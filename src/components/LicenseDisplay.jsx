@@ -8,8 +8,20 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Progress } from "@/components/ui/progress";
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 
 const LicenseDisplay = ({ licenseInfo }) => {
+  const { isSuperAdmin } = useAuth();
+
+  if (isSuperAdmin) {
+    return (
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-medium shadow-sm">
+        <ShieldCheck className="w-3.5 h-3.5" />
+        <span>Super Admin Access</span>
+      </div>
+    );
+  }
+
   if (!licenseInfo || licenseInfo.status === 'loading') return null;
   
   if (licenseInfo.daysRemaining === Infinity && !licenseInfo.isAlumni) {

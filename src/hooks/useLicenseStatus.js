@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '@/lib/customSupabaseClient';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 
 /**
  * Hook to check and monitor the license status for a specific user.
@@ -11,6 +12,7 @@ import { supabase } from '@/lib/supabaseClient';
  * @returns {Object} status object containing current license details
  */
 export const useLicenseStatus = (userId) => {
+  const { isSuperAdmin } = useAuth();
   const [status, setStatus] = useState(null);
   const [isValid, setIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,13 +24,26 @@ export const useLicenseStatus = (userId) => {
       return;
     }
 
+    // Task 2: Super Admins bypass all license checks immediately
+    if (isSuperAdmin) {
+      setStatus({
+        status: 'Active (Super Admin)',
+        message: 'Super Admin Access',
+        daysRemaining: null,
+        isPerpetual: true,
+        expiryDate: null,
+        inGracePeriod: false,
+        isActive: true
+      });
+      setIsValid(true);
+      setIsLoading(false);
+      return;
+    }
+
     try {
       setIsLoading(true);
       setError(null);
 
-      // We need to fetch the user's university_member record to check license details
-      // Note: This assumes the user is a university member. 
-      // Adjust logic if license is stored elsewhere for different user types.
       const { data, error } = await supabase
         .from('university_members')
         .select(`
@@ -44,7 +59,6 @@ export const useLicenseStatus = (userId) => {
       if (error) throw error;
 
       if (!data) {
-        // No member record found implies no active license context
         setStatus({
           status: 'none',
           message: 'No academic license found',
@@ -109,7 +123,7 @@ export const useLicenseStatus = (userId) => {
 
   useEffect(() => {
     checkStatus();
-  }, [userId]);
+  }, [userId, isSuperAdmin]);
 
   return { 
     status, 

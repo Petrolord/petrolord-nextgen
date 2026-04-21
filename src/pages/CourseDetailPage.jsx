@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { useCourseProgress } from '@/hooks/useCourseProgress';
+import { supabase } from '@/lib/customSupabaseClient';
 import { 
     Loader2, 
     ChevronLeft, 
@@ -24,8 +25,36 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { courseService } from '@/services/courseService';
+import VideoPlayer from '@/components/VideoPlayer';
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+  componentDidCatch(error, errorInfo) {
+    console.error("ErrorBoundary caught an error:", error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="p-6 bg-red-900/20 border border-red-500 rounded-xl text-red-200 w-full mb-6">
+          <h3 className="font-bold text-lg flex items-center gap-2 mb-2">
+            <AlertCircle className="w-5 h-5" />
+            Video Player Error
+          </h3>
+          <p className="text-sm font-mono bg-black/40 p-3 rounded">{this.state.error?.message || "An unexpected error occurred rendering the video."}</p>
+        </div>
+      );
+    }
+    return this.props.children; 
+  }
+}
 
 const CourseDetailPage = () => {
     const { courseId } = useParams();
@@ -35,12 +64,12 @@ const CourseDetailPage = () => {
     const [selectedLesson, setSelectedLesson] = useState(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [completingLesson, setCompletingLesson] = useState(false);
+    const [lessonUrlLoading, setLessonUrlLoading] = useState(false);
     
-    // Requirements State
     const [requirements, setRequirements] = useState(null);
     const [reqLoading, setReqLoading] = useState(true);
 
-    // Fetch Passing Requirements
+    // Fetch requirements on mount
     useEffect(() => {
         const loadReqs = async () => {
             if(!courseId) return;
@@ -59,36 +88,77 @@ const CourseDetailPage = () => {
     // Set initial lesson
     useEffect(() => {
         if (!loading && courseStructure.length > 0 && !selectedLesson) {
-            // Find first uncompleted lesson or just first lesson
             let found = false;
             for (const module of courseStructure) {
                 for (const lesson of module.lessons) {
                     if (!progressMap[lesson.id]?.is_completed) {
-                        setSelectedLesson(lesson);
+                        handleLessonSelect(lesson);
                         found = true;
                         break;
                     }
                 }
                 if (found) break;
             }
-            // If all completed, select first
             if (!found && courseStructure[0]?.lessons?.length > 0) {
-                setSelectedLesson(courseStructure[0].lessons[0]);
+                handleLessonSelect(courseStructure[0].lessons[0]);
             }
         }
     }, [loading, courseStructure, progressMap, selectedLesson]);
 
+    // Ensure we have the latest video_url and log it to verify
+    useEffect(() => {
+        const checkAndFetchVideoUrl = async () => {
+            if (!selectedLesson) return;
+            
+            // Re-fetch lesson explicitly requesting video_url to guarantee it is present
+            if (selectedLesson.lesson_type === 'video' || !selectedLesson.video_url) {
+                setLessonUrlLoading(true);
+                try {
+                    const { data, error: fetchError } = await supabase
+                        .from('course_lessons')
+                        .select('id, title, description, lesson_order, video_url, lesson_type, content')
+                        .eq('id', selectedLesson.id)
+                        .single();
+                        
+                    if (data && !fetchError) {
+                        console.log(`[CourseDetailPage] Fetched fresh lesson data:`, { id: data.id, video_url: data.video_url });
+                        // Only update state if data differs to prevent infinite loops
+                        if (data.video_url !== selectedLesson.video_url || data.content !== selectedLesson.content) {
+                            setSelectedLesson(prev => ({ ...prev, ...data }));
+                        }
+                    }
+                } catch (err) {
+                    console.error("[CourseDetailPage] Error fetching fresh lesson data:", err);
+                } finally {
+                    setLessonUrlLoading(false);
+                }
+            }
+        };
+        
+        checkAndFetchVideoUrl();
+    }, [selectedLesson?.id]);
+
     const handleLessonSelect = (lesson) => {
-        setSelectedLesson(lesson);
-        setIsSidebarOpen(false);
-        window.scrollTo(0, 0);
+        console.log(`[CourseDetailPage] Switching to lesson:`, lesson.title);
+        // Clear current selection slightly to force unmount/remount of video player if needed
+        setSelectedLesson(null);
+        setTimeout(() => {
+             setSelectedLesson(lesson);
+             setIsSidebarOpen(false);
+             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 50);
     };
 
     const handleComplete = async () => {
         if (!selectedLesson) return;
         setCompletingLesson(true);
-        const success = await markLessonComplete(selectedLesson.id);
-        setCompletingLesson(false);
+        try {
+            await markLessonComplete(selectedLesson.id);
+        } catch (err) {
+            console.error("Error completing lesson:", err);
+        } finally {
+            setCompletingLesson(false);
+        }
     };
 
     const handleStartQuiz = () => {
@@ -118,6 +188,7 @@ const CourseDetailPage = () => {
     const currentProgress = progressMap[selectedLesson?.id];
     const isCompleted = currentProgress?.is_completed;
     const isQuiz = selectedLesson?.lesson_type === 'quiz';
+    const isVideo = selectedLesson?.lesson_type === 'video' || (selectedLesson && selectedLesson.video_url);
 
     const RequirementsCard = () => (
         <div className="bg-[#1E293B] border border-slate-700 rounded-lg p-4 space-y-3">
@@ -208,7 +279,7 @@ const CourseDetailPage = () => {
                                                     {lIndex + 1}. {lesson.title}
                                                 </p>
                                                 <div className="flex items-center gap-2 mt-1 text-xs text-slate-500">
-                                                    {isQ ? <BrainCircuit className="w-3 h-3" /> : (lesson.video_url && <Video className="w-3 h-3" />)}
+                                                    {isQ ? <BrainCircuit className="w-3 h-3" /> : (lesson.video_url || lesson.lesson_type === 'video' ? <Video className="w-3 h-3" /> : <FileText className="w-3 h-3" />)}
                                                     <span>{lesson.duration_minutes || 5} min</span>
                                                 </div>
                                             </div>
@@ -226,17 +297,16 @@ const CourseDetailPage = () => {
     return (
         <div className="h-screen w-full bg-[#0F172A] flex flex-col overflow-hidden">
             <Helmet>
-                <title>{course.title} | Learning Mode</title>
+                <title>{course?.title ? `${course.title} | Learning Mode` : 'Learning Mode'}</title>
             </Helmet>
 
-            {/* Header */}
-            <header className="h-16 bg-[#1E293B] border-b border-slate-800 flex items-center justify-between px-4 z-20">
+            <header className="h-16 bg-[#1E293B] border-b border-slate-800 flex items-center justify-between px-4 z-20 shrink-0">
                 <div className="flex items-center gap-4">
                     <Link to="/courses" className="p-2 hover:bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors">
                         <ChevronLeft className="w-5 h-5" />
                     </Link>
                     <div className="h-6 w-px bg-slate-700 hidden md:block"></div>
-                    <h1 className="text-white font-semibold truncate hidden md:block">{course.title}</h1>
+                    <h1 className="text-white font-semibold truncate hidden md:block">{course?.title}</h1>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -256,7 +326,6 @@ const CourseDetailPage = () => {
                         </DialogContent>
                     </Dialog>
 
-                    {/* Mobile Sidebar Trigger */}
                     <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
                         <SheetTrigger asChild>
                             <Button variant="outline" size="icon" className="md:hidden border-slate-700 bg-slate-800 text-white">
@@ -270,15 +339,13 @@ const CourseDetailPage = () => {
                 </div>
             </header>
 
-            <div className="flex-1 flex overflow-hidden">
-                {/* Desktop Sidebar */}
+            <div className="flex-1 flex overflow-hidden relative">
                 <div className="hidden md:block w-96 flex-shrink-0 h-full">
                     <SidebarContent />
                 </div>
 
-                {/* Main Content */}
                 <main className="flex-1 overflow-y-auto bg-[#0F172A] p-4 md:p-8">
-                    <div className="max-w-4xl mx-auto space-y-8">
+                    <div className="max-w-4xl mx-auto space-y-8 pb-20">
                         {selectedLesson ? (
                             <motion.div
                                 key={selectedLesson.id}
@@ -287,41 +354,50 @@ const CourseDetailPage = () => {
                                 transition={{ duration: 0.3 }}
                                 className="space-y-6"
                             >
-                                {/* Video/Content Container */}
-                                {!isQuiz && (
-                                    <Card className="bg-black border-slate-800 overflow-hidden shadow-2xl rounded-xl">
-                                        <div className="aspect-video w-full">
-                                            {selectedLesson.video_url ? (
-                                                <div className="w-full h-full flex items-center justify-center bg-slate-900 relative group">
-                                                    <div className="text-center">
-                                                        <PlayCircle className="w-16 h-16 text-slate-600 mx-auto mb-4 group-hover:text-[#BFFF00] transition-colors" />
-                                                        <p className="text-slate-500">Video Placeholder: {selectedLesson.video_url}</p>
-                                                        <p className="text-xs text-slate-600 mt-2">Replace with actual video player component</p>
+                                {/* Media / Video Area */}
+                                {lessonUrlLoading ? (
+                                    <div className="aspect-video w-full rounded-xl flex flex-col items-center justify-center bg-slate-900 border border-slate-800 shadow-sm">
+                                        <Loader2 className="w-8 h-8 text-[#BFFF00] animate-spin mb-4" />
+                                        <span className="text-slate-400 font-medium">Preparing Lesson Media...</span>
+                                    </div>
+                                ) : !isQuiz && isVideo && selectedLesson.video_url ? (
+                                    <ErrorBoundary>
+                                        <VideoPlayer 
+                                            videoUrl={selectedLesson.video_url} 
+                                            title={selectedLesson.title}
+                                            className="mb-8"
+                                        />
+                                    </ErrorBoundary>
+                                ) : !isQuiz && (
+                                    <Card className="bg-slate-900 border-slate-800 overflow-hidden rounded-xl">
+                                        <div className="aspect-video w-full flex items-center justify-center text-slate-500 flex-col p-8">
+                                            <div className="text-center bg-slate-800/50 p-8 rounded-2xl border border-slate-700/50">
+                                                <FileText className="w-16 h-16 mx-auto mb-4 text-slate-600" />
+                                                <h3 className="text-xl font-medium text-slate-300 mb-2">Text-based Lesson</h3>
+                                                <p className="text-sm">Read the material provided below to complete this section.</p>
+                                                
+                                                {isVideo && !selectedLesson.video_url && (
+                                                    <div className="mt-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg inline-flex items-center gap-2">
+                                                        <AlertCircle className="w-5 h-5 text-red-400" />
+                                                        <span className="text-sm text-red-400 font-medium">Video missing or link is invalid.</span>
                                                     </div>
-                                                </div>
-                                            ) : (
-                                                <div className="w-full h-full flex items-center justify-center bg-slate-900 text-slate-500">
-                                                    <div className="text-center">
-                                                        <FileText className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                                                        <p>Text-based Lesson</p>
-                                                    </div>
-                                                </div>
-                                            )}
+                                                )}
+                                            </div>
                                         </div>
                                     </Card>
                                 )}
 
-                                {/* Lesson/Quiz Details */}
+                                {/* Content Area */}
                                 <div>
                                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                                         <div>
                                             <h2 className="text-2xl font-bold text-white mb-2">{selectedLesson.title}</h2>
                                             <div className="flex items-center gap-2 text-slate-400 text-sm">
-                                                 <Badge variant="outline" className="border-slate-700 bg-slate-800 text-slate-300">
+                                                 <Badge variant="outline" className="border-slate-700 bg-slate-800 text-slate-300 capitalize">
                                                     {selectedLesson.lesson_type || 'Lesson'}
                                                  </Badge>
                                                  <span>•</span>
-                                                 <span>{selectedLesson.duration_minutes} min {isQuiz ? 'duration' : 'read/watch'}</span>
+                                                 <span>{selectedLesson.duration_minutes || 5} min {isQuiz ? 'duration' : 'read/watch'}</span>
                                             </div>
                                         </div>
                                         
@@ -356,21 +432,23 @@ const CourseDetailPage = () => {
                                         )}
                                     </div>
 
-                                    {/* Content Area */}
-                                    <div className="prose prose-invert max-w-none text-slate-300 leading-relaxed bg-[#1E293B]/50 p-6 rounded-xl border border-slate-800">
-                                        <div dangerouslySetInnerHTML={{ __html: selectedLesson.content || selectedLesson.description || '<p>No description available.</p>' }} />
+                                    <div className="prose prose-invert max-w-none text-slate-300 leading-relaxed bg-[#1E293B]/50 p-6 rounded-xl border border-slate-800 shadow-sm">
+                                        {selectedLesson.content || selectedLesson.description ? (
+                                            <div dangerouslySetInnerHTML={{ __html: selectedLesson.content || selectedLesson.description }} />
+                                        ) : (
+                                            <p className="text-slate-500 italic">No additional description available for this lesson.</p>
+                                        )}
                                     </div>
                                 </div>
                             </motion.div>
                         ) : (
                             <div className="flex flex-col items-center justify-center h-[50vh] text-slate-500 space-y-4">
-                                <Award className="w-12 h-12 opacity-50" />
+                                <div className="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center mb-2">
+                                    <Award className="w-12 h-12 text-slate-600" />
+                                </div>
                                 <div className="text-center">
                                     <h3 className="text-xl font-medium text-slate-300">Ready to Start?</h3>
-                                    <p className="max-w-md mx-auto mt-2">Select a lesson from the sidebar to begin your learning journey. Check the requirements to understand what's needed to pass.</p>
-                                </div>
-                                <div className="max-w-md w-full">
-                                    <RequirementsCard />
+                                    <p className="max-w-md mx-auto mt-2">Select a lesson from the sidebar to begin your learning journey.</p>
                                 </div>
                             </div>
                         )}
