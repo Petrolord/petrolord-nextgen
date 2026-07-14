@@ -53,30 +53,12 @@ const LicenseExpiredPage = lazy(() => import('@/pages/LicenseExpiredPage'));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 
 // Drilling Modules
-const CasingDesignPage = lazy(() => import('@/pages/modules/drilling/CasingDesignPage'));
-const CasingDesignDetail = lazy(() => import('@/pages/modules/drilling/CasingDesignDetail'));
-const TorqueDragPage = lazy(() => import('@/pages/apps/TorqueDragPage')); 
-const HydraulicsSimulatorPage = lazy(() => import('@/pages/modules/drilling/HydraulicsSimulatorPage')); 
 
 // Production Modules
-const ProductionPage = lazy(() => import('@/pages/modules/ProductionPage'));
-const NodalAnalysisApp = lazy(() => import('@/pages/production/nodal-analysis/NodalAnalysisApp'));
-const PressureTransientAnalysisPage = lazy(() => import('@/pages/production/pressure-transient/PressureTransientAnalysisPage'));
-const ArtificialLiftPage = lazy(() => import('@/pages/modules/production/artificial-lift/ArtificialLiftPage'));
-const NetworkOptimizationPage = lazy(() => import('@/pages/production/network-optimization/NetworkOptimizationPage'));
 
 // Economics Modules
-const IRRAnalysisPage = lazy(() => import('@/pages/economics/irr-analysis/IRRAnalysisPage'));
-const RiskAnalysisPage = lazy(() => import('@/pages/economics/risk-analysis/RiskAnalysisPage'));
 
 // Facilities Module
-const FacilitiesPage = lazy(() => import('@/pages/modules/FacilitiesPage'));
-const FacilityMasterPlannerStudio = lazy(() => import('@/pages/modules/facilities/FacilityMasterPlannerStudio'));
-const FacilityLayoutDesignerPage = lazy(() => import('@/pages/modules/facilities/FacilityLayoutDesignerPage'));
-const PipelineSizerPage = lazy(() => import('@/dashboard/modules/facilities/pipeline-sizer/PipelineSizerPage')); 
-const EquipmentRegister = lazy(() => import('@/modules/facilities/facility-layout-designer/components/EquipmentRegister'));
-const LineList = lazy(() => import('@/modules/facilities/facility-layout-designer/components/LineList'));
-const LayoutReport = lazy(() => import('@/modules/facilities/facility-layout-designer/components/LayoutReport'));
 
 // Legal Pages
 const PrivacyPolicyPage = lazy(() => import('@/pages/PrivacyPolicyPage'));
@@ -147,30 +129,10 @@ const AppContent = () => {
                 <Route path="/courses/:courseId/quiz/:attemptId/results" element={<ProtectedRoute><NotificationProvider><QuizResultsPage /></NotificationProvider></ProtectedRoute>} />
                 <Route path="/courses/:courseId/quiz/:attemptId/review" element={<ProtectedRoute><NotificationProvider><QuizReviewPage /></NotificationProvider></ProtectedRoute>} />
 
-                {/* --- MODULES (Protected by License) --- */}
-                <Route path="/dashboard/modules/drilling/casing-design" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><ApplicationLayoutProvider><Layout><CasingDesignPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
-                <Route path="/dashboard/modules/drilling/casing-design/:id" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><ApplicationLayoutProvider><Layout><CasingDesignDetail /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
-                <Route path="/dashboard/modules/drilling/torque-drag" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><TorqueDragPage /></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
-                <Route path="/dashboard/modules/drilling/hydraulics-simulator" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><HydraulicsSimulatorPage /></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
                 
-                <Route path="/dashboard/modules/production" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><ApplicationLayoutProvider><Layout><ProductionPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
-                <Route path="/dashboard/production/nodal-analysis" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><ApplicationLayoutProvider><Layout><NodalAnalysisApp /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
-                <Route path="/dashboard/modules/production/pressure-transient-analysis" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><ApplicationLayoutProvider><Layout><PressureTransientAnalysisPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
-                <Route path="/dashboard/modules/production/ald" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><ArtificialLiftPage /></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
-                <Route path="/dashboard/modules/production/network-optimization" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><NetworkOptimizationPage /></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
                 
-                <Route path="/dashboard/modules/economics/irr-analysis" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><ApplicationLayoutProvider><Layout><IRRAnalysisPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
-                <Route path="/dashboard/modules/economics/risk-analysis" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><ApplicationLayoutProvider><RiskAnalysisPage /></ApplicationLayoutProvider></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
                 
-                <Route path="/dashboard/modules/facilities" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><ApplicationLayoutProvider><Layout><FacilitiesPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
-                <Route path="/dashboard/modules/facilities/facility-master-planner" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><FacilityMasterPlannerStudio /></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
-                <Route path="/dashboard/modules/facilities/layout-designer" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><FacilityLayoutDesignerPage /></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
-                <Route path="/dashboard/modules/facilities/pipeline-sizer" element={<ProtectedRoute><ProtectedLicenseRoute userId={user?.id} fallbackPath="/license-expired"><NotificationProvider><ApplicationLayoutProvider><Layout><PipelineSizerPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedLicenseRoute></ProtectedRoute>} />
-                <Route path="/pipeline-sizer" element={<Navigate to="/dashboard/modules/facilities/pipeline-sizer" replace />} />
                 
-                <Route path="/dashboard/modules/facilities/layout-designer/equipment-register" element={<ProtectedRoute><EquipmentRegister /></ProtectedRoute>} />
-                <Route path="/dashboard/modules/facilities/layout-designer/line-list" element={<ProtectedRoute><LineList /></ProtectedRoute>} />
-                <Route path="/dashboard/modules/facilities/layout-designer/layout-report" element={<ProtectedRoute><LayoutReport /></ProtectedRoute>} />
                 
                 <Route path="/dashboard/settings" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><Layout><SettingsPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
                 <Route path="/dashboard/analytics" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><Layout><AdminAnalyticsPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
