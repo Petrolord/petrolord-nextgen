@@ -57,8 +57,8 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-[#BFFF00] mt-0.5" />
-                <a href="mailto:education@petrolord.com" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">
-                  education@petrolord.com
+                <a href="mailto:info@petrolord.com" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">
+                  info@petrolord.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
@@ -77,7 +77,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <span className="text-xs text-slate-500 order-2 md:order-1">
-            &copy; 2025 Lordsway Energy. All Rights Reserved.
+            &copy; 2026 Lordsway Energy. All Rights Reserved.
           </span>
           <div className="flex items-center gap-6 order-1 md:order-2">
             <Link to="/privacy-policy" className="text-xs text-slate-500 hover:text-slate-300 transition-colors">Privacy Policy</Link>
