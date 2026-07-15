@@ -16,14 +16,15 @@ import {
 } from 'lucide-react';
 import {
   computeSynthetic, waveletRows, traceRows, CAPSTONE_FREQ_HZ, V_OVERBURDEN_MS, DT_MS,
-  computeIntermediate, PLANTED_LAG_MS,
+  computeIntermediate, PLANTED_LAG_MS, computeAdvanced, tuningRows, WEDGE,
 } from '@/lib/seismolordTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
 
 const APP = 'seismolord';
-const LEARN_TIERS = ['beginner', 'intermediate'];
+const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
+const CERT_LABELS = { associate: 'Associate', professional: 'Professional', expert: 'Expert' };
 const FREQS = [15, 25, 40];
 
 const LESSONS = [
@@ -121,7 +122,7 @@ const SeismolordLearningPage = () => {
       const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
-        toast({ title: 'Capstone passed — Associate certified!', description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
       } else if (res.passed) {
         toast({ title: 'Passed — you were already certified', className: 'bg-[#BFFF00] text-slate-900' });
       } else {
@@ -315,6 +316,56 @@ const SeismolordLearningPage = () => {
             );
           })()}
 
+          {tier === 'advanced' && (() => {
+            const adv = computeAdvanced();
+            const rows = tuningRows(adv);
+            return (
+              <Card className="bg-[#1E293B] border-gray-700">
+                <CardHeader>
+                  <CardTitle className="text-white">Wedge tuning panel (Advanced)</CardTitle>
+                  <CardDescription>
+                    The SAND top and base as an equal and opposite pair (RC {WEDGE.rcTop} / {WEDGE.rcBase}), wedged 0 to {WEDGE.maxThicknessMs} ms at {WEDGE.dtMs} ms. Peak amplitude near the top interface per thickness.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div style={{ height: 240 }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={rows} margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
+                        <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
+                        <XAxis dataKey="thickness" tick={{ fill: '#94a3b8', fontSize: 11 }}
+                          label={{ value: 'thickness (ms)', position: 'insideBottom', offset: -2, fill: '#64748b', fontSize: 10 }} />
+                        <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                        <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', color: '#fff' }} />
+                        <ReferenceLine x={adv.f25.tuneMs} stroke="#BFFF00" strokeDasharray="4 3" />
+                        <ReferenceLine x={adv.f40.tuneMs} stroke="#38bdf8" strokeDasharray="4 3" />
+                        <Line type="monotone" dataKey="a25" name="25 Hz" stroke="#BFFF00" dot={false} strokeWidth={1.5} />
+                        <Line type="monotone" dataKey="a40" name="40 Hz" stroke="#38bdf8" dot={false} strokeWidth={1.5} />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
+                    {[
+                      ['Tuning thickness at 25 Hz', `${adv.f25.tuneMs} ms`],
+                      ['Peak amplitude at 25 Hz tuning', num(adv.f25.tuneAmp, 6)],
+                      ['Tuning thickness at 40 Hz', `${adv.f40.tuneMs} ms`],
+                      ['Peak amplitude at 40 Hz tuning', num(adv.f40.tuneAmp, 6)],
+                      ['Isolated-reflector amplitude (25 Hz)', num(adv.f25.isoAmp, 6)],
+                      ['Theoretical tuning at 25 Hz', `${num(adv.f25.theoryMs, 4)} ms`],
+                    ].map(([k, v]) => (
+                      <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
+                        <p className="text-gray-500 text-xs">{k}</p>
+                        <p className="text-white">{v}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    Below tuning the pair brightens as the side lobes stack; the panel picks the tuning maximum one sample grid step above the Kallweit-Wood value sqrt(6)/(2*pi*f). Note the tuning amplitude itself does not depend on frequency.
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })()}
+
           {/* Capstone */}
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
@@ -349,7 +400,8 @@ const SeismolordLearningPage = () => {
                       {result.certificate_number ? (
                         <div className="mt-2 text-sm text-gray-300 space-y-1">
                           <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                            {result.tier === 'professional' ? 'Professional' : 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</p>
+                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
+                            {result.tier === 'expert' && ' Your 50% Suite discount code is on your certificates page.'}</p>
                           <div className="flex gap-3">
                             <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
                               My certificates <ArrowRight className="h-3 w-3" />

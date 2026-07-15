@@ -13,14 +13,15 @@ import {
 } from 'lucide-react';
 import {
   TEACHING_WELLS, TOP_NAME, CAPSTONE_CELL_M, MAX_EXTRAP_M, TARGET, computeMap,
-  computeIntermediate,
+  computeIntermediate, computeAdvanced, E7,
 } from '@/lib/mappingTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
 
 const APP = 'mapping';
-const LEARN_TIERS = ['beginner', 'intermediate'];
+const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
+const CERT_LABELS = { associate: 'Associate', professional: 'Professional', expert: 'Expert' };
 const CELLS = [50, 100, 200];
 
 const LESSONS = [
@@ -157,7 +158,7 @@ const MappingLearningPage = () => {
       const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
-        toast({ title: 'Capstone passed — Associate certified!', description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
       } else if (res.passed) {
         toast({ title: 'Passed — you were already certified', className: 'bg-[#BFFF00] text-slate-900' });
       } else {
@@ -317,6 +318,58 @@ const MappingLearningPage = () => {
             );
           })()}
 
+          {tier === 'advanced' && (() => {
+            const adv = computeAdvanced();
+            return (
+              <Card className="bg-[#1E293B] border-gray-700">
+                <CardHeader>
+                  <CardTitle className="text-white">Grid validation panel (Advanced)</CardTitle>
+                  <CardDescription>
+                    Leave-one-out cross-validation on the {CAPSTONE_CELL_M} m frame, then a blind test at the new appraisal well {E7.name} ({E7.x}, {E7.y}), actual pick {E7.actual} m.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead><tr className="text-left text-gray-400 border-b border-gray-700">
+                        <th className="py-2 pr-4">Well left out</th><th className="py-2 pr-4">Actual</th>
+                        <th className="py-2 pr-4">Predicted</th><th className="py-2 pr-4">Residual</th>
+                      </tr></thead>
+                      <tbody>
+                        {adv.loo.map((r) => (
+                          <tr key={r.well} className="border-b border-gray-800 text-gray-300">
+                            <td className="py-2 pr-4 text-white">{r.well}</td>
+                            <td className="py-2 pr-4">{r.actual} m</td>
+                            <td className="py-2 pr-4">{r.pred == null ? <span className="text-amber-400">outside the hull</span> : `${num(r.pred, 2)} m`}</td>
+                            <td className="py-2 pr-4">{r.resid == null ? 'n/a' : `${num(r.resid, 2)} m`}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
+                    {[
+                      ['Wells that can be cross-validated', `${adv.crossValidatableWells}`],
+                      ['Leave-one-out residual at Ekene-6', `${num(adv.looResidE6, 3)} m`],
+                      [`Six-well prediction at ${E7.name}`, adv.predAtE7 == null ? 'unmapped' : `${num(adv.predAtE7, 3)} m`],
+                      [`Blind-test residual at ${E7.name}`, adv.blindResidualE7 == null ? 'n/a' : `${num(adv.blindResidualE7, 3)} m`],
+                      [`Crest depth with ${E7.name} included`, `${num(adv.zminWithE7, 3)} m`],
+                      [`Live nodes with ${E7.name} included`, `${adv.liveWithE7}`],
+                    ].map(([k, v]) => (
+                      <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
+                        <p className="text-gray-500 text-xs">{k}</p>
+                        <p className="text-white">{v}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    The gridder masks to the control hull, so a removed edge well never sees a prediction at its own location. Only the interior well validates, and the blind test is the honest check a new well gives you.
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })()}
+
           {/* Capstone */}
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
@@ -351,7 +404,8 @@ const MappingLearningPage = () => {
                       {result.certificate_number ? (
                         <div className="mt-2 text-sm text-gray-300 space-y-1">
                           <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                            {result.tier === 'professional' ? 'Professional' : 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</p>
+                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
+                            {result.tier === 'expert' && ' Your 50% Suite discount code is on your certificates page.'}</p>
                           <div className="flex gap-3">
                             <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
                               My certificates <ArrowRight className="h-3 w-3" />

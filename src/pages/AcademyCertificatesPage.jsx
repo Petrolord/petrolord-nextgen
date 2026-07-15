@@ -6,10 +6,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 import {
   Loader2, Award, ExternalLink, Copy, Printer, CheckCircle2,
-  AlertTriangle, XCircle,
+  AlertTriangle, XCircle, Ticket,
 } from 'lucide-react';
 import {
   listMyCertifications, certificateStatus, verificationUrl,
+  listMyBridgeCodes, bridgeCodeStatus,
 } from '@/services/academyService';
 
 const APP_NAMES = {
@@ -31,12 +32,14 @@ const STATUS_PILL = {
 const AcademyCertificatesPage = () => {
   const { toast } = useToast();
   const [certs, setCerts] = useState([]);
+  const [bridgeCodes, setBridgeCodes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
       try {
         setCerts(await listMyCertifications());
+        setBridgeCodes(await listMyBridgeCodes());
       } catch (e) {
         toast({ title: 'Failed to load certificates', description: e.message, variant: 'destructive' });
       } finally {
@@ -45,6 +48,17 @@ const AcademyCertificatesPage = () => {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const bridgeByCert = Object.fromEntries(bridgeCodes.map((b) => [b.certification_id, b]));
+
+  const copyCode = async (code) => {
+    try {
+      await navigator.clipboard.writeText(code);
+      toast({ title: 'Discount code copied', className: 'bg-[#BFFF00] text-slate-900' });
+    } catch {
+      toast({ title: 'Could not copy', variant: 'destructive' });
+    }
+  };
 
   const copyLink = async (verifyCode) => {
     try {
@@ -91,6 +105,7 @@ const AcademyCertificatesPage = () => {
             {certs.map((c) => {
               const status = certificateStatus(c);
               const pill = STATUS_PILL[status];
+              const bridge = bridgeByCert[c.id];
               return (
                 <Card key={c.id} className="bg-[#1E293B] border-gray-700 print:border-black">
                   <CardContent className="p-6">
@@ -121,6 +136,29 @@ const AcademyCertificatesPage = () => {
                         <p className="text-white">{new Date(c.valid_until).toLocaleDateString()}</p>
                       </div>
                     </div>
+
+                    {bridge && (
+                      <div className="mt-4 rounded-md border border-[#BFFF00]/40 bg-[#BFFF00]/5 p-4">
+                        <p className="text-sm text-white font-medium flex items-center gap-2">
+                          <Ticket className="h-4 w-4 text-[#BFFF00]" />
+                          Suite bridge: {bridge.discount_pct}% off the {bridge.suite_module} module
+                        </p>
+                        <div className="mt-2 flex flex-wrap items-center gap-3 text-sm">
+                          <span className="font-mono text-[#BFFF00] text-base tracking-wider">{bridge.code}</span>
+                          {bridgeCodeStatus(bridge) === 'valid' ? (
+                            <Button size="sm" variant="outline" className="border-gray-600 text-gray-300 print:hidden"
+                              onClick={() => copyCode(bridge.code)}>
+                              <Copy className="h-4 w-4 mr-1" /> Copy code
+                            </Button>
+                          ) : (
+                            <span className="text-xs text-gray-400 capitalize">{bridgeCodeStatus(bridge)}</span>
+                          )}
+                        </div>
+                        <p className="mt-2 text-xs text-gray-500">
+                          Single use at Petrolord Suite checkout. Valid until {new Date(bridge.valid_until).toLocaleDateString()}.
+                        </p>
+                      </div>
+                    )}
 
                     <div className="mt-4 flex flex-wrap gap-2 print:hidden">
                       <a href={verificationUrl(c.verify_code)} target="_blank" rel="noreferrer">

@@ -84,6 +84,56 @@ export function headerRows(well) {
     .map((k) => ({ key: k, ...well[k] }));
 }
 
+// ---- Advanced tier (NG7): the six-file import campaign. Every
+// teaching file through the full pipeline, aggregated into one panel.
+// Oracle-reproduced in Node before the NG7 migration was seeded.
+export function computeAdvanced() {
+  const perFile = [];
+  let campaignCurves = 0;
+  let convertedFiles = 0;
+  let deadCurves = 0;
+  let uniformFiles = 0;
+  let wrappedSamples = 0;
+  let nullheavyNulls = 0;
+  for (const f of TEACHING_FILES) {
+    const parsed = parseLas(f.text);
+    const prep = prepareLogs(parsed, { sourceFile: f.label });
+    const nCurves = prep.logs.length - 1; // logs[0] is depth
+    campaignCurves += nCurves;
+    const converted = prep.logs.some((l) => l.converted);
+    if (converted) convertedFiles += 1;
+    const toM = depthUnitToMetres(parsed.curves[0].unit) ?? 1;
+    const deptM = Array.from(parsed.curves[0].data, (v) => v * toM);
+    const uniform = uniformStepM(deptM) !== null;
+    if (uniform) uniformFiles += 1;
+    let dead = 0;
+    let nulls = 0;
+    for (let ci = 1; ci < parsed.curves.length; ci++) {
+      let finite = 0;
+      for (const v of parsed.curves[ci].data) {
+        if (Number.isFinite(v)) finite += 1; else nulls += 1;
+      }
+      if (finite === 0) dead += 1;
+    }
+    deadCurves += dead;
+    if (f.id === 'nullheavy_20') nullheavyNulls = nulls;
+    if (f.id === 'wrapped_12') wrappedSamples = parsed.curves[0].data.length;
+    perFile.push({
+      id: f.id, label: f.label, curves: nCurves, converted, uniform,
+      dead, nulls, samples: parsed.curves[0].data.length,
+    });
+  }
+  return {
+    perFile,
+    campaignCurves,
+    convertedFiles,
+    deadCurves,
+    uniformFiles,
+    wrappedSamples,
+    nullheavyNulls,
+  };
+}
+
 // ---- Intermediate tier: SI import (the full prepareLogs pipeline).
 // Oracle-reproduced in Node before the NG6 migration was seeded.
 export function computeIntermediate() {

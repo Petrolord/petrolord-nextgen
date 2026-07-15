@@ -11,13 +11,14 @@ import {
   Loader2, HardDrive, GraduationCap, Lock, CheckCircle2, XCircle,
   BookOpen, Award, ArrowRight,
 } from 'lucide-react';
-import { TEACHING_FILES, qcFile, headerRows, computeIntermediate } from '@/lib/welldataTeaching';
+import { TEACHING_FILES, qcFile, headerRows, computeIntermediate, computeAdvanced } from '@/lib/welldataTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
 
 const APP = 'welldata';
-const TIERS = ['beginner', 'intermediate'];
+const TIERS = ['beginner', 'intermediate', 'advanced'];
+const CERT_LABELS = { associate: 'Associate', professional: 'Professional', expert: 'Expert' };
 
 const LESSONS = [
   { n: 1, title: 'Anatomy of a LAS file',
@@ -96,6 +97,11 @@ const WellDataLearningPage = () => {
     [tier],
   );
 
+  const advanced = useMemo(
+    () => (tier === 'advanced' ? computeAdvanced() : null),
+    [tier],
+  );
+
   const file = TEACHING_FILES.find((f) => f.id === fileId);
   const qc = useMemo(() => {
     try {
@@ -117,7 +123,7 @@ const WellDataLearningPage = () => {
       setResult(res);
       if (res.passed && res.certificate_number) {
         toast({
-          title: 'Capstone passed — Associate certified!',
+          title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`,
           description: res.certificate_number,
           className: 'bg-[#BFFF00] text-slate-900',
         });
@@ -320,6 +326,55 @@ const WellDataLearningPage = () => {
             </Card>
           )}
 
+          {advanced && (
+            <Card className="bg-[#1E293B] border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-white">Import campaign panel (Advanced)</CardTitle>
+                <CardDescription>All six teaching files through the full pipeline, aggregated. Depth curves are excluded from the curve counts.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs text-gray-400">
+                    <thead><tr className="text-left text-gray-500 border-b border-gray-700">
+                      <th className="py-1 pr-3">File</th><th className="py-1 pr-3">Curves</th>
+                      <th className="py-1 pr-3">Converted?</th><th className="py-1 pr-3">Uniform step?</th>
+                      <th className="py-1 pr-3">Dead curves</th><th className="py-1 pr-3">Nulls</th>
+                      <th className="py-1 pr-3">Samples</th>
+                    </tr></thead>
+                    <tbody>
+                      {advanced.perFile.map((f) => (
+                        <tr key={f.id} className="border-b border-gray-800/60">
+                          <td className="py-1 pr-3 text-white font-mono">{f.label}</td>
+                          <td className="py-1 pr-3">{f.curves}</td>
+                          <td className="py-1 pr-3">{f.converted ? 'yes' : 'no'}</td>
+                          <td className="py-1 pr-3">{f.uniform ? 'yes' : <span className="text-amber-400">no</span>}</td>
+                          <td className="py-1 pr-3">{f.dead ? <span className="text-red-400">{f.dead}</span> : '0'}</td>
+                          <td className="py-1 pr-3">{f.nulls}</td>
+                          <td className="py-1 pr-3">{f.samples}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
+                  {[
+                    ['Curves imported across the campaign', `${advanced.campaignCurves}`],
+                    ['Files needing depth unit conversion', `${advanced.convertedFiles}`],
+                    ['Dead curves detected', `${advanced.deadCurves}`],
+                    ['Files with a uniform depth step', `${advanced.uniformFiles}`],
+                    ['Depth samples in wrapped_12', `${advanced.wrappedSamples}`],
+                    ['Flagged nulls in nullheavy_20', `${advanced.nullheavyNulls}`],
+                  ].map(([k, v]) => (
+                    <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
+                      <p className="text-gray-500 text-xs">{k}</p>
+                      <p className="text-white">{v}</p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           {/* Capstone */}
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
@@ -354,8 +409,9 @@ const WellDataLearningPage = () => {
                       {result.certificate_number ? (
                         <div className="mt-2 text-sm text-gray-300 space-y-1">
                           <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                            Associate certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
-                            The rest of the geoscience path is now open to you.</p>
+                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
+                            {result.tier === 'associate' && ' The rest of the geoscience path is now open to you.'}
+                            {result.tier === 'expert' && ' Your 50% Suite discount code is on your certificates page.'}</p>
                           <div className="flex gap-3">
                             <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
                               My certificates <ArrowRight className="h-3 w-3" />

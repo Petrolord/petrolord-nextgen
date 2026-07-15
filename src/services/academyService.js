@@ -308,6 +308,36 @@ export function certificateStatus(cert) {
   return 'valid';
 }
 
+// ---- NG7 Suite bridge (owner Q3): an Expert certification auto-issues
+// a personal single-use 50% Suite discount code for the certified
+// module, valid for the certificate window. Learners read their own
+// codes; redemption is server-side at Suite checkout.
+
+export async function listMyBridgeCodes() {
+  const { data, error } = await supabase
+    .from('academy_suite_bridge_codes')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return data;
+}
+
+export function bridgeCodeStatus(code) {
+  if (code.voided_at) return 'voided';
+  if (code.redeemed_at) return 'redeemed';
+  if (new Date(code.valid_until) <= new Date()) return 'expired';
+  return 'valid';
+}
+
+// Anonymous bridge-code verification (mirrors certificate verify).
+export async function verifyBridgeCode(code) {
+  const { data, error } = await supabase.rpc('academy_verify_bridge_code', {
+    p_code: code,
+  });
+  if (error) throw error;
+  return data; // null when not found
+}
+
 export function verificationUrl(verifyCode) {
   const origin = typeof window !== 'undefined' ? window.location.origin : '';
   return `${origin}/verify/${verifyCode}`;
