@@ -81,3 +81,45 @@ export function computeVolumes(owcM) {
     },
   };
 }
+
+// ---- Intermediate tier: fault-block volumes.
+// A sealing fault at x = FAULT_X_M splits the accumulation; zoneVolumes
+// sums each block separately via its labels argument. The blocks must
+// sum to the Beginner-tier field total. Oracle-reproduced in Node
+// before the NG6 migration was seeded.
+export const FAULT_X_M = 1800;
+
+export function computeIntermediate(owcM) {
+  const { spec, top, base, topPts } = SURFACES;
+  const owc = Number(owcM);
+  const n = top.length;
+  const thick = new Float32Array(n).fill(1e30);
+  const labels = new Int32Array(n);
+  const blockNodes = [];
+  for (let j = 0; j < n; j++) {
+    const c = j % spec.nx;
+    const west = spec.x0 + c * spec.dx < FAULT_X_M;
+    labels[j] = west ? 0 : 1;
+    if (isNull(top[j]) || isNull(base[j])) continue;
+    const t = Math.min(base[j], owc) - top[j];
+    if (t <= 0) continue;
+    thick[j] = t;
+    blockNodes.push({ j, t, west });
+  }
+  const mk = (v) => new Float32Array(n).fill(v);
+  const vols = zoneVolumes(spec, thick, labels, {
+    ntg: mk(PROPS.ntg), phi: mk(PROPS.phi), sw: mk(PROPS.sw),
+  });
+  const empty = { bulk_m3: 0, net_m3: 0, pore_m3: 0, hcpv_m3: 0, cells: 0 };
+  const stoiip = (b) => ((b.hcpv_m3 / PROPS.bo) * M3_TO_STB) / 1e6;
+  const west = vols['0'] || empty;
+  const east = vols['1'] || empty;
+  return {
+    spec,
+    topPts,
+    blockNodes,
+    west: { cells: west.cells, grvMm3: west.bulk_m3 / 1e6, stoiipMmstb: stoiip(west) },
+    east: { cells: east.cells, grvMm3: east.bulk_m3 / 1e6, stoiipMmstb: stoiip(east) },
+    totalStoiipMmstb: stoiip(vols.total || empty),
+  };
+}

@@ -11,13 +11,13 @@ import {
   Loader2, HardDrive, GraduationCap, Lock, CheckCircle2, XCircle,
   BookOpen, Award, ArrowRight,
 } from 'lucide-react';
-import { TEACHING_FILES, qcFile, headerRows } from '@/lib/welldataTeaching';
+import { TEACHING_FILES, qcFile, headerRows, computeIntermediate } from '@/lib/welldataTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
 
 const APP = 'welldata';
-const TIER = 'beginner';
+const TIERS = ['beginner', 'intermediate'];
 
 const LESSONS = [
   { n: 1, title: 'Anatomy of a LAS file',
@@ -61,6 +61,7 @@ const num = (v, dp = 4) => (v == null || Number.isNaN(v) ? '—' : Number(v).toF
 const WellDataLearningPage = () => {
   const { toast } = useToast();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
+  const [tier, setTier] = useState('beginner');
   const [fileId, setFileId] = useState(TEACHING_FILES[0].id);
   const [capstone, setCapstone] = useState(null);
   const [answers, setAnswers] = useState({});
@@ -73,7 +74,6 @@ const WellDataLearningPage = () => {
         const allowed = await hasScope(APP, 'learning');
         const quota = allowed ? await getQuota(APP) : null;
         setGate({ loading: false, allowed, quota });
-        if (allowed) setCapstone(await getCapstone(APP, TIER));
       } catch (e) {
         setGate({ loading: false, allowed: false, quota: null });
         toast({ title: 'Could not open the app', description: e.message, variant: 'destructive' });
@@ -81,6 +81,20 @@ const WellDataLearningPage = () => {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!gate.allowed) return;
+    setCapstone(null);
+    setAnswers({});
+    setResult(null);
+    getCapstone(APP, tier).then(setCapstone).catch(() => setCapstone(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tier, gate.allowed]);
+
+  const intermediate = useMemo(
+    () => (tier === 'intermediate' ? computeIntermediate() : null),
+    [tier],
+  );
 
   const file = TEACHING_FILES.find((f) => f.id === fileId);
   const qc = useMemo(() => {
@@ -99,7 +113,7 @@ const WellDataLearningPage = () => {
       const numeric = Object.fromEntries(
         (capstone?.fields || []).map((f) => [f.key, answers[f.key] === '' || answers[f.key] === undefined ? null : Number(answers[f.key])]),
       );
-      const res = await submitCapstone(APP, TIER, numeric);
+      const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
         toast({
@@ -254,6 +268,57 @@ const WellDataLearningPage = () => {
               )}
             </CardContent>
           </Card>
+
+          {/* Tier toggle + intermediate panel */}
+          <div className="flex gap-2">
+            {TIERS.map((t) => (
+              <button key={t} type="button" onClick={() => setTier(t)}
+                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+                {t} tier
+              </button>
+            ))}
+          </div>
+
+          {intermediate && (
+            <Card className="bg-[#1E293B] border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-white">SI import panel (Intermediate)</CardTitle>
+                <CardDescription>The full import pipeline on feet_20: unit conversion to metres, step detection, curve-kind recognition.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
+                  {[
+                    ['Converted depth range', `${num(intermediate.startMdM, 2)} – ${num(intermediate.stopMdM, 2)} m`],
+                    ['Converted step', `${num(intermediate.stepM, 4)} m`],
+                    ['Curves unit-converted', `${intermediate.convertedCurves}`],
+                    ['Curve kinds recognised', `${intermediate.recognizedKinds}`],
+                    ['irregular_20 uniform step?', intermediate.irregularUniform ? 'yes (1)' : 'no (0)'],
+                  ].map(([k, v]) => (
+                    <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
+                      <p className="text-gray-500 text-xs">{k}</p>
+                      <p className="text-white">{v}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs text-gray-400">
+                    <thead><tr className="text-left text-gray-500 border-b border-gray-700">
+                      <th className="py-1 pr-3">Curve</th><th className="py-1 pr-3">Kind</th><th className="py-1 pr-3">Unit (source → SI)</th>
+                    </tr></thead>
+                    <tbody>
+                      {intermediate.logs.map((l) => (
+                        <tr key={l.mnemonic} className="border-b border-gray-800/60">
+                          <td className="py-1 pr-3 text-white font-mono">{l.mnemonic}</td>
+                          <td className="py-1 pr-3">{l.kind || '—'}</td>
+                          <td className="py-1 pr-3">{l.converted ? `${l.sourceUnit} → ${l.unit}` : l.unit}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Capstone */}
           <Card className="bg-[#1E293B] border-gray-700">

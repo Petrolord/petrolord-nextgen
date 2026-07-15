@@ -7,16 +7,16 @@
 // running exactly this pipeline in Node before the migration was seeded.
 import { topsToPoints, specForPoints } from '@petrolord/engines/engines/mapping/surface.js';
 import { gridSurface } from '@petrolord/engines/lib/gridding/gridding.js';
-import { surfaceStats, sampleAtXY, isNull } from '@petrolord/engines/lib/gridding/gridmath.js';
+import { surfaceStats, sampleAtXY, isNull, isochore } from '@petrolord/engines/lib/gridding/gridmath.js';
 import { contourLevels, contourPolylines } from '@petrolord/engines/lib/gridding/mapContours.js';
 
 export const TEACHING_WELLS = [
-  { name: 'Ekene-1', surface_x: 1000, surface_y: 1000, tops: [{ name: 'TOP_SAND', md_m: 1548 }] },
-  { name: 'Ekene-2', surface_x: 2200, surface_y: 1150, tops: [{ name: 'TOP_SAND', md_m: 1565 }] },
-  { name: 'Ekene-3', surface_x: 1400, surface_y: 2300, tops: [{ name: 'TOP_SAND', md_m: 1541 }] },
-  { name: 'Ekene-4', surface_x: 2600, surface_y: 2500, tops: [{ name: 'TOP_SAND', md_m: 1590 }] },
-  { name: 'Ekene-5', surface_x: 600,  surface_y: 1900, tops: [{ name: 'TOP_SAND', md_m: 1552 }] },
-  { name: 'Ekene-6', surface_x: 1900, surface_y: 1800, tops: [{ name: 'TOP_SAND', md_m: 1546 }] },
+  { name: 'Ekene-1', surface_x: 1000, surface_y: 1000, tops: [{ name: 'TOP_SAND', md_m: 1548 }, { name: 'BASE_SAND', md_m: 1580 }] },
+  { name: 'Ekene-2', surface_x: 2200, surface_y: 1150, tops: [{ name: 'TOP_SAND', md_m: 1565 }, { name: 'BASE_SAND', md_m: 1601 }] },
+  { name: 'Ekene-3', surface_x: 1400, surface_y: 2300, tops: [{ name: 'TOP_SAND', md_m: 1541 }, { name: 'BASE_SAND', md_m: 1570 }] },
+  { name: 'Ekene-4', surface_x: 2600, surface_y: 2500, tops: [{ name: 'TOP_SAND', md_m: 1590 }, { name: 'BASE_SAND', md_m: 1615 }] },
+  { name: 'Ekene-5', surface_x: 600,  surface_y: 1900, tops: [{ name: 'TOP_SAND', md_m: 1552 }, { name: 'BASE_SAND', md_m: 1583 }] },
+  { name: 'Ekene-6', surface_x: 1900, surface_y: 1800, tops: [{ name: 'TOP_SAND', md_m: 1546 }, { name: 'BASE_SAND', md_m: 1580 }] },
 ];
 
 export const TOP_NAME = 'TOP_SAND';
@@ -63,5 +63,33 @@ export function computeMap(cellM) {
       depthAtTarget: isNull(zAtTarget) ? null : zAtTarget,
       contourStep: step,
     },
+  };
+}
+
+// ---- Intermediate tier: two-surface math (isochore).
+// Oracle-reproduced in Node before the NG6 migration was seeded.
+export function computeIntermediate() {
+  const topPts = topsToPoints(TEACHING_WELLS, TOP_NAME);
+  const spec = specForPoints(topPts, CAPSTONE_CELL_M, PAD_CELLS);
+  const topZ = gridSurface(topPts, spec, { maxExtrapolation: MAX_EXTRAP_M }).z;
+  const baseZ = gridSurface(
+    topsToPoints(TEACHING_WELLS, 'BASE_SAND'), spec, { maxExtrapolation: MAX_EXTRAP_M },
+  ).z;
+  const iso = isochore(baseZ, topZ);
+  const stats = surfaceStats(iso);
+  const atP1 = sampleAtXY(iso, spec, TARGET.x, TARGET.y);
+  const wellThk = TEACHING_WELLS.map((w) => {
+    const top = w.tops.find((t) => t.name === TOP_NAME).md_m;
+    const base = w.tops.find((t) => t.name === 'BASE_SAND').md_m;
+    return { name: w.name, thickness: base - top };
+  });
+  return {
+    isoMin: stats.min,
+    isoMax: stats.max,
+    isoMean: stats.mean,
+    isoLive: stats.count,
+    isoAtP1: isNull(atP1) ? null : atP1,
+    wellThk,
+    meanWellThickness: wellThk.reduce((a, w) => a + w.thickness, 0) / wellThk.length,
   };
 }

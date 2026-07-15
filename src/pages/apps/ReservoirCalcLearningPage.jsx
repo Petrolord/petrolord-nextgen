@@ -13,13 +13,14 @@ import {
 } from 'lucide-react';
 import {
   TEACHING_WELLS, CELL_M, CAPSTONE_OWC_M, OWC_OPTIONS, PROPS, computeVolumes,
+  computeIntermediate, FAULT_X_M,
 } from '@/lib/reservoircalcTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
 
 const APP = 'reservoircalc';
-const TIER = 'beginner';
+const LEARN_TIERS = ['beginner', 'intermediate'];
 
 const LESSONS = [
   { n: 1, title: 'The volumetrics chain',
@@ -98,6 +99,7 @@ function OilMap({ vols }) {
 const ReservoirCalcLearningPage = () => {
   const { toast } = useToast();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
+  const [tier, setTier] = useState('beginner');
   const [owc, setOwc] = useState(CAPSTONE_OWC_M);
   const [capstone, setCapstone] = useState(null);
   const [answers, setAnswers] = useState({});
@@ -110,7 +112,6 @@ const ReservoirCalcLearningPage = () => {
         const allowed = await hasScope(APP, 'learning');
         const quota = allowed ? await getQuota(APP) : null;
         setGate({ loading: false, allowed, quota });
-        if (allowed) setCapstone(await getCapstone(APP, TIER));
       } catch (e) {
         setGate({ loading: false, allowed: false, quota: null });
         toast({ title: 'Could not open the app', description: e.message, variant: 'destructive' });
@@ -118,6 +119,15 @@ const ReservoirCalcLearningPage = () => {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!gate.allowed) return;
+    setCapstone(null);
+    setAnswers({});
+    setResult(null);
+    getCapstone(APP, tier).then(setCapstone).catch(() => setCapstone(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tier, gate.allowed]);
 
   const vols = useMemo(() => {
     try {
@@ -135,7 +145,7 @@ const ReservoirCalcLearningPage = () => {
       const numeric = Object.fromEntries(
         (capstone?.fields || []).map((f) => [f.key, answers[f.key] === '' || answers[f.key] === undefined ? null : Number(answers[f.key])]),
       );
-      const res = await submitCapstone(APP, TIER, numeric);
+      const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
         toast({ title: 'Capstone passed — Associate certified!', description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
@@ -241,6 +251,53 @@ const ReservoirCalcLearningPage = () => {
             </Card>
           )}
 
+          {/* Tier toggle + intermediate panel */}
+          <div className="flex gap-2">
+            {LEARN_TIERS.map((t) => (
+              <button key={t} type="button" onClick={() => setTier(t)}
+                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+                {t} tier
+              </button>
+            ))}
+          </div>
+
+          {tier === 'intermediate' && (() => {
+            const inter = computeIntermediate(CAPSTONE_OWC_M);
+            return (
+              <Card className="bg-[#1E293B] border-gray-700">
+                <CardHeader>
+                  <CardTitle className="text-white">Fault-block panel (Intermediate) — OWC {CAPSTONE_OWC_M} m</CardTitle>
+                  <CardDescription>
+                    A sealing fault at x = {FAULT_X_M} m splits the accumulation. The two blocks must sum to the field total from the Associate tier.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead><tr className="text-left text-gray-400 border-b border-gray-700">
+                        <th className="py-2 pr-4">Block</th><th className="py-2 pr-4">Oil cells</th>
+                        <th className="py-2 pr-4">GRV</th><th className="py-2 pr-4">STOIIP</th>
+                      </tr></thead>
+                      <tbody>
+                        {[['West (x < ' + FAULT_X_M + ')', inter.west], ['East (x ≥ ' + FAULT_X_M + ')', inter.east]].map(([label, b]) => (
+                          <tr key={label} className="border-b border-gray-800 text-gray-300">
+                            <td className="py-2 pr-4 text-white">{label}</td>
+                            <td className="py-2 pr-4">{b.cells}</td>
+                            <td className="py-2 pr-4">{num(b.grvMm3, 3)} ×10⁶ m³</td>
+                            <td className="py-2 pr-4">{num(b.stoiipMmstb, 3)} MMstb</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    Block sum: {num(inter.west.stoiipMmstb + inter.east.stoiipMmstb, 3)} MMstb — matches the field total ({num(inter.totalStoiipMmstb, 3)} MMstb).
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })()}
+
           {/* Capstone */}
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
@@ -275,7 +332,7 @@ const ReservoirCalcLearningPage = () => {
                       {result.certificate_number ? (
                         <div className="mt-2 text-sm text-gray-300 space-y-1">
                           <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                            Associate certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
+                            {result.tier === 'professional' ? 'Professional' : 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
                             That completes the geoscience Beginner path — every course in the daily loop.</p>
                           <div className="flex gap-3">
                             <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">

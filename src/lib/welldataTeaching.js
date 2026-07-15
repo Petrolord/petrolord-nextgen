@@ -5,7 +5,7 @@
 // lasio goldens the parser validates against, so the capstone answers a
 // careful learner reads off the QC panel are exactly the oracle.
 import { parseLas } from '@petrolord/engines/engines/welldata/lasParse.js';
-import { depthUnitToMetres } from '@petrolord/engines/engines/welldata/lasImport.js';
+import { depthUnitToMetres, prepareLogs, uniformStepM } from '@petrolord/engines/engines/welldata/lasImport.js';
 
 import basicLas from '@petrolord/engines/test-data/wells/las/basic_20.las?raw';
 import feetLas from '@petrolord/engines/test-data/wells/las/feet_20.las?raw';
@@ -82,4 +82,25 @@ export function headerRows(well) {
   return keys
     .filter((k) => well[k] !== undefined)
     .map((k) => ({ key: k, ...well[k] }));
+}
+
+// ---- Intermediate tier: SI import (the full prepareLogs pipeline).
+// Oracle-reproduced in Node before the NG6 migration was seeded.
+export function computeIntermediate() {
+  const feetFile = TEACHING_FILES.find((f) => f.id === 'feet_20');
+  const irrFile = TEACHING_FILES.find((f) => f.id === 'irregular_20');
+  const feet = prepareLogs(parseLas(feetFile.text), { sourceFile: feetFile.label });
+  const irr = parseLas(irrFile.text);
+  return {
+    startMdM: feet.startMdM,
+    stopMdM: feet.stopMdM,
+    stepM: feet.stepM,
+    convertedCurves: feet.logs.filter((l) => l.converted).length,
+    recognizedKinds: feet.logs.filter((l, i) => i > 0 && l.kind).length,
+    irregularUniform: uniformStepM(irr.curves[0].data) === null ? 0 : 1,
+    logs: feet.logs.map((l) => ({
+      mnemonic: l.mnemonic, kind: l.kind, unit: l.unit,
+      sourceUnit: l.sourceUnit, converted: l.converted,
+    })),
+  };
 }
