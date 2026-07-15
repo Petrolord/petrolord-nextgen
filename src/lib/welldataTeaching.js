@@ -1,0 +1,85 @@
+// Well Data Manager teaching workflow — drives the central
+// @petrolord/engines LAS parser over the six golden teaching files
+// (test-data/wells/las). The engine is consumed as-is; this module only
+// orchestrates it for Learning Mode. The QC numbers it surfaces are the
+// lasio goldens the parser validates against, so the capstone answers a
+// careful learner reads off the QC panel are exactly the oracle.
+import { parseLas } from '@petrolord/engines/engines/welldata/lasParse.js';
+import { depthUnitToMetres } from '@petrolord/engines/engines/welldata/lasImport.js';
+
+import basicLas from '@petrolord/engines/test-data/wells/las/basic_20.las?raw';
+import feetLas from '@petrolord/engines/test-data/wells/las/feet_20.las?raw';
+import irregularLas from '@petrolord/engines/test-data/wells/las/irregular_20.las?raw';
+import nullheavyLas from '@petrolord/engines/test-data/wells/las/nullheavy_20.las?raw';
+import quirksLas from '@petrolord/engines/test-data/wells/las/quirks_20.las?raw';
+import wrappedLas from '@petrolord/engines/test-data/wells/las/wrapped_12.las?raw';
+
+export const TEACHING_FILES = [
+  { id: 'basic_20', label: 'basic_20.las', text: basicLas,
+    hint: 'A clean LAS 2.0 export. Start here: sections, curves, the NULL value.' },
+  { id: 'feet_20', label: 'feet_20.las', text: feetLas,
+    hint: 'Depth in feet. Everything downstream works in metres, so watch the unit.' },
+  { id: 'irregular_20', label: 'irregular_20.las', text: irregularLas,
+    hint: 'An irregular depth column: the step is not constant everywhere.' },
+  { id: 'nullheavy_20', label: 'nullheavy_20.las', text: nullheavyLas,
+    hint: 'Heavy null flagging, including one completely dead curve.' },
+  { id: 'quirks_20', label: 'quirks_20.las', text: quirksLas,
+    hint: 'Real-world header quirks: odd spacing, colons in values.' },
+  { id: 'wrapped_12', label: 'wrapped_12.las', text: wrappedLas,
+    hint: 'A LAS 1.2 wrapped file: each depth step spans several data lines.' },
+];
+
+// Parse one teaching file and build the QC summary the page renders.
+// Means are accumulated in f64 over the finite samples, matching how the
+// validation goldens were produced (sum_finite_f64 / finite count).
+export function qcFile(file) {
+  const parsed = parseLas(file.text);
+  const curves = parsed.curves.map((c) => {
+    let sum = 0;
+    let finite = 0;
+    for (const v of c.data) {
+      if (Number.isFinite(v)) { sum += v; finite += 1; }
+    }
+    return {
+      mnemonic: c.mnemonic,
+      unit: c.unit,
+      descr: c.descr,
+      nSamples: c.data.length,
+      nullCount: c.data.length - finite,
+      firstFinite: c.firstFinite,
+      lastFinite: c.lastFinite,
+      mean: finite ? sum / finite : null,
+    };
+  });
+
+  const dept = parsed.curves[0];
+  const deptVals = Array.from(dept.data).filter(Number.isFinite);
+  const stepNative = deptVals.length > 1
+    ? (deptVals[deptVals.length - 1] - deptVals[0]) / (deptVals.length - 1)
+    : null;
+  const toM = depthUnitToMetres(dept.unit);
+
+  return {
+    version: parsed.version,
+    wrap: parsed.wrap,
+    nullValue: parsed.nullValue,
+    well: parsed.well,
+    depth: {
+      unit: dept.unit,
+      first: deptVals[0],
+      last: deptVals[deptVals.length - 1],
+      stepNative,
+      stepM: stepNative != null && toM != null ? stepNative * toM : null,
+      nSamples: dept.data.length,
+    },
+    curves,
+  };
+}
+
+// Well-header rows worth showing (skip parser bookkeeping entries).
+export function headerRows(well) {
+  const keys = ['WELL', 'COMP', 'FLD', 'LOC', 'SRVC', 'DATE', 'STRT', 'STOP', 'STEP', 'NULL'];
+  return keys
+    .filter((k) => well[k] !== undefined)
+    .map((k) => ({ key: k, ...well[k] }));
+}

@@ -47,6 +47,7 @@ export default [
 
 			// Override recommended import rules for stricter checking
 			'import/no-self-import': 'error', // Extremely fast rule, breaking results in infinite loop/bundling error
+			'import/no-unresolved': ['error', { ignore: ['\\?raw$'] }], // Vite asset query imports (e.g. .las?raw) are resolved by Vite, not node
 
 			// Disable expensive rules for performance
 			'import/no-cycle': 'off', // AI rarely makes this error, and the rule is very slow to run
