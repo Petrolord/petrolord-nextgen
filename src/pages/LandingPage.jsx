@@ -44,8 +44,8 @@ const LADDER = [{
 
 // Module buckets mirror the Suite dashboard tiles plus the four new
 // modules introduced for the commercial and energy-business app wave
-// (2026-07-15 owner direction). `coming` names the flagship app that
-// anchors the bucket; keep in sync as the owner adds courses.
+// (2026-07-15 owner direction). `coming` lists the apps planned for the
+// bucket, flagship first; keep in sync as the owner adds courses.
 const MODULES = [{
   name: 'Geoscience',
   icon: Layers,
@@ -76,7 +76,7 @@ const MODULES = [{
   color: 'text-lime-400',
   bg: 'bg-lime-500/10',
   desc: 'Project economics, AFE and cost control, fiscal and contract modelling.',
-  coming: 'Fiscal & Contract Economics Modeler'
+  coming: ['Fiscal & Contract Economics Modeler']
 }, {
   name: 'Facilities',
   icon: Factory,
@@ -101,7 +101,7 @@ const MODULES = [{
   color: 'text-teal-400',
   bg: 'bg-teal-500/10',
   desc: 'Carbon accounting, emissions tracking and decarbonisation planning.',
-  coming: 'Carbon & Emissions Studio',
+  coming: ['Carbon & Emissions Studio', 'CCS/CCUS Screening Tool', 'Methane & Flaring Monitor'],
   isNew: true
 }, {
   name: 'Commercial & Trading',
@@ -109,7 +109,7 @@ const MODULES = [{
   color: 'text-orange-400',
   bg: 'bg-orange-500/10',
   desc: 'Energy trading, cargo operations and market analytics.',
-  coming: 'Energy Trading & Cargo Simulator',
+  coming: ['Energy Trading & Cargo Simulator', 'Crude Assay & Blending Manager', 'Price Risk & Hedging Desk'],
   isNew: true
 }, {
   name: 'Supply Chain & Logistics',
@@ -117,7 +117,7 @@ const MODULES = [{
   color: 'text-sky-400',
   bg: 'bg-sky-500/10',
   desc: 'Supply chain planning and marine logistics for energy operations.',
-  coming: 'Supply Chain & Marine Logistics Planner',
+  coming: ['Supply Chain & Marine Logistics Planner', 'Materials & Inventory Manager', 'Vessel Scheduling Optimizer'],
   isNew: true
 }, {
   name: 'Data & AI',
@@ -125,7 +125,7 @@ const MODULES = [{
   color: 'text-violet-400',
   bg: 'bg-violet-500/10',
   desc: 'Oilfield data management and applied AI workflows.',
-  coming: 'Oilfield Data & AI Studio',
+  coming: ['Oilfield Data & AI Studio', 'Production Forecasting ML Workbench'],
   isNew: true
 }];
 
@@ -421,9 +421,17 @@ const LandingPage = () => {
                 <h3 className="text-lg font-bold text-white mb-2">{module.name}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">{module.desc}</p>
                 {module.coming && (
-                  <p className="mt-4 pt-3 border-t border-slate-700/60 text-xs text-slate-500">
-                    Coming soon: <span className="text-slate-300 font-medium">{module.coming}</span>
-                  </p>
+                  <div className="mt-4 pt-3 border-t border-slate-700/60">
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Coming soon</p>
+                    <ul className="space-y-1">
+                      {module.coming.map((app, i) => (
+                        <li key={i} className="text-xs text-slate-300 flex items-start gap-1.5">
+                          <span className="mt-1.5 w-1 h-1 rounded-full shrink-0 bg-[#BFFF00]/70"></span>
+                          {app}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
               </motion.div>)}
           </div>
