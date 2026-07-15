@@ -13,14 +13,15 @@ import {
 } from 'lucide-react';
 import {
   TEACHING_WELLS, ZONE, FLATTEN_DATUM_M, computeSection, structuralRelief, displayGr,
-  computeIntermediate, INTERMEDIATE_DATUM,
+  computeIntermediate, INTERMEDIATE_DATUM, computeAdvanced,
 } from '@/lib/correlationTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
 
 const APP = 'wellcorrelation';
-const LEARN_TIERS = ['beginner', 'intermediate'];
+const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
+const CERT_LABELS = { associate: 'Associate', professional: 'Professional', expert: 'Expert' };
 
 const LESSONS = [
   { n: 1, title: 'Tops are the correlation currency',
@@ -192,7 +193,7 @@ const WellCorrelationLearningPage = () => {
       const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
-        toast({ title: 'Capstone passed — Associate certified!', description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
       } else if (res.passed) {
         toast({ title: 'Passed — you were already certified', className: 'bg-[#BFFF00] text-slate-900' });
       } else {
@@ -367,6 +368,58 @@ const WellCorrelationLearningPage = () => {
             );
           })()}
 
+          {tier === 'advanced' && (() => {
+            const adv = computeAdvanced();
+            return (
+              <Card className="bg-[#1E293B] border-gray-700">
+                <CardHeader>
+                  <CardTitle className="text-white">Missing-pick prediction (Advanced)</CardTitle>
+                  <CardDescription>
+                    Ekene-4 TDs above TOP_B. Two interval methods project the missing pick from the three wells that carry it; the spread between them is the growth uncertainty.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead><tr className="text-left text-gray-400 border-b border-gray-700">
+                        <th className="py-2 pr-4">Well</th><th className="py-2 pr-4">TOP_B</th>
+                        <th className="py-2 pr-4">TOP_A to TOP_B</th><th className="py-2 pr-4">TOP_SAND to TOP_B</th>
+                      </tr></thead>
+                      <tbody>
+                        {adv.rows.map((r) => (
+                          <tr key={r.id} className="border-b border-gray-800 text-gray-300">
+                            <td className="py-2 pr-4 text-white">{r.name}</td>
+                            <td className="py-2 pr-4">{r.topB} m</td>
+                            <td className="py-2 pr-4">{r.aToB} m</td>
+                            <td className="py-2 pr-4">{r.sandToB} m</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
+                    {[
+                      ['Mean TOP_A to TOP_B interval', `${adv.aToBMean.toFixed(2)} m`],
+                      ['Mean TOP_SAND to TOP_B interval', `${adv.sandToBMean.toFixed(2)} m`],
+                      ['Ekene-4 TOP_B, layer-cake estimate', `${adv.w4TopBLayercake.toFixed(2)} m`],
+                      ['Ekene-4 TOP_B, from TOP_SAND', `${adv.w4TopBFromSand.toFixed(2)} m`],
+                      ['Spread between the estimates', `${adv.predictionSpread.toFixed(2)} m`],
+                      ['TOP_B structural relief (3 wells)', `${adv.topBRelief.toFixed(2)} m`],
+                    ].map(([k, v]) => (
+                      <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
+                        <p className="text-gray-500 text-xs">{k}</p>
+                        <p className="text-white">{v}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    The section grows toward Ekene-4, so the layer-cake estimate is a floor and the TOP_SAND projection a better anchor. Report the spread honestly rather than picking a favourite.
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })()}
+
           {/* Capstone */}
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
@@ -401,7 +454,8 @@ const WellCorrelationLearningPage = () => {
                       {result.certificate_number ? (
                         <div className="mt-2 text-sm text-gray-300 space-y-1">
                           <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                            {result.tier === 'professional' ? 'Professional' : 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</p>
+                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
+                            {result.tier === 'expert' && ' Your 50% Suite discount code is on your certificates page.'}</p>
                           <div className="flex gap-3">
                             <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
                               My certificates <ArrowRight className="h-3 w-3" />

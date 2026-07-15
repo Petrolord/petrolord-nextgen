@@ -85,6 +85,38 @@ export function displayGr(well, md) {
   return base + wiggle;
 }
 
+// ---- Advanced tier (NG7): predict the missing TOP_B in Ekene-4 two
+// ways (layer-cake from TOP_A, interval from TOP_SAND); the spread
+// between the estimates is the growth uncertainty. Closed-form on the
+// fixture through the engine's top reads; oracle-reproduced in Node
+// before the NG7 migration was seeded.
+export function computeAdvanced() {
+  const withB = TEACHING_WELLS.filter((w) => topMd(w, 'TOP_B') !== null);
+  const mean = (arr) => arr.reduce((a, b) => a + b, 0) / arr.length;
+  const rows = withB.map((w) => ({
+    id: w.id,
+    name: w.name,
+    aToB: topMd(w, 'TOP_B') - topMd(w, 'TOP_A'),
+    sandToB: topMd(w, 'TOP_B') - topMd(w, 'TOP_SAND'),
+    topB: topMd(w, 'TOP_B'),
+  }));
+  const aToBMean = mean(rows.map((r) => r.aToB));
+  const sandToBMean = mean(rows.map((r) => r.sandToB));
+  const w4 = TEACHING_WELLS.find((w) => w.id === 'W4');
+  const layercake = topMd(w4, 'TOP_A') + aToBMean;
+  const fromSand = topMd(w4, 'TOP_SAND') + sandToBMean;
+  const bMds = rows.map((r) => r.topB);
+  return {
+    rows,
+    aToBMean,
+    sandToBMean,
+    w4TopBLayercake: layercake,
+    w4TopBFromSand: fromSand,
+    predictionSpread: Math.abs(fromSand - layercake),
+    topBRelief: Math.max(...bMds) - Math.min(...bMds),
+  };
+}
+
 // ---- Intermediate tier: growth analysis on the TOP_A datum.
 // Oracle-reproduced in Node before the NG6 migration was seeded.
 export const INTERMEDIATE_DATUM = { topName: 'TOP_A', datumM: 1450 };

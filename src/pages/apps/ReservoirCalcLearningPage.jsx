@@ -13,14 +13,15 @@ import {
 } from 'lucide-react';
 import {
   TEACHING_WELLS, CELL_M, CAPSTONE_OWC_M, OWC_OPTIONS, PROPS, computeVolumes,
-  computeIntermediate, FAULT_X_M,
+  computeIntermediate, FAULT_X_M, computeAdvanced, WELL_PHI, P1,
 } from '@/lib/reservoircalcTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
 
 const APP = 'reservoircalc';
-const LEARN_TIERS = ['beginner', 'intermediate'];
+const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
+const CERT_LABELS = { associate: 'Associate', professional: 'Professional', expert: 'Expert' };
 
 const LESSONS = [
   { n: 1, title: 'The volumetrics chain',
@@ -148,7 +149,7 @@ const ReservoirCalcLearningPage = () => {
       const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
-        toast({ title: 'Capstone passed — Associate certified!', description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
       } else if (res.passed) {
         toast({ title: 'Passed — you were already certified', className: 'bg-[#BFFF00] text-slate-900' });
       } else {
@@ -266,7 +267,7 @@ const ReservoirCalcLearningPage = () => {
             return (
               <Card className="bg-[#1E293B] border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-white">Fault-block panel (Intermediate) — OWC {CAPSTONE_OWC_M} m</CardTitle>
+                  <CardTitle className="text-white">Fault-block panel (Intermediate) at OWC {CAPSTONE_OWC_M} m</CardTitle>
                   <CardDescription>
                     A sealing fault at x = {FAULT_X_M} m splits the accumulation. The two blocks must sum to the field total from the Associate tier.
                   </CardDescription>
@@ -292,6 +293,55 @@ const ReservoirCalcLearningPage = () => {
                   </div>
                   <p className="text-xs text-gray-500">
                     Block sum: {num(inter.west.stoiipMmstb + inter.east.stoiipMmstb, 3)} MMstb — matches the field total ({num(inter.totalStoiipMmstb, 3)} MMstb).
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })()}
+
+          {tier === 'advanced' && (() => {
+            const adv = computeAdvanced(CAPSTONE_OWC_M);
+            return (
+              <Card className="bg-[#1E293B] border-gray-700">
+                <CardHeader>
+                  <CardTitle className="text-white">Property-model panel (Advanced) at OWC {CAPSTONE_OWC_M} m</CardTitle>
+                  <CardDescription>
+                    A porosity trend surface fitted to the six well values replaces the constant {PROPS.phi}. Same frame, same contact; only the porosity model changes.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs text-gray-400">
+                      <thead><tr className="text-left text-gray-500 border-b border-gray-700">
+                        <th className="py-1 pr-3">Well</th><th className="py-1 pr-3">Porosity</th>
+                      </tr></thead>
+                      <tbody>
+                        {TEACHING_WELLS.map((w) => (
+                          <tr key={w.name} className="border-b border-gray-800/60">
+                            <td className="py-1 pr-3 text-white">{w.name}</td>
+                            <td className="py-1 pr-3">{WELL_PHI[w.name]}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
+                    {[
+                      [`Trend porosity at P-1 (${P1.x}, ${P1.y})`, num(adv.phiAtP1, 4)],
+                      ['Mean trend porosity over oil nodes', num(adv.phiMeanOil, 4)],
+                      ['Pore volume, trend model', `${num(adv.poreTrendMm3, 4)} ×10⁶ m³`],
+                      ['HCPV, trend model', `${num(adv.hcpvTrendMm3, 4)} ×10⁶ m³`],
+                      ['STOIIP, trend model', `${num(adv.stoiipTrendMmstb, 3)} MMstb`],
+                      ['STOIIP added over the constant model', `${num(adv.stoiipDeltaMmstb, 3)} MMstb`],
+                    ].map(([k, v]) => (
+                      <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
+                        <p className="text-gray-500 text-xs">{k}</p>
+                        <p className="text-white">{v}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    The crest sits nearest the good-porosity wells, so the trend model books more oil than the flat {PROPS.phi} ({num(adv.stoiipConstMmstb, 3)} MMstb). Property models move volumes without touching a single surface.
                   </p>
                 </CardContent>
               </Card>
@@ -332,7 +382,8 @@ const ReservoirCalcLearningPage = () => {
                       {result.certificate_number ? (
                         <div className="mt-2 text-sm text-gray-300 space-y-1">
                           <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                            {result.tier === 'professional' ? 'Professional' : 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
+                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
+                            {result.tier === 'expert' && ' Your 50% Suite discount code is on your certificates page.'}
                             That completes the geoscience Beginner path — every course in the daily loop.</p>
                           <div className="flex gap-3">
                             <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">

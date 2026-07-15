@@ -66,6 +66,48 @@ export function computeMap(cellM) {
   };
 }
 
+// ---- Advanced tier (NG7): grid validation. Leave-one-out only works
+// for wells INSIDE the control hull (the gridder masks to the hull, so
+// a removed edge well never sees a prediction at its own location);
+// Ekene-6 is the only interior well. Then a blind test at the new
+// appraisal well Ekene-7. Oracle-reproduced in Node before the NG7
+// migration was seeded.
+export const E7 = { name: 'Ekene-7', x: 1500, y: 1500, actual: 1549 };
+
+export function computeAdvanced() {
+  const pts = topsToPoints(TEACHING_WELLS, TOP_NAME);
+  const spec = specForPoints(pts, CAPSTONE_CELL_M, PAD_CELLS);
+  const loo = pts.map((p, i) => {
+    const rest = pts.filter((_, k) => k !== i);
+    const z = gridSurface(rest, spec, { maxExtrapolation: MAX_EXTRAP_M }).z;
+    const pred = sampleAtXY(z, spec, p.x, p.y);
+    return {
+      well: TEACHING_WELLS[i].name,
+      actual: p.z,
+      pred: isNull(pred) ? null : pred,
+      resid: isNull(pred) ? null : pred - p.z,
+    };
+  });
+  const validatable = loo.filter((r) => r.resid !== null);
+
+  const base6 = gridSurface(pts, spec, { maxExtrapolation: MAX_EXTRAP_M }).z;
+  const predE7 = sampleAtXY(base6, spec, E7.x, E7.y);
+  const pts7 = [...pts, { x: E7.x, y: E7.y, z: E7.actual }];
+  const spec7 = specForPoints(pts7, CAPSTONE_CELL_M, PAD_CELLS); // interior: frame unchanged
+  const with7 = gridSurface(pts7, spec7, { maxExtrapolation: MAX_EXTRAP_M });
+  let zmin7 = Infinity;
+  for (const v of with7.z) if (!isNull(v) && v < zmin7) zmin7 = v;
+  return {
+    loo,
+    crossValidatableWells: validatable.length,
+    looResidE6: loo.find((r) => r.well === 'Ekene-6')?.resid ?? null,
+    predAtE7: isNull(predE7) ? null : predE7,
+    blindResidualE7: isNull(predE7) ? null : predE7 - E7.actual,
+    zminWithE7: zmin7,
+    liveWithE7: with7.live,
+  };
+}
+
 // ---- Intermediate tier: two-surface math (isochore).
 // Oracle-reproduced in Node before the NG6 migration was seeded.
 export function computeIntermediate() {

@@ -100,6 +100,41 @@ export function traceRows(syn) {
   return rows;
 }
 
+// ---- Advanced tier (NG7): wedge modeling + tuning of the SAND
+// reflection pair (equal and opposite RC, the classic tuning setup) on
+// the central rockphysics wedge engine. Oracle-reproduced in Node
+// before the NG7 migration was seeded.
+import { tuningCurve, tuningThicknessMs } from '@petrolord/engines/engines/rockphysics/wedge.js';
+
+export const WEDGE = { rcTop: 0.08, rcBase: -0.08, dtMs: 2, maxThicknessMs: 60 };
+
+export function computeAdvanced() {
+  const { rcTop, rcBase, dtMs, maxThicknessMs } = WEDGE;
+  const run = (freqHz) => {
+    const { thicknessesMs, amplitudes } = tuningCurve(rcTop, rcBase, freqHz, dtMs, maxThicknessMs);
+    const tuneMs = tuningThicknessMs(amplitudes, dtMs);
+    return {
+      freqHz,
+      thicknessesMs,
+      amplitudes,
+      tuneMs,
+      tuneAmp: amplitudes[tuneMs / dtMs],
+      isoAmp: amplitudes[amplitudes.length - 1],
+      theoryMs: (Math.sqrt(6) / (2 * Math.PI * freqHz)) * 1000,
+    };
+  };
+  return { f25: run(25), f40: run(40) };
+}
+
+// Chart rows for the two tuning curves (thickness vs peak amplitude).
+export function tuningRows(adv) {
+  return adv.f25.thicknessesMs.map((t, i) => ({
+    thickness: t,
+    a25: adv.f25.amplitudes[i],
+    a40: adv.f40.amplitudes[i],
+  }));
+}
+
 // ---- Intermediate tier: bulk shift + tuning.
 // The "observed seismic" is the 25 Hz synthetic arriving 8 ms late (a
 // known planted lag, so the scan's answer is checkable). Oracle

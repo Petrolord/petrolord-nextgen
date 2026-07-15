@@ -92,6 +92,56 @@ export function chartRows(depth, curves, step = 2) {
 // Oracle-reproduced in Node before the NG6 migration was seeded.
 import { pickettFitDepthWindow } from '@petrolord/engines/engines/petrophysics/crossplot.js';
 
+// ---- Advanced tier (NG7): Rw triangulation. The lab sample corrected
+// with Arps, the SP quicklook, and the NG6 Pickett fit all converge on
+// the typewell's own Rw = 0.05; then SAND_A is booked with the
+// corrected and the raw Rw to show what the wrong Rw does to pay.
+// Oracle-reproduced in Node before the NG7 migration was seeded.
+import { rwArps, spK, rweFromSsp } from '@petrolord/engines/engines/petrophysics/rw.js';
+
+export const ADVANCED_GIVENS = {
+  rwSample: 0.114, tSampleF: 75, tFmF: 180,   // the lab water sample
+  sspMv: -93, rmfe: 0.62,                     // the SP quicklook reading
+};
+
+export function computeAdvanced() {
+  const c = typewell.curves;
+  const p = typewell.params;
+  const g = ADVANCED_GIVENS;
+  const rwA = rwArps(g.rwSample, g.tSampleF, g.tFmF);
+  const k = spK(g.tFmF);
+  const rwe = rweFromSsp(g.sspMv, g.rmfe, g.tFmF);
+
+  const phiD = c.RHOB.map((r) => phiDensity(r, p.rho_ma, p.rho_fl));
+  const phiND = phiD.map((pd, i) => phiNd(pd, c.NPHI[i], 'avg'));
+  const swWl = [];
+  for (let i = 0; i < c.DEPT.length; i++) {
+    if (c.DEPT[i] < p.water_leg[0] || c.DEPT[i] > p.water_leg[1]) continue;
+    const s = swArchie(c.RT[i], phiND[i], rwA, p.a, p.m, p.n);
+    if (Number.isFinite(s)) swWl.push(s);
+  }
+
+  const vsh = Array.from(vshFromGr(c.GR, {
+    grClean: p.gr_clean, grClay: p.gr_clay, method: 'larionov-tertiary',
+  }));
+  const book = (rw) => {
+    const sw = c.DEPT.map((_, i) => swArchie(c.RT[i], phiD[i], rw, p.a, p.m, p.n));
+    return netPay({ depth: c.DEPT, phi: phiD, vsh, sw }, {
+      cutPhi: p.cut_phi, cutVsh: p.cut_vsh, cutSw: p.cut_sw,
+      top: p.zones.SAND_A[0], base: p.zones.SAND_A[1],
+    }).summary;
+  };
+  return {
+    givens: g,
+    rwArps: rwA,
+    spK: k,
+    rweSsp: rwe,
+    swWaterlegMean: swWl.reduce((a, b) => a + b, 0) / swWl.length,
+    corrected: book(rwA),
+    uncorrected: book(g.rwSample),
+  };
+}
+
 export function computeIntermediate() {
   const c = typewell.curves;
   const p = typewell.params;

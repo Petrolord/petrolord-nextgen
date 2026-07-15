@@ -16,14 +16,15 @@ import {
 } from 'lucide-react';
 import {
   defaultParams, computeWorkflow, capstoneAnswers, chartRows, ZONES,
-  computeIntermediate,
+  computeIntermediate, computeAdvanced, ADVANCED_GIVENS,
 } from '@/lib/petrophysicsTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
 
 const APP = 'petrophysics';
-const LEARN_TIERS = ['beginner', 'intermediate'];
+const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
+const CERT_LABELS = { associate: 'Associate', professional: 'Professional', expert: 'Expert' };
 
 const LESSONS = [
   { n: 1, title: 'Shale volume from gamma ray',
@@ -97,6 +98,11 @@ const PetrophysicsLearningPage = () => {
     [tier],
   );
 
+  const advanced = useMemo(
+    () => (tier === 'advanced' ? computeAdvanced() : null),
+    [tier],
+  );
+
   const workflow = useMemo(() => {
     try {
       return computeWorkflow(params);
@@ -126,7 +132,7 @@ const PetrophysicsLearningPage = () => {
       setResult(res);
       if (res.passed && res.certificate_number) {
         toast({
-          title: `Capstone passed — ${res.tier === 'professional' ? 'Professional' : 'Associate'} certified!`,
+          title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`,
           description: res.certificate_number,
           className: 'bg-[#BFFF00] text-slate-900',
         });
@@ -307,7 +313,40 @@ const PetrophysicsLearningPage = () => {
             </Card>
           )}
 
-          {intermediate && (
+          {advanced && (
+            <Card className="bg-[#1E293B] border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-white">Rw triangulation panel (Advanced)</CardTitle>
+                <CardDescription>
+                  Lab sample {ADVANCED_GIVENS.rwSample} ohm.m at {ADVANCED_GIVENS.tSampleF} degF, formation {ADVANCED_GIVENS.tFmF} degF; SP quicklook SSP {ADVANCED_GIVENS.sspMv} mV with Rmfe {ADVANCED_GIVENS.rmfe} ohm.m. Three independent Rw estimates should converge; then SAND_A is booked with the corrected and the raw Rw.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+                  {[
+                    ['Sample Rw at formation T (Arps)', advanced.rwArps.toFixed(4) + ' ohm.m'],
+                    ['SP coefficient K', advanced.spK.toFixed(2)],
+                    ['Rwe from the SP quicklook', advanced.rweSsp.toFixed(4) + ' ohm.m'],
+                    ['Water-leg mean Sw (Arps Rw)', advanced.swWaterlegMean.toFixed(4)],
+                    ['SAND_A net pay (Arps Rw)', advanced.corrected.net_m.toFixed(2) + ' m'],
+                    ['SAND_A pay-avg Sw (Arps Rw)', advanced.corrected.sw_avg.toFixed(4)],
+                    ['SAND_A net pay (raw sample Rw)', advanced.uncorrected.net_m.toFixed(2) + ' m'],
+                    ['SAND_A pay-avg Sw (raw sample Rw)', advanced.uncorrected.sw_avg.toFixed(4)],
+                  ].map(([k, v]) => (
+                    <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
+                      <p className="text-gray-500 text-xs">{k}</p>
+                      <p className="text-white">{v}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500 mt-3">
+                  The Arps correction and the SP quicklook both land on the Pickett fit's a.Rw of 0.05. Booking with the raw surface sample instead overstates Sw and quietly erases pay.
+                </p>
+              </CardContent>
+            </Card>
+          )}
+
+          {(intermediate || advanced) && (
             <Card className="bg-[#1E293B] border-gray-700">
               <CardHeader>
                 <CardTitle className="text-white">{capstone?.title || 'Capstone'}</CardTitle>
@@ -337,7 +376,8 @@ const PetrophysicsLearningPage = () => {
                 {result && result.passed && (
                   <p className="text-emerald-300 text-sm flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4" /> Passed ({result.score}/{result.max_score}).
-                    {result.certificate_number && <>Professional certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</>}
+                    {result.certificate_number && <>{CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</>}
+                    {result.certificate_number && result.tier === 'expert' && <> Your 50% Suite discount code is on <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline">your certificates page</Link>.</>}
                     {result.already_certified && 'You were already certified for this tier.'}
                   </p>
                 )}
@@ -387,7 +427,7 @@ const PetrophysicsLearningPage = () => {
                         {result.certificate_number ? (
                           <div className="mt-2 text-sm text-gray-300 space-y-1">
                             <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                              {result.tier === 'professional' ? 'Professional' : 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</p>
+                              {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</p>
                             <div className="flex gap-3">
                               <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
                                 My certificates <ArrowRight className="h-3 w-3" />
