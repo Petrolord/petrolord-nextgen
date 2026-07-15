@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { AlertTriangle, Clock } from 'lucide-react';
 import useLicenseStatus from '@/hooks/useLicenseStatus';
 import { Link } from 'react-router-dom';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 
 /**
  * Component that displays a warning if the user's license is expiring soon,
@@ -13,9 +14,10 @@ import { Link } from 'react-router-dom';
  * <LicenseWarning userId={user.id} />
  */
 const LicenseWarning = ({ userId }) => {
+  const { isSuperAdmin } = useAuth();
   const { status, isValid, isLoading } = useLicenseStatus(userId);
 
-  if (isLoading || !status) return null;
+  if (isLoading || !status || isSuperAdmin) return null;
 
   // Don't show if active and not expiring soon (more than 14 days)
   if (status.status === 'active' && status.daysRemaining > 14) return null;

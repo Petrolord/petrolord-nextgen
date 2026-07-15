@@ -32,6 +32,10 @@
   --ring: 212.7 26.8% 83.9%;
   
   --radius: 0.5rem;
+
+  /* Custom Video Player Properties */
+  --video-bg: 222.2 84% 4.9%;
+  --video-accent: 76 100% 50%; /* #BFFF00 */
 }
  
 @layer base {
@@ -50,4 +54,31 @@
 /* Custom Utilities */
 .image-pixelated {
   image-rendering: pixelated;
+}
+
+@layer components {
+  /* Video Player Custom Styles */
+  .vimeo-player-container {
+    @apply relative overflow-hidden bg-[hsl(var(--video-bg))] aspect-video w-full;
+  }
+
+  .vimeo-play-button {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+  
+  .vimeo-player-container:hover .vimeo-play-button {
+    transform: scale(1.1);
+  }
+
+  .vimeo-player-container:active .vimeo-play-button {
+    transform: scale(0.95);
+  }
+
+  .video-error-overlay {
+    @apply absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-black/90 backdrop-blur-sm z-20;
+  }
+  
+  .video-loading-spinner {
+    @apply w-10 h-10 animate-spin text-[hsl(var(--video-accent))];
+  }
 }

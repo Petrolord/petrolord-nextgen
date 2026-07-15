@@ -1,0 +1,47 @@
+## Pages
+- [- Petrolord`}](/moduledetail): No description available
+- [| Learning Mode` : 'Learning Mode'}](/coursedetail): No description available
+- [| Petrolord Admin](/coursemanagement): No description available
+- [Add Users | Petrolord Admin](/adduser): No description available
+- [Admin - Audit Dashboard](/adminauditdashboard): Overview of system audit activities.
+- [Admin Management - Petrolord](/adminmanagement): No description available
+- [Admin Settings | Petrolord](/adminsettings): No description available
+- [Admin: Application Access - Petrolord](/adminapplicationaccess): No description available
+- [Admin: Manage Modules - Petrolord](/adminmodules): No description available
+- [Advanced Analytics | Petrolord Admin](/adminanalytics): No description available
+- [Anonymization Rule Sets - Petrolord](/adminanonymizationrulesets): No description available
+- [Anonymization Rules - Petrolord](/adminanonymizationrules): No description available
+- [Application Modules - Petrolord NextGen Suite](/applicationmodules): Explore the powerful application modules available in the Petrolord NextGen Suite.
+- [Audit Logs - Petrolord](/adminauditlogs): No description available
+- [Audit Logs | Petrolord](/auditlogviewer): No description available
+- [Compliance & Audit | Petrolord Admin](/admincompliance): No description available
+- [Compliance Reports - Petrolord](/admincompliancereports): No description available
+- [Course Management | Admin Dashboard](/admincourses): No description available
+- [Course Management | Lecturer Portal](/lecturercoursemanagement): No description available
+- [Email Logs - Petrolord](/adminemaillogs): No description available
+- [Email System Diagnostics | Petrolord](/emailtest): No description available
+- [Forgot Password - Petrolord NextGen Suite](/forgotpassword): Request a password reset link for your Petrolord NextGen Suite account.
+- [Help Center | Petrolord](/helpcenter): No description available
+- [Import History | Petrolord](/importhistory): No description available
+- [Lecturer Dashboard | Petrolord](/lecturerdashboard): No description available
+- [Login - Petrolord NextGen Suite](/login): Login to your Petrolord NextGen Suite account.
+- [My Courses - Petrolord](/mycourses): No description available
+- [My Courses | Petrolord NextGen](/courses): No description available
+- [My Grades & Progress | Petrolord](/studentgrades): No description available
+- [My Profile - Petrolord NextGen Suite](/profile): No description available
+- [Notification Settings - Petrolord](/adminnotificationsettings): No description available
+- [Notifications - Petrolord](/adminnotifications): No description available
+- [Notifications | Petrolord](/notificationcenter): No description available
+- [Notifications | Petrolord](/notificationcenter): No description available
+- [Report Analytics - Petrolord](/adminreportanalytics): No description available
+- [Report Scheduling - Petrolord](/adminreportscheduling): No description available
+- [Report Templates - Petrolord](/adminreporttemplates): No description available
+- [Scheduled Imports | Petrolord Admin](/scheduledimport): No description available
+- [Settings - Petrolord NextGen Suite](/settings): No description available
+- [Student Management | Lecturer Portal](/lecturerstudentmanagement): No description available
+- [System Settings - Petrolord Admin](/adminsystemsettings): No description available
+- [University Admin | Petrolord](/universityadmindashboard): No description available
+- [University Approvals | Admin Dashboard](/adminapproval): No description available
+- [University Onboarding | Petrolord NextGen](/universityonboarding): Apply for institutional access to the Petrolord NextGen Suite.
+- [Update Password - Petrolord NextGen Suite](/updatepassword): Update your password for your Petrolord NextGen Suite account.
+- [User Management - Petrolord](/adminusers): No description available

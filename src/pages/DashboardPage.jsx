@@ -13,29 +13,11 @@ import LicenseWarning from '@/components/LicenseWarning';
 import StudentModuleAssignment from '@/components/StudentModuleAssignment';
 
 // --- Module Pages ---
-import GeosciencePage from '@/pages/modules/GeosciencePage';
-import ReservoirPage from '@/pages/modules/ReservoirPage';
-import ProductionPage from '@/pages/modules/ProductionPage';
-import DrillingPage from '@/pages/modules/DrillingPage';
-import EconomicsPage from '@/pages/modules/EconomicsPage';
-import FacilitiesPage from '@/pages/modules/FacilitiesPage';
 
 // --- Tool Applications ---
-import WellLogCorrelationPage from '@/pages/modules/geoscience/WellLogCorrelationPage';
-import PetrophysicalAnalysisPage from '@/modules/geoscience/petrophysical-analysis/PetrophysicalAnalysisPage';
-import VolumetricsPro from '@/pages/apps/VolumetricsPro';
-import SeismicInterpretationPage from '@/modules/geoscience/seismic-interpretation/pages/SeismicInterpretationPage';
 
-import MaterialBalancePro from '@/pages/apps/MaterialBalancePro';
-import DeclineCurveAnalysis from '@/pages/apps/DeclineCurveAnalysis';
-import ReservoirSimulationPage from '@/pages/apps/ReservoirSimulationPage';
-import WellTestAnalysisPage from '@/pages/apps/WellTestAnalysisPage';
 
-import WellPlanningDesign from '@/pages/apps/WellPlanningDesign'; 
-import PressureTransientAnalysisPage from '@/pages/production/pressure-transient/PressureTransientAnalysisPage';
 
-import AIInsightsPage from '@/pages/enterprise/AIInsightsPage';
-import EnterpriseDashboardPage from '@/pages/enterprise/EnterpriseDashboardPage';
 
 import CoursesPage from '@/pages/CoursesPage';
 import MyCoursesPage from '@/pages/MyCoursesPage';
@@ -345,44 +327,18 @@ const DashboardPage = () => {
     <Routes>
     {/* The Index Route determines the Dashboard Landing Page */}
     <Route path="/" element={renderHome()} />
+
+    {/* Engineering modules removed at N2 — being rebuilt on the Suite's validated engines (@petrolord/engines; see NextGen-ROADMAP.md in petrolord-suite) */}
+    <Route path="modules/*" element={<ModulePlaceholder name="Engineering Modules" icon={Construction} description="The engineering teaching modules are being rebuilt on the Petrolord Suite's validated engines and will return module by module." />} />
+    <Route path="enterprise/*" element={<ModulePlaceholder name="Enterprise Analytics" icon={Activity} description="Retired pending the NextGen rebuild." />} />
     
-    {/* --- GEOSCIENCE ROUTES --- */}
-    <Route path="modules/geoscience" element={<GeosciencePage />} />
-    <Route path="modules/geoscience/well-correlation/*" element={<WellLogCorrelationPage />} />
-    <Route path="modules/geoscience/petrophysics/*" element={<PetrophysicalAnalysisPage />} />
-    <Route path="modules/geoscience/volumetrics/*" element={<VolumetricsPro />} />
-    <Route path="modules/geoscience/seismic/*" element={<SeismicInterpretationPage />} />
-    <Route path="modules/geoscience/well-test/*" element={<WellTestAnalysisPage />} />
 
-    {/* --- RESERVOIR ENGINEERING ROUTES --- */}
-    <Route path="modules/reservoir" element={<ReservoirPage />} />
-    <Route path="modules/reservoir/material-balance/*" element={<MaterialBalancePro />} />
-    <Route path="modules/reservoir/dca/*" element={<DeclineCurveAnalysis />} />
-    <Route path="modules/reservoir/simulation-lab/*" element={<ReservoirSimulationPage />} />
-    <Route path="modules/reservoir/well-test/*" element={<WellTestAnalysisPage />} />
 
-    {/* --- PRODUCTION ROUTES --- */}
-    <Route path="modules/production" element={<ProductionPage />} />
-    <Route path="modules/production/pressure-transient-analysis" element={<PressureTransientAnalysisPage />} />
-    <Route path="modules/production/optimization" element={<ModulePlaceholder name="Production Optimization" icon={Factory} />} />
     
-    {/* --- DRILLING ROUTES --- */}
-    <Route path="modules/drilling" element={<DrillingPage />} />
-    <Route path="modules/drilling/well-planning/*" element={<WellPlanningDesign />} />
-    <Route path="modules/drilling/casing-design" element={<ModulePlaceholder name="Casing Design" icon={Hammer} description="Casing seat selection and load case analysis." />} />
-    <Route path="modules/drilling/hydraulics" element={<ModulePlaceholder name="Hydraulics Simulator" icon={Droplets} description="ECD management and bit optimization." />} />
-    <Route path="modules/drilling/torque-drag" element={<ModulePlaceholder name="Torque & Drag" icon={Activity} description="Tension, torque, and side force analysis." />} />
-    <Route path="modules/drilling/wellbore-design" element={<ModulePlaceholder name="Wellbore Schematic" icon={FileText} description="Wellbore geometry construction." />} />
 
-    {/* --- ECONOMICS ROUTES --- */}
-    <Route path="modules/economics" element={<EconomicsPage />} />
 
     {/* --- FACILITIES ROUTES (NEW) --- */}
-    <Route path="modules/facilities" element={<FacilitiesPage />} />
 
-    {/* --- ENTERPRISE ROUTES --- */}
-    <Route path="enterprise/ai/*" element={<AIInsightsPage />} />
-    <Route path="enterprise/analytics/*" element={<EnterpriseDashboardPage />} />
 
     {/* --- COURSES --- */}
     <Route path="courses/*" element={<CoursesPage />} />
@@ -394,7 +350,6 @@ const DashboardPage = () => {
     {/* --- NOTIFICATIONS --- */}
     <Route path="notifications" element={<NotificationCenterPage />} />
 
-    {/* --- ADMIN ROUTES --- */}
     <Route path="admin/approvals" element={<AdminApprovalPage />} />
     <Route path="admin/courses" element={<AdminCoursesPage />} />
     <Route path="admin/audit-logs" element={<AdminAuditLogsPage />} />
@@ -409,11 +364,9 @@ const DashboardPage = () => {
     {/* This route is explicit but also protected within the component itself */}
     <Route path="university-admin" element={<UniversityAdminDashboard />} />
 
-    {/* --- LECTURER ROUTES --- */}
     <Route path="lecturer/students" element={<LecturerStudentManagement />} />
     <Route path="lecturer/courses" element={<LecturerCourseManagement />} />
 
-    {/* --- STUDENT ROUTES --- */}
     <Route path="grades" element={<StudentGradesPage />} />
 
     {/* Fallback */}

@@ -199,6 +199,7 @@ export const courseService = {
     const nextOrder = (maxOrderData?.[0]?.lesson_order || 0) + 1;
 
     // 2. Prepare payload - Explicitly select valid columns
+    // Ensure video_url is securely captured from incoming lessonData
     const payload = {
         module_id: lessonData.module_id,
         title: lessonData.title,
@@ -226,7 +227,7 @@ export const courseService = {
     const payload = {};
     if (lessonData.title !== undefined) payload.title = lessonData.title;
     if (lessonData.description !== undefined) payload.description = lessonData.description;
-    if (lessonData.video_url !== undefined) payload.video_url = lessonData.video_url;
+    if (lessonData.video_url !== undefined) payload.video_url = lessonData.video_url; // Explicit video_url update mapping
     if (lessonData.lesson_type !== undefined) payload.lesson_type = lessonData.lesson_type;
     if (lessonData.duration_minutes !== undefined) payload.duration_minutes = parseInt(lessonData.duration_minutes) || 0;
     if (lessonData.is_published !== undefined) payload.is_published = lessonData.is_published;
