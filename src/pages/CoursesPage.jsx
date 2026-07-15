@@ -51,7 +51,8 @@ const CoursesPage = () => {
                     .from('courses')
                     .select(`
                         *,
-                        enrollments:course_enrollments(status, progress_percentage)
+                        enrollments:course_enrollments(status, progress_percentage),
+                        course_modules(course_lessons(id))
                     `)
                     .eq('is_published', true);
 
@@ -68,8 +69,14 @@ const CoursesPage = () => {
                         ? course.enrollments[0] 
                         : null;
                     
+                    // The denormalized courses.total_lessons was never
+                    // maintained — count the real lessons through modules.
+                    const totalLessons = (course.course_modules || []).reduce(
+                        (sum, m) => sum + (m.course_lessons?.length || 0), 0);
+
                     return {
                         ...course,
+                        total_lessons: totalLessons,
                         isEnrolled: !!enrollment,
                         status: enrollment?.status || 'not_started',
                         progress: enrollment?.progress_percentage || 0
