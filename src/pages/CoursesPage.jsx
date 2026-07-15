@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { 
     Loader2, 
     BookOpen, 
@@ -11,6 +11,7 @@ import {
     Filter
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { 
     Select, 
@@ -176,13 +177,17 @@ const CoursesPage = () => {
                         <p className="text-slate-400">Loading your courses...</p>
                     </div>
                 ) : filteredCourses.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center h-64 bg-[#1E293B]/30 rounded-2xl border border-slate-800 border-dashed">
+                    <div className="flex flex-col items-center justify-center h-64 bg-[#1E293B]/30 rounded-2xl border border-slate-800 border-dashed text-center px-6">
                         <BookOpen className="w-12 h-12 text-slate-600 mb-4" />
-                        <h3 className="text-xl font-semibold text-slate-300">No courses found</h3>
-                        <p className="text-slate-500 mt-2">Try adjusting your filters or search terms.</p>
-                        {assignedModule && (
-                             <p className="text-slate-600 text-sm mt-1">Currently viewing courses for: {assignedModule.name}</p>
-                        )}
+                        <h3 className="text-xl font-semibold text-slate-300">Courses live in the Academy</h3>
+                        <p className="text-slate-500 mt-2 max-w-md">
+                            Enrol through the Academy to learn inside the real engineering apps and earn verifiable certifications.
+                        </p>
+                        <Link to="/dashboard/enroll" className="mt-4">
+                            <Button className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                                Browse Academy courses
+                            </Button>
+                        </Link>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
