@@ -21,6 +21,8 @@ import StudentModuleAssignment from '@/components/StudentModuleAssignment';
 
 import CoursesPage from '@/pages/CoursesPage';
 import MyCoursesPage from '@/pages/MyCoursesPage';
+import EnrollPage from '@/pages/EnrollPage';
+import AdminAcademyDoorsPage from '@/pages/AdminAcademyDoorsPage';
 import SettingsPage from '@/pages/SettingsPage';
 import AdminApprovalPage from '@/pages/AdminApprovalPage';
 import AdminUsersPage from '@/pages/AdminUsersPage';
@@ -344,6 +346,9 @@ const DashboardPage = () => {
     <Route path="courses/*" element={<CoursesPage />} />
     <Route path="my-learning/*" element={<MyCoursesPage />} />
 
+    {/* --- ACADEMY ENROLLMENT (N3.2 four doors) --- */}
+    <Route path="enroll" element={<EnrollPage />} />
+
     {/* --- SETTINGS --- */}
     <Route path="settings" element={<SettingsPage />} />
 
@@ -351,6 +356,7 @@ const DashboardPage = () => {
     <Route path="notifications" element={<NotificationCenterPage />} />
 
     <Route path="admin/approvals" element={<AdminApprovalPage />} />
+    <Route path="admin/academy-doors" element={<AdminAcademyDoorsPage />} />
     <Route path="admin/courses" element={<AdminCoursesPage />} />
     <Route path="admin/audit-logs" element={<AdminAuditLogsPage />} />
     <Route path="admin/monitoring" element={<RealTimeMonitoringPage />} />

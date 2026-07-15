@@ -29,7 +29,8 @@ import {
   CalendarClock,
   Award,
   Trophy,
-  Medal
+  Medal,
+  KeyRound
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useRole } from '@/contexts/RoleContext';
@@ -126,6 +127,7 @@ const Sidebar = () => {
         {isViewAsStudent && (
           <>
             <SidebarGroup title="My Learning">
+              <SidebarItem to="/dashboard/enroll" icon={GraduationCap} label="Enroll" />
               <SidebarItem to="/dashboard/my-learning" icon={BookOpen} label="My Courses" />
               <SidebarItem to="/dashboard/certificates" icon={Award} label="Certificates" />
               <SidebarItem to="/dashboard/achievements" icon={Medal} label="Achievements" />
@@ -178,6 +180,7 @@ const Sidebar = () => {
         {isViewAsAdmin && (
           <>
             <SidebarGroup title="Platform Mgmt">
+              <SidebarItem to="/dashboard/admin/academy-doors" icon={KeyRound} label="Academy Doors" />
               <SidebarItem to="/dashboard/admin/approvals" icon={ClipboardCheck} label="Uni Approvals" />
               <SidebarItem to="/dashboard/admin/add-users" icon={UserPlus} label="Add Users" />
               <SidebarItem to="/dashboard/admin/import-history" icon={History} label="Import History" />
@@ -197,6 +200,7 @@ const Sidebar = () => {
         {isViewAsSuperAdmin && (
           <>
             <SidebarGroup title="Platform Superuser">
+              <SidebarItem to="/dashboard/admin/academy-doors" icon={KeyRound} label="Academy Doors" />
               <SidebarItem to="/dashboard/admin/approvals" icon={ClipboardCheck} label="Approvals" />
               <SidebarItem to="/dashboard/admin/add-users" icon={UserPlus} label="Add Users" />
               <SidebarItem to="/dashboard/admin/import-history" icon={History} label="Import History" />
