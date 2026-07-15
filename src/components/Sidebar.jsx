@@ -33,7 +33,8 @@ import {
   KeyRound,
   MonitorSmartphone,
   FlaskConical,
-  HardDrive
+  HardDrive,
+  GitCompareArrows
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useRole } from '@/contexts/RoleContext';
@@ -133,6 +134,7 @@ const Sidebar = () => {
               <SidebarItem to="/dashboard/enroll" icon={GraduationCap} label="Enroll" />
               <SidebarItem to="/dashboard/apps/welldata" icon={HardDrive} label="Well Data Manager" />
               <SidebarItem to="/dashboard/apps/petrophysics" icon={FlaskConical} label="Petrophysics" />
+              <SidebarItem to="/dashboard/apps/wellcorrelation" icon={GitCompareArrows} label="Well Correlation" />
               <SidebarItem to="/dashboard/my-learning" icon={BookOpen} label="My Courses" />
               <SidebarItem to="/dashboard/certificates" icon={Award} label="Certificates" />
               <SidebarItem to="/dashboard/achievements" icon={Medal} label="Achievements" />

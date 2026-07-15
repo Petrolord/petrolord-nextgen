@@ -28,6 +28,7 @@ import DevicesPage from '@/pages/DevicesPage';
 import AdminCertificationsPage from '@/pages/AdminCertificationsPage';
 import PetrophysicsLearningPage from '@/pages/apps/PetrophysicsLearningPage';
 import WellDataLearningPage from '@/pages/apps/WellDataLearningPage';
+import WellCorrelationLearningPage from '@/pages/apps/WellCorrelationLearningPage';
 import ActivationBanner from '@/components/academy/ActivationBanner';
 import SettingsPage from '@/pages/SettingsPage';
 import AdminApprovalPage from '@/pages/AdminApprovalPage';
@@ -365,6 +366,7 @@ const DashboardPage = () => {
     {/* --- COURSE APPS on the spine (N4) --- */}
     <Route path="apps/petrophysics" element={<PetrophysicsLearningPage />} />
     <Route path="apps/welldata" element={<WellDataLearningPage />} />
+    <Route path="apps/wellcorrelation" element={<WellCorrelationLearningPage />} />
 
     {/* --- SETTINGS --- */}
     <Route path="settings" element={<SettingsPage />} />
