@@ -153,6 +153,7 @@ const Sidebar = () => {
               <SidebarItem to="/dashboard/my-learning" icon={GraduationCap} label="My Classes" />
               <SidebarItem to="/dashboard/courses" icon={BookOpen} label="Course Library" />
               <SidebarItem to="/dashboard/assignments" icon={ClipboardCheck} label="Assignments" />
+              <SidebarItem to="/dashboard/admin/certifications" icon={Award} label="Certifications" />
             </SidebarGroup>
 
             <SidebarGroup title="Department Tools">
@@ -183,6 +184,7 @@ const Sidebar = () => {
           <>
             <SidebarGroup title="Platform Mgmt">
               <SidebarItem to="/dashboard/admin/academy-doors" icon={KeyRound} label="Academy Doors" />
+              <SidebarItem to="/dashboard/admin/certifications" icon={Award} label="Certifications" />
               <SidebarItem to="/dashboard/admin/approvals" icon={ClipboardCheck} label="Uni Approvals" />
               <SidebarItem to="/dashboard/admin/add-users" icon={UserPlus} label="Add Users" />
               <SidebarItem to="/dashboard/admin/import-history" icon={History} label="Import History" />
@@ -203,6 +205,7 @@ const Sidebar = () => {
           <>
             <SidebarGroup title="Platform Superuser">
               <SidebarItem to="/dashboard/admin/academy-doors" icon={KeyRound} label="Academy Doors" />
+              <SidebarItem to="/dashboard/admin/certifications" icon={Award} label="Certifications" />
               <SidebarItem to="/dashboard/admin/approvals" icon={ClipboardCheck} label="Approvals" />
               <SidebarItem to="/dashboard/admin/add-users" icon={UserPlus} label="Add Users" />
               <SidebarItem to="/dashboard/admin/import-history" icon={History} label="Import History" />
