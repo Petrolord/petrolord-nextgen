@@ -31,6 +31,7 @@ import WellDataLearningPage from '@/pages/apps/WellDataLearningPage';
 import WellCorrelationLearningPage from '@/pages/apps/WellCorrelationLearningPage';
 import SeismolordLearningPage from '@/pages/apps/SeismolordLearningPage';
 import MappingLearningPage from '@/pages/apps/MappingLearningPage';
+import ReservoirCalcLearningPage from '@/pages/apps/ReservoirCalcLearningPage';
 import ActivationBanner from '@/components/academy/ActivationBanner';
 import SettingsPage from '@/pages/SettingsPage';
 import AdminApprovalPage from '@/pages/AdminApprovalPage';
@@ -371,6 +372,7 @@ const DashboardPage = () => {
     <Route path="apps/wellcorrelation" element={<WellCorrelationLearningPage />} />
     <Route path="apps/seismolord" element={<SeismolordLearningPage />} />
     <Route path="apps/mapping" element={<MappingLearningPage />} />
+    <Route path="apps/reservoircalc" element={<ReservoirCalcLearningPage />} />
 
     {/* --- SETTINGS --- */}
     <Route path="settings" element={<SettingsPage />} />
