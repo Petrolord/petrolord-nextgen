@@ -295,6 +295,9 @@ export default defineConfig({
 		extensions: ['.jsx', '.js', '.tsx', '.ts', '.json', ],
 		alias: {
 			'@': path.resolve(__dirname, './src'),
+			// Central engines consumed via git-subtree at packages/engines
+			// (NextGen-ROADMAP: no forks — PR the engines repo, subtree-pull).
+			'@petrolord/engines': path.resolve(__dirname, './packages/engines'),
 		},
 	},
 	build: {
