@@ -6,12 +6,10 @@ import { useToast } from '@/components/ui/use-toast';
 import { Loader2 } from 'lucide-react';
 import { updateUser } from '@/lib/userUtils';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
-import ModuleSelect from './AddUserForm/ModuleSelect'; // Reuse the ModuleSelect component
 
 const UserEditModal = ({ user, isOpen, onClose, onSave }) => {
     const [role, setRole] = useState('');
     const [status, setStatus] = useState('');
-    const [moduleId, setModuleId] = useState('');
     const [loading, setLoading] = useState(false);
     const { toast } = useToast();
     const { isSuperAdmin, isAdmin } = useAuth();
@@ -34,7 +32,6 @@ const UserEditModal = ({ user, isOpen, onClose, onSave }) => {
             const updates = {};
             if (role !== user.role) updates.role = role;
             if (status !== user.status) updates.status = status;
-            if (moduleId) updates.module_id = moduleId; // Only update if selected
 
             if (Object.keys(updates).length > 0) {
                 const updatedUser = await updateUser(user.id, updates);
@@ -60,7 +57,7 @@ const UserEditModal = ({ user, isOpen, onClose, onSave }) => {
                 <DialogHeader>
                     <DialogTitle>Edit User: {user.display_name}</DialogTitle>
                     <DialogDescription>
-                        Update the role, status, and module assignment for {user.email}.
+                        Update the role and status for {user.email}.
                     </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 py-4">
@@ -69,12 +66,8 @@ const UserEditModal = ({ user, isOpen, onClose, onSave }) => {
                         <Select value={role} onValueChange={setRole} disabled={!isSuperAdmin && (user.role === 'admin' || user.role === 'super_admin')}>
                             <SelectTrigger className="col-span-3"><SelectValue /></SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="student">Student</SelectItem>
-                                <SelectItem value="user">User</SelectItem>
+                                <SelectItem value="learner">Learner</SelectItem>
                                 <SelectItem value="lecturer">Lecturer</SelectItem>
-                                {canAssignPrivilegedRoles && (
-                                    <SelectItem value="university_admin">University Admin</SelectItem>
-                                )}
                                 {canAssignPrivilegedRoles && (
                                     <SelectItem value="admin">Petrolord Admin</SelectItem>
                                 )}
@@ -85,13 +78,6 @@ const UserEditModal = ({ user, isOpen, onClose, onSave }) => {
                         </Select>
                     </div>
                     
-                    <div className="grid grid-cols-4 items-center gap-4">
-                        <label className="text-right text-sm font-medium text-slate-300">Module</label>
-                        <div className="col-span-3">
-                             <ModuleSelect value={moduleId} onChange={setModuleId} />
-                        </div>
-                    </div>
-
                     <div className="grid grid-cols-4 items-center gap-4">
                         <label className="text-right text-sm font-medium text-slate-300">Status</label>
                         <Select value={status} onValueChange={setStatus} className="col-span-3">

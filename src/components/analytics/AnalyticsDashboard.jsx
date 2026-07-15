@@ -5,7 +5,7 @@ import {
 } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Users, FileText, CheckCircle, Clock, Activity, Download } from 'lucide-react';
+import { Users, GraduationCap, CheckCircle, Award, Activity } from 'lucide-react';
 import { analyticsService } from '@/services/analyticsService';
 import { KPICard } from '@/components/charts/DashboardWidgets';
 import { Loader2 } from 'lucide-react';
@@ -48,40 +48,35 @@ const AnalyticsDashboard = () => {
       
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-        <KPICard 
-          title="Total Users" 
-          value={metrics?.totalUsers} 
-          icon={Users} 
-          trend={12} 
-          color="text-[#38BDF8]" 
+        <KPICard
+          title="Total Users"
+          value={metrics?.totalUsers}
+          icon={Users}
+          color="text-[#38BDF8]"
         />
-        <KPICard 
-          title="Applications" 
-          value={metrics?.totalApplications} 
-          icon={FileText} 
-          trend={5} 
-          color="text-[#BFFF00]" 
+        <KPICard
+          title="Enrollments"
+          value={metrics?.totalEnrollments}
+          icon={GraduationCap}
+          color="text-[#BFFF00]"
         />
-        <KPICard 
-          title="Approval Rate" 
-          value={`${metrics?.approvalRate}%`} 
-          icon={CheckCircle} 
-          trend={2.4} 
-          color="text-emerald-400" 
+        <KPICard
+          title="Active Enrollments"
+          value={metrics?.activeEnrollments}
+          icon={CheckCircle}
+          color="text-emerald-400"
         />
-        <KPICard 
-          title="Avg Process Time" 
-          value={metrics?.avgProcessingTime} 
-          icon={Clock} 
-          trend={-1.5} 
-          color="text-orange-400" 
+        <KPICard
+          title="Live Certificates"
+          value={metrics?.certificatesIssued}
+          icon={Award}
+          color="text-orange-400"
         />
-        <KPICard 
-          title="Active Users" 
-          value={metrics?.activeUsers} 
-          icon={Activity} 
-          trend={8.7} 
-          color="text-purple-400" 
+        <KPICard
+          title="Active Users (30d)"
+          value={metrics?.activeUsers}
+          icon={Activity}
+          color="text-purple-400"
         />
       </div>
 
@@ -107,16 +102,16 @@ const AnalyticsDashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Application Status */}
+        {/* Enrollment Status */}
         <Card className="bg-[#1E293B] border-slate-800">
           <CardHeader>
-            <CardTitle className="text-white">Application Status</CardTitle>
+            <CardTitle className="text-white">Enrollment Status</CardTitle>
           </CardHeader>
           <CardContent className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
-                  data={charts?.applicationStatus}
+                  data={charts?.enrollmentStatus}
                   cx="50%"
                   cy="50%"
                   innerRadius={60}
@@ -124,7 +119,7 @@ const AnalyticsDashboard = () => {
                   paddingAngle={5}
                   dataKey="value"
                 >
-                  {charts?.applicationStatus.map((entry, index) => (
+                  {charts?.enrollmentStatus.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
@@ -141,7 +136,7 @@ const AnalyticsDashboard = () => {
         {/* Active Users Area */}
         <Card className="bg-[#1E293B] border-slate-800">
           <CardHeader>
-            <CardTitle className="text-white">Daily Active Users</CardTitle>
+            <CardTitle className="text-white">Daily Activity (Session Events, 14 Days)</CardTitle>
           </CardHeader>
           <CardContent className="h-80">
             <ResponsiveContainer width="100%" height="100%">
@@ -162,21 +157,21 @@ const AnalyticsDashboard = () => {
           </CardContent>
         </Card>
         
-        {/* Approvals vs Rejections */}
+        {/* Enrollments by Door */}
          <Card className="bg-[#1E293B] border-slate-800">
           <CardHeader>
-            <CardTitle className="text-white">Decision Distribution</CardTitle>
+            <CardTitle className="text-white">Enrollments by Door</CardTitle>
           </CardHeader>
           <CardContent className="h-80">
              <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={charts?.applicationStatus.filter(i => i.name !== 'Pending')}>
+              <BarChart data={charts?.enrollmentsByDoor}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
                 <XAxis dataKey="name" stroke="#94A3B8" />
                 <YAxis stroke="#94A3B8" />
                 <Tooltip contentStyle={{ backgroundColor: '#0F172A', border: '1px solid #334155', color: '#fff' }} />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-                   {charts?.applicationStatus.filter(i => i.name !== 'Pending').map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.name === 'Approved' ? '#BFFF00' : '#ef4444'} />
+                   {charts?.enrollmentsByDoor.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Bar>
               </BarChart>
