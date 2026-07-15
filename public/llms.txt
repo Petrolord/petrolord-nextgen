@@ -20,10 +20,12 @@
 - [Course Management | Admin Dashboard](/admincourses): No description available
 - [Course Management | Lecturer Portal](/lecturercoursemanagement): No description available
 - [Create account - Petrolord NextGen Academy](/register): Create your Petrolord NextGen Academy account with your personal email.
+- [Devices & Sessions - Petrolord NextGen Academy](/devices): No description available
 - [Email Logs - Petrolord](/adminemaillogs): No description available
 - [Email System Diagnostics | Petrolord](/emailtest): No description available
 - [Enroll - Petrolord NextGen Academy](/enroll): No description available
 - [Forgot Password - Petrolord NextGen Suite](/forgotpassword): Request a password reset link for your Petrolord NextGen Suite account.
+- [Get Started - Petrolord NextGen Academy](/getstarted): No description available
 - [Help Center | Petrolord](/helpcenter): No description available
 - [Import History | Petrolord](/importhistory): No description available
 - [Lecturer Dashboard | Petrolord](/lecturerdashboard): No description available

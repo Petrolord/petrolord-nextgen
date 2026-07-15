@@ -8,11 +8,18 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
 import { useRole } from '@/contexts/RoleContext';
-import { Loader2, KeyRound, Microscope, Plus, Check, X } from 'lucide-react';
+import { Loader2, KeyRound, Microscope, Plus, Check, X, Shield } from 'lucide-react';
 import {
   adminListCodes, adminIssueCode, adminListResidencyApplications,
-  adminDecideResidency,
+  adminDecideResidency, adminListSessions,
 } from '@/services/academyService';
+
+const SESSION_EVENT = {
+  register: { label: 'Device registered', cls: 'text-emerald-400' },
+  resume: { label: 'Signed in', cls: 'text-gray-300' },
+  revoke: { label: 'Device signed out', cls: 'text-yellow-400' },
+  denied: { label: 'Blocked (limit)', cls: 'text-red-400' },
+};
 
 // Admin surface for N3.2's doors: issue Campus cohort / employer
 // sponsorship codes, and decide residency applications. All mutations
@@ -23,6 +30,7 @@ const AdminAcademyDoorsPage = () => {
   const { isViewAsSuperAdmin, isViewAsAdmin } = useRole();
   const [codes, setCodes] = useState([]);
   const [applications, setApplications] = useState([]);
+  const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
 
@@ -36,9 +44,12 @@ const AdminAcademyDoorsPage = () => {
 
   const refresh = async () => {
     try {
-      const [c, a] = await Promise.all([adminListCodes(), adminListResidencyApplications()]);
+      const [c, a, s] = await Promise.all([
+        adminListCodes(), adminListResidencyApplications(), adminListSessions(),
+      ]);
       setCodes(c);
       setApplications(a);
+      setSessions(s);
     } catch (err) {
       toast({ title: 'Failed to load', description: err.message, variant: 'destructive' });
     } finally {
@@ -132,6 +143,7 @@ const AdminAcademyDoorsPage = () => {
           <TabsList className="bg-[#1E293B]">
             <TabsTrigger value="codes"><KeyRound className="h-4 w-4 mr-2" />Entry codes</TabsTrigger>
             <TabsTrigger value="residency"><Microscope className="h-4 w-4 mr-2" />Residency queue</TabsTrigger>
+            <TabsTrigger value="sessions"><Shield className="h-4 w-4 mr-2" />Session monitoring</TabsTrigger>
           </TabsList>
 
           <TabsContent value="codes" className="space-y-6">
@@ -274,6 +286,45 @@ const AdminAcademyDoorsPage = () => {
                         <p className="mt-2 text-sm text-gray-400 whitespace-pre-wrap">{a.motivation}</p>
                       </div>
                     ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="sessions">
+            <Card className="bg-[#1E293B] border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-white">Session monitoring</CardTitle>
+                <CardDescription>Recent device/login events across all learners (two-device limit + integrity feed).</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {sessions.length === 0 ? (
+                  <p className="text-gray-500 text-sm">No session activity yet.</p>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="text-left text-gray-400 border-b border-gray-700">
+                          <th className="py-2 pr-4">When</th>
+                          <th className="py-2 pr-4">Learner</th>
+                          <th className="py-2 pr-4">Event</th>
+                          <th className="py-2 pr-4">Device</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {sessions.map((s) => (
+                          <tr key={s.id} className="border-b border-gray-800 text-gray-300">
+                            <td className="py-2 pr-4 whitespace-nowrap">{new Date(s.created_at).toLocaleString()}</td>
+                            <td className="py-2 pr-4">{s.actor?.display_name || s.actor?.email || '—'}</td>
+                            <td className={`py-2 pr-4 ${SESSION_EVENT[s.event]?.cls || 'text-gray-300'}`}>
+                              {SESSION_EVENT[s.event]?.label || s.event}
+                            </td>
+                            <td className="py-2 pr-4 font-mono text-xs text-gray-500">{(s.device_id || '').slice(0, 8) || '—'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 )}
               </CardContent>

@@ -30,7 +30,8 @@ import {
   Award,
   Trophy,
   Medal,
-  KeyRound
+  KeyRound,
+  MonitorSmartphone
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useRole } from '@/contexts/RoleContext';
@@ -132,6 +133,7 @@ const Sidebar = () => {
               <SidebarItem to="/dashboard/certificates" icon={Award} label="Certificates" />
               <SidebarItem to="/dashboard/achievements" icon={Medal} label="Achievements" />
               <SidebarItem to="/dashboard/leaderboard" icon={Trophy} label="Leaderboard" />
+              <SidebarItem to="/dashboard/devices" icon={MonitorSmartphone} label="Devices & Sessions" />
             </SidebarGroup>
             
             <SidebarGroup title="Tools">

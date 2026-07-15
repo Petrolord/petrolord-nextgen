@@ -23,6 +23,9 @@ import CoursesPage from '@/pages/CoursesPage';
 import MyCoursesPage from '@/pages/MyCoursesPage';
 import EnrollPage from '@/pages/EnrollPage';
 import AdminAcademyDoorsPage from '@/pages/AdminAcademyDoorsPage';
+import GetStartedPage from '@/pages/GetStartedPage';
+import DevicesPage from '@/pages/DevicesPage';
+import ActivationBanner from '@/components/academy/ActivationBanner';
 import SettingsPage from '@/pages/SettingsPage';
 import AdminApprovalPage from '@/pages/AdminApprovalPage';
 import AdminUsersPage from '@/pages/AdminUsersPage';
@@ -189,6 +192,9 @@ const StudentHome = () => {
     return (
         <div className="space-y-8 animate-in fade-in duration-500 py-16">
         
+        {/* N3.3 activation gate prompt (learners who haven't cleared it) */}
+        <ActivationBanner />
+
         {/* License Warning Component */}
         <LicenseWarning userId={user?.id} />
 
@@ -348,6 +354,10 @@ const DashboardPage = () => {
 
     {/* --- ACADEMY ENROLLMENT (N3.2 four doors) --- */}
     <Route path="enroll" element={<EnrollPage />} />
+
+    {/* --- ACTIVATION GATE + INTEGRITY (N3.3) --- */}
+    <Route path="get-started" element={<GetStartedPage />} />
+    <Route path="devices" element={<DevicesPage />} />
 
     {/* --- SETTINGS --- */}
     <Route path="settings" element={<SettingsPage />} />
