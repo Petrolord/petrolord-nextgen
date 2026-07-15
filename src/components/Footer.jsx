@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Linkedin, Twitter, Facebook, Instagram, MapPin } from 'lucide-react';
+import { Mail, Linkedin, Twitter, Facebook, Instagram, MapPin, Phone } from 'lucide-react';
 
 const Footer = () => {
   return (
     <footer className="bg-[#020617] border-t border-slate-800 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
-          
+
           {/* Column 1: Brand */}
           <div className="lg:col-span-4 space-y-6">
             <div className="flex items-center gap-3">
@@ -16,11 +16,11 @@ const Footer = () => {
               </div>
               <span className="text-xl font-bold text-white">Petrolord <span className="font-normal text-slate-300">NextGen</span></span>
             </div>
-            
+
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-              The NextGen component of the digital operating system for the modern energy enterprise. Ensuring safety, compliance, and efficiency across all operations.
+              The academy edition of the Petrolord Suite. Learn hands-on inside the real engineering apps and earn verifiable Associate, Professional and Expert certifications.
             </p>
-            
+
             <div className="flex items-center gap-4 pt-2">
               <a href="#" className="text-slate-500 hover:text-[#BFFF00] transition-colors"><Linkedin className="w-5 h-5" /></a>
               <a href="#" className="text-slate-500 hover:text-[#BFFF00] transition-colors"><Twitter className="w-5 h-5" /></a>
@@ -29,38 +29,43 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Column 2: Program */}
-          <div className="lg:col-span-2 lg:col-start-6 space-y-6">
-            <span className="text-white font-semibold text-base block mb-2">Program</span>
-            <ul className="space-y-3">
-              <li><Link to="/university-onboarding" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Apply Now</Link></li>
-              <li><a href="#process" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">How It Works</a></li>
-              <li><a href="#requirements" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Requirements</a></li>
-              <li><Link to="/curriculum" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Curriculum</Link></li> {/* Assuming this route exists */}
-            </ul>
-          </div>
-
-          {/* Column 3: Resources */}
+          {/* Column 2: Academy */}
           <div className="lg:col-span-2 space-y-6">
-            <span className="text-white font-semibold text-base block mb-2">Resources</span>
+            <span className="text-white font-semibold text-base block mb-2">Academy</span>
             <ul className="space-y-3">
-              <li><Link to="/support" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Student Support</Link></li> {/* Assuming this route exists */}
-              <li><Link to="/ambassadors" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Ambassadors</Link></li> {/* Assuming this route exists */}
-              <li><Link to="/documentation" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Documentation</Link></li> {/* Assuming this route exists */}
-              <li><Link to="/community" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Community</Link></li> {/* Assuming this route exists */}
+              <li><Link to="/register" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Create Account</Link></li>
+              <li><a href="/#doors" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">How to Join</a></li>
+              <li><a href="/#courses" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Courses</a></li>
+              <li><a href="/#pricing" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Pricing</a></li>
+              <li><Link to="/verify" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Verify a Certificate</Link></li>
             </ul>
           </div>
 
-          {/* Column 4: Contact */}
+          {/* Column 3: UK Office */}
           <div className="lg:col-span-3 space-y-6">
-            <span className="text-white font-semibold text-base block mb-2">Contact Support</span>
+            <span className="text-white font-semibold text-base block mb-2">UK Office</span>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-[#BFFF00] mt-0.5" />
-                <a href="mailto:info@petrolord.com" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">
-                  info@petrolord.com
+                <MapPin className="w-5 h-5 text-[#BFFF00] mt-0.5 shrink-0" />
+                <span className="text-sm text-slate-400 leading-relaxed">
+                  128 City Road,<br />
+                  London, EC1V 2NX,<br />
+                  United Kingdom
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone className="w-5 h-5 text-[#BFFF00] mt-0.5 shrink-0" />
+                <a href="tel:+447403660720" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">
+                  +44 7403 660720
                 </a>
               </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Nigeria Office */}
+          <div className="lg:col-span-3 space-y-6">
+            <span className="text-white font-semibold text-base block mb-2">Nigeria Office</span>
+            <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#BFFF00] mt-0.5 shrink-0" />
                 <span className="text-sm text-slate-400 leading-relaxed">
@@ -68,6 +73,18 @@ const Footer = () => {
                   Lekki Phase 1, Lagos,<br />
                   Nigeria
                 </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone className="w-5 h-5 text-[#BFFF00] mt-0.5 shrink-0" />
+                <a href="tel:+2349015566981" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">
+                  +234 901 556 6981
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-[#BFFF00] mt-0.5 shrink-0" />
+                <a href="mailto:info@petrolord.com" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">
+                  info@petrolord.com
+                </a>
               </li>
             </ul>
           </div>
