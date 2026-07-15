@@ -36,8 +36,6 @@ const EmailTestPage = lazy(() => import('@/pages/EmailTestPage'));
 const AddUserPage = lazy(() => import('@/pages/AddUserPage'));
 const ImportHistoryPage = lazy(() => import('@/pages/ImportHistoryPage'));
 const ScheduledImportPage = lazy(() => import('@/pages/ScheduledImportPage'));
-const AdminCoursesPage = lazy(() => import('@/pages/AdminCoursesPage'));
-const CourseManagementPage = lazy(() => import('@/pages/CourseManagementPage'));
 const AdminDepartmentMappingPage = lazy(() => import('@/pages/AdminDepartmentMappingPage')); // New Page
 
 // Student Pages
@@ -124,10 +122,6 @@ const AppContent = () => {
                 <Route path="/dashboard/admin/import-history" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><Layout><ImportHistoryPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
                 <Route path="/dashboard/admin/scheduled-imports" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><Layout><ScheduledImportPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
                 
-                {/* Admin Course Management Routes */}
-                <Route path="/dashboard/admin/courses" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><Layout><AdminCoursesPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
-                <Route path="/dashboard/admin/courses/:id" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><CourseManagementPage /></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
-                <Route path="/dashboard/admin/courses/new" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><CourseManagementPage /></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
                 <Route path="/dashboard/admin/mappings" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><Layout><AdminDepartmentMappingPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
 
                 {/* Student Learning Routes */}
