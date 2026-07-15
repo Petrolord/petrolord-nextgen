@@ -67,9 +67,9 @@ const CourseCard = ({ course, onClick }) => {
                     <div className="flex-1">
                         <div className="flex items-center gap-2 mb-3 text-xs text-slate-400 font-mono uppercase tracking-wider">
                             <Clock className="w-3 h-3" />
-                            <span>{course.duration_weeks || 4} Weeks</span>
+                            <span>{course.duration_weeks || 4} {(course.duration_weeks || 4) === 1 ? 'Week' : 'Weeks'}</span>
                             <span>•</span>
-                            <span>{course.total_lessons || 0} Lessons</span>
+                            <span>{course.total_lessons || 0} {(course.total_lessons || 0) === 1 ? 'Lesson' : 'Lessons'}</span>
                         </div>
                         
                         <TooltipProvider>
