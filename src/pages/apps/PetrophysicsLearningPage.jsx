@@ -16,13 +16,14 @@ import {
 } from 'lucide-react';
 import {
   defaultParams, computeWorkflow, capstoneAnswers, chartRows, ZONES,
+  computeIntermediate,
 } from '@/lib/petrophysicsTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
 
 const APP = 'petrophysics';
-const TIER = 'beginner';
+const LEARN_TIERS = ['beginner', 'intermediate'];
 
 const LESSONS = [
   { n: 1, title: 'Shale volume from gamma ray',
@@ -61,6 +62,8 @@ function ScopeGate() {
 const PetrophysicsLearningPage = () => {
   const { toast } = useToast();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
+  const [tier, setTier] = useState('beginner');
+  const [answers, setAnswers] = useState({});
   const [params, setParams] = useState(defaultParams());
   const [capstone, setCapstone] = useState(null);
   const [submitting, setSubmitting] = useState(false);
@@ -72,7 +75,6 @@ const PetrophysicsLearningPage = () => {
         const allowed = await hasScope(APP, 'learning');
         const quota = allowed ? await getQuota(APP) : null;
         setGate({ loading: false, allowed, quota });
-        if (allowed) setCapstone(await getCapstone(APP, TIER));
       } catch (e) {
         setGate({ loading: false, allowed: false, quota: null });
         toast({ title: 'Could not open the app', description: e.message, variant: 'destructive' });
@@ -80,6 +82,20 @@ const PetrophysicsLearningPage = () => {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!gate.allowed) return;
+    setCapstone(null);
+    setAnswers({});
+    setResult(null);
+    getCapstone(APP, tier).then(setCapstone).catch(() => setCapstone(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tier, gate.allowed]);
+
+  const intermediate = useMemo(
+    () => (tier === 'intermediate' ? computeIntermediate() : null),
+    [tier],
+  );
 
   const workflow = useMemo(() => {
     try {
@@ -101,11 +117,16 @@ const PetrophysicsLearningPage = () => {
     if (!workflow) return;
     setSubmitting(true);
     try {
-      const res = await submitCapstone(APP, TIER, capstoneAnswers(workflow));
+      const payload = tier === 'beginner'
+        ? capstoneAnswers(workflow)
+        : Object.fromEntries((capstone?.fields || []).map((f) => [
+            f.key, answers[f.key] === '' || answers[f.key] === undefined ? null : Number(answers[f.key]),
+          ]));
+      const res = await submitCapstone(APP, tier, payload);
       setResult(res);
       if (res.passed && res.certificate_number) {
         toast({
-          title: 'Capstone passed — Associate certified!',
+          title: `Capstone passed — ${res.tier === 'professional' ? 'Professional' : 'Associate'} certified!`,
           description: res.certificate_number,
           className: 'bg-[#BFFF00] text-slate-900',
         });
@@ -244,7 +265,88 @@ const PetrophysicsLearningPage = () => {
             </Card>
           </div>
 
+          {/* Tier toggle + intermediate panel */}
+          <div className="flex gap-2">
+            {LEARN_TIERS.map((t) => (
+              <button key={t} type="button" onClick={() => setTier(t)}
+                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+                {t} tier
+              </button>
+            ))}
+          </div>
+
+          {intermediate && (
+            <Card className="bg-[#1E293B] border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-white">Advanced interpretation panel (Intermediate)</CardTitle>
+                <CardDescription>
+                  Multi-method porosity, a Pickett fit in the water leg ({intermediate.waterLeg[0]}–{intermediate.waterLeg[1]} m, {intermediate.pickett.nPoints} points), and shaly-sand saturation with linear Vsh. SAND_A zone means.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+                  {[
+                    ['SAND_A mean φ (neutron-density)', intermediate.phindAvgSandA.toFixed(4)],
+                    ['SAND_A mean φ (Wyllie sonic)', intermediate.phiwAvgSandA.toFixed(4)],
+                    ['Pickett fit: a·Rw', intermediate.pickett.aRw.toFixed(4) + ' Ω·m'],
+                    ['Pickett fit: m', intermediate.pickett.m.toFixed(3)],
+                    ['SAND_A mean Sw (Archie, φND)', intermediate.swArchieSandA.toFixed(4)],
+                    ['SAND_A mean Sw (Simandoux)', intermediate.swSimSandA.toFixed(4)],
+                    ['SAND_A mean Sw (Indonesia)', intermediate.swIndSandA.toFixed(4)],
+                  ].map(([k, v]) => (
+                    <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
+                      <p className="text-gray-500 text-xs">{k}</p>
+                      <p className="text-white">{v}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500 mt-3">
+                  The Pickett fit should recover the given water properties — a water-leg crossplot is how Rw and m are QC'd. The shaly-sand methods read lower Sw than Archie in shale-affected intervals.
+                </p>
+              </CardContent>
+            </Card>
+          )}
+
+          {intermediate && (
+            <Card className="bg-[#1E293B] border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-white">{capstone?.title || 'Capstone'}</CardTitle>
+                <CardDescription>{capstone?.prompt}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {(capstone?.fields || []).map((f) => (
+                    <div key={f.key}>
+                      <Label className="text-gray-400 text-xs mb-1 block">{f.label} ({f.unit})</Label>
+                      <Input type="number" step="any" value={answers[f.key] ?? ''}
+                        onChange={(e) => setAnswers((a) => ({ ...a, [f.key]: e.target.value }))}
+                        className="bg-gray-700 text-white border-gray-600 h-8 text-sm" />
+                    </div>
+                  ))}
+                </div>
+                <Button onClick={submit} disabled={submitting || !capstone}
+                  className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                  {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
+                  Submit for grading
+                </Button>
+                {result && !result.passed && (
+                  <p className="text-red-300 text-sm flex items-center gap-2">
+                    <XCircle className="h-4 w-4" /> {result.score}/{result.max_score} within tolerance — re-read the panel.
+                  </p>
+                )}
+                {result && result.passed && (
+                  <p className="text-emerald-300 text-sm flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4" /> Passed ({result.score}/{result.max_score}).
+                    {result.certificate_number && <>Professional certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</>}
+                    {result.already_certified && 'You were already certified for this tier.'}
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
           {/* Net-pay summary + capstone */}
+          {tier === 'beginner' && (
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
               <CardTitle className="text-white">Net-pay summary</CardTitle>
@@ -285,7 +387,7 @@ const PetrophysicsLearningPage = () => {
                         {result.certificate_number ? (
                           <div className="mt-2 text-sm text-gray-300 space-y-1">
                             <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                              Associate certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</p>
+                              {result.tier === 'professional' ? 'Professional' : 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</p>
                             <div className="flex gap-3">
                               <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
                                 My certificates <ArrowRight className="h-3 w-3" />
@@ -309,6 +411,7 @@ const PetrophysicsLearningPage = () => {
               </div>
             </CardContent>
           </Card>
+          )}
         </motion.div>
       </div>
     </>

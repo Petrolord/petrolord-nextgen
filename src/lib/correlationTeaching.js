@@ -84,3 +84,33 @@ export function displayGr(well, md) {
   const wiggle = 12 * Math.sin(md * 0.9) + 6 * Math.sin(md * 2.3 + well.id.charCodeAt(1));
   return base + wiggle;
 }
+
+// ---- Intermediate tier: growth analysis on the TOP_A datum.
+// Oracle-reproduced in Node before the NG6 migration was seeded.
+export const INTERMEDIATE_DATUM = { topName: 'TOP_A', datumM: 1450 };
+
+export function computeIntermediate() {
+  const datum = { mode: 'flatten', ...INTERMEDIATE_DATUM };
+  const flattening = computeFlattening(TEACHING_WELLS, datum);
+  const byId = new Map(flattening.map((f) => [f.id, f.shift]));
+  const rows = TEACHING_WELLS.map((w) => {
+    const a = topMd(w, 'TOP_A');
+    const sand = topMd(w, 'TOP_SAND');
+    return {
+      id: w.id,
+      name: w.name,
+      shift: byId.get(w.id),
+      aToSand: sand - a,
+      sandDisplayed: displayedDepth(sand, byId.get(w.id)),
+      allFourTops: w.tops.length === 4,
+    };
+  });
+  const growths = rows.map((r) => r.aToSand);
+  const range = displayedRange(TEACHING_WELLS, flattening);
+  return {
+    rows,
+    growthRange: Math.max(...growths) - Math.min(...growths),
+    wellsWithAllTops: rows.filter((r) => r.allFourTops).length,
+    displayedSpan: range[1] - range[0],
+  };
+}

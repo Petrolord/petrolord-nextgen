@@ -4,9 +4,9 @@
 // only orchestrates it for Learning Mode. The net-pay summaries it
 // produces are auto-graded server-side against the validation goldens
 // (academy_submit_capstone).
-import { phiDensity } from '@petrolord/engines/engines/petrophysics/porosity.js';
+import { phiDensity, phiSonicWyllie, phiNd } from '@petrolord/engines/engines/petrophysics/porosity.js';
 import { vshFromGr } from '@petrolord/engines/engines/petrophysics/vsh.js';
-import { swArchie } from '@petrolord/engines/engines/petrophysics/sw.js';
+import { swArchie, swSimandoux, swIndonesia } from '@petrolord/engines/engines/petrophysics/sw.js';
 import { netPay } from '@petrolord/engines/engines/petrophysics/netpay.js';
 import typewell from '@petrolord/engines/test-data/petrophysics/typewell.json';
 
@@ -85,4 +85,45 @@ export function chartRows(depth, curves, step = 2) {
     });
   }
   return rows;
+}
+
+// ---- Intermediate tier (NG6): multi-method porosity, Pickett, shaly-
+// sand saturation. All engine calls; parameters are the typewell givens.
+// Oracle-reproduced in Node before the NG6 migration was seeded.
+import { pickettFitDepthWindow } from '@petrolord/engines/engines/petrophysics/crossplot.js';
+
+export function computeIntermediate() {
+  const c = typewell.curves;
+  const p = typewell.params;
+  const zone = p.zones.SAND_A;
+  const clamp01 = (v) => Math.max(0, Math.min(1, v));
+  const vshLin = c.GR.map((g) => clamp01((g - p.gr_clean) / (p.gr_clay - p.gr_clean)));
+  const phiD = c.RHOB.map((r) => phiDensity(r, p.rho_ma, p.rho_fl));
+  const phiW = c.DT.map((d) => phiSonicWyllie(d, p.dt_ma, p.dt_fl));
+  const phiND = phiD.map((pd, i) => phiNd(pd, c.NPHI[i], 'avg'));
+  const swSim = c.RT.map((rt, i) => swSimandoux(rt, phiND[i], p.rw, vshLin[i], p.rsh, p.a, p.m));
+  const swInd = c.RT.map((rt, i) => swIndonesia(rt, phiND[i], p.rw, vshLin[i], p.rsh, p.a, p.m, p.n));
+  const pickett = pickettFitDepthWindow(c.DEPT, phiND, c.RT, p.water_leg[0], p.water_leg[1]);
+  const zoneMean = (arr) => {
+    let s = 0;
+    let n = 0;
+    for (let i = 0; i < c.DEPT.length; i++) {
+      if (c.DEPT[i] < zone[0] || c.DEPT[i] > zone[1]) continue;
+      if (!Number.isFinite(arr[i])) continue;
+      s += arr[i]; n += 1;
+    }
+    return s / n;
+  };
+  return {
+    waterLeg: p.water_leg,
+    pickett,
+    phindAvgSandA: zoneMean(phiND),
+    phiwAvgSandA: zoneMean(phiW),
+    swSimSandA: zoneMean(swSim),
+    swIndSandA: zoneMean(swInd),
+    swArchieSandA: zoneMean(c.RT.map((rt, i) => {
+      const phi = phiND[i];
+      return Number.isFinite(phi) && phi > 0 ? Math.min(1, Math.pow((p.a * p.rw) / (Math.pow(phi, p.m) * rt), 1 / p.n)) : NaN;
+    })),
+  };
 }

@@ -13,13 +13,14 @@ import {
 } from 'lucide-react';
 import {
   TEACHING_WELLS, ZONE, FLATTEN_DATUM_M, computeSection, structuralRelief, displayGr,
+  computeIntermediate, INTERMEDIATE_DATUM,
 } from '@/lib/correlationTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
 
 const APP = 'wellcorrelation';
-const TIER = 'beginner';
+const LEARN_TIERS = ['beginner', 'intermediate'];
 
 const LESSONS = [
   { n: 1, title: 'Tops are the correlation currency',
@@ -143,6 +144,7 @@ function SectionView({ section, zoneOn }) {
 const WellCorrelationLearningPage = () => {
   const { toast } = useToast();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
+  const [tier, setTier] = useState('beginner');
   const [flattened, setFlattened] = useState(false);
   const [zoneOn, setZoneOn] = useState(true);
   const [capstone, setCapstone] = useState(null);
@@ -156,7 +158,6 @@ const WellCorrelationLearningPage = () => {
         const allowed = await hasScope(APP, 'learning');
         const quota = allowed ? await getQuota(APP) : null;
         setGate({ loading: false, allowed, quota });
-        if (allowed) setCapstone(await getCapstone(APP, TIER));
       } catch (e) {
         setGate({ loading: false, allowed: false, quota: null });
         toast({ title: 'Could not open the app', description: e.message, variant: 'destructive' });
@@ -164,6 +165,15 @@ const WellCorrelationLearningPage = () => {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!gate.allowed) return;
+    setCapstone(null);
+    setAnswers({});
+    setResult(null);
+    getCapstone(APP, tier).then(setCapstone).catch(() => setCapstone(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tier, gate.allowed]);
 
   const section = useMemo(() => computeSection(
     flattened
@@ -179,7 +189,7 @@ const WellCorrelationLearningPage = () => {
       const numeric = Object.fromEntries(
         (capstone?.fields || []).map((f) => [f.key, answers[f.key] === '' || answers[f.key] === undefined ? null : Number(answers[f.key])]),
       );
-      const res = await submitCapstone(APP, TIER, numeric);
+      const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
         toast({ title: 'Capstone passed — Associate certified!', description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
@@ -299,6 +309,64 @@ const WellCorrelationLearningPage = () => {
             </CardContent>
           </Card>
 
+          {/* Tier toggle + intermediate panel */}
+          <div className="flex gap-2">
+            {LEARN_TIERS.map((t) => (
+              <button key={t} type="button" onClick={() => setTier(t)}
+                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+                {t} tier
+              </button>
+            ))}
+          </div>
+
+          {tier === 'intermediate' && (() => {
+            const inter = computeIntermediate();
+            return (
+              <Card className="bg-[#1E293B] border-gray-700">
+                <CardHeader>
+                  <CardTitle className="text-white">Growth analysis (Intermediate)</CardTitle>
+                  <CardDescription>
+                    Flattened on {INTERMEDIATE_DATUM.topName} at {INTERMEDIATE_DATUM.datumM} m — the A-to-SAND interval thickens where accommodation grew.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead><tr className="text-left text-gray-400 border-b border-gray-700">
+                        <th className="py-2 pr-4">Well</th><th className="py-2 pr-4">Shift</th>
+                        <th className="py-2 pr-4">TOP_A→TOP_SAND</th><th className="py-2 pr-4">TOP_SAND (displayed)</th>
+                        <th className="py-2 pr-4">All four tops?</th>
+                      </tr></thead>
+                      <tbody>
+                        {inter.rows.map((r) => (
+                          <tr key={r.id} className="border-b border-gray-800 text-gray-300">
+                            <td className="py-2 pr-4 text-white">{r.name}</td>
+                            <td className="py-2 pr-4">{num(r.shift)} m</td>
+                            <td className="py-2 pr-4">{num(r.aToSand)} m</td>
+                            <td className="py-2 pr-4">{num(r.sandDisplayed)} m</td>
+                            <td className="py-2 pr-4">{r.allFourTops ? 'yes' : <span className="text-red-400">no</span>}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-3 text-sm">
+                    {[
+                      ['Growth range (max − min)', `${num(inter.growthRange)} m`],
+                      ['Wells with all four tops', `${inter.wellsWithAllTops}`],
+                      ['Displayed depth span', `${num(inter.displayedSpan)} m`],
+                    ].map(([k, v]) => (
+                      <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
+                        <p className="text-gray-500 text-xs">{k}</p>
+                        <p className="text-white">{v}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })()}
+
           {/* Capstone */}
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
@@ -333,7 +401,7 @@ const WellCorrelationLearningPage = () => {
                       {result.certificate_number ? (
                         <div className="mt-2 text-sm text-gray-300 space-y-1">
                           <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                            Associate certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</p>
+                            {result.tier === 'professional' ? 'Professional' : 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</p>
                           <div className="flex gap-3">
                             <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
                               My certificates <ArrowRight className="h-3 w-3" />

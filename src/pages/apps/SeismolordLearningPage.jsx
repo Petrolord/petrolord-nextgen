@@ -16,13 +16,14 @@ import {
 } from 'lucide-react';
 import {
   computeSynthetic, waveletRows, traceRows, CAPSTONE_FREQ_HZ, V_OVERBURDEN_MS, DT_MS,
+  computeIntermediate, PLANTED_LAG_MS,
 } from '@/lib/seismolordTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
 
 const APP = 'seismolord';
-const TIER = 'beginner';
+const LEARN_TIERS = ['beginner', 'intermediate'];
 const FREQS = [15, 25, 40];
 
 const LESSONS = [
@@ -69,6 +70,7 @@ const num = (v, dp = 2) => (v == null || Number.isNaN(v) ? '—' : Number(v).toF
 const SeismolordLearningPage = () => {
   const { toast } = useToast();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
+  const [tier, setTier] = useState('beginner');
   const [freq, setFreq] = useState(CAPSTONE_FREQ_HZ);
   const [capstone, setCapstone] = useState(null);
   const [answers, setAnswers] = useState({});
@@ -81,7 +83,6 @@ const SeismolordLearningPage = () => {
         const allowed = await hasScope(APP, 'learning');
         const quota = allowed ? await getQuota(APP) : null;
         setGate({ loading: false, allowed, quota });
-        if (allowed) setCapstone(await getCapstone(APP, TIER));
       } catch (e) {
         setGate({ loading: false, allowed: false, quota: null });
         toast({ title: 'Could not open the app', description: e.message, variant: 'destructive' });
@@ -89,6 +90,15 @@ const SeismolordLearningPage = () => {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!gate.allowed) return;
+    setCapstone(null);
+    setAnswers({});
+    setResult(null);
+    getCapstone(APP, tier).then(setCapstone).catch(() => setCapstone(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tier, gate.allowed]);
 
   const model = useMemo(() => {
     try {
@@ -108,7 +118,7 @@ const SeismolordLearningPage = () => {
       const numeric = Object.fromEntries(
         (capstone?.fields || []).map((f) => [f.key, answers[f.key] === '' || answers[f.key] === undefined ? null : Number(answers[f.key])]),
       );
-      const res = await submitCapstone(APP, TIER, numeric);
+      const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
         toast({ title: 'Capstone passed — Associate certified!', description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
@@ -262,6 +272,49 @@ const SeismolordLearningPage = () => {
             </Card>
           )}
 
+          {/* Tier toggle + intermediate panel */}
+          <div className="flex gap-2">
+            {LEARN_TIERS.map((t) => (
+              <button key={t} type="button" onClick={() => setTier(t)}
+                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+                {t} tier
+              </button>
+            ))}
+          </div>
+
+          {tier === 'intermediate' && (() => {
+            const inter = computeIntermediate();
+            return (
+              <Card className="bg-[#1E293B] border-gray-700">
+                <CardHeader>
+                  <CardTitle className="text-white">Bulk shift and tuning (Intermediate)</CardTitle>
+                  <CardDescription>
+                    The observed seismic is the 25 Hz synthetic arriving {PLANTED_LAG_MS} ms late; the scan should find exactly that. Tuning: compare the 15 Hz and 40 Hz peaks.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
+                    {[
+                      ['Suggested bulk shift', `${num(inter.bulkShiftMs, 1)} ms`],
+                      ['Correlation at that shift', num(inter.corr, 4)],
+                      ['15 Hz peak (abs / TWT)', `${num(inter.peak15.abs, 6)} / ${num(inter.peak15.twt, 0)} ms`],
+                      ['40 Hz peak (abs / TWT)', `${num(inter.peak40.abs, 6)} / ${num(inter.peak40.twt, 0)} ms`],
+                      ['Peak ratio 15/40 Hz', num(inter.peak15.abs / inter.peak40.abs, 2)],
+                    ].map(([k, v]) => (
+                      <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
+                        <p className="text-gray-500 text-xs">{k}</p>
+                        <p className="text-white">{v}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-3">
+                    The lower frequency merges neighbouring reflections into one strong event (tuning) — a different amplitude AND a different apparent time.
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })()}
+
           {/* Capstone */}
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
@@ -296,7 +349,7 @@ const SeismolordLearningPage = () => {
                       {result.certificate_number ? (
                         <div className="mt-2 text-sm text-gray-300 space-y-1">
                           <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                            Associate certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</p>
+                            {result.tier === 'professional' ? 'Professional' : 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</p>
                           <div className="flex gap-3">
                             <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
                               My certificates <ArrowRight className="h-3 w-3" />

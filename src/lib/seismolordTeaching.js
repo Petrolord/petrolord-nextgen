@@ -7,7 +7,7 @@
 // this pipeline in Node before the migration was seeded.
 import { parseLas } from '@petrolord/engines/engines/welldata/lasParse.js';
 import {
-  buildSynthetic, rickerWavelet, slownessToVelocity, isGap,
+  buildSynthetic, rickerWavelet, slownessToVelocity, isGap, suggestBulkShift,
 } from '@petrolord/engines/engines/seismolord/synthetics.js';
 import basicLas from '@petrolord/engines/test-data/wells/las/basic_20.las?raw';
 
@@ -98,4 +98,26 @@ export function traceRows(syn) {
     });
   }
   return rows;
+}
+
+// ---- Intermediate tier: bulk shift + tuning.
+// The "observed seismic" is the 25 Hz synthetic arriving 8 ms late (a
+// known planted lag, so the scan's answer is checkable). Oracle
+// reproduced in Node before the NG6 migration was seeded.
+export const PLANTED_LAG_MS = 8;
+
+export function computeIntermediate() {
+  const s25 = computeSynthetic(25);
+  const s15 = computeSynthetic(15);
+  const s40 = computeSynthetic(40);
+  const lagSamples = PLANTED_LAG_MS / DT_MS;
+  const seis = new Float32Array(NS).fill(NaN);
+  for (let i = 0; i < NS - lagSamples; i++) seis[i + lagSamples] = s25.syn.synthetic[i];
+  const shift = suggestBulkShift(s25.syn.synthetic, seis, DT_MS, 40);
+  return {
+    bulkShiftMs: shift?.lagMs ?? null,
+    corr: shift?.corr ?? null,
+    peak15: { abs: s15.summary.synPeakAbs, twt: s15.summary.synPeakTwt },
+    peak40: { abs: s40.summary.synPeakAbs, twt: s40.summary.synPeakTwt },
+  };
 }
