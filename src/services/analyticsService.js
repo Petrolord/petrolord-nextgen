@@ -1,5 +1,34 @@
 import { supabase } from '@/lib/customSupabaseClient';
 
+// Admin analytics over the academy spine (academy_* tables + profiles).
+// Reads rely on the admin SELECT policies on academy_enrollments,
+// academy_certifications, academy_payments and academy_sessions.
+
+const count = async (table, filter) => {
+  let query = supabase.from(table).select('*', { count: 'exact', head: true });
+  if (filter) query = filter(query);
+  const { count: n, error } = await query;
+  if (error) throw error;
+  return n || 0;
+};
+
+const fetchDisplayNames = async (userIds) => {
+  const unique = [...new Set(userIds)].filter(Boolean);
+  if (unique.length === 0) return {};
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('id, display_name, email')
+    .in('id', unique);
+  if (error) throw error;
+  return Object.fromEntries(data.map((p) => [p.id, p]));
+};
+
+const daysAgo = (n) => {
+  const d = new Date();
+  d.setDate(d.getDate() - n);
+  return d.toISOString();
+};
+
 export const analyticsService = {
   // --- Tracking ---
 
@@ -13,52 +42,12 @@ export const analyticsService = {
         event_type: eventType,
         event_data: eventData,
         user_agent: navigator.userAgent,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
 
       if (error) console.error('Error logging event:', error);
-
-      // Update user activity stats
-      if (eventType === 'login') {
-        await this.updateUserActivity(user.id, { login: true });
-      } else {
-        await this.updateUserActivity(user.id, { action: true });
-      }
-
     } catch (err) {
       console.error('Analytics logging failed:', err);
-    }
-  },
-
-  async updateUserActivity(userId, { login = false, action = false }) {
-    try {
-      // Check if record exists
-      const { data: existing } = await supabase
-        .from('user_activity')
-        .select('*')
-        .eq('user_id', userId)
-        .single();
-
-      if (existing) {
-        const updates = {
-          updated_at: new Date().toISOString(),
-          actions_count: action ? existing.actions_count + 1 : existing.actions_count
-        };
-        if (login) {
-          updates.login_count = existing.login_count + 1;
-          updates.last_login = new Date().toISOString();
-        }
-        await supabase.from('user_activity').update(updates).eq('id', existing.id);
-      } else {
-        await supabase.from('user_activity').insert({
-          user_id: userId,
-          login_count: login ? 1 : 0,
-          last_login: login ? new Date().toISOString() : null,
-          actions_count: action ? 1 : 0
-        });
-      }
-    } catch (err) {
-      console.error('Error updating user activity:', err);
     }
   },
 
@@ -66,27 +55,16 @@ export const analyticsService = {
 
   async getDashboardMetrics() {
     try {
-      // 1. Total Users
-      const { count: totalUsers } = await supabase.from('profiles').select('*', { count: 'exact', head: true });
-      
-      // 2. Total Applications
-      const { count: totalApps } = await supabase.from('university_applications').select('*', { count: 'exact', head: true });
-      
-      // 3. Approvals for Rate
-      const { count: approvedApps } = await supabase.from('university_applications').select('*', { count: 'exact', head: true }).eq('status', 'approved');
-      
-      // 4. Active Users (Login in last 30 days)
-      const thirtyDaysAgo = new Date();
-      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-      const { count: activeUsers } = await supabase.from('user_activity').select('*', { count: 'exact', head: true }).gte('last_login', thirtyDaysAgo.toISOString());
+      const [totalUsers, totalEnrollments, activeEnrollments, certificatesIssued, activeUsers] =
+        await Promise.all([
+          count('profiles'),
+          count('academy_enrollments'),
+          count('academy_enrollments', (q) => q.eq('status', 'active')),
+          count('academy_certifications', (q) => q.is('revoked_at', null)),
+          count('profiles', (q) => q.gte('last_login', daysAgo(30))),
+        ]);
 
-      return {
-        totalUsers: totalUsers || 0,
-        totalApplications: totalApps || 0,
-        approvalRate: totalApps ? ((approvedApps / totalApps) * 100).toFixed(1) : 0,
-        activeUsers: activeUsers || 0,
-        avgProcessingTime: '2.4 days' // Placeholder/Mock until we have strict start/end timestamps on apps
-      };
+      return { totalUsers, totalEnrollments, activeEnrollments, certificatesIssued, activeUsers };
     } catch (error) {
       console.error('Error fetching dashboard metrics:', error);
       throw error;
@@ -95,150 +73,161 @@ export const analyticsService = {
 
   async getSystemMetrics() {
     try {
-      // 1. Total Universities (using university_applications for now as proxy for onboarded unis)
-      const { count: universityCount } = await supabase.from('university_applications').select('*', { count: 'exact', head: true }).eq('status', 'approved');
+      const [userCount, learnerCount, activeUsers, enrollmentCount, certificateCount] =
+        await Promise.all([
+          count('profiles'),
+          count('profiles', (q) => q.in('role', ['learner', 'student'])),
+          count('profiles', (q) => q.gte('last_login', daysAgo(1))),
+          count('academy_enrollments'),
+          count('academy_certifications', (q) => q.is('revoked_at', null)),
+        ]);
 
-      // 2. Total Users
-      const { count: userCount } = await supabase.from('profiles').select('*', { count: 'exact', head: true });
-
-      // 3. Active Users (Active Today - logged in within last 24h)
-      const oneDayAgo = new Date();
-      oneDayAgo.setDate(oneDayAgo.getDate() - 1);
-      const { count: activeUsers } = await supabase.from('user_activity').select('*', { count: 'exact', head: true }).gte('last_login', oneDayAgo.toISOString());
-
-      // 4. Total Courses
-      const { count: courseCount } = await supabase.from('courses').select('*', { count: 'exact', head: true });
-
-      // 5. Student Count (for pie chart)
-      const { count: studentCount } = await supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'student');
-
-      return {
-        universityCount: universityCount || 0,
-        userCount: userCount || 0,
-        activeUsers: activeUsers || 0,
-        courseCount: courseCount || 0,
-        studentCount: studentCount || 0
-      };
+      return { userCount, learnerCount, activeUsers, enrollmentCount, certificateCount };
     } catch (error) {
       console.error('Error fetching system metrics:', error);
-      return {
-        universityCount: 0,
-        userCount: 0,
-        activeUsers: 0,
-        courseCount: 0,
-        studentCount: 0
-      };
+      return { userCount: 0, learnerCount: 0, activeUsers: 0, enrollmentCount: 0, certificateCount: 0 };
     }
   },
 
   async getChartsData() {
-    // In a real production environment, these would use 'rpc' calls or aggregated views for performance.
-    // Simulating aggregated data for chart visualization based on existing table structures.
-    
-    // User Growth (Mocked trend based on profiles created_at if feasible, else simulated)
-    const userGrowth = [
-      { name: 'Jan', value: 45 }, { name: 'Feb', value: 52 }, { name: 'Mar', value: 78 }, 
-      { name: 'Apr', value: 95 }, { name: 'May', value: 120 }, { name: 'Jun', value: 156 }
-    ];
+    // User growth: real monthly sign-up counts from profiles.created_at.
+    const { data: profileRows, error: profilesError } = await supabase
+      .from('profiles')
+      .select('created_at');
+    if (profilesError) throw profilesError;
 
-    // Application Status
-    const { data: apps } = await supabase.from('university_applications').select('status');
-    const statusCounts = apps?.reduce((acc, curr) => {
-      acc[curr.status] = (acc[curr.status] || 0) + 1;
-      return acc;
-    }, {}) || {};
-    
-    const applicationStatus = [
-      { name: 'Pending', value: statusCounts['pending'] || 0 },
-      { name: 'Approved', value: statusCounts['approved'] || 0 },
-      { name: 'Rejected', value: statusCounts['rejected'] || 0 }
-    ];
+    const months = [];
+    const now = new Date();
+    for (let i = 5; i >= 0; i--) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      months.push({
+        key: `${d.getFullYear()}-${d.getMonth()}`,
+        name: d.toLocaleString('en', { month: 'short' }),
+        value: 0,
+      });
+    }
+    const monthIndex = Object.fromEntries(months.map((m, i) => [m.key, i]));
+    profileRows.forEach((p) => {
+      const d = new Date(p.created_at);
+      const idx = monthIndex[`${d.getFullYear()}-${d.getMonth()}`];
+      if (idx !== undefined) months[idx].value += 1;
+    });
+    const userGrowth = months.map(({ name, value }) => ({ name, value }));
 
-    // Active Users Trend (Mocked)
-    const activeUsersTrend = [
-      { name: 'Mon', value: 120 }, { name: 'Tue', value: 132 }, { name: 'Wed', value: 145 },
-      { name: 'Thu', value: 160 }, { name: 'Fri', value: 155 }, { name: 'Sat', value: 90 }, { name: 'Sun', value: 85 }
-    ];
+    // Enrollment breakdowns from the academy spine.
+    const { data: enrollments, error: enrollError } = await supabase
+      .from('academy_enrollments')
+      .select('status, door');
+    if (enrollError) throw enrollError;
 
-    return {
-      userGrowth,
-      applicationStatus,
-      activeUsersTrend,
-      approvalRatio: applicationStatus.filter(i => i.name !== 'Pending')
-    };
+    const byStatus = {};
+    const byDoor = {};
+    enrollments.forEach((e) => {
+      byStatus[e.status] = (byStatus[e.status] || 0) + 1;
+      byDoor[e.door] = (byDoor[e.door] || 0) + 1;
+    });
+    const label = (s) => s.replaceAll('_', ' ').replace(/^./, (c) => c.toUpperCase());
+    const enrollmentStatus = Object.entries(byStatus).map(([name, value]) => ({ name: label(name), value }));
+    const enrollmentsByDoor = Object.entries(byDoor).map(([name, value]) => ({ name: label(name), value }));
+
+    // Daily activity: session events per day for the last 14 days.
+    const { data: sessions, error: sessionsError } = await supabase
+      .from('academy_sessions')
+      .select('created_at')
+      .gte('created_at', daysAgo(14));
+    if (sessionsError) throw sessionsError;
+
+    const days = [];
+    for (let i = 13; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      days.push({ key: d.toDateString(), name: d.toLocaleString('en', { weekday: 'short' }), value: 0 });
+    }
+    const dayIndex = Object.fromEntries(days.map((d, i) => [d.key, i]));
+    sessions.forEach((s) => {
+      const idx = dayIndex[new Date(s.created_at).toDateString()];
+      if (idx !== undefined) days[idx].value += 1;
+    });
+    const activeUsersTrend = days.map(({ name, value }) => ({ name, value }));
+
+    return { userGrowth, enrollmentStatus, enrollmentsByDoor, activeUsersTrend };
   },
 
   // --- Reports ---
 
   async getUserActivityReport(dateRange) {
-    let query = supabase.from('user_activity').select('*, profiles(email, display_name, role)');
-    if (dateRange?.start) query = query.gte('last_login', dateRange.start.toISOString());
-    if (dateRange?.end) query = query.lte('last_login', dateRange.end.toISOString());
-    
-    const { data, error } = await query;
+    let query = supabase.from('academy_sessions').select('*');
+    if (dateRange?.start) query = query.gte('created_at', dateRange.start.toISOString());
+    if (dateRange?.end) query = query.lte('created_at', dateRange.end.toISOString());
+
+    const { data, error } = await query.order('created_at', { ascending: false });
     if (error) throw error;
-    return data.map(item => ({
-      id: item.id,
-      user: item.profiles?.display_name || 'Unknown',
-      email: item.profiles?.email,
-      role: item.profiles?.role,
-      loginCount: item.login_count,
-      lastLogin: item.last_login ? new Date(item.last_login).toLocaleString() : 'Never',
-      actions: item.actions_count
+
+    const names = await fetchDisplayNames(data.map((s) => s.user_id));
+    return data.map((s) => ({
+      user: names[s.user_id]?.display_name || 'Unknown',
+      email: names[s.user_id]?.email || 'N/A',
+      event: s.event,
+      device: s.device_id || 'N/A',
+      at: new Date(s.created_at).toLocaleString(),
     }));
   },
 
-  async getApplicationReport(dateRange) {
-    let query = supabase.from('university_applications').select('*');
-    if (dateRange?.start) query = query.gte('created_at', dateRange.start.toISOString()); // Assuming created_at exists, if not use submitted_at
-    
-    const { data, error } = await query;
+  async getEnrollmentReport(dateRange) {
+    let query = supabase.from('academy_enrollments').select('*');
+    if (dateRange?.start) query = query.gte('created_at', dateRange.start.toISOString());
+    if (dateRange?.end) query = query.lte('created_at', dateRange.end.toISOString());
+
+    const { data, error } = await query.order('created_at', { ascending: false });
     if (error) throw error;
-    
-    return data.map(app => ({
-      id: app.id,
-      university: app.university_name,
-      repName: app.rep_name,
-      status: app.status,
-      submittedAt: app.submitted_at ? new Date(app.submitted_at).toLocaleDateString() : 'N/A',
-      departments: Array.isArray(app.departments) ? app.departments.length : 0
+
+    const names = await fetchDisplayNames(data.map((e) => e.user_id));
+    return data.map((e) => ({
+      learner: names[e.user_id]?.display_name || 'Unknown',
+      course: e.app_slug,
+      tier: e.course_tier,
+      door: e.door,
+      status: e.status,
+      enrolledAt: new Date(e.created_at).toLocaleDateString(),
     }));
   },
 
-  async getUniversityReport() {
-    const { data, error } = await supabase.from('university_applications').select('*');
+  async getCertificationReport(dateRange) {
+    let query = supabase.from('academy_certifications').select('*');
+    if (dateRange?.start) query = query.gte('issued_at', dateRange.start.toISOString());
+    if (dateRange?.end) query = query.lte('issued_at', dateRange.end.toISOString());
+
+    const { data, error } = await query.order('issued_at', { ascending: false });
     if (error) throw error;
-    
-    // Aggregate data manually for report
-    return data.map(uni => ({
-      id: uni.id,
-      name: uni.university_name,
-      location: uni.address,
-      status: uni.status,
-      contact: uni.rep_name,
-      departments: Array.isArray(uni.departments) ? uni.departments.join(', ') : 'N/A'
+
+    const names = await fetchDisplayNames(data.map((c) => c.user_id));
+    return data.map((c) => ({
+      learner: names[c.user_id]?.display_name || 'Unknown',
+      course: c.app_slug,
+      tier: c.tier,
+      number: c.certificate_number,
+      issued: new Date(c.issued_at).toLocaleDateString(),
+      validUntil: c.valid_until ? new Date(c.valid_until).toLocaleDateString() : 'N/A',
+      status: c.revoked_at ? 'Revoked' : 'Live',
     }));
   },
 
-  async getDepartmentReport() {
-      // Since departments are JSONB in applications, we parse them
-      const { data, error } = await supabase.from('university_applications').select('university_name, departments');
-      if (error) throw error;
+  async getPaymentReport(dateRange) {
+    let query = supabase.from('academy_payments').select('*');
+    if (dateRange?.start) query = query.gte('created_at', dateRange.start.toISOString());
+    if (dateRange?.end) query = query.lte('created_at', dateRange.end.toISOString());
 
-      const deptRows = [];
-      data.forEach(uni => {
-          if (Array.isArray(uni.departments)) {
-              uni.departments.forEach(dept => {
-                  deptRows.push({
-                      university: uni.university_name,
-                      department: dept,
-                      modules: Math.floor(Math.random() * 5) + 1, // Mock
-                      students: Math.floor(Math.random() * 200) + 50, // Mock
-                      lecturers: Math.floor(Math.random() * 10) + 2 // Mock
-                  });
-              });
-          }
-      });
-      return deptRows;
-  }
+    const { data, error } = await query.order('created_at', { ascending: false });
+    if (error) throw error;
+
+    const names = await fetchDisplayNames(data.map((p) => p.user_id));
+    return data.map((p) => ({
+      payer: names[p.user_id]?.display_name || 'Unknown',
+      reference: p.reference,
+      purpose: p.purpose,
+      amount: `${p.currency} ${(p.amount_minor / 100).toLocaleString()}`,
+      status: p.status,
+      paidAt: p.paid_at ? new Date(p.paid_at).toLocaleString() : 'N/A',
+    }));
+  },
 };

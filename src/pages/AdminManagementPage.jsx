@@ -166,77 +166,40 @@ const AdminManagementPage = () => {
                 <>
                     {/* Top Level KPIs */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <KPICard title="Total Universities" value={systemMetrics?.universityCount || 0} icon={Users} color="text-purple-400 bg-purple-500/10" trend={12} />
-                        <KPICard title="Total Users" value={systemMetrics?.userCount || 0} icon={Users} color="text-blue-400 bg-blue-500/10" trend={8.5} />
-                        <KPICard title="Active Today" value={systemMetrics?.activeUsers || 0} icon={RefreshCw} color="text-emerald-400 bg-emerald-500/10" trend={5.2} />
-                        <KPICard title="Total Courses" value={systemMetrics?.courseCount || 0} icon={BarChart2} color="text-orange-400 bg-orange-500/10" />
+                        <KPICard title="Total Users" value={systemMetrics?.userCount || 0} icon={Users} color="text-blue-400 bg-blue-500/10" />
+                        <KPICard title="Learners" value={systemMetrics?.learnerCount || 0} icon={Users} color="text-purple-400 bg-purple-500/10" />
+                        <KPICard title="Active Today" value={systemMetrics?.activeUsers || 0} icon={RefreshCw} color="text-emerald-400 bg-emerald-500/10" />
+                        <KPICard title="Enrollments" value={systemMetrics?.enrollmentCount || 0} icon={BarChart2} color="text-orange-400 bg-orange-500/10" />
                     </div>
 
-                    {/* Charts Row 1 */}
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                         <div className="lg:col-span-2 h-80">
-                             <AreaChartWidget 
-                                title="System Growth (New Users)"
-                                data={[
-                                    { name: 'Jan', value: 400 }, { name: 'Feb', value: 300 },
-                                    { name: 'Mar', value: 550 }, { name: 'Apr', value: 800 },
-                                    { name: 'May', value: 950 }, { name: 'Jun', value: 1245 }
-                                ]}
-                                dataKey="value"
-                             />
-                         </div>
                          <div className="h-80">
-                             <PieChartWidget 
+                             <PieChartWidget
                                 title="User Distribution"
                                 data={[
-                                    { name: 'Students', value: systemMetrics?.studentCount || 800 },
-                                    { name: 'Lecturers', value: (systemMetrics?.userCount - systemMetrics?.studentCount) || 150 },
-                                    { name: 'Admins', value: 50 }
+                                    { name: 'Learners', value: systemMetrics?.learnerCount || 0 },
+                                    { name: 'Staff', value: Math.max((systemMetrics?.userCount || 0) - (systemMetrics?.learnerCount || 0), 0) }
                                 ]}
                              />
                          </div>
-                    </div>
-
-                    {/* Charts Row 2 */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="h-80">
-                            <BarChartWidget 
-                                title="Course Enrollments by Month"
-                                data={[
-                                    { name: 'Jan', value: 120 }, { name: 'Feb', value: 200 },
-                                    { name: 'Mar', value: 150 }, { name: 'Apr', value: 300 },
-                                    { name: 'May', value: 450 }, { name: 'Jun', value: 600 }
-                                ]}
-                                dataKey="value"
-                                color="#38BDF8"
-                            />
-                        </div>
-                        <div className="h-80">
+                         <div className="lg:col-span-2 h-80">
                             <Card className="bg-[#1E293B] border-slate-800 h-full">
-                                <CardHeader><CardTitle className="text-white">System Health</CardTitle></CardHeader>
+                                <CardHeader><CardTitle className="text-white">Academy Records</CardTitle></CardHeader>
                                 <CardContent>
-                                    <div className="flex flex-col items-center justify-center h-full space-y-4">
-                                        <div className="relative w-40 h-40 flex items-center justify-center rounded-full border-8 border-slate-700">
-                                            <div className="absolute inset-0 rounded-full border-8 border-[#BFFF00] border-t-transparent animate-spin" style={{ animationDuration: '3s' }}></div>
-                                            <div className="text-center">
-                                                <div className="text-3xl font-bold text-white">99.9%</div>
-                                                <div className="text-xs text-slate-400">Uptime</div>
-                                            </div>
+                                    <div className="grid grid-cols-2 gap-4 mt-4">
+                                        <div className="bg-slate-800 p-6 rounded text-center">
+                                            <div className="text-3xl font-bold text-white">{systemMetrics?.enrollmentCount || 0}</div>
+                                            <div className="text-xs text-slate-500 mt-1">Total Enrollments</div>
                                         </div>
-                                        <div className="grid grid-cols-2 gap-4 w-full mt-4">
-                                            <div className="bg-slate-800 p-3 rounded text-center">
-                                                <div className="text-emerald-400 font-bold">Normal</div>
-                                                <div className="text-xs text-slate-500">Latency</div>
-                                            </div>
-                                            <div className="bg-slate-800 p-3 rounded text-center">
-                                                <div className="text-emerald-400 font-bold">Stable</div>
-                                                <div className="text-xs text-slate-500">Error Rate</div>
-                                            </div>
+                                        <div className="bg-slate-800 p-6 rounded text-center">
+                                            <div className="text-3xl font-bold text-white">{systemMetrics?.certificateCount || 0}</div>
+                                            <div className="text-xs text-slate-500 mt-1">Live Certificates</div>
                                         </div>
                                     </div>
+                                    <p className="text-xs text-slate-500 mt-4">Full breakdowns live in System Analytics.</p>
                                 </CardContent>
                             </Card>
-                        </div>
+                         </div>
                     </div>
                 </>
             )}

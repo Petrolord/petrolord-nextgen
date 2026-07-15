@@ -17,7 +17,7 @@ const DetailItem = ({ icon, label, value }) => (
 );
 
 const UserDetailModal = ({ user, isOpen, onClose, onEdit }) => {
-    const [stats, setStats] = useState({ enrolled: 0, completed: 0 });
+    const [stats, setStats] = useState({ enrolled: 0, certified: 0 });
     const [moduleName, setModuleName] = useState('Loading...');
     const [loading, setLoading] = useState(true);
     const { toast } = useToast();
@@ -88,8 +88,8 @@ const UserDetailModal = ({ user, isOpen, onClose, onEdit }) => {
                         <DetailItem icon={AlertTriangle} label="Status" value={<span className={`font-semibold capitalize ${statusColor}`}>{user.status}</span>} />
                         <DetailItem icon={Calendar} label="Join Date" value={new Date(user.created_at).toLocaleString()} />
                         <DetailItem icon={LogIn} label="Last Login" value={user.last_login ? new Date(user.last_login).toLocaleString() : 'Never'} />
-                        <DetailItem icon={BookOpen} label="Courses Enrolled" value={stats.enrolled} />
-                        <DetailItem icon={GraduationCap} label="Courses Completed" value={stats.completed} />
+                        <DetailItem icon={BookOpen} label="Active Enrollments" value={stats.enrolled} />
+                        <DetailItem icon={GraduationCap} label="Live Certificates" value={stats.certified} />
                         {user.user_metadata?.university_name && (
                             <DetailItem icon={User} label="University" value={user.user_metadata.university_name} />
                         )}

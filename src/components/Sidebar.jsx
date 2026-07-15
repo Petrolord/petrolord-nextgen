@@ -1,35 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { 
-  Home, 
-  Settings, 
-  GraduationCap, 
-  BookOpen, 
-  LayoutDashboard, 
-  Users, 
-  Shield, 
-  FileText, 
-  PieChart, 
-  ClipboardCheck, 
-  Building2, 
-  BadgeInfo,
-  Activity, 
-  Database, 
-  Hammer, 
-  Factory, 
-  Compass, 
-  Landmark, 
-  BrainCircuit, 
-  BarChart, 
-  HardHat, 
-  Droplets, 
-  Construction,
-  UserPlus,
-  History,
-  CalendarClock,
+import {
+  Settings,
+  GraduationCap,
+  LayoutDashboard,
+  Users,
+  Shield,
+  FileText,
+  PieChart,
+  Activity,
   Award,
-  Trophy,
-  Medal,
   KeyRound,
   MonitorSmartphone,
   FlaskConical,
@@ -37,16 +17,31 @@ import {
   GitCompareArrows,
   Waves,
   Map,
-  Calculator
+  Calculator,
+  BookOpen,
+  SlidersHorizontal
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useRole } from '@/contexts/RoleContext';
 import { useApplicationLayout } from '@/contexts/ApplicationLayoutContext';
+import { listAcademyApps } from '@/services/academyService';
+import { moduleLabel } from '@/lib/academyModules';
+
+// Course links are grouped per module (Geoscience is one of many);
+// icons are per-course with a BookOpen fallback for future courses.
+const COURSE_ICONS = {
+  welldata: HardDrive,
+  petrophysics: FlaskConical,
+  wellcorrelation: GitCompareArrows,
+  seismolord: Waves,
+  mapping: Map,
+  reservoircalc: Calculator,
+};
 
 const SidebarItem = ({ to, icon: Icon, label, exact = false }) => {
   const location = useLocation();
-  const isActive = exact 
-    ? location.pathname === to 
+  const isActive = exact
+    ? location.pathname === to
     : location.pathname.startsWith(to);
 
   return (
@@ -65,28 +60,6 @@ const SidebarItem = ({ to, icon: Icon, label, exact = false }) => {
   );
 };
 
-const FacilitiesSidebarItem = ({ to, icon: Icon, label, exact = false }) => {
-  const location = useLocation();
-  const isActive = exact 
-    ? location.pathname === to 
-    : location.pathname.startsWith(to);
-
-  return (
-    <NavLink
-      to={to}
-      className={({ isActive: linkActive }) => cn(
-        "flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-200 group text-sm font-medium",
-        (exact ? linkActive : isActive)
-          ? "bg-[#BFFF00] text-black shadow-[0_0_15px_rgba(191,255,0,0.3)]"
-          : "text-slate-400 hover:text-white hover:bg-white/5"
-      )}
-    >
-      <Icon className={cn("w-5 h-5", isActive ? "text-black" : "text-[#0066cc] group-hover:text-[#BFFF00]")} />
-      <span className="truncate">{label}</span>
-    </NavLink>
-  );
-};
-
 const SidebarGroup = ({ title, children }) => (
   <div className="mb-6">
     <h3 className="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
@@ -98,14 +71,49 @@ const SidebarGroup = ({ title, children }) => (
   </div>
 );
 
+// One sidebar group per module that has courses live in the catalog.
+const CourseModuleGroups = () => {
+  const [apps, setApps] = useState([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    listAcademyApps()
+      .then((data) => { if (!cancelled) setApps(data || []); })
+      .catch((err) => console.error('Sidebar catalog load failed:', err));
+    return () => { cancelled = true; };
+  }, []);
+
+  const modules = [];
+  const byModule = {};
+  apps.filter((a) => a.status === 'available').forEach((a) => {
+    if (!byModule[a.module]) {
+      byModule[a.module] = [];
+      modules.push(a.module);
+    }
+    byModule[a.module].push(a);
+  });
+
+  return modules.map((mod) => (
+    <SidebarGroup key={mod} title={`${moduleLabel(mod)} Courses`}>
+      {byModule[mod].map((app) => (
+        <SidebarItem
+          key={app.slug}
+          to={`/dashboard/apps/${app.slug}`}
+          icon={COURSE_ICONS[app.slug] || BookOpen}
+          label={app.name}
+        />
+      ))}
+    </SidebarGroup>
+  ));
+};
+
 const Sidebar = () => {
   const { isFullScreen } = useApplicationLayout();
-  const { 
-    isViewAsSuperAdmin, 
-    isViewAsAdmin, 
-    isViewAsUniversityAdmin, 
-    isViewAsLecturer, 
-    isViewAsStudent 
+  const {
+    isViewAsSuperAdmin,
+    isViewAsAdmin,
+    isViewAsLecturer,
+    isViewAsStudent
   } = useRole();
 
   return (
@@ -130,64 +138,28 @@ const Sidebar = () => {
           <SidebarItem to="/dashboard" icon={LayoutDashboard} label="Dashboard" exact />
         </SidebarGroup>
 
-        {/* === STUDENT VIEW === */}
+        {/* === LEARNER VIEW === */}
         {isViewAsStudent && (
           <>
             <SidebarGroup title="My Learning">
               <SidebarItem to="/dashboard/enroll" icon={GraduationCap} label="Enroll" />
-              <SidebarItem to="/dashboard/apps/welldata" icon={HardDrive} label="Well Data Manager" />
-              <SidebarItem to="/dashboard/apps/petrophysics" icon={FlaskConical} label="Petrophysics" />
-              <SidebarItem to="/dashboard/apps/wellcorrelation" icon={GitCompareArrows} label="Well Correlation" />
-              <SidebarItem to="/dashboard/apps/seismolord" icon={Waves} label="Seismolord" />
-              <SidebarItem to="/dashboard/apps/mapping" icon={Map} label="Mapping" />
-              <SidebarItem to="/dashboard/apps/reservoircalc" icon={Calculator} label="ReservoirCalc" />
-              <SidebarItem to="/dashboard/my-learning" icon={BookOpen} label="My Courses" />
               <SidebarItem to="/dashboard/certificates" icon={Award} label="Certificates" />
-              <SidebarItem to="/dashboard/achievements" icon={Medal} label="Achievements" />
-              <SidebarItem to="/dashboard/leaderboard" icon={Trophy} label="Leaderboard" />
               <SidebarItem to="/dashboard/devices" icon={MonitorSmartphone} label="Devices & Sessions" />
             </SidebarGroup>
-            
-            <SidebarGroup title="Tools">
-               <SidebarItem to="/dashboard/modules/geoscience" icon={Activity} label="Geoscience" />
-               <SidebarItem to="/dashboard/modules/reservoir" icon={Database} label="Reservoir" />
-               <SidebarItem to="/dashboard/modules/drilling" icon={HardHat} label="Drilling" />
-               <SidebarItem to="/dashboard/modules/production" icon={Factory} label="Production" />
-               <FacilitiesSidebarItem to="/dashboard/modules/facilities" icon={Building2} label="Facilities" />
-            </SidebarGroup>
+
+            <CourseModuleGroups />
           </>
         )}
 
         {/* === LECTURER VIEW === */}
         {isViewAsLecturer && (
           <>
-            <SidebarGroup title="Academic">
-              <SidebarItem to="/dashboard/my-learning" icon={GraduationCap} label="My Classes" />
-              <SidebarItem to="/dashboard/courses" icon={BookOpen} label="Course Library" />
-              <SidebarItem to="/dashboard/assignments" icon={ClipboardCheck} label="Assignments" />
+            <SidebarGroup title="Academy">
               <SidebarItem to="/dashboard/admin/certifications" icon={Award} label="Certifications" />
+              <SidebarItem to="/dashboard/certificates" icon={GraduationCap} label="My Certificates" />
             </SidebarGroup>
 
-            <SidebarGroup title="Department Tools">
-               <SidebarItem to="/dashboard/modules/geoscience" icon={Activity} label="Geoscience Lab" />
-               <SidebarItem to="/dashboard/modules/reservoir" icon={Database} label="Reservoir Lab" />
-               <FacilitiesSidebarItem to="/dashboard/modules/facilities" icon={Building2} label="Facilities Lab" />
-            </SidebarGroup>
-          </>
-        )}
-
-        {/* === UNIVERSITY ADMIN VIEW === */}
-        {isViewAsUniversityAdmin && (
-          <>
-            <SidebarGroup title="Institution Mgmt">
-              <SidebarItem to="/dashboard/admin/users" icon={Users} label="Students & Staff" />
-              <SidebarItem to="/dashboard/admin/departments" icon={Building2} label="Departments" />
-            </SidebarGroup>
-            
-            <SidebarGroup title="Reports">
-              <SidebarItem to="/dashboard/admin/analytics" icon={BarChart} label="Usage Analytics" />
-              <SidebarItem to="/dashboard/admin/audit-logs" icon={FileText} label="Access Logs" />
-            </SidebarGroup>
+            <CourseModuleGroups />
           </>
         )}
 
@@ -197,16 +169,13 @@ const Sidebar = () => {
             <SidebarGroup title="Platform Mgmt">
               <SidebarItem to="/dashboard/admin/academy-doors" icon={KeyRound} label="Academy Doors" />
               <SidebarItem to="/dashboard/admin/certifications" icon={Award} label="Certifications" />
-              <SidebarItem to="/dashboard/admin/approvals" icon={ClipboardCheck} label="Uni Approvals" />
-              <SidebarItem to="/dashboard/admin/add-users" icon={UserPlus} label="Add Users" />
-              <SidebarItem to="/dashboard/admin/import-history" icon={History} label="Import History" />
-              <SidebarItem to="/dashboard/admin/scheduled-imports" icon={CalendarClock} label="Scheduled Imports" />
               <SidebarItem to="/dashboard/admin/users" icon={Users} label="User Directory" />
             </SidebarGroup>
 
             <SidebarGroup title="System">
               <SidebarItem to="/dashboard/admin/audit-logs" icon={FileText} label="Audit Logs" />
               <SidebarItem to="/dashboard/admin/analytics" icon={PieChart} label="System Analytics" />
+              <SidebarItem to="/dashboard/admin/monitoring" icon={Activity} label="Live Monitoring" />
             </SidebarGroup>
           </>
         )}
@@ -217,33 +186,16 @@ const Sidebar = () => {
             <SidebarGroup title="Platform Superuser">
               <SidebarItem to="/dashboard/admin/academy-doors" icon={KeyRound} label="Academy Doors" />
               <SidebarItem to="/dashboard/admin/certifications" icon={Award} label="Certifications" />
-              <SidebarItem to="/dashboard/admin/approvals" icon={ClipboardCheck} label="Approvals" />
-              <SidebarItem to="/dashboard/admin/add-users" icon={UserPlus} label="Add Users" />
-              <SidebarItem to="/dashboard/admin/import-history" icon={History} label="Import History" />
-              <SidebarItem to="/dashboard/admin/scheduled-imports" icon={CalendarClock} label="Scheduled Imports" />
               <SidebarItem to="/dashboard/admin/users" icon={Users} label="User Management" />
               <SidebarItem to="/dashboard/admin/admin-mgmt" icon={Shield} label="Admin Roles" />
               <SidebarItem to="/dashboard/admin/super-admins" icon={Shield} label="Super Admins" />
+              <SidebarItem to="/dashboard/admin/settings" icon={SlidersHorizontal} label="System Settings" />
             </SidebarGroup>
 
             <SidebarGroup title="Monitoring">
               <SidebarItem to="/dashboard/admin/analytics" icon={PieChart} label="Analytics" />
               <SidebarItem to="/dashboard/admin/audit-logs" icon={FileText} label="Audit Logs" />
-              <SidebarItem to="/dashboard/admin/notifications" icon={Activity} label="System Alerts" />
-            </SidebarGroup>
-
-            <SidebarGroup title="Core Modules">
-              <SidebarItem to="/dashboard/modules/geoscience" icon={Activity} label="Geoscience" />
-              <SidebarItem to="/dashboard/modules/reservoir" icon={Database} label="Reservoir" />
-              <SidebarItem to="/dashboard/modules/production" icon={Factory} label="Production" />
-              <SidebarItem to="/dashboard/modules/drilling" icon={HardHat} label="Drilling" />
-              <SidebarItem to="/dashboard/modules/economics" icon={Landmark} label="Economics" />
-              <FacilitiesSidebarItem to="/dashboard/modules/facilities" icon={Building2} label="Facilities" />
-            </SidebarGroup>
-            
-            <SidebarGroup title="Enterprise">
-              <SidebarItem to="/dashboard/enterprise/ai" icon={BrainCircuit} label="AI Insights" />
-              <SidebarItem to="/dashboard/enterprise/analytics" icon={BarChart} label="Adv. Analytics" />
+              <SidebarItem to="/dashboard/admin/monitoring" icon={Activity} label="Live Monitoring" />
             </SidebarGroup>
           </>
         )}

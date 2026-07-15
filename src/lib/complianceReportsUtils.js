@@ -175,29 +175,43 @@ export async function getSecurityEventReport(dateRange) {
 }
 
 
+// academy_enrollments/_certifications have no FK to profiles, so names are
+// joined client-side rather than via a nested select.
+async function fetchDisplayNames(userIds) {
+    const unique = [...new Set(userIds)].filter(Boolean);
+    if (unique.length === 0) return {};
+    const { data, error } = await supabase
+        .from('profiles')
+        .select('id, display_name')
+        .in('id', unique);
+    if (error) throw error;
+    return Object.fromEntries(data.map(p => [p.id, p.display_name]));
+}
+
 export async function getUserEnrollmentReport(dateRange) {
     try {
-        let query = supabase.from('course_enrollments').select('*, profiles(display_name), courses(title)', { count: 'exact' });
-        query = applyDateRange(query, dateRange, 'enrolled_at');
+        let query = supabase.from('academy_enrollments').select('*', { count: 'exact' });
+        query = applyDateRange(query, dateRange, 'created_at');
         const { data, count, error } = await query;
 
         if (error) throw error;
 
-        const completions = data.filter(e => e.status === 'completed').length;
-        const completionRate = count > 0 ? (completions / count) * 100 : 0;
+        const names = await fetchDisplayNames(data.map(e => e.user_id));
+        const active = data.filter(e => e.status === 'active').length;
 
         const summary = {
             'Total Enrollments': count,
-            'Total Completions': completions,
-            'Completion Rate': `${completionRate.toFixed(2)}%`,
+            'Active Enrollments': active,
+            'Pending / Other': count - active,
         };
-        
+
         const details = data.map(e => ({
-            'Student': e.profiles?.display_name || 'N/A',
-            'Course': e.courses?.title || 'N/A',
-            'Enrolled At': new Date(e.enrolled_at).toLocaleString(),
+            'Learner': names[e.user_id] || 'N/A',
+            'Course': e.app_slug,
+            'Tier': e.course_tier,
+            'Door': e.door,
+            'Enrolled At': new Date(e.created_at).toLocaleString(),
             'Status': e.status,
-            'Progress': `${e.progress_percentage}%`,
         }));
 
         return { summary, details };
@@ -209,21 +223,26 @@ export async function getUserEnrollmentReport(dateRange) {
 
 export async function getCertificateReport(dateRange) {
      try {
-        let query = supabase.from('certificates').select('*, profiles(display_name), courses(title)', { count: 'exact' });
-        query = applyDateRange(query, dateRange, 'issued_date');
+        let query = supabase.from('academy_certifications').select('*', { count: 'exact' });
+        query = applyDateRange(query, dateRange, 'issued_at');
         const { data, count, error } = await query;
 
         if (error) throw error;
 
+        const names = await fetchDisplayNames(data.map(c => c.user_id));
+
         const summary = {
             'Total Certificates Issued': count,
+            'Revoked': data.filter(c => c.revoked_at).length,
         };
-        
+
         const details = data.map(c => ({
-            'Student': c.profiles?.display_name || 'N/A',
-            'Course': c.courses?.title || 'N/A',
+            'Learner': names[c.user_id] || 'N/A',
+            'Course': c.app_slug,
+            'Tier': c.tier,
             'Certificate Number': c.certificate_number,
-            'Issued Date': new Date(c.issued_date).toLocaleString(),
+            'Issued Date': new Date(c.issued_at).toLocaleString(),
+            'Valid Until': c.valid_until ? new Date(c.valid_until).toLocaleDateString() : 'N/A',
         }));
 
         return { summary, details };

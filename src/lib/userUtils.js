@@ -180,34 +180,36 @@ export const permanentlyDeleteUser = async (userId, userEmail) => {
 
     return data;
 };
-
+// Academy-native per-user stats for the admin console (relies on the
+// admin SELECT policies on academy_enrollments / academy_certifications).
 export const getUserStats = async (userId) => {
     if (!userId) {
-        return { enrolled: 0, completed: 0 };
+        return { enrolled: 0, certified: 0 };
     }
 
     try {
         const { count: enrolled, error: enrollError } = await supabase
-            .from('course_enrollments')
+            .from('academy_enrollments')
             .select('*', { count: 'exact', head: true })
-            .eq('student_id', userId);
+            .eq('user_id', userId)
+            .eq('status', 'active');
 
         if (enrollError) throw enrollError;
 
-        const { count: completed, error: completeError } = await supabase
-            .from('course_enrollments')
+        const { count: certified, error: certError } = await supabase
+            .from('academy_certifications')
             .select('*', { count: 'exact', head: true })
-            .eq('student_id', userId)
-            .eq('status', 'completed');
-        
-        if (completeError) throw completeError;
+            .eq('user_id', userId)
+            .is('revoked_at', null);
+
+        if (certError) throw certError;
 
         return {
             enrolled: enrolled || 0,
-            completed: completed || 0,
+            certified: certified || 0,
         };
     } catch (error) {
         console.error('Error fetching user stats:', error);
-        return { enrolled: 0, completed: 0 };
+        return { enrolled: 0, certified: 0 };
     }
 };

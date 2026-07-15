@@ -1,26 +1,11 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { useRole } from '@/contexts/RoleContext';
-import { useStudentLicense } from '@/hooks/useStudentLicense';
-import { useStudentLoginTracking } from '@/hooks/useStudentLoginTracking';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Activity, Database, Users, HardHat, Factory, Hammer, Droplets, Settings, Construction, Lock, FileText } from 'lucide-react';
+import { Activity, Users, Settings, Construction, Award, KeyRound, GraduationCap, ArrowRight, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import LicenseDisplay from '@/components/LicenseDisplay';
-import StudentWelcomeWidget from '@/components/dashboard/StudentWelcomeWidget';
-import LicenseWarning from '@/components/LicenseWarning';
-import StudentModuleAssignment from '@/components/StudentModuleAssignment';
 
-// --- Module Pages ---
-
-// --- Tool Applications ---
-
-
-
-
-import CoursesPage from '@/pages/CoursesPage';
-import MyCoursesPage from '@/pages/MyCoursesPage';
 import EnrollPage from '@/pages/EnrollPage';
 import AdminAcademyDoorsPage from '@/pages/AdminAcademyDoorsPage';
 import GetStartedPage from '@/pages/GetStartedPage';
@@ -34,7 +19,6 @@ import MappingLearningPage from '@/pages/apps/MappingLearningPage';
 import ReservoirCalcLearningPage from '@/pages/apps/ReservoirCalcLearningPage';
 import ActivationBanner from '@/components/academy/ActivationBanner';
 import SettingsPage from '@/pages/SettingsPage';
-import AdminApprovalPage from '@/pages/AdminApprovalPage';
 import AdminUsersPage from '@/pages/AdminUsersPage';
 import AdminReportAnalyticsPage from '@/pages/AdminReportAnalyticsPage';
 import AdminAuditLogsPage from '@/pages/AdminAuditLogsPage';
@@ -42,234 +26,198 @@ import AdminManagementPage from '@/pages/AdminManagementPage';
 import AdminSystemSettingsPage from '@/pages/AdminSystemSettingsPage';
 import SuperAdminToolPage from '@/pages/SuperAdminToolPage';
 import RealTimeMonitoringPage from '@/pages/RealTimeMonitoringPage';
-
-// Phase 3: New University Admin Dashboard
-import UniversityAdminDashboard from '@/pages/UniversityAdminDashboard';
-
-// Phase 3.3: Lecturer Dashboard
-import LecturerDashboard from '@/pages/LecturerDashboard';
-import LecturerStudentManagement from '@/pages/LecturerStudentManagement';
-import LecturerCourseManagement from '@/pages/LecturerCourseManagement';
-
-// Phase 3.4: Student Grades
-import StudentGradesPage from '@/pages/StudentGradesPage';
-import { getUserStats } from '@/lib/userUtils';
-
-// Phase 3.10: Notifications
 import NotificationCenterPage from '@/pages/NotificationCenterPage';
+import { listAcademyApps, listMyEnrollments, listMyCertifications } from '@/services/academyService';
+import { MODULE_LABELS, moduleLabel } from '@/lib/academyModules';
 
 // --- Role Specific Home Components ---
 
-const SuperAdminHome = () => {
-    return (
-        <div className="space-y-6 animate-in fade-in duration-500 py-16">
-          <div className="flex flex-col space-y-2">
-            <h1 className="text-3xl font-bold tracking-tight text-white">
-              Super Admin Control Center
-            </h1>
-            <p className="text-slate-400">Full system oversight and administration.</p>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Card className="bg-[#1E293B] border-slate-800">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-slate-200">Total Users</CardTitle>
-                <Users className="h-4 w-4 text-purple-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-white">1,245</div>
-                <p className="text-xs text-slate-500">Global user base</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#1E293B] border-slate-800 cursor-pointer hover:bg-slate-800/50 transition-colors" onClick={() => window.location.href='/dashboard/admin/settings'}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-slate-200">System Configuration</CardTitle>
-                <Settings className="h-4 w-4 text-orange-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-white">Settings</div>
-                <p className="text-xs text-slate-500">Manage global config</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#1E293B] border-slate-800 cursor-pointer hover:bg-slate-800/50 transition-colors" onClick={() => window.location.href='/dashboard/admin/monitoring'}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-slate-200">Live Monitoring</CardTitle>
-                <Activity className="h-4 w-4 text-[#BFFF00] animate-pulse" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-white">Active</div>
-                <p className="text-xs text-slate-500">View real-time logs</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#1E293B] border-slate-800 cursor-pointer hover:bg-slate-800/50 transition-colors" onClick={() => window.location.href='/dashboard/admin/mappings'}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-slate-200">Department Mappings</CardTitle>
-                <Database className="h-4 w-4 text-blue-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-white">Modules</div>
-                <p className="text-xs text-slate-500">Assign to departments</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-    );
-};
+const AdminHomeCard = ({ to, title, description, cta }) => (
+    <Card className="bg-[#1E293B] border-slate-800 hover:border-slate-600 transition-colors">
+        <CardHeader><CardTitle className="text-white">{title}</CardTitle></CardHeader>
+        <CardContent>
+            <p className="text-slate-400 mb-4">{description}</p>
+            <Link to={to}>
+                <Button variant="outline" className="w-full border-slate-700 text-slate-200">{cta}</Button>
+            </Link>
+        </CardContent>
+    </Card>
+);
+
+const SuperAdminHome = () => (
+    <div className="space-y-6 animate-in fade-in duration-500 py-16">
+      <div className="flex flex-col space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight text-white">Super Admin Control Center</h1>
+        <p className="text-slate-400">Full system oversight and administration.</p>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <AdminHomeCard to="/dashboard/admin/academy-doors" title="Academy Doors" description="Issue cohort and sponsorship codes, decide residency applications." cta="Open Doors Console" />
+        <AdminHomeCard to="/dashboard/admin/certifications" title="Certifications" description="Issue and revoke academy certificates." cta="Open Certifications" />
+        <AdminHomeCard to="/dashboard/admin/monitoring" title="Live Monitoring" description="View real-time logs and system health." cta="Open Monitoring" />
+        <AdminHomeCard to="/dashboard/admin/settings" title="System Configuration" description="Manage global configuration." cta="Open Settings" />
+      </div>
+    </div>
+);
 
 const PetrolordAdminHome = () => (
     <div className="space-y-6 animate-in fade-in duration-500 py-16">
       <div className="flex flex-col space-y-2">
         <h1 className="text-3xl font-bold tracking-tight text-white">Admin Dashboard</h1>
-        <p className="text-slate-400">Manage university approvals and platform users.</p>
+        <p className="text-slate-400">Manage academy learners, doors and certificates.</p>
       </div>
        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="bg-[#1E293B] border-slate-800 hover:border-slate-600 transition-colors">
-            <CardHeader><CardTitle className="text-white">University Approvals</CardTitle></CardHeader>
-            <CardContent>
-                <p className="text-slate-400 mb-4">Review and approve pending university access requests.</p>
-                <Button className="w-full bg-[#BFFF00] text-black hover:bg-[#a3d900]">Go to Approvals</Button>
-            </CardContent>
-        </Card>
-        <Card className="bg-[#1E293B] border-slate-800 hover:border-slate-600 transition-colors" onClick={() => window.location.href='/dashboard/admin/monitoring'}>
-            <CardHeader><CardTitle className="text-white">System Monitoring</CardTitle></CardHeader>
-            <CardContent>
-                <p className="text-slate-400 mb-4">View real-time logs and system health status.</p>
-                <Button variant="outline" className="w-full border-slate-700 text-slate-200">Open Dashboard</Button>
-            </CardContent>
-        </Card>
-        <Card className="bg-[#1E293B] border-slate-800 hover:border-slate-600 transition-colors" onClick={() => window.location.href='/dashboard/admin/mappings'}>
-            <CardHeader><CardTitle className="text-white">Module Assignments</CardTitle></CardHeader>
-            <CardContent>
-                <p className="text-slate-400 mb-4">Configure which modules are available to student departments.</p>
-                <Button variant="outline" className="w-full border-slate-700 text-slate-200">Manage Mappings</Button>
-            </CardContent>
-        </Card>
+        <AdminHomeCard to="/dashboard/admin/academy-doors" title="Academy Doors" description="Issue cohort and sponsorship codes, decide residency applications." cta="Open Doors Console" />
+        <AdminHomeCard to="/dashboard/admin/certifications" title="Certifications" description="Issue and revoke academy certificates." cta="Open Certifications" />
+        <AdminHomeCard to="/dashboard/admin/monitoring" title="System Monitoring" description="View real-time logs and system health status." cta="Open Dashboard" />
       </div>
     </div>
 );
 
-// University Admin Dashboard Route Wrapper
-const UniversityAdminHome = () => <UniversityAdminDashboard />;
-const LecturerHome = () => <LecturerDashboard />;
+const LecturerHome = () => (
+    <div className="space-y-6 animate-in fade-in duration-500 py-16">
+      <div className="flex flex-col space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight text-white">Lecturer Dashboard</h1>
+        <p className="text-slate-400">Support learners and manage certifications.</p>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        <AdminHomeCard to="/dashboard/admin/certifications" title="Certifications" description="Issue and revoke academy certificates for your learners." cta="Open Certifications" />
+        <AdminHomeCard to="/dashboard/certificates" title="My Certificates" description="Certificates issued to your own account." cta="View Certificates" />
+      </div>
+    </div>
+);
+
+const TIER_LABELS = { beginner: 'Associate', intermediate: 'Professional', advanced: 'Expert' };
 
 const StudentHome = () => {
     const { user, profile } = useAuth();
-    useStudentLoginTracking();
-    
-    const licenseInfo = useStudentLicense(user?.id);
-    const assignedModule = licenseInfo?.assignedModule || 'Geoscience'; 
-    
-    const [stats, setStats] = React.useState({ enrolled: 0, completed: 0, inProgress: 0, lastLogin: null });
-    
-    const isAccessRestricted = licenseInfo?.status === 'expired' || licenseInfo?.status === 'grace_period_expired';
+    const [apps, setApps] = React.useState([]);
+    const [enrollments, setEnrollments] = React.useState([]);
+    const [certs, setCerts] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
-        if (user) {
-            const fetchStats = async () => {
-                const userStats = await getUserStats(user.id);
-                setStats({
-                    ...userStats,
-                    inProgress: userStats.enrolled - userStats.completed,
-                    lastLogin: user.last_sign_in_at 
-                });
-            };
-            fetchStats();
-        }
+        if (!user) return;
+        let cancelled = false;
+        (async () => {
+            try {
+                const [appList, enrollList, certList] = await Promise.all([
+                    listAcademyApps(),
+                    listMyEnrollments(),
+                    listMyCertifications(),
+                ]);
+                if (cancelled) return;
+                setApps(appList || []);
+                setEnrollments(enrollList || []);
+                setCerts(certList || []);
+            } catch (err) {
+                console.error('Failed to load academy dashboard:', err);
+            } finally {
+                if (!cancelled) setLoading(false);
+            }
+        })();
+        return () => { cancelled = true; };
     }, [user]);
 
-    const isModuleAllowed = (moduleName) => {
-        if (!assignedModule) return false;
-        return assignedModule.toLowerCase().includes(moduleName.toLowerCase());
-    };
-    
-    const ModuleLink = ({ to, children, className }) => {
-        if (isAccessRestricted) {
-            return (
-                <div className={`${className} opacity-50 cursor-not-allowed relative group`}>
-                    {children}
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/60 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Lock className="w-6 h-6 text-red-400" />
-                    </div>
-                </div>
-            );
+    const activeEnrollments = enrollments.filter((e) => e.status === 'active');
+    const liveCerts = certs.filter((c) => !c.revoked_at && (!c.valid_until || new Date(c.valid_until) > new Date()));
+    const enrolledSlugs = new Set(activeEnrollments.map((e) => e.app_slug));
+
+    // Group the available catalog by module; every module the academy
+    // teaches gets its own section as courses come online.
+    const modules = [];
+    const byModule = {};
+    apps.filter((a) => a.status === 'available').forEach((a) => {
+        if (!byModule[a.module]) {
+            byModule[a.module] = [];
+            modules.push(a.module);
         }
-        return <a href={to} className={className}>{children}</a>;
-    };
+        byModule[a.module].push(a);
+    });
 
     return (
         <div className="space-y-8 animate-in fade-in duration-500 py-16">
-        
         {/* N3.3 activation gate prompt (learners who haven't cleared it) */}
         <ActivationBanner />
 
-        {/* License Warning Component */}
-        <LicenseWarning userId={user?.id} />
+        <div className="flex flex-col gap-2">
+            <h1 className="text-3xl font-bold tracking-tight text-white">
+                Welcome{profile?.display_name ? `, ${profile.display_name}` : ''}
+            </h1>
+            <p className="text-slate-400">Your NextGen Academy dashboard.</p>
+        </div>
 
-        <div className="flex flex-col gap-6">
-            <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold tracking-tight text-white hidden md:block">Dashboard</h1>
-                <div className="w-full md:w-auto flex justify-end">
-                    <LicenseDisplay licenseInfo={licenseInfo} />
+        <div className="grid gap-4 md:grid-cols-3">
+            <Card className="bg-[#1E293B] border-slate-800">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium text-slate-200">Active Enrollments</CardTitle>
+                    <GraduationCap className="h-4 w-4 text-[#BFFF00]" />
+                </CardHeader>
+                <CardContent>
+                    <div className="text-2xl font-bold text-white">{loading ? '—' : activeEnrollments.length}</div>
+                    <p className="text-xs text-slate-500">Courses you can work in right now</p>
+                </CardContent>
+            </Card>
+            <Card className="bg-[#1E293B] border-slate-800">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium text-slate-200">Live Certificates</CardTitle>
+                    <Award className="h-4 w-4 text-emerald-400" />
+                </CardHeader>
+                <CardContent>
+                    <div className="text-2xl font-bold text-white">{loading ? '—' : liveCerts.length}</div>
+                    <p className="text-xs text-slate-500">Valid certifications on your account</p>
+                </CardContent>
+            </Card>
+            <Card className="bg-[#1E293B] border-slate-800">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium text-slate-200">Enroll</CardTitle>
+                    <BookOpen className="h-4 w-4 text-sky-400" />
+                </CardHeader>
+                <CardContent>
+                    <Link to="/dashboard/enroll">
+                        <Button className="w-full bg-[#BFFF00] text-black hover:bg-[#a3d900] font-bold">
+                            Browse Courses <ArrowRight className="w-4 h-4 ml-2" />
+                        </Button>
+                    </Link>
+                </CardContent>
+            </Card>
+        </div>
+
+        {modules.map((mod) => (
+            <div key={mod} className="rounded-lg border border-slate-800 bg-[#1E293B] p-6 shadow-lg">
+                <div className="flex items-baseline justify-between mb-1">
+                    <h3 className="text-lg font-medium text-slate-200">{moduleLabel(mod)}</h3>
+                    <span className="text-xs text-slate-500">{byModule[mod].length} course{byModule[mod].length === 1 ? '' : 's'}</span>
+                </div>
+                <p className="text-slate-400 text-sm mb-4">Courses in the {moduleLabel(mod)} module, in learning-path order.</p>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {byModule[mod].map((app) => {
+                        const cert = liveCerts.filter((c) => c.app_slug === app.slug)
+                            .sort((a, b) => new Date(b.issued_at) - new Date(a.issued_at))[0];
+                        return (
+                            <Link key={app.slug} to={`/dashboard/apps/${app.slug}`}
+                                className="p-4 bg-slate-800 rounded border border-slate-700 hover:bg-slate-700 transition-all hover:scale-[1.02] block">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-sm font-medium text-slate-200">{app.name}</span>
+                                    {cert ? (
+                                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                            {TIER_LABELS[cert.tier] || cert.tier}
+                                        </span>
+                                    ) : enrolledSlugs.has(app.slug) ? (
+                                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">Enrolled</span>
+                                    ) : null}
+                                </div>
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
-            
-            <StudentWelcomeWidget 
-                user={user} 
-                profile={profile} 
-                licenseInfo={licenseInfo} 
-                stats={stats} 
-            />
-            
-            {/* NEW: Student Module Assignment Component */}
-            <div className="w-full">
-                <StudentModuleAssignment />
-            </div>
-        </div>
-        
-        <div className="rounded-lg border border-slate-800 bg-[#1E293B] p-8 text-center shadow-lg">
-            <h3 className="text-lg font-medium text-slate-200">Technical Modules</h3>
-            <p className="text-slate-400 mt-2 text-sm mb-4">Access industry-standard simulation tools.</p>
-            
-            <div className="flex flex-wrap justify-center gap-4">
-                {(isModuleAllowed('Geoscience') || !assignedModule) && (
-                    <ModuleLink to="/dashboard/modules/geoscience" className="p-4 bg-slate-800 rounded hover:bg-slate-700 cursor-pointer border border-slate-700 w-40 transition-all hover:scale-105 block">
-                        <Activity className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                        <span className="text-sm font-medium text-slate-300">Geoscience</span>
-                    </ModuleLink>
-                )}
-                
-                {(isModuleAllowed('Drilling') || !assignedModule) && (
-                    <ModuleLink to="/dashboard/modules/drilling" className="p-4 bg-slate-800 rounded hover:bg-slate-700 cursor-pointer border border-slate-700 w-40 transition-all hover:scale-105 block">
-                        <HardHat className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-                        <span className="text-sm font-medium text-slate-300">Drilling</span>
-                    </ModuleLink>
-                )}
-                
-                {(isModuleAllowed('Reservoir') || !assignedModule) && (
-                    <ModuleLink to="/dashboard/modules/reservoir" className="p-4 bg-slate-800 rounded hover:bg-slate-700 cursor-pointer border border-slate-700 w-40 transition-all hover:scale-105 block">
-                        <Database className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
-                        <span className="text-sm font-medium text-slate-300">Reservoir</span>
-                    </ModuleLink>
-                )}
+        ))}
 
-                {(isModuleAllowed('Production') || !assignedModule) && (
-                     <ModuleLink to="/dashboard/modules/production" className="p-4 bg-slate-800 rounded hover:bg-slate-700 cursor-pointer border border-slate-700 w-40 transition-all hover:scale-105 block">
-                        <Factory className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                        <span className="text-sm font-medium text-slate-300">Production</span>
-                    </ModuleLink>
-                )}
-                
-                {(isModuleAllowed('Facilities') || !assignedModule) && (
-                     <ModuleLink to="/dashboard/modules/facilities" className="p-4 bg-slate-800 rounded hover:bg-slate-700 cursor-pointer border border-slate-700 w-40 transition-all hover:scale-105 block">
-                        <Construction className="h-8 w-8 text-indigo-400 mx-auto mb-2" />
-                        <span className="text-sm font-medium text-slate-300">Facilities</span>
-                    </ModuleLink>
-                )}
-            </div>
-            {assignedModule && (
-                <p className="text-xs text-slate-500 mt-4 italic">
-                    You only have access to modules within the {assignedModule} track.
-                </p>
-            )}
+        <div className="rounded-lg border border-slate-800 bg-[#1E293B] p-6 text-center">
+            <h3 className="text-sm font-medium text-slate-300">More modules are on the way</h3>
+            <p className="text-slate-500 text-xs mt-1">
+                {Object.keys(MODULE_LABELS).filter((m) => !byModule[m]).map((m) => MODULE_LABELS[m]).join(' · ')}
+            </p>
         </div>
         </div>
     );
@@ -286,18 +234,12 @@ const ModulePlaceholder = ({ name, icon: Icon, description }) => (
         {description || "This module is currently active and ready for data integration."}
       </p>
     </div>
-    <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm">
-        <p>✓ Route Verified: Connected successfully</p>
-    </div>
   </div>
 );
 
 const DashboardPage = () => {
-  const { user, loading } = useAuth();
-  const { viewRole, actualRole } = useRole();
-
-  // Logging active role for debugging
-  console.log('Dashboard Initialized | Active Role:', viewRole, '| Actual Role:', actualRole);
+  const { loading } = useAuth();
+  const { viewRole } = useRole();
 
   if (loading) {
     return (
@@ -307,34 +249,11 @@ const DashboardPage = () => {
     );
   }
 
-  // Central Routing Logic for the Dashboard Root ("/")
-  // Explicitly check role to determine which dashboard to render
   const renderHome = () => {
-    // Task 2: Explicitly check for university_admin FIRST
-    if (viewRole === 'university_admin') {
-        console.log('Routing to: UniversityAdminHome');
-        return <UniversityAdminHome />;
-    }
-    
-    // Check for other roles
-    if (viewRole === 'super_admin') {
-        console.log('Routing to: SuperAdminHome');
-        return <SuperAdminHome />;
-    }
-
-    if (viewRole === 'admin') {
-        console.log('Routing to: PetrolordAdminHome');
-        return <PetrolordAdminHome />;
-    }
-
-    if (viewRole === 'lecturer') {
-        console.log('Routing to: LecturerHome');
-        return <LecturerHome />;
-    }
-    
-    // Default fallback to StudentDashboard
-    console.log('Routing to: StudentHome (Default)');
-    return <StudentHome />; 
+    if (viewRole === 'super_admin') return <SuperAdminHome />;
+    if (viewRole === 'admin') return <PetrolordAdminHome />;
+    if (viewRole === 'lecturer') return <LecturerHome />;
+    return <StudentHome />;
   };
 
   return (
@@ -344,19 +263,6 @@ const DashboardPage = () => {
 
     {/* Engineering modules removed at N2 — being rebuilt on the Suite's validated engines (@petrolord/engines; see NextGen-ROADMAP.md in petrolord-suite) */}
     <Route path="modules/*" element={<ModulePlaceholder name="Engineering Modules" icon={Construction} description="The engineering teaching modules are being rebuilt on the Petrolord Suite's validated engines and will return module by module." />} />
-    <Route path="enterprise/*" element={<ModulePlaceholder name="Enterprise Analytics" icon={Activity} description="Retired pending the NextGen rebuild." />} />
-    
-
-
-    
-
-
-    {/* --- FACILITIES ROUTES (NEW) --- */}
-
-
-    {/* --- COURSES --- */}
-    <Route path="courses/*" element={<CoursesPage />} />
-    <Route path="my-learning/*" element={<MyCoursesPage />} />
 
     {/* --- ACADEMY ENROLLMENT (N3.2 four doors) --- */}
     <Route path="enroll" element={<EnrollPage />} />
@@ -379,7 +285,6 @@ const DashboardPage = () => {
     {/* --- NOTIFICATIONS --- */}
     <Route path="notifications" element={<NotificationCenterPage />} />
 
-    <Route path="admin/approvals" element={<AdminApprovalPage />} />
     <Route path="admin/academy-doors" element={<AdminAcademyDoorsPage />} />
     <Route path="admin/certifications" element={<AdminCertificationsPage />} />
     <Route path="admin/audit-logs" element={<AdminAuditLogsPage />} />
@@ -389,15 +294,6 @@ const DashboardPage = () => {
     <Route path="admin/analytics" element={<AdminReportAnalyticsPage />} />
     <Route path="admin/super-admins" element={<SuperAdminToolPage />} />
     <Route path="admin/settings" element={<AdminSystemSettingsPage />} />
-    
-    {/* --- UNIVERSITY ADMIN --- */}
-    {/* This route is explicit but also protected within the component itself */}
-    <Route path="university-admin" element={<UniversityAdminDashboard />} />
-
-    <Route path="lecturer/students" element={<LecturerStudentManagement />} />
-    <Route path="lecturer/courses" element={<LecturerCourseManagement />} />
-
-    <Route path="grades" element={<StudentGradesPage />} />
 
     {/* Fallback */}
     <Route path="*" element={<Navigate to="/dashboard" replace />} />

@@ -120,10 +120,7 @@ const Header = () => {
             )}
             
             <DropdownMenuItem className="hover:bg-slate-700 focus:bg-slate-700 cursor-pointer">
-                <Link to="/profile" className="w-full flex items-center">Profile</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="hover:bg-slate-700 focus:bg-slate-700 cursor-pointer">
-                <Link to="/settings" className="w-full flex items-center">Settings</Link>
+                <Link to="/dashboard/settings" className="w-full flex items-center">Settings</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator className="bg-slate-700" />
             <DropdownMenuItem className="hover:bg-slate-700 focus:bg-slate-700 text-red-400 cursor-pointer" onClick={signOut}>

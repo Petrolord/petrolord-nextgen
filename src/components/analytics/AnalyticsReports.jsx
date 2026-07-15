@@ -11,10 +11,9 @@ import { useAuth } from '@/contexts/SupabaseAuthContext';
 
 const REPORT_TYPES = [
   { id: 'user_activity', name: 'User Activity Report' },
-  { id: 'application', name: 'Application Report' },
-  { id: 'university', name: 'University Report' },
-  { id: 'department', name: 'Department Report' },
-  { id: 'performance', name: 'Performance Report' }
+  { id: 'enrollment', name: 'Enrollment Report' },
+  { id: 'certification', name: 'Certification Report' },
+  { id: 'payment', name: 'Payment Report' }
 ];
 
 const DATE_RANGES = [
@@ -43,23 +42,14 @@ const AnalyticsReports = () => {
         case 'user_activity':
           data = await analyticsService.getUserActivityReport(range);
           break;
-        case 'application':
-          data = await analyticsService.getApplicationReport(range);
+        case 'enrollment':
+          data = await analyticsService.getEnrollmentReport(range);
           break;
-        case 'university':
-          data = await analyticsService.getUniversityReport();
+        case 'certification':
+          data = await analyticsService.getCertificationReport(range);
           break;
-        case 'department':
-          data = await analyticsService.getDepartmentReport();
-          break;
-        case 'performance':
-          // Mocking performance for now
-          data = [
-            { metric: 'Avg Response Time', value: '145ms', status: 'Optimal' },
-            { metric: 'Uptime', value: '99.98%', status: 'Excellent' },
-            { metric: 'Error Rate', value: '0.02%', status: 'Low' },
-            { metric: 'Database Load', value: '24%', status: 'Normal' }
-          ];
+        case 'payment':
+          data = await analyticsService.getPaymentReport(range);
           break;
         default:
           data = [];
