@@ -21,17 +21,22 @@ export async function listFees() {
   return data;
 }
 
-export function feeFor(fees, appSlug, tier, kind = 'course') {
+// Fees are keyed per school × tier (a per-app override wins when present).
+// `apps` is the loaded academy_apps list, used to resolve the app's school.
+export function feeFor(fees, apps, appSlug, tier, kind = 'course') {
+  const school = (apps || []).find((a) => a.slug === appSlug)?.school || 'subsurface';
   const candidates = (fees || []).filter(
     (f) =>
       f.kind === kind &&
       f.active &&
-      (f.app_slug === appSlug || f.app_slug === '*') &&
+      (f.app_slug === appSlug || f.app_slug == null) &&
+      (f.school === school || f.school == null) &&
       (f.course_tier === tier || f.course_tier === '*'),
   );
   candidates.sort(
     (a, b) =>
       (b.app_slug === appSlug) - (a.app_slug === appSlug) ||
+      (b.school != null) - (a.school != null) ||
       (b.course_tier === tier) - (a.course_tier === tier),
   );
   return candidates[0] || null;
@@ -39,8 +44,12 @@ export function feeFor(fees, appSlug, tier, kind = 'course') {
 
 export function formatFee(fee) {
   if (!fee) return '—';
-  const major = fee.amount_minor / 100;
-  return `${fee.currency === 'NGN' ? '₦' : fee.currency + ' '}${major.toLocaleString()}`;
+  const symbol = fee.currency === 'NGN' ? '₦' : fee.currency + ' ';
+  const major = `${symbol}${(fee.amount_minor / 100).toLocaleString()}`;
+  if (fee.amount_usd_minor) {
+    return `${major} (≈ $${(fee.amount_usd_minor / 100).toLocaleString()})`;
+  }
+  return major;
 }
 
 export async function listMyEnrollments() {
