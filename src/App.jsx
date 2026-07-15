@@ -20,6 +20,7 @@ import ProtectedLicenseRoute from '@/components/ProtectedLicenseRoute';
 
 // Lazy Load Pages
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
+const RegisterPage = lazy(() => import('@/pages/RegisterPage'));
 const UniversityOnboardingPage = lazy(() => import('@/pages/UniversityOnboardingPage'));
 const PasswordResetPage = lazy(() => import('@/pages/PasswordResetPage')); 
 const ResetPasswordPage = lazy(() => import('@/pages/ResetPasswordPage')); 
@@ -98,6 +99,7 @@ const AppContent = () => {
               <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
                 <Route path="/university-onboarding" element={<UniversityOnboardingPage />} />
                 <Route path="/onboarding" element={<Navigate to="/university-onboarding" replace />} />
                 <Route path="/forgot-password" element={<PasswordResetPage />} /> 

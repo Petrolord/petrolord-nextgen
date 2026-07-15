@@ -17,7 +17,12 @@ export const ROLES = {
   ADMIN: 'admin', // Petrolord Admin
   UNIVERSITY_ADMIN: 'university_admin',
   LECTURER: 'lecturer',
-  STUDENT: 'student'
+  // N3.2 doctrine: 'learner' is the base identity. The doors
+  // (self/campus/residency/sponsored) are enrollment attributes on
+  // academy_enrollments, NOT roles. 'student' remains as the legacy
+  // alias until the retirement pass; both render the learner surfaces.
+  LEARNER: 'learner',
+  STUDENT: 'student' // legacy alias of LEARNER
 };
 
 export const ROLE_LABELS = {
@@ -25,6 +30,7 @@ export const ROLE_LABELS = {
   [ROLES.ADMIN]: 'Petrolord Admin',
   [ROLES.UNIVERSITY_ADMIN]: 'University Admin',
   [ROLES.LECTURER]: 'Lecturer',
+  [ROLES.LEARNER]: 'Learner',
   [ROLES.STUDENT]: 'Student'
 };
 
@@ -47,8 +53,8 @@ export const RoleProvider = ({ children }) => {
     // 3. User Metadata (Fastest source on initial login)
     if (user?.user_metadata?.role) return user.user_metadata.role;
     
-    // 4. Fallback
-    return ROLES.STUDENT;
+    // 4. Fallback: the base identity
+    return ROLES.LEARNER;
   };
 
   const [actualRole, setActualRole] = useState(getDerivedRole());
@@ -83,8 +89,9 @@ export const RoleProvider = ({ children }) => {
     isViewAsAdmin: viewRole === ROLES.ADMIN,
     isViewAsUniversityAdmin: viewRole === ROLES.UNIVERSITY_ADMIN,
     isViewAsLecturer: viewRole === ROLES.LECTURER,
-    // Default to student view if role is student OR if no specific view role matches (safe fallback)
-    isViewAsStudent: viewRole === ROLES.STUDENT || !Object.values(ROLES).includes(viewRole),
+    // Learner (or legacy student) view — also the safe fallback for any unknown role
+    isViewAsStudent: viewRole === ROLES.STUDENT || viewRole === ROLES.LEARNER || !Object.values(ROLES).includes(viewRole),
+    isViewAsLearner: viewRole === ROLES.LEARNER || viewRole === ROLES.STUDENT || !Object.values(ROLES).includes(viewRole),
   };
 
   return <RoleContext.Provider value={value}>{children}</RoleContext.Provider>;

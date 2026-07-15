@@ -1,0 +1,12 @@
+project_id = "petrolord-nextgen"
+
+[functions.academy-checkout]
+verify_jwt = true
+
+[functions.academy-verify]
+verify_jwt = true
+
+[functions.academy-paystack-webhook]
+# Paystack calls this server-to-server; auth is the HMAC-SHA512
+# signature over the raw body, not a JWT.
+verify_jwt = false
