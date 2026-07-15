@@ -36,7 +36,6 @@
 - [Report Analytics - Petrolord](/adminreportanalytics): No description available
 - [Report Scheduling - Petrolord](/adminreportscheduling): No description available
 - [Report Templates - Petrolord](/adminreporttemplates): No description available
-- [Reservoir Engineering Dashboard | Petrolord](/reservoirengineeringdashboard): Master reservoir engineering fundamentals with interactive tools.
 - [Scheduled Imports | Petrolord Admin](/scheduledimport): No description available
 - [Settings - Petrolord NextGen Suite](/settings): No description available
 - [Student Management | Lecturer Portal](/lecturerstudentmanagement): No description available
