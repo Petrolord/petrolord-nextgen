@@ -44,7 +44,9 @@ const DOOR_LABELS = {
 function CourseTierPicker({ apps, tier, setTier, appSlug, setAppSlug, fees, feeKind }) {
   const available = apps.filter((a) => a.status === 'available');
   const comingSoon = apps.filter((a) => a.status !== 'available');
-  const fee = feeKind === 'course' ? feeFor(fees, appSlug, tier, 'course') : feeFor(fees, appSlug, tier, 'registration');
+  const fee = feeKind === 'course'
+    ? feeFor(fees, apps, appSlug, tier, 'course')
+    : feeFor(fees, apps, appSlug, tier, 'registration');
   return (
     <div className="space-y-4">
       <div>
