@@ -17,6 +17,7 @@ import LandingPage from '@/pages/LandingPage';
 import LoginPage from '@/pages/LoginPage';
 import GlobalSearchModal from '@/components/search/GlobalSearchModal';
 import ProtectedLicenseRoute from '@/components/ProtectedLicenseRoute';
+import DeviceGuard from '@/components/academy/DeviceGuard';
 
 // Lazy Load Pages
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
@@ -158,7 +159,7 @@ function App() {
   return (
     <>
       <Helmet><title>Petrolord NextGen Suite</title><meta name="description" content="Digital Operating System for Energy Enterprise" /></Helmet>
-      <RoleProvider><SearchProvider><AppContent /></SearchProvider></RoleProvider><Toaster />
+      <RoleProvider><SearchProvider><DeviceGuard><AppContent /></DeviceGuard></SearchProvider></RoleProvider><Toaster />
     </>
   );
 }

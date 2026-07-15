@@ -162,3 +162,105 @@ export async function adminDecideResidency(applicationId, decision, note = null)
   if (error) throw error;
   return data;
 }
+
+// ---- N3.3 activation gate + integrity controls ----
+
+export async function getActivationStatus() {
+  const { data, error } = await supabase.rpc('academy_activation_status');
+  if (error) throw error;
+  return data;
+}
+
+export async function completeOrientation() {
+  const { data, error } = await supabase.rpc('academy_complete_orientation');
+  if (error) throw error;
+  return data;
+}
+
+export async function getEntryAssessment() {
+  const { data, error } = await supabase.rpc('academy_get_entry_assessment');
+  if (error) throw error;
+  return data;
+}
+
+// answers: { [questionId]: selectedIndex }
+export async function submitEntryAssessment(answers) {
+  const { data, error } = await supabase.rpc('academy_submit_entry_assessment', {
+    p_answers: answers,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function registerDevice(deviceId, label = null) {
+  const { data, error } = await supabase.rpc('academy_register_device', {
+    p_device_id: deviceId,
+    p_user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : null,
+    p_ip: null,
+    p_label: label,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function revokeDevice(deviceId) {
+  const { data, error } = await supabase.rpc('academy_revoke_device', {
+    p_device_id: deviceId,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function listMyDevices() {
+  const { data, error } = await supabase
+    .from('academy_devices')
+    .select('*')
+    .is('revoked_at', null)
+    .order('last_seen', { ascending: false });
+  if (error) throw error;
+  return data;
+}
+
+export async function listMySessions(limit = 25) {
+  const { data, error } = await supabase
+    .from('academy_sessions')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(limit);
+  if (error) throw error;
+  return data;
+}
+
+// admin session-monitoring feed (admins read all via RLS)
+export async function adminListSessions(limit = 100) {
+  const { data, error } = await supabase
+    .from('academy_sessions')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(limit);
+  if (error) throw error;
+  const userIds = [...new Set((data || []).map((s) => s.user_id))];
+  if (!userIds.length) return data;
+  const { data: profiles } = await supabase
+    .from('profiles')
+    .select('id, display_name, email')
+    .in('id', userIds);
+  const byId = Object.fromEntries((profiles || []).map((p) => [p.id, p]));
+  return data.map((s) => ({ ...s, actor: byId[s.user_id] || null }));
+}
+
+// Stable per-browser device id (opaque; not PII).
+export function getDeviceId() {
+  const KEY = 'petrolord_academy_device_id';
+  try {
+    let id = localStorage.getItem(KEY);
+    if (!id) {
+      id = crypto.randomUUID();
+      localStorage.setItem(KEY, id);
+    }
+    return id;
+  } catch {
+    // storage blocked — fall back to an ephemeral id (limit still applies server-side)
+    return 'ephemeral-' + Math.random().toString(36).slice(2);
+  }
+}
