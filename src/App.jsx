@@ -22,6 +22,8 @@ import DeviceGuard from '@/components/academy/DeviceGuard';
 // Lazy Load Pages
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
 const RegisterPage = lazy(() => import('@/pages/RegisterPage'));
+const VerifyCertificatePage = lazy(() => import('@/pages/VerifyCertificatePage'));
+const AcademyCertificatesPage = lazy(() => import('@/pages/AcademyCertificatesPage'));
 const UniversityOnboardingPage = lazy(() => import('@/pages/UniversityOnboardingPage'));
 const PasswordResetPage = lazy(() => import('@/pages/PasswordResetPage')); 
 const ResetPasswordPage = lazy(() => import('@/pages/ResetPasswordPage')); 
@@ -101,6 +103,9 @@ const AppContent = () => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                {/* Public, no-auth certificate verification (N3.4) */}
+                <Route path="/verify" element={<VerifyCertificatePage />} />
+                <Route path="/verify/:code" element={<VerifyCertificatePage />} />
                 <Route path="/university-onboarding" element={<UniversityOnboardingPage />} />
                 <Route path="/onboarding" element={<Navigate to="/university-onboarding" replace />} />
                 <Route path="/forgot-password" element={<PasswordResetPage />} /> 
@@ -143,7 +148,8 @@ const AppContent = () => {
                 <Route path="/dashboard/reports" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><Layout><AdminComplianceReportsPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
                 
                 {/* Student Gamification Pages */}
-                <Route path="/dashboard/certificates" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><Layout><CertificatesPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
+                {/* N3.4: certificates v2 (academy_certifications). Legacy CertificatesPage retired at the retirement pass. */}
+                <Route path="/dashboard/certificates" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><Layout><AcademyCertificatesPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
                 <Route path="/dashboard/achievements" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><Layout><AchievementsPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
                 <Route path="/dashboard/leaderboard" element={<ProtectedRoute><NotificationProvider><ApplicationLayoutProvider><Layout><LeaderboardPage /></Layout></ApplicationLayoutProvider></NotificationProvider></ProtectedRoute>} />
 

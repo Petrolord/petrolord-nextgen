@@ -25,6 +25,7 @@ import EnrollPage from '@/pages/EnrollPage';
 import AdminAcademyDoorsPage from '@/pages/AdminAcademyDoorsPage';
 import GetStartedPage from '@/pages/GetStartedPage';
 import DevicesPage from '@/pages/DevicesPage';
+import AdminCertificationsPage from '@/pages/AdminCertificationsPage';
 import ActivationBanner from '@/components/academy/ActivationBanner';
 import SettingsPage from '@/pages/SettingsPage';
 import AdminApprovalPage from '@/pages/AdminApprovalPage';
@@ -367,6 +368,7 @@ const DashboardPage = () => {
 
     <Route path="admin/approvals" element={<AdminApprovalPage />} />
     <Route path="admin/academy-doors" element={<AdminAcademyDoorsPage />} />
+    <Route path="admin/certifications" element={<AdminCertificationsPage />} />
     <Route path="admin/courses" element={<AdminCoursesPage />} />
     <Route path="admin/audit-logs" element={<AdminAuditLogsPage />} />
     <Route path="admin/monitoring" element={<RealTimeMonitoringPage />} />

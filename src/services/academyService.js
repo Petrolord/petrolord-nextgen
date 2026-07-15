@@ -231,6 +231,87 @@ export async function listMySessions(limit = 25) {
   return data;
 }
 
+// ---- N3.4 certificates v2 ----
+
+// Public, no-auth certificate verification (anon-executable definer fn).
+export async function verifyCertificate(verifyCode) {
+  const { data, error } = await supabase.rpc('academy_verify_certificate', {
+    p_verify_code: verifyCode,
+  });
+  if (error) throw error;
+  return data; // null when not found
+}
+
+export async function listMyCertifications() {
+  const { data, error } = await supabase
+    .from('academy_certifications')
+    .select('*')
+    .order('issued_at', { ascending: false });
+  if (error) throw error;
+  return data;
+}
+
+export function certificateStatus(cert) {
+  if (cert.revoked_at) return 'revoked';
+  if (new Date(cert.valid_until) <= new Date()) return 'expired';
+  return 'valid';
+}
+
+export function verificationUrl(verifyCode) {
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+  return `${origin}/verify/${verifyCode}`;
+}
+
+// admin/instructor issuance
+export async function issueCertification({ userId, appSlug, tier, courseId = null, note = null }) {
+  const { data, error } = await supabase.rpc('academy_issue_certification', {
+    p_user: userId,
+    p_app_slug: appSlug,
+    p_tier: tier,
+    p_course_id: courseId,
+    p_note: note,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function revokeCertification(certId, reason = null) {
+  const { data, error } = await supabase.rpc('academy_revoke_certification', {
+    p_cert_id: certId,
+    p_reason: reason,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function adminListCertifications(limit = 100) {
+  const { data, error } = await supabase
+    .from('academy_certifications')
+    .select('*')
+    .order('issued_at', { ascending: false })
+    .limit(limit);
+  if (error) throw error;
+  const userIds = [...new Set((data || []).map((c) => c.user_id))];
+  if (!userIds.length) return data;
+  const { data: profiles } = await supabase
+    .from('profiles')
+    .select('id, display_name, email')
+    .in('id', userIds);
+  const byId = Object.fromEntries((profiles || []).map((p) => [p.id, p]));
+  return data.map((c) => ({ ...c, holder: byId[c.user_id] || null }));
+}
+
+// look up a learner by email for issuance (admins can read profiles)
+export async function findProfileByEmail(email) {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('id, display_name, email, role')
+    .ilike('email', email.trim())
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
 // admin session-monitoring feed (admins read all via RLS)
 export async function adminListSessions(limit = 100) {
   const { data, error } = await supabase

@@ -15,6 +15,8 @@
 - [Application Modules - Petrolord NextGen Suite](/applicationmodules): Explore the powerful application modules available in the Petrolord NextGen Suite.
 - [Audit Logs - Petrolord](/adminauditlogs): No description available
 - [Audit Logs | Petrolord](/auditlogviewer): No description available
+- [Certificates - Petrolord NextGen Academy](/academycertificates): No description available
+- [Certifications - Admin](/admincertifications): No description available
 - [Compliance & Audit | Petrolord Admin](/admincompliance): No description available
 - [Compliance Reports - Petrolord](/admincompliancereports): No description available
 - [Course Management | Admin Dashboard](/admincourses): No description available
@@ -50,3 +52,4 @@
 - [University Onboarding | Petrolord NextGen](/universityonboarding): Apply for institutional access to the Petrolord NextGen Suite.
 - [Update Password - Petrolord NextGen Suite](/updatepassword): Update your password for your Petrolord NextGen Suite account.
 - [User Management - Petrolord](/adminusers): No description available
+- [Verify certificate - Petrolord NextGen Academy](/verifycertificate): No description available
