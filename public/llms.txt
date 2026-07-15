@@ -1,7 +1,6 @@
 ## Pages
 - [- Petrolord`}](/moduledetail): No description available
 - [| Learning Mode` : 'Learning Mode'}](/coursedetail): No description available
-- [| Petrolord Admin](/coursemanagement): No description available
 - [Academy Doors - Admin](/adminacademydoors): No description available
 - [Add Users | Petrolord Admin](/adduser): No description available
 - [Admin - Audit Dashboard](/adminauditdashboard): Overview of system audit activities.
@@ -19,7 +18,6 @@
 - [Certifications - Admin](/admincertifications): No description available
 - [Compliance & Audit | Petrolord Admin](/admincompliance): No description available
 - [Compliance Reports - Petrolord](/admincompliancereports): No description available
-- [Course Management | Admin Dashboard](/admincourses): No description available
 - [Course Management | Lecturer Portal](/lecturercoursemanagement): No description available
 - [Create account - Petrolord NextGen Academy](/register): Create your Petrolord NextGen Academy account with your personal email.
 - [Devices & Sessions - Petrolord NextGen Academy](/devices): No description available

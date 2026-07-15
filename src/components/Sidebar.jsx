@@ -202,7 +202,6 @@ const Sidebar = () => {
               <SidebarItem to="/dashboard/admin/import-history" icon={History} label="Import History" />
               <SidebarItem to="/dashboard/admin/scheduled-imports" icon={CalendarClock} label="Scheduled Imports" />
               <SidebarItem to="/dashboard/admin/users" icon={Users} label="User Directory" />
-              <SidebarItem to="/dashboard/admin/courses" icon={BookOpen} label="Course Catalog" />
             </SidebarGroup>
 
             <SidebarGroup title="System">
@@ -224,7 +223,6 @@ const Sidebar = () => {
               <SidebarItem to="/dashboard/admin/scheduled-imports" icon={CalendarClock} label="Scheduled Imports" />
               <SidebarItem to="/dashboard/admin/users" icon={Users} label="User Management" />
               <SidebarItem to="/dashboard/admin/admin-mgmt" icon={Shield} label="Admin Roles" />
-              <SidebarItem to="/dashboard/admin/courses" icon={BookOpen} label="Course Manager" />
               <SidebarItem to="/dashboard/admin/super-admins" icon={Shield} label="Super Admins" />
             </SidebarGroup>
 

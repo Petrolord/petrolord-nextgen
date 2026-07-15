@@ -41,7 +41,6 @@ import AdminAuditLogsPage from '@/pages/AdminAuditLogsPage';
 import AdminManagementPage from '@/pages/AdminManagementPage';
 import AdminSystemSettingsPage from '@/pages/AdminSystemSettingsPage';
 import SuperAdminToolPage from '@/pages/SuperAdminToolPage';
-import AdminCoursesPage from '@/pages/AdminCoursesPage';
 import RealTimeMonitoringPage from '@/pages/RealTimeMonitoringPage';
 
 // Phase 3: New University Admin Dashboard
@@ -383,7 +382,6 @@ const DashboardPage = () => {
     <Route path="admin/approvals" element={<AdminApprovalPage />} />
     <Route path="admin/academy-doors" element={<AdminAcademyDoorsPage />} />
     <Route path="admin/certifications" element={<AdminCertificationsPage />} />
-    <Route path="admin/courses" element={<AdminCoursesPage />} />
     <Route path="admin/audit-logs" element={<AdminAuditLogsPage />} />
     <Route path="admin/monitoring" element={<RealTimeMonitoringPage />} />
     <Route path="admin/users" element={<AdminUsersPage />} />

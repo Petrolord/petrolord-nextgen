@@ -13,10 +13,10 @@ const AdminDepartmentMappingPage = () => {
                 <Button 
                     variant="ghost" 
                     className="w-fit pl-0 text-slate-500 hover:text-slate-900 dark:hover:text-slate-200"
-                    onClick={() => navigate('/dashboard/admin/courses')}
+                    onClick={() => navigate('/dashboard')}
                 >
                     <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to Course Management
+                    Back to Dashboard
                 </Button>
                 
                 <div>
