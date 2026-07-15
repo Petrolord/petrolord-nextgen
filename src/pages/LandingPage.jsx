@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, Mail, Menu, X, GraduationCap, Unlock, ShieldAlert, BookOpen, CreditCard, Briefcase, Microscope, Award, BadgeCheck, UserPlus, ClipboardCheck } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Mail, Menu, X, GraduationCap, Unlock, ShieldAlert, BookOpen, CreditCard, Briefcase, Microscope, Award, BadgeCheck, UserPlus, ClipboardCheck, Layers, Database, HardHat, Fuel, DollarSign, Factory, ShieldCheck, HeartPulse, Leaf, CandlestickChart, Ship, BrainCircuit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import Footer from '@/components/Footer';
@@ -42,16 +42,92 @@ const LADDER = [{
   desc: 'Full capability, the highest quotas and all export formats, plus a discounted pathway into the professional Petrolord Suite.'
 }];
 
-const MODULES = [
-  'Geoscience',
-  'Reservoir',
-  'Drilling',
-  'Production',
-  'Economics',
-  'Facilities',
-  'Assurance',
-  'HSE',
-];
+// Module buckets mirror the Suite dashboard tiles plus the four new
+// modules introduced for the commercial and energy-business app wave
+// (2026-07-15 owner direction). `coming` names the flagship app that
+// anchors the bucket; keep in sync as the owner adds courses.
+const MODULES = [{
+  name: 'Geoscience',
+  icon: Layers,
+  color: 'text-emerald-400',
+  bg: 'bg-emerald-500/10',
+  desc: 'Well data, petrophysics, correlation, seismic interpretation, mapping and earth modelling.'
+}, {
+  name: 'Reservoir',
+  icon: Database,
+  color: 'text-blue-400',
+  bg: 'bg-blue-500/10',
+  desc: 'Volumetrics, material balance, decline analysis and waterflood surveillance.'
+}, {
+  name: 'Drilling',
+  icon: HardHat,
+  color: 'text-amber-400',
+  bg: 'bg-amber-500/10',
+  desc: 'Well engineering, cementing and drilling operations.'
+}, {
+  name: 'Production',
+  icon: Fuel,
+  color: 'text-purple-400',
+  bg: 'bg-purple-500/10',
+  desc: 'Production surveillance, allocation and performance optimisation.'
+}, {
+  name: 'Economics',
+  icon: DollarSign,
+  color: 'text-lime-400',
+  bg: 'bg-lime-500/10',
+  desc: 'Project economics, AFE and cost control, fiscal and contract modelling.',
+  coming: 'Fiscal & Contract Economics Modeler'
+}, {
+  name: 'Facilities',
+  icon: Factory,
+  color: 'text-rose-400',
+  bg: 'bg-rose-500/10',
+  desc: 'Surface facilities, flow assurance and pipeline engineering.'
+}, {
+  name: 'Assurance',
+  icon: ShieldCheck,
+  color: 'text-cyan-400',
+  bg: 'bg-cyan-500/10',
+  desc: 'Technical assurance, risk and compliance.'
+}, {
+  name: 'HSE',
+  icon: HeartPulse,
+  color: 'text-red-400',
+  bg: 'bg-red-500/10',
+  desc: 'Health, safety and environment management.'
+}, {
+  name: 'Energy Transition',
+  icon: Leaf,
+  color: 'text-teal-400',
+  bg: 'bg-teal-500/10',
+  desc: 'Carbon accounting, emissions tracking and decarbonisation planning.',
+  coming: 'Carbon & Emissions Studio',
+  isNew: true
+}, {
+  name: 'Commercial & Trading',
+  icon: CandlestickChart,
+  color: 'text-orange-400',
+  bg: 'bg-orange-500/10',
+  desc: 'Energy trading, cargo operations and market analytics.',
+  coming: 'Energy Trading & Cargo Simulator',
+  isNew: true
+}, {
+  name: 'Supply Chain & Logistics',
+  icon: Ship,
+  color: 'text-sky-400',
+  bg: 'bg-sky-500/10',
+  desc: 'Supply chain planning and marine logistics for energy operations.',
+  coming: 'Supply Chain & Marine Logistics Planner',
+  isNew: true
+}, {
+  name: 'Data & AI',
+  icon: BrainCircuit,
+  color: 'text-violet-400',
+  bg: 'bg-violet-500/10',
+  desc: 'Oilfield data management and applied AI workflows.',
+  coming: 'Oilfield Data & AI Studio',
+  isNew: true
+}];
 
 const LandingPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -320,13 +396,36 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Modules</h2>
-            <p className="text-slate-400 text-lg">Courses span the full breadth of the platform, with every course built around a real app.</p>
+            <p className="text-slate-400 text-lg">Courses span the full breadth of the platform, from subsurface engineering to the business of energy, with every course built around a real app.</p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-            {MODULES.map((module, idx) => <div key={idx} className="p-6 rounded-2xl bg-[#1E293B]/40 border border-slate-800 hover:border-[#BFFF00]/30 transition-colors text-center">
-                <h3 className="text-xl font-bold text-white">{module}</h3>
-              </div>)}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {MODULES.map((module, idx) => <motion.div key={idx} initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            delay: (idx % 4) * 0.08,
+            duration: 0.4
+          }} className={`relative p-6 rounded-2xl border transition-all group ${module.isNew ? 'bg-[#1E293B]/70 border-[#BFFF00]/25 hover:border-[#BFFF00]/50' : 'bg-[#1E293B]/40 border-slate-800 hover:border-slate-600'}`}>
+                {module.isNew && (
+                  <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#BFFF00]/15 text-[#BFFF00]">New</span>
+                )}
+                <div className={`w-12 h-12 rounded-xl ${module.bg} flex items-center justify-center mb-5 ${module.color} group-hover:scale-110 transition-transform duration-300`}>
+                  <module.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">{module.name}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">{module.desc}</p>
+                {module.coming && (
+                  <p className="mt-4 pt-3 border-t border-slate-700/60 text-xs text-slate-500">
+                    Coming soon: <span className="text-slate-300 font-medium">{module.coming}</span>
+                  </p>
+                )}
+              </motion.div>)}
           </div>
         </div>
       </section>
