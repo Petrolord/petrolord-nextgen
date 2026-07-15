@@ -13,11 +13,11 @@ import Footer from '@/components/Footer';
 const DOORS = [{
   icon: CreditCard,
   title: 'Self-Enrolled',
-  desc: 'Register with your personal email, pick a course and tier, and pay the published fee securely online. Start learning the same day.'
+  desc: 'Register with your personal email, pick a course and tier, and pay the course fee securely online. Start learning the same day.'
 }, {
   icon: GraduationCap,
   title: 'Campus Scholar',
-  desc: 'Your university liaison gives you a cohort code that applies a scholarship to the published fee, so you pay only a small personal registration fee.'
+  desc: 'Your university liaison gives you a cohort code that applies a scholarship to the course fee, so you pay only a small personal registration fee.'
 }, {
   icon: Microscope,
   title: 'Residency',
@@ -42,25 +42,16 @@ const LADDER = [{
   desc: 'Full capability, the highest quotas and all export formats, plus a discounted pathway into the professional Petrolord Suite.'
 }];
 
-const COURSES = [{
-  name: 'Well Data Manager',
-  status: 'Coming soon'
-}, {
-  name: 'Petrophysics',
-  status: 'Available now'
-}, {
-  name: 'Well Correlation',
-  status: 'Coming soon'
-}, {
-  name: 'Seismolord',
-  status: 'Coming soon'
-}, {
-  name: 'Mapping',
-  status: 'Coming soon'
-}, {
-  name: 'ReservoirCalc Pro',
-  status: 'Coming soon'
-}];
+const MODULES = [
+  'Geoscience',
+  'Reservoir',
+  'Drilling',
+  'Production',
+  'Economics',
+  'Facilities',
+  'Assurance',
+  'HSE',
+];
 
 const LandingPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -96,7 +87,7 @@ const LandingPage = () => {
             <div className="hidden md:flex items-center space-x-8">
               <a href="#about" className="text-sm font-medium text-slate-300 hover:text-[#BFFF00] transition-colors">About</a>
               <a href="#doors" className="text-sm font-medium text-slate-300 hover:text-[#BFFF00] transition-colors">How to Join</a>
-              <a href="#courses" className="text-sm font-medium text-slate-300 hover:text-[#BFFF00] transition-colors">Courses</a>
+              <a href="#modules" className="text-sm font-medium text-slate-300 hover:text-[#BFFF00] transition-colors">Modules</a>
               <a href="#pricing" className="text-sm font-medium text-slate-300 hover:text-[#BFFF00] transition-colors">Pricing</a>
               <Link to="/verify" className="text-sm font-medium text-slate-300 hover:text-[#BFFF00] transition-colors">Verify a Certificate</Link>
             </div>
@@ -125,7 +116,7 @@ const LandingPage = () => {
           <div className="md:hidden bg-[#1E293B] border-b border-slate-800 py-4 px-4 space-y-4 shadow-xl">
             <a href="#about" onClick={toggleMobileMenu} className="block text-base font-medium text-slate-300 hover:text-[#BFFF00]">About</a>
             <a href="#doors" onClick={toggleMobileMenu} className="block text-base font-medium text-slate-300 hover:text-[#BFFF00]">How to Join</a>
-            <a href="#courses" onClick={toggleMobileMenu} className="block text-base font-medium text-slate-300 hover:text-[#BFFF00]">Courses</a>
+            <a href="#modules" onClick={toggleMobileMenu} className="block text-base font-medium text-slate-300 hover:text-[#BFFF00]">Modules</a>
             <a href="#pricing" onClick={toggleMobileMenu} className="block text-base font-medium text-slate-300 hover:text-[#BFFF00]">Pricing</a>
             <Link to="/verify" onClick={toggleMobileMenu} className="block text-base font-medium text-slate-300 hover:text-[#BFFF00]">Verify a Certificate</Link>
             <div className="pt-4 border-t border-slate-700 flex flex-col gap-3">
@@ -324,30 +315,19 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Courses */}
-      <section id="courses" className="py-24">
+      {/* Modules */}
+      <section id="modules" className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">The Geoscience Learning Path</h2>
-            <p className="text-slate-400 text-lg">Every course is built around a real app. The geoscience path follows the daily loop of a working subsurface team, in the order the work actually happens.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Modules</h2>
+            <p className="text-slate-400 text-lg">Courses span the full breadth of the platform, with every course built around a real app.</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {COURSES.map((course, idx) => <div key={idx} className={`p-6 rounded-2xl border transition-colors ${course.status === 'Available now' ? 'bg-[#1E293B] border-[#BFFF00]/40' : 'bg-[#1E293B]/40 border-slate-800'}`}>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-bold text-slate-500">{String(idx + 1).padStart(2, '0')}</span>
-                  <span className={`text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full ${course.status === 'Available now' ? 'bg-[#BFFF00]/10 text-[#BFFF00]' : 'bg-slate-800 text-slate-500'}`}>
-                    {course.status}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-white">{course.name}</h3>
-                <p className="text-slate-500 text-sm mt-2">Beginner · Intermediate · Advanced</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+            {MODULES.map((module, idx) => <div key={idx} className="p-6 rounded-2xl bg-[#1E293B]/40 border border-slate-800 hover:border-[#BFFF00]/30 transition-colors text-center">
+                <h3 className="text-xl font-bold text-white">{module}</h3>
               </div>)}
           </div>
-
-          <p className="text-center text-slate-400 mt-10 text-sm">
-            Petrophysics is live today with lessons, guided exercises, a quiz and an auto-graded capstone. The rest of the path is rolling out course by course.
-          </p>
         </div>
       </section>
 
@@ -355,8 +335,8 @@ const LandingPage = () => {
       <section id="pricing" className="py-20 bg-[#0B1221] border-y border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Published Fees</h2>
-            <p className="text-slate-400 text-lg">One fee per course tier, published upfront. Campus scholars enter on a scholarship via their university's cohort code and pay only a small personal registration fee.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Fees</h2>
+            <p className="text-slate-400 text-lg">One fee per course tier. Campus scholars enter on a scholarship via their university's cohort code and pay only a small personal registration fee.</p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
