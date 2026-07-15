@@ -17,7 +17,7 @@ const DOORS = [{
 }, {
   icon: GraduationCap,
   title: 'Campus Scholar',
-  desc: 'Your university liaison gives you a cohort code that applies a scholarship at the published fee — you pay only a modest personal registration fee.'
+  desc: 'Your university liaison gives you a cohort code that applies a scholarship to the published fee, so you pay only a small personal registration fee.'
 }, {
   icon: Microscope,
   title: 'Residency',
@@ -25,7 +25,7 @@ const DOORS = [{
 }, {
   icon: Briefcase,
   title: 'Employer-Sponsored',
-  desc: 'Redeem a sponsorship code from your employer. The course is billed to your sponsor; the account, courses and certificate are yours.'
+  desc: 'Redeem a sponsorship code from your employer. Your sponsor covers the course fee, while the account, courses and certificate remain yours.'
 }];
 
 const LADDER = [{
@@ -39,7 +39,7 @@ const LADDER = [{
 }, {
   tier: 'Advanced',
   cert: 'Expert',
-  desc: 'Full capability, highest quotas, full export formats — and a discounted pathway into professional Petrolord Suite use.'
+  desc: 'Full capability, the highest quotas and all export formats, plus a discounted pathway into the professional Petrolord Suite.'
 }];
 
 const COURSES = [{
@@ -150,7 +150,7 @@ const LandingPage = () => {
           <motion.div initial="hidden" animate="visible" variants={fadeIn} className="max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 mb-8 backdrop-blur-md shadow-lg">
               <span className="flex h-2.5 w-2.5 rounded-full bg-[#BFFF00] animate-pulse"></span>
-              <span className="text-xs font-semibold text-[#BFFF00] uppercase tracking-wider">The Petrolord Academy — Enrollment Open</span>
+              <span className="text-xs font-semibold text-[#BFFF00] uppercase tracking-wider">Petrolord Academy: Enrollment Now Open</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
@@ -159,7 +159,7 @@ const LandingPage = () => {
             </h1>
 
             <p className="mt-8 max-w-2xl mx-auto text-lg md:text-xl text-slate-300 leading-relaxed">
-              <strong>Petrolord NextGen</strong> is the academy edition of the Petrolord Suite. Train hands-on inside the actual engineering apps, complete auto-graded practicals, and climb the Associate → Professional → Expert certification ladder.
+              <strong>Petrolord NextGen</strong> is the academy edition of the Petrolord Suite. Train hands-on inside the actual engineering apps, complete auto-graded practicals, and climb the certification ladder from Associate to Professional to Expert.
             </p>
 
             <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5">
@@ -199,13 +199,13 @@ const LandingPage = () => {
               </h2>
               <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
                 <p>
-                  Petrolord NextGen is the academy of the Petrolord Suite. One app equals one course: you learn Petrophysics inside the actual Petrophysics app, running the same calculation engines used in professional work — not a slideshow about them.
+                  Petrolord NextGen is the academy of the Petrolord Suite. Each course is built around a real app: you learn Petrophysics inside the actual Petrophysics app, running the same calculation engines that professionals use in their daily work.
                 </p>
                 <p>
-                  Every course pairs lessons and guided exercises on bundled teaching datasets with a quiz and a practical capstone that is auto-graded against known-truth answers. When you certify, your access is upgraded automatically — from Learning Mode through to full professional capability.
+                  Every course pairs lessons and guided exercises on bundled teaching datasets with a quiz and a practical capstone that is auto-graded against verified reference answers. When you certify, your access upgrades automatically, from Learning Mode all the way to full professional capability.
                 </p>
                 <ul className="grid grid-cols-1 gap-3 mt-6">
-                  {['The real Petrolord apps and engines — not simulations', 'Auto-graded capstones with machine-checked answers', 'Certificates anyone can verify online, valid 12 months', 'Cloud-based — zero installation required'].map((item, i) => <li key={i} className="flex items-center gap-3">
+                  {['Hands-on learning in the real Petrolord apps and engines', 'Auto-graded capstones with machine-checked answers', 'Certificates anyone can verify online, valid for 12 months', 'Fully cloud-based, with nothing to install'].map((item, i) => <li key={i} className="flex items-center gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#BFFF00] shrink-0" />
                       <span className="text-slate-200">{item}</span>
                     </li>)}
@@ -237,7 +237,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">One Identity, Four Doors</h2>
-            <p className="text-slate-400 text-lg">Every learner registers with a personal email — an account that outlives graduation. Four ways in; the only difference is who pays.</p>
+            <p className="text-slate-400 text-lg">Every learner registers with a personal email, so your account stays with you long after graduation. There are four ways in, and the only difference between them is who pays.</p>
           </div>
 
           <div className="grid md:grid-cols-4 gap-8">
@@ -265,7 +265,7 @@ const LandingPage = () => {
           </div>
 
           <p className="text-center text-slate-300 mt-12 text-lg">
-            Same account, same courses, same certificates — <span className="text-[#BFFF00] font-semibold">only the payer differs.</span>
+            Same account, same courses, same certificates. <span className="text-[#BFFF00] font-semibold">The only difference is who pays.</span>
           </p>
         </div>
       </section>
@@ -275,7 +275,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">The Certification Ladder</h2>
-            <p className="text-slate-400 text-lg">Each course has three tiers. Passing a tier's quiz and capstone earns the matching certification — and automatically unlocks more of the app.</p>
+            <p className="text-slate-400 text-lg">Each course has three tiers. Passing a tier's quiz and capstone earns you the matching certification and automatically unlocks more of the app.</p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8 mb-16">
@@ -308,11 +308,11 @@ const LandingPage = () => {
           }, {
             icon: ClipboardCheck,
             title: 'Prove It',
-            desc: 'Pass the quiz and the practical capstone, auto-graded against known-truth answers within stated tolerance.'
+            desc: 'Pass the quiz and the practical capstone, which is auto-graded against verified reference answers within a stated tolerance.'
           }, {
             icon: Unlock,
             title: 'Certify & Unlock',
-            desc: 'Your certificate is issued with a verifiable ID, valid 12 months and renewable — and your app access is upgraded automatically.'
+            desc: 'Your certificate is issued with a verifiable ID, valid for 12 months and renewable, and your app access upgrades automatically.'
           }].map((step, idx) => <div key={idx} className="p-6 rounded-2xl bg-slate-800/30 border border-slate-700/50">
                 <div className="w-12 h-12 rounded-xl bg-slate-800/80 flex items-center justify-center mb-4 text-[#BFFF00]">
                   <step.icon className="w-6 h-6" />
@@ -329,7 +329,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">The Geoscience Learning Path</h2>
-            <p className="text-slate-400 text-lg">The catalog is the app catalog. The geoscience path follows the daily loop a working subsurface team runs — in order.</p>
+            <p className="text-slate-400 text-lg">Every course is built around a real app. The geoscience path follows the daily loop of a working subsurface team, in the order the work actually happens.</p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -445,7 +445,7 @@ const LandingPage = () => {
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Certificates Anyone Can Verify</h2>
           <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
-            Every certificate carries a unique verification code. Employers and universities can confirm a credential in seconds — no account needed. Certifications are valid for 12 months and renewable by re-certification.
+            Every certificate carries a unique verification code, so employers and universities can confirm a credential in seconds without creating an account. Certifications are valid for 12 months and renewable through re-certification.
           </p>
           <Link to="/verify">
             <Button variant="outline" className="border-slate-600 text-slate-200 hover:bg-slate-800 hover:text-white">
@@ -484,7 +484,7 @@ const LandingPage = () => {
             </Button>
           </Link>
           <p className="mt-8 text-slate-400">
-            Representing a university? Partner with us on Campus cohort scholarships —{' '}
+            Representing a university? Partner with us on Campus cohort scholarships at{' '}
             <a href="mailto:info@petrolord.com" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
               <Mail className="w-4 h-4" /> info@petrolord.com
             </a>
