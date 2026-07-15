@@ -31,7 +31,8 @@ import {
   Trophy,
   Medal,
   KeyRound,
-  MonitorSmartphone
+  MonitorSmartphone,
+  FlaskConical
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useRole } from '@/contexts/RoleContext';
@@ -129,6 +130,7 @@ const Sidebar = () => {
           <>
             <SidebarGroup title="My Learning">
               <SidebarItem to="/dashboard/enroll" icon={GraduationCap} label="Enroll" />
+              <SidebarItem to="/dashboard/apps/petrophysics" icon={FlaskConical} label="Petrophysics" />
               <SidebarItem to="/dashboard/my-learning" icon={BookOpen} label="My Courses" />
               <SidebarItem to="/dashboard/certificates" icon={Award} label="Certificates" />
               <SidebarItem to="/dashboard/achievements" icon={Medal} label="Achievements" />

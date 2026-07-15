@@ -231,6 +231,48 @@ export async function listMySessions(limit = 25) {
   return data;
 }
 
+// ---- N4 Learning Mode + capstone ----
+
+// Effective scope + quota on an app (RLS-real; gates Learning Mode).
+export async function hasScope(appSlug, minScope = 'learning') {
+  const { data, error } = await supabase.rpc('academy_has_scope', {
+    p_app: appSlug,
+    p_min: minScope,
+  });
+  if (error) throw error;
+  return !!data;
+}
+
+export async function getQuota(appSlug) {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return null;
+  const { data, error } = await supabase.rpc('academy_quota', {
+    p_user: user.id,
+    p_app: appSlug,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function getCapstone(appSlug, tier) {
+  const { data, error } = await supabase.rpc('academy_get_capstone', {
+    p_app: appSlug,
+    p_tier: tier,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function submitCapstone(appSlug, tier, answers) {
+  const { data, error } = await supabase.rpc('academy_submit_capstone', {
+    p_app: appSlug,
+    p_tier: tier,
+    p_answers: answers,
+  });
+  if (error) throw error;
+  return data;
+}
+
 // ---- N3.4 certificates v2 ----
 
 // Public, no-auth certificate verification (anon-executable definer fn).

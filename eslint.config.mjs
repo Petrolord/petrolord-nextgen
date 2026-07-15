@@ -4,7 +4,7 @@ import importPlugin from 'eslint-plugin-import';
 import globals from 'globals';
 
 export default [
-	{ ignores: ['node_modules/**', 'dist/**', 'build/**', 'vite.config.js'] },
+	{ ignores: ['node_modules/**', 'dist/**', 'build/**', 'vite.config.js', 'packages/engines/**'] },
 	{
 		files: ['**/*.js', '**/*.jsx'],
 		plugins: { react, 'react-hooks': reactHooks, import: importPlugin },
@@ -18,7 +18,10 @@ export default [
 			react: { version: 'detect' },
 			'import/resolver': {
 				node: { extensions: ['.js', '.jsx'] },
-				alias: { map: [['@', './src']], extensions: ['.js', '.jsx'] },
+				alias: {
+					map: [['@', './src'], ['@petrolord/engines', './packages/engines']],
+					extensions: ['.js', '.jsx', '.json'],
+				},
 			},
 		},
 		rules: {
