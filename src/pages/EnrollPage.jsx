@@ -67,6 +67,15 @@ function CourseTierPicker({ apps, tier, setTier, appSlug, setAppSlug, fees, feeK
           One app = one course. The geoscience learning path follows the daily loop:
           Well Data Manager → Petrophysics → Correlation → Seismolord → Mapping → ReservoirCalc.
         </p>
+        {(() => {
+          const sel = apps.find((a) => a.slug === appSlug);
+          const prereq = sel?.prereq_slug && apps.find((a) => a.slug === sel.prereq_slug);
+          return prereq ? (
+            <p className="mt-1 text-xs text-amber-400">
+              Prerequisite: an active {prereq.name} certification is required before enrolling in this course.
+            </p>
+          ) : null;
+        })()}
       </div>
       <div>
         <Label className="text-gray-300 mb-1 block">Tier</Label>
