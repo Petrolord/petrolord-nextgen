@@ -20,6 +20,7 @@ import ReservoirCalcLearningPage from '@/pages/apps/ReservoirCalcLearningPage';
 import RockPhysicsLearningPage from '@/pages/apps/RockPhysicsLearningPage';
 import PorePressureLearningPage from '@/pages/apps/PorePressureLearningPage';
 import EarthModelLearningPage from '@/pages/apps/EarthModelLearningPage';
+import BasinLearningPage from '@/pages/apps/BasinLearningPage';
 import ActivationBanner from '@/components/academy/ActivationBanner';
 import SettingsPage from '@/pages/SettingsPage';
 import AdminUsersPage from '@/pages/AdminUsersPage';
@@ -284,6 +285,7 @@ const DashboardPage = () => {
     <Route path="apps/rockphysics" element={<RockPhysicsLearningPage />} />
     <Route path="apps/porepressure" element={<PorePressureLearningPage />} />
     <Route path="apps/earthmodel" element={<EarthModelLearningPage />} />
+    <Route path="apps/basin" element={<BasinLearningPage />} />
 
     {/* --- SETTINGS --- */}
     <Route path="settings" element={<SettingsPage />} />
