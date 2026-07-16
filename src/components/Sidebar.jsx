@@ -20,7 +20,8 @@ import {
   Calculator,
   BookOpen,
   SlidersHorizontal,
-  Atom
+  Atom,
+  Gauge
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useRole } from '@/contexts/RoleContext';
@@ -38,6 +39,7 @@ const COURSE_ICONS = {
   mapping: Map,
   reservoircalc: Calculator,
   rockphysics: Atom,
+  porepressure: Gauge,
 };
 
 const SidebarItem = ({ to, icon: Icon, label, exact = false }) => {
