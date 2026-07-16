@@ -19,7 +19,8 @@ import {
   Map,
   Calculator,
   BookOpen,
-  SlidersHorizontal
+  SlidersHorizontal,
+  Atom
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useRole } from '@/contexts/RoleContext';
@@ -36,6 +37,7 @@ const COURSE_ICONS = {
   seismolord: Waves,
   mapping: Map,
   reservoircalc: Calculator,
+  rockphysics: Atom,
 };
 
 const SidebarItem = ({ to, icon: Icon, label, exact = false }) => {
