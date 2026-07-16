@@ -22,7 +22,8 @@ import {
   SlidersHorizontal,
   Atom,
   Gauge,
-  Layers
+  Layers,
+  Flame
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useRole } from '@/contexts/RoleContext';
@@ -42,6 +43,7 @@ const COURSE_ICONS = {
   rockphysics: Atom,
   porepressure: Gauge,
   earthmodel: Layers,
+  basin: Flame,
 };
 
 const SidebarItem = ({ to, icon: Icon, label, exact = false }) => {
