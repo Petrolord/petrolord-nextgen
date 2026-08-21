@@ -8,10 +8,10 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
 import { useRole } from '@/contexts/RoleContext';
-import { Loader2, KeyRound, Microscope, Plus, Check, X, Shield } from 'lucide-react';
+import { Loader2, KeyRound, Microscope, Plus, Check, X, Shield, Eye } from 'lucide-react';
 import {
   adminListCodes, adminIssueCode, adminListResidencyApplications,
-  adminDecideResidency, adminListSessions,
+  adminDecideResidency, adminListSessions, grantReviewAccess, revokeReviewAccess,
 } from '@/services/academyService';
 
 const SESSION_EVENT = {
@@ -39,8 +39,42 @@ const AdminAcademyDoorsPage = () => {
   const [issuer, setIssuer] = useState('');
   const [maxRedemptions, setMaxRedemptions] = useState('');
   const [validUntil, setValidUntil] = useState('');
+  const [reviewResult, setReviewResult] = useState(null);
+  const [reviewBusy, setReviewBusy] = useState(false);
 
   const isAdminView = isViewAsSuperAdmin || isViewAsAdmin;
+
+  const onGrantReview = async () => {
+    setReviewBusy(true);
+    try {
+      const res = await grantReviewAccess(90);
+      setReviewResult(res);
+      toast({
+        title: 'Review access refreshed',
+        description: `${res.apps_covered} courses covered, ${res.enrollments_created} new reviewer enrollments.`,
+      });
+    } catch (err) {
+      toast({ title: 'Grant failed', description: err.message, variant: 'destructive' });
+    } finally {
+      setReviewBusy(false);
+    }
+  };
+
+  const onRevokeReview = async () => {
+    setReviewBusy(true);
+    try {
+      const res = await revokeReviewAccess();
+      setReviewResult(null);
+      toast({
+        title: 'Review access revoked',
+        description: `${res.entitlements_expired} entitlements expired, ${res.enrollments_cancelled} reviewer enrollments cancelled.`,
+      });
+    } catch (err) {
+      toast({ title: 'Revoke failed', description: err.message, variant: 'destructive' });
+    } finally {
+      setReviewBusy(false);
+    }
+  };
 
   const refresh = async () => {
     try {
@@ -144,7 +178,58 @@ const AdminAcademyDoorsPage = () => {
             <TabsTrigger value="codes"><KeyRound className="h-4 w-4 mr-2" />Entry codes</TabsTrigger>
             <TabsTrigger value="residency"><Microscope className="h-4 w-4 mr-2" />Residency queue</TabsTrigger>
             <TabsTrigger value="sessions"><Shield className="h-4 w-4 mr-2" />Session monitoring</TabsTrigger>
+            {isViewAsSuperAdmin && (
+              <TabsTrigger value="review"><Eye className="h-4 w-4 mr-2" />Review access</TabsTrigger>
+            )}
           </TabsList>
+
+          {isViewAsSuperAdmin && (
+            <TabsContent value="review">
+              <Card className="bg-[#1E293B] border-gray-700">
+                <CardHeader>
+                  <CardTitle className="text-white">Reviewer door</CardTitle>
+                  <CardDescription>
+                    Grant yourself time-boxed (90 day) full-scope review access to every
+                    available course, plus reviewer enrollments so capstone grading can be
+                    exercised. The prerequisite and tier-progression rules stay in force:
+                    tiers you have not earned are skipped and listed below. Re-run after
+                    new courses ship, or after passing a capstone unlocks the next tier.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex flex-wrap gap-3">
+                    <Button onClick={onGrantReview} disabled={reviewBusy}
+                      className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#a8e600] font-semibold">
+                      {reviewBusy ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Eye className="h-4 w-4 mr-2" />}
+                      Grant / refresh my review access
+                    </Button>
+                    <Button variant="outline" onClick={onRevokeReview} disabled={reviewBusy}
+                      className="border-gray-600 text-gray-200">
+                      Revoke my review access
+                    </Button>
+                  </div>
+                  {reviewResult && (
+                    <div className="text-sm text-gray-300 space-y-2">
+                      <p>
+                        {reviewResult.apps_covered} courses covered at full scope for {reviewResult.valid_days} days;{' '}
+                        {reviewResult.enrollments_created} new reviewer enrollment{reviewResult.enrollments_created === 1 ? '' : 's'}.
+                      </p>
+                      {(reviewResult.skipped || []).length > 0 && (
+                        <div>
+                          <p className="text-gray-400">Tiers awaiting ladder progression:</p>
+                          <ul className="mt-1 space-y-0.5 text-xs text-gray-400 font-mono">
+                            {reviewResult.skipped.map((s, i) => (
+                              <li key={i}>{s.app} / {s.tier}: {s.reason}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </TabsContent>
+          )}
 
           <TabsContent value="codes" className="space-y-6">
             <Card className="bg-[#1E293B] border-gray-700">

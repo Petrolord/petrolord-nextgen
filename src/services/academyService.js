@@ -121,6 +121,23 @@ export async function verifyPayment(reference) {
 
 // ---- admin (Petrolord admin / super_admin only; RLS + fn checks) ----
 
+// Reviewer door (super_admin only): time-boxed full-scope review
+// entitlements on every available course + ladder-honest reviewer
+// enrollments. Re-run to refresh after new courses ship.
+export async function grantReviewAccess(days = 90) {
+  const { data, error } = await supabase.rpc('academy_grant_review_access', {
+    p_days: days,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function revokeReviewAccess() {
+  const { data, error } = await supabase.rpc('academy_revoke_review_access');
+  if (error) throw error;
+  return data;
+}
+
 export async function adminListCodes() {
   const { data, error } = await supabase
     .from('academy_codes')
