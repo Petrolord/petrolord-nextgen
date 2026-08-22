@@ -1,0 +1,75 @@
+{
+  "app_slug": "petrophysics",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-logs-and-the-typewell",
+      "title": "Well Logs and the Typewell",
+      "order": 1,
+      "lessons": [
+        { "key": "l01-what-well-logs-measure", "title": "What well logs measure", "order": 1, "est_minutes": 12 },
+        { "key": "l02-the-borehole-environment", "title": "The borehole environment", "order": 2, "est_minutes": 12 },
+        { "key": "l03-depth-units-and-sampling", "title": "Depth, units and sampling", "order": 3, "est_minutes": 10 },
+        { "key": "l04-meet-the-typewell", "title": "Meet the typewell", "order": 4, "est_minutes": 14 }
+      ]
+    },
+    {
+      "key": "m02-shale-volume",
+      "title": "Shale Volume from Gamma Ray",
+      "order": 2,
+      "lessons": [
+        { "key": "l01-gamma-ray-basics", "title": "Gamma ray basics", "order": 1, "est_minutes": 12 },
+        { "key": "l02-igr-normalisation", "title": "Normalising to IGR", "order": 2, "est_minutes": 14 },
+        { "key": "l03-vsh-transforms", "title": "Vsh transforms", "order": 3, "est_minutes": 16 },
+        { "key": "l04-vsh-on-the-typewell", "title": "Vsh on the typewell", "order": 4, "est_minutes": 14 }
+      ]
+    },
+    {
+      "key": "m03-porosity",
+      "title": "Porosity from Logs",
+      "order": 3,
+      "lessons": [
+        { "key": "l01-porosity-concepts", "title": "Porosity concepts", "order": 1, "est_minutes": 12 },
+        { "key": "l02-the-density-log", "title": "The density log", "order": 2, "est_minutes": 16 },
+        { "key": "l03-neutron-and-sonic-porosity", "title": "Neutron and sonic porosity", "order": 3, "est_minutes": 14 },
+        { "key": "l04-choosing-matrix-and-fluid", "title": "Choosing matrix and fluid values", "order": 4, "est_minutes": 14 },
+        { "key": "l05-porosity-on-the-typewell", "title": "Porosity on the typewell", "order": 5, "est_minutes": 14 }
+      ]
+    },
+    {
+      "key": "m04-resistivity-and-saturation",
+      "title": "Resistivity and Water Saturation",
+      "order": 4,
+      "lessons": [
+        { "key": "l01-why-resistivity", "title": "Why resistivity", "order": 1, "est_minutes": 12 },
+        { "key": "l02-formation-water-resistivity", "title": "Formation water resistivity", "order": 2, "est_minutes": 14 },
+        { "key": "l03-the-archie-equation", "title": "The Archie equation", "order": 3, "est_minutes": 18 },
+        { "key": "l04-limits-of-archie", "title": "The limits of Archie", "order": 4, "est_minutes": 12 },
+        { "key": "l05-saturation-on-the-typewell", "title": "Saturation on the typewell", "order": 5, "est_minutes": 14 }
+      ]
+    },
+    {
+      "key": "m05-cutoffs-and-net-pay",
+      "title": "Cutoffs and Net Pay",
+      "order": 5,
+      "lessons": [
+        { "key": "l01-why-cutoffs", "title": "Why cutoffs", "order": 1, "est_minutes": 10 },
+        { "key": "l02-choosing-cutoff-values", "title": "Choosing cutoff values", "order": 2, "est_minutes": 14 },
+        { "key": "l03-zone-summaries", "title": "Zone summaries", "order": 3, "est_minutes": 16 },
+        { "key": "l04-net-pay-on-the-typewell", "title": "Net pay on the typewell", "order": 4, "est_minutes": 16 }
+      ]
+    },
+    {
+      "key": "m06-the-interpretation-loop",
+      "title": "The Interpretation Loop",
+      "order": 6,
+      "lessons": [
+        { "key": "l01-the-workflow-end-to-end", "title": "The workflow end to end", "order": 1, "est_minutes": 14 },
+        { "key": "l02-quality-control", "title": "Quality control", "order": 2, "est_minutes": 14 },
+        { "key": "l03-uncertainty-and-sensitivity", "title": "Uncertainty and sensitivity", "order": 3, "est_minutes": 16 },
+        { "key": "l04-reporting-and-the-capstone", "title": "Reporting and the capstone", "order": 4, "est_minutes": 12 }
+      ]
+    }
+  ]
+}
