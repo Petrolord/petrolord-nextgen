@@ -8,16 +8,7 @@ import {
   Loader2, ShieldCheck, ShieldX, ShieldAlert, Search, GraduationCap,
 } from 'lucide-react';
 import { verifyCertificate } from '@/services/academyService';
-
-const APP_NAMES = {
-  welldata: 'Well Data Manager',
-  petrophysics: 'Petrophysics',
-  wellcorrelation: 'Well Correlation',
-  seismolord: 'Seismolord',
-  mapping: 'Mapping',
-  reservoircalc: 'ReservoirCalc Pro',
-};
-const TIER_LABEL = { associate: 'Associate', professional: 'Professional', expert: 'Expert' };
+import { APP_NAMES, CERT_TIER_LABELS as TIER_LABEL } from '@/lib/appNames';
 
 const STATUS = {
   valid: { icon: ShieldCheck, color: 'text-[#BFFF00]', border: 'border-[#BFFF00]', label: 'Valid certificate' },
