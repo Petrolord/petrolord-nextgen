@@ -21,6 +21,12 @@ import RockPhysicsLearningPage from '@/pages/apps/RockPhysicsLearningPage';
 import PorePressureLearningPage from '@/pages/apps/PorePressureLearningPage';
 import EarthModelLearningPage from '@/pages/apps/EarthModelLearningPage';
 import BasinLearningPage from '@/pages/apps/BasinLearningPage';
+import CourseHomePage from '@/pages/course/CourseHomePage';
+import ModulePage from '@/pages/course/ModulePage';
+import LessonPage from '@/pages/course/LessonPage';
+import ModuleQuizPage from '@/pages/course/ModuleQuizPage';
+import FinalExamPage from '@/pages/course/FinalExamPage';
+import CapstoneRedirect from '@/pages/course/CapstoneRedirect';
 import ActivationBanner from '@/components/academy/ActivationBanner';
 import SettingsPage from '@/pages/SettingsPage';
 import AdminUsersPage from '@/pages/AdminUsersPage';
@@ -286,6 +292,16 @@ const DashboardPage = () => {
     <Route path="apps/porepressure" element={<PorePressureLearningPage />} />
     <Route path="apps/earthmodel" element={<EarthModelLearningPage />} />
     <Route path="apps/basin" element={<BasinLearningPage />} />
+
+    {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.
+           Static segments (quiz/exam/capstone) rank above the :moduleKey
+           params, so the order here is cosmetic. --- */}
+    <Route path="apps/:appSlug/course/:tier" element={<CourseHomePage />} />
+    <Route path="apps/:appSlug/course/:tier/exam" element={<FinalExamPage />} />
+    <Route path="apps/:appSlug/course/:tier/capstone" element={<CapstoneRedirect />} />
+    <Route path="apps/:appSlug/course/:tier/quiz/:moduleKey" element={<ModuleQuizPage />} />
+    <Route path="apps/:appSlug/course/:tier/:moduleKey" element={<ModulePage />} />
+    <Route path="apps/:appSlug/course/:tier/:moduleKey/:lessonKey" element={<LessonPage />} />
 
     {/* --- SETTINGS --- */}
     <Route path="settings" element={<SettingsPage />} />

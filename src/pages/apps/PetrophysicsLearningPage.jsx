@@ -21,6 +21,7 @@ import {
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
+import DeepCourseBanner from '@/components/course/DeepCourseBanner';
 
 const APP = 'petrophysics';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -197,6 +198,8 @@ const PetrophysicsLearningPage = () => {
               </p>
             </div>
           </div>
+
+          <DeepCourseBanner app={APP} tier={tier} />
 
           {/* Lessons */}
           <Card className="bg-[#1E293B] border-gray-700">
