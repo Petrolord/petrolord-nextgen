@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import {
-  Loader2, BookOpen, Printer, Lock, FileQuestion, GraduationCap,
+  Loader2, BookOpen, Printer, Download, Lock, FileQuestion, GraduationCap,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -104,6 +104,55 @@ const AdminCourseHandbookPage = () => {
     );
   }
 
+  const ready = Boolean(manifest && bodies && banks);
+
+  // Standalone HTML export of the rendered handbook (element-level
+  // styles embedded, KaTeX styling from its CDN copy of the same
+  // version the app bundles). Print to PDF remains the polished path;
+  // this gives staff a file they can archive or share.
+  const downloadHandbook = () => {
+    const el = document.getElementById('handbook-doc');
+    if (!el || !ready) return;
+    const title = `${appName(manifest.app_slug)} ${TIER_LABELS[manifest.tier] || manifest.tier} handbook`;
+    const html = [
+      '<!doctype html><html lang="en"><head><meta charset="utf-8">',
+      `<title>${title}</title>`,
+      '<meta name="viewport" content="width=device-width, initial-scale=1">',
+      '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css">',
+      '<style>',
+      'body{font-family:Georgia,\'Times New Roman\',serif;color:#0f172a;background:#fff;',
+      'max-width:820px;margin:0 auto;padding:32px 24px;line-height:1.65;}',
+      'h1,h2,h3,h4{font-family:Helvetica,Arial,sans-serif;line-height:1.25;margin:1.6em 0 .5em;}',
+      'h2{border-bottom:2px solid #0f172a;padding-bottom:.3em;}',
+      'h3{border-bottom:1px solid #cbd5e1;padding-bottom:.25em;}',
+      'p{margin:.6em 0;} ul,ol{padding-left:1.5em;} li{margin:.3em 0;}',
+      'table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.95em;}',
+      'th,td{border:1px solid #cbd5e1;padding:6px 10px;text-align:left;}',
+      'thead{background:#f1f5f9;}',
+      'code{font-family:Menlo,Consolas,monospace;font-size:.9em;background:#f1f5f9;',
+      'border:1px solid #e2e8f0;border-radius:3px;padding:1px 4px;}',
+      'pre{background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:12px;overflow-x:auto;}',
+      'pre code{border:none;background:none;padding:0;}',
+      'blockquote{border-left:3px solid #94a3b8;margin:1em 0;padding:.2em 1em;background:#f8fafc;}',
+      'img{max-width:100%;} section{margin-top:2.5em;}',
+      'ol.space-y-4>li,div.break-inside-avoid{border:1px solid #cbd5e1;border-radius:6px;',
+      'padding:12px 14px;margin:.8em 0;}',
+      '@media print{body{padding:0;} @page{size:A4 portrait;margin:14mm;}}',
+      '</style></head><body>',
+      el.innerHTML,
+      '</body></html>',
+    ].join('\n');
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${manifest.app_slug}-${manifest.tier}-handbook.html`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
   const moduleBankByKey = Object.fromEntries(
     (banks?.module_banks || []).map((b) => [b.module_key, b.questions]));
   const allLessons = manifest ? flatLessons(manifest) : [];
@@ -141,10 +190,16 @@ const AdminCourseHandbookPage = () => {
               The full course as learners see it, plus the question banks. Answer keys stay on the server and are never shown here.
             </p>
           </div>
-          <Button onClick={() => window.print()}
-            className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
-            <Printer className="h-4 w-4 mr-1" /> Print handbook
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={downloadHandbook} disabled={!ready}
+              className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+              <Download className="h-4 w-4 mr-1" /> Download
+            </Button>
+            <Button onClick={() => window.print()} disabled={!ready} variant="outline"
+              className="border-[#BFFF00] text-[#BFFF00] hover:bg-[#BFFF00] hover:text-[#0F172A]">
+              <Printer className="h-4 w-4 mr-1" /> Print
+            </Button>
+          </div>
         </div>
 
         {courses.length > 1 && (
