@@ -51,6 +51,10 @@ The fitted $a R_w = 0.0500$ ohm.m matches the given $R_w = 0.05$ with $a = 1$, a
 
 Notice also what a mismatch would have meant. A fitted $m$ of 1.8 against a given 2.0 would change every Archie saturation in the well; at $\phi = 0.17$ the term $\phi^m$ moves from 0.0289 to 0.0413, dropping computed $S_w$ by about 16 percent relative. Parameter validation is not pedantry; it moves reserves.
 
+Try it yourself: the panel below runs the same engine on the typewell.
+
+{{panel:petro-pickett-explorer}}
+
 ## Exercise
 
 Fit the line yourself using the two middle points instead of the ends: (0.0970, 5.3141) and (0.0960, 5.4253). Compute the slope in log space and then $a R_w$ from either point. As a self-check: $\log 5.4253 = 0.73441$, $\log 5.3141 = 0.72542$, $\log 0.0960 = -1.01773$, $\log 0.0970 = -1.01323$, so the slope is $0.00899 / (-0.00450) = -1.998$ and $m = 2.0$; then $a R_w = 5.3141 \times 0.0970^2 = 5.3141 \times 0.009409 = 0.0500$ ohm.m. State in one sentence why any pair of points on this leg returns the same answers.

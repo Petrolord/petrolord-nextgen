@@ -40,6 +40,10 @@ Read the damage in business terms, because that is how it will be read when it e
 
 Notice also the quiet oddity in the table: pay-average porosity went up, from 0.2081 to 0.2099, in the booking that lost pay. That is not a compensation and not good news; it is the conditional-average behaviour flagged in the previous lesson. The samples that fell out were the poorer ones, so the survivors average slightly higher. The next lesson treats this properly.
 
+Try it yourself: the panel below runs the same engine on the typewell.
+
+{{panel:petro-rw-triangulator}}
+
 ## Exercise
 
 A colleague books a different well with $R_w = 0.114$ ohm.m and reports a pay-average Sw of 0.62 for its main sand. Assuming the same lab-versus-formation temperature mistake, estimate what the corrected pay-average Sw would roughly be, and state one reason your estimate is only approximate. Self-check: dividing by the scaling factor gives $0.62 / 1.5113 = 0.410$, so about 0.41; the estimate is approximate because the corrected booking would also readmit flipped samples into the net, and the pay average would then be taken over a different, larger sample set rather than by rescaling the old average.

@@ -16,8 +16,11 @@ import {
 } from 'lucide-react';
 import {
   defaultParams, computeWorkflow, capstoneAnswers, chartRows, ZONES,
-  computeIntermediate, computeAdvanced, ADVANCED_GIVENS,
 } from '@/lib/petrophysicsTeaching';
+import PorosityLab from '@/components/course/panels/petrophysics/PorosityLab';
+import PickettExplorer from '@/components/course/panels/petrophysics/PickettExplorer';
+import ShalySwLab from '@/components/course/panels/petrophysics/ShalySwLab';
+import RwTriangulator from '@/components/course/panels/petrophysics/RwTriangulator';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
   getCourseProgress,
@@ -114,16 +117,6 @@ const PetrophysicsLearningPage = () => {
     || courseProgress?.capstone?.unlocked === true
     || courseProgress?.capstone?.passed === true
     || actualRole === 'super_admin';
-
-  const intermediate = useMemo(
-    () => (tier === 'intermediate' ? computeIntermediate() : null),
-    [tier],
-  );
-
-  const advanced = useMemo(
-    () => (tier === 'advanced' ? computeAdvanced() : null),
-    [tier],
-  );
 
   const workflow = useMemo(() => {
     try {
@@ -262,7 +255,7 @@ const PetrophysicsLearningPage = () => {
             <Card className="bg-[#1E293B] border-gray-700 lg:col-span-1">
               <CardHeader>
                 <CardTitle className="text-white">Interpretation parameters</CardTitle>
-                <CardDescription>Given constants are pre-filled — set the cutoffs and Archie Rw.</CardDescription>
+                <CardDescription>Given constants are pre-filled. Set the cutoffs and Archie Rw.</CardDescription>
               </CardHeader>
               <CardContent className="grid grid-cols-2 gap-3">
                 <Param k="rhoMa" label="ρ matrix" />
@@ -324,73 +317,28 @@ const PetrophysicsLearningPage = () => {
             ))}
           </div>
 
-          {intermediate && (
-            <Card className="bg-[#1E293B] border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-white">Advanced interpretation panel (Intermediate)</CardTitle>
-                <CardDescription>
-                  Multi-method porosity, a Pickett fit in the water leg ({intermediate.waterLeg[0]}–{intermediate.waterLeg[1]} m, {intermediate.pickett.nPoints} points), and shaly-sand saturation with linear Vsh. SAND_A zone means.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-                  {[
-                    ['SAND_A mean φ (neutron-density)', intermediate.phindAvgSandA.toFixed(4)],
-                    ['SAND_A mean φ (Wyllie sonic)', intermediate.phiwAvgSandA.toFixed(4)],
-                    ['Pickett fit: a·Rw', intermediate.pickett.aRw.toFixed(4) + ' Ω·m'],
-                    ['Pickett fit: m', intermediate.pickett.m.toFixed(3)],
-                    ['SAND_A mean Sw (Archie, φND)', intermediate.swArchieSandA.toFixed(4)],
-                    ['SAND_A mean Sw (Simandoux)', intermediate.swSimSandA.toFixed(4)],
-                    ['SAND_A mean Sw (Indonesia)', intermediate.swIndSandA.toFixed(4)],
-                  ].map(([k, v]) => (
-                    <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                      <p className="text-gray-500 text-xs">{k}</p>
-                      <p className="text-white">{v}</p>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-xs text-gray-500 mt-3">
-                  The Pickett fit should recover the given water properties — a water-leg crossplot is how Rw and m are QC'd. The shaly-sand methods read lower Sw than Archie in shale-affected intervals.
-                </p>
-              </CardContent>
-            </Card>
+          {tier === 'intermediate' && (
+            <div className="space-y-6">
+              <p className="text-sm text-gray-400 mb-0">
+                Professional workflow: produce the capstone numbers yourself. Multi-method porosity, then the Pickett fit in a window you choose, then shaly-sand saturation. The capstone grades what these panels compute from your inputs.
+              </p>
+              <PorosityLab />
+              <PickettExplorer />
+              <ShalySwLab />
+            </div>
           )}
 
-          {advanced && (
-            <Card className="bg-[#1E293B] border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-white">Rw triangulation panel (Advanced)</CardTitle>
-                <CardDescription>
-                  Lab sample {ADVANCED_GIVENS.rwSample} ohm.m at {ADVANCED_GIVENS.tSampleF} degF, formation {ADVANCED_GIVENS.tFmF} degF; SP quicklook SSP {ADVANCED_GIVENS.sspMv} mV with Rmfe {ADVANCED_GIVENS.rmfe} ohm.m. Three independent Rw estimates should converge; then SAND_A is booked with the corrected and the raw Rw.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-                  {[
-                    ['Sample Rw at formation T (Arps)', advanced.rwArps.toFixed(4) + ' ohm.m'],
-                    ['SP coefficient K', advanced.spK.toFixed(2)],
-                    ['Rwe from the SP quicklook', advanced.rweSsp.toFixed(4) + ' ohm.m'],
-                    ['Water-leg mean Sw (Arps Rw)', advanced.swWaterlegMean.toFixed(4)],
-                    ['SAND_A net pay (Arps Rw)', advanced.corrected.net_m.toFixed(2) + ' m'],
-                    ['SAND_A pay-avg Sw (Arps Rw)', advanced.corrected.sw_avg.toFixed(4)],
-                    ['SAND_A net pay (raw sample Rw)', advanced.uncorrected.net_m.toFixed(2) + ' m'],
-                    ['SAND_A pay-avg Sw (raw sample Rw)', advanced.uncorrected.sw_avg.toFixed(4)],
-                  ].map(([k, v]) => (
-                    <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                      <p className="text-gray-500 text-xs">{k}</p>
-                      <p className="text-white">{v}</p>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-xs text-gray-500 mt-3">
-                  The Arps correction and the SP quicklook both land on the Pickett fit's a.Rw of 0.05. Booking with the raw surface sample instead overstates Sw and quietly erases pay.
-                </p>
-              </CardContent>
-            </Card>
+          {tier === 'advanced' && (
+            <div className="space-y-6">
+              <p className="text-sm text-gray-400 mb-0">
+                Expert workflow: triangulate Rw from the lab sample, the SP quicklook and the Pickett fit, validate it in the water leg, then book SAND_A with the Rw you adopt and once more with the raw sample to see the damage.
+              </p>
+              <RwTriangulator />
+            </div>
           )}
 
-          {(intermediate || advanced) && !capstoneOpen && capstoneLockedNote}
-          {(intermediate || advanced) && capstoneOpen && (
+          {tier !== 'beginner' && !capstoneOpen && capstoneLockedNote}
+          {tier !== 'beginner' && capstoneOpen && (
             <Card className="bg-[#1E293B] border-gray-700">
               <CardHeader>
                 <CardTitle className="text-white">{capstone?.title || 'Capstone'}</CardTitle>
@@ -414,7 +362,7 @@ const PetrophysicsLearningPage = () => {
                 </Button>
                 {result && !result.passed && (
                   <p className="text-red-300 text-sm flex items-center gap-2">
-                    <XCircle className="h-4 w-4" /> {result.score}/{result.max_score} within tolerance — re-read the panel.
+                    <XCircle className="h-4 w-4" /> {result.score}/{result.max_score} within tolerance. Rework the panels and try again.
                   </p>
                 )}
                 {result && result.passed && (

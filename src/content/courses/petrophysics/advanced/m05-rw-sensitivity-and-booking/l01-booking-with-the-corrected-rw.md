@@ -45,6 +45,10 @@ This is worth internalising as a professional habit. A validation exercise that 
 
 One reading note before the counterfactual. The pay-average porosity of 0.2081 is averaged over the 18.0 m that passed the cutoffs, not over the full 20.5 m gross. Averages conditioned on a cutoff travel with their sample set, and the next lessons exploit exactly that behaviour, so fix the definition now: net, NTG and the pay averages are a package computed over the same flagged samples, and they must always be read together.
 
+Try it yourself: the panel below runs the same engine on the typewell.
+
+{{panel:petro-rw-triangulator}}
+
 ## Exercise
 
 Rerun the 2020 m Archie calculation with $R_w = 0.05$ ohm.m and confirm you recover the Associate value. Self-check: $0.05 / 0.4082 = 0.12249$ and $\sqrt{0.12249} = 0.3500$, against 0.3497 with the corrected value. Then state, in one sentence each: (a) why the two bookings agree so closely on the typewell, and (b) why the agreement was still worth proving. For (a), the corrected Rw of 0.049910 differs from the given 0.05 by less than 0.2 percent, and Sw scales only with the square root of Rw; for (b), the Associate value was an unverified given, and the Expert triangulation is what makes 18.0 m defensible in front of a partner or an auditor.
