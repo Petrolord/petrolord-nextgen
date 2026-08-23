@@ -53,6 +53,10 @@ Close the module with the habit that separates professional work from quicklook 
 
 On the typewell that report reads: SAND_A mean $S_w$ 0.4335 (Simandoux) and 0.4280 (Indonesia) against an Archie baseline of 0.4478; all parameters as validated in the water leg; model spread under 0.02, consistent with a clean sand. Three lines, and a reviewer can reproduce every number in them.
 
+Try it yourself: the panel below runs the same engine on the typewell.
+
+{{panel:petro-shaly-sw-lab}}
+
 ## Exercise
 
 Write the equivalent three-line report for SAND_B using the module's zone means (Archie 0.7692, Simandoux 0.7504, Indonesia 0.7455) and the SAND_B neutron-density porosity mean of 0.1220 from module three. Self-check: the Simandoux hydrocarbon pore volume per metre is $0.1220 \times (1 - 0.7504) = 0.0305$, less than a third of SAND_A's. Finish with one sentence on whether the water leg supports treating SAND_B's high saturations as real rather than as a model failure.

@@ -45,6 +45,10 @@ Repeat at every sample in the zone and average, and the engine reports 0.1762. T
 
 From here on, $\phi_{ND}$ is the porosity, full stop. The Pickett fit in module m04 plots RT against $\phi_{ND}$ in the water leg and expects the fit to return a·Rw = 0.0500 and m = 2.000 precisely because it is fed the same porosity curve the rest of the interpretation uses. Both shaly-sand saturation models in module m05, Simandoux and Indonesia, take $\phi_{ND}$ as their porosity input, and their SAND_A means (0.4335 and 0.4280) are the remaining capstone numbers. Booking a different porosity would silently move every one of those results, which is exactly why the booking is stated once, here, and never revisited mid-workflow.
 
+Try it yourself: the panel below runs the same engine on the typewell.
+
+{{panel:petro-porosity-lab}}
+
 ## Exercise
 
 Compute all four porosities at the water-leg sample, 2076 m, where RHOB = 2.4883, NPHI = 0.098, and DT = 228.452 us/m, using the typewell parameters (density: 2.65 and 1.0; Wyllie: 182 and 656 us/m). As a self-check: $\phi_D = 0.0980$, $\phi_{ND} = (0.0980 + 0.098)/2 = 0.0980$, Wyllie $= (228.452 - 182)/(656 - 182) = 0.0980$, and RHG $= 0.67 \times (228.452 - 182)/228.452 = 0.1362$. Three of the four agree to four decimals in this clean wet sand. State in one sentence which method is the outlier here and whether that changes the booking argument.

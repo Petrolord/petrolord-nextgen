@@ -43,6 +43,10 @@ The typewell's SAND_A samples plot as a compact cluster around the $S_w \approx 
 
 One caution before you lean on iso-$S_w$ lines quantitatively: everything here is Archie. The lines inherit Archie's clean-sand assumption, so in shaly intervals the plot's saturations read too high, for reasons the next module takes apart. Use the plot to validate parameters and to survey the well; book saturations from the model you can defend in the actual lithology.
 
+Try it yourself: the panel below runs the same engine on the typewell.
+
+{{panel:petro-pickett-explorer}}
+
 ## Exercise
 
 The sample at 2076 m in the water leg reads $\phi_{ND} = 0.0980$, $R_t = 5.2062$ ohm.m. First confirm from the water-line prediction that it sits on the $S_w = 1$ line: the line at $\phi = 0.098$ predicts $0.05 / 0.098^2 = 0.05 / 0.009604 = 5.2062$ ohm.m, a ratio of exactly 1. Then compute what resistivity the same sample would read at $S_w = 0.5$ and at $S_w = 0.25$. As a self-check: the offsets are factors of 4 and 16, giving 20.82 and 83.30 ohm.m. State in one sentence why the two answers differ by exactly a factor of 4.

@@ -41,6 +41,10 @@ Quantify the correction in the zone that pays. For SAND_A:
 
 The shaly-sand correction adds between 1.4 and 2.0 saturation points of hydrocarbon in SAND_A. On a large accumulation that is not a rounding error; scaled through a volumetric calculation it moves reserves by the same fraction. Yet it is small enough to confirm SAND_A is fundamentally a clean sand, which is precisely what the model spread is telling you.
 
+Try it yourself: the panel below runs the same engine on the typewell.
+
+{{panel:petro-shaly-sw-lab}}
+
 ## Exercise
 
 Repeat the three-step comparison for SAND_B using the table values. Self-check: the Archie-to-Simandoux gap is $0.7692 - 0.7504 = 0.0188$, the Archie-to-Indonesia gap is $0.7692 - 0.7455 = 0.0237$, and the hydrocarbon saturations are 0.2308, 0.2496 and 0.2545. Then answer in two sentences: why is the model spread larger in SAND_B than in SAND_A, and why does the spread matter less to booked volumes in SAND_B despite being larger?
