@@ -37,6 +37,10 @@ Verify the two headline numbers by hand:
 
 The scaling rule $S_{w,2} = S_{w,1}\sqrt{R_{w,2}/R_{w,1}}$ is worth memorising: it converts any Archie saturation between candidate Rw values without recomputing from the logs.
 
+Try it yourself: the panel below runs the same engine on the typewell.
+
+{{panel:petro-rw-triangulator}}
+
 ## Exercise
 
 A water leg evaluated with a candidate Rw of 0.080 $\Omega\cdot m$ returns saturations clustered at 1.26. Use the scaling rule to estimate the Rw the leg actually implies, and state what you would do next. As a self-check: the leg wants $S_w = 1$, so $R_w = 0.080 / 1.26^2 = 0.080/1.5876 = 0.0504\ \Omega\cdot m$; the candidate is roughly 1.6 times too resistive, the same failure signature as the typewell's raw sample, and the next step is to hunt the temperature or contamination error in whichever route produced 0.080.

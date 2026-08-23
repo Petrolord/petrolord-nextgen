@@ -42,6 +42,10 @@ Quantify the spread as you would in a report:
 
 A SAND_A saturation near 0.36 would move by well under 0.001 across the whole triangle. The conclusion writes itself: the choice among 0.049831, 0.049910 and 0.0500 has no material effect on the evaluation, and any of them, or the rounded 0.05, is defensible.
 
+Try it yourself: the panel below runs the same engine on the typewell.
+
+{{panel:petro-rw-triangulator}}
+
 ## Exercise
 
 A neighbouring well yields these three routes: laboratory sample corrected by Arps to 0.031 $\Omega\cdot m$, SP quicklook 0.029 $\Omega\cdot m$, Pickett $aR_w$ 0.030 $\Omega\cdot m$ with $a = 1$. Compute the range and the relative spread against the middle value, and state whether the triangle closes as convincingly as the typewell's. As a self-check: the range is 0.002, the relative spread is 0.002/0.030 = 6.7 percent, and the implied Sw effect is a factor $\sqrt{0.031/0.029} = 1.034$ between extremes, about 3.4 percent in Sw. That triangle still closes usefully, but the report should carry the spread rather than silently picking one vertex.

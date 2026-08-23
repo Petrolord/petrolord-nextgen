@@ -40,6 +40,10 @@ A 33 mV misread moved $R_{we}$ from 0.0498 to 0.1219 ohm.m, a factor of 2.4. Car
 
 The other input is gentler: $R_{we}$ is only linear in $R_{mfe}$. A 10 percent error in the mud report becomes a 10 percent error in $R_{we}$. Still worth care, but the millivolts dominate the error budget.
 
+Try it yourself: the panel below runs the same engine on the typewell.
+
+{{panel:petro-rw-triangulator}}
+
 ## Exercise
 
 A well at 180 degF ($K = 84.94$) has $R_{mfe} = 0.45$ ohm.m and a carefully read $SSP = -85$ mV. Compute $R_{we}$, then recompute with a sloppy reading of $-70$ mV and report the ratio of the two answers. As a self-check: $-85/84.94 = -1.000706$, $10^{-1.000706} = 0.09984$, so $R_{we} = 0.45 \times 0.09984 = 0.0449$ ohm.m; the sloppy read gives $-70/84.94 = -0.824111$, $10^{-0.824111} = 0.14993$, so $R_{we} = 0.0675$ ohm.m; the ratio is 1.50. Fifteen missing millivolts inflated the answer by half.

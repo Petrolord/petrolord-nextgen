@@ -39,6 +39,10 @@ The correction is steepest early and flattens with temperature, exactly as an in
 
 In the app's Learning Mode the Arps leg is a single computation from the two given temperatures and the lab value, and the result feeds two places: the triangulation comparison in module 4, and the corrected booking of SAND_A in module 5. Carry the unrounded value (0.049910) through the workflow and round only in the report; rounding to 0.05 before the water-leg check would still pass here, but the habit of premature rounding eventually costs a capstone tolerance somewhere else.
 
+Try it yourself: the panel below runs the same engine on the typewell.
+
+{{panel:petro-rw-triangulator}}
+
 ## Exercise
 
 A different field's water sample measures 0.20 ohm.m at 68 degF, and the reservoir sits at 212 degF. Apply Arps: the offsets are $74.77$ and $218.77$, the ratio is $74.77 / 218.77 = 0.34178$, and the corrected value is $0.20 \times 0.34178 = 0.0684$ ohm.m. Then verify your arithmetic by the round trip: $0.0684 \times 218.77 / 74.77$ should return 0.20 within rounding. Finally, state in one sentence why the answer would be unchanged if the same water had twice the salinity but still measured 0.20 ohm.m at 68 degF.
