@@ -1,0 +1,76 @@
+{
+  "app_slug": "petrophysics",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-professional-workflow",
+      "title": "The Professional Workflow",
+      "order": 1,
+      "lessons": [
+        { "key": "l01-beyond-the-quicklook", "title": "Beyond the quicklook", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-the-full-curve-suite", "title": "The full curve suite", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-linear-vsh-for-shaly-sand-work", "title": "Linear Vsh for shaly-sand work", "order": 3, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l04-the-intermediate-workflow-map", "title": "The intermediate workflow map", "order": 4, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m02-sonic-porosity",
+      "title": "Sonic Porosity",
+      "order": 2,
+      "lessons": [
+        { "key": "l01-the-sonic-log", "title": "The sonic log", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-wyllie-time-average", "title": "The Wyllie time average", "order": 2, "est_minutes": 16, "panels": [], "has_exercise": true },
+        { "key": "l03-raymer-hunt-gardner", "title": "Raymer-Hunt-Gardner", "order": 3, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l04-sonic-on-the-typewell", "title": "Sonic porosity on the typewell", "order": 4, "est_minutes": 16, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m03-neutron-density-porosity",
+      "title": "Neutron-Density Porosity",
+      "order": 3,
+      "lessons": [
+        { "key": "l01-the-neutron-log", "title": "The neutron log", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-combining-neutron-and-density", "title": "Combining neutron and density", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-shale-and-gas-effects", "title": "Shale and gas effects", "order": 3, "est_minutes": 16, "panels": [], "has_exercise": true },
+        { "key": "l04-the-nd-crossplot", "title": "The neutron-density crossplot", "order": 4, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l05-porosity-on-the-typewell", "title": "Porosity on the typewell", "order": 5, "est_minutes": 14, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m04-the-pickett-plot",
+      "title": "The Pickett Plot",
+      "order": 4,
+      "lessons": [
+        { "key": "l01-water-legs", "title": "Water legs", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-pickett-theory", "title": "Pickett plot theory", "order": 2, "est_minutes": 16, "panels": [], "has_exercise": true },
+        { "key": "l03-fitting-the-typewell-leg", "title": "Fitting the typewell water leg", "order": 3, "est_minutes": 16, "panels": [], "has_exercise": true },
+        { "key": "l04-iso-sw-lines", "title": "Iso-Sw lines", "order": 4, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l05-validating-archie-parameters", "title": "Validating Archie parameters", "order": 5, "est_minutes": 14, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m05-shaly-sand-saturation",
+      "title": "Shaly-Sand Saturation",
+      "order": 5,
+      "lessons": [
+        { "key": "l01-why-archie-fails-in-shaly-sand", "title": "Why Archie fails in shaly sand", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-the-simandoux-model", "title": "The Simandoux model", "order": 2, "est_minutes": 16, "panels": [], "has_exercise": true },
+        { "key": "l03-the-indonesia-model", "title": "The Indonesia model", "order": 3, "est_minutes": 16, "panels": [], "has_exercise": true },
+        { "key": "l04-comparing-the-models", "title": "Comparing the models", "order": 4, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l05-saturation-on-the-typewell", "title": "Saturation on the typewell", "order": 5, "est_minutes": 14, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m06-method-choice-and-reporting",
+      "title": "Method Choice and Reporting",
+      "order": 6,
+      "lessons": [
+        { "key": "l01-sensitivity-of-booked-pay", "title": "Sensitivity of booked pay", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-reconciling-methods", "title": "Reconciling methods", "order": 2, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l03-the-professional-report", "title": "The professional report", "order": 3, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l04-the-capstone-walkthrough", "title": "The capstone walkthrough", "order": 4, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    }
+  ]
+}
