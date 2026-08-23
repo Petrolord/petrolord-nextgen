@@ -20,7 +20,11 @@ import {
 } from '@/lib/petrophysicsTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
+  getCourseProgress,
 } from '@/services/academyService';
+import { useRole } from '@/contexts/RoleContext';
+import { hasDeepCourse } from '@/lib/courseContent';
+import DeepCourseBanner from '@/components/course/DeepCourseBanner';
 
 const APP = 'petrophysics';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -62,8 +66,10 @@ function ScopeGate() {
 
 const PetrophysicsLearningPage = () => {
   const { toast } = useToast();
+  const { actualRole } = useRole();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
   const [tier, setTier] = useState('beginner');
+  const [courseProgress, setCourseProgress] = useState(null);
   const [answers, setAnswers] = useState({});
   const [params, setParams] = useState(defaultParams());
   const [capstone, setCapstone] = useState(null);
@@ -90,8 +96,24 @@ const PetrophysicsLearningPage = () => {
     setAnswers({});
     setResult(null);
     getCapstone(APP, tier).then(setCapstone).catch(() => setCapstone(null));
+    // Deep-path state: which finishing steps the course has unlocked.
+    setCourseProgress(null);
+    if (hasDeepCourse(APP, tier)) {
+      getCourseProgress(APP, tier).then(setCourseProgress).catch(() => setCourseProgress(null));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tier, gate.allowed]);
+
+  // On the deep path the capstone is the LAST step: lessons, module
+  // quizzes and the final exam come first (all enforced server-side).
+  // Hide the submit UI until the course reports it unlocked, so the old
+  // pass-in-minutes surface is gone. Super admins keep the submit UI for
+  // the reviewer door (the server's bypass contract).
+  const deep = hasDeepCourse(APP, tier);
+  const capstoneOpen = !deep
+    || courseProgress?.capstone?.unlocked === true
+    || courseProgress?.capstone?.passed === true
+    || actualRole === 'super_admin';
 
   const intermediate = useMemo(
     () => (tier === 'intermediate' ? computeIntermediate() : null),
@@ -157,6 +179,22 @@ const PetrophysicsLearningPage = () => {
   }
   if (!gate.allowed) return <ScopeGate />;
 
+  const capstoneLockedNote = (
+    <Card className="bg-[#1E293B] border-gray-700">
+      <CardContent className="p-5 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-gray-300 text-sm mb-0 flex items-center gap-2">
+          <Lock className="h-4 w-4 text-[#BFFF00] shrink-0" />
+          The graded capstone unlocks at the end of the course, after every module quiz and the final exam.
+        </p>
+        <Link to={`/dashboard/apps/${APP}/course/${tier}`}>
+          <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+            Open the course <ArrowRight className="h-4 w-4 ml-1" />
+          </Button>
+        </Link>
+      </CardContent>
+    </Card>
+  );
+
   const zoneRow = (name, s) => (
     <tr className="border-b border-gray-800 text-gray-300">
       <td className="py-2 pr-4 text-white">{name}</td>
@@ -198,7 +236,11 @@ const PetrophysicsLearningPage = () => {
             </div>
           </div>
 
-          {/* Lessons */}
+          <DeepCourseBanner app={APP} tier={tier} />
+
+          {/* Legacy pocket lessons: superseded by the deep course. They
+              only render for tiers whose full content has not shipped. */}
+          {!deep && (
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2"><BookOpen className="h-5 w-5 text-[#BFFF00]" /> Lessons</CardTitle>
@@ -213,6 +255,7 @@ const PetrophysicsLearningPage = () => {
               ))}
             </CardContent>
           </Card>
+          )}
 
           <div className="grid gap-6 lg:grid-cols-3">
             {/* Parameters */}
@@ -346,7 +389,8 @@ const PetrophysicsLearningPage = () => {
             </Card>
           )}
 
-          {(intermediate || advanced) && (
+          {(intermediate || advanced) && !capstoneOpen && capstoneLockedNote}
+          {(intermediate || advanced) && capstoneOpen && (
             <Card className="bg-[#1E293B] border-gray-700">
               <CardHeader>
                 <CardTitle className="text-white">{capstone?.title || 'Capstone'}</CardTitle>
@@ -408,6 +452,20 @@ const PetrophysicsLearningPage = () => {
                 </table>
               </div>
 
+              {!capstoneOpen && (
+                <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4 flex flex-wrap items-center justify-between gap-3">
+                  <p className="text-gray-300 text-sm mb-0 flex items-center gap-2">
+                    <Lock className="h-4 w-4 text-[#BFFF00] shrink-0" />
+                    The graded capstone unlocks at the end of the course, after every module quiz and the final exam.
+                  </p>
+                  <Link to={`/dashboard/apps/${APP}/course/${tier}`}>
+                    <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                      Open the course <ArrowRight className="h-4 w-4 ml-1" />
+                    </Button>
+                  </Link>
+                </div>
+              )}
+              {capstoneOpen && (
               <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4">
                 <p className="text-white font-medium">{capstone?.title || 'Capstone'}</p>
                 <p className="text-sm text-gray-400 mt-1">{capstone?.prompt}</p>
@@ -449,6 +507,7 @@ const PetrophysicsLearningPage = () => {
                   </div>
                 )}
               </div>
+              )}
             </CardContent>
           </Card>
           )}

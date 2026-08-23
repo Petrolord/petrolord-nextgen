@@ -443,3 +443,73 @@ export function getDeviceId() {
     return 'ephemeral-' + Math.random().toString(36).slice(2);
   }
 }
+
+// ---- DC1 deep-course progress (sequential unlock + quizzes + final
+// exam, all enforced server-side; see migrations/20260822_dc1_*).
+
+export async function markLessonRead(appSlug, tier, moduleKey, lessonKey) {
+  const { data, error } = await supabase.rpc('academy_mark_lesson_read', {
+    p_app: appSlug,
+    p_tier: tier,
+    p_module_key: moduleKey,
+    p_lesson_key: lessonKey,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function getModuleQuiz(appSlug, tier, moduleKey) {
+  const { data, error } = await supabase.rpc('academy_get_module_quiz', {
+    p_app: appSlug,
+    p_tier: tier,
+    p_module_key: moduleKey,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function submitModuleQuiz(attemptId, answers) {
+  const { data, error } = await supabase.rpc('academy_submit_module_quiz', {
+    p_attempt: attemptId,
+    p_answers: answers,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function getFinalExam(appSlug, tier) {
+  const { data, error } = await supabase.rpc('academy_get_final_exam', {
+    p_app: appSlug,
+    p_tier: tier,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function submitFinalExam(attemptId, answers) {
+  const { data, error } = await supabase.rpc('academy_submit_final_exam', {
+    p_attempt: attemptId,
+    p_answers: answers,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function getCourseProgress(appSlug, tier) {
+  const { data, error } = await supabase.rpc('academy_course_progress', {
+    p_app: appSlug,
+    p_tier: tier,
+  });
+  if (error) throw error;
+  return data;
+}
+
+// Admin/lecturer only: full quiz banks WITHOUT answer keys (handbook feed).
+export async function adminQuizSyllabus(appSlug, tier) {
+  const { data, error } = await supabase.rpc('academy_admin_quiz_syllabus', {
+    p_app: appSlug,
+    p_tier: tier,
+  });
+  if (error) throw error;
+  return data;
+}
