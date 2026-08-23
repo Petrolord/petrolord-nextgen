@@ -1,0 +1,265 @@
+{
+  "app_slug": "welldata",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-well-data-and-the-registry",
+      "title": "Well Data and the Registry",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-well-data-comes-first",
+          "title": "Why well data comes first",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-a-well-log-is",
+          "title": "What a well log is",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-six-teaching-files",
+          "title": "The six teaching files",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "wd-las-inspector"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-data-managers-job",
+          "title": "The data manager's job",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-las-format",
+      "title": "The LAS Format",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-las-versions-and-history",
+          "title": "LAS versions and history",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-section-structure",
+          "title": "The section structure",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-header-line-grammar",
+          "title": "The header line grammar",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-data-section",
+          "title": "The data section",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-wrapped-mode",
+          "title": "Wrapped mode",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "wd-las-inspector"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-depth-units-and-steps",
+      "title": "Depth, Units and Steps",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-depth-units",
+          "title": "Depth units",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-converting-the-feet-well",
+          "title": "Converting the feet well",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "wd-las-inspector"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-uniform-and-irregular-steps",
+          "title": "Uniform and irregular steps",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-why-downstream-apps-care",
+          "title": "Why downstream apps care",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-nulls-and-data-quality",
+      "title": "Nulls and Data Quality",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-null-flag",
+          "title": "The NULL flag",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-counting-what-is-missing",
+          "title": "Counting what is missing",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wd-las-inspector"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-dead-curves",
+          "title": "Dead curves",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "wd-las-inspector"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-statistics-over-finite-samples",
+          "title": "Statistics over finite samples",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-headers-and-metadata",
+      "title": "Headers and Metadata",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-well-section",
+          "title": "The well section",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-header-quirks",
+          "title": "Header quirks",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wd-las-inspector"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-trust-but-verify",
+          "title": "Trust but verify",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-metadata-as-identity",
+          "title": "Metadata as identity",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-qc-workflow",
+      "title": "The QC Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-import-checklist",
+          "title": "The import checklist",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-reading-the-qc-panel",
+          "title": "Reading the QC panel",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wd-las-inspector"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "wd-las-inspector"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-professional",
+          "title": "Onward to Professional",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
