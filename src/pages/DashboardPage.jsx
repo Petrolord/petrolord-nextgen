@@ -11,6 +11,7 @@ import AdminAcademyDoorsPage from '@/pages/AdminAcademyDoorsPage';
 import GetStartedPage from '@/pages/GetStartedPage';
 import DevicesPage from '@/pages/DevicesPage';
 import AdminCertificationsPage from '@/pages/AdminCertificationsPage';
+import AdminCourseHandbookPage from '@/pages/AdminCourseHandbookPage';
 import PetrophysicsLearningPage from '@/pages/apps/PetrophysicsLearningPage';
 import WellDataLearningPage from '@/pages/apps/WellDataLearningPage';
 import WellCorrelationLearningPage from '@/pages/apps/WellCorrelationLearningPage';
@@ -63,6 +64,7 @@ const SuperAdminHome = () => (
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <AdminHomeCard to="/dashboard/admin/academy-doors" title="Academy Doors" description="Issue cohort and sponsorship codes, decide residency applications." cta="Open Doors Console" />
         <AdminHomeCard to="/dashboard/admin/certifications" title="Certifications" description="Issue and revoke academy certificates." cta="Open Certifications" />
+        <AdminHomeCard to="/dashboard/admin/handbook" title="Course Handbook" description="Review every deep course's lessons and question banks in one printable document." cta="Open Handbook" />
         <AdminHomeCard to="/dashboard/admin/monitoring" title="Live Monitoring" description="View real-time logs and system health." cta="Open Monitoring" />
         <AdminHomeCard to="/dashboard/admin/settings" title="System Configuration" description="Manage global configuration." cta="Open Settings" />
       </div>
@@ -78,6 +80,7 @@ const PetrolordAdminHome = () => (
        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <AdminHomeCard to="/dashboard/admin/academy-doors" title="Academy Doors" description="Issue cohort and sponsorship codes, decide residency applications." cta="Open Doors Console" />
         <AdminHomeCard to="/dashboard/admin/certifications" title="Certifications" description="Issue and revoke academy certificates." cta="Open Certifications" />
+        <AdminHomeCard to="/dashboard/admin/handbook" title="Course Handbook" description="Review every deep course's lessons and question banks in one printable document." cta="Open Handbook" />
         <AdminHomeCard to="/dashboard/admin/monitoring" title="System Monitoring" description="View real-time logs and system health status." cta="Open Dashboard" />
       </div>
     </div>
@@ -91,6 +94,7 @@ const LecturerHome = () => (
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         <AdminHomeCard to="/dashboard/admin/certifications" title="Certifications" description="Issue and revoke academy certificates for your learners." cta="Open Certifications" />
+        <AdminHomeCard to="/dashboard/admin/handbook" title="Course Handbook" description="Review every deep course's lessons and question banks in one printable document." cta="Open Handbook" />
         <AdminHomeCard to="/dashboard/certificates" title="My Certificates" description="Certificates issued to your own account." cta="View Certificates" />
       </div>
     </div>
@@ -311,6 +315,7 @@ const DashboardPage = () => {
 
     <Route path="admin/academy-doors" element={<AdminAcademyDoorsPage />} />
     <Route path="admin/certifications" element={<AdminCertificationsPage />} />
+    <Route path="admin/handbook" element={<AdminCourseHandbookPage />} />
     <Route path="admin/audit-logs" element={<AdminAuditLogsPage />} />
     <Route path="admin/monitoring" element={<RealTimeMonitoringPage />} />
     <Route path="admin/users" element={<AdminUsersPage />} />
