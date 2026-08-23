@@ -1,0 +1,75 @@
+{
+  "app_slug": "petrophysics",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-rw-problem",
+      "title": "The Rw Problem",
+      "order": 1,
+      "lessons": [
+        { "key": "l01-why-rw-rules-the-answer", "title": "Why Rw rules the answer", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-sources-of-rw", "title": "Sources of Rw", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-the-typewell-brief", "title": "The typewell brief", "order": 3, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l04-the-expert-workflow-map", "title": "The Expert workflow map", "order": 4, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m02-temperature-and-the-arps-correction",
+      "title": "Temperature and the Arps Correction",
+      "order": 2,
+      "lessons": [
+        { "key": "l01-formation-temperature", "title": "Formation temperature", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-resistivity-and-temperature", "title": "Resistivity and temperature", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-the-arps-equation", "title": "The Arps equation", "order": 3, "est_minutes": 16, "panels": [], "has_exercise": true },
+        { "key": "l04-limits-of-arps", "title": "The limits of Arps", "order": 4, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m03-the-sp-quicklook",
+      "title": "The SP Quicklook",
+      "order": 3,
+      "lessons": [
+        { "key": "l01-the-sp-log", "title": "The SP log", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-reading-ssp", "title": "Reading SSP", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-the-k-coefficient", "title": "The K coefficient", "order": 3, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l04-from-ssp-to-rwe", "title": "From SSP to Rwe", "order": 4, "est_minutes": 16, "panels": [], "has_exercise": true },
+        { "key": "l05-limits-of-the-quicklook", "title": "Limits of the quicklook", "order": 5, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m04-triangulation-and-validation",
+      "title": "Triangulation and Validation",
+      "order": 4,
+      "lessons": [
+        { "key": "l01-three-independent-routes", "title": "Three independent routes", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-when-routes-disagree", "title": "When routes disagree", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-the-water-leg-check", "title": "The water-leg check", "order": 3, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l04-adopting-a-final-rw", "title": "Adopting a final Rw", "order": 4, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m05-rw-sensitivity-and-booking",
+      "title": "Rw Sensitivity and Booking",
+      "order": 5,
+      "lessons": [
+        { "key": "l01-booking-with-the-corrected-rw", "title": "Booking with the corrected Rw", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-booking-with-the-raw-sample", "title": "Booking with the raw sample", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-why-pay-moves", "title": "Why pay moves", "order": 3, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l04-sand-b-and-the-field-view", "title": "SAND_B and the field view", "order": 4, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l05-reporting-rw-sensitivity", "title": "Reporting Rw sensitivity", "order": 5, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m06-the-expert-standard",
+      "title": "The Expert Standard",
+      "order": 6,
+      "lessons": [
+        { "key": "l01-the-three-tier-workflow", "title": "The three-tier workflow", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-uncertainty-and-defensibility", "title": "Uncertainty and defensibility", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-the-capstone-walkthrough", "title": "The capstone walkthrough", "order": 3, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l04-beyond-the-typewell", "title": "Beyond the typewell", "order": 4, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    }
+  ]
+}
