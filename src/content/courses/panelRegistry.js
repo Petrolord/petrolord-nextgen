@@ -12,6 +12,7 @@ export const PANELS = {
   'petro-shaly-sw-lab': React.lazy(() => import('@/components/course/panels/petrophysics/ShalySwLab')),
   'petro-rw-triangulator': React.lazy(() => import('@/components/course/panels/petrophysics/RwTriangulator')),
   'wd-las-inspector': React.lazy(() => import('@/components/course/panels/welldata/LasInspector')),
+  'wc-section-explorer': React.lazy(() => import('@/components/course/panels/wellcorrelation/SectionExplorer')),
 };
 
 export function resolvePanel(id) {
