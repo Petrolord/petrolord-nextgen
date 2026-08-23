@@ -1,0 +1,267 @@
+{
+  "app_slug": "seismolord",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-seismic-and-the-well-tie",
+      "title": "Seismic and the Well Tie",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-tie-a-well",
+          "title": "Why tie a well",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-seismic-measures",
+          "title": "What seismic measures",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-teaching-well",
+          "title": "The teaching well",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-synthetic-workflow-map",
+          "title": "The synthetic workflow map",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "sl-synthetic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-velocity-and-impedance",
+      "title": "Velocity and Impedance",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-from-sonic-to-velocity",
+          "title": "From sonic to velocity",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-density-and-the-rock",
+          "title": "Density and the rock",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-acoustic-impedance",
+          "title": "Acoustic impedance",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-impedance-log",
+          "title": "The impedance log",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "sl-synthetic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-depth-to-time",
+      "title": "Depth to Time",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-why-seismic-lives-in-time",
+          "title": "Why seismic lives in time",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-two-way-time",
+          "title": "Two-way time",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-teaching-time-depth-function",
+          "title": "The teaching time-depth function",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-time-grid",
+          "title": "The time grid",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "sl-synthetic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-reflection-coefficients",
+      "title": "Reflection Coefficients",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-reflects",
+          "title": "What reflects",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-reflection-coefficient",
+          "title": "The reflection coefficient",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-polarity-and-sign",
+          "title": "Polarity and sign",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-rc-series-on-the-typewell",
+          "title": "The RC series on the teaching well",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "sl-synthetic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-wavelets-and-convolution",
+      "title": "Wavelets and Convolution",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-a-wavelet-is",
+          "title": "What a wavelet is",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ricker-wavelet",
+          "title": "The Ricker wavelet",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-convolution",
+          "title": "Convolution",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "sl-synthetic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-frequency-and-resolution",
+          "title": "Frequency and resolution",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "sl-synthetic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-interference-and-tuning",
+          "title": "Interference and tuning",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "sl-synthetic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-reading-the-synthetic",
+      "title": "Reading the Synthetic",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-summary-panel",
+          "title": "The summary panel",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "sl-synthetic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "sl-synthetic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-professional",
+          "title": "Onward to Professional",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
