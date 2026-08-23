@@ -11,7 +11,8 @@ import {
   Loader2, HardDrive, GraduationCap, Lock, CheckCircle2, XCircle,
   BookOpen, Award, ArrowRight,
 } from 'lucide-react';
-import { TEACHING_FILES, qcFile, headerRows, computeIntermediate, computeAdvanced } from '@/lib/welldataTeaching';
+import { computeIntermediate, computeAdvanced } from '@/lib/welldataTeaching';
+import LasInspector from '@/components/course/panels/welldata/LasInspector';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
 } from '@/services/academyService';
@@ -63,7 +64,6 @@ const WellDataLearningPage = () => {
   const { toast } = useToast();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
   const [tier, setTier] = useState('beginner');
-  const [fileId, setFileId] = useState(TEACHING_FILES[0].id);
   const [capstone, setCapstone] = useState(null);
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -101,15 +101,6 @@ const WellDataLearningPage = () => {
     () => (tier === 'advanced' ? computeAdvanced() : null),
     [tier],
   );
-
-  const file = TEACHING_FILES.find((f) => f.id === fileId);
-  const qc = useMemo(() => {
-    try {
-      return qcFile(file);
-    } catch (e) {
-      return { error: e.message };
-    }
-  }, [file]);
 
   const watermark = gate.quota?.export_watermark;
 
@@ -187,93 +178,8 @@ const WellDataLearningPage = () => {
             </CardContent>
           </Card>
 
-          {/* File explorer + QC */}
-          <Card className="bg-[#1E293B] border-gray-700">
-            <CardHeader>
-              <CardTitle className="text-white">Teaching files</CardTitle>
-              <CardDescription>Load each file with the real parser and read its QC panel.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex flex-wrap gap-2">
-                {TEACHING_FILES.map((f) => (
-                  <button key={f.id} type="button" onClick={() => setFileId(f.id)}
-                    className={`px-3 py-1.5 rounded-md border text-sm transition-colors ${
-                      f.id === fileId
-                        ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
-                        : 'bg-gray-800 text-gray-300 border-gray-600 hover:border-gray-400'
-                    }`}>
-                    {f.label}
-                  </button>
-                ))}
-              </div>
-              <p className="text-xs text-gray-500">{file.hint}</p>
-
-              {qc.error ? (
-                <p className="text-red-400 text-sm">Parse failed: {qc.error}</p>
-              ) : (
-                <>
-                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-                    <div className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                      <p className="text-gray-500 text-xs">LAS version / wrap</p>
-                      <p className="text-white">{qc.version} / {qc.wrap}</p>
-                    </div>
-                    <div className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                      <p className="text-gray-500 text-xs">Depth range ({qc.depth.unit})</p>
-                      <p className="text-white">{num(qc.depth.first, 1)} – {num(qc.depth.last, 1)}</p>
-                    </div>
-                    <div className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                      <p className="text-gray-500 text-xs">Step (native / metres)</p>
-                      <p className="text-white">{num(qc.depth.stepNative, 4)} {qc.depth.unit} / {num(qc.depth.stepM, 4)} m</p>
-                    </div>
-                    <div className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                      <p className="text-gray-500 text-xs">Samples / NULL flag</p>
-                      <p className="text-white">{qc.depth.nSamples} / {qc.nullValue ?? '—'}</p>
-                    </div>
-                  </div>
-
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="text-left text-gray-400 border-b border-gray-700">
-                          <th className="py-2 pr-4">Curve</th><th className="py-2 pr-4">Unit</th>
-                          <th className="py-2 pr-4">Samples</th><th className="py-2 pr-4">Nulls</th>
-                          <th className="py-2 pr-4">First</th><th className="py-2 pr-4">Last</th>
-                          <th className="py-2 pr-4">Mean (finite)</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {qc.curves.map((c) => (
-                          <tr key={c.mnemonic} className={`border-b border-gray-800 ${c.nullCount === c.nSamples ? 'text-red-400' : 'text-gray-300'}`}>
-                            <td className="py-2 pr-4 text-white">{c.mnemonic}</td>
-                            <td className="py-2 pr-4">{c.unit}</td>
-                            <td className="py-2 pr-4">{c.nSamples}</td>
-                            <td className="py-2 pr-4">{c.nullCount}</td>
-                            <td className="py-2 pr-4">{num(c.firstFinite)}</td>
-                            <td className="py-2 pr-4">{num(c.lastFinite)}</td>
-                            <td className="py-2 pr-4">{num(c.mean)}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-xs text-gray-400">
-                      <tbody>
-                        {headerRows(qc.well).map((r) => (
-                          <tr key={r.key} className="border-b border-gray-800/60">
-                            <td className="py-1 pr-3 text-gray-500 font-mono">{r.key}</td>
-                            <td className="py-1 pr-3">{String(r.value ?? '')} {r.unit}</td>
-                            <td className="py-1">{r.descr}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </>
-              )}
-            </CardContent>
-          </Card>
+          {/* File explorer + QC: the shared LAS inspector panel (also embedded in DC5 lessons) */}
+          <LasInspector />
 
           {/* Tier toggle + intermediate panel */}
           <div className="flex gap-2">
