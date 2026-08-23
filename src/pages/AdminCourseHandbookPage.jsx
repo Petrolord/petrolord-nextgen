@@ -24,6 +24,10 @@ import MarkdownLesson from '@/components/course/MarkdownLesson';
 // only. Answer keys never reach any client, this page included.
 const OPTION_LETTERS = ['A', 'B', 'C', 'D'];
 
+// Same brand asset the landing page and footer use. An absolute URL so
+// the standalone HTML download keeps its cover logo too.
+const PETROLORD_LOGO = 'https://horizons-cdn.hostinger.com/80504870-35f5-4fc9-ba7f-f8bc12cf282f/petrolord-symbol-512-4kVUt.png';
+
 const QuestionList = ({ questions }) => (
   <ol className="space-y-4">
     {(questions || []).map((qq, i) => (
@@ -165,12 +169,18 @@ const AdminCourseHandbookPage = () => {
       <Helmet><title>Course handbook - Petrolord NextGen Academy</title></Helmet>
       <style>{`
         @media print {
-          body * { visibility: hidden !important; }
-          #handbook-doc, #handbook-doc * { visibility: visible !important; }
-          #handbook-doc {
-            position: absolute !important; left: 0 !important; top: 0 !important;
-            width: 100% !important;
-          }
+          /* The app shell is a fixed-height scroll pane (h-screen +
+             overflow), which clips print output to a single page.
+             Flatten it so the handbook flows and paginates. */
+          html, body { height: auto !important; overflow: visible !important; background: #ffffff !important; }
+          .h-screen { height: auto !important; }
+          .overflow-hidden, .overflow-y-auto, .overflow-x-hidden { overflow: visible !important; }
+          aside, body > div header { display: none !important; }
+          body * { visibility: hidden; }
+          #handbook-doc, #handbook-doc * { visibility: visible; }
+          /* Keep the handbook in normal flow: in-flow content paginates
+             reliably where absolutely positioned content can truncate. */
+          #handbook-doc { width: 100% !important; }
           #handbook-doc, #handbook-doc * {
             color: #0F172A !important;
             background: #ffffff !important;
@@ -230,6 +240,15 @@ const AdminCourseHandbookPage = () => {
         {manifest && bodies && banks && (
           <div id="handbook-doc" className="space-y-8">
             <div className="border-b border-gray-700 pb-4">
+              {/* Width/height attributes, not Tailwind, so the standalone
+                  HTML download sizes the logo correctly too. */}
+              <img
+                src={PETROLORD_LOGO}
+                alt="Petrolord"
+                width="56"
+                height="56"
+                className="mb-4 rounded-lg"
+              />
               <p className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-1">
                 Petrolord NextGen Academy staff handbook
               </p>
