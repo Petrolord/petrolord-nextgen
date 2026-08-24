@@ -1,0 +1,277 @@
+{
+  "app_slug": "welldata",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-campaign",
+      "title": "The Campaign",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-run-a-campaign",
+          "title": "Why run a campaign",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-six-files",
+          "title": "The six files",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-campaign-number-is",
+          "title": "What a campaign number is",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-campaign-panel-map",
+          "title": "The campaign panel map",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "wd-campaign-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-counting-curves",
+      "title": "Counting Curves",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-twenty-four-curves",
+          "title": "Twenty four curves",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "wd-campaign-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-why-depth-is-excluded",
+          "title": "Why depth is excluded",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-every-file-contributes-four",
+          "title": "Every file contributes four",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-curve-count-hides",
+          "title": "What a curve count hides",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "wd-campaign-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-finding-the-exceptions",
+      "title": "Finding the Exceptions",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-one-file-converts",
+          "title": "One file converts",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-one-file-is-not-uniform",
+          "title": "One file is not uniform",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "wd-campaign-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-one-curve-is-dead",
+          "title": "One curve is dead",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "wd-campaign-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-exceptions-are-the-product",
+          "title": "Exceptions are the product",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-when-the-exception-count-changes",
+          "title": "When the exception count changes",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-aggregates-hide-composition",
+      "title": "Aggregates Hide Composition",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-two-hundred-and-seventy-two",
+          "title": "The two hundred and seventy two",
+          "order": 1,
+          "est_minutes": 16,
+          "panels": [
+            "wd-campaign-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-most-of-it-is-one-curve",
+          "title": "Most of it is one curve",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "wd-campaign-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-dead-curve-is-not-scattered-nulls",
+          "title": "A dead curve is not scattered nulls",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-findings-two-responses",
+          "title": "Two findings two responses",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-never-report-an-aggregate-alone",
+          "title": "Never report an aggregate alone",
+          "order": 5,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-wrapped-file",
+      "title": "The Wrapped File",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-las-1-2-and-wrapping",
+          "title": "LAS 1.2 and wrapping",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-parser-has-no-wrap-branch",
+          "title": "The parser has no wrap branch",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-flatten-and-reshape",
+          "title": "Flatten and reshape",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "wd-campaign-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-where-that-is-safe-and-where-it-is-not",
+          "title": "Where that is safe and where it is not",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-campaign-workflow",
+      "title": "The Campaign Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wd-campaign-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wd-campaign-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-top-of-the-ladder",
+          "title": "The top of the ladder",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
