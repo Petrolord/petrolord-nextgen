@@ -1,0 +1,269 @@
+{
+  "app_slug": "reservoircalc",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-from-map-to-volume",
+      "title": "From Map to Volume",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-volumes-matter",
+          "title": "Why volumes matter",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ekene-accumulation",
+          "title": "The Ekene accumulation",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-oil-water-contact",
+          "title": "The oil water contact",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-volumetrics-workflow-map",
+          "title": "The volumetrics workflow map",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "rc-volume-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-oil-column",
+      "title": "The Oil Column",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-top-and-base",
+          "title": "Top and base",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-clipping-against-the-contact",
+          "title": "Clipping against the contact",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-which-nodes-hold-oil",
+          "title": "Which nodes hold oil",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "rc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-maximum-column",
+          "title": "The maximum column",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "rc-volume-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-volumetric-chain",
+      "title": "The Volumetric Chain",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-gross-rock-volume",
+          "title": "Gross rock volume",
+          "order": 1,
+          "est_minutes": 16,
+          "panels": [
+            "rc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-net-to-gross",
+          "title": "Net to gross",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-porosity-and-pore-volume",
+          "title": "Porosity and pore volume",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-water-saturation-and-hcpv",
+          "title": "Water saturation and HCPV",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-formation-volume-factor-and-stoiip",
+          "title": "Formation volume factor and STOIIP",
+          "order": 5,
+          "est_minutes": 16,
+          "panels": [
+            "rc-volume-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-properties",
+      "title": "The Properties",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-where-the-numbers-come-from",
+          "title": "Where the numbers come from",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-constants-are-a-simplification",
+          "title": "Constants are a simplification",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-how-much-each-property-moves-the-answer",
+          "title": "How much each property moves the answer",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-units-and-conversions",
+          "title": "Units and conversions",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-contact",
+      "title": "The Contact",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-contact-dominates",
+          "title": "The contact dominates",
+          "order": 1,
+          "est_minutes": 16,
+          "panels": [
+            "rc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-why-the-response-is-not-linear",
+          "title": "Why the response is not linear",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-a-contact-comes-from",
+          "title": "Where a contact comes from",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reporting-a-volume-honestly",
+          "title": "Reporting a volume honestly",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-volumetrics-workflow",
+      "title": "The Volumetrics Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "rc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-professional",
+          "title": "Onward to Professional",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
