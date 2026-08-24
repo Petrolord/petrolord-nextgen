@@ -13,6 +13,7 @@ export const PANELS = {
   'petro-rw-triangulator': React.lazy(() => import('@/components/course/panels/petrophysics/RwTriangulator')),
   'wd-las-inspector': React.lazy(() => import('@/components/course/panels/welldata/LasInspector')),
   'wc-section-explorer': React.lazy(() => import('@/components/course/panels/wellcorrelation/SectionExplorer')),
+  'sl-synthetic-explorer': React.lazy(() => import('@/components/course/panels/seismolord/SyntheticExplorer')),
 };
 
 export function resolvePanel(id) {
