@@ -14,6 +14,7 @@ export const PANELS = {
   'wd-las-inspector': React.lazy(() => import('@/components/course/panels/welldata/LasInspector')),
   'wc-section-explorer': React.lazy(() => import('@/components/course/panels/wellcorrelation/SectionExplorer')),
   'sl-synthetic-explorer': React.lazy(() => import('@/components/course/panels/seismolord/SyntheticExplorer')),
+  'mp-map-explorer': React.lazy(() => import('@/components/course/panels/mapping/MapExplorer')),
 };
 
 export function resolvePanel(id) {
