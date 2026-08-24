@@ -1,0 +1,269 @@
+{
+  "app_slug": "mapping",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-maps-and-control-points",
+      "title": "Maps and Control Points",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-we-map",
+          "title": "Why we map",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-from-tops-to-points",
+          "title": "From tops to points",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-ekene-map-wells",
+          "title": "The Ekene map wells",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "mp-map-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-mappers-job",
+          "title": "The mapper's job",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-grid",
+      "title": "The Grid",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-what-a-grid-is",
+          "title": "What a grid is",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-grid-frame",
+          "title": "The grid frame",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-choosing-a-cell-size",
+          "title": "Choosing a cell size",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "mp-map-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-nodes-are-not-wells",
+          "title": "Nodes are not wells",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-interpolation",
+      "title": "Interpolation",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-filling-the-gaps",
+          "title": "Filling the gaps",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-thin-plate-spline",
+          "title": "The thin-plate spline",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-honouring-the-control",
+          "title": "Honouring the control",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-interpolation-invents",
+          "title": "What interpolation invents",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "mp-map-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-extrapolation-and-honesty",
+      "title": "Extrapolation and Honesty",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-edge-of-knowledge",
+          "title": "The edge of knowledge",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-extrapolation-limit",
+          "title": "The extrapolation limit",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "mp-map-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-live-and-dead-nodes",
+          "title": "Live and dead nodes",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-crest-problem",
+          "title": "The crest problem",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "mp-map-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-reading-the-map",
+      "title": "Reading the Map",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-contours",
+          "title": "Contours",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "mp-map-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-contour-interval",
+          "title": "The contour interval",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "mp-map-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-reading-structure",
+          "title": "Reading structure",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-sampling-a-location",
+          "title": "Sampling a location",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-maps-that-mislead",
+          "title": "Maps that mislead",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "mp-map-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-mapping-workflow",
+      "title": "The Mapping Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "mp-map-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "mp-map-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-professional",
+          "title": "Onward to Professional",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
