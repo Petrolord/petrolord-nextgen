@@ -1,7 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import {
   computeAdvanced, computeValidationMap, CONTROL_SETS, ALL_SIX, PLUS_SEVEN, E7,
+  TEACHING_WELLS, TOP_NAME, CAPSTONE_CELL_M, PAD_CELLS, MAX_EXTRAP_M, TARGET,
 } from '@/lib/mappingTeaching';
+import { topsToPoints, specForPoints } from '@petrolord/engines/engines/mapping/surface.js';
+import { gridSurface } from '@petrolord/engines/lib/gridding/gridding.js';
+import { sampleAtXY } from '@petrolord/engines/lib/gridding/gridmath.js';
 
 // Pins the validation-explorer panel math to the live NG7 Expert capstone
 // oracle, and to the readings the lessons quote.
@@ -120,5 +124,50 @@ describe('mapping expert: validating the map', () => {
     expect(plus7.summary.atTarget).toBeLessThan(hi);
     expect(all6.summary.atTarget).toBeGreaterThan(lo);
     expect(all6.summary.atTarget).toBeLessThan(hi);
+  });
+
+  it('keeps the frame fixed, which three of the six subsets would not', () => {
+    // The lessons claim the frame discipline is a construction rather than a
+    // check: derived once from the full control and reused. Three five-well
+    // subsets derive a different frame, and the interior well's does not move,
+    // which is why the one cross-validatable run agrees either way.
+    const pts = topsToPoints(TEACHING_WELLS, TOP_NAME);
+    const shared = specForPoints(pts, CAPSTONE_CELL_M, PAD_CELLS);
+    const moved = [];
+    for (let i = 0; i < pts.length; i++) {
+      const own = specForPoints(pts.filter((_, k) => k !== i), CAPSTONE_CELL_M, PAD_CELLS);
+      if (JSON.stringify(own) !== JSON.stringify(shared)) moved.push(TEACHING_WELLS[i].name);
+    }
+    expect(moved).toEqual(['Ekene-1', 'Ekene-4', 'Ekene-5']);
+
+    // Only the Ekene-1 removal actually moves the prospect reading, because its
+    // origin shift takes P-1 off a node and the value is then interpolated.
+    const at = (i, spec) => sampleAtXY(
+      gridSurface(pts.filter((_, k) => k !== i), spec, { maxExtrapolation: MAX_EXTRAP_M }).z,
+      spec, TARGET.x, TARGET.y,
+    );
+    const own0 = specForPoints(pts.filter((_, k) => k !== 0), CAPSTONE_CELL_M, PAD_CELLS);
+    expect(own0.y0).toBe(950);
+    expect(at(0, own0) - at(0, shared)).toBeCloseTo(0.0351562, 6);
+    for (const i of [3, 4]) {
+      const own = specForPoints(pts.filter((_, k) => k !== i), CAPSTONE_CELL_M, PAD_CELLS);
+      expect(at(i, own)).toBeCloseTo(at(i, shared), 9);
+    }
+  });
+
+  it('reproduces the blind residual through the seven-well leave-one-out', () => {
+    const pts = topsToPoints(TEACHING_WELLS, TOP_NAME);
+    const spec = specForPoints(pts, CAPSTONE_CELL_M, PAD_CELLS);
+    const pts7 = [...pts, { x: E7.x, y: E7.y, z: E7.actual }];
+    // Removing Ekene-7 from the seven-well set restores the original six, so
+    // the prediction there is the same calculation as the blind test.
+    const without7 = gridSurface(pts, spec, { maxExtrapolation: MAX_EXTRAP_M }).z;
+    expect(sampleAtXY(without7, spec, E7.x, E7.y) - E7.actual)
+      .toBeCloseTo(A.blindResidualE7, 12);
+    // Ekene-6's residual barely moves once Ekene-7 joins the control.
+    const without6 = gridSurface(pts7.filter((p) => !(p.x === 1900 && p.y === 1800)), spec,
+      { maxExtrapolation: MAX_EXTRAP_M }).z;
+    expect(sampleAtXY(without6, spec, 1900, 1800) - 1546).toBeCloseTo(9.815673828125, 9);
+    expect(A.looResidE6 - 9.815673828125).toBeCloseTo(0.028198242, 6);
   });
 });

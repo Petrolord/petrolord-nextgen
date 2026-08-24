@@ -49,11 +49,13 @@ So the residual is a property of the control geometry and the interpolator, not 
 
 ## Worked example
 
-A colleague runs the same exercise but derives a new frame for each five-well subset. Their residual at Ekene-6 comes out at 9.6 m rather than 9.84 m. Which is right?
+A colleague runs the same exercise but derives a new frame for each five-well subset. Their residual at Ekene-6 is 9.8438720703125 m, identical to yours. Does that mean the frame discipline does not matter?
 
-The 9.8439 m figure. Deriving a new frame per subset moves the grid origin and the node positions between runs, so the sampled value at (1900, 1800) is taken from a differently placed lattice each time. The 0.24 m disagreement is the frame moving, not the interpolation changing.
+No, and this dataset is a good illustration of why the check is worth running rather than assumed. Ekene-6 is interior, so removing it does not change the extent of the control and the frame derived from the remaining five is the same 25 by 20 grid at (400, 800). The two routes agree here by luck of geometry.
 
-The difference is small here and the principle is not: with one frame the six runs differ in exactly one thing, the control set, and any difference in the answer is attributable to it.
+Derive a frame per subset for the other five runs and three of them move: without Ekene-1 the origin shifts to $y_0 = 950$ with 19 rows, without Ekene-4 the frame shrinks to 21 by 18, and without Ekene-5 the origin shifts to $x_0 = 800$. Those runs are then sampling a differently placed lattice, and module 5, which samples a fixed location under all six removals, is where that shows up as a number.
+
+With one frame the six runs differ in exactly one thing, the control set, and any difference in the answer is attributable to it.
 
 ## Exercise
 

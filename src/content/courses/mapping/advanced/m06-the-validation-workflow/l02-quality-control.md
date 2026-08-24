@@ -8,7 +8,7 @@ Validation is easy to run and easy to run in a way that produces numbers meaning
 
 Run these before any residual is computed.
 
-**Is the frame the same in every run?** Derived once from the full control set and reused. If each subset derives its own frame, the residuals contain a lattice shift. On Ekene that shift is about 0.24 m, small enough to pass unnoticed and large enough to matter on a field where the whole answer is a few metres.
+**Is the frame the same in every run?** Derived once from the full control set and reused. If each subset derives its own frame, the runs sample a lattice that moves between them. On Ekene three of the six five-well subsets derive a different frame, and the jackknife at P-1 then shifts by 0.035 m on the Ekene-1 run, because the moved origin takes the prospect off a node and the value has to be interpolated between nodes instead of read from the fit. The size of that shift is a property of the cell size rather than of the geology, which is exactly why it should not be in a residual.
 
 **Are the settings the same in every run?** Same method, cell size and extrapolation limit. A leave-one-out run with a wider limit than the full map is answering a different question.
 
