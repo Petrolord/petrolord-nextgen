@@ -26,6 +26,8 @@ export const PANELS = {
   'em-framework-explorer': React.lazy(() => import('@/components/course/panels/earthmodel/FrameworkExplorer')),
   'bs-burial-heat-explorer': React.lazy(() => import('@/components/course/panels/basin/BurialHeatExplorer')),
   'mp-map-explorer': React.lazy(() => import('@/components/course/panels/mapping/MapExplorer')),
+  'mp-isochore-explorer': React.lazy(() => import('@/components/course/panels/mapping/IsochoreExplorer')),
+  'mp-validation-explorer': React.lazy(() => import('@/components/course/panels/mapping/ValidationExplorer')),
 };
 
 export function resolvePanel(id) {

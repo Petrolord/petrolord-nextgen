@@ -135,3 +135,186 @@ export function computeIntermediate() {
     meanWellThickness: wellThk.reduce((a, w) => a + w.thickness, 0) / wellThk.length,
   };
 }
+
+// ---- Panel drivers -------------------------------------------------------
+// The two deep tiers each get one explorer panel. Both drive the same
+// engines the capstones do, so a tile a learner reads is the number the
+// grader holds. Neither of these is used by the capstone itself.
+
+const BASE_NAME = 'BASE_SAND';
+
+// Contours in world coordinates, for a grid that is already computed.
+function contoursFor(z, spec, zMin, zMax) {
+  if (!Number.isFinite(zMin) || !Number.isFinite(zMax) || zMin === zMax) {
+    return { contours: [], step: null };
+  }
+  const { levels, step } = contourLevels(zMin, zMax, 10);
+  const contours = levels.map((level) => ({
+    level,
+    // contourPolylines works in fractional (col,row) index space with
+    // grid[i*nXl+j]; our z is z[r*nx+c], so nIl=ny, nXl=nx.
+    lines: contourPolylines(z, spec.ny, spec.nx, level).map((flat) => {
+      const pts = [];
+      for (let k = 0; k < flat.length; k += 2) {
+        pts.push([spec.x0 + flat[k] * spec.dx, spec.y0 + flat[k + 1] * spec.dy]);
+      }
+      return pts;
+    }),
+  }));
+  return { contours, step };
+}
+
+const wellPick = (w, name) => w.tops.find((t) => t.name === name).md_m;
+
+// ---- Intermediate panel: one frame, two surfaces, and their difference.
+export const ISO_CELLS = [50, CAPSTONE_CELL_M, 200];
+export const SURFACE_KEYS = [TOP_NAME, BASE_NAME, 'ISOCHORE'];
+
+// Grid both Ekene surfaces on one frame at the given cell, subtract them,
+// and return whichever of the three the learner asked to see. The well
+// posting is the measured value: a pick on the depth surfaces, and base
+// minus top on the isochore, computed without any gridding.
+export function computeIsochoreMap(cellM, surfaceKey) {
+  const topPts = topsToPoints(TEACHING_WELLS, TOP_NAME);
+  const spec = specForPoints(topPts, Number(cellM), PAD_CELLS);
+  const opts = { maxExtrapolation: MAX_EXTRAP_M };
+  const topZ = gridSurface(topPts, spec, opts).z;
+  const baseZ = gridSurface(topsToPoints(TEACHING_WELLS, BASE_NAME), spec, opts).z;
+  const isoZ = isochore(baseZ, topZ);
+
+  const z = surfaceKey === TOP_NAME ? topZ : (surfaceKey === BASE_NAME ? baseZ : isoZ);
+  const stats = surfaceStats(z);
+  const sampled = sampleAtXY(z, spec, TARGET.x, TARGET.y);
+  const { contours, step } = contoursFor(z, spec, stats.min, stats.max);
+
+  const posted = TEACHING_WELLS.map((w) => {
+    const top = wellPick(w, TOP_NAME);
+    const base = wellPick(w, BASE_NAME);
+    const value = surfaceKey === TOP_NAME ? top : (surfaceKey === BASE_NAME ? base : base - top);
+    const atWell = sampleAtXY(z, spec, w.surface_x, w.surface_y);
+    return {
+      name: w.name, x: w.surface_x, y: w.surface_y, value,
+      mapped: isNull(atWell) ? null : atWell,
+    };
+  });
+  const wellMean = posted.reduce((a, p) => a + p.value, 0) / posted.length;
+  let above = 0;
+  for (const v of z) if (!isNull(v) && v > wellMean) above += 1;
+
+  return {
+    spec,
+    z,
+    contours,
+    posted,
+    summary: {
+      surface: surfaceKey,
+      cellM: Number(cellM),
+      nx: spec.nx,
+      ny: spec.ny,
+      nNodes: spec.nx * spec.ny,
+      liveNodes: stats.count,
+      min: stats.min,
+      max: stats.max,
+      mapMean: stats.mean,
+      atTarget: isNull(sampled) ? null : sampled,
+      contourStep: step,
+      wellMean,
+      mapMinusWell: stats.mean === null ? null : stats.mean - wellMean,
+      nodesAboveWellMean: above,
+    },
+  };
+}
+
+// ---- Advanced panel: the same surface under eight control sets.
+export const ALL_SIX = 'all6';
+export const PLUS_SEVEN = 'plus7';
+
+export const CONTROL_SETS = [
+  { key: ALL_SIX, label: 'All six wells' },
+  ...TEACHING_WELLS.map((w) => ({ key: `drop:${w.name}`, label: `Without ${w.name}` })),
+  { key: PLUS_SEVEN, label: `Six plus ${E7.name}` },
+];
+
+const dist = (ax, ay, bx, by) => Math.hypot(ax - bx, ay - by);
+
+// Every control set is gridded on the SAME frame as the six-well map, so
+// a change in the live node count is a change in what the control
+// supports rather than a change of frame.
+export function computeValidationMap(setKey) {
+  const sixPts = topsToPoints(TEACHING_WELLS, TOP_NAME);
+  const spec = specForPoints(sixPts, CAPSTONE_CELL_M, PAD_CELLS);
+  const opts = { maxExtrapolation: MAX_EXTRAP_M };
+  const e7pt = { x: E7.x, y: E7.y, z: E7.actual, name: E7.name };
+  const named = sixPts.map((p, i) => ({ ...p, name: TEACHING_WELLS[i].name }));
+
+  let control = named;
+  let withheld = null;
+  if (setKey === PLUS_SEVEN) {
+    control = [...named, e7pt];
+  } else if (setKey.startsWith('drop:')) {
+    const name = setKey.slice(5);
+    control = named.filter((p) => p.name !== name);
+    const out = named.find((p) => p.name === name);
+    withheld = out ? { ...out } : null;
+  }
+
+  const grid = gridSurface(control, spec, opts);
+  const stats = surfaceStats(grid.z);
+  const atTarget = sampleAtXY(grid.z, spec, TARGET.x, TARGET.y);
+  const { contours, step } = contoursFor(grid.z, spec, stats.min, stats.max);
+
+  // How many of the current control wells could be dropped and still be
+  // predicted at their own location? On this geometry that is the count
+  // of wells inside the hull of the others.
+  let crossValidatable = 0;
+  for (const p of control) {
+    const rest = control.filter((q) => q !== p);
+    const z = gridSurface(rest, spec, opts).z;
+    if (!isNull(sampleAtXY(z, spec, p.x, p.y))) crossValidatable += 1;
+  }
+
+  // The tested well is the withheld one, or Ekene-7 when it has just
+  // been added: in both cases a pick the six-well map did not use.
+  const tested = withheld || (setKey === PLUS_SEVEN ? e7pt : null);
+  let pred = null;
+  let nearest = null;
+  if (tested) {
+    if (setKey === PLUS_SEVEN) {
+      // The blind prediction is the one the SIX-well map made, before
+      // this well joined the control set.
+      const six = gridSurface(named, spec, opts).z;
+      const v = sampleAtXY(six, spec, tested.x, tested.y);
+      pred = isNull(v) ? null : v;
+      nearest = Math.min(...named.map((p) => dist(p.x, p.y, tested.x, tested.y)));
+    } else {
+      const v = sampleAtXY(grid.z, spec, tested.x, tested.y);
+      pred = isNull(v) ? null : v;
+      nearest = Math.min(...control.map((p) => dist(p.x, p.y, tested.x, tested.y)));
+    }
+  }
+
+  return {
+    spec,
+    z: grid.z,
+    contours,
+    control,
+    withheld,
+    tested,
+    summary: {
+      setKey,
+      nControl: control.length,
+      liveNodes: grid.live,
+      crossValidatable,
+      crest: stats.min,
+      deepest: stats.max,
+      mapMean: stats.mean,
+      atTarget: isNull(atTarget) ? null : atTarget,
+      contourStep: step,
+      testedName: tested ? tested.name : null,
+      actual: tested ? tested.z : null,
+      pred,
+      resid: pred === null || !tested ? null : pred - tested.z,
+      nearestControlM: nearest,
+    },
+  };
+}
