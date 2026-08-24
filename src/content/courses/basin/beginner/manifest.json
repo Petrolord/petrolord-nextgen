@@ -1,0 +1,269 @@
+{
+  "app_slug": "basin",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-why-basin-modelling",
+      "title": "Why Basin Modelling",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-question-a-basin-model-answers",
+          "title": "The question a basin model answers",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-petroleum-system",
+          "title": "The petroleum system",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-golden-fixtures",
+          "title": "The golden fixtures",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-beginner-scope",
+          "title": "The beginner scope",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "bs-burial-heat-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-compaction",
+      "title": "Compaction",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-porosity-falls-with-depth",
+          "title": "Porosity falls with depth",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-sclater-christie-curve",
+          "title": "The Sclater-Christie curve",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-porosity-at-depth",
+          "title": "Porosity at depth",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "bs-burial-heat-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-solid-thickness",
+          "title": "Solid thickness",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "bs-burial-heat-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-lithology-changes-the-curve",
+          "title": "Lithology changes the curve",
+          "order": 5,
+          "est_minutes": 16,
+          "panels": [
+            "bs-burial-heat-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-decompaction",
+      "title": "Decompaction",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-what-decompaction-is",
+          "title": "What decompaction is",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-restoring-a-buried-layer",
+          "title": "Restoring a buried layer",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "bs-burial-heat-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-grain-is-conserved",
+          "title": "Grain is conserved",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-why-burial-history-needs-it",
+          "title": "Why burial history needs it",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-heat-in-the-subsurface",
+      "title": "Heat in the Subsurface",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-heat-flow-and-conductivity",
+          "title": "Heat flow and conductivity",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-steady-state-column",
+          "title": "The steady state column",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-layers-two-gradients",
+          "title": "Two layers two gradients",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "bs-burial-heat-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reading-the-column",
+          "title": "Reading the column",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "bs-burial-heat-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-burial-and-heat-together",
+      "title": "Burial and Heat Together",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-layer-has-a-history",
+          "title": "A layer has a history",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-why-time-and-temperature-both-matter",
+          "title": "Why time and temperature both matter",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-this-tier-does-not-do",
+          "title": "What this tier does not do",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-sanity-checks",
+          "title": "Sanity checks",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "bs-burial-heat-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-basin-workflow",
+      "title": "The Basin Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "bs-burial-heat-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "bs-burial-heat-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-professional",
+          "title": "Onward to Professional",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

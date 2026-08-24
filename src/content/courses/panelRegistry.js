@@ -18,6 +18,7 @@ export const PANELS = {
   'rp-fluid-explorer': React.lazy(() => import('@/components/course/panels/rockphysics/FluidExplorer')),
   'pp-frame-explorer': React.lazy(() => import('@/components/course/panels/porepressure/FrameExplorer')),
   'em-framework-explorer': React.lazy(() => import('@/components/course/panels/earthmodel/FrameworkExplorer')),
+  'bs-burial-heat-explorer': React.lazy(() => import('@/components/course/panels/basin/BurialHeatExplorer')),
   'mp-map-explorer': React.lazy(() => import('@/components/course/panels/mapping/MapExplorer')),
 };
 
