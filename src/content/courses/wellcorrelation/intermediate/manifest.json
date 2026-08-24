@@ -1,0 +1,267 @@
+{
+  "app_slug": "wellcorrelation",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-from-reading-to-flattening",
+      "title": "From Reading to Flattening",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-this-tier-adds",
+          "title": "What this tier adds",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-teaching-section",
+          "title": "The teaching section",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-flatten-at-all",
+          "title": "Why flatten at all",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-flattening-panel-map",
+          "title": "The flattening panel map",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "wc-flatten-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-choosing-a-datum",
+      "title": "Choosing a Datum",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-what-a-datum-is",
+          "title": "What a datum is",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-shift-is-one-subtraction",
+          "title": "The shift is one subtraction",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "wc-flatten-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-every-shift-is-negative-here",
+          "title": "Why every shift is negative here",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-choosing-the-flattening-top",
+          "title": "Choosing the flattening top",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-displayed-depth",
+      "title": "Displayed Depth",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-displayed-against-measured",
+          "title": "Displayed against measured",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-reading-a-displayed-pick",
+          "title": "Reading a displayed pick",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "wc-flatten-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-displayed-span",
+          "title": "The displayed span",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "wc-flatten-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-flattening-does-not-change",
+          "title": "What flattening does not change",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-growth",
+      "title": "Growth",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-intervals-survive-flattening",
+          "title": "Intervals survive flattening",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-a-to-sand-interval",
+          "title": "The A to SAND interval",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "wc-flatten-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-growth-range",
+          "title": "The growth range",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "wc-flatten-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-growth-means-geologically",
+          "title": "What growth means geologically",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-growth-against-relief",
+          "title": "Growth against relief",
+          "order": 5,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-missing-tops",
+      "title": "Missing Tops",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-well-that-stops-short",
+          "title": "A well that stops short",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-counting-wells-with-all-tops",
+          "title": "Counting wells with all tops",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wc-flatten-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-correlation-line-does",
+          "title": "What a correlation line does",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-never-invent-a-pick",
+          "title": "Never invent a pick",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-flattening-workflow",
+      "title": "The Flattening Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wc-flatten-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wc-flatten-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-expert",
+          "title": "Onward to Expert",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
