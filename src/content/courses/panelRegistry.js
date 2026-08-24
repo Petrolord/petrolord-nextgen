@@ -12,6 +12,7 @@ export const PANELS = {
   'petro-shaly-sw-lab': React.lazy(() => import('@/components/course/panels/petrophysics/ShalySwLab')),
   'petro-rw-triangulator': React.lazy(() => import('@/components/course/panels/petrophysics/RwTriangulator')),
   'wd-las-inspector': React.lazy(() => import('@/components/course/panels/welldata/LasInspector')),
+  'wd-import-explorer': React.lazy(() => import('@/components/course/panels/welldata/ImportExplorer')),
   'wc-section-explorer': React.lazy(() => import('@/components/course/panels/wellcorrelation/SectionExplorer')),
   'sl-synthetic-explorer': React.lazy(() => import('@/components/course/panels/seismolord/SyntheticExplorer')),
   'rc-volume-explorer': React.lazy(() => import('@/components/course/panels/reservoircalc/VolumeExplorer')),
