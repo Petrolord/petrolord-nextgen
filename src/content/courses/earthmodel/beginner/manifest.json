@@ -1,0 +1,267 @@
+{
+  "app_slug": "earthmodel",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-an-earth-model-is",
+      "title": "What an Earth Model Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-build-a-model",
+          "title": "Why build a model",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-container-not-the-barrels",
+          "title": "The container not the barrels",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-golden-model",
+          "title": "The golden model",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-beginner-framework-map",
+          "title": "The beginner framework map",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "em-framework-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-one-frame-many-grids",
+      "title": "One Frame, Many Grids",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-surfaces-arrive-on-their-own-grids",
+          "title": "Surfaces arrive on their own grids",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-model-frame",
+          "title": "The model frame",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-resampling",
+          "title": "Resampling",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-resampling-cannot-fix",
+          "title": "What resampling cannot fix",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "em-framework-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-depth-down-clamp",
+      "title": "The Depth-Down Clamp",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-model-must-be-valid",
+          "title": "A model must be valid",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-monotonic-clamp",
+          "title": "The monotonic clamp",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-180-fixed-nodes",
+          "title": "The 180 fixed nodes",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "em-framework-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-clamp-count-is-information",
+          "title": "A clamp count is information",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-zones-and-thickness",
+      "title": "Zones and Thickness",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-from-surfaces-to-zones",
+          "title": "From surfaces to zones",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-zone-a",
+          "title": "Zone A",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-zone-b-pinches-out",
+          "title": "Zone B pinches out",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "em-framework-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-means-over-what",
+          "title": "Means over what",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "em-framework-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-a-thickness-map",
+          "title": "Reading a thickness map",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "em-framework-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-bulk-rock-volume",
+      "title": "Bulk Rock Volume",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-bulk-volume-is",
+          "title": "What bulk volume is",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-closed-form-check",
+          "title": "The closed form check",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "em-framework-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-zone-b-volume",
+          "title": "Zone B volume",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-where-the-volume-goes-next",
+          "title": "Where the volume goes next",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-earth-modeling-workflow",
+      "title": "The Earth Modeling Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "em-framework-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "em-framework-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-professional",
+          "title": "Onward to Professional",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
