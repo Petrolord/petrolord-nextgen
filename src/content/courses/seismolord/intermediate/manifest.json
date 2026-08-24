@@ -1,0 +1,277 @@
+{
+  "app_slug": "seismolord",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-from-tie-to-shift",
+      "title": "From Tie to Shift",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-this-tier-adds",
+          "title": "What this tier adds",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-planted-lag",
+          "title": "The planted lag",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-bulk-shift-is",
+          "title": "What a bulk shift is",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-shift-panel-map",
+          "title": "The shift panel map",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "sl-shift-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-correlation-scan",
+      "title": "The Correlation Scan",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-comparing-two-traces",
+          "title": "Comparing two traces",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-normalised-correlation",
+          "title": "The normalised correlation",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-scanning-the-lags",
+          "title": "Scanning the lags",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "sl-shift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reading-the-peak",
+          "title": "Reading the peak",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "sl-shift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-why-a-correlation-of-one-is-a-synthetic-answer",
+          "title": "Why a correlation of one is a synthetic answer",
+          "order": 5,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-reading-the-scan-curve",
+      "title": "Reading the Scan Curve",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-shape-of-the-curve",
+          "title": "The shape of the curve",
+          "order": 1,
+          "est_minutes": 16,
+          "panels": [
+            "sl-shift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-zero-lag-is-not-innocent",
+          "title": "Zero lag is not innocent",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "sl-shift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-how-sharp-is-the-peak",
+          "title": "How sharp is the peak",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-the-scan-misleads",
+          "title": "When the scan misleads",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-tuning-moves-the-amplitude",
+      "title": "Tuning Moves the Amplitude",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-wavelet-sets-the-amplitude",
+          "title": "The wavelet sets the amplitude",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-lower-frequency-larger-peak",
+          "title": "Lower frequency larger peak",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "sl-shift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-that-is-backwards",
+          "title": "Why that is backwards",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-amplitude-is-not-reflectivity",
+          "title": "Amplitude is not reflectivity",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-tuning-moves-the-time",
+      "title": "Tuning Moves the Time",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-peak-time-is-not-fixed",
+          "title": "The peak time is not fixed",
+          "order": 1,
+          "est_minutes": 16,
+          "panels": [
+            "sl-shift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-reflectivity-never-moves",
+          "title": "The reflectivity never moves",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "sl-shift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-sixty-six-milliseconds",
+          "title": "Sixty six milliseconds",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-which-time-do-you-pick",
+          "title": "Which time do you pick",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-this-costs-a-tie",
+          "title": "What this costs a tie",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-shift-workflow",
+      "title": "The Shift Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "sl-shift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "sl-shift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-expert",
+          "title": "Onward to Expert",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

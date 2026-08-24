@@ -18,6 +18,7 @@ export const PANELS = {
   'wc-flatten-explorer': React.lazy(() => import('@/components/course/panels/wellcorrelation/FlattenExplorer')),
   'wc-prediction-explorer': React.lazy(() => import('@/components/course/panels/wellcorrelation/PredictionExplorer')),
   'sl-synthetic-explorer': React.lazy(() => import('@/components/course/panels/seismolord/SyntheticExplorer')),
+  'sl-shift-explorer': React.lazy(() => import('@/components/course/panels/seismolord/ShiftExplorer')),
   'rc-volume-explorer': React.lazy(() => import('@/components/course/panels/reservoircalc/VolumeExplorer')),
   'rp-fluid-explorer': React.lazy(() => import('@/components/course/panels/rockphysics/FluidExplorer')),
   'pp-frame-explorer': React.lazy(() => import('@/components/course/panels/porepressure/FrameExplorer')),
