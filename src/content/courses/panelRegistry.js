@@ -16,6 +16,7 @@ export const PANELS = {
   'sl-synthetic-explorer': React.lazy(() => import('@/components/course/panels/seismolord/SyntheticExplorer')),
   'rc-volume-explorer': React.lazy(() => import('@/components/course/panels/reservoircalc/VolumeExplorer')),
   'rp-fluid-explorer': React.lazy(() => import('@/components/course/panels/rockphysics/FluidExplorer')),
+  'pp-frame-explorer': React.lazy(() => import('@/components/course/panels/porepressure/FrameExplorer')),
   'mp-map-explorer': React.lazy(() => import('@/components/course/panels/mapping/MapExplorer')),
 };
 
