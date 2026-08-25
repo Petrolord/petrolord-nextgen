@@ -1,0 +1,289 @@
+{
+  "app_slug": "rockphysics",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-putting-the-fluid-in-the-rock",
+      "title": "Putting the Fluid in the Rock",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-this-tier-adds",
+          "title": "What this tier adds",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-moduli-from-a-log-point",
+          "title": "Moduli from a log point",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-two-directions",
+          "title": "The two directions",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "rp-substitution-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-substitution-panel-map",
+          "title": "The substitution panel map",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "rp-substitution-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-dry-frame",
+      "title": "The Dry Frame",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-inverse-gassmann",
+          "title": "Inverse Gassmann",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "rp-substitution-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-not-the-mineral-frame",
+          "title": "Not the mineral frame",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-shear-is-fluid-blind",
+          "title": "Shear is fluid blind",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "rp-substitution-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-dry-frame-depends-on",
+          "title": "What the dry frame depends on",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "rp-substitution-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-when-inverse-gassmann-refuses",
+          "title": "When inverse Gassmann refuses",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-substituting-the-fluid",
+      "title": "Substituting the Fluid",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-forward-step",
+          "title": "The forward step",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "rp-substitution-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-density-is-the-easy-half",
+          "title": "Density is the easy half",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-vs-goes-up",
+          "title": "Why vs goes up",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "rp-substitution-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-impedance-and-vp-over-vs",
+          "title": "Impedance and Vp over Vs",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "rp-substitution-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-oil-case",
+          "title": "The oil case",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-gas-effect",
+      "title": "The Gas Effect",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-first-percent",
+          "title": "The first percent",
+          "order": 1,
+          "est_minutes": 16,
+          "panels": [
+            "rp-substitution-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-velocity-minimum",
+          "title": "The velocity minimum",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rp-substitution-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-seismic-cannot-count-gas",
+          "title": "Why seismic cannot count gas",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-that-means-for-a-prospect",
+          "title": "What that means for a prospect",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-when-there-is-no-shear-log",
+      "title": "When There Is No Shear Log",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-why-shear-goes-missing",
+          "title": "Why shear goes missing",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-mudrock-line",
+          "title": "The mudrock line",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-greenberg-castagna",
+          "title": "Greenberg-Castagna",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-testing-the-estimator",
+          "title": "Testing the estimator",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-estimate-first-substitute-after",
+          "title": "Estimate first, substitute after",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-substitution-workflow",
+      "title": "The Substitution Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rp-substitution-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "rp-substitution-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-expert",
+          "title": "Onward to Expert",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

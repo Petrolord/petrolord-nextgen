@@ -1,0 +1,303 @@
+{
+  "app_slug": "rockphysics",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-from-a-rock-to-an-interface",
+      "title": "From a Rock to an Interface",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-this-tier-adds",
+          "title": "What this tier adds",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-shale-over-the-sand",
+          "title": "The shale over the sand",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-normal-incidence-first",
+          "title": "Normal incidence first",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-avo-panel-map",
+          "title": "The AVO panel map",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-intercept-and-gradient",
+      "title": "Intercept and Gradient",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-what-shuey-is",
+          "title": "What Shuey is",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-intercept",
+          "title": "The intercept",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-gradient",
+          "title": "The gradient",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-gradient-is-a-shear-story",
+          "title": "The gradient is a shear story",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-a-crossplot",
+          "title": "Reading a crossplot",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-class-flip",
+      "title": "The Class Flip",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-rutherford-williams-classes",
+          "title": "The Rutherford-Williams classes",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-brine-is-class-one",
+          "title": "Brine is class one",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-gas-is-class-three",
+          "title": "Gas is class three",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-threshold-is-a-convention",
+          "title": "The threshold is a convention",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-polarity-crossover",
+          "title": "The polarity crossover",
+          "order": 5,
+          "est_minutes": 16,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-approximation-and-exact",
+      "title": "Approximation and Exact",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-zoeppritz",
+          "title": "Zoeppritz",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-two-term-and-three-term",
+          "title": "Two term and three term",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-the-lines-part",
+          "title": "Where the lines part",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-worse-on-the-brine-case",
+          "title": "Worse on the brine case",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-which-one-to-report",
+          "title": "Which one to report",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-resolution",
+      "title": "Resolution",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-an-anomaly-has-a-thickness",
+          "title": "An anomaly has a thickness",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-tuning-at-sixteen-milliseconds",
+          "title": "Tuning at sixteen milliseconds",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-tuning-belongs-to-the-wavelet",
+          "title": "Tuning belongs to the wavelet",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-amplitude-and-thickness-together",
+          "title": "Amplitude and thickness together",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-resolution-does-to-avo",
+          "title": "What resolution does to AVO",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-avo-workflow",
+      "title": "The AVO Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "rp-avo-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-top-of-the-ladder",
+          "title": "The top of the ladder",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
