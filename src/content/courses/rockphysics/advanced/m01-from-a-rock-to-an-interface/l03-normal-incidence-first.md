@@ -63,7 +63,7 @@ The gas case impedance depends on the porosity through both factors: a higher po
 | 0.40 | 3210.41 | 1911.94 | 6,138,096 |
 | 0.50 | 3344.89 | 1827.42 | 6,112,518 |
 
-The gas impedance rises with porosity, peaks at 6,138,865 near a porosity of 0.41, and falls again. It never reaches the shale's 6,720,350 at any porosity the calculation will accept.
+The gas impedance rises with porosity, peaks at 6,138,917 near a porosity of 0.413, and falls again. It never reaches the shale's 6,720,350 at any porosity the calculation will accept.
 
 So the sign of this reflection is robust. The magnitude is not: across the plausible range of 0.20 to 0.30 the contrast against the shale runs from 16.1 percent to 9.9 percent, a factor of 1.6. That is the tier below's finding restated at the interface, and it is worth keeping separate from the sign, which nothing in the porosity assumption can change.
 
