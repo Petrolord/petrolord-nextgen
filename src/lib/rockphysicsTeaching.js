@@ -15,8 +15,8 @@ import {
   brine, gas, liveOil, woodMix,
 } from '@petrolord/engines/engines/rockphysics/fluids.js';
 import { MINERALS, mixMinerals } from '@petrolord/engines/engines/rockphysics/minerals.js';
-import { kdry, substituteVels } from '@petrolord/engines/engines/rockphysics/gassmann.js';
-import { greenbergCastagnaVs, mudrockVs } from '@petrolord/engines/engines/rockphysics/vsEstimate.js';
+import { kdry, ksat as ksatFwd, substituteVels } from '@petrolord/engines/engines/rockphysics/gassmann.js';
+import { gcLithVs, greenbergCastagnaVs, mudrockVs } from '@petrolord/engines/engines/rockphysics/vsEstimate.js';
 import { shuey, avoClass, zoeppritzRpp } from '@petrolord/engines/engines/rockphysics/avo.js';
 import { tuningCurve, tuningThicknessMs } from '@petrolord/engines/engines/rockphysics/wedge.js';
 
@@ -103,3 +103,152 @@ export function computeAvoScreen(freqHz = CAPSTONE_FREQ_HZ) {
 }
 
 export { MINERALS };
+
+// ---- DC24 (Professional): the substitution explorer.
+// The same inverse-then-forward Gassmann pass the capstone runs, but with
+// the pore fluid mixed at a saturation the learner chooses and with the two
+// assumed inputs (porosity and mineral modulus) exposed, because the tier's
+// argument is about what the answer is sensitive to. Oracle-reproduced in
+// Node against the live NG6 answer key before the seed migration was written.
+
+export const SW_OPTIONS = [1, 0.99, 0.95, 0.9, 0.8, 0.73, 0.5, 0.2, 0];
+export const PHI_OPTIONS = [0.2, 0.25, 0.3];
+export const KMIN_OPTIONS = [35e9, 36e9, 37e9, 38e9, 40e9];
+
+/**
+ * Gassmann substitution of the logged brine sand to a pore fluid mixed at
+ * saturation sw, with the assumed porosity and mineral modulus exposed.
+ * Returns the whole chain plus the round-trip check, which is the tier's
+ * sharpest quality control: substituting back must return the log exactly.
+ */
+export function computeSubstitutionAt(sw = 0, phi = PHI, kmin = KMIN) {
+  const { vp, vs, rho } = SAND_IN_SITU;
+  const base = computeFluids();
+  const mixed = computeFluids(sw).mixed;
+  const mu = rho * vs * vs;
+  const ksatInSitu = rho * vp * vp - (4 * mu) / 3;
+  const kDry = kdry(ksatInSitu, kmin, base.brine.k, phi);
+  const out = substituteVels(vp, vs, rho, kmin, phi,
+    { k: base.brine.k, rho: base.brine.rho }, { k: mixed.k, rho: mixed.rho });
+  // Round trip: put the brine back and the log must return.
+  const back = substituteVels(out.vp, out.vs, out.rho, kmin, phi,
+    { k: mixed.k, rho: mixed.rho }, { k: base.brine.k, rho: base.brine.rho });
+  const curve = SW_OPTIONS.map((s) => {
+    const m = computeFluids(s).mixed;
+    const g = substituteVels(vp, vs, rho, kmin, phi,
+      { k: base.brine.k, rho: base.brine.rho }, { k: m.k, rho: m.rho });
+    return { sw: s, vp: g.vp, vs: g.vs, rho: g.rho, fluidK: m.k };
+  }).sort((a, b) => b.sw - a.sw);
+  return {
+    sw,
+    phi,
+    kmin,
+    mu,
+    ksatInSitu,
+    kDry,
+    fluid: mixed,
+    brine: base.brine,
+    gas: base.gas,
+    oil: base.oil,
+    frame: base.frame,
+    result: out,
+    logged: { ...SAND_IN_SITU },
+    impedanceLogged: rho * vp,
+    impedance: out.rho * out.vp,
+    vpvsLogged: vp / vs,
+    vpvs: out.vp / out.vs,
+    roundTrip: { vp: back.vp, vs: back.vs, rho: back.rho },
+    curve,
+    // The forward direction on its own, so the two halves stay separable.
+    ksatCheck: ksatFwd(kDry, kmin, base.brine.k, phi),
+  };
+}
+
+/** Shear estimation when the log has none, on the frame lithology split. */
+export function computeShearEstimate(vpTarget = 3000) {
+  const fracs = { sandstone: FRAME[0].frac, shale: FRAME[1].frac };
+  const sand = gcLithVs(vpTarget, 'sandstone');
+  const shale = gcLithVs(vpTarget, 'shale');
+  const arith = fracs.sandstone * sand + fracs.shale * shale;
+  const harm = 1 / (fracs.sandstone / sand + fracs.shale / shale);
+  return {
+    vpTarget,
+    sand,
+    shale,
+    arith,
+    harm,
+    gc: greenbergCastagnaVs(vpTarget, fracs),
+    mudrock: mudrockVs(vpTarget),
+    // The same estimator run at the logged velocity, where a measured shear
+    // exists to check it against.
+    atLogged: greenbergCastagnaVs(SAND_IN_SITU.vp, fracs),
+    loggedVs: SAND_IN_SITU.vs,
+  };
+}
+
+// ---- DC25 (Expert): the AVO explorer.
+// Both fluid cases screened under the Ekene shale across angle, with the
+// Shuey approximation and the exact Zoeppritz solution side by side, plus
+// the class call and its threshold. Oracle-reproduced against the live NG7
+// answer key.
+export const CLASS_THRESHOLDS = [0.01, 0.02, 0.04, 0.05];
+export const ANGLE_MAX_DEG = 40;
+
+export function computeAvoDetail(freqHz = CAPSTONE_FREQ_HZ, threshold = 0.02) {
+  const { gasCase } = computeSubstitution();
+  const sh = SHALE;
+  const cases = {
+    brine: { label: 'brine', lower: SAND_IN_SITU },
+    gas: { label: 'gas', lower: gasCase },
+  };
+  const out = {};
+  for (const [key, c] of Object.entries(cases)) {
+    const s0 = shuey(sh.vp, sh.vs, sh.rho, c.lower.vp, c.lower.vs, c.lower.rho, 0);
+    const curve = [];
+    let crossing = null;
+    let prev = null;
+    for (let th = 0; th <= ANGLE_MAX_DEG; th += 1) {
+      const sr = shuey(sh.vp, sh.vs, sh.rho, c.lower.vp, c.lower.vs, c.lower.rho, th).r;
+      const zr = zoeppritzRpp(sh.vp, sh.vs, sh.rho, c.lower.vp, c.lower.vs, c.lower.rho, th).re;
+      curve.push({ theta: th, shuey: sr, exact: zr, err: sr - zr });
+      if (prev !== null && prev > 0 && sr <= 0 && crossing === null) crossing = th;
+      prev = sr;
+    }
+    out[key] = {
+      lower: c.lower,
+      a: s0.a,
+      b: s0.b,
+      c: s0.c,
+      klass: avoClass(s0.a, s0.b, threshold),
+      klassNum: ROMAN_CLASS[avoClass(s0.a, s0.b, threshold)],
+      curve,
+      crossingDeg: crossing,
+      maxErr: curve.reduce((m, p) => Math.max(m, Math.abs(p.err)), 0),
+      zoep30: zoeppritzRpp(sh.vp, sh.vs, sh.rho, c.lower.vp, c.lower.vs, c.lower.rho, 30).re,
+      shuey30: shuey(sh.vp, sh.vs, sh.rho, c.lower.vp, c.lower.vs, c.lower.rho, 30).r,
+    };
+  }
+  // The gradient decomposed, because the tier's argument is that B is a
+  // shear story rather than a density one.
+  const g = cases.gas.lower;
+  const vpm = 0.5 * (sh.vp + g.vp);
+  const vsm = 0.5 * (sh.vs + g.vs);
+  const rhom = 0.5 * (sh.rho + g.rho);
+  const w = (vsm / vpm) ** 2;
+  out.gradientTerms = {
+    vpTerm: 0.5 * ((g.vp - sh.vp) / vpm),
+    rhoTerm: -2 * w * ((g.rho - sh.rho) / rhom),
+    vsTerm: -2 * w * ((2 * (g.vs - sh.vs)) / vsm),
+  };
+  const tc = tuningCurve(WEDGE.rcTop, WEDGE.rcBase, freqHz, WEDGE.dtMs, WEDGE.maxThicknessMs);
+  out.tuning = {
+    freqHz,
+    tuningMs: tuningThicknessMs(tc.amplitudes, WEDGE.dtMs),
+    amplitudes: tc.amplitudes,
+    peak: tc.amplitudes.reduce((m, v) => Math.max(m, v), 0),
+    theoryMs: (1000 * Math.sqrt(6)) / (2 * Math.PI * freqHz),
+    isolated: tc.amplitudes[tc.amplitudes.length - 1],
+  };
+  out.threshold = threshold;
+  return out;
+}
