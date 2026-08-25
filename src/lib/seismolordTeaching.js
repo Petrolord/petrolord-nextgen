@@ -104,26 +104,83 @@ export function traceRows(syn) {
 // reflection pair (equal and opposite RC, the classic tuning setup) on
 // the central rockphysics wedge engine. Oracle-reproduced in Node
 // before the NG7 migration was seeded.
-import { tuningCurve, tuningThicknessMs } from '@petrolord/engines/engines/rockphysics/wedge.js';
+import { tuningCurve, tuningThicknessMs, wedgePanel } from '@petrolord/engines/engines/rockphysics/wedge.js';
 
 export const WEDGE = { rcTop: 0.08, rcBase: -0.08, dtMs: 2, maxThicknessMs: 60 };
 
-export function computeAdvanced() {
+// The frequencies the Expert-tier panel offers. The capstone reads 25 and
+// 40; the other three exist so the f*T law can be demonstrated rather than
+// asserted (20 and 50 also land on a product of 400, 15 lands on 390).
+export const WEDGE_FREQS = [15, 20, 25, 40, 50];
+
+// The product f*T at the CONTINUOUS tuning maximum, in Hz times ms:
+// 1000 * sqrt(6) / (2 pi) = 389.8484. Every frequency's theoretical tuning
+// thickness is this constant divided by the frequency.
+export const TUNING_PRODUCT_HZ_MS = (Math.sqrt(6) / (2 * Math.PI)) * 1000;
+
+// The thin-bed peak-to-trough floor, 1.0493 / (pi f) in seconds, from the
+// smaller root of 4u^4 - 12u^2 + 3 = 0 with u = pi f t.
+const DOUBLET_U = Math.sqrt((12 - Math.sqrt(144 - 48)) / 8);
+export function apparentFloorMs(freqHz) {
+  return (2 * DOUBLET_U) / (Math.PI * freqHz) * 1000;
+}
+
+// One wedge panel at one frequency: the tuning curve, the panel-level
+// readings the capstone grades, and a per-trace row carrying the readings
+// that respond to the thickness selector (peak drift and apparent
+// thickness). Everything comes from the shared rockphysics wedge engine.
+export function computeWedge(freqHz) {
   const { rcTop, rcBase, dtMs, maxThicknessMs } = WEDGE;
-  const run = (freqHz) => {
-    const { thicknessesMs, amplitudes } = tuningCurve(rcTop, rcBase, freqHz, dtMs, maxThicknessMs);
-    const tuneMs = tuningThicknessMs(amplitudes, dtMs);
+  const f = Number(freqHz);
+  const { thicknessesMs, amplitudes } = tuningCurve(rcTop, rcBase, f, dtMs, maxThicknessMs);
+  const { traces, t0 } = wedgePanel(rcTop, rcBase, f, dtMs, maxThicknessMs);
+  const tuneMs = tuningThicknessMs(amplitudes, dtMs);
+  const theoryMs = (Math.sqrt(6) / (2 * Math.PI * f)) * 1000;
+
+  // Same window the engine's tuningCurve uses, so the drift reported here
+  // is the position of the amplitude the curve plots.
+  const w = Math.round(((0.5 * Math.sqrt(6)) / (Math.PI * f)) * 1000 / dtMs) + 1;
+  const rows = traces.map((trace, k) => {
+    let peakIdx = t0;
+    let best = -1;
+    for (let i = Math.max(0, t0 - w); i <= Math.min(trace.length - 1, t0 + w); i++) {
+      if (Math.abs(trace[i]) > best) { best = Math.abs(trace[i]); peakIdx = i; }
+    }
+    // Apparent thickness: largest positive to largest negative, over a
+    // window wide enough to hold the base event at any modelled thickness.
+    let hi = t0; let lo = t0; let hiV = -Infinity; let loV = Infinity;
+    for (let i = t0 - 20; i <= Math.min(trace.length - 1, t0 + 40); i++) {
+      if (trace[i] > hiV) { hiV = trace[i]; hi = i; }
+      if (trace[i] < loV) { loV = trace[i]; lo = i; }
+    }
     return {
-      freqHz,
-      thicknessesMs,
-      amplitudes,
-      tuneMs,
-      tuneAmp: amplitudes[tuneMs / dtMs],
-      isoAmp: amplitudes[amplitudes.length - 1],
-      theoryMs: (Math.sqrt(6) / (2 * Math.PI * freqHz)) * 1000,
+      thicknessMs: thicknessesMs[k],
+      amp: amplitudes[k],
+      peakOffsetMs: (peakIdx - t0) * dtMs,
+      apparentMs: (lo - hi) * dtMs,
     };
+  });
+
+  return {
+    freqHz: f,
+    thicknessesMs,
+    amplitudes,
+    traces,
+    t0,
+    dtMs,
+    tuneMs,
+    tuneAmp: amplitudes[tuneMs / dtMs],
+    isoAmp: amplitudes[amplitudes.length - 1],
+    theoryMs,
+    overshootMs: tuneMs - theoryMs,
+    productHzMs: f * tuneMs,
+    floorMs: apparentFloorMs(f),
+    rows,
   };
-  return { f25: run(25), f40: run(40) };
+}
+
+export function computeAdvanced() {
+  return { f25: computeWedge(25), f40: computeWedge(40) };
 }
 
 // Chart rows for the two tuning curves (thickness vs peak amplitude).
