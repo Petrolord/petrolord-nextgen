@@ -17,10 +17,11 @@
 import goldens from '@petrolord/engines/test-data/basin/goldens.json';
 import { SimulationEngine } from '@petrolord/engines/engines/basin/SimulationEngine.js';
 import { BurialCompactionEngine } from '@petrolord/engines/engines/basin/BurialCompactionEngine.js';
+import { ExpulsionEngine } from '@petrolord/engines/engines/basin/ExpulsionEngine.js';
 import { HeatTransportEngine } from '@petrolord/engines/engines/basin/HeatTransportEngine.js';
 import { MaturityEngine } from '@petrolord/engines/engines/basin/MaturityEngine.js';
 import { getCompactionParams } from '@petrolord/engines/engines/basin/CompactionModelLibrary.js';
-import { EasyRoWeights, EasyRoFrequencyFactor } from '@petrolord/engines/engines/basin/KerogenLibrary.js';
+import { EasyRoWeights, EasyRoFrequencyFactor, KerogenKinetics } from '@petrolord/engines/engines/basin/KerogenLibrary.js';
 import { Spec } from '@petrolord/engines/engines/basin/PhysicsUtils.js';
 
 export const PROJECT = goldens.reference_basin.project;
@@ -142,5 +143,91 @@ export async function computeReferenceBasin() {
     generated: pick(withErosion, 'generation'),
     expelled: pick(withErosion, 'expulsion'),
     finalRoNoErosion: pick(noErosion, 'maturity'),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// DC30/DC31 panel drivers. Everything below is additive; the capstone
+// drivers above are pinned by the live NG11 keys and stay untouched.
+
+export const KEROGEN_TYPES = ['type1', 'type2', 'type3'];
+
+/** First whole degree at or above an Ro threshold on a ramp table. */
+export function roCrossing(ramp, threshold) {
+  const e = ramp.find((x) => x.ro >= threshold);
+  return e ? e.t_c : null;
+}
+
+/** Professional panel: the three ramps plus an isothermal TR series.
+ *  Heavy (tens of thousands of kinetic sub-steps) so callers memoize. */
+export function computeKineticsExplorer(isoTempC, kerogenType = 'type2') {
+  const potentials = KerogenKinetics[kerogenType].potentials;
+  const ramps = {};
+  for (const r of RAMP_RATES) ramps[r] = easyRoRamp(r);
+  const iso = [];
+  let fractions = [...potentials];
+  const total = potentials.reduce((a, b) => a + b, 0);
+  iso.push({ ma: 0, tr: 0 });
+  for (let ma = 1; ma <= 100; ma++) {
+    fractions = MaturityEngine.kineticStep(fractions, 1e13, isoTempC + 273.15, Spec.DT_MA);
+    iso.push({ ma, tr: 1 - fractions.reduce((a, b) => a + b, 0) / total });
+  }
+  return {
+    ramps,
+    roAt: (rate, tC) => ramps[rate].find((e) => e.t_c === tC)?.ro,
+    crossings: (threshold) => RAMP_RATES.map((r) => ({ rate: r, t_c: roCrossing(ramps[r], threshold) })),
+    iso,
+    trAt: (ma) => iso.find((e) => e.ma === ma)?.tr,
+    roF0: MaturityEngine.roFromF(0),
+    roFull: MaturityEngine.roFromF(EasyRoWeights.reduce((s, w) => s + w, 0)),
+  };
+}
+
+/** The saturation-bucket retention cap for a burial entry, exactly as
+ *  SimulationEngine computes it (mean of top/bottom Athy porosities). */
+export function retentionCapOf(entry, phi0 = 0.63, c = 0.00051) {
+  const phiTop = BurialCompactionEngine.porosity(entry.top, phi0, c);
+  const phiBottom = BurialCompactionEngine.porosity(entry.bottom, phi0, c);
+  return ExpulsionEngine.retentionCap(entry.thickness, (phiTop + phiBottom) / 2);
+}
+
+/** Closed-form generation potential of the reference basin's source. */
+export function sourcePotentialMass() {
+  const presentOrder = [...PROJECT.stratigraphy].sort((a, b) => (a.ageStart || 0) - (b.ageStart || 0));
+  const init = BurialCompactionEngine.initializeSolidThickness(presentOrder);
+  const src = init.find((l) => l.id === 'source_shale');
+  const sr = src.sourceRock;
+  return 2720 * src.solidThickness * (sr.toc / 100) * (sr.hi / 1000);
+}
+
+/** Expert panel: the reference basin at a chosen erosion amount, against
+ *  the no-erosion baseline. Async; two full forward runs per call. */
+export async function computeErosionScenario(amountM) {
+  const project = amountM > 0
+    ? { ...PROJECT, erosionEvents: [{ age: 10, amount: amountM }] }
+    : { ...PROJECT, erosionEvents: [] };
+  const run = await SimulationEngine.run(project);
+  const base = await SimulationEngine.run({ ...PROJECT, erosionEvents: [] });
+  const srcIdx = run.meta.layers.findIndex((l) => l.id === 'source_shale');
+  const series = (res, f) => res.data[f][srcIdx];
+  const last = (a) => a[a.length - 1].value;
+  const burial = series(run, 'burial');
+  const capSeries = burial.map((b) => ({ age: b.age, cap: retentionCapOf(b) }));
+  return {
+    burial,
+    temperature: series(run, 'temperature'),
+    maturity: series(run, 'maturity'),
+    generation: series(run, 'generation'),
+    expulsion: series(run, 'expulsion'),
+    capSeries,
+    finalRo: last(series(run, 'maturity')),
+    finalTempC: last(series(run, 'temperature')),
+    finalTr: last(series(run, 'transformation')),
+    generated: last(series(run, 'generation')),
+    expelled: last(series(run, 'expulsion')),
+    baselineRo: last(series(base, 'maturity')),
+    baselineExpelled: last(series(base, 'expulsion')),
+    roDelta: last(series(run, 'maturity')) - last(series(base, 'maturity')),
+    potentialMass: sourcePotentialMass(),
   };
 }

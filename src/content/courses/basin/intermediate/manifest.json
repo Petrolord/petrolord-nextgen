@@ -1,0 +1,283 @@
+{
+  "app_slug": "basin",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-from-a-snapshot-to-a-clock",
+      "title": "From a Snapshot to a Clock",
+      "lessons": [
+        {
+          "key": "l01-what-this-tier-adds",
+          "title": "What this tier adds",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-two-clocks-one-integrator",
+          "title": "Two clocks, one integrator",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-the-arrhenius-rate",
+          "title": "The Arrhenius rate",
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-the-kinetics-panel-map",
+          "title": "The kinetics panel map",
+          "est_minutes": 12,
+          "panels": [
+            "bs-kinetics-explorer"
+          ],
+          "has_exercise": true,
+          "order": 4
+        }
+      ],
+      "order": 1
+    },
+    {
+      "key": "m02-the-easy-ro-scheme",
+      "title": "The Easy%Ro Scheme",
+      "lessons": [
+        {
+          "key": "l01-twenty-bins",
+          "title": "Twenty bins",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-from-f-to-reflectance",
+          "title": "From F to reflectance",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-the-kinetic-step",
+          "title": "The kinetic step",
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-the-frequency-factor-and-units",
+          "title": "The frequency factor and units",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 4
+        },
+        {
+          "key": "l05-the-published-range",
+          "title": "The published range",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 5
+        }
+      ],
+      "order": 2
+    },
+    {
+      "key": "m03-the-heating-ramp",
+      "title": "The Heating Ramp",
+      "lessons": [
+        {
+          "key": "l01-the-ramp-convention",
+          "title": "The ramp convention",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-ro-at-150-on-the-capstone-ramp",
+          "title": "Ro at 150 on the capstone ramp",
+          "est_minutes": 13,
+          "panels": [
+            "bs-kinetics-explorer"
+          ],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-the-slow-ramp-wins",
+          "title": "The slow ramp wins",
+          "est_minutes": 14,
+          "panels": [
+            "bs-kinetics-explorer"
+          ],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-a-threshold-is-not-a-temperature",
+          "title": "A threshold is not a temperature",
+          "est_minutes": 13,
+          "panels": [
+            "bs-kinetics-explorer"
+          ],
+          "has_exercise": true,
+          "order": 4
+        },
+        {
+          "key": "l05-the-fast-ramp-and-the-pattern",
+          "title": "The fast ramp and the pattern",
+          "est_minutes": 12,
+          "panels": [
+            "bs-kinetics-explorer"
+          ],
+          "has_exercise": true,
+          "order": 5
+        }
+      ],
+      "order": 3
+    },
+    {
+      "key": "m04-the-kerogen-clock",
+      "title": "The Kerogen Clock",
+      "lessons": [
+        {
+          "key": "l01-potentials-are-a-spectrum",
+          "title": "Potentials are a spectrum",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-the-transformation-ratio",
+          "title": "The transformation ratio",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-the-isothermal-stall",
+          "title": "The isothermal stall",
+          "est_minutes": 14,
+          "panels": [
+            "bs-kinetics-explorer"
+          ],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-temperature-buys-what-time-cannot",
+          "title": "Temperature buys what time cannot",
+          "est_minutes": 13,
+          "panels": [
+            "bs-kinetics-explorer"
+          ],
+          "has_exercise": true,
+          "order": 4
+        },
+        {
+          "key": "l05-type-one-two-three",
+          "title": "Type I, II and III",
+          "est_minutes": 13,
+          "panels": [
+            "bs-kinetics-explorer"
+          ],
+          "has_exercise": true,
+          "order": 5
+        }
+      ],
+      "order": 4
+    },
+    {
+      "key": "m05-reading-a-maturity",
+      "title": "Reading a Maturity",
+      "lessons": [
+        {
+          "key": "l01-windows-are-conventions",
+          "title": "Windows are conventions",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-what-ro-does-not-say",
+          "title": "What Ro does not say",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-geometry-errors-become-chemistry-errors",
+          "title": "Geometry errors become chemistry errors",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-sanity-checks",
+          "title": "Sanity checks",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 4
+        }
+      ],
+      "order": 5
+    },
+    {
+      "key": "m06-the-kinetics-workflow",
+      "title": "The Kinetics Workflow",
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "est_minutes": 15,
+          "panels": [
+            "bs-kinetics-explorer"
+          ],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-onward-to-expert",
+          "title": "Onward to Expert",
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true,
+          "order": 4
+        }
+      ],
+      "order": 6
+    }
+  ]
+}
