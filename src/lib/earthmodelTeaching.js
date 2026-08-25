@@ -16,10 +16,11 @@
 // migration was seeded.
 import goldens from '@petrolord/engines/test-data/earthmodel/goldens.json';
 import { buildFramework, isNull } from '@petrolord/engines/engines/earthmodeling/framework.js';
-import { wellTies, zoneControlPoints } from '@petrolord/engines/engines/earthmodeling/wellties.js';
+import { minCurvature, positionAtMd, wellTies, zoneControlPoints } from '@petrolord/engines/engines/earthmodeling/wellties.js';
 import { labelBlocks, blockCensus, pointInPolygon } from '@petrolord/engines/engines/earthmodeling/blocks.js';
-import { planeFit, simpleKrige, weightedMean } from '@petrolord/engines/engines/earthmodeling/properties.js';
+import { planeFit, simpleKrige, weightedMean, populateZoneProperty } from '@petrolord/engines/engines/earthmodeling/properties.js';
 import { zoneVolumes } from '@petrolord/engines/engines/earthmodeling/volumes.js';
+import { sampleAtXY } from '@petrolord/engines/lib/gridding/gridmath.js';
 
 export const MODEL_SPEC = goldens.model_spec;      // 25x20, 50 m cells
 export const SURF_NAMES = ['TopA', 'TopB', 'BaseB'];
@@ -115,5 +116,120 @@ export function computeBlocksAndProperties(fw) {
     phiBlock1: phiBlock(1),
     byBlock,
     volsA,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Deep-course panel drivers (DC28 Professional, DC29 Expert). Pure functions
+// beside the capstone drivers above, which stay untouched.
+
+export const TIE_WELL_NAMES = Object.keys(goldens.wells);
+export const KRIGE_PARAMS = goldens.population.krige_spherical.params;
+export const NUGGET_OPTIONS = [0, 0.00025, 0.001, 0.002];
+export const RANGE_OPTIONS = [300, 600, 900, 1800];
+export const POPULATION_METHODS = ['krige', 'trend', 'constant'];
+
+/** Professional panel: one well tied in detail. The panel's exposed
+ *  assumption is the survey itself: vertical=true replaces the well's
+ *  deviation with a straight vertical hole, which is what every tie
+ *  silently assumes until a trajectory is built. */
+export function computeTieDetail(wellName, vertical = false) {
+  const fw = buildFramework(SURFACES, MODEL_SPEC);
+  const w = WELLS.find((x) => x.name === wellName);
+  const dev = vertical ? [{ md: 5000, inc: 0, azi: 0 }] : w.deviation;
+  const traj = minCurvature(dev, w.kb_m, w.x, w.y);
+  const trueTraj = minCurvature(w.deviation, w.kb_m, w.x, w.y);
+  const lastMd = Math.max(...w.tops.map((t) => t.md_m));
+  const path = [];
+  for (let md = 1400; md <= lastMd + 20; md += 10) {
+    path.push({ md, ...positionAtMd(traj, md) });
+  }
+  const rows = w.tops
+    .slice()
+    .sort((a, b) => a.md_m - b.md_m)
+    .map((t) => {
+      const pos = positionAtMd(traj, t.md_m);
+      const tru = positionAtMd(trueTraj, t.md_m);
+      const zs = sampleAtXY(fw.clamped[SURF_INDEX[t.name]], MODEL_SPEC, pos.x, pos.y);
+      const live = !isNull(zs);
+      return {
+        top: t.name,
+        md: t.md_m,
+        x: pos.x,
+        y: pos.y,
+        tvdss: pos.tvdss,
+        surfaceZ: live ? zs : null,
+        residualM: live ? pos.tvdss - zs : null,
+        lateralM: Math.hypot(tru.x - w.x, tru.y - w.y),
+      };
+    });
+  // Surfaces along an east-west window at the well's y, for the section.
+  const xs = path.map((p) => p.x);
+  const x0 = Math.min(...xs) - 120;
+  const x1 = Math.max(...xs) + 220;
+  const section = [];
+  for (let i = 0; i <= 40; i++) {
+    const x = x0 + ((x1 - x0) * i) / 40;
+    const at = (idx) => {
+      const v = sampleAtXY(fw.clamped[idx], MODEL_SPEC, x, w.y);
+      return isNull(v) ? null : v;
+    };
+    section.push({ x, topA: at(0), topB: at(1), baseB: at(2) });
+  }
+  // The worst residual across the whole (true-survey) well set.
+  const all = wellTies(WELLS, fw.clamped, MODEL_SPEC, SURF_INDEX);
+  let worstAll = null;
+  for (const r of all) {
+    if (r.residualM == null) continue;
+    if (!worstAll || Math.abs(r.residualM) > Math.abs(worstAll.residualM)) worstAll = r;
+  }
+  const cpWells = vertical
+    ? WELLS.map((x) => (x.name === wellName ? { ...x, deviation: dev } : x))
+    : WELLS;
+  const cp = zoneControlPoints(cpWells, 'A').find((c) => c.well === wellName);
+  return { well: w, vertical, path, rows, section, worstAll, cp };
+}
+
+/** Expert panel: label the model with the fault polygon and populate
+ *  zone-A porosity per block, with the method and the variogram's two
+ *  assumed numbers exposed as controls. */
+export function computePopulation(method = 'krige', nugget = KRIGE_PARAMS.nugget, range = KRIGE_PARAMS.range) {
+  const fw = buildFramework(SURFACES, MODEL_SPEC);
+  const labels = labelBlocks(MODEL_SPEC, [FAULT_POLYGON]);
+  const census = blockCensus(labels);
+  const inBlock1 = (p) => pointInPolygon(p.x, p.y, FAULT_POLYGON);
+  const pts = CONTROL_POINTS_A.map((p) => ({ x: p.x, y: p.y, v: p.phi, w: p.w, well: p.well }));
+  const byBlock = { 0: pts.filter((p) => !inBlock1(p)), 1: pts.filter(inBlock1) };
+  const params = { ...KRIGE_PARAMS, nugget, range };
+  const { z, provenance } = populateZoneProperty(MODEL_SPEC, labels, byBlock, pts, method, params);
+  const profileRow = Math.round((2200 - MODEL_SPEC.y0) / MODEL_SPEC.dy);
+  const profile = [];
+  for (let c = 0; c < MODEL_SPEC.nx; c++) {
+    const j = profileRow * MODEL_SPEC.nx + c;
+    profile.push({ x: MODEL_SPEC.x0 + c * MODEL_SPEC.dx, phi: z[j], block: labels[j] });
+  }
+  const phiBlock = (b) => weightedMean(byBlock[b].map((p) => p.v), byBlock[b].map((p) => p.w));
+  const volsA = zoneVolumes(MODEL_SPEC, fw.thickness[0], labels);
+  const [ta, tb, tc] = planeFit(pts);
+  const krigeAt = (x, y) => simpleKrige(pts, null, params, [[x, y]])[0];
+  return {
+    labels,
+    census,
+    byBlock,
+    provenance,
+    profile,
+    profileY: MODEL_SPEC.y0 + profileRow * MODEL_SPEC.dy,
+    phiBlock0: phiBlock(0),
+    phiBlock1: phiBlock(1),
+    volsA,
+    trend: { a: ta, b: tb, c: tc, at: (x, y) => ta + tb * x + tc * y },
+    probes: {
+      trendProbe: ta + tb * 1250 + tc * 2250,
+      krigeProbe: krigeAt(1500, 2500),
+      krigeAtW1: krigeAt(1100, 2100),
+      far: krigeAt(9999, 9999),
+    },
+    arithmeticMean: weightedMean(pts.map((p) => p.v)),
+    weightedConstant: weightedMean(pts.map((p) => p.v), pts.map((p) => p.w)),
   };
 }

@@ -1,0 +1,279 @@
+{
+  "app_slug": "earthmodel",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-well-is-not-a-vertical-line",
+      "title": "A Well Is Not a Vertical Line",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-this-tier-adds",
+          "title": "What this tier adds",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-the-four-wells",
+          "title": "The four wells",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-md-tvd-and-tvdss",
+          "title": "MD, TVD and TVDSS",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-the-tie-panel-map",
+          "title": "The tie panel map",
+          "est_minutes": 12,
+          "panels": [
+            "em-tie-explorer"
+          ],
+          "has_exercise": true,
+          "order": 4
+        }
+      ]
+    },
+    {
+      "key": "m02-minimum-curvature",
+      "title": "Minimum Curvature",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-survey-stations",
+          "title": "Survey stations",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-the-circular-arc",
+          "title": "The circular arc",
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-the-hold-section",
+          "title": "The hold section",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-between-stations",
+          "title": "Between stations",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 4
+        },
+        {
+          "key": "l05-w2-in-numbers",
+          "title": "W2 in numbers",
+          "est_minutes": 15,
+          "panels": [
+            "em-tie-explorer"
+          ],
+          "has_exercise": true,
+          "order": 5
+        }
+      ]
+    },
+    {
+      "key": "m03-landing-the-tops",
+      "title": "Landing the Tops",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-pick-is-a-measured-depth",
+          "title": "A pick is a measured depth",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-from-md-to-3d",
+          "title": "From MD to 3D",
+          "est_minutes": 13,
+          "panels": [
+            "em-tie-explorer"
+          ],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-vertical-wells-are-the-easy-case",
+          "title": "Vertical wells are the easy case",
+          "est_minutes": 12,
+          "panels": [
+            "em-tie-explorer"
+          ],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-sampling-the-surface",
+          "title": "Sampling the surface",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 4
+        }
+      ]
+    },
+    {
+      "key": "m04-the-tie-table",
+      "title": "The Tie Table",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-residual",
+          "title": "The residual",
+          "est_minutes": 13,
+          "panels": [
+            "em-tie-explorer"
+          ],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-the-twelve-rows",
+          "title": "The twelve rows",
+          "est_minutes": 14,
+          "panels": [
+            "em-tie-explorer"
+          ],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-the-worst-residual",
+          "title": "The worst residual",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-the-baseb-ledger",
+          "title": "The BaseB ledger",
+          "est_minutes": 15,
+          "panels": [
+            "em-tie-explorer"
+          ],
+          "has_exercise": true,
+          "order": 4
+        },
+        {
+          "key": "l05-what-a-residual-is-not",
+          "title": "What a residual is not",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 5
+        }
+      ]
+    },
+    {
+      "key": "m05-the-cost-of-assuming-vertical",
+      "title": "The Cost of Assuming Vertical",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-vertical-assumption",
+          "title": "The vertical assumption",
+          "est_minutes": 14,
+          "panels": [
+            "em-tie-explorer"
+          ],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-two-errors-that-do-not-cancel",
+          "title": "Two errors that do not cancel",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-the-control-point-moves",
+          "title": "The control point moves",
+          "est_minutes": 13,
+          "panels": [
+            "em-tie-explorer"
+          ],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-the-md-weight",
+          "title": "The MD weight",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 4
+        }
+      ]
+    },
+    {
+      "key": "m06-the-well-tie-workflow",
+      "title": "The Well Tie Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "est_minutes": 13,
+          "panels": [
+            "em-tie-explorer"
+          ],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "est_minutes": 15,
+          "panels": [
+            "em-tie-explorer"
+          ],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-onward-to-expert",
+          "title": "Onward to Expert",
+          "est_minutes": 10,
+          "panels": [],
+          "has_exercise": true,
+          "order": 4
+        }
+      ]
+    }
+  ]
+}
