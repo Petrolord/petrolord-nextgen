@@ -1,0 +1,293 @@
+{
+  "app_slug": "earthmodel",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-one-model-two-blocks",
+      "title": "One Model, Two Blocks",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-this-tier-adds",
+          "title": "What this tier adds",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-the-fault-polygon",
+          "title": "The fault polygon",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-labelling-the-nodes",
+          "title": "Labelling the nodes",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-the-population-panel-map",
+          "title": "The population panel map",
+          "est_minutes": 12,
+          "panels": [
+            "em-population-explorer"
+          ],
+          "has_exercise": true,
+          "order": 4
+        }
+      ]
+    },
+    {
+      "key": "m02-the-census",
+      "title": "The Census",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-hand-counting-174",
+          "title": "Hand counting 174",
+          "est_minutes": 14,
+          "panels": [
+            "em-population-explorer"
+          ],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-area-is-not-a-census",
+          "title": "Area is not a census",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-the-closure-key",
+          "title": "The closure key",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-what-a-block-means",
+          "title": "What a block means",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 4
+        }
+      ]
+    },
+    {
+      "key": "m03-control-points-cross-the-fault",
+      "title": "Control Points Cross the Fault",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-where-control-points-live",
+          "title": "Where control points live",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-w2-crosses",
+          "title": "W2 crosses",
+          "est_minutes": 14,
+          "panels": [
+            "em-population-explorer"
+          ],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-one-value-is-not-a-statistic",
+          "title": "One value is not a statistic",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-weights-are-measured-depth",
+          "title": "Weights are measured depth",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 4
+        }
+      ]
+    },
+    {
+      "key": "m04-the-trend-plane",
+      "title": "The Trend Plane",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-plane-through-the-points",
+          "title": "A plane through the points",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-an-exact-fit-is-a-property-of-the-data",
+          "title": "An exact fit is a property of the data",
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-reading-the-coefficients",
+          "title": "Reading the coefficients",
+          "est_minutes": 13,
+          "panels": [
+            "em-population-explorer"
+          ],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-extrapolation-has-no-floor",
+          "title": "Extrapolation has no floor",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 4
+        },
+        {
+          "key": "l05-trend-per-block",
+          "title": "Trend per block",
+          "est_minutes": 13,
+          "panels": [
+            "em-population-explorer"
+          ],
+          "has_exercise": true,
+          "order": 5
+        }
+      ]
+    },
+    {
+      "key": "m05-simple-kriging",
+      "title": "Simple Kriging",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-variogram",
+          "title": "The variogram",
+          "est_minutes": 14,
+          "panels": [
+            "em-population-explorer"
+          ],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-honoring-the-data",
+          "title": "Honoring the data",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-the-nugget",
+          "title": "The nugget",
+          "est_minutes": 14,
+          "panels": [
+            "em-population-explorer"
+          ],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-two-means-in-one-engine",
+          "title": "Two means in one engine",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 4
+        },
+        {
+          "key": "l05-the-probe-value",
+          "title": "The probe value",
+          "est_minutes": 14,
+          "panels": [
+            "em-population-explorer"
+          ],
+          "has_exercise": true,
+          "order": 5
+        },
+        {
+          "key": "l06-one-well-is-enough",
+          "title": "One well is enough",
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true,
+          "order": 6
+        }
+      ]
+    },
+    {
+      "key": "m06-per-block-volume-and-the-workflow",
+      "title": "Per-Block Volume and the Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-volumes-per-block",
+          "title": "Volumes per block",
+          "est_minutes": 14,
+          "panels": [
+            "em-population-explorer"
+          ],
+          "has_exercise": true,
+          "order": 1
+        },
+        {
+          "key": "l02-the-hand-chain",
+          "title": "The hand chain",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 2
+        },
+        {
+          "key": "l03-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true,
+          "order": 3
+        },
+        {
+          "key": "l04-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "est_minutes": 15,
+          "panels": [
+            "em-population-explorer"
+          ],
+          "has_exercise": true,
+          "order": 4
+        },
+        {
+          "key": "l05-onward-from-earth-modeling",
+          "title": "Onward from Earth Modeling",
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true,
+          "order": 5
+        }
+      ]
+    }
+  ]
+}
