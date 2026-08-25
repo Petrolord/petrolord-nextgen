@@ -1,0 +1,285 @@
+{
+  "app_slug": "mapping",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-is-the-map-any-good",
+      "title": "Is the Map Any Good",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-this-tier-adds",
+          "title": "What this tier adds",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-question-a-map-cannot-answer",
+          "title": "The question a map cannot answer",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-two-instruments",
+          "title": "The two instruments",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-validation-panel-map",
+          "title": "The validation panel map",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "mp-validation-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-leave-one-out",
+      "title": "Leave One Out",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-procedure",
+          "title": "The procedure",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "mp-validation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-hull-limitation",
+          "title": "The hull limitation",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "mp-validation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-one-well-of-six",
+          "title": "One well of six",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-ekene-six-residual",
+          "title": "The Ekene-6 residual",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "mp-validation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-one-number-is-not-a-statistic",
+          "title": "One number is not a statistic",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-blind-test",
+      "title": "The Blind Test",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-ekene-seven",
+          "title": "Ekene-7",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-prediction-before-the-pick",
+          "title": "The prediction before the pick",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "mp-validation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-residual",
+          "title": "The residual",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-residuals-two-signs",
+          "title": "Two residuals, two signs",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-what-the-new-well-changed",
+      "title": "What the New Well Changed",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-adding-ekene-seven-to-the-control",
+          "title": "Adding Ekene-7 to the control",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "mp-validation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-largest-change-is-at-the-well",
+          "title": "The largest change is at the well",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-crest-moves",
+          "title": "The crest moves",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "mp-validation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-prospect-moves",
+          "title": "The prospect moves",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-contour-interval-trap",
+          "title": "The contour interval trap",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-an-uncertainty-you-can-quote",
+      "title": "An Uncertainty You Can Quote",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-jackknife-at-the-prospect",
+          "title": "The jackknife at the prospect",
+          "order": 1,
+          "est_minutes": 16,
+          "panels": [
+            "mp-validation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-spread",
+          "title": "The spread",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-spread-predicted-the-move",
+          "title": "The spread predicted the move",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-spread-is-not",
+          "title": "What the spread is not",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reporting-a-mapped-depth",
+          "title": "Reporting a mapped depth",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-validation-workflow",
+      "title": "The Validation Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "mp-validation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "mp-validation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-top-of-the-ladder",
+          "title": "The top of the ladder",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
