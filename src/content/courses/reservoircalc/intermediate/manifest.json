@@ -1,0 +1,299 @@
+{
+  "app_slug": "reservoircalc",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-accumulation-is-not-one-tank",
+      "title": "The Accumulation Is Not One Tank",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-this-tier-adds",
+          "title": "What this tier adds",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-a-sealing-fault-does",
+          "title": "What a sealing fault does",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-ekene-fault",
+          "title": "The Ekene fault",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-block-panel-map",
+          "title": "The block panel map",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-labelling-the-grid",
+      "title": "Labelling the Grid",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-label-per-node",
+          "title": "A label per node",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-fault-lands-on-a-node",
+          "title": "The fault lands on a node",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-convention-is-worth",
+          "title": "What the convention is worth",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-mask-is-still-geometric",
+          "title": "The mask is still geometric",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-moving-the-fault",
+          "title": "Moving the fault",
+          "order": 5,
+          "est_minutes": 16,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-block-volumes",
+      "title": "The Block Volumes",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-same-chain-twice",
+          "title": "The same chain twice",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-adds-and-what-does-not",
+          "title": "What adds and what does not",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-area-is-not-barrels",
+          "title": "Area is not barrels",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-crest-belongs-to-one-block",
+          "title": "The crest belongs to one block",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-the-blocks-together",
+          "title": "Reading the blocks together",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-fault-the-map-does-not-know",
+      "title": "The Fault the Map Does Not Know About",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-grid-crossed-the-fault",
+          "title": "The grid crossed the fault",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-fifth-of-the-west-block",
+          "title": "A fifth of the west block",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-cells-do-not-move",
+          "title": "The cells do not move, the depths do",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-real-fault-would-do",
+          "title": "What a real fault would do",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-three-wells-one-discovery",
+          "title": "Three wells, one discovery",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-two-blocks-two-contacts",
+      "title": "Two Blocks, Two Contacts",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-why-contacts-differ",
+          "title": "Why contacts differ across a seal",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-east-contact-shallower",
+          "title": "The east contact ten metres shallower",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-east-contact-deeper",
+          "title": "The east contact ten metres deeper",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-booking-two-blocks-honestly",
+          "title": "Booking two blocks honestly",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-compartment-workflow",
+      "title": "The Compartment Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "rc-block-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-expert",
+          "title": "Onward to Expert",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
