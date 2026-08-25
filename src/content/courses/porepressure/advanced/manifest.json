@@ -1,0 +1,285 @@
+{
+  "app_slug": "porepressure",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-from-pressure-to-mud",
+      "title": "From Pressure to Mud",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-this-tier-adds",
+          "title": "What this tier adds",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-drillers-question",
+          "title": "The driller's question",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-emw-revisited",
+          "title": "Equivalent mud weight, revisited",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-window-panel-map",
+          "title": "The window panel map",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pp-window-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-window",
+      "title": "The Window",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-floor",
+          "title": "The floor",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "pp-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ceiling",
+          "title": "The ceiling",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-window-at-td",
+          "title": "The window at TD",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pp-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-window-down-the-well",
+          "title": "The window down the well",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pp-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-wide-window-buys",
+          "title": "What a wide window buys",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-exponent-lever",
+      "title": "The Exponent Lever",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-lever",
+          "title": "The lever",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-n-one-point-two",
+          "title": "n equals 1.2",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pp-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-window-under-n12",
+          "title": "The window under n 1.2",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pp-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-which-n-is-right",
+          "title": "Which n is right",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-bowers-loading",
+      "title": "Bowers: The Loading Curve",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-second-method",
+          "title": "A second method",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-loading-curve",
+          "title": "The loading curve",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-published-domain",
+          "title": "The published domain",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-worked-v-at-5-mpa",
+          "title": "Worked: velocity at 5 MPa",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-inverting-the-curve",
+          "title": "Inverting the curve",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-unloading-and-the-crosscheck",
+      "title": "Unloading and the Cross-Check",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-unloading-curve",
+          "title": "The unloading curve",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-graded-inversion",
+          "title": "The graded inversion",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-same-velocity-two-stresses",
+          "title": "Same velocity, two stresses",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pp-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-rejoin-and-the-limits",
+          "title": "The rejoin and the limits",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-crosscheck-on-this-well",
+          "title": "The cross-check on this well",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "pp-window-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-window-workflow",
+      "title": "The Window Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pp-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pp-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward",
+          "title": "Onward",
+          "order": 4,
+          "est_minutes": 10,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
