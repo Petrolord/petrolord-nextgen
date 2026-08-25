@@ -1,0 +1,311 @@
+{
+  "app_slug": "reservoircalc",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-from-a-constant-to-a-grid",
+      "title": "From a Constant to a Grid",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-this-tier-adds",
+          "title": "What this tier adds",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-engine-was-always-ready",
+          "title": "The engine was always ready",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-six-well-porosities",
+          "title": "The six well porosities",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-property-panel-map",
+          "title": "The property panel map",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-trend-plane",
+      "title": "The Trend Plane",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-three-ways-to-fill-a-grid",
+          "title": "Three ways to fill a grid",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-a-least-squares-plane-is",
+          "title": "What a least squares plane is",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-ekene-plane",
+          "title": "The Ekene plane",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-model-honours-no-well",
+          "title": "The model honours no well",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-outside-the-wells",
+          "title": "Outside the wells",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-three-means",
+      "title": "Three Means",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-an-average-is-no-longer-one-number",
+          "title": "An average is no longer one number",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-arithmetic-well-mean",
+          "title": "The arithmetic well mean",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-node-mean-over-the-oil",
+          "title": "The node mean over the oil",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-volume-weighted-mean",
+          "title": "The volume weighted mean",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-which-mean-belongs-in-the-booking",
+          "title": "Which mean belongs in the booking",
+          "order": 5,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-what-the-model-buys",
+      "title": "What the Property Model Buys",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-chain-diverges-at-the-pore-step",
+          "title": "The chain diverges at the pore step",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-uplift-is-one-ratio",
+          "title": "The uplift is one ratio",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-decomposition",
+          "title": "The decomposition",
+          "order": 3,
+          "est_minutes": 18,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-why-the-sign-is-positive",
+          "title": "Why the sign is positive",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-number-in-proportion",
+          "title": "The number in proportion",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-limits-of-a-property-model",
+      "title": "The Limits of a Property Model",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-two-properties-still-constant",
+          "title": "Two properties still constant",
+          "order": 1,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-plane-is-a-strong-assumption",
+          "title": "A plane is a strong assumption",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-method-that-honours-the-data",
+          "title": "A method that honours the data",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-well-the-map-could-not-report",
+          "title": "The well the map could not report",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-invented-detail",
+          "title": "Invented detail",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-property-workflow",
+      "title": "The Property Workflow",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow-end-to-end",
+          "title": "The workflow end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-quality-control",
+          "title": "Quality control",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "rc-property-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-top-of-the-ladder",
+          "title": "The top of the ladder",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
