@@ -5,20 +5,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 import {
-  Loader2, Award, ExternalLink, Copy, Printer, CheckCircle2,
+  Loader2, Award, ExternalLink, Copy, CheckCircle2,
   AlertTriangle, XCircle, Ticket,
 } from 'lucide-react';
 import {
   listMyCertifications, certificateStatus, verificationUrl,
   listMyBridgeCodes, bridgeCodeStatus,
 } from '@/services/academyService';
-
-const APP_NAMES = {
-  welldata: 'Well Data Manager', petrophysics: 'Petrophysics',
-  wellcorrelation: 'Well Correlation', seismolord: 'Seismolord',
-  mapping: 'Mapping', reservoircalc: 'ReservoirCalc Pro',
-};
-const TIER_LABEL = { associate: 'Associate', professional: 'Professional', expert: 'Expert' };
+import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { appName, CERT_TIER_LABELS } from '@/lib/appNames';
+import CertificateView from '@/components/academy/CertificateView';
 const STATUS_PILL = {
   valid: { cls: 'bg-emerald-900/40 text-emerald-300 border-emerald-700', icon: CheckCircle2, label: 'Valid' },
   expired: { cls: 'bg-yellow-900/40 text-yellow-300 border-yellow-700', icon: AlertTriangle, label: 'Expired' },
@@ -31,9 +27,13 @@ const STATUS_PILL = {
 // `certificates` table view.
 const AcademyCertificatesPage = () => {
   const { toast } = useToast();
+  const { user, profile } = useAuth();
   const [certs, setCerts] = useState([]);
   const [bridgeCodes, setBridgeCodes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [viewCert, setViewCert] = useState(null);
+
+  const holderName = profile?.display_name || user?.email || 'Certificate holder';
 
   useEffect(() => {
     (async () => {
@@ -90,7 +90,7 @@ const AcademyCertificatesPage = () => {
             <Award className="h-7 w-7 text-[#BFFF00]" /> My certificates
           </h1>
           <p className="mt-1 text-gray-400">
-            Each certificate has a public verification page — share the link and anyone can confirm it.
+            View and print each certificate, and share its public verification link so anyone can confirm it.
           </p>
         </div>
 
@@ -113,10 +113,10 @@ const AcademyCertificatesPage = () => {
                       <div>
                         <div className="flex items-center gap-2">
                           <h3 className="text-lg font-semibold text-white">
-                            {APP_NAMES[c.app_slug] || c.app_slug}
+                            {appName(c.app_slug)}
                           </h3>
                           <span className="text-[#BFFF00] text-sm font-medium">
-                            {TIER_LABEL[c.tier] || c.tier}
+                            {CERT_TIER_LABELS[c.tier] || c.tier}
                           </span>
                         </div>
                         <p className="text-xs text-gray-500 font-mono mt-1">{c.certificate_number}</p>
@@ -160,7 +160,11 @@ const AcademyCertificatesPage = () => {
                       </div>
                     )}
 
-                    <div className="mt-4 flex flex-wrap gap-2 print:hidden">
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold"
+                        onClick={() => setViewCert(c)}>
+                        <Award className="h-4 w-4 mr-1" /> View certificate
+                      </Button>
                       <a href={verificationUrl(c.verify_code)} target="_blank" rel="noreferrer">
                         <Button size="sm" variant="outline" className="border-[#BFFF00] text-[#BFFF00] hover:bg-[#BFFF00] hover:text-[#0F172A]">
                           <ExternalLink className="h-4 w-4 mr-1" /> Verification page
@@ -170,10 +174,6 @@ const AcademyCertificatesPage = () => {
                         onClick={() => copyLink(c.verify_code)}>
                         <Copy className="h-4 w-4 mr-1" /> Copy link
                       </Button>
-                      <Button size="sm" variant="outline" className="border-gray-600 text-gray-300"
-                        onClick={() => window.print()}>
-                        <Printer className="h-4 w-4 mr-1" /> Print
-                      </Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -182,6 +182,14 @@ const AcademyCertificatesPage = () => {
           </div>
         )}
       </motion.div>
+
+      {viewCert && (
+        <CertificateView
+          cert={viewCert}
+          holderName={holderName}
+          onClose={() => setViewCert(null)}
+        />
+      )}
     </>
   );
 };
