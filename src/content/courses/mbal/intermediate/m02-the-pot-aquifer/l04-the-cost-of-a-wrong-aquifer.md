@@ -16,7 +16,7 @@ The Ekene tank has no aquifer. Its ratio column is flat to fourteen significant 
 | depletion drive index | $-0.0258243022172419$ | 0.607003891050583 |
 | drive indices summed | 1.00000000000000 | 1.00000000000000 |
 | drive mechanism | strong_water_drive | depletion_drive |
-| warnings | none | none |
+| warnings | 5, all about the PVT table order | the same 5 |
 
 A negative oil in place, 12655657.1508521 stb from the truth, on a tank the closed model reads perfectly. A water drive index above one, crediting water with 104 percent of everything withdrawn while the oil expansion supplies a negative amount. A cumulative influx of 331452.684714500 rb against a withdrawal of 317926.842484584 rb, so the model claims 13525.8422299160 more reservoir barrels of water arrived than volume of any kind left the tank.
 
