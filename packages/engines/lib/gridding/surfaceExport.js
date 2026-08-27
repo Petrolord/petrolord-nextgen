@@ -92,6 +92,10 @@ export function writeCPS3(g) {
 export function writeZMAP(g) {
   const header = [
     `!  ZMAP+ GRID: ${g.name}${g.commentSuffix ?? ''}`,
+    // CRS stamp (CRS program): ZMAP's '!' comments are ignored by every
+    // parser, so a tagged grid can carry its system without breaking
+    // byte-golden output for untagged grids (line absent when no crs).
+    ...(g.crsLabel ? [`!  CRS: ${g.crsLabel}`] : []),
     `@${g.name} HEADER, GRID, 5`,
     `  20, ${EXPORT_NULL_STRING}, , 7, 1`,
     `  ${g.ny}, ${g.nx}, ${pyFixed(g.x[0], 6)}, ${pyFixed(g.x[g.nx - 1], 6)}, `
@@ -102,6 +106,39 @@ export function writeZMAP(g) {
   const vals = [...columnMajorNorthToSouth(g.z, g.nx, g.ny)].map((v) => pyExp(v, 7, 19));
   const body = [];
   for (let i = 0; i < vals.length; i += 5) body.push(vals.slice(i, i + 5).join(' '));
+  return `${header.concat(body).join('\n')}\n`;
+}
+
+/** Irap classic's own undefined sentinel (NOT the suite's 1.0E+30). */
+export const IRAP_NULL = 9999900.0;
+
+/**
+ * Irap "RMS classic" ASCII grid — the surface format Petrel and RMS both
+ * import natively. Header (4 lines): `-996 ny dx dy`, `xmin xmax ymin
+ * ymax`, `nx rotation xori yori`, seven zeros. Body: node values with X
+ * varying fastest starting at the SW corner going north — exactly our
+ * row-major, south-first storage order — 6 per line. Nulls become Irap's
+ * own 9999900 sentinel. Rotation is always 0 here: export grids are
+ * axis-aligned world bboxes.
+ * @param {{x, y, z, nx: number, ny: number, dx: number, dy: number}} g
+ */
+export function writeIrapClassic(g) {
+  const header = [
+    `-996 ${g.ny} ${pyFixed(g.dx, 6)} ${pyFixed(g.dy, 6)}`,
+    `${pyFixed(g.x[0], 6)} ${pyFixed(g.x[g.nx - 1], 6)} `
+      + `${pyFixed(g.y[0], 6)} ${pyFixed(g.y[g.ny - 1], 6)}`,
+    `${g.nx} ${pyFixed(0, 6)} ${pyFixed(g.x[0], 6)} ${pyFixed(g.y[0], 6)}`,
+    '0  0  0  0  0  0  0',
+  ];
+  const vals = [];
+  for (let r = 0; r < g.ny; r++) {
+    for (let c = 0; c < g.nx; c++) {
+      const v = g.z[r * g.nx + c];
+      vals.push(pyFixed(isNull(v) ? IRAP_NULL : v, 6));
+    }
+  }
+  const body = [];
+  for (let i = 0; i < vals.length; i += 6) body.push(vals.slice(i, i + 6).join(' '));
   return `${header.concat(body).join('\n')}\n`;
 }
 
