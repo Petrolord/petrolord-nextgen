@@ -22,12 +22,22 @@ do $$
 declare
   v_structures integer;
   v_capstones  integer;
+  v_questions  integer;
 begin
+  -- The ladder is complete now, so this asserts the whole of it rather than
+  -- "at least one tier": flipping the course to available with a tier missing
+  -- would sell a path that dead-ends.
   select count(*) into v_structures
     from public.academy_course_structures
    where app_slug = 'mbal' and active;
-  if v_structures < 1 then
-    raise exception 'RC2 go-live refused: mbal has % active deep structures, expected at least 1', v_structures;
+  if v_structures <> 3 then
+    raise exception 'RC2 go-live refused: mbal has % active deep structures, expected 3', v_structures;
+  end if;
+
+  select count(*) into v_questions
+    from public.academy_quiz_questions where app_slug = 'mbal';
+  if v_questions <> 396 then
+    raise exception 'RC2 go-live refused: mbal has % quiz questions, expected 396 (132 per tier)', v_questions;
   end if;
 
   select count(*) into v_capstones
