@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 import {
-  Loader2, TrendingDown, GraduationCap, Lock, CheckCircle2, XCircle,
+  Loader2, Scale, GraduationCap, Lock, CheckCircle2, XCircle,
   BookOpen, Award, ArrowRight,
 } from 'lucide-react';
 import { useRole } from '@/contexts/RoleContext';
@@ -106,7 +106,9 @@ const MbalLearningPage = () => {
     || courseProgress?.capstone?.passed === true
     || actualRole === 'super_admin';
 
-  const recon = reconciliation();
+  // Runs the material-balance engine over the six survey rows, so memoise it
+  // rather than re-running on every render (including while the gate loads).
+  const recon = useMemo(() => reconciliation(), []);
   const watermark = gate.quota?.export_watermark;
 
   const submit = async () => {
