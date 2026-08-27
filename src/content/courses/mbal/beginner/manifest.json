@@ -1,0 +1,273 @@
+{
+  "app_slug": "mbal",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-tank-idea",
+      "title": "The Tank Idea",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-material-balance",
+          "title": "Why material balance",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-tank-and-its-assumptions",
+          "title": "The tank and its assumptions",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-ekene-tank",
+          "title": "The Ekene tank",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-survey-is",
+          "title": "What a survey is",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-terms",
+      "title": "The Terms",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-underground-withdrawal",
+          "title": "Underground withdrawal",
+          "order": 1,
+          "est_minutes": 15,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-oil-expansion",
+          "title": "Oil expansion",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-rock-and-water-expansion",
+          "title": "Rock and water expansion",
+          "order": 3,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-efw-grouping",
+          "title": "The Efw grouping",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-total-expansion",
+          "title": "Total expansion",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-straight-line",
+      "title": "The Straight Line",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-havlena-odeh",
+          "title": "Havlena and Odeh",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-f-against-et",
+          "title": "F against Et",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-slope-is-the-ooip",
+          "title": "The slope is the OOIP",
+          "order": 3,
+          "est_minutes": 15,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-the-line-is-not-straight",
+          "title": "When the line is not straight",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-drive-indices",
+      "title": "Drive Indices",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-drives-the-oil",
+          "title": "What drives the oil",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-computing-the-indices",
+          "title": "Computing the indices",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-denominator-convention",
+          "title": "The denominator convention",
+          "order": 3,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reading-a-drive-split",
+          "title": "Reading a drive split",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-reconciliation",
+      "title": "The Reconciliation",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-two-independent-routes",
+          "title": "Two independent routes",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ekene-agreement",
+          "title": "The Ekene agreement",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-when-they-disagree",
+          "title": "When they disagree",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-agreement-buys",
+          "title": "What agreement buys",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow",
+          "title": "The workflow",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-common-errors",
+          "title": "Common errors",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-professional",
+          "title": "Onward to Professional",
+          "order": 4,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
