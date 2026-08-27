@@ -1,0 +1,75 @@
+{
+  "app_slug": "scal",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-two-phases-one-rock",
+      "title": "Two Phases, One Rock",
+      "order": 1,
+      "lessons": [
+        { "key": "l01-the-second-fluid", "title": "The second fluid", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-endpoints-and-movable-oil", "title": "Endpoints and movable oil", "order": 2, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l03-the-ekene-sand-on-paper", "title": "The Ekene sand on paper", "order": 3, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l04-drainage-imbibition-and-history", "title": "Drainage, imbibition, and history", "order": 4, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m02-relative-permeability",
+      "title": "Relative Permeability",
+      "order": 2,
+      "lessons": [
+        { "key": "l01-what-kr-measures", "title": "What kr measures", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-the-corey-model", "title": "The Corey model", "order": 2, "est_minutes": 14, "panels": ["sc-displacement-explorer"], "has_exercise": true },
+        { "key": "l03-reading-the-ekene-curves", "title": "Reading the Ekene curves", "order": 3, "est_minutes": 14, "panels": ["sc-displacement-explorer"], "has_exercise": true },
+        { "key": "l04-endpoints-rule-the-curves", "title": "Endpoints rule the curves", "order": 4, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l05-tables-vs-models", "title": "Tables versus models", "order": 5, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m03-fractional-flow",
+      "title": "Fractional Flow",
+      "order": 3,
+      "lessons": [
+        { "key": "l01-one-equation-for-the-race", "title": "One equation for the race", "order": 1, "est_minutes": 13, "panels": ["sc-displacement-explorer"], "has_exercise": true },
+        { "key": "l02-mobility-ratio", "title": "Mobility ratio", "order": 2, "est_minutes": 13, "panels": ["sc-displacement-explorer"], "has_exercise": true },
+        { "key": "l03-the-s-curve", "title": "The S-curve", "order": 3, "est_minutes": 13, "panels": ["sc-displacement-explorer"], "has_exercise": true },
+        { "key": "l04-viscosity-moves-the-curve", "title": "Viscosity moves the curve", "order": 4, "est_minutes": 13, "panels": ["sc-displacement-explorer"], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m04-the-welge-tangent",
+      "title": "The Welge Tangent",
+      "order": 4,
+      "lessons": [
+        { "key": "l01-the-front-exists", "title": "The front exists", "order": 1, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l02-drawing-the-tangent", "title": "Drawing the tangent", "order": 2, "est_minutes": 14, "panels": ["sc-displacement-explorer"], "has_exercise": true },
+        { "key": "l03-front-saturation-and-breakthrough", "title": "Front saturation and breakthrough", "order": 3, "est_minutes": 14, "panels": ["sc-displacement-explorer"], "has_exercise": true },
+        { "key": "l04-average-behind-the-front", "title": "The average behind the front", "order": 4, "est_minutes": 13, "panels": ["sc-displacement-explorer"], "has_exercise": true },
+        { "key": "l05-the-grid-under-the-answer", "title": "The grid under the answer", "order": 5, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m05-recovery-and-time",
+      "title": "Recovery and Time",
+      "order": 5,
+      "lessons": [
+        { "key": "l01-after-breakthrough", "title": "After breakthrough", "order": 1, "est_minutes": 14, "panels": ["sc-displacement-explorer"], "has_exercise": true },
+        { "key": "l02-the-ceiling", "title": "The ceiling", "order": 2, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l03-pore-volumes-to-days", "title": "Pore volumes to days", "order": 3, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l04-what-ed-is-not", "title": "What ED is not", "order": 4, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        { "key": "l01-the-story-so-far", "title": "The story so far", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-working-the-capstone", "title": "Working the capstone", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-what-the-engine-assumes", "title": "What the engine assumes", "order": 3, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l04-onward-to-professional", "title": "Onward to Professional", "order": 4, "est_minutes": 11, "panels": [], "has_exercise": false }
+      ]
+    }
+  ]
+}

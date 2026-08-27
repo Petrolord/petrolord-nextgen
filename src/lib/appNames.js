@@ -15,6 +15,7 @@ export const APP_NAMES = {
   basin: 'Basin & Charge',
   dca: 'Decline Curve Analysis',
   mbal: 'Material Balance',
+  scal: 'SCAL & Displacement',
 };
 
 export const CERT_TIER_LABELS = {

@@ -1,0 +1,75 @@
+{
+  "app_slug": "scal",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-fitting-the-lab",
+      "title": "Fitting the Lab",
+      "order": 1,
+      "lessons": [
+        { "key": "l01-least-squares-in-log-space", "title": "Least squares in log space", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-the-fit-recovers-the-plant", "title": "The fit recovers the plant", "order": 2, "est_minutes": 14, "panels": ["sc-design-explorer"], "has_exercise": true },
+        { "key": "l03-confidence-intervals", "title": "Confidence intervals", "order": 3, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l04-fitting-endpoints-too", "title": "Fitting endpoints too", "order": 4, "est_minutes": 13, "panels": ["sc-design-explorer"], "has_exercise": true },
+        { "key": "l05-the-fit-reads-data-not-labels", "title": "The fit reads data, not labels", "order": 5, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m02-normalization-and-transfer",
+      "title": "Normalization and Transfer",
+      "order": 2,
+      "lessons": [
+        { "key": "l01-normalized-curves", "title": "Normalized curves", "order": 1, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l02-carrying-shape-between-rocks", "title": "Carrying shape between rocks", "order": 2, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l03-exponent-consistency-across-plugs", "title": "Exponent consistency across plugs", "order": 3, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l04-what-transfer-assumes", "title": "What transfer assumes", "order": 4, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m03-the-average-that-drifts",
+      "title": "The Average That Drifts",
+      "order": 3,
+      "lessons": [
+        { "key": "l01-averaging-j-curves-again", "title": "Averaging J curves, again", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-the-drift", "title": "The drift", "order": 2, "est_minutes": 14, "panels": ["sc-design-explorer"], "has_exercise": true },
+        { "key": "l03-direct-vs-averaged", "title": "Direct versus averaged", "order": 3, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l04-the-column-average", "title": "The column average", "order": 4, "est_minutes": 14, "panels": ["sc-design-explorer"], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m04-gravity-and-the-dip-term",
+      "title": "Gravity and the Dip Term",
+      "order": 4,
+      "lessons": [
+        { "key": "l01-the-gravity-number", "title": "The gravity number", "order": 1, "est_minutes": 14, "panels": ["sc-design-explorer"], "has_exercise": true },
+        { "key": "l02-updip-helps-a-little", "title": "Updip helps, a little", "order": 2, "est_minutes": 13, "panels": ["sc-design-explorer"], "has_exercise": true },
+        { "key": "l03-rate-buys-gravity", "title": "Rate buys gravity", "order": 3, "est_minutes": 13, "panels": ["sc-design-explorer"], "has_exercise": true },
+        { "key": "l04-downdip-hurts", "title": "Downdip hurts", "order": 4, "est_minutes": 12, "panels": ["sc-design-explorer"], "has_exercise": true },
+        { "key": "l05-gravity-stable-screening", "title": "Gravity-stable screening", "order": 5, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m05-polymer-and-the-design-space",
+      "title": "Polymer and the Design Space",
+      "order": 5,
+      "lessons": [
+        { "key": "l01-thickening-the-water", "title": "Thickening the water", "order": 1, "est_minutes": 13, "panels": ["sc-design-explorer"], "has_exercise": true },
+        { "key": "l02-what-the-front-gains", "title": "What the front gains", "order": 2, "est_minutes": 13, "panels": ["sc-design-explorer"], "has_exercise": true },
+        { "key": "l03-screening-only", "title": "Screening only", "order": 3, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l04-choosing-a-design", "title": "Choosing a design", "order": 4, "est_minutes": 13, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        { "key": "l01-the-story-so-far", "title": "The story so far", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-working-the-capstone", "title": "Working the capstone", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-the-locks-and-why", "title": "The locks, and why", "order": 3, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l04-the-suite-bridge", "title": "The Suite bridge", "order": 4, "est_minutes": 11, "panels": [], "has_exercise": false }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "app_slug": "scal",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-capillary-pressure",
+      "title": "Capillary Pressure",
+      "order": 1,
+      "lessons": [
+        { "key": "l01-the-pressure-between-fluids", "title": "The pressure between fluids", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-drainage-curves-in-the-lab", "title": "Drainage curves in the lab", "order": 2, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l03-the-rules-of-a-pc-table", "title": "The rules of a Pc table", "order": 3, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l04-entry-pressure-and-the-plateau", "title": "Entry pressure and the plateau", "order": 4, "est_minutes": 13, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m02-the-leverett-collapse",
+      "title": "The Leverett Collapse",
+      "order": 2,
+      "lessons": [
+        { "key": "l01-one-curve-under-many", "title": "One curve under many", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-the-j-function", "title": "The J-function", "order": 2, "est_minutes": 14, "panels": ["sc-jfunction-explorer"], "has_exercise": true },
+        { "key": "l03-collapsing-the-ekene-plugs", "title": "Collapsing the Ekene plugs", "order": 3, "est_minutes": 14, "panels": ["sc-jfunction-explorer"], "has_exercise": true },
+        { "key": "l04-when-it-does-not-collapse", "title": "When it does not collapse", "order": 4, "est_minutes": 13, "panels": ["sc-jfunction-explorer"], "has_exercise": true },
+        { "key": "l05-three-labs-one-rock", "title": "Three labs, one rock", "order": 5, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m03-the-nameless-field",
+      "title": "The Nameless Field",
+      "order": 3,
+      "lessons": [
+        { "key": "l01-ahmed-4-7-start-to-finish", "title": "Ahmed 4-7, start to finish", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-the-j-column", "title": "The J column", "order": 2, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l03-back-to-reservoir-pc", "title": "Back to reservoir Pc", "order": 3, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l04-the-rounding-chain", "title": "The rounding chain", "order": 4, "est_minutes": 13, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m04-fitting-and-averaging",
+      "title": "Fitting and Averaging",
+      "order": 4,
+      "lessons": [
+        { "key": "l01-the-power-law", "title": "The power law", "order": 1, "est_minutes": 13, "panels": ["sc-jfunction-explorer"], "has_exercise": true },
+        { "key": "l02-fig-4-18", "title": "Figure 4-18", "order": 2, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l03-averaging-samples", "title": "Averaging samples", "order": 3, "est_minutes": 13, "panels": ["sc-jfunction-explorer"], "has_exercise": true },
+        { "key": "l04-the-swirr-heuristic", "title": "The Swirr heuristic", "order": 4, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m05-saturation-height",
+      "title": "Saturation and Height",
+      "order": 5,
+      "lessons": [
+        { "key": "l01-from-pc-to-height", "title": "From Pc to height", "order": 1, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l02-the-free-water-level", "title": "The free water level", "order": 2, "est_minutes": 14, "panels": ["sc-jfunction-explorer"], "has_exercise": true },
+        { "key": "l03-the-transition-zone", "title": "The transition zone", "order": 3, "est_minutes": 14, "panels": ["sc-jfunction-explorer"], "has_exercise": true },
+        { "key": "l04-the-crest-just-reaches-connate", "title": "The crest just reaches connate", "order": 4, "est_minutes": 14, "panels": ["sc-jfunction-explorer"], "has_exercise": true },
+        { "key": "l05-feet-and-metres", "title": "Feet and metres", "order": 5, "est_minutes": 11, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        { "key": "l01-the-story-so-far", "title": "The story so far", "order": 1, "est_minutes": 12, "panels": ["sc-displacement-explorer"], "has_exercise": true },
+        { "key": "l02-working-the-capstone", "title": "Working the capstone", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-what-j-cannot-do", "title": "What J cannot do", "order": 3, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l04-onward-to-expert", "title": "Onward to Expert", "order": 4, "est_minutes": 11, "panels": [], "has_exercise": false }
+      ]
+    }
+  ]
+}

@@ -44,6 +44,9 @@ export const PANELS = {
   'mb-tank-explorer': React.lazy(() => import('@/components/course/panels/mbal/TankExplorer')),
   'mb-aquifer-explorer': React.lazy(() => import('@/components/course/panels/mbal/AquiferExplorer')),
   'mb-pd-explorer': React.lazy(() => import('@/components/course/panels/mbal/PdExplorer')),
+  'sc-displacement-explorer': React.lazy(() => import('@/components/course/panels/scal/DisplacementExplorer')),
+  'sc-jfunction-explorer': React.lazy(() => import('@/components/course/panels/scal/JFunctionExplorer')),
+  'sc-design-explorer': React.lazy(() => import('@/components/course/panels/scal/DesignExplorer')),
 };
 
 export function resolvePanel(id) {
