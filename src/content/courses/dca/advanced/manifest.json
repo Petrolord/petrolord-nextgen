@@ -1,0 +1,276 @@
+{
+  "app_slug": "dca",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-literature-anchors",
+      "title": "Literature Anchors",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-literature-anchors",
+          "title": "Why literature anchors",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-weaver-worked-examples",
+          "title": "The Weaver worked examples",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-b-above-one",
+          "title": "b above one",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-ahmed-gas-examples",
+          "title": "The Ahmed gas examples",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-ikoku-newton-versus-grid",
+          "title": "Ikoku: Newton versus the grid",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-b-lever",
+      "title": "The b Lever",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-eur-versus-b",
+          "title": "EUR versus b",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "dca-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-three-and-a-half-times-lever",
+          "title": "The 3.5x lever",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "dca-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-spee-governance",
+          "title": "SPEE governance",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-terminal-decline-practice",
+          "title": "Terminal decline practice",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-confidence-and-scatter",
+      "title": "Confidence and Scatter",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-what-an-interval-measures",
+          "title": "What an interval measures",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-standard-errors",
+          "title": "Standard errors",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-intervals-on-real-data",
+          "title": "Intervals on real data",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-intervals-cannot-say",
+          "title": "What intervals cannot say",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-risked-reserves",
+      "title": "Risked Reserves",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-distributions-not-points",
+          "title": "Distributions, not points",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-triangular-closed-forms",
+          "title": "Triangular closed forms",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "dca-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-p90-p50-p10",
+          "title": "P90, P50, P10",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "dca-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-ekene-triangle",
+          "title": "The Ekene triangle",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "dca-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-monte-carlo-honestly",
+          "title": "Monte Carlo, honestly",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-declines-after-the-flood",
+      "title": "Declines After the Flood",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-response-model",
+          "title": "The response model",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-refitting-post-ramp",
+          "title": "Refitting post-ramp",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-oil-versus-gross",
+          "title": "Oil versus gross",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-mbal-bridge",
+          "title": "The material-balance bridge",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-booking",
+      "title": "The Expert Booking",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow",
+          "title": "The workflow",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "dca-fit-explorer",
+            "dca-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-governance-memo",
+          "title": "The governance memo",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-on-the-reservoir-path",
+          "title": "Onward on the reservoir path",
+          "order": 4,
+          "est_minutes": 10,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

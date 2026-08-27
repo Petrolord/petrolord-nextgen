@@ -1,0 +1,282 @@
+{
+  "app_slug": "dca",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-b-problem",
+      "title": "The b Problem",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-b-really-is",
+          "title": "What b really is",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-grid-search",
+          "title": "The grid search",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-b-needs-time",
+          "title": "b needs time",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-forcing-the-wrong-model",
+          "title": "Forcing the wrong model",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-b-ceiling-alarm",
+          "title": "The b ceiling alarm",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-fit-windows",
+      "title": "Fit Windows",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-windows-are-model-statements",
+          "title": "Windows are model statements",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-flood-breaks-arps",
+          "title": "The flood breaks Arps",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-windowed-to-primary",
+          "title": "Windowed to the primary",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-boundaries-to-the-month",
+          "title": "Boundaries to the month",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-forecast-mechanics",
+      "title": "Forecast Mechanics",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-how-forecasts-are-generated",
+          "title": "How forecasts are generated",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-daily-sum-versus-closed-form",
+          "title": "Daily sum versus closed form",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-monthly-snapshot-overstatement",
+          "title": "Monthly snapshot overstatement",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-choosing-the-honest-number",
+          "title": "Choosing the honest number",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-type-curves",
+      "title": "Type Curves",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-normalization",
+          "title": "Normalization",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-pooling-the-ekene-hyperbolics",
+          "title": "Pooling the Ekene hyperbolics",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "dca-typecurve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-analogy-requirement",
+          "title": "The analogy requirement",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "dca-typecurve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-fixed-b-application",
+          "title": "Fixed-b application",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "dca-typecurve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-appearance-versus-booking",
+          "title": "Appearance versus booking",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "dca-typecurve-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-portfolio-rollups",
+      "title": "Portfolio Roll-ups",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-scenarios-and-rollups",
+          "title": "Scenarios and roll-ups",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ekene-rollup",
+          "title": "The Ekene roll-up",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-reading-combined-series",
+          "title": "Reading combined series",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-field-level-honesty",
+          "title": "Field-level honesty",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-booking",
+      "title": "The Professional Booking",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow",
+          "title": "The workflow",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "dca-fit-explorer",
+            "dca-typecurve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-defending-a-window",
+          "title": "Defending a window",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-expert",
+          "title": "Onward to Expert",
+          "order": 4,
+          "est_minutes": 10,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
