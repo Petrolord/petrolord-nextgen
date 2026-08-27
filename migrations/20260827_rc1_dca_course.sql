@@ -62,5 +62,10 @@ values
 )
 on conflict (app_slug, tier) do nothing;
 
--- ------------------------------------------------ 3. go live
-update public.academy_apps set status = 'available' where slug = 'dca';
+-- ------------------------------------------------ 3. NO go-live here
+-- The catalog row is deliberately left 'coming_soon'. Flipping it to
+-- 'available' makes the course ENROLLABLE, and the DcaLearningPage route it
+-- needs ships with the next NextGen production upload. Going live before the
+-- route is deployed would sell a course whose app page 404s (the standing
+-- deploy-gating rule). The flip lives in its own held migration,
+-- 20260827_rc1_dca_go_live.sql, applied AFTER that upload.
