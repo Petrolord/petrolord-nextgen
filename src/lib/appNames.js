@@ -13,6 +13,7 @@ export const APP_NAMES = {
   porepressure: 'Pore Pressure',
   earthmodel: 'Earth Modeling',
   basin: 'Basin & Charge',
+  dca: 'Decline Curve Analysis',
 };
 
 export const CERT_TIER_LABELS = {

@@ -38,6 +38,9 @@ export const PANELS = {
   'mp-map-explorer': React.lazy(() => import('@/components/course/panels/mapping/MapExplorer')),
   'mp-isochore-explorer': React.lazy(() => import('@/components/course/panels/mapping/IsochoreExplorer')),
   'mp-validation-explorer': React.lazy(() => import('@/components/course/panels/mapping/ValidationExplorer')),
+  'dca-fit-explorer': React.lazy(() => import('@/components/course/panels/dca/FitExplorer')),
+  'dca-typecurve-explorer': React.lazy(() => import('@/components/course/panels/dca/TypeCurveExplorer')),
+  'dca-uncertainty-explorer': React.lazy(() => import('@/components/course/panels/dca/UncertaintyExplorer')),
 };
 
 export function resolvePanel(id) {

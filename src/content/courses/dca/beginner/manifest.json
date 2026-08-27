@@ -1,0 +1,273 @@
+{
+  "app_slug": "dca",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-declines-and-the-field",
+      "title": "Declines and the Field",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-rates-decline",
+          "title": "Why rates decline",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-ekene-goes-on-production",
+          "title": "Ekene goes on production",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-rate-time-data",
+          "title": "Rate-time data",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-primary-window",
+          "title": "The primary window",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-three-models",
+      "title": "The Three Models",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-exponential-decline",
+          "title": "Exponential decline",
+          "order": 1,
+          "est_minutes": 16,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-harmonic-decline",
+          "title": "Harmonic decline",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-hyperbolic-and-b",
+          "title": "Hyperbolic decline and b",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-nominal-and-effective",
+          "title": "Nominal and effective decline",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-semilog-plots",
+          "title": "Reading semilog plots",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-cumulative-volumes",
+      "title": "Cumulative Volumes",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-rate-integrates-to-volume",
+          "title": "Rate integrates to volume",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-exponential-cumulative",
+          "title": "The exponential cumulative",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-harmonic-and-hyperbolic-cumulative",
+          "title": "Harmonic and hyperbolic cumulatives",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-snapshots-versus-the-integral",
+          "title": "Snapshots versus the integral",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-fitting-the-data",
+      "title": "Fitting the Data",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-how-the-engine-fits",
+          "title": "How the engine fits",
+          "order": 1,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-fitting-ekene-1",
+          "title": "Fitting Ekene-1",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-r-squared-and-quality",
+          "title": "R-squared and quality",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-models-look-alike",
+          "title": "When models look alike",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-eur-and-the-limit",
+      "title": "EUR and the Economic Limit",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-economic-limit",
+          "title": "The economic limit",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-eur-closed-forms",
+          "title": "EUR closed forms",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-time-to-limit",
+          "title": "Time to the limit",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-limit-sensitivity",
+          "title": "Limit sensitivity",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-booking",
+      "title": "The Associate Booking",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow",
+          "title": "The workflow",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "dca-fit-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-common-errors",
+          "title": "Common errors",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-professional",
+          "title": "Onward to Professional",
+          "order": 4,
+          "est_minutes": 10,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
