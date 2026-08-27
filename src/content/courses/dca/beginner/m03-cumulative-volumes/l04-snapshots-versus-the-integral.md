@@ -24,7 +24,9 @@ Ekene-1's primary window is 36 monthly rows, 2020-01-01 through 2022-12-01. Sum 
 
 $$74502.9269694921 - 73157.9366256283 = 1344.99034386381 \text{ stb}$$
 
-which is 1.83847495692304 percent of the true volume. That is a thousand barrels of oil that exist only because somebody multiplied instead of integrating, on a well with no noise, no downtime and no allocation problem. Scaled to a field of a hundred wells it is a number an auditor will find.
+out of nothing. That is more than a thousand barrels of oil that exist only because somebody multiplied instead of integrating, on a well with no noise, no downtime and no allocation problem. Scaled to a field of a hundred wells it is a number an auditor will find.
+
+Work out what that difference is as a percentage of the true volume and keep your answer. You will meet the same quantity again at the Expert tier, where the size of the snapshot error becomes something you are asked to defend rather than something you are shown.
 
 ## The sign rule
 
