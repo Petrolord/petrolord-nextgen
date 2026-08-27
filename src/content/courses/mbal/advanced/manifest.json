@@ -164,7 +164,9 @@
           "title": "The danger of freedom",
           "order": 3,
           "est_minutes": 15,
-          "panels": [],
+          "panels": [
+            "mb-tank-explorer"
+          ],
           "has_exercise": true
         },
         {

@@ -17,7 +17,7 @@ Here is the Dake tank of module 2, matched four times. The data does not change 
 
 Every one of those runs converged. Every one of them is a legitimate use of the engine. The middle two are the same number of parameters.
 
-Start with the first two rows, because that pair is the whole lesson. Freeing the reservoir radius alongside the oil in place improves the root mean square pressure error by a factor of 8.07808530258443, from four psi to half a psi, on a history spanning 1280 psi of drawdown. By every fit statistic you have, the two parameter match is enormously better. And it moves the oil in place by 20014255.8584060 stb, 6.45207796204157 percent, away from Dake's published answer and away from Dake's stated truth of 312 MMSTB.
+Start with the first two rows, because that pair is the whole lesson. Freeing the reservoir radius alongside the oil in place improves the root mean square pressure error by a factor of 8.07808530258444, from four psi to half a psi, on a history spanning 1280 psi of drawdown. By every fit statistic you have, the two parameter match is enormously better. And it moves the oil in place by 20014255.8584065 stb, 6.45207796204173 percent, away from Dake's published answer and away from Dake's stated truth of 312 MMSTB.
 
 Better fit. Worse answer. Not by accident, and not because the second parameter was a silly one to free: the reservoir radius at the contact is genuinely uncertain and genuinely affects influx.
 
@@ -31,7 +31,7 @@ Now read the uncertainties the two runs report.
 | $N$ and $r_R$ | 330212861.271306 | 0.278974659845899 percent | 328414716.799611 to 332020850.988587 |
 | $N$ and $k_{aq}$ | 305373480.952866 | 0.645388379309786 percent | 301547210.026266 to 309248302.649352 |
 
-The two parameter match with the radius reports a tighter relative error than the one parameter match, and its interval contains neither the one parameter answer nor Dake's truth. The two parameter match with permeability reports an interval that does not overlap the radius match's interval at all. The gap between them is 19166414.1502590 stb, and the two central answers are 24839380.3184400 stb apart, 8.13409869152125 percent.
+The two parameter match with the radius reports a tighter relative error than the one parameter match, and its interval contains neither the one parameter answer nor Dake's truth. The two parameter match with permeability reports an interval that does not overlap the radius match's interval at all. The gap between them is 19166414.1502592 stb, and the two central answers are 24839380.3184402 stb apart, 8.13409869152133 percent.
 
 Two matches. Same eleven observations. Same aquifer model. Same engine. Each frees exactly two parameters. Each converges. Each quotes an uncertainty under one percent. Their intervals do not touch.
 

@@ -44,7 +44,7 @@ Record: finite or infinite, the radius ratio and where it came from, and the oth
 
 ## Five: the benchmark, where one exists
 
-Where a published worked example covers the path you used, run it. Not the tier badge, the case. Take the published inputs through the same code path with the same settings, and quote the disagreement you measured today rather than the one in the provenance string, which module 5 showed still records 301.0 MMSTB and 3.53 percent where the case now gives 307.221409553720 MMSTB and 1.53159950201283 percent.
+Where a published worked example covers the path you used, run it. Not the tier badge, the case. Take the published inputs through the same code path with the same settings, and quote the disagreement you measured today rather than the one in the provenance string, which module 5 showed still records 301.0 MMSTB and 3.53 percent where the case now gives 307.221409553720 MMSTB and 1.53159950201266 percent.
 
 Record: the case, the printed value, your value, the disagreement, and the date you measured it.
 
@@ -60,7 +60,7 @@ Record: the convention, in the same sentence as the indices.
 
 ## Worked example: the Dake reading as a paired record
 
-Fluid oil, eleven annual surveys, pressure from 2740 to 1460 psia, per row properties throughout. Column rises steadily, a lagging influx, and the level cannot be reconciled independently here, so the aquifer decision rests on the drift and the geometry. Model Carter-Tracy, chosen from a 140 degree wedge aquifer at a radius ratio of 5, not from fit. Result 307.221409553720 MMSTB, influx 88.0645883139400 MMrb, fit 0.999975248425736, indices 0.567843338103932 and 0.417877131928747 summing to 0.997165062762353 under the gross convention. Counterfactuals: no aquifer 532.588241588393 MMSTB, infinite family 156.177551848366 MMSTB. Benchmark: Dake's own 312 MMSTB, disagreement 1.53159950201283 percent, measured today. Exposure: the aquifer model, worth 225 MMSTB, and the solution family, worth 151 MMSTB.
+Fluid oil, eleven annual surveys, pressure from 2740 to 1460 psia, per row properties throughout. Column rises steadily, a lagging influx, and the level cannot be reconciled independently here, so the aquifer decision rests on the drift and the geometry. Model Carter-Tracy, chosen from a 140 degree wedge aquifer at a radius ratio of 5, not from fit. Result 307.221409553720 MMSTB, influx 88.0645883139400 MMrb, fit 0.999975248425736, indices 0.567843338103932 and 0.417877131928747 summing to 0.997165062762353 under the gross convention. Counterfactuals: no aquifer 532.588241588393 MMSTB, infinite family 156.177551848366 MMSTB. Benchmark: Dake's own 312 MMSTB, disagreement 1.53159950201266 percent, measured today. Exposure: the aquifer model, worth 225 MMSTB, and the solution family, worth 151 MMSTB.
 
 Nine sentences, and a reviewer who now knows what your judgment was worth.
 

@@ -6,7 +6,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   runEkeneTank, reconciliation, fetkovichConstants, fetkovichMarch,
-  combinationDrive, pdSweep, pssAsymptote, pD, pDFinite, FIELD,
+  combinationDrive, pdSweep, pssAsymptote, pD, pDFinite, FIELD, runDakeTank,
 } from './tankLab';
 
 const rel = (a, b) => Math.abs(a - b) / Math.max(Math.abs(b), 1e-12);
@@ -126,5 +126,47 @@ describe('Expert capstone: the finite aquifer and the benchmark', () => {
     expect(agreesWithPrinted(c.byGrossWithdrawal.DDI, c.printed.DDI)).toBe(false);
     // The gross convention looks like a 2.8 percent closure failure and is not.
     expect(c.byGrossWithdrawal.sum).toBeCloseTo(0.971594137029883, 9);
+  });
+});
+
+describe('Expert capstone: the Dake 9.2 benchmark itself', () => {
+  // The first two graded Expert fields come from this run. Before RC2 they were
+  // the only capstone values in the course with no test behind them, so a drift
+  // in the vendored engine would have stranded a live capstone silently.
+  const finite = runDakeTank();
+
+  it('reproduces the two graded Dake fields', () => {
+    expect(rel(finite.ooip_mmstb, 307.221409553720)).toBeLessThan(1e-12);
+    expect(rel(finite.we_mmrb, 88.0645883139400)).toBeLessThan(1e-12);
+    expect(rel(finite.result.r_squared, 0.999975248425736)).toBeLessThan(1e-12);
+    expect(finite.result.drive_mechanism).toBe('water_drive_with_depletion');
+    expect(finite.result.aquifer_strength).toBe('strong');
+  });
+
+  it('sits inside the 3.53 percent the provenance string records for this path', () => {
+    const missPct = (Math.abs(finite.ooip_mmstb - 312) / 312) * 100;
+    expect(missPct).toBeLessThan(3.53);
+    expect(missPct).toBeCloseTo(1.53159950201266, 10);
+  });
+
+  it('prices the two counterfactuals the Expert tier teaches', () => {
+    // No aquifer at all: the regression buys the pressure history with oil.
+    const none = runDakeTank({ aquifer: 'none' });
+    expect(rel(none.ooip_mmstb, 532.588241588393)).toBeLessThan(1e-12);
+    expect(none.result.warnings ?? []).toHaveLength(0);   // silent, and 225 MMSTB out
+
+    // Infinite-acting solution on a bounded aquifer: influx up, oil down.
+    const inf = runDakeTank({ aquifer: 'infinite' });
+    expect(rel(inf.ooip_mmstb, 156.177551848366)).toBeLessThan(1e-12);
+    expect(rel(inf.we_mmrb, 148.248060002236)).toBeLessThan(1e-12);
+    expect(rel(inf.result.r_squared, 0.863239485188882)).toBeLessThan(1e-12);
+
+    // An over-sized aquifer breaks the fit; an under-sized one does not.
+    const red3 = runDakeTank({ radiusRatio: 3 });
+    expect(rel(red3.ooip_mmstb, 455.567695625077)).toBeLessThan(1e-12);
+    expect(red3.result.r_squared).toBeGreaterThan(0.9999);
+
+    // Recovery factor moves more than ten points across the aquifer decision.
+    expect(finite.recovery_factor_pct - none.recovery_factor_pct).toBeCloseTo(10.6648857625075, 9);
   });
 });

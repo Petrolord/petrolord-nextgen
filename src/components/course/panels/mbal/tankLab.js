@@ -10,6 +10,9 @@ import ahmed111 from '@petrolord/engines/test-data/mbal/ahmed-ex-11-1-combinatio
 import {
   computeMaterialBalance, computeOilPerTimestep, computeFetkovichWe,
 } from '@petrolord/engines/engines/mbal/mbalEngine.ts';
+import {
+  DAKE_CT_RESERVOIR, DAKE_CT_PERFORMANCE,
+} from '@petrolord/engines/test-data/mbal/dake-9-2.ts';
 import { pD, pDFinite } from '@petrolord/engines/engines/aquifer/aquiferInflux.js';
 
 export const EKENE = ekeneMbal;
@@ -178,4 +181,85 @@ export function pdSweep(reD = 5, tDs = [0.1, 1, 5, 10, 25, 50, 100]) {
     const finite = pDFinite(tD, reD);
     return { tD, infinite, finite, ratio: infinite > 0 ? finite / infinite : null, pss: pssAsymptote(tD, reD) };
   });
+}
+
+// ---------------------------------------------------------------------------
+// 5. Dake Exercise 9.2, the Expert benchmark
+// ---------------------------------------------------------------------------
+
+/** Run the real engine over Dake's Exercise 9.2 performance history.
+ *
+ *  aquifer:
+ *    'finite'   the mapped wedge aquifer at the fixture's radius ratio (reD 5),
+ *               which is what the Expert capstone grades;
+ *    'infinite' the same aquifer with the radius ratio removed, so the
+ *               infinite-acting solution is used on a bounded aquifer;
+ *    'none'     the compulsory counterfactual, no aquifer term at all.
+ *
+ *  The two graded capstone fields come from here, so this run is pinned by
+ *  tankLab.test.js exactly as the Associate and Professional values are.
+ */
+export function runDakeTank({ aquifer = 'finite', radiusRatio } = {}) {
+  const R = DAKE_CT_RESERVOIR;
+  const production_data = DAKE_CT_PERFORMANCE.map((row, idx) => ({
+    timestep_index: idx,
+    observation_date: `${1980 + row.yr}-01-01`,
+    pressure_psia: row.p,
+    cum_oil_stb: row.Np_mmstb * 1e6,
+    cum_gas_scf: row.Np_mmstb * 1e6 * row.Rp,
+    cum_water_stb: 0,
+    bo_rb_stb: row.Bo,
+    rs_scf_stb: row.Rs,
+    bg_rb_scf: row.Bg,
+    bw_rb_stb: 1.0,
+  }));
+
+  const aquifer_params = {
+    aquifer_radius_ft: R.aquifer_radius_ft,
+    aquifer_thickness_ft: R.aquifer_thickness_ft,
+    aquifer_permeability_md: R.aquifer_permeability_md,
+    aquifer_porosity: R.aquifer_porosity,
+    aquifer_water_viscosity_cp: R.aquifer_water_viscosity_cp,
+    theta_degrees: R.aquifer_encroachment_angle_deg,
+    aquifer_total_compressibility_psi: R.aquifer_total_compressibility_psi,
+  };
+  // radius_ratio present = bounded solution; absent = infinite-acting.
+  if (aquifer === 'finite') {
+    aquifer_params.radius_ratio = radiusRatio ?? R.aquifer_dim_radius_ratio;
+  }
+
+  const inputs = {
+    fluid_system: 'oil',
+    has_aquifer: aquifer !== 'none',
+    has_gas_cap: false,
+    initial_pressure_psia: R.initial_pressure_psia,
+    reservoir_temperature_f: R.reservoir_temperature_f,
+    initial_water_saturation: R.initial_water_saturation,
+    bubble_point_psia: R.bubble_point_psia,
+    oil_gravity_api: R.oil_gravity_api,
+    gas_specific_gravity: R.gas_specific_gravity,
+    formation_compressibility_psi: R.formation_compressibility_psi,
+    water_compressibility_psi: R.water_compressibility_psi,
+    gas_cap_ratio_m: 0,
+    aquifer_model: aquifer === 'none' ? 'none' : 'carter_tracy',
+    aquifer_params: aquifer === 'none' ? undefined : aquifer_params,
+    pvt_source: 'lab_table',
+    pvt_correlations: {
+      pb_rs_bo: 'standing', oil_viscosity: 'beggs_robinson', z_factor: 'hall_yarborough',
+      water: 'mccain', gas_viscosity: 'lee_gonzalez_eakin',
+    },
+    solver_method: 'havlena_odeh',
+    production_data,
+  };
+
+  const result = computeMaterialBalance(inputs);
+  return {
+    result,
+    inputs,
+    ooip_mmstb: result.estimated_ooip_stb / 1e6,
+    we_mmrb: (result.aquifer_cumulative_we_rb ?? 0) / 1e6,
+    // Dake's own truth for the field, carried so a caller never has to recall it.
+    dake_truth_mmstb: 312,
+    recovery_factor_pct: (77.43e6 / result.estimated_ooip_stb) * 100,
+  };
 }

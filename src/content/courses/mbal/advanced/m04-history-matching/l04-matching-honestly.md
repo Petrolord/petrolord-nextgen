@@ -14,7 +14,7 @@ Five things. A match missing any of them is not reproducible.
 
 **The fit, in full.** The root mean square error, the maximum absolute error, and the residual series. Lesson 1's Dake match ran one sign then the other, which the summary statistic conceals.
 
-**The alternative.** The answer under a different but equally defensible choice. If freeing the aquifer permeability instead of the reservoir radius moves your oil in place by 24839380.3184400 stb, that number belongs in your report whichever one you headline. A reader who finds it later finds it as something you concealed.
+**The alternative.** The answer under a different but equally defensible choice. If freeing the aquifer permeability instead of the reservoir radius moves your oil in place by 24839380.3184402 stb, that number belongs in your report whichever one you headline. A reader who finds it later finds it as something you concealed.
 
 ## The warnings are part of the answer
 

@@ -38,7 +38,7 @@ Name the fields too if you are quoting a tool's output, because the engine field
 
 State the benchmark the tool passed on the path you used, the published source with its edition and example number, the tolerance claimed, and the disagreement you measured yourself, on the version you ran, on a named date.
 
-Copying a provenance string is not this entry. Module 5 took the longest string in the engine and found that of its six numbers, one still holds. Re running the published case converts a quotation into a measurement: on the Dake path it turns "3.53 percent as recorded in May" into "1.53159950201283 percent, measured today, on this build". State what the tier does not cover too: it is about a code path checked against somebody else's data, not about your field.
+Copying a provenance string is not this entry. Module 5 took the longest string in the engine and found that of its six numbers, one still holds. Re running the published case converts a quotation into a measurement: on the Dake path it turns "3.53 percent as recorded in May" into "1.53159950201266 percent, measured today, on this build". State what the tier does not cover too: it is about a code path checked against somebody else's data, not about your field.
 
 ## Six: what the answer would be under a different but equally defensible choice
 
@@ -54,7 +54,7 @@ The entry that separates a memo from a number. For each decision that could have
 
 **Result and convention.** Oil in place 307.221409553720 MMSTB, cumulative influx 88.0645883139400 MMrb, fit statistic 0.999975248425736. Drive indices at the final survey 0.567843338103932 and 0.417877131928747, summing to 0.997165062762353, in the gross withdrawal convention. This history produced no water, so the net convention gives identical figures and the shortfall of 0.00283493723764727 is a residual in the influx solution rather than a denominator artefact. It is inside the tool's closure threshold of 0.05, and is reported rather than rounded to 1.00.
 
-**Benchmark.** Carter-Tracy oil path, `benchmark_verified`, referenced against Dake 1978 Exercise 9.2 at a stated 3.53 percent recorded on 2026-05-17. Re run on this build against Dake's own 312 MMSTB: disagreement 1.53159950201283 percent. Provenance not refreshed since the recorded date. The tier is a statement about the code path, not about this field.
+**Benchmark.** Carter-Tracy oil path, `benchmark_verified`, referenced against Dake 1978 Exercise 9.2 at a stated 3.53 percent recorded on 2026-05-17. Re run on this build against Dake's own 312 MMSTB: disagreement 1.53159950201266 percent. Provenance not refreshed since the recorded date. The tier is a statement about the code path, not about this field.
 
 **Alternatives.** Ignoring the aquifer gives 532.588241588393 MMSTB, 225.366832034673 MMSTB higher, at a fit statistic of 0.999317934436751 and with no warnings. Using the infinite acting solution gives 156.177551848366 MMSTB with an influx of 148.248060002236 MMrb, at a fit statistic of 0.863239485188882. The aquifer decision is the dominant exposure.
 
