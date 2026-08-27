@@ -41,6 +41,9 @@ export const PANELS = {
   'dca-fit-explorer': React.lazy(() => import('@/components/course/panels/dca/FitExplorer')),
   'dca-typecurve-explorer': React.lazy(() => import('@/components/course/panels/dca/TypeCurveExplorer')),
   'dca-uncertainty-explorer': React.lazy(() => import('@/components/course/panels/dca/UncertaintyExplorer')),
+  'mb-tank-explorer': React.lazy(() => import('@/components/course/panels/mbal/TankExplorer')),
+  'mb-aquifer-explorer': React.lazy(() => import('@/components/course/panels/mbal/AquiferExplorer')),
+  'mb-pd-explorer': React.lazy(() => import('@/components/course/panels/mbal/PdExplorer')),
 };
 
 export function resolvePanel(id) {

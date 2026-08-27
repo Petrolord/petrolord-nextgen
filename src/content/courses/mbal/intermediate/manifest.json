@@ -1,0 +1,270 @@
+{
+  "app_slug": "mbal",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-water-arrives",
+      "title": "Water Arrives",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-aquifers-matter",
+          "title": "Why aquifers matter",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-signature-in-the-data",
+          "title": "The signature in the data",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-drifting-ratio",
+          "title": "The drifting ratio",
+          "order": 3,
+          "est_minutes": 15,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-choosing-a-model",
+          "title": "Choosing a model",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-pot-aquifer",
+      "title": "The Pot Aquifer",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-simplest-aquifer",
+          "title": "The simplest aquifer",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-pot-regression",
+          "title": "The pot regression",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-pot-cannot-do",
+          "title": "What a pot cannot do",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-cost-of-a-wrong-aquifer",
+          "title": "The cost of a wrong aquifer",
+          "order": 4,
+          "est_minutes": 16,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-fetkovich",
+      "title": "Fetkovich",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-productivity-index",
+          "title": "The productivity index",
+          "order": 1,
+          "est_minutes": 15,
+          "panels": [
+            "mb-aquifer-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-encroachment-angle",
+          "title": "The encroachment angle",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "mb-aquifer-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-marching-scheme",
+          "title": "The marching scheme",
+          "order": 3,
+          "est_minutes": 15,
+          "panels": [
+            "mb-aquifer-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-midpoint-convention",
+          "title": "The midpoint convention",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "mb-aquifer-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-ahmed-10-10",
+          "title": "Ahmed Example 10-10",
+          "order": 5,
+          "est_minutes": 16,
+          "panels": [
+            "mb-aquifer-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-gas-and-p-over-z",
+      "title": "Gas and p over z",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-gas-tank",
+          "title": "The gas tank",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-p-over-z-line",
+          "title": "The p over z line",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-when-the-line-bends",
+          "title": "When the line bends",
+          "order": 3,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-three-solvers",
+          "title": "The three solvers",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-pvt-and-precedence",
+      "title": "PVT and Precedence",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-where-pvt-comes-from",
+          "title": "Where PVT comes from",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-precedence-chain",
+          "title": "The precedence chain",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-bt-and-the-bubble-point",
+          "title": "Bt and the bubble point",
+          "order": 3,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-warnings-mean",
+          "title": "What the warnings mean",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow",
+          "title": "The workflow",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "mb-tank-explorer",
+            "mb-aquifer-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-defending-an-aquifer",
+          "title": "Defending an aquifer",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-to-expert",
+          "title": "Onward to Expert",
+          "order": 4,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

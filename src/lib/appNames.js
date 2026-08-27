@@ -14,6 +14,7 @@ export const APP_NAMES = {
   earthmodel: 'Earth Modeling',
   basin: 'Basin & Charge',
   dca: 'Decline Curve Analysis',
+  mbal: 'Material Balance',
 };
 
 export const CERT_TIER_LABELS = {

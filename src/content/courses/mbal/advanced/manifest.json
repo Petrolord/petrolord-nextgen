@@ -1,0 +1,262 @@
+{
+  "app_slug": "mbal",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-finite-aquifer",
+      "title": "The Finite Aquifer",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-two-solution-families",
+          "title": "Two solution families",
+          "order": 1,
+          "est_minutes": 15,
+          "panels": [
+            "mb-pd-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-line-source-limit",
+          "title": "The line source limit",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "mb-pd-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-pseudo-steady-state",
+          "title": "Pseudo steady state",
+          "order": 3,
+          "est_minutes": 15,
+          "panels": [
+            "mb-pd-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reading-the-pd-table",
+          "title": "Reading the pD table",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "mb-pd-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-why-finite-matters",
+          "title": "Why finite matters",
+          "order": 5,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-carter-tracy",
+      "title": "Carter-Tracy",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-superposition-problem",
+          "title": "The superposition problem",
+          "order": 1,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-carter-tracy-step",
+          "title": "The Carter-Tracy step",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-dake-9-2",
+          "title": "Dake Exercise 9.2",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [
+            "mb-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-benchmark-verdict",
+          "title": "The benchmark verdict",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-combination-drive",
+      "title": "Combination Drive",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-more-than-one-mechanism",
+          "title": "More than one mechanism",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-gas-cap-term",
+          "title": "The gas cap term",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-ahmed-11-1",
+          "title": "Ahmed Example 11-1",
+          "order": 3,
+          "est_minutes": 16,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-apportioning-the-drive",
+          "title": "Apportioning the drive",
+          "order": 4,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-history-matching",
+      "title": "History Matching",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-matching-means",
+          "title": "What matching means",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-parameters-and-bounds",
+          "title": "Parameters and bounds",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-danger-of-freedom",
+          "title": "The danger of freedom",
+          "order": 3,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-matching-honestly",
+          "title": "Matching honestly",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-validation-tiers",
+      "title": "Validation Tiers",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-benchmark-versus-method",
+          "title": "Benchmark versus method",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-a-tier-claims",
+          "title": "What a tier claims",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-warnings-versus-tiers",
+          "title": "Warnings versus tiers",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reading-the-provenance",
+          "title": "Reading the provenance",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-workflow",
+          "title": "The workflow",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-capstone-walkthrough",
+          "title": "The capstone walkthrough",
+          "order": 2,
+          "est_minutes": 16,
+          "panels": [
+            "mb-tank-explorer",
+            "mb-pd-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-reserves-memo",
+          "title": "The reserves memo",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward-on-the-reservoir-path",
+          "title": "Onward on the reservoir path",
+          "order": 4,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
