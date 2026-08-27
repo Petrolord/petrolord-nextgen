@@ -93,7 +93,23 @@ describe('Expert capstone values', () => {
     expect(rel(s.p10, 531360.331525141)).toBeLessThan(1e-9);
     expect(s.fAtMode).toBeCloseTo(0.408545662663958, 12);
   });
+  it('Ekene-6 oil declines 3.79x faster than the gross on the same window', () => {
+    // The Expert pair: same post-ramp window, one well with no water cut and
+    // one whose cut climbs toward 45 percent. An oil decline is not the
+    // reservoir's decline. Graded as e6_oil_di (tol 0.00002).
+    const { fit } = fitWell('Ekene-6', 'Auto-Select', 'postRamp');
+    expect(fit.parameters.modelType).toBe('Exponential');
+    expect(rel(fit.parameters.Di, 0.0013275893489185155)).toBeLessThan(1e-12);
+    const { fit: f5 } = fitWell('Ekene-5', 'Auto-Select', 'postRamp');
+    expect(fit.parameters.Di / f5.parameters.Di).toBeCloseTo(3.793112425481, 9);
+  });
+});
+
+describe('Professional-tier teaching values (not Expert-graded)', () => {
   it('monthly snapshot overstates Ekene-1 primary Np by 1.838%', () => {
+    // Owned by the Professional tier's forecast-mechanics module. It was
+    // briefly an Expert capstone field, which graded recall of the tier
+    // below; migration 20260827_rc1_dca_expert_capstone_fix.sql removed it.
     const r = monthlySnapshotNp('Ekene-1');
     expect(r.overstatementPct).toBeCloseTo(1.83847495692304, 9);
   });
