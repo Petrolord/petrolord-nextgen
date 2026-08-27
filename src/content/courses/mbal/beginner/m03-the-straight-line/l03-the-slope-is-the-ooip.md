@@ -70,7 +70,7 @@ That number is real and useful. It is the stiffness of the tank: 287.97936771938
 
 {{panel:mb-tank-explorer}}
 
-Read the four tiles: slope, intercept, R squared and the volumetric comparison. Confirm the slope against the table above. Then find the tile that reports the geoscience booking for the same field and note how close the two are. Module 5 is about that agreement and about what it is worth. For now, register only that the two numbers were produced by methods with no shared inputs.
+Read the four tiles: slope, intercept, R squared and the volumetric comparison. Confirm the slope against the table above. Then find the tile that reports the geoscience booking for the same field and note how close the two are. Module 5 is about that agreement and about what it is worth. For now, register only that the two numbers were produced by methods whose measurements are entirely separate, one from a map and a contact, the other from pressure and produced volumes.
 
 ## Exercise
 

@@ -1,0 +1,27 @@
+# Onward to Expert
+
+You arrived at this tier able to close a tank that behaved. You leave it able to say what is arriving from outside the tank, to size it, to choose a model for it with a reason, to know where every fluid property in the calculation came from, and to hand a reviewer a document they can check without you. That is most of what a reservoir engineer does with material balance in a working career.
+
+Four things remain, and they are the four that turn a good reading into a defensible one when the case is hard.
+
+**The finite aquifer.** Every aquifer you have modelled so far has been simple in one specific way: it either responded instantly or it responded through a single productivity index. Neither knows anything about how a pressure signal actually travels through rock. A real aquifer takes time to notice that the reservoir has been produced, and the signal spreads outward from the contact at a speed set by the rock and the fluid. While it is still spreading, the aquifer behaves as though it were infinite. Once the signal reaches the far edge, the aquifer discovers that it is a tank of finite size, and its behaviour changes character completely. The Expert tier works that transition, and it matters commercially: an aquifer modelled as endless when it is not will keep promising water long after the real one has stopped delivering, and the oil in place that closes the books against that promise is too small.
+
+**Two solution families, not one.** The mathematics that describes a pressure disturbance spreading through an aquifer comes in more than one form, and the engine carries two of them. One treats the reservoir as a point and is at its best late, once the details of the contact have been forgotten. The other solves the bounded circle properly and is the one that knows where the outer edge is. They are not the same expression with and without a boundary term, they are different derivations, and where they agree and where they diverge is a real result rather than a numerical accident. Expert reads that comparison directly, over a sweep of dimensionless time, in a panel built for it. The habit it builds is one you already half have from this tier: know which family your number came from, and know where that family is weak.
+
+**Carter-Tracy.** The honest way to compute water influx step by step is to superpose the response to every pressure change that has ever happened, which means the work of a run grows with the square of its length and every step has to be recomputed when an early one changes. Carter-Tracy is the approximation that made that practical, and it is what the engine reaches for on the harder benchmark. Expert derives the step, runs it against a published exercise, and asks the question that matters about any approximation, which is where it stops being one.
+
+**Combination drive.** Ekene had one drive mechanism and the tanks in this tier had two. Real fields commonly run three at once: the oil expanding, a gas cap expanding down onto it, and water pushing in from below. When all three are live the apportionment stops being arithmetic and starts being a judgment about which mechanism you are willing to spend money on. Expert works a published combination drive case end to end, and settles the denominator convention that this tier has been carefully stepping around.
+
+**History matching, and what it is allowed to do.** Everything you have done has computed forward: given the parameters, what does the tank do? History matching runs the other way. Given what the tank did, what parameters would produce it? That is a far more powerful tool and a far more dangerous one, because a model with enough free parameters can reproduce any history at all, including a wrong one, and the fit statistic will look magnificent while it does. You have already met a small version of that: an unnecessary aquifer, one extra freedom, a fit of 0.999485673716372, and an answer that was not merely wrong but negative. Expert scales the lesson up, and teaches how to bound a match so that it means something.
+
+**Validation tiers.** Module 5 of this tier taught you that a warning is about your run while a tier is about the method. Expert takes the second half seriously: what benchmark verified actually claims, what published method claims when no benchmark exists, how a tier is earned and how it can be lost, and how to read a provenance string as a reviewer rather than as a badge. It is the least glamorous module in the course and the one that most often decides whether an answer survives an audit.
+
+None of it needs anything you do not already have. It needs the same three phases, applied where the models are harder to justify and the freedoms are easier to abuse. Diagnose. Then model. Then defend.
+
+## Exercise
+
+Two pages, and keep them.
+
+First, go back to the phase one verdict you wrote in this module's first lesson and grade yourself honestly. Did you commit to a diagnosis before you saw a fit? If you did, say what it cost you when the model came out differently. If you did not, say when you stopped.
+
+Second, write down the one aquifer decision you have made in this tier that you would least like to defend in front of a reviewer. Name the input, name what it is worth in barrels, and name the measurement or the map that would settle it. Bring that page to the Expert tier. Its first module will change what you think that number is worth.

@@ -116,7 +116,8 @@ const TankExplorer = () => {
         <Note>
           F/Et is the same number at every survey, and that constancy IS the straight line. The
           slope lands on the volumetric booking the geoscience courses derived from a map and a
-          contact, by a route that shares none of its inputs.
+          contact, by a route whose measurements are entirely independent. The two chains do
+          share the constants Boi and Swi, so a PVT error would move both answers together.
         </Note>
       ) : (
         <Note>
