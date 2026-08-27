@@ -14,9 +14,28 @@ and its consumers.
 - `engines/<domain>/` — the engine modules (named exports only):
   `seismolord`, `welldata` (LAS parse/import), `petrophysics`,
   `wellcorrelation`, `mapping`, `rockphysics`, `earthmodeling`,
-  `porepressure`.
+  `porepressure`, `basin`, `dca` (decline-curve analysis: Arps
+  fits/EUR/forecast, type curves, group roll-up, EUR Monte Carlo;
+  goldens are published literature fixtures — SPEE REP #6 Table 1,
+  CED P03-004, Ahmed REH Ch. 16 — rather than a Python oracle),
+  `aquifer` (vEH / Fetkovich / Carter-Tracy water influx with finite-reD
+  pD; golden = the Dake Exercise 9.2 server cross-validation history,
+  regenerated Suite-side via tools/validation/gen-dake92-client-golden.ts),
+  `scal` (Corey/tabular rel-perm + Buckley-Leverett/Welge fractional
+  flow and displacement, Leverett J-function Pc with LM fitting;
+  golden = Leverett 1941 via the Ahmed reproduction, embedded in the
+  test suites), `waterflood` (VRR series/classification, surveillance
+  analytics — Hall plots, Chan diagnostics, cross-correlation lags,
+  injection recommendations — plus layered sweep and pattern
+  forecasting).
+- Cross-directory imports: `engines/* -> ../../lib/*`, plus ONE
+  sanctioned cross-domain edge: `engines/waterflood/patternForecast.js
+  -> ../scal/fractionalFlow.js` (Buckley-Leverett displacement is the
+  shared physics between the two domains).
 - `lib/` — shared math the engines depend on (`waveform.js`,
-  `gridding/`). The ONLY cross-directory imports in the package are
+  `gridding/`, `welltest/` — Stehfest inversion, radial Laplace
+  models, and Levenberg-Marquardt fitting used by the aquifer and scal
+  engines; the full welltest domain extraction will build on these). Historic note (see cross-directory rule above):
   `engines/* -> ../../lib/*`.
 - `test-data/<domain>/` — committed goldens (byte-identical
   regeneration required).
@@ -44,6 +63,18 @@ In the Suite, the original engine paths
 `src/lib/gridding/*`) are one-line re-export shims into the vendored
 package, so app code and tests import exactly what they always did.
 
+## TypeScript engines
+
+`engines/mbal/` is the package's first TypeScript domain (the MBAL server
+engine, 2026-08-06). Imports keep explicit `.ts` extensions so the same
+files load under Deno (Supabase edge functions), jest (babel
+preset-typescript, see jest.config.cjs) and Vite consumers without a build
+step. The full tiered MBAL validation harness (14+ literature cases, tier
+promotion) remains Suite-side at tools/validation/mbal-validation.ts and
+runs against this vendored engine through the Suite shim; __tests__/mbal
+carries the portable literature anchors (Pletcher SPE 75354, Ahmed
+Ex. 10-10 and 11-1).
+
 ## Moved from petrolord-suite (N1 log)
 
 | Here | Was |
@@ -58,6 +89,25 @@ package, so app code and tests import exactly what they always did.
 | `engines/porepressure/` | `src/pages/apps/PorePressureStudio/engine/` |
 | `lib/waveform.js`, `lib/gridding/` | `src/lib/waveform.js`, `src/lib/gridding/` |
 | `test-data/{wells,petrophysics,rockphysics,earthmodel,porepressure}` | same paths in suite |
+| `engines/dca/arps.js` | `src/utils/declineCurve/dcaEngine.js` (pure math; `exportToLAS`/`exportToCSV` stayed in the Suite) |
+| `engines/dca/typeCurve.js` | `src/utils/declineCurve/typeCurveEngine.js` (`fitTypeCurve` two-array call fixed — it never fit pre-extraction, zero consumers) |
+| `engines/dca/groupRollup.js` | `src/utils/declineCurve/dcaGroupRollup.js` |
+| `engines/dca/monteCarlo.js` | `src/utils/dcaMonteCarlo.js` |
+| `test-data/dca/dca-literature-fixtures.json` | `src/utils/declineCurve/__tests__/fixtures/` |
+| `engines/aquifer/aquiferInflux.js` | `src/utils/aquiferInfluxCalculations.js` |
+| `lib/welltest/{numerics.js,models/radial.js,models/dualPorosity.js}` | `src/utils/welltest/` (same names) |
+| `test-data/aquifer/dake92-we.json` | `src/utils/__tests__/goldens/dake92-we.json` (generator stays in the Suite: `tools/validation/gen-dake92-client-golden.ts`) |
+| `engines/scal/fractionalFlow.js` | `src/utils/fractionalFlowCalculations.js` |
+| `engines/scal/scal.js` | `src/utils/scalCalculations.js` |
+| `lib/welltest/lmFit.js` | `src/utils/welltest/lmFit.js` |
+| `engines/mbal/mbalEngine.ts` | `supabase/functions/_shared/mbal-engine.ts` (server engine; the Suite path is now a re-export shim bundled into the calculate-mbal edge function) |
+| `engines/mbal/lm.ts` | `supabase/functions/_shared/lm.ts` (mbal's own Levenberg-Marquardt; coexists with lib/welltest/lmFit.js for now, unification is a later cleanup) |
+| `test-data/mbal/dake-9-2.ts` | `tools/validation/fixtures/dake-9-2.ts` |
+| `test-data/mbal/ahmed-ex-*.json` | `tools/validation/mbal-fixtures/` |
+| `engines/waterflood/vrr.js` | `src/utils/vrrCalculations.js` |
+| `engines/waterflood/waterflood.js` | `src/utils/waterfloodCalculations.js` (pure math; `parseWaterfloodCSV` stays in the Suite — papaparse) |
+| `engines/waterflood/layeredSweep.js` | `src/utils/layeredSweepCalculations.js` |
+| `engines/waterflood/patternForecast.js` | `src/utils/patternForecastCalculations.js` |
 | `tools/validation/{wells,petrophysics,rockphysics,earthmodel,porepressure}` | same paths in suite |
 
 Import rewrites at extraction: `engines/seismolord/synthetics.js` and
