@@ -1,0 +1,275 @@
+{
+  "app_slug": "fluid",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-where-a-number-comes-from",
+      "title": "Where a Number Comes From",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-four-properties-and-a-question",
+          "title": "Four properties and a question",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-provenance-ladder",
+          "title": "The provenance ladder",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-black-oil-idea",
+          "title": "The black-oil idea",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-two-fluids-in-this-course",
+          "title": "The two fluids in this course",
+          "order": 4,
+          "est_minutes": 11,
+          "panels": [
+            "fluid-correlation-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-bubble-point",
+      "title": "The Bubble Point",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-what-a-bubble-point-is",
+          "title": "What a bubble point is",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-standings-correlation",
+          "title": "Standing's correlation",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fluid-correlation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-three-correlations-disagree",
+          "title": "Three correlations disagree",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fluid-correlation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reading-it-backwards",
+          "title": "Reading it backwards",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-ekenes-bubble-point",
+          "title": "Ekene's bubble point",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-correlation-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-solution-gas-and-volume",
+      "title": "Solution Gas and Volume",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-solution-gas-ratio",
+          "title": "Solution gas ratio",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-formation-volume-factor",
+          "title": "Formation volume factor",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-saturated-and-undersaturated",
+          "title": "Saturated and undersaturated",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-correlation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-designed-ekene-fluid",
+          "title": "The designed Ekene fluid",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-gap-would-cost",
+          "title": "What the gap would cost",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-viscosity",
+      "title": "Viscosity",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-dead-oil",
+          "title": "Dead oil",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-dissolved-gas-does",
+          "title": "What dissolved gas does",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-correlation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-pressure-does",
+          "title": "What pressure does",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-chain-not-a-number",
+          "title": "A chain, not a number",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-gas-and-water",
+      "title": "Gas and Water",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-z-factor",
+          "title": "The z factor",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-two-z-correlations",
+          "title": "Two z correlations",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-correlation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-gas-formation-volume-factor",
+          "title": "Gas formation volume factor",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-correlation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-gas-viscosity",
+          "title": "Gas viscosity",
+          "order": 4,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-formation-water",
+          "title": "Formation water",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fluid-correlation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 10,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
