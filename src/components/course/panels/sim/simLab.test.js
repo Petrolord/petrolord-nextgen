@@ -70,9 +70,11 @@ describe('simLab: Professional capstone oracles', () => {
     near(e2.delta_m, -0.6816826996098371, 1e-12);
   });
 
-  it('Bo at the bubble point on the designed line', () => {
-    near(lab.pvtTables().boAtPb, 1.21728, 1e-12);
+  it('what the correlation says Bo is at the initial pressure', () => {
+    near(lab.pvtDivergence().correlated_bo_at_pi, 1.2292846175634324, 1e-12);
+    // The designed line returns exactly 1.2 there. The gap is the lesson.
     expect(lab.pvtTables().boAtPi).toBe(1.2);
+    near(lab.pvtTables().boAtPb, 1.21728, 1e-12);
   });
 
   it('how far the correlation would have moved the solution gas', () => {

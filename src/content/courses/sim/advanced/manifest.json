@@ -1,0 +1,271 @@
+{
+  "app_slug": "sim",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-trajectories",
+      "title": "Trajectories",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-well-is-a-path",
+          "title": "A well is a path",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-intersecting-the-grid",
+          "title": "Intersecting the grid",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "sim-build-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-connection-direction",
+          "title": "Connection direction",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "sim-build-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-re-entries-and-merging",
+          "title": "Re-entries and merging",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-when-a-path-misses",
+          "title": "When a path misses",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-history-schedule",
+      "title": "The History Schedule",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-wconhist-and-observed-rates",
+          "title": "WCONHIST and observed rates",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-rates-from-volumes",
+          "title": "Rates from volumes",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "sim-build-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-period-boundaries",
+          "title": "Period boundaries",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-history-then-prediction",
+          "title": "History then prediction",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-calibration",
+      "title": "Calibration",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-what-calibration-means-here",
+          "title": "What calibration means here",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-matching-the-volume",
+          "title": "Matching the volume",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "sim-build-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-costs-in-area",
+          "title": "What it costs in area",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "sim-build-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reporting-a-calibrated-model",
+          "title": "Reporting a calibrated model",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-validation",
+      "title": "Validation",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-the-validator-checks",
+          "title": "What the validator checks",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-one-rule-at-a-time",
+          "title": "One rule at a time",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "sim-build-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-errors-and-warnings",
+          "title": "Errors and warnings",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-validation-cannot-catch",
+          "title": "What validation cannot catch",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-deck-security",
+          "title": "Deck security",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-reading-results",
+      "title": "Reading Results",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-a-summary-holds",
+          "title": "What a SUMMARY holds",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-field-and-well-vectors",
+          "title": "Field and well vectors",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-spe1-reference",
+          "title": "The SPE1 reference",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-history-match-vectors",
+          "title": "History-match vectors",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-where-this-course-stops",
+          "title": "Where this course stops",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "sim-build-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

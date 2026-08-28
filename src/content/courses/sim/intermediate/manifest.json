@@ -1,0 +1,269 @@
+{
+  "app_slug": "sim",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-where-the-structure-comes-from",
+      "title": "Where the Structure Comes From",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-grid-needs-a-surface",
+          "title": "A grid needs a surface",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-kriging-the-mapped-tops",
+          "title": "Kriging the mapped tops",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "sim-structure-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-exact-at-the-well",
+          "title": "Exact at the well",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-well-that-misses-the-lattice",
+          "title": "The well that misses the lattice",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "sim-structure-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-grid-cannot-honour",
+          "title": "What a grid cannot honour",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-volumetric-reconciliation",
+      "title": "The Volumetric Reconciliation",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-model-of-a-model",
+          "title": "A model of a model",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "sim-structure-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-two-clipping-conventions",
+          "title": "Two clipping conventions",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "sim-structure-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-gap-is-made-of",
+          "title": "What the gap is made of",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-volume-or-area",
+          "title": "Volume or area",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "sim-structure-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reporting-the-gap",
+          "title": "Reporting the gap",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-fluid-provenance",
+      "title": "Fluid Provenance",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-designed-against-correlated",
+          "title": "Designed against correlated",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-standing-gap",
+          "title": "The Standing gap",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-which-fluid-the-deck-must-carry",
+          "title": "Which fluid the deck must carry",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-gas-table",
+          "title": "The gas table",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-rock-curves-from-the-lab",
+      "title": "Rock Curves from the Lab",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-corey-into-a-table",
+          "title": "Corey into a table",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-endpoints-and-axis-closure",
+          "title": "Endpoints and axis closure",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-gas-oil-set",
+          "title": "The gas-oil set",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-tables-assume",
+          "title": "What the tables assume",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-wells-on-a-real-field",
+      "title": "Wells on a Real Field",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-map-coordinates-to-cells",
+          "title": "Map coordinates to cells",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "sim-structure-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-completions-through-the-column",
+          "title": "Completions through the column",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-history-rates-from-monthly-volumes",
+          "title": "History rates from monthly volumes",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-injectors-in-the-water-leg",
+          "title": "Injectors in the water leg",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-eight-character-limit",
+          "title": "The eight-character limit",
+          "order": 5,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward-to-expert",
+          "title": "Onward to Expert",
+          "order": 3,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
