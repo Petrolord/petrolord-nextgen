@@ -47,6 +47,11 @@ export const PANELS = {
   'sc-displacement-explorer': React.lazy(() => import('@/components/course/panels/scal/DisplacementExplorer')),
   'sc-jfunction-explorer': React.lazy(() => import('@/components/course/panels/scal/JFunctionExplorer')),
   'sc-design-explorer': React.lazy(() => import('@/components/course/panels/scal/DesignExplorer')),
+
+  // RC4 Waterflood Management
+  'wf-ledger-explorer': React.lazy(() => import('@/components/course/panels/waterflood/LedgerExplorer')),
+  'wf-pattern-explorer': React.lazy(() => import('@/components/course/panels/waterflood/PatternExplorer')),
+  'wf-design-explorer': React.lazy(() => import('@/components/course/panels/waterflood/DesignExplorer')),
 };
 
 export function resolvePanel(id) {

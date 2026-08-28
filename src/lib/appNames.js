@@ -16,6 +16,7 @@ export const APP_NAMES = {
   dca: 'Decline Curve Analysis',
   mbal: 'Material Balance',
   scal: 'SCAL & Displacement',
+  waterflood: 'Waterflood Management',
 };
 
 export const CERT_TIER_LABELS = {
