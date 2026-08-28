@@ -1,0 +1,75 @@
+{
+  "app_slug": "waterflood",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-waterflood-is",
+      "title": "What a Waterflood Is",
+      "order": 1,
+      "lessons": [
+        { "key": "l01-why-inject-at-all", "title": "Why inject at all", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-the-ekene-flood-on-paper", "title": "The Ekene flood on paper", "order": 2, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l03-rates-volumes-and-months", "title": "Rates, volumes, and months", "order": 3, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l04-what-this-course-does-not-do", "title": "What this course does not do", "order": 4, "est_minutes": 11, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m02-voidage",
+      "title": "Voidage",
+      "order": 2,
+      "lessons": [
+        { "key": "l01-reservoir-barrels-not-stock-tank", "title": "Reservoir barrels, not stock tank", "order": 1, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l02-the-voidage-equation", "title": "The voidage equation", "order": 2, "est_minutes": 14, "panels": ["wf-ledger-explorer"], "has_exercise": true },
+        { "key": "l03-only-free-gas-counts", "title": "Only free gas counts", "order": 3, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l04-the-fvf-convention", "title": "The FVF convention", "order": 4, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l05-when-the-gas-is-not-solution-gas", "title": "When the gas is not solution gas", "order": 5, "est_minutes": 13, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m03-reading-vrr",
+      "title": "Reading VRR",
+      "order": 3,
+      "lessons": [
+        { "key": "l01-three-vrrs-one-flood", "title": "Three VRRs, one flood", "order": 1, "est_minutes": 14, "panels": ["wf-ledger-explorer"], "has_exercise": true },
+        { "key": "l02-the-target-profile", "title": "The target profile", "order": 2, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l03-the-rolling-window-is-a-lag", "title": "The rolling window is a lag", "order": 3, "est_minutes": 14, "panels": ["wf-ledger-explorer"], "has_exercise": true },
+        { "key": "l04-bands-and-flags", "title": "Bands and flags", "order": 4, "est_minutes": 13, "panels": ["wf-ledger-explorer"], "has_exercise": true },
+        { "key": "l05-fill-up", "title": "Fill-up", "order": 5, "est_minutes": 13, "panels": ["wf-ledger-explorer"], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m04-pressure",
+      "title": "Pressure",
+      "order": 4,
+      "lessons": [
+        { "key": "l01-what-vrr-promises-about-pressure", "title": "What VRR promises about pressure", "order": 1, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l02-the-closed-form-track", "title": "The closed-form track", "order": 2, "est_minutes": 14, "panels": ["wf-ledger-explorer"], "has_exercise": true },
+        { "key": "l03-break-even-is-not-one", "title": "Break-even is not one", "order": 3, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l04-the-trough", "title": "The trough", "order": 4, "est_minutes": 13, "panels": ["wf-ledger-explorer"], "has_exercise": true },
+        { "key": "l05-surveys-and-cadence", "title": "Surveys and cadence", "order": 5, "est_minutes": 14, "panels": ["wf-ledger-explorer"], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m05-the-ledger-in-practice",
+      "title": "The Ledger in Practice",
+      "order": 5,
+      "lessons": [
+        { "key": "l01-building-periods-from-rows", "title": "Building periods from rows", "order": 1, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l02-the-pvt-track", "title": "The PVT track", "order": 2, "est_minutes": 13, "panels": ["wf-ledger-explorer"], "has_exercise": true },
+        { "key": "l03-frozen-versus-tracked", "title": "Frozen versus tracked", "order": 3, "est_minutes": 13, "panels": ["wf-ledger-explorer"], "has_exercise": true },
+        { "key": "l04-what-the-ledger-cannot-see", "title": "What the ledger cannot see", "order": 4, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        { "key": "l01-the-story-so-far", "title": "The story so far", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-working-the-capstone", "title": "Working the capstone", "order": 2, "est_minutes": 14, "panels": ["wf-ledger-explorer"], "has_exercise": true },
+        { "key": "l03-onward-to-professional", "title": "Onward to Professional", "order": 3, "est_minutes": 11, "panels": [], "has_exercise": true }
+      ]
+    }
+  ]
+}
