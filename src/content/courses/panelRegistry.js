@@ -52,6 +52,9 @@ export const PANELS = {
   'wf-ledger-explorer': React.lazy(() => import('@/components/course/panels/waterflood/LedgerExplorer')),
   'wf-pattern-explorer': React.lazy(() => import('@/components/course/panels/waterflood/PatternExplorer')),
   'wf-design-explorer': React.lazy(() => import('@/components/course/panels/waterflood/DesignExplorer')),
+  'sim-deck-explorer': React.lazy(() => import('@/components/course/panels/sim/DeckExplorer')),
+  'sim-structure-explorer': React.lazy(() => import('@/components/course/panels/sim/StructureExplorer')),
+  'sim-build-explorer': React.lazy(() => import('@/components/course/panels/sim/BuildExplorer')),
 };
 
 export function resolvePanel(id) {
