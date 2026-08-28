@@ -14,7 +14,7 @@ The North element has been in surplus since the first month of record, so its fi
 
 ## The correction
 
-At the field target of 1.05, the two elements converge on nearly the same injection rate, 2810.2915494395775 and 2817.2043370935 barrels per period, because they produce nearly the same voidage. Reaching that costs a 15.358338556978579 percent cut in the north and a 72.6255853400599 percent increase in the south, netting to a 13.636363636363624 percent increase in total allocated injection.
+At the field target of 1.05, the two elements converge on nearly the same injection rate, 2810.2915494395775 and 2817.2043370935 barrels per period, because they produce nearly the same voidage. Reaching that costs a 15.358338556978579 percent cut in the north and a 72.6255853400599 percent increase in the south, netting to a 13.64 percent increase in total allocated injection.
 
 Most of the correction is redistribution rather than volume, which is the general reason pattern analysis pays for itself.
 

@@ -4,7 +4,7 @@ You can now read a waterflood's voidage ledger and defend every number in it. Th
 
 ## The one fact that motivates everything next
 
-Ekene's field cumulative VRR is 1.034899536109. Split that same record by which producers each injector actually supports, and it becomes two elements: one at 1.2024353717815623 and one at 0.6097477559533482.
+Ekene's field cumulative VRR is 1.034899536109. Split that same record by which producers each injector actually supports, and it becomes two elements: one near 1.20 and one near 0.61.
 
 Neither of those is visible from anything in this tier. The field number is not wrong, and it is not an approximation to either element. It is an average over a geometry that the ledger deliberately does not model, and averaging a flood over geometry is exactly the operation that hides a flood's problems.
 

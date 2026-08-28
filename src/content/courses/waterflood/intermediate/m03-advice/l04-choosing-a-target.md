@@ -13,7 +13,7 @@ Ekene's field plan is 1.05: replace everything and buy a little margin above the
 
 Interesting result: at a common target of 1.05, the two elements converge on almost the same injection rate, about 2810 and 2817 barrels per period. That is a consequence of them producing similar voidage, and it is a useful sanity check that the arithmetic is doing what you think.
 
-The total becomes 5627.495886533077 against a current allocated 4952.196380149108, an increase of 13.636363636363624 percent in allocated injection.
+The total becomes 5627.495886533077 against a current allocated 4952.196380149108, an increase of 13.64 percent in allocated injection. That percentage is a ratio of two sums, and its digits beyond the fourth depend on the order the sums were accumulated in, so quoting it to sixteen figures would be claiming precision the quantity does not carry.
 
 ## Why a common target may be wrong
 

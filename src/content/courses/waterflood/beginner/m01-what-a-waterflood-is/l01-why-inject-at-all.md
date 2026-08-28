@@ -18,7 +18,7 @@ That is displacement and sweep, and it is where the SCAL and Displacement course
 
 ## The two jobs can disagree
 
-Here is the case that makes the distinction concrete, and it is the case this whole course builds toward. Over three years the Ekene field replaced 1.034899536109 reservoir barrels of voidage for every barrel it produced. Read as a pressure statement that is a healthy flood: pressure was maintained, slightly more than maintained. Read as a displacement statement it says nothing at all, because it does not know where the water went. When the Professional tier splits that same number by which producer the injection actually supported, one half of the field sits at 1.2024353717815623 and the other at 0.6097477559533482. The field average was never wrong. It was answering a different question than the one people were asking of it.
+Here is the case that makes the distinction concrete, and it is the case this whole course builds toward. Over three years the Ekene field replaced 1.034899536109 reservoir barrels of voidage for every barrel it produced. Read as a pressure statement that is a healthy flood: pressure was maintained, slightly more than maintained. Read as a displacement statement it says nothing at all, because it does not know where the water went. When the Professional tier splits that same number by which producer the injection actually supported, one half of the field sits near 1.20 and the other near 0.61. The field average was never wrong. It was answering a different question than the one people were asking of it.
 
 ## A worked orientation
 

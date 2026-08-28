@@ -34,7 +34,7 @@ Three reasons, and they are the standard three.
 
 **Fracture pressure is a ceiling.** Pushing harder raises injection pressure, and above the formation parting pressure the water opens fractures instead of entering the matrix. A fractured injector can flood a thief zone with astonishing efficiency and recover nothing.
 
-**Over-injection can be worse than useless.** Water that arrives at a producer without displacing anything on the way is water you paid to inject and will now pay to lift, treat and dispose of. The Professional tier meets a pattern at a cumulative VRR of 1.2024353717815623, and the question there is not whether that is a big number but whether the water is doing anything.
+**Over-injection can be worse than useless.** Water that arrives at a producer without displacing anything on the way is water you paid to inject and will now pay to lift, treat and dispose of. The Professional tier meets a pattern at a cumulative VRR of about 1.20, and the question there is not whether that is a big number but whether the water is doing anything.
 
 ## Reading a target profile you inherit
 

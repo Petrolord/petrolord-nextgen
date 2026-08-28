@@ -14,9 +14,9 @@ The swept area grows with the LOGARITHM of the injected volume ratio. That funct
 
 Doubling the injected water past breakthrough adds
 
-$$0.2749 \times \ln 2 = 0.19053 \text{ of areal sweep}$$
+$$0.2749 \times \ln 2 = 0.19054615993592894 \text{ of areal sweep}$$
 
-Doubling it again adds the same 0.19053. Every doubling buys the same increment, so the incremental cost per unit of swept area doubles each time.
+Doubling it again adds the same 0.19054615993592894. Every doubling buys the same increment, so the incremental cost per unit of swept area doubles each time.
 
 Start from Ekene's $E_{Abt} = 0.6573574366303985$ and inject twice the breakthrough volume:
 

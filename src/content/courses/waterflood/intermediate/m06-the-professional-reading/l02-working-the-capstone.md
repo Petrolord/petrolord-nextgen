@@ -1,6 +1,6 @@
 # Working the capstone
 
-Six numbers, from the allocation matrix through the pattern ledgers to the injectivity diagnostic. This lesson walks the mechanism for each and names the mistake most likely to produce a near-miss.
+Six numbers, from the allocation matrix through the pattern ledgers to the injectivity and water-arrival diagnostics. This lesson walks the mechanism for each and names the mistake most likely to produce a near-miss.
 
 ## What you are given
 
@@ -38,17 +38,19 @@ This field exists to test the convention. On absolute pressure you get 1.0669369
 
 The check: the answer should be recognisable as a simple ratio of two injectivity indices, and the two fitted slopes should be recognisable as their reciprocals.
 
-## Field 6: cumulative VRR on a pressure-tracked Bo
+## Field 6: the Chan late-time slope on Ekene-6
 
-Attach the six pressure surveys to the periods by interpolation, read $B_o$ off the PVT table at each period's pressure, and recompute the cumulative VRR with those per-period factors instead of the frozen 1.21584.
+Build the water oil ratio series for Ekene-6 from the surveillance rows, take its derivative with respect to time, and fit the late-time slope on log-log axes. Classify it against the thresholds: at or above 0.4 is channelling, at or below 0.0 is coning, between them is transitional.
 
-The check: the answer should differ from the frozen 1.034899536109 in the fifth decimal place, not the third. If your answer differs in the third decimal, you have probably used the model pressure track rather than the survey-interpolated one, or evaluated $B_o$ at the wrong pressures.
+Two mistakes to avoid, and both return a plausible number rather than an obvious failure. The first is fitting the slope of the WOR itself instead of the slope of its derivative. The second is reading the FIELD curve, which the engine also produces, rather than the Ekene-6 producer curve. The field number is the aggregate of every producer and it is close enough to Ekene-6's to look right.
+
+The check: the answer should sit well above the 0.4 channelling threshold, and it should be the LARGER of the two producer slopes the engine returns. Only two producers get a curve at all. Ekene-1 has six wet months against a ten-point minimum and Ekene-5 has never broken through, so a run that returns three or four producer curves has picked up something that is not water arrival.
 
 ## Using the panel
 
 {{panel:wf-pattern-explorer}}
 
-Set the target to 1.0 and the window to 3, which are the capstone settings, and step through both patterns. Fields 1 to 4 are all readable in the tiles. Fields 5 and 6 are not in this panel; work those from the definitions above.
+Set the target to 1.0 and the window to 3, which are the capstone settings, and step through both patterns. Fields 1 to 4 are all readable in the tiles. Fields 5 and 6 are diagnostics rather than ledger quantities, so they are not in this panel; work those from the definitions above.
 
 ## The general advice
 

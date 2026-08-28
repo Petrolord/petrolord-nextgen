@@ -69,11 +69,11 @@ describe('floodLab: Professional capstone oracles', () => {
     expect(h.alerts).toHaveLength(1);
   });
 
-  it('cumulative VRR on a pressure-tracked Bo', () => {
-    const t = lab.trackedFvfLedger();
-    near(t.tracked, 1.0349459620241488, 1e-12);
-    near(t.frozen, 1.034899536109, 1e-12);
-    near(t.differencePct, 0.004486031110162436, 1e-12);
+  it('the Chan late-time slope on Ekene-6', () => {
+    const c = lab.chanDiagnostics();
+    const e6 = c.producers.find((p) => p.producer === 'Ekene-6');
+    near(e6.lateSlope, 2.348281726147951, 1e-12);
+    expect(e6.classification.code).toBe('channeling');
   });
 });
 
@@ -115,6 +115,17 @@ describe('floodLab: Expert capstone oracles', () => {
 });
 
 describe('floodLab: supporting truth the lessons quote', () => {
+  // Taught in Associate m05 l03. NOT graded anywhere: it lands 4.6e-5 from the
+  // Associate's own graded field cumulative VRR, so no usable tolerance can
+  // separate the two. See RC4-TRUTH section J.
+  it('cumulative VRR on a pressure-tracked Bo, taught but not graded', () => {
+    const t = lab.trackedFvfLedger();
+    near(t.tracked, 1.0349459620241488, 1e-12);
+    near(t.frozen, 1.034899536109, 1e-12);
+    near(t.differencePct, 0.004486031110162436, 1e-12);
+    expect(Math.abs(t.tracked - t.frozen)).toBeLessThan(0.0005);
+  });
+
   it('the break-even VRR is Boi/Bo(ledger), not 1.0', () => {
     near(lab.BREAK_EVEN_VRR, 0.9869719699960521, 1e-15);
     expect(lab.BREAK_EVEN_VRR).toBeLessThan(1);
