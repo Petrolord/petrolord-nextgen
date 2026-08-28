@@ -1,0 +1,75 @@
+{
+  "app_slug": "waterflood",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-heterogeneity",
+      "title": "Heterogeneity",
+      "order": 1,
+      "lessons": [
+        { "key": "l01-a-column-is-not-one-permeability", "title": "A column is not one permeability", "order": 1, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l02-the-dykstra-parsons-coefficient", "title": "The Dykstra-Parsons coefficient", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-the-planted-column", "title": "The planted column", "order": 3, "est_minutes": 14, "panels": ["wf-design-explorer"], "has_exercise": true },
+        { "key": "l04-order-is-permeability-not-depth", "title": "Order is permeability, not depth", "order": 4, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l05-what-v-does-not-tell-you", "title": "What V does not tell you", "order": 5, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m02-layered-sweep",
+      "title": "Layered Sweep",
+      "order": 2,
+      "lessons": [
+        { "key": "l01-piston-layers-no-crossflow", "title": "Piston layers, no crossflow", "order": 1, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l02-dykstra-parsons-stages", "title": "Dykstra-Parsons stages", "order": 2, "est_minutes": 14, "panels": ["wf-design-explorer"], "has_exercise": true },
+        { "key": "l03-stiles", "title": "Stiles", "order": 3, "est_minutes": 14, "panels": ["wf-design-explorer"], "has_exercise": true },
+        { "key": "l04-the-two-methods-compared", "title": "The two methods compared", "order": 4, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l05-mobility-ratio-sensitivity", "title": "Mobility ratio sensitivity", "order": 5, "est_minutes": 13, "panels": ["wf-design-explorer"], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m03-areal-sweep",
+      "title": "Areal Sweep",
+      "order": 3,
+      "lessons": [
+        { "key": "l01-the-five-spot-correlation", "title": "The five-spot correlation", "order": 1, "est_minutes": 14, "panels": ["wf-design-explorer"], "has_exercise": true },
+        { "key": "l02-after-breakthrough", "title": "After breakthrough", "order": 2, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l03-ed-times-ea-times-ev", "title": "ED times EA times EV", "order": 3, "est_minutes": 14, "panels": ["wf-design-explorer"], "has_exercise": true },
+        { "key": "l04-the-pore-volume-constant", "title": "The pore volume constant", "order": 4, "est_minutes": 13, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m04-the-forecast",
+      "title": "The Forecast",
+      "order": 4,
+      "lessons": [
+        { "key": "l01-how-the-engine-marches", "title": "How the engine marches", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-the-pre-breakthrough-identity", "title": "The pre-breakthrough identity", "order": 2, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l03-the-design-case", "title": "The design case", "order": 3, "est_minutes": 14, "panels": ["wf-design-explorer"], "has_exercise": true },
+        { "key": "l04-rate-buys-time-not-oil", "title": "Rate buys time, not oil", "order": 4, "est_minutes": 13, "panels": ["wf-design-explorer"], "has_exercise": true },
+        { "key": "l05-fill-up-and-the-spurious-water", "title": "Fill-up and the spurious water", "order": 5, "est_minutes": 13, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m05-forecast-against-field",
+      "title": "Forecast Against Field",
+      "order": 5,
+      "lessons": [
+        { "key": "l01-the-observed-rate-cannot-flood-it", "title": "The observed rate cannot flood it", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-the-channel-back-out", "title": "The channel back-out", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-what-the-diagnostics-agreed-on", "title": "What the diagnostics agreed on", "order": 3, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l04-eor-is-a-different-question", "title": "EOR is a different question", "order": 4, "est_minutes": 13, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        { "key": "l01-the-story-so-far", "title": "The story so far", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-working-the-capstone", "title": "Working the capstone", "order": 2, "est_minutes": 14, "panels": ["wf-design-explorer"], "has_exercise": true },
+        { "key": "l03-onward", "title": "Onward", "order": 3, "est_minutes": 11, "panels": [], "has_exercise": true }
+      ]
+    }
+  ]
+}
