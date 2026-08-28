@@ -55,6 +55,9 @@ export const PANELS = {
   'sim-deck-explorer': React.lazy(() => import('@/components/course/panels/sim/DeckExplorer')),
   'sim-structure-explorer': React.lazy(() => import('@/components/course/panels/sim/StructureExplorer')),
   'sim-build-explorer': React.lazy(() => import('@/components/course/panels/sim/BuildExplorer')),
+  'fluid-correlation-explorer': React.lazy(() => import('@/components/course/panels/fluid/CorrelationExplorer')),
+  'fluid-study-explorer': React.lazy(() => import('@/components/course/panels/fluid/StudyExplorer')),
+  'fluid-tuning-explorer': React.lazy(() => import('@/components/course/panels/fluid/TuningExplorer')),
 };
 
 export function resolvePanel(id) {

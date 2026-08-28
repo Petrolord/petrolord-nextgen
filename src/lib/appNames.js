@@ -18,6 +18,7 @@ export const APP_NAMES = {
   scal: 'SCAL & Displacement',
   waterflood: 'Waterflood Management',
   sim: 'Reservoir Simulation Essentials',
+  fluid: 'Fluid Properties & PVT',
 };
 
 export const CERT_TIER_LABELS = {
