@@ -1,0 +1,275 @@
+{
+  "app_slug": "sim",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-deck-is",
+      "title": "What a Deck Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-an-input-file-not-a-model",
+          "title": "An input file, not a model",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-six-sections",
+          "title": "The six sections",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "sim-deck-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-units-and-keyword-grammar",
+          "title": "Units and keyword grammar",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-this-course-does-not-do",
+          "title": "What this course does not do",
+          "order": 4,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-grid",
+      "title": "The Grid",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-block-centred-geometry",
+          "title": "Block-centred geometry",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-tops-and-what-they-carry",
+          "title": "TOPS and what they carry",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "sim-deck-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-layers-and-their-properties",
+          "title": "Layers and their properties",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-star-repeat-and-deck-size",
+          "title": "Star repeat and deck size",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "sim-deck-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-cell-count-and-what-it-costs",
+          "title": "Cell count and what it costs",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-tables",
+      "title": "The Tables",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-pvt-in-a-deck",
+          "title": "PVT in a deck",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "sim-deck-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-pvto-and-the-saturated-branch",
+          "title": "PVTO and the saturated branch",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-relative-permeability-tables",
+          "title": "Relative permeability tables",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-axis-closure",
+          "title": "Axis closure",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "sim-deck-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-table-does-between-its-rows",
+          "title": "What a table does between its rows",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-initialisation",
+      "title": "Initialisation",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-equil-and-the-datum",
+          "title": "EQUIL and the datum",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "sim-deck-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-contacts",
+          "title": "Contacts",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-rsvd-and-solution-gas",
+          "title": "RSVD and solution gas",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-equilibration-decides",
+          "title": "What equilibration decides",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-wells-and-schedule",
+      "title": "Wells and Schedule",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-welspecs-and-compdat",
+          "title": "WELSPECS and COMPDAT",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "sim-deck-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-controls",
+          "title": "Controls",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-dates-and-timesteps",
+          "title": "DATES and timesteps",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-summary-vectors",
+          "title": "SUMMARY vectors",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "sim-deck-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-well-names-and-limits",
+          "title": "Well names and limits",
+          "order": 5,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "sim-deck-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward-to-professional",
+          "title": "Onward to Professional",
+          "order": 3,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

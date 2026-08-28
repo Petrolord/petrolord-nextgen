@@ -17,6 +17,7 @@ export const APP_NAMES = {
   mbal: 'Material Balance',
   scal: 'SCAL & Displacement',
   waterflood: 'Waterflood Management',
+  sim: 'Reservoir Simulation Essentials',
 };
 
 export const CERT_TIER_LABELS = {
