@@ -1,0 +1,75 @@
+{
+  "app_slug": "waterflood",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-allocation",
+      "title": "Allocation",
+      "order": 1,
+      "lessons": [
+        { "key": "l01-why-a-matrix", "title": "Why a matrix", "order": 1, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l02-the-ekene-matrix", "title": "The Ekene matrix", "order": 2, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l03-rows-that-do-not-sum-to-one", "title": "Rows that do not sum to one", "order": 3, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l04-the-conservation-audit", "title": "The conservation audit", "order": 4, "est_minutes": 14, "panels": ["wf-pattern-explorer"], "has_exercise": true },
+        { "key": "l05-never-assume-a-split", "title": "Never assume a split", "order": 5, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m02-pattern-vrr",
+      "title": "Pattern VRR",
+      "order": 2,
+      "lessons": [
+        { "key": "l01-a-pattern-is-a-producer-list", "title": "A pattern is a producer list", "order": 1, "est_minutes": 13, "panels": ["wf-pattern-explorer"], "has_exercise": true },
+        { "key": "l02-north-and-south", "title": "North and South", "order": 2, "est_minutes": 14, "panels": ["wf-pattern-explorer"], "has_exercise": true },
+        { "key": "l03-fill-up-per-pattern", "title": "Fill-up per pattern", "order": 3, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l04-the-whole-field-invariant", "title": "The whole-field invariant", "order": 4, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l05-what-the-split-changes", "title": "What the split changes", "order": 5, "est_minutes": 13, "panels": ["wf-pattern-explorer"], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m03-advice",
+      "title": "Advice",
+      "order": 3,
+      "lessons": [
+        { "key": "l01-scaling-to-a-target", "title": "Scaling to a target", "order": 1, "est_minutes": 13, "panels": ["wf-pattern-explorer"], "has_exercise": true },
+        { "key": "l02-per-injector-deltas", "title": "Per-injector deltas", "order": 2, "est_minutes": 13, "panels": ["wf-pattern-explorer"], "has_exercise": true },
+        { "key": "l03-the-clamp", "title": "The clamp", "order": 3, "est_minutes": 13, "panels": ["wf-pattern-explorer"], "has_exercise": true },
+        { "key": "l04-choosing-a-target", "title": "Choosing a target", "order": 4, "est_minutes": 13, "panels": ["wf-pattern-explorer"], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m04-injectivity",
+      "title": "Injectivity",
+      "order": 4,
+      "lessons": [
+        { "key": "l01-the-hall-plot", "title": "The Hall plot", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-slope-is-one-over-injectivity", "title": "Slope is one over injectivity", "order": 2, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l03-the-pressure-convention", "title": "The pressure convention", "order": 3, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l04-baselines-and-thirds", "title": "Baselines and thirds", "order": 4, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l05-when-injectivity-improves", "title": "When injectivity improves", "order": 5, "est_minutes": 12, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m05-water-arrival",
+      "title": "Water Arrival",
+      "order": 5,
+      "lessons": [
+        { "key": "l01-chan-diagnostics", "title": "Chan diagnostics", "order": 1, "est_minutes": 14, "panels": [], "has_exercise": true },
+        { "key": "l02-reading-the-ekene-producers", "title": "Reading the Ekene producers", "order": 2, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l03-who-does-not-get-a-curve", "title": "Who does not get a curve", "order": 3, "est_minutes": 13, "panels": [], "has_exercise": true },
+        { "key": "l04-the-lag-table-and-its-two-lies", "title": "The lag table and its two lies", "order": 4, "est_minutes": 14, "panels": [], "has_exercise": true }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        { "key": "l01-the-story-so-far", "title": "The story so far", "order": 1, "est_minutes": 12, "panels": [], "has_exercise": true },
+        { "key": "l02-working-the-capstone", "title": "Working the capstone", "order": 2, "est_minutes": 14, "panels": ["wf-pattern-explorer"], "has_exercise": true },
+        { "key": "l03-onward-to-expert", "title": "Onward to Expert", "order": 3, "est_minutes": 11, "panels": [], "has_exercise": true }
+      ]
+    }
+  ]
+}
