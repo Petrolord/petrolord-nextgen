@@ -24,6 +24,7 @@ import EarthModelLearningPage from '@/pages/apps/EarthModelLearningPage';
 import BasinLearningPage from '@/pages/apps/BasinLearningPage';
 import DcaLearningPage from '@/pages/apps/DcaLearningPage';
 import MbalLearningPage from '@/pages/apps/MbalLearningPage';
+import ScalLearningPage from '@/pages/apps/ScalLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
 import LessonPage from '@/pages/course/LessonPage';
@@ -302,6 +303,7 @@ const DashboardPage = () => {
     {/* --- RESERVOIR COURSE APPS (RC series) --- */}
     <Route path="apps/dca" element={<DcaLearningPage />} />
     <Route path="apps/mbal" element={<MbalLearningPage />} />
+    <Route path="apps/scal" element={<ScalLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.
            Static segments (quiz/exam/capstone) rank above the :moduleKey
