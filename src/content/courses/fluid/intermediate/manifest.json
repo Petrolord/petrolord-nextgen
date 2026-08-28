@@ -1,0 +1,281 @@
+{
+  "app_slug": "fluid",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-laboratory-measures",
+      "title": "What a Laboratory Measures",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-study-is-a-set-of-experiments",
+          "title": "A study is a set of experiments",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-constant-composition-expansion",
+          "title": "Constant composition expansion",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-differential-liberation",
+          "title": "Differential liberation",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-separator-tests",
+          "title": "Separator tests",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-study-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-each-experiment-gives-you",
+          "title": "What each experiment gives you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-good-oil-report",
+      "title": "The Good Oil Report",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-real-published-study",
+          "title": "A real published study",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fluid-study-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-composition",
+          "title": "The composition",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fluid-study-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-plus-fraction",
+          "title": "The plus fraction",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-study-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-separator-test-that-is-listed",
+          "title": "The separator test that is listed",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-study-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-stage-that-is-not",
+          "title": "The stage that is not",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-characterizing-the-plus-fraction",
+      "title": "Characterizing the Plus Fraction",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-two-numbers-into-seven",
+          "title": "Two numbers into seven",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-study-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-boiling-point-and-criticals",
+          "title": "Boiling point and criticals",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-volume-shift",
+          "title": "The volume shift",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-one-pseudo-component-costs",
+          "title": "What one pseudo-component costs",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-untuned-model",
+      "title": "The Untuned Model",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-running-it-against-the-study",
+          "title": "Running it against the study",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-study-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-saturation-pressure-bias",
+          "title": "The saturation pressure bias",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-study-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-gravity-bias",
+          "title": "The gravity bias",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-study-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-number-it-refuses-to-give",
+          "title": "The number it refuses to give",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fluid-study-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-documented-bias-is-not-a-bug",
+          "title": "A documented bias is not a bug",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-correlations-against-a-study",
+      "title": "Correlations Against a Study",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-a-correlation-was-fitted-to",
+          "title": "What a correlation was fitted to",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-validity-range",
+          "title": "The validity range",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-study-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-when-a-correlation-is-enough",
+          "title": "When a correlation is enough",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-it-is-not",
+          "title": "When it is not",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fluid-study-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 10,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

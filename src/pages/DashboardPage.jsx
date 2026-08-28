@@ -27,6 +27,7 @@ import MbalLearningPage from '@/pages/apps/MbalLearningPage';
 import ScalLearningPage from '@/pages/apps/ScalLearningPage';
 import WaterfloodLearningPage from '@/pages/apps/WaterfloodLearningPage';
 import SimLearningPage from '@/pages/apps/SimLearningPage';
+import FluidLearningPage from '@/pages/apps/FluidLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
 import LessonPage from '@/pages/course/LessonPage';
@@ -308,6 +309,7 @@ const DashboardPage = () => {
     <Route path="apps/scal" element={<ScalLearningPage />} />
     <Route path="apps/waterflood" element={<WaterfloodLearningPage />} />
     <Route path="apps/sim" element={<SimLearningPage />} />
+    <Route path="apps/fluid" element={<FluidLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.
            Static segments (quiz/exam/capstone) rank above the :moduleKey

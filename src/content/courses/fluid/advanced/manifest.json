@@ -1,0 +1,277 @@
+{
+  "app_slug": "fluid",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-equation-of-state",
+      "title": "The Equation of State",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-cubic",
+          "title": "Why cubic",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-peng-robinson-1978",
+          "title": "Peng-Robinson 1978",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-mixing-rules-and-bips",
+          "title": "Mixing rules and BIPs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-fugacity-and-equilibrium",
+          "title": "Fugacity and equilibrium",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-volume-translation",
+          "title": "Volume translation",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "fluid-tuning-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-flash-and-envelope",
+      "title": "Flash and Envelope",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-is-it-two-phase-at-all",
+          "title": "Is it two phase at all",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-tuning-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-rachford-rice-solve",
+          "title": "The Rachford-Rice solve",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-tuning-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-saturation-pressure",
+          "title": "Saturation pressure",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-tuning-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-phase-envelope",
+          "title": "The phase envelope",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-tuning",
+      "title": "Tuning",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-what-a-knob-is",
+          "title": "What a knob is",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fluid-tuning-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-four-knobs",
+          "title": "The four knobs",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fluid-tuning-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-only-the-pseudo",
+          "title": "Why only the pseudo",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-bounds-and-the-prior",
+          "title": "Bounds and the prior",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-regression",
+          "title": "The regression",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fluid-tuning-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-what-tuning-costs",
+      "title": "What Tuning Costs",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-ledger",
+          "title": "The ledger",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "fluid-tuning-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-target-that-got-worse",
+          "title": "The target that got worse",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fluid-tuning-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-four-knobs-four-targets",
+          "title": "Four knobs, four targets",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reporting-a-tuned-model",
+          "title": "Reporting a tuned model",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-tiers-this-course-will-not-grade",
+      "title": "The Tiers This Course Will Not Grade",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-why-this-module-grades-nothing",
+          "title": "Why this module grades nothing",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-lbc-viscosity",
+          "title": "LBC viscosity",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-interfacial-tension-and-parachors",
+          "title": "Interfacial tension and parachors",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-black-oil-separator-shortcut",
+          "title": "The black-oil separator shortcut",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-how-to-report-a-screening-number",
+          "title": "How to report a screening number",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fluid-tuning-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
