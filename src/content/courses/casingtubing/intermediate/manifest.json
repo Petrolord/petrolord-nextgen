@@ -1,0 +1,303 @@
+{
+  "app_slug": "casingtubing",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-load-case-is-two-columns",
+      "title": "A Load Case Is Two Columns",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-inside-and-outside-at-every-depth",
+          "title": "Inside and outside, at every depth",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-differential-and-its-sign",
+          "title": "The differential, and its sign",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-grid-and-the-section",
+          "title": "The grid, and the section",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-seven-canonical-cases",
+          "title": "The seven canonical cases",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-burst-cases",
+      "title": "The Burst Cases",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-gas-kick",
+          "title": "The gas kick",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-why-the-gas-kick-governs-at-surface",
+          "title": "Why the gas kick governs at surface",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-pressure-test",
+          "title": "The pressure test",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-cases-opposite-governing-depths",
+          "title": "Two cases, opposite governing depths",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-shoe-only-check-would-say",
+          "title": "What a shoe only check would say",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-collapse-cases",
+      "title": "The Collapse Cases",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-full-evacuation",
+          "title": "Full evacuation",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-partial-evacuation-and-the-level",
+          "title": "Partial evacuation, and the level",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-cementing",
+          "title": "Cementing",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-regime-along-the-string",
+          "title": "The regime along the string",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-tension-inside-the-collapse-check",
+          "title": "Tension inside the collapse check",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-axial-and-triaxial",
+      "title": "Axial and Triaxial",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-buoyed-weight",
+          "title": "Buoyed weight",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-overpull-and-the-running-case",
+          "title": "Overpull, and the running case",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-lame-at-the-wall",
+          "title": "Lame at the wall",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-von-mises-and-the-bending-term",
+          "title": "Von Mises, and the bending term",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-worst-point-is-a-search",
+          "title": "The worst point is a search",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-reading-a-string-check",
+      "title": "Reading a String Check",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-design-factors-and-three-verdicts",
+          "title": "Design factors, and three verdicts",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-only-warning-in-fourteen",
+          "title": "The only warning in fourteen",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-margin-of-two-thousandths",
+          "title": "A margin of two thousandths",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-check-does-not-cover",
+          "title": "What the check does not cover",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ct-loadcase-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

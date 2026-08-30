@@ -1,0 +1,301 @@
+{
+  "app_slug": "casingtubing",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-tubing-is-a-different-problem",
+      "title": "Tubing Is a Different Problem",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-cemented-and-not-cemented",
+          "title": "Cemented, and not cemented",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-three-areas",
+          "title": "Three areas",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-changes-and-from-what",
+          "title": "What changes, and from what",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-sign-convention",
+          "title": "The sign convention",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-three-forces",
+      "title": "The Three Forces",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-piston",
+          "title": "Piston",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-ballooning",
+          "title": "Ballooning",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-thermal",
+          "title": "Thermal",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-why-thermal-usually-wins",
+          "title": "Why thermal usually wins",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-adding-them-up-at-the-packer",
+          "title": "Adding them up at the packer",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-length-and-what-holds-it",
+      "title": "Length, and What Holds It",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-force-and-length-are-two-answers",
+          "title": "Force and length are two answers",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-three-length-terms",
+          "title": "The three length terms",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-stroke-window-is-a-constant",
+          "title": "The stroke window is a constant",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-free-anchored-and-limited-motion",
+          "title": "Free, anchored and limited motion",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-a-stroke-verdict",
+          "title": "Reading a stroke verdict",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-buckling",
+      "title": "Buckling",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-string-in-compression-in-a-hole",
+          "title": "A string in compression in a hole",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-sinusoidal-and-helical",
+          "title": "Sinusoidal and helical",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-radial-clearance",
+          "title": "The radial clearance",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-where-this-string-starts-to-buckle",
+          "title": "Where this string starts to buckle",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-buckling-costs",
+          "title": "What buckling costs",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-envelope-and-its-edges",
+      "title": "The Envelope, and Its Edges",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-three-cases-three-limits",
+          "title": "Three cases, three limits",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-erosional-velocity-limit",
+          "title": "The erosional velocity limit",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-planning-forms-leave-out",
+          "title": "What the planning forms leave out",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-this-course-will-not-certify",
+          "title": "What this course will not certify",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ct-tubing-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

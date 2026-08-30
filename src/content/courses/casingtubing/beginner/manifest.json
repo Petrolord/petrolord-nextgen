@@ -1,0 +1,299 @@
+{
+  "app_slug": "casingtubing",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-casing-string-is",
+      "title": "What a Casing String Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-well-is-a-nest-of-pipes",
+          "title": "A well is a nest of pipes",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-od-wall-id-and-weight",
+          "title": "OD, wall, ID and weight",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-grade-is-a-yield-strength",
+          "title": "Grade is a yield strength",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-rating-is-and-is-not",
+          "title": "What a rating is, and is not",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-burst-and-tension",
+      "title": "Burst and Tension",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-barlow-and-the-thin-wall-idea",
+          "title": "Barlow, and the thin wall idea",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-twelve-and-a-half-percent",
+          "title": "The twelve and a half percent",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-pipe-body-yield",
+          "title": "Pipe body yield",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-connection-is-the-weak-point",
+          "title": "The connection is the weak point",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-burst-is-linear-in-the-grade",
+          "title": "Burst is linear in the grade",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-four-collapse-regimes",
+      "title": "The Four Collapse Regimes",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-collapse-is-not-one-formula",
+          "title": "Collapse is not one formula",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-d-over-t-ratio",
+          "title": "The D over t ratio",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-four-formulas",
+          "title": "The four formulas",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-boundaries-belong-to-the-grade",
+          "title": "The boundaries belong to the grade",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-the-regime-off-a-row",
+          "title": "Reading the regime off a row",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-combined-loading",
+      "title": "Combined Loading",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-tension-eats-collapse",
+          "title": "Tension eats collapse",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-axial-adjusted-yield",
+          "title": "The axial adjusted yield",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-tension-moves-the-regime",
+          "title": "Tension moves the regime",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-where-the-derating-bites",
+          "title": "Where the derating bites",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-when-the-yield-is-exhausted",
+          "title": "When the yield is exhausted",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-reading-a-rating-table",
+      "title": "Reading a Rating Table",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-elastic-regime-does-not-know-the-grade",
+          "title": "The elastic regime does not know the grade",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-a-higher-grade-actually-buys",
+          "title": "What a higher grade actually buys",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-minimum-wall-nominal-weight",
+          "title": "Minimum wall, nominal weight",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-screening-numbers-and-data-sheets",
+          "title": "Screening numbers and data sheets",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ct-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
