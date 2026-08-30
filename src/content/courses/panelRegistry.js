@@ -68,6 +68,9 @@ export const PANELS = {
   'wd-survey-explorer': React.lazy(() => import('@/components/course/panels/welldesign/SurveyExplorer')),
   'wd-uncertainty-explorer': React.lazy(() => import('@/components/course/panels/welldesign/UncertaintyExplorer')),
   'wd-clearance-explorer': React.lazy(() => import('@/components/course/panels/welldesign/ClearanceExplorer')),
+  'td-string-explorer': React.lazy(() => import('@/components/course/panels/torquedrag/StringExplorer')),
+  'td-friction-explorer': React.lazy(() => import('@/components/course/panels/torquedrag/FrictionExplorer')),
+  'td-buckling-explorer': React.lazy(() => import('@/components/course/panels/torquedrag/BucklingExplorer')),
 };
 
 export function resolvePanel(id) {
