@@ -80,6 +80,9 @@ export const PANELS = {
   'gm-stress-explorer': React.lazy(() => import('@/components/course/panels/geomech/StressExplorer')),
   'gm-stability-explorer': React.lazy(() => import('@/components/course/panels/geomech/StabilityExplorer')),
   'gm-window-explorer': React.lazy(() => import('@/components/course/panels/geomech/WindowExplorer')),
+  'ct-rating-explorer': React.lazy(() => import('@/components/course/panels/casingtubing/RatingExplorer')),
+  'ct-loadcase-explorer': React.lazy(() => import('@/components/course/panels/casingtubing/LoadCaseExplorer')),
+  'ct-tubing-explorer': React.lazy(() => import('@/components/course/panels/casingtubing/TubingExplorer')),
 };
 
 export function resolvePanel(id) {
