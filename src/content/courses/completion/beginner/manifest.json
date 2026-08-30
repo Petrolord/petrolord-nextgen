@@ -1,0 +1,295 @@
+{
+  "app_slug": "completion",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-completion-is",
+      "title": "What a Completion Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-last-string-in-the-well",
+          "title": "The last string in the well",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-the-components-do",
+          "title": "What the components do",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-diameters-per-component",
+          "title": "Two diameters per component",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-api-drift",
+      "title": "API Drift",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-an-id-is-not-what-fits",
+          "title": "An inside diameter is not what fits",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-drift-mandrel",
+          "title": "The drift mandrel",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-three-deduction-classes",
+          "title": "Three deduction classes",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-class-boundary",
+          "title": "The class boundary",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-drift-is-a-guarantee",
+          "title": "Drift is a guarantee",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-stack-up",
+      "title": "The Stack-Up",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-tally-is-a-telescoping-sum",
+          "title": "A tally is a telescoping sum",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-top-down-from-the-hanger",
+          "title": "Top down from the hanger",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-the-packer-lands",
+          "title": "Where the packer lands",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-tally-refuses",
+          "title": "What the tally refuses",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-a-tally",
+          "title": "Reading a tally",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-equipment",
+      "title": "The Equipment",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-each-piece-is-for",
+          "title": "What each piece is for",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-body-od-is-the-coupling-od",
+          "title": "The body OD is the coupling OD",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-landing-nipples-and-seat-bores",
+          "title": "Landing nipples and seat bores",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-big-body-items",
+          "title": "The big body items",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-catalog-says-approx",
+          "title": "The catalog says approx",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-volumes-and-what-a-tally-hides",
+      "title": "Volumes, and What a Tally Hides",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-capacity-and-displacement",
+          "title": "Capacity and displacement",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-steel-between-them",
+          "title": "The steel between them",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-measured-depth-not-vertical",
+          "title": "Measured depth, not vertical",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-tally-cannot-tell-you",
+          "title": "What a tally cannot tell you",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "cd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

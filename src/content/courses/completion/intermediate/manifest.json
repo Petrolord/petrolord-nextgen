@@ -1,0 +1,301 @@
+{
+  "app_slug": "completion",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-exposed-program",
+      "title": "The Exposed Program",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-the-string-runs-through",
+          "title": "What the string runs through",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-innermost-bore-wins",
+          "title": "The innermost bore wins",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-cuts-merges-and-gaps",
+          "title": "Cuts, merges and gaps",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-governing-drift-to-a-depth",
+          "title": "Governing drift to a depth",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-getting-it-down",
+      "title": "Getting It Down",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-run-in-clearance",
+          "title": "Run-in clearance",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-whole-path-above",
+          "title": "The whole path above",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-three-verdicts-and-a-margin",
+          "title": "Three verdicts and a margin",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-packer-through-the-liner",
+          "title": "The packer through the liner",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-where-an-oversized-item-fails",
+          "title": "Where an oversized item fails",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-getting-through-it-afterwards",
+      "title": "Getting Through It Afterwards",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-through-bore",
+          "title": "The through-bore",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-cumulative-from-the-top",
+          "title": "Cumulative from the top",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-safety-valve-and-the-no-go",
+          "title": "The safety valve and the no-go",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-an-extreme-is-not-an-extent",
+          "title": "An extreme is not an extent",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-wireline-access-means",
+          "title": "What wireline access means",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-volumes",
+      "title": "The Volumes",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-four-volumes",
+          "title": "Four volumes",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-annulus-above-the-packer",
+          "title": "The annulus above the packer",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-below-the-packer",
+          "title": "Below the packer",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-breakpoints-not-slices",
+          "title": "Breakpoints, not slices",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-when-the-integration-skips",
+          "title": "When the integration skips",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-reading-a-check-critically",
+      "title": "Reading a Check Critically",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-worst-row-was-the-first-row",
+          "title": "The worst row was the first row",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-why-nothing-caught-it",
+          "title": "Why nothing caught it",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-fix-asserts",
+          "title": "What the fix asserts",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-checks-do-not-cover",
+          "title": "What the checks do not cover",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "cd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

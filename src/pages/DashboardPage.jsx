@@ -36,6 +36,7 @@ import WellControlLearningPage from '@/pages/apps/WellControlLearningPage';
 import GeomechLearningPage from '@/pages/apps/GeomechLearningPage';
 import CasingTubingLearningPage from '@/pages/apps/CasingTubingLearningPage';
 import CementingLearningPage from '@/pages/apps/CementingLearningPage';
+import CompletionLearningPage from '@/pages/apps/CompletionLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
 import LessonPage from '@/pages/course/LessonPage';
@@ -326,6 +327,7 @@ const DashboardPage = () => {
     <Route path="apps/geomech" element={<GeomechLearningPage />} />
     <Route path="apps/casingtubing" element={<CasingTubingLearningPage />} />
     <Route path="apps/cementing" element={<CementingLearningPage />} />
+    <Route path="apps/completion" element={<CompletionLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.
            Static segments (quiz/exam/capstone) rank above the :moduleKey
