@@ -1,0 +1,277 @@
+{
+  "app_slug": "welldesign",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-survey-is",
+      "title": "What a Survey Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-three-numbers-at-a-depth",
+          "title": "Three numbers at a depth",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-wellbore-is-not-the-wellpath",
+          "title": "The wellbore is not the well path",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-measured-depth-and-true-vertical-depth",
+          "title": "Measured depth and true vertical depth",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wd-survey-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-azimuth-and-which-north",
+          "title": "Azimuth, and which north",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-minimum-curvature",
+      "title": "Minimum Curvature",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-arc-between-two-stations",
+          "title": "The arc between two stations",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ratio-factor",
+          "title": "The ratio factor",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wd-survey-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-methods-it-replaced",
+          "title": "The methods it replaced",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-tangential-method-costs",
+          "title": "What the tangential method costs",
+          "order": 4,
+          "est_minutes": 15,
+          "panels": [
+            "wd-survey-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-why-the-survey-interval-matters",
+          "title": "Why the survey interval matters",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-reading-the-survey-table",
+      "title": "Reading the Survey Table",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-listing-a-driller-reads",
+          "title": "The listing a driller reads",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wd-survey-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-dogleg-severity-and-its-two-conventions",
+          "title": "Dogleg severity and its two conventions",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-build-rate-and-turn-rate",
+          "title": "Build rate and turn rate",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-vertical-section",
+          "title": "Vertical section",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wd-survey-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-closure-and-when-it-equals-the-vertical-section",
+          "title": "Closure, and when it equals the vertical section",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-designing-a-trajectory",
+      "title": "Designing a Trajectory",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-shapes-and-when-to-use-them",
+          "title": "The shapes, and when to use them",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-build-and-hold",
+          "title": "Build and hold",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wd-survey-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-s-profile",
+          "title": "The S profile",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wd-survey-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-landing-a-horizontal",
+          "title": "Landing a horizontal",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-toolface-and-steering-to-a-target",
+          "title": "Toolface, and steering to a target",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-compiling-and-checking",
+      "title": "Compiling and Checking",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-from-a-design-to-a-station-list",
+          "title": "From a design to a station list",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wd-survey-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-dogleg-the-design-implies",
+          "title": "The dogleg the design implies",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-crossing-a-tvd",
+          "title": "Crossing a TVD",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wd-survey-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-compiler-will-not-let-you-do",
+          "title": "What the compiler will not let you do",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "wd-survey-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 10,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
