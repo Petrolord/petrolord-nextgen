@@ -63,6 +63,11 @@ export const PANELS = {
   'wt-buildup-explorer': React.lazy(() => import('@/components/course/panels/welltest/BuildupExplorer')),
   'wt-diagnostic-explorer': React.lazy(() => import('@/components/course/panels/welltest/DiagnosticExplorer')),
   'wt-regression-explorer': React.lazy(() => import('@/components/course/panels/welltest/RegressionExplorer')),
+
+  // DR1 Well Design & Surveys
+  'wd-survey-explorer': React.lazy(() => import('@/components/course/panels/welldesign/SurveyExplorer')),
+  'wd-uncertainty-explorer': React.lazy(() => import('@/components/course/panels/welldesign/UncertaintyExplorer')),
+  'wd-clearance-explorer': React.lazy(() => import('@/components/course/panels/welldesign/ClearanceExplorer')),
 };
 
 export function resolvePanel(id) {
