@@ -1,0 +1,289 @@
+{
+  "app_slug": "welltest",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-regression",
+      "title": "Regression",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-from-straight-line-to-model",
+          "title": "From straight line to model",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-residuals-in-log-space",
+          "title": "Residuals in log space",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-bounds-and-the-skin-floor",
+          "title": "Bounds and the skin floor",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-line-could-not-recover",
+          "title": "What the line could not recover",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-what-a-fit-cannot-tell-you",
+      "title": "What a Fit Cannot Tell You",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-confidence-interval-on-clean-data",
+          "title": "A confidence interval on clean data",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-phantom-fault",
+          "title": "The phantom fault",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-model-that-degenerates",
+          "title": "A model that degenerates",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reporting-a-match-honestly",
+          "title": "Reporting a match honestly",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-rate-history",
+      "title": "Rate History",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-superposition-properly",
+          "title": "Superposition, properly",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-equivalent-producing-time",
+          "title": "The equivalent producing time",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-multi-rate-semilog",
+          "title": "Multi-rate semilog",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-ignoring-the-history-costs",
+          "title": "What ignoring the history costs",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-gas",
+      "title": "Gas",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-why-pressure-squared-is-not-enough",
+          "title": "Why pressure squared is not enough",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-pseudo-pressure",
+          "title": "Pseudo-pressure",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-equivalent-liquid-adapter",
+          "title": "The equivalent-liquid adapter",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-deliverability",
+          "title": "Deliverability",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-two-answers-from-three-points",
+          "title": "Two answers from three points",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-rate-transient-analysis",
+      "title": "Rate Transient Analysis",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-production-data-as-a-test",
+          "title": "Production data as a test",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-material-balance-time",
+          "title": "Material-balance time",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-flowing-material-balance",
+          "title": "The flowing material balance",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-gas-and-pseudo-time",
+          "title": "Gas and pseudo-time",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-product-you-cannot-split",
+          "title": "The product you cannot split",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-course-will-not-certify",
+          "title": "What this course will not certify",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 3,
+          "est_minutes": 15,
+          "panels": [
+            "wt-regression-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-onward",
+          "title": "Onward",
+          "order": 4,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,289 @@
+{
+  "app_slug": "welltest",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-derivative",
+      "title": "The Derivative",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-a-derivative-at-all",
+          "title": "Why a derivative at all",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-bourdet-three-point-rule",
+          "title": "The Bourdet three-point rule",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-smoothing-window",
+          "title": "The smoothing window",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-radial-plateau",
+          "title": "The radial plateau",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-contract-that-returns-nothing",
+          "title": "The contract that returns nothing",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-reading-shapes",
+      "title": "Reading Shapes",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-slope-alphabet",
+          "title": "The slope alphabet",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-storage-on-the-derivative",
+          "title": "Storage on the derivative",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-classifier-actually-does",
+          "title": "What the classifier actually does",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-transitions-look-like-regimes",
+          "title": "Transitions look like regimes",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-label-is-not-a-diagnosis",
+          "title": "A label is not a diagnosis",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-boundaries",
+      "title": "Boundaries",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-sealing-fault",
+          "title": "The sealing fault",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-late-line-halves-the-permeability",
+          "title": "The late line halves the permeability",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-constant-pressure-and-channels",
+          "title": "Constant pressure and channels",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-closed-rectangle",
+          "title": "The closed rectangle",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-drainage-area-from-the-cartesian-line",
+          "title": "Drainage area from the Cartesian line",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-well-itself",
+      "title": "The Well Itself",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-fracture-and-its-half-slope",
+          "title": "The fracture and its half slope",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-half-length-from-the-linear-line",
+          "title": "Half-length from the linear line",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-fractured-well-read-as-radial",
+          "title": "A fractured well read as radial",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-horizontal-well",
+          "title": "The horizontal well",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-heterogeneity-and-data",
+      "title": "Heterogeneity and Data",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-dual-porosity-and-the-dip",
+          "title": "Dual porosity and the dip",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-omega-and-lambda",
+          "title": "Omega and lambda",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-decimation",
+          "title": "Decimation",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-one-spike-does",
+          "title": "What one spike does",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "wt-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 10,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
