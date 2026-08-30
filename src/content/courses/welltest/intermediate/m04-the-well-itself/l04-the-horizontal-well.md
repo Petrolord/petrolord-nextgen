@@ -18,7 +18,7 @@ That is a well whose length is more than forty times the thickness of the reserv
 
 **Pseudoradial flow.** Eventually the disturbance is far enough away that the 2000 ft lateral looks like a point, and flow becomes radial in the horizontal plane, as it would be for a vertical well. The derivative flattens again, at a level set by the horizontal permeability and the full layer thickness.
 
-Between the linear flow and the pseudoradial plateau, the classifier reports a bilinear segment from 14.56 to 37.28 hours. Order check: bilinear flow is a fracture regime and there is no fracture. It is the transition.
+Between the linear flow and the pseudoradial plateau, the classifier reports a transition from 14.56 to 37.28 hours. Its slope sits in the bilinear band, and the ordering rule catches it: bilinear flow is a fracture regime, it precedes radial flow, and there is no fracture here. It is the climb from the linear period to the pseudoradial plateau.
 
 ## Two plateaus, two permeabilities
 

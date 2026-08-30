@@ -40,9 +40,11 @@ The reason is that the early plateau on this fixture is not a clean fissure plat
 
 ## What the classifier makes of it
 
-Wellbore storage, then a segment labelled constant-pressure recharge from 0.12 to 2.68 hours, then radial from 79 hours on.
+Wellbore storage, then a transition from 0.12 to 2.68 hours, then radial from 79 hours on.
 
-The middle label is the dip, and mechanically it is the same false positive as the storage transition: a steep fall lands in the recharge band. Physically the confusion is more forgivable than usual, because a dip and a recharge boundary both mean "something started supplying fluid". The difference is that the matrix stops supplying once equilibrium is reached and the derivative comes back up, whereas a constant-pressure boundary keeps supplying and the derivative keeps falling.
+The middle segment is the dip. Its slope lands in the recharge band, exactly as the storage transition's does, and the ordering rule is what stops it being reported as a boundary: the derivative RECOVERS to a plateau afterwards, and recharge does not recover. Physically the confusion is more forgivable than usual, because a dip and a recharge boundary both mean "something started supplying fluid". The difference is that the matrix stops supplying once equilibrium is reached, whereas a constant-pressure boundary keeps supplying and the derivative keeps falling.
+
+Which is the same argument the rule makes, and it is worth noticing that the rule can only make it once the recovery is IN THE RECORD. On a test stopped inside the dip, the last segment is a steep fall with nothing after it, and both the classifier and you would have to call it a possible boundary.
 
 Which means the way to tell them apart is to wait. A dip recovers; recharge does not.
 

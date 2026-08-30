@@ -20,7 +20,12 @@ const fmt = (v, d = 4) => (Number.isFinite(v)
 const FIXTURE_OPTIONS = TRANSIENT_FIXTURES.map((f) => ({ value: f.id, label: f.label }));
 const L_OPTIONS = [0, 0.1, 0.2, 0.3, 0.5].map((v) => ({ value: String(v), label: `L = ${v} cycles` }));
 
-const TRANSITION_REGIMES = new Set(['constant-pressure', 'bilinear']);
+// The engine now names a transition rather than mislabelling it. What it
+// cannot name is a FIRST segment that could be near-well geometry or could be
+// the roll-off of a storage unit slope, because separating those needs the
+// pressure curve and detectFlowRegimes is given only the derivative.
+const TRANSITION_REGIMES = new Set(['transition']);
+const AMBIGUOUS_FIRST = new Set(['linear', 'bilinear']);
 
 const extras = (id) => {
   if (id === 'faultDrawdown') {
@@ -88,6 +93,7 @@ const DiagnosticExplorer = () => {
 
   const { chart, regimes, truth, late, story } = view;
   const suspect = regimes.filter((r) => TRANSITION_REGIMES.has(r.regime));
+  const ambiguousFirst = regimes.length > 0 && AMBIGUOUS_FIRST.has(regimes[0].regime);
 
   return (
     <PanelShell
@@ -171,22 +177,24 @@ const DiagnosticExplorer = () => {
         </div>
       )}
 
-      {suspect.length > 0 ? (
+      {ambiguousFirst ? (
         <div className="mt-3 rounded border border-amber-700/60 bg-amber-950/30 p-3">
           <p className="text-amber-300 text-xs font-medium mb-1">
-            {suspect.length} of these labels {suspect.length === 1 ? 'is' : 'are'} probably a transition
+            The first segment is the one the ordering rules cannot check
           </p>
           <p className="text-[11px] text-amber-200/90">
-            The classifier reads the local log-log slope and nothing else. A steep fall between two
-            regimes lands in the constant-pressure band and a slow rise between two plateaus lands
-            in the bilinear band. Check the order as well as the shape: recharge cannot precede
-            radial flow, and bilinear flow cannot start after ten hours of it.
+            A fracture's linear flow legitimately comes first in a test, and so does the roll-off of
+            a wellbore storage unit slope, so nothing about the ORDER separates them. The pressure
+            does: during storage the pressure change and its derivative are the same quantity and
+            lie on top of each other. Compare the two series above over that interval before
+            accepting the label.
           </p>
         </div>
       ) : (
         <Note>
-          Every segment here survives the order check as well as the slope check, which is the
-          weaker of the two tests a regime has to pass.
+          {suspect.length > 0
+            ? `${suspect.length} of these segments ${suspect.length === 1 ? 'is a transition' : 'are transitions'} rather than a regime: a steep fall between two regimes lands in the constant-pressure band and a slow rise between two plateaus lands in the bilinear band, and the engine's ordering rules relabel both. The extent is still reported, because a transition is part of the response.`
+            : 'Every segment here passes the slope check, the span check and the order check. The two the software cannot make are yours: does the level imply a credible number, and do the pressure and derivative curves agree with the regime being claimed?'}
         </Note>
       )}
     </PanelShell>

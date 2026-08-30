@@ -42,7 +42,7 @@ Between the top of the hump and the radial plateau, the derivative FALLS. On a l
 
 The classifier's constant-pressure band is "slope at or below minus 0.35". The storage-to-radial transition sits squarely inside it.
 
-So on both the buildup and the drawdown fixture, which are infinite-acting reservoirs with no boundary of any kind, the engine reports a segment labelled "Constant-pressure boundary / recharge" before the radial flow. It is not a boundary. It is the well emptying its own transition.
+So on the buildup and the drawdown fixture, which are infinite-acting reservoirs with no boundary of any kind, a slope band alone would call that fall a constant-pressure boundary. It is not a boundary. It is the well emptying its own transition, and the engine now says so: it reports the stretch as a transition, because a constant-pressure boundary with radial flow AFTER it is a contradiction. The next two lessons are about that rule and the one case it cannot reach.
 
 ## Reading the storage coefficient
 

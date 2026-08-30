@@ -38,9 +38,9 @@ And this is the general situation for unconventional wells. A multi-fractured ho
 
 The engine reports three segments on this fixture: linear, then bilinear from 23.71373705661655 to 100 hours, then radial.
 
-The middle one is a false label of the kind module 2 catalogued: it is the transition from linear flow to radial flow, and the transition's local slope passes through the bilinear band on the way from a half to zero.
+The middle one is reported as a TRANSITION rather than as a regime, and module 2 is why. Its local slope passes through the bilinear band on the way from a half to zero, and a slope band alone would have called it bilinear flow.
 
-Applying the order check settles it. Bilinear flow is a FINITE-conductivity fracture effect and it happens BEFORE linear flow, not after. A bilinear segment sitting between linear flow and radial flow is a transition, and the fixture has infinite conductivity anyway.
+The ordering rule settles it. Bilinear flow is a FINITE-conductivity fracture effect and it happens BEFORE linear flow, not after, so a bilinear stretch with linear flow already behind it is a transition. This fixture has infinite conductivity anyway, so there is no bilinear period in it at all.
 
 ## The storage question
 
