@@ -1,0 +1,277 @@
+{
+  "app_slug": "welltest",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-well-test-is",
+      "title": "What a Well Test Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-controlled-disturbance",
+          "title": "A controlled disturbance",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-drawdown-and-buildup",
+          "title": "Drawdown and buildup",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-well-this-course-analyses",
+          "title": "The well this course analyses",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "wt-buildup-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-answer-is-for",
+          "title": "What the answer is for",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-radial-straight-line",
+      "title": "The Radial Straight Line",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-why-pressure-is-linear-in-log-time",
+          "title": "Why pressure is linear in log time",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-semilog-slope",
+          "title": "The semilog slope",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wt-buildup-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-permeability-from-the-slope",
+          "title": "Permeability from the slope",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wt-buildup-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-thickness-you-divide-by",
+          "title": "The thickness you divide by",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-line-is-not",
+          "title": "What the line is not",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-skin",
+      "title": "Skin",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-what-skin-is",
+          "title": "What skin is",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-skin-from-the-one-hour-pressure",
+          "title": "Skin from the one-hour pressure",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wt-buildup-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-pressure-skin-costs",
+          "title": "The pressure skin costs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wt-buildup-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-flow-efficiency",
+          "title": "Flow efficiency",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-skin-is-not-damage",
+          "title": "Skin is not damage",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-buildup-horner-and-mdh",
+      "title": "Buildup: Horner and MDH",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-superposition-in-one-picture",
+          "title": "Superposition in one picture",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-horner-time-runs-backwards",
+          "title": "Horner time runs backwards",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wt-buildup-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-p-star-and-average-pressure",
+          "title": "p star and average pressure",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wt-buildup-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-mdh-and-agarwal",
+          "title": "MDH and Agarwal",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-two-analyses-disagree",
+          "title": "The two analyses disagree",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-choosing-the-line",
+      "title": "Choosing the Line",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-wellbore-storage",
+          "title": "Wellbore storage",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-window-walk",
+          "title": "The window walk",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "wt-buildup-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-sign-of-the-skin-inverts",
+          "title": "The sign of the skin inverts",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wt-buildup-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-r-squared-does-not-protect-you",
+          "title": "R squared does not protect you",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "wt-buildup-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 10,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
