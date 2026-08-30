@@ -1,0 +1,273 @@
+{
+  "app_slug": "welldesign",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-why-a-position-is-uncertain",
+      "title": "Why a Position Is Uncertain",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-survey-is-a-measurement",
+          "title": "A survey is a measurement",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-three-sensor-sets",
+          "title": "The three sensor sets",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-error-sources-and-their-codes",
+          "title": "Error sources and their codes",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wd-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-three-propagation-modes",
+          "title": "The three propagation modes",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-reference-the-model-needs",
+          "title": "The reference the model needs",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-iscwsa-model",
+      "title": "The ISCWSA Model",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-what-a-weighting-function-is",
+          "title": "What a weighting function is",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-from-sensor-error-to-position-error",
+          "title": "From sensor error to position error",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-building-the-covariance",
+          "title": "Building the covariance",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wd-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-validation-case",
+          "title": "The validation case",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wd-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-machine-precision-against-a-workbook",
+          "title": "Machine precision against a workbook",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-reading-the-covariance",
+      "title": "Reading the Covariance",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-nev-and-what-it-hides",
+          "title": "NEV, and what it hides",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-borehole-frame",
+          "title": "The borehole frame",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wd-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-highside-lateral-and-along-hole",
+          "title": "Highside, lateral and along hole",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wd-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-horizontal-ellipse",
+          "title": "The horizontal ellipse",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-confidence-and-the-k-you-multiply-by",
+          "title": "Confidence, and the k you multiply by",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-budget",
+      "title": "The Budget",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-which-sources-dominate",
+          "title": "Which sources dominate",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "wd-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ranking-changes-with-attitude",
+          "title": "The ranking changes with attitude",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wd-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-depth-only-sources",
+          "title": "Depth-only sources",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-to-do-about-the-biggest-one",
+          "title": "What to do about the biggest one",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-using-the-number",
+      "title": "Using the Number",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-uncertainty-in-a-target",
+          "title": "Uncertainty in a target",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-uncertainty-in-a-tvd",
+          "title": "Uncertainty in a TVD",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-quoting-an-ellipse-honestly",
+          "title": "Quoting an ellipse honestly",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-model-does-not-include",
+          "title": "What the model does not include",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "wd-uncertainty-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 10,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

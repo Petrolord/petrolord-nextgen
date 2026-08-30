@@ -1,0 +1,279 @@
+{
+  "app_slug": "welldesign",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-two-wells-in-one-frame",
+      "title": "Two Wells in One Frame",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-problem",
+          "title": "The problem",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-closest-approach-on-an-arc",
+          "title": "Closest approach on an arc",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-centre-to-centre-is-not-clearance",
+          "title": "Centre to centre is not clearance",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-frame-both-wells-must-be-in",
+          "title": "The frame both wells must be in",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-offset-you-did-not-plot",
+          "title": "The offset you did not plot",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-separation-factor",
+      "title": "The Separation Factor",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-definition",
+          "title": "The definition",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-pedal-curve",
+          "title": "The pedal curve",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-iscwsa-standard-cases",
+          "title": "The ISCWSA standard cases",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-thresholds-and-what-they-mean",
+          "title": "Thresholds, and what they mean",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-negative-separation-factor",
+          "title": "A negative separation factor",
+          "order": 5,
+          "est_minutes": 15,
+          "panels": [
+            "wd-clearance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-what-it-moves-with",
+      "title": "What It Moves With",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-confidence-factor",
+          "title": "The confidence factor",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "wd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-surface-position-uncertainty",
+          "title": "Surface position uncertainty",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-tool-projection-allowance",
+          "title": "The tool projection allowance",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-sharing-a-surface-location",
+          "title": "Sharing a surface location",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "wd-clearance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-reference-frame",
+      "title": "The Reference Frame",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-true-grid-and-magnetic-north",
+          "title": "True, grid and magnetic north",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-world-magnetic-model",
+          "title": "The world magnetic model",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-declination-and-how-fast-it-moves",
+          "title": "Declination, and how fast it moves",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-grid-convergence",
+          "title": "Grid convergence",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-an-azimuth-reference-error-does",
+          "title": "What an azimuth reference error does",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-reporting-and-its-limits",
+      "title": "Reporting and Its Limits",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-traveling-cylinder",
+          "title": "The traveling cylinder",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ladder-plot",
+          "title": "The ladder plot",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "wd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-disagreement-worth-knowing-about",
+          "title": "A disagreement worth knowing about",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-this-course-will-not-certify",
+          "title": "What this course will not certify",
+          "order": 4,
+          "est_minutes": 15,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 15,
+          "panels": [
+            "wd-clearance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
