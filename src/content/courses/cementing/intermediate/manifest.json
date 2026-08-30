@@ -1,0 +1,303 @@
+{
+  "app_slug": "cementing",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-flow-path",
+      "title": "The Flow Path",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-plug-flow-and-what-it-assumes",
+          "title": "Plug flow, and what it assumes",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-volume-coordinate",
+          "title": "The volume coordinate",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-fronts-and-intervals",
+          "title": "Fronts and intervals",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-from-volume-to-measured-depth",
+          "title": "From volume to measured depth",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-u-tube",
+      "title": "The U-tube",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-three-terms-and-a-maximum",
+          "title": "Three terms and a maximum",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-head-on-the-exact-tvd",
+          "title": "Head on the exact TVD",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-friction-from-the-loss-kernel",
+          "title": "Friction from the loss kernel",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-free-fall",
+          "title": "Free fall",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-one-pascal-deadband",
+          "title": "The one pascal deadband",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-job-over-time",
+      "title": "The Job Over Time",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-reading-a-pump-pressure-curve",
+          "title": "Reading a pump pressure curve",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-it-falls-before-it-rises",
+          "title": "It falls before it rises",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-ecd-at-the-previous-shoe",
+          "title": "ECD at the previous shoe",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-ecd-at-the-shoe",
+          "title": "ECD at the shoe",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-end-of-the-job",
+          "title": "The end of the job",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-two-programmes-one-well",
+      "title": "Two Programmes, One Well",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-neat-and-lead-and-tail",
+          "title": "Neat, and lead and tail",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-the-lead-slurry-buys",
+          "title": "What the lead slurry buys",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-rate-is-a-trade",
+          "title": "The rate is a trade",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-the-window-closes",
+          "title": "When the window closes",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-choosing-a-programme",
+          "title": "Choosing a programme",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-reading-a-placement-result",
+      "title": "Reading a Placement Result",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-achieved-toc",
+          "title": "Achieved TOC",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-warnings-one-at-a-time",
+          "title": "The warnings, one at a time",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-simulation-cannot-see",
+          "title": "What the simulation cannot see",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-sixty-steps",
+          "title": "Sixty steps",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "cm-placement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

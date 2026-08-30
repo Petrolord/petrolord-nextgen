@@ -1,0 +1,299 @@
+{
+  "app_slug": "cementing",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-why-mud-removal-decides-it",
+      "title": "Why Mud Removal Decides It",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-cement-follows-the-wide-side",
+          "title": "Cement follows the wide side",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-standoff-defined",
+          "title": "Standoff, defined",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-api-sixty-seven-percent",
+          "title": "The API sixty seven percent",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-channel-costs",
+          "title": "What a channel costs",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-centralizer",
+      "title": "The Centralizer",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-bow-springs-and-rigid-blades",
+          "title": "Bow springs and rigid blades",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-lateral-load",
+          "title": "The lateral load",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-spring-rate",
+          "title": "The spring rate",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-deflection-at-the-centralizer",
+          "title": "Deflection at the centralizer",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-blade-cannot-exceed-its-ratio",
+          "title": "A blade cannot exceed its ratio",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-span-between-them",
+      "title": "The Span Between Them",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-mid-span-sag",
+          "title": "Mid-span sag",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-fourth-power",
+          "title": "The fourth power",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-which-term-binds",
+          "title": "Which term binds",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-standoff-collapses-at-twenty-metres",
+          "title": "Standoff collapses at twenty metres",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-heavier-mud-helps",
+          "title": "Heavier mud helps",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-choosing-a-spacing",
+      "title": "Choosing a Spacing",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-bisection",
+          "title": "The bisection",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-two-wells-two-answers",
+          "title": "Two wells, two answers",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-which-hole-the-clearance-is-in",
+          "title": "Which hole the clearance is in",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-calculation-leaves-out",
+          "title": "What the calculation leaves out",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-spacing-against-force",
+          "title": "Spacing against force",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-checklist-and-its-edges",
+      "title": "The Checklist, and Its Edges",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-five-items-honestly-counted",
+          "title": "Five items, honestly counted",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-annular-velocity",
+          "title": "Annular velocity",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-there-is-no-efficiency-number",
+          "title": "Why there is no efficiency number",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-this-course-will-not-certify",
+          "title": "What this course will not certify",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "cm-standoff-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
