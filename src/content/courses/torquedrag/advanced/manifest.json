@@ -1,0 +1,293 @@
+{
+  "app_slug": "torquedrag",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-compression",
+      "title": "Compression",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-string-in-compression",
+          "title": "A string in compression",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-neutral-point-is-not-a-place",
+          "title": "The neutral point is not a place",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-sinusoidal-limit",
+          "title": "The sinusoidal limit",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-helical-limit",
+          "title": "The helical limit",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-ratio-that-does-not-move",
+          "title": "The ratio that does not move",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-what-the-pipe-has-left",
+      "title": "What the Pipe Has Left",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-tensile-capacity",
+          "title": "Tensile capacity",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-torsional-capacity",
+          "title": "Torsional capacity",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-which-one-binds",
+          "title": "Which one binds",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-combined-loading",
+          "title": "Combined loading, and what this engine does not do",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-casing-wear",
+      "title": "Casing Wear",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-same-side-force-over-hours",
+          "title": "The same side force, spent over hours",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-sliding-distance",
+          "title": "Sliding distance",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-crescent-groove",
+          "title": "The crescent groove",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-wear-factor",
+          "title": "The wear factor",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-is-left-of-the-wall",
+          "title": "What is left of the wall",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-planning-against-it",
+      "title": "Planning Against It",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-where-the-wear-lands",
+          "title": "Where the wear lands",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-actually-reduces-it",
+          "title": "What actually reduces it",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-derated-burst",
+          "title": "The derated burst",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-uncertainty-it-inherits",
+          "title": "The uncertainty it inherits",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-when-the-model-stops",
+      "title": "When the Model Stops",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-string-that-will-not-go-in",
+          "title": "The string that will not go in",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "td-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-lock-up",
+          "title": "Lock-up",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-extended-reach-and-what-limits-it",
+          "title": "Extended reach, and what limits it",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-disagreement-worth-knowing-about",
+          "title": "A disagreement worth knowing about",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "td-friction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-this-course-will-not-certify",
+          "title": "What this course will not certify",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "td-buckling-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

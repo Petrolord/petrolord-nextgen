@@ -7,7 +7,7 @@ import {
   runCase, summaryOf, broomstick, operationTable, oracleCheck, verticalClosedForm,
   stepStudy, frictionSweep, frictionFromHookload, pipeLimits, bucklingLadder,
   utilization, WEAR_CASE, slidingDistance, grooveArea, grooveDepthForArea,
-  wearRun, wearOracleCheck, capstoneValues,
+  wearRun, wearOracleCheck, capstoneValues, CAPSTONE_SCHEDULE, CAPSTONE_MUD_KGM3,
 } from './torquedragLab.js';
 
 const near = (a, b, tol) => expect(Math.abs(a - b)).toBeLessThanOrEqual(tol);
@@ -217,6 +217,20 @@ describe('casing wear', () => {
     expect(w.rows[0].wearDepthM).toBe(0);
   });
 
+  it('runs the capstone on a different schedule from the lessons', () => {
+    expect(CAPSTONE_SCHEDULE).toEqual([{ rpm: 150, hours: 30 }, { rpm: 90, hours: 20 }]);
+    const teaching = wearRun();
+    const graded = wearRun({ schedule: CAPSTONE_SCHEDULE });
+    // same total revolutions would give the same answer, so assert they differ
+    expect(Math.abs(graded.totalSlidingM - teaching.totalSlidingM)).toBeGreaterThan(1000);
+    near(graded.totalSlidingM, 199830.26842990686, 1e-6);
+    near(graded.maxWearDepthM * 1000, 3.543562667146535, 1e-9);
+    near(graded.worstWallLossPct, 29.557275683525745, 1e-9);
+    // and the graded run additionally changes the mud, so it is different again
+    const capstone = wearRun({ schedule: CAPSTONE_SCHEDULE, over: { mudDensityKgM3: CAPSTONE_MUD_KGM3 } });
+    near(capstone.maxWearDepthM * 1000, 3.537607641481055, 1e-9);
+  });
+
   it('carries the T&D gap one step downstream', () => {
     const o = wearOracleCheck();
     expect(o.relDepth).toBeGreaterThan(0.005);
@@ -227,36 +241,46 @@ describe('casing wear', () => {
 describe('the eighteen graded values', () => {
   const v = capstoneValues();
 
+  it('runs at a mud weight and a schedule the lessons do not use', () => {
+    expect(CAPSTONE_MUD_KGM3).toBe(1500);
+    expect(CAPSTONE_SCHEDULE).toEqual([{ rpm: 150, hours: 30 }, { rpm: 90, hours: 20 }]);
+    // the teaching mud is 1440 and the teaching schedule is one entry at 120 rpm
+    expect(caseOf('vertical').mudDensityKgM3).toBe(1440);
+    expect(WEAR_CASE.schedule).toEqual([{ rpm: 120, hours: 50 }]);
+    // and the graded hookload is therefore NOT the one the lessons print
+    expect(Math.abs(v.beginner.vertical_hookload_N - 732311.4682840434)).toBeGreaterThan(1000);
+  });
+
   it('reproduces the Associate six', () => {
-    near(v.beginner.buoyancy_factor_1440, 0.8165605095541402, 5e-13);
-    near(v.beginner.vertical_hookload_N, 732311.4682840434, 1e-6);
-    near(v.beginner.slant_pickup_hookload_N, 1103695.4071581454, 1e-6);
-    near(v.beginner.slant_slackoff_hookload_N, 604424.8115063506, 1e-6);
-    near(v.beginner.slant_drag_swing_N, 499270.5956517948, 1e-6);
-    near(v.beginner.horizontal_slackoff_hookload_N, -16676.68507494847, 1e-6);
+    near(v.beginner.buoyancy_factor_1500, 0.8089171974522293, 5e-13);
+    near(v.beginner.vertical_hookload_N, 725456.7587525246, 1e-6);
+    near(v.beginner.slant_pickup_hookload_N, 1093364.404907054, 1e-6);
+    near(v.beginner.slant_slackoff_hookload_N, 598767.1689649521, 1e-6);
+    near(v.beginner.slant_drag_swing_N, 494597.2359421019, 1e-6);
+    near(v.beginner.horizontal_slackoff_hookload_N, -16520.58505864785, 1e-6);
   });
 
   it('reproduces the Professional six', () => {
-    near(v.intermediate.buildhold_rot_torque_Nm, 26934.19951651723, 1e-6);
-    near(v.intermediate.horizontal_rot_torque_Nm, 24324.87703304575, 1e-6);
-    near(v.intermediate.buildhold_max_side_force_Npm, 1167.5116395360324, 1e-9);
-    near(v.intermediate.swell3d_backream_torque_Nm, 15376.404018294324, 1e-6);
-    near(v.intermediate.horizontal_slide_min_tension_N, -422023.82665557245, 1e-6);
-    near(v.intermediate.buildhold_mu_for_1100kN_pickup, 0.39698485180907916, 1e-9);
+    near(v.intermediate.buildhold_rot_torque_Nm, 26687.478922047892, 1e-6);
+    near(v.intermediate.horizontal_rot_torque_Nm, 24154.471040113644, 1e-6);
+    near(v.intermediate.buildhold_max_side_force_Npm, 1156.5832934561317, 1e-9);
+    near(v.intermediate.swell3d_backream_torque_Nm, 15232.475119527086, 1e-6);
+    near(v.intermediate.horizontal_slide_min_tension_N, -419384.71820713475, 1e-6);
+    near(v.intermediate.buildhold_mu_for_1100kN_pickup, 0.4102238555495764, 1e-9);
   });
 
   it('reproduces the Expert six', () => {
-    near(v.advanced.dp_sinusoidal_limit_90deg_N, 171229.45713680828, 1e-6);
-    near(v.advanced.dp_helical_limit_90deg_N, 313080.5839845054, 1e-6);
-    near(v.advanced.hz_max_torsion_utilization, 0.24212108500048712, 1e-9);
-    near(v.advanced.casing_sliding_distance_m, 190314.54136181608, 1e-6);
-    near(v.advanced.casing_max_wear_depth_mm, 3.4259056218767463, 1e-9);
-    near(v.advanced.casing_worst_wall_loss_pct, 28.575884341024505, 1e-9);
+    near(v.advanced.dp_sinusoidal_limit_90deg_N, 170426.18707539304, 1e-6);
+    near(v.advanced.dp_helical_limit_90deg_N, 311611.86321571725, 1e-6);
+    near(v.advanced.hz_max_torsion_utilization, 0.24042492498112686, 1e-9);
+    near(v.advanced.casing_sliding_distance_m, 199830.26842990686, 1e-6);
+    near(v.advanced.casing_max_wear_depth_mm, 3.537607641481055, 1e-9);
+    near(v.advanced.casing_worst_wall_loss_pct, 29.507604109511, 1e-9);
   });
 
   it('keeps every graded value clear of every other one at its own tolerance', () => {
     const TOL = {
-      buoyancy_factor_1440: 5e-7,
+      buoyancy_factor_1500: 5e-7,
       vertical_hookload_N: 0.5,
       slant_pickup_hookload_N: 0.5,
       slant_slackoff_hookload_N: 0.5,

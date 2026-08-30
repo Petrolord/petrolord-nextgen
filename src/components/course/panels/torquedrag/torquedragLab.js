@@ -219,10 +219,10 @@ export const frictionSweep = (id = 'buildhold', operation = 'trip_out',
 // monotone response, 200 halvings, deterministic.
 export const frictionFromHookload = ({
   well = 'buildhold', operation = 'trip_out', targetN,
-  lo = 0.05, hi = 1.0,
+  lo = 0.05, hi = 1.0, mudDensityKgM3,
 } = {}) => {
   if (!(targetN > -Infinity)) throw new Error('Need a target hookload.');
-  const at = (mu) => summaryOf(well, operation, { frictionOpen: mu }).hookloadN;
+  const at = (mu) => summaryOf(well, operation, { frictionOpen: mu, mudDensityKgM3 }).hookloadN;
   const rising = at(hi) > at(lo);
   let a = lo;
   let b = hi;
@@ -284,6 +284,13 @@ export const utilization = (well = 'horizontal', operation = 'rotate_on_bottom',
 // ---------------------------------------------------------------------------
 // Casing wear, which is the side force this course computes, spent over hours.
 // ---------------------------------------------------------------------------
+
+// The capstone deliberately runs at a DIFFERENT mud weight and a different
+// rotating schedule from the lessons, so that no graded value is a number a
+// lesson printed. The lessons teach on 1440 kg/m3 and 50 h at 120 rpm; the
+// capstone reruns the same wells in 1500 kg/m3 mud with a two-entry schedule.
+export const CAPSTONE_MUD_KGM3 = 1500;
+export const CAPSTONE_SCHEDULE = [{ rpm: 150, hours: 30 }, { rpm: 90, hours: 20 }];
 
 export const WEAR_CASE = {
   casingIdM: wearCase.casing.irM * 2,
@@ -349,36 +356,38 @@ export const wearOracleCheck = () => {
 // ---------------------------------------------------------------------------
 
 export const capstoneValues = () => {
-  const slant = broomstick('slant');
-  const bh = summaryOf('buildhold', 'rotate_on_bottom');
-  const hz = summaryOf('horizontal', 'rotate_on_bottom');
-  const lim = pipeLimits({ well: 'horizontal', incDeg: 90 });
-  const u = utilization('horizontal', 'rotate_on_bottom');
-  const wear = wearRun();
+  const over = { mudDensityKgM3: CAPSTONE_MUD_KGM3 };
+  const slant = broomstick('slant', over);
+  const bh = summaryOf('buildhold', 'rotate_on_bottom', over);
+  const hz = summaryOf('horizontal', 'rotate_on_bottom', over);
+  const lim = pipeLimits({ well: 'horizontal', incDeg: 90, mudDensityKgM3: CAPSTONE_MUD_KGM3 });
+  const u = utilization('horizontal', 'rotate_on_bottom', over);
+  const wear = wearRun({ schedule: CAPSTONE_SCHEDULE, over });
   return {
     beginner: {
-      buoyancy_factor_1440: buoyancyFactor(1440),
-      vertical_hookload_N: summaryOf('vertical', 'trip_out').hookloadN,
+      buoyancy_factor_1500: buoyancyFactor(CAPSTONE_MUD_KGM3),
+      vertical_hookload_N: summaryOf('vertical', 'trip_out', over).hookloadN,
       slant_pickup_hookload_N: slant.pickupN,
       slant_slackoff_hookload_N: slant.slackoffN,
       slant_drag_swing_N: slant.dragSwingN,
-      horizontal_slackoff_hookload_N: summaryOf('horizontal', 'trip_in').hookloadN,
+      horizontal_slackoff_hookload_N: summaryOf('horizontal', 'trip_in', over).hookloadN,
     },
     intermediate: {
       buildhold_rot_torque_Nm: bh.surfaceTorqueNm,
       horizontal_rot_torque_Nm: hz.surfaceTorqueNm,
       buildhold_max_side_force_Npm: bh.maxSideForceNPerM,
-      swell3d_backream_torque_Nm: summaryOf('swell3d', 'backream').surfaceTorqueNm,
-      horizontal_slide_min_tension_N: summaryOf('horizontal', 'slide_drill').minTensionN,
+      swell3d_backream_torque_Nm: summaryOf('swell3d', 'backream', over).surfaceTorqueNm,
+      horizontal_slide_min_tension_N: summaryOf('horizontal', 'slide_drill', over).minTensionN,
       buildhold_mu_for_1100kN_pickup: frictionFromHookload({
         well: 'buildhold', operation: 'trip_out', targetN: 1100000,
+        mudDensityKgM3: CAPSTONE_MUD_KGM3,
       }),
     },
     advanced: {
       dp_sinusoidal_limit_90deg_N: lim.sinusoidalN,
       dp_helical_limit_90deg_N: lim.helicalN,
       hz_max_torsion_utilization: u.maxTorsionUtilization,
-      casing_sliding_distance_m: slidingDistance({ rpm: 120, hours: 50 }),
+      casing_sliding_distance_m: wear.totalSlidingM,
       casing_max_wear_depth_mm: wear.maxWearDepthM * 1000,
       casing_worst_wall_loss_pct: wear.worstWallLossPct,
     },
