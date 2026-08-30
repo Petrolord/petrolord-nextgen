@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   Settings,
@@ -12,39 +12,12 @@ import {
   Award,
   KeyRound,
   MonitorSmartphone,
-  FlaskConical,
-  HardDrive,
-  GitCompareArrows,
-  Waves,
-  Map,
-  Calculator,
-  BookOpen,
-  SlidersHorizontal,
-  Atom,
-  Gauge,
-  Layers,
-  Flame
+  SlidersHorizontal
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useRole } from '@/contexts/RoleContext';
 import { useApplicationLayout } from '@/contexts/ApplicationLayoutContext';
-import { listAcademyApps } from '@/services/academyService';
-import { moduleLabel } from '@/lib/academyModules';
-
-// Course links are grouped per module (Geoscience is one of many);
-// icons are per-course with a BookOpen fallback for future courses.
-const COURSE_ICONS = {
-  welldata: HardDrive,
-  petrophysics: FlaskConical,
-  wellcorrelation: GitCompareArrows,
-  seismolord: Waves,
-  mapping: Map,
-  reservoircalc: Calculator,
-  rockphysics: Atom,
-  porepressure: Gauge,
-  earthmodel: Layers,
-  basin: Flame,
-};
+import CourseModuleNav from '@/components/sidebar/CourseModuleNav';
 
 const SidebarItem = ({ to, icon: Icon, label, exact = false }) => {
   const location = useLocation();
@@ -78,42 +51,6 @@ const SidebarGroup = ({ title, children }) => (
     </div>
   </div>
 );
-
-// One sidebar group per module that has courses live in the catalog.
-const CourseModuleGroups = () => {
-  const [apps, setApps] = useState([]);
-
-  useEffect(() => {
-    let cancelled = false;
-    listAcademyApps()
-      .then((data) => { if (!cancelled) setApps(data || []); })
-      .catch((err) => console.error('Sidebar catalog load failed:', err));
-    return () => { cancelled = true; };
-  }, []);
-
-  const modules = [];
-  const byModule = {};
-  apps.filter((a) => a.status === 'available').forEach((a) => {
-    if (!byModule[a.module]) {
-      byModule[a.module] = [];
-      modules.push(a.module);
-    }
-    byModule[a.module].push(a);
-  });
-
-  return modules.map((mod) => (
-    <SidebarGroup key={mod} title={`${moduleLabel(mod)} Courses`}>
-      {byModule[mod].map((app) => (
-        <SidebarItem
-          key={app.slug}
-          to={`/dashboard/apps/${app.slug}`}
-          icon={COURSE_ICONS[app.slug] || BookOpen}
-          label={app.name}
-        />
-      ))}
-    </SidebarGroup>
-  ));
-};
 
 const Sidebar = () => {
   const { isFullScreen } = useApplicationLayout();
@@ -155,7 +92,7 @@ const Sidebar = () => {
               <SidebarItem to="/dashboard/devices" icon={MonitorSmartphone} label="Devices & Sessions" />
             </SidebarGroup>
 
-            <CourseModuleGroups />
+            <CourseModuleNav />
           </>
         )}
 
@@ -167,7 +104,7 @@ const Sidebar = () => {
               <SidebarItem to="/dashboard/certificates" icon={GraduationCap} label="My Certificates" />
             </SidebarGroup>
 
-            <CourseModuleGroups />
+            <CourseModuleNav />
           </>
         )}
 
