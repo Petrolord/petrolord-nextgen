@@ -1,0 +1,289 @@
+{
+  "app_slug": "torquedrag",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-friction-factor",
+      "title": "The Friction Factor",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-it-is-and-is-not",
+          "title": "What it is, and what it is not",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "td-friction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-where-the-numbers-come-from",
+          "title": "Where the numbers come from",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-cased-and-open-hole",
+          "title": "Cased hole and open hole",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "td-friction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-it-hides",
+          "title": "What it hides",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-sweep",
+          "title": "The sweep",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "td-friction-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-torque",
+      "title": "Torque",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-why-rotating-splits-the-friction",
+          "title": "Why rotating splits the friction",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-radius-that-matters",
+          "title": "The radius that matters",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-surface-torque-against-depth",
+          "title": "Surface torque against depth",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "td-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-off-bottom-and-on-bottom",
+          "title": "Off bottom and on bottom",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "td-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-rotating-while-you-trip",
+          "title": "Rotating while you trip",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "td-string-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-side-force",
+      "title": "Side Force",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-where-it-is-largest",
+          "title": "Where it is largest",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "td-friction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-doglegs-and-tension",
+          "title": "Doglegs and tension",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-tangent-that-costs-nothing",
+          "title": "The tangent that costs nothing",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-three-dimensional-turns",
+          "title": "Three-dimensional turns",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "td-string-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-calibration",
+      "title": "Calibration",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-backing-it-out-of-a-trip",
+          "title": "Backing it out of a trip",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "td-friction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-it-always-succeeds",
+          "title": "It always succeeds",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "td-friction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-fitted-factor-absorbs",
+          "title": "What a fitted factor absorbs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-predicting-torque-from-a-hookload",
+          "title": "Predicting torque from a hookload fit",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "td-friction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-two-factors-and-one-observation",
+          "title": "Two factors and one observation",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-against-the-oracle",
+      "title": "Against the Oracle",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-the-goldens-are",
+          "title": "What the goldens are",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "td-friction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-where-the-two-implementations-part",
+          "title": "Where the two implementations part",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "td-friction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-refining-the-step",
+          "title": "Refining the step",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "td-friction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-case-that-settles-it",
+          "title": "The case that settles it",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "td-string-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "td-friction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
