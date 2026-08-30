@@ -1,0 +1,295 @@
+{
+  "app_slug": "geomech",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-window-along-a-well",
+      "title": "The Window Along a Well",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-one-depth-is-not-a-well",
+          "title": "One depth is not a well",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-walk",
+          "title": "The walk",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-interpolating-onto-the-trajectory",
+          "title": "Interpolating onto the trajectory",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-tightest-point",
+          "title": "The tightest point",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-two-wells-two-answers",
+          "title": "Two wells, two answers",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-which-bound-binds",
+      "title": "Which Bound Binds",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-collapse-or-pore-pressure",
+          "title": "Collapse, or pore pressure",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-slant-well-is-pore-pressure-bound",
+          "title": "The slant well is pore pressure bound",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-horizontal-well-is-collapse-bound",
+          "title": "The horizontal well is collapse bound",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-different-bounds-different-remedies",
+          "title": "Different bounds, different remedies",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-when-the-window-closes",
+          "title": "When the window closes",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-sensitivity",
+      "title": "Sensitivity",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-shmax-azimuth",
+          "title": "The SHmax azimuth",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-poisson-ratio",
+          "title": "The Poisson ratio",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-friction-angle-twice",
+          "title": "The friction angle, twice",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-to-calibrate-first",
+          "title": "What to calibrate first",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-using-it-in-a-well-plan",
+      "title": "Using It in a Well Plan",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-the-driller-gets",
+          "title": "What the driller gets",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-against-the-kick-tolerance",
+          "title": "Against the kick tolerance",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-against-the-circulating-density",
+          "title": "Against the circulating density",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-goes-in-the-programme",
+          "title": "What goes in the programme",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-edges-of-the-model",
+      "title": "The Edges of the Model",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-linear-elastic-and-isotropic",
+          "title": "Linear elastic, and isotropic",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-no-time-and-no-chemistry",
+          "title": "No time, and no chemistry",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-no-thermal-stress",
+          "title": "No thermal stress",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-no-natural-fractures-or-bedding",
+          "title": "No natural fractures or bedding",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-this-course-will-not-certify",
+          "title": "What this course will not certify",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "gm-window-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "app_slug": "geomech",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-mechanical-earth-model-is",
+      "title": "What a Mechanical Earth Model Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-six-numbers-at-a-depth",
+          "title": "Six numbers at a depth",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-is-measured-and-what-is-estimated",
+          "title": "What is measured, and what is estimated",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-pressure-and-equivalent-mud-weight",
+          "title": "Pressure, and equivalent mud weight",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-model-is-for",
+          "title": "What the model is for",
+          "order": 4,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-overburden-and-the-pore-pressure",
+      "title": "The Overburden and the Pore Pressure",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-where-the-overburden-comes-from",
+          "title": "Where the overburden comes from",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-constant-gradient-and-what-it-hides",
+          "title": "A constant gradient, and what it hides",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-the-pore-pressure-comes-from",
+          "title": "Where the pore pressure comes from",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-ramp-at-1500-m",
+          "title": "The ramp below 1500 m",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-effective-stress",
+          "title": "Effective stress",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-horizontal-stresses",
+      "title": "The Horizontal Stresses",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-uniaxial-estimate",
+          "title": "The uniaxial estimate",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-k0-and-the-poisson-ratio",
+          "title": "k0, and the Poisson ratio",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-tectonic-strain-term",
+          "title": "The tectonic strain term",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-shmin-and-shmax-from-one-formula",
+          "title": "Shmin and SHmax from one formula",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-frictional-bounds",
+          "title": "The frictional bounds",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-strength-from-a-log",
+      "title": "Strength from a Log",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-ucs-is",
+          "title": "What UCS is",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-two-correlations",
+          "title": "Two correlations",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-they-cross-twice",
+          "title": "They cross twice",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-friction-angle",
+          "title": "The friction angle",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-lithology-seeds-are-not-measurements",
+          "title": "Lithology seeds are not measurements",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-reading-the-model-critically",
+      "title": "Reading the Model Critically",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-quality-score",
+          "title": "The quality score",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-twenty-three-samples-out-of-order",
+          "title": "Twenty-three samples out of order",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-the-strain-term-does-it",
+          "title": "Why the strain term does it",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-an-estimate-inside-a-bound",
+          "title": "An estimate inside a bound",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "gm-stress-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
