@@ -1,0 +1,279 @@
+{
+  "app_slug": "hydraulics",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-moving-the-string",
+      "title": "Moving the String",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-surge-and-swab",
+          "title": "Surge and swab",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "hy-surge-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-displaced-volume",
+          "title": "The displaced volume",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "hy-surge-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-clinging-mud",
+          "title": "The clinging mud",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "hy-surge-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-closed-string-and-open",
+          "title": "Closed string and open",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "hy-surge-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-speed-and-what-it-costs",
+          "title": "Speed, and what it costs",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "hy-surge-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-pressure-window",
+      "title": "The Pressure Window",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-pore-and-fracture",
+          "title": "Pore and fracture",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-four-pressures-one-window",
+          "title": "Four pressures, one window",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "hy-surge-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-speed-limit",
+          "title": "The speed limit",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "hy-surge-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-narrow-margin-drilling",
+          "title": "Narrow-margin drilling",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "hy-surge-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-what-goes-wrong",
+      "title": "What Goes Wrong",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-losses",
+          "title": "Losses",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-kick-on-a-trip",
+          "title": "A kick on a trip",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-pack-off",
+          "title": "Pack-off",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-signature-of-each",
+          "title": "The signature of each",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-model-warns-about",
+          "title": "What the model warns about",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "hy-cleaning-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-managing-the-window",
+      "title": "Managing the Window",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-mud-weight-is-not-the-only-lever",
+          "title": "Mud weight is not the only lever",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "hy-surge-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-breaking-circulation",
+          "title": "Breaking circulation",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-managed-pressure-drilling",
+          "title": "Managed pressure drilling",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-trip-sheet-is-for",
+          "title": "What a trip sheet is for",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-edges-of-the-model",
+      "title": "The Edges of the Model",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-steady-state-and-what-it-misses",
+          "title": "Steady state, and what it misses",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-temperature-and-compressibility",
+          "title": "Temperature and compressibility",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-gel-strength-and-breaking-it",
+          "title": "Gel strength, and breaking it",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-eccentricity-and-rotation",
+          "title": "Eccentricity and rotation",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-this-course-will-not-certify",
+          "title": "What this course will not certify",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "hy-surge-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

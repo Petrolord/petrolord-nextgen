@@ -1,0 +1,289 @@
+{
+  "app_slug": "hydraulics",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-hydraulics-is-for",
+      "title": "What Hydraulics Is For",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-four-jobs-one-circulating-system",
+          "title": "Four jobs, one circulating system",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-fixtures-this-course-runs",
+          "title": "The fixtures this course runs",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-flow-path",
+          "title": "The flow path",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-answer-is-for",
+          "title": "What the answer is for",
+          "order": 4,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-mud-rheology",
+      "title": "Mud Rheology",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-four-dial-readings",
+          "title": "Four dial readings",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-power-law",
+          "title": "The power law",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-bingham-plastic",
+          "title": "The Bingham plastic",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-herschel-bulkley",
+          "title": "Herschel-Bulkley",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-which-model-and-where",
+          "title": "Which model, and where",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-pressure-loss",
+      "title": "Pressure Loss",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-one-element-at-a-time",
+          "title": "One element at a time",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-laminar-and-turbulent",
+          "title": "Laminar and turbulent",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-blend-between-them",
+          "title": "The blend between them",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-inside-the-pipe",
+          "title": "Inside the pipe",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-up-the-annulus",
+          "title": "Up the annulus",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-bit",
+      "title": "The Bit",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-nozzles-and-total-flow-area",
+          "title": "Nozzles and total flow area",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-only-square-law-in-the-system",
+          "title": "The only square law in the system",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-hydraulic-horsepower-and-impact-force",
+          "title": "Hydraulic horsepower and impact force",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-optimising-the-bit-share",
+          "title": "Optimising the bit share",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-bit-does-not-tell-you",
+          "title": "What the bit does not tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-pump-pressure",
+      "title": "Pump Pressure",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-three-losses-in-series",
+          "title": "Three losses in series",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-where-it-actually-goes",
+          "title": "Where it actually goes",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-changes-it",
+          "title": "What changes it",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-oracle-check",
+          "title": "The oracle check",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "hy-cleaning-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "hy-rheology-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

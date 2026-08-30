@@ -71,6 +71,9 @@ export const PANELS = {
   'td-string-explorer': React.lazy(() => import('@/components/course/panels/torquedrag/StringExplorer')),
   'td-friction-explorer': React.lazy(() => import('@/components/course/panels/torquedrag/FrictionExplorer')),
   'td-buckling-explorer': React.lazy(() => import('@/components/course/panels/torquedrag/BucklingExplorer')),
+  'hy-rheology-explorer': React.lazy(() => import('@/components/course/panels/hydraulics/RheologyExplorer')),
+  'hy-cleaning-explorer': React.lazy(() => import('@/components/course/panels/hydraulics/CleaningExplorer')),
+  'hy-surge-explorer': React.lazy(() => import('@/components/course/panels/hydraulics/SurgeExplorer')),
 };
 
 export function resolvePanel(id) {
