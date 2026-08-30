@@ -1,0 +1,299 @@
+{
+  "app_slug": "completion",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-completion-is-not-static",
+      "title": "A Completion Is Not Static",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-where-the-movement-comes-from",
+          "title": "Where the movement comes from",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-numbers-come-from-elsewhere",
+          "title": "The numbers come from elsewhere",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-absorbs-it",
+          "title": "What absorbs it",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-anchored-free-and-limited",
+          "title": "Anchored, free and limited",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-polished-bore-receptacle",
+      "title": "The Polished Bore Receptacle",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-pbr-and-the-seal-stack",
+          "title": "The PBR and the seal stack",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-insertion-depth",
+          "title": "Insertion depth",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-budget-is-fixed",
+          "title": "The budget is fixed",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-available-used-remaining",
+          "title": "Available, used, remaining",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-three-verdicts-again",
+          "title": "Three verdicts again",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-asymmetry",
+      "title": "The Asymmetry",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-elongation-pushes-in",
+          "title": "Elongation pushes in",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-contraction-pulls-out",
+          "title": "Contraction pulls out",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-two-directions-do-not-share",
+          "title": "The two directions do not share",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-landing-at-the-midpoint",
+          "title": "Landing at the midpoint",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-when-the-midpoint-is-wrong",
+          "title": "When the midpoint is wrong",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-designing-the-space-out",
+      "title": "Designing the Space-Out",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-two-extremes-one-band",
+          "title": "Two extremes, one band",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-band-on-the-published-job",
+          "title": "The band on the published job",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-published-landing-is-short",
+          "title": "The published landing is short",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-shortest-pbr-that-works",
+          "title": "The shortest PBR that works",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-other-courses-numbers",
+          "title": "The other course s numbers",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-edges",
+      "title": "The Edges",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-the-catalog-is",
+          "title": "What the catalog is",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-the-engine-will-not-decide",
+          "title": "What the engine will not decide",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-this-course-does-not-model",
+          "title": "What this course does not model",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-this-course-will-not-certify",
+          "title": "What this course will not certify",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "cd-spaceout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

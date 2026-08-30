@@ -86,6 +86,9 @@ export const PANELS = {
   'cm-volume-explorer': React.lazy(() => import('@/components/course/panels/cementing/VolumeExplorer')),
   'cm-placement-explorer': React.lazy(() => import('@/components/course/panels/cementing/PlacementExplorer')),
   'cm-standoff-explorer': React.lazy(() => import('@/components/course/panels/cementing/StandoffExplorer')),
+  'cd-string-explorer': React.lazy(() => import('@/components/course/panels/completion/StringExplorer')),
+  'cd-clearance-explorer': React.lazy(() => import('@/components/course/panels/completion/ClearanceExplorer')),
+  'cd-spaceout-explorer': React.lazy(() => import('@/components/course/panels/completion/SpaceoutExplorer')),
 };
 
 export function resolvePanel(id) {
