@@ -49,7 +49,9 @@ Field 1 plus field 2 is field 3, exactly. If it is not, one of the three was com
 
 Field 5 times 0.0402 is field 3. That is the yield definition and it catches a slurry volume error.
 
-Field 6 must be LARGER than 0.31115 and smaller than the 13-3/8 inch bore of 0.315341. If it is outside that range, the excess was applied to the diameter rather than to the area.
+Field 6 must be LARGER than the bit size of 0.31115 and smaller than 0.404495, which is what inflating the DIAMETER by 30 percent rather than the area would give.
+
+It will also come out larger than the 13-3/8 inch casing bore of 0.315341 above it, and that is correct rather than an error. A washed-out 12-1/4 inch hole really is a wider annulus than the casing it hangs from, which is the same reversal module 3 found on the published well at a much smaller excess.
 
 Field 4 divided by the inside capacity must be exactly 1352. That is the fastest way to check both at once.
 

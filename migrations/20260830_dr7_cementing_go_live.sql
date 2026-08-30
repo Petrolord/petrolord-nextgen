@@ -131,14 +131,20 @@ begin
     raise exception 'DR7 go-live refused: the sacks of % at a yield of 0.0402 give % against a total slurry of %, so one of the two was computed on the wrong volume', v_sacks, v_sacks * 0.0402, v_slurry;
   end if;
 
-  -- THE EXCESS ASSERTION. The effective bore must lie STRICTLY between the
-  -- 12-1/4 inch bit size and the 13-3/8 inch casing bore above it. Below the
-  -- bit size means the excess was applied as a divisor; above the casing bore
-  -- means it was applied to the DIAMETER rather than to the area, which is the
-  -- single easiest error in the Associate tier and which no tolerance on the
-  -- field itself would catch.
-  if v_bore <= 0.31115 or v_bore >= 0.315341 then
-    raise exception 'DR7 go-live refused: the effective open hole bore of % is outside the bit size of 0.31115 and the casing bore of 0.315341, so the excess was applied to the wrong quantity', v_bore;
+  -- THE EXCESS ASSERTION. The effective bore must sit STRICTLY above the
+  -- 12-1/4 inch bit size of 0.31115, because the excess is a multiplier on the
+  -- capacity, and STRICTLY below 0.404495, which is what inflating the
+  -- DIAMETER by 30 percent rather than the area would give. Those are the two
+  -- error modes, and neither would be caught by any tolerance on the field.
+  --
+  -- Note what is NOT a bound here. The effective bore of 0.32852429371737485
+  -- EXCEEDS the 13-3/8 inch casing bore of 0.315341 above it, and that is
+  -- correct: a washed-out 12-1/4 inch hole really is a wider annulus than the
+  -- casing it hangs from, which is the same reversal Associate m03 l03 teaches
+  -- on the published well. An assertion that used the casing bore as a ceiling
+  -- would be asserting the reversal away.
+  if v_bore <= 0.31115 or v_bore >= 0.404495 then
+    raise exception 'DR7 go-live refused: the effective open hole bore of % is outside the band 0.31115 to 0.404495, so the excess was applied as a divisor or to the diameter rather than to the area', v_bore;
   end if;
 
   select (f->>'expected')::numeric into v_minr from public.academy_capstones c,
