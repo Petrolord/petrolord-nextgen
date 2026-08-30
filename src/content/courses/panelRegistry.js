@@ -58,6 +58,11 @@ export const PANELS = {
   'fluid-correlation-explorer': React.lazy(() => import('@/components/course/panels/fluid/CorrelationExplorer')),
   'fluid-study-explorer': React.lazy(() => import('@/components/course/panels/fluid/StudyExplorer')),
   'fluid-tuning-explorer': React.lazy(() => import('@/components/course/panels/fluid/TuningExplorer')),
+
+  // RC7 Well Test Analysis
+  'wt-buildup-explorer': React.lazy(() => import('@/components/course/panels/welltest/BuildupExplorer')),
+  'wt-diagnostic-explorer': React.lazy(() => import('@/components/course/panels/welltest/DiagnosticExplorer')),
+  'wt-regression-explorer': React.lazy(() => import('@/components/course/panels/welltest/RegressionExplorer')),
 };
 
 export function resolvePanel(id) {
