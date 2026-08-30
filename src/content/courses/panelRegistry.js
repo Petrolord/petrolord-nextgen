@@ -77,6 +77,9 @@ export const PANELS = {
   'wc-volume-explorer': React.lazy(() => import('@/components/course/panels/wellcontrol/VolumeExplorer')),
   'wc-killsheet-explorer': React.lazy(() => import('@/components/course/panels/wellcontrol/KillSheetExplorer')),
   'wc-tolerance-explorer': React.lazy(() => import('@/components/course/panels/wellcontrol/ToleranceExplorer')),
+  'gm-stress-explorer': React.lazy(() => import('@/components/course/panels/geomech/StressExplorer')),
+  'gm-stability-explorer': React.lazy(() => import('@/components/course/panels/geomech/StabilityExplorer')),
+  'gm-window-explorer': React.lazy(() => import('@/components/course/panels/geomech/WindowExplorer')),
 };
 
 export function resolvePanel(id) {

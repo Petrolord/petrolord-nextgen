@@ -1,0 +1,301 @@
+{
+  "app_slug": "geomech",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-hole-in-the-rock",
+      "title": "The Hole in the Rock",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-drilling-a-hole-does",
+          "title": "What drilling a hole does",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-three-wall-stresses",
+          "title": "The three wall stresses",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-walking-round-the-wall",
+          "title": "Walking round the wall",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-mud-is-the-radial-stress",
+          "title": "The mud is the radial stress",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-borehole-frame",
+          "title": "The borehole frame",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-two-criteria",
+      "title": "The Two Criteria",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-collapse-is-a-shear-failure",
+          "title": "Collapse is a shear failure",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-mohr-coulomb-at-the-wall",
+          "title": "Mohr-Coulomb at the wall",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-fracture-is-a-tension-failure",
+          "title": "Fracture is a tension failure",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-zero-breakout-width",
+          "title": "Zero breakout width",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-lower-bound-is-the-larger-of-two",
+          "title": "The lower bound is the larger of two",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-what-the-hole-attitude-costs",
+      "title": "What the Hole Attitude Costs",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-vertical-hole-has-no-azimuth",
+          "title": "A vertical hole has no azimuth",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-deviating-costs-window",
+          "title": "Deviating costs window",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-along-shmax-and-along-shmin",
+          "title": "Along SHmax, and along Shmin",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-breakout-rotates",
+          "title": "The breakout rotates",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-choosing-a-trajectory",
+          "title": "Choosing a trajectory",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-against-the-oracle",
+      "title": "Against the Oracle",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-the-goldens-are",
+          "title": "What the goldens are",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-vertical-closed-forms",
+          "title": "The vertical closed forms",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-deriving-them-in-two-lines",
+          "title": "Deriving them in two lines",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-agreement-proves",
+          "title": "What agreement proves",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-reading-a-stability-answer",
+      "title": "Reading a Stability Answer",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-bisection-is-not-a-formula",
+          "title": "A bisection is not a formula",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-criterion-is-not-monotone",
+          "title": "The criterion is not monotone",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-clamped-answer-means",
+          "title": "What a clamped answer means",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-checking-a-number-before-using-it",
+          "title": "Checking a number before using it",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "gm-stability-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
