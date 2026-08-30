@@ -205,7 +205,7 @@ describe('regression', () => {
     expect(p.homogeneousK).toBeCloseTo(85, 4);
     expect(p.storedDp.L).toBeCloseTo(3092.921381005056, 6);
     expect(p.subtracted.L).toBeCloseTo(3209.25285825101, 6);
-    expect(p.distanceGapFt).toBeCloseTo(116.33147724595415, 6);
+    expect(p.distanceGapFt).toBeCloseTo(116.33147724595392, 6);
     // two 95 percent intervals from the same measurement that never meet
     expect(p.intervalsOverlap).toBe(false);
   });
