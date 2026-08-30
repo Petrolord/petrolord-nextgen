@@ -32,6 +32,7 @@ import WellTestLearningPage from '@/pages/apps/WellTestLearningPage';
 import WellDesignLearningPage from '@/pages/apps/WellDesignLearningPage';
 import TorqueDragLearningPage from '@/pages/apps/TorqueDragLearningPage';
 import HydraulicsLearningPage from '@/pages/apps/HydraulicsLearningPage';
+import WellControlLearningPage from '@/pages/apps/WellControlLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
 import LessonPage from '@/pages/course/LessonPage';
@@ -318,6 +319,7 @@ const DashboardPage = () => {
     <Route path="apps/welldesign" element={<WellDesignLearningPage />} />
     <Route path="apps/torquedrag" element={<TorqueDragLearningPage />} />
     <Route path="apps/hydraulics" element={<HydraulicsLearningPage />} />
+    <Route path="apps/wellcontrol" element={<WellControlLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.
            Static segments (quiz/exam/capstone) rank above the :moduleKey

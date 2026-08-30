@@ -1,0 +1,285 @@
+{
+  "app_slug": "wellcontrol",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-kill-sheet",
+      "title": "The Kill Sheet",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-six-inputs-four-outputs",
+          "title": "Six inputs, four outputs",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-initial-circulating-pressure",
+          "title": "Initial circulating pressure",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-final-circulating-pressure",
+          "title": "Final circulating pressure",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-schedule-between-them",
+          "title": "The schedule between them",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-after-the-bit",
+          "title": "After the bit",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-what-the-influx-is",
+      "title": "What the Influx Is",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-height-from-pit-gain",
+          "title": "Height from pit gain",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-density-from-the-difference",
+          "title": "Density from the difference",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-gas-liquid-and-mixed",
+          "title": "Gas, liquid and mixed",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-scenario-named-gas-that-is-not",
+          "title": "A scenario named gas that is not",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-classification-is-for",
+          "title": "What the classification is for",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-holding-bottom-hole-pressure",
+      "title": "Holding Bottom Hole Pressure",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-constant-bhp-principle",
+          "title": "The constant bottom hole pressure principle",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-choke-is-the-control",
+          "title": "The choke is the control",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-pump-rate-changes",
+          "title": "Pump rate changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-goes-wrong-on-the-choke",
+          "title": "What goes wrong on the choke",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-reading-the-sheet-back",
+      "title": "Reading the Sheet Back",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-pressure-above-the-schedule",
+          "title": "Pressure above the schedule",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-pressure-below-it",
+          "title": "Pressure below it",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-second-influx",
+          "title": "A second influx",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-plugged-and-washed-out",
+          "title": "Plugged, and washed out",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-when-to-stop-and-think",
+          "title": "When to stop and think",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-against-the-oracle",
+      "title": "Against the Oracle",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-the-goldens-are",
+          "title": "What the goldens are",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "wc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-hand-built-example",
+          "title": "The hand-built example",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-closed-forms-you-can-check",
+          "title": "Closed forms you can check",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-agreement-proves",
+          "title": "What agreement proves",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -74,6 +74,9 @@ export const PANELS = {
   'hy-rheology-explorer': React.lazy(() => import('@/components/course/panels/hydraulics/RheologyExplorer')),
   'hy-cleaning-explorer': React.lazy(() => import('@/components/course/panels/hydraulics/CleaningExplorer')),
   'hy-surge-explorer': React.lazy(() => import('@/components/course/panels/hydraulics/SurgeExplorer')),
+  'wc-volume-explorer': React.lazy(() => import('@/components/course/panels/wellcontrol/VolumeExplorer')),
+  'wc-killsheet-explorer': React.lazy(() => import('@/components/course/panels/wellcontrol/KillSheetExplorer')),
+  'wc-tolerance-explorer': React.lazy(() => import('@/components/course/panels/wellcontrol/ToleranceExplorer')),
 };
 
 export function resolvePanel(id) {
