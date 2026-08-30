@@ -1,0 +1,285 @@
+{
+  "app_slug": "wellcontrol",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-kick-is",
+      "title": "What a Kick Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-primary-barrier",
+          "title": "The primary barrier",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-causes-and-warning-signs",
+          "title": "Causes, and warning signs",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-shut-in-and-why-quickly",
+          "title": "Shut in, and why quickly",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-answer-is-for",
+          "title": "What the answer is for",
+          "order": 4,
+          "est_minutes": 11,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-volumes-and-strokes",
+      "title": "Volumes and Strokes",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-span-walk",
+          "title": "The span walk",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "wc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-string-and-annulus",
+          "title": "String and annulus",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-pump-output-and-efficiency",
+          "title": "Pump output, and efficiency",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "wc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-two-depths",
+          "title": "The two depths",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-capacity-at-a-depth",
+          "title": "Capacity at a depth",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wc-volume-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-shut-in-pressures",
+      "title": "The Shut-In Pressures",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-drill-pipe-is-a-manometer",
+          "title": "The drill pipe is a manometer",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-formation-pressure-from-sidpp",
+          "title": "Formation pressure from SIDPP",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-the-casing-reads-higher",
+          "title": "Why the casing reads higher",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-the-drill-pipe-lies",
+          "title": "When the drill pipe lies",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-them-in-order",
+          "title": "Reading them in order",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-kill-mud",
+      "title": "The Kill Mud",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-weight-balances-it",
+          "title": "What weight balances it",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-trip-margin",
+          "title": "The trip margin",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-mixing-it-and-the-delay",
+          "title": "Mixing it, and the delay",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-if-you-cannot-make-it",
+          "title": "What if you cannot make it",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-circulating-it-out",
+      "title": "Circulating It Out",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-two-methods",
+          "title": "Two methods",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-drillers-method",
+          "title": "The drillers method",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-wait-and-weight",
+          "title": "Wait and weight",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-which-one-and-why",
+          "title": "Which one, and why",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-slow-circulating-rate",
+          "title": "The slow circulating rate",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wc-killsheet-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wc-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,287 @@
+{
+  "app_slug": "wellcontrol",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-maasp",
+      "title": "MAASP",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-weakest-point",
+          "title": "The weakest point",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-definition",
+          "title": "The definition",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-it-changes-with-the-mud",
+          "title": "It changes with the mud",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-it-is-not",
+          "title": "What it is not",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-it-on-the-gauge",
+          "title": "Reading it on the gauge",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-kick-tolerance",
+      "title": "Kick Tolerance",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-question-it-answers",
+          "title": "The question it answers",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-shut-in-case",
+          "title": "The shut-in case",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-circulated-case",
+          "title": "The circulated case",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-smaller-one-wins",
+          "title": "The smaller one wins",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-two-wells-two-answers",
+          "title": "Two wells, two answers",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-bubble",
+      "title": "The Bubble",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-boyle-and-migration",
+          "title": "Boyle, and migration",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-why-gas-is-worse",
+          "title": "Why gas is worse",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-single-bubble-assumption",
+          "title": "The single-bubble assumption",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-isothermal-and-ideal",
+          "title": "Isothermal, and ideal",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-planning-with-it",
+      "title": "Planning With It",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-casing-point",
+          "title": "The casing point",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-sweep-against-mud-weight",
+          "title": "The sweep against mud weight",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-zero-means",
+          "title": "What a zero means",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-numbers-that-go-in-a-programme",
+          "title": "The numbers that go in a programme",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-edges-of-the-model",
+      "title": "The Edges of the Model",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-surface-bop-only",
+          "title": "A surface BOP only",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-vertical-hydrostatics",
+          "title": "Vertical hydrostatics",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-no-friction-in-the-annulus",
+          "title": "No friction in the annulus",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-no-time-and-no-migration-rate",
+          "title": "No time, and no migration rate",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-this-course-will-not-certify",
+          "title": "What this course will not certify",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wc-tolerance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
