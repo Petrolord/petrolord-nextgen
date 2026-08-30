@@ -83,6 +83,9 @@ export const PANELS = {
   'ct-rating-explorer': React.lazy(() => import('@/components/course/panels/casingtubing/RatingExplorer')),
   'ct-loadcase-explorer': React.lazy(() => import('@/components/course/panels/casingtubing/LoadCaseExplorer')),
   'ct-tubing-explorer': React.lazy(() => import('@/components/course/panels/casingtubing/TubingExplorer')),
+  'cm-volume-explorer': React.lazy(() => import('@/components/course/panels/cementing/VolumeExplorer')),
+  'cm-placement-explorer': React.lazy(() => import('@/components/course/panels/cementing/PlacementExplorer')),
+  'cm-standoff-explorer': React.lazy(() => import('@/components/course/panels/cementing/StandoffExplorer')),
 };
 
 export function resolvePanel(id) {

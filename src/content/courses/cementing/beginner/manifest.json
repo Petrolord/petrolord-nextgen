@@ -1,0 +1,297 @@
+{
+  "app_slug": "cementing",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-primary-cement-job-is",
+      "title": "What a Primary Cement Job Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-a-well-is-cemented",
+          "title": "Why a well is cemented",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-four-things-the-job-must-do",
+          "title": "The four things the job must do",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-shoe-float-collar-plugs-spacer",
+          "title": "Shoe, float collar, plugs, spacer",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-geometry",
+      "title": "The Geometry",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-two-tubulars-and-a-hole",
+          "title": "Two tubulars and a hole",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-annulus-capacity-rows",
+          "title": "Annulus capacity rows",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-the-rows-are-cut",
+          "title": "Where the rows are cut",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-inside-capacity",
+          "title": "Inside capacity",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-where-the-geometry-refuses",
+          "title": "Where the geometry refuses",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-open-hole-excess",
+      "title": "Open Hole Excess",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-hole-is-not-the-bit",
+          "title": "The hole is not the bit",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-excess-factor",
+          "title": "The excess factor",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-effective-bore",
+          "title": "The effective bore",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-excess-costs",
+          "title": "What excess costs",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-excess-is-the-biggest-guess",
+          "title": "Excess is the biggest guess",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-volumes",
+      "title": "The Volumes",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-top-of-cement",
+          "title": "Top of cement",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-annular-slurry",
+          "title": "Annular slurry",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-shoe-track",
+          "title": "The shoe track",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-lead-and-tail",
+          "title": "Lead and tail",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-displacement",
+          "title": "Displacement",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-sacks-time-and-the-sheet",
+      "title": "Sacks, Time and the Sheet",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-yield-and-sacks",
+          "title": "Yield, and sacks",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-job-time",
+          "title": "Job time",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-wells-one-slurry-volume",
+          "title": "Two wells, one slurry volume",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-volume-sheet-hides",
+          "title": "What a volume sheet hides",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "cm-volume-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
