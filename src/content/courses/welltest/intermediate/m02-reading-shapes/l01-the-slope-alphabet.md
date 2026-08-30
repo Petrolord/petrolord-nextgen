@@ -55,9 +55,9 @@ A test that shows a clean unit slope, a clean plateau and a clean doubling is a 
 
 `detectFlowRegimes` implements exactly this alphabet as slope bands: 0.85 to 1.2 for unit slope, within 0.12 of zero for radial, 0.38 to 0.62 for linear, 0.16 to 0.34 for bilinear, below minus 0.35 for constant pressure. It computes a local slope over about two points each side, groups consecutive points with the same label, and discards groups spanning less than a quarter of a decade.
 
-It then applies the one piece of ORDER logic it has: a unit-slope segment that is first becomes wellbore storage, and one that is last becomes a boundary.
+It then applies three pieces of ORDER logic: a unit slope that is first becomes wellbore storage and one that is last becomes a boundary; a constant-pressure stretch with anything after it becomes a transition; and a bilinear stretch with radial or linear flow before it becomes a transition.
 
-That is a sensible implementation and it is the subject of the next two lessons, because slope bands alone are not enough.
+Those rules are the subject of the next two lessons, because slope bands alone are not enough and because there is one shape the rules still cannot reach.
 
 ## The misconception to avoid
 

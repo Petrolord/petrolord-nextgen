@@ -16,7 +16,7 @@ The Professional tier is built on that one plot, and on a gallery of six more te
 
 ## What the Professional tier will show you
 
-That the automatic regime labels the software prints are slope bands rather than diagnoses, and that on every fixture in this course at least one of them is a transition rather than a regime.
+That the automatic regime labels the software prints are slope bands with ordering rules applied, rather than diagnoses, and that a transition between two regimes has a slope of its own that lands inside one of the bands.
 
 That past a sealing fault, the late semilog line reports about half the permeability, with the skin sign inverting again from an entirely different cause than the one you saw in module 5.
 

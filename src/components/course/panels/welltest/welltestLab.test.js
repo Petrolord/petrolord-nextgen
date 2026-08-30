@@ -102,17 +102,47 @@ describe('the derivative', () => {
     expect(Math.abs(last(0.5) - last(0)) / last(0)).toBeLessThan(0.005);
   });
 
-  it('names a regime that is not there on the buildup', () => {
+  it('calls the storage fall a transition rather than recharge', () => {
     const { regimes } = derivative('buildup');
-    expect(regimes.map((r) => r.regime)).toEqual(['constant-pressure', 'radial']);
+    expect(regimes.map((r) => r.regime)).toEqual(['transition', 'radial']);
     expect(regimes[1].xStart).toBeCloseTo(3.5846608228717867, 10);
+    // the segment is relabelled, never hidden: its extent is still reported
+    expect(regimes[0].xEnd).toBeGreaterThan(regimes[0].xStart);
+    expect(regimes[0].label).toBe('Transition between regimes');
   });
 
-  it('names a bilinear segment in the fault transition', () => {
+  it('calls the fault ramp a transition rather than bilinear flow', () => {
     const { regimes } = derivative('faultDrawdown');
     expect(regimes.map((r) => r.regime))
-      .toEqual(['linear', 'constant-pressure', 'radial', 'bilinear', 'radial']);
+      .toEqual(['linear', 'transition', 'radial', 'transition', 'radial']);
     expect(regimes[3].xStart).toBeCloseTo(25.650209056800456, 10);
+  });
+
+  it('still calls the fault fixture first segment linear, which it is not', () => {
+    // The one false label ordering cannot remove. A fracture's linear flow
+    // legitimately comes first and so does the roll-off of a storage unit
+    // slope, and separating them needs the PRESSURE curve rather than the
+    // order. The course teaches that check; the engine is not given the data
+    // to make it.
+    const { regimes } = derivative('faultDrawdown');
+    expect(regimes[0].regime).toBe('linear');
+    expect(regimes[0].xStart).toBeCloseTo(0.01, 12);
+    expect(fixtureTruth('faultDrawdown').C).toBe(0.01);
+  });
+
+  it('leaves every genuine regime alone across the seven fixtures', () => {
+    const sequences = Object.fromEntries(
+      TRANSIENT_FIXTURES.map((f) => [f.id, derivative(f.id).regimes.map((r) => r.regime)]),
+    );
+    expect(sequences.rectangleDrawdown).toEqual(['radial', 'boundary-or-pss']);
+    expect(sequences.dualPorosityDrawdown).toEqual(['wellbore-storage', 'transition', 'radial']);
+    expect(sequences.horizontalDrawdown).toEqual(['radial', 'linear', 'transition', 'radial']);
+    expect(sequences.icFractureDrawdown).toEqual(['linear', 'transition', 'radial']);
+    // no fixture in this course has a real recharge boundary or a real
+    // bilinear period in it, so neither label should survive anywhere
+    const all = Object.values(sequences).flat();
+    expect(all).not.toContain('constant-pressure');
+    expect(all).not.toContain('bilinear');
   });
 
   it('gets the closed rectangle right', () => {
