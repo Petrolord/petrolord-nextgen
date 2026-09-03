@@ -1,0 +1,299 @@
+{
+  "app_slug": "perfsand",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-this-course-decides",
+      "title": "What This Course Decides",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-two-questions-one-app",
+          "title": "Two questions, one app",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-hole-in-the-casing",
+          "title": "The hole in the casing",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-sand-that-comes-back",
+          "title": "The sand that comes back",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-shot",
+      "title": "The Shot",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-shaped-charge-in-one-paragraph",
+          "title": "A shaped charge in one paragraph",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-entrance-hole-and-penetration",
+          "title": "Entrance hole and penetration",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-shot-density",
+          "title": "Shot density",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-phasing",
+          "title": "Phasing",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-catalog-is-a-concrete-target",
+          "title": "The catalog is a concrete target",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-geometry-the-charge-leaves",
+      "title": "The Geometry the Charge Leaves",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-four-lengths-and-nothing-else",
+          "title": "Four lengths and nothing else",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-spacing-is-one-over-density",
+          "title": "Spacing is one over density",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-effective-wellbore-radius",
+          "title": "The effective wellbore radius",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-crushed-zone",
+          "title": "The crushed zone",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-geometry-refuses",
+          "title": "What the geometry refuses",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-sand-sample",
+      "title": "The Sand Sample",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-sieve-analysis",
+          "title": "A sieve analysis",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-retained-not-passing",
+          "title": "Retained, not passing",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-d-values",
+          "title": "D-values",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-interpolating-on-a-log-scale",
+          "title": "Interpolating on a log scale",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-when-the-curve-does-not-reach",
+          "title": "When the curve does not reach",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-uniformity-and-fines",
+      "title": "Uniformity and Fines",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-uniformity-coefficient",
+          "title": "The uniformity coefficient",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-sorting",
+          "title": "Sorting",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-forty-four-micron-cutoff",
+          "title": "The forty four micron cutoff",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-numbers-that-decide-everything",
+          "title": "Two numbers that decide everything",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ps-shot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
