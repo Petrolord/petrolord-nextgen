@@ -1,0 +1,303 @@
+{
+  "app_slug": "perfsand",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-choosing-a-completion-type",
+      "title": "Choosing a Completion Type",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-question-the-sieve-answers",
+          "title": "The question the sieve answers",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ladder",
+          "title": "The ladder",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-fines-decide-the-middle",
+          "title": "Fines decide the middle",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-screening-rule-is-worth",
+          "title": "What a screening rule is worth",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-gravel",
+      "title": "Gravel",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-saucier",
+          "title": "Saucier",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-band-is-narrow",
+          "title": "The band is narrow",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-when-nothing-matches",
+          "title": "When nothing matches",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-nearest-sand",
+          "title": "The nearest sand",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-why-five-to-six",
+          "title": "Why five to six",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-screens",
+      "title": "Screens",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-gravel-pack-rule",
+          "title": "The gravel-pack rule",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-gauge-series-is-not-continuous",
+          "title": "A gauge series is not continuous",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-standalone-and-the-coberly-window",
+          "title": "Standalone and the Coberly window",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-margin-you-actually-get",
+          "title": "The margin you actually get",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-screen-does-not-do",
+          "title": "What a screen does not do",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-sanding-onset",
+      "title": "Sanding Onset",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-kirsch-at-the-cavity-wall",
+          "title": "Kirsch at the cavity wall",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-critical-flowing-pressure",
+          "title": "The critical flowing pressure",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-cavity-geometries",
+          "title": "Two cavity geometries",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-strength-boost-factor",
+          "title": "The strength boost factor",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-margin-not-a-sand-rate",
+          "title": "A margin, not a sand rate",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-sweep-and-the-missing-row",
+      "title": "The Sweep, and the Missing Row",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-walking-the-interval",
+          "title": "Walking the interval",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-row-that-was-never-computed",
+          "title": "The row that was never computed",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-the-golden-could-not-see-it",
+          "title": "Why the golden could not see it",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-fix-asserts",
+          "title": "What the fix asserts",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ps-sand-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

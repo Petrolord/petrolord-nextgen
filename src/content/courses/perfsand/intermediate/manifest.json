@@ -1,0 +1,301 @@
+{
+  "app_slug": "perfsand",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-skin-and-what-it-is-not",
+      "title": "Skin, and What It Is Not",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-a-skin-is",
+          "title": "What a skin is",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-perforation-skin-is-geometry",
+          "title": "A perforation skin is geometry",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-sign-convention",
+          "title": "The sign convention",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-karakas-tariq-assumes",
+          "title": "What Karakas and Tariq assume",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-four-components",
+      "title": "The Four Components",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-plane-flow-skin",
+          "title": "Plane-flow skin",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-converging-flow-skin",
+          "title": "Converging-flow skin",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-wellbore-blockage-skin",
+          "title": "Wellbore blockage skin",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-crushed-zone-skin",
+          "title": "Crushed-zone skin",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-which-one-moves-the-answer",
+          "title": "Which one moves the answer",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-reading-the-catalog",
+      "title": "Reading the Catalog",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-nine-guns-one-rock",
+          "title": "Nine guns, one rock",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-where-the-total-crosses-zero",
+          "title": "Where the total crosses zero",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-phasing-is-the-biggest-lever",
+          "title": "Phasing is the biggest lever",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-penetration-and-density",
+          "title": "Penetration and density",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-anisotropy",
+          "title": "Anisotropy",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-productivity-ratio",
+      "title": "Productivity Ratio",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-skin-into-a-flow-number",
+          "title": "Skin into a flow number",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-drainage-radius",
+          "title": "The drainage radius",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-ratio-not-a-rate",
+          "title": "A ratio, not a rate",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-bound-on-negative-skin",
+          "title": "The bound on negative skin",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-ratio-hides",
+          "title": "What the ratio hides",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-where-the-correlation-stops",
+      "title": "Where the Correlation Stops",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-development-range",
+          "title": "The development range",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-gun-that-leaves-it",
+          "title": "The gun that leaves it",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-underbalance-is-a-band",
+          "title": "Underbalance is a band",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-tier-cannot-tell-you",
+          "title": "What the tier cannot tell you",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ps-skin-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -89,6 +89,9 @@ export const PANELS = {
   'cd-string-explorer': React.lazy(() => import('@/components/course/panels/completion/StringExplorer')),
   'cd-clearance-explorer': React.lazy(() => import('@/components/course/panels/completion/ClearanceExplorer')),
   'cd-spaceout-explorer': React.lazy(() => import('@/components/course/panels/completion/SpaceoutExplorer')),
+  'ps-shot-explorer': React.lazy(() => import('@/components/course/panels/perfsand/ShotExplorer')),
+  'ps-skin-explorer': React.lazy(() => import('@/components/course/panels/perfsand/SkinExplorer')),
+  'ps-sand-explorer': React.lazy(() => import('@/components/course/panels/perfsand/SandExplorer')),
 };
 
 export function resolvePanel(id) {
