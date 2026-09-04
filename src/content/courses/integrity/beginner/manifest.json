@@ -1,0 +1,299 @@
+{
+  "app_slug": "integrity",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-this-course-decides",
+      "title": "What This Course Decides",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-integrity-means-here",
+          "title": "What integrity means here",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-two-barriers-always",
+          "title": "Two barriers, always",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-it-refuses",
+          "title": "What it refuses",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-elements-and-envelopes",
+      "title": "Elements and Envelopes",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-well-barrier-element",
+          "title": "A well barrier element",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-kinds",
+          "title": "The kinds",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-primary-and-secondary",
+          "title": "Primary and secondary",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-common-element",
+          "title": "The common element",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-drawing-an-envelope",
+          "title": "Drawing an envelope",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-status-and-what-it-means",
+      "title": "Status, and What It Means",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-four-statuses",
+          "title": "The four statuses",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-verified-is-a-claim-about-evidence",
+          "title": "Verified is a claim about evidence",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-not-verified-is-not-absent",
+          "title": "Not verified is not absent",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-degraded",
+          "title": "Degraded",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-failed",
+          "title": "Failed",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-envelope-verdict",
+      "title": "The Envelope Verdict",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-one-element-sets-the-whole",
+          "title": "One element sets the whole",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-worst-element-wins",
+          "title": "The worst element wins",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-independence-that-is-not-there",
+          "title": "Independence that is not there",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-counting-seats-against-elements",
+          "title": "Counting seats against elements",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-a-barrier-table",
+          "title": "Reading a barrier table",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-well-category",
+      "title": "The Well Category",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-a-category-is-for",
+          "title": "What a category is for",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-flow-potential",
+          "title": "Flow potential",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-category-table",
+          "title": "The category table",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-category-obliges",
+          "title": "What a category obliges",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wi-envelope-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

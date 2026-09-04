@@ -1,0 +1,303 @@
+{
+  "app_slug": "integrity",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-why-annulus-pressure-matters",
+      "title": "Why Annulus Pressure Matters",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-sealed-volume-that-heats-up",
+          "title": "A sealed volume that heats up",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-a-limit-protects",
+          "title": "What a limit protects",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-maasp-and-mawop-are-different",
+          "title": "MAASP and MAWOP are different",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-this-tier-computes",
+          "title": "What this tier computes",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-maasp",
+      "title": "MAASP",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-row-for-every-element",
+          "title": "A row for every element",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-rating-term",
+          "title": "The rating term",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-hydrostatic-term",
+          "title": "The hydrostatic term",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-governing-row",
+          "title": "The governing row",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-the-table",
+          "title": "Reading the table",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-mawop-and-the-rp90-factors",
+      "title": "MAWOP and the RP 90 Factors",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-design-factor-by-role",
+          "title": "A design factor by role",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-why-an-outer-string-is-derated",
+          "title": "Why an outer string is derated",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-governing-candidate",
+          "title": "The governing candidate",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-inversion",
+          "title": "The inversion",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-wear-derating",
+          "title": "Wear derating",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-differential",
+      "title": "The Differential",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-rating-is-across-a-wall",
+          "title": "A rating is across a wall",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-is-on-the-far-side",
+          "title": "What is on the far side",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-fluid-that-pushes-back",
+          "title": "The fluid that pushes back",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-heavier-annulus-buys-margin",
+          "title": "A heavier annulus buys margin",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-and-takes-it-away-elsewhere",
+          "title": "And takes it away elsewhere",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-when-it-cannot-be-pressured",
+      "title": "When It Cannot Be Pressured",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-unloading-the-tubing-to-gas",
+          "title": "Unloading the tubing to gas",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-negative-row",
+          "title": "A negative row",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-clamp-to-zero",
+          "title": "The clamp to zero",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-negative-maasp-obliges",
+          "title": "What a negative MAASP obliges",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wi-annulus-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
