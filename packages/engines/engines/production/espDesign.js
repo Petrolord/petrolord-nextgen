@@ -265,7 +265,13 @@ export const sizePump = ({
   if (!stage.inRange) {
     warnings.push({
       code: 'outsideCurve',
-      message: `At ${Math.round(qBpd)} bbl/d and ${hz} Hz the pump runs outside its published range (${Math.round(curve.qMin)} to ${Math.round(curve.qMax)} bbl/d at ${curve.refHz} Hz). Head and efficiency here are an extrapolation.`,
+      // The rate is said to be OUTSIDE the range printed next to it, so
+      // rounded whole a rate a fraction past `qMax` read as the bound
+      // itself: "At 2500 bbl/d ... outside its published range (1200 to
+      // 2500 bbl/d)". One decimal on the rate; the bounds read exactly
+      // as they did before, because they are the published range and
+      // not a number this well is being measured to a fraction of.
+      message: `At ${qBpd.toFixed(1)} bbl/d and ${hz} Hz the pump runs outside its published range (${Math.round(curve.qMin)} to ${Math.round(curve.qMax)} bbl/d at ${curve.refHz} Hz). Head and efficiency here are an extrapolation.`,
     });
   }
   if (stage.region === 'downthrust' || stage.region === 'upthrust') {
@@ -310,15 +316,29 @@ export const sizePump = ({
       motorEfficiency,
       inputKw: (shaftHp * 0.7457) / motorEfficiency,
     };
+    // Both of these fire on `loadFraction`, which is measured against
+    // the DERATED rating, so the derate has to appear in the message
+    // or the numbers argue against the warning they are attached to:
+    // 95.4 hp against a 100 hp motor reads as comfortably inside
+    // rating, while what tripped the flag is 95.4 / (100 x 0.88) =
+    // 1.084 at a 12 percent thrust derate. The usable rating and the
+    // load fraction are both named for the same reason, and the
+    // underload message names them too rather than asserting a
+    // condition a reader cannot check.
+    const usableHp = nameplateHp * motorLoad.derate;
+    const plate = motorLoad.derate < 1
+      ? `a ${nameplateHp} hp motor derated ${thrustDeratePct} percent for thrust, a usable ${usableHp.toFixed(1)} hp`
+      : `a ${nameplateHp} hp motor`;
+    const carried = `${(motorLoad.loadFraction * 100).toFixed(1)} percent of what it may carry`;
     if (motorLoad.loadFraction > 1) {
       warnings.push({
         code: 'motorOverloaded',
-        message: `The shaft needs ${shaftHp.toFixed(1)} hp against a ${nameplateHp} hp motor. Move up a motor or take stages out.`,
+        message: `The shaft needs ${shaftHp.toFixed(1)} hp against ${plate}, ${carried}. Move up a motor or take stages out.`,
       });
     } else if (motorLoad.loadFraction < 0.5) {
       warnings.push({
         code: 'motorUnderloaded',
-        message: 'The motor is loaded below half its nameplate: it will run cool but the power factor and the cost both suffer.',
+        message: `The shaft needs ${shaftHp.toFixed(1)} hp against ${plate}, ${carried}: it will run cool but the power factor and the cost both suffer.`,
       });
     }
   }
