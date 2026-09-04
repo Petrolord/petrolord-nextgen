@@ -1,0 +1,305 @@
+{
+ "app_slug": "intervention",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-evidence-that-argues-the-other-way",
+   "title": "The Evidence That Argues the Other Way",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-the-filter-that-drops-a-sign",
+     "title": "The filter that drops a sign",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l02-a-count-computed-and-discarded",
+     "title": "A count computed and discarded",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l03-fitting-the-discarded-stretch",
+     "title": "Fitting the discarded stretch",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l04-the-span-the-drop-costs",
+     "title": "The span the drop costs",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l05-what-an-unreachable-note-means",
+     "title": "What an unreachable note means",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    }
+   ]
+  },
+  {
+   "key": "m02-the-dial-that-decides-the-spend",
+   "title": "The Dial That Decides the Spend",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-one-history-many-windows",
+     "title": "One history, many windows",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l02-where-the-verdict-flips",
+     "title": "Where the verdict flips",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l03-the-margin-against-the-threshold",
+     "title": "The margin against the threshold",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l04-a-clamp-documented-nowhere",
+     "title": "A clamp documented nowhere",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l05-what-a-sweep-cannot-settle",
+     "title": "What a sweep cannot settle",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    }
+   ]
+  },
+  {
+   "key": "m03-a-missing-column-read-as-zero",
+   "title": "A Missing Column Read as Zero",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-spellings-of-no-value",
+     "title": "The spellings of no value",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l02-the-flat-branch",
+     "title": "The flat branch",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l03-a-branch-that-asserts-what-it-never-checked",
+     "title": "A branch that asserts what it never checked",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l04-what-ok-means-here",
+     "title": "What ok means here",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    }
+   ]
+  },
+  {
+   "key": "m04-guards-in-the-wrong-place",
+   "title": "Guards in the Wrong Place",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-guard-at-the-singularity",
+     "title": "The guard at the singularity",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l02-a-refusal-that-names-another-limit",
+     "title": "A refusal that names another limit",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l03-a-guard-that-fires-by-accident",
+     "title": "A guard that fires by accident",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l04-clean-data-refused-as-noise",
+     "title": "Clean data refused as noise",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l05-one-sample-that-ends-a-reading",
+     "title": "One sample that ends a reading",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    }
+   ]
+  },
+  {
+   "key": "m05-what-the-screening-cannot-know",
+   "title": "What the Screening Cannot Know",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-it-does-not-know-the-fluid",
+     "title": "It does not know the fluid",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l02-confidence-read-in-one-place",
+     "title": "Confidence read in one place",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l03-a-test-that-decides-nothing",
+     "title": "A test that decides nothing",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l04-a-verdict-with-no-golden",
+     "title": "A verdict with no golden",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    }
+   ]
+  },
+  {
+   "key": "m06-the-expert-reading",
+   "title": "The Expert Reading",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-story-so-far",
+     "title": "The story so far",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true
+    },
+    {
+     "key": "l02-working-the-capstone",
+     "title": "Working the capstone",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "pd-candidate-explorer"
+     ],
+     "has_exercise": true
+    },
+    {
+     "key": "l03-onward",
+     "title": "Onward",
+     "order": 3,
+     "est_minutes": 9,
+     "panels": [],
+     "has_exercise": true
+    }
+   ]
+  }
+ ]
+}

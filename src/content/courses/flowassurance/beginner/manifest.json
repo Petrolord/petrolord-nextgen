@@ -1,0 +1,299 @@
+{
+  "app_slug": "flowassurance",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-line-that-cools",
+      "title": "A Line That Cools",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-a-flowline-is-a-thermal-problem",
+          "title": "Why a flowline is a thermal problem",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses",
+          "title": "What it refuses",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-boundary-is-an-input",
+          "title": "The boundary is an input",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-resistances-in-series",
+      "title": "Resistances in Series",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-heat-leaves-through-layers",
+          "title": "Heat leaves through layers",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-layer-is-a-resistance",
+          "title": "A layer is a resistance",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-adding-them-up",
+          "title": "Adding them up",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-overall-coefficient",
+          "title": "The overall coefficient",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-u-value-is-referred-to",
+          "title": "What a U value is referred to",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-insulation",
+      "title": "Insulation",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-what-insulation-buys",
+          "title": "What insulation buys",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-foams-share",
+          "title": "The foam share",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-diminishing-returns",
+          "title": "Diminishing returns",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-insulation-cannot-do",
+          "title": "What insulation cannot do",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-burial",
+      "title": "Burial",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-trench-is-a-resistance-too",
+          "title": "A trench is a resistance too",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-soil-conductivity",
+          "title": "Soil conductivity",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-burial-term",
+          "title": "The burial term",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-depth-buys",
+          "title": "What depth buys",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-burial-assumes",
+          "title": "What burial assumes",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-what-the-line-weighs",
+      "title": "What the Line Weighs",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-steel-mass-per-foot",
+          "title": "Steel mass per foot",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-contents-mass-per-foot",
+          "title": "Contents mass per foot",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-mass-matters-later",
+          "title": "Why mass matters later",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-layers-that-carry-none",
+          "title": "The layers that carry none",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-mass-is-for",
+          "title": "What a mass is for",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-thermal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

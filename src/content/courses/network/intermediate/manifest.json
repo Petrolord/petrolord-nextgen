@@ -1,0 +1,305 @@
+{
+  "app_slug": "network",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-solve",
+      "title": "The Solve",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-one-case-with-a-closed-form",
+          "title": "The one case with a closed form",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-newton-on-a-nodal-mass-balance",
+          "title": "Newton on a nodal mass balance",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-jacobian-and-the-line-search",
+          "title": "The Jacobian and the line search",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-tree-of-turbulent-branches",
+          "title": "A tree of turbulent branches",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-convergence-is-measured-on",
+          "title": "What convergence is measured on",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-loops-and-directions",
+      "title": "Loops and Directions",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-loop-is-what-makes-a-network",
+          "title": "A loop is what makes a network",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-split-is-a-decision",
+          "title": "The split is a decision",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-walking-a-leg-and-watching-the-share",
+          "title": "Walking a leg and watching the share",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-drawn-arrow-is-not-a-direction",
+          "title": "A drawn arrow is not a direction",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-topology-cannot-decide",
+          "title": "What a topology cannot decide",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-wells-fight",
+      "title": "Wells Fight",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-one-well-then-two-then-three",
+          "title": "One well, then two, then three",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-header-rises",
+          "title": "The header rises",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-network-costs-each-well",
+          "title": "What the network costs each well",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-weak-well-loses-most",
+          "title": "The weak well loses most",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-deferment-number-overstates",
+          "title": "What a deferment number overstates",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-streams",
+      "title": "Streams",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-component-rates-add",
+          "title": "Component rates add",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-never-average-a-ratio",
+          "title": "Never average a ratio",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-split-by-mass-share",
+          "title": "A split by mass share",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-arrives-at-the-separator",
+          "title": "What arrives at the separator",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-reading-the-result",
+      "title": "Reading the Result",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-biggest-drop",
+          "title": "The biggest drop",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-bottleneck",
+          "title": "The bottleneck",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-backflows-and-dead-legs",
+          "title": "Backflows and dead legs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-diagnosis-does-not-decide",
+          "title": "What a diagnosis does not decide",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-network-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

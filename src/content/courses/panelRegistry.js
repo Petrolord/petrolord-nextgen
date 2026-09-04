@@ -126,6 +126,21 @@ export const PANELS = {
   'pd-stage-explorer': React.lazy(() => import('@/components/course/panels/esp/StageExplorer')),
   'pd-lift-explorer': React.lazy(() => import('@/components/course/panels/esp/LiftExplorer')),
   'pd-power-explorer': React.lazy(() => import('@/components/course/panels/esp/PowerExplorer')),
+
+  // PD6 Flow Assurance
+  'pd-thermal-explorer': React.lazy(() => import('@/components/course/panels/flowassurance/ThermalExplorer')),
+  'pd-line-explorer': React.lazy(() => import('@/components/course/panels/flowassurance/LineExplorer')),
+  'pd-hydrate-explorer': React.lazy(() => import('@/components/course/panels/flowassurance/HydrateExplorer')),
+
+  // PD7 Production Networks
+  'pd-trunk-explorer': React.lazy(() => import('@/components/course/panels/network/TrunkExplorer')),
+  'pd-network-explorer': React.lazy(() => import('@/components/course/panels/network/NetworkExplorer')),
+  'pd-fight-explorer': React.lazy(() => import('@/components/course/panels/network/FightExplorer')),
+
+  // PD8 Well Intervention
+  'pd-diagnostic-explorer': React.lazy(() => import('@/components/course/panels/intervention/DiagnosticExplorer')),
+  'pd-channel-explorer': React.lazy(() => import('@/components/course/panels/intervention/ChannelExplorer')),
+  'pd-candidate-explorer': React.lazy(() => import('@/components/course/panels/intervention/CandidateExplorer')),
 };
 
 export function resolvePanel(id) {

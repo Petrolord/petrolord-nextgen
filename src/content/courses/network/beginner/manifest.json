@@ -1,0 +1,299 @@
+{
+  "app_slug": "network",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-gathering-system",
+      "title": "A Gathering System",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-a-production-network-is",
+          "title": "What a production network is",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-these-engines-model",
+          "title": "What these engines model",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-they-refuse",
+          "title": "What they refuse",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-six-functions-one-answer",
+          "title": "Six functions, one answer",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-line-and-what-it-holds",
+      "title": "The Line and What It Holds",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-pipe-schedule-is-a-table",
+          "title": "A pipe schedule is a table",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-redundancy-that-checks-itself",
+          "title": "The redundancy that checks itself",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-wall-can-hold",
+          "title": "What a wall can hold",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-design-factor-is-an-input",
+          "title": "The design factor is an input",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-rating-is-not",
+          "title": "What a rating is not",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-fittings-as-pipe",
+      "title": "Fittings as Pipe",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-fitting-is-a-resistance",
+          "title": "A fitting is a resistance",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-equivalent-length",
+          "title": "Equivalent length",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-the-friction-factor-belongs-in-it",
+          "title": "Why the friction factor belongs in it",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-one-valve-against-all-the-others",
+          "title": "One valve against all the others",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-rule-of-thumb-assumes",
+          "title": "What a rule of thumb assumes",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-nodes-and-branches",
+      "title": "Nodes and Branches",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-three-node-kinds",
+          "title": "Three node kinds",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-makes-a-drawing-a-network",
+          "title": "What makes a drawing a network",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-refusals-not-repairs",
+          "title": "Refusals, not repairs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-an-index-is-for",
+          "title": "What an index is for",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-one-well-on-its-own",
+      "title": "One Well on Its Own",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-well-against-a-boundary",
+          "title": "A well against a boundary",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-inflow-curve",
+          "title": "The inflow curve",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-drop-along-the-line",
+          "title": "The drop along the line",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-where-the-wellhead-lands",
+          "title": "Where the wellhead lands",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-one-well-cannot-tell-you",
+          "title": "What one well cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-trunk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

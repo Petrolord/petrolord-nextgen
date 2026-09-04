@@ -1,0 +1,305 @@
+{
+  "app_slug": "flowassurance",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-joule-thomson",
+      "title": "Joule Thomson",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-gas-cools-as-it-expands",
+          "title": "Gas cools as it expands",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-where-the-term-belongs",
+          "title": "Where the term belongs",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-applied-undamped",
+          "title": "Applied undamped",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-verdict-flips",
+          "title": "The verdict flips",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-damping-would-be",
+          "title": "What the damping would be",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-a-refusal-that-is-not",
+      "title": "A Refusal That Is Not",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-nan-caught-and-dropped",
+          "title": "A NaN caught and dropped",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-dropping-a-term-does",
+          "title": "What dropping a term does",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-refusing-against-continuing",
+          "title": "Refusing against continuing",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-ok-means-here",
+          "title": "What ok means here",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-inhibitor",
+      "title": "The Inhibitor",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-what-depression-is",
+          "title": "What depression is",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-hammerschmidt",
+          "title": "Hammerschmidt",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-sizing-the-dose",
+          "title": "Sizing the dose",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-injection-rate",
+          "title": "The injection rate",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-dose-assumes",
+          "title": "What the dose assumes",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-sized-one-way-checked-another",
+      "title": "Sized One Way, Checked Another",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-two-correlations-one-dose",
+          "title": "Two correlations, one dose",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-check-that-is-never-compared",
+          "title": "The check that is never compared",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-how-short-is-short",
+          "title": "How short is short",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-no-check-at-all-for-meg",
+          "title": "No check at all for MEG",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-passing-check-proved",
+          "title": "What a passing check proved",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-ceilings-and-conventions",
+      "title": "Ceilings and Conventions",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-ceiling-in-the-wrong-coordinates",
+          "title": "A ceiling in the wrong coordinates",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-weight-percent-against-volume-percent",
+          "title": "Weight percent against volume percent",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-reference-nobody-accepts",
+          "title": "The reference nobody accepts",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-which-conventions-travel",
+          "title": "Which conventions travel",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-hydrate-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

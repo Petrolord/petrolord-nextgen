@@ -1,0 +1,305 @@
+{
+  "app_slug": "network",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-node-nothing-depends-on",
+      "title": "A Node Nothing Depends On",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-when-a-row-goes-flat",
+          "title": "When a row goes flat",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-pinning-does",
+          "title": "What pinning does",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-residual-that-cannot-see-its-error",
+          "title": "The residual that cannot see its error",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-check-in-the-same-file",
+          "title": "The check in the same file",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-message-that-asserts-a-diagnosis",
+          "title": "A message that asserts a diagnosis",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-two-masses-under-one-word",
+      "title": "Two Masses Under One Word",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-stream-mass-nobody-compares",
+          "title": "The stream mass nobody compares",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-two-sign-conventions-one-word",
+          "title": "Two sign conventions, one word",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-separator-is-told",
+          "title": "What the separator is told",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-handing-in-a-mass-that-is-wrong",
+          "title": "Handing in a mass that is wrong",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-comparison-that-would-catch-it",
+          "title": "The comparison that would catch it",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-answer-and-the-guess",
+      "title": "The Answer and the Guess",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-an-answer-with-no-tolerance-in-it",
+          "title": "An answer with no tolerance in it",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-same-network-a-different-guess",
+          "title": "The same network, a different guess",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-reordering-moves",
+          "title": "What a reordering moves",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-agreement-is-not-evidence",
+          "title": "When agreement is not evidence",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-which-numbers-are-reproducible",
+          "title": "Which numbers are reproducible",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-what-convergence-reports",
+      "title": "What Convergence Reports",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-tolerance-is-not-a-mass",
+          "title": "The tolerance is not a mass",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-scale-the-caller-never-sees",
+          "title": "The scale the caller never sees",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-every-failure-comes-back-ok",
+          "title": "Every failure comes back ok",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-message-that-prints-zero",
+          "title": "A message that prints zero",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-cusps-and-rankings",
+      "title": "Cusps and Rankings",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-continuous-is-not-differentiable",
+          "title": "Continuous is not differentiable",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-branch-at-its-own-cusp",
+          "title": "A branch at its own cusp",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-ranking-that-fails-open",
+          "title": "A ranking that fails open",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-contract-has-to-say",
+          "title": "What a contract has to say",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-fight-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
