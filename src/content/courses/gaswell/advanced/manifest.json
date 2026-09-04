@@ -1,0 +1,305 @@
+{
+  "app_slug": "gaswell",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-chosen-once-used-everywhere",
+      "title": "Chosen Once, Used Everywhere",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-chosen-at-the-wellhead",
+          "title": "Chosen at the wellhead",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-used-at-the-shoe",
+          "title": "Used at the shoe",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-twenty-percent-is-worth",
+          "title": "What twenty percent is worth",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-threshold-cleared-by-nothing",
+          "title": "A threshold cleared by nothing",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-choosing-per-station-changes",
+          "title": "What choosing per station changes",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-candidate-that-was-discarded",
+      "title": "The Candidate That Was Discarded",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-sizing-returns-one-answer",
+          "title": "A sizing returns one answer",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-rejected-string",
+          "title": "The rejected string",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-reading-a-rejection",
+          "title": "Reading a rejection",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-pick-hides",
+          "title": "What a pick hides",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-gradient-constant",
+      "title": "The Gradient Constant",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-rounded-constant",
+          "title": "A rounded constant",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-the-rounding-is-worth",
+          "title": "What the rounding is worth",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-same-seam-elsewhere",
+          "title": "The same seam elsewhere",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-which-conventions-travel",
+          "title": "Which conventions travel",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-a-requirement-that-falls",
+      "title": "A Requirement That Falls",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-gas-against-casing-pressure",
+          "title": "Gas against casing pressure",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-wrong-direction",
+          "title": "The wrong direction",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-flag-that-flips-the-wrong-way",
+          "title": "A flag that flips the wrong way",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-clamp-at-zero",
+          "title": "The clamp at zero",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-feasible-still-catches",
+          "title": "What feasible still catches",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-what-nobody-checks",
+      "title": "What Nobody Checks",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-liquid-capacity",
+          "title": "Liquid capacity",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-cycle-against-the-well",
+          "title": "The cycle against the well",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-molecular-weights-of-air",
+          "title": "Two molecular weights of air",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-sizing-at-any-station",
+          "title": "A sizing at any station",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-screen-cannot-tell-you",
+          "title": "What a screen cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-remedy-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,299 @@
+{
+  "app_slug": "rodpump",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-well-on-a-beam",
+      "title": "A Well on a Beam",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-a-rod-pump-is",
+          "title": "What a rod pump is",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses",
+          "title": "What it refuses",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-four-objects-one-well",
+          "title": "Four objects, one well",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-rod-string",
+      "title": "The Rod String",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-taper-is-a-compromise",
+          "title": "A taper is a compromise",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-stiffness-adds-in-series",
+          "title": "Stiffness adds in series",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-buoyed-weight",
+          "title": "Buoyed weight",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-string-weighs",
+          "title": "What a string weighs",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-string-cannot-tell-you",
+          "title": "What a string cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-string-has-a-note",
+      "title": "The String Has a Note",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-natural-frequency",
+          "title": "Natural frequency",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-stepped-bar",
+          "title": "A stepped bar",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-the-note-matters",
+          "title": "Why the note matters",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-note-does-not-promise",
+          "title": "What the note does not promise",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-linkage",
+      "title": "The Linkage",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-four-bars-and-a-crank",
+          "title": "Four bars and a crank",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-stroke",
+          "title": "The stroke",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-position-and-velocity",
+          "title": "Position and velocity",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-geometry-decides",
+          "title": "What geometry decides",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-linkage-refuses",
+          "title": "What a linkage refuses",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-pump-itself",
+      "title": "The Pump Itself",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-fluid-load",
+          "title": "Fluid load",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-plunger-area",
+          "title": "Plunger area",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-rated-displacement",
+          "title": "Rated displacement",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-volume-per-stroke",
+          "title": "Volume per stroke",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-rating-is-not",
+          "title": "What a rating is not",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-string-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

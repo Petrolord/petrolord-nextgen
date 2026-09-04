@@ -115,6 +115,12 @@ export const PANELS = {
   'pd-column-explorer': React.lazy(() => import('@/components/course/panels/gaslift/ColumnExplorer')),
   'pd-valve-explorer': React.lazy(() => import('@/components/course/panels/gaslift/ValveExplorer')),
   'pd-unloading-explorer': React.lazy(() => import('@/components/course/panels/gaslift/UnloadingExplorer')),
+  'pd-string-explorer': React.lazy(() => import('@/components/course/panels/rodpump/StringExplorer')),
+  'pd-card-explorer': React.lazy(() => import('@/components/course/panels/rodpump/CardExplorer')),
+  'pd-balance-explorer': React.lazy(() => import('@/components/course/panels/rodpump/BalanceExplorer')),
+  'pd-droplet-explorer': React.lazy(() => import('@/components/course/panels/gaswell/DropletExplorer')),
+  'pd-profile-explorer': React.lazy(() => import('@/components/course/panels/gaswell/ProfileExplorer')),
+  'pd-remedy-explorer': React.lazy(() => import('@/components/course/panels/gaswell/RemedyExplorer')),
 
   // PD3 ESP Design
   'pd-stage-explorer': React.lazy(() => import('@/components/course/panels/esp/StageExplorer')),

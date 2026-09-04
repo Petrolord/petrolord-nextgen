@@ -44,6 +44,8 @@ import WellCostLearningPage from '@/pages/apps/WellCostLearningPage';
 import NodalLearningPage from '@/pages/apps/NodalLearningPage';
 import GasLiftLearningPage from '@/pages/apps/GasLiftLearningPage';
 import EspLearningPage from '@/pages/apps/EspLearningPage';
+import RodPumpLearningPage from '@/pages/apps/RodPumpLearningPage';
+import GasWellLearningPage from '@/pages/apps/GasWellLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
 import LessonPage from '@/pages/course/LessonPage';
@@ -342,6 +344,8 @@ const DashboardPage = () => {
     <Route path="apps/nodal" element={<NodalLearningPage />} />
     <Route path="apps/gaslift" element={<GasLiftLearningPage />} />
     <Route path="apps/esp" element={<EspLearningPage />} />
+    <Route path="apps/rodpump" element={<RodPumpLearningPage />} />
+    <Route path="apps/gaswell" element={<GasWellLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.
            Static segments (quiz/exam/capstone) rank above the :moduleKey
