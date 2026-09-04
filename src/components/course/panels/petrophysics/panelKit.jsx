@@ -28,12 +28,34 @@ export const NumField = ({ label, value, onChange, placeholder }) => (
   </div>
 );
 
+/**
+ * Accepts EITHER shape of option, because both are in use across the course
+ * panels and neither is wrong:
+ *   [['a', 'Alpha'], ['b', 'Beta']]        the array-pair form
+ *   [{ value: 'a', label: 'Alpha' }, ...]  the object form
+ *
+ * This used to destructure `([v, l])` only. Array-destructuring an object
+ * throws "object is not iterable", so every panel passing the object form
+ * crashed the moment its select rendered. Eight call sites across five panels
+ * were doing exactly that, in Drilling Hydraulics, Geomechanics and
+ * Perforation & Sand Control, and nothing caught it because no test rendered a
+ * panel. A shared component with two callers using two shapes has to accept
+ * both or reject one loudly; silently supporting the less common one was the
+ * bug.
+ */
+const optionPair = (o) => (Array.isArray(o)
+  ? [o[0], o[1] === undefined ? o[0] : o[1]]
+  : [o.value, o.label === undefined ? o.value : o.label]);
+
 export const SelectField = ({ label, value, onChange, options }) => (
   <div>
     <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
     <select value={value} onChange={(e) => onChange(e.target.value)}
       className="w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2">
-      {options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+      {(options || []).map((o) => {
+        const [v, l] = optionPair(o);
+        return <option key={v} value={v}>{l}</option>;
+      })}
     </select>
   </div>
 );
