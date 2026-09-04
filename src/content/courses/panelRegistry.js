@@ -100,6 +100,11 @@ export const PANELS = {
   'wi-envelope-explorer': React.lazy(() => import('@/components/course/panels/integrity/EnvelopeExplorer')),
   'wi-annulus-explorer': React.lazy(() => import('@/components/course/panels/integrity/AnnulusExplorer')),
   'wi-pa-explorer': React.lazy(() => import('@/components/course/panels/integrity/PaExplorer')),
+
+  // DR12 Well Cost and Time
+  'wc-time-explorer': React.lazy(() => import('@/components/course/panels/wellcost/TimeExplorer')),
+  'wc-afe-explorer': React.lazy(() => import('@/components/course/panels/wellcost/AfeExplorer')),
+  'wc-risk-explorer': React.lazy(() => import('@/components/course/panels/wellcost/RiskExplorer')),
 };
 
 export function resolvePanel(id) {

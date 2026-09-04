@@ -1,0 +1,305 @@
+{
+  "app_slug": "wellcost",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-an-afe-is-a-structure",
+      "title": "An AFE Is a Structure",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-an-afe-is-for",
+          "title": "What an AFE is for",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-line-items",
+          "title": "Line items",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-classifications-at-once",
+          "title": "Two classifications at once",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-engine-needs-from-you",
+          "title": "What the engine needs from you",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-three-cost-bases",
+      "title": "The Three Cost Bases",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-per-day",
+          "title": "Per day",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-per-metre",
+          "title": "Per metre",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-lump",
+          "title": "Lump",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-which-basis-fits-which-line",
+          "title": "Which basis fits which line",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-basis-chosen-wrong",
+          "title": "A basis chosen wrong",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-tangible-and-intangible",
+      "title": "Tangible and Intangible",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-split",
+          "title": "The split",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-decides-which",
+          "title": "What decides which",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-anyone-cares",
+          "title": "Why anyone cares",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reading-a-sorted-afe",
+          "title": "Reading a sorted AFE",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-split-is-not-a-quality-judgement",
+          "title": "The split is not a quality judgement",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-contingency",
+      "title": "Contingency",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-provision-not-a-cost",
+          "title": "A provision, not a cost",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-where-it-sits",
+          "title": "Where it sits",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-provision-can-outrank-a-contract",
+          "title": "A provision can outrank a contract",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-percentage-actually-buys",
+          "title": "What a percentage actually buys",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-cost-per-metre",
+      "title": "Cost Per Metre",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-form",
+          "title": "The form",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-hours-it-needs",
+          "title": "The hours it needs",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-interval-it-divides-by",
+          "title": "The interval it divides by",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-inversion",
+          "title": "The inversion",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-it-is-good-for",
+          "title": "What it is good for",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wc-afe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
