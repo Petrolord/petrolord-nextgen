@@ -1,0 +1,295 @@
+{
+  "app_slug": "wellcost",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-this-course-decides",
+      "title": "What This Course Decides",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-time-is-the-cost",
+          "title": "Time is the cost",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses",
+          "title": "What it refuses",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-currencies",
+          "title": "Two currencies",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-activity",
+      "title": "The Activity",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-programme-is-a-list-of-activities",
+          "title": "A programme is a list of activities",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-four-kinds",
+          "title": "The four kinds",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-each-kind-needs",
+          "title": "What each kind needs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-flat-activity",
+          "title": "The flat activity",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-an-activity-does-not-carry",
+          "title": "What an activity does not carry",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-closed-forms",
+      "title": "The Closed Forms",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-drilling-is-interval-over-rate",
+          "title": "Drilling is interval over rate",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-tripping-is-twice-the-depth",
+          "title": "Tripping is twice the depth",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-running-casing-is-both",
+          "title": "Running casing is both",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-why-closed-forms-at-all",
+          "title": "Why closed forms at all",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-forms-leave-out",
+          "title": "What the forms leave out",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-productive-and-non-productive",
+      "title": "Productive and Non-Productive",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-split",
+          "title": "The split",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-counts-as-npt",
+          "title": "What counts as NPT",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-trouble-time-and-the-allowance",
+          "title": "Trouble time and the allowance",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-bit-is-rarely-turning",
+          "title": "The bit is rarely turning",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-why-the-distinction-earns-its-keep",
+          "title": "Why the distinction earns its keep",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-rolling-up-a-programme",
+      "title": "Rolling Up a Programme",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-hours-into-days",
+          "title": "Hours into days",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-drilled-metres",
+          "title": "Drilled metres",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-reading-a-schedule",
+          "title": "Reading a schedule",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-numbers-that-travel",
+          "title": "The numbers that travel",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wc-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

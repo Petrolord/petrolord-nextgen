@@ -1,0 +1,301 @@
+{
+  "app_slug": "wellcost",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-cost-time-curve",
+      "title": "The Cost Time Curve",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-the-curve-shows",
+          "title": "What the curve shows",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-how-it-is-built",
+          "title": "How it is built",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-reading-a-checkpoint",
+          "title": "Reading a checkpoint",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-curve-against-the-plan",
+          "title": "The curve against the plan",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-endpoint-identity",
+      "title": "The Endpoint Identity",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-where-the-curve-ends",
+          "title": "Where the curve ends",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-contingency-does-not-accrue",
+          "title": "Contingency does not accrue",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-that-is-the-right-choice",
+          "title": "Why that is the right choice",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-an-identity-worth-checking",
+          "title": "An identity worth checking",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-uncertainty",
+      "title": "Uncertainty",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-what-actually-varies",
+          "title": "What actually varies",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-rate-of-penetration-dominates",
+          "title": "Rate of penetration dominates",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-choosing-a-distribution",
+          "title": "Choosing a distribution",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-correlation",
+          "title": "Correlation",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-canonical-sampler",
+          "title": "The canonical sampler",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-why-convexity-bites",
+      "title": "Why Convexity Bites",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-time-goes-as-one-over-rate",
+          "title": "Time goes as one over rate",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-mean-moves-up",
+          "title": "The mean moves up",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-no-closed-form-to-fall-back-on",
+          "title": "No closed form to fall back on",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-why-you-have-to-sample",
+          "title": "Why you have to sample",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-seed-is-part-of-the-answer",
+          "title": "A seed is part of the answer",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-reading-a-risked-result",
+      "title": "Reading a Risked Result",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-percentiles",
+          "title": "Percentiles",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-convention-trap",
+          "title": "The convention trap",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-the-base-case-sits",
+          "title": "Where the base case sits",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-contingency-percentage-buys",
+          "title": "What a contingency percentage buys",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-risked-run-cannot-tell-you",
+          "title": "What the risked run cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
