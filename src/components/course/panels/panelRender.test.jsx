@@ -60,6 +60,12 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('intervention/ChannelExplorer.jsx');
     expect(names).toContain('intervention/CandidateExplorer.jsx');
   });
+  it('finds the PD9 production surveillance panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('surveillance/LedgerExplorer.jsx');
+    expect(names).toContain('surveillance/ExceptionExplorer.jsx');
+    expect(names).toContain('surveillance/ReadingExplorer.jsx');
+  });
   for (const [path, load] of entries) {
     it(path.split('/panels/')[1], async () => {
       const mod = await load();

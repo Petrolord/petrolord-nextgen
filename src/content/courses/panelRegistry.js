@@ -141,6 +141,11 @@ export const PANELS = {
   'pd-diagnostic-explorer': React.lazy(() => import('@/components/course/panels/intervention/DiagnosticExplorer')),
   'pd-channel-explorer': React.lazy(() => import('@/components/course/panels/intervention/ChannelExplorer')),
   'pd-candidate-explorer': React.lazy(() => import('@/components/course/panels/intervention/CandidateExplorer')),
+
+  // PD9 Production Surveillance
+  'pd-ledger-explorer': React.lazy(() => import('@/components/course/panels/surveillance/LedgerExplorer')),
+  'pd-exception-explorer': React.lazy(() => import('@/components/course/panels/surveillance/ExceptionExplorer')),
+  'pd-reading-explorer': React.lazy(() => import('@/components/course/panels/surveillance/ReadingExplorer')),
 };
 
 export function resolvePanel(id) {

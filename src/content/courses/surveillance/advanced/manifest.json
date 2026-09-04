@@ -1,0 +1,305 @@
+{
+  "app_slug": "surveillance",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-one-ratio-read-two-ways",
+      "title": "One Ratio Read Two Ways",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-mean-of-ratios-and-a-ratio-of-sums",
+          "title": "A mean of ratios and a ratio of sums",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-where-the-two-agree",
+          "title": "Where the two agree",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-makes-them-diverge",
+          "title": "What makes them diverge",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-severity-that-changes-with-the-reading",
+          "title": "A severity that changes with the reading",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-neither-reading-is-wrong",
+          "title": "Neither reading is wrong",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-column-that-is-never-read",
+      "title": "The Column That Is Never Read",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-computed-on-every-row",
+          "title": "Computed on every row",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-rate-key-the-engine-picks",
+          "title": "The rate key the engine picks",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-well-that-did-not-change",
+          "title": "A well that did not change",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-exception-that-would-have-explained-it",
+          "title": "The exception that would have explained it",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-period-row-does-not-say",
+          "title": "What a period row does not say",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-spellings-of-nothing",
+      "title": "The Spellings of Nothing",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-four-modules-four-conventions",
+          "title": "Four modules, four conventions",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-number-that-arrived-as-text",
+          "title": "A number that arrived as text",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-an-absent-row-and-a-full-share",
+          "title": "An absent row and a full share",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-missing-exponent-read-as-zero",
+          "title": "A missing exponent read as zero",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-default-decides",
+          "title": "What a default decides",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-guards-in-the-wrong-place",
+      "title": "Guards in the Wrong Place",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-gate-on-two-checks-of-three",
+          "title": "A gate on two checks of three",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-clause-that-can-never-fire",
+          "title": "A clause that can never fire",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-limit-that-turns-itself-off",
+          "title": "A limit that turns itself off",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-refusal-that-names-another-number",
+          "title": "A refusal that names another number",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-guard-that-passes-what-it-cannot-read",
+          "title": "A guard that passes what it cannot read",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-one-rate-two-phases",
+      "title": "One Rate, Two Phases",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-handoff-between-two-halves",
+          "title": "The handoff between two halves",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-where-the-screening-scores-move",
+          "title": "Where the screening scores move",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-checklist-is-not-a-calculation",
+          "title": "A checklist is not a calculation",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-reading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
