@@ -1,0 +1,305 @@
+{
+  "app_slug": "surveillance",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-two-windows-on-one-well",
+      "title": "Two Windows on One Well",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-a-well-is-compared-to-itself",
+          "title": "Why a well is compared to itself",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-where-the-windows-start-and-end",
+          "title": "Where the windows start and end",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-anchored-on-the-data",
+          "title": "Anchored on the data",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-widening-for-a-coarse-ledger",
+          "title": "Widening for a coarse ledger",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-window-assumes",
+          "title": "What a window assumes",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-seven-exceptions",
+      "title": "The Seven Exceptions",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-drop-and-a-stop",
+          "title": "A drop and a stop",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-two-ratio-triggers",
+          "title": "The two ratio triggers",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-downtime-and-stale-data",
+          "title": "Downtime and stale data",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-how-a-severity-is-assigned",
+          "title": "How a severity is assigned",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-a-surveillance-list",
+          "title": "Reading a surveillance list",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-test-that-carries-a-well",
+      "title": "The Test That Carries a Well",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-which-test-is-in-force",
+          "title": "Which test is in force",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-ageing-a-test-out",
+          "title": "Ageing a test out",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-qc-checks",
+          "title": "What the QC checks",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-qc-decides",
+          "title": "What the QC decides",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-one-meter-many-wells",
+      "title": "One Meter, Many Wells",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-why-an-allocation-is-not-a-measurement",
+          "title": "Why an allocation is not a measurement",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-theoretical-rate-and-uptime",
+          "title": "Theoretical rate and uptime",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-factor-is-the-output",
+          "title": "The factor is the output",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-closure-and-what-it-proves",
+          "title": "Closure and what it proves",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-monthly-factors-and-the-write-back",
+          "title": "Monthly factors and the write-back",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-what-the-meter-and-the-model-say",
+      "title": "What the Meter and the Model Say",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-imbalance-an-engineer-chases",
+          "title": "The imbalance an engineer chases",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-checking-a-test-against-its-well",
+          "title": "Checking a test against its well",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-deferments-and-the-loss-book",
+          "title": "Deferments and the loss book",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-diagnostic-is-for",
+          "title": "What a diagnostic is for",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-exception-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

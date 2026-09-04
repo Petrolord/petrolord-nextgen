@@ -46,6 +46,10 @@ import GasLiftLearningPage from '@/pages/apps/GasLiftLearningPage';
 import EspLearningPage from '@/pages/apps/EspLearningPage';
 import RodPumpLearningPage from '@/pages/apps/RodPumpLearningPage';
 import GasWellLearningPage from '@/pages/apps/GasWellLearningPage';
+import FlowAssuranceLearningPage from '@/pages/apps/FlowAssuranceLearningPage';
+import NetworkLearningPage from '@/pages/apps/NetworkLearningPage';
+import InterventionLearningPage from '@/pages/apps/InterventionLearningPage';
+import SurveillanceLearningPage from '@/pages/apps/SurveillanceLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
 import LessonPage from '@/pages/course/LessonPage';
@@ -346,6 +350,10 @@ const DashboardPage = () => {
     <Route path="apps/esp" element={<EspLearningPage />} />
     <Route path="apps/rodpump" element={<RodPumpLearningPage />} />
     <Route path="apps/gaswell" element={<GasWellLearningPage />} />
+    <Route path="apps/flowassurance" element={<FlowAssuranceLearningPage />} />
+    <Route path="apps/network" element={<NetworkLearningPage />} />
+    <Route path="apps/intervention" element={<InterventionLearningPage />} />
+    <Route path="apps/surveillance" element={<SurveillanceLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.
            Static segments (quiz/exam/capstone) rank above the :moduleKey

@@ -1,0 +1,305 @@
+{
+  "app_slug": "intervention",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-late-window",
+      "title": "The Late Window",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-the-reading-is-late",
+          "title": "Why the reading is late",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-window-as-a-fraction",
+          "title": "The window as a fraction",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-the-window-starts",
+          "title": "Where the window starts",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-dial-is-clamped",
+          "title": "The dial is clamped",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-window-assumes",
+          "title": "What a window assumes",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-diagnosis",
+      "title": "The Diagnosis",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-two-fits-from-one-call",
+          "title": "Two fits from one call",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-derivative-slope-decides",
+          "title": "The derivative slope decides",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-ambiguous-band",
+          "title": "The ambiguous band",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-how-confidence-is-assigned",
+          "title": "How confidence is assigned",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-verdict-rests-on",
+          "title": "What the verdict rests on",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-what-removing-skin-is-worth",
+      "title": "What Removing Skin Is Worth",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-ratio-of-two-groups",
+          "title": "A ratio of two groups",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-a-stimulation-buys",
+          "title": "What a stimulation buys",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-auditing-a-claimed-uplift",
+          "title": "Auditing a claimed uplift",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-multiplier-refuses",
+          "title": "What the multiplier refuses",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-water-gate",
+      "title": "The Water Gate",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-seven-treatments-one-well",
+          "title": "Seven treatments, one well",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-water-cut-gate",
+          "title": "The water cut gate",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-mechanism-gate",
+          "title": "The mechanism gate",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-blocked-against-no",
+          "title": "Blocked against no",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-block-reason-says",
+          "title": "What a block reason says",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-gas-side",
+      "title": "The Gas Side",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-gas-oil-ratio-gate",
+          "title": "The gas-oil ratio gate",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-measured-against-an-expectation",
+          "title": "Measured against an expectation",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-instruction-it-ends-on",
+          "title": "The instruction it ends on",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-screening-never-checks",
+          "title": "What the screening never checks",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-channel-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

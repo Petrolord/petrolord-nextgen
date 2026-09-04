@@ -1,0 +1,299 @@
+{
+  "app_slug": "intervention",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-well-that-makes-water",
+      "title": "A Well That Makes Water",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-a-ratio-history-is-a-plot",
+          "title": "Why a ratio history is a plot",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses",
+          "title": "What it refuses",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-five-functions-and-one-idea",
+          "title": "Five functions and one idea",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-straight-line",
+      "title": "The Straight Line",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-least-squares-in-log-space",
+          "title": "Least squares in log space",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-slope",
+          "title": "The slope",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-intercept",
+          "title": "The intercept",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-exact-on-a-power-law",
+          "title": "Exact on a power law",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-slope-does-not-carry",
+          "title": "What a slope does not carry",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-reading-the-fit",
+      "title": "Reading the Fit",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-r-squared-is-about-the-fit",
+          "title": "R squared is about the fit",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-span-in-log-cycles",
+          "title": "The span in log cycles",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-how-many-points-the-fit-used",
+          "title": "How many points the fit used",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-clean-fit-does-not-prove",
+          "title": "What a clean fit does not prove",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-geometry-group",
+      "title": "The Geometry Group",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-one-group-decides-the-value",
+          "title": "One group decides the value",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-drainage-radius-is-a-guess",
+          "title": "A drainage radius is a guess",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-skin-adds-undivided",
+          "title": "Skin adds undivided",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-floor-a-geometry-allows",
+          "title": "The floor a geometry allows",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-two-failure-contracts",
+          "title": "Two failure contracts",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-four-pictures",
+      "title": "Four Pictures",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-channelling-against-coning",
+          "title": "Channelling against coning",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-displacement-and-not-determined",
+          "title": "Displacement and not determined",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-thresholds-are-boundaries",
+          "title": "The thresholds are boundaries",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-treatable-and-not",
+          "title": "Treatable and not",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-label-is-not",
+          "title": "What a label is not",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-diagnostic-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "app_slug": "flowassurance",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-steady-state",
+      "title": "Steady State",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-energy-balance",
+          "title": "The energy balance",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-relaxation-length",
+          "title": "The relaxation length",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-arrival-temperature",
+          "title": "The arrival temperature",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-number-of-transfer-units",
+          "title": "Number of transfer units",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-steady-state-assumes",
+          "title": "What steady state assumes",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-designing-to-a-target",
+      "title": "Designing to a Target",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-inverting-the-balance",
+          "title": "Inverting the balance",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-u-you-need",
+          "title": "The U you need",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-target-costs",
+          "title": "What a target costs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-inverse-refuses",
+          "title": "What the inverse refuses",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-cooldown",
+      "title": "Cooldown",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-when-the-flow-stops",
+          "title": "When the flow stops",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-time-constant",
+          "title": "The time constant",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-no-touch-time",
+          "title": "The no touch time",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-mass-the-cooldown-uses",
+          "title": "The mass the cooldown uses",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-cooldown-assumes",
+          "title": "What a cooldown assumes",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-margin",
+      "title": "The Margin",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-how-close-is-close",
+          "title": "How close is close",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-reading-a-margin",
+          "title": "Reading a margin",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-moves-it",
+          "title": "What moves it",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-margin-does-not-promise",
+          "title": "What a margin does not promise",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-whole-line",
+      "title": "The Whole Line",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-one-number-for-a-whole-line",
+          "title": "One number for a whole line",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-where-the-line-is-coldest",
+          "title": "Where the line is coldest",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-profiles-against-endpoints",
+          "title": "Profiles against endpoints",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-single-arrival-hides",
+          "title": "What a single arrival hides",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-profile-refuses",
+          "title": "What the profile refuses",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-line-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

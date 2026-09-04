@@ -1,0 +1,303 @@
+{
+  "app_slug": "surveillance",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-ledger-and-a-question",
+      "title": "A Ledger and a Question",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-surveillance-is-for",
+          "title": "What surveillance is for",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-four-modules-and-one-idea",
+          "title": "Four modules and one idea",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-row-holds",
+          "title": "What a row holds",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-these-engines-refuse",
+          "title": "What these engines refuse",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-producing-day-rate",
+      "title": "The Producing-Day Rate",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-volume-is-not-a-rate",
+          "title": "A volume is not a rate",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-scaling-to-twenty-four-hours",
+          "title": "Scaling to twenty-four hours",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-zero-hours-is-a-refusal",
+          "title": "Zero hours is a refusal",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-hours-that-are-not-a-number",
+          "title": "Hours that are not a number",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-rate-does-not-say",
+          "title": "What the rate does not say",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-ratios-a-row-carries",
+      "title": "The Ratios a Row Carries",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-watercut-is-a-fraction-of-liquid",
+          "title": "Watercut is a fraction of liquid",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-gas-oil-ratio-is-per-barrel-of-oil",
+          "title": "The gas-oil ratio is per barrel of oil",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-each-ratio-refuses",
+          "title": "Where each ratio refuses",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-ratio-is-a-reading-of-a-period",
+          "title": "A ratio is a reading of a period",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-from-rows-to-a-field",
+      "title": "From Rows to a Field",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-grouping-a-ledger-by-well",
+          "title": "Grouping a ledger by well",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-field-day",
+          "title": "The field day",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-counts-as-a-well-on-stream",
+          "title": "What counts as a well on stream",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-cadence-and-the-moving-average",
+          "title": "Cadence and the moving average",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-decimator-and-its-cap",
+          "title": "The decimator and its cap",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-field-kpis",
+      "title": "The Field KPIs",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-trailing-window-of-days",
+          "title": "A trailing window of days",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-mean-rates-and-the-ratios-of-means",
+          "title": "Mean rates and the ratios of means",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-uptime-and-who-is-in-it",
+          "title": "Uptime and who is in it",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-counts-and-what-they-count",
+          "title": "Two counts and what they count",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-kpi-cannot-tell-you",
+          "title": "What a KPI cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

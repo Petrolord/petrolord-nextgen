@@ -42,6 +42,30 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('rodpump/CardExplorer.jsx');
     expect(names).toContain('rodpump/BalanceExplorer.jsx');
   });
+  it('finds the PD6 flow assurance panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('flowassurance/ThermalExplorer.jsx');
+    expect(names).toContain('flowassurance/LineExplorer.jsx');
+    expect(names).toContain('flowassurance/HydrateExplorer.jsx');
+  });
+  it('finds the PD7 network panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('network/TrunkExplorer.jsx');
+    expect(names).toContain('network/NetworkExplorer.jsx');
+    expect(names).toContain('network/FightExplorer.jsx');
+  });
+  it('finds the PD8 intervention panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('intervention/DiagnosticExplorer.jsx');
+    expect(names).toContain('intervention/ChannelExplorer.jsx');
+    expect(names).toContain('intervention/CandidateExplorer.jsx');
+  });
+  it('finds the PD9 production surveillance panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('surveillance/LedgerExplorer.jsx');
+    expect(names).toContain('surveillance/ExceptionExplorer.jsx');
+    expect(names).toContain('surveillance/ReadingExplorer.jsx');
+  });
   for (const [path, load] of entries) {
     it(path.split('/panels/')[1], async () => {
       const mod = await load();
