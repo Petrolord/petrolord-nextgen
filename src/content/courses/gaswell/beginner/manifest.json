@@ -1,0 +1,299 @@
+{
+  "app_slug": "gaswell",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-well-that-drowns",
+      "title": "A Well That Drowns",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-a-gas-well-loads-up",
+          "title": "Why a gas well loads up",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses",
+          "title": "What it refuses",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-droplet-picture",
+          "title": "The droplet picture",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-gas-at-a-station",
+      "title": "Gas at a Station",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-z-at-pressure-and-temperature",
+          "title": "z at pressure and temperature",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-gas-density",
+          "title": "Gas density",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-density-decides",
+          "title": "What density decides",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reading-one-station",
+          "title": "Reading one station",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-one-station-cannot-tell-you",
+          "title": "What one station cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-droplet-balance",
+      "title": "The Droplet Balance",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-drag-against-weight",
+          "title": "Drag against weight",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-terminal-velocity",
+          "title": "Terminal velocity",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-surface-tension-and-density",
+          "title": "Surface tension and density",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-brine-against-condensate",
+          "title": "Brine against condensate",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-balance-assumes",
+          "title": "What the balance assumes",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-critical-velocity-and-rate",
+      "title": "Critical Velocity and Rate",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-from-velocity-to-rate",
+          "title": "From velocity to rate",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-flow-area",
+          "title": "Flow area",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-critical-rate",
+          "title": "The critical rate",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-actual-velocity",
+          "title": "The actual velocity",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-ratio-that-decides",
+          "title": "The ratio that decides",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-two-correlations",
+      "title": "Two Correlations",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-turner-and-coleman",
+          "title": "Turner and Coleman",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-twenty-percent",
+          "title": "The twenty percent",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-which-one-and-where",
+          "title": "Which one and where",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-correlation-is-not",
+          "title": "What a correlation is not",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-droplet-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

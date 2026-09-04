@@ -1,0 +1,305 @@
+{
+  "app_slug": "gaswell",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-well-is-not-a-station",
+      "title": "A Well Is Not a Station",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-traverse",
+          "title": "The traverse",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-profile-down-the-hole",
+          "title": "The profile down the hole",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-loading-starts",
+          "title": "Where loading starts",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-controlling-station",
+          "title": "The controlling station",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-profile-refuses",
+          "title": "What a profile refuses",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-reading-a-loaded-well",
+      "title": "Reading a Loaded Well",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-margin",
+          "title": "The margin",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-loaded-flag",
+          "title": "The loaded flag",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-the-crossing-sits",
+          "title": "Where the crossing sits",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-verdict-costs",
+          "title": "What a verdict costs",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-sizing-the-tubing",
+      "title": "Sizing the Tubing",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-velocity-string",
+          "title": "A velocity string",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-candidates-and-the-pick",
+          "title": "Candidates and the pick",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-sizing-optimises",
+          "title": "What the sizing optimises",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-station-the-sizing-was-given",
+          "title": "The station the sizing was given",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-sizing-cannot-fix",
+          "title": "What sizing cannot fix",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-plunger",
+      "title": "The Plunger",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-a-plunger-does",
+          "title": "What a plunger does",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-lift-pressure",
+          "title": "The lift pressure",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-gas-requirement",
+          "title": "The gas requirement",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-screen-and-its-verdict",
+          "title": "The screen and its verdict",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-screen-does-not-check",
+          "title": "What the screen does not check",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-choosing-a-remedy",
+      "title": "Choosing a Remedy",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-four-remedies-one-problem",
+          "title": "Four remedies, one problem",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-each-one-buys",
+          "title": "What each one buys",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-each-one-costs",
+          "title": "What each one costs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-engine-will-not-choose",
+          "title": "What the engine will not choose",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-profile-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
