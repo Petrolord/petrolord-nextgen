@@ -33,6 +33,15 @@ describe('every course panel renders with no props', () => {
   it('finds the panels', () => {
     expect(entries.length).toBeGreaterThan(70);
   });
+
+  // Named rather than left to the glob, so a panel that is renamed, moved or
+  // deleted fails here instead of quietly dropping out of the sweep.
+  it('finds the PD4 rod pump panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('rodpump/StringExplorer.jsx');
+    expect(names).toContain('rodpump/CardExplorer.jsx');
+    expect(names).toContain('rodpump/BalanceExplorer.jsx');
+  });
   for (const [path, load] of entries) {
     it(path.split('/panels/')[1], async () => {
       const mod = await load();

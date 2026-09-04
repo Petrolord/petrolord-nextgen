@@ -1,0 +1,305 @@
+{
+  "app_slug": "rodpump",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-card-is-the-design",
+      "title": "The Card Is the Design",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-a-dynamometer-card-is",
+          "title": "What a dynamometer card is",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-wave-in-a-rod-string",
+          "title": "A wave in a rod string",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-march-computes",
+          "title": "What the march computes",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-card-asserts",
+          "title": "What a card asserts",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-stretch",
+      "title": "Stretch",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-static-stretch",
+          "title": "Static stretch",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-spring-rule",
+          "title": "The spring rule",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-overtravel",
+          "title": "Overtravel",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-size-of-the-disagreement",
+          "title": "The size of the disagreement",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-which-one-is-the-stroke",
+          "title": "Which one is the stroke",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-loads",
+      "title": "The Loads",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-peak-polished-rod-load",
+          "title": "Peak polished rod load",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-minimum-polished-rod-load",
+          "title": "Minimum polished rod load",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-load-range",
+          "title": "The load range",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-moves-the-loads",
+          "title": "What moves the loads",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-load-is-measured-against",
+          "title": "What a load is measured against",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-power",
+      "title": "Power",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-polished-rod-horsepower",
+          "title": "Polished rod horsepower",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-card-area",
+          "title": "The card area",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-power-costs",
+          "title": "What power costs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-power-does-not-include",
+          "title": "What power does not include",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-what-the-well-makes",
+      "title": "What the Well Makes",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-fillage",
+          "title": "Fillage",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-displacement-against-production",
+          "title": "Displacement against production",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-cliff-in-the-code",
+          "title": "A cliff in the code",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-effective-factor",
+          "title": "The effective factor",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-production-cannot-be-read-from",
+          "title": "What production cannot be read from",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-card-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

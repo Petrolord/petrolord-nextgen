@@ -1,0 +1,305 @@
+{
+  "app_slug": "rodpump",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-envelope-and-the-subsample",
+      "title": "The Envelope and the Subsample",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-the-march-accumulates",
+          "title": "What the march accumulates",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-card-is-decimated",
+          "title": "The card is decimated",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-loads-from-one-object",
+          "title": "Two loads from one object",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-subsample-costs",
+          "title": "What the subsample costs",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-which-check-reads-which",
+          "title": "Which check reads which",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-convergence",
+      "title": "Convergence",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-nodes-and-steps",
+          "title": "Nodes and steps",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-converges-and-what-does-not",
+          "title": "What converges and what does not",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-periodicity-flag",
+          "title": "The periodicity flag",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-smaller-than-the-noise",
+          "title": "Smaller than the noise",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-sweep-cannot-resolve",
+          "title": "What a sweep cannot resolve",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-counterbalance",
+      "title": "The Counterbalance",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-what-a-counterbalance-does",
+          "title": "What a counterbalance does",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-moment",
+          "title": "The moment",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-peak-torque",
+          "title": "Peak torque",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-balance-asserts",
+          "title": "What the balance asserts",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-inputs-that-do-nothing",
+      "title": "Inputs That Do Nothing",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-three-inputs-never-read",
+          "title": "Three inputs never read",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-proving-it-by-strict-equality",
+          "title": "Proving it by strict equality",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-fails-open-looks-like",
+          "title": "What a fails-open looks like",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-caller-may-assume",
+          "title": "What a caller may assume",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-stress-and-diagnosis",
+      "title": "Stress and Diagnosis",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-modified-goodman-line",
+          "title": "The modified Goodman line",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-service-factor-is-a-judgement",
+          "title": "A service factor is a judgement",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-reading-a-measured-card",
+          "title": "Reading a measured card",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-diagnostic-against-the-design",
+          "title": "The diagnostic against the design",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-diagnosis-cannot-tell-you",
+          "title": "What a diagnosis cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-balance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
