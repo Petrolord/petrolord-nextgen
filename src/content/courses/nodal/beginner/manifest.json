@@ -1,0 +1,299 @@
+{
+  "app_slug": "nodal",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-well-can-deliver",
+      "title": "What a Well Can Deliver",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-two-halves-of-one-question",
+          "title": "Two halves of one question",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses",
+          "title": "What it refuses",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-pressure-is-the-currency",
+          "title": "Pressure is the currency",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-straight-line",
+      "title": "The Straight Line",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-productivity-index",
+          "title": "Productivity index",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-when-a-line-is-honest",
+          "title": "When a line is honest",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-calibrating-from-one-test",
+          "title": "Calibrating from one test",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-drawdown",
+          "title": "Drawdown",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-where-the-line-breaks",
+          "title": "Where the line breaks",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-below-the-bubble-point",
+      "title": "Below the Bubble Point",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-why-the-curve-bends",
+          "title": "Why the curve bends",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-vogel",
+          "title": "Vogel",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-composite-ipr",
+          "title": "The composite IPR",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-join-at-the-bubble-point",
+          "title": "The join at the bubble point",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-choosing-a-model",
+          "title": "Choosing a model",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-reading-the-curve-both-ways",
+      "title": "Reading the Curve Both Ways",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-rate-from-a-pressure",
+          "title": "Rate from a pressure",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-pressure-from-a-rate",
+          "title": "Pressure from a rate",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-the-inverse-needs-a-root-find",
+          "title": "Why the inverse needs a root find",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-sampling-and-what-it-costs",
+          "title": "Sampling and what it costs",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-reading-cannot-tell-you",
+          "title": "What a reading cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-absolute-open-flow",
+      "title": "Absolute Open Flow",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-aof-is",
+          "title": "What AOF is",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-aof-is-not",
+          "title": "What AOF is not",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-comparing-wells-with-it",
+          "title": "Comparing wells with it",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-numbers-that-travel",
+          "title": "The numbers that travel",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-ipr-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
