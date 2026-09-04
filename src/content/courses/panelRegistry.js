@@ -92,6 +92,9 @@ export const PANELS = {
   'ps-shot-explorer': React.lazy(() => import('@/components/course/panels/perfsand/ShotExplorer')),
   'ps-skin-explorer': React.lazy(() => import('@/components/course/panels/perfsand/SkinExplorer')),
   'ps-sand-explorer': React.lazy(() => import('@/components/course/panels/perfsand/SandExplorer')),
+  'st-acid-explorer': React.lazy(() => import('@/components/course/panels/stimulation/AcidExplorer')),
+  'st-frac-explorer': React.lazy(() => import('@/components/course/panels/stimulation/FracExplorer')),
+  'st-pack-explorer': React.lazy(() => import('@/components/course/panels/stimulation/PackExplorer')),
 };
 
 export function resolvePanel(id) {

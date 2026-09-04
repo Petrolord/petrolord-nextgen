@@ -1,0 +1,297 @@
+{
+  "app_slug": "stimulation",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-fracture-is-a-pressure-problem",
+      "title": "A Fracture Is a Pressure Problem",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-net-pressure-is",
+          "title": "What net pressure is",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-closure-stress",
+          "title": "Closure stress",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-plane-strain-modulus",
+          "title": "The plane strain modulus",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-why-e-prime-and-not-e",
+          "title": "Why E prime and not E",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-two-two-dimensional-models",
+      "title": "Two Two-Dimensional Models",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-pkn",
+          "title": "PKN",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-kgd",
+          "title": "KGD",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-which-one-and-when",
+          "title": "Which one, and when",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-widths-they-give",
+          "title": "The widths they give",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-choosing-wrong",
+          "title": "Choosing wrong",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-width-net-pressure-and-height",
+      "title": "Width, Net Pressure and Height",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-max-width-and-average-width",
+          "title": "Max width and average width",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-quarter-power",
+          "title": "The quarter power",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-net-pressure-from-width",
+          "title": "Net pressure from width",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-height-is-an-assumption",
+          "title": "Height is an assumption",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-contained-height-fiction",
+          "title": "The contained height fiction",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-material-balance",
+      "title": "Material Balance",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-carter-leakoff",
+          "title": "Carter leakoff",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-nolte-factor",
+          "title": "The Nolte factor",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-efficiency",
+          "title": "Efficiency",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-pump-time",
+          "title": "Pump time",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-fixed-point-not-a-formula",
+          "title": "A fixed point, not a formula",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-where-the-models-stop",
+      "title": "Where the Models Stop",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-two-dimensions-is-a-fiction",
+          "title": "Two dimensions is a fiction",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-no-height-growth",
+          "title": "No height growth",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-no-tip-effects",
+          "title": "No tip effects",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-no-proppant-transport",
+          "title": "No proppant transport",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "st-frac-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
