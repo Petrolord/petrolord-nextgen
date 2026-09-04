@@ -42,6 +42,7 @@ import StimulationLearningPage from '@/pages/apps/StimulationLearningPage';
 import IntegrityLearningPage from '@/pages/apps/IntegrityLearningPage';
 import WellCostLearningPage from '@/pages/apps/WellCostLearningPage';
 import NodalLearningPage from '@/pages/apps/NodalLearningPage';
+import GasLiftLearningPage from '@/pages/apps/GasLiftLearningPage';
 import EspLearningPage from '@/pages/apps/EspLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
@@ -339,6 +340,7 @@ const DashboardPage = () => {
     <Route path="apps/integrity" element={<IntegrityLearningPage />} />
     <Route path="apps/wellcost" element={<WellCostLearningPage />} />
     <Route path="apps/nodal" element={<NodalLearningPage />} />
+    <Route path="apps/gaslift" element={<GasLiftLearningPage />} />
     <Route path="apps/esp" element={<EspLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.

@@ -1,0 +1,305 @@
+{
+  "app_slug": "gaslift",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-spacing-is-a-recursion",
+      "title": "Spacing Is a Recursion",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-one-valve-at-a-time",
+          "title": "One valve at a time",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-surface-decrement",
+          "title": "The surface decrement",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-transfer-differential",
+          "title": "The transfer differential",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-conventions-one-recursion",
+          "title": "Two conventions, one recursion",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-where-spacing-stops",
+          "title": "Where spacing stops",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-valve-itself",
+      "title": "The Valve Itself",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-dome-bellows-and-port",
+          "title": "Dome, bellows and port",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-port-to-bellows-ratio",
+          "title": "The port to bellows ratio",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-dome-is-a-thermometer",
+          "title": "A dome is a thermometer",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-test-rack-opening",
+          "title": "The test rack opening",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-setting-a-string",
+      "title": "Setting a String",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-from-dome-to-test-rack",
+          "title": "From dome to test rack",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-ipo-and-ppo",
+          "title": "IPO and PPO",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-setting-asserts",
+          "title": "What a setting asserts",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-closing-test",
+          "title": "The closing test",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-string-is-not-a-valve",
+          "title": "A string is not a valve",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-spread",
+      "title": "Spread",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-spread-is",
+          "title": "What spread is",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-why-spread-decides-things",
+          "title": "Why spread decides things",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-reading-a-spread",
+          "title": "Reading a spread",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-spread-does-not-promise",
+          "title": "What spread does not promise",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-throughput",
+      "title": "Throughput",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-valve-is-an-orifice",
+          "title": "A valve is an orifice",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-critical-flow",
+          "title": "Critical flow",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-thornhill-and-craver",
+          "title": "Thornhill and Craver",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-selecting-a-port",
+          "title": "Selecting a port",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-throughput-cannot-tell-you",
+          "title": "What throughput cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-valve-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

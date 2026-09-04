@@ -1,0 +1,299 @@
+{
+  "app_slug": "gaslift",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-well-full-of-kill-fluid",
+      "title": "A Well Full of Kill Fluid",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-a-well-needs-lifting",
+          "title": "Why a well needs lifting",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses",
+          "title": "What it refuses",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-continuous-and-intermittent",
+          "title": "Continuous and intermittent",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-injection-line",
+      "title": "The Injection Line",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-gas-has-weight",
+          "title": "Gas has weight",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-z-at-pressure-and-temperature",
+          "title": "z at pressure and temperature",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-gradient-is-not-a-constant",
+          "title": "The gradient is not a constant",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-marching-down-the-annulus",
+          "title": "Marching down the annulus",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-marching-back-up",
+          "title": "Marching back up",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-three-lines-on-one-plot",
+      "title": "Three Lines on One Plot",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-unloading-line",
+          "title": "The unloading line",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-transfer-line",
+          "title": "The transfer line",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-the-lines-cross",
+          "title": "Where the lines cross",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-straight-line-assumes",
+          "title": "What a straight line assumes",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-top-valve",
+      "title": "The Top Valve",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-where-the-first-valve-goes",
+          "title": "Where the first valve goes",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-full-column-of-kill-fluid",
+          "title": "A full column of kill fluid",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-moves-the-top-valve",
+          "title": "What moves the top valve",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reading-the-curve-at-a-depth",
+          "title": "Reading the curve at a depth",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-top-valve-decides",
+          "title": "What the top valve decides",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-a-column-that-converges",
+      "title": "A Column That Converges",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-march-and-its-steps",
+          "title": "The march and its steps",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-more-steps-buy",
+          "title": "What more steps buy",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-against-a-rule-of-thumb",
+          "title": "Against a rule of thumb",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reporting-a-negative-result",
+          "title": "Reporting a negative result",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-column-cannot-tell-you",
+          "title": "What the column cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-column-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
