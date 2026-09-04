@@ -1,0 +1,305 @@
+{
+  "app_slug": "gaslift",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-unloading-is-a-sequence",
+      "title": "Unloading Is a Sequence",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-unloading-means",
+          "title": "What unloading means",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-stage-by-stage",
+          "title": "Stage by stage",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-closing-surface-pressure",
+          "title": "The closing surface pressure",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-stage-asserts",
+          "title": "What a stage asserts",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-multipointing",
+      "title": "Multipointing",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-two-valves-open-at-once",
+          "title": "Two valves open at once",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-verdict-on-a-margin",
+          "title": "A verdict on a margin",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-flips-it",
+          "title": "What flips it",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-boolean-needs-an-oracle",
+          "title": "A boolean needs an oracle",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-verdict-does-not-say",
+          "title": "What the verdict does not say",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-deepest-injection-point",
+      "title": "The Deepest Injection Point",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-depth-is-what-you-are-buying",
+          "title": "Depth is what you are buying",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-traverse-comes-from-outside",
+          "title": "The traverse comes from outside",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-crossing",
+          "title": "The crossing",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-depth-buys",
+          "title": "What depth buys",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-a-chord-cannot-see-itself",
+      "title": "A Chord Cannot See Itself",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-how-the-crossing-is-found",
+          "title": "How the crossing is found",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-both-sides-off-the-same-chords",
+          "title": "Both sides off the same chords",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-self-consistent-wrong-answer",
+          "title": "A self consistent wrong answer",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-residual-proves",
+          "title": "What a residual proves",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-tabulation-resolution",
+          "title": "Tabulation resolution",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-sweeping-a-design",
+      "title": "Sweeping a Design",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-one-design-is-one-answer",
+          "title": "One design is one answer",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-sweeping-the-decrement",
+          "title": "Sweeping the decrement",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-sweeping-the-gas-rate",
+          "title": "Sweeping the gas rate",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-where-a-design-flips",
+          "title": "Where a design flips",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-sweep-cannot-answer",
+          "title": "What a sweep cannot answer",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-unloading-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

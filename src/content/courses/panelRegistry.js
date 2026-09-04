@@ -111,6 +111,11 @@ export const PANELS = {
   'pd-vlp-explorer': React.lazy(() => import('@/components/course/panels/nodal/VlpExplorer')),
   'pd-node-explorer': React.lazy(() => import('@/components/course/panels/nodal/NodeExplorer')),
 
+  // PD2 Gas Lift Design
+  'pd-column-explorer': React.lazy(() => import('@/components/course/panels/gaslift/ColumnExplorer')),
+  'pd-valve-explorer': React.lazy(() => import('@/components/course/panels/gaslift/ValveExplorer')),
+  'pd-unloading-explorer': React.lazy(() => import('@/components/course/panels/gaslift/UnloadingExplorer')),
+
   // PD3 ESP Design
   'pd-stage-explorer': React.lazy(() => import('@/components/course/panels/esp/StageExplorer')),
   'pd-lift-explorer': React.lazy(() => import('@/components/course/panels/esp/LiftExplorer')),
