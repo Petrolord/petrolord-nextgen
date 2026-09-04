@@ -105,6 +105,11 @@ export const PANELS = {
   'wc-time-explorer': React.lazy(() => import('@/components/course/panels/wellcost/TimeExplorer')),
   'wc-afe-explorer': React.lazy(() => import('@/components/course/panels/wellcost/AfeExplorer')),
   'wc-risk-explorer': React.lazy(() => import('@/components/course/panels/wellcost/RiskExplorer')),
+
+  // PD1 Nodal Analysis & Well Performance
+  'pd-ipr-explorer': React.lazy(() => import('@/components/course/panels/nodal/IprExplorer')),
+  'pd-vlp-explorer': React.lazy(() => import('@/components/course/panels/nodal/VlpExplorer')),
+  'pd-node-explorer': React.lazy(() => import('@/components/course/panels/nodal/NodeExplorer')),
 };
 
 export function resolvePanel(id) {

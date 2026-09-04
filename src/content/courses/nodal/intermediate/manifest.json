@@ -1,0 +1,305 @@
+{
+  "app_slug": "nodal",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-column-pushes-back",
+      "title": "The Column Pushes Back",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-outflow-means",
+          "title": "What outflow means",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-three-pressure-losses",
+          "title": "The three pressure losses",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-why-the-engine-injects-it",
+          "title": "Why the engine injects it",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-tubing-curve-is",
+          "title": "What a tubing curve is",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-j-shape",
+      "title": "The J Shape",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-two-terms-pulling-opposite-ways",
+          "title": "Two terms pulling opposite ways",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-gravity-limb",
+          "title": "The gravity limb",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-friction-limb",
+          "title": "The friction limb",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-minimum",
+          "title": "The minimum",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-shape-tells-a-designer",
+          "title": "What the shape tells a designer",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-what-moves-the-curve",
+      "title": "What Moves the Curve",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-wellhead-pressure",
+          "title": "Wellhead pressure",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-tubing-size",
+          "title": "Tubing size",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-water-cut-and-density",
+          "title": "Water cut and density",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-lifting-gas",
+          "title": "Lifting gas",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-one-change-two-effects",
+          "title": "One change, two effects",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-gas-column",
+      "title": "The Gas Column",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-why-dry-gas-is-the-one-built-in",
+          "title": "Why dry gas is the one built in",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-cullender-and-smith",
+          "title": "Cullender and Smith",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-static-gradient",
+          "title": "The static gradient",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-steps-and-truncation",
+          "title": "Steps and truncation",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-injection-pressure",
+      "title": "The Injection Pressure",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-a-valve-needs",
+          "title": "What a valve needs",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-annulus-versus-tubing",
+          "title": "Annulus versus tubing",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-reading-a-depth",
+          "title": "Reading a depth",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-average-t-and-z-as-a-check",
+          "title": "Average T and z as a check",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-column-cannot-tell-you",
+          "title": "What the column cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-vlp-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
