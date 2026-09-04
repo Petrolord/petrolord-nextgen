@@ -1,0 +1,305 @@
+{
+  "app_slug": "esp",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-from-head-to-horsepower",
+      "title": "From Head to Horsepower",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-shaft-power-is",
+          "title": "What shaft power is",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-two-powers-for-one-pump",
+          "title": "Two powers for one pump",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-which-one-the-method-takes",
+          "title": "Which one the method takes",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-difference-is-worth",
+          "title": "What the difference is worth",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-motor",
+      "title": "The Motor",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-nameplate-and-derate",
+          "title": "Nameplate and derate",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-load-fraction",
+          "title": "Load fraction",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-derate-stops-at-the-seam",
+          "title": "The derate stops at the seam",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-one-name-two-quantities",
+          "title": "One name, two quantities",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-load-fraction-asserts",
+          "title": "What a load fraction asserts",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-amps-and-cable",
+      "title": "Amps and Cable",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-motor-current",
+          "title": "Motor current",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-voltage-drop",
+          "title": "Voltage drop",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-selecting-a-cable",
+          "title": "Selecting a cable",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-check-that-checks-nothing",
+          "title": "A check that checks nothing",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-pick-runs-on",
+          "title": "What the pick runs on",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-at-the-surface",
+      "title": "At the Surface",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-surface-voltage",
+          "title": "Surface voltage",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-kva",
+          "title": "kVA",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-cable-loss",
+          "title": "Cable loss",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-surface-numbers-are-for",
+          "title": "What the surface numbers are for",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-diagnosis",
+      "title": "Diagnosis",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-a-diagnosis-is",
+          "title": "What a diagnosis is",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-three-ratio-flags",
+          "title": "The three ratio flags",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-warning-that-printed-its-own-threshold",
+          "title": "A warning that printed its own threshold",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-one-decimal-changed",
+          "title": "What one decimal changed",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-diagnosis-cannot-tell-you",
+          "title": "What a diagnosis cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-power-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

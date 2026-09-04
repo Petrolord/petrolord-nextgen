@@ -110,6 +110,11 @@ export const PANELS = {
   'pd-ipr-explorer': React.lazy(() => import('@/components/course/panels/nodal/IprExplorer')),
   'pd-vlp-explorer': React.lazy(() => import('@/components/course/panels/nodal/VlpExplorer')),
   'pd-node-explorer': React.lazy(() => import('@/components/course/panels/nodal/NodeExplorer')),
+
+  // PD3 ESP Design
+  'pd-stage-explorer': React.lazy(() => import('@/components/course/panels/esp/StageExplorer')),
+  'pd-lift-explorer': React.lazy(() => import('@/components/course/panels/esp/LiftExplorer')),
+  'pd-power-explorer': React.lazy(() => import('@/components/course/panels/esp/PowerExplorer')),
 };
 
 export function resolvePanel(id) {

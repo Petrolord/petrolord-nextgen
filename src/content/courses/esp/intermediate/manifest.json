@@ -1,0 +1,305 @@
+{
+  "app_slug": "esp",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-fluid-at-the-intake",
+      "title": "The Fluid at the Intake",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-the-pump-actually-sees",
+          "title": "What the pump actually sees",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-intake-pressure",
+          "title": "Intake pressure",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-free-gas",
+          "title": "Free gas",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-gas-volume-fraction",
+          "title": "Gas volume fraction",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-gas-does-to-a-pump",
+          "title": "What gas does to a pump",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-density-and-gradient",
+      "title": "Density and Gradient",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-mixture-density",
+          "title": "Mixture density",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-gradient-from-density",
+          "title": "Gradient from density",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-conversions-one-gradient",
+          "title": "Two conversions, one gradient",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-convention-that-stays-exact",
+          "title": "The convention that stays exact",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-rate-at-depth",
+      "title": "Rate at Depth",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-barrel-is-not-a-barrel",
+          "title": "A barrel is not a barrel",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-formation-volume-factor",
+          "title": "Formation volume factor",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-pump-intake-rate",
+          "title": "Pump intake rate",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-rate-at-depth-changes",
+          "title": "What a rate at depth changes",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-total-dynamic-head",
+      "title": "Total Dynamic Head",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-three-parts-of-one-number",
+          "title": "Three parts of one number",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-net-lift",
+          "title": "The net lift",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-friction-in-the-tubing",
+          "title": "Friction in the tubing",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-wellhead-term",
+          "title": "The wellhead term",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-tdh-refuses",
+          "title": "What TDH refuses",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-sizing-the-stack",
+      "title": "Sizing the Stack",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-stages-are-integers",
+          "title": "Stages are integers",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-head-required-and-head-made",
+          "title": "Head required and head made",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-rounding-margin",
+          "title": "The rounding margin",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-margin-is-worth",
+          "title": "What the margin is worth",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-stack-cannot-fix",
+          "title": "What a stack cannot fix",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-lift-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

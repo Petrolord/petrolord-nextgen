@@ -1,0 +1,299 @@
+{
+  "app_slug": "esp",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-stack-of-stages",
+      "title": "A Stack of Stages",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-an-esp-is",
+          "title": "What an ESP is",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses",
+          "title": "What it refuses",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-curves-that-define-a-stage",
+          "title": "The curves that define a stage",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-fitting-a-curve",
+      "title": "Fitting a Curve",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-three-curves-one-stage",
+          "title": "Three curves, one stage",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-cubic-fit",
+          "title": "The cubic fit",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-how-good-is-the-fit",
+          "title": "How good is the fit",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reading-head-at-a-rate",
+          "title": "Reading head at a rate",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-fit-assumes",
+          "title": "What a fit assumes",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-best-efficiency-point",
+      "title": "The Best Efficiency Point",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-what-bep-is",
+          "title": "What BEP is",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-finding-it",
+          "title": "Finding it",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-operating-range",
+          "title": "The operating range",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-bep-does-not-promise",
+          "title": "What BEP does not promise",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-duty-point",
+      "title": "The Duty Point",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-head-at-duty",
+          "title": "Head at duty",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-efficiency-at-duty",
+          "title": "Efficiency at duty",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-power-per-stage",
+          "title": "Power per stage",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-three-readings-one-point",
+          "title": "Three readings, one point",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-duty-point-cannot-tell-you",
+          "title": "What a duty point cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-outside-the-data",
+      "title": "Outside the Data",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-flag-is-not-a-refusal",
+          "title": "A flag is not a refusal",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-cubic-beyond-its-data",
+          "title": "A cubic beyond its data",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-head-goes-negative",
+          "title": "Where head goes negative",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-an-unbounded-fit-costs",
+          "title": "What an unbounded fit costs",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-a-warning",
+          "title": "Reading a warning",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "pd-stage-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
