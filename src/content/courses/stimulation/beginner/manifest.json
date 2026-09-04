@@ -1,0 +1,297 @@
+{
+  "app_slug": "stimulation",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-this-course-decides",
+      "title": "What This Course Decides",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-two-ways-to-stimulate",
+          "title": "Two ways to stimulate",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-matrix-or-fracture",
+          "title": "Matrix or fracture",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-it-refuses",
+          "title": "What it refuses",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-damage-and-what-it-costs",
+      "title": "Damage, and What It Costs",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-skin-in-one-paragraph",
+          "title": "Skin in one paragraph",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-hawkins",
+          "title": "Hawkins",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-ratio-and-a-radius",
+          "title": "A ratio and a radius",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-which-one-moves-the-skin",
+          "title": "Which one moves the skin",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-measured-skin-is-a-sum",
+          "title": "A measured skin is a sum",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-acid-route",
+      "title": "The Acid Route",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-sandstone-and-carbonate-are-different-jobs",
+          "title": "Sandstone and carbonate are different jobs",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-pore-volume-idea",
+          "title": "The pore volume idea",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-planning-a-sandstone-volume",
+          "title": "Planning a sandstone volume",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-the-acid-stops-short",
+          "title": "When the acid stops short",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-volume-is-not-the-answer",
+          "title": "The volume is not the answer",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-carbonates-and-wormholes",
+      "title": "Carbonates and Wormholes",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-wormhole-is-not-dissolution",
+          "title": "A wormhole is not dissolution",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-wormhole-radius",
+          "title": "The wormhole radius",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-pore-volumes-to-breakthrough",
+          "title": "Pore volumes to breakthrough",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-skin-a-wormhole-gives",
+          "title": "The skin a wormhole gives",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-why-the-two-routes-differ",
+          "title": "Why the two routes differ",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-matrix-ceiling",
+      "title": "The Matrix Ceiling",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-below-frac-pressure-or-it-is-not-matrix",
+          "title": "Below frac pressure, or it is not matrix",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-darcy-ceiling",
+          "title": "The Darcy ceiling",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-ceiling-depends-on",
+          "title": "What the ceiling depends on",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-damage-lowers-the-ceiling",
+          "title": "Damage lowers the ceiling",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "st-acid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

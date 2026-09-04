@@ -1,0 +1,301 @@
+{
+  "app_slug": "stimulation",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-pad-and-the-ramp",
+      "title": "The Pad and the Ramp",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-a-pad-at-all",
+          "title": "Why a pad at all",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-nolte-exponent",
+          "title": "The Nolte exponent",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-ramp",
+          "title": "The ramp",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-pad-fraction-trap",
+          "title": "The pad fraction trap",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-from-slurry-to-pack",
+      "title": "From Slurry to Pack",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-placed-mass",
+          "title": "The placed mass",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-areal-concentration",
+          "title": "Areal concentration",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-propped-width",
+          "title": "Propped width",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-pack-porosity",
+          "title": "Pack porosity",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-damage-factor",
+          "title": "The damage factor",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-conductivity",
+      "title": "Conductivity",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-conductivity-is-a-product",
+          "title": "Conductivity is a product",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-dimensionless-conductivity",
+          "title": "Dimensionless conductivity",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-closure-stress-crushes",
+          "title": "Closure stress crushes",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-retained-permeability",
+          "title": "Retained permeability",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-conductivity-buys",
+          "title": "What conductivity buys",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-fracture-as-a-skin",
+      "title": "The Fracture as a Skin",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-cinco-ley-and-samaniego",
+          "title": "Cinco-Ley and Samaniego",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-f-function",
+          "title": "The f function",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-pseudo-skin",
+          "title": "The pseudo-skin",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-effective-wellbore-radius",
+          "title": "The effective wellbore radius",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-frac-is-not-a-bigger-hole",
+          "title": "A frac is not a bigger hole",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-unified-design-optimum",
+      "title": "The Unified Design Optimum",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-one-point-six-result",
+          "title": "The one point six result",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-trading-length-against-width",
+          "title": "Trading length against width",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-reading-a-design-off-the-optimum",
+          "title": "Reading a design off the optimum",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-optimum-assumes",
+          "title": "What the optimum assumes",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "st-pack-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

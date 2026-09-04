@@ -38,6 +38,7 @@ import CasingTubingLearningPage from '@/pages/apps/CasingTubingLearningPage';
 import CementingLearningPage from '@/pages/apps/CementingLearningPage';
 import CompletionLearningPage from '@/pages/apps/CompletionLearningPage';
 import PerfsandLearningPage from '@/pages/apps/PerfsandLearningPage';
+import StimulationLearningPage from '@/pages/apps/StimulationLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
 import LessonPage from '@/pages/course/LessonPage';
@@ -330,6 +331,7 @@ const DashboardPage = () => {
     <Route path="apps/cementing" element={<CementingLearningPage />} />
     <Route path="apps/completion" element={<CompletionLearningPage />} />
     <Route path="apps/perfsand" element={<PerfsandLearningPage />} />
+    <Route path="apps/stimulation" element={<StimulationLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.
            Static segments (quiz/exam/capstone) rank above the :moduleKey
