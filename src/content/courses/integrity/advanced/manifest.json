@@ -1,0 +1,303 @@
+{
+  "app_slug": "integrity",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-balanced-plug",
+      "title": "The Balanced Plug",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-balanced-means",
+          "title": "What balanced means",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-four-capacities",
+          "title": "The four capacities",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-spacer-ahead-and-behind",
+          "title": "Spacer ahead and behind",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-displacement",
+          "title": "The displacement",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-excess-and-where-the-plug-ends-up",
+      "title": "Excess, and Where the Plug Ends Up",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-why-excess-at-all",
+          "title": "Why excess at all",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-as-pumped-top",
+          "title": "The as-pumped top",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-pulling-the-stinger",
+          "title": "Pulling the stinger",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-identity-at-zero-excess",
+          "title": "The identity at zero excess",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-pump-chart-is-not-a-plug-top",
+          "title": "A pump chart is not a plug top",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-rules",
+      "title": "The Rules",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-hundred-metres-or-fifty",
+          "title": "A hundred metres, or fifty",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-a-foundation-buys",
+          "title": "What a foundation buys",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-above-the-source",
+          "title": "Above the source",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-covering-the-source",
+          "title": "Covering the source",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-surface-plug",
+          "title": "The surface plug",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-annular-cement",
+      "title": "Annular Cement",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-barrier-outside-the-pipe",
+          "title": "The barrier outside the pipe",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-thirty-metres-or-a-hundred",
+          "title": "Thirty metres, or a hundred",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-log-buys",
+          "title": "What a log buys",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-verification-is-the-whole-difference",
+          "title": "Verification is the whole difference",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-programme",
+      "title": "The Programme",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-every-flowing-zone-needs-two",
+          "title": "Every flowing zone needs two",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-primary-qualifying",
+          "title": "Primary qualifying",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-secondary-qualifying",
+          "title": "Secondary qualifying",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-rule-does-not-check",
+          "title": "What the rule does not check",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-takeoff",
+          "title": "The takeoff",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "wi-pa-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

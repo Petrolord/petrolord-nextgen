@@ -95,6 +95,11 @@ export const PANELS = {
   'st-acid-explorer': React.lazy(() => import('@/components/course/panels/stimulation/AcidExplorer')),
   'st-frac-explorer': React.lazy(() => import('@/components/course/panels/stimulation/FracExplorer')),
   'st-pack-explorer': React.lazy(() => import('@/components/course/panels/stimulation/PackExplorer')),
+
+  // DR11 Well Integrity & P&A
+  'wi-envelope-explorer': React.lazy(() => import('@/components/course/panels/integrity/EnvelopeExplorer')),
+  'wi-annulus-explorer': React.lazy(() => import('@/components/course/panels/integrity/AnnulusExplorer')),
+  'wi-pa-explorer': React.lazy(() => import('@/components/course/panels/integrity/PaExplorer')),
 };
 
 export function resolvePanel(id) {
