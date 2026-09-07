@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
+  Briefcase,
   Settings,
   GraduationCap,
   LayoutDashboard,
@@ -18,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { useRole } from '@/contexts/RoleContext';
 import { useApplicationLayout } from '@/contexts/ApplicationLayoutContext';
 import CourseModuleNav from '@/components/sidebar/CourseModuleNav';
+import useIsSponsorLead from '@/hooks/useIsSponsorLead';
 
 const SidebarItem = ({ to, icon: Icon, label, exact = false }) => {
   const location = useLocation();
@@ -60,6 +62,7 @@ const Sidebar = () => {
     isViewAsLecturer,
     isViewAsStudent
   } = useRole();
+  const isSponsorLead = useIsSponsorLead();
 
   return (
     <aside className={cn(
@@ -90,6 +93,7 @@ const Sidebar = () => {
               <SidebarItem to="/dashboard/enroll" icon={GraduationCap} label="Enroll" />
               <SidebarItem to="/dashboard/certificates" icon={Award} label="Certificates" />
               <SidebarItem to="/dashboard/devices" icon={MonitorSmartphone} label="Devices & Sessions" />
+              {isSponsorLead && <SidebarItem to="/dashboard/sponsor" icon={Briefcase} label="Sponsor console" />}
             </SidebarGroup>
 
             <CourseModuleNav />

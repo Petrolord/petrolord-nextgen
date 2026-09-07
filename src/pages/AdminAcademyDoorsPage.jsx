@@ -8,7 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
 import { useRole } from '@/contexts/RoleContext';
-import { Loader2, KeyRound, Microscope, Plus, Check, X, Shield, Eye } from 'lucide-react';
+import { Loader2, KeyRound, Microscope, Plus, Check, X, Shield, Eye, Building2 } from 'lucide-react';
+import AdminSponsorPools from '@/components/academy/AdminSponsorPools';
 import {
   adminListCodes, adminIssueCode, adminListResidencyApplications,
   adminDecideResidency, adminListSessions, grantReviewAccess, revokeReviewAccess,
@@ -169,19 +170,24 @@ const AdminAcademyDoorsPage = () => {
         <div>
           <h1 className="text-3xl font-bold text-white">Academy doors</h1>
           <p className="mt-1 text-gray-400">
-            Issue cohort and sponsorship codes; review residency applications.
+            Issue cohort and sponsorship codes, set up employer enrolment pools, review residency applications.
           </p>
         </div>
 
         <Tabs defaultValue="codes" className="w-full">
           <TabsList className="bg-[#1E293B]">
             <TabsTrigger value="codes"><KeyRound className="h-4 w-4 mr-2" />Entry codes</TabsTrigger>
+            <TabsTrigger value="sponsors"><Building2 className="h-4 w-4 mr-2" />Sponsor pools</TabsTrigger>
             <TabsTrigger value="residency"><Microscope className="h-4 w-4 mr-2" />Residency queue</TabsTrigger>
             <TabsTrigger value="sessions"><Shield className="h-4 w-4 mr-2" />Session monitoring</TabsTrigger>
             {isViewAsSuperAdmin && (
               <TabsTrigger value="review"><Eye className="h-4 w-4 mr-2" />Review access</TabsTrigger>
             )}
           </TabsList>
+
+          <TabsContent value="sponsors">
+            <AdminSponsorPools />
+          </TabsContent>
 
           {isViewAsSuperAdmin && (
             <TabsContent value="review">

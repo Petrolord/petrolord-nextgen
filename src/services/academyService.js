@@ -513,3 +513,70 @@ export async function adminQuizSyllabus(appSlug, tier) {
   if (error) throw error;
   return data;
 }
+
+// ---------------------------------------------------------------------------
+// Sponsor pools (Breeze Energy onboarding, 2026-09-07): an employer's block of
+// enrolments, run by its own training lead. Every mutation is a definer
+// function; the client only reads what RLS lets it.
+
+export async function mySponsorPools() {
+  const { data, error } = await supabase.rpc('academy_my_sponsor_pools');
+  if (error) throw error;
+  return data || [];
+}
+
+export async function sponsorPoolReport(poolId) {
+  const { data, error } = await supabase.rpc('academy_sponsor_pool_report', { p_pool_id: poolId });
+  if (error) throw error;
+  return data || [];
+}
+
+export async function sponsorAssign({ poolId, email, appSlug, tier, note = null }) {
+  const { data, error } = await supabase.rpc('academy_sponsor_assign', {
+    p_pool_id: poolId, p_email: email, p_app_slug: appSlug, p_tier: tier, p_note: note,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function sponsorCancel(assignmentId, reason = null) {
+  const { data, error } = await supabase.rpc('academy_sponsor_cancel', { p_assignment_id: assignmentId, p_reason: reason });
+  if (error) throw error;
+  return data;
+}
+
+export async function adminUpsertSponsor({ name, contactName = null, contactEmail = null, notes = null }) {
+  const { data, error } = await supabase.rpc('academy_admin_upsert_sponsor', {
+    p_name: name, p_contact_name: contactName, p_contact_email: contactEmail, p_notes: notes,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function adminAddSponsorLead(sponsorId, email) {
+  const { data, error } = await supabase.rpc('academy_admin_add_sponsor_lead', { p_sponsor_id: sponsorId, p_email: email });
+  if (error) throw error;
+  return data;
+}
+
+export async function adminRemoveSponsorLead(sponsorId, userId) {
+  const { data, error } = await supabase.rpc('academy_admin_remove_sponsor_lead', { p_sponsor_id: sponsorId, p_user_id: userId });
+  if (error) throw error;
+  return data;
+}
+
+export async function adminCreatePool({ sponsorId, name, seats, validUntil, priceMinor = null, currency = 'NGN', appSlugs = [], tiers = [], paymentRef = null, notes = null }) {
+  const { data, error } = await supabase.rpc('academy_admin_create_pool', {
+    p_sponsor_id: sponsorId, p_name: name, p_seats: seats, p_valid_until: validUntil,
+    p_price_minor: priceMinor, p_currency: currency, p_app_slugs: appSlugs, p_tiers: tiers,
+    p_payment_ref: paymentRef, p_notes: notes,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function adminClosePool(poolId) {
+  const { data, error } = await supabase.rpc('academy_admin_close_pool', { p_pool_id: poolId });
+  if (error) throw error;
+  return data;
+}

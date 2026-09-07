@@ -395,8 +395,10 @@ const EnrollPage = () => {
               <CardHeader>
                 <CardTitle className="text-white">Employer-sponsored</CardTitle>
                 <CardDescription>
-                  Redeem the sponsorship code from your employer — the sponsor is billed, and your
-                  enrollment activates immediately.
+                  Redeem the sponsorship code from your employer: the sponsor is billed, and your
+                  enrollment activates immediately. If your employer runs an enrolment pool, your
+                  training lead assigns you directly and the course appears on your dashboard with
+                  no code to enter.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
