@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -109,7 +110,7 @@ export default function AdminSponsorPools() {
       <Card className="bg-[#1E293B] border-gray-700">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2"><Layers className="h-4 w-4" />Enrolment block</CardTitle>
-          <CardDescription>Record the block the sponsor bought. Seats, the price paid, a validity window (a year by default) and, if wanted, which courses and tiers the seats may be spent on.</CardDescription>
+          <CardDescription>Record the block the sponsor bought. Seats, the price paid, a validity window (a year by default) and, if wanted, which courses and tiers the seats may be spent on. Seats are handed to named learners in the <Link to="/dashboard/sponsor" className="text-[#BFFF00] hover:underline">Sponsor console</Link> (also in the sidebar), by you or by the sponsor's training leads.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="flex gap-2 flex-wrap">
@@ -165,7 +166,10 @@ export default function AdminSponsorPools() {
               {(sponsor.pools || []).map((p) => (
                 <div key={p.id} className="flex items-center justify-between gap-2 text-sm text-gray-200" data-testid={`admin-pool-${p.id}`}>
                   <span>{p.name}: {seatsRemaining(p)} of {p.seats} left, {poolState(p)}{p.seat_scope === 'course' ? ', course seats' : ''}{p.valid_until ? `, until ${fmtDate(p.valid_until)}` : ''}{formatPrice(p) ? `, ${formatPrice(p)}` : ''}</span>
-                  {p.status === 'active' && <button type="button" disabled={busy} onClick={() => run('Pool closed', () => adminClosePool(p.id))} className="text-red-400 hover:text-red-300 text-xs">Close</button>}
+                  <span className="flex items-center gap-3">
+                    {p.status === 'active' && <Link to={`/dashboard/sponsor?pool=${p.id}`} className="text-[#BFFF00] hover:underline text-xs" data-testid={`admin-pool-assign-${p.id}`}>Assign seats</Link>}
+                    {p.status === 'active' && <button type="button" disabled={busy} onClick={() => run('Pool closed', () => adminClosePool(p.id))} className="text-red-400 hover:text-red-300 text-xs">Close</button>}
+                  </span>
                 </div>
               ))}
               {!(sponsor.pools || []).length && <p className="text-gray-500 text-sm">No pools yet.</p>}

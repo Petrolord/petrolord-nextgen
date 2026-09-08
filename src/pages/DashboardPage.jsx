@@ -93,6 +93,7 @@ const SuperAdminHome = () => (
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <AdminHomeCard to="/dashboard/admin/academy-doors" title="Academy Doors" description="Issue cohort and sponsorship codes, decide residency applications." cta="Open Doors Console" />
+        <AdminHomeCard to="/dashboard/sponsor" title="Sponsor console" description="Hand pool seats to named learners, reassign them, and see where every seat went." cta="Open Sponsor Console" />
         <AdminHomeCard to="/dashboard/admin/certifications" title="Certifications" description="Issue and revoke academy certificates." cta="Open Certifications" />
         <AdminHomeCard to="/dashboard/admin/handbook" title="Course Handbook" description="Review every deep course's lessons and question banks in one printable document." cta="Open Handbook" />
         <AdminHomeCard to="/dashboard/admin/monitoring" title="Live Monitoring" description="View real-time logs and system health." cta="Open Monitoring" />
@@ -109,6 +110,7 @@ const PetrolordAdminHome = () => (
       </div>
        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <AdminHomeCard to="/dashboard/admin/academy-doors" title="Academy Doors" description="Issue cohort and sponsorship codes, decide residency applications." cta="Open Doors Console" />
+        <AdminHomeCard to="/dashboard/sponsor" title="Sponsor console" description="Hand pool seats to named learners, reassign them, and see where every seat went." cta="Open Sponsor Console" />
         <AdminHomeCard to="/dashboard/admin/certifications" title="Certifications" description="Issue and revoke academy certificates." cta="Open Certifications" />
         <AdminHomeCard to="/dashboard/admin/handbook" title="Course Handbook" description="Review every deep course's lessons and question banks in one printable document." cta="Open Handbook" />
         <AdminHomeCard to="/dashboard/admin/monitoring" title="System Monitoring" description="View real-time logs and system health status." cta="Open Dashboard" />
