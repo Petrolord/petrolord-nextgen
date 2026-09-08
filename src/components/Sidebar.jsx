@@ -117,6 +117,7 @@ const Sidebar = () => {
           <>
             <SidebarGroup title="Platform Mgmt">
               <SidebarItem to="/dashboard/admin/academy-doors" icon={KeyRound} label="Academy Doors" />
+              <SidebarItem to="/dashboard/sponsor" icon={Briefcase} label="Sponsor console" />
               <SidebarItem to="/dashboard/admin/certifications" icon={Award} label="Certifications" />
               <SidebarItem to="/dashboard/admin/users" icon={Users} label="User Directory" />
             </SidebarGroup>
@@ -134,6 +135,7 @@ const Sidebar = () => {
           <>
             <SidebarGroup title="Platform Superuser">
               <SidebarItem to="/dashboard/admin/academy-doors" icon={KeyRound} label="Academy Doors" />
+              <SidebarItem to="/dashboard/sponsor" icon={Briefcase} label="Sponsor console" />
               <SidebarItem to="/dashboard/admin/certifications" icon={Award} label="Certifications" />
               <SidebarItem to="/dashboard/admin/users" icon={Users} label="User Management" />
               <SidebarItem to="/dashboard/admin/admin-mgmt" icon={Shield} label="Admin Roles" />

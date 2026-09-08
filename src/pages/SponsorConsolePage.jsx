@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
@@ -38,6 +39,9 @@ const SponsorConsolePage = () => {
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [poolId, setPoolId] = useState('');
+  // /dashboard/sponsor?pool=<id> (the Assign seats link on Academy Doors) preselects that pool.
+  const [searchParams] = useSearchParams();
+  const wantedPool = searchParams.get('pool');
   const [report, setReport] = useState([]);
   const [reportLoading, setReportLoading] = useState(false);
   const [email, setEmail] = useState('');
@@ -57,7 +61,7 @@ const SponsorConsolePage = () => {
       setGroups(g);
       setApps(a || []);
       const all = g.flatMap((x) => x.pools || []);
-      if (!poolId && all.length) setPoolId(all[0].id);
+      if (!poolId && all.length) setPoolId(all.find((p) => p.id === wantedPool)?.id || all[0].id);
     } catch (err) {
       toast({ title: 'Failed to load', description: err.message, variant: 'destructive' });
     } finally {
