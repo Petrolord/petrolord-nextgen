@@ -61,6 +61,16 @@ export function summarizeAssignments(rows) {
   };
 }
 
+/** Seat scope wording (owner decision 2026-09-08). */
+export const SEAT_SCOPES = Object.freeze({
+  tier: 'One seat = one course tier',
+  course: 'One seat = one course, all three tiers',
+});
+export const seatScopeLabel = (pool) => SEAT_SCOPES[pool?.seat_scope] || SEAT_SCOPES.tier;
+
+/** Seats a course-scope pool needs for n learners taking k courses each. */
+export const courseSeatsNeeded = (learners, coursesEach) => Math.max(0, Number(learners) || 0) * Math.max(0, Number(coursesEach) || 0);
+
 /** The published block offers (NGN, minor units) for the admin form's presets. */
 export const BLOCK_OFFERS = Object.freeze([
   { key: 'starter', name: 'Starter', seats: 20, price_minor: 240000000 },

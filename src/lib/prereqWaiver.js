@@ -64,7 +64,8 @@ export function selfEnrolOutcome(res) {
 export function assignToast(res, courseName, tierLabel) {
   const who = res?.display_name || res?.email || 'The learner';
   if (res && res.seat_consumed === false) {
-    return `${who} is enrolled in ${courseName} (${tierLabel}). Bonus course: no seat used, ${res.seats_used} of ${res.seats} seats remain in use.`;
+    const why = res.seat_reason === 'course_seat' ? 'Rides on the seat already held for this course' : 'Bonus course';
+    return `${who} is enrolled in ${courseName} (${tierLabel}). ${why}: no seat used, ${res.seats_used} of ${res.seats} seats remain in use.`;
   }
   return `${who} is enrolled in ${courseName} (${tierLabel}). ${res?.seats_used ?? '?'} of ${res?.seats ?? '?'} seats used.`;
 }

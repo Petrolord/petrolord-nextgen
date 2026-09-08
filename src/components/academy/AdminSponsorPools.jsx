@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { useToast } from '@/components/ui/use-toast';
 import { Loader2, Building2, UserPlus, Layers, XCircle } from 'lucide-react';
 import { listAcademyApps, mySponsorPools, adminUpsertSponsor, adminAddSponsorLead, adminRemoveSponsorLead, adminCreatePool, adminClosePool } from '@/services/academyService';
-import { BLOCK_OFFERS, TIER_LABELS, TIERS, seatsRemaining, poolState, formatPrice } from '@/lib/sponsorPools';
+import { BLOCK_OFFERS, TIER_LABELS, TIERS, SEAT_SCOPES, seatsRemaining, poolState, formatPrice, seatScopeLabel } from '@/lib/sponsorPools';
 
 // Admin half of sponsor pools (2026-09-07): create the sponsor, name its
 // training leads, and record the block it bought (seats, price, validity,
@@ -35,6 +35,7 @@ export default function AdminSponsorPools() {
   const [paymentRef, setPaymentRef] = useState('');
   const [appSlugs, setAppSlugs] = useState([]);
   const [tiers, setTiers] = useState([]);
+  const [seatScope, setSeatScope] = useState('tier');
 
   const sponsor = groups.find((g) => g.sponsor?.id === sponsorId) || null;
   const availableApps = useMemo(() => apps.filter((a) => a.status === 'available'), [apps]);
@@ -126,6 +127,15 @@ export default function AdminSponsorPools() {
             <div><Label className="text-gray-300 mb-1 block">Payment reference</Label><Input value={paymentRef} onChange={(e) => setPaymentRef(e.target.value)} placeholder="invoice or Paystack ref" className={inputCls} /></div>
           </div>
           <div>
+            <Label className="text-gray-300 mb-1 block">What one seat buys</Label>
+            <div className="flex flex-col gap-1 text-sm text-gray-200">
+              {Object.entries(SEAT_SCOPES).map(([k, label]) => (
+                <label key={k} className="flex items-center gap-2"><input type="radio" name="seat-scope" checked={seatScope === k} onChange={() => setSeatScope(k)} data-testid={`admin-seat-scope-${k}`} />{label}</label>
+              ))}
+            </div>
+            <p className="text-xs text-gray-500 mt-1">Course scope: the learner's later tiers of a course they already hold a seat for take no further seat (pioneer cohorts: seats = learners x courses each).</p>
+          </div>
+          <div>
             <Label className="text-gray-300 mb-1 block">Tiers allowed (none ticked = any)</Label>
             <div className="flex gap-3 flex-wrap text-sm text-gray-200">
               {TIERS.map((t) => (
@@ -144,8 +154,8 @@ export default function AdminSponsorPools() {
           <Button disabled={busy || !sponsor || !poolName.trim() || !(Number(seats) > 0) || !validUntil} onClick={async () => {
             const r = await run('Pool created', () => adminCreatePool({
               sponsorId: sponsor.sponsor.id, name: poolName, seats: Number(seats), validUntil: new Date(`${validUntil}T23:59:59Z`).toISOString(),
-              priceMinor: price === '' ? null : Math.round(Number(price) * 100), currency: 'NGN', appSlugs, tiers, paymentRef: paymentRef || null,
-            }), (x) => `${x.name}: ${x.seats} seats until ${fmtDate(x.valid_until)}.`);
+              priceMinor: price === '' ? null : Math.round(Number(price) * 100), currency: 'NGN', appSlugs, tiers, paymentRef: paymentRef || null, seatScope,
+            }), (x) => `${x.name}: ${x.seats} seats (${seatScopeLabel(x).toLowerCase()}) until ${fmtDate(x.valid_until)}.`);
             if (r) { setPoolName(''); setPaymentRef(''); setAppSlugs([]); setTiers([]); }
           }} className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold" data-testid="admin-pool-create">Create pool</Button>
 
@@ -154,7 +164,7 @@ export default function AdminSponsorPools() {
               <Label className="text-gray-300 block">{sponsor.sponsor.name}'s pools</Label>
               {(sponsor.pools || []).map((p) => (
                 <div key={p.id} className="flex items-center justify-between gap-2 text-sm text-gray-200" data-testid={`admin-pool-${p.id}`}>
-                  <span>{p.name}: {seatsRemaining(p)} of {p.seats} left, {poolState(p)}{p.valid_until ? `, until ${fmtDate(p.valid_until)}` : ''}{formatPrice(p) ? `, ${formatPrice(p)}` : ''}</span>
+                  <span>{p.name}: {seatsRemaining(p)} of {p.seats} left, {poolState(p)}{p.seat_scope === 'course' ? ', course seats' : ''}{p.valid_until ? `, until ${fmtDate(p.valid_until)}` : ''}{formatPrice(p) ? `, ${formatPrice(p)}` : ''}</span>
                   {p.status === 'active' && <button type="button" disabled={busy} onClick={() => run('Pool closed', () => adminClosePool(p.id))} className="text-red-400 hover:text-red-300 text-xs">Close</button>}
                 </div>
               ))}

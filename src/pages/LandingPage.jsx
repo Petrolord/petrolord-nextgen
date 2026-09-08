@@ -17,11 +17,11 @@ const DOORS = [{
 }, {
   icon: GraduationCap,
   title: 'Campus Scholar',
-  desc: 'Your university liaison gives you a cohort code that applies a scholarship to the course fee, so you pay only a small personal registration fee.'
+  desc: 'For university cohorts: your liaison gives you a cohort code that applies a scholarship to the course fee, and a small personal registration fee (once per account) is all you pay.'
 }, {
   icon: Microscope,
   title: 'Residency',
-  desc: 'Apply for a residency intake. If selected, your enrollment is created for you and you train inside a time-boxed, instructor-visible cohort.'
+  desc: 'A selective, in-person, time-boxed intake at the Lordsway facility with instructor supervision and a small number of places. Intakes open when the new facility is ready in 2027; applications are not being accepted yet.'
 }, {
   icon: Briefcase,
   title: 'Employer-Sponsored',
