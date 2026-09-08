@@ -7,6 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
+import { useRole } from '@/contexts/RoleContext';
+import { hasDeepCourse } from '@/lib/courseContent';
+import DeepCourseBanner from '@/components/course/DeepCourseBanner';
 import {
   Loader2, Atom, GraduationCap, Lock, CheckCircle2, XCircle,
   BookOpen, Award, ArrowRight,
@@ -18,6 +21,7 @@ import {
 } from '@/lib/rockphysicsTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
+  getCourseProgress,
 } from '@/services/academyService';
 
 const APP = 'rockphysics';
@@ -115,6 +119,7 @@ function TuningPlot({ tuning }) {
 
 const RockPhysicsLearningPage = () => {
   const { toast } = useToast();
+  const { actualRole } = useRole();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
   const [tier, setTier] = useState('beginner');
   const [sw, setSw] = useState(CAPSTONE_SW);
@@ -123,6 +128,7 @@ const RockPhysicsLearningPage = () => {
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState(null);
+  const [courseProgress, setCourseProgress] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -144,6 +150,11 @@ const RockPhysicsLearningPage = () => {
     setAnswers({});
     setResult(null);
     getCapstone(APP, tier).then(setCapstone).catch(() => setCapstone(null));
+    // Deep-path state: which finishing steps the course has unlocked.
+    setCourseProgress(null);
+    if (hasDeepCourse(APP, tier)) {
+      getCourseProgress(APP, tier).then(setCourseProgress).catch(() => setCourseProgress(null));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tier, gate.allowed]);
 
@@ -179,6 +190,17 @@ const RockPhysicsLearningPage = () => {
     }
   };
 
+  // On the deep path the capstone is the LAST step: lessons, module
+  // quizzes and the final exam come first (all enforced server-side).
+  // Hide the submit UI until the course reports it unlocked, so the old
+  // pass-in-minutes surface is gone. Super admins keep the submit UI for
+  // the reviewer door (the server's bypass contract).
+  const deep = hasDeepCourse(APP, tier);
+  const capstoneOpen = !deep
+    || courseProgress?.capstone?.unlocked === true
+    || courseProgress?.capstone?.passed === true
+    || actualRole === 'super_admin';
+
   if (gate.loading) {
     return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" /></div>;
   }
@@ -207,7 +229,11 @@ const RockPhysicsLearningPage = () => {
             </p>
           </div>
 
-          {/* Lessons */}
+          <DeepCourseBanner app={APP} tier={tier} />
+
+          {/* Legacy pocket lessons: superseded by the deep course. They
+              only render for tiers whose full content has not shipped. */}
+          {!deep && (
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2"><BookOpen className="h-5 w-5 text-[#BFFF00]" /> Lessons</CardTitle>
@@ -222,6 +248,7 @@ const RockPhysicsLearningPage = () => {
               ))}
             </CardContent>
           </Card>
+          )}
 
           {/* Beginner panel: fluids + frame */}
           {fluids.error ? (
@@ -368,22 +395,37 @@ const RockPhysicsLearningPage = () => {
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {(capstone?.fields || []).map((f) => (
-                  <div key={f.key}>
-                    <Label className="text-gray-400 text-xs mb-1 block">{f.label} ({f.unit})</Label>
-                    <Input type="number" step="any" value={answers[f.key] ?? ''}
-                      onChange={(e) => setAnswers((a) => ({ ...a, [f.key]: e.target.value }))}
-                      className="bg-gray-700 text-white border-gray-600 h-8 text-sm" />
-                  </div>
-                ))}
-              </div>
+              {!capstoneOpen ? (
+                <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4 text-sm text-gray-300 flex items-start gap-2">
+                  <Lock className="h-4 w-4 text-[#BFFF00] mt-0.5 shrink-0" />
+                  <p className="mb-0">
+                    The capstone unlocks after the course: finish the lessons, pass each module quiz
+                    and the final exam, then submit here.{' '}
+                    <Link to={`/dashboard/apps/${APP}/course/${tier}`} className="text-[#BFFF00] hover:underline">
+                      Open the course
+                    </Link>
+                  </p>
+                </div>
+              ) : (
+                <>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {(capstone?.fields || []).map((f) => (
+                    <div key={f.key}>
+                      <Label className="text-gray-400 text-xs mb-1 block">{f.label} ({f.unit})</Label>
+                      <Input type="number" step="any" value={answers[f.key] ?? ''}
+                        onChange={(e) => setAnswers((a) => ({ ...a, [f.key]: e.target.value }))}
+                        className="bg-gray-700 text-white border-gray-600 h-8 text-sm" />
+                    </div>
+                  ))}
+                </div>
 
-              <Button onClick={submit} disabled={submitting || !capstone}
-                className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
-                {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
-                Submit for grading
-              </Button>
+                <Button onClick={submit} disabled={submitting || !capstone}
+                  className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                  {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
+                  Submit for grading
+                </Button>
+                </>
+              )}
 
               {result && (
                 <div className={`rounded-md border p-4 ${result.passed ? 'border-emerald-700 bg-emerald-900/20' : 'border-red-800 bg-red-900/20'}`}>
