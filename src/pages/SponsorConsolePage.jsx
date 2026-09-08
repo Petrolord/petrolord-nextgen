@@ -9,7 +9,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { Loader2, Briefcase, UserPlus, XCircle, Download, RefreshCw } from 'lucide-react';
 import { listAcademyApps, mySponsorPools, sponsorPoolReport, sponsorAssign, sponsorCancel } from '@/services/academyService';
 import {
-  TIER_LABELS, TIERS, seatsRemaining, poolState, canAssign, daysLeft, formatPrice, poolCovers, summarizeAssignments,
+  TIER_LABELS, TIERS, seatsRemaining, poolState, canAssign, daysLeft, formatPrice, poolCovers, summarizeAssignments, seatScopeLabel,
 } from '@/lib/sponsorPools';
 import { isBonusTier, assignToast } from '@/lib/prereqWaiver';
 
@@ -159,7 +159,7 @@ const SponsorConsolePage = () => {
                 <CardDescription>
                   {formatPrice(pool) ? `${formatPrice(pool)} for ${pool.seats} seats. ` : ''}
                   {left != null ? (left >= 0 ? `${left} days left. ` : 'Expired. ') : ''}
-                  The learner needs a NextGen account first; their sponsored enrolment activates at once.
+                  {seatScopeLabel(pool)}. The learner needs a NextGen account first; their sponsored enrolment activates at once.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">

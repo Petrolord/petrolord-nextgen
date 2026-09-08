@@ -566,11 +566,11 @@ export async function adminRemoveSponsorLead(sponsorId, userId) {
   return data;
 }
 
-export async function adminCreatePool({ sponsorId, name, seats, validUntil, priceMinor = null, currency = 'NGN', appSlugs = [], tiers = [], paymentRef = null, notes = null }) {
+export async function adminCreatePool({ sponsorId, name, seats, validUntil, priceMinor = null, currency = 'NGN', appSlugs = [], tiers = [], paymentRef = null, notes = null, seatScope = 'tier' }) {
   const { data, error } = await supabase.rpc('academy_admin_create_pool', {
     p_sponsor_id: sponsorId, p_name: name, p_seats: seats, p_valid_until: validUntil,
     p_price_minor: priceMinor, p_currency: currency, p_app_slugs: appSlugs, p_tiers: tiers,
-    p_payment_ref: paymentRef, p_notes: notes,
+    p_payment_ref: paymentRef, p_notes: notes, p_seat_scope: seatScope,
   });
   if (error) throw error;
   return data;
@@ -605,4 +605,12 @@ export async function submitPrereqWaiverExam(attemptId, answers) {
   });
   if (error) throw error;
   return data;
+}
+
+// Door availability (owner decision 2026-09-08): the Residency door is
+// gated by an admin setting until an intake can be hosted.
+export async function doorsStatus() {
+  const { data, error } = await supabase.rpc('academy_doors_status');
+  if (error) throw error;
+  return data || { residency_open: false, residency_notice: '' };
 }

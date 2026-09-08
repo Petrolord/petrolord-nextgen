@@ -61,5 +61,7 @@ describe('self-enrolment outcome and sponsor wording', () => {
       .toBe('Ada is enrolled in Well Data Manager (Associate). Bonus course: no seat used, 3 of 20 seats remain in use.');
     expect(assignToast({ display_name: 'Ada', seat_consumed: true, seats_used: 4, seats: 20 }, 'Petrophysics', 'Associate'))
       .toBe('Ada is enrolled in Petrophysics (Associate). 4 of 20 seats used.');
+    expect(assignToast({ display_name: 'Ada', seat_consumed: false, seat_reason: 'course_seat', seats_used: 4, seats: 15 }, 'Petrophysics', 'Professional'))
+      .toMatch(/^Ada is enrolled in Petrophysics \(Professional\)\. Rides on the seat already held for this course: no seat used/);
   });
 });

@@ -16,7 +16,7 @@ import {
 import {
   listAcademyApps, listFees, feeFor, formatFee, listMyEnrollments,
   listMyResidencyApplications, startSelfEnrollment, redeemCode,
-  applyResidency, startCheckout, verifyPayment, TIERS, getPrereqWaiverStatus,
+  applyResidency, startCheckout, verifyPayment, TIERS, getPrereqWaiverStatus, doorsStatus,
 } from '@/services/academyService';
 import { waiverPresentation, selfEnrolOutcome, isBonusTier } from '@/lib/prereqWaiver';
 import { supabase } from '@/lib/customSupabaseClient';
@@ -94,7 +94,7 @@ function CourseTierPicker({ apps, tier, setTier, appSlug, setAppSlug, fees, feeK
       </div>
       {feeKind && (
         <p className="text-sm text-gray-300">
-          {feeKind === 'course' ? 'Published fee: ' : 'Personal registration fee: '}
+          {feeKind === 'course' ? 'Published fee: ' : 'Personal registration fee, in addition to your university scholarship: '}
           <span className="text-[#BFFF00] font-semibold">{formatFee(fee)}</span>
           {feeKind === 'course' && isBonusTier(apps.find((a) => a.slug === appSlug), tier) && (
             <span className="ml-2 text-xs text-gray-400" data-testid="enroll-bonus-note">Bonus tier: free, and it takes no sponsor seat.</span>
@@ -153,7 +153,10 @@ const EnrollPage = () => {
   const [resApp, setResApp] = useState('petrophysics');
   const [resMotivation, setResMotivation] = useState('');
   const [prereqStatus, setPrereqStatus] = useState({});
+  const [doors, setDoors] = useState({ residency_open: false, residency_notice: '' });
   const verifiedRef = useRef(false);
+
+  useEffect(() => { doorsStatus().then(setDoors).catch(() => {}); }, []);
 
   // One status per distinct course the four doors currently point at.
   useEffect(() => {
@@ -390,15 +393,15 @@ const EnrollPage = () => {
               <CardHeader>
                 <CardTitle className="text-white">Campus cohort</CardTitle>
                 <CardDescription>
-                  Enter the cohort code from your university liaison. Your scholarship applies at
-                  the published fee; you pay only the modest personal registration fee (once per
-                  account). Your university email is recorded as a verification attribute — your
-                  personal email remains your account.
+                  For university cohorts only. Enter the cohort code from your university liaison:
+                  your scholarship covers the course fee, and a small personal registration fee
+                  (once per account, shown once you enter the code) is all you pay. Your university
+                  email is recorded as a verification attribute; your personal email remains your account.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <CourseTierPicker
-                  apps={apps} fees={fees} feeKind="registration"
+                  apps={apps} fees={fees} feeKind={campusCode.trim() ? 'registration' : null}
                   appSlug={campusApp} setAppSlug={setCampusApp} prereq={prereqStatus[campusApp]}
                   tier={campusTier} setTier={setCampusTier}
                 />
@@ -472,10 +475,19 @@ const EnrollPage = () => {
               <CardHeader>
                 <CardTitle className="text-white">Residency</CardTitle>
                 <CardDescription>
-                  Apply for a residency intake. Selection creates your enrollment — you'll see the
-                  decision here.
+                  A selective, in-person, time-boxed intake at the Lordsway facility with instructor
+                  supervision and a small number of places. It is a different programme from the
+                  online courses, not a cheaper way into them.
                 </CardDescription>
               </CardHeader>
+              {!doors.residency_open ? (
+                <CardContent>
+                  <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4 text-sm text-gray-300 flex items-start gap-2" data-testid="residency-closed">
+                    <Clock className="h-4 w-4 text-[#BFFF00] mt-0.5 shrink-0" />
+                    <p className="mb-0">{doors.residency_notice || 'Residency intakes are not open yet. Applications are not being accepted.'}</p>
+                  </div>
+                </CardContent>
+              ) : (
               <CardContent className="space-y-6">
                 <CourseTierPicker
                   apps={apps} fees={fees} feeKind={null}
@@ -514,6 +526,7 @@ const EnrollPage = () => {
                   </div>
                 )}
               </CardContent>
+              )}
             </Card>
           </TabsContent>
         </Tabs>

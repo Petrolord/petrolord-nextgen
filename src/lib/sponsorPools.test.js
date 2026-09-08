@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   seatsRemaining, poolState, canAssign, daysLeft, formatPrice, perSeatMinor, poolCovers,
-  summarizeAssignments, BLOCK_OFFERS,
+  summarizeAssignments, BLOCK_OFFERS, seatScopeLabel, courseSeatsNeeded,
 } from './sponsorPools';
 
 const NOW = Date.parse('2026-09-07T12:00:00Z');
@@ -61,5 +61,18 @@ describe('summarizeAssignments', () => {
     ]);
     expect(s).toEqual({ total: 4, active: 2, cancelled: 2, returned: 1, certified: 2 });
     expect(summarizeAssignments(null).total).toBe(0);
+  });
+});
+
+describe('seat scope (2026-09-08)', () => {
+  it('labels the two scopes and defaults old pools to tier', () => {
+    expect(seatScopeLabel(pool())).toBe('One seat = one course tier');
+    expect(seatScopeLabel(pool({ seat_scope: 'course' }))).toBe('One seat = one course, all three tiers');
+    expect(seatScopeLabel(null)).toBe('One seat = one course tier');
+  });
+  it('sizes a pioneer pool: learners times courses each', () => {
+    expect(courseSeatsNeeded(5, 3)).toBe(15);
+    expect(courseSeatsNeeded('4', '3')).toBe(12);
+    expect(courseSeatsNeeded(null, 3)).toBe(0);
   });
 });
