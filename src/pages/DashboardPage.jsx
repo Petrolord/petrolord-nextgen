@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import EnrollPage from '@/pages/EnrollPage';
 import AdminAcademyDoorsPage from '@/pages/AdminAcademyDoorsPage';
 import SponsorConsolePage from '@/pages/SponsorConsolePage';
+import PrereqWaiverPage from '@/pages/PrereqWaiverPage';
 import GetStartedPage from '@/pages/GetStartedPage';
 import DevicesPage from '@/pages/DevicesPage';
 import AdminCertificationsPage from '@/pages/AdminCertificationsPage';
@@ -374,6 +375,7 @@ const DashboardPage = () => {
 
     <Route path="admin/academy-doors" element={<AdminAcademyDoorsPage />} />
     <Route path="sponsor" element={<SponsorConsolePage />} />
+    <Route path="waiver/:appSlug" element={<PrereqWaiverPage />} />
     <Route path="admin/certifications" element={<AdminCertificationsPage />} />
     <Route path="admin/handbook" element={<AdminCourseHandbookPage />} />
     <Route path="admin/audit-logs" element={<AdminAuditLogsPage />} />
