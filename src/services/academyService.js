@@ -44,6 +44,7 @@ export function feeFor(fees, apps, appSlug, tier, kind = 'course') {
 
 export function formatFee(fee) {
   if (!fee) return '—';
+  if (Number(fee.amount_minor) === 0) return 'Free';
   const symbol = fee.currency === 'NGN' ? '₦' : fee.currency + ' ';
   const major = `${symbol}${(fee.amount_minor / 100).toLocaleString()}`;
   if (fee.amount_usd_minor) {
@@ -577,6 +578,31 @@ export async function adminCreatePool({ sponsorId, name, seats, validUntil, pric
 
 export async function adminClosePool(poolId) {
   const { data, error } = await supabase.rpc('academy_admin_close_pool', { p_pool_id: poolId });
+  if (error) throw error;
+  return data;
+}
+
+// ---- prerequisite waiver (owner decision 2026-09-08) ------------------
+// Well Data Manager stays the root of the geoscience path, but a FREE
+// waiver exam (the root's Beginner final-exam bank, no enrolment, no seat)
+// satisfies the prerequisite for 12 months, exactly like the certification.
+
+export async function getPrereqWaiverStatus(appSlug) {
+  const { data, error } = await supabase.rpc('academy_prereq_waiver_status', { p_app: appSlug });
+  if (error) throw error;
+  return data;
+}
+
+export async function getPrereqWaiverExam(rootSlug) {
+  const { data, error } = await supabase.rpc('academy_get_prereq_waiver_exam', { p_root: rootSlug });
+  if (error) throw error;
+  return data;
+}
+
+export async function submitPrereqWaiverExam(attemptId, answers) {
+  const { data, error } = await supabase.rpc('academy_submit_prereq_waiver_exam', {
+    p_attempt: attemptId, p_answers: answers,
+  });
   if (error) throw error;
   return data;
 }

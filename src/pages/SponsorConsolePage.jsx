@@ -11,6 +11,7 @@ import { listAcademyApps, mySponsorPools, sponsorPoolReport, sponsorAssign, spon
 import {
   TIER_LABELS, TIERS, seatsRemaining, poolState, canAssign, daysLeft, formatPrice, poolCovers, summarizeAssignments,
 } from '@/lib/sponsorPools';
+import { isBonusTier, assignToast } from '@/lib/prereqWaiver';
 
 // The sponsor console (Breeze Energy onboarding, 2026-09-07): a training or
 // technical lead runs the employer's block of enrolments here. Assign a
@@ -78,7 +79,7 @@ const SponsorConsolePage = () => {
     setBusy(true);
     try {
       const res = await sponsorAssign({ poolId: pool.id, email: email.trim(), appSlug, tier, note: note || null });
-      toast({ title: 'Seat assigned', description: `${res.display_name || email} is enrolled in ${apps.find((a) => a.slug === appSlug)?.name || appSlug} (${TIER_LABELS[tier]}). ${res.seats_used} of ${res.seats} seats used.`, className: 'bg-[#BFFF00] text-slate-900' });
+      toast({ title: res.seat_consumed === false ? 'Enrolled, no seat used' : 'Seat assigned', description: assignToast({ ...res, email }, apps.find((a) => a.slug === appSlug)?.name || appSlug, TIER_LABELS[tier]), className: 'bg-[#BFFF00] text-slate-900' });
       setEmail(''); setNote('');
       await refresh(); await loadReport(pool.id);
     } catch (err) {
@@ -178,6 +179,14 @@ const SponsorConsolePage = () => {
                     {availableApps.map((a) => <option key={a.slug} value={a.slug}>{a.name}</option>)}
                   </select>
                   {!availableApps.length && <p className="text-xs text-yellow-400 mt-1">This pool covers no course at this tier.</p>}
+                  {isBonusTier(apps.find((a) => a.slug === appSlug), tier) && (
+                    <p className="text-xs text-emerald-400 mt-1" data-testid="sponsor-bonus-note">Bonus tier: this enrolment takes no seat from the pool.</p>
+                  )}
+                  {apps.find((a) => a.slug === appSlug)?.prereq_slug && (
+                    <p className="text-xs text-gray-400 mt-1" data-testid="sponsor-prereq-note">
+                      Prerequisite: {apps.find((a) => a.slug === apps.find((b) => b.slug === appSlug)?.prereq_slug)?.name || 'the root course'} (Associate certification, or the free waiver exam the learner takes from their Enroll page).
+                    </p>
+                  )}
                 </div>
                 <div>
                   <Label className="text-gray-300 mb-1 block">Note (development plan, role)</Label>

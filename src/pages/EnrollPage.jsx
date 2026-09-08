@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -16,8 +16,9 @@ import {
 import {
   listAcademyApps, listFees, feeFor, formatFee, listMyEnrollments,
   listMyResidencyApplications, startSelfEnrollment, redeemCode,
-  applyResidency, startCheckout, verifyPayment, TIERS,
+  applyResidency, startCheckout, verifyPayment, TIERS, getPrereqWaiverStatus,
 } from '@/services/academyService';
+import { waiverPresentation, selfEnrolOutcome, isBonusTier } from '@/lib/prereqWaiver';
 import { supabase } from '@/lib/customSupabaseClient';
 
 // One identity, four doors (NextGen-Academy-PLAN §1): same account, same
@@ -41,7 +42,7 @@ const DOOR_LABELS = {
   sponsored: 'Employer-sponsored',
 };
 
-function CourseTierPicker({ apps, tier, setTier, appSlug, setAppSlug, fees, feeKind }) {
+function CourseTierPicker({ apps, tier, setTier, appSlug, setAppSlug, fees, feeKind, prereq }) {
   const available = apps.filter((a) => a.status === 'available');
   const comingSoon = apps.filter((a) => a.status !== 'available');
   const fee = feeKind === 'course'
@@ -67,15 +68,7 @@ function CourseTierPicker({ apps, tier, setTier, appSlug, setAppSlug, fees, feeK
           One app = one course. The geoscience learning path follows the daily loop:
           Well Data Manager → Petrophysics → Correlation → Seismolord → Mapping → ReservoirCalc.
         </p>
-        {(() => {
-          const sel = apps.find((a) => a.slug === appSlug);
-          const prereq = sel?.prereq_slug && apps.find((a) => a.slug === sel.prereq_slug);
-          return prereq ? (
-            <p className="mt-1 text-xs text-amber-400">
-              Prerequisite: an active {prereq.name} certification is required before enrolling in this course.
-            </p>
-          ) : null;
-        })()}
+        <PrereqNote apps={apps} appSlug={appSlug} status={prereq} />
       </div>
       <div>
         <Label className="text-gray-300 mb-1 block">Tier</Label>
@@ -103,9 +96,36 @@ function CourseTierPicker({ apps, tier, setTier, appSlug, setAppSlug, fees, feeK
         <p className="text-sm text-gray-300">
           {feeKind === 'course' ? 'Published fee: ' : 'Personal registration fee: '}
           <span className="text-[#BFFF00] font-semibold">{formatFee(fee)}</span>
+          {feeKind === 'course' && isBonusTier(apps.find((a) => a.slug === appSlug), tier) && (
+            <span className="ml-2 text-xs text-gray-400" data-testid="enroll-bonus-note">Bonus tier: free, and it takes no sponsor seat.</span>
+          )}
         </p>
       )}
     </div>
+  );
+}
+
+// Prerequisite line under the course picker (owner decision 2026-09-08):
+// the server says whether it is met and how; when it is not, the free
+// waiver exam is one click away instead of a trigger error at enrolment.
+function PrereqNote({ apps, appSlug, status }) {
+  const sel = apps.find((a) => a.slug === appSlug);
+  if (!sel?.prereq_slug) return null;
+  const root = apps.find((a) => a.slug === sel.prereq_slug);
+  const view = waiverPresentation(status || {
+    required: true, prereq_slug: sel.prereq_slug, prereq_name: root?.name || sel.prereq_slug, satisfied: false, exam_available: true,
+  });
+  if (view.kind === 'none') return null;
+  const cls = view.kind === 'satisfied' ? 'text-emerald-400' : 'text-amber-400';
+  return (
+    <p className={`mt-1 text-xs ${cls}`} data-testid="enroll-prereq-note" data-kind={view.kind}>
+      {view.text}{' '}
+      {view.kind === 'open' && (
+        <Link to={`/dashboard/waiver/${sel.prereq_slug}`} className="text-[#BFFF00] hover:underline font-semibold" data-testid="enroll-waiver-link">
+          Take the free waiver exam
+        </Link>
+      )}
+    </p>
   );
 }
 
@@ -132,7 +152,20 @@ const EnrollPage = () => {
   const [sponsorCode, setSponsorCode] = useState('');
   const [resApp, setResApp] = useState('petrophysics');
   const [resMotivation, setResMotivation] = useState('');
+  const [prereqStatus, setPrereqStatus] = useState({});
   const verifiedRef = useRef(false);
+
+  // One status per distinct course the four doors currently point at.
+  useEffect(() => {
+    if (loading) return;
+    const slugs = [...new Set([selfApp, campusApp, sponsorApp, resApp].filter(Boolean))]
+      .filter((s) => apps.find((a) => a.slug === s)?.prereq_slug);
+    slugs.forEach((slug) => {
+      getPrereqWaiverStatus(slug)
+        .then((st) => setPrereqStatus((m) => ({ ...m, [slug]: st })))
+        .catch(() => {});
+    });
+  }, [loading, apps, selfApp, campusApp, sponsorApp, resApp, enrollments]);
 
   const refresh = async () => {
     const [e, r] = await Promise.all([listMyEnrollments(), listMyResidencyApplications()]);
@@ -206,7 +239,15 @@ const EnrollPage = () => {
     setBusy(true);
     try {
       const res = await startSelfEnrollment(selfApp, selfTier);
-      await goToCheckout(res.reference);
+      const outcome = selfEnrolOutcome(res);
+      if (outcome.next === 'enrolled') {
+        toast({ title: 'Enrolled', description: outcome.message, className: 'bg-[#BFFF00] text-slate-900' });
+        await refresh();
+        setBusy(false);
+        return;
+      }
+      if (outcome.next !== 'checkout') throw new Error(outcome.message);
+      await goToCheckout(outcome.reference);
     } catch (err) {
       toast({ title: 'Enrollment failed', description: err.message, variant: 'destructive' });
       setBusy(false);
@@ -324,13 +365,13 @@ const EnrollPage = () => {
               <CardHeader>
                 <CardTitle className="text-white">Self-enrollment</CardTitle>
                 <CardDescription>
-                  Pay the published fee at registration and start immediately in Learning Mode.
+                  Pay the published fee at registration and start immediately in Learning Mode. Free tiers activate at once.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <CourseTierPicker
                   apps={apps} fees={fees} feeKind="course"
-                  appSlug={selfApp} setAppSlug={setSelfApp}
+                  appSlug={selfApp} setAppSlug={setSelfApp} prereq={prereqStatus[selfApp]}
                   tier={selfTier} setTier={setSelfTier}
                 />
                 <Button
@@ -358,7 +399,7 @@ const EnrollPage = () => {
               <CardContent className="space-y-6">
                 <CourseTierPicker
                   apps={apps} fees={fees} feeKind="registration"
-                  appSlug={campusApp} setAppSlug={setCampusApp}
+                  appSlug={campusApp} setAppSlug={setCampusApp} prereq={prereqStatus[campusApp]}
                   tier={campusTier} setTier={setCampusTier}
                 />
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -404,7 +445,7 @@ const EnrollPage = () => {
               <CardContent className="space-y-6">
                 <CourseTierPicker
                   apps={apps} fees={fees} feeKind={null}
-                  appSlug={sponsorApp} setAppSlug={setSponsorApp}
+                  appSlug={sponsorApp} setAppSlug={setSponsorApp} prereq={prereqStatus[sponsorApp]}
                   tier={sponsorTier} setTier={setSponsorTier}
                 />
                 <div>
@@ -438,7 +479,7 @@ const EnrollPage = () => {
               <CardContent className="space-y-6">
                 <CourseTierPicker
                   apps={apps} fees={fees} feeKind={null}
-                  appSlug={resApp} setAppSlug={setResApp}
+                  appSlug={resApp} setAppSlug={setResApp} prereq={prereqStatus[resApp]}
                   tier="beginner" setTier={() => {}}
                 />
                 <div>
