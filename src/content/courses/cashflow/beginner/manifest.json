@@ -1,0 +1,299 @@
+{
+  "app_slug": "cashflow",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-cash-flow-is",
+      "title": "What a Cash Flow Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-year-is-a-row",
+          "title": "A year is a row",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses",
+          "title": "What it refuses",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-units-that-travel",
+          "title": "The units that travel",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-from-rows-to-years",
+      "title": "From Rows to Years",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-volumes-by-well-and-by-year",
+          "title": "Volumes by well and by year",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-dates-years-and-month-indexes",
+          "title": "Dates, years and month indexes",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-per-well-beats-the-rollup",
+          "title": "Per-well beats the rollup",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-costs-by-year-and-their-aliases",
+          "title": "Costs by year and their aliases",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-when-the-file-is-refused",
+          "title": "When the file is refused",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-prices",
+      "title": "Prices",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-flat-price-and-an-escalator",
+          "title": "A flat price and an escalator",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-deck-and-the-step-hold",
+          "title": "A deck and the step hold",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-differentials-and-scales",
+          "title": "Differentials and scales",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-three-streams-one-fiscal-price",
+          "title": "Three streams, one fiscal price",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-default-nobody-set",
+          "title": "The default nobody set",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-joint-venture-cascade",
+      "title": "The Joint Venture Cascade",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-royalty-off-the-top",
+          "title": "Royalty off the top",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-depreciation-is-not-a-cash-flow",
+          "title": "Depreciation is not a cash flow",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-taxable-income-and-tax",
+          "title": "Taxable income and tax",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-net-cash-flow",
+          "title": "Net cash flow",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-working-interest-scales-inside",
+          "title": "Working interest scales inside",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-adding-up",
+      "title": "Adding Up",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-cumulative-cash-flow",
+          "title": "Cumulative cash flow",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-payback",
+          "title": "Payback",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-totals-boe-and-unit-costs",
+          "title": "Totals, barrels of oil equivalent and unit costs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-take-without-time",
+          "title": "Take without time",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-ledger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

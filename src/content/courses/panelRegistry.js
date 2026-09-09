@@ -146,6 +146,11 @@ export const PANELS = {
   'pd-ledger-explorer': React.lazy(() => import('@/components/course/panels/surveillance/LedgerExplorer')),
   'pd-exception-explorer': React.lazy(() => import('@/components/course/panels/surveillance/ExceptionExplorer')),
   'pd-reading-explorer': React.lazy(() => import('@/components/course/panels/surveillance/ReadingExplorer')),
+
+  // EC1 Cash Flow & NPV
+  'ec-ledger-explorer': React.lazy(() => import('@/components/course/panels/cashflow/LedgerExplorer')),
+  'ec-time-explorer': React.lazy(() => import('@/components/course/panels/cashflow/TimeExplorer')),
+  'ec-fiscal-explorer': React.lazy(() => import('@/components/course/panels/cashflow/FiscalExplorer')),
 };
 
 export function resolvePanel(id) {
