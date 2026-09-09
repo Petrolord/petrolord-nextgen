@@ -25,6 +25,7 @@ import {
 import {
   hasScope, getQuota, getCapstone, submitCapstone, getCourseProgress, verificationUrl,
 } from '@/services/academyService';
+import LearningModeGate from '@/components/academy/LearningModeGate';
 
 const APP = 'perfsand';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -48,24 +49,15 @@ const LESSONS = [
 
 function ScopeGate() {
   return (
-    <div className="max-w-xl mx-auto p-8 text-center space-y-4">
-      <Lock className="h-10 w-10 text-[#BFFF00] mx-auto" />
-      <h2 className="text-2xl font-bold text-white">Perforation and Sand Control: Learning Mode locked</h2>
-      <p className="text-gray-400">
+    <LearningModeGate app={APP} title="Perforation and Sand Control: Learning Mode locked">
+      <p>
         Enrol in the Perforation and Sand Control course and activate your account to open this app
         in Learning Mode. There is no prerequisite inside the Drilling and Completions module.
         Completion Design is the natural companion: it decides what sits above the packer, and this
         course decides what happens below it. Geomechanics supplies the stress and strength profile
         the sanding screen runs on.
       </p>
-      <div className="flex justify-center">
-        <Link to="/dashboard/enroll">
-          <Button className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
-            <GraduationCap className="h-4 w-4 mr-1" /> Enrol
-          </Button>
-        </Link>
-      </div>
-    </div>
+    </LearningModeGate>
   );
 }
 

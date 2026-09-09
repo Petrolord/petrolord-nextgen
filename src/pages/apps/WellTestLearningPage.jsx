@@ -21,6 +21,7 @@ import { buildupWindow, faultLines, fixtureTruth, multiRateCase } from '@/compon
 import {
   hasScope, getQuota, getCapstone, submitCapstone, getCourseProgress, verificationUrl,
 } from '@/services/academyService';
+import LearningModeGate from '@/components/academy/LearningModeGate';
 
 const APP = 'welltest';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -43,23 +44,14 @@ const LESSONS = [
 
 function ScopeGate() {
   return (
-    <div className="max-w-xl mx-auto p-8 text-center space-y-4">
-      <Lock className="h-10 w-10 text-[#BFFF00] mx-auto" />
-      <h2 className="text-2xl font-bold text-white">Well Test Analysis: Learning Mode locked</h2>
-      <p className="text-gray-400">
+    <LearningModeGate app={APP} title="Well Test Analysis: Learning Mode locked">
+      <p>
         Enrol in the Well Test Analysis course and activate your account to open this app in
         Learning Mode. There is no prerequisite inside the Reservoir Engineering module, though
         Material Balance and Decline Curve Analysis are the recommended courses before this one,
         because the tank this well sits in and the decline it eventually shows are both theirs.
       </p>
-      <div className="flex justify-center">
-        <Link to="/dashboard/enroll">
-          <Button className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
-            <GraduationCap className="h-4 w-4 mr-1" /> Enrol
-          </Button>
-        </Link>
-      </div>
-    </div>
+    </LearningModeGate>
   );
 }
 

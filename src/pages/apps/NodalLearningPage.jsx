@@ -26,6 +26,7 @@ import {
 import {
   hasScope, getQuota, getCapstone, submitCapstone, getCourseProgress, verificationUrl,
 } from '@/services/academyService';
+import LearningModeGate from '@/components/academy/LearningModeGate';
 
 const APP = 'nodal';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -70,24 +71,15 @@ const LESSONS = [
 
 function ScopeGate() {
   return (
-    <div className="max-w-xl mx-auto p-8 text-center space-y-4">
-      <Lock className="h-10 w-10 text-[#BFFF00] mx-auto" />
-      <h2 className="text-2xl font-bold text-white">Nodal Analysis and Well Performance: Learning Mode locked</h2>
-      <p className="text-gray-400">
+    <LearningModeGate app={APP} title="Nodal Analysis and Well Performance: Learning Mode locked">
+      <p>
         Enrol in the Nodal Analysis and Well Performance course and activate your account to open
         this app in Learning Mode. This is the root of the Production and Artificial Lift path: the
         inflow it calibrates is what every artificial lift decision is measured against, the outflow
         it builds is what a tubing size argument is really about, and the operating point it solves
         for is the rate every production forecast downstream of it starts from.
       </p>
-      <div className="flex justify-center">
-        <Link to="/dashboard/enroll">
-          <Button className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
-            <GraduationCap className="h-4 w-4 mr-1" /> Enrol
-          </Button>
-        </Link>
-      </div>
-    </div>
+    </LearningModeGate>
   );
 }
 

@@ -25,6 +25,7 @@ import {
 import {
   hasScope, getQuota, getCapstone, submitCapstone, getCourseProgress, verificationUrl,
 } from '@/services/academyService';
+import LearningModeGate from '@/components/academy/LearningModeGate';
 
 const APP = 'stimulation';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -51,24 +52,15 @@ const LESSONS = [
 
 function ScopeGate() {
   return (
-    <div className="max-w-xl mx-auto p-8 text-center space-y-4">
-      <Lock className="h-10 w-10 text-[#BFFF00] mx-auto" />
-      <h2 className="text-2xl font-bold text-white">Stimulation Design: Learning Mode locked</h2>
-      <p className="text-gray-400">
+    <LearningModeGate app={APP} title="Stimulation Design: Learning Mode locked">
+      <p>
         Enrol in the Stimulation Design course and activate your account to open this app in
         Learning Mode. Perforation and Sand Control is the natural companion: it decides how the
         well is connected to the rock, and this course decides what you then do to that rock.
         Geomechanics supplies the closure stress every fracture width and every matrix ceiling on
         this page is measured against.
       </p>
-      <div className="flex justify-center">
-        <Link to="/dashboard/enroll">
-          <Button className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
-            <GraduationCap className="h-4 w-4 mr-1" /> Enrol
-          </Button>
-        </Link>
-      </div>
-    </div>
+    </LearningModeGate>
   );
 }
 

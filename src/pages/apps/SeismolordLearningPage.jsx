@@ -25,6 +25,7 @@ import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
   getCourseProgress,
 } from '@/services/academyService';
+import LearningModeGate from '@/components/academy/LearningModeGate';
 
 const APP = 'seismolord';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -48,25 +49,13 @@ const LESSONS = [
 
 function ScopeGate() {
   return (
-    <div className="max-w-xl mx-auto p-8 text-center space-y-4">
-      <Lock className="h-10 w-10 text-[#BFFF00] mx-auto" />
-      <h2 className="text-2xl font-bold text-white">Seismolord — Learning Mode locked</h2>
-      <p className="text-gray-400">
+    <LearningModeGate app={APP} title="Seismolord: Learning Mode locked">
+      <p>
         Enrol in the Seismolord course and activate your account to open this app in Learning
         Mode. This course requires a Well Data Manager certification first (it is the root of
         the geoscience path).
       </p>
-      <div className="flex justify-center gap-3">
-        <Link to="/dashboard/enroll">
-          <Button className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
-            <GraduationCap className="h-4 w-4 mr-1" /> Enrol
-          </Button>
-        </Link>
-        <Link to="/dashboard/apps/welldata">
-          <Button variant="outline" className="border-gray-600 text-gray-200">Well Data Manager course</Button>
-        </Link>
-      </div>
-    </div>
+    </LearningModeGate>
   );
 }
 
