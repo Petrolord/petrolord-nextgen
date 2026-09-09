@@ -1,0 +1,305 @@
+{
+  "app_slug": "cashflow",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-why-time-matters",
+      "title": "Why Time Matters",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-dollar-next-year",
+          "title": "A dollar next year",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-the-discount-rate-is",
+          "title": "What the discount rate is",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-end-year-and-mid-year",
+          "title": "End year and mid year",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-convention-cannot-tell-you",
+          "title": "What a convention cannot tell you",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-real-and-nominal",
+      "title": "Real and Nominal",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-inflation-in-the-ledger",
+          "title": "Inflation in the ledger",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-fisher-rate",
+          "title": "The Fisher rate",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-same-field-on-two-bases",
+          "title": "The same field on two bases",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-valuation-year",
+          "title": "The valuation year",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-sunk-years",
+          "title": "Sunk years",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-net-present-value",
+      "title": "Net Present Value",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-npv-row-by-row",
+          "title": "NPV row by row",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-npv-profile",
+          "title": "The NPV profile",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-discounted-payback",
+          "title": "Discounted payback",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-dpi-and-the-index-it-is-not",
+          "title": "DPI and the index it is not",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-take-discounted-and-not",
+          "title": "Take, discounted and not",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-internal-rate-of-return",
+      "title": "The Internal Rate of Return",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-irr-solves",
+          "title": "What IRR solves",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-newton-and-bisection",
+          "title": "Newton and bisection",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-when-there-is-no-irr",
+          "title": "When there is no IRR",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-there-are-two",
+          "title": "When there are two",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-irr-cannot-tell-you",
+          "title": "What IRR cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-sweeps",
+      "title": "Sweeps",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-price-sweep",
+          "title": "The price sweep",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-discount-rate-sweep",
+          "title": "The discount rate sweep",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-breakeven-price",
+          "title": "The breakeven price",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-decline-sweep",
+          "title": "The decline sweep",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-time-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

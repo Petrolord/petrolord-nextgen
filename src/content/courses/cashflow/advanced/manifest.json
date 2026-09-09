@@ -1,0 +1,305 @@
+{
+  "app_slug": "cashflow",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-cost-recovery",
+      "title": "Cost Recovery",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-psc-cost-pool",
+          "title": "The PSC cost pool",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-cap-binds-and-carries",
+          "title": "The cap binds and carries",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-tranches-and-the-credit",
+          "title": "Tranches and the credit",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-cost-oil-refuses",
+          "title": "What cost oil refuses",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-pia-royalties",
+      "title": "The PIA Royalties",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-terrain-sets-the-rate",
+          "title": "Terrain sets the rate",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-marginal-blend",
+          "title": "The marginal blend",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-price-royalty-and-its-anchors",
+          "title": "The price royalty and its anchors",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-field-level-tiers-and-working-interest",
+          "title": "Field-level tiers and working interest",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-hydrocarbon-tax",
+      "title": "Hydrocarbon Tax",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-hcdt-and-nddc",
+          "title": "HCDT and NDDC",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-cost-price-ratio-cap",
+          "title": "The cost price ratio cap",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-allowance-and-its-volume-cap",
+          "title": "The allowance and its volume cap",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-hct-on-liquids-only",
+          "title": "HCT on liquids only",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-cit-and-the-two-thirds-restriction",
+          "title": "CIT and the two-thirds restriction",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-levies-and-losses",
+      "title": "Levies and Losses",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-tet-or-the-development-levy",
+          "title": "TET or the development levy",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-date-trigger",
+          "title": "The date trigger",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-loss-relief",
+          "title": "Loss relief",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-losses-unused-at-cessation",
+          "title": "Losses unused at cessation",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-minimum-effective-tax-rate",
+          "title": "The minimum effective tax rate",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-end-of-life",
+      "title": "End of Life",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-economic-limit",
+          "title": "The economic limit",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-abandonment-as-a-lump-sum",
+          "title": "Abandonment as a lump sum",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-sinking-fund",
+          "title": "The sinking fund",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-first-oil-delay",
+          "title": "First oil delay",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-three-numbers-to-distrust",
+          "title": "Three numbers to distrust",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-fiscal-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
