@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
 import {
   Loader2, CreditCard, GraduationCap, Briefcase, Microscope, BadgeCheck,
-  Clock, XCircle,
+  Clock, XCircle, PlayCircle, ArrowRight,
 } from 'lucide-react';
 import {
   listAcademyApps, listFees, feeFor, formatFee, listMyEnrollments,
@@ -20,6 +20,9 @@ import {
 } from '@/services/academyService';
 import { waiverPresentation, selfEnrolOutcome, isBonusTier } from '@/lib/prereqWaiver';
 import { supabase } from '@/lib/customSupabaseClient';
+import { useActivation } from '@/hooks/useActivation';
+import { useRole } from '@/contexts/RoleContext';
+import { enrollmentAction } from '@/lib/learningGate';
 
 // One identity, four doors (NextGen-Academy-PLAN §1): same account, same
 // courses, same certificates — only the payer differs. Learning-Mode
@@ -132,6 +135,9 @@ function PrereqNote({ apps, appSlug, status }) {
 const EnrollPage = () => {
   const { toast } = useToast();
   const [searchParams, setSearchParams] = useSearchParams();
+  // Sponsored learners (2026-09-09): an active row must lead somewhere.
+  const { isViewAsStudent } = useRole();
+  const { status: activation } = useActivation();
   const [apps, setApps] = useState([]);
   const [fees, setFees] = useState([]);
   const [enrollments, setEnrollments] = useState([]);
@@ -563,6 +569,18 @@ const EnrollPage = () => {
                           <span className="inline-flex items-center gap-1"><XCircle className="h-3 w-3" />cancelled</span>
                         ) : e.status}
                       </span>
+                      {(() => {
+                        const act = enrollmentAction(e, { isLearner: !!isViewAsStudent, activation });
+                        if (!act || act.kind === 'pay') return null;
+                        return (
+                          <Link to={act.to}>
+                            <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                              {act.kind === 'start' ? <PlayCircle className="h-4 w-4 mr-1" /> : <ArrowRight className="h-4 w-4 mr-1" />}
+                              {act.label}
+                            </Button>
+                          </Link>
+                        );
+                      })()}
                       {e.status === 'pending' && (
                         <Button
                           size="sm" variant="outline"

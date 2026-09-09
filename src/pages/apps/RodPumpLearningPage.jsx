@@ -30,6 +30,7 @@ import {
 import {
   hasScope, getQuota, getCapstone, submitCapstone, getCourseProgress, verificationUrl,
 } from '@/services/academyService';
+import LearningModeGate from '@/components/academy/LearningModeGate';
 
 const APP = 'rodpump';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -74,24 +75,15 @@ const LESSONS = [
 
 function ScopeGate() {
   return (
-    <div className="max-w-xl mx-auto p-8 text-center space-y-4">
-      <Lock className="h-10 w-10 text-[#BFFF00] mx-auto" />
-      <h2 className="text-2xl font-bold text-white">Rod Pump Design: Learning Mode locked</h2>
-      <p className="text-gray-400">
+    <LearningModeGate app={APP} title="Rod Pump Design: Learning Mode locked">
+      <p>
         Enrol in the Rod Pump Design course and activate your account to open this app in Learning
         Mode. A beam pump is a wave machine. The polished rod moves one stroke at the surface, the
         rod string carries it down as a travelling wave, and the plunger moves a different one, so
         almost every number a designer wants is a property of the card the wave makes rather than
         of the geometry that started it.
       </p>
-      <div className="flex justify-center">
-        <Link to="/dashboard/enroll">
-          <Button className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
-            <GraduationCap className="h-4 w-4 mr-1" /> Enrol
-          </Button>
-        </Link>
-      </div>
-    </div>
+    </LearningModeGate>
   );
 }
 

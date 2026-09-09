@@ -15,6 +15,8 @@
 - [Notifications | Petrolord](/notificationcenter): No description available
 - [Report Analytics - Petrolord](/adminreportanalytics): No description available
 - [Settings - Petrolord NextGen Suite](/settings): No description available
+- [Sponsor console - NextGen Academy](/sponsorconsole): No description available
 - [System Settings - Petrolord Admin](/adminsystemsettings): No description available
 - [User Management - Petrolord](/adminusers): No description available
 - [Verify certificate - Petrolord NextGen Academy](/verifycertificate): No description available
+- [waiver exam - Petrolord NextGen Academy](/prereqwaiver): No description available

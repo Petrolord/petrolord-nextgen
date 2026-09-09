@@ -21,6 +21,7 @@ import { fieldLedger, patternLedger } from '@/components/course/panels/waterfloo
 import {
   hasScope, getQuota, getCapstone, submitCapstone, getCourseProgress, verificationUrl,
 } from '@/services/academyService';
+import LearningModeGate from '@/components/academy/LearningModeGate';
 
 const APP = 'waterflood';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -43,23 +44,14 @@ const LESSONS = [
 
 function ScopeGate() {
   return (
-    <div className="max-w-xl mx-auto p-8 text-center space-y-4">
-      <Lock className="h-10 w-10 text-[#BFFF00] mx-auto" />
-      <h2 className="text-2xl font-bold text-white">Waterflood Management: Learning Mode locked</h2>
-      <p className="text-gray-400">
+    <LearningModeGate app={APP} title="Waterflood Management: Learning Mode locked">
+      <p>
         Enrol in the Waterflood Management course and activate your account to open this app in
         Learning Mode. There is no prerequisite inside the Reservoir Engineering module, though
         SCAL and Displacement is the recommended course before this one because the flood front
         it constructs is the front this course sweeps.
       </p>
-      <div className="flex justify-center">
-        <Link to="/dashboard/enroll">
-          <Button className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
-            <GraduationCap className="h-4 w-4 mr-1" /> Enrol
-          </Button>
-        </Link>
-      </div>
-    </div>
+    </LearningModeGate>
   );
 }
 

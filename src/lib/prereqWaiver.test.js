@@ -64,4 +64,10 @@ describe('self-enrolment outcome and sponsor wording', () => {
     expect(assignToast({ display_name: 'Ada', seat_consumed: false, seat_reason: 'course_seat', seats_used: 4, seats: 15 }, 'Petrophysics', 'Professional'))
       .toMatch(/^Ada is enrolled in Petrophysics \(Professional\)\. Rides on the seat already held for this course: no seat used/);
   });
+  it('names a superseded pending self-enrolment', () => {
+    expect(assignToast({ display_name: 'Ada', seat_consumed: true, seats_used: 4, seats: 20, superseded_door: 'self' }, 'Petrophysics', 'Associate'))
+      .toBe('Ada is enrolled in Petrophysics (Associate). 4 of 20 seats used. Their pending self-enrolment was closed and its unpaid checkout cancelled.');
+    expect(assignToast({ display_name: 'Ada', seat_consumed: true, seats_used: 4, seats: 20, superseded_door: null }, 'Petrophysics', 'Associate'))
+      .not.toMatch(/superseded|pending/);
+  });
 });

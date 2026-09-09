@@ -60,12 +60,22 @@ export function selfEnrolOutcome(res) {
   return { next: 'error', message: `Unexpected enrollment status: ${res.status || 'unknown'}` };
 }
 
+const SUPERSEDED_DOOR = {
+  self: 'self-enrolment', campus: 'campus cohort enrolment', residency: 'residency enrolment', sponsored: 'sponsored enrolment',
+};
+
 /** Sponsor console wording for an assignment result. */
 export function assignToast(res, courseName, tierLabel) {
   const who = res?.display_name || res?.email || 'The learner';
+  // 2026-09-09: a pending (unpaid) enrolment for the same course tier is
+  // superseded by the seat rather than blocking it; say so to the lead.
+  const superseded = res?.superseded_door
+    ? ` Their pending ${SUPERSEDED_DOOR[res.superseded_door] || 'enrolment'} was closed and its unpaid checkout cancelled.`
+    : '';
   if (res && res.seat_consumed === false) {
     const why = res.seat_reason === 'course_seat' ? 'Rides on the seat already held for this course' : 'Bonus course';
-    return `${who} is enrolled in ${courseName} (${tierLabel}). ${why}: no seat used, ${res.seats_used} of ${res.seats} seats remain in use.`;
+    return `${who} is enrolled in ${courseName} (${tierLabel}). ${why}: no seat used, ${res.seats_used} of ${res.seats} seats remain in use.${superseded}`;
   }
-  return `${who} is enrolled in ${courseName} (${tierLabel}). ${res?.seats_used ?? '?'} of ${res?.seats ?? '?'} seats used.`;
+  return `${who} is enrolled in ${courseName} (${tierLabel}). ${res?.seats_used ?? '?'} of ${res?.seats ?? '?'} seats used.${superseded}`;
 }
+

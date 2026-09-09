@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
+import { isDashboardPath } from '@/lib/learningGate';
 import {
   Loader2, GraduationCap, ShieldCheck, BookOpen, Database, CheckCircle2,
   Compass, ClipboardList,
@@ -37,6 +38,11 @@ const TIER_COPY = {
 
 const GetStartedPage = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  // A course gate or an enrollment row sends the learner here with
+  // ?next=<dashboard path>; once activated they go back to that course.
+  const nextParam = searchParams.get('next');
+  const returnTo = isDashboardPath(nextParam) ? nextParam : '/dashboard';
   const { toast } = useToast();
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState(null);
@@ -67,10 +73,10 @@ const GetStartedPage = () => {
 
   useEffect(() => {
     if (status?.activated) {
-      const t = setTimeout(() => navigate('/dashboard'), 1500);
+      const t = setTimeout(() => navigate(returnTo), 1500);
       return () => clearTimeout(t);
     }
-  }, [status, navigate]);
+  }, [status, navigate, returnTo]);
 
   const handleOrientation = async () => {
     setBusy(true);

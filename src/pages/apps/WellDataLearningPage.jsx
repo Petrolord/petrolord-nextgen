@@ -20,6 +20,7 @@ import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
   getCourseProgress,
 } from '@/services/academyService';
+import LearningModeGate from '@/components/academy/LearningModeGate';
 
 const APP = 'welldata';
 const TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -40,25 +41,13 @@ const LESSONS = [
 
 function ScopeGate() {
   return (
-    <div className="max-w-xl mx-auto p-8 text-center space-y-4">
-      <Lock className="h-10 w-10 text-[#BFFF00] mx-auto" />
-      <h2 className="text-2xl font-bold text-white">Well Data Manager — Learning Mode locked</h2>
-      <p className="text-gray-400">
+    <LearningModeGate app={APP} title="Well Data Manager: Learning Mode locked">
+      <p>
         Enrol in the Well Data Manager course and activate your account to open this app in
         Learning Mode against the bundled teaching LAS files. This course is the root of the
         geoscience path: certifying here unlocks enrollment in the other geoscience courses.
       </p>
-      <div className="flex justify-center gap-3">
-        <Link to="/dashboard/enroll">
-          <Button className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
-            <GraduationCap className="h-4 w-4 mr-1" /> Enrol
-          </Button>
-        </Link>
-        <Link to="/dashboard/get-started">
-          <Button variant="outline" className="border-gray-600 text-gray-200">Get started</Button>
-        </Link>
-      </div>
-    </div>
+    </LearningModeGate>
   );
 }
 

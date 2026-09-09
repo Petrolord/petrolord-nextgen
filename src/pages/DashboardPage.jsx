@@ -3,7 +3,7 @@ import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { useRole } from '@/contexts/RoleContext';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Activity, Users, Settings, Construction, Award, KeyRound, GraduationCap, ArrowRight, BookOpen } from 'lucide-react';
+import { Activity, Users, Settings, Construction, Award, KeyRound, GraduationCap, ArrowRight, BookOpen, PlayCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 import EnrollPage from '@/pages/EnrollPage';
@@ -11,6 +11,8 @@ import AdminAcademyDoorsPage from '@/pages/AdminAcademyDoorsPage';
 import SponsorConsolePage from '@/pages/SponsorConsolePage';
 import PrereqWaiverPage from '@/pages/PrereqWaiverPage';
 import GetStartedPage from '@/pages/GetStartedPage';
+import { useActivation } from '@/hooks/useActivation';
+import { enrollmentAction } from '@/lib/learningGate';
 import DevicesPage from '@/pages/DevicesPage';
 import AdminCertificationsPage from '@/pages/AdminCertificationsPage';
 import AdminCourseHandbookPage from '@/pages/AdminCourseHandbookPage';
@@ -134,9 +136,52 @@ const LecturerHome = () => (
 );
 
 const TIER_LABELS = { beginner: 'Associate', intermediate: 'Professional', advanced: 'Expert' };
+const DOOR_LABELS = { self: 'Self-enrolled', campus: 'Campus cohort', residency: 'Residency', sponsored: 'Employer-sponsored' };
+
+// Every active enrolment gets the one button that opens it (2026-09-09):
+// Start course, or Activate account first when the gate is not cleared.
+const YourCourses = ({ enrollments, apps, isLearner, activation }) => {
+    if (!enrollments.length) return null;
+    const nameOf = (slug) => apps.find((a) => a.slug === slug)?.name || slug;
+    return (
+        <div className="rounded-lg border border-[#BFFF00]/30 bg-[#1E293B] p-6 shadow-lg">
+            <div className="flex items-baseline justify-between mb-1">
+                <h3 className="text-lg font-medium text-slate-200">Your courses</h3>
+                <span className="text-xs text-slate-500">{enrollments.length} active</span>
+            </div>
+            <p className="text-slate-400 text-sm mb-4">Courses with an active enrollment on your account, newest first.</p>
+            <div className="space-y-2">
+                {enrollments.map((e) => {
+                    const act = enrollmentAction(e, { isLearner, activation });
+                    return (
+                        <div key={e.id} className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-slate-700 bg-slate-800 px-4 py-3">
+                            <div>
+                                <p className="text-white font-medium">
+                                    {nameOf(e.app_slug)}
+                                    <span className="text-slate-400 font-normal"> · {TIER_LABELS[e.course_tier] || e.course_tier}</span>
+                                </p>
+                                <p className="text-xs text-slate-500">{DOOR_LABELS[e.door] || e.door} · {new Date(e.created_at).toLocaleDateString()}</p>
+                            </div>
+                            {act && act.to && (
+                                <Link to={act.to}>
+                                    <Button size="sm" className="bg-[#BFFF00] text-black hover:bg-[#a3d900] font-bold">
+                                        {act.kind === 'start' ? <PlayCircle className="w-4 h-4 mr-1" /> : <ArrowRight className="w-4 h-4 mr-1" />}
+                                        {act.label}
+                                    </Button>
+                                </Link>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
 
 const StudentHome = () => {
     const { user, profile } = useAuth();
+    const { isViewAsStudent } = useRole();
+    const { status: activation } = useActivation();
     const [apps, setApps] = React.useState([]);
     const [enrollments, setEnrollments] = React.useState([]);
     const [certs, setCerts] = React.useState([]);
@@ -229,6 +274,13 @@ const StudentHome = () => {
             </Card>
         </div>
 
+        <YourCourses
+            enrollments={[...activeEnrollments].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))}
+            apps={apps}
+            isLearner={!!isViewAsStudent}
+            activation={activation}
+        />
+
         {modules.map((mod) => (
             <div key={mod} className="rounded-lg border border-slate-800 bg-[#1E293B] p-6 shadow-lg">
                 <div className="flex items-baseline justify-between mb-1">
@@ -250,7 +302,7 @@ const StudentHome = () => {
                                             {TIER_LABELS[cert.tier] || cert.tier}
                                         </span>
                                     ) : enrolledSlugs.has(app.slug) ? (
-                                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">Enrolled</span>
+                                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">Enrolled · open</span>
                                     ) : null}
                                 </div>
                             </Link>
