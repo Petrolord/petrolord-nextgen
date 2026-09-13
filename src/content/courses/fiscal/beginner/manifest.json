@@ -1,0 +1,299 @@
+{
+  "app_slug": "fiscal",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-fiscal-regime-is",
+      "title": "What a Fiscal Regime Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-four-instruments",
+          "title": "The four instruments",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-sandbox-models",
+          "title": "What this sandbox models",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses-to-be",
+          "title": "What it refuses to be",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-units-that-travel",
+          "title": "The units that travel",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-project-before-the-regime",
+      "title": "The Project Before the Regime",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-decline-and-a-fixed-horizon",
+          "title": "A decline and a fixed horizon",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-three-streams",
+          "title": "Three streams",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-price-deck-and-the-step-hold",
+          "title": "The price deck and the step hold",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-fixed-opex-and-variable-opex",
+          "title": "Fixed opex and variable opex",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-capex-lands-in-year-one",
+          "title": "Capex lands in year one",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-revenue-and-royalty",
+      "title": "Revenue and Royalty",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-gross-revenue-in-millions",
+          "title": "Gross revenue in millions",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-flat-royalty",
+          "title": "A flat royalty",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-revenue-after-royalty",
+          "title": "Revenue after royalty",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-six-templates-as-data",
+          "title": "The six templates as data",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-royalty-a-template-chooses",
+          "title": "The royalty a template chooses",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-concession-ledger",
+      "title": "The Concession Ledger",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-cost-recovery-at-the-full-limit",
+          "title": "Cost recovery at the full limit",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-profit-oil-at-a-flat-split",
+          "title": "Profit oil at a flat split",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-tax-on-the-profit-share",
+          "title": "Tax on the profit share",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-contractor-net-cash-flow",
+          "title": "Contractor net cash flow",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-government-take",
+          "title": "Government take",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-reading-the-ledger",
+      "title": "Reading the Ledger",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-cumulative-net-cash-flow",
+          "title": "Cumulative net cash flow",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-payback-year",
+          "title": "The payback year",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-totals-across-the-life",
+          "title": "Totals across the life",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-one-regime-cannot-tell-you",
+          "title": "What one regime cannot tell you",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-regime-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

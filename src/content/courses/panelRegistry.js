@@ -151,6 +151,11 @@ export const PANELS = {
   'ec-ledger-explorer': React.lazy(() => import('@/components/course/panels/cashflow/LedgerExplorer')),
   'ec-time-explorer': React.lazy(() => import('@/components/course/panels/cashflow/TimeExplorer')),
   'ec-fiscal-explorer': React.lazy(() => import('@/components/course/panels/cashflow/FiscalExplorer')),
+
+  // EC2 Fiscal Regime Design
+  'ec-regime-explorer': React.lazy(() => import('@/components/course/panels/fiscal/RegimeExplorer')),
+  'ec-instrument-explorer': React.lazy(() => import('@/components/course/panels/fiscal/InstrumentExplorer')),
+  'ec-comparison-explorer': React.lazy(() => import('@/components/course/panels/fiscal/ComparisonExplorer')),
 };
 
 export function resolvePanel(id) {
