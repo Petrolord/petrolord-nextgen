@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   ResponsiveContainer, LineChart, BarChart, Bar, Line, Cell, XAxis, YAxis, CartesianGrid,
-  Tooltip, Legend, ReferenceLine,
+  Tooltip, Legend, ReferenceLine, ReferenceArea,
 } from 'recharts';
 import {
   COMPARISON_IDS, COMPARISON_LABELS, PRICE_POINT_MEANINGS,
@@ -18,6 +18,12 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 // sweep and the eighth point the loop never reaches, and the derived verdicts
 // beside the quantities they claim to rank.
 //
+// THE PRICE CHART READS THE ENGINE'S STATE ON EVERY POINT (EC2-1). A `share`
+// point is drawn on the line. An `undefined` point has no value: the line
+// breaks there and the price band is shaded as uneconomic. An `exceeds` point
+// is drawn as an open marker pinned to the top of the axis, its true value in
+// the tooltip, and it never sets the scale.
+//
 // runFiscalComparison is declared ASYNC by the engine, so every reader here is
 // awaited rather than called inline. Nothing on this page computes anything.
 
@@ -30,7 +36,7 @@ const yr = (v) => (v === null || v === undefined ? 'never' : String(v));
 
 const MODES = [
   ['summary', 'Summary: the ranking, and one rate with two values'],
-  ['price', 'Price: the sweep, and which meaning each point carries'],
+  ['price', 'Price: the sweep, and the state each point carries'],
   ['capex', 'Capex: seven swept points, an eighth called directly, two losses'],
   ['insights', 'Insights: the verdicts beside the quantities they rank'],
 ];
@@ -189,11 +195,25 @@ const Price = () => {
   if (sw.status !== 'done') {
     return <>{picker}{sw.status === 'failed' ? <Failed what="this price sweep" /> : <Waiting what="the price sweep" />}</>;
   }
+  const shareValues = sw.value.series.flatMap((d) => d.values.filter((_, i) => d.states[i] === 'share'));
+  const top = shareValues.length ? Math.min(100, Math.max(10, Math.ceil(Math.max(...shareValues) / 10) * 10)) : 100;
   const chart = sw.value.labels.map((label, i) => {
     const row = { price: label };
-    sw.value.series.forEach((d) => { row[d.id] = d.values[i]; });
+    sw.value.series.forEach((d) => {
+      row[d.id] = d.states[i] === 'share' ? d.values[i] : null;
+      row[`${d.id}__pin`] = d.states[i] === 'exceeds' ? top : null;
+      row[`${d.id}__true`] = d.values[i];
+    });
     return row;
   });
+  const step = sw.value.labels.length > 1 ? sw.value.labels[1] - sw.value.labels[0] : 10;
+  const tooltipFormatter = (v, name, item) => {
+    const key = String(item?.dataKey ?? '');
+    if (key.endsWith('__pin')) {
+      return [`${pc(item.payload[key.replace('__pin', '__true')])} percent, exceeds 100 and pinned to the top of the axis`, name];
+    }
+    return [pc(v), name];
+  };
   return (
     <>
       {picker}
@@ -207,39 +227,63 @@ const Price = () => {
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
             {GRID}
-            <XAxis dataKey="price" tick={AXIS} label={{ value: 'oil price, USD per bbl', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'government share the sweep plots, percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => pc(v)} />
+            <XAxis
+              dataKey="price" type="number" tick={AXIS} ticks={sw.value.labels}
+              domain={[sw.value.labels[0] - step / 2, sw.value.labels[sw.value.labels.length - 1] + step / 2]}
+              label={{ value: 'oil price, USD per bbl', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }}
+            />
+            <YAxis tick={AXIS} domain={[0, top]} allowDataOverflow tickFormatter={compact} label={{ value: 'government share, percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP} formatter={tooltipFormatter} />
             <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={100} stroke="#f87171" strokeDasharray="5 3" label={{ value: 'a share of 100 percent', fill: '#f87171', fontSize: 10, position: 'insideTopRight' }} />
+            {sw.value.undefinedPrices.map((price, k) => (
+              <ReferenceArea
+                key={`band-${price}`} x1={price - step / 2} x2={price + step / 2} fill="#f87171" fillOpacity={0.12} stroke="none"
+                label={k === 0 ? { value: 'project uneconomic at this price', fill: '#f87171', fontSize: 10, position: 'insideTop' } : undefined}
+              />
+            ))}
             {sw.value.series.map((d, i) => (
-              <Line key={d.id} type="monotone" dataKey={d.id} name={d.name} stroke={SERIES_COLOURS[i % SERIES_COLOURS.length]} dot={false} isAnimationActive={false} />
+              <Line key={d.id} type="linear" dataKey={d.id} name={d.name} stroke={SERIES_COLOURS[i % SERIES_COLOURS.length]} dot={false} connectNulls={false} isAnimationActive={false} />
+            ))}
+            {sw.value.series.map((d, i) => (
+              <Line
+                key={`${d.id}-pin`} type="linear" dataKey={`${d.id}__pin`} name={`${d.name}, above 100 percent`} stroke="none" legendType="none"
+                dot={{ r: 4, stroke: SERIES_COLOURS[i % SERIES_COLOURS.length], strokeWidth: 2, fill: '#0f172a' }} activeDot={false} isAnimationActive={false}
+              />
             ))}
           </LineChart>
         </ResponsiveContainer>
+      </div>
+      <div className="mt-3 rounded-md border border-gray-700 bg-[#0F172A] p-3">
+        <p className="text-xs text-slate-500 mb-0 font-mono">price</p>
+        <p className="text-xs text-slate-300 mt-1 mb-0">{sw.value.priceVerdict ? sw.value.priceVerdict.text : 'No price verdict: fewer than two regimes are compared.'}</p>
+        <p className="text-xs text-slate-500 mt-1 mb-0">
+          {sw.value.windowLabels
+            ? `The verdict ranks climbs from ${sw.value.windowLabels[0]} to ${sw.value.windowLabels[1]} USD per bbl, the longest run of prices at which every regime's point is a share.`
+            : 'No swept price gives a share for every regime, so there is no run of prices to rank a climb over.'}
+        </p>
       </div>
       {sw.value.series.map((d) => (
         <div key={d.id} className="mt-4">
           <p className="text-xs text-slate-500 mb-1">{d.name}</p>
           <Tbl
             mark={(i) => d.points[i].warn}
-            head={['oil price, USD/bbl', 'government share plotted, percent', 'lifetime contractor NCF at that price', 'lifetime government take', 'denominator', 'what this point is']}
+            head={['oil price, USD/bbl', 'value the engine returns, percent', 'state', 'lifetime contractor NCF at that price', 'lifetime government take', 'profit, the two added', 'what this point is']}
             rows={d.points.map((q) => [
-              q.price, pc(q.plotted), mm(q.lifetimeContractorNCF), mm(q.lifetimeGovernmentTake), mm(q.lifetimeDenominatorDerived),
+              q.price, pc(q.plotted), q.state, mm(q.lifetimeContractorNCF), mm(q.lifetimeGovernmentTake), mm(q.lifetimeDenominatorDerived),
               q.warn ? <span key={q.price} className="whitespace-normal text-amber-300">{q.meaning}</span> : 'a share',
             ])}
           />
           {d.warnPoints.length > 0 && (
             <p className="text-xs text-amber-300 mt-1 mb-0">
-              Warning. At {d.warnPoints.join(', ')} USD per bbl the lifetime contractor net cash flow on this series is
-              NOT positive, so the plotted point is not a government share. Read the two totals underneath it before
-              believing the number.
+              Warning. At {d.warnPoints.join(', ')} USD per bbl the engine flags this series exceeds or undefined, so the
+              point is not a government share. An exceeds point keeps its true value and a contractor losing money over
+              the life; an undefined point has no value because lifetime profit is not positive.
             </p>
           )}
           {d.warnPoints.length === 0 && (
             <p className="text-xs text-slate-500 mt-1 mb-0">
-              Every point on this series is a share: the lifetime contractor net cash flow is positive at all nine
-              prices. Climb across the range, last minus first, {pc(d.climbDerived)} percentage points.
+              Every point on this series is a share at all nine prices. Climb across the range, last minus first,
+              {' '}{pc(d.climbDerived)} percentage points.
             </p>
           )}
         </div>
@@ -251,13 +295,13 @@ const Price = () => {
       />
       <SweepRegimeCaution />
       <Note>
-        THREE MEANINGS LIVE ON ONE CURVE. Where the denominator is comfortably positive the number is a share between
-        0 and 100. Where the contractor is losing money while the government still collects, the denominator is small
-        and positive and the ratio has no ceiling, so a reading in the hundreds or thousands is arithmetic and not a
-        fiscal term. And where the denominator is zero or negative the engine guard fires and the function returns
-        EXACTLY 0, so a share of 0.00 percent is plotted for a project on which the government collected a great
-        deal. A regime whose share RISES with price is progressive; one whose share FALLS is regressive, and the
-        flat-royalty concessions in this template set are exactly that.
+        THREE STATES LIVE ON ONE CURVE, AND EVERY POINT SAYS WHICH. A share is between 0 and 100. An exceeds point is
+        above 100 percent because the contractor is losing money while the government still collects: the true value
+        is kept in the tooltip and the point is pinned to the top of the axis, so it never sets the scale. An undefined
+        point has no value because lifetime profit is not positive at that price, which is the same under every regime,
+        so the line breaks and the band is shaded; an earlier build returned exactly 0 there. A regime whose share
+        RISES with price is progressive; one whose share FALLS is regressive, and the flat-royalty concessions in this
+        template set are exactly that.
       </Note>
     </>
   );
@@ -368,8 +412,9 @@ const Insights = () => {
       </p>
 
       <p className="text-xs text-slate-500 mt-5 mb-1">
-        THE TIE THE SENTENCE DOES NOT ADMIT. The capex and price verdicts pick their winner with a strict less-than in
-        a reduce, which returns the FIRST element when two are equal and therefore breaks a tie by list order.
+        THE TIE THE SENTENCE DOES NOT ADMIT. The capex verdict picks its winner with a strict less-than in a reduce,
+        which returns the FIRST element when two are equal and therefore breaks a tie by list order. The price verdict
+        declines to rank unless its lead is at least one percentage point over at least three share prices.
       </p>
       {tie.status !== 'done' ? (tie.status === 'failed' ? <Failed what="the tie evidence" /> : <Waiting what="the tie evidence" />) : (
         <>
@@ -441,40 +486,40 @@ const Insights = () => {
       )}
 
       <p className="text-xs text-slate-500 mt-5 mb-1">
-        THE ZERO THAT MEANS THIS COULD NOT BE COMPUTED. On the comparison built for it, every regime plots a flat zero
-        across the whole price sweep, and each of them collected hundreds or thousands of millions of USD for the
-        government.
+        NO VALUE WHERE PROFIT IS NOT POSITIVE. On the comparison built for it, every regime returns null and the state
+        undefined across the whole price sweep, and each of them collected hundreds or thousands of millions of USD for
+        the government.
       </p>
       {share.status !== 'done' ? (share.status === 'failed' ? <Failed what="the share curve evidence" /> : <Waiting what="the share curve evidence" />) : (
         <>
           <Tbl
-            head={['regime', 'total government take', 'total contractor NCF', 'the two added', 'government share plotted at every one of the nine prices']}
-            rows={share.value.rows.map((x) => [x.name, mm(x.totalGovernmentTake), mm(x.totalContractorNCF), mm(x.denominatorDerived), x.distinctPlotted.map((v) => pc(v)).join(', ')])}
+            head={['regime', 'total government take', 'total contractor NCF', 'the two added', 'value and state at every one of the nine prices']}
+            rows={share.value.rows.map((x) => [x.name, mm(x.totalGovernmentTake), mm(x.totalContractorNCF), mm(x.denominatorDerived), [...new Set(x.points.map((q) => `${pc(q.plotted)} ${q.state}`))].join(', ')])}
           />
           <p className="text-xs text-slate-500 mt-4 mb-1">
             And the other direction, reached by making one project progressively more expensive. The Angola template on
             the DEFAULT PROJECT with every capex line multiplied, so nothing but the capital cost changes.
           </p>
           <Tbl
-            head={['capex multiple', ...share.value.angola[0].labels.map((x) => String(x)), 'meanings on this line']}
+            head={['capex multiple', ...share.value.angola[0].labels.map((x) => String(x)), 'states on this line']}
             rows={share.value.angola.map((a) => [
-              `x${a.multiple}`, ...a.values.map((v) => pc(v)), a.meanings.length,
+              `x${a.multiple}`, ...a.values.map((v) => pc(v)), [...new Set(a.states)].join(', '),
             ])}
           />
           <p className="text-xs text-amber-300 mt-2 mb-0">
-            Read the x3 row along its length. It plots zero at 40 USD per bbl, a number in the thousands at 50, one in
-            the hundreds at 60, and only from 80 onward is it a share. Three of those points are the guard firing, the
-            ratio exploding through a near-zero denominator, and an ordinary reading, in that order, on one line of one
-            chart, with no flag on any of them. The series is healthy AT THE DECK, which is why the check has to be per
-            point and not per series.
+            Read the x3 row along its length. It is null and undefined at 40 USD per bbl, exceeds at 50 with a number in
+            the thousands and at 60 with one in the hundreds, and a share from
+            {' '}{share.value.angola.find((a) => a.multiple === 3)?.firstSharePrice} USD per bbl onward. Three states on
+            one line of one chart, each flagged by the engine. The series is healthy AT THE DECK, which is why the check
+            has to be per point and not per series.
           </p>
         </>
       )}
       <Note>
-        The rule a reader needs. Before believing a point on this curve, look at the two totals underneath it. If
-        lifetime contractor net cash flow is negative, the share is not a share. If it is negative enough to outweigh
-        the government take, the curve reads zero and means nothing at all. The price mode carries
-        {' '}{Object.values(PRICE_POINT_MEANINGS).length} distinct sentences, one per reading, and writes the right one
+        The rule a reader needs. Before believing a point on this curve, read its state and the two totals underneath
+        it. If lifetime contractor net cash flow is negative, the point is above 100 percent and flagged exceeds. If it
+        is negative enough to outweigh the government take, the point is null and flagged undefined. The price mode
+        carries {Object.values(PRICE_POINT_MEANINGS).length} distinct sentences, one per state, and writes the right one
         under every point, so a reader is never left to guess which of the three a number is. Every verdict above is
         the engine own string printed verbatim, its own money formatting included, because paraphrasing what a
         function said is how a claim it never made gets attributed to it.
@@ -488,7 +533,7 @@ const ComparisonExplorer = () => {
   return (
     <PanelShell
       title="Comparison explorer"
-      subtitle="What runFiscalComparison returns and what it does not say: the ranking with one rate carrying two values, the price sweep with the meaning of every point named, the capex sweep and the eighth point the loop never reaches, and the derived verdicts beside the quantities they claim to rank"
+      subtitle="What runFiscalComparison returns and what it does not say: the ranking with one rate carrying two values, the price sweep with the state of every point named, the capex sweep and the eighth point the loop never reaches, and the derived verdicts beside the quantities they claim to rank"
     >
       <FieldGrid>
         <SelectField label="View" value={mode} onChange={setMode} options={MODES} />

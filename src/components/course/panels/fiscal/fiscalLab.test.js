@@ -544,6 +544,9 @@ const T = {
     ["5", "Nigeria - PIA (2021)", "-15768.8129", "0.0000", "null", "null", "1431.0440", "27.7811"],
     ["6", "Angola - Deepwater PSC", "-15900.1132", "0.0000", "null", "null", "1662.7835", "32.2800"],
   ],
+  'S17.5': [
+    ["1", "Angola - Deepwater PSC", "-486.1090", "1.0697", "18", "10", "638.1453", "28.4191"],
+  ],
   'S18.0': [
     ["Nigeria - PIA (2021)", "69.6344", "73.5963", "74.2694", "76.7282", "78.2773", "78.6226", "79.2134", "79.5507", "79.7764", "10.1420"],
     ["Ghana - Deepwater", "69.9215", "72.0008", "74.3024", "75.4293", "76.7284", "76.4647", "77.2412", "77.0702", "77.8175", "7.8960"],
@@ -562,6 +565,11 @@ const T = {
     ["price_100_pia_default", "347.4937", "52.4218", "804.6219", "2027.6406", "3", "2", "0.0000"],
     ["price_110_pia_default", "404.9801", "64.8969", "908.9574", "2285.5646", "3", "2", "0.0000"],
     ["price_120_pia_default", "452.5105", "78.2522", "1000.3405", "2556.4410", "2", "2", "0.0000"],
+  ],
+  'S18.2': [
+    ["cmp_all_templates_default_project", "**cmp_all_templates_default_project**, common share window 40 to 120 USD per bbl, 9 prices:", [["Nigeria - PIA (2021)", "share, share, share, share, share, share, share, share, share", "10.1420", "10.1420"], ["Ghana - Deepwater", "share, share, share, share, share, share, share, share, share", "7.8960", "7.8960"], ["Brazil - Concession", "share, share, share, share, share, share, share, share, share", "6.0391", "6.0391"], ["USA - Gulf of Mexico", "share, share, share, share, share, share, share, share, share", "-17.2498", "-17.2498"], ["Angola - Deepwater PSC", "share, share, share, share, share, share, share, share, share", "12.1305", "12.1305"], ["Generic Royalty/Tax", "share, share, share, share, share, share, share, share, share", "-10.1897", "-10.1897"]], "- `price`: \"Angola - Deepwater PSC\" is the most progressive: its government share rises 12.1 percentage points across the swept price range, so it captures upside fastest."],
+    ["cmp_all_templates_test_project", "**cmp_all_templates_test_project**, common share window 50 to 120 USD per bbl, 8 prices:", [["Nigeria - PIA (2021)", "exceeds, share, share, share, share, share, share, share, share", "-27.2520", "-6.8624"], ["Ghana - Deepwater", "exceeds, share, share, share, share, share, share, share, share", "-26.7801", "-2.5353"], ["Brazil - Concession", "share, share, share, share, share, share, share, share, share", "-23.6720", "2.0567"], ["USA - Gulf of Mexico", "exceeds, share, share, share, share, share, share, share, share", "-70.0730", "-25.4837"], ["Angola - Deepwater PSC", "exceeds, share, share, share, share, share, share, share, share", "-49.1305", "-0.3641"], ["Generic Royalty/Tax", "share, share, share, share, share, share, share, share, share", "-49.0246", "-17.3596"]], "- `price`: \"Brazil - Concession\" is the most progressive: its government share rises 2.1 percentage points between 50 and 120 USD per bbl, the prices at which every regime's point is a government share, so it captures upside fastest."],
+    ["cmp_designer_defaults", "**cmp_designer_defaults**, common share window 40 to 120 USD per bbl, 9 prices:", [["Nigerian PIA (PSC)", "share, share, share, share, share, share, share, share, share", "-1.2876", "-1.2876"], ["Concessionary (Royalty/Tax)", "share, share, share, share, share, share, share, share, share", "-7.2784", "-7.2784"]], "- `price`: No regime is progressive: every government share falls across the swept price range. \"Nigerian PIA (PSC)\" is the least regressive, falling 1.3 percentage points."],
   ],
   'S19.0': [
     ["Concessionary (Royalty/Tax)", "46.3452", "59.6210", "13.2758"],
@@ -712,18 +720,24 @@ const T = {
     ["Generic Royalty/Tax", "48.5980", "17.7848", "-13.3840", "-45.1844", "-77.4757", "-110.2956", "-143.7606", "192.3586"],
   ],
   'S26.0': [
-    ["Nigeria - PIA (2021)", "1431.0440", "-16279.9099", "-14848.8659", "0.0000"],
-    ["Ghana - Deepwater", "712.5465", "-15561.4124", "-14848.8659", "0.0000"],
-    ["Brazil - Concession", "700.1194", "-15548.9853", "-14848.8659", "0.0000"],
-    ["USA - Gulf of Mexico", "1312.7238", "-16161.5898", "-14848.8659", "0.0000"],
-    ["Angola - Deepwater PSC", "1662.7835", "-16511.6494", "-14848.8659", "0.0000"],
-    ["Generic Royalty/Tax", "875.1492", "-15724.0151", "-14848.8659", "0.0000"],
+    ["Nigeria - PIA (2021)", "1431.0440", "-16279.9099", "-14848.8659", "null undefined"],
+    ["Ghana - Deepwater", "712.5465", "-15561.4124", "-14848.8659", "null undefined"],
+    ["Brazil - Concession", "700.1194", "-15548.9853", "-14848.8659", "null undefined"],
+    ["USA - Gulf of Mexico", "1312.7238", "-16161.5898", "-14848.8659", "null undefined"],
+    ["Angola - Deepwater PSC", "1662.7835", "-16511.6494", "-14848.8659", "null undefined"],
+    ["Generic Royalty/Tax", "875.1492", "-15724.0151", "-14848.8659", "null undefined"],
   ],
   'S26.1': [
     ["x1", "63.4520", "59.5510", "65.7226", "68.7654", "70.9486", "72.5065", "73.7920", "74.1974", "75.5825"],
     ["x2", "239.4592", "89.4632", "65.5264", "56.3684", "57.4398", "61.8510", "64.6858", "67.2930", "68.3499"],
-    ["x3", "0.0000", "2223.0766", "144.0692", "85.6015", "67.2176", "59.3155", "53.8218", "56.8449", "59.9462"],
-    ["x4", "0.0000", "0.0000", "0.0000", "259.9538", "119.1591", "83.5274", "68.4803", "61.2595", "56.4963"],
+    ["x3", "null", "2223.0766", "144.0692", "85.6015", "67.2176", "59.3155", "53.8218", "56.8449", "59.9462"],
+    ["x4", "null", "null", "null", "259.9538", "119.1591", "83.5274", "68.4803", "61.2595", "56.4963"],
+  ],
+  'S26.2': [
+    ["x1", "share, share, share, share, share, share, share, share, share"],
+    ["x2", "exceeds, share, share, share, share, share, share, share, share"],
+    ["x3", "undefined, exceeds, exceeds, share, share, share, share, share, share"],
+    ["x4", "undefined, undefined, undefined, exceeds, exceeds, share, share, share, share"],
   ],
   'S27.0': [
     ["1", "Generic Royalty/Tax", "397.0445", "3"],
@@ -884,6 +898,8 @@ const LINE = {
     "Regimes: \"Flat\", \"Complex\". Discount rate 10 percent.",
     "**cmp_never_recovers**: Templates on a project with capex 20000: nothing pays back, every IRR 0, the payback insight says so.",
     "Regimes: \"Nigeria - PIA (2021)\", \"Ghana - Deepwater\", \"Brazil - Concession\", \"USA - Gulf of Mexico\", \"Angola - Deepwater PSC\", \"Generic Royalty/Tax\". Discount rate 10 percent.",
+    "**cmp_angola_capex_x3**: EC2-1: Angola - Deepwater PSC on the default project with every capex line tripled. Profit is not positive at 40 (undefined, null), small and positive at 50 (exceeds, 2223 percent) and 60, and a share from 80 up.",
+    "Regimes: \"Angola - Deepwater PSC\". Discount rate 10 percent.",
   ],
   "s21": [
     "**insights_suite**: Suite test summary: Beta pays back fastest and collects most; Beta resilient; Beta progressive.",
@@ -922,13 +938,43 @@ const LINE = {
     "  - `price` / Response to higher prices: \"Beta\" is the most progressive: its government share rises 25.0 percentage points across the swept price range, so it captures upside fastest.",
     "**insights_empty**: No regimes: an empty list.",
     "  (returns an empty list)",
+    "**insights_price_two_points**: EC2-1: two swept prices are fewer than three, so no regime is ranked; both are economic at the lowest price.",
+    "  - `npv` / Best for the contractor: \"Alpha\" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.",
+    "  - `payback` / Fastest capital recovery: \"Beta\" pays back in year 4, against year 6 for \"Alpha\".",
+    "  - `government` / Best for the government: \"Beta\" collects the most, $900.0MM against $400.0MM for the next highest, \"Alpha\".",
+    "  - `capex` / Resilience to cost overrun: Over the swept capex range, \"Beta\" gives up the least contractor NPV ($30.0MM) and \"Alpha\" the most ($100.0MM).",
+    "  - `price` / Response to higher prices: No regime can be ranked across this sweep: fewer than 3 swept prices give a government share for every regime. \"Alpha\" and \"Beta\" are already economic at 40 USD per bbl, the lowest price swept.",
+    "**insights_price_within_one_point**: EC2-1: climbs of 10 and 10.5 points are within one point, so no regime is ranked.",
+    "  - `npv` / Best for the contractor: \"Alpha\" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.",
+    "  - `payback` / Fastest capital recovery: \"Beta\" pays back in year 4, against year 6 for \"Alpha\".",
+    "  - `government` / Best for the government: \"Beta\" collects the most, $900.0MM against $400.0MM for the next highest, \"Alpha\".",
+    "  - `capex` / Resilience to cost overrun: Over the swept capex range, \"Beta\" gives up the least contractor NPV ($30.0MM) and \"Alpha\" the most ($100.0MM).",
+    "  - `price` / Response to higher prices: No regime can be ranked across this sweep: the steepest climb, 10.5 percentage points for \"Beta\", is within one percentage point of the next, 10.0 for \"Alpha\". \"Alpha\" and \"Beta\" are already economic at 40 USD per bbl, the lowest price swept.",
+    "**insights_price_exceeds_excluded**: EC2-1: Alpha exceeds 100 at 40, so the climb runs 50 to 70 for both; an endpoint read from 40 would give Alpha -86.",
+    "  - `npv` / Best for the contractor: \"Alpha\" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.",
+    "  - `payback` / Fastest capital recovery: \"Beta\" pays back in year 4, against year 6 for \"Alpha\".",
+    "  - `government` / Best for the government: \"Beta\" collects the most, $900.0MM against $400.0MM for the next highest, \"Alpha\".",
+    "  - `capex` / Resilience to cost overrun: Over the swept capex range, \"Beta\" gives up the least contractor NPV ($30.0MM) and \"Alpha\" the most ($100.0MM).",
+    "  - `price` / Response to higher prices: \"Beta\" is the most progressive: its government share rises 21.0 percentage points between 50 and 70 USD per bbl, the prices at which every regime's point is a government share, so it captures upside fastest.",
+    "**insights_price_never_economic**: EC2-1: every point undefined, so no rank and no regime economic at any swept price.",
+    "  - `npv` / Best for the contractor: \"Alpha\" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.",
+    "  - `payback` / Fastest capital recovery: \"Beta\" pays back in year 4, against year 6 for \"Alpha\".",
+    "  - `government` / Best for the government: \"Beta\" collects the most, $900.0MM against $400.0MM for the next highest, \"Alpha\".",
+    "  - `capex` / Resilience to cost overrun: Over the swept capex range, \"Beta\" gives up the least contractor NPV ($30.0MM) and \"Alpha\" the most ($100.0MM).",
+    "  - `price` / Response to higher prices: No regime can be ranked across this sweep: fewer than 3 swept prices give a government share for every regime. No regime is economic at any swept price from 40 to 60 USD per bbl.",
+    "**insights_price_first_economic**: EC2-1: one common share price is fewer than three; Beta is the first regime economic, at 50.",
+    "  - `npv` / Best for the contractor: \"Alpha\" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.",
+    "  - `payback` / Fastest capital recovery: \"Beta\" pays back in year 4, against year 6 for \"Alpha\".",
+    "  - `government` / Best for the government: \"Beta\" collects the most, $900.0MM against $400.0MM for the next highest, \"Alpha\".",
+    "  - `capex` / Resilience to cost overrun: Over the swept capex range, \"Beta\" gives up the least contractor NPV ($30.0MM) and \"Alpha\" the most ($100.0MM).",
+    "  - `price` / Response to higher prices: No regime can be ranked across this sweep: fewer than 3 swept prices give a government share for every regime. The first regime to become economic is \"Beta\", at 50 USD per bbl.",
   ],
   "s22Verdicts": [
     "- `npv`: \"Brazil - Concession\" delivers the highest contractor NPV at $-15354.7MM, with an IRR of 0.0%.",
     "- `payback`: No regime pays back within the project life on these inputs.",
     "- `government`: \"Angola - Deepwater PSC\" collects the most, $1662.8MM against $1431.0MM for the next highest, \"Nigeria - PIA (2021)\".",
     "- `capex`: Over the swept capex range, \"USA - Gulf of Mexico\" gives up the least contractor NPV ($10909.1MM) and \"Nigeria - PIA (2021)\" the most ($10909.1MM).",
-    "- `price`: \"Nigeria - PIA (2021)\" is the most progressive: its government share rises 0.0 percentage points across the swept price range, so it captures upside fastest.",
+    "- `price`: No regime can be ranked across this sweep: fewer than 3 swept prices give a government share for every regime. No regime is economic at any swept price from 40 to 120 USD per bbl.",
     "**insights_ties**: Ties on payback and government take: strict comparisons keep the FIRST of tied regimes.",
     "  - `npv`: \"Alpha\" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.",
     "  - `payback`: \"Alpha\" pays back in year 4, against year 4 for \"Beta\".",
@@ -1533,7 +1579,7 @@ describe('discounting, the parity with mid year, and IRR', () => {
 const summaryRow = (s) => [String(s.rank), s.name, m(s.npv), p(s.irrPct), yr(s.paybackPeriod), yr(s.rFactorPayoutYear), m(s.govTake), p(s.effectiveTaxRateSummary)];
 
 describe('the comparison and its summary', () => {
-  it('the five published comparisons are the digest tables, sorted as the engine sorts them', async () => {
+  it('the six published comparisons are the digest tables, sorted as the engine sorts them', async () => {
     const ids = L.goldenComparisonIds();
     const heads = [];
     for (let i = 0; i < ids.length; i += 1) {
@@ -1616,7 +1662,7 @@ describe('the price sweep', () => {
     expect(Math.abs(s.npvOfTheTemplate - s.npvOfTheDesignerRegime)).toBeGreaterThan(1);
   });
 
-  it('EVERY POINT SAYS WHETHER ITS LIFETIME CONTRACTOR NET CASH FLOW IS POSITIVE, and names which meaning it carries', async () => {
+  it('EVERY POINT CARRIES THE ENGINE STATE, the totals underneath agree with it, and it names which state it is', async () => {
     const healthy = await L.priceSweep('cmp_all_templates_default_project');
     healthy.series.forEach((d) => {
       expect(d.points, d.name).toHaveLength(9);
@@ -1625,7 +1671,9 @@ describe('the price sweep', () => {
       d.points.forEach((q) => {
         expect(q.lifetimeContractorNcfPositive, `${d.name} at ${q.price}`).toBe(true);
         expect(q.lifetimeContractorNCF).toBeGreaterThan(0);
-        expect(q.guardFired).toBe(false);
+        expect(q.state).toBe('share');
+        expect(q.noValue).toBe(false);
+        expect(q.stateAgreesWithTotals).toBe(true);
         expect(q.meaning).toBe(L.PRICE_POINT_MEANINGS.share);
         expect(q.warn).toBe(false);
       });
@@ -1640,23 +1688,52 @@ describe('the price sweep', () => {
         expect(q.lifetimeContractorNcfPositive, `${d.name} at ${q.price}`).toBe(false);
         expect(q.lifetimeContractorNCF, `${d.name} at ${q.price}`).toBeLessThan(0);
         expect(q.lifetimeDenominatorDerived, `${d.name} at ${q.price}`).toBeLessThan(0);
-        expect(q.guardFired).toBe(true);
-        expect(q.meaning, `${d.name} at ${q.price}`).toBe(L.PRICE_POINT_MEANINGS.guard);
-        expect(q.plotted).toBe(0);
+        expect(q.state).toBe('undefined');
+        expect(q.noValue).toBe(true);
+        expect(q.stateAgreesWithTotals).toBe(true);
+        expect(q.meaning, `${d.name} at ${q.price}`).toBe(L.PRICE_POINT_MEANINGS.undefined);
+        // Null, never the zero an earlier build returned.
+        expect(q.plotted).toBeNull();
       });
-      expect(d.distinctPlotted, d.name).toEqual([0]);
-      expect(d.climbDerived).toBe(0);
+      expect(d.distinctPlotted, d.name).toEqual([null]);
+      expect(d.climbDerived).toBeNull();
+      expect(d.windowClimbDerived).toBeNull();
     });
+    expect(broken.undefinedPrices).toEqual(broken.labels);
+    expect(broken.window).toBeNull();
+    expect(broken.priceVerdict.text).toMatch(/^No regime can be ranked across this sweep/);
+    expect(broken.priceVerdict.text).toContain('No regime is economic at any swept price from 40 to 120 USD per bbl.');
   });
 
-  it('ONE SERIES CAN CARRY ALL THREE MEANINGS, and each point says which', async () => {
+  it('THREE STATES, ONE SENTENCE EACH, and no sentence says a point is plotted as zero', async () => {
     const sw = await L.priceSweep('cmp_designer_defaults');
     // The Designer's defaults are healthy at every price, so nothing warns.
     expect(sw.series.every((d) => d.everyPointIsAShare)).toBe(true);
-    // The three meanings are distinct sentences, so a panel cannot print the wrong one.
+    expect(Object.keys(L.PRICE_POINT_MEANINGS)).toEqual(['share', 'exceeds', 'undefined']);
     expect(new Set(Object.values(L.PRICE_POINT_MEANINGS)).size).toBe(3);
-    expect(L.PRICE_POINT_MEANINGS.guard).toContain('plotted as exactly 0');
-    expect(L.PRICE_POINT_MEANINGS.blownUp).toContain('has no ceiling');
+    expect(L.PRICE_POINT_MEANINGS.undefined).toContain('null');
+    expect(L.PRICE_POINT_MEANINGS.exceeds).toContain('above 100 percent');
+    Object.values(L.PRICE_POINT_MEANINGS).forEach((t) => expect(t).not.toMatch(/exactly 0|plotted as 0/));
+  });
+
+  it('the states, both climbs and the verdict on three comparisons are the digest tables', async () => {
+    const got = [];
+    for (const id of ['cmp_all_templates_default_project', 'cmp_all_templates_test_project', 'cmp_designer_defaults']) {
+      // eslint-disable-next-line no-await-in-loop
+      const sw = await L.priceSweep(id);
+      const head = `**${id}**, common share window ${sw.window ? `${sw.windowLabels[0]} to ${sw.windowLabels[1]} USD per bbl, ${sw.window.length} prices` : 'none'}:`;
+      got.push([id, head, sw.series.map((d) => [d.name, d.states.join(', '), p(d.climbDerived), p(d.windowClimbDerived)]), `- \`price\`: ${sw.priceVerdict.text}`]);
+    }
+    expect(got).toEqual(T['S18.2']);
+    // THE WINDOW MOVES THE VERDICT. On the test project four templates exceed
+    // 100 percent at 40, so the verdict ranks 50 to 120 and names a regime whose
+    // endpoint climb from 40 is negative.
+    const test = await L.priceSweep('cmp_all_templates_test_project');
+    expect(test.windowLabels).toEqual([50, 120]);
+    const brazil = test.series.find((d) => d.name === 'Brazil - Concession');
+    expect(brazil.climbDerived).toBeLessThan(0);
+    expect(brazil.windowClimbDerived).toBeGreaterThan(0);
+    expect(test.priceVerdict.text).toMatch(/^"Brazil - Concession" is the most progressive/);
   });
 });
 
@@ -1781,9 +1858,9 @@ describe('A TIE RANKED BY FLOATING POINT NOISE', () => {
     const amounts = [...capex.matchAll(/\(\$(-?[\d.]+)MM\)/g)].map((x) => x[1]);
     expect(amounts).toHaveLength(2);
     expect(amounts[0]).toBe(amounts[1]);
-    // The price verdict names a most progressive regime whose climb is zero.
-    expect(t.priceVerdict.text).toContain('rises 0.0 percentage points');
-    t.climbs.forEach((c) => expect(c.climbDerived).toBe(0));
+    // The price verdict declines to rank: there is no share at any price.
+    expect(t.priceVerdict.text).toMatch(/^No regime can be ranked across this sweep/);
+    t.climbs.forEach((c) => expect(c.climbDerived).toBeNull());
   });
 
   it('the tie is broken by LIST ORDER, which is what a strict less-than in a reduce does', () => {
@@ -1797,10 +1874,10 @@ describe('A TIE RANKED BY FLOATING POINT NOISE', () => {
 // 13. The government share curve mixes three meanings (digest Section 26).
 // ---------------------------------------------------------------------------
 
-describe('THE GOVERNMENT SHARE CURVE MIXES THREE MEANINGS', () => {
-  it('the cmp_never_recovers totals beside the flat zero are the digest table', async () => {
+describe('THE GOVERNMENT SHARE CURVE CARRIES THREE STATES', () => {
+  it('the cmp_never_recovers totals beside the null the sweep returns are the digest table', async () => {
     const s = await L.shareCurveRegimes();
-    expect(s.rows.map((x) => [x.name, m(x.totalGovernmentTake), m(x.totalContractorNCF), m(x.denominatorDerived), [...new Set(x.plotted.map((v) => p(v)))].join(', ')])).toEqual(T['S26.0']);
+    expect(s.rows.map((x) => [x.name, m(x.totalGovernmentTake), m(x.totalContractorNCF), m(x.denominatorDerived), [...new Set(x.points.map((q) => `${p(q.plotted)} ${q.state}`))].join(', ')])).toEqual(T['S26.0']);
     // The capex is the whole of the case, and it is the golden's own numbers.
     expect([m(s.capex.drilling), m(s.capex.facilities), m(s.capex.subsea)]).toEqual(['10000.0000', '10000.0000', '0.0000']);
     expect(LINE.s26Note).toContain(s.note);
@@ -1810,44 +1887,52 @@ describe('THE GOVERNMENT SHARE CURVE MIXES THREE MEANINGS', () => {
   it('A POINT WHOSE LIFETIME CONTRACTOR NET CASH FLOW IS NOT POSITIVE IS REPORTED AS SUCH, not merely survived', async () => {
     const s = await L.shareCurveRegimes();
     expect(s.rows).toHaveLength(6);
-    expect(s.everyRegimePlotsFlatZero).toBe(true);
+    expect(s.everyRegimeHasNoValueAtAnyPrice).toBe(true);
+    expect(s.priceVerdict.text).toMatch(/^No regime can be ranked across this sweep/);
     s.rows.forEach((x) => {
       expect(x.lifetimeContractorNcfPositive, x.name).toBe(false);
       expect(x.totalContractorNCF, x.name).toBeLessThan(0);
       expect(x.denominatorDerived, x.name).toBeLessThan(0);
-      expect(x.meaning, x.name).toBe(L.PRICE_POINT_MEANINGS.guard);
-      expect(x.flatZero, x.name).toBe(true);
-      expect(x.everyPointGuarded, x.name).toBe(true);
-      expect(x.distinctPlotted, x.name).toEqual([0]);
-      // And each of them collected a great deal for the government while plotting zero.
+      expect(x.meaning, x.name).toBe(L.PRICE_POINT_MEANINGS.undefined);
+      expect(x.noValueAtAnyPrice, x.name).toBe(true);
+      expect(x.everyPointUndefined, x.name).toBe(true);
+      expect(x.everyStateAgreesWithTotals, x.name).toBe(true);
+      expect(x.distinctPlotted, x.name).toEqual([null]);
+      expect(x.distinctStates, x.name).toEqual(['undefined']);
+      // And each of them collected a great deal for the government while returning no share.
       expect(x.totalGovernmentTake, x.name).toBeGreaterThan(100);
     });
   });
 
-  it('the Angola capex multiple table is the digest, and the x3 line runs through all three meanings', async () => {
+  it('the Angola capex multiple tables are the digest, and the x3 line runs through all three states', async () => {
     const s = await L.shareCurveRegimes();
     expect(s.angola.map((a) => [`x${a.multiple}`, ...a.values.map((v) => p(v))])).toEqual(T['S26.1']);
+    expect(s.angola.map((a) => [`x${a.multiple}`, a.states.join(', ')])).toEqual(T['S26.2']);
     const x1 = s.angola.find((a) => a.multiple === 1);
     expect(x1.everyPointIsAShare).toBe(true);
-    expect(x1.guardFiresAtSomePoint).toBe(false);
-    expect(x1.aboveOneHundredAtSomePoint).toBe(false);
+    expect(x1.undefinedAtSomePoint).toBe(false);
+    expect(x1.exceedsAtSomePoint).toBe(false);
     expect(x1.meanings).toEqual([L.PRICE_POINT_MEANINGS.share]);
 
-    // THE x3 ROW, READ ALONG ITS LENGTH. 0.00 at 40, a number in the thousands
-    // at 50, one in the hundreds at 60, and a share from 80 on. Each point is
-    // reported for what it is, and the series is a share AT THE DECK, which is
-    // why the check has to be per point and not per series.
+    // THE x3 ROW, READ ALONG ITS LENGTH. Null and undefined at 40, exceeds at
+    // 50 with a number in the thousands and at 60 with one in the hundreds, and
+    // a share from 70 on (an earlier draft said 80; the 70 point is 85.6015
+    // and a share). The series is a share AT THE DECK, which is why the check
+    // has to be per point and not per series.
     const x3 = s.angola.find((a) => a.multiple === 3);
     expect(x3.lifetimeContractorNcfPositiveAtTheDeck).toBe(true);
     expect(x3.everyPointIsAShare).toBe(false);
     expect(x3.meanings).toHaveLength(3);
-    expect(x3.points[0].guardFired).toBe(true);
-    expect(x3.points[0].plotted).toBe(0);
-    expect(x3.points[0].meaning).toBe(L.PRICE_POINT_MEANINGS.guard);
-    expect(x3.points[1].meaning).toBe(L.PRICE_POINT_MEANINGS.blownUp);
+    expect(x3.firstSharePrice).toBe(70);
+    expect(x3.points[0].noValue).toBe(true);
+    expect(x3.points[0].plotted).toBeNull();
+    expect(x3.points[0].meaning).toBe(L.PRICE_POINT_MEANINGS.undefined);
+    expect(x3.points[1].meaning).toBe(L.PRICE_POINT_MEANINGS.exceeds);
+    expect(x3.points.every((q) => q.stateAgreesWithTotals)).toBe(true);
+    expect(x3.points[3].meaning).toBe(L.PRICE_POINT_MEANINGS.share);
     expect(x3.points[1].lifetimeContractorNcfPositive).toBe(false);
     expect(x3.points[1].plotted).toBeGreaterThan(1000);
-    expect(x3.points[2].meaning).toBe(L.PRICE_POINT_MEANINGS.blownUp);
+    expect(x3.points[2].meaning).toBe(L.PRICE_POINT_MEANINGS.exceeds);
     expect(x3.points[2].plotted).toBeGreaterThan(100);
     expect(x3.points[2].plotted).toBeLessThan(1000);
     expect(x3.points[4].meaning).toBe(L.PRICE_POINT_MEANINGS.share);
@@ -2259,6 +2344,11 @@ const KNOWN_COINCIDENCES = [
     path: 'shareCurveRegimes.angola[2].points[1].lifetimeDenominatorDerived',
     value: 20.965183106703535, key: 'cmp_top_npv_musd', tag: 'as graded', clearance: 9.17,
     is: 'the government take plus contractor net cash flow of the Angola template at a tripled capex and 50 USD per bbl, in millions of USD, which is the denominator that makes the share explode',
+  },
+  {
+    path: 'priceSweep(cmp_angola_capex_x3).series[0].points[1].lifetimeDenominatorDerived',
+    value: 20.965183106703535, key: 'cmp_top_npv_musd', tag: 'as graded', clearance: 9.17,
+    is: 'the same Angola tripled-capex denominator at 50 USD per bbl, reached through the published cmp_angola_capex_x3 comparison the engine goldens gained in EC2-1',
   },
   {
     path: 'ledger(ghana___deepwater, default).rows[5].profitOil',

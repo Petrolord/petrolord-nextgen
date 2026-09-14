@@ -22,11 +22,11 @@ The capex verdict works on contractor NPV given up between the first and last sw
 
 ## price, a climb across the sweep
 
-The price verdict is the government share at the last swept price minus the share at the first. On ODIDI, Ghana - Deepwater goes from 74.9711 to 76.9682, a climb of 1.9971, and the sentence calls it the most progressive, rising 2.0 percentage points. Only Nigeria - PIA (2021) also climbs, by 0.1968, while the climb for USA - Gulf of Mexico is -37.6994. A regime can win the progressivity verdict on two percentage points, because on this field nobody captures upside.
+The price verdict ranks a climb, the share at the last price minus the share at the first, over the longest run of swept prices at which every regime's point is a share. On ODIDI that run is the whole sweep: Ghana - Deepwater goes from 74.9711 to 76.9682, a climb of 1.9971, and the sentence calls it the most progressive, rising 2.0 percentage points. Only Nigeria - PIA (2021) also climbs, by 0.1968, while the climb for USA - Gulf of Mexico is -37.6994. Ghana wins on two percentage points because its lead clears the one point required, though nobody captures upside here.
 
 ## What the verdicts refuse
 
-With a single regime the capex and price verdicts are omitted entirely, a ranking of one being no ranking, and the payback and government sentences drop their comparison clause. No sentence names the quantity it ranked or the range it ranked it over.
+With a single regime the capex and price verdicts are omitted entirely, a ranking of one being no ranking, and the payback and government sentences drop their comparison clause. Only the price sentence ever names its range, and only when that range is shorter than the sweep.
 
 ## The mistake
 
