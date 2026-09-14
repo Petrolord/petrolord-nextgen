@@ -402,7 +402,7 @@ export const flatRoyaltyLedger = (projectKey) => {
 // SECTION 9. The identity that closes the ledger.
 //
 // In EVERY year, for EVERY regime, at EVERY cost recovery limit these
-// templates use, contractor net cash flow PLUS government take equals gross
+// templates use, contractor net cash flow PLUS government cash flow equals gross
 // revenue MINUS opex MINUS capex. Both sides of that are sums of columns the
 // engine returned on the same row, and the gap between them is the check.
 // ---------------------------------------------------------------------------
@@ -905,7 +905,8 @@ export const comparisonResult = async (caseId) => {
 
 /**
  * The summary table, sorted as the engine sorts it (contractor NPV
- * descending), with both effective tax rates side by side and the difference.
+ * descending), with government take and government share of net revenue side by side
+ * and their difference.
  * The price sweep's rate is read at the deck's own first-year price, which is
  * the one price at which the two definitions describe the same run.
  */
@@ -932,6 +933,14 @@ export const comparison = async (caseId) => {
         paybackPeriod: s.paybackPeriod,
         rFactorPayoutYear: s.rFactorPayoutYear,
         govTake: s.govTake,
+        // The two named metrics, straight off the engine's summary row.
+        governmentTakePct: s.governmentTakePct,
+        governmentTakeState: s.governmentTakeState,
+        governmentTakeDiscountedPct: s.governmentTakeDiscountedPct,
+        governmentTakeDiscountedState: s.governmentTakeDiscountedState,
+        governmentShareOfNetRevenuePct: s.governmentShareOfNetRevenuePct,
+        takeMinusShareDerived: s.governmentTakePct === null || s.governmentShareOfNetRevenuePct === null
+          ? null : s.governmentTakePct - s.governmentShareOfNetRevenuePct,
         effectiveTaxRateSummary: s.effectiveTaxRate,
         effectiveTaxRateSweepAtBase: sweepAtBase,
         effectiveTaxRateDifferenceDerived: sweepAtBase === null ? null : sweepAtBase - s.effectiveTaxRate,
@@ -945,7 +954,7 @@ export const comparison = async (caseId) => {
  * SECTION 19. The pair, on its own. The summary's rate adds total capex back
  * to the contractor's take, so it is a rate on profit; the price sweep's rate
  * does not, so it is a rate on cash. Both live in one result object and one
- * screen labels both of them "effective tax rate".
+ * screen once labelled both of them "effective tax rate".
  */
 export const etrBothWays = async (caseId) => {
   const c = await comparison(caseId);
@@ -966,7 +975,7 @@ export const etrBothWays = async (caseId) => {
 /**
  * SECTION 18. The price sweep. It reaches a price by a MULTIPLIER of the first
  * deck point's oil price, and it scales OIL ONLY. What it plots is government
- * take over government take plus contractor net cash flow, without the capex
+ * take over government cash flow plus contractor net cash flow, without the capex
  * add-back.
  *
  * EVERY POINT CARRIES THE ENGINE'S OWN STATE (EC2-1, owner decision
@@ -978,7 +987,7 @@ export const etrBothWays = async (caseId) => {
  * and to check that the totals agree with the state the engine returned.
  */
 export const PRICE_POINT_MEANINGS = {
-  share: 'share: lifetime profit is positive and the government share is within 0 to 100 percent',
+  share: 'share: lifetime profit is positive and government take is within 0 to 100 percent',
   exceeds: 'exceeds: lifetime profit is positive but the contractor loses money while the government still collects, so the ratio is above 100 percent; the true value is kept and it is not a share',
   undefined: 'undefined: lifetime profit is zero or negative, so there is no share, the value is null and the line breaks',
 };
@@ -1236,7 +1245,7 @@ export const tieEvidence = async () => {
 };
 
 /**
- * SECTION 26. The government share curve carries three states, and this is the
+ * SECTION 26. The government take curve carries three states, and this is the
  * evidence. The cmp_never_recovers totals beside the null the sweep returns at
  * every price (an earlier build returned exactly 0 there), and the Angola capex
  * multiple table where the same line runs through all three states.

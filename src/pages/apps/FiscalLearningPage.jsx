@@ -17,6 +17,7 @@ import DeepCourseBanner from '@/components/course/DeepCourseBanner';
 import RegimeExplorer from '@/components/course/panels/fiscal/RegimeExplorer';
 import InstrumentExplorer from '@/components/course/panels/fiscal/InstrumentExplorer';
 import ComparisonExplorer from '@/components/course/panels/fiscal/ComparisonExplorer';
+import FiscalDefinitions from '@/components/course/panels/fiscal/FiscalDefinitions';
 import {
   ODIDI_LABEL,
   templates, projectLife, templateTotals, ledger, costRecoverySweep, rFactorTable,
@@ -44,7 +45,7 @@ const LESSONS = [
   { n: 2, title: 'The sandbox generates its own production and refuses four other jobs',
     body: 'It does not take a forecast, it generates one from a rate and a decline over a horizon fixed at 25 years. It spends every dollar of capex in year 1. It models no abandonment, no depreciation, no loss carryforward, no ring fence and no valuation date.' },
   { n: 3, title: 'The ledger cascades in one order and closes on an identity',
-    body: 'Royalty off gross revenue, cost recovery against revenue after royalty, profit oil split, tax on the contractor share. In every year contractor net cash flow plus government take equals gross revenue less opex less capex, and that identity is the first check to run on any ledger this engine produces.' },
+    body: 'Royalty off gross revenue, cost recovery against revenue after royalty, profit oil split, tax on the contractor share. In every year contractor net cash flow plus government cash flow equals gross revenue less opex less capex, and that identity is the first check to run on any ledger this engine produces.' },
   { n: 4, title: 'A sliding scale is a step, and the threshold belongs to the tier above it',
     body: 'The walk keeps the rate of every tier whose threshold the price has reached, so nothing between the tiers is interpolated and a price below every threshold pays the first tier rate rather than zero. A printed price is a rounding; the implied rate is the measurement.' },
   { n: 5, title: 'An unrecovered pool is a claim on future revenue, not a tax loss',
@@ -57,9 +58,9 @@ const LESSONS = [
     body: 'Each year net cash flow is divided by one plus the rate raised to the year number, and year 1 is already discounted once. On identical flows a mid-year convention is larger by exactly the square root of one plus the rate.' },
   { n: 9, title: 'An internal rate of return can be a bound rather than a root',
     body: 'The solver returns 0 when the flows never change sign and 0 when the value at a rate of zero is not above zero, so a project that loses money at every rate reports 0. Past its search range it reports the bound, and a suspiciously round number where a rate should be is the tell.' },
-  { n: 10, title: 'One result object holds two different effective tax rates',
-    body: 'The summary adds total capex back to the contractor take, which makes it a rate on profit. The price sensitivity does not, which makes it a rate on cash. Both are returned by one call and one screen labels both of them the same thing.' },
-  { n: 11, title: 'Every point on the government share curve carries one of three states',
+  { n: 10, title: 'Government take and government share of net revenue are two different ratios',
+    body: 'Government take, the headline, divides government cash flow by revenue less opex less capex. Government share of net revenue adds capex back and comes second. Both come from one call, undiscounted unless a label names a rate, and neither is a tax rate.' },
+  { n: 11, title: 'Every point on the government take curve carries one of three states',
     body: 'A share; an exceeds point above 100 percent, where the contractor loses money while the government still collects and the true value is kept; and an undefined point, null, where lifetime profit is not positive although the government may have collected a great deal. Before believing a point, read its state and the two totals underneath it.' },
   { n: 12, title: 'A verdict that names a winner is only a verdict when the quantities separate',
     body: 'The capex verdict breaks a tie by list order, the price verdict declines to rank when its lead is under one percentage point, and the payback verdict ranks a whole year, where ties are the normal case. Where the column ties, the sentence names whichever regime has the highest net present value, under a different label.' },
@@ -230,7 +231,7 @@ const FiscalLearningPage = () => {
               {' '}{fmt(lab.odidiTotals[0].totalRevenue)} million USD of revenue under every one of
               them, and returns {fmt(topOdidi.npv)} million USD of contractor net present value under
               {' '}{topOdidi.name} against {fmt(worstOdidi.npv)} million USD under {worstOdidi.name}.
-              Government take over the life runs from {fmt(worstOdidi.totalGovernmentTake)} down to
+              Government cash flow over the life runs from {fmt(worstOdidi.totalGovernmentTake)} down to
               {' '}{fmt(topOdidi.totalGovernmentTake)} million USD across the same six. Payback moves
               between year {lab.gomOnOdidi.paybackYear} and year {lab.piaOnOdidi.paybackYear}, and the
               closing unrecovered cost pool between {fmt(lab.gomOnOdidi.closingUnrecoveredPool)} and
@@ -253,7 +254,7 @@ const FiscalLearningPage = () => {
                 inside every panel is a return value from that engine, and the whole set is pinned by
                 a test file that asserts the arguments as well as the arithmetic. Four results are
                 worth the price of the course. THE LEDGER CLOSES ON AN IDENTITY: in every year of
-                every regime, contractor net cash flow plus government take equals gross revenue less
+                every regime, contractor net cash flow plus government cash flow equals gross revenue less
                 opex less capex, which is why a cost recovery limit of
                 {' '}{lab.recoveryTightest.limit} percent and one of {lab.recoveryLoosest.limit} percent
                 leave closing pools of {fmt(lab.recoveryTightest.closingUnrecoveredPool)} and
@@ -300,6 +301,9 @@ const FiscalLearningPage = () => {
           {tier === 'intermediate' && <InstrumentExplorer />}
           {tier === 'advanced' && <ComparisonExplorer />}
 
+          {/* The course definitions, from the shared conventions module */}
+          <FiscalDefinitions />
+
           {/* What the engine refuses to do */}
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
@@ -331,10 +335,10 @@ const FiscalLearningPage = () => {
                     1.5000000000000004 and fails the test, so the loss it reports for
                     {' '}{cmp.capex.series[0].name} is {fmt(cmp.capex.series[0].lossOverSevenSweptPointsDerived)} million
                     USD where the eighth point called directly gives
-                    {' '}{fmt(cmp.capex.series[0].lossOverEightPointsDerived)}. Its summary and its
-                    price chart both call a number the effective tax rate and disagree by
+                    {' '}{fmt(cmp.capex.series[0].lossOverEightPointsDerived)}. Its summary shows government share of
+                    net revenue and its price chart government take, and the two differ by
                     {' '}{pct(cmp.summary.summary[0].effectiveTaxRateDifferenceDerived)} on the very
-                    first row. Its government share curve has no value at any swept price for every
+                    first row. Its government take curve has no value at any swept price for every
                     regime on the published never-recovers comparison, because lifetime profit is
                     not positive there, and each of those regimes collected between
                     {' '}{fmt(Math.min(...cmp.share.rows.map((x) => x.totalGovernmentTake)))} and

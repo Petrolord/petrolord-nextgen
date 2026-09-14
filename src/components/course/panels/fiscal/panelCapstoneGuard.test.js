@@ -39,9 +39,9 @@ const panelSources = fs
 
 describe('THE PANEL GUARD: no panel may read the capstone', () => {
   it('there are panels to check, so a rename cannot silently empty this gate', () => {
-    expect(panelSources.length).toBeGreaterThanOrEqual(4);
+    expect(panelSources.length).toBeGreaterThanOrEqual(5);
     expect(panelSources.map((s) => s.file).sort()).toEqual([
-      'ComparisonExplorer.jsx', 'FiscalLearningPage.jsx', 'InstrumentExplorer.jsx', 'RegimeExplorer.jsx',
+      'ComparisonExplorer.jsx', 'FiscalDefinitions.jsx', 'FiscalLearningPage.jsx', 'InstrumentExplorer.jsx', 'RegimeExplorer.jsx',
     ]);
   });
 
