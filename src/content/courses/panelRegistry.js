@@ -161,6 +161,11 @@ export const PANELS = {
   'ec-screening-explorer': React.lazy(() => import('@/components/course/panels/uncertainty/ScreeningExplorer')),
   'ec-breakeven-explorer': React.lazy(() => import('@/components/course/panels/uncertainty/BreakevenExplorer')),
   'ec-risk-explorer': React.lazy(() => import('@/components/course/panels/uncertainty/RiskExplorer')),
+
+  // EC4 Decision Analysis & Value of Information
+  'ec-tree-explorer': React.lazy(() => import('@/components/course/panels/decision/TreeExplorer')),
+  'ec-information-explorer': React.lazy(() => import('@/components/course/panels/decision/InformationExplorer')),
+  'ec-judgement-explorer': React.lazy(() => import('@/components/course/panels/decision/JudgementExplorer')),
 };
 
 export function resolvePanel(id) {
