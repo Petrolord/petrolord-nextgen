@@ -156,6 +156,11 @@ export const PANELS = {
   'ec-regime-explorer': React.lazy(() => import('@/components/course/panels/fiscal/RegimeExplorer')),
   'ec-instrument-explorer': React.lazy(() => import('@/components/course/panels/fiscal/InstrumentExplorer')),
   'ec-comparison-explorer': React.lazy(() => import('@/components/course/panels/fiscal/ComparisonExplorer')),
+
+  // EC3 Probabilistic Economics
+  'ec-screening-explorer': React.lazy(() => import('@/components/course/panels/uncertainty/ScreeningExplorer')),
+  'ec-breakeven-explorer': React.lazy(() => import('@/components/course/panels/uncertainty/BreakevenExplorer')),
+  'ec-risk-explorer': React.lazy(() => import('@/components/course/panels/uncertainty/RiskExplorer')),
 };
 
 export function resolvePanel(id) {
