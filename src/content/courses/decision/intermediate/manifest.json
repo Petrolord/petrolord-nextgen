@@ -1,0 +1,305 @@
+{
+  "app_slug": "decision",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-perfect-information",
+      "title": "Perfect Information",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-knowing-the-outcome-first",
+          "title": "Knowing the outcome first",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-best-action-for-each-outcome",
+          "title": "The best action for each outcome",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-evpi-as-a-difference",
+          "title": "EVPI as a difference",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-perfect-information-is-worthless",
+          "title": "When perfect information is worthless",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-evpi-peaks-where-the-decision-turns",
+          "title": "EVPI peaks where the decision turns",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-imperfect-information-by-bayes",
+      "title": "Imperfect Information by Bayes",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-likelihoods-of-a-signal",
+          "title": "Likelihoods of a signal",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-chance-of-each-signal",
+          "title": "The chance of each signal",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-posteriors",
+          "title": "Posteriors",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-best-action-after-each-signal",
+          "title": "The best action after each signal",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-evii-and-its-two-bounds",
+          "title": "EVII and its two bounds",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-buying-the-information",
+      "title": "Buying the Information",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-gross-and-net",
+          "title": "Gross and net",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-information-tree",
+          "title": "The information tree",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-price-that-makes-it-neutral",
+          "title": "The price that makes it neutral",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-cost-sweep",
+          "title": "A cost sweep",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-accuracy-and-value",
+      "title": "Accuracy and Value",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-symmetric-signal",
+          "title": "A symmetric signal",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-worth-nothing-until-it-changes-a-choice",
+          "title": "Worth nothing until it changes a choice",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-rising-to-evpi",
+          "title": "Rising to EVPI",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-useless-and-perfect-signals",
+          "title": "Useless and perfect signals",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-voi-analyzer",
+      "title": "The VOI Analyzer",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-two-actions-and-typed-percents",
+          "title": "Two actions and typed percents",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-indicator-chances-and-posteriors",
+          "title": "Indicator chances and posteriors",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-inverting-to-likelihoods",
+          "title": "Inverting to likelihoods",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-four-cards-five-numbers-and-a-verdict",
+          "title": "Four cards, five numbers and a verdict",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-missing-third-action",
+          "title": "A missing third action",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-information-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,301 @@
+{
+  "app_slug": "decision",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-decision-tree-is",
+      "title": "What a Decision Tree Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-decision-under-uncertainty",
+          "title": "A decision under uncertainty",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-three-kinds-of-node",
+          "title": "Three kinds of node",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-this-engine-assumes",
+          "title": "What this engine assumes",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-money-that-is-already-discounted",
+          "title": "Money that is already discounted",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-chance-nodes",
+      "title": "Chance Nodes",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-weighting-by-probability",
+          "title": "Weighting by probability",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-probabilities-that-must-sum-to-one",
+          "title": "Probabilities that must sum to one",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-cost-on-a-branch",
+          "title": "A cost on a branch",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-payoff-that-is-a-distribution",
+          "title": "A payoff that is a distribution",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-an-emv-nobody-receives",
+          "title": "An EMV nobody receives",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-decision-nodes",
+      "title": "Decision Nodes",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-taking-the-best-branch",
+          "title": "Taking the best branch",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-optimal-path",
+          "title": "The optimal path",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-tie-goes-to-the-first-branch",
+          "title": "A tie goes to the first branch",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-least-bad-choice",
+          "title": "The least bad choice",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-walking-away-is-a-branch",
+          "title": "Walking away is a branch",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-rolling-back-a-sequence",
+      "title": "Rolling Back a Sequence",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-right-to-left",
+          "title": "Right to left",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-decision-inside-a-chance-node",
+          "title": "A decision inside a chance node",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-value-of-a-later-choice",
+          "title": "The value of a later choice",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-four-levels-deep",
+          "title": "Four levels deep",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-when-the-decision-changes",
+      "title": "When the Decision Changes",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-one-probability-moved",
+          "title": "One probability moved",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-switch-point",
+          "title": "The switch point",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-drill-farm-out-or-walk",
+          "title": "Drill, farm out or walk",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-emv-hides",
+          "title": "What the EMV hides",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-published-tree-swept",
+          "title": "The published tree swept",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-tree-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "app_slug": "decision",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-inputs-that-contradict-each-other",
+      "title": "Inputs That Contradict Each Other",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-priors-your-posteriors-imply",
+          "title": "The priors your posteriors imply",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-half-percent-threshold",
+          "title": "A half percent threshold",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-rounded-posteriors",
+          "title": "Rounded posteriors",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-value-above-its-ceiling",
+          "title": "A value above its ceiling",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-negative-value-of-information",
+          "title": "A negative value of information",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-bigger-lotteries",
+      "title": "Bigger Lotteries",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-three-outcomes-and-four-actions",
+          "title": "Three outcomes and four actions",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-signal-with-three-readings",
+          "title": "A signal with three readings",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-reading-that-never-happens",
+          "title": "A reading that never happens",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-an-action-that-is-never-best",
+          "title": "An action that is never best",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-decision-brief",
+      "title": "The Decision Brief",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-what-decision-studio-assembles",
+          "title": "What Decision Studio assembles",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-next-best-and-the-advantage",
+          "title": "Next best and the advantage",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-monte-carlo-payoff-enters-at-its-mean",
+          "title": "A Monte Carlo payoff enters at its mean",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-provenance-on-every-row",
+          "title": "Provenance on every row",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-refusals-and-silent-defaults",
+      "title": "Refusals and Silent Defaults",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-the-engine-refuses",
+          "title": "What the engine refuses",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-thirds-typed-to-three-places",
+          "title": "Thirds typed to three places",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-cost-that-is-not-a-number",
+          "title": "A cost that is not a number",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-half-a-percent-in-binary",
+          "title": "Half a percent in binary",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-percents-that-are-not-chances",
+          "title": "Percents that are not chances",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-numbers-to-distrust",
+      "title": "Numbers to Distrust",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-risk-neutral-choice",
+          "title": "A risk neutral choice",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-an-exact-tie-reported-as-a-recommendation",
+          "title": "An exact tie reported as a recommendation",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-kpi-rounded-before-the-verdict",
+          "title": "A KPI rounded before the verdict",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-information-that-cannot-change-anything",
+          "title": "Information that cannot change anything",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-tree-cannot-tell-you",
+          "title": "What a tree cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-judgement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
