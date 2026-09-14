@@ -1,0 +1,305 @@
+{
+  "app_slug": "fiscal",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-sliding-scale",
+      "title": "The Sliding Scale",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-royalty-that-moves-with-price",
+          "title": "Royalty that moves with price",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-tier-that-is-chosen",
+          "title": "The tier that is chosen",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-deck-that-crosses-a-threshold",
+          "title": "A deck that crosses a threshold",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-below-every-threshold",
+          "title": "Below every threshold",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-cost-recovery",
+      "title": "Cost Recovery",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-recoverable-pool",
+          "title": "The recoverable pool",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-limit-and-its-base",
+          "title": "The limit and its base",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-carryforward",
+          "title": "The carryforward",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-cost-is-never-recovered",
+          "title": "When cost is never recovered",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-cost-recovery-is-not",
+          "title": "What cost recovery is not",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-r-factor",
+      "title": "The R Factor",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-ratio-of-cumulatives",
+          "title": "A ratio of cumulatives",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-tranche-the-ratio-selects",
+          "title": "The tranche the ratio selects",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-crossing-a-tranche",
+          "title": "Crossing a tranche",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-falling-back",
+          "title": "Falling back",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-order-of-the-tiers",
+          "title": "The order of the tiers",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-tax-stack",
+      "title": "The Tax Stack",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-base-is-the-profit-share",
+          "title": "The base is the profit share",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-corporate-income-tax",
+          "title": "Corporate income tax",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-resource-rent-tax-and-its-uplift",
+          "title": "Resource rent tax and its uplift",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-minimum-tax-and-the-maximum",
+          "title": "The minimum tax and the maximum",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-stack-leaves-out",
+          "title": "What the stack leaves out",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-rate-and-return",
+      "title": "Rate and Return",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-year-end-discounting",
+          "title": "Year end discounting",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-parity-with-mid-year",
+          "title": "The parity with mid year",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-irr-by-bisection",
+          "title": "IRR by bisection",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-irr-returns-zero",
+          "title": "When IRR returns zero",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-instrument-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

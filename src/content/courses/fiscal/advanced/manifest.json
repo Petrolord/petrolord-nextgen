@@ -1,0 +1,305 @@
+{
+  "app_slug": "fiscal",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-six-regimes-at-once",
+      "title": "Six Regimes at Once",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-the-comparison-returns",
+          "title": "What the comparison returns",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-summary-and-its-sort",
+          "title": "The summary and its sort",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-effective-tax-rate-in-the-table",
+          "title": "The effective tax rate in the table",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-payback-and-the-payout-year",
+          "title": "Payback and the payout year",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-price-sweep",
+      "title": "The Price Sweep",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-swept-range",
+          "title": "The swept range",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-government-share-curve",
+          "title": "The government share curve",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-progressivity",
+          "title": "Progressivity",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-multiplier-scales-oil-only",
+          "title": "The multiplier scales oil only",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-second-effective-tax-rate",
+          "title": "The second effective tax rate",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-capex-sweep",
+      "title": "The Capex Sweep",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-multiplier-loop",
+          "title": "The multiplier loop",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-point-the-loop-never-reaches",
+          "title": "The point the loop never reaches",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-resilience-measures",
+          "title": "What resilience measures",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-sweeps-side-by-side",
+          "title": "Two sweeps side by side",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-a-verdict-that-moved",
+          "title": "Reading a verdict that moved",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-insights",
+      "title": "The Insights",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-four-claims-that-were-never-computed",
+          "title": "Four claims that were never computed",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-how-each-one-is-derived-now",
+          "title": "How each one is derived now",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-tie-ranked-by-noise",
+          "title": "A tie ranked by noise",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-nothing-pays-back",
+          "title": "When nothing pays back",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-one-regime-and-none",
+          "title": "One regime, and none",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-numbers-to-distrust",
+      "title": "Numbers to Distrust",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-rate-with-two-values",
+          "title": "The rate with two values",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-label-that-is-not-the-sweep",
+          "title": "The label that is not the sweep",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-irr-that-reports-its-bracket",
+          "title": "The IRR that reports its bracket",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-uplift-charged-every-year",
+          "title": "The uplift charged every year",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-comparison-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
