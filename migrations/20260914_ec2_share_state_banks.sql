@@ -281,9 +281,9 @@ declare
 begin
   select prompt into v_prompt from public.academy_capstones where app_slug = 'fiscal' and tier = 'advanced';
   if v_prompt is null then raise exception 'EC2-1 capstone prompt update refused: no fiscal advanced capstone'; end if;
-  if position('the concession's line falls as the price rises, and field 6 is the endpoint difference asked for whatever state each endpoint carries.' in v_prompt) > 0 then
+  if position('the concession''s line falls as the price rises, and field 6 is the endpoint difference asked for whatever state each endpoint carries.' in v_prompt) > 0 then
     raise notice 'EC2-1 capstone prompt already reworded';
-  elsif position('the concession's share falls as the price rises.' in v_prompt) = 0 then
+  elsif position('the concession''s share falls as the price rises.' in v_prompt) = 0 then
     raise exception 'EC2-1 capstone prompt update refused: the field 6 sentence is not in the published prompt';
   else
     update public.academy_capstones
