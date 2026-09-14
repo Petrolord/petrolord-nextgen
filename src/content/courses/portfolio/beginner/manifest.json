@@ -1,0 +1,303 @@
+{
+  "app_slug": "portfolio",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-capital-is-a-constraint",
+      "title": "Capital Is a Constraint",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-more-projects-than-money",
+          "title": "More projects than money",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-money-in-millions",
+          "title": "Money in millions",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-it-refuses",
+          "title": "What it refuses",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-risking-a-project",
+      "title": "Risking a Project",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-chance-of-success",
+          "title": "A chance of success",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-cost-of-failing",
+          "title": "The cost of failing",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-risked-emv-in-one-line",
+          "title": "Risked EMV in one line",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-success-case-npv-is-not-value",
+          "title": "Success-case NPV is not value",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-clamps-and-defaults",
+          "title": "Clamps and defaults",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-choosing-under-a-budget",
+      "title": "Choosing Under a Budget",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-all-or-nothing-funding",
+          "title": "All or nothing funding",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-best-set-is-not-the-best-projects",
+          "title": "The best set is not the best projects",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-negative-emv-stays-out",
+          "title": "A negative EMV stays out",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-money-left-unspent",
+          "title": "Money left unspent",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-ties-between-sets",
+          "title": "Ties between sets",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-efficient-frontier",
+      "title": "The Efficient Frontier",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-best-value-at-each-budget",
+          "title": "Best value at each budget",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-reading-the-steps",
+          "title": "Reading the steps",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-last-point-is-the-answer",
+          "title": "The last point is the answer",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-an-extra-million-buys",
+          "title": "What an extra million buys",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-two-budgets-on-one-frontier",
+          "title": "Two budgets on one frontier",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-grid-under-the-answer",
+      "title": "The Grid Under the Answer",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-an-exact-grid-and-a-coarse-one",
+          "title": "An exact grid and a coarse one",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-set-over-the-limit",
+          "title": "A set over the limit",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-set-left-out",
+          "title": "A set left out",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-free-project-charged-a-cell",
+          "title": "A free project charged a cell",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-capital-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

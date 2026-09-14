@@ -1,0 +1,305 @@
+{
+  "app_slug": "portfolio",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-portfolio-risk-by-simulation",
+      "title": "Portfolio Risk by Simulation",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-the-normal-approximation-failed",
+          "title": "Why the normal approximation failed",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-success-and-failure-drawn",
+          "title": "Success and failure drawn",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-seed-and-the-draw-order",
+          "title": "The seed and the draw order",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-loss-probability-counted",
+          "title": "A loss probability counted",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-low-case-you-can-reach",
+          "title": "A low case you can reach",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-correlation",
+      "title": "Correlation",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-one-average-correlation",
+          "title": "One average correlation",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-spread-formula",
+          "title": "The spread formula",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-shared-drivers",
+          "title": "Shared drivers",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-correlation-never-moves",
+          "title": "What correlation never moves",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-joint-venture-shares",
+      "title": "Joint Venture Shares",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-working-interest",
+          "title": "Working interest",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-operator-carries-the-rest",
+          "title": "The operator carries the rest",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-shares-over-the-whole",
+          "title": "Shares over the whole",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-negative-share",
+          "title": "A negative share",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-billing-a-partner",
+          "title": "Billing a partner",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-refusals-and-flags",
+      "title": "Refusals and Flags",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-negative-capex",
+          "title": "A negative capex",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-negative-progress",
+          "title": "Negative progress",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-an-overshoot-flagged",
+          "title": "An overshoot flagged",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-was-repaired-and-what-was-not",
+          "title": "What was repaired and what was not",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-numbers-to-distrust",
+      "title": "Numbers to Distrust",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-cpi-before-any-spend",
+          "title": "CPI before any spend",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-an-invoice-with-no-date",
+          "title": "An invoice with no date",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-plan-that-never-reaches-the-budget",
+          "title": "A plan that never reaches the budget",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-iterations-and-the-standard-error",
+          "title": "Iterations and the standard error",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-portfolio-model-cannot-tell-you",
+          "title": "What a portfolio model cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-governance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
