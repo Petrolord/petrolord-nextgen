@@ -8,7 +8,7 @@ A project is three production streams with an initial rate and a decline each, t
 
 ## What it manufactures
 
-From the rates and declines it generates a production profile. From the profile and the deck it computes gross revenue. From the four regime fields it computes royalty, cost recovery, profit oil, tax, contractor net cash flow and government take. Every table in the course is a return value of one of five functions: `calculateCashFlowForRegime`, `calculateNPV`, `calculateIRR`, `deriveInsights` or `runFiscalComparison`.
+From the rates and declines it generates a production profile. From the profile and the deck it computes gross revenue. From the four regime fields it computes royalty, cost recovery, profit oil, tax, contractor net cash flow and government cash flow. Every table in the course is a return value of one of five functions: `calculateCashFlowForRegime`, `calculateNPV`, `calculateIRR`, `deriveInsights` or `runFiscalComparison`.
 
 `PROJECT_LIFE` is 25 rows, and that is the row count returned for every regime and every project, without exception.
 

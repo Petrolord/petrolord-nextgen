@@ -1,44 +1,44 @@
-# The rate with two values
+# Two names for two ratios
 
-One result object holds two quantities called the effective tax rate, computed on the same cash flows by different formulas, and one screen shows both within a centimetre of each other.
+One result object used to hold two quantities under one label. They are two different ratios of the same government cash flow, and each now carries its own name, definition and basis.
 
 {{panel:ec-comparison-explorer}}
 
 ## The two formulas
 
-The summary table divides total government take by total government take plus contractor take, with TOTAL CAPEX ADDED BACK to the contractor side. The add-back is what makes it a rate on profit rather than a rate on cash. The price sensitivity divides the same two quantities on the same cash flows WITHOUT the add-back. Both come back from one call to `runFiscalComparison`.
+Government take divides government cash flow by revenue less opex less capex, which on the ledger is government cash flow plus contractor net cash flow. It is the headline, and the price sweep plots it. Government share of net revenue divides the same government cash flow by revenue less opex, with TOTAL CAPEX ADDED BACK to the contractor side, and the summary table shows it second. Both come back from one call to `runFiscalComparison`, both undiscounted by default. An earlier build labelled both "effective tax rate".
 
-At the deck's own first-year price of 70 USD per bbl, the two read like this on `cmp_all_templates_default_project`:
+At the deck's own first-year price of 70 USD per bbl on `cmp_all_templates_default_project`:
 
-| regime | summary, capex added back | price sweep, no add-back | difference, percentage points (derived) |
+| regime | government take | government share of net revenue | difference, percentage points (derived) |
 | --- | --- | --- | --- |
-| Generic Royalty/Tax | 33.7901 | 43.4694 | 9.6793 |
-| USA - Gulf of Mexico | 34.0485 | 43.8018 | 9.7533 |
-| Brazil - Concession | 37.1137 | 47.7450 | 10.6313 |
-| Angola - Deepwater PSC | 53.4534 | 68.7654 | 15.3119 |
-| Ghana - Deepwater | 58.6335 | 75.4293 | 16.7958 |
-| Nigeria - PIA (2021) | 59.6432 | 76.7282 | 17.0850 |
+| Generic Royalty/Tax | 43.4694 | 33.7901 | 9.6793 |
+| USA - Gulf of Mexico | 43.8018 | 34.0485 | 9.7533 |
+| Brazil - Concession | 47.7450 | 37.1137 | 10.6313 |
+| Angola - Deepwater PSC | 68.7654 | 53.4534 | 15.3119 |
+| Ghana - Deepwater | 75.4293 | 58.6335 | 16.7958 |
+| Nigeria - PIA (2021) | 76.7282 | 59.6432 | 17.0850 |
 
-On the Designer's own two defaults the gap is the same size: Concessionary (Royalty/Tax) reads 46.3452 in the table and 59.6210 on the chart, a difference of 13.2758, and Nigerian PIA (PSC) reads 55.5380 against 71.4471, a difference of 15.9091.
+On the Designer's own two defaults, Concessionary (Royalty/Tax) reads 59.6210 as government take and 46.3452 as government share of net revenue, a difference of 13.2758, and Nigerian PIA (PSC) reads 71.4471 against 55.5380, a difference of 15.9091.
 
-Neither number is wrong on its own terms. Take over profit and take over cash are both quantities a fiscal analyst uses, and they answer different questions. What is wrong is that one screen calls both the effective tax rate.
+Neither number is wrong. They answer different questions, and the danger was only ever the shared label.
 
-## The sweep's second problem
+## Government take's second problem
 
-The summary's denominator stays comfortably positive on these cases. The sweep's denominator is government take plus contractor net cash flow with nothing added back, and it can reach zero and go through it. Every point of the sweep therefore carries a state: share, exceeds above 100 percent, or undefined with a null value where that denominator is not positive. An earlier build returned exactly 0 in the undefined case.
+Government share of net revenue keeps capex in its denominator and stays positive on these cases. Government take has nothing added back, so its denominator can reach zero and go through it. Every government take point therefore carries a state: share, exceeds above 100 percent, or undefined with a null value where the pre-take net cash flow is not positive. An earlier build returned exactly 0 in the undefined case.
 
-On `cmp_never_recovers` all six templates are undefined at all nine prices, while the same run records government take of 1431.0440 for Nigeria - PIA (2021) and 1662.7835 for Angola - Deepwater PSC. There is no share to quote, and the government still collected a great deal.
+On `cmp_never_recovers` every template is undefined at all nine prices, while the same run records government cash flow of 1431.0440 for Nigeria - PIA (2021) and 1662.7835 for Angola - Deepwater PSC, and government share of net revenue of 27.7811 and 32.2800.
 
-Run the Angola template on the default project with every capex line multiplied by three: null, then 2223.0766, then 144.0692, then 85.6015 at the first four prices. Those are undefined, exceeds twice and an ordinary share, in that order, on one line of one chart, and each point is flagged.
+Run the Angola template on the default project with every capex line multiplied by three: null, then 2223.0766, then 144.0692, then 85.6015 at the first four prices. Those are undefined, exceeds twice and an ordinary government take, in that order, each point flagged. Discounted at 10 percent the same regime's government take has no value, while its government share of net revenue reads 28.4191.
 
 ## The mistake
 
-The careful mistake is treating the difference between the two rates as movement. It is not a change with price, not a modelling error, and not a rounding artefact. Both numbers describe the same 25 years of the same ledger, and 17.0850 percentage points separate them because one counted capex as returned to the contractor and the other did not.
+The careful mistake is treating the difference between the two numbers as movement. It is not a change with price, not a modelling error and not rounding. Both describe the same 25 years of the same ledger, and 17.0850 percentage points separate them for Nigeria - PIA (2021) because one keeps capex in the denominator and the other takes it out.
 
 ## What to do
 
-Quote a rate with its definition, and before believing any point on the sweep curve read its state and the two totals underneath it. If lifetime contractor net cash flow is negative, the number is not a share.
+Quote each number with its name and its basis, and before believing a government take read its state and the two totals underneath it. If lifetime contractor net cash flow is negative, the point is above 100 percent or has no value.
 
 ## Exercise
 
-For Nigeria - PIA (2021) on `cmp_all_templates_default_project`, state both effective tax rates at 70 USD per bbl and the difference, and say which counts capex as returned. Then say what the sweep returns for that regime on `cmp_never_recovers`, with its state, and what it collected there.
+For Nigeria - PIA (2021) on `cmp_all_templates_default_project`, state government take and government share of net revenue at 70 USD per bbl and the difference, and say which keeps capex in its denominator. Then say what government take returns for that regime on `cmp_never_recovers`, with its state, and what government share of net revenue still reads there.

@@ -12,7 +12,7 @@ The resource rent tax base is the contractor profit share minus `totalCapex` tim
 
 Take the Brazil - Concession instruments on the default project, whose total capex is 500.0000 million USD, and move the uplift:
 
-| rrtUpliftPct | total tax | total contractor NCF | total government take | NPV at 10 percent | first year with a positive RRT charge |
+| rrtUpliftPct | total tax | total contractor NCF | total government cash flow | NPV at 10 percent | first year with a positive RRT charge |
 | --- | --- | --- | --- | --- | --- |
 | 0 | 590.7165 | 886.0748 | 859.4093 | 357.3957 | 3 |
 | 5 | 380.1066 | 1096.6848 | 648.7993 | 428.7343 | 3 |

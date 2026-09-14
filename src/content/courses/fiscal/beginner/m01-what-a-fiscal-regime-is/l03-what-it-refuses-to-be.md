@@ -4,7 +4,7 @@ Four refusals are written into the engine's own header, and a fifth list of omis
 
 ## It is not a fiscal truth
 
-The module's single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine. This model exists to compare the shape of regimes against each other. A line reading total government take 1339.2784 million USD under "Nigeria - PIA (2021)" on the Designer's default project is a shape, not an assessment.
+The module's single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine. This model exists to compare the shape of regimes against each other. A line reading total government cash flow 1339.2784 million USD under "Nigeria - PIA (2021)" on the Designer's default project is a shape, not an assessment.
 
 ## It does not take a forecast
 
@@ -20,7 +20,7 @@ No abandonment, no depreciation, no loss carryforward against tax, no ring fenci
 
 ## What the omissions cost you
 
-Take `never_recovers_huge_capex`, the published case that puts capex of 20000 on the test project. It reports total contractor net cash flow of -15724.0151 million USD, a closing unrecovered cost pool of 15724.0151 million USD, payback year null and payout year null. Total tax is 0.0000 million USD and total profit oil is 0.0000 million USD, so government take of 875.1492 million USD is pure royalty on total revenue of 7001.1938 million USD.
+Take `never_recovers_huge_capex`, the published case that puts capex of 20000 on the test project. It reports total contractor net cash flow of -15724.0151 million USD, a closing unrecovered cost pool of 15724.0151 million USD, payback year null and payout year null. Total tax is 0.0000 million USD and total profit oil is 0.0000 million USD, so government cash flow of 875.1492 million USD is pure royalty on total revenue of 7001.1938 million USD.
 
 A real contractor facing that would abandon. This one produces for 25 years and hands the treasury 875.1492 million USD while losing 15724.0151 million USD, because no economic limit exists to stop it and no abandonment cost exists to be paid at the end.
 

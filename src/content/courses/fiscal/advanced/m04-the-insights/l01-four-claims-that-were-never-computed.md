@@ -16,13 +16,13 @@ The real templates make the same point differently. On `cmp_all_templates_defaul
 
 ## The government claim, checked
 
-`runFiscalComparison` sorts the summary by contractor NPV descending, and the sort carries no information at all about take. On `cmp_all_templates_default_project` the second row is USA - Gulf of Mexico with government take 764.5528. The government's largest collection on that comparison is 1339.2784, from Nigeria - PIA (2021), which sits sixth. On ODIDI the second row is Generic Royalty/Tax at 242.1194 while Angola - Deepwater PSC, ranked sixth, collects 316.7898.
+`runFiscalComparison` sorts the summary by contractor NPV descending, and the sort carries no information at all about take. On `cmp_all_templates_default_project` the second row is USA - Gulf of Mexico with government cash flow 764.5528. The government's largest collection on that comparison is 1339.2784, from Nigeria - PIA (2021), which sits sixth. On ODIDI the second row is Generic Royalty/Tax at 242.1194 while Angola - Deepwater PSC, ranked sixth, collects 316.7898.
 
 The old rule named the second-best regime for the contractor and called it best for the government, on comparisons where those readings are close to opposite.
 
 ## The two rankings nothing computed
 
-A capex-resilience ranking needs the capex sweep and a price-response ranking needs the price sweep, and the tab printed both without touching either. Run them on the default project: contractor NPV given up across the swept capex points runs from 84.8591 for Angola - Deepwater PSC to 228.7953 for USA - Gulf of Mexico, and the government share climb across the swept prices runs from -17.2498 for USA - Gulf of Mexico to 12.1305 for Angola - Deepwater PSC. The same two regimes sit at opposite ends of both, which is a finding, and not one a hard-coded sentence could have produced.
+A capex-resilience ranking needs the capex sweep and a price-response ranking needs the price sweep, and the tab printed both without touching either. Run them on the default project: contractor NPV given up across the swept capex points runs from 84.8591 for Angola - Deepwater PSC to 228.7953 for USA - Gulf of Mexico, and the climb in government take across the swept prices runs from -17.2498 for USA - Gulf of Mexico to 12.1305 for Angola - Deepwater PSC. The same two regimes sit at opposite ends of both, which is a finding, and not one a hard-coded sentence could have produced.
 
 ## What the function refuses
 
@@ -30,7 +30,7 @@ A capex-resilience ranking needs the capex sweep and a price-response ranking ne
 
 ## The mistake
 
-The careful mistake is to treat the first summary row as first at everything. It is first at one quantity, contractor NPV, and on the default project its government take of 758.7514 is the smallest of the six.
+The careful mistake is to treat the first summary row as first at everything. It is first at one quantity, contractor NPV, and on the default project its government cash flow of 758.7514 is the smallest of the six.
 
 ## Exercise
 

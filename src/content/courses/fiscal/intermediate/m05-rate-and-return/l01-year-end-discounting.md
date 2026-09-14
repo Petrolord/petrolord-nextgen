@@ -34,7 +34,7 @@ The careful mistake is to treat year 1 as time zero and leave it undiscounted, t
 
 ## What it refuses
 
-There is no valuation year, so the discount always starts from the first row. There is no mid period option inside this function, no partial years and no inflation, real or nominal. The horizon is 25 rows for every regime and every project. And the function discounts contractor net cash flow only, so there is no discounted government take and no discounted tax to read beside it.
+There is no valuation year, so the discount always starts from the first row. There is no mid period option inside this function, no partial years and no inflation, real or nominal. The horizon is 25 rows for every regime and every project. And the function discounts contractor net cash flow only, so there is no discounted government cash flow and no discounted tax to read beside it.
 
 ## Exercise
 

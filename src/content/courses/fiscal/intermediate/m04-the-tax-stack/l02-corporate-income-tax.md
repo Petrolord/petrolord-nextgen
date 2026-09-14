@@ -23,18 +23,18 @@ Raise the rate and the column scales with it. Running the "Brazil - Concession" 
 
 Four of the six templates carry a corporate income tax and nothing else, and their total tax on the default project does not follow their rate.
 
-| regime | corporate income tax rate percent | total tax | total government take |
+| regime | corporate income tax rate percent | total tax | total government cash flow |
 | --- | --- | --- | --- |
 | USA - Gulf of Mexico | 21 | 260.7539 | 764.5528 |
 | Nigeria - PIA (2021) | 30 | 174.0882 | 1339.2784 |
 | Generic Royalty/Tax | 30 | 422.8854 | 758.7514 |
 | Ghana - Deepwater | 35 | 230.9340 | 1316.6067 |
 
-Ghana charges the highest rate of the four and collects 230.9340 million USD, while Generic Royalty/Tax charges 30 percent and collects 422.8854. Nigeria charges the same 30 percent as Generic and collects 174.0882. The reason is the base. Generic hands the contractor 100 percent of profit oil, so all of it is taxable, while Ghana and Nigeria split profit oil on the R factor and the government's own share of it never passes through the tax line. Total government take runs the other way for exactly that reason, 1316.6067 million USD for Ghana against 758.7514 for Generic.
+Ghana charges the highest rate of the four and collects 230.9340 million USD, while Generic Royalty/Tax charges 30 percent and collects 422.8854. Nigeria charges the same 30 percent as Generic and collects 174.0882. The reason is the base. Generic hands the contractor 100 percent of profit oil, so all of it is taxable, while Ghana and Nigeria split profit oil on the R factor and the government's own share of it never passes through the tax line. Total government cash flow runs the other way for exactly that reason, 1316.6067 million USD for Ghana against 758.7514 for Generic.
 
 ## The mistake
 
-The mistake is ranking regimes by their headline tax rate, or reading a small total tax as a light regime. Nigeria's 174.0882 million USD of tax is the smallest of the four and sits inside the largest government take of the four, 1339.2784. The tax line measures one instrument. The take measures the regime, and the two can point in opposite directions on the same ledger.
+The mistake is ranking regimes by their headline tax rate, or reading a small total tax as a light regime. Nigeria's 174.0882 million USD of tax is the smallest of the four and sits inside the largest government cash flow of the four, 1339.2784. The tax line measures one instrument. The take measures the regime, and the two can point in opposite directions on the same ledger.
 
 ## What it refuses
 

@@ -8,7 +8,7 @@ The sweep is nine fixed prices, and every one of them re-runs the entire compari
 
 The price sweep runs the whole comparison again at oil prices of 40, 50, 60, 70, 80, 90, 100, 110 and 120 USD per bbl. It reaches each of those prices by a multiplier: the price the sweep wants divided by the first deck point's oil price. That multiplier then scales the oil price in every year of the deck, so the deck's step structure survives the sweep intact and only its level moves.
 
-Every point is a full re-run: the whole comparison, every regime, all 25 rows of every ledger, computed again from the scaled deck. The default project's first deck point is 70 USD per bbl, so the sweep's 70 point is the deck itself at a multiplier of one, and it returns the base case exactly, an NPV of 173.4150 million USD and government take of 1247.0980. Three of the nine points sit below the deck and five above it, so the range is not centred on the base case.
+Every point is a full re-run: the whole comparison, every regime, all 25 rows of every ledger, computed again from the scaled deck. The default project's first deck point is 70 USD per bbl, so the sweep's 70 point is the deck itself at a multiplier of one, and it returns the base case exactly, an NPV of 173.4150 million USD and government cash flow of 1247.0980. Three of the nine points sit below the deck and five above it, so the range is not centred on the base case.
 
 ## What each point returns
 
@@ -30,7 +30,7 @@ The sweep looks like a set of price scenarios and is not. It is one deck, scaled
 
 ## What it refuses
 
-The nine prices are fixed and there is no input that changes them, so a project whose economics turn at 45 USD per bbl cannot be examined there. The sweep moves price only: it will not sweep capex, opex or the discount rate at the same time. And it plots one quantity per regime, a government share, so the NPV, the payback year and the unrecovered pool that also moved at each point are computed and then discarded before the chart is drawn.
+The nine prices are fixed and there is no input that changes them, so a project whose economics turn at 45 USD per bbl cannot be examined there. The sweep moves price only: it will not sweep capex, opex or the discount rate at the same time. And it plots one quantity per regime, its government take (undiscounted), so the NPV, the payback year and the unrecovered pool that also moved at each point are computed and then discarded before the chart is drawn.
 
 ## Exercise
 

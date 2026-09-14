@@ -21,7 +21,7 @@ Over the whole life of the default project the royalty totals 503.7989 million U
 
 ## It does not care what the year did
 
-Year 1 of the default project carries capex of 500.0000 million USD, opex of 31.0027 million USD and a contractor net cash flow of -310.0117 million USD. The royalty in that year is 50.9979 million USD, charged in full. Government take for the year is 50.9979 million USD, because there is no profit oil and no tax, and the contractor is 310.0117 million USD down.
+Year 1 of the default project carries capex of 500.0000 million USD, opex of 31.0027 million USD and a contractor net cash flow of -310.0117 million USD. The royalty in that year is 50.9979 million USD, charged in full. Government cash flow for the year is 50.9979 million USD, because there is no profit oil and no tax, and the contractor is 310.0117 million USD down.
 
 That is what off the top means in this model. A loss making year pays royalty at the same rate as the best year in the field.
 

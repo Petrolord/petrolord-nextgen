@@ -10,7 +10,7 @@ The teaching field ODIDI runs 8000 bbl/d of oil declining 14 percent a year agai
 
 ## It cannot tell you what the regime does at another price
 
-One run is one deck. Swept across prices from 40 to 120 USD per bbl on ODIDI, the government's share under the Gulf of Mexico terms falls from 78.5512 percent to 40.8517, while under PIA it stays inside a band from 75.1077 to 79.4678. Two regimes that look similar on one run behave nothing alike on the next one, and a single ledger shows neither shape.
+One run is one deck. Swept across prices from 40 to 120 USD per bbl on ODIDI, government take under the Gulf of Mexico terms falls from 78.5512 percent to 40.8517, while under PIA it stays inside a band from 75.1077 to 79.4678. Two regimes that look similar on one run behave nothing alike on the next one, and a single ledger shows neither shape.
 
 ## It cannot tell you what a cost overrun does
 

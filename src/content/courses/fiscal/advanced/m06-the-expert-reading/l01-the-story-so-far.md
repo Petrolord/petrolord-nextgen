@@ -4,11 +4,11 @@ This tier is one sentence, tested six ways: on a comparison screen, knowing whic
 
 ## Four returns and one sort
 
-`runFiscalComparison` gives back `summary`, `annualCashFlows`, `sensitivityData` and `insights`. Only the summary is sorted, by contractor NPV descending, and nothing else can be read off a row's position. On the default project all six templates share a total revenue of 2686.9277, and the first row, Generic Royalty/Tax at 397.0445, collects the smallest government take of the six at 758.7514, while the last, Nigeria - PIA (2021) at 154.8286, collects the largest at 1339.2784.
+`runFiscalComparison` gives back `summary`, `annualCashFlows`, `sensitivityData` and `insights`. Only the summary is sorted, by contractor NPV descending, and nothing else can be read off a row's position. On the default project all six templates share a total revenue of 2686.9277, and the first row, Generic Royalty/Tax at 397.0445, collects the smallest government cash flow of the six at 758.7514, while the last, Nigeria - PIA (2021) at 154.8286, collects the largest at 1339.2784.
 
-## One rate, two values
+## Two ratios, two names
 
-The summary's effective tax rate adds total capex back to the contractor side; the price sweep's does not. Nigeria - PIA (2021) reads 59.6432 in the table and 76.7282 on the chart at the same 70 USD per bbl, on the same cash flows. The sweep's version also has a denominator that can hit zero, and there it returns null with the state undefined for a regime that collected 1431.0440.
+Government share of net revenue, in the summary, adds total capex back to the contractor side; government take, on the price sweep, does not. Nigeria - PIA (2021) reads 59.6432 in the table and 76.7282 on the chart at the same 70 USD per bbl, on the same cash flows. Government take also has a denominator that can hit zero, and there it returns null with the state undefined for a regime that collected 1431.0440.
 
 ## Two sweeps with edges
 
@@ -28,4 +28,4 @@ ODIDI at 12 percent returns six negative NPVs, from -5.8662 for Brazil - Concess
 
 ## Exercise
 
-Name the four things `runFiscalComparison` returns and the one that is sorted. Then give both effective tax rates for Nigeria - PIA (2021) at 70 USD per bbl and say which adds capex back.
+Name the four things `runFiscalComparison` returns and the one that is sorted. Then give government take and government share of net revenue for Nigeria - PIA (2021) at 70 USD per bbl and say which adds capex back.

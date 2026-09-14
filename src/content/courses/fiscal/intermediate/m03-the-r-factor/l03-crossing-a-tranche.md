@@ -18,7 +18,7 @@ A tranche crossing is a discontinuity in the middle of a smooth ledger. The R fa
 | 6 | 2.680048 | 116.7617 | 0.300000 |
 | 7 | 2.832537 | 100.3503 | 0.300000 |
 
-Two crossings, both invisible in the R factor column unless the thresholds are in hand. Between year 2 at 1.383252 and year 3 at 1.846809 the ratio steps over 1.6 without ever taking a value near it, and the split drops from 0.600000 to 0.400000. Between year 5 at 2.474747 and year 6 at 2.680048 it steps over 2.5, and the split drops to 0.300000. Over the life the case returns contractor net cash flow of 279.5803 million USD, government take of 1174.9793, tax of 136.4182 and an NPV of 168.2190 at 10 percent, with payback in year 2 and payout in year 2.
+Two crossings, both invisible in the R factor column unless the thresholds are in hand. Between year 2 at 1.383252 and year 3 at 1.846809 the ratio steps over 1.6 without ever taking a value near it, and the split drops from 0.600000 to 0.400000. Between year 5 at 2.474747 and year 6 at 2.680048 it steps over 2.5, and the split drops to 0.300000. Over the life the case returns contractor net cash flow of 279.5803 million USD, government cash flow of 1174.9793, tax of 136.4182 and an NPV of 168.2190 at 10 percent, with payback in year 2 and payout in year 2.
 
 ## A cut that is not a cut
 

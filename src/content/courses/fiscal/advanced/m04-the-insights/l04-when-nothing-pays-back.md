@@ -27,7 +27,7 @@ The contractor verdict names "Brazil - Concession" at -15354.7 million USD with 
 
 ## What the government still collects
 
-A project that never pays back is not a project the government walks away from. `never_recovers_huge_capex` runs capex 20000 on the test project and shows why: total revenue 7001.1938, total royalty 875.1492, total cost recovered 6126.0445, total profit oil 0.0000, total tax 0.0000 and total government take 875.1492, against a total contractor net cash flow of -15724.0151 and a closing unrecovered pool of 15724.0151. Profit oil never appears, so the tax stack never charges anything, and every dollar the government takes is royalty off the top.
+A project that never pays back is not a project the government walks away from. `never_recovers_huge_capex` runs capex 20000 on the test project and shows why: total revenue 7001.1938, total royalty 875.1492, total cost recovered 6126.0445, total profit oil 0.0000, total tax 0.0000 and total government cash flow 875.1492, against a total contractor net cash flow of -15724.0151 and a closing unrecovered pool of 15724.0151. Profit oil never appears, so the tax stack never charges anything, and every dollar the government takes is royalty off the top.
 
 ## The zero that is not a rate
 
@@ -43,4 +43,4 @@ The careful mistake is sorting a comparison on IRR when every IRR is 0.0000, or 
 
 ## Exercise
 
-From `never_recovers_huge_capex`, state total profit oil, total tax and total government take, and say which single instrument produced the take. Then say what heading the payback verdict carries when no regime pays back.
+From `never_recovers_huge_capex`, state total profit oil, total tax and total government cash flow, and say which single instrument produced the take. Then say what heading the payback verdict carries when no regime pays back.

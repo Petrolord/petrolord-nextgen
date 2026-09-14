@@ -1,4 +1,4 @@
-# Government take
+# Government cash flow
 
 The state's line is royalty plus its share of profit oil plus tax, and it is a collection, not a profit, because the state carries none of the cost.
 
@@ -35,7 +35,7 @@ The state collects royalty from year 1 on a field that has returned none of its 
 
 ## What it refuses
 
-Government take here is royalty, profit share and tax. It holds no signature bonus, no production bonus, no state equity, no domestic supply obligation and no royalty taken in kind. It is undiscounted, and it says nothing about when the money arrives.
+Government cash flow here is royalty, profit share and tax. The engine column is `governmentTake`; the course keeps the name government take for a ratio of this cash flow that the Expert tier meets. It holds no signature bonus, no production bonus, no state equity, no domestic supply obligation and no royalty taken in kind. It is undiscounted, and it says nothing about when the money arrives.
 
 ## Exercise
 

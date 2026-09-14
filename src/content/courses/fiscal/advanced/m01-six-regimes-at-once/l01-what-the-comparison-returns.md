@@ -21,11 +21,11 @@ Money is millions of USD, so the Concessionary regime hands the government 1040.
 
 Total revenue is the same for every regime on a given project. All six templates on the default project return 2686.9277 million USD of gross revenue, and all six on the test project return 7001.1938 million USD. The regime touches neither production nor price, so revenue is a property of the field alone. Everything downstream moves a great deal: on that identical 2686.9277, lifetime contractor net cash flow is 406.2057 million USD under Nigeria - PIA (2021) and 986.7327 million USD under Generic Royalty/Tax.
 
-A name is not a regime either. The comparison of the two Suite test regimes returns "Flat" with an NPV of 1262.3470 million USD, government take of 1881.7626 and an effective tax rate of 36.5310, which is the same row Generic Royalty/Tax returns on the test project, because the four instruments are identical.
+A name is not a regime either. The comparison of the two Suite test regimes returns "Flat" with an NPV of 1262.3470 million USD, government cash flow of 1881.7626 and a government share of net revenue of 36.5310, which is the same row Generic Royalty/Tax returns on the test project, because the four instruments are identical.
 
 ## The mistake
 
-The comparison looks like six scenarios and is not. It is one field, one production profile and one price deck, divided six ways. A reader who reports that a regime "adds value" has misread the arithmetic: nothing was added, and the difference between 758.7514 million USD of government take under Generic Royalty/Tax and 1339.2784 under Nigeria - PIA (2021) came out of the contractor's column on the same 2686.9277 of sales.
+The comparison looks like six scenarios and is not. It is one field, one production profile and one price deck, divided six ways. A reader who reports that a regime "adds value" has misread the arithmetic: nothing was added, and the difference between 758.7514 million USD of government cash flow under Generic Royalty/Tax and 1339.2784 under Nigeria - PIA (2021) came out of the contractor's column on the same 2686.9277 of sales.
 
 ## What it refuses
 

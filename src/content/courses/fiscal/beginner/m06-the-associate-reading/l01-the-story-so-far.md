@@ -12,7 +12,7 @@ The engine generates the profile rather than reading one: year 1 lifts 2.920000 
 
 Under "USA - Gulf of Mexico", ODIDI sells 139.6563 in year 1 and pays royalty of 26.1856, leaving 113.4707 of revenue after royalty. Year 5 sells 76.1939 and year 6 sells 93.9859: revenue rose while every stream declined, because the deck stepped. Year 25 sells 6.9081, pays 1.2953 of royalty and leaves 5.6128 against opex of 12.3405, which is why this ledger closes with 24.2824 of cost still unrecovered at a limit of 100 percent.
 
-| regime | contractor NCF | government take | payback | NPV at 12 percent | IRR percent |
+| regime | contractor NCF | government cash flow | payback | NPV at 12 percent | IRR percent |
 | --- | --- | --- | --- | --- | --- |
 | Nigeria - PIA (2021) | 113.0236 | 312.9610 | 7 | -43.7842 | 7.4603 |
 | Ghana - Deepwater | 117.1399 | 308.8447 | 6 | -27.4074 | 8.7906 |

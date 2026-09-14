@@ -30,7 +30,7 @@ Two things move in year 6 and they compound. Gross revenue rises from 76.1939 to
 | 7 | 154.4254 | 19.3032 | 0.125000 |
 | 8 | 138.8057 | 17.3507 | 0.125000 |
 
-The deck steps at year 5, from 70 to 75, and the rate does not move, because 75 has not reached 80. The rate holds at 12.5 percent until year 9 and becomes 15 percent from year 10, when the deck reaches 80. Two schedules, one for price and one for rate, and they change in different years. Over the life the case charges 360.1731 million USD of royalty and closes with contractor net cash flow of 498.3862, government take of 1247.0980 and an NPV of 173.4150 at 10 percent, with payback in year 4.
+The deck steps at year 5, from 70 to 75, and the rate does not move, because 75 has not reached 80. The rate holds at 12.5 percent until year 9 and becomes 15 percent from year 10, when the deck reaches 80. Two schedules, one for price and one for rate, and they change in different years. Over the life the case charges 360.1731 million USD of royalty and closes with contractor net cash flow of 498.3862, government cash flow of 1247.0980 and an NPV of 173.4150 at 10 percent, with payback in year 4.
 
 ## The mistake
 

@@ -20,7 +20,7 @@ The implied rate is 0.125000 in every year. That is the first tier's rate, charg
 
 ## What that costs
 
-The case is not a marginal project, it is a losing one, and the royalty is charged anyway. Over the life it pays 177.3774 million USD of royalty on total revenue of 1419.0195, while contractor net cash flow reaches only 80.8085, government take is 396.7675 and NPV at 10 percent is negative 111.7254. IRR is 2.9910 percent, payback does not arrive until year 12, and 72.2941 million USD of cost is still sitting unrecovered when the horizon closes. A royalty larger than twice the contractor's whole lifetime cash flow was collected from a project that destroyed value.
+The case is not a marginal project, it is a losing one, and the royalty is charged anyway. Over the life it pays 177.3774 million USD of royalty on total revenue of 1419.0195, while contractor net cash flow reaches only 80.8085, government cash flow is 396.7675 and NPV at 10 percent is negative 111.7254. IRR is 2.9910 percent, payback does not arrive until year 12, and 72.2941 million USD of cost is still sitting unrecovered when the horizon closes. A royalty larger than twice the contractor's whole lifetime cash flow was collected from a project that destroyed value.
 
 ## The mistake
 
