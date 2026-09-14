@@ -56,6 +56,7 @@ import InterventionLearningPage from '@/pages/apps/InterventionLearningPage';
 import SurveillanceLearningPage from '@/pages/apps/SurveillanceLearningPage';
 import CashflowLearningPage from '@/pages/apps/CashflowLearningPage';
 import FiscalLearningPage from '@/pages/apps/FiscalLearningPage';
+import UncertaintyLearningPage from '@/pages/apps/UncertaintyLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
 import LessonPage from '@/pages/course/LessonPage';
@@ -414,6 +415,7 @@ const DashboardPage = () => {
     <Route path="apps/surveillance" element={<SurveillanceLearningPage />} />
     <Route path="apps/cashflow" element={<CashflowLearningPage />} />
     <Route path="apps/fiscal" element={<FiscalLearningPage />} />
+    <Route path="apps/uncertainty" element={<UncertaintyLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.
            Static segments (quiz/exam/capstone) rank above the :moduleKey

@@ -1,0 +1,299 @@
+{
+  "app_slug": "uncertainty",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-screening-model-is",
+      "title": "What a Screening Model Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-one-number-is-a-guess",
+          "title": "One number is a guess",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-engine-models",
+          "title": "What this engine models",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses-to-be",
+          "title": "What it refuses to be",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-units-that-travel",
+          "title": "The units that travel",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-case-before-the-numbers",
+      "title": "The Case Before the Numbers",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-quick-inputs-and-a-fixed-life",
+          "title": "Quick inputs and a fixed life",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-decline-year-on-year",
+          "title": "A decline year on year",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-capex-over-two-years",
+          "title": "Capex over two years",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-fixed-and-variable-opex",
+          "title": "Fixed and variable opex",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-price-that-never-moves",
+          "title": "A price that never moves",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-royalty-and-tax-ledger",
+      "title": "The Royalty and Tax Ledger",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-gross-revenue-in-millions",
+          "title": "Gross revenue in millions",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-royalty-off-the-top",
+          "title": "Royalty off the top",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-taxable-income-and-expensing",
+          "title": "Taxable income and expensing",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-tax-only-on-a-positive-base",
+          "title": "Tax only on a positive base",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-net-cash-flow",
+          "title": "Net cash flow",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-value-from-a-ledger",
+      "title": "Value from a Ledger",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-mid-year-discounting",
+          "title": "Mid-year discounting",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-npv-row-by-row",
+          "title": "NPV row by row",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-payback-part-way-through-a-year",
+          "title": "Payback part way through a year",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-irr-by-newton",
+          "title": "IRR by Newton",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-peak-exposure",
+          "title": "Peak exposure",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-one-number-becomes-three",
+      "title": "One Number Becomes Three",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-sensitivity-sweep",
+          "title": "The sensitivity sweep",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-tornado-has-two-sides",
+          "title": "A tornado has two sides",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-low-base-and-high",
+          "title": "Low, base and high",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-scenario-is-not",
+          "title": "What a scenario is not",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-screening-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

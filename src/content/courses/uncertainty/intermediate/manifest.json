@@ -1,0 +1,305 @@
+{
+  "app_slug": "uncertainty",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-percentiles-are-not-endpoints",
+      "title": "Percentiles Are Not Endpoints",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-three-numbers-you-believe",
+          "title": "Three numbers you believe",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-why-minimum-mode-maximum-is-wrong",
+          "title": "Why minimum, mode and maximum is wrong",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-shape-from-the-median",
+          "title": "The shape from the median",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-band-no-triangle-reaches",
+          "title": "The band no triangle reaches",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-range-and-origin-in-closed-form",
+          "title": "Range and origin in closed form",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-sampling-a-distribution",
+      "title": "Sampling a Distribution",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-inverse-cdf-and-its-two-branches",
+          "title": "The inverse CDF and its two branches",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-seeded-generator",
+          "title": "A seeded generator",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-three-draws-in-a-fixed-order",
+          "title": "Three draws in a fixed order",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-same-seed-same-answer",
+          "title": "Same seed, same answer",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-breakeven-price",
+      "title": "The Breakeven Price",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-npv-rises-with-price",
+          "title": "NPV rises with price",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-bisection-to-a-target",
+          "title": "Bisection to a target",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-kinks-where-tax-switches-on",
+          "title": "The kinks where tax switches on",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-target-no-price-reaches",
+          "title": "A target no price reaches",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-hurdle-above-zero",
+          "title": "A hurdle above zero",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-reading-the-sample",
+      "title": "Reading the Sample",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-sorting-the-sample",
+          "title": "Sorting the sample",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-three-percentiles-of-a-price",
+          "title": "Three percentiles of a price",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-s-curve",
+          "title": "The S-curve",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-iterations-that-never-break-even",
+          "title": "Iterations that never break even",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-mean-beside-the-median",
+          "title": "The mean beside the median",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-two-sided-tornado",
+      "title": "The Two-Sided Tornado",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-base-case-at-the-medians",
+          "title": "The base case at the medians",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-swinging-one-variable",
+          "title": "Swinging one variable",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-efficiency-runs-backwards",
+          "title": "Efficiency runs backwards",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-sorting-by-swing",
+          "title": "Sorting by swing",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-breakeven-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

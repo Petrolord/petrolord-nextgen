@@ -1,0 +1,52 @@
+# Working the capstone
+
+A graded probabilistic case is worked in a fixed order: the deterministic case, the Monte Carlo outcomes with their labels, the breakeven price in percentile words, and then every edge and every number this tier has shown can mislead. The order is worked here on ISIALA.
+
+{{panel:ec-risk-explorer}}
+
+## The deterministic case first
+
+Write the inputs before running anything. ISIALA is 4400 bopd declining 12 percent a year, oil at 70 USD per bbl, capex of 180 million USD in two halves, fixed opex of 2.5 million USD a year, variable opex of 13 USD per bbl, royalty 15 percent, tax 35 percent, a discount rate of 12 percent and a first year of 2027. The case returns an NPV of 81.0464 million USD, an IRR of 53.7148 percent, a payback of 3.2746 years and a peak exposure of -44.6035.
+
+Then check each against its defect. The IRR is not 1000.0000, 10.0000 or 0.0000, so it is a solved rate. The cumulative crosses zero once, from -8.6381 in 2029 to 22.8165 in 2030, and stays positive, so the payback is no re-crossing of the kind finding EC3-1 records.
+
+## The outcomes with their labels
+
+Record the settings with the answer: 1000 iterations, price, capex and reserves each plus or minus 20 percent, seed 20260829.
+
+| case | P-label | engine key | NPV |
+| --- | --- | --- | --- |
+| Low case | P90 | `p10` | 48.7439 |
+| Best case | P50 | `p50` | 81.1835 |
+| High case | P10 | `p90` | 109.8980 |
+
+The emv is 80.1707. The Low case comes first and holds the smallest NPV. A result that shows the largest NPV under P90 has swapped its labels. Name the rule too: on the same sample the breakeven rule puts the Low case at 48.8335, so 48.7439 is quoted with the screening engine that produced it.
+
+## The breakeven price in percentile words
+
+State the target NPV, the iteration count, the seed and the exclusions: NPV 0, 5000 iterations, seed 20260829, 0 excluded. The base at the stated medians is 71.6277 USD per bbl, the 10th percentile of breakeven price 62.1713, the median 73.3297 and the 90th percentile of breakeven price 85.5912. No P-label touches any of them. Keep the base beside the percentiles and say which is which: 71.6277 is one solve at the stated medians, and 73.3297 is the middle of the sample, sitting higher.
+
+## The edges
+
+Read `exact` on every fit: ISIALA's capex, opex and efficiency fits are all true. Read both sides of every tornado bar: Total CAPEX -7.0202 and 9.4067, Annual OPEX -5.8578 and 8.8730, Prod. Efficiency -3.7306 and 5.0561, with no side at 0.0000. Had a fit been inexact or a side been zero, the answer would say so in words.
+
+## Before you submit
+
+| Check | What passing looks like |
+| --- | --- |
+| Deterministic | NPV, IRR, payback and exposure, each checked against its return codes |
+| Outcomes | Low, Best and High in that order, with P-labels and engine keys |
+| Breakeven | Base and three percentiles, in percentile words |
+| Settings | Iterations, ranges, target and seed written beside every sampled number |
+| Edges | Every fit's `exact` flag and both sides of every tornado bar read |
+| Conventions | Mid-year discounting named, one percentile rule per engine |
+
+Then the units: USD, bbl, bopd, percent as a word, money in million USD, and calendar years.
+
+## The mistake
+
+The careful mistake is reporting the right numbers under the wrong words. Every ISIALA value can be correct and the answer still lose its marks by writing a breakeven price with a P-label, by showing the High case first, or by quoting a median without its seed.
+
+## Exercise
+
+Work ISIALA in this order: the deterministic case and its checks, the three NPV cases with labels and keys, the breakeven price at three percentiles, then the fits and the tornado sides. Say which results would change under a different seed and which would not.
