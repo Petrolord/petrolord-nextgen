@@ -31,6 +31,7 @@
 import golden from '@petrolord/engines/test-data/economics/goldens/fiscal_cases.json';
 import {
   calculateNPV, calculateIRR, calculateCashFlowForRegime, deriveInsights, runFiscalComparison,
+  GOVERNMENT_SHARE_STATES, commonShareWindow,
 } from '@petrolord/engines/engines/economics/fiscalRegime.js';
 import { fiscalTemplates } from '@petrolord/engines/engines/economics/fiscalTemplates.js';
 
@@ -966,62 +967,82 @@ export const etrBothWays = async (caseId) => {
  * SECTION 18. The price sweep. It reaches a price by a MULTIPLIER of the first
  * deck point's oil price, and it scales OIL ONLY. What it plots is government
  * take over government take plus contractor net cash flow, without the capex
- * add-back, guarded by `totalProfit > 0`.
+ * add-back.
  *
- * EVERY POINT CARRIES ITS OWN EVIDENCE. The sweep is run at a price, not at
- * the deck, so a series can be a share at one price and the guard's own zero at
- * another. For each swept price the reader re-runs the SAME regime at the SAME
- * multiplier the engine used and reports the two lifetime totals underneath the
- * point, whether the contractor's is positive, and which of the three meanings
- * the point therefore carries. It is not enough that the call returned.
+ * EVERY POINT CARRIES THE ENGINE'S OWN STATE (EC2-1, owner decision
+ * 2026-09-14): `share`, `exceeds` (above 100 percent, true value kept) or
+ * `undefined` (lifetime profit not positive, value null). An earlier build
+ * returned exactly 0 where the state is now undefined. The reader does not
+ * re-derive the state: it reads the engine's, and re-runs the SAME regime at
+ * the SAME multiplier only to put the two lifetime totals underneath the point
+ * and to check that the totals agree with the state the engine returned.
  */
 export const PRICE_POINT_MEANINGS = {
-  share: 'a share: lifetime contractor net cash flow is positive, the denominator is comfortably positive, and the number is a government share',
-  blownUp: 'NOT a share: lifetime contractor net cash flow is not positive, so the ratio runs through a small positive denominator and has no ceiling',
-  guard: 'NOT a number at all: the denominator is zero or negative, the engine guard fires, and the point is plotted as exactly 0',
+  share: 'share: lifetime profit is positive and the government share is within 0 to 100 percent',
+  exceeds: 'exceeds: lifetime profit is positive but the contractor loses money while the government still collects, so the ratio is above 100 percent; the true value is kept and it is not a share',
+  undefined: 'undefined: lifetime profit is zero or negative, so there is no share, the value is null and the line breaks',
 };
 
-const pricePointEvidence = (g, projectInputs, priceLabel, plotted) => {
+const stateFromTotals = (gov, ncf) => {
+  const profit = gov + ncf;
+  if (!(profit > 0)) return GOVERNMENT_SHARE_STATES.UNDEFINED;
+  return (gov / profit) * 100 > 100 ? GOVERNMENT_SHARE_STATES.EXCEEDS : GOVERNMENT_SHARE_STATES.SHARE;
+};
+
+const pricePointEvidence = (g, projectInputs, priceLabel, plotted, state) => {
   const rows = cf(g, projectInputs, 1, priceLabel / projectInputs.prices[0].oil);
   const t = totals(rows);
   const denominator = t.gov + t.ncf;
-  const positive = t.ncf > 0;
-  const meaning = denominator > 0
-    ? (positive ? PRICE_POINT_MEANINGS.share : PRICE_POINT_MEANINGS.blownUp)
-    : PRICE_POINT_MEANINGS.guard;
   return {
     price: priceLabel,
     plotted,
+    state,
     lifetimeContractorNCF: t.ncf,
     lifetimeGovernmentTake: t.gov,
     lifetimeDenominatorDerived: denominator,
-    lifetimeContractorNcfPositive: positive,
-    guardFired: !(denominator > 0),
-    meaning,
-    warn: meaning !== PRICE_POINT_MEANINGS.share,
+    lifetimeContractorNcfPositive: t.ncf > 0,
+    stateAgreesWithTotals: stateFromTotals(t.gov, t.ncf) === state,
+    noValue: state === GOVERNMENT_SHARE_STATES.UNDEFINED,
+    meaning: PRICE_POINT_MEANINGS[state],
+    warn: state !== GOVERNMENT_SHARE_STATES.SHARE,
   };
+};
+
+/** Last minus first, or null when either end has no value. */
+const endpointClimb = (values) => {
+  const a = values[0];
+  const b = values[values.length - 1];
+  return a === null || b === null || a === undefined || b === undefined ? null : b - a;
 };
 
 export const priceSweep = async (caseId) => {
   const { projectInputs, regimes, note } = comparisonInputs(caseId);
   const res = await runFiscalComparison({ projectInputs, regimes });
   const sw = res.sensitivityData.price;
+  const win = commonShareWindow(sw.data, sw.labels.length);
   return {
     caseId, note,
     labels: sw.labels,
+    window: win,
+    windowLabels: win ? [sw.labels[win.start], sw.labels[win.end]] : null,
+    undefinedPrices: sw.labels.filter((_, i) => sw.data.some((d) => d.states[i] === GOVERNMENT_SHARE_STATES.UNDEFINED)),
+    priceVerdict: res.insights.find((i) => i.key === 'price') ?? null,
     series: sw.data.map((d) => {
       const g = regimes.find((x) => x.id === d.regimeId);
-      const points = sw.labels.map((label, i) => pricePointEvidence(g, projectInputs, label, d.values[i]));
+      const points = sw.labels.map((label, i) => pricePointEvidence(g, projectInputs, label, d.values[i], d.states[i]));
       const base = totals(cf(g, projectInputs));
       return {
         id: d.regimeId,
         name: g.name,
         values: d.values,
-        climbDerived: d.values[d.values.length - 1] - d.values[0],
+        states: d.states,
+        climbDerived: endpointClimb(d.values),
+        windowClimbDerived: win ? d.values[win.end] - d.values[win.start] : null,
         points,
         warnPoints: points.filter((x) => x.warn).map((x) => x.price),
         everyPointIsAShare: points.every((x) => !x.warn),
-        anyPointGuarded: points.some((x) => x.guardFired),
+        anyPointUndefined: points.some((x) => x.noValue),
+        everyStateAgreesWithTotals: points.every((x) => x.stateAgreesWithTotals),
         lifetimeContractorNCFAtTheDeck: base.ncf,
         lifetimeGovernmentTakeAtTheDeck: base.gov,
         lifetimeContractorNcfPositiveAtTheDeck: base.ncf > 0,
@@ -1164,8 +1185,9 @@ export const tieEvidence = async () => {
     return {
       id: d.regimeId,
       name: g.name,
-      climbDerived: d.values[d.values.length - 1] - d.values[0],
-      climbToOneDecimalDerived: (d.values[d.values.length - 1] - d.values[0]).toFixed(1),
+      states: d.states,
+      climbDerived: endpointClimb(d.values),
+      climbToOneDecimalDerived: endpointClimb(d.values) === null ? null : endpointClimb(d.values).toFixed(1),
     };
   });
   const distinctLosses = new Set(ranked.map((r) => r.lossToOneDecimalDerived));
@@ -1214,10 +1236,10 @@ export const tieEvidence = async () => {
 };
 
 /**
- * SECTION 26. The government share curve mixes three meanings, and this is the
- * evidence. The cmp_never_recovers totals beside the flat zero the sweep plots
- * for every one of them, and the Angola capex multiple table where the same
- * line runs through all three meanings in nine points.
+ * SECTION 26. The government share curve carries three states, and this is the
+ * evidence. The cmp_never_recovers totals beside the null the sweep returns at
+ * every price (an earlier build returned exactly 0 there), and the Angola capex
+ * multiple table where the same line runs through all three states.
  *
  * A regime whose LIFETIME contractor net cash flow is not positive is reported
  * as such in `lifetimeContractorNcfPositive` and named in `meaning`. It is not
@@ -1231,9 +1253,10 @@ export const shareCurveRegimes = async () => {
   const rows = c.regimes.map((g) => {
     const led = cf(g, c.project);
     const t = totals(led);
-    const series = res.sensitivityData.price.data.find((d) => d.regimeId === g.id).values;
+    const d = res.sensitivityData.price.data.find((x) => x.regimeId === g.id);
+    const series = d.values;
     const positive = t.ncf > 0;
-    const points = res.sensitivityData.price.labels.map((label, i) => pricePointEvidence(g, c.project, label, series[i]));
+    const points = res.sensitivityData.price.labels.map((label, i) => pricePointEvidence(g, c.project, label, series[i], d.states[i]));
     return {
       id: g.id,
       name: g.name,
@@ -1242,11 +1265,14 @@ export const shareCurveRegimes = async () => {
       denominatorDerived: t.gov + t.ncf,
       lifetimeContractorNcfPositive: positive,
       plotted: series,
+      states: d.states,
       points,
       distinctPlotted: [...new Set(series)],
-      flatZero: series.every((v) => v === 0),
-      everyPointGuarded: points.every((x) => x.guardFired),
-      meaning: positive ? PRICE_POINT_MEANINGS.share : PRICE_POINT_MEANINGS.guard,
+      distinctStates: [...new Set(d.states)],
+      noValueAtAnyPrice: series.every((v) => v === null),
+      everyPointUndefined: d.states.every((x) => x === GOVERNMENT_SHARE_STATES.UNDEFINED),
+      everyStateAgreesWithTotals: points.every((x) => x.stateAgreesWithTotals),
+      meaning: positive ? PRICE_POINT_MEANINGS.share : PRICE_POINT_MEANINGS.undefined,
     };
   });
   const angola = [];
@@ -1261,18 +1287,21 @@ export const shareCurveRegimes = async () => {
     const led = cf(g, pr);
     const t = totals(led);
     const values = r.sensitivityData.price.data[0].values;
-    const points = r.sensitivityData.price.labels.map((label, i) => pricePointEvidence(g, pr, label, values[i]));
+    const states = r.sensitivityData.price.data[0].states;
+    const points = r.sensitivityData.price.labels.map((label, i) => pricePointEvidence(g, pr, label, values[i], states[i]));
     angola.push({
       multiple,
       labels: r.sensitivityData.price.labels,
       values,
+      states,
       points,
       meanings: [...new Set(points.map((x) => x.meaning))],
       lifetimeContractorNCFAtTheDeck: t.ncf,
       lifetimeGovernmentTakeAtTheDeck: t.gov,
       lifetimeContractorNcfPositiveAtTheDeck: t.ncf > 0,
-      guardFiresAtSomePoint: points.some((x) => x.guardFired),
-      aboveOneHundredAtSomePoint: values.some((v) => v > 100),
+      undefinedAtSomePoint: states.includes(GOVERNMENT_SHARE_STATES.UNDEFINED),
+      exceedsAtSomePoint: states.includes(GOVERNMENT_SHARE_STATES.EXCEEDS),
+      firstSharePrice: r.sensitivityData.price.labels[states.indexOf(GOVERNMENT_SHARE_STATES.SHARE)] ?? null,
       everyPointIsAShare: points.every((x) => !x.warn),
     });
   }
@@ -1281,7 +1310,8 @@ export const shareCurveRegimes = async () => {
     note: c.note,
     capex: { drilling: c.project.costs.capex.drilling, facilities: c.project.costs.capex.facilities, subsea: c.project.costs.capex.subsea },
     rows,
-    everyRegimePlotsFlatZero: rows.every((r) => r.flatZero),
+    everyRegimeHasNoValueAtAnyPrice: rows.every((r) => r.noValueAtAnyPrice),
+    priceVerdict: res.insights.find((i) => i.key === 'price') ?? null,
     angola,
   };
 };

@@ -33,7 +33,7 @@ The price sweep is nine oil prices from 40 to 120 USD per bbl and it scales oil 
 
 ## Check every denominator
 
-Before quoting any government share, read total government take and total contractor net cash flow for that regime. If the contractor total is negative the number is not a share, and if the sum is not positive the curve reads 0.0000.
+Before quoting any government share, read its state and the regime's total government take and total contractor net cash flow. A negative contractor total means exceeds, and a sum that is not positive means null and undefined.
 
 ## Before you submit
 
@@ -43,7 +43,7 @@ Before quoting any government share, read total government take and total contra
 | Instruments | Four fields per regime, uplift stated even when absent |
 | Sort | Contractor NPV only; take and rate read from their columns |
 | Sweeps | Nine prices, oil only; seven capex points ending at 1.4 |
-| Shares | Two totals read under every plotted point |
+| Shares | State and two totals read under every plotted point |
 | Verdicts | Ranked quantity quoted beside the rounded sentence |
 
 Then the units: USD, bbl, Mscf, boe at 6000 scf per barrel, percent as a word, money as million USD, and years numbered 1 to 25.

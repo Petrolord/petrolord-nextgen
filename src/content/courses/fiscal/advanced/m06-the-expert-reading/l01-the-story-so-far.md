@@ -8,7 +8,7 @@ This tier is one sentence, tested six ways: on a comparison screen, knowing whic
 
 ## One rate, two values
 
-The summary's effective tax rate adds total capex back to the contractor side; the price sweep's does not. Nigeria - PIA (2021) reads 59.6432 in the table and 76.7282 on the chart at the same 70 USD per bbl, on the same cash flows. The sweep's version also has a denominator that can hit zero, and when the guard fires it plots exactly 0.0000 for a regime that collected 1431.0440.
+The summary's effective tax rate adds total capex back to the contractor side; the price sweep's does not. Nigeria - PIA (2021) reads 59.6432 in the table and 76.7282 on the chart at the same 70 USD per bbl, on the same cash flows. The sweep's version also has a denominator that can hit zero, and there it returns null with the state undefined for a regime that collected 1431.0440.
 
 ## Two sweeps with edges
 

@@ -1,6 +1,6 @@
 # A tie ranked by noise
 
-The capex and price verdicts pick their winner with a strict less-than inside a reduce. Such a comparison keeps the first of two equals, so an exact tie goes to list order and a near tie to rounding error.
+The capex verdict picks its winner with a strict less-than inside a reduce. Such a comparison keeps the first of two equals, so an exact tie goes to list order and a near tie to rounding error.
 
 {{panel:ec-comparison-explorer}}
 
@@ -21,7 +21,7 @@ Six regimes, six different NPVs, and one loss figure repeated to every printed d
 
 ## What the sentence says anyway
 
-The capex verdict reads: over the swept capex range, "USA - Gulf of Mexico" gives up the least contractor NPV at 10909.1 million USD and "Nigeria - PIA (2021)" the most at 10909.1 million USD. The least and the most print the same number. The price verdict is worse: "Nigeria - PIA (2021)" is the most progressive, its government share rising 0.0 percentage points, so it captures upside fastest.
+The capex verdict reads: over the swept capex range, "USA - Gulf of Mexico" gives up the least contractor NPV at 10909.1 million USD and "Nigeria - PIA (2021)" the most at 10909.1 million USD. The least and the most print the same number. The price verdict no longer joins in: every point is null and flagged undefined, so it ranks nothing and says no regime is economic from 40 to 120 USD per bbl.
 
 The golden records the engine naming USA - Gulf of Mexico the most resilient here and the oracle's arithmetic naming Brazil - Concession. Neither is a result. The tie is exact by construction: cost recovered, profit oil and tax are unchanged across the sweep, so only the year 1 capex line moves and every regime gives up 12000 million USD discounted one year. The golden pins the ranked quantities and the gate treats a tie as a tie.
 
@@ -45,4 +45,4 @@ The careful mistake is trusting a verdict because it is specific. "USA - Gulf of
 
 ## Exercise
 
-From the `cmp_never_recovers` capex sweep, state the loss for each of the six regimes and how many distinct values there are. Then say what a climb of 0.0 percentage points implies about the series it came from.
+From the `cmp_never_recovers` capex sweep, state the loss for each of the six regimes and how many distinct values there are. Then say why the price verdict names no regime there.

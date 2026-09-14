@@ -29,11 +29,11 @@ The same six templates on the teaching field ODIDI return climbs of 0.1968 for N
 
 ## The mistake
 
-Quoting progressivity as a fact about a regime, rather than about a regime on a project over a range, is the error. The verdict sentence rounds the climb to one decimal and names a winner: on ODIDI that winner rises 2.0 percentage points across the whole sweep, which is a ranking of near-flat curves.
+Quoting progressivity as a fact about a regime, rather than about a regime on a project over a range, is the error. On ODIDI the verdict names Ghana - Deepwater, rising 2.0 percentage points: a lead that clears the one point the verdict requires, over near-flat curves.
 
 ## What it refuses
 
-The climb sees two points. It cannot report the shape, the minimum, the reversals or the price at which a curve turns, it cannot say how much money a percentage point is worth, and it will not tell you that one of the two points it used was not a share at all.
+The climb sees two points. It cannot report the shape, the minimum, the reversals or the price at which a curve turns, and it cannot say how much money a percentage point is worth. The verdict is stricter: it ranks only where every regime's point is a share. On the Suite test project four templates exceed 100 percent at 40 USD per bbl, so it ranks from 50 to 120 and names Brazil - Concession at 2.0567, against -23.6720 from 40.
 
 ## Exercise
 

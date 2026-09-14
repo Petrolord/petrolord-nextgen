@@ -59,10 +59,10 @@ const LESSONS = [
     body: 'The solver returns 0 when the flows never change sign and 0 when the value at a rate of zero is not above zero, so a project that loses money at every rate reports 0. Past its search range it reports the bound, and a suspiciously round number where a rate should be is the tell.' },
   { n: 10, title: 'One result object holds two different effective tax rates',
     body: 'The summary adds total capex back to the contractor take, which makes it a rate on profit. The price sensitivity does not, which makes it a rate on cash. Both are returned by one call and one screen labels both of them the same thing.' },
-  { n: 11, title: 'The government share curve mixes three meanings on one line',
-    body: 'A share, a ratio through a near-zero denominator with no ceiling, and a guard returning exactly zero for a project on which the government collected a great deal. Before believing a point, read the two totals underneath it.' },
+  { n: 11, title: 'Every point on the government share curve carries one of three states',
+    body: 'A share; an exceeds point above 100 percent, where the contractor loses money while the government still collects and the true value is kept; and an undefined point, null, where lifetime profit is not positive although the government may have collected a great deal. Before believing a point, read its state and the two totals underneath it.' },
   { n: 12, title: 'A verdict that names a winner is only a verdict when the quantities separate',
-    body: 'The capex and price verdicts break a tie by list order, and the payback verdict ranks a whole year, where ties are the normal case. Where the column ties, the sentence names whichever regime has the highest net present value, under a different label.' },
+    body: 'The capex verdict breaks a tie by list order, the price verdict declines to rank when its lead is under one percentage point, and the payback verdict ranks a whole year, where ties are the normal case. Where the column ties, the sentence names whichever regime has the highest net present value, under a different label.' },
 ];
 
 function ScopeGate() {
@@ -334,8 +334,9 @@ const FiscalLearningPage = () => {
                     {' '}{fmt(cmp.capex.series[0].lossOverEightPointsDerived)}. Its summary and its
                     price chart both call a number the effective tax rate and disagree by
                     {' '}{pct(cmp.summary.summary[0].effectiveTaxRateDifferenceDerived)} on the very
-                    first row. Its government share curve plots a flat zero for every regime on the
-                    published never-recovers comparison, each of which collected between
+                    first row. Its government share curve has no value at any swept price for every
+                    regime on the published never-recovers comparison, because lifetime profit is
+                    not positive there, and each of those regimes collected between
                     {' '}{fmt(Math.min(...cmp.share.rows.map((x) => x.totalGovernmentTake)))} and
                     {' '}{fmt(Math.max(...cmp.share.rows.map((x) => x.totalGovernmentTake)))} million
                     USD for the government. And its payback verdict ranks a whole year: on

@@ -34,7 +34,7 @@ The tempting repair is a mental correction: learn that the chart runs about ten 
 
 ## What each refuses
 
-The summary's version refuses to be a cash measure, and its capex add-back is undiscounted and undated. The sweep's version refuses nothing at all, which is the more dangerous property: its denominator is take plus contractor net cash flow with no add-back to hold it up, so on a project that loses money the denominator can shrink to nothing, cross zero and take the ratio with it. That is why the two rates diverge most exactly where a project is worst, and why a number quoted off the chart needs the two totals underneath it before it means anything.
+The summary's version refuses to be a cash measure, and its capex add-back is undiscounted and undated. The sweep's version refuses nothing at all, which is the more dangerous property: its denominator is take plus contractor net cash flow with no add-back to hold it up, so on a project that loses money the denominator can shrink toward nothing, and past zero there is no ratio at all: the engine then flags the point undefined and returns null. That is why the two rates diverge most exactly where a project is worst, and why a number quoted off the chart needs the two totals underneath it before it means anything.
 
 ## Exercise
 
