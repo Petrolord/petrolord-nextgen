@@ -1,0 +1,305 @@
+{
+  "app_slug": "uncertainty",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-one-meaning-of-a-p-label",
+      "title": "One Meaning of a P-Label",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-exceedance-on-outcomes",
+          "title": "Exceedance on outcomes",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-an-npv-low-case",
+          "title": "An NPV low case",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-breakeven-price-takes-no-label",
+          "title": "A breakeven price takes no label",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-parameters-take-percentiles",
+          "title": "Parameters take percentiles",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-cards-that-were-swapped",
+          "title": "The cards that were swapped",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-scenario-builder-monte-carlo",
+      "title": "The Scenario Builder's Monte Carlo",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-uniform-around-the-base",
+          "title": "Uniform around the base",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-the-ranges-scale",
+          "title": "What the ranges scale",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-seed-and-what-it-guarantees",
+          "title": "The seed and what it guarantees",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-histogram-and-its-bins",
+          "title": "The histogram and its bins",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-s-curve-downsample",
+          "title": "The S-curve downsample",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-two-percentile-rules",
+      "title": "Two Percentile Rules",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-rule-that-averages",
+          "title": "The rule that averages",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-rule-that-floors",
+          "title": "The rule that floors",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-one-sample-two-medians",
+          "title": "One sample, two medians",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-how-much-a-percentile-wobbles",
+          "title": "How much a percentile wobbles",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-edges-that-used-to-break",
+      "title": "Repaired Edges and One Still Open",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-every-range-at-zero",
+          "title": "Every range at zero",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-fewer-than-fifty-iterations",
+          "title": "Fewer than fifty iterations",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-tornado-bar-with-one-side-missing",
+          "title": "A tornado bar with one side missing",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-fit-that-cannot-pass-through-three-points",
+          "title": "A fit that cannot pass through three points",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-numbers-to-distrust",
+      "title": "Numbers to Distrust",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-irr-that-reports-its-clamp",
+          "title": "The IRR that reports its clamp",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-mid-year-beside-year-end",
+          "title": "Mid-year beside year-end",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-breakevens-for-one-field",
+          "title": "Two breakevens for one field",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-iterations-are-not-accuracy",
+          "title": "Iterations are not accuracy",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-distribution-cannot-tell-you",
+          "title": "What a distribution cannot tell you",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
