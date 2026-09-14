@@ -6,7 +6,7 @@ The comparison returns both sweeps in one object, and they are drawn to look lik
 
 ## Different units, different ranges
 
-The price sweep plots a government share in percent at nine oil prices from 40 to 120 USD per bbl. The capex sweep plots contractor NPV in million USD at seven multipliers from 0.8 to 1.4. One is a rate and belongs to the state's side of the ledger, the other is money and belongs to the contractor's. Only the capex chart's values can be added, subtracted or compared as amounts, and only the price chart's values can be compared between projects of different sizes.
+The price sweep plots government take, undiscounted, in percent at nine oil prices from 40 to 120 USD per bbl. The capex sweep plots contractor NPV in million USD at seven multipliers from 0.8 to 1.4. One is a rate and belongs to the state's side of the ledger, the other is money and belongs to the contractor's. Only the capex chart's values can be added, subtracted or compared as amounts, and only the price chart's values can be compared between projects of different sizes.
 
 ## What they agree about
 
@@ -29,7 +29,7 @@ On ODIDI the pairing loosens. Ghana - Deepwater is the most progressive with a c
 
 ## The mistake
 
-Reading one sweep as a proxy for the other is the error, and reading either as a joint answer is a worse one. The price sweep holds capex at the base case at every price. The capex sweep holds price at the deck at every multiplier. Neither chart contains the case a project team actually fears, an overrun arriving at a low price, and the two curves cannot be combined into it by eye. The Angola template on the default project at three times capex reads a government share of 0.0000 at 40 USD per bbl and 2223.0766 at 50, and nothing in either sweep as drawn would have suggested that.
+Reading one sweep as a proxy for the other is the error, and reading either as a joint answer is a worse one. The price sweep holds capex at the base case at every price. The capex sweep holds price at the deck at every multiplier. Neither chart contains the case a project team actually fears, an overrun arriving at a low price, and the two curves cannot be combined into it by eye. The Angola template on the default project at three times capex returns no value at 40 USD per bbl, where the point is null and flagged undefined, and a government take of 2223.0766, flagged exceeds, at 50, and nothing in either sweep as drawn would have suggested that.
 
 ## What they refuse
 

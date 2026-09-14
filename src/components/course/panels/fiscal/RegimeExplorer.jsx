@@ -126,7 +126,7 @@ const Ledger = () => {
         <TileGrid>
           <Tile label="Total gross revenue" value={mm(led.totals.rev)} unit="million USD" />
           <Tile label="Total contractor net cash flow" value={mm(led.totals.ncf)} unit="million USD" />
-          <Tile label="Total government take" value={mm(led.totals.gov)} unit="million USD" />
+          <Tile label="Total government cash flow" value={mm(led.totals.gov)} unit="million USD" />
           <Tile label="Total tax" value={mm(led.totals.tax)} unit="million USD" />
           <Tile label="Total cost recovered" value={mm(led.totals.rec)} unit="million USD" />
           <Tile label="Closing unrecovered pool" value={mm(led.closingUnrecoveredPool)} unit="million USD" />
@@ -163,7 +163,7 @@ const Ledger = () => {
               {chart.map((c) => <Cell key={c.year} fill={c.ncf < 0 ? '#f87171' : '#38bdf8'} />)}
             </Bar>
             <Line type="monotone" dataKey="cumulative" name="cumulative contractor net cash flow" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="gov" name="government take" stroke="#f472b6" dot={false} isAnimationActive={false} />
+            <Line type="monotone" dataKey="gov" name="government cash flow" stroke="#f472b6" dot={false} isAnimationActive={false} />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
@@ -173,7 +173,7 @@ const Ledger = () => {
         after royalty, and whatever is not recovered carries forward. Profit oil is what is left, split on the R
         factor or flat. Tax is charged on the contractor share of profit oil and on nothing else. The contractor
         receives cost oil AND its profit share and pays the costs and the tax. In every year the contractor net cash
-        flow plus the government take equals gross revenue less opex less capex: the regime decides who gets what
+        flow plus the government cash flow equals gross revenue less opex less capex: the regime decides who gets what
         and when, and does not change what there is to get.
       </Note>
     </>
@@ -247,7 +247,7 @@ const Totals = () => {
         <SelectField label="Project" value={projectKey} onChange={setProjectKey} options={PROJECT_OPTIONS} />
       </FieldGrid>
       <Tbl
-        head={['regime', 'total revenue', 'total contractor NCF', 'total government take', 'total tax', 'total cost recovered', 'closing pool', 'payback', 'payout', 'NPV at the project rate', 'IRR, percent']}
+        head={['regime', 'total revenue', 'total contractor NCF', 'total government cash flow', 'total tax', 'total cost recovered', 'closing pool', 'payback', 'payout', 'NPV at the project rate', 'IRR, percent']}
         rows={rows.map((t) => [
           t.name, mm(t.totalRevenue), mm(t.totalContractorNCF), mm(t.totalGovernmentTake), mm(t.totalTax),
           mm(t.totalCostRecovered), mm(t.closingUnrecoveredPool), yr(t.paybackYear), yr(t.payoutYear), mm(t.npv), Number(t.irrPct).toFixed(4),
@@ -263,7 +263,7 @@ const Totals = () => {
             <Legend wrapperStyle={{ fontSize: 11 }} />
             <ReferenceLine y={0} stroke="#64748b" />
             <Bar dataKey="contractor" name="total contractor net cash flow" fill="#BFFF00" isAnimationActive={false} />
-            <Bar dataKey="government" name="total government take" fill="#f472b6" isAnimationActive={false} />
+            <Bar dataKey="government" name="total government cash flow" fill="#f472b6" isAnimationActive={false} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -271,7 +271,7 @@ const Totals = () => {
         Total revenue is identical down the column, because the regime never touches production or price. Everything
         else moves. Payback is the first year cumulative contractor net cash flow is above zero and payout is the
         first year the R factor passes 1.0; they answer different questions and they often differ, because the R
-        factor is gross revenue over cost while payback is cash after tax and after the government share. Both read
+        factor is gross revenue over cost while payback is cash after tax and after government cash flow. Both read
         "never" when they do not happen inside the 25 years.
       </Note>
     </>

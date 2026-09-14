@@ -48,7 +48,7 @@ Every net present value is negative because every rate of return is below 12. Sa
 
 ## Step seven: rank, and say what the ranking is of
 
-The summary sorts by contractor net present value descending, so Brazil is first and Angola last. Government take runs the other way, 316.7898 million USD for Angola against 232.9950 for Brazil. Both orders are correct, and they are orders of different things.
+The summary sorts by contractor net present value descending, so Brazil is first and Angola last. Government cash flow runs the other way, 316.7898 million USD for Angola against 232.9950 for Brazil. Both orders are correct, and they are orders of different things.
 
 ## The mistake
 
@@ -60,4 +60,4 @@ The method produces labelled readings, never a recommendation. It cannot say whi
 
 ## Exercise
 
-Work the seven steps under Ghana Deepwater: 117.1399 contractor net cash flow, 308.8447 government take, 74.7196 tax, 788.5887 recovered, 21.6250 left in the pool, payback year 6, -27.4074 at 12 percent and 8.7906 percent. Write each with the label that makes it an answer.
+Work the seven steps under Ghana Deepwater: 117.1399 contractor net cash flow, 308.8447 government cash flow, 74.7196 tax, 788.5887 recovered, 21.6250 left in the pool, payback year 6, -27.4074 at 12 percent and 8.7906 percent. Write each with the label that makes it an answer.

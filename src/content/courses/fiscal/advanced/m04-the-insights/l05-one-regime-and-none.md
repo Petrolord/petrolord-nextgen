@@ -12,7 +12,7 @@ A sentence template that always prints will print, and a reader would have been 
 
 ## The sentences drop their comparison clause
 
-With several regimes the payback verdict reads that "Beta" pays back in year 4, against year 6 for "Alpha", and the government verdict that "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha". With one regime the same two verdicts read differently: "Alpha" pays back in year 6, and no other regime pays back within the project life; and "Alpha" collects 400.0 million USD in total government take.
+With several regimes the payback verdict reads that "Beta" pays back in year 4, against year 6 for "Alpha", and the government verdict that "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha". With one regime the same two verdicts read differently: "Alpha" pays back in year 6, and no other regime pays back within the project life; and "Alpha" collects 400.0 million USD in total government cash flow.
 
 The government sentence loses the words the most, because there is nothing to be most of, and reports a total instead of a ranking.
 

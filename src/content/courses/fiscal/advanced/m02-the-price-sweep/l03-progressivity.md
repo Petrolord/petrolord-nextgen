@@ -1,12 +1,12 @@
 # Progressivity
 
-A regime is called progressive when the government's share rises with price, and the sweep measures that with two points out of nine.
+A regime is called progressive when its government take rises with price, and the sweep measures that with two points out of nine.
 
 {{panel:ec-comparison-explorer}}
 
 ## The definition and the climb
 
-A regime whose share rises with price captures the upside and is progressive. A regime whose share falls with price is regressive, and the flat-royalty concessions in this template set are exactly that: a fixed royalty rate and a fixed tax rate on a growing profit hand the government a shrinking fraction once cost recovery has been paid off. The quantity the sweep reports is a climb, the last swept share minus the first, at full precision. All six templates on the default project:
+A regime whose government take rises with price captures the upside and is progressive. A regime whose government take falls with price is regressive, and the flat-royalty concessions in this template set are exactly that: a fixed royalty rate and a fixed tax rate on a growing profit hand the government a shrinking fraction once cost recovery has been paid off. The quantity the sweep reports is a climb, the last swept government take minus the first, at full precision. All six templates on the default project:
 
 | regime | 40 | 50 | 60 | 70 | 80 | 90 | 100 | 110 | 120 | climb |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

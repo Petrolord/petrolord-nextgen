@@ -9,11 +9,17 @@ import {
   insights, goldenInsightsIds, tieEvidence, shareCurveRegimes, paybackTieEvidence,
   publishedPriceSweep, publishedCapexSweep, sweepCaseRegime,
 } from './fiscalLab';
+// The metric names and definitions come from the conventions module the Suite's
+// Fiscal Regime Designer also imports (naming wave, 2026-09-14), so the course
+// and the app cannot word them differently.
+import {
+  GOVERNMENT_CASH_FLOW, metricLabel, metricDefinition,
+} from '@petrolord/engines/engines/economics/fiscalConventions.js';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Comparison explorer, the Expert tier. WHAT runFiscalComparison RETURNS AND
-// WHAT IT DOES NOT SAY: the summary sorted by contractor NPV with both
-// effective tax rates side by side, the price sweep with a warning under every
+// WHAT IT DOES NOT SAY: the summary sorted by contractor NPV with government
+// take and government share of net revenue side by side, the price sweep with a warning under every
 // point whose lifetime contractor net cash flow is not positive, the capex
 // sweep and the eighth point the loop never reaches, and the derived verdicts
 // beside the quantities they claim to rank.
@@ -33,9 +39,16 @@ const mm = (v) => (Number.isFinite(v)
 const ratio = (v) => (Number.isFinite(v) ? Number(v).toFixed(6) : 'null');
 const pc = (v) => (Number.isFinite(v) ? Number(v).toFixed(4) : 'null');
 const yr = (v) => (v === null || v === undefined ? 'never' : String(v));
+const withState = (v, state) => (state === 'share' ? pc(v) : `${pc(v)} (${state})`);
+
+// A column heading that carries its definition on hover, from the shared
+// conventions module. The headline metric is set larger.
+const Defined = ({ label, definition, headline = false }) => (
+  <span title={definition} className={`cursor-help underline decoration-dotted ${headline ? 'text-sm font-semibold text-slate-200' : ''}`}>{label}</span>
+);
 
 const MODES = [
-  ['summary', 'Summary: the ranking, and one rate with two values'],
+  ['summary', 'Summary: the ranking, government take and government share of net revenue'],
   ['price', 'Price: the sweep, and the state each point carries'],
   ['capex', 'Capex: seven swept points, an eighth called directly, two losses'],
   ['insights', 'Insights: the verdicts beside the quantities they rank'],
@@ -124,15 +137,15 @@ const Summary = () => {
   if (c.status !== 'done' || e.status !== 'done') {
     return <>{picker}{(c.status === 'failed' || e.status === 'failed') ? <Failed what="this comparison" /> : <Waiting what="the comparison" />}</>;
   }
-  const bars = c.value.summary.map((s) => ({ name: s.name, summary: s.effectiveTaxRateSummary, sweep: s.effectiveTaxRateSweepAtBase }));
+  const bars = c.value.summary.map((s) => ({ name: s.name, take: s.governmentTakePct, share: s.governmentShareOfNetRevenuePct }));
   return (
     <>
       {picker}
       <p className="text-xs text-slate-400 mt-2 mb-0">{c.value.note}</p>
       <p className="text-xs text-slate-500 mt-1 mb-0">
         Discount rate {c.value.discountRatePct} percent. The deck own first-year oil price is {c.value.basePrice} USD per
-        bbl, which is the price sweep label at index {c.value.basePriceLabelIndex} and the one price at which both
-        definitions of the rate describe the same run.
+        bbl, which is the price sweep label at index {c.value.basePriceLabelIndex} and the one price at which the sweep's
+        government take and the summary's describe the same run.
       </p>
       <div className="mt-3">
         <TileGrid>
@@ -143,12 +156,18 @@ const Summary = () => {
         </TileGrid>
       </div>
       <Tbl
-        head={['rank', 'regime', 'npv', 'irr, percent', 'paybackPeriod', 'rFactorPayoutYear', 'govTake', 'effective tax rate, summary', 'effective tax rate, sweep at the deck price', 'difference, percentage points']}
+        head={['rank', 'regime', 'npv', 'irr, percent', 'paybackPeriod', 'rFactorPayoutYear',
+          <Defined key="gcf" label="government cash flow, million USD" definition={`${GOVERNMENT_CASH_FLOW.title}: ${GOVERNMENT_CASH_FLOW.definition}`} />,
+          <Defined key="take" label={`${metricLabel('governmentTake')}, percent`} definition={metricDefinition('governmentTake')} headline />,
+          <Defined key="takeDisc" label={`${metricLabel('governmentTake', c.value.discountRatePct)}, percent`} definition={metricDefinition('governmentTake', c.value.discountRatePct)} />,
+          <Defined key="share" label={`${metricLabel('governmentShareOfNetRevenue')}, percent`} definition={metricDefinition('governmentShareOfNetRevenue')} />,
+          'take minus share, percentage points (derived)']}
         rows={c.value.summary.map((s) => [
           s.rank, s.name, mm(s.npv), pc(s.irrPct), yr(s.paybackPeriod), yr(s.rFactorPayoutYear), mm(s.govTake),
-          pc(s.effectiveTaxRateSummary),
-          s.effectiveTaxRateSweepAtBase === null ? 'null' : pc(s.effectiveTaxRateSweepAtBase),
-          s.effectiveTaxRateDifferenceDerived === null ? 'null' : pc(s.effectiveTaxRateDifferenceDerived),
+          <span key="take" className="text-sm font-semibold text-white">{withState(s.governmentTakePct, s.governmentTakeState)}</span>,
+          withState(s.governmentTakeDiscountedPct, s.governmentTakeDiscountedState),
+          pc(s.governmentShareOfNetRevenuePct),
+          s.takeMinusShareDerived === null ? 'null' : pc(s.takeMinusShareDerived),
         ])}
       />
       <div className="h-64 mt-3">
@@ -159,8 +178,8 @@ const Summary = () => {
             <YAxis tick={AXIS} label={{ value: 'percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP} formatter={(v) => pc(v)} />
             <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="summary" name="summary table, capex added back" fill="#BFFF00" isAnimationActive={false} />
-            <Bar dataKey="sweep" name="price sweep at the same price, no add-back" fill="#f472b6" isAnimationActive={false} />
+            <Bar dataKey="take" name={metricLabel('governmentTake')} fill="#BFFF00" barSize={22} isAnimationActive={false} />
+            <Bar dataKey="share" name={metricLabel('governmentShareOfNetRevenue')} fill="#64748b" barSize={12} isAnimationActive={false} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -168,16 +187,15 @@ const Summary = () => {
         The summary is sorted by contractor NPV descending, so the first row is the best regime FOR THE CONTRACTOR and
         nothing else can be read off the position. Payback is the first year cumulative contractor net cash flow is
         above zero; payout is the first year the R factor passes 1.0. They answer different questions and they often
-        differ here, because the R factor is gross revenue over cost while payback is cash after tax and after the
-        government share.
+        differ here, because the R factor is gross revenue over cost while payback is cash after tax and after
+        government cash flow.
       </div>
       <Note>
-        ONE RATE, TWO VALUES, ONE RESULT OBJECT. The summary computes government take over government take plus
-        contractor take WITH total capex added back, which makes it a rate on profit. The price sensitivity computes
-        the same ratio on the same cash flows WITHOUT the add-back, which makes it a rate on cash. Both are returned
-        by one call and one screen labels both of them "effective tax rate". Neither is wrong on its own terms; what
-        is wrong is showing them within a centimetre of each other under one name. The difference column above is the
-        two subtracted, and on this comparison it never falls below half a percentage point.
+        TWO RATIOS, TWO NAMES, ONE RESULT OBJECT. Government take, the headline, divides government cash flow by revenue
+        less opex less capex, and the price sweep plots it. Government share of net revenue divides the same cash flow
+        by revenue less opex, with capex added back, and comes second. On one project the two stand in the same ratio
+        for every regime, so the difference column grows with the share. Hover a heading for its definition; every
+        value here is undiscounted unless its heading names a rate.
       </Note>
     </>
   );
@@ -232,7 +250,7 @@ const Price = () => {
               domain={[sw.value.labels[0] - step / 2, sw.value.labels[sw.value.labels.length - 1] + step / 2]}
               label={{ value: 'oil price, USD per bbl', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }}
             />
-            <YAxis tick={AXIS} domain={[0, top]} allowDataOverflow tickFormatter={compact} label={{ value: 'government share, percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
+            <YAxis tick={AXIS} domain={[0, top]} allowDataOverflow tickFormatter={compact} label={{ value: `${metricLabel('governmentTake')}, percent`, angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP} formatter={tooltipFormatter} />
             <Legend wrapperStyle={{ fontSize: 11 }} />
             {sw.value.undefinedPrices.map((price, k) => (
@@ -267,7 +285,7 @@ const Price = () => {
           <p className="text-xs text-slate-500 mb-1">{d.name}</p>
           <Tbl
             mark={(i) => d.points[i].warn}
-            head={['oil price, USD/bbl', 'value the engine returns, percent', 'state', 'lifetime contractor NCF at that price', 'lifetime government take', 'profit, the two added', 'what this point is']}
+            head={['oil price, USD/bbl', 'value the engine returns, percent', 'state', 'lifetime contractor NCF at that price', 'lifetime government cash flow', 'profit, the two added', 'what this point is']}
             rows={d.points.map((q) => [
               q.price, pc(q.plotted), q.state, mm(q.lifetimeContractorNCF), mm(q.lifetimeGovernmentTake), mm(q.lifetimeDenominatorDerived),
               q.warn ? <span key={q.price} className="whitespace-normal text-amber-300">{q.meaning}</span> : 'a share',
@@ -276,7 +294,7 @@ const Price = () => {
           {d.warnPoints.length > 0 && (
             <p className="text-xs text-amber-300 mt-1 mb-0">
               Warning. At {d.warnPoints.join(', ')} USD per bbl the engine flags this series exceeds or undefined, so the
-              point is not a government share. An exceeds point keeps its true value and a contractor losing money over
+              point is not an ordinary government take. An exceeds point keeps its true value and a contractor losing money over
               the life; an undefined point has no value because lifetime profit is not positive.
             </p>
           )}
@@ -444,7 +462,7 @@ const Insights = () => {
           <p className="text-xs text-slate-300 mt-2 mb-0">
             READ THE PROFIT OIL COLUMN BEFORE BELIEVING ANY STORY ABOUT IT. It is nought for the three templates that
             recover cost at 100 percent and very much not nought for the other three, so a claim that no profit oil
-            and no tax exist anywhere here is refuted by the government take the same comparison reports. What is
+            and no tax exist anywhere here is refuted by the government cash flow the same comparison reports. What is
             true, and is the whole of it, is that none of those columns MOVES across the sweep. The arithmetic closes
             exactly: the capex difference is {mm(tie.value.capexDifference)} million USD, spent in year 1 and
             discounted one year at {tie.value.discountRatePct} percent, which is {ratio(tie.value.lossFromTheCapexLineAlone)},
@@ -493,7 +511,7 @@ const Insights = () => {
       {share.status !== 'done' ? (share.status === 'failed' ? <Failed what="the share curve evidence" /> : <Waiting what="the share curve evidence" />) : (
         <>
           <Tbl
-            head={['regime', 'total government take', 'total contractor NCF', 'the two added', 'value and state at every one of the nine prices']}
+            head={['regime', 'total government cash flow', 'total contractor NCF', 'the two added', 'value and state at every one of the nine prices']}
             rows={share.value.rows.map((x) => [x.name, mm(x.totalGovernmentTake), mm(x.totalContractorNCF), mm(x.denominatorDerived), [...new Set(x.points.map((q) => `${pc(q.plotted)} ${q.state}`))].join(', ')])}
           />
           <p className="text-xs text-slate-500 mt-4 mb-1">
@@ -518,7 +536,7 @@ const Insights = () => {
       <Note>
         The rule a reader needs. Before believing a point on this curve, read its state and the two totals underneath
         it. If lifetime contractor net cash flow is negative, the point is above 100 percent and flagged exceeds. If it
-        is negative enough to outweigh the government take, the point is null and flagged undefined. The price mode
+        is negative enough to outweigh the government cash flow, the point is null and flagged undefined. The price mode
         carries {Object.values(PRICE_POINT_MEANINGS).length} distinct sentences, one per state, and writes the right one
         under every point, so a reader is never left to guess which of the three a number is. Every verdict above is
         the engine own string printed verbatim, its own money formatting included, because paraphrasing what a
@@ -533,7 +551,7 @@ const ComparisonExplorer = () => {
   return (
     <PanelShell
       title="Comparison explorer"
-      subtitle="What runFiscalComparison returns and what it does not say: the ranking with one rate carrying two values, the price sweep with the state of every point named, the capex sweep and the eighth point the loop never reaches, and the derived verdicts beside the quantities they claim to rank"
+      subtitle="What runFiscalComparison returns and what it does not say: the ranking with government take and government share of net revenue named apart, the price sweep with the state of every point named, the capex sweep and the eighth point the loop never reaches, and the derived verdicts beside the quantities they claim to rank"
     >
       <FieldGrid>
         <SelectField label="View" value={mode} onChange={setMode} options={MODES} />

@@ -6,13 +6,13 @@ The bottom row of the ledger is nine numbers, and the only one a regime cannot t
 
 ## The nine totals
 
-"USA - Gulf of Mexico" on the Designer's default project closes its 25 rows at gross revenue 2686.9277, royalty 503.7989, cost recovered 941.4436, profit oil 1241.6852, tax 260.7539, opex 441.4436, capex 500.0000, contractor net cash flow 980.9313 and government take 764.5528, all in millions of USD.
+"USA - Gulf of Mexico" on the Designer's default project closes its 25 rows at gross revenue 2686.9277, royalty 503.7989, cost recovered 941.4436, profit oil 1241.6852, tax 260.7539, opex 441.4436, capex 500.0000, contractor net cash flow 980.9313 and government cash flow 764.5528, all in millions of USD.
 
 ## What the regime cannot move
 
 Run all six templates on the same project and the revenue column does not move at all.
 
-| regime | total contractor NCF | total government take | total revenue | total tax |
+| regime | total contractor NCF | total government cash flow | total revenue | total tax |
 | --- | --- | --- | --- | --- |
 | Nigeria - PIA (2021) | 406.2057 | 1339.2784 | 2686.9277 | 174.0882 |
 | Ghana - Deepwater | 428.8774 | 1316.6067 | 2686.9277 | 230.9340 |

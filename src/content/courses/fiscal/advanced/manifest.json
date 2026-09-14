@@ -30,7 +30,7 @@
         },
         {
           "key": "l03-the-effective-tax-rate-in-the-table",
-          "title": "The effective tax rate in the table",
+          "title": "Government share of net revenue in the table",
           "order": 3,
           "est_minutes": 14,
           "panels": [
@@ -67,7 +67,7 @@
         },
         {
           "key": "l02-the-government-share-curve",
-          "title": "The government share curve",
+          "title": "The government take curve",
           "order": 2,
           "est_minutes": 13,
           "panels": [
@@ -97,7 +97,7 @@
         },
         {
           "key": "l05-the-second-effective-tax-rate",
-          "title": "The second effective tax rate",
+          "title": "Government take beside government share of net revenue",
           "order": 5,
           "est_minutes": 12,
           "panels": [
@@ -228,7 +228,7 @@
       "lessons": [
         {
           "key": "l01-the-rate-with-two-values",
-          "title": "The rate with two values",
+          "title": "Two names for two ratios",
           "order": 1,
           "est_minutes": 13,
           "panels": [

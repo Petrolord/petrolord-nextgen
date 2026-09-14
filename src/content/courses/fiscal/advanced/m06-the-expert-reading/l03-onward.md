@@ -4,9 +4,9 @@ A fiscal comparison is a model of the shape of four instruments, not a model of 
 
 ## What it earns
 
-It isolates the regime. On the default project all six templates return a total revenue of 2686.9277 million USD, because a regime never touches production or price, and contractor NPV across them runs from 154.8286 for Nigeria - PIA (2021) to 397.0445 for Generic Royalty/Tax, with government take running the other way, 1339.2784 down to 758.7514. On the test project the same six share a revenue of 7001.1938 and split contractor NPV from 478.1985 to 1262.3470.
+It isolates the regime. On the default project all six templates return a total revenue of 2686.9277 million USD, because a regime never touches production or price, and contractor NPV across them runs from 154.8286 for Nigeria - PIA (2021) to 397.0445 for Generic Royalty/Tax, with government cash flow running the other way, 1339.2784 down to 758.7514. On the test project the same six share a revenue of 7001.1938 and split contractor NPV from 478.1985 to 1262.3470.
 
-It also prices the shape. Angola - Deepwater PSC gains 12.1305 percentage points of government share from 40 to 120 USD per bbl while the climb for USA - Gulf of Mexico is -17.2498, and that difference is what progressive and regressive mean here.
+It also prices the shape. Angola - Deepwater PSC gains 12.1305 percentage points of government take from 40 to 120 USD per bbl while the climb for USA - Gulf of Mexico is -17.2498, and that difference is what progressive and regressive mean here.
 
 ## Where it hands over
 
@@ -18,11 +18,11 @@ A regime whose real burden lives in an instrument the four fields cannot express
 
 ## The limit worth remembering
 
-A number without its definition is not a number. Nigeria - PIA (2021) on the default project reports an effective tax rate of 59.6432 and 76.7282 on the same 25 years of the same ledger, and a capex resilience of 97.7613 or 118.3685 depending on whether the sweep reached the multiplier its axis promised. Each is right for its question, and none of them is right without the question.
+A number without its definition is not a number. Nigeria - PIA (2021) on the default project reports a government share of net revenue of 59.6432 and a government take of 76.7282 on the same 25 years of the same ledger, and a capex resilience of 97.7613 or 118.3685 depending on whether the sweep reached the multiplier its axis promised. Each is right for its question, and none of them is right without the question.
 
 ## What you have finished
 
-What a comparison returns and which part is sorted; both effective tax rates and which adds capex back; what each sweep really covers; how the five verdicts are derived and when they rank nothing; and which reported numbers to read with their method.
+What a comparison returns and which part is sorted; government take and government share of net revenue, and which adds capex back; what each sweep really covers; how the five verdicts are derived and when they rank nothing; and which reported numbers to read with their method.
 
 ## Exercise
 

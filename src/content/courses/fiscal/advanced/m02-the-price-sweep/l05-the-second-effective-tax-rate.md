@@ -1,41 +1,34 @@
-# The second effective tax rate
+# Government take beside government share of net revenue
 
-One result object holds two different effective tax rates for the same regime, and a single screen shows both of them without saying they are different.
+One result object carries two ratios of the same government cash flow, and they have two names: government take, the headline, and government share of net revenue, the second number.
 
 {{panel:ec-comparison-explorer}}
 
-## Two definitions, one label
+## Two definitions
 
-The summary table divides government take by government take plus contractor take, with total capex added back into the contractor's side. The price sensitivity divides the same two quantities, on the same cash flows, without the add-back. Both come out of one call, both are called an effective tax rate, and they never agree. At the deck's own first-year price of 70 USD per bbl, on the Designer's two default regimes:
+Government take is government cash flow divided by the project's pre-take net cash flow, which is revenue less opex less capex, over the project life. It is the figure fiscal comparisons in the literature and in bid rounds quote, and it is what the price sweep plots. Government share of net revenue is government cash flow divided by revenue less opex, so capex is added back to the contractor side, and it is what the summary table's percentage column holds. Both are undiscounted unless a label names a rate; the summary also returns government take discounted at the project rate. At the deck's own first-year price of 70 USD per bbl on the default project:
 
-| regime | summary table, capex added back | price sweep at the same price, no add-back | difference, percentage points |
-| --- | --- | --- | --- |
-| Concessionary (Royalty/Tax) | 46.3452 | 59.6210 | 13.2758 |
-| Nigerian PIA (PSC) | 55.5380 | 71.4471 | 15.9091 |
+| regime | government take, undiscounted | government share of net revenue, undiscounted | take minus share, percentage points (derived) | take over share (derived) |
+| --- | --- | --- | --- | --- |
+| Generic Royalty/Tax | 43.4694 | 33.7901 | 9.6793 | 1.286453 |
+| USA - Gulf of Mexico | 43.8018 | 34.0485 | 9.7533 | 1.286453 |
+| Brazil - Concession | 47.7450 | 37.1137 | 10.6313 | 1.286453 |
+| Angola - Deepwater PSC | 68.7654 | 53.4534 | 15.3119 | 1.286453 |
+| Ghana - Deepwater | 75.4293 | 58.6335 | 16.7958 | 1.286453 |
+| Nigeria - PIA (2021) | 76.7282 | 59.6432 | 17.0850 | 1.286453 |
 
-And on all six templates, same project, same price:
+## Why they differ, exactly
 
-| regime | summary table, capex added back | price sweep at the same price, no add-back | difference, percentage points |
-| --- | --- | --- | --- |
-| Generic Royalty/Tax | 33.7901 | 43.4694 | 9.6793 |
-| USA - Gulf of Mexico | 34.0485 | 43.8018 | 9.7533 |
-| Brazil - Concession | 37.1137 | 47.7450 | 10.6313 |
-| Angola - Deepwater PSC | 53.4534 | 68.7654 | 15.3119 |
-| Ghana - Deepwater | 58.6335 | 75.4293 | 16.7958 |
-| Nigeria - PIA (2021) | 59.6432 | 76.7282 | 17.0850 |
+The last column is the whole story. Revenue less opex is 2245.4841 million USD under every regime and capex is 500.0000, so government take is always government share of net revenue times 2245.4841 over 1745.4841, which is 1.286453, whatever the terms. The gap in points is the share times capex over the pre-take net cash flow, so it grows with the share: 9.6793 for Generic Royalty/Tax, 17.0850 for Nigeria - PIA (2021). No fixed offset between the two columns exists. A fixed ratio does, and only on one project: on the test project, with capex of 1000.0000, it is 1.240898.
 
-## Neither one is wrong
+## Where a royalty makes the second number matter
 
-Take over profit and take over cash are both quantities a fiscal analyst uses, and they answer different questions. Adding capex back asks what share of the profit the state took. Leaving it out asks what share of the cash that came out of the project went to the state. What is wrong is that one screen labels both of them effective tax rate and puts them a finger's width apart.
+A royalty is charged on gross revenue from year 1, so a royalty-heavy regime collects whether or not the project makes a profit. On the published comparison with capex of 20000 the pre-take net cash flow is negative, and government take has no value for any regime, undiscounted or discounted. Government share of net revenue still reads: 13.5916 for Brazil - Concession, 16.9894 for Generic Royalty/Tax and 25.4842 for USA - Gulf of Mexico, three regimes whose government cash flow is 100.0000 percent royalty. Where profit is thin rather than gone, government take runs past 100 percent instead. On ODIDI, discounted at 12 percent, it reads 106.4788 for Brazil - Concession and 164.2571 for Angola - Deepwater PSC, both flagged exceeds, while the undiscounted government share of net revenue reads 27.5413 and 37.4463.
 
 ## The mistake
 
-The tempting repair is a mental correction: learn that the chart runs about ten points higher than the summary table and translate between the two. The difference column refuses that. On one comparison, on one project, at one price, it runs from 9.6793 percentage points to 17.0850. A reader who carries a ten point offset across to the Nigeria - PIA (2021) row, where the gap is 17.0850, understates the chart badly, and a reader who carries Ghana - Deepwater's gap of 16.7958 back to Generic Royalty/Tax, where it is 9.6793, overstates it just as badly in the other direction. The gap grows with the government's share, because a fixed add-back of capex weighs more heavily on a denominator the state has already thinned.
-
-## What each refuses
-
-The summary's version refuses to be a cash measure, and its capex add-back is undiscounted and undated. The sweep's version refuses nothing at all, which is the more dangerous property: its denominator is take plus contractor net cash flow with no add-back to hold it up, so on a project that loses money the denominator can shrink toward nothing, and past zero there is no ratio at all: the engine then flags the point undefined and returns null. That is why the two rates diverge most exactly where a project is worst, and why a number quoted off the chart needs the two totals underneath it before it means anything.
+Treating the two numbers as one rate measured twice, or translating between them with a remembered offset. The gap is 9.6793 points for Generic Royalty/Tax and 17.0850 for Nigeria - PIA (2021) on the same project at the same price. Quote each with its name and its basis, and read government take's state before quoting it at all.
 
 ## Exercise
 
-Write the two definitions side by side and say which of them the summary table shows. Then give both values for Nigeria - PIA (2021) at 70 USD per bbl and say why a fixed offset between the two columns does not exist.
+Write both definitions. Give both values for Nigeria - PIA (2021) at 70 USD per bbl, the gap and the ratio, and say why Generic Royalty/Tax has the same ratio. Then say which metric still has a value on the comparison with capex of 20000, and why a royalty-heavy regime makes that the useful one.

@@ -21,14 +21,14 @@ Read the IRR column down the ranks and it is already out of order: rank 2 return
 
 ## Where the mirror breaks
 
-On this project the government take column happens to run the other way in step, from 758.7514 million USD at rank 1 to 1339.2784 at rank 6, which invites the conclusion that the sort ranks both sides at once. It does not. On the teaching field ODIDI the same six templates return two adjacent ranks that break it:
+On this project the government cash flow column happens to run the other way in step, from 758.7514 million USD at rank 1 to 1339.2784 at rank 6, which invites the conclusion that the sort ranks both sides at once. It does not. On the teaching field ODIDI the same six templates return two adjacent ranks that break it:
 
 | rank | regime | npv | govTake | effectiveTaxRate | paybackPeriod |
 | --- | --- | --- | --- | --- | --- |
 | 3 | Ghana - Deepwater | -27.4074 | 308.8447 | 36.5071 | 6 |
 | 4 | USA - Gulf of Mexico | -37.3123 | 277.6679 | 32.8219 | 7 |
 
-The regime ranked lower for the contractor collects less for the government, 277.6679 million USD against 308.8447, and carries the lower effective tax rate too, 32.8219 against 36.5071. It also keeps more money: lifetime contractor net cash flow on ODIDI is 148.3166 million USD for USA - Gulf of Mexico against 117.1399 for Ghana - Deepwater. It ranks lower anyway, because the sort key is discounted at 12 percent and the take column is an undiscounted lifetime total, and the larger sum arrives later, in a regime that pays back in year 7 rather than year 6. Payback breaks the mirror in the same way: rank 1 pays back in year 6, rank 2 in year 7 and rank 3 in year 6 again.
+The regime ranked lower for the contractor collects less for the government, 277.6679 million USD against 308.8447, and carries the lower government share of net revenue too, 32.8219 against 36.5071. It also keeps more money: lifetime contractor net cash flow on ODIDI is 148.3166 million USD for USA - Gulf of Mexico against 117.1399 for Ghana - Deepwater. It ranks lower anyway, because the sort key is discounted at 12 percent and the take column is an undiscounted lifetime total, and the larger sum arrives later, in a regime that pays back in year 7 rather than year 6. Payback breaks the mirror in the same way: rank 1 pays back in year 6, rank 2 in year 7 and rank 3 in year 6 again.
 
 ## The mistake
 
@@ -40,4 +40,4 @@ The sort has no secondary key, so regimes with equal NPV keep the order they wer
 
 ## Exercise
 
-Give the rank order of the six templates on the default project, then give the order the government take column would produce on ODIDI and name the regime that changes position. Say in one sentence what `summary[0]` guarantees.
+Give the rank order of the six templates on the default project, then give the order the government cash flow column would produce on ODIDI and name the regime that changes position. Say in one sentence what `summary[0]` guarantees.

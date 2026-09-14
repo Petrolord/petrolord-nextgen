@@ -32,7 +32,7 @@ The same tier list on the crossing case never falls back. There the ratio peaks 
 
 Real R factor contracts usually ratchet: a split once given up is never returned. This engine does not ratchet, and nothing in it says so. Two errors follow. The first is checking the split at first oil and at the peak and assuming everything between and after is monotone. On this case that check reads 0.600000 and 0.300000 and misses years 23 to 25 entirely. The second is seeing the split rise and concluding the model has a bug. It has not. The formula is faithfully implemented and the contract shape it produces is simply not the usual one.
 
-Lifetime totals for the case are contractor net cash flow 225.7346, government take 1133.8250, total revenue 2333.7313, total tax 128.6822, NPV 159.5115 at 10 percent and closing unrecovered pool 74.5238.
+Lifetime totals for the case are contractor net cash flow 225.7346, government cash flow 1133.8250, total revenue 2333.7313, total tax 128.6822, NPV 159.5115 at 10 percent and closing unrecovered pool 74.5238.
 
 ## What it refuses
 

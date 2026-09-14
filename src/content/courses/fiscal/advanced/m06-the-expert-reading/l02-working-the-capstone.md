@@ -25,7 +25,7 @@ The summary is sorted by contractor NPV descending and by nothing else. On ODIDI
 | 5 | Nigeria - PIA (2021) | -43.7842 | 7 | 312.9610 | 36.9937 |
 | 6 | Angola - Deepwater PSC | -58.1813 | 8 | 316.7898 | 37.4463 |
 
-Government take does not follow that order: Angola - Deepwater PSC collects the most while sitting last, and the effective tax rate does not either, since Ghana - Deepwater reads 36.5071 in third place against 32.8219 for USA - Gulf of Mexico in fourth.
+Government cash flow does not follow that order: Angola - Deepwater PSC collects the most while sitting last, and government share of net revenue does not either, since Ghana - Deepwater reads 36.5071 in third place against 32.8219 for USA - Gulf of Mexico in fourth.
 
 ## Take each sweep at its real range
 
@@ -33,7 +33,7 @@ The price sweep is nine oil prices from 40 to 120 USD per bbl and it scales oil 
 
 ## Check every denominator
 
-Before quoting any government share, read its state and the regime's total government take and total contractor net cash flow. A negative contractor total means exceeds, and a sum that is not positive means null and undefined.
+Before quoting any government take, read its state and the regime's total government cash flow and total contractor net cash flow. A negative contractor total means exceeds, and a sum that is not positive means null and undefined.
 
 ## Before you submit
 
@@ -41,7 +41,7 @@ Before quoting any government share, read its state and the regime's total gover
 | --- | --- |
 | Project | Streams, declines, capex, both opex halves, rate, full deck |
 | Instruments | Four fields per regime, uplift stated even when absent |
-| Sort | Contractor NPV only; take and rate read from their columns |
+| Sort | Contractor NPV only; cash flow and both ratios read from their columns |
 | Sweeps | Nine prices, oil only; seven capex points ending at 1.4 |
 | Shares | State and two totals read under every plotted point |
 | Verdicts | Ranked quantity quoted beside the rounded sentence |
@@ -54,4 +54,4 @@ The careful mistake is checking the instruments and skipping the ranges. Every r
 
 ## Exercise
 
-Work ODIDI in the order given: project, instruments, summary sort, both sweeps, then the verdicts. Name the regime with the highest contractor NPV and the one with the largest government take, and say why they are not the same row.
+Work ODIDI in the order given: project, instruments, summary sort, both sweeps, then the verdicts. Name the regime with the highest contractor NPV and the one with the largest government cash flow, and say why they are not the same row.

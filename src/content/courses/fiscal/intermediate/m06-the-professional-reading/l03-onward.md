@@ -4,11 +4,11 @@ The Professional tier read one regime's instruments carefully. The Expert tier p
 
 ## Six at once, and a sort
 
-Running the six templates over the teaching field returns a summary sorted by contractor net present value descending, and a column the single-regime ledger never showed: an effective tax rate. Brazil reads 27.5413 percent, Generic Royalty/Tax 28.6198, USA Gulf of Mexico 32.8219, Ghana 36.5071, Nigeria PIA 36.9937 and Angola 37.4463. That column has a second value in the same result object, computed on the same cash flows a different way, and both appear on the screen. Working out which is which is where the Expert tier starts.
+Running the six templates over the teaching field returns a summary sorted by contractor net present value descending, and a column the single-regime ledger never showed: government share of net revenue. Brazil reads 27.5413 percent, Generic Royalty/Tax 28.6198, USA Gulf of Mexico 32.8219, Ghana 36.5071, Nigeria PIA 36.9937 and Angola 37.4463. Beside it sits government take, the same government cash flow divided without the capex added back, and both appear on the screen. Working out which is which is where the Expert tier starts.
 
 ## Two sweeps and what they promise
 
-The price sweep runs nine oil prices and plots a government share for each. On the teaching field that share climbs 1.9971 points for Ghana and falls 37.6994 for USA Gulf of Mexico, so one regime captures upside and another gives it away. The capex sweep runs multipliers from 0.8 and stops at 1.4, seven points in all. Over that range Ghana gives up 150.9021 million USD of contractor net present value and Angola 215.1075. Read the axis before the verdict: what the loop reaches and what the label promises are not always the same thing.
+The price sweep runs nine oil prices and plots government take for each. On the teaching field it climbs 1.9971 points for Ghana and falls 37.6994 for USA Gulf of Mexico, so one regime captures upside and another gives it away. The capex sweep runs multipliers from 0.8 and stops at 1.4, seven points in all. Over that range Ghana gives up 150.9021 million USD of contractor net present value and Angola 215.1075. Read the axis before the verdict: what the loop reaches and what the label promises are not always the same thing.
 
 ## Verdicts that name a winner
 
@@ -20,4 +20,4 @@ Three habits survive the move. Name the base before the rate, because 21 percent
 
 ## Exercise
 
-Write the six effective tax rates from the teaching field summary and the six price sweep climbs beside them. Say whether the two orders agree, then name one reason a government share that falls as price rises might not mean what it appears to.
+Write the six values of government share of net revenue from the teaching field summary and the six price sweep climbs beside them. Say whether the two orders agree, then name one reason a government take that falls as price rises might not mean what it appears to.

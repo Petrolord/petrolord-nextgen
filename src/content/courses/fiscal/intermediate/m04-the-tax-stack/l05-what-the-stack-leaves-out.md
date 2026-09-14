@@ -18,7 +18,7 @@ There is no education tax, no levy on gross production, no bonus, no rental and 
 
 ## The mistake
 
-The tempting repair is to bend a rate until the total looks right. If a real regime carries a production levy the four fields cannot express, raising the corporate income tax rate until total tax matches produces the right total and the wrong shape, because the two have different bases and move differently with price and cost. The evidence is in the templates themselves: on the default project "Nigeria - PIA (2021)" collects 174.0882 million USD of tax inside a government take of 1339.2784, while "Generic Royalty/Tax" collects 422.8854 inside a take of 758.7514. A rate tuned to match one of those numbers misses the other completely.
+The tempting repair is to bend a rate until the total looks right. If a real regime carries a production levy the four fields cannot express, raising the corporate income tax rate until total tax matches produces the right total and the wrong shape, because the two have different bases and move differently with price and cost. The evidence is in the templates themselves: on the default project "Nigeria - PIA (2021)" collects 174.0882 million USD of tax inside a government cash flow of 1339.2784, while "Generic Royalty/Tax" collects 422.8854 inside a take of 758.7514. A rate tuned to match one of those numbers misses the other completely.
 
 ## What the sandbox is for
 

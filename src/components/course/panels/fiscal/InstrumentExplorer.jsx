@@ -320,7 +320,7 @@ const Tax = () => {
       />
       <p className="text-xs text-slate-500 mt-4 mb-1">The uplift swept, with CIT set to zero so the RRT is the whole of the tax</p>
       <Tbl
-        head={['rrtUpliftPct', 'total tax', 'total contractor NCF', 'total government take', 'NPV at 10 percent', 'first year with a positive RRT charge']}
+        head={['rrtUpliftPct', 'total tax', 'total contractor NCF', 'total government cash flow', 'NPV at 10 percent', 'first year with a positive RRT charge']}
         rows={uplift.map((x) => [x.rrtUpliftPct, mm(x.totalTax), mm(x.totalContractorNCF), mm(x.totalGovernmentTake), mm(x.npvAt10), yr(x.firstYearWithPositiveRrt)])}
       />
       <FieldGrid>
