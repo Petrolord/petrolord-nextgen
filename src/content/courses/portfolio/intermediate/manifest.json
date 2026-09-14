@@ -1,0 +1,303 @@
+{
+  "app_slug": "portfolio",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-an-afe-is-a-promise",
+      "title": "An AFE Is a Promise",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-authorisation-for-expenditure",
+          "title": "Authorisation for expenditure",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-lines-budgets-and-commitments",
+          "title": "Lines, budgets and commitments",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-actuals-and-invoices",
+          "title": "Actuals and invoices",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-currency-of-the-afe",
+          "title": "The currency of the AFE",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-one-forecast-rule",
+      "title": "One Forecast Rule",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-an-entered-forecast",
+          "title": "An entered forecast",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-budget-or-spend-plus-commitment",
+          "title": "Budget or spend plus commitment",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-forecast-that-is-not-positive",
+          "title": "A forecast that is not positive",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-variance-at-completion",
+          "title": "Variance at completion",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-rule-the-screens-share",
+          "title": "The rule the screens share",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-earned-value",
+      "title": "Earned Value",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-progress-weighted-by-budget",
+          "title": "Progress weighted by budget",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-cost-performance",
+          "title": "Cost performance",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-planned-value-from-the-calendar",
+          "title": "Planned value from the calendar",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-schedule-performance",
+          "title": "Schedule performance",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-percent-spent-and-percent-complete",
+          "title": "Percent spent and percent complete",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-as-of-date",
+      "title": "The As-of Date",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-report-dated-once",
+          "title": "A report dated once",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-before-the-start",
+          "title": "Before the start",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-inside-the-window",
+          "title": "Inside the window",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-after-the-end",
+          "title": "After the end",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-s-curve",
+      "title": "The S-Curve",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-monthly-buckets",
+          "title": "Monthly buckets",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-straight-plan",
+          "title": "A straight plan",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-actuals-from-invoices",
+          "title": "Actuals from invoices",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-forecast-past-the-as-of-date",
+          "title": "A forecast past the as-of date",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-curve-that-stops-at-the-end",
+          "title": "A curve that stops at the end",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-cost-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

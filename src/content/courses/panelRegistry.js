@@ -166,6 +166,10 @@ export const PANELS = {
   'ec-tree-explorer': React.lazy(() => import('@/components/course/panels/decision/TreeExplorer')),
   'ec-information-explorer': React.lazy(() => import('@/components/course/panels/decision/InformationExplorer')),
   'ec-judgement-explorer': React.lazy(() => import('@/components/course/panels/decision/JudgementExplorer')),
+  // EC5 Capital Portfolio & Cost Control
+  'ec-capital-explorer': React.lazy(() => import('@/components/course/panels/portfolio/CapitalExplorer')),
+  'ec-cost-explorer': React.lazy(() => import('@/components/course/panels/portfolio/CostExplorer')),
+  'ec-governance-explorer': React.lazy(() => import('@/components/course/panels/portfolio/GovernanceExplorer')),
 };
 
 export function resolvePanel(id) {
