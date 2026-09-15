@@ -1,6 +1,6 @@
 # An invoice with no date
 
-The S-curve builds its Actual line from invoices, bucket by bucket, by invoice date. An invoice whose date is null is counted from 1970, so it sits in every bucket, and an invoice with no date field at all is never counted.
+The S-curve builds its Actual line from invoices, bucket by bucket, by invoice date. An invoice the engine cannot date reaches no bucket, and the count of undated invoices is reported beside the curve, so money it cannot place is named rather than misdated.
 
 {{panel:ec-governance-explorer}}
 
@@ -10,10 +10,10 @@ The case has 12 monthly points labelled Jan 20 to Dec 20 and two invoices: one o
 
 | point | label | Planned | Actual | Forecast |
 | --- | --- | --- | --- | --- |
-| first | Jan 20 | 0 | 200 | 200 |
-| last | Dec 20 | 1101 | 200 | 200 |
+| first | Jan 20 | 0 | 0 | 0 |
+| last | Dec 20 | 1101 | 0 | 0 |
 
-At the first point, with Planned still at 0, the Actual line already reads 200. That is the null-dated invoice. The engine counts a null date from 1970, which is earlier than every bucket, so the amount appears from the first point to the last. The invoice of 100 has no date to read and never appears. The curve shows 200 of spend throughout, which matches neither what was invoiced nor when.
+The Actual line reads 0 at the first point and at the last, while Planned climbs to 1101. Neither invoice carries a date the engine can read, so neither reaches the curve: the 200 with a null invoice_date and the 100 with no invoice_date field are treated alike. Beside it the engine reports 2 undated invoices. The curve places what it can; the count names what it cannot.
 
 ## How a dated invoice lands
 
@@ -29,20 +29,20 @@ OFON-1's invoices show the rule working: 3100000 dated 2027-02-20, 5200000 dated
 | 5 | Jul 27 | 12700000 |
 | 6 | Aug 27 | 15090000 |
 
-The February invoice first appears at Mar 27 and the April invoice at May 27: each invoice counts from the first point after its date. Point 0 reads 0 because nothing is dated before the window opens. A curve that reads above 0 at its first point has counted something dated before its window, and a null date is the first suspect.
+The February invoice first appears at Mar 27 and the April invoice at May 27: each invoice counts from the first point after its date. Point 0 reads 0 because nothing is dated before the window opens. A curve whose Actual never moves while bills are approved is the shape to check now, and the undated count says how many the engine could not place.
 
 ## Two sources of actuals
 
-The AFE metrics read actuals from the cost lines, and the S-curve reads them from invoices. On OFON-1 both come to 15090000, because the teaching field was built so they agree. Nothing in the engine makes them agree. A null-dated invoice pushes the curve ahead of the lines, an invoice with no date field leaves it behind, and the CPI of 1.009377 is computed from line actuals the curve never uses.
+The AFE metrics read actuals from the cost lines, and the S-curve reads them from invoices. On OFON-1 both come to 15090000, because the teaching field was built that way. Nothing in the engine makes them agree. An invoice the engine cannot date leaves the curve behind the lines, and the CPI of 1.009377 is computed from line actuals the curve never uses.
 
-## Left as published
+## What the repair changed
 
-EC5-0 bounded the S-curve to its window and left the null date as it was. The engine neither refuses nor flags an undated invoice, so the finding is taught as a property of the engine as published.
+EC5-0 bounded the S-curve to its window and left the undated invoice alone; that repair came later. Until it did, a null date was read as a day in 1970, earlier than every bucket, so this case put an Actual of 200 on every point from the first. The figure was plausible, it reconciled with nothing, and no screen said a date was missing. That is why this module exists. The engine still does not refuse an undated invoice: it declines to place it and names the count instead, a smaller number and a better one.
 
 ## The mistake
 
-The mistake is reading an early Actual as early spending. A curve showing 200 of spend at its first point, beside a Planned line at 0, looks like a project well ahead of plan on its costs. The second mistake is trusting the curve's total, which here matches neither invoice list nor cost lines. Before reading any S-curve, check that point 0 reads 0 and that the last Actual equals the actuals on the cost lines.
+The mistake used to be reading an early Actual as early spending; now it is reading a low Actual as low spending. A curve flat at 0 beside a Planned line ending at 1101 looks like a project that never started, when the bills may simply have arrived with no dates. The count beside the curve separates the two, and it is the reading to take first. The second is trusting the curve's total, which here matches neither invoice list nor cost lines.
 
 ## Exercise
 
-For the published undated case, give the first and last Actual, say which invoice produced them and which invoice never counts. Then, from OFON-1, say at which point the invoice dated 2027-04-10 first appears and why point 0 reads 0.
+For the published undated case, give the first and last Actual, say how many invoices the engine reports as undated, and what each contributes to the curve. Then, from OFON-1, say at which point the invoice dated 2027-04-10 first appears and why point 0 reads 0.

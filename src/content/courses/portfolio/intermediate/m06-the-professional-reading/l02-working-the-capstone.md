@@ -6,7 +6,7 @@ A graded AFE reading is worked in the order the engine works: lines, forecast, e
 
 ## The lines and the currency
 
-Open the AFE in the explorer and write its currency and window before touching any metric. OFON-1 is in USD, over 2027-02-01 to 2027-11-30. Then check the totals against the lines: the budgets sum to 27050000, the commitments to 5000000 and the actuals to 15090000. Add the invoices on their own. OFON-1's four total 15090000 as well. If the two actual totals differ on the capstone, say so at the top, because the metrics and the S-curve will then describe different money. Check every invoice has a date; a null date is counted from 1970.
+Open the AFE in the explorer and write its currency and window before touching any metric. OFON-1 is in USD, over 2027-02-01 to 2027-11-30. Then check the totals against the lines: the budgets sum to 27050000, the commitments to 5000000 and the actuals to 15090000. Add the invoices separately: OFON-1's four total 15090000 as well. If the two actual totals differ, say so at the top: the metrics and the S-curve then describe different money. Check every invoice has a date, and read the count of undated invoices beside the curve.
 
 ## The forecast, line by line
 

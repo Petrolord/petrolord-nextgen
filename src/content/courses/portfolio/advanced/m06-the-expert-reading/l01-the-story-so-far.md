@@ -27,10 +27,10 @@ A negative capex throws PortfolioInputError and negative progress throws AfeInpu
 
 ## Numbers to distrust
 
-CPI reads 1.000000 whenever actuals are 0. An invoice with a null date counts from 1970. OFON-1's plan ends at 24452483, 2597517 short of its budget. OKONO's 450.0000 set reads P(loss) 0.123600 at 10000 iterations on the default seed and 0.119100 to 0.128500 across seeds 1 to 3: a seed is reproducibility, iterations are precision, and neither is truth.
+CPI reads 1.000000 whenever actuals are 0. An invoice the engine cannot date is kept off the curve and counted beside it, so the published undated case reads an Actual of 0 with 2 undated invoices named. OFON-1's plan ends at 24452483, 2597517 short of its budget. OKONO's 450.0000 set reads P(loss) 0.123600 at 10000 iterations on the default seed and 0.119100 to 0.128500 across seeds 1 to 3: a seed is reproducibility, iterations are precision, and neither is truth.
 
 Under all of it sit the properties no run changes. Projects are funded whole, capex is never phased, correlation is one number, the success spread is normal, the AFE plan is a straight line, and earned value is only as good as the progress typed in.
 
 ## Exercise
 
-Give the single wildcat's exact, approximated and simulated P(loss), and say what was wrong with the old P90. Then state the stdDev of OKONO's 600.0000 set at rho 0 and at rho 1 with its emv, give OFON-1's operator share, and name one number for each of the five engine findings left unrepaired.
+Give the single wildcat's exact, approximated and simulated P(loss), and say what was wrong with the old P90. Then state the stdDev of OKONO's 600.0000 set at rho 0 and at rho 1 with its emv, give OFON-1's operator share, and name one number for each of the four engine findings left unrepaired.

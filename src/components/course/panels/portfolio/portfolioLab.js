@@ -674,8 +674,8 @@ export const partnerShares = () => {
 // SECTION 14. Refusals and flags.
 // ---------------------------------------------------------------------------
 
-export const REPAIRED = 'Repaired in EC5-0: the risk summary (simulation, seed shown), the overshoot flag, the negative capex refusal, the as-of date, SPI null, the S-curve bounded to its window, one forecast rule, negative progress refused, a negative working interest flagged. The Suite repair removed the invented partners and integrations, added AFE dates, one EAC rule on every screen and the resolution and overshoot on screen.';
-export const NOT_REPAIRED = 'Not repaired (findings, taught as properties): the grid undershoot (D4) and the free project charged a cell (D2); CPI reported as 1 before any money is spent; SPI 1 on a zero-budget AFE; time progress 1 on an AFE with no dates; an entered forecast below the money already spent taken as typed; an invoice with a null date counted from 1970 while an invoice with no date field is silently dropped; progress above 100 percent accepted although the refusal message says progress runs from 0 to 100; a blank pos read as certain failure; a non-numeric capex neither refused nor flagged; S-curve labels and plan shifting with the viewer\'s timezone west of UTC; the S-curve plan stopping short of the budget and its forecast ignoring actuals after the as-of date; the correlation slider stopping at 0.9; the unused risk score.';
+export const REPAIRED = 'Repaired after this course was cut: an invoice the engine cannot date no longer reaches the S-curve at all, and the count of undated invoices is reported beside the curve, so the money is named instead of being counted from 1970 into every bucket. Repaired in EC5-0: the risk summary (simulation, seed shown), the overshoot flag, the negative capex refusal, the as-of date, SPI null, the S-curve bounded to its window, one forecast rule, negative progress refused, a negative working interest flagged. The Suite repair removed the invented partners and integrations, added AFE dates, one EAC rule on every screen and the resolution and overshoot on screen.';
+export const NOT_REPAIRED = 'Not repaired (findings, taught as properties): the grid undershoot (D4) and the free project charged a cell (D2); CPI reported as 1 before any money is spent; SPI 1 on a zero-budget AFE; time progress 1 on an AFE with no dates; an entered forecast below the money already spent taken as typed; progress above 100 percent accepted although the refusal message says progress runs from 0 to 100; a blank pos read as certain failure; a non-numeric capex neither refused nor flagged; S-curve labels and plan shifting with the viewer\'s timezone west of UTC; the S-curve plan stopping short of the budget and its forecast ignoring actuals after the as-of date; the correlation slider stopping at 0.9; the unused risk score.';
 
 export const refusalsAndFlags = () => {
   const { o } = publishedOptimize('gridOvershoot');
@@ -707,7 +707,15 @@ export const distrust = () => {
   const lastPlanned = curve[curve.length - 1].Planned;
   return {
     cpiBeforeSpend: { asOf: OFON_MID_AS_OF, cpi: noSpend.cpi, earnedValue: noSpend.earnedValue, totalActuals: noSpend.totalActuals },
-    nullDated: { name: NULL_DATED_CASE_NAME, asOfUsed, invoices: clone(c.inputs.invoices), firstActual: pts[0].Actual, lastActual: pts[pts.length - 1].Actual },
+    nullDated: {
+      name: NULL_DATED_CASE_NAME, asOfUsed, invoices: clone(c.inputs.invoices),
+      firstActual: pts[0].Actual, lastActual: pts[pts.length - 1].Actual,
+      // EC6-1 took undated invoices off the curve. The count is reported so
+      // the money is named rather than dropped in silence; wasNull is the
+      // amount this case used to show at every point, kept as history.
+      undated: A.countUndatedInvoices(c.inputs.invoices),
+      wasNull: c.inputs.invoices.find((v) => 'invoice_date' in v && v.invoice_date === null)?.amount,
+    },
     shortPlan: { lastPlanned, totalBudget: mt.totalBudget, shortDerived: mt.totalBudget - lastPlanned },
     // An overrun drawn as an underrun: the curve's last Forecast point sits
     // below the budget while the EAC is above it.
