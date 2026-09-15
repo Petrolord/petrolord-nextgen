@@ -20,19 +20,19 @@ A vertical mesh pad at 600.000000 psig falls from 0.350000 to 0.300000, and ever
 
 At 3000.000000 psig the derating gives -0.110000, a negative settling coefficient. The floor holds K at 0.120000 and the engine says why: "The 0.12 floor bound: the published derating gives K = -0.110 at 3000 psig, below the floor where the rule of thumb stops meaning anything. K is held at 0.12, and a vendor K is the only honest input here."
 
-A linear rule extrapolated far enough produces a negative number, which is the clearest possible signal that it is being used outside the range anybody intended for it. The floor is a guard rail rather than a physical limit, and 0.120000 is a number with no derivation behind it in this module.
+A linear rule extrapolated far enough produces a negative number, the clearest possible signal that it is being used outside the range anybody intended. The floor is a guard rail rather than a physical limit, and 0.120000 has no derivation behind it in this module.
+
+Nothing marks the approach to that cliff. The published case verticalNoneAt650psig returns K 0.125000 with `derated` true and `floored` false, which reads like any robust derated value. Against the floor of 0.120000 it sits 0.005000 clear, and at 0.01 per 100 psi that is 50 psi of pressure away from being floored.
 
 ## Why it is held
 
-The derating and the floor are taught as limits and they are never graded. What is unchecked is the published form: whether the slope is 0.01 per 100 psi, whether it starts at 100 psig, and whether any source places a floor at all. Until that is read against the literature, a conclusion built on a derated K carries the uncertainty of the rule rather than the precision of the six decimals it prints in.
+The derating and the floor are taught as limits and never graded. What is unchecked is the published form: whether the slope is 0.01 per 100 psi, whether it starts at 100 psig, and whether any source places a floor at all. Until that is read against the literature, a conclusion built on a derated K carries the uncertainty of the rule rather than the precision of its six decimals.
 
-The practical consequence is stated by the engine itself. Where the derating bites, a vendor K is the only honest input.
+Where the derating bites, a vendor K is the only honest input, and the engine says so itself.
 
 ## Nothing reconciles a vendor number
 
 An override wins outright and says so, returning `source` as typed with `derated` and `floored` both false. It is never compared against the table value at that pressure and no warning is raised when the two are far apart, so a vendor K of 0.9 would be taken silently.
-
-That is a gap worth knowing about. The override is the recommended input where the derating bites, and the engine will not tell anybody when the recommended input is wrong.
 
 ## The mistake
 
