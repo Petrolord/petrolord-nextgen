@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The Stokes oracle sits at 1.004184 times the engine on stokes500um, stokes150um and stokes1000um, in the same direction each time. What does that pattern establish?",
+  "options": [
+   "That the oracle carries a unit conversion the engine does not, which is the one explanation left once three cases at three droplet sizes and three viscosities agree to six decimals on the ratio.",
+   "That the engine is wrong by four parts in a thousand and the goldens record the error, so any case decided inside that gap has to be re-run against the SI form before anybody quotes it.",
+   "That the two implementations disagree about the density difference, since specific gravity in the field form and density in SI are the only inputs the two forms take in different units.",
+   "A packaged constant rather than an arithmetic slip, since a slip in the working would move with the inputs and this gap does not."
+  ],
+  "answer": 3,
+  "explanation": "The field constant 1.78e-6 is a rounded packaging of the SI group g d2 dRho over 18 mu. The engine reads 0.044500 ft/s where the oracle reads 0.044686 ft/s, always low and always by the same ratio."
+ },
+ {
+  "prompt": "Where does the four parts in a thousand between the field form and the SI derivation actually matter to a verdict?",
+  "options": [
+   "Only where a crossing time and a residence time nearly meet, which is why any gate on droplet settling has to hold a tolerance wider than the 1.004184 the three published cases show.",
+   "On every verdict, since the engine velocity of 0.001762 ft/s on stokes150um is the figure the comparison uses and it sits low against the oracle's 0.001770 ft/s.",
+   "On the large drops, because the gap scales with the square of the droplet size and 1000.000000 micron carries it on 0.320400 ft/s rather than on 0.044500 ft/s.",
+   "On the carryunder check alone, because a rising oil drop crosses the thicker of the two layers and a small velocity error accumulates over that distance."
+  ],
+  "answer": 0,
+  "explanation": "A drop needing 111.4796 s in a phase that stays 300.0000 s is nowhere near the edge. The ratio is the same 1.004184 at every size, so the margin decides whether it bites."
+ },
+ {
+  "prompt": "A 500.000000 micron water drop settles at 0.017500 ft/s in 4.000000 cP oil. What does the same oil do to a 250.000000 micron drop?",
+  "options": [
+   "Half the speed, because the settling velocity falls in proportion to the droplet diameter at a fixed viscosity of 4.000000 cP.",
+   "0.001575 ft/s, which is what the same oil gives at 150.000000 micron and the smallest velocity the table carries for a water drop in oil.",
+   "0.004375 ft/s, a quarter of the speed, because the settling velocity goes as the square of the droplet size.",
+   "0.017500 ft/s still, since the size sets the distance and the viscosity sets the speed."
+  ],
+  "answer": 2,
+  "explanation": "The table runs 0.017500, 0.008575, 0.004375, 0.001575 and 0.000700 ft/s at 500.000000, 350.000000, 250.000000, 150.000000 and 100.000000 micron. Halving the drop quarters the speed."
+ },
+ {
+  "prompt": "On AGBAMI a water drop is judged against 300.0000 s and an oil drop against 480.0000 s. Why those two figures rather than one of them for both?",
+  "options": [
+   "The shorter residence is applied to the harder check and the longer one to the easier check, so the falling drop that has 111.4796 s of work in front of it takes 300.0000 s.",
+   "Each drop races the phase it is trying to leave: the falling water drop races the oil, and the rising oil drop races the water.",
+   "The oil is the product stream and is judged first at 300.0000 s, and the water is given whatever residence is left.",
+   "Each drop is judged against the phase it ends up in, so a water drop that has fallen takes the water's 480.0000 s."
+  ],
+  "answer": 1,
+  "explanation": "The water drop crosses 1.950851 ft of oil in 111.4796 s against the oil's 300.0000 s, and the oil drop crosses 3.049149 ft of water in 217.8010 s against the water's 480.0000 s."
+ },
+ {
+  "prompt": "Tightening the AGBAMI water specification from 500.000000 micron to 150.000000 micron turns waterCarryover true. What else moves?",
+  "options": [
+   "The vessel length, which rises from 12.311666 ft because the engine lengthens the drum until the oil residence covers the crossing time of 1238.6620 s the smaller drop needs.",
+   "The interface, which drops below 3.049149 ft because the tighter specification asks for a thinner oil layer and the engine places the interface to give the drop less to cross.",
+   "The oil residence, which rises above 300.0000 s once the tighter specification is applied, because residence is recomputed against the droplet size the vessel is asked to remove.",
+   "Nothing else: the drum, the layers, the residence times and the length stand exactly where they were."
+  ],
+  "answer": 3,
+  "explanation": "The drop falls at 0.001575 ft/s instead of 0.017500 ft/s and needs 1238.6620 s against the same 300.0000 s of residence. A droplet size is a product specification and it sizes nothing by itself."
+ },
+ {
+  "prompt": "The engine's carryover warning offers two repairs: raise the oil retention, or lower the interface. What does each one do to the comparison?",
+  "options": [
+   "Raising the retention lengthens the drum and buys residence time directly, while lowering the interface thins the oil layer and shortens the crossing the drop has to make.",
+   "Raising the retention thins the oil layer by handing the water more of the cross-section, and lowering the interface buys residence time by slowing the oil stream down as it moves through the drum.",
+   "Both of them lengthen the vessel past 12.311666 ft, since the retention time and the interface height are the two inputs the liquid retention length is built from.",
+   "Raising the retention widens the water band and lowering the interface widens it further, so both act on the layer the falling drop crosses."
+  ],
+  "answer": 0,
+  "explanation": "The message is verbatim about this case: 1238.6620 s to fall through the 1.95 ft oil layer against 300.0000 s of residence. Neither lever touches the droplet size, which says how clean the oil must be."
+ },
+ {
+  "prompt": "A designer cures a water carryover by lowering the interface. What should they check next?",
+  "options": [
+   "The gas capacity margin, because moving the interface down raises the liquid level and takes gas space out of the top of the drum where settling is measured.",
+   "The oil residence time, because the oil layer has thinned and a thinner band carries the same oil rate through the drum faster than a thick one does.",
+   "The carryunder verdict, because a lower interface thickens the water layer the rising oil drop has to cross.",
+   "The retention phase field, because a lower interface makes the oil the phase that sets the requirement."
+  ],
+  "answer": 2,
+  "explanation": "AGBAMI holds 1.950851 ft of oil over 3.049149 ft of water. The two verdicts pull in opposite directions, so a vessel can be walked out of one failing check straight into the other."
+ },
+ {
+  "prompt": "Under the retention-proportional split the AGBAMI residences come back as 300.0000 s and 480.0000 s. Why does this course decline to grade those two figures?",
+  "options": [
+   "They depend on the droplet sizes that were asked for, so they move whenever the specification moves and cannot be marked against any fixed expected value at all.",
+   "They are the retention times somebody typed in, 5.000000 minutes and 8.000000 minutes, converted to seconds.",
+   "They come from the vessel length of 12.311666 ft, which may be revised.",
+   "They print to four decimals where vessel work runs to six."
+  ],
+  "answer": 1,
+  "explanation": "The proportional split was built to give both phases the same length, so each phase gets exactly the time it was designed for. Quoting one back is quoting an input."
+ },
+ {
+  "prompt": "Pin the AGBAMI water share at 0.300000 and the oil residence becomes 746.6667 s while the water stays at 480.0000 s. Why did one move and the other not?",
+  "options": [
+   "The water set the length at 21.181362 ft to buy its own 8.000000 minutes, and the oil was left sitting in a band of 2.925687 ft inside a drum that had been sized for somebody else.",
+   "The pin raised the oil rate through the drum and left the water rate alone, so only the oil residence had to be recomputed after the interface moved to 2.074313 ft.",
+   "The water residence is fixed by the retention time of 8.000000 minutes in every case, pinned or proportional, while the oil residence is always computed.",
+   "The oil band grew to 2.925687 ft and the water band shrank to 2.074313 ft, and residence scales with band thickness, so the two moved in opposite directions."
+  ],
+  "answer": 0,
+  "explanation": "This is where a residence becomes a real output rather than an input read back. The oil is held far longer than its own 5.000000 minutes asked for, because another phase forced the length."
+ },
+ {
+  "prompt": "A report gives waterCarryover false for a three-phase vessel and no droplet size. What is missing from that claim?",
+  "options": [
+   "The residence time it was compared against, which is the only figure that can turn a verdict and cannot be recovered from the vessel dimensions once a report has been issued.",
+   "The direction of the check, since waterCarryover and oilCarryunder both read false on a passing vessel and cannot be told apart without the layer thickness printed beside them.",
+   "The oracle velocity, because a verdict quoted from the field form of Stokes law sits four parts in a thousand from the SI figure and that gap belongs beside any published verdict.",
+   "Its premise: false says a drop of the stated size crossed in time, and it says nothing about a smaller one."
+  ],
+  "answer": 3,
+  "explanation": "AGBAMI clears at 500.000000 micron with 111.4796 s against 300.0000 s, and fails at 150.000000 micron with 1238.6620 s against the same residence. The vessel is identical in both runs."
+ },
+ {
+  "prompt": "Before FC1-0 the carryunder check measured the rising oil drop against a water layer of 2.026834 ft on AGBAMI where the vessel holds 3.049149 ft. Which way did that error run?",
+  "options": [
+   "Conservative: a thinner layer leaves the drop less time inside the water band, so the check failed vessels that would in fact have separated the stream cleanly enough.",
+   "Permissive: a thinner layer is crossed sooner, so the comparison cleared on vessels that should have failed it.",
+   "Neither, because the same chord divisor was applied to the oil layer too and the two errors cancel.",
+   "It depended on the level, since the chord equals the diameter only at a level of 0.500000."
+  ],
+  "answer": 1,
+  "explanation": "The arithmetic was honest and the geometry handed to it was not. On lowLevelSmallOilDropCarryunder the retired layer is 0.617770 ft against the exact 1.249328 ft, less than half of it."
+ },
+ {
+  "prompt": "A three-phase run before FC1-0 was given no oil gravity and reported waterCarryover false and oilCarryunder false. What had actually happened?",
+  "options": [
+   "The engine substituted a default oil gravity taken from the published cases, sized the vessel on it, and reported the verdicts that default produced without flagging it.",
+   "The engine skipped both droplet checks and returned the initialised values of the two fields, which a caller could detect from the empty warning string beside them.",
+   "Both calculations read NaN, every comparison against NaN came back false, and false is the word for a vessel that passed.",
+   "The engine fell back to the water gravity for both phases, leaving a density difference of zero."
+  ],
+  "answer": 2,
+  "explanation": "The repair is a SeparatorInputError on sgOil. A verdict computed from an input the engine could not read is a verdict that says nothing, and it said nothing in the reassuring direction."
+ },
+ {
+  "prompt": "A NaN gravity read as a passing comparison, a chord-rule water layer and one dropletMicron standing for two checks. What do the three retired behaviours have in common?",
+  "options": [
+   "Not one of them ever raised a false alarm, so each was quiet in exactly the way a defect that fails open is quiet and stayed in the engine until somebody went looking.",
+   "Each was confined to the carryunder check, which is why the carryover verdict came through FC1-0 unchanged and only the rising drop had to be re-run.",
+   "Each produced a number out by a constant factor, so a result from before the repair can be scaled to the right answer without running the case again.",
+   "Each was caught by the published goldens as soon as the oracle was written, which is why the three were repaired together in FC1-0."
+  ],
+  "answer": 0,
+  "explanation": "A defect that fails closed announces itself the first time somebody sizes a vessel. A green verdict from a method that could fail open is the one to re-run, and it is the one nobody re-runs."
+ },
+ {
+  "prompt": "On AGBAMI a 200.000000 micron oil drop rises at 0.014000 ft/s and the water band is 3.049149 ft deep. What does the check report?",
+  "options": [
+   "217.8010 s of crossing against 300.0000 s of residence, so the margin is narrower than the falling drop's and oilCarryunder still comes back false on the strength of it.",
+   "217.8010 s of crossing against 480.0000 s of water residence, so oilCarryunder comes back false.",
+   "111.4796 s of crossing against 480.0000 s of residence, since both drops cross the liquid depth of 5.000000 ft and differ only in direction.",
+   "1238.6620 s of crossing against 480.0000 s of residence, so oilCarryunder comes back true and the vessel has to be re-sized."
+  ],
+  "answer": 1,
+  "explanation": "The rising drop is judged against the water it is leaving. Its layer of 3.049149 ft is the thicker of the two, which is why a slower drop still clears with room to spare."
+ },
+ {
+  "prompt": "A droplet arrives with no viscosity to fall through, and a separate call has the heavy phase lighter than the light phase. How does settling answer each?",
+  "options": [
+   "With a SeparatorInputError naming muOilCp in the first case and sgWater in the second, since both are named inputs the caller failed to supply correctly.",
+   "With a velocity of zero in the first case and a negative velocity in the second, either of which a caller can test for without reading a message string at all.",
+   "With an object carrying an error string in both cases: settling needs a droplet size and viscosity, and the heavy phase must be denser than the light phase, both returned rather than thrown.",
+   "With an error object in the first case and a throw in the second, since a missing viscosity is an absent input while a reversed pair of gravities is a value outside its domain."
+  ],
+  "answer": 2,
+  "explanation": "Both are fair questions the method cannot answer, so neither is a throw. The thrown refusals live upstream, on the named inputs a three-phase call has to be given before settling is reached."
+ }
+]

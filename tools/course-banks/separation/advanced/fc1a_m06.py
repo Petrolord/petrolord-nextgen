@@ -1,0 +1,114 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC1 Expert m06, The Expert Reading. Digest section 18, over sections 13 to 17.
+
+q(1, "The AGBAMI chain runs gauge pressure, reduced pair, z, gas density, K, settling velocity, then the vessel. Why can the steps not be taken in another order?",
+ "Each step is an input to the next one: the reduced pair needs the absolute pressure, z needs the reduced pair, the density needs z, settling needs K and the densities, and the vessel needs settling.",
+ ["They can be taken in any order provided every figure is recomputed at the end, which is what the studio does when a user edits a field halfway down the chain.",
+  "K has to be taken first, because the mist extractor decides which orientation the rest of the chain is worked in.",
+  "The vessel has to be sized first, because the residence times the verdicts need come from a length."],
+ "On AGBAMI the chain runs 350.000000 psig to Ppr 0.549797 and Tpr 1.508700, z 0.947166, a density of 1.276898 lb/ft3, K 0.525000, settling 3.549130 ft/s and 8.713371 ft3/s of gas.")
+
+q(3, "AGBAMI runs at 350.000000 psig and 110.000000 degF behind a vane pack. What does the chain report for z and for K?",
+ "z 0.947166 and K 0.525000.",
+ ["z 0.908065 and K 0.300000, which are the figures the same vane pack produces once the pressure is taken as absolute rather than as gauge.",
+  "z 0.947166 and K 0.550000, since the vane pack carries a base K of 0.550000 and the derating rule starts above the pressure this vessel runs at.",
+  "z 0.850000 and K 0.525000, because a three-phase vessel takes the retired constant for z and derates only the K that the mist extractor supplies."],
+ "The reduced pair 0.549797 and 1.508700 gives z 0.947166, and the horizontal vane pack base of 0.550000 derates to 0.525000 at 350.000000 psig. Both figures move every dimension below them.")
+
+q(0, "AGBAMI is 10.000000 ft across at a level of 0.500000 and needs 12.311666 ft of length, with the controlling requirement liquid-retention. What would a reader have to add before that length could be acted on?",
+ "The interface at 3.049149 ft with the layers it implies, the droplet specification the verdicts were taken at, and the word liquid-retention itself, since a gas-controlled row is a different finding.",
+ ["The slenderness of the drum, which is the only figure a fabricator needs beyond the diameter and the length the engine returned.",
+  "The gas rate of 8.713371 ft3/s, because the length is divided between the two phases in proportion to it.",
+  "The band the sweep was run in, because a length is only meaningful once it has been judged against a slenderness band."],
+ "A length with no interface, no specification and no controlling requirement beside it is a number. The same drum returns 12.311666 ft whether the water verdict passes or fails.")
+
+q(2, "Both AGBAMI droplet verdicts pass at 500.000000 micron and the water verdict fails at 150.000000 micron. What does a design package have to carry for either statement to mean anything?",
+ "The droplet size each verdict was taken at, because a verdict without its specification is a conclusion with its premise removed.",
+ ["The oracle velocities beside the engine velocities, because the field form sits 1.004184 below the SI derivation and a verdict quoted without that gap overstates its own precision.",
+  "The vessel length of 12.311666 ft and the liquid level of 0.500000, which are the two inputs that decide a verdict once the stream has been fixed.",
+  "The retention times of 5.000000 minutes and 8.000000 minutes, since a verdict is a comparison against a residence and the residence is the retention time typed in."],
+ "The same drum gives waterCarryover false at 500.000000 micron and true at 150.000000 micron. Nothing about the vessel moved between those two runs.")
+
+q(1, "ERHA needs 64.6458 m of flare setback and its bund gives 59.5294 m from the pool centre with 50.5294 m from the pool edge. What is the site report, in one reading?",
+ "6 breaches on a plan that is not complete, the largest 43.8223 m and the sharpest 0.597753 of its requirement, with 2 items skipped.",
+ ["6 breaches on a complete plan, since every item on the station was reached and the two computed setbacks were both compared against the distances measured.",
+  "2 breaches against the computed setbacks and 4 against the table, which is the split the two rankings are drawn from separately.",
+  "No breaches, because the largest shortfall of 43.8223 m is measured against a table figure of 90.0000 m that the site standard may replace."],
+ "Complete is false because 2 items were skipped and 12 type pairs are unknown, and pass is false because 6 comparisons came up short. The two fields have separate causes.")
+
+q(3, "Which of these answers from an Expert run is a status word rather than a number?",
+ "preferredStatus, which reads selected, none-feasible or none-in-band.",
+ ["The controlling requirement on a three-phase row, which reads as a length in ft once the larger of liquid retention and gas capacity has been taken.",
+  "The margin in a gas capacity check, which reads as a ratio and is the figure a reader compares against the verdict that was printed beside it.",
+  "The water share of the liquid cross-section, which reads as a fraction such as 0.516129 and decides where the interface is placed in the drum."],
+ "This tier introduced four answers that are not numbers: retentionPhase, preferredStatus, pass with its nothing-checked status, and complete beside pass. Each is a case a retired rule answered with a number it had not earned.")
+
+q(0, "This engine sizes a vessel. Which two questions does it leave to other work, and where does each belong?",
+ "What actually leaves each stage at a given pressure and temperature, which is a flash calculation in the fluid engine, and the slug volume, which comes from the line where the pigging work produces it.",
+ ["The droplet verdicts, which belong to the laboratory that measured the crude, and the spacing table, which belongs to whoever owns the site standard.",
+  "The z factor, which belongs to the gas properties module, and the radiation labels, which belong to API 521 and are quoted rather than computed.",
+  "The slenderness band, which is a plot decision, and the retention times, which come from the process engineers rather than from this engine."],
+ "A sizing result says the drum is big enough for the stream to separate in it. It never says what the compositions at the outlets will be, and it never computes the slug it is asked to hold.")
+
+q(2, "A team has results from before FC1-0. Which of them has to be run again, and why?",
+ "Every carryunder verdict, every preferred diameter and every layout that passed with nothing checked, because each answered a different question from the one it appeared to answer.",
+ ["Only the results that failed, since a failing case is the one where a repaired rule could move the answer and a passing case was never in any doubt at the time the package was signed off by the reviewer.",
+  "Only the three-phase results, because the two-phase path was untouched by FC1-0 and its lengths and margins still stand as reported.",
+  "None of them, provided the inputs were recorded, since the repairs changed how answers are reported rather than what the arithmetic produced."],
+ "A carryunder judged against a chord-rule layer was judged on a vessel whose water band was never that thin, a retired preference could be a row that was merely first, and a pass on nothing checked was an absence of evidence.")
+
+q(1, "What question separates the parts of a design package that survive a review from the parts that do not?",
+ "Whether each figure was computed, copied or refused, because a computed figure moves when its duty moves, a copied figure never moves, and a refusal names the input it wants.",
+ ["Whether each figure carries six decimals, since vessel work printed to fewer decimals has been rounded somewhere between the engine and the report, which is the one check a reviewer can make without re-running anything.",
+  "Whether each figure came from the repaired engine, since anything from before FC1-0 is unreliable and anything after it is not.",
+  "Whether each figure has a published case behind it, since a figure with a golden is checked and a figure without one is an assertion."],
+ "The ERHA flare setback of 64.6458 m moves with 828000.0000 kW of heat release. The 90.0000 m between a flare and a control room does not move at all, because it was never a function of anything.")
+
+q(0, "Why does this tier insist that a sized vessel and a judged plot are two halves of one answer?",
+ "Because a drum that separates the stream is useless on a plot that cannot hold it, and a plot judged clear says nothing about whether the vessel on it works.",
+ ["Because the layout check reads the vessel dimensions, so a diameter of 10.000000 ft changes the distances between the items on the plan once the drum has been placed on it.",
+  "Because the flare setback of 64.6458 m is computed from the gas the separator releases, so the two calculations share the same duty and the same allowable of 4.730000 kW/m2.",
+  "Because the spacing table scores a separator against a tank at 15.000000 m, which is the figure that sizes the plot the drum stands on."],
+ "AGBAMI answers with a vessel of 12.311666 ft and a verdict at each droplet size. ERHA answers with 6 breaches, 2 skipped items and two rankings. Neither answer contains the other.")
+
+q(2, "The AGBAMI family prefers 7.000000 ft at a specification of 500.000000 micron and returns null with none-feasible at 150.000000 micron. What is the lesson for a procurement note?",
+ "The preference is an answer to the specification as well as to the stream, so a diameter quoted without the droplet size it was cleared at is unquotable.",
+ ["The vendor list has to be widened, because a family that returns null at the tighter specification has been offered the wrong diameters for the duty it carries.",
+  "The band has to be revisited, because none-feasible is the status a sweep returns once its rows fall outside the slenderness that was asked for.",
+  "The 7.000000 ft vessel is the safe order in both cases, since a row that is feasible at one specification stays feasible and only its reason list changes."],
+ "Every row keeps its length and slenderness between those two runs. The 7.000000 ft row is inRange true in both and carries water-carryover in the second.")
+
+q(3, "A report gives the AGBAMI oil residence as 300.0000 s and the ERHA flare setback as 64.6458 m. What is the difference in what those two figures are worth?",
+ "One is the 5.000000 minutes of retention typed in and read back, and one is computed from a heat release of 828000.0000 kW.",
+ ["One is measured to four decimals and one to six, which is the convention that tells a reader which figures came from the engine and which were derived on the page.",
+  "One is held for the literature because the settling packaging is unchecked, and one is a computed setback that no held assumption feeds into at any point.",
+  "One belongs to the vessel and one to the plot, so the two are reported by different studios and there is no basis on which to compare their worth."],
+ "Under the proportional split the residences are the retention times in seconds, which is why this course does not grade them. A setback moves when its duty moves.")
+
+q(0, "A dashboard renders null preferred diameters, null retention phases and a null pass as blank cells. What is the common risk?",
+ "Each blank is a finding with a reason behind it, and a blank invites a reader to fill it in by eye with the nearest row, the phase they expected or a green tick.",
+ ["Each blank is a value the engine could not compute, so the calculation has to be re-run with the missing input supplied by whoever owns it before the report can be issued at all.",
+  "Each blank means a refusal was thrown upstream, and a thrown refusal names the input it wants while a blank cell does not.",
+  "Each blank is a rounding artefact from printing a number below the precision the field is reported at."],
+ "A null preferred diameter carries none-feasible or none-in-band, a null retentionPhase says no contest was held, and a null pass carries nothing-checked. Each is an answer.")
+
+q(1, "Four things in this course are held for the literature and one is a stated convention. What makes the Stokes constant different from the other four?",
+ "Its disagreement has been measured and stated at 1.004184 on every case and in the same direction, so the size of the gap travels with the number.",
+ ["It is an engine constant rather than a table value, and an engine constant cannot be replaced by a site standard the way the spacing figures can, which is what marks the two kinds of unchecked figure apart.",
+  "It has been checked against the literature and the other four have not, which is why the field form of 1.78e-6 is the one the standards write.",
+  "It changes no answer, since 0.044500 ft/s and 0.044686 ft/s round to the same figure at the precision vessel work is printed to."],
+ "The held items are the K derating with its floor, the borrowed settling velocity, the API 521 labels and the spacing table. None of the five is an answer, and only one of them has its error bar written down.")
+
+q(2, "A handover writes 350 psi for the AGBAMI operating pressure and reports the interface to the nearest inch. What conventions has it broken?",
+ "Gauge and absolute pressures are never written as though they were one quantity, and vessel work prints to six decimals, so the interface is 3.049149 ft.",
+ ["Pressures are always reported as absolute in this course, and lengths are reported to four decimals in the same way as metres, kilowatts and seconds on every page of a report.",
+  "Counts are whole numbers and everything else carries six decimals, so both the pressure and the interface needed six before the handover could be accepted.",
+  "Nothing is broken, since 350.000000 psig and 3.049149 ft are the engine figures and a handover may round either of them for a reader."],
+ "AGBAMI runs at 350.000000 psig, which is a gauge pressure. Metres, kilowatts and seconds print to four decimals and counts are whole numbers, so the precision itself says what kind of quantity is being read.")
+
+emit(Q, '/root/fc-wip-separation/banks/fc1a_m06.json')
+finish()
