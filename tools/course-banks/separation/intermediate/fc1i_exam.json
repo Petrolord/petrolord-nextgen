@@ -55,15 +55,15 @@
   "explanation": "On the 8.000000 ft drum the gas height is 4.000000 ft against a liquid requirement of 23.270539 ft. Gas controls only a vessel that is overloaded or wider than its duty needs."
  },
  {
-  "prompt": "A catcher is sized for a 350.000000 bbl slug at 12000.000000 bpd over a 5.000000 minute hold. Which volume goes into the vessel calculation?",
+  "prompt": "Four figures sit on one separation sheet: a slug of 350.000000 bbl, a spacing requirement of 90.000000 m, a flare setback of 64.6458 m and a catcher volume of 3665.075231 ft3. Which of them does this engine produce?",
   "options": [
-   "350.000000 bbl, since the slug is what has to be caught and the normal inflow leaves through the outlet as it arrives at the vessel.",
-   "391.666667 bbl, the slug with the 41.666667 bbl that arrives while the catcher drains.",
-   "3665.075231 bbl, which is the working volume after the fill fraction of 0.600000 has been applied to it.",
-   "41.666667 bbl, the inflow across the hold, with the slug held in the line."
+   "The catcher volume alone, since a setback of 64.6458 m is read off the API 521 levels in the same way a spacing requirement of 90.000000 m is read off the spacing table.",
+   "The setback and the catcher volume, while the slug arrives from the line sizing studio and the spacing requirement is read out of a table.",
+   "The slug and the catcher volume, both being vessel quantities, while every figure quoted in metres belongs to the layout side and is looked up rather than worked out.",
+   "All four, which is why each is quoted to the precision the engine prints."
   ],
   "answer": 1,
-  "explanation": "The plant keeps producing while the catcher drains. A fill fraction of 0.600000 then turns 391.666667 bbl into 3665.075231 ft3 of vessel."
+  "explanation": "A missing slug returns an error naming the studio that owns it. The setback moves with a heat release of 828000.0000 kW and the table figure moves with nothing at all."
  },
  {
   "prompt": "Two distances sit on the ERHA plan for the flare: a requirement of 90.000000 m and a setback of 64.6458 m. A reviewer doubles the relief rate. Which figure moves?",
@@ -264,15 +264,15 @@
   "explanation": "The finger form ignores the normal inflow entirely. The gap between the two volumes is part fill fraction and part the 41.666667 bbl the harp never counted."
  },
  {
-  "prompt": "A flare relieves 18.000000 kg/s at 46000.000000 kJ/kg and 0.300000 of the heat is radiated. Which chain gives the 64.6458 m?",
+  "prompt": "One reviewer halves the relief rate on the ERHA flare and another drops ABANA-2 from a level of 0.500000 to 0.300000. What moves in each case?",
   "options": [
-   "The radiated fraction is applied to the mass rate first, the heat of combustion is applied to the remainder, and the result is then compared against the table figure of 90.000000 m for that pair.",
-   "Mass rate times heat of combustion gives 828000.0000 kW, the radiated fraction is taken off that, and the point source model solves for where the intensity reaches 4.730000 kW/m2.",
-   "The allowable of 4.730000 kW/m2 is multiplied by the area of a sphere at the table distance, which gives the heat release the flare is allowed to carry.",
-   "The flame height is found first, and the setback is measured from the top of the flame."
+   "Both the setback of 64.6458 m and the table figure of 90.000000 m move, a spacing requirement being indexed on the duty of the flare it was written for, and on the vessel only the liquid requirement moves with the level.",
+   "The setback of 64.6458 m moves while the table figure of 90.000000 m does not, and on the vessel the areas, the requirement and the velocity all move while the 50.265482 ft2 of shell stays put.",
+   "Neither figure on the site moves, a layout being judged once, while on the vessel every figure on the row moves with the level.",
+   "The table figure moves and the setback holds, and on the vessel the shell falls to 37.582708 ft2."
   ],
   "answer": 1,
-  "explanation": "Each step is arithmetic on the step before. Change the relief rate and 64.6458 m moves, which is the whole difference between a computed setback and a table figure."
+  "explanation": "A computed setback follows its duty and a table figure follows nothing. The liquid requirement goes from 23.270539 ft to 46.113917 ft in a drum that has not changed."
  },
  {
   "prompt": "A plan reports complete false with 2 skipped items. One reviewer says the plot has failed and another says nothing has been proved. Who is right?",
@@ -308,15 +308,15 @@
   "explanation": "Reading a width as a height is how a check came to report on a layer that was not there, with every figure on the page still in feet."
  },
  {
-  "prompt": "What has to be said about the 2.396801 ft gas requirement whenever it is quoted?",
+  "prompt": "Suppose the literature turns out to size a gas length from a stated droplet diameter. What on the ABANA-2 family would have to be read again from scratch?",
   "options": [
-   "That it was solved for the droplet size the vessel is specified to remove, which is the figure a reader has to state alongside it for the answer to be reproducible.",
-   "That it is the smaller of the two requirements on this drum and therefore never used, so its provenance does not matter to the length reported.",
-   "That it rests on Souders-Brown borrowed as the droplet settling velocity, which is HELD FOR LITERATURE with no check against a published method.",
-   "That it is an API 12J result quoted to the engine's own precision."
+   "The liquid requirement of 23.270539 ft as well, because a retention volume is divided by an area that the settling velocity had already fixed for the level in question.",
+   "Nothing on this family, since liquid controls every row and a requirement that is never the larger of the two cannot change a length.",
+   "The gas requirement of 2.396801 ft and the bound tying it to the gas height, since the velocity ratio would stop being the quantity the capacity check compares.",
+   "The slenderness of 2.908817, taken on a length the gas requirement helped to set."
   ],
   "answer": 2,
-  "explanation": "If the published method sizes a gas length from a stated droplet diameter, the figure and every conclusion drawn from it change. It is taught as a limit."
+  "explanation": "It is HELD FOR LITERATURE. The bound is a property of this method rather than a fact about separators, and it rests on that borrowed velocity."
  },
  {
   "prompt": "The engine carries four radiation levels with labels, from 1.580000 kW/m2 for continuous exposure up to 9.460000 kW/m2 for an escape route. What is their status?",
@@ -352,7 +352,7 @@
   "explanation": "A margin of 0.938751 comes with false. A radius of 2.2745 m comes with within-pool-edge, which says the answer is a lower bound rather than a distance to build to."
  },
  {
-  "prompt": "The 8.000000 ft drum reads a slenderness of 2.908817 and the 7.000000 ft drum reads 4.342025 against a band of 3.000000 to 5.000000. Which is the better vessel?",
+  "prompt": "A project has to choose between two rows of one family, one inside a band of 3.000000 to 5.000000 at 4.342025 and one below the band at 2.908817. On what grounds is that choice made?",
   "options": [
    "The 7.000000 ft drum, because a row inside the band is the only row a sweep treats as feasible and the 8.000000 ft row is rejected with its reasons attached.",
    "The 8.000000 ft drum, because a lower slenderness is a shorter vessel at 23.270539 ft and a shorter vessel is cheaper to fabricate and transport.",
@@ -374,7 +374,7 @@
   "explanation": "Two rows of this table read 0.000000 m. On ERHA 21 pairs carry no requirement, and they are reported apart from the 69 comparisons that do."
  },
  {
-  "prompt": "Every row of the ABANA-2 cross-section table reads 50.265482 ft2 in its last column while the gas area runs from 43.108759 ft2 down to 9.826958 ft2. What does the pair of columns establish?",
+  "prompt": "A velocity is taken by dividing 29.490437 ft3/s by 50.265482 ft2, on the grounds that the figure sits on every row of the cut while the gas share runs from 43.108759 ft2 down to 9.826958 ft2. What is wrong with that?",
   "options": [
    "The gas area is the total less a vapour allowance, and the allowance grows as the level rises, which is why the gas keeps less of the circle at 0.750000.",
    "The total is the area used for the capacity check and the gas area is used for the gas length, which is why both are carried on every row of the table.",
@@ -396,15 +396,15 @@
   "explanation": "The relationship between the two dimensions is the input that was typed. 10739.004630 ft3 at a ratio of 5.000000 gives 13.984106 ft and 69.920531 ft."
  },
  {
-  "prompt": "A pool fire result reads radius 2.2745 m, edge setback 0.0000 m and setbackStatus within-pool-edge, on a pool whose flame stands 25.6078 m tall. What is the reading?",
+  "prompt": "Two pool fire answers reach a reviewer, the ERHA bund at beyond-pool-edge and a published case at within-pool-edge. What does that pair of statuses settle?",
   "options": [
-   "A pool too small to reach the allowable, so the engine reports zero and expects the spacing table to govern that pair instead of the radiation check.",
-   "A failed calculation, the zero being the placeholder the engine writes whenever a solver does not converge on a radius outside the pool.",
-   "A clear result that a neighbouring item may stand against the bund wall, since the setback from the edge is 0.0000 m.",
-   "A lower bound produced well inside the flame height, where a point source under-predicts."
+   "Whether the pool was measured from its centre or from its edge, which is the 9.0000 m the layout check has to carry on the ERHA bund itself.",
+   "Whether the allowable behind each was taken from the API 521 levels or typed by the project, which is what separates a defensible answer from an absurd one.",
+   "Whether the flame height was found by Thomas, a status of within-pool-edge being what the engine returns when that correlation is skipped.",
+   "Whether each answer may be used as a distance or only as a lower bound."
   ],
   "answer": 3,
-  "explanation": "The engine reports 0.0000 m rather than a negative distance and says to use a solid-flame view factor model for design. A status is part of the answer."
+  "explanation": "beyond-pool-edge confirms that 50.5294 m sits where a point source is defensible. within-pool-edge says a radius of 2.2745 m is inside the flame height of 25.6078 m and under-predicts."
  },
  {
   "prompt": "A report quotes a liquid requirement of 46.113917 ft for ABANA-2 and a reviewer who remembers 23.270539 ft calls it an error. Who is right?",
@@ -429,15 +429,15 @@
   "explanation": "From 5.000000 ft to 6.000000 ft the velocity falls to 2.086022 ft/s. From 9.000000 ft to 10.000000 ft the same extra foot moves 0.927121 ft/s to 0.750968 ft/s."
  },
  {
-  "prompt": "ABANA's slug is squeezed into 2.000000 fingers of 12.000000 inch bore and each finger comes out at 1563.780209 ft. What does the engine return and what is the advice?",
+  "prompt": "Three answers arrive with something attached to them: a harp whose fingers reach 1563.780209 ft, a pool radius of 2.2745 m, and a lookup for a tank against a skid. What came with each?",
   "options": [
-   "The dimensions with a warning attached, saying that fingers longer than about 1500 ft each call for more fingers or a larger bore rather than a very long harp.",
-   "A refusal naming nFingers, since two fingers of that bore cannot hold the slug and the engine will not size a harp it considers unbuildable.",
-   "The dimensions with no comment, buildability being a matter for the project rather than for a sizing engine.",
-   "A harp of 5.000000 fingers, which is the arrangement the warning recommends."
+   "A warning about buildability with the dimensions still returned, a status saying the distance is only a lower bound, and a null, which is the table saying it holds no figure for that pair at all.",
+   "A refusal naming nFingers, a setback of 0.0000 m with nothing attached to it, and a requirement of 0.000000 m for a pair the table scores at nothing.",
+   "Three warnings, the engine attaching advice wherever an answer lands outside the range its method was built for.",
+   "A warning, a refusal and a zero."
   ],
   "answer": 0,
-  "explanation": "The warning is advice about buildability rather than a refusal, and the fix it names is more fingers or a wider bore. ABANA's own harp is 225.184350 ft in each of 5.000000 fingers."
+  "explanation": "The harp keeps its dimensions and gains advice, the pool keeps a distance and gains setbackStatus, and the lookup returns nothing rather than a guess."
  },
  {
   "prompt": "What single reading tells a reviewer that the ERHA flare is a problem for the control room on two separate grounds?",
