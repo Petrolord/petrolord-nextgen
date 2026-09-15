@@ -35,7 +35,7 @@ The second mistake is to read 12 percent a year as a fixed number of barrels los
 
 It refuses a build up, a plateau, a hyperbolic tail, a workover and an economic limit. The profile is one exponential from the first day to the last row, and it declines at the same rate whatever the price, the costs or the cash flow are doing. Other fields in this course differ only in their numbers: OKPOMA declines 18 percent a year from 6800 bopd, and NTEJE declines 20 percent a year from 3000 bopd.
 
-A decline also carries no uncertainty of its own. The Scenario Builder's Monte Carlo has a reserves range, which draws each year's volume around its base value, and no range for the decline itself, so a steeper decline from the same first year is a case it never samples.
+A decline also carries no uncertainty of its own. The Scenario Builder's Monte Carlo draws one reserves factor in each iteration and applies it to every year, so the whole profile moves up or down together and keeps its 0.880000 shape. It holds no range for the decline itself, so a steeper decline from the same first year is a case it never samples.
 
 ## Exercise
 

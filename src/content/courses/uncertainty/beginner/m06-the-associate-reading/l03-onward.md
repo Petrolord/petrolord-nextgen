@@ -1,6 +1,6 @@
 # Onward
 
-The Associate reading ends with ISIALA's value and a range of -72.1531 to 237.8860 million USD that carries no probability. The other two tiers exist to put honest odds on a range.
+The Associate reading ends with ISIALA's value and a range of -57.8151 to 226.0140 million USD that carries no probability. The other two tiers exist to put honest odds on a range.
 
 ## Beliefs are percentiles
 
@@ -12,7 +12,7 @@ That tier then asks what oil price ISIALA needs. At the stated medians the break
 
 ## What this tier cannot tell you
 
-How likely any of its numbers is. The sweep says ISIALA is worth -17.3893 if price falls to 0.7 of 70.0000 USD per bbl, and the Low scenario says -72.1531 if four inputs fail together, but neither says how often that happens. Nor can this tier say whether a belief can be honoured at all: ISIALA's narrow opex belief, a 10th percentile of 16, a median of 17 and a 90th percentile of 26, has a shape ratio of 0.100000 that no triangular reaches, and the engine clamps the fit and says so.
+How likely any of its numbers is. The sweep says ISIALA is worth -17.3893 if price falls to 0.7 of 70.0000 USD per bbl, and the Low scenario says -57.8151 if four inputs fail together, but neither says how often that happens. Nor can this tier say whether a belief can be honoured at all: ISIALA's narrow opex belief, a 10th percentile of 16, a median of 17 and a 90th percentile of 26, has a shape ratio of 0.100000 that no triangular reaches, and the engine clamps the fit and says so.
 
 ## One meaning of a P-label
 
@@ -20,14 +20,14 @@ The Expert tier fixes the words. An NPV takes P-labels under the exceedance mean
 
 | case | P-label | engine key | NPV |
 | --- | --- | --- | --- |
-| Low case | P90 | p10 | 48.7439 |
-| Best case | P50 | p50 | 81.1835 |
-| High case | P10 | p90 | 109.8980 |
+| Low case | P90 | p10 | 15.6063 |
+| Best case | P50 | p50 | 78.5315 |
+| High case | P10 | p90 | 152.0653 |
 
-The panel that shipped before the fix printed 109.8980 under "P90 (Conservative)".
+The panel that shipped before the fix printed 152.0653 under "P90 (Conservative)".
 ## What to carry forward
 
-Three habits survive. Prove a row by hand before trusting a column. Read every metric against its flag: a payback equal to the life, an IRR of 0 or 1000. And name the basis beside every number, because 81.0464 is a mid-year NPV at 12 percent and 76.5817 is the same rows at year end.
+Three habits survive. Prove a row by hand before trusting a column. Read every metric against the status beside it: a payback that says not-recovered, an IRR that says no-root. And name the basis beside every number, because 81.0464 is a mid-year NPV at 12 percent and 76.5817 is the same rows at year end.
 
 ## Exercise
 

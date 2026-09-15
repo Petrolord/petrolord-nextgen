@@ -17,7 +17,7 @@ Every year is priced the same, so scaling the price scales every year's revenue 
 | Oil Price | -17.3893 | 81.0464 | 175.8952 | 193.2845 |
 | CAPEX | 126.2382 | 81.0464 | 32.7547 | -93.4835 |
 
-The price bar swings 193.2845 million USD, the largest on ISIALA and far wider than the capex bar. A 0.7 price turns the field negative. The Low scenario, with price and production both times 0.8, returns -72.1531.
+The price bar swings 193.2845 million USD, the largest on ISIALA and far wider than the capex bar. A 0.7 price turns the field negative. The Low scenario, with price, production and variable opex all times 0.8, returns -57.8151.
 
 ## The mistake
 
@@ -29,7 +29,7 @@ The sampled breakeven says the same thing more carefully. Over 5000 iterations i
 
 ## What a flat price refuses
 
-It refuses a price deck, escalation, inflation, a quality differential and any link between price and time. There is no inflation basis in the screening engine, so 70.0000 in 2046 is the same number of USD as 70.0000 in 2027. The Scenario Builder's Monte Carlo can draw a price for each year around 70, and it never draws a trend.
+It refuses a price deck, escalation, inflation, a quality differential and any link between price and time. There is no inflation basis in the screening engine, so 70.0000 in 2046 is the same number of USD as 70.0000 in 2027. The Scenario Builder's Monte Carlo can scale the whole flat deck up or down by one factor an iteration, and it never draws a trend.
 
 ## Exercise
 

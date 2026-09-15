@@ -28,7 +28,7 @@ The NPV divides each row by (1.12)^(i + 0.5), starting at 1.058301. Payback is 3
 
 ## The range
 
-The sensitivity sweep scales one input by 0.7 and 1.3: Oil Price gives -17.3893 and 175.8952, and Production gives the same pair because variable opex does not follow the volume. The scenarios move four inputs at once and give Low -72.1531, Base 81.0464 and High 237.8860. Low's payback of 20.0000 means it never pays back, and High's IRR of 0.0000 means its net cash flow never changes sign. None of these numbers carries a probability.
+The sensitivity sweep scales one input by 0.7 and 1.3: Oil Price gives -17.3893 and 175.8952, and Production gives 4.1176 and 156.4596, a narrower bar because the variable opex follows the volume. The scenarios move five inputs at once and give Low -57.8151, Base 81.0464 and High 226.0140. Low's payback is null with paybackStatus not-recovered, and High's IRR is null with irrStatus no-sign-change because its net cash flow never changes sign. None of these numbers carries a probability.
 
 ## Exercise
 

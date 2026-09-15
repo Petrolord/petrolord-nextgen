@@ -11,9 +11,9 @@
 | Oil Price | -17.3893 | 81.0464 | 175.8952 |
 | CAPEX | 126.2382 | 81.0464 | 32.7547 |
 | OPEX | 85.3696 | 81.0464 | 76.7233 |
-| Production | -17.3893 | 81.0464 | 175.8952 |
+| Production | 4.1176 | 81.0464 | 156.4596 |
 
-Price is the input that turns the answer: at 0.7 of 70.0000 USD per bbl ISIALA is worth -17.3893, a loss. CAPEX runs the other way, 126.2382 when capex falls to 0.7 and 32.7547 when it rises to 1.3. OPEX barely moves the value, from 85.3696 to 76.7233.
+Price is the input that turns the answer: at 0.7 of 70.0000 USD per bbl ISIALA is worth -17.3893, a loss. CAPEX runs the other way, 126.2382 when capex falls to 0.7 and 32.7547 when it rises to 1.3. OPEX barely moves the value, from 85.3696 to 76.7233. Production runs with price and stops short of it, 4.1176 to 156.4596.
 
 ## What each row actually scales
 
@@ -22,15 +22,15 @@ The labels are shorter than the operations behind them.
 - Oil Price scales `price.oil`.
 - CAPEX scales `capex`.
 - OPEX scales `opexFixed` ONLY. `opexVariable` is untouched.
-- Production scales `production.oil` ONLY. Variable opex does not follow the volume.
+- Production scales `production.oil` AND `opexVariable`, so the variable cost follows the barrels.
 
-That last line is why Production and Oil Price print the same numbers to four decimals. The expanded case stores variable opex as million USD per year, 20.8780 in 2027, already worked out from the base volume at 13 USD per bbl. Scale the volume and revenue moves exactly as a price change would move it, while the variable cost stays where it was. The published 10 year base case repeats it: Oil Price 95.1220 to 850.0945, Production 95.1220 to 850.0945.
+That last line is why the Production row is the narrower of the two. Both scale the same revenue by the same fraction, and only Production moves the cost the barrels carry, so at 0.7 the field keeps 4.1176 where the price bar pays every barrel's variable opex out of smaller revenue and reaches -17.3893. The published 10 year base case shows the same gap: Oil Price 95.1220 to 850.0945, Production 129.6350 to 815.5814. Before the 2026-09-15 repair the Production bar scaled volume alone and printed the price bar's pair to four decimals.
 
 The OPEX row is small for the matching reason. ISIALA's fixed opex is 2.5 million USD a year against variable opex of 20.8780 in its first year, and only the 2.5 is scaled.
 
 ## The mistake
 
-A careful reader looks at the Production row and concludes that a 30 percent shortfall in volume costs ISIALA as much as a 30 percent fall in price. It does not, in any real field: fewer barrels means less variable opex, so the true loss from lower volume is smaller than the engine prints, and the true gain from higher volume is also smaller. The row is an engine property, read as physics. The second mistake is to read the OPEX row as "opex does not matter". Only about a tenth of ISIALA's first year opex is in it.
+A careful reader takes the Production row as the price of a volume shortfall and stops there. It is the price of a smaller field, operating cost included: the 4.1176 at 0.7 already has part of the variable opex removed with the barrels, so a shortfall that leaves the operating bill where it was is worth less than that. The second mistake is to read the OPEX row as "opex does not matter". Only about a tenth of ISIALA's first year opex is in it.
 
 ## What it refuses
 
@@ -38,4 +38,4 @@ The sweep moves one input with the others frozen, so it can never show two thing
 
 ## Exercise
 
-Write ISIALA's NPV at 0.7 and 1.3 for Oil Price and for OPEX. Then explain why the Production row matches the Oil Price row exactly, and say which way a real volume shortfall would move the printed -17.3893.
+Write ISIALA's NPV at 0.7 and 1.3 for Oil Price and for OPEX. Then explain why the Production row is narrower than the Oil Price row, and name the two things each of those two rows scales.

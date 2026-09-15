@@ -22,7 +22,7 @@ The published 10 year base case is built year by year instead of through the qui
 
 ## The mistake
 
-The careful mistake is to trust a payback on a split. OKPOMA earns enough in 2027 to cover the first 130.0000, so its cumulative after year 1 is 9.2498. The second 130.0000 in 2028 takes the cumulative to -2.2287. The engine reads payback where the cumulative is first non-negative, at index 0, and reports a payback of 0.0000 years. That payback is never revisited, although the project was under water after its second year.
+The careful mistake is to trust a payback on a split without its status. OKPOMA earns enough in 2027 to cover the first 130.0000, so its cumulative after year 1 is 9.2498. The second 130.0000 in 2028 takes the cumulative to -2.2287. Payback is the FIRST crossing, at index 0, so it reports 0.0000 years, and it carries paybackStatus recrossed with paybackLast 2.0385, the point where the cumulative turns non-negative for good. Before the 2026-09-15 repair the same 0.0000 came with no status, and the second dip left no trace in the metrics.
 
 The second mistake is to compare breakevens across engines as if capex were timed the same way. The Probabilistic Breakeven Analyzer places all capex in year 1 and expenses it there. Its year 1 tax kink, the price at which that year's taxable income crosses zero, is 160.9994 USD per bbl because the whole capex sits in one year. The quick form never builds a year like that.
 
