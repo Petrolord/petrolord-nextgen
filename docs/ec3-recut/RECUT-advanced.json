@@ -43,13 +43,49 @@
    "bank": "ec3a_exam.json",
    "module_key": "exam",
    "ord": 35,
-   "why": "Sits at 0.48 prompt Jaccard against ec3a_m06 ord 7, both on right numbers under the wrong words. Pre-existing live stems with different keyed answers, left as live."
+   "why": "Sits at 0.48 prompt Jaccard against ec3a_m06 ord 7, both on right numbers under the wrong words. CORRECTED BY THE INDEPENDENT AUDIT 2026-09-15: the earlier note here said the two key on different answers, and they do not. Both key the same three item list (keyed-text Jaccard 0.76), so a learner who has done m06 answers this exam item without reading it. Both stems and both keys are pre-existing live text that this recut did not author or change, so the pair is left as live rather than widening the diff over text the engines repair does not touch. Flagged for the next content wave."
   },
   {
    "bank": "ec3a_exam.json",
    "module_key": "exam",
    "ord": 15,
    "why": "Its explanation contains the phrase 'The floor applies to the index, not to the answer'. That is pre-existing live wording which the committed recut lesson m03/l02 repeats verbatim, so it was left rather than widen the diff over house phrasing."
+  },
+  {
+   "bank": "ec3a_exam.json",
+   "module_key": "exam",
+   "ord": 18,
+   "why": "Pre-existing pair with ec3a_m05 ord 13 and ec3a_m03 ord 13 on the iteration count sequence; keyed-text Jaccard 0.70 against m03 ord 13, identical on the live rows. Live text this recut did not change, left as live; found by the audit's keyed-answer sweep, which the recut's prompt-only sweep could not see."
+  },
+  {
+   "bank": "ec3a_exam.json",
+   "module_key": "exam",
+   "ord": 5,
+   "why": "Pre-existing pair with ec3a_m01 ord 8 on what the emv is; keyed-text Jaccard 0.64, and 0.67 on the live rows. Only the moved values changed here, so the pair is left as live."
+  },
+  {
+   "bank": "ec3a_exam.json",
+   "module_key": "exam",
+   "ord": 31,
+   "why": "Pre-existing pair with ec3a_m05 ord 11 on two breakevens for one field; keyed-text Jaccard 0.62, identical on the live rows. Left as live."
+  },
+  {
+   "bank": "ec3a_exam.json",
+   "module_key": "exam",
+   "ord": 21,
+   "why": "Pre-existing pair with ec3a_m04 ord 2 on why the published engine threw at zero ranges; keyed-text Jaccard 0.53 and prompt Jaccard 0.44, identical on the live rows. Both are history questions about the retired engine, neither touched by this recut. Left as live."
+  },
+  {
+   "bank": "ec3a_exam.json",
+   "module_key": "exam",
+   "ord": 27,
+   "why": "Pairs with ec3a_m05 ord 1 on NTEJE's IRR; keyed-text Jaccard rose from 0.33 to 0.52 because both keys were rebuilt onto the engine's own no-root sentence. The two questions still differ, one asking what the engine reports and one asking what the status claims, and the shared words are the engine's sentence, so it is left. Recorded so the convergence is on the record."
+  },
+  {
+   "bank": "ec3a_exam.json",
+   "module_key": "exam",
+   "ord": 23,
+   "why": "Pairs with ec3a_m04 ord 9 on a null tornado high side; keyed-text Jaccard 0.42, 0.44 on the live rows. Different framings of one repaired behaviour, left as live."
   }
  ],
  "decisions": [
@@ -58,7 +94,10 @@
   "Length-rank gate failures were fixed only by lengthening distractors, naming the mechanism each wrongly invokes. No correct option was edited to satisfy a gate.",
   "Retired numbers appear only where a question is explicitly about what changed, and are marked as history in the same sentence, sourced from the digest History lines and Section 18.",
   "Exam ords 6, 15, 25 and 28 were re-angled a second time to clear a near-duplicate against a module-bank stem. bankkit measures prompt Jaccard WITHIN a bank only, so an exam stem repeating a module stem passes every gate. This tier was swept for it explicitly; three pre-existing pairs below the 0.50 threshold were left as live and are listed in reviewed_no_change.",
-  "Three 'X, not Y' contrastives introduced by this recut were reworded. Pre-existing live contrastives in unflagged questions were left alone."
+  "Three 'X, not Y' contrastives introduced by this recut were reworded. Pre-existing live contrastives in unflagged questions were left alone.",
+  "INDEPENDENT AUDIT 2026-09-15 (second reader, not the recut writer). All 132 Expert questions were re-read against digest.txt: every keyed answer traced to a digest line, every option swept for a retired rule asserted as current, and the retired figures swept for by literal. No mis-keyed question and no question with two defensible answers was found beyond the two duplications below. Leakage 0, promptleak 0, numsweep 0 unresolved, bankkit green on all seven banks, answer-length ranks 30/44/28/30 over the tier with the key longest in 30 of 132 and shortest in 30 of 132.",
+  "The audit re-ran the exam-against-module comparison itself, on KEYED ANSWERS as well as stems, and against the live rows so that a pre-existing pair could be told from one this recut created. Two duplications were created by the recut and are fixed here: exam ord 8 against ec3a_m02 ord 6 (keyed-text Jaccard 0.39 live, 0.83 after the recut) and ec3a_m05 ord 15 against ec3a_m02 ord 3 (0.14 live, 0.82 after the recut, word for word). Both fixes hold the ord, the answer index and the option count. Seven pre-existing pairs are listed in reviewed_no_change and left as live.",
+  "The manifest was verified independently rather than trusted: the live SQL was re-parsed to 132 rows, every OLD string matched the live row character for character, every NEW string matched the regenerated bank JSON, the 89 entries are exactly the set of questions that differ from live, no answer index moves, and every keyed_answer_changed flag is correct."
  ],
  "questions": [
   {
@@ -1715,7 +1754,7 @@
    "beyond_recut_list": false,
    "rebuilt_for_retired_rule": true,
    "gate_tuning_only": false,
-   "what_changed": "Rebuilt. The mechanism moved from per-year independence to independence between the three factors, and iterations now do lose money, reaching -46.1564.",
+   "what_changed": "Rebuilt. The mechanism moved from per-year independence to independence between the three factors, and iterations now do lose money, reaching -46.1564. Keyed answer restated by the independent Expert audit. The recut's rebuild made this key word-for-word ec3a_m02 ord 3's key (keyed-text Jaccard 0.82, against 0.14 on the live rows). The assertion is unchanged, in this module's own terms: the corner needs every input bad at once, the three factors are unrelated draws, and fixed opex is never sampled. Same ord, same answer index.",
    "fields": {
     "prompt": {
      "old": "ISIALA's Scenario Builder sample has a Low case P90 of 48.7439 million USD and a lowest NPV of 16.3054, while the Low scenario loses 72.1531. Why does no iteration come near the Low scenario?",
@@ -1735,7 +1774,7 @@
     },
     "option_2": {
      "old": "Each value is drawn independently per year per array, so a whole life of low prices almost never occurs, and price, reserves and capex never move against the project together.",
-     "new": "Its three factors are drawn independently of one another, so they seldom land near their bad ends together, and fixed opex is never drawn.",
+     "new": "A corner needs every input bad at once, and nothing in the sampler makes one: its three factors are unrelated draws, and fixed opex is not among them.",
      "was_answer": true,
      "is_answer_now": true
     },
@@ -1749,7 +1788,8 @@
      "old": "The Scenario Builder never samples opex, royalty or tax whatever ranges are typed, and the lowest draw of 16.3054 already sits far below a fifth off the base; independence narrows the spread.",
      "new": "One factor does carry a whole life, which is why iterations lose money and the lowest reaches -46.1564. The scenario moves price, production and variable opex to 0.8 and capex and fixed opex to 1.2 in one move, and the sampler never touches fixed opex."
     }
-   }
+   },
+   "audited_2026_09_15": true
   },
   {
    "bank": "ec3a_m06.json",
@@ -2233,35 +2273,42 @@
    "beyond_recut_list": true,
    "rebuilt_for_retired_rule": true,
    "gate_tuning_only": false,
-   "what_changed": "Rebuilt, BEYOND RECUT.md, keyed answer moved. The keyed answer had become false: reserves now scales variable opex with the barrels.",
+   "what_changed": "Rebuilt, BEYOND RECUT.md, keyed answer moved. The keyed answer had become false: reserves now scales variable opex with the barrels. Re-angled by the independent Expert audit. The recut's rebuild left this exam item asking the same question as ec3a_m02 ord 6 with a near-identical keyed answer (keyed-text Jaccard 0.83, against 0.39 on the live rows), so the exam slot tested nothing the module bank had not. It now asks which of 2027's two opex columns the reserves factor moves, keyed on the variable column alone at 20.8780 against the fixed 2.5000 that never moves. Same ord, same answer index, same option count.",
    "fields": {
     "prompt": {
      "old": "Suppose one iteration draws ISIALA's first production year at the bottom of the reserves range, 0.8 of base. How much does that year's variable cost column hold?",
-     "new": "Suppose one iteration draws ISIALA's reserves factor at the bottom of its range, 0.8 of base. How much does 2027's variable cost column hold?"
+     "new": "One ISIALA iteration draws its reserves factor at 0.8 of base. Of 2027's two opex columns, which one moves with that factor?"
     },
     "option_0": {
      "old": "About 0.8 times 20.8780 million USD, because the reserves range scales the volume and variable opex is that volume times 13 USD per bbl.",
-     "new": "20.8780 million USD, the base-volume money, because variable opex was fixed when the quick inputs were expanded and is never sampled.",
+     "new": "Both of them, because the one factor drawn for an iteration is applied to every cost column the case holds before the ledger is rebuilt.",
      "was_answer": false,
      "is_answer_now": false
     },
     "option_1": {
      "old": "20.8780 million USD, the base-volume money, because variable opex was fixed when the quick inputs were expanded and is never sampled.",
-     "new": "About 0.8 times 20.8780 million USD, because the reserves factor scales variable opex along with the barrels.",
+     "new": "The variable column alone, from 20.8780 million USD toward four fifths of it, while the fixed 2.5000 million USD a year stands where the case put it.",
      "was_answer": true,
      "is_answer_now": true
     },
     "option_2": {
      "old": "A fresh uniform draw around 20.8780 million USD, taken right after the capex draw of the same iteration.",
-     "new": "A fresh uniform draw around 20.8780 million USD, taken right after the capex factor of the same iteration.",
+     "new": "Neither of them, because both opex columns were written out when the quick inputs were expanded and the sampler reads them as fixed arrays from then on.",
+     "was_answer": false,
+     "is_answer_now": false
+    },
+    "option_3": {
+     "old": "Nothing for that year, because the sampler removes opex from any year whose drawn volume falls below its base value.",
+     "new": "The fixed column alone, since each barrel still costs the same 13 USD per bbl to lift however few of them are drawn, so only the standing charge can give way.",
      "was_answer": false,
      "is_answer_now": false
     },
     "explanation": {
      "old": "Opex, royalty, tax and the discount rate keep their case values in every iteration (EC3-7), so a low volume draw saves no variable opex.",
-     "new": "Variable opex is volume times 13 USD per bbl, so an iteration that lifts a fifth fewer barrels pays a fifth less to lift them. Fixed opex, royalty and tax keep their case values in every iteration (EC3-7)."
+     "new": "The reserves factor scales oil volume, gas volume and the variable opex those volumes carry, so a fifth fewer barrels costs a fifth less to lift. Fixed opex, royalty and tax are never sampled at any setting (EC3-7)."
     }
-   }
+   },
+   "audited_2026_09_15": true
   },
   {
    "bank": "ec3a_exam.json",
