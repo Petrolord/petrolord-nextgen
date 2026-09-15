@@ -26,14 +26,14 @@ Even inside the analyzer, "the breakeven" is not one number:
 
 | quantity | USD per bbl |
 | --- | --- |
-| base case at the stated medians | 71.6277 |
+| base case at the beliefs' medians | 71.6277 |
 | 10th percentile of breakeven price | 62.1713 |
 | median of breakeven price | 73.3297 |
 | mean | 73.6242 |
 | 90th percentile of breakeven price | 85.5912 |
 | breakeven to NPV 100 million USD | 96.5968 |
 
-The base case is one solve at the stated medians. The median is the middle of 5000 solves at seed 20260829, and it sits above the base. The breakeven to 100 million USD answers a different target altogether.
+The base case is one solve at the beliefs' medians. The median is the middle of 5000 solves at seed 20260829, and it sits above the base. The breakeven to 100 million USD answers a different target altogether.
 
 ## A third engine
 

@@ -28,7 +28,7 @@ It is the Monte Carlo's negative control. A sampler handed no uncertainty must g
 
 ## What it refuses
 
-A zero run is not a field without uncertainty. The Scenario Builder never samples opex, royalty or tax at any setting, so zero on the three ranges it does sample only means its own knobs are still. The decline, both halves of opex and the 20 year quick life sit exactly where they were typed whatever the ranges say.
+A zero run is not a field without uncertainty. The Scenario Builder never samples fixed opex, royalty or tax at any setting, so zero on the three ranges it does sample only means its own knobs are still. The decline, both halves of opex and the 20 year quick life sit exactly where they were typed whatever the ranges say.
 
 ## The mistake
 

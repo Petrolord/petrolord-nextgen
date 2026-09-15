@@ -12,8 +12,8 @@ A seed makes a Monte Carlo sample repeat exactly. That is the whole of its promi
 
 | seed | Best case P50, million USD |
 | --- | --- |
-| 20260829 | 81.1835 |
-| 43 | 79.0624 |
+| 20260829 | 78.5315 |
+| 43 | 80.2233 |
 
 Both runs use the same field, 1000 iterations and the same plus or minus 20 percent ranges. Neither median is more correct than the other. Each is one sample of 1000, and the gap between them shows how much a single seed hides.
 
@@ -21,7 +21,7 @@ Both runs use the same field, 1000 iterations and the same plus or minus 20 perc
 
 The seed fixes the stream of draws. It does not fix which value each draw goes to. A falsy range consumes no draw. In the published case mc_seed3_price_only, reserves and capex are falsy, so the price draws take positions the volume draws would otherwise have used. Switch one range from zero to nonzero at the same seed, and the later draws land on different values.
 
-The same holds across engines. The breakeven engine at the same seed takes three draws per iteration, in the order capex, opex, efficiency, through a triangular inverse CDF. Its first draw is 0.936239, as in the Scenario Builder, but there it becomes a capex of 226.5205 million USD, not a 2027 oil volume. Samples from the two apps at one seed have nothing to do with each other.
+The same holds across engines. The breakeven engine at the same seed draws in the order capex, opex, efficiency, through a triangular inverse CDF, where the Scenario Builder draws reserves, price, capex through a uniform range. Its first draw is 0.936239, as in the Scenario Builder, but there it becomes a capex of 226.5205 million USD, where in the Scenario Builder it is the factor that scales every year's volume. Samples from the two apps at one seed have nothing to do with each other.
 
 ## Reproducible is not accurate
 
@@ -29,7 +29,7 @@ The Breakeven Analyzer shows how far a sample moves with its seed. At 5000 itera
 
 ## The mistake
 
-The careful mistake is seed shopping without meaning to. An analyst runs ISIALA and sees a Best case P50 of 79.0624 at seed 43. They try the default seed and report 81.1835 because it is closer to the deterministic 81.0464. Both results are reproducible, and the choice between them puts a thumb on the scale. Fix the seed before the first run and record it beside every number. Treat the difference between seeds as part of the uncertainty. Do not tune it away as though it were an error.
+The careful mistake is seed shopping without meaning to. An analyst runs ISIALA at the default seed, sees a Best case P50 of 78.5315, tries seed 43 and gets 80.2233, which sits closer to the deterministic 81.0464. Reporting the second because it looks tidier puts a thumb on the scale, and both results are reproducible. Fix the seed before the first run and record it beside every number. Treat the difference between seeds as part of the uncertainty. Do not tune it away as though it were an error.
 
 ## What it refuses
 

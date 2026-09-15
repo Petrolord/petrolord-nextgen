@@ -18,11 +18,11 @@ Here is ISIALA through the Scenario Builder's Monte Carlo at the app's own setti
 
 | case | P-label | engine key | NPV, million USD |
 | --- | --- | --- | --- |
-| Low case | P90 | `p10` | 48.7439 |
-| Best case | P50 | `p50` | 81.1835 |
-| High case | P10 | `p90` | 109.8980 |
+| Low case | P90 | `p10` | 15.6063 |
+| Best case | P50 | `p50` | 78.5315 |
+| High case | P10 | `p90` | 152.0653 |
 
-Read the Low case row the way the definition says: 90 percent of the sampled NPVs meet or exceed 48.7439 million USD. Read the High case row the same way: only 10 percent meet or exceed 109.8980 million USD.
+Read the Low case row the way the definition says: 90 percent of the sampled NPVs meet or exceed 15.6063 million USD. Read the High case row the same way: only 10 percent meet or exceed 152.0653 million USD.
 
 ## Why the keys and the labels disagree
 
@@ -30,15 +30,15 @@ The engine returns `p10`, `p50` and `p90` as plain percentiles of the sorted NPV
 
 ## Why only outcomes
 
-Exceedance is clear only when more is better. Meeting or exceeding 48.7439 million USD is good news, so P90 is the cautious number. On a quantity where more is worse, the same sentence flips. The breakeven price that 90 percent of iterations meet or exceed is a low, comfortable price. The convention's answer is to refuse the label there. ISIALA's breakeven price is quoted as 10th percentile of breakeven price 62.1713, median 73.3297 and 90th percentile of breakeven price 85.5912, all in USD per bbl.
+Exceedance is clear only when more is better. Meeting or exceeding 15.6063 million USD is good news, so P90 is the cautious number. On a quantity where more is worse, the same sentence flips. The breakeven price that 90 percent of iterations meet or exceed is a low, comfortable price. The convention's answer is to refuse the label there. ISIALA's breakeven price is quoted as 10th percentile of breakeven price 62.1713, median 73.3297 and 90th percentile of breakeven price 85.5912, all in USD per bbl.
 
 ## The mistake
 
-The careful mistake is reading P90 as "the 90th percentile". It is the habit arithmetic teaches, and it lands on the wrong row. A reader who does this quotes 109.8980 as the P90 and calls the High case cautious. The check is the order. Under the exceedance meaning, P90 is at or below P50 and P50 is at or below P10. ISIALA's three numbers pass, and the swapped reading fails.
+The careful mistake is reading P90 as "the 90th percentile". It is the habit arithmetic teaches, and it lands on the wrong row. A reader who does this quotes 152.0653 as the P90 and calls the High case cautious. The check is the order. Under the exceedance meaning, P90 is at or below P50 and P50 is at or below P10. ISIALA's three numbers pass, and the swapped reading fails.
 
 ## What the label refuses
 
-A P90 describes the sample the model drew and nothing more. The Scenario Builder never samples opex, royalty or tax. It draws every year and every variable independently. The 90 percent in the sentence is therefore 90 percent of a model with no correlation between its uncertainties. The label does not make 48.7439 a floor either: the lowest of the 1000 NPVs is 16.3054.
+A P90 describes the sample the model drew and nothing more. The Scenario Builder never samples fixed opex, royalty or tax. It draws one factor for each of its three variables in each iteration, and the three are drawn independently of one another. The 90 percent in the sentence is therefore 90 percent of a model with no correlation between its uncertainties. The label does not make 15.6063 a floor either: the lowest of the 1000 NPVs is -46.1564.
 
 ## Exercise
 
