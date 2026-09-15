@@ -1,0 +1,305 @@
+{
+  "app_slug": "fdp",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-schedule-as-a-network",
+      "title": "The Schedule as a Network",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-activities-and-what-comes-first",
+          "title": "Activities, and what comes first",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-forward-pass",
+          "title": "The forward pass",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-backward-pass-and-float",
+          "title": "The backward pass, and float",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-critical-path",
+          "title": "The critical path",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-network-that-cannot-be-read",
+          "title": "A network that cannot be read",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-dates-that-do-not-move",
+      "title": "Dates That Do Not Move",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-date-is-not-a-timestamp",
+          "title": "A date is not a timestamp",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-counting-days",
+          "title": "Counting days",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-window-and-the-work",
+          "title": "The window and the work",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-no-clock-in-the-answer",
+          "title": "No clock in the answer",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-wells-and-rig-days",
+      "title": "Wells and Rig Days",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-depth-and-trajectory",
+          "title": "Depth and trajectory",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-a-rig-day-costs",
+          "title": "What a rig day costs",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-campaign-on-two-rigs",
+          "title": "A campaign on two rigs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-rate-is-not-a-detail",
+          "title": "The rate is not a detail",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-facilities-sized-and-priced",
+      "title": "Facilities, Sized and Priced",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-nameplate-and-what-follows",
+          "title": "Nameplate, and what follows",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-size-to-the-power-of",
+          "title": "Size to the power of",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-decommissioning-scales-too",
+          "title": "Decommissioning scales too",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-utilisation-against-the-plan",
+          "title": "Utilisation against the plan",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-flow-assurance-on-a-blank-field",
+          "title": "Flow assurance on a blank field",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-one-risk-scale",
+      "title": "One Risk Scale",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-probability-times-impact",
+          "title": "Probability times impact",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-four-bands-one-register",
+          "title": "Four bands, one register",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-risk-nobody-scored",
+          "title": "A risk nobody scored",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-exposure-is-not-the-worst-case",
+          "title": "Exposure is not the worst case",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-health-and-what-it-counts",
+          "title": "Health, and what it counts",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-schedule-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

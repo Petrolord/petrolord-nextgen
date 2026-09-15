@@ -1,0 +1,303 @@
+{
+  "app_slug": "fdp",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-plan-holds",
+      "title": "What a Plan Holds",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-one-field-one-plan",
+          "title": "One field, one plan",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-this-studio-does-not-do",
+          "title": "What this studio does not do",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-screening-tier",
+          "title": "The screening tier",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-it-refuses-to-guess",
+          "title": "What it refuses to guess",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-reserves-per-fluid",
+      "title": "Reserves, One Total per Fluid",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-table-of-reservoirs",
+          "title": "A table of reservoirs",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-oil-is-not-gas",
+          "title": "Oil is not gas",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-sum-of-low-cases",
+          "title": "A sum of low cases",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-plan-s-own-p50",
+          "title": "The plan's own P50",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-volumetrics-behind-the-number",
+          "title": "Volumetrics behind the number",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-concepts-and-their-capex",
+      "title": "Concepts and Their Capex",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-three-capex-fields",
+          "title": "Three capex fields",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-lifecycle-cost",
+          "title": "Lifecycle cost",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-shape-a-concept-implies",
+          "title": "The shape a concept implies",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-dating-a-concept",
+          "title": "Dating a concept",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-what-a-scenario-is-worth",
+      "title": "What a Scenario Is Worth",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-price-is-an-input-not-a-fact",
+          "title": "Price is an input, not a fact",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-npv-after-royalty-and-tax",
+          "title": "NPV after royalty and tax",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-year-the-money-goes-out",
+          "title": "The year the money goes out",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-payback-and-what-it-hides",
+          "title": "Payback, and what it hides",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-two-concepts-one-price",
+          "title": "Two concepts, one price",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-plan-s-own-economics",
+      "title": "The Plan's Own Economics",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-cost-items-are-the-money",
+          "title": "Cost items are the money",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-capex-opex-and-the-line-left-out",
+          "title": "CAPEX, OPEX and the line left out",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-deck-that-does-not-cover-the-profile",
+          "title": "A deck that does not cover the profile",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-moves-the-answer",
+          "title": "What moves the answer",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-no-economics-yet",
+          "title": "No economics yet",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
