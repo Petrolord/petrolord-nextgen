@@ -149,39 +149,39 @@
    "answer_index": 1,
    "answer_index_changed": false,
    "keyed_answer_changed": true,
-   "what_changed": "Rebuilt. A project that never recovers reports payback null with paybackStatus not-recovered. New stem, keyed answer, two distractors and explanation; the retired payback of 20.0000 appears only as marked history.",
+   "what_changed": "Rebuilt. A project that never recovers reports payback null with paybackStatus not-recovered. The exam version is reframed across modules, ranking all three scenarios by recovery so it does not restate the m04 question, and the retired payback of 20.0000 appears only as marked history.",
    "fields": {
     "prompt": {
      "old": "ISIALA's Low scenario reports a payback of 20.0000 years. What does that number say?",
-     "new": "ISIALA's Low scenario reports payback null with paybackStatus not-recovered. What does that pair say?"
+     "new": "A board pack ranks ISIALA's three scenarios by speed of recovery: High at 0.0000 years, Base at 3.2746 and Low left blank. What has the ranking missed?"
     },
     "option_0": {
      "old": "Low pays back in its final year, 2046, so it is slow but recovers its 216.0000 of capex.",
-     "new": "Low pays back in its final year, 2046, recovering its 216.0000 of capex just in time.",
+     "new": "Nothing: High, Base, Low is exactly the order the three paybacks give, and a blank is simply the slowest entry of the three.",
      "was_answer": false,
      "is_answer_now": false
     },
     "option_1": {
      "old": "Never: a payback equal to the project life is the engine's way of saying the cumulative never recovers.",
-     "new": "The cumulative never turned non-negative inside the twenty year life, so there is no crossing to report.",
+     "new": "Three situations wearing two numbers and a blank: High was never under water, Base crosses inside 2030, and Low never recovers at all.",
      "was_answer": true,
      "is_answer_now": true
     },
     "option_2": {
      "old": "Low pays back after twenty years discounted at 12 percent, which the scenario reports in place of the undiscounted figure.",
-     "new": "Payback could not be struck at all, because the engine reads it from the discounted column and Low's NPV of -57.8151 leaves that column below zero throughout.",
+     "new": "That payback is struck on discounted cash, so the three figures cannot be compared until each is restated at its own scenario's discount rate.",
      "was_answer": false,
      "is_answer_now": false
     },
     "option_3": {
      "old": "Low recovers within the life, and 20.0000 is the fixed life written over the true crossing because the quick form caps payback.",
-     "new": "Low recovers inside the life, and the null stands in for a crossing that lands past the four decimals the engine prints for a payback.",
+     "new": "That Low recovers in 2046, its final year, so the blank belongs beside Base rather than at the end of the ranking.",
      "was_answer": false,
      "is_answer_now": false
     },
     "explanation": {
      "old": "payback_never reports 5.0000 on a five period life the same way, and a value equal to the life cannot tell a recovery at the very end from none; Low's NPV is -72.1531.",
-     "new": "payback_never reports the same pair on a five period life. Before the 2026-09-15 repair a project that never recovered printed the project life instead, 20.0000 on Low and 5.0000 on payback_never, which reads like a recovery in the final year."
+     "new": "High carries paybackStatus no-investment, Base carries ok and Low carries not-recovered. Before the 2026-09-15 repair Low printed its project life, 20.0000, which reads like a recovery in the final year."
     }
    }
   },
@@ -637,11 +637,11 @@
    "answer_index": 1,
    "answer_index_changed": false,
    "keyed_answer_changed": true,
-   "what_changed": "Rebuilt keyed answer. The derivative-guard disagreement is repaired, so the scaled case returns 21.0000 percent with irrStatus ok; the 10 percent starting guess is a distractor and is marked history.",
+   "what_changed": "Rebuilt keyed answer. The derivative-guard disagreement is repaired, so the case returns 21.0000 percent with irrStatus ok; the 10 percent starting guess is a distractor and is marked history. The stem now comes at it through the oracle's disagreement record rather than restating the m04 question.",
    "fields": {
     "prompt": {
      "old": "Scale irr_known_21pct's net cash flows of -100 and +121 down to order 1e-7 million USD. The root is still 21 percent, yet the engine's IRR moves from 21.0000 to 10.0000. What happened?",
-     "new": "Scale irr_known_21pct's net cash flows of -100 and +121 down to order 1e-7 million USD. What does the engine report for them?"
+     "new": "FINDINGS-fiscal.md recorded a disagreement with the oracle on a ledger whose cash flows are of order 1e-7 million USD. What does the repaired engine report there?"
     },
     "option_0": {
      "old": "Flows that small round to zero at four decimals, so the ledger shows no sign change and the solver returns its fixed rate.",
