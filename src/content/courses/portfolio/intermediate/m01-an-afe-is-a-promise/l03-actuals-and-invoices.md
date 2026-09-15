@@ -39,7 +39,7 @@ Enter a new invoice and forget the line, and the S-curve moves while CPI, percen
 
 ## What it refuses
 
-The engine does not reconcile invoices against actuals, and it does not attribute an invoice to a line. It also does not refuse an invoice with no date. As published, an invoice with a null date is counted from 1970, so it appears in every bucket of the curve from the first; the finding is recorded and has not been repaired. A null date is therefore not ignored. It is placed at the start of every curve, while an invoice with no date field at all is dropped without a flag.
+The engine does not reconcile invoices against actuals, and it does not attribute an invoice to a line. It still does not refuse an invoice with no date, but it no longer guesses one. An invoice the engine cannot date, whether its date is null or the field is missing, is kept off the S-curve altogether, and the count of undated invoices is reported beside the curve. In the published undated case neither invoice can be dated, so the curve holds neither and the count reads 2.
 
 ## The mistake
 
@@ -47,4 +47,4 @@ The mistake is to treat one agreement as proof of the other record. A reviewer w
 
 ## Exercise
 
-Add OFON-1's four invoices and show that they equal the line actuals of 15090000. Then say which readings would move and which would stay put if a fifth invoice were entered without any line's actual being changed, and explain what an invoice with a null date does to the S-curve.
+Add OFON-1's four invoices and show that they equal the line actuals of 15090000. Then say which readings would move and which would stay put if a fifth invoice were entered without any line's actual being changed, and what the engine now does with an invoice it cannot date, and what it reports beside the curve.

@@ -1,0 +1,309 @@
+{
+  "app_slug": "fdp",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-rate-of-return",
+      "title": "The Rate of Return",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-rate-that-zeroes-the-value",
+          "title": "The rate that zeroes the value",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-reading-it-beside-the-npv",
+          "title": "Reading it beside the NPV",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-negative-rate-is-an-answer",
+          "title": "A negative rate is an answer",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-payback-and-the-honest-null",
+          "title": "Payback, and the honest null",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-hurdle-hides",
+          "title": "What the hurdle hides",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-when-there-is-no-rate",
+      "title": "When There Is No Rate",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-no-change-of-sign",
+          "title": "No change of sign",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-above-the-band",
+          "title": "Above the band",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-more-than-one-root",
+          "title": "More than one root",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-clamp-is-not-an-answer",
+          "title": "A clamp is not an answer",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-what-a-sensitivity-says",
+      "title": "What a Sensitivity Says",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-one-driver-at-a-time",
+          "title": "One driver at a time",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-price-against-volume",
+          "title": "Price against volume",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-bar-that-runs-backwards",
+          "title": "The bar that runs backwards",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-tornado-is-not",
+          "title": "What a tornado is not",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-earned-value-to-a-date",
+      "title": "Earned Value to a Date",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-three-numbers-and-two-indexes",
+          "title": "Three numbers and two indexes",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-planned-value-is-time-phased",
+          "title": "Planned value is time-phased",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-ratio-that-is-not-an-index",
+          "title": "The ratio that is not an index",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-an-index-above-one",
+          "title": "An index above one",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-as-of-date",
+          "title": "The as-of date",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-what-earned-value-refuses",
+      "title": "What Earned Value Refuses",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-cost-it-cannot-read",
+          "title": "A cost it cannot read",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-task-nobody-dated",
+          "title": "A task nobody dated",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-project-with-no-costs",
+          "title": "A project with no costs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-progress-outside-the-range",
+          "title": "Progress outside the range",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-null-is-not-zero",
+          "title": "Null is not zero",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-reading-a-plan-against-itself",
+      "title": "Reading a Plan Against Itself",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-three-estimates-of-one-cost",
+          "title": "Three estimates of one cost",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-calendar-and-the-logic",
+          "title": "The calendar and the logic",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-question-in-the-difference",
+          "title": "The question in the difference",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "ec-value-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

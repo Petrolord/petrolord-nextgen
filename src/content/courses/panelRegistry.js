@@ -170,6 +170,11 @@ export const PANELS = {
   'ec-capital-explorer': React.lazy(() => import('@/components/course/panels/portfolio/CapitalExplorer')),
   'ec-cost-explorer': React.lazy(() => import('@/components/course/panels/portfolio/CostExplorer')),
   'ec-governance-explorer': React.lazy(() => import('@/components/course/panels/portfolio/GovernanceExplorer')),
+
+  // EC6 Field Development Planning
+  'ec-plan-explorer': React.lazy(() => import('@/components/course/panels/fdp/PlanExplorer')),
+  'ec-schedule-explorer': React.lazy(() => import('@/components/course/panels/fdp/ScheduleExplorer')),
+  'ec-value-explorer': React.lazy(() => import('@/components/course/panels/fdp/ValueExplorer')),
 };
 
 export function resolvePanel(id) {

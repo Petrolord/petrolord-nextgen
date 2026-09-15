@@ -35,7 +35,7 @@ On a live AFE they need not. A cost line's actual can carry an accrual for work 
 
 ## An invoice with no date
 
-One published case bills two invoices over a past window: an amount of 100 with no date field at all, and an amount of 200 whose date is null. The first point's Actual is 200 and the last point's Actual is 200. A null date is read as a day in 1970, so that amount counts in every bucket from the first. The missing date never counts, so that amount never appears. The engine as published refuses neither, and flags neither.
+One published case bills two invoices over a past window: an amount of 100 with no date field at all, and an amount of 200 whose date is null. Neither carries a date the engine can read, so neither reaches the curve. The first point's Actual is 0, the last point's Actual is 0, and the engine reports 2 undated invoices beside the curve. It refuses neither invoice. It declines to place either, and says how many it could not place.
 
 ## What the line refuses
 
@@ -43,8 +43,8 @@ The Actual line has no commitments in it, no accruals and no line detail. It can
 
 ## The mistake
 
-The mistake is assuming that the curve's last Actual is the dashboard's actuals. On OFON-1 both read 15090000, which teaches the wrong habit. The check belongs in every reading: compare the line total with the last Actual at or before the as-of date, and treat any difference as a question about accruals, billing or a missing date. The second form is trusting a curve that starts above zero, which on the published case is an undated invoice pulled back to 1970.
+The mistake is assuming that the curve's last Actual is the dashboard's actuals. On OFON-1 both read 15090000, which teaches the wrong habit. The check belongs in every reading: compare the line total with the last Actual at or before the as-of date, and treat any difference as a question about accruals, billing or a missing date. The second form is trusting a curve that reconciles with nothing, which on the published case reads 0 at every point while 2 undated invoices sit outside it.
 
 ## Exercise
 
-Build OFON-1's cumulative invoices at Mar 27, May 27, Jul 27 and Aug 27 from the four invoice amounts. Then name the two places the engine reads actuals from, give one reason a live AFE could show different totals in them, and say what the published case's first-point Actual of 200 tells you about its invoice dates.
+Build OFON-1's cumulative invoices at Mar 27, May 27, Jul 27 and Aug 27 from the four invoice amounts. Then name the two places the engine reads actuals from, give one reason a live AFE could show different totals in them, and say what the published case's first-point Actual of 0, read beside its count of 2 undated invoices, tells you about its invoice dates.

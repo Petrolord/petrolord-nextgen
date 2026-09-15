@@ -289,7 +289,8 @@ const buildDigest = () => {
   w('# SECTION 15: Numbers to distrust (owned by Expert m05)');
   w();
   w(`CPI before any spend: OFON-1 with every actual set to 0 (progress unchanged) reports CPI ${r(s15.cpiBeforeSpend.cpi)} with earned value ${u(s15.cpiBeforeSpend.earnedValue)}: the engine returns 1 whenever actuals are 0.`);
-  w(`An invoice with no date: published "${s15.nullDated.name}" (invoices ${JSON.stringify(s15.nullDated.invoices)}) gives a first point Actual of ${s15.nullDated.firstActual}: the null-dated amount counts from 1970 in every bucket; the missing date never counts.`);
+  w(`An invoice with no date: published "${s15.nullDated.name}" (invoices ${JSON.stringify(s15.nullDated.invoices)}) gives a first point Actual of ${s15.nullDated.firstActual} and a last point Actual of ${s15.nullDated.lastActual}. Neither invoice carries a date the engine can read, so neither reaches the curve at all, and the engine reports ${s15.nullDated.undated} undated invoices beside it so the money is named rather than dropped in silence.`);
+  w(`# Commentary: this case used to read ${s15.nullDated.wasNull} at every point. An amount whose date was null was counted from 1970, which is before any window, so it landed in every bucket and the first point reported spending from before the work began. The figure was plausible, it reconciled with nothing, and no screen said a date was missing. It is the reason this section exists.`);
   const up = s15.underrunPicture;
   w(`An overrun drawn as an underrun: OFON-1's last Forecast point on the S-curve is ${u(up.lastForecast)}, below the budget of ${u(up.totalBudget)}, while the EAC is ${u(up.eac)} and the variance at completion ${u(up.variance)}.`);
   w(`A plan that never reaches the budget: OFON-1's last Planned point ${u(s15.shortPlan.lastPlanned)} is ${u(s15.shortPlan.shortDerived)} short of the budget (derived).`);

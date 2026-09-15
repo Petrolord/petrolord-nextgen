@@ -1,6 +1,6 @@
 # What was repaired and what was not
 
-EC5-0 repaired the portfolio and AFE engines and the Suite apps that call them. It left five engine findings and two app items as they were, and those are properties of the tools as published, to be read around on every answer.
+EC5-0 repaired the portfolio and AFE engines and the Suite apps that call them, and one more repair has landed since. Four engine findings and two app items are left as they were, and those are properties of the tools as published, to be read around on every answer.
 
 {{panel:ec-governance-explorer}}
 
@@ -22,13 +22,15 @@ The Suite repair removed the invented partners and integrations, added the AFE d
 
 The risk summary is the largest repair. Before EC5-0 it used a normal approximation. On the published single wildcat that approximation gave a loss probability of 0.365832 against an exact 0.700000, and a P90 of -150.5560, below the worst possible outcome of -50.0000. The simulation returns 0.696100 and a P90 of -50.0000. The approximation is now history, and the seed is shown with every answer.
 
+One repair landed after these modules were written. An invoice the engine cannot date no longer reaches the S-curve, and the count of undated invoices is reported beside it. The published undated case, which once read 200 at every point, now reads 0 throughout, with 2 undated invoices named.
+
 ## Left in the portfolio engine
 
 The grid undershoot (finding D4) is not flagged: gridUndershoot funds X + Y + Z at 660.0000 where the exact optimum is 860.0000. A free project is still charged one cell (finding D2). At a limit of 0.0000 a project with capex 0.0000 and EMV 10.0000 is not funded. At a limit of 100.0000 beside a project costing 100.0000 it is dropped, a gap of -10.0000, and only at 101.0000 does it fit. Both bite where rounding or a zero capex meets a tight limit, and neither says so on the result.
 
 ## Left in the AFE engine
 
-CPI reads 1.000000 whenever actuals are 0: OFON-1 with every actual set to 0 still earns 15231500 and reports CPI 1.000000, the number an AFE exactly on budget would show. An invoice with a null date counts from 1970 and so sits in every bucket: in the published case an invoice of 200 with a null date puts an Actual of 200 on the first point. The S-curve plan stops short: OFON-1's last Planned point is 24452483 against a budget of 27050000, 2597517 short.
+CPI reads 1.000000 whenever actuals are 0: OFON-1 with every actual set to 0 still earns 15231500 and reports CPI 1.000000, the number an AFE exactly on budget would show. The S-curve plan stops short: OFON-1's last Planned point is 24452483 against a budget of 27050000, 2597517 short.
 
 ## Left in the Suite app
 
@@ -36,8 +38,8 @@ The correlation slider stops at 0.9, while the engine accepts 1. OKONO's 600.000
 
 ## The mistake
 
-The mistake is hearing "repaired" as "trustworthy". The repairs make the engines state their conditions: a seed, a date, a rule, a flag. They remove none of the findings left, and a result can carry every repair and still hide D2, D4, a CPI of 1.000000 before spend, an invoice dated 1970 or a plan that ends short. The other mistake is working around a finding silently. Put it in the answer, for example: overLimit false, and D4 is not flagged on this grid.
+The mistake is hearing "repaired" as "trustworthy". The repairs make the engines state their conditions: a seed, a date, a rule, a flag. They remove none of the findings left, and a result can carry every repair and still hide D2, D4, a CPI of 1.000000 before spend or a plan that ends short. The other mistake is working around a finding silently. Put it in the answer, for example: overLimit false, and D4 is not flagged on this grid.
 
 ## Exercise
 
-List four repairs with the number or message each now returns. Then name the five engine findings left and the two app items, and give one published number that shows each engine finding.
+List four repairs with the number or message each now returns. Then name the four engine findings left and the two app items, and give one published number that shows each engine finding.

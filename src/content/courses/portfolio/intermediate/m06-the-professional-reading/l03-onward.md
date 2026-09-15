@@ -16,7 +16,7 @@ An AFE is billed by working interest. OFON-1's three partners hold 40.0000, 22.5
 
 ## Numbers to distrust
 
-CPI reads 1.000000 whenever actuals are 0, even beside OFON-1's earned value of 15231500. An invoice with a null date counts from 1970 in every bucket. OFON-1's plan stops 2597517 short of its budget. On OKONO's 450.0000 set the probability of loss reads 0.114000 at 1000 iterations and 0.123600 at 10000. A seed buys a reproducible number and iterations buy precision; neither buys a correct model of the projects.
+CPI reads 1.000000 whenever actuals are 0, even beside OFON-1's earned value of 15231500. An invoice the engine cannot date is kept off the S-curve and counted beside it, so the published undated case reads an Actual of 0 at its first point and its last, with 2 undated invoices named. OFON-1's plan stops 2597517 short of its budget. On OKONO's 450.0000 set the probability of loss reads 0.114000 at 1000 iterations and 0.123600 at 10000. A seed buys a reproducible number and iterations buy precision; neither buys a correct model of the projects.
 
 ## What to carry
 
