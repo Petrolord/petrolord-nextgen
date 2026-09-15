@@ -147,9 +147,10 @@ export const FitMode = ({ fit, inexact, onInexact, inexactRunning }) => {
       <Note>
         Read the old error row against the stated beliefs of {BELIEF.capex.join(', ')}. Used as endpoints, the
         beliefs declare that nothing lies below the first or above the last, and the quantiles read back pull in
-        toward the middle: the tails vanish and every downside case is understated. And no fit is bounded by physics:
-        the fitted efficiency here tops out at {fit.rows[2] ? four(fit.rows[2].max) : 'null'} percent, and a wider belief would carry it past 100
-        percent, or a cost below zero, without a word from the engine (EC3-8).
+        toward the middle: the tails vanish and every downside case is understated. A fit is now bounded by physics
+        (EC3-8): the fitted efficiency here tops out at {fit.rows[2] ? four(fit.rows[2].max) : 'null'} percent, and where a wider belief carries a
+        fitted tail past 100 percent the draws are held at the limit and counted in clippedDraws, while a stated
+        percentile below zero, or an efficiency above 100, is refused by name.
       </Note>
     </>
   );
@@ -201,7 +202,7 @@ export const SolveMode = ({ curve, hurdle, kinks, solves }) => {
   return (
     <>
       <TileGrid>
-        <Tile label={<PriceLabel>Breakeven price to NPV 0, at the stated medians</PriceLabel>} value={four(curve.baseBreakeven)} unit="USD/bbl" />
+        <Tile label={<PriceLabel>Breakeven price to NPV 0, at the beliefs&apos; medians</PriceLabel>} value={four(curve.baseBreakeven)} unit="USD/bbl" />
         {hurdle && hurdle.rows.map((x) => (
           <Tile key={x.targetNpv} label={<PriceLabel>{`Breakeven price to NPV ${x.targetNpv} million USD`}</PriceLabel>} value={four(x.price)} unit="USD/bbl" />
         ))}
@@ -209,6 +210,9 @@ export const SolveMode = ({ curve, hurdle, kinks, solves }) => {
       </TileGrid>
       <p className="text-xs text-slate-400 mt-2 mb-0">
         The base case: capex {curve.capexMM} million USD all in year 1, opex {curve.opexMM} million USD a year, efficiency {curve.efficiency}.
+        {curve.allStated
+          ? ' Every fit here is exact, so the base case runs at the stated medians (EC3-5).'
+          : ' At least one fit clamps, so the base case runs at that fitted triangle\'s own median (EC3-5).'}
       </p>
       <div className="h-56 mt-3">
         <ResponsiveContainer width="100%" height="100%">
@@ -260,8 +264,9 @@ export const DistributionMode = ({ run, torn, unreachable, published }) => {
           <Tile key={x.key} label={<PriceLabel>{x.label}</PriceLabel>} value={four(x.value)} unit="USD/bbl" />
         ))}
         <Tile label={<PriceLabel>Mean breakeven price</PriceLabel>} value={four(run.mean)} unit="USD/bbl" />
-        <Tile label={<PriceLabel>Base case breakeven price at the stated medians</PriceLabel>} value={four(run.baseBreakeven)} unit="USD/bbl" />
+        <Tile label={<PriceLabel>Base case breakeven price at the beliefs&apos; medians</PriceLabel>} value={four(run.baseBreakeven)} unit="USD/bbl" />
         <Tile label="Iterations excluded, never broke even" value={`${run.excluded} of ${run.iterations}`} />
+        <Tile label="Draws held at a physical limit (clippedDraws)" value={`${run.clippedDraws.capex} / ${run.clippedDraws.opex} / ${run.clippedDraws.efficiency}`} unit="capex / opex / efficiency" />
         <Tile label="Seed" value={String(run.seed)} />
         <Tile label="Mean minus median (derived)" value={four(run.meanMinusMedianDerived)} unit="USD/bbl" />
       </TileGrid>
@@ -270,6 +275,14 @@ export const DistributionMode = ({ run, torn, unreachable, published }) => {
         rows={run.percentiles.map((x) => [<PriceLabel key={x.key}>{x.label}</PriceLabel>, x.sortedIndexDerived, x.engineKey, four(x.value)])}
       />
       <p className="text-xs text-slate-500 mt-1 mb-0">The engine keys its percentiles p10, p50 and p90. They are plain percentiles of a price, named here only as keys.</p>
+      <Tbl
+        head={[<InputLabel key="v">belief</InputLabel>, 'tenth percentile the base case and the tornado use', 'median they use', 'ninetieth they use', 'stated or fitted']}
+        rows={Object.entries(run.beliefs).map(([k, b]) => [<InputLabel key={k}>{k}</InputLabel>, four(b.p10), four(b.p50), four(b.p90), b.source])}
+      />
+      <p className="text-xs text-slate-500 mt-1 mb-0">
+        EC3-5: the sample draws from the fitted triangle, so the base case and the tornado read that triangle&apos;s own
+        percentiles wherever a fit clamps, and the stated ones wherever it is exact.
+      </p>
       <div className="h-56 mt-3">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={run.sCurve} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
@@ -287,8 +300,14 @@ export const DistributionMode = ({ run, torn, unreachable, published }) => {
       </p>
       <p className="text-xs text-slate-300 mt-3 mb-0"><span className="text-slate-500">The engine&apos;s insight:</span> {run.insights}</p>
       <Tbl
-        head={['rank', 'variable', 'low side, from the base', <InputLabel key="l">low side comes from</InputLabel>, 'high side, from the base', <InputLabel key="h">high side comes from</InputLabel>, 'swing (derived)']}
-        rows={rows.map((x) => [x.rank, x.variable, four(x.low), <InputLabel key={`l${x.rank}`}>{sideLabel(x.variable, 'low')}</InputLabel>, four(x.high), <InputLabel key={`h${x.rank}`}>{sideLabel(x.variable, 'high')}</InputLabel>, four(x.swingDerived)])}
+        head={['rank', 'variable', 'low side, from the base', <InputLabel key="l">low side comes from</InputLabel>, 'high side, from the base', <InputLabel key="h">high side comes from</InputLabel>, 'swing (derived)', 'open end']}
+        rows={rows.map((x) => [x.rank, x.variable,
+          x.low === null ? 'no breakeven below the bracket' : four(x.low),
+          <InputLabel key={`l${x.rank}`}>{sideLabel(x.variable, 'low')}</InputLabel>,
+          x.high === null ? 'no breakeven below the bracket' : four(x.high),
+          <InputLabel key={`h${x.rank}`}>{sideLabel(x.variable, 'high')}</InputLabel>,
+          x.swingDerived === null ? 'none, one end is open' : four(x.swingDerived),
+          x.unreachable ? 'yes, sorts first' : 'no'])}
       />
       <div className="h-48 mt-3">
         <ResponsiveContainer width="100%" height="100%">
@@ -312,15 +331,26 @@ export const DistributionMode = ({ run, torn, unreachable, published }) => {
       )}
       {published && (
         <Tbl
-          head={['published run', 'seed', 'iterations', <PriceLabel key="a">10th percentile</PriceLabel>, <PriceLabel key="b">50th percentile</PriceLabel>, <PriceLabel key="c">90th percentile</PriceLabel>, 'mean', 'base', 'excluded']}
-          rows={published.runs.map((x) => [x.id, x.seed, x.iterations, four(x.p10), four(x.p50), four(x.p90), four(x.mean), four(x.baseBreakeven), x.excluded])}
+          head={['published run', 'seed', 'iterations', <PriceLabel key="a">10th percentile</PriceLabel>, <PriceLabel key="b">50th percentile</PriceLabel>, <PriceLabel key="c">90th percentile</PriceLabel>, 'mean', 'base', 'excluded', 'beliefs, capex / opex / efficiency', 'clippedDraws']}
+          rows={published.runs.map((x) => [x.id, x.seed, x.iterations, four(x.p10), four(x.p50), four(x.p90), four(x.mean), four(x.baseBreakeven), x.excluded,
+            `${x.beliefSources.capex} / ${x.beliefSources.opex} / ${x.beliefSources.efficiency}`,
+            `${x.clippedDraws.capex} / ${x.clippedDraws.opex} / ${x.clippedDraws.efficiency}`])}
+        />
+      )}
+      {published && published.refused && (
+        <Tbl
+          head={['belief the engine refuses (EC3-8)', 'the engine&apos;s own message']}
+          rows={published.refused.map((x) => [x.id, x.error])}
         />
       )}
       {published && <p className="text-xs text-slate-400 mt-2 mb-0">{published.allUnreachable.id}: the engine throws, &quot;{published.allUnreachable.error}&quot;</p>}
       <Note>
         A breakeven price is a quantity where more is worse, so it is read as three percentiles and never given a
         P-label. The mean sits above the median because the sample has a longer high tail. Efficiency runs backwards
-        in the tornado: its low-price end comes from the {sideLabel('Prod. Efficiency', 'low')}.
+        in the tornado: its low-price end comes from the {sideLabel('Prod. Efficiency', 'low')}. An end of a swing
+        with no breakeven below the {PRICE_BRACKET_TOP} USD/bbl bracket is left open rather than drawn at the base,
+        and an open bar sorts first (B1, fixed 2026-09-15), because a variable that can put the project out of reach
+        is the one that matters most.
       </Note>
     </>
   );
