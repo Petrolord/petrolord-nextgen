@@ -10,7 +10,7 @@
  "counts": {
   "questions_live": 132,
   "questions_changed": 89,
-  "keyed_answers_changed": 63,
+  "keyed_answers_changed": 64,
   "answer_indices_changed": 0,
   "questions_rebuilt_for_retired_rule": 58,
   "questions_value_migration_only": 29,
@@ -2146,23 +2146,35 @@
    "fields": {
     "prompt": {
      "old": "A board pack prints ISIALA's scenario Low of -72.1531 under a P90 heading. Why is that wrong?",
-     "new": "A board pack prints ISIALA's scenario Low of -57.8151 under a P90 heading. Why is that wrong?"
+     "new": "Three ISIALA figures are offered for a P90 heading: the scenario Low of -57.8151, the lowest sampled NPV of -46.1564, and 15.6063. Which belongs there?"
     },
     "option_0": {
      "old": "The scenario Low is one deterministic corner with every input bad in every year, while the P90 is a statistic of 1000 independent draws, 48.7439, and no iteration came near -72.1531.",
-     "new": "The scenario Low is one deterministic corner with every input at its bad end at once, while the P90 is a statistic of 1000 sampled cases, 15.6063, and no iteration reached -57.8151.",
+     "new": "15.6063, the Low case P90, the only one of the three that 90 percent of the sampled NPVs meet or exceed.",
      "was_answer": true,
      "is_answer_now": true
     },
+    "option_1": {
+     "old": "The number is right but belongs under P10, because the lowest case takes the lowest label on every quantity the Suite reports.",
+     "new": "The scenario Low of -57.8151, because a P90 heading takes the most cautious figure the screening tools produce for the field.",
+     "was_answer": false,
+     "is_answer_now": false
+    },
     "option_2": {
      "old": "The two are one quantity at different iteration counts, so -72.1531 is simply the P90 of a shorter run with fewer draws in it.",
-     "new": "The two are one quantity at different iteration counts, so -57.8151 is simply the P90 of a shorter run with fewer draws in it.",
+     "new": "The lowest sampled NPV of -46.1564, because a P90 is the floor of the sample and 90 percent of the draws must sit above it.",
+     "was_answer": false,
+     "is_answer_now": false
+    },
+    "option_3": {
+     "old": "The scenario Low applies a 30 percent move rather than 20 percent, so it is the P90 of a wider range the panel was not given.",
+     "new": "Any of the three, provided the heading also records the 1000 iterations and the seed 20260829 that produced the sample.",
      "was_answer": false,
      "is_answer_now": false
     },
     "explanation": {
      "old": "The lowest of the 1000 NPVs is 16.3054. The scenario moves price and production to 0.8 and capex and fixed opex to 1.2 at once in every year, which independent yearly draws almost never do.",
-     "new": "The lowest of the 1000 NPVs is -46.1564. The scenario moves price, production and variable opex to 0.8 and capex and fixed opex to 1.2 together, and three separately drawn factors seldom line up that way."
+     "new": "A P90 is a statistic of the sample rather than a corner or a minimum. The scenario Low moves price, production and variable opex to 0.8 and capex and fixed opex to 1.2 at once, and no iteration reached it."
     }
    }
   },
@@ -2447,7 +2459,7 @@
    "ord": 15,
    "answer_index": 0,
    "answer_index_changed": false,
-   "keyed_answer_changed": false,
+   "keyed_answer_changed": true,
    "beyond_recut_list": false,
    "rebuilt_for_retired_rule": false,
    "gate_tuning_only": false,
@@ -2455,7 +2467,35 @@
    "fields": {
     "prompt": {
      "old": "Every difference between the averaging rule and the floor rule on ISIALA's 1000 NPVs is negative: -0.0896, -0.0116 and -0.0056. Why can none be positive on this sample?",
-     "new": "Every difference between the averaging rule and the floor rule on ISIALA's 1000 NPVs is negative: -0.0556, -0.0521 and -0.1142. Why can none be positive on this sample?"
+     "new": "A report quotes ISIALA's Low case as 15.6619 million USD. Which rule produced that figure, and what must the report carry beside it?"
+    },
+    "option_0": {
+     "old": "With n x q whole, the averaging rule blends the value at the index with the one before it, while the floor rule takes the value at the index, the upper of the two.",
+     "new": "The breakeven engine's floor rule, read on the Scenario Builder's sample, so the report has to name the rule beside the number.",
+     "was_answer": true,
+     "is_answer_now": true
+    },
+    "option_1": {
+     "old": "The floor rule rounds its index down, so it takes the lower of the two neighbours and always reads below the average.",
+     "new": "The Scenario Builder's own averaging rule, which returns 15.6619 whenever the iteration count leaves n x q a whole number.",
+     "was_answer": false,
+     "is_answer_now": false
+    },
+    "option_2": {
+     "old": "The NPVs are skewed to the right, so any rule that avoids averaging reads higher than the average in both tails and at the middle.",
+     "new": "Neither rule: 15.6619 is the lowest sampled NPV of that run, which is why it sits below every case the panel prints.",
+     "was_answer": false,
+     "is_answer_now": false
+    },
+    "option_3": {
+     "old": "The averaging rule weights each value by its histogram count, which pulls every case toward the tallest bin below the median.",
+     "new": "The averaging rule at seed 43, since a change of seed moves the Low case and the two engines share one percentile rule.",
+     "was_answer": false,
+     "is_answer_now": false
+    },
+    "explanation": {
+     "old": "The floor applies to the index, not to the answer. On an NPV it leans toward the good end, so a reader who takes the floor rule as the cautious one has the direction backwards.",
+     "new": "The Scenario Builder's card reads 15.6063 by the averaging rule, and the floor rule on the same 1000 NPVs reads 15.6619, a difference of -0.0556. Every percentile is a convention, so name the rule before comparing two numbers."
     }
    }
   },
@@ -2615,35 +2655,35 @@
    "fields": {
     "prompt": {
      "old": "ISIALA with the narrow opex belief 16 / 17 / 26 reports a base breakeven of 67.2301 and a median breakeven price of 73.1740. Why should the two not be quoted as one belief?",
-     "new": "ISIALA with the narrow opex belief 16 / 17 / 26 reports a base breakeven of 71.3621 and a median breakeven price of 73.1740. What belief do those two numbers describe?"
+     "new": "Before quoting either of ISIALA's narrow-belief figures, a base breakeven of 71.3621 and a median breakeven price of 73.1740, what must a reader check?"
     },
     "option_0": {
      "old": "The base and the tornado use the stated median of 17, while the sample draws from the clamped triangle 15.1886 / 15.1886 / 31.0000, whose median is not 17.",
-     "new": "One belief, the fitted triangle: the base case, the tornado and the sample all run at its own percentiles, 16.0000 / 19.8197 / 26.0000.",
+     "new": "The fit's `exact` flag and the beliefs line beneath it, which name the percentiles the base case and the tornado actually ran at.",
      "was_answer": true,
      "is_answer_now": true
     },
     "option_1": {
      "old": "The base is discounted at year end and the sample at mid-year, so the two differ by the ratio between the conventions.",
-     "new": "Two beliefs, since the base keeps the stated median of 17 while the sample draws from the clamped triangle around it.",
+     "new": "The seed and the iteration count, since a base breakeven is the middle of the sample and moves with both of them.",
      "was_answer": false,
      "is_answer_now": false
     },
     "option_2": {
      "old": "The median comes from the averaging rule and the base from the floor rule, so their gap is the rule difference at 5000 iterations.",
-     "new": "Two beliefs, since the base is discounted at year end and the sample at mid-year, so they differ by the ratio between the conventions, 1.058301.",
+     "new": "The discounting convention of each, since the base solves at year end and the sample at mid-year on the same ledger.",
      "was_answer": false,
      "is_answer_now": false
     },
     "option_3": {
      "old": "The belief was refused and replaced by 16 / 20 / 26 for the sample, while the base kept the values that were typed.",
-     "new": "One belief, the stated one, because a clamp changes only the shape of the draws and never the percentiles the base case solves at.",
+     "new": "The excluded count, since a clamped belief drops the iterations that cannot break even and the two figures then describe different samples.",
      "was_answer": false,
      "is_answer_now": false
     },
     "explanation": {
      "old": "Its shape ratio of 0.100000 lies outside 0.381966 to 0.618034, so the fit clamps, `exact` reads false and the insight carries the note (EC3-5). Read `exact` before quoting either number.",
-     "new": "Its shape ratio of 0.100000 lies outside 0.381966 to 0.618034, so the fit clamps, `exact` reads false and the beliefs line names what was used. The stated 17 appears nowhere, and before the repair it gave a base of 67.2301."
+     "new": "The opex belief 16 / 17 / 26 has a shape ratio of 0.100000, outside 0.381966 to 0.618034, so `exact` reads false and the beliefs line reports opex 16.0000 / 19.8197 / 26.0000 as fitted. The stated median of 17 appears nowhere in the answer."
     }
    }
   },
@@ -2709,35 +2749,35 @@
    "fields": {
     "prompt": {
      "old": "OKPOMA, valued at 167.4389 million USD, prints an internal rate of 1000.0000 as well. Where did its number come from?",
-     "new": "OKPOMA, valued at 167.4389 million USD, reports an IRR of -54.7919 percent with irrStatus ok. Where does that rate come from?"
+     "new": "A screen lists OKPOMA at -54.7919 percent with irrStatus ok and NTEJE at irr null with irrStatus no-root. What separates the two entries?"
     },
     "option_0": {
      "old": "Its only IRR root is negative, so Newton wandered upward from its 10 percent start and stopped at the clamp, which is no root at all.",
-     "new": "It is a genuine root: OKPOMA's cash flow starts positive, so the rate that zeroes its NPV lies below zero while the project still creates value.",
+     "new": "OKPOMA has a rate that zeroes its NPV and NTEJE has none, so only one of the two entries is a rate at all.",
      "was_answer": true,
      "is_answer_now": true
     },
     "option_1": {
      "old": "Its root lies past the clamp, the gentle form, so the project truly earns more than 1000 percent and the clamp understates it, as in `irr_beyond_clamp`.",
-     "new": "It is the Newton clamp reached from the other end, which the engine writes as a negative once its iteration runs past the bound and reports where it stopped.",
+     "new": "OKPOMA's rate was clamped and NTEJE's was not, so the first is a bound the solver stopped at and the second a genuine search.",
      "was_answer": false,
      "is_answer_now": false
     },
     "option_2": {
      "old": "The rate is right, because a first year already cash positive makes the IRR unbounded and 1000 is how the engine says so.",
-     "new": "It is the rate at which the 2029 cash flow of 57.8806 repays the second capex half, reported in place of a lifetime rate.",
+     "new": "OKPOMA is the worse project, since a negative rate of return ranks below a project whose rate the engine could not find at all.",
      "was_answer": false,
      "is_answer_now": false
     },
     "option_3": {
      "old": "It is the starting guess returned by the derivative guard, finding S2, since OKPOMA's final years carry tiny cash flows.",
-     "new": "It is a root past the clamp with its sign inverted, the same form as `irr_beyond_clamp` and its golden root of 9900 percent.",
+     "new": "Nothing of substance: both are ways of reporting that the Newton iteration failed to converge on the cash flow it was given.",
      "was_answer": false,
      "is_answer_now": false
     },
     "explanation": {
      "old": "Neither OKPOMA nor NTEJE is a root past the clamp; that form is `irr_beyond_clamp` at 9900. The guard asks whether the years differ in sign, never whether the last guess makes NPV zero, and S2 returns 10, not 1000.",
-     "new": "irrStatus ok says a rate zeroes the NPV; it never says the rate is a sensible screening number. Before the repair OKPOMA and NTEJE both reported the same 1000.0000 percent, one creating value and one destroying it."
+     "new": "A status of ok says a rate zeroes the NPV; it never says the rate is a sensible screening number, and OKPOMA is worth 167.4389 million USD. NTEJE loses 123.9923 million USD and no rate in the band zeroes it."
     }
    }
   },
