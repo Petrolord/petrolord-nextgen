@@ -30,6 +30,24 @@
   {
    "bank": "ec3a_exam.json",
    "module_key": "exam",
+   "ord": 3,
+   "why": "Sits at 0.49 prompt Jaccard against ec3a_m01 ord 10, both on capex beliefs arriving under P-labels. Both stems are pre-existing live text this recut did not author, and they key on different answers, so they were left rather than widen the diff. Below bankkit's 0.50 threshold."
+  },
+  {
+   "bank": "ec3a_exam.json",
+   "module_key": "exam",
+   "ord": 30,
+   "why": "Sits at 0.48 prompt Jaccard against ec3a_m05 ord 7, both on mid-year beside year-end. Pre-existing live stems with different keyed answers, left as live."
+  },
+  {
+   "bank": "ec3a_exam.json",
+   "module_key": "exam",
+   "ord": 35,
+   "why": "Sits at 0.48 prompt Jaccard against ec3a_m06 ord 7, both on right numbers under the wrong words. Pre-existing live stems with different keyed answers, left as live."
+  },
+  {
+   "bank": "ec3a_exam.json",
+   "module_key": "exam",
    "ord": 15,
    "why": "Its explanation contains the phrase 'The floor applies to the index, not to the answer'. That is pre-existing live wording which the committed recut lesson m03/l02 repeats verbatim, so it was left rather than widen the diff over house phrasing."
   }
@@ -39,6 +57,7 @@
   "Nine questions RECUT.md did not list, or listed as text-only, were changed because their KEYED answer had become false under engines #182. They are marked beyond_recut_list true.",
   "Length-rank gate failures were fixed only by lengthening distractors, naming the mechanism each wrongly invokes. No correct option was edited to satisfy a gate.",
   "Retired numbers appear only where a question is explicitly about what changed, and are marked as history in the same sentence, sourced from the digest History lines and Section 18.",
+  "Exam ords 6, 15, 25 and 28 were re-angled a second time to clear a near-duplicate against a module-bank stem. bankkit measures prompt Jaccard WITHIN a bank only, so an exam stem repeating a module stem passes every gate. This tier was swept for it explicitly; three pre-existing pairs below the 0.50 threshold were left as live and are listed in reviewed_no_change.",
   "Three 'X, not Y' contrastives introduced by this recut were reworded. Pre-existing live contrastives in unflagged questions were left alone."
  ],
  "questions": [
@@ -2142,7 +2161,7 @@
    "beyond_recut_list": false,
    "rebuilt_for_retired_rule": true,
    "gate_tuning_only": false,
-   "what_changed": "Rebuilt. The mechanism moved to three separately drawn factors; the lowest sampled NPV is now -46.1564.",
+   "what_changed": "Rebuilt. The mechanism moved to three separately drawn factors; the lowest sampled NPV is now -46.1564. The stem was then re-angled to examine across modules, because the rebuilt version collided with a module-bank stem; bankkit measures prompt Jaccard within a bank only, so no gate could see it.",
    "fields": {
     "prompt": {
      "old": "A board pack prints ISIALA's scenario Low of -72.1531 under a P90 heading. Why is that wrong?",
@@ -2463,7 +2482,7 @@
    "beyond_recut_list": false,
    "rebuilt_for_retired_rule": false,
    "gate_tuning_only": false,
-   "what_changed": "Moved values migrated to the engines #182 digest. The keyed answer is unchanged.",
+   "what_changed": "Moved values migrated to the engines #182 digest. The stem was then re-angled to examine across modules, because the rebuilt version collided with a module-bank stem; bankkit measures prompt Jaccard within a bank only, so no gate could see it.",
    "fields": {
     "prompt": {
      "old": "Every difference between the averaging rule and the floor rule on ISIALA's 1000 NPVs is negative: -0.0896, -0.0116 and -0.0056. Why can none be positive on this sample?",
@@ -2651,7 +2670,7 @@
    "beyond_recut_list": false,
    "rebuilt_for_retired_rule": true,
    "gate_tuning_only": false,
-   "what_changed": "Rebuilt. An inexact fit now runs base and tornado at the fitted percentiles, so the answer is one belief rather than two.",
+   "what_changed": "Rebuilt. An inexact fit now runs base and tornado at the fitted percentiles, so the answer is one belief rather than two. The stem was then re-angled to examine across modules, because the rebuilt version collided with a module-bank stem; bankkit measures prompt Jaccard within a bank only, so no gate could see it.",
    "fields": {
     "prompt": {
      "old": "ISIALA with the narrow opex belief 16 / 17 / 26 reports a base breakeven of 67.2301 and a median breakeven price of 73.1740. Why should the two not be quoted as one belief?",
@@ -2745,7 +2764,7 @@
    "beyond_recut_list": false,
    "rebuilt_for_retired_rule": true,
    "gate_tuning_only": false,
-   "what_changed": "Rebuilt. OKPOMA now solves to -54.7919 percent with irrStatus ok.",
+   "what_changed": "Rebuilt. OKPOMA now solves to -54.7919 percent with irrStatus ok. The stem was then re-angled to examine across modules, because the rebuilt version collided with a module-bank stem; bankkit measures prompt Jaccard within a bank only, so no gate could see it.",
    "fields": {
     "prompt": {
      "old": "OKPOMA, valued at 167.4389 million USD, prints an internal rate of 1000.0000 as well. Where did its number come from?",
