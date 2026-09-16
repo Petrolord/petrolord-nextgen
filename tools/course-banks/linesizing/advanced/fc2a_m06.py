@@ -69,11 +69,11 @@ q(2, "Four inputs in this tier are stated conditions rather than results and eac
  "The wall is meaningless without its class and code, the swept volume is a straight multiplication by the holdup, and the run time is a length divided by the speed.")
 
 q(3, "The capstone asks for figures at the precision the engine returned them. What are the conventions?",
- "Liquid work to six decimals, barrels and hours and days to four, and counts as whole numbers.",
- ["Liquid work to four decimals, barrels and hours and days to six, and counts as whole numbers, since a volume carries more significant figures than a pressure.",
+ "Liquid work to six decimals, the run hours among it, with barrels and days to four and counts as whole numbers.",
+ ["Liquid work to six decimals, with barrels and hours and days all three to four and counts as whole numbers, since the hours come off the same pigging chain the volumes do.",
   "Everything to six decimals, since that is the precision the wall and the pressure figures are printed at and a single convention avoids a rounding argument.",
   "Everything to the precision of the least precise input, which for the pigging chain is the holdup of 0.060000 and therefore six decimals throughout."],
- "Quote what the engine returned rather than a rounding of it. Gas rates, Reynolds numbers, barrels, hours and days print to four decimals.")
+ "Quote what the engine returned rather than a rounding of it. A run time is liquid work and prints to six decimals, 2.444444 hours on the OGBIA duty, and barrels and days print to four.")
 
 q(0, "A step in the capstone chain returns an object carrying an error string. What should be reported for that step?",
  "The error itself, because a refusal is a result and writing a number where the engine declined to produce one is the worst available answer.",

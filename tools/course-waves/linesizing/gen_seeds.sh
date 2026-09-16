@@ -14,12 +14,15 @@
 # reads can have been edited after the commit it is named for.
 #
 # Usage: gen_seeds.sh [ref]     default HEAD
+#   REPO=<path>  the clone or worktree whose object store the tree is read from.
+#                It was hardcoded, so a run from any other worktree silently cut
+#                the seeds from a tree the caller was not working in.
 # =============================================================================
 set -eu
 
 REF=${1:-HEAD}
 W=/root/fc-wip-linesizing
-REPO=/root/wt-fc2-nextgen
+REPO=${REPO:-/root/wt-fc2-nextgen}
 KIT=/root/dc-wavekit
 SLUG=linesizing
 PREFIX=fc2

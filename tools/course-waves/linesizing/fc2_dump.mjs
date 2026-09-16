@@ -61,8 +61,8 @@ const G = JSON.parse(fs.readFileSync(`${ROOT}/test-data/facilities/goldens/lineh
 const out = [];
 const w = (s = '') => out.push(s);
 const num = (x, n) => (x === null || x === undefined || Number.isNaN(Number(x)) ? 'null' : Number(x).toFixed(n));
-const e6 = (x) => num(x, 6);    // ft/s, psi, inches, ratios, friction factors
-const r4 = (x) => num(x, 4);    // scfd, Reynolds numbers, barrels, hours, days
+const e6 = (x) => num(x, 6);    // ft/s, psi, inches, ratios, hours, design factors
+const r4 = (x) => num(x, 4);    // scfd, Reynolds numbers, barrels, days
 const raw = (x) => (Number.isFinite(x) ? String(x) : String(x));
 const soft = (r) => (r && r.error ? `{ error: "${r.error}" }` : 'no error');
 /** What a caller actually gets back when the engine neither refuses nor
