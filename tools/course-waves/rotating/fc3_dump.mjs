@@ -836,15 +836,17 @@ ACFM_PRESSURE_SWEEP_PSIA.forEach((p) => {
 });
 w(`At the SOKU suction of ${e6(SOKU.pSuctionPsia)} psia the inlet volume is ${r4(C.actualInletCfm({ qMMscfd: SOKU.qMMscfd, pPsia: SOKU.pSuctionPsia, tF: SOKU.tSuctionF, gasSg: SOKU.gasSg }))} acfm (engine).`);
 w();
-w(`The screen, on ${SCREEN_DUTIES.length} duties chosen to land in all four of its branches, with the branch each one reached printed beside it rather than promised:`);
+w(`The screen, on ${SCREEN_DUTIES.length} duties chosen to land in all four of its branches, with the branch each one reached printed beside it rather than promised. A BRANCH IS A REASON, and two branches can end on the same recommendation:`);
 const branchesHit = new Set();
+const machinesHit = new Set();
 SCREEN_DUTIES.forEach((d) => {
   const s = C.machineScreen(d);
-  branchesHit.add(`${s.recommendation}|${s.reasons[0]}`);
+  branchesHit.add(s.reasons[0]);
+  machinesHit.add(s.recommendation);
   w(`- ${d.label}: ${r4(s.acfm)} acfm at an overall ratio of ${e6(d.overallRatio)} and ${r4(d.totalBrakeHp)} brake hp gives "${s.recommendation}"`);
   s.reasons.forEach((r) => w(`    ${r}`));
 });
-w(`Distinct first reasons across those ${SCREEN_DUTIES.length} duties: ${branchesHit.size} (derived by collecting them). The branch is decided on the inlet VOLUME first and on the ratio second, so two duties can reach the same recommendation by different roads, and the reason line is the only thing that says which road.`);
+w(`TWO COUNTS, AND THEY ARE DIFFERENT QUESTIONS, both derived by collecting them across those ${SCREEN_DUTIES.length} duties: ${branchesHit.size} distinct FIRST REASONS, which is one per branch of the screen, and ${machinesHit.size} distinct RECOMMENDATION words, which is ${machinesHit.size < branchesHit.size ? `${branchesHit.size - machinesHit.size} fewer` : 'the same'} because the branch is decided on the inlet VOLUME first and on the ratio second, so more than one branch can end on the same machine. The reason line is the only thing that says which road a duty took.`);
 w();
 w('The screen asks for the compressibility BEFORE it asks for the volume, so a suction state outside the correlation is refused by name rather than as a missing volume:');
 [['a suction below absolute zero', { qMMscfd: 20, pSuctionPsia: 200, tSuctionF: -600, gasSg: 0.65, overallRatio: 3, totalBrakeHp: 500 }],
@@ -980,7 +982,7 @@ w('The surface runs to the ideal-gas limit as the reduced pressure goes to zero,
 w();
 
 // --------------------------------------------------------------- SECTION 16
-w('# SECTION 16: The published golden cases, and the engine beside them (read by every tier)');
+w('# SECTION 16: The published golden cases, and the engine beside them (shared by Associate m06, Professional m06 and Expert m06)');
 w();
 w(`The pump goldens carry ${GP.curves.length + GP.duty.length + GP.npsh.length + GP.power.length + GP.viscosity.length} cases in five blocks and the compression goldens ${GC.stages.length + GC.staging.length} cases in two, which is ${GP.curves.length + GP.duty.length + GP.npsh.length + GP.power.length + GP.viscosity.length + GC.stages.length + GC.staging.length} published cases for the ${Object.keys(P).length + Object.keys(C).length} exported functions of the two modules (both counts read off the files themselves).`);
 w();
@@ -1058,7 +1060,7 @@ w('# HELD FOR LITERATURE, taught as a limit and never graded: all of them. Every
 w();
 
 // --------------------------------------------------------------- SECTION 17
-w('# SECTION 17: What this course teaches as limits and never as answers (owned by Expert m05, and read again in Associate m06, Professional m06 and Expert m06)');
+w('# SECTION 17: What this course teaches as limits and never as answers (shared by Associate m06, Professional m06 and Expert m06)');
 w();
 w('# The three tier readings, Associate m06, Professional m06 and Expert m06, assemble the sections above; they introduce no number of their own.');
 w();

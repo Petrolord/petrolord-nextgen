@@ -1181,3 +1181,103 @@ After the fixes, a sweep of all 78 lessons for
   stated geometry. A writer correctly refused to infer it. Fixing it costs a
   line and would move Section 6's line numbers, so it waits for a rebuild
   rather than being slipped in while three tiers are pinned to this file.
+
+
+---
+
+## SHARED SECTIONS, AND A COUNT THAT WAS TWO COUNTS. 2026-09-16.
+
+Four digest lines changed, **809 to 809, 0 added, 0 removed, all 17 section
+start lines unchanged, all 257 table rows byte identical**, and `fields.json`
+byte identical, so no graded answer moved. The Associate-owned Sections 1 to 5
+are literal-for-literal unchanged.
+
+### Sections 16 and 17 were not owned by anybody, and the gate had to guess
+
+`litsweep` builds its tier ranges from each section's `(owned by <Tier> mNN)`
+clause. **Section 16 carried none at all** and **Section 17 carried a compound
+one**, `(owned by Expert m05, and read again in Associate m06, Professional m06
+and Expert m06)`, of which the regex reads only the first name. Both therefore
+fell inside the EXPERT range, so any lower tier quoting a published golden or a
+held item read as a FORWARD REACH.
+
+**Measured, on the committed corpus:** with the old headings, litsweep reported
+`REACHES FORWARD '35' beginner/m06-the-associate-reading/l03-onward.md:21
+(digest line 797; beginner owns 8 to 246)`. Line 797 is Section 17's NPSH
+margin rule, which the Associate reading legitimately re-reads. And **both FC3
+bank writers independently refused every Section 16 and Section 17 numeral for
+this reason**, so the Associate and Professional banks teach the published
+goldens, the tolerance argument and the held items in prose with no figures.
+That is teaching quality paid away to a gate defect.
+
+Both headings now read **`(shared by Associate m06, Professional m06 and Expert
+m06)`**.
+
+**The form was chosen to agree with the kit rather than to work around it.**
+`litsweep.tier_spans` now carries a shared-section concept whose contract is
+**"A SECTION WITH NO OWNER IS SHARED, NOT THE PREVIOUS TIER'S"**, plus the
+preamble. `(shared by ...)` carries no `owned by` clause, so the gate reads it
+as shared, and a human reads which modules it is shared by. Verified against
+the kit's own code, not assumed:
+
+    owned spans  : beginner 8-246, intermediate 247-447, advanced 448-737
+    shared ranges: 1-7 (the preamble), 738-787 (Section 16), 788-810 (Section 17)
+
+and the controlled before-and-after on the same corpus, swapping only
+`digest.txt`:
+
+| headings | reaching FORWARD | reaching back |
+| --- | --- | --- |
+| old | **1** (the false one at line 797) | 1 |
+| new | **0** | 0 |
+
+The preamble being shared also answers the other half of that report: the
+export counts 14 and 8 live before Section 1 and used to class as backward
+reaches for every tier. They are in range for everyone now.
+
+### One count that was two, and it is the second time this claim has been wrong
+
+Section 14 said the screen was run "on 4 duties chosen to land in all four of
+its branches" with "4 distinct first reasons". Both are TRUE. What was missing
+is that **there are only 3 distinct recommendation words**, because two
+branches both end on `reciprocating`, and the section's prose asserted that
+without computing it.
+
+**A branch is a reason; a recommendation is a machine type.** The section now
+prints both counts and says which is which, derived rather than promised: 4
+distinct first reasons, one per branch, and 3 distinct recommendations, one
+fewer, with the difference itself computed.
+
+**The lab module carried the identical conflation.**
+`rotatingLab.js` keyed `branchesHit` on `` `${recommendation}|${reasons[0]}` ``
+and labelled the result `distinctFirstReasonsDerived`: a count of PAIRS
+reported as a count of reasons. The two coincide at 4 on this fixture set, so
+the name was wrong rather than the number, which is exactly how it survived.
+Split into `branchesHit` and `machinesHit`, and
+`distinctRecommendationsDerived` added.
+
+This is the second time this one claim has been wrong. The first time the
+FIXTURE was wrong, reaching two branches while claiming four. This time the
+fixture is right and the VOCABULARY was wrong. A sentence that has been wrong
+twice in two different ways is a sentence to compute rather than to write.
+
+### wave.json was stale against the digest on the held thresholds
+
+Its `heldItemCheck` item (6) listed "500 and 20000 acfm" where digest Section 14
+lists **500 and 5000 and 20000**. The engine has all three: `acfm < 500`,
+`acfm > 20000 && ratio < 4`, and `ratio > 6 && acfm < 5000`. The writer taught
+the digest's list, which was right. **A plan that lists fewer thresholds than
+the engine has is how a writer gets told to teach something the digest does not
+carry**, which is precisely what the struck three-percent-head-drop promise
+was. Corrected, and the omission named in the plan so it is not re-introduced.
+
+### Still open, and not ours
+
+`litsweep --lessons` exits 1 on **five literals in one committed Associate
+lesson**, `beginner/m05-where-the-duty-landed/l03-both-sides-of-every-boundary.md`
+lines 33 and 53, which write the band percentages bare as `30, 60, 85 and 130`
+where the digest's table prints `60.000000` and `130.000000`. Whole-number
+matching correctly refuses `60` against `60.000000`. It is prose in another
+agent's committed tier and it is a round-form question rather than a wrong
+figure, so it is reported rather than edited: the cheapest fix is for that
+lesson to cite the table's own values.

@@ -575,12 +575,12 @@ const buildDigest = () => {
   s14.acfmSweep.forEach((r) => w(`| ${e6(r.pPsia)} | ${r4(r.acfm)} |`));
   w(`At the SOKU suction of ${e6(s14.atSuctionPsia)} psia the inlet volume is ${r4(s14.atSuctionAcfm)} acfm (engine).`);
   w();
-  w(`The screen, on ${s14.screenCount} duties chosen to land in all four of its branches, with the branch each one reached printed beside it rather than promised:`);
+  w(`The screen, on ${s14.screenCount} duties chosen to land in all four of its branches, with the branch each one reached printed beside it rather than promised. A BRANCH IS A REASON, and two branches can end on the same recommendation:`);
   s14.screen.forEach((d) => {
     w(`- ${d.label}: ${r4(d.acfm)} acfm at an overall ratio of ${e6(d.overallRatio)} and ${r4(d.totalBrakeHp)} brake hp gives "${d.recommendation}"`);
     d.reasons.forEach((r) => w(`    ${r}`));
   });
-  w(`Distinct first reasons across those ${s14.screenCount} duties: ${s14.distinctFirstReasonsDerived} (derived by collecting them). The branch is decided on the inlet VOLUME first and on the ratio second, so two duties can reach the same recommendation by different roads, and the reason line is the only thing that says which road.`);
+  w(`TWO COUNTS, AND THEY ARE DIFFERENT QUESTIONS, both derived by collecting them across those ${s14.screenCount} duties: ${s14.distinctFirstReasonsDerived} distinct FIRST REASONS, which is one per branch of the screen, and ${s14.distinctRecommendationsDerived} distinct RECOMMENDATION words, which is ${s14.distinctRecommendationsDerived < s14.distinctFirstReasonsDerived ? `${s14.distinctFirstReasonsDerived - s14.distinctRecommendationsDerived} fewer` : 'the same'} because the branch is decided on the inlet VOLUME first and on the ratio second, so more than one branch can end on the same machine. The reason line is the only thing that says which road a duty took.`);
   w();
   w('The screen asks for the compressibility BEFORE it asks for the volume, so a suction state outside the correlation is refused by name rather than as a missing volume:');
   s14.screenDomain.forEach((r) => w(`- ${r.label}: ${soft(r.error)}`));
@@ -656,7 +656,7 @@ const buildDigest = () => {
   w();
 
   // Section 16
-  w('# SECTION 16: The published golden cases, and the engine beside them (read by every tier)');
+  w('# SECTION 16: The published golden cases, and the engine beside them (shared by Associate m06, Professional m06 and Expert m06)');
   w();
   w(`The pump goldens carry ${s16.pumpCases} cases in five blocks and the compression goldens ${s16.compressionCases} cases in two, which is ${s16.totalCases} published cases for the ${s16.exportedFunctions} exported functions of the two modules (both counts read off the files themselves).`);
   w();
@@ -696,7 +696,7 @@ const buildDigest = () => {
   w();
 
   // Section 17
-  w('# SECTION 17: What this course teaches as limits and never as answers (owned by Expert m05, and read again in Associate m06, Professional m06 and Expert m06)');
+  w('# SECTION 17: What this course teaches as limits and never as answers (shared by Associate m06, Professional m06 and Expert m06)');
   w();
   w('# The three tier readings, Associate m06, Professional m06 and Expert m06, assemble the sections above; they introduce no number of their own.');
   w();

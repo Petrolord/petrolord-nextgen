@@ -1452,9 +1452,16 @@ export const machineDriverFuel = () => {
     brakeHp: train.totalBrakeHp, heatRateBtuHpHr: SOKU_HEAT_RATE_BTU_HP_HR, gasLhvBtuScf: SOKU_LHV_BTU_SCF,
   });
   const branchesHit = new Set();
+  const machinesHit = new Set();
   const screen = SCREEN_DUTIES.map((d) => {
     const s = C.machineScreen(d);
-    branchesHit.add(`${s.recommendation}|${s.reasons[0]}`);
+    // A BRANCH IS A REASON. Keying on `${recommendation}|${reasons[0]}` counted
+    // PAIRS and was labelled a count of reasons; the two coincide on this
+    // fixture set, so the name was wrong rather than the number. Two branches
+    // end on the same recommendation, so the two counts differ and both are
+    // reported.
+    branchesHit.add(s.reasons[0]);
+    machinesHit.add(s.recommendation);
     return {
       label: d.label,
       acfm: s.acfm,
@@ -1511,6 +1518,7 @@ export const machineDriverFuel = () => {
     screenCount: SCREEN_DUTIES.length,
     screen,
     distinctFirstReasonsDerived: branchesHit.size,
+    distinctRecommendationsDerived: machinesHit.size,
     screenDomain: [
       ['a suction below absolute zero', {
         qMMscfd: 20, pSuctionPsia: 200, tSuctionF: -600, gasSg: 0.65, overallRatio: 3, totalBrakeHp: 500,

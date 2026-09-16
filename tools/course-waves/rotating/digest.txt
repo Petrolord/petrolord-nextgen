@@ -613,7 +613,7 @@ The actual inlet volume is what the machine screen turns on, and it falls with p
 | 1200.000000 | 204.9510 |
 At the SOKU suction of 92.000000 psia the inlet volume is 3090.0016 acfm (engine).
 
-The screen, on 4 duties chosen to land in all four of its branches, with the branch each one reached printed beside it rather than promised:
+The screen, on 4 duties chosen to land in all four of its branches, with the branch each one reached printed beside it rather than promised. A BRANCH IS A REASON, and two branches can end on the same recommendation:
 - a small high-pressure gathering duty: 14.6564 acfm at an overall ratio of 3.000000 and 180.0000 brake hp gives "reciprocating"
     only 14.7 acfm at suction: below about 500 acfm a centrifugal wheel is too small to be efficient
     under 200 bhp: a packaged gas-engine recip is the usual answer
@@ -624,7 +624,7 @@ The screen, on 4 duties chosen to land in all four of its branches, with the bra
     overall ratio 11.5 at 2015 acfm: recips take ratio far more happily than centrifugals
 - the duty where both machines are viable: 7962.6965 acfm at an overall ratio of 3.000000 and 5000.0000 brake hp gives "either"
     this duty sits where both machine types are viable; the decision goes on availability, footprint, maintenance philosophy and driver
-Distinct first reasons across those 4 duties: 4 (derived by collecting them). The branch is decided on the inlet VOLUME first and on the ratio second, so two duties can reach the same recommendation by different roads, and the reason line is the only thing that says which road.
+TWO COUNTS, AND THEY ARE DIFFERENT QUESTIONS, both derived by collecting them across those 4 duties: 4 distinct FIRST REASONS, which is one per branch of the screen, and 3 distinct RECOMMENDATION words, which is 1 fewer because the branch is decided on the inlet VOLUME first and on the ratio second, so more than one branch can end on the same machine. The reason line is the only thing that says which road a duty took.
 
 The screen asks for the compressibility BEFORE it asks for the volume, so a suction state outside the correlation is refused by name rather than as a missing volume:
 - a suction below absolute zero: { error: "at the screening suction, the z-factor needs a positive absolute pressure and a temperature above absolute zero (at 200 psia and -600 F)" }
@@ -735,7 +735,7 @@ The refusal carries the reduced coordinates and the state they were taken at, an
 A suction BELOW the reduced pressure the fit data start at is accepted rather than refused, exactly as separatorSizing accepts it, and it is noted instead: "Ppr 0.018 against 0.2 at 12 psia and 100 F is below the 0.2 where the DAK fit data start; the z-factor here runs toward the ideal-gas limit"
 The surface runs to the ideal-gas limit as the reduced pressure goes to zero, so a low-pressure suction is an ordinary machine and not an extrapolation. A window has two kinds of edge and they are not the same kind.
 
-# SECTION 16: The published golden cases, and the engine beside them (read by every tier)
+# SECTION 16: The published golden cases, and the engine beside them (shared by Associate m06, Professional m06 and Expert m06)
 
 The pump goldens carry 10 cases in five blocks and the compression goldens 6 cases in two, which is 16 published cases for the 22 exported functions of the two modules (both counts read off the files themselves).
 
@@ -785,7 +785,7 @@ A gate against a golden therefore has to carry a tolerance, and the tolerance ha
 
 # HELD FOR LITERATURE, taught as a limit and never graded: all of them. Every one of those published cases was written by an oracle. There is no measured pump test, no vendor performance run and no field compressor datasheet anywhere in this course.
 
-# SECTION 17: What this course teaches as limits and never as answers (owned by Expert m05, and read again in Associate m06, Professional m06 and Expert m06)
+# SECTION 17: What this course teaches as limits and never as answers (shared by Associate m06, Professional m06 and Expert m06)
 
 # The three tier readings, Associate m06, Professional m06 and Expert m06, assemble the sections above; they introduce no number of their own.
 
