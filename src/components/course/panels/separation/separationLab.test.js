@@ -1,5 +1,5 @@
 // Every value the FC1 lab exposes to a panel, a lesson or the grader is pinned
-// here against the teaching digest (/root/fc-wip-separation/digest.txt), which
+// here against the teaching digest (tools/course-waves/separation/digest.txt), which
 // is itself nothing but the Separator & Slug Catcher Designer's and the
 // Facility Layout Mapper's return values on the published goldens and on the
 // teaching fields ABANA, AGBAMI and the ERHA flow station.
@@ -12,7 +12,7 @@
 // by section and then whole.
 //
 // THE EIGHTEEN GRADED FIELDS of the EJULEBE, ODEAMA and ADANGA capstone are
-// pinned separately and EXACTLY against /root/fc-wip-separation/fields.json,
+// pinned separately and EXACTLY against tools/course-waves/separation/fields.json,
 // READ FROM THE FILE.
 //
 // Then the gates:
@@ -42,17 +42,23 @@ import { execFileSync } from 'node:child_process';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import * as LAB_NS from './separationLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const L = LAB_NS;
 const LAB = Object.fromEntries(Object.entries(L));
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../../../../..');
-const DIGEST = '/root/fc-wip-separation/digest.txt';
-const FIELDS_JSON = '/root/fc-wip-separation/fields.json';
-const DUMP_MJS = '/root/fc-wip-separation/fc1_dump.mjs';
-const FIELDS_MJS = '/root/fc-wip-separation/fc1_fields.mjs';
-const CAPSTONE_MJS = '/root/fc-wip-separation/fc1_fields_capstone.mjs';
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'separation';
+const DIGEST = waveInput(WAVE_NAME, 'digest.txt');
+const FIELDS_JSON = waveInput(WAVE_NAME, 'fields.json');
+const DUMP_MJS = waveInput(WAVE_NAME, 'fc1_dump.mjs');
+const FIELDS_MJS = waveInput(WAVE_NAME, 'fc1_fields.mjs');
+const CAPSTONE_MJS = waveInput(WAVE_NAME, 'fc1_fields_capstone.mjs');
 const LAB_SOURCE = () => fs.readFileSync(path.join(HERE, 'separationLab.js'), 'utf8');
 const PANEL_FILES = ['SeparatorExplorer.jsx', 'SlugExplorer.jsx', 'LayoutExplorer.jsx'];
 

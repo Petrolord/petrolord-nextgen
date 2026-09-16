@@ -1,0 +1,18 @@
+{
+ "slug": "decision",
+ "prefix": "ec4",
+ "name": "Decision Analysis & Value of Information",
+ "goldens": [
+  "economics/goldens/decision_cases.json"
+ ],
+ "constants": {
+  "100": "percent, the VOI Analyzer's probability scale",
+  "1000000": "USD per million USD"
+ },
+ "repo": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen-ec4",
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3"
+ ]
+}

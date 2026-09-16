@@ -1,0 +1,41 @@
+-- ============================================================================
+-- FC1 ASSOCIATE DEEP SEED: Separation & Slug Catching, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE STREAM AND THE SIMPLE VESSEL. What a sizing engine
+-- does and what it refuses to guess (it holds no equation of state, so a
+-- split at a stated pressure and temperature is a flash living somewhere
+-- else); the gas at separator conditions, which is gauge to absolute, the
+-- pseudo-criticals from gravity, the DAK z factor and the range it is honest
+-- in, the density and the rate the vessel actually sees; the K value, its six
+-- published rows, its pressure derating and its floor; settling, the two
+-- liquid densities and the rate-weighted mixture the gas load sees; and the
+-- vertical vessel, whose diameter comes from the gas and whose height comes
+-- from the retention volume plus an allowance.
+--
+-- THE ENGINE FACT THIS TIER OWNS. z enters the chain TWICE and the two paths
+-- oppose: the gas density goes as one over z, and the actual rate is scaled
+-- BY z. The rate wins. A reader who follows only the density path concludes
+-- that holding z at 1 flatters the design, and the engine says the opposite:
+-- on ABANA-1 the gas-required diameter goes from 2.052551 ft to 2.100599 ft.
+-- The Associate audit found that exact mistake keyed into a question and
+-- glossed into a lesson, with every number on the page correct.
+--
+-- THE TRAP THE TIER IS BUILT ON. A separator is sized by asking which
+-- requirement binds first, and almost every number on the page came from a
+-- different requirement than the reader assumes. The diameter came from the
+-- gas, the height came from the liquid, and the K that set the settling
+-- velocity came from a table somebody copied.
+--
+-- HELD FOR LITERATURE, taught as a limit and never graded: the K derating of
+-- 0.01 per 100 psi above 100 psig and the 0.12 floor are the customary rule
+-- of thumb as this module records it, unchecked against the source. The
+-- capstone states its own vendor K for that reason, so nothing graded in any
+-- tier depends on the derating or the floor.
+--
+-- The only numbers that travel from this tier to the next are the conditions
+-- chain, the settling velocity and the vertical vessel's dimensions.
+-- ============================================================================

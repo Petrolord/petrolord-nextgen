@@ -1,5 +1,5 @@
 // Every value the EC5 lab exposes to a panel, a lesson or the grader is pinned
-// here against the teaching digest (/root/ec-wip-portfolio/digest.txt), which
+// here against the teaching digest (tools/course-waves/portfolio/digest.txt), which
 // is itself nothing but the portfolio engine's and the AFE engine's return
 // values on the published goldens and on the teaching fields OKONO and OFON-1.
 //
@@ -11,7 +11,7 @@
 // compared with digest.txt section by section and then whole.
 //
 // THE EIGHTEEN GRADED FIELDS of the IDOHO capstone are pinned separately and
-// EXACTLY against /root/ec-wip-portfolio/fields.json, READ FROM THE FILE.
+// EXACTLY against tools/course-waves/portfolio/fields.json, READ FROM THE FILE.
 //
 // Then the gates: the leak gate (no teaching export may return a number within
 // ten times a graded field's ABSOLUTE tolerance of a graded answer, in any of
@@ -26,14 +26,20 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as L from './portfolioLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const LAB = Object.fromEntries(Object.entries(L));
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DIGEST = '/root/ec-wip-portfolio/digest.txt';
-const FIELDS_JSON = '/root/ec-wip-portfolio/fields.json';
-const DUMP_MJS = '/root/ec-wip-portfolio/ec5_dump.mjs';
-const FIELDS_MJS = '/root/ec-wip-portfolio/ec5_fields.mjs';
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'portfolio';
+const DIGEST = waveInput(WAVE_NAME, 'digest.txt');
+const FIELDS_JSON = waveInput(WAVE_NAME, 'fields.json');
+const DUMP_MJS = waveInput(WAVE_NAME, 'ec5_dump.mjs');
+const FIELDS_MJS = waveInput(WAVE_NAME, 'ec5_fields.mjs');
 const LAB_SOURCE = () => fs.readFileSync(path.join(HERE, 'portfolioLab.js'), 'utf8');
 
 // ---------------------------------------------------------------------------

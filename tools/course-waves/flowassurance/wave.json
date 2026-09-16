@@ -1,0 +1,13 @@
+{
+ "slug": "flowassurance",
+ "prefix": "pd6",
+ "name": "Flow Assurance",
+ "goldens": [
+  "production/goldens/flowassurance_cases.json"
+ ],
+ "constants": {
+  "0.3048": "metres per foot",
+  "6894.757293168": "pascals per psi",
+  "144": "square inches per square foot"
+ }
+}

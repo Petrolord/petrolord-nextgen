@@ -1,5 +1,5 @@
 // Every value the EC3 lab exposes to a panel, a lesson or the grader is pinned
-// here against the teaching digest (/root/ec-wip-uncertainty/digest.txt), which
+// here against the teaching digest (tools/course-waves/uncertainty/digest.txt), which
 // is itself nothing but the screening engine's, the breakeven engine's and
 // lib/stats' return values on the published goldens and on the teaching fields
 // ISIALA, OKPOMA and NTEJE. The digest prints money to four decimals in
@@ -9,7 +9,7 @@
 // insight sentences included.
 //
 // THE EIGHTEEN GRADED FIELDS of the UMUNEDE capstone are pinned separately and
-// EXACTLY against /root/ec-wip-uncertainty/fields.json, READ FROM THE FILE.
+// EXACTLY against tools/course-waves/uncertainty/fields.json, READ FROM THE FILE.
 //
 // Then the leak gate: no teaching export may return a number within ten times
 // a graded field's ABSOLUTE tolerance of a graded answer, in any of three unit
@@ -24,15 +24,21 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as L from './uncertaintyLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 // A plain object copy of the namespace, for the lookups by name below.
 const LAB = Object.fromEntries(Object.entries(L));
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DIGEST = '/root/ec-wip-uncertainty/digest.txt';
-const FIELDS_JSON = '/root/ec-wip-uncertainty/fields.json';
-const DUMP_MJS = '/root/ec-wip-uncertainty/ec3_dump.mjs';
-const FIELDS_MJS = '/root/ec-wip-uncertainty/ec3_fields.mjs';
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'uncertainty';
+const DIGEST = waveInput(WAVE_NAME, 'digest.txt');
+const FIELDS_JSON = waveInput(WAVE_NAME, 'fields.json');
+const DUMP_MJS = waveInput(WAVE_NAME, 'ec3_dump.mjs');
+const FIELDS_MJS = waveInput(WAVE_NAME, 'ec3_fields.mjs');
 const HEAVY = 1_800_000;
 
 // ---------------------------------------------------------------------------
@@ -82,7 +88,7 @@ beforeAll(async () => {
   }
 }, HEAVY);
 
-// GENERATED FROM /root/ec-wip-uncertainty/digest.txt by line number, with the
+// GENERATED FROM tools/course-waves/uncertainty/digest.txt by line number, with the
 // first characters of each block checked against the file. Do not hand-edit a
 // value here: every string below is a line of the teaching digest, and the
 // first describe block proves each one is still in the file on disk.

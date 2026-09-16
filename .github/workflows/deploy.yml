@@ -37,6 +37,25 @@ jobs:
         npm ci --prefix packages/engines
         node tools/run-vendored-engine-tests.mjs
 
+    # THE COURSE GATES. Every shipped course pins its lab against the teaching
+    # digest its 78 lessons were written from, and keeps the graded capstone
+    # answers out of everything a learner can see. Until 2026-09-16 not one of
+    # those suites had ever run here. There was no vitest step at all, and the
+    # suites could not have run if there had been: each read its inputs from an
+    # absolute path under /root, the wave directory its author built in. So
+    # "CI green" on a course pull request meant lint, the vendored engine
+    # suites and a build, and never a single course gate.
+    #
+    # The inputs are committed under tools/course-waves now. The first step
+    # checks that committed copy against the wave's own generators, because a
+    # stale copy would keep every gate green while pinning numbers nothing
+    # produces. The second runs the gates.
+    - name: Committed wave inputs
+      run: node tools/course-waves/check-wave-inputs.mjs
+
+    - name: Course panel and lab gates
+      run: npx vitest run src/components/course/panels --reporter=basic
+
     - name: Build
       run: npm run build
 

@@ -1,5 +1,5 @@
 // Every value the EC6 lab exposes to a panel, a lesson or the grader is pinned
-// here against the teaching digest (/root/ec-wip-fdp/digest.txt), which is
+// here against the teaching digest (tools/course-waves/fdp/digest.txt), which is
 // itself nothing but the FDP Accelerator's and Project Management Pro's return
 // values on the published goldens and on the teaching fields EGINA and ODUDU-2.
 //
@@ -11,7 +11,7 @@
 // digest.txt section by section and then whole.
 //
 // THE EIGHTEEN GRADED FIELDS of the UKOT and MEREN-3 capstone are pinned
-// separately and EXACTLY against /root/ec-wip-fdp/fields.json, READ FROM THE FILE.
+// separately and EXACTLY against tools/course-waves/fdp/fields.json, READ FROM THE FILE.
 //
 // Then the gates:
 //   THE LEAK GATE   no teaching export may return a number within ten times a
@@ -33,16 +33,22 @@ import { execFileSync } from 'node:child_process';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import * as L from './fdpLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const LAB = Object.fromEntries(Object.entries(L));
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../../../../..');
-const DIGEST = '/root/ec-wip-fdp/digest.txt';
-const FIELDS_JSON = '/root/ec-wip-fdp/fields.json';
-const DUMP_MJS = '/root/ec-wip-fdp/ec6_dump.mjs';
-const FIELDS_MJS = '/root/ec-wip-fdp/ec6_fields.mjs';
-const CAPSTONE_MJS = '/root/ec-wip-fdp/ec6_fields_capstone.mjs';
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'fdp';
+const DIGEST = waveInput(WAVE_NAME, 'digest.txt');
+const FIELDS_JSON = waveInput(WAVE_NAME, 'fields.json');
+const DUMP_MJS = waveInput(WAVE_NAME, 'ec6_dump.mjs');
+const FIELDS_MJS = waveInput(WAVE_NAME, 'ec6_fields.mjs');
+const CAPSTONE_MJS = waveInput(WAVE_NAME, 'ec6_fields_capstone.mjs');
 const LAB_SOURCE = () => fs.readFileSync(path.join(HERE, 'fdpLab.js'), 'utf8');
 
 // ---------------------------------------------------------------------------

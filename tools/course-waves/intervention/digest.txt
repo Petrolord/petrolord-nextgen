@@ -1,0 +1,894 @@
+PD8 Well Intervention: TEACHING DIGEST
+
+THE ONLY NUMBERS A LESSON MAY QUOTE. Every line names its source: a PUBLISHED
+value out of packages/engines/test-data/production/goldens/intervention_cases.json,
+a DERIVED re-run or sweep on published inputs, or a TEACHING case this wave
+designed for itself. NOTHING in this file comes from the graded capstone. The
+capstone conditions and its eighteen graded answers live in separate files that
+the generator of this digest never opens.
+
+A leak guard, pd8_leakcheck.mjs, reads the capstone graded field list and every
+number on every line of this file and rejects the digest if any number lands
+within TEN TIMES a graded field tolerance of that field value, in five unit
+shiftings: the three the wave standard requires (as printed, times 1000, times
+0.001) and two this domain needs (times 100 and times 0.01), because a fit
+quality quoted as a fraction and the same fit quality quoted as a percentage are
+the live confusion in a diagnostics digest. academy_submit_capstone grades with
+abs(got - expected) <= tol, so tol is ABSOLUTE in the field own units and is not
+a fraction of anything. The guard lives in its own file and the generator never
+imports the capstone.
+
+Generator: /root/pd-wip-intervention/pd8_dump.mjs
+Engines:   packages/engines/engines/production/interventionDiagnostics.js
+Goldens:   packages/engines/test-data/production/goldens/intervention_cases.json
+Oracle:    tools/validation/production/oracle_intervention.py
+Units: producing time in DAYS, radii in FT, water-oil ratio a bare stb/stb
+       RATIO, gas-oil ratio in scf/stb, water cut in PERCENT, skin and the
+       pseudo-steady-state group dimensionless, fit quality as a FRACTION,
+       log-log slopes per LOG CYCLE (they are d ln y / d ln x, so they carry no
+       unit at all), spans in LOG CYCLES. Nothing here is SI.
+
+WHAT PROVENANCE LABEL MEANS WHAT
+  golden ...    a value committed in intervention_cases.json by the independent
+                stdlib oracle. Two routes, both genuinely independent: the
+                log-log slope by THEIL-SEN, the median of every pairwise slope,
+                which shares no mean, no square and no covariance with the
+                engine ordinary least squares; and the skin uplift by a full
+                radial Darcy rate in SI, permeability in square metres and
+                pressures in pascals, divided as two real flow rates, against
+                the engine ratio of two dimensionless groups.
+  derived ...   the shipped engine re-run on PUBLISHED inputs, or a sweep this
+                generator ran around them. A sweep point is not a published
+                case. Say so if you print one.
+  teaching ...  the teaching well ELELENWO-4, the teaching gas history, the
+                three constructed demonstration series, and every sweep on
+                them. Invented by this wave to carry the Expert results. Not a
+                published case, not a real well, and never to be shown as
+                either.
+
+WHAT THE ORACLE NEVER CALLS, WHICH IS MOST OF THE MODULE
+  The golden publishes four labelled histories, a lateDerivativeSlope for each,
+  five skin pairs, one geometry floor and one power law. It publishes NO
+  expected mechanism, NO expected confidence, NO expected verdict, NO expected
+  refusal and NO expected block reason. chanDiagnosis, screenTreatments,
+  rankTreatments and skinFromPiRatio are not asserted against anything at all.
+  The only part of this module that returns a VERDICT is the part with no
+  golden. Section 2 runs the classifier over the four published histories and
+  prints the four assertions that were never written.
+
+THE PUBLISHED CASES AT A GLANCE
+  power_law        11 points on y = a x^m, slope 1.35 exactly
+  histories        four labelled series, 40 samples each, t from 10 to 3000 days
+  minimumSkin      one geometry, re 2000 ft and rw 0.35 ft
+  skin             5 before-and-after skin pairs on that same geometry
+
+THE TEACHING CASES
+  ELELENWO-4    a water-oil ratio that climbs faster than proportionally for
+               most of its life, then turns back down after the well is beaned
+               back, so ONE history argues both mechanisms at once. This wave
+               designed it so that the discarded evidence, the window sweep,
+               the two point counts and the skin guard all have a case a lesson
+               may quote.
+  teaching gas history   the same well gas-oil ratio, exported with the Bourdet
+               derivative column NOT COMPUTED, in both JavaScript spellings of
+               "no value".
+  constant-derivative demonstration   a ratio rising exactly logarithmically.
+  low-last-sample demonstration       a climbing ratio with one low final test.
+
+# SECTION 0: FIVE FUNCTIONS AND ONE IDEA
+# Associate m01. This module is five exported calculations and two lookups, and
+# every number in this digest belongs to exactly one of them. Naming which
+# function owns a number is most of what the Associate tier is for.
+#   logLogSlope        THE MEASUREMENT. Ordinary least squares of ln y against
+#                      ln x over a window. Exact on a power law. Returns a
+#                      slope, an intercept, an r-squared, a point count and a
+#                      span in log cycles. Knows nothing about wells.
+#   pssDenominator     THE GEOMETRY GROUP. ln(re/rw) - 3/4 + S, and nothing
+#                      else. Productivity is inversely proportional to it.
+#   minimumSkin        THE FLOOR. The skin at which that group reaches zero and
+#                      the productivity index goes infinite.
+#   skinPiMultiplier   WHAT REMOVING SKIN IS WORTH. A ratio of two of those
+#                      groups. Exactly 1 when the skin does not change.
+#   skinFromPiRatio    THE INVERSE. The skin implied by a measured uplift.
+#   chanDiagnosis      THE VERDICT. Reads a ratio history the way Chan reads
+#                      one and says which of four pictures it is closest to.
+#   screenTreatments   THE SPEND. Seven treatments, each gated by the verdict.
+# THE IDEA THE WHOLE MODULE TURNS ON: channelling is plumbing and can be sealed,
+# coning is not and cannot, and the two need OPPOSITE treatments. A planner who
+# recommends a squeeze without the diagnosis is wrong about half the time.
+#
+# THE THRESHOLDS. All named, all overridable, all round on purpose: they are
+# boundaries between pictures, not measurements.
+derived CHAN_DEFAULTS, coningSlope = -0.1
+derived CHAN_DEFAULTS, channellingSlope = 1.3
+derived CHAN_DEFAULTS, ambiguousBand = 0.25
+derived CHAN_DEFAULTS, minR2 = 0.5
+derived CHAN_DEFAULTS, minSpanDecades = 0.4
+derived CHAN_DEFAULTS, minWor = 0.1
+derived CHAN_DEFAULTS, the ambiguous band therefore runs from 1.050000 to 1.550000 on the derivative slope, a width of 0.500000
+derived CHAN_MECHANISMS, channelling: label Channelling, treatable = true
+derived CHAN_MECHANISMS, channelling: note: Water is arriving through a path of its own -- behind pipe, a thief zone, a fracture or a high-permeability streak. That is plumbing, and plumbing can be sealed.
+derived CHAN_MECHANISMS, coning: label Coning, treatable = false
+derived CHAN_MECHANISMS, coning: note: Water is being pulled up through the same rock as the oil by the drawdown. There is nothing to squeeze: shut off the bottom perforations and the cone re-forms above them. The answers are less drawdown, a different completion, or living with it.
+derived CHAN_MECHANISMS, displacement: label Normal displacement, treatable = false
+derived CHAN_MECHANISMS, displacement: note: The water is simply arriving, as it does in a swept reservoir. This is not a well problem and no intervention on this well will change it.
+derived CHAN_MECHANISMS, indeterminate: label Not determined, treatable = false
+derived CHAN_MECHANISMS, indeterminate: note: The history does not settle the question. That is an answer: it says do not spend money on a treatment chosen by guesswork.
+derived TREATMENTS, matrixAcid: label Matrix acid stimulation, addressesSkin = true, addressesWater = false, addressesGas = false, addressesLift = false
+derived TREATMENTS, hydraulicFracture: label Hydraulic fracture, addressesSkin = true, addressesWater = false, addressesGas = false, addressesLift = false
+derived TREATMENTS, waterShutoff: label Water shutoff squeeze, addressesSkin = false, addressesWater = true, addressesGas = false, addressesLift = false
+derived TREATMENTS, gasShutoff: label Gas shutoff squeeze, addressesSkin = false, addressesWater = false, addressesGas = true, addressesLift = false
+derived TREATMENTS, recompletion: label Recompletion or reperforation, addressesSkin = true, addressesWater = false, addressesGas = false, addressesLift = false
+derived TREATMENTS, rateReduction: label Reduce drawdown, addressesSkin = false, addressesWater = true, addressesGas = false, addressesLift = false
+derived TREATMENTS, artificialLift: label Add or upgrade artificial lift, addressesSkin = false, addressesWater = false, addressesGas = false, addressesLift = true
+derived VERDICT_ORDER = candidate, consider, marginal, blocked, unknown, no
+
+# SECTION 1: THE MEASUREMENT, AND THE ONE THING THE ORACLE DOES CHECK
+# Associate m02. PUBLISHED. The oracle commits eleven points on y = a x^m and
+# the Theil-Sen slope through them. Theil-Sen is the median of every pairwise
+# slope: no mean, no square, no covariance in common with least squares. On a
+# clean power law the two routes agree to machine precision, which is the gate,
+# and the engine reproduces the published slope and intercept exactly.
+golden power_law, points = 11, trueSlope = 1.350000000000, trueIntercept = 1.308332819650
+golden power_law, theilSen slope = 1.350000000000, theilSen intercept = 1.308332819650, n = 11
+golden power_law point 1: x = 1.000000, y = 3.700000000, ln x = 0.000000000, ln y = 1.308332820
+golden power_law point 2: x = 2.000000, y = 9.431748642, ln x = 0.693147181, ln y = 2.244081513
+golden power_law point 3: x = 3.000000, y = 16.304797821, ln x = 1.098612289, ln y = 2.791459409
+golden power_law point 4: x = 5.000000, y = 32.494602592, ln x = 1.609437912, ln y = 3.481074001
+golden power_law point 5: x = 8.000000, y = 61.287683491, ln x = 2.079441542, ln y = 4.115578901
+golden power_law point 6: x = 10.000000, y = 82.832682127, ln x = 2.302585093, ln y = 4.416822695
+golden power_law point 7: x = 20.000000, y = 211.150550589, ln x = 2.995732274, ln y = 5.352571389
+golden power_law point 8: x = 35.000000, y = 449.462625067, ln x = 3.555348061, ln y = 6.108052703
+golden power_law point 9: x = 50.000000, y = 727.463537110, ln x = 3.912023005, ln y = 6.589563877
+golden power_law point 10: x = 80.000000, y = 1372.060325661, ln x = 4.382026635, ln y = 7.224068776
+golden power_law point 11: x = 100.000000, y = 1854.392764421, ln x = 4.605170186, ln y = 7.525312571
+derived power_law, engine slope = 1.350000000000, difference from the published Theil-Sen = 0.0000e+0
+derived power_law, engine intercept = 1.308332819650, difference from published = 0.0000e+0
+derived power_law, engine r2 = 1.000000000000, shortfall from a perfect fit = 0.0000e+0
+derived power_law, engine n = 11, spanDecades = 2.000000000
+# WHAT THE MEASUREMENT REFUSES, and the exact words it refuses with.
+derived logLogSlope refusal, two points: ok = false, n = 2
+derived logLogSlope refusal, two points: error: A slope needs at least three points that are both positive; a log-log plot has nothing to say about zero or negative values.
+derived logLogSlope refusal, one negative and one zero y among four points: ok = false, n = 2
+derived logLogSlope refusal, one negative and one zero y among four points: error: A slope needs at least three points that are both positive; a log-log plot has nothing to say about zero or negative values.
+derived logLogSlope refusal, every point at the same time: ok = false
+derived logLogSlope refusal, every point at the same time: error: Every point is at the same time, so there is no slope to measure.
+# THE FILTER IS THE POINT. logLogSlope drops every point whose y is not strictly
+# positive and then fits what is left, WITHOUT SAYING SO. The n it returns is the
+# count after the drop. Section 9 is what that costs.
+derived logLogSlope drop, six points handed in of which two are negative: ok = true, n returned = 4, slope = 1.000000000, r2 = 1.000000000, spanDecades = 0.903089987
+derived logLogSlope drop, the span the six points actually cover = 1.505149978 log cycles, so the fit reports 0.602059991 of a log cycle less than it was handed
+
+# SECTION 2: THE FOUR PUBLISHED HISTORIES, AND THE FOUR ASSERTIONS NOBODY WROTE
+# Associate m03 and Professional m01. PUBLISHED shapes, DERIVED verdicts. The
+# golden publishes each history and its lateDerivativeSlope and stops there. It
+# names no mechanism, no confidence and no verdict, so the lines below are what
+# the classifier says when nothing is checking it. Read them as the four
+# assertions the oracle could have written and did not.
+golden histories.channelling: form a t^m, n = 40, t from 10.000000 to 3000.000000 days, span = 2.477121255 log cycles
+golden histories.channelling: meta a = 0.020000000
+golden histories.channelling: meta expectedDerivativeSlope = 1.600000000
+golden histories.channelling: meta m = 1.600000000
+golden histories.channelling: published lateDerivativeSlope = 1.600000000000
+golden histories.channelling: first sample ratio = 0.796214341, derivative = 1.273942946
+golden histories.channelling: last sample ratio = 7318.532456802, derivative = 11709.651930883
+derived histories.channelling: the oracle late window is series[20:], which starts at t = 186.345364 days, and it is exactly what chanDiagnosis reads at its default lateFraction of 0.5
+derived histories.channelling: late samples = 20, of which positive derivative = 20, negative = 0, exactly zero = 0
+derived histories.channelling: engine derivative fit over that window: ok = true, slope = 1.600000000000, r2 = 1.000000000000, n = 20, spanDecades = 1.206802663
+derived histories.channelling: engine least squares against the published Theil-Sen: difference = 2.220446e-16, relative = 1.387779e-16
+derived histories.channelling, chanDiagnosis at the default window: ok = true, mechanism = channelling, treatable = true, confidence = high, ambiguous = false
+derived histories.channelling, chanDiagnosis at the default window: worSlope = 1.600000000, worR2 = 1.000000000, derivativeSlope = 1.600000000, derivativeR2 = 1.000000000, spanDecades = 1.206802663, lateFromT = 186.345364 days
+derived histories.channelling, chanDiagnosis at the default window: note 1: The derivative is climbing at a slope of 1.60, which is distinctly steeper than the roughly proportional climb of ordinary displacement. Water is accelerating away from the oil, which is water finding a path of its own.
+
+golden histories.coning: form plateau t/(t+tau), n = 40, t from 10.000000 to 3000.000000 days, span = 2.477121255 log cycles
+golden histories.coning: meta expectedDerivativeSlopeSign = -1.000000000
+golden histories.coning: meta plateau = 4.000000000
+golden histories.coning: meta tau = 200.000000000
+golden histories.coning: published lateDerivativeSlope = -0.555098339661
+golden histories.coning: first sample ratio = 0.190476190, derivative = 0.181405896
+golden histories.coning: last sample ratio = 3.750000000, derivative = 0.234375000
+derived histories.coning: the oracle late window is series[20:], which starts at t = 186.345364 days, and it is exactly what chanDiagnosis reads at its default lateFraction of 0.5
+derived histories.coning: late samples = 20, of which positive derivative = 20, negative = 0, exactly zero = 0
+derived histories.coning: engine derivative fit over that window: ok = true, slope = -0.539955222223, r2 = 0.948751314445, n = 20, spanDecades = 1.206802663
+derived histories.coning: engine least squares against the published Theil-Sen: difference = 1.514312e-2, relative = -2.728006e-2
+derived histories.coning, chanDiagnosis at the default window: ok = true, mechanism = coning, treatable = false, confidence = high, ambiguous = false
+derived histories.coning, chanDiagnosis at the default window: worSlope = 0.230022389, worR2 = 0.930741260, derivativeSlope = -0.539955222, derivativeR2 = 0.948751314, spanDecades = 1.206802663, lateFromT = 186.345364 days
+derived histories.coning, chanDiagnosis at the default window: note 1: The derivative is falling, at a slope of -0.54. The ratio has stopped climbing, which is what a cone does once it has reached the perforations and stopped growing. A falling derivative is qualitatively different from a rising one, so this is the firm end of the reading.
+
+golden histories.displacement: form a t, n = 40, t from 10.000000 to 3000.000000 days, span = 2.477121255 log cycles
+golden histories.displacement: meta a = 0.050000000
+golden histories.displacement: meta expectedDerivativeSlope = 1.000000000
+golden histories.displacement: meta m = 1.000000000
+golden histories.displacement: published lateDerivativeSlope = 1.000000000000
+golden histories.displacement: first sample ratio = 0.500000000, derivative = 0.500000000
+golden histories.displacement: last sample ratio = 150.000000000, derivative = 150.000000000
+derived histories.displacement: the oracle late window is series[20:], which starts at t = 186.345364 days, and it is exactly what chanDiagnosis reads at its default lateFraction of 0.5
+derived histories.displacement: late samples = 20, of which positive derivative = 20, negative = 0, exactly zero = 0
+derived histories.displacement: engine derivative fit over that window: ok = true, slope = 1.000000000000, r2 = 1.000000000000, n = 20, spanDecades = 1.206802663
+derived histories.displacement: engine least squares against the published Theil-Sen: difference = 4.440892e-16, relative = 4.440892e-16
+derived histories.displacement, chanDiagnosis at the default window: ok = true, mechanism = displacement, treatable = false, confidence = high, ambiguous = false
+derived histories.displacement, chanDiagnosis at the default window: worSlope = 1.000000000, worR2 = 1.000000000, derivativeSlope = 1.000000000, derivativeR2 = 1.000000000, spanDecades = 1.206802663, lateFromT = 186.345364 days
+derived histories.displacement, chanDiagnosis at the default window: note 1: The derivative is climbing at a slope of 1.00, which is about proportional. Water is arriving steadily rather than accelerating, which is the ordinary displacement picture.
+
+golden histories.flat: form constant, n = 40, t from 10.000000 to 3000.000000 days, span = 2.477121255 log cycles
+golden histories.flat: meta level = 1.200000000
+golden histories.flat: published lateDerivativeSlope = null
+golden histories.flat: first sample ratio = 1.200000000, derivative = 0.000000000
+golden histories.flat: last sample ratio = 1.200000000, derivative = 0.000000000
+derived histories.flat: the oracle late window is series[20:], which starts at t = 186.345364 days, and it is exactly what chanDiagnosis reads at its default lateFraction of 0.5
+derived histories.flat: late samples = 20, of which positive derivative = 0, negative = 0, exactly zero = 20
+derived histories.flat: engine derivative fit over that window: ok = false, slope = n/a, r2 = n/a, n = 0, spanDecades = n/a
+derived histories.flat, chanDiagnosis at the default window: ok = true, mechanism = displacement, treatable = false, confidence = n/a, ambiguous = n/a
+derived histories.flat, chanDiagnosis at the default window: worSlope = 0.000000000, worR2 = 0.000000000, derivativeSlope = n/a, derivativeR2 = n/a, spanDecades = n/a, lateFromT = 186.345364 days
+derived histories.flat, chanDiagnosis at the default window: note 1: The ratio is sitting flat at 1.20 and its derivative is zero throughout. Nothing is changing, so there is no mechanism to diagnose and nothing on this well for an intervention to fix. That is a finding, not a failure to reach one.
+
+# THE TWO THAT DESERVE A SECOND LOOK.
+# The coning history is the one place the two routes visibly separate: the engine
+# least squares and the published Theil-Sen disagree in the second decimal, on
+# data with no noise in it at all, because the shape is not a power law and the
+# two estimators weight a curved log-log trend differently. Both are right about
+# their own question. Neither is a measurement of a slope that exists.
+# The displacement history returns displacement with HIGH confidence and
+# ambiguous FALSE, on a slope of exactly one, which the oracle own docstring
+# calls the case that genuinely needs the plot and a person.
+
+# SECTION 3: THE PSEUDO-STEADY-STATE GROUP
+# Associate m04. PUBLISHED geometry. Everything about what a stimulation is worth
+# comes out of one group, ln(re/rw) - 3/4 + S, because the productivity index is
+# inversely proportional to it. The 3/4 is the pseudo-steady-state constant for a
+# circular drainage area; it is not a fudge and it is not adjustable.
+golden minimumSkin, geometry: re = 2000.000000 ft, rw = 0.350000 ft
+golden minimumSkin, published value = -7.900724584041
+derived minimumSkin, engine value = -7.900724584041, difference from published = 0.0000e+0
+derived minimumSkin, re over rw = 5714.285714286, ln of that = 8.650724584041, less 3/4 = 7.900724584041
+# HOW LITTLE THE RADII MATTER, and how much the skin does. A drainage radius is
+# a guess and a logarithm forgives a guess; a skin is a measurement and the group
+# adds it undivided. DERIVED sweep on the published wellbore radius.
+derived geometry sweep, re = 500 ft at the published rw of 0.35 ft: ln(re/rw) = 7.264430223, denominator at zero skin = 6.514430223, minimumSkin = -6.514430223
+derived geometry sweep, re = 1000 ft at the published rw of 0.35 ft: ln(re/rw) = 7.957577403, denominator at zero skin = 7.207577403, minimumSkin = -7.207577403
+derived geometry sweep, re = 1500 ft at the published rw of 0.35 ft: ln(re/rw) = 8.363042512, denominator at zero skin = 7.613042512, minimumSkin = -7.613042512
+derived geometry sweep, re = 2000 ft at the published rw of 0.35 ft: ln(re/rw) = 8.650724584, denominator at zero skin = 7.900724584, minimumSkin = -7.900724584
+derived geometry sweep, re = 3000 ft at the published rw of 0.35 ft: ln(re/rw) = 9.056189692, denominator at zero skin = 8.306189692, minimumSkin = -8.306189692
+derived geometry sweep, re = 5000 ft at the published rw of 0.35 ft: ln(re/rw) = 9.567015316, denominator at zero skin = 8.817015316, minimumSkin = -8.817015316
+derived geometry sweep, re = 10000 ft at the published rw of 0.35 ft: ln(re/rw) = 10.260162496, denominator at zero skin = 9.510162496, minimumSkin = -9.510162496
+derived geometry sweep, a TWENTYFOLD change in drainage radius, from 500 to 10000 ft, moves the zero-skin denominator by 2.995732274, which one unit of skin more than covers
+# THE DENOMINATOR AGAINST SKIN, on the published geometry. DERIVED sweep.
+derived denominator sweep, skin = -7.0: denominator = 0.900724584, flow efficiency against an undamaged well = 8.771520978
+derived denominator sweep, skin = -6.0: denominator = 1.900724584, flow efficiency against an undamaged well = 4.156690901
+derived denominator sweep, skin = -5.0: denominator = 2.900724584, flow efficiency against an undamaged well = 2.723707251
+derived denominator sweep, skin = -4.0: denominator = 3.900724584, flow efficiency against an undamaged well = 2.025450506
+derived denominator sweep, skin = -3.0: denominator = 4.900724584, flow efficiency against an undamaged well = 1.612154376
+derived denominator sweep, skin = -2.0: denominator = 5.900724584, flow efficiency against an undamaged well = 1.338941425
+derived denominator sweep, skin = -1.0: denominator = 6.900724584, flow efficiency against an undamaged well = 1.144912319
+derived denominator sweep, skin = 0.0: denominator = 7.900724584, flow efficiency against an undamaged well = 1.000000000
+derived denominator sweep, skin = 1.0: denominator = 8.900724584, flow efficiency against an undamaged well = 0.887649596
+derived denominator sweep, skin = 2.0: denominator = 9.900724584, flow efficiency against an undamaged well = 0.797994583
+derived denominator sweep, skin = 4.0: denominator = 11.900724584, flow efficiency against an undamaged well = 0.663886012
+derived denominator sweep, skin = 6.0: denominator = 13.900724584, flow efficiency against an undamaged well = 0.568367824
+derived denominator sweep, skin = 8.0: denominator = 15.900724584, flow efficiency against an undamaged well = 0.496878274
+derived denominator sweep, skin = 12.0: denominator = 19.900724584, flow efficiency against an undamaged well = 0.397006880
+derived denominator sweep, skin = 20.0: denominator = 27.900724584, flow efficiency against an undamaged well = 0.283172738
+# WHAT pssDenominator AND minimumSkin REFUSE. Both return a BARE NaN, which is a
+# different failure contract from the one skinPiMultiplier uses, and Section 13
+# is what that costs.
+derived pssDenominator refusal, rw larger than re: value = n/a, Number.isFinite = false
+derived minimumSkin refusal, rw larger than re: value = n/a, Number.isFinite = false
+derived pssDenominator refusal, a wellbore radius of zero: value = n/a, Number.isFinite = false
+
+# SECTION 4: WHAT REMOVING SKIN IS WORTH, ON THE FIVE PUBLISHED PAIRS
+# Associate m05 and Professional m03. PUBLISHED. The oracle builds a full radial
+# Darcy rate in SI, permeability in square metres and pressures in pascals, and
+# divides two real flow rates. The engine divides two dimensionless groups. They
+# agree because they are the same physics, and that agreement is the second of
+# the oracle two checks.
+golden skin case 1: re = 2000.000 ft, rw = 0.350 ft, skin 8.000 to 0.000, published multiplier = 2.012565355861
+derived skin case 1: engine multiplier = 2.012565355861, difference from published = 0.0000e+0
+derived skin case 1: denominator before = 15.900724584, after = 7.900724584, flowEfficiencyBefore = 0.496878274, flowEfficiencyAfter = 1.000000000, minimumSkin returned inside the result = -7.900724584
+golden skin case 2: re = 2000.000 ft, rw = 0.350 ft, skin 5.000 to -2.000, published multiplier = 2.186294988065
+derived skin case 2: engine multiplier = 2.186294988065, difference from published = -4.4409e-16
+derived skin case 2: denominator before = 12.900724584, after = 5.900724584, flowEfficiencyBefore = 0.612424871, flowEfficiencyAfter = 1.338941425, minimumSkin returned inside the result = -7.900724584
+golden skin case 3: re = 2000.000 ft, rw = 0.350 ft, skin 2.000 to 0.000, published multiplier = 1.253141338965
+derived skin case 3: engine multiplier = 1.253141338965, difference from published = -2.2204e-16
+derived skin case 3: denominator before = 9.900724584, after = 7.900724584, flowEfficiencyBefore = 0.797994583, flowEfficiencyAfter = 1.000000000, minimumSkin returned inside the result = -7.900724584
+golden skin case 4: re = 2000.000 ft, rw = 0.350 ft, skin 0.000 to 0.000, published multiplier = 1.000000000000
+derived skin case 4: engine multiplier = 1.000000000000, difference from published = 0.0000e+0
+derived skin case 4: denominator before = 7.900724584, after = 7.900724584, flowEfficiencyBefore = 1.000000000, flowEfficiencyAfter = 1.000000000, minimumSkin returned inside the result = -7.900724584
+golden skin case 5: re = 2000.000 ft, rw = 0.350 ft, skin 12.000 to -3.000, published multiplier = 4.060771880315
+derived skin case 5: engine multiplier = 4.060771880315, difference from published = -8.8818e-16
+derived skin case 5: denominator before = 19.900724584, after = 4.900724584, flowEfficiencyBefore = 0.397006880, flowEfficiencyAfter = 1.612154376, minimumSkin returned inside the result = -7.900724584
+# THE FIRST GATE ON IT: the multiplier is EXACTLY 1 when the skin does not
+# change, to the last bit, because it is one number divided by itself.
+derived skin identity, skin 0 to 0 on the published geometry: multiplier = 1.000000000000000, departure from one = 0.0000e+0
+# WHY A STIMULATION IS WORTH SO LITTLE ON AN UNDAMAGED WELL. DERIVED sweep on
+# the published geometry: the same one unit of skin removed, from different
+# starting points. Removing a unit from a heavily damaged well is worth several
+# times what removing a unit from a clean one is worth.
+derived one unit of skin, 20.0 down to 19.0: multiplier = 1.037173720, uplift = 3.717372 percent
+derived one unit of skin, 12.0 down to 11.0: multiplier = 1.052908025, uplift = 5.290802 percent
+derived one unit of skin, 8.0 down to 7.0: multiplier = 1.067110830, uplift = 6.711083 percent
+derived one unit of skin, 5.0 down to 4.0: multiplier = 1.084028497, uplift = 8.402850 percent
+derived one unit of skin, 3.0 down to 2.0: multiplier = 1.101002709, uplift = 10.100271 percent
+derived one unit of skin, 2.0 down to 1.0: multiplier = 1.112350404, uplift = 11.235040 percent
+derived one unit of skin, 1.0 down to 0.0: multiplier = 1.126570669, uplift = 12.657067 percent
+
+# SECTION 5: THE INVERSE, AND WHAT IT DOES NOT CHECK
+# Professional m03 and Expert m05. skinFromPiRatio is the natural way to audit a
+# claimed uplift: a vendor says the well makes N times what it made, and this is
+# the skin that claim implies. DERIVED on the published geometry.
+derived implied skin, a claimed uplift of 1.250 times on the published geometry implies a post-job skin of -1.580144917, and the floor this geometry allows is -7.900724584
+derived implied skin, a claimed uplift of 1.500 times on the published geometry implies a post-job skin of -2.633574861, and the floor this geometry allows is -7.900724584
+derived implied skin, a claimed uplift of 2.000 times on the published geometry implies a post-job skin of -3.950362292, and the floor this geometry allows is -7.900724584
+derived implied skin, a claimed uplift of 2.500 times on the published geometry implies a post-job skin of -4.740434750, and the floor this geometry allows is -7.900724584
+derived implied skin, a claimed uplift of 3.000 times on the published geometry implies a post-job skin of -5.267149723, and the floor this geometry allows is -7.900724584
+derived implied skin, a claimed uplift of 4.000 times on the published geometry implies a post-job skin of -5.925543438, and the floor this geometry allows is -7.900724584
+derived implied skin, a claimed uplift of 5.000 times on the published geometry implies a post-job skin of -6.320579667, and the floor this geometry allows is -7.900724584
+derived implied skin, a claimed uplift of 6.000 times on the published geometry implies a post-job skin of -6.583937153, and the floor this geometry allows is -7.900724584
+derived implied skin, a claimed uplift of 8.000 times on the published geometry implies a post-job skin of -6.913134011, and the floor this geometry allows is -7.900724584
+derived implied skin, a claimed uplift of 10.000 times on the published geometry implies a post-job skin of -7.110652126, and the floor this geometry allows is -7.900724584
+derived implied skin, a claimed uplift of 12.000 times on the published geometry implies a post-job skin of -7.242330869, and the floor this geometry allows is -7.900724584
+# THE ROUND TRIP. Take a published pair, compute its multiplier, invert it, and
+# the skin comes back. That is the only check there is on this function, and it
+# is one this generator ran, not one the oracle wrote.
+derived round trip, published case 1: multiplier = 2.012565356, inverted skin = 0.000000000, stated skinAfter = 0.000, difference = 0.0000e+0
+derived round trip, published case 2: multiplier = 2.186294988, inverted skin = -2.000000000, stated skinAfter = -2.000, difference = 8.8818e-16
+derived round trip, published case 3: multiplier = 1.253141339, inverted skin = 0.000000000, stated skinAfter = 0.000, difference = 0.0000e+0
+# NO PLAUSIBILITY CHECK OF ANY KIND, and a BARE NaN for bad geometry. There is no
+# ok flag on this function, so a caller that does not run Number.isFinite on the
+# result cannot tell an answer from a refusal.
+derived inverse refusal, rw larger than re: value = n/a, Number.isFinite = false
+derived inverse refusal, a negative claimed ratio: value = n/a, Number.isFinite = false
+derived inverse refusal, a claimed ratio of zero: value = n/a, Number.isFinite = false
+# AND WHAT IT RETURNS WITHOUT COMMENT: a claimed uplift can imply a skin below
+# everything the module own refusal text calls real, and the answer comes back as
+# a bare number with nothing said about it.
+derived inverse overreach, a claimed uplift of 15.000 times implies a skin of -7.374009612, which is 0.526714972 above the floor and past everything the module calls achievable, returned with no flag, no warning and no note
+derived inverse overreach, a claimed uplift of 20.000 times implies a skin of -7.505688355, which is 0.395036229 above the floor and past everything the module calls achievable, returned with no flag, no warning and no note
+derived inverse overreach, a claimed uplift of 30.000 times implies a skin of -7.637367098, which is 0.263357486 above the floor and past everything the module calls achievable, returned with no flag, no warning and no note
+
+# SECTION 6: THE TEACHING WELL, ELELENWO-4, SAMPLE BY SAMPLE
+# Professional m02 and Expert m01 through m03. TEACHING. Not a real well and not
+# a published case. Designed so that one history argues both mechanisms at once:
+# the water-oil ratio climbs faster than proportionally for most of its life,
+# then the well is beaned back and the ratio falls, which is the coning field
+# test and the coning answer. Both stories are in the same series.
+teaching ELELENWO-4, samples = 38, t from 15.000 to 3600.000 days, spaced geometrically, span = 2.380211242 log cycles
+teaching ELELENWO-4, WOR(t) = c1 t + c2 t^p with c1 = 0.0032 per day, p = 1.9, crossover tX = 1500 days and therefore c2 = 4.432694952e-6
+teaching ELELENWO-4, beaned back on day 2200; after that WOR(t) = 1.3 + (wBreak - 1.3) (t/tBreak)^-0.85
+teaching ELELENWO-4, the last sample before the choke is at t = 1990.592514 days with WOR = 14.587294415
+teaching ELELENWO-4, first sample WOR = 0.048760749, last sample WOR = 9.329979637, peak WOR = 14.587294415
+teaching ELELENWO-4, samples with a positive derivative = 34, with a negative derivative = 4
+teaching ELELENWO-4, water cut = 74.5 percent, skin = 7.5, re = 1180 ft, rw = 0.354 ft, gas-oil ratio = 2152 scf/stb against an expected 950 scf/stb, flowing = true
+teaching ELELENWO-4 sample 1: t = 15.000000 days, WOR = 0.048760749, derivative = 0.049445423
+teaching ELELENWO-4 sample 2: t = 17.394874 days, WOR = 0.056671616, derivative = 0.057578832
+teaching ELELENWO-4 sample 3: t = 20.172110 days, WOR = 0.065886410, derivative = 0.067088503
+teaching ELELENWO-4 sample 4: t = 23.392754 days, WOR = 0.076626607, derivative = 0.078219420
+teaching ELELENWO-4 sample 5: t = 27.127601 days, WOR = 0.089153360, derivative = 0.091263892
+teaching ELELENWO-4 sample 6: t = 31.458747 days, WOR = 0.103775244, derivative = 0.106571772
+teaching ELELENWO-4 sample 7: t = 36.481397 days, WOR = 0.120857686, derivative = 0.124563180
+teaching ELELENWO-4 sample 8: t = 42.305954 days, WOR = 0.140834504, derivative = 0.145744411
+teaching ELELENWO-4 sample 9: t = 49.060450 days, WOR = 0.164222099, derivative = 0.170727892
+teaching ELELENWO-4 sample 10: t = 56.893357 days, WOR = 0.191636963, derivative = 0.200257361
+teaching ELELENWO-4 sample 11: t = 65.976853 days, WOR = 0.223817397, derivative = 0.235239719
+teaching ELELENWO-4 sample 12: t = 76.510604 days, WOR = 0.261650560, derivative = 0.276785526
+teaching ELELENWO-4 sample 13: t = 88.726155 days, WOR = 0.306206303, derivative = 0.326260650
+teaching ELELENWO-4 sample 14: t = 102.892020 days, WOR = 0.358779680, derivative = 0.385352374
+teaching ELELENWO-4 sample 15: t = 119.319584 days, WOR = 0.420944585, derivative = 0.456154310
+teaching ELELENWO-4 sample 16: t = 138.369943 days, WOR = 0.494621693, derivative = 0.541275781
+teaching ELELENWO-4 sample 17: t = 160.461850 days, WOR = 0.582164875, derivative = 0.643983134
+teaching ELELENWO-4 sample 18: t = 186.080914 days, WOR = 0.686471482, derivative = 0.768382784
+teaching ELELENWO-4 sample 19: t = 215.790272 days, WOR = 0.811123617, derivative = 0.919658888
+teaching ELELENWO-4 sample 20: t = 250.242976 days, WOR = 0.960569677, derivative = 1.104382615
+teaching ELELENWO-4 sample 21: t = 290.196340 days, WOR = 1.140358343, derivative = 1.330915394
+teaching ELELENWO-4 sample 22: t = 336.528588 days, WOR = 1.357441033, derivative = 1.609935628
+teaching ELELENWO-4 sample 23: t = 390.258164 days, WOR = 1.620563854, derivative = 1.955127809
+teaching ELELENWO-4 sample 24: t = 452.566112 days, WOR = 1.940776734, derivative = 2.384085392
+teaching ELELENWO-4 sample 25: t = 524.822039 days, WOR = 2.332096193, derivative = 2.919495294
+teaching ELELENWO-4 sample 26: t = 608.614224 days, WOR = 2.812369799, derivative = 3.590693653
+teaching ELELENWO-4 sample 27: t = 705.784525 days, WOR = 3.404405666, derivative = 4.435711334
+teaching ELELENWO-4 sample 28: t = 818.468869 days, WOR = 4.137450607, derivative = 5.503965813
+teaching ELELENWO-4 sample 29: t = 949.144201 days, WOR = 5.049127312, derivative = 6.859806593
+teaching ELELENWO-4 sample 30: t = 1100.682933 days, WOR = 6.187976318, derivative = 8.587188158
+teaching ELELENWO-4 sample 31: t = 1276.416078 days, WOR = 7.616795409, derivative = 10.795832973
+teaching ELELENWO-4 sample 32: t = 1480.206474 days, WOR = 9.417031009, derivative = 13.629364272
+teaching ELELENWO-4 sample 33: t = 1716.533695 days, WOR = 11.694558186, derivative = 17.276043512
+teaching ELELENWO-4 sample 34: t = 1990.592514 days, WOR = 14.587294415, derivative = 21.982952948
+teaching ELELENWO-4 sample 35: t = 2308.407093 days, WOR = 13.015370548, derivative = -9.958064965
+teaching ELELENWO-4 sample 36: t = 2676.963401 days, WOR = 11.629409643, derivative = -8.779998197
+teaching ELELENWO-4 sample 37: t = 3104.362776 days, WOR = 10.407411767, derivative = -7.741300002
+teaching ELELENWO-4 sample 38: t = 3600.000000 days, WOR = 9.329979637, derivative = -6.825482691
+# THE WHOLE HISTORY FITTED AS ONE. This is the Associate measurement, on a raw
+# history, with no window and no classifier anywhere near it.
+teaching ELELENWO-4 full-history ratio fit: ok = true, slope = 1.098217467822, intercept = -6.052413433629, r2 = 0.989832434458, n = 38, spanDecades = 2.380211242
+teaching ELELENWO-4 full-history ratio fit: the fit dropped 0 of the 38 samples handed to it, and said nothing about it
+teaching ELELENWO-4 full-history ratio fit: intercept as a coefficient, exp(intercept) = 2.352178324e-3
+teaching ELELENWO-4 full-history derivative fit: ok = true, slope = 1.229355998655, r2 = 0.994988493568, n = 34, spanDecades = 2.122891107
+
+# SECTION 7: THE DIAGNOSIS AT THE DEFAULT WINDOW
+# Professional m02. TEACHING, at the engine own default lateFraction of 0.5,
+# which is also the window the oracle reads its four histories on. This is the
+# reading a user gets by touching nothing.
+teaching ELELENWO-4 at lateFraction 0.5: ok = true, mechanism = channelling, treatable = true, confidence = low, ambiguous = true
+teaching ELELENWO-4 at lateFraction 0.5: worSlope = 1.040602176, worR2 = 0.921895186, derivativeSlope = 1.442132492, derivativeR2 = 0.998513658, spanDecades = 0.900620470, lateFromT = 250.242976 days
+teaching ELELENWO-4 at lateFraction 0.5: note 1: The derivative is climbing at a slope of 1.44, which is distinctly steeper than the roughly proportional climb of ordinary displacement. Water is accelerating away from the oil, which is water finding a path of its own.
+teaching ELELENWO-4 at lateFraction 0.5: note 2: This sits within 0.25 of the boundary between displacement and channelling, and that boundary is the weak part of the reading: for any power-law history the ratio and its derivative have the SAME log-log slope, so nothing separates the two pictures except how steep the climb is. Take this one to the plot, or to a production log, before spending on it.
+teaching ELELENWO-4 at lateFraction 0.5: late samples = 19, positive derivative = 15, negative = 4, exactly zero = 0
+# TWO FITS IN ONE RETURN OBJECT, ON TWO DIFFERENT WINDOWS. worSlope is fitted
+# over EVERY late sample. derivativeSlope is fitted over only the late samples
+# whose derivative is positive. They come back side by side with nothing in the
+# object saying they were measured on different data, and spanDecades describes
+# the second window only while being named as though it described the reading.
+teaching ELELENWO-4 two windows: the ratio fit used n = 19 samples over 1.157940604 log cycles, slope = 1.040602176348, r2 = 0.921895186494
+teaching ELELENWO-4 two windows: the derivative fit used n = 15 samples over 0.900620470 log cycles, slope = 1.442132492322, r2 = 0.998513658433
+teaching ELELENWO-4 two windows: the derivative fit is 4 samples short of the ratio fit, and 0.257320134 of a log cycle short of the window it claims to describe
+teaching ELELENWO-4 two windows: the window actually runs 1.157940604 log cycles
+teaching ELELENWO-4 two windows: the two slopes returned side by side are 1.040602176 for the ratio and 1.442132492 for the derivative, a gap of 0.401530316
+# WHERE THE VERDICT SITS AGAINST THE THRESHOLD. This is the whole spend, decided
+# on one comparison.
+teaching ELELENWO-4 margin: derivativeSlope = 1.442132492322 against a channellingSlope of 1.3, so the margin is 0.142132492322
+teaching ELELENWO-4 margin: and against the ambiguous band of 0.25, the reading is 0.142132492 from the boundary, so ambiguous = true
+
+# SECTION 8: THE DIAL THAT DECIDES THE SPEND
+# Expert m02. TEACHING sweep. lateFraction is a free analyst choice with a
+# default of 0.5 and no guidance anywhere in the module, no sweep helper, and
+# nothing in the return object that names its effect. On one history, with not
+# one datum changed, it moves the mechanism and therefore the water shutoff
+# verdict. Every column below is the same 38 samples read through a different
+# window.
+teaching ELELENWO-4 window sweep, lateFraction = 0.20: window starts at t = 1276.416078 days, late samples = 8 of which 4 positive and 4 negative, derivativeSlope = 1.600276347, derivativeR2 = 0.999944740, spanDecades = n/a, worSlope = 0.143809349, worR2 = 0.063449269, mechanism = indeterminate, confidence = low, ambiguous = n/a, waterShutoff = blocked
+teaching ELELENWO-4 window sweep, lateFraction = 0.30: window starts at t = 705.784525 days, late samples = 12 of which 8 positive and 4 negative, derivativeSlope = 1.544046342, derivativeR2 = 0.999661253, spanDecades = 0.450310235, worSlope = 0.734484318, worR2 = 0.692418777, mechanism = channelling, confidence = low, ambiguous = true, waterShutoff = candidate
+teaching ELELENWO-4 window sweep, lateFraction = 0.40: window starts at t = 390.258164 days, late samples = 16 of which 12 positive and 4 negative, derivativeSlope = 1.485563987, derivativeR2 = 0.999101063, spanDecades = 0.707630369, worSlope = 0.963127975, worR2 = 0.869741844, mechanism = channelling, confidence = low, ambiguous = true, waterShutoff = candidate
+teaching ELELENWO-4 window sweep, lateFraction = 0.50: window starts at t = 250.242976 days, late samples = 19 of which 15 positive and 4 negative, derivativeSlope = 1.442132492, derivativeR2 = 0.998513658, spanDecades = 0.900620470, worSlope = 1.040602176, worR2 = 0.921895186, mechanism = channelling, confidence = low, ambiguous = true, waterShutoff = candidate
+teaching ELELENWO-4 window sweep, lateFraction = 0.60: window starts at t = 138.369943 days, late samples = 23 of which 19 positive and 4 negative, derivativeSlope = 1.387035000, derivativeR2 = 0.997599130, spanDecades = 1.157940604, worSlope = 1.088100432, worR2 = 0.955925314, mechanism = channelling, confidence = low, ambiguous = true, waterShutoff = candidate
+teaching ELELENWO-4 window sweep, lateFraction = 0.70: window starts at t = 76.510604 days, late samples = 27 of which 23 positive and 4 negative, derivativeSlope = 1.336892539, derivativeR2 = 0.996676450, spanDecades = 1.415260738, worSlope = 1.104746497, worR2 = 0.972752511, mechanism = channelling, confidence = low, ambiguous = true, waterShutoff = candidate
+teaching ELELENWO-4 window sweep, lateFraction = 0.80: window starts at t = 42.305954 days, late samples = 31 of which 27 positive and 4 negative, derivativeSlope = 1.292632524, derivativeR2 = 0.995879922, spanDecades = 1.672580873, worSlope = 1.107183344, worR2 = 0.981897063, mechanism = displacement, confidence = low, ambiguous = true, waterShutoff = blocked
+teaching ELELENWO-4 window sweep, lateFraction = 0.90: window starts at t = 23.392754 days, late samples = 35 of which 31 positive and 4 negative, derivativeSlope = 1.254360095, derivativeR2 = 0.995286721, spanDecades = 1.929901007, worSlope = 1.103149966, worR2 = 0.987227989, mechanism = displacement, confidence = low, ambiguous = true, waterShutoff = blocked
+teaching ELELENWO-4 window sweep, lateFraction = 1.00: window starts at t = 15.000000 days, late samples = 38 of which 34 positive and 4 negative, derivativeSlope = 1.229355999, derivativeR2 = 0.994988494, spanDecades = 2.122891107, worSlope = 1.098217468, worR2 = 0.989832434, mechanism = displacement, confidence = low, ambiguous = true, waterShutoff = blocked
+# THE SAME SWEEP AS A MARGIN. What the dial is worth, measured against the one
+# threshold that decides whether the squeeze is recommended or refused.
+teaching ELELENWO-4 window margin, lateFraction = 0.20: derivativeSlope less channellingSlope = 0.300276347
+teaching ELELENWO-4 window margin, lateFraction = 0.30: derivativeSlope less channellingSlope = 0.244046342
+teaching ELELENWO-4 window margin, lateFraction = 0.40: derivativeSlope less channellingSlope = 0.185563987
+teaching ELELENWO-4 window margin, lateFraction = 0.50: derivativeSlope less channellingSlope = 0.142132492
+teaching ELELENWO-4 window margin, lateFraction = 0.60: derivativeSlope less channellingSlope = 0.087035000
+teaching ELELENWO-4 window margin, lateFraction = 0.70: derivativeSlope less channellingSlope = 0.036892539
+teaching ELELENWO-4 window margin, lateFraction = 0.80: derivativeSlope less channellingSlope = -0.007367476
+teaching ELELENWO-4 window margin, lateFraction = 0.90: derivativeSlope less channellingSlope = -0.045639905
+teaching ELELENWO-4 window margin, lateFraction = 1.00: derivativeSlope less channellingSlope = -0.070644001
+teaching ELELENWO-4 window sweep: across the whole range of the dial the derivative slope moves by 0.370920348, from 1.229355999 to 1.600276347
+# THE DIAL IS CLAMPED, WHICH IS THE ONE THING ABOUT IT THAT IS DOCUMENTED
+# NOWHERE. lateFraction is clamped to the range 0.1 to 1.0, so a value outside it
+# is silently replaced rather than refused.
+teaching ELELENWO-4 clamp, lateFraction = -3.00 as handed in: window starts at t = 2308.407093 days, derivativeSlope = n/a, mechanism = coning
+teaching ELELENWO-4 clamp, lateFraction = 0.00 as handed in: window starts at t = 2308.407093 days, derivativeSlope = n/a, mechanism = coning
+teaching ELELENWO-4 clamp, lateFraction = 0.05 as handed in: window starts at t = 2308.407093 days, derivativeSlope = n/a, mechanism = coning
+teaching ELELENWO-4 clamp, lateFraction = 0.10 as handed in: window starts at t = 2308.407093 days, derivativeSlope = n/a, mechanism = coning
+teaching ELELENWO-4 clamp, lateFraction = 1.00 as handed in: window starts at t = 15.000000 days, derivativeSlope = 1.229355999, mechanism = displacement
+teaching ELELENWO-4 clamp, lateFraction = 2.50 as handed in: window starts at t = 15.000000 days, derivativeSlope = 1.229355999, mechanism = displacement
+
+# SECTION 9: THE EVIDENCE THAT ARGUES THE OTHER WAY, AND WHERE IT GOES
+# Expert m01. THE CENTRE OF THE TIER. chanDiagnosis builds its derivative fit
+# from clean.filter((p) => Number.isFinite(p.derivative) && p.derivative > 0),
+# and logLogSlope then filters y > 0 again. A late window whose ratio has
+# TURNED BACK DOWN is therefore read entirely on the samples from BEFORE the
+# turn. The engine knows: two lines later
+# it counts negativeDerivatives, and it reads that count only inside the
+# !derFit.ok branch and the flat branch. Whenever three positive samples survive,
+# derFit.ok is true, the count is discarded, and the note it carries is
+# unreachable. Here is that note, quoted from the source, on a path this history
+# never reaches:
+#   "A ratio that has turned back down is itself the coning signature, but
+#    confirm it against the plot rather than on this alone."
+teaching ELELENWO-4 discarded evidence: the turn happens after day 2200; the first sample past it is at t = 2308.407093 days
+teaching ELELENWO-4 discarded sample 1: t = 2308.407093 days, WOR = 13.015370548, derivative = -9.958064965
+teaching ELELENWO-4 discarded sample 2: t = 2676.963401 days, WOR = 11.629409643, derivative = -8.779998197
+teaching ELELENWO-4 discarded sample 3: t = 3104.362776 days, WOR = 10.407411767, derivative = -7.741300002
+teaching ELELENWO-4 discarded sample 4: t = 3600.000000 days, WOR = 9.329979637, derivative = -6.825482691
+teaching ELELENWO-4 discarded evidence, fitted on its own: ok = true, ratio slope = -0.749171775150, r2 = 0.999955540052, n = 4, spanDecades = 0.192990101
+teaching ELELENWO-4 discarded evidence, the magnitude of the falling derivative fitted on its own: slope = -0.850000000000, r2 = 1.000000000000, n = 4
+teaching ELELENWO-4 discarded evidence: a rate cut followed by a falling water-oil ratio is the coning field test, and the ratio fit through it has an r-squared of 0.999955540, which is a cleaner reading than the 0.998513658 the engine reported for the verdict it actually gave
+# WHAT THE ENGINE REPORTED INSTEAD, on the same well, at the same window.
+teaching ELELENWO-4 discarded evidence: reported mechanism = channelling, reported derivativeSlope = 1.442132492, samples used = 15, samples dropped = 4, and the count of negative derivatives the engine computed and then discarded = 4
+# THE COMPOUNDING COST: dropping the contrary samples also SHORTENS the span the
+# fit sits on, and the span has its own gate at minSpanDecades. At a short enough
+# window the drop is the difference between a reading and a refusal.
+teaching ELELENWO-4 span loss, lateFraction = 0.20: the window runs 0.450310235 log cycles, the fit reports spanDecades = n/a, the loss is n/a, and minSpanDecades is 0.4, so the reported span clears the gate by n/a
+teaching ELELENWO-4 span loss, lateFraction = 0.25: the window runs 0.578970302 log cycles, the fit reports spanDecades = n/a, the loss is n/a, and minSpanDecades is 0.4, so the reported span clears the gate by n/a
+teaching ELELENWO-4 span loss, lateFraction = 0.30: the window runs 0.707630369 log cycles, the fit reports spanDecades = 0.450310235, the loss is 0.257320134, and minSpanDecades is 0.4, so the reported span clears the gate by 0.050310235
+teaching ELELENWO-4 span loss, lateFraction = 0.35: the window runs 0.836290436 log cycles, the fit reports spanDecades = 0.578970302, the loss is 0.257320134, and minSpanDecades is 0.4, so the reported span clears the gate by 0.178970302
+# AND THE PATH THAT DOES READ THE COUNT, so a lesson can show what the engine
+# would have said. TEACHING: the same four falling samples with nothing before
+# them, so no positive sample survives, derFit fails, and the coning branch
+# fires with the note that is otherwise unreachable.
+teaching falling-only demonstration, 8 samples every one with a negative derivative: ok = true, mechanism = coning, treatable = false, confidence = low, ambiguous = n/a
+teaching falling-only demonstration, 8 samples every one with a negative derivative: worSlope = 0.143809349, worR2 = 0.063449269, derivativeSlope = n/a, derivativeR2 = n/a, spanDecades = n/a, lateFromT = 1276.416078 days
+teaching falling-only demonstration, 8 samples every one with a negative derivative: note 1: The derivative turns negative over 8 of the late samples, so its slope cannot be read on a log-log plot. A ratio that has turned back down is itself the coning signature, but confirm it against the plot rather than on this alone.
+
+# SECTION 10: THE FAILS-OPEN. A MISSING DERIVATIVE COLUMN IS READ AS ZERO
+# Expert m03. THE WORST ONE IN THE MODULE. Number(null) is 0. So is Number("")
+# and Number([]). Only Number(undefined) is NaN. chanDiagnosis filters its input
+# on Number.isFinite(p.t) and Number.isFinite(p.ratio) and DOES NOT REQUIRE THE
+# DERIVATIVE TO BE FINITE, so a series exported with the Bourdet derivative
+# column never computed satisfies Math.abs(p.derivative) < 1e-12 at every late
+# point, takes the flat branch, and returns a reassuring verdict.
+# The spelling decides the answer, and null is the spelling every JSON export and
+# every SQL null produces.
+derived coercion, Number(null) = 0.0, Number.isFinite = true, passes Math.abs(x) < 1e-12 = true
+derived coercion, Number(empty string) = 0.0, Number.isFinite = true, passes Math.abs(x) < 1e-12 = true
+derived coercion, Number(empty array) = 0.0, Number.isFinite = true, passes Math.abs(x) < 1e-12 = true
+derived coercion, Number(false) = 0.0, Number.isFinite = true, passes Math.abs(x) < 1e-12 = true
+derived coercion, Number(the string "0") = 0.0, Number.isFinite = true, passes Math.abs(x) < 1e-12 = true
+derived coercion, Number(undefined) = NaN, Number.isFinite = false, passes Math.abs(x) < 1e-12 = false
+derived coercion, Number(the string "n/a") = NaN, Number.isFinite = false, passes Math.abs(x) < 1e-12 = false
+# THE SAME WATER HISTORY, THE SAME MISSING DATA, TWO SPELLINGS, TWO OPPOSITE
+# ANSWERS. TEACHING.
+teaching ELELENWO-4 with the derivative column spelled null: ok = true, mechanism = displacement, treatable = false, confidence = n/a, ambiguous = n/a
+teaching ELELENWO-4 with the derivative column spelled null: worSlope = 1.040602176, worR2 = 0.921895186, derivativeSlope = n/a, derivativeR2 = n/a, spanDecades = n/a, lateFromT = 250.242976 days
+teaching ELELENWO-4 with the derivative column spelled null: note 1: The ratio is sitting flat at 9.33 and its derivative is zero throughout. Nothing is changing, so there is no mechanism to diagnose and nothing on this well for an intervention to fix. That is a finding, not a failure to reach one.
+teaching ELELENWO-4 with the derivative column spelled undefined: ok = true, mechanism = indeterminate, treatable = false, confidence = low, ambiguous = n/a
+teaching ELELENWO-4 with the derivative column spelled undefined: worSlope = 1.040602176, worR2 = 0.921895186, derivativeSlope = n/a, derivativeR2 = n/a, spanDecades = n/a, lateFromT = 250.242976 days
+teaching ELELENWO-4 with the derivative column spelled undefined: note 1: A slope needs at least three points that are both positive; a log-log plot has nothing to say about zero or negative values.
+teaching ELELENWO-4 spelling: null returns mechanism displacement at confidence n/a, undefined returns mechanism indeterminate at confidence low, on identical ratios
+# AND ON THE GAS HISTORY, WHICH IS WHERE THE MODULE OWN TEXT SENDS THE USER. The
+# gas shutoff reasoning says "Run the diagnostic on the gas-oil ratio before
+# deciding". TEACHING gas history: GOR(t) = g0 + g1 t^q scf/stb, with the
+# derivative column never computed.
+teaching gas history: samples = 26, t from 60 to 3600 days, g0 = 950 scf/stb, g1 = 0.0431, q = 1.25
+teaching gas history: first GOR = 957.197245770 scf/stb, last GOR = 2151.864191995 scf/stb, a factor of 2.248088575 across the window
+teaching gas history sample 1: t = 60.000000 days, GOR = 957.197245770 scf/stb, derivative column = null
+teaching gas history sample 2: t = 70.676869 days, GOR = 958.832301702 scf/stb, derivative column = null
+teaching gas history sample 3: t = 83.253663 days, GOR = 960.838806377 scf/stb, derivative column = null
+teaching gas history sample 4: t = 98.068470 days, GOR = 963.301144780 scf/stb, derivative column = null
+teaching gas history sample 5: t = 115.519540 days, GOR = 966.322872309 scf/stb, derivative column = null
+teaching gas history sample 6: t = 136.075989 days, GOR = 970.031069867 scf/stb, derivative column = null
+teaching gas history sample 7: t = 160.290414 days, GOR = 974.581688346 scf/stb, derivative column = null
+teaching gas history sample 8: t = 188.813742 days, GOR = 980.166107250 scf/stb, derivative column = null
+teaching gas history sample 9: t = 222.412735 days, GOR = 987.019183298 scf/stb, derivative column = null
+teaching gas history sample 10: t = 261.990595 days, GOR = 995.429127486 scf/stb, derivative column = null
+teaching gas history sample 11: t = 308.611248 days, GOR = 1005.749626012 scf/stb, derivative column = null
+teaching gas history sample 12: t = 363.527944 days, GOR = 1018.414714799 scf/stb, derivative column = null
+teaching gas history sample 13: t = 428.216947 days, GOR = 1033.957033182 scf/stb, derivative column = null
+teaching gas history sample 14: t = 504.417216 days, GOR = 1053.030224440 scf/stb, derivative column = null
+teaching gas history sample 15: t = 594.177156 days, GOR = 1076.436425227 scf/stb, derivative column = null
+teaching gas history sample 16: t = 699.909681 days, GOR = 1105.160000000 scf/stb, derivative column = null
+teaching gas history sample 17: t = 824.457078 days, GOR = 1140.408939171 scf/stb, derivative column = null
+teaching gas history sample 18: t = 971.167411 days, GOR = 1183.665662002 scf/stb, derivative column = null
+teaching gas history sample 19: t = 1143.984528 days, GOR = 1236.749360805 scf/stb, derivative column = null
+teaching gas history sample 20: t = 1347.554072 days, GOR = 1301.892508371 scf/stb, derivative column = null
+teaching gas history sample 21: t = 1587.348371 days, GOR = 1381.834746205 scf/stb, derivative column = null
+teaching gas history sample 22: t = 1869.813542 days, GOR = 1479.938102102 scf/stb, derivative column = null
+teaching gas history sample 23: t = 2202.542771 days, GOR = 1600.328382621 scf/stb, derivative column = null
+teaching gas history sample 24: t = 2594.480439 days, GOR = 1748.068686825 scf/stb, derivative column = null
+teaching gas history sample 25: t = 3056.162558 days, GOR = 1929.372338514 scf/stb, derivative column = null
+teaching gas history sample 26: t = 3600.000000 days, GOR = 2151.864191995 scf/stb, derivative column = null
+teaching gas history with the derivative column spelled null: ok = true, mechanism = displacement, treatable = false, confidence = n/a, ambiguous = n/a
+teaching gas history with the derivative column spelled null: worSlope = 0.356090047, worR2 = 0.949579198, derivativeSlope = n/a, derivativeR2 = n/a, spanDecades = n/a, lateFromT = 504.417216 days
+teaching gas history with the derivative column spelled null: note 1: The ratio is sitting flat at 2151.86 and its derivative is zero throughout. Nothing is changing, so there is no mechanism to diagnose and nothing on this well for an intervention to fix. That is a finding, not a failure to reach one.
+teaching gas history with the derivative column spelled undefined: ok = true, mechanism = indeterminate, treatable = false, confidence = low, ambiguous = n/a
+teaching gas history with the derivative column spelled undefined: worSlope = 0.356090047, worR2 = 0.949579198, derivativeSlope = n/a, derivativeR2 = n/a, spanDecades = n/a, lateFromT = 504.417216 days
+teaching gas history with the derivative column spelled undefined: note 1: A slope needs at least three points that are both positive; a log-log plot has nothing to say about zero or negative values.
+
+# SECTION 11: THE FLAT BRANCH ASSERTS SOMETHING IT NEVER CHECKED
+# Expert m03. That branch note opens "The ratio is sitting flat at X". NOTHING IN
+# THE BRANCH LOOKS AT THE RATIO. The condition is entirely about the derivative,
+# and the same return object carries worSlope and worR2, fitted on the ratio, and
+# they say the opposite. The engine contradicts itself inside one object.
+teaching gas history flat branch: the note says the ratio is sitting flat at 2151.86 scf/stb
+teaching gas history flat branch: the SAME return object carries worSlope = 0.356090047430 and worR2 = 0.949579197952, which is a ratio climbing steadily, on 26 clean samples
+teaching ELELENWO-4 flat branch: the note says the ratio is sitting flat at 9.33
+teaching ELELENWO-4 flat branch: the SAME return object carries worSlope = 1.040602176348 and worR2 = 0.921895186494
+# THE PUBLISHED FLAT HISTORY IS THE ONE CASE WHERE THE SENTENCE IS TRUE, which is
+# exactly why nobody noticed: the only series anyone tested it on really was
+# flat.
+golden histories.flat: every ratio = 1.200000000, every derivative = 0.000000000
+derived histories.flat, chanDiagnosis: ok = true, mechanism = displacement, treatable = false, confidence = n/a, ambiguous = n/a
+derived histories.flat, chanDiagnosis: worSlope = 0.000000000, worR2 = 0.000000000, derivativeSlope = n/a, derivativeR2 = n/a, spanDecades = n/a, lateFromT = 186.345364 days
+derived histories.flat, chanDiagnosis: note 1: The ratio is sitting flat at 1.20 and its derivative is zero throughout. Nothing is changing, so there is no mechanism to diagnose and nothing on this well for an intervention to fix. That is a finding, not a failure to reach one.
+
+# SECTION 12: THE ZERO-VARIANCE GUARD THAT FIRES BY ACCIDENT
+# Expert m03 and m04. logLogSlope computes r2 = syy > 0 ? (sxy*sxy)/(sxx*syy) : 1,
+# intending to hand back a perfect fit when every y is identical.
+# AN EARLIER VERSION OF THIS COMMENT SAID THE BRANCH NEVER FIRES. THAT IS WRONG,
+# and the generated line directly below it always said so: four points with y
+# identical at 5 return exactly the r2 = 1 the branch exists to produce. Whether
+# syy accumulates to EXACTLY zero over identical y depends on the sample count
+# and the value TOGETHER, and SECTION 12A sweeps both. What is true is that it
+# fires on small tidy cases and stops firing on real ones, so on the twenty
+# sample constant-derivative history it does NOT fire and the opposite of what
+# was intended happens: clean data is refused as noise.
+derived zero variance, four points with y identical at 5: ok = true, slope = 0.000000e+0, r2 = 1.000000e+0, n = 4, spanDecades = 3.000000000
+derived zero variance, the guard intended r2 = 1 here; it returned 1.000000e+0, which is 0.000000e+0 short of the value the branch exists to produce
+# AND THE REAL SIGNATURE THAT LANDS ON IT. A ratio rising exactly logarithmically
+# has a derivative that is exactly constant. TEACHING demonstration: WOR = A +
+# B ln t, so d(WOR)/d(ln t) = B at every sample.
+teaching constant-derivative demonstration: WOR = 2.0 + 0.9 ln t, 20 samples from t = 20 to 2000 days, first WOR = 4.696159046, last WOR = 8.840812214, derivative = 0.900000000 at every sample
+teaching constant-derivative demonstration, chanDiagnosis: ok = true, mechanism = indeterminate, treatable = false, confidence = low, ambiguous = n/a
+teaching constant-derivative demonstration, chanDiagnosis: worSlope = 0.114949989, worR2 = 0.998756100, derivativeSlope = 0.000000000, derivativeR2 = 0.000000000, spanDecades = n/a, lateFromT = 225.767578 days
+teaching constant-derivative demonstration, chanDiagnosis: note 1: The derivative scatters too much to carry a slope: the fit explains only 0.0 percent of it. Reading a mechanism off this would be reading noise.
+teaching constant-derivative demonstration, the derivative fit on its own: slope = -9.465333e-33, r2 = 2.271680e-31, against a minR2 of 0.5
+teaching constant-derivative demonstration, the ratio fit on its own: slope = 0.135843859, r2 = 0.992767316
+
+# SECTION 13: THE SKIN GUARD SITS AT THE SINGULARITY, NOT AT PLAUSIBILITY
+# Expert m04. skinPiMultiplier refuses a design only when the denominator reaches
+# ZERO, which is where the productivity index goes infinite. Its refusal text
+# then advertises a COMPLETELY DIFFERENT limit: "Real treatments reach about -3
+# to -5 on acid and -5 to -6 on a fracture; ask for less." Everything between
+# those limits and the pole is accepted in silence, with no warning, no note and
+# no flag. minimumSkin exists, is computed on every call, and is even returned
+# inside the successful result. It is never compared against anything but zero.
+teaching ELELENWO-4 geometry: re = 1180 ft, rw = 0.354 ft, ln(re/rw) = 8.111728083308, minimumSkin = -7.361728083308
+teaching ELELENWO-4 damage: skin before = 7.5, denominator = 14.861728083308, flow efficiency = 0.495348054
+teaching ELELENWO-4 designed acid job, skin 7.5 down to -2.2: ok = true, multiplier = 2.879215612184, before = 14.861728083, after = 5.161728083, flowEfficiencyAfter = 1.426213850, minimumSkin in the result = -7.361728083
+# THE SWEEP THAT MATTERS. Walk the after-skin down past everything the refusal
+# text calls real, and watch the answer get bigger and the engine stay quiet.
+teaching ELELENWO-4 skin guard, after-skin = -1.000: ok = true, multiplier = 2.336114950, denominator after = 6.361728083, distance above the floor = 6.361728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -2.000: ok = true, multiplier = 2.771816820, denominator after = 5.361728083, distance above the floor = 5.361728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -3.000: ok = true, multiplier = 3.407302748, denominator after = 4.361728083, distance above the floor = 4.361728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -4.000: ok = true, multiplier = 4.420859664, denominator after = 3.361728083, distance above the floor = 3.361728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -5.000: ok = true, multiplier = 6.292734624, denominator after = 2.361728083, distance above the floor = 2.361728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -5.500: ok = true, multiplier = 7.982759790, denominator after = 1.861728083, distance above the floor = 1.861728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -6.000: ok = true, multiplier = 10.913873530, denominator after = 1.361728083, distance above the floor = 1.361728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -6.500: ok = true, multiplier = 17.246424216, denominator after = 0.861728083, distance above the floor = 0.861728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -6.800: ok = true, multiplier = 26.457156986, denominator after = 0.561728083, distance above the floor = 0.561728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -7.000: ok = true, multiplier = 41.085358779, denominator after = 0.361728083, distance above the floor = 0.361728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -7.200: ok = true, multiplier = 91.893304980, denominator after = 0.161728083, distance above the floor = 0.161728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -7.300: ok = true, multiplier = 240.761210892, denominator after = 0.061728083, distance above the floor = 0.061728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -7.350: ok = true, multiplier = 1267.191551503, denominator after = 0.011728083, distance above the floor = 0.011728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -7.361: ok = true, multiplier = 20412.125808300, denominator after = 0.000728083, distance above the floor = 0.000728083, warnings = none, notes = none
+teaching ELELENWO-4 skin guard, after-skin = -7.400: ok = false
+teaching ELELENWO-4 skin guard, after-skin = -7.400: error: Taking the skin to -7.4 would put it below the -7.4 this geometry allows, where the productivity index goes infinite. Real treatments reach about -3 to -5 on acid and -5 to -6 on a fracture; ask for less.
+teaching ELELENWO-4 skin guard, after-skin = -7.600: ok = false
+teaching ELELENWO-4 skin guard, after-skin = -7.600: error: Taking the skin to -7.6 would put it below the -7.4 this geometry allows, where the productivity index goes infinite. Real treatments reach about -3 to -5 on acid and -5 to -6 on a fracture; ask for less.
+teaching ELELENWO-4 skin guard, after-skin = -8.000: ok = false
+teaching ELELENWO-4 skin guard, after-skin = -8.000: error: Taking the skin to -8.0 would put it below the -7.4 this geometry allows, where the productivity index goes infinite. Real treatments reach about -3 to -5 on acid and -5 to -6 on a fracture; ask for less.
+teaching ELELENWO-4 skin guard: the deepest skin the refusal text calls real for a fracture is -6; at an after-skin of -5 the multiplier is 6.292734624 and at -6.8 it is 26.457156986, a factor of 4.204397383 handed back with the same confidence as the honest one
+teaching ELELENWO-4 skin guard: against the DESIGNED acid job the same overreach is a factor of 9.189015534
+# THE BEFORE-SKIN HAS THE SAME GUARD AND THE SAME GAP, and its refusal text is a
+# different sentence that does not mention the achievable range at all.
+teaching ELELENWO-4 skin guard, before-skin = -8.5: ok = false
+teaching ELELENWO-4 skin guard, before-skin = -8.5: error: A skin of -8.5 is below the -7.4 this geometry allows, where the productivity index goes infinite. That is the equation running out, not a well.
+teaching skin guard, rw larger than re: ok = false
+teaching skin guard, rw larger than re: error: The drainage and wellbore radii are needed, and the drainage radius has to be the larger one.
+# TWO FAILURE CONTRACTS IN ONE MODULE, which is what makes this hard to catch at
+# a call site: skinPiMultiplier returns { ok: false, error }, and pssDenominator,
+# minimumSkin and skinFromPiRatio return a BARE NaN for the same bad geometry.
+derived failure contracts: skinPiMultiplier returns an object with ok = false; pssDenominator returns n/a; minimumSkin returns n/a; skinFromPiRatio returns n/a
+# AUDITING A CLAIM ON THE TEACHING GEOMETRY. A vendor claims a fold increase; the
+# inverse says what skin that implies, and says nothing about whether it is real.
+teaching ELELENWO-4 claim audit, a claimed uplift of 2.000 times implies a post-job skin of -3.680864042, against a geometry floor of -7.361728083 and a fracture limit the module own text puts at -6
+teaching ELELENWO-4 claim audit, a claimed uplift of 4.000 times implies a post-job skin of -5.521296062, against a geometry floor of -7.361728083 and a fracture limit the module own text puts at -6
+teaching ELELENWO-4 claim audit, a claimed uplift of 6.000 times implies a post-job skin of -6.134773403, against a geometry floor of -7.361728083 and a fracture limit the module own text puts at -6
+teaching ELELENWO-4 claim audit, a claimed uplift of 8.500 times implies a post-job skin of -6.495642426, against a geometry floor of -7.361728083 and a fracture limit the module own text puts at -6
+teaching ELELENWO-4 claim audit, a claimed uplift of 12.000 times implies a post-job skin of -6.748250743, against a geometry floor of -7.361728083 and a fracture limit the module own text puts at -6
+
+# SECTION 14: THE RATIO GATE IS UNIT BLIND AND READS ONE SAMPLE
+# Expert m05. minWor is 0.1, named for a water-oil ratio, documented as "Below
+# this water-oil ratio there is no water problem to diagnose", and applied
+# unchanged to whatever ratio column arrives. It is also applied to the LAST
+# SAMPLE ALONE, so one low final reading short-circuits the entire diagnosis with
+# no slope computed and no confidence returned.
+derived minWor: the threshold is 0.1, and it is compared against the last sample ratio only
+teaching gas history: the last GOR is 2151.864192 scf/stb, which clears a water-oil-ratio threshold of 0.1 by a factor of 2.151864e+4, so on a gas history the gate is inert
+teaching low-last-sample demonstration: 24 samples from t = 30 to 2000 days on WOR = 0.004 t^1.15, climbing to 20.279117393 at the second to last sample, with the last reading replaced by a post-shut-in test of 0.060000000
+teaching low-last-sample demonstration, chanDiagnosis: ok = true, mechanism = displacement, treatable = false, confidence = n/a, ambiguous = n/a
+teaching low-last-sample demonstration, chanDiagnosis: worSlope = n/a, worR2 = n/a, derivativeSlope = n/a, derivativeR2 = n/a, spanDecades = n/a, lateFromT = n/a days
+teaching low-last-sample demonstration, chanDiagnosis: note 1: The ratio is still only 0.060. There is no water problem here to diagnose, and nothing to treat.
+teaching low-last-sample demonstration with that one sample restored, chanDiagnosis: ok = true, mechanism = displacement, treatable = false, confidence = low, ambiguous = true
+teaching low-last-sample demonstration with that one sample restored, chanDiagnosis: worSlope = 1.150000000, worR2 = 1.000000000, derivativeSlope = 1.150000000, derivativeR2 = 1.000000000, spanDecades = 0.872304180, lateFromT = 268.364963 days
+teaching low-last-sample demonstration with that one sample restored, chanDiagnosis: note 1: The derivative is climbing at a slope of 1.15, which is about proportional. Water is arriving steadily rather than accelerating, which is the ordinary displacement picture.
+teaching low-last-sample demonstration with that one sample restored, chanDiagnosis: note 2: This sits within 0.25 of the boundary between displacement and channelling, and that boundary is the weak part of the reading: for any power-law history the ratio and its derivative have the SAME log-log slope, so nothing separates the two pictures except how steep the climb is. Take this one to the plot, or to a production log, before spending on it.
+teaching low-last-sample demonstration: one sample decides between mechanism displacement with confidence n/a and no slope at all, and mechanism displacement with confidence low at a derivative slope of 1.150000000
+# THE OTHER DOOR IN. A history of fewer than six samples is refused outright, and
+# that refusal is the one place the module counts before it reads.
+teaching short history, 5 samples: ok = false, mechanism = indeterminate, treatable = false, confidence = n/a, ambiguous = n/a
+teaching short history, 5 samples: worSlope = n/a, worR2 = n/a, derivativeSlope = n/a, derivativeR2 = n/a, spanDecades = n/a, lateFromT = n/a days
+teaching short history, 5 samples: error: A Chan reading needs a history, not a handful of points. Six producing samples is the bare minimum and a useful reading wants far more.
+
+# SECTION 15: THE SCREENING, AND WHAT THE VERDICT IS GATED ON
+# Professional m04 and m05. TEACHING. Seven treatments, each with its reasons in
+# full, and the water shutoff gated by the diagnosis. Every verdict below is the
+# same well row read against a different diagnosis, and nothing about the well
+# changes between them.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, matrixAcid: verdict = candidate, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, matrixAcid: reason 1: A skin of 7.5 is heavy damage. Most of what this well could make is being lost in the last few feet.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, hydraulicFracture: verdict = consider, blocked = false, reasons = 3
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, hydraulicFracture: reason 1: A skin of 7.5 is heavy damage. Most of what this well could make is being lost in the last few feet.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, hydraulicFracture: reason 2: A fracture is not a damage treatment: it adds conductive area, so it pays on tight rock whether or not there is damage, and it is the wrong tool on a well whose problem is a skin of a few units in good permeability.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, hydraulicFracture: reason 3: At 75 percent water, a fracture that grows out of zone will make the water worse, not the oil better.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, waterShutoff: verdict = candidate, blocked = false, reasons = 3
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, waterShutoff: reason 1: Water cut is 75 percent and the derivative is climbing, which says the water has a path of its own.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, waterShutoff: reason 2: That is plumbing, and a squeeze or a gel has somewhere to go and something to seal. This is the case where a shutoff earns its money.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, waterShutoff: reason 3: The reading is low confidence, so confirm it with a production log before committing to a squeeze.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, gasShutoff: verdict = consider, blocked = false, reasons = 2
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, gasShutoff: reason 1: The gas-oil ratio is 2152 against an expected 950, so most of the gas is not coming out of the oil.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, gasShutoff: reason 2: Gas coning and gas channelling separate the same way water does, and the same rule applies: only the channelling case is worth squeezing. Run the diagnostic on the gas-oil ratio before deciding.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, recompletion: verdict = candidate, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, recompletion: reason 1: A channelling diagnosis is often a completion problem: a poor cement bond or perforations into the wrong interval. Recompleting addresses the cause rather than sealing the symptom.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, rateReduction: verdict = no, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, rateReduction: reason 1: Only worth it for coning, and the diagnostic does not say coning. Choking a channelling well back gives away rate without touching the water path.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, artificialLift: verdict = consider, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5, artificialLift: reason 1: At 75 percent water the column is heavy, and a well that flows today may not flow much longer. Size the lift before it stops rather than after.
+teaching ELELENWO-4 screening, water diagnosis at lateFraction 0.5: ranked order = matrixAcid (candidate), waterShutoff (candidate), recompletion (candidate), hydraulicFracture (consider), gasShutoff (consider), artificialLift (consider), rateReduction (no)
+
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, matrixAcid: verdict = candidate, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, matrixAcid: reason 1: A skin of 7.5 is heavy damage. Most of what this well could make is being lost in the last few feet.
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, hydraulicFracture: verdict = consider, blocked = false, reasons = 3
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, hydraulicFracture: reason 1: A skin of 7.5 is heavy damage. Most of what this well could make is being lost in the last few feet.
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, hydraulicFracture: reason 2: A fracture is not a damage treatment: it adds conductive area, so it pays on tight rock whether or not there is damage, and it is the wrong tool on a well whose problem is a skin of a few units in good permeability.
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, hydraulicFracture: reason 3: At 75 percent water, a fracture that grows out of zone will make the water worse, not the oil better.
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, waterShutoff: verdict = blocked, blocked = true, reasons = 1
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, waterShutoff: reason 1: Water cut is 75 percent and the derivative is flat.
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, waterShutoff: blockReason: The diagnostic says ordinary displacement. The water is arriving because the reservoir is swept, which is not a well problem and no treatment on this well will change it.
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, gasShutoff: verdict = consider, blocked = false, reasons = 2
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, gasShutoff: reason 1: The gas-oil ratio is 2152 against an expected 950, so most of the gas is not coming out of the oil.
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, gasShutoff: reason 2: Gas coning and gas channelling separate the same way water does, and the same rule applies: only the channelling case is worth squeezing. Run the diagnostic on the gas-oil ratio before deciding.
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, recompletion: verdict = consider, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, recompletion: reason 1: Nothing in the data points at the completion specifically. Worth considering alongside anything else that needs a rig.
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, rateReduction: verdict = no, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, rateReduction: reason 1: Only worth it for coning, and the diagnostic does not say coning. Choking a channelling well back gives away rate without touching the water path.
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, artificialLift: verdict = consider, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9, artificialLift: reason 1: At 75 percent water the column is heavy, and a well that flows today may not flow much longer. Size the lift before it stops rather than after.
+teaching ELELENWO-4 screening, the same well at lateFraction 0.9: ranked order = matrixAcid (candidate), hydraulicFracture (consider), gasShutoff (consider), recompletion (consider), artificialLift (consider), waterShutoff (blocked), rateReduction (no)
+
+# WITH NO DIAGNOSIS AT ALL, which is the honest refusal and the one the module
+# gets right.
+teaching ELELENWO-4 screening, no diagnosis, matrixAcid: verdict = candidate, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, no diagnosis, matrixAcid: reason 1: A skin of 7.5 is heavy damage. Most of what this well could make is being lost in the last few feet.
+teaching ELELENWO-4 screening, no diagnosis, hydraulicFracture: verdict = consider, blocked = false, reasons = 3
+teaching ELELENWO-4 screening, no diagnosis, hydraulicFracture: reason 1: A skin of 7.5 is heavy damage. Most of what this well could make is being lost in the last few feet.
+teaching ELELENWO-4 screening, no diagnosis, hydraulicFracture: reason 2: A fracture is not a damage treatment: it adds conductive area, so it pays on tight rock whether or not there is damage, and it is the wrong tool on a well whose problem is a skin of a few units in good permeability.
+teaching ELELENWO-4 screening, no diagnosis, hydraulicFracture: reason 3: At 75 percent water, a fracture that grows out of zone will make the water worse, not the oil better.
+teaching ELELENWO-4 screening, no diagnosis, waterShutoff: verdict = blocked, blocked = true, reasons = 1
+teaching ELELENWO-4 screening, no diagnosis, waterShutoff: reason 1: The water cut is 75 percent, which is worth acting on, but not until it is known what is bringing the water.
+teaching ELELENWO-4 screening, no diagnosis, waterShutoff: blockReason: The mechanism has not been established. A shutoff squeeze on a coning well is money down a hole, and this history does not say which it is. Get more production history, or a production log, before spending anything.
+teaching ELELENWO-4 screening, no diagnosis, gasShutoff: verdict = consider, blocked = false, reasons = 2
+teaching ELELENWO-4 screening, no diagnosis, gasShutoff: reason 1: The gas-oil ratio is 2152 against an expected 950, so most of the gas is not coming out of the oil.
+teaching ELELENWO-4 screening, no diagnosis, gasShutoff: reason 2: Gas coning and gas channelling separate the same way water does, and the same rule applies: only the channelling case is worth squeezing. Run the diagnostic on the gas-oil ratio before deciding.
+teaching ELELENWO-4 screening, no diagnosis, recompletion: verdict = consider, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, no diagnosis, recompletion: reason 1: Nothing in the data points at the completion specifically. Worth considering alongside anything else that needs a rig.
+teaching ELELENWO-4 screening, no diagnosis, rateReduction: verdict = no, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, no diagnosis, rateReduction: reason 1: Only worth it for coning, and the diagnostic does not say coning. Choking a channelling well back gives away rate without touching the water path.
+teaching ELELENWO-4 screening, no diagnosis, artificialLift: verdict = consider, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, no diagnosis, artificialLift: reason 1: At 75 percent water the column is heavy, and a well that flows today may not flow much longer. Size the lift before it stops rather than after.
+
+# SECTION 16: THE SCREENING DOES NOT KNOW WHICH FLUID IT READ
+# Expert m05. screenTreatments takes a diagnosis and reads diagnosis.mechanism.id.
+# NOTHING in chanDiagnosis return says whether it read a water-oil ratio or a
+# gas-oil ratio, and the module own gas reasoning sends the user to run it on the
+# gas. Hand the screening the GAS diagnosis and the WATER shutoff comes back with
+# a verdict, and its reasons quote the water cut. That block is issued on gas
+# evidence.
+teaching ELELENWO-4 screening, handed the GAS diagnosis, matrixAcid: verdict = candidate, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, handed the GAS diagnosis, matrixAcid: reason 1: A skin of 7.5 is heavy damage. Most of what this well could make is being lost in the last few feet.
+teaching ELELENWO-4 screening, handed the GAS diagnosis, hydraulicFracture: verdict = consider, blocked = false, reasons = 3
+teaching ELELENWO-4 screening, handed the GAS diagnosis, hydraulicFracture: reason 1: A skin of 7.5 is heavy damage. Most of what this well could make is being lost in the last few feet.
+teaching ELELENWO-4 screening, handed the GAS diagnosis, hydraulicFracture: reason 2: A fracture is not a damage treatment: it adds conductive area, so it pays on tight rock whether or not there is damage, and it is the wrong tool on a well whose problem is a skin of a few units in good permeability.
+teaching ELELENWO-4 screening, handed the GAS diagnosis, hydraulicFracture: reason 3: At 75 percent water, a fracture that grows out of zone will make the water worse, not the oil better.
+teaching ELELENWO-4 screening, handed the GAS diagnosis, waterShutoff: verdict = blocked, blocked = true, reasons = 1
+teaching ELELENWO-4 screening, handed the GAS diagnosis, waterShutoff: reason 1: Water cut is 75 percent and the derivative is flat.
+teaching ELELENWO-4 screening, handed the GAS diagnosis, waterShutoff: blockReason: The diagnostic says ordinary displacement. The water is arriving because the reservoir is swept, which is not a well problem and no treatment on this well will change it.
+teaching ELELENWO-4 screening, handed the GAS diagnosis, gasShutoff: verdict = consider, blocked = false, reasons = 2
+teaching ELELENWO-4 screening, handed the GAS diagnosis, gasShutoff: reason 1: The gas-oil ratio is 2152 against an expected 950, so most of the gas is not coming out of the oil.
+teaching ELELENWO-4 screening, handed the GAS diagnosis, gasShutoff: reason 2: Gas coning and gas channelling separate the same way water does, and the same rule applies: only the channelling case is worth squeezing. Run the diagnostic on the gas-oil ratio before deciding.
+teaching ELELENWO-4 screening, handed the GAS diagnosis, recompletion: verdict = consider, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, handed the GAS diagnosis, recompletion: reason 1: Nothing in the data points at the completion specifically. Worth considering alongside anything else that needs a rig.
+teaching ELELENWO-4 screening, handed the GAS diagnosis, rateReduction: verdict = no, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, handed the GAS diagnosis, rateReduction: reason 1: Only worth it for coning, and the diagnostic does not say coning. Choking a channelling well back gives away rate without touching the water path.
+teaching ELELENWO-4 screening, handed the GAS diagnosis, artificialLift: verdict = consider, blocked = false, reasons = 1
+teaching ELELENWO-4 screening, handed the GAS diagnosis, artificialLift: reason 1: At 75 percent water the column is heavy, and a well that flows today may not flow much longer. Size the lift before it stops rather than after.
+teaching ELELENWO-4 screening comparison: on the water diagnosis the water shutoff is candidate; on the gas diagnosis it is blocked; the well row handed in is identical
+# AND CONFIDENCE IS READ IN EXACTLY ONE PLACE. screenTreatments reads
+# diagnosis.confidence only in the channelling branch, where it appends a line
+# about a production log. The displacement and coning branches, which BLOCK, read
+# neither confidence nor ambiguous. The caveat is attached to the verdict that
+# spends money, not to the one that refuses to.
+teaching ELELENWO-4 confidence handling, at lateFraction 0.5: mechanism = channelling, confidence = low, ambiguous = true, water shutoff reasons = 3
+teaching ELELENWO-4 confidence handling, at lateFraction 0.9: mechanism = displacement, confidence = low, ambiguous = true, water shutoff reasons = 1, blocked = true
+
+# SECTION 17: A TEST THAT DECIDES NOTHING
+# Expert m05. UNAMBIGUOUS, and one word wide. The fracture verdict is
+#   push("hydraulicFracture", Number.isFinite(skin) && skin > 0 ? "consider" :
+#   "consider", fracReasons);
+# Both arms of the ternary return the same string. The skin test decides nothing
+# and never has, and it reads as though somebody meant "candidate" on the true
+# arm. DERIVED sweep: the same well row at every skin, and the verdict never
+# moves.
+derived fracture ternary, skin = -4.000: hydraulicFracture = consider, matrixAcid = no, recompletion = candidate, fracture reasons = 3
+derived fracture ternary, skin = -1.000: hydraulicFracture = consider, matrixAcid = no, recompletion = candidate, fracture reasons = 3
+derived fracture ternary, skin = 0.000: hydraulicFracture = consider, matrixAcid = no, recompletion = candidate, fracture reasons = 3
+derived fracture ternary, skin = 0.500: hydraulicFracture = consider, matrixAcid = marginal, recompletion = candidate, fracture reasons = 3
+derived fracture ternary, skin = 3.000: hydraulicFracture = consider, matrixAcid = candidate, recompletion = candidate, fracture reasons = 3
+derived fracture ternary, skin = 9.000: hydraulicFracture = consider, matrixAcid = candidate, recompletion = candidate, fracture reasons = 3
+derived fracture ternary, skin = 20.000: hydraulicFracture = consider, matrixAcid = candidate, recompletion = candidate, fracture reasons = 3
+derived fracture ternary, skin = not entered: hydraulicFracture = consider, matrixAcid = unknown, recompletion = candidate, fracture reasons = 3
+# WHAT THE OTHER SKIN-GATED VERDICTS DO INSTEAD, so a lesson can show that the
+# module knows how to write this branch and wrote it correctly three times.
+derived verdict thresholds, matrixAcid: candidate above skin 2, marginal above 0, no at or below 0, unknown when no skin was entered
+derived verdict thresholds, recompletion: candidate when the mechanism is channelling or the skin is above 8, consider otherwise
+derived verdict thresholds, artificialLift: candidate when flowing is false, consider above 70 percent water, no otherwise; this well is at 74.5 percent
+
+# SECTION 18: THE GAS SHUTOFF GATE, AND THE INSTRUCTION IT ENDS ON
+# Professional m05. DERIVED sweep on the teaching well expected gas-oil ratio.
+# The gate is a factor of two on the expected ratio and nothing else.
+derived gas gate, gas-oil ratio = 900 scf/stb against an expected 950: verdict = no, ratio to expected = 0.947368421, reasons = 1
+derived gas gate, gas-oil ratio = 1500 scf/stb against an expected 950: verdict = no, ratio to expected = 1.578947368, reasons = 1
+derived gas gate, gas-oil ratio = 1899 scf/stb against an expected 950: verdict = no, ratio to expected = 1.998947368, reasons = 1
+derived gas gate, gas-oil ratio = 1900 scf/stb against an expected 950: verdict = consider, ratio to expected = 2.000000000, reasons = 2
+derived gas gate, gas-oil ratio = 1901 scf/stb against an expected 950: verdict = consider, ratio to expected = 2.001052632, reasons = 2
+derived gas gate, gas-oil ratio = 2152 scf/stb against an expected 950: verdict = consider, ratio to expected = 2.265263158, reasons = 2
+derived gas gate, gas-oil ratio = 3000 scf/stb against an expected 950: verdict = consider, ratio to expected = 3.157894737, reasons = 2
+derived gas gate, gas-oil ratio = 5000 scf/stb against an expected 950: verdict = consider, ratio to expected = 5.263157895, reasons = 2
+derived gas gate, at the teaching well own ratio: reason 1: The gas-oil ratio is 2152 against an expected 950, so most of the gas is not coming out of the oil.
+derived gas gate, at the teaching well own ratio: reason 2: Gas coning and gas channelling separate the same way water does, and the same rule applies: only the channelling case is worth squeezing. Run the diagnostic on the gas-oil ratio before deciding.
+# THAT LAST SENTENCE IS THE WHOLE OF SECTION 10 AND SECTION 16 IN ONE LINE. It
+# tells the user to run the diagnostic on the gas-oil ratio, and the diagnostic
+# it sends them to cannot tell it read a gas history, fails open on a missing
+# derivative column, and returns a verdict the water screening will then act on.
+
+# SECTION 19: THE WATER GATE, END TO END
+# Professional m04. DERIVED sweep on the water cut, holding the diagnosis fixed.
+# Below 30 percent there is no water problem worth an intervention, whatever the
+# diagnosis says, and that gate fires before the mechanism is ever read.
+derived water gate, water cut = 10.0 percent: waterShutoff = no, blocked = false, reasons = 1, fracture reasons = 2, artificialLift = no
+derived water gate, water cut = 25.0 percent: waterShutoff = no, blocked = false, reasons = 1, fracture reasons = 2, artificialLift = no
+derived water gate, water cut = 29.0 percent: waterShutoff = no, blocked = false, reasons = 1, fracture reasons = 2, artificialLift = no
+derived water gate, water cut = 30.0 percent: waterShutoff = candidate, blocked = false, reasons = 3, fracture reasons = 2, artificialLift = no
+derived water gate, water cut = 45.0 percent: waterShutoff = candidate, blocked = false, reasons = 3, fracture reasons = 2, artificialLift = no
+derived water gate, water cut = 60.0 percent: waterShutoff = candidate, blocked = false, reasons = 3, fracture reasons = 2, artificialLift = no
+derived water gate, water cut = 61.0 percent: waterShutoff = candidate, blocked = false, reasons = 3, fracture reasons = 3, artificialLift = no
+derived water gate, water cut = 74.5 percent: waterShutoff = candidate, blocked = false, reasons = 3, fracture reasons = 3, artificialLift = consider
+derived water gate, water cut = 90.0 percent: waterShutoff = candidate, blocked = false, reasons = 3, fracture reasons = 3, artificialLift = consider
+# THE SAME WATER CUT UNDER EVERY MECHANISM. This is the gating the module exists
+# for, and it is the part with no golden.
+derived mechanism gate, published channelling history gives mechanism channelling at confidence high: waterShutoff = candidate (blocked false), rateReduction = no, recompletion = candidate
+derived mechanism gate, published coning history gives mechanism coning at confidence high: waterShutoff = blocked (blocked true), rateReduction = candidate, recompletion = consider
+derived mechanism gate, published displacement history gives mechanism displacement at confidence high: waterShutoff = blocked (blocked true), rateReduction = no, recompletion = consider
+derived mechanism gate, published flat history gives mechanism displacement at confidence n/a: waterShutoff = blocked (blocked true), rateReduction = no, recompletion = consider
+
+# SECTION 20: WHAT A LESSON MAY AND MAY NOT DO WITH THIS FILE
+# 1. Every number a lesson quotes must appear on a line above. If it is not here,
+#    it is not a number this course knows.
+# 2. Say which label a number carries. A golden value, a derived sweep point and
+#    a teaching case are three different kinds of claim and a reader is entitled
+#    to know which one is in front of them.
+# 3. Never present the teaching well, the teaching gas history or the three
+#    demonstration series as real or as published. They were built to carry a
+#    result and they are labelled teaching for that reason.
+# 4. Never mention the capstone well, its history, its geometry, its skin, its
+#    water cut or its window. None of it is in this file and none of it belongs
+#    in a lesson.
+# 5. Say what the thing REFUSES to do. Every refusal in this module is printed
+#    above with its exact words, and the refusals are half the teaching.
+# 6. A slope on a log-log plot carries no unit. Do not give it one.
+# 7. Fit quality is a FRACTION in this engine and a PERCENTAGE in its own error
+#    messages. Say which you mean every time.
+
+# SECTION 12A: WHEN THE ZERO-VARIANCE GUARD FIRES, AND WHY IT IS WORSE
+# THAN A GUARD THAT NEVER FIRES. derived, reproducing logLogSlope's own
+# accumulation. The guard is `syy > 0 ? ordinary : 1`, so it fires exactly
+# when syy is EXACTLY zero. Over identical y values that is decided by
+# whether the sequential sum of n identical logarithms divides exactly by n,
+# and THAT DEPENDS ON THE SAMPLE COUNT AND THE VALUE TOGETHER. Neither one
+# alone predicts it. Expert m04.
+derived zero variance sweep, n = 3: y = 5: syy = 0.000e+0, guard fires = true; y = 0.9: syy = 0.000e+0, guard fires = true; y = 2: syy = 0.000e+0, guard fires = true; y = 0.1: syy = 0.000e+0, guard fires = true
+derived zero variance sweep, n = 4: y = 5: syy = 0.000e+0, guard fires = true; y = 0.9: syy = 0.000e+0, guard fires = true; y = 2: syy = 0.000e+0, guard fires = true; y = 0.1: syy = 0.000e+0, guard fires = true
+derived zero variance sweep, n = 5: y = 5: syy = 0.000e+0, guard fires = true; y = 0.9: syy = 9.630e-34, guard fires = false; y = 2: syy = 0.000e+0, guard fires = true; y = 0.1: syy = 0.000e+0, guard fires = true
+derived zero variance sweep, n = 8: y = 5: syy = 3.944e-31, guard fires = false; y = 0.9: syy = 6.163e-33, guard fires = false; y = 2: syy = 0.000e+0, guard fires = true; y = 0.1: syy = 0.000e+0, guard fires = true
+derived zero variance sweep, n = 10: y = 5: syy = 4.930e-31, guard fires = false; y = 0.9: syy = 7.704e-33, guard fires = false; y = 2: syy = 0.000e+0, guard fires = true; y = 0.1: syy = 1.972e-30, guard fires = false
+derived zero variance sweep, n = 16: y = 5: syy = 3.155e-30, guard fires = false; y = 0.9: syy = 2.773e-32, guard fires = false; y = 2: syy = 0.000e+0, guard fires = true; y = 0.1: syy = 0.000e+0, guard fires = true
+derived zero variance sweep, n = 20: y = 5: syy = 9.861e-31, guard fires = false; y = 0.9: syy = 1.541e-32, guard fires = false; y = 2: syy = 0.000e+0, guard fires = true; y = 0.1: syy = 3.944e-30, guard fires = false
+derived zero variance sweep, n = 32: y = 5: syy = 2.524e-29, guard fires = false; y = 0.9: syy = 5.547e-32, guard fires = false; y = 2: syy = 6.311e-30, guard fires = false; y = 0.1: syy = 0.000e+0, guard fires = true
+# READ THE TABLE, NOT THE SLOGAN. At n = 3 and n = 4 the guard fires on
+# every value tried. At n = 5 it already splits: it fires on y = 5 and not
+# on y = 0.9. At n = 8 and above it mostly does not fire, and y = 2 keeps
+# firing until n = 32 where it stops. There is no rule here a caller could
+# hold in their head.
+# SO THE HEADLINE "A GUARD THAT NEVER FIRES" IS WRONG, AND THE TRUTH IS
+# WORSE. A guard that never fires is dead code, and dead code is harmless
+# once you know it is dead. THIS guard fires on small tidy cases and stops
+# firing on real ones, which is the pattern that survives a test suite and
+# fails in production: the derived four-point case at y = 5 fires and
+# returns the intended r2 = 1, and the twenty-sample constant-derivative
+# history does not fire and comes back at r2 = 2.271680e-31, clean data
+# refused as noise.
+
+derived digest, lines written = 894
