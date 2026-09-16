@@ -16,7 +16,7 @@ A gas line is read by asking which form was used, what the hill did to it, and w
 
 SOKU is 11.938000 in of bore over 32.000000 miles, 850.000000 psia at the station against 620.000000 psia at the delivery point, at a gravity of 0.670000, an average flowing temperature of 535.000000 degR, an average compressibility of 0.885000 and an efficiency of 1.000000. Those two pressures never appear on their own. They appear as 338100.0000 psia squared, counted at a base of 520.000000 degR and 14.650000 psia, over a length in miles.
 
-Four published forms read that trunk. Weymouth gives 66104956.1404 scfd, Panhandle A 86864172.0167, Panhandle B 88369202.2673 and General Flow 73861363.0502 at a friction factor of 0.0112132010. The spread from lowest to highest is 1.336801, which makes the choice of form a larger decision than the choice of bore.
+Four published forms read that trunk. Weymouth gives 66104956.1404 scfd, Panhandle A 86864172.0167, Panhandle B 88369202.2673 and General Flow 73861363.0502 at a friction factor of 0.0112132010. The spread from lowest to highest is 1.336801, and one step of bore through Weymouth, from 11.938000 in to 15.000000 in, spreads 1.838340, so the bore moves the answer further than the form does and both have to be defended.
 
 ## The hill
 

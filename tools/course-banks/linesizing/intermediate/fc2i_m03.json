@@ -107,7 +107,7 @@
    "That it is the correction a designer applies to a flat-line rate before quoting it for a route with relief on it, which is why it is computed from the Weymouth row."
   ],
   "answer": 0,
-  "explanation": "The term is an exponential and an exponential is not symmetric about zero. The climb loses more than the descent gains on every row of that table, which is why the average falls below one rather than above it."
+  "explanation": "The term is an exponential and an exponential is not symmetric about zero. On that row the climb loses more than the descent gains, which is why the average falls below one rather than above it."
  },
  {
   "prompt": "All four forms share one elevation term and the four still respond to the same hill by different amounts. Why?",

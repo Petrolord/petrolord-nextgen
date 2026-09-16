@@ -15,7 +15,7 @@ A liquid is incompressible, so marching it buys the station list and nothing els
 
 ## Which makes the reason for marching clearer rather than weaker
 
-It is tempting to read that zero as evidence the traverse is redundant. It is the opposite. Because the two totals agree exactly, the station list is the entire value of the call, and there is no accuracy argument mixed into the decision. A reader choosing between the two calls is choosing between a number and a profile, and never between a rougher answer and a better one. There is no tradeoff to weigh, which is unusual enough to be worth naming.
+It is tempting to read that zero as evidence the traverse is redundant. It is the opposite. Because the two totals agree exactly, the station list is the entire value of the call, and there is no accuracy argument mixed into the decision. A reader choosing between the two calls is choosing between a number and a profile, and never between a rougher answer and a better one.
 
 The previous lesson showed what the profile is worth: two cases with identical totals and a crest 158.958333 psi apart. Neither of those cases is better represented by its total than the other, and only one of them is safe.
 

@@ -12,7 +12,7 @@ Asked for 20000000.0000 scfd up that hill, the trunk delivers at 766.523922 psia
 
 That band from 784.964657 psia up to 850.000000 psia is the part of a climbing line's arithmetic that has no physical content. The driving group has already vanished at the ceiling, so there is no rate to be found above it. A bracket whose upper end is the inlet spends that entire band searching a region where the form has no answer to give, and the search still terminates and still returns a value.
 
-This is the opposite failure from the descent. On a descent an inlet-capped bracket is too short and cannot reach the answer. On a climb it is too long and reaches past the point where answers stop existing. Both failures return numbers.
+This is the opposite failure from the descent, and both failures return numbers.
 
 ## A climb the inlet cannot pay for at all
 

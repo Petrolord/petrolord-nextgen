@@ -17,7 +17,7 @@ The forward direction says that pressure carries that rate. The inverse directio
 
 Both rows are the same hill, the same trunk and the same bisection. The second row puts the outlet genuinely below the inlet at 700.000000 psia, the line carries 65259103.7761 scfd, and the solve recovers 700.000000 psia with an error of 0.000000 psi.
 
-That control is the point of the table. If the solver were the weak part, both rows would suffer. Only one of them ever did, and it is the row whose answer sits above the inlet. The conclusion follows directly: the fault was never in the search, it was in the range the search was given.
+That control is the point of the table. Both rows run the same bisection, so a result that came out right on one and wrong on the other could not be the search. What separates them is where the answer sits against the interval, and only the first row's answer sits above the inlet.
 
 ## Where 880 sits
 
@@ -25,11 +25,11 @@ The ceiling for this descent is 920.423606 psia. So 880.000000 psia is comfortab
 
 ## Reading a negative drop in a report
 
-A drop of -30.000000 psi means the terminal sees more pressure than the station sent, which is an ordinary fact about descending lines and a useful one. It is also the figure most likely to be typed back in as a positive number on its way into a summary, at which point the terminal is reported 60.000000 psi lower than it will be.
+A drop of -30.000000 psi means the terminal sees more pressure than the station sent, which is an ordinary fact about descending lines and a useful one. It is also the figure most likely to be typed back in as a positive number on its way into a summary, at which point the terminal is reported 30.000000 psi below the station rather than 30.000000 psi above it.
 
 ## Why the descent is the case that exposes the range
 
-A descent is the only ordinary situation in which the correct answer lies above the inlet, which makes it the only one in which a bracket capped at the inlet is provably unable to hold the answer. That is why it earns a place as a test case even though climbing lines are commoner. It is the case where the failure is not a matter of degree.
+A descent is the only ordinary situation in which the correct answer lies above the inlet, which makes it the only one in which a bracket capped at the inlet is provably unable to hold the answer. It is the case where the failure is not a matter of degree.
 
 ## The mistake
 

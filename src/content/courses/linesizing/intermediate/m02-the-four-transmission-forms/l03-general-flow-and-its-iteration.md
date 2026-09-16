@@ -50,9 +50,7 @@ The engine value and the golden are printed side by side on all five cases, so a
 
 The friction factor is a result rather than an input, so it is the one figure on a General Flow answer that can be checked against expectation. A value of 0.0112132010 on a 11.938000 in trunk is a report about the flow the form settled on, and quoting the rate while dropping it throws away the only self-description the answer had.
 
-## What the returned factor is worth in a review
-
-It is the one number on a gas answer that can be sanity checked first. A reviewer who knows what a friction factor should look like on a trunk of this size can read 0.0112132010 and form a view at once, and no Weymouth or Panhandle answer offers that.
+A reviewer who knows what a friction factor should look like on a trunk of this size can read 0.0112132010 and form a view at once, and no Weymouth or Panhandle answer offers that.
 
 ## The mistake
 

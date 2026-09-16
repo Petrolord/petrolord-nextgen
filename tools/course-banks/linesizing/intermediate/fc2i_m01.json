@@ -159,7 +159,7 @@
    "The inlet of 850.000000 psia and the outlet of 620.000000 psia, and also the bore of 11.938000 in, since a gas form carries an area and an area is a squared length.",
    "The inlet of 850.000000 psia alone, the outlet entering the group linearly, which is what makes the group asymmetric between the two ends of a line.",
    "The two pressures and the average flowing temperature of 535.000000 degR, all three of which appear inside the driving group of 338100.0000 psia squared.",
-   "The inlet of 850.000000 psia and the outlet of 620.000000 psia, and none of the other six conditions, every one of which enters a transmission form exactly as it stands."
+   "The inlet of 850.000000 psia and the outlet of 620.000000 psia, and none of the other six conditions, no one of which is squared anywhere in a transmission form."
   ],
   "answer": 3,
   "explanation": "Eight conditions, and the first two never appear in a gas form on their own. They appear squared, as 338100.0000 psia squared."

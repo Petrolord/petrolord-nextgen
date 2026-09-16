@@ -26,7 +26,7 @@ Panhandle A and Panhandle B are separate published correlations rather than a fo
 | 0.950000 | 82520963.4159 | 83950742.1539 |
 | 1.000000 | 86864172.0167 | 88369202.2673 |
 
-Both carry it linearly, exactly as Weymouth does, and neither is defended by this course at any particular value of it. Panhandle A at an efficiency of 0.850000 reads 73834546.2142 scfd, which is below the Weymouth rate at an efficiency of 1.000000. Two forms at two efficiencies can be ordered any way the efficiencies please, which is why the efficiency travels with the rate or the rate means nothing.
+Both carry it linearly, exactly as Weymouth does, and neither is defended by this course at any particular value of it. Panhandle A at an efficiency of 0.850000 reads 73834546.2142 scfd, which is below the General Flow rate of 73861363.0502 scfd at an efficiency of 1.000000, although Panhandle A stands above General Flow whenever the two are read at the same efficiency. Two forms at two efficiencies can be ordered any way the efficiencies please, which is why the efficiency travels with the rate or the rate means nothing.
 
 ## The published cases, climbing and descending
 
@@ -51,4 +51,4 @@ The second mistake is reading the gap to Weymouth as an error in Weymouth. Nothi
 
 ## Exercise
 
-Give both Panhandle rates on the SOKU trunk and each one against Weymouth. State both diameter exponents and say which form has the smallest of the four. Then give Panhandle A at an efficiency of 0.850000 and explain why it can sit below a Weymouth rate.
+Give both Panhandle rates on the SOKU trunk and each one against Weymouth. State both diameter exponents and say which form has the smallest of the four. Then give Panhandle A at an efficiency of 0.850000 and explain why it can sit below a General Flow rate it stands above at equal efficiency.

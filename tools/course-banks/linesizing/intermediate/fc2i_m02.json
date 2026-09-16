@@ -91,7 +91,7 @@
   "prompt": "The efficiency is held for the literature in this course. What does that status require of a graded gas figure?",
   "options": [
    "That it is computed at an efficiency of 1.000000, which is the only value the course will grade against and the reason the published cases at 0.950000 and 0.920000 are taught rather than examined.",
-   "That it states the efficiency it was computed at, because the multiplier is linear and no publication in this package stands behind any particular value of it.",
+   "That it states the efficiency it was computed at, because every form carries it and no publication in this package stands behind any particular value of it.",
    "That it is quoted as a ratio against Weymouth rather than as a rate, since a ratio between two forms at one efficiency is independent of what that efficiency was.",
    "That it carries the friction factor the form settled on, which is the figure that records what was assumed about the pipe when no efficiency can be defended."
   ],
@@ -140,7 +140,7 @@
    "Highest of the four at 1.117335 against Weymouth, the ratio column being read against Panhandle B as the reference rather than against Weymouth."
   ],
   "answer": 1,
-  "explanation": "General Flow sits nearer the bottom of the four than the top. It stands about a third of the way from Weymouth to Panhandle B rather than halfway between them."
+  "explanation": "General Flow sits nearer the bottom of the four than the top. Against Weymouth it reads 1.117335 while Panhandle A reads 1.314034 and Panhandle B reads 1.336801."
  },
  {
   "prompt": "A reviewer takes the exponent of 2.6666666667 and uses it to scale a Panhandle B answer to a larger bore. What has gone wrong?",

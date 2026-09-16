@@ -30,7 +30,7 @@
    "A measured value, since the 60000000.0000 scfd duty is one of the published cases this package carries a golden for."
   ],
   "answer": 0,
-  "explanation": "This is the first figure in the course that no equation produced. A closed-form answer can be wrong in its algebra, and a bracketed answer can be wrong by never having contained the answer at all."
+  "explanation": "No equation produced it. A closed-form answer can be wrong in its algebra, and a bracketed answer can be wrong by never having contained the answer at all."
  },
  {
   "prompt": "The bracket the solver searches runs from atmospheric up to a ceiling. What is that ceiling?",
@@ -92,7 +92,7 @@
   "options": [
    "On the descent it is too long, since the real ceiling sits below the inlet there, and on the climb it is too short, since the real ceiling sits above it.",
    "On the descent it is too short and cannot reach an answer lying above the inlet, and on the climb it is too long and reaches past the pressure where the group has already vanished.",
-   "On the descent it fails to converge and reports so, and on the climb it converges on the floor, which is why only the descending case was ever noticed.",
+   "On the descent it fails to converge and reports so, and on the climb it converges on the floor, so only the descending case produces a visible symptom.",
    "On both it returns the inlet with a drop of 0.000000 psi, the search collapsing to its upper bound whenever the answer lies outside the interval."
   ],
   "answer": 1,
@@ -118,7 +118,7 @@
    "It establishes the floor of the bracket, because 700.000000 psia is the lowest outlet this trunk will deliver at on that hill."
   ],
   "answer": 0,
-  "explanation": "If the search were the weak part, both rows would suffer. The conclusion follows directly: the fault was in the range the search was given rather than in the search."
+  "explanation": "A weakness in the search itself would show on both rows at once, so a difference between them points at the range the search was given rather than at the search."
  },
  {
   "prompt": "Asked for 20000000.0000 scfd up the 3000.000000 ft hill, the trunk delivers at 766.523922 psia for a drop of 83.476078 psi. What does that figure sit beside?",

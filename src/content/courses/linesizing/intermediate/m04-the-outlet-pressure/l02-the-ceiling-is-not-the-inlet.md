@@ -28,15 +28,15 @@ A climb ends it below. At 3000.000000 ft of rise the ceiling is 784.964657 psia,
 
 The fourth column measures the difference between the bracket the physics asks for and a bracket that runs from atmospheric to the inlet. Reading it is reading how much of the answer such a bracket would have been unable to express.
 
-It is worth being exact about the two ways that goes wrong, because they are opposite. On a descent the inlet-capped bracket is too short: the answer can sit above it, and a search that cannot reach a value cannot return it. On a climb the inlet-capped bracket is too long: its upper reach lies past the pressure where the group has already vanished, in a region where there is no rate to be found.
+The two ways that goes wrong are opposite. On a descent the inlet-capped bracket is too short: the answer can sit above it, and a search that cannot reach a value cannot return it. On a climb the inlet-capped bracket is too long: its upper reach lies past the pressure where the group has already vanished, in a region where there is no rate to be found.
 
-## Why this is the most interesting number in the course
+## Why the ceiling is unlike everything else here
 
 Everywhere else in this engine a hill changes an answer. Here it changes the range of answers that exist. The ceiling is not an implementation detail of a bisection, it is the statement that at a given inlet and a given slope there is a pressure the outlet simply cannot be above, however little gas is moving.
 
 ## Reading a ceiling in practice
 
-The ceiling is not an exotic quantity. It needs the inlet and the elevation group, both of which the engine already returns, and it is worth working out before a solve rather than after. A target outlet above the ceiling on a climb, or below atmospheric on any line, is a question with no answer inside this method, and knowing that in advance turns a refusal from a surprise into a confirmation.
+It needs the inlet and the elevation group, both of which the engine already returns, and is worth working out before a solve rather than after. A target outlet above the ceiling on a climb, or below atmospheric on any line, is a question with no answer inside this method, and knowing that in advance turns a refusal from a surprise into a confirmation.
 
 ## The mistake
 

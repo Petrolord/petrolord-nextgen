@@ -25,7 +25,7 @@ Read what that proves and what it does not. It proves the inversion is faithful 
 
 ## An answer that came out of a solver
 
-This is the first figure in the course that no equation produced. Asked for 60000000.0000 scfd through Weymouth, the trunk arrives at 666.307057 psia, a drop of 183.692943 psi. That number is the endpoint of a search, and it carries a different kind of trust from a closed-form result: it is only as good as the bracket it searched and the form it called.
+No equation produced this figure. Asked for 60000000.0000 scfd through Weymouth, the trunk arrives at 666.307057 psia, a drop of 183.692943 psi. That number is the endpoint of a search, and it carries a different kind of trust from a closed-form result: it is only as good as the bracket it searched and the form it called.
 
 That is a different question from whether the arithmetic inside the loop is correct, and it is the one the rest of this module asks. Which is why the bracket is worth a lesson of its own. A closed-form answer can be wrong in its algebra. A bracketed answer can be wrong by never having contained the answer at all, and it will still return a number.
 

@@ -6,7 +6,7 @@ Double the bore and read the engine twice, and the ratio of the two rates says w
 
 ## Measured rather than quoted
 
-| form | rate at 10 in scfd | rate at 20 in scfd | measured exponent |
+| form | rate at 10.000000 in scfd | rate at 20.000000 in scfd | measured exponent |
 | --- | --- | --- | --- |
 | weymouth | 41217643.2456 | 261715720.9907 | 2.6666666667 |
 | panhandleA | 54628394.3526 | 335409354.2407 | 2.6182000000 |

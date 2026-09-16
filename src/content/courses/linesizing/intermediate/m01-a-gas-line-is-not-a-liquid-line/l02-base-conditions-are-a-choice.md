@@ -29,7 +29,7 @@ The flowing temperature and the compressibility belong to the line and change wi
 
 ## Why the module exports the base
 
-The base could have been left implicit inside the forms, which is where most published statements of them leave it. Exporting 520.000000 degR and 14.650000 psia makes it a value a caller can read, print in a report and check against a contract, rather than a constant buried in an equation. A figure that can be quoted is a figure that can be disagreed with, and that is the whole reason for lifting it out.
+The base could have been left implicit inside the forms, where most published statements leave it. Exporting 520.000000 degR and 14.650000 psia makes it a value a caller can read, print in a report and check against a contract, rather than a constant buried in an equation. A figure that can be quoted is a figure that can be disagreed with, which is the reason for lifting it out.
 
 ## The mistake
 

@@ -1,6 +1,6 @@
 # What a traverse drops
 
-A single call on the OGBIA line carrying the isometric's 4.500000 velocity heads spends 25.793983 psi. The traverse of the same line spends 25.660631 psi. The gap of 0.133351 psi is exactly the fittings.
+A single call on the OGBIA line carrying the isometric's 4.500000 velocity heads spends 25.793983 psi. The traverse of the same line spends 25.660631 psi. The gap of 0.133351 psi is the fittings.
 
 {{panel:fc-liquid-explorer}}
 
@@ -21,7 +21,7 @@ It also means the traverse is not wrong. It computed a correct answer to the que
 
 ## Why the size of the gap is not the lesson
 
-On this line the fittings are worth 0.133351 psi, which is small beside 25.660631 psi of pipe. That is a fact about this isometric rather than about traverses. The gap is exactly whatever the fitting list is worth, so a line with the same pipe and a heavier fitting count has the same structural omission and a larger consequence.
+On this line the fittings are worth 0.133351 psi, which is small beside 25.660631 psi of pipe. That is a fact about this isometric rather than about traverses. The gap is whatever the fitting list is worth, so a line with the same pipe and a heavier fitting count has the same structural omission and a larger consequence.
 
 Nothing in the traverse output says any of this. There is no zero fittings field and no note. The absence is silent, and a reader who has not compared the two calls has no way to discover it from a station list.
 
@@ -31,7 +31,7 @@ The practical habit is to use each for what it returns. The traverse gives the p
 
 ## How an omission like this one is noticed
 
-The general method is the one this lesson used. Put the same case through two calls that ought to agree, and then account for the difference rather than accepting it. Here the difference was 0.133351 psi and it matched the fittings exactly, which identified the omission and ruled out every other explanation at the same time. A difference that had not matched a known term would have been the more interesting finding.
+Put the same case through two calls that ought to agree, and then account for the difference rather than accepting it. Here the difference was 0.133351 psi and it matched the fittings term the engine returns separately, to every digit either of them prints, which identified the omission and ruled out every other explanation at the same time. A difference that had not matched a known term would have been the more interesting finding.
 
 ## The mistake
 

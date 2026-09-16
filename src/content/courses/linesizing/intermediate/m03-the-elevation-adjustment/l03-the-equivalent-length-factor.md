@@ -31,7 +31,7 @@ The two do not move by the same amount. At a rise of 1500.000000 ft the multipli
 
 ## Both columns come from one input
 
-The two numbers on a row are consequences of the same s, which is itself a consequence of the elevation change, the gravity, the temperature and the compressibility. There are not two elevation inputs and there is no way to have one without the other. That matters when a result is being reproduced by hand, because taking the multiplier from the engine and the length factor from a textbook mixes two sources for one physical quantity, and they will not correspond unless every input behind s matches.
+The two numbers on a row are consequences of the same s. There are not two elevation inputs and there is no way to have one without the other. That matters when a result is being reproduced by hand, because taking the multiplier from the engine and the length factor from a textbook mixes two sources for one physical quantity, and they will not correspond unless every input behind s matches.
 
 ## The mistake
 

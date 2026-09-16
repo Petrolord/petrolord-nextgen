@@ -4,7 +4,7 @@ A hill scales the outlet pressure inside the driving group and it changes the le
 
 {{panel:fc-gasline-explorer}}
 
-## What 1500 ft costs each form
+## What 1500.000000 ft costs each form
 
 | form | flat scfd | up scfd | down scfd | up as a fraction of flat | down as a fraction of flat |
 | --- | --- | --- | --- | --- | --- |

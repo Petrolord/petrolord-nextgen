@@ -118,7 +118,7 @@
    "It mixes two conventions, the traverse reporting an absolute arrival pressure and a pressure drop being a difference, so the two cannot be quoted as the same quantity."
   ],
   "answer": 1,
-  "explanation": "The gap of 0.133351 psi is exactly the fittings and nothing else. The omission is in the signature rather than in the arithmetic, so it is visible before the call is made."
+  "explanation": "The gap of 0.133351 psi is the fittings and nothing else. The omission is in the signature rather than in the arithmetic, so it is visible before the call is made."
  },
  {
   "prompt": "At 1500.000000 ft of rise on the SOKU trunk the engine returns 1.0828513009 and 1.0408761444. What is each one for?",
@@ -184,7 +184,7 @@
    "That the engine applies a correction of that size to a flat-line rate before reporting it for a route with relief, which is why the figure is printed."
   ],
   "answer": 2,
-  "explanation": "It is close to one and it is not one. The climb loses more than the descent gains on every row, and the engine will answer a netted figure honestly for a line that climbs once."
+  "explanation": "It is close to one and it is not one. On the Weymouth row the climb loses more than the descent gains, and the engine will answer a netted figure honestly for a line that climbs once."
  },
  {
   "prompt": "A terminal contracts for 60000000.0000 scfd on the flat SOKU trunk. What does the studio report, and what kind of trust does the figure carry?",

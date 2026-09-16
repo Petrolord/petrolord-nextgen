@@ -25,7 +25,7 @@ A liquid line subtracts pressures because the fluid that leaves the pipe is the 
 
 ## The group is the quantity that moves
 
-Because the group is what the form reads, a small change near the inlet and the same change near the outlet are not worth the same rate. The same trunk shows it at two settings. Held at 620.000000 psia the outlet gives a group of 338100.0000 psia squared and Weymouth reads 66104956.1404 scfd. Brought up to 845.000000 psia, five psi below the inlet, the same form on the same pipe reads 10466013.4729 scfd. The pipe did not change and neither did the gas. The group did.
+Because the group is what the form reads, the same trunk answers very differently at two outlet settings. Held at 620.000000 psia the outlet gives a group of 338100.0000 psia squared and Weymouth reads 66104956.1404 scfd. Brought up to 845.000000 psia, five psi below the inlet, the same form on the same pipe reads 10466013.4729 scfd. The pipe did not change and neither did the gas. The group did.
 
 ## Absolute, always
 
