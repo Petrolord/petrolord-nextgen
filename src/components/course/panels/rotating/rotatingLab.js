@@ -58,6 +58,11 @@ import compressionGolden from '@petrolord/engines/test-data/facilities/goldens/c
 import * as P from '@petrolord/engines/engines/facilities/pumps.js';
 import * as C from '@petrolord/engines/engines/facilities/compression.js';
 import * as G from '@petrolord/engines/engines/production/gasProperties.js';
+// THE GRADING TOLERANCES ARE NOT HELD HERE. They are derived, once, in
+// gradedTolerance.js, which fc3_capstone.mjs imports too, so the lab, the
+// generator and the shipped fields.json cannot hold three different opinions
+// about what a correct answer is. This module imports nothing itself.
+import { GRADED_FIELDS, gradedClassOf, gradedTolerance } from './gradedTolerance.js';
 
 export const GP = pumpsGolden;
 export const GC = compressionGolden;
@@ -1968,31 +1973,44 @@ export const capstoneRuns = () => {
 /** The eighteen graded fields, in the published order, with the tolerances. */
 export const capstoneFields = () => {
   const r = capstoneRuns();
-  return [
-    // TOLERANCES ARE AT LEAST HALF A UNIT IN THE LAST PLACE THE DIGEST PRINTS
-    // THE QUANTITY AT. Seven of these were tighter than that, so a learner
-    // quoting the digest exactly failed: 221.7762 degF is 3.98e-5 from the
-    // graded value and was graded at 1e-5. fc3_capstone.mjs derives them and
-    // asserts the floor; this list mirrors the published fields.json.
-    ['beginner', 'escravos_duty_flow_gpm', r.escDuty.qGpm, 1e-4],
-    ['beginner', 'escravos_duty_head_ft', r.escDuty.headFt, 1e-5],
-    ['beginner', 'escravos_hydraulic_hp', r.escPower.hydraulicHp, 1e-6],
-    ['beginner', 'escravos_brake_hp', r.escPower.brakeHp, 1e-6],
-    ['beginner', 'escravos_motor_input_kw', r.escPower.motorInputKw, 1e-6],
-    ['beginner', 'escravos_discharge_psi', r.escDischargePsi, 5e-7],
-    ['intermediate', 'bonga_pressure_head_ft', r.bonNpsh.pressureHeadFt, 5e-7],
-    ['intermediate', 'bonga_npsha_ft', r.bonNpsh.npshaFt, 5e-7],
-    ['intermediate', 'bonga_npsha_raised_ft', r.bonNpshRaised.npshaFt, 5e-7],
-    ['intermediate', 'bonga_speed_flow_gpm', r.bonSpeed.qGpm, 1e-4],
-    ['intermediate', 'bonga_speed_head_ft', r.bonSpeed.headFt, 1e-5],
-    ['intermediate', 'bonga_parallel_flow_gpm', r.bonParallelDuty.qGpm, 1e-4],
-    ['advanced', 'bonny_exponent_ratio', r.bonnyE, 5e-10],
-    ['advanced', 'bonny_ratio_per_stage', r.bonnyTrain.ratioPerStage, 1e-9],
-    ['advanced', 'bonny_stage1_discharge_f', r.bonnyStage1.tDischargeF, 5e-5],
-    ['advanced', 'bonny_stage1_poly_head', r.bonnyStage1.headPolyFtLbfLbm, 1e-2],
-    ['advanced', 'bonny_stage1_gas_hp', r.bonnyStage1.gasHp, 5e-5],
-    ['advanced', 'bonny_fuel_mmscfd', r.bonnyFuel.fuelMMscfd, 1e-9],
-  ];
+  // ONLY THE VALUES ARE HERE. The tier, the quantity class and the tolerance
+  // of every field come from gradedTolerance.js, which derives each tolerance
+  // as max(stated, half a unit in the last place the digest prints that
+  // class). Seven of the eighteen were once tighter than that, so a learner
+  // quoting the digest exactly FAILED: 221.7762 degF is 3.98e-5 from the
+  // graded value and was graded at 1e-5. This list used to carry a fourth
+  // column of hand-kept numbers mirroring the generator's, and a mirror is a
+  // copy that goes stale quietly, so it no longer exists.
+  const value = {
+    escravos_duty_flow_gpm: r.escDuty.qGpm,
+    escravos_duty_head_ft: r.escDuty.headFt,
+    escravos_hydraulic_hp: r.escPower.hydraulicHp,
+    escravos_brake_hp: r.escPower.brakeHp,
+    escravos_motor_input_kw: r.escPower.motorInputKw,
+    escravos_discharge_psi: r.escDischargePsi,
+    bonga_pressure_head_ft: r.bonNpsh.pressureHeadFt,
+    bonga_npsha_ft: r.bonNpsh.npshaFt,
+    bonga_npsha_raised_ft: r.bonNpshRaised.npshaFt,
+    bonga_speed_flow_gpm: r.bonSpeed.qGpm,
+    bonga_speed_head_ft: r.bonSpeed.headFt,
+    bonga_parallel_flow_gpm: r.bonParallelDuty.qGpm,
+    bonny_exponent_ratio: r.bonnyE,
+    bonny_ratio_per_stage: r.bonnyTrain.ratioPerStage,
+    bonny_stage1_discharge_f: r.bonnyStage1.tDischargeF,
+    bonny_stage1_poly_head: r.bonnyStage1.headPolyFtLbfLbm,
+    bonny_stage1_gas_hp: r.bonnyStage1.gasHp,
+    bonny_fuel_mmscfd: r.bonnyFuel.fuelMMscfd,
+  };
+  // A value for a field nobody grades, and a graded field with no value, are
+  // both refusals rather than a quietly short list.
+  Object.keys(value).forEach((k) => gradedClassOf(k));
+  return GRADED_FIELDS.map(([tier, key]) => {
+    const v = value[key];
+    if (!Number.isFinite(v)) {
+      throw new Error(`the lab produced no finite value for the graded field ${key}`);
+    }
+    return [tier, key, v, gradedTolerance(key)];
+  });
 };
 
 export const capstoneValues = (fieldList) => Object.fromEntries((fieldList || capstoneFields()).map(([, k, v]) => [k, v]));

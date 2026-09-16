@@ -15,6 +15,17 @@ import {
   BONGA_SPEED_RATIO, BONGA_N_PARALLEL, BONGA_Q_MAX_GPM,
   BONNY, BONNY_HEAT_RATE_BTU_HP_HR, BONNY_LHV_BTU_SCF,
 } from '/root/fc-wip-rotating/fc3_fields_capstone.mjs';
+// THE TOLERANCES ARE NOT DECLARED HERE EITHER. This generator and the shipped
+// teaching lab both import the ONE derivation, in the repository, so the
+// number this file writes into fields.json is literally the number the lab
+// ships. It used to hold its own PRINTED_DECIMALS, its own tol() and its own
+// class list, with rotatingLab.js holding a hand-kept mirror of the answers:
+// three copies, and FC2 repaired only two of them.
+const TOLPATH = process.env.FC3_TOLERANCE
+  || '/root/wt-fc3-nextgen/src/components/course/panels/rotating/gradedTolerance.js';
+const {
+  PRINTED_DECIMALS, GRADED_FIELDS, gradedClassOf, gradedTolerance, precisionDeclaration,
+} = await import(TOLPATH);
 
 const OUT = process.env.FC3_FIELDS_OUT || '/root/fc-wip-rotating/fields.json';
 const PRECISION_OUT = process.env.FC3_PRECISION_OUT || '/root/fc-wip-rotating/precision.json';
@@ -169,43 +180,28 @@ const src = fs.readFileSync('/root/fc-wip-rotating/fc3_capstone.mjs', 'utf8');
  * `Math.max` with the stated tolerance, never `min`: this only ever LOOSENS,
  * so no answer that graded correct before grades wrong now.
  */
-const PRINTED_DECIMALS = {
-  gpm: 6, ft: 6, psi: 6, pumpHp: 6, kW: 6,   // e6, the pump classes
-  gasHp: 4, degF: 4, ftLbfPerLbm: 4,         // r4, the gas classes
-  exponent: 9, ratio: 9, MMscfd: 9,          // f9
-};
-// Parsed from a literal rather than multiplied, because 0.5 * 10 ** -4 is
-// 0.000049999999999999996 in binary and a tolerance is a number a human
-// reads off this file.
-const floorFor = (cls) => Number(`5e-${PRINTED_DECIMALS[cls] + 1}`);
-const tol = (cls, stated) => {
-  const floor = floorFor(cls);
-  must(Number.isFinite(floor), `no printed precision declared for the class ${cls}`);
-  return Math.max(stated, floor);
-};
-
 const F = [
   // Associate: one pump against one station, end to end.
-  ['beginner', 'escravos_duty_flow_gpm', escDuty.qGpm, tol('gpm', 1e-4)],
-  ['beginner', 'escravos_duty_head_ft', escDuty.headFt, tol('ft', 1e-5)],
-  ['beginner', 'escravos_hydraulic_hp', escPower.hydraulicHp, tol('pumpHp', 1e-6)],
-  ['beginner', 'escravos_brake_hp', escPower.brakeHp, tol('pumpHp', 1e-6)],
-  ['beginner', 'escravos_motor_input_kw', escPower.motorInputKw, tol('kW', 1e-6)],
-  ['beginner', 'escravos_discharge_psi', escDischargePsi, tol('psi', 1e-7)],
+  ['beginner', 'escravos_duty_flow_gpm', escDuty.qGpm, gradedTolerance('escravos_duty_flow_gpm')],
+  ['beginner', 'escravos_duty_head_ft', escDuty.headFt, gradedTolerance('escravos_duty_head_ft')],
+  ['beginner', 'escravos_hydraulic_hp', escPower.hydraulicHp, gradedTolerance('escravos_hydraulic_hp')],
+  ['beginner', 'escravos_brake_hp', escPower.brakeHp, gradedTolerance('escravos_brake_hp')],
+  ['beginner', 'escravos_motor_input_kw', escPower.motorInputKw, gradedTolerance('escravos_motor_input_kw')],
+  ['beginner', 'escravos_discharge_psi', escDischargePsi, gradedTolerance('escravos_discharge_psi')],
   // Professional: the suction side, an exact affinity law, and a second machine.
-  ['intermediate', 'bonga_pressure_head_ft', bonNpsh.pressureHeadFt, tol('ft', 1e-7)],
-  ['intermediate', 'bonga_npsha_ft', bonNpsh.npshaFt, tol('ft', 1e-7)],
-  ['intermediate', 'bonga_npsha_raised_ft', bonNpshRaised.npshaFt, tol('ft', 1e-7)],
-  ['intermediate', 'bonga_speed_flow_gpm', bonSpeed.qGpm, tol('gpm', 1e-4)],
-  ['intermediate', 'bonga_speed_head_ft', bonSpeed.headFt, tol('ft', 1e-5)],
-  ['intermediate', 'bonga_parallel_flow_gpm', bonParallelDuty.qGpm, tol('gpm', 1e-4)],
+  ['intermediate', 'bonga_pressure_head_ft', bonNpsh.pressureHeadFt, gradedTolerance('bonga_pressure_head_ft')],
+  ['intermediate', 'bonga_npsha_ft', bonNpsh.npshaFt, gradedTolerance('bonga_npsha_ft')],
+  ['intermediate', 'bonga_npsha_raised_ft', bonNpshRaised.npshaFt, gradedTolerance('bonga_npsha_raised_ft')],
+  ['intermediate', 'bonga_speed_flow_gpm', bonSpeed.qGpm, gradedTolerance('bonga_speed_flow_gpm')],
+  ['intermediate', 'bonga_speed_head_ft', bonSpeed.headFt, gradedTolerance('bonga_speed_head_ft')],
+  ['intermediate', 'bonga_parallel_flow_gpm', bonParallelDuty.qGpm, gradedTolerance('bonga_parallel_flow_gpm')],
   // Expert: the thermodynamic path and what the driver burns for it.
-  ['advanced', 'bonny_exponent_ratio', bonnyE, tol('exponent', 1e-12)],
-  ['advanced', 'bonny_ratio_per_stage', bonnyTrain.ratioPerStage, tol('ratio', 1e-9)],
-  ['advanced', 'bonny_stage1_discharge_f', bonnyStage1.tDischargeF, tol('degF', 1e-5)],
-  ['advanced', 'bonny_stage1_poly_head', bonnyStage1.headPolyFtLbfLbm, tol('ftLbfPerLbm', 1e-2)],
-  ['advanced', 'bonny_stage1_gas_hp', bonnyStage1.gasHp, tol('gasHp', 1e-5)],
-  ['advanced', 'bonny_fuel_mmscfd', bonnyFuel.fuelMMscfd, tol('MMscfd', 1e-9)],
+  ['advanced', 'bonny_exponent_ratio', bonnyE, gradedTolerance('bonny_exponent_ratio')],
+  ['advanced', 'bonny_ratio_per_stage', bonnyTrain.ratioPerStage, gradedTolerance('bonny_ratio_per_stage')],
+  ['advanced', 'bonny_stage1_discharge_f', bonnyStage1.tDischargeF, gradedTolerance('bonny_stage1_discharge_f')],
+  ['advanced', 'bonny_stage1_poly_head', bonnyStage1.headPolyFtLbfLbm, gradedTolerance('bonny_stage1_poly_head')],
+  ['advanced', 'bonny_stage1_gas_hp', bonnyStage1.gasHp, gradedTolerance('bonny_stage1_gas_hp')],
+  ['advanced', 'bonny_fuel_mmscfd', bonnyFuel.fuelMMscfd, gradedTolerance('bonny_fuel_mmscfd')],
 ];
 
 // WRITTEN ONLY ON SUCCESS, which is a trap and is named here because this
@@ -223,14 +219,20 @@ const PAYLOAD = `${JSON.stringify(F, null, 1)}\n`;
 // a field whose tolerance never went through `tol()`: restoring the bare 1e-5
 // on the discharge temperature makes it fire and write nothing, which is the
 // control that was actually run.
-const CLS = ['gpm', 'ft', 'pumpHp', 'pumpHp', 'kW', 'psi', 'ft', 'ft', 'ft', 'gpm', 'ft', 'gpm',
-  'exponent', 'ratio', 'degF', 'ftLbfPerLbm', 'gasHp', 'MMscfd'];
-F.forEach(([, key, value, t], i) => {
-  const dp = PRINTED_DECIMALS[CLS[i]];
+F.forEach(([tier, key, value, t]) => {
+  const { tier: wantTier, cls } = gradedClassOf(key);
+  must(tier === wantTier, `${key} is generated as ${tier} and declared as ${wantTier}`);
+  const dp = PRINTED_DECIMALS[cls];
   const asQuoted = Number(value.toFixed(dp));
   must(Math.abs(asQuoted - value) <= t,
     `${key} grades at ${t} but the digest prints it to ${dp} decimals, so a learner quoting ${asQuoted} is ${Math.abs(asQuoted - value)} out and would FAIL a correct answer`);
 });
+// THE EIGHTEEN ARE THE EIGHTEEN. A field added to one side and not the other
+// is a refusal, not a short file.
+must(F.length === GRADED_FIELDS.length,
+  `this generator emits ${F.length} fields and gradedTolerance.js declares ${GRADED_FIELDS.length}`);
+GRADED_FIELDS.forEach(([, key], i) => must(F[i][1] === key,
+  `field ${i} is ${F[i][1]} here and ${key} in gradedTolerance.js`));
 // THE PRECISION DECLARATION, derived here and never hand kept.
 //
 // `gradeprecision` reads a wave's stated precision off the digest header, and
@@ -248,11 +250,7 @@ F.forEach(([, key, value, t], i) => {
 // file writes one, out of the same PRINTED_DECIMALS and CLS the assertion
 // above uses. It cannot drift from the tolerances because it is the same
 // source, and a field added without a class fails the must() above first.
-const byClass = {};
-F.forEach(([, key], i) => { (byClass[CLS[i]] ||= []).push(key); });
-const PRECISION = Object.fromEntries(Object.entries(byClass).map(([cls, keys]) => [
-  cls, { decimals: PRINTED_DECIMALS[cls], match: `^(${keys.join('|')})$` },
-]));
+const PRECISION = precisionDeclaration();
 const PRECISION_PAYLOAD = `${JSON.stringify(PRECISION, null, 1)}\n`;
 
 fs.writeFileSync(OUT, PAYLOAD);
