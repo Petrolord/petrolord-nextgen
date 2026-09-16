@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "A contract sheet carries a gas rate and nothing else. A reviewer wants to reproduce it. What is missing?",
+  "options": [
+   "The bore and the length, which are the only two things a transmission form knows about the pipe and therefore the only two a reproduction needs.",
+   "The friction factor, which is the sole self-description a gas answer carries and can be used to recover whichever of the four forms produced the rate.",
+   "The form, the efficiency, the elevation and the base, none of which a rate records and all of which change the answer.",
+   "The driving group, since the two pressures can be recovered from it and every other condition of a gas form follows from the pressures."
+  ],
+  "answer": 2,
+  "explanation": "Four forms span 66104956.1404 to 88369202.2673 scfd on one line, the efficiency multiplies each linearly, and two bases are not comparable. The rate carries no record of any of it."
+ },
+ {
+  "prompt": "An operator moves the SOKU delivery point from 620.000000 psia up to 845.000000 psia and then to 900.000000 psia, holding the inlet at 850.000000 psia. Describe the three answers.",
+  "options": [
+   "66104956.1404 scfd, then 10466013.4729 scfd, then a refusal naming no flow, because the driving group first shrinks and then goes altogether.",
+   "66104956.1404 scfd, then 10466013.4729 scfd, then 0.0000 scfd, the rate falling smoothly to nothing as the outlet closes on the inlet.",
+   "66104956.1404 scfd, then a refusal at 845.000000 psia because five psi is inside the band the engine declines to resolve, and then the same refusal at 900.000000 psia.",
+   "66104956.1404 scfd, then 10466013.4729 scfd, then a negative rate, since above the inlet the gas flows the other way and the form reports the direction in its sign."
+  ],
+  "answer": 0,
+  "explanation": "A group of 338100.0000 psia squared at 620.000000 psia has shrunk to almost nothing by 845.000000 psia and is gone by 900.000000 psia. Zero would be a claim the engine declines to make."
+ },
+ {
+  "prompt": "A junior engineer reports that the SOKU trunk has a pressure drop of 338100.0000 psi. What is the error?",
+  "options": [
+   "That figure is the group at the flat condition, and the trunk's stated elevation change means the outlet's square has to be scaled by e to the s before the group is quoted.",
+   "That figure has been computed from gauge pressures, and the two absolute values of 850.000000 psia and 620.000000 psia give a different group entirely.",
+   "That figure is the group for the pair of published pressures at 900.000000 psia and 500.000000 psia rather than for the SOKU trunk's own two ends.",
+   "That figure is the driving group in psia squared rather than any pressure at all, so it cannot be read as a pressure drop whatever the two ends of the line are."
+  ],
+  "answer": 3,
+  "explanation": "A liquid habit subtracts the two ends and reads what comes out as a drop. Here the two ends were squared first, so the figure being quoted is measured in psia squared."
+ },
+ {
+  "prompt": "Everywhere else in this engine a hill changes an answer. Where does a hill change which answers exist at all?",
+  "options": [
+   "At the equivalent length factor, which changes the length friction acts over and so decides how much of the inlet pressure is available to be delivered.",
+   "At the ceiling of the outlet-pressure bracket, which is the inlet over the square root of e to the s and therefore moves with the slope.",
+   "At the driving group, which vanishes on any line whose outlet meets its inlet and therefore removes every answer above that pressure on every profile.",
+   "At the transition between the friction branches, which a hill can push a line across by changing the rate it carries."
+  ],
+  "answer": 1,
+  "explanation": "The ceiling is the statement that at a given inlet and a given slope there is a pressure the outlet cannot be above, however little gas is moving. A climb of 3000.000000 ft puts it 65.035343 psi under the inlet."
+ },
+ {
+  "prompt": "A delivery point on a descending line is reported at 880.000000 psia against a station pressure of 850.000000 psia. A reviewer marks it as an error. Are they right?",
+  "options": [
+   "No. On a 3000.000000 ft descent the ceiling is 920.423606 psia, so 880.000000 psia is comfortably inside the range the physics allows and the line carries 29457958.5967 scfd there.",
+   "Yes. An outlet meeting or exceeding an inlet is exactly the state the no-flow refusal covers, so the reported figure cannot have come from this engine.",
+   "Yes, unless the elevation change was entered in miles rather than feet, which is the entry error that produces an outlet above an inlet on a line that in fact climbs.",
+   "No, but only because the figure is inside the printing tolerance of the inlet, and a delivery point above a station pressure is otherwise refused."
+  ],
+  "answer": 0,
+  "explanation": "The column of gas recovers more head than the friction spends, so outlets above the inlet are real operating points. The inverse returns a drop of -30.000000 psi for that case."
+ },
+ {
+  "prompt": "Two rows of the same descent are run, one with the outlet at 880.000000 psia and one at 700.000000 psia, and both recover their outlet with an error of 0.000000 psi. What does the second row rule out?",
+  "options": [
+   "The elevation term, since a case whose outlet sits below the inlet carries no static column and therefore isolates the friction treatment from the hill.",
+   "The form, since two outlets on one profile agreeing to 0.000000 psi shows that whichever of the four was named is being computed as published.",
+   "The bisection as a mechanism, since everything shared by the two rows is held fixed between them and only the position of the answer against the interval has moved.",
+   "The bracket, since a row that recovers its outlet exactly proves the answer lay inside whatever interval was searched for both rows."
+  ],
+  "answer": 2,
+  "explanation": "A weakness in the method would show on both rows at once. Carrying 65259103.7761 scfd, the row with its outlet at 700.000000 psia is the one whose answer was never in doubt."
+ },
+ {
+  "prompt": "A design review is handed the arrival pressure of a marched liquid line and nothing else. What has it not been shown?",
+  "options": [
+   "The total spend of 25.660631 psi, which is the one quantity an arrival pressure states directly once the length of the line is known.",
+   "The number of segments the caller supplied, which decides the resolution of the profile and therefore how much of the line the arrival represents.",
+   "The fittings, which the traverse carries on every station and reports only in its total rather than station by station.",
+   "The worst station, which on the OGBIA ridge stands 158.958333 psi below the flat line's station at the same distance."
+  ],
+  "answer": 3,
+  "explanation": "Both the flat case and the ridge arrive at 874.339369 psia. A line is sized on its worst station and not on its last one."
+ },
+ {
+  "prompt": "Panhandle A returns the second highest rate on the flat SOKU trunk and falls furthest of the four when the trunk is put up 1500.000000 ft. What do those two facts together tell a designer choosing a form for a route with relief on it?",
+  "options": [
+   "That Panhandle A should be avoided on a route with relief, since a form that loses most on a climb is the one least likely to be describing the line correctly.",
+   "That the choice of form settles not only the rate on the flat but also how much of it the survey can take away, since Panhandle A reads 86864172.0167 scfd flat and falls to 0.927767 of that climbing.",
+   "That the two facts are the same fact, because a form returning a higher rate on the flat has more rate available to lose and the fractions follow from the rates.",
+   "That Panhandle A carries a different elevation term from the other three, which is why it responds to the same hill by a different amount."
+  ],
+  "answer": 1,
+  "explanation": "The elevation term is shared by all four and each combines it with its own friction treatment. Panhandle A also gains most descending at 1.068566, and Weymouth moves least in both directions."
+ },
+ {
+  "prompt": "A sizing sweep catches the refusal on a rate the line cannot carry and substitutes the largest rate the line will pass. What has been lost?",
+  "options": [
+   "The distinction between what a contract asked for and what the line can do, since a caller who asked what pressure a contracted rate arrives at has not asked what rate is achievable.",
+   "The refusal itself, which is the only record that the solver reached the floor of its bracket and can be recovered from nothing else in the output.",
+   "The bracket, since a substituted rate has no outlet pressure attached and the sweep can no longer say which interval the answer was searched over.",
+   "Nothing of substance, provided the substitution is reported, since the largest rate the line will pass is the most useful answer available in that state."
+  ],
+  "answer": 0,
+  "explanation": "Returning the floor would be worse still: it is a valid pressure that passes any check testing whether a number came back. The solver went to the bottom of its range and found the line short."
+ },
+ {
+  "prompt": "Two refusals in the outlet-pressure solver look similar on a sheet. One names a rate the line cannot carry to atmosphere and one names a static column that spends the inlet. What separates them?",
+  "options": [
+   "The first concerns the duty and the second the profile, so the first can be cleared by lowering the target and the second by lowering the target as well once the hill is netted.",
+   "The first is returned and the second thrown, which is how a caller distinguishes a duty the line cannot meet from an input the method cannot accept.",
+   "The first is a real interval searched to its floor and found short, and the second is an interval that has closed because the ceiling has fallen to or below the floor.",
+   "The first is raised by the forward form and the second by the inverse, which is why only one of them can appear on an outlet-pressure call."
+  ],
+  "answer": 2,
+  "explanation": "Under a near-atmospheric inlet of 15.500000 psia on a 3000.000000 ft climb, the second message is about the column alone, before any rate has been considered."
+ },
+ {
+  "prompt": "A review quotes a marched liquid line's total as the pressure drop of that line. The isometric carries 4.500000 velocity heads. What is wrong with the quoted figure?",
+  "options": [
+   "It overstates the drop by the fittings, since a march accumulates a velocity head at each of its three segment boundaries that a single call over the whole length applies once.",
+   "It omits every elbow, valve and exit on the isometric, because the traverse has no resistance-sum argument and the single call with the fittings spends 25.793983 psi against the traverse's 25.660631 psi.",
+   "It is correct as a total but cannot be attributed to any station, since the traverse distributes the fittings evenly along the line rather than placing them.",
+   "It mixes two conventions, the traverse reporting an absolute arrival pressure and a pressure drop being a difference, so the two cannot be quoted as the same quantity."
+  ],
+  "answer": 1,
+  "explanation": "The gap of 0.133351 psi is exactly the fittings and nothing else. The omission is in the signature rather than in the arithmetic, so it is visible before the call is made."
+ },
+ {
+  "prompt": "At 1500.000000 ft of rise on the SOKU trunk the engine returns 1.0828513009 and 1.0408761444. What is each one for?",
+  "options": [
+   "The first scales the outlet's square inside the driving group and the second scales the inlet's square, the two together forming the full adjustment a hill applies to the group.",
+   "The first is the ratio of the climbing rate to the flat rate and the second the ratio of the equivalent length to the laid length, so both are outputs read against the flat case.",
+   "The first scales the whole driving group and the second the gas gravity, which is how the weight of the column enters a form that has no rate yet to work with.",
+   "The first scales the outlet's square inside the driving group and the second scales the length friction acts over."
+  ],
+  "answer": 3,
+  "explanation": "Two columns, two jobs. One scales a pressure inside the group and one scales a length outside it, and both collapse to 1.0000000000 at an elevation change of 0.000000 ft."
+ },
+ {
+  "prompt": "At a bore of 10.000000 in Panhandle B stands above Panhandle A and at 20.000000 in the order has reversed. What should a reader conclude about an ordering of forms read off a single line?",
+  "options": [
+   "That it is an ordering on that line, since the higher exponent of 2.6182000000 overtakes the higher starting point somewhere between those two bores.",
+   "That it is stable for the four forms, since Weymouth is the lowest and Panhandle B the highest on every case in this package and the crossing is a property of the two Panhandles alone.",
+   "That it is unreliable below 10.000000 in, which is where the published cases stop and where the two Panhandles were fitted to different behaviour.",
+   "That it depends on the efficiency, since the two Panhandles carry the multiplier differently and a common efficiency of 1.000000 is what produces the reversal."
+  ],
+  "answer": 0,
+  "explanation": "Panhandle A carries 2.6182000000 against Panhandle B's 2.5300000000. Which of the pair is higher is a question about the bore rather than a fact about the forms."
+ },
+ {
+  "prompt": "Equal hills of 3000.000000 ft move the ceiling 65.035343 psi one way and 70.423606 psi the other. What accounts for the two figures differing?",
+  "options": [
+   "The descent recovers the static column in full while the climb also pays the equivalent length factor, so the climbing figure carries a second cost the descending one does not.",
+   "The two are measured against different references, the climbing figure against the inlet of 850.000000 psia and the descending one against the ceiling itself.",
+   "The ceiling is the inlet over the square root of e to the s, and an exponential is not symmetric about zero, so equal slopes do not move a ceiling by equal amounts.",
+   "The compressibility of 0.885000 is applied to the column on the way down and not on the way up, which is the origin of every asymmetry in the elevation group."
+  ],
+  "answer": 2,
+  "explanation": "At 1500.000000 ft the same pair reads 33.164669 and 34.511201, so the descent offset is the larger on both hills. The ceiling inherits the asymmetry of the exponential."
+ },
+ {
+  "prompt": "A traverse refuses a liquid duty and a reviewer asks how far the engine got. What does the refusal report, and what kind of quantity is it?",
+  "options": [
+   "The pressure at each of the four stations, three of which stand behind the refusal and the fourth of which carries the value the arithmetic produced.",
+   "One station, which is a count, together with the distance it died at of 20000.000000 ft and the pressure the arithmetic produced there.",
+   "The fraction of the line it completed, which on this case is the distance it died at expressed against the length and is the actionable figure a designer works from.",
+   "No positional information at all, the refusal carrying the error string and the produced pressure and leaving the location to be found by re-running the case."
+  ],
+  "answer": 1,
+  "explanation": "Four pieces of evidence travel with the error string. The station count is 1 and the last of them stands at 0.000000 ft and 100.000000 psia."
+ },
+ {
+  "prompt": "Two operators write contracts in scfd against lines in different climates carrying different gas. What makes the two contracts mean the same thing?",
+  "options": [
+   "Both rates are counted at the flowing conditions of their own line, which is what a standard cubic foot is defined against and why the base is exported for a caller to read.",
+   "Both rates are computed with the same transmission form, which is the condition that has to match before two rates can be set beside one another.",
+   "Both rates are corrected to the compressibility of the gas each line carries, so that a quantity counted on one line is the same quantity when counted on the other.",
+   "A standard cubic foot is an accounting unit fixed at 520.000000 degR and 14.650000 psia, and neither of the two climates reaches inside it to change that."
+  ],
+  "answer": 3,
+  "explanation": "The flowing temperature and the compressibility belong to the line and change with it. Two forms quoted at different bases are not comparable even when they agree."
+ },
+ {
+  "prompt": "The Weymouth up and down fractions at 1500.000000 ft average to 0.998132. What practical reading does that support?",
+  "options": [
+   "That an undulating route may be netted to its total elevation change, the residual of that averaging being small enough to disregard on any ordinary profile.",
+   "That the descent is the more expensive half on every form, so a profile with more fall than rise in it is the one to check first.",
+   "That an undulating route has not done nothing to the gas, because a climb and an equal descent do not return the rate to where it started.",
+   "That the engine applies a correction of that size to a flat-line rate before reporting it for a route with relief, which is why the figure is printed."
+  ],
+  "answer": 2,
+  "explanation": "It is close to one and it is not one. The climb loses more than the descent gains on every row, and the engine will answer a netted figure honestly for a line that climbs once."
+ },
+ {
+  "prompt": "A terminal contracts for 60000000.0000 scfd on the flat SOKU trunk. What does the studio report, and what kind of trust does the figure carry?",
+  "options": [
+   "666.307057 psia at a drop of 183.692943 psi, with the trust of a closed-form result, since the round trip recovers the outlet each form came from with a difference of 0.000000 psi.",
+   "666.307057 psia at a drop of 183.692943 psi, and the trust of a search rather than of an equation, since it is only as good as the bracket it ran in and the form it called.",
+   "666.307057 psia at a drop of 183.692943 psi, with the trust of a published case, since that duty is one of the rows this package carries a golden for.",
+   "A refusal, since 60000000.0000 scfd is below the largest rate the line will pass and the solver only reports a pressure for a target it cannot meet."
+  ],
+  "answer": 1,
+  "explanation": "183.692943 psi is what the terminal pays for its duty, and the pressure behind it came out of a bisection. Where a number came from is part of what a reader has to carry with it."
+ },
+ {
+  "prompt": "A marched liquid line and a single call over the same length agree to 0.000000 psi. What is the right conclusion?",
+  "options": [
+   "That the march is redundant on any incompressible line, and worth running only where the profile has enough relief for the two totals to separate.",
+   "That the segment count was too low to show the difference, and a finer profile would move the marched total away from the single call.",
+   "That the two calls return the same thing, so a review may quote either of them for either purpose.",
+   "That the station list is the whole value of the march, so there is no accuracy tradeoff to weigh."
+  ],
+  "answer": 3,
+  "explanation": "Nothing the arithmetic depends on varies from one end of an incompressible line to the other, so cutting it into pieces cannot move the total. What the pieces buy is the station list."
+ },
+ {
+  "prompt": "An outlet-pressure solve on a climbing line is validated by checking that it recovers the outlet it was run forward from. Why is that check weaker than it looks?",
+  "options": [
+   "The same correlation is used in both directions, so a round trip tests the solver against the form and says nothing about whether the form is right.",
+   "A round trip on a climbing line runs the whole bracket twice, so it will pass even where the ceiling has fallen below the floor and no interval exists.",
+   "A round trip is run at the flat condition only, which is the one profile on which the ceiling and the inlet coincide and no bracket error can appear.",
+   "A round trip recovers the outlet to 0.000000 psi on all four forms, so it cannot distinguish between them and therefore cannot validate any one of them."
+  ],
+  "answer": 0,
+  "explanation": "All four forms recover 620.000000 psia with a difference of 0.000000 psi. A round trip is a test of a solver and never a test of physics."
+ },
+ {
+  "prompt": "An engineer treats a ridge on a gas line the way the OGBIA liquid case treats one, expecting the climb and the descent to cancel. What goes wrong?",
+  "options": [
+   "Nothing goes wrong on the arrival, which cancels on both fluids, and the error is confined to the crest pressure that only a march reports.",
+   "The gas form refuses an undulating profile, since a gas call carries a single elevation change and cannot express a ridge at all.",
+   "The gas elevation term sits inside an exponential, so the two do not cancel, while on the incompressible liquid the column is paid on the way up and returned on the way down.",
+   "The gas case cancels more than completely, so the expectation errs in the conservative direction and the arrival is understated rather than overstated."
+  ],
+  "answer": 2,
+  "explanation": "The OGBIA ridge climbs 420.000000 ft and returns all of it, leaving the friction alone at 25.660631 psi. On the gas side 0.932862 and 1.063402 average to 0.998132."
+ },
+ {
+  "prompt": "A studio calls a gas form, does not check the returned object for an error property, and passes the result into a total. What happens on a dead line?",
+  "options": [
+   "The total is silently reduced by that branch, since a refused call contributes zero and a zero is indistinguishable from a shut line in a sum.",
+   "An object flows onward where a number was expected, because the refusal is returned rather than thrown and nothing compels the caller to look at it.",
+   "The call throws at the point of use, which is late but recoverable, and is the reason the refusal is returned rather than raised at the call site.",
+   "The engine substitutes the largest rate the branch will pass, which is the behaviour the refusal exists to make visible."
+  ],
+  "answer": 1,
+  "explanation": "The refusal arrives as an object carrying an error property, and a total that adds objects does not stop to complain. The failure surfaces downstream of the call that produced it."
+ },
+ {
+  "prompt": "Why is the floor of the outlet-pressure bracket what makes the largest rate a line will pass a decidable question?",
+  "options": [
+   "Because the floor is the base pressure the published forms report at, so a rate computed there is the only one expressed in the same units as the target.",
+   "Because the floor and the ceiling together define the interval, and the largest rate is found by bisecting between them in the same way the outlet is.",
+   "Because the floor is fixed while the ceiling moves with the hill, so the largest rate is the one figure on a gas line that a profile cannot change.",
+   "Because the rate at the floor is the most the line can carry, so any target above it needs an outlet the method will not produce."
+  ],
+  "answer": 3,
+  "explanation": "The solver can ask a question the forward direction cannot: what is the most this line will pass, with the outlet dumped to atmosphere. A target above that is refused rather than approximated."
+ },
+ {
+  "prompt": "How was the diameter exponent of each transmission form obtained in this package, and why does the method not need the form's leading constant?",
+  "options": [
+   "By doubling the bore from 10.000000 in to 20.000000 in and taking the base-two logarithm of the two rates' ratio, in which any constant standing in front of the form cancels.",
+   "Each form's published statement was read and its exponent quoted, the two engine rates at 10.000000 in and 20.000000 in being printed alongside as a check that the quoted figure reproduces.",
+   "Each form was fitted across the published cases, whose bores run from 6.065000 in to 16.000000 in, and the exponent is the slope of that fit with the constant as its intercept.",
+   "Each form was run at the SOKU bore of 11.938000 in and the exponent recovered from the ratio against Weymouth, which removes the constant by comparison with a reference form."
+  ],
+  "answer": 0,
+  "explanation": "What comes back is a property of the correlation and of nothing else, which is why it can be set beside a published statement without either one being taken on trust."
+ },
+ {
+  "prompt": "A reader applies e to the s to both pressures in the driving group. Why does a sweep across bores fail to expose that?",
+  "options": [
+   "Because the mistake moves each row by a different factor, so the rows stop ranking in order of bore and the sweep is discarded before anyone reads a rate off it.",
+   "Because every single row of the sweep is then wrong by one and the same factor, and the only thing a sweep has to compare a row against is the other rows in it.",
+   "Because the sweep prints the friction factor General Flow settled on, and a factor holding steady down the rows is taken as evidence that the group behind it was formed correctly.",
+   "Because the group is still zero when the pressures meet, so the no-flow refusal fires at the right point and the sweep's boundary behaviour is unaffected."
+  ],
+  "answer": 1,
+  "explanation": "Only the outlet is scaled. The error also vanishes on a flat line, where e to the s is exactly 1.0000000000, so a flat test case catches neither it nor the version that scales the inlet."
+ },
+ {
+  "prompt": "A traverse refuses a liquid line while the single pressure-drop call underneath returns 47428.563502 psi on the same inputs. Are the two answers in conflict?",
+  "options": [
+   "Yes. One of the two has to be wrong, and it is the single call, which has no way to notice that the pressure it reports spending exceeds anything the line holds.",
+   "No, because the single call carries the fittings and the traverse does not, and the gap between them on this line is what puts one across the physical boundary.",
+   "Yes, in the sense that both should refuse, and the single call answering is the fails-open half of the pair.",
+   "No. They were asked different questions, and only the traverse was told that the line enters at 100.000000 psia."
+  ],
+  "answer": 3,
+  "explanation": "The single call was asked what the duty costs, and a cost can exceed a balance. The traverse was asked where the fluid is, and it is the call that knows the inlet."
+ },
+ {
+  "prompt": "Asked for 20000000.0000 scfd up a 3000.000000 ft hill, the trunk delivers at 766.523922 psia. A designer proposes lowering the rate until the outlet reaches 850.000000 psia. What is wrong with the proposal?",
+  "options": [
+   "The outlet rises towards 784.964657 psia as the rate falls towards nothing and stops there, so 850.000000 psia is unreachable at any rate on that hill.",
+   "Nothing is wrong in principle, but the rate required would be below the smallest the four published forms are fitted for, so the answer would be an extrapolation.",
+   "The outlet falls rather than rises as the rate is reduced, since a lower rate spends less friction and arrives with the static column still unpaid.",
+   "The proposal reaches 850.000000 psia only at a rate of zero, at which point the no-flow refusal fires because the outlet has met the inlet."
+  ],
+  "answer": 0,
+  "explanation": "The gas has to lift itself 3000.000000 ft before it delivers anything. The ceiling of 784.964657 psia is as close to the inlet as any rate can bring the outlet, a drop of 83.476078 psi being the answer at the stated rate."
+ },
+ {
+  "prompt": "Which figures on a gas answer say what the calculation assumed about the surface of the pipe?",
+  "options": [
+   "The friction factor and the efficiency together, the first describing the pipe wall and the second the departure of a real line from the published correlation.",
+   "The equivalent length factor, which converts the laid length into the length the friction actually acts over and therefore encodes the surface it acted on.",
+   "Only the friction factor General Flow returns, since the other three forms carry no roughness at all and cannot be asked what pipe they assumed.",
+   "The diameter exponent, which differs across the four forms because each was fitted to pipe of a different surface condition."
+  ],
+  "answer": 2,
+  "explanation": "A value of 0.0112132010 on the SOKU trunk is a report about the flow the form settled on, and it is a result rather than an input."
+ },
+ {
+  "prompt": "A route with real relief on it is to be modelled, and the designer has already chosen a transmission form. What has that choice already decided?",
+  "options": [
+   "Nothing further, since the elevation term is shared by all four forms and applies identically whichever of them was named.",
+   "How sensitive the answer is to the survey, since the four forms respond to the same shared elevation term by different amounts.",
+   "The equivalent length factor, since each form converts the laid length differently and the factor is the part of the adjustment the form owns.",
+   "The ceiling of the outlet bracket, since each form vanishes at a different outlet pressure and the bracket is cut to the form that was chosen."
+  ],
+  "answer": 1,
+  "explanation": "Each form combines the shared adjustment with its own friction treatment. At 1500.000000 ft the four climb to 0.932862, 0.927767, 0.931566 and 0.931850 of their flat rates."
+ },
+ {
+  "prompt": "A survey shows a route rising and falling several times, and only its two end elevations reach the gas call. What comes back, and what is the exposure?",
+  "options": [
+   "An honest answer for a line that climbs once, which is not the line that was surveyed, because nothing in the call describes the ground between the two ends.",
+   "A refusal, since the elevation guard compares the rise against the length and a netted profile fails that comparison on any route with relief.",
+   "An answer carrying a warning, since the engine detects a netted profile from the mismatch between the elevation change and the equivalent length factor.",
+   "An answer that is conservative, since netting discards the climbs and the descents together and the exponential asymmetry works in the designer's favour."
+  ],
+  "answer": 0,
+  "explanation": "The engine will accept the net figure and answer it. On the liquid side a ridge of 420.000000 ft genuinely returns all of itself, and that is exactly what the gas side does not do."
+ },
+ {
+  "prompt": "A reviewer wants to distinguish an implementation problem from a method disagreement on the four forms. What does each look like?",
+  "options": [
+   "A spread between the four wider than the published cases show is an implementation problem, and a spread inside that range is the ordinary disagreement between correlations.",
+   "A form whose rate cannot be reproduced at the stated efficiency is an implementation problem, and one that can is a method disagreement by elimination.",
+   "One form drifting away from its own golden is an implementation problem, and every form sitting on its own golden while the four still return different rates is a method disagreement.",
+   "A form whose measured exponent differs from its published one is an implementation problem, and a matching exponent with a differing rate is a method disagreement."
+  ],
+  "answer": 2,
+  "explanation": "The two look nothing alike once stated. Each of the four is published here with its own golden on five cases, and the spread of 1.336801 survives that agreement."
+ },
+ {
+  "prompt": "On a profile where the highest ground sits early in the line, why might the worst station not be under it?",
+  "options": [
+   "Because the traverse reports elevation and pressure in separate columns and the worst station is selected on elevation, which is why the two can disagree.",
+   "Because pressure falls with distance as well as with elevation, so a hill late in a line sits at a lower pressure than the same hill early in it.",
+   "Because a station's pressure is computed from the segment before it, so the lowest pressure always falls one station after the highest ground.",
+   "Because the elevation is returned in full on any profile that comes back to its starting height, which removes the hill from the pressure reading entirely."
+  ],
+  "answer": 1,
+  "explanation": "On the OGBIA ridge the lowest pressure and the highest ground coincide, because the line is level apart from one ridge and the duty is uniform. The worst station is the one the march reports."
+ },
+ {
+  "prompt": "The elevation coefficient is reported as 0.037500000000 and described as measured. What makes that a stronger statement than quoting it from a publication?",
+  "options": [
+   "It is an engine return, obtained by setting the gravity, the absolute temperature and the compressibility to one and dividing the 37.500000 the engine gave at 1000.000000 ft by that distance.",
+   "It is checked against a golden, since the elevation group is one of the published cases this package carries measured values for.",
+   "It is derived from the base conditions of 520.000000 degR and 14.650000 psia, which fixes the field units the coefficient belongs to and therefore its value.",
+   "It is recovered from two rows of the elevation table, the ratio of s at 1500.000000 ft to s at 3000.000000 ft isolating the coefficient from the other three inputs."
+  ],
+  "answer": 0,
+  "explanation": "Setting three of the four inputs to one leaves the coefficient and the elevation change. A number typed into a teaching file would not be an engine return."
+ },
+ {
+  "prompt": "A trunk is quoted with an average flowing temperature and an average compressibility. What can the method not represent?",
+  "options": [
+   "A line whose compressibility depends on pressure, since the average is taken over temperature alone and the compressibility is held at the inlet condition.",
+   "A line longer than the published cases cover, since an average over 80.000000 miles is the widest span the correlations were fitted across.",
+   "A line carrying gas of more than one gravity, since the average conditions are computed per stream and a commingled line has no single value for them.",
+   "A line that is hot where it leaves the station and cold where it arrives."
+  ],
+  "answer": 3,
+  "explanation": "One temperature and one compressibility stand in for the whole 32.000000 miles. Two engineers who average differently report different rates from the same pipe."
+ },
+ {
+  "prompt": "A gas line and a liquid line both have a hill on them. What is fundamentally different about how the two calculations treat it?",
+  "options": [
+   "On the liquid line the hill changes the length friction acts over and on the gas line it changes the pressure, which is why only the gas side carries an equivalent length factor.",
+   "On the liquid line the hill is entered in feet and on the gas line in miles, matching the unit each half states its length in.",
+   "On the liquid line the column is a static head paid on the way up and returned on the way down, and on the gas line it is a multiplier inside an exponential that does not return.",
+   "On the liquid line the hill is one of three losses reported separately and on the gas line it is folded into the friction, so it cannot be separated from the rate."
+  ],
+  "answer": 2,
+  "explanation": "Both halves take the elevation change in feet. The OGBIA ridge returns its 420.000000 ft in full, and the gas fractions of 0.932862 and 1.063402 do not average to one."
+ },
+ {
+  "prompt": "What does a designer gain by working out the ceiling before attempting a solve rather than after?",
+  "options": [
+   "The bracket is narrowed, so the bisection converges in fewer passes and the answer is returned at a higher precision than the default search allows.",
+   "A target above the ceiling on a climb is known in advance to have no answer, which turns a refusal from a surprise into a confirmation.",
+   "The ceiling can be compared against the inlet to decide which of the four forms to name, since each carries its own ceiling on the same hill.",
+   "The ceiling gives the largest rate the line will pass, which is the figure a contract should be checked against before any pressure is requested."
+  ],
+  "answer": 1,
+  "explanation": "Nothing new has to be computed for it. On a 3000.000000 ft climb it stands at 784.964657 psia, and a target above that figure can be ruled out on paper."
+ },
+ {
+  "prompt": "A sheet carries a gas rate of 66104956.1404 scfd and a liquid traverse arrival of 874.339369 psia. What units and precisions do those two belong to?",
+  "options": [
+   "The rate is scfd counted at 520.000000 degR and 14.650000 psia and printed to four decimals, and the pressure is psia printed to six.",
+   "Both are printed to six decimals, which is the convention for any quantity carrying a pressure unit and for the rate because it derives from two pressures.",
+   "The rate is scfd counted at the line's own flowing conditions and printed to four decimals, and the pressure is psig printed to six.",
+   "The rate is scfd printed to four decimals and the pressure is psia printed to four, counts being the only whole numbers in either half of the engine."
+  ],
+  "answer": 0,
+  "explanation": "Gas rates and Reynolds numbers print to four decimals, and pressures, ratios and friction factors to six. A gas length is in miles and an elevation change in feet on the same call."
+ },
+ {
+  "prompt": "A rate is quoted for the SOKU trunk and the form that produced it is not named. How much of the answer has been left unstated?",
+  "options": [
+   "Nothing of the rate itself, since the four agree to within the tolerance the published cases are checked at, and only the friction factor of 0.0112132010 has been lost.",
+   "The equivalent length factor alone, since the four forms share the elevation term and part company only over how each converts the laid length.",
+   "The base the rate is counted at, since each of the four reports at a base of its own and naming the form is what fixes which of them applies.",
+   "A third of it, because Weymouth and Panhandle B answer these same eight conditions with a ratio of 1.336801 between them, and the form was never named."
+  ],
+  "answer": 3,
+  "explanation": "Weymouth reads 66104956.1404 scfd on this trunk and Panhandle B reads 88369202.2673 scfd. An unnamed form leaves a reader holding a rate that could be either."
+ },
+ {
+  "prompt": "On a climb a bracket capped at the inlet covers a band above the ceiling, and on a descent it stops short of the answers standing above the inlet. Why is the climbing band the harder of the two to notice on a sheet?",
+  "options": [
+   "Because a climb is the rarer of the two profiles, so fewer lines ever reach that band and a case that arises seldom is a case nobody reports.",
+   "Because the climbing ceiling stands above the inlet, so the band lies outside the bracket altogether and cannot appear in an answer at all.",
+   "Because that band runs from 784.964657 psia up to 850.000000 psia, which are ordinary delivery pressures to look at, while a figure standing above the station it was fed from is odd at a glance.",
+   "Because the climbing band is the narrower of the two, 65.035343 psi against 70.423606 psi, and the smaller of a pair is the one a reviewer passes over."
+  ],
+  "answer": 2,
+  "explanation": "A climb of 3000.000000 ft puts the ceiling at 784.964657 psia, below the inlet of 850.000000 psia. The matching descent puts it at 920.423606 psia, above the inlet, which is a pressure no inlet-capped bracket could have reached."
+ },
+ {
+  "prompt": "What has to be true of a figure before this course will grade it?",
+  "options": [
+   "That it is one of the published cases carrying a golden, since a figure with no measured counterpart cannot be marked.",
+   "That it does not rest on a held item, so every graded gas value states its own efficiency rather than assuming one.",
+   "That it is printed to six decimals, which is the precision the grading tolerance is set against for every quantity in the course.",
+   "That it comes from the forward direction, since a figure produced by a search carries the uncertainty of its bracket and cannot be marked exactly."
+  ],
+  "answer": 1,
+  "explanation": "The efficiency multiplies every form linearly and no publication in this package stands behind any particular value of it. It is taught as a limit and never graded."
+ },
+ {
+  "prompt": "Reading across the whole tier, which single change to the method is the one the rest of it follows from?",
+  "options": [
+   "The pressures enter squared, so the quantity that moves along the pipe is a driving group rather than a difference.",
+   "The gas forms state their length in miles, which is what makes a gas call carry two units of length and what the base conditions were fitted against.",
+   "Four published forms replace one closed-form chain, and the squared group is one of the four ways those forms happen to express a difference of pressure.",
+   "The elevation term moved out of a static head and into an exponential, and the driving group is what that exponential multiplies once the hill has been applied."
+  ],
+  "answer": 0,
+  "explanation": "The density the friction sees is proportional to the pressure, which is what puts the pressures inside a square. The base, the exponential hill and the bracketed inverse are all consequences of it."
+ },
+ {
+  "prompt": "The Expert tier takes up the wall and the pig. What do those two have in common that this tier's subject does not?",
+  "options": [
+   "Both are computed from the bore and the length alone, which are the two quantities a transmission form already carries, so the Expert tier adds no new inputs.",
+   "Both are governed by published correlations with their own efficiencies, which is the same held-item problem this tier met in the transmission forms.",
+   "Both are answered by the same marching function this tier used on the OGBIA line, applied along the wall thickness and along the liquid holdup in turn.",
+   "Neither can be sized from a pressure drop."
+  ],
+  "answer": 3,
+  "explanation": "A code demands the wall from the design pressure, the diameter, the grade and where the line runs. A pigging estimate needs one input this engine never computes."
+ }
+]

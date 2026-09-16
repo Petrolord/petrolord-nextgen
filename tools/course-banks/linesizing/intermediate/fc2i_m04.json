@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The studio knows the rate a terminal has contracted for and wants the pressure it will see. How does the engine answer a question it has no closed inversion for?",
+  "options": [
+   "It rearranges whichever of the four forms was named into an explicit expression for the outlet, which is possible for all four because the driving group is quadratic in the outlet pressure.",
+   "It bisects on the outlet pressure, calling the same published form the forward direction uses at every step, so no second implementation of the physics exists to drift away from the first.",
+   "It runs the forward form across a sweep of outlet pressures and interpolates between the two rows that bracket the target rate, which is why the answer is reported to six decimals rather than exactly.",
+   "It inverts Weymouth in closed form and corrects that answer for whichever form the caller named, using the ratio column of 1.000000, 1.314034, 1.336801 and 1.117335."
+  ],
+  "answer": 1,
+  "explanation": "The form being inverted is the same code the forward direction uses. The search runs inside a bracket, and that bracket is a piece of physics rather than a convenience."
+ },
+ {
+  "prompt": "Each of the four forms was run forward from an outlet of 620.000000 psia to a rate, and each rate was handed back to the solver. All four recover 620.000000 psia with a difference of 0.000000 psi. What has been proved?",
+  "options": [
+   "That the four forms agree with one another once the question is asked in the inverse direction, which is what makes a contracted outlet a safer quantity to work in than a rate.",
+   "That the published forms are correct, since a correlation that returns the pressure it was given is reproducing the physics of the line in both directions.",
+   "That the bisection converged, which is the flag the solver cannot otherwise report and the reason the round trip is run on every call before the answer is released.",
+   "That the inversion is faithful to the form it inverts, to the precision printed, and nothing whatever about whether that form describes this line correctly."
+  ],
+  "answer": 3,
+  "explanation": "The same correlation was used in both directions, so a round trip is a test of a solver and never a test of physics. It proves nothing about whether the form is right."
+ },
+ {
+  "prompt": "Asked for 60000000.0000 scfd through Weymouth, the flat trunk arrives at 666.307057 psia for a drop of 183.692943 psi. What kind of number is 666.307057 psia?",
+  "options": [
+   "The endpoint of a search, which carries a different trust from a closed-form result because it is only as good as the bracket it searched and the form it called.",
+   "A closed-form result, since the Weymouth relation can be solved for the outlet directly once the rate is known and only the other three forms require a search.",
+   "An interpolated value, taken between the two nearest rows of the published Weymouth cases and therefore carrying the uncertainty of that table rather than of a solver.",
+   "A measured value, since the 60000000.0000 scfd duty is one of the published cases this package carries a golden for."
+  ],
+  "answer": 0,
+  "explanation": "This is the first figure in the course that no equation produced. A closed-form answer can be wrong in its algebra, and a bracketed answer can be wrong by never having contained the answer at all."
+ },
+ {
+  "prompt": "The bracket the solver searches runs from atmospheric up to a ceiling. What is that ceiling?",
+  "options": [
+   "The inlet pressure, since an outlet can never stand above the pressure the gas entered at and the search would otherwise waste itself on impossible values.",
+   "The pressure at which the rate reaches the largest value the line can pass, which is the other end of the same interval whose floor is the largest rate at atmospheric outlet.",
+   "The pressure at which the driving group vanishes, which is the inlet divided by the square root of e to the s, and which is not the inlet itself on any sloping line.",
+   "The inlet multiplied by the square root of e to the s, so that a climb raises the ceiling to cover the extra head the column of gas demands."
+  ],
+  "answer": 2,
+  "explanation": "Each ceiling on the trunk's table is its own inlet of 850.000000 psia divided by the square root of the engine's e to the s on that row. A hill moves it."
+ },
+ {
+  "prompt": "On the flat SOKU trunk the ceiling is 850.000000 psia, which is the inlet. Why is that case misleading?",
+  "options": [
+   "Because the flat case is the only one the engine computes the ceiling for, the sloping rows being extrapolated from it by the equivalent length factor.",
+   "Because e to the s is exactly 1.0000000000 and the square root of one changes nothing, so the flat line is the only case in which the intuition that a ceiling is an inlet is right.",
+   "Because the flat case puts the ceiling at the inlet only to the precision printed, and a finer computation would show it fractionally below 850.000000 psia on every line.",
+   "Because a flat line is the only profile on which the outlet can legitimately equal the inlet, which is the state the no-flow refusal covers."
+  ],
+  "answer": 1,
+  "explanation": "A descent ends the bracket above the inlet and a climb ends it below. One case out of three puts the ceiling at the inlet, and it is the case the intuition was formed on."
+ },
+ {
+  "prompt": "Take the SOKU trunk up 3000.000000 ft. Where does its bracket end?",
+  "options": [
+   "At 850.000000 psia, since a climbing line still enters at its inlet and the hill is expressed through the equivalent length factor rather than through the bracket.",
+   "At 920.423606 psia, the climb raising the ceiling above the inlet because the gas must arrive with enough pressure in hand to have lifted itself 3000.000000 ft.",
+   "At 784.964657 psia, which is 65.035343 psi below the 850.000000 psia the gas entered at, because the column of gas costs head that no rate at all gets back.",
+   "At 766.523922 psia, which is the outlet the trunk delivers at on that hill and therefore the highest pressure the search has any reason to consider."
+  ],
+  "answer": 2,
+  "explanation": "On that row e to the s is 1.1725669398, and 850.000000 psia divided by the square root of it is 784.964657 psia. The ceiling falls below the inlet on every climb."
+ },
+ {
+  "prompt": "A delivery point is quoted above the station pressure it is fed from, on a line that falls 3000.000000 ft. Is the figure admissible?",
+  "options": [
+   "Yes, up to 920.423606 psia, which stands 70.423606 psi above the inlet, so a delivery point above a station is a real operating point rather than nonsense.",
+   "No, because the inlet is the most pressure the line ever holds and a descent recovers its head along the pipe rather than at the delivery point.",
+   "No, because the descent lowers the ceiling to 784.964657 psia, the gas arriving having spent both the friction and the column it ran down.",
+   "Yes, but only up to 884.511201 psia, which is the ceiling for a descent and the pressure a delivery point sees once the static column has been returned to it."
+  ],
+  "answer": 0,
+  "explanation": "The column of gas recovers more head than the friction spends. 884.511201 psia is the ceiling for a fall of 1500.000000 ft, and 920.423606 psia for a fall of twice that."
+ },
+ {
+  "prompt": "Equal hills of 3000.000000 ft put the ceiling 65.035343 psi below the inlet climbing and 70.423606 psi above it descending. At 1500.000000 ft the two figures are 33.164669 and 34.511201. What do those pairs show?",
+  "options": [
+   "That the ceiling is asymmetric only on the larger hill, the 1500.000000 ft pair of 33.164669 and 34.511201 being equal to the precision the table is printed at and the asymmetry appearing between there and 3000.000000 ft.",
+   "That the descent figures are the larger because they are measured from the ceiling down to the inlet while the climb figures are measured from the inlet down to the ceiling, so the two columns are reckoned from opposite ends.",
+   "That the ceiling moves with the square of the elevation change, since doubling the hill from 1500.000000 ft to 3000.000000 ft roughly doubles both offsets rather than leaving them unchanged.",
+   "That the ceiling inherits the asymmetry of the exponential, so equal slopes up and down do not move it by equal amounts."
+  ],
+  "answer": 3,
+  "explanation": "Each ceiling is the inlet over the square root of e to the s, and e to the s is not symmetric about zero. The descent offset is the larger of the pair on both hills."
+ },
+ {
+  "prompt": "A bracket that runs from atmospheric to the inlet is used on a descent and then on a climb. How does it fail in each case?",
+  "options": [
+   "On the descent it is too long, since the real ceiling sits below the inlet there, and on the climb it is too short, since the real ceiling sits above it.",
+   "On the descent it is too short and cannot reach an answer lying above the inlet, and on the climb it is too long and reaches past the pressure where the group has already vanished.",
+   "On the descent it fails to converge and reports so, and on the climb it converges on the floor, which is why only the descending case was ever noticed.",
+   "On both it returns the inlet with a drop of 0.000000 psi, the search collapsing to its upper bound whenever the answer lies outside the interval."
+  ],
+  "answer": 1,
+  "explanation": "The two failures are opposite and both return numbers. On a climb the band from 784.964657 psia up to 850.000000 psia has no physical content, because there is no rate to be found above the ceiling."
+ },
+ {
+  "prompt": "Run the SOKU trunk 3000.000000 ft downhill with its outlet at 880.000000 psia and it carries 29457958.5967 scfd, the outlet standing 30.000000 psia above the inlet. Hand the solver that rate and what comes back?",
+  "options": [
+   "An outlet of 880.000000 psia and a drop of 30.000000 psi, the engine reporting the magnitude and leaving the direction to be read off the profile.",
+   "A refusal, because the target outlet lies above the inlet and the no-flow message covers any outlet that meets or exceeds it.",
+   "An outlet of 880.000000 psia and a drop of -30.000000 psi, the forward and inverse calls differing by 0.000000 psi.",
+   "An outlet of 850.000000 psia and a drop of 0.000000 psi, the search returning its upper bound when the answer it is looking for sits above the inlet."
+  ],
+  "answer": 2,
+  "explanation": "A negative drop is the honest reading of a descent and not a sign convention to be tidied up. The line arrives higher than it left because the column gave back more than the friction spent."
+ },
+ {
+  "prompt": "The same descent is run again with its outlet genuinely below the inlet, at 700.000000 psia, where it carries 65259103.7761 scfd and the solve recovers 700.000000 psia with an error of 0.000000 psi. Why does that second row matter?",
+  "options": [
+   "It is the control: both rows use the same hill, the same trunk and the same bisection, so a fault that appears in one and not the other cannot be blamed on the search.",
+   "It is the calibration row, since a case whose answer sits below the inlet is the only one a bracket of any width can be relied on to contain, and the first row is scaled against it.",
+   "It shows that the solver is more accurate at lower outlet pressures, which is why a descending line should be worked from an outlet below the inlet wherever the profile allows it.",
+   "It establishes the floor of the bracket, because 700.000000 psia is the lowest outlet this trunk will deliver at on that hill."
+  ],
+  "answer": 0,
+  "explanation": "If the search were the weak part, both rows would suffer. The conclusion follows directly: the fault was in the range the search was given rather than in the search."
+ },
+ {
+  "prompt": "Asked for 20000000.0000 scfd up the 3000.000000 ft hill, the trunk delivers at 766.523922 psia for a drop of 83.476078 psi. What does that figure sit beside?",
+  "options": [
+   "The ceiling of 850.000000 psia, which is the inlet the gas entered at and the pressure the outlet would approach if the rate were reduced towards nothing on any profile.",
+   "The floor of the bracket, since a climb of that height leaves the delivered pressure much nearer the bottom of the search interval than the top of it.",
+   "The 880.000000 psia of the matching descent, the two together giving the band a delivery point can occupy on a hill of 3000.000000 ft in either direction.",
+   "The ceiling of 784.964657 psia, which is as close to the inlet as any rate can bring the outlet."
+  ],
+  "answer": 3,
+  "explanation": "Reduce the rate towards nothing and the outlet rises towards 784.964657 psia and stops there. It never reaches 850.000000 psia at any rate, because the gas has to lift itself 3000.000000 ft before delivering anything."
+ },
+ {
+  "prompt": "A target rate beyond the line returns an error saying the line cannot carry it even to an atmospheric outlet. Why would returning the floor of the bracket instead be a particularly dangerous response?",
+  "options": [
+   "It is below the base pressure of 14.650000 psia, so every rate computed downstream of it would be counted at a condition the published forms do not report at.",
+   "It is a valid pressure that would pass any check testing whether a number came back, and it would flow into a sizing sweep as though the line delivered the contracted rate.",
+   "It would be indistinguishable from the answer on a descending line, where an outlet below the inlet is the ordinary case and a low delivered pressure raises no question.",
+   "It would contradict the round trip, since running that pressure forward through the same form returns a rate the caller never asked for."
+  ],
+  "answer": 1,
+  "explanation": "The solver went to the bottom of its range, found the line still short, and said so. The distance between that finding and a returned floor is the entire point."
+ },
+ {
+  "prompt": "Put the 3000.000000 ft climb under a near-atmospheric inlet of 15.500000 psia and the engine reports that the static gas column alone spends the inlet pressure. How does that differ from the refusal on a rate the line cannot carry?",
+  "options": [
+   "It is the same finding reported at a different point in the call, the rate message being returned when a target was supplied and the column message when one was not.",
+   "The column message is thrown while the rate message is returned, which is how a caller tells a malformed inlet from a duty the line cannot meet.",
+   "The ceiling has fallen to or below the floor, so there is no interval left to search at all, whereas the rate refusal is the solver searching a real interval and finding the line short at the bottom of it.",
+   "The column message reports that the rate requested was too large for the inlet given, so lowering the target recovers an answer in the way it does for the other refusal."
+  ],
+  "answer": 2,
+  "explanation": "That message is about the column alone, before any rate has been considered and before any friction has been spent. The range itself has closed."
+ },
+ {
+  "prompt": "A designer wants to know in advance whether a target outlet is answerable on a climbing line. What does the ceiling let them decide before a solve is attempted?",
+  "options": [
+   "That a target above the ceiling has no answer inside this method, because the driving group has already vanished up there and no rate can bring the outlet that high.",
+   "That a target above the ceiling will be answered at the ceiling itself, since the solver clamps to the nearest reachable pressure and reports the rate that goes with it.",
+   "That a target above the ceiling requires a different form, because the four published correlations carry different ceilings on the same hill and one of them will contain the target.",
+   "That a target above the ceiling is reachable at a low enough rate, the ceiling being the outlet at the largest rate the line will pass rather than at the smallest."
+  ],
+  "answer": 0,
+  "explanation": "The ceiling needs the inlet and the elevation group, both of which the engine already returns. Knowing it in advance turns a refusal from a surprise into a confirmation."
+ }
+]

@@ -1,0 +1,117 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC2 Professional m01, a gas line is not a liquid line. Digest Section 7 only.
+# Atmospheric is named and never numbered here: the digest prints its value in
+# Section 1, which the Associate tier owns, and this tier's own lesson names it
+# without a figure for the same reason.
+
+q(2, "The SOKU trunk runs 850.000000 psia at the station against 620.000000 psia at the delivery point, and the first quantity any transmission form builds is 338100.0000 psia squared. Why does a gas form square the two pressures before subtracting them?",
+ "The density the friction acts on is itself proportional to the pressure, so the gas is heavier and slower where the line is full and lighter and faster where it has spent itself, and integrating that along the pipe puts the pressures inside a square.",
+ ["Squaring keeps the group positive whichever way round the two pressures are handed in, which is what lets one form serve a line read from either end without a separate sign convention for the delivery point.",
+  "The square is a linearisation that holds while the pressure ratio stays near one, and it is replaced by the plain difference on any line whose ends are far apart.",
+  "The gas is compressible, so the volume at the outlet is larger than the volume at the inlet, and squaring both pressures is how the form carries that ratio of volumes into a single term."],
+ "A liquid line subtracts pressures because the fluid leaving is the fluid that entered, at one density. A gas line cannot, and the whole compressible half of the course follows from that.")
+
+q(0, "A report quotes the SOKU driving group as a pressure of 338100.0000 psi. What is wrong with that line of the report?",
+ "The group is 338100.0000 psia squared, and its units say so, because it is the difference of two squared pressures rather than a pressure difference at all.",
+ ["Nothing is wrong with the units, because the group is formed from two absolute pressures and therefore carries the same units they do, but the figure should be quoted at six decimals as a pressure rather than at four.",
+  "The group should be reported as the ordinary difference between the two ends in psi, with the squared form kept inside the calculation and never quoted on a report at all.",
+  "The group is correct in psi but incomplete, because a driving group is only meaningful once the efficiency of 1.000000 has been applied to it."],
+ "The inlet squared less the outlet squared is 338100.0000 psia squared. Quoting a squared group as a pressure is the second of the two mistakes a liquid habit produces here.")
+
+q(3, "The module exports a base temperature of 520.000000 degR and a base pressure of 14.650000 psia. What does a rate of 66104956.1404 scfd actually assert?",
+ "That this quantity of gas, counted as the volume it would occupy at 520.000000 degR and 14.650000 psia, passes the line each day, whatever conditions it is actually at while it does so.",
+ ["That the line passes that volume each day at the conditions it actually flows at, which on this trunk are 535.000000 degR and a pressure somewhere between 850.000000 psia and 620.000000 psia.",
+  "That the line passes that volume each day measured at the delivery point of 620.000000 psia, which is the condition a contract is written against and the reason the base is exported for a caller to read.",
+  "That the line would pass that volume if it were run at 520.000000 degR and 14.650000 psia, which is why the base is a condition of the pipe rather than of the counting."],
+ "Nothing in the pipe is at the base. A standard cubic foot is an accounting unit, and the base is inside the form so the answer is a quantity rather than a volume at an unstated condition.")
+
+q(1, "Two low pressures appear in this engine: the base pressure of 14.650000 psia and atmospheric, which the engine names rather than numbering. What separates them?",
+ "The base is a bookkeeping condition that sits inside every published form, and atmospheric is a physical floor that appears in the solver inverting them.",
+ ["The base is the value the four transmission forms were fitted at and atmospheric is the value the goldens were generated at, so the two belong to the published correlations and to this package's own check of them.",
+  "They are two statements of the same condition at different precisions, which is why the engine exports one of them and leaves the other to be read off the first.",
+  "The base applies to the gas half of the engine and atmospheric to the liquid half, so a single call never carries both."],
+ "One is where a standard cubic foot is counted and the other is where an outlet-pressure search stops. They hold different values and they do opposite jobs.")
+
+q(0, "Why can two gas rates counted at different bases not be compared, even in the case where the two numbers are equal?",
+ "Because each is a volume at its own stated condition, so an agreement between them is a coincidence of the arithmetic rather than a statement about how much gas either line passes.",
+ ["Because a difference of base changes the compressibility the form applies, and two rates computed at two compressibilities describe gas of two different gravities.",
+  "Because the base enters each form linearly, so two rates at two bases differ by a fixed ratio and the equal case is the one in which that ratio has been applied twice.",
+  "Because the base pressure sets the floor of the outlet-pressure bracket, so two rates counted at different bases were searched over different ranges."],
+ "Every rate in this tier is counted at 520.000000 degR and 14.650000 psia, which is exactly what lets the four forms be set beside each other honestly.")
+
+q(2, "Asked for the rate on the SOKU trunk with 900.000000 psia at the outlet against 850.000000 psia at the inlet, the engine answers with an error naming no flow. Why is that better than returning zero?",
+ "A rate of zero would be a claim that the line was considered and found to carry nothing, and it would be indistinguishable in a sweep from a line that is genuinely shut in.",
+ ["Zero would be dimensionally wrong, since the form returns a rate in scfd and a shut line has no rate at that base to report.",
+  "Zero would be caught by the next check downstream anyway, so the refusal exists to save that check the work rather than to make a different statement.",
+  "Zero would understate the line, because at 900.000000 psia against 850.000000 psia the gas flows backwards and the honest answer is a negative rate rather than an absent one."],
+ "The refusal says the question as asked has no answer in this method, because a form built on a driving group cannot be evaluated once the group has gone.")
+
+q(3, "The refusal on a dead line is worded to cover an outlet that meets or exceeds the inlet. What follows from the first of those two words?",
+ "An outlet standing exactly at the inlet is refused on the same terms as one standing above it.",
+ ["An outlet standing exactly at the inlet is the boundary case the message admits, so the engine returns the smallest rate it can represent there and refuses only above it, which is what the wording is drawing attention to.",
+  "An outlet within a narrow band of the inlet is refused as well, because a group that small cannot be resolved by the arithmetic and the engine declines the whole neighbourhood rather than a single point.",
+  "An outlet exactly at the inlet is accepted and an outlet above it refused, which is the distinction between a group of zero and a group that has gone negative."],
+ "The group is zero in the first case and negative in the second, and neither is a state the form can be evaluated at. There is no tolerance band and no nearly-equal case that quietly returns a very small rate.")
+
+q(1, "At an outlet of 845.000000 psia, five psi below the inlet, the trunk returns 10466013.4729 scfd. At 900.000000 psia it returns a refusal. What distinguishes the two?",
+ "At 845.000000 psia the driving group is small and at 900.000000 psia it is absent, and a form built on that group can be evaluated in the first case and not in the second.",
+ ["At 845.000000 psia the line is inside the range the bisection searches and at 900.000000 psia it is above the ceiling of that bracket, so the second case is a search failure rather than a physical one.",
+  "At 845.000000 psia the engine falls back to a linearised form valid for small pressure differences, and at 900.000000 psia no such fallback exists.",
+  "At 845.000000 psia the rate is small enough to be reported at the base of 14.650000 psia, and at 900.000000 psia it would have to be reported at a base the module does not export."],
+ "Five psi below the inlet is very nearly a dead line and it still has an answer. Small and absent are different states of the same trunk.")
+
+q(2, "The dead-line message arrives as an ordinary returned object carrying an error string rather than as a thrown exception. What is the cost of that choice?",
+ "A studio that forgets to check the property does not crash, so an unchecked refusal flows onward as an object where a number was expected.",
+ ["A returned error cannot name the input that failed, so the caller has to reconstruct which of the eight conditions was at fault from the message text alone.",
+  "A returned error is lost whenever the result is serialised, because an error string has no representation once the object is written out for a report.",
+  "A returned error forces every caller to wrap the call, which is the work a thrown exception would have done for them."],
+ "Nothing has to be wrapped to catch it, and that convenience cuts both ways. The check matters precisely because nothing compels it.")
+
+q(0, "The trunk is stated at an average flowing temperature of 535.000000 degR and an average compressibility of 0.885000. What does the word average commit the method to?",
+ "One temperature and one compressibility stand in for the whole 32.000000 miles, so the form has no way to represent a line that is hot where it leaves the station and cold where it arrives.",
+ ["That the engine averages the temperature along the line internally from the two end conditions, which is why only one figure is exposed to a caller.",
+  "That the two figures are averages over the published cases in this package rather than over the length of any one line.",
+  "That the temperature and the compressibility are averaged over the four transmission forms, each of which would otherwise use its own."],
+ "Choosing what to average over is part of setting a case up, and two engineers who average differently report different rates from the same pipe.")
+
+q(3, "Why is a gauge pressure handed to a gas form worse than a gauge pressure handed to a liquid one?",
+ "The error goes through a square, so it stops being a constant offset and no later step recovers it.",
+ ["The gas forms report at a base pressure of 14.650000 psia, so a gauge pressure is already expressed against the wrong reference before the form reads it and the two errors compound.",
+  "A liquid form subtracts the two pressures and the offset survives that subtraction, while a gas form divides them and an offset in a ratio grows without limit as the pressures approach one another.",
+  "The gas forms take the flowing temperature in degR, so a caller who has supplied a gauge pressure has usually supplied a temperature on the wrong scale too."],
+ "Every pressure in this half of the engine is absolute, which is why the trunk is quoted at 850.000000 psia and 620.000000 psia and the temperature at 535.000000 degR.")
+
+q(1, "Two trunks in different climates carry different gas. What does each of them report its rate against?",
+ "The same 520.000000 degR and 14.650000 psia, because the base does not change with the line.",
+ ["Its own flowing temperature and compressibility, which on SOKU are 535.000000 degR and 0.885000, since those are the conditions the gas is actually at when it passes the metering.",
+  "The base scaled by its own compressibility, which is how a contract written in scfd stays comparable between two lines carrying gas of different gravities.",
+  "Whichever of the four transmission forms it was computed with, each of which carries its own base as part of its published statement."],
+ "The flowing temperature and the compressibility belong to the line and change with it. The base does not, and that is what makes a contract written in scfd mean the same thing at both ends.")
+
+q(2, "A gathering scheme returns the no-flow refusal on one branch. What may not be concluded from it?",
+ "That the bore on that branch is too small, because the message says nothing about the pipe.",
+ ["That this branch passes nothing on the conditions as given, which is the whole of what the message asserts.",
+  "That the two pressures as handed in do not describe flow from the station towards the delivery point.",
+  "That no rate was computed for the branch at all, since a form built on a driving group is never evaluated once the group has gone."],
+ "The message says the pressures as given do not describe flow from the inlet to the outlet. A larger bore, a higher inlet and a lower target are separate questions.")
+
+q(0, "The same trunk reads 66104956.1404 scfd at an outlet of 620.000000 psia and 10466013.4729 scfd at an outlet of 845.000000 psia. Which quantity accounts for the whole difference?",
+ "The driving group, since the bore, the length, the gravity, the temperature, the compressibility and the efficiency are identical on both readings.",
+ ["The compressibility, which the engine re-averages at each outlet pressure and which falls as the two ends of the line approach one another.",
+  "The efficiency, which is the only input in a transmission form able to move an answer by that proportion and the reason every rate is quoted with it.",
+  "The base, since a rate counted at 14.650000 psia against one counted at the line's own outlet differ by the ratio of those two pressures."],
+ "The pipe did not change and neither did the gas. Held at 620.000000 psia the group is 338100.0000 psia squared, and brought up to 845.000000 psia it is very much smaller.")
+
+q(3, "Of the eight conditions the SOKU trunk is stated at, which ones does a transmission form square?",
+ "The inlet of 850.000000 psia and the outlet of 620.000000 psia, and none of the other six conditions, every one of which enters a transmission form exactly as it stands.",
+ ["The inlet of 850.000000 psia and the outlet of 620.000000 psia, and also the bore of 11.938000 in, since a gas form carries an area and an area is a squared length.",
+  "The inlet of 850.000000 psia alone, the outlet entering the group linearly, which is what makes the group asymmetric between the two ends of a line.",
+  "The two pressures and the average flowing temperature of 535.000000 degR, all three of which appear inside the driving group of 338100.0000 psia squared."],
+ "Eight conditions, and the first two never appear in a gas form on their own. They appear squared, as 338100.0000 psia squared.")
+
+emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m01.json')
+finish()
