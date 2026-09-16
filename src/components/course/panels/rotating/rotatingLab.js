@@ -1344,6 +1344,10 @@ export const stageCountAndLimit = () => {
       coolestReachedF: cap.coolestReachedF,
       maxDischargeF: cap.maxDischargeF,
       hottestInletF: cap.hottestInletF,
+      // The SIXTH numeric field of the refusal. The digest named five and the
+      // return carries six, so the inlet is printed beside the approach it was
+      // taken from rather than alone.
+      interstageCoolToF: cap.interstageCoolToF,
       overallRatio: cap.overallRatio,
       gapDerivedF: cap.coolestReachedF - cap.maxDischargeF,
     },
@@ -1965,23 +1969,28 @@ export const capstoneRuns = () => {
 export const capstoneFields = () => {
   const r = capstoneRuns();
   return [
+    // TOLERANCES ARE AT LEAST HALF A UNIT IN THE LAST PLACE THE DIGEST PRINTS
+    // THE QUANTITY AT. Seven of these were tighter than that, so a learner
+    // quoting the digest exactly failed: 221.7762 degF is 3.98e-5 from the
+    // graded value and was graded at 1e-5. fc3_capstone.mjs derives them and
+    // asserts the floor; this list mirrors the published fields.json.
     ['beginner', 'escravos_duty_flow_gpm', r.escDuty.qGpm, 1e-4],
     ['beginner', 'escravos_duty_head_ft', r.escDuty.headFt, 1e-5],
     ['beginner', 'escravos_hydraulic_hp', r.escPower.hydraulicHp, 1e-6],
     ['beginner', 'escravos_brake_hp', r.escPower.brakeHp, 1e-6],
     ['beginner', 'escravos_motor_input_kw', r.escPower.motorInputKw, 1e-6],
-    ['beginner', 'escravos_discharge_psi', r.escDischargePsi, 1e-7],
-    ['intermediate', 'bonga_pressure_head_ft', r.bonNpsh.pressureHeadFt, 1e-7],
-    ['intermediate', 'bonga_npsha_ft', r.bonNpsh.npshaFt, 1e-7],
-    ['intermediate', 'bonga_npsha_raised_ft', r.bonNpshRaised.npshaFt, 1e-7],
+    ['beginner', 'escravos_discharge_psi', r.escDischargePsi, 5e-7],
+    ['intermediate', 'bonga_pressure_head_ft', r.bonNpsh.pressureHeadFt, 5e-7],
+    ['intermediate', 'bonga_npsha_ft', r.bonNpsh.npshaFt, 5e-7],
+    ['intermediate', 'bonga_npsha_raised_ft', r.bonNpshRaised.npshaFt, 5e-7],
     ['intermediate', 'bonga_speed_flow_gpm', r.bonSpeed.qGpm, 1e-4],
     ['intermediate', 'bonga_speed_head_ft', r.bonSpeed.headFt, 1e-5],
     ['intermediate', 'bonga_parallel_flow_gpm', r.bonParallelDuty.qGpm, 1e-4],
-    ['advanced', 'bonny_exponent_ratio', r.bonnyE, 1e-12],
+    ['advanced', 'bonny_exponent_ratio', r.bonnyE, 5e-10],
     ['advanced', 'bonny_ratio_per_stage', r.bonnyTrain.ratioPerStage, 1e-9],
-    ['advanced', 'bonny_stage1_discharge_f', r.bonnyStage1.tDischargeF, 1e-5],
+    ['advanced', 'bonny_stage1_discharge_f', r.bonnyStage1.tDischargeF, 5e-5],
     ['advanced', 'bonny_stage1_poly_head', r.bonnyStage1.headPolyFtLbfLbm, 1e-2],
-    ['advanced', 'bonny_stage1_gas_hp', r.bonnyStage1.gasHp, 1e-5],
+    ['advanced', 'bonny_stage1_gas_hp', r.bonnyStage1.gasHp, 5e-5],
     ['advanced', 'bonny_fuel_mmscfd', r.bonnyFuel.fuelMMscfd, 1e-9],
   ];
 };

@@ -150,7 +150,7 @@ const buildDigest = () => {
   w('States the compression module has no answer for, engine messages verbatim:');
   s1.compressionSoftStates.forEach((r) => w(`- ${r.label}: ${soft(r.error)}`));
   w();
-  w('# HELD FOR LITERATURE, taught as a limit and never graded: the whole of the machine-screening threshold set, the viscosity correlation, the trim shortfall model, the operating-region bands, the NPSH margin rule, the 300 degF DEFAULT discharge limit and the speed-ratio band the affinity warning uses. Section 17 lists all eight held items with what each one costs.');
+  w('# HELD FOR LITERATURE, taught as a limit and never graded: the viscosity correlation, the trim shortfall model, the operating-region bands, the NPSH margin rule, the machine-screening threshold set, the 300 degF DEFAULT discharge limit, what the implied water density is away from real water, and every published golden case, which carries the affinity speed band with it. Section 17 lists those eight again with what each one costs.');
   w();
 
   // Section 2
@@ -514,11 +514,11 @@ const buildDigest = () => {
   w(`The tenth column is derived on each row as the stated limit of ${r4(s12.duty.maxDischargeF)} degF less the hottest stage, so a NEGATIVE entry there is a train running over the limit it was staged against. ${s12.sweepOverLimit} of the ${s12.sweepRows} rows do that, on a duty whose intercooler approach of ${r4(s12.duty.interstageCoolToF)} degF sits ABOVE its suction of ${r4(s12.duty.tSuctionF)} degF, which is the condition under which the count and the train could disagree at all. Section 13 walks that approach across the suction and keeps the column non-negative the whole way.`);
   w();
   w(`The search for the temperature-driven count runs from one stage to twelve and refuses past it. That refusal is hard to reach, because every cheaper explanation is caught at the door first: it needs a discharge limit above the suction temperature (${r4(s12.capDuty.maxDischargeF)} degF against ${r4(s12.capDuty.tSuctionF)} degF here), a readable efficiency and a workable ratio limit, and an overall ratio large enough that twelve equal stages are still too hot. ${soft(s12.cap.error)}`);
-  w('A REFUSAL CARRIES ITS EVIDENCE, because the diagnosis has to survive it. That return also holds:');
+  w('A REFUSAL CARRIES ITS EVIDENCE, because the diagnosis has to survive it. That return also holds six numeric fields, and a caller that prints the error string and discards the object has thrown all six away:');
   w(`- the stage counts tried: ${s12.cap.triedStages} (engine)`);
   w(`- the coolest discharge those twelve equal stages could reach: ${r4(s12.cap.coolestReachedF)} degF (engine)`);
   w(`- the limit it was measured against: ${r4(s12.cap.maxDischargeF)} degF (engine)`);
-  w(`- the inlet it was measured from: ${r4(s12.cap.hottestInletF)} degF (engine)`);
+  w(`- the inlet it was measured from: ${r4(s12.cap.hottestInletF)} degF, and the interstage cooling temperature that inlet was taken from: ${r4(s12.cap.interstageCoolToF)} degF (engine)`);
   w(`- the overall ratio it was working on: ${f9(s12.cap.overallRatio)} (engine)`);
   w(`The gap between the coolest reachable discharge and the stated limit is ${r4(s12.cap.gapDerivedF)} degF (derived from the two rows above), which is what tells a reader whether it is the approach or the limit that is impossible rather than sending them off to intercool harder.`);
   w('Section 15 puts four other faults that reach this same function beside the refusal that names each of them, so a refusal here means the twelve-stage cap and not one of those four.');
@@ -698,7 +698,7 @@ const buildDigest = () => {
   // Section 17
   w('# SECTION 17: What this course teaches as limits and never as answers (shared by Associate m06, Professional m06 and Expert m06)');
   w();
-  w('# The three tier readings, Associate m06, Professional m06 and Expert m06, assemble the sections above; they introduce no number of their own.');
+  w('# The tier readings, Associate m06, Professional m06 and Expert m06, assemble the sections above; they introduce no number of their own. The list below is the eight held items, and it is the only count on this page.');
   w();
   w('Eight things are HELD FOR LITERATURE. Each is used, each is printed, and none of them decides a graded answer anywhere in this course.');
   w();
@@ -1447,7 +1447,11 @@ describe('THE LEAK GATE: the guard itself', () => {
     const t = (key, tag) => targets.find((x) => x.key === key && x.tag === tag);
     expect(t('escravos_duty_flow_gpm', 'as graded').band).toBeCloseTo(0.001, 12);
     expect(t('escravos_duty_flow_gpm', 'x0.001').band).toBeCloseTo(0.000001, 15);
-    expect(t('bonny_exponent_ratio', 'x1000').band).toBeCloseTo(1e-8, 15);
+    // 10 x 5e-10 x 1000. The exponent ratio's tolerance was loosened from 1e-12
+    // to half a unit in the ninth decimal, which is the place the digest prints
+    // it at; the guard band moves with it, which is why this pin is stated in
+    // the tolerance rather than left as a bare constant.
+    expect(t('bonny_exponent_ratio', 'x1000').band).toBeCloseTo(10 * 5e-10 * 1000, 15);
   });
 
   it('every reader answers, and the surface is large enough to mean something', () => {

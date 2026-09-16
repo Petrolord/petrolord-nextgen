@@ -71,7 +71,7 @@ States the compression module has no answer for, engine messages verbatim:
 - a driver burning gas with no heating value: { error: "fuel needs a positive power, heat rate and heating value" }
 - a driver more efficient than the first law allows: { error: "a heat rate of 2000 Btu per hp hr is below the 2544.4336 Btu that one horsepower-hour is: that driver would be more than 100 percent thermally efficient" }
 
-# HELD FOR LITERATURE, taught as a limit and never graded: the whole of the machine-screening threshold set, the viscosity correlation, the trim shortfall model, the operating-region bands, the NPSH margin rule, the 300 degF DEFAULT discharge limit and the speed-ratio band the affinity warning uses. Section 17 lists all eight held items with what each one costs.
+# HELD FOR LITERATURE, taught as a limit and never graded: the viscosity correlation, the trim shortfall model, the operating-region bands, the NPSH margin rule, the machine-screening threshold set, the 300 degF DEFAULT discharge limit, what the implied water density is away from real water, and every published golden case, which carries the affinity speed band with it. Section 17 lists those eight again with what each one costs.
 
 # SECTION 2: Two curves, and why neither has an operating point (owned by Associate m02)
 
@@ -541,11 +541,11 @@ Power climbs smoothly along that table and the stage count climbs in steps, and 
 The tenth column is derived on each row as the stated limit of 300.0000 degF less the hottest stage, so a NEGATIVE entry there is a train running over the limit it was staged against. 0 of the 9 rows do that, on a duty whose intercooler approach of 110.0000 degF sits ABOVE its suction of 104.0000 degF, which is the condition under which the count and the train could disagree at all. Section 13 walks that approach across the suction and keeps the column non-negative the whole way.
 
 The search for the temperature-driven count runs from one stage to twelve and refuses past it. That refusal is hard to reach, because every cheaper explanation is caught at the door first: it needs a discharge limit above the suction temperature (110.0000 degF against 100.0000 degF here), a readable efficiency and a workable ratio limit, and an overall ratio large enough that twelve equal stages are still too hot. { error: "no practical stage count keeps the discharge temperature under the limit: 12 equal stages still reach 318.0 F against a stated limit of 110.0 F, from an inlet of 100.0 F" }
-A REFUSAL CARRIES ITS EVIDENCE, because the diagnosis has to survive it. That return also holds:
+A REFUSAL CARRIES ITS EVIDENCE, because the diagnosis has to survive it. That return also holds six numeric fields, and a caller that prints the error string and discards the object has thrown all six away:
 - the stage counts tried: 12 (engine)
 - the coolest discharge those twelve equal stages could reach: 317.9889 degF (engine)
 - the limit it was measured against: 110.0000 degF (engine)
-- the inlet it was measured from: 100.0000 degF (engine)
+- the inlet it was measured from: 100.0000 degF, and the interstage cooling temperature that inlet was taken from: 100.0000 degF (engine)
 - the overall ratio it was working on: 1000.000000000 (engine)
 The gap between the coolest reachable discharge and the stated limit is 207.9889 degF (derived from the two rows above), which is what tells a reader whether it is the approach or the limit that is impossible rather than sending them off to intercool harder.
 Section 15 puts four other faults that reach this same function beside the refusal that names each of them, so a refusal here means the twelve-stage cap and not one of those four.
@@ -787,7 +787,7 @@ A gate against a golden therefore has to carry a tolerance, and the tolerance ha
 
 # SECTION 17: What this course teaches as limits and never as answers (shared by Associate m06, Professional m06 and Expert m06)
 
-# The three tier readings, Associate m06, Professional m06 and Expert m06, assemble the sections above; they introduce no number of their own.
+# The tier readings, Associate m06, Professional m06 and Expert m06, assemble the sections above; they introduce no number of their own. The list below is the eight held items, and it is the only count on this page.
 
 Eight things are HELD FOR LITERATURE. Each is used, each is printed, and none of them decides a graded answer anywhere in this course.
 

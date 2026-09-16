@@ -145,28 +145,66 @@ const src = fs.readFileSync('/root/fc-wip-rotating/fc3_capstone.mjs', 'utf8');
     must(calls === 0, `a held function is called: ${held}`);
   });
 
+/**
+ * GRADING TOLERANCE IS DERIVED FROM THE DIGEST'S OWN PRINTED PRECISION, and
+ * it is never tighter than half a unit in the last place the digest prints
+ * that quantity at.
+ *
+ * THE DEFECT THIS ENDS: `bonny_stage1_discharge_f` was graded at 1e-5 while
+ * the digest prints gas degF to FOUR decimals, so a learner who quoted
+ * 221.7762 exactly as the digest instructs was 3.98e-5 out and FAILED. Five
+ * of the eighteen fields were in that state. A wrong answer for a learner who
+ * followed the course exactly is the worst thing this programme can ship, and
+ * it cannot be fixed by telling learners to type more digits than the course
+ * shows them.
+ *
+ * The coarsest precision the digest uses for a quantity is what a learner may
+ * legitimately quote, so that is what sets the floor. Gas horsepower is the
+ * one that is not obvious: the digest's own precision line puts horsepower in
+ * the six-decimal class, and Section 11 prints gas hp with the four-decimal
+ * gas formatter, so FOUR is the number a reader can actually take off the
+ * page and four is what is used here.
+ *
+ * `Math.max` with the stated tolerance, never `min`: this only ever LOOSENS,
+ * so no answer that graded correct before grades wrong now.
+ */
+const PRINTED_DECIMALS = {
+  gpm: 6, ft: 6, psi: 6, pumpHp: 6, kW: 6,   // e6, the pump classes
+  gasHp: 4, degF: 4, ftLbfPerLbm: 4,         // r4, the gas classes
+  exponent: 9, ratio: 9, MMscfd: 9,          // f9
+};
+// Parsed from a literal rather than multiplied, because 0.5 * 10 ** -4 is
+// 0.000049999999999999996 in binary and a tolerance is a number a human
+// reads off this file.
+const floorFor = (cls) => Number(`5e-${PRINTED_DECIMALS[cls] + 1}`);
+const tol = (cls, stated) => {
+  const floor = floorFor(cls);
+  must(Number.isFinite(floor), `no printed precision declared for the class ${cls}`);
+  return Math.max(stated, floor);
+};
+
 const F = [
   // Associate: one pump against one station, end to end.
-  ['beginner', 'escravos_duty_flow_gpm', escDuty.qGpm, 1e-4],
-  ['beginner', 'escravos_duty_head_ft', escDuty.headFt, 1e-5],
-  ['beginner', 'escravos_hydraulic_hp', escPower.hydraulicHp, 1e-6],
-  ['beginner', 'escravos_brake_hp', escPower.brakeHp, 1e-6],
-  ['beginner', 'escravos_motor_input_kw', escPower.motorInputKw, 1e-6],
-  ['beginner', 'escravos_discharge_psi', escDischargePsi, 1e-7],
+  ['beginner', 'escravos_duty_flow_gpm', escDuty.qGpm, tol('gpm', 1e-4)],
+  ['beginner', 'escravos_duty_head_ft', escDuty.headFt, tol('ft', 1e-5)],
+  ['beginner', 'escravos_hydraulic_hp', escPower.hydraulicHp, tol('pumpHp', 1e-6)],
+  ['beginner', 'escravos_brake_hp', escPower.brakeHp, tol('pumpHp', 1e-6)],
+  ['beginner', 'escravos_motor_input_kw', escPower.motorInputKw, tol('kW', 1e-6)],
+  ['beginner', 'escravos_discharge_psi', escDischargePsi, tol('psi', 1e-7)],
   // Professional: the suction side, an exact affinity law, and a second machine.
-  ['intermediate', 'bonga_pressure_head_ft', bonNpsh.pressureHeadFt, 1e-7],
-  ['intermediate', 'bonga_npsha_ft', bonNpsh.npshaFt, 1e-7],
-  ['intermediate', 'bonga_npsha_raised_ft', bonNpshRaised.npshaFt, 1e-7],
-  ['intermediate', 'bonga_speed_flow_gpm', bonSpeed.qGpm, 1e-4],
-  ['intermediate', 'bonga_speed_head_ft', bonSpeed.headFt, 1e-5],
-  ['intermediate', 'bonga_parallel_flow_gpm', bonParallelDuty.qGpm, 1e-4],
+  ['intermediate', 'bonga_pressure_head_ft', bonNpsh.pressureHeadFt, tol('ft', 1e-7)],
+  ['intermediate', 'bonga_npsha_ft', bonNpsh.npshaFt, tol('ft', 1e-7)],
+  ['intermediate', 'bonga_npsha_raised_ft', bonNpshRaised.npshaFt, tol('ft', 1e-7)],
+  ['intermediate', 'bonga_speed_flow_gpm', bonSpeed.qGpm, tol('gpm', 1e-4)],
+  ['intermediate', 'bonga_speed_head_ft', bonSpeed.headFt, tol('ft', 1e-5)],
+  ['intermediate', 'bonga_parallel_flow_gpm', bonParallelDuty.qGpm, tol('gpm', 1e-4)],
   // Expert: the thermodynamic path and what the driver burns for it.
-  ['advanced', 'bonny_exponent_ratio', bonnyE, 1e-12],
-  ['advanced', 'bonny_ratio_per_stage', bonnyTrain.ratioPerStage, 1e-9],
-  ['advanced', 'bonny_stage1_discharge_f', bonnyStage1.tDischargeF, 1e-5],
-  ['advanced', 'bonny_stage1_poly_head', bonnyStage1.headPolyFtLbfLbm, 1e-2],
-  ['advanced', 'bonny_stage1_gas_hp', bonnyStage1.gasHp, 1e-5],
-  ['advanced', 'bonny_fuel_mmscfd', bonnyFuel.fuelMMscfd, 1e-9],
+  ['advanced', 'bonny_exponent_ratio', bonnyE, tol('exponent', 1e-12)],
+  ['advanced', 'bonny_ratio_per_stage', bonnyTrain.ratioPerStage, tol('ratio', 1e-9)],
+  ['advanced', 'bonny_stage1_discharge_f', bonnyStage1.tDischargeF, tol('degF', 1e-5)],
+  ['advanced', 'bonny_stage1_poly_head', bonnyStage1.headPolyFtLbfLbm, tol('ftLbfPerLbm', 1e-2)],
+  ['advanced', 'bonny_stage1_gas_hp', bonnyStage1.gasHp, tol('gasHp', 1e-5)],
+  ['advanced', 'bonny_fuel_mmscfd', bonnyFuel.fuelMMscfd, tol('MMscfd', 1e-9)],
 ];
 
 // WRITTEN ONLY ON SUCCESS, which is a trap and is named here because this
@@ -175,6 +213,23 @@ const F = [
 // import looks byte identical for a run that never happened. Delete the
 // target before the run and check the exit status, and read the stamp below.
 const PAYLOAD = `${JSON.stringify(F, null, 1)}\n`;
+// ASSERTED, not assumed: every graded answer must survive being quoted at the
+// precision the digest prints it at.
+//
+// WHAT THIS CAN AND CANNOT CATCH, because the first control written for it was
+// CIRCULAR. Mutating PRINTED_DECIMALS moves the floor and this check together,
+// so that mutation can never fail it and proves nothing. What it DOES catch is
+// a field whose tolerance never went through `tol()`: restoring the bare 1e-5
+// on the discharge temperature makes it fire and write nothing, which is the
+// control that was actually run.
+const CLS = ['gpm', 'ft', 'pumpHp', 'pumpHp', 'kW', 'psi', 'ft', 'ft', 'ft', 'gpm', 'ft', 'gpm',
+  'exponent', 'ratio', 'degF', 'ftLbfPerLbm', 'gasHp', 'MMscfd'];
+F.forEach(([, key, value, t], i) => {
+  const dp = PRINTED_DECIMALS[CLS[i]];
+  const asQuoted = Number(value.toFixed(dp));
+  must(Math.abs(asQuoted - value) <= t,
+    `${key} grades at ${t} but the digest prints it to ${dp} decimals, so a learner quoting ${asQuoted} is ${Math.abs(asQuoted - value)} out and would FAIL a correct answer`);
+});
 fs.writeFileSync(OUT, PAYLOAD);
 
 console.log('FC3 capstone answers\n');

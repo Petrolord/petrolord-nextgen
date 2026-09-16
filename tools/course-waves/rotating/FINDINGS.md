@@ -1374,3 +1374,120 @@ nine-figure literal.** FC3's "859 checked / 0 unresolved" is therefore weaker
 evidence than it reads, and is worth re-running once the kit compares at the
 precision the literal itself carries. Recorded here so no later reader takes
 that line at face value.
+
+
+---
+
+## THE GRADING TOLERANCE DEFECT, AND THREE COUNTS. 2026-09-16.
+
+### A learner who followed the course exactly failed a graded field
+
+**This is the worst thing this programme can ship**, and five of the eighteen
+graded fields were in that state. The digest's own precision line says gas degF
+prints to four decimals. `bonny_stage1_discharge_f` was graded at **1e-5**. A
+learner quoting **221.7762**, exactly as the digest shows it, is **3.98e-5 out
+and fails.**
+
+| field | printed at | quoting it gives | error | old tol | verdict |
+| --- | --- | --- | --- | --- | --- |
+| `bonny_stage1_discharge_f` | 4 dp | 221.7762 | 3.976e-5 | 1e-5 | **FAILED** |
+| `bonny_stage1_gas_hp` | 4 dp | 1678.3191 | 1.793e-5 | 1e-5 | **FAILED** |
+| `escravos_discharge_psi` | 6 dp | 136.164028 | 4.309e-7 | 1e-7 | **FAILED** |
+| `bonga_npsha_raised_ft` | 6 dp | 130.887342 | 2.278e-7 | 1e-7 | **FAILED** |
+| `bonny_exponent_ratio` | 9 dp | 0.278795930 | 4.206e-10 | 1e-12 | **FAILED** |
+| `bonga_pressure_head_ft` | 6 dp | 45.907595 | 6.329e-8 | 1e-7 | within a factor of 2 |
+| `bonga_npsha_ft` | 6 dp | 53.107595 | 6.329e-8 | 1e-7 | within a factor of 2 |
+
+**Settled at the generator rather than field by field.** `fc3_capstone.mjs` now
+declares `PRINTED_DECIMALS` per quantity class and derives every tolerance as
+`Math.max(stated, half a unit in the last printed place)`. `Math.max` and never
+`min`, so this only ever LOOSENS and no answer that graded correct before
+grades wrong now. **Seven tolerances loosened; not one of the eighteen VALUES
+moved.**
+
+Gas horsepower is the one that is not obvious. The digest's precision line puts
+horsepower in the six-decimal class, and Section 11 prints gas hp with the
+four-decimal gas formatter. **Four is the number a reader can take off the
+page, so four sets the floor.** That mismatch between the declared class and
+the printed class is itself worth a look whenever Section 11 is next rebuilt.
+
+**The assertion, and the control that was circular.** The generator now asserts
+every graded value survives being quoted at its printed precision. The first
+control written for it mutated `PRINTED_DECIMALS`, which moves the floor and
+the check together, so it could not fail and proved nothing: **a gate that
+cannot fail, built while fixing a gate defect.** The honest control restores a
+bare `1e-5` on the discharge temperature, and the generator exits 1, writes
+nothing, and names the field, the tolerance, the precision, the quoted value
+and the error. Both the circularity and the real control are recorded in the
+generator itself.
+
+Knock-ons carried: the lab module's mirrored tolerance list, and its leak-guard
+band pin, which was a bare `1e-8` derived from the old 1e-12 and is now stated
+as `10 * 5e-10 * 1000` so it moves with the tolerance rather than silently
+pinning a stale one. Leak gate re-run with the wider bands: **0 of 54.**
+
+### Three count defects, and a sweep of all thirty-four
+
+- **Digest line 74 listed SEVEN held items and said "all eight"**, and its set
+  differed from Section 17's: it omitted the implied water density and the
+  published goldens and counted the speed band separately. Reconciled onto
+  Section 17's eight. Section 1 is Associate m01's range, so the line keeps its
+  `300` and `eight` tokens and introduces no new numeral.
+- **The twelve-stage cap refusal carries SIX numeric fields and the digest
+  named five.** `interstageCoolToF` was the missing one, and it is the field
+  that says whether the approach or the limit is the impossible half. Printed
+  beside the inlet it was taken from, and the lead line now states six.
+- **Section 17's preamble claimed "three tier readings" over the eight-item
+  held list**, which the kit's `count-disagrees` rule reads as a heading whose
+  count disagrees with its list. The three readings are named in the same
+  sentence, so the numeral carried nothing the enumeration does not; the line
+  now names them and says the list below is the only count on the page. **It
+  was checked and it predates the shared-section repair**: it fails identically
+  on the digest before that repair and on the foundation digest `dd9148bf`.
+
+**Swept rather than patched:** all **34** count claims across the whole digest
+were read against the list or table beneath each. The three above were the only
+defects; the other 31 are computed or check out by inspection.
+
+**809 to 809 lines, 0 added, 4 changed, 0 removed; all 17 section start lines
+unchanged; all 257 table rows byte identical.**
+
+### wave.json, third sweep: a list that numbered two different items (7)
+
+`heldItemCheck` ran **1-8, then 7 again, then 9**, because an earlier pass
+appended a back-reference to item (7) that reads as a new list item. The
+back-reference is folded into item (7); the capstone's new assertions, which
+are not held items, are out of the numbered list; and the list now states that
+there are EIGHT, the same eight digest Section 17 carries, so it checks itself.
+
+The whole file was swept structurally this time, not by keyword: every string
+field scanned for numbered lists, duplicates, gaps and ordering. **One defect,
+now clean.** `plan.reCut`'s three `(7)`s are back-reference prose rather than a
+list, which the checker distinguishes by whether the numbering starts at 1.
+
+### digest_prose.rules.mjs, which FC3 never had
+
+Its absence is what disabled the gate's deferral, so five true lines read as
+copy-rule failures and an auditor was one step from rewording the engine's own
+words in the digest. Written against FC4's as the reference: **47 engine pins**,
+5 heading claims specific to this digest's own stale titles, and 4 cleared
+phrases.
+
+**The pins are the stronger half, not the deferral.** Each fragment is asserted
+still present in its module, so an upstream engine edit turns the gate RED
+rather than leaving a stale quote looking current. Negative control: a copy of
+the engines with both quoted messages reworded makes the gate name both broken
+pins and fail.
+
+Result: `digestprose --rules` reports **0 failing, 0 warned, 47 engine pins, 5
+deferred**.
+
+### Recorded, not fixed
+
+- **The bare-number contract's "never an Infinity" is falsifiable.** Four of the
+  five bare-number functions return Infinity at denormal inputs, because the
+  guard is `pPsia > 0` and 1e-308 passes it. Nothing taught or graded depends
+  on it. **Engines-repo note.**
+- **`numsweep` accepts anything within 5e-7 relative**, so FC3's "859 checked /
+  0 unresolved" says nothing about the last digit of a nine-figure literal.
+  Worth re-running when the kit compares at the literal's own precision.

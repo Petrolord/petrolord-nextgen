@@ -33,25 +33,25 @@
   "beginner",
   "escravos_discharge_psi",
   136.16402756910645,
-  1e-7
+  5e-7
  ],
  [
   "intermediate",
   "bonga_pressure_head_ft",
   45.907594936708854,
-  1e-7
+  5e-7
  ],
  [
   "intermediate",
   "bonga_npsha_ft",
   53.10759493670886,
-  1e-7
+  5e-7
  ],
  [
   "intermediate",
   "bonga_npsha_raised_ft",
   130.88734177215187,
-  1e-7
+  5e-7
  ],
  [
   "intermediate",
@@ -75,7 +75,7 @@
   "advanced",
   "bonny_exponent_ratio",
   0.27879592957942817,
-  1e-12
+  5e-10
  ],
  [
   "advanced",
@@ -87,7 +87,7 @@
   "advanced",
   "bonny_stage1_discharge_f",
   221.77616024486855,
-  0.00001
+  0.00005
  ],
  [
   "advanced",
@@ -99,7 +99,7 @@
   "advanced",
   "bonny_stage1_gas_hp",
   1678.3191179361222,
-  0.00001
+  0.00005
  ],
  [
   "advanced",

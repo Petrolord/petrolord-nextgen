@@ -200,7 +200,7 @@ w('States the compression module has no answer for, engine messages verbatim:');
   ['a driver more efficient than the first law allows', () => C.driverFuel({ brakeHp: 1000, heatRateBtuHpHr: 2000 })],
 ].forEach(([label, fn]) => w(`- ${label}: ${soft(fn())}`));
 w();
-w('# HELD FOR LITERATURE, taught as a limit and never graded: the whole of the machine-screening threshold set, the viscosity correlation, the trim shortfall model, the operating-region bands, the NPSH margin rule, the 300 degF DEFAULT discharge limit and the speed-ratio band the affinity warning uses. Section 17 lists all eight held items with what each one costs.');
+w('# HELD FOR LITERATURE, taught as a limit and never graded: the viscosity correlation, the trim shortfall model, the operating-region bands, the NPSH margin rule, the machine-screening threshold set, the 300 degF DEFAULT discharge limit, what the implied water density is away from real water, and every published golden case, which carries the affinity speed band with it. Section 17 lists those eight again with what each one costs.');
 w();
 
 // ---------------------------------------------------------------- SECTION 2
@@ -754,11 +754,11 @@ w(`The tenth column is derived on each row as the stated limit of ${r4(SOKU.maxD
 w();
 const CAP_REFUSAL = C.stageCount(STAGE_CAP_DUTY);
 w(`The search for the temperature-driven count runs from one stage to twelve and refuses past it. That refusal is hard to reach, because every cheaper explanation is caught at the door first: it needs a discharge limit above the suction temperature (${r4(STAGE_CAP_DUTY.maxDischargeF)} degF against ${r4(STAGE_CAP_DUTY.tSuctionF)} degF here), a readable efficiency and a workable ratio limit, and an overall ratio large enough that twelve equal stages are still too hot. ${soft(CAP_REFUSAL)}`);
-w('A REFUSAL CARRIES ITS EVIDENCE, because the diagnosis has to survive it. That return also holds:');
+w('A REFUSAL CARRIES ITS EVIDENCE, because the diagnosis has to survive it. That return also holds six numeric fields, and a caller that prints the error string and discards the object has thrown all six away:');
 w(`- the stage counts tried: ${CAP_REFUSAL.triedStages} (engine)`);
 w(`- the coolest discharge those twelve equal stages could reach: ${r4(CAP_REFUSAL.coolestReachedF)} degF (engine)`);
 w(`- the limit it was measured against: ${r4(CAP_REFUSAL.maxDischargeF)} degF (engine)`);
-w(`- the inlet it was measured from: ${r4(CAP_REFUSAL.hottestInletF)} degF (engine)`);
+w(`- the inlet it was measured from: ${r4(CAP_REFUSAL.hottestInletF)} degF, and the interstage cooling temperature that inlet was taken from: ${r4(CAP_REFUSAL.interstageCoolToF)} degF (engine)`);
 w(`- the overall ratio it was working on: ${f9(CAP_REFUSAL.overallRatio)} (engine)`);
 w(`The gap between the coolest reachable discharge and the stated limit is ${r4(CAP_REFUSAL.coolestReachedF - CAP_REFUSAL.maxDischargeF)} degF (derived from the two rows above), which is what tells a reader whether it is the approach or the limit that is impossible rather than sending them off to intercool harder.`);
 w('Section 15 puts four other faults that reach this same function beside the refusal that names each of them, so a refusal here means the twelve-stage cap and not one of those four.');
@@ -1062,7 +1062,7 @@ w();
 // --------------------------------------------------------------- SECTION 17
 w('# SECTION 17: What this course teaches as limits and never as answers (shared by Associate m06, Professional m06 and Expert m06)');
 w();
-w('# The three tier readings, Associate m06, Professional m06 and Expert m06, assemble the sections above; they introduce no number of their own.');
+w('# The tier readings, Associate m06, Professional m06 and Expert m06, assemble the sections above; they introduce no number of their own. The list below is the eight held items, and it is the only count on this page.');
 w();
 w('Eight things are HELD FOR LITERATURE. Each is used, each is printed, and none of them decides a graded answer anywhere in this course.');
 w();
