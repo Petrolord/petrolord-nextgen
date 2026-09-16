@@ -29,7 +29,7 @@ On every row the two distances differ by half the pool diameter: 10.0000 m on th
 
 ## What it means on this plot
 
-The crude tank stands 43.1555 m from Transfer pump A and 44.1452 m from Transfer pump B, against a radius of 59.5294 m from the tank centre. Both fail, by 16.3739 m and 15.3842 m. The heater treater at 50.1598 m fails by 9.3696 m, and against the retired edge figure of 50.5294 m it would have read only 0.3696 m short, a breach a tenth of its true size.
+The crude tank stands 43.1555 m from Transfer pump A and 44.1452 m from Transfer pump B, against a radius of 59.5294 m from the tank centre. Both fail, by 16.3739 m and 15.3842 m. The heater treater at 50.1598 m fails by 9.3696 m, and against the retired edge figure of 50.5294 m it would have read only 0.3696 m short.
 
 Those three shortfalls are reported as fractions of the requirement as well: 0.275056, 0.258430 and 0.157395. The fraction is the useful figure when comparing failures on items of different sizes, because a short distance can be badly short without being short by many metres.
 

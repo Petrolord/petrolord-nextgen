@@ -347,7 +347,7 @@ const buildDigest = () => {
   w('| pair | actual m | required from the centre m | shortfall m | required as the retired edge figure m | residual shortfall under the retired figure m |');
   w('| --- | --- | --- | --- | --- | --- |');
   re.rows.forEach((r) => w(`| Crude tank to ${r.bName} | ${m4(r.actualM)} | ${m4(r.requiredM)} | ${m4(r.shortfallM)} | ${m4(r.retiredRequiredM)} | ${r.retiredShortfallM === null ? 'not flagged at all' : m4(r.retiredShortfallM)} |`));
-  w(`Every row's two shortfalls differ by ${m4(re.halfBundDerivedM)} m, the half bund (derived from the two requirement columns). The heater treater is the row that shows what the defect cost: ${m4(re.heaterTreaterShortfallM)} m short of the real requirement, and only ${m4(re.heaterTreaterRetiredShortfallM)} m short of the retired one, so a reviewer reading the retired figure saw a breach a tenth of its true size.`);
+  w(`Every row's two shortfalls differ by ${m4(re.halfBundDerivedM)} m, the half bund (derived from the two requirement columns). The heater treater is the row that shows what the defect cost: ${m4(re.heaterTreaterShortfallM)} m short of the real requirement, and only ${m4(re.heaterTreaterRetiredShortfallM)} m short of the retired one.`);
   w(`Judged the retired way the plot still fails, ${re.retiredViolationCount} breaches against ${s12.violationCount}, so the defect never showed as a pass: it showed as a smaller number, which is the harder kind to notice.`);
   w();
   w('What every item has around it, which is the other half of a layout review:');
@@ -446,7 +446,7 @@ const buildDigest = () => {
       w(`    worstAbsolute ${c.worstAbsolute.kind} ${c.worstAbsolute.aId} to ${c.worstAbsolute.bId}, ${m4(c.worstAbsolute.shortfallM)} m of ${m4(c.worstAbsolute.requiredM)} m; worstRelative ${c.worstRelative.kind} ${c.worstRelative.aId} to ${c.worstRelative.bId}, ${e6(c.worstRelative.shortfallFraction)}.`);
     }
   });
-  w('Two rankings are returned and neither is called the worst on its own. A pair 2 m short of 3 m is the worst RELATIVE breach; a control room 40 m short of 90 m is the worst ABSOLUTE one. The retired code returned one ranking, built on the relative shortfall, and called it worst.');
+  w('Two rankings are returned and neither is called the worst on its own. A pair 2.0011 m short of 3.0000 m is the worst RELATIVE breach; a control room 40.0561 m short of 90.0000 m is the worst ABSOLUTE one. The retired code returned one ranking, built on the relative shortfall, and called it worst.');
   w();
 
   // Section 17
