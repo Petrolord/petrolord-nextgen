@@ -306,7 +306,13 @@ A("""  -- ---------------------------------------------------------------- shape
     raise exception 'FC2 go-live refused: % graded field(s) reach into a quantity held for the literature', v_graded;
   end if;""")
 
-pub = ',\n'.join(f'            ({p!r})'.ljust(28) + f'-- {label}' for p, label in PUBLISHED)
+# The comma belongs BEFORE the comment, or the separator ends up inside it
+# and the VALUES list stops after one row. The dry run caught exactly that.
+pub = '\n'.join(f'            ({p!r}),'.ljust(28) + f'-- {label}' for p, label in PUBLISHED)
+pub = pub.rstrip()
+pub = re.sub(r',(\s*--[^\n]*)$', r'\1', pub)  # the last row carries no comma
+last = PUBLISHED[-1]
+assert pub.splitlines()[-1].lstrip().startswith(f'({last[0]!r})'), pub.splitlines()[-1]
 A(f"""
   -- --------------------------------------- the published-golden assertion --
   -- Headline values the goldens and the teaching digest publish. A graded

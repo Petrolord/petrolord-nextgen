@@ -230,52 +230,52 @@ begin
   select count(*) into v_graded
     from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f,
          (values
-            (12000)         -- OGBIA rate,
-            (54.5)          -- OGBIA density,
-            (2.5)           -- OGBIA viscosity,
-            (7.981)         -- OGBIA bore,
-            (26400)         -- OGBIA length,
-            (2.244621)      -- OGBIA velocity,
-            (48431.2523)    -- OGBIA Reynolds,
-            (0.0002255356)  -- OGBIA relative roughness,
-            (0.0218149625)  -- OGBIA friction factor,
-            (25.660631)     -- OGBIA friction loss,
-            (4.5)           -- OGBIA resistance sum,
-            (0.133351)      -- OGBIA fitting loss,
-            (13.545709)     -- OGBIA erosional velocity,
-            (0.165707)      -- OGBIA share of the erosional limit,
-            (11.938)        -- SOKU bore,
-            (32)            -- SOKU length,
-            (850)           -- SOKU inlet,
-            (620)           -- SOKU outlet,
-            (338100)        -- SOKU driving group,
-            (66104956.1404) -- SOKU Weymouth,
-            (86864172.0167) -- SOKU Panhandle A,
-            (88369202.2673) -- SOKU Panhandle B,
-            (73861363.0502) -- SOKU General Flow,
-            (0.011213201)   -- SOKU General Flow friction factor,
-            (1500)          -- the SOKU elevation step,
-            (61666790.6494) -- SOKU up 1500 ft,
-            (70296168.593)  -- SOKU down 1500 ft,
-            (60000000)      -- the SOKU contracted rate,
-            (666.307057)    -- the SOKU outlet at that rate,
-            (1.336801)      -- the spread across the four forms,
-            (121523381.8036)-- SOKU at one step of bore,
-            (1.83834)       -- the bore spread,
-            (1.375178)      -- the bore spread over the form spread,
-            (12.75)         -- SOKU outside diameter,
-            (52000)         -- SOKU yield,
-            (0.419231)      -- SOKU wall at Class 3,
-            (0.329327)      -- SOKU wall at Class 1,
-            (0.375)         -- the SOKU wall the mill rolled,
-            (1019.607843)   -- the SOKU rating,
-            (12.0)          -- the SOKU bore,
-            (4.019)         -- the gap between the two bores,
-            (1633.5349)     -- OGBIA line volume,
-            (2.444444)      -- the OGBIA pig run,
-            (0.06)          -- the OGBIA measured holdup,
-            (98.0121)       -- the OGBIA swept volume,
-            (3.7997)        -- the OGBIA interval
+            (12000),        -- OGBIA rate
+            (54.5),         -- OGBIA density
+            (2.5),          -- OGBIA viscosity
+            (7.981),        -- OGBIA bore
+            (26400),        -- OGBIA length
+            (2.244621),     -- OGBIA velocity
+            (48431.2523),   -- OGBIA Reynolds
+            (0.0002255356), -- OGBIA relative roughness
+            (0.0218149625), -- OGBIA friction factor
+            (25.660631),    -- OGBIA friction loss
+            (4.5),          -- OGBIA resistance sum
+            (0.133351),     -- OGBIA fitting loss
+            (13.545709),    -- OGBIA erosional velocity
+            (0.165707),     -- OGBIA share of the erosional limit
+            (11.938),       -- SOKU bore
+            (32),           -- SOKU length
+            (850),          -- SOKU inlet
+            (620),          -- SOKU outlet
+            (338100),       -- SOKU driving group
+            (66104956.1404),-- SOKU Weymouth
+            (86864172.0167),-- SOKU Panhandle A
+            (88369202.2673),-- SOKU Panhandle B
+            (73861363.0502),-- SOKU General Flow
+            (0.011213201),  -- SOKU General Flow friction factor
+            (1500),         -- the SOKU elevation step
+            (61666790.6494),-- SOKU up 1500 ft
+            (70296168.593), -- SOKU down 1500 ft
+            (60000000),     -- the SOKU contracted rate
+            (666.307057),   -- the SOKU outlet at that rate
+            (1.336801),     -- the spread across the four forms
+            (121523381.8036),-- SOKU at one step of bore
+            (1.83834),      -- the bore spread
+            (1.375178),     -- the bore spread over the form spread
+            (12.75),        -- SOKU outside diameter
+            (52000),        -- SOKU yield
+            (0.419231),     -- SOKU wall at Class 3
+            (0.329327),     -- SOKU wall at Class 1
+            (0.375),        -- the SOKU wall the mill rolled
+            (1019.607843),  -- the SOKU rating
+            (12.0),         -- the SOKU bore
+            (4.019),        -- the gap between the two bores
+            (1633.5349),    -- OGBIA line volume
+            (2.444444),     -- the OGBIA pig run
+            (0.06),         -- the OGBIA measured holdup
+            (98.0121),      -- the OGBIA swept volume
+            (3.7997)       -- the OGBIA interval
          ) as g(v)
    where c.app_slug = 'linesizing'
      and abs(abs((f->>'expected')::numeric) - g.v) <= (f->>'tol')::numeric;
