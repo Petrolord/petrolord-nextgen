@@ -69,7 +69,7 @@ q(1, "A chord of 8.000000 ft across a drum and a distance of 43.1555 m across a 
   "Neither leaves anything out, since both are measured between fixed points."],
  "Levels of 0.400000 and 0.600000 share a chord of 7.838367 ft. A tank inside an 18.000000 m bund carries 9.0000 m of the centre-to-centre difference on its own.")
 
-q(2, "On the judged station the heater treater sits 50.1598 m from the crude tank and is reported 9.3696 m short, the smallest shortfall in metres on the plot. What does that particular breach illustrate?",
+q(2, "On the judged station the heater treater sits 50.1598 m from the crude tank and is reported 9.3696 m short, the smallest of the four radiation breaches on the plot. What does that particular breach illustrate?",
  "Nearly all of it is the half bund: measured against the edge figure of 50.5294 m that distance would read as barely short, and against the radius of 59.5294 m it is 9.3696 m short.",
  ["The two rankings disagreeing, since 9.3696 m is the smallest shortfall in metres anywhere on this plot while 0.157395 of the requirement is the largest shortfall on it as a fraction of what was asked for.",
   "A pair that belongs against the spacing table instead, a heater treater against a tank carrying a figure of 30.000000 m.",

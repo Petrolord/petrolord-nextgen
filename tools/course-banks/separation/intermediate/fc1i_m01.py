@@ -101,7 +101,7 @@ q(2, "A drum sized at a level of 0.500000 for 23.270539 ft of length is then run
 q(1, "Every row of the cross-section table reports a total area of 50.265482 ft2 while the liquid area runs from 7.156723 ft2 up to 40.438525 ft2. What is that column for?",
  "It fixes the shell: the level splits one circle into two shares and never changes how much circle there is.",
  ["It records the area the engine held before the vapour allowance above the liquid was taken off the top of the segment on each row.",
-  "It is the area the gas would flow through in an empty drum.",
+  "It is the area the gas flows through on every row, the liquid lying in the bottom of the circle without taking any of the cross-section away from the gas.",
   "It is the area the two length requirements are divided into, which is what allows a liquid length and a gas length to be added on one row."],
  "A liquid area of 7.156723 ft2 at a level of 0.200000 and 40.438525 ft2 at 0.750000 are two shares of the same 50.265482 ft2 of shell.")
 

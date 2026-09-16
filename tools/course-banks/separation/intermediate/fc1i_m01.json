@@ -147,7 +147,7 @@
   "options": [
    "It records the area the engine held before the vapour allowance above the liquid was taken off the top of the segment on each row.",
    "It fixes the shell: the level splits one circle into two shares and never changes how much circle there is.",
-   "It is the area the gas would flow through in an empty drum.",
+   "It is the area the gas flows through on every row, the liquid lying in the bottom of the circle without taking any of the cross-section away from the gas.",
    "It is the area the two length requirements are divided into, which is what allows a liquid length and a gas length to be added on one row."
   ],
   "answer": 1,
