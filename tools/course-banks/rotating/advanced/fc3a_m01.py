@@ -78,7 +78,7 @@ q(3, "With no discharge limit stated, the warning turns on between a ratio of 2.
 
 q(0, "Walk the polytropic efficiency across the SOKU stage and the head runs 65574.3395 ft lbf per lbm at 0.650000 and 62157.4133 at 0.860000, while the gas power runs 2729.8297 hp and 1955.7326. Why does a worse machine show a larger head?",
  "A lower efficiency steepens the path, so the stage has more head to deliver and it delivers that head less efficiently.",
- ["A lower efficiency raises the discharge temperature, which moves the averaged z up.",
+ ["A lower efficiency raises the discharge temperature, and the averaged z rises with it by enough to carry the difference.",
   "The head is what the driver supplies, so the mechanical losses are inside it.",
   "A lower efficiency cuts the mass flow, so the head per pound rises."],
  "Read the table as two effects at once. The power carries both of them and the head carries only the first, which is why the power falls faster across that walk than the head does.")

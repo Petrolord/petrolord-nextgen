@@ -7,10 +7,10 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 q(2, "Hold the rate, the gas and the temperature and move only the suction pressure. The inlet volume runs 9555.2490 acfm at 30.000000 psia and 204.9510 acfm at 1200.000000 psia. What is the same on every row?",
  "The molar flow, which is what a rate in MMscfd actually is.",
- ["The mass flow in lb per hr, which the volume is derived from by dividing by a density.",
+ ["The density of the gas at the flange, since the rate, the gas and the temperature are all held.",
   "The compressibility, since z is evaluated once at the standard base rather than at each suction.",
   "The brake horsepower, because the screen is asked at a fixed power and only the casing size moves."],
- "A rate in MMscfd is a molar quantity dressed as a volume, measured at a standard pressure and temperature no part of the plant is at. Raise the pressure and the same moles occupy less space.")
+ "A rate in MMscfd is a molar quantity dressed as a volume, measured at a standard pressure and temperature no part of the plant is at. Raise the pressure and the same moles occupy less space, which is the density rising and the volume falling.")
 
 q(0, "What three quantities does the actual inlet volume at a suction state depend on?",
  "The absolute pressure, the absolute temperature and the compressibility at that state.",
@@ -61,12 +61,12 @@ q(1, "The screen asks for the compressibility at the suction before it asks for 
   "A finiteness test cannot see the ratio, and the branch is decided on the ratio before the volume."],
  "A screen that only asked whether the answer was finite would take that negative volume, find it below about 500 acfm and recommend a reciprocating machine on it.")
 
-q(1, "Three suction states are refused at the screen. Which refusal names a reduced pressure?",
+q(1, "Three suction states are refused at the screen. Which refusal's MESSAGE names a reduced pressure?",
  "The one at 24000.000000 psia and 100.0000 degF, where Ppr 35.814 sits above the DAK validity limit of 30.",
  ["The one at 1000.000000 psia and -150.0000 degF, where Tpr 0.848 sits below the validity range.",
   "The one at 200 psia and -600 F, where the z-factor needs a temperature above absolute zero.",
   "All three, since the screen reports both reduced coordinates on every refusal it makes."],
- "The colder probe is refused on Tpr 0.848 against 1.0, and the state below absolute zero is refused before any reduced coordinate can be formed at all.")
+ "The colder probe's message names Tpr 0.848 against 1.0, and the state below absolute zero is refused before any reduced coordinate can be formed at all. Both of the in-window refusals carry their reduced pair on the returned object; only one of them says a reduced pressure out loud.")
 
 q(3, "The SOKU driver runs at a heat rate of 8100.000000 Btu per hp hr on a fuel gas of 985.000000 Btu per scf. What does it burn, and at what thermal efficiency?",
  "36296606.9250 Btu per hr, which is 0.884384331 MMscfd, at 31.412760 percent.",

@@ -18,7 +18,7 @@ q(3, "The property check is the only check most callers ever make. What follows 
  ["A guard can be omitted where the value is always finite, since the check would never fire.",
   "Errors have to be raised at construction rather than at the call, because a call has no return to carry them.",
   "The error string has to be generic, because a caller comparing strings cannot rely on a specific wording."],
- "A caller that sees no error believes it has a number. That is why both modules were worked through input by input, and why the faults in this module came back as a number before they came back as a refusal.")
+ "A caller that sees no error believes it has a number. That is why both modules were worked through input by input: every fault in this module reached a caller with no error key on it before the guard beside it was written.")
 
 q(0, "A motor efficiency above one, a negative motor efficiency and a motor efficiency of zero all come back with the same sentence. Is that a defect?",
  "No. Those are three typing mistakes against one rule, and the message states the rule.",

@@ -91,7 +91,7 @@ q(2, "The refusal at the twelve-stage cap ends with the clause \"from an inlet o
 
 q(0, "Four other faults reach the same function as the twelve-stage cap, and each of them has its own refusal. What does that buy a reader who meets the cap?",
  "Certainty that this refusal is the cap and not one of the four, so the diagnosis starts in the right place.",
- ["A guarantee that the four cheaper faults were ruled out before the search ran.",
+ ["A guarantee that all four are re-tested at each of the twelve trials, so a late one cannot slip through.",
   "The four messages, returned alongside the cap's own, so every possibility is listed.",
   "A count of how many guards the call passed before it reached the cap."],
  "That is the difference between being told something is wrong and being told what is wrong. The count tried is on the return for the same reason, saying the search ran to its bound.")
