@@ -482,19 +482,21 @@ export const templateTotals = (projectKey) => {
 // ---------------------------------------------------------------------------
 // SECTION 11. Every published cash flow case, one line each.
 //
-// THREE of the 28 published NOTES make a claim their own numbers refuse. The
-// note is the golden's prose and is reprinted verbatim; the caution beside it
-// is this course's, and the values are the engine's. Quote a golden's NUMBERS,
-// never a golden's prose.
+// Three published NOTES USED TO make a claim their own numbers refused, and
+// the 2026-09-15 recut corrected all three in the golden itself. The note is
+// the golden's prose and is reprinted verbatim; the annotation beside it is
+// this course's record of what the note used to say, and the values are the
+// engine's. Quote a golden's NUMBERS, never a golden's prose. These strings
+// are the ones the teaching digest prints, byte for byte.
 // ---------------------------------------------------------------------------
 
 export const STALE_NOTES = {
   capped_5pct_pool_never_clears:
-    'READ THE PAYBACK AND THE POOL AS TWO DIFFERENT QUESTIONS. The pool never clears, 2543.7575 is still unrecovered in year 25, and the contractor still pays back in year 3, because the flat regime hands it 100 percent of the profit oil the cap leaves. Its NPV is zero at 54.6792 percent and again at -14.2614 percent, so under EC2-5 the IRR is null with status multiple-roots.',
+    'HISTORY, AND THE NOTE IS CORRECT NOW. Until the 2026-09-15 recut this case was called capped_5pct_never_recovers and its note claimed "no payback, IRR 0", while the golden recorded paybackYear 3 beside it. Only the pool half was ever right. The note now states the payback and the two roots, and the engine returns null with status multiple-roots.',
   rfactor_tranche_crossing:
-    'CAUTION, THIS NOTE MISATTRIBUTES ITS OWN STEPS. The R factor crosses 1.0 between year 1 (0.781480) and year 2 (1.383252), not in year 3, and that crossing steps NOTHING because 60 percent is already the first tier\'s split. The step to 40 percent in year 3 is the 1.6 threshold (1.383252 to 1.846809). Only the 2.5 crossing in year 6 is as the note describes. The table in Section 14 is the record.',
+    'HISTORY, AND THE NOTE IS CORRECT NOW. The retired note said the R factor walks through 1.0 in year 3 and steps the split there. It crosses 1.0 between year 1 (0.781480) and year 2 (1.383252), and that crossing steps NOTHING because 60 percent is already the lowest tier\'s split; the step to 40 percent in year 3 is the 1.6 threshold. The note now says exactly that, and the table in Section 14 is the record.',
   rfactor_falls_back:
-    'CAUTION, THIS NOTE UNDERSTATES ITS OWN PEAK. The R factor does not peak "just above 2.5"; it peaks at 2.972625 in year 11. It crosses 2.5 upward in year 5 at 2.501684, which is probably the number the note meant. The fall back through 2.5 in year 23 and the step from 30 back up to 40 are as described.',
+    'HISTORY, AND THE NOTE IS CORRECT NOW. The retired note said the R factor peaks "just above 2.5". It peaks at 2.972625 in year 11, crossing 2.5 upward in year 5 at 2.501684. The fall back through 2.5 in year 23 and the step from 30 back up to 40 were always as described.',
 };
 
 export const publishedCaseLines = () => golden.cashflow.map((c) => {
