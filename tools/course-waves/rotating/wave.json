@@ -1,0 +1,111 @@
+{
+ "slug": "rotating",
+ "prefix": "fc3",
+ "name": "Rotating Equipment",
+ "pathOrder": 41,
+ "pathOrderNote": "FC3 takes 41, directly above FC2. The earlier reading here, that FC1 took 39, FC2 took 41 and nothing took 40, was WRONG and was corrected against the migration itself: migrations/20260922_fc2_linesizing_course.sql seeds linesizing at path_order 40, so the Facilities ladder is 39 separation, 40 linesizing, 41 rotating, 42 gasprocessing. There is no gap at 40 and nothing to flag. The wave dir for gasprocessing also claimed 42, which 41 now clears rather than collides with. Neither course is in the catalogue yet, both go-lives being held, so this was settled on the migrations rather than on the database.",
+ "module": "facilities",
+ "prerequisite": null,
+ "repo": "/root/wt-fc3-nextgen",
+ "branch": "feat/fc3-rotating-course",
+ "route": "/dashboard/apps/rotating",
+ "goldens": [
+  "facilities/goldens/pumps_cases.json",
+  "facilities/goldens/compression_cases.json"
+ ],
+ "engines": [
+  "engines/facilities/pumps.js",
+  "engines/facilities/compression.js",
+  "engines/facilities/separatorSizing.js (the DAK validity window compression.js now imports)",
+  "engines/production/gasProperties.js (R_UNIVERSAL, AIR_MW, R_OFFSET, suttonPseudoCriticals, dakZ, toRankine)",
+  "lib/units/fieldUnits.js (KW_PER_HP and BTU_PER_HP_HR, derived rather than quoted)"
+ ],
+ "enginesVendoredAt": "4fa37e6 (the FC3-0 repair, engines PR #197). Twelve paths vendored and proved sha-identical with a pristine git archive of 4fa37e6 and with the git blob sha of each path: engines/facilities/{pumps,compression,separatorSizing}.js, engines/production/gasProperties.js, lib/units/fieldUnits.js (new), test-data/facilities/goldens/{pumps,compression}_cases.json, tools/validation/facilities/{oracle_pumps.py,oracle_compression.py,FINDINGS-rotating.md}, and the two jest gates, which run 68 green on the vendored copy (36 before the repair). The rest of packages/engines is a partial mirror at other courses' vintages and is deliberately NOT moved.",
+ "apps": [
+  "Pump Station Designer (Facilities F10), src/pages/apps/PumpStationDesigner.jsx, route apps/facilities/pump-station-designer",
+  "Compressor Station Designer (Facilities F9), src/pages/apps/CompressorStationDesigner.jsx, route apps/facilities/compressor-station-designer"
+ ],
+ "constants": {
+  "2.31": "feet of head per psi at specific gravity 1, measured out of psiToHeadFt",
+  "62.33766233766234": "the water density BOTH pump packagings imply, lb per ft3, derived from 144 over 2.31 and again from 33000 over 3960 times 1728 over 231. The two agree exactly and that agreement is computed, not claimed",
+  "3960": "the field horsepower packaging, gpm times ft times SG over 3960",
+  "33000": "ft lbf per minute per horsepower, the definition of a horsepower",
+  "0.7456998715822702": "kilowatts per horsepower, DERIVED in lib/units/fieldUnits.js from the foot, the pound, standard gravity and the definition of a mechanical horsepower. Measured out of pumpPower as motorInputKw over motorInputHp",
+  "0.94": "the default motor efficiency, measured with the argument omitted",
+  "144": "square inches per square foot",
+  "459.67": "the Rankine offset, exported by gasProperties.js as R_OFFSET; compression.js keeps no copy",
+  "1545.3504": "the universal gas constant in ft lbf per lbmol degR, which is gasProperties.R_UNIVERSAL (10.7316 psia ft3) times 144. ONE value, measured out of headPolyFtLbfLbm and equal to the export to 2.3e-13",
+  "379.48357185628737": "standard cubic feet per lbmol, DERIVED from the 14.696 psia and 519.67 degR base and the package's own gas constant. Measured out of massLbHr",
+  "0.028279485058": "the standard pressure over the standard temperature, psia per degR, which is all actualInletCfm reveals about its base from outside. The mass-flow route reaches the same quotient, difference 0: ONE base for the module",
+  "28.9625": "the molecular weight of dry air, exported by gasProperties.js as AIR_MW",
+  "2544.433577644024": "Btu per horsepower hour, DERIVED in lib/units/fieldUnits.js. Measured twice: out of thermalEfficiencyPct, and by bisecting the heat rate at which driverFuel refuses on first-law grounds",
+  "3 and 0.35": "the NPSH margin floor in ft and the fraction of required, both measured out of npshCheck.requiredMarginFt at required NPSHs where only one of them can bind; they change places at 8.571428571 ft, found by bisection",
+  "300": "the DEFAULT discharge-temperature limit, measured by bisecting the stage ratio with no limit stated until the warning turns on. HELD: customary, no publication here",
+  "0.5 and 1.5": "the speed-ratio band the affinity warning uses, walked out of speedChange. HELD: a sanity bound, not a correlation limit",
+  "1e-9": "the percentage slack in impellerTrim's two boundaries, bisected out of the engine: digest Section 8 measures the shortfall boundary at 1.0000045236324695e-9 above five percent",
+  "1440": "minutes per day",
+  "24": "hours per day",
+  "100": "percent"
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3"
+ ],
+ "plan": {
+  "thesis": "A rotating machine has no operating point until it is connected to something, and every number that follows from it, the power, the suction margin, the stage count, the discharge temperature, is a consequence of where that point landed and of which limit was allowed to put it there. The discipline is knowing which limit set your answer, and whether the machine will still be there in a year.",
+  "tiers": {
+   "beginner": "Associate. THE PUMP AND THE SYSTEM IT WORKS INTO. Why: this is the only place in the Facilities module where a whole answer is assembled from two objects that are each incomplete on their own. A pump curve says what the machine makes and a system curve says what the piping demands, and neither has an operating point; the duty is SOLVED as their intersection, and the power, the conversion to pressure and the judgement of where the duty landed all hang off that one solved number. It is also the tier where the two field packagings, 2.31 and 3960, turn out to be one constant. The tier ends before the suction side, which is where selections actually fail.",
+   "intermediate": "Professional. THE SUCTION SIDE, THE CHANGES, AND THE SECOND MACHINE. Why: a duty point that works on paper fails in three ways, and this tier is all three. It fails on suction, where NPSH available is built from the real suction side and the margin over required is not the same thing as adequacy. It fails on change, where a speed change follows the affinity laws exactly and a trim does not, and where applying either law to a duty point does not give you a new duty point because the system curve did not move. And it fails on the fluid, because a catalogue curve is a water curve. The tier ends with two pumps in parallel delivering far less than twice one pump, which is the result the engine exists to make visible.",
+   "advanced": "Expert. THE COMPRESSOR, AND WHERE BOTH ENGINES STOP. Why: compression is the same discipline with the fluid no longer incompressible and the machine no longer describable by a curve the user can type in, so every answer comes out of a thermodynamic path instead of an intersection. The polytropic exponent is not the isentropic one; the stage count is the larger of two limits and the engine names which; and the count is tested at the inlet the stages will really have, so a hotter intercooler approach is paid for in MACHINES rather than in discharge temperature, with the cooling-against-power trade reversing across a stage-count change. Then what a refusal IS: an object carrying an error that names the input actually wrong, three bare-number functions holding a documented NaN contract because they have nowhere to put one, four faults each refused by its own name, a refusal that hands back its own evidence, a compressibility window this module imports from the module that declares it, one gas constant for the package, and the difference between a comparison that can come out false and an algebraic identity that cannot."
+  },
+  "modulesPerTier": 6,
+  "lessonsPerTier": 26,
+  "questionsPerTier": 132,
+  "questionsPerModuleBank": 15,
+  "examQuestions": 42,
+  "modules": {
+   "beginner": [
+    "m01 What these engines size, and what they refuse (4 lessons). Two machines and two modules, and the scope seam said out loud: there is no surge line, no recycle, no seal or bearing calculation, no machine curve and no wheel selection anywhere in this package, and the Compressor studio's own help guide says so. Every refusal message in both modules, verbatim.",
+    "m02 Two curves, and why neither has an operating point (5). The system curve stated through a friction head at a flow rather than an abstract coefficient; the least-squares quadratic through catalogue points, what its R squared means and when it is null; the conditioning of the solve behind it, which is a different question from the fit; the shutoff head; and the droop flag the duty point reads.",
+    "m03 The duty point, solved (5). The intersection and the report the solve leaves behind (bracket, residual, halvings, converged); why that flag is made of the residual as well as the bracket, with the case that makes it false; the three refusals that are real answers, a pump that cannot start its system, a pair of curves that do not cross below the search limit, and a curve that does not droop; and what moves the point.",
+    "m04 Power, head and pressure (4). Hydraulic, brake and motor input power; the two field packagings measured out of the engine; and the single water density they both imply, printed with the difference between them.",
+    "m05 Where the duty landed (5). The four regions either side of best efficiency flow, what each costs in the engine's own words, the boundaries, and why the region is judged per machine and not on the combined flow.",
+    "m06 The Associate reading (3). One pump end to end, the capstone worked, and what the suction side changes."
+   ],
+   "intermediate": [
+    "m01 NPSH available, from the real suction side (5). The pressure head over the vapour pressure, the static height and the suction friction; the flashing warning; and why an available figure on its own decides nothing.",
+    "m02 The margin, and the rule it is judged against (4). The customary rule with both halves of its maximum measured out of the engine, the required NPSH where the floor and the fraction change places, the three severities, and why a margin rule and a rule on the returned ratio are not the same rule. NOTE: the foundation plan had this module teach that NPSHr is itself measured at a three percent head drop. NOTHING IN THIS REPOSITORY CARRIES THAT, the digest does not compute it, and it is struck rather than held, because a held item is one the engine uses and this is one the engine has never heard of.",
+    "m03 A speed change and a trim are not the same thing (5). The exact cube law against the trim shortfall, with the exactness printed as a subtraction; ideal and real side by side; the efficiency the trim's return implies, computed and returned rather than left to division; the vendor limit the warning names; and the two decimal boundaries and the slack that makes them land where the rule says.",
+    "m04 An affinity law applied to a duty point is not a new duty point (4). The system curve does not move when the machine changes, so the answer is a new intersection and not a scaled old one, and the scaled old one is a real point on the new curve that the machine will not run at. Both, labelled, and how far apart they get.",
+    "m05 Two pumps, and a catalogue curve that is a water curve (5). Parallel adds flow at equal head and series adds head at equal flow, and on a friction-dominated system the second machine buys far less than double; then the Hydraulic Institute correction, its correlating parameter, its three factors and its two warnings.",
+    "m06 The Professional reading (3)."
+   ],
+   "advanced": [
+    "m01 A stage is not a pump (5). The polytropic exponent against the isentropic one and what using the wrong one costs; the discharge temperature that follows; compressibility evaluated at both ends and averaged; both heads reported so neither is quoted as the other; and why the two power routes agreeing is an algebraic identity rather than a check.",
+    "m02 The stage count, and the limit that governs (5). The equal-ratio rule, the discharge-temperature limit, the engine naming which one bound, the twelve-stage cap, and the closed form the search is converging on.",
+    "m03 The train, its cooling, and the limit that buys the stages (5). Equal ratios chained, interstage cooling as a real exchanger duty, and the comparison the whole of staging turns on: the stage count is tested at the inlet the stages will really have, so a hotter approach buys a machine rather than a hotter discharge. Then the trade that reverses: colder suction means less work and more heat to take out at a FIXED stage count, and the opposite across a stage-count change.",
+    "m04 The machine, the driver and the fuel (4). Actual inlet volume and why it falls with pressure; the four screening branches including the honest 'either', each reached by a duty that fails the three tests above it, and the two counts that are different questions there, four distinct first reasons against three distinct recommendation words; the driver's fuel taken out of the stream being compressed; and the thermal efficiency the first law bounds, with the refusal boundary that IS the Btu in a horsepower-hour.",
+    "m05 What a refusal is, and where each guard turns over (4). Every refusal is a returned object naming the input that is wrong; the three bare-number functions that have nowhere to put one and hold a documented NaN contract instead; four faults that used to share one sentence and now have four; the compressibility window one module in this package declares and this one imports; and a gate that could not fail beside one that can.",
+    "m06 The Expert reading (3)."
+   ]
+  },
+  "capstones": {
+   "count": 3,
+   "gradedFieldsEach": 6,
+   "beginner": "A crude transfer pump against a stated station. The catalogue points, the static head, the friction head at its stated flow, the specific gravity and the pump efficiency are all given. Graded: the duty flow, the duty head, the hydraulic power, the brake power, the motor input in kilowatts, and the duty head expressed as a discharge pressure.",
+   "intermediate": "The same station's suction side and a proposed speed change. The suction pressure, the vapour pressure, the static suction height, the suction friction and the speed ratio are all stated. Graded: the pressure-head component of NPSH available, NPSH available, NPSH available again at a stated raised suction pressure, the flow after the speed change, the head after the speed change, and the duty flow of two identical machines in parallel solved as a fresh intersection.",
+   "advanced": "A gas compression train. The rate, suction pressure and temperature, discharge pressure, gas gravity, k, the polytropic and mechanical efficiencies, the maximum ratio per stage, the maximum discharge temperature, the intercooling approach and the driver heat rate and fuel heating value are all stated. Graded: the polytropic exponent ratio, the ratio per stage, the first stage's discharge temperature, the first stage's polytropic head, the first stage's gas horsepower, and the driver fuel in MMscfd.",
+   "heldItemCheck": "NONE of the eighteen reads a held item. There are EIGHT held items, the same eight digest Section 17 lists, and each is neutralised by construction rather than by hope. (1) The HYDRAULIC INSTITUTE viscosity correction is an unsourced empirical form, so no capstone runs it and no graded field is a corrected flow, head or efficiency. (2) The TRIM SHORTFALL model has no publication behind it, so the Professional capstone grades a SPEED change, where the affinity laws are exact, and never a trim. (3) The OPERATING REGION bands at 50, 70, 120 and 140 percent are customary and unsourced, so no graded field is a region, a percentage of best efficiency flow or a verdict. (4) The NPSH MARGIN RULE, the larger of 3 ft and 35 percent, is customary and unsourced, so the Professional capstone grades NPSH AVAILABLE and never the required margin, the pass flag or the severity. (5) The comparison of the engine's implied water density to a published water density is held, but the packagings themselves are the engine's own definitions, so a power and a pressure conversion are gradeable. (6) The MACHINE SCREENING thresholds are unsourced, so no graded field is a recommendation. The list is 500 and 5000 and 20000 acfm, ratios of 4 and 6, and 200 and 10000 brake hp, which is what digest Section 14 carries; an earlier draft of this plan omitted the 5000, and a plan that lists fewer thresholds than the engine has is how a writer gets told to teach something the digest does not carry. (7) The compressor capstone's suction and discharge states are chosen INSIDE the DAK validity window, Tpr between 1.0 and 3.0 and Ppr at or below 30, and the capstone generator asserts that rather than assuming it. THE WINDOW IS NOW ALSO ENFORCED BY THE ENGINE at 4fa37e6, which refuses outside it by name; the capstone's own assertion is kept as a second opinion on the CASE rather than on the engine, because a case edited later must still land inside the window. (8) The three discriminating conditions, the maximum ratio per stage, the maximum discharge temperature and the intercooling approach, are STATED in the prompt, so no graded value depends on a default. BEYOND THE EIGHT, and not a held item: the capstone also asserts that every curve it fits droops, that every duty solve reports converged, that the fit's R squared is finite, and that the graded speed change carries no extrapolation warning, so no graded answer can come off an unresolved solve or a curve the engine has disowned."
+  },
+  "panels": {
+   "lab": "src/components/course/panels/rotating/rotatingLab.js",
+   "ids": [
+    "fc-pump-explorer (Associate): the two curves on one axis with the crossing marked, the duty solved as that crossing, the power chain, and the four regions",
+    "fc-suction-explorer (Professional): NPSH available assembled from its three parts, the margin and its severities, a trim against a speed change with the ideal beside the real, parallel and series re-solved, and the Hydraulic Institute factors",
+    "fc-compressor-explorer (Expert, with the inlet-volume view open to Professional): the two staging limits and which governed, the train stage by stage with its cooling duty, the machine screen, the driver fuel, and the domain limits"
+   ]
+  },
+  "reCut": "PROVENANCE, NOT TEACHING TRUTH. This field records what the plan USED to say and why it changed; nothing in it may reach a lesson, a question or a panel, which take their numbers from digest.txt alone. 2026-09-16, onto engines 4fa37e6. THREE MODULES CHANGE SUBJECT because the defects they were built on were repaired, and one gains a subject the repair created. Expert m05 was 'What these engines accept and should not', five lessons on unguarded inputs; thirty-one of those inputs now return a named error, so it is re-cut onto digest Section 15: what a refusal IS, the contract, the messages, the boundary either side of every guard, and the three bare-number functions that hold a documented NaN contract instead. Expert m03 was 'the limit it can break'; the train no longer breaks the limit it was staged against, and the better lesson is the one the repair exposed: a warmer intercooler approach is paid for in STAGES, and the cooling-against-power trade reverses across a stage-count change. Professional m04 was written when the Pump studio showed two answers for one change; Suite PR #491 labelled them as two questions, so the module teaches the distinction rather than the disagreement. Associate m03 gains the solve's own report: bracket, residual, iterations, converged, and a negative control showing a flag made only of the bracket could never be false. A fifth module moved after the digest heading sweep: Professional m02 was 'what a check does not check', and what it did not check was an available head it could not read, which it now refuses. The title named a shortcoming the section no longer shows, so it is re-cut onto the margin rule itself. The sweep also corrected the Expert m03 digest heading, which still read 'the limit it can break' over a table showing no stage over any limit on any row. Sections 16 and 17 now carry a SHARED owner clause, 'shared by Associate m06, Professional m06 and Expert m06', because both are read by all three tiers and neither is owned by one of them. SWEPT AGAIN 2026-09-16 against the digest, the whole file rather than the line that was reported: plan.tiers.advanced still carried the pre-repair audit paragraph, asserting that the train can break the limit it was staged against, eighteen non-finite returns with no error key, two refusals naming the wrong cause, a validity window this module does not enforce, and two values of one gas constant. Every one of those was repaired at engines 4fa37e6 and the digest refutes each: Section 13 prints 0 stages over the limit on every row, Section 15 prints named refusals for all of them, and Section 14 computes the two gas constants as one to 2.3e-13. The tier paragraph is re-cut onto what the sections now teach. heldItemCheck item (7) still said the module does not check the DAK window, one clause away from a note saying it now does; the stale clause is gone. Counts re-verified: 6 modules and 26 lessons a tier, 6 x 15 + 42 = 132 questions, 3 capstones x 6 graded fields = the 18 rows fields.json carries, 3 panels. Numbering swept 2026-09-16: heldItemCheck numbered two different items (7), so the list ran 1-8, 7, 9. The back-reference is folded into item (7) and the capstone's new assertions are moved out of the numbered list, which is the eight held items and nothing else, stated as eight so it checks itself against digest Section 17."
+ }
+}

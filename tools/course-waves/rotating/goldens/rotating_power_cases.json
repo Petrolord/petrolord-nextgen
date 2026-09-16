@@ -1,0 +1,90 @@
+[
+ {
+  "brakeHp": 123.83449883449883,
+  "efficiency": 0.78,
+  "headFt": 300.0,
+  "hydraulicHp": 96.5909090909091,
+  "motorEfficiency": 0.94,
+  "motorInputHp": 131.73882854733918,
+  "motorInputKw": 98.23762753014954,
+  "qGpm": 1500.0,
+  "sg": 0.85
+ },
+ {
+  "brakeHp": 25.75757575757576,
+  "efficiency": 0.72,
+  "headFt": 120.0,
+  "hydraulicHp": 18.545454545454547,
+  "motorEfficiency": 0.94,
+  "motorInputHp": 27.401676337846556,
+  "motorInputKw": 20.43342652627111,
+  "qGpm": 600.0,
+  "sg": 1.02
+ },
+ {
+  "brakeHp": 251.88470066518846,
+  "efficiency": 0.82,
+  "headFt": 480.0,
+  "hydraulicHp": 206.54545454545453,
+  "motorEfficiency": 0.96,
+  "motorInputHp": 262.379896526238,
+  "motorInputKw": 195.65665514538503,
+  "qGpm": 2400.0,
+  "sg": 0.71
+ },
+ {
+  "brakeHp": 58.51239669421487,
+  "efficiency": 0.55,
+  "headFt": 900.0,
+  "hydraulicHp": 32.18181818181818,
+  "motorEfficiency": 0.9,
+  "motorInputHp": 65.0137741046832,
+  "motorInputKw": 48.48076300094098,
+  "qGpm": 120.0,
+  "sg": 1.18
+ },
+ {
+  "brakeHp": 184.9431818181818,
+  "efficiency": 0.8,
+  "headFt": 210.0,
+  "hydraulicHp": 147.95454545454547,
+  "motorEfficiency": 0.955,
+  "motorInputHp": 193.65778200856735,
+  "motorInputKw": 144.41058317469597,
+  "qGpm": 3000.0,
+  "sg": 0.93
+ },
+ {
+  "brakeHp": 1.829268292682927,
+  "efficiency": 0.41,
+  "headFt": 60.0,
+  "hydraulicHp": 0.75,
+  "motorEfficiency": 0.88,
+  "motorInputHp": 2.0787139689578713,
+  "motorInputKw": 1.550096739708156,
+  "qGpm": 75.0,
+  "sg": 0.66
+ },
+ {
+  "brakeHp": 252.5252525252525,
+  "efficiency": 1.0,
+  "headFt": 1000.0,
+  "hydraulicHp": 252.5252525252525,
+  "motorEfficiency": 1.0,
+  "motorInputHp": 252.5252525252525,
+  "motorInputKw": 188.30804837936117,
+  "qGpm": 1000.0,
+  "sg": 1.0
+ },
+ {
+  "brakeHp": 183.27519957107114,
+  "efficiency": 0.763,
+  "headFt": 355.5,
+  "hydraulicHp": 139.83897727272728,
+  "motorEfficiency": 0.938,
+  "motorInputHp": 195.38933856190954,
+  "motorInputKw": 145.70180467416066,
+  "qGpm": 1850.0,
+  "sg": 0.842
+ }
+]

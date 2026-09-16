@@ -29,7 +29,7 @@ The default project's deck prices oil at 70, 75 and 80 USD per bbl, and the test
 
 ## The mistake
 
-The careful reader sees `sliding_price` in a template and assumes the royalty must move. On these two published projects it never does, and a reader who tries to explain the PIA and Brazil results by their royalty difference is explaining a difference that does not exist. Contractor net cash flow on the default project is 406.2057 million USD under the PIA template and 912.1029 million USD under Brazil, and since both paid 268.6928 million USD of royalty, the whole of that gap comes from the other three fields.
+The careful reader sees `sliding_price` in a template and assumes the royalty must move. On these two published projects it never does, and a reader who tries to explain the PIA and Brazil results by their royalty difference is explaining a difference that does not exist. Contractor net cash flow on the default project is 406.2057 million USD under the PIA template and 623.9658 million USD under Brazil, and since both paid 268.6928 million USD of royalty, the whole of that gap comes from the other three fields.
 
 Whether a slider slides is a property of the deck, not of the template. The only way to know is to read the applied price in each year against the tier thresholds.
 

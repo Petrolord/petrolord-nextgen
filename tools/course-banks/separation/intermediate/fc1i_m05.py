@@ -92,7 +92,7 @@ q(1, "The pool result reports a radius of 59.5294 m and a setback of 50.5294 m. 
  "Passing the edge figure into a centre-to-centre check leaves every comparison short by half the bund. That is the defect that failed open.")
 
 q(0, "A pool fire run at an allowable of 4000.000000 kW/m2 returns a radius of 2.2745 m, an edge setback of 0.0000 m and setbackStatus within-pool-edge. What is the engine saying?",
- "The radius lies inside the pool edge at 10.0000 m from the centre and well inside the flame height of 25.6078 m, so the answer is a lower bound rather than a distance to build to.",
+ "The radius lies inside the pool edge at 10.0 m from the centre and well inside the flame height of 25.6078 m, so the answer is a lower bound rather than a distance to build to.",
  ["The calculation failed and the zero is a placeholder, which is why a status is attached in the place of a distance somebody could act on.",
   "The pool is too small to radiate at that allowable, so the setback is reported as zero and the reader is expected to fall back on the spacing table for the pair.",
   "A neighbouring item may stand against the bund wall, the setback from the edge being 0.0000 m."],
@@ -112,5 +112,5 @@ q(1, "The flare stands 46.1777 m from the control room, against a table figure o
   "That the plot passes on radiation and fails on spacing."],
  "The pair fails both. A table cannot know a relief rate, so a flare well inside a 90.000000 m rule can still exceed its allowable.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1i_m05.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1i_m05.json', expect_n=15)
 finish()

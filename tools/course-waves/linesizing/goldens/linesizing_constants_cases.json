@@ -1,0 +1,12 @@
+{
+ "elevationCoefficientDerived": 0.03748633557495975,
+ "elevationCoefficientPublished": 0.0375,
+ "generalFlowConstantDerived": 77.56484115314491,
+ "generalFlowConstantPublished": 77.54,
+ "generalFlowConstantRatio": 1.0003203656583042,
+ "weymouthConstantDerived": 433.600643706013,
+ "weymouthConstantPublished": 433.5,
+ "weymouthConstantRatio": 1.0002321654117947,
+ "weymouthExponentDerived": 2.6666666666666665,
+ "weymouthExponentPublished": 2.6666666666666665
+}

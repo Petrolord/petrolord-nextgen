@@ -1,0 +1,83 @@
+[
+ {
+  "marginFt": 13.0,
+  "npshaFt": 25.0,
+  "npshrFt": 12.0,
+  "pass": true,
+  "ratio": 2.0833333333333335,
+  "requiredMarginFt": 4.199999999999999,
+  "severity": "adequate"
+ },
+ {
+  "marginFt": 2.0,
+  "npshaFt": 14.0,
+  "npshrFt": 12.0,
+  "pass": false,
+  "ratio": 1.1666666666666667,
+  "requiredMarginFt": 4.199999999999999,
+  "severity": "marginal"
+ },
+ {
+  "marginFt": -4.0,
+  "npshaFt": 8.0,
+  "npshrFt": 12.0,
+  "pass": false,
+  "ratio": 0.6666666666666666,
+  "requiredMarginFt": 4.199999999999999,
+  "severity": "cavitating"
+ },
+ {
+  "marginFt": 3.0,
+  "npshaFt": 15.0,
+  "npshrFt": 12.0,
+  "pass": false,
+  "ratio": 1.25,
+  "requiredMarginFt": 4.199999999999999,
+  "severity": "marginal"
+ },
+ {
+  "marginFt": 2.0,
+  "npshaFt": 3.0,
+  "npshrFt": 1.0,
+  "pass": false,
+  "ratio": 3.0,
+  "requiredMarginFt": 3.0,
+  "severity": "marginal"
+ },
+ {
+  "marginFt": -7.8,
+  "npshaFt": 4.2,
+  "npshrFt": 12.0,
+  "pass": false,
+  "ratio": 0.35000000000000003,
+  "requiredMarginFt": 4.199999999999999,
+  "severity": "cavitating"
+ },
+ {
+  "marginFt": 4.199999999999999,
+  "npshaFt": 16.2,
+  "npshrFt": 12.0,
+  "pass": true,
+  "ratio": 1.3499999999999999,
+  "requiredMarginFt": 4.199999999999999,
+  "severity": "adequate"
+ },
+ {
+  "marginFt": 96.0,
+  "npshaFt": 100.0,
+  "npshrFt": 4.0,
+  "pass": true,
+  "ratio": 25.0,
+  "requiredMarginFt": 3.0,
+  "severity": "adequate"
+ },
+ {
+  "marginFt": 3.0,
+  "npshaFt": 4.0,
+  "npshrFt": 1.0,
+  "pass": true,
+  "ratio": 4.0,
+  "requiredMarginFt": 3.0,
+  "severity": "adequate"
+ }
+]

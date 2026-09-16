@@ -1,0 +1,305 @@
+{
+  "app_slug": "linesizing",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-wall-a-code-demands",
+      "title": "The Wall a Code Demands",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-barlow-with-a-design-factor",
+          "title": "Barlow with a design factor",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-four-location-classes",
+          "title": "Four location classes",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-joint-factor-and-the-derate",
+          "title": "The joint factor and the derate",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-allowance-that-is-not-strength",
+          "title": "The allowance that is not strength",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-the-rating-back",
+          "title": "Reading the rating back",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-pig-and-what-it-pushes",
+      "title": "The Pig and What It Pushes",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-line-is-a-volume",
+          "title": "A line is a volume",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-holdup-is-an-input",
+          "title": "Holdup is an input",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-swept-volume",
+          "title": "The swept volume",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-run",
+          "title": "The run",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-interval-a-catcher-allows",
+          "title": "The interval a catcher allows",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-where-the-correlations-stop",
+      "title": "Where the Correlations Stop",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-jump-at-the-branch",
+          "title": "The jump at the branch",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-colebrook-past-its-roughness",
+          "title": "Colebrook past its roughness",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-friction-weymouth-assumes",
+          "title": "The friction Weymouth assumes",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-four-forms-and-no-regime-check",
+          "title": "Four forms and no regime check",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-an-iteration-that-never-reports",
+          "title": "An iteration that never reports",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-what-a-refusal-is",
+      "title": "What a Refusal Is",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-an-object-carrying-an-error",
+          "title": "An object carrying an error",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-three-returns-outside-the-contract",
+          "title": "Three returns outside the contract",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-messages-and-what-each-protects",
+          "title": "The messages, and what each protects",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-both-sides-of-every-guard",
+          "title": "Both sides of every guard",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-it-still-accepts",
+          "title": "What it still accepts",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-what-the-method-does-not-know",
+      "title": "What the Method Does Not Know",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-items-held-for-the-literature",
+          "title": "Items held for the literature",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-goldens-that-are-not-measurements",
+          "title": "Goldens that are not measurements",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-half-that-is-not-here",
+          "title": "The half that is not here",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-wall-pig-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

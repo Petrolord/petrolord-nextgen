@@ -103,12 +103,12 @@ q(1, "Four things in this course are held for the literature and one is a stated
   "It changes no answer, since 0.044500 ft/s and 0.044686 ft/s round to the same figure at the precision vessel work is printed to."],
  "The held items are the K derating with its floor, the borrowed settling velocity, the API 521 labels and the spacing table. None of the five is an answer, and only one of them has its error bar written down.")
 
-q(2, "A handover writes 350 psi for the AGBAMI operating pressure and reports the interface to the nearest inch. What conventions has it broken?",
+q(2, "A handover writes the AGBAMI operating pressure as 350.000000 psi and reports the interface to the nearest inch. What conventions has it broken?",
  "Gauge and absolute pressures are never written as though they were one quantity, and vessel work prints to six decimals, so the interface is 3.049149 ft.",
  ["Pressures are always reported as absolute in this course, and lengths are reported to four decimals in the same way as metres, kilowatts and seconds on every page of a report.",
   "Counts are whole numbers and everything else carries six decimals, so both the pressure and the interface needed six before the handover could be accepted.",
   "Nothing is broken, since 350.000000 psig and 3.049149 ft are the engine figures and a handover may round either of them for a reader."],
  "AGBAMI runs at 350.000000 psig, which is a gauge pressure. Metres, kilowatts and seconds print to four decimals and counts are whole numbers, so the precision itself says what kind of quantity is being read.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1a_m06.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1a_m06.json', expect_n=15)
 finish()

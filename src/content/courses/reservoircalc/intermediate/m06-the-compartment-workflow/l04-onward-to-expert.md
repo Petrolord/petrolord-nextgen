@@ -18,13 +18,13 @@ Every volume in this tier and the tier below was computed with four constants: n
 
 The Expert tier replaces the constant porosity with a value at every node, fitted from the porosity measured at each of the six wells. The same contact, the same map, the same chain, and a grid where there was a number.
 
-The booking moves from 12.139208 to 12.796077 MMstb, an increase of 0.656868 MMstb.
+The booking moves up from 12.139208 MMstb, by well under a million barrels. Both the new booking and the size of the increase are Expert graded fields, so this lesson names them rather than printing them.
 
 ## Two things to notice about that number
 
 The first is its size. It is smaller than the tie break convention you priced in module two and a third of what the cross fault control is worth. A whole tier is built on a quantity that this tier's labelling conventions outweigh, which is a useful piece of perspective to carry into it: the property model is not where the leverage is, and knowing that is part of knowing when to spend effort on it.
 
-The second is that the number is not what it appears to be. Most of that 0.656868 MMstb is not spatial at all. The Expert tier decomposes it, and the larger part turns out to come from something much simpler than a property model. That is where the tier starts, and it is worth arriving without a firm expectation.
+The second is that the number is not what it appears to be. Most of that increase is not spatial at all. The Expert tier decomposes it, and the larger part turns out to come from something much simpler than a property model. That is where the tier starts, and it is worth arriving without a firm expectation.
 
 ## What the Expert tier inherits from this one
 

@@ -512,3 +512,78 @@ The three near misses section 5 flagged as one to two tolerances from a
 cross-tier answer were re-checked and are unmoved by the recut: `scal` beginner
 0.35 at 1.3 tolerances, `sim` advanced at 1.4, `scal` beginner 0.25 at 1.7. No
 near miss was converted into a leak.
+
+## 10. The surfaces nobody had swept, 2026-09-16
+
+Section 9 fixed a leaking field **label** and noted that the gate could not see
+it. This section closes that: the gate now sweeps everything
+`academy_get_capstone` serves, and the answer to "how many other labels are
+like that" is measured rather than assumed.
+
+### The complete inventory of learner-reachable surfaces
+
+`academy_get_capstone` returns `app_slug`, `tier`, `cert_tier`, `dataset`,
+`title`, `prompt`, and for each graded field `key`, `label` and `unit`. It
+does **not** return `expected` or `tol`, so the answer key itself never leaves
+the server. The learning pages (one per course, all 46 the same shape) draw the
+`title`, the `prompt`, and for each field `{label} ({unit})` directly above its
+input box. `dataset`, `cert_tier` and `key` reach the browser in the payload
+without being drawn.
+
+| surface | count | drawn on screen | swept before | swept now |
+|---|---|---|---|---|
+| `prompt` | 132 | yes | yes | yes |
+| `title` | 132 | yes | **no** | yes |
+| `dataset` | 132 | no, payload only | **no** | yes |
+| `label` | 793 | yes, above the box | **no** | yes |
+| `unit` | 793 | yes, beside the label | **no** | yes |
+
+**1982 surfaces, of which the old gate examined 132.** The grading RPC
+(`academy_submit_capstone`) returns `score`, `max_score` and a `missed` array of
+field keys; no page renders `missed`, and it carries no values.
+
+### Three classes of field the sweep had never examined at all
+
+Independently of which surface was read, the loop skipped any field with
+`tol <= 0` or `expected == 0`, and excused any small-integer match as a
+coincidence. On the live 793: **40 fields are graded at zero tolerance** and
+**one is graded at zero**. A zero-tolerance field is the easiest of all to leak,
+because the answer must be typed exactly and a surface that prints it prints it
+exactly. All three classes are now swept: zero-tolerance and zero-valued fields
+by exact equality, and the small-integer excuse no longer applies when a label
+matches **its own** field, which is never a coincidence.
+
+### What the full sweep found
+
+Twelve accepted leaks on production as it stood. Nine were already closed by the
+section 9 recut (seven directly; the `completion` and `seismolord` dataset
+strings stop matching once the fields they named are retired). Three were new,
+plus a fourth sitting in the small-integer band:
+
+| rank | course | surface | what a learner scores without working |
+|---|---|---|---|
+| 1 | `seismolord` beginner | **label** | `twt_at_log_top_ms` was captioned "TWT at the top of the log (1500 m)" and graded 1500 ms. The teaching velocity is 2000 m/s, so TWT in ms *is* the depth in m: the caption above the box was the answer. Now "TWT at the top of the log". |
+| 2 | `welldata` intermediate | **label** | `irregular_uniform` was captioned "irregular_20 has a uniform step (1 yes / 0 no)" and graded 0. A coin flip whose label must print both answers to be readable. **Rewording cannot fix this, so the field moved**: `irregular_samples` = 121, a measured count both panels print. |
+| 3 | `integrity` advanced | **dataset** | "which FAILS on a 7.5 metre shortfall" is `above_source_margin_m` = -7.5. Payload only, not drawn, so lower consequence, and still a graded answer shipped to the client for nothing. |
+| 4 | `wellcorrelation` advanced | **label** | "TOP_B structural relief (3 wells)" states 3, which is exactly `beginner.wells_with_top_b` and `intermediate.wells_with_all_tops`, **both graded at zero tolerance**. Lowest consequence: three is a small integer and the section holds four wells, so a guess was already likely; the label turns a likely guess into a certainty. |
+
+Rank 2 is the one worth generalising. A yes/no graded field cannot have an
+honest label: the encoding has to be stated, and stating it hands over half the
+answer space. The field was redesigned rather than the caption reworded, on the
+same grounds section 9 rejected restating a reflection coefficient as an
+impedance contrast: **do not make a surface opaque to the gate while leaving the
+leak intact.**
+
+After both waves the gate reports `own-field leaks: 0   cross-tier leaks: 0
+self leaks: 0` over 132 prompts, 132 titles, 132 datasets, 793 labels and 793
+units, and exits 0. Near misses rise from 41 to 61 and notes from 8 to 11
+purely because there are now fifteen times as many surfaces to be near on; none
+is accepted. The negative control is **23 checks, all passing**, with new ones
+for a label printing its own answer, the small-integer excuse not applying to
+an own-field match, a zero-tolerance field leaked on any surface, a dataset
+carrying another tier's answer, and a refusal when a sweep sees no labels at
+all.
+
+One reporting bug was fixed in passing: the near-miss and note lines printed
+every finding as though it came from a prompt, so label and unit findings were
+mislabelled in the output.

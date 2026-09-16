@@ -21,7 +21,7 @@ Neither levy is in the tax column. The worked example's tax of 604809283.90 is H
 | pia_worked_example | 5100000.00 | 1054994854.24 | 1039994854.24 | 284810956.27 | 135185570.34 |
 | pia_prior_year_opex_zero | 0.00 | 1060094854.24 | 1045094854.24 | 286340956.27 | 137098070.34 |
 
-Removing the levy raises both bases by exactly 5100000.00, so HCT, CIT and TET all rise, and NPV rises by less than the levy saved. The CIT base sits 15000000.00 below the HCT base in both rows: NDDC is deducted for CIT and not for HCT, and 15000000.00 is the fixed NDDC. On AKATA, a prior year opex of 20000000 gives hcdt 600000.00 in 2029 and moves NPV from 42943268.01 to 42721818.62.
+Removing the levy raises both bases by exactly 5100000.00, so HCT, CIT and TET all rise, and NPV rises by less than the levy saved. The CIT base sits 15000000.00 below the HCT base in both rows: NDDC is deducted for CIT and not for HCT, and 15000000.00 is the fixed NDDC. On AKATA, a prior year opex of 20000000 gives hcdt 600000.00 in 2029 and moves NPV from 43223505.88 to 43002056.49.
 
 ## The mistake
 

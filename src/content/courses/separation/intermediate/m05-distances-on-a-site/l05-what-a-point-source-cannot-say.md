@@ -22,7 +22,7 @@ It is a poor approximation near the fire, where the flame is not small, where it
 | setback from edge m | 0.0000 |
 | setbackStatus | within-pool-edge |
 
-An allowable of 4000.000000 kW/m2 is an absurd tolerance, and it drives the radius down to 2.2745 m, which is inside a pool whose edge is 10.0000 m from the centre. The engine reports the setback from the edge as 0.0000 m with a status of within-pool-edge rather than returning a negative distance.
+An allowable of 4000.000000 kW/m2 is an absurd tolerance, and it drives the radius down to 2.2745 m, which is inside a pool whose edge is 10.0 m from the centre. The engine reports the setback from the edge as 0.0000 m with a status of within-pool-edge rather than returning a negative distance.
 
 It also notes that the computed radius of 2.2745 m is well inside the flame height of 25.6078 m, so the point source is being used where it under-predicts. The instruction attached is to treat the answer as a lower bound and to use a solid-flame view factor model for design.
 

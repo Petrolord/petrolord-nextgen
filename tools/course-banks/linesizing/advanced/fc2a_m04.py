@@ -1,0 +1,114 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC2 Expert m04, What a Refusal Is. Digest section 16.
+
+q(3, "This engine has one shape for a refusal and keeps to it. What is that shape, and what does it let a caller do?",
+ "An object carrying an error string, which arrives through the ordinary return path, so a caller checks a property rather than catching.",
+ ["A thrown exception carrying the message, which is why a caller wraps every entry point and handles the whole module's failures in one place at the top of the chain.",
+  "A null in the field the answer would have occupied, which a caller tests for before reading the value and which cannot be confused with a pressure or a rate.",
+  "A sentinel value the module documents, which is a negative figure in a field that is otherwise always positive, so one comparison catches every failure the engine has."],
+ "It is never a thrown exception, never a null and never a bare number. A liquid line with no rate comes back as an object saying the drop needs positive rate, bore, length, density and viscosity.")
+
+q(1, "Why is a NaN or an Infinity returned without an error worse than having no guard at all?",
+ "It passes the check a caller makes and then propagates into a sizing sweep, a marched profile or a wall specification, each of which carries it forward without complaint.",
+ ["It is the one return that leaves the ordinary path, so the caller that knew what to do about it has already unwound by the time the value arrives at the top of the chain.",
+  "It is indistinguishable from an ordinary result, which means the engine cannot report it either, so the failure is invisible on both sides of the call at once.",
+  "It cannot be serialised at all, so a case file that contains one fails to save and the record of the run that produced it is lost along with the value."],
+ "An absent guard produces an obviously wrong answer that somebody notices. A NaN is a returned value with no error property beside it, so it survives the test and travels.")
+
+q(2, "Three returns in this engine sit outside the refusal contract on purpose. Which three?",
+ "The Reynolds number of a line with no viscosity, the volume of a line with no bore, and the friction factor at a negative relative roughness.",
+ ["The Reynolds number of a line with no viscosity, the volume of a line with no bore, and the interval whose sweep already overfills the catcher, which prescribes rather than describes.",
+  "The friction factor at a negative relative roughness, the wall with no design pressure, and the outlet-pressure solve on an equation the engine does not carry by name.",
+  "The volume of a line with no bore, the rating with no wall left after the allowance, and the sweep handed a holdup above one, all three of which answer with a bare number."],
+ "All three return NaN, the first two bare and the third in a field beside a regime of invalid. The wall and the sweep cases refuse in the ordinary way, with an object carrying an error string.")
+
+q(0, "The Reynolds number and the line volume answer NaN while the friction factor answers with a regime of invalid. What explains the difference between those two treatments?",
+ "The first two are bare numbers with nowhere to put a message, and the friction factor already returns an object with a regime field, so its refusal rides in a field that was there anyway.",
+ ["The first two are reached through the ordinary entry points and the friction factor is not, so only the friction factor has a wrapper available to it that can refuse in words.",
+  "The first two are guarding meaningless inputs and the friction factor is guarding a state the method has no answer for, and the engine spells those two classes differently.",
+  "The first two are computed before their guards run and the friction factor after, so the NaN is arithmetic that has already happened and the invalid regime is a guard that fired in time."],
+ "Where a function has room for a message it refuses in words, and where it has none it returns a value that cannot be mistaken for a pressure or a rate. The friction factor's is the tidiest of the three.")
+
+q(1, "All three of the returns outside the contract print as null in a saved case file. Why, and what does it cost a reader?",
+ "A NaN has no JSON spelling, so all three print as null although not one of them is a null the engine chose, and the record cannot say which of the three it holds.",
+ ["The encoder replaces any value outside the contract with null so that a stored case always parses, so a reader loses the distinction between a refusal and an ordinary answer.",
+  "All three genuinely return null, and what a reader loses is only the message, since the engine attaches a message to an error object and none to a null.",
+  "The engine serialises the regime field ahead of the friction factor, so the two bare numbers inherit the invalid regime and print under it, and the original values are gone."],
+ "The engine returned NaN in every one of the three and null is what printing it produced. The regime field is the only thing that distinguishes the third, which is another reason that design is the better one.")
+
+q(3, "The engine refuses two different classes of thing in the same shape. What is the distinction, and why does it matter to whoever reads the message?",
+ "A state the method has no answer for had meaningful inputs and led nowhere, and a meaningless input was never attempted, so a reader who conflates them hunts for physics behind a typing error.",
+ ["A state the method has no answer for is refused with an error object and a meaningless input is refused with a NaN, so the shape of the return is what tells the two apart.",
+  "A state the method has no answer for is reported with the boundary either side of it and a meaningless input is not, so a reader can see which class a message belongs to from the message alone.",
+  "A state the method has no answer for is a failure of the line and a meaningless input is a failure of the engine, so one of them is a design finding and the other is a defect to be fixed."],
+ "A gas line whose outlet meets its inlet has no flow to report, and every input was meaningful. A negative roughness or an efficiency above one was never attempted at all.")
+
+q(0, "The catalogue of physically meaningless inputs has more entry points than sentences. What are the two counts, and what are the two reasons a sentence appears twice?",
+ "Twenty-four entries carrying eighteen distinct messages, with six repeated: three are one message guarding two entry points, and three are one guard catching two kinds of bad value.",
+ ["Twenty-four entries carrying eighteen distinct messages, all six of the repeats being one guard catching a value above its range and a value below it, in the way the efficiency is refused at each end.",
+  "Eighteen entries carrying twenty-four distinct messages, because six of the entries carry a second sentence naming the boundary the engine accepts on the other side of the guard.",
+  "Twenty-four entries carrying eighteen distinct messages, with six repeated because the same input is reached once through a liquid call and once through a gas call in every one of those cases."],
+ "The roughness message answers a liquid friction call and a General Flow call. The efficiency message refuses a value above one and a value below zero. Those are the two different reasons.")
+
+q(2, "Which set of messages is shared across two different entry points rather than catching two kinds of bad value at one entry point?",
+ "The roughness message, the elevation message and the corrosion allowance message, which answer a liquid call and a General Flow call, a liquid line and a gas line, and a wall call and a rating call.",
+ ["The efficiency message, the gas length message and the swept volume message, which answer a value above a range and a value below it at the same entry point in each case.",
+  "The gas gravity message, the compressibility message and the absolute temperature message, which are raised both by a transmission form and by the elevation group that reads the same state.",
+  "The traverse message, the fitting resistance message and the static gas column message, each of which is reached once from a liquid chain and once from the marched profile above it."],
+ "Efficiency is refused above one and below zero by one sentence, a gas line is refused for a zero length and a negative one, and a swept volume is refused for a missing bore and a negative length.")
+
+q(1, "One message in the meaningless-input catalogue is a physical verdict wearing the shape of an input guard. Which, and what makes it different?",
+ "The one saying the static gas column alone spends the inlet pressure and the line delivers nothing at any rate, because every input behind it is meaningful and the hill is simply taller than the pressure can pay for.",
+ ["The one saying elevation change cannot exceed line length, because a line as tall as it is long is vertical and the verdict is about the geometry rather than about the value supplied.",
+  "The one saying the sweep alone already exceeds the slug limit, because it prescribes two fixes and a guard on a meaningless input has nothing to prescribe.",
+  "The one saying no flow, the outlet pressure meets or exceeds the inlet head, because the inputs are meaningful and the engine still declines to report a rate for the line."],
+ "Six of the eighteen protect dimensions, six protect the gas state, three protect the code factors in the wall calculation, one protects the fitting resistance sum and one protects a traverse. The eighteenth belongs to none of those groups cleanly.")
+
+q(0, "Every guard in this engine is read on both of its sides rather than only on the side that fails. What do the accepted values have in common?",
+ "Each of them is a real engineering condition: no fittings, the ideal efficiency, a line running liquid full, a vertical line, a pipe not expected to corrode and a dry line.",
+ ["Each of them is the value the engine falls back on when the argument is omitted entirely.",
+  "Each of them is a value no real line would ever carry, which is what makes them safe to accept, since accepting an impossible condition cannot mislead a designer who would never ask for it.",
+  "Each of them sits one representable step from a value the engine refuses, and nothing else."],
+ "The resistance sum answers at 0.000000 and refuses at -0.000001, the efficiency answers at 1.000000 and refuses at 1.000001, and the holdup runs the same way. None of those limits is an edge case to be tolerated.")
+
+q(3, "One guard has been walked to the finest resolution the machine offers. Which, and what did that establish?",
+ "The rise of a gas line against its length, where a mile-long line accepts 5280.000000000 ft and refuses the next representable value above it, 9.095e-13 ft higher.",
+ ["The transmission efficiency, where the engine accepts 1.000000 and refuses 1.000001, which is the finest step any input anywhere in this engine has been read at.",
+  "The corrosion allowance, where the engine accepts 0.000000 in and refuses -0.000001 in, which is the only guard read at a step finer than the results are printed to.",
+  "The liquid holdup, where the engine was walked below 1.000001 to the last value it accepts."],
+ "There is no physical difference between those two lines. The point is that the boundary is exactly where it claims to be, with no slack built in on either side.")
+
+q(2, "Why is a guard that refuses its own limit a harder defect to notice than one that accepts nonsense?",
+ "It complains about a valid question, and the usual response is to change the input until the engine stops objecting rather than to suspect the guard.",
+ ["It produces no message at all, since a guard firing on a legal value returns the same bare NaN that the three documented exceptions return, and nothing marks which of them it was.",
+  "It fires only at the limit itself, which is a value no test suite ever reaches.",
+  "It shifts the boundary by one representable step of 9.095e-13 ft, which nothing prints."],
+ "Testing only the bad side confirms that a guard exists. Testing both sides establishes where it is, which is why every one of the seven is handed the value on each side.")
+
+q(0, "Ask each of the five catalogues for an entry it does not carry. What comes back?",
+ "NaN from fittingK, roughnessOf and gradeYield, null from scheduleRow, and from erosionalC an object naming continuous service at a c factor of 100.",
+ ["NaN from all five, since a lookup that cannot answer has no message to attach and the wrapping function is what refuses in words, exactly as the Reynolds number does.",
+  "NaN from fittingK and roughnessOf, null from gradeYield and scheduleRow, and from erosionalC an object carrying an error string naming the service that was asked for.",
+  "An object carrying an error string from all five, since a catalogue miss is a meaningless input rather than a state the method has no answer for and is refused in the ordinary way."],
+ "Four of the five say they do not know, in two different spellings. The fifth answers under a label that is not the one it was asked for.")
+
+q(3, "erosionalC answers an unknown service with continuous service at a c factor of 100. Why was that one left alone?",
+ "Because the RP 14E table belongs to the wellhead engine that two other studios read, so what an unknown service returns there is a decision for that table.",
+ ["Because the returned object is internally consistent and correctly labelled, so a caller who reads the label can detect the substitution and no repair is warranted at all.",
+  "Because a c factor is a held item with no source read against it, so no return it makes can be more correct.",
+  "Because the three c factors of 100.000000, 125.000000 and 175.000000 are the only services the table carries, so an unknown id can only ever be a caller error rather than a gap."],
+ "Repairing it here would fix one caller and change the behaviour of two applications that never asked. A caller who reads only the c factor has silently been given a different service's figure.")
+
+q(2, "The rating over-rates a line whenever the caller drops the corrosion allowance, and no guard will ever catch it. Why not?",
+ "Both calls are fully formed and correct for what they were asked, so what went wrong is the choice of question rather than the value of any input.",
+ ["The allowance is a property of the pipe rather than an argument of the call, so by the time the rating runs there is nothing left in the inputs for a guard to inspect.",
+  "A guard on the allowance would refuse 0.000000 in, which is a legal value for a line that is not expected to corrode, so the guard would have to reject its own limit.",
+  "The two answers differ by 1.500000 times, which is inside the range a rating can legitimately span across the four location classes, so no threshold could separate them."],
+ "The same wall reads 1019.607843 psig with the allowance and 1529.411765 psig without it. A guard cannot fix a question that was fully formed and simply wrong.")
+
+emit(Q, '/root/fc-wip-linesizing/banks/fc2a_m04.json', expect_n=15)
+finish()

@@ -28,8 +28,8 @@
     },
     {
       "domain": "facilities",
-      "engineFiles": 10,
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet and is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "engineFiles": 7,
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. The remaining seven facilities engines have no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     }
   ],
   "localOnly": [
@@ -511,225 +511,251 @@
     },
     {
       "path": "__tests__/facilities.compression.test.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "fbbf68ed7522d1dc140d5c87aa562a6d2090eb92"
     },
     {
       "path": "__tests__/facilities.controlvalve.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "__tests__/facilities.corrosion.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "__tests__/facilities.heattransfer.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "__tests__/facilities.linehydraulics.test.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC2 Pipeline & Line Sizing vendors the line-hydraulics family from engines main AFTER the FC2-0 repairs merged (engines PR #196, merge da9693b), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
+      "vendoredSha": "49614dba71b4edddc3158953e41c8439e28fd570"
     },
     {
       "path": "__tests__/facilities.producedwater.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "__tests__/facilities.pumps.test.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "183c9e4a10796bb794ae84c5d1153ab8bac70a73"
     },
     {
       "path": "__tests__/facilities.relief.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "__tests__/facilities.tanksmetering.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+    },
+    {
+      "path": "__tests__/production.choke.test.js",
+      "kind": "differing",
+      "group": "0-partial-domain-facilities",
+      "reason": "The erosional limit the FC2 course grades lives here, and FC2-0 (engines PR #196) repaired it. Vendored from engines main after that merge, ahead of the canonical pin at 709172f, and sha-identical with engines origin/main. It clears when canonical is next advanced.",
+      "vendoredSha": "58a0f6c7a6095cefb8e4dc5731698777a39cc32a"
     },
     {
       "path": "engines/facilities/compression.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "776f654f8561c0337bf7ca0e653e1a280bb5ba14"
     },
     {
       "path": "engines/facilities/controlValve.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "engines/facilities/corrosion.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "engines/facilities/heatTransfer.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "engines/facilities/lineHydraulics.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC2 Pipeline & Line Sizing vendors the line-hydraulics family from engines main AFTER the FC2-0 repairs merged (engines PR #196, merge da9693b), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
+      "vendoredSha": "b4e2c70ce978fe1c6865a5295832b291132e0fa6"
     },
     {
       "path": "engines/facilities/metering.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "engines/facilities/producedWater.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "engines/facilities/pumps.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "c3651e2ba41bc98d234f2f341662b3046f811990"
     },
     {
       "path": "engines/facilities/relief.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "engines/facilities/storageTank.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+    },
+    {
+      "path": "engines/production/chokePerformance.js",
+      "kind": "differing",
+      "group": "0-partial-domain-facilities",
+      "reason": "The erosional limit the FC2 course grades lives here, and FC2-0 (engines PR #196) repaired it. Vendored from engines main after that merge, ahead of the canonical pin at 709172f, and sha-identical with engines origin/main. It clears when canonical is next advanced.",
+      "vendoredSha": "0925af553382ff09c11b12109deb97b8f9704e67"
+    },
+    {
+      "path": "lib/units/fieldUnits.js",
+      "kind": "extra",
+      "group": "0-partial-domain-facilities",
+      "reason": "Pulled by the FC2-0 vendor (NextGen 27de8d90) because the repaired lineHydraulics.js and chokePerformance.js import their barrel and their field constants from it rather than keeping private roundings. It did not exist at the canonical pin 709172f, so it reads as extra. FC3 now carries the engines-main power and energy block on it too (J_PER_FT_LBF, FT_LBF_PER_MIN_PER_HP, W_PER_HP, KW_PER_HP, J_PER_BTU, BTU_PER_HP_HR), which pumps.js and compression.js import instead of the roundings 0.7457 and 2544.43 that FC3-0 removed. The blob is engines main at 4fa37e6, and the two reconcile when canonical is next advanced.",
+      "vendoredSha": "d2f96efc8d4f16d1c07a09c1e387f13d114ad682"
     },
     {
       "path": "test-data/facilities/goldens/compression_cases.json",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "42c28da29567f3022527f1a5712d5b3e65eebf12"
     },
     {
       "path": "test-data/facilities/goldens/controlvalve_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "test-data/facilities/goldens/corrosion_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "test-data/facilities/goldens/heattransfer_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "test-data/facilities/goldens/linehydraulics_cases.json",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC2 Pipeline & Line Sizing vendors the line-hydraulics family from engines main AFTER the FC2-0 repairs merged (engines PR #196, merge da9693b), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
+      "vendoredSha": "43c71b0b8527de15a2b496eb0e5f50fac93261e2"
     },
     {
       "path": "test-data/facilities/goldens/producedwater_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
-    },
-    {
-      "path": "test-data/facilities/goldens/pumps_cases.json",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "test-data/facilities/goldens/relief_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "test-data/facilities/goldens/tanksmetering_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+    },
+    {
+      "path": "tools/validation/facilities/FINDINGS-rotating.md",
+      "kind": "extra",
+      "group": "0-partial-domain-facilities",
+      "reason": "The FC3-0 rotating wave's own findings file, written by engines PR #197 and absent from the canonical pin 709172f, so it reads as extra. It is vendored with the pumps and compression family it documents, for the same reason FINDINGS-separation.md is vendored with the separator family. It clears when canonical is next advanced.",
+      "vendoredSha": "eefa0fb4c4b766ed4d167d0aafea0f1fe030d706"
     },
     {
       "path": "tools/validation/facilities/oracle_compression.py",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "10fe384cf62c1efad9953b3e64ad3ec3a29d6ea3"
     },
     {
       "path": "tools/validation/facilities/oracle_controlvalve.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_corrosion.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_heattransfer.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_linehydraulics.py",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC2 Pipeline & Line Sizing vendors the line-hydraulics family from engines main AFTER the FC2-0 repairs merged (engines PR #196, merge da9693b), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
+      "vendoredSha": "953d13d1c2f34ce94909070dab94e815c267e81b"
     },
     {
       "path": "tools/validation/facilities/oracle_producedwater.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
-    },
-    {
-      "path": "tools/validation/facilities/oracle_pumps.py",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_relief.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_tanksmetering.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
     },
     {
       "path": "__tests__/earthmodel.adjust.test.js",
@@ -1334,91 +1360,77 @@
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "f5262a523739be110b3a1c7b04e8c70ec2d1ce37",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
-    },
-    {
-      "path": "engines/economics/cashflow.ts",
-      "kind": "differing",
-      "group": "4-economics-revendor",
-      "vendoredSha": "17a3af1c129ce97de2630ac2b224efc4cc54f2ee",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/decisionTree.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "0e6b723987506b5da772c85bdbddd35b150940fc",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/costCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "42363da0f2ca7e6f919d29c58ed8d50d99902f1a",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/facilitiesCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "d20c1d97a81f570555f09c3fe5ec701fe781360f",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/fdpCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "bc641603fcd05a6054018051af9a68b34d3c5aa6",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/scheduleCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "6727c25f942087e98f44707c4d1fed16bcb0121d",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/wellCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "a35fc3034598dbbe9419e5058931d63d796d6cd1",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
-    },
-    {
-      "path": "engines/economics/fiscalRegime.js",
-      "kind": "differing",
-      "group": "4-economics-revendor",
-      "vendoredSha": "64f4811fdfce3228647d76dc5f7140fbcabc29db",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/montecarlo.ts",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "3f73b78488c9996848443b26375c3e25cc5e429a",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/portfolio.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "9255c481cd30269195c0396729425f6664cce075",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/screening.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "9cc861c81de21005fdbed7083806d354b9d1beda",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/voi.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "04302a01f008a12cde1b703825b13ba289155800",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/drilling/profileDesign.js",
@@ -1568,13 +1580,6 @@
       "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
     },
     {
-      "path": "__tests__/economics.cashflow.test.ts",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "2cc14b59b2b926b3c3447bce9b73bc85f45f17a1",
-      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
-    },
-    {
       "path": "__tests__/economics.decision.test.js",
       "kind": "differing",
       "group": "6-test-layer-drift",
@@ -1586,13 +1591,6 @@
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "95fcc172b5cbbb864fc7c207fe2405e8d43c1f9d",
-      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
-    },
-    {
-      "path": "__tests__/economics.fiscal.test.js",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "5a04444c186779e497221976054ed67121640607",
       "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
     },
     {
@@ -1750,13 +1748,6 @@
       "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
     },
     {
-      "path": "test-data/economics/goldens/cashflow_cases.json",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "009c83b44b8d5277bc9873e41b1e0be7d7e9fa25",
-      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
-    },
-    {
       "path": "test-data/economics/goldens/decision_cases.json",
       "kind": "differing",
       "group": "6-test-layer-drift",
@@ -1768,13 +1759,6 @@
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "3c35c0ba1b8e807fa3cb239397dd30fdfc0390ee",
-      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
-    },
-    {
-      "path": "test-data/economics/goldens/fiscal_cases.json",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "96a06d1e9bdacf08470c75ba48fbc1374d018d5a",
       "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
     },
     {
@@ -1925,13 +1909,6 @@
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
-      "path": "tools/validation/economics/FINDINGS-cashflow.md",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "a3cd23b057abff4a5081fc897f12d0aa544c50b2",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
       "path": "tools/validation/economics/FINDINGS-decision.md",
       "kind": "differing",
       "group": "6-test-layer-drift",
@@ -1943,13 +1920,6 @@
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "39ab04456e67460bd1bae27502698622d14dfd45",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
-      "path": "tools/validation/economics/FINDINGS-fiscal.md",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "ebc26ff67e56d219b0209e98b617edd48fe5e0e1",
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
@@ -1967,13 +1937,6 @@
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
-      "path": "tools/validation/economics/oracle_cashflow.py",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "da0fcadd8d664aba8c90193aba988093879a0d06",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
       "path": "tools/validation/economics/oracle_decision.py",
       "kind": "differing",
       "group": "6-test-layer-drift",
@@ -1985,13 +1948,6 @@
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "ba6e3767f6deb9750750375879924fcbc1f1d8cd",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
-      "path": "tools/validation/economics/oracle_fiscal.py",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "9d1e1a4eeb20a169c333f425308cf99a8eab2ce6",
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {

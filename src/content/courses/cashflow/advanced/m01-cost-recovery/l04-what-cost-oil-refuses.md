@@ -6,7 +6,7 @@ The production sharing rows answer every question except the one that decides wh
 
 ## The columns that are there
 
-A PSC row reports gross_revenue, royalty, opex, capex, taxable_income (the contractor's profit oil), tax, net_cash_flow, psc_contractor_share_pct, the discounted and cumulative flows and oil_bbl. There is no depreciation column, because capex under a PSC is recovered as cost oil rather than written off, and there is no cost recovered column and no carried forward column. The KPI block ends with unrecovered cost at cessation not reported.
+A PSC row reports gross_revenue, royalty, opex, capex, taxable_income (the contractor's profit oil), tax, net_cash_flow, psc_contractor_share_pct, the discounted and cumulative flows and oil_bbl. There is no depreciation column, because capex under a PSC is recovered as cost oil rather than written off, and there is no cost recovered column. The carried balance has been reportable since engines 3.10.0: the published psc_pool_unrecovered_at_cessation case prints psc_cost_pool_after on every row and a KPI for the pool that cessation forfeits.
 
 ## The number that is not there
 
@@ -14,7 +14,7 @@ AKATA under production sharing at a 30 percent cap ends 2035 with 207346412.26 o
 
 ## Working interest halves everything
 
-psc_wi_50 sets psc_working_interest_pct 50 on the hand-derived case. Every monetary line halves: gross revenue 50000000.00, royalty 5000000.00, capex 40000000.00, taxable income 13500000.00, tax 6750000.00, net -20250000.00 then 19750000.00. The oil_bbl column halves too, to 500000.00, and total oil reads 1000000.00 bbl. NPV halves to -2295454.55; IRR -2.4691 percent, take 101.0000 percent and DPI -0.057386 do not move. Under a PSC the working interest is applied at the door, so the rows are the share and the volumes are entitlement volumes. That is a different ledger from the joint venture one, where the rows keep field revenue and field volumes.
+psc_wi_50 sets psc_working_interest_pct 50 on the hand-derived case. Every monetary line halves: gross revenue 50000000.00, royalty 5000000.00, capex 40000000.00, taxable income 13500000.00, tax 6750000.00, net -20250000.00 then 19750000.00. The oil_bbl column halves too, to 500000.00, and total oil reads 1000000.00 bbl. NPV halves to -2295454.55; IRR -2.4691 percent, take 101.0000 percent and DPI -0.057386 do not move. Under a PSC the working interest is applied at the door, so the rows are the share and the volumes are entitlement volumes. The joint venture ledger now does the same: since engines 3.10.0 every JV monetary line and the volumes are the share too. Until that repair the JV rows kept field revenue and field volumes while reporting royalty, tax and net cash flow at the share, which is the mismatch that made take move with the interest.
 
 ## Abandonment rides the pool
 
@@ -26,4 +26,4 @@ Reading psc_contractor_share_pct as the contractor's share of revenue. It is the
 
 ## Exercise
 
-Open the 30 percent AKATA case and look for any output column that reports the carried pool. Then write the cost recovered and the pool at the end of 2035 from the march and say what the take of 120.4874 percent hides.
+Open the 30 percent AKATA case and write the cost recovered in each year from the march, the one figure no column reports. Then give the pool at the end of 2035 and say what the take of 120.4874 percent hides.

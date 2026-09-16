@@ -1,0 +1,338 @@
+[
+ {
+  "atFlowGpm": 1500.0,
+  "frictionHeadFt": 200.0,
+  "headFt": 352.37125329205253,
+  "nParallel": 1,
+  "nSeries": 1,
+  "points": [
+   {
+    "headFt": 520.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 470.0,
+    "qGpm": 800.0
+   },
+   {
+    "headFt": 330.0,
+    "qGpm": 1600.0
+   },
+   {
+    "headFt": 180.0,
+    "qGpm": 2200.0
+   }
+  ],
+  "qGpm": 1508.865997872439,
+  "staticHeadFt": 150.0
+ },
+ {
+  "atFlowGpm": 1500.0,
+  "frictionHeadFt": 300.0,
+  "headFt": 352.77445520525924,
+  "nParallel": 1,
+  "nSeries": 1,
+  "points": [
+   {
+    "headFt": 520.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 470.0,
+    "qGpm": 800.0
+   },
+   {
+    "headFt": 330.0,
+    "qGpm": 1600.0
+   },
+   {
+    "headFt": 180.0,
+    "qGpm": 2200.0
+   }
+  ],
+  "qGpm": 1506.9201750721384,
+  "staticHeadFt": 50.0
+ },
+ {
+  "atFlowGpm": 1500.0,
+  "frictionHeadFt": 300.0,
+  "headFt": 458.3126381501124,
+  "nParallel": 2,
+  "nSeries": 1,
+  "points": [
+   {
+    "headFt": 520.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 470.0,
+    "qGpm": 800.0
+   },
+   {
+    "headFt": 330.0,
+    "qGpm": 1600.0
+   },
+   {
+    "headFt": 180.0,
+    "qGpm": 2200.0
+   }
+  ],
+  "qGpm": 1749.9556526169006,
+  "staticHeadFt": 50.0
+ },
+ {
+  "atFlowGpm": 1500.0,
+  "frictionHeadFt": 300.0,
+  "headFt": 488.03173558849784,
+  "nParallel": 3,
+  "nSeries": 1,
+  "points": [
+   {
+    "headFt": 520.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 470.0,
+    "qGpm": 800.0
+   },
+   {
+    "headFt": 330.0,
+    "qGpm": 1600.0
+   },
+   {
+    "headFt": 180.0,
+    "qGpm": 2200.0
+   }
+  ],
+  "qGpm": 1812.5225562496412,
+  "staticHeadFt": 50.0
+ },
+ {
+  "atFlowGpm": 1200.0,
+  "frictionHeadFt": 120.0,
+  "headFt": 633.2510994899442,
+  "nParallel": 1,
+  "nSeries": 2,
+  "points": [
+   {
+    "headFt": 520.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 470.0,
+    "qGpm": 800.0
+   },
+   {
+    "headFt": 330.0,
+    "qGpm": 1600.0
+   },
+   {
+    "headFt": 180.0,
+    "qGpm": 2200.0
+   }
+  ],
+  "qGpm": 1673.0251623568997,
+  "staticHeadFt": 400.0
+ },
+ {
+  "atFlowGpm": 900.0,
+  "frictionHeadFt": 60.0,
+  "headFt": 123.69244260100213,
+  "nParallel": 1,
+  "nSeries": 1,
+  "points": [
+   {
+    "headFt": 180.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 168.0,
+    "qGpm": 500.0
+   },
+   {
+    "headFt": 130.0,
+    "qGpm": 1000.0
+   },
+   {
+    "headFt": 82.0,
+    "qGpm": 1400.0
+   }
+  ],
+  "qGpm": 1062.9430723766577,
+  "staticHeadFt": 40.0
+ },
+ {
+  "atFlowGpm": 900.0,
+  "frictionHeadFt": 60.0,
+  "headFt": 160.05510729593553,
+  "nParallel": 2,
+  "nSeries": 1,
+  "points": [
+   {
+    "headFt": 180.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 168.0,
+    "qGpm": 500.0
+   },
+   {
+    "headFt": 130.0,
+    "qGpm": 1000.0
+   },
+   {
+    "headFt": 82.0,
+    "qGpm": 1400.0
+   }
+  ],
+  "qGpm": 1273.0844231609817,
+  "staticHeadFt": 40.0
+ },
+ {
+  "atFlowGpm": 1800.0,
+  "frictionHeadFt": 260.0,
+  "headFt": 425.4919187040624,
+  "nParallel": 1,
+  "nSeries": 1,
+  "points": [
+   {
+    "headFt": 640.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 610.0,
+    "qGpm": 600.0
+   },
+   {
+    "headFt": 520.0,
+    "qGpm": 1200.0
+   },
+   {
+    "headFt": 370.0,
+    "qGpm": 1800.0
+   },
+   {
+    "headFt": 150.0,
+    "qGpm": 2400.0
+   }
+  ],
+  "qGpm": 1600.2329356896792,
+  "staticHeadFt": 220.0
+ },
+ {
+  "atFlowGpm": 600.0,
+  "frictionHeadFt": 45.0,
+  "headFt": 66.53480767881518,
+  "nParallel": 1,
+  "nSeries": 1,
+  "points": [
+   {
+    "headFt": 95.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 90.0,
+    "qGpm": 250.0
+   },
+   {
+    "headFt": 76.0,
+    "qGpm": 500.0
+   },
+   {
+    "headFt": 52.0,
+    "qGpm": 750.0
+   }
+  ],
+  "qGpm": 610.1462623261093,
+  "staticHeadFt": 20.0
+ },
+ {
+  "atFlowGpm": 1400.0,
+  "frictionHeadFt": 180.0,
+  "headFt": 312.8360971978625,
+  "nParallel": 1,
+  "nSeries": 1,
+  "points": [
+   {
+    "headFt": 410.0,
+    "qGpm": 200.0
+   },
+   {
+    "headFt": 372.0,
+    "qGpm": 900.0
+   },
+   {
+    "headFt": 300.0,
+    "qGpm": 1500.0
+   },
+   {
+    "headFt": 190.0,
+    "qGpm": 2100.0
+   }
+  ],
+  "qGpm": 1410.986161259427,
+  "staticHeadFt": 130.0
+ },
+ {
+  "atFlowGpm": 3000.0,
+  "frictionHeadFt": 600.0,
+  "headFt": 799.8867669460052,
+  "nParallel": 1,
+  "nSeries": 1,
+  "points": [
+   {
+    "headFt": 1200.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 1150.0,
+    "qGpm": 1000.0
+   },
+   {
+    "headFt": 990.0,
+    "qGpm": 2000.0
+   },
+   {
+    "headFt": 720.0,
+    "qGpm": 3000.0
+   },
+   {
+    "headFt": 330.0,
+    "qGpm": 4000.0
+   }
+  ],
+  "qGpm": 2738.302668477332,
+  "staticHeadFt": 300.0
+ },
+ {
+  "atFlowGpm": 3000.0,
+  "frictionHeadFt": 600.0,
+  "headFt": 1054.2032568166965,
+  "nParallel": 2,
+  "nSeries": 1,
+  "points": [
+   {
+    "headFt": 1200.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 1150.0,
+    "qGpm": 1000.0
+   },
+   {
+    "headFt": 990.0,
+    "qGpm": 2000.0
+   },
+   {
+    "headFt": 720.0,
+    "qGpm": 3000.0
+   },
+   {
+    "headFt": 330.0,
+    "qGpm": 4000.0
+   }
+  ],
+  "qGpm": 3363.487602511781,
+  "staticHeadFt": 300.0
+ }
+]

@@ -1,6 +1,6 @@
 # CIT and the two-thirds restriction
 
-Companies income tax is the second profit tax on the same cash, on a base that includes gas and excludes the production allowance, with a capital allowance that is capped at two thirds of the profit and never carried.
+Companies income tax is the second profit tax on the same cash, on a base that includes gas and excludes the production allowance, with a capital allowance that is capped at two thirds of the profit and carried when the cap refuses it.
 
 {{panel:ec-fiscal-explorer}}
 
@@ -21,16 +21,18 @@ On a one-year field the recovery years are the whole answer: at 1 the entire 300
 
 ## The restriction
 
-cpr_forfeiture has cit_assessable_profit 7987389.27, and its recoverable costs are 40000000.00 of opex plus the year's fifth of 100000000.00 of capex. The full allowance would take the base below zero. The engine restricts it to two thirds of the assessable profit, so cit_chargeable_profit is 2662463.09, one third of 7987389.27, and cit_tax is 798738.93. What the restriction disallowed is not carried anywhere: cit_loss_carryforward reads 0.00, cpr_deferred_to_next reads 8000000.00 for a different reason, and the extraction's findings record that the disallowed amount has no carryforward in this engine, where the Act carries it. HCT on the same row is 2546216.78 on 8487389.27, unrestricted.
+cpr_forfeiture has cit_assessable_profit 7987389.27, and its recoverable costs are 40000000.00 of opex plus the year's fifth of 100000000.00 of capex. The full allowance would take the base below zero. The engine restricts it to two thirds of the assessable profit, so cit_chargeable_profit is 2662463.09, one third of 7987389.27, and cit_tax is 798738.93. HCT on the same row is 2546216.78 on 8487389.27, unrestricted.
+
+What the restriction refuses is carried. Since engines 3.10.0 the disallowed allowance goes into a carryforward and is claimed in the next year with room for it, which is what the Act does. The published pair prices the rule: pia_cit_allowance_restricted_carry reports NPV -113389070.73, and pia_cit_allowance_no_carry, the same field with the carry switched off, reports -115209545.41. Switching it off is how the engine behaved before that release. On cpr_forfeiture nothing moves either way, because one year has no next year to carry into, and cpr_deferred_to_next reads 8000000.00 for a different reason, the cost price ratio cap.
 
 ## The mistake
 
-Reading the two thirds as a floor on tax of one third of profit in every year. It is a cap on the allowance, and it only acts in a year where the allowance is large against a thin profit; the worked example's 60000000.00 against 1039994854.24 is nowhere near it. The other is expecting the disallowed amount next year.
+Reading the two thirds as a floor on tax of one third of profit in every year. It is a cap on the allowance, and it only acts in a year where the allowance is large against a thin profit; the worked example's 60000000.00 against 1039994854.24 is nowhere near it. The other is reading the old behaviour forward and writing the disallowed amount off, which understates every later year's allowance.
 
 ## What it refuses
 
-CIT has no production allowance, no terrain and no reading; its rate is 30 in every published case. And a company that hits the restriction has lost that allowance for good in this engine.
+CIT has no production allowance, no terrain and no reading; its rate is 30 in every published case. And the carryforward needs a later year to land in, so a company whose ledger ends in the year the restriction binds loses the allowance anyway.
 
 ## Exercise
 
-Write the CIT on cpr_forfeiture from its assessable profit and say why the chargeable profit is exactly one third of it. Then find the row in which the disallowed allowance reappears.
+Write the CIT on cpr_forfeiture from its assessable profit and say why the chargeable profit is exactly one third of it. Then say why the disallowed allowance reappears nowhere on that ledger although the engine now carries it.

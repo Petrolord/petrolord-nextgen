@@ -13,9 +13,9 @@ On the Designer's two default regimes and its default project the summary is two
 | rank | regime | npv | irr | paybackPeriod | rFactorPayoutYear | govTake | effectiveTaxRate |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Concessionary (Royalty/Tax) | 274.3670 | 37.4526 | 3 | 3 | 1040.6750 | 46.3452 |
-| 2 | Nigerian PIA (PSC) | 173.4150 | 26.2153 | 4 | 3 | 1247.0980 | 55.5380 |
+| 2 | Nigerian PIA (PSC) | 169.7176 | 26.1629 | 4 | 3 | 1269.4940 | 56.5354 |
 
-Money is millions of USD, so the Concessionary regime hands the government 1040.6750 million USD over the life while the production sharing contract hands it 1247.0980 million USD. Two further columns, `royaltyRate` and `contractorSplit`, are published by the oracle rather than returned by the engine, so the tier a row selected can be read without deriving it.
+Money is millions of USD, so the Concessionary regime hands the government 1040.6750 million USD over the life while the production sharing contract hands it 1269.4940 million USD. Two further columns, `royaltyRate` and `contractorSplit`, are published by the oracle rather than returned by the engine, so the tier a row selected can be read without deriving it.
 
 ## The column that never moves
 

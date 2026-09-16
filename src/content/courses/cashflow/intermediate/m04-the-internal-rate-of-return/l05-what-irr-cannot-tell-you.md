@@ -18,7 +18,7 @@ The discount rate never enters the IRR. On multiyear_jv_real the IRR is 47.9020 
 
 ## Which root
 
-On a vector that ends negative the IRR is one of two roots and the return does not say which. two_roots_2_and_6, [-100, 208, -108.12], reports 6.0000 percent where the oracle reads 2.0000. AKATA with an abandonment of 60000000 reports 23.2570 percent. Neither number is wrong, and neither is complete.
+On a vector that ends negative there are two crossings, and the engine will not choose between them. two_roots_2_and_6, [-100, 208, -108.12], returns null with irrStatus multiple-roots, and so does AKATA with an abandonment of 60000000. Until engines 3.10.0 those two returned 6.0000 percent, where the oracle read 2.0000, and 23.2570 percent, each one crossing of two, with nothing to say the other existed. Either way the IRR cannot tell you which rate a hurdle should be compared against, and on these vectors it will not name one at all.
 
 ## The mistake
 
@@ -26,7 +26,7 @@ The careful mistake is the ranking one. A reader with two candidate fields sorts
 
 ## What it refuses
 
-It refuses to report scale, to rank, to use the discount rate, to count its roots, or to name the basis it should be compared on.
+It refuses to report scale, to rank, to use the discount rate, to choose among its roots, or to name the basis it should be compared on.
 
 ## Exercise
 

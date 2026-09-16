@@ -29,13 +29,13 @@ The other three split profit oil on the R factor and cap cost recovery at 80, 90
 
 ## What the split buys the government
 
-On the Designer's default project, total contractor net cash flow is 406.2057 million USD under the PIA template, 428.8774 under Ghana, 912.1029 under Brazil, 980.9313 under the Gulf of Mexico, 545.1955 under Angola and 986.7327 under the Generic template. Total revenue behind every one of those is 2686.9277 million USD.
+On the Designer's default project, total contractor net cash flow is 406.2057 million USD under the PIA template, 428.8774 under Ghana, 623.9658 under Brazil, 980.9313 under the Gulf of Mexico, 481.7318 under Angola and 986.7327 under the Generic template. Total revenue behind every one of those is 2686.9277 million USD.
 
 The two families separate cleanly. The three concession shaped templates occupy the top of that range and the three sharing templates the bottom, and no tax rate in the list predicts the ordering.
 
 ## The mistake
 
-The careful reader ranks by the headline royalty, since it is the number a press release quotes. Angola charges 0 percent and leaves the contractor 545.1955 million USD. The Generic template charges 12.5 percent and leaves 986.7327 million USD. Brazil charges 10 percent, carries the heaviest tax stack in the list at CIT 34 percent with RRT 40 percent, and still leaves 912.1029 million USD.
+The careful reader ranks by the headline royalty, since it is the number a press release quotes. Angola charges 0 percent and leaves the contractor 481.7318 million USD. The Generic template charges 12.5 percent and leaves 986.7327 million USD. Brazil charges 10 percent, pays the most tax of the six at 852.8256 million USD, and still leaves 623.9658 million USD.
 
 ## What a template refuses
 

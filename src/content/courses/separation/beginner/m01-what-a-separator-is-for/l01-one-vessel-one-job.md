@@ -14,7 +14,7 @@ Nine numbers, and each one is an input to the next. A gas density of 2.239712 lb
 
 ## What the retired app did instead
 
-The Suite app this engine replaced hardcoded z at 0.850000 for every gas at every condition, used one K at every pressure, sized only two-phase vessels, and took its gas velocity from the diameter of the previous render. The last of those is the worst kind of fault, because the number on the screen was a correct calculation on a diameter the user had already replaced.
+The Suite app this engine replaced hardcoded z at 0.85 for every gas at every condition, used one K at every pressure, sized only two-phase vessels, and took its gas velocity from the diameter of the previous render. The last of those is the worst kind of fault, because the number on the screen was a correct calculation on a diameter the user had already replaced.
 
 ## What sizing does not answer
 

@@ -181,6 +181,16 @@ export const PANELS = {
   'fc-slug-explorer': React.lazy(() => import('@/components/course/panels/separation/SlugExplorer')),
   'fc-layout-explorer': React.lazy(() => import('@/components/course/panels/separation/LayoutExplorer')),
 
+  // FC2 Line Sizing & Hydraulics
+  'fc-liquid-explorer': React.lazy(() => import('@/components/course/panels/linesizing/LiquidExplorer')),
+  'fc-gasline-explorer': React.lazy(() => import('@/components/course/panels/linesizing/GasLineExplorer')),
+  'fc-wall-pig-explorer': React.lazy(() => import('@/components/course/panels/linesizing/WallPigExplorer')),
+
+  // FC3 Rotating Equipment
+  'fc-pump-explorer': React.lazy(() => import('@/components/course/panels/rotating/PumpExplorer')),
+  'fc-suction-explorer': React.lazy(() => import('@/components/course/panels/rotating/SuctionExplorer')),
+  'fc-compressor-explorer': React.lazy(() => import('@/components/course/panels/rotating/CompressorExplorer')),
+
   // FC4 Gas Processing
   'fc-water-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/WaterExplorer')),
   'fc-absorber-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/AbsorberExplorer')),

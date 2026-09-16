@@ -23,8 +23,8 @@ AKATA under the PIA is shallow water, and its 2029 production royalty on 1860320
 
 | terrain | 2029 production royalty | total royalties | NPV |
 | --- | --- | --- | --- |
-| onshore | 27454240.00 | 143184623.40 | 36246417.05 |
-| shallow_water | 22944240.00 | 122393644.64 | 42943268.01 |
+| onshore | 27454240.00 | 143184623.40 | 37060198.23 |
+| shallow_water | 22944240.00 | 122393644.64 | 43223505.88 |
 | deep_offshore, conservative | 9301600.00 | 59501441.00 | 141623594.88 |
 
 Deep offshore's NPV gain is not only royalty; the conservative reading also zeroes the hydrocarbon tax, and the aggressive reading leaves NPV at 61725382.46 with the same 59501441.00 of royalties. But the royalty alone moves from 143184623.40 to 59501441.00 across one string in a config, and no other single input on this field does that.

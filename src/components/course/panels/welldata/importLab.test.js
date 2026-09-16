@@ -15,6 +15,8 @@ describe('welldata import explorer: engine math', () => {
     expect(r.convertedCurves).toBe(2);
     expect(r.recognizedKinds).toBe(4);
     expect(r.irregularUniform).toBe(0);
+    // The graded field on irregular_20 is the sample count, not the yes/no.
+    expect(r.irregularSamples).toBe(121);
   });
 
   it('converts the depth column by exactly 0.3048', () => {

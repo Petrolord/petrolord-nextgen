@@ -1,0 +1,101 @@
+{
+ "app_slug": "wellcorrelation",
+ "tier": "advanced",
+ "tier_name": "Expert",
+ "generated": "2026-09-16",
+ "old_text_source": "the live production row, read 2026-09-16",
+ "prompt_old": "Ekene-4 TDs above TOP_B. Predict the missing pick two ways from the three wells that carry it: project the mean TOP_A to TOP_B interval down from TOP_A (the layer-cake estimate), and the mean TOP_SAND to TOP_B interval down from TOP_SAND. Report both predictions, their spread (that is the growth uncertainty), the two mean intervals, and the structural relief of TOP_B where it is drilled.",
+ "prompt_new": "Ekene-4 TDs above TOP_B. Predict the missing pick two ways from the three wells that carry it: project the mean TOP_A to TOP_B interval down from TOP_A (the layer-cake estimate), and the mean TOP_SAND to TOP_B interval down from TOP_SAND. Report both predictions, their spread (that is the growth uncertainty), the two mean intervals, and the structural relief of TOP_B where it is drilled.",
+ "dataset_old": "correlation/ekene-section",
+ "dataset_new": "correlation/ekene-section",
+ "fields_old": [
+  {
+   "key": "a_to_b_mean",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "Mean TOP_A to TOP_B interval",
+   "expected": 141
+  },
+  {
+   "key": "sand_to_b_mean",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "Mean TOP_SAND to TOP_B interval",
+   "expected": 92
+  },
+  {
+   "key": "w4_topb_layercake",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "Ekene-4 TOP_B, layer-cake estimate",
+   "expected": 1671
+  },
+  {
+   "key": "w4_topb_from_sand",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "Ekene-4 TOP_B, from TOP_SAND",
+   "expected": 1682
+  },
+  {
+   "key": "prediction_spread",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "Spread between the two estimates",
+   "expected": 11
+  },
+  {
+   "key": "topb_relief",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "TOP_B structural relief (3 wells)",
+   "expected": 34
+  }
+ ],
+ "fields_new": [
+  {
+   "key": "a_to_b_mean",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "Mean TOP_A to TOP_B interval",
+   "expected": 141
+  },
+  {
+   "key": "sand_to_b_mean",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "Mean TOP_SAND to TOP_B interval",
+   "expected": 92
+  },
+  {
+   "key": "w4_topb_layercake",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "Ekene-4 TOP_B, layer-cake estimate",
+   "expected": 1671
+  },
+  {
+   "key": "w4_topb_from_sand",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "Ekene-4 TOP_B, from TOP_SAND",
+   "expected": 1682
+  },
+  {
+   "key": "prediction_spread",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "Spread between the two estimates",
+   "expected": 11
+  },
+  {
+   "key": "topb_relief",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "TOP_B structural relief where it is drilled",
+   "expected": 34
+  }
+ ],
+ "prompt_replacements": [],
+ "dataset_replacements": []
+}

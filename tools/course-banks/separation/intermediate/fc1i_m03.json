@@ -4,7 +4,7 @@
   "options": [
    "The 110.000000 MMscfd stream taken to 614.700000 psia, 95.000000 degF and a z of 0.908065, which is the volume the drum passes each second.",
    "The 110.000000 MMscfd stream at standard conditions, which is 1273.148148 standard ft3/s and is the volume a separator running at 614.700000 psia has to move.",
-   "The gas density of 2.239712 lb/ft3 multiplied by the gas area, which turns a mass rate into the volume the gas space is asked to carry.",
+   "The gas density of 2.239712 lb/ft3 multiplied by the gas area of 25.132741 ft2, which turns a mass rate into the volume the gas space is asked to carry.",
    "The settling velocity of 1.958255 ft/s times the gas area of 25.132741 ft2."
   ],
   "answer": 0,
@@ -22,7 +22,7 @@
   "explanation": "From 5.000000 ft to 6.000000 ft the velocity falls from 3.003871 ft/s to 2.086022 ft/s. From 9.000000 ft to 10.000000 ft the same foot is worth 0.927121 ft/s down to 0.750968 ft/s."
  },
  {
-  "prompt": "What does the margin of 1.668891 on the 8.000000 ft drum measure?",
+  "prompt": "A margin of 1.668891 is reported beside ABANA-2. Which division produced it?",
   "options": [
    "The gas velocity divided by the settling velocity, so any figure above one says the gas is winning and liquid is leaving with it.",
    "The settling velocity of 1.958255 ft/s divided by the gas velocity of 1.173387 ft/s, so the gas in the gas space moves more slowly than a droplet falls through it.",
@@ -59,7 +59,7 @@
   "options": [
    "A margin of one on a drum whose verdict is false, because the rounded figure and the threshold are the same number.",
    "The margin the engine would return at a level of 0.300000, since rounding a ratio has the same effect as moving the level that produced it.",
-   "Nothing that matters, since the verdict of false travels beside the margin and cannot be rounded away.",
+   "Nothing that matters, since the verdict of false travels beside the margin on every row and a verdict cannot be rounded away.",
    "The 7.000000 ft drum's margin in the place of the 6.000000 ft drum's."
   ],
   "answer": 0,

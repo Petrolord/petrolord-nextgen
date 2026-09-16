@@ -1,6 +1,6 @@
 # Below every threshold
 
-A price that never reaches a tier does not escape royalty. The walk starts at the first tier's rate, so the first tier is the floor, and on a poor price deck that floor is the only rate the field ever pays.
+A price that never reaches a tier does not escape royalty. The rate falls back to the lowest tier's, so that tier is the floor, and on a poor price deck that floor is the only rate the field ever pays.
 
 {{panel:ec-instrument-explorer}}
 
@@ -16,17 +16,17 @@ A price that never reaches a tier does not escape royalty. The walk starts at th
 | 5 | 101.3476 | 12.6685 | 0.125000 |
 | 8 | 73.3389 | 9.1674 | 0.125000 |
 
-The implied rate is 0.125000 in every year. That is the first tier's rate, charged because `getSlidingScaleRoyalty` initialises to it before the walk begins, not because any threshold was met.
+The implied rate is 0.125000 in every year. That is the lowest tier's rate, charged because `getSlidingScaleRoyalty` falls back to it when no threshold has been reached, not because any threshold was met.
 
 ## What that costs
 
-The case is not a marginal project, it is a losing one, and the royalty is charged anyway. Over the life it pays 177.3774 million USD of royalty on total revenue of 1419.0195, while contractor net cash flow reaches only 80.8085, government cash flow is 396.7675 and NPV at 10 percent is negative 111.7254. IRR is 2.9910 percent, payback does not arrive until year 12, and 72.2941 million USD of cost is still sitting unrecovered when the horizon closes. A royalty larger than twice the contractor's whole lifetime cash flow was collected from a project that destroyed value.
+The case is not a marginal project, it is a losing one, and the royalty is charged anyway. Over the life it pays 177.3774 million USD of royalty on total revenue of 1419.0195, while contractor net cash flow reaches only 80.8085, government cash flow is 396.7675 and NPV at 10 percent is negative 111.7254. The internal rate of return is null, payback does not arrive until year 12, and 72.2941 million USD of cost is still sitting unrecovered when the horizon closes. A royalty larger than twice the contractor's whole lifetime cash flow was collected from a project that destroyed value.
 
 ## The mistake
 
 The wrong intuition is that a tier list keyed at 60 and 80 USD per bbl means no royalty below 60. It means 12.5 percent below 60. A reader who assumes zero will predict a royalty line of zeros, a much larger profit oil, and a project that looks marginal rather than negative. The number that gives it away is 18.0299 in year 1 on 144.2389 of revenue.
 
-The other trap is the "Nigeria - PIA (2021)" template, whose first tier is keyed at 0 USD/bbl. There the first tier is reached at any positive price, so the initialisation never shows itself and the behaviour looks like an ordinary threshold rule. Every tier list has to be checked for what its first entry does at low price, because that entry is a default and not only a tier.
+The other trap is the "Nigeria - PIA (2021)" template, whose lowest tier is keyed at 0 USD/bbl. There that tier is reached at any positive price, so the fallback never shows itself and the behaviour looks like an ordinary threshold rule. Every tier list has to be checked for what its lowest entry does at low price, because that entry is a default and not only a tier.
 
 ## What it refuses
 

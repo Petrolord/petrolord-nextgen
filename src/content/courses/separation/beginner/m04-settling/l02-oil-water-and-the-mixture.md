@@ -22,7 +22,7 @@ The error is modest here because AGBAMI is not far from even. On ABANA-1, at 260
 
 ## The same fluids, a different mixture
 
-ABANA-1 and ABANA-2 hold identical oil and water, 53.675380 and 64.896000 lb/ft3. Their mixtures differ, 55.171463 against 55.919504, purely because the water cut differs: 400.000000 in 3000.000000 bpd on the test separator against 6000.000000 in 30000.000000 bpd on the production separator.
+ABANA-1 and ABANA-2 hold identical oil and water, 53.675380 and 64.896000 lb/ft3. Their mixtures differ, 55.171463 against 55.919504, purely because the water cut differs: 400.000000 bpd of water against 2600.000000 of oil on the test separator, and 6000.000000 against 24000.000000 on the production separator.
 
 So the mixture is a property of the stream rather than of the fluids, and it moves whenever the water cut moves. A field watering out over its life walks this number upward year by year, and the vessel sized at first oil was sized against the driest mixture it will ever see.
 

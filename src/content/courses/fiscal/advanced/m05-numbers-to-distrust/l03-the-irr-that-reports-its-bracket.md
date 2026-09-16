@@ -1,18 +1,16 @@
 # The IRR that reports its bracket
 
-`calculateIRR` is documented as robust with no artificial cap, and it has a bracket. When the root lies outside that bracket the function returns the bracket, and 102400 is printed where a rate should be.
+`calculateIRR` was documented as robust with no artificial cap, and it had a bracket. When the root lay outside it the function returned the bracket. It now returns nothing, and says why.
 
 {{panel:ec-comparison-explorer}}
 
-## How the search is set up
+## The band, and the four refusals
 
-The solver starts at 100 percent and doubles ten times, reaching 102400 percent. If the NPV is still positive at the top of that range it stops and returns 102400. Its 80 bisections run only when a sign change was found. Before any of that it has two early exits: it returns 0 when the flows never change sign, and 0 when the NPV at a rate of zero is not above zero.
+`calculateIRR` follows the shared contract in `engines/economics/irrContract.js`, the same one the screening engine uses. It searches the band from -99 to 1000 percent and returns a number only when exactly one rate in that band zeroes the NPV. A negative root inside the band is reported as the negative rate it is. Otherwise it returns null and `calculateIRRResult` says why: `no-sign-change` when the flows never change sign, `no-root` when no rate in the band zeroes the NPV, `above-clamp` when the only root is above the band, and `multiple-roots` when several are, with `irrRoots` listing the ones inside and `irrRootAboveBand` flagging one beyond.
 
 ## The published case
 
-The golden pins flows of -1 in year 1 and 2000 in year 2. The engine reports 102400.0000 percent, the oracle reports no root, and the true rate is 199900 percent. Both numbers are pinned with the disagreement recorded, so the bracket cannot change quietly.
-
-`calculateNPV` on those same flows makes the bracket visible:
+The golden pins flows of -1 in year 1 and 2000 in year 2. The true rate is 199900 percent, far above the band, so the engine returns null with the status above-clamp. The retired bisection doubled from 100 percent ten times, reached 102400 percent, found the NPV still positive and returned 102400 as a rate. `calculateNPV` on those flows makes the distance visible:
 
 | rate percent | NPV |
 | --- | --- |
@@ -24,28 +22,24 @@ The golden pins flows of -1 in year 1 and 2000 in year 2. The engine reports 102
 | 199900 | 0.0000 |
 | 400000 | -0.0001 |
 
-At 102400 percent the NPV is 0.0009, which is small, positive, and not zero. The curve is that flat out there, and the engine has no way to tell a reader it stopped early.
+At 102400 percent the NPV is 0.0009, small, positive, and not zero. The curve is that flat out there, and the old solver could not say it had stopped early.
+
+## A root inside the old bracket
+
+`irr_above_clamp_inside_old_bracket` has flows of -100 then 1500 and a root of 1400.0000 percent. The doubling would have reported that one, because 1400 sits well inside 102400. It is above the band, so it is null with the same status. The band says what the engine will call an internal rate of return, not how far its search can reach.
+
+## The two zeros, retired
+
+The old solver returned 0 for two unlike situations, no sign change and a project whose only root is negative. Each now carries its own answer. `irr_all_positive_no_sign_change` returns null with the status no-sign-change on a profitable project whose NPV at 10 percent is 25.6198. `irr_negative_root_reported` has flows of -100 then 90, loses money at every rate, and reports the negative root itself, -10.0000 percent, on an NPV at 10 percent of -16.5289.
 
 ## The clamp next door
 
-The screening engine in the same package solves its IRR by Newton iteration and returns a 1000 percent clamp when the iteration runs away. Two solvers, two different methods, and the same failure: each reports the edge of its own search as an answer.
-
-The tell is identical in both, a suspiciously round number where a rate should be: 102400 is 100 doubled ten times, and 1000 is a clamp someone typed. Neither is a root.
-
-Roundness is the tell, not size. The published `capex_multiplier_0_7` case returns an IRR of 1095.4783 percent on a real ledger, and that is a root, not a bracket.
-
-## The zero that is not a root
-
-The two zero returns deserve as much attention. `irr_all_positive` has no sign change and reports 0.0000 percent with an NPV at 10 percent of 25.6198, a profitable project. `irr_npv0_negative` has flows of -100 then 90, loses money at every rate, and also reports 0.0000 percent, with an NPV at 10 percent of -16.5289. One zero means the question was ill-posed and the other means the answer is negative, and they print the same.
-
-## What the solver refuses
-
-It refuses to report a negative internal rate of return, refuses to search past 102400 percent, and refuses to distinguish its three special returns from a computed root. Nothing in the return value says which path produced it.
+The screening engine solves its IRR by Newton iteration and returned a 1000 percent clamp when the iteration ran away. Two solvers, two methods, one failure: each reported the edge of its own search as an answer. The tell was identical, a suspiciously round number where a rate should be.
 
 ## The mistake
 
-The careful mistake is sanity-checking an IRR by its magnitude. A reader who rejects 102400 percent as absurd and accepts 0.0000 percent as break-even has caught the harmless case and swallowed the dangerous one. Check the NPV at a rate of zero first: positive and no sign change gives one kind of zero, negative gives the other.
+The careful mistake is sanity-checking an IRR by its magnitude. Read the status word, and never quote a rate the engine did not give. Hold the shape of the published `capex_multiplier_0_7` case: its NPV is zero at 1095.4783 percent, above the band, and at -20.4852 percent, inside it, so the engine returns null with the status multiple-roots, lists -20.4852 and flags the other. The retired bisection read 1095.4783 as the IRR.
 
 ## Exercise
 
-State the NPV of the published bracket case at 102400 percent and at 199900 percent, and which of the two the engine reports as the IRR. Then name the two situations in which the bisection returns 0, with a published case for each.
+State the NPV of the published bracket case at 102400 percent and at 199900 percent, and what the engine returns. Then name the two situations in which the retired bisection returned 0, and say what each returns now.

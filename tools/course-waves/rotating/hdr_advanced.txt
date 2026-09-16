@@ -1,0 +1,35 @@
+-- ============================================================================
+-- FC3 EXPERT DEEP SEED: Rotating Equipment, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE COMPRESSOR, AND WHERE BOTH ENGINES STOP. The same
+-- discipline with the fluid no longer incompressible and the machine no
+-- longer describable by a curve a user can type in, so every answer comes out
+-- of a thermodynamic path instead of an intersection. The polytropic exponent
+-- is not the isentropic one. The stage count is the larger of two limits and
+-- the engine names which one governed. The count is tested at the inlet the
+-- stages will really have, so a hotter intercooler approach is paid for in
+-- MACHINES rather than in discharge temperature.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A refusal is an ordinary returned object
+-- carrying an error that names the input actually wrong. Neither module
+-- throws. Five exports return a bare number and have nowhere to put an error
+-- at all, so they hold a documented NaN contract instead, and Section 15
+-- shows each of them keeping it.
+--
+-- THE TRAP THE TIER IS BUILT ON. Stages at one ratio and one inlet
+-- temperature are still not identical machines, because the compressibility
+-- falls as the pressure climbs and the head per pound falls with it. A reader
+-- who multiplies the first stage by the stage count overstates the train.
+--
+-- HELD FOR LITERATURE, taught as a limit and never graded: the default
+-- discharge temperature limit of 300 degF, which is customary and carries no
+-- publication here, and the speed ratio band of 0.5 to 1.5 that the affinity
+-- warning uses. The capstone states its own discharge limit of 285 degF for
+-- that reason, so no graded value in any tier rides on the default.
+--
+-- This tier receives nothing from the tier below it and hands nothing on.
+-- ============================================================================

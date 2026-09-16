@@ -1,0 +1,101 @@
+{
+ "app_slug": "seismolord",
+ "tier": "beginner",
+ "tier_name": "Associate",
+ "generated": "2026-09-16",
+ "old_text_source": "the live production row, read 2026-09-16",
+ "prompt_old": "Set the wavelet to 25 Hz and read the synthetic summary panel: report the mean sonic velocity, the two-way time at the top of the log under the teaching time-depth function, the maximum impedance, and the strongest reflection coefficient and synthetic amplitude with their two-way times.",
+ "prompt_new": "Set the wavelet to 25 Hz and read the synthetic summary panel: report the mean sonic velocity, the two-way time at the top of the log under the teaching time-depth function, the maximum impedance, and the strongest reflection coefficient and synthetic amplitude with their two-way times.",
+ "dataset_old": "wells/las/basic_20 + ricker25",
+ "dataset_new": "wells/las/basic_20 + ricker25",
+ "fields_old": [
+  {
+   "key": "mean_velocity_ms",
+   "tol": 1,
+   "unit": "m/s",
+   "label": "Mean sonic velocity",
+   "expected": 3145.2869374221345
+  },
+  {
+   "key": "twt_at_log_top_ms",
+   "tol": 0.5,
+   "unit": "ms",
+   "label": "TWT at the top of the log (1500 m)",
+   "expected": 1500
+  },
+  {
+   "key": "imp_max",
+   "tol": 10,
+   "unit": "(m/s)\u00b7(g/cc)",
+   "label": "Maximum impedance",
+   "expected": 10624.9560546875
+  },
+  {
+   "key": "rc_peak_abs",
+   "tol": 0.0005,
+   "unit": "-",
+   "label": "Strongest reflection coefficient (abs)",
+   "expected": 0.017688043415546417
+  },
+  {
+   "key": "rc_peak_twt_ms",
+   "tol": 2,
+   "unit": "ms",
+   "label": "TWT of the strongest reflection",
+   "expected": 1582
+  },
+  {
+   "key": "syn_peak_twt_ms",
+   "tol": 2,
+   "unit": "ms",
+   "label": "TWT of the strongest synthetic amplitude (25 Hz)",
+   "expected": 1642
+  }
+ ],
+ "fields_new": [
+  {
+   "key": "mean_velocity_ms",
+   "tol": 1,
+   "unit": "m/s",
+   "label": "Mean sonic velocity",
+   "expected": 3145.2869374221345
+  },
+  {
+   "key": "twt_at_log_top_ms",
+   "tol": 0.5,
+   "unit": "ms",
+   "label": "TWT at the top of the log",
+   "expected": 1500
+  },
+  {
+   "key": "imp_max",
+   "tol": 10,
+   "unit": "(m/s)\u00b7(g/cc)",
+   "label": "Maximum impedance",
+   "expected": 10624.9560546875
+  },
+  {
+   "key": "rc_peak_abs",
+   "tol": 0.0005,
+   "unit": "-",
+   "label": "Strongest reflection coefficient (abs)",
+   "expected": 0.017688043415546417
+  },
+  {
+   "key": "rc_peak_twt_ms",
+   "tol": 2,
+   "unit": "ms",
+   "label": "TWT of the strongest reflection",
+   "expected": 1582
+  },
+  {
+   "key": "syn_peak_twt_ms",
+   "tol": 2,
+   "unit": "ms",
+   "label": "TWT of the strongest synthetic amplitude (25 Hz)",
+   "expected": 1642
+  }
+ ],
+ "prompt_replacements": [],
+ "dataset_replacements": []
+}

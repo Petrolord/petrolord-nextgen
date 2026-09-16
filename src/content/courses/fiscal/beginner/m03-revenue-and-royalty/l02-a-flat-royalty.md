@@ -29,7 +29,7 @@ That is what off the top means in this model. A loss making year pays royalty at
 
 The careful reader charges royalty against something net, because production sharing contracts train the eye to look for a base after cost. Charging 18.75 percent against revenue less opex in year 1 of the default project gives a royalty smaller than 50.9979 million USD, and every downstream column moves with it: revenue after royalty rises, cost recovery changes, profit oil changes, tax changes. The ledger stays internally consistent and is wrong from the second row down.
 
-The second slip is assuming a low rate is a soft regime. "Angola - Deepwater PSC" carries a flat royalty of 0 percent and collects total royalty of 0.0000 million USD on the default project, while "USA - Gulf of Mexico" collects 503.7989 million USD. The Angola contractor keeps 545.1955 million USD and the Gulf of Mexico contractor keeps 980.9313 million USD. The regime with no royalty at all is the harsher of the two, because its cost recovery limit is 50 percent, its profit split is tiered, and it carries RRT at 50 percent.
+The second slip is assuming a low rate is a soft regime. "Angola - Deepwater PSC" carries a flat royalty of 0 percent and collects total royalty of 0.0000 million USD on the default project, while "USA - Gulf of Mexico" collects 503.7989 million USD. The Angola contractor keeps 481.7318 million USD and the Gulf of Mexico contractor keeps 980.9313 million USD. The regime with no royalty at all is the harsher of the two, because its cost recovery limit is 50 percent, its profit split is tiered, and it carries RRT at 50 percent.
 
 ## What a flat royalty refuses
 

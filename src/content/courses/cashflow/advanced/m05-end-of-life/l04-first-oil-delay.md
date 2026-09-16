@@ -17,7 +17,7 @@ Capex is not shifted. A delay in this engine is a delay of first oil against a s
 | 0 | 2029 | 0.00 | 72534830.66 | 29.2361 | 3.46 |
 | 1 | 2030 | 21000000.00 | 56565094.12 | 18.8363 | 4.20 |
 | 2 | 2031 | 21000000.00 | 40880824.32 | 14.6753 | 4.96 |
-| 3 | 2032 | 21000000.00 | 17894126.42 | 15.1070 | 4.90 |
+| 3 | 2032 | 21000000.00 | 17894126.42 | 11.6363 | 4.90 |
 
 In the one-year case 2029 carries capex of 210000000.00 and nothing else, net -210000000.00, and its 21000000.00 of depreciation goes into the loss pool. 2030 carries the second tranche of 45000000.00 with the first 2200000.00 bbl, and the opex is 24720000.00 rather than 24000000.00, because the escalator counts calendar years from the base year and does not care when first oil came. The oil price escalates the same way, so the delayed first year sells at 83.640000 rather than 82.000000 and reports 55541846.40 against 31746007.20 at zero shift, where the same barrels had to carry the 210000000.00.
 
@@ -27,7 +27,7 @@ The careful mistake is to model the delay by hand and shift everything. A reader
 
 ## A row that is not there
 
-The three-year row list runs 2029, 2030, 2032 and onward: no 2031 row, because nothing happened in it and the engine did not emit an empty year. Now read the KPIs. NPV fell from 40880824.32 at two years to 17894126.42 at three, as it should, while the IRR rose from 14.6753 to 15.1070 percent and the payback shortened from 4.96 to 4.90 years, as it should not. A longer wait for the same money cannot raise a rate of return; the reading that fits is that IRR and payback are counted on rows rather than calendar years, so the missing row made the delay look a year shorter to them. Whatever the mechanism, the NPV of that run is discounted on calendar years and can be trusted; the other two cannot.
+The three-year row list runs 2029, 2030, 2032 and onward: no 2031 row, because nothing happened in it and the engine did not emit an empty year. Now read the KPIs. NPV fell from 40880824.32 at two years to 17894126.42 and the IRR fell from 14.6753 to 11.6363 percent, both as they should, while the payback shortened from 4.96 to 4.90 years, as it should not. A longer wait for the same money cannot shorten a payback; payback is counted on rows rather than on calendar years, so the missing row made the delay look a year shorter to it. Until engines 3.10.0 the IRR read 15.1070 percent here and rose with the delay for the same reason. The NPV is discounted on calendar years and can be trusted; the payback cannot.
 
 ## What the engine refuses
 
@@ -35,4 +35,4 @@ It refuses to shift capex. It refuses to hold opex or prices at first-oil values
 
 ## Exercise
 
-State which of capex, production, opex and price escalation move with schedule_shift_years and which do not. Then say, from the row list alone, why the three-year NPV of 17894126.42 can be trusted and the IRR of 15.1070 percent cannot.
+State which of capex, production, opex and price escalation move with schedule_shift_years and which do not. Then say, from the row list alone, why the three-year NPV of 17894126.42 can be trusted and the payback of 4.90 years cannot.

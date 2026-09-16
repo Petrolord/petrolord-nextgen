@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "Put the tier's chain in the order the engine runs it, from the bore to the pressure.",
+  "options": [
+   "Bore to relative roughness, relative roughness to friction factor, friction factor and rate to velocity, and the velocity and the length together to the loss.",
+   "Bore to area, area and rate to velocity, velocity to Reynolds number, Reynolds number and relative roughness to friction factor, friction factor and length to loss.",
+   "Rate to velocity, velocity and density to Reynolds number, Reynolds number to regime, regime to a branch of the friction law, and the branch and the bore together to the loss without an area being formed.",
+   "Bore and length to a length over bore factor, that factor and the roughness to a friction factor, and the friction factor and the rate to the loss."
+  ],
+  "answer": 1,
+  "explanation": "Every link is the input to the next, so one wrong condition at the top gives a line that is confidently the wrong size at the bottom with every figure on the way down printing normally."
+ },
+ {
+  "prompt": "A sizing sweep is run over twelve bores and one row is handed a viscosity the guard will not take. What do the other eleven rows return?",
+  "options": [
+   "Their own numbers, because the refusal is an object returned on that one row and it travels back along the same path a result does.",
+   "Nothing, because the guard raises on the offending row and the loop stops there, so the bores below it are never evaluated at all.",
+   "A refusal each, because a sweep puts one fluid through twelve pipes and a fluid the method will not accept disqualifies every row of the table.",
+   "Their own numbers with the regime reported as invalid, because the sweep carries the failed row's verdict down into the rows beneath it."
+  ],
+  "answer": 0,
+  "explanation": "That is what a returned error buys. The row that refused can be shown beside the rows that answered, with the reason on it, which a thrown exception would not allow."
+ },
+ {
+  "prompt": "The OGBIA rate is read as a stock tank figure waiting to shrink rather than as a line-conditions one. Which figures in the row are then wrong?",
+  "options": [
+   "Only the erosional ratio, since it is the one check formed from the rate while the pressure chain reads a velocity that was settled before the rate was interpreted.",
+   "Only the pressure terms, since the velocity and the Reynolds number never read a rate at all.",
+   "Every one of them from the velocity onward, because the whole chain hangs on a rate through an area and the rate was the first thing misread.",
+   "None of them, since the engine takes a rate to line conditions itself using the density of 54.500000 lb/ft3."
+  ],
+  "answer": 2,
+  "explanation": "Liquid rates here are at LINE conditions, downstream of separation, so 12000.000000 bpd is 12000.000000 bpd of liquid in the pipe. The flow area of 0.347410 ft2 and the 0.001800 in of wall are all that survive the misreading."
+ },
+ {
+  "prompt": "A drawing gives a liquid line's run in miles and the figure is handed over unconverted. Which of the tier's returned numbers gives the mistake away?",
+  "options": [
+   "The regime, because a length thousands of times too small drags the Reynolds number under 2100 and the engine reports the line as laminar when the crude is plainly turbulent at 48431.2523.",
+   "The gradient, because it is the total divided by the length and would be reported in psi per mile, so the unit printed beside it no longer matches the psi per ft the rest of the tier works in.",
+   "None of them. The velocity, the Reynolds number and the friction factor never see the length at all, and the loss is proportional to it, so the answer is simply wrong by whatever the confusion was worth.",
+   "The friction factor, because it is solved over the run of the pipe and a length short by a factor of 5280.000000000 pushes the iteration onto the other branch of the friction law."
+  ],
+  "answer": 2,
+  "explanation": "The engine knows the two units apart exactly, accepting 5280.000000000 ft as a rise on a gas line 1.000000 mile long. It is the caller that has to keep them apart on a liquid line, where feet is what is wanted."
+ },
+ {
+  "prompt": "One barrel is reported as 5.6145833333333 cubic feet, measured out of an engine that does not export it. What question was put to the engine?",
+  "options": [
+   "Its fittings loss of 0.029634 psi at a resistance sum of one, from which the barrel falls out once the density and the velocity have been divided away again.",
+   "Its Reynolds number of 48431.2523 against the velocity and the bore, from which the barrel is what remains once the centipoise has been recovered from the row.",
+   "Nothing was put to it, since a barrel is a definition of volume rather than anything an engine computes, so the published figure is typed in with its source named.",
+   "Its line volume of 1633.5349 bbl, divided into the flow area times the length."
+  ],
+  "answer": 3,
+  "explanation": "The module keeps that constant to itself, so a figure typed into a teaching file would not be an engine return. gc at 32.174000 and the centipoise at 6.7197000000e-4 are each recovered by a call that isolates them."
+ },
+ {
+  "prompt": "Of the Reynolds number's four inputs on the OGBIA line, which reaches the calculation here for the first time?",
+  "options": [
+   "The density of 54.500000 lb/ft3, since the velocity step is a rate and a geometry that would return 2.244621 ft/s for water or for crude alike and never asks what the fluid weighs.",
+   "The bore of 7.981000 in, since the velocity was formed from the rate and the flow area of 0.347410 ft2 rather than from the bore itself, so the inches reach the arithmetic here.",
+   "The viscosity of 2.500000 cp, since the density, the velocity and the bore were all settled before this step.",
+   "The velocity of 2.244621 ft/s, since the caller supplies a rate in bpd and the conversion into a velocity happens inside this expression rather than before it."
+  ],
+  "answer": 2,
+  "explanation": "This is where the fluid's character finally reaches the calculation, and 48431.2523 is what it returns. The bore is in the expression twice, directly and inside the velocity, but neither is new here."
+ },
+ {
+  "prompt": "The OGBIA viscosity is raised to 30.000000 cp. Of the velocity, the Reynolds number, the friction loss and the erosional ratio, which move?",
+  "options": [
+   "All four, since a thicker crude carries more of its own solids into the wall.",
+   "The Reynolds number to 4035.9377 and the loss to 47.087803 psi. The other two do not move at all.",
+   "Three of them, since only the velocity holds at 2.244621 ft/s while the Reynolds number, the loss and the erosional ratio all follow the fluid downward.",
+   "Two of them, the velocity and the Reynolds number, since the loss is proportional to the length and no length was altered on the row."
+  ],
+  "answer": 1,
+  "explanation": "The ceiling of 13.545709 ft/s reads a density and a c factor, and the velocity is a rate over an area. Neither of those sits downstream of the Reynolds number, so the ratio of 0.165707 is untouched."
+ },
+ {
+  "prompt": "The engine returns 0.064000000000 at a Reynolds number of 1000.0000 and 0.042666666667 at 1500.0000. What relation do those two figures satisfy?",
+  "options": [
+   "Each is 64.000000 over its own Reynolds number, which is exactly how the laminar numerator is measured back out of an engine that does not export it.",
+   "Each is the one before it scaled by the ratio of the two Reynolds numbers raised to a power the Colebrook expression fixes at a quarter.",
+   "Each is 64.000000 over the square root of its own Reynolds number, which is why the pair falls more slowly than the Reynolds numbers rise.",
+   "Neither satisfies a relation at all, since both are last iterates of a solve and a laminar factor is no more closed form than a turbulent one."
+  ],
+  "answer": 0,
+  "explanation": "Because the Reynolds number sits underneath, a slower or a thicker flow returns a larger figure, and the walk down that branch reads 0.030490709862, 0.0317150585, 0.042666666667 and 0.0634301170."
+ },
+ {
+  "prompt": "How is the Colebrook roughness divisor of 3.700000 recovered from an engine that exports no such constant?",
+  "options": [
+   "On a smooth pipe, where the roughness term is exactly zero, from the 0.017989773084 the engine returns at a Reynolds number of 100000.0000.",
+   "From the built row, by dividing the relative roughness of 0.0002255356 into the friction factor of 0.0218149625 that the engine settled on for it.",
+   "It is not recovered at all, since the module exports it beside the two branch boundaries and a caller reads the published figure directly.",
+   "In the fully rough limit, where the Reynolds term falls away: from 0.037903711893 at a relative roughness of 0.010000 and a Reynolds number of 100000000000000.0000."
+  ],
+  "answer": 3,
+  "explanation": "A constant is measured by choosing inputs that isolate it. The Reynolds numerator of 2.510000 takes the other route, on a smooth pipe where the wall term vanishes instead."
+ },
+ {
+  "prompt": "The engine reports a line at a Reynolds number of 2500.0000 as transitional. What has it computed?",
+  "options": [
+   "A blend of the laminar and turbulent laws weighted by position in the band, which is why the interior rows fall smoothly from 0.048678586645 at 2100.0000 to 0.043519188769 at 3000.0000.",
+   "The turbulent law, so the word and the arithmetic are saying different things and 0.046053830366 is the turbulent branch's opinion about a flow that is not reliably turbulent.",
+   "A correlation fitted to the transition band itself, which is what the reported label is announcing and why the band continues neither branch.",
+   "The laminar law with a caution attached, since the engine stays on that branch until 4000 and the label marks where it is least reliable."
+  ],
+  "answer": 1,
+  "explanation": "The lower boundary is where the discontinuity sits. At 2099.0000 the engine reports laminar and at 2100.0000 transitional, and the upper of that pair is computed on the turbulent branch."
+ },
+ {
+  "prompt": "Two published cases run through the same 2.067000 in bore. One spends 14.550645 psi over 3000.000000 ft and the other 130.867123 psi over 5000.000000 ft. What separates them?",
+  "options": [
+   "The length alone, since the friction loss follows the length and the dearer case is the longer pipe.",
+   "The elevation, since the cheaper case falls 60.000000 ft and recovers -26.000000 psi on the way down.",
+   "The roughness, since a bore that small makes the wall term carry most of the loss.",
+   "The branch. The first runs at 2.230927 ft/s and a Reynolds number of 35684.4798, and the second at 0.418299 ft/s and 15.5476."
+  ],
+  "answer": 3,
+  "explanation": "0.0249265571 against 4.1163843599. A line slow enough to go laminar can spend more pressure than a far larger duty in a far larger pipe, which is where the habit that velocity and cost move together breaks."
+ },
+ {
+  "prompt": "The isometric's 4.500000 velocity heads cost 0.133351 psi where a single head costs 0.029634 psi. What does the arithmetic between those two figures establish?",
+  "options": [
+   "That a fittings loss is one velocity head multiplied by a resistance sum, since 4.500000 heads cost 4.500000 times what a single head costs.",
+   "That a fittings loss carries the length over bore factor as well, since the same list on a 300.000000 ft run also costs 0.133351 psi.",
+   "That a fittings loss is the velocity head raised to the resistance sum, which is why an isometric costs several times what one fitting does.",
+   "That the engine reads the four entries of the isometric separately, since a resistance sum of one is the elbow row and 4.500000 is the whole list."
+  ],
+  "answer": 0,
+  "explanation": "The isometric costs the single head multiplied by 4.500000, and neither figure survives a change of bore, because the head they are both built on is set by the velocity the duty makes."
+ },
+ {
+  "prompt": "The same OGBIA isometric is moved onto a line of 6.065000 in bore carrying the same duty. What travels with it, and what does not?",
+  "options": [
+   "Both travel, since a resistance sum is a pressure in psi accumulated from the fitting table and each entry on the list already carries its own cost in it.",
+   "Neither travels, since the K of each fitting is quoted for the bore it was tabulated in, so a change of bore needs a fresh lookup for every entry on the drawing.",
+   "The resistance sum of 4.500000 travels, because it is a count of velocity heads belonging to the shapes on the drawing. The 0.133351 psi does not, because the head it counts belongs to the stream.",
+   "The 0.133351 psi travels and the count does not, since the pressure a fitting costs is a property of the fitting while the count depends on how the drawing was read."
+  ],
+  "answer": 2,
+  "explanation": "At 6.065000 in the same duty runs at 3.886834 ft/s instead of 2.244621 ft/s, and a velocity head carries the square of the velocity. The count belongs to the shape of the fitting and the pressure belongs to the stream it is placed in."
+ },
+ {
+  "prompt": "An engineer leaves the isometric out of the calculation entirely. On which of the tier's two runs is that defensible, and what settles it?",
+  "options": [
+   "On the manifold run, where the pipe spends only 0.291598 psi, so the whole answer is small.",
+   "On the long export line, where the same list is 0.005170 of the total, and what settles it is the length rather than the fittings.",
+   "On neither, since a resistance sum reaches the loss through the same velocity head the pipe friction does, so an omitted term is an omitted term on any length.",
+   "On whichever run is the slower, since a fittings cost is the velocity head times the sum."
+  ],
+  "answer": 1,
+  "explanation": "One list, unchanged, worth 0.005170 of the total on the one and 0.313805 on the other. The rule that follows is about the length: ask what the pipe is spending first."
+ },
+ {
+  "prompt": "A 420.000000 ft rise adds 158.958333 psi to the OGBIA line. What would half that rise add, and what would it do to the friction term?",
+  "options": [
+   "Half of it, and the friction term would fall with it, because a gentler climb lets the stream run faster and a faster stream meets less wall for each foot it covers.",
+   "A quarter of it, because a static column carries its height in the same square that a velocity head carries its velocity, and the friction term would not move.",
+   "The same 158.958333 psi, because the engine reports one elevation term for the whole line whatever the profile is, and the friction term would not move.",
+   "Half of it, and nothing at all to the friction term."
+  ],
+  "answer": 3,
+  "explanation": "The static column is the density times the height. The friction column reads 25.660631 psi on all three rows of the elevation table, because a hill changes nothing about the rate, the bore, the roughness or the viscosity."
+ },
+ {
+  "prompt": "The OGBIA line dropped 420.000000 ft returns a total of -133.297702 psi. What are the two numbers inside that figure?",
+  "options": [
+   "25.660631 psi of friction, still positive, and -158.958333 psi of static column.",
+   "A friction term the engine declines to report on a descending line, and -158.958333 psi of static column, which is the whole of the figure.",
+   "A friction term the descent has turned negative, and -158.958333 psi of static column, so the total is the sum of two negative numbers.",
+   "25.660631 psi of friction and -158.958333 psi of static column, beside a fittings term the engine suppresses whenever a total comes back negative."
+  ],
+  "answer": 0,
+  "explanation": "The three terms on that row are 25.660631, 0.000000 and -158.958333 psi. They are returned apart precisely so that the sign on the total can be read back to the hill that produced it."
+ },
+ {
+  "prompt": "A long route is costed by taking 0.0069931426 psi per ft off a climbing section and scaling it along the whole run. What is wrong with that?",
+  "options": [
+   "Nothing at all, since a gradient is a loss per foot and scaling it along a route is the operation it was reported for.",
+   "The sign, since a route that later falls returns -0.0050491554 psi per ft and no scaling can carry that across.",
+   "The friction part of that average scales with the length and the static column inside it does not, so extending the pipe extends only one of the two terms.",
+   "The regime, since a longer pipe at the same duty sits at a different Reynolds number altogether."
+  ],
+  "answer": 2,
+  "explanation": "184.618965 psi over 26400.000000 ft carries 158.958333 psi of hill inside it. On a level bare line the same figure is 0.0009719936 psi per ft and is the friction alone, which does scale."
+ },
+ {
+  "prompt": "Which quantities does the API RP 14E erosional velocity take, and which of the line's does it ignore?",
+  "options": [
+   "It takes a c factor, the density and the bore, because a ceiling on a velocity has to know the passage it applies to.",
+   "It takes a c factor and the fluid density, and it ignores the bore, the length, the roughness, the viscosity and the rate.",
+   "It takes a c factor, the density, the viscosity and the rate, because how much fluid passes the wall matters to erosion as much as how fast and how heavy that fluid happens to be.",
+   "It takes a c factor and the mixture velocity, because the check is a comparison between two velocities and both halves of that comparison have to be formed before either is useful."
+  ],
+  "answer": 1,
+  "explanation": "13.545709 ft/s follows from 54.500000 lb/ft3 and a c factor of 100.000000 and from nothing else, which is why a ceiling can be quoted before a bore has been chosen."
+ },
+ {
+  "prompt": "A 20.000000 lb/ft3 mixture is allowed 22.360680 ft/s at a c factor of 100.000000. What is it allowed at 125.000000, and what changed in the expression?",
+  "options": [
+   "27.950850 ft/s, and the density as well, since the intermittent row is quoted for a lighter mixture.",
+   "A figure between 22.360680 and 27.950850 ft/s, since the c factor enters beneath the same root.",
+   "27.950850 ft/s, and only the c factor, which multiplies the whole expression while the density under the root stands still.",
+   "22.360680 ft/s still, since an allowance is a property of the mixture and the c factor only selects which of the three rows the check reports the verdict against."
+  ],
+  "answer": 2,
+  "explanation": "Reading across a row of the density table is reading the c factor alone. Reading down a column is reading the density, and the two are different kinds of judgement."
+ },
+ {
+  "prompt": "A twelve-bore sweep is run at a c factor id the table does not carry. What appears in the erosional column of all twelve rows?",
+  "options": [
+   "An error string on every row, since an unknown id is one of the eighteen states the method has no answer for and it refuses before a single bore is evaluated.",
+   "The continuous-service ceiling of 13.545709 ft/s, because the lookup resolved to the first row and that is what each bore was then measured against.",
+   "A blank column, since the lookup came back empty and the sweep reports the columns it could compute and leaves out the check it could not.",
+   "The clean inhibited ceiling of 23.704991 ft/s, since an unrecognised service is resolved upward to the most generous row that the table carries."
+  ],
+  "answer": 1,
+  "explanation": "Twelve rows, one substituted ceiling, and nine of them reading true against it. The returned label is the only place the substitution is visible at all."
+ },
+ {
+  "prompt": "The OGBIA line reports a margin of 90.531019 percent. What does that margin NOT tell a designer?",
+  "options": [
+   "Anything about the density, since a margin is formed from the c factor and the velocity and the density has already been divided out of both of them.",
+   "Which c factor it was taken at, since the margin column is reported against the continuous row throughout so that the three rows of the table stay comparable.",
+   "Whether the velocity is inside the 6.000000 ft/s practice ceiling, since that ceiling is what a margin is measured from once a sweep applies both criteria at once.",
+   "Anything about the pressure the line spends, which on that row is 25.660631 psi."
+  ],
+  "answer": 3,
+  "explanation": "90.531019 percent is the room under the clean inhibited ceiling of 23.704991 ft/s. Nothing in the erosional check reads a length, a roughness or a friction factor."
+ },
+ {
+  "prompt": "Which row of the twelve-bore sweep sits closest to the erosional ceiling while still passing it, and at what ratio?",
+  "options": [
+   "The 4 in schedule 80 row at a bore of 3.826000 in, at 0.721051.",
+   "The 4 in schedule 40 row at a bore of 4.026000 in, at 0.651191, since it is the first row down the table whose verdict the check reports as true.",
+   "The 3 in schedule 40 row at a bore of 3.068000 in, at 1.121360, since it is the last row before the check begins reporting true as the table is read downward.",
+   "The 2 in schedule 80 row at a bore of 1.939000 in, at 2.807374, since it carries the highest velocity of the twelve and so stands nearest the ceiling of them all."
+  ],
+  "answer": 0,
+  "explanation": "The passing ratios run 0.721051, 0.651191, 0.318024, 0.286942, 0.181542, 0.165707, 0.105128, 0.074062 and 0.046911. The largest of them is the tightest margin that still passes."
+ },
+ {
+  "prompt": "Two rows of the sweep share an outside diameter of 4.500000 in. What separates them, and what does the difference cost?",
+  "options": [
+   "Walls of 0.237000 in and 0.337000 in on bores of 4.026000 in and 3.826000 in, and totals that are identical, with only the erosional ratios differing at 0.651191 and 0.721051.",
+   "Nothing in the hydraulics, since an outside diameter is what the flanges are built to.",
+   "Walls of 0.237000 in and 0.337000 in, so bores of 4.026000 in and 3.826000 in, and totals of 728.175700 psi and 937.455844 psi.",
+   "Two different nominal sizes, since 4.500000 in belongs to the 4 in entry and to the 3 in entry."
+  ],
+  "answer": 2,
+  "explanation": "The heavier schedule spends its extra steel inwards, so the bore is what is left. A line uprated for pressure quietly becomes a faster and a dearer line at the same duty."
+ },
+ {
+  "prompt": "Down the twelve bores the velocity falls from 38.027872 ft/s to 0.635441 ft/s while the total falls from 28841.350797 psi to 1.236026 psi. Why does the pressure fall so much further?",
+  "options": [
+   "Because the friction factor falls with the bore as well, so three separate effects compound.",
+   "Because the bore is under the square of the velocity in the head and again in the length over bore factor, so both of the terms standing in front of the friction factor fall as it opens.",
+   "Because the length over bore factor falls with the bore while the velocity head does not, so only one of the two terms in the loss follows the velocity down.",
+   "Because the wide rows are evaluated at a reduced duty rather than at the same 12000.000000 bpd."
+  ],
+  "answer": 1,
+  "explanation": "Read the velocity column and the total column of the sweep against each other and the totals fall away much the faster of the two. That is why bore is the first thing reached for when a pressure budget will not close."
+ },
+ {
+  "prompt": "The 6.000000 ft/s practice ceiling is applied on top of the erosional limit. How many bores does each leave, and where does the difference come from?",
+  "options": [
+   "Nine and then seven, and the two rows lost are the 4 in pair at 8.820843 and 9.767147 ft/s, which the erosional limit had allowed.",
+   "Nine and then seven, and the two rows lost are the 6 in pair at 3.886834 and 4.307863 ft/s, which sit above the practice ceiling while inside the published one.",
+   "Twelve and then seven, since the erosional check returns a ratio on every row of the table and it is the practice ceiling that removes a candidate for the first time.",
+   "Seven and then seven, since the two criteria remove the same rows on this duty."
+  ],
+  "answer": 0,
+  "explanation": "A line can be inside the RP 14E ceiling and still run faster than an operator wants to run crude. Their erosional ratios of 0.651191 and 0.721051 were both comfortable."
+ },
+ {
+  "prompt": "Used steel at 0.006000 in gives a relative roughness of 0.0007517855 in the OGBIA bore. What do the friction factor and the loss do?",
+  "options": [
+   "They do not move, since 0.0007517855 is small enough to leave the line hydraulically smooth and the Reynolds number of 48431.2523 carries the whole answer.",
+   "The factor rises to 0.0234342460 and the loss falls to 24.854515 psi, since a rougher wall slows the stream and a slower stream spends less pressure over the run.",
+   "They rise, from 0.0218149625 to 0.0234342460 and from 25.660631 psi to 27.565372 psi.",
+   "They fall, to 0.0210675199 and 24.781425 psi, since the catalogue runs roughest to smoothest."
+  ],
+  "answer": 2,
+  "explanation": "Used steel at 0.006000 in is the roughest of the four catalogue rows and commercial steel at 0.001800 in the second roughest. Across the whole catalogue this line lands between 24.781425 psi and 27.565372 psi."
+ },
+ {
+  "prompt": "The same 12000.000000 bpd is put through 6.065000 in instead of 7.981000 in. Give the velocity, the loss and the erosional ratio on that row.",
+  "options": [
+   "3.886834 ft/s, 97.306913 psi and 0.165707, since an erosional ratio is a property of the crude and its c factor rather than of the bore chosen to carry it.",
+   "3.886834 ft/s, 25.660631 psi and 0.286942, since a loss belongs to the duty and the length and the change of bore touched neither of those two.",
+   "4.307863 ft/s, 125.058374 psi and 0.318024, which is the 6 in row of the sweep at the schedule the OGBIA line was actually built to.",
+   "3.886834 ft/s, 97.306913 psi and 0.286942."
+  ],
+  "answer": 3,
+  "explanation": "Every figure in the tier belongs to a complete row. The ceiling of 13.545709 ft/s is the one number that did not move, because no bore appears anywhere in it."
+ },
+ {
+  "prompt": "Colebrook is iterated with no convergence flag returned. What does the tier offer instead as evidence that the settled iterate is right?",
+  "options": [
+   "A residual reported beside the friction factor, which a caller reads to see how far the last pass moved before the engine stopped iterating on it.",
+   "Four published cases where the engine and the golden agree digit for digit, at 0.037504518014, 0.021926421295, 0.019943465840 and 0.010859745054.",
+   "The regime, which the engine returns as invalid whenever the iteration has not settled inside the number of passes it allows itself.",
+   "The laminar branch, which is closed form, so a turbulent factor is checked by evaluating 64.000000 over the same Reynolds number and comparing the two."
+  ],
+  "answer": 1,
+  "explanation": "Those four span Reynolds 5000.0000 to 10000000.0000 and relative roughness 0.000050 to 0.001000. Two independent implementations landing on the same digits is what the chain's standing rests on."
+ },
+ {
+  "prompt": "A sizing sweep varies the bore and holds everything else still. What makes so small a change of it move so much?",
+  "options": [
+   "Because it is the only input a designer is free to choose, since the rate, the density and the viscosity all arrive from outside the calculation and cannot be altered by a sizing decision.",
+   "Because it enters the friction loss through the length over bore factor, which is the term the length sits in as well, so the two strongest influences on the loss share one factor.",
+   "Because the area goes as the square of the bore, so the velocity moves by that square too, and the velocity is what four separate answers are then built on.",
+   "Because it fixes the relative roughness, and the relative roughness is the axis of the Moody chart along which the friction factor moves furthest at any given Reynolds number."
+  ],
+  "answer": 2,
+  "explanation": "A bore of 7.981000 in encloses 0.347410 ft2 and a bore twice as wide encloses four times that. One duty through 1.939000 in runs at 38.027872 ft/s and through 15.000000 in at 0.635441 ft/s."
+ },
+ {
+  "prompt": "Two of the bore's routes into the friction loss stand outside the friction factor entirely. Name them, and say what the sweep shows for it.",
+  "options": [
+   "Through the relative roughness and through the Reynolds number, and across three neighbouring bores the loss falls from 97.306913 psi to 25.660631 psi to 8.561327 psi as the wall term relaxes.",
+   "Through the length over bore factor and through the velocity head, and across three neighbouring bores the loss falls from 97.306913 psi to 25.660631 psi to 8.561327 psi.",
+   "Through the flow area alone, which carries the bore into the velocity and thereby into every term downstream of it.",
+   "Through the length over bore factor alone, since the velocity head is built from the density and a velocity the duty had already fixed."
+  ],
+  "answer": 1,
+  "explanation": "6.065000 in, 7.981000 in and 10.020000 in are within a few inches of each other and the cost falls away steeply across them. The bore is inside the friction factor as well, through the Reynolds number and the relative roughness, and those are the two routes this question set aside."
+ },
+ {
+  "prompt": "The pressure drop and the erosional check are run on the OGBIA line. Which computed quantity do they both read?",
+  "options": [
+   "The velocity of 2.244621 ft/s, formed from the duty and the flow area of 0.347410 ft2.",
+   "The friction factor of 0.0218149625, which reaches the loss through the length over bore factor and reaches the erosional check through the ceiling that the ratio is taken against.",
+   "The viscosity of 2.500000 cp, which the loss reads through the Reynolds number of 48431.2523 and the erosional check reads through the ceiling of 13.545709 ft/s.",
+   "Nothing that either of them computed, since the erosional check works from the rate and the bore and never forms a velocity at all, comparing the rate against the largest rate the bore allows instead."
+  ],
+  "answer": 0,
+  "explanation": "They share the density as well, 54.500000 lb/ft3 sitting in the velocity head and again under the root that gives 13.545709 ft/s. The velocity is the computed quantity both of them read, and the length, the roughness and the viscosity reach only the loss."
+ },
+ {
+  "prompt": "A bore is chosen on the erosional check alone and the duty raised to the 72416.9067 bpd it allows. What has to be re-formed, and what has not moved?",
+  "options": [
+   "Only the friction factor moves, since the velocity head is built from the density and the loss follows the length, so a change of rate reaches the answer through the friction factor alone.",
+   "Nothing moves, since the two checks read one velocity and a rate that satisfies either is priced.",
+   "Only the ceiling moves, since it is the figure the rate was chosen against, and the loss of 25.660631 psi was settled by the bore and the length before any duty was put through them.",
+   "The velocity, the Reynolds number, the friction factor and the loss all move with the rate, and the ceiling of 13.545709 ft/s does not move at all."
+  ],
+  "answer": 3,
+  "explanation": "Nothing in the erosional check reads a length, a roughness or a friction factor, so the loss at that rate is an entirely separate number and would have to be affordable on its own."
+ },
+ {
+  "prompt": "The 3 in schedule 40 row reads a ratio of 1.121360 and the 4 in schedule 40 row reads 0.651191. What lies between those two rows, and what does it buy?",
+  "options": [
+   "One schedule, since 3.068000 in and 4.026000 in are the heavy and light walls of a single outside diameter, and dropping a schedule is what carries the verdict from false to true.",
+   "One nominal size. The bore goes from 3.068000 in to 4.026000 in, the velocity from 15.189621 ft/s to 8.820843 ft/s, the total from 2820.384450 psi to 728.175700 psi, and the verdict from false to true.",
+   "One c factor, since the 3 in row is read against continuous service and the 4 in row against the clean inhibited figure of 175.000000, which is what lifts the ceiling past the row's velocity.",
+   "Nothing the sweep varies, since both rows carry the same 12000.000000 bpd over the same 26400.000000 ft, so the whole of the difference between 2820.384450 psi and 728.175700 psi is the friction factor."
+  ],
+  "answer": 1,
+  "explanation": "One step up the nominal sizes is where this duty crosses out of the failing rows. What it costs is a dearer pipe, and the sweep carries no price for that at all."
+ },
+ {
+  "prompt": "What does the twelve-bore sweep hold still, and why does that matter to the reader?",
+  "options": [
+   "The velocity, at the figure the design was drawn to, so each row reports the duty that bore would carry at an acceptable speed rather than what one fixed duty costs in it.",
+   "The duty, the fluid, the length and the roughness, so every difference down the table is the bore's doing and 20803.315944 psi against 1.236026 psi is one decision rather than several tangled together.",
+   "The pressure drop, at the budget the system has available, so each row reports the rate that bore would pass inside that budget and the twelve rows are twelve capacities.",
+   "Everything except the bore and the roughness, since each nominal size is drawn from its own part of the vendored schedule and carries the wall condition recorded against it there."
+  ],
+  "answer": 1,
+  "explanation": "That is what makes a sweep readable. One duty, twelve pipes, and the velocity spans the table from 38.027872 ft/s to 0.635441 ft/s because the crude and the rate never moved."
+ },
+ {
+  "prompt": "The engine returns 0.039909964901 at a Reynolds number of 3999.0000 and 0.039907014056 at 4000.0000, calling the first transitional and the second turbulent. What does that pair prove?",
+  "options": [
+   "That the engine blends the two laws through the band and the blend has reached the turbulent law by 4000, which is why the two rows so nearly agree with each other.",
+   "That a discontinuity sits at the upper boundary as well as at the lower one, and is simply too small to see at the four decimal places those two rows agree to.",
+   "That the label changed and the arithmetic did not, because both rows were computed on the same branch.",
+   "That the turbulent law is continuous with the laminar one at 4000, by design."
+  ],
+  "answer": 2,
+  "explanation": "The step is at the lower boundary, where the smooth pipe goes from 0.030490709862 to 0.048678586645 and the OGBIA line jumps 60.303955 percent across one unit of Reynolds number."
+ },
+ {
+  "prompt": "The three c factor rows are all described as overridable. What does that buy an operating company?",
+  "options": [
+   "A figure the engine validates against the published rows before it accepts one, so an override cannot stray far from RP 14E without the check reporting that it has.",
+   "A fourth row in the table under an id of its own, so that the three published figures and the company figure can all be swept against one another in a single call.",
+   "Very little, since an override is refused for continuous service, the row the lookup falls back to.",
+   "A company figure used directly, carrying its own provenance, with the two RP 14E rows left exactly as published."
+  ],
+  "answer": 3,
+  "explanation": "A c factor is a judgement about a fluid and a service life. Expressing a local view as an override rather than as a quiet edit to the table is what keeps the published rows readable."
+ },
+ {
+  "prompt": "On the 20000.0000 bpd published case the golden returns a Reynolds number of 20644.5892 against the engine's 20644.5578. What follows from a disagreement that size?",
+  "options": [
+   "Almost nothing. The friction factors are 0.0260794714 and 0.0260794621 and the totals 153.516220 psi and 153.516115 psi.",
+   "That the two are on different branches, since that Reynolds number sits near a boundary.",
+   "That the golden was computed over a different length, since 52800.000000 ft is the one input of the case that the two implementations state in different units.",
+   "That neither figure can be quoted at all, since two implementations disagreeing in the fourth decimal have not validated one another in any useful sense."
+  ],
+  "answer": 0,
+  "explanation": "Two independent implementations in two unit systems land within a small fraction of a psi across all four published liquid cases. That is what gives the chain its standing."
+ },
+ {
+  "prompt": "Eighteen states have no answer in this method. What do all eighteen have in common?",
+  "options": [
+   "Each is a physical impossibility rather than a fault in the shape of the input, which is why a traverse handed no profile segment is reported through a different mechanism from the others.",
+   "Each comes back as an object carrying an error string, so a caller checks a property rather than catching anything.",
+   "Each raises an exception that names itself, so code that forgets to catch one stops rather than carrying a defaulted value forward into the rest of a sizing sweep unnoticed.",
+   "Each returns a result with its numeric fields set to 0.000000, so a refusal is told apart from an answer by the arithmetic rather than by any property on the returned object."
+  ],
+  "answer": 1,
+  "explanation": "A returned error travels back along the same path as a result, so it can be shown beside the other rows of a sizing sweep with the row that refused saying why."
+ },
+ {
+  "prompt": "A routine walks the sweep and returns the first row whose erosional verdict is true. What has it actually found?",
+  "options": [
+   "The smallest bore that passes, since the table is ordered by nominal size and the bores rise steadily along with it.",
+   "The cheapest passing pipe, since the totals rise as the table is read downward and the first row to pass is therefore the last one still affordable.",
+   "A row rather than a bore. The very next line of the table carries a tighter bore than the one it stopped on, and that row passes as well.",
+   "Nothing usable, since the erosional verdict is a boolean and a walk that stops at the first true row cannot report a ratio for the rows it skipped."
+  ],
+  "answer": 2,
+  "explanation": "In table order the bores run 2.067000, 1.939000, 3.068000, 4.026000, 3.826000 and onwards. A heavier schedule is a smaller bore and it sits after the lighter one."
+ },
+ {
+  "prompt": "At a relative roughness of 0.010000 the engine returns 0.038503543527 at Reynolds 100000.0000 and 0.037904323387 at 100000000.0000. What has happened to that pipe?",
+  "options": [
+   "The correlation has run past the roughness range it was published over, so both figures are extrapolations and the engine reports the regime as invalid on each of them.",
+   "The pipe has gone hydraulically smooth, since a large relative roughness saturates the wall term and the Reynolds number then carries the whole of the answer between them.",
+   "The two columns have crossed, since a rough pipe returns the larger friction factor at the higher Reynolds number while a smooth one returns it at the lower.",
+   "The wall has taken over, so a thousandfold change in the rate barely moves the answer."
+  ],
+  "answer": 3,
+  "explanation": "On the smooth row the same two columns are 0.017989773084 and 0.005940466352. A rough pipe stops caring about the Reynolds number and a smooth one never does."
+ },
+ {
+  "prompt": "The largest rate the OGBIA bore is allowed runs 72416.9067, 90521.1334 and 126729.5868 bpd across the three rows. What did not change to produce that?",
+  "options": [
+   "The bore, its flow area of 0.347410 ft2 and the density of 54.500000 lb/ft3. Only the c factor moved.",
+   "The density alone. The flow area is re-evaluated on every row, because a largest rate is the rate at which that particular bore arrives at its own ceiling.",
+   "Nothing at all. A largest rate is formed from the c factor, the density and the bore together, so all three had to be restated for each of the three rows.",
+   "The c factor. The three rates belong to three fluids at one continuous-service ceiling."
+  ],
+  "answer": 0,
+  "explanation": "One bore, one crude, three services, and ceilings of 13.545709, 16.932137 and 23.704991 ft/s. The rate the line actually carries is 12000.000000 bpd, which is 0.165707 of the first of the three."
+ },
+ {
+  "prompt": "The OGBIA duty and crude are put through the same 7.981000 in bore over 300.000000 ft instead of 26400.000000 ft. Which reported figures are unchanged?",
+  "options": [
+   "The total of 25.660631 psi, since the level row reports no fittings and no elevation and a total built from one term is a property of the fluid.",
+   "The velocity of 2.244621 ft/s, the Reynolds number of 48431.2523 and the friction factor of 0.0218149625.",
+   "The friction loss of 25.660631 psi, since a loss belongs to the fluid and the bore.",
+   "None of them, since every figure in the chain reads the length, which is why a loss cannot be scaled along a route without the chain being run again."
+  ],
+  "answer": 1,
+  "explanation": "The loss is not among them: 25.660631 psi becomes 0.291598 psi, because the friction term follows the length directly while nothing upstream of it does."
+ }
+]
