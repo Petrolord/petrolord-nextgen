@@ -28,7 +28,7 @@ It also carries something the CAPEX total does not. The same screening gives the
 
 ## What sits outside every total
 
-The plan's cost items include a Decommissioning provision of 260.0000 typed as ABEX. The engine's CAPEX total is 2250.0000 and its OPEX total is 95.0000 a year, and the ABEX line is in neither, because the screening case carries capex and operating cost only. A line can be in the plan, correct, and absent from the number the plan reports.
+The plan's cost items include a Decommissioning provision of 260.0000 typed as ABEX. The engine's CAPEX total is 2250.0000 and its OPEX total is 95.0000 a year, and the ABEX line is in neither, because it is neither development capex nor an annual operating cost. It is the plan's end-of-life cost, and the case charges it in the final production year, so a line can sit outside both totals and still reach the value the plan reports.
 
 ## The mistake
 

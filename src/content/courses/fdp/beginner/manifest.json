@@ -226,7 +226,7 @@
         },
         {
           "key": "l02-capex-opex-and-the-line-left-out",
-          "title": "CAPEX, OPEX and the line left out",
+          "title": "CAPEX, OPEX and the line outside both totals",
           "order": 2,
           "est_minutes": 13,
           "panels": [

@@ -1,38 +1,39 @@
 # What the hurdle hides
 
-A hurdle turns a rate into a yes or a no, and in doing so it throws away every other number on the row. What survives the comparison is one bit, and the money is not in it.
+A hurdle turns a rate into a yes or a no, and in doing so it throws away every other number on the row. On this plan it throws away more than that, because not one of the five scenarios carries a rate for a hurdle to test.
 
 {{panel:ec-value-explorer}}
 
-## One test, four different projects
+## One test, and nothing to test it on
 
-Take a screening hurdle of 15 percent and run the EGINA scenarios past it.
+The scenario card colours an internal rate of return of 15 percent or more green and anything below it amber, and that is the only hurdle rate anywhere in the studio.
 
-| scenario | concept | capex | NPV | IRR | verdict at 15 percent |
-| --- | --- | --- | --- | --- | --- |
-| High price | FPSO development | 2250.0000 | 3667.1870 | 43.8693 | pass |
-| Tie-back base | Subsea tie-back | 730.0000 | 1048.6281 | 40.4321 | pass |
-| Base | FPSO development | 2250.0000 | 2047.5653 | 29.5998 | pass |
-| Low price | FPSO development | 2250.0000 | 427.9436 | 14.4152 | fail |
+| scenario | concept | capex | NPV | rate of return |
+| --- | --- | --- | --- | --- |
+| High price | FPSO development | 2250.0000 | 3638.0233 | none, multiple-roots |
+| Base | FPSO development | 2250.0000 | 2015.4123 | none, multiple-roots |
+| Tie-back base | Subsea tie-back | 730.0000 | 1013.7182 | none, multiple-roots |
+| Low price | FPSO development | 2250.0000 | 392.8013 | none, multiple-roots |
+| Stress | FPSO development | 2250.0000 | -1834.1220 | none, no-root |
 
-The Low price case returns 14.4152 percent and fails. It is also worth 427.9436 million USD at a discount rate of 10.0000 percent, which is money the field would otherwise not have. The hurdle rejected a positive NPV, and it did so correctly by its own rule, because 14.4152 is less than 15.
+Each of those five carries a value and none of them carries a rate, because the plan pays 260.0000 million USD to abandon the field in production year 20 and every flow changes sign twice. A rule written against the rate returns nothing on every row, on the row worth 3638.0233 million USD and on the row worth -1834.1220 alike.
 
-## The ordering the hurdle imposes
+## What the colour was hiding while it still worked
 
-Among the three that pass, the hurdle has nothing further to say, so the natural next step is to sort by how far each cleared it. That puts 40.4321 percent above 29.5998 percent, which puts 1048.6281 million USD above 2047.5653 million USD. A screening process built entirely on a rate against a threshold will reach for the tie-back and never surface that the FPSO was worth more. The two are not even the same commitment: 730.0000 million USD of capex against 2250.0000, and the hurdle divides that scale out before it tests anything.
+Run the Base case with no end-of-life cost and it reports 29.5998 percent on a value of 2047.5653 million USD, comfortably inside the green. That colour was never a statement about how much money a case carried. A rate divides the size out before it reports, so a commitment of 730.0000 million USD of capex and one of 2250.0000 can clear the same threshold and leave very different amounts behind: 1013.7182 million USD against 2015.4123 at the same price.
 
-## Two thresholds are already in play
+## Two thresholds, and only one of them still works
 
-The screening case is discounted at 10.0000 percent, and that rate is already a test: it is the rate at which future money is charged before the NPV is struck. A separate hurdle of 15 percent applied to the IRR afterwards is a second, stricter test, and the two are not the same test twice. The Low price case passes the first, since 427.9436 is positive, and fails the second. Which of those is the decision depends on what the 15 is for, and that is a policy somebody set rather than anything the engine derived.
+The screening case is discounted at 10.0000 percent, and that rate is already a test, since future money is charged at it before the value is struck. A hurdle of 15 percent applied to the rate afterwards is a second and stricter test, and it is the one that now has no input. The first still reads on every case: 392.8013 million USD at 48.0000 USD a barrel is positive, and -1834.1220 at 18.0000 is not.
 
-## What a pass does not certify
+## What a verdict never certified
 
-A rate clearing a hurdle says nothing about whether the inputs behind it were sound. The Base rate of 29.5998 percent rests on one price of 70.0000 USD a barrel, one screening shape, a capex of 2250.0000 million USD and default terms of royalty 12.5000 percent and tax 30.0000 percent. Change the price to 48.0000 and the same concept, on the same capex, fails the same hurdle at 14.4152 percent. The hurdle did not detect anything about the project. It detected the price deck it was handed.
+A rate clearing a hurdle said nothing about whether the inputs behind it were sound. The Base figures rest on one price of 70.0000 USD a barrel, one screening shape, a capex of 2250.0000 million USD and default terms of royalty 12.5000 percent and tax 30.0000 percent. Change the price to 48.0000 and the same concept on the same capex is worth 392.8013. A threshold detects the price deck it was handed.
 
 ## The mistake
 
-The mistake is a green tick with no NPV beside it. A reader who sees only the verdict cannot tell 427.9436 million USD of rejected value from a case that was genuinely worthless, and cannot tell a pass on 2047.5653 from a pass on 1048.6281. Report the rate, the NPV, the capex and the payback together, and let the hurdle filter rather than decide.
+Reading a missing rate as a failed one. A card that leads with a rate has nothing to print on any of these five cases, and a reader who treats the empty cell as a low score ranks 3638.0233 million USD below nothing at all. Report the value, the status, the capex and the payback together, and let a hurdle filter what it can still measure.
 
 ## Exercise
 
-Apply a 15 percent hurdle to all four scenarios and record each verdict. Then state the NPV of the case that fails, and explain what a reader who sees only the verdicts cannot learn about the two passing FPSO cases.
+State what each of the five EGINA scenarios reports for its rate of return and the status beside it. Then give the value at 92.0000 USD a barrel and the value at 18.0000, and say what a hurdle of 15 percent can tell a reader about either of them.

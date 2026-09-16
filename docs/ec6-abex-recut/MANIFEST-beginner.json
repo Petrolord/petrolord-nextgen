@@ -2,2543 +2,1429 @@
  "app_slug": "fdp",
  "course": "Field Development Planning",
  "tier": "beginner",
- "tier_name": "Associate",
  "generated": "2026-09-16",
- "repair": "EC6-8 end-of-life cost: the teaching lab and the capstone now pass planAbandonment, so every screening case is charged the plan's ABEX cost item in its final production year.",
- "engines": "engines main 709172f (economics/fdp/economics.js and scenarioCalculations.js vendored)",
- "old_digest": "/root/ec-wip-fdp/digest.txt at 511 lines, as the live course was written from",
- "new_digest": "/root/ec-wip-fdp/digest.txt at 534 lines, rebuilt by ec6_dump.mjs, byte-reproducible and byte-identical under a second timezone",
+ "what_this_is": "What this wave actually recut in this tier. Every old_ value is the text of the LIVE production row or of the committed lesson line it replaces.",
  "counts": {
-  "lessons_live": 26,
-  "lessons_falsified": 16,
-  "questions_live": 132,
-  "questions_falsified": 51,
-  "questions_falsified_module_bank": 32,
-  "questions_falsified_final_exam": 19,
-  "keyed_answer_affected": 13,
-  "stem_affected": 26,
-  "superlative_stems_among_falsified": 6
+  "lessons_recut": 16,
+  "questions_recut": 52,
+  "keyed_option_text_rewritten": 15,
+  "stems_rewritten": 26
  },
- "method": {
-  "corpus": "ALL 78 lessons (src/content/courses/fdp/**/*.md) and ALL 396 LIVE questions, the questions read out of the applied seed migrations 20260918_ec6_fdp_seed_{beginner,intermediate,advanced}.sql rather than out of the wave's bank JSONs, so the manifest describes what production actually serves.",
-  "moved_values": "Every numeric literal the old teaching digest printed and the rebuilt digest does not, matched in its canonical four-decimal form AND in every rounded (0 to 3 dp) and comma-grouped restatement, each with a numeric boundary on both sides so a match is never a fragment of a longer number.",
-  "moved_referent": "Three values the rebuilt digest still prints, but now labels as the case WITHOUT the end-of-life cost (2047.5653, 29.5998, 1048.6281). Quoting them as the plan's answer is false even though the literal survives.",
-  "falsified_claims": "Six prose patterns with no moved number of their own, each paired with the digest line that settles it.",
-  "two_defects_found_in_this_sweep_and_fixed": [
-   "An exact-literal sweep alone was checked against a rounded-restatement sweep. 0 of 404 value-hits turned out to be rounded-only, but the check had to be run: the corpus quotes the digest's canonical four-decimal forms. An earlier substring version of that check reported 32 false hits for '628' because 628 sits inside 0.628637, which is why every match here carries a numeric boundary.",
-   "The claim patterns first used [^.] as a sentence guard. A decimal point inside a number ends that window, so 'at 30.0000 USD a barrel gives -898.3507 and multiple-roots' was invisible to it and intermediate/m06/l03-onward.md was missed. The guard is now (?:[^.\\n]|\\.(?=\\d)), which found 17 further claim instances and two further questions."
-  ]
- },
- "lessons_falsified": [
+ "lessons_recut": [
   {
    "path": "src/content/courses/fdp/beginner/m01-what-a-plan-holds/l01-one-field-one-plan.md",
-   "module": "m01-what-a-plan-holds",
-   "lesson": "l01-one-field-one-plan.md",
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 million USD, NPV 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "5653 million USD, IRR 29."
-    }
+   "retitled": null,
+   "old_lines": [
+    "Six figures come off the EGINA plan as its headline: P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, total CAPEX 2250.0000 million USD, NPV 2047.5653 million USD, IRR 29.5998 percent, and 4 wells.",
+    "None of those six is free standing. The 130.0000 MMbbl is the arithmetic sum of two oil reservoir rows at P50, 95.0000 for Egina Main and 35.0000 for Egina Deep. The 70.0000 Bcf is a single gas row and stays in its own unit. The 2250.0000 million USD is the FPSO concept's three capex fields added up, 520.0000 for drilling, 1350.0000 for facilities and 380.0000 for subsea. The NPV of 2047.5653 million USD is what that concept is worth at 70.0000 USD a barrel on the studio's default screening terms.",
+    "The mistake is to read the plan as one document with one answer in it. The plan holds several answers to overlapping questions, and a reader who quotes NPV 2047.5653 million USD without knowing which capex it ran on, which price deck it priced, and which production shape it burned has quoted a number and understood none of it."
    ],
-   "falsified_claims": []
+   "new_lines": [
+    "Six figures come off the EGINA plan as its headline: P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, total CAPEX 2250.0000 million USD, NPV 2015.4123 million USD, IRR none, and 4 wells. The rate of return reads none because the plan pays 260.0000 million USD to abandon the field in production year 20, so its cash flow changes sign twice and no single rate is reportable.",
+    "None of those six is free standing. The 130.0000 MMbbl is the arithmetic sum of two oil reservoir rows at P50, 95.0000 for Egina Main and 35.0000 for Egina Deep. The 70.0000 Bcf is a single gas row and stays in its own unit. The 2250.0000 million USD is the FPSO concept's three capex fields added up, 520.0000 for drilling, 1350.0000 for facilities and 380.0000 for subsea. The NPV of 2015.4123 million USD is what that concept is worth at 70.0000 USD a barrel on the studio's default screening terms.",
+    "The mistake is to read the plan as one document with one answer in it. The plan holds several answers to overlapping questions, and a reader who quotes NPV 2015.4123 million USD without knowing which capex it ran on, which price deck it priced, and which production shape it burned has quoted a number and understood none of it."
+   ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m01-what-a-plan-holds/l03-the-screening-tier.md",
-   "module": "m01-what-a-plan-holds",
-   "lesson": "l03-the-screening-tier.md",
-   "moved_values": [
-    {
-     "value": "-1797.2732",
-     "kind": "retired",
-     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
-     "quoted_as": [
-      "-1797",
-      "1797",
-      "-1797.2732"
-     ],
-     "example": "0000 USD a barrel the same concept is worth -1797."
-    },
-    {
-     "value": "-3517.4133",
-     "kind": "retired",
-     "settled_by": "- a scenario priced at zero, which is a number somebody typed: accepted, NPV -3554.2621.",
-     "quoted_as": [
-      "-3517.4133",
-      "3517",
-      "-3517"
-     ],
-     "example": "A scenario priced at zero is accepted, because zero is a number somebody entered, and the result is an NPV of -3517."
-    },
-    {
-     "value": "0.330657",
-     "kind": "retired",
-     "settled_by": "# Commentary: the payback column is the one figure in that table computed WITHOUT the end-of-life cost. scenarioPayback takes no abandonment argument, so the card reports the payback of a plan that never pays to abandon. On these cases it changes nothing, because the cost falls in the last year and the money has been recovered long before it; on a plan that only recovers at the end it would.",
-     "quoted_as": [
-      "0.330657"
-     ],
-     "example": "9377 million USD, which is 0."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 percent, is an NPV of 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "5653 million USD with an IRR of 29."
-    },
-    {
-     "value": "3310.0565",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "3310",
-      "3310.0565"
-     ],
-     "example": "8812 and tax takes 3310."
-    },
-    {
-     "value": "5321.9377",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "5321.9377"
-     ],
-     "example": "0565, so government take is 5321."
-    }
+   "retitled": null,
+   "old_lines": [
+    "Take the EGINA Base case at 70.0000 USD a barrel on the FPSO concept. Gross revenue over the life is 16095.0492 million USD. Royalty takes 2011.8812 and tax takes 3310.0565, so government take is 5321.9377 million USD, which is 0.330657 of gross revenue. Capex is 2250.0000 and operating cost over the life is 3049.6464. What survives all of that, discounted at 10.0000 percent, is an NPV of 2047.5653 million USD with an IRR of 29.5998 percent and payback in 3.8273 years.",
+    "The tier prices what it is given. A scenario priced at zero is accepted, because zero is a number somebody entered, and the result is an NPV of -3517.4133 million USD. The engine refuses a missing oil price and prices a zero one, and the difference between those two cases is the difference between a gap and a decision.",
+    "The mistake is to carry a screening NPV into a room where a sanction number is wanted. The second mistake is quieter: reading 2047.5653 million USD as though it were robust because it has four decimals. It is one deck at one price on one shape, and at 18.0000 USD a barrel the same concept is worth -1797.2732 million USD."
    ],
-   "falsified_claims": []
+   "new_lines": [
+    "Take the EGINA Base case at 70.0000 USD a barrel on the FPSO concept. Gross revenue over the life is 16095.0492 million USD. Royalty takes 2011.8812 and tax takes 3276.9239, so government take is 5288.8051 million USD, which is 0.328598 of gross revenue. Capex is 2250.0000 and operating cost over the life is 3049.6464. What survives all of that, discounted at 10.0000 percent, is an NPV of 2015.4123 million USD and a payback of 3.8273 years. No rate of return is reported beside them: the plan pays 260.0000 million USD to abandon the field in production year 20, the flow changes sign twice, and the engine reports the status multiple-roots.",
+    "The tier prices what it is given. A scenario priced at zero is accepted, because zero is a number somebody entered, and the result is an NPV of -3554.2621 million USD. The engine refuses a missing oil price and prices a zero one, and the difference between those two cases is the difference between a gap and a decision.",
+    "The mistake is to carry a screening NPV into a room where a sanction number is wanted. The second mistake is quieter: reading 2015.4123 million USD as though it were robust because it has four decimals. It is one deck at one price on one shape, and at 18.0000 USD a barrel the same concept is worth -1834.1220 million USD."
+   ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m01-what-a-plan-holds/l04-what-it-refuses-to-guess.md",
-   "module": "m01-what-a-plan-holds",
-   "lesson": "l04-what-it-refuses-to-guess.md",
-   "moved_values": [
-    {
-     "value": "-3517.4133",
-     "kind": "retired",
-     "settled_by": "- a scenario priced at zero, which is a number somebody typed: accepted, NPV -3554.2621.",
-     "quoted_as": [
-      "-3517.4133",
-      "3517",
-      "-3517"
-     ],
-     "example": "Price the same concept at zero and the engine runs it and returns an NPV of -3517."
-    }
+   "retitled": null,
+   "old_lines": [
+    "A zero is an answer. Price the same concept at zero and the engine runs it and returns an NPV of -3517.4133 million USD, because somebody decided the price. A blank price is not a decision, and the engine will not decide it for you.",
+    "Write out the messages for a concept with no capex and for a scenario with no oil price. Then explain why a scenario priced at zero returns -3517.4133 million USD while a scenario with a blank price returns nothing at all."
    ],
-   "falsified_claims": []
+   "new_lines": [
+    "A zero is an answer. Price the same concept at zero and the engine runs it and returns an NPV of -3554.2621 million USD, because somebody decided the price. A blank price is not a decision, and the engine will not decide it for you.",
+    "Write out the messages for a concept with no capex and for a scenario with no oil price. Then explain why a scenario priced at zero returns -3554.2621 million USD while a scenario with a blank price returns nothing at all."
+   ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m03-concepts-and-their-capex/l01-three-capex-fields.md",
-   "module": "m03-concepts-and-their-capex",
-   "lesson": "l01-three-capex-fields.md",
-   "moved_values": [
-    {
-     "value": "0.910029",
-     "kind": "retired",
-     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
-     "quoted_as": [
-      "0.910029"
-     ],
-     "example": "436477 of NPV per million USD of capex and the FPSO returns 0."
-    },
-    {
-     "value": "1.436477",
-     "kind": "retired",
-     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
-     "quoted_as": [
-      "1.436477"
-     ],
-     "example": "0000 USD a barrel the tie-back returns 1."
-    },
-    {
-     "value": "1048.6281",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "1048.6281"
-     ],
-     "example": "0000 of capex and the tie-back's 1048."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "The FPSO's NPV of 2047."
-    }
+   "retitled": null,
+   "old_lines": [
+    "Every screening result for a concept runs on the sum of its own three fields. The FPSO's NPV of 2047.5653 million USD is a return on 2250.0000 of capex and the tie-back's 1048.6281 is a return on 730.0000, and the year 0 cash flow row of the FPSO Base case is -2250.0000, the whole capex in the year before production starts.",
+    "Because the capex is read in full, the two concepts can be compared on what each million buys. At 70.0000 USD a barrel the tie-back returns 1.436477 of NPV per million USD of capex and the FPSO returns 0.910029. The FPSO is worth more in absolute terms, 2047.5653 million USD against 1048.6281, and the tie-back is more efficient with the money it uses."
    ],
-   "falsified_claims": []
+   "new_lines": [
+    "Every screening result for a concept runs on the sum of its own three fields. The FPSO's NPV of 2015.4123 million USD is a return on 2250.0000 of capex and the tie-back's 1013.7182 is a return on 730.0000, and the year 0 cash flow row of the FPSO Base case is -2250.0000, the whole capex in the year before production starts.",
+    "Because the capex is read in full, the two concepts can be compared on what each million buys. At 70.0000 USD a barrel the tie-back returns 1.388655 of NPV per million USD of capex and the FPSO returns 0.895739. The FPSO is worth more in absolute terms, 2015.4123 million USD against 1013.7182, and the tie-back is more efficient with the money it uses."
+   ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m03-concepts-and-their-capex/l02-lifecycle-cost.md",
-   "module": "m03-concepts-and-their-capex",
-   "lesson": "l02-lifecycle-cost.md",
-   "moved_values": [
-    {
-     "value": "1048.6281",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "1048.6281"
-     ],
-     "example": "5653 million USD and the tie-back 1048."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "Value needs the timing, and the screening NPV supplies it: the FPSO is worth 2047."
-    }
+   "retitled": null,
+   "old_lines": [
+    "Lifecycle cost is a plain sum. No discounting, no price, no royalty and no tax: 4150.0000 million USD is money as it is spent, whenever it is spent. That makes it useful for the question it answers, which is how much cash a concept consumes in total, and useless for ranking concepts by value. Value needs the timing, and the screening NPV supplies it: the FPSO is worth 2047.5653 million USD and the tie-back 1048.6281 at 70.0000 USD a barrel, an ordering the lifecycle totals do not give you.",
+    "The EGINA cost breakdown carries a decommissioning provision of 260.0000 million USD, typed as ABEX. The engine's totals are CAPEX 2250.0000 and OPEX 95.0000 a year, and that ABEX line is in neither of them, so it is not in the lifecycle figure and not in the screening case. Facilities carry their own estimate of the same thing, 204.5029 million USD for the Egina FPSO, at 15 percent of the capex the facility holds. Two figures for the end of life, both real, neither one inside the 4150.0000."
    ],
-   "falsified_claims": [
-    {
-     "claim": "abex-reaches-no-cash-flow",
-     "quote": "ABEX line is in neither",
-     "settled_by": "Engine totals: CAPEX 2250.0000, OPEX 95.0000 a year. The ABEX line of 260.0000 is in neither of those two totals (derived) ... It is the plan's end-of-life cost and the case carries it in the final production year."
-    }
+   "new_lines": [
+    "Lifecycle cost is a plain sum. No discounting, no price, no royalty and no tax: 4150.0000 million USD is money as it is spent, whenever it is spent. That makes it useful for the question it answers, which is how much cash a concept consumes in total, and useless for ranking concepts by value. Value needs the timing, and the screening NPV supplies it: the FPSO is worth 2015.4123 million USD and the tie-back 1013.7182 at 70.0000 USD a barrel, an ordering the lifecycle totals do not give you.",
+    "The EGINA cost breakdown carries a decommissioning provision of 260.0000 million USD, typed as ABEX. The engine's totals are CAPEX 2250.0000 and OPEX 95.0000 a year, and that ABEX line is in neither of them, so it is not inside the 4150.0000. It does reach the screening case: the engine charges it as the plan's end-of-life cost in production year 20. Facilities carry their own estimate of the same thing, 204.5029 million USD for the Egina FPSO, at 15 percent of the capex the facility holds, and an ABEX cost item replaces that estimate rather than being added to it."
    ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m04-what-a-scenario-is-worth/l01-price-is-an-input-not-a-fact.md",
-   "module": "m04-what-a-scenario-is-worth",
-   "lesson": "l01-price-is-an-input-not-a-fact.md",
-   "moved_values": [
-    {
-     "value": "-161.0098",
-     "kind": "retired",
-     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
-     "quoted_as": [
-      "-161.0098",
-      "-161",
-      "161"
-     ],
-     "example": "0000 USD a barrel the same concept returns an NPV of -161."
-    },
-    {
-     "value": "-1797.2732",
-     "kind": "retired",
-     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
-     "quoted_as": [
-      "-1797",
-      "1797",
-      "-1797.2732"
-     ],
-     "example": "0000 | -1797."
-    },
-    {
-     "value": "-3517.4133",
-     "kind": "retired",
-     "settled_by": "- a scenario priced at zero, which is a number somebody typed: accepted, NPV -3554.2621.",
-     "quoted_as": [
-      "-3517.4133",
-      "3517",
-      "-3517"
-     ],
-     "example": "A scenario priced at zero is accepted and returns an NPV of -3517."
-    },
-    {
-     "value": "14.4152",
-     "kind": "retired",
-     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
-     "quoted_as": [
-      "14.4152"
-     ],
-     "example": "9436 | 14."
-    },
-    {
-     "value": "19.4279",
-     "kind": "retired",
-     "settled_by": "- 55.0000 USD a barrel: NPV 909.0866, IRR none (multiple-roots).",
-     "quoted_as": [
-      "19.4279"
-     ],
-     "example": "2778 and 19."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 | 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "5653 | 29."
-    },
-    {
-     "value": "3151.8529",
-     "kind": "retired",
-     "settled_by": "- 85.0000 USD a barrel: NPV 3121.7380, IRR none (multiple-roots).",
-     "quoted_as": [
-      "3151.8529"
-     ],
-     "example": "0000 USD a barrel, 3151."
-    },
-    {
-     "value": "3667.1870",
-     "kind": "retired",
-     "settled_by": "| High price | FPSO development | 92.0000 | 2250.0000 | 3638.0233 | none | multiple-roots | 3.0625 |",
-     "quoted_as": [
-      "3667.1870",
-      "3667"
-     ],
-     "example": "0000 | 3667."
-    },
-    {
-     "value": "39.3813",
-     "kind": "retired",
-     "settled_by": "- 85.0000 USD a barrel: NPV 3121.7380, IRR none (multiple-roots).",
-     "quoted_as": [
-      "39.3813"
-     ],
-     "example": "8529 and 39."
-    },
-    {
-     "value": "427.9436",
-     "kind": "retired",
-     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
-     "quoted_as": [
-      "427.9436"
-     ],
-     "example": "0000 | 427."
-    },
-    {
-     "value": "43.8693",
-     "kind": "retired",
-     "settled_by": "| High price | FPSO development | 92.0000 | 2250.0000 | 3638.0233 | none | multiple-roots | 3.0625 |",
-     "quoted_as": [
-      "43.8693"
-     ],
-     "example": "1870 | 43."
-    },
-    {
-     "value": "8.2444",
-     "kind": "retired",
-     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
-     "quoted_as": [
-      "8.2444"
-     ],
-     "example": "0098 and a rate of return of 8."
-    },
-    {
-     "value": "943.2778",
-     "kind": "retired",
-     "settled_by": "- 55.0000 USD a barrel: NPV 909.0866, IRR none (multiple-roots).",
-     "quoted_as": [
-      "943.2778",
-      "943"
-     ],
-     "example": "0000 USD a barrel, 943."
-    }
+   "retitled": null,
+   "old_lines": [
+    "| Base | 70.0000 | 2047.5653 | 29.5998 | ok | 3.8273 |",
+    "| Low price | 48.0000 | 427.9436 | 14.4152 | ok | 5.7734 |",
+    "| High price | 92.0000 | 3667.1870 | 43.8693 | ok | 3.0625 |",
+    "| Stress | 18.0000 | -1797.2732 | none | no-root | never |",
+    "Every row runs the same FPSO concept, the same capex of 2250.0000 million USD, the same operating cost of 95.0000 million USD a year and the same 20 year production shape. Nothing about the rock, the wells or the vessel differs between the first row and the last. The plan is worth 2047.5653 million USD under one typed price and -1797.2732 million USD under another.",
+    "Priced at 40.0000 USD a barrel the same concept returns an NPV of -161.0098 and a rate of return of 8.2444 percent. At 55.0000 USD a barrel, 943.2778 and 19.4279 percent. At 70.0000 USD a barrel, 2047.5653 and 29.5998 percent. At 85.0000 USD a barrel, 3151.8529 and 39.3813 percent. The four prices are evenly spaced and the NPV rises by the same amount at every step, because the production shape, the capex and the fiscal terms never move between the runs. Only what a barrel earns moves.",
+    "A scenario priced at zero is accepted and returns an NPV of -3517.4133 million USD, because zero is a number somebody chose and the engine runs the number it was given. A scenario with no price is refused by name: FdpInputError: \"the scenario oil price is missing\". A blank box gets the same message. A negative price gets its own: FdpInputError: \"the scenario oil price may not be negative: -5\".",
+    "Quoting a value without its price. \"The development is worth 2047.5653\" is not a statement about the field. It is a statement about that concept at 70.0000 USD a barrel, post royalty and tax, discounted mid year on the studio's default terms. Put 18.0000 USD a barrel in the same sentence and it reads -1797.2732 with no rate of return at all. Write the price beside every figure you carry out of the studio, and look for the price beside every figure somebody carries in."
    ],
-   "falsified_claims": [
-    {
-     "claim": "payback-or-status-paired-with-a-retired-rate",
-     "quote": "2047.5653 | 29.5998 | ok",
-     "settled_by": "| EGINA Base, 70 USD a barrel | 2015.4123 | none | multiple-roots |"
-    }
+   "new_lines": [
+    "| Base | 70.0000 | 2015.4123 | none | multiple-roots | 3.8273 |",
+    "| Low price | 48.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+    "| High price | 92.0000 | 3638.0233 | none | multiple-roots | 3.0625 |",
+    "| Stress | 18.0000 | -1834.1220 | none | no-root | never |",
+    "Every row runs the same FPSO concept, the same capex of 2250.0000 million USD, the same operating cost of 95.0000 million USD a year and the same 20 year production shape. Nothing about the rock, the wells or the vessel differs between the first row and the last. The plan is worth 2015.4123 million USD under one typed price and -1834.1220 million USD under another.",
+    "Priced at 40.0000 USD a barrel the same concept returns an NPV of -197.2391. At 55.0000 USD a barrel, 909.0866. At 70.0000 USD a barrel, 2015.4123. At 85.0000 USD a barrel, 3121.7380. Each of those four runs reports its rate of return as none, at the status multiple-roots, because the plan pays to abandon the field at the end of its life. The four prices are evenly spaced and the NPV rises by the same amount at every step, because the production shape, the capex and the fiscal terms never move between the runs. Only what a barrel earns moves.",
+    "A scenario priced at zero is accepted and returns an NPV of -3554.2621 million USD, because zero is a number somebody chose and the engine runs the number it was given. A scenario with no price is refused by name: FdpInputError: \"the scenario oil price is missing\". A blank box gets the same message. A negative price gets its own: FdpInputError: \"the scenario oil price may not be negative: -5\".",
+    "Quoting a value without its price. \"The development is worth 2015.4123\" is not a statement about the field. It is a statement about that concept at 70.0000 USD a barrel, post royalty and tax, discounted mid year on the studio's default terms. Put 18.0000 USD a barrel in the same sentence and it reads -1834.1220 with no rate of return at all. Write the price beside every figure you carry out of the studio, and look for the price beside every figure somebody carries in."
    ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m04-what-a-scenario-is-worth/l02-npv-after-royalty-and-tax.md",
-   "module": "m04-what-a-scenario-is-worth",
-   "lesson": "l02-npv-after-royalty-and-tax.md",
-   "moved_values": [
-    {
-     "value": "-1797.2732",
-     "kind": "retired",
-     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
-     "quoted_as": [
-      "-1797",
-      "1797",
-      "-1797.2732"
-     ],
-     "example": "0000 USD a barrel, lands at -1797."
-    },
-    {
-     "value": "0.330657",
-     "kind": "retired",
-     "settled_by": "# Commentary: the payback column is the one figure in that table computed WITHOUT the end-of-life cost. scenarioPayback takes no abandonment argument, so the card reports the payback of a plan that never pays to abandon. On these cases it changes nothing, because the cost falls in the last year and the money has been recovered long before it; on a plan that only recovers at the end it would.",
-     "quoted_as": [
-      "0.330657"
-     ],
-     "example": "9377, which is 0."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "The Base scenario is worth 2047."
-    },
-    {
-     "value": "3310.0565",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "3310",
-      "3310.0565"
-     ],
-     "example": "| tax | 3310."
-    },
-    {
-     "value": "5321.9377",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "5321.9377"
-     ],
-     "example": "| government take | 5321."
-    }
+   "retitled": null,
+   "old_lines": [
+    "The Base scenario is worth 2047.5653 million USD, and that figure is what is left of 16095.0492 million USD of gross revenue after the state, the drill bit, the vessel and the discount rate have each taken their part.",
+    "| tax | 3310.0565 |",
+    "| government take | 5321.9377 |",
+    "| NPV | 2047.5653 |",
+    "Royalty of 2011.8812 and tax of 3310.0565 are the government take of 5321.9377, which is 0.330657 of gross revenue. The default terms behind those two lines are a royalty of 12.5000 percent and a tax of 30.0000 percent, and the engine applies them year by year rather than to the life total. The capex of 2250.0000 is the concept's own money, read from the three capex fields the concept carries and not from a separate economics box.",
+    "The 2047.5653 is a present value at a discount rate of 10.0000 percent, taken mid year rather than at each year end, which treats the cash as arriving through the year instead of on its last day. The undiscounted cash the case describes is far larger than the value it reports, and the gap is the discount rate doing its work on money that arrives late. Capex is the exception: it is spent before any of it, which is why a scenario that cannot earn enough after the state has been paid, such as the same concept at 18.0000 USD a barrel, lands at -1797.2732 rather than merely at a small positive figure.",
+    "Reading the NPV as cash in a bank account. Nothing in a plan ever pays out 2047.5653 million USD: the number is a comparison against earning 10.0000 percent somewhere else. The second mistake is treating government take as tax alone. Tax here is 3310.0565 and royalty is 2011.8812, and a reader who quotes only the first understates what the state receives by the second."
    ],
-   "falsified_claims": []
+   "new_lines": [
+    "The Base scenario is worth 2015.4123 million USD, and that figure is what is left of 16095.0492 million USD of gross revenue after the state, the drill bit, the vessel and the discount rate have each taken their part.",
+    "| tax | 3276.9239 |",
+    "| government take | 5288.8051 |",
+    "| NPV | 2015.4123 |",
+    "Royalty of 2011.8812 and tax of 3276.9239 are the government take of 5288.8051, which is 0.328598 of gross revenue. Tax is lower than it would otherwise be, because the plan's end-of-life cost of 260.0000 million USD is deductible in production year 20. The default terms behind those two lines are a royalty of 12.5000 percent and a tax of 30.0000 percent, and the engine applies them year by year rather than to the life total. The capex of 2250.0000 is the concept's own money, read from the three capex fields the concept carries and not from a separate economics box.",
+    "The 2015.4123 is a present value at a discount rate of 10.0000 percent, taken mid year rather than at each year end, which treats the cash as arriving through the year instead of on its last day. The undiscounted cash the case describes is far larger, and the gap is the discount rate at work on money that arrives late. Capex is the exception, spent before any of it, which is why the same concept at 18.0000 USD a barrel lands at -1834.1220 rather than at a small positive figure.",
+    "Reading the NPV as cash in a bank account. Nothing in a plan ever pays out 2015.4123 million USD: the number is a comparison against earning 10.0000 percent somewhere else. The second mistake is treating government take as tax alone. Tax here is 3276.9239 and royalty is 2011.8812, and a reader who quotes only the first understates what the state receives by the second."
+   ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m04-what-a-scenario-is-worth/l03-the-year-the-money-goes-out.md",
-   "module": "m04-what-a-scenario-is-worth",
-   "lesson": "l03-the-year-the-money-goes-out.md",
-   "moved_values": [
-    {
-     "value": "-1797.2732",
-     "kind": "retired",
-     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
-     "quoted_as": [
-      "-1797",
-      "1797",
-      "-1797.2732"
-     ],
-     "example": "0000 USD a barrel the same concept never climbs out: the NPV is -1797."
-    }
+   "retitled": null,
+   "old_lines": [
+    "The profile has 21 rows in all. Year 0 is the build: the money goes out, the field produces nothing, and the cumulative position opens at -2250.0000, which is also the deepest cash position the case ever reaches. From year 1 the capex column is 0.0000 for the rest of the life, and every later row is revenue against royalty, operating cost and tax.",
+    "Discounting punishes late money, so a plan that spends first and earns later is worth less than the same totals in the other order. That ordering is also what makes the other two headline figures mean anything. A rate of return exists only where the cash flow changes sign, and payback can only be measured because there is a hole to climb out of. At 18.0000 USD a barrel the same concept never climbs out: the NPV is -1797.2732, the payback is never, and the rate of return has status no-root because no rate makes that flow worth zero. Timing is the whole reason those two figures are reportable at all, and a case whose years never change sign has neither of them."
    ],
-   "falsified_claims": []
+   "new_lines": [
+    "The profile has 21 rows in all, and the last of them carries the plan's end-of-life cost of 260.0000 million USD, charged in production year 20. Year 0 is the build: the money goes out, the field produces nothing, and the cumulative position opens at -2250.0000, which is also the deepest cash position the case ever reaches. From year 1 the capex column is 0.0000 for the rest of the life, and every later row is revenue against royalty, operating cost and tax.",
+    "Discounting punishes late money, so a plan that spends first and earns later is worth less than the same totals in the other order. That ordering is also what makes the other two headline figures mean anything. A rate of return exists only where the cash flow changes sign, and payback can only be measured because there is a hole to climb out of. At 18.0000 USD a barrel the same concept never climbs out: the NPV is -1834.1220, the payback is never, and the rate of return has status no-root because no rate makes that flow worth zero. Timing is the whole reason those two figures are reportable at all, and a case whose years never change sign has neither of them."
+   ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m04-what-a-scenario-is-worth/l04-payback-and-what-it-hides.md",
-   "module": "m04-what-a-scenario-is-worth",
-   "lesson": "l04-payback-and-what-it-hides.md",
-   "moved_values": [
-    {
-     "value": "1048.6281",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "1048.6281"
-     ],
-     "example": "It is also worth less: 1048."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "The NPV can: it is 2047."
-    }
+   "retitled": null,
+   "old_lines": [
+    "The instant the cumulative crosses zero, payback has said everything it has to say. Year 4 earns 709.5812, year 5 earns 631.9731, year 6 earns 562.1258, year 7 earns 499.2632, and the rest of the 21 rows follow them down the decline. None of that reaches the payback figure. Two cases with the same payback can hold completely different amounts of money after the crossing, and payback cannot tell them apart. The NPV can: it is 2047.5653 on this case, and it counts every one of the 21 rows.",
+    "The tie-back concept at the same price of 70.0000 USD a barrel pays back in 3.2035 years against the FPSO's 3.8273, so it is the quicker of the two. It is also worth less: 1048.6281 against 2047.5653. A reader ranking by payback alone puts the smaller value first. Price moves the figure as well: the same FPSO concept pays back in 3.0625 years at 92.0000 USD a barrel and 5.7734 years at 48.0000, and at 18.0000 it never pays back at all.",
+    "Payback carries no discount rate of its own and no judgement about what comes after the crossing. It will not rank concepts, and it will not be reported when there is nothing to report: a case that never recovers its capex returns never, in place of a number that would look like an answer. The 5.7734 years at 48.0000 USD a barrel and the never at 18.0000 are answers of the same kind, one measured and one refused."
    ],
-   "falsified_claims": []
+   "new_lines": [
+    "The instant the cumulative crosses zero, payback has said everything it has to say. Year 4 earns 709.5812, year 5 earns 631.9731, year 6 earns 562.1258, year 7 earns 499.2632, and the rest of the 21 rows follow them down the decline. None of that reaches the payback figure. Two cases with the same payback can hold completely different amounts of money after the crossing, and payback cannot tell them apart. The NPV can: it is 2015.4123 on this case, and it counts every one of the 21 rows.",
+    "The tie-back concept at the same price of 70.0000 USD a barrel pays back in 3.2035 years against the FPSO's 3.8273, so it is the quicker of the two. It is also worth less: 1013.7182 against 2015.4123. A reader ranking by payback alone puts the smaller value first. Price moves the figure as well: the same FPSO concept pays back in 3.0625 years at 92.0000 USD a barrel and 5.7734 years at 48.0000, and at 18.0000 it never pays back at all.",
+    "Payback carries no discount rate of its own and no judgement about what comes after the crossing. It is also the one figure on the scenario card computed without the plan's end-of-life cost of 260.0000 million USD, because the payback reader takes no abandonment argument at all. On these cases that changes nothing, since the cost falls in the last year and the money has been recovered long before it. It will not rank concepts, and it will not be reported when there is nothing to report: a case that never recovers its capex returns never, in place of a number that would look like an answer. The 5.7734 years at 48.0000 USD a barrel and the never at 18.0000 are answers of the same kind, one measured and one refused."
+   ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m04-what-a-scenario-is-worth/l05-two-concepts-one-price.md",
-   "module": "m04-what-a-scenario-is-worth",
-   "lesson": "l05-two-concepts-one-price.md",
-   "moved_values": [
-    {
-     "value": "0.910029",
-     "kind": "retired",
-     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
-     "quoted_as": [
-      "0.910029"
-     ],
-     "example": "436477 per million USD of capex and the FPSO returns 0."
-    },
-    {
-     "value": "1.436477",
-     "kind": "retired",
-     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
-     "quoted_as": [
-      "1.436477"
-     ],
-     "example": "The tie-back returns 1."
-    },
-    {
-     "value": "1048.6281",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "1048.6281"
-     ],
-     "example": "5653 million USD and the subsea tie-back 1048."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 USD a barrel, the FPSO concept is worth 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "5653 | 29."
-    },
-    {
-     "value": "40.4321",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "40.4321"
-     ],
-     "example": "6281 | 40."
-    }
+   "retitled": null,
+   "old_lines": [
+    "Read at the same 70.0000 USD a barrel, the FPSO concept is worth 2047.5653 million USD and the subsea tie-back 1048.6281, and the tie-back is the better of the two per million USD of capex it asks for.",
+    "| Base | FPSO development | 2250.0000 | 2047.5653 | 29.5998 | 3.8273 |",
+    "| Tie-back base | Subsea tie-back | 730.0000 | 1048.6281 | 40.4321 | 3.2035 |",
+    "The FPSO earns nearly twice the value. The tie-back earns its money faster, at a rate of return of 40.4321 percent against 29.5998, and pays back in 3.2035 years against 3.8273. Both runs use the same price, the same royalty of 12.5000 percent, the same tax of 30.0000 percent and the same discount rate of 10.0000 percent, so the only things that differ between the two rows are the capex, the operating cost, the peak rate and the life that each concept carries on its own record.",
+    "Divide each value by the capex that bought it and the ranking turns over. The tie-back returns 1.436477 per million USD of capex and the FPSO returns 0.910029. On a balance sheet with 730.0000 to spend and no more, the tie-back is the only one of the two that can be built at all. On a balance sheet that can carry 2250.0000, the FPSO leaves 2047.5653 where the tie-back would have left 1048.6281. The two measures answer different questions: one asks what the field is worth developed this way, the other asks what each million USD of the budget bought."
    ],
-   "falsified_claims": []
+   "new_lines": [
+    "Read at the same 70.0000 USD a barrel, the FPSO concept is worth 2015.4123 million USD and the subsea tie-back 1013.7182, and the tie-back is the better of the two per million USD of capex it asks for.",
+    "| Base | FPSO development | 2250.0000 | 2015.4123 | none | 3.8273 |",
+    "| Tie-back base | Subsea tie-back | 730.0000 | 1013.7182 | none | 3.2035 |",
+    "The FPSO earns nearly twice the value. The tie-back earns its money faster, paying back in 3.2035 years against 3.8273, and neither row carries a rate of return at all: both concepts pay to abandon the field at the end of their lives, so both report the status multiple-roots. Both runs use the same price, the same royalty of 12.5000 percent, the same tax of 30.0000 percent and the same discount rate of 10.0000 percent, so the only things that differ between the two rows are the capex, the operating cost, the peak rate and the life that each concept carries on its own record.",
+    "Divide each value by the capex that bought it and the ranking turns over. The tie-back returns 1.388655 per million USD of capex and the FPSO returns 0.895739. On a balance sheet with 730.0000 to spend and no more, the tie-back is the only one of the two that can be built at all. On a balance sheet that can carry 2250.0000, the FPSO leaves 2015.4123 where the tie-back would have left 1013.7182. The two measures answer different questions: one asks what the field is worth developed this way, the other asks what each million USD of the budget bought."
+   ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m05-the-plan-s-own-economics/l01-cost-items-are-the-money.md",
-   "module": "m05-the-plan-s-own-economics",
-   "lesson": "l01-cost-items-are-the-money.md",
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 a year, the plan returns an NPV of 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "5653 million USD, a rate of return of 29."
-    }
+   "retitled": null,
+   "old_lines": [
+    "Run at 70.0000 USD a barrel on the FPSO concept's 20 year shape, with capex of 2250.0000 taken from the cost items and an operating cost of 95.0000 a year, the plan returns an NPV of 2047.5653 million USD, a rate of return of 29.5998 percent and a payback of 3.8273 years. The concept's own capex is also 2250.0000. The two agree here because this plan was costed against the concept it is running, and that agreement is a result, not a rule. The same studio will happily run a plan whose items total something else entirely, and it reports both figures without complaint."
    ],
-   "falsified_claims": [
-    {
-     "claim": "egina-has-one-rate-of-return",
-     "quote": "the plan returns an NPV of 2047.5653 million USD, a rate of return of 29.5998 percent and a payback of 3.8273",
-     "settled_by": "MORE THAN ONE ROOT ... The engine finds every root, reports irr null and irrStatus multiple-roots, and lists them."
-    }
+   "new_lines": [
+    "Run at 70.0000 USD a barrel on the FPSO concept's 20 year shape, with capex of 2250.0000 taken from the cost items, an operating cost of 95.0000 a year and the end-of-life cost in the last of those years, the plan returns an NPV of 2015.4123 million USD, no rate of return at all at the status multiple-roots, and a payback of 3.8273 years. The concept's own capex is also 2250.0000. The two agree here because this plan was costed against the concept it is running, and that agreement is a result, not a rule. The same studio will happily run a plan whose items total something else entirely, and it reports both figures without complaint."
    ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m05-the-plan-s-own-economics/l02-capex-opex-and-the-line-left-out.md",
-   "module": "m05-the-plan-s-own-economics",
-   "lesson": "l02-capex-opex-and-the-line-left-out.md",
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "What matters is knowing it is out, so that a value of 2047."
-    }
+   "retitled": true,
+   "old_lines": [
+    "# CAPEX, OPEX and the line left out",
+    "The plan holds seven cost items totalling more than the economics ever see, because the decommissioning provision of 260.0000 million USD is typed as ABEX and a screening case carries capex and operating cost only.",
+    "| ABEX | Decommissioning provision 260.0000 | in neither total |",
+    "The engine reports CAPEX 2250.0000 and OPEX 95.0000. The 260.0000 is in the plan, it is visible in the Operate phase roll-up of 355.0000, and it is in no line of the cash flow the screening case builds. Read the Operate roll-up of 355.0000 as an annual figure and the plan appears to cost nearly four times what its economics charge it.",
+    "## The line that is not there",
+    "Nothing is wrong with the engine here. A screening tier is a comparison between concepts, and every one of them will carry a decommissioning cost at the end. Leaving it out of all of them changes none of the rankings, and putting it in would need an abandonment year, an escalation and a fiscal treatment that this tier does not ask for. What matters is knowing it is out, so that a value of 2047.5653 million USD is read as a screening value with an abandonment cost still to come. A plan that carries the provision and a plan that forgot to type it both screen at the same value, and only the cost item list shows which of the two you are holding.",
+    "Adding the 260.0000 to the capex to be conservative. The engine reports CAPEX 2250.0000, and a reader who quietly makes it something else has a number that matches nothing in the plan, agrees with no concept estimate and cannot be reconciled against anything. If the abandonment cost has to be in the economics, it belongs in a tier that models it, not in a screening capex.",
+    "Give the CAPEX total, the OPEX total and the amount of the plan that reaches neither, and name the cost item it belongs to. Then explain why the Base case charges 204.5000 of operating cost in year 1 when the plan's OPEX total is 95.0000 a year."
    ],
-   "falsified_claims": [
-    {
-     "claim": "abex-reaches-no-cash-flow",
-     "quote": "ABEX | Decommissioning provision 260.0000 | in neither",
-     "settled_by": "Engine totals: CAPEX 2250.0000, OPEX 95.0000 a year. The ABEX line of 260.0000 is in neither of those two totals (derived) ... It is the plan's end-of-life cost and the case carries it in the final production year."
-    }
+   "new_lines": [
+    "# CAPEX, OPEX and the line outside both totals",
+    "The plan holds seven cost items and the engine totals them into two figures. The decommissioning provision of 260.0000 million USD is typed as ABEX, which is neither development capex nor an annual operating cost, so it sits outside both totals and the case charges it at the end of the field's life instead.",
+    "| ABEX | Decommissioning provision 260.0000 | in neither total, charged in production year 20 |",
+    "The engine reports CAPEX 2250.0000 and OPEX 95.0000. The 260.0000 is in the plan, it is visible in the Operate phase roll-up of 355.0000, and the screening case charges it once, in production year 20, as the plan's end-of-life cost. Read the Operate roll-up of 355.0000 as an annual figure and the plan appears to cost nearly four times what its economics charge it.",
+    "## What charging it is worth",
+    "Until September 2026 that line reached no cash flow at all, and the value on the card was the value of a plan that never paid to abandon the field. It now falls in the final production year, where it is deductible for tax in the year it falls, and the case reports 2015.4123 million USD. The same case run with no end-of-life cost at all is worth 2047.5653 million USD, so charging 260.0000 twenty years out costs the plan 32.1530 million USD of present value. A plan that carries the provision and a plan that forgot to type it no longer screen at the same value.",
+    "Adding the 260.0000 to the capex to be conservative. The engine reports CAPEX 2250.0000, and a reader who quietly makes it something else has a number that matches nothing in the plan, agrees with no concept estimate and cannot be reconciled against anything. The end-of-life cost is already charged, in the year it falls rather than in year 0, so adding it to the capex charges it twice and twenty years too early.",
+    "Give the CAPEX total, the OPEX total and the amount that sits outside both of them, name the cost item it belongs to and say in which year the case charges it. Then explain why the Base case charges 204.5000 of operating cost in year 1 when the plan's OPEX total is 95.0000 a year."
    ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m05-the-plan-s-own-economics/l03-a-deck-that-does-not-cover-the-profile.md",
-   "module": "m05-the-plan-s-own-economics",
-   "lesson": "l03-a-deck-that-does-not-cover-the-profile.md",
-   "moved_values": [
-    {
-     "value": "-3517.4133",
-     "kind": "retired",
-     "settled_by": "- a scenario priced at zero, which is a number somebody typed: accepted, NPV -3554.2621.",
-     "quoted_as": [
-      "-3517.4133",
-      "3517",
-      "-3517"
-     ],
-     "example": "A scenario priced at zero is accepted and returns an NPV of -3517."
-    }
+   "retitled": null,
+   "old_lines": [
+    "A scenario priced at zero is accepted and returns an NPV of -3517.4133 million USD. A typed zero is a number somebody chose, and the engine owes them the answer to the question they asked. A missing year is a question nobody asked, and an engine that answers it has made up the input and the output together."
    ],
-   "falsified_claims": []
+   "new_lines": [
+    "A scenario priced at zero is accepted and returns an NPV of -3554.2621 million USD. A typed zero is a number somebody chose, and the engine owes them the answer to the question they asked. A missing year is a question nobody asked, and an engine that answers it has made up the input and the output together."
+   ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m05-the-plan-s-own-economics/l04-what-moves-the-answer.md",
-   "module": "m05-the-plan-s-own-economics",
-   "lesson": "l04-what-moves-the-answer.md",
-   "moved_values": [
-    {
-     "value": "0.158179",
-     "kind": "retired",
-     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 | 0.161906 (derived) |",
-     "quoted_as": [
-      "0.158179"
-     ],
-     "example": "628637 and operating cost 0."
-    },
-    {
-     "value": "0.628637",
-     "kind": "retired",
-     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 | 0.638666 (derived) |",
-     "quoted_as": [
-      "0.628637"
-     ],
-     "example": "386816, capex 0."
-    },
-    {
-     "value": "1.386816",
-     "kind": "retired",
-     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 | 1.411541 (derived) |",
-     "quoted_as": [
-      "1.386816"
-     ],
-     "example": "510089 of it, production 1."
-    },
-    {
-     "value": "1.510089",
-     "kind": "retired",
-     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 | 1.537012 (derived) |",
-     "quoted_as": [
-      "1.510089"
-     ],
-     "example": "Measured against the base value itself, the oil price swing is 1."
-    },
-    {
-     "value": "1403.9781",
-     "kind": "retired",
-     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
-     "quoted_as": [
-      "1403.9781"
-     ],
-     "example": "1526 | 1403."
-    },
-    {
-     "value": "1885.6239",
-     "kind": "retired",
-     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
-     "quoted_as": [
-      "1885.6239"
-     ],
-     "example": "5067 | 1885."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "5679 | 2047."
-    },
-    {
-     "value": "2209.5067",
-     "kind": "retired",
-     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
-     "quoted_as": [
-      "2209.5067"
-     ],
-     "example": "| OPEX | 2209."
-    },
-    {
-     "value": "2691.1526",
-     "kind": "retired",
-     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
-     "quoted_as": [
-      "2691.1526",
-      "2691"
-     ],
-     "example": "| CAPEX | 2691."
-    },
-    {
-     "value": "2839.5965",
-     "kind": "retired",
-     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
-     "quoted_as": [
-      "2839.5965"
-     ],
-     "example": "5653 | 2839."
-    },
-    {
-     "value": "3092.0051",
-     "kind": "retired",
-     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
-     "quoted_as": [
-      "3092.0051",
-      "3092"
-     ],
-     "example": "5653 | 3092."
-    },
-    {
-     "value": "323.8828",
-     "kind": "retired",
-     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
-     "quoted_as": [
-      "323.8828"
-     ],
-     "example": "5653 | 323."
-    },
-    {
-     "value": "3467.3636",
-     "kind": "retired",
-     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
-     "quoted_as": [
-      "3467",
-      "3467.3636"
-     ],
-     "example": "7671 | 3467."
-    },
-    {
-     "value": "3593.5679",
-     "kind": "retired",
-     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
-     "quoted_as": [
-      "3593.5679"
-     ],
-     "example": "5628 | 3593."
-    },
-    {
-     "value": "501.5628",
-     "kind": "retired",
-     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
-     "quoted_as": [
-      "501.5628"
-     ],
-     "example": "| Oil Price | 501."
-    },
-    {
-     "value": "627.7671",
-     "kind": "retired",
-     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
-     "quoted_as": [
-      "627.7671"
-     ],
-     "example": "| Production | 627."
-    }
+   "retitled": null,
+   "old_lines": [
+    "| Oil Price | 501.5628 | 3593.5679 | 2047.5653 | 3092.0051 |",
+    "| CAPEX | 2691.1526 | 1403.9781 | 2047.5653 | 1287.1745 |",
+    "| OPEX | 2209.5067 | 1885.6239 | 2047.5653 | 323.8828 |",
+    "| Production | 627.7671 | 3467.3636 | 2047.5653 | 2839.5965 |",
+    "Ranked by swing, the order is oil price, production, capex, operating cost. Oil price moves the value by 3092.0051 million USD across its range and operating cost by 323.8828, so the driver at the top of the list is worth nearly ten of the one at the bottom. Measured against the base value itself, the oil price swing is 1.510089 of it, production 1.386816, capex 0.628637 and operating cost 0.158179. The first two are each larger than the value they are moving.",
+    "Both price and production scale revenue, so a first guess is that they swing the value equally. They do not: 3092.0051 against 2839.5965. The reason is in the cost side. A barrel carries its own variable operating cost of 5.0000 USD, so 30 percent more barrels brings 30 percent more revenue and more cost with it. A dollar of price brings revenue and no cost at all. Price is therefore the stronger driver on every case where barrels cost money to lift.",
+    "More capex is less value, so the capex row reads high on the left and low on the right: 2691.1526 at minus 30 percent and 1403.9781 at plus 30 percent. Read the columns rather than the picture. A reader who assumes every bar grows to the right has the sign of the capex sensitivity backwards, and will report that overspending improves the plan. The magnitude is worth holding too: a capex overrun of 30 percent takes this case from 2047.5653 down to 1403.9781, and the whole capex swing of 1287.1745 is smaller than either of the two revenue drivers.",
+    "The sweep will not rank the drivers by importance in the world, only by what they did to this case. It will not tell you a swing is acceptable. It carries no probabilities, no correlations and no combinations, and the base column of 2047.5653 is the same screening value in every row, conditional on the same price and the same shape as the case it came from.",
+    "List the four drivers in order of swing with each swing's value. Then explain, using the variable operating cost, why the oil price swing of 3092.0051 is larger than the production swing of 2839.5965, and say why neither of the two capex figures should be called a P-case."
    ],
-   "falsified_claims": []
+   "new_lines": [
+    "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 |",
+    "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 |",
+    "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 |",
+    "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 |",
+    "Ranked by swing, the order is oil price, production, capex, operating cost. Oil price moves the value by 3097.7119 million USD across its range and operating cost by 326.3064, so the driver at the top of the list is worth nearly ten of the one at the bottom. Measured against the base value itself, the oil price swing is 1.537012 of it, production 1.411541, capex 0.638666 and operating cost 0.161906. The first two are each larger than the value they are moving.",
+    "Both price and production scale revenue, so a first guess is that they swing the value equally. They do not: 3097.7119 against 2844.8375. The reason is in the cost side. A barrel carries its own variable operating cost of 5.0000 USD, so 30 percent more barrels brings 30 percent more revenue and more cost with it. A dollar of price brings revenue and no cost at all. Price is therefore the stronger driver on every case where barrels cost money to lift.",
+    "More capex is less value, so the capex row reads high on the left and low on the right: 2658.9995 at minus 30 percent and 1371.8250 at plus 30 percent. Read the columns rather than the picture. A reader who assumes every bar grows to the right has the sign of the capex sensitivity backwards, and will report that overspending improves the plan. The magnitude is worth holding too: a capex overrun of 30 percent takes this case from 2015.4123 down to 1371.8250, and the whole capex swing of 1287.1745 is smaller than either of the two revenue drivers.",
+    "The sweep will not rank the drivers by importance in the world, only by what they did to this case. It will not tell you a swing is acceptable. It carries no probabilities, no correlations and no combinations, and the base column of 2015.4123 is the same screening value in every row, conditional on the same price and the same shape as the case it came from.",
+    "List the four drivers in order of swing with each swing's value. Then explain, using the variable operating cost, why the oil price swing of 3097.7119 is larger than the production swing of 2844.8375, and say why neither of the two capex figures should be called a P-case."
+   ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m06-the-associate-reading/l01-the-story-so-far.md",
-   "module": "m06-the-associate-reading",
-   "lesson": "l01-the-story-so-far.md",
-   "moved_values": [
-    {
-     "value": "-1797.2732",
-     "kind": "retired",
-     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
-     "quoted_as": [
-      "-1797",
-      "1797",
-      "-1797.2732"
-     ],
-     "example": "0000 USD a barrel the same concept returns -1797."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 USD a barrel the FPSO concept returns an NPV of 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "5653 million USD, a rate of return of 29."
-    }
+   "retitled": null,
+   "old_lines": [
+    "At 70.0000 USD a barrel the FPSO concept returns an NPV of 2047.5653 million USD, a rate of return of 29.5998 percent and a payback of 3.8273 years, post royalty and tax, discounted mid year on default terms of 12.5000 percent royalty, 30.0000 percent tax and a 10.0000 percent discount rate. At 18.0000 USD a barrel the same concept returns -1797.2732, never pays back, and has no rate of return at all.",
+    "Seven cost items total a CAPEX of 2250.0000 and an OPEX of 95.0000 a year, and the ABEX line of 260.0000 reaches neither. The plan and the concept agree at 2250.0000 here because the plan was costed against the concept. A complete plan scores 100 percent on 9 of 9 sections; a plan missing its economics scores 89 percent and names what is missing."
    ],
-   "falsified_claims": []
+   "new_lines": [
+    "At 70.0000 USD a barrel the FPSO concept returns an NPV of 2015.4123 million USD, no rate of return at all at the status multiple-roots, and a payback of 3.8273 years, post royalty and tax, discounted mid year on default terms of 12.5000 percent royalty, 30.0000 percent tax and a 10.0000 percent discount rate. At 18.0000 USD a barrel the same concept returns -1834.1220, never pays back, and has no rate of return at all.",
+    "Seven cost items total a CAPEX of 2250.0000 and an OPEX of 95.0000 a year, and the ABEX line of 260.0000 sits outside both totals and is charged as the plan's end-of-life cost in production year 20, which is what leaves the case with two rates that zero it and none to report. The plan and the concept agree at 2250.0000 here because the plan was costed against the concept. A complete plan scores 100 percent on 9 of 9 sections; a plan missing its economics scores 89 percent and names what is missing."
+   ]
   },
   {
    "path": "src/content/courses/fdp/beginner/m06-the-associate-reading/l02-working-the-capstone.md",
-   "module": "m06-the-associate-reading",
-   "lesson": "l02-working-the-capstone.md",
-   "moved_values": [
-    {
-     "value": "0.330657",
-     "kind": "retired",
-     "settled_by": "# Commentary: the payback column is the one figure in that table computed WITHOUT the end-of-life cost. scenarioPayback takes no abandonment argument, so the card reports the payback of a plan that never pays to abandon. On these cases it changes nothing, because the cost falls in the last year and the money has been recovered long before it; on a plan that only recovers at the end it would.",
-     "quoted_as": [
-      "0.330657"
-     ],
-     "example": "A percent and a ratio are different animals, and 0."
-    },
-    {
-     "value": "1.436477",
-     "kind": "retired",
-     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
-     "quoted_as": [
-      "1.436477"
-     ],
-     "example": "| a ratio | a plain number | 1."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "An NPV of 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "| a rate of return | percent | 29."
-    }
+   "retitled": null,
+   "old_lines": [
+    "Every value in this course is conditional on something. An NPV of 2047.5653 million USD is conditional on a price of 70.0000 USD a barrel, a capex of 2250.0000, an operating cost of 95.0000 a year, a royalty of 12.5000 percent, a tax of 30.0000 percent, a discount rate of 10.0000 percent and a 20 year shape. Before working anything, list what the question fixes and what it leaves you to read out of the plan. Half the wrong answers in this subject are right answers to a slightly different question.",
+    "| a rate of return | percent | 29.5998 |",
+    "| a ratio | a plain number | 1.436477 |",
+    "Oil and gas never add. Money in a development plan is million USD to four decimals, while a task or a well cost is a whole currency unit. A percent and a ratio are different animals, and 0.330657 of gross revenue is not 0.330657 percent of it. Write the unit beside every figure as you work, and a unit error becomes visible instead of arriving in the final line.",
+    "Take the FPSO concept and write down, with units, its three capex fields, its total, its annual operating cost and its life. Then state the price the Base scenario runs at and the three headline figures it reports, and mark beside each one whether it is money, a percent or a duration."
    ],
-   "falsified_claims": []
+   "new_lines": [
+    "Every value in this course is conditional on something. An NPV of 2015.4123 million USD is conditional on a price of 70.0000 USD a barrel, a capex of 2250.0000, an operating cost of 95.0000 a year, a royalty of 12.5000 percent, a tax of 30.0000 percent, a discount rate of 10.0000 percent and a 20 year shape. Before working anything, list what the question fixes and what it leaves you to read out of the plan. Half the wrong answers in this subject are right answers to a slightly different question.",
+    "| a tax rate | percent | 30.0000 |",
+    "| a ratio | a plain number | 1.388655 |",
+    "Oil and gas never add. Money in a development plan is million USD to four decimals, while a task or a well cost is a whole currency unit. A percent and a ratio are different animals, and 0.328598 of gross revenue is not 0.328598 percent of it. Write the unit beside every figure as you work, and a unit error becomes visible instead of arriving in the final line.",
+    "Take the FPSO concept and write down, with units, its three capex fields, its total, its annual operating cost and its life. Then state the price the Base scenario runs at, the value and the payback it reports, and what it reports in place of a rate of return."
+   ]
   }
  ],
- "questions_falsified": [
+ "questions_recut": [
   {
-   "bank": "ec6b_m01",
    "scope": "module",
    "module_key": "m01-what-a-plan-holds",
    "ord": 2,
-   "prompt_head": "A plan otherwise like EGINA, with its economics never written, scores 89 percent. Where does that figure come from?",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [
-    "never"
-   ],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "Where does that figure come from? The economics section is weighted above the others, because the NPV of 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "The score falls to the share of the six headline figures that survive, since the NPV and the IRR of 29."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "The economics section is weighted above the others, because the NPV of 2047.5653 million USD is the figure the document leads on and the rest of it support.",
+      "new": "The economics section is weighted above the others, because the NPV of 2015.4123 million USD is the figure the document leads on and the rest of it support."
+     },
+     {
+      "index": 1,
+      "old": "The score falls to the share of the six headline figures that survive, since the NPV and the IRR of 29.5998 percent both drop out when no economics are written.",
+      "new": "The score falls to the share of the six headline figures that survive, since the NPV of 2015.4123 million USD and the well count both drop out when no economics are written."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_m01",
    "scope": "module",
    "module_key": "m01-what-a-plan-holds",
    "ord": 3,
-   "prompt_head": "A reader quotes EGINA's NPV of 2047.5653 million USD off the plan's headline and stops there. What is still missing?",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "-1797.2732",
-     "kind": "retired",
-     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
-     "quoted_as": [
-      "-1797",
-      "1797",
-      "-1797.2732"
-     ],
-     "example": "0000 USD a barrel and -1797."
+   "bank": "ec6b_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "A reader quotes EGINA's NPV of 2047.5653 million USD off the plan's headline and stops there. What is still missing?",
+     "new": "A reader quotes EGINA's NPV of 2015.4123 million USD off the plan's headline and stops there. What is still missing?"
     },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "A reader quotes EGINA's NPV of 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "The IRR of 29."
+    "options": [
+     {
+      "index": 2,
+      "old": "The IRR of 29.5998 percent beside it, because a present value can only be read next to the rate of return the same case returned for that concept.",
+      "new": "The rate of return beside it, because a present value can only ever be read next to the rate that the very same case returned for that concept."
+     }
+    ],
+    "explanation": {
+     "old": "The same concept is worth 2047.5653 million USD at 70.0000 USD a barrel and -1797.2732 million USD at 18.0000, so the deck is part of the number.",
+     "new": "The same concept is worth 2015.4123 million USD at 70.0000 USD a barrel and -1834.1220 million USD at 18.0000, so the deck is part of the number."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m01",
    "scope": "module",
    "module_key": "m01-what-a-plan-holds",
    "ord": 8,
-   "prompt_head": "The screening tier discounts mid year. What does that convention do to the answer?",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "It is a timing convention on the same cash flow, and the NPV of 2047."
+   "bank": "ec6b_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "explanation": {
+     "old": "It is a timing convention on the same cash flow, and the NPV of 2047.5653 million USD carries it.",
+     "new": "It is a timing convention on the same cash flow, and the NPV of 2015.4123 million USD carries it."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m01",
    "scope": "module",
    "module_key": "m01-what-a-plan-holds",
    "ord": 9,
-   "prompt_head": "On the EGINA Base case royalty takes 2011.8812 and tax 3310.0565 million USD. The studio reports 0.330657 alongside them. What is that ratio",
-   "keyed_answer_affected": true,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "0.330657",
-     "kind": "retired",
-     "settled_by": "# Commentary: the payback column is the one figure in that table computed WITHOUT the end-of-life cost. scenarioPayback takes no abandonment argument, so the card reports the payback of a plan that never pays to abandon. On these cases it changes nothing, because the cost falls in the last year and the money has been recovered long before it; on a plan that only recovers at the end it would.",
-     "quoted_as": [
-      "0.330657"
-     ],
-     "example": "The studio reports 0."
+   "bank": "ec6b_m01",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "On the EGINA Base case royalty takes 2011.8812 and tax 3310.0565 million USD. The studio reports 0.330657 alongside them. What is that ratio?",
+     "new": "On the EGINA Base case royalty takes 2011.8812 and tax 3276.9239 million USD. The studio reports 0.328598 alongside them. What is that ratio?"
     },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "The share of the NPV of 2047."
-    },
-    {
-     "value": "3310.0565",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "3310",
-      "3310.0565"
-     ],
-     "example": "8812 and tax 3310."
-    },
-    {
-     "value": "5321.9377",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "5321.9377"
-     ],
-     "example": "What is that ratio? Government take of 5321."
-    }
-   ],
-   "falsified_claims": []
+    "options": [
+     {
+      "index": 0,
+      "old": "Government take of 5321.9377 million USD over the net cash flow the concept generates once its capex of 2250.0000 million USD and its operating cost have been taken out of revenue.",
+      "new": "Government take of 5288.8051 million USD over the net cash flow the concept generates once its capex of 2250.0000 million USD and its operating cost have been taken out of revenue."
+     },
+     {
+      "index": 1,
+      "old": "Government take of 5321.9377 million USD over gross revenue of 16095.0492 million USD, royalty and tax added before any cost is taken out.",
+      "new": "Government take of 5288.8051 million USD over gross revenue of 16095.0492 million USD, royalty and tax added before any cost is taken out."
+     },
+     {
+      "index": 2,
+      "old": "The share of the NPV of 2047.5653 million USD that royalty and tax removed before the remainder was discounted at 10.0000 percent.",
+      "new": "The share of the NPV of 2015.4123 million USD that royalty and tax removed before the remainder was discounted at 10.0000 percent."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_m01",
    "scope": "module",
    "module_key": "m01-what-a-plan-holds",
    "ord": 10,
-   "prompt_head": "The EGINA Base case never gets deeper than -2250.0000 million USD. Which year is that, and why that figure?",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [
-    "never"
-   ],
-   "moved_values": [
-    {
-     "value": "-1797.2732",
-     "kind": "retired",
-     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
-     "quoted_as": [
-      "-1797",
-      "1797",
-      "-1797.2732"
-     ],
-     "example": "0000 USD a barrel, where the same concept is worth -1797."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 2,
+      "old": "The stress case at 18.0000 USD a barrel, where the same concept is worth -1797.2732 million USD and the cash position is at its lowest point in the plan.",
+      "new": "The stress case at 18.0000 USD a barrel, where the same concept is worth -1834.1220 million USD and the cash position is at its lowest point in the plan."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_m01",
    "scope": "module",
    "module_key": "m01-what-a-plan-holds",
    "ord": 11,
-   "prompt_head": "A scenario priced at zero returns an NPV of -3517.4133 million USD, and a scenario with a blank oil price returns nothing at all. What separ",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [
-    "all"
-   ],
-   "moved_values": [
-    {
-     "value": "-3517.4133",
-     "kind": "retired",
-     "settled_by": "- a scenario priced at zero, which is a number somebody typed: accepted, NPV -3554.2621.",
-     "quoted_as": [
-      "-3517.4133",
-      "3517",
-      "-3517"
-     ],
-     "example": "A scenario priced at zero returns an NPV of -3517."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "A scenario priced at zero returns an NPV of -3517.4133 million USD, and a scenario with a blank oil price returns nothing at all. What separates them?",
+     "new": "A scenario priced at zero returns an NPV of -3554.2621 million USD, and a scenario with a blank oil price returns nothing at all. What separates them?"
+    },
+    "options": [
+     {
+      "index": 3,
+      "old": "A price of zero skips royalty and tax, so the -3517.4133 million USD is capex and operating cost alone and a blank has no such shortcut.",
+      "new": "A price of zero skips royalty and tax, so the -3554.2621 million USD is capex and operating cost alone and a blank has no such shortcut."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_m01",
    "scope": "module",
    "module_key": "m01-what-a-plan-holds",
    "ord": 13,
-   "prompt_head": "Before the repair that preceded this course, a concept with no capex, no operating cost and no peak rate, priced by a scenario with no oil p",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "1048.6281",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "1048.6281"
-     ],
-     "example": "It was run on the other concept in the plan, the subsea tie-back, so the value of 1048."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "It was run on the other concept in the plan, the subsea tie-back, so the value of 1048.6281 million USD came back under the FPSO concept's name instead.",
+      "new": "It was run on the other concept in the plan, the subsea tie-back, so the value of 1013.7182 million USD came back under the FPSO concept's name instead."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_m02",
    "scope": "module",
    "module_key": "m02-reserves-per-fluid",
    "ord": 11,
-   "prompt_head": "Which figure in the EGINA plan may carry a P90 label?",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "The NPV of 2047."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_m02",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "The NPV of 2047.5653 million USD, since the uncertainty in the reserves is carried through the case into the value it returns.",
+      "new": "The NPV of 2015.4123 million USD, since the uncertainty in the reserves is carried through the case into the value it returns."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_m03",
    "scope": "module",
    "module_key": "m03-concepts-and-their-capex",
    "ord": 10,
-   "prompt_head": "The lifecycle totals are 4150.0000 million USD for the FPSO and 1330.0000 for the tie-back. What can that pair of figures not do?",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "1048.6281",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "1048.6281"
-     ],
-     "example": "5653 and 1048."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "A lifecycle cost is money as it is spent, with no discounting, no price, no royalty and no tax in it, and the ordering by value comes from the NPVs of 2047."
+   "bank": "ec6b_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "explanation": {
+     "old": "A lifecycle cost is money as it is spent, with no discounting, no price, no royalty and no tax in it, and the ordering by value comes from the NPVs of 2047.5653 and 1048.6281 million USD.",
+     "new": "A lifecycle cost is money as it is spent, with no discounting, no price, no royalty and no tax in it, and the ordering by value comes from the NPVs of 2015.4123 and 1013.7182 million USD."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m03",
    "scope": "module",
    "module_key": "m03-concepts-and-their-capex",
    "ord": 11,
-   "prompt_head": "The EGINA cost breakdown carries a decommissioning provision of 260.0000 million USD typed as ABEX. Where does it sit inside the concept's l",
-   "keyed_answer_affected": true,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [],
-   "falsified_claims": [
-    {
-     "claim": "abex-reaches-no-cash-flow",
-     "quote": "ABEX line is in neither",
-     "settled_by": "Engine totals: CAPEX 2250.0000, OPEX 95.0000 a year. The ABEX line of 260.0000 is in neither of those two totals (derived) ... It is the plan's end-of-life cost and the case carries it in the final production year."
+   "bank": "ec6b_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 3,
+      "old": "In the final year of the profile, where the Base case charges it against a declining revenue.",
+      "new": "In the lifecycle once the facility's own decommissioning estimate of 204.5029 is added to it, which is how 4150.0000 covers the end of the field's life."
+     }
+    ],
+    "explanation": {
+     "old": "Facilities carry their own estimate of the same thing, 204.5029 million USD for the Egina FPSO, so two real figures for the end of life sit outside the 4150.0000.",
+     "new": "Facilities carry their own estimate of the same thing, 204.5029 million USD for the Egina FPSO, so two figures for the end of life sit outside the 4150.0000, and the case charges the plan's own line in production year 20."
     }
-   ]
+   }
   },
   {
-   "bank": "ec6b_m04",
    "scope": "module",
    "module_key": "m04-what-a-scenario-is-worth",
    "ord": 1,
-   "prompt_head": "The same FPSO concept returns an NPV of -161.0098 million USD at 40.0000 USD a barrel and 3151.8529 at 85.0000 USD a barrel. What differs be",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "-161.0098",
-     "kind": "retired",
-     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
-     "quoted_as": [
-      "-161.0098",
-      "-161",
-      "161"
-     ],
-     "example": "The same FPSO concept returns an NPV of -161."
+   "bank": "ec6b_m04",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The same FPSO concept returns an NPV of -161.0098 million USD at 40.0000 USD a barrel and 3151.8529 at 85.0000 USD a barrel. What differs between those two runs?",
+     "new": "The same FPSO concept returns an NPV of -197.2391 million USD at 40.0000 USD a barrel and 3121.7380 at 85.0000 USD a barrel. What differs between those two runs?"
     },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "2778, 2047."
-    },
-    {
-     "value": "3151.8529",
-     "kind": "retired",
-     "settled_by": "- 85.0000 USD a barrel: NPV 3121.7380, IRR none (multiple-roots).",
-     "quoted_as": [
-      "3151.8529"
-     ],
-     "example": "0000 USD a barrel and 3151."
-    },
-    {
-     "value": "943.2778",
-     "kind": "retired",
-     "settled_by": "- 55.0000 USD a barrel: NPV 909.0866, IRR none (multiple-roots).",
-     "quoted_as": [
-      "943.2778",
-      "943"
-     ],
-     "example": "0098, 943."
+    "explanation": {
+     "old": "Four evenly spaced prices give -161.0098, 943.2778, 2047.5653 and 3151.8529, and the value steps up by the same amount each time because only what a barrel earns moves.",
+     "new": "Four evenly spaced prices give -197.2391, 909.0866, 2015.4123 and 3121.7380, and the value steps up by the same amount each time because only what a barrel earns moves."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m04",
    "scope": "module",
    "module_key": "m04-what-a-scenario-is-worth",
    "ord": 2,
-   "prompt_head": "A scenario priced at 0 returns an NPV of -3517.4133 million USD, while a scenario whose price box is left empty returns no value at all. Wha",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [
-    "all"
-   ],
-   "moved_values": [
-    {
-     "value": "-3517.4133",
-     "kind": "retired",
-     "settled_by": "- a scenario priced at zero, which is a number somebody typed: accepted, NPV -3554.2621.",
-     "quoted_as": [
-      "-3517.4133",
-      "3517",
-      "-3517"
-     ],
-     "example": "A scenario priced at 0 returns an NPV of -3517."
+   "bank": "ec6b_m04",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "A scenario priced at 0 returns an NPV of -3517.4133 million USD, while a scenario whose price box is left empty returns no value at all. What separates the two inputs?",
+     "new": "A scenario priced at 0 returns an NPV of -3554.2621 million USD, while a scenario whose price box is left empty returns no value at all. What separates the two inputs?"
     },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 USD a barrel the studio substitutes and quietly returns the Base value of 2047."
+    "options": [
+     {
+      "index": 1,
+      "old": "Nothing in the inputs, because a blank reads as zero and both runs land on -3517.4133, with the missing price only noted.",
+      "new": "Nothing in the inputs, because a blank reads as zero and both runs land on -3554.2621, with the missing price only noted."
+     },
+     {
+      "index": 3,
+      "old": "The default, because a blank price falls back to the 70.0000 USD a barrel the studio substitutes and quietly returns the Base value of 2047.5653.",
+      "new": "The default, because a blank price falls back to the 70.0000 USD a barrel the studio substitutes and quietly returns the Base value of 2015.4123."
+     }
+    ],
+    "explanation": {
+     "old": "Zero is accepted and returns -3517.4133; the silent substitution of 70.0000 USD a barrel ended in September 2026, and a missing price is now refused by name.",
+     "new": "Zero is accepted and returns -3554.2621; the silent substitution of 70.0000 USD a barrel ended in September 2026, and a missing price is now refused by name."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m04",
    "scope": "module",
    "module_key": "m04-what-a-scenario-is-worth",
    "ord": 3,
-   "prompt_head": "The Stress scenario at 18.0000 USD a barrel reports an NPV of -1797.2732, an IRR status of no-root and a payback of never. What does that pa",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [
-    "never"
-   ],
-   "moved_values": [
-    {
-     "value": "-1797.2732",
-     "kind": "retired",
-     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
-     "quoted_as": [
-      "-1797",
-      "1797",
-      "-1797.2732"
-     ],
-     "example": "0000 USD a barrel reports an NPV of -1797."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_m04",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The Stress scenario at 18.0000 USD a barrel reports an NPV of -1797.2732, an IRR status of no-root and a payback of never. What does that payback state?",
+     "new": "The Stress scenario at 18.0000 USD a barrel reports an NPV of -1834.1220, an IRR status of no-root and a payback of never. What does that payback state?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "That payback falls in the last year of the 20.0000 year life, since a case ending at -1797.2732 has recovered all but that part of its capex of 2250.0000.",
+      "new": "That payback falls in the last year of the 20.0000 year life, since a case ending at -1834.1220 has recovered all but that part of its capex of 2250.0000."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_m04",
    "scope": "module",
    "module_key": "m04-what-a-scenario-is-worth",
    "ord": 4,
-   "prompt_head": "The Base case takes 2011.8812 of royalty and 3310.0565 of tax out of gross revenue of 16095.0492. A reader quotes the tax alone as what the ",
-   "keyed_answer_affected": true,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "0.330657",
-     "kind": "retired",
-     "settled_by": "# Commentary: the payback column is the one figure in that table computed WITHOUT the end-of-life cost. scenarioPayback takes no abandonment argument, so the card reports the payback of a plan that never pays to abandon. On these cases it changes nothing, because the cost falls in the last year and the money has been recovered long before it; on a plan that only recovers at the end it would.",
-     "quoted_as": [
-      "0.330657"
-     ],
-     "example": "9377, which is 0."
+   "bank": "ec6b_m04",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The Base case takes 2011.8812 of royalty and 3310.0565 of tax out of gross revenue of 16095.0492. A reader quotes the tax alone as what the state receives. What has that reader left out?",
+     "new": "The Base case takes 2011.8812 of royalty and 3276.9239 of tax out of gross revenue of 16095.0492. A reader quotes the tax alone as what the state receives. What has that reader left out?"
     },
-    {
-     "value": "3310.0565",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "3310",
-      "3310.0565"
-     ],
-     "example": "8812 of royalty and 3310."
-    },
-    {
-     "value": "5321.9377",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "5321.9377"
-     ],
-     "example": "8812, so the state's 5321."
+    "options": [
+     {
+      "index": 1,
+      "old": "The royalty of 2011.8812, so the state's 5321.9377, which is 0.330657 of gross revenue, is understated by that whole line.",
+      "new": "The royalty of 2011.8812, so the state's 5288.8051, which is 0.328598 of gross revenue, is understated by that whole line."
+     },
+     {
+      "index": 3,
+      "old": "The discounting, because the take of 5321.9377 is a present value while the tax is money of the day.",
+      "new": "The discounting, because the take of 5288.8051 is a present value while the tax is money of the day."
+     }
+    ],
+    "explanation": {
+     "old": "Government take is royalty plus tax, 5321.9377 against gross revenue of 16095.0492, which is a share of 0.330657.",
+     "new": "Government take is royalty plus tax, 5288.8051 against gross revenue of 16095.0492, which is a share of 0.328598."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m04",
    "scope": "module",
    "module_key": "m04-what-a-scenario-is-worth",
    "ord": 8,
-   "prompt_head": "The Base case reports a deepest cash position of -2250.0000 million USD. What is that figure?",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "What is that figure? The loss the case carries to the end of its life, which the NPV of 2047."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_m04",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "The loss the case carries to the end of its life, which the NPV of 2047.5653 states once the discount of 10.0000 percent has been applied to it.",
+      "new": "The loss the case carries to the end of its life, which the NPV of 2015.4123 states once the discount of 10.0000 percent has been applied to it."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_m04",
    "scope": "module",
    "module_key": "m04-what-a-scenario-is-worth",
    "ord": 10,
-   "prompt_head": "Year 4 of the Base case earns 709.5812, year 5 earns 631.9731, and the decline runs on to the end of the 21 rows. How much of that money rea",
-   "keyed_answer_affected": true,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "8273 years? All of it, because payback is measured on the same discounted flow as the NPV of 2047."
+   "bank": "ec6b_m04",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "All of it, because payback is measured on the same discounted flow as the NPV of 2047.5653 and therefore reads the whole of the life.",
+      "new": "All of it, because payback is measured on the same discounted flow as the NPV of 2015.4123 and therefore reads the whole of the life."
+     },
+     {
+      "index": 1,
+      "old": "None of it, because payback stops at the crossing, while the NPV of 2047.5653 counts every one of the 21 rows.",
+      "new": "None of it, because payback stops at the crossing, while the NPV of 2015.4123 counts every one of the 21 rows."
+     }
+    ],
+    "explanation": {
+     "old": "Two cases with the same payback can hold quite different money after the crossing, and only a value figure such as 2047.5653 can tell them apart.",
+     "new": "Two cases with the same payback can hold quite different money after the crossing, and only a value figure such as 2015.4123 can tell them apart."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m04",
    "scope": "module",
    "module_key": "m04-what-a-scenario-is-worth",
    "ord": 11,
-   "prompt_head": "The tie-back pays back in 3.2035 years and the FPSO in 3.8273 years at the same 70.0000 USD a barrel. What does a reader who ranks the two o",
-   "keyed_answer_affected": true,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "1048.6281",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "1048.6281"
-     ],
-     "example": "What does a reader who ranks the two on payback alone give up? The larger value, because the quicker concept is worth 1048."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "6281 against the FPSO's 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "4321 percent against 29."
-    },
-    {
-     "value": "40.4321",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "40.4321"
-     ],
-     "example": "Nothing measurable, because the tie-back also carries the higher rate of return at 40."
+   "bank": "ec6b_m04",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "The larger value, because the quicker concept is worth 1048.6281 against the FPSO's 2047.5653 at that price.",
+      "new": "The larger value, because the quicker concept is worth 1013.7182 against the FPSO's 2015.4123 at that price."
+     },
+     {
+      "index": 1,
+      "old": "Nothing measurable, because the tie-back also carries the higher rate of return at 40.4321 percent against 29.5998, so every measure agrees with it.",
+      "new": "Nothing measurable, because the tie-back also carries the higher of the two rates that zero its flow, 40.4136 against 29.5779, so every measure agrees with it."
+     }
+    ],
+    "explanation": {
+     "old": "The quicker concept is the smaller one, 1048.6281 against 2047.5653 at one price, so a payback ranking puts the smaller value first.",
+     "new": "The quicker concept is the smaller one, 1013.7182 against 2015.4123 at one price, so a payback ranking puts the smaller value first."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m04",
    "scope": "module",
    "module_key": "m04-what-a-scenario-is-worth",
    "ord": 12,
-   "prompt_head": "At 70.0000 USD a barrel the tie-back returns 1.436477 per million USD of capex and the FPSO returns 0.910029. What does that pair of ratios ",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "0.910029",
-     "kind": "retired",
-     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
-     "quoted_as": [
-      "0.910029"
-     ],
-     "example": "436477 per million USD of capex and the FPSO returns 0."
+   "bank": "ec6b_m04",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "At 70.0000 USD a barrel the tie-back returns 1.436477 per million USD of capex and the FPSO returns 0.910029. What does that pair of ratios not say?",
+     "new": "At 70.0000 USD a barrel the tie-back returns 1.388655 per million USD of capex and the FPSO returns 0.895739. What does that pair of ratios not say?"
     },
-    {
-     "value": "1.436477",
-     "kind": "retired",
-     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
-     "quoted_as": [
-      "1.436477"
-     ],
-     "example": "0000 USD a barrel the tie-back returns 1."
-    },
-    {
-     "value": "1048.6281",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "1048.6281"
-     ],
-     "example": "5653 where the tie-back leaves 1048."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 the FPSO leaves 2047."
-    },
-    {
-     "value": "40.4321",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "40.4321"
-     ],
-     "example": "How the two would rank on their rates of return, because the ratio is the rate of 40."
+    "options": [
+     {
+      "index": 1,
+      "old": "Which concept the studio selects, because a ratio above one marks a development the engine passes and 0.910029 marks one it holds back.",
+      "new": "Which concept the studio selects, because a ratio above one marks a development the engine passes and 0.895739 marks one it holds back."
+     },
+     {
+      "index": 2,
+      "old": "How the two would rank on their rates of return, because the ratio is the rate of 40.4321 percent restated for each million USD of capex.",
+      "new": "How the two would rank on the rates that zero their flows, because the ratio is one of those rates restated for each million USD of capex."
+     }
+    ],
+    "explanation": {
+     "old": "On a budget that can carry 2250.0000 the FPSO leaves 2047.5653 where the tie-back leaves 1048.6281, and the ratio of 1.436477 says nothing about that gap.",
+     "new": "On a budget that can carry 2250.0000 the FPSO leaves 2015.4123 where the tie-back leaves 1013.7182, and the ratio of 1.388655 says nothing about that gap."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m04",
    "scope": "module",
    "module_key": "m04-what-a-scenario-is-worth",
    "ord": 13,
-   "prompt_head": "The FPSO concept's lifecycle cost is 4150.0000 million USD and the tie-back's is 1330.0000. What is each figure made of?",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "The capex each concept asks for added to the value it earns, 2047."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_m04",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 3,
+      "old": "The capex each concept asks for added to the value it earns, 2047.5653 on 2250.0000.",
+      "new": "The capex each concept asks for added to the value it earns, 2015.4123 on 2250.0000."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_m04",
    "scope": "module",
    "module_key": "m04-what-a-scenario-is-worth",
    "ord": 15,
-   "prompt_head": "The Base case reports 2047.5653 million USD at a discount rate of 10.0000 percent taken mid year. What does that figure state?",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "The Base case reports 2047."
+   "bank": "ec6b_m04",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The Base case reports 2047.5653 million USD at a discount rate of 10.0000 percent taken mid year. What does that figure state?",
+     "new": "The Base case reports 2015.4123 million USD at a discount rate of 10.0000 percent taken mid year. What does that figure state?"
     },
-    {
-     "value": "5321.9377",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "5321.9377"
-     ],
-     "example": "What is left once the government take of 5321."
+    "options": [
+     {
+      "index": 1,
+      "old": "The cash the plan pays out, because the undiscounted total of the 21 rows comes to 2047.5653.",
+      "new": "The cash the plan pays out, because the undiscounted total of the 21 rows comes to 2015.4123."
+     },
+     {
+      "index": 2,
+      "old": "What is left once the government take of 5321.9377 is paid, with the discount applied to the capex alone.",
+      "new": "What is left once the government take of 5288.8051 is paid, with the discount applied to the capex alone."
+     }
+    ],
+    "explanation": {
+     "old": "Nothing in a plan pays out 2047.5653: the figure is a comparison against a 10.0000 percent alternative, and mid year treatment puts the cash through the year rather than on its last day.",
+     "new": "Nothing in a plan pays out 2015.4123: the figure is a comparison against a 10.0000 percent alternative, and mid year treatment puts the cash through the year rather than on its last day."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m05",
    "scope": "module",
    "module_key": "m05-the-plan-s-own-economics",
    "ord": 1,
-   "prompt_head": "The engine reports CAPEX 2250.0000 and OPEX 95.0000 a year for a plan whose seven items total more than those two figures together. Which li",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [],
-   "falsified_claims": [
-    {
-     "claim": "abex-reaches-no-cash-flow",
-     "quote": "ABEX line of 260.0000 is in neither",
-     "settled_by": "Engine totals: CAPEX 2250.0000, OPEX 95.0000 a year. The ABEX line of 260.0000 is in neither of those two totals (derived) ... It is the plan's end-of-life cost and the case carries it in the final production year."
+   "bank": "ec6b_m05",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "The decommissioning provision of 260.0000, typed as ABEX, which is visible only in the Operate phase roll-up of 355.0000.",
+      "new": "The decommissioning provision of 260.0000, typed as ABEX, which shows in the Operate phase roll-up of 355.0000 and is charged in production year 20."
+     }
+    ],
+    "explanation": {
+     "old": "A screening case carries capex and operating cost only, so the ABEX line of 260.0000 is in neither the CAPEX total of 2250.0000 nor the OPEX total of 95.0000.",
+     "new": "An ABEX line is neither development capex nor an annual operating cost, so the 260.0000 is in neither the CAPEX total of 2250.0000 nor the OPEX total of 95.0000, and the case charges it in production year 20."
     }
-   ]
+   }
   },
   {
+   "scope": "module",
+   "module_key": "m05-the-plan-s-own-economics",
+   "ord": 5,
    "bank": "ec6b_m05",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "The arithmetic holds, but the screening case then charges the provision twice, once inside the capex and once in the Operate phase roll-up of 355.0000.",
+      "new": "The arithmetic holds, and the only cost of it is that the Operate phase roll-up of 355.0000 then counts the same line a second time."
+     }
+    ],
+    "explanation": {
+     "old": "Abandonment belongs in a tier that models it with a year and a fiscal treatment; in a screening case the capex is 2250.0000 and a hand altered figure reconciles against nothing.",
+     "new": "The case already charges the 260.0000 in production year 20, where it is deductible; put in the capex it is charged twice and twenty years too early, and it reconciles against nothing."
+    }
+   }
+  },
+  {
    "scope": "module",
    "module_key": "m05-the-plan-s-own-economics",
    "ord": 8,
-   "prompt_head": "A scenario priced at 0 returns an NPV of -3517.4133 million USD, while a deck missing one year's price is refused outright. Why are the two ",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "-3517.4133",
-     "kind": "retired",
-     "settled_by": "- a scenario priced at zero, which is a number somebody typed: accepted, NPV -3554.2621.",
-     "quoted_as": [
-      "-3517.4133",
-      "3517",
-      "-3517"
-     ],
-     "example": "A scenario priced at 0 returns an NPV of -3517."
+   "bank": "ec6b_m05",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "A scenario priced at 0 returns an NPV of -3517.4133 million USD, while a deck missing one year's price is refused outright. Why are the two treated differently?",
+     "new": "A scenario priced at 0 returns an NPV of -3554.2621 million USD, while a deck missing one year's price is refused outright. Why are the two treated differently?"
+    },
+    "explanation": {
+     "old": "Zero is a number somebody chose and the engine owes them its answer of -3517.4133; the missing year gets a refusal in place of a price nobody supplied.",
+     "new": "Zero is a number somebody chose and the engine owes them its answer of -3554.2621; the missing year gets a refusal in place of a price nobody supplied."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m05",
    "scope": "module",
    "module_key": "m05-the-plan-s-own-economics",
    "ord": 10,
-   "prompt_head": "How do the four drivers of the sweep rank by what each does to the value of the plan's own case?",
-   "keyed_answer_affected": true,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2839.5965",
-     "kind": "retired",
-     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
-     "quoted_as": [
-      "2839.5965"
-     ],
-     "example": "0051, production at 2839."
-    },
-    {
-     "value": "3092.0051",
-     "kind": "retired",
-     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
-     "quoted_as": [
-      "3092.0051",
-      "3092"
-     ],
-     "example": "How do the four drivers of the sweep rank by what each does to the value of the plan's own case? Oil price at 3092."
-    },
-    {
-     "value": "323.8828",
-     "kind": "retired",
-     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
-     "quoted_as": [
-      "323.8828"
-     ],
-     "example": "1745, then operating cost at 323."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_m05",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "Oil price at 3092.0051, production at 2839.5965, capex at 1287.1745, then operating cost at 323.8828.",
+      "new": "Oil price at 3097.7119, production at 2844.8375, capex at 1287.1745, then operating cost at 326.3064."
+     },
+     {
+      "index": 2,
+      "old": "Production at 2839.5965 first and oil price at 3092.0051 second, because barrels earn the revenue and the deck only prices them.",
+      "new": "Production at 2844.8375 first and oil price at 3097.7119 second, because barrels earn the revenue and the deck only prices them."
+     },
+     {
+      "index": 3,
+      "old": "Operating cost at 323.8828 first, as the only driver charged in all of the 21 rows, then capex, production and oil price.",
+      "new": "Operating cost at 326.3064 first, as the only driver charged in all of the 21 rows, then capex, production and oil price."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_m05",
    "scope": "module",
    "module_key": "m05-the-plan-s-own-economics",
    "ord": 11,
-   "prompt_head": "The oil price swing is 3092.0051 and the production swing is 2839.5965, although both drivers scale revenue. What makes the price swing the ",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2839.5965",
-     "kind": "retired",
-     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
-     "quoted_as": [
-      "2839.5965"
-     ],
-     "example": "0051 and the production swing is 2839."
-    },
-    {
-     "value": "3092.0051",
-     "kind": "retired",
-     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
-     "quoted_as": [
-      "3092.0051",
-      "3092"
-     ],
-     "example": "The oil price swing is 3092."
+   "bank": "ec6b_m05",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The oil price swing is 3092.0051 and the production swing is 2839.5965, although both drivers scale revenue. What makes the price swing the larger of the two?",
+     "new": "The oil price swing is 3097.7119 and the production swing is 2844.8375, although both drivers scale revenue. What makes the price swing the larger of the two?"
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m05",
    "scope": "module",
    "module_key": "m05-the-plan-s-own-economics",
    "ord": 12,
-   "prompt_head": "The capex row of the sweep reads 2691.1526 at minus 30 percent and 1403.9781 at plus 30 percent. What is a reader who expects every bar to g",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [
-    "every"
-   ],
-   "moved_values": [
-    {
-     "value": "1403.9781",
-     "kind": "retired",
-     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
-     "quoted_as": [
-      "1403.9781"
-     ],
-     "example": "1526 at minus 30 percent and 1403."
+   "bank": "ec6b_m05",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The capex row of the sweep reads 2691.1526 at minus 30 percent and 1403.9781 at plus 30 percent. What is a reader who expects every bar to grow to the right about to report?",
+     "new": "The capex row of the sweep reads 2658.9995 at minus 30 percent and 1371.8250 at plus 30 percent. What is a reader who expects every bar to grow to the right about to report?"
     },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "That the base value of 2047."
-    },
-    {
-     "value": "2691.1526",
-     "kind": "retired",
-     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
-     "quoted_as": [
-      "2691.1526",
-      "2691"
-     ],
-     "example": "The capex row of the sweep reads 2691."
+    "options": [
+     {
+      "index": 0,
+      "old": "That the capex swing of 1287.1745 is the largest of the four, because the bar drawn from 1403.9781 to 2691.1526 is the widest on the chart.",
+      "new": "That the capex swing of 1287.1745 is the largest of the four, because the bar drawn from 1371.8250 to 2658.9995 is the widest on the chart."
+     },
+     {
+      "index": 1,
+      "old": "That the base value of 2047.5653 falls outside the capex range, because the two capex figures sit either side of it in the wrong order.",
+      "new": "That the base value of 2015.4123 falls outside the capex range, because the two capex figures sit either side of it in the wrong order."
+     },
+     {
+      "index": 3,
+      "old": "That an overrun of 30 percent is worth 2691.1526.",
+      "new": "That an overrun of 30 percent is worth 2658.9995."
+     }
+    ],
+    "explanation": {
+     "old": "More capex is less value, so the capex row reads high on the left and low on the right, and an overrun of 30 percent takes the case from 2047.5653 to 1403.9781.",
+     "new": "More capex is less value, so the capex row reads high on the left and low on the right, and an overrun of 30 percent takes the case from 2015.4123 to 1371.8250."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m05",
    "scope": "module",
    "module_key": "m05-the-plan-s-own-economics",
    "ord": 13,
-   "prompt_head": "Someone labels the plus 30 percent column of the sweep a P10 case and the minus 30 percent column a P90 case. What is wrong with those label",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "They belong to the plan as a whole, so only the base value of 2047."
-    },
-    {
-     "value": "3092.0051",
-     "kind": "retired",
-     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
-     "quoted_as": [
-      "3092.0051",
-      "3092"
-     ],
-     "example": "They may be used on the oil price row, whose swing of 3092."
-    },
-    {
-     "value": "3593.5679",
-     "kind": "retired",
-     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
-     "quoted_as": [
-      "3593.5679"
-     ],
-     "example": "They are the wrong way round, because more of a driver is the low case and the label belongs on the column reading 3593."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_m05",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "They are the wrong way round, because more of a driver is the low case and the label belongs on the column reading 3593.5679.",
+      "new": "They are the wrong way round, because more of a driver is the low case and the label belongs on the column reading 3564.2683."
+     },
+     {
+      "index": 2,
+      "old": "They belong to the plan as a whole, so only the base value of 2047.5653 may carry one of them.",
+      "new": "They belong to the plan as a whole, so only the base value of 2015.4123 may carry one of them."
+     },
+     {
+      "index": 3,
+      "old": "They may be used on the oil price row, whose swing of 3092.0051 was measured across prices, but not on the other three.",
+      "new": "They may be used on the oil price row, whose swing of 3097.7119 was measured across prices, but not on the other three."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_m06",
    "scope": "module",
    "module_key": "m06-the-associate-reading",
    "ord": 2,
-   "prompt_head": "A reader sets the FPSO's 2047.5653 beside the tie-back's 1048.6281, and the oil P50 of 130.0000 beside the gas P50 of 70.0000. Which compari",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "1048.6281",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "1048.6281"
-     ],
-     "example": "5653 beside the tie-back's 1048."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "A reader sets the FPSO's 2047."
+   "bank": "ec6b_m06",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "A reader sets the FPSO's 2047.5653 beside the tie-back's 1048.6281, and the oil P50 of 130.0000 beside the gas P50 of 70.0000. Which comparison stands?",
+     "new": "A reader sets the FPSO's 2015.4123 beside the tie-back's 1013.7182, and the oil P50 of 130.0000 beside the gas P50 of 70.0000. Which comparison stands?"
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m06",
    "scope": "module",
    "module_key": "m06-the-associate-reading",
    "ord": 6,
-   "prompt_head": "An NPV of 2047.5653 million USD is carried out of the studio with no conditions attached to it. What has been left behind?",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "-1797.2732",
-     "kind": "retired",
-     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
-     "quoted_as": [
-      "-1797",
-      "1797",
-      "-1797.2732"
-     ],
-     "example": "0000 USD a barrel returns -1797."
+   "bank": "ec6b_m06",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "An NPV of 2047.5653 million USD is carried out of the studio with no conditions attached to it. What has been left behind?",
+     "new": "An NPV of 2015.4123 million USD is carried out of the studio with no conditions attached to it. What has been left behind?"
     },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "An NPV of 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "The rate of return of 29."
+    "options": [
+     {
+      "index": 1,
+      "old": "The reserves the value was earned on, because 130.0000 MMbbl of oil and 70.0000 Bcf of gas are what the case sold to reach 2047.5653.",
+      "new": "The reserves the value was earned on, because 130.0000 MMbbl of oil and 70.0000 Bcf of gas are what the case sold to reach 2015.4123."
+     },
+     {
+      "index": 3,
+      "old": "The rate of return of 29.5998 percent and the payback of 3.8273 years, without which a value carries no measure of timing beside it.",
+      "new": "The rate of return and the payback of 3.8273 years, without which a value carries no measure of timing anywhere beside it."
+     }
+    ],
+    "explanation": {
+     "old": "Every value in this course is conditional on something, and the same concept at 18.0000 USD a barrel returns -1797.2732 with nothing else changed.",
+     "new": "Every value in this course is conditional on something, and the same concept at 18.0000 USD a barrel returns -1834.1220 with nothing else changed."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m06",
    "scope": "module",
    "module_key": "m06-the-associate-reading",
    "ord": 7,
-   "prompt_head": "The Base case reports 2047.5653, 29.5998 and 3.8273. What kind of quantity is each of the three?",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "1.436477",
-     "kind": "retired",
-     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
-     "quoted_as": [
-      "1.436477"
-     ],
-     "example": "Money in million USD, a plain ratio of the kind 1."
+   "bank": "ec6b_m06",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The Base case reports 2047.5653, 29.5998 and 3.8273. What kind of quantity is each of the three?",
+     "new": "The Base case reports 2015.4123 and 3.8273, and the government take beside them reads 0.328598. What kind of quantity is each of the three?"
     },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "The Base case reports 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "5653, 29."
+    "options": [
+     {
+      "index": 0,
+      "old": "Money in million USD, then a percent, then a duration in years.",
+      "new": "Money in million USD, then a duration in years, then a plain ratio."
+     },
+     {
+      "index": 1,
+      "old": "Money in million USD, a percent, and a second percent, because payback states the share of the life that has been recovered.",
+      "new": "Money in million USD, a duration in years, and a percent, since 0.328598 is the share of gross revenue the state takes on this case."
+     },
+     {
+      "index": 2,
+      "old": "Money in whole currency units, a plain ratio, and a duration in years counted from the sanction date of the concept.",
+      "new": "Money in whole currency units, a duration in years counted from the sanction date of the concept, and a plain ratio."
+     },
+     {
+      "index": 3,
+      "old": "Money in million USD, a plain ratio of the kind 1.436477 is, and a duration in years.",
+      "new": "Money in million USD, a percent, and a plain ratio of the kind 1.388655 is."
+     }
+    ],
+    "explanation": {
+     "old": "Plan money prints in million USD, a rate of return is the percent 29.5998, and payback is 3.8273 years, so the unit written beside each figure makes a unit error visible.",
+     "new": "Plan money prints in million USD, payback is 3.8273 years, and 0.328598 of gross revenue is a plain ratio: 0.328598 percent of it would be a different figure entirely."
     }
-   ],
-   "falsified_claims": [
-    {
-     "claim": "base-case-carries-a-single-rate",
-     "quote": "The Base case reports 2047.5653, 29.5998",
-     "settled_by": "MORE THAN ONE ROOT ... | EGINA Base, 70 USD a barrel | 2015.4123 | multiple-roots | -44.3414 and 29.5779 |"
-    }
-   ]
+   }
   },
   {
-   "bank": "ec6b_m06",
    "scope": "module",
    "module_key": "m06-the-associate-reading",
    "ord": 8,
-   "prompt_head": "The tie-back concept returns 1.436477 at 70.0000 USD a barrel. In what unit is that figure?",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "1.436477",
-     "kind": "retired",
-     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
-     "quoted_as": [
-      "1.436477"
-     ],
-     "example": "The tie-back concept returns 1."
+   "bank": "ec6b_m06",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The tie-back concept returns 1.436477 at 70.0000 USD a barrel. In what unit is that figure?",
+     "new": "The tie-back concept returns 1.388655 at 70.0000 USD a barrel. In what unit is that figure?"
     },
-    {
-     "value": "1048.6281",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "1048.6281"
-     ],
-     "example": "Million USD, the value left once the capex has been taken out of the NPV of 1048."
-    },
-    {
-     "value": "40.4321",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "40.4321"
-     ],
-     "example": "436477 and the 40."
+    "options": [
+     {
+      "index": 2,
+      "old": "Million USD, the value left once the capex has been taken out of the NPV of 1048.6281 the concept reports.",
+      "new": "Million USD, the value left once the capex has been taken out of the NPV of 1013.7182 the concept reports."
+     }
+    ],
+    "explanation": {
+     "old": "A ratio is a plain number and a rate of return is a percent, so 1.436477 and the 40.4321 percent the tie-back earns are different animals.",
+     "new": "A ratio is a plain number and a rate of return is a percent, so 1.388655 is not a rate, and on this plan the tie-back reports no rate of return at all."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m06",
    "scope": "module",
    "module_key": "m06-the-associate-reading",
    "ord": 12,
-   "prompt_head": "What does rounding a figure as you work, rather than at the end, do to an answer?",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "0.330657",
-     "kind": "retired",
-     "settled_by": "# Commentary: the payback column is the one figure in that table computed WITHOUT the end-of-life cost. scenarioPayback takes no abandonment argument, so the card reports the payback of a plan that never pays to abandon. On these cases it changes nothing, because the cost falls in the last year and the money has been recovered long before it; on a plan that only recovers at the end it would.",
-     "quoted_as": [
-      "0.330657"
-     ],
-     "example": "5653 and 0."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "Carry the figures at the precision they were printed at, such as 2047."
+   "bank": "ec6b_m06",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "explanation": {
+     "old": "Carry the figures at the precision they were printed at, such as 2047.5653 and 0.330657, do the arithmetic once, and quote at the precision the question asks for.",
+     "new": "Carry the figures at the precision they were printed at, such as 2015.4123 and 0.328598, do the arithmetic once, and quote at the precision the question asks for."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_m06",
    "scope": "module",
    "module_key": "m06-the-associate-reading",
    "ord": 15,
-   "prompt_head": "What does the Associate tier hand on to the rest of the course?",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "A set of values to carry forward, led by the 2047."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_m06",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "A set of values to carry forward, led by the 2047.5653 the Base case reports, against which the later work is checked.",
+      "new": "A set of values to carry forward, led by the 2015.4123 the Base case reports, against which the later work is checked."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 5,
-   "prompt_head": "A board paper prints the Low price, Base and High price scenarios as the range the field could be worth, 427.9436 to 3667.1870 million USD. ",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "3667.1870",
-     "kind": "retired",
-     "settled_by": "| High price | FPSO development | 92.0000 | 2250.0000 | 3638.0233 | none | multiple-roots | 3.0625 |",
-     "quoted_as": [
-      "3667.1870",
-      "3667"
-     ],
-     "example": "9436 to 3667."
-    },
-    {
-     "value": "427.9436",
-     "kind": "retired",
-     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
-     "quoted_as": [
-      "427.9436"
-     ],
-     "example": "A board paper prints the Low price, Base and High price scenarios as the range the field could be worth, 427."
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "A board paper prints the Low price, Base and High price scenarios as the range the field could be worth, 427.9436 to 3667.1870 million USD. What has the paper claimed that the tier does not?",
+     "new": "A board paper prints the Low price, Base and High price scenarios as the range the field could be worth, 392.8013 to 3638.0233 million USD. What has the paper claimed that the tier does not?"
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 6,
-   "prompt_head": "Quoting an NPV of 2047.5653 million USD without its terms is quoting half a number. Which set of defaults is that value conditional on?",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "Quoting an NPV of 2047."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "Quoting an NPV of 2047.5653 million USD without its terms is quoting half a number. Which set of defaults is that value conditional on?",
+     "new": "Quoting an NPV of 2015.4123 million USD without its terms is quoting half a number. Which set of defaults is that value conditional on?"
+    },
+    "options": [
+     {
+      "index": 3,
+      "old": "Royalty 12.5000 percent, tax 30.0000 percent, a discount rate of 10.0000 percent and an abandonment provision of 260.0000 million USD.",
+      "new": "Royalty 12.5000 percent, tax 30.0000 percent, a discount rate of 10.0000 percent and a fixed operating cost of 95.0000 million USD a year with no charge on the barrels."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 10,
-   "prompt_head": "The sweep prices the plan's case with CAPEX at minus 30 percent, 2691.1526, and at plus 30 percent, 1403.9781. What is wrong with calling th",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "1403.9781",
-     "kind": "retired",
-     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
-     "quoted_as": [
-      "1403.9781"
-     ],
-     "example": "1526, and at plus 30 percent, 1403."
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The sweep prices the plan's case with CAPEX at minus 30 percent, 2691.1526, and at plus 30 percent, 1403.9781. What is wrong with calling those the P90 and the P10 capex?",
+     "new": "The sweep prices the plan's case with CAPEX at minus 30 percent, 2658.9995, and at plus 30 percent, 1371.8250. What is wrong with calling those the P90 and the P10 capex?"
     },
-    {
-     "value": "2691.1526",
-     "kind": "retired",
-     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
-     "quoted_as": [
-      "2691.1526",
-      "2691"
-     ],
-     "example": "The sweep prices the plan's case with CAPEX at minus 30 percent, 2691."
+    "explanation": {
+     "old": "P90 is the low case of a reserves distribution, such as the oil P90 of 80.0000 MMbbl, while 2691.1526 is one driver moved 30 percent with the other three held at the base case.",
+     "new": "P90 is the low case of a reserves distribution, such as the oil P90 of 80.0000 MMbbl, while 2658.9995 is one driver moved 30 percent with the other three held at the base case."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 12,
-   "prompt_head": "A reserves figure can reach a plan three ways: a headline somebody typed, a summary carried in from a loaded example, and a table of reservo",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 million USD and the NPV of 2047."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "The headline, because it is the figure the generated document prints beside the total CAPEX of 2250.0000 million USD and the NPV of 2047.5653, and the only one a reader of the finished plan ever sees.",
+      "new": "The headline, because it is the figure the generated document prints beside the total CAPEX of 2250.0000 million USD and the NPV of 2015.4123, and the only one a reader of the finished plan ever sees."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 16,
-   "prompt_head": "The FPSO concept's lifecycle cost is 4150.0000 million USD. What is inside that figure, and what is not?",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 percent, which is what lets it be set beside the NPV of 2047."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "Capex of 2250.0000 plus 1900.0000 of operating cost discounted at 10.0000 percent, which is what lets it be set beside the NPV of 2047.5653 million USD as a figure on the same scale.",
+      "new": "Capex of 2250.0000 plus 1900.0000 of operating cost discounted at 10.0000 percent, which is what lets it be set beside the NPV of 2015.4123 million USD as a figure on the same scale."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 18,
-   "prompt_head": "The volume under the FPSO concept's 20 year shape is 229.9293 MMbbl and the plan's oil P50 is 130.0000 MMbbl. What does the studio do about ",
-   "keyed_answer_affected": true,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "Nothing: the shape is drawn from a peak rate and a life without consulting the reserves, so the plan still scores complete and still returns 2047."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "Nothing: the shape is drawn from a peak rate and a life without consulting the reserves, so the plan still scores complete and still returns 2047.5653 million USD.",
+      "new": "Nothing: the shape is drawn from a peak rate and a life without consulting the reserves, so the plan still scores complete and still returns 2015.4123 million USD."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 21,
-   "prompt_head": "The Low price scenario runs the FPSO at 48.0000 USD a barrel for an NPV of 427.9436 million USD, and the sweep's oil price at minus 30 perce",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "427.9436",
-     "kind": "retired",
-     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
-     "quoted_as": [
-      "427.9436"
-     ],
-     "example": "0000 USD a barrel for an NPV of 427."
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The Low price scenario runs the FPSO at 48.0000 USD a barrel for an NPV of 427.9436 million USD, and the sweep's oil price at minus 30 percent returns 501.5628. Why do two low price answers on one concept disagree?",
+     "new": "The Low price scenario runs the FPSO at 48.0000 USD a barrel for an NPV of 392.8013 million USD, and the sweep's oil price at minus 30 percent returns 466.5563. Why do two low price answers on one concept disagree?"
     },
-    {
-     "value": "501.5628",
-     "kind": "retired",
-     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
-     "quoted_as": [
-      "501.5628"
-     ],
-     "example": "9436 million USD, and the sweep's oil price at minus 30 percent returns 501."
+    "options": [
+     {
+      "index": 0,
+      "old": "The sweep prices the plan's own case off the cost items while the scenario prices the concept, so the 501.5628 runs on a capex that the 427.9436 does not.",
+      "new": "The sweep prices the plan's own case off the cost items while the scenario prices the concept, so the 466.5563 runs on a capex that the 392.8013 does not."
+     },
+     {
+      "index": 3,
+      "old": "The sweep reports a swing rather than a value, so 501.5628 is the distance the value moved and not what the case is worth at the lower price.",
+      "new": "The sweep reports a swing rather than a value, so 466.5563 is the distance the value moved and not what the case is worth at the lower price."
+     }
+    ],
+    "explanation": {
+     "old": "Both runs use the same 2250.0000 million USD of capex, the same 20 year shape and the same terms, so a dollar of price is the whole of the difference between 427.9436 and 501.5628.",
+     "new": "Both runs use the same 2250.0000 million USD of capex, the same 20 year shape and the same terms, so a dollar of price is the whole of the difference between 392.8013 and 466.5563."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 22,
-   "prompt_head": "The FPSO pays back in 3.8273 years and the tie-back at the same price in 3.2035. Which does a payback ranking choose, and what does that ran",
-   "keyed_answer_affected": true,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "1048.6281",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "1048.6281"
-     ],
-     "example": "5653 million USD against the tie-back's 1048."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "Which does a payback ranking choose, and what does that ranking miss? The tie-back, and the ranking misses that the FPSO is worth 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "4321 percent against 29."
-    },
-    {
-     "value": "40.4321",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "40.4321"
-     ],
-     "example": "The tie-back, and the ranking misses nothing, because a rate of return of 40."
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "The tie-back, and the ranking misses that the FPSO is worth 2047.5653 million USD against the tie-back's 1048.6281, because payback stops counting at the crossing.",
+      "new": "The tie-back, and the ranking misses that the FPSO is worth 2015.4123 million USD against the tie-back's 1013.7182, because payback stops counting at the crossing."
+     },
+     {
+      "index": 2,
+      "old": "The tie-back, and the ranking misses nothing, because a rate of return of 40.4321 percent against 29.5998 puts it first on both measures.",
+      "new": "The tie-back, and the ranking misses nothing, because the higher of the two rates that zero each flow, 40.4136 against 29.5779, puts it first on both measures."
+     }
+    ],
+    "explanation": {
+     "old": "Payback ranks the tie-back first at 3.2035 years and value takes the FPSO at 2047.5653 million USD, because the years after the crossing reach the NPV and never reach the payback.",
+     "new": "Payback ranks the tie-back first at 3.2035 years and value takes the FPSO at 2015.4123 million USD, because the years after the crossing reach the NPV and never reach the payback."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 23,
-   "prompt_head": "A worked answer calls the payback of 3.8273 years the point at which the Base case has recovered its 2250.0000 million USD in present value ",
-   "keyed_answer_affected": true,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 percent taken mid year belongs to the 2047."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 2,
+      "old": "Payback carries no discount rate of its own: it is where the plain cumulative cash position crosses zero, and the 10.0000 percent taken mid year belongs to the 2047.5653 million USD instead.",
+      "new": "Payback carries no discount rate of its own: it is where the plain cumulative cash position crosses zero, and the 10.0000 percent taken mid year belongs to the 2015.4123 million USD instead."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 24,
-   "prompt_head": "At 40.0000, 55.0000, 70.0000 and 85.0000 USD a barrel the same concept returns -161.0098, 943.2778, 2047.5653 and 3151.8529. Why is the step",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "-161.0098",
-     "kind": "retired",
-     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
-     "quoted_as": [
-      "-161.0098",
-      "-161",
-      "161"
-     ],
-     "example": "0000 USD a barrel the same concept returns -161."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "2778, 2047."
-    },
-    {
-     "value": "3151.8529",
-     "kind": "retired",
-     "settled_by": "- 85.0000 USD a barrel: NPV 3121.7380, IRR none (multiple-roots).",
-     "quoted_as": [
-      "3151.8529"
-     ],
-     "example": "5653 and 3151."
-    },
-    {
-     "value": "943.2778",
-     "kind": "retired",
-     "settled_by": "- 55.0000 USD a barrel: NPV 909.0866, IRR none (multiple-roots).",
-     "quoted_as": [
-      "943.2778",
-      "943"
-     ],
-     "example": "0098, 943."
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "At 40.0000, 55.0000, 70.0000 and 85.0000 USD a barrel the same concept returns -161.0098, 943.2778, 2047.5653 and 3151.8529. Why is the step even?",
+     "new": "At 40.0000, 55.0000, 70.0000 and 85.0000 USD a barrel the same concept returns -197.2391, 909.0866, 2015.4123 and 3121.7380. Why is the step even?"
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 25,
-   "prompt_head": "The tie-back returns 1.436477 of NPV per million USD of capex against the FPSO's 0.910029. What does a ranking on that ratio leave out?",
-   "keyed_answer_affected": true,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "0.910029",
-     "kind": "retired",
-     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
-     "quoted_as": [
-      "0.910029"
-     ],
-     "example": "436477 of NPV per million USD of capex against the FPSO's 0."
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The tie-back returns 1.436477 of NPV per million USD of capex against the FPSO's 0.910029. What does a ranking on that ratio leave out?",
+     "new": "The tie-back returns 1.388655 of NPV per million USD of capex against the FPSO's 0.895739. What does a ranking on that ratio leave out?"
     },
-    {
-     "value": "1.436477",
-     "kind": "retired",
-     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
-     "quoted_as": [
-      "1.436477"
-     ],
-     "example": "The tie-back returns 1."
-    },
-    {
-     "value": "1048.6281",
-     "kind": "retired",
-     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
-     "quoted_as": [
-      "1048.6281"
-     ],
-     "example": "5653 million USD where the tie-back would have left 1048."
-    },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 the FPSO leaves 2047."
+    "options": [
+     {
+      "index": 0,
+      "old": "Size: a ratio has none in it, and on a balance sheet that can carry 2250.0000 the FPSO leaves 2047.5653 million USD where the tie-back would have left 1048.6281.",
+      "new": "Size: a ratio has none in it, and on a balance sheet that can carry 2250.0000 the FPSO leaves 2015.4123 million USD where the tie-back would have left 1013.7182."
+     }
+    ],
+    "explanation": {
+     "old": "1048.6281 on 730.0000 of capex is the more efficient use of the money and 2047.5653 on 2250.0000 is the larger value, and the two measures answer different questions.",
+     "new": "1013.7182 on 730.0000 of capex is the more efficient use of the money and 2015.4123 on 2250.0000 is the larger value, and the two measures answer different questions."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 26,
-   "prompt_head": "The Base case earns gross revenue of 16095.0492 million USD and reports a government take of 5321.9377. What is that take made of, and what ",
-   "keyed_answer_affected": true,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "0.330657",
-     "kind": "retired",
-     "settled_by": "# Commentary: the payback column is the one figure in that table computed WITHOUT the end-of-life cost. scenarioPayback takes no abandonment argument, so the card reports the payback of a plan that never pays to abandon. On these cases it changes nothing, because the cost falls in the last year and the money has been recovered long before it; on a plan that only recovers at the end it would.",
-     "quoted_as": [
-      "0.330657"
-     ],
-     "example": "0565 added together, which is 0."
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The Base case earns gross revenue of 16095.0492 million USD and reports a government take of 5321.9377. What is that take made of, and what share is it?",
+     "new": "The Base case earns gross revenue of 16095.0492 million USD and reports a government take of 5288.8051. What is that take made of, and what share is it?"
     },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 the state recovers through the fiscal terms, which is why the take runs well above the NPV of 2047."
-    },
-    {
-     "value": "3310.0565",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "3310",
-      "3310.0565"
-     ],
-     "example": "What is that take made of, and what share is it? Tax of 3310."
-    },
-    {
-     "value": "5321.9377",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "5321.9377"
-     ],
-     "example": "0492 million USD and reports a government take of 5321."
+    "options": [
+     {
+      "index": 0,
+      "old": "Tax of 3310.0565 on its own, because royalty is a cost of production charged ahead of the tax base and is already carried inside the operating cost of 3049.6464 million USD.",
+      "new": "Tax of 3276.9239 on its own, because royalty is a cost of production charged ahead of the tax base and is already carried inside the operating cost of 3049.6464 million USD."
+     },
+     {
+      "index": 1,
+      "old": "Royalty of 2011.8812 and tax of 3310.0565 added together, which is 0.330657 of gross revenue, a ratio rather than a percent.",
+      "new": "Royalty of 2011.8812 and tax of 3276.9239 added together, which is 0.328598 of gross revenue, a ratio rather than a percent."
+     },
+     {
+      "index": 2,
+      "old": "Royalty of 2011.8812 and tax of 3310.0565 added, which is 0.330657 percent of gross revenue under the stated default rates of 12.5000 percent and 30.0000 percent.",
+      "new": "Royalty of 2011.8812 and tax of 3276.9239 added, which is 0.328598 percent of gross revenue under the stated default rates of 12.5000 percent and 30.0000 percent."
+     },
+     {
+      "index": 3,
+      "old": "Royalty of 2011.8812, tax of 3310.0565 and the capex of 2250.0000 the state recovers through the fiscal terms, which is why the take runs well above the NPV of 2047.5653.",
+      "new": "Royalty of 2011.8812, tax of 3276.9239 and the capex of 2250.0000 the state recovers through the fiscal terms, which is why the take runs well above the NPV of 2015.4123."
+     }
+    ],
+    "explanation": {
+     "old": "2011.8812 plus 3310.0565 is 5321.9377 million USD, and 0.330657 of gross revenue is a plain ratio: 0.330657 percent of it would be a different figure entirely.",
+     "new": "2011.8812 plus 3276.9239 is 5288.8051 million USD, and 0.328598 of gross revenue is a plain ratio: 0.328598 percent of it would be a different figure entirely."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 28,
-   "prompt_head": "The plan carries a decommissioning provision of 260.0000 million USD and the Egina FPSO carries a decommissioning figure of 204.5029. What d",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000 from the value of 2047."
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "The 260.0000, in the final year of the 20.0000 year life, which is exactly why the Operate phase roll-up of 355.0000 stands so far above the annual operating cost of 95.0000.",
+      "new": "Neither of them, because the case carries capex and operating cost only, so both figures sit outside the CAPEX total of 2250.0000 and outside the OPEX of 95.0000 a year."
+     },
+     {
+      "index": 2,
+      "old": "Neither of them: the case carries capex and operating cost only, so the 260.0000 falls outside the CAPEX total of 2250.0000 and outside the OPEX of 95.0000 a year.",
+      "new": "The 260.0000, charged in production year 20 as the plan's end-of-life cost, while the facility's 204.5029 is replaced by it rather than added to it."
+     },
+     {
+      "index": 3,
+      "old": "Both, as one abandonment line of the two added, which is what separates the lifecycle cost of 4150.0000 from the value of 2047.5653.",
+      "new": "Both, as one abandonment line of the two added, which is what separates the lifecycle cost of 4150.0000 from the value of 2015.4123."
+     }
+    ],
+    "explanation": {
+     "old": "The engine totals CAPEX 2250.0000 and OPEX 95.0000 a year, so a value of 2047.5653 million USD is a screening value with an abandonment cost still to come.",
+     "new": "An ABEX cost item replaces the facility estimate and is never added to it, and charging the 260.0000 costs the plan 32.1530 million USD of present value against the 2047.5653 the same case is worth without it."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 29,
-   "prompt_head": "A three year profile given two prices is refused. What does the refusal say, and what does the same profile do once a third price is entered",
-   "keyed_answer_affected": false,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "-3517.4133",
-     "kind": "retired",
-     "settled_by": "- a scenario priced at zero, which is a number somebody typed: accepted, NPV -3554.2621.",
-     "quoted_as": [
-      "-3517.4133",
-      "3517",
-      "-3517"
-     ],
-     "example": "It says the scenario oil price is missing, which is the message a blank price returns, and with a third price entered the case runs and returns an NPV of -3517."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "It says the scenario oil price is missing, which is the message a blank price returns, and with a third price entered the case runs and returns an NPV of -3517.4133.",
+      "new": "It says the scenario oil price is missing, which is the message a blank price returns, and with a third price entered the case runs and returns an NPV of -3554.2621."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 30,
-   "prompt_head": "Moving the Production driver up 30 percent takes the plan's case to 3467.3636 million USD. What has that run done to the 130.0000 MMbbl the ",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "3467.3636",
-     "kind": "retired",
-     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
-     "quoted_as": [
-      "3467",
-      "3467.3636"
-     ],
-     "example": "Moving the Production driver up 30 percent takes the plan's case to 3467."
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "Moving the Production driver up 30 percent takes the plan's case to 3467.3636 million USD. What has that run done to the 130.0000 MMbbl the reserves table holds?",
+     "new": "Moving the Production driver up 30 percent takes the plan's case to 3437.8310 million USD. What has that run done to the 130.0000 MMbbl the reserves table holds?"
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 31,
-   "prompt_head": "The sweep moves the value by 3092.0051 on oil price and by 2839.5965 on production. Why is price the stronger of the two?",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2839.5965",
-     "kind": "retired",
-     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
-     "quoted_as": [
-      "2839.5965"
-     ],
-     "example": "0051 on oil price and by 2839."
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The sweep moves the value by 3092.0051 on oil price and by 2839.5965 on production. Why is price the stronger of the two?",
+     "new": "The sweep moves the value by 3097.7119 on oil price and by 2844.8375 on production. Why is price the stronger of the two?"
     },
-    {
-     "value": "3092.0051",
-     "kind": "retired",
-     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
-     "quoted_as": [
-      "3092.0051",
-      "3092"
-     ],
-     "example": "The sweep moves the value by 3092."
+    "explanation": {
+     "old": "Both drivers scale revenue, but 30 percent more barrels brings 30 percent more variable operating cost with it, which is why 3092.0051 runs above 2839.5965.",
+     "new": "Both drivers scale revenue, but 30 percent more barrels brings 30 percent more variable operating cost with it, which is why 3097.7119 runs above 2844.8375."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 32,
-   "prompt_head": "A reviewer subtracts the FPSO concept's lifecycle cost of 4150.0000 million USD from the Base case's gross revenue of 16095.0492 and calls t",
-   "keyed_answer_affected": true,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "What has that produced? The undiscounted value of the development, which becomes the 2047."
-    },
-    {
-     "value": "3310.0565",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "3310",
-      "3310.0565"
-     ],
-     "example": "8812 and the tax of 3310."
-    },
-    {
-     "value": "5321.9377",
-     "kind": "retired",
-     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
-     "quoted_as": [
-      "5321.9377"
-     ],
-     "example": "The government take of 5321."
-    }
-   ],
-   "falsified_claims": []
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "The undiscounted value of the development, which becomes the 2047.5653 million USD once the 10.0000 percent rate has been applied to it year by year across the 21 rows the case carries.",
+      "new": "The undiscounted value of the development, which becomes the 2015.4123 million USD once the 10.0000 percent rate has been applied to it year by year across the 21 rows the case carries."
+     },
+     {
+      "index": 2,
+      "old": "A figure on no scale the studio uses: it leaves the royalty of 2011.8812 and the tax of 3310.0565 inside the revenue and discounts nothing, while the value on those terms is 2047.5653 million USD.",
+      "new": "A figure on no scale the studio uses: it leaves the royalty of 2011.8812 and the tax of 3276.9239 inside the revenue and discounts nothing, while the value on those terms is 2015.4123 million USD."
+     },
+     {
+      "index": 3,
+      "old": "The government take of 5321.9377 million USD reached the long way round, because royalty and tax are exactly what separate gross revenue from a lifecycle cost.",
+      "new": "The government take of 5288.8051 million USD reached the long way round, because royalty and tax are exactly what separate gross revenue from a lifecycle cost."
+     }
+    ]
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 34,
-   "prompt_head": "A worked answer reports an oil reserves figure, a rate of return and a value per million USD of capex. What unit does each of the three carr",
-   "keyed_answer_affected": true,
-   "stem_affected": false,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "0.330657",
-     "kind": "retired",
-     "settled_by": "# Commentary: the payback column is the one figure in that table computed WITHOUT the end-of-life cost. scenarioPayback takes no abandonment argument, so the card reports the payback of a plan that never pays to abandon. On these cases it changes nothing, because the cost falls in the last year and the money has been recovered long before it; on a plan that only recovers at the end it would.",
-     "quoted_as": [
-      "0.330657"
-     ],
-     "example": "5998 and for the government take of 0."
-    },
-    {
-     "value": "1.436477",
-     "kind": "retired",
-     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
-     "quoted_as": [
-      "1.436477"
-     ],
-     "example": "What unit does each of the three carry? MMbbl for the oil, a ratio for the rate of return, and million USD for the value per million USD of capex, which is why it prints as 1."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "MMbbl for the oil, percent for the rate of return such as 29."
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "MMbbl for the oil, a ratio for the rate of return, and million USD for the value per million USD of capex, which is why it prints as 1.436477 alongside the money in the plan.",
+      "new": "MMbbl for the oil, a ratio for the rate of return, and million USD for the value per million USD of capex, which is why it prints as 1.388655 alongside the money in the plan."
+     },
+     {
+      "index": 1,
+      "old": "MMbbl for the oil, percent for the rate of return such as 29.5998, and a plain number for the ratio such as 1.436477.",
+      "new": "MMbbl for the oil, percent for a rate of return, and a plain number for the ratio such as 1.388655."
+     },
+     {
+      "index": 3,
+      "old": "MMbbl for the oil, percent for the rate of return of 29.5998 and for the government take of 0.330657 as well, and million USD for the value per million USD of capex.",
+      "new": "MMbbl for the oil, percent for the rate of return and for the government take of 0.328598 as well, and million USD for the value per million USD of capex."
+     }
+    ],
+    "explanation": {
+     "old": "A percent and a ratio are different animals: 0.330657 of gross revenue is not 0.330657 percent of it, and 1.436477 is a plain number carrying no unit at all.",
+     "new": "A percent and a ratio are different animals: 0.328598 of gross revenue is not 0.328598 percent of it, and 1.388655 is a plain number carrying no unit at all."
     }
-   ],
-   "falsified_claims": []
+   }
   },
   {
-   "bank": "ec6b_exam",
    "scope": "final",
    "module_key": null,
    "ord": 38,
-   "prompt_head": "A plan reports P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, CAPEX 2250.0000, NPV 2047.5653, IRR 29.5998 and 4 wells. What does a reader need",
-   "keyed_answer_affected": false,
-   "stem_affected": true,
-   "superlatives_in_stem": [],
-   "moved_values": [
-    {
-     "value": "-1797.2732",
-     "kind": "retired",
-     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
-     "quoted_as": [
-      "-1797",
-      "1797",
-      "-1797.2732"
-     ],
-     "example": "0000 USD a barrel the same concept reads -1797."
+   "bank": "ec6b_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "A plan reports P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, CAPEX 2250.0000, NPV 2047.5653, IRR 29.5998 and 4 wells. What does a reader need before quoting that NPV?",
+     "new": "A plan reports P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, CAPEX 2250.0000, NPV 2015.4123, IRR none and 4 wells. What does a reader need before quoting that NPV?"
     },
-    {
-     "value": "2047.5653",
-     "kind": "moved_referent",
-     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
-     "quoted_as": [
-      "2047.5653"
-     ],
-     "example": "0000, NPV 2047."
-    },
-    {
-     "value": "29.5998",
-     "kind": "moved_referent",
-     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
-     "quoted_as": [
-      "29.5998"
-     ],
-     "example": "5653, IRR 29."
+    "explanation": {
+     "old": "2047.5653 million USD belongs to the FPSO concept at 70.0000 USD a barrel on 2250.0000 of capex and a 20 year shape, and at 18.0000 USD a barrel the same concept reads -1797.2732.",
+     "new": "2015.4123 million USD belongs to the FPSO concept at 70.0000 USD a barrel on 2250.0000 of capex and a 20 year shape, and at 18.0000 USD a barrel the same concept reads -1834.1220."
     }
-   ],
-   "falsified_claims": []
+   }
   }
  ]
 }
