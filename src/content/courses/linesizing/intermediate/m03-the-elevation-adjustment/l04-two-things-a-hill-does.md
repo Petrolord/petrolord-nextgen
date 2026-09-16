@@ -17,7 +17,7 @@ All four lose rate climbing and gain it descending, and they do not lose and gai
 
 ## Uphill is not the mirror of downhill
 
-Read across any row. The two fractions do not average to one. The term is an exponential and an exponential is not symmetric about zero, so equal distances up and down are not equal effects on the rate, and the gain going down is the larger of the two on every row of this table.
+Read across the Weymouth row and average its two fractions. The answer is 0.998132, which is close to one and is not one. The term is an exponential and an exponential is not symmetric about zero, so equal distances up and down are not equal effects on the rate. The average sitting below one is the direction of the asymmetry: on that row the climb takes away slightly more than the matching descent gives back.
 
 This is the most practically important sentence in the module. A route that climbs 1500.000000 ft and then descends 1500.000000 ft has not done nothing to the gas, and treating an undulating profile as though the ups and downs cancel is an assumption the arithmetic refuses.
 
@@ -33,7 +33,7 @@ A reader who has followed the two previous lessons can now say what happens phys
 
 The mistake is netting a profile to a single elevation change and assuming the answer is the same. The engine will accept the net figure and answer it honestly, and the answer will be for a line that climbs once rather than a line that undulates.
 
-The second mistake is assuming a descent buys back what the matching climb cost. On this table it buys back more than it cost, and the asymmetry is real.
+The second mistake is assuming a descent buys back what the matching climb cost. On the Weymouth row it buys back slightly less, which is what an average of 0.998132 rather than 1.000000 is saying.
 
 ## Exercise
 

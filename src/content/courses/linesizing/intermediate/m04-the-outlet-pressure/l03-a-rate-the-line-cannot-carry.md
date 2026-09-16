@@ -15,13 +15,13 @@ The first row is a demanding duty. Sixty million standard cubic feet a day costs
 
 ## The floor is what makes it decidable
 
-The bracket runs from atmospheric up to the ceiling. The solver can therefore ask a question the forward direction cannot: what is the most this line will pass. That is the rate at the floor, with the outlet dumped to atmosphere. Any target above it needs an outlet below atmospheric, which is not a pressure this method will produce.
+The bracket runs from atmospheric up to the ceiling. The solver can therefore ask a question the forward direction cannot: what is the most this line will pass. That is the rate at the floor, with the outlet dumped to atmosphere, and on this trunk it can be measured rather than described. Push the rate up and the largest the trunk accepts is 96619638.0494 scfd, where the solve converges on an outlet of 14.700000 psia. One scfd beyond that is refused. Any target above that rate needs an outlet below atmospheric, which is not a pressure this method will produce.
 
 So the refusal is a real finding rather than a failure of the search. The solver went to the bottom of its range, found the line still short, and said so.
 
 ## Why the floor is not returned as the answer
 
-Returning the atmospheric floor would be the most dangerous possible response. It is a valid pressure, it would pass any check that tests whether a number came back, and it would flow into a sizing sweep as though the line delivered the contracted rate at atmospheric outlet. The distance between that and the truth is the entire finding.
+Returning 14.700000 psia would be the most dangerous possible response. It is a valid pressure, it would pass any check that tests whether a number came back, and it would flow into a sizing sweep as though the line delivered the contracted rate at atmospheric outlet. The distance between that and the truth is the entire finding.
 
 The same reasoning rules out returning the closest achievable rate. A caller who asked what pressure a contracted rate arrives at has not asked what rate is achievable, and quietly answering the second question is how a report comes to contain a figure nobody requested.
 

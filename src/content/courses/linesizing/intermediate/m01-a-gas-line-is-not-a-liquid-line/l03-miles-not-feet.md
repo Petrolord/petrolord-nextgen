@@ -1,4 +1,4 @@
-# Miles, not feet
+# The engine works in miles
 
 A gas line in this engine is measured in miles because that is the unit the published transmission forms are stated in. The SOKU trunk is 32.000000 miles. The elevation change on the same call is in feet, so one gas call carries two units of length.
 

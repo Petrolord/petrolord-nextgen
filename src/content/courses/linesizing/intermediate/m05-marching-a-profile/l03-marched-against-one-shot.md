@@ -2,7 +2,7 @@
 
 The traverse spends 25.660631 psi over 26400.000000 ft. A single call over the same length spends 25.660631 psi. The difference is 0.000000 psi.
 
-{{panel:fc-gasline-explorer}}
+{{panel:fc-liquid-explorer}}
 
 ## The comparison
 

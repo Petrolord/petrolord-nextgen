@@ -10,9 +10,10 @@ A rate in scfd is a volume counted at a stated base, and the base the published 
 | --- | --- | --- |
 | the base temperature of the published forms | 520.000000 degR | the temperature a standard cubic foot is counted at |
 | the base pressure of the published forms | 14.650000 psia | the pressure a standard cubic foot is counted at |
+| atmospheric | 14.700000 psia | the floor of the outlet-pressure bracket |
 | the SOKU outlet | 620.000000 psia | a pressure the line actually runs at |
 
-A fourth pressure belongs beside them and the engine names it rather than numbering it: atmospheric, which is the floor of the outlet-pressure bracket. The base pressure is not atmospheric. The two do different jobs as well as holding different values, because the base is a bookkeeping condition that appears inside every form while atmospheric is a physical floor that appears in the solver inverting them.
+The base pressure is not atmospheric. The two differ by 0.050000 psi, which is close enough to look like a rounding and is nothing of the kind, because the two do different jobs. The base is a bookkeeping condition that appears inside every form. Atmospheric is a physical floor, and it appears only in the solver that inverts them.
 
 ## A standard cubic foot is an accounting unit
 
@@ -32,7 +33,7 @@ The base could have been left implicit inside the forms, which is where most pub
 
 ## The mistake
 
-The mistake is reading 14.650000 psia as atmospheric and using it as the floor of a pressure search, or reading atmospheric as the base and reporting a rate against it. They are two low pressures in the same engine, used at opposite ends of the calculation.
+The mistake is reading 14.650000 psia as atmospheric and using it as the floor of a pressure search, or reading 14.700000 psia as the base and reporting a rate against it. They are used at opposite ends of the calculation.
 
 The second mistake is comparing a rate from this engine against a rate from a document that never stated its base.
 

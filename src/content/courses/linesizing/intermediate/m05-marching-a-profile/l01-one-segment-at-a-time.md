@@ -2,7 +2,7 @@
 
 A traverse marches a line segment by segment and returns the pressure at every station, so a designer draws the hydraulic gradient instead of asserting one number.
 
-{{panel:fc-gasline-explorer}}
+{{panel:fc-liquid-explorer}}
 
 ## The OGBIA line, marched flat
 

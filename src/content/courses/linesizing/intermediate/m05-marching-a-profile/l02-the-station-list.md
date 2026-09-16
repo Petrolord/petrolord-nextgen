@@ -2,7 +2,7 @@
 
 Run the same line over a ridge and it arrives at exactly the same pressure. Everything that differs between the two cases happens in the middle, where nobody reads.
 
-{{panel:fc-gasline-explorer}}
+{{panel:fc-liquid-explorer}}
 
 ## The same line, flat and over a ridge
 
