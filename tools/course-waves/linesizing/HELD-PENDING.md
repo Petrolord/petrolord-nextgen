@@ -49,7 +49,15 @@ Digest Section 10, in the `THE CONTROL.` paragraph:
 > the solver could not converge."
 
 This pass left it, arguing it teaches why the control exists. **THE
-COORDINATOR OVERRULED THAT AND ORDERED IT STRUCK**, for consistency: writers
+COORDINATOR OVERRULED THAT AND ORDERED IT STRUCK**, and the Professional audit
+then CONFIRMED IT IS THE ANCESTOR OF THREE LESSON DEFECTS, while confirming it
+is not inherited anywhere in the Professional tier as it now stands. Its own
+upstream is `lineHydraulics.js` lines 333 to 350, headed "THE BRACKET IS THE
+WHOLE OF THIS FUNCTION'S HISTORY", which names the pre-repair symptom verbatim.
+That comment is CORRECT AS A COMMENT and needs no engine change: the defect is
+that nothing stops a writer reading it, which is why "engine source comments
+are provenance, not teaching truth" is now a briefing rule in the kit. For
+consistency: writers
 are told repair history is forbidden to lessons and that the digest is the one
 file which is teaching truth, so a single history sentence in the digest
 invites exactly the confusion FC3 hit this morning, where a writer had to
@@ -68,6 +76,33 @@ constraint and is held only because it would be rebuilt alongside Item 1.
 `digestheadings.mjs` carries a `repair-history` rule; it does not fire on this
 line because the history is in PROSE rather than in the heading, and the prose
 sweep is what has to catch it.
+
+## ITEM 2b. Digest line 386. AN "X, NOT Y" CONTRASTIVE. STRIKE IT.
+
+Found by `digestprose.mjs`, missed by the copy-rule sweep that fixed five other
+lines in this wave, and confirmed independently by the Professional audit.
+
+> "Class 4 asks for 1.800000 times the pressure wall of Class 1 on the same
+> pipe at the same pressure (derived from the two rows above). **The route, not
+> the fluid, is what moved it.**"
+
+The owner rule bans "X, not Y" contrastives. Section 13 is at or after Section
+7, so this is legal under the original constraint and is held only because it
+rebuilds alongside the rest. Something of this shape:
+
+> "What moved it is the route rather than the fluid."
+
+## ITEM 2c. Nine BACKWARD REACHES into Section 1 constants, from Professional lessons
+
+Reported by the Professional audit. Professional lessons quote figures that
+resolve only inside Section 1: `5280.000000000` with its `9.095e-13` step,
+`96619638.0494`, and the base and atmospheric pair.
+
+**The fix is ADDITIVE and has already been done once in this wave**, for the
+three Expert constants: derive each inside the Professional sections rather
+than moving anything out of Section 1, so no line already pinned by another
+reader moves. Section 9 or 10 is the natural home for the mile and Section 7
+for the base and atmospheric pair. `litsweep.py --strict-range` reports them.
 
 ## ITEM 3. Eleven over-length Professional lessons. NOT A SEPARATE JOB.
 

@@ -10,9 +10,15 @@
 // left standing, which is the defect class this gate exists for, in the same
 // pass that repaired the body.
 //
-// Run with: node /root/dc-wavekit/digestheadings.mjs \
-//             /root/fc-wip-linesizing/digest.txt --rules /root/fc-wip-linesizing
-export default [
+// Run with: node /root/dc-wavekit/digestprose.mjs \
+//             /root/fc-wip-linesizing/digest.txt --rules /root/fc-wip-linesizing \
+//             --lessons /root/wt-fc2-nextgen/src/content/courses/linesizing
+export default {
+  // FC2 quotes no engine string that breaks the copy rule, so it pins nothing.
+  // A wave that does quote one pins it here as {frag, src} and names enginesRoot.
+  pinned: [],
+  cleared: [],
+  headings: [
   {
     id: 'fc2-one-pipe',
     // A heading may not frame the Expert reading as one pipe, because the
@@ -45,4 +51,5 @@ export default [
     body: () => true,
     why: 'a heading says the form moves the answer further than the bore, which Section 12 computes the other way',
   },
-];
+  ],
+};

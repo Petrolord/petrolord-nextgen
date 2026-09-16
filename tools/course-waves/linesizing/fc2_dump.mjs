@@ -158,12 +158,10 @@ const mArea = (Math.PI * OGBIA.idIn * OGBIA.idIn) / (4 * 144);
 w(`cubic feet per barrel, measured as the flow area times the length over the engine's line volume: ${num((mArea * OGBIA.lengthFt) / mVol, 13)} (derived from the engine's line volume ${r4(mVol)} bbl).`);
 w(`seconds per day, measured as the rate times the cubic feet per barrel above over the area times the velocity: ${e6((OGBIA.qBpd * ((mArea * OGBIA.lengthFt) / mVol)) / (mArea * OG.vFtS))} (derived on the row).`);
 w(`seconds per hour, measured as a length over the pig speed times the engine's run hours: ${e6(OGBIA_PIG.lengthFt / (OGBIA_PIG.pigSpeedFtS * H.pigRun(OGBIA_PIG).runHours))} (derived from the engine's run time ${e6(H.pigRun(OGBIA_PIG).runHours)} h).`);
-// The feet in a mile used to be unmeasurable here, because the module
-// declared the constant and never used it. The gas forms compare an
-// elevation change against the line's own length now, so the constant is
-// consumed and can be recovered by asking the engine where that refusal
-// begins: halve between a rise it accepts and a rise it refuses on a line
-// one mile long.
+// The feet in a mile is recoverable because the gas forms compare an
+// elevation change against the line's OWN LENGTH, so the constant is consumed
+// by a guard and the guard can be asked where it begins: halve between a rise
+// the engine accepts and a rise it refuses, on a line one mile long.
 const mileAccepts = (dz) => H.weymouthQ({ ...SOKU, lengthMi: MILE_PROBE_LENGTH_MI, elevChangeFt: dz }).error
   !== 'elevation change cannot exceed line length';
 let mLo = 0; let mHi = 1e6;
