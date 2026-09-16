@@ -451,6 +451,14 @@ A('  v_z_plus double precision; v_z_minus double precision;')
 A('  v_resid double precision; v_pump double precision;')
 A('  v_one_step double precision; v_excess double precision;')
 A('  v_antoine double precision; v_psat double precision;')
+# THE SWEEPS NAME WHAT THEY CAUGHT. FC3's counted, and a refusal reading
+# "1 graded field(s) land on a quantity held for the literature" leaves the
+# reader to find which of eighteen and which of twenty-two. The dry run's own
+# held-quantity control landed exactly there: the gate refused correctly and the
+# control could not tell it apart from any other refusal, because the message
+# carried no name. Every sweep below collects the offending tier/key pairs into
+# this and prints them.
+A('  v_names text;')
 for (t, k) in V:
     A(f'  {V[(t, k)]} double precision;')
 A('begin')
@@ -568,7 +576,8 @@ A(f'''
   -- one. The first is what a recut of the capstone prompt would break; the
   -- second is what a recut of the ANSWER would break, and neither implies the
   -- other.
-  select count(*) into v_graded from public.academy_capstones c,
+  select count(*), string_agg(c.tier || '/' || (f->>'key'), ', ' order by c.tier, f->>'key')
+    into v_graded, v_names from public.academy_capstones c,
          lateral jsonb_array_elements(c.fields) f
    where c.app_slug = '{SLUG}'
      and (lower(f->>'label') like '%reboiler dut%'
@@ -578,11 +587,12 @@ A(f'''
           or lower(f->>'label') like '%real-gas%'
           or lower(f->>'label') like '%mcketta%');
   if v_graded <> 0 then
-    raise exception 'FC4 go-live refused: % graded field(s) name a quantity held for the literature', v_graded;
+    raise exception 'FC4 go-live refused: % graded field(s) name a quantity held for the literature: %', v_graded, v_names;
   end if;
 
   -- A graded field may not be a quantity these engines cannot produce at all.
-  select count(*) into v_graded from public.academy_capstones c,
+  select count(*), string_agg(c.tier || '/' || (f->>'key'), ', ' order by c.tier, f->>'key')
+    into v_graded, v_names from public.academy_capstones c,
          lateral jsonb_array_elements(c.fields) f
    where c.app_slug = '{SLUG}'
      and (lower(f->>'label') like '%hydrate%'
@@ -590,14 +600,15 @@ A(f'''
           or lower(f->>'label') like '%tray%'
           or lower(f->>'label') like '%phase envelope%');
   if v_graded <> 0 then
-    raise exception 'FC4 go-live refused: % capstone field(s) grade a quantity this gas processing engine cannot produce', v_graded;
+    raise exception 'FC4 go-live refused: % capstone field(s) grade a quantity this gas processing engine cannot produce: %', v_graded, v_names;
   end if;
 ''')
 
 HELD_ROWS = ',\n'.join('                 ' + ', '.join(f'({f17(v)})' for v, _l in HELD[i:i + 5])
                        for i in range(0, len(HELD), 5))
 A(f'''
-  select count(*) into v_graded from public.academy_capstones c,
+  select count(*), string_agg(distinct c.tier || '/' || (f->>'key'), ', ')
+    into v_graded, v_names from public.academy_capstones c,
          lateral jsonb_array_elements(c.fields) f,
          (values
 {HELD_ROWS}
@@ -606,7 +617,7 @@ A(f'''
      and abs((f->>'expected')::double precision) - h.v <= (f->>'tol')::double precision
      and h.v - abs((f->>'expected')::double precision) <= (f->>'tol')::double precision;
   if v_graded <> 0 then
-    raise exception 'FC4 go-live refused: % graded field(s) land on a quantity held for the literature', v_graded;
+    raise exception 'FC4 go-live refused: % graded field(s) land on a quantity held for the literature: %', v_graded, v_names;
   end if;
 ''')
 
@@ -617,7 +628,8 @@ A(f'''
   -- EVERY NUMBER THE TEACHING DIGEST PRINTS. A hand-picked list of headline
   -- figures is a list of the collisions somebody thought of, so this is all
   -- {len(published)} of them.
-  select count(*) into v_graded from public.academy_capstones c,
+  select count(*), string_agg(distinct c.tier || '/' || (f->>'key'), ', ')
+    into v_graded, v_names from public.academy_capstones c,
          lateral jsonb_array_elements(c.fields) f,
          (values
 {PUB_ROWS}
@@ -626,14 +638,15 @@ A(f'''
      and abs((f->>'expected')::double precision) - d.v <= (f->>'tol')::double precision
      and d.v - abs((f->>'expected')::double precision) <= (f->>'tol')::double precision;
   if v_graded <> 0 then
-    raise exception 'FC4 go-live refused: % graded field(s) sit within their own tolerance of a value the digest publishes, which makes them a lookup rather than a calculation', v_graded;
+    raise exception 'FC4 go-live refused: % graded field(s) sit within their own tolerance of a value the digest publishes, which makes them a lookup rather than a calculation: %', v_graded, v_names;
   end if;
 ''')
 
 HANDED_ROWS = ',\n'.join('                 ' + ', '.join(f'({f17(v)})' for v in handed[i:i + 6])
                          for i in range(0, len(handed), 6))
 A(f'''
-  select count(*) into v_graded from public.academy_capstones c,
+  select count(*), string_agg(distinct c.tier || '/' || (f->>'key'), ', ')
+    into v_graded, v_names from public.academy_capstones c,
          lateral jsonb_array_elements(c.fields) f,
          (values
 {HANDED_ROWS}
@@ -642,17 +655,18 @@ A(f'''
      and abs((f->>'expected')::double precision) - p.v <= (f->>'tol')::double precision
      and p.v - abs((f->>'expected')::double precision) <= (f->>'tol')::double precision;
   if v_graded <> 0 then
-    raise exception 'FC4 go-live refused: % graded field(s) land on a number the learner is handed in a prompt, which makes the field a transcription rather than a calculation', v_graded;
+    raise exception 'FC4 go-live refused: % graded field(s) land on a number the learner is handed in a prompt, which makes the field a transcription rather than a calculation: %', v_graded, v_names;
   end if;
 
   -- A capstone prompt stating another tier's graded answer hands that tier away.
-  select count(*) into v_graded from public.academy_capstones c,
-         (select f->>'expected' as e, c2.tier as owner
+  select count(*), string_agg(distinct c.tier || ' states ' || g.owner || '/' || g.k, ', ')
+    into v_graded, v_names from public.academy_capstones c,
+         (select f->>'expected' as e, f->>'key' as k, c2.tier as owner
             from public.academy_capstones c2, lateral jsonb_array_elements(c2.fields) f
            where c2.app_slug = '{SLUG}') g
    where c.app_slug = '{SLUG}' and c.tier <> g.owner and c.prompt like '%' || g.e || '%';
   if v_graded <> 0 then
-    raise exception 'FC4 go-live refused: % capstone prompt(s) state a graded value belonging to another tier', v_graded;
+    raise exception 'FC4 go-live refused: % capstone prompt(s) state a graded value belonging to another tier: %', v_graded, v_names;
   end if;
 '''.replace('{SLUG}', SLUG))
 
