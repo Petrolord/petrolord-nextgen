@@ -19,7 +19,7 @@
    "Zero gauge is ordinary atmospheric pressure, and zero absolute is not a gas."
   ],
   "answer": 3,
-  "explanation": "A gas at 0.000000 psig is a gas at 14.700000 psia. Feed a gauge pressure into the gas law and the density falls to zero at atmospheric conditions."
+  "explanation": "A gas at 0.000000 psig is a gas at 14.7 psia. Feed a gauge pressure into the gas law and the density falls to zero at atmospheric conditions."
  },
  {
   "prompt": "Raising the gas gravity from 0.680000 to 0.700000 takes Tpc from 372.642400 to 377.590000 degR and Ppc from 666.055360 to 663.336000 psia. At fixed conditions, what does that do to the reduced pair?",
@@ -88,15 +88,15 @@
   "explanation": "z falls from 0.986286 to 0.828979 across these cases and turns and rises again further up the pressure axis. That shape is the reason a correlation exists at all."
  },
  {
-  "prompt": "The retired app held z at 0.850000. Read against the four published density cases, where was that substitution worst?",
+  "prompt": "The retired app held z at 0.85. Read against the four published density cases, where was that substitution worst?",
   "options": [
    "At the 2500.000000 psia case, where the correlation returns 0.828979 and the density reaches 9.344827 lb/ft3.",
    "At the low-pressure case, where the correlation returns 0.986286 and a gas near the ideal limit was being corrected as though it were dense.",
    "At the 1000.000000 psia case, where the correlation returns 0.871027, because that is the condition an ordinary separator runs at, so it is the error most often made in practice.",
-   "Nowhere in particular, since 0.850000 sits between 0.828979 and 0.986286 on the four cases."
+   "Nowhere in particular, since 0.85 sits between 0.828979 and 0.986286 on the four cases."
   ],
   "answer": 1,
-  "explanation": "0.850000 against 0.986286 is the widest of the four gaps, and a low-pressure stage is exactly where it sits. Density is proportional to one over z, so the error runs straight into the density."
+  "explanation": "0.85 against 0.986286 is the widest of the four gaps, and a low-pressure stage is exactly where it sits. Density is proportional to one over z, so the error runs straight into the density."
  },
  {
   "prompt": "What happens to a vertical vessel sized with z left at 1 in place of 0.908065?",

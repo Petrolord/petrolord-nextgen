@@ -154,7 +154,7 @@
   "explanation": "The held items are the K derating with its floor, the borrowed settling velocity, the API 521 labels and the spacing table. None of the five is an answer, and only one of them has its error bar written down."
  },
  {
-  "prompt": "A handover writes 350 psi for the AGBAMI operating pressure and reports the interface to the nearest inch. What conventions has it broken?",
+  "prompt": "A handover writes the AGBAMI operating pressure as 350.000000 psi and reports the interface to the nearest inch. What conventions has it broken?",
   "options": [
    "Pressures are always reported as absolute in this course, and lengths are reported to four decimals in the same way as metres, kilowatts and seconds on every page of a report.",
    "Counts are whole numbers and everything else carries six decimals, so both the pressure and the interface needed six before the handover could be accepted.",
