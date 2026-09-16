@@ -15,7 +15,17 @@ const GOLD = '/root/fc-wip-rotating/goldens';
 const P = await import(`${ROOT}/engines/facilities/pumps.js`);
 const C = await import(`${ROOT}/engines/facilities/compression.js`);
 
-const read = (n) => JSON.parse(fs.readFileSync(path.join(GOLD, `rotating_${n}_cases.json`), 'utf8'));
+// Python's json.dump writes bare Infinity, -Infinity and NaN, which are legal
+// nowhere in JSON and which JSON.parse refuses. The refusals catalogue records
+// exactly those values, because they ARE the finding. They are read back as
+// labelled strings: nothing in this file does arithmetic on them, it reports
+// what the engine returns for the same input.
+const read = (n) => JSON.parse(
+  fs.readFileSync(path.join(GOLD, `rotating_${n}_cases.json`), 'utf8')
+    .replace(/:\s*-Infinity\b/g, ': "-Infinity"')
+    .replace(/:\s*Infinity\b/g, ': "Infinity"')
+    .replace(/:\s*NaN\b/g, ': "NaN"'),
+);
 const rel = (a, b) => (Math.abs(b) > 1e-300 ? Math.abs(a - b) / Math.abs(b) : Math.abs(a - b));
 
 let swept = 0;
@@ -110,15 +120,21 @@ block('viscosity', read('viscosity'), (row) => {
     viscosityCSt: row.viscosityCSt, speedRpm: row.speedRpm,
   });
   const notes = [];
-  if (row.viscosityCSt <= 1) {
-    // The engine's water branch returns B: 0, which is not the value of B at
-    // water viscosity. Recorded as a shape finding, not a numeric gap.
-    notes.push(`engine reports B = ${r.B} at ${row.viscosityCSt} cSt; the correlating parameter there is ${row.B}`);
-    return { pairs: [['cQ', r.cQ, row.cQ], ['cEta', r.cEta, row.cEta]], notes };
-  }
+  // B is now compared on EVERY branch. The engine used to return B: 0 at or
+  // below water viscosity, a sentinel dressed as a value, so this block had
+  // to special-case the water rows and report the disagreement as a note
+  // instead of measuring it. FC3-0 made the engine report the parameter it
+  // actually has, and the note became a comparison.
   const pairs = [['B', r.B, row.B], ['cQ', r.cQ, row.cQ], ['cH', r.cH, row.cH], ['cEta', r.cEta, row.cEta]];
-  if (row.branch === 'corrected' && r.correctedQGpm === undefined) notes.push('engine omitted correctedQGpm on a corrected row');
-  if (row.branch !== 'corrected' && r.correctedQGpm !== undefined) notes.push('engine returned correctedQGpm on an uncorrected row');
+  // And the corrected values are present on every branch, so the shape check
+  // is now unconditional: on a no-correction row the answer is the catalogue
+  // value unchanged, which is a value and not an absence.
+  if (r.correctedQGpm === undefined || r.correctedHeadFt === undefined) {
+    notes.push(`engine omitted the corrected values on a ${row.branch} row`);
+  } else {
+    pairs.push(['correctedQGpm', r.correctedQGpm, row.correctedQGpm]);
+    pairs.push(['correctedHeadFt', r.correctedHeadFt, row.correctedHeadFt]);
+  }
   if (row.inverseRoundTripRelative !== undefined && row.inverseRoundTripRelative > 1e-20) {
     notes.push(`oracle inverse round trip ${row.inverseRoundTripRelative}`);
   }
@@ -194,15 +210,29 @@ const oracleStage = JSON.parse(fs.readFileSync('/root/fc-wip-rotating/goldens/ro
 // acfm: the oracle derives the ideal-gas volume from the SAME z the engine
 // computed (z is DAK, declared an input by the oracle), so what is actually
 // compared here is the standard-base packaging and the arithmetic.
+//
+// AFTER FC3-0 the module has ONE standard base. This expectation used to be
+// written on 14.7 psia and 520 degR because that is what actualInletCfm used
+// while the mass flow in the same file used 14.696 and 519.67; the gap
+// between the two bases showed up here as 3.627e-4, which is F3 exactly. The
+// base is the module's declared 60 degF one on both legs now, and the
+// NEGATIVE CONTROL below is that the retired base still fails this block.
 block('acfm', read('acfm'), (row) => {
   const probe = C.compressionStage({
     qMMscfd: Math.max(row.qMMscfd, 1e-6), pSuctionPsia: row.pPsia,
     tSuctionF: row.tF, ratio: 1.5, gasSg: row.gasSg, k: 1.28,
   });
   const z = probe.z1;
-  const want = (row.qMMscfd * 1e6 / 1440) * (14.7 / row.pPsia) * ((row.tF + 459.67) / 520) * z;
+  const base = (pStd, tStd) => (row.qMMscfd * 1e6 / 1440)
+    * (pStd / row.pPsia) * ((row.tF + 459.67) / tStd) * z;
+  const want = base(14.696, 519.67);
   const got = C.actualInletCfm(row);
-  return { pairs: [['acfm', got, want]] };
+  const retired = base(14.7, 520);
+  const notes = [];
+  // the control: the base this replaced must NOT match, or the comparison is
+  // not sensitive to the base at all and this block checks only arithmetic
+  if (rel(got, retired) < 1e-6) notes.push('CONTROL FAILED: the retired 14.7/520 base still matches');
+  return { pairs: [['acfm', got, want]], notes };
 });
 
 block('fuel', read('fuel'), (row) => {
@@ -217,9 +247,17 @@ block('fuel', read('fuel'), (row) => {
 });
 
 /* --------------------------------------------------------------- refusals */
+/** The five exports that return a bare number and so have nowhere to put an
+ *  error. Their NaN is a documented contract; every other export's is a bug. */
+const BARE_NUMBER_EXPORTS = new Set([
+  'pumps.headFtToPsi', 'pumps.psiToHeadFt',
+  'compression.polytropicExponentRatio', 'compression.dischargeTempR',
+  'compression.actualInletCfm',
+]);
+
 {
   const rows = read('refusals');
-  let ok = 0; const bad = [];
+  let ok = 0; let silent = 0; let contract = 0; const bad = [];
   for (const row of rows) {
     const mod = row.module === 'pumps' ? P : C;
     const r = mod[row.fn](row.input);
@@ -234,11 +272,33 @@ block('fuel', read('fuel'), (row) => {
       if (typeof r.headAt === 'function') nums.push(r.headAt(1000));
     }
     const nonFinite = nums.some((v) => !Number.isFinite(v));
-    const cls = hasErr ? 'refusal' : (nonFinite ? 'silent' : 'answered');
+    // A non-finite return with no error key is 'silent' — a DEFECT — unless
+    // the export is one of the five bare-number ones, which have nowhere to
+    // put an error and return NaN by documented contract. The two classes are
+    // kept apart so the contract cannot be used to excuse a defect: a row
+    // expecting 'nanContract' fails if it is not a bare-number export, and
+    // after FC3-0 no row expects 'silent' at all.
+    const bare = BARE_NUMBER_EXPORTS.has(`${row.module}.${row.fn}`);
+    const cls = hasErr ? 'refusal' : (nonFinite ? (bare ? 'nanContract' : 'silent') : 'answered');
+    if (row.expect === 'nanContract' && !bare) {
+      bad.push(`${row.module}.${row.fn} is expected to hold the bare-number NaN contract but is not a bare-number export`);
+    }
     if (cls === row.expect) ok += 1; else bad.push(`${row.module}.${row.fn} ${JSON.stringify(row.input)} -> ${cls}, expected ${row.expect}`);
+    if (cls === 'silent') silent += 1;
+    if (cls === 'nanContract') contract += 1;
     swept += 1;
   }
-  report.push({ name: 'refusals', n: rows.length, worst: 0, worstAt: `${ok}/${rows.length} classified as expected`, notes: bad });
+  report.push({
+    name: 'refusals',
+    n: rows.length,
+    worst: 0,
+    worstAt: `${ok}/${rows.length} classified as expected, ${silent} silent (must be 0), ${contract} by bare-number contract`,
+    notes: bad,
+  });
+  if (silent > 0) {
+    console.log(`\n${silent} non-finite return(s) with no error key from an export that has somewhere to put one. That class was emptied by FC3-0; this is a regression.`);
+    failures += 1;
+  }
   if (rows.length === 0) failures += 1;
 }
 

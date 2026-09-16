@@ -20,7 +20,7 @@
   "module": "pumps"
  },
  {
-  "expect": "silent",
+  "expect": "refusal",
   "fn": "systemCurve",
   "input": {
    "atFlowGpm": 1500,
@@ -132,7 +132,7 @@
   "module": "pumps"
  },
  {
-  "expect": "silent",
+  "expect": "refusal",
   "fn": "pumpPower",
   "input": {
    "efficiency": 0.78,
@@ -181,7 +181,7 @@
   "module": "pumps"
  },
  {
-  "expect": "silent",
+  "expect": "refusal",
   "fn": "npshCheck",
   "input": {
    "npshrFt": 12
@@ -211,7 +211,7 @@
   "module": "pumps"
  },
  {
-  "expect": "silent",
+  "expect": "refusal",
   "fn": "speedChange",
   "input": {
    "speedRatio": 0.8
@@ -241,7 +241,7 @@
   "module": "pumps"
  },
  {
-  "expect": "silent",
+  "expect": "refusal",
   "fn": "impellerTrim",
   "input": {
    "diameterRatio": 0.8
@@ -269,7 +269,7 @@
   "module": "pumps"
  },
  {
-  "expect": "silent",
+  "expect": "refusal",
   "fn": "viscosityCorrection",
   "input": {
    "headBepFt": 300,
@@ -280,7 +280,7 @@
   "module": "pumps"
  },
  {
-  "expect": "silent",
+  "expect": "refusal",
   "fn": "viscosityCorrection",
   "input": {
    "headBepFt": 300,
@@ -379,7 +379,7 @@
   "module": "compression"
  },
  {
-  "expect": "silent",
+  "expect": "refusal",
   "fn": "stageCount",
   "input": {
    "k": 1.28,
@@ -391,7 +391,7 @@
   "module": "compression"
  },
  {
-  "expect": "silent",
+  "expect": "refusal",
   "fn": "stageCount",
   "input": {
    "k": 1.28,
@@ -455,7 +455,7 @@
   "module": "compression"
  },
  {
-  "expect": "silent",
+  "expect": "refusal",
   "fn": "compressionStage",
   "input": {
    "gasSg": 0.65,
@@ -469,7 +469,7 @@
   "module": "compression"
  },
  {
-  "expect": "silent",
+  "expect": "refusal",
   "fn": "compressionStage",
   "input": {
    "gasSg": 0.65,
@@ -517,13 +517,196 @@
   "module": "compression"
  },
  {
-  "expect": "silent",
+  "expect": "nanContract",
   "fn": "actualInletCfm",
   "input": {
    "gasSg": 0.65,
    "pPsia": 200,
    "qMMscfd": 0,
    "tF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "pumpPower",
+  "input": {
+   "efficiency": 0.78,
+   "headFt": 300,
+   "motorEfficiency": 5,
+   "qGpm": 1500,
+   "sg": 0.85
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "pumpPower",
+  "input": {
+   "efficiency": 0.78,
+   "headFt": 300,
+   "motorEfficiency": -0.5,
+   "qGpm": 1500,
+   "sg": 0.85
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "answered",
+  "fn": "pumpPower",
+  "input": {
+   "efficiency": 0.78,
+   "headFt": 300,
+   "motorEfficiency": 1,
+   "qGpm": 1500,
+   "sg": 0.85
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "npshCheck",
+  "input": {
+   "npshaFt": Infinity,
+   "npshrFt": 12
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "combineParallel",
+  "input": {
+   "n": 2.5
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "combineSeries",
+  "input": {
+   "n": 1.5
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "nanContract",
+  "fn": "psiToHeadFt",
+  "input": {
+   "psi": 100,
+   "sg": 0
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "nanContract",
+  "fn": "headFtToPsi",
+  "input": {
+   "sg": 1
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "stageCount",
+  "input": {
+   "k": 1.28,
+   "pDischargePsia": 1000,
+   "pSuctionPsia": 100,
+   "polytropicEfficiency": 1.5,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "stageCount",
+  "input": {
+   "k": 1.28,
+   "pDischargePsia": 1000,
+   "pSuctionPsia": 100,
+   "tSuctionF": -600
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "stageCount",
+  "input": {
+   "k": 1.28,
+   "maxDischargeF": -100,
+   "pDischargePsia": 1000,
+   "pSuctionPsia": 100,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "compressionStage",
+  "input": {
+   "gasSg": 0.65,
+   "k": 1.28,
+   "pSuctionPsia": 100,
+   "polytropicEfficiency": 1.5,
+   "qMMscfd": 20,
+   "ratio": 3.16,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "compressorTrain",
+  "input": {
+   "cpBtuLbF": NaN,
+   "gasSg": 0.65,
+   "k": 1.28,
+   "pDischargePsia": 1000,
+   "pSuctionPsia": 100,
+   "qMMscfd": 20,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "nanContract",
+  "fn": "actualInletCfm",
+  "input": {
+   "gasSg": 0.65,
+   "pPsia": 200,
+   "qMMscfd": 20,
+   "tF": -600
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "machineScreen",
+  "input": {
+   "gasSg": 0.65,
+   "overallRatio": 3,
+   "pSuctionPsia": 200,
+   "qMMscfd": 20,
+   "tSuctionF": -600,
+   "totalBrakeHp": 500
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "driverFuel",
+  "input": {
+   "brakeHp": 1000,
+   "heatRateBtuHpHr": 2000
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "driverFuel",
+  "input": {
+   "brakeHp": 1000,
+   "heatRateBtuHpHr": 1
   },
   "module": "compression"
  }

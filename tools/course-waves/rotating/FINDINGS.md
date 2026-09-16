@@ -12,8 +12,23 @@ from its own definition). 403 engine-against-oracle comparisons across 14
 blocks plus 8 stages in a second pass, with a negative control in each that
 was caught.
 
-**NOTHING HERE IS FIXED IN THIS PHASE.** The course may need to teach around
-these, and a fix moves goldens. Each item says whether it **FAILS OPEN** (a
+**RE-CUT 2026-09-16 ONTO ENGINES MAIN `4fa37e6`.** When this file was written
+nothing was fixed. Everything in sections A, B and E now is: the FC3-0 wave
+repaired the engines half (engines PR #197) and the Suite half (Suite PR #491),
+and the course foundation was rebuilt on the repaired engine before a lesson
+was written. The status of every item is recorded in the two FC3-0 sections at
+the end of this file, and a third section records what the REBUILD itself
+found. Read the per-item text below as the state at `709172f` and the
+resolution at the end.
+
+**NOTHING IN THIS FILE IS TEACHING TRUTH, AND REPAIR-HISTORY LEAST OF ALL.**
+Every ratio, every "used to", every old constant and every moved golden here is
+provenance for the lead. A lesson, a question, a panel or a capstone takes its
+numbers from `digest.txt` and from nowhere else. See RECON.md, which says the
+same thing at the top for the same reason.
+
+**NOTHING HERE WAS FIXED IN THE FOUNDATION PHASE.** The course may have needed
+to teach around these, and a fix moves goldens. Each item says whether it **FAILS OPEN** (a
 wrong number presented confidently), **FAILS SILENT** (a non-finite value with
 no `error` key, so a caller checking `if (r.error)` is told nothing is wrong),
 **FAILS CLOSED** (a refusal), or is a **CONVENTION** (a rounded packaging,
@@ -130,10 +145,20 @@ byTemp: 3, governedBy: 'ratio per stage' }` **with no error key**, because
 `governedBy: 'both equally'`.
 
 `compressorTrain` does not hang on it (checked under a timeout): it calls
-`compressionStage` with `ratio: 1`, which refuses — with **"a stage needs a
+`compressionStage` with `ratio: 1`, which refuses, with **"a stage needs a
 positive rate, suction pressure, gas gravity, k above 1 and a ratio above
 1"**. The rate, the suction pressure, the gravity and k are all perfectly
 good. The user is sent to check four correct inputs.
+
+**ADDED 2026-09-16, during the FC3-0 repair. `maxRatioPerStage: -4` does not
+return `stages: NaN`; it THROWS.** `stages` is NaN, so the stage loop body
+never runs, `stages` stays empty and the return statement reads
+`stages[stages.length - 1].tDischargeF` on `undefined`:
+`TypeError: Cannot read properties of undefined (reading 'tDischargeF')`.
+In the Suite that throw happens inside a `useMemo` during render, so **typing
+a minus sign into `Max ratio per stage` takes the whole Compressor Station
+Designer down**, not just the one field. This is the strongest single argument
+for checking the inputs at the door, and it is now gated in the Suite.
 
 **LIVE.** `Max ratio per stage` is an input box.
 
@@ -169,7 +194,7 @@ to its last branch. **`pass: false` and `severity: 'adequate'` in one
 object.** With `npshaFt: Infinity`: `pass: true, severity: 'adequate'`.
 
 Not reachable through the Suite today (the context defaults the two unguarded
-suction terms to 0 before the call), so **not live** — but it is the shape the
+suction terms to 0 before the call), so **not live**, but it is the shape the
 platform rule exists for: a verdict returned for an input it could not read.
 
 ### P2. A duty point is returned for a curve the engine has just said is not a pump curve. LIVE
@@ -187,7 +212,7 @@ duty flow and head as the two headline figures, in that order.
 
 `pumpPower({ qGpm: 1500, headFt: 300, sg: 0.85, efficiency: 0.78,
 motorEfficiency: 5 })` returns `motorInputHp: 24.766899766899765` against a
-`brakeHp` of 123.83449883449883 — **a motor drawing a fifth of what its shaft
+`brakeHp` of 123.83449883449883, **a motor drawing a fifth of what its shaft
 delivers**. At `-0.5` it returns `motorInputKw: -184.68677156177156`.
 `efficiency` is bounded to `(0, 1]`; `motorEfficiency` is not bounded at all.
 
@@ -406,7 +431,7 @@ its private `zAt` and never checks:
 | 24000 psia, 100 F, sg 0.65 | 1.532 | **35.814** | `z1: 2.864603158649205`, no error, `gasHp: 1790.90` | refuse: "above the DAK validity limit of 30" |
 
 `dakZ` reports `converged: true` in both, so reading the convergence flag
-catches neither. **Two modules, two philosophies, one package** — the same
+catches neither. **Two modules, two philosophies, one package**, the same
 shape FC2 recorded between `chokePerformance` and `pipeSchedule`.
 
 ### G3. `viscosityCorrection` returns a sentinel dressed as a value, and changes its return shape between branches
@@ -443,8 +468,8 @@ check.
 ### G7. The module header misstates its own margin rule
 
 `pumps.js` says "the customary rule is the larger of 3 ft and 1.35 times
-NPSHr". The code is `Math.max(3, 0.35 * npshrFt)`. **The code is right** — the
-customary rule is `NPSHa >= 1.35 NPSHr`, a MARGIN of 0.35 NPSHr — and the UI
+NPSHr". The code is `Math.max(3, 0.35 * npshrFt)`. **The code is right**, the
+customary rule is `NPSHa >= 1.35 NPSHr`, a MARGIN of 0.35 NPSHr, and the UI
 and the STATUS document both say 35 percent. The header describes a ratio rule
 as if it were a margin rule, and a reader trusting it would demand nearly four
 times the margin the engine applies.
@@ -474,18 +499,32 @@ to the **untrimmed** duty point, under the heading "What a change would buy".
 
 On the app's own default inputs:
 
-| trim ratio | the chart and the duty headline | the "what a change would buy" card |
-| --- | --- | --- |
-| 0.95 | 1400.691 gpm at 324.394 ft | 1433.423 gpm at 318.015 ft |
-| 0.90 | 1267.314 gpm at 292.763 ft | 1337.610 gpm at 276.858 ft |
-| 0.85 | 1129.118 gpm at 263.325 ft | 1244.060 gpm at 239.313 ft |
-| **0.80** | **983.850 gpm at 236.041 ft** | **1152.774 gpm at 205.221 ft** |
-| 0.75 | 827.554 gpm at 210.875 ft | 1063.751 gpm at 174.424 ft |
+**CORRECTION, 2026-09-16, measured against the shipped code during the FC3-0
+repair.** The second column below was originally recorded as the engine law
+applied to the UNTRIMMED duty. That is not what the shipped context does.
+`changeEffect` passes `duty.qGpm`, and `duty` is already the duty of the
+TRIMMED curve, so the change is applied to the curve and then applied a
+second time to the point that curve produced. The card is therefore further
+out, and out in the other direction, than this file first said.
 
-At a 20 percent trim the two figures on one screen are **17.2 percent apart in
-flow and 13.1 percent apart in head**. The speed case does it too: at a ratio
-of 1.2 the chart says 1922.922 gpm at 478.678 ft and the card says 1810.639
-gpm at 507.415 ft.
+| trim ratio | the chart and the duty headline | the card, AS SHIPPED | the card if it used the untrimmed duty (what this file first recorded) |
+| --- | --- | --- | --- |
+| 0.95 | 1400.691 gpm at 324.394 ft | 1330.657 gpm at 292.766 ft | 1433.423 gpm at 318.015 ft |
+| 0.90 | 1267.314 gpm at 292.763 ft | 1123.474 gpm at 230.024 ft | 1337.610 gpm at 276.858 ft |
+| 0.85 | 1129.118 gpm at 263.325 ft | 930.958 gpm at 178.837 ft | 1244.060 gpm at 239.313 ft |
+| **0.80** | **983.850 gpm at 236.041 ft** | **751.661 gpm at 137.470 ft** | 1152.774 gpm at 205.221 ft |
+| 0.75 | 827.554 gpm at 210.875 ft | 583.426 gpm at 104.383 ft | 1063.751 gpm at 174.424 ft |
+
+At a 20 percent trim the two figures in the app are **23.6 percent apart in
+flow and 41.8 percent apart in head**, the card reading low. The speed case
+does it too and there the card reads high: at a ratio of 1.2 the chart says
+1922.922 gpm at 478.678 ft and the card says **2307.507 gpm at 689.297 ft**
+(1810.639 gpm at 507.415 ft is again the single-application figure).
+
+The cheapest proof that the card is not on any curve the app draws: at a trim
+of 0.95 the card's point is 1330.657 gpm at 292.766 ft, and the configured
+pump curve makes **337.587 ft** at that flow. At 0.80 the card says 137.470 ft
+where the curve makes **261.992 ft**.
 
 **The card is the wrong one, and the reason is the course's own thesis.**
 Applying an affinity law to a duty point does not give a new duty point,
@@ -494,6 +533,18 @@ not, so the answer is a fresh intersection. The disagreement is visible even
 at a 5 percent trim where the shortfall is exactly zero (1400.691 against
 1433.423), which is the proof that the gap is the missing re-intersection and
 not the shortfall model.
+
+**REPAIRED 2026-09-16, Suite branch `fix/fc3-0-rotating-studio-defects`.**
+The judgement: both paths answer real questions and the defect was presenting
+them as one answer, so neither was deleted. `changeEffect` now works from the
+duty BEFORE the change (a new `baseDuty`, the same machine count and the same
+system with no speed or trim applied) and returns three things under separate
+labels: `before`, `after` (the fresh crossing, which is the duty headline and
+the chart marker), and `onCurve` (where the old duty point lands on the
+changed curve, which sits on the pump curve and not on the system curve). The
+card's headline figures are now the crossing. `onCurve` is exactly the
+third column of the table above, which is to say the quantity this file
+originally described is the one that was missing and is now shown, labelled.
 
 ### S2. The context's own trim law does not match the engine's
 
@@ -507,6 +558,14 @@ not the shortfall model.
 Two implementations of one unsourced model, in one app, disagreeing on the
 flow leg.
 
+**REPAIRED 2026-09-16.** The context no longer states the law at all. It asks
+`impellerTrim` and `speedChange` what they do to a duty of 1 gpm at 1 ft at
+1 bhp and scales the curve by the answer. Both laws are homogeneous of degree
+one in the duty, so the factors ARE the law, the curve and the point cannot
+disagree by construction, and an engine repair to the shortfall model carries
+through to the curve with no second edit. The flow leg is now applied, which
+is what moves duty numbers (see the repair-wave section at the end).
+
 ### S3. Every unguarded engine input in section B is reachable by typing
 
 Both contexts parse field values and pass them through. The live ones are
@@ -515,6 +574,20 @@ Both contexts parse field values and pass them through. The live ones are
 C2), `Suction temp (F)` (C4), `Heat rate (Btu/hp-hr)` (C3) and the four pump
 curve points (P2). The two suction head terms are defaulted to 0 by the
 context, which is why P1 is not live.
+
+**REPAIRED 2026-09-16, at the door in both contexts, since the engine could
+not be touched in this wave.** Pump: the motor efficiency is bounded to
+(0, 1] with the shaft power still computed and only the motor figures refused
+by name, because the shaft side never depended on it; a trim ratio above 1
+carries the engine's own refusal; a speed ratio outside 0.5 to 1.5 is NAMED as
+an extrapolation rather than refused, because it is computable; a fitted curve
+that does not droop no longer yields a duty point (P2, and G8's flat curve
+with its rSquared of 1 falls under the same check). Compressor: the gas rate,
+both pressures, the gravity, k, both efficiencies, the ratio limit, the two
+temperature limits and the heat capacity are all checked before the engine
+sees them, each refusal naming the box that was typed in; the heat rate is
+refused below 2544.43 Btu/hp-hr (C3). Every refusal is a named refusal and
+none returns a NaN.
 
 ### S4. Neither studio has a numeric gate
 
@@ -545,3 +618,294 @@ Suite would have caught S1.
 **Everything in A, B and S would move a number somewhere. Nothing here is
 fixed in this phase, and the digest and the goldens are built on the engines
 as they stand at `709172f`.**
+
+---
+
+## FC3-0. THE SUITE HALF, REPAIRED 2026-09-16
+
+Suite PR: https://github.com/Petrolord/petrolord-suite/pull/491
+
+Branch `fix/fc3-0-rotating-studio-defects` off Suite main `dde23115a`, in a
+fresh worktree. **S1, S2, S3 and S4 are all repaired. Nothing in sections A
+to E is touched**: `packages/engines` is untouched and `engines/facilities/
+pumps.js` and `compression.js` are being repaired separately in the engines
+repo. Four of the nine LIVE findings (C1, C2, C3 partly, C4, C6, C7) are
+defended from the Suite side where the defence does not need the engine, and
+each such guard says in its own comment that it is a door check and not the
+repair.
+
+Files: `src/contexts/PumpStudioContext.jsx`,
+`src/components/pumpstudio/PumpPanels.jsx`,
+`src/contexts/CompressorStudioContext.jsx`,
+`src/components/compressorstudio/CompressorPanels.jsx`, two new gate files
+under `src/contexts/__tests__/`, and both `docs/scope/*-STATUS.md`.
+
+### What moves, measured before anything was changed
+
+Control set declared first: 3 systems (the app default, one friction
+dominated, one static dominated) x 2 pump curves (the catalogue default and a
+flatter machine) x 9 trim ratios (1.00 down to 0.70) x 3 speed ratios x 1 and
+2 machines in parallel = **324 combinations**.
+
+- **168 of 324 duty points move, every one of them DOWN**, because the trim's
+  flow shortfall is now applied and was not before. Worst move **4.43 percent
+  in flow** (static-dominated system, 30 percent trim at a 1.2 speed ratio),
+  median **0.53 percent**, smallest **0.037 percent**.
+- **Nothing at all moves at a trim of 5 percent or shallower**, which is the
+  whole of the default state and every speed-only change. The app's own
+  defaults produce an identical duty, power, region and NPSH verdict.
+- **3 of 324 operating-region bands flip**, all `preferred` to
+  `allowable, low`, all within 1.5 points of the 70 percent boundary.
+- The changes card moves at every non-unit ratio, by the gap in the corrected
+  S1 table above.
+
+### The judgement on S1, for the record
+
+Two paths existed because they answer two different questions, and the app
+presented them as one answer. The crossing is the operating point and the
+affinity map is not, but the affinity map is not junk either: it is where the
+old duty point lands on the new curve, and after the repair it lies exactly on
+the curve the chart draws, which is now gated. **Users have been sizing on the
+duty headline, the chart marker and the summary rail, and those were always
+right.** The card was wrong and was wrong by a double application, not by the
+missing re-intersection alone.
+
+### Gates
+
+`src/contexts/__tests__/pumpStudioContext.test.jsx` and
+`compressorStudioContext.test.jsx`. The S1 gate asserts the card's point lies
+on the configured curve and that the card's operating point IS the duty; it
+fails against the shipped code at every ratio, including a 5 percent trim
+where the shortfall is exactly zero. Both smoke tests stayed green unchanged.
+
+---
+
+## FC3-0. THE ENGINES HALF, REPAIRED 2026-09-16
+
+Engines PR: https://github.com/Petrolord/petrolord-engines/pull/197
+
+Branch `fix/fc3-0-rotating`, rebased onto engines main `fa53f7f` (past
+`da9693b`, which this branch was cut from, so PR #195's FC1 near-floor K flag
+is under it). Four commits: `5ff2f9a` (the derived power packagings in
+`lib/units/fieldUnits.js`), `f308385` (compression), `a5b31e5` (pumps),
+`485246d` (`tools/validation/facilities/FINDINGS-rotating.md`).
+
+**Repaired: C1, C2, C3, C4, C6, C7, P1, P2, P3, P4, P5, all eighteen rows of
+section B, F1, F2, F3, F4, F5, F8, G1, G2, G3, G4, G5, G6, G7, G8.** Nothing in
+section A, B or E is left open.
+
+**Deliberately not changed:** F6 and F7 were positive results, not defects. The
+eight items in section D are held for literature and taught as limits: in
+particular the trim's power leg stays the ideal cube, because the shortfall
+model has no publication here and de-rating the power would be a second
+unsourced model on top of the first. What the trim returns now is
+`impliedEfficiencyRatio`, the quantity a reader used to have to discover by
+division.
+
+### Two things this file said that the repair found were not quite so
+
+1. **C6's negative case.** Already corrected in place above: `maxRatioPerStage:
+   -4` does not return `stages: NaN`, it THROWS out of `compressorTrain`'s
+   return statement. Both are refused now and the throw is gated.
+2. **C7's fourth row.** `maxDischargeF: -100` is above absolute zero, so the
+   honest diagnosis is not "a limit below absolute zero" but a limit below the
+   suction temperature. The refusal says that, with both temperatures in it.
+   `-600` gets the absolute-zero sentence.
+
+### Movement
+
+**Engine goldens: nine of 63 compression fields moved, and the ten published
+pump cases did not move at all.** Every moved field is one of exactly two named
+constant ratios or their product: `headPolyFtLbfLbm` x 1.0000009059442236 (F1,
+the gas constant), `massLbHr` x 1.0000169391883849 (F3, the standard base),
+`gasHp` x 1.0000178451479544. `tDischargeF`, `zAvg`, `ratio` and every staging
+field are bit for bit unchanged. Both golden files regenerate byte for byte
+from their own oracles.
+
+**Graded capstone fields: four of the 18 in `fields.json` moved**, and the same
+three constants account for all four:
+
+| field | ratio | cause |
+| --- | --- | --- |
+| `escravos_motor_input_kw` | 0.9999998277890173 | F4, 0.7457 |
+| `bonny_stage1_poly_head` | 1.0000009059442239 | F1 |
+| `bonny_stage1_gas_hp` | 1.0000178451479547 | F1 x F3 |
+| `bonny_fuel_mmscfd` | 1.0000178451479544 | F1 x F3 |
+
+The other fourteen are byte identical, and `fields.json` in this directory
+already holds the REPAIRED values.
+
+**THE COURSE BRANCH DOES NOT.**
+`/root/wt-fc3-nextgen/tools/course-waves/rotating/fields.json` still holds the
+four pre-repair values, and all four move by more than their own stated
+tolerance, so four capstone answers would be graded against numbers the engine
+no longer produces. **It must be re-seeded from the repaired engine before FC3
+goes live.**
+
+### A trap in regenerating it
+
+`fc3_capstone.mjs` writes `fields.json` only on a successful run and leaves the
+old file in place on a crash, so a control run against a different engine tree
+that fails to import will look byte identical. It needs a `package.json` with
+`"type": "module"` beside any extracted engine tree, and the exit status has to
+be checked. The first control run of this wave failed exactly that way and
+briefly reported "byte identical" for a run that never happened.
+
+### Two constants that are still roundings, one level up
+
+`gasProperties.R_UNIVERSAL = 10.7316` is 2.135e-6 above the 2019 SI derivation,
+and the private 1545.349 this wave deleted was marginally CLOSER to it (1.229e-6).
+Consistency was chosen over proximity: a second opinion held privately by one
+module is the defect whatever its sign, and the owner's value is what the gas
+engines, the separator sizing and the shipped courses all grade against. That
+is why the stage-block gap against the independent quadrature grew from
+1.229e-6 to a flat 2.135e-6 on all eight stages, and why re-scaling the same
+quadrature onto the package's own constant still closes it to 7e-16. Moving
+`gasProperties.R_UNIVERSAL` onto the SI derivation is a package-wide decision
+that would move every gas course, and it is not this wave's to take.
+
+
+---
+
+## FC3 FOUNDATION REBUILD, 2026-09-16. What rebuilding the digest found.
+
+The engines were re-vendored at `4fa37e6` (twelve paths, all sha-identical with
+a pristine `git archive` and with the git blob shas), `fields.json` was
+regenerated, and `digest.txt` was rebuilt: **660 to 809 lines, 149 added, 216
+changed, 0 removed, across 77 blocks.** Byte-identical across five timezones
+and across repeat runs, with a negative control (a planted
+`getTimezoneOffset()` line) proving the reproducibility check can fail.
+
+### Graded fields: four of eighteen moved, and nothing else did
+
+The tolerances in `fields.json` are ABSOLUTE in each field's own units (the
+FC1 leak-guard code says so in as many words, and the rodpump capstone guard
+gates it). On that reading **all four moved fields exceed their own stated
+tolerance**, by 17.9x, 3.2x, 2995x and 17045x. A relative reading would have
+said only two exceeded, and it would have been wrong; the reading was checked
+against `separationLab.js` and `panelCapstoneGuard.test.js` rather than
+assumed.
+
+| field | old | new | absolute move | tol | move/tol | named cause |
+| --- | --- | --- | --- | --- | --- | --- |
+| `escravos_motor_input_kw` | 103.76581046865581 | 103.76579259904362 | 1.78696e-5 kW | 1e-6 | 17.9 | F4, `KW_PER_HP`: 0.7457 -> the derived 0.7456998715822702 |
+| `bonny_stage1_poly_head` | 35027.48016377518 | 35027.51189671851 | 3.17329e-2 ft lbf/lbm | 1e-2 | 3.2 | F1, the gas constant: 1545.349 -> `R_UNIVERSAL * 144` |
+| `bonny_stage1_gas_hp` | 1678.2891686175976 | 1678.3191179361222 | 2.99493e-2 hp | 1e-5 | 2995 | F1 x F3 |
+| `bonny_fuel_mmscfd` | 0.9551730234380579 | 0.9551900686419833 | 1.70452e-5 MMscfd | 1e-9 | 17045 | F1 x F3, through `brakeHp` |
+
+The other **fourteen are bit for bit**. Each cause was RECOVERED FROM THE
+ENGINE rather than typed: `KW_PER_HP` as `motorInputKw / motorInputHp`,
+`BTU_PER_HP_HR` as `heatRate * thermalEfficiencyPct / 100` and again by
+bisecting the first-law refusal boundary, `LBMOL_SCF` out of `massLbHr`, and
+the gas constant out of `headPolyFtLbfLbm`. Measured ratios: head
+x1.0000009059442234, mass x1.0000169391883849, gas hp x1.000017845147954,
+`KW_PER_HP` x0.9999998277890172. `zAvg` and `tDischargeF` are bit for bit at
+the stage level, which is why `bonny_stage1_discharge_f` did not move.
+
+**Nothing moved that these four constants do not explain**, so there is no
+finding here beyond the four.
+
+### The generator trap, closed
+
+`fc3_capstone.mjs` writes only on success and used to leave the old file in
+place on a crash, which briefly reported "byte identical" for a run that never
+happened. Three things now close it: the target is DELETED before every run and
+its absence afterwards is a failure; the generator prints its engines root and
+the sha256 of the payload it wrote; and the output path is overridable with
+`FC3_FIELDS_OUT` so a control run cannot clobber the real file. **Negative
+control: pointed at a non-existent engines tree the run exits 1 and the file is
+absent, so a crash cannot masquerade as agreement.** The pre-repair engine run
+reproduces the committed `fields.json` and the committed `digest.txt` BYTE FOR
+BYTE, which is the proof in the other direction that a byte-identical result
+means something here.
+
+### Five defects in the foundation digest that the rebuild caught
+
+These were shipped at `dd9148bf` and are the reason the two-figure sweep is a
+standing rule.
+
+1. **A ratio off by a factor of ten, in prose.** Section 16 said the published
+   power and NPSH goldens "agree only to a few parts in a thousand". The
+   quotient columns beneath it print 0.999553114, 1.000395783 and 1.000525448,
+   which are parts in TEN thousand. This is the sixth instance of the same
+   defect class on this programme. Fixed by computing the worst quotient and
+   the worst absolute disagreement and printing both.
+2. **A branch count the fixtures could not deliver.** Section 14 said four
+   duties were "chosen to land in all four of its branches"; the fourth duty,
+   labelled "the duty where both machines are viable", had an overall ratio of
+   10.7 at 3090 acfm, which is the RECIPROCATING branch. Two branches were
+   reached, not four. Fixed in `fc3_fields.mjs` with a duty that fails all
+   three tests above `either` (67 MMscfd at 92 psia, ratio 3.0, 7962.7 acfm),
+   and the digest now COUNTS the distinct reasons it reached and prints the
+   count.
+3. **A monotonic claim its own table contradicts.** "Colder suction means less
+   work and more heat to take out" holds across the five approach rows that
+   share a stage count and REVERSES on the two that do not: at a 150 degF
+   approach the cooling goes back up from 8.1149 to 8.6374 MMBtu/hr while the
+   gas power goes down from 4453.3383 to 4447.6481 hp. The repair made this
+   visible by letting the stage count move with the approach. Fixed by putting
+   the stage count in the table and computing where the trade holds.
+4. **A probe label that named the wrong input.** "a machine screen with no
+   rate" returned a message about the gas gravity, because the probe passed
+   neither. Split into two probes, one per cause.
+5. **A probe label that named the wrong physics.** "a discharge limit below
+   absolute zero" at -100 degF: -100 degF is above absolute zero, and the
+   honest diagnosis is a limit below the suction temperature. Already corrected
+   in the engines' own FINDINGS; corrected here in the fixture label too.
+
+### Eleven defects the REBUILD itself introduced, caught before it shipped
+
+Every one was found by re-reading the rebuilt digest end to end and sweeping
+every two-figure comparison as guilty until it printed its own comparison.
+
+| # | defect | how it was fixed |
+| --- | --- | --- |
+| R1 | "the same place 200 blind halvings arrived at" characterised a relationship to an engine no longer present | 200 blind halvings are now RUN in the dump and the difference printed (it is 0) |
+| R2 | "the two readings are far apart" compared a margin rule to a ratio rule with no computed comparison | the boundary ratio is computed at four required NPSHs; where the fraction binds it is 1.35 on every row and where the floor binds it is 1.75, and the difference is printed |
+| R3 | "NOT ONE OF THEM IS BIT FOR BIT" while its own table showed two that were | the count is now computed and the field names printed |
+| R4 | a table of "engine equals golden" listed `ratio`, which `compressionStage` does not return, so it reported `false`: a FALSE FINDING manufactured by the digest itself | the output keys are read off the golden file with the stated inputs excluded |
+| R5 | "three different stated limits" above a four-row table | corrected to four |
+| R6 | the twelve-stage-cap refusal printed `undefined` for all four evidence fields, because the input it used is now caught by an earlier guard | a real cap case was added (`STAGE_CAP_DUTY`, limit above the suction, overall ratio 1000) and it reaches the cap |
+| R7 | two refusal probes read "no error" because `undefined` fell through to a default parameter | changed to `NaN`, which is what an unreadable input actually looks like |
+| R8 | "across every point set this digest fits" over a list of five of the seven | all seven are now collected and the range is derived from them |
+| R9 | the trim slack was called "far below any trim anyone can machine" with no figure | the slack is bisected out of the engine and printed |
+| R10 | `e6(200)` and `e6(35)` printed a count and a percentage to six decimals, against the digest's own header rule | printed as a count, and the percentage replaced by the measured fraction |
+| R11 | "a factor of two either way is far beyond any drive turndown" compared the band to an unstated figure | reworded to say what the band IS, a judgement about when to make a reader think |
+
+### Two things the rebuild added because the repair made them teachable
+
+- **A gate that CAN fail, beside one that cannot.** Digest Section 3 now runs
+  `dutyPoint` against a curve that returns a non-finite head between 900 and
+  1400 gpm. The solve returns 900 gpm, which is 334.452969 gpm from the real
+  crossing, on a bracket of 1.14e-13 gpm with a residual of 154.78 ft. **A flag
+  made only of that bracket would have called it converged.** The engine's flag
+  says false. That is the G1 lesson, run rather than described.
+- **What a golden's agreement is worth.** Two of five published stage output
+  fields come back bit for bit and three do not, by up to 1.5e-11, because the
+  file is a fifty-digit Python oracle and the engine is double precision.
+  Section 16 computes it and teaches the tolerance question.
+
+### Capstone generator, strengthened
+
+`fc3_capstone.mjs` now asserts `droops`, `converged` on all three duty solves,
+a finite `rSquared`, and that the graded speed change carries no
+extrapolation warning. **`fields.json` is byte identical before and after those
+assertions**, proven by deleting the target and re-running. Negative control: a
+capstone pointed at a rising point set exits 1 and writes nothing. The two
+comments claiming the engine does not check the discharge limit or the DAK
+window were corrected, because at `4fa37e6` it checks both; the assertions stay
+as second opinions on the CASE rather than on the engine.
+
+### Gates run on the rebuilt foundation
+
+| gate | result | negative control |
+| --- | --- | --- |
+| vendored suites `facilities.pumps` + `facilities.compression` | **68 green** (36 at `709172f`) | n/a |
+| whole vendored `facilities` suite | **159 green across 5 files** | n/a |
+| digestrepro, 5 timezones + a repeat | byte identical, sha `33ca3e33...` before the Section 3 addition | a planted `getTimezoneOffset()` line makes UTC and Auckland differ: **caught** |
+| digestleak, 18 graded fields x 3 scalings against 1751 literals | **0 of 54** | two answers planted into the text: **2 hits, caught** |
+| promptleak, the three capstone machine names | **none in the digest** | n/a |
+| capstone isolation | `fc3_dump.mjs` does not mention `fc3_fields_capstone` | n/a |
+| capstone anti-trap protocol | file absent after a failed run | pointed at a missing engines tree: exits 1, writes nothing: **caught** |
+| capstone droop assertion | passes on the real case | fed a rising point set: exits 1, writes nothing: **caught** |
+| `dutyPoint.converged` | `true` on every real solve | non-finite head inside the bracket: `false` with a 154.78 ft residual, where a bracket-only flag would have said `true`: **caught** |

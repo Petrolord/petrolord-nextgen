@@ -1,15 +1,32 @@
 # FC3 recon. Rotating Equipment.
 
 Course `rotating`, module `facilities`, the THIRD of nine Facilities courses.
-Written 2026-09-16 against engines main `709172f`, the NextGen worktree
-`/root/wt-fc3-nextgen` (branch `feat/fc3-rotating-course`, off nextgen main
-`b539fa15`) and the Suite worktree
-`/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite`.
+First written 2026-09-16 against engines main `709172f`.
+
+**RE-CUT 2026-09-16 ONTO ENGINES MAIN `4fa37e6`**, which is the FC3-0 repair
+wave (engines PR #197, forty-nine findings repaired). The foundation was
+rebuilt on the repaired engine before a single lesson was written, which is the
+FC2 pattern: repairing after the writers costs the full recut EC3 paid for.
+The NextGen worktree is `/root/wt-fc3-nextgen` (branch
+`feat/fc3-rotating-course`, off nextgen main `b539fa15`) and the Suite worktree
+is `/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite`; the Suite
+half of FC3-0 merged as Suite PR #491.
 
 Every path below is exact and every exported name was read from the source with
 `grep -oE "^export const"`, not remembered. **Nothing in this file is teaching
 truth.** The only teaching truth this wave has is `digest.txt`, and every line
 of that is an engine return value.
+
+**AND REPAIR-HISTORY IS NOT TEACHING TRUTH EITHER.** This file, `FINDINGS.md`
+and the engines' own `FINDINGS-rotating.md` all say what the engine USED to do,
+what a constant USED to be, and by what ratio a golden moved. **None of that
+belongs in a lesson, a question, a panel or a capstone.** A writer who needs a
+number takes it from `digest.txt`, which holds only what the engine at
+`4fa37e6` returns today. Six figures of one earlier brief on this programme
+were correctly refused by a writer for exactly this reason, and refusing them
+was right. If a sentence here begins "used to", "was", "before the repair" or
+quotes a ratio between an old value and a new one, it is provenance for the
+lead and it is forbidden to the course.
 
 ---
 
@@ -35,18 +52,44 @@ no `'rotating'` anywhere in `src/` or `migrations/`.
 
 ## 1. The engines this course teaches
 
-Two modules, both `engines/facilities/`, both vendored into
-`/root/wt-fc3-nextgen/packages/engines` at this wave's first commit and both
-sha-identical with engines main `709172f`.
+Two modules, both `engines/facilities/`, vendored into
+`/root/wt-fc3-nextgen/packages/engines` and sha-identical with engines main
+`4fa37e6`, together with the dependency closure the repair added:
+
+| vendored path | at `4fa37e6` | note |
+| --- | --- | --- |
+| `engines/facilities/pumps.js` | re-vendored | now imports `KW_PER_HP` |
+| `engines/facilities/compression.js` | re-vendored | now imports from three places |
+| `engines/facilities/separatorSizing.js` | already identical | owns the DAK window |
+| `engines/production/gasProperties.js` | already identical | owns `R_UNIVERSAL`, `AIR_MW`, `R_OFFSET` |
+| `lib/units/fieldUnits.js` | **NEW** | owns `KW_PER_HP` and `BTU_PER_HP_HR` |
+| `test-data/facilities/goldens/pumps_cases.json` | already identical | did not move |
+| `test-data/facilities/goldens/compression_cases.json` | re-vendored | nine fields moved |
+| `tools/validation/facilities/oracle_pumps.py` | already identical | |
+| `tools/validation/facilities/oracle_compression.py` | re-vendored | |
+| `tools/validation/facilities/FINDINGS-rotating.md` | **NEW** | the repair record |
+| `__tests__/facilities.pumps.test.js` | re-vendored | |
+| `__tests__/facilities.compression.test.js` | re-vendored | |
+
+Every one of those twelve paths was compared byte for byte against a pristine
+`git archive` of `4fa37e6` and against the git blob sha of the same path, and
+all twelve match. **The rest of `packages/engines` is deliberately NOT moved**:
+it is a partial mirror carrying other courses' vintages, and re-vendoring it
+wholesale would move shipped goldens for economics, production and
+petrophysics.
 
 ### `engines/facilities/pumps.js` (Facilities F10)
 
 Centrifugal pump hydraulics and station design. **14 exports, no exported
-constants at all**, and — unlike `lineHydraulics.js` — **no named internal
+constants at all**, and unlike `lineHydraulics.js` it has **no named internal
 constants either**: `grep -nE "^const [A-Z_]+"` returns nothing. Every
-numeric packaging in this module (2.31, 3960, 0.7457, the HI coefficients,
-the region bands, the trim shortfall slope) is written inline at its point of
-use. Under the FC1 rule that every digest number is an engine return, all of
+numeric packaging in this module (2.31, 3960, the HI coefficients, the region
+bands, the trim shortfall slope, and at `4fa37e6` the percentage slack on the
+trim's two boundaries) is written inline at its point of use. The one
+packaging that is NOT is the kilowatt, which `4fa37e6` imports as `KW_PER_HP`
+from `lib/units/fieldUnits.js`, where it is derived from the foot, the pound,
+standard gravity and the definition of a mechanical horsepower rather than
+quoted as 0.7457. Under the FC1 rule that every digest number is an engine return, all of
 them must be MEASURED by asking the engine a question about itself. Section 5
 below records the measurement route proven for each.
 
@@ -55,14 +98,40 @@ below records the measurement route proven for each.
 | export | signature | returns |
 | --- | --- | --- |
 | `systemCurve` | `{ staticHeadFt, frictionHeadFt, atFlowGpm }` | `{ kFt, headAt(q), staticHeadFt }` or `{ error }` |
-| `fitPumpCurve` | `{ points: [{qGpm, headFt}] }` | `{ coefficients: {c0,c1,c2,scale}, headAt(q), rSquared, shutoffHeadFt, warning }` or `{ error }` |
+| `fitPumpCurve` | `{ points: [{qGpm, headFt}] }` | `{ coefficients: {c0,c1,c2,scale}, headAt(q), rSquared, shutoffHeadFt, droops, conditionNumber, conditioningNote, warning }` or `{ error }` |
 
 `systemCurve` expresses the friction coefficient through a reference point (a
 friction head at a stated flow) rather than as an abstract coefficient, which
-is the form a hydraulics calculation hands over. `fitPumpCurve` is a
-least-squares quadratic in `q/scale`, solved by Gaussian elimination with
-partial pivoting on the normal equations, and it reports `rSquared` and a
-`warning` when the fitted curve does not droop.
+is the form a hydraulics calculation hands over. It refuses a missing static
+head and accepts a negative one. `fitPumpCurve` is a least-squares quadratic in
+`q/scale`, solved by Gaussian elimination with partial pivoting on the normal
+equations.
+
+**NEW ENGINE SURFACE AT `4fa37e6`, each item verified against the vendored copy
+by direct probe before the digest asserted it:**
+
+| item | verified | value on the digest's own sets |
+| --- | --- | --- |
+| `fitPumpCurve.droops` | yes | `true` on the OKONO catalogue, `false` on a rising set and on three identical heads |
+| `fitPumpCurve.conditionNumber` (1-norm of the normal matrix) | yes | **304.75 to 366.68** across the seven sets this digest fits |
+| `fitPumpCurve.conditioningNote` | yes | `null` on all seven; it fires only above 1e10 |
+| `fitPumpCurve.rSquared` can be `null` | yes | `null` on three identical heads, where the total sum of squares is zero |
+| `dutyPoint` refuses a non-drooping curve | yes | named refusal, and it travels through `combineParallel`/`combineSeries` via `droops` |
+| `dutyPoint.bracketGpm`, `.residualFt`, `.iterations`, `.converged`, `.systemHeadFt` | yes | 2.27e-13 gpm, 0 ft, 55 halvings, `true` on the OKONO duty |
+| `impellerTrim.impliedEfficiencyRatio` | yes | 0.8272 at a 25 percent trim, equal to (Q/Qideal)x(H/Hideal) to 1.1e-16 |
+| the 12-stage refusal carries `coolestReachedF`, `maxDischargeF`, `hottestInletF`, `triedStages` | yes | 317.99 F, 110 F, 100 F, 12 on the digest's cap case |
+| `compressionStage` and `machineScreen` refuse outside the DAK window carrying `{ppr, tpr, atPsia, atF, state}` | yes | both, at Tpr 0.848 and at Ppr 35.814, with `state: "suction"` |
+| `stageCount` takes `interstageCoolToF` and tests at the inlet the stages will have | yes | the digest's approach sweep moves the count 3, 3, 3, 3, 3, 4, 5 |
+| `compressionStage` warns on the CALLER's `maxDischargeF` | yes | same discharge, four different stated limits, three warn and one does not |
+| `driverFuel` refuses a heat rate below `BTU_PER_HP_HR` | yes | the refusal boundary bisects to 2544.433577644024, the constant itself |
+
+**The load-bearing held item, and it is a decision the repair took
+deliberately: the trim's power leg stays the IDEAL CUBE.** The shortfall model
+has no publication in this repository, so de-rating the power would be a second
+unsourced model on top of the first. The efficiency the return implies is
+COMPUTED and returned as `impliedEfficiencyRatio` instead. Eight items stay
+held for literature in total and none of them grades anything; they are listed
+in FINDINGS section D and again in digest Section 17.
 
 **The duty point**
 
@@ -151,7 +220,7 @@ const LBMOL_SCF = 379.49;
 ```
 
 It imports `suttonPseudoCriticals`, `dakZ` and `toRankine` from
-`../production/gasProperties.js` — which already exports `AIR_MW = 28.9625`,
+`../production/gasProperties.js`, which already exports `AIR_MW = 28.9625`,
 `R_UNIVERSAL = 10.7316` and `R_OFFSET = 459.67`. **All three internal
 constants duplicate a constant the imported module already owns** (FINDINGS
 C11), and one of the two duplicates does not agree with its twin.
@@ -200,8 +269,8 @@ Grepped the whole `engines/` tree for `recycle`, `anti-surge`, `antisurge`,
 
 **Consequence, and it is a decision rather than an observation: FC3 cannot
 teach surge, recycle, seals or bearings as digest truth, and no graded field
-can touch them.** The course teaches the seam by name — what a screening tool
-answers and what needs a vendor frame — exactly as FC2 taught the two-phase
+can touch them.** The course teaches the seam by name: what a screening tool
+answers and what needs a vendor frame, exactly as FC2 taught the two-phase
 seam it could not compute. Extracting a surge-line model would be an engines
 programme item and is out of scope here.
 
@@ -245,16 +314,42 @@ bisects and the engine's oracle scans; the head integral is **64-point
 Gauss-Legendre in `decimal.Decimal`** with the nodes generated from the
 Legendre recurrence, plus a **path-property check** that `p v^n` really is
 constant along the path the exponent claims; the stage count is **closed form**
-in logarithms; and every field packaging (2.31, 3960, 0.7457, 1545.349,
-379.49, 2544.43, 33000) is **derived from its definition** rather than quoted.
-Stdlib only.
+in logarithms; and every field packaging (2.31, 3960, the kilowatt, the gas
+constant, the molar volume at the 60 degF base, the Btu in a horsepower-hour
+and 33000) is **derived from its definition** rather than quoted. Stdlib only.
+
+**Re-run against the repaired engine, 2026-09-16:** 446 comparisons across 14
+blocks plus 8 stages in a second pass. Worst gaps: curves 1.233e-12, duty
+1.065e-15, power exact, NPSH 8.514e-16, the NPSH check exact, the HI factors
+2.469e-15, the speed law 1.480e-16, the trim 3.339e-13, the regions exact,
+staging 2.006e-16, the inlet volume exact, the fuel exact, and **65 of 65
+refusal branches classified as expected with 0 silent**, four of them by the
+bare-number contract. The polytropic path holds `p v^n` constant to 1.7e-59.
+**Both negative controls fire:** a deliberately wrong duty at 9.901e-3 and a
+head recomputed with the exponent moved a tenth of a percent at 1.750e-4.
+
+The one block that moved is the stage power: the gap against the independent
+SI quadrature is now a flat 2.135e-6 on all eight stages, because the package
+settled on `gasProperties.R_UNIVERSAL = 10.7316`, which is 2.135e-6 above the
+2019 SI derivation. Re-scaling the same quadrature onto the package's own
+constant closes it to 7e-16. **Consistency across the package was chosen over
+proximity to SI**, and moving `R_UNIVERSAL` is a package-wide decision that
+would move every gas course. That is provenance, not teaching truth.
 
 ### The engine gates
 
 `__tests__/facilities.pumps.test.js` and `__tests__/facilities.compression.test.js`,
-**36 tests across the two suites, green on the vendored copy** at this wave's
-first commit (measured, not quoted). One of those tests is a tautology and is
-recorded in FINDINGS as a gate defect, not a content defect.
+**68 tests across the two suites, green on the vendored copy at `4fa37e6`**
+(measured by running them, not quoted), against 36 at `709172f`. The whole
+vendored `facilities` suite is 159 green across five files.
+
+The tautology this recon recorded at `709172f` is gone: the two power routes
+still agree and that agreement is still asserted, but it is now LABELLED as the
+algebraic identity it is, and the real check beside it is a numerical
+quadrature of `int(v dp)` along the polytropic path with a negative control
+that moves the exponent and must break the comparison. **Digest Section 11
+teaches that distinction directly**, because a gate that restates the formula
+validates nothing and a reader needs to be able to tell the two apart.
 
 ---
 
@@ -284,24 +379,36 @@ src/utils/facilities/engine/pumps.js:2:       export * from '.../engines/facilit
 src/utils/facilities/engine/compression.js:2: export * from '.../engines/facilities/compression.js';
 ```
 
-**So the composition that exists lives inside the two React contexts**, and
-that is where the app-side defects are:
+**So the composition that exists lives inside the two React contexts.**
 
-- `PumpStudioContext.configured` **reimplements the trim and speed laws in the
-  context rather than calling `impellerTrim` and `speedChange`**, in order to
-  scale the whole CURVE rather than one point. `NpshResults` then renders the
-  ENGINE's `impellerTrim` and `speedChange` applied to the untrimmed duty. The
-  two answers are on one screen at once and they disagree (FINDINGS S1, live
-  and user-facing).
-- `CompressorStudioContext.engineArgs` converts psig to psia by adding 14.7 at
-  the door, and `sweep` reruns the whole train per listed discharge pressure.
-- Both contexts pass raw parsed input fields straight through, so every
-  unguarded engine input in FINDINGS section B is reachable by typing into a
-  box.
+**RE-CUT 2026-09-16: the Suite half of FC3-0 merged as PR #491** (Suite main
+`88b57a5fd`), so the four app-side findings this recon opened at `dde23115a`
+are repaired and the paragraph that used to sit here described code that is
+gone. What the merged contexts do now, read off Suite `origin/main` rather than
+remembered:
 
-Neither app has a unit test of its own beyond the two smoke tests, and neither
-smoke test asserts a number: they assert that headings and prose are on the
-page. **Nothing in the Suite gates the arithmetic of either studio.**
+- `PumpStudioContext.changeFactors` asks the ENGINE what a speed change and a
+  trim do to a duty of 1 gpm at 1 ft at 1 bhp. Both laws are homogeneous of
+  degree one in the duty, so those returns ARE the factors, and the context
+  scales the whole curve by them. The curve and the point can no longer drift
+  apart, and an engine repair moves both together. Digest Section 9 reproduces
+  exactly that composition over the vendored engine, and reads the factors out
+  of the engine for the same reason.
+- The studio still shows both answers, and it now LABELS them as two: the
+  crossing is the operating point and the affinity map is where the old duty
+  lands on the new curve. Section 9 shows that the map really does lie on the
+  scaled curve, to 0 ft.
+- The context exports `NON_DROOPING_CURVE`, `SPEED_RATIO_MIN` and
+  `SPEED_RATIO_MAX`, so the app has door checks of its own for two of the
+  engine findings. Each of those carries a comment in the Suite saying it is a
+  door check and not the repair.
+- Both studios gained context gates under `src/contexts/__tests__/`.
+
+**For a course writer, the consequence is small and specific:** the two
+answers on that screen are a real distinction and still worth teaching, but the
+course must NOT describe them as a disagreement or a defect. They are two
+questions with two answers, labelled. Digest Section 9 is written that way and
+is the only place a lesson should take this from.
 
 ---
 
@@ -338,7 +445,7 @@ hits for every one of the ten terms.**
    The idea that a machine has no operating point until it is connected to
    something is FC3's, and it is the organising idea of `pumps.js`.
 3. **The affinity laws where they FAIL.** PD3 teaches them where they are exact
-   — a fixed-geometry ESP stage at a changed drive frequency, and its own
+  , a fixed-geometry ESP stage at a changed drive frequency, and its own
    digest says efficiency "does not move at all". FC3 teaches
    `impellerTrim`, the one function in the package that states the laws do NOT
    hold and prints the shortfall. **FC3 does not re-derive the laws; it cites
@@ -347,7 +454,7 @@ hits for every one of the ten terms.**
 4. **NPSH, available and required, and the margin rule.** Zero `npsh` hits in
    any other digest. Entirely FC3's.
 5. **The Hydraulic Institute viscosity corrections.** PD3's Section 18 is
-   titled "VISCOSITY, WHICH THIS ENGINE WILL NOT GUESS AT" — its engine
+   titled "VISCOSITY, WHICH THIS ENGINE WILL NOT GUESS AT", its engine
    deliberately refuses. FC3's engine does the correction, so FC3 owns it.
 6. **Parallel and series machines, and the result that two pumps are not twice
    one pump.** Nowhere else.
@@ -369,11 +476,18 @@ hits for every one of the ten terms.**
 3. **Machine curves, wheel selection, valve dynamics, rod loading.** The
    Compressor help guide disclaims all four.
 4. **Vendor NPSHr as a function of flow.** `npshrFt` is a scalar INPUT, so the
-   course cannot show NPSHr climbing with flow past 120 percent of BEP even
-   though `operatingRegion`'s own note says it does. **That is a seam between
-   two of this module's own returns and it is teaching material**: the engine
-   warns about a curve it does not carry.
+   course cannot show NPSHr climbing with flow past 120 percent of BEP. **That
+   is a seam between two of this module's own returns and it is teaching
+   material**, and at `4fa37e6` the engine's own note says so: it tells the
+   reader the module carries NPSHr as a single number rather than a curve and
+   that the vendor curve has to be read at THIS flow. A warning a reader can
+   act on, in place of one they could not.
 5. **Any measured machine.** All sixteen published goldens are synthetic.
+6. **What a golden file's agreement with the engine is worth.** Two of the five
+   published stage output fields come back bit for bit and three do not, by up
+   to 1.5e-11, because the file is written by a fifty-digit Python oracle and
+   the engine is double precision. The course teaches the tolerance question
+   rather than pretending to equality, and digest Section 16 computes it.
 
 ---
 
@@ -394,18 +508,36 @@ probe before the digest was built:
 
 **The two packagings imply the SAME water density to the last printed digit,
 and that is a computed result rather than a claim** (the digest prints both and
-their difference). Comparing that density to a published water density is a
-HELD item, because no publication is in this repository to compare it to.
+their difference, which is 0). Comparing that density to a published water
+density is a HELD item, because no publication is in this repository to compare
+it to.
 
-`compression.js`'s three internal constants are measurable through the returns:
+`kW per hp` is now the derived 0.7456998715822702 rather than 0.7457, because
+`pumps.js` imports `KW_PER_HP` from `lib/units/fieldUnits.js` where it is built
+from the foot, the pound, standard gravity and the definition of a mechanical
+horsepower. **That is the only pump constant this re-cut moved**, and the one
+graded capstone field that reads it moved with it.
+
+`compression.js`'s internal constants are measurable through the returns:
 
 | constant | route | measured |
 | --- | --- | --- |
-| `LBMOL_SCF` | `1e6 / 24 / massLbHr * MW_AIR` at `gasSg: 1, qMMscfd: 1` | 379.49 |
-| `MW_AIR` | `massLbHr * 379.49 * 24 / 1e6` at `gasSg: 1, qMMscfd: 1` | 28.9625 |
-| `R_UNIVERSAL_FT_LBF` | `headPoly / (zAvg * T1 * (1/e) * (r^e - 1)) * MW` | 1545.349 |
+| `LBMOL_SCF` | `1e6 / 24 / massLbHr * AIR_MW` at `gasSg: 1, qMMscfd: 1` | 379.483571856287 |
+| `AIR_MW` | `massLbHr * LBMOL_SCF * 24 / 1e6` at `gasSg: 1, qMMscfd: 1` | 28.9625 (and it is now an EXPORT of `gasProperties.js`, so the measurement is a cross-check rather than the only route) |
+| the gas constant in ft lbf per lbmol degR | `headPoly / (zAvg * T1 * (1/e) * (r^e - 1)) * MW` | 1545.3504, which is `gasProperties.R_UNIVERSAL * 144` to 2.3e-13 |
 | the horsepower-minute packaging | via `gasHp` at a known head and mass | 33000 |
-| the Btu-per-hp-hour figure | `driverFuel({ heatRateBtuHpHr: 100 }).thermalEfficiencyPct / 100 * 100` | 2544.43 |
+| Btu per horsepower-hour, route A | `driverFuel({ heatRateBtuHpHr: 1e4 }).thermalEfficiencyPct / 100 * 1e4` | 2544.433577644024 |
+| Btu per horsepower-hour, route B | **bisect the heat rate until `driverFuel` refuses**: the first-law refusal boundary IS the constant | 2544.433577644024, identical to route A |
+| the standard base | `actualInletCfm` reveals only the QUOTIENT of its pressure and temperature base, 0.028279485058 psia/degR; the mass-flow route reaches the same quotient through the measured gas constant, difference 0 | one base, both routes |
+
+**Two new measurement routes this re-cut added, both in the digest:**
+
+| constant | route | measured |
+| --- | --- | --- |
+| the NPSH margin floor and fraction | `npshCheck.requiredMarginFt` at a required NPSH too small for the fraction to reach, and at one too large for the floor to reach | 3 ft and 0.35; the crossover bisects to 8.571428571 ft, which is also the quotient of the two |
+| the default discharge limit | with no `maxDischargeF` stated, bisect the stage ratio until the warning turns on and read the discharge either side | brackets 300 degF to 6e-14 |
+| the trim rule's floating-point slack | bisect the trim ratio until the shortfall leaves zero | the boundary sits 1.0000045e-9 above five percent |
+| the affinity speed band | walk the ratio up from 0.01 and down from 5 until the warning changes state | 0.5 and 1.5 |
 
 ---
 
@@ -424,3 +556,8 @@ HELD item, because no publication is in this repository to compare it to.
 | teaching digest | `/root/fc-wip-rotating/digest.txt` via `build_digest.sh` -> `fc3_dump.mjs` |
 | apps | `src/pages/apps/{PumpStationDesigner,CompressorStationDesigner}.jsx` (Suite) |
 | app state | `src/contexts/{PumpStudioContext,CompressorStudioContext}.jsx` (Suite) |
+| the derived power packagings | `packages/engines/lib/units/fieldUnits.js` (NEW at `4fa37e6`) |
+| the DAK window compression.js imports | `packages/engines/engines/facilities/separatorSizing.js` |
+| the engines' own repair record | `packages/engines/tools/validation/facilities/FINDINGS-rotating.md` |
+| graded capstone answers | `/root/fc-wip-rotating/fields.json` via `fc3_capstone.mjs` |
+| the lesson and module manifest | `/root/fc-wip-rotating/structure.py` |

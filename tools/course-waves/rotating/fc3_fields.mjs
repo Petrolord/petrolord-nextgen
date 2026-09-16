@@ -201,8 +201,23 @@ export const SCREEN_DUTIES = [
   { label: 'a small high-pressure gathering duty', qMMscfd: 0.6, pSuctionPsia: 420, tSuctionF: 96, gasSg: 0.66, overallRatio: 3.0, totalBrakeHp: 180 },
   { label: 'a large low-pressure gathering duty', qMMscfd: 380, pSuctionPsia: 95, tSuctionF: 96, gasSg: 0.66, overallRatio: 2.6, totalBrakeHp: 14500 },
   { label: 'a deep booster at high ratio', qMMscfd: 14, pSuctionPsia: 75, tSuctionF: 96, gasSg: 0.66, overallRatio: 11.5, totalBrakeHp: 2100 },
-  { label: 'the duty where both machines are viable', qMMscfd: 26, pSuctionPsia: 92, tSuctionF: 104, gasSg: 0.648, overallRatio: 10.7, totalBrakeHp: 3400 },
+  // The fourth branch is the one an earlier draft of this file MISSED: it
+  // asked for 'either' with an overall ratio of 10.7 at 3090 acfm, which is
+  // the reciprocating branch, and the digest then claimed four branches on a
+  // set that reached two. A duty reaches 'either' only by failing all three
+  // of the tests above it: 500 acfm or more, not a large volume at a modest
+  // ratio, and not a high ratio at a small volume.
+  { label: 'the duty where both machines are viable', qMMscfd: 67, pSuctionPsia: 92, tSuctionF: 104, gasSg: 0.648, overallRatio: 3.0, totalBrakeHp: 5000 },
 ];
+
+/** A duty NO stage count can cool, for real: the discharge limit is above
+ *  the suction temperature, so the early guards let it through, and twelve
+ *  equal stages still cannot get under it. This is the case the twelve-stage
+ *  cap was written for, and the only one that still reaches it. */
+export const STAGE_CAP_DUTY = {
+  pSuctionPsia: 100, pDischargePsia: 100000, tSuctionF: 100,
+  k: 1.4, polytropicEfficiency: 0.5, maxDischargeF: 110,
+};
 
 /** Inlet-volume conditions, to show the volume falling with pressure. */
 export const ACFM_PRESSURE_SWEEP_PSIA = [30, 60, 92, 150, 300, 600, 1200];
@@ -263,7 +278,7 @@ export const UNGUARDED_COMPRESSION_PROBES = [
   ['a polytropic efficiency of zero', 'stageCount', { pSuctionPsia: 100, pDischargePsia: 1000, tSuctionF: 100, k: 1.28, polytropicEfficiency: 0 }],
   ['a polytropic efficiency above one', 'stageCount', { pSuctionPsia: 100, pDischargePsia: 1000, tSuctionF: 100, k: 1.28, polytropicEfficiency: 1.5 }],
   ['a suction below absolute zero', 'stageCount', { pSuctionPsia: 100, pDischargePsia: 1000, tSuctionF: -600, k: 1.28 }],
-  ['a discharge limit below absolute zero', 'stageCount', { pSuctionPsia: 100, pDischargePsia: 1000, tSuctionF: 100, k: 1.28, maxDischargeF: -100 }],
+  ['a discharge limit below the suction temperature', 'stageCount', { pSuctionPsia: 100, pDischargePsia: 1000, tSuctionF: 100, k: 1.28, maxDischargeF: -100 }],
   ['a stage at zero polytropic efficiency', 'compressionStage', { qMMscfd: 20, pSuctionPsia: 100, tSuctionF: 100, ratio: 3.16, gasSg: 0.65, k: 1.28, polytropicEfficiency: 0 }],
   ['a stage at zero mechanical efficiency', 'compressionStage', { qMMscfd: 20, pSuctionPsia: 100, tSuctionF: 100, ratio: 3.16, gasSg: 0.65, k: 1.28, mechanicalEfficiency: 0 }],
   ['an inlet volume at zero rate', 'actualInletCfm', { qMMscfd: 0, pPsia: 200, tF: 100, gasSg: 0.65 }],

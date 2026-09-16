@@ -105,9 +105,21 @@ RHO_FROM_3960 = Fraction(33000, 3960) * Fraction(IN3_PER_FT3, IN3_PER_GAL)
 def molar_volume_scf(p_psia, t_degr):
     return float(R_PSIA_FT3) * t_degr / p_psia
 
+# AFTER FC3-0 the module holds ONE base. It used to quote LBMOL_SCF = 379.49,
+# which belongs to 14.696 psia and 519.67 degR, and work actualInletCfm from
+# 14.7 psia and 520 degR in the same file: the same MMscfd was one molar
+# quantity when it became a mass flow and a different one, 3.4 parts in ten
+# thousand away, when it became an inlet volume. The 60 degF base is now the
+# module's single base and is DECLARED here, with the molar volume derived
+# from it rather than quoted. The other two are kept for the comparison,
+# because the size of the gap between them is the finding.
+STD_BASE_PSIA = 14.696
+STD_BASE_DEGR = 519.67
+
 STD_BASES = {
-    '14.696 psia, 519.67 degR (the 60 degF base)': (14.696, 519.67),
-    '14.7 psia, 520 degR (the base actualInletCfm uses)': (14.7, 520.0),
+    '14.696 psia, 519.67 degR (the 60 degF base, the module\'s single base)':
+        (STD_BASE_PSIA, STD_BASE_DEGR),
+    '14.7 psia, 520 degR (the base actualInletCfm used before FC3-0)': (14.7, 520.0),
     '14.65 psia, 520 degR (the base the gas transmission forms use)': (14.65, 520.0),
 }
 
@@ -288,7 +300,13 @@ def hi_correction(q_bep, h_bep, visc_cst, rpm):
     D = Decimal
     B = (D('26.6') * (D(str(visc_cst)).sqrt() * D(str(h_bep)) ** D('0.0625'))
          / (D(str(q_bep)) ** D('0.375') * D(str(rpm)) ** D('0.25')))
-    if B <= 1:
+    # B IS THE VALUE OF THE PARAMETER ON EVERY BRANCH. The engine used to
+    # return B: 0 at or below water viscosity, which is a sentinel dressed as
+    # a value: the correlating parameter at 1 cSt is a real positive number
+    # and a millionth of a centistoke higher moved the reported B from 0 to
+    # 0.4257. The oracle always computed it honestly; after FC3-0 the engine
+    # does too, so this row is now a comparison rather than a note.
+    if visc_cst <= 1 or B <= 1:
         return {'B': float(B), 'cQ': 1.0, 'cH': 1.0, 'cEta': 1.0, 'branch': 'no correction'}
     log10B = B.ln() / D(10).ln()
     cQ = (D('-0.165') * log10B ** D('3.15')).exp()
@@ -497,7 +515,7 @@ def isentropic_identity_is_a_tautology(k_num, k_den, eta_num, eta_den):
     return e * eta == k_exp
 
 
-def acfm_derived(q_mmscfd, p_psia, t_f, z, p_std=14.7, t_std=520.0):
+def acfm_derived(q_mmscfd, p_psia, t_f, z, p_std=STD_BASE_PSIA, t_std=STD_BASE_DEGR):
     return (q_mmscfd * 1e6 / 1440.0) * (p_std / p_psia) * ((t_f + float(R_OFFSET)) / t_std) * z
 
 
@@ -652,13 +670,32 @@ FUEL_CASES = [
 ]
 
 # The refusal catalogue. Each entry names the behaviour class the comparator
-# must observe. 'refusal' means an `error` key; 'silent' means a non-finite
-# value with NO error key, which is a DEFECT and is recorded as such rather
-# than blessed. Nothing here is a tolerance question.
+# must observe:
+#
+#   'refusal'     an `error` key. What every object-returning export must do.
+#   'nanContract' a non-finite value with no error key from one of the five
+#                 BARE-NUMBER exports, which have nowhere to put an error.
+#                 This is the module's DOCUMENTED contract, not a defect, and
+#                 it is a separate class precisely so it cannot be used to
+#                 excuse the next row.
+#   'silent'      a non-finite value with no error key from an export that
+#                 HAS somewhere to put one. A DEFECT. FC3-0 emptied this
+#                 class; an entry appearing here again is a regression.
+#   'answered'    a real answer, listed when the point is that the engine
+#                 must NOT refuse.
+#
+# Before FC3-0 eighteen of these rows were 'silent'. Nothing here is a
+# tolerance question.
+BARE_NUMBER_EXPORTS = {
+    ('pumps', 'headFtToPsi'), ('pumps', 'psiToHeadFt'),
+    ('compression', 'polytropicExponentRatio'), ('compression', 'dischargeTempR'),
+    ('compression', 'actualInletCfm'),
+}
+
 REFUSALS = [
     ('pumps', 'systemCurve', {'staticHeadFt': 100, 'frictionHeadFt': 200, 'atFlowGpm': 0}, 'refusal'),
     ('pumps', 'systemCurve', {'staticHeadFt': 100, 'frictionHeadFt': -50, 'atFlowGpm': 1500}, 'refusal'),
-    ('pumps', 'systemCurve', {'frictionHeadFt': 200, 'atFlowGpm': 1500}, 'silent'),
+    ('pumps', 'systemCurve', {'frictionHeadFt': 200, 'atFlowGpm': 1500}, 'refusal'),
     ('pumps', 'fitPumpCurve', {'points': [{'qGpm': 0, 'headFt': 100}, {'qGpm': 100, 'headFt': 90}]}, 'refusal'),
     ('pumps', 'fitPumpCurve', {'points': [{'qGpm': 100, 'headFt': 50}, {'qGpm': 100, 'headFt': 60}, {'qGpm': 100, 'headFt': 70}]}, 'refusal'),
     ('pumps', 'fitPumpCurve', {'points': [{'qGpm': 0, 'headFt': -5}, {'qGpm': 100, 'headFt': 50}, {'qGpm': 200, 'headFt': 40}]}, 'refusal'),
@@ -666,22 +703,22 @@ REFUSALS = [
     ('pumps', 'pumpPower', {'qGpm': 1500, 'headFt': 300, 'sg': 0, 'efficiency': 0.78}, 'refusal'),
     ('pumps', 'pumpPower', {'qGpm': 1500, 'headFt': 300, 'sg': 0.85, 'efficiency': 0}, 'refusal'),
     ('pumps', 'pumpPower', {'qGpm': 1500, 'headFt': 300, 'sg': 0.85, 'efficiency': 1.0001}, 'refusal'),
-    ('pumps', 'pumpPower', {'qGpm': 1500, 'headFt': 300, 'sg': 0.85, 'efficiency': 0.78, 'motorEfficiency': 0}, 'silent'),
+    ('pumps', 'pumpPower', {'qGpm': 1500, 'headFt': 300, 'sg': 0.85, 'efficiency': 0.78, 'motorEfficiency': 0}, 'refusal'),
     ('pumps', 'npshAvailable', {'suctionPressurePsia': 14.7, 'vapourPressurePsia': 0.5, 'sg': 0}, 'refusal'),
     ('pumps', 'npshAvailable', {'vapourPressurePsia': 0.5, 'sg': 0.85}, 'refusal'),
     ('pumps', 'npshAvailable', {'suctionPressurePsia': 14.7, 'sg': 0.85}, 'refusal'),
     ('pumps', 'npshCheck', {'npshaFt': 20, 'npshrFt': 0}, 'refusal'),
-    ('pumps', 'npshCheck', {'npshrFt': 12}, 'silent'),
+    ('pumps', 'npshCheck', {'npshrFt': 12}, 'refusal'),
     ('pumps', 'speedChange', {'qGpm': 1000, 'headFt': 300, 'brakeHp': 100, 'speedRatio': 0}, 'refusal'),
     ('pumps', 'speedChange', {'qGpm': 1000, 'headFt': 300, 'brakeHp': 100, 'speedRatio': -1}, 'refusal'),
-    ('pumps', 'speedChange', {'speedRatio': 0.8}, 'silent'),
+    ('pumps', 'speedChange', {'speedRatio': 0.8}, 'refusal'),
     ('pumps', 'impellerTrim', {'qGpm': 1000, 'headFt': 300, 'brakeHp': 100, 'diameterRatio': 1.2}, 'refusal'),
     ('pumps', 'impellerTrim', {'qGpm': 1000, 'headFt': 300, 'brakeHp': 100, 'diameterRatio': 0}, 'refusal'),
-    ('pumps', 'impellerTrim', {'diameterRatio': 0.8}, 'silent'),
+    ('pumps', 'impellerTrim', {'diameterRatio': 0.8}, 'refusal'),
     ('pumps', 'viscosityCorrection', {'qBepGpm': 0, 'headBepFt': 300, 'viscosityCSt': 100}, 'refusal'),
     ('pumps', 'viscosityCorrection', {'qBepGpm': 1500, 'headBepFt': 300, 'viscosityCSt': 0}, 'refusal'),
-    ('pumps', 'viscosityCorrection', {'qBepGpm': 1500, 'headBepFt': 300, 'viscosityCSt': 100, 'speedRpm': 0}, 'silent'),
-    ('pumps', 'viscosityCorrection', {'qBepGpm': 1500, 'headBepFt': 300, 'viscosityCSt': 100, 'speedRpm': -3560}, 'silent'),
+    ('pumps', 'viscosityCorrection', {'qBepGpm': 1500, 'headBepFt': 300, 'viscosityCSt': 100, 'speedRpm': 0}, 'refusal'),
+    ('pumps', 'viscosityCorrection', {'qBepGpm': 1500, 'headBepFt': 300, 'viscosityCSt': 100, 'speedRpm': -3560}, 'refusal'),
     ('pumps', 'combineParallel', {'n': 2}, 'refusal'),
     ('pumps', 'combineParallel', {'n': 0.5}, 'refusal'),
     ('pumps', 'combineSeries', {'n': 0}, 'refusal'),
@@ -691,19 +728,38 @@ REFUSALS = [
     ('compression', 'stageCount', {'pSuctionPsia': 100, 'pDischargePsia': 100, 'tSuctionF': 100, 'k': 1.28}, 'refusal'),
     ('compression', 'stageCount', {'pSuctionPsia': 100, 'pDischargePsia': 1000, 'tSuctionF': 100, 'k': 0.9}, 'refusal'),
     ('compression', 'stageCount', {'pSuctionPsia': 100, 'pDischargePsia': 200, 'tSuctionF': 300, 'k': 1.4, 'polytropicEfficiency': 0.5, 'maxDischargeF': 250}, 'refusal'),
-    ('compression', 'stageCount', {'pSuctionPsia': 100, 'pDischargePsia': 1000, 'tSuctionF': 100, 'k': 1.28, 'maxRatioPerStage': 1}, 'silent'),
-    ('compression', 'stageCount', {'pSuctionPsia': 100, 'pDischargePsia': 1000, 'tSuctionF': 100, 'k': 1.28, 'maxRatioPerStage': -4}, 'silent'),
+    ('compression', 'stageCount', {'pSuctionPsia': 100, 'pDischargePsia': 1000, 'tSuctionF': 100, 'k': 1.28, 'maxRatioPerStage': 1}, 'refusal'),
+    ('compression', 'stageCount', {'pSuctionPsia': 100, 'pDischargePsia': 1000, 'tSuctionF': 100, 'k': 1.28, 'maxRatioPerStage': -4}, 'refusal'),
     ('compression', 'compressionStage', {'qMMscfd': 0, 'pSuctionPsia': 100, 'tSuctionF': 100, 'ratio': 3, 'gasSg': 0.65, 'k': 1.28}, 'refusal'),
     ('compression', 'compressionStage', {'qMMscfd': 20, 'pSuctionPsia': 100, 'tSuctionF': 100, 'ratio': 1, 'gasSg': 0.65, 'k': 1.28}, 'refusal'),
     ('compression', 'compressionStage', {'qMMscfd': 20, 'pSuctionPsia': 100, 'tSuctionF': 100, 'ratio': 3, 'gasSg': 0, 'k': 1.28}, 'refusal'),
     ('compression', 'compressionStage', {'qMMscfd': 20, 'pSuctionPsia': 100, 'tSuctionF': 100, 'ratio': 3, 'gasSg': 0.65, 'k': 1}, 'refusal'),
-    ('compression', 'compressionStage', {'qMMscfd': 20, 'pSuctionPsia': 100, 'tSuctionF': 100, 'ratio': 3.16, 'gasSg': 0.65, 'k': 1.28, 'polytropicEfficiency': 0}, 'silent'),
-    ('compression', 'compressionStage', {'qMMscfd': 20, 'pSuctionPsia': 100, 'tSuctionF': 100, 'ratio': 3.16, 'gasSg': 0.65, 'k': 1.28, 'mechanicalEfficiency': 0}, 'silent'),
+    ('compression', 'compressionStage', {'qMMscfd': 20, 'pSuctionPsia': 100, 'tSuctionF': 100, 'ratio': 3.16, 'gasSg': 0.65, 'k': 1.28, 'polytropicEfficiency': 0}, 'refusal'),
+    ('compression', 'compressionStage', {'qMMscfd': 20, 'pSuctionPsia': 100, 'tSuctionF': 100, 'ratio': 3.16, 'gasSg': 0.65, 'k': 1.28, 'mechanicalEfficiency': 0}, 'refusal'),
     ('compression', 'machineScreen', {'qMMscfd': 0}, 'refusal'),
     ('compression', 'driverFuel', {'brakeHp': 0}, 'refusal'),
     ('compression', 'driverFuel', {'brakeHp': 1000, 'heatRateBtuHpHr': 0}, 'refusal'),
     ('compression', 'driverFuel', {'brakeHp': 1000, 'gasLhvBtuScf': 0}, 'refusal'),
-    ('compression', 'actualInletCfm', {'qMMscfd': 0, 'pPsia': 200, 'tF': 100, 'gasSg': 0.65}, 'silent'),
+    ('compression', 'actualInletCfm', {'qMMscfd': 0, 'pPsia': 200, 'tF': 100, 'gasSg': 0.65}, 'nanContract'),
+    # ---- rows FC3-0 added. Each was a FAILS-OPEN finding: a confident wrong
+    # number rather than a non-finite one, so no earlier row covered it.
+    ('pumps', 'pumpPower', {'qGpm': 1500, 'headFt': 300, 'sg': 0.85, 'efficiency': 0.78, 'motorEfficiency': 5}, 'refusal'),
+    ('pumps', 'pumpPower', {'qGpm': 1500, 'headFt': 300, 'sg': 0.85, 'efficiency': 0.78, 'motorEfficiency': -0.5}, 'refusal'),
+    ('pumps', 'pumpPower', {'qGpm': 1500, 'headFt': 300, 'sg': 0.85, 'efficiency': 0.78, 'motorEfficiency': 1}, 'answered'),
+    ('pumps', 'npshCheck', {'npshaFt': float('inf'), 'npshrFt': 12}, 'refusal'),
+    ('pumps', 'combineParallel', {'n': 2.5}, 'refusal'),
+    ('pumps', 'combineSeries', {'n': 1.5}, 'refusal'),
+    ('pumps', 'psiToHeadFt', {'psi': 100, 'sg': 0}, 'nanContract'),
+    ('pumps', 'headFtToPsi', {'sg': 1}, 'nanContract'),
+    ('compression', 'stageCount', {'pSuctionPsia': 100, 'pDischargePsia': 1000, 'tSuctionF': 100, 'k': 1.28, 'polytropicEfficiency': 1.5}, 'refusal'),
+    ('compression', 'stageCount', {'pSuctionPsia': 100, 'pDischargePsia': 1000, 'tSuctionF': -600, 'k': 1.28}, 'refusal'),
+    ('compression', 'stageCount', {'pSuctionPsia': 100, 'pDischargePsia': 1000, 'tSuctionF': 100, 'k': 1.28, 'maxDischargeF': -100}, 'refusal'),
+    ('compression', 'compressionStage', {'qMMscfd': 20, 'pSuctionPsia': 100, 'tSuctionF': 100, 'ratio': 3.16, 'gasSg': 0.65, 'k': 1.28, 'polytropicEfficiency': 1.5}, 'refusal'),
+    ('compression', 'compressorTrain', {'qMMscfd': 20, 'pSuctionPsia': 100, 'tSuctionF': 100, 'pDischargePsia': 1000, 'gasSg': 0.65, 'k': 1.28, 'cpBtuLbF': float('nan')}, 'refusal'),
+    ('compression', 'actualInletCfm', {'qMMscfd': 20, 'pPsia': 200, 'tF': -600, 'gasSg': 0.65}, 'nanContract'),
+    ('compression', 'machineScreen', {'qMMscfd': 20, 'pSuctionPsia': 200, 'tSuctionF': -600, 'gasSg': 0.65, 'overallRatio': 3, 'totalBrakeHp': 500}, 'refusal'),
+    ('compression', 'driverFuel', {'brakeHp': 1000, 'heatRateBtuHpHr': 2000}, 'refusal'),
+    ('compression', 'driverFuel', {'brakeHp': 1000, 'heatRateBtuHpHr': 1}, 'refusal'),
 ]
 
 
@@ -810,9 +866,14 @@ def build():
         r = hi_correction(q, h, v, rpm)
         row = {'qBepGpm': q, 'headBepFt': h, 'viscosityCSt': v, 'speedRpm': rpm}
         row.update(r)
+        # THE CORRECTED VALUES ARE PRESENT ON EVERY BRANCH. On a branch where
+        # no correction applies the answer is the catalogue value unchanged,
+        # which is a value and not an absence; the engine used to omit both
+        # keys on exactly those rows, so a caller reading correctedQGpm got
+        # undefined precisely when the answer was "the number you gave me".
+        row['correctedQGpm'] = q * r['cQ']
+        row['correctedHeadFt'] = h * r['cH']
         if r['branch'] == 'corrected':
-            row['correctedQGpm'] = q * r['cQ']
-            row['correctedHeadFt'] = h * r['cH']
             back = hi_inverse_B_from_cQ(r['cQ'])
             row['bRecoveredFromCQ'] = back
             row['inverseRoundTripRelative'] = abs(back - r['B']) / r['B']

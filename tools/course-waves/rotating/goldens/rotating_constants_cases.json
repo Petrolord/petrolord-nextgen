@@ -9,8 +9,8 @@
  "rPsiaFt3PerLbmolR": 10.73157708901629,
  "standardMolarVolumeScfPerLbmol": {
   "14.65 psia, 520 degR (the base the gas transmission forms use)": 380.91604684562935,
-  "14.696 psia, 519.67 degR (the 60 degF base)": 379.4827616935965,
-  "14.7 psia, 520 degR (the base actualInletCfm uses)": 379.6204140332293
+  "14.696 psia, 519.67 degR (the 60 degF base, the module's single base)": 379.4827616935965,
+  "14.7 psia, 520 degR (the base actualInletCfm used before FC3-0)": 379.6204140332293
  },
  "theTwoPackagingsAgreeExactly": true,
  "waterDensityFrom231": 62.33766233766234,

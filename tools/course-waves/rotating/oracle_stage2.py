@@ -43,10 +43,22 @@ SRC = os.path.join(HERE, 'scratch', 'stage_z.json')
 
 # The engine's own MW_AIR and LBMOL_SCF, used as INPUTS so that the head and
 # the power are what is checked. Their VALUES are audited separately below.
-ENGINE_MW_AIR = 28.9625
-ENGINE_LBMOL_SCF = 379.49
-ENGINE_R_FT_LBF = 1545.349
-ENGINE_R_PSIA_FT3 = 10.7316          # from gasProperties.js, the same constant
+#
+# AFTER FC3-0 the module holds ONE gas constant and ONE standard base. It used
+# to declare R_UNIVERSAL_FT_LBF = 1545.349 privately while importing from
+# gasProperties.js, which declares the same constant as 10.7316 psia.ft3, a
+# ratio of 0.999999094056597; and it quoted LBMOL_SCF = 379.49 for the 60 degF
+# base while working its inlet volumes from 14.7 psia and 520 degR, three parts
+# in ten thousand away. It now imports the owner's constant and derives the
+# molar volume from one declared base, so section A below prints a ratio of
+# exactly 1 between the two engine constants where it used to print the
+# divergence.
+ENGINE_R_PSIA_FT3 = 10.7316          # gasProperties.js R_UNIVERSAL, the owner
+ENGINE_R_FT_LBF = ENGINE_R_PSIA_FT3 * 144
+ENGINE_MW_AIR = 28.9625              # gasProperties.js AIR_MW
+ENGINE_STD_P_PSIA = 14.696
+ENGINE_STD_T_R = 519.67
+ENGINE_LBMOL_SCF = ENGINE_R_PSIA_FT3 * ENGINE_STD_T_R / ENGINE_STD_P_PSIA
 
 
 def main():

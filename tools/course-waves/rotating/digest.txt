@@ -2,6 +2,7 @@
 # Pump work prints to six decimals (gpm, ft, psi, hp, kW, ratios, percentages); gas work to four (ft lbf per lbm, Btu per hr, acfm, degF); exponents, small factors and MMscfd to nine; counts are whole numbers.
 # Field units: gpm and feet of head for pumps, MMscfd and psia and degF for gas, horsepower for both.
 # Two engines: engines/facilities/pumps.js (14 exports) and engines/facilities/compression.js (8 exports), over engines/production/gasProperties.js. The export counts are read off the modules themselves.
+# The engines are vendored at engines main 4fa37e6, which is the FC3-0 repair wave. compression.js reads its gas constant, its molecular weight of air and its Rankine offset from engines/production/gasProperties.js, its compressibility validity window from engines/facilities/separatorSizing.js, and its two power packagings from lib/units/fieldUnits.js, which pumps.js also reads.
 # Nothing here is read from a clock or a random number, so every line reproduces.
 
 # SECTION 1: What these engines size, and what they refuse (owned by Associate m01)
@@ -11,7 +12,7 @@
 - These two modules size MACHINES. What the piping upstream and downstream costs in pressure is a line-sizing question and lives in engines/facilities/lineHydraulics.js.
 - THE SCOPE SEAM, and it is large. There is NO compressor surge line, no surge control, no recycle valve and no anti-surge calculation anywhere in the engines package. There is no mechanical seal and no bearing calculation: seals and bearings appear only inside returned prose. There is no machine curve, no wheel selection, no valve dynamics and no rod loading. A vendor performance run on a specific frame answers those, and this course does not.
 - Every refusal in both modules is a RETURNED OBJECT carrying an `error` string. Neither module throws. A caller checks a property rather than catching.
-- 5 of these exports return a BARE NUMBER rather than an object, so they have nowhere to put an error at all: pumps.headFtToPsi, pumps.psiToHeadFt, compression.polytropicExponentRatio, compression.dischargeTempR, compression.actualInletCfm. They signal failure with NaN or Infinity, and Section 15 catalogues them, because a NaN with no error key is not a refusal.
+- 5 of these exports return a BARE NUMBER rather than an object, so they have nowhere to put an error at all: pumps.headFtToPsi, pumps.psiToHeadFt, compression.polytropicExponentRatio, compression.dischargeTempR, compression.actualInletCfm. They hold a DOCUMENTED NaN CONTRACT instead: NaN when the inputs cannot be read, never an Infinity and never a plausible number, and Section 15 shows each of them keeping it.
 
 States the pump module has no answer for, engine messages verbatim:
 - a system curve with no flow to state its friction at: { error: "a system curve needs a friction head at a stated positive flow" }
@@ -25,16 +26,25 @@ States the pump module has no answer for, engine messages verbatim:
 - power at no gravity: { error: "power needs a positive flow, head and specific gravity" }
 - power at an efficiency of zero: { error: "pump efficiency must be between 0 and 1" }
 - power at an efficiency above one: { error: "pump efficiency must be between 0 and 1" }
+- power through a motor efficiency of zero: { error: "motor efficiency must be greater than 0 and at most 1" }
+- power through a motor efficiency above one: { error: "motor efficiency must be greater than 0 and at most 1" }
+- a system curve with no static head at all: { error: "a system curve needs a static head: it may be negative, but it cannot be missing" }
+- a duty on a curve that rises with flow: { error: "this curve does not fall with flow, so it is not a centrifugal head curve and its crossing with a system curve is not a duty point: check the catalogue points" }
 - NPSH at no gravity: { error: "NPSH needs a positive specific gravity" }
 - NPSH with no suction pressure: { error: "NPSH needs a suction pressure and a vapour pressure" }
 - NPSH with no vapour pressure: { error: "NPSH needs a suction pressure and a vapour pressure" }
 - a margin check with no required NPSH: { error: "a required NPSH is needed for the check" }
+- a margin check on an available head that is not a number: { error: "the margin check needs a finite available NPSH: there is no verdict to give on a suction head that cannot be read" }
+- NPSH with a suction friction that cannot be read: { error: "the static suction head and the suction friction must both be numbers: they may be negative, but they cannot be missing" }
 - a speed change at a ratio of zero: { error: "the speed ratio must be positive" }
+- a speed change with no duty to change: { error: "a speed change needs a duty to change: give the flow, the head and the brake power at the present speed" }
+- a trim with no duty to trim: { error: "a trim needs a duty to trim: give the flow, the head and the brake power at the full diameter" }
 - an impeller trimmed LARGER: { error: "a trim ratio must be between 0 and 1 (you cannot trim an impeller larger)" }
 - a viscosity correction with no BEP flow: { error: "the viscosity correction needs a BEP flow, head and a kinematic viscosity" }
 - a viscosity correction with no viscosity: { error: "the viscosity correction needs a BEP flow, head and a kinematic viscosity" }
-- half a pump in parallel: { error: "parallel operation needs a pump curve and a count" }
-- pumps in series with no curve: { error: "series operation needs a pump curve and a count" }
+- a viscosity correction at a standstill: { error: "the viscosity correction needs a positive pump speed in rpm" }
+- half a pump in parallel: { error: "parallel operation needs a pump curve and a whole number of machines, at least one" }
+- pumps in series with no curve: { error: "series operation needs a pump curve and a whole number of machines, at least one" }
 - an operating region with no best efficiency flow: { error: "a BEP flow is needed to judge the operating region" }
 - an operating region at a negative flow: { error: "a BEP flow is needed to judge the operating region" }
 
@@ -42,16 +52,26 @@ States the compression module has no answer for, engine messages verbatim:
 - a discharge below the suction: { error: "discharge pressure must exceed suction pressure" }
 - a discharge equal to the suction: { error: "discharge pressure must exceed suction pressure" }
 - a heat capacity ratio of one: { error: "the heat capacity ratio must exceed 1" }
-- a duty no practical stage count can cool: { error: "no practical stage count keeps the discharge temperature under the limit: intercool harder, or check k and the suction temperature" }
-- a stage at no rate: { error: "a stage needs a positive rate, suction pressure, gas gravity, k above 1 and a ratio above 1" }
-- a stage at a ratio of one: { error: "a stage needs a positive rate, suction pressure, gas gravity, k above 1 and a ratio above 1" }
-- a stage with no gas gravity: { error: "a stage needs a positive rate, suction pressure, gas gravity, k above 1 and a ratio above 1" }
-- a machine screen with no rate: { error: "screening needs a rate and suction conditions" }
+- a duty no practical stage count can cool: { error: "no practical stage count keeps the discharge temperature under the limit: 12 equal stages still reach 318.0 F against a stated limit of 110.0 F, from an inlet of 100.0 F" }
+- a polytropic efficiency above one: { error: "polytropic efficiency must be greater than 0 and at most 1 (got 1.5)" }
+- a per-stage ratio limit of one: { error: "the maximum ratio per stage must be greater than 1: a stage at a ratio of 1 adds no pressure, so no number of them reaches the discharge" }
+- a suction below absolute zero: { error: "the suction temperature is at or below absolute zero (-600 F)" }
+- a discharge limit at or below the suction temperature: { error: "the maximum discharge temperature of -100 F is at or below the suction temperature of 100 F: compression raises the temperature of a gas, so no stage count can meet this limit" }
+- a stage at no rate: { error: "a stage needs a positive rate" }
+- a stage at a ratio of one: { error: "a stage needs a compression ratio above 1: at a ratio of 1 the stage adds no pressure" }
+- a stage with no gas gravity: { error: "a stage needs a positive gas gravity" }
+- a stage at a mechanical efficiency of zero: { error: "mechanical efficiency must be greater than 0 and at most 1 (got 0)" }
+- a stage colder than the compressibility correlation reaches: { error: "at the stage suction, Tpr 0.848 against 1.0 is below the DAK validity range of 1.0 to 3.0, at 1000 psia and -150 F: the z-factor would be an extrapolation below the critical temperature, so it is refused" }
+- a stage at a pressure above where that correlation stops: { error: "at the stage suction, Ppr 35.814 against 30.0 is above the DAK validity limit of 30, at 24000 psia and 100 F, so the z-factor is refused" }
+- a train whose interstage specific heat cannot be read: { error: "the interstage cooling needs a non-negative specific heat in Btu per lb per degF" }
+- a machine screen with no gas gravity to take pseudo-criticals from: { error: "at the screening suction, the Sutton pseudo-criticals are not physical at a gas gravity of undefined" }
+- a machine screen at no rate: { error: "screening needs a rate and suction conditions that give a positive inlet volume" }
 - a driver with no power: { error: "fuel needs a positive power, heat rate and heating value" }
 - a driver with no heat rate: { error: "fuel needs a positive power, heat rate and heating value" }
 - a driver burning gas with no heating value: { error: "fuel needs a positive power, heat rate and heating value" }
+- a driver more efficient than the first law allows: { error: "a heat rate of 2000 Btu per hp hr is below the 2544.4336 Btu that one horsepower-hour is: that driver would be more than 100 percent thermally efficient" }
 
-# HELD FOR LITERATURE, taught as a limit and never graded: the whole of the machine-screening threshold set, the viscosity correlation, the trim shortfall model, the operating-region bands, the NPSH margin rule and the 300 degF discharge warning. Section 17 lists all eight held items with what each one costs.
+# HELD FOR LITERATURE, taught as a limit and never graded: the whole of the machine-screening threshold set, the viscosity correlation, the trim shortfall model, the operating-region bands, the NPSH margin rule, the 300 degF DEFAULT discharge limit and the speed-ratio band the affinity warning uses. Section 17 lists all eight held items with what each one costs.
 
 # SECTION 2: Two curves, and why neither has an operating point (owned by Associate m02)
 
@@ -64,7 +84,17 @@ The OKONO P-1201 produced-water injection pump, as its catalogue reads:
 | 1900.000000 | 250.000000 |
 
 The least-squares quadratic through them, in the normalised variable q over the scale: c0 = 540.203016, c1 = 0.738126, c2 = -291.101770, scale = 1900.000000 (engine).
-Shutoff head, which is the fitted head at zero flow: 540.203016 ft (engine). R squared: 0.999985896 (engine). Warning: null.
+Shutoff head, which is the fitted head at zero flow: 540.203016 ft (engine). R squared: 0.999985896 (engine). Droops: true (engine). Warning: null.
+THE SOLVE IS REPORTED AS WELL AS THE FIT. R squared measures how well the fitted curve describes the four points; it says nothing about whether the linear system behind it was solvable, and those are two different questions. The 1-norm condition number of the normal-equation matrix is 334.938111 (engine), and the conditioning note is null.
+The condition number across a spread of the point sets this digest fits, so the figure above has a range to sit in rather than standing alone:
+| point set | condition number | R squared | droops |
+| --- | --- | --- | --- |
+| the OKONO catalogue | 334.938111 | 0.999985896 | true |
+| a rising set | 308.014664 | 1.000000000 | false |
+| three identical heads | 304.750000 | null | false |
+| the published curve goldens, first | 366.680892 | 0.999754151 | true |
+| the published curve goldens, last | 360.837617 | 0.999983354 | true |
+Normal equations square the condition number of the design matrix, which is the price of solving a least-squares problem this way, and the engine pays it in the normalised variable rather than in raw gpm. Across every point set this file fits successfully, 7 of them, the reported figure runs from 304.750000 to 366.680892 (derived as the smallest and largest of those 7). Double precision carries about sixteen decimal digits, so a figure of this size costs the coefficients two or three of them.
 The scale is the largest flow in the point set, and the fitted shutoff is NOT the catalogue's own first point: the catalogue reads 540.000000 ft at zero flow against the fit's 540.203016 ft, a difference of 0.203016 ft (derived from the two figures on this line). A quadratic through four points misses all four.
 
 The fitted curve read back at each catalogue flow, with the residual:
@@ -95,20 +125,33 @@ The last column is derived on each row. It starts positive and ends negative, an
 
 A point set that is not a centrifugal head curve, because it RISES with flow:
 - points: 0.000000 gpm at 120.000000 ft, 450.000000 gpm at 176.000000 ft, 950.000000 gpm at 288.000000 ft
-- fitted c2 = 94.577778 (engine), R squared 1.000000000
+- fitted c2 = 94.577778 (engine), R squared 1.000000000, droops false
 - warning: "the fitted curve does not fall with flow: check the points, because a centrifugal head curve must droop"
-A drooping curve has a negative c2. This one is positive, and the engine says so.
+A drooping curve has a negative c2. This one is positive, the engine says so in prose, and it also says so in a field: `droops` is the machine-readable half of that same warning, and Section 3 is where it is read.
 
 A point set of three identical heads:
-- fitted c2 = 0.000000, R squared 1.000000000 (engine)
+- fitted c2 = 0.000000, R squared null, droops false (engine)
 - warning: "the fitted curve does not fall with flow: check the points, because a centrifugal head curve must droop"
-The R squared and the warning disagree on the same return: the fit explains nothing and is reported as perfect, because the total sum of squares is zero and the engine returns 1 for that case. Recorded in FINDINGS as G8.
+R squared is the share of the variance the fit explains. Three identical heads have no variance to explain, the total sum of squares is zero and the quantity is undefined, so the engine returns null rather than a number. A horizontal line explains nothing, and null is what "there is nothing to explain" looks like in a return.
 
 # SECTION 3: The duty point, solved (owned by Associate m03)
 
 OKONO against its stated system: the curves cross at 1234.452969 gpm and 417.801018 ft (engine).
-At that flow the pump makes 417.801018 ft and the system demands 417.801018 ft. The difference is 0 ft (derived from the two figures on this line), which is what "solved" means here.
-The solve is 200 bisections on the head difference and the return carries no convergence flag. FINDINGS G4.
+At that flow the pump makes 417.801018 ft and the system demands 417.801018 ft (both engine, the second read back off the return). The difference is 0 ft (derived from the two figures on this line), which is what "solved" means here.
+THE SOLVE REPORTS ITSELF. Bisection on the head difference, and the return carries the evidence it finished on:
+- halvings taken: 55 (engine), out of a cap of 200
+- the bracket it stopped on: 2.2737367544323206e-13 gpm (engine)
+- the head difference at the flow it returned: 0 ft (engine)
+- converged: true (engine); warning null
+The flag is made of the residual as well as the bracket, and it has to be. On a bracketed sign change bisection always collapses, so a flag made only of the bracket width could never come back false and would be a check that validates nothing.
+THE CASE IT DOES CATCH, run here as a negative control rather than described. A curve that returns a non-finite head over part of the range sends the comparison false at every step there and marches the search quietly to the bottom of it:
+- the flow it returns: 900.000000 gpm, against the 1234.452969 gpm the same curves really cross at, which is 334.452969 gpm away (derived from the two figures on this line)
+- the bracket it finished on: 1.1368683772161603e-13 gpm, after 56 halvings
+- the head difference at that flow: 154.7816454151096 ft
+- converged: false (engine)
+A flag made only of that bracket would have called this solve converged: the bracket is 1.1368683772161603e-13 gpm, which is at the resolution of the numbers themselves. The residual half is the half that can be false, and here it is 154.7816454151096 ft.
+That is what a check which CAN fail looks like beside one that cannot, and the same question is worth asking of every flag in this course: what input makes it false?
+It stops when the midpoint stops moving rather than after a fixed count. A fixed 200 halvings with no stopping test gives 1234.452969 gpm on this same pair of curves against the engine's 1234.452969 gpm, a difference of 0 gpm (derived from the two figures on this line), so nothing moved when the report was added: the loop breaks exactly where the blind one was already standing still.
 
 The same pump against a friction-dominated system, which is the case Section 10 needs:
 - static head 60.000000 ft, friction head 380.000000 ft at 1100.000000 gpm, k = 0.000314049587 ft per gpm squared (engine)
@@ -126,6 +169,10 @@ Moving the system moves the duty, which is the point of solving it rather than t
 | 320.000000 | 1008.245819 | 458.621768 |
 | 400.000000 | 804.694816 | 488.300056 |
 
+A curve that RISES with flow is not a centrifugal head curve, so where it crosses a system curve is not a duty point:
+- { error: "this curve does not fall with flow, so it is not a centrifugal head curve and its crossing with a system curve is not a duty point: check the catalogue points" }
+That is the `droops` flag of Section 2 being read. The fit and the duty are two halves of one module, they used to disagree about the same curve, and the trusting half was the bug.
+
 The two refusals that are real answers rather than hidden errors:
 - a system the pump cannot start: { error: "the system needs more head at zero flow than the pump makes at shutoff: this pump cannot start this system" }
   it hands back the evidence: shutoff head 540.203016 ft against a system static head of 700.000000 ft (engine). The gap is 159.796984 ft (derived from the two figures on this line).
@@ -138,7 +185,7 @@ The two refusals that are real answers rather than hidden errors:
 At the OKONO duty of 1234.452969 gpm and 417.801018 ft, on a fluid of gravity 1.040000 at an efficiency of 0.740000 through a motor of 0.920000:
 - hydraulic power 135.450994 hp (engine)
 - brake power 183.041884 hp (engine)
-- motor input 198.958569 hp, 148.363405 kW (engine)
+- motor input 198.958569 hp, 148.363379 kW (engine)
 - the pump loses 47.590890 hp and the motor a further 15.916686 hp (derived from the three figures above)
 
 The duty head as a discharge pressure: 188.100891 psi (engine), and converting it back gives 417.801018 ft (engine).
@@ -154,7 +201,7 @@ The same head on a lighter and a heavier fluid, because head is a property of th
 THE CONSTANTS. pumps.js exports no constants and names none internally: every packaging is written inline at its point of use. Each one below is MEASURED by asking the engine a question about itself.
 - feet of head per psi at gravity 1, from psiToHeadFt at one psi: 2.310000000
 - the horsepower packaging, from one over the hydraulic power at unit flow, head, gravity and efficiency: 3960.000000
-- kilowatts per horsepower, from the motor input in kW over the motor input in hp at an efficiency of one: 0.745700000000
+- kilowatts per horsepower, from the motor input in kW over the motor input in hp at an efficiency of one: 0.745699871582
 - the DEFAULT motor efficiency, from the brake power over the motor input when the argument is omitted: 0.940000000000
 
 Both pump packagings carry a water density inside them, and they can be compared:
@@ -190,12 +237,12 @@ The four bands, with the value either side of every boundary, because a band tha
 
 The notes themselves, which are the part of this return that says what a region costs:
 - at 60.000000 percent, "allowable, low": below 70 percent of best efficiency flow: suction and discharge recirculation begin here, and bearing and seal life shorten
-- at 130.000000 percent, "allowable, high": above 120 percent of best efficiency flow: NPSH required climbs steeply here, so check the suction margin again at this duty
+- at 130.000000 percent, "allowable, high": above 120 percent of best efficiency flow: the required NPSH climbs steeply with flow here, and this module carries NPSHr as a single number rather than a curve, so the vendor curve has to be read at THIS flow before the suction margin means anything
 - at 30.000000 percent, "outside": far below best efficiency flow: this pump is being throttled hard, which wastes power and damages the machine. A smaller pump, a trim or a variable speed drive is the answer
 - at 160.000000 percent, "outside": far above best efficiency flow: the pump will run out of NPSH and may cavitate, and the driver may overload
 
 # HELD FOR LITERATURE, taught as a limit and never graded: the bands themselves, at 50, 70, 120 and 140 percent of best efficiency flow. They are customary and this repository holds no publication for them, so no graded value in this course is a region, a percentage of best efficiency flow or a preferred flag.
-The note above 120 percent says the required suction head climbs steeply there. It does, and this module cannot show it: the required NPSH is a scalar INPUT to the check in Section 7 and there is no required-NPSH-against-flow curve anywhere in the module. The engine warns about a curve it does not carry. FINDINGS G5.
+Read the note above 120 percent carefully, because it is the one that names its own limit. The required NPSH climbs steeply with flow there, and this module carries NPSHr as a SINGLE NUMBER rather than as a curve: it is a scalar input to the check in Section 7, and there is no required-NPSH-against-flow curve anywhere in the module. The note says so, which is the difference between a warning a reader can act on and one they cannot: the vendor curve has to be read at THIS flow before the suction margin means anything.
 
 # SECTION 6: NPSH available, from the real suction side (owned by Professional m01)
 
@@ -244,38 +291,57 @@ The three severities, each with the message the engine attaches:
   note: null
 
 What the check returns when it is handed an available head it cannot read:
-- an available head that is not a number: { marginFt: NaN, requiredMarginFt: 4.199999999999999, ratio: NaN, pass: false, severity: "adequate", note: null }
-- an available head of infinity: { marginFt: Infinity, requiredMarginFt: 4.199999999999999, ratio: Infinity, pass: true, severity: "adequate", note: null }
-Read the severity on those two rows. The first reports "adequate" beside pass false, and the second reports "adequate" beside pass TRUE. Neither comparison in the severity ternary is true for a value that is not a number, so both fall to the last branch. FINDINGS P1.
+- an available head that is not a number: { error: "the margin check needs a finite available NPSH: there is no verdict to give on a suction head that cannot be read" }
+- an available head of infinity: { error: "the margin check needs a finite available NPSH: there is no verdict to give on a suction head that cannot be read" }
+A verdict needs an input. The available head is the whole of what this function judges, so an unreadable one is refused rather than classified: there is no severity to report and no pass flag to set, and the refusal says which of the two inputs it could not read.
 
-# HELD FOR LITERATURE, taught as a limit and never graded: the margin rule itself, the larger of 3 ft and 35 percent of required. It is customary and this repository holds no publication for it, so no graded value in this course is a required margin, a pass flag or a severity. The module's own header states the rule differently from its code, which is FINDINGS G7.
+THE RULE IS A MARGIN RULE, and both halves of its maximum are MEASURED out of the engine rather than typed, and so is the required NPSH where they change places:
+- the floor, from the required margin at a required NPSH small enough that the percentage cannot reach it: 3.000000000 ft
+- the fraction, from the required margin at a required NPSH large enough that the floor cannot reach it, divided by that required NPSH: 0.350000000
+- the required NPSH where the two are equal, found by halving until the engine's own answer leaves the floor: 8.571428571 ft (engine, by bisection on its own return)
+- and the quotient of the first two, which is the same figure by a different route: 8.571428571 ft (derived from the two rows above)
+| required NPSH ft | required margin the engine applies ft | the half that bound | the available head that exactly satisfies it ft | the ratio there |
+| --- | --- | --- | --- | --- |
+| 4.000000 | 3.000000 | the floor | 7.000000 | 1.750000000 |
+| 16.000000 | 5.600000 | the fraction | 21.600000 | 1.350000000 |
+| 12.000000 | 4.200000 | the fraction | 16.200000 | 1.350000000 |
+| 30.000000 | 10.500000 | the fraction | 40.500000 | 1.350000000 |
+A MARGIN RULE AND A RATIO RULE ARE NOT THE SAME RULE, and the last column is where the difference shows. On the rows where the fraction binds, the ratio at the boundary is the same number on each of them, so a reader could mistake the margin rule for a rule on that ratio and never notice. On the row where the floor binds it is a different number, and the next line measures how different.
+Read the two governed rows against each other: at a required NPSH of 16.000000 ft the boundary ratio is 1.350000000 and at 4.000000 ft it is 1.750000000, a difference of 0.3999999999999999 (derived from the two figures on this line).
+# HELD FOR LITERATURE, taught as a limit and never graded: the margin rule itself, the larger of the 3.000000000 ft floor and the 0.350000000 fraction measured above. It is customary and this repository holds no publication for it, so no graded value in this course is a required margin, a pass flag or a severity.
 
 # SECTION 8: A speed change and a trim are not the same thing (owned by Professional m03)
 
 Both are asked at the OKONO duty of 1234.452969 gpm, 417.801018 ft and 183.041884 brake hp.
 
 A speed change, which follows the affinity laws exactly for a geometrically similar machine:
-| speed ratio | flow gpm | head ft | brake hp | head over the base head | power over the base power |
-| --- | --- | --- | --- | --- | --- |
-| 0.700000 | 864.117078 | 204.722499 | 62.783366 | 0.490000000 | 0.343000000 |
-| 0.800000 | 987.562375 | 267.392652 | 93.717444 | 0.640000000 | 0.512000000 |
-| 0.900000 | 1111.007672 | 338.418825 | 133.437533 | 0.810000000 | 0.729000000 |
-| 1.000000 | 1234.452969 | 417.801018 | 183.041884 | 1.000000000 | 1.000000000 |
-| 1.100000 | 1357.898266 | 505.539232 | 243.628747 | 1.210000000 | 1.331000000 |
-The last two columns are derived on each row. They are the speed ratio squared and cubed, and the engine applies both exactly.
+| speed ratio | flow gpm | head ft | brake hp | head over the base head | less the ratio squared | power over the base power | less the ratio cubed | warned |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0.700000 | 864.117078 | 204.722499 | 62.783366 | 0.490000000 | 5.551115123125783e-17 | 0.343000000 | 0 | false |
+| 0.800000 | 987.562375 | 267.392652 | 93.717444 | 0.640000000 | 0 | 0.512000000 | 0 | false |
+| 0.900000 | 1111.007672 | 338.418825 | 133.437533 | 0.810000000 | 0 | 0.729000000 | 1.1102230246251565e-16 | false |
+| 1.000000 | 1234.452969 | 417.801018 | 183.041884 | 1.000000000 | 0 | 1.000000000 | 0 | false |
+| 1.100000 | 1357.898266 | 505.539232 | 243.628747 | 1.210000000 | 0 | 1.331000000 | 0 | false |
+The four quotient and difference columns are derived on each row. The two difference columns are what "exactly" means here: the head quotient against the speed ratio squared and the power quotient against it cubed, subtracted rather than described.
+
+THE LAWS ARE EXACT AND THE MACHINE IS NOT, so the engine carries a band it will report a ratio without comment over. Its two ends are measured by walking the ratio until the warning changes state:
+- the lower end, walked up from a ratio of 0.010000: 0.500000000000
+- the upper end, walked down from a ratio of 5.000000: 1.500000000000
+- at a ratio of 100.000000 the laws still apply, and the engine still applies them: 123445.296915 gpm, 4178010.181407 ft, 183041883.582474 brake hp, with "a speed ratio of 100 is far outside the range over which the affinity laws describe a real machine: the power leg goes as the cube, so this is an extrapolation on the number that sizes the driver"
+That band is a SANITY BOUND and not a published correlation limit. No publication in this repository says where the affinity laws stop describing a real machine, so the two ends above are a judgement about when a reader should be told to think, not a measurement of where the physics fails. It is warned on and never used to refuse, and nothing computed from it decides a value.
 
 An impeller trim, which does not:
-| trim ratio | trim percent | ideal flow gpm | real flow gpm | ideal head ft | real head ft | shortfall percent | brake hp | warning |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1.000000 | 0.000000 | 1234.452969 | 1234.452969 | 417.801018 | 417.801018 | 0.000000 | 183.041884 | null |
-| 0.980000 | 2.000000 | 1209.763910 | 1209.763910 | 401.256098 | 401.256098 | 0.000000 | 172.277556 | null |
-| 0.950000 | 5.000000 | 1172.730321 | 1172.730321 | 377.065419 | 377.065419 | 0.000000 | 156.935535 | null |
-| 0.920000 | 8.000000 | 1135.696732 | 1125.475461 | 353.626782 | 347.261500 | 1.800000 | 142.532518 | null |
-| 0.880000 | 12.000000 | 1086.318613 | 1063.505922 | 323.545108 | 309.956214 | 4.200000 | 124.737918 | null |
-| 0.840000 | 16.000000 | 1036.940494 | 1002.721458 | 294.800398 | 275.343572 | 6.600000 | 108.489657 | null |
-| 0.800000 | 20.000000 | 987.562375 | 943.122068 | 267.392652 | 243.327313 | 9.000000 | 93.717444 | null |
-| 0.760000 | 24.000000 | 938.184257 | 884.707754 | 241.321868 | 213.811175 | 11.400000 | 80.350994 | set |
-| 0.700000 | 30.000000 | 864.117078 | 812.270054 | 204.722499 | 180.155799 | 12.000000 | 62.783366 | set |
+| trim ratio | trim percent | ideal flow gpm | real flow gpm | ideal head ft | real head ft | shortfall percent | brake hp | implied efficiency ratio | warning |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1.000000 | 0.000000 | 1234.452969 | 1234.452969 | 417.801018 | 417.801018 | 0.000000 | 183.041884 | 1.000000000 | null |
+| 0.980000 | 2.000000 | 1209.763910 | 1209.763910 | 401.256098 | 401.256098 | 0.000000 | 172.277556 | 1.000000000 | null |
+| 0.950000 | 5.000000 | 1172.730321 | 1172.730321 | 377.065419 | 377.065419 | 0.000000 | 156.935535 | 1.000000000 | null |
+| 0.920000 | 8.000000 | 1135.696732 | 1125.475461 | 353.626782 | 347.261500 | 1.800000 | 142.532518 | 0.973162000 | null |
+| 0.880000 | 12.000000 | 1086.318613 | 1063.505922 | 323.545108 | 309.956214 | 4.200000 | 124.737918 | 0.937882000 | null |
+| 0.840000 | 16.000000 | 1036.940494 | 1002.721458 | 294.800398 | 275.343572 | 6.600000 | 108.489657 | 0.903178000 | null |
+| 0.800000 | 20.000000 | 987.562375 | 943.122068 | 267.392652 | 243.327313 | 9.000000 | 93.717444 | 0.869050000 | null |
+| 0.760000 | 24.000000 | 938.184257 | 884.707754 | 241.321868 | 213.811175 | 11.400000 | 80.350994 | 0.835498000 | set |
+| 0.700000 | 30.000000 | 864.117078 | 812.270054 | 204.722499 | 180.155799 | 12.000000 | 62.783366 | 0.827200000 | set |
 
 The warning, in full, at the trim where it first fires and at a deep one:
 - at a trim ratio of 0.799900: "a 20.0 percent trim is beyond what most casings tolerate: efficiency falls away and the vendor limit usually sits near 20 percent"
@@ -283,30 +349,44 @@ The warning, in full, at the trim where it first fires and at a deep one:
 - at a trim ratio of 0.800000, trim percent 20.000000: warning null. The threshold is exclusive, so the vendor limit itself does not warn.
 
 The two boundaries the trim rule turns on, with the value either side:
-- where the shortfall is meant to begin, trim ratio 0.950000: trim percent 5.000000000000004, shortfall percent 2.6645352591003757e-15
+- where the shortfall is meant to begin, trim ratio 0.950000: trim percent 5.000000000000004, shortfall percent 0
 - one ten-thousandth past it, trim ratio 0.949900: trim percent 5.010000000000003, shortfall percent 0.006000000000002004
 - where the shortfall reaches its cap, trim ratio 0.750000: trim percent 25, shortfall percent 12
 - far past the cap, trim ratio 0.550000: trim percent 44.99999999999999, shortfall percent 12
-The first of those four is the finding. A trim ratio of 0.95 is meant to be exactly five percent and to carry no shortfall, and the subtraction in binary floating point puts the trim percent just above five, so a shortfall appears. FINDINGS F8, which is FC1's floor-comparison lesson in a second module.
+Read the first of those four twice, because it is where binary floating point meets a rule written in decimal. A trim ratio of 0.950000 is meant to be exactly five percent and the rule says five percent carries no shortfall; the subtraction puts the trim percent at 5.000000000000004, which is above five by 4.440892098500626e-15 (derived from the two figures on this line). The shortfall percent on that row is nevertheless 0, so the comparison is carrying a slack.
+The slack is MEASURED by halving the trim ratio until the shortfall leaves zero: the last ratio with no shortfall gives a trim percent of 5.000000000999993 and the first with one gives 5.0000000010000045, so the boundary the engine really applies sits 1.0000045236324695e-9 above five percent (derived from those two figures). The rule is written in whole percent and the value it is compared against is not one, and that gap is what the slack spans.
+The warning boundary carries the same slack: at a trim ratio of 0.800000 the trim percent is 19.999999999999996 and the warning is null.
 
-The power leg of a trim is the ideal cube law while the head and flow legs are both de-rated. At a trim ratio of 0.750000 the flow is 0.940000000 of ideal and the head is 0.880000000 of ideal (both derived on this line from the columns above), so the product of the two is 0.827200000 while the brake power is 1.000000000 of the ideal cube. FINDINGS P5.
+The power leg of a trim is the IDEAL CUBE while the head and flow legs are both de-rated, so the return implies an efficiency change. At a trim ratio of 0.750000 the flow is 0.940000000 of ideal and the head is 0.880000000 of ideal (both derived on this line from the columns above), so the product of the two is 0.827200000 while the brake power is 1.000000000 of the ideal cube.
+That implied ratio is RETURNED rather than left to be discovered by division: the engine reports impliedEfficiencyRatio = 0.827200000 on that row, against the 0.827200000 derived above, a difference of -1.1102230246251565e-16 (derived from the two figures on this line).
+The power leg is LEFT as the ideal cube on purpose. The shortfall model has no publication in this repository, so de-rating the power here would be inventing a second unsourced model on top of the first. What the engine owes the reader is the arithmetic it actually did, and that is what the field carries.
 
 # HELD FOR LITERATURE, taught as a limit and never graded: the trim shortfall model, zero at or under five percent and then 0.006 per further percent, capped at 0.12, applied whole to head and half to flow. The engine's own comment calls it "the published shortfall" and names no publication, so no graded value in this course is a trimmed flow, head or shortfall. The speed law above is NOT held: it is the affinity law and it is exact.
 
 # SECTION 9: An affinity law applied to a duty point is not a new duty point (owned by Professional m04)
 
-# App surface, and this is a live disagreement rather than a teaching device. The Pump Station Designer draws its chart and its duty headline from a scaled CURVE re-intersected with the system, and prints the engine's impellerTrim and speedChange applied to the UNTRIMMED duty in a card headed "What a change would buy" on the next tab. Both are on screen at once.
-The rows below reproduce the studio's own composition over the vendored engine: the curve is scaled the way the context scales it and the duty is re-solved with dutyPoint, against the engine's own one-point law.
+# App surface. The Pump Station Designer draws its chart and its duty headline from a scaled CURVE re-intersected with the system, and it also shows where the old duty point lands on that new curve, in a card headed "What a change would buy". Those are two different questions and the studio labels them as two: the crossing is the operating point, and the affinity map is where the machine you had ends up on the machine you now have.
+The rows below reproduce that composition over the vendored engine. The scaling factors are READ OUT OF THE ENGINE at a unit duty rather than restated here, which is the same thing the studio does and is what keeps the curve and the point from drifting apart when the engine moves.
+
+The factors themselves, at a unit duty, so the scaling above is on the page rather than behind it:
+| speed ratio | trim ratio | flow factor | head factor |
+| --- | --- | --- | --- |
+| 1.000000 | 1.000000 | 1.000000000 | 1.000000000 |
+| 1.000000 | 0.950000 | 0.950000000 | 0.902500000 |
+| 1.000000 | 0.800000 | 0.764000000 | 0.582400000 |
+| 1.100000 | 1.000000 | 1.100000000 | 1.210000000 |
+| 0.800000 | 1.000000 | 0.800000000 | 0.640000000 |
+| 1.100000 | 0.900000 | 0.975150000 | 0.950697000 |
 
 A trim, both ways:
 | trim ratio | re-solved flow gpm | re-solved head ft | one-point flow gpm | one-point head ft | flow quotient | head quotient |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1.000000 | 1234.452969 | 417.801018 | 1234.452969 | 417.801018 | 1.000000000 | 1.000000000 |
 | 0.950000 | 1131.756344 | 384.664421 | 1172.730321 | 377.065419 | 1.036203885 | 0.980245113 |
-| 0.900000 | 1000.453559 | 346.487362 | 1094.342557 | 328.266260 | 1.093846433 | 0.947411928 |
-| 0.850000 | 860.630790 | 311.002549 | 1017.806473 | 283.749561 | 1.182628469 | 0.912370534 |
-| 0.800000 | 706.912009 | 278.144262 | 943.122068 | 243.327313 | 1.334143510 | 0.874824133 |
-| 0.750000 | 526.796197 | 247.842850 | 870.289343 | 206.811504 | 1.652041810 | 0.834446118 |
+| 0.900000 | 994.911823 | 344.979482 | 1094.342557 | 328.266260 | 1.099939243 | 0.951552997 |
+| 0.850000 | 851.147837 | 308.788996 | 1017.806473 | 283.749561 | 1.195804570 | 0.918910857 |
+| 0.800000 | 695.297235 | 275.923397 | 943.122068 | 243.327313 | 1.356430057 | 0.881865458 |
+| 0.750000 | 515.331652 | 246.213642 | 870.289343 | 206.811504 | 1.688794663 | 0.839967688 |
 The last two columns are derived on each row as the one-point answer over the re-solved answer.
 
 A speed change, both ways:
@@ -318,7 +398,8 @@ A speed change, both ways:
 | 1.000000 | 1234.452969 | 417.801018 | 1234.452969 | 417.801018 | 1.000000000 | 1.000000000 |
 | 1.100000 | 1430.823522 | 489.171266 | 1357.898266 | 505.539232 | 0.949032669 | 1.033460604 |
 
-Read the trim ratio of 0.950000 row, where the shortfall model contributes nothing (its shortfall percent is 2.6645352591003757e-15). The two answers are still 1131.756344 gpm and 1172.730321 gpm, a quotient of 1.036203885. The gap there is not the shortfall model. It is that the system curve did not move when the machine changed, so the machine meets it somewhere else, and an affinity law applied to the old duty point does not know that. FINDINGS S1.
+Read the trim ratio of 0.950000 row, where the shortfall model contributes nothing (its shortfall percent is 0). The two answers are still 1131.756344 gpm and 1172.730321 gpm, a quotient of 1.036203885. The gap there is not the shortfall model. It is that the system curve did not move when the machine changed, so the machine meets it somewhere else, and an affinity law applied to the old duty point does not know that.
+And the affinity map does lie ON the new curve, which is the other half of the same statement: at the trim ratio of 0.950000 the one-point answer is 1172.730321 gpm at 377.065419 ft, and the scaled curve read at that flow gives 377.065419 ft, a difference of 0 ft (derived from the two figures on this line). It is a point on the machine you now have; it is simply not where that machine will run.
 
 # SECTION 10: Two pumps, and a catalogue curve that is a water curve (owned by Professional m05)
 
@@ -338,14 +419,15 @@ The same machines in series, which add head at equal flow instead:
 | 2 | 1465.998506 | 734.940178 | 1.661125814 |
 | 3 | 1676.470978 | 942.653617 | 2.130603693 |
 A series stack reads back exactly: at 1000.000000 gpm one machine makes 459.953894 ft and three in series make 1379.861681 ft (engine), a quotient of 3.000000000 (derived from the two figures on this line).
-The count is guarded as at least one and not as a whole number: two and a half machines in parallel returns a curve, and it reads 527.456393 ft at 1000.000000 gpm. FINDINGS G6.
+A COUNT IS A NUMBER OF MACHINES, so it is guarded as a whole number and not merely as one or more: { error: "parallel operation needs a pump curve and a whole number of machines, at least one" }, and in series { error: "series operation needs a pump curve and a whole number of machines, at least one" }. Two and a half pumps is a question with no answer, and a curve returned for it would be an answer to it.
+Both combinations also carry the droop of the curve they were built from, so a stack of machines refuses a duty point for the same reason one machine does: { error: "this curve does not fall with flow, so it is not a centrifugal head curve and its crossing with a system curve is not a duty point: check the catalogue points" }
 
 A CATALOGUE CURVE IS A WATER CURVE. The Hydraulic Institute correction on the OKONO best efficiency point:
 - best efficiency flow 1150.000000 gpm, best efficiency head 430.000000 ft, 1780.000000 rpm
 | viscosity cSt | B | flow factor | head factor | efficiency factor | corrected flow gpm | corrected head ft | note or warning |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1.000000 | 0.000000000 | 1.000000000 | 1.000000000 | 1.000000000 | absent | absent | note: at water viscosity there is nothing to correct |
-| 5.000000 | 0.951900876 | 1.000000000 | 1.000000000 | 1.000000000 | absent | absent | note: B at or below 1: no correction applies |
+| 1.000000 | 0.425703013 | 1.000000000 | 1.000000000 | 1.000000000 | 1150.000000 | 430.000000 | note: at water viscosity there is nothing to correct |
+| 5.000000 | 0.951900876 | 1.000000000 | 1.000000000 | 1.000000000 | 1150.000000 | 430.000000 | note: B at or below 1: no correction applies |
 | 20.000000 | 1.903801752 | 0.997024668 | 0.997024668 | 0.946562979 | 1146.578368 | 428.720607 | null |
 | 60.000000 | 3.297481363 | 0.979412912 | 0.979412912 | 0.861851087 | 1126.324848 | 421.147552 | null |
 | 100.000000 | 4.257030134 | 0.962401519 | 0.962401519 | 0.806312723 | 1106.761747 | 413.832653 | null |
@@ -358,8 +440,8 @@ The two warnings, in full:
 - at 850.000000 cSt: "the efficiency correction is 45.7 percent: a centrifugal pump is a poor choice for a fluid this viscous"
 - at 9000.000000 cSt: "B above 40 is outside the published correlation: this service needs a positive-displacement pump or vendor viscous test data, not a corrected centrifugal curve"
 
-Two rows worth reading against each other. At 1.000000 cSt the engine reports B = 0.000000000; at 1.000001 cSt, a millionth higher, it reports B = 0.425703226. The first is a sentinel and not the value of the parameter there. FINDINGS G3.
-The RETURN SHAPE also changes between branches, and the table above shows where. The corrected flow and head are absent on the water row, absent on the row a millionth above it, and present on a corrected row. So a caller reading the corrected flow gets undefined on exactly the cases where the answer is the catalogue value unchanged.
+Two rows worth reading against each other. At 1.000000 cSt the engine reports B = 0.425703013; at 1.000001 cSt, a millionth higher, it reports B = 0.425703226, a difference of 2.1285145351823687e-7 (derived from the two figures on this line). The correlating parameter is a real positive number at water viscosity and the engine reports it there, on the branch where it then applies no correction at all. B is what says how far from water the fluid is; the decision not to correct is a separate statement, and it is carried by the note.
+THE RETURN SHAPE IS THE SAME ON EVERY BRANCH, and the table above shows it. The corrected flow and head are present on the water row, present on the row a millionth above it, and present on a corrected row. On the two no-correction branches they are the catalogue values themselves: at 1.000000 cSt the corrected flow is 1150.000000 gpm against a stated best efficiency flow of 1150.000000 gpm, a difference of 0 gpm (derived from the two figures on this line). "The catalogue values, unchanged" is an answer, and it is returned as one.
 
 # HELD FOR LITERATURE, taught as a limit and never graded: the whole Hydraulic Institute correction. B, the flow factor, the head factor and the efficiency factor are an empirical correlation with no publication in this repository, and the head factor is taken equal to the flow factor at best efficiency, which is a further simplification of the standard. This wave's oracle checks the arithmetic at sixty digits, the closed-form inverse of the flow factor and the monotonicity both factors must have, and that is arithmetic evidence only. No graded value in this course is a corrected flow, head or efficiency.
 
@@ -372,14 +454,25 @@ The SOKU K-2101 stage: 26.000000 MMscfd of a 0.648000 gravity gas at 92.000000 p
 - the same function at an efficiency of one, which is the isentropic exponent ratio: 0.221789883 (engine)
 - their quotient: 1.324503311 (derived from the two rows above), which is one over the polytropic efficiency
 - discharge pressure 294.4000 psia, discharge temperature 333.5954 degF (engine)
-- the discharge temperature the ISENTROPIC exponent would have predicted: 269.8918 degF (engine, through the same function at an efficiency of one), which is 63.7036 degF below the real one (derived from the two figures on this line)
+- the discharge temperature the ISENTROPIC exponent would have predicted: 269.8918 degF (engine, through the same function at an efficiency of one, brought to Fahrenheit by the Rankine offset gasProperties.js exports), which is 63.7036 degF below the real one (derived from the two figures on this line)
 - compressibility at suction 0.987732307, at discharge 0.988949105, averaged 0.988340706 (engine). The two ends differ by 0.001216798 (derived), which is why the average is taken rather than the suction value carried through.
-- mass flow 53576.3129 lb per hr (engine)
-- polytropic head 63604.9006 ft lbf per lbm, isentropic head 60870.2867 ft lbf per lbm (engine); their quotient 0.957006239 (derived)
+- mass flow 53577.2205 lb per hr (engine)
+- polytropic head 63604.9582 ft lbf per lbm, isentropic head 60870.3418 ft lbf per lbm (engine); their quotient 0.957006239 (derived)
 - polytropic efficiency 0.755000000, isentropic efficiency 0.722539710 (engine); the isentropic one is lower by 0.032460290 (derived)
-- gas horsepower by the polytropic route 2279.5612, by the isentropic route 2279.5612 (engine); difference 0 hp (derived)
-- brake horsepower 2354.9186 at a mechanical efficiency of 0.968000 (engine)
-- warning: "discharge at 333.6 F: above about 300 F the valves and the lube oil become the limit, not the thermodynamics"
+- gas horsepower by the polytropic route 2279.6019, by the isentropic route 2279.6019 (engine); difference -9.094947017729282e-13 hp (derived)
+- brake horsepower 2354.9606 at a mechanical efficiency of 0.968000 (engine)
+- compressibility note: "Ppr 0.137 against 0.2 at 92 psia and 104 F is below the 0.2 where the DAK fit data start; the z-factor here runs toward the ideal-gas limit"
+- warning: "discharge at 333.6 F is above the stated limit of 300.0 F: the valves and the lube oil become the limit, not the thermodynamics"
+
+THE HOT-STAGE WARNING FIRES ON THE LIMIT THE CALLER STATED, not on a threshold written into the module. The same stage against four different stated limits, everything else held:
+| stated limit degF | discharge degF | warned | the warning |
+| --- | --- | --- | --- |
+| 200.0000 | 333.5954 | true | "discharge at 333.6 F is above the stated limit of 200.0 F: the valves and the lube oil become the limit, not the thermodynamics" |
+| 250.0000 | 333.5954 | true | "discharge at 333.6 F is above the stated limit of 250.0 F: the valves and the lube oil become the limit, not the thermodynamics" |
+| 300.0000 | 333.5954 | true | "discharge at 333.6 F is above the stated limit of 300.0 F: the valves and the lube oil become the limit, not the thermodynamics" |
+| 400.0000 | 333.5954 | false | null |
+The discharge on all four rows is the same 333.5954 degF, because the limit is a limit and not an input to the thermodynamics.
+THE DEFAULT IS MEASURED, not typed. With no limit stated the warning turns on between a ratio of 2.7616873004480746 and 2.761687300448075, and the discharge temperatures either side of that crossing are 299.99999999999994 and 300.00000000000006 degF (engine), which brackets the default the engine applies when the caller states none. That default is a customary figure with no publication behind it in this repository.
 
 THE TWO POWER ROUTES AGREE BECAUSE THEY ARE THE SAME EXPRESSION, which is worth showing rather than admiring. The exponent ratio times the polytropic efficiency is the isentropic exponent ratio, exactly, for every pair:
 | k | polytropic efficiency | exponent ratio | times the efficiency | the isentropic exponent ratio | difference |
@@ -388,41 +481,44 @@ THE TWO POWER ROUTES AGREE BECAUSE THEY ARE THE SAME EXPRESSION, which is worth 
 | 1.260000 | 0.780000 | 0.264550265 | 0.20634920634920634 | 0.20634920634920637 | -2.7755575615628914e-17 |
 | 1.300000 | 0.720000 | 0.320512821 | 0.2307692307692308 | 0.23076923076923078 | 2.7755575615628914e-17 |
 | 1.400000 | 0.820000 | 0.348432056 | 0.2857142857142857 | 0.28571428571428564 | 5.551115123125783e-17 |
-The last column is derived on each row. Because that identity holds, dividing the isentropic head by the isentropic efficiency and dividing the polytropic head by the polytropic efficiency are one expression, so the two horsepower figures above cannot disagree for any input at all. The engine's own gate calls their agreement its strongest available check. FINDINGS G1.
+The last column is derived on each row. Because that identity holds, dividing the isentropic head by the isentropic efficiency and dividing the polytropic head by the polytropic efficiency are one expression, so the two horsepower figures above cannot disagree for any input at all.
+A COMPARISON THAT CANNOT COME OUT FALSE IS NOT A CHECK. The engine's gate used to call the agreement of those two routes its strongest available check that neither head is transcribed wrong; it is an algebraic identity, it holds for every input including a transcribed one, and it validated nothing. It is kept, labelled as the shape property it is, and the real check is a numerical quadrature of the integral of v dp along the polytropic path with a negative control that moves the exponent and must break the comparison.
+The same rule applies to every gate a reader will meet: ask what input would make it fail, and if there is none, it is a restatement of the formula and not a test of it.
 
 The exponent, the discharge and the head against the polytropic efficiency, everything else held:
 | polytropic efficiency | exponent ratio | discharge degF | polytropic head ft lbf per lbm | gas hp |
 | --- | --- | --- | --- | --- |
-| 0.650000 | 0.341215205 | 378.6113 | 65574.2801 | 2729.7810 |
-| 0.700000 | 0.316842690 | 355.1806 | 64554.8682 | 2495.3909 |
-| 0.750000 | 0.295719844 | 335.4044 | 63684.9334 | 2297.6457 |
-| 0.780000 | 0.284346004 | 324.9553 | 63221.5810 | 2193.2007 |
-| 0.820000 | 0.270475467 | 312.3981 | 62661.2155 | 2067.7241 |
-| 0.860000 | 0.257895213 | 301.1829 | 62157.3570 | 1955.6977 |
+| 0.650000 | 0.341215205 | 378.6113 | 65574.3395 | 2729.8297 |
+| 0.700000 | 0.316842690 | 355.1806 | 64554.9267 | 2495.4355 |
+| 0.750000 | 0.295719844 | 335.4044 | 63684.9911 | 2297.6867 |
+| 0.780000 | 0.284346004 | 324.9553 | 63221.6383 | 2193.2399 |
+| 0.820000 | 0.270475467 | 312.3981 | 62661.2723 | 2067.7610 |
+| 0.860000 | 0.257895213 | 301.1829 | 62157.4133 | 1955.7326 |
 
 And against k, which is what a richer gas changes:
 | k | exponent ratio | discharge degF | polytropic head ft lbf per lbm | gas hp |
 | --- | --- | --- | --- | --- |
-| 1.200000 | 0.220750552 | 269.0103 | 60693.1672 | 2175.2064 |
-| 1.240000 | 0.256355480 | 299.8214 | 62095.9704 | 2225.4821 |
-| 1.280000 | 0.289735099 | 329.8890 | 63440.6874 | 2273.6759 |
-| 1.320000 | 0.321091712 | 359.2178 | 64731.3686 | 2319.9331 |
-| 1.400000 | 0.378429518 | 415.6938 | 67164.3949 | 2407.1313 |
+| 1.200000 | 0.220750552 | 269.0103 | 60693.2222 | 2175.2453 |
+| 1.240000 | 0.256355480 | 299.8214 | 62096.0266 | 2225.5218 |
+| 1.280000 | 0.289735099 | 329.8890 | 63440.7448 | 2273.7165 |
+| 1.320000 | 0.321091712 | 359.2178 | 64731.4272 | 2319.9745 |
+| 1.400000 | 0.378429518 | 415.6938 | 67164.4557 | 2407.1743 |
 
 And against the ratio the stage is asked to take:
 | ratio | discharge psia | discharge degF | polytropic head ft lbf per lbm | gas hp | warning |
 | --- | --- | --- | --- | --- | --- |
-| 1.500000 | 138.0000 | 175.3008 | 19739.9790 | 707.4689 | null |
-| 2.000000 | 184.0000 | 231.2948 | 35245.9140 | 1263.1923 | null |
-| 2.500000 | 230.0000 | 278.1057 | 48215.9416 | 1728.0302 | null |
-| 3.000000 | 276.0000 | 318.6976 | 59471.3891 | 2131.4187 | set |
-| 3.500000 | 322.0000 | 354.7551 | 69478.6863 | 2490.0741 | set |
-| 4.000000 | 368.0000 | 387.3369 | 78530.7585 | 2814.4949 | set |
-| 4.500000 | 414.0000 | 417.1563 | 86824.8176 | 3111.7490 | set |
+| 1.500000 | 138.0000 | 175.3008 | 19739.9969 | 707.4815 | null |
+| 2.000000 | 184.0000 | 231.2948 | 35245.9460 | 1263.2148 | null |
+| 2.500000 | 230.0000 | 278.1057 | 48215.9853 | 1728.0611 | null |
+| 3.000000 | 276.0000 | 318.6976 | 59471.4430 | 2131.4567 | set |
+| 3.500000 | 322.0000 | 354.7551 | 69478.7492 | 2490.1186 | set |
+| 4.000000 | 368.0000 | 387.3369 | 78530.8297 | 2814.5452 | set |
+| 4.500000 | 414.0000 | 417.1563 | 86824.8963 | 3111.8045 | set |
 
 # SECTION 12: The stage count, and the limit that governs (owned by Expert m02)
 
 SOKU as a whole duty: 26.000000 MMscfd from 92.000000 psia to 985.000000 psia at 104.0000 degF, with a per-stage ratio limit of 4.000000 and a discharge limit of 300.0000 degF.
+The count is chosen against the temperature the stages will ACTUALLY see. A single stage starts from the suction and is never cooled; every stage after the first starts from the interstage approach, so the inlet a trial count must be tested at is the suction for one stage and the hotter of the suction and the cooled temperature for more than one. This duty cools back to 110.0000 degF against a suction of 104.0000 degF.
 - overall ratio 10.706521739 (engine)
 - stages the ratio rule demands: 2 (engine)
 - stages the temperature limit demands: 3 (engine)
@@ -430,173 +526,214 @@ SOKU as a whole duty: 26.000000 MMscfd from 92.000000 psia to 985.000000 psia at
 - ratio per stage: 2.204023061 (engine)
 
 Across a range of discharge pressures, which is the sweep the studio's third tab draws:
-| discharge psia | overall ratio | by ratio | by temperature | stages | governed by | ratio per stage | brake hp | hottest stage degF | over the stated limit degF | cooling MMBtu per hr | fuel MMscfd |
+| discharge psia | overall ratio | by ratio | by temperature | stages | governed by | ratio per stage | brake hp | hottest stage degF | the stated limit less the hottest degF | cooling MMBtu per hr | fuel MMscfd |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 300.000000 | 3.260869565 | 1 | 2 | 2 | discharge temperature | 1.805787796 | 2192.7465 | 218.0060 | -81.9940 | 2.9723 | 0.432761334 |
-| 450.000000 | 4.891304348 | 2 | 2 | 2 | both equally | 2.211629342 | 3030.8178 | 259.5910 | -40.4090 | 4.1848 | 0.598163440 |
-| 600.000000 | 6.521739130 | 2 | 2 | 2 | both equally | 2.553769592 | 3654.3248 | 290.6346 | -9.3654 | 5.0899 | 0.721219025 |
-| 800.000000 | 8.695652174 | 2 | 3 | 3 | discharge temperature | 2.056367445 | 4054.2267 | 244.3748 | -55.6252 | 7.7007 | 0.800143821 |
-| 985.000000 | 10.706521739 | 2 | 3 | 3 | discharge temperature | 2.204023061 | 4480.9826 | 258.8635 | -41.1365 | 8.5501 | 0.884368549 |
-| 1200.000000 | 13.043478261 | 2 | 3 | 3 | discharge temperature | 2.353953103 | 4892.4024 | 272.8900 | -27.1100 | 9.3724 | 0.965566523 |
-| 1500.000000 | 16.304347826 | 3 | 3 | 3 | both equally | 2.535719112 | 5365.8192 | 289.0728 | -10.9272 | 10.3211 | 1.059000255 |
-| 1900.000000 | 20.652173913 | 3 | 3 | 3 | both equally | 2.743607141 | 5879.1112 | 306.6064 | 6.6064 | 11.3490 | 1.160303765 |
-| 2400.000000 | 26.086956522 | 3 | 4 | 4 | discharge temperature | 2.259986545 | 6085.0033 | 264.1757 | -35.8243 | 13.4046 | 1.200938713 |
+| 300.000000 | 3.260869565 | 1 | 2 | 2 | discharge temperature | 1.805787796 | 2192.7856 | 218.0060 | 81.9940 | 2.9723 | 0.432769057 |
+| 450.000000 | 4.891304348 | 2 | 2 | 2 | both equally | 2.211629342 | 3030.8719 | 259.5910 | 40.4090 | 4.1848 | 0.598174115 |
+| 600.000000 | 6.521739130 | 2 | 2 | 2 | both equally | 2.553769592 | 3654.3900 | 290.6346 | 9.3654 | 5.0900 | 0.721231896 |
+| 800.000000 | 8.695652174 | 2 | 3 | 3 | discharge temperature | 2.056367445 | 4054.2990 | 244.3748 | 55.6252 | 7.7009 | 0.800158099 |
+| 985.000000 | 10.706521739 | 2 | 3 | 3 | discharge temperature | 2.204023061 | 4481.0626 | 258.8635 | 41.1365 | 8.5503 | 0.884384331 |
+| 1200.000000 | 13.043478261 | 2 | 3 | 3 | discharge temperature | 2.353953103 | 4892.4897 | 272.8900 | 27.1100 | 9.3726 | 0.965583754 |
+| 1500.000000 | 16.304347826 | 3 | 3 | 3 | both equally | 2.535719112 | 5365.9149 | 289.0728 | 10.9272 | 10.3213 | 1.059019153 |
+| 1900.000000 | 20.652173913 | 3 | 4 | 4 | discharge temperature | 2.131775386 | 5615.9251 | 251.8628 | 48.1372 | 12.3202 | 1.108361261 |
+| 2400.000000 | 26.086956522 | 3 | 4 | 4 | discharge temperature | 2.259986545 | 6085.1118 | 264.1757 | 35.8243 | 13.4048 | 1.200960144 |
 Power climbs smoothly along that table and the stage count climbs in steps, and each step is a machine, a cooler and a foundation.
-The second-to-last column is derived on each row as the hottest stage less the stated limit of 300.0000 degF. 1 of the 9 rows comes out ABOVE that limit, on a duty whose intercooler approach of 110.0000 degF sits above its suction of 104.0000 degF. Section 13 is about why.
+The tenth column is derived on each row as the stated limit of 300.0000 degF less the hottest stage, so a NEGATIVE entry there is a train running over the limit it was staged against. 0 of the 9 rows do that, on a duty whose intercooler approach of 110.0000 degF sits ABOVE its suction of 104.0000 degF, which is the condition under which the count and the train could disagree at all. Section 13 walks that approach across the suction and keeps the column non-negative the whole way.
 
-The search for the temperature-driven count runs from one stage to twelve and refuses past it: { error: "no practical stage count keeps the discharge temperature under the limit: intercool harder, or check k and the suction temperature" }
-Section 15 shows four different faults that produce that identical sentence, only one of which is about temperature.
+The search for the temperature-driven count runs from one stage to twelve and refuses past it. That refusal is hard to reach, because every cheaper explanation is caught at the door first: it needs a discharge limit above the suction temperature (110.0000 degF against 100.0000 degF here), a readable efficiency and a workable ratio limit, and an overall ratio large enough that twelve equal stages are still too hot. { error: "no practical stage count keeps the discharge temperature under the limit: 12 equal stages still reach 318.0 F against a stated limit of 110.0 F, from an inlet of 100.0 F" }
+A REFUSAL CARRIES ITS EVIDENCE, because the diagnosis has to survive it. That return also holds:
+- the stage counts tried: 12 (engine)
+- the coolest discharge those twelve equal stages could reach: 317.9889 degF (engine)
+- the limit it was measured against: 110.0000 degF (engine)
+- the inlet it was measured from: 100.0000 degF (engine)
+- the overall ratio it was working on: 1000.000000000 (engine)
+The gap between the coolest reachable discharge and the stated limit is 207.9889 degF (derived from the two rows above), which is what tells a reader whether it is the approach or the limit that is impossible rather than sending them off to intercool harder.
+That sentence used to be the answer to four unrelated faults as well as this one. Section 15 shows each of those four refused by name instead.
 
 # SECTION 13: The train, its cooling, and the limit it can break (owned by Expert m03)
 
 SOKU as a train, cooled back to 110.0000 degF between stages against a suction of 104.0000 degF:
 | stage | suction psia | discharge psia | in degF | out degF | ratio | z average | polytropic head ft lbf per lbm | gas hp | brake hp | cooling Btu per hr | cooled to degF | warning |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 92.0000 | 202.7701 | 104.0000 | 251.2956 | 2.204023061 | 0.987885118 | 40786.5476 | 1461.7652 | 1510.0880 | 4163553.3747 | 110.0000 | null |
-| 2 | 202.7701 | 446.9100 | 110.0000 | 258.8635 | 2.204023061 | 0.974896675 | 40678.7426 | 1457.9016 | 1506.0967 | 4386556.2315 | 110.0000 | null |
-| 3 | 446.9100 | 985.0000 | 110.0000 | 258.8635 | 2.204023061 | 0.948163998 | 39563.2893 | 1417.9244 | 1464.7979 | 0.0000 | null | null |
-Totals: gas 4337.5912 hp, brake 4480.9826 hp, cooling 8550109.6061 Btu per hr which is 8.5501 MMBtu per hr, final discharge 258.8635 degF (engine).
-The stated discharge limit is 300.0000 degF and the hottest stage on that table is 258.8635 degF (derived as the maximum of the out column), a difference of -41.1365 degF.
+| 1 | 92.0000 | 202.7701 | 104.0000 | 251.2956 | 2.204023061 | 0.987885118 | 40786.5845 | 1461.7913 | 1510.1150 | 4163623.9019 | 110.0000 | null |
+| 2 | 202.7701 | 446.9100 | 110.0000 | 258.8635 | 2.204023061 | 0.974896675 | 40678.7794 | 1457.9276 | 1506.1235 | 4386630.5362 | 110.0000 | null |
+| 3 | 446.9100 | 985.0000 | 110.0000 | 258.8635 | 2.204023061 | 0.948163998 | 39563.3251 | 1417.9497 | 1464.8241 | 0.0000 | null | null |
+Totals: gas 4337.6686 hp, brake 4481.0626 hp, cooling 8550254.4381 Btu per hr which is 8.5503 MMBtu per hr, final discharge 258.8635 degF (engine).
+The stated discharge limit is 300.0000 degF and the hottest stage on that table is 258.8635 degF (derived as the maximum of the out column), which leaves 41.1365 degF of room (derived from the two figures on this line).
 
-NOW MOVE THE INTERCOOLER APPROACH ACROSS THE SUCTION TEMPERATURE. The stage count is decided using the SUCTION temperature for every stage, and the train then runs every stage after the first from the cooled temperature:
-| cooled to degF | stages | governed by | stage discharges degF | hottest degF | over the stated limit degF | stages over the limit | stages warned |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 90.0000 | 3 | discharge temperature | 251.2956, 233.6372, 233.6372 | 251.2956 | -48.7044 | 0 | 0 |
-| 100.0000 | 3 | discharge temperature | 251.2956, 246.2503, 246.2503 | 251.2956 | -48.7044 | 0 | 0 |
-| 104.0000 | 3 | discharge temperature | 251.2956, 251.2956, 251.2956 | 251.2956 | -48.7044 | 0 | 0 |
-| 110.0000 | 3 | discharge temperature | 251.2956, 258.8635, 258.8635 | 258.8635 | -41.1365 | 0 | 0 |
-| 130.0000 | 3 | discharge temperature | 251.2956, 284.0898, 284.0898 | 284.0898 | -15.9102 | 0 | 0 |
-| 150.0000 | 3 | discharge temperature | 251.2956, 309.3161, 309.3161 | 309.3161 | 9.3161 | 2 | 2 |
-| 180.0000 | 3 | discharge temperature | 251.2956, 347.1556, 347.1556 | 347.1556 | 47.1556 | 2 | 2 |
-The suction temperature on that table is 104.0000 degF and the stated limit is 300.0000 degF. The "over the stated limit" column is derived on each row as the hottest stage less the stated limit.
+NOW MOVE THE INTERCOOLER APPROACH ACROSS THE SUCTION TEMPERATURE. A warmer approach makes every stage after the first start hotter, so at a fixed count it finishes hotter, and the count the temperature limit demands rises once that is no longer affordable. The count and the train are asked the same question about the same inlets, and the table shows both halves of that:
+| cooled to degF | inlet the count was tested at degF | stages | governed by | stage discharges degF | hottest degF | the stated limit less the hottest degF | stages over the limit | stages warned |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 90.0000 | 104.0000 | 3 | discharge temperature | 251.2956, 233.6372, 233.6372 | 251.2956 | 48.7044 | 0 | 0 |
+| 100.0000 | 104.0000 | 3 | discharge temperature | 251.2956, 246.2503, 246.2503 | 251.2956 | 48.7044 | 0 | 0 |
+| 104.0000 | 104.0000 | 3 | discharge temperature | 251.2956, 251.2956, 251.2956 | 251.2956 | 48.7044 | 0 | 0 |
+| 110.0000 | 110.0000 | 3 | discharge temperature | 251.2956, 258.8635, 258.8635 | 258.8635 | 41.1365 | 0 | 0 |
+| 130.0000 | 130.0000 | 3 | discharge temperature | 251.2956, 284.0898, 284.0898 | 284.0898 | 15.9102 | 0 | 0 |
+| 150.0000 | 150.0000 | 4 | discharge temperature | 211.2066, 265.9556, 265.9556, 265.9556 | 265.9556 | 34.0444 | 0 | 0 |
+| 180.0000 | 180.0000 | 5 | discharge temperature | 188.2466, 275.6056, 275.6056, 275.6056, 275.6056 | 275.6056 | 24.3944 | 0 | 0 |
+The suction temperature on that table is 104.0000 degF and the stated limit is 300.0000 degF. The seventh column is derived on each row as the stated limit less the hottest stage, so a NEGATIVE entry there is a train running over its own limit; 0 stages across the whole table do that. The second column is the inlet the count was chosen at, and on every row it is the inlet the stages after the first actually run from.
+The whole of that is one comparison. A count chosen at the suction while the stages run from the cooler is a count chosen for a machine that is not the one being built, and the second column is the only thing on the table that says which machine the count was bought for.
 
-A case cut to make the point on its own numbers: the same gas from 92.000000 psia to 420.000000 psia at 104.0000 degF, a stated discharge limit of 230.0000 degF and an intercooler approach of 165.0000 degF.
-- stages: 3, governed by discharge temperature (engine)
-- stage discharges: 194.3631, 265.1421, 265.1421 degF (engine)
-- the stated limit was 230.0000 degF and the hottest stage is 265.1421 degF, which is 35.1421 degF above it (derived from the two figures on this line)
-- stages carrying a warning: 0 of 3
-The return says the discharge temperature governed the stage count, and the discharge temperature is above the limit it was governed by. The warning that might have caught it fires on a threshold written into the module rather than on the limit the caller stated, so it is silent here. FINDINGS C1 and C2.
-The condition this needs is one comparison: an intercooler approach ABOVE the suction temperature. The Compressor Station Designer ships with an approach of 110 degF against a suction of 100 degF, so a studio opened at its defaults already satisfies that condition, and whether any stage then crosses the stated limit depends on the duty. It does not at those defaults; it does on the rows above.
+A case cut to press on it: the same gas from 92.000000 psia to 420.000000 psia at 104.0000 degF, a stated discharge limit of 230.0000 degF and an intercooler approach of 165.0000 degF, which is 61.0000 degF ABOVE the suction (derived from the two figures on this line).
+- stages: 5, governed by discharge temperature (engine)
+- stage discharges: 156.5982, 223.2904, 223.2904, 223.2904, 223.2904 degF (engine)
+- the stated limit is 230.0000 degF and the hottest stage is 223.2904 degF, which leaves 6.7096 degF of room (derived from the two figures on this line)
+- stages over the stated limit: 0 of 5; stages carrying a warning: 0 of 5
+- the first stage runs from the suction and reaches 156.5982 degF; every later stage runs from the 165.0000 degF approach and reaches 223.2904 degF, a difference of 66.6921 degF (derived from the two figures on this line) at the same ratio
+The return says the discharge temperature governed the stage count, and the discharge temperature is under the limit it was governed by. That is what a staging that agrees with its own train looks like: the count was bought at the inlet the stages have, and the cost of the hotter approach is paid in machines rather than in temperature.
+The Compressor Station Designer ships with an approach of 110 degF against a suction of 100 degF, so a studio opened and not touched is already on the warm side of that comparison. What it buys there is a stage count, which is a cooler and a foundation and a machine, and the table above is the price list.
 
-The interstage cooling duty is a real exchanger, and it moves with the approach:
-| cooled to degF | total cooling MMBtu per hr | total gas hp |
-| --- | --- | --- |
-| 90.0000 | 8.9854 | 4220.7330 |
-| 100.0000 | 8.7678 | 4279.3236 |
-| 104.0000 | 8.6807 | 4302.6678 |
-| 110.0000 | 8.5501 | 4337.5912 |
-| 130.0000 | 8.1148 | 4453.2588 |
-| 150.0000 | 7.6794 | 4567.9125 |
-| 180.0000 | 7.0264 | 4738.2967 |
-Colder suction to the next stage means less work for the same ratio, and more heat to take out. That trade is the reason multi-stage compression is worth the extra machinery.
+The interstage cooling duty is a real exchanger, and it moves with the approach. The stage count is in the table because it moves too, and the trade below only reads cleanly where it does not:
+| cooled to degF | stages | total cooling MMBtu per hr | total gas hp |
+| --- | --- | --- | --- |
+| 90.0000 | 3 | 8.9856 | 4220.8083 |
+| 100.0000 | 3 | 8.7679 | 4279.3999 |
+| 104.0000 | 3 | 8.6809 | 4302.7446 |
+| 110.0000 | 3 | 8.5503 | 4337.6686 |
+| 130.0000 | 3 | 8.1149 | 4453.3383 |
+| 150.0000 | 4 | 8.6374 | 4447.6481 |
+| 180.0000 | 5 | 8.6948 | 4572.5633 |
+Colder suction to the next stage means less work for the same ratio, and more heat to take out. The table says where that holds and where it stops, and the answer is read off it rather than asserted:
+- across the 5 rows that share a stage count of 3, the cooling falls and the gas power rises on every step: true
+- over those rows the cooling goes from 8.9856 to 8.1149 MMBtu per hr and the gas power from 4220.8083 to 4453.3383 hp (engine, read off the table)
+- 2 rows add a stage, and on the first of them the cooling goes back UP from 8.1149 to 8.6374 MMBtu per hr while the gas power goes DOWN from 4453.3383 to 4447.6481 hp, because the extra machine changed the ratio each stage takes
+So the trade is a statement about a FIXED number of stages. Across a stage-count change it reverses, and a reader who quotes the trade without the count attached has quoted it wrong. That extra machine is also the reason multi-stage compression is worth its machinery at all.
 
 # SECTION 14: The machine, the driver and the fuel (owned by Expert m04)
 
 The actual inlet volume is what the machine screen turns on, and it falls with pressure:
 | suction psia | actual inlet acfm |
 | --- | --- |
-| 30.000000 | 9551.7842 |
-| 60.000000 | 4756.7078 |
-| 92.000000 | 3088.8812 |
-| 150.000000 | 1879.7539 |
-| 300.000000 | 920.9648 |
-| 600.000000 | 442.1298 |
-| 1200.000000 | 204.8767 |
-At the SOKU suction of 92.000000 psia the inlet volume is 3088.8812 acfm (engine).
+| 30.000000 | 9555.2490 |
+| 60.000000 | 4758.4333 |
+| 92.000000 | 3090.0016 |
+| 150.000000 | 1880.4357 |
+| 300.000000 | 921.2989 |
+| 600.000000 | 442.2902 |
+| 1200.000000 | 204.9510 |
+At the SOKU suction of 92.000000 psia the inlet volume is 3090.0016 acfm (engine).
 
-The screen, on four duties chosen to land in all four of its branches:
-- a small high-pressure gathering duty: 14.6511 acfm at an overall ratio of 3.000000 and 180.0000 brake hp gives "reciprocating"
+The screen, on 4 duties chosen to land in all four of its branches, with the branch each one reached printed beside it rather than promised:
+- a small high-pressure gathering duty: 14.6564 acfm at an overall ratio of 3.000000 and 180.0000 brake hp gives "reciprocating"
     only 14.7 acfm at suction: below about 500 acfm a centrifugal wheel is too small to be efficient
     under 200 bhp: a packaged gas-engine recip is the usual answer
-- a large low-pressure gathering duty: 43037.8307 acfm at an overall ratio of 2.600000 and 14500.0000 brake hp gives "centrifugal"
-    43038 acfm at a modest ratio: this is centrifugal territory
+- a large low-pressure gathering duty: 43053.4421 acfm at an overall ratio of 2.600000 and 14500.0000 brake hp gives "centrifugal"
+    43053 acfm at a modest ratio: this is centrifugal territory
     over 10,000 bhp: turbine-driven centrifugal territory
-- a deep booster at high ratio: 2014.2844 acfm at an overall ratio of 11.500000 and 2100.0000 brake hp gives "reciprocating"
-    overall ratio 11.5 at 2014 acfm: recips take ratio far more happily than centrifugals
-- the duty where both machines are viable: 3088.8812 acfm at an overall ratio of 10.700000 and 3400.0000 brake hp gives "reciprocating"
-    overall ratio 10.7 at 3089 acfm: recips take ratio far more happily than centrifugals
+- a deep booster at high ratio: 2015.0151 acfm at an overall ratio of 11.500000 and 2100.0000 brake hp gives "reciprocating"
+    overall ratio 11.5 at 2015 acfm: recips take ratio far more happily than centrifugals
+- the duty where both machines are viable: 7962.6965 acfm at an overall ratio of 3.000000 and 5000.0000 brake hp gives "either"
+    this duty sits where both machine types are viable; the decision goes on availability, footprint, maintenance philosophy and driver
+Distinct first reasons across those 4 duties: 4 (derived by collecting them). The branch is decided on the inlet VOLUME first and on the ratio second, so two duties can reach the same recommendation by different roads, and the reason line is the only thing that says which road.
+
+The screen asks for the compressibility BEFORE it asks for the volume, so a suction state outside the correlation is refused by name rather than as a missing volume:
+- a suction below absolute zero: { error: "at the screening suction, the z-factor needs a positive absolute pressure and a temperature above absolute zero (at 200 psia and -600 F)" }
+- a suction colder than the correlation reaches: { error: "at the screening suction, Tpr 0.848 against 1.0 is below the DAK validity range of 1.0 to 3.0, at 1000 psia and -150 F: the z-factor would be an extrapolation below the critical temperature, so it is refused" }
+- a suction above the pressure the correlation reaches: { error: "at the screening suction, Ppr 35.814 against 30.0 is above the DAK validity limit of 30, at 24000 psia and 100 F, so the z-factor is refused" }
+A volume is positive, and the guard says so. Finiteness alone is not enough here, because a NEGATIVE number is finite: a suction below absolute zero puts a negative absolute temperature into the volume, and a screen that only asked whether the answer was finite would take that negative volume, find it "below about 500 acfm" and recommend a reciprocating machine on it.
+
 # HELD FOR LITERATURE, taught as a limit and never graded: the screening thresholds, 500 and 5000 and 20000 acfm, ratios of 4 and 6, and 200 and 10000 brake hp. They are customary and unsourced here, so no graded value in this course is a recommendation.
 
 The driver on the SOKU train, at a heat rate of 8100.000000 Btu per hp hr burning gas of 985.000000 Btu per scf:
-- fuel 36295959.2183 Btu per hr, which is 0.884368549 MMscfd (engine)
-- driver thermal efficiency 31.412716 percent (engine)
-- the fuel as a share of the stream being compressed: 3.401417 percent (derived: the fuel over the 26.000000 MMscfd throughput, times 100)
+- fuel 36296606.9250 Btu per hr, which is 0.884384331 MMscfd (engine)
+- driver thermal efficiency 31.412760 percent (engine)
+- the fuel as a share of the stream being compressed: 3.401478 percent (derived: the fuel over the 26.000000 MMscfd throughput, times 100)
 
 A better driver burns less of the stream:
 | heat rate Btu per hp hr | fuel MMscfd | thermal efficiency percent | share of throughput percent |
 | --- | --- | --- | --- |
-| 6200.000000 | 0.676924075 | 41.039194 | 2.603554 |
-| 7000.000000 | 0.764269117 | 36.349000 | 2.939497 |
-| 7600.000000 | 0.829777898 | 33.479342 | 3.191453 |
-| 8100.000000 | 0.884368549 | 31.412716 | 3.401417 |
-| 9200.000000 | 1.004467982 | 27.656848 | 3.863338 |
-| 11000.000000 | 1.200994326 | 23.131182 | 4.619209 |
+| 6200.000000 | 0.676936155 | 41.039251 | 2.603601 |
+| 7000.000000 | 0.764282755 | 36.349051 | 2.939549 |
+| 7600.000000 | 0.829792706 | 33.479389 | 3.191510 |
+| 8100.000000 | 0.884384331 | 31.412760 | 3.401478 |
+| 9200.000000 | 1.004485907 | 27.656887 | 3.863407 |
+| 11000.000000 | 1.201015758 | 23.131214 | 4.619291 |
 The last column is derived on each row.
 
 THE COMPRESSION CONSTANTS, measured out of the engine the same way:
-- standard cubic feet per lbmol, from the mass flow of one MMscfd of a gravity-one gas: 379.490000
+- standard cubic feet per lbmol, from the mass flow of one MMscfd of a gravity-one gas: 379.483572
 - the molecular weight of air, from the same return once the first is known: 28.962500
-- the universal gas constant in ft lbf per lbmol degR, from the polytropic head over its own z, temperature, exponent and ratio group: 1545.349000
+- the universal gas constant in ft lbf per lbmol degR, from the polytropic head over its own z, temperature, exponent and ratio group: 1545.350400
 - the same constant as gasProperties.js carries it, times 144 square inches per square foot: 1545.350400 (engine export, derived on this line)
-- the quotient of those two: 0.999999094056597 (derived from the two rows above). Two values of one constant, in two modules where one imports from the other. FINDINGS F1.
+- the quotient of those two: 1.000000000000000 (derived from the two rows above), and their difference is 2.2737367544323206e-13 ft lbf per lbmol degR (derived the same way). ONE VALUE OF ONE CONSTANT, in two modules where one imports from the other. A package that holds two opinions about a constant cannot say which of them any answer carries, however small the gap.
 - ft lbf per minute per horsepower, from the mass, head, power and efficiency of one stage: 33000.000000
-- Btu per horsepower hour, from the thermal efficiency at a heat rate of 100.000000: 2544.430000
-- the ratio of the standard pressure to the standard temperature that the inlet-volume function uses: 0.028269230769 psia per degR (derived from one acfm return, its own z, its pressure and its temperature). That quotient is all the function reveals about its base; the two figures cannot be separated from outside it.
-- the Rankine offset, exported: 459.670000. The molecular weight of air, exported: 28.962500. compression.js carries private copies of both. FINDINGS F2.
+- Btu per horsepower hour, from the thermal efficiency at a heat rate of 10000.000000: 2544.433577644024
+- the same constant again, from the heat rate the engine refuses below, found by halving: 2544.433577644024. A driver that burns less than a horsepower-hour to make one would be more than 100 percent efficient, so the refusal boundary IS the constant, and the two routes differ by 0 (derived from the two rows above).
+- the ratio of the standard pressure to the standard temperature that the inlet-volume function uses: 0.028279485058 psia per degR (derived from one acfm return, its own z, its pressure and its temperature). That quotient is all the volume route reveals about its base; the two figures cannot be separated from outside it.
+- ONE STANDARD BASE FOR THE MODULE. The mass-flow route above gives 379.483571856287 standard cubic feet per lbmol, and the gas constant measured on this page turns that back into the same pressure-over-temperature quotient the volume route uses: 0.028279485058 psia per degR (derived from two rows above). The difference between the two routes is 0 psia per degR (derived from the two figures on this line). The same MMscfd is now one molar quantity whether it becomes a mass flow or an inlet volume.
+- the Rankine offset, exported: 459.670000. The molecular weight of air, exported: 28.962500. compression.js reads both from gasProperties.js and keeps no copy of either.
 
-# SECTION 15: What these engines accept and should not (owned by Expert m05)
+# SECTION 15: What a refusal is, and where each guard turns over (owned by Expert m05)
 
-A REFUSAL IS A RETURNED OBJECT CARRYING AN ERROR STRING. Everything below returns something else: a number that is not a number, with no error key, so a caller testing `if (result.error)` is told nothing is wrong. The WHOLE return is printed, because the shape is the finding.
-Note on reading these: a NaN and an Infinity have no spelling in JSON, and both come out as null through JSON.stringify. The lines below are printed by a hand-rolled serialiser for that reason, so they say NaN and Infinity where the engine returned them.
+EVERY REFUSAL IS A RETURNED OBJECT CARRYING AN `error` STRING, and it names the input that is actually wrong. Neither module throws. A caller checks a property rather than catching, and the property it checks is the only check most callers make, which is why a non-finite value slipped past it is worse than no guard at all.
+Note on reading these: a NaN and an Infinity have no spelling in JSON and both come out as null through JSON.stringify. The lines below are printed by a hand-rolled serialiser for that reason, so they say NaN and Infinity where the engine returned them.
 
-The pump module:
-- a motor efficiency above one: { hydraulicHp: 96.5909090909091, brakeHp: 123.83449883449883, motorInputHp: 24.766899766899765, motorInputKw: 18.468677156177154 }
-- a negative motor efficiency: { hydraulicHp: 96.5909090909091, brakeHp: 123.83449883449883, motorInputHp: -247.66899766899766, motorInputKw: -184.68677156177156 }
-- a motor efficiency of zero: { hydraulicHp: 96.5909090909091, brakeHp: 123.83449883449883, motorInputHp: Infinity, motorInputKw: Infinity }
-- a speed ratio of one hundred: { qGpm: 100000, headFt: 3000000, brakeHp: 100000000 }
-- a speed change with no duty to change: { qGpm: NaN, headFt: NaN, brakeHp: NaN }
-- a trim with no duty to trim: { trimPercent: 19.999999999999996, idealQGpm: NaN, idealHeadFt: NaN, qGpm: NaN, headFt: NaN, brakeHp: NaN, shortfallPct: 8.999999999999998, warning: null }
-- a viscosity correction at zero speed: { B: Infinity, cQ: 0, cH: 0, cEta: 0, correctedQGpm: 0, correctedHeadFt: 0, warning: "B above 40 is outside the published correlation: this service needs a positive-displacement pump or vendor viscous test data, not a corrected centrifugal curve" }
-- a viscosity correction at a negative speed: { B: NaN, cQ: NaN, cH: NaN, cEta: NaN, correctedQGpm: NaN, correctedHeadFt: NaN, warning: null }
-- a head to pressure conversion at zero gravity: Infinity
-- two and a half pumps in parallel: { headAtOneThousandGpm: 527.4563933071679, n: 2.5, mode: "parallel" }
-- a system curve with no static head: { kFt: 0.00008888888888888889, headAt: <function>, staticHeadFt: undefined }, and its head at 1000.000000 gpm is NaN
-  That one is the sharpest of the set: the object looks healthy, the coefficient is right, and the failure only appears when the curve is called.
+The pump module, on the inputs that used to come back as a number instead:
+- a motor efficiency above one: { error: "motor efficiency must be greater than 0 and at most 1" }
+- a negative motor efficiency: { error: "motor efficiency must be greater than 0 and at most 1" }
+- a motor efficiency of zero: { error: "motor efficiency must be greater than 0 and at most 1" }
+- a speed ratio of one hundred: { qGpm: 100000, headFt: 3000000, brakeHp: 100000000, warning: "a speed ratio of 100 is far outside the range over which the affinity laws describe a real machine: the power leg goes as the cube, so this is an extrapolation on the number that sizes the driver" }
+- a speed change with no duty to change: { error: "a speed change needs a duty to change: give the flow, the head and the brake power at the present speed" }
+- a trim with no duty to trim: { error: "a trim needs a duty to trim: give the flow, the head and the brake power at the full diameter" }
+- a viscosity correction at zero speed: { error: "the viscosity correction needs a positive pump speed in rpm" }
+- a viscosity correction at a negative speed: { error: "the viscosity correction needs a positive pump speed in rpm" }
+- a head to pressure conversion at zero gravity: NaN
+- two and a half pumps in parallel: { error: "parallel operation needs a pump curve and a whole number of machines, at least one" }
+- a system curve with no static head: { error: "a system curve needs a static head: it may be negative, but it cannot be missing" }
+  That one was the sharpest of the set: the object looked healthy, the coefficient was right, and the failure only appeared when the curve was called. A static head may be NEGATIVE, because the destination can sit below the pump, so the guard is finiteness and not positivity, and the message says so.
 
-The compression module:
-- a per-stage ratio limit of one: { overallRatio: 10, stages: Infinity, ratioPerStage: 1, byRatio: Infinity, byTemp: 3, governedBy: "ratio per stage" }
-- a negative per-stage ratio limit: { overallRatio: 10, stages: NaN, ratioPerStage: NaN, byRatio: NaN, byTemp: 3, governedBy: "both equally" }
-- a polytropic efficiency of zero: { error: "no practical stage count keeps the discharge temperature under the limit: intercool harder, or check k and the suction temperature" }
-- a polytropic efficiency above one: { error: "no practical stage count keeps the discharge temperature under the limit: intercool harder, or check k and the suction temperature" }
-- a suction below absolute zero: { error: "no practical stage count keeps the discharge temperature under the limit: intercool harder, or check k and the suction temperature" }
-- a discharge limit below absolute zero: { error: "no practical stage count keeps the discharge temperature under the limit: intercool harder, or check k and the suction temperature" }
-- a stage at zero polytropic efficiency: { pDischargePsia: 316, tDischargeF: NaN, z1: 0.9862860165156366, z2: NaN, zAvg: NaN, massLbHr: 41339.74764376751, headPolyFtLbfLbm: NaN, headIsenFtLbfLbm: NaN, polytropicEfficiency: 0, isentropicEfficiency: NaN, gasHp: NaN, gasHpIsentropicRoute: NaN, brakeHp: NaN, warning: null }
-- a stage at zero mechanical efficiency: { pDischargePsia: 316, tDischargeF: 323.1719567350813, z1: 0.9862860165156366, z2: 0.9874519405519727, zAvg: 0.9868689785338047, massLbHr: 41339.74764376751, headPolyFtLbfLbm: 61985.41203737779, headIsenFtLbfLbm: 59317.31372857305, polytropicEfficiency: 0.75, isentropicEfficiency: 0.7177170213792095, gasHp: 1725.563159070806, gasHpIsentropicRoute: 1725.5631590708058, brakeHp: Infinity, warning: "discharge at 323.2 F: above about 300 F the valves and the lube oil become the limit, not the thermodynamics" }
+The compression module, the same way:
+- a per-stage ratio limit of one: { error: "the maximum ratio per stage must be greater than 1: a stage at a ratio of 1 adds no pressure, so no number of them reaches the discharge" }
+- a negative per-stage ratio limit: { error: "the maximum ratio per stage must be greater than 1: a stage at a ratio of 1 adds no pressure, so no number of them reaches the discharge" }
+- a polytropic efficiency of zero: { error: "polytropic efficiency must be greater than 0 and at most 1 (got 0)" }
+- a polytropic efficiency above one: { error: "polytropic efficiency must be greater than 0 and at most 1 (got 1.5)" }
+- a suction below absolute zero: { error: "the suction temperature is at or below absolute zero (-600 F)" }
+- a discharge limit below the suction temperature: { error: "the maximum discharge temperature of -100 F is at or below the suction temperature of 100 F: compression raises the temperature of a gas, so no stage count can meet this limit" }
+- a stage at zero polytropic efficiency: { error: "polytropic efficiency must be greater than 0 and at most 1 (got 0)" }
+- a stage at zero mechanical efficiency: { error: "mechanical efficiency must be greater than 0 and at most 1 (got 0)" }
 - an inlet volume at zero rate: NaN
-- an inlet volume below absolute zero: -275.48758058196427
-- a machine screened on that volume: { acfm: -275.48758058196427, recommendation: "reciprocating", reasons: ["only -275.5 acfm at suction: below about 500 acfm a centrifugal wheel is too small to be efficient"] }
-- a driver more efficient than thermodynamics allows: { fuelBtuHr: 2000000, fuelMMscfd: 0.05052631578947369, thermalEfficiencyPct: 127.22149999999999 }
-- a driver a thousand times more efficient than that: { fuelBtuHr: 1000, fuelMMscfd: 0.00002526315789473684, thermalEfficiencyPct: 254442.99999999997 }
+- an inlet volume below absolute zero: NaN
+- a machine screened on that volume: { error: "at the screening suction, the z-factor needs a positive absolute pressure and a temperature above absolute zero (at 200 psia and -600 F)", atPsia: 200, atF: -600 }
+- a driver more efficient than thermodynamics allows: { error: "a heat rate of 2000 Btu per hp hr is below the 2544.4336 Btu that one horsepower-hour is: that driver would be more than 100 percent thermally efficient" }
+- a driver a thousand times more efficient than that: { error: "a heat rate of 1 Btu per hp hr is below the 2544.4336 Btu that one horsepower-hour is: that driver would be more than 100 percent thermally efficient" }
 
-FOUR DIFFERENT FAULTS, ONE SENTENCE. Each of these returns the identical message, and it is about the temperature in only one of the four cases:
-- a polytropic efficiency of zero: { error: "no practical stage count keeps the discharge temperature under the limit: intercool harder, or check k and the suction temperature" }
-- a polytropic efficiency above one: { error: "no practical stage count keeps the discharge temperature under the limit: intercool harder, or check k and the suction temperature" }
-- a suction below absolute zero: { error: "no practical stage count keeps the discharge temperature under the limit: intercool harder, or check k and the suction temperature" }
-- a discharge limit below absolute zero: { error: "no practical stage count keeps the discharge temperature under the limit: intercool harder, or check k and the suction temperature" }
-A refusal that names the wrong cause sends a reader to fix an input that was correct. FINDINGS C7.
+THE 5 BARE-NUMBER FUNCTIONS of Section 1 have nowhere to put an error key, so they hold a documented contract instead: NaN when the inputs cannot be read, never an Infinity and never a plausible number. They are pumps.headFtToPsi, pumps.psiToHeadFt, compression.polytropicExponentRatio, compression.dischargeTempR, compression.actualInletCfm, and each appears below with at least one input it must refuse.
+| function | input | returns |
+| --- | --- | --- |
+| pumps.headFtToPsi | a gravity of zero | NaN |
+| pumps.psiToHeadFt | a gravity of zero | NaN |
+| pumps.psiToHeadFt | a readable case, as a control | 271.7647058823529 |
+| compression.polytropicExponentRatio | an efficiency above one | NaN |
+| compression.dischargeTempR | a suction temperature that is not a number | NaN |
+| compression.actualInletCfm | a suction below absolute zero | NaN |
+| compression.actualInletCfm | a state outside the compressibility window | NaN |
+| compression.actualInletCfm | a readable state, as a control | 1069.0552909632156 |
+Read the two control rows against the rest. A contract that says NaN is only worth anything if the same function returns a real number when it can, and those two rows are what makes the others mean something.
 
-AND ONE THAT REACHES THE NEXT FUNCTION BEFORE IT FAILS:
-- a per-stage ratio limit of one, through stageCount: { overallRatio: 10, stages: Infinity, ratioPerStage: 1, byRatio: Infinity, byTemp: 3, governedBy: "ratio per stage" }
-- the same through compressorTrain: { error: "a stage needs a positive rate, suction pressure, gas gravity, k above 1 and a ratio above 1" }
-The rate, the suction pressure, the gas gravity and k in that call are all good. The fault is the ratio limit, and the message names four inputs that are not it. FINDINGS C6.
+FOUR FAULTS THAT USED TO SHARE ONE SENTENCE, each now refused by its own name. Not one of the four is about the temperature the shared sentence blamed:
+- a polytropic efficiency of zero: { error: "polytropic efficiency must be greater than 0 and at most 1 (got 0)" }
+- a polytropic efficiency above one: { error: "polytropic efficiency must be greater than 0 and at most 1 (got 1.5)" }
+- a suction below absolute zero: { error: "the suction temperature is at or below absolute zero (-600 F)" }
+- a discharge limit below the suction temperature: { error: "the maximum discharge temperature of -100 F is at or below the suction temperature of 100 F: compression raises the temperature of a gas, so no stage count can meet this limit" }
+Two of those messages carry the value that was typed, because two typed values reach one guard from opposite directions: a 0 and a 1.5 are not the same mistake, and a reader told only the rule has to work out which of them they made. A refusal that names the wrong cause sends a reader to fix an input that was correct, and that is worse than a bare refusal.
 
-THE COMPRESSIBILITY WINDOW. engines/facilities/separatorSizing.js in this same package exports its DAK validity bounds and refuses outside them by name. This module calls the same correlation through a private helper and never checks.
+AND THE ONE THAT USED TO REACH THE NEXT FUNCTION BEFORE IT FAILED:
+- a per-stage ratio limit of one, through stageCount: { error: "the maximum ratio per stage must be greater than 1: a stage at a ratio of 1 adds no pressure, so no number of them reaches the discharge" }
+- the same through compressorTrain: { error: "the maximum ratio per stage must be greater than 1: a stage at a ratio of 1 adds no pressure, so no number of them reaches the discharge" }
+The rate, the suction pressure, the gas gravity and k in that call are all good. The fault is the ratio limit, and the message is about the ratio limit.
+
+THE COMPRESSIBILITY WINDOW. engines/facilities/separatorSizing.js in this same package exports its DAK validity bounds and refuses outside them by name. This module now IMPORTS those same bounds rather than restating them, which is the same one-owner rule the gas constant of Section 14 is settled by.
 | probe | suction psia | suction degF | Ppr | Tpr | z at suction | solver says converged | error key | gas hp |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| inside the window, as a control | 600.000000 | 100.0000 | 0.895350 | 1.532881 | 0.919606033 | true | absent | 910.0851 |
-| below the temperature floor | 1000.000000 | -150.0000 | 1.492250 | 0.848155 | 0.223493600 | true | absent | 180.8841 |
-| above the pressure limit | 24000.000000 | 100.0000 | 35.814000 | 1.532881 | 2.864603159 | true | absent | 1790.8950 |
-The published window is a reduced temperature from 1.0 to 3.0 and a reduced pressure up to 30. Two of those three rows sit outside it, neither carries an error key, and the convergence column is the reason reading that flag would not have caught either: the solver is perfectly happy at both. FINDINGS G2.
+| inside the window, as a control | 600.000000 | 100.0000 | 0.895350 | 1.532881 | 0.919606033 | true | absent | 910.1014 |
+| below the temperature floor | 1000.000000 | -150.0000 | 1.492250 | 0.848155 | refused | true | present | refused |
+| above the pressure limit | 24000.000000 | 100.0000 | 35.814000 | 1.532881 | refused | true | present | refused |
+The published window is a reduced temperature from 1.0 to 3.0 and a reduced pressure up to 30. Two of those three rows sit outside it and are refused; the convergence column is why reading that flag would never have caught either, because the solver is perfectly happy at both and reports so.
+The refusal carries the reduced coordinates and the state they were taken at, and it says which end of the train died:
+- below the temperature floor: Ppr 1.492250, Tpr 0.848155, at 1000.000000 psia and -150.0000 degF, state "suction"
+- above the pressure limit: Ppr 35.814000, Tpr 1.532881, at 24000.000000 psia and 100.0000 degF, state "suction"
+A suction BELOW the reduced pressure the fit data start at is accepted rather than refused, exactly as separatorSizing accepts it, and it is noted instead: "Ppr 0.018 against 0.2 at 12 psia and 100 F is below the 0.2 where the DAK fit data start; the z-factor here runs toward the ideal-gas limit"
+The surface runs to the ideal-gas limit as the reduced pressure goes to zero, so a low-pressure suction is an ordinary machine and not an extrapolation. A window has two kinds of edge and they are not the same kind.
 
 # SECTION 16: The published golden cases, and the engine beside them (read by every tier)
 
@@ -604,15 +741,15 @@ The pump goldens carry 10 cases in five blocks and the compression goldens 6 cas
 
 Published curve fits:
 - curve 0: c0 520.804255 against golden 520.804255, c1 -35.024468 against golden -35.024468, c2 -307.005319 against golden -307.005319, shutoff 520.804255 against golden 520.804255
-  the golden also records the maximum orthogonality residual of the least-squares solve, 3.4354741274000844e-12 (golden), which is the property that makes it a least-squares fit at all
+  the golden also records the maximum orthogonality residual of the least-squares solve, 3.4354741274000844e-12 (golden), which is the property that makes it a least-squares fit at all; the engine reports the conditioning of that solve as 366.680892 and its R squared as 0.999754151
 - curve 1: c0 180.062578 against golden 180.062578, c1 1.140303 against golden 1.140303, c2 -99.289794 against golden -99.289794, shutoff 180.062578 against golden 180.062578
-  the golden also records the maximum orthogonality residual of the least-squares solve, 9.908462939023366e-13 (golden), which is the property that makes it a least-squares fit at all
+  the golden also records the maximum orthogonality residual of the least-squares solve, 9.908462939023366e-13 (golden), which is the property that makes it a least-squares fit at all; the engine reports the conditioning of that solve as 360.837617 and its R squared as 0.999983354
 
 Published duty points:
 - duty 0 (static 150.000000 ft, friction 200.000000 ft at 1500.000000 gpm): 1508.865998 gpm against golden 1508.865998, 352.371253 ft against golden 352.371253
 - duty 1 (static 40.000000 ft, friction 60.000000 ft at 900.000000 gpm): 1062.943072 gpm against golden 1062.943072, 123.692443 ft against golden 123.692443
 
-Published power cases. The golden was written through SI watts at a water density its own oracle states, which is not the density the horsepower packaging of Section 4 carries, so the two agree only to a few parts in a thousand and the engine gate is written with that tolerance. The quotient column is the size of it:
+Published power cases. The golden was written through SI watts at a water density its own oracle states, which is not the density the horsepower packaging of Section 4 carries, so the two do NOT agree to machine precision and the engine gate is written with a tolerance. The worst quotient across the 2 power cases below is 0.999553114 and across the 2 NPSH cases after them 1.000525448, so the disagreement is 0.0005254484459904507 at its largest (all derived from the quotient columns below). The quotient column on each row is the size of it:
 - power 0 (1500.000000 gpm, 300.000000 ft, gravity 0.850000, efficiency 0.780000): brake 123.834499 hp against golden 123.889863 hp, quotient 0.999553114 (derived)
 - power 1 (600.000000 gpm, 120.000000 ft, gravity 1.020000, efficiency 0.720000): brake 25.757576 hp against golden 25.769092 hp, quotient 0.999553114 (derived)
 
@@ -630,9 +767,21 @@ Published staging cases:
 - staging 2 (200.000000 to 600.000000 psia at 110.0000 degF, k 1.250000): 1 stage against golden 1, governed by both equally, ratio per stage 3.000000000
 
 Published stage cases:
-- stage 0 (20.000000 MMscfd, ratio 3.160000, k 1.280000, efficiency 0.750000): head 61985.4120 against golden 61985.4120, discharge 323.1720 degF against golden 323.1720, gas hp 1725.5632 against golden 1725.5632, z average 0.986868979 against golden 0.986868979
-- stage 1 (50.000000 MMscfd, ratio 2.500000, k 1.260000, efficiency 0.780000): head 43087.8803 against golden 43087.8803, discharge 266.2663 degF against golden 266.2663, gas hp 3105.1876 against golden 3105.1876, z average 0.956986144 against golden 0.956986144
-- stage 2 (5.000000 MMscfd, ratio 4.000000, k 1.300000, efficiency 0.720000): head 84758.4939 against golden 84758.4939, discharge 397.5060 degF against golden 397.5060, gas hp 567.1935 against golden 567.1935, z average 0.993426696 against golden 0.993426696
+- stage 0 (20.000000 MMscfd, ratio 3.160000, k 1.280000, efficiency 0.750000): head 61985.4682 against golden 61985.4682, discharge 323.1720 degF against golden 323.1720, gas hp 1725.5940 against golden 1725.5940, z average 0.986868979 against golden 0.986868979
+- stage 1 (50.000000 MMscfd, ratio 2.500000, k 1.260000, efficiency 0.780000): head 43087.9193 against golden 43087.9193, discharge 266.2663 degF against golden 266.2663, gas hp 3105.2431 against golden 3105.2431, z average 0.956986144 against golden 0.956986144
+- stage 2 (5.000000 MMscfd, ratio 4.000000, k 1.300000, efficiency 0.720000): head 84758.5707 against golden 84758.5707, discharge 397.5060 degF against golden 397.5060, gas hp 567.2037 against golden 567.2037, z average 0.993426696 against golden 0.993426696
+
+
+EVERY PUBLISHED FIELD, CHECKED RATHER THAN SAMPLED. The four stage fields quoted above are the readable ones; the file carries more, and each of them is compared here against the engine on every case, with the fields the file states as inputs left out because they are what the case IS:
+| published stage field | cases | bit for bit | worst relative gap |
+| --- | --- | --- | --- |
+| gasHp | 3 | false | 1.0639229984758982e-12 |
+| headPolyFtLbfLbm | 3 | false | 3.107080181448693e-14 |
+| massLbHr | 3 | true | 0 |
+| tDischargeF | 3 | false | 1.522776943887805e-11 |
+| zAvg | 3 | true | 0 |
+5 published stage fields across 3 cases. 2 of them come back BIT FOR BIT (massLbHr, zAvg) and 3 do not, and neither answer is a failure: the file is written by a Python oracle carrying fifty digits and the engine is double precision, so on a field where the two routes take different arithmetic they land a little apart. The worst gap on the table is 1.522776943887805e-11 on tDischargeF.
+A gate against a golden therefore has to carry a tolerance, and the tolerance has to be chosen from the size of the disagreement the two routes really have rather than from what looks tidy. Demanding equality on this table would fail on arithmetic rather than on error. The other end of that choice is the one worth thinking about: a tolerance loose enough to swallow a mis-transcribed constant catches nothing at all, so the useful question about any tolerance is what error it is still small enough to see.
 
 # HELD FOR LITERATURE, taught as a limit and never graded: all of them. Every one of those published cases was written by an oracle. There is no measured pump test, no vendor performance run and no field compressor datasheet anywhere in this course.
 
@@ -643,18 +792,18 @@ Published stage cases:
 Eight things are HELD FOR LITERATURE. Each is used, each is printed, and none of them decides a graded answer anywhere in this course.
 
 1. The Hydraulic Institute viscosity correction of Section 10. Empirical, unsourced in this repository, and the head factor is taken equal to the flow factor at best efficiency.
-2. The impeller trim shortfall model of Section 8. The engine calls it "the published shortfall" and names no publication.
+2. The impeller trim shortfall model of Section 8. The engine calls it "the published shortfall" and names no publication. Its power leg is left as the ideal cube for that same reason, and the efficiency the return implies is computed and reported rather than modelled.
 3. The operating-region bands of Section 5, at 50, 70, 120 and 140 percent of best efficiency flow.
-4. The NPSH margin rule of Section 7, the larger of 3 ft and 35 percent of required. The module header states it differently from the code.
+4. The NPSH margin rule of Section 7, the larger of 3 ft and 35 percent of required. Both halves of it are measurable out of the engine, and Section 7 measures them; the rule itself is customary.
 5. The machine-screening thresholds of Section 14.
-6. The 300 degF discharge warning of Sections 11 and 13, which is also the wrong threshold to be testing against a caller who stated their own.
+6. The 300 degF DEFAULT discharge limit of Sections 11, 12 and 13. It is the figure the engine uses when the caller states none, and the warning is measured against whatever the caller does state.
 7. What the implied water density of Section 4 is away from real water. The packagings are measurable; the handbook figure is not here.
-8. Every one of the published golden cases of Section 16.
+8. Every one of the published golden cases of Section 16. The affinity speed band of Section 8 is held on the same footing: it is a sanity bound and no publication here says where the laws stop describing a real machine.
 
 And four things are not in these engines at all, so the course names the seam rather than papering over it:
 - there is no compressor surge line, no surge margin, no recycle valve and no anti-surge control anywhere in the package;
 - there is no seal and no bearing calculation. Section 5 quotes the engine saying that bearing and seal life shorten below 70 percent of best efficiency flow, and that sentence is the whole of what this package knows about it;
 - there is no machine curve, no wheel selection, no valve dynamics and no rod loading;
-- there is no required-NPSH-against-flow curve, which is why Section 5's own warning cannot be followed inside this module.
+- there is no required-NPSH-against-flow curve, which is why Section 5's own note says to read the vendor curve at the duty flow before the suction margin means anything.
 
 What this course DOES answer is the duty a vendor should be quoting against, the power and the stage count to expect, the suction margin the selection has to survive, and the reasons behind all four.

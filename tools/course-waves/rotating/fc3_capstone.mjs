@@ -7,6 +7,7 @@
 // inside the DAK validity window, and every stage is proved to respect the
 // discharge-temperature limit the capstone states.
 import fs from 'fs';
+import { createHash } from 'crypto';
 import {
   ESCRAVOS_POINTS, ESCRAVOS_SYSTEM, ESCRAVOS_SG, ESCRAVOS_EFFICIENCY,
   ESCRAVOS_MOTOR_EFFICIENCY, ESCRAVOS_Q_MAX_GPM,
@@ -15,6 +16,7 @@ import {
   BONNY, BONNY_HEAT_RATE_BTU_HP_HR, BONNY_LHV_BTU_SCF,
 } from '/root/fc-wip-rotating/fc3_fields_capstone.mjs';
 
+const OUT = process.env.FC3_FIELDS_OUT || '/root/fc-wip-rotating/fields.json';
 const ROOT = process.env.FC3_ENGINES || '/root/wt-fc3-nextgen/packages/engines';
 const P = await import(`${ROOT}/engines/facilities/pumps.js`);
 const C = await import(`${ROOT}/engines/facilities/compression.js`);
@@ -32,6 +34,12 @@ const escSystem = P.systemCurve(ESCRAVOS_SYSTEM);
 must(!escSystem.error, `ESCRAVOS system: ${escSystem.error}`);
 const escDuty = P.dutyPoint({ pump: escCurve, system: escSystem, qMaxGpm: ESCRAVOS_Q_MAX_GPM });
 must(!escDuty.error, `ESCRAVOS duty: ${escDuty.error}`);
+// The solve reports itself at 4fa37e6, so the capstone reads the report
+// instead of trusting the number: a duty flow off an unconverged bisection
+// is not an answer to grade against.
+must(escCurve.droops === true, 'the ESCRAVOS curve does not droop, so its crossing is not a duty point');
+must(escDuty.converged === true, `ESCRAVOS duty did not converge: bracket ${escDuty.bracketGpm} gpm, residual ${escDuty.residualFt} ft`);
+must(Number.isFinite(escCurve.rSquared), 'the ESCRAVOS fit reports no R squared, which means its points carry no variance to explain');
 const escPower = P.pumpPower({
   qGpm: escDuty.qGpm, headFt: escDuty.headFt, sg: ESCRAVOS_SG,
   efficiency: ESCRAVOS_EFFICIENCY, motorEfficiency: ESCRAVOS_MOTOR_EFFICIENCY,
@@ -47,6 +55,8 @@ const bonSystem = P.systemCurve(BONGA_SYSTEM);
 must(!bonSystem.error, `BONGA system: ${bonSystem.error}`);
 const bonDuty = P.dutyPoint({ pump: bonCurve, system: bonSystem, qMaxGpm: BONGA_Q_MAX_GPM });
 must(!bonDuty.error, `BONGA duty: ${bonDuty.error}`);
+must(bonCurve.droops === true, 'the BONGA curve does not droop, so its crossing is not a duty point');
+must(bonDuty.converged === true, `BONGA duty did not converge: bracket ${bonDuty.bracketGpm} gpm, residual ${bonDuty.residualFt} ft`);
 const bonNpsh = P.npshAvailable(BONGA_SUCTION);
 must(!bonNpsh.error, `BONGA NPSH: ${bonNpsh.error}`);
 must(!bonNpsh.warning, `BONGA suction is at or below vapour pressure: ${bonNpsh.warning}`);
@@ -61,6 +71,9 @@ const bonSpeed = P.speedChange({
   qGpm: bonDuty.qGpm, headFt: bonDuty.headFt, brakeHp: 1, speedRatio: BONGA_SPEED_RATIO,
 });
 must(!bonSpeed.error, `BONGA speed: ${bonSpeed.error}`);
+// The speed ratio must sit inside the band the engine reports without comment,
+// because a graded answer must not be an extrapolation the engine warned about.
+must(bonSpeed.warning === null, `BONGA speed change carries a warning: ${bonSpeed.warning}`);
 // Two machines in parallel are re-intersected with the SAME system, because
 // the system curve does not move when a second pump is added.
 const bonParallel = P.combineParallel({ pump: bonCurve, n: BONGA_N_PARALLEL });
@@ -69,6 +82,7 @@ const bonParallelDuty = P.dutyPoint({
   pump: bonParallel, system: bonSystem, qMaxGpm: BONGA_Q_MAX_GPM,
 });
 must(!bonParallelDuty.error, `BONGA parallel duty: ${bonParallelDuty.error}`);
+must(bonParallelDuty.converged === true, `BONGA parallel duty did not converge: bracket ${bonParallelDuty.bracketGpm} gpm, residual ${bonParallelDuty.residualFt} ft`);
 must(bonParallelDuty.qGpm < bonDuty.qGpm * 2,
   'the parallel duty should be BELOW twice the single duty; this capstone is built on that result');
 
@@ -95,14 +109,21 @@ must(!bonnyFuel.error, `BONNY fuel: ${bonnyFuel.error}`);
 
 // HELD-ITEM NEUTRALISATION, ASSERTED.
 // 1. Every stage respects the discharge-temperature limit the capstone states.
-//    compression.js does NOT check this (FINDINGS C5), so it is checked here.
+//    At engines 4fa37e6 the engine chooses the stage count against the inlet
+//    each stage really has and warns on the caller's own limit, so it would
+//    now catch this itself. The assertion stays anyway: a capstone answer is
+//    graded for years and this file is the last thing between a graded number
+//    and a limit nobody rechecked.
 bonnyTrain.stages.forEach((s) => {
   must(s.tDischargeF <= BONNY.maxDischargeF,
     `stage ${s.stage} discharges at ${s.tDischargeF} F, above the stated limit of ${BONNY.maxDischargeF} F`);
 });
 // 2. Every compressibility this train evaluates sits INSIDE the DAK validity
-//    window (1.0 <= Tpr <= 3.0, Ppr <= 30). compression.js does NOT check this
-//    either, while separatorSizing.js in the same package refuses outside it.
+//    window (1.0 <= Tpr <= 3.0, Ppr <= 30). At 4fa37e6 compression.js imports
+//    that window from separatorSizing.js and refuses outside it, so this is a
+//    second opinion rather than the only one; it is kept because the window
+//    is a property of the CASE this capstone states, not of the engine, and a
+//    case edited later must still land inside it.
 const { tpcR, ppcPsia } = G.suttonPseudoCriticals(BONNY.gasSg);
 const windowRows = [];
 bonnyTrain.stages.forEach((s) => {
@@ -148,7 +169,13 @@ const F = [
   ['advanced', 'bonny_fuel_mmscfd', bonnyFuel.fuelMMscfd, 1e-9],
 ];
 
-fs.writeFileSync('/root/fc-wip-rotating/fields.json', `${JSON.stringify(F, null, 1)}\n`);
+// WRITTEN ONLY ON SUCCESS, which is a trap and is named here because this
+// wave has already been caught by it: a run that throws leaves the OLD file
+// in place, so a control run against a different engine tree that fails to
+// import looks byte identical for a run that never happened. Delete the
+// target before the run and check the exit status, and read the stamp below.
+const PAYLOAD = `${JSON.stringify(F, null, 1)}\n`;
+fs.writeFileSync(OUT, PAYLOAD);
 
 console.log('FC3 capstone answers\n');
 console.log('ASSOCIATE, the ESCRAVOS transfer pump');
@@ -171,4 +198,6 @@ console.log(`  train brake hp / fuel     ${bonnyTrain.totalBrakeHp.toFixed(4)} /
 console.log(`  every stage under the stated ${BONNY.maxDischargeF} F limit: asserted`);
 console.log('  DAK window at every evaluated state:');
 windowRows.forEach((r) => console.log(`    stage ${r.stage} ${r.pPsia.toFixed(2)} psia ${r.tF.toFixed(2)} F -> Ppr ${r.ppr.toFixed(6)}, Tpr ${r.tpr.toFixed(6)}`));
-console.log(`\nwrote ${F.length} graded fields to fields.json`);
+console.log(`\nwrote ${F.length} graded fields to ${OUT}`);
+console.log(`engines root ${ROOT}`);
+console.log(`payload sha256 ${createHash('sha256').update(PAYLOAD).digest('hex')}`);
