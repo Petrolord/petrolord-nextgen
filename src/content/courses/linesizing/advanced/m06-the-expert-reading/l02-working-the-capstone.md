@@ -26,7 +26,7 @@ The location class and the code, because the wall is meaningless without them. W
 
 ## Precision and refusals
 
-Liquid work prints to six decimals. Barrels, hours and days print to four. Counts are whole numbers. Quote what the engine returned rather than a rounding of it.
+Liquid work prints to six decimals, and the run time is liquid work: the OGBIA duty reports 2.444444 hours. Barrels and days print to four, 1633.5349 bbl and 3.7997 days on that same line. Counts are whole numbers. Quote what the engine returned rather than a rounding of it.
 
 If any step returns an object carrying an error, that error is the answer to give. A refusal is a result, and writing a number where the engine declined to produce one is the worst available answer.
 

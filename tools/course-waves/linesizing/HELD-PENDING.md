@@ -165,3 +165,61 @@ those edits silently. The shipped SQL is correct: `verify_sql.py` compares all
 396 migration rows against the committed JSON field for field and AGREES, so
 nothing a learner sees is wrong today. It is the SOURCE that is stale, and the
 hazard is the next person who regenerates a bank.
+
+
+## BOTH OF THOSE TWO ARE NOW CLOSED, 2026-09-16
+
+ITEM A, THE HOURS CONVENTION. The repair chosen was to make every statement of
+the convention say what the page prints, which is SIX decimals for hours, and
+to re-key the one question that said four. Restating the course to four was the
+alternative and it was rejected: hours are printed at six by every call site in
+`fc2_dump.mjs`, the digest header already says six, and
+`quaiboe_pig_run_hours` is graded at the half-unit of six places, so moving the
+convention to four would have meant reprinting a column, re-deriving a
+tolerance and re-sweeping 78 lessons to gain nothing.
+
+The digest did NOT move. It already stated the convention correctly on line 2,
+so `digest.txt` and `fields.json` reproduce byte for byte and their pins in
+`tools/course-waves/waves.json` are untouched. Five places moved:
+
+  * `fc2_dump.mjs`, the `r4` comment, which listed hours among the four-decimal
+    quantities. Its `e6` neighbour listed friction factors, which print at ten;
+    `e6` prints the B31.8 location-class design factors. Both comments now name
+    what they format.
+  * the Expert capstone lesson, `advanced/m06-the-expert-reading/
+    l02-working-the-capstone.md`, which said "Barrels, hours and days print to
+    four". NOBODY HAD REPORTED THIS ONE and it is the worst of the five,
+    because it is the sentence a learner reads immediately before working the
+    graded fields. It now states the six-decimal run time and gives the OGBIA
+    figures for all three quantities.
+  * the Expert m06 keyed answer, which is now the true convention.
+  * the m06 explanation, which now names 2.444444 hours.
+  * `fc2_capstone.mjs`, whose recorded disagreement is no longer a
+    disagreement.
+
+Barrels and days were checked with the same care and they were right
+everywhere: `r4` at every call site, four decimals in the digest header, four
+in the Expert lesson, four in the m06 key and four in the Expert exam question
+on the swept volume. Only hours were ever wrong.
+
+ITEM B, THE TEN BANK SOURCES. The edits were in the REPOSITORY copies all
+along. `tools/course-banks/linesizing/` held the repaired `.py` for all ten,
+because the audit's writer edited the committed source and ran it, and a bank
+source writes its JSON into THIS directory whatever tree it is run from. So the
+wave directory kept the pre-audit sources and the wave directory is what
+`bankrepro.py` was pointed at. The ten wave sources were brought up to the
+committed ones and all 21 now reproduce. The JSON was never regenerated from a
+stale source, so no repair was lost.
+
+THE GUARD. `tools/course-banks/check-bank-sources.py` runs every committed bank
+source in the repository and compares the BYTES it writes with the bytes
+committed beside it, and CI runs it on every pull request. It refuses on an
+empty tree, on a wave with no pairs, and on a `.json` or a `.py` with no
+partner; a source that will not run is a failure and not a skip. Its selftest
+plants a key repaired in the JSON alone and a re-indented JSON and proves both
+are caught. 63 pairs and 1188 questions compare clean, which is the same
+verdict `bankrepro.py` reaches with the wave kit's own `bankkit`.
+
+`gen_seeds.sh` took its repository path from a hardcoded worktree, so a run
+from any other worktree cut the seeds out of a tree the caller was not working
+in. It now reads `REPO` and keeps that path as the default.
