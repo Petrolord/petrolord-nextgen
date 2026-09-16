@@ -180,6 +180,11 @@ export const PANELS = {
   'fc-separator-explorer': React.lazy(() => import('@/components/course/panels/separation/SeparatorExplorer')),
   'fc-slug-explorer': React.lazy(() => import('@/components/course/panels/separation/SlugExplorer')),
   'fc-layout-explorer': React.lazy(() => import('@/components/course/panels/separation/LayoutExplorer')),
+
+  // FC4 Gas Processing
+  'fc-water-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/WaterExplorer')),
+  'fc-absorber-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/AbsorberExplorer')),
+  'fc-coldend-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/ColdEndExplorer')),
 };
 
 export function resolvePanel(id) {
