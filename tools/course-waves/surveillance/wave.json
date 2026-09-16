@@ -1,0 +1,19 @@
+{
+ "slug": "surveillance",
+ "prefix": "pd9",
+ "name": "Production Surveillance",
+ "goldens": [
+  "production/goldens/surveillance_cases.json",
+  "production/goldens/allocation_cases.json",
+  "production/goldens/lift_screening_cases.json",
+  "production/goldens/lift_advisor_cases.json"
+ ],
+ "constants": {
+  "86400000": "milliseconds per day, the epoch day number both modules count in",
+  "365": "days in the year annualEffectiveDecline evaluates the rate law at",
+  "24": "hours in a producing day, the divisor in every producing-day rate",
+  "1000": "scf per Mscf, the factor in every gas-oil ratio in the domain",
+  "14.7": "psia, liftAdvisor.ATM_PSIA, the one place gauge meets absolute",
+  "0.9": "liftAdvisor.RATE_TOLERANCE, the fraction of target a design must reach"
+ }
+}

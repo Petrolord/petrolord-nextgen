@@ -1,0 +1,982 @@
+PD5 Gas Well Performance and Deliquification: TEACHING DIGEST
+
+THIS FILE RUNS THE PUBLISHED CASES. THE CAPSTONE RUNS DIFFERENT CONDITIONS
+ENTIRELY. Every line below comes from a PUBLISHED golden case out of
+packages/engines/test-data/production/goldens/gaswell_cases.json, from the
+shipped engine re-run on those published inputs, from a sweep this generator
+ran on published inputs, or from one of the two TEACHING wells this wave
+designed for itself. The generator never opens pd5_fields.mjs and never reads
+the capstone well: no capstone depth, pressure, temperature, tubing size,
+slug, casing pressure, gas-liquid ratio or graded answer is reachable from
+here.
+
+A leak guard, pd5_leakcheck.mjs, reads the capstone graded field list out of
+fields.json and every number on every line of this file, and rejects the digest
+if any number lands within TEN TIMES a graded field tolerance of that field
+value, in three unit shiftings (as printed, times 1000, times 0.001).
+academy_submit_capstone grades with abs(got - expected) <= tol, so tol is
+ABSOLUTE in the field own units and is not a fraction of anything. Ten times it
+is under a hundredth of a psi on the plunger lift pressure, under a fortieth of
+a Mscf/d on a critical rate, and under a hundredth of a foot on the maximum
+slug. This file passed that guard.
+
+Generator: /root/pd-wip-gaswell/pd5_dump.mjs
+Engine:    packages/engines/engines/production/gasWellLoading.js
+           packages/engines/engines/production/plungerLift.js
+           packages/engines/engines/production/gasProperties.js
+Goldens:   packages/engines/test-data/production/goldens/gaswell_cases.json
+Golden oracle: tools/validation/production/oracle_gaswell.py (SI throughout,
+           no gc anywhere, plunger lift in pascals and metres, the rate constant
+           built from the molar volume rather than from 86400 Tsc/psc)
+Gate:      __tests__/production.gaswell.test.js
+Units: psia, degR, degF, Mscf/d, ft, in, in2, ft2, lbm/ft3, dyne/cm, ft/s, bbl,
+       bbl/d, scf, scf/bbl, psi, psi/ft, min. Never psig, never SI.
+
+WHAT PROVENANCE LABEL MEANS WHAT
+  golden ...    a value committed in gaswell_cases.json, cut by the independent
+                stdlib oracle named above. Twelve droplet-velocity rows, one
+                plunger-lift case, three constants.
+  engine ...    the shipped engine re-run on PUBLISHED golden inputs. Where a
+                golden carries the same quantity, the two are printed together
+                so a lesson can see the agreement or the divergence.
+  derived ...   a sweep, a refinement or a second route run by this generator on
+                PUBLISHED inputs. A sweep point is not a published case. Say so
+                if you print one.
+  teaching ...  a construct this wave invented: the teaching wells EBOCHA-5 and
+                OGUTA-2. Not published cases, not real wells, and never to be
+                presented as either. No oracle has ever checked them.
+
+THE PUBLISHED CASES AT A GLANCE
+  velocity table   12 rows. Two fluids (Turner water at 60.0 dyne/cm and
+                   67.0 lbm/ft3, Turner condensate at 20.0 dyne/cm and 45.0
+                   lbm/ft3) crossed with three pressures (300.0, 1000.0, 2500.0
+                   psia) and two temperatures (540.0, 620.0 degR), all at gas
+                   gravity 0.65 and z 0.9. Each row carries the gas density, the
+                   terminal droplet velocity, the Turner and Coleman velocities,
+                   and the Turner critical rate through a 2.441 in string.
+  plunger case     6000.0 ft of 2.441 in tubing, 200.0 ft slug of 1.02 SG liquid,
+                   120.0 psia line, 600.0 psia casing, 6.0 lb plunger, gas gravity
+                   0.65 at 580.0 degR and z 0.9. Carries the lift pressure term by
+                   term, the gas a cycle needs, the liquid a cycle brings up and
+                   the gas-liquid ratio that follows.
+  constants        the Turner droplet constant, the Mscf/d rate constant, and one
+                   real-gas density spot check.
+
+THE TWO TEACHING WELLS
+  EBOCHA-5   a 7500 ft gas well on 3.548 in tubing with a six station flowing
+             traverse, designed so the wellhead reads healthy and the shoe reads
+             loading under the correlation the wellhead pressure selects, and so
+             the sizing pick changes when the other correlation is used. It is a
+             TEACHING WELL.
+  OGUTA-2    an 8200 ft plunger lift candidate on 2.441 in tubing, designed so
+             the casing pressure can be walked down through the lift requirement
+             and the gas requirement watched falling the wrong way. It is a
+             TEACHING WELL.
+
+# SECTION 1: THE PUBLISHED CONSTANTS, AND WHAT EACH ONE IS BUILT FROM
+# The three numbers the goldens publish on their own, each re-derived by the
+# engine on its own route. The Turner constant is the whole droplet balance
+# collapsed into one number, and the gate checks that the engine PRODUCES it
+# rather than storing it. Associate m03 and m04 own this section.
+golden constant, Turner droplet constant = 1.5935357894 dimensionless
+golden constant, rate constant = 3054.38693878 Mscf/d per (ft/s x ft2 x psia / degR)
+golden constant, gas density at 1000.0 psia 600.0 degR z 0.88 gas gravity 0.65 = 3.3226524714 lbm/ft3
+engine constant, Turner droplet constant from the derivation = 1.5935346111 dimensionless
+engine constant, difference from the SI oracle = -1.1784e-6 dimensionless
+engine constant, relative difference from the SI oracle, as a magnitude = 7.3947e-7
+engine constant, rate constant = 3054.38693878 Mscf/d, difference from the oracle = 4.5475e-13
+engine constant, gas density at the same spot = 3.3226453778 lbm/ft3, difference from the oracle = -7.0936e-6 lbm/ft3
+engine constant, drag coefficient = 0.4400 dimensionless (rigid sphere, Newton regime)
+engine constant, critical Weber number = 30.0000 dimensionless (droplet break-up)
+engine constant, gc = 32.1740 lbm ft / (lbf s2)
+engine constant, dyne/cm to lbf/ft = 6.852177e-5
+engine constant, standard pressure = 14.70 psia, standard temperature = 519.67 degR
+engine constant, Turner adjustment = 1.2000, Coleman adjustment = 1.0000
+engine constant, Coleman pressure limit = 1000.0 psia
+engine constant, air molecular weight in gasWellLoading = 28.9647 lbm/lbmol
+engine constant, air molecular weight in gasProperties = 28.9625 lbm/lbmol
+engine constant, gas constant R = 10.7316 psia ft3 / (lbmol degR) in both modules
+derived constant, the rate constant divided by 1000 = 3.054387, which is the 3.06 the texts print for MMscf/d
+derived constant, the rate constant rebuilt by hand as 86400 x 519.67 / (14.70 x 1000) = 3054.38693878 Mscf/d
+
+# SECTION 2: THE PUBLISHED VELOCITY TABLE, EVERY ROW, EVERY COLUMN
+# All twelve rows as the oracle cut them, then the same twelve re-run through the
+# engine. The Coleman velocity IS the terminal velocity, because Coleman applies
+# no adjustment, and the goldens carry both names so that identity is visible.
+# The published critical rate is the TURNER rate through a 2.441 in string; the
+# Coleman rate on the same string is derived below it. Associate m02 through m05.
+golden velocity row 1, inputs: water, sigma 60.0 dyne/cm, liquid density 67.0 lbm/ft3, 300.0 psia, 540.0 degR, z 0.90, gas gravity 0.65
+golden velocity row 1, gas density = 1.0829385833 lbm/ft3
+golden velocity row 1, terminal droplet velocity = 12.1435923634 ft/s
+golden velocity row 1, Coleman critical velocity = 12.1435923634 ft/s
+golden velocity row 1, Turner critical velocity = 14.5723108360 ft/s
+golden velocity row 1, Turner critical rate through 2.441 in = 892.895047041 Mscf/d
+golden velocity row 2, inputs: water, sigma 60.0 dyne/cm, liquid density 67.0 lbm/ft3, 300.0 psia, 620.0 degR, z 0.90, gas gravity 0.65
+golden velocity row 2, gas density = 0.9432045725 lbm/ft3
+golden velocity row 2, terminal droplet velocity = 13.0189530541 ft/s
+golden velocity row 2, Coleman critical velocity = 13.0189530541 ft/s
+golden velocity row 2, Turner critical velocity = 15.6227436649 ft/s
+golden velocity row 2, Turner critical rate through 2.441 in = 833.741395355 Mscf/d
+golden velocity row 3, inputs: water, sigma 60.0 dyne/cm, liquid density 67.0 lbm/ft3, 1000.0 psia, 540.0 degR, z 0.90, gas gravity 0.65
+golden velocity row 3, gas density = 3.6097952775 lbm/ft3
+golden velocity row 3, terminal droplet velocity = 6.5866393859 ft/s
+golden velocity row 3, Coleman critical velocity = 6.5866393859 ft/s
+golden velocity row 3, Turner critical velocity = 7.9039672631 ft/s
+golden velocity row 3, Turner critical rate through 2.441 in = 1614.343188395 Mscf/d
+golden velocity row 4, inputs: water, sigma 60.0 dyne/cm, liquid density 67.0 lbm/ft3, 1000.0 psia, 620.0 degR, z 0.90, gas gravity 0.65
+golden velocity row 4, gas density = 3.1440152417 lbm/ft3
+golden velocity row 4, terminal droplet velocity = 7.0706235386 ft/s
+golden velocity row 4, Coleman critical velocity = 7.0706235386 ft/s
+golden velocity row 4, Turner critical velocity = 8.4847482463 ft/s
+golden velocity row 4, Turner critical rate through 2.441 in = 1509.356272243 Mscf/d
+golden velocity row 5, inputs: water, sigma 60.0 dyne/cm, liquid density 67.0 lbm/ft3, 2500.0 psia, 540.0 degR, z 0.90, gas gravity 0.65
+golden velocity row 5, gas density = 9.0244881938 lbm/ft3
+golden velocity row 5, terminal droplet velocity = 4.0737980096 ft/s
+golden velocity row 5, Coleman critical velocity = 4.0737980096 ft/s
+golden velocity row 5, Turner critical velocity = 4.8885576115 ft/s
+golden velocity row 5, Turner critical rate through 2.441 in = 2496.154595078 Mscf/d
+golden velocity row 6, inputs: water, sigma 60.0 dyne/cm, liquid density 67.0 lbm/ft3, 2500.0 psia, 620.0 degR, z 0.90, gas gravity 0.65
+golden velocity row 6, gas density = 7.8600381043 lbm/ft3
+golden velocity row 6, terminal droplet velocity = 4.3868983237 ft/s
+golden velocity row 6, Coleman critical velocity = 4.3868983237 ft/s
+golden velocity row 6, Turner critical velocity = 5.2642779885 ft/s
+golden velocity row 6, Turner critical rate through 2.441 in = 2341.162863678 Mscf/d
+golden velocity row 7, inputs: condensate, sigma 20.0 dyne/cm, liquid density 45.0 lbm/ft3, 300.0 psia, 540.0 degR, z 0.90, gas gravity 0.65
+golden velocity row 7, gas density = 1.0829385833 lbm/ft3
+golden velocity row 7, terminal droplet velocity = 8.3363458777 ft/s
+golden velocity row 7, Coleman critical velocity = 8.3363458777 ft/s
+golden velocity row 7, Turner critical velocity = 10.0036150532 ft/s
+golden velocity row 7, Turner critical rate through 2.441 in = 612.955517763 Mscf/d
+golden velocity row 8, inputs: condensate, sigma 20.0 dyne/cm, liquid density 45.0 lbm/ft3, 300.0 psia, 620.0 degR, z 0.90, gas gravity 0.65
+golden velocity row 8, gas density = 0.9432045725 lbm/ft3
+golden velocity row 8, terminal droplet velocity = 8.9396311083 ft/s
+golden velocity row 8, Coleman critical velocity = 8.9396311083 ft/s
+golden velocity row 8, Turner critical velocity = 10.7275573299 ft/s
+golden velocity row 8, Turner critical rate through 2.441 in = 572.499223494 Mscf/d
+golden velocity row 9, inputs: condensate, sigma 20.0 dyne/cm, liquid density 45.0 lbm/ft3, 1000.0 psia, 540.0 degR, z 0.90, gas gravity 0.65
+golden velocity row 9, gas density = 3.6097952775 lbm/ft3
+golden velocity row 9, terminal droplet velocity = 4.4988594774 ft/s
+golden velocity row 9, Coleman critical velocity = 4.4988594774 ft/s
+golden velocity row 9, Turner critical velocity = 5.3986313728 ft/s
+golden velocity row 9, Turner critical rate through 2.441 in = 1102.641685283 Mscf/d
+golden velocity row 10, inputs: condensate, sigma 20.0 dyne/cm, liquid density 45.0 lbm/ft3, 1000.0 psia, 620.0 degR, z 0.90, gas gravity 0.65
+golden velocity row 10, gas density = 3.1440152417 lbm/ft3
+golden velocity row 10, terminal droplet velocity = 4.8341084620 ft/s
+golden velocity row 10, Coleman critical velocity = 4.8341084620 ft/s
+golden velocity row 10, Turner critical velocity = 5.8009301545 ft/s
+golden velocity row 10, Turner critical rate through 2.441 in = 1031.930477998 Mscf/d
+golden velocity row 11, inputs: condensate, sigma 20.0 dyne/cm, liquid density 45.0 lbm/ft3, 2500.0 psia, 540.0 degR, z 0.90, gas gravity 0.65
+golden velocity row 11, gas density = 9.0244881938 lbm/ft3
+golden velocity row 11, terminal droplet velocity = 2.7473233382 ft/s
+golden velocity row 11, Coleman critical velocity = 2.7473233382 ft/s
+golden velocity row 11, Turner critical velocity = 3.2967880058 ft/s
+golden velocity row 11, Turner critical rate through 2.441 in = 1683.378448943 Mscf/d
+golden velocity row 12, inputs: condensate, sigma 20.0 dyne/cm, liquid density 45.0 lbm/ft3, 2500.0 psia, 620.0 degR, z 0.90, gas gravity 0.65
+golden velocity row 12, gas density = 7.8600381043 lbm/ft3
+golden velocity row 12, terminal droplet velocity = 2.9673403246 ft/s
+golden velocity row 12, Coleman critical velocity = 2.9673403246 ft/s
+golden velocity row 12, Turner critical velocity = 3.5608083895 ft/s
+golden velocity row 12, Turner critical rate through 2.441 in = 1583.585134443 Mscf/d
+# The engine on the same twelve rows. Two unit systems meeting: the oracle in
+# N/m, kg/m3 and m/s with no gc at all, the engine in dyne/cm, lbm/ft3 and ft/s
+# carrying gc explicitly. The residual differences are the rounding in the
+# field-unit conversions, not a difference in physics.
+engine velocity row 1, gas density = 1.0829362713 lbm/ft3, difference from golden = -2.3120e-6 lbm/ft3
+engine velocity row 1, terminal = 12.1435964527 ft/s, Coleman = 12.1435964527 ft/s, Turner = 14.5723157432 ft/s, Turner difference from golden = 4.9072e-6 ft/s
+engine velocity row 1, Turner critical rate through 2.441 in = 892.895347723 Mscf/d, difference from golden = 3.0068e-4 Mscf/d
+derived velocity row 1, Coleman critical rate through 2.441 in = 744.079456436 Mscf/d, Turner minus Coleman = 148.815891287 Mscf/d, Turner over Coleman = 1.2000000000
+engine velocity row 2, gas density = 0.9432025589 lbm/ft3, difference from golden = -2.0137e-6 lbm/ft3
+engine velocity row 2, terminal = 13.0189574233 ft/s, Coleman = 13.0189574233 ft/s, Turner = 15.6227489079 ft/s, Turner difference from golden = 5.2430e-6 ft/s
+engine velocity row 2, Turner critical rate through 2.441 in = 833.741675160 Mscf/d, difference from golden = 2.7981e-4 Mscf/d
+derived velocity row 2, Coleman critical rate through 2.441 in = 694.784729300 Mscf/d, Turner minus Coleman = 138.956945860 Mscf/d, Turner over Coleman = 1.2000000000
+engine velocity row 3, gas density = 3.6097875709 lbm/ft3, difference from golden = -7.7066e-6 lbm/ft3
+engine velocity row 3, terminal = 6.5866417464 ft/s, Coleman = 6.5866417464 ft/s, Turner = 7.9039700957 ft/s, Turner difference from golden = 2.8326e-6 ft/s
+engine velocity row 3, Turner critical rate through 2.441 in = 1614.343766935 Mscf/d, difference from golden = 5.7854e-4 Mscf/d
+derived velocity row 3, Coleman critical rate through 2.441 in = 1345.286472446 Mscf/d, Turner minus Coleman = 269.057294489 Mscf/d, Turner over Coleman = 1.2000000000
+engine velocity row 4, gas density = 3.1440085295 lbm/ft3, difference from golden = -6.7122e-6 lbm/ft3
+engine velocity row 4, terminal = 7.0706260434 ft/s, Coleman = 7.0706260434 ft/s, Turner = 8.4847512521 ft/s, Turner difference from golden = 3.0058e-6 ft/s
+engine velocity row 4, Turner critical rate through 2.441 in = 1509.356806948 Mscf/d, difference from golden = 5.3470e-4 Mscf/d
+derived velocity row 4, Coleman critical rate through 2.441 in = 1257.797339123 Mscf/d, Turner minus Coleman = 251.559467825 Mscf/d, Turner over Coleman = 1.2000000000
+engine velocity row 5, gas density = 9.0244689273 lbm/ft3, difference from golden = -1.9266e-5 lbm/ft3
+engine velocity row 5, terminal = 4.0737996842 ft/s, Coleman = 4.0737996842 ft/s, Turner = 4.8885596210 ft/s, Turner difference from golden = 2.0095e-6 ft/s
+engine velocity row 5, Turner critical rate through 2.441 in = 2496.155621150 Mscf/d, difference from golden = 1.0261e-3 Mscf/d
+derived velocity row 5, Coleman critical rate through 2.441 in = 2080.129684292 Mscf/d, Turner minus Coleman = 416.025936858 Mscf/d, Turner over Coleman = 1.2000000000
+engine velocity row 6, gas density = 7.8600213238 lbm/ft3, difference from golden = -1.6780e-5 lbm/ft3
+engine velocity row 6, terminal = 4.3869000737 ft/s, Coleman = 4.3869000737 ft/s, Turner = 5.2642800885 ft/s, Turner difference from golden = 2.1000e-6 ft/s
+engine velocity row 6, Turner critical rate through 2.441 in = 2341.163797607 Mscf/d, difference from golden = 9.3393e-4 Mscf/d
+derived velocity row 6, Coleman critical rate through 2.441 in = 1950.969831339 Mscf/d, Turner minus Coleman = 390.193966268 Mscf/d, Turner over Coleman = 1.2000000000
+engine velocity row 7, gas density = 1.0829362713 lbm/ft3, difference from golden = -2.3120e-6 lbm/ft3
+engine velocity row 7, terminal = 8.3363487215 ft/s, Coleman = 8.3363487215 ft/s, Turner = 10.0036184658 ft/s, Turner difference from golden = 3.4127e-6 ft/s
+engine velocity row 7, Turner critical rate through 2.441 in = 612.955726868 Mscf/d, difference from golden = 2.0911e-4 Mscf/d
+derived velocity row 7, Coleman critical rate through 2.441 in = 510.796439056 Mscf/d, Turner minus Coleman = 102.159287811 Mscf/d, Turner over Coleman = 1.2000000000
+engine velocity row 8, gas density = 0.9432025589 lbm/ft3, difference from golden = -2.0137e-6 lbm/ft3
+engine velocity row 8, terminal = 8.9396341425 ft/s, Coleman = 8.9396341425 ft/s, Turner = 10.7275609710 ft/s, Turner difference from golden = 3.6410e-6 ft/s
+engine velocity row 8, Turner critical rate through 2.441 in = 572.499417805 Mscf/d, difference from golden = 1.9431e-4 Mscf/d
+derived velocity row 8, Coleman critical rate through 2.441 in = 477.082848170 Mscf/d, Turner minus Coleman = 95.416569634 Mscf/d, Turner over Coleman = 1.2000000000
+engine velocity row 9, gas density = 3.6097875709 lbm/ft3, difference from golden = -7.7066e-6 lbm/ft3
+engine velocity row 9, terminal = 4.4988611623 ft/s, Coleman = 4.4988611623 ft/s, Turner = 5.3986333948 ft/s, Turner difference from golden = 2.0219e-6 ft/s
+engine velocity row 9, Turner critical rate through 2.441 in = 1102.642098255 Mscf/d, difference from golden = 4.1297e-4 Mscf/d
+derived velocity row 9, Coleman critical rate through 2.441 in = 918.868415212 Mscf/d, Turner minus Coleman = 183.773683042 Mscf/d, Turner over Coleman = 1.2000000000
+engine velocity row 10, gas density = 3.1440085295 lbm/ft3, difference from golden = -6.7122e-6 lbm/ft3
+engine velocity row 10, terminal = 4.8341102413 ft/s, Coleman = 4.8341102413 ft/s, Turner = 5.8009322896 ft/s, Turner difference from golden = 2.1352e-6 ft/s
+engine velocity row 10, Turner critical rate through 2.441 in = 1031.930857823 Mscf/d, difference from golden = 3.7982e-4 Mscf/d
+derived velocity row 10, Coleman critical rate through 2.441 in = 859.942381519 Mscf/d, Turner minus Coleman = 171.988476304 Mscf/d, Turner over Coleman = 1.2000000000
+engine velocity row 11, gas density = 9.0244689273 lbm/ft3, difference from golden = -1.9266e-5 lbm/ft3
+engine velocity row 11, terminal = 2.7473246071 ft/s, Coleman = 2.7473246071 ft/s, Turner = 3.2967895285 ft/s, Turner difference from golden = 1.5227e-6 ft/s
+engine velocity row 11, Turner critical rate through 2.441 in = 1683.379226440 Mscf/d, difference from golden = 7.7750e-4 Mscf/d
+derived velocity row 11, Coleman critical rate through 2.441 in = 1402.816022033 Mscf/d, Turner minus Coleman = 280.563204407 Mscf/d, Turner over Coleman = 1.2000000000
+engine velocity row 12, gas density = 7.8600213238 lbm/ft3, difference from golden = -1.6780e-5 lbm/ft3
+engine velocity row 12, terminal = 2.9673416330 ft/s, Coleman = 2.9673416330 ft/s, Turner = 3.5608099596 ft/s, Turner difference from golden = 1.5701e-6 ft/s
+engine velocity row 12, Turner critical rate through 2.441 in = 1583.585832702 Mscf/d, difference from golden = 6.9826e-4 Mscf/d
+derived velocity row 12, Coleman critical rate through 2.441 in = 1319.654860585 Mscf/d, Turner minus Coleman = 263.930972117 Mscf/d, Turner over Coleman = 1.2000000000
+
+# SECTION 3: z AND GAS DENSITY AT A STATION, AND THE TWO MOLECULAR WEIGHTS OF AIR
+# Density is the first thing a station gives you and everything after it turns on
+# the number. rho = p M / (z R T), and the two production modules do not carry
+# the same M. gasWellLoading uses 28.9647 and takes degR at the door;
+# gasProperties uses 28.9625 and takes degF at the door and divides by 144 to get
+# a gradient. Both feed real-gas density in the same domain, on the same R.
+# Associate m02 states the density; Expert m05 l03 owns the seam.
+derived air, gasWellLoading.AIR_MW minus gasProperties.AIR_MW = 0.002200 lbm/lbmol
+derived air, the two as parts per million of each other = 75.9603 ppm
+# The published station this is priced on is golden velocity row 6: 2500.0 psia,
+# 620.0 degR, z 0.9, gas gravity 0.65. Both routes get the same p, T, z and
+# gravity; the ONLY thing that differs is the molecular weight of air.
+derived air, the station in degR = 620.0000 degR, the same station in degF = 160.3300 degF, and gasProperties.toRankine takes it back = 620.0000 degR
+derived air, gasWellLoading.gasDensityLbFt3 = 7.8600213238 lbm/ft3
+derived air, gasProperties.gasGradient x 144 = 7.8594243196 lbm/ft3
+derived air, the gap between the two routes = 5.970042e-4 lbm/ft3
+derived air, the gap as a fraction of the density = 7.595452e-5
+derived air, gasProperties.gasGradient at the same station = 0.0545793356 psi/ft
+golden air, the same station published by the SI oracle = 7.8600381043 lbm/ft3
+# What the gap is worth further on. Gas density enters the critical velocity as
+# 1/sqrt(rho) and also, weakly, through the buoyancy in the density difference,
+# so the velocity moves by a little over half the fractional density change.
+# Both fractions are printed rather than reasoned about.
+derived air, Turner critical velocity on the gasWellLoading density = 5.2642800885 ft/s
+derived air, Turner critical velocity on the gasProperties density = 5.2644933087 ft/s
+derived air, the difference the molecular weight makes to the velocity = -2.132202e-4 ft/s
+derived air, that difference as a fraction of the velocity = 4.050320e-5, against a density fraction of 7.595452e-5
+derived air, the velocity fraction over the density fraction = 0.53325597, which is the one half from the inverse square root plus the buoyancy term
+# DAK z, which the goldens do not exercise: the velocity table pins z at 0.9 as
+# an input, so the compressibility route is only reachable through gasProperties.
+derived z, Sutton plus Dranchuk and Abou-Kassem at 300.0 psia 80.33 degF gas gravity 0.65: z = 0.9538831487 dimensionless, against the 0.9 the golden table pins
+derived z, Sutton plus Dranchuk and Abou-Kassem at 1000.0 psia 80.33 degF gas gravity 0.65: z = 0.8522484090 dimensionless, against the 0.9 the golden table pins
+derived z, Sutton plus Dranchuk and Abou-Kassem at 2500.0 psia 160.33 degF gas gravity 0.65: z = 0.8616840918 dimensionless, against the 0.9 the golden table pins
+derived z, Sutton plus Dranchuk and Abou-Kassem at 1000.0 psia 140.33 degF gas gravity 0.65: z = 0.9010583689 dimensionless, against the 0.9 the golden table pins
+derived z, Sutton pseudo-criticals at gas gravity 0.65: Tpc = 365.110000 degR, Ppc = 670.129000 psia
+
+# SECTION 4: THE DROPLET BALANCE, AND WHAT MOVES IT
+# Drag against weight less buoyancy, with the largest stable droplet set by a
+# critical Weber number. Eliminating the droplet diameter between the two leaves
+# a velocity that depends on exactly three groups and nothing else: sigma to the
+# quarter, the density difference to the quarter, and one over the square root of
+# the gas density. Every row below is the engine, run on published golden fluid
+# properties and published golden gas densities. Associate m03 owns all of it.
+#
+# READ THAT SENTENCE CAREFULLY, BECAUSE IT INVITES A CLAIM THAT IS FALSE.
+# "Three groups and nothing else" is true of the SWEEP below, where the density
+# difference is driven as an independent input. It is NOT true of a real
+# station, because there the gas density appears TWICE: once on its own under
+# the square root and once inside the density difference.
+#
+# The consequence a writer will trip on: the water-to-condensate velocity ratio
+# is NOT a fluid constant. The 1.4626530609 printed below belongs to 1000.0
+# psia and 620.0 degR and does not hold at 300.0 or at 2500.0 psia. Quote it
+# with its station, always. A lesson writer nearly wrote it as an invariant,
+# caught it, and asked for this note.
+# The power laws, checked rather than asserted. Doubling sigma by sixteen doubles
+# the velocity; doubling the density difference by sixteen doubles it; four times
+# the gas density halves it.
+derived balance, sigma 1.0 dyne/cm, density difference 60.0, gas density 3.0: terminal = 2.5605819862 ft/s
+derived balance, sigma 16.0 dyne/cm, density difference 60.0, gas density 3.0: terminal = 5.1211639724 ft/s, ratio to the row above = 2.0000000000
+derived balance, sigma 60.0 dyne/cm, density difference 1.0, gas density 3.0: terminal = 2.5605819862 ft/s
+derived balance, sigma 60.0 dyne/cm, density difference 16.0, gas density 3.0: terminal = 5.1211639724 ft/s, ratio to the row above = 2.0000000000
+derived balance, sigma 60.0 dyne/cm, density difference 60.0, gas density 1.0: terminal = 12.3434660205 ft/s
+derived balance, sigma 60.0 dyne/cm, density difference 60.0, gas density 4.0: terminal = 6.1717330102 ft/s, ratio to the row above = 0.5000000000
+# The drag coefficient and the Weber number are inputs, so the 1.5936 moves when
+# they move. This is the whole difference between a derivation and a remembered
+# number, and the sweep is contiguous so the direction of each is visible.
+derived balance, drag coefficient 0.22: constant = 1.8950426975 dimensionless, ratio to the shipped 0.44 = 1.1892062356
+derived balance, drag coefficient 0.33: constant = 1.7123643784 dimensionless, ratio to the shipped 0.44 = 1.0745691372
+derived balance, drag coefficient 0.44: constant = 1.5935346111 dimensionless, ratio to the shipped 0.44 = 0.9999992605
+derived balance, drag coefficient 0.55: constant = 1.5070719871 dimensionless, ratio to the shipped 0.44 = 0.9457409097
+derived balance, drag coefficient 0.88: constant = 1.3399975420 dimensionless, ratio to the shipped 0.44 = 0.8408957934
+derived balance, drag coefficient 1.10: constant = 1.2672914315 dimensionless, ratio to the shipped 0.44 = 0.7952701407
+derived balance, critical Weber number 10.0: constant = 1.2108244638 dimensionless, ratio to the shipped 30 = 0.7598351238
+derived balance, critical Weber number 20.0: constant = 1.4399210674 dimensionless, ratio to the shipped 30 = 0.9036013354
+derived balance, critical Weber number 30.0: constant = 1.5935346111 dimensionless, ratio to the shipped 30 = 0.9999992605
+derived balance, critical Weber number 40.0: constant = 1.7123643784 dimensionless, ratio to the shipped 30 = 1.0745691372
+derived balance, critical Weber number 60.0: constant = 1.8950426975 dimensionless, ratio to the shipped 30 = 1.1892062356
+derived balance, critical Weber number 120.0: constant = 2.2535982591 dimensionless, ratio to the shipped 30 = 1.4142125166
+# Surface tension at one published gas density. Row 4 of the golden table:
+# 1000.0 psia, 620.0 degR, z 0.9, gas gravity 0.65, gas density as published.
+# The whole contiguous sweep, including the two ends nobody would produce.
+derived tension, sigma 5.0 dyne/cm at liquid density 67.0 lbm/ft3: terminal = 3.7989369177 ft/s, Turner = 4.5587243012 ft/s
+derived tension, sigma 10.0 dyne/cm at liquid density 67.0 lbm/ft3: terminal = 4.5177228119 ft/s, Turner = 5.4212673743 ft/s
+derived tension, sigma 20.0 dyne/cm at liquid density 67.0 lbm/ft3: terminal = 5.3725081116 ft/s, Turner = 6.4470097339 ft/s
+derived tension, sigma 30.0 dyne/cm at liquid density 67.0 lbm/ft3: terminal = 5.9456575905 ft/s, Turner = 7.1347891086 ft/s
+derived tension, sigma 40.0 dyne/cm at liquid density 67.0 lbm/ft3: terminal = 6.3890248717 ft/s, Turner = 7.6668298460 ft/s
+derived tension, sigma 50.0 dyne/cm at liquid density 67.0 lbm/ft3: terminal = 6.7555713007 ft/s, Turner = 8.1066855609 ft/s
+derived tension, sigma 60.0 dyne/cm at liquid density 67.0 lbm/ft3: terminal = 7.0706183100 ft/s, Turner = 8.4847419720 ft/s
+derived tension, sigma 70.0 dyne/cm at liquid density 67.0 lbm/ft3: terminal = 7.3484220382 ft/s, Turner = 8.8181064458 ft/s
+derived tension, sigma 80.0 dyne/cm at liquid density 67.0 lbm/ft3: terminal = 7.5978738354 ft/s, Turner = 9.1174486024 ft/s
+# Liquid density at the same published gas density, contiguous.
+derived density, liquid density 40.0 lbm/ft3 at sigma 60.0 dyne/cm: terminal = 6.1628840484 ft/s, Turner = 7.3954608581 ft/s
+derived density, liquid density 45.0 lbm/ft3 at sigma 60.0 dyne/cm: terminal = 6.3620398181 ft/s, Turner = 7.6344477818 ft/s
+derived density, liquid density 50.0 lbm/ft3 at sigma 60.0 dyne/cm: terminal = 6.5440748684 ft/s, Turner = 7.8528898421 ft/s
+derived density, liquid density 55.0 lbm/ft3 at sigma 60.0 dyne/cm: terminal = 6.7120736517 ft/s, Turner = 8.0544883821 ft/s
+derived density, liquid density 60.0 lbm/ft3 at sigma 60.0 dyne/cm: terminal = 6.8683281812 ft/s, Turner = 8.2419938174 ft/s
+derived density, liquid density 62.0 lbm/ft3 at sigma 60.0 dyne/cm: terminal = 6.9279484821 ft/s, Turner = 8.3135381785 ft/s
+derived density, liquid density 67.0 lbm/ft3 at sigma 60.0 dyne/cm: terminal = 7.0706183100 ft/s, Turner = 8.4847419720 ft/s
+derived density, liquid density 70.0 lbm/ft3 at sigma 60.0 dyne/cm: terminal = 7.1522397565 ft/s, Turner = 8.5826877078 ft/s
+derived density, liquid density 75.0 lbm/ft3 at sigma 60.0 dyne/cm: terminal = 7.2823697925 ft/s, Turner = 8.7388437510 ft/s
+# Brine against condensate, on the Turner fluid properties the module publishes.
+engine fluid, water (Water (Turner)): sigma = 60.0 dyne/cm, liquid density = 67.0 lbm/ft3
+engine fluid, condensate (Condensate (Turner)): sigma = 20.0 dyne/cm, liquid density = 45.0 lbm/ft3
+engine fluid, an unknown fluid id falls back to water rather than refusing
+golden fluid pair, at 1000.0 psia 620.0 degR the water terminal velocity = 7.0706235386 ft/s
+golden fluid pair, at 1000.0 psia 620.0 degR the condensate terminal velocity = 4.8341084620 ft/s
+derived fluid pair, at 1000.0 psia 620.0 degR the water terminal over the condensate terminal = 1.4626530609
+derived fluid pair, at 1000.0 psia 620.0 degR the water Turner rate over the condensate Turner rate = 1.4626530609
+# Condensate loads a well at a LOWER rate than water: about a third the tension
+# and a lower density, so its droplets are easier to carry. Getting the sign of
+# that backwards flags healthy wells as loaded.
+# What the balance refuses. A liquid lighter than the gas, or no tension at all,
+# is not given a velocity.
+engine refusal, liquid density 2.0 below gas density 5.0: ok = false, velocity = n/a ft/s
+engine refusal, sigma 0.0 dyne/cm: ok = false, velocity = n/a ft/s
+engine refusal, an unknown correlation: ok = false, error = "Unknown loading correlation "guess". Use turner or coleman."
+
+# SECTION 5: FLOW AREA, AND THE RATE THAT FOLLOWS FROM A VELOCITY
+# A critical velocity is not a rate until it is multiplied by an area and
+# converted to standard conditions. The area is where the tubing size enters and
+# it is the only place it enters, which is why a velocity string works at all.
+# Associate m04 l01 and l02 own this.
+derived area, inside diameter 4.494 in: flow area = 0.1101522888 ft2, cross-section = 15.86192958 in2
+derived area, inside diameter 3.958 in: flow area = 0.0854434880 ft2, cross-section = 12.30386227 in2
+derived area, inside diameter 3.826 in: flow area = 0.0798394103 ft2, cross-section = 11.49687509 in2
+derived area, inside diameter 3.740 in: flow area = 0.0762905233 ft2, cross-section = 10.98583535 in2
+derived area, inside diameter 3.548 in: flow area = 0.0686585475 ft2, cross-section = 9.88683084 in2
+derived area, inside diameter 3.476 in: flow area = 0.0659002292 ft2, cross-section = 9.48963300 in2
+derived area, inside diameter 3.068 in: flow area = 0.0513379000 ft2, cross-section = 7.39265760 in2
+derived area, inside diameter 2.441 in: flow area = 0.0324984725 ft2, cross-section = 4.67978003 in2
+derived area, inside diameter 2.041 in: flow area = 0.0227202653 ft2, cross-section = 3.27171821 in2
+derived area, inside diameter 1.995 in: flow area = 0.0217076689 ft2, cross-section = 3.12590433 in2
+derived area, inside diameter 1.610 in: flow area = 0.0141377124 ft2, cross-section = 2.03583058 in2
+derived area, doubling the diameter from 2.441 in to 4.882 in multiplies the area by 4.0000000000
+# Rate and velocity are exact inverses. A rate quoted at surface and a velocity
+# quoted downhole are the same statement in two currencies.
+derived inverse, 12.0 ft/s through 2.441 in at 900.0 psia 580.0 degR z 0.9 = 2053.715375332 Mscf/d
+derived inverse, that rate back to a velocity = 12.000000000000 ft/s
+derived inverse, round trip closure = -1.7764e-15 ft/s
+engine refusal, velocityAtRate with zero area = n/a
+engine refusal, gasDensityLbFt3 at zero temperature = n/a lbm/ft3
+
+# SECTION 6: THE CRITICAL RATE, THE ACTUAL VELOCITY, AND THE RATIO THAT DECIDES
+#
+# PROVENANCE, AND SECTION 7 TAKES THE OTHER ROAD. The critical rates below
+# come from the ENGINE. Section 7 prints the same quantity for the same
+# published rows from the ORACLE. They agree to about ten significant figures
+# and disagree after that: golden row 3 Turner is 1614.343766935 Mscf/d here
+# and 1614.343188395 Mscf/d there, 5.7854e-4 apart. Both are correct and they
+# are two roads to one number.
+#
+# So keep a lesson on ONE road. A writer who takes a rate from section 6 and
+# a paired Turner-against-Coleman figure from section 7 has silently mixed
+# them, and the difference is exactly the size that reads as a typo. A lesson
+# writer hit this fork and kept m04 wholly on section 6 and m05 wholly on
+# section 7 rather than trusting themselves to remember which was which.
+# One published station, walked across a contiguous rate sweep. The critical rate
+# does not move: it belongs to the station, not to the well. The actual velocity
+# and the ratio move with the rate, and the ratio is the only one of the three
+# that carries a verdict. Every row is printed, including the two nobody would
+# report. Associate m04 l03 to l05.
+derived station, published golden row 3 conditions: 1000.0 psia, 540.0 degR, z 0.90, gas gravity 0.65, water at 60.0 dyne/cm and 67.0 lbm/ft3, 2.441 in tubing
+derived station, gas density = 3.6097875709 lbm/ft3
+derived station, terminal droplet velocity = 6.5866417464 ft/s
+derived station, Turner critical velocity = 7.9039700957 ft/s
+derived station, flow area = 0.0324984725 ft2
+derived station, Turner critical rate = 1614.343766935 Mscf/d
+derived station, Coleman critical velocity = 6.5866417464 ft/s, Coleman critical rate = 1345.286472446 Mscf/d
+derived sweep, rate 400.0 Mscf/d: actual velocity = 1.9584354355 ft/s, critical rate = 1614.343766935 Mscf/d, ratio = 0.2477787000, loaded = true
+derived sweep, rate 800.0 Mscf/d: actual velocity = 3.9168708710 ft/s, critical rate = 1614.343766935 Mscf/d, ratio = 0.4955574001, loaded = true
+derived sweep, rate 1200.0 Mscf/d: actual velocity = 5.8753063066 ft/s, critical rate = 1614.343766935 Mscf/d, ratio = 0.7433361001, loaded = true
+derived sweep, rate 1400.0 Mscf/d: actual velocity = 6.8545240243 ft/s, critical rate = 1614.343766935 Mscf/d, ratio = 0.8672254502, loaded = true
+derived sweep, rate 1600.0 Mscf/d: actual velocity = 7.8337417421 ft/s, critical rate = 1614.343766935 Mscf/d, ratio = 0.9911148002, loaded = true
+derived sweep, rate 1614.0 Mscf/d: actual velocity = 7.9022869823 ft/s, critical rate = 1614.343766935 Mscf/d, ratio = 0.9997870547, loaded = true
+derived sweep, rate 1800.0 Mscf/d: actual velocity = 8.8129594598 ft/s, critical rate = 1614.343766935 Mscf/d, ratio = 1.1150041502, loaded = false
+derived sweep, rate 2200.0 Mscf/d: actual velocity = 10.7713948953 ft/s, critical rate = 1614.343766935 Mscf/d, ratio = 1.3627828503, loaded = false
+derived sweep, rate 2600.0 Mscf/d: actual velocity = 12.7298303309 ft/s, critical rate = 1614.343766935 Mscf/d, ratio = 1.6105615503, loaded = false
+# The ratio is the rate ratio and the velocity ratio at once, because both sides
+# of it are evaluated at the same station on the same area.
+derived sweep, at 1800.0 Mscf/d the velocity ratio = 1.1150041502 and the rate ratio = 1.1150041502, difference = 0.0000e+0
+
+# SECTION 7: TURNER AND COLEMAN SIDE BY SIDE, AND THE TWENTY PERCENT
+# They are one equation and one factor. Turner et al. found their field data sat
+# about twenty percent above the theoretical velocity and applied the adjustment;
+# Coleman et al., on low-pressure wells, found the unadjusted equation fitted
+# better. Every published row shows the same factor, exactly, to machine
+# precision. Associate m05 and Expert m01.
+golden pair row 1, Coleman = 12.1435923634 ft/s, Turner = 14.5723108360 ft/s, Turner over Coleman = 1.200000000000
+golden pair row 2, Coleman = 13.0189530541 ft/s, Turner = 15.6227436649 ft/s, Turner over Coleman = 1.200000000000
+golden pair row 3, Coleman = 6.5866393859 ft/s, Turner = 7.9039672631 ft/s, Turner over Coleman = 1.200000000000
+golden pair row 4, Coleman = 7.0706235386 ft/s, Turner = 8.4847482463 ft/s, Turner over Coleman = 1.200000000000
+golden pair row 5, Coleman = 4.0737980096 ft/s, Turner = 4.8885576115 ft/s, Turner over Coleman = 1.200000000000
+golden pair row 6, Coleman = 4.3868983237 ft/s, Turner = 5.2642779885 ft/s, Turner over Coleman = 1.200000000000
+golden pair row 7, Coleman = 8.3363458777 ft/s, Turner = 10.0036150532 ft/s, Turner over Coleman = 1.200000000000
+golden pair row 8, Coleman = 8.9396311083 ft/s, Turner = 10.7275573299 ft/s, Turner over Coleman = 1.200000000000
+golden pair row 9, Coleman = 4.4988594774 ft/s, Turner = 5.3986313728 ft/s, Turner over Coleman = 1.200000000000
+golden pair row 10, Coleman = 4.8341084620 ft/s, Turner = 5.8009301545 ft/s, Turner over Coleman = 1.200000000000
+golden pair row 11, Coleman = 2.7473233382 ft/s, Turner = 3.2967880058 ft/s, Turner over Coleman = 1.200000000000
+golden pair row 12, Coleman = 2.9673403246 ft/s, Turner = 3.5608083895 ft/s, Turner over Coleman = 1.200000000000
+# And the same factor carried straight through to rate, because the rate is
+# linear in the velocity at a fixed station and a fixed area.
+derived pair row 1, Turner rate = 892.895047041 Mscf/d, Coleman rate = 744.079205867 Mscf/d, Turner minus Coleman = 148.815841173 Mscf/d, as a percentage of the Coleman rate = 20.00000000
+derived pair row 2, Turner rate = 833.741395355 Mscf/d, Coleman rate = 694.784496129 Mscf/d, Turner minus Coleman = 138.956899226 Mscf/d, as a percentage of the Coleman rate = 20.00000000
+derived pair row 3, Turner rate = 1614.343188395 Mscf/d, Coleman rate = 1345.285990329 Mscf/d, Turner minus Coleman = 269.057198066 Mscf/d, as a percentage of the Coleman rate = 20.00000000
+derived pair row 4, Turner rate = 1509.356272243 Mscf/d, Coleman rate = 1257.796893536 Mscf/d, Turner minus Coleman = 251.559378707 Mscf/d, as a percentage of the Coleman rate = 20.00000000
+derived pair row 5, Turner rate = 2496.154595078 Mscf/d, Coleman rate = 2080.128829231 Mscf/d, Turner minus Coleman = 416.025765846 Mscf/d, as a percentage of the Coleman rate = 20.00000000
+derived pair row 6, Turner rate = 2341.162863678 Mscf/d, Coleman rate = 1950.969053065 Mscf/d, Turner minus Coleman = 390.193810613 Mscf/d, as a percentage of the Coleman rate = 20.00000000
+derived pair row 7, Turner rate = 612.955517763 Mscf/d, Coleman rate = 510.796264802 Mscf/d, Turner minus Coleman = 102.159252960 Mscf/d, as a percentage of the Coleman rate = 20.00000000
+derived pair row 8, Turner rate = 572.499223494 Mscf/d, Coleman rate = 477.082686245 Mscf/d, Turner minus Coleman = 95.416537249 Mscf/d, as a percentage of the Coleman rate = 20.00000000
+derived pair row 9, Turner rate = 1102.641685283 Mscf/d, Coleman rate = 918.868071069 Mscf/d, Turner minus Coleman = 183.773614214 Mscf/d, as a percentage of the Coleman rate = 20.00000000
+derived pair row 10, Turner rate = 1031.930477998 Mscf/d, Coleman rate = 859.942064998 Mscf/d, Turner minus Coleman = 171.988413000 Mscf/d, as a percentage of the Coleman rate = 20.00000000
+derived pair row 11, Turner rate = 1683.378448943 Mscf/d, Coleman rate = 1402.815374119 Mscf/d, Turner minus Coleman = 280.563074824 Mscf/d, as a percentage of the Coleman rate = 20.00000000
+derived pair row 12, Turner rate = 1583.585134443 Mscf/d, Coleman rate = 1319.654278703 Mscf/d, Turner minus Coleman = 263.930855741 Mscf/d, as a percentage of the Coleman rate = 20.00000000
+engine pair, LOADING_ADJUSTMENT.turner = 1.200000, LOADING_ADJUSTMENT.coleman = 1.000000, and the difference between them as a percentage = 20.000000
+# The terminal velocity is IDENTICAL under both. Only the adjustment differs, so
+# a lesson that says the two correlations use different physics is wrong.
+derived pair, at 1200.0 psia 600.0 degR z 0.9: Turner terminal = 6.3307682001 ft/s, Coleman terminal = 6.3307682001 ft/s, difference = 0.0000e+0 ft/s
+derived pair, at the same station: Turner critical = 7.5969218402 ft/s, Coleman critical = 6.3307682001 ft/s, and the shared droplet constant = 1.5935346111
+
+# SECTION 8: THE THRESHOLD BETWEEN THEM, AND THE SENTENCE THAT PRINTS IT
+# recommendCorrelation takes ONE pressure and switches on a strict comparison
+# against 1000 psia. The branch is unambiguous; the sentence attached to it is
+# where the trouble was. The reason used to round the pressure it branched on to
+# a whole number, so a well below the limit printed AS the limit under a branch
+# that only takes wells below it, and it hardcoded the word wellhead for whatever
+# station it was handed. Both are display-only and both are now fixed: the print
+# carries one decimal and the station label is set by the caller. One decimal
+# NARROWS the collision by ten rather than closing it. Expert m01 l04.
+engine threshold, 400.00 psia: correlation = coleman, rounded whole that pressure prints as 400, printed to one decimal it prints as 400.0
+engine threshold, 850.00 psia: correlation = coleman, rounded whole that pressure prints as 850, printed to one decimal it prints as 850.0
+engine threshold, 980.00 psia: correlation = coleman, rounded whole that pressure prints as 980, printed to one decimal it prints as 980.0
+engine threshold, 999.04 psia: correlation = coleman, rounded whole that pressure prints as 999, printed to one decimal it prints as 999.0
+engine threshold, 999.88 psia: correlation = coleman, rounded whole that pressure prints as 1000, printed to one decimal it prints as 999.9
+engine threshold, 999.96 psia: correlation = coleman, rounded whole that pressure prints as 1000, printed to one decimal it prints as 1000.0
+engine threshold, 1000.00 psia: correlation = turner, rounded whole that pressure prints as 1000, printed to one decimal it prints as 1000.0
+engine threshold, 1000.04 psia: correlation = turner, rounded whole that pressure prints as 1000, printed to one decimal it prints as 1000.0
+engine threshold, 1000.50 psia: correlation = turner, rounded whole that pressure prints as 1001, printed to one decimal it prints as 1000.5
+engine threshold, 1500.00 psia: correlation = turner, rounded whole that pressure prints as 1500, printed to one decimal it prints as 1500.0
+engine threshold, 2500.00 psia: correlation = turner, rounded whole that pressure prints as 2500, printed to one decimal it prints as 2500.0
+engine threshold, the reason at 850.00 psia: "At 850.0 psia wellhead this well sits inside the low-pressure range Coleman's data covered, where the unadjusted equation fitted better."
+engine threshold, the reason at 999.88 psia: "At 999.9 psia wellhead this well sits inside the low-pressure range Coleman's data covered, where the unadjusted equation fitted better."
+engine threshold, the reason at 1500.00 psia: "At 1500.0 psia wellhead this well is above the range Coleman studied, so Turner's 20 percent adjustment is the usual choice."
+# The station label. The function takes the pressure of any station, and callers do
+# hand it others, so the word in the sentence is an argument now.
+engine threshold, with no label at 1500.00 psia: "At 1500.0 psia wellhead this well is above the range Coleman studied, so Turner's 20 percent adjustment is the usual choice."
+engine threshold, with a label at 1500.00 psia: "At 1500.0 psia at the 7,500 ft shoe this well is above the range Coleman studied, so Turner's 20 percent adjustment is the usual choice."
+# The collision that one decimal leaves behind: anything inside 0.05 psi of the
+# limit still renders as the limit.
+derived threshold, 999.96 psia prints as 1000.0 and the limit prints as 1000.0, while the branch still returns coleman
+derived threshold, the distance from 999.96 psia to the limit = 0.0400 psi
+derived threshold, the distance from 999.04 psia to the limit = 0.9600 psi, and it prints as 999.0
+
+# SECTION 9: TEACHING WELL EBOCHA-5, THE WHOLE DEFINITION
+# A TEACHING WELL. Not a published case, not a real well, and no oracle has ever
+# checked it. It exists so the three functions a point check cannot reach have
+# something to run on: the profile, the sizing and the correlation seam. Every
+# input is on this page so a reader can rebuild it.
+teaching EBOCHA-5, tubing shoe depth = 7500.0 ft
+teaching EBOCHA-5, current tubing inside diameter = 3.548 in, flow area = 0.0686585475 ft2
+teaching EBOCHA-5, gas gravity = 0.620
+teaching EBOCHA-5, produced liquid interfacial tension = 62.0 dyne/cm, liquid density = 66.2 lbm/ft3 (produced brine)
+teaching EBOCHA-5, gas rate = 3100.0 Mscf/d
+teaching EBOCHA-5, tubing candidates for a velocity string = 3.958, 3.826, 3.740, 3.548, 3.476, 3.068, 2.441, 2.041, 1.610 in
+teaching EBOCHA-5 traverse, 0.0 ft: 880.0 psia, 112.00 degF, 571.67 degR, z from Sutton and DAK = 0.9023320453, tubing 3.548 in
+teaching EBOCHA-5 traverse, 1500.0 ft: 978.0 psia, 128.40 degF, 588.07 degR, z from Sutton and DAK = 0.9038126330, tubing 3.548 in
+teaching EBOCHA-5 traverse, 3000.0 ft: 1090.0 psia, 144.80 degF, 604.47 degR, z from Sutton and DAK = 0.9054332182, tubing 3.548 in
+teaching EBOCHA-5 traverse, 4500.0 ft: 1218.0 psia, 161.20 degF, 620.87 degR, z from Sutton and DAK = 0.9073899041, tubing 3.548 in
+teaching EBOCHA-5 traverse, 6000.0 ft: 1350.0 psia, 177.60 degF, 637.27 degR, z from Sutton and DAK = 0.9105334387, tubing 3.548 in
+teaching EBOCHA-5 traverse, 7500.0 ft: 1500.0 psia, 194.00 degF, 653.67 degR, z from Sutton and DAK = 0.9142643742, tubing 3.548 in
+teaching EBOCHA-5 traverse, 0.0 ft: gas density = 2.8547437868 lbm/ft3
+teaching EBOCHA-5 traverse, 1500.0 ft: gas density = 3.0791274829 lbm/ft3
+teaching EBOCHA-5 traverse, 3000.0 ft: gas density = 3.3326643060 lbm/ft3
+teaching EBOCHA-5 traverse, 4500.0 ft: gas density = 3.6178363439 lbm/ft3
+teaching EBOCHA-5 traverse, 6000.0 ft: gas density = 3.8932352069 lbm/ft3
+teaching EBOCHA-5 traverse, 7500.0 ft: gas density = 4.2000760651 lbm/ft3
+teaching EBOCHA-5, the wellhead pressure the operator reads = 880.0 psia
+teaching EBOCHA-5, the shoe pressure the liquid sees = 1500.0 psia
+teaching EBOCHA-5, the pressure ratio between them = 1.70454545
+
+# SECTION 10: THE LOADING PROFILE DOWN EBOCHA-5, STATION BY STATION
+# The correlation used here is the one recommendCorrelation returns for the
+# WELLHEAD pressure, which is how the function is called in practice. Every
+# station is printed, in order, top first, with its own ratio, so the crossing is
+# a sequence rather than an assertion. Professional m01 and m02 own this.
+teaching EBOCHA-5 profile, recommendCorrelation at the wellhead returns coleman
+teaching EBOCHA-5 profile, its reason: "At 880.0 psia wellhead this well sits inside the low-pressure range Coleman's data covered, where the unadjusted equation fitted better."
+teaching EBOCHA-5 profile coleman, 0.0 ft: gas density = 2.8547437868 lbm/ft3, terminal = 7.4662818275 ft/s, critical velocity = 7.4662818275 ft/s
+teaching EBOCHA-5 profile coleman, 1500.0 ft: gas density = 3.0791274829 lbm/ft3, terminal = 7.1827183372 ft/s, critical velocity = 7.1827183372 ft/s
+teaching EBOCHA-5 profile coleman, 3000.0 ft: gas density = 3.3326643060 lbm/ft3, terminal = 6.8971536633 ft/s, critical velocity = 6.8971536633 ft/s
+teaching EBOCHA-5 profile coleman, 4500.0 ft: gas density = 3.6178363439 lbm/ft3, terminal = 6.6122247656 ft/s, critical velocity = 6.6122247656 ft/s
+teaching EBOCHA-5 profile coleman, 6000.0 ft: gas density = 3.8932352069 lbm/ft3, terminal = 6.3670447518 ft/s, critical velocity = 6.3670447518 ft/s
+teaching EBOCHA-5 profile coleman, 7500.0 ft: gas density = 4.2000760651 lbm/ft3, terminal = 6.1224977520 ft/s, critical velocity = 6.1224977520 ft/s
+teaching EBOCHA-5 profile coleman, 0.0 ft: critical rate = 2671.123287413 Mscf/d, actual velocity = 8.6650712734 ft/s, ratio = 1.1605604334, loaded = false
+teaching EBOCHA-5 profile coleman, 1500.0 ft: critical rate = 2771.653428599 Mscf/d, actual velocity = 8.0336259272 ft/s, ratio = 1.1184659554, loaded = false
+teaching EBOCHA-5 profile coleman, 3000.0 ft: critical rate = 2880.606192973 Mscf/d, actual velocity = 7.4224572621 ft/s, ratio = 1.0761623743, loaded = false
+teaching EBOCHA-5 profile coleman, 4500.0 ft: critical rate = 2997.912433154 Mscf/d, actual velocity = 6.8373900941 ft/s, ratio = 1.0340528848, loaded = false
+teaching EBOCHA-5 profile coleman, 6000.0 ft: critical rate = 3106.497172008 Mscf/d, actual velocity = 6.3537282146 ft/s, ratio = 0.9979085215, loaded = true
+teaching EBOCHA-5 profile coleman, 7500.0 ft: critical rate = 3222.613396799 Mscf/d, actual velocity = 5.8895500931 ft/s, ratio = 0.9619521855, loaded = true
+teaching EBOCHA-5 profile coleman, controlling station = 7500.0 ft, its critical rate = 3222.613396799 Mscf/d, its ratio = 0.9619521855
+teaching EBOCHA-5 profile coleman, loaded = true, marginPct = -3.80478145 percent
+teaching EBOCHA-5 profile coleman, the wellhead ratio = 1.1605604334 and the shoe ratio = 0.9619521855, wellhead over shoe = 1.2064637420
+# Where the crossing sits. The last station that reads healthy and the first that
+# reads loaded, both printed, with the ratio each carries.
+teaching EBOCHA-5 profile coleman, deepest healthy station = 4500.0 ft at ratio 1.0340528848
+teaching EBOCHA-5 profile coleman, shallowest loading station = 6000.0 ft at ratio 0.9979085215
+teaching EBOCHA-5 profile coleman, the crossing sits between those two, so it lies inside the deepest 40.0000 percent of the string and outside the deepest 20.0000 percent
+# What a wellhead-only check would have said, on the same well, on the same day.
+teaching EBOCHA-5 profile coleman, a point check at the wellhead alone: ratio = 1.1605604334, loaded = false, margin = 16.05604334 percent
+teaching EBOCHA-5 profile coleman, the same well at the controlling station: ratio = 0.9619521855, loaded = true, margin = -3.80478145 percent
+# The critical rate rises monotonically with depth on a normal traverse, which is
+# WHY the shoe controls. The increments are printed so the shape is visible.
+teaching EBOCHA-5 profile coleman, from 0.0 ft to 1500.0 ft: critical rate rises 100.530141186 Mscf/d, ratio falls 0.0420944780
+teaching EBOCHA-5 profile coleman, from 1500.0 ft to 3000.0 ft: critical rate rises 108.952764374 Mscf/d, ratio falls 0.0423035811
+teaching EBOCHA-5 profile coleman, from 3000.0 ft to 4500.0 ft: critical rate rises 117.306240181 Mscf/d, ratio falls 0.0421094894
+teaching EBOCHA-5 profile coleman, from 4500.0 ft to 6000.0 ft: critical rate rises 108.584738855 Mscf/d, ratio falls 0.0361443633
+teaching EBOCHA-5 profile coleman, from 6000.0 ft to 7500.0 ft: critical rate rises 116.116224791 Mscf/d, ratio falls 0.0359563360
+# The same well at a contiguous set of gas rates, so the crossing can be watched
+# walking up the hole as the well declines. Every rate is printed, including the
+# two where nothing crosses at all.
+teaching EBOCHA-5 rate sweep coleman, 2400.0 Mscf/d: ratios = 0.898498, 0.865909, 0.833158, 0.800557, 0.772574, 0.744737, loaded = true, marginPct = -25.526282, shallowest loading station = 0.0 ft
+teaching EBOCHA-5 rate sweep coleman, 2700.0 Mscf/d: ratios = 1.010811, 0.974148, 0.937303, 0.900627, 0.869146, 0.837829, loaded = true, marginPct = -16.217068, shallowest loading station = 1500.0 ft
+teaching EBOCHA-5 rate sweep coleman, 3000.0 Mscf/d: ratios = 1.123123, 1.082386, 1.041447, 1.000696, 0.965718, 0.930921, loaded = true, marginPct = -6.907853, shallowest loading station = 6000.0 ft
+teaching EBOCHA-5 rate sweep coleman, 3100.0 Mscf/d: ratios = 1.160560, 1.118466, 1.076162, 1.034053, 0.997909, 0.961952, loaded = true, marginPct = -3.804781, shallowest loading station = 6000.0 ft
+teaching EBOCHA-5 rate sweep coleman, 3200.0 Mscf/d: ratios = 1.197998, 1.154546, 1.110877, 1.067409, 1.030099, 0.992983, loaded = true, marginPct = -0.701710, shallowest loading station = 7500.0 ft
+teaching EBOCHA-5 rate sweep coleman, 3450.0 Mscf/d: ratios = 1.291591, 1.244744, 1.197665, 1.150801, 1.110576, 1.070560, loaded = false, marginPct = 7.055969, shallowest loading station = none
+teaching EBOCHA-5 rate sweep coleman, 3700.0 Mscf/d: ratios = 1.385185, 1.334943, 1.284452, 1.234192, 1.191052, 1.148136, loaded = false, marginPct = 14.813648, shallowest loading station = none
+teaching EBOCHA-5 rate sweep coleman, 4000.0 Mscf/d: ratios = 1.497497, 1.443182, 1.388597, 1.334262, 1.287624, 1.241229, loaded = false, marginPct = 24.122863, shallowest loading station = none
+# What the profile refuses.
+engine refusal, an empty traverse: ok = false, error = "The loading profile needs at least one station from the flowing traverse."
+engine refusal, an unknown correlation in a profile: ok = false, error = "Unknown loading correlation "guess". Use turner or coleman."
+
+# SECTION 11: THE CORRELATION SEAM AT FULL SIZE, ON EVERY STATION
+# The SAME six stations, evaluated once under Coleman and once under Turner. The
+# correlation was chosen from the wellhead pressure alone and is then used at
+# every station including the one that actually controls. This is what the choice
+# is worth, in Mscf/d and in verdicts, not as a claim. Expert m01 owns it.
+teaching EBOCHA-5 seam, 0.0 ft at 880.0 psia: Coleman critical velocity = 7.4662818275 ft/s, Turner critical velocity = 8.9595381931 ft/s
+teaching EBOCHA-5 seam, 1500.0 ft at 978.0 psia: Coleman critical velocity = 7.1827183372 ft/s, Turner critical velocity = 8.6192620046 ft/s
+teaching EBOCHA-5 seam, 3000.0 ft at 1090.0 psia: Coleman critical velocity = 6.8971536633 ft/s, Turner critical velocity = 8.2765843959 ft/s
+teaching EBOCHA-5 seam, 4500.0 ft at 1218.0 psia: Coleman critical velocity = 6.6122247656 ft/s, Turner critical velocity = 7.9346697187 ft/s
+teaching EBOCHA-5 seam, 6000.0 ft at 1350.0 psia: Coleman critical velocity = 6.3670447518 ft/s, Turner critical velocity = 7.6404537021 ft/s
+teaching EBOCHA-5 seam, 7500.0 ft at 1500.0 psia: Coleman critical velocity = 6.1224977520 ft/s, Turner critical velocity = 7.3469973023 ft/s
+teaching EBOCHA-5 seam, 0.0 ft: Coleman critical rate = 2671.123287413 Mscf/d, Turner critical rate = 3205.347944896 Mscf/d, difference = 534.224657483 Mscf/d, Turner over Coleman = 1.200000000000
+teaching EBOCHA-5 seam, 1500.0 ft: Coleman critical rate = 2771.653428599 Mscf/d, Turner critical rate = 3325.984114318 Mscf/d, difference = 554.330685720 Mscf/d, Turner over Coleman = 1.200000000000
+teaching EBOCHA-5 seam, 3000.0 ft: Coleman critical rate = 2880.606192973 Mscf/d, Turner critical rate = 3456.727431568 Mscf/d, difference = 576.121238595 Mscf/d, Turner over Coleman = 1.200000000000
+teaching EBOCHA-5 seam, 4500.0 ft: Coleman critical rate = 2997.912433154 Mscf/d, Turner critical rate = 3597.494919784 Mscf/d, difference = 599.582486631 Mscf/d, Turner over Coleman = 1.200000000000
+teaching EBOCHA-5 seam, 6000.0 ft: Coleman critical rate = 3106.497172008 Mscf/d, Turner critical rate = 3727.796606410 Mscf/d, difference = 621.299434402 Mscf/d, Turner over Coleman = 1.200000000000
+teaching EBOCHA-5 seam, 7500.0 ft: Coleman critical rate = 3222.613396799 Mscf/d, Turner critical rate = 3867.136076159 Mscf/d, difference = 644.522679360 Mscf/d, Turner over Coleman = 1.200000000000
+teaching EBOCHA-5 seam, 0.0 ft: Coleman ratio = 1.1605604334 loaded false, Turner ratio = 0.9671336945 loaded true, verdicts agree = false
+teaching EBOCHA-5 seam, 1500.0 ft: Coleman ratio = 1.1184659554 loaded false, Turner ratio = 0.9320549628 loaded true, verdicts agree = false
+teaching EBOCHA-5 seam, 3000.0 ft: Coleman ratio = 1.0761623743 loaded false, Turner ratio = 0.8968019786 loaded true, verdicts agree = false
+teaching EBOCHA-5 seam, 4500.0 ft: Coleman ratio = 1.0340528848 loaded false, Turner ratio = 0.8617107374 loaded true, verdicts agree = false
+teaching EBOCHA-5 seam, 6000.0 ft: Coleman ratio = 0.9979085215 loaded true, Turner ratio = 0.8315904346 loaded true, verdicts agree = true
+teaching EBOCHA-5 seam, 7500.0 ft: Coleman ratio = 0.9619521855 loaded true, Turner ratio = 0.8016268212 loaded true, verdicts agree = true
+teaching EBOCHA-5 seam, Coleman verdict for the well: loaded = true, controlling = 7500.0 ft, marginPct = -3.80478145
+teaching EBOCHA-5 seam, Turner verdict for the well: loaded = true, controlling = 7500.0 ft, marginPct = -19.83731788
+teaching EBOCHA-5 seam, the two verdicts differ at 0.0, 1500.0, 3000.0, 4500.0 ft
+# recommendCorrelation asked at EVERY station rather than only at the gauge. The
+# function takes one pressure, so this is the same call six times, and it does not
+# return the same answer.
+teaching EBOCHA-5 seam, recommendCorrelation at 0.0 ft (880.0 psia) returns coleman
+teaching EBOCHA-5 seam, recommendCorrelation at 1500.0 ft (978.0 psia) returns coleman
+teaching EBOCHA-5 seam, recommendCorrelation at 3000.0 ft (1090.0 psia) returns turner
+teaching EBOCHA-5 seam, recommendCorrelation at 4500.0 ft (1218.0 psia) returns turner
+teaching EBOCHA-5 seam, recommendCorrelation at 6000.0 ft (1350.0 psia) returns turner
+teaching EBOCHA-5 seam, recommendCorrelation at 7500.0 ft (1500.0 psia) returns turner
+teaching EBOCHA-5 seam, the reason it gives at the shoe: "At 1500.0 psia at the 7,500 ft shoe this well is above the range Coleman studied, so Turner's 20 percent adjustment is the usual choice."
+teaching EBOCHA-5 seam, the wellhead choice is coleman and the controlling station would choose turner
+# The same seam on a PUBLISHED station, so the twenty percent is not only a
+# teaching-well number. Golden row 5: 2500.0 psia, 540.0 degR.
+derived seam, published row 5 Coleman rate = 2080.128829231 Mscf/d, Turner rate = 2496.154595078 Mscf/d, difference = 416.025765846 Mscf/d
+derived seam, a well making exactly the Coleman rate at that station is loaded under Turner at a ratio of 0.8333333333
+
+# SECTION 12: SIZING A VELOCITY STRING, EVERY CANDIDATE, BOTH CORRELATIONS
+# sizeTubingForRate returns the largest inside diameter whose critical rate the
+# well still beats, and it returns EVERY candidate with it. The pick is a single
+# line in the returned object; the rejections are the rest of it, and they are
+# where the argument about a workover actually happens. The list is run twice at
+# the SAME station, once under each correlation, and both full lists are printed
+# so the discarded candidate can be seen. Professional m03 and Expert m02.
+teaching EBOCHA-5 sizing, evaluated at the controlling station: 7500.0 ft, 1500.0 psia, 653.67 degR, z = 0.9142643742
+teaching EBOCHA-5 sizing, at a gas rate of 3100.0 Mscf/d
+teaching EBOCHA-5 sizing coleman, candidate 3.958 in: flow area = 0.0854434880 ft2, critical velocity = 6.1224977520 ft/s, critical rate = 4010.445008120 Mscf/d, actual velocity = 4.7325778044 ft/s, ratio = 0.7729815504, unloads = false
+teaching EBOCHA-5 sizing coleman, candidate 3.826 in: flow area = 0.0798394103 ft2, critical velocity = 6.1224977520 ft/s, critical rate = 3747.407462010 Mscf/d, actual velocity = 5.0647663014 ft/s, ratio = 0.8272385726, unloads = false
+teaching EBOCHA-5 sizing coleman, candidate 3.740 in: flow area = 0.0762905233 ft2, critical velocity = 6.1224977520 ft/s, critical rate = 3580.834014580 Mscf/d, actual velocity = 5.3003693982 ft/s, ratio = 0.8657201053, unloads = false
+teaching EBOCHA-5 sizing coleman, candidate 3.548 in: flow area = 0.0686585475 ft2, critical velocity = 6.1224977520 ft/s, critical rate = 3222.613396799 Mscf/d, actual velocity = 5.8895500931 ft/s, ratio = 0.9619521855, unloads = false
+teaching EBOCHA-5 sizing coleman, candidate 3.476 in: flow area = 0.0659002292 ft2, critical velocity = 6.1224977520 ft/s, critical rate = 3093.146724566 Mscf/d, actual velocity = 6.1360629550 ft/s, ratio = 1.0022156322, unloads = true
+teaching EBOCHA-5 sizing coleman, candidate 3.068 in: flow area = 0.0513379000 ft2, critical velocity = 6.1224977520 ft/s, critical rate = 2409.637406392 Mscf/d, actual velocity = 7.8765971099 ft/s, ratio = 1.2865006128, unloads = true
+teaching EBOCHA-5 sizing coleman, candidate 2.441 in: flow area = 0.0324984725 ft2, critical velocity = 6.1224977520 ft/s, critical rate = 1525.374720469 Mscf/d, actual velocity = 12.4426757415 ft/s, ratio = 2.0322875149, unloads = true
+teaching EBOCHA-5 sizing coleman, candidate 2.041 in: flow area = 0.0227202653 ft2, critical velocity = 6.1224977520 ft/s, critical rate = 1066.416841966 Mscf/d, actual velocity = 17.7976774974 ft/s, ratio = 2.9069308342, unloads = true
+teaching EBOCHA-5 sizing coleman, candidate 1.610 in: flow area = 0.0141377124 ft2, critical velocity = 6.1224977520 ft/s, critical rate = 663.579159341 Mscf/d, actual velocity = 28.6020782357 ft/s, ratio = 4.6716355635, unloads = true
+teaching EBOCHA-5 sizing coleman, largestUnloaded = 3.476 in at a ratio of 1.0022156322
+teaching EBOCHA-5 sizing coleman, candidates that unload = 3.476, 3.068, 2.441, 2.041, 1.610
+teaching EBOCHA-5 sizing coleman, candidates that do not = 3.958, 3.826, 3.740, 3.548
+teaching EBOCHA-5 sizing turner, candidate 3.958 in: flow area = 0.0854434880 ft2, critical velocity = 7.3469973023 ft/s, critical rate = 4812.534009744 Mscf/d, actual velocity = 4.7325778044 ft/s, ratio = 0.6441512920, unloads = false
+teaching EBOCHA-5 sizing turner, candidate 3.826 in: flow area = 0.0798394103 ft2, critical velocity = 7.3469973023 ft/s, critical rate = 4496.888954411 Mscf/d, actual velocity = 5.0647663014 ft/s, ratio = 0.6893654772, unloads = false
+teaching EBOCHA-5 sizing turner, candidate 3.740 in: flow area = 0.0762905233 ft2, critical velocity = 7.3469973023 ft/s, critical rate = 4297.000817496 Mscf/d, actual velocity = 5.3003693982 ft/s, ratio = 0.7214334210, unloads = false
+teaching EBOCHA-5 sizing turner, candidate 3.548 in: flow area = 0.0686585475 ft2, critical velocity = 7.3469973023 ft/s, critical rate = 3867.136076159 Mscf/d, actual velocity = 5.8895500931 ft/s, ratio = 0.8016268212, unloads = false
+teaching EBOCHA-5 sizing turner, candidate 3.476 in: flow area = 0.0659002292 ft2, critical velocity = 7.3469973023 ft/s, critical rate = 3711.776069480 Mscf/d, actual velocity = 6.1360629550 ft/s, ratio = 0.8351796935, unloads = false
+teaching EBOCHA-5 sizing turner, candidate 3.068 in: flow area = 0.0513379000 ft2, critical velocity = 7.3469973023 ft/s, critical rate = 2891.564887670 Mscf/d, actual velocity = 7.8765971099 ft/s, ratio = 1.0720838440, unloads = true
+teaching EBOCHA-5 sizing turner, candidate 2.441 in: flow area = 0.0324984725 ft2, critical velocity = 7.3469973023 ft/s, critical rate = 1830.449664562 Mscf/d, actual velocity = 12.4426757415 ft/s, ratio = 1.6935729291, unloads = true
+teaching EBOCHA-5 sizing turner, candidate 2.041 in: flow area = 0.0227202653 ft2, critical velocity = 7.3469973023 ft/s, critical rate = 1279.700210360 Mscf/d, actual velocity = 17.7976774974 ft/s, ratio = 2.4224423618, unloads = true
+teaching EBOCHA-5 sizing turner, candidate 1.610 in: flow area = 0.0141377124 ft2, critical velocity = 7.3469973023 ft/s, critical rate = 796.294991209 Mscf/d, actual velocity = 28.6020782357 ft/s, ratio = 3.8930296363, unloads = true
+teaching EBOCHA-5 sizing turner, largestUnloaded = 3.068 in at a ratio of 1.0720838440
+teaching EBOCHA-5 sizing turner, candidates that unload = 3.068, 2.441, 2.041, 1.610
+teaching EBOCHA-5 sizing turner, candidates that do not = 3.958, 3.826, 3.740, 3.548, 3.476
+teaching EBOCHA-5 sizing, the Coleman pick is 3.476 in and the Turner pick is 3.068 in
+teaching EBOCHA-5 sizing, THE DISCARDED CANDIDATE: 3.476 in reads 1.0022156322 under Coleman and 0.8351796935 under Turner
+teaching EBOCHA-5 sizing, the Coleman pick loses 0.1670359387 of ratio when the other correlation is used, which is 16.666667 percent of it
+teaching EBOCHA-5 sizing, the Turner pick reads 1.2865006128 under Coleman and 1.0720838440 under Turner
+teaching EBOCHA-5 sizing, the returned object carries these keys: rows, largestUnloaded, ok
+teaching EBOCHA-5 sizing, each row carries these keys: idIn, ok, correlation, adjustment, rhoGasLbFt3, terminalFtS, velocityFtS, constant, areaFt2, criticalVelocityFtS, criticalRateMscfd, actualVelocityFtS, ratio, loaded
+teaching EBOCHA-5 sizing, so the CORRELATION is recorded, on every row, as "coleman" and "turner", and the adjustment beside it as 1.0000 and 1.2000
+# But the STATION is recorded nowhere. A row carries the pressure and
+# temperature only through the density and the velocity it produced, and the
+# returned object names no depth at all, so two sizings run at two stations on
+# the same well are indistinguishable from their return values. See section 13.
+# A rate nothing on the list can carry returns null rather than the least bad
+# candidate, which is the right refusal and worth showing beside the pick.
+teaching EBOCHA-5 sizing, at 40.0 Mscf/d the largestUnloaded = null, and the best ratio on the list = 0.0502326405
+teaching EBOCHA-5 sizing, the rows are returned largest diameter first: 3.958 then 3.826 then 3.740 then 3.548 then 3.476 then 3.068 then 2.441 then 2.041 then 1.610
+
+# SECTION 13: THE SAME SIZING AT THE WRONG STATION
+# sizeTubingForRate takes bare pPsia, tempR and z and has no opinion about which
+# station they came from. the loadingProfile header says the controlling
+# station is the shoe and that evaluating at the wellhead is the classic error,
+# and the sizing that consumes that judgement accepts wellhead conditions without
+# a murmur. Both full lists are printed. Professional m03 l04 states it as a
+# limit; Expert m05 l04 states it as a fails-open.
+teaching EBOCHA-5 wellhead sizing coleman, candidate 3.958 in: critical rate = 3324.132229053 Mscf/d, ratio = 0.9325742138, unloads = false
+teaching EBOCHA-5 wellhead sizing coleman, candidate 3.826 in: critical rate = 3106.108647454 Mscf/d, ratio = 0.9980333439, unloads = false
+teaching EBOCHA-5 wellhead sizing coleman, candidate 3.740 in: critical rate = 2968.041135249 Mscf/d, ratio = 1.0444599177, unloads = true
+teaching EBOCHA-5 wellhead sizing coleman, candidate 3.548 in: critical rate = 2671.123287413 Mscf/d, ratio = 1.1605604334, unloads = true
+teaching EBOCHA-5 wellhead sizing coleman, candidate 3.476 in: critical rate = 2563.812418697 Mscf/d, ratio = 1.2091368219, unloads = true
+teaching EBOCHA-5 wellhead sizing coleman, candidate 3.068 in: critical rate = 1997.272957665 Mscf/d, ratio = 1.5521163435, unloads = true
+teaching EBOCHA-5 wellhead sizing coleman, candidate 2.441 in: critical rate = 1264.335319254 Mscf/d, ratio = 2.4518812002, unloads = true
+teaching EBOCHA-5 wellhead sizing coleman, candidate 2.041 in: critical rate = 883.919511877 Mscf/d, ratio = 3.5071066521, unloads = true
+teaching EBOCHA-5 wellhead sizing coleman, candidate 1.610 in: critical rate = 550.019976742 Mscf/d, ratio = 5.6361589235, unloads = true
+teaching EBOCHA-5 wellhead sizing coleman, largestUnloaded = 3.740 in at a ratio of 1.0444599177
+teaching EBOCHA-5 wellhead sizing coleman, the same list at the controlling station picks 3.476 in, so the station is worth 0.264 in of tubing
+teaching EBOCHA-5 wellhead sizing turner, candidate 3.958 in: critical rate = 3988.958674864 Mscf/d, ratio = 0.7771451781, unloads = false
+teaching EBOCHA-5 wellhead sizing turner, candidate 3.826 in: critical rate = 3727.330376945 Mscf/d, ratio = 0.8316944533, unloads = false
+teaching EBOCHA-5 wellhead sizing turner, candidate 3.740 in: critical rate = 3561.649362299 Mscf/d, ratio = 0.8703832648, unloads = false
+teaching EBOCHA-5 wellhead sizing turner, candidate 3.548 in: critical rate = 3205.347944896 Mscf/d, ratio = 0.9671336945, unloads = false
+teaching EBOCHA-5 wellhead sizing turner, candidate 3.476 in: critical rate = 3076.574902437 Mscf/d, ratio = 1.0076140183, unloads = true
+teaching EBOCHA-5 wellhead sizing turner, candidate 3.068 in: critical rate = 2396.727549198 Mscf/d, ratio = 1.2934302862, unloads = true
+teaching EBOCHA-5 wellhead sizing turner, candidate 2.441 in: critical rate = 1517.202383105 Mscf/d, ratio = 2.0432343335, unloads = true
+teaching EBOCHA-5 wellhead sizing turner, candidate 2.041 in: critical rate = 1060.703414252 Mscf/d, ratio = 2.9225888767, unloads = true
+teaching EBOCHA-5 wellhead sizing turner, candidate 1.610 in: critical rate = 660.023972091 Mscf/d, ratio = 4.6967991029, unloads = true
+teaching EBOCHA-5 wellhead sizing turner, largestUnloaded = 3.476 in at a ratio of 1.0076140183
+teaching EBOCHA-5 wellhead sizing turner, the same list at the controlling station picks 3.068 in, so the station is worth 0.408 in of tubing
+teaching EBOCHA-5 wellhead sizing, the current string is 3.548 in and the wellhead sizing returns 3.740 in, so it reports no workover is needed
+teaching EBOCHA-5 wellhead sizing, the current string ratio at the wellhead = 1.1605604334 and at the controlling station = 0.9619521855
+teaching EBOCHA-5 wellhead sizing, the well is loading over the bottom 40.0000 percent of its tubing while that answer is returned
+# The controlling profile point already carries pPsia, tempR, z and idIn so that
+# it can be handed straight in. Nothing makes a caller do it.
+teaching EBOCHA-5 wellhead sizing, the controlling point carries: pPsia = 1500.0, tempR = 653.67, z = 0.9142643742, idIn = 3.548, depthFt = 7500.0
+
+# SECTION 14: THE PUBLISHED PLUNGER LIFT CASE, TERM BY TERM
+# The one plunger case the oracle publishes, run through the engine. Every term
+# of the static force balance printed on its own, then the gas a cycle needs, the
+# liquid it brings up and the ratio between them. The oracle did the same balance
+# in pascals and metres. Professional m04 owns the reading.
+golden plunger, inputs: depth 6000.0 ft, tubing 2.441 in, slug 200.0 ft, liquid SG 1.020, line 120.0 psia, casing 600.0 psia, plunger 6.0 lb, gas gravity 0.65, 580.0 degR, z 0.90
+golden plunger, slug hydrostatic = 88.4396108162 psi
+golden plunger, plunger weight term = 1.2821115429 psi
+golden plunger, gas column term = 16.2440787488 psi
+golden plunger, required lift pressure = 225.9658011080 psia
+golden plunger, gas per cycle = 5453.635111991 scf
+golden plunger, liquid per cycle = 1.1576450988 bbl
+golden plunger, required gas-liquid ratio = 4710.97326605 scf/bbl
+derived plunger, the gas column is carried over 5800.0 ft, from the line to the top of the slug
+derived plunger, gas column term AT THE LINE PRESSURE 120.0 psia, which is what the engine ships = 16.2440440692 psi
+derived plunger, gas column term AT THE PRESSURE AT THE SLUG TOP 136.244044 psia = 18.4429521336 psi
+derived plunger, gas column term AT THE AVERAGE OF THE TWO 128.122022 psia = 17.3434981014 psi
+derived plunger, the spread between the shipped convention and the slug top = 2.1989080644 psi
+derived plunger, that spread as a fraction of the required lift pressure = 9.7312e-3
+engine plunger, line pressure term = 120.0000000000 psi
+engine plunger, slug hydrostatic = 88.3320000000 psi, difference from the oracle = -0.1076108162 psi
+engine plunger, plunger weight term = 1.2821115429 psi, difference from the oracle = 0.0000e+0 psi
+engine plunger, gas column term = 16.2440440692 psi, difference from the oracle = -3.4680e-5 psi
+engine plunger, friction term = 0.0000000000 psi, which is an input and is measured rather than modelled
+engine plunger, required lift pressure = 225.8581556122 psia, difference from the oracle = -0.1076454958 psi
+engine plunger, tubing cross-section = 4.6797800340 in2
+engine plunger, the five terms sum to = 225.8581556122 psia
+engine plunger, gas per cycle = 5452.924357073 scf, difference from the oracle = -0.710754919 scf
+engine plunger, liquid per cycle = 1.1576450988 bbl, difference from the oracle = 0.0000e+0 bbl
+engine plunger, required gas-liquid ratio = 4710.35929989 scf/bbl, difference from the oracle = -0.61396616 scf/bbl
+derived plunger, slug volume and slug length are inverses: 200.0 ft gives 1.1576450988 bbl and that volume gives back 200.0000000000 ft
+engine plunger, FT3_PER_BBL = 5.614583 ft3/bbl
+engine plunger, the rule of thumb constant = 400.0 scf per bbl per 1000 ft
+derived plunger, the rule of thumb on the published depth = 2400.00000000 scf/bbl against a computed requirement of 4710.35929989 scf/bbl
+derived plunger, the physics is 1.96264971 times as demanding as the heuristic on the published case
+engine plunger, TYPICAL rise = 750.0 ft/min, fall in gas = 1000.0 ft/min, fall in liquid = 172.0 ft/min, friction = 0.0 psi
+# The friction term is linear and additive, which is the easiest thing in the
+# balance to check by hand.
+derived plunger, the published case with 40.0 psi of friction = 265.8581556122 psia, which is 40.0000000000 psi more
+
+# SECTION 15: THE GRADIENT CONSTANT, ITS EXACT FORM, AND WHAT THE ROUNDING COSTS
+# plungerLift.PSI_PER_FT_SG is 0.433. The exact water gradient is one thousand
+# kilograms per cubic metre times g, expressed in psi per foot per unit specific
+# gravity, and it is built below from the three conversion constants this wave
+# declares. The two are a tenth of a percent apart, the gate knows it and loosens
+# that one assertion to a 5e-3 relative tolerance, and the golden publishes the
+# ORACLE number for its own case, which the engine cannot reproduce. The cost
+# is a FIXED PERCENTAGE of whatever slug it sits on, so a cost in psi divides back
+# to the slug that produced it: the costs below are given on the PUBLISHED case
+# and on TEACHING slugs only. Expert m03 owns this.
+derived gradient, 1000.0 kg/m3 times g of 9.80665 m/s2 = 9806.650000 Pa/m
+derived gradient, times 0.3048 m per ft = 2989.066920 Pa/ft
+derived gradient, divided by 6894.757293168 Pa per psi = 0.4335275040010 psi/ft per unit SG
+engine gradient, PSI_PER_FT_SG = 0.4330000000000 psi/ft per unit SG
+derived gradient, exact minus rounded = 0.0005275040010 psi/ft per unit SG
+derived gradient, exact over rounded = 1.0012182540439
+derived gradient, the rounding as a percentage of the exact value = 0.1216771707 percent
+derived gradient, the rounding as a percentage of the rounded value = 0.1218254044 percent
+# The published case, where the golden carries the oracle exact-gradient answer.
+golden gradient, the published 200.0 ft slug of 1.02 SG liquid = 88.4396108162 psi
+engine gradient, the same slug through 0.433 = 88.3320000000 psi
+derived gradient, the cost on the published slug = 0.1076108162 psi
+derived gradient, the cost on the published required lift pressure = 0.1076454958 psi, which is 0.04763796 percent of it
+# A contiguous slug sweep at a TEACHING liquid gravity of 1.06, so the fixed
+# percentage and the growing absolute cost are both visible. Every row printed.
+teaching gradient, a 120.0 ft slug of 1.06 SG: 0.433 gives 55.0776000000 psi, the exact gradient gives 55.1446985089 psi, cost = 0.0670985089 psi, cost as a percentage = 0.1216771707
+teaching gradient, a 180.0 ft slug of 1.06 SG: 0.433 gives 82.6164000000 psi, the exact gradient gives 82.7170477634 psi, cost = 0.1006477634 psi, cost as a percentage = 0.1216771707
+teaching gradient, a 240.0 ft slug of 1.06 SG: 0.433 gives 110.1552000000 psi, the exact gradient gives 110.2893970179 psi, cost = 0.1341970179 psi, cost as a percentage = 0.1216771707
+teaching gradient, a 300.0 ft slug of 1.06 SG: 0.433 gives 137.6940000000 psi, the exact gradient gives 137.8617462723 psi, cost = 0.1677462723 psi, cost as a percentage = 0.1216771707
+teaching gradient, a 360.0 ft slug of 1.06 SG: 0.433 gives 165.2328000000 psi, the exact gradient gives 165.4340955268 psi, cost = 0.2012955268 psi, cost as a percentage = 0.1216771707
+teaching gradient, a 420.0 ft slug of 1.06 SG: 0.433 gives 192.7716000000 psi, the exact gradient gives 193.0064447813 psi, cost = 0.2348447813 psi, cost as a percentage = 0.1216771707
+teaching gradient, a 480.0 ft slug of 1.06 SG: 0.433 gives 220.3104000000 psi, the exact gradient gives 220.5787940357 psi, cost = 0.2683940357 psi, cost as a percentage = 0.1216771707
+# The same constant, at the same value, sits in espDesign in this domain, beside
+# an exact 62.4/144 elsewhere. Two modules in one domain carrying a rounded 0.433
+# is one adjudication, not two local fixes.
+derived gradient, 62.4 lbm/ft3 over 144 = 0.4333333333333 psi/ft, against the exact 0.4335275040010 and the shipped 0.4330000000000
+derived gradient, the gate pins PSI_PER_FT_SG to 0.433 exactly and loosens the slug assertion alone to a relative tolerance of 5e-3, which is 4.109234 times the disagreement it is covering
+
+# SECTION 16: TEACHING WELL OGUTA-2, AND THE PLUNGER SCREEN IN FULL
+# A TEACHING WELL. Not a published case, not a real well, no oracle has checked
+# it. It exists so the casing pressure can be walked down through the lift
+# requirement, which the published case does not do. Every field the screen
+# returns is printed, including the ones the verdict never uses. Professional m04
+# and Expert m04 and m05.
+teaching OGUTA-2, depth = 8200.0 ft, tubing = 2.441 in, cross-section = 4.6797800340 in2, flow area = 0.0324984725 ft2
+teaching OGUTA-2, line pressure = 145.0 psia, casing pressure = 720.0 psia
+teaching OGUTA-2, slug = 160.0 ft of 1.060 SG liquid, plunger = 8.20 lb
+teaching OGUTA-2, gas gravity = 0.660, average temperature = 592.0 degR (132.33 degF), z = 0.870
+teaching OGUTA-2, the well makes 1150.0 Mscf/d at a gas-liquid ratio of 5900.0 scf/bbl
+teaching OGUTA-2, cycle inputs: rise 750.0 ft/min, fall in gas 1000.0 ft/min, fall in liquid 172.0 ft/min, afterflow 30.0 min, shut-in 40.0 min
+teaching OGUTA-2 screen, ok = true, errors = 0
+teaching OGUTA-2 screen, line pressure term = 145.0000000000 psi
+teaching OGUTA-2 screen, slug hydrostatic term = 73.4368000000 psi
+teaching OGUTA-2 screen, plunger weight term = 1.7522191087 psi
+teaching OGUTA-2 screen, gas column term = 28.0007131786 psi
+teaching OGUTA-2 screen, friction term = 0.0000000000 psi
+teaching OGUTA-2 screen, required lift pressure = 248.1897322873 psia
+teaching OGUTA-2 screen, the casing exceeds it by = 471.8102677127 psi
+teaching OGUTA-2 screen, gas per cycle = 8854.756635640 scf
+teaching OGUTA-2 screen, liquid per cycle = 0.9261160790 bbl
+teaching OGUTA-2 screen, required gas-liquid ratio = 9561.17363265 scf/bbl
+teaching OGUTA-2 screen, the well gas-liquid ratio = 5900.0 scf/bbl
+teaching OGUTA-2 screen, rule of thumb gas-liquid ratio = 3280.00000000 scf/bbl
+teaching OGUTA-2 screen, ruleOfThumbAgrees = false
+teaching OGUTA-2 screen, the computed requirement over the rule of thumb = 2.91499196
+teaching OGUTA-2 screen, rise = 10.93333333 min, fall = 8.97023256 min, afterflow = 30.0 min, shut-in = 40.0 min
+teaching OGUTA-2 screen, total cycle = 89.90356589 min, cycles per day = 16.01716223
+teaching OGUTA-2 screen, liquid per day = 14.83375148 bbl/d
+teaching OGUTA-2 screen, gas per day = 141.82807355 Mscf/d
+teaching OGUTA-2 screen, pressureOk = true, glrOk = false, feasible = false
+teaching OGUTA-2 screen, warning insufficientGas: "A cycle needs 9,561.2 scf of gas per barrel and the well makes 5,900.0. There is not enough gas to drive the plunger at this slug size."
+teaching OGUTA-2 screen, warnings raised = insufficientGas
+# What the screen refuses outright, on the same well with one input broken.
+engine refusal, OGUTA-2 with zero depth: ok = false, errors = "The plunger has to travel a depth. The slug is longer than the tubing it sits in."
+engine refusal, OGUTA-2 with zero plunger weight: ok = false, errors = "The plunger needs a weight."
+engine refusal, OGUTA-2 with a slug longer than the tubing: ok = false, errors = "The slug is longer than the tubing it sits in."
+engine refusal, OGUTA-2 with zero tubing diameter: ok = false, errors = "The tubing needs an inside diameter."
+engine refusal, OGUTA-2 with zero slug: ok = false, errors = "A cycle lifts a slug, so it needs a slug length."
+engine refusal, OGUTA-2 with zero average temperature: ok = false, errors = "The gas column needs an average temperature."
+
+# SECTION 17: THE REQUIREMENT THAT FALLS THE WRONG WAY
+# screenPlungerLift computes the gas a cycle needs as an expansion from the
+# casing pressure down to the pressure still needed at the top of the rise, and
+# gasPerCycleScf averages the two ends with no check that the expansion runs the
+# right way. When the casing cannot reach the requirement the average is simply
+# smaller and a number still comes back. The sweep below is contiguous and every
+# point prints pressureOk, glrOk and feasible, so the flag turning TRUE on a well
+# that cannot move the plunger at all is on the page. Expert m04.
+teaching OGUTA-2 sweep, the required lift pressure is fixed at 248.1897322873 psia and does not move with the casing
+teaching OGUTA-2 sweep, the well makes 5900.0 scf/bbl throughout
+teaching OGUTA-2 sweep, casing 900.0 psia: required lift = 248.18973229 psia, gas per cycle = 10500.97962403 scf, required gas-liquid ratio = 11338.72941173 scf/bbl, pressureOk = true, glrOk = false, feasible = false
+teaching OGUTA-2 sweep, casing 720.0 psia: required lift = 248.18973229 psia, gas per cycle = 8854.75663564 scf, required gas-liquid ratio = 9561.17363265 scf/bbl, pressureOk = true, glrOk = false, feasible = false
+teaching OGUTA-2 sweep, casing 600.0 psia: required lift = 248.18973229 psia, gas per cycle = 7757.27464338 scf, required gas-liquid ratio = 8376.13644659 scf/bbl, pressureOk = true, glrOk = false, feasible = false
+teaching OGUTA-2 sweep, casing 480.0 psia: required lift = 248.18973229 psia, gas per cycle = 6659.79265112 scf, required gas-liquid ratio = 7191.09926054 scf/bbl, pressureOk = true, glrOk = false, feasible = false
+teaching OGUTA-2 sweep, casing 400.0 psia: required lift = 248.18973229 psia, gas per cycle = 5928.13798961 scf, required gas-liquid ratio = 6401.07446983 scf/bbl, pressureOk = true, glrOk = false, feasible = false
+teaching OGUTA-2 sweep, casing 320.0 psia: required lift = 248.18973229 psia, gas per cycle = 5196.48332811 scf, required gas-liquid ratio = 5611.04967913 scf/bbl, pressureOk = true, glrOk = true, feasible = true
+teaching OGUTA-2 sweep, casing 285.0 psia: required lift = 248.18973229 psia, gas per cycle = 4876.38441370 scf, required gas-liquid ratio = 5265.41383320 scf/bbl, pressureOk = true, glrOk = true, feasible = true
+teaching OGUTA-2 sweep, casing 240.0 psia: required lift = 248.18973229 psia, gas per cycle = 4464.82866660 scf, required gas-liquid ratio = 4821.02488843 scf/bbl, pressureOk = false, glrOk = true, feasible = false
+teaching OGUTA-2 sweep, casing 180.0 psia: required lift = 248.18973229 psia, gas per cycle = 3916.08767047 scf, required gas-liquid ratio = 4228.50629540 scf/bbl, pressureOk = false, glrOk = true, feasible = false
+teaching OGUTA-2 sweep, casing 130.0 psia: required lift = 248.18973229 psia, gas per cycle = 3458.80350703 scf, required gas-liquid ratio = 3734.74080121 scf/bbl, pressureOk = false, glrOk = true, feasible = false
+teaching OGUTA-2 sweep, casing 90.0 psia: required lift = 248.18973229 psia, gas per cycle = 3092.97617627 scf, required gas-liquid ratio = 3339.72840586 scf/bbl, pressureOk = false, glrOk = true, feasible = false
+teaching OGUTA-2 sweep, from 900.0 psia of casing to 90.0 psia the required gas-liquid ratio FALLS from 11338.72941173 to 3339.72840586 scf/bbl
+teaching OGUTA-2 sweep, that is a drop of 7999.00100588 scf/bbl, or 70.545832 percent, all of it in the flattering direction
+teaching OGUTA-2 sweep, at 900.0 psia the well CAN move the plunger and glrOk = false; at 90.0 psia it cannot move it at all and glrOk = true
+teaching OGUTA-2 sweep, feasible still catches both, because feasible is pressureOk AND glrOk: at 900.0 psia feasible = false and at 90.0 psia feasible = false
+# Read the sweep in two halves. ABOVE the crossing the fall is defensible: less
+# casing pressure genuinely means less gas expanded per cycle, and feasible turns
+# TRUE over that band because the requirement dropped under what the well makes.
+# BELOW the crossing there is no expansion at all and the number is an artefact,
+# and that is the half the missing guard belongs to. The row that says whether
+# the expansion runs the right way is printed for every point below.
+# The mechanism, printed rather than described: the average of the two ends is
+# the whole of it, and it keeps falling straight through the crossing.
+teaching OGUTA-2 sweep, casing 900.0 psia: the average of casing and requirement = 574.09486614 psia, casing minus requirement = 651.81026771 psi, expansion runs the right way = true
+teaching OGUTA-2 sweep, casing 720.0 psia: the average of casing and requirement = 484.09486614 psia, casing minus requirement = 471.81026771 psi, expansion runs the right way = true
+teaching OGUTA-2 sweep, casing 600.0 psia: the average of casing and requirement = 424.09486614 psia, casing minus requirement = 351.81026771 psi, expansion runs the right way = true
+teaching OGUTA-2 sweep, casing 480.0 psia: the average of casing and requirement = 364.09486614 psia, casing minus requirement = 231.81026771 psi, expansion runs the right way = true
+teaching OGUTA-2 sweep, casing 400.0 psia: the average of casing and requirement = 324.09486614 psia, casing minus requirement = 151.81026771 psi, expansion runs the right way = true
+teaching OGUTA-2 sweep, casing 320.0 psia: the average of casing and requirement = 284.09486614 psia, casing minus requirement = 71.81026771 psi, expansion runs the right way = true
+teaching OGUTA-2 sweep, casing 285.0 psia: the average of casing and requirement = 266.59486614 psia, casing minus requirement = 36.81026771 psi, expansion runs the right way = true
+teaching OGUTA-2 sweep, casing 240.0 psia: the average of casing and requirement = 244.09486614 psia, casing minus requirement = -8.18973229 psi, expansion runs the right way = false
+teaching OGUTA-2 sweep, casing 180.0 psia: the average of casing and requirement = 214.09486614 psia, casing minus requirement = -68.18973229 psi, expansion runs the right way = false
+teaching OGUTA-2 sweep, casing 130.0 psia: the average of casing and requirement = 189.09486614 psia, casing minus requirement = -118.18973229 psi, expansion runs the right way = false
+teaching OGUTA-2 sweep, casing 90.0 psia: the average of casing and requirement = 169.09486614 psia, casing minus requirement = -158.18973229 psi, expansion runs the right way = false
+# The same shape on the PUBLISHED case, so this is not a teaching-well artefact.
+# The well gas-liquid ratio here is a DERIVED figure of 4500.0 scf/bbl chosen to
+# straddle the requirement; everything else is the published input set.
+derived published sweep, casing 600.0 psia: required lift = 225.85815561 psia, gas per cycle = 5452.92435707 scf, required gas-liquid ratio = 4710.35929989 scf/bbl, pressureOk = true, glrOk = false, feasible = false
+derived published sweep, casing 480.0 psia: required lift = 225.85815561 psia, gas per cycle = 4660.59589437 scf, required gas-liquid ratio = 4025.92806658 scf/bbl, pressureOk = true, glrOk = true, feasible = true
+derived published sweep, casing 400.0 psia: required lift = 225.85815561 psia, gas per cycle = 4132.37691923 scf, required gas-liquid ratio = 3569.64057770 scf/bbl, pressureOk = true, glrOk = true, feasible = true
+derived published sweep, casing 300.0 psia: required lift = 225.85815561 psia, gas per cycle = 3472.10320031 scf, required gas-liquid ratio = 2999.28121661 scf/bbl, pressureOk = true, glrOk = true, feasible = true
+derived published sweep, casing 240.0 psia: required lift = 225.85815561 psia, gas per cycle = 3075.93896896 scf, required gas-liquid ratio = 2657.06559995 scf/bbl, pressureOk = true, glrOk = true, feasible = true
+derived published sweep, casing 200.0 psia: required lift = 225.85815561 psia, gas per cycle = 2811.82948139 scf, required gas-liquid ratio = 2428.92185551 scf/bbl, pressureOk = false, glrOk = true, feasible = false
+derived published sweep, casing 150.0 psia: required lift = 225.85815561 psia, gas per cycle = 2481.69262193 scf, required gas-liquid ratio = 2143.74217497 scf/bbl, pressureOk = false, glrOk = true, feasible = false
+# The guard that is missing is one line: refuse the gas number when the casing
+# pressure is at or below the lift requirement, rather than averaging across the
+# crossing.
+
+# SECTION 18: THE SLUG LENGTH CLAMP, AND THE ANSWER IT HIDES
+# maxSlugLengthFt solves the balance directly and then clamps the answer into
+# [0, depthFt]. Both ends of that clamp print a number that is not a solution.
+# The unclamped value is beside the returned one at every point below. Expert m04.
+teaching OGUTA-2 clamp, the plunger weight term = 1.7522191087 psi
+teaching OGUTA-2 clamp, the gas density at line pressure = 0.5015053107 lbm/ft3, so the gas column costs 0.003482675768 psi/ft
+teaching OGUTA-2 clamp, the net cost of a foot of slug = 0.455497324232 psi/ft, which is 0.433 times 1.060 less the gas gradient
+teaching OGUTA-2 clamp, casing 4000.0 psia: available = 3824.68983959 psi, unclamped solution = 8396.73393481 ft, maxSlugLengthFt returns = 8200.00000000 ft, clamped = true
+teaching OGUTA-2 clamp, casing 900.0 psia: available = 724.68983959 psi, unclamped solution = 1590.98594226 ft, maxSlugLengthFt returns = 1590.98594226 ft, clamped = false
+teaching OGUTA-2 clamp, casing 720.0 psia: available = 544.68983959 psi, unclamped solution = 1195.81347818 ft, maxSlugLengthFt returns = 1195.81347818 ft, clamped = false
+teaching OGUTA-2 clamp, casing 600.0 psia: available = 424.68983959 psi, unclamped solution = 932.36516879 ft, maxSlugLengthFt returns = 932.36516879 ft, clamped = false
+teaching OGUTA-2 clamp, casing 480.0 psia: available = 304.68983959 psi, unclamped solution = 668.91685940 ft, maxSlugLengthFt returns = 668.91685940 ft, clamped = false
+teaching OGUTA-2 clamp, casing 400.0 psia: available = 224.68983959 psi, unclamped solution = 493.28465314 ft, maxSlugLengthFt returns = 493.28465314 ft, clamped = false
+teaching OGUTA-2 clamp, casing 320.0 psia: available = 144.68983959 psi, unclamped solution = 317.65244688 ft, maxSlugLengthFt returns = 317.65244688 ft, clamped = false
+teaching OGUTA-2 clamp, casing 285.0 psia: available = 109.68983959 psi, unclamped solution = 240.81335664 ft, maxSlugLengthFt returns = 240.81335664 ft, clamped = false
+teaching OGUTA-2 clamp, casing 240.0 psia: available = 64.68983959 psi, unclamped solution = 142.02024062 ft, maxSlugLengthFt returns = 142.02024062 ft, clamped = false
+teaching OGUTA-2 clamp, casing 180.0 psia: available = 4.68983959 psi, unclamped solution = 10.29608593 ft, maxSlugLengthFt returns = 10.29608593 ft, clamped = false
+teaching OGUTA-2 clamp, casing 130.0 psia: available = -45.31016041 psi, unclamped solution = -99.47404299 ft, maxSlugLengthFt returns = 0.00000000 ft, clamped = true
+teaching OGUTA-2 clamp, casing 90.0 psia: available = -85.31016041 psi, unclamped solution = -187.29014611 ft, maxSlugLengthFt returns = 0.00000000 ft, clamped = true
+# What zero actually means. At the casing pressures where the function returns
+# zero, the balance with NO SLUG AT ALL still is not satisfied, so zero is not
+# the longest slug the well can lift, it is a refusal wearing a number.
+teaching OGUTA-2 clamp, casing 130.0 psia: maxSlugLengthFt returns 0.00000000 ft, and the balance at a zero slug still needs 175.3101604102 psia, short by 45.3101604102 psi
+teaching OGUTA-2 clamp, casing 90.0 psia: maxSlugLengthFt returns 0.00000000 ft, and the balance at a zero slug still needs 175.3101604102 psia, short by 85.3101604102 psi
+# The upper clamp has the same shape. At a casing pressure high enough, the
+# function returns the tubing length exactly, which is a depth rather than a
+# computed maximum.
+teaching OGUTA-2 clamp, at 4000.0 psia of casing maxSlugLengthFt returns 8200.00000000 ft and the tubing is 8200.0 ft, identical = true
+# At the maximum the balance is exactly satisfied, which is the check that the
+# solve is right in the range where the clamp does not bite.
+teaching OGUTA-2 clamp, at the maximum slug of 1195.81347818 ft the required lift = 720.0000000000 psia against a casing of 720.0 psia, residual = -1.1369e-13 psi
+teaching OGUTA-2 clamp, that maximum slug holds 6.92163806 bbl
+engine refusal, maxSlugLengthFt with a liquid so light the net cost of a foot of slug is not positive returns NaN, which is the one place in this function that refuses instead of clamping
+
+# SECTION 19: WHAT THE PLUNGER CYCLE CARRIES AGAINST WHAT THE WELL MAKES
+# liquidPerDayBbl is computed and returned and never compared to anything.
+# feasible is built from the pressure balance and the gas-liquid ratio only. The
+# third step is arithmetic the screen already has every ingredient for. Expert
+# m05 l01 and l02.
+teaching OGUTA-2 capacity, the cycle delivers = 0.9261160790 bbl per trip
+teaching OGUTA-2 capacity, trips per day = 16.01716223
+teaching OGUTA-2 capacity, liquidPerDayBbl = 14.83375148 bbl/d
+teaching OGUTA-2 capacity, the well makes 1150.0 Mscf/d at 5900.0 scf/bbl, so its liquid make = 194.91525424 bbl/d
+teaching OGUTA-2 capacity, the well makes 13.13998380 times what the cycle carries
+teaching OGUTA-2 capacity, the shortfall = 180.08150275 bbl/d
+teaching OGUTA-2 capacity, feasible = false, built from pressureOk = true and glrOk = false and nothing else
+teaching OGUTA-2 capacity, the design object returns these keys: lift, gasPerCycleScf, liquidPerCycleBbl, requiredGlrScfBbl, wellGlrScfBbl, ruleOfThumbGlrScfBbl, ruleOfThumbAgrees, timing, liquidPerDayBbl, gasPerDayMscf, pressureOk, glrOk, feasible, warnings
+# What it would take to carry the well. A contiguous shut-in sweep, so the number
+# of trips a day rises and the liquid carried rises with it, and the gap closes or
+# does not. Every row printed, including the ones that cycle faster than any real
+# installation would.
+teaching OGUTA-2 capacity, shut-in 40.0 min with no afterflow: cycle = 59.90356589 min, trips per day = 24.03863574, liquid per day = 22.26256708 bbl/d, against a well make of 194.91525424 bbl/d, ratio = 8.75529105
+teaching OGUTA-2 capacity, shut-in 30.0 min with no afterflow: cycle = 49.90356589 min, trips per day = 28.85565338, liquid per day = 26.72368457 bbl/d, against a well make of 194.91525424 bbl/d, ratio = 7.29372680
+teaching OGUTA-2 capacity, shut-in 20.0 min with no afterflow: cycle = 39.90356589 min, trips per day = 36.08700044, liquid per day = 33.42075135 bbl/d, against a well make of 194.91525424 bbl/d, ratio = 5.83216254
+teaching OGUTA-2 capacity, shut-in 10.0 min with no afterflow: cycle = 29.90356589 min, trips per day = 48.15479215, liquid per day = 44.59692729 bbl/d, against a well make of 194.91525424 bbl/d, ratio = 4.37059829
+teaching OGUTA-2 capacity, shut-in 5.0 min with no afterflow: cycle = 24.90356589 min, trips per day = 57.82304455, liquid per day = 53.55085130 bbl/d, against a well make of 194.91525424 bbl/d, ratio = 3.63981617
+teaching OGUTA-2 capacity, shut-in 2.0 min with no afterflow: cycle = 21.90356589 min, trips per day = 65.74272003, liquid per day = 60.88539010 bbl/d, against a well make of 194.91525424 bbl/d, ratio = 3.20134689
+teaching OGUTA-2 capacity, shut-in 0.0 min with no afterflow: cycle = 19.90356589 min, trips per day = 72.34884482, liquid per day = 67.00342849 bbl/d, against a well make of 194.91525424 bbl/d, ratio = 2.90903404
+# The same reading on the PUBLISHED case, with a DERIVED well gas-liquid ratio of
+# 4500.0 scf/bbl and a DERIVED gas rate of 700.0 Mscf/d, so a lesson can make the
+# point without a teaching well.
+derived published capacity, cycle = 69.96279070 min, trips per day = 20.58236937, liquid per day = 23.82707902 bbl/d
+derived published capacity, the well liquid make = 155.55555556 bbl/d, ratio to what the cycle carries = 6.52851973
+derived published capacity, pressureOk = true, glrOk = false, feasible = false, and the liquid comparison appears nowhere in that verdict
+# The slow-cycle warning is the only timing check there is, and it fires on trips
+# per day rather than on barrels.
+teaching OGUTA-2 capacity, with a 1500.0 min shut-in the cycle = 1549.90356589 min, trips per day = 0.92909006, warnings = insufficientGas, slowCycle
+teaching OGUTA-2 capacity, the slow-cycle message: "At 1549.9 minutes a cycle this well would make fewer than one trip a day. Check the shut-in and afterflow times."
+
+# SECTION 20: WHAT THESE MODULES REFUSE TO DO
+# Every module that introduces a capability has to state its limit. These are the
+# engines own refusals, taken from their headers and their code, and every tier
+# needs at least one of them.
+refusal, the droplet balance models ONE droplet at its terminal velocity. It does
+refusal, not model a droplet population, coalescence, break-up in transit, or any
+refusal, film flowing on the tubing wall, which is the other way a gas well
+refusal, carries liquid.
+refusal, interfacial tension and liquid density are INPUTS. Neither is a function
+refusal, of anything these modules know, and the Turner fluid properties are
+refusal, offered as labelled starting points rather than as correlations.
+refusal, the drag coefficient of 0.44 is a rigid sphere in the Newton regime. A
+refusal, real droplet deforms, and nothing here knows that.
+refusal, there is no inflow performance anywhere in these modules. The gas rate is
+refusal, an input, so a loading verdict is a verdict at a rate somebody supplied
+refusal, and not a prediction of what the well will do next.
+refusal, the flowing traverse is PASSED IN as a list of stations with their own
+refusal, pressure, temperature, z and diameter. loadingProfile does not solve
+refusal, multiphase flow and does not invent a gradient.
+refusal, an empty traverse is refused rather than treated as a passing well, and an
+refusal, unknown correlation is refused rather than silently treated as turner.
+refusal, recommendCorrelation takes ONE pressure and returns guidance, not a
+refusal, decision. It does not switch the correlation for anybody, and it cannot
+refusal, see which station the pressure came from.
+refusal, sizeTubingForRate has no opinion about which station its pressure,
+refusal, temperature and z came from. See section 13.
+refusal, the plunger lift force balance is STATIC. No friction unless it is handed
+refusal, in, no velocity, no gas slippage past the plunger, and no fallback of the
+refusal, slug during the rise.
+refusal, the rise and fall velocities, the afterflow and the shut-in are operating
+refusal, inputs with stated typical bands. They are not computed and they are not
+refusal, optimised.
+refusal, the 400 scf per bbl per 1000 ft screening rule is carried for comparison
+refusal, only and is never used to decide feasibility. Which of the two a well sits
+refusal, between is reported through ruleOfThumbAgrees.
+refusal, gasPerCycleScf does NOT check that the expansion runs the right way. See
+refusal, section 17. This is a KNOWN DEFECT, not a thing to design on.
+refusal, maxSlugLengthFt clamps rather than refuses at both ends. See section 18.
+refusal, screenPlungerLift never compares liquidPerDayBbl to anything. See section
+refusal, 19.
+refusal, the two production modules carry two molecular weights of air and two
+refusal, temperature conventions at the door. See section 3.
+
+END OF DIGEST

@@ -59,23 +59,23 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as L from './gasWellLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
-const WAVE_DIR = '/root/pd-wip-gaswell';
-const FIELDS_PATH = path.join(WAVE_DIR, 'fields.json');
-const DIGEST_PATH = path.join(WAVE_DIR, 'digest.txt');
-
-const fieldsAvailable = fs.existsSync(FIELDS_PATH);
-const digestAvailable = fs.existsSync(DIGEST_PATH);
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'gaswell';
+const FIELDS_PATH = waveInput(WAVE_NAME, 'fields.json');
+const DIGEST_PATH = waveInput(WAVE_NAME, 'digest.txt');
 
 /**
  * The graded field list, as [tier, key, value, tolerance]. Eighteen fields,
  * three tiers, and every tolerance ABSOLUTE in the field's own units.
  */
-const FIELDS = fieldsAvailable
-  ? JSON.parse(fs.readFileSync(FIELDS_PATH, 'utf8'))
-  : [];
+const FIELDS = JSON.parse(fs.readFileSync(FIELDS_PATH, 'utf8'));
 
 /** How much wider than the grader's own acceptance band a teaching number stands clear. */
 export const LEAK_GUARD_MARGIN = 10;
@@ -127,7 +127,6 @@ const leakGuardHit = (value, targets) => {
 const DIGEST_NUMBER = /-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/g;
 
 const digestNumbers = () => {
-  if (!digestAvailable) return [];
   const out = [];
   fs.readFileSync(DIGEST_PATH, 'utf8').split('\n').forEach((line, i) => {
     const m = line.match(DIGEST_NUMBER);
@@ -140,7 +139,7 @@ const digestNumbers = () => {
   return out;
 };
 
-describe.skipIf(!fieldsAvailable)('THE LEAK GATE: no teaching number may be a graded capstone answer', () => {
+describe('THE LEAK GATE: no teaching number may be a graded capstone answer', () => {
   const targets = leakGuardTargets();
 
   it('reads eighteen graded fields across three tiers, with absolute tolerances', () => {
@@ -239,7 +238,7 @@ describe.skipIf(!fieldsAvailable)('THE LEAK GATE: no teaching number may be a gr
   });
 });
 
-describe.skipIf(!fieldsAvailable || !digestAvailable)('and neither does the shipped teaching digest', () => {
+describe('and neither does the shipped teaching digest', () => {
   const targets = leakGuardTargets();
 
   it('NO NUMBER THE DIGEST PRINTS lands in any forbidden neighbourhood', () => {
@@ -270,16 +269,15 @@ describe.skipIf(!fieldsAvailable || !digestAvailable)('and neither does the ship
   });
 });
 
-describe('the guard itself is honest about when it cannot run', () => {
-  it('says so rather than passing silently when the wave directory is absent', () => {
-    // A skipped gate is a reported gate. If this ever runs on a machine without
-    // /root/pd-wip-gaswell the two blocks above skip, and this one records why.
-    if (!fieldsAvailable) {
-      expect(FIELDS).toHaveLength(0);
-    } else {
-      expect(FIELDS.length).toBe(18);
-    }
-    expect(typeof fieldsAvailable).toBe('boolean');
+describe('the guard itself cannot empty itself', () => {
+  it('the eighteen graded fields are there to check against, wherever this runs', () => {
+    // This block used to record that the gates above had skipped, because the
+    // fields were read from a wave directory that only the author's machine
+    // had. They are read from the committed copy now, so there is nothing to
+    // skip: a missing fields.json throws at the top of this file and names
+    // itself. What is left to say is that the file really carries the
+    // eighteen fields the gates above walk.
+    expect(FIELDS.length).toBe(18);
   });
 
   it('the lab carries no capstone surface at all, which is the other half of the guarantee', () => {

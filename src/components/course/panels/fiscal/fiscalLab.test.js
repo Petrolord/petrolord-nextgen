@@ -1,5 +1,5 @@
 // Every value the EC2 lab exposes to a panel, a lesson or the grader is pinned
-// here against the teaching digest (/root/ec-wip-fiscal/digest.txt), which is
+// here against the teaching digest (tools/course-waves/fiscal/digest.txt), which is
 // itself nothing but the vendored fiscal regime engine's return values on the
 // published goldens, on the Designer's two projects and on the teaching field
 // ODIDI. The digest prints money to four decimals in millions of USD, ratios
@@ -8,7 +8,7 @@
 // value the way the digest formats its own and comparing the strings.
 //
 // THE EIGHTEEN GRADED FIELDS of the URUAN capstone are pinned separately and
-// EXACTLY against /root/ec-wip-fiscal/fields.json, READ FROM THE FILE rather
+// EXACTLY against tools/course-waves/fiscal/fields.json, READ FROM THE FILE rather
 // than retyped, because a grader reading one derivation and a lesson reading
 // another is exactly the failure this file exists to stop.
 //
@@ -20,12 +20,18 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import * as L from './fiscalLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 // ---------------------------------------------------------------------------
 // The digest, as the digest prints it.
 // ---------------------------------------------------------------------------
 
-const FIELDS_JSON = '/root/ec-wip-fiscal/fields.json';
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'fiscal';
+const FIELDS_JSON = waveInput(WAVE_NAME, 'fields.json');
 
 /** The digest's three precisions, and its own null. */
 const f = (x, n) => ((x === null || x === undefined || Number.isNaN(Number(x))) ? 'null' : Number(x).toFixed(n));
@@ -43,7 +49,7 @@ const cell = (k, x) => {
 };
 const ledgerRow = (row) => L.LEDGER_COLUMNS.map((k) => cell(k, row[k]));
 
-// GENERATED FROM /root/ec-wip-fiscal/digest.txt. Do not hand-edit a value
+// GENERATED FROM tools/course-waves/fiscal/digest.txt. Do not hand-edit a value
 // here: every string below is a cell or a line of the teaching digest,
 // copied out of the file rather than retyped, at the precision the digest
 // prints it. `T` is keyed section.tableOrdinal, `LINE` by what it pins.

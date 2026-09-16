@@ -1,0 +1,39 @@
+-- ============================================================================
+-- FC1 EXPERT DEEP SEED: Separation & Slug Catching, advanced tier. COMPLETES
+-- THE FC1 LADDER.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE THREE-PHASE VESSEL, THE FAMILY AND THE JUDGEMENT.
+-- The oil-water split the retentions imply and the interface at its exact
+-- height; Stokes between two liquids and the two verdicts a sized vessel has
+-- to survive; the L/D family, its reasons, its preferred row and its three
+-- statuses; judging a layout, where complete and pass answer different
+-- questions and two rankings disagree; and the four things this method does
+-- not know.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The exact interface and the retired chord
+-- rule disagree in the SAME DIRECTION on both layers. The retired layers are
+-- each an area over the same gas-liquid chord, so they sum to the liquid area
+-- over the chord and not to the liquid depth: 3.926991 against 5.000000 on
+-- the half-full 10 ft cases. Both retired layers are therefore thin, both
+-- crossings were understated, and both errors ran the permissive way.
+--
+-- THE TRAP THE TIER IS BUILT ON. Complete and pass answer different
+-- questions, and neither is the one a reviewer thinks they asked. A layout
+-- with nothing checked is not a pass, zero-requirement pairs do not make a
+-- layout incomplete (s3ZeroRequirementPairOnly is complete with one), and
+-- worstAbsolute and worstRelative name different pairs on the same plot.
+--
+-- WHAT THE EXPERT AUDIT CAUGHT, twelve defects, and one of them shows why a
+-- false lesson is not a local problem. m01/l02 claimed every retired oil
+-- layer sat ABOVE its exact one, refuted by all six published cases. No key
+-- rested on it, but it was propping up an exam distractor two modules away:
+-- with the lesson corrected, that distractor is false, as it must be.
+--
+-- The capstone grades the interface, both droplet crossings, the preferred
+-- vessel of a family and the two layout rankings, so a reader who never
+-- learned which requirement each answer came from cannot pass it.
+-- ============================================================================

@@ -18,7 +18,7 @@
 // and a lesson reading another is exactly the failure this file exists to stop.
 //
 // AND THE SEVENTY EIGHT SHIPPED LESSONS are pinned too. They were written from
-// /root/pd-wip-esp/digest.txt, so a lab value that disagrees with that file
+// tools/course-waves/esp/digest.txt, so a lab value that disagrees with that file
 // breaks a lesson that is already written. `teachingQuantities()` is compared to
 // it label for label at the digest's own printed precision, and the checksum
 // below pins the same thing on a machine that does not have the file.
@@ -29,6 +29,7 @@ import * as path from 'node:path';
 import * as crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import * as L from './espLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const G = L.GOLDEN;
@@ -48,7 +49,7 @@ const relNear = (a, b, tol) => expect(rel(a, b)).toBeLessThan(tol);
  * number would be.
  *
  * Every one of them is a return value of the ESP engines, produced by the
- * capstone derivation in /root/pd-wip-esp/pd3_fields.mjs and carried here
+ * capstone derivation in tools/course-waves/esp/pd3_fields.mjs and carried here
  * verbatim so the grader, the lessons and this file all pin one set of numbers.
  * `capstoneValues()` in the lab reproduces the same derivation call for call, and
  * the test below is what proves the two have not drifted.
@@ -809,7 +810,12 @@ describe('the capstone derivation', () => {
 // 4. THE SEVENTY EIGHT SHIPPED LESSONS.
 // ---------------------------------------------------------------------------
 
-const DIGEST_PATH = '/root/pd-wip-esp/digest.txt';
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'esp';
+const DIGEST_PATH = waveInput(WAVE_NAME, 'digest.txt');
 
 /**
  * Lines in the digest that carry an equals sign but are PROSE, not a quantity,
@@ -880,7 +886,10 @@ const readDigest = () => {
   return map;
 };
 
-const digestAvailable = fs.existsSync(DIGEST_PATH);
+// The digest is committed under tools/course-waves, so the block below always
+// runs. It used to skip itself whenever the wave directory was absent, which on
+// every machine but its author's meant this whole agreement check passed
+// without comparing anything.
 
 describe('the teaching quantities', () => {
   const rows = L.teachingQuantities();
@@ -948,11 +957,11 @@ describe('the teaching quantities', () => {
   });
 });
 
-describe.skipIf(!digestAvailable)('AGREEMENT WITH THE SHIPPED DIGEST that the 78 lessons quote', () => {
-  // A lab value that disagrees with /root/pd-wip-esp/digest.txt breaks a lesson
+describe('AGREEMENT WITH THE SHIPPED DIGEST that the 78 lessons quote', () => {
+  // A lab value that disagrees with tools/course-waves/esp/digest.txt breaks a lesson
   // that is already written, so this is compared label for label at the digest's
   // own printed precision rather than spot checked.
-  const digest = digestAvailable ? readDigest() : new Map();
+  const digest = readDigest();
   const lab = L.teachingQuantityMap();
 
   it('every teaching quantity the lab exposes agrees with the digest', () => {

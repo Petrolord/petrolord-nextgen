@@ -1,5 +1,5 @@
 // Every value the FC2 lab exposes to a panel, a lesson or the grader is pinned
-// here against the teaching digest (/root/fc-wip-linesizing/digest.txt), which
+// here against the teaching digest (tools/course-waves/linesizing/digest.txt), which
 // is itself nothing but the Pipeline & Line Sizing Studio's engines' return
 // values on the published goldens and on the teaching fields OGBIA and SOKU.
 //
@@ -11,7 +11,7 @@
 // section by section and then whole.
 //
 // THE EIGHTEEN GRADED FIELDS of the IMO-1, BRASS and QUA IBOE capstone are
-// pinned separately and EXACTLY against /root/fc-wip-linesizing/fields.json,
+// pinned separately and EXACTLY against tools/course-waves/linesizing/fields.json,
 // READ FROM THE FILE.
 //
 // Then the gates:
@@ -41,17 +41,23 @@ import { execFileSync } from 'node:child_process';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import * as LAB_NS from './linesizingLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const L = LAB_NS;
 const LAB = Object.fromEntries(Object.entries(L));
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../../../../..');
-const DIGEST = '/root/fc-wip-linesizing/digest.txt';
-const FIELDS_JSON = '/root/fc-wip-linesizing/fields.json';
-const DUMP_MJS = '/root/fc-wip-linesizing/fc2_dump.mjs';
-const FIELDS_MJS = '/root/fc-wip-linesizing/fc2_fields.mjs';
-const CAPSTONE_MJS = '/root/fc-wip-linesizing/fc2_fields_capstone.mjs';
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'linesizing';
+const DIGEST = waveInput(WAVE_NAME, 'digest.txt');
+const FIELDS_JSON = waveInput(WAVE_NAME, 'fields.json');
+const DUMP_MJS = waveInput(WAVE_NAME, 'fc2_dump.mjs');
+const FIELDS_MJS = waveInput(WAVE_NAME, 'fc2_fields.mjs');
+const CAPSTONE_MJS = waveInput(WAVE_NAME, 'fc2_fields_capstone.mjs');
 const LAB_SOURCE = () => fs.readFileSync(path.join(HERE, 'linesizingLab.js'), 'utf8');
 const PANEL_FILES = ['LiquidExplorer.jsx', 'GasLineExplorer.jsx', 'WallPigExplorer.jsx'];
 
