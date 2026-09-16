@@ -1,0 +1,112 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+q(3, "EGINA's facility screening estimate is 1363.3524 million USD for the FPSO. Which figure in the plan should it be set beside?",
+ "The concept's facilities field of 1350.0000 million USD, a gap of 13.3524.",
+ ["The concept's total capex of 2250.0000 million USD, which is the figure the plan reports as the cost of the whole development.",
+  "The cost items' CAPEX total of 2250.0000 million USD, since both of those are totals the engine computed rather than figures somebody typed in.",
+  "The FPSO hull and topsides line of 1180.0000 million USD, which is the only cost item the plan raises against the vessel itself."],
+ "Setting 1363.3524 against 2250.0000 compares one facility with a development that also drills 520.0000 of wells and lays 380.0000 of subsea.")
+
+q(1, "Which of the plan's cost items correspond to the concept's facilities field of 1350.0000 million USD?",
+ "FPSO hull and topsides at 1180.0000 together with Mooring and installation at 170.0000.",
+ ["FPSO hull and topsides at 1180.0000 together with Subsea system at 380.0000, the two lines raised against the vessel and its tie-ins.",
+  "The Construction phase total of 1180.0000 and the Installation phase total of 550.0000, which is how the engine groups that same money.",
+  "The two largest lines the plan carries, 520.0000 and 1180.0000."],
+ "1180.0000 and 170.0000 make 1350.0000; Development drilling of 520.0000 matches the drilling field and Subsea system of 380.0000 matches the subsea field.")
+
+q(2, "The concept's capex is 2250.0000 million USD and the cost items' CAPEX total is 2250.0000 million USD. What does that agreement tell a reader?",
+ "That this plan was costed against the concept it is running, which is a result somebody earned rather than something the studio guarantees.",
+ ["That the cost items are derived from the concept's three capex fields, so the two totals cannot differ however the lines are entered.",
+  "That the concept's drilling, facilities and subsea fields were filled in from the cost items once the budget lines had been priced.",
+  "That the plan has been validated, since the studio compares the two totals against each other before it scores a plan complete at 100 percent."],
+ "They remain two different numbers gathered by two different people for two different purposes, and a plan where they differ has a question in it.")
+
+q(0, "The plan's cost items include a Decommissioning provision of 260.0000 million USD typed as ABEX. Where does it appear in the engine's totals?",
+ "In neither of them: the CAPEX total is 2250.0000 and the OPEX total is 95.0000 a year, because an ABEX line is neither development capex nor an annual operating cost.",
+ ["In the CAPEX total, which is why 2250.0000 stands above the drilling, facilities and subsea fields taken on their own.",
+  "In the OPEX total of 95.0000 a year, since the line sits in the Operate phase alongside the operations and the maintenance lines.",
+  "In the facility screening estimate of 1363.3524, which is the one figure in the studio that carries a decommissioning number."],
+ "The line sits outside both totals and still reaches the value the plan reports, because the case charges it in the final production year.")
+
+q(1, "What does the facility screening estimate carry that the plan's CAPEX total does not?",
+ "A decommissioning figure of 204.5029 million USD for the FPSO, which is 0.150000 of the capex that facility carries.",
+ ["The Decommissioning provision of 260.0000 million USD, which the screening picks up from the plan's own cost items and prices on the nameplate.",
+  "The operating cost of 95.0000 million USD a year, which the screening derives from the type and the size the facility was entered at.",
+  "The subsea capex of 380.0000, since the tie-ins land on the same vessel."],
+ "The screening gives every facility a decommissioning figure at 0.150000 of its capex: 204.5029 on 1363.3524, and 388.3805 on the debottlenecked case.")
+
+q(3, "EGINA's network says the work must take 870 days and the dates typed on its activities span 933 days. What is the 63 days between them?",
+ "Float already spent, sitting inside somebody's start dates and available to nobody.",
+ ["Contingency the planner has set aside, which is why the calendar is drawn longer than the logic requires it to be.",
+  "The duration of the activities that carry float, since a2 and a5 hold 180 days each and a6 holds 480 days of its own.",
+  "A counting error from subtracting two timestamps across a daylight saving change, which the whole day count was brought in to remove."],
+ "Reading the 63 days as contingency double counts it, because the calendar has spent it and the plan has not recorded spending it.")
+
+q(0, "Subsea installation carries 480 days of float and the calendar carries 63 days. Which of the two can the project actually spend?",
+ "The 480 days, because an activity with float can slip that far without moving the end date, while the 63 days are already committed to start dates.",
+ ["Both, since 480 days of logic float and 63 days of calendar float add up to the slack the schedule is holding in total.",
+  "Neither, since a float measured as late start minus early start is an artefact of the backward pass rather than a stretch of time anybody can spend.",
+  "The 63 days, since the calendar is the only place a date can actually move and a6 sits off the critical path in any case."],
+ "The critical path of a1, a3, a4, a7 and a8 at 870 days cannot slip at all, a2 and a5 carry 180 days each, and a6 carries 480.")
+
+q(2, "A plan can state its own duration in three ways. Where does the 36 months between a sanction of 2027-04-01 and a first oil of 2030-04-01 come from?",
+ "From the concept type, dated from the concept start, which is a different mechanism from the network's 870 days and the activity dates' 933 days.",
+ ["From the critical path, since 870 days of work dated forward from 2027-04-01 lands on the concept's own first oil date.",
+  "From the calendar span of 933 days on the activities, rounded to whole months and dated from the sanction milestone.",
+  "From the machine clock at the moment the concept was created, which is why a concept schedule has to be re-dated every time somebody reopens the plan."],
+ "The concept schedule is dated from the concept and never from a clock, so a plan carries three statements about its own duration produced three different ways.")
+
+q(1, "Before the repair every one of EGINA's eight activities read critical at float 0. What does a network of eight critical activities actually indicate?",
+ "That nothing has been linked: with no dependencies typed every activity starts on day 0, and the network is only as long as its longest single activity.",
+ ["That every activity genuinely sits on the longest path, which is what a plan with no float anywhere in it looks like.",
+  "That float was computed as late finish minus early finish instead of late start minus early start, which returns 0 on every row.",
+  "That the schedule is fully resourced, since a critical path method run over a plan with its resources levelled marks every activity in it critical by design."],
+ "A path of five out of eight with 480 days of float sitting on Subsea installation is a schedule somebody can manage; a list of eight critical activities is not.")
+
+q(0, "The Base scenario on the concept's capex returns an NPV of 2015.4123 million USD and the plan's own cost items at the same price return 2015.4123. What does the difference of 0.0000 mean?",
+ "That the plan was costed against the concept it is running, which is a reconciliation somebody performed rather than an identity the engine enforces.",
+ ["That the engine runs the scenario once and reports it twice, so the two figures are one calculation printed under two headings.",
+  "That the cost items are ignored by the economics, which reads the concept's three capex fields and nothing else.",
+  "That the plan is complete and valid at 100 percent, which is the check that holds the two NPVs together."],
+ "A difference of zero earned by reconciliation is a finding; a difference of zero assumed in advance is nothing at all.")
+
+q(2, "Which pair of EGINA's numbers can never be reconciled at all, whatever a reader does with them?",
+ "The oil P50 of 130.0000 MMbbl and the gas P50 of 70.0000 Bcf, because adding them gives 200.0000 of nothing.",
+ ["The concept's capex of 2250.0000 and the facility screening estimate of 1363.3524, because one is a class 5 figure and the other a budget.",
+  "The network's 870 days and the calendar's 933 days, two counts of one schedule.",
+  "The schedule index of 0.821326 and the completion ratio of 0.261250, because one moves with the as-of date and the other never moves."],
+ "Each of the other pairs has a stated relationship to work through; two fluids in two different units have none, and the totals are kept one fluid at a time.")
+
+q(3, "A schedule index of 0.821326 and a completion ratio of 0.261250 are reported for the same project on the same date. Which of the two is wrong?",
+ "Neither: both are correct readings of the same earned value.",
+ ["The completion ratio, since a figure that stands at 0.261250 on every as-of date cannot be describing a project that is moving.",
+  "The schedule index, since a project only a quarter of the way through its budget cannot be running at 0.821326 of its plan.",
+  "Both of them, since two ratios sharing one earned value ought to agree once they are put over the same denominator."],
+ "One divides by a planned value that moved with the date and the other by a budget at completion that never moves, and reconciling them by dropping one throws the information away.")
+
+q(0, "At 18.0000 USD a barrel the FPSO scenario returns an NPV of -1834.1220 million USD. What does it report for the rate of return and for the payback?",
+ "No rate of return at all, with a status of no-root, and a payback of never, which is the honest reading of a case that does not return its money.",
+ ["A rate of 1000 percent, the upper edge of the band the engine searches, and a payback of never.",
+  "A negative rate, since an NPV of -1834.1220 has to correspond to a rate below the discount rate of 10.0000 percent.",
+  "No rate, with a status of no-sign-change, and a payback equal to the concept's life of 20.0000 years."],
+ "A search that clamped at its own boundary used to print 1000 percent here, in green, on a scenario that never pays back.")
+
+q(1, "EGINA's register carries a Host government approval risk with an impact of 5 and a cost impact of 400.0000 million USD. What does it contribute to the exposure of 269.0000 million USD?",
+ "0.0000, because its probability is missing, so there is no factor to multiply the cost impact by.",
+ ["400.0000, the whole cost impact, carried undiscounted.",
+  "108.0000, the same contribution the critical risk makes, since an unscored risk is banded with the highest risk that is scored.",
+  "A share of the 1145.0000 the five cost impacts add to, since the exposure spreads the register's total across its rows."],
+ "The factors run by probability, 1 giving 0.05 up to 5 giving 0.85, and a risk with no probability has no factor; the exposure of 269.0000 is not the 1145.0000 the impacts add to.")
+
+q(2, "Two figures in a plan disagree, and a reviewer proposes dropping one of them so the document reads clean. What does that lose?",
+ "The information: the disagreement is the finding, and the 63 days between 870 and 933 is the most useful number in EGINA's schedule precisely because nobody planned it.",
+ ["Nothing, provided the figure that is kept is the one the engine computed rather than the one somebody typed.",
+  "Only the audit trail, since the two figures can be rebuilt from the cost items and the activity dates whenever they are wanted again.",
+  "The completeness score, since a plan that drops a section falls below 100 percent and stops being sanctionable at the screening tier."],
+ "Three questions turn a set of outputs into a plan that has been read: which number is this, what was it measured against, and does another number in the same plan answer the same question.")
+
+emit(Q, '/root/ec-wip-fdp/banks/ec6a_m06.json')
+finish()

@@ -21,11 +21,11 @@ A concept carries drilling, facilities and subsea capex in three separate fields
 
 ## What a scenario is worth
 
-At 70.0000 USD a barrel the FPSO concept returns an NPV of 2047.5653 million USD, a rate of return of 29.5998 percent and a payback of 3.8273 years, post royalty and tax, discounted mid year on default terms of 12.5000 percent royalty, 30.0000 percent tax and a 10.0000 percent discount rate. At 18.0000 USD a barrel the same concept returns -1797.2732, never pays back, and has no rate of return at all.
+At 70.0000 USD a barrel the FPSO concept returns an NPV of 2015.4123 million USD, no rate of return at all at the status multiple-roots, and a payback of 3.8273 years, post royalty and tax, discounted mid year on default terms of 12.5000 percent royalty, 30.0000 percent tax and a 10.0000 percent discount rate. At 18.0000 USD a barrel the same concept returns -1834.1220, never pays back, and has no rate of return at all.
 
 ## The plan's own money
 
-Seven cost items total a CAPEX of 2250.0000 and an OPEX of 95.0000 a year, and the ABEX line of 260.0000 reaches neither. The plan and the concept agree at 2250.0000 here because the plan was costed against the concept. A complete plan scores 100 percent on 9 of 9 sections; a plan missing its economics scores 89 percent and names what is missing.
+Seven cost items total a CAPEX of 2250.0000 and an OPEX of 95.0000 a year, and the ABEX line of 260.0000 sits outside both totals and is charged as the plan's end-of-life cost in production year 20, which is what leaves the case with two rates that zero it and none to report. The plan and the concept agree at 2250.0000 here because the plan was costed against the concept. A complete plan scores 100 percent on 9 of 9 sections; a plan missing its economics scores 89 percent and names what is missing.
 
 ## Exercise
 

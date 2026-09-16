@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The Egina FPSO card reads a capex of 1363.3524, an annual operating cost of 55.7800 and a decommissioning allowance of 204.5029 million USD at a nameplate of 60000 bopd. What produced those three figures?",
+  "options": [
+   "The plan's own cost ledger, whose FPSO hull and topsides line of 1180.0000 and mooring and installation line of 170.0000 are summed onto the card and reported there as the facility capex.",
+   "The type and the nameplate alone, each money column being a screening function of those two inputs, so all three move together when the nameplate is revised.",
+   "The FPSO concept's facilities field of 1350.0000, carried onto the card and grossed up for the vessel's handling capacities.",
+   "A cost engineer's estimate written against the concept's total capex of 2250.0000 and rounded onto the card."
+  ],
+  "answer": 1,
+  "explanation": "Not one figure on the card was typed by a cost engineer. Move the nameplate to 150000 bopd and the same type returns 2589.2031, 96.6591 and 388.3805."
+ },
+ {
+  "prompt": "Moving the FPSO nameplate from 60000 to 150000 bopd multiplies gas handling from 90000 to 225000 Mscf/d and water handling from 48000 to 120000 bopd, a factor of 2.500000. Which other column on the card moves by that same factor?",
+  "options": [
+   "The capex, which rises from 1363.3524 to 2589.2031 because steel and hull volume are bought by the barrel of installed throughput just as separation capacity is.",
+   "The annual operating cost, which rises from 55.7800 to 96.6591 because crew, inspection and marine spread are manned against the capacity that has been installed.",
+   "The decommissioning allowance, which rises from 204.5029 to 388.3805 because removal scope is set by the size of the vessel rather than by the money spent building it.",
+   "None of them: handling capacity is the only part of the card sized in proportion."
+  ],
+  "answer": 3,
+  "explanation": "Capex moves by 1.899144 and operating cost by 1.732862 over the same step, and the decommissioning allowance follows the capex."
+ },
+ {
+  "prompt": "A reader prices the debottlenecked FPSO by taking 1363.3524 and multiplying by the size factor of 2.500000. What has that arithmetic assumed, and what does the engine return instead?",
+  "options": [
+   "An exponent of one on the size factor, where the curve uses 0.7, so the capex factor is 1.899144 and the engine returns 2589.2031 rather than the larger figure proportional scaling gives.",
+   "That capex and operating cost share one exponent, where operating cost uses 0.6 and returns a factor of 1.732862, so the capex should have been read off the operating cost row.",
+   "That the nameplate drives the capex at all, where the driver is the gas handling capacity of 225000 Mscf/d, which is what the curve is actually raised to a power of.",
+   "That the two rows are the same type, where the second is priced off its own base cost, in the way the Deep tie-back holds 184.6717 at a nameplate of 25000."
+  ],
+  "answer": 0,
+  "explanation": "Raise 2.500000 to the power 0.7 and the answer is 1.899144. Nothing else enters the calculation."
+ },
+ {
+  "prompt": "Over the step from 60000 to 150000 bopd the capex factor is 1.899144 and the operating cost factor is 1.732862. Why is the operating cost factor the smaller of the two?",
+  "options": [
+   "The operating cost of 96.6591 is an annual figure spread over the concept's 20.0000 year life while the capex of 2589.2031 is spent once, so the two factors are taken over different periods.",
+   "The operating cost is a share of the capex in the way the decommissioning allowance is a share of it at 0.150000, and a share of a number that grew by 1.899144 grows more slowly than the number itself.",
+   "Operating cost scales to the power 0.6 and capex to the power 0.7, and the flatter exponent on the same size factor of 2.500000 returns the smaller number.",
+   "The debottlenecked case runs at an oil utilisation of 0.400000, so idle capacity carries no crew or marine spread."
+  ],
+  "answer": 2,
+  "explanation": "Both factors come from the same 2.500000: to the power 0.7 it is 1.899144 and to the power 0.6 it is 1.732862."
+ },
+ {
+  "prompt": "The Deep tie-back holds a capex of 184.6717 at a nameplate of 25000 bopd against the FPSO's 1363.3524 at 60000. Can the 0.7 exponent account for that gap?",
+  "options": [
+   "Yes: 60000 against 25000 is a larger size step than the one between the two FPSO rows, so raising it to the power 0.7 gives a factor well above the 1.899144 that step returns.",
+   "No: the type changed as well as the size, each type carries its own base cost, and the exponent works only within a type.",
+   "Yes, once the handling capacities are taken in: the tie-back carries 37500 Mscf/d of gas against the FPSO's 90000, and the curve is raised to a power on capacity rather than on nameplate.",
+   "No: the tie-back is priced from its concept's capex of 730.0000, not from a curve at all."
+  ],
+  "answer": 1,
+  "explanation": "Comparing across types tells you what a tie-back is rather than what scale is worth, and the two figures sit far further apart than any exponent on a size ratio would put them."
+ },
+ {
+  "prompt": "What does the screening curve behind the FPSO's capex of 1363.3524 read?",
+  "options": [
+   "A type and a nameplate, and nothing else: it has no water depth, no mooring scope, no local content and no yard order book inside it to interrogate.",
+   "A type, a nameplate and the plan's peak rate of 60.0000 kbpd, which is what fixes the oil utilisation of 1.000000 that the same card reports.",
+   "A type, a nameplate and the concept's facilities field of 1350.0000, which anchors the curve so that the two estimates stay close to one another.",
+   "A type, a nameplate and the water depth the facility sits in, which is what separates the FPSO from the Deep tie-back's 184.6717 at 25000 bopd."
+  ],
+  "answer": 0,
+  "explanation": "A costed number is built the other way, item by item: the plan's ledger carries hull and topsides at 1180.0000 and mooring and installation at 170.0000, two lines a person wrote and can defend."
+ },
+ {
+  "prompt": "Decommissioning reads 204.5029 on the 60000 bopd FPSO and 388.3805 on the 150000 case, a share of 0.150000 on both rows. What makes the two allowances differ if the share is the same?",
+  "options": [
+   "The exponent is applied to the allowance directly, with removal scope scaling to the power 0.7 in its own right and the 15 percent then read off the answer as a check.",
+   "The share is 0.150000 only after rounding, the two rows carrying different percentages off the type's base cost.",
+   "The base it is taken from: the allowance is 15 percent of the capex the facility carries, so it inherits that capex's factor of 1.899144.",
+   "The nameplate enters twice, through the capex and again through the handling capacities."
+  ],
+  "answer": 2,
+  "explanation": "Nobody told the decommissioning calculation about the power 0.7. It multiplies a capex that already carries the exponent, so the allowance scales that way as well."
+ },
+ {
+  "prompt": "Before the repairs made ahead of this course, what did two FPSOs of very different nameplate return for their decommissioning allowance?",
+  "options": [
+   "Figures that differed by the full size factor of 2.500000, because the allowance was taken as a share of the nameplate rather than of any money column at all.",
+   "No figure at all on the larger row, because the allowance was refused by name whenever a nameplate sat above the type's own base case of 60000 bopd.",
+   "Figures that differed by 1.732862, because the allowance was taken as a share of the annual operating cost, which scales to the power 0.6 rather than to the power 0.7.",
+   "The same figure, because the allowance was 15 percent of the type's unscaled base cost, so the larger unit looked free to take away."
+  ],
+  "answer": 3,
+  "explanation": "Treat that as history. The published behaviour now reads 204.5029 against 388.3805 on the two FPSO rows."
+ },
+ {
+  "prompt": "The plan's cost ledger carries a decommissioning provision of 260.0000 million USD as an ABEX line. Where does that provision show up in the screening case?",
+  "options": [
+   "Inside the CAPEX total of 2250.0000, alongside development drilling at 520.0000 and the subsea system at 380.0000, which is how the ledger and the concept come to agree.",
+   "In the final production year: it sits in neither the CAPEX total of 2250.0000 nor the operating cost of 95.0000 a year, and the case charges it there as the plan's end-of-life cost.",
+   "Inside the operating cost of 95.0000 a year, spread across the concept's 20.0000 year life in the way maintenance and integrity at 23.0000 a year is spread.",
+   "Inside the facility card's allowance of 204.5029, which the ledger line is added to so that one removal figure covers the vessel and the field at once."
+  ],
+  "answer": 1,
+  "explanation": "An ABEX cost item replaces the facility estimate rather than being added to it, so the case charges the plan's own 260.0000 and the card's 204.5029 never enters the NPV."
+ },
+ {
+  "prompt": "Oil utilisation reads 1.000000 on the Egina FPSO, 0.400000 on the debottlenecked case and 2.400000 on the Deep tie-back. What is divided by what?",
+  "options": [
+   "Each facility's nameplate divided by the largest nameplate on the plan, so the 150000 case reads 1.000000 and the others read as shares of the vessel that carries the most.",
+   "Each facility's nameplate divided by the peak of the concept it belongs to, which is why the tie-back at a nameplate of 25000 comes out above one against a plan peaking at 60.0000 kbpd.",
+   "The plan's own peak of 60000 bopd divided by each facility's nameplate: one numerator and three denominators.",
+   "The plan's peak divided by the sum of the three nameplates, the studio treating the facilities as one installed capacity and reporting each row's share of the throughput."
+  ],
+  "answer": 2,
+  "explanation": "The whole spread of answers comes from the facilities rather than from the production: 60000 into 60000 is 1.000000, into 150000 is 0.400000 and into 25000 is 2.400000."
+ },
+ {
+  "prompt": "Gas utilisation reads 0.426667 on the Egina FPSO against a gas capacity of 90000 Mscf/d. Where does the rate on the top of that ratio come from?",
+  "options": [
+   "From the plan's peak of 60000 bopd at a gas-oil ratio of 640 scf a barrel, which is 38400 Mscf/d, and 38400 into 90000 is 0.426667.",
+   "From the nameplate of 60000 bopd read directly as a gas rate, the studio treating a barrel a day of oil as a thousand standard cubic feet a day of gas.",
+   "From the gas reserves of 70.0000 Bcf spread across the concept's 20.0000 year life, the plan's only gas volume.",
+   "From the debottlenecked case's gas capacity of 225000 Mscf/d, the largest gas handling on the plan."
+  ],
+  "answer": 0,
+  "explanation": "One numerator of 38400 Mscf/d runs across all three rows: into 225000 it is 0.170667 and into 37500 it is 1.024000."
+ },
+ {
+  "prompt": "The Deep tie-back fires Oil Separation Capacity Exceeded at an oil utilisation of 2.400000 and Gas Compression Limits at a gas utilisation of 1.024000. What do the two flags say on their own?",
+  "options": [
+   "That the gas side is the binding constraint, since a compression flag fires before a separation flag and the engine lists the constraints it hit in the order they bind.",
+   "That both sides are over by a comparable amount, since the studio raises a flag only once a utilisation passes the level the other facilities on the plan read against the same peak.",
+   "That the facility needs 2.400000 times its installed oil capacity and 1.024000 times its gas capacity, the flags being the studio's way of reporting a required duty rather than a breach.",
+   "Only that two limits have been crossed, since a flag carries no magnitude and the ratios beside it hold the size of the problem."
+  ],
+  "answer": 3,
+  "explanation": "The gas side is over by a hair at 1.024000 and the oil side is nowhere near at 2.400000, and a register of flags with no ratios beside it hides that difference entirely."
+ },
+ {
+  "prompt": "Measured against its own concept's peak of 25.0000 kbpd the Deep tie-back would read an oil utilisation of 1.000000 with no bottleneck at all. Why does the studio not report that figure?",
+  "options": [
+   "Because a utilisation above one is clamped to 1.000000 for reporting, and the studio prints the bottleneck flags instead of the ratio whenever a facility runs over its nameplate.",
+   "Because the throughput comes from the plan being assessed and is the same for every row, so the tie-back is measured at 60000 bopd and reads 2.400000.",
+   "Because the tie-back concept's peak applies only once a reader selects that concept as the plan's own.",
+   "Because the peak used is the largest nameplate on the plan, 150000 bopd, rather than a production rate."
+  ],
+  "answer": 1,
+  "explanation": "Run each facility against the throughput that suits it and the tie-back looks adequate for a plan it cannot carry, which the engine refuses by construction."
+ },
+ {
+  "prompt": "The Deep tie-back's flow assurance score of 3 reads level Medium. A score of 3 on the plan's risk register reads Low. What accounts for the two readings?",
+  "options": [
+   "Two different scales sharing three words: the flow assurance level is High above 5 and Medium above 2, while the register bands at 20 Critical, 12 High and 6 Medium.",
+   "The register scores a risk as probability times impact while the flow assurance screen adds its hazards up, so a 3 on the screen is worth more than a 3 on the register.",
+   "The flow assurance screen rounds its level up whenever a named hazard is present, and the tie-back carries Hydrates High and Wax Medium against a register row carrying none.",
+   "The register applies its bands only to a scored row, so a 3 falls through to Low as an unscored row does, while the screen bands every score it forms."
+  ],
+  "answer": 0,
+  "explanation": "The tie-back scores 3 and reads Medium on the screen, while the register's table puts a probability of 1 and an impact of 3 at a score of 3 and a band of Low."
+ },
+ {
+  "prompt": "Run the Deep tie-back on a fluid carrying 12 ppm of H2S and its hazards read Hydrates High, Wax Medium and Corrosion High. What does the screen report for corrosion when the H2S field is left blank?",
+  "options": [
+   "A corrosion entry at the lowest level, the screen treating an empty field as a zero concentration and scoring it as it would a fluid with none.",
+   "An unscored corrosion entry, in the way the risk register reports a row with no probability as Unscored rather than folding it into the Low band.",
+   "Nothing at all: with no figure the corrosion screen cannot fire, so the output is identical to a fluid that was measured and came back sweet.",
+   "No corrosion entry, and a level of Low in place of Medium, the untested hazard being dropped from the score."
+  ],
+  "answer": 2,
+  "explanation": "The score stays 3 and the level stays Medium either way, so a reader cannot tell from the screen whether the sour gas question was asked and answered or never asked."
+ }
+]

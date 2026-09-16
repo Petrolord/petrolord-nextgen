@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "The EGINA plan reads completeness 100 percent on 9 of 9 sections. Take its economics section out and leave everything else alone. What does the studio then report?",
+  "options": [
+   "0 percent and no error, because a plan the studio cannot cost is scored as an empty record until a capex is typed back into it.",
+   "100 percent still, because the other eight sections are untouched and the economics section is scored off the concept's own capex of 2250.0000 million USD rather than off its own box.",
+   "89 percent, with the error \"Total CAPEX is zero or missing.\", because one of the nine stops carrying a figure and the check names what went with it.",
+   "89 percent with an empty error list, because the count of sections carrying something is the whole of the score and the error list is reserved for the reserves check alone."
+  ],
+  "answer": 2,
+  "explanation": "One section emptied moves the score by roughly a ninth, from 100 percent to 89 percent, and the error names the missing capex rather than the section it came from."
+ },
+ {
+  "prompt": "The studio shows three figures for what this development costs: concept capex 2250.0000, cost items CAPEX 2250.0000 and 1363.3524 million USD. What is the third of them?",
+  "options": [
+   "A class 5 screening estimate drawn from the facility type and its 60000 bopd nameplate, covering the Egina FPSO alone and none of the drilling or the subsea.",
+   "The facilities part of the concept read back through the cost breakdown, which is why it sits below the concept's own facilities capex field of 1350.0000 million USD.",
+   "A costed number for the vessel built from the seven cost items, which is why it prints to four decimals like the 2250.0000 beside it.",
+   "The lowest of three quotes for the same scope, carried so that a reader can see the range the 2250.0000 estimate was drawn from."
+  ],
+  "answer": 0,
+  "explanation": "The 1363.3524 million USD comes from a type and a nameplate and the 2250.0000 of cost items comes from seven lines somebody wrote; both print to four decimals and neither is the same class of number."
+ },
+ {
+  "prompt": "The plan's cost items put 520.0000 into Execution, 1180.0000 into Construction and 550.0000 into Installation, while the FPSO concept carries drilling 520.0000, facilities 1350.0000 and subsea 380.0000. How do those two cuts line up?",
+  "options": [
+   "They do not line up: the Installation phase of 550.0000 million USD has no counterpart in the concept record, which carries the mooring inside its drilling field of 520.0000 instead.",
+   "They cut the same 2250.0000 million USD two ways: drilling is Execution, the concept's facilities figure is the hull and topsides of 1180.0000 plus the mooring of 170.0000, and its subsea figure is the subsea system line of 380.0000.",
+   "The four phases are the three capex fields with one added, so Execution is the drilling, Construction is the facilities, Installation is the subsea and Operate is the 95.0000 million USD a year the concept carries, which is how the four phase figures and the three capex fields both come to total 2250.0000 million USD.",
+   "The concept fields were rolled up from the phases, which is why both reach 2250.0000 million USD, and the studio refuses to price a plan whose roll-up and concept record disagree, naming the phase whose total has moved away from the capex field it was rolled up into."
+  ],
+  "answer": 1,
+  "explanation": "1180.0000 plus 170.0000 is the concept's facilities capex of 1350.0000 and the subsea system line is its subsea capex of 380.0000, so the same money is being cut by what it buys and by when it leaves."
+ },
+ {
+  "prompt": "\"the drilling capex may not be negative: -500\" does something that \"the scenario oil price is missing\" cannot. What, and why is it worth having?",
+  "options": [
+   "It names a field somebody filled in rather than a field left empty, so it alone carries a FdpInputError while the missing price returns a warning the run continues past.",
+   "It carries the cell reference beside the value, and that reference rather than the value is what lets a reader find the box, which a missing price has no way to supply.",
+   "It stops the whole plan rather than the one scenario, because a value that cannot be read might already have reached any other calculation the studio had run.",
+   "It quotes the offending value back, so -500 is searchable in the plan, and a figure nobody entered has no value to quote."
+  ],
+  "answer": 3,
+  "explanation": "Five of the ten published refusals quote the value back, -500, -5, abc, x and lots, and every one of the ten is a FdpInputError that names its own field."
+ },
+ {
+  "prompt": "A board paper prints the Low price, Base and High price scenarios as the range the field could be worth, 392.8013 to 3638.0233 million USD. What has the paper claimed that the tier does not?",
+  "options": [
+   "That the three describe a spread: each is a separate run of one concept conditional on the single price typed at its head, and the tier holds no view on how likely 48.0000 or 92.0000 USD a barrel is.",
+   "That the three share one concept, when the Low price row runs the subsea tie-back on its own capex of 730.0000 million USD and only the Base and the High price figures sit on one scale, so the range the paper prints is two concepts wide rather than one.",
+   "That the figures are comparable, when each row is discounted at a rate matched to its own price and only the Base case runs at the default 10.0000 percent.",
+   "That the studio named them, when Low price, Base and High price are the engine's own judgements about which of the three prices is conservative and which optimistic."
+  ],
+  "answer": 0,
+  "explanation": "Four rows of one concept at four typed prices are four complete answers, not a distribution, and the tier will not say whether any of the prices is plausible."
+ },
+ {
+  "prompt": "Quoting an NPV of 2015.4123 million USD without its terms is quoting half a number. Which set of defaults is that value conditional on?",
+  "options": [
+   "Royalty 12.5000 percent, tax 30.0000 percent, a discount rate of 10.0000 percent and the concept's fixed operating cost of 95.0000 million USD a year, discounted at each year end.",
+   "An oil price of 70.0000 USD a barrel, a peak rate of 60.0000 kbpd, a life of 20.0000 years and a capex of 2250.0000 million USD.",
+   "Royalty 12.5000 percent, tax 30.0000 percent, a discount rate of 10.0000 percent and a variable operating cost of 5.0000 USD a barrel, discounted mid year.",
+   "Royalty 12.5000 percent, tax 30.0000 percent, a discount rate of 10.0000 percent and a fixed operating cost of 95.0000 million USD a year with no charge on the barrels."
+  ],
+  "answer": 2,
+  "explanation": "The four stated defaults are royalty 12.5000 percent, tax 30.0000 percent, discount 10.0000 percent and a variable operating cost of 5.0000 USD a barrel, and the discounting is mid year."
+ },
+ {
+  "prompt": "EGINA's oil P50 of 130.0000 MMbbl comes off the reserves table. Which rows is it built from, and what does the recovery factor column contribute?",
+  "options": [
+   "Egina Main at 95.0000 and Egina Deep at 35.0000, each weighted by its recovery factor of 0.340000 and 0.280000 before they are added.",
+   "Egina Main at 95.0000 and Egina Deep at 35.0000, and the recovery factor contributes nothing: the engine adds the percentile columns and never touches it.",
+   "All three reservoir rows at P50, with the Egina Gas Cap's 70.0000 Bcf converted to a barrel of oil equivalent basis first and each row's recovery factor carried through that conversion.",
+   "Egina Main at 95.0000 on its own, because Egina Deep's recovery factor of 0.280000 falls below the field average and the engine reports that reservoir as a second oil line."
+  ],
+  "answer": 1,
+  "explanation": "95.0000 plus 35.0000 is 130.0000 MMbbl, and the recovery factor is context for the volume rather than an input to the sum."
+ },
+ {
+  "prompt": "A reserves row named Aquifer is typed with a fluid of Brine. What comes back, and what would be different if the row had no name?",
+  "options": [
+   "\"Aquifer: fluid type is missing or unknown (Brine); expected one of Oil, Gas, Condensate\", and an unnamed row is refused by its position instead, as row 2.",
+   "Brine is reported as a fluid the engine does not price and the row is dropped from the totals, and an unnamed row is dropped the same way under a warning that the table holds fewer rows.",
+   "The message lists Oil, Gas, Condensate and Water as the fluids the engine knows, and a row with no name is given the name Unlabelled.",
+   "The whole table is refused rather than the row, so the plan reports P50 0.0000 and completeness 89 percent until the fluid is fixed."
+  ],
+  "answer": 0,
+  "explanation": "The message uses the name somebody typed, which is why Aquifer and Unlabelled are names in the table, and an unnamed row comes back as \"row 2: fluid type is missing or unknown (undefined)\"."
+ },
+ {
+  "prompt": "Two of the studio's totals turn on a type somebody picked from a list: the fluid on a reserves row and the cost type on a cost item. What does the engine do with an entry it cannot use in each of them?",
+  "options": [
+   "It refuses both by name, so a provision typed as CAPEX comes back the way a fluid typed as Brine does, naming the item and quoting the type that was entered, so that the reader can find the cell that holds it and correct it there.",
+   "It accepts both and reports them apart, opening a column of its own for an unknown fluid and holding an unknown cost type outside the CAPEX and OPEX totals the way an ABEX line is held.",
+   "It drops the reserves row from the totals under a warning and refuses the cost item, because a volume can be summed with one row missing and a money total cannot.",
+   "It refuses the reserves row by name, because a fluid it cannot read has no column to sit in, and it accepts whatever a cost item's type says, so a decommissioning provision typed as CAPEX is totalled into the capex."
+  ],
+  "answer": 3,
+  "explanation": "A row typed as Brine returns \"Aquifer: fluid type is missing or unknown (Brine); expected one of Oil, Gas, Condensate\", while the engine will not classify a cost line for you and totals what the type field says."
+ },
+ {
+  "prompt": "The sweep prices the plan's case with CAPEX at minus 30 percent, 2658.9995, and at plus 30 percent, 1371.8250. What is wrong with calling those the P90 and the P10 capex?",
+  "options": [
+   "The labels are right only for a driver that lifts the value, so a capex row reads P10 at minus 30 percent and P90 at plus 30 percent.",
+   "A capex may carry a P-label once the sweep has been run at more than the two points, because three or more runs describe enough of a spread for a percentile to be read off them.",
+   "A P-label belongs to a reserves distribution, one fluid at a time, and the sweep holds no distribution: it moves a driver by 30 percent and says nothing about how likely that is.",
+   "The sweep moves all four drivers at once in each run, so neither figure belongs to the capex alone and no percentile of any kind could be attached to either of the two columns."
+  ],
+  "answer": 2,
+  "explanation": "P90 is the low case of a reserves distribution, such as the oil P90 of 80.0000 MMbbl, while 2658.9995 is one driver moved 30 percent with the other three held at the base case."
+ },
+ {
+  "prompt": "The engine returns an OOIP of 403539180.4580 STB for an Egina Main zone, which is 403.5392 MMstb. What makes quoting that as the field size expensive?",
+  "options": [
+   "The zone covers 2400.0000 acres of a larger field, so the figure understates what is in place and a reader who quotes it is low rather than high, which is the safer of the two errors.",
+   "An in place volume becomes reserves only after a recovery factor, and the plan's recoverable oil is 130.0000 MMbbl, so the listener hears a field several times the size of the one being developed.",
+   "The four decimals on 403539180.4580 STB describe the arithmetic rather than the mapping, so the fault is in the precision quoted and not in the quantity the figure describes.",
+   "Oil in place is carried in stock tank barrels and reserves in MMbbl, so the two are not comparable until the formation volume factor of 1.310000 has been applied to the volume a second time."
+  ],
+  "answer": 1,
+  "explanation": "403.5392 MMstb is oil in place and 130.0000 MMbbl is what the plan expects to recover from it, an implied recovery factor of 0.322150."
+ },
+ {
+  "prompt": "A reserves figure can reach a plan three ways: a headline somebody typed, a summary carried in from a loaded example, and a table of reservoir rows. Which of the three is the plan's own P50?",
+  "options": [
+   "The headline, because it is the figure the generated document prints beside the total CAPEX of 2250.0000 million USD and the NPV of 2015.4123, and the only one a reader of the finished plan ever sees.",
+   "The summary, because a plan carrying one scores 33 percent with isValid true while a plan carrying the rows alone scores 78 percent and fails validation until somebody has filled the summary box in behind them.",
+   "Whichever of the three the plan carries first, because the accessor reads them in that order and stops at the first figure it can resolve.",
+   "The table, because the engine totals the rows one fluid at a time and the completeness check, the generated document and the economics all reach the reserves through that one accessor."
+  ],
+  "answer": 3,
+  "explanation": "A headline typed by hand, a summary carried in from an example and a table of rows can all sit in one plan and disagree, and the number that belongs to the plan is the one totalled from the rows."
+ },
+ {
+  "prompt": "At 12 MMbbl a well the engine returns 11 wells for the oil P50 of 130.0000 MMbbl, and the plan carries 4 wells. What should a reader do with the two figures?",
+  "options": [
+   "Read them as real answers to different questions, one a drainage assumption applied to the recoverable volume and one the well list as it stands, and go and reconcile them, because the studio will not.",
+   "Take the 4, because the well list holds a designed trajectory for each well while the 11 is a screening figure the engine drew from the concept's peak rate and its life.",
+   "Take the 11, because the completeness check reads a plan's well count from its reserves and a plan carrying only 4 fails validation until the list has caught up with the volume.",
+   "Average the two, because 12 MMbbl a well is an assumption at one end and a well list is an intention at the other, so the plan's true count sits somewhere between them."
+  ],
+  "answer": 0,
+  "explanation": "11 wells is what 130.0000 MMbbl needs at an assumed 12 MMbbl a well and 4 is what the well list holds, and nothing in the studio resolves the gap between them."
+ },
+ {
+  "prompt": "The gas total reads 70.0000 Bcf on a row count of 1. Why does that row count matter as much as the total beside it?",
+  "options": [
+   "A count of 1 means the engine could not aggregate the distributions it was given, so the gas figure is a sum of low cases in the way the oil column of 80.0000 MMbbl is.",
+   "The count decides the unit: one gas row stays in Bcf, while two or more would be totalled onto a barrel of oil equivalent basis.",
+   "A fluid with one row has no aggregation in it, so 70.0000 Bcf is a single reservoir estimate carried through rather than a sum of anything.",
+   "A count of 1 marks the fluid as unverified, because the engine will not label a column P50 until it has at least two independent estimates of the same volume to read it from."
+  ],
+  "answer": 2,
+  "explanation": "The oil P50 of 130.0000 MMbbl is two rows added and the gas P50 of 70.0000 Bcf is one row carried through, and the row count is what tells the two apart."
+ },
+ {
+  "prompt": "Which of the figures on the FPSO concept record did the studio work out for itself?",
+  "options": [
+   "The operating cost of 95.0000 million USD a year, which the engine sizes from the vessel's nameplate of 60000 bopd, and the 36 months, which it takes from the concept type and holds against the sanction date of 2027-04-01.",
+   "None of them: the capex fields, the operating cost, the peak rate and the life were all typed in, and even the 36 months to first oil is a duration the concept type carries rather than an estimate the studio made.",
+   "The peak rate of 60.0000 kbpd and the life of 20.0000 years, which the engine reads back off the oil P50 of 130.0000 MMbbl so that the shape it draws can be fed by the reserves.",
+   "All of them, because a concept record is generated from the concept type and the field's reserves, which is why two concepts on one field carry different capex, peak rate and life."
+  ],
+  "answer": 1,
+  "explanation": "The studio holds a plan together and re-derives nothing in it, so a concept figure is only as good as the work behind it and a duration attached to a type deserves the same scrutiny as any other entry."
+ },
+ {
+  "prompt": "The FPSO concept's lifecycle cost is 4150.0000 million USD. What is inside that figure, and what is not?",
+  "options": [
+   "Capex of 2250.0000 plus the whole case operating cost of 3049.6464, which carries the variable 5.0000 USD a barrel with it, and the 260.0000 decommissioning provision charged at the end of the life.",
+   "Capex of 2250.0000 plus 1900.0000 of operating cost discounted at 10.0000 percent, which is what lets it be set beside the NPV of 2015.4123 million USD as a figure on the same scale.",
+   "The cost items' CAPEX of 2250.0000 plus the Operate phase roll-up of 355.0000 taken across the life, which is the route by which the decommissioning provision enters the lifecycle figure.",
+   "Capex of 2250.0000 plus 1900.0000 of operating cost, undiscounted, and the 260.0000 decommissioning provision is not in it."
+  ],
+  "answer": 3,
+  "explanation": "95.0000 a year across 20.0000 years is 1900.0000, and 2250.0000 plus 1900.0000 is 4150.0000, a plain sum with no discounting and no abandonment inside it."
+ },
+ {
+  "prompt": "The FPSO concept's profile reads 60.0000, 60.0000, 60.0000, 54.0000, 48.6000 and 43.7400 kbpd. Which two inputs drew the whole of that curve?",
+  "options": [
+   "The peak rate of 60.0000 kbpd, which sets the height, and the life of 20.0000 years, which sets how long the decline of 0.900000 a year runs for.",
+   "The oil P50 of 130.0000 MMbbl, which fixes the area under the curve, and the life of 20.0000 years, across which the engine spreads that recoverable volume year by year.",
+   "The peak rate of 60.0000 kbpd and the well count of 4, since each well carries its own share of the plateau.",
+   "The peak rate of 60.0000 kbpd and the concept's 36 months from sanction to first oil, which is what holds the plateau at three years before the decline is allowed to start."
+  ],
+  "answer": 0,
+  "explanation": "The plateau runs to year 3 and year 4 is year 3 times 0.900000, which is 54.0000 kbpd, and nothing about the rock, the wells or the reserves enters the shape at all."
+ },
+ {
+  "prompt": "The volume under the FPSO concept's 20 year shape is 229.9293 MMbbl and the plan's oil P50 is 130.0000 MMbbl. What does the studio do about the difference?",
+  "options": [
+   "Caps the profile at the recoverable volume, so the decline steepens once cumulative production reaches 130.0000 MMbbl.",
+   "Nothing: the shape is drawn from a peak rate and a life without consulting the reserves, so the plan still scores complete and still returns 2015.4123 million USD.",
+   "Refuses the scenario by name, as it refuses a price deck that does not cover the profile, and asks for a larger reserves figure.",
+   "Reports the difference as a warning against the completeness check, which is why a plan built this way reads 89 percent rather than the 100 percent its nine sections would otherwise give."
+  ],
+  "answer": 1,
+  "explanation": "229.9293 MMbbl under a shape drawn from two inputs against 130.0000 MMbbl in the reserves table, and the reconciliation is the planner's job rather than the engine's."
+ },
+ {
+  "prompt": "An FPSO sanctioned on 2028-02-29 reaches first oil on 2031-03-01, and one sanctioned on 2027-04-01 reaches it on 2030-04-01. What do the two say about how a concept is dated?",
+  "options": [
+   "The engine counts 36 months as calendar days from the start date, which is what puts a leap day start one day later than plain month arithmetic would have placed it.",
+   "The engine dates a concept off the plan's sanction milestone, so both inherit the schedule's 870 day network and differ only in their start.",
+   "The engine adds 36 whole months to the start date somebody typed and lands on a date that exists, and it reads no clock, so the answer is the same on any machine on any day.",
+   "The engine dates from today unless a start date is given, so a concept carrying 2028-02-29 is anchored and one without a date moves."
+  ],
+  "answer": 2,
+  "explanation": "36 months from 2027-04-01 is 2030-04-01 and 36 months from 2028-02-29 is 2031-03-01, and a concept with no start date and no today supplied is refused rather than dated from a clock."
+ },
+ {
+  "prompt": "Both EGINA concepts are sanctioned on 2027-04-01 and the tie-back reaches first oil a full year before the FPSO. Where does that year come from?",
+  "options": [
+   "The capex each concept carries, so the tie-back's 730.0000 million USD buys a shorter build than the FPSO's 2250.0000 does, and the months move with the money committed.",
+   "The network of eight activities, whose critical path of 870 days is walked once for each concept and cut short for the tie-back by the work that concept does not have to do.",
+   "The peak rate: the tie-back's 25.0000 kbpd needs fewer wells than the FPSO's 60.0000 kbpd, and the 24 and the 36 months are measuring those two drilling campaigns.",
+   "The concept type: 24 months for a tie-back hung off a host already there, 36 for an FPSO whose hull must be converted."
+  ],
+  "answer": 3,
+  "explanation": "A Platform sanctioned on 2027-04-01 also reaches first oil in 24 months, so the duration belongs to the concept type rather than to the size of the spend."
+ },
+ {
+  "prompt": "The Low price scenario runs the FPSO at 48.0000 USD a barrel for an NPV of 392.8013 million USD, and the sweep's oil price at minus 30 percent returns 466.5563. Why do two low price answers on one concept disagree?",
+  "options": [
+   "The sweep prices the plan's own case off the cost items while the scenario prices the concept, so the 466.5563 runs on a capex that the 392.8013 does not.",
+   "They are not at the same price: 30 percent off the base of 70.0000 USD a barrel is 49.0000, and the scenario was typed at 48.0000.",
+   "The scenario carries a full deck at 48.0000 while the sweep moves the producing years only, leaving year 0 priced at the base of 70.0000 USD a barrel.",
+   "The sweep reports a swing rather than a value, so 466.5563 is the distance the value moved and not what the case is worth at the lower price."
+  ],
+  "answer": 1,
+  "explanation": "Both runs use the same 2250.0000 million USD of capex, the same 20 year shape and the same terms, so a dollar of price is the whole of the difference between 392.8013 and 466.5563."
+ },
+ {
+  "prompt": "The FPSO pays back in 3.8273 years and the tie-back at the same price in 3.2035. Which does a payback ranking choose, and what does that ranking miss?",
+  "options": [
+   "The tie-back, and the ranking misses that the FPSO is worth 2015.4123 million USD against the tie-back's 1013.7182, because payback stops counting at the crossing.",
+   "The FPSO, because a longer payback across a life of 20.0000 years is the stronger result, and the ranking misses the 15.0000 year life.",
+   "The tie-back, and the ranking misses nothing, because the higher of the two rates that zero each flow, 40.4136 against 29.5779, puts it first on both measures.",
+   "Neither, because payback carries no discount rate of its own and only shows the year the capex of 2250.0000 is recovered in cash."
+  ],
+  "answer": 0,
+  "explanation": "Payback ranks the tie-back first at 3.2035 years and value takes the FPSO at 2015.4123 million USD, because the years after the crossing reach the NPV and never reach the payback."
+ },
+ {
+  "prompt": "A worked answer calls the payback of 3.8273 years the point at which the Base case has recovered its 2250.0000 million USD in present value terms. What is wrong with that sentence?",
+  "options": [
+   "Nothing is wrong with it, since payback and value are measured on one discounted flow and 3.8273 years is simply where that flow first turns positive at the 10.0000 percent the scenario carries.",
+   "The capex is wrong rather than the discounting, because payback is measured against the cost items' CAPEX total and the 2250.0000 million USD quoted is the concept's own estimate, and the two agree on this plan only because it was costed against the concept it runs.",
+   "Payback carries no discount rate of its own: it is where the plain cumulative cash position crosses zero, and the 10.0000 percent taken mid year belongs to the 2015.4123 million USD instead.",
+   "Payback is measured after the state is paid while the 2250.0000 million USD is a gross figure, so the sentence sets a post take measure against a pre take one."
+  ],
+  "answer": 2,
+  "explanation": "The cumulative runs -2250.0000, -1454.1875, -658.3750 then 137.4375 with nothing discounted, and payback is placed inside the year where that crossing happens."
+ },
+ {
+  "prompt": "At 40.0000, 55.0000, 70.0000 and 85.0000 USD a barrel the same concept returns -197.2391, 909.0866, 2015.4123 and 3121.7380. Why is the step even?",
+  "options": [
+   "The engine interpolates between the two prices it was given a full run at, so the two middle figures are read off a straight line drawn between 40.0000 and 85.0000 USD a barrel.",
+   "Royalty and tax are charged on what is left after costs, so the state absorbs the curvature in the cash flow and leaves the value rising evenly with each step in the price.",
+   "The four prices are evenly spaced within one price deck, and a deck that covers every year of the profile always returns an even step in the value it prices out.",
+   "Only what a barrel earns moves between the runs: the shape, the capex of 2250.0000 and the fiscal terms are identical in all four."
+  ],
+  "answer": 3,
+  "explanation": "Each run prices the same 20 year shape on the same 2250.0000 of capex, so a step of 15.0000 USD a barrel moves the value by the same amount every time."
+ },
+ {
+  "prompt": "The tie-back returns 1.388655 of NPV per million USD of capex against the FPSO's 0.895739. What does a ranking on that ratio leave out?",
+  "options": [
+   "Size: a ratio has none in it, and on a balance sheet that can carry 2250.0000 the FPSO leaves 2015.4123 million USD where the tie-back would have left 1013.7182.",
+   "The price, because both ratios are conditional on the 70.0000 USD a barrel the two runs shared and the ranking between them turns over as soon as either is priced at 48.0000.",
+   "The fiscal terms, because both pay royalty of 12.5000 percent on different volumes and the ratio is taken before the state is paid.",
+   "The operating cost, because the tie-back's 40.0000 a year against the FPSO's 95.0000 sits outside the capex the ratio divides by."
+  ],
+  "answer": 0,
+  "explanation": "1013.7182 on 730.0000 of capex is the more efficient use of the money and 2015.4123 on 2250.0000 is the larger value, and the two measures answer different questions."
+ },
+ {
+  "prompt": "The Base case earns gross revenue of 16095.0492 million USD and reports a government take of 5288.8051. What is that take made of, and what share is it?",
+  "options": [
+   "Tax of 3276.9239 on its own, because royalty is a cost of production charged ahead of the tax base and is already carried inside the operating cost of 3049.6464 million USD.",
+   "Royalty of 2011.8812 and tax of 3276.9239 added together, which is 0.328598 of gross revenue, a ratio rather than a percent.",
+   "Royalty of 2011.8812 and tax of 3276.9239 added, which is 0.328598 percent of gross revenue under the stated default rates of 12.5000 percent and 30.0000 percent.",
+   "Royalty of 2011.8812, tax of 3276.9239 and the capex of 2250.0000 the state recovers through the fiscal terms, which is why the take runs well above the NPV of 2015.4123."
+  ],
+  "answer": 1,
+  "explanation": "2011.8812 plus 3276.9239 is 5288.8051 million USD, and 0.328598 of gross revenue is a plain ratio: 0.328598 percent of it would be a different figure entirely."
+ },
+ {
+  "prompt": "The Operate phase of the cost breakdown totals 355.0000 million USD while the plan's OPEX total is 95.0000 a year. What accounts for the difference?",
+  "options": [
+   "The 355.0000 is the operating cost with the variable 5.0000 USD a barrel added at full plateau, which is the same addition that puts 204.5000 into year 1 of the Base case.",
+   "The 355.0000 is the two OPEX lines of 72.0000 and 23.0000 escalated across the 20.0000 year life of the concept, and the 95.0000 is the first year of that escalating series.",
+   "The 355.0000 is the Installation phase read one row out, which totals 550.0000 from the mooring and the subsea system.",
+   "The Operate roll-up carries the 260.0000 decommissioning provision beside the two OPEX lines, and it is money by phase rather than money a year."
+  ],
+  "answer": 3,
+  "explanation": "Operations and logistics at 72.0000 plus Maintenance and integrity at 23.0000 make the 95.0000 a year, and the third line sitting in that phase is the 260.0000 ABEX provision."
+ },
+ {
+  "prompt": "The plan carries a decommissioning provision of 260.0000 million USD and the Egina FPSO carries a decommissioning figure of 204.5029. What does the screening case charge?",
+  "options": [
+   "Neither of them, because the case carries capex and operating cost only, so both figures sit outside the CAPEX total of 2250.0000 and outside the OPEX of 95.0000 a year.",
+   "The 204.5029, because a facility figure is derived from the nameplate of 60000 bopd and the engine prefers a derived number.",
+   "The 260.0000, charged in production year 20 as the plan's end-of-life cost, while the facility's 204.5029 is replaced by it rather than added to it.",
+   "Both, as one abandonment line of the two added, which is what separates the lifecycle cost of 4150.0000 from the value of 2015.4123."
+  ],
+  "answer": 2,
+  "explanation": "An ABEX cost item replaces the facility estimate and is never added to it, and charging the 260.0000 costs the plan 32.1530 million USD of present value against the 2047.5653 the same case is worth without it."
+ },
+ {
+  "prompt": "A three year profile given two prices is refused. What does the refusal say, and what does the same profile do once a third price is entered?",
+  "options": [
+   "It says the deck has no price for production year 3 and asks for a price for every year of the profile, and with three prices the case runs and returns an NPV of -202.4284.",
+   "It says the scenario oil price is missing, which is the message a blank price returns, and with a third price entered the case runs and returns an NPV of -3554.2621.",
+   "It extends the last price it holds across year 3 and warns that the deck was short, and with three prices returns the same value.",
+   "It refuses the plan rather than the scenario, so completeness falls to 89 percent, and with the third price entered the plan reads 100 percent and prices normally again."
+  ],
+  "answer": 0,
+  "explanation": "The message names the year: \"the price deck has no price for production year 3: enter a price for every year of the profile\", and the complete deck prices out at -202.4284."
+ },
+ {
+  "prompt": "Moving the Production driver up 30 percent takes the plan's case to 3437.8310 million USD. What has that run done to the 130.0000 MMbbl the reserves table holds?",
+  "options": [
+   "It raises the recoverable volume by the same 30 percent, because the sweep re-runs the whole case and the reserves table is one of the inputs that gets re-run with it, so the table and the profile stay in step through every row of the sweep.",
+   "Nothing, and nothing checks it: the sweep scales the concept's screening shape, and that shape was drawn from a peak rate and a life without consulting the reserves in the first place.",
+   "It leaves the table alone but caps the run, since the engine stops the profile once cumulative production reaches the oil P50 of 130.0000 MMbbl.",
+   "It swaps the oil P10 of 205.0000 MMbbl into the case in place of the P50, which is how the studio prices a production upside."
+  ],
+  "answer": 1,
+  "explanation": "The shape already produces 229.9293 MMbbl against an oil P50 of 130.0000 MMbbl before the driver is moved at all, and the plan still scores complete and still returns a value."
+ },
+ {
+  "prompt": "The sweep moves the value by 3097.7119 on oil price and by 2844.8375 on production. Why is price the stronger of the two?",
+  "options": [
+   "Production is capped by the concept's peak rate of 60.0000 kbpd, so a rise of 30 percent cannot be delivered through the plateau years and only the declining years actually move.",
+   "Royalty of 12.5000 percent falls on revenue from both drivers, while tax of 30.0000 percent is charged on the barrels alone.",
+   "A move in the oil price also moves the capex of 2250.0000 through the cost items, so its swing carries a second effect.",
+   "A barrel carries a variable operating cost of 5.0000 USD, so more barrels bring more cost with the revenue, while a dollar of price brings revenue and no cost."
+  ],
+  "answer": 3,
+  "explanation": "Both drivers scale revenue, but 30 percent more barrels brings 30 percent more variable operating cost with it, which is why 3097.7119 runs above 2844.8375."
+ },
+ {
+  "prompt": "A reviewer subtracts the FPSO concept's lifecycle cost of 4150.0000 million USD from the Base case's gross revenue of 16095.0492 and calls the remainder what the development is worth. What has that produced?",
+  "options": [
+   "The undiscounted value of the development, which becomes the 2015.4123 million USD once the 10.0000 percent rate has been applied to it year by year across the 21 rows the case carries.",
+   "The right figure on the wrong scale, since gross revenue is money across the whole life and a lifecycle cost is money as it is spent, so the two would have to be put on one basis before either could be taken from the other.",
+   "A figure on no scale the studio uses: it leaves the royalty of 2011.8812 and the tax of 3276.9239 inside the revenue and discounts nothing, while the value on those terms is 2015.4123 million USD.",
+   "The government take of 5288.8051 million USD reached the long way round, because royalty and tax are exactly what separate gross revenue from a lifecycle cost."
+  ],
+  "answer": 2,
+  "explanation": "A lifecycle cost is a plain sum of capex and operating cost with no price, no fiscal terms and no discounting in it, so it cannot be subtracted from a revenue to leave a value."
+ },
+ {
+  "prompt": "A gas only plan scores 33 percent with isValid true, a plan with a value of exactly zero scores 0 percent and one with a negative value scores 11 percent. What do those say about the score?",
+  "options": [
+   "That it counts sections carrying something and cannot tell a calculated zero from a box nobody filled in, so it measures what is present and never whether any of it is right.",
+   "That the nine sections are weighted by importance, which is how the economics section alone moves a plan between 0 percent and 11 percent while the reserves section cannot.",
+   "That a plan is scored against the fluids it carries, so a gas only plan is measured against a shorter list of sections and reaches isValid true at a third of the full score.",
+   "That each section is rounded to the nearest ninth of the total, which is what puts a plan with a value of zero at 0 percent and one with a negative value at 11 percent."
+  ],
+  "answer": 0,
+  "explanation": "A negative value counts as economics done and scores 11 percent while a zero does not, because the check cannot tell a calculated zero from a field nobody ever filled in."
+ },
+ {
+  "prompt": "A worked answer reports an oil reserves figure, a rate of return and a value per million USD of capex. What unit does each of the three carry?",
+  "options": [
+   "MMbbl for the oil, a ratio for the rate of return, and million USD for the value per million USD of capex, which is why it prints as 1.388655 alongside the money in the plan.",
+   "MMbbl for the oil, percent for a rate of return, and a plain number for the ratio such as 1.388655.",
+   "A barrel of oil equivalent basis for the oil once the 70.0000 Bcf of gas has been carried into it, percent for the rate of return, and percent again for the ratio that follows it.",
+   "MMbbl for the oil, percent for the rate of return and for the government take of 0.328598 as well, and million USD for the value per million USD of capex."
+  ],
+  "answer": 1,
+  "explanation": "A percent and a ratio are different animals: 0.328598 of gross revenue is not 0.328598 percent of it, and 1.388655 is a plain number carrying no unit at all."
+ },
+ {
+  "prompt": "A question asks what a concept is worth and the plan carries no annual operating cost for that concept. What is the answer?",
+  "options": [
+   "The value taken on the default operating cost of 10 million USD a year, which is what the engine ran on before the repair and remains the figure to assume where the field is blank.",
+   "The value taken on the plan's own OPEX total of 95.0000 million USD a year, because the cost items carry an operating cost for the field even when the concept record does not.",
+   "That the figure is missing: the engine stops with \"the concept annual operating cost is missing\" and names the field to go and fill in.",
+   "A value computed at 0.0000 of operating cost, because a screening case charges only what it has been given."
+  ],
+  "answer": 2,
+  "explanation": "A guessed input produces an output with no owner, so the engine names the field instead, and where the plan cannot say what something is worth the answer is what is missing."
+ },
+ {
+  "prompt": "The teaching schedule's activities give a network duration of 870 days against a calendar span of 933 days on the dates typed across them. What is the 63 days?",
+  "options": [
+   "The float carried by the three activities that sit off the critical path, which hold 180 days, 180 days and 480 days respectively before the finish date is moved by any of them.",
+   "The days lost to weekends and public holidays, because a network duration counts only working days while a calendar span counts every day between the first date and the last one.",
+   "An error in the dates, because a network of 870 days and a span of 933 days cannot both be right and the engine reports the difference so that the typed dates can be corrected.",
+   "Float already spent in the calendar: the window is wider than the work the network says has to happen."
+  ],
+  "answer": 3,
+  "explanation": "870 days is how long the work must take and 933 days is how wide the window is, so 63 days of that window is not needed by the logic of the network."
+ },
+ {
+  "prompt": "The EGINA register's five cost impacts add to 1145.0000 million USD and its exposure reads 269.0000. What is the 269.0000?",
+  "options": [
+   "The expected value at the engine's probability factors, of which the critical risk contributes 108.0000, and it is not the worst case the register describes.",
+   "The worst case with the unscored risk taken out of it, since Host government approval carries 400.0000 million USD of cost impact and no probability to weight that figure with.",
+   "The cost impacts of the scored risks added once the unscored one is dropped, which is what the four bands contribute.",
+   "The register's total cost impact weighted by the portfolio health of 58, so exposure and health always move in step."
+  ],
+  "answer": 0,
+  "explanation": "269.0000 million USD is the probability weighted total, 1145.0000 is what the register would cost if every risk happened, and the critical risk alone contributes 108.0000."
+ },
+ {
+  "prompt": "A plan reports P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, CAPEX 2250.0000, NPV 2015.4123, IRR none and 4 wells. What does a reader need before quoting that NPV?",
+  "options": [
+   "The completeness score, because a plan below 100 percent carries an error list and an NPV quoted off an incomplete plan is exactly the case the studio puts a warning against.",
+   "The gas P50 of 70.0000 Bcf, because the screening case prices both fluids and a value quoted without it understates the field.",
+   "Which capex it ran on, which price priced it and which production shape it burned, because the figure is one concept at 70.0000 USD a barrel on default terms.",
+   "The well count of 4, because the capex of 2250.0000 is divided across the wells the list carries."
+  ],
+  "answer": 2,
+  "explanation": "2015.4123 million USD belongs to the FPSO concept at 70.0000 USD a barrel on 2250.0000 of capex and a 20 year shape, and at 18.0000 USD a barrel the same concept reads -1834.1220."
+ },
+ {
+  "prompt": "A plan carries a reserves row of 95.0000 MMbbl at P50 for Egina Main and a well at 14200 ft of measured depth. What did the studio contribute to either of those two figures?",
+  "options": [
+   "It derived both, the reserves row from the zone's 403.5392 MMstb of oil in place at a recovery factor of 0.340000, and the depth from the drilling capex of 520.0000 million USD the concept carries, before it would let either figure reach the generated document.",
+   "Nothing beyond holding them: a subsurface team handed over the 95.0000 and somebody designed the 14200 ft trajectory, and the studio adds the oil rows to 130.0000 MMbbl without ever checking the geology.",
+   "It checked both against the engine's published cases and would have flagged either one for falling outside the range those cases cover, which is the check a plan carrying figures of this kind is supposed to survive.",
+   "It set the 95.0000 MMbbl from the recovery factor of 0.340000 that the row carries, which is the one column in the reserves table the engine computes rather than reads."
+  ],
+  "answer": 1,
+  "explanation": "A figure typed into the studio is only as good as the work behind it, and the totalling, the dating and the pricing are the whole of what the studio adds to it."
+ },
+ {
+  "prompt": "Two fields show the same figure when their oil and gas P50 totals are added together. What does a screening case say about the pair?",
+  "options": [
+   "It prices both fluids at the scenario's oil price of 70.0000 USD a barrel, so the two fields are worth the same figure until somebody enters a separate price for the gas.",
+   "It refuses a combined figure in the way it refuses a row typed as Brine, so neither field can be screened at all until the two fluid totals are reported separately again.",
+   "It converts the gas onto a barrel of oil equivalent basis at the engine's own factor, which is the conversion that makes a combined figure such as 200.0000 mean something.",
+   "It prices barrels only, so the gas never enters the value and the two can be worth entirely different money."
+  ],
+  "answer": 3,
+  "explanation": "EGINA's oil P50 of 130.0000 MMbbl and gas P50 of 70.0000 Bcf are never added, and the screening case runs on the oil shape the concept implies."
+ },
+ {
+  "prompt": "The concept's capex of 2250.0000 million USD and the cost items' CAPEX total of 2250.0000 agree exactly. Is that agreement a rule of the studio?",
+  "options": [
+   "No: the plan was costed against the concept it runs, and the studio will price a plan whose items total something else entirely and report both figures without complaint.",
+   "Yes: the engine reads a concept's capex from the cost item list, which is why the drilling line of 520.0000 matches the concept's own drilling field to the decimal.",
+   "Yes: a plan whose two totals disagree fails validation with \"Total CAPEX is zero or missing.\" until one of the two has been corrected to match the other.",
+   "No, but the gap is bounded by the facility screening estimate of 1363.3524 million USD, held so one total can check the other."
+  ],
+  "answer": 0,
+  "explanation": "They are two answers to one question, one from a concept type and a size and one from a list of seven purchases, and a plan where they differ has a question inside it."
+ },
+ {
+  "prompt": "Two habits this tier insists on are carrying figures at the precision they were printed at and never answering about one model with a number from another. What goes wrong when either is dropped?",
+  "options": [
+   "Rounding as you go loses the unit and a borrowed number brings its own, so both faults surface as money where a ratio was wanted.",
+   "Rounding as you go moves the last figures, and a number borrowed across models is wrong even where it looks plausible, because the models in this course share nothing.",
+   "Rounding as you go is safe wherever the engine prints four decimals, so only the borrowed number matters at all.",
+   "Rounding as you go is caught by the completeness check and a borrowed number by the refusal that names a field."
+  ],
+  "answer": 1,
+  "explanation": "Carry each figure at the precision it was printed at, do the arithmetic once, and keep a development plan in million USD apart from a project schedule in whole currency units."
+ }
+]

@@ -96,6 +96,23 @@ export const RateMode = ({ ror }) => {
         stops at its own boundary has found nothing, and reporting the boundary put a rate of exactly {ror.band.high} percent
         in green on cards for projects that never return their money.
       </p>
+      <p className="text-sm text-slate-200 mt-3 mb-0">
+        More than one root, which is what an end of life cost does to a rate of return. The plan spends
+        {' '}{four(ror.multipleRoots.capexMM)} million USD in year 0, earns for {ror.multipleRoots.years} years and pays
+        {' '}{four(ror.multipleRoots.abandonmentMM)} to abandon in the last of them, so its flow changes sign twice and can be
+        zeroed at more than one rate. The engine finds every root and reports none of them as the rate.
+      </p>
+      <Tbl
+        head={['case', 'NPV, million USD', 'status', <RateLabel key="r">the rates that zero this flow, percent</RateLabel>]}
+        rows={ror.multipleRoots.rows.map((x) => [x.label, four(x.npv), x.irrStatus,
+          <RateLabel key={x.label}>{x.roots === null ? 'none: the flow is negative at every rate the engine searches' : x.roots.map((y) => four(y)).join(' and ')}</RateLabel>])}
+      />
+      <Note>
+        The same base case with no end of life cost reports a single rate of {four(ror.multipleRoots.withoutEnd.irr)} percent at
+        status {ror.multipleRoots.withoutEnd.irrStatus}. Neither root is the rate of return: they are the two discount rates at
+        which this flow is worth nothing, and between them the plan is worth more than nothing. Quoting the higher one alone is
+        the mistake the multiple-roots status exists to stop, and quoting the lower one as a loss is the same mistake upside down.
+      </Note>
       <Tbl
         head={['payback', <DurationLabel key="y">years</DurationLabel>]}
         rows={ror.paybacks.map((x) => [x.label, x.payback === null ? 'never pays back, which is null and not the project life' : four(x.payback)])}

@@ -29,7 +29,7 @@ Oil of 130.0000 MMbbl and gas of 70.0000 Bcf do not add, and 200.0000 is a numbe
 
 ## Never guess
 
-When the engine has no answer it says so, and the honest answer is the one it gives. A case with a net present value of -1797.2732 returns no rate of return and a status of no-root. An activity with no readable dates returns a calendar span of null. A project with no costed task returns no schedule index, no cost index and no percent complete, with the basis stated: no costed task, so there is no planned value. A concept with no capex is refused by name. Writing a plausible figure into any of those gaps turns a correct reading into a wrong answer.
+When the engine has no answer it says so, and the honest answer is the one it gives. A case with a net present value of -1834.1220 returns no rate of return and a status of no-root. An activity with no readable dates returns a calendar span of null. A project with no costed task returns no schedule index, no cost index and no percent complete, with the basis stated: no costed task, so there is no planned value. A concept with no capex is refused by name. Writing a plausible figure into any of those gaps turns a correct reading into a wrong answer.
 
 ## Exercise
 

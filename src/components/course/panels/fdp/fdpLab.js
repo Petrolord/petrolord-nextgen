@@ -233,14 +233,29 @@ export const RISK_PROBABILITY_FACTORS = { 1: 0.05, 2: 0.2, 3: 0.4, 4: 0.6, 5: 0.
 export const IRR_STATUSES = ['ok', 'no-sign-change', 'above-clamp', 'multiple-roots', 'no-root'];
 /** The band the engine searches for a rate of return, percent. */
 export const IRR_BAND = { low: -99, high: 1000 };
-/** The stress prices the rate of return is read at, USD a barrel. */
-export const STRESS_PRICES = { noRoot: 18, multipleRoots: 30 };
+/**
+ * The stress prices the rate of return is read at, USD a barrel. BOTH are
+ * no-root now: 30 used to be this course's multiple-roots example, and charging
+ * the plan's end-of-life cost (EC6-8) moved it. The multiple-root cases are the
+ * ones that earn, and they are in `rateOfReturn().multipleRoots`.
+ */
+export const STRESS_PRICES = { noRoot: 18, alsoNoRoot: 30 };
 
 const FPSO = EGINA_CONCEPTS[0];
 const TIEBACK = EGINA_CONCEPTS[1];
 const BASE = EGINA_SCENARIOS[0];
 
 const conceptByScenario = (scenario) => EGINA_CONCEPTS.find((c) => c.id === scenario.conceptId);
+/**
+ * EC6-8 (engines #183/#191). The plan's end-of-life cost. `planAbandonment`
+ * reads the plan's ABEX cost items first and falls back to the facility
+ * decommissioning estimate only when the plan carries none. EGINA carries one,
+ * so every EGINA screening case below is charged it in its final production
+ * year. Before this repair the ABEX line sat on the cost screen and reached no
+ * cash flow, and every NPV this lab reported was the value of a plan that never
+ * paid to abandon the field. A fresh object each call: nothing here is shared.
+ */
+const abex = () => E.planAbandonment({ costs: { items: clone(EGINA_COSTS) }, facilities: { list: clone(EGINA_FACILITIES) } });
 const conceptShape = () => SC.conceptProfileKbpd(clone(FPSO));
 const planCase = () => {
   const shape = conceptShape();
@@ -249,6 +264,7 @@ const planCase = () => {
     annualOpexMM: CO.calculateTotalOPEX(clone(EGINA_COSTS)),
     productionKbpd: shape,
     pricesUsd: new Array(shape.length).fill(70),
+    abandonment: abex(),
   };
 };
 /** The EGINA plan as the completeness check and the document reader see it. */
@@ -295,9 +311,10 @@ export const planAndRefusals = () => ({
     ...refusalOf(() => SC.runScenario(
       { ...clone(BASE), ...(scenarioPatch || {}) },
       { ...clone(FPSO), ...(conceptPatch || {}) },
+      abex(),
     )),
   })),
-  zeroPriceNpv: SC.runScenario({ ...clone(BASE), oilPrice: 0 }, clone(FPSO)).metrics.npv,
+  zeroPriceNpv: SC.runScenario({ ...clone(BASE), oilPrice: 0 }, clone(FPSO), abex()).metrics.npv,
 });
 
 // ---------------------------------------------------------------------------
@@ -420,14 +437,15 @@ export const conceptsAndCapex = () => {
 // ---------------------------------------------------------------------------
 
 export const scenarioValues = () => {
-  const baseRun = SC.runScenario(clone(BASE), clone(FPSO));
-  const tie = SC.runScenario(clone(EGINA_SCENARIOS[4]), clone(TIEBACK));
+  const end = abex();
+  const baseRun = SC.runScenario(clone(BASE), clone(FPSO), end);
+  const tie = SC.runScenario(clone(EGINA_SCENARIOS[4]), clone(TIEBACK), end);
   const tieCapex = SC.conceptCapexMM(clone(TIEBACK));
   const fpsoCapex = SC.conceptCapexMM(clone(FPSO));
   return {
     rows: clone(EGINA_SCENARIOS).map((s) => {
       const concept = conceptByScenario(s);
-      const res = SC.runScenario(clone(s), clone(concept));
+      const res = SC.runScenario(clone(s), clone(concept), abex());
       return {
         name: s.name,
         conceptName: concept.name,
@@ -439,6 +457,12 @@ export const scenarioValues = () => {
         payback: SC.scenarioPayback(clone(s), clone(concept)),
       };
     }),
+    abandonment: {
+      source: baseRun.abandonmentSource,
+      amountMM: baseRun.abandonmentMM,
+      year: baseRun.abandonmentYear,
+      basis: end.abandonmentBasis,
+    },
     base: {
       totalRevenue: baseRun.metrics.totalRevenue,
       totalRoyalty: baseRun.metrics.totalRoyalty,
@@ -461,7 +485,7 @@ export const scenarioValues = () => {
     })),
     cashflowRowCount: baseRun.cashflow.length,
     priceLadder: PRICE_LADDER.map((price) => {
-      const res = SC.runScenario({ ...clone(BASE), oilPrice: price }, clone(FPSO));
+      const res = SC.runScenario({ ...clone(BASE), oilPrice: price }, clone(FPSO), abex());
       return { price, npv: res.metrics.npv, irr: res.metrics.irr, irrStatus: res.metrics.irrStatus };
     }),
     comparison: {
@@ -488,6 +512,7 @@ export const planEconomics = () => {
   const opexSum = CO.calculateTotalOPEX(items);
   const kase = planCase();
   const run = E.runFdpCase(kase);
+  const withoutEnd = E.runFdpCase({ ...planCase(), abandonment: undefined });
   const deck = (n) => new Array(n).fill({ oil_price_usd: PRICE_DECK_PROBE.priceUsd });
   const short = refusalOf(() => CO.calculateCashFlows(
     PRICE_DECK_PROBE.capexMM, PRICE_DECK_PROBE.annualOpexMM, clone(PRICE_DECK_PROBE.productionKbpd), deck(2),
@@ -507,6 +532,17 @@ export const planEconomics = () => {
       irr: run.metrics.irr,
       irrStatus: run.metrics.irrStatus,
       payback: E.paybackYears(run),
+    },
+    abandonment: {
+      source: run.abandonmentSource,
+      amountMM: run.abandonmentMM,
+      year: run.abandonmentYear,
+      basis: kase.abandonment.abandonmentBasis,
+      withoutNpv: withoutEnd.metrics.npv,
+      withoutIrr: withoutEnd.metrics.irr,
+      withoutIrrStatus: withoutEnd.metrics.irrStatus,
+      // What charging it costs the plan: two engine NPVs, one subtraction.
+      costDerived: withoutEnd.metrics.npv - run.metrics.npv,
     },
     conceptCapex: SC.conceptCapexMM(clone(FPSO)),
     priceDeck: {
@@ -858,9 +894,16 @@ export const IRR_PROBE_CASES = [
 
 export const rateOfReturn = () => {
   const scenarioRow = (label, oilPrice) => {
-    const res = SC.runScenario({ ...clone(BASE), oilPrice }, clone(FPSO));
+    const res = SC.runScenario({ ...clone(BASE), oilPrice }, clone(FPSO), abex());
     return { label, npv: res.metrics.npv, irr: res.metrics.irr, irrStatus: res.metrics.irrStatus };
   };
+  const rootRow = (label, scenario, concept) => {
+    const res = SC.runScenario(clone(scenario), clone(concept), abex());
+    return { label, npv: res.metrics.npv, irrStatus: res.metrics.irrStatus, roots: res.metrics.irrRoots };
+  };
+  const kase = planCase();
+  const planRun = E.runFdpCase(kase);
+  const baseWithoutEnd = SC.runScenario(clone(BASE), clone(FPSO));
   const recovered = fdpGolden.fdpCase.find((c) => c.name.startsWith('suite test: never pays back'));
   const recoveredRun = recovered ? E.runFdpCase(clone(recovered.inputs)) : null;
   return {
@@ -869,7 +912,7 @@ export const rateOfReturn = () => {
     rows: [
       scenarioRow('EGINA Base, 70 USD a barrel', BASE.oilPrice),
       scenarioRow('EGINA at 18 USD a barrel', STRESS_PRICES.noRoot),
-      scenarioRow('EGINA at 30 USD a barrel', STRESS_PRICES.multipleRoots),
+      scenarioRow('EGINA at 30 USD a barrel', STRESS_PRICES.alsoNoRoot),
       ...IRR_PROBE_CASES.map(([label, inputs]) => {
         const res = E.runFdpCase(clone(inputs));
         return { label, npv: res.metrics.npv, irr: res.metrics.irr, irrStatus: res.metrics.irrStatus };
@@ -890,9 +933,23 @@ export const rateOfReturn = () => {
       irr: recoveredRun.metrics.irr,
       irrStatus: recoveredRun.metrics.irrStatus,
     },
+    multipleRoots: {
+      capexMM: kase.capexMM,
+      years: kase.productionKbpd.length,
+      abandonmentMM: planRun.abandonmentMM,
+      rows: [
+        rootRow('EGINA Base, 70 USD a barrel', BASE, FPSO),
+        rootRow('EGINA Low price, 48 USD a barrel', EGINA_SCENARIOS[1], FPSO),
+        rootRow('EGINA High price, 92 USD a barrel', EGINA_SCENARIOS[2], FPSO),
+        rootRow('EGINA Tie-back base, 70 USD a barrel', EGINA_SCENARIOS[4], TIEBACK),
+        rootRow('EGINA at 18 USD a barrel', { ...clone(BASE), oilPrice: STRESS_PRICES.noRoot }, FPSO),
+      ],
+      // The same case with no end-of-life cost: one rate, and a status of ok.
+      withoutEnd: { irr: baseWithoutEnd.metrics.irr, irrStatus: baseWithoutEnd.metrics.irrStatus },
+    },
     paybacks: [
       ['EGINA Base', BASE.oilPrice],
-      ['EGINA at 30 USD a barrel', STRESS_PRICES.multipleRoots],
+      ['EGINA at 30 USD a barrel', STRESS_PRICES.alsoNoRoot],
       ['EGINA at 18 USD a barrel', STRESS_PRICES.noRoot],
     ].map(([label, oilPrice]) => ({ label, payback: SC.scenarioPayback({ ...clone(BASE), oilPrice }, clone(FPSO)) })),
   };
@@ -1032,7 +1089,7 @@ export const earnedValue = () => {
 export const reconciliations = () => {
   const net = clone(EGINA_NETWORK);
   const items = clone(EGINA_COSTS);
-  const baseRun = SC.runScenario(clone(BASE), clone(FPSO));
+  const baseRun = SC.runScenario(clone(BASE), clone(FPSO), abex());
   const planRun = E.runFdpCase(planCase());
   const networkDays = SH.calculateNetworkDuration(net);
   const calendarDays = SH.calculateProjectDuration(net);
@@ -1170,15 +1227,19 @@ const MEREN_RATIO = 0.00001;
 export const ukotRuns = () => {
   const net = UKOT_SCHEDULE.map((a) => ({ ...a, startDate: a.start, endDate: a.end }));
   const agg = SB.aggregateReserves(clone(UKOT_RESERVOIRS));
-  const base = SC.runScenario(clone(UKOT_BASE), clone(UKOT_CONCEPT));
-  const stress = SC.runScenario(clone(UKOT_STRESS), clone(UKOT_CONCEPT));
-  const alt = SC.runScenario({ ...clone(UKOT_BASE), conceptId: 302 }, clone(UKOT_ALTERNATIVE));
+  // EC6-8: UKOT carries an ABEX cost item, so every case it implies is charged
+  // that end-of-life cost in its final production year.
+  const end = E.planAbandonment({ costs: { items: clone(UKOT_COSTS) }, facilities: { list: clone(UKOT_FACILITIES) } });
+  const base = SC.runScenario(clone(UKOT_BASE), clone(UKOT_CONCEPT), end);
+  const stress = SC.runScenario(clone(UKOT_STRESS), clone(UKOT_CONCEPT), end);
+  const alt = SC.runScenario({ ...clone(UKOT_BASE), conceptId: 302 }, clone(UKOT_ALTERNATIVE), end);
   const shape = SC.conceptProfileKbpd(clone(UKOT_CONCEPT));
   const kase = {
     capexMM: CO.calculateTotalCAPEX(clone(UKOT_COSTS)),
     annualOpexMM: CO.calculateTotalOPEX(clone(UKOT_COSTS)),
     productionKbpd: shape,
     pricesUsd: new Array(shape.length).fill(UKOT_BASE.oilPrice),
+    abandonment: end,
   };
   const sweep = E.runFdpSensitivity(kase);
   return {
@@ -1206,7 +1267,14 @@ export const ukotCapstoneFields = () => {
     ['beginner', 'ukot_oil_p50_mmbbl', SB.reservesP50(agg), UKOT_EXACT_MONEY],
     ['beginner', 'ukot_gas_p50_bcf', SB.reservesP50(agg, 'Gas'), UKOT_EXACT_MONEY],
     ['beginner', 'ukot_base_npv_mm', base.metrics.npv, UKOT_MONEY],
-    ['beginner', 'ukot_base_irr_pct', base.metrics.irr, UKOT_PERCENT],
+    // EC6-8 RETIRED ukot_base_irr_pct. Charging the end-of-life cost makes the
+    // Board case flow change sign twice, so the engine returns irr null with
+    // irrStatus multiple-roots and BOTH roots in irrRoots. A numerically graded
+    // field cannot grade a null. The HIGHER root sits 0.0097 from the retired
+    // answer of 37.66903, inside the old tolerance of 0.01, so grading it would
+    // pass a learner who ran the pre-repair case; the LOWER root can only be
+    // reached by reading both, which is the judgement the repair exposes.
+    ['beginner', 'ukot_base_irr_low_root_pct', base.metrics.irrRoots[0], UKOT_PERCENT],
     ['beginner', 'ukot_alternative_npv_mm', alt.metrics.npv, UKOT_MONEY],
     ['intermediate', 'ukot_network_duration_days', SH.calculateNetworkDuration(net), UKOT_DAYS],
     ['intermediate', 'ukot_calendar_span_days', SH.calculateProjectDuration(net), UKOT_DAYS],

@@ -10,15 +10,15 @@ The EGINA Base cumulative runs -2250.0000 at year 0, then -1454.1875, then -658.
 
 | scenario | oil price | NPV | payback years |
 | --- | --- | --- | --- |
-| High price | 92.0000 | 3667.1870 | 3.0625 |
-| Base | 70.0000 | 2047.5653 | 3.8273 |
-| Low price | 48.0000 | 427.9436 | 5.7734 |
-| Stress | 18.0000 | -1797.2732 | never |
-| Tie-back base | 70.0000 | 1048.6281 | 3.2035 |
+| High price | 92.0000 | 3638.0233 | 3.0625 |
+| Base | 70.0000 | 2015.4123 | 3.8273 |
+| Low price | 48.0000 | 392.8013 | 5.7734 |
+| Stress | 18.0000 | -1834.1220 | never |
+| Tie-back base | 70.0000 | 1013.7182 | 3.2035 |
 
 ## Never is a value
 
-At 18.0000 USD a barrel the cumulative never reaches zero, and payback is null. At 30.0000 USD a barrel, on an NPV of -898.3507, it is null again. Null here is not missing data and it is not an error. It is the measured answer, and it is the strongest thing payback ever says.
+At 18.0000 USD a barrel the cumulative never reaches zero, and payback is null. At 30.0000 USD a barrel, on an NPV of -935.1995, it is null again. Null here is not missing data and it is not an error. It is the measured answer, and it is the strongest thing payback ever says.
 
 There is one published case that behaves differently and it is worth knowing by name: a case with zero production every year records payback as the project life by convention, alongside an NPV of -979.6325 and the status `no-sign-change`. That convention is a property of that published case. A reader who meets a payback equal to the concept life of 20.0000 years should check whether the project paid back in its last year or never paid back at all.
 
@@ -26,7 +26,7 @@ There is one published case that behaves differently and it is worth knowing by 
 
 Payback stops looking the moment the cumulative turns. The Base case is at 137.4375 when it crosses and at 2540.3809 by year 7, and payback of 3.8273 years is identical in both readings. A short payback on a flow that collapses afterwards and a short payback on a flow that keeps climbing are the same number.
 
-It also says nothing about size. The tie-back pays back in 3.2035 years and the FPSO in 3.8273, and the FPSO earns 2047.5653 million USD against 1048.6281.
+It also says nothing about size. The tie-back pays back in 3.2035 years and the FPSO in 3.8273, and the FPSO earns 2015.4123 million USD against 1013.7182.
 
 ## The mistake
 
