@@ -1132,9 +1132,11 @@ export const distrustTable = () => {
         case: `irr:${v.name}`,
         name: v.name,
         flows: v.flows,
-        engineIrrPct: rate === null ? null : rate * 100,
+        // irrResult reports PERCENT already; the scalar irr() is the one that
+        // divides by 100. No second scaling here.
+        engineIrrPct: rate,
         irrStatus: res.irr_status ?? res.irrStatus ?? null,
-        irrRootsPct: roots ? roots.map((x) => x * 100) : null,
+        irrRootsPct: roots,
         irrRootAboveBand: res.irr_root_above_band ?? res.irrRootAboveBand ?? false,
         goldenIrrPct: v.irr_pct ?? null,
       };
