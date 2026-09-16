@@ -585,6 +585,18 @@ export const acidGasByMoles = () => {
     acidMolesDay: ub.acidMolesDay,
     richLoadingUsed: ub.richLoadingUsed,
     swingDerived: ub.richLoadingUsed - UBIE.leanLoading,
+    /**
+     * WHICH INPUTS THE ENGINE ECHOES, READ OFF THE ANSWER'S OWN KEYS. The
+     * digest used to name one, `richLoadingUsed`, under the RICH LOADING
+     * bullet and nowhere else, which reads as though the rich loading is the
+     * echoed one. It is not: the answer carries a `...Used` key for every
+     * typed input in this chain, and two bank questions were defective on
+     * that sentence. The LOADING SWING is deliberately absent from this set,
+     * because the engine derives it and returns no name for it, and that
+     * absence is what the section is about.
+     */
+    echoedInputs: Object.keys(ub).filter((k) => k.endsWith('Used')).sort()
+      .map((k) => ({ key: k, value: ub[k] })),
     circGpm: ub.circGpm,
     reboilerMMBtuHr: ub.reboilerMMBtuHr,
     swingVanishesRefusal: softOf(G.aminePackage({ ...UBIE, leanLoading: UBIE.richLoading })),
@@ -988,7 +1000,7 @@ export const KREMSER_CONTRACT_CALLS = [[0, 5], [-1, 5], [2, 0], [2, -3], [1.6, 6
 /** The refusals that hand back evidence beside the message. */
 export const EVIDENCE_PROBES = [
   ['the stage count a spec needs when the solvent caps it', () => G.kremserStagesFor({ absorptionFactor: A_WELL_UNDER_UNITY, fractionRemoved: UNREACHABLE_SPEC })],
-  ['a march that walks off the correlation', () => G.jtDrop({ ...AGBADA, p2Psia: AGBADA_DEEP_P2_PSIA })],
+  ['a march that walks off the correlation part way down', () => G.jtDrop({ ...AGBADA, tF: AGBADA_COLD_INLET_F, p2Psia: AGBADA_COLD_P2_PSIA })],
   ['a compressibility off the correlation band', () => G.zAtState({ pPsia: 30000, tF: 100, gasSg: 0.65 })],
   ['a contactor whose liquid is lighter than its gas', () => G.contactorDiameter({ gasMMscfd: 50, pPsia: 900, tF: 100, gasSg: 0.65, rhoLLbFt3: 0.5 })],
 ];
@@ -1011,6 +1023,194 @@ export const BOUNDARY_PROBES = [
   ['the let-down a hair apart', 499.999999, () => G.jtDrop({ p1Psia: 500, p2Psia: 499.999999, tF: 100, gasSg: 0.65 })],
 ];
 
+/**
+ * A ROW LABELLED A REFUSAL MUST ACTUALLY REFUSE, and this lab shipped one that
+ * did not. The evidence probe called the AGBADA DEEP let-down at 60 psia, which
+ * ANSWERS, so the reader reported its seven SUCCESS keys under a refusal
+ * heading: t2F, dropF, steps and three coefficients read as the evidence a
+ * refusal carries. Every figure was real engine output, so no numeric gate
+ * could see it, and the true refusal carries four keys and not seven. The
+ * generator grew this guard in the same repair and this lab did not, which is
+ * exactly how the two drifted. It guards EVERY refusal-labelled probe here.
+ */
+const mustRefuse = (label, r) => {
+  if (!r || typeof r.error !== 'string') {
+    throw new Error(`LAB REFUSES: the row "${label}" is labelled a refusal and the engine ANSWERED it. A refusal row computed from a successful call prints real numbers under a false heading, which no numeric sweep can see. Keys returned: ${r && typeof r === 'object' ? Object.keys(r).join(', ') : String(r)}`);
+  }
+  return r;
+};
+
+/* ------------------------------------------------------------------ *
+ * THE CONTRACT CENSUS.
+ *
+ * Section 1, Section 11 and Section 15 all state the module's return contract,
+ * and the contract has TWO shapes rather than one: nine DOORS taking a
+ * named-argument object, which answer with an object and refuse with a named
+ * string on an `error` key, and four SCALAR HELPERS taking one positional
+ * value, which answer with a bare number or one row of the amine table and
+ * report no answer with a bare NaN or a null.
+ *
+ * Nothing here declares which is which. Each export is asked a question it can
+ * answer and a question it cannot, and the shape of both answers is READ OFF
+ * the return value; whether an export is a door is read off its own source, so
+ * a signature change upstream moves the census rather than leaving a stale
+ * count standing. That is the only reason the numbers in three digest sections
+ * can be trusted to agree with the engine.
+ * ------------------------------------------------------------------ */
+
+/** A pressure above the DAK validity limit, so the z-factor door refuses. */
+export const P_ABOVE_DAK_PSIA = 30000;
+
+/** A solvent the amine table does not carry. */
+export const AMINE_NOT_CARRIED = 'DIPA';
+
+/** The step count the march refuses, because a march needs a positive whole
+ *  number of them. */
+export const STEPS_REFUSED = 0;
+
+/** Every callable export, with one answerable probe, one unanswerable probe,
+ *  and for a helper the DOOR that consumes its no-answer and names it. This is
+ *  the CENSUS probe table and is deliberately separate from CONTRACT_PROBES
+ *  above, which reads ten doors from both sides and knows nothing of helpers. */
+export const CONTRACT_CENSUS_PROBES = [
+  {
+    name: 'waterSatPsia',
+    answer: OBIAFU_LINE.tF,
+    refuse: GAS_ABOVE_FIT_F,
+    caughtBy: 'saturatedWaterContent',
+    caughtArgs: () => ({ pPsia: OBIAFU_LINE.pPsia, tF: GAS_ABOVE_FIT_F }),
+  },
+  {
+    name: 'saturatedWaterContent',
+    answer: OBIAFU_LINE,
+    refuse: { pPsia: OBIAFU_LINE.pPsia, tF: GAS_ABOVE_FIT_F },
+  },
+  {
+    name: 'kremserFractionRemoved',
+    answer: { absorptionFactor: OBIAFU_ABSORPTION_FACTOR, stages: OBIAFU_STAGES },
+    refuse: { absorptionFactor: 0, stages: OBIAFU_STAGES },
+  },
+  {
+    name: 'kremserStagesFor',
+    answer: { absorptionFactor: OBIAFU_ABSORPTION_FACTOR, fractionRemoved: UNREACHABLE_SPEC },
+    refuse: { absorptionFactor: A_WELL_UNDER_UNITY, fractionRemoved: UNREACHABLE_SPEC },
+  },
+  {
+    name: 'tegPackage',
+    answer: { ...OBIAFU, inletLbMMscf: SATURATION_T[3] },
+    refuse: { ...OBIAFU, inletLbMMscf: SATURATION_T[3], circulationGalPerLb: -RATIO_AT_LOWER_CUSTOM },
+  },
+  {
+    name: 'amineOf',
+    answer: UBIE.amineId,
+    refuse: AMINE_NOT_CARRIED,
+    caughtBy: 'aminePackage',
+    caughtArgs: () => ({ ...UBIE, amineId: AMINE_NOT_CARRIED }),
+  },
+  {
+    name: 'solutionLbPerFt3',
+    answer: () => G.amineOf(UBIE.amineId).sgSolution,
+    refuse: undefined,
+    caughtBy: 'contactorDiameter',
+    caughtArgs: (noAnswer) => ({
+      gasMMscfd: UBIE.gasMMscfd, ...UBIE_CONTACTOR, rhoLLbFt3: noAnswer,
+    }),
+  },
+  {
+    name: 'amineSolutionLbPerFt3',
+    answer: UBIE.amineId,
+    refuse: AMINE_NOT_CARRIED,
+    caughtBy: 'contactorDiameter',
+    caughtArgs: (noAnswer) => ({
+      gasMMscfd: UBIE.gasMMscfd, ...UBIE_CONTACTOR, rhoLLbFt3: noAnswer,
+    }),
+  },
+  {
+    name: 'aminePackage',
+    answer: UBIE,
+    refuse: { ...UBIE, amineId: AMINE_NOT_CARRIED },
+  },
+  {
+    name: 'zAtState',
+    answer: { pPsia: OBIAFU_LINE.pPsia, tF: OBIAFU_LINE.tF, gasSg: OBIAFU_CONTACTOR.gasSg },
+    refuse: { pPsia: P_ABOVE_DAK_PSIA, tF: OBIAFU_LINE.tF, gasSg: OBIAFU_CONTACTOR.gasSg },
+  },
+  {
+    name: 'contactorDiameter',
+    answer: { gasMMscfd: UBIE.gasMMscfd, ...UBIE_CONTACTOR },
+    refuse: { gasMMscfd: UBIE.gasMMscfd, ...UBIE_CONTACTOR, ksFtS: 0 },
+  },
+  {
+    name: 'jouleThomsonFPerPsi',
+    answer: {
+      pPsia: AGBADA.p1Psia, tF: AGBADA.tF, gasSg: AGBADA.gasSg,
+      cpBtuLbmolF: AGBADA.cpBtuLbmolF,
+    },
+    refuse: {
+      pPsia: 0, tF: AGBADA.tF, gasSg: AGBADA.gasSg,
+      cpBtuLbmolF: AGBADA.cpBtuLbmolF,
+    },
+  },
+  {
+    name: 'jtDrop',
+    answer: AGBADA,
+    refuse: { ...AGBADA, steps: STEPS_REFUSED },
+  },
+];
+
+/**
+ * Is this export called with a NAMED-ARGUMENT OBJECT? Read off the function's
+ * OWN SOURCE rather than declared in a list, so a signature change upstream
+ * moves the census instead of leaving a stale count standing.
+ */
+export const takesNamedArguments = (fn) => /^\(?\s*\{/.test(String(fn).trim());
+
+/** What a return value IS, read off the value. No probe knows in advance. */
+export const returnShape = (v) => {
+  if (v === null) return 'null';
+  if (typeof v === 'number') return Number.isNaN(v) ? 'a bare NaN' : 'a bare number';
+  if (Array.isArray(v)) return 'an array';
+  if (typeof v === 'object') {
+    return (typeof v.error === 'string')
+      ? 'an object with a named string on an `error` key'
+      : 'an object of named results';
+  }
+  return typeof v;
+};
+
+/** Section 1, Section 11 and Section 15's contract block, all measured here. */
+export const contractCensus = () => {
+  const names = Object.keys(G).sort();
+  const callable = names.filter((n) => typeof G[n] === 'function');
+  const values = names.filter((n) => typeof G[n] !== 'function');
+  const rows = CONTRACT_CENSUS_PROBES.map((p) => {
+    const fn = G[p.name];
+    const arg = (a) => (typeof a === 'function' ? a() : a);
+    const answered = fn(arg(p.answer));
+    const refused = fn(arg(p.refuse));
+    const row = {
+      name: p.name,
+      door: takesNamedArguments(fn),
+      answers: returnShape(answered),
+      refuses: returnShape(refused),
+      caughtBy: p.caughtBy || null,
+      caughtShape: null,
+      caughtMessage: null,
+    };
+    if (p.caughtBy) {
+      const caught = G[p.caughtBy](p.caughtArgs(refused));
+      row.caughtShape = returnShape(caught);
+      row.caughtMessage = caught && caught.error ? caught.error : null;
+    }
+    return row;
+  });
+  return {
+    names, callable, values, rows,
+    doors: rows.filter((r) => r.door),
+    helpers: rows.filter((r) => !r.door),
+  };
+};
+
 /** Section 15. What a refusal is, and what one always carries with it. */
 export const refusalContract = () => ({
   refusals: REFUSAL_PROBES.map(probe),
@@ -1024,7 +1224,7 @@ export const refusalContract = () => ({
     };
   }),
   evidence: EVIDENCE_PROBES.map(([label, fn]) => {
-    const r = fn();
+    const r = mustRefuse(label, fn());
     const keys = Object.keys(r).filter((k) => k !== 'error');
     return { label, fieldCount: keys.length, fields: keys };
   }),

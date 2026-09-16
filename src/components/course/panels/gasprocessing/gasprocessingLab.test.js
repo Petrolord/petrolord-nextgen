@@ -65,6 +65,7 @@ const LAB = Object.fromEntries(Object.entries(L));
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../../../../..');
+
 const WAVE = '/root/fc-wip-gasprocessing';
 const MIRROR = path.join(ROOT, 'tools/course-waves/gasprocessing');
 const DIGEST = path.join(WAVE, 'digest.txt');
@@ -116,6 +117,7 @@ const buildDigest = () => {
   const s16 = L.methodDoesNotKnow();
   const s17 = L.publishedCaseReach();
   const s20 = L.repairHistory();
+  const census = L.contractCensus();
   const hist = historyCounts();
   const s18 = L.associateReading();
   const s19 = L.professionalReading();
@@ -134,7 +136,7 @@ const buildDigest = () => {
   w('# App surface: the Gas Processing Studio runs three units over one gas stream. Dehydration takes water out with glycol, sweetening takes acid gas out with amine, and the dew point unit cools the gas by letting it down.');
   w('- This engine conditions a GAS STREAM. It answers how much water a gas carries, how much solvent it takes to remove it, what the regenerator costs to run, how wide the vessel has to be, and how far a let-down cools the gas.');
   w('- The doctrine is stated in the module\'s own header: everything that is a DESIGN CHOICE or a chart value is an INPUT with its customary range named, and everything computable from first principles is computed. The circulation ratio, the BTEX absorbed fraction, the glycol properties, the water overhead and the contactor liquid are all inputs with defaults, and a reader can see each one on the page rather than having to find it in the source.');
-  w('- A state the method has no answer for comes back as an object with an `error` string. This module throws nothing, and there is no export outside that contract: every one of them answers with an object and every refusal puts a named string on an `error` key. Section 15 reads the contract and the evidence a refusal carries with it.');
+  w(`- A state the method has no answer for comes back as an object with an \`error\` string, and this module throws nothing at all. The contract belongs to the ${census.doors.length} exports that are called with a NAMED-ARGUMENT OBJECT, which is every door the studio calls: each of them answers with an object, and each refusal puts a named string on an \`error\` key. The other ${census.helpers.length} callable exports take a single positional value and are scalar helpers. They answer with a bare number or with one row of a table, and they say they have no answer with a bare NaN or a null, which the door that consumes them turns into a named refusal. Section 15 reads every export of the module from both sides and names the ${census.helpers.length}.`);
   w('- What is NOT in this engine: no hydrate boundary, no compositional flash, no rate-based absorber model, no stage efficiency, no molecular sieve, no refrigeration and no NGL recovery. A hydrate margin is the Production module Flow Assurance engine, and the phase envelope of a reservoir fluid is the Fluid engine.');
   w();
   w('The three units, on the two teaching streams, end to end:');
@@ -198,7 +200,11 @@ const buildDigest = () => {
   w(`On OBIAFU at ${e6(L.OBIAFU_LINE.pPsia)} psia and ${e6(L.OBIAFU_LINE.tF)} degF the mole fraction is ${num(s3.yWater, 9)} and the content is ${e6(s3.lbPerMMscf)} lb per MMscf. The vapour pressure at that temperature alone is ${e6(s3.psatPsia)} psia, and the mole fraction is that over the total pressure: ${num(s3.yWaterDerived, 9)} (derived, the two figures on this line divided).`);
   w();
   w('The surface, in lb per MMscf. Rows are degF, columns are psia:');
-  w(`| degF | ${L.SATURATION_P.map((p) => `${p} psia`).join(' | ')} |`);
+  // The column heads print at the SAME precision as every pressure in this
+  // digest, which its own header line promises. They used to print bare, so
+  // `1500.000000` existed only in Section 14 and the tier sweep read an
+  // Associate lesson quoting this table's own column as reaching forward.
+  w(`| degF | ${L.SATURATION_P.map((p) => `${e6(p)} psia`).join(' | ')} |`);
   w(`| --- | ${L.SATURATION_P.map(() => '---').join(' | ')} |`);
   s3.surface.forEach((row) => {
     w(`| ${e6(row.tF)} | ${row.lbPerMMscf.map((v) => e6(v)).join(' | ')} |`);
@@ -420,9 +426,16 @@ const buildDigest = () => {
   w('Sweetening is a mole balance from end to end. The gas carries a mole percent of CO2 and H2S, the spec says what may stay, and the difference is what the solution has to pick up. Nothing in that chain is a mass until the very last step.');
   w('THREE NAMES, AND THEY ARE THREE DIFFERENT NUMBERS. A reader who collapses them has lost the whole section, so they are separated here before any of them is used, and they are the engine\'s own words:');
   w(`- the LEAN LOADING: what a mole of amine is still carrying when it comes back from the regenerator and enters the contactor. An input. On UBIE, ${e6(L.UBIE.leanLoading)} mol of acid gas per mol of amine.`);
-  w(`- the RICH LOADING: what a mole of amine is carrying when it leaves the contactor. An input, and the engine echoes back the one it used as \`richLoadingUsed\`. On UBIE, ${e6(s10.richLoadingUsed)}.`);
+  w(`- the RICH LOADING: what a mole of amine is carrying when it leaves the contactor. An input. On UBIE, ${e6(s10.richLoadingUsed)}.`);
   w(`- the LOADING SWING: the DIFFERENCE between them, which is what each mole of amine actually carries round the loop and is therefore what sets the circulation. NOT an input, and the engine does not return it under any name. On UBIE it is ${num(s10.swingDerived, 9)}, derived from the two figures above.`);
   w('The rich loading is a CEILING that corrosion sets. The swing is a THROUGHPUT that the regenerator buys. Raising the rich loading raises the swing; lowering the lean loading also raises the swing, and costs regenerator duty rather than corrosion margin. That is why this section reads both ends separately.');
+  // WHICH INPUTS THE ENGINE ECHOES, MEASURED FROM THE ANSWER. The bullet above
+  // used to carry "the engine echoes back the one it used as `richLoadingUsed`",
+  // which reads as though the rich loading is the echoed one. It is not: the
+  // answer carries a `...Used` key for EVERY typed input in this chain. The set
+  // is read off the answer's own keys.
+  const amineEchoes = s10.echoedInputs;
+  w(`The engine echoes back EVERY typed input this chain used, each under its own name ending in Used. There are ${amineEchoes.length} of them, measured by reading the keys of the answer itself: ${amineEchoes.map((x) => `\`${x.key}\` = ${e6(x.value)}`).join(', ')}. So an echoed name tells a reader the value was TYPED and which value was taken, and it never means the figure was computed. THE LOADING SWING IS NOT AMONG THEM, and that absence is the point of the bullet above: the engine returns every number it was given and does not return the one it derived from two of them.`);
   w(`The engine's own refusal uses all three words in one sentence when the swing vanishes: ${soft(s10.swingVanishesRefusal)}`);
   w();
   w(`On UBIE: ${e6(L.UBIE.co2MolPct)} less ${e6(L.UBIE.co2SpecMolPct)} mol percent of CO2 plus ${e6(L.UBIE.h2sMolPct)} less ${e6(L.UBIE.h2sSpecMolPct)} of H2S is ${num(s10.removedMolPctDerived, 9)} mol percent removed (derived, the four figures on this line), which at ${e6(L.UBIE.gasMMscfd)} MMscfd is ${r4(s10.acidMolesDay)} lbmol a day.`);
@@ -497,6 +510,7 @@ const buildDigest = () => {
   w('The two ratio columns are NOT equal, and that is the whole point of the table: circulation is set by the rich limit and the strength, duty is set by the rich limit, the strength and the duty per gallon, so the same ordering is reached by two different routes and the gaps between the amines are different sizes on each.');
   w();
   w(`An amine the table does not carry: ${shape(s11.unknownAmine)}, and the package asked for it returns ${soft(s11.unknownAmineRefusal)}. This is the one catalogue lookup in the module and it says it does not know.`);
+  w(`\`amineOf\` is one of the ${census.helpers.length} scalar helpers Section 15 names. It hands back a null where a door would hand back an object with an \`error\` key, and \`aminePackage\`, the door that consumes it, is what turns that null into the named refusal printed above. A caller of the LOOKUP therefore tests for a null; a caller of the PACKAGE reads one property, the way it does at every other door.`);
   w();
 
   // ------------------------------------------------------------- SECTION 12
@@ -653,7 +667,17 @@ const buildDigest = () => {
   w('The contract: a state the method has no answer for comes back as an object carrying an `error` string. Nothing in this module throws. Every refusal it makes:');
   s15.refusals.forEach((r) => w(`- ${r.label}: ${soft(r.error)}`));
   w();
-  w('THE CONTRACT IS WHOLE. Every export answers with an object, and every one that cannot answer puts a named string on an `error` key. A caller checks one property and never catches, and there is no export it has to check differently:');
+  w(`THE CONTRACT, EXACTLY. This module exports ${census.names.length} names. ${census.values.length} of them are values, the constants and the amine property table, and ${census.callable.length} are callable. Every callable one is asked here a question it can answer and a question it cannot, and the shape below is read off what came back rather than stated:`);
+  w('| export | called with | answering | with no answer | where a no-answer is named |');
+  w('| --- | --- | --- | --- | --- |');
+  census.rows.forEach((r) => {
+    w(`| ${r.name} | ${r.door ? 'a named-argument object' : 'one positional value'} | ${r.answers} | ${r.refuses} | ${r.caughtBy ? `\`${r.caughtBy}\`, which returns ${r.caughtShape}` : 'the call itself'} |`);
+  });
+  w(`Read the table by its second column. THE ERROR CONTRACT IS THE DOORS: all ${census.doors.length} exports called with a named-argument object answer with an object, and every one of them that cannot answer puts a named string on an \`error\` key. That is every door the studio calls, so a caller of a door checks one property and never catches, and there is no door it has to check differently.`);
+  w(`The other ${census.helpers.length} are SCALAR HELPERS, called with one positional value, and they are named here so nobody has to discover them at a call site: ${census.helpers.map((r) => `\`${r.name}\``).join(', ')}. A helper answers with a bare number or with one row of the property table, and says it has no answer with a bare NaN or a null. None of those reaches a studio tab as a blank, because each one is consumed by a door, and the last column above is that door being handed the helper's no-answer and refusing BY NAME. The engine's own header says so of the first of them: the saturation fit is a correlation with nowhere to put an error key, and its one caller turns the NaN into a named refusal.`);
+  w('A helper read straight from a studio tab would be the real defect, because a bare NaN passes an `error` check and surfaces far downstream as an empty field, and an empty field looks exactly like a field nobody filled in. That is what the audit asks of a module: which exports are doors, which are helpers, and whether anything reads a helper where it should have read a door.');
+  w();
+  w('The contract read on ONE door, from five directions:');
   w('| call | absorption factor | stages | returns |');
   w('| --- | --- | --- | --- |');
   s15.kremserContract.forEach((row) => {
@@ -754,7 +778,7 @@ const buildDigest = () => {
   w('| --- | --- |');
   [['m05 l01, What was repaired, and what was not', 'Section 20'],
     ['m05 l02, What a refusal is', 'Section 15'],
-    ['m05 l03, The contract read on one export', 'Section 15, the whole-contract table'],
+    ['m05 l03, The contract read on one door', 'Section 15, the export census and the one-door table'],
     ['m05 l04, Constants measured out of the engine', 'Section 2'],
     ['m05 l05, What a published case can catch', 'Section 17'],
     ['m06 l01, What the method does not know', 'Section 16'],
@@ -780,7 +804,7 @@ const buildDigest = () => {
   w();
   w('4. ONE FLUID WITH TWO DENSITIES, AND ONE MODULE WITH TWO STANDARD BASES. Two numbers for one glycol, and a standard cubic foot defined at one pressure and converted at another. Neither gap was large. Both are defects whatever their size, because nothing downstream can tell which of the two numbers it is holding. Section 2 now shows one of each, and shows the derived ones being derived.');
   w();
-  w(`WHERE THE REST OF IT LIVES, AND HOW TO READ IT. The engine's own source comments record what changed, because a good repair records what it changed: there are ${hist.thisModule} such comment lines in this module and ${hist.allEngines} across the vendored engines, counted here rather than quoted, by reading ${hist.engineFileCount} vendored engine modules under packages/engines/engines and taking every COMMENT line carrying "used to", "no longer" or the repair's own name. Both the tree and the rule are stated because a count of this kind means nothing without them: widen the rule to the nine keywords this file also sweeps with and this module alone reads ${hist.thisModuleWide}, and count the canonical engines repository instead of the subset NextGen vendors and the tree figure more than doubles. A number quoted without its tree and its rule is not checkable and should not be repeated. THEY ARE PROVENANCE. A comment is not the digest, and a sentence lifted out of one into a lesson arrives with no frame around it. If you want to teach any of it, frame it the way this section does, and never present it as what the engine does now.`);
+  w(`WHERE THE REST OF IT LIVES, AND HOW TO READ IT. The engine's own source comments record what changed, because a good repair records what it changed: there are ${hist.thisModule} such comment lines in packages/engines/engines/facilities/gasProcessing.js, counted here rather than quoted, by taking every COMMENT line in that one file carrying "used to", "no longer" or the repair's own name. Both the tree and the rule are stated because a count of this kind means nothing without them, and widening the rule to the nine keywords this file also sweeps with takes the same module to ${hist.thisModuleWide}. A COUNT ACROSS THE WHOLE VENDORED TREE IS DELIBERATELY NOT QUOTED HERE, and the reason is the lesson. It was quoted once. It then moved, not because anything in this engine changed, but because two other courses vendored three more engines of their own, and a figure that answers to work in another module is not a fact about this one. A number quoted without its tree and its rule is not checkable and should not be repeated; a number whose tree can change under it should not be quoted at all. THEY ARE PROVENANCE. A comment is not the digest, and a sentence lifted out of one into a lesson arrives with no frame around it. If you want to teach any of it, frame it the way this section does, and never present it as what the engine does now.`);
   w();
 
 
@@ -788,21 +812,23 @@ const buildDigest = () => {
 };
 
 /**
- * The two counts digest Section 20 states. The RULE is the lab's
- * (`countHistoryComments`); the WALK is here, because a browser module cannot
- * read a directory and the lab has to stay one.
+ * The two counts digest Section 20 states, BOTH TAKEN OVER THIS ONE MODULE.
+ * The RULE is the lab's (`countHistoryComments` and its wider sibling).
+ *
+ * THE TREE-WIDE COUNT IS GONE, and its absence is deliberate. Section 20 used
+ * to print a count over every vendored engine module, and that number moved the
+ * day FC2 and FC3 vendored three engines of their own: 59 over 226 modules
+ * became 81 over 229, the committed digest stopped reproducing, and one live
+ * bank question and one lesson were quoting the stale pair. Nothing in this
+ * engine had changed. A figure that answers to another module's work is not a
+ * fact about this one, so the digest now declines to quote it and says why, and
+ * this helper stops computing what nothing prints.
  */
-const walkJs = (dir) => fs.readdirSync(dir, { withFileTypes: true })
-  .flatMap((e) => (e.isDirectory() ? walkJs(path.join(dir, e.name)) : (e.name.endsWith('.js') ? [path.join(dir, e.name)] : [])));
-
 const historyCounts = () => {
-  const files = walkJs(path.join(ENGINES, 'engines'));
   const thisModuleSrc = fs.readFileSync(path.join(ENGINES, 'engines/facilities/gasProcessing.js'), 'utf8');
   return {
-    engineFileCount: files.length,
     thisModule: L.countHistoryComments(thisModuleSrc),
     thisModuleWide: L.countHistoryCommentsWide(thisModuleSrc),
-    allEngines: files.reduce((a, f) => a + L.countHistoryComments(fs.readFileSync(f, 'utf8')), 0),
   };
 };
 
@@ -839,7 +865,9 @@ const READERS = [
 // ---------------------------------------------------------------------------
 
 /** Every file the wave ships and the repo mirrors. The mirror may hold its own
- *  README and nothing else beyond this list. */
+ *  README and nothing else beyond this list.
+ *
+ */
 const MIRRORED = [
   'BANK_TASK.md', 'FINDINGS.md', 'KEY_TRUTH_TASK.md', 'LESSON_TASK.md', 'PANELS.md', 'RECON.md',
   'build_digest.sh', 'digest.txt', 'digest_prose.rules.mjs', 'fc4_capstone.mjs', 'fc4_dump.mjs',

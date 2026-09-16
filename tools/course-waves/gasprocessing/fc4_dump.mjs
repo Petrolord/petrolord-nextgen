@@ -991,10 +991,16 @@ const countHist = (file) => fs.readFileSync(file, 'utf8').split('\n').filter((l)
 const walkJs = (dir) => fs.readdirSync(dir, { withFileTypes: true })
   .flatMap((e) => (e.isDirectory() ? walkJs(`${dir}/${e.name}`) : (e.name.endsWith('.js') ? [`${dir}/${e.name}`] : [])));
 const THIS_MODULE_HIST = countHist(`${ROOT}/engines/facilities/gasProcessing.js`);
-const ENGINE_FILES = walkJs(`${ROOT}/engines`);
-const ALL_ENGINE_HIST = ENGINE_FILES.reduce((a, f) => a + countHist(f), 0);
 const THIS_MODULE_WIDE = countWide(`${ROOT}/engines/facilities/gasProcessing.js`);
-w(`WHERE THE REST OF IT LIVES, AND HOW TO READ IT. The engine's own source comments record what changed, because a good repair records what it changed: there are ${THIS_MODULE_HIST} such comment lines in this module and ${ALL_ENGINE_HIST} across the vendored engines, counted here rather than quoted, by reading ${ENGINE_FILES.length} vendored engine modules under packages/engines/engines and taking every COMMENT line carrying "used to", "no longer" or the repair's own name. Both the tree and the rule are stated because a count of this kind means nothing without them: widen the rule to the nine keywords this file also sweeps with and this module alone reads ${THIS_MODULE_WIDE}, and count the canonical engines repository instead of the subset NextGen vendors and the tree figure more than doubles. A number quoted without its tree and its rule is not checkable and should not be repeated. THEY ARE PROVENANCE. A comment is not the digest, and a sentence lifted out of one into a lesson arrives with no frame around it. If you want to teach any of it, frame it the way this section does, and never present it as what the engine does now.`);
+// A TREE-WIDE COUNT IS DELIBERATELY NOT PRINTED. It was, and it read 59
+// over 226 modules until FC2 and FC3 vendored three more engines, at which
+// point the same sweep read 81 over 229 and the committed digest stopped
+// reproducing. The figure is a reading of WHICH ENGINES NEXTGEN HAPPENS TO
+// VENDOR, not a property of this engine, so it went stale for a reason that
+// has nothing to do with gas processing and it would go stale again at the
+// next facilities wave. Both counts below are taken over THIS MODULE, which
+// is the thing the course teaches and the thing a reader can check.
+w(`WHERE THE REST OF IT LIVES, AND HOW TO READ IT. The engine's own source comments record what changed, because a good repair records what it changed: there are ${THIS_MODULE_HIST} such comment lines in packages/engines/engines/facilities/gasProcessing.js, counted here rather than quoted, by taking every COMMENT line in that one file carrying "used to", "no longer" or the repair's own name. Both the tree and the rule are stated because a count of this kind means nothing without them, and widening the rule to the nine keywords this file also sweeps with takes the same module to ${THIS_MODULE_WIDE}. A COUNT ACROSS THE WHOLE VENDORED TREE IS DELIBERATELY NOT QUOTED HERE, and the reason is the lesson. It was quoted once. It then moved, not because anything in this engine changed, but because two other courses vendored three more engines of their own, and a figure that answers to work in another module is not a fact about this one. A number quoted without its tree and its rule is not checkable and should not be repeated; a number whose tree can change under it should not be quoted at all. THEY ARE PROVENANCE. A comment is not the digest, and a sentence lifted out of one into a lesson arrives with no frame around it. If you want to teach any of it, frame it the way this section does, and never present it as what the engine does now.`);
 w();
 
 console.log(out.join('\n'));

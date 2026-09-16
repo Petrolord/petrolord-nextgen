@@ -55,15 +55,15 @@
   "explanation": "Section 2 now shows one of each and shows the derived ones being derived. A defect of this kind is a defect whatever its size."
  },
  {
-  "prompt": "The digest counts 9 repair-history comment lines in this module and 59 across the vendored engines, by reading 226 vendored modules for comment lines carrying one of three phrases. Why is the counting rule stated beside the count?",
+  "prompt": "The digest counts 9 repair-history comment lines in gasProcessing.js by three phrases, and states that rule beside the count. It also declines to quote any count across the whole vendored tree, and gives a reason. What is that reason?",
   "options": [
-   "A count of this kind means nothing without the tree it was taken over and the rule it was taken with.",
-   "Because the three phrases are the only ones the authors were permitted to use.",
-   "Because any figure a lesson quotes has to name the call that produced it.",
-   "Because provenance figures are the ones the digest has to source."
+   "A tree-wide count answers to which engines NextGen happens to vendor, so it can move without anything in this engine changing.",
+   "A tree-wide count would have to be taken over the canonical engines repository rather than the vendored subset, and that repository is not present here.",
+   "The three phrases are the only ones the authors were permitted to use, so a wider tree would need a wider rule and the two counts would not compare.",
+   "A count over more than one module cannot be reproduced from this course's own generators, which read one file each."
   ],
   "answer": 0,
-  "explanation": "Widen the rule to the nine keywords the same file also sweeps with and this module alone reads 18, and count the canonical engines repository instead of the subset NextGen vendors and the tree figure more than doubles."
+  "explanation": "Widen the rule to the nine keywords the same file also sweeps with and this module alone reads 18, which is the same lesson from the rule's side: a count means nothing without the tree it was taken over and the rule it was taken with. The tree-wide figure is worse than uninformative, because a reader cannot tell from the number whether it moved for a reason that concerns them."
  },
  {
   "prompt": "What must a writer establish about a sentence found in an engine source comment before putting it in front of a learner?",
@@ -140,7 +140,7 @@
    "The studio would render the fault as a named message anyway."
   ],
   "answer": 1,
-  "explanation": "An empty field looks exactly like a field nobody filled in. A contract with one exception is not a contract a caller can rely on, because relying on it means knowing the exception."
+  "explanation": "An empty field looks exactly like a field nobody filled in. What lets a caller guard once is that all 9 doors answer the same way, so reading one property is enough and there is no door to remember. This module does carry 4 scalar helpers that hand back a bare number and report no answer with a bare NaN or a null, and they are safe for a different reason: each is consumed by a door that turns the no-answer into a named refusal, so no caller of a door ever meets one. A door that answered with a bare number would have neither protection."
  },
  {
   "prompt": "The module sorts its constants into three kinds. What is the difference between what a gate over a derived constant proves and what a gate over a declared one proves?",
