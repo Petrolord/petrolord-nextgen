@@ -1,13 +1,44 @@
 # A published case that cannot discriminate
 
+A published case is only worth what it can tell apart. That sounds like a platitude until you meet a case that can tell nothing apart, and this engine has two, declared in the open.
+
 {{panel:fc-blowdown-explorer}}
 
-<!-- FC5 SCAFFOLD PLACEHOLDER: replace this body. Do not change the H1 or the panel line. -->
+## The test that separates a validation from a pin
 
-This lesson is not written yet. It belongs to advanced module What the Method Does Not Know (m05-what-the-method-does-not-know) and must carry between 500 and 560 PROSE WORDS, counted the way lengths.py counts them: front matter, markdown table rows, headings and panel lines are all excluded.
+A route whose oracle is an INDEPENDENT DERIVATION goes red when the engine moves, because two derivations disagree. A route whose oracle is a TRANSCRIPTION of the engine cannot go red, because there is only one derivation in the room and both sides of the comparison are reading it.
 
-Every figure in it must be quoted from digest.txt at the precision the digest prints, and no figure may come from RECON.md, FINDINGS.md, the engine source comments or the vendored FINDINGS-relief.md, all four of which are provenance rather than teaching truth.
+| route | the oracle route | independent |
+| --- | --- | --- |
+| gas, critical | the isentropic nozzle mass flux from R, M, T and P in absolute SI | yes |
+| the critical ratio | the argmax of that flux over the throat ratio, by golden-section search | yes |
+| liquid area | the published SI form of the same equation | yes |
+| the Kv fit | nothing: SHARED with the engine on purpose | NO, and it is named as held |
+| wetted area, both orientations | polyline summation round the real circle with Richardson extrapolation | yes |
+| the drag correlation | nothing: SHARED with the engine on purpose | NO, and it is named as held |
+| the knockout drum | Simpson quadrature of the segment integral, and a transit time against a fall time, in SI | yes |
+| the blowdown march | the same march solved IN CLOSED FORM in SI | yes |
+
+## The two, and the sentence they get
+
+The Kv viscosity fit and the sphere-drag correlation are shared between the engine and its oracle on purpose, because no route in this package can derive either. Move one of them in both files and every published case still passes.
+
+Read that again, because it is the whole lesson. Every case green is the reported result, and the green IS the finding rather than a reassurance. A gate that stays green while the thing it guards has changed is not a gate, and the only honest response is to say so where a reader will look. The digest says it in plain words and calls it the honest statement of the limit.
+
+Nothing graded in this course rests on either of them. That is the practical half of the same decision: a figure nothing can check is a figure nobody should be marked right or wrong about, and the way to respect that is to teach it as a stated limit and then keep it out of every answer key.
+
+## What such a case can still do
+
+It is a tripwire. Two copies have to change together, so an accidental edit to one goes red. It cannot catch a deliberate change to both, or a value that was wrong when first written down.
+
+It can also discriminate ENGINE-SIDE DRIFT even when it cannot discriminate the constant. The published set places a liquid case at a Reynolds number of 92.428866, which is where the inverse-three-halves term of the Kv fit is worth most, so a change in how the engine uses the fit shows up there even though a change to the fit itself would not.
+
+## The other kind of empty case
+
+A case can also be present and unable to discriminate its own constant, which is a different fault from a missing case. The test is arithmetic: move the constant by a realistic amount and ask whether the answer moves by more than the tolerance the case is checked at.
+
+This set answers that deliberately. The Napier fit is placed at 2014.700000 and 3100.000000 and 1550.000000 psia. The march is placed at its hardest geometries. The drum holdup is swept at six distinct holdups on one drum. The published set carries 49 rows across 11 blocks.
 
 ## Exercise
 
-Not written yet.
+State the difference between an oracle that is an independent derivation and one that is a transcription. Name the two shared routes and write out what happens when their constant is moved in both files, and say why that outcome is the finding. Then record the Reynolds number the published set places its liquid case at, say what that case can still catch, and name the three Napier pressures.
