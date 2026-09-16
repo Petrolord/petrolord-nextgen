@@ -217,8 +217,10 @@ committed beside it, and CI runs it on every pull request. It refuses on an
 empty tree, on a wave with no pairs, and on a `.json` or a `.py` with no
 partner; a source that will not run is a failure and not a skip. Its selftest
 plants a key repaired in the JSON alone and a re-indented JSON and proves both
-are caught. 63 pairs and 1188 questions compare clean, which is the same
-verdict `bankrepro.py` reaches with the wave kit's own `bankkit`.
+are caught. It compares clean over every wave committed here, which was 63
+pairs and 1188 questions for FC1 to FC3 and is 84 pairs and 1584 questions once
+FC4 landed, and that is the same verdict `bankrepro.py` reaches with the wave
+kit's own `bankkit`.
 
 `gen_seeds.sh` took its repository path from a hardcoded worktree, so a run
 from any other worktree cut the seeds out of a tree the caller was not working

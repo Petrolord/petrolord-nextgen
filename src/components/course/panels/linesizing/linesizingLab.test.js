@@ -5,10 +5,10 @@
 //
 // THE DIGEST IS REBUILT BYTE FOR BYTE. buildDigest() below is fc2_dump.mjs's
 // writer with every engine call replaced by a lab return value: the prose is
-// the dump's, the formatting is the dump's (liquid work to six decimals; gas
-// rates, Reynolds numbers, barrels, hours and days to four), and every number
-// comes out of linesizingLab.js. The rebuilt text is compared with digest.txt
-// section by section and then whole.
+// the dump's, the formatting is the dump's (liquid work, the run hours among
+// it, to six decimals; gas rates, Reynolds numbers, barrels and days to four),
+// and every number comes out of linesizingLab.js. The rebuilt text is compared
+// with digest.txt section by section and then whole.
 //
 // THE EIGHTEEN GRADED FIELDS of the IMO-1, BRASS and QUA IBOE capstone are
 // pinned separately and EXACTLY against tools/course-waves/linesizing/fields.json,
@@ -67,8 +67,8 @@ const PANEL_FILES = ['LiquidExplorer.jsx', 'GasLineExplorer.jsx', 'WallPigExplor
 // ---------------------------------------------------------------------------
 
 const num = (x, n) => (x === null || x === undefined || Number.isNaN(Number(x)) ? 'null' : Number(x).toFixed(n));
-const e6 = (x) => num(x, 6);   // ft/s, psi, inches, ratios, friction factors
-const r4 = (x) => num(x, 4);   // scfd, Reynolds numbers, barrels, hours, days
+const e6 = (x) => num(x, 6);   // ft/s, psi, inches, ratios, hours, design factors
+const r4 = (x) => num(x, 4);   // scfd, Reynolds numbers, barrels, days
 const soft = (err) => (err ? `{ error: "${err}" }` : 'no error');
 const shape = (r) => JSON.stringify(r);
 const ex3 = (x) => (Number.isFinite(x) ? Number(x).toExponential(3) : String(x));
