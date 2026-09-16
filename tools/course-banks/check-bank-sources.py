@@ -123,12 +123,13 @@ def check(root, waves=None, shim_dir=None, quiet=False):
             continue
         committed = open(py[:-3] + '.json', 'rb').read()
         rows = json.loads(committed.decode('utf-8'))
-        slot = per_wave.setdefault(wave, {'banks': 0, 'questions': 0, 'tiers': set()})
+        slot = per_wave.setdefault(wave, {'banks': 0, 'questions': 0, 'tiers': set(), 'bad': 0})
         slot['banks'] += 1
         slot['questions'] += len(rows)
         slot['tiers'].add(tier)
         if produced == committed:
             continue
+        slot['bad'] += 1
         mine = json.loads(produced.decode('utf-8'))
         qs = [i + 1 for i, (a, b) in enumerate(zip(mine, rows)) if a != b]
         if len(mine) != len(rows):
@@ -144,9 +145,12 @@ def check(root, waves=None, shim_dir=None, quiet=False):
                   'THAT EDIT, silently. Put the edit into the .py and re-emit.')
         for name, why in broken:
             print(f'  FAIL {name} could not be run at all: {why}')
+            per_wave.setdefault(name.split('/')[0],
+                                {'banks': 0, 'questions': 0, 'tiers': set(), 'bad': 0})['bad'] += 1
         for wave in sorted(per_wave):
             s = per_wave[wave]
-            print(f'  ok   {wave}: {s["banks"]} bank(s) across {len(s["tiers"])} tier(s), '
+            verdict = f'FAIL {s["bad"]} drifted or unrunnable in' if s['bad'] else 'ok  '
+            print(f'  {verdict} {wave}: {s["banks"]} bank(s) across {len(s["tiers"])} tier(s), '
                   f'{s["questions"]} question(s) compared byte for byte')
         total_q = sum(s['questions'] for s in per_wave.values())
         print(f'[course-banks] {len(found)} committed pair(s) under {root}: '
