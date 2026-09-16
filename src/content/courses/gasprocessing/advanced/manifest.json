@@ -1,0 +1,307 @@
+{
+  "app_slug": "gasprocessing",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-dew-point-control-by-expansion",
+      "title": "Dew Point Control by Expansion",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-a-dew-point-skid-sells",
+          "title": "What a dew point skid sells",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-coefficient-another-engine-asks-you-to-type",
+          "title": "The coefficient another engine asks you to type",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-the-number-comes-from",
+          "title": "Where the number comes from",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-coefficient-that-survives-low-pressure",
+          "title": "A coefficient that survives low pressure",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-three-dew-points-one-phrase",
+          "title": "Three dew points, one phrase",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-marching-a-pressure-drop",
+      "title": "Marching a Pressure Drop",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-one-step-is-not-enough",
+          "title": "One step is not enough",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-midpoint-march",
+          "title": "The midpoint march",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-how-many-steps-are-enough",
+          "title": "How many steps are enough",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-temperature-the-gas-arrives-at",
+          "title": "The temperature the gas arrives at",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-cold-separator",
+      "title": "The Cold Separator",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-water-the-cold-gas-can-still-hold",
+          "title": "Water the cold gas can still hold",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-drops-out-and-where",
+          "title": "What drops out, and where",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-dew-point-depression-as-the-product",
+          "title": "Dew point depression as the product",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-hydrate-question-this-engine-hands-on",
+          "title": "The hydrate question this engine hands on",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-cooling-against-dehydrating",
+          "title": "Cooling against dehydrating",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-still-overhead-nobody-sells",
+      "title": "The Still Overhead Nobody Sells",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-aromatics-arrive-in-the-glycol",
+          "title": "Aromatics arrive in the glycol",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-mole-balance-from-ppmv",
+          "title": "A mole balance from ppmv",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-short-tons-a-year",
+          "title": "Short tons a year",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-one-molecular-weight-for-four-compounds",
+          "title": "One molecular weight for four compounds",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-computed-chosen-and-kept",
+      "title": "Computed, Chosen and Kept",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-doctrine-this-engine-was-written-against",
+          "title": "The doctrine this engine was written against",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-a-refusal-is",
+          "title": "What a refusal is",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-one-export-outside-the-contract",
+          "title": "The one export outside the contract",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-constants-measured-out-of-the-engine",
+          "title": "Constants measured out of the engine",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-published-case-can-catch",
+          "title": "What a published case can catch",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-what-the-method-does-not-know",
+          "title": "What the method does not know",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-capstone-worked",
+          "title": "The capstone worked",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coldend-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-this-engine-hands-over",
+          "title": "Where this engine hands over",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
