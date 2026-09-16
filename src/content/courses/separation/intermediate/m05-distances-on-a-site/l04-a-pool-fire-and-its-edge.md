@@ -25,7 +25,7 @@ That gap is the defect this course was built after. The layout check measures ce
 | pool40mAt4p73Tau0p9 | 40.000000 | 4.730000 | 3428105.9036 | 44.5990 | 134.7867 | 114.7867 | beyond-pool-edge |
 | withinPoolEdgeEdgeCase | 20.000000 | 4000.000000 | 742986.6626 | 25.6078 | 2.2745 | 0.0000 | within-pool-edge |
 
-On every row the two distances differ by half the pool diameter: 10.0000 m on the 20.000000 m pools, 3.0000 m on the 6.000000 m pool and 20.0000 m on the 40.000000 m pool. The status is what tells a reader which world the answer is in.
+On every row the two distances differ by half the pool diameter: 66.1438 m against 56.1438 m on the 20.000000 m pool, 34.3330 m against 31.3330 m on the 6.000000 m pool, and 134.7867 m against 114.7867 m on the 40.000000 m pool. The status is what tells a reader which world the answer is in.
 
 ## What it means on this plot
 

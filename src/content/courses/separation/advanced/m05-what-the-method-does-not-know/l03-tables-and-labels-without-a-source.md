@@ -39,7 +39,7 @@ So even the computed half of a setback comes with a stated range of validity, wh
 
 ## The mistake
 
-The mistake is presenting a table figure as a calculation. Quoting 90.0000 m between a flare and a control room as a computed safety distance gives a copied number the authority of a model, and a site standard that says 75 m or 120 m is not contradicting a calculation.
+The mistake is presenting a table figure as a calculation. Quoting 90.0000 m between a flare and a control room as a computed safety distance gives a copied number the authority of a model, and a site standard that sets its own figure is not contradicting a calculation.
 
 The second mistake is defaulting a null. A pair the table does not carry is a gap, and filling it with zero turns silence into a positive statement that nothing is required.
 

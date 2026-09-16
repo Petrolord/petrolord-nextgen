@@ -8,7 +8,7 @@ Give the engine a K and it uses it, with no derating and no floor, and it labels
 
 An override is not blended with the table and it is not derated afterwards. It replaces the whole lookup. The five fields returned beside the value say exactly that: nothing was derated, nothing was floored, nothing sits near the floor, the source is typed rather than the published table, and no warning is raised.
 
-The source field is the part worth keeping. A K of 0.280000 could have come from a table row, a derating, a floor or a supplier, and the vessel built on it looks the same in all four cases.
+The source field is the part worth keeping. A K of 0.28 could have come from a table row, a derating, a floor or a supplier, and the vessel built on it looks the same in all four cases.
 
 ## Why an override is the honest input under pressure
 
@@ -24,7 +24,7 @@ Leaving the override out entirely is different from giving it a value that means
 
 ## What nothing checks
 
-The engine accepts the override and never compares it with the table value at that pressure. A vendor K of 0.9 would be taken silently, sized with, and reported as typed with no warning attached.
+The engine accepts the override and never compares it with the table value at that pressure. A vendor K far above every row of the table would be taken silently, sized with, and reported as typed with no warning attached.
 
 The base rows run from 0.180000 to 0.550000, so a typed figure far outside that span is either unusual hardware or a transcription error, and nothing in the output tells the two apart. The reconciliation is the reviewer's job.
 

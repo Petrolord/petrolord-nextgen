@@ -30,7 +30,7 @@ The distinction is worth holding. A throw is a typing error. A returned error is
 
 A gas gravity that arrives as undefined is not a missing decoration on a report. It is the input that produces Ppr and Tpr, which produce z, which produces the gas density, which produces the settling velocity and the diameter. Defaulting it to anything would give a complete vessel built on a number nobody supplied.
 
-The retired app defaulted in exactly this way, holding z at 0.850000 whatever the gas and whatever the conditions, and printed a full set of dimensions every time.
+The retired app defaulted in exactly this way, holding z at 0.85 whatever the gas and whatever the conditions, and printed a full set of dimensions every time.
 
 ## The domain matters as much as the presence
 
