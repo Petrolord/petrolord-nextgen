@@ -81,7 +81,7 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20260922_fc2_linesizing_course              ) echo 2a442a099ddf04ae39db283cf5be63b51c34a678742ab442657e33a5bad2d7e0 ;;
+    20260922_fc2_linesizing_course              ) echo 520333b80dbb31de101ad11fe42c6dee15f4a887343bf035dd50b5303bcf35a6 ;;
     20260922_fc2_linesizing_beginner_deep       ) echo 6f7ffaf71a9b0df1f5954b8ad0fa73c87fd9aa6f668b691166cd19c648aa9588 ;;
     20260922_fc2_linesizing_intermediate_deep   ) echo 887474ce014bf3519831eff288ee11643614c1bc469c200844192fdba5d619dd ;;
     20260922_fc2_linesizing_advanced_deep       ) echo 31c494acd0c6c131337fb66128b03aa3fe4bee5bc9878661a50e9c2ce249ee23 ;;

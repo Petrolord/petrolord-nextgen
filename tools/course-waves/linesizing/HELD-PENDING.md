@@ -51,29 +51,36 @@ three deep seeds and `20260922_fc2_linesizing_go_live`. The ladder is
 content-addressed by sha256 in `apply_fc2_linesizing.sh`, so it cannot be
 applied against SQL that is not the SQL it was proved on.
 
-HANDED ON, NOT FIXED HERE. `gradeprecision.py` (commit ef5d67fc, the precision
-pass running in parallel in this same worktree) reports two graded Expert
-fields whose tolerance is not satisfiable at the precision this course prints:
+SETTLED 2026-09-16, and the ladder was recut for it. `gradeprecision.py`
+(commit ef5d67fc, the precision pass running in parallel in this same
+worktree) found that two graded Expert fields carried a tolerance no precision
+this course prints could satisfy:
 
-    quaiboe_pig_run_hours        graded at 1e-7, hours print to six decimals
+    quaiboe_pig_run_hours         graded at 1e-7, hours print to six decimals
     quaiboe_pigging_interval_days graded at 1e-7, days print to four decimals
 
-The Expert capstone lesson `advanced/m06-the-expert-reading/l02` still states
-"Barrels, hours and days print to four decimals", which the Professional side
-of that same claim has already been corrected for. A learner who quotes the
-printed precision fails both fields.
+The coordinator ruled (f48e3374) that each becomes half a unit in the last
+place the course actually prints that quantity, 5e-7 and 5e-5. No expected
+value moved. A tolerance nothing printed can satisfy does not grade the
+learner, it grades their guess at unprinted digits.
 
-WHY THE MIGRATION PASS DID NOT CHANGE IT. The fix is to a tolerance in
-`fc2_capstone.mjs` or to a printed precision, both of which are the capstone's
-contract, and the precision pass owns that contract and is mid-flight in this
-worktree. Two editors in one worktree is a failure this programme has already
-paid for. Nothing is lost by waiting: the ladder pins file CONTENT, so if the
-tolerances move, `apply_fc2_linesizing.sh verify` REFUSES, names the file that
-drifted and prints the `pin` command that reprints the table. A repaired
-capstone cannot be applied as the unrepaired one, and an unrepaired one cannot
-be applied silently after the repair lands.
+WHAT THE MIGRATION PASS DID ABOUT IT. The drift control in `gen_course.py`
+caught it before anything was seeded, reporting DISAGREE on both tolerances
+between the capstone draft and `fields.json`. The draft was re-synced for
+those two field objects, the course migration was recut, and both collision
+sweeps were re-run AT THE NEW, WIDER TOLERANCES, because widening a tolerance
+can reveal a collision a tighter one hid: 0 against the 46 published headline
+values, 0 against the 37 numbers handed to a learner in a prompt, 0 pairwise.
+The three deep seeds regenerate byte-identical, because no bank moved.
 
-WHAT TO DO WHEN THE HOLD LIFTS. Repair the tolerance or the precision claim,
-re-run `gen_course.py` and `gen_golive.py`, re-run `verify_sql.py` and
-`dryrun_fc2.sh`, then `apply_fc2_linesizing.sh pin <ref>` and paste the new
-table into the script with the PR number that moved it.
+THE APPLY SCRIPT PROVED ITSELF ON THIS, LIVE. Run against the recut tree while
+still pinned to the pre-recut content it printed:
+
+    STALE     20260922_fc2_linesizing_course
+                expected 2a442a099ddf04ae39db283cf5be63b51c34a678742ab442657e33a5bad2d7e0
+                found    520333b80dbb31de101ad11fe42c6dee15f4a887343bf035dd50b5303bcf35a6
+
+and refused, naming the one file that moved and leaving the other four alone.
+It has since been re-pinned with `pin HEAD`.
+
+NOTHING IS OUTSTANDING FROM THIS PASS.
