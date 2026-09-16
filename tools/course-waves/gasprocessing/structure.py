@@ -5,7 +5,15 @@
 # (the Kremser surface in both directions, the amine property table, the
 # loading swing and the contactor), C the cold end explorer (HELD, see below).
 #
-# Titles carry COUNTS only, never a measurement. No em dashes and no
+# Titles carry COUNTS only, never a measurement.
+#
+# FRAMED HISTORY IS CURRICULUM. Expert m05 l01 is titled so that the frame is
+# in the HEADING, which is where the gate looks for it and where a reader
+# meets it first. Its source is digest Section 20, the one section of the
+# digest whose subject is what this engine used to do and which says so in
+# its own title and first line. Unframed history is still a defect: a
+# sentence about former behaviour that reads as current behaviour is the
+# thing that has actually gone wrong in this programme, every time. No em dashes and no
 # "X, not Y" contrastive anywhere a learner reads, headings included.
 #
 # Engine: engines/facilities/gasProcessing.js over
@@ -156,7 +164,7 @@ TIERS = {
     ('l04-one-molecular-weight-for-four-compounds', 'One molecular weight for four compounds', 13, [W]),
   ]),
   ('m05-computed-chosen-and-kept', 'Computed, Chosen and Kept', [
-    ('l01-the-doctrine-this-engine-was-written-against', 'The doctrine this engine was written against', 13, [W]),
+    ('l01-what-was-repaired-and-what-was-not', 'What was repaired, and what was not', 13, [W]),
     ('l02-what-a-refusal-is', 'What a refusal is', 14, [A]),
     ('l03-the-one-export-outside-the-contract', 'The one export outside the contract', 13, [A]),
     ('l04-constants-measured-out-of-the-engine', 'Constants measured out of the engine', 14, [W]),

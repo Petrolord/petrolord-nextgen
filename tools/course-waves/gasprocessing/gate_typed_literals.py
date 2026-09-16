@@ -30,6 +30,15 @@ ALLOWED = {
  '100':   'the other edge of the same band, on the same terms',
  '200':   'a stage count naming a column the table beside it prints, and the same count in the prose that reads that column',
  '12':    'a stage count naming the other column of the same table',
+ # SECTION 20 IS FRAMED HISTORY, and these four are facts about the WORK
+ # rather than about the engine, so no probe can measure them. They are the
+ # only typed figures in this digest and each is named here with what it is
+ # and why it cannot be measured. The comment counts in the same section are
+ # NOT here: those are counted by reading the engine source.
+ '49':    'SECTION 20, framed history: the number of findings the recon raised. A fact about the work, not a value any call to the engine can return',
+ '1':     'SECTION 20, framed history: the numerator of "1 over z", a column label over compressibilities the engine does report',
+ '5':     'SECTION 20, framed history: the lower edge of the band that was the routine only check. The band no longer exists in the engine, so nothing can be asked for it',
+ '9':     'SECTION 20, framed history: the upper edge of that same band',
 }
 
 def strip_substitutions(text):
@@ -67,8 +76,19 @@ def main():
     # feed the gate a fragment of code as if it were prose.
     body_src = strip_substitutions(body_src)
     calls = re.findall(r"(`(?:[^`\\]|\\.)*`|'(?:[^'\\]|\\.)*')", body_src, re.S)
-    # import specifiers and engine paths are addresses, not output
-    calls = [c for c in calls if not re.search(r'(engines|fc-wip|node:|\.mjs|\.js|\.json|utf8)', c)]
+    # Import specifiers and file paths are addresses, not output. Excluded by
+    # SHAPE rather than by substring: a substring filter on the word "engines"
+    # silently skipped a prose line reading "54 across the vendored engines"
+    # and with it two typed figures, which is a gate quietly not examining
+    # the thing it reports on.
+    def is_path(lit):
+        body = lit[1:-1].strip()
+        if ' ' in body:
+            return False
+        return bool(re.match(r'^(\.{0,2}/|node:|[A-Za-z0-9_@./-]+\.(mjs|js|json|py|md|txt))', body)) \
+            or body.startswith('/') or body in ('utf8',)
+    skipped = [c for c in calls if is_path(c)]
+    calls = [c for c in calls if not is_path(c)]
     swept, bad, seen = 0, [], []
     for c in calls:
         body = c[1:-1]
@@ -95,7 +115,7 @@ def main():
                 seen.append(tok)
                 continue
             bad.append((tok, body[max(0, m.start()-60):m.start()+40].replace('\n', ' ')))
-    print(f'  w() calls examined: {len(calls)}')
+    print(f'  string literals examined: {len(calls)}  (paths excluded by shape: {len(skipped)})')
     print(f'  numeric literals swept in printed prose: {swept}')
     print(f'  allowed-with-a-reason entries: {len(ALLOWED)}')
     used = sorted(set(seen))

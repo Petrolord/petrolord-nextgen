@@ -842,6 +842,46 @@ w('| --- | --- | --- |');
 w();
 w('THE RULE A READER SHOULD LEAVE WITH. Agreement to twelve decimals between two things that share their arithmetic is a weaker result than agreement to six between two things that do not. The first says a transcription was faithful. The second says two roads met. When a published case agrees exactly, the question to ask is not how close it came but how far apart the two sides were to begin with.');
 w();
+// --------------------------------------------------------------- SECTION 20
+// FRAMED HISTORY. This section is the one place in the digest where the
+// subject IS what the engine used to do, and it says so in its own title and
+// in its first line. Framed history is curriculum; unframed history is a
+// defect. It is placed LAST so nothing above it can be read as history by
+// accident, and every figure in it is either the repaired engine's answer or
+// a ratio printed beside the two numbers it came from.
+w('# SECTION 20: What this engine was repaired for, and how to teach it (owned by Expert m05 l01)');
+w();
+w('EVERYTHING IN THIS SECTION IS HISTORY AND IS LABELLED AS HISTORY. Nothing above this line is. If you teach any of it, say plainly that it is what the engine used to do, the way this section does. A sentence about former behaviour that reads as current behaviour is the defect; the subject itself is not.');
+w();
+w('This module was repaired after a recon found 49 findings in it, its published cases and the studio that composes it. Four of those are worth teaching because each one is a general lesson that happens to have an example here.');
+w();
+w('1. A COEFFICIENT THAT WAS WRONG ON FOUR SCREENS AT THE APP\'S OWN DEFAULTS. The Joule-Thomson relation carries no compressibility in its denominator, and this module divided by one. The error was exactly a factor of one over z: nothing at all in the ideal-gas limit and growing with pressure, which is the shape that hides an error, because it is smallest exactly where a sanity check is easiest. The lesson is the shape rather than the factor.');
+const histP = [20, 600, 1000, 2500];
+w('| psia | z the engine reports | 1 over z, which is what the error was |');
+w('| --- | --- | --- |');
+histP.forEach((pp) => {
+  const r = G.jouleThomsonFPerPsi({ pPsia: pp, tF: 100, gasSg: 0.65 });
+  w(`| ${e6(pp)} | ${num(r.z, 9)} | ${num(1 / r.z, 9)} |`);
+});
+w('Those are the repaired engine\'s compressibilities, and the last column is one over each of them, printed so the shape of the former error can be read off numbers that are current.');
+w();
+w('2. THE CHECK THAT COULD NOT CATCH IT. The routine had no published case at all, and its only check was that the answer fell in a band of 5 to 9 degF per 100 psi. Both the wrong answer and the right one sit inside that band, so the check could not fail. A gate that restates the formula it is checking, or bounds an answer loosely enough to admit both candidates, is not a check. Section 17 is what a real one looks like, and the golden now carries published cases for this routine.');
+w();
+w('3. AN INPUT THAT WAS VALIDATED AND THEN IGNORED. The lean glycol strength was range checked, refused outside 90 to 100 weight percent, and read by nothing. A validated input that moves no output is worse than an absent one, because the validation asserts that it matters. It now drives the loop water balance, and Section 6 teaches what it does and, just as carefully, what it does not: it does not set the outlet spec, and the engine says so on every answer.');
+w();
+w('4. ONE FLUID WITH TWO DENSITIES, AND ONE MODULE WITH TWO STANDARD BASES. Two numbers for one glycol, and a standard cubic foot defined at one pressure and converted at another. Neither gap was large. Both are defects whatever their size, because nothing downstream can tell which of the two numbers it is holding. Section 2 now shows one of each, and shows the derived ones being derived.');
+w();
+// The comment counts are MEASURED by reading the engine source, not typed,
+// for the same reason every other figure in this digest is measured.
+const HIST_RE = /^\s*(\*|\/\/).*(used to|no longer|until FC4-0)/;
+const countHist = (file) => fs.readFileSync(file, 'utf8').split('\n').filter((l) => HIST_RE.test(l)).length;
+const walkJs = (dir) => fs.readdirSync(dir, { withFileTypes: true })
+  .flatMap((e) => (e.isDirectory() ? walkJs(`${dir}/${e.name}`) : (e.name.endsWith('.js') ? [`${dir}/${e.name}`] : [])));
+const THIS_MODULE_HIST = countHist(`${ROOT}/engines/facilities/gasProcessing.js`);
+const ALL_ENGINE_HIST = walkJs(`${ROOT}/engines`).reduce((a, f) => a + countHist(f), 0);
+w(`WHERE THE REST OF IT LIVES, AND HOW TO READ IT. The engine's own source comments record what changed, because a good repair records what it changed: there are ${THIS_MODULE_HIST} such comment lines in this module and ${ALL_ENGINE_HIST} across the vendored engines, counted by reading the source for a comment line carrying "used to", "no longer" or the repair's own name. THEY ARE PROVENANCE. A comment is not the digest, and a sentence lifted out of one into a lesson arrives with no frame around it. If you want to teach any of it, frame it the way this section does, and never present it as what the engine does now.`);
+w();
+
 // --------------------------------------------------------------- SECTION 18
 w('# SECTION 18: The Associate reading, one stream from the line to the still (owned by Associate m06)');
 w();

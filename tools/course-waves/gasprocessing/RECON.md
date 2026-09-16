@@ -11,13 +11,23 @@ repaired it. **Repair history is not teaching truth.** What the engine used
 to do is true of the WORK and is absent from the digest. The digest is the
 only source a lesson quotes.
 
-**AND THERE IS A THIRD PLACE IT LEAKS FROM, which nothing gates.** The
-repaired `engines/facilities/gasProcessing.js` is dense with source comments
-describing its own former behaviour, because a good repair records what it
-changed. A sibling wave shipped three repair-history sentences into committed
-lesson text and the worst of the three came from an engine source comment.
-**Engine source comments are provenance on exactly the same terms as this
-file.** Every writer brief in this wave says so in its opening block.
+**FRAMED HISTORY IS CURRICULUM. UNFRAMED HISTORY IS A DEFECT.** You may teach
+what this engine used to do, provided you say that is what you are doing.
+Digest **Section 20** is the one section whose subject is history, framed in
+its own title and first line, and `Expert m05 l01` owns it with the frame in
+its heading. Nothing else in the digest is history.
+
+**THE THIRD SOURCE, which nothing can gate.** The repaired
+`engines/facilities/gasProcessing.js` carries comment lines describing its
+own former behaviour, and there are dozens across the vendored engines,
+because a good repair records what it changed. **Digest Section 20 counts
+them by reading the source and states the rule it counted with**, so the
+figure is checkable rather than quoted. A sibling course carries 12
+history instances in its lesson text, five of them H2 headings, traced to a
+changelog block in one engine file. **Engine source comments are provenance
+on exactly the same terms as this file.** The danger is not the subject. It
+is that a sentence lifted out of a comment arrives with no frame around it,
+and a writer cannot frame what they did not know was history.
 
 FC4-0 is merged (engines `82ec6d4`) and vendored. Digest Section 14, which
 was withheld and printed nothing rather than printing behind a banner, is

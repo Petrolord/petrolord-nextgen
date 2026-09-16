@@ -25,6 +25,26 @@ Fourteen of the eighteen graded capstone fields moved. `gate_movement.mjs`
 measures every one against the pre-vendoring engine and requires a NAMED
 cause for each. Four held.
 
+## Repair history
+
+**FRAMED HISTORY IS CURRICULUM. UNFRAMED HISTORY IS A DEFECT.** Digest
+**Section 20** is the one section whose subject is what this engine used to
+do. It says so in its title and its first line, it is placed last so nothing
+above it can be read as history by accident, and `Expert m05 l01`, "What was
+repaired, and what was not", owns it with the frame in its heading.
+
+Everything else in the digest describes the engine as it is. The kit gate
+reports Section 20's four sentences as warnings for a human read, and they
+are re-read on every rebuild rather than cleared, because clearing them would
+make the one place carrying history the one place nobody checks.
+
+**Engine source comments are provenance.** Section 20 counts them by reading
+the source and states the rule it counted with. A sentence lifted out of a
+comment arrives with no frame around it, and a writer cannot frame what they
+did not know was history.
+
+## Files
+
 - `RECON.md` is the map. Read it before anything else.
 - `FINDINGS.md` is the classified defect list with its negative controls.
   **Neither is teaching truth.** Both describe the engine as found.
@@ -42,7 +62,7 @@ cause for each. Four held.
 | `gate_typed_literals.py` | 293 string literals in `fc4_dump.mjs`, substitutions stripped at source level, 23 numeric literals swept in printed prose | 12 allowed with a reason, all 12 hit, 0 unexplained. Negative control caught a planted figure |
 | `gate_capstone_leak.py` | 25 capstone conditions and 18 graded values at three renderings each | 0 leaks. **Caught one real leak**: an earlier capstone temperature pair reproduced a row of the digest's own duty table |
 | `gate_copy_rule.py` | the digest, every lesson body and every manifest title: 4 files, 795 lines and titles | 0 violations. **Caught two contrastives in the digest** that an eye sweep had passed |
-| `digest_prose.mjs` | 698 digest lines, 19 section titles and 22 in-body headings against their own blocks, 33 pinned engine fragments | 0 failing. **Caught a stale section title on the rebuild**, naming a contract exception the repaired engine no longer has, and **caught a repair-history sentence in this wave's own new prose** |
+| `digestprose.mjs` (the kit gate) with `digest_prose.rules.mjs` | 721 digest lines, 20 section titles and 25 in-body markers against their own blocks, 30 history framings, **33 pinned engine fragments** | 0 failing, 4 warned. **Caught a stale section title on the rebuild**, naming a contract exception the repaired engine no longer has, and **caught a repair-history sentence in this wave's own new prose** |
 | `gate_movement.mjs` | all 18 graded fields against the pre-vendoring engine | 0 findings. **Caught a stability claim that was reasoned rather than measured** |
 | `harvest_truth.py` | the digest, into `truth-gasprocessing.json` | 1365 numbers, 597 distinct. numsweep now builds a resolver of **769 derived values from 2 sources** and resolved 63 of 63 on a probe run |
 | `jest` | the vendored gas processing and separator suites | **110 of 110** (47 + 63), up from 12 |
@@ -53,6 +73,9 @@ cause for each. Four held.
 
     sh build_digest.sh > digest.tmp && mv digest.tmp digest.txt
 
-Through a temp file, never straight into the file the gates read. Then re-run
-all three gates, because a gate holding a stale resolver copy of the digest
-is a gate that is not examining your files.
+Through a temp file, never straight into the file the gates read. Then
+re-run `harvest_truth.py`, because the resolver numsweep reads is built from
+the digest, and then every gate, because a gate holding a stale copy of the
+digest is a gate that is not examining your files.
+
+    node /root/dc-wavekit/digestprose.mjs digest.txt --rules /root/fc-wip-gasprocessing

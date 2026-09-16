@@ -97,16 +97,21 @@
   "gate_typed_literals.py": "no number is typed into the digest. Sweeps every string literal in fc4_dump.mjs with substitutions stripped at source level by brace depth. Fails on a dead allowlist row.",
   "gate_capstone_leak.py": "no capstone condition and no graded value reaches the digest or the generator, at three renderings each. CAUGHT ONE REAL LEAK into the digest duty table. Fails on a dead shared row.",
   "gate_copy_rule.py": "the owner copy rule over the digest, every lesson body and every manifest title. CAUGHT TWO CONTRASTIVES an eye sweep had passed.",
-  "digest_prose.mjs": "the consolidated prose gate: headings against their own block, repair history inside a teaching section, a past-tense WARN family for history told without a trigger word, and the copy rule. 33 engine fragments PINNED so an upstream engine edit turns it red rather than letting a stale quote pass. CAUGHT A STALE SECTION TITLE on the rebuild, naming a contract exception the repaired engine no longer has.",
   "gate_movement.mjs": "all eighteen graded fields re-measured against the pre-vendoring engine, with a NAMED and verified cause for each that moved and a declared stable set that must be exactly what held. CAUGHT A STABILITY CLAIM THAT WAS REASONED RATHER THAN MEASURED.",
   "harvest_truth.py": "harvests the digest into truth-gasprocessing.json so numsweep has a resolver. FC3 shipped none and its sweep reported 396 of 412 unresolved, measuring the resolver rather than the lessons.",
   "sweep_literals.py": "the FULL-literal sweep with no significant-figure floor, over banks or lessons. numsweep skipped 56 of 119 literals on this wave own probe run, so a green numsweep is roughly half a sweep. Refuses an empty sweep.",
-  "jest": "packages/engines __tests__/facilities.gasprocessing.test.js, 47 of 47 green, up from 12. The separator suite it now shares a module with is 63 of 63."
+  "jest": "packages/engines __tests__/facilities.gasprocessing.test.js, 47 of 47 green, up from 12. The separator suite it now shares a module with is 63 of 63.",
+  "digestprose.mjs (the kit gate, with this wave rules file)": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules /root/fc-wip-gasprocessing. Headings against their own blocks in the digest AND the lessons, repair history, and the copy rule. 721 lines, 20 section titles and 25 in-body markers, 30 history framings, 33 ENGINE FRAGMENTS PINNED so an upstream engine edit turns it red. 3 warned, all inside Section 20 and re-read by hand on every rebuild rather than cleared. CAUGHT A STALE SECTION TITLE on the rebuild and a repair-history sentence in this wave own new prose."
  },
  "digest": {
   "lines": 675,
   "sections": 19,
   "withheld": null,
   "note": "Section 14 was WITHHELD while the Joule-Thomson chain was under repair and printed NOTHING rather than printing behind a banner. It is built. No lesson ever took a wrong coefficient, which is what the withholding bought."
+ },
+ "history": {
+  "position": "FRAMED HISTORY IS CURRICULUM, UNFRAMED HISTORY IS A DEFECT. Digest SECTION 20 is the one section whose subject is what this engine used to do; it says so in its title and its first line, and nothing above it is history. Expert m05 l01, \"What was repaired, and what was not\", owns it, with the frame in the HEADING where the gate and the reader both look for it.",
+  "engineComments": "Repair-history comment lines in the engine source are PROVENANCE. Digest Section 20 COUNTS them by reading the source and states the rule it counted with, rather than quoting a figure from a report. A sentence lifted out of a comment arrives with no frame, and a writer cannot frame what they did not know was history. Every writer brief in this wave says so.",
+  "framingRule": "Framing comes from the HEADING above a passage or the line immediately before it. An inline prefix inside a sentence is not framing and the gate does not read it as one."
  }
 }

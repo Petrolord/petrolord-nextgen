@@ -1,35 +1,82 @@
 # FC4 LESSON TASK. Read every line before you write a word.
 
-## THE THREE PLACES REPAIR HISTORY LEAKS FROM. Read this before anything else.
+## REPAIR HISTORY: FRAMED IS CURRICULUM, UNFRAMED IS A DEFECT.
+
+**You may teach what this engine used to do. You must say that is what you
+are doing.** An academy-wide sweep settled this: six live Economics courses
+teach repair history deliberately, one of them in a module directory named
+for it and a lesson titled "What was repaired and what was not", with 29
+graded items on the subject. FC1's own sweep found 27 history-shaped
+sentences and every one was framed and none was a defect. **Every real defect
+this class has produced was UNFRAMED.**
+
+So the rule is not "no history". The rule is:
+
+- **A sentence about former behaviour that reads as current behaviour is a
+  defect.** That is the whole of it.
+- **Framing comes from the HEADING above a passage, or the line immediately
+  before it.** An inline "HISTORY." prefix inside a sentence is not framing,
+  and the gate does not read it as framing either. Put it in the heading, the
+  way `Expert m05 l01` does.
+- **Never repeat history you did not know was history.** That is what the
+  three sources below are about.
+
+## THE THREE PLACES HISTORY REACHES YOU, AND ONLY ONE IS FRAMED FOR YOU
 
 The engine this course teaches has just been through a 49-finding repair.
 That means three files near you are FULL of sentences describing what it used
 to do, and **none of them is teaching truth**:
 
-1. **`RECON.md` and `FINDINGS.md`.** Both open with a banner saying they are
-   provenance. Do not take a number or a behaviour from either.
-2. **THE ENGINE SOURCE COMMENTS.** `engines/facilities/gasProcessing.js` is
+1. **`digest.txt` SECTION 20, which IS framed for you.** It is the one
+   section of the digest whose subject is what this engine used to do, it
+   says so in its title and its first line, and it is the only place you
+   should be drawing history from. Four items, each a general lesson that
+   happens to have an example here.
+2. **`RECON.md` and `FINDINGS.md`.** Both open with a banner saying they are
+   provenance. They describe the engine AS FOUND, in far more detail than
+   Section 20, and **their numbers are stale**: fourteen of the eighteen
+   graded capstone fields moved when the repair was vendored. Read them to
+   understand the work. Do not take a figure from either.
+3. **THE ENGINE SOURCE COMMENTS.** `engines/facilities/gasProcessing.js` is
    dense with them: "The 379.49 this file used to quote", "It used to carry
    two", "This function divided by one until FC4-0", "the march used to
    evaluate mu at each interval MIDPOINT PRESSURE but at the temperature it
    started with". **NOTHING GATES A WRITER READING ENGINE COMMENTS.** A
    sibling wave shipped three repair-history sentences into committed lesson
    text and the worst of the three came from an engine source comment.
-   **Engine source comments are provenance, not teaching truth.**
-3. **Anything you remember from a briefing.** Including this one.
+   **Engine source comments are provenance.** Digest Section 20 counts them
+   for you, by reading the source, and there are dozens across the vendored
+   engines. A sibling course carries 12 history instances in its lesson text,
+   5 of them H2 headings, traced to a changelog block in one engine file. The danger is
+   not that the subject is forbidden. It is that **a sentence lifted out of a
+   comment arrives with no frame around it**, and you cannot frame something
+   you did not know was history. Before using any sentence you found in the
+   source, establish whether it describes what the engine does now.
+4. **Anything you remember from a briefing.** Including this one.
 
-**`digest.txt` is the only teaching truth.** It is swept by
-`digest_prose.mjs` for exactly this, so a forbidden sentence in the digest is
-worse than the same sentence in a provenance file: two of the three sibling
-leaks were not the writers' fault at all, because the writers took what the
-digest said.
+**`digest.txt` is the only teaching truth**, and Section 20 is the only part
+of it that is history. It is swept by the kit's `digestprose.mjs` with this
+wave's own claims, cleared phrases and 33 engine pins:
 
-**AND IT IS NOT ONLY WHOLE SENTENCES.** One sibling leak was a lesson H2
-HEADING, "One sentence used to answer several questions". Sweep your
-headings, not only your prose. A keyword sweep will not catch the worst of
-it either: the worst sibling instance was plain past tense with no trigger
-word at all. Read your own past-tense sentences against what the engine does
-TODAY.
+    node /root/dc-wavekit/digestprose.mjs \
+      /root/fc-wip-gasprocessing/digest.txt \
+      --rules /root/fc-wip-gasprocessing --lessons <your content dir>
+
+**RUN IT OVER YOUR LESSONS, not only over the digest.** It sweeps lesson
+headings as well as lesson prose, because one sibling leak was a lesson H2:
+"One sentence used to answer several questions".
+
+**Expect to TRIAGE rather than to get a clean binary.** The gate carries two
+families. High-confidence keywords FAIL when unframed. Plain past-tense
+narration WARNS, because no word list catches the worst instance this
+programme has seen, which was "the object looked healthy, the coefficient was
+right" with no trigger word in it. Read every warning against what the engine
+does today, and either frame it or rewrite it.
+
+This wave's own digest raises three warnings and all three are inside Section
+20. They are re-read by hand on every rebuild rather than cleared, because
+clearing them would make the one place carrying history the one place nobody
+checks.
 
 You are writing lessons for **FC4 `gasprocessing`, "Gas Processing"**, the
 fourth course in the NextGen Facilities module, path_order 42.
