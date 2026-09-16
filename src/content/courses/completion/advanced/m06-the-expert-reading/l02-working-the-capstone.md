@@ -12,13 +12,13 @@ Read the four numbers carefully: the bore length, the insertion depth as landed,
 
 ## The six values
 
-Two availables, two remainings, and two sizing results.
+One available, two remainings, the two edges of the band, and one sizing result.
 
-The available elongation is the bore length less the insertion depth. The available contraction is the insertion depth. Check them by the identity: they must sum to the bore length exactly.
+The available elongation is the bore length less the insertion depth. The available contraction is the insertion depth itself, which is why it is not one of the graded six: reporting it would only copy the landing back out of the conditions. Compute it anyway, because the identity is the fastest check you have, and the two availables must sum to the bore length exactly.
 
 The two remainings are each available less the magnitude of the corresponding case. One of them is negative, and a negative remaining is a real answer rather than an error. Report it with its sign.
 
-The minimum insertion at which both cases pass is the lower edge of the band. The shortest usable bore is the swing plus twice the margin.
+The minimum insertion at which both cases pass is the lower edge of the band and comes from the contraction case. The maximum insertion is the upper edge and comes from the elongation case. The shortest usable bore is the swing plus twice the margin, and the width of the band is whatever the bore carries above that.
 
 ## The traps
 
@@ -28,11 +28,11 @@ Dropping the sign on the negative remaining. The grader expects the signed value
 
 Computing the minimum bore length with one margin instead of two.
 
-And computing the minimum insertion from the elongation case. It comes from the contraction case, because that is the lower bound.
+And taking both edges of the band from the same design case. The minimum comes from the contraction case, which is the lower bound, and the maximum from the elongation case, which is the upper one.
 
 ## The checks
 
-The two availables must sum to the bore length. The contraction remaining must equal the available contraction less the contraction magnitude, which you can verify without the engine. And the minimum insertion must be larger than the landing as given, because the landing as given fails one case.
+The two availables must sum to the bore length. The contraction remaining must equal the landing depth less the contraction magnitude, which you can verify without the engine. The maximum insertion less the minimum is the width of the band, and it must equal the bore length less the shortest usable bore. And the minimum insertion must be larger than the landing as given, because the landing as given fails one case.
 
 If the last of those is not true, you have the two directions the wrong way round.
 

@@ -382,6 +382,21 @@ def numbers_in(text):
             continue
 
 
+def literal_quantum(raw):
+    """Half of the last decimal place the literal is actually WRITTEN to.
+
+    "1.2" is written to a tenth, so it carries +/- 0.05 of its own. "1.2000"
+    is written to a ten-thousandth and carries +/- 0.00005. This is the
+    precision the author committed to on the page, not the precision of the
+    float it parses to.
+    """
+    s = raw.replace(',', '').lstrip('-')
+    mant, _, exp = s.lower().partition('e')
+    dec = len(mant.split('.')[1]) if '.' in mant else 0
+    q = 0.5 * 10.0 ** (-dec)
+    return q * 10.0 ** int(exp) if exp else q
+
+
 def sweep(records, course=None):
     """Return (findings, stats). Raises Refused on an empty sweep."""
     by_course = {}
@@ -432,6 +447,21 @@ def sweep(records, course=None):
                         if scale != 1.0:
                             rel = abs(shifted - abs(expected)) / max(abs(expected), 1e-30)
                             if rel > 1e-4:
+                                continue
+                            # AND IT MUST BE WRITTEN PRECISELY ENOUGH TO BE ONE.
+                            # A third false-positive class, found by re-running
+                            # this gate over the 2026-09-16 recut. DCA's Expert
+                            # prompt says "b = 1.2", an Arps exponent, and
+                            # 1.2/1000 is EXACTLY the 0.0012 per day decline the
+                            # Associate tier is graded on, so the relative test
+                            # above cannot reject it. But "1.2" is written to one
+                            # decimal: it carries +/- 0.05 of its own, which is
+                            # +/- 5e-05 once shifted, and the field's tolerance is
+                            # 2e-05. A number cannot be a restatement of a value
+                            # it is not written precisely enough to resolve. The
+                            # same quantity written "1.2000", or "0.0012", still
+                            # matches and is still reported.
+                            if literal_quantum(raw) / scale > tol:
                                 continue
                         if True:
                             findings.append({
@@ -603,6 +633,24 @@ def selftest():
     findings, _ = sweep(loose)
     check('a loose approximation under a unit shifting is not called a leak',
           not any(f['accepted'] and f['key'] == 'phi' for f in findings))
+
+    # 4c. An EXACT power-of-ten coincidence between a coarsely written literal
+    # and a far smaller graded value. The relative test cannot reject this one,
+    # because the agreement is exact; the written precision can.
+    coarse = [dict(r) for r in SELFTEST_CLEAN]
+    coarse[2] = dict(coarse[2])
+    coarse[2]['fields'] = [{'key': 'a_decline', 'expected': 0.0012, 'tol': 2e-05}]
+    coarse[2]['prompt'] = 'Book the EUR at a decline exponent b of 1.2 and state the value.'
+    findings, _ = sweep(coarse)
+    check('a coarsely written literal is not a unit restatement of a far smaller value',
+          not any(f['accepted'] and f['key'] == 'a_decline' for f in findings))
+
+    fine = [dict(r) for r in coarse]
+    fine[2] = dict(fine[2])
+    fine[2]['prompt'] = 'Book the EUR. The decline is 1.2000 per thousand days.'
+    findings, _ = sweep(fine)
+    check('the same shifting written to full precision is still caught',
+          any(f['accepted'] and f['key'] == 'a_decline' for f in findings))
 
     # 5. REFUSALS. These are the whole point of the rewrite.
     def refuses(name, fn):

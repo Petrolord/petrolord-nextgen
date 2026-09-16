@@ -450,3 +450,65 @@ python3 docs/gate-audit/promptleak.py --sql migrations/20260908_ec1_cashflow_cou
 
 Exit codes: 0 clean, 1 leaks found, 2 refused. Only 0 is a pass, and 2 is not
 a pass however convenient it looks in a wave log.
+
+## 9. The recut, 2026-09-16
+
+All six findings of section 5 are closed by five migrations,
+`migrations/20260916_promptleak_recut_*.sql`, with the published and recut text
+of every row recorded in `docs/prompt-leak-recut/`. The principle applied
+throughout: a prompt must give the learner everything needed to do the work and
+nothing that substitutes for doing it.
+
+| # | course | what was done | why that and not something else |
+|---|---|---|---|
+| 1, 2 | `dca` advanced | prompt states the *fit* instead of its result: the b = 1.2 booking is now taken on Ekene-1's pre-flood primary window, and the triangle's mode is now "the field's deterministic booking", to be totalled from the four closed-form EURs | both figures are real inputs, so each is replaced by the thing it was computed from. The triangle tolerates a derived mode: dP90/dmode is 0.247 and dP10/dmode 0.206, so a 2000 stb error moves each quantile by less than its own 2000 stb tolerance |
+| 3 | `scal` beginner | the two Corey exponents leave the prompt; the four endpoints stay | the exponents live in the fixture the Associate loads, and every Associate answer comes out of the engine run. The endpoints stay because the first graded field, the mobility ratio, is a hand calculation from them |
+| 4 | `completion` advanced | graded field replaced: `available_contraction_m` (2.28, the stated landing depth) becomes `max_insertion_both_pass_m` (4.299999999999999) | the landing depth cannot leave the prompt, so the field moved instead. The new field is the far edge of the band whose near edge was already graded, and it catches the "both edges from one design case" trap that was previously graded at one end only. The direction-swap the old field guarded still fails field 1 |
+| 5 | `seismolord` advanced | graded field replaced: `iso25_amp` becomes `tune25_iso_ratio` (1.4449345270902185, tol 0.001) | as section 5 recommended, grade what the wedge decides. The ratio is scale invariant, so no statement of the reflection pair can give it away, and `wedgeLab.test.js` already pinned it independently |
+| 6 | `reservoircalc` advanced | `phi_mean_oil` tolerance 0.001 to 0.0002; the prompt does not change | a tolerance defect, as recorded. The panel prints this mean to six decimals, so 0.0002 is four hundred times an honest reading error, while the copied well value 0.21 now misses by 3.2 tolerances and the two wrong-method means the lessons name miss by 7.3 and 13 |
+
+Two leak surfaces this gate cannot see were found while doing the work, and
+both were fixed in the same wave. `academy_get_capstone` serves the learner the
+`dataset` string and every field's `label`, not only the `prompt`:
+`dca.b12_eur_stb` was labelled "EUR at b 1.2 (qi 120, Di 0.0012, limit 10)",
+which hands over the same two Associate answers the prompt did. **Extending the
+sweep to `label` and `dataset` is the obvious next repair to this gate** and is
+not done here.
+
+Three residues are reported rather than hidden. The DCA Expert lesson
+`m04-risked-reserves/l04-the-ekene-triangle.md` derives the mode in full and
+`UncertaintyExplorer` pre-fills it as a panel default; the SCAL Associate
+lessons teach nw = 2.5 and the panel's slider defaults to it. Those are lesson
+and panel leaks, which is `leakage.mjs`'s job, and section 6 shows that gate
+has the same swept-nothing hole this one had. `scal.advanced.fitted_nw` in
+particular is a recover-the-plant field whose value the course must teach, so
+no prompt wording can make it secret; redesigning it needs an engine run.
+
+### A third false-positive class, found by re-running the gate
+
+The re-run over the recut reported `dca` advanced leaking `beginner.di_per_day`
+through "b = 1.2", because 1.2/1000 is *exactly* 0.0012 and the relative test of
+section 3 cannot reject an exact agreement. It is not a restatement: an Arps
+exponent is not a decline rate, and a learner typing 1.2 into that field fails.
+The finding was present on the unchanged production rows too, masked by
+deduplication behind the worse verbatim leak.
+
+The gate now also requires, for a *shifted* match only, that the literal be
+written precisely enough to resolve the shifted tolerance. "1.2" is written to
+one decimal, so it carries ±0.05, which is ±5e-05 once shifted, against a
+tolerance of 2e-05. The same value written "1.2000" or "0.0012" still matches
+and is still reported, and the selftest asserts both directions. Unshifted
+matches are untouched, because at scale 1 the grader itself would accept the
+literal as typed.
+
+The negative control is now **18 checks, all passing**, and the two new ones are
+`a coarsely written literal is not a unit restatement of a far smaller value`
+and `the same shifting written to full precision is still caught`. Run against
+the unchanged production rows the patched gate still reports all six original
+leaks, so the narrowing hides none of them; run against the recut rows it
+reports `cross-tier leaks: 0   self leaks: 0` and exits 0.
+
+The three near misses section 5 flagged as one to two tolerances from a
+cross-tier answer were re-checked and are unmoved by the recut: `scal` beginner
+0.35 at 1.3 tolerances, `sim` advanced at 1.4, `scal` beginner 0.25 at 1.7. No
+near miss was converted into a leak.
