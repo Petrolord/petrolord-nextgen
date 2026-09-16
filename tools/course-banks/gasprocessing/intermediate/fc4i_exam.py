@@ -153,7 +153,7 @@ q(2, "Which step of the gallons chain is chemistry rather than practice or proce
  ["The strength of the solution as it circulates.",
   "The customary rich limit of the amine.",
   "The duty per gallon circulated."],
- "It is a property of the molecule and there is nothing customary about it. The strength, the limits and the duties are operating practice with no publication behind them in this repository.")
+ "A molecular weight is fixed by the molecule and can be checked in any handbook. Everything else in that chain was chosen by somebody, either as a design value or as the way a plant is run.")
 
 q(3, "The plant is turned down. Which pair moves together?",
  "The lbmol a day and the gpm.",

@@ -217,7 +217,7 @@
    "The duty per gallon circulated."
   ],
   "answer": 2,
-  "explanation": "It is a property of the molecule and there is nothing customary about it. The strength, the limits and the duties are operating practice with no publication behind them in this repository."
+  "explanation": "A molecular weight is fixed by the molecule and can be checked in any handbook. Everything else in that chain was chosen by somebody, either as a design value or as the way a plant is run."
  },
  {
   "prompt": "The plant is turned down. Which pair moves together?",
