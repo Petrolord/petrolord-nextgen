@@ -1,0 +1,147 @@
+{
+ "slug": "producedwater",
+ "prefix": "fc7",
+ "name": "Produced Water Treatment",
+ "pathOrder": 45,
+ "module": "facilities",
+ "prerequisite": null,
+ "repo": "/root/wt-fc7-nextgen",
+ "branch": "feat/fc7-producedwater-course",
+ "goldens": [
+  "facilities/goldens/producedwater_cases.json"
+ ],
+ "engines": [
+  "engines/facilities/producedWater.js"
+ ],
+ "enginesVendoredAt": "NextGen, sha-identical with engines 8b8fb6a (the FC7-0 repair). The IMPORT CLOSURE IS FIVE PATHS and it was WALKED, not listed: engines/facilities/producedWater.js imports NOTHING AT ALL, and the only three edges in the family are the jest suite to the engine, the suite to the golden and the oracle to the golden. FC4's closure came out at ten where four were expected, so the walker refuses if a seed is absent, if an edge resolves to nothing, or if it resolves no paths. Identity proved path by path three independent ways: git blob hash against engines HEAD, md5 byte compare, and against the Suite's own vendoring of the same repair (Suite PR #498, merge 3c327474b). Vendoring guard clean over 563 paths. The canonical pin stays at 709172f, so all five paths are ledgered as ahead of it: four move from missing to differing pinned to the blob now vendored, and FINDINGS-producedwater.md is extra because it did not exist at the pin.",
+ "constants": {
+  "0.00002414": "vogelA, the fresh water viscosity fit coefficient. DECLARED and EXPORTED, pinned by literal in the jest suite. Not published in this repository",
+  "247.8": "vogelB, the same fit numerator. DECLARED and EXPORTED. The one published check anywhere in the property fits is 0.890 cP for fresh water at 25 C, and it is the only number in them that comes from outside the module",
+  "140": "vogelC, the same fit offset. DECLARED and EXPORTED",
+  "1.8": "TWO constants carry this value. salinityViscosityMultiplier, the relative viscosity rise per unit mass fraction of dissolved solids: DECLARED and EXPORTED. API_421.shortCircuitCustomaryMax, the top of the customary short-circuit band: DECLARED and EXPORTED",
+  "700": "brineDensitySlopeKgM3, the density rise per unit mass fraction. DECLARED and EXPORTED",
+  "0.0007": "crudeThermalExpansionPerC. DECLARED and EXPORTED",
+  "999": "crudeReferenceWaterKgM3, the water the API gravity specific gravity is taken against. DECLARED and EXPORTED",
+  "60": "defaultNBins, the droplet grid. DECLARED and EXPORTED, and it MOVES THE ANSWER, which is why every return reports it back",
+  "4": "defaultSpanSigma, how far either side of the median the grid reaches. DECLARED and EXPORTED. The volume it truncates is reported as truncatedTailFraction and is checked against twice the cdf at the span edge, which is an identity and needs no source",
+  "3": "THREE constants carry this value. defaultSharpness, the reduced-efficiency exponent of the gravity and centrifugal devices: DECLARED and EXPORTED, worth many points of removal and with no source here. flotationCellDepthM, the default cell depth: DECLARED and EXPORTED, an input since FC7-0. gasRatioMax, the widest gas to water ratio the module will describe: DECLARED and EXPORTED",
+  "2": "TWO constants carry this value. interceptionSharpness: DERIVED, not chosen. Interception capture goes as the square of the droplet diameter, so the grade curve is an exponential in the square of the reduced size and the reduced-efficiency family at m equal to 2 has the same half point and the same leading power. maxTurndown, the multiple of design flow past which the hydrocyclone refuses: DECLARED and EXPORTED",
+  "1.5": "THREE constants carry this value. interceptionCoefficient, the Stokes-flow interception efficiency coefficient: DECLARED and EXPORTED, no source here. shortCircuitFDefault, the API 421 turbulence allowance: DECLARED and EXPORTED, customarily 1.3 to 1.8. The customary band is enforced as a warning and 5 as a refusal",
+  "0.7": "THREE constants carry this value. plateEfficiencyFactor, the fraction of a plate pack projected area that settles: DECLARED and EXPORTED, worth a large part of the pack answer and with no source here. linerLengthM, which sets the liner residence time: DECLARED and EXPORTED. trainSigmaDefault, the inlet spread the train assumes when the caller states none: DECLARED and EXPORTED",
+  "0.035": "linerDiameterM, the liner bore. DECLARED and EXPORTED. Both liner dimensions now move the cut size, one through residence time and one through the travel as well",
+  "0.0006": "designFlowPerLinerM3S, the flow one liner is rated at. DECLARED and EXPORTED, and it is what the whole envelope is measured in multiples of",
+  "1000": "gFieldAtDesign, the field one liner develops at its design flow. DECLARED and EXPORTED. The reported field is this times the square of min(turndown, 1.3), so it cannot exceed 1690 g",
+  "0.5": "FOUR constants carry this value. coreRadiusFraction, where the oil core sits as a fraction of the liner radius: DECLARED and EXPORTED, refused at or above one over the root of two because past that the median droplet starts inside the core. starvedTurndown, the bottom of the liner envelope: DECLARED and EXPORTED. filterLoadingExponent, how fast bed capture falls with loading rate: DECLARED and EXPORTED. sigmaCustomaryMin: DECLARED and EXPORTED",
+  "1.3": "TWO constants carry this value. overloadTurndown, the top of the liner operating envelope: DECLARED and EXPORTED, and it is the most consequential number in the module, because the field stops rising there and the cut carries the root of the overload as a shear penalty past it. API_421.shortCircuitCustomaryMin: DECLARED and EXPORTED",
+  "1.2": "flotationGasDensityKgM3, the gas in the bubbles. DECLARED and EXPORTED, and an INPUT since FC7-0: it used to be a hardcode no caller could pass",
+  "300": "bubbleMicronDefault. DECLARED and EXPORTED. A 300 micron bubble rises at Reynolds about 20, which is why the bubble rise is the full drag balance and not Stokes",
+  "0.2": "TWO constants carry this value. gasRatioDefault: DECLARED and EXPORTED. gasHoldupWarn, the holdup past which a swarm of independent bubbles is no longer what is in the cell: DECLARED and EXPORTED",
+  "20": "TWO constants carry this value. bubbleMicronMin: DECLARED and EXPORTED. filterReferenceDropletMicron, the droplet the bed filter coefficient is declared at: DECLARED and EXPORTED",
+  "2000": "bubbleMicronMax. DECLARED and EXPORTED",
+  "0.01": "attachmentEfficiency. A CALIBRATION and HELD FOR LITERATURE: the probability a collision sticks, chosen so a cell at this module's own defaults cuts in the range induced gas flotation is customarily credited with. It is the ONE number in the module with no derivation at all, it is an input so a caller with a vendor curve can move it, the jest suite PINS it rather than validating it, and NO GRADED CAPSTONE ANSWER IN THIS COURSE DEPENDS ON IT",
+  "100": "THREE constants carry this value. coarseCutWarnMicron, the cut past which the module says a flotation cell is doing very little: DECLARED and EXPORTED. apiGravityMax: DECLARED and EXPORTED. waterDensityMaxC, the top of the fresh water density fit: DECLARED and EXPORTED",
+  "3.5": "filterCoefficientPerM, the bed filter coefficient at its reference triple. DECLARED and EXPORTED. The triple of 3.5 per m at a 20 micron droplet, 800 micron media and 10 m/hr is ONE calibration of this module with no published source here",
+  "10": "filterReferenceLoadingMHr, the loading rate the filter coefficient is declared at. DECLARED and EXPORTED",
+  "800": "filterReferenceMediaMicron, the grain size it is declared at. DECLARED and EXPORTED. The grain size EXPONENT is HELD FOR LITERATURE: the interception derivation gives the inverse cube and no bed data here can check it, so both graded capstone beds are packed at exactly this size, where the media factor is one and the held exponent cannot move the answer",
+  "25": "filterBreakthroughLoadingMHr, the loading this module warns past. DECLARED and EXPORTED",
+  "0.9": "filterBedDepthDefaultM. DECLARED and EXPORTED",
+  "1": "TWO constants carry this value. stokesReynoldsLimit, the Reynolds number Stokes law is stated to here: DECLARED and EXPORTED, and every device reports the Reynolds number of its own cut droplet against it. sigmaCustomaryMax: DECLARED and EXPORTED",
+  "-10": "waterViscosityMinC, the bottom of the viscosity fit band. DECLARED and EXPORTED, refused by name",
+  "200": "waterViscosityMaxC, the top of it. DECLARED and EXPORTED, refused by name",
+  "0": "waterDensityMinC, the bottom of the fresh water density fit. DECLARED and EXPORTED",
+  "300000": "tdsMaxPpm, the salinity the linear correction is stated to. DECLARED and EXPORTED. It used to CLAMP silently at both ends and is refused by name now",
+  "5": "TWO constants carry this value. apiGravityMin: DECLARED and EXPORTED. API_421.shortCircuitMax, past which the short-circuit factor is refused: DECLARED and EXPORTED",
+  "0.015": "API_421.horizontalVelocityLimitMS. DECLARED and EXPORTED, and HALF A RULE: the standard limits the horizontal velocity to the LESSER of a fixed velocity and a multiple of the design droplet rise velocity, and the second half is not in this repository. Every return carrying the check also carries velocityRuleComplete false, and a test asserts no return ever claims the whole rule",
+  "9.80665": "standard gravity. A physical constant, used unnamed in the module, and the only number in the device physics that is neither declared nor derived",
+  "0.158987294928": "one barrel in cubic metres, EXACT by definition. The only unit conversion in the wave's own generators, used to turn a bwpd rate into m3/s the way the Suite layer does",
+  "0.707106781187": "the half-area radius of a round liner as a fraction of the radius, DERIVED as one over the root of two. It is a CRITERION rather than a constant: half the flow area sits inside it, so it is where the median droplet enters, and the module refuses an oil core at or beyond it",
+  "1690": "the ceiling on the reported centrifugal field, DERIVED as gFieldAtDesign times the square of overloadTurndown. Nothing in this module can report a field above it",
+  "18": "the Stokes group constant. DERIVED, and MEASURED out of the engine in digest Section 2 rather than typed. The oracle never types it at all, which is why bending it in both files is still caught",
+  "0.693147180560": "the natural log of two, DERIVED. The cut size of both interception devices is the size at which the capture rate times the residence equals it, because a cut size is where half the volume goes"
+ },
+ "held": [
+  "the VALUE of the dissolved and soluble oil floor. Its existence is stated on every train return and an optional caller floor is applied and reported beside the dispersed figure. NEVER GRADED: no capstone passes a floor, and the TUNU train asserts dissolvedOilFloorPpm null and floorApplied false",
+  "the second half of the API 421 horizontal velocity rule. NEVER GRADED: the OGULAGHA basin runs under the fixed limit and its warning is asserted null, so the missing half cannot decide anything",
+  "any discharge limit at all, including the 29 ppm figure the studio used to hint at. THE ENGINE NOW STATES NO LIMIT AND A TEST ASSERTS IT. NEVER GRADED: no capstone field is a verdict, a margin or a spec comparison, and the TUNU train is run with no spec so the engine withholds its verdict and says why",
+  "the media filter grain size exponent, the inverse cube out of the interception derivation. NEVER GRADED: both graded beds are packed at the module's own 800 micron reference grain, where the media factor is exactly one",
+  "attachmentEfficiency 0.01, which is a CALIBRATION and is pinned rather than validated. NEVER GRADED: no graded field reads a flotation cut size. The two graded flotation fields are the bubble rise velocity and the gas holdup, and the generator MEASURES that both are bit-identical at ten times the attachment efficiency while the cut moves",
+  "E28's unsourced constants, the shape and scale numbers in DECLARED_CONSTANTS, pinned by literal with an exact key-set match rather than validated. Every one that touches a graded answer is PASSED EXPLICITLY by the capstone and stated on its page, the FC1 vendor-K pattern. The property fits and the sharpness cannot be passed as inputs and are named as the module's own declared choices in the brief"
+ ],
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3"
+ ],
+ "plan": {
+  "state": "FOUNDATION COMPLETE at engines 8b8fb6a. Digest built, 22 sections. All 78 lessons writable. No lesson, bank, capstone answer file, panel, lab or migration written yet.",
+  "thesis": "Oil in water is a droplet size distribution and every device is a cut size, so what a train removes follows from the equipment's own geometry and the water's own properties, and the discipline is knowing which numbers on the page the engine DERIVED, which it was GIVEN, which it CALIBRATED and which it refuses to state at all.",
+  "oneSentence": "Produced Water Treatment teaches how to read oil in water as a droplet size distribution and every treating device as a cut size computed from its own geometry, so that what a train removes, what the water looks like afterwards, and what the engine will not rule on all follow from stated physics rather than from a quoted efficiency.",
+  "tiers": {
+   "beginner": "Associate. THE WATER, THE OIL, THE DROPLETS AND WHAT GRAVITY CATCHES. Why: this is the only part of the module that runs end to end in closed form, so a learner can watch a whole answer assemble before anything iterates, inverts or couples. It is also where the module's thesis first bites, because the temperature and the salinity the predecessor collected and ignored are exactly what set the viscosity and the density difference, and those set every cut size in the course. The gravity devices are the right first devices because their cut size is one inversion of one balance: the surface loading times an allowance. The tier ends at the point where a designer wants a finer cut than any plan area can buy.",
+   "intermediate": "Professional. THE THREE DEVICES WHOSE CUT IS NOT GRAVITY ALONE. Why: each of the three answers the same question by a completely different argument, and a reader who can say which argument produced which number has the whole middle of this module. A hydrocyclone is a field and a travel, and it carries the sharpest engineering lesson in the course, because its operating envelope means the cut stops improving and starts degrading while the arithmetic of a bigger field would say otherwise. Flotation is a collision rate against a residence time, which is why the bubble size and the gas rate decide the answer and why a dissolved gas cell is a different device from an induced gas one. A media bed is an exponential penetration through a depth, and its cut size is an inversion of that rather than a second opinion about it. The tier ends able to put three unlike devices in a train and say why the order matters.",
+   "advanced": "Expert. THE COUPLING, THE GRID, AND WHERE THE METHOD STOPS. Why: the two things left are the ones that separate a model from a lookup table. The coupling is why three good devices are not one great one, and it can only be seen by carrying the outlet distribution forward, which is what this engine does and what a fixed efficiency cannot. Then the honesty: the grid the medians are measured on, the creeping flow band the rise velocities are stated in, the difference between a refusal, a withheld verdict and a warning, the six things held for literature, and what an independent oracle is. This module's oracle is the strongest teaching example in the package, because it reaches the same answers by force balances, marched trajectories, bisections and 400,000 tracked droplets, and never types the constant the engine could have got wrong."
+  },
+  "modulesPerTier": 6,
+  "lessonsPerTier": 26,
+  "questionsPerTier": 132,
+  "questionsPerModuleBank": 15,
+  "examQuestions": 42,
+  "lessonLength": {
+   "band": "420 to 560 words, ranked by est_minutes within a tier",
+   "measure": "PROSE WORDS ONLY, counted the way lengths.py counts them: front matter, markdown table rows, headings and {{panel:...}} lines are all excluded. A raw wc -w over the whole file is NOT this measure and runs materially higher, so a lesson can be inside the band and still fail a raw word count. State which measure before quoting a number at a writer."
+  },
+  "capstones": {
+   "count": 3,
+   "gradedFieldsEach": 6,
+   "beginner": "OGULAGHA, a gravity front end on a warm saline stream: the water viscosity, the brine density, the crude density, the median droplet rise velocity, the API 421 basin cut and the plate pack cut.",
+   "intermediate": "IZOMBE, a de-oiling train on a cool very saline stream: the liner turndown, the centrifugal field at its ceiling, the cyclone cut with its shear penalty, the bubble rise velocity, the gas holdup and the bed cut.",
+   "advanced": "TUNU, a three stage train on a hot fresher stream: the truncated tail of the grid, the plate stage removal, the cyclone stage removal, the train outlet concentration, the outlet droplet median and the Reynolds number of a coarse droplet outside the creeping flow band.",
+   "heldItemCheck": "Every held item is neutralised BY CONSTRUCTION and every neutralisation is ASSERTED against the engine's own return values by fc7_capstone.mjs, which writes nothing if one fails. 28 such statements pass on every run. The basin runs under the fixed velocity limit and its warning is asserted null. Both graded beds are packed at the 800 micron reference grain, where the held grain exponent multiplies by one. No graded field reads a flotation cut, and the generator MEASURES that ten times the attachment efficiency moves the cut and leaves the bubble rise and the holdup identical to the last bit. The TUNU train is given no floor and no spec, and meetsSpec, marginPpm, dissolvedOilFloorPpm and floorApplied are all asserted to be withheld or absent.",
+   "tolerances": "Derived, never typed, and in ONE PLACE from the first day of the wave: src/components/course/panels/producedwater/gradedTolerance.js holds the class and the stated tolerance of each field and derives the rest, and the capstone generator, the panel guard and the lab all import it. tol = max(stated, half a unit in the last place the digest prints that class), MAX AND NEVER MIN. Three of the eighteen are widened by that rule, the three dimensionless ratios from 1e-9 to 5e-7, and --bare-stated-tolerances is the negative control that restores the stated figures and makes the generator exit 1 naming all three. precision.json is DERIVED from the same table, so gradeprecision reads 18 OF 18 CLASSIFIED."
+  },
+  "panels": {
+   "lab": "src/components/course/panels/producedwater/producedWaterLab.js (NOT WRITTEN YET; the foundation ships gradedTolerance.js and the leak guard beside it)",
+   "ids": [
+    "pw-water-explorer (Associate): the viscosity and density surfaces against temperature and salinity, the droplet distribution and its grid, and the two gravity cuts against plan area and F",
+    "pw-device-explorer (Professional): the liner sweep with its envelope and its ceiling, the flotation chain from gas rate to bubble to holdup to cut, and the bed against depth, grain and loading",
+    "pw-train-explorer (Expert): the coupling stage by stage, both medians, the refusals and the withheld verdict"
+   ]
+  },
+  "route": "/dashboard/apps/producedwater",
+  "suiteApp": "/dashboard/apps/facilities/produced-water-treatment",
+  "migrations": [
+   "course and capstones",
+   "beginner deep seed",
+   "intermediate deep seed",
+   "advanced deep seed",
+   "go-live, HELD behind the one Facilities module upload"
+  ]
+ },
+ "gates": {
+  "closure.py": "walks the import closure of the produced water family in the engines repository and proves the vendored copy sha-identical path by path. Refuses on a missing seed, an unresolvable edge or an empty closure. FIVE paths, three edges.",
+  "fc7_capstone.mjs": "writes fields.json and precision.json and asserts 28 held-item and soundness statements against the engine's own returns. --bare-stated-tolerances is the negative control and exits 1.",
+  "gate_wavejson.mjs": "every claim this file makes that can be checked against a file, checked against that file, including that every key of the constants block is a value the engine actually exports or a derived number the digest prints. Refuses below ten claims.",
+  "gate_typed_literals.py": "no number is typed into the digest. Sweeps every string literal in fc7_dump.mjs with substitutions stripped by brace depth.",
+  "gate_capstone_leak.py": "no capstone stream name, condition or graded value reaches the digest or any generator, at five renderings each including the FULL FLOAT one. Both plants proved.",
+  "gate_claims.mjs": "every relational claim the digest makes, re-computed from the engine.",
+  "gate_movement.mjs": "all eighteen graded fields re-measured against the PRE-REPAIR engine at canonical 709172f, with each field classified as unchanged, moved with a named cause, or having no pre-repair counterpart at all because the repair changed the contract.",
+  "gate_copy_rule.py": "the owner copy rule over the digest and every generator.",
+  "sweep_literals.py": "the FULL-literal sweep over prompts, explanations AND options. The kit's K8 defect is not reintroduced: this copy iterates the option TEXTS.",
+  "jest": "packages/engines __tests__/facilities.producedwater.test.js, 68 of 68 green, up from 20 before FC7-0.",
+  "vitest": "src/components/course/panels/producedwater/capstoneLeak.test.js, which reads the COMMITTED wave inputs through tools/course-waves/waveInputs.mjs and fails by name when one is missing."
+ },
+ "digest": {
+  "lines": 760,
+  "sections": 22,
+  "md5": "0a6b449afebf4b86a36d12a62446b709",
+  "guardedRefusalRows": 27,
+  "withheld": null,
+  "note": "Byte-identical across two consecutive rebuilds and three timezones. build_digest.sh is mode 755, which is checked rather than assumed: FC4's copy was committed non-executable so its reproducibility gate had never once run. SECTION 22 is the one section whose subject is history and it is framed in its own title and first line."
+ },
+ "history": {
+  "position": "FRAMED HISTORY IS CURRICULUM, UNFRAMED HISTORY IS A DEFECT. Digest SECTION 22 is the one section whose subject is what this engine used to do; it says so in its title and its first line, and nothing above it is history. Expert m05 l01 owns it.",
+  "engineComments": "Repair-history comment lines in the engine source are PROVENANCE. A sentence lifted out of one arrives with no frame, and a writer cannot frame what they did not know was history. Every writer brief in this wave says so.",
+  "framingRule": "Framing comes from the HEADING above a passage or the line immediately before it. An inline prefix inside a sentence is not framing and the gate does not read it as one.",
+  "recon": "RECON.md and FINDINGS.md in this directory are PROVENANCE AND ARE STALE ON PURPOSE. The repair moved the shipped Suite case from 1.2188 ppm at 58,786 g to 6.5387 ppm at 919 g, and the old shipped inputs now yield NO VERDICT AT ALL. Read them for the work, never for a figure. Every number a brief quotes is quoted from digest.txt."
+ }
+}

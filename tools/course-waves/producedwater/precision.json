@@ -1,0 +1,30 @@
+{
+ "Pa.s": {
+  "decimals": 12,
+  "match": "^(ogulagha_water_viscosity_pas)$"
+ },
+ "kg/m3": {
+  "decimals": 6,
+  "match": "^(ogulagha_oil_density_kgm3|ogulagha_water_density_kgm3)$"
+ },
+ "m/s": {
+  "decimals": 12,
+  "match": "^(izombe_bubble_rise_ms|ogulagha_droplet_rise_ms)$"
+ },
+ "micron": {
+  "decimals": 6,
+  "match": "^(izombe_cyclone_cut_micron|izombe_filter_cut_micron|ogulagha_basin_cut_micron|ogulagha_plate_cut_micron|tunu_cyclone_stage_median_micron|tunu_train_outlet_median_micron)$"
+ },
+ "percent": {
+  "decimals": 6,
+  "match": "^(tunu_cyclone_stage_removal_pct|tunu_plate_stage_removal_pct)$"
+ },
+ "ppm": {
+  "decimals": 6,
+  "match": "^(tunu_train_outlet_ppm)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(izombe_cyclone_shear_penalty|izombe_gas_holdup_ratio|izombe_liner_turndown_ratio|tunu_coarse_droplet_reynolds)$"
+ }
+}

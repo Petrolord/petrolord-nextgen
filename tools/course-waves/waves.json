@@ -253,5 +253,28 @@
       "digest.txt": "090d101c45aa4e8aaa93b1b301342d4834efc5210c87387395b1f778278fe8a9",
       "fields.json": "7bfa8d45e9edcee50eac517130cfa75b2cbb2d66de40bb12a4a37b5d55894c53"
     }
+  },
+  "producedwater": {
+    "course": "FC7",
+    "live": "/root/fc-wip-producedwater",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "wave.json",
+      "precision.json",
+      "truth-producedwater.json",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "fc7_dump.mjs",
+      "fc7_fields.mjs",
+      "fc7_capstone.mjs",
+      "fc7_fields_capstone.mjs",
+      "structure.py"
+    ],
+    "pins": {
+      "digest.txt": "a862bec48108544af47b9250daa3b6e19780e5b91a16c660d276cd15b0a2a813",
+      "fields.json": "73576e0fb180f1518d85e1906d0fa4041ba88b46ea479e25be33c83367f591fd"
+    }
   }
 }
