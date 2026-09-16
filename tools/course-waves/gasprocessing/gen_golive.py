@@ -863,9 +863,28 @@ RAISE = re.compile(r"raise exception '((?:[^']|'')*)'((?:[^;']|'(?:[^']|'')*')*)
 
 
 def name_the_field(m):
+    """Append every graded field THE WHOLE GUARD READS, condition included.
+
+    THE CONDITION AND NOT ONLY THE MESSAGE, and the dry run is what taught this.
+    An identity between two graded values reads both, and the first version of
+    this appender scanned only the `raise` statement: so moving
+    `beginner/inletLbMMscf` by one part in 1e7 was CAUGHT, correctly, by the
+    water-a-day identity that depends on it, and the refusal named
+    `beginner.waterLbDay` and not the field that had actually moved. A reader of
+    that message cannot tell which of the two is wrong, which is the same defect
+    as a gate that names nothing: the trusting half of a disagreeing pair is
+    exactly where a reader will not look. Every assertion now names EVERY graded
+    field it reads, so a control on any one of the eighteen is refused by name.
+    """
+    start = m.start()
+    # Back up to the `if` this raise belongs to, so the condition is scanned too.
+    head = sql_draft.rfind('\n  if ', 0, start)
+    alt = sql_draft.rfind('\n  elsif ', 0, start)
+    head = max(head, alt)
+    scope = sql_draft[head:m.end()] if head >= 0 else m.group(0)
     msg, args = m.group(1), m.group(2)
     keys = []
-    for tok in re.findall(r'\bv_[A-Za-z0-9_]+\b', m.group(0)):
+    for tok in re.findall(r'\bv_[A-Za-z0-9_]+\b', scope):
         if tok in BY_VAR and BY_VAR[tok] not in keys:
             keys.append(BY_VAR[tok])
     if not keys:
@@ -873,6 +892,7 @@ def name_the_field(m):
     return f"raise exception '{msg} [graded field: {', '.join(keys)}]'{args};"
 
 
+sql_draft = sql
 sql = RAISE.sub(name_the_field, sql)
 
 named = set()
@@ -883,9 +903,18 @@ for m in RAISE.finditer(sql):
 unnamed = [f'{t}.{k} is graded and no refusal in this file names it'
            for (t, k) in V if f'{t}.{k}' not in named]
 for m in RAISE.finditer(sql):
-    reads = [t for t in re.findall(r'\bv_[A-Za-z0-9_]+\b', m.group(0)) if t in BY_VAR]
+    head = max(sql.rfind('\n  if ', 0, m.start()), sql.rfind('\n  elsif ', 0, m.start()))
+    scope = sql[head:m.end()] if head >= 0 else m.group(0)
+    reads = [t for t in re.findall(r'\bv_[A-Za-z0-9_]+\b', scope) if t in BY_VAR]
     if reads and 'graded field:' not in m.group(1):
         unnamed.append(f'a refusal reads {reads} and names no graded field: {m.group(1)[:80]}')
+    named_here = re.search(r'\[graded field: ([^\]]*)\]', m.group(1))
+    if reads and named_here:
+        want = {BY_VAR[t] for t in reads}
+        got = {x.strip() for x in named_here.group(1).split(',')}
+        if want - got:
+            unnamed.append('a refusal reads ' + ', '.join(sorted(want - got))
+                           + f' and does not name it: {m.group(1)[:80]}')
 
 # --------------------------------------------- THE INTEGER-DIVISION GUARD
 intdiv = []

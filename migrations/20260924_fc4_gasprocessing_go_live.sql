@@ -486,17 +486,17 @@ begin
      or v_exp_t2F is null
      or v_exp_waterInLbMMscf is null
      or v_exp_waterOutLbMMscf is null then
-    raise exception 'FC4 go-live refused: one or more of the eighteen graded fields is missing';
+    raise exception 'FC4 go-live refused: one or more of the eighteen graded fields is missing [graded field: beginner.inletLbMMscf, beginner.waterLbDay, beginner.circGpm, beginner.circGpd, beginner.sensiblePerGal, beginner.btexTonsYear, intermediate.fractionRemoved, intermediate.stagesNeeded, intermediate.acidMolesDay, intermediate.circGpm, intermediate.reboilerMMBtuHr, intermediate.circGpmRetuned, advanced.dzdT, advanced.muFPerPsi, advanced.dropF, advanced.t2F, advanced.waterInLbMMscf, advanced.waterOutLbMMscf]';
   end if;
 
   -- ------------------------------------------- the Associate, IKOT ABASI
   -- The water a day is the CONTENT DIFFERENCE applied to the rate, which is the
   -- intensive-against-extensive distinction the whole tier is built on.
   if abs(v_ass_waterLbDay - (v_ass_inletLbMMscf - 5.0) * 47.0) > 1e-09 then
-    raise exception 'FC4 go-live refused: the water a day of % lb is not the content difference applied to % MMscfd [graded field: beginner.waterLbDay]', v_ass_waterLbDay, 47.0;
+    raise exception 'FC4 go-live refused: the water a day of % lb is not the content difference applied to % MMscfd [graded field: beginner.waterLbDay, beginner.inletLbMMscf]', v_ass_waterLbDay, 47.0;
   end if;
   if abs(v_ass_circGpd - v_ass_waterLbDay * 3.6) > 1e-09 then
-    raise exception 'FC4 go-live refused: the daily glycol volume of % gallons is not the stated ratio of % on that water [graded field: beginner.circGpd]', v_ass_circGpd, 3.6;
+    raise exception 'FC4 go-live refused: the daily glycol volume of % gallons is not the stated ratio of % on that water [graded field: beginner.circGpd, beginner.waterLbDay]', v_ass_circGpd, 3.6;
   end if;
   if abs(v_ass_circGpm - v_ass_circGpd / 1440.0) > 1e-12 then
     raise exception 'FC4 go-live refused: the glycol circulation of % gpm and % gallons a day are not one quantity in two units [graded field: beginner.circGpm, beginner.circGpd]', v_ass_circGpm, v_ass_circGpd;
@@ -545,21 +545,21 @@ begin
   if abs(v_pro_circGpm - (v_pro_acidMolesDay / (0.38 - 0.07))
          * 105.14 / (33.0 / 100.0)
          / (8.34 * 1.02) / 1440.0) > 1e-08 then
-    raise exception 'FC4 go-live refused: the amine circulation of % gpm does not close the mole balance on a swing of % [graded field: intermediate.circGpm]', v_pro_circGpm, 0.31;
+    raise exception 'FC4 go-live refused: the amine circulation of % gpm does not close the mole balance on a swing of % [graded field: intermediate.circGpm, intermediate.acidMolesDay]', v_pro_circGpm, 0.31;
   end if;
   if abs(v_pro_reboilerMMBtuHr - v_pro_circGpm * 60.0 * 920.0 / 1e6) > 1e-12 then
-    raise exception 'FC4 go-live refused: the regenerator duty of % MMBtu an hour is not that circulation at the stated % Btu a gallon [graded field: intermediate.reboilerMMBtuHr]', v_pro_reboilerMMBtuHr, 920.0;
+    raise exception 'FC4 go-live refused: the regenerator duty of % MMBtu an hour is not that circulation at the stated % Btu a gallon [graded field: intermediate.reboilerMMBtuHr, intermediate.circGpm]', v_pro_reboilerMMBtuHr, 920.0;
   end if;
   if abs(v_pro_circGpmRetuned - (v_pro_acidMolesDay / (0.38 - 0.03))
          * 105.14 / (33.0 / 100.0)
          / (8.34 * 1.02) / 1440.0) > 1e-08 then
-    raise exception 'FC4 go-live refused: the retuned circulation of % gpm is not the same balance on the wider swing of % [graded field: intermediate.circGpmRetuned]', v_pro_circGpmRetuned, 0.35;
+    raise exception 'FC4 go-live refused: the retuned circulation of % gpm is not the same balance on the wider swing of % [graded field: intermediate.circGpmRetuned, intermediate.acidMolesDay]', v_pro_circGpmRetuned, 0.35;
   end if;
   -- ONE MOLE BALANCE, TWO SWINGS. This is the retune's whole lesson as
   -- arithmetic: neither circulation can move without the other.
   if abs(v_pro_circGpmRetuned * (0.38 - 0.03)
          - v_pro_circGpm * (0.38 - 0.07)) > 1e-08 then
-    raise exception 'FC4 go-live refused: the surveyed circulation of % gpm and the retuned % gpm are not one mole balance read at two swings [graded field: intermediate.circGpm, intermediate.circGpmRetuned]', v_pro_circGpm, v_pro_circGpmRetuned;
+    raise exception 'FC4 go-live refused: the surveyed circulation of % gpm and the retuned % gpm are not one mole balance read at two swings [graded field: intermediate.circGpmRetuned, intermediate.circGpm]', v_pro_circGpm, v_pro_circGpmRetuned;
   end if;
   if not (v_pro_circGpmRetuned < v_pro_circGpm) then
     raise exception 'FC4 go-live refused: the retune to a leaner lean did not reduce the circulation, which is what widening the swing buys: % against % [graded field: intermediate.circGpmRetuned, intermediate.circGpm]', v_pro_circGpmRetuned, v_pro_circGpm;
@@ -595,10 +595,10 @@ begin
   -- and neither can move alone.
   if abs(v_exp_muFPerPsi - (10.7316 / (10.2 * 5.403953210180594))
          * 546.6700000000001 * 546.6700000000001 * v_exp_dzdT / 935.0) > 1e-15 then
-    raise exception 'FC4 go-live refused: the coefficient of % degF a psi is not the graded derivative through a heat capacity of % Btu a lbmol degF [graded field: advanced.muFPerPsi]', v_exp_muFPerPsi, 10.2;
+    raise exception 'FC4 go-live refused: the coefficient of % degF a psi is not the graded derivative through a heat capacity of % Btu a lbmol degF [graded field: advanced.muFPerPsi, advanced.dzdT]', v_exp_muFPerPsi, 10.2;
   end if;
   if abs(v_exp_t2F - (87.0 - v_exp_dropF)) > 1e-12 then
-    raise exception 'FC4 go-live refused: the separator temperature of % degF is not the inlet of % less the drop [graded field: advanced.t2F]', v_exp_t2F, 87.0;
+    raise exception 'FC4 go-live refused: the separator temperature of % degF is not the inlet of % less the drop [graded field: advanced.t2F, advanced.dropF]', v_exp_t2F, 87.0;
   end if;
   -- THE COOLING IS A MARCH, so what is asserted is the error the tier exists to
   -- show: the one-step answer the INLET coefficient would give, and the band the
