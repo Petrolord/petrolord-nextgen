@@ -27,7 +27,7 @@ The shape is a blend. The first 5000 bopd pay 5 percent, the next 5000 pay 7.5 p
 
 pia_marginal_field_blend produces 2920000 bbl in 2025, 8000 bopd, and the digest describes the split as the first 5000 bopd at 5 percent and the balance at 7.5 percent. Its production royalty is 13870000.00 on 233600000.00 of gross revenue, the 0.059375 in the table. pia_marginal_field_pre_2021 is true, so the hydrocarbon tax rate is 0.150000 rather than 0.300000: HCT is 26361776.50 on a chargeable profit of 175745176.68. NPV 62918717.76, take 65.7305 percent.
 
-AKATA as a marginal field lifts 2200000 bbl in 2029, a daily rate between the 6000 and 8000 bopd rows, and its production royalty is 10182990.00 against 22944240.00 as shallow water. But its HCT is 29251153.65 in 2029 against 25422778.65, because the pre-2021 flag was not set and the field pays 30 percent on a base that the smaller royalty has left larger. Total royalties fall to 60841733.38, total tax rises to 223261390.90, and NPV is 61154067.34 against 42943268.01. The terrain string cut the royalty in half and the tax took most of the gain back.
+AKATA as a marginal field lifts 2200000 bbl in 2029, a daily rate between the 6000 and 8000 bopd rows, and its production royalty is 10182990.00 against 22944240.00 as shallow water. But its HCT is 29251153.65 in 2029 against 25422778.65, because the pre-2021 flag was not set and the field pays 30 percent on a base that the smaller royalty has left larger. Total royalties fall to 60841733.38, total tax rises to 223261390.90, and NPV is 61154067.34 against 43223505.88. The terrain string cut the royalty in half and the tax took most of the gain back.
 
 ## The mistake
 

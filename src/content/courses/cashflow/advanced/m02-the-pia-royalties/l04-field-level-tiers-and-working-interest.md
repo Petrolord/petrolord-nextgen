@@ -20,7 +20,7 @@ The naive row is a different field. At half the daily rate it is under the 50000
 
 ## AKATA at half
 
-AKATA under the PIA at pia_working_interest_pct 50 reports NPV 21471634.00, half of 42943268.01; royalties 61196822.32, half of 122393644.64; CPR claimed 33000000.00 in 2029, half of 66000000.00; allowance 2750000.00 on 2200000.00 eligible bbl, the field's barrels. IRR 21.3196 percent and take 75.6789 percent are unchanged. Under joint venture terms the same field's take rises from 66.1723 percent at WI 100 to 79.7034 at WI 60, because the JV rows keep field-level revenue and count the partners' share as take. PIA take is invariant because the whole ledger was scaled.
+AKATA under the PIA at pia_working_interest_pct 50 reports NPV 21611752.94, half of 43223505.88; royalties 61196822.32, half of 122393644.64; CPR claimed 33000000.00 in 2029, half of 66000000.00; allowance 2750000.00 on 2200000.00 eligible bbl, the field's barrels. IRR 21.3784 percent and take 75.5752 percent are unchanged. Joint venture terms behave the same way since engines 3.10.0, which put every JV monetary line and the volumes at the share as well: AKATA under JV reads take 66.1723 percent at a working interest of 100, 75, 60, 40 and 25 alike. Until that repair the JV rows kept field-level revenue and counted the partners' share as take, so the same field read 79.7034 percent at 60 percent. Take is invariant under both regimes now, for the same reason in each: the whole ledger was scaled.
 
 ## The mistake
 

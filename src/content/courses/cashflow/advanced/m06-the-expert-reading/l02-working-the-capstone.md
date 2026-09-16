@@ -6,7 +6,7 @@ A fiscal ledger is worked from the outside in: regime, framework, terrain, then 
 
 ## Fix the regime and the framework before any number
 
-Read the fiscal regime and the base year, and write the framework down. Under the PIA a base year of 2025 on auto gives pia_only and 2026 gives nta_2025; AKATA's 2029 gives nta_2025, so its last line is a development levy, 5390489.91 in 2029, and its TET is 0.00. Forced to pia_only the same rows pay TET of 3369056.19 and NPV moves from 42943268.01 to 49521778.87. Get the framework wrong and every row's last line is wrong.
+Read the fiscal regime and the base year, and write the framework down. Under the PIA a base year of 2025 on auto gives pia_only and 2026 gives nta_2025; AKATA's 2029 gives nta_2025, so its last line is a development levy, 5390489.91 in 2029, and its TET is 0.00. Forced to pia_only the same rows pay TET of 3369056.19 and NPV moves from 43223505.88 to 49802016.74. Get the framework wrong and every row's last line is wrong.
 
 ## Fix the terrain, the lease and the reading
 
@@ -18,7 +18,7 @@ Take AKATA's 2029 row. Gross revenue 186032000.00. Royalty 26549752.36, producti
 
 ## Decide the end of the ledger
 
-Read whether the economic limit is on; with it off, a losing tail stays and hands the IRR a terminal negative. Read the abandonment mode, and if it is a lump sum, whether the number entered is the share. Then read the sign of the final net cash flow before believing any IRR.
+Read whether the economic limit is on; with it off, a losing tail stays and hands the IRR a terminal negative, which since engines 3.10.0 comes back as null with a status. Read the abandonment mode and whether the number entered is the share, which it must be under either mode. Then read the sign of the final net cash flow before believing any IRR.
 
 ## Before you submit
 
@@ -28,14 +28,14 @@ Read whether the economic limit is on; with it off, a losing tail stays and hand
 | Last line | TET or the levy, never both, at 2.5 or 4 percent of the assessable profit |
 | Royalties | Sum to the KPI, 122393644.64 on AKATA |
 | Loss columns | Offsets used on the row after the loss, per base |
-| Final flow | Sign read; negative means the IRR is one root of possibly two |
+| Final flow | Sign read; negative often means the IRR comes back null with a status |
 | Headline | Basis, convention and framework written beside it |
 
 Then the units: USD, bbl, Mscf, boe at 6 Mscf per barrel, percent as a word, calendar years.
 
 ## The mistake
 
-The careful mistake is to check the rates and skip the bases. Every rate on AKATA under the PIA is a published number, and a ledger can carry every one of them correctly and still report 61725382.46 where 141623594.88 is right, because one string was read the other way. The strings are where the marks are lost.
+The careful mistake is to check the rates and skip the bases. Every rate on AKATA under the PIA is published, and a ledger can carry them all correctly and still report 61725382.46 where 141623594.88 is right, because one string was read the other way. The strings are where the marks are lost.
 
 ## Exercise
 

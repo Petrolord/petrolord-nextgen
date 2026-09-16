@@ -1,6 +1,6 @@
 # The sinking fund
 
-The same abandonment cost paid as contributions instead of a lump sum. It rides the opex lane, it relieves the profit taxes, and it scales with the working interest when the lump sum does not.
+The same abandonment cost paid as contributions instead of a lump sum. It rides the opex lane, it relieves the profit taxes, and it changes what a field is worth without changing what it costs.
 
 {{panel:ec-fiscal-explorer}}
 
@@ -14,26 +14,26 @@ Under the PIA the contribution relieves the two profit taxes at their rates and 
 
 | Funding | Contributions | Total tax | NPV | IRR, percent |
 | --- | --- | --- | --- | --- |
-| lump sum in 2035 | none | 148425219.46 | 38666394.86 | 23.2570 |
+| lump sum in 2035 | none | 148425219.46 | 38666394.86 | null |
 | fund from 2029 | 8571428.57 a year | 124585925.52 | 44902775.54 | 21.9086 |
 | fund from 2032 | 15000000.00 a year | 127157354.09 | 47415100.31 | 23.9820 |
 
-Starting early spreads the cost thin, seven contributions of 8571428.57, and relieves the most tax; starting in 2032 pays four of 15000000.00 and gives the higher NPV, because the money leaves later. Both beat the lump sum on NPV. The early fund loses to it on IRR, 21.9086 percent against 23.2570, because money moved out of the early years hurts a rate more than a present value. NPV and IRR disagree, and neither is wrong.
+Starting early spreads the cost thin and relieves the most tax; starting in 2032 pays four contributions of 15000000.00 and gives the higher NPV, because the money leaves later. The early fund loses to the late one on IRR as well, 21.9086 percent against 23.9820, because money moved out of the early years hurts a rate more than a present value. The lump sum offers no rate to compare: its terminal negative leaves the engine returning null.
 
-## The number that scales
+## The number that is the share under both modes
 
-pia_sinking_fund_wi_50 runs the same PIA example at a 50 percent working interest. Total fund contributions read 15000000.00 while total_abandonment_cost and abandonment_cost_funded still read 30000000.00. The contribution was halved with the other monetary lines; the cost it funds was not. NPV is 61592785.17 and the unit technical cost 29.726027 against 28.082192 at full interest.
+pia_sinking_fund_wi_50 runs the same PIA example at a 50 percent working interest. Total fund contributions read 30000000.00, and total_abandonment_cost and abandonment_cost_funded read the same 30000000.00: the fund collects what was entered. NPV is 55592785.17 and the unit technical cost 29.726027 against 28.082192 at full interest, because one bill is spread over half the barrels.
 
-Set that beside the lump sum. On AKATA at 50 percent the fund's IRR is 21.9086 percent, the same as at 100 percent, while the lump sum's falls from 23.2570 to 12.7634. The fund moved with the share; the lump sum did not. Under one mode abandonment_cost_usd is a share-level number and under the other a field-level one, and the engine does not say which.
+That row read differently until engines 3.10.0. The contribution was halved with the other monetary lines while the cost it funded was not, so the fund collected 15000000.00 against a reported 30000000.00 and NPV read 61592785.17. The repair grosses the fund by one over the working interest, so abandonment_cost_usd is the share under both modes. On AKATA at 50 percent the fund now collects the whole 60000000.00 and reports NPV 7713047.81 with IRR 14.1861 percent, against the lump sum's 2398979.53 and null.
 
 ## The mistake
 
-The careful mistake is to switch funding modes at a partial working interest and read the result as timing. On AKATA at 50 percent the lump sum reports NPV 2398979.53 and the fund 22451387.77. Most of that gap is 60000000 charged against a half share on one side and a half-scaled fund on the other.
+The careful mistake is the one the old behaviour taught: reading the gap between the modes at a partial interest as an artefact of scaling. On AKATA at 50 percent the lump sum reports 2398979.53 and the fund 7713047.81, and both charge the same 60000000.00 against the same half share. The gap is timing and tax relief, 74212609.73 against 52007248.47.
 
 ## What the engine refuses
 
-It refuses to relieve the levies with the contribution: TET is 25999871.36 with or without the fund. It refuses to reconcile contributions with the cost: 15000000.00 collected, 30000000.00 reported. And it refuses to flag the inconsistency between the modes, so the reader has to know that one is the share and the other the field.
+It refuses to relieve the levies: TET is 25999871.36 with or without the fund. It refuses to earn anything on the money set aside, so a fund is a timing device and not an investment. And it reports the mode nowhere but the KPI line.
 
 ## Exercise
 
-Order the AKATA timing table by NPV and then by IRR, and explain why the orders differ. Then say what a 50 percent partner must do to abandonment_cost_usd before switching from a lump sum to a fund, and why.
+Order the AKATA timing table by NPV and then by IRR, and explain why the orders differ. Then say what a 50 percent partner must enter for abandonment_cost_usd under each mode, and why the answer is the same.

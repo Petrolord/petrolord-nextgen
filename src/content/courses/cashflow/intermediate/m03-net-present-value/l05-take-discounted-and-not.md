@@ -12,18 +12,20 @@ Read as a share, it is not a rate. The royalty rate is 15 percent and the tax ra
 
 ## The discounted take
 
-The same shares on present values give 76.1610 percent. It is higher because the government's share arrives earlier than the contractor's: royalty is taken from the first barrel in 2029, while the contractor's running total is negative until 2032 and is recovered in the tail years that discounting reduces most. Both figures are readings of one field: the first on totals in money of the day, the second on present values at the applied rate. Every published case with a tail shows the same direction: jv_analytic_decision_kpis 80.7692 against 82.2761, multiyear_jv_real 69.2573 against 75.4578, multiyear_pia_real 71.1024 against 77.4499. single_year_positive, with one row and nothing to discount, reads 61.1111 percent both ways.
+The same shares on present values give 76.1610 percent. It is higher because the government's share arrives earlier than the contractor's: royalty is taken from the first barrel in 2029, while the contractor's running total is negative until 2032 and is recovered in the tail years that discounting reduces most. Every published case with a tail shows the same direction: jv_analytic_decision_kpis 80.7692 against 82.2761, multiyear_jv_real 69.2573 against 75.4578, multiyear_pia_real 71.1024 against 77.4499. single_year_positive, with one row and nothing to discount, reads 61.1111 percent both ways.
 
 ## The mistake
 
-The careful mistake is to read take as a property of the fiscal terms. On AKATA at 75 percent working interest, with the same 15 and 40 percent, the reported take is 74.6292 percent; at 25 percent it is 91.5431. The rates did not change. The figure is the share of the whole field's pre-take value that does not reach your ledger, and at a partial interest that includes the partners' share. A take quoted without its working interest, like an NPV quoted without its convention, is not comparable to anything.
+The careful mistake is to expect take to move with the working interest. It does not. AKATA reports 66.1723 percent at a working interest of 100 percent, and 66.1723 at 75, at 60, at 40 and at 25. Every monetary line and the volumes are the share: 2029 gross revenue is 186032000.00 at 100 percent and 111619200.00 at 60, total oil 9680000.00 bbl against 5808000.00. Both sides of the ratio are scaled by one factor, so the share holds.
+
+Until engines 3.10.0 the joint venture ledger kept revenue, volumes, opex, capex and depreciation at field level while reporting royalty, tax and net cash flow at the share, so the partners' portion counted as government take and the figure rose as the interest fell: 74.6292 percent at 75 and 91.5431 at 25. A take quoted from a report of that vintage is not comparable with one quoted today.
 
 The second mistake is to compare a take across a sunk boundary. valuation_year_sunk reports 58.3333 percent where the same rows valued without the sunk flag report 80.7692, because the capex year left the residual.
 
 ## What take refuses
 
-It refuses to exist when the residual is not positive: zero_rates_capex_only and jv_loss_unused_at_cessation report take null and discounted take null. It refuses to distinguish royalty from tax; it is one share. And it refuses to say who is better off, since a high take on a large residual can leave the contractor more than a low take on a small one.
+It refuses to exist when the residual is not positive: zero_rates_capex_only and jv_loss_unused_at_cessation report take null and discounted take null. It refuses to distinguish royalty from tax; it is one share. It refuses to move with the working interest. And it refuses to say who is better off.
 
 ## Exercise
 
-Read the undiscounted and the discounted take on AKATA and explain, from the timing of royalty against net cash flow, why the second is higher. Then change the working interest and say what the take figure is measuring.
+Read the undiscounted and the discounted take on AKATA and explain, from the timing of royalty against net cash flow, why the second is higher. Then change the working interest and say why the figure does not move.
