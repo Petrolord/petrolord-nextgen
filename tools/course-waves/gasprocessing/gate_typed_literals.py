@@ -1,0 +1,148 @@
+#!/usr/bin/env python3
+"""GATE: no number is TYPED into the digest.
+
+Every figure in digest.txt has to be a return value of the engine, a golden,
+or arithmetic on values printed on the same line. The only way a typed number
+can reach the digest is a numeric literal sitting in a printed template string
+in fc4_dump.mjs OUTSIDE a ${...} substitution.
+
+This sweeps fc4_dump.mjs for exactly that: it strips every ${...} group from
+every w(`...`) and w('...') argument, then reports every numeric literal left
+in the prose. Each survivor must be listed in ALLOWED below with the reason it
+is allowed to be prose rather than a measurement, or the gate fails.
+
+It prints how many w() calls it examined and how many literals it swept, so a
+green run that examined nothing is not possible.
+"""
+import re, sys, os
+
+DUMP = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fc4_dump.mjs')
+
+# Numbers allowed to appear as PROSE in a printed string, each with its reason.
+ALLOWED = {
+ '231':   'cubic inches in a gallon, a definition, used in a stated conversion whose result is printed beside it',
+ '1728':  'cubic inches in a cubic foot, a definition, used in the same stated conversion',
+ '60':    'minutes in an hour, in the stated conversion of the amine duty column, whose result is printed beside it',
+ '180':   'names a row of the BTEX table printed directly above, whose ratio to another named row is computed on the same line',
+ '0.1':   'names a row of the same BTEX table, on the same terms',
+ '0.2':   'names a row of the same BTEX table, on the same terms',
+ '90':    'the lean glycol band edge the engine names in its OWN refusal message, quoted in the prose that explains the refusal and in the row label that asks for it',
+ '100':   'the other edge of the same band, on the same terms',
+ '200':   'a stage count naming a column the table beside it prints, and the same count in the prose that reads that column',
+ '12':    'a stage count naming the other column of the same table',
+ # SECTION 20 IS FRAMED HISTORY, and these four are facts about the WORK
+ # rather than about the engine, so no probe can measure them. They are the
+ # only typed figures in this digest and each is named here with what it is
+ # and why it cannot be measured. The comment counts in the same section are
+ # NOT here: those are counted by reading the engine source.
+ '49':    'SECTION 20, framed history: the number of findings the recon raised. A fact about the work, not a value any call to the engine can return',
+ '1':     'SECTION 20, framed history: the numerator of "1 over z", a column label over compressibilities the engine does report',
+ '5':     'SECTION 20, framed history: the lower edge of the band that was the routine only check. The band no longer exists in the engine, so nothing can be asked for it',
+ '9':     'SECTION 20, framed history: the upper edge of that same band',
+}
+
+def strip_substitutions(text):
+    """Remove every ${...} group, matching braces by DEPTH so a substitution
+    holding an object literal or a nested template is removed whole. A regex
+    that only handles one level of nesting leaks the tail of the expression
+    into the prose and the gate then sweeps code as if it were output."""
+    out, i, n = [], 0, len(text)
+    while i < n:
+        if text[i] == '$' and i + 1 < n and text[i + 1] == '{':
+            depth, i = 1, i + 2
+            while i < n and depth:
+                if text[i] == '{':
+                    depth += 1
+                elif text[i] == '}':
+                    depth -= 1
+                i += 1
+            out.append(' ')
+        else:
+            out.append(text[i])
+            i += 1
+    return ''.join(out)
+
+
+def main():
+    src = open(DUMP, encoding='utf-8').read()
+    # EVERY string literal in the file, not only the ones handed straight to
+    # w(). Row labels live in arrays and reach the digest through a forEach,
+    # so a gate that only read w() arguments would miss exactly the strings a
+    # writer is most likely to type a number into. Line comments are stripped
+    # first so the module header's own prose is not swept as output.
+    body_src = re.sub(r'^\s*//.*$', '', src, flags=re.M)
+    # Strip every ${...} at SOURCE level first. A nested backtick template
+    # inside a substitution would otherwise split the outer literal in two and
+    # feed the gate a fragment of code as if it were prose.
+    body_src = strip_substitutions(body_src)
+    calls = re.findall(r"(`(?:[^`\\]|\\.)*`|'(?:[^'\\]|\\.)*')", body_src, re.S)
+    # Import specifiers and file paths are addresses, not output. Excluded by
+    # SHAPE rather than by substring: a substring filter on the word "engines"
+    # silently skipped a prose line reading "54 across the vendored engines"
+    # and with it two typed figures, which is a gate quietly not examining
+    # the thing it reports on.
+    def is_path(lit):
+        body = lit[1:-1].strip()
+        if ' ' in body:
+            return False
+        return bool(re.match(r'^(\.{0,2}/|node:|[A-Za-z0-9_@./-]+\.(mjs|js|json|py|md|txt))', body)) \
+            or body.startswith('/') or body in ('utf8',)
+    skipped = [c for c in calls if is_path(c)]
+    calls = [c for c in calls if not is_path(c)]
+    swept, bad, seen = 0, [], []
+    for c in calls:
+        body = c[1:-1]
+        # A CROSS-REFERENCE IS NOT A QUANTITY. Section numbers, the repair
+        # wave's name and module and lesson keys are addresses in this
+        # package, not measurements, so they are removed by SHAPE rather
+        # than allowlisted by value, which would blind the gate to the same
+        # digits used as a figure.
+        body = re.sub(r'#?\s*SECTIONS?\s+\d+(?:\s*,\s*\d+)*(?:\s+and\s+\d+)?', ' SECTIONREF ', body, flags=re.I)
+        body = re.sub(r'FC\d-\d', ' WAVEREF ', body)
+        body = re.sub(r'\b[ml]\d{2}\b', ' KEYREF ', body)
+        # A DERIVATION IS NOT A MEASUREMENT. Section 14 prints the relation
+        # the module derives, and the exponents in it are algebra rather
+        # than figures. Recognised by SHAPE: an indented line that is all
+        # symbols, operators and single letters, with no units and no
+        # decimal point. A number with a decimal point is never exempted
+        # here, so a real figure typed into a formula line still fails.
+        # A DERIVATION OR A CLOSED FORM IS NOT A MEASUREMENT. Recognised by
+        # SHAPE: an indented line whose first token is a short symbol and
+        # whose second is an equals sign, with no decimal point anywhere in
+        # it. A figure has a decimal point in this digest, so a real number
+        # typed into a formula line still fails; the negative control for
+        # that is run and recorded.
+        if (re.match(r'^\s{4,}\S', body) and '=' in body
+                and not re.search(r'\d\.\d', body)):
+            # Only SINGLE DIGITS are algebra: an exponent, an offset of one,
+            # a branch condition. A multi-digit integer on a formula line is
+            # a figure wearing a formula's clothes and still fails. Both
+            # halves have a negative control, one with a decimal figure and
+            # one with a whole number, and both are recorded in wave.json.
+            body = re.sub(r'(?<!\d)\d(?!\d)', ' ALGEBRA ', body)
+        for m in re.finditer(r'(?<![\w.])\d+(?:\.\d+)?(?:e[-+]?\d+)?(?![\w.])|1e6', body):
+            swept += 1
+            tok = m.group(0)
+            if tok in ALLOWED:
+                seen.append(tok)
+                continue
+            bad.append((tok, body[max(0, m.start()-60):m.start()+40].replace('\n', ' ')))
+    print(f'  string literals examined: {len(calls)}  (paths excluded by shape: {len(skipped)})')
+    print(f'  numeric literals swept in printed prose: {swept}')
+    print(f'  allowed-with-a-reason entries: {len(ALLOWED)}')
+    used = sorted(set(seen))
+    dead = sorted(set(ALLOWED) - set(used))
+    print(f'  allowed entries actually hit: {len(used)} -> {used}')
+    print(f'  DEAD allowed entries (the ledger has gone stale): {len(dead)} -> {dead}')
+    print(f'  UNEXPLAINED TYPED NUMBERS: {len(bad)}')
+    for tok, ctx in bad:
+        print(f'   TYPED "{tok}"  ... {ctx}')
+    if len(calls) < 100 or swept < 5:
+        print('  GATE REFUSES: it examined too little to have checked anything')
+        return 2
+    if dead:
+        print('  GATE FAILS: an allowed entry that nothing hits is a dead row, not an amnesty')
+        return 1
+    return 1 if bad else 0
+
+sys.exit(main())

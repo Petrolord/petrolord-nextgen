@@ -1,0 +1,120 @@
+{
+ "slug": "gasprocessing",
+ "prefix": "fc4",
+ "name": "Gas Processing",
+ "pathOrder": 42,
+ "module": "facilities",
+ "prerequisite": null,
+ "repo": "/root/wt-fc4-nextgen",
+ "branch": "feat/fc4-gasprocessing-course",
+ "goldens": [
+  "facilities/goldens/gasprocessing_cases.json"
+ ],
+ "engines": [
+  "engines/facilities/gasProcessing.js",
+  "engines/production/gasProperties.js",
+  "engines/facilities/separatorSizing.js"
+ ],
+ "enginesVendoredAt": "NextGen, sha-identical with engines 82ec6d4 (the FC4-0 repair). TEN paths, not four: the repaired engine imports the DAK validity band from separatorSizing.js, which carries FC1 separation engine, golden, oracle and suite with it, plus two findings records. Proven three independent ways and walked as an import closure inside the vendored tree. Vendoring guard clean over 551 paths.",
+ "constants": {
+  "2": "the customary circulation band, low, gal a lb. DECLARED",
+  "5": "the customary circulation band, high. DECLARED",
+  "50": "the same, high, degC. Between this and the guard the engine answers and attaches an extrapolation note",
+  "60": "the water fit band, high, degC. EXPORTED, and the guard now enforces exactly it",
+  "92": "the BTEX molecular weight default, toluene standing for a four-compound cut. DECLARED",
+  "140": "the same band at the module door, high, degF. EXPORTED. A gas above this is REFUSED BY NAME and that is a LIVE behaviour",
+  "1000": "the pressure above which the ideal-mixing water content carries a chart warning, psia. DECLARED",
+  "1100": "the water overhead the reboiler pays for, Btu a lb. DECLARED, and an input with this as its default",
+  "14.696": "the standard pressure of this module, psia. EXPORTED",
+  "519.67": "the standard temperature of this module, degR. EXPORTED",
+  "379.48357185628737": "standard cubic feet a pound mole, DERIVED from the gas constant at the base above and EXPORTED. Measured out of the BTEX mole balance in digest Section 2",
+  "7.48051948051948": "US gallons in a cubic foot, exact as 1728 over 231. EXPORTED",
+  "9.3": "glycol, lb a gallon. DECLARED: no publication in this repository checks it",
+  "69.56883116883117": "the same glycol density in lb a ft3, derived. The module has ONE glycol density and both the loop balance and the vessel sizing read it",
+  "8.34": "water, lb a gallon, in the amine gallons chain. DECLARED",
+  "18.01528": "the molecular weight of water. DECLARED",
+  "0.61094": "the Magnus coefficient. DECLARED",
+  "17.625": "the Magnus numerator. DECLARED",
+  "243.04": "the Magnus denominator. DECLARED",
+  "-45": "the water fit band, low, degC. EXPORTED",
+  "-49": "the same band at the module door, low, degF. EXPORTED",
+  "-40": "the narrower band the Magnus coefficients were published over, low, degC. EXPORTED",
+  "10.7316": "the gas constant, psia ft3 per lbmol degR. Exported by the gas properties door",
+  "28.9625": "the molecular weight of dry air. Exported by the gas properties door",
+  "459.67": "the Rankine offset, degF to degR. Exported by the gas properties door"
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3"
+ ],
+ "plan": {
+  "state": "FOUNDATION COMPLETE AND RE-VENDORED at engines 82ec6d4. Digest Section 14 BUILT. All 78 lessons writable. No lesson, bank, capstone answer file, panel or migration written yet.",
+  "thesis": "Gas conditioning is three separate balances over one stream, and the discipline is knowing which of the numbers in front of you the engine COMPUTED, which one you CHOSE, and which one it simply kept to itself.",
+  "tiers": {
+   "beginner": "Associate. WATER, AND WHAT IT COSTS TO TAKE OUT. Why: the water chain is the only part of this engine that runs end to end in closed form, so a learner can watch a whole answer assemble before anything iterates or solves. It is also where the difference between an intensive answer and an extensive one is sharpest, because the water content knows nothing about the rate and the circulation is nothing but the rate applied to it. And it is where the module's own doctrine first bites: the circulation ratio is a CHOICE the engine refuses to make, and the reboiler duty is split into named parts instead of arriving as one number. The tier ends where one column becomes several stages.",
+   "intermediate": "Professional. STAGES, SOLVENTS AND WHAT A COLUMN COSTS. Why: a contactor is not a tank, and the moment it is read as a staged device a ceiling appears that no amount of steel can buy past. Below an absorption factor of one the removal cannot exceed the factor itself, however many trays are bought, and the engine's refusal says the remedy is more solvent rather than more stages. The amine half then answers the same shape of question by a completely different route, a mole balance with a loading swing, and the two arrive at a circulation for reasons that have nothing in common. The tier ends able to say which question a given number answers.",
+   "advanced": "Expert. THE COLD END, THE OVERHEAD, AND WHERE THE METHOD STOPS. Why: the two things left are the ones the rest of the platform hands to this engine and to nobody else. It is the only module in the package that COMPUTES a Joule-Thomson coefficient, and the Flow Assurance engine asks a caller to type one in; and the still overhead is the only emissions figure the Facilities engines produce at all. Then the audit, which on this engine is unusually rich: what was computed, what was chosen, what was kept, and the difference between a published case that could have caught an error and one that could not."
+  },
+  "modulesPerTier": 6,
+  "lessonsPerTier": 26,
+  "questionsPerTier": 132,
+  "questionsPerModuleBank": 15,
+  "examQuestions": 42,
+  "lessonLength": {
+   "band": "420 to 560 words, ranked by est_minutes within a tier",
+   "measure": "PROSE WORDS ONLY, counted the way lengths.py counts them: front matter, markdown table rows, headings and {{panel:...}} lines are all excluded. A raw `wc -w` over the whole file is NOT this measure and runs materially higher, so a lesson can be inside the band and still fail a raw word count. State which measure before quoting a number at a writer."
+  },
+  "capstones": {
+   "count": 3,
+   "gradedFieldsEach": 6,
+   "beginner": "IKOT ABASI, a TEG dehydration train: the saturated inlet water content, the water taken out in lb a day, the circulation in gpm and in gallons a day, the sensible heat per gallon, and the BTEX in short tons a year.",
+   "intermediate": "OTUMARA, a sour gas train: the removal at the stated stage count, the stages the contract spec demands, the acid gas picked up in lbmol a day, the amine circulation, the regenerator duty, and the circulation again after the regenerator is retuned to a leaner lean.",
+   "advanced": "ESCRAVOS, a dew point skid: the compressibility temperature derivative at the inlet, the Joule-Thomson coefficient, the cooling, the separator inlet temperature, and the water the gas carries at the inlet and can still hold at the cold spot. Ordered so the one field MEASURED to be stable across the vendoring leads.",
+   "heldItemCheck": "Every held item is neutralised by CONSTRUCTION rather than by a lookup. The McKetta real-gas correction is held, so IKOT ABASI and both ESCRAVOS water reads sit BELOW the pressure at which the engine warns, verified by asserting the warning is null on all three. The 1100 Btu per lb overhead is held, so NO Associate graded field reads a reboiler duty: the SENSIBLE half, which is built entirely from stated inputs, is what is graded. The contactor's liquid density is held and is the wrong fluid for an amine, so NO Professional graded field reads a contactor diameter. The amine duty per gallon is customary, so OTUMARA states its own 920. The BTEX absorbed fraction and molecular weight are operating values and are stated on the one capstone that grades a BTEX figure. STABILITY IS MEASURED, NOT REASONED: gate_movement.mjs re-measures all eighteen fields against the pre-vendoring engine and fails if the declared stable set is not exactly what held. Four hold; an earlier ordering wrongly reasoned that the inlet water content would, and it moves by the standard-base factor.",
+   "tolerances": "Derived, never typed. PRINTED_DECIMALS in fc4_capstone.mjs declares the precision each quantity class prints at, from the digest header own words, and make_fields.mjs grades at the stated tolerance or half a unit in the last printed place, WHICHEVER IS LOOSER. Three fields were tighter than the course prints and therefore unanswerable: a fraction at 1e-9, a derivative at 1e-12 and a coefficient at 1e-9, all now 5e-7 and none trivially wide. NOT ONE OF THE EIGHTEEN VALUES MOVED. fields.json is the single source; the teaching lab must READ it rather than restate a number from it, which is the three-copy trap a sibling wave hit."
+  },
+  "panels": {
+   "lab": "src/components/course/panels/gasprocessing/gasprocessingLab.js",
+   "ids": [
+    "fc-water-explorer (Associate, and Expert for the cold-end water read): the saturation surface across pressure and temperature, the spec, the water load, the circulation ratio sweep and the duty split into its two named parts",
+    "fc-absorber-explorer (Professional): the Kremser surface in both directions with the ceiling below unity, the amine property table, the loading swing at both ends, and the contactor diameter",
+    "fc-coldend-explorer (Expert, and Professional for the contactor): the coefficient and the derivative behind it, the heat capacity as a divisor, the march against its own converged answer, the march three coefficients, and the four-state water table that separates the cooling from the let-down"
+   ]
+  },
+  "route": "/dashboard/apps/gasprocessing",
+  "suiteApp": "/dashboard/apps/gas-treating-dehydration",
+  "migrations": [
+   "course and capstones",
+   "beginner deep seed",
+   "intermediate deep seed",
+   "advanced deep seed",
+   "go-live, HELD behind the one Facilities module upload"
+  ]
+ },
+ "gates": {
+  "gate_claims.mjs": "every relational claim in digest.txt re-computed from the engine, plus two classes the kit heading sweep cannot see because they sit on ordinary prose lines: a COUNTED claim over a block with a different count, and a COST-AND-BUY sentence over a table whose two named columns move the same way. Both shipped in one rebuild and both have a negative control. CAUGHT TWO FALSE CLAIMS in the first draft, one an ordering stated as different that was identical.",
+  "gate_typed_literals.py": "no number is typed into the digest. Sweeps every string literal in fc4_dump.mjs with substitutions stripped at source level by brace depth. Fails on a dead allowlist row.",
+  "gate_capstone_leak.py": "no capstone condition and no graded value reaches the digest or the generator, at three renderings each. CAUGHT ONE REAL LEAK into the digest duty table. Fails on a dead shared row.",
+  "gate_copy_rule.py": "the owner copy rule over the digest, every lesson body and every manifest title. CAUGHT TWO CONTRASTIVES an eye sweep had passed.",
+  "gate_movement.mjs": "all eighteen graded fields re-measured against the pre-vendoring engine, with a NAMED and verified cause for each that moved and a declared stable set that must be exactly what held. CAUGHT A STABILITY CLAIM THAT WAS REASONED RATHER THAN MEASURED.",
+  "harvest_truth.py": "harvests the digest into truth-gasprocessing.json so numsweep has a resolver. FC3 shipped none and its sweep reported 396 of 412 unresolved, measuring the resolver rather than the lessons.",
+  "sweep_literals.py": "the FULL-literal sweep with no significant-figure floor, over banks or lessons. numsweep skipped 56 of 119 literals on this wave own probe run, so a green numsweep is roughly half a sweep. Refuses an empty sweep.",
+  "jest": "packages/engines __tests__/facilities.gasprocessing.test.js, 47 of 47 green, up from 12. The separator suite it now shares a module with is 63 of 63.",
+  "digestprose.mjs (the kit gate, with this wave rules file)": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules /root/fc-wip-gasprocessing. Headings against their own blocks in the digest AND the lessons, repair history with a framed-is-curriculum split, and the copy rule. 780 lines, 20 section titles and 33 in-body markers, 32 history framings, 33 ENGINE FRAGMENTS PINNED so an upstream engine edit turns it red. 4 warned, all inside Section 20 and re-read by hand on every rebuild rather than cleared.",
+  "gate_wavejson.mjs": "every claim wave.json makes that can be checked against a file, checked against that file. It exists because this file gave TWO ANSWERS for its own digest in one place: a digest block and a gates entry that disagreed on both the line count and the section count. Refuses below ten claims.",
+  "make_fields.mjs": "regenerates fields.json and REFUSES any field graded tighter than its class prints, naming the field, the tolerance, the precision, the figure a learner could quote and the error that quoting it carries. --bare-stated-tolerances is the negative control and leaves PRINTED_DECIMALS alone, because mutating that would move the floor and the tolerance together and could not fail."
+ },
+ "digest": {
+  "lines": 780,
+  "sections": 20,
+  "withheld": null,
+  "note": "Section 14 was WITHHELD while the Joule-Thomson chain was under repair and printed NOTHING rather than printing behind a banner. It is built. No lesson ever took a wrong coefficient, which is what the withholding bought. SECTION 20 is the one section whose subject is history and it is framed in its own title and first line."
+ },
+ "history": {
+  "position": "FRAMED HISTORY IS CURRICULUM, UNFRAMED HISTORY IS A DEFECT. Digest SECTION 20 is the one section whose subject is what this engine used to do; it says so in its title and its first line, and nothing above it is history. Expert m05 l01, \"What was repaired, and what was not\", owns it, with the frame in the HEADING where the gate and the reader both look for it.",
+  "engineComments": "Repair-history comment lines in the engine source are PROVENANCE. Digest Section 20 COUNTS them by reading the source and states the rule it counted with, rather than quoting a figure from a report. A sentence lifted out of a comment arrives with no frame, and a writer cannot frame what they did not know was history. Every writer brief in this wave says so.",
+  "framingRule": "Framing comes from the HEADING above a passage or the line immediately before it. An inline prefix inside a sentence is not framing and the gate does not read it as one.",
+  "standardBaseFactor": "1.0000169391883849, the old typed 379.49 over the derived standard molar volume. Eleven of the eighteen graded capstone fields moved by exactly this when the repair was vendored, and three more by that factor amplified by a typed spec. MEASURED by gate_movement.mjs and deliberately NOT a wave constant: it is a fact about the vendoring and no lesson resolves a number against it."
+ }
+}
