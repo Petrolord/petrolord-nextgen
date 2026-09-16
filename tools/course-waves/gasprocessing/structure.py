@@ -14,18 +14,14 @@
 # fa33717f, sha-identical with engines 709172f.
 #
 # ---------------------------------------------------------------------------
-# HELD PENDING FC4-0. The Expert tier's m01, m02 and m03 are FOURTEEN LESSONS
-# built on the Joule-Thomson chain, which the recon found wrong by a factor
-# that varies with the compressibility. Digest Section 14 is WITHHELD and
-# prints nothing, so those fourteen lessons have no source to be written from
-# and must not be attempted until FC4-0 is vendored and the digest rebuilt.
-# The other sixty-four lessons are unaffected and can be written today.
+# The Expert tier's m01, m02 and m03 are built on digest Section 14, which was
+# WITHHELD while the Joule-Thomson chain was under repair and printed nothing
+# rather than printing behind a banner. It is built now. Nothing is held.
 #
-# The Expert m01 subject is already shaped around the repair rather than
-# around the bug, which is the FC2 lesson: m01 teaches WHERE THE NUMBER COMES
-# FROM and the seam to the Flow Assurance engine, which takes a Joule-Thomson
-# coefficient as a typed input and never computes one. That subject survives
-# the repair unchanged. Only its figures move.
+# m01 is shaped around WHERE THE NUMBER COMES FROM and around the seam to the
+# Flow Assurance engine, which takes a Joule-Thomson coefficient as a typed
+# input and never computes one. That subject was chosen so it would survive
+# the repair unchanged, and it did: only its figures moved.
 #
 # SCOPE SEAMS, all three checked against the 47 live course slugs:
 #  * Souders-Brown, the K value and the settling velocity are OWNED by
@@ -44,7 +40,7 @@
 # ---------------------------------------------------------------------------
 W = 'fc-water-explorer'
 A = 'fc-absorber-explorer'
-C = 'fc-coldend-explorer'   # HELD until FC4-0
+C = 'fc-coldend-explorer'
 
 TIERS = {
  'beginner': [
@@ -174,11 +170,9 @@ TIERS = {
  ],
 }
 
-HELD = {
- 'advanced': ['m01-dew-point-control-by-expansion',
-              'm02-marching-a-pressure-drop',
-              'm03-the-cold-separator'],
-}
+# Nothing is held. FC4-0 is merged and vendored, digest Section 14 is built,
+# and all three Expert modules have their source.
+HELD = {}
 
 if __name__ == '__main__':
     total = 0
@@ -186,10 +180,10 @@ if __name__ == '__main__':
         n = sum(len(m[2]) for m in mods)
         held = sum(len(m[2]) for m in mods if m[0] in HELD.get(tier, []))
         total += n
-        print(f'{tier:<14} {len(mods)} modules  {n} lessons  ({held} HELD pending FC4-0)')
+        print(f'{tier:<14} {len(mods)} modules  {n} lessons  ({held} held)')
         assert len(mods) == 6, f'{tier} has {len(mods)} modules'
         assert n == 26, f'{tier} has {n} lessons'
-    print(f'{"total":<14} {total} lessons, {total - 14} writable today')
+    print(f'{"total":<14} {total} lessons, all writable')
     keys = [l[0] for mods in TIERS.values() for m in mods for l in m[2]]
     titles = [l[1] for mods in TIERS.values() for m in mods for l in m[2]]
     bad = [t for t in titles if '—' in t or '–' in t or ', not ' in t]

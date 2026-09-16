@@ -20,18 +20,16 @@ DUMP = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fc4_dump.mjs')
 
 # Numbers allowed to appear as PROSE in a printed string, each with its reason.
 ALLOWED = {
- '14.65': "quoted to be contradicted: the module's own comment names this base pressure and Section 2 computes the base its pound mole actually implies",
- '970':   "quoted to be contradicted: the module's comment names this latent heat and the code contains only the folded figure",
- '100':   "the lean glycol band the engine names in its OWN refusal message, quoted in the row label that asks for the refusal",
  '231':   'cubic inches in a gallon, a definition, used in a stated conversion whose result is printed beside it',
  '1728':  'cubic inches in a cubic foot, a definition, used in the same stated conversion',
- '90':    'the lean glycol band the engine names in its own refusal message, quoted as prose',
  '60':    'minutes in an hour, in the stated conversion of the amine duty column, whose result is printed beside it',
- '12':    'a decimal-place count in prose about rounding',
- '200':   'a stage count in prose naming a column the table above prints',
  '180':   'names a row of the BTEX table printed directly above, whose ratio to another named row is computed on the same line',
  '0.1':   'names a row of the same BTEX table, on the same terms',
  '0.2':   'names a row of the same BTEX table, on the same terms',
+ '90':    'the lean glycol band edge the engine names in its OWN refusal message, quoted in the prose that explains the refusal and in the row label that asks for it',
+ '100':   'the other edge of the same band, on the same terms',
+ '200':   'a stage count naming a column the table beside it prints, and the same count in the prose that reads that column',
+ '12':    'a stage count naming the other column of the same table',
 }
 
 def strip_substitutions(text):
@@ -82,6 +80,14 @@ def main():
         body = re.sub(r'#?\s*SECTIONS?\s+\d+(?:\s*,\s*\d+)*(?:\s+and\s+\d+)?', ' SECTIONREF ', body, flags=re.I)
         body = re.sub(r'FC\d-\d', ' WAVEREF ', body)
         body = re.sub(r'\b[ml]\d{2}\b', ' KEYREF ', body)
+        # A DERIVATION IS NOT A MEASUREMENT. Section 14 prints the relation
+        # the module derives, and the exponents in it are algebra rather
+        # than figures. Recognised by SHAPE: an indented line that is all
+        # symbols, operators and single letters, with no units and no
+        # decimal point. A number with a decimal point is never exempted
+        # here, so a real figure typed into a formula line still fails.
+        if re.match(r'^\s{4,}(mu|T|=)', body) and not re.search(r'\d\.\d', body):
+            body = re.sub(r'\d+', ' ALGEBRA ', body)
         for m in re.finditer(r'(?<![\w.])\d+(?:\.\d+)?(?:e[-+]?\d+)?(?![\w.])|1e6', body):
             swept += 1
             tok = m.group(0)

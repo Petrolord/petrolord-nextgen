@@ -24,7 +24,14 @@
 //     so both are STATED on every capstone that grades a BTEX figure;
 //   * ESCRAVOS lets down from BELOW the pressure the engine warns at, so
 //     neither of its two graded water contents leans on the held chart
-//     correction either.
+//     correction either;
+//   * AND ITS CONDITIONS ARE ON NO PUBLISHED CASE. An earlier set sat on the
+//     golden's own Joule-Thomson row at 980 psia, 91 degF and 0.69 gravity,
+//     so the published file handed back a graded answer. The leak gate
+//     caught it on the rebuild. Re-run that gate after any change here, and
+//     check the golden's `jt` and `jtDrop` blocks by hand as well, because
+//     a golden can acquire a case that collides with a capstone at any
+//     time without this wave touching anything.
 
 /* ------------------------------------------------------------------ *
  * Associate. IKOT ABASI, a TEG dehydration train on a gas gathering
@@ -66,7 +73,7 @@ export const OTUMARA_REQUIRED_REMOVAL = 0.94;
 export const OTUMARA = {
   gasMMscfd: 71,
   co2MolPct: 6.4,
-  h2sMolPct: 0.85,
+  h2sMolPct: 0.78,
   co2SpecMolPct: 2.5,
   h2sSpecMolPct: 0.0004,
   amineId: 'DEA',
@@ -92,5 +99,5 @@ export const OTUMARA_RETUNED_LEAN_LOADING = 0.03;
  * ------------------------------------------------------------------ */
 
 export const ESCRAVOS = {
-  p1Psia: 980, p2Psia: 430, tF: 91, gasSg: 0.69, cpBtuLbmolF: 10.4,
+  p1Psia: 935, p2Psia: 405, tF: 87, gasSg: 0.67, cpBtuLbmolF: 10.2,
 };

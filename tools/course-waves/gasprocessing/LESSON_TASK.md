@@ -1,5 +1,36 @@
 # FC4 LESSON TASK. Read every line before you write a word.
 
+## THE THREE PLACES REPAIR HISTORY LEAKS FROM. Read this before anything else.
+
+The engine this course teaches has just been through a 49-finding repair.
+That means three files near you are FULL of sentences describing what it used
+to do, and **none of them is teaching truth**:
+
+1. **`RECON.md` and `FINDINGS.md`.** Both open with a banner saying they are
+   provenance. Do not take a number or a behaviour from either.
+2. **THE ENGINE SOURCE COMMENTS.** `engines/facilities/gasProcessing.js` is
+   dense with them: "The 379.49 this file used to quote", "It used to carry
+   two", "This function divided by one until FC4-0", "the march used to
+   evaluate mu at each interval MIDPOINT PRESSURE but at the temperature it
+   started with". **NOTHING GATES A WRITER READING ENGINE COMMENTS.** A
+   sibling wave shipped three repair-history sentences into committed lesson
+   text and the worst of the three came from an engine source comment.
+   **Engine source comments are provenance, not teaching truth.**
+3. **Anything you remember from a briefing.** Including this one.
+
+**`digest.txt` is the only teaching truth.** It is swept by
+`digest_prose.mjs` for exactly this, so a forbidden sentence in the digest is
+worse than the same sentence in a provenance file: two of the three sibling
+leaks were not the writers' fault at all, because the writers took what the
+digest said.
+
+**AND IT IS NOT ONLY WHOLE SENTENCES.** One sibling leak was a lesson H2
+HEADING, "One sentence used to answer several questions". Sweep your
+headings, not only your prose. A keyword sweep will not catch the worst of
+it either: the worst sibling instance was plain past tense with no trigger
+word at all. Read your own past-tense sentences against what the engine does
+TODAY.
+
 You are writing lessons for **FC4 `gasprocessing`, "Gas Processing"**, the
 fourth course in the NextGen Facilities module, path_order 42.
 
@@ -16,17 +47,17 @@ extended rather than the lesson invented.
 engine AS FOUND before FC4-0 repaired it. That is true of the WORK and is not
 teaching truth. A number from either of those files in a lesson is a defect.
 
-## SECTION 14 IS WITHHELD AND FOURTEEN LESSONS ARE HELD WITH IT
+## SECTION 14 IS BUILT. ALL 78 LESSONS ARE WRITABLE.
 
-The Joule-Thomson chain was found wrong and is under repair. Digest Section
-14 prints **nothing**, deliberately, so there is no provisional figure for
-anyone to learn. **Do not write Expert m01, m02 or m03.** That is fourteen of
-the seventy-eight lessons. The other sixty-four have their sources today and
-are what you are here for.
+It was withheld while the Joule-Thomson chain was under repair, and it
+printed nothing rather than printing behind a banner, which is why no lesson
+ever took a wrong coefficient. FC4-0 is merged and vendored, the digest is
+rebuilt against it, and Section 14 now carries the coefficient, the
+derivative behind it, the march, the step-count convergence, the cold
+separator and the seam to Flow Assurance.
 
-If you have been told FC4-0 has landed, check first: the digest header line
-naming Section 14 as withheld must be gone and Section 14 must have content.
-If it does not, the repair has not been carried into the digest yet.
+**What that means for you: nothing is held.** Expert m01, m02 and m03 have
+their source.
 
 ## Shape
 
@@ -63,12 +94,36 @@ sentences, or recast. `structure.py`'s titles already obey this.
 | Professional | m04 | 11 |
 | Professional | m05 | 12 |
 | Professional | m06 | 19 |
-| Expert | m01, m02, m03 | **14, WITHHELD. DO NOT WRITE.** |
+| Expert | m01, m02, m03 | 14 |
 | Expert | m04 | 13 |
 | Expert | m05 | 1, 2, 15, 16, 17 |
 | Expert | m06 | 16, 17 |
 
 A lesson does not reach forward into a later tier's sections.
+
+## Two behaviour changes the digest now teaches, and both are LIVE
+
+Both are reachable by typing into a box in the shipped Suite studio, so both
+belong in a lesson rather than in a footnote.
+
+1. **A gas above 140 degF is REFUSED BY NAME in the water-content path.** The
+   vapour-pressure fit holds to 60 degC and the guard now enforces exactly
+   that. The refusal carries the band in both units and the temperature it
+   was handed, converted. Digest Section 4 reads it from both sides of both
+   edges, and separates it from the two limits that only WARN: the narrower
+   band the coefficients were published over, and the pressure above which
+   ideal mixing stops being the right method at all. Three limits, three
+   different behaviours, and Associate m02 l05 is where they belong.
+
+2. **The lean glycol strength drives the loop water balance.** A gallon of
+   lean solution already carries water before it meets the gas, and the
+   engine reports both that and the strength the rich glycol returns at.
+   **It does NOT set the outlet spec**, and the engine says so on every
+   answer through `outletSpecBasis`: the dew point a lean strength can
+   deliver is a chart this module does not carry. Digest Section 6 teaches
+   both halves, including the circulation ratio low enough that the rich
+   glycol comes back below the strength the module accepts as a lean one.
+   Teach the seam rather than implying the engine derives one from the other.
 
 ## Three scope seams you must respect
 

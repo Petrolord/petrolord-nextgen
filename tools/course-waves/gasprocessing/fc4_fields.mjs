@@ -36,6 +36,20 @@ export const OBIAFU = {
 /** The contactor OBIAFU's gas goes up. */
 export const OBIAFU_CONTACTOR = { gasSg: 0.66, ksFtS: 0.3 };
 
+/** Lean glycol strengths across the band the engine accepts. Since FC4-0
+ *  this input is not inert: it sets the water a gallon of lean solution
+ *  already carries, and therefore the strength the rich glycol returns at.
+ *  The outlet spec stays a TYPED design input and the engine says so. */
+export const OBIAFU_LEAN_SWEEP = [90.5, 95, 98, 99, 99.2, 99.5, 99.9];
+export const LEAN_AT_LOWER_EDGE = 90;
+export const LEAN_JUST_INSIDE_LOWER = 90.000001;
+export const LEAN_JUST_UNDER_UPPER = 99.999999;
+export const LEAN_AT_UPPER_EDGE = 100;
+/** A ratio low enough that the rich glycol comes back under 90 weight
+ *  percent, which the engine flags because the loop is then carrying more
+ *  water than a glycol loop is meant to. */
+export const RATIO_THAT_FLOODS_THE_LOOP = 0.25;
+
 /** Circulation ratios across and outside the customary band, so a lesson
  *  can show what the ratio buys and where the engine starts objecting. */
 export const OBIAFU_RATIO_SWEEP = [1.5, 2, 2.5, 3, 3.2, 4, 5, 6];
@@ -62,13 +76,25 @@ export const WARN_AT_THRESHOLD = 1000;
 export const WARN_JUST_OVER = 1000.000001;
 
 /** The band the water fit is guarded to, read from both sides at each end.
- *  degF, because that is the door the engine takes. */
+ *  degF, because that is the door the engine takes. The upper edge is 60
+ *  degC, which is where the module's own docstring always said the fit
+ *  held; the guard now enforces it. */
 export const FIT_LOW_EDGE_F = -49;
 export const FIT_BELOW_LOW_EDGE_F = -49.000001;
-export const FIT_HIGH_EDGE_F = 212;
-export const FIT_ABOVE_HIGH_EDGE_F = 212.000001;
-/** 60 degC, the upper edge the module's own docstring claims for the fit. */
-export const FIT_DOCSTRING_HIGH_EDGE_F = 140;
+export const FIT_HIGH_EDGE_F = 140;
+export const FIT_ABOVE_HIGH_EDGE_F = 140.000001;
+
+/** The narrower band the Magnus coefficients were PUBLISHED over, -40 to
+ *  50 degC, inside which the engine attaches no extrapolation note. Both
+ *  edges in degF: -40 degC is -40 degF and 50 degC is 122 degF. */
+export const FIT_PUBLISHED_LOW_EDGE_F = -40;
+export const FIT_PUBLISHED_HIGH_EDGE_F = 122;
+export const FIT_PUBLISHED_JUST_OVER_F = 122.000001;
+
+/** A gas temperature a user would plausibly type into the studio and that
+ *  the engine now refuses BY NAME. This is a live behaviour change. */
+export const GAS_ABOVE_FIT_F = 200;
+
 /** Freezing, for the measured vapour-pressure coefficient. */
 export const WATER_FREEZING_F = 32;
 
@@ -138,7 +164,25 @@ export const UNREACHABLE_SPEC = 0.9;
 export const AGBADA = { p1Psia: 1180, p2Psia: 640, tF: 96, gasSg: 0.68, cpBtuLbmolF: 9.8 };
 export const AGBADA_P_SWEEP = [50, 200, 600, 1000, 1500, 2200];
 export const AGBADA_CP_SWEEP = [8.5, 9.5, 10.5, 12];
+/** Step counts for the march. Whole and positive since FC4-0, which is
+ *  what the engine now requires. The last is the reference the others are
+ *  measured against. */
 export const AGBADA_STEP_SWEEP = [1, 2, 5, 10, 20, 50, 200];
+export const AGBADA_STEP_REFERENCE = 20000;
+export const AGBADA_STEPS_REFUSED = [0, -5, 0.4];
+/** Gravities and temperatures at which the z-factor itself is refused, so
+ *  the march dies and says where. Sutton's pressure correlation turns
+ *  negative above a gravity of about 5.08. */
+export const SG_SUTTON_BREAKS = 5.08;
+export const SG_SUTTON_LAST_PHYSICAL = 5.07;
+/** A let-down deep enough to show the arrival flattening out as the
+ *  coefficient falls with pressure. It does NOT kill the march. */
+export const AGBADA_DEEP_P2_PSIA = 60;
+/** A COLD inlet, which is what actually walks the march off the
+ *  correlation: the gas cools below the reduced temperature the
+ *  compressibility correlation is valid at, part way down. */
+export const AGBADA_COLD_INLET_F = 10;
+export const AGBADA_COLD_P2_PSIA = 200;
 
 /* ------------------------------------------------------------------ *
  * Probes that measure the module's own unexported constants. Every one

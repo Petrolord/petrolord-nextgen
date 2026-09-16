@@ -12,28 +12,37 @@
  ],
  "engines": [
   "engines/facilities/gasProcessing.js",
-  "engines/production/gasProperties.js"
+  "engines/production/gasProperties.js",
+  "engines/facilities/separatorSizing.js"
  ],
- "enginesVendoredAt": "NextGen fa33717f. Five paths sha-identical with engines 709172f, which is byte-for-byte the stated FC4 canonical fa53f7f on every gas-processing path. Vendoring guard clean over 547 paths. MUST BE RE-VENDORED when FC4-0 lands.",
+ "enginesVendoredAt": "NextGen, sha-identical with engines 82ec6d4 (the FC4-0 repair). TEN paths, not four: the repaired engine imports the DAK validity band from separatorSizing.js, which carries FC1 separation engine, golden, oracle and suite with it, plus two findings records. Proven three independent ways and walked as an import closure inside the vendored tree. Vendoring guard clean over 551 paths.",
  "constants": {
-  "379.49": "the standard cubic feet in a pound mole, MEASURED out of the BTEX mole balance. Its comment names 14.65 psia; the module's own gas constant and Rankine offset put the base at 14.695751 psia (digest Section 2)",
-  "18.01528": "the molecular weight of water, MEASURED from the saturation answer and the mole fraction the same call returns",
-  "1100": "the Btu a pound the reboiler pays to send water overhead, MEASURED at a circulation ratio of one and no reflux. HELD FOR LITERATURE, unsourced, and its comment names a 970 that is not in the code",
-  "1440": "the minutes in a day, MEASURED as the gallons a day over the gallons a minute of one call",
-  "0.1825": "the days in a year over the pounds in a short ton, MEASURED as one BTEX answer over another. The two are not separable from outside",
-  "24000000": "the hours in a day times the Btu in a MMBtu, MEASURED from the gallons a day, the duty per gallon and the duty in MMBtu an hour",
-  "69.9": "the liquid density the contactor sizes against, lb per ft3, MEASURED from the gas density and the allowed velocity. HELD FOR LITERATURE, and it is a GLYCOL density used for every column including amine",
-  "8.34": "the pounds per gallon of water the amine gallons chain divides by, MEASURED through the swing, the molecular weight and the solution gravity the amine table exports",
-  "0.028173077": "the contactor's base pressure over base temperature, psia per degR, MEASURED from the allowed velocity and the diameter. The group the module's own pound mole implies is 0.028279006, a factor of 0.996254 apart",
-  "1.985881": "the gas constant over the Btu conversion in the Joule-Thomson routine, MEASURED at a unit heat capacity. The only constant of that routine FC4-0 will not move",
-  "0.088609355": "the water vapour pressure at the freezing point, psia, which IS the Magnus coefficient because the exponent is exactly zero there",
-  "459.67": "the Rankine offset, exported by the gas properties module",
-  "28.9625": "the molecular weight of dry air, exported",
-  "10.7316": "the gas constant in psia ft3 per lbmol degR, exported",
-  "92": "the molecular weight the BTEX balance defaults to, which is toluene standing for a four-compound cut",
-  "231": "cubic inches in a gallon, a definition, used only in a stated conversion whose result is printed beside it",
-  "1728": "cubic inches in a cubic foot, on the same terms",
-  "14.6959487755142": "one standard atmosphere, psia, used only to state what the water fit reads at its own guard edge"
+  "2": "the customary circulation band, low, gal a lb. DECLARED",
+  "5": "the customary circulation band, high. DECLARED",
+  "50": "the same, high, degC. Between this and the guard the engine answers and attaches an extrapolation note",
+  "60": "the water fit band, high, degC. EXPORTED, and the guard now enforces exactly it",
+  "92": "the BTEX molecular weight default, toluene standing for a four-compound cut. DECLARED",
+  "140": "the same band at the module door, high, degF. EXPORTED. A gas above this is REFUSED BY NAME and that is a LIVE behaviour",
+  "1000": "the pressure above which the ideal-mixing water content carries a chart warning, psia. DECLARED",
+  "1100": "the water overhead the reboiler pays for, Btu a lb. DECLARED, and an input with this as its default",
+  "14.696": "the standard pressure of this module, psia. EXPORTED",
+  "519.67": "the standard temperature of this module, degR. EXPORTED",
+  "379.48357185628737": "standard cubic feet a pound mole, DERIVED from the gas constant at the base above and EXPORTED. Measured out of the BTEX mole balance in digest Section 2",
+  "7.48051948051948": "US gallons in a cubic foot, exact as 1728 over 231. EXPORTED",
+  "9.3": "glycol, lb a gallon. DECLARED: no publication in this repository checks it",
+  "69.56883116883117": "the same glycol density in lb a ft3, derived. The module has ONE glycol density and both the loop balance and the vessel sizing read it",
+  "8.34": "water, lb a gallon, in the amine gallons chain. DECLARED",
+  "18.01528": "the molecular weight of water. DECLARED",
+  "0.61094": "the Magnus coefficient. DECLARED",
+  "17.625": "the Magnus numerator. DECLARED",
+  "243.04": "the Magnus denominator. DECLARED",
+  "-45": "the water fit band, low, degC. EXPORTED",
+  "-49": "the same band at the module door, low, degF. EXPORTED",
+  "-40": "the narrower band the Magnus coefficients were published over, low, degC. EXPORTED",
+  "10.7316": "the gas constant, psia ft3 per lbmol degR. Exported by the gas properties door",
+  "28.9625": "the molecular weight of dry air. Exported by the gas properties door",
+  "459.67": "the Rankine offset, degF to degR. Exported by the gas properties door",
+  "1.0000169391883849": "THE STANDARD-BASE FACTOR. Measured, not typed: the old typed 379.49 over the derived value above. Eleven of the eighteen graded capstone fields moved by exactly this when the repair was vendored"
  },
  "leakScales": [
   "1",
@@ -41,7 +50,7 @@
   "x1e-3"
  ],
  "plan": {
-  "state": "FOUNDATION COMPLETE, WRITING HELD. Recon found 49 findings, one of them a live wrong answer on four screens. FC4-0 repairs before a lesson exists.",
+  "state": "FOUNDATION COMPLETE AND RE-VENDORED at engines 82ec6d4. Digest Section 14 BUILT. All 78 lessons writable. No lesson, bank, capstone answer file, panel or migration written yet.",
   "thesis": "Gas conditioning is three separate balances over one stream, and the discipline is knowing which of the numbers in front of you the engine COMPUTED, which one you CHOSE, and which one it simply kept to itself.",
   "tiers": {
    "beginner": "Associate. WATER, AND WHAT IT COSTS TO TAKE OUT. Why: the water chain is the only part of this engine that runs end to end in closed form, so a learner can watch a whole answer assemble before anything iterates or solves. It is also where the difference between an intensive answer and an extensive one is sharpest, because the water content knows nothing about the rate and the circulation is nothing but the rate applied to it. And it is where the module's own doctrine first bites: the circulation ratio is a CHOICE the engine refuses to make, and the reboiler duty is split into named parts instead of arriving as one number. The tier ends where one column becomes several stages.",
@@ -62,15 +71,15 @@
    "gradedFieldsEach": 6,
    "beginner": "IKOT ABASI, a TEG dehydration train: the saturated inlet water content, the water taken out in lb a day, the circulation in gpm and in gallons a day, the sensible heat per gallon, and the BTEX in short tons a year.",
    "intermediate": "OTUMARA, a sour gas train: the removal at the stated stage count, the stages the contract spec demands, the acid gas picked up in lbmol a day, the amine circulation, the regenerator duty, and the circulation again after the regenerator is retuned to a leaner lean.",
-   "advanced": "ESCRAVOS, a dew point skid: the compressibility temperature derivative at the inlet, the water the warm gas carries, and then the Joule-Thomson coefficient, the cooling, the separator inlet temperature and the water the cold gas can still hold. FOUR OF THE SIX READ THE JOULE-THOMSON CHAIN AND ARE NOT CUT UNTIL FC4-0 IS VENDORED.",
-   "heldItemCheck": "Every held item is neutralised by CONSTRUCTION rather than by a lookup. The McKetta real-gas correction is held, so IKOT ABASI and both ESCRAVOS water reads sit BELOW the pressure at which the engine warns, verified by asserting the warning is null on all three. The 1100 Btu per lb overhead is held, so NO Associate graded field reads a reboiler duty: the SENSIBLE half, which is built entirely from stated inputs, is what is graded. The contactor's liquid density is held and is the wrong fluid for an amine, so NO Professional graded field reads a contactor diameter. The amine duty per gallon is customary, so OTUMARA states its own 920. The BTEX absorbed fraction and molecular weight are operating values and are stated on the one capstone that grades a BTEX figure."
+   "advanced": "ESCRAVOS, a dew point skid: the compressibility temperature derivative at the inlet, the Joule-Thomson coefficient, the cooling, the separator inlet temperature, and the water the gas carries at the inlet and can still hold at the cold spot. Ordered so the one field MEASURED to be stable across the vendoring leads.",
+   "heldItemCheck": "Every held item is neutralised by CONSTRUCTION rather than by a lookup. The McKetta real-gas correction is held, so IKOT ABASI and both ESCRAVOS water reads sit BELOW the pressure at which the engine warns, verified by asserting the warning is null on all three. The 1100 Btu per lb overhead is held, so NO Associate graded field reads a reboiler duty: the SENSIBLE half, which is built entirely from stated inputs, is what is graded. The contactor's liquid density is held and is the wrong fluid for an amine, so NO Professional graded field reads a contactor diameter. The amine duty per gallon is customary, so OTUMARA states its own 920. The BTEX absorbed fraction and molecular weight are operating values and are stated on the one capstone that grades a BTEX figure. STABILITY IS MEASURED, NOT REASONED: gate_movement.mjs re-measures all eighteen fields against the pre-vendoring engine and fails if the declared stable set is not exactly what held. Four hold; an earlier ordering wrongly reasoned that the inlet water content would, and it moves by the standard-base factor."
   },
   "panels": {
    "lab": "src/components/course/panels/gasprocessing/gasprocessingLab.js",
    "ids": [
     "fc-water-explorer (Associate, and Expert for the cold-end water read): the saturation surface across pressure and temperature, the spec, the water load, the circulation ratio sweep and the duty split into its two named parts",
     "fc-absorber-explorer (Professional): the Kremser surface in both directions with the ceiling below unity, the amine property table, the loading swing at both ends, and the contactor diameter",
-    "fc-coldend-explorer (Expert, and Professional for the contactor): HELD until FC4-0 is vendored, because every exported value of it reads the Joule-Thomson chain"
+    "fc-coldend-explorer (Expert, and Professional for the contactor): the coefficient and the derivative behind it, the heat capacity as a divisor, the march against its own converged answer, the march three coefficients, and the four-state water table that separates the cooling from the let-down"
    ]
   },
   "route": "/dashboard/apps/gasprocessing",
@@ -84,15 +93,20 @@
   ]
  },
  "gates": {
-  "gate_claims.mjs": "every relational claim in digest.txt re-computed from the engine. 26 checks. CAUGHT TWO FALSE CLAIMS in the first draft, one of them an ordering that was stated as different and was in fact identical.",
-  "gate_typed_literals.py": "no number is typed into the digest. Sweeps every string literal in fc4_dump.mjs with ${...} stripped at source level. 293 literals examined, 23 numeric literals swept in printed prose, 12 allowed with a reason and all 12 hit, 0 unexplained. Fails on a dead allowlist row.",
-  "gate_capstone_leak.py": "no capstone condition and no graded value reaches the digest or the generator. 25 conditions and 18 graded values at three renderings each. Fails on a dead shared row.",
-  "jest": "packages/engines __tests__/facilities.gasprocessing.test.js, 12 of 12 green. SEE FINDINGS F-O1 AND F-O2 BEFORE TRUSTING THAT NUMBER.",
-  "gate_copy_rule.py": "the owner copy rule over everything a learner reads: no em dashes, no en dashes, no 'X, not Y' contrastive, in the digest, in every lesson body and in every manifest title. 4 files and 547 lines and titles examined, 0 violations. CAUGHT TWO CONTRASTIVES in the digest that an eye sweep had passed."
+  "gate_claims.mjs": "every relational claim in digest.txt re-computed from the engine. CAUGHT TWO FALSE CLAIMS in the first draft, one an ordering stated as different that was identical.",
+  "gate_typed_literals.py": "no number is typed into the digest. Sweeps every string literal in fc4_dump.mjs with substitutions stripped at source level by brace depth. Fails on a dead allowlist row.",
+  "gate_capstone_leak.py": "no capstone condition and no graded value reaches the digest or the generator, at three renderings each. CAUGHT ONE REAL LEAK into the digest duty table. Fails on a dead shared row.",
+  "gate_copy_rule.py": "the owner copy rule over the digest, every lesson body and every manifest title. CAUGHT TWO CONTRASTIVES an eye sweep had passed.",
+  "digest_prose.mjs": "the consolidated prose gate: headings against their own block, repair history inside a teaching section, a past-tense WARN family for history told without a trigger word, and the copy rule. 33 engine fragments PINNED so an upstream engine edit turns it red rather than letting a stale quote pass. CAUGHT A STALE SECTION TITLE on the rebuild, naming a contract exception the repaired engine no longer has.",
+  "gate_movement.mjs": "all eighteen graded fields re-measured against the pre-vendoring engine, with a NAMED and verified cause for each that moved and a declared stable set that must be exactly what held. CAUGHT A STABILITY CLAIM THAT WAS REASONED RATHER THAN MEASURED.",
+  "harvest_truth.py": "harvests the digest into truth-gasprocessing.json so numsweep has a resolver. FC3 shipped none and its sweep reported 396 of 412 unresolved, measuring the resolver rather than the lessons.",
+  "sweep_literals.py": "the FULL-literal sweep with no significant-figure floor, over banks or lessons. numsweep skipped 56 of 119 literals on this wave own probe run, so a green numsweep is roughly half a sweep. Refuses an empty sweep.",
+  "jest": "packages/engines __tests__/facilities.gasprocessing.test.js, 47 of 47 green, up from 12. The separator suite it now shares a module with is 63 of 63."
  },
  "digest": {
-  "lines": 450,
+  "lines": 675,
   "sections": 19,
-  "withheld": "SECTION 14, the Joule-Thomson chain. It prints NOTHING rather than printing behind a banner, because a digest that prints a wrong number behind a warning has still taught it. Expert m01, m02 and m03 (14 lessons) and four of six Expert capstone fields wait on FC4-0."
+  "withheld": null,
+  "note": "Section 14 was WITHHELD while the Joule-Thomson chain was under repair and printed NOTHING rather than printing behind a banner. It is built. No lesson ever took a wrong coefficient, which is what the withholding bought."
  }
 }

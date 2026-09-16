@@ -1,5 +1,36 @@
 # FC4 PANELS TASK. Three panels over one teaching lab.
 
+## THE THREE PLACES REPAIR HISTORY LEAKS FROM. Read this before anything else.
+
+The engine this course teaches has just been through a 49-finding repair.
+That means three files near you are FULL of sentences describing what it used
+to do, and **none of them is teaching truth**:
+
+1. **`RECON.md` and `FINDINGS.md`.** Both open with a banner saying they are
+   provenance. Do not take a number or a behaviour from either.
+2. **THE ENGINE SOURCE COMMENTS.** `engines/facilities/gasProcessing.js` is
+   dense with them: "The 379.49 this file used to quote", "It used to carry
+   two", "This function divided by one until FC4-0", "the march used to
+   evaluate mu at each interval MIDPOINT PRESSURE but at the temperature it
+   started with". **NOTHING GATES A WRITER READING ENGINE COMMENTS.** A
+   sibling wave shipped three repair-history sentences into committed lesson
+   text and the worst of the three came from an engine source comment.
+   **Engine source comments are provenance, not teaching truth.**
+3. **Anything you remember from a briefing.** Including this one.
+
+**`digest.txt` is the only teaching truth.** It is swept by
+`digest_prose.mjs` for exactly this, so a forbidden sentence in the digest is
+worse than the same sentence in a provenance file: two of the three sibling
+leaks were not the writers' fault at all, because the writers took what the
+digest said.
+
+**AND IT IS NOT ONLY WHOLE SENTENCES.** One sibling leak was a lesson H2
+HEADING, "One sentence used to answer several questions". Sweep your
+headings, not only your prose. A keyword sweep will not catch the worst of
+it either: the worst sibling instance was plain past tense with no trigger
+word at all. Read your own past-tense sentences against what the engine does
+TODAY.
+
 ## Shape
 
 One lab, `src/components/course/panels/gasprocessing/gasprocessingLab.js`,
@@ -37,10 +68,25 @@ carries three `fc-` facilities panels, all of them FC1's.
   does not re-draw a K-value chart**, because that course owns it.
 
 **`fc-coldend-explorer`** (Expert m01 to m03, Professional m05 for the
-contactor) is **HELD**. Every value it would export reads the Joule-Thomson
-chain, digest Section 14 is withheld, and there is nothing to pin a test
-against. Register the id so the manifests validate; build the panel when
-FC4-0 is vendored and Section 14 is rebuilt.
+contactor)
+
+- the coefficient across pressure, with the derivative that produces it
+  beside it, digest Section 14. Draw the derivative: it is the only term in
+  the relation that carries any real-gas behaviour, and a reader who sees it
+  understands why the coefficient does not vanish as the pressure falls;
+- the heat capacity as a divisor, with the product of it and the coefficient
+  shown flat, Section 14;
+- the march, with the step count against the converged answer, Section 14.
+  The default is twenty steps and the panel should let a learner see what
+  that default is worth;
+- the cold separator: the water the gas holds at the inlet, at the arrival,
+  and at the two intermediate states that separate the cooling from the
+  let-down. **That four-row table is the point of the panel**, because
+  letting the gas down without cooling it would let it hold MORE water, and
+  a learner who has not seen that believes expansion dries gas directly;
+- the march's three coefficients, the inlet one, the last-step one and the
+  mean, because the Suite prints an inlet coefficient beside an arrival
+  temperature that twenty other coefficients produced.
 
 ## Rules
 
@@ -59,13 +105,17 @@ FC4-0 is vendored and Section 14 is rebuilt.
 
 ## The engine's error contract, which the panels have to respect
 
-Every export returns an object carrying an `error` string, **except
-`kremserFractionRemoved`, which returns a bare number** and therefore returns
-a non-number rather than an error. The absorber panel cannot guard it with
-`if (r.error)` and must check the number is finite.
+Every export returns an object carrying an `error` string, and since FC4-0
+there is no exception: `kremserFractionRemoved` returns `{ fractionRemoved }`
+or `{ error }` like everything else. **One guard shape works everywhere**,
+which is what makes a render gate cheap to write correctly.
+
+Many refusals also carry EVIDENCE beside the message: the step a march died
+at and the state it died in, the ceiling an absorption factor caps a removal
+at, the reduced pressure and temperature a compressibility was refused at.
+A panel that shows only the message throws that away.
 
 ## Hand back
 
 The lab's exported values, the vitest count and which exports each test pins,
-the three registered ids, and confirmation that the cold end panel is
-registered and unbuilt.
+and the three registered ids.

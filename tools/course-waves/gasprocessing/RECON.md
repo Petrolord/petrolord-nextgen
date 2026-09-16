@@ -6,13 +6,23 @@ exists, which is the point.
 
 **READ THIS FIRST IF YOU ARE ABOUT TO WRITE ANYTHING.**
 
-This file and `FINDINGS.md` describe the engine AS FOUND on 2026-09-16.
-FC4-0 is repairing it. **Repair history is not teaching truth.** What the
-engine used to do before it was fixed is true of the WORK and is absent from
-the digest, and a lesson that teaches it will be wrong the day the repair
-lands. The digest is the only source a lesson quotes, and Section 14 of the
-digest is deliberately empty rather than provisional, so that there is
-nothing here for a writer to mistake for truth.
+This file and `FINDINGS.md` describe the engine AS FOUND, before FC4-0
+repaired it. **Repair history is not teaching truth.** What the engine used
+to do is true of the WORK and is absent from the digest. The digest is the
+only source a lesson quotes.
+
+**AND THERE IS A THIRD PLACE IT LEAKS FROM, which nothing gates.** The
+repaired `engines/facilities/gasProcessing.js` is dense with source comments
+describing its own former behaviour, because a good repair records what it
+changed. A sibling wave shipped three repair-history sentences into committed
+lesson text and the worst of the three came from an engine source comment.
+**Engine source comments are provenance on exactly the same terms as this
+file.** Every writer brief in this wave says so in its opening block.
+
+FC4-0 is merged (engines `82ec6d4`) and vendored. Digest Section 14, which
+was withheld and printed nothing rather than printing behind a banner, is
+built. **No lesson ever took a wrong Joule-Thomson number, which is what the
+withholding bought.**
 
 ---
 
@@ -162,9 +172,24 @@ all FC1's. FC4 registers three new ones over one lab. See `PANELS.md`.
 
 ## 6. What state this wave is in
 
-- Engine, golden, oracle and gate vendored sha-identical at NextGen
-  `fa33717f`, vendoring guard clean over 547 paths, gate green 12 of 12.
-- Digest built, 450 lines, 19 sections, **Section 14 WITHHELD**.
-- Three gates green with counts (see `wave.json`).
-- **NOT ONE LESSON WRITTEN**, which is the decision this recon exists to
-  support.
+- Re-vendored at engines `82ec6d4`, the FC4-0 repair. **The closure was ten
+  paths, not four**: the repaired engine imports the DAK validity band from
+  `separatorSizing.js`, which pulls FC1's engine, golden, oracle and suite
+  with it, plus two findings records. Proven sha-identical three independent
+  ways (git blob hash, `cmp` byte compare, sha256) and walked as an import
+  closure inside the vendored tree.
+- Vendoring guard clean over 551 paths, ledger carries five new pinned rows.
+- Vendored gate green **47 of 47**, up from 12. The separator suite it now
+  shares a module with is green at 63 of 63.
+- Digest rebuilt, 675 lines, **19 sections, Section 14 BUILT**.
+- Seven gates green with counts (see `wave.json`), each proven by a negative
+  control.
+- **NOT ONE LESSON WRITTEN.** All 78 are now writable.
+
+### What the re-vendoring moved
+
+Fourteen of the eighteen graded capstone fields moved, every one with a cause
+`gate_movement.mjs` measures rather than asserts. Eleven moved by the
+standard-base factor alone, one by that factor amplified by a typed spec, and
+the Joule-Thomson chain by its own two causes compounded. Four held
+bit-identical. The full table is in the gate's own output.

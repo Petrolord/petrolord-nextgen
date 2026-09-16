@@ -1,5 +1,36 @@
 # FC4 BANK TASK. 396 questions, and the one defect that got past this before.
 
+## THE THREE PLACES REPAIR HISTORY LEAKS FROM. Read this before anything else.
+
+The engine this course teaches has just been through a 49-finding repair.
+That means three files near you are FULL of sentences describing what it used
+to do, and **none of them is teaching truth**:
+
+1. **`RECON.md` and `FINDINGS.md`.** Both open with a banner saying they are
+   provenance. Do not take a number or a behaviour from either.
+2. **THE ENGINE SOURCE COMMENTS.** `engines/facilities/gasProcessing.js` is
+   dense with them: "The 379.49 this file used to quote", "It used to carry
+   two", "This function divided by one until FC4-0", "the march used to
+   evaluate mu at each interval MIDPOINT PRESSURE but at the temperature it
+   started with". **NOTHING GATES A WRITER READING ENGINE COMMENTS.** A
+   sibling wave shipped three repair-history sentences into committed lesson
+   text and the worst of the three came from an engine source comment.
+   **Engine source comments are provenance, not teaching truth.**
+3. **Anything you remember from a briefing.** Including this one.
+
+**`digest.txt` is the only teaching truth.** It is swept by
+`digest_prose.mjs` for exactly this, so a forbidden sentence in the digest is
+worse than the same sentence in a provenance file: two of the three sibling
+leaks were not the writers' fault at all, because the writers took what the
+digest said.
+
+**AND IT IS NOT ONLY WHOLE SENTENCES.** One sibling leak was a lesson H2
+HEADING, "One sentence used to answer several questions". Sweep your
+headings, not only your prose. A keyword sweep will not catch the worst of
+it either: the worst sibling instance was plain past tense with no trigger
+word at all. Read your own past-tense sentences against what the engine does
+TODAY.
+
 You are writing the question banks for **FC4 `gasprocessing`**, path_order 42.
 
 ## Shape

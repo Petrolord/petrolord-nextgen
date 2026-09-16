@@ -19,6 +19,16 @@ import {
 const ROOT = process.env.FC4_ENGINES || '/root/wt-fc4-nextgen/packages/engines';
 const G = await import(`${ROOT}/engines/facilities/gasProcessing.js`);
 
+/** The graded fields MEASURED to be bit-identical across the FC4-0
+ *  vendoring. Verified by gate_movement.mjs, never asserted from reasoning
+ *  about which quantities a repair touches. */
+export const STABLE = [
+  'beginner/sensiblePerGal',
+  'intermediate/fractionRemoved',
+  'intermediate/stagesNeeded',
+  'advanced/dzdT',
+];
+
 const rows = [];
 const add = (tier, key, label, unit, value) => rows.push({ tier, key, label, unit, value });
 
@@ -34,6 +44,8 @@ add('beginner', 'sensiblePerGal', 'Sensible heat per gallon circulated', 'Btu/ga
 add('beginner', 'btexTonsYear', 'BTEX carried to the still overhead', 'short tons/yr', ikPack.btexTonsYear);
 
 /* ---------------------------------------------------- Professional ----- */
+// FC4-0 put this export inside the module's error contract: it returns
+// { fractionRemoved } or { error } where it used to return a bare number.
 const otFrac = G.kremserFractionRemoved(OTUMARA_ABSORBER);
 const otStages = G.kremserStagesFor({
   absorptionFactor: OTUMARA_ABSORBER.absorptionFactor,
@@ -42,7 +54,7 @@ const otStages = G.kremserStagesFor({
 const otAmine = G.aminePackage(OTUMARA);
 const otRetuned = G.aminePackage({ ...OTUMARA, leanLoading: OTUMARA_RETUNED_LEAN_LOADING });
 
-add('intermediate', 'fractionRemoved', 'Removal at the stated stage count', 'fraction', otFrac);
+add('intermediate', 'fractionRemoved', 'Removal at the stated stage count', 'fraction', otFrac.fractionRemoved);
 add('intermediate', 'stagesNeeded', 'Theoretical stages the spec demands', 'stages', otStages.stages);
 add('intermediate', 'acidMolesDay', 'Acid gas the solution picks up', 'lbmol/day', otAmine.acidMolesDay);
 add('intermediate', 'circGpm', 'Amine circulation', 'gpm', otAmine.circGpm);
@@ -50,8 +62,18 @@ add('intermediate', 'reboilerMMBtuHr', 'Regenerator duty', 'MMBtu/hr', otAmine.r
 add('intermediate', 'circGpmRetuned', 'Amine circulation at the leaner lean', 'gpm', otRetuned.circGpm);
 
 /* --------------------------------------------------------- Expert ----- */
-// WITHHELD until FC4-0 is vendored: four of these six read the
-// Joule-Thomson chain. The generator runs; the answer file is not cut.
+// The Joule-Thomson chain. Ordered so the one field MEASURED to be stable
+// across the FC4-0 vendoring leads, and the five that move follow it in the
+// order their causes compound: the coefficient, then the cooling the march
+// builds from it, then the arrival temperature that is the cooling
+// subtracted from a typed inlet, then the two water reads.
+//
+// STABLE IS A MEASURED CLAIM HERE, NOT A REASONED ONE. An earlier ordering
+// led with dzdT AND the inlet water content on the reasoning that neither
+// touched the Joule-Thomson chain. The inlet water content moves: it is a
+// molar quantity and the module's standard base was one of the repairs.
+// `gate_movement.mjs` re-measures the whole set against the pre-vendoring
+// engine and fails if the STABLE list below is not exactly what holds.
 const esMu = G.jouleThomsonFPerPsi({
   pPsia: ESCRAVOS.p1Psia, tF: ESCRAVOS.tF,
   gasSg: ESCRAVOS.gasSg, cpBtuLbmolF: ESCRAVOS.cpBtuLbmolF,
@@ -61,11 +83,11 @@ const esWaterIn = G.saturatedWaterContent({ pPsia: ESCRAVOS.p1Psia, tF: ESCRAVOS
 const esWaterOut = G.saturatedWaterContent({ pPsia: ESCRAVOS.p2Psia, tF: esDrop.t2F });
 
 add('advanced', 'dzdT', 'The z-factor temperature derivative at inlet', 'per degR', esMu.dzdT);
+add('advanced', 'muFPerPsi', 'Joule-Thomson coefficient at inlet', 'degF/psi', esMu.muFPerPsi);
+add('advanced', 'dropF', 'Cooling across the let-down', 'degF', esDrop.dropF);
+add('advanced', 't2F', 'Low temperature separator inlet', 'degF', esDrop.t2F);
 add('advanced', 'waterInLbMMscf', 'Water the warm gas carries at inlet', 'lb/MMscf', esWaterIn.lbPerMMscf);
-add('advanced', 'muFPerPsi', 'Joule-Thomson coefficient at inlet [FC4-0]', 'degF/psi', esMu.muFPerPsi);
-add('advanced', 'dropF', 'Cooling across the let-down [FC4-0]', 'degF', esDrop.dropF);
-add('advanced', 't2F', 'Low temperature separator inlet [FC4-0]', 'degF', esDrop.t2F);
-add('advanced', 'waterOutLbMMscf', 'Water the cold gas can still hold [FC4-0]', 'lb/MMscf', esWaterOut.lbPerMMscf);
+add('advanced', 'waterOutLbMMscf', 'Water the cold gas can still hold', 'lb/MMscf', esWaterOut.lbPerMMscf);
 
 if (process.argv.includes('--json')) {
   console.log(JSON.stringify(rows, null, 1));
@@ -75,5 +97,6 @@ if (process.argv.includes('--json')) {
     if (r.tier !== tier) { tier = r.tier; console.log(`\n# ${tier}`); }
     console.log(`  ${r.key.padEnd(20)} ${String(r.value).padEnd(24)} ${r.unit.padEnd(14)} ${r.label}`);
   });
-  console.log('\n# [FC4-0] marks a field that reads the Joule-Thomson chain and will move when the repair is vendored. The Expert answer file is NOT cut until then.');
+  console.log(`\n# ${STABLE.length} of ${rows.length} fields are MEASURED to hold bit-identical across the FC4-0 vendoring: ${STABLE.join(', ')}.`);
+  console.log('# Every other field moved, and gate_movement.mjs names the cause of each.');
 }
