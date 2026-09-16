@@ -1358,91 +1358,77 @@
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "f5262a523739be110b3a1c7b04e8c70ec2d1ce37",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
-    },
-    {
-      "path": "engines/economics/cashflow.ts",
-      "kind": "differing",
-      "group": "4-economics-revendor",
-      "vendoredSha": "17a3af1c129ce97de2630ac2b224efc4cc54f2ee",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/decisionTree.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "0e6b723987506b5da772c85bdbddd35b150940fc",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/costCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "42363da0f2ca7e6f919d29c58ed8d50d99902f1a",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/facilitiesCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "d20c1d97a81f570555f09c3fe5ec701fe781360f",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/fdpCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "bc641603fcd05a6054018051af9a68b34d3c5aa6",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/scheduleCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "6727c25f942087e98f44707c4d1fed16bcb0121d",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/wellCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "a35fc3034598dbbe9419e5058931d63d796d6cd1",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
-    },
-    {
-      "path": "engines/economics/fiscalRegime.js",
-      "kind": "differing",
-      "group": "4-economics-revendor",
-      "vendoredSha": "64f4811fdfce3228647d76dc5f7140fbcabc29db",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/montecarlo.ts",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "3f73b78488c9996848443b26375c3e25cc5e429a",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/portfolio.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "9255c481cd30269195c0396729425f6664cce075",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/screening.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "9cc861c81de21005fdbed7083806d354b9d1beda",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/economics/voi.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "04302a01f008a12cde1b703825b13ba289155800",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
       "path": "engines/drilling/profileDesign.js",
@@ -1585,13 +1571,6 @@
       "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
     },
     {
-      "path": "__tests__/economics.cashflow.test.ts",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "2cc14b59b2b926b3c3447bce9b73bc85f45f17a1",
-      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
-    },
-    {
       "path": "__tests__/economics.decision.test.js",
       "kind": "differing",
       "group": "6-test-layer-drift",
@@ -1603,13 +1582,6 @@
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "95fcc172b5cbbb864fc7c207fe2405e8d43c1f9d",
-      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
-    },
-    {
-      "path": "__tests__/economics.fiscal.test.js",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "5a04444c186779e497221976054ed67121640607",
       "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
     },
     {
@@ -1760,13 +1732,6 @@
       "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
     },
     {
-      "path": "test-data/economics/goldens/cashflow_cases.json",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "009c83b44b8d5277bc9873e41b1e0be7d7e9fa25",
-      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
-    },
-    {
       "path": "test-data/economics/goldens/decision_cases.json",
       "kind": "differing",
       "group": "6-test-layer-drift",
@@ -1778,13 +1743,6 @@
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "3c35c0ba1b8e807fa3cb239397dd30fdfc0390ee",
-      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
-    },
-    {
-      "path": "test-data/economics/goldens/fiscal_cases.json",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "96a06d1e9bdacf08470c75ba48fbc1374d018d5a",
       "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
     },
     {
@@ -1928,13 +1886,6 @@
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
-      "path": "tools/validation/economics/FINDINGS-cashflow.md",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "a3cd23b057abff4a5081fc897f12d0aa544c50b2",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
       "path": "tools/validation/economics/FINDINGS-decision.md",
       "kind": "differing",
       "group": "6-test-layer-drift",
@@ -1946,13 +1897,6 @@
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "39ab04456e67460bd1bae27502698622d14dfd45",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
-      "path": "tools/validation/economics/FINDINGS-fiscal.md",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "ebc26ff67e56d219b0209e98b617edd48fe5e0e1",
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
@@ -1970,13 +1914,6 @@
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
-      "path": "tools/validation/economics/oracle_cashflow.py",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "da0fcadd8d664aba8c90193aba988093879a0d06",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
       "path": "tools/validation/economics/oracle_decision.py",
       "kind": "differing",
       "group": "6-test-layer-drift",
@@ -1988,13 +1925,6 @@
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "ba6e3767f6deb9750750375879924fcbc1f1d8cd",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
-      "path": "tools/validation/economics/oracle_fiscal.py",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "9d1e1a4eeb20a169c333f425308cf99a8eab2ce6",
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
