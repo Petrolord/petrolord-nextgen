@@ -88,7 +88,7 @@ const buildDigest = () => {
   };
 
   w('# FC1 Separation & Slug Catching. Teaching digest.');
-  w('# Vessel work prints to six decimals (ft, ft2, ft per s, lb per ft3, ratios); metres, kilowatts and seconds to four; counts are whole numbers.');
+  w('# Vessel work prints to six decimals: every ft, ft2, lb per ft3 and ft per s figure, so each density, velocity, diameter, height, length, margin, fraction and actual gas rate carries six. Site work prints to four decimals: every metre, kilowatt and second, so each setback, shortfall and drop crossing time carries four. Counts are whole numbers.');
   w('# Field units: MMscfd, bpd, psig and psia, degF, ft, minutes. Site work is in metres.');
   w('# Nothing here is read from a clock or a random number, so every line reproduces.');
   w();

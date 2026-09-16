@@ -29,7 +29,7 @@ The second case appears when the same field is made progressively more expensive
 
 | capex multiple | 40 | 50 | 60 | 70 | 80 | 90 | 100 | 110 | 120 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| x1 | 63.4520 | 59.5510 | 65.7226 | 68.7654 | 70.9486 | 72.5065 | 73.7920 | 74.1974 | 75.5825 |
+| x1 | 63.4520 | 59.5510 | 66.9424 | 72.4012 | 76.0199 | 78.4920 | 80.3565 | 81.6019 | 83.1392 |
 | x3 | null | 2223.0766 | 144.0692 | 85.6015 | 67.2176 | 59.3155 | 53.8218 | 56.8449 | 59.9462 |
 
 Read the x3 row along its length: undefined at 40 USD per bbl, exceeds at 50 with a number in the thousands and at 60 with one in the hundreds, and a share from 70 onward, starting at 85.6015. Four consecutive points, three states, one line, and each point flagged.

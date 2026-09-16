@@ -1,0 +1,102 @@
+{
+ "app_slug": "reservoircalc",
+ "tier": "advanced",
+ "tier_name": "Expert",
+ "course": "ReservoirCalc Pro",
+ "generated": "2026-09-16",
+ "finding": "docs/gate-audit/promptleak.md section 5",
+ "old_text_source": "the live production row, read 2026-09-16 (select prompt, fields::text from public.academy_capstones)",
+ "new_text_source": "the live prompt with the substring replacements listed below, each asserted to match exactly once",
+ "prompt_changed": false,
+ "prompt_replacements": [],
+ "prompt_old": "Replace the constant porosity with a per-node property grid: fit a porosity trend surface to the six well values (0.22, 0.19, 0.23, 0.17, 0.21, 0.22 for Ekene-1 to Ekene-6) with the population engine and rerun the volumetrics at the 1560 m contact. Read the panel: the trend porosity at prospect P-1 and its mean over the oil-bearing nodes, the pore volume and HCPV, the STOIIP, and how much the trend model adds over the constant-porosity booking.",
+ "prompt_new": "Replace the constant porosity with a per-node property grid: fit a porosity trend surface to the six well values (0.22, 0.19, 0.23, 0.17, 0.21, 0.22 for Ekene-1 to Ekene-6) with the population engine and rerun the volumetrics at the 1560 m contact. Read the panel: the trend porosity at prospect P-1 and its mean over the oil-bearing nodes, the pore volume and HCPV, the STOIIP, and how much the trend model adds over the constant-porosity booking.",
+ "fields_old": [
+  {
+   "key": "phi_at_p1",
+   "tol": 0.001,
+   "unit": "v/v",
+   "label": "Trend porosity at P-1",
+   "expected": 0.20714187889686578
+  },
+  {
+   "key": "phi_mean_oil",
+   "tol": 0.001,
+   "unit": "v/v",
+   "label": "Mean trend porosity over oil nodes",
+   "expected": 0.20936760570720417
+  },
+  {
+   "key": "pore_trend_mm3",
+   "tol": 0.02,
+   "unit": "10^6 m3",
+   "label": "Pore volume, trend model",
+   "expected": 3.7558468705687864
+  },
+  {
+   "key": "hcpv_trend_mm3",
+   "tol": 0.02,
+   "unit": "10^6 m3",
+   "label": "HCPV, trend model",
+   "expected": 2.4413004882563025
+  },
+  {
+   "key": "stoiip_trend_mmstb",
+   "tol": 0.05,
+   "unit": "MMstb",
+   "label": "STOIIP, trend model",
+   "expected": 12.79607650919541
+  },
+  {
+   "key": "stoiip_delta_mmstb",
+   "tol": 0.02,
+   "unit": "MMstb",
+   "label": "STOIIP added over the constant model",
+   "expected": 0.656868401698647
+  }
+ ],
+ "fields_new": [
+  {
+   "key": "phi_at_p1",
+   "tol": 0.001,
+   "unit": "v/v",
+   "label": "Trend porosity at P-1",
+   "expected": 0.20714187889686578
+  },
+  {
+   "key": "phi_mean_oil",
+   "tol": 0.0002,
+   "unit": "v/v",
+   "label": "Mean trend porosity over oil nodes",
+   "expected": 0.20936760570720417
+  },
+  {
+   "key": "pore_trend_mm3",
+   "tol": 0.02,
+   "unit": "10^6 m3",
+   "label": "Pore volume, trend model",
+   "expected": 3.7558468705687864
+  },
+  {
+   "key": "hcpv_trend_mm3",
+   "tol": 0.02,
+   "unit": "10^6 m3",
+   "label": "HCPV, trend model",
+   "expected": 2.4413004882563025
+  },
+  {
+   "key": "stoiip_trend_mmstb",
+   "tol": 0.05,
+   "unit": "MMstb",
+   "label": "STOIIP, trend model",
+   "expected": 12.79607650919541
+  },
+  {
+   "key": "stoiip_delta_mmstb",
+   "tol": 0.02,
+   "unit": "MMstb",
+   "label": "STOIIP added over the constant model",
+   "expected": 0.656868401698647
+  }
+ ]
+}

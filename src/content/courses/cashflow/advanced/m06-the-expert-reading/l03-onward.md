@@ -4,7 +4,7 @@ A fiscal ledger is a model of a law as one engine reads it. Be clear about what 
 
 ## What it earns
 
-It turns a contract into a number with a provenance. AKATA under the PIA is NPV 42943268.01 on the real basis, end-year, base year 2029, framework nta_2025, shallow water, converted PML, conservative reading, and every one of those words is a lever the ledger has shown moving. It prices the levers in one currency: the terrain string is worth the distance from 42943268.01 to 141623594.88, a CPR cap of 40 percent takes the same field to -1723561.25, and a 50 percent working interest halves NPV to 21471634.00 while leaving take at 75.6789 percent and IRR at 21.3196.
+It turns a contract into a number with a provenance. AKATA under the PIA is NPV 43223505.88 on the real basis, end-year, base year 2029, framework nta_2025, shallow water, converted PML, conservative reading, and every one of those words is a lever the ledger has shown moving. It prices the levers in one currency: the terrain string is worth the distance from 43223505.88 to 141623594.88, a CPR cap of 40 percent takes the same field to -1723561.25, and a 50 percent working interest halves NPV to 21611752.94 while leaving take at 75.5752 percent and IRR at 21.3784.
 
 It also says what to negotiate. A cap that binds, a lease status, a reading of the deep offshore rule: those move NPV further than the oil price sweep from 82 to 120 does, and they are words in a document rather than a market.
 
@@ -18,7 +18,7 @@ It stops at the last row. What an unused loss pool, a forfeited CPR balance or u
 
 ## The limit worth remembering
 
-A number without its convention is not a number, and the fiscal edges are where that costs most: the same rows produced 72534830.66, 42943268.01, 141623594.88 and 61725382.46 without a barrel or a price changing, and each of the four is right for its question.
+A number without its convention is not a number, and the fiscal edges are where that costs most: the same rows produced 72534830.66, 43223505.88, 141623594.88 and 61725382.46 without a barrel or a price changing, and each of the four is right for its question.
 
 ## What you have finished
 
@@ -26,4 +26,4 @@ Which regime, which framework, which terrain, which base each tax is charged on,
 
 ## Exercise
 
-Write the full sentence that names 42943268.01, with every string it depends on. Then list the three questions a fiscal ledger answers and the three it hands to someone else.
+Write the full sentence that names 43223505.88, with every string it depends on. Then list the three questions a fiscal ledger answers and the three it hands to someone else.

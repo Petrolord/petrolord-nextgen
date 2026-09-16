@@ -1,6 +1,6 @@
 # When there are two
 
-A vector whose last entry is negative has an NPV curve that crosses zero twice. The engine reports one crossing, does not say which, and does not say that there was another.
+A vector whose last entry is negative has an NPV curve that crosses zero twice. The engine names neither crossing: it reports null, says multiple-roots, and lists the roots it found.
 
 {{panel:ec-time-explorer}}
 
@@ -21,9 +21,9 @@ two_roots_2_and_6 is [-100, 208, -108.12]. Its sampled NPV curve:
 | 10 | -0.264463 |
 | 20 | -1.750000 |
 
-The engine reports 6.0000 percent. The golden records 2.0000 percent, the oracle's root, and the NPV is printed as 0.000000 at both. Newton starts at 10 percent, where the curve reads -0.264463 and rises toward the root at 6, so 6 is where it lands. The oracle reports the root nearest zero on the positive side, the hurdle-rate region. The recorded note on the case says that the method statement does not choose, that both zero the NPV, and that the choice is an owner decision.
+The curve is zero at 2 percent and again at 6. Both lie inside the band from -99 to 1000 percent, so the engine refuses to call either one the IRR: irr is null, irrStatus is multiple-roots, and the roots are listed beside the status as 2.0000 and 6.0000 percent.
 
-The reported root is an accident of the start. two_roots_10_and_20, [-100, 230, -132], has roots at 10 and 20 percent and reports 10.0000, because Newton begins on one. three_roots_0_7_33, [-100, 340, -382.4, 142.4], reads 0.000000 at 0 percent, -0.005143 at 7, 0.010161 at 8, 0.081930 at 30 and -0.012624 at 33. The engine reports 7.3509 percent and the oracle 0.0000.
+The same rule catches every vector of the shape. two_roots_10_and_20, [-100, 230, -132], is null with 10.0000 and 20.0000 listed. two_roots_5_and_50 is null with 5.0000 and 50.0000. three_roots_0_7_33, [-100, 340, -382.4, 142.4], is null with 0.0000, 7.3509 and 32.6491. one_in_band_one_above, [-1, 30, -200], is null with 900.0000 listed and irrRootAboveBand set, its other crossing being past the top of the band.
 
 ## Why a terminal negative does it
 
@@ -31,16 +31,20 @@ At very negative rates the discount factor on the last entry is enormous, so a n
 
 ## AKATA
 
-AKATA with an abandonment of 60000000 in 2035 ends in -29598201.95. Its NPV is 81637829.18 at 0 percent and -78880508.48 at 100 percent, so it is positive in the middle and negative at the ends, and it has two roots. The engine reports 23.2570 percent, and the headline NPV at the configured rate is 38666394.86. Nothing in the return says a second root exists.
+AKATA with an abandonment of 60000000 in 2035 ends in -29598201.95. Its NPV is 81637829.18 at 0 percent and -78880508.48 at 100 percent, so it is positive in the middle and negative at the ends, and it crosses twice. The engine reports IRR null. The headline NPV at the configured rate is still 38666394.86, the number a decision is made on.
+
+## What the engine used to do
+
+Until engines 3.10.0 the engine reported whichever root Newton reached from 10 percent, with nothing to say a second existed. two_roots_2_and_6 returned 6.0000 percent where the oracle read 2.0000, three_roots_0_7_33 returned 7.3509 where the oracle read 0.0000, and AKATA with the 60000000 abandonment returned 23.2570 percent. Which root came back was an accident of the starting point. The golden records no disagreement now.
 
 ## The mistake
 
-The careful mistake is to take 6.0000 percent to a hurdle of 5 percent and approve. The NPV at 5 percent is 0.027211, positive, so on this vector the approval happens to hold. The same reasoning on three_roots_0_7_33, 7.3509 percent against a hurdle of 5 percent, approves a vector whose NPV at 5 percent is -0.028075. A root is where the curve is zero; a comparison with a hurdle needs the sign of the curve at the hurdle, which is the NPV, not a root.
+The careful mistake survives the repair. It is to take any single rate to a hurdle and approve. Carry 6.0000 percent to a hurdle of 5 percent and the approval happens to hold, because the NPV at 5 percent is 0.027211. The same reasoning on three_roots_0_7_33, 7.3509 against 5 percent, approves a vector whose NPV at 5 percent is -0.028075. A root is where the curve is zero; a hurdle comparison needs the sign of the curve there, which is the NPV.
 
 ## What it refuses
 
-It refuses to count the roots, to flag a multi-root profile, or to choose the hurdle-side root. The choice is recorded as an owner decision and not yet made, so the reported IRR on any terminal-negative vector is one of two, and the reader must supply the other.
+It refuses to choose a root, and it refuses to pretend a multi-root vector has an IRR. It refuses to look outside the band. And it refuses to make the decision: what the roots mean against a hurdle is the reader's to work out.
 
 ## Exercise
 
-From the sampled curve of two_roots_2_and_6, write the sign of the NPV at 1, 4 and 7 percent, and say from those three signs alone why there must be two roots. Then say which root a finder started at 3 percent would reach, and why that would not be an error either.
+From the sampled curve of two_roots_2_and_6, write the sign of the NPV at 1, 4 and 7 percent, and say from those three signs alone why there must be two roots. Then say what the engine returns for this vector, and which number a hurdle comparison should use instead.

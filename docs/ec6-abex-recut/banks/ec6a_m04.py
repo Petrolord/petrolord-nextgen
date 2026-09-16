@@ -1,0 +1,112 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+q(2, "ODUDU-2 carries planned costs of 2400000, 5200000, 8600000, 12500000 and 3300000, and reports an earned value of 8360000 at every as-of date. Where does 8360000 come from?",
+ "Each task's own budget taken at that task's own percent complete and then summed, which is why no date moves it.",
+ ["The planned costs of the tasks that have started, since a task enters the earned value at its full budget once work opens on it.",
+  "The spending column added up, 2510000 and 3180000 and 2450000, which is what the project has actually paid out so far.",
+  "The share of the 32000000 budget the calendar had scheduled by 2028-12-31."],
+ "Front end engineering at 100.0000 percent, Detailed design at 65.0000 percent and Procurement at 30.0000 percent build the 8360000; the spending column builds 8140000 and the planned costs build 32000000.")
+
+q(0, "ODUDU-2 reports a cost index of 1.027027 on every one of its five as-of dates. What has that number measured?",
+ "An earned value of 8360000 against an actual cost of 8140000, so the work that has been done was bought for slightly less than the budget attached to it.",
+ ["An earned value of 8360000 against a planned value of 10178668, so the project is a little ahead of what the plan asked for.",
+  "An actual cost of 8140000 against a planned value of 10178668, so spending is running under what the calendar had scheduled.",
+  "An earned value of 8360000 against the budget at completion of 32000000, so about a quarter of the job has been bought."],
+ "Nothing in the cost index is about time: 8360000 over 8140000 is 1.027027 whether the date is 2028-01-01 or 2031-01-01, while the schedule reading on those two dates is none and 0.261250.")
+
+q(3, "A published three task case reports planned value 1750, earned value 1500 and actual cost 1450, with a schedule index of 0.857143 beside a cost index of 1.034483. How does one earned value produce two different answers?",
+ "It is divided by two different denominators, 1750 for time and 1450 for money.",
+ ["The schedule index is taken at the as-of date while the cost index is taken over the whole window, so the two cover different stretches of the same work.",
+  "The cost index carries the plan of 1750 inside it as well, which is why the two readings differ by the amount the plan and the spending differ by.",
+  "The engine builds the schedule index from the planned costs and the cost index from the invoices, so the two are computed over different task lists."],
+ "1500 over 1750 is 0.857143 and 1500 over 1450 is 1.034483: a report that quotes a single index has answered one of the two questions and left the other open.")
+
+q(1, "ODUDU-2 reports a schedule index of 2.437529 at 2028-06-30 and 0.439389 at 2029-06-30, with an earned value of 8360000 and an actual cost of 8140000 on both rows. What happened to the project between those dates?",
+ "Nothing: the planned value rose from 3429703 to 19026406 as the calendar moved, and the plan's own demand ran past the work.",
+ ["Work stopped for the best part of a year on a project that had been running ahead of its plan, which is what a fall from 2.437529 to 0.439389 records.",
+  "The budget at completion grew as tasks were added, so the same earned value now covers a smaller share of a bigger job.",
+  "Spending overtook progress, which drags a schedule index down once the actual cost of 8140000 has passed the earned value."],
+ "Earned value and actual cost are unmoved across all five as-of dates; planned value is the only figure the date reaches, and the schedule index moves with it.")
+
+q(0, "At an as-of date of 2031-01-01 ODUDU-2 reports a planned value of 32000000, which is exactly its budget at completion. Why do the two meet there?",
+ "Every planned window has closed by then, so the whole budget had been scheduled and the plan has nothing left to ask for on a later date.",
+ ["The project finished on 2031-01-01, so the plan and the work had both run their course by the time the question was asked.",
+  "Commissioning runs to 2030-10-31 and the engine stretches that last window to the year end, which rounds the planned value up to the whole budget.",
+  "The planned value is set to the budget at completion once the earned value of 8360000 has stopped moving, since nothing further can be phased."],
+ "Commissioning is the last window and it shuts on 2030-10-31; with every window closed the planned value equals the 32000000 the task list sums to, and the schedule index reads 0.261250.")
+
+q(2, "ODUDU-2's completion ratio stands at 0.261250 on all five as-of dates. What is it a ratio of?",
+ "An earned value of 8360000 over a budget at completion of 32000000, a sum of planned costs that no date changes.",
+ ["An earned value of 8360000 over the planned value the calendar had reached, which is 10178668 on the date the project is usually reported.",
+  "The share of the five tasks that are finished, since Front end engineering stands at 100.0000 percent and the rest are still running.",
+  "The actual cost of 8140000 over the same 32000000, which is the money paid out."],
+ "Add 2400000, 5200000, 8600000, 12500000 and 3300000 and the denominator is 32000000 on every date, so 8360000 over it gives 0.261250 on every date.")
+
+q(1, "A completion ratio can never read above one and a schedule index can. What in the arithmetic makes that so?",
+ "Earned value cannot pass the budget at completion because progress stops at 100.0000 percent, while the planned value it is divided by stays smaller than that budget until the last window closes.",
+ ["The engine clips any schedule index above one before it is displayed, and applies no such clip to the completion ratio it prints beside it.",
+  "The completion ratio counts finished tasks only, so it stops at the five in the list, while the schedule index counts money and carries no ceiling at all.",
+  "The schedule index carries the cost index inside it, so a project bought under its budget at 1.027027 can be pushed above one on the schedule reading."],
+ "One task 90.0000 percent done half way through its window reads a schedule index of 1.795082 against a completion ratio of 0.900000 at the same moment.")
+
+q(3, "One task 90.0000 percent done half way through its own window reports a schedule index of 1.795082. What does that number claim?",
+ "That the work earned to this date is worth more than the plan had scheduled to this date.",
+ ["That the task has earned nearly twice its own budget, which is why the completion ratio standing beside it reads 0.900000.",
+  "That the task will finish well ahead of its window, since the index scales the time still to run by the pace already achieved.",
+  "That the money was spent efficiently, since an index above one is what a project buys when its cost index also reads above one at 1.027027."],
+ "It says nothing about money and nothing about the finish: the completion ratio on the same task at the same moment is 0.900000, and the task still has half its window to survive.")
+
+q(2, "ODUDU-2 at an as-of date of 2028-01-01 reports an earned value of 8360000, an actual cost of 8140000 and no schedule index at all. Why is there no index on that row?",
+ "No window has opened by that date, so the planned value is 0 and there is no denominator to divide by.",
+ ["The engine withholds the index until Front end engineering opens on 2028-01-10, because an earned value of 8360000 cannot be real before the first window.",
+  "The index would be unbounded, so the engine prints the cost index of 1.027027 alone.",
+  "The as-of date falls before the project start, so every figure on that row is withheld and the 8360000 shown is carried up from the row beneath it."],
+ "Earned value is not time-phased and reads 8360000 on every date, while the planned value at 2028-01-01 is 0; a published case read at 2025-12-31, before its window opens, reports the same absence.")
+
+q(1, "An as-of date typed as last Friday is refused with ProjectControlsInputError: \"asOf is not a valid date: last Friday\". Why is no default date put in its place?",
+ "A quietly substituted date would make every index on the report impossible to reproduce, because a planned value and a schedule index are a pair of a project and a date.",
+ ["The engine has no clock to fall back on, and a date read as UTC midnight lands on the day before anywhere west of Greenwich.",
+  "A phrase like that could mean any of the five dates on the report, so the engine asks for one of 2028-01-01, 2028-06-30, 2028-12-31, 2029-06-30 or 2031-01-01.",
+  "The refusal protects the earned value of 8360000 and the actual cost of 8140000, which would otherwise be recomputed against the wrong week of the plan."],
+ "ODUDU-2 at 2028-12-31 reports a planned value of 10178668 and a schedule index of 0.821326 whenever it is run, this year or in five years, because nothing in the calculation asks what today is.")
+
+q(0, "A reviewer sets a status pack reading 2.437529 beside a live screen reading 0.439389 and concludes the project has collapsed. What is wrong with that reading?",
+ "The two figures carry different as-of dates, 2028-06-30 and 2029-06-30, and the earned value behind both of them is the same 8360000.",
+ ["The pack quoted the cost index and the screen the schedule index, which is why one reads above one and the other well below it.",
+  "The screen reports the completion ratio of 0.261250 rescaled to the window still to run, so the two numbers were never the same measurement.",
+  "The pack was run before Procurement was costed at 8600000, so its denominator was missing a task the screen now carries in full."],
+ "Planned value moves from 3429703 to 19026406 between those dates while no work is done and no money is spent, so the fall is the calendar and not the team.")
+
+q(3, "Which figures on an earned value report does the as-of date reach?",
+ "The planned value, and the schedule index through it.",
+ ["All five, since each figure is a measurement taken at the stated date and a later date finds more work done and more money spent.",
+  "The earned value and the planned value, since both are built from the task windows, while the actual cost of 8140000 comes from what was invoiced.",
+  "The two indexes alone, since the three money figures of 10178668, 8360000 and 8140000 are properties of the task list rather than of the date."],
+ "Across the five dates the earned value stays 8360000 and the actual cost stays 8140000 for a cost index of 1.027027, while the planned value runs 0, 3429703, 10178668, 19026406 and 32000000.")
+
+q(1, "A published case read at 2027-06-30, after its last window has closed, reports a planned value of 1000 against an earned value of 600 for an index of 0.600000. What can that denominator no longer say?",
+ "That the work is early, because the plan has run out of time to schedule anything and the denominator now holds the whole budget.",
+ ["That the work is late, since a denominator that has reached the whole budget can only push the index above one from that point onward.",
+  "That any work is left to do, since 0.600000 on a closed window is the share of the budget abandoned.",
+  "That the cost is under control, since the case reports no actual cost at all."],
+ "Before the last window closes the planned value is smaller than the budget at completion, and that gap is the only room a schedule index has to read above one.")
+
+q(2, "ODUDU-2's schedule index and completion ratio both read 0.261250 at 2031-01-01 and disagree on every earlier date. Is that agreement reassuring?",
+ "No: they meet only because the planned value has reached the budget at completion of 32000000, which means every window has shut.",
+ ["Yes: two measurements built on different denominators arriving at one figure is the reconciliation that shows the task list and the calendar agree.",
+  "Yes: an index that has settled onto 0.261250 has stopped moving, and so has the schedule.",
+  "No: they meet because the earned value of 8360000 is frozen in both numerators."],
+ "At 2028-06-30 the same two numbers read 2.437529 and 0.261250; the meeting at 2031-01-01 says the plan ran out of calendar, not that the work was finished.")
+
+q(0, "Two published cases read half way through a single window report planned value 500 against earned value 500 for an index of 1.000000, and planned value 500 against earned value 250 for 0.500000. How was the 500 of planned value arrived at?",
+ "Each costed task's budget is spread across that task's own planned window and then cut off at the as-of date, so half a window carries half the budget.",
+ ["The budget at completion is divided between the tasks whose windows are open, which puts half of a two task plan into the planned value.",
+  "The earned value is rounded to the nearest planned figure once the as-of date falls inside a window, which is why 500 appears on both rows.",
+  "The plan books a task's whole budget on the day its window opens, so any window that opened before the as-of date carries all of its cost."],
+ "The same rule gives ODUDU-2 a planned value of 3429703 at 2028-06-30 and 10178668 at 2028-12-31 out of the same five windows.")
+
+emit(Q, '/root/ec-wip-fdp/banks/ec6a_m04.json')
+finish()

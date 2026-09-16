@@ -1,6 +1,6 @@
 # NPV after royalty and tax
 
-The Base scenario is worth 2047.5653 million USD, and that figure is what is left of 16095.0492 million USD of gross revenue after the state, the drill bit, the vessel and the discount rate have each taken their part.
+The Base scenario is worth 2015.4123 million USD, and that figure is what is left of 16095.0492 million USD of gross revenue after the state, the drill bit, the vessel and the discount rate have each taken their part.
 
 {{panel:ec-plan-explorer}}
 
@@ -10,13 +10,13 @@ The Base scenario is worth 2047.5653 million USD, and that figure is what is lef
 | --- | --- |
 | gross revenue | 16095.0492 |
 | royalty | 2011.8812 |
-| tax | 3310.0565 |
+| tax | 3276.9239 |
 | capex | 2250.0000 |
 | operating cost | 3049.6464 |
-| government take | 5321.9377 |
-| NPV | 2047.5653 |
+| government take | 5288.8051 |
+| NPV | 2015.4123 |
 
-Royalty of 2011.8812 and tax of 3310.0565 are the government take of 5321.9377, which is 0.330657 of gross revenue. The default terms behind those two lines are a royalty of 12.5000 percent and a tax of 30.0000 percent, and the engine applies them year by year rather than to the life total. The capex of 2250.0000 is the concept's own money, read from the three capex fields the concept carries and not from a separate economics box.
+Royalty of 2011.8812 and tax of 3276.9239 are the government take of 5288.8051, which is 0.328598 of gross revenue. Tax is lower than it would otherwise be, because the plan's end-of-life cost of 260.0000 million USD is deductible in production year 20. The default terms behind those two lines are a royalty of 12.5000 percent and a tax of 30.0000 percent, and the engine applies them year by year rather than to the life total. The capex of 2250.0000 is the concept's own money, read from the three capex fields the concept carries and not from a separate economics box.
 
 ## The arithmetic in one year
 
@@ -24,11 +24,11 @@ Year 1 of the Base case earns 1533.0000 of gross revenue. Royalty is 12.5000 per
 
 ## Discounted mid year
 
-The 2047.5653 is a present value at a discount rate of 10.0000 percent, taken mid year rather than at each year end, which treats the cash as arriving through the year instead of on its last day. The undiscounted cash the case describes is far larger than the value it reports, and the gap is the discount rate doing its work on money that arrives late. Capex is the exception: it is spent before any of it, which is why a scenario that cannot earn enough after the state has been paid, such as the same concept at 18.0000 USD a barrel, lands at -1797.2732 rather than merely at a small positive figure.
+The 2015.4123 is a present value at a discount rate of 10.0000 percent, taken mid year rather than at each year end, which treats the cash as arriving through the year instead of on its last day. The undiscounted cash the case describes is far larger, and the gap is the discount rate at work on money that arrives late. Capex is the exception, spent before any of it, which is why the same concept at 18.0000 USD a barrel lands at -1834.1220 rather than at a small positive figure.
 
 ## The mistake
 
-Reading the NPV as cash in a bank account. Nothing in a plan ever pays out 2047.5653 million USD: the number is a comparison against earning 10.0000 percent somewhere else. The second mistake is treating government take as tax alone. Tax here is 3310.0565 and royalty is 2011.8812, and a reader who quotes only the first understates what the state receives by the second.
+Reading the NPV as cash in a bank account. Nothing in a plan ever pays out 2015.4123 million USD: the number is a comparison against earning 10.0000 percent somewhere else. The second mistake is treating government take as tax alone. Tax here is 3276.9239 and royalty is 2011.8812, and a reader who quotes only the first understates what the state receives by the second.
 
 ## What it refuses
 

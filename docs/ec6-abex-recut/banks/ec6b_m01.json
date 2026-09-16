@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The EGINA plan reads completeness 100 percent, 9 of 9 sections. What has the document established about those nine sections?",
+  "options": [
+   "That each one carries a figure somebody entered, which is all the check counts: it reports what is present and what is missing and fills no gap.",
+   "That each one was re-derived by the studio from the subsurface work, the well designs and the facility sizing behind the plan.",
+   "That the nine sections agree with each other, because the check reconciles the concept capex against the cost items before it scores.",
+   "That nine chapters of prose have been written, since the document scores the writing rather than the entries."
+  ],
+  "answer": 0,
+  "explanation": "The same plan with no economics written scores 89 percent and carries the error \"Total CAPEX is zero or missing.\", so a section counts when it holds an entry and never because the entry was checked."
+ },
+ {
+  "prompt": "A plan otherwise like EGINA, with its economics never written, scores 89 percent. Where does that figure come from?",
+  "options": [
+   "The economics section is weighted above the others, because the NPV of 2015.4123 million USD is the figure the document leads on and the rest of it support.",
+   "The score falls to the share of the six headline figures that survive, since the NPV of 2015.4123 million USD and the well count both drop out when no economics are written.",
+   "Eight of the nine sections still hold something, so the one empty section costs about a ninth of the score and the error names the CAPEX that is missing.",
+   "A plan that fails validation is given a fixed penalty score, the same one a plan whose reserves rows cannot be parsed receives."
+  ],
+  "answer": 2,
+  "explanation": "Completeness counts sections and does not weight them, and the error \"Total CAPEX is zero or missing.\" names the one that is empty."
+ },
+ {
+  "prompt": "A reader quotes EGINA's NPV of 2015.4123 million USD off the plan's headline and stops there. What is still missing?",
+  "options": [
+   "Nothing further, since the NPV is the one headline figure the studio derives for itself, rather than reading it off an entry that somebody typed into the plan.",
+   "Which capex it ran on, which price deck priced it and which production shape it burned, since one plan holds several answers to overlapping questions.",
+   "The rate of return beside it, because a present value can only ever be read next to the rate that the very same case returned for that concept.",
+   "The completeness score of 100 percent, because a plan scoring below it returns an NPV the studio marks provisional."
+  ],
+  "answer": 1,
+  "explanation": "The same concept is worth 2015.4123 million USD at 70.0000 USD a barrel and -1834.1220 million USD at 18.0000, so the deck is part of the number."
+ },
+ {
+  "prompt": "EGINA's concept capex of 2250.0000 million USD and its cost items CAPEX total of 2250.0000 million USD are the same figure. What does that agreement tell a reader?",
+  "options": [
+   "That the cost items are a roll-up of the concept's drilling, facilities and subsea fields, so the two figures cannot disagree on any plan the studio holds.",
+   "That the engine has reconciled the plan, since it refuses to price a plan whose line by line budget differs from the capex of the concept being priced.",
+   "That the facility screening estimate of 1363.3524 million USD has been superseded, because two figures that agree outrank a single one that stands alone.",
+   "That this plan was costed against the concept it is running, and no more than that."
+  ],
+  "answer": 3,
+  "explanation": "They are two different measurements that happen to match here; a plan where they differ has a question in it, and the studio will not answer that question for you."
+ },
+ {
+  "prompt": "The studio shows 1363.3524 million USD beside the plan's other cost figures. What is that number measured from?",
+  "options": [
+   "The concept's facilities field of 1350.0000 million USD, carried through the sizing model and adjusted for the vessel's gas and water handling capacity.",
+   "The concept capex of 2250.0000 million USD less the 520.0000 of drilling and the 380.0000 of subsea, leaving what the vessel itself is estimated to cost.",
+   "The facility type and its 60000 bopd nameplate, which makes it a class 5 figure covering the Egina FPSO alone and none of the drilling the plan carries.",
+   "The plan's own CAPEX cost lines for the vessel, which is why it sits below the 2250.0000 million USD that also carries drilling."
+  ],
+  "answer": 2,
+  "explanation": "The 2250.0000 million USD comes from seven cost lines somebody wrote and the 1363.3524 from a type and a nameplate; both print to four decimals and are not the same class of number."
+ },
+ {
+  "prompt": "The Egina FPSO returns a flow assurance level of Low on a fluid card with no H2S entry. What does that Low not rule out?",
+  "options": [
+   "Corrosion, because the corrosion screen cannot fire at all without an H2S figure, so the blank field reads as no corrosion risk rather than as a question nobody has asked.",
+   "Nothing at all, since the screen scores every hazard it knows against the fluid it was given and a Low means each one was tested and cleared.",
+   "Hydrates, since the hydrate screen fires only where a line runs on the seabed and the Deep tie-back was the only item it was run against.",
+   "Wax, since wax scores Medium on the Deep tie-back and a Medium is carried across to every facility sharing that fluid card."
+  ],
+  "answer": 0,
+  "explanation": "Put 12 ppm of H2S on that fluid and the tie-back's hazards read Hydrates High, Wax Medium and Corrosion High, so a Low is worth checking the missing fields against."
+ },
+ {
+  "prompt": "Which four terms sit behind every scenario the screening tier prices unless the scenario overrides them?",
+  "options": [
+   "Royalty 30.0000 percent, tax 12.5000 percent, discount 10.0000 percent and a variable operating cost of 5.0000 USD charged on every produced barrel of oil.",
+   "Royalty 12.5000 percent, tax 30.0000 percent, an oil price of 70.0000 USD a barrel and a peak production rate of 60.0000 kbpd carried in from the concept.",
+   "Tax 30.0000 percent, discount 10.0000 percent, an operating cost of 95.0000 million USD a year and a producing life of 20.0000 years taken from the concept.",
+   "Royalty 12.5000 percent, tax 30.0000 percent, discount 10.0000 percent and a variable operating cost of 5.0000 USD a barrel that rides with the barrels."
+  ],
+  "answer": 3,
+  "explanation": "The 5.0000 USD a barrel falls as production declines, and the discounting those four sit inside is mid year."
+ },
+ {
+  "prompt": "The screening tier discounts mid year. What does that convention do to the answer?",
+  "options": [
+   "It halves the 10.0000 percent discount rate for the first producing year, which is how the payback of 3.8273 years comes to fall between two whole years.",
+   "It treats a year of production as arriving in the middle of the year, which is closer to how a field earns and gives a slightly higher present value than year end discounting on the same cash flow.",
+   "It moves half of each year's capex into the year before it is spent, so the deepest cash position of -2250.0000 million USD arrives one period earlier.",
+   "It applies the 10.0000 percent rate at the middle of the 20.0000 year life rather than year by year, so a single factor prices the whole profile at once."
+  ],
+  "answer": 1,
+  "explanation": "It is a timing convention on the same cash flow, and the NPV of 2015.4123 million USD carries it."
+ },
+ {
+  "prompt": "On the EGINA Base case royalty takes 2011.8812 and tax 3276.9239 million USD. The studio reports 0.328598 alongside them. What is that ratio?",
+  "options": [
+   "Government take of 5288.8051 million USD over the net cash flow the concept generates once its capex of 2250.0000 million USD and its operating cost have been taken out of revenue.",
+   "Government take of 5288.8051 million USD over gross revenue of 16095.0492 million USD, royalty and tax added before any cost is taken out.",
+   "The share of the NPV of 2015.4123 million USD that royalty and tax removed before the remainder was discounted at 10.0000 percent.",
+   "The effective rate on profit, which is the 30.0000 percent tax lifted by the royalty charged ahead of it on the same barrels."
+  ],
+  "answer": 1,
+  "explanation": "Capex of 2250.0000 and operating cost of 3049.6464 million USD sit outside that ratio: it is take over gross revenue and nothing else."
+ },
+ {
+  "prompt": "The EGINA Base case never gets deeper than -2250.0000 million USD. Which year is that, and why that figure?",
+  "options": [
+   "The payback year 3.8273 years in, where the cumulative position finally turns and the capex has just been recovered out of the producing years.",
+   "The last year of the 20.0000 year life, where the decommissioning provision of 260.0000 million USD is charged against a profile that has declined to its lowest rate.",
+   "The stress case at 18.0000 USD a barrel, where the same concept is worth -1834.1220 million USD and the cash position is at its lowest point in the plan.",
+   "Year 0, which carries the capex and no production."
+  ],
+  "answer": 3,
+  "explanation": "The whole 2250.0000 million USD of capex is spent before the first barrel is sold, so the deepest point is the year before revenue starts."
+ },
+ {
+  "prompt": "A scenario priced at zero returns an NPV of -3554.2621 million USD, and a scenario with a blank oil price returns nothing at all. What separates them?",
+  "options": [
+   "Zero is a number somebody entered, so the tier prices it, while a blank is a gap and the engine answers \"the scenario oil price is missing\" instead of deciding it.",
+   "A blank is read as zero and then rejected for producing a negative value, since the engine declines any case worth less than the capex it carries.",
+   "The engine puts its default oil price of 70.0000 USD a barrel behind a blank and reports the substitution, so no separate figure is returned.",
+   "A price of zero skips royalty and tax, so the -3554.2621 million USD is capex and operating cost alone and a blank has no such shortcut."
+  ],
+  "answer": 0,
+  "explanation": "The difference between those two cases is the difference between a decision and a gap, and the engine will not make the second one for you."
+ },
+ {
+  "prompt": "Someone types the word lots into a capex box and the engine answers \"the concept capex is not a number: lots\". Why does the message repeat the word back?",
+  "options": [
+   "Because the engine cannot name the field when the value it received is text, so it quotes the entry in place of the box the entry came from.",
+   "Because a quoted value marks a warning rather than a refusal, so the case still runs on whichever capex field did hold a number.",
+   "Because the offending value is searchable, so the reader can find the cell that holds it instead of walking the plan.",
+   "Because the message is assembled from the cell reference, and lots is the heading the studio read that entry under."
+  ],
+  "answer": 2,
+  "explanation": "Five refusals quote the value back, -500, -5, abc, x and lots, and every one of them names the field as well."
+ },
+ {
+  "prompt": "Before the repair that preceded this course, a concept with no capex, no operating cost and no peak rate, priced by a scenario with no oil price, still returned a full set of screening economics. What was wrong with that output?",
+  "options": [
+   "It was rounded to four decimals from values the engine held at full precision, so the NPV, the IRR and the payback disagreed with one another by small amounts.",
+   "It was run on the other concept in the plan, the subsea tie-back, so the value of 1013.7182 million USD came back under the FPSO concept's name instead.",
+   "It carried a warning about the missing inputs which the studio printed in green, and readers took that green for a pass rather than for the notice it was.",
+   "It was arithmetic on four figures the reader never saw."
+  ],
+  "answer": 3,
+  "explanation": "The engine now stops instead and names the field: \"the concept carries no capex: enter a drilling, facilities or subsea capex\"."
+ },
+ {
+  "prompt": "What can the screening tier not answer, on its own terms?",
+  "options": [
+   "Whether one concept is worth carrying further than another, because one deck and one shape are applied to both and neither is tested on terms of its own.",
+   "What to sign, since it models no ring fencing, uplift, cost recovery pool or tax holiday, and says nothing about how likely 70.0000 USD a barrel is.",
+   "What a concept is worth after royalty and tax, because the tier reports gross revenue of 16095.0492 million USD and leaves the fiscal terms to the reader.",
+   "Which figures the plan left blank, because it prices whatever it is handed and reports nothing when a concept field was never filled in."
+  ],
+  "answer": 1,
+  "explanation": "Full fiscal detail under the PIA and the Nigeria Tax Act belongs to Petroleum Economics Studio, and this tier is one deck at one price on one shape."
+ },
+ {
+  "prompt": "What does the studio do with the figures a plan carries?",
+  "options": [
+   "It recomputes each figure from the study that produced it, which is how the reserves, the well designs and the facility sizing are kept in agreement inside one plan.",
+   "It checks each figure against the engine's published cases and flags any entry falling outside the range those cases cover before the plan is priced.",
+   "It totals them, dates them and prices them, and re-derives no subsurface, no well design and no facility sizing of its own.",
+   "It grades each figure by the class of estimate behind it, so a class 5 number is marked apart from a costed line."
+  ],
+  "answer": 2,
+  "explanation": "A figure typed into it is only as good as the work behind it: a reserves row of 95.0000 MMbbl at P50 is a number a subsurface team handed over, and the studio never checks the geology."
+ }
+]

@@ -16,9 +16,9 @@ Run all six templates on the same project and the revenue column does not move a
 | --- | --- | --- | --- | --- |
 | Nigeria - PIA (2021) | 406.2057 | 1339.2784 | 2686.9277 | 174.0882 |
 | Ghana - Deepwater | 428.8774 | 1316.6067 | 2686.9277 | 230.9340 |
-| Brazil - Concession | 912.1029 | 833.3812 | 2686.9277 | 564.6884 |
+| Brazil - Concession | 623.9658 | 1121.5184 | 2686.9277 | 852.8256 |
 | USA - Gulf of Mexico | 980.9313 | 764.5528 | 2686.9277 | 260.7539 |
-| Angola - Deepwater PSC | 545.1955 | 1200.2886 | 2686.9277 | 181.7318 |
+| Angola - Deepwater PSC | 481.7318 | 1263.7523 | 2686.9277 | 245.1955 |
 | Generic Royalty/Tax | 986.7327 | 758.7514 | 2686.9277 | 422.8854 |
 
 A fiscal regime prices barrels, it does not produce them. Revenue is 2686.9277 in every row because production and price are the project's, and cost recovered is 941.4436 in every row too, because each pool clears inside the life here. The division moves: contractor cash from 406.2057 to 986.7327, and the state from 758.7514 to 1339.2784.
@@ -29,7 +29,7 @@ Cost recovered matches the life costs only when the pool empties. On the default
 
 ## Tax is not take
 
-The tax column and the take column rank differently, and confusing them is the fastest way to misread a comparison. Brazil pays the most tax of the six, 564.6884, and leaves the contractor 912.1029, the second highest figure in the table. PIA pays the least tax, 174.0882, and leaves the contractor 406.2057, the lowest. Tax is one of three instruments the state collects through, and a regime that takes its share as royalty and profit oil needs very little of it.
+The tax column and the take column rank differently, and confusing them is the fastest way to misread a comparison. Brazil pays the most tax of the six, 852.8256, and leaves the contractor 623.9658, the third highest figure in the table. PIA pays the least tax, 174.0882, and leaves the contractor 406.2057, the lowest. Tax is one of three instruments the state collects through, and a regime that takes its share as royalty and profit oil needs very little of it.
 
 ## The mistake
 

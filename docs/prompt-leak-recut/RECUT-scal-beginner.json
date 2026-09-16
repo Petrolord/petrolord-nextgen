@@ -1,0 +1,107 @@
+{
+ "app_slug": "scal",
+ "tier": "beginner",
+ "tier_name": "Associate",
+ "course": "SCAL & Displacement",
+ "generated": "2026-09-16",
+ "finding": "docs/gate-audit/promptleak.md section 5",
+ "old_text_source": "the live production row, read 2026-09-16 (select prompt, fields::text from public.academy_capstones)",
+ "new_text_source": "the live prompt with the substring replacements listed below, each asserted to match exactly once",
+ "prompt_changed": true,
+ "prompt_replacements": [
+  {
+   "old": "krwMax 0.3, kroMax 0.9, nw 2.5, no 2.0; water 0.5 cp",
+   "new": "krwMax 0.3, kroMax 0.9 and the Corey exponents the fixture itself carries; water 0.5 cp"
+  }
+ ],
+ "prompt_old": "Run the Ekene displacement from its designed relative permeability set (Corey with Swc 0.35, Sor 0.25, krwMax 0.3, kroMax 0.9, nw 2.5, no 2.0; water 0.5 cp against oil 1.8 cp) and read the flood: the endpoint mobility ratio, the Welge front saturation and the fractional flow at the front, the pore volumes injected at breakthrough, the displacement efficiency at breakthrough, and the days to breakthrough at a steady 8000 bwpd on the fixture pore volume.",
+ "prompt_new": "Run the Ekene displacement from its designed relative permeability set (Corey with Swc 0.35, Sor 0.25, krwMax 0.3, kroMax 0.9 and the Corey exponents the fixture itself carries; water 0.5 cp against oil 1.8 cp) and read the flood: the endpoint mobility ratio, the Welge front saturation and the fractional flow at the front, the pore volumes injected at breakthrough, the displacement efficiency at breakthrough, and the days to breakthrough at a steady 8000 bwpd on the fixture pore volume.",
+ "fields_old": [
+  {
+   "key": "m_ratio",
+   "tol": 0.005,
+   "unit": "-",
+   "label": "Endpoint mobility ratio M",
+   "expected": 1.2
+  },
+  {
+   "key": "swf",
+   "tol": 0.0005,
+   "unit": "fraction",
+   "label": "Welge front saturation Swf",
+   "expected": 0.6372
+  },
+  {
+   "key": "fwf",
+   "tol": 0.001,
+   "unit": "fraction",
+   "label": "Fractional flow at the front",
+   "expected": 0.8682763300877854
+  },
+  {
+   "key": "qi_bt_pv",
+   "tol": 0.001,
+   "unit": "PV",
+   "label": "Pore volumes injected at breakthrough",
+   "expected": 0.33077027444818546
+  },
+  {
+   "key": "ed_bt",
+   "tol": 0.001,
+   "unit": "fraction",
+   "label": "Displacement efficiency at breakthrough",
+   "expected": 0.5088773453049006
+  },
+  {
+   "key": "bt_days_8000",
+   "tol": 2,
+   "unit": "days",
+   "label": "Days to breakthrough at 8000 bwpd",
+   "expected": 926.6051908800841
+  }
+ ],
+ "fields_new": [
+  {
+   "key": "m_ratio",
+   "tol": 0.005,
+   "unit": "-",
+   "label": "Endpoint mobility ratio M",
+   "expected": 1.2
+  },
+  {
+   "key": "swf",
+   "tol": 0.0005,
+   "unit": "fraction",
+   "label": "Welge front saturation Swf",
+   "expected": 0.6372
+  },
+  {
+   "key": "fwf",
+   "tol": 0.001,
+   "unit": "fraction",
+   "label": "Fractional flow at the front",
+   "expected": 0.8682763300877854
+  },
+  {
+   "key": "qi_bt_pv",
+   "tol": 0.001,
+   "unit": "PV",
+   "label": "Pore volumes injected at breakthrough",
+   "expected": 0.33077027444818546
+  },
+  {
+   "key": "ed_bt",
+   "tol": 0.001,
+   "unit": "fraction",
+   "label": "Displacement efficiency at breakthrough",
+   "expected": 0.5088773453049006
+  },
+  {
+   "key": "bt_days_8000",
+   "tol": 2,
+   "unit": "days",
+   "label": "Days to breakthrough at 8000 bwpd",
+   "expected": 926.6051908800841
+  }
+ ]
+}

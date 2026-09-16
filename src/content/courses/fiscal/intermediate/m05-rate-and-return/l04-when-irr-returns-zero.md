@@ -1,38 +1,37 @@
 # When IRR returns zero
 
-The engine reports 0.0000 percent for two situations that could hardly be further apart, and prints the same four characters for both. Neither of them means the project broke even.
+It does not, any more. Until the 2026-09-15 repair one value, 0.0000 percent, stood for two situations that could hardly be further apart, and neither of them meant the project had broken even.
 
 {{panel:ec-instrument-explorer}}
 
-## Two guards, one value
+## The two situations
 
-The first guard fires when the cash flows never change sign. With nothing negative in the vector there is no root, because the net present value is positive at every rate. The published case `irr_all_positive` is exactly that: engine 0.0000 percent, golden 0.0000, and a net present value of 25.6198 at 10 percent. It has no outlay against which a return could be measured.
+The first is a set of flows that never changes sign. With nothing negative in the vector there is no root, because the present value is positive at every rate. `irr_all_positive_no_sign_change` is exactly that: null with the status no-sign-change, and a present value of 25.6198 million USD at 10 percent. There is no outlay against which a return could be measured.
 
-The second guard fires when the net present value at a rate of zero is not above zero. The published case `irr_npv0_negative` has flows of -100 then 90, loses money at every rate, and would solve to a negative rate. The engine reports 0.0000 instead, and its net present value at 10 percent is -16.5289.
+The second is a project whose only root is negative. `irr_negative_root_reported` has flows of negative 100 then 90 and loses money at every rate. Its root is negative 10.0000 percent, which is inside the band, so the engine now reports that rate as the negative rate it is, and its present value at 10 percent is negative 16.5289.
 
-So one zero means the project never loses and the other means it never wins. A reader who takes 0.0000 for "breaks even exactly" has it backwards in both directions at once.
+The retired rule printed 0.0000 for both, so one zero meant a project that never loses and the other a project that never wins.
 
-## Telling them apart
+## A root the band cannot reach
 
-The function gives no clue, so look at the ledger: the sign of total contractor net cash flow over the life, and the net present value at a rate of zero.
+A root can also fall outside the band altogether. `irr_no_root_below_band` has flows of negative 100 then 0.5 and a root at negative 99.5000 percent, below the band, with a present value negative at both ends: null with the status no-root. The published run with capex of 20000 on the Suite test project carries the same status on a real ledger. Its contractor net cash flow over the life is negative 15724.0151 million USD, its present value at 10 percent negative 15453.8510, its closing unrecovered pool 15724.0151, and it has no payback year at all.
 
-| case | net present value at 10 percent | which guard |
+| case | present value at 10 percent | what the engine returns |
 | --- | --- | --- |
-| irr_all_positive | 25.6198 | no sign change |
-| irr_npv0_negative | -16.5289 | only root is negative |
+| irr_all_positive_no_sign_change | 25.6198 | null, no-sign-change |
+| irr_negative_root_reported | -16.5289 | -10.0000 percent |
+| irr_no_root_below_band | -90.4959 | null, no-root |
 
-The second kind turns up on real ledgers. The published case with capex of 20000 on the Suite test project reports an internal rate of return of 0.0000 percent, a total contractor net cash flow of -15724.0151 million USD, a net present value of -15453.8510 at 10 percent, a closing unrecovered pool of 15724.0151 and no payback year. Nothing there breaks even.
+Read the status word first and the present value beside it. A null is not a missing number. It is the engine declining to name one, and the word says which reason applies.
 
 ## The mistake
 
-The mistake is sorting or filtering on the rate column. A comparison in which several regimes report 0.0000 percent has not ranked them, and a filter below a threshold hides the hopeless projects and the ones that never needed capital together. The mirror mistake is treating 0.0000 as missing data and substituting the net present value, which ranks a project worth 25.6198 million USD beside one at -15453.8510.
-
-There is a third way this solver returns a number that is not a root. The case `irr_beyond_bracket`, with flows of -1 then 2000, reports 102400.0000 percent where the true rate is 199900 percent, because 102400 is the top of the doubling search rather than a solution. The Expert tier returns to it.
+The mistake that survives the repair is sorting or filtering on the rate column. A comparison in which several regimes come back null has not ranked them, and a filter set above a threshold rate drops every one of them, the hopeless project and the one that never needed capital together. The mirror mistake is treating a null as a zero and reaching for the present value instead, which ranks a project worth 25.6198 million USD beside one at negative 15453.8510.
 
 ## What it refuses
 
-The function returns a number and no status, so a guard, a bound and a root are indistinguishable at the call site. It reports nothing about the number of roots. And it will never report a negative internal rate of return, so a genuinely loss-making project cannot be described by this column.
+It will not name a rate it cannot make unique inside the band, and it will not report one above 1000 percent or below negative 99. A status is a statement about the shape of a cash flow and never about its worth, so no status on its own says whether a project is any good.
 
 ## Exercise
 
-Write the two guards and the published case that fires each, with its net present value at 10 percent. Then say which two ledger numbers you would check before quoting an internal rate of return of 0.0000 percent.
+Write the three statuses with the published case that produces each and its present value at 10 percent. Then say what those same cases used to report, and name the two ledger numbers you would read before quoting any rate at all.

@@ -112,5 +112,5 @@ q(0, "Dropping the level from 0.500000 to 0.300000 takes the liquid requirement 
   "The settling velocity of 1.958255 ft/s climbs as the level drops, which slows the gas and lengthens the liquid in one move."],
  "The liquid area fell to 12.682775 ft2 while the gas area rose to 37.582708 ft2 out of the same 50.265482 ft2. The drum got worse at holding liquid and better at carrying gas.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1i_m01.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1i_m01.json', expect_n=15)
 finish()

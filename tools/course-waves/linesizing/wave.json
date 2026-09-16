@@ -1,0 +1,109 @@
+{
+ "slug": "linesizing",
+ "prefix": "fc2",
+ "name": "Line Sizing & Hydraulics",
+ "pathOrder": 40,
+ "module": "facilities",
+ "prerequisite": null,
+ "repo": "/root/wt-fc2-nextgen",
+ "goldens": [
+  "facilities/goldens/linehydraulics_cases.json"
+ ],
+ "engines": [
+  "engines/facilities/lineHydraulics.js",
+  "engines/production/chokePerformance.js",
+  "engines/production/pipeSchedule.js"
+ ],
+ "enginesVendoredAt": "engines PR #196 (FC2-0 repairs), vendored at NextGen 27de8d90, eight paths sha-identical with the engines branch",
+ "constants": {
+  "5.614583333333333": "cubic feet per barrel, 42 gal x 231 in3 over 1728, now the one definition both modules share",
+  "86400": "seconds per day",
+  "3600": "seconds per hour",
+  "5280": "feet per mile, now live in the gas elevation guard and measured by the digest",
+  "144": "square inches per square foot",
+  "32.174": "gc, lbm ft per lbf s2",
+  "0.00067197": "lbm per ft s in one centipoise",
+  "520": "the base temperature of the published gas forms, degR",
+  "14.65": "the base pressure of the published gas forms, psia",
+  "14.7": "atmospheric pressure, psia, and the floor of the outlet-pressure bracket",
+  "2100": "the Reynolds number where the engine leaves the laminar branch",
+  "4000": "the Reynolds number where the engine calls the flow turbulent",
+  "64": "the laminar numerator, f = 64 over Re",
+  "3.7": "the Colebrook roughness divisor",
+  "2.51": "the Colebrook Reynolds numerator",
+  "0.0375": "the published elevation coefficient of the gas forms",
+  "0.032": "the Weymouth fully-rough friction coefficient",
+  "100": "percent"
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3"
+ ],
+ "plan": {
+  "recut": "2026-09-16, after the FC2-0 engine repairs and the FC2-0b Suite repair. Two modules changed subject and one lesson changed title. Digest 530 lines, 18 sections, all five gates zero, no capstone field moved.",
+  "thesis": "A line is sized by the limit that binds first, and every one of those limits is a different equation with a different domain, so the discipline is knowing which limit you are standing on and whether the equation you reached for is still honest there.",
+  "tiers": {
+   "beginner": "Associate. THE LIQUID LINE AND WHAT THE ENGINE REFUSES. Why: the liquid line is the only part of this engine that is closed form end to end, so a learner can see a whole answer assembled before anything iterates. It is also where the three losses separate (friction is what a bigger pipe fixes, elevation is what no pipe fixes), where the friction factor splits into two branches with nothing honest between them, and where the erosional limit stops being a wellhead idea and becomes the thing that actually decides a bore. The tier ends where the fluid becomes compressible.",
+   "intermediate": "Professional. THE GAS LINE. Why: the moment the fluid compresses, pressure stops being linear along the pipe and the whole method changes shape into a p-squared driving group. Four published forms answer the same question and disagree by a third on one line; the elevation term is shared by all four and is the only place a static column enters; and the outlet pressure has no closed form in the engine at all, so the tier is also where a learner first meets an answer that came out of a solver, and out of a solver whose SEARCH RANGE is itself a piece of physics. The tier ends able to say which of four numbers to believe and why.",
+   "advanced": "Expert. THE WALL, THE PIG, AND WHERE THE METHOD STOPS. Why: the two things left are the ones nobody can size from a pressure drop alone (the wall a code demands, and the liquid a pig will push in front of it), and then the audit: where the correlations stop being honest, and what this engine will and will not answer. That last pair is the tier's reason to exist."
+  },
+  "modulesPerTier": 6,
+  "lessonsPerTier": 26,
+  "questionsPerTier": 132,
+  "questionsPerModuleBank": 15,
+  "examQuestions": 42,
+  "lessonLength": {
+   "band": "420 to 560 words, ranked by est_minutes within a tier",
+   "measure": "PROSE WORDS ONLY, counted the way lengths.py counts them: front matter, markdown table rows, headings and {{panel:...}} lines are all excluded. A raw `wc -w` over the whole file is NOT this measure and runs materially higher, so a lesson can be inside the band and still fail a raw word count. State which measure before quoting a number at a writer."
+  },
+  "modules": {
+   "beginner": [
+    "m01 What a line-sizing engine does, and what it refuses (4 lessons). The scope seam: this engine sizes ONE line. It is not a network and it is not a multiphase trace, and it says which is which. Its l04 measures SEVEN constants out of the engine, none of them typed: gc, the centipoise, the barrel, the day, the hour, the mile and atmospheric.",
+    "m02 Velocity, Reynolds and the friction factor (5). Bore to area to velocity, the Reynolds number in field units, the two branches, and the band between them that has no correlation.",
+    "m03 The liquid line, three losses kept apart (5). Darcy-Weisbach, the velocity head, fittings as a resistance sum, elevation as a static column, and the gradient.",
+    "m04 The erosional limit as a sizing criterion (4). RP 14E, C over root rho, the c factor as an input, and the largest rate a bore can carry.",
+    "m05 Choosing a bore (5). The same duty across every schedule bore, the pressure drop against the velocity, and what a recommendation actually ranks.",
+    "m06 The Associate reading (3). One line end to end, the capstone worked, and what the next tier changes."
+   ],
+   "intermediate": [
+    "m01 A gas line is not a liquid line (4). Why the driving group is p1 squared minus p2 squared, the base conditions of the published forms, and why 14.65 is not 14.7.",
+    "m02 The four transmission forms (5). Weymouth, Panhandle A, Panhandle B and General Flow on one line, their diameter exponents, and the spread between them.",
+    "m03 The elevation adjustment (4). s, e to the s, the equivalent length factor, and the two things a hill does that are not the same thing.",
+    "m04 RE-CUT. The outlet pressure (5). The bisection with no closed form; the CEILING the bracket ends at, which is the inlet over the square root of e to the s and not the inlet; the rate the line cannot carry; the descent, where the ceiling sits above the inlet and the drop comes back NEGATIVE because the line arrives higher than it left; and the climb, where the ceiling sits below the inlet, which is the commoner case and the one the old bracket got wrong by the widest margin.",
+    "m05 Marching a profile (5). Segment by segment, the station list, marched against one shot, the refusal that hands back its own evidence, and the fittings a traverse drops.",
+    "m06 The Professional reading (3)."
+   ],
+   "advanced": [
+    "m01 The wall a code demands (5). Barlow with design factors, the four B31.8 location classes against B31.4's flat factor, the joint factor and the temperature derate, the corrosion allowance, and the MAOP read back.",
+    "m02 The pig and what it pushes (5). Line volume, the holdup that is an INPUT and not a result, the swept volume, the run, and the interval that keeps a slug inside its catcher.",
+    "m03 Where the correlations stop (5). The transition band, Colebrook past its published roughness, Weymouth's hidden friction assumption, four forms with no regime check, and two iterations that never report convergence.",
+    "m04 RE-CUT. What a refusal is (5). The contract, an object carrying an error and never a throw, a null or a bare number; the three returns that sit outside that contract on purpose, and the trap that a NaN has no JSON spelling and prints as null; the messages themselves and what each one protects; the boundary either side of every guard, because a guard that refuses its own limit is as wrong as one that accepts nonsense; and the two things the engine still accepts and should not.",
+    "m05 What the method does not know (3). The held items, the synthetic goldens that decided which half of the barrel disagreement was right, and the two-phase half that is not in this engine at all.",
+    "m06 The Expert reading (3)."
+   ]
+  },
+  "recutRationale": {
+   "advanced-m04": "Was 'What It Accepts and Should Not', five lessons built on unguarded inputs. FC2-0 gave twenty-one of those inputs a named error, so four of the five described behaviour that no longer exists. Section 16 replaces it with the boundary rather than the bug, which is both a better subject and one that will not rot the next time something is repaired.",
+   "intermediate-m04": "Its l02 taught a bracket that was wrong and its l04 taught a descent that was mishandled. Both are now correct, and the ceiling is the most interesting physics in the course: the solve is driven by p1 squared minus es times p2 squared, so the bracket ends at p1 over the square root of es. The ASCENT is promoted to its own lesson because it is the commoner case and the one the old code got wrong by 75 psi rather than 10 to 50.",
+   "intermediate-m05-l04": "Was 'Where a line dies', written when the traverse marched past zero absolute and returned a number. It now refuses and attaches the stations it stands behind, the distance it died at and the pressure the arithmetic produced, so the lesson is the refusal that keeps its evidence. Not flagged in the re-cut request; found by re-reading Section 11."
+  },
+  "capstones": {
+   "count": 3,
+   "gradedFieldsEach": 6,
+   "beginner": "IMO-1, a crude transfer line: velocity, Reynolds, friction factor, friction loss, total loss, and the erosional velocity at the site's own stated c factor.",
+   "intermediate": "The BRASS trunk, a descending gas line: the elevation factor, three of the four forms' rates, the General Flow friction factor, and the outlet pressure at a contracted rate.",
+   "advanced": "The QUA IBOE export line: the required wall, the MAOP of the wall as built, the line volume, the swept volume at a measured holdup, the run time, and the pigging interval.",
+   "heldItemCheck": "Re-confirmed after FC2-0. None of the eighteen reads a held item. The c factor, the efficiency, the roughness, the resistance sum, the location class and the holdup are all STATED conditions; every capstone Reynolds number is above 20000 so the held transition band cannot touch a graded friction factor; and no graded field reads the RP 14E rows, the pipe schedule, the roughness table or the fitting K table. NO CAPSTONE FIELD MOVED under the repairs, verified twice by the repair wave, and the BRASS outlet is a descent whose graded outlet sits well below its inlet and therefore well inside the corrected bracket."
+  },
+  "panels": {
+   "lab": "src/components/course/panels/linesizing/linesizingLab.js",
+   "ids": [
+    "fc-liquid-explorer (Associate and Professional): regime and friction factor, the three losses, the erosional limit, the bore sweep, and the marched profile, which is a LIQUID traverse and is why Professional m05 tags this panel and not the gas one",
+    "fc-gasline-explorer (Professional and Expert): the four forms side by side, the elevation group, the ceiling table in both signs, and the inverse solve",
+    "fc-wall-pig-explorer (Expert and Professional): the code design factors, wall and MAOP, line volume and the holdup sweep, the guard boundaries, and the domain limits"
+   ]
+  },
+  "route": "/dashboard/apps/linesizing"
+ }
+}

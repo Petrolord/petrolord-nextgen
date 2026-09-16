@@ -22,7 +22,21 @@ jobs:
       
     - name: Lint
       run: npm run lint --if-present
-      
+
+    # The vendored engines are a hand-maintained copy of the canonical
+    # petrolord-engines tree. Nothing used to compare the two, so a partial
+    # pull built cleanly and looked successful: by 2026-09-16 the tree was
+    # short 191 canonical paths and differed in 126 more. These two steps are
+    # the check that stops it. They run BEFORE the build, because a build that
+    # succeeds on a diverged tree is exactly the signal that hid this.
+    - name: Vendored engines match canonical
+      run: node tools/check-vendored-engines.mjs
+
+    - name: Vendored engine suites
+      run: |
+        npm ci --prefix packages/engines
+        node tools/run-vendored-engine-tests.mjs
+
     - name: Build
       run: npm run build
 
@@ -43,10 +57,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           
+      - name: Lowercase the image name
+        id: image
+        run: echo "name=${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./deployment/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ghcr.io/${{ steps.image.outputs.name }}:latest

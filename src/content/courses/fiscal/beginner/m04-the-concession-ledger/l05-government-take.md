@@ -23,7 +23,7 @@ Run "Angola - Deepwater PSC" on the same project and the same two derived column
 
 ## Six collections on one field
 
-The state's life collection on the default project runs 758.7514 under Generic, 764.5528 under the Gulf of Mexico terms, 833.3812 under Brazil, 1200.2886 under Angola, 1316.6067 under Ghana and 1339.2784 under PIA. The royalty rate does not order that list: Angola charges no royalty at all and collects 1200.2886, while the Gulf of Mexico terms charge the highest royalty of the six at 18.75 percent and collect 764.5528.
+The state's life collection on the default project runs 758.7514 under Generic, 764.5528 under the Gulf of Mexico terms, 1121.5184 under Brazil, 1263.7523 under Angola, 1316.6067 under Ghana and 1339.2784 under PIA. The royalty rate does not order that list: Angola charges no royalty at all and collects 1263.7523, while the Gulf of Mexico terms charge the highest royalty of the six at 18.75 percent and collect 764.5528.
 
 ## The mistake
 

@@ -10,7 +10,7 @@ Write down the three streams with their declines, the capex lines, both halves o
 
 ## The four instruments
 
-Four fields and nothing else: the royalty, flat with a rate or sliding on the oil price; the cost recovery limit as a percent of revenue after royalty; the profit split, flat or tiered on the R factor; and the tax block holding CIT, RRT, the minimum tax and an `rrtUpliftPct` that defaults to 20 when the field is absent. A missing uplift is not a zero uplift, and the difference between those two readings is 1638.5664 against 2607.5549 of total tax on the published pair.
+Four fields and nothing else: the royalty, flat with a rate or sliding on the oil price; the cost recovery limit as a percent of revenue after royalty; the profit split, flat or tiered on the R factor; and the tax block holding CIT, RRT, the minimum tax and an `rrtUpliftPct` that defaults to 20 when the field is absent. A missing uplift is not a zero uplift, and the difference between those two readings is 2127.5549 against 2207.5549 of total tax on the published pair.
 
 ## Run it, then read the sort
 
@@ -29,7 +29,7 @@ Government cash flow does not follow that order: Angola - Deepwater PSC collects
 
 ## Take each sweep at its real range
 
-The price sweep is nine oil prices from 40 to 120 USD per bbl and it scales oil only. The capex sweep is seven points ending at 1.4, whatever its axis says. Quote the range you actually have: ODIDI's capex losses of 150.9021 for Ghana and 215.1075 for Angola are losses to a 40 percent overrun.
+The price sweep is nine oil prices from 40 to 120 USD per bbl and it scales oil only. The capex sweep is eight points from 0.8 to 1.5. Quote the range you actually have: ODIDI's capex losses of 181.1922 for Ghana and 252.6075 for Angola are losses to a 50 percent overrun.
 
 ## Check every denominator
 
@@ -42,7 +42,7 @@ Before quoting any government take, read its state and the regime's total govern
 | Project | Streams, declines, capex, both opex halves, rate, full deck |
 | Instruments | Four fields per regime, uplift stated even when absent |
 | Sort | Contractor NPV only; cash flow and both ratios read from their columns |
-| Sweeps | Nine prices, oil only; seven capex points ending at 1.4 |
+| Sweeps | Nine prices, oil only; eight capex points from 0.8 to 1.5 |
 | Shares | State and two totals read under every plotted point |
 | Verdicts | Ranked quantity quoted beside the rounded sentence |
 
@@ -50,7 +50,7 @@ Then the units: USD, bbl, Mscf, boe at 6000 scf per barrel, percent as a word, m
 
 ## The mistake
 
-The careful mistake is checking the instruments and skipping the ranges. Every rate on ODIDI can be read correctly and the resilience answer still be wrong, because the chart promised a multiplier the loop never reached. Ranges and definitions are where the marks are lost, not rates.
+The careful mistake is checking the instruments and skipping the ranges. Every rate on ODIDI can be read correctly and the resilience answer still be wrong, because a capex loss belongs to a field and ODIDI orders the six templates differently. Ranges and definitions are where the marks are lost, not rates.
 
 ## Exercise
 

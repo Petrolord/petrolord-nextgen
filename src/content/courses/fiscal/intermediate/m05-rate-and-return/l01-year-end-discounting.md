@@ -26,11 +26,11 @@ At 0 percent the NPV is 980.9313 million USD, which is exactly the total contrac
 
 ## A negative NPV is not a loss
 
-The teaching field runs at a discount rate of 12 percent, and every one of the six templates returns a negative NPV on it: "Brazil - Concession" -5.8662 million USD, "Generic Royalty/Tax" -13.3840, "Ghana - Deepwater" -27.4074, "USA - Gulf of Mexico" -37.3123, "Nigeria - PIA (2021)" -43.7842 and "Angola - Deepwater PSC" -58.1813. None of those regimes loses money. Brazil returns 192.9896 million USD of undiscounted contractor net cash flow over the life and pays back in year 6. Its internal rate of return is 11.4055 percent, which is below 12, and that is the whole of the explanation.
+The teaching field runs at a discount rate of 12 percent, and every one of the six templates returns a negative NPV on it: "Brazil - Concession" -5.8662 million USD, "Generic Royalty/Tax" -13.3840, "Ghana - Deepwater" -27.4074, "USA - Gulf of Mexico" -37.3123, "Nigeria - PIA (2021)" -43.7842 and "Angola - Deepwater PSC" -58.1813. None of those regimes loses money. Brazil returns 192.9896 million USD of undiscounted contractor net cash flow over the life and pays back in year 6. The engine names no single rate of return for it, because its present value crosses zero twice, once at a negative rate and once below the 12 percent it is discounted at.
 
 ## The mistake
 
-The careful mistake is to treat year 1 as time zero and leave it undiscounted, the way a spreadsheet laid out with an initial investment in column zero usually does. Every number then comes out slightly too high, and it comes out too high by a factor that changes with the rate, so no single correction fixes a swept table. The tell is not the 0 percent row: a rate of zero makes every divisor one, so every convention returns the undiscounted 980.9313 there, whatever layout produced it. It is at every other rate, where the mistaken layout returns exactly one plus the rate times the year-end figure, a gap that widens with the rate and closes only at zero.
+The careful mistake is to treat year 1 as time zero and leave it undiscounted, the way a spreadsheet laid out with an initial investment in column zero usually does. Every number then comes out slightly too high, and it comes out too high by a factor that changes with the rate, so no single correction fixes a swept table. The tell is not the 0 percent row: a rate of zero makes every divisor one, so every convention returns the undiscounted 980.9313 there, whatever layout produced it. It is at every other rate, where the mistaken layout returns one plus the rate times the year-end figure, a gap that widens with the rate.
 
 ## What it refuses
 

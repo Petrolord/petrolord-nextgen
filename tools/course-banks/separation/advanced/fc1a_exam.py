@@ -7,12 +7,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # Most questions need two modules at once: geometry with verdicts, verdicts
 # with the sweep, the sweep with the held items, the layout with provenance.
 
-q(0, "The interface repair moved a geometry figure and a verdict together. On AGBAMI, which verdict was reading a layer that was not in the vessel, and which way did the reading err?",
- "The carryunder verdict, which was asking a rising oil drop to cross 2.026834 ft where the vessel holds 3.049149 ft of water, so every crossing it timed came out shorter than the vessel makes it.",
- ["The carryover verdict, which was asking a falling water drop to cross a thicker oil layer than the drum holds, so it failed vessels that in fact separated.",
-  "Both verdicts equally, since the chord divisor was applied to each layer and both crossings were shortened by the same factor.",
-  "Neither verdict, since the chord rule fed the length calculation and the droplet checks were computed from the retention volumes."],
- "The retired layer is understated on every case and the direction never varies, so the error always ran the permissive way. On lowLevelSmallOilDropCarryunder it gave 0.617770 ft against 1.249328 ft.")
+q(0, "On lowLevelSmallOilDropCarryunder the retired chord rule handed the carryunder check a water layer of 0.617770 ft where the exact interface sits at 1.249328 ft. What was that worth on that one case?",
+ "The rising oil drop was timed across less than half the water the drum holds, so the crossing came back shorter than the vessel makes it, and the reported verdict still did not move.",
+ ["The drop was timed across more water than the drum holds, so the check was the conservative one and the vessels it failed would in fact have separated.",
+  "The reported carryunder verdict on that case went from false to true, which is the disagreement that exposed the chord rule in the first place.",
+  "Nothing on that case, because the retired layer was divided into the retention volume and the droplet checks always read the exact interface."],
+ "Every retired figure sits below its exact one and the direction never varies. The oil layer on the same case is 1.750672 ft against a retired 1.544424 ft, thin the same way.")
 
 q(2, "AGBAMI at 10.000000 ft needs 12.311666 ft of length, and the same 10.000000 ft diameter appears in the family as a row of slenderness 1.231167. What does that pairing tell a reader about the vessel the tier has been sizing?",
  "It is a working drum that the band of 3.000000 to 5.000000 excludes on shape alone, and the family prefers 7.000000 ft instead.",
@@ -63,12 +63,12 @@ q(1, "Put the three-phase steps in the order the engine performs them.",
   "The length comes first from the liquid retention volume, the areas follow from it, and the share and the interface are read back from the areas."],
  "AGBAMI holds 0.516129 of its liquid area as water, which places the interface at 3.049149 ft under 1.950851 ft of oil, and the verdicts are compared against residences the length produced.")
 
-q(0, "What does a complete reading of the ERHA layout consist of?",
- "Five counts and two flags: 69 checks, 21 zero-requirement pairs, 2 skipped, 12 unknown pairs and 6 breaches, with complete false and pass false, and then the two rankings read separately.",
- ["The count of 69 checks and the pass flag, since the other counts explain the checks rather than adding to them.",
-  "The 6 breaches with worstAbsolute named, since the absolute ranking is the one a works order is written from.",
-  "The complete flag and the skipped list, because coverage decides whether any of the results can be acted on."],
- "Pass is false because 6 comparisons came up short and complete is false because 2 items were skipped and 12 type pairs are unknown. Neither field is a verdict on its own.")
+q(0, "Two published layouts sit either side of the line: s3SkippedItemPassesButIncomplete reports complete false with pass true, and s3ZeroRequirementPairOnly reports complete true with pass null. What does the pair establish?",
+ "That the two fields are independent: one cleared every comparison it made while an item was skipped, and the other was fully judged with nothing in it to clear.",
+ ["That pass is computed only where complete has come back true, so the pass true on the first case is the residue of a verdict the engine ought to have withheld once it knew an item on the plan had been skipped.",
+  "That a zero-requirement pair leaves a layout incomplete, which is the reason the second case comes back with pass null rather than with the pass true that its single unbreached pair would otherwise have earned it.",
+  "That a skipped item is the only thing able to make complete false, so the 12 unknown type pairs that ERHA reports beside its 69 checks leave the complete flag on that plan exactly where it stood."],
+ "The first is checked 3 with one item whose coordinates could not be read. The second is checked 0 with one zero-requirement pair, complete true and passStatus nothing-checked.")
 
 q(2, "Two retired behaviours failed open in different parts of the engine: droplet verdicts on a NaN gravity, and a layout that passed with nothing checked. What is the shared shape?",
  "An absence of information rendered as a positive result, which is quiet, where a defect that fails closed announces itself the first time somebody runs it.",
@@ -84,12 +84,12 @@ q(1, "A report quotes a preferred diameter of 7.000000 ft for ABANA-2 and a pass
   "The reason list on the preferred row and the zero-requirement count, since those two are what turn a bare answer into a finding somebody can act on."],
  "7.000000 ft in a band of 3.000000 to 5.000000 and a null in a band of 4.000000 to 5.000000 are two honest answers, and a pass with complete false was judged on the comparisons that could be made.")
 
-q(3, "Pinning the AGBAMI water share at 0.300000 gives an oil residence of 746.6667 s. Which two things had to happen for a residence to rise that far above the 5.000000 minutes the oil was given?",
- "The water forced a length of 21.181362 ft, and the pin left the oil a band of 2.925687 ft inside it.",
- ["The oil rate fell as the interface dropped to 2.074313 ft, and the vessel kept the length of 12.311666 ft that the proportional split had produced for it.",
-  "The oil retention time was raised to match the water's 8.000000 minutes, and the drum grew to hold both phases for the same time.",
-  "The droplet specification was relaxed, and the engine lengthened the vessel until both verdicts cleared at the new size with room in hand."],
- "Under the proportional split both residences are the retention times read back. Under the pin one phase sets the length and the other sits in a drum sized for somebody else.")
+q(3, "Pinning the AGBAMI water share at 0.300000 returns 8.510368 ft for the oil and 21.181362 ft for the water, and names the water in retentionPhase. What does that field add to the two lengths?",
+ "It names the phase whose retention bought the reported 21.181362 ft, so anyone shortening the drum knows whose holding time is being spent.",
+ ["It names the phase whose retention time was typed as the longer of the two, which restates an input the caller already had.",
+  "It names the phase that will leave through the wrong outlet first, so water there is the carryover verdict under another name.",
+  "It records that the split was pinned rather than proportional, which is why a proportional run leaves it null."],
+ "The two lengths say how long each phase wants the vessel to be. The field says which of them won, and a proportional run leaves it null because the two agree inside 1e-9.")
 
 q(0, "Why does complete come back false on almost any real plot, and what should a reviewer do with that?",
  "The spacing table has no entry for a flow meter, a skid, a pig launcher or a booster package, so one modern item produces unknown pairs; the reading is to treat complete as a pointer at the skipped list and the unknown pairs and then judge whether the remainder matters.",
@@ -231,12 +231,12 @@ q(0, "What does a sweep report about a row it has judged infeasible?",
   "A null row with its diameter, which is how the sweep marks a vessel that cannot carry the duty it was given."],
  "On ABANA-2 the 5.000000 ft row reports 59.572579 ft at a slenderness of 11.914516 with both flags false. A reader who filters the sweep loses the fact that the two smallest diameters failed on gas.")
 
-q(1, "What would change in this course if the literature check moved the gas length packaging?",
- "The gas length, the claim that it cannot exceed the gas height, and the observation that gas controls only a failing vessel would all have to be re-read together.",
- ["The gas margin and the capacity verdict, since both are computed from the same Souders-Brown velocity the gas length borrows at the horizontal K of the mist extractor.",
-  "The three-phase lengths, since the controlling requirement compares them against the gas length and any change there changes which one wins on every row of a family.",
-  "Nothing in this tier, since the held item belongs to the horizontal two-phase path and the Expert tier sizes three-phase vessels."],
- "Every published case where gas controls is a case where gasCapacityOk is false, and that is a consequence of one packaging choice rather than a fact about separation.")
+q(1, "On gasOverloaded6ftGasControls the retention asks 0.689497 ft and the vessel comes back at 16.976527 ft with the controlling requirement gas. If the literature check moves the borrowed settling velocity, which of those two figures moves with it?",
+ "16.976527 ft, because a gas-controlled length is computed through the velocity held for the literature, while 0.689497 ft is a volume over an area.",
+ ["Both of them, since the borrowed settling velocity fixes the liquid area that the retention volume is divided by, so a move in the packaging carries 0.689497 ft along with the gas figure.",
+  "0.689497 ft only, because a retention length is where a settling velocity enters a three-phase vessel and a gas length is fixed once the bore and the level are typed.",
+  "Neither of them, because the case is published as a golden and a golden expectation is frozen by the file it lives in whatever the literature check later decides."],
+ "A gas length is a velocity ratio carried onto a height, so it reads the borrowed velocity twice over. A retention length reads a volume and an area and no velocity at all.")
 
 q(3, "The ERHA plan carries one chemical injection skid, a tank whose coordinates cannot be read and a radiation source that was never placed. What does the layout check do with the three of them?",
  "It records 12 unknown type pairs and 2 skipped items with their reasons, and it judges the rest of the plan.",
@@ -259,19 +259,19 @@ q(0, "What does the retired sweep rule and the retired layout rule have in commo
   "Each failed closed, so both produced alarms that sent engineers back to re-run cases that were sound."],
  "verticalNoneFeasible preferred 3.000000 ft under the retired rule and returns none-feasible now. s3AllUnplacedNothingChecked reported pass true with checked 0.")
 
-q(1, "A specification tightens from 500.000000 micron to 250.000000 micron. What does that ask of the vessel, in the language of the settling table?",
- "Four times as long in the phase, because 0.017500 ft/s becomes 0.004375 ft/s in 4.000000 cP oil.",
- ["Twice as long in the phase, because a linear reading of the law halves 0.017500 ft/s to 0.008750 ft/s for a 250.000000 micron drop in the same 4.000000 cP oil.",
-  "The same time in a thinner layer, because the crossing time depends on the layer and the specification decides only which drops are counted.",
-  "Nothing, until the vessel is re-sized, because a droplet specification enters the calculation only through the length the retentions produce."],
- "Velocity goes as the square of the droplet size. Halving the drop quarters the speed, which is why 150.000000 micron takes 1238.6620 s where 500.000000 micron takes 111.4796 s.")
+q(1, "AGBAMI as sized holds the oil 300.0000 s, and a 500.000000 micron water drop crosses the 1.950851 ft oil layer in 111.4796 s. A specification of 250.000000 micron settles that drop at 0.004375 ft/s. What happens to waterCarryover?",
+ "It turns true, because a quarter of the speed is four times the 111.4796 s crossing and the oil is held only 300.0000 s.",
+ ["It stays false, because 0.004375 ft/s still carries the drop through 1.950851 ft inside the 300.0000 s the oil is held.",
+  "It turns true and takes oilCarryunder with it, because one specification governs both drops and 217.8010 s lengthens in the same proportion.",
+  "It is unchanged and the drum lengthens instead, because the engine raises the oil retention until the crossing fits inside it."],
+ "Velocity goes as the square of the diameter, so halving the drop quarters the speed and quadruples the crossing. At 150.000000 micron the same reading gives 1238.6620 s against 300.0000 s and the warning fires.")
 
 q(3, "What is the honest way to report a vessel sized with a vendor K?",
  "State the K, the pressure it was quoted at, and that nothing reconciled it against the table.",
  ["State the K and the derated table value beside it, since the engine returns both on an override so that a reviewer can compare them at that pressure.",
   "State the K alone, since an override wins outright and the table value at that pressure has no bearing on the vessel that was sized from it.",
   "State the K and the floor of 0.120000, since the floor is the only part of the table that still applies once an override has been supplied to the engine."],
- "An override returns source typed with derated and floored both false, and no warning is raised when a typed K sits far from the table. A vendor K of 0.9 would be taken silently.")
+ "An override returns source typed with derated and floored both false, and no warning is raised when a typed K sits far from the table.")
 
 q(2, "A layout reports 69 checks and a sweep reports six rows. What do the two counts have in common as headline numbers?",
  "Each depends on what was put in front of the engine, so a bigger count is not a better review or a better family.",

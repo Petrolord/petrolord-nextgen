@@ -1,0 +1,115 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC2 Professional m06, the Professional reading. Digest Section 12, which
+# recapitulates Sections 7 to 11 on one trunk.
+
+q(1, "A reviewer is handed one line for the SOKU trunk. Which reading carries the whole of what this tier can say about it?",
+ "11.938000 in over 32.000000 miles from 850.000000 to 620.000000 psia, a driving group of 338100.0000 psia squared, four rates from 66104956.1404 to 88369202.2673 scfd with General Flow at a friction factor of 0.0112132010, and 666.307057 psia delivered at 60000000.0000 scfd.",
+ ["11.938000 in over 32.000000 miles carrying 66104956.1404 scfd, which is the Weymouth rate and therefore the conservative figure a reviewer should work from.",
+  "A driving group of 338100.0000 psia squared and a spread of 1.336801 across the four forms, the individual rates being recoverable from those two figures and the ratio column.",
+  "11.938000 in over 32.000000 miles at an average flowing temperature of 535.000000 degR and an average compressibility of 0.885000, the eight conditions being the reading and the rates following from them."],
+ "Four forms and one line, with a spread of 1.336801 across them and a step of bore that moves the answer further still. A rate alone does not say which of the four produced it.")
+
+q(3, "The Professional reading carries one figure the engine could not evaluate and had to search a bracket for. Which is it?",
+ "The 666.307057 psia the trunk delivers at 60000000.0000 scfd.",
+ ["The friction factor of 0.0112132010, which General Flow searches for inside the same bracket the outlet pressure uses, running from atmospheric up to the ceiling a hill moves.",
+  "The equivalent length factor of 1.0408761444, which has no closed expression and is searched for once s is known.",
+  "The driving group of 338100.0000 psia squared, which the engine resolves by bisection because the two pressures enter it squared and the inverse of a square is not unique."],
+ "The engine has no closed inversion, so it bisects on the outlet pressure inside a bracket whose ceiling the hill moves. Nothing else on the reading needed a bracket.")
+
+q(0, "Put the SOKU trunk up 1500.000000 ft and Weymouth reads 61666790.6494 scfd. Put it down the same distance and it reads 70296168.5930 scfd. What may not be concluded from that pair?",
+ "That a route climbing 1500.000000 ft and then descending the same distance leaves the rate where it started, because the two do not average back to the flat 66104956.1404 scfd.",
+ ["That the descent is the better case, since the higher of the two rates belongs to it and a designer with a choice of route would take the falling one.",
+  "That the two readings stand several million scfd apart on a trunk that is otherwise unchanged.",
+  "That the flat rate of 66104956.1404 scfd stands between the climbing figure and the descending one."],
+ "The term is an exponential and an exponential is not symmetric about zero. Averaging the two fractions on that row gives 0.998132, which is close to one and is not one.")
+
+q(2, "The ceiling on the flat SOKU trunk is 850.000000 psia, on a 3000.000000 ft descent it is 920.423606 psia and on the matching climb 784.964657 psia. Why do the three differ?",
+ "Each is the inlet divided by the square root of that row's e to the s, so the hill moves the end of the bracket and only a flat line leaves it at the inlet.",
+ ["Each is the outlet the trunk delivers at on that profile, so the three differ for the same reason the rates differ and the ceiling is a restatement of the answer.",
+  "Each is the inlet corrected by the equivalent length factor of its row, which is why a climb lowers the figure and a descent raises it.",
+  "Each is the pressure at which the line reaches the largest rate it can pass on that profile, which a hill moves because it changes how much the friction has to spend."],
+ "A descent puts the ceiling above the inlet and a climb below it. Reading the offset is reading how much of the answer an inlet-capped bracket could not have expressed.")
+
+q(1, "A gas rate arrives on a report with no other figure beside it. Which of the conditions behind it can be recovered from the rate alone?",
+ "None of them, because the form, the efficiency, the elevation and the base are all stated rather than discovered and the answer carries no record of any of them.",
+ ["The form, since the four rates on any one line are distinct and a rate can therefore be matched back against whichever of the four produced it.",
+  "The efficiency, because it scales the rate directly and can be divided back out once that same form's rate at an efficiency of 1.000000 is known.",
+  "The base, since a rate in scfd is by definition counted at 520.000000 degR and 14.650000 psia, and no figure reported in those units could have been counted at any other base."],
+ "Every answer on the reading is conditional on something stated. A gas figure travels with its conditions or it does not travel at all.")
+
+q(3, "The OGBIA line flat and over a ridge both arrive at 874.339369 psia while standing 158.958333 psi apart at the crest. What does that contribute to the Professional reading?",
+ "That a line is sized on its worst station and not on its last one.",
+ ["That a march and a single call disagree once a profile has relief on it, the arrival being the figure the two share and the crest the figure that separates them.",
+  "That the elevation on a gas line is returned in full when a profile climbs and descends the same distance, which is what lets a route be netted to one figure.",
+  "That the traverse is the more accurate of the two calls on an undulating line, since it resolves the crest that a single call over the whole length averages away."],
+ "The arrival is the same and the middle of the line is not. That difference is invisible in every report quoting an arrival pressure.")
+
+q(0, "The digest prints gas rates to four decimals and the friction factor General Flow settles on to ten. Why does the tier insist a figure be quoted at the precision the engine printed it?",
+ "Because rounding on the way through moves every figure computed from the rounded one, and the tolerances a graded gas value is marked against are far tighter than the rounding would be.",
+ ["Because the two conventions distinguish a gas quantity from a liquid one, so the number of decimals is how a reader tells which half of the engine a figure came from.",
+  "Because the goldens are checked at those precisions, so a figure quoted at fewer digits cannot be matched against the published case it belongs to.",
+  "Because the grading tolerance is set at the last printed digit, so a rounded figure falls outside the band whatever its physical accuracy."],
+ "The engine chose how many digits to print and the course grades what the engine returned. Quoting at that precision is one of the capstone habits.")
+
+q(2, "The transmission efficiency is held for the literature in this course. What does the Professional reading do with it?",
+ "States it as a condition of every gas figure, since a rate is not reproducible without it and this package defends no particular value.",
+ ["Omits it, since a held item may not appear in a course's teaching material and the reading is confined to figures the engine stands behind.",
+  "Fixes it at 1.000000, which is the only value the four forms were fitted at and therefore the only one a reading may quote.",
+  "Reports it as a range across the published cases, whose efficiencies of 0.920000, 0.950000 and 1.000000 bracket what a real line achieves and are the three values a reading may quote."],
+ "The SOKU reading is at an efficiency of 1.000000 and says so. A rate computed at an efficiency the question did not name is a different answer to a different question.")
+
+q(3, "A summary reports a descending line's drop as a positive number. What has that done to the reading?",
+ "It has put the terminal below the station on paper when the line in fact arrives higher than it left, and the sign was the answer.",
+ ["It has lost the elevation change, because the sign of the drop is the only place a traverse records which way the profile ran.",
+  "It has moved the figure outside the bracket, since a positive drop on a descent implies an outlet below the floor the solver searched from.",
+  "Nothing, provided the profile is stated alongside it, because the magnitude is the quantity a summary reports and the direction is read off the survey."],
+ "On the 3000.000000 ft descent the inverse returns an outlet of 880.000000 psia against an inlet of 850.000000 psia and a drop of -30.000000 psi. Taking the absolute value is the mistake.")
+
+q(1, "What single property of the SOKU trunk is it that obliges a designer to defend the choice of transmission form?",
+ "The spread of 1.336801 from the lowest of the four rates to the highest on identical inputs.",
+ ["The diameter exponent of 2.6666666667, which every one of the four forms carries and which therefore fixes what a change of bore is worth whichever form is chosen.",
+  "The friction factor of 0.0112132010, which is the only description of the pipe any of the four forms carries and therefore the only figure a bore decision can be checked against.",
+  "The driving group of 338100.0000 psia squared, which is fixed by the two pressures and leaves the bore as the only remaining variable in the reading."],
+ "A spread of that width across the answers has to be defended. One step of bore from 11.938000 in to 15.000000 in spreads 1.838340 on the same trunk, so the bore moves the answer further still and both choices are defended rather than defaulted.")
+
+q(0, "A reviewer wants to check a gas answer before anything else on the sheet. Which figure lets them do it, and why?",
+ "The friction factor General Flow settled on, because it is the one number on a gas answer that reports what the form concluded about the pipe rather than what it was told.",
+ ["The driving group, because a form handed the right two pressures cannot return a wrong rate, so checking the group is checking the answer.",
+  "The ratio against Weymouth, because it removes the efficiency and the base from the comparison and leaves only the difference between the correlations.",
+  "The equivalent length factor, because it is the part of the elevation adjustment a reviewer can check against the survey rather than against the engine, and the only one of the two the engine returns."],
+ "A value of 0.0112132010 on a trunk of 11.938000 in is a report about the flow the form settled on. No Weymouth or Panhandle answer offers that.")
+
+q(2, "This tier met several refusals and read each as a finding. What does the reading do when the engine refuses?",
+ "Reports the refusal, because the gap was the finding and writing a plausible figure into it turns a correct reading into a wrong one.",
+ ["Reports the nearest figure the engine can supply, since a reading with a gap in it cannot be compared against another reading of the same line.",
+  "Reports the refusal together with the value the arithmetic produced, since the engine attaches that figure precisely so it can stand in the answer's place.",
+  "Reports a zero, because a line that cannot deliver passes nothing and a total has to be able to add the branch up."],
+ "An outlet meeting its inlet, a rate the line cannot carry to atmosphere and a climb the static column alone pays for each return an error string rather than a number.")
+
+q(1, "What did this tier change about the method, as against the Associate tier's liquid line?",
+ "The shape of it: pressures enter squared, the base a rate is counted at is part of the answer, the hill acts twice and never symmetrically, and the inverse has a range a hill moves.",
+ ["The precision of it, gas work being printed to four decimals against the liquid half's six, which is what a reader has to carry across between the two halves.",
+  "The units of it alone, the gas forms being stated in miles while the liquid correlations are stated in feet and the elevation staying in feet on both.",
+  "The number of answers, four published forms replacing the single closed-form chain the liquid line is assembled from while the arithmetic underneath stays the same."],
+ "The compressible half changed the method rather than the numbers. A reader who can say why the outlet of a descending line can stand above its inlet is ready for the next tier.")
+
+q(3, "What two questions about a pipe does the Expert tier take up that no pressure drop can answer?",
+ "What wall the pipe needs, and what liquid sits inside it for a pig to push.",
+ ["What the transition band between the two friction branches should return, and what roughness a fitted curve may be extrapolated past, both of which are limits this tier met and did not resolve.",
+  "What efficiency a real line achieves, and what base a contract written against another operator's meter is counted at, neither of which this engine can produce.",
+  "What the worst station on a gas line is, and what a gas traverse would report, since the marching function in this engine is a liquid one."],
+ "Everything in this tier treated the pipe as a bore. A pipe is also a wall a code demands, and a line is also a volume that collects liquid.")
+
+q(0, "Which figures on the Professional reading would move if the trunk were re-run at a different transmission efficiency?",
+ "All four rates and the delivered pressure at a contracted rate, because every one of the four forms carries the efficiency and the inverse solves against the form it was given.",
+ ["The four rates alone, since the inverse is solved on the driving group and the efficiency enters after the pressure has been found.",
+  "The four rates and the driving group of 338100.0000 psia squared, since the efficiency enters the group before any of the four forms is evaluated.",
+  "None of them, because an efficiency of 1.000000 is the reference the ratio column of 1.000000, 1.314034, 1.336801 and 1.117335 is built on, and a reading is quoted against that column."],
+ "Weymouth moves from 66104956.1404 scfd at 1.000000 to 56189212.7194 scfd at 0.850000. Every graded gas figure in this course states the efficiency it belongs to.")
+
+emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m06.json', expect_n=15)
+finish()

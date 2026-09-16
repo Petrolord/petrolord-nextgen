@@ -1,0 +1,107 @@
+{
+ "app_slug": "seismolord",
+ "tier": "advanced",
+ "tier_name": "Expert",
+ "course": "Seismolord",
+ "generated": "2026-09-16",
+ "finding": "docs/gate-audit/promptleak.md section 5",
+ "old_text_source": "the live production row, read 2026-09-16 (select prompt, fields::text from public.academy_capstones)",
+ "new_text_source": "the live prompt with the substring replacements listed below, each asserted to match exactly once",
+ "prompt_changed": true,
+ "prompt_replacements": [
+  {
+   "old": "the isolated-reflector amplitude on the thick end at 25 Hz",
+   "new": "the ratio of the 25 Hz tuning amplitude to the isolated-reflector level on the thick end of the same run"
+  }
+ ],
+ "prompt_old": "Model the SAND top and base as an equal and opposite reflection pair (RC +0.08 / -0.08) in a wedge from 0 to 60 ms at a 2 ms sample rate. Read the tuning panel at 25 Hz and 40 Hz: the tuning thickness and its peak amplitude at each frequency, the isolated-reflector amplitude on the thick end at 25 Hz, and the Kallweit-Wood theoretical tuning thickness sqrt(6)/(2*pi*f) at 25 Hz.",
+ "prompt_new": "Model the SAND top and base as an equal and opposite reflection pair (RC +0.08 / -0.08) in a wedge from 0 to 60 ms at a 2 ms sample rate. Read the tuning panel at 25 Hz and 40 Hz: the tuning thickness and its peak amplitude at each frequency, the ratio of the 25 Hz tuning amplitude to the isolated-reflector level on the thick end of the same run, and the Kallweit-Wood theoretical tuning thickness sqrt(6)/(2*pi*f) at 25 Hz.",
+ "fields_old": [
+  {
+   "key": "tune25_ms",
+   "tol": 0,
+   "unit": "ms",
+   "label": "Tuning thickness at 25 Hz",
+   "expected": 16
+  },
+  {
+   "key": "tune25_amp",
+   "tol": 0.002,
+   "unit": "-",
+   "label": "Peak amplitude at 25 Hz tuning",
+   "expected": 0.1155947595834732
+  },
+  {
+   "key": "tune40_ms",
+   "tol": 0,
+   "unit": "ms",
+   "label": "Tuning thickness at 40 Hz",
+   "expected": 10
+  },
+  {
+   "key": "tune40_amp",
+   "tol": 0.002,
+   "unit": "-",
+   "label": "Peak amplitude at 40 Hz tuning",
+   "expected": 0.1155947595834732
+  },
+  {
+   "key": "iso25_amp",
+   "tol": 0.002,
+   "unit": "-",
+   "label": "Isolated-reflector amplitude at 25 Hz",
+   "expected": 0.07999999821186066
+  },
+  {
+   "key": "theory25_ms",
+   "tol": 0.05,
+   "unit": "ms",
+   "label": "Theoretical tuning thickness at 25 Hz",
+   "expected": 15.593936024673521
+  }
+ ],
+ "fields_new": [
+  {
+   "key": "tune25_ms",
+   "tol": 0,
+   "unit": "ms",
+   "label": "Tuning thickness at 25 Hz",
+   "expected": 16
+  },
+  {
+   "key": "tune25_amp",
+   "tol": 0.002,
+   "unit": "-",
+   "label": "Peak amplitude at 25 Hz tuning",
+   "expected": 0.1155947595834732
+  },
+  {
+   "key": "tune40_ms",
+   "tol": 0,
+   "unit": "ms",
+   "label": "Tuning thickness at 40 Hz",
+   "expected": 10
+  },
+  {
+   "key": "tune40_amp",
+   "tol": 0.002,
+   "unit": "-",
+   "label": "Peak amplitude at 40 Hz tuning",
+   "expected": 0.1155947595834732
+  },
+  {
+   "key": "tune25_iso_ratio",
+   "label": "Tuning amplitude over the isolated level at 25 Hz",
+   "unit": "-",
+   "expected": 1.4449345270902185,
+   "tol": 0.001
+  },
+  {
+   "key": "theory25_ms",
+   "tol": 0.05,
+   "unit": "ms",
+   "label": "Theoretical tuning thickness at 25 Hz",
+   "expected": 15.593936024673521
+  }
+ ]
+}

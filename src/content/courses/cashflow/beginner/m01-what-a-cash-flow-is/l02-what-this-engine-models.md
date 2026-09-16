@@ -1,6 +1,6 @@
 # What this engine models
 
-The Petroleum Economics Studio engine, version 3.9.0, turns three uploaded files and a configuration into a yearly ledger and a handful of headline readings. Knowing its edges is most of knowing how to use it.
+The Petroleum Economics Studio engine, version 3.10.0, turns three uploaded files and a configuration into a yearly ledger and a handful of headline readings. Knowing its edges is most of knowing how to use it.
 
 ## The inputs
 

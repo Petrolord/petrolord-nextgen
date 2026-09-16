@@ -29,7 +29,7 @@ Both readings are null when the event never happens. The published case that run
 
 Payback is not the year the cost pool clears. A published case named for a pool that never recovers, running cost recovery capped at 5 percent, pays back in year 3 and reaches payout in year 2, and closes the life with 2543.7575 still unrecovered. Its total contractor net cash flow is 1530.0622. The contractor's cash turned positive early while the cost pool never emptied at all, and a reader who treats the two as one clock reports the wrong one.
 
-The second error is to rank on payback. It is a whole year, so four of the six templates read 3 on the default project and are not distinguished at all, and on the Suite test project five of them read 2. A tie in this column is not a tie in the money: the same year 3 covers a life total of 986.7327 under Generic and 912.1029 under Brazil.
+The second error is to rank on payback. It is a whole year, so four of the six templates read 3 on the default project and are not distinguished at all, and on the Suite test project all six read 2. A tie in this column is not a tie in the money: the same year 3 covers a life total of 986.7327 under Generic and 623.9658 under Brazil.
 
 ## Slower on a harder field
 

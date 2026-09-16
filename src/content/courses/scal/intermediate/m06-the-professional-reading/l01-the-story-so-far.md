@@ -27,7 +27,7 @@ SCAL is one subject wearing two coats. The capillary half you finished here says
 
 {{panel:sc-displacement-explorer}}
 
-Set the oil viscosity back to the Ekene value of 1.8 cp and the water exponent to 2.5, and confirm the six Associate quantities still read as you remember them: mobility ratio 1.2, front saturation 0.6372, displacement efficiency at breakthrough just under 0.51. Then slide the oil viscosity to 5 cp and watch which tiles move and which do not. The ceiling tile does not move, because endpoints alone set it. If you can explain every tile that moved using only the fractional flow curve, the Associate half is still yours.
+Set the oil viscosity back to the Ekene value of 1.8 cp and the water exponent to 2.5, and confirm the six Associate quantities still read as you remember them: mobility ratio 1.2, front saturation 0.6372, displacement efficiency at breakthrough a shade over one half. Then slide the oil viscosity to 5 cp and watch which tiles move and which do not. The ceiling tile does not move, because endpoints alone set it. If you can explain every tile that moved using only the fractional flow curve, the Associate half is still yours.
 
 ## The misconception to avoid
 

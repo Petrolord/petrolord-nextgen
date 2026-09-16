@@ -1,0 +1,1541 @@
+{
+ "app_slug": "fdp",
+ "course": "Field Development Planning",
+ "tier": "advanced",
+ "generated": "2026-09-16",
+ "what_this_is": "What this wave actually recut in this tier. Every old_ value is the text of the LIVE production row or of the committed lesson line it replaces.",
+ "counts": {
+  "lessons_recut": 14,
+  "questions_recut": 56,
+  "keyed_option_text_rewritten": 15,
+  "stems_rewritten": 31
+ },
+ "lessons_recut": [
+  {
+   "path": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l01-the-rate-that-zeroes-the-value.md",
+   "retitled": null,
+   "old_lines": [
+    "The EGINA Base scenario runs the FPSO concept at 70.0000 USD a barrel on the studio's default screening terms: royalty 12.5000 percent, tax 30.0000 percent, discount 10.0000 percent and variable operating cost 5.0000 USD a barrel. Discounted at 10.0000 percent the NPV is 2047.5653 million USD. The rate that would drive that same NPV to zero is 29.5998 percent, and the engine reports the status `ok`.",
+    "Nobody chose 29.5998. The capex of 2250.0000 million USD, the twenty year production shape, the price and the terms fix a yearly cash flow, and the rate falls out of it. Change any one of them and the rate changes with it.",
+    "| oil price | NPV | IRR percent |",
+    "| 40.0000 | -161.0098 | 8.2444 |",
+    "| 55.0000 | 943.2778 | 19.4279 |",
+    "| 70.0000 | 2047.5653 | 29.5998 |",
+    "| 85.0000 | 3151.8529 | 39.3813 |",
+    "The same concept, the same capex, four prices. At 40.0000 USD a barrel the rate is 8.2444 percent, which is a real root, and the case is still worth -161.0098 million USD because it is discounted at 10.0000 percent. A rate exists there. It is simply lower than the rate the money is being charged.",
+    "Year 0 carries the capex and no production, so its net cash flow is -2250.0000. Year 1 earns 795.8125, and years 2 and 3 repeat that, so the cumulative runs -2250.0000, then -1454.1875, then -658.3750, then 137.4375. A flow that starts negative and later turns positive can be driven to zero by some rate, because discounting punishes the late positive years harder than the early negative one.",
+    "A flow that never turns has no such rate, and the engine says so instead of producing one.",
+    "The search runs between -99 and 1000 percent, and a rate is reported only when it is a root inside that band. Otherwise the rate is null and the status names the reason: `no-sign-change`, `above-clamp`, `multiple-roots` or `no-root`, with `ok` as the fifth value. The EGINA Base case reads `ok` and 29.5998 percent. The same concept at 18.0000 USD a barrel reads no rate at all, status `no-root`, on an NPV of -1797.2732.",
+    "The mistake is reading the rate as an opinion the engine formed about the project. It is not. It is the answer to one arithmetic question asked of one cash flow, and the cash flow came from a screening case: one price deck, one shape, post royalty and tax on stated default terms. A rate of 29.5998 percent on those inputs is not a sanction case, and it is not evidence that the inputs were right.",
+    "State the NPV and the IRR of the EGINA Base case, and say which discount rate the NPV was taken at. Then, using the 40.0000 USD a barrel row, explain how a case can carry a rate of 8.2444 percent and an NPV of -161.0098 million USD at the same time."
+   ],
+   "new_lines": [
+    "The EGINA Base scenario runs the FPSO concept at 70.0000 USD a barrel on the studio's default screening terms: royalty 12.5000 percent, tax 30.0000 percent, discount 10.0000 percent and variable operating cost 5.0000 USD a barrel. Discounted at 10.0000 percent the NPV is 2015.4123 million USD. Run the same case with no end-of-life cost and it is worth 2047.5653 million USD, and the rate that drives that flow to zero is 29.5998 percent at status `ok`.",
+    "Nobody chose 29.5998. A capex of 2250.0000 million USD, a twenty year production shape, the price and the terms fix a yearly cash flow, and the rate falls out of it. Charge the plan's end-of-life cost of 260.0000 million USD in production year 20 and the flow is zeroed at two rates, -44.3414 and 29.5779, so the engine reports `multiple-roots` and no rate.",
+    "| oil price | NPV | rate of return |",
+    "| 40.0000 | -197.2391 | none, multiple-roots |",
+    "| 55.0000 | 909.0866 | none, multiple-roots |",
+    "| 70.0000 | 2015.4123 | none, multiple-roots |",
+    "| 85.0000 | 3121.7380 | none, multiple-roots |",
+    "The same concept, the same capex, four prices, and not one of them carries a rate. The value moves by the same amount at every step because only what a barrel earns changes, and the rate is missing for a reason unrelated to the price: each of these flows spends, earns, and then pays to abandon.",
+    "Year 0 carries the capex and no production, so its net cash flow is -2250.0000, and the cumulative runs -2250.0000, then -1454.1875, then -658.3750, then 137.4375. A flow that starts negative and later turns positive can be driven to zero by some rate, because discounting punishes the late positive years harder than the early negative one. A flow that never turns has no such rate, and the engine says so instead of producing one.",
+    "The search runs between -99 and 1000 percent, and a rate is reported only when it is the one root inside that band. Otherwise the rate is null and the status names the reason: `no-sign-change`, `above-clamp`, `multiple-roots` or `no-root`, with `ok` as the fifth value. The EGINA Base case reads `multiple-roots` and no rate. The same concept at 18.0000 USD a barrel reads no rate either, status `no-root`, on an NPV of -1834.1220.",
+    "The mistake is reading the rate as an opinion the engine formed about the project. It is not. It is the answer to one arithmetic question asked of one cash flow from a screening case: one price deck, one shape, post royalty and tax on stated default terms. A value of 2015.4123 million USD on those inputs is not a sanction case, and it is not evidence that the inputs were right.",
+    "State the NPV of the EGINA Base case and what it reports in place of a rate, and say which discount rate the NPV was taken at. Then give the two rates that zero the Base flow and say what has to be true of a cash flow before one rate can answer for it."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l02-reading-it-beside-the-npv.md",
+   "retitled": null,
+   "old_lines": [
+    "| Base | FPSO development | 70.0000 | 2250.0000 | 2047.5653 | 29.5998 | 3.8273 |",
+    "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1048.6281 | 40.4321 | 3.2035 |",
+    "At the same price, the tie-back returns 40.4321 percent and the FPSO returns 29.5998 percent. On the rate alone the tie-back wins by a clear margin. On the money it does not: the FPSO earns 2047.5653 million USD and the tie-back earns 1048.6281 million USD.",
+    "The tie-back spends 730.0000 million USD and the FPSO spends 2250.0000. Value per million of capex is 1.436477 for the tie-back and 0.910029 for the FPSO. Every million the tie-back commits works harder. There is simply far less of it committed, and a plan that stops at the tie-back has left the rest of the field undeveloped rather than earning 0.910029 per million on it.",
+    "The tie-back pays back in 3.2035 years and the FPSO in 3.8273. That is a third measure, and it ranks with the rate rather than with the money, because it is also indifferent to how much money is involved. Three measures agreeing on the smaller concept still does not make the smaller concept worth more.",
+    "The mistake is a ranked list of rates presented as a ranked list of projects. A screening portfolio sorted on IRR puts 40.4321 percent above 29.5998 percent and hands the reader an option worth 1048.6281 million USD in place of one worth 2047.5653 million USD, with nothing on the page to show what was given up. The discipline is to print the rate, the NPV and the capex on the same row, so that 40.4321 percent never appears without 730.0000 beside it.",
+    "Write the NPV, IRR and capex of both EGINA scenarios and say which concept each of the three measures favours. Then explain, using 1.436477 and 0.910029, how the tie-back can be the more efficient use of capital and still be worth less money."
+   ],
+   "new_lines": [
+    "| Base | FPSO development | 70.0000 | 2250.0000 | 2015.4123 | none | 3.8273 |",
+    "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | 3.2035 |",
+    "At the same price neither concept carries a rate of return: both pay to abandon the field at the end of its life, both flows change sign twice, and both report `multiple-roots`. The money is unambiguous either way: the FPSO earns 2015.4123 million USD and the tie-back earns 1013.7182 million USD.",
+    "The tie-back spends 730.0000 million USD and the FPSO spends 2250.0000. Value per million of capex is 1.388655 for the tie-back and 0.895739 for the FPSO. Every million the tie-back commits works harder. There is simply far less of it committed, and a plan that stops at the tie-back has left the rest of the field undeveloped rather than earning 0.895739 per million on it.",
+    "The tie-back pays back in 3.2035 years and the FPSO in 3.8273. That is a third measure, and it ranks with the roots rather than with the money, because it is also indifferent to how much money is involved. Three measures agreeing on the smaller concept still does not make the smaller concept worth more.",
+    "The mistake is a ranked list of rates presented as a ranked list of projects. A screening portfolio sorted on a rate has nothing to sort here, and a reader who reaches instead for the higher of the two roots the engine lists, 40.4136 on the tie-back against 29.5779 on the Base, hands over an option worth 1013.7182 million USD in place of one worth 2015.4123 million USD. Neither figure is a rate of return, and the ordering they produce is the one the money contradicts.",
+    "Write the NPV, IRR and capex of both EGINA scenarios and say which concept each of the three measures favours. Then explain, using 1.388655 and 0.895739, how the tie-back can be the more efficient use of capital and still be worth less money."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l03-a-negative-rate-is-an-answer.md",
+   "retitled": null,
+   "old_lines": [
+    "| EGINA at 18.0000 USD a barrel | -1797.2732 | none | no-root |",
+    "The mirror of this mistake is just as common. At 40.0000 USD a barrel the EGINA concept reports 8.2444 percent, a positive rate and a valid one, on an NPV of -161.0098 million USD. The rate is positive and the project destroys value, because the screening discount rate is 10.0000 percent and the flow only earns 8.2444. The sign of the rate is not the test. The test is the rate against the rate money costs, and the NPV already did that comparison."
+   ],
+   "new_lines": [
+    "| EGINA at 18.0000 USD a barrel | -1834.1220 | none | no-root |",
+    "The mirror of this mistake is just as common. A rate above zero is not a project that pays: the test is the rate against the rate money costs, which is 10.0000 percent on every screening case here, and the NPV has already made that comparison in money. At 40.0000 USD a barrel the EGINA concept is worth -197.2391 million USD and reports no rate at all, so the value is the only figure on that row a reader can act on."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l04-payback-and-the-honest-null.md",
+   "retitled": null,
+   "old_lines": [
+    "| High price | 92.0000 | 3667.1870 | 3.0625 |",
+    "| Base | 70.0000 | 2047.5653 | 3.8273 |",
+    "| Low price | 48.0000 | 427.9436 | 5.7734 |",
+    "| Stress | 18.0000 | -1797.2732 | never |",
+    "| Tie-back base | 70.0000 | 1048.6281 | 3.2035 |",
+    "At 18.0000 USD a barrel the cumulative never reaches zero, and payback is null. At 30.0000 USD a barrel, on an NPV of -898.3507, it is null again. Null here is not missing data and it is not an error. It is the measured answer, and it is the strongest thing payback ever says.",
+    "It also says nothing about size. The tie-back pays back in 3.2035 years and the FPSO in 3.8273, and the FPSO earns 2047.5653 million USD against 1048.6281."
+   ],
+   "new_lines": [
+    "| High price | 92.0000 | 3638.0233 | 3.0625 |",
+    "| Base | 70.0000 | 2015.4123 | 3.8273 |",
+    "| Low price | 48.0000 | 392.8013 | 5.7734 |",
+    "| Stress | 18.0000 | -1834.1220 | never |",
+    "| Tie-back base | 70.0000 | 1013.7182 | 3.2035 |",
+    "At 18.0000 USD a barrel the cumulative never reaches zero, and payback is null. At 30.0000 USD a barrel, on an NPV of -935.1995, it is null again. Null here is not missing data and it is not an error. It is the measured answer, and it is the strongest thing payback ever says.",
+    "It also says nothing about size. The tie-back pays back in 3.2035 years and the FPSO in 3.8273, and the FPSO earns 2015.4123 million USD against 1013.7182."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l05-what-the-hurdle-hides.md",
+   "retitled": null,
+   "old_lines": [
+    "A hurdle turns a rate into a yes or a no, and in doing so it throws away every other number on the row. What survives the comparison is one bit, and the money is not in it.",
+    "## One test, four different projects",
+    "Take a screening hurdle of 15 percent and run the EGINA scenarios past it.",
+    "| scenario | concept | capex | NPV | IRR | verdict at 15 percent |",
+    "| --- | --- | --- | --- | --- | --- |",
+    "| High price | FPSO development | 2250.0000 | 3667.1870 | 43.8693 | pass |",
+    "| Tie-back base | Subsea tie-back | 730.0000 | 1048.6281 | 40.4321 | pass |",
+    "| Base | FPSO development | 2250.0000 | 2047.5653 | 29.5998 | pass |",
+    "| Low price | FPSO development | 2250.0000 | 427.9436 | 14.4152 | fail |",
+    "The Low price case returns 14.4152 percent and fails. It is also worth 427.9436 million USD at a discount rate of 10.0000 percent, which is money the field would otherwise not have. The hurdle rejected a positive NPV, and it did so correctly by its own rule, because 14.4152 is less than 15.",
+    "## The ordering the hurdle imposes",
+    "Among the three that pass, the hurdle has nothing further to say, so the natural next step is to sort by how far each cleared it. That puts 40.4321 percent above 29.5998 percent, which puts 1048.6281 million USD above 2047.5653 million USD. A screening process built entirely on a rate against a threshold will reach for the tie-back and never surface that the FPSO was worth more. The two are not even the same commitment: 730.0000 million USD of capex against 2250.0000, and the hurdle divides that scale out before it tests anything.",
+    "## Two thresholds are already in play",
+    "The screening case is discounted at 10.0000 percent, and that rate is already a test: it is the rate at which future money is charged before the NPV is struck. A separate hurdle of 15 percent applied to the IRR afterwards is a second, stricter test, and the two are not the same test twice. The Low price case passes the first, since 427.9436 is positive, and fails the second. Which of those is the decision depends on what the 15 is for, and that is a policy somebody set rather than anything the engine derived.",
+    "## What a pass does not certify",
+    "A rate clearing a hurdle says nothing about whether the inputs behind it were sound. The Base rate of 29.5998 percent rests on one price of 70.0000 USD a barrel, one screening shape, a capex of 2250.0000 million USD and default terms of royalty 12.5000 percent and tax 30.0000 percent. Change the price to 48.0000 and the same concept, on the same capex, fails the same hurdle at 14.4152 percent. The hurdle did not detect anything about the project. It detected the price deck it was handed.",
+    "The mistake is a green tick with no NPV beside it. A reader who sees only the verdict cannot tell 427.9436 million USD of rejected value from a case that was genuinely worthless, and cannot tell a pass on 2047.5653 from a pass on 1048.6281. Report the rate, the NPV, the capex and the payback together, and let the hurdle filter rather than decide.",
+    "Apply a 15 percent hurdle to all four scenarios and record each verdict. Then state the NPV of the case that fails, and explain what a reader who sees only the verdicts cannot learn about the two passing FPSO cases."
+   ],
+   "new_lines": [
+    "A hurdle turns a rate into a yes or a no, and in doing so it throws away every other number on the row. On this plan it throws away more than that, because not one of the five scenarios carries a rate for a hurdle to test.",
+    "## One test, and nothing to test it on",
+    "The scenario card colours an internal rate of return of 15 percent or more green and anything below it amber, and that is the only hurdle rate anywhere in the studio.",
+    "| scenario | concept | capex | NPV | rate of return |",
+    "| --- | --- | --- | --- | --- |",
+    "| High price | FPSO development | 2250.0000 | 3638.0233 | none, multiple-roots |",
+    "| Base | FPSO development | 2250.0000 | 2015.4123 | none, multiple-roots |",
+    "| Tie-back base | Subsea tie-back | 730.0000 | 1013.7182 | none, multiple-roots |",
+    "| Low price | FPSO development | 2250.0000 | 392.8013 | none, multiple-roots |",
+    "| Stress | FPSO development | 2250.0000 | -1834.1220 | none, no-root |",
+    "Each of those five carries a value and none of them carries a rate, because the plan pays 260.0000 million USD to abandon the field in production year 20 and every flow changes sign twice. A rule written against the rate returns nothing on every row, on the row worth 3638.0233 million USD and on the row worth -1834.1220 alike.",
+    "## What the colour was hiding while it still worked",
+    "Run the Base case with no end-of-life cost and it reports 29.5998 percent on a value of 2047.5653 million USD, comfortably inside the green. That colour was never a statement about how much money a case carried. A rate divides the size out before it reports, so a commitment of 730.0000 million USD of capex and one of 2250.0000 can clear the same threshold and leave very different amounts behind: 1013.7182 million USD against 2015.4123 at the same price.",
+    "## Two thresholds, and only one of them still works",
+    "The screening case is discounted at 10.0000 percent, and that rate is already a test, since future money is charged at it before the value is struck. A hurdle of 15 percent applied to the rate afterwards is a second and stricter test, and it is the one that now has no input. The first still reads on every case: 392.8013 million USD at 48.0000 USD a barrel is positive, and -1834.1220 at 18.0000 is not.",
+    "## What a verdict never certified",
+    "A rate clearing a hurdle said nothing about whether the inputs behind it were sound. The Base figures rest on one price of 70.0000 USD a barrel, one screening shape, a capex of 2250.0000 million USD and default terms of royalty 12.5000 percent and tax 30.0000 percent. Change the price to 48.0000 and the same concept on the same capex is worth 392.8013. A threshold detects the price deck it was handed.",
+    "Reading a missing rate as a failed one. A card that leads with a rate has nothing to print on any of these five cases, and a reader who treats the empty cell as a low score ranks 3638.0233 million USD below nothing at all. Report the value, the status, the capex and the payback together, and let a hurdle filter what it can still measure.",
+    "State what each of the five EGINA scenarios reports for its rate of return and the status beside it. Then give the value at 92.0000 USD a barrel and the value at 18.0000, and say what a hurdle of 15 percent can tell a reader about either of them."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m02-when-there-is-no-rate/l02-above-the-band.md",
+   "retitled": null,
+   "old_lines": [
+    "A search has to stop somewhere. The bound at 1000 percent is a choice about the range of rates a screening tool expects to meet, and a real development case sits far inside it: the EGINA Base is 29.5998 percent and the tie-back is 40.4321 percent. Cases that clear 1000 percent are almost always cases whose capex is wrong, missing or entered in the wrong units, and the status is a prompt to go and look at the inputs."
+   ],
+   "new_lines": [
+    "A search has to stop somewhere. The bound at 1000 percent is a choice about the range of rates a screening tool expects to meet, and a real development case sits far inside it: every rate that zeroes an EGINA flow falls between -66.9344 and 43.8661 percent. Cases that clear 1000 percent are almost always cases whose capex is wrong, missing or entered in the wrong units, and the status is a prompt to go and look at the inputs."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m02-when-there-is-no-rate/l03-more-than-one-root.md",
+   "retitled": null,
+   "old_lines": [
+    "A cash flow that changes sign more than once can be driven to zero at more than one discount rate. When that happens there is no such thing as the rate of return, and the engine reports the status `multiple-roots` with no number.",
+    "## Why a second crossing creates a second root",
+    "The NPV of a flow is a curve drawn against the discount rate, and a root is a place where that curve touches zero. One change of sign gives a curve that crosses once. Two give a curve that can bend back and cross again, and both crossings are genuine: at each of them the NPV really is zero, and neither has any claim to be the answer.",
+    "## The two cases the digest records",
+    "| case | NPV | IRR | status |",
+    "| EGINA at 30.0000 USD a barrel | -898.3507 | none | multiple-roots |",
+    "| price deck shorter than the profile | 126.1636 | none | multiple-roots |",
+    "The second shows where a second sign change comes from in practice. The published case runs a price deck that does not cover the whole production profile, and the missing prices are read as 0. The years the deck covers earn money; the years past the end of the deck produce barrels at a price of 0 while still carrying their operating cost, so those years go negative again. The flow goes down, up and down, and the curve crosses zero twice. The golden records that the root the band hides is -52.4425 percent, and even that recorded root is not the return, because another one exists.",
+    "## The value is still one number",
+    "The NPV is defined whatever the flow does. At 30.0000 USD a barrel the EGINA case is worth -898.3507 million USD and its payback is never. The published deck case is worth 126.1636. Those numbers are unambiguous at the discount rate they were struck at, and they are what a reader should take from a `multiple-roots` case: the ambiguity lives in the rate and nowhere else. Reporting nothing there is less convenient than reporting something, and the gain is that no reader is handed a rate a second, equally valid rate contradicts.",
+    "## The input is usually the finding",
+    "A case that flips sign twice is normally telling you something about the inputs rather than about the geology. A deck that stops before the profile does, an abandonment cost in the middle of the life, a second capex phase: any of these will do it. In the studio's plan path a price deck that does not cover the profile is refused by name rather than padded, with the message \"the price deck has no price for production year 3: enter a price for every year of the profile\".",
+    "The mistake is picking one root, usually the one nearest a familiar number, and calling it the return. Neither root is more true than the other, and the choice is the reader's preference wearing the engine's authority. The second mistake is reading `multiple-roots` as a synonym for `no-root`. At 30.0000 USD a barrel the status is `multiple-roots` and at 18.0000 it is `no-root`, and the difference is whether any rate zeroes the flow at all.",
+    "State the NPV and status of both `multiple-roots` cases. Then explain, from the way the shortened price deck is read, how a flow acquires a second change of sign, and say why -52.4425 percent is still not the rate of return of that case."
+   ],
+   "new_lines": [
+    "A cash flow that changes sign more than once can be driven to zero at more than one discount rate. When that happens there is no such thing as the rate of return, and the engine reports the status `multiple-roots` with no number at all.",
+    "## What puts a second crossing in a development plan",
+    "The EGINA plan spends 2250.0000 million USD in year 0, earns for twenty years, and pays 260.0000 million USD to abandon the field in the last of them. Its net cash flow therefore changes sign twice, down then up then down again, and by Descartes' rule a flow that changes sign twice can be zeroed at more than one rate. The engine finds every root rather than stopping at the first one it meets, and when it finds two it reports neither.",
+    "## The rates that zero each case",
+    "| case | NPV | status | the rates that zero this flow, percent |",
+    "| Base, 70 USD a barrel | 2015.4123 | multiple-roots | -44.3414 and 29.5779 |",
+    "| Low price, 48 USD a barrel | 392.8013 | multiple-roots | -26.6855 and 14.2149 |",
+    "| High price, 92 USD a barrel | 3638.0233 | multiple-roots | -66.9344 and 43.8661 |",
+    "| Tie-back base, 70 USD a barrel | 1013.7182 | multiple-roots | -24.3411 and 40.4136 |",
+    "| At 18 USD a barrel | -1834.1220 | no-root | none: the flow is negative at every rate the engine searches |",
+    "The cases carrying two roots are the ones that earn. A case that never climbs out of its hole reports `no-root` instead: at 18.0000 USD a barrel the value is -1834.1220 and at 30.0000 USD a barrel it is -935.1995, and both of those flows change sign without any rate inside the band zeroing them.",
+    "## Neither root is the rate of return",
+    "The two figures on a row are the discount rates at which that flow is worth nothing, and between them the plan is worth more than nothing. Quoting the higher one alone is the mistake the status exists to stop, and quoting the lower one as a loss is the same mistake upside down. A rate of return only ever summarises a flow that spends once and earns thereafter. Charge a real end-of-life cost and most development plans stop being that shape, which is why the value, and not the rate, is what a plan is judged on.",
+    "## One line of cost, and the question loses its answer",
+    "The same Base case run with no end-of-life cost at all is worth 2047.5653 million USD and reports a single rate of 29.5998 percent at the status `ok`. Charging the 260.0000 costs the plan 32.1530 million USD of present value and takes the rate away entirely.",
+    "## The published case that does the same thing",
+    "A deck shorter than its profile reads the missing prices as 0, so the uncovered years produce barrels at no revenue while still paying to lift them. That case is worth 126.1636, and the golden records a root the band hides at -52.4425 percent. It is not the return either, because another root exists. In the studio's plan path such a deck is refused by name rather than padded: \"the price deck has no price for production year 3: enter a price for every year of the profile\".",
+    "Reading `multiple-roots` as a synonym for `no-root`. Both withhold a rate and they say opposite things about the flow: one says more than one rate zeroes it, the other says none does.",
+    "Give the two rates that zero the Base flow and say why neither is the rate of return. Then state the status and the value at 30.0000 USD a barrel and at 18.0000 USD a barrel, and say what separates a flow with two roots from one with none."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m02-when-there-is-no-rate/l04-a-clamp-is-not-an-answer.md",
+   "retitled": null,
+   "old_lines": [
+    "The EGINA concept priced at 18.0000 USD a barrel is worth -1797.2732 million USD, its status is `no-root`, and its payback is never. The flow does change sign, because year 0 spends 2250.0000 and later years earn, so a naive search is entitled to start looking. It simply never finds a crossing: no discount rate between -99 and 1000 percent makes that NPV zero, because the NPV is negative across the whole band.",
+    "The number was plausible in the worst way. It cleared every screening threshold anyone would set, so it was coloured green on the card, and a reader scanning a portfolio saw a strong return on a case that never returns its money. Green on a case worth -1797.2732 million USD is the exact opposite of the reading the arithmetic supports, and the failure is silent: nothing about 1000 percent announces that it came from the boundary rather than from a solution.",
+    "The tell is that the reported rate was exactly the boundary. A solver that lands precisely on the limit of its own search range has almost certainly returned a return code rather than a solution. The engine's genuine answers do not look like that: 29.5998 percent on the Base case, 40.4321 percent on the tie-back, 14.4152 percent on the low price case, and -36.6747 percent on the published case that never pays back. That last one is worth holding beside 1000 percent, because it shows the repaired engine reporting an ugly verified root rather than hiding it.",
+    "The mistake is trusting a rate without checking the sign of the value it came with. An IRR of 1000 percent beside an NPV of -1797.2732 million USD is a contradiction on the face of the card, and the two numbers were printed next to each other the whole time. Read the NPV first, then the status, then the rate."
+   ],
+   "new_lines": [
+    "The EGINA concept priced at 18.0000 USD a barrel is worth -1834.1220 million USD, its status is `no-root`, and its payback is never. The flow does change sign, because year 0 spends 2250.0000 and later years earn, so a naive search is entitled to start looking. It simply never finds a crossing: no discount rate between -99 and 1000 percent makes that NPV zero, because the NPV is negative across the whole band.",
+    "The number was plausible in the worst way. It cleared every screening threshold anyone would set, so it was coloured green on the card, and a reader scanning a portfolio saw a strong return on a case that never returns its money. Green on a case worth -1834.1220 million USD is the exact opposite of the reading the arithmetic supports, and the failure is silent: nothing about 1000 percent announces that it came from the boundary rather than from a solution.",
+    "The tell is that the reported rate was exactly the boundary. A solver that lands precisely on the limit of its own search range has almost certainly returned a return code rather than a solution. The engine's genuine answers do not look like that: -36.6747 percent on the published case that never pays back, and, on the EGINA flows that carry two roots, figures such as -44.3414 and 29.5779. That first one is worth holding beside 1000 percent, because it shows the repaired engine reporting an ugly verified root rather than hiding it.",
+    "The mistake is trusting a rate without checking the sign of the value it came with. An IRR of 1000 percent beside an NPV of -1834.1220 million USD is a contradiction on the face of the card, and the two numbers were printed next to each other the whole time. Read the NPV first, then the status, then the rate."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m03-what-a-sensitivity-says/l01-one-driver-at-a-time.md",
+   "retitled": null,
+   "old_lines": [
+    "| Oil Price | 501.5628 | 3593.5679 | 2047.5653 | 3092.0051 |",
+    "| CAPEX | 2691.1526 | 1403.9781 | 2047.5653 | 1287.1745 |",
+    "| OPEX | 2209.5067 | 1885.6239 | 2047.5653 | 323.8828 |",
+    "| Production | 627.7671 | 3467.3636 | 2047.5653 | 2839.5965 |",
+    "Every row runs the full case: royalty, tax, the discount, the production shape, all of it. The minus 30 percent oil price run of 501.5628 is not the base NPV scaled down. It is a complete re-calculation with one input changed, which is why the results are not symmetric about the base and why the two ends of a row are rarely the same distance from 2047.5653.",
+    "The sweep never moves two drivers together, so nothing in it describes a price fall arriving with an overrun. The worst single number in the table is 501.5628 on a 30 percent price fall, and that is the worst the sweep can produce, not the worst the project can suffer. A case with both a price fall and a capex overrun would sit below every figure printed here, and the sweep does not contain it.",
+    "The sweep inherits every limit of the case it runs on. The base of 2047.5653 million USD is a screening result: one price deck, one production shape, post royalty at 12.5000 percent and tax at 30.0000 percent, discounted at 10.0000 percent. A sweep around it is a sweep around those terms. Change the terms and the ranking itself can change, which is why a published case with no royalty and no tax on a base of 2738.0331 gives a different set of ends entirely.",
+    "The mistake is reading the widest row as a risk assessment. The sweep reports arithmetic sensitivity and nothing about exposure, likelihood or correlation. The other mistake is comparing swings across different cases: 3092.0051 on this plan and a swing from some other project are not on the same scale, because each is a share of its own base."
+   ],
+   "new_lines": [
+    "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 |",
+    "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 |",
+    "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 |",
+    "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 |",
+    "Every row runs the full case: royalty, tax, the discount, the production shape, all of it. The minus 30 percent oil price run of 466.5563 is not the base NPV scaled down. It is a complete re-calculation with one input changed, which is why the results are not symmetric about the base and why the two ends of a row are rarely the same distance from 2015.4123.",
+    "The sweep never moves two drivers together, so nothing in it describes a price fall arriving with an overrun. The worst single number in the table is 466.5563 on a 30 percent price fall, and that is the worst the sweep can produce, not the worst the project can suffer. A case with both a price fall and a capex overrun would sit below every figure printed here, and the sweep does not contain it.",
+    "The sweep inherits every limit of the case it runs on. The base of 2015.4123 million USD is a screening result: one price deck, one production shape, post royalty at 12.5000 percent and tax at 30.0000 percent, discounted at 10.0000 percent. A sweep around it is a sweep around those terms. Change the terms and the ranking itself can change, which is why a published case with no royalty and no tax on a base of 2738.0331 gives a different set of ends entirely.",
+    "The mistake is reading the widest row as a risk assessment. The sweep reports arithmetic sensitivity and nothing about exposure, likelihood or correlation. The other mistake is comparing swings across different cases: 3097.7119 on this plan and a swing from some other project are not on the same scale, because each is a share of its own base."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m03-what-a-sensitivity-says/l02-price-against-volume.md",
+   "retitled": null,
+   "old_lines": [
+    "Price and production both scale revenue, so a 30 percent move in either should move the value by the same amount. It does not. On the EGINA plan the price swing is 3092.0051 and the production swing is 2839.5965.",
+    "| Oil Price | 501.5628 | 3593.5679 | 2047.5653 | 3092.0051 | 1.510089 |",
+    "| Production | 627.7671 | 3467.3636 | 2047.5653 | 2839.5965 | 1.386816 |",
+    "Price is wider at both ends. Its downside of 501.5628 sits below the production downside of 627.7671, and its upside of 3593.5679 sits above the production upside of 3467.3636. As a share of base that is 1.510089 against 1.386816.",
+    "Raise production by 30 percent and the extra barrels raise both revenue and the variable operating cost that the barrels carry. Raise the price by 30 percent and only the revenue moves. The same relative move therefore hands more net cash flow to price than to volume, at both ends of the sweep. On the Base case the operating cost over the life is 3049.6464 million USD against revenue of 16095.0492, and it is that block of cost moving with the barrels that separates the two rows. Royalty and tax take their share of both drivers alike, at 2011.8812 and 3310.0565 on the Base case, so they are not what splits price from volume.",
+    "Price is wider than production on every one of them, including the case that pays no royalty and no tax, which shows the gap is not a fiscal artefact. Removing the government take changes the base from 2047.5653 to 2738.0331 and leaves price the wider driver. The second row is worth reading twice: it runs the example FPSO concept profile, a much larger case with a base of 10032.1182, and the ordering survives the change of scale intact."
+   ],
+   "new_lines": [
+    "Price and production both scale revenue, so a 30 percent move in either should move the value by the same amount. It does not. On the EGINA plan the price swing is 3097.7119 and the production swing is 2844.8375.",
+    "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 | 1.537012 |",
+    "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 | 1.411541 |",
+    "Price is wider at both ends. Its downside of 466.5563 sits below the production downside of 592.9935, and its upside of 3564.2683 sits above the production upside of 3437.8310. As a share of base that is 1.537012 against 1.411541.",
+    "Raise production by 30 percent and the extra barrels raise both revenue and the variable operating cost that the barrels carry. Raise the price by 30 percent and only the revenue moves. The same relative move therefore hands more net cash flow to price than to volume, at both ends of the sweep. On the Base case the operating cost over the life is 3049.6464 million USD against revenue of 16095.0492, and it is that block of cost moving with the barrels that separates the two rows. Royalty and tax take their share of both drivers alike, at 2011.8812 and 3276.9239 on the Base case, so they are not what splits price from volume.",
+    "Price is wider than production on every one of them, including the case that pays no royalty and no tax, which shows the gap is not a fiscal artefact. Removing the government take changes the base from 2015.4123 to 2738.0331 and leaves price the wider driver. The second row is worth reading twice: it runs the example FPSO concept profile, a much larger case with a base of 10032.1182, and the ordering survives the change of scale intact."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m03-what-a-sensitivity-says/l03-the-bar-that-runs-backwards.md",
+   "retitled": null,
+   "old_lines": [
+    "Three of the four drivers raise the value when they rise. Capex does not. Its minus 30 percent end is the high one at 2691.1526 and its plus 30 percent end is the low one at 1403.9781.",
+    "| Oil Price | 501.5628 | 3593.5679 | 3092.0051 |",
+    "| Production | 627.7671 | 3467.3636 | 2839.5965 |",
+    "| CAPEX | 2691.1526 | 1403.9781 | 1287.1745 |",
+    "| OPEX | 2209.5067 | 1885.6239 | 323.8828 |",
+    "The base capex is 2250.0000 million USD and it lands in year 0, before a barrel is produced, so a 30 percent move changes the deepest cash position of -2250.0000 directly, in the year discounting touches least. The swing is 1287.1745 million USD, a share of base of 0.628637.",
+    "Operating cost behaves differently. It is spread across the producing years, so it is discounted year by year and the later portions count for less. Its swing is 323.8828, a share of base of 0.158179, on the same 30 percent move.",
+    "Nothing in the numbers is wrong. The ends are 2691.1526 and 1403.9781 and both are correct runs of the full case. The difficulty is that a chart drawn from a table where two rows run one way and two run the other places the minus 30 percent end of the capex row on the same side as the plus 30 percent end of the price row, and a reader skimming the ends reads a capex saving as a capex overrun.",
+    "The habit that avoids it is to read the label before the value: 2691.1526 is what the case is worth if capex comes in 30 percent under, and 1403.9781 if it comes in 30 percent over.",
+    "The mistake is ranking the bars by their right hand end rather than by their swing, which sorts the cost drivers as though their overruns were upsides. The other mistake is assuming the capex bar is symmetric about the base of 2047.5653: it is not, and 2691.1526 and 1403.9781 are not the same distance from it."
+   ],
+   "new_lines": [
+    "Three of the four drivers raise the value when they rise. Capex does not. Its minus 30 percent end is the high one at 2658.9995 and its plus 30 percent end is the low one at 1371.8250.",
+    "| Oil Price | 466.5563 | 3564.2683 | 3097.7119 |",
+    "| Production | 592.9935 | 3437.8310 | 2844.8375 |",
+    "| CAPEX | 2658.9995 | 1371.8250 | 1287.1745 |",
+    "| OPEX | 2178.5655 | 1852.2591 | 326.3064 |",
+    "The base capex is 2250.0000 million USD and it lands in year 0, before a barrel is produced, so a 30 percent move changes the deepest cash position of -2250.0000 directly, in the year discounting touches least. The swing is 1287.1745 million USD, a share of base of 0.638666.",
+    "Operating cost behaves differently. It is spread across the producing years, so it is discounted year by year and the later portions count for less. Its swing is 326.3064, a share of base of 0.161906, on the same 30 percent move.",
+    "Nothing in the numbers is wrong. The ends are 2658.9995 and 1371.8250 and both are correct runs of the full case. The difficulty is that a chart drawn from a table where two rows run one way and two run the other places the minus 30 percent end of the capex row on the same side as the plus 30 percent end of the price row, and a reader skimming the ends reads a capex saving as a capex overrun.",
+    "The habit that avoids it is to read the label before the value: 2658.9995 is what the case is worth if capex comes in 30 percent under, and 1371.8250 if it comes in 30 percent over.",
+    "The mistake is ranking the bars by their right hand end rather than by their swing, which sorts the cost drivers as though their overruns were upsides. The other mistake is assuming the capex bar is symmetric about the base of 2015.4123: it is not, and 2658.9995 and 1371.8250 are not the same distance from it."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m03-what-a-sensitivity-says/l04-what-a-tornado-is-not.md",
+   "retitled": null,
+   "old_lines": [
+    "| Oil Price | 501.5628 | 3593.5679 | 3092.0051 | 1.510089 |",
+    "| Production | 627.7671 | 3467.3636 | 2839.5965 | 1.386816 |",
+    "| CAPEX | 2691.1526 | 1403.9781 | 1287.1745 | 0.628637 |",
+    "| OPEX | 2209.5067 | 1885.6239 | 323.8828 | 0.158179 |",
+    "The ends are not percentiles and they never take a P-label. A P90 and a P10 belong to a reserves distribution, one fluid at a time: EGINA's oil P50 is 130.0000 MMbbl and its gas P50 is 70.0000 Bcf, and those labels came from a distribution somebody built. The value 501.5628 is not a low case in that sense. It is one run. Calling it a P90 NPV asserts that a 30 percent price fall has a particular chance of being exceeded, and the sweep contains no such claim.",
+    "The base of 2047.5653 million USD is a screening result on the EGINA plan's own capex of 2250.0000, at 70.0000 USD a barrel, post royalty at 12.5000 percent and tax at 30.0000 percent, discounted at 10.0000 percent. A wide sweep around a wrong base is a wide sweep around a wrong base. The chart is silent on whether the inputs were right, and it draws with equal confidence on a case the engine would otherwise refuse to price.",
+    "It ranks the drivers of one case by arithmetic leverage, and that ranking is a work list: Oil Price, Production, CAPEX, OPEX. It says where to spend effort tightening an estimate. A driver with a swing of 323.8828 does not repay much study on this case, and one with a swing of 3092.0051 does.",
+    "State the swing and the swing as a share of base for all four drivers. Then give two things the chart does not tell you about the case, and explain why 501.5628 may not be labelled a P90 NPV."
+   ],
+   "new_lines": [
+    "| Oil Price | 466.5563 | 3564.2683 | 3097.7119 | 1.537012 |",
+    "| Production | 592.9935 | 3437.8310 | 2844.8375 | 1.411541 |",
+    "| CAPEX | 2658.9995 | 1371.8250 | 1287.1745 | 0.638666 |",
+    "| OPEX | 2178.5655 | 1852.2591 | 326.3064 | 0.161906 |",
+    "The ends are not percentiles and they never take a P-label. A P90 and a P10 belong to a reserves distribution, one fluid at a time: EGINA's oil P50 is 130.0000 MMbbl and its gas P50 is 70.0000 Bcf, and those labels came from a distribution somebody built. The value 466.5563 is not a low case in that sense. It is one run. Calling it a P90 NPV asserts that a 30 percent price fall has a particular chance of being exceeded, and the sweep contains no such claim.",
+    "The base of 2015.4123 million USD is a screening result on the EGINA plan's own capex of 2250.0000, at 70.0000 USD a barrel, post royalty at 12.5000 percent and tax at 30.0000 percent, discounted at 10.0000 percent. A wide sweep around a wrong base is a wide sweep around a wrong base. The chart is silent on whether the inputs were right, and it draws with equal confidence on a case the engine would otherwise refuse to price.",
+    "It ranks the drivers of one case by arithmetic leverage, and that ranking is a work list: Oil Price, Production, CAPEX, OPEX. It says where to spend effort tightening an estimate. A driver with a swing of 326.3064 does not repay much study on this case, and one with a swing of 3097.7119 does.",
+    "State the swing and the swing as a share of base for all four drivers. Then give two things the chart does not tell you about the case, and explain why 466.5563 may not be labelled a P90 NPV."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m06-reading-a-plan-against-itself/l01-three-estimates-of-one-cost.md",
+   "retitled": null,
+   "old_lines": [
+    "The plan's cost items include a Decommissioning provision of 260.0000 typed as ABEX. The engine's CAPEX total is 2250.0000 and its OPEX total is 95.0000 a year, and the ABEX line is in neither, because the screening case carries capex and operating cost only. A line can be in the plan, correct, and absent from the number the plan reports."
+   ],
+   "new_lines": [
+    "The plan's cost items include a Decommissioning provision of 260.0000 typed as ABEX. The engine's CAPEX total is 2250.0000 and its OPEX total is 95.0000 a year, and the ABEX line is in neither, because it is neither development capex nor an annual operating cost. It is the plan's end-of-life cost, and the case charges it in the final production year, so a line can sit outside both totals and still reach the value the plan reports."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m06-reading-a-plan-against-itself/l03-the-question-in-the-difference.md",
+   "retitled": null,
+   "old_lines": [
+    "| the scenario NPV against the plan's own NPV | 2047.5653 and 2047.5653 | 0.0000 |",
+    "The strongest reading a plan gives is sometimes a refusal. At 18.0000 USD a barrel the FPSO scenario returns an NPV of -1797.2732 million USD, no rate of return at all with a status of no-root, and a payback of never. A search that clamped at its own boundary used to print 1000 percent here, in green."
+   ],
+   "new_lines": [
+    "| the scenario NPV against the plan's own NPV | 2015.4123 and 2015.4123 | 0.0000 |",
+    "The strongest reading a plan gives is sometimes a refusal. At 18.0000 USD a barrel the FPSO scenario returns an NPV of -1834.1220 million USD, no rate of return at all with a status of no-root, and a payback of never. A search that clamped at its own boundary used to print 1000 percent here, in green."
+   ]
+  }
+ ],
+ "questions_recut": [
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 1,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The EGINA Base scenario reports an internal rate of return of 29.5998 percent with the status ok. Where does that number come from?",
+     "new": "Run the EGINA Base case with no end-of-life cost and it reports an internal rate of return of 29.5998 percent at the status ok. Where does that number come from?"
+    },
+    "explanation": {
+     "old": "Nobody chose 29.5998. Year 0 spends 2250.0000 and the years after it earn, and the rate falls out of that flow; the value of 2047.5653 was taken at 10.0000 percent.",
+     "new": "Nobody chose 29.5998. Year 0 spends 2250.0000 and the years after it earn, and the rate falls out of that flow; charge the plan's end-of-life cost and the same case is worth 2015.4123 with two roots and no rate."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 2,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "At 40.0000 USD a barrel the same concept reports a rate of 8.2444 percent and a net present value of -161.0098 million USD. How are both true at once?",
+     "new": "At 40.0000 USD a barrel the concept is worth -197.2391 million USD and reports no rate of return at all, at the status multiple-roots. What is that status saying about the flow?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "The flow turns positive, so a root exists at 8.2444 percent, and the value was struck at a discount rate of 10.0000 percent, which is more than this flow earns.",
+      "new": "It changes sign more than once, so more than one discount rate zeroes it and the engine will name none of them the rate of return."
+     },
+     {
+      "index": 1,
+      "old": "The rate is solved before royalty at 12.5000 percent and tax at 30.0000 percent while the value is struck after them, so the two are reading one flow at different points.",
+      "new": "The search ran out of range before it reached a root, so the status stands in for a rate the engine could see but not confirm inside the band."
+     },
+     {
+      "index": 2,
+      "old": "The search failed at that price and returned a floor, so -161.0098 million USD is the real finding and 8.2444 percent is only where the solver gave up.",
+      "new": "The value fell below zero, and the engine withholds a rate on any case whose value is negative at the screening discount of 10.0000 percent."
+     },
+     {
+      "index": 3,
+      "old": "A rate under the discount rate is recorded by convention rather than solved, as the published zero production case records 0 beside its value of -979.6325.",
+      "new": "No root exists at all here, in the way a flow that only spends has none, which is the reading the status no-sign-change carries."
+     }
+    ],
+    "explanation": {
+     "old": "A positive rate is not a profitable one. 8.2444 is below the 10.0000 percent the money is charged at, and the -161.0098 is that comparison already made.",
+     "new": "The plan pays 260.0000 million USD to abandon the field in production year 20, so every earning case here changes sign twice; the value of -197.2391 is defined all the same."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 3,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The Base cumulative runs -2250.0000, then -1454.1875, then -658.3750, then 137.4375. Why can a rate be solved for this flow at all?",
+     "new": "The Base cumulative runs -2250.0000, then -1454.1875, then -658.3750, then 137.4375. Why is that climb the reason a discount rate can zero this flow at all?"
+    },
+    "options": [
+     {
+      "index": 2,
+      "old": "The net present value of 2047.5653 million USD is positive, and a positive value guarantees a root somewhere inside the band of -99 to 1000 percent.",
+      "new": "The net present value of 2015.4123 million USD is positive, and a positive value guarantees a root somewhere inside the band of -99 to 1000 percent."
+     }
+    ],
+    "explanation": {
+     "old": "Discounting punishes the late positive years harder than the year 0 spend of -2250.0000, so a rate exists; a flow that never turns has none.",
+     "new": "Discounting punishes the late positive years harder than the year 0 spend of -2250.0000, so a rate that zeroes it exists, and on this plan two of them do; a flow that never turns has none."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 4,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "What makes the Base net present value of 2047.5653 million USD and the tie-back's 1048.6281 comparable numbers?",
+     "new": "What makes the Base net present value of 2015.4123 million USD and the tie-back's 1013.7182 comparable numbers?"
+    },
+    "explanation": {
+     "old": "The rates differ, 40.4321 against 29.5998, and so does the capex, 730.0000 against 2250.0000; what the two values share is the price and the discount rate.",
+     "new": "Neither case carries a rate at all, and the capex differs, 730.0000 against 2250.0000; what the two values share is the price and the discount rate."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 5,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "Value per million of capex is 1.436477 for the tie-back and 0.910029 for the FPSO. What does that pair establish?",
+     "new": "Value per million of capex is 1.388655 for the tie-back and 0.895739 for the FPSO. What does that pair establish?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "The tie-back is worth more money, since 1.436477 is the share of the field's total value that its capex captures against the FPSO's 0.910029.",
+      "new": "The tie-back is worth more money, since 1.388655 is the share of the field's total value that its capex captures against the FPSO's 0.895739."
+     },
+     {
+      "index": 1,
+      "old": "The FPSO is the more efficient user of capital, since its 0.910029 is spread over a life of 20.0000 years against the tie-back's 15.0000.",
+      "new": "The FPSO is the more efficient user of capital, since its 0.895739 is spread over a life of 20.0000 years against the tie-back's 15.0000."
+     },
+     {
+      "index": 3,
+      "old": "The two concepts are interchangeable, since 1.436477 and 0.910029 both sit above zero.",
+      "new": "The two concepts are interchangeable, since 1.388655 and 0.895739 both sit above zero."
+     }
+    ],
+    "explanation": {
+     "old": "A plan that stops at the tie-back leaves the rest of the field undeveloped rather than earning 0.910029 per million on it, which is why 1048.6281 is less than 2047.5653.",
+     "new": "A plan that stops at the tie-back leaves the rest of the field undeveloped rather than earning 0.895739 per million on it, which is why 1013.7182 is less than 2015.4123."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 6,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "explanation": {
+     "old": "The tie-back's 40.4321 percent says nothing about its 730.0000 million USD of capex, which is why 1048.6281 sits under a higher rate than 2047.5653.",
+     "new": "The tie-back's higher root of 40.4136 says nothing about its 730.0000 million USD of capex, which is why 1013.7182 sits under a higher figure than 2015.4123."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 7,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "The status records only that the engine priced the case without refusing one of its inputs, so any run that produced a number carries it.",
+      "new": "The status records only that the engine priced the case without refusing one of its inputs, so any run that produced a number at all carries it, whatever the search itself found."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 8,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "Three cases all lose money: one reads -92616.5020 with a rate, one reads -1797.2732 with the status no-root, and one reads -524.1537 with no-sign-change. What separates them?",
+     "new": "Three cases all lose money: one reads -92616.5020 with a rate, one reads -1834.1220 with the status no-root, and one reads -524.1537 with no-sign-change. What separates them?"
+    },
+    "options": [
+     {
+      "index": 3,
+      "old": "The discount rate each was struck at, since -1797.2732 and -524.1537 were taken at rates outside the band.",
+      "new": "The discount rate each was struck at, since -1834.1220 and -524.1537 were taken at rates outside the band."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 9,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "Nothing at all, since the EGINA rates run 29.5998, 40.4321, 43.8693 and 14.4152 percent.",
+      "new": "Nothing at all, since every EGINA case reports a rate above the screening discount of 10.0000 percent."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 10,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 3,
+      "old": "The engine interpolated between the year 3 and year 4 positions of 137.4375 and 847.0187 to find where the rate of 29.5998 percent is met.",
+      "new": "The engine interpolated between the year 3 and year 4 positions of 137.4375 and 847.0187 to find where the discounted flow meets the capex of 2250.0000."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 11,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "At 30.0000 USD a barrel the concept is worth -898.3507 million USD and the cumulative never reaches zero. What should the payback column carry?",
+     "new": "At 30.0000 USD a barrel the concept is worth -935.1995 million USD and the cumulative never reaches zero. What should the payback column carry?"
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 13,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The Low price scenario returns 14.4152 percent and fails a screening hurdle of 15 percent. What did the hurdle reject?",
+     "new": "The Low price scenario is worth 392.8013 million USD and reports no rate of return at all, so a screening hurdle of 15 percent has nothing to test. What does the hurdle do with it?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "A case worth 427.9436 million USD at a discount rate of 10.0000 percent, rejected correctly by the hurdle's own rule since 14.4152 is below 15.",
+      "new": "Nothing it can act on: the card has no rate to colour, and the figure that survives is the 392.8013 million USD the case is worth at a discount rate of 10.0000 percent."
+     },
+     {
+      "index": 1,
+      "old": "A case the engine had already priced as a loss, so the hurdle gave nothing away.",
+      "new": "It rejects the case as a loss, since a case the engine gives no rate has already been priced below zero."
+     },
+     {
+      "index": 2,
+      "old": "A case worth less than nothing at the screening discount rate of 10.0000 percent.",
+      "new": "It passes the case, since a scenario with no rate clears any threshold until a rate is entered against it."
+     },
+     {
+      "index": 3,
+      "old": "A concept rather than a scenario, since a hurdle is applied to a capex of 2250.0000.",
+      "new": "It applies itself to the concept's capex of 2250.0000 instead, since a threshold has to test some figure."
+     }
+    ],
+    "explanation": {
+     "old": "The rule fired correctly, and the 427.9436 million USD it turned down is money the field would otherwise not have had at all.",
+     "new": "The rule needs a rate and the engine reports none, so the verdict is missing rather than negative, and the 392.8013 million USD is money the field would otherwise not have had."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 14,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "It produces an order that matches the values, since the margin above a hurdle grows with the size of the case and 2047.5653 million USD leads it.",
+      "new": "It produces an order that matches the values, since the margin above a hurdle grows with the size of the case and 2015.4123 million USD leads it."
+     },
+     {
+      "index": 1,
+      "old": "It places the tie-back above the Base, 40.4321 percent against 29.5998, so 1048.6281 million USD outranks 2047.5653.",
+      "new": "It sorts nothing at all, since not one of the five carries a rate to clear a hurdle by, and 3638.0233, 2015.4123, 1013.7182 and 392.8013 go unranked."
+     },
+     {
+      "index": 2,
+      "old": "It produces no order at all, since a hurdle returns a pass or a fail and no margin above the threshold to sort on.",
+      "new": "It ranks them on the higher of the two rates that zero each flow, which puts the tie-back's 40.4136 above the Base's 29.5779 and so puts the tie-back first of all."
+     }
+    ],
+    "explanation": {
+     "old": "The hurdle divides the scale out before it tests anything, and nothing on the page shows that 2047.5653 was the larger amount of money.",
+     "new": "The hurdle divides the scale out before it tests anything, and here there is nothing to divide: the card reports no rate on any EGINA case."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 15,
+   "bank": "ec6a_m01",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "The hurdle replaces the discount rate for any case the engine returns a rate for, so the Base value of 2047.5653 million USD is restated at the higher rate.",
+      "new": "The hurdle replaces the discount rate for any case the engine returns a rate for, so the Base value of 2015.4123 million USD is restated at the higher rate."
+     }
+    ],
+    "explanation": {
+     "old": "The Low price case passes the first test, since 427.9436 million USD is positive, and fails the second at 14.4152 percent; which of them decides is a policy somebody set.",
+     "new": "The Low price case passes the first test, since 392.8013 million USD is positive, and the second has no rate to test at all; which of them decides is a policy somebody set."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m02-when-there-is-no-rate",
+   "ord": 7,
+   "bank": "ec6a_m02",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "explanation": {
+     "old": "A real development case sits far inside the band, the Base at 29.5998 percent and the tie-back at 40.4321, so a four figure root is a prompt about the inputs.",
+     "new": "A real development case sits far inside the band: every rate that zeroes an EGINA flow falls between -66.9344 and 43.8661 percent, so a four figure root is a prompt about the inputs."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m02-when-there-is-no-rate",
+   "ord": 8,
+   "bank": "ec6a_m02",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "explanation": {
+     "old": "None of the three means zero and none of them is a rate. At 18.0000 USD a barrel the status is no-root on a value of -1797.2732 million USD.",
+     "new": "None of the three means zero and none of them is a rate. At 18.0000 USD a barrel the status is no-root on a value of -1834.1220 million USD."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m02-when-there-is-no-rate",
+   "ord": 11,
+   "bank": "ec6a_m02",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "At 30.0000 USD a barrel the concept reads multiple-roots and at 18.0000 it reads no-root. What is the difference between those two answers?",
+     "new": "At 30.0000 USD a barrel the concept reads no-root and at 70.0000 USD a barrel it reads multiple-roots. What is the difference between those two answers?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "How far each value sits below zero, -898.3507 against -1797.2732 million USD, with multiple-roots kept for the shallower of the two losses.",
+      "new": "How far each value sits below zero, since a loss as shallow as -935.1995 still admits roots and a deeper one does not."
+     },
+     {
+      "index": 1,
+      "old": "Whether a payback exists, since the case at 30.0000 USD a barrel pays back inside its life and the case at 18.0000 never does.",
+      "new": "Whether a payback exists, since the case at 70.0000 USD a barrel pays back in 3.8273 years and the case at 30.0000 never does, which is what the two statuses record."
+     }
+    ],
+    "explanation": {
+     "old": "Reading the two as synonyms loses the finding. Both are worth stating, -898.3507 and -1797.2732, and neither of them carries a rate.",
+     "new": "Reading the two as synonyms loses the finding: at 30.0000 USD a barrel no rate zeroes the flow at all, and at 70.0000 two do, on values of -935.1995 and 2015.4123."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m02-when-there-is-no-rate",
+   "ord": 13,
+   "bank": "ec6a_m02",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "At 18.0000 USD a barrel the concept is worth -1797.2732 million USD. Before the repair the engine reported a rate there. What was the number, and what was it a property of?",
+     "new": "At 18.0000 USD a barrel the concept is worth -1834.1220 million USD. Before the repair the engine reported a rate there. What was the number, and what was it a property of?"
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m02-when-there-is-no-rate",
+   "ord": 14,
+   "bank": "ec6a_m02",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "It moved with the price deck as a solved rate would, so no reader could tell it apart from the 29.5998 percent that the Base case reports.",
+      "new": "It moved with the price deck as a solved rate would, so no reader could tell it apart from the rates the engine reports on the cases that have one."
+     },
+     {
+      "index": 2,
+      "old": "It cleared every threshold anyone would set, so it was coloured green on a case whose value of -1797.2732 million USD says the opposite.",
+      "new": "It cleared every threshold anyone would set, so it was coloured green on a case whose value of -1834.1220 million USD says the opposite."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m02-when-there-is-no-rate",
+   "ord": 15,
+   "bank": "ec6a_m02",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "It sits exactly on the limit of the search range, where the engine's genuine answers do not: 29.5998, 40.4321, 14.4152 and -36.6747 percent.",
+      "new": "It sits exactly on the limit of the search range, where the engine's genuine answers do not: -36.6747 percent on the published case, or the roots -44.3414 and 29.5779 on the plan's own."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 1,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The minus 30 percent oil price end of the EGINA sweep is 501.5628. How was that figure produced?",
+     "new": "The minus 30 percent oil price end of the EGINA sweep is 466.5563. How was that figure produced?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "By scaling the base of 2047.5653 million USD down in proportion to the price move, which is what would make the two ends of the row symmetric about it.",
+      "new": "By scaling the base of 2015.4123 million USD down in proportion to the price move, which is what would make the two ends of the row symmetric about it."
+     }
+    ],
+    "explanation": {
+     "old": "A full re-calculation is why the ends are not symmetric about 2047.5653: 501.5628 and 3593.5679 are not the same distance from it.",
+     "new": "A full re-calculation is why the ends are not symmetric about 2015.4123: 466.5563 and 3564.2683 are not the same distance from it."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 2,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "explanation": {
+     "old": "The worst single figure in the table is 501.5628, which is the worst the sweep can produce and not the worst the project can suffer.",
+     "new": "The worst single figure in the table is 466.5563, which is the worst the sweep can produce and not the worst the project can suffer."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 3,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 3,
+      "old": "Which input carries the most money, since a swing of 3092.0051 is the share of the revenue of 16095.0492 that the price controls.",
+      "new": "Which input carries the most money, since a swing of 3097.7119 is the share of the revenue of 16095.0492 that the price controls."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 4,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "A reviewer sets the EGINA price swing of 3092.0051 against a swing reported on a different project. What is wrong with that?",
+     "new": "A reviewer sets the EGINA price swing of 3097.7119 against a swing reported on a different project. What is wrong with that?"
+    },
+    "explanation": {
+     "old": "As a share of its own base the EGINA price swing is 1.510089, which is the figure that travels between cases; 3092.0051 does not travel.",
+     "new": "As a share of its own base the EGINA price swing is 1.537012, which is the figure that travels between cases; 3097.7119 does not travel."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 5,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "A 30 percent move in price and a 30 percent move in production both scale revenue, yet the price swing is 3092.0051 and the production swing 2839.5965. Why?",
+     "new": "A 30 percent move in price and a 30 percent move in production both scale revenue, yet the price swing is 3097.7119 and the production swing 2844.8375. Why?"
+    },
+    "explanation": {
+     "old": "Over the Base life the operating cost is 3049.6464 against revenue of 16095.0492; royalty at 2011.8812 and tax at 3310.0565 take their share of both drivers alike.",
+     "new": "Over the Base life the operating cost is 3049.6464 against revenue of 16095.0492; royalty at 2011.8812 and tax at 3276.9239 take their share of both drivers alike."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 6,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "That the government take is what separates the two, since the base moves from 2047.5653 to 2738.0331 once royalty and tax come out of the case.",
+      "new": "That the government take is what separates the two, since the base moves from 2015.4123 to 2738.0331 once royalty and tax come out of the case."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 8,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "explanation": {
+     "old": "A case with a higher variable cost per barrel separates them further, and the 5.0000 USD a barrel is what splits 3092.0051 from 2839.5965.",
+     "new": "A case with a higher variable cost per barrel separates them further, and the 5.0000 USD a barrel is what splits 3097.7119 from 2844.8375."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 9,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The CAPEX row of the EGINA sweep reads 2691.1526 at one end and 1403.9781 at the other. Which end is the overrun?",
+     "new": "The CAPEX row of the EGINA sweep reads 2658.9995 at one end and 1371.8250 at the other. Which end is the overrun?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "2691.1526, since the sweep prints the ends of every row in order of size and a cost driver always puts its worst outcome first of the two.",
+      "new": "2658.9995, since the sweep prints the ends of every row in order of size and a cost driver always puts its worst outcome first of the two."
+     },
+     {
+      "index": 1,
+      "old": "2691.1526, since an overrun raises the capex and the sweep reports the higher value against the higher spend on the row.",
+      "new": "2658.9995, since an overrun raises the capex and the sweep reports the higher value against the higher spend on the row."
+     },
+     {
+      "index": 2,
+      "old": "1403.9781, the plus 30 percent end of the row, and 2691.1526 is what the case is worth if the capex comes in 30 percent under.",
+      "new": "1371.8250, the plus 30 percent end of the row, and 2658.9995 is what the case is worth if the capex comes in 30 percent under."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 10,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "Capex swings the value by 1287.1745 and operating cost by 323.8828 on the same relative move. What accounts for the difference?",
+     "new": "Capex swings the value by 1287.1745 and operating cost by 326.3064 on the same relative move. What accounts for the difference?"
+    },
+    "options": [
+     {
+      "index": 3,
+      "old": "The capex bar is symmetric about the base of 2047.5653 and the operating cost bar is not, which stretches the capex swing.",
+      "new": "The capex bar is symmetric about the base of 2015.4123 and the operating cost bar is not, which stretches the capex swing."
+     }
+    ],
+    "explanation": {
+     "old": "As a share of base that is 0.628637 against 0.158179, and the capex move works directly on the deepest cash position of -2250.0000.",
+     "new": "As a share of base that is 0.638666 against 0.161906, and the capex move works directly on the deepest cash position of -2250.0000."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 11,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "It puts the base of 2047.5653 in the middle of the chart, which is where a sweep is read from in any case and costs its reader nothing at all.",
+      "new": "It puts the base of 2015.4123 in the middle of the chart, which is where a sweep is read from in any case and costs its reader nothing at all."
+     },
+     {
+      "index": 1,
+      "old": "It reverses the ranking of Oil Price and Production, whose right hand ends of 3593.5679 and 3467.3636 sit fairly close together on the page.",
+      "new": "It reverses the ranking of Oil Price and Production, whose right hand ends of 3564.2683 and 3437.8310 sit fairly close together on the page."
+     },
+     {
+      "index": 3,
+      "old": "It drops OPEX from the chart, since its ends of 2209.5067 and 1885.6239 both sit above the right hand end of the capex row.",
+      "new": "It drops OPEX from the chart, since its ends of 2178.5655 and 1852.2591 both sit above the right hand end of the capex row."
+     }
+    ],
+    "explanation": {
+     "old": "The swings are 3092.0051, 2839.5965, 1287.1745 and 323.8828, and only a swing puts the four rows of the sweep on one footing.",
+     "new": "The swings are 3097.7119, 2844.8375, 1287.1745 and 326.3064, and only a swing puts the four rows of the sweep on one footing."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 12,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 2,
+      "old": "A swing read at the wrong sign, which the share of base of 0.628637 corrects as soon as the row is ranked against the other three.",
+      "new": "A swing read at the wrong sign, which the share of base of 0.638666 corrects as soon as the row is ranked against the other three."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 13,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "Why may the figure 501.5628 not be labelled a P90 NPV?",
+     "new": "Why may the figure 466.5563 not be labelled a P90 NPV?"
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 14,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "The base of 2047.5653 million USD, which the chart leaves out and which a reader needs before either end of any row can be placed at all.",
+      "new": "The base of 2015.4123 million USD, which the chart leaves out and which a reader needs before either end of any row can be placed at all."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 15,
+   "bank": "ec6a_m03",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "explanation": {
+     "old": "A driver with a swing of 323.8828 does not repay much study on this case and one with a swing of 3092.0051 does.",
+     "new": "A driver with a swing of 326.3064 does not repay much study on this case and one with a swing of 3097.7119 does."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m06-reading-a-plan-against-itself",
+   "ord": 4,
+   "bank": "ec6a_m06",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "In neither of them: the CAPEX total is 2250.0000 and the OPEX total is 95.0000 a year, because the screening case carries capex and operating cost only.",
+      "new": "In neither of them: the CAPEX total is 2250.0000 and the OPEX total is 95.0000 a year, because an ABEX line is neither development capex nor an annual operating cost."
+     }
+    ],
+    "explanation": {
+     "old": "A line can be in the plan, correct, and absent from the number the plan reports.",
+     "new": "The line sits outside both totals and still reaches the value the plan reports, because the case charges it in the final production year."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m06-reading-a-plan-against-itself",
+   "ord": 10,
+   "bank": "ec6a_m06",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The Base scenario on the concept's capex returns an NPV of 2047.5653 million USD and the plan's own cost items at the same price return 2047.5653. What does the difference of 0.0000 mean?",
+     "new": "The Base scenario on the concept's capex returns an NPV of 2015.4123 million USD and the plan's own cost items at the same price return 2015.4123. What does the difference of 0.0000 mean?"
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m06-reading-a-plan-against-itself",
+   "ord": 13,
+   "bank": "ec6a_m06",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "At 18.0000 USD a barrel the FPSO scenario returns an NPV of -1797.2732 million USD. What does it report for the rate of return and for the payback?",
+     "new": "At 18.0000 USD a barrel the FPSO scenario returns an NPV of -1834.1220 million USD. What does it report for the rate of return and for the payback?"
+    },
+    "options": [
+     {
+      "index": 2,
+      "old": "A negative rate, since an NPV of -1797.2732 has to correspond to a rate below the discount rate of 10.0000 percent.",
+      "new": "A negative rate, since an NPV of -1834.1220 has to correspond to a rate below the discount rate of 10.0000 percent."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 1,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The scenario card colours a rate of 15 percent or more green, and the sweep ranks the plan's drivers Oil Price, Production, CAPEX, OPEX. A reviewer reads a green 29.5998 percent beside the widest bar and calls the case risked. What has that reading assumed?",
+     "new": "The scenario card colours a rate of 15 percent or more green, and the sweep ranks the plan's drivers Oil Price, Production, CAPEX, OPEX. A reviewer treats the colour rule as a decision and the widest bar as the biggest risk. What has that reading assumed?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "Nothing that is not already stated, since the colour applies the only hurdle rate in the studio and the widest swing of 3092.0051 names the driver most likely to move against the case.",
+      "new": "Nothing that is not already stated, since the colour applies the only hurdle rate in the studio and the widest swing of 3097.7119 names the driver most likely to move against the case."
+     },
+     {
+      "index": 1,
+      "old": "Only that the base is sound, since a green rate and a driver ranking are both properties of a case whose value of 2047.5653 million USD was struck on a capex of 2250.0000 the plan has reconciled.",
+      "new": "Only that the base is sound, since the colour rule and the driver ranking are both properties of a case whose value of 2015.4123 million USD was struck on a capex of 2250.0000 the plan has reconciled."
+     },
+     {
+      "index": 3,
+      "old": "That the tie-back was screened on the same terms, since 40.4321 percent is green as well and its own swing would have to be ranked before either concept could be called risked.",
+      "new": "That the tie-back was screened on the same terms, since its own swing would have to be ranked as well before either concept could be called risked."
+     }
+    ],
+    "explanation": {
+     "old": "The green at 29.5998 percent says nothing about the 2047.5653 million USD standing beside it, and the sweep ranks by leverage as a work list for tightening an estimate rather than by likelihood.",
+     "new": "The card has no rate to colour on any EGINA case, and the sweep ranks by leverage as a work list for tightening an estimate rather than by likelihood."
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "At 70.0000 USD a barrel the subsea tie-back returns 40.4321 percent on a capex of 730.0000 and the FPSO returns 29.5998 percent on 2250.0000, while the tie-back is worth 1048.6281 million USD and the FPSO 2047.5653. Which reading is sound?",
+     "new": "At 70.0000 USD a barrel the subsea tie-back is worth 1013.7182 million USD on a capex of 730.0000 and the FPSO 2015.4123 on 2250.0000, and neither of them reports a rate of return. Which reading is sound?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "Both measures are true at once, since value per million of capex is 1.436477 for the tie-back and 0.910029 for the FPSO while the FPSO still returns the larger amount of money.",
+      "new": "Both measures are true at once, since value per million of capex is 1.388655 for the tie-back and 0.895739 for the FPSO while the FPSO still returns the larger amount of money."
+     },
+     {
+      "index": 1,
+      "old": "The tie-back is the better development, because it wins on the rate and on payback at 3.2035 years against 3.8273, and two measures out of three settle a screening ranking.",
+      "new": "The tie-back is the better development, because it wins on efficiency and on payback at 3.2035 years against 3.8273, and two measures out of three settle a screening ranking."
+     },
+     {
+      "index": 2,
+      "old": "The FPSO is the better development, because a rate taken on 730.0000 of capex cannot be set against a rate taken on 2250.0000 until both have been restated on one capex.",
+      "new": "The FPSO is the better development, because a ratio taken on 730.0000 of capex cannot be set against one taken on 2250.0000 until both have been restated on a single capex."
+     }
+    ],
+    "explanation": {
+     "old": "The rate says how hard the money worked and the NPV says how much came back. A portfolio sorted on 40.4321 percent hands the reader 1048.6281 in place of 2047.5653.",
+     "new": "The ratio says how hard the money worked and the NPV says how much came back. A portfolio sorted on 1.388655 hands the reader 1013.7182 in place of 2015.4123."
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 3,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "A reviewer divides the FPSO's NPV of 2047.5653 million USD by the facility screening estimate of 1363.3524 and sets the result beside the tie-back's value per million of capex of 1.436477. What is wrong with that pair?",
+     "new": "A reviewer divides the FPSO's NPV of 2015.4123 million USD by the facility screening estimate of 1363.3524 and sets the result beside the tie-back's value per million of capex of 1.388655. What is wrong with that pair?"
+    },
+    "options": [
+     {
+      "index": 3,
+      "old": "The tie-back figure is taken on its concept's whole capex of 730.0000, while 1363.3524 prices one facility and leaves out drilling of 520.0000 and subsea of 380.0000, so the FPSO's like for like figure is 0.910029 on 2250.0000.",
+      "new": "The tie-back figure is taken on its concept's whole capex of 730.0000, while 1363.3524 prices one facility and leaves out drilling of 520.0000 and subsea of 380.0000, so the FPSO's like for like figure is 0.895739 on 2250.0000."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 5,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "Run the EGINA scenarios past a screening threshold of 15 percent on the rate and the Low price case at 14.4152 percent fails. What has just been rejected?",
+     "new": "A screening threshold of 15 percent on the rate is run past the EGINA scenarios, and the Low price case comes back with no rate at all. What has the threshold told the reader about it?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "A case the engine had already priced as worthless, since a rate below the threshold means the discounted flow at 48.0000 USD a barrel does not cover its own capex.",
+      "new": "That the case is worthless, since a rate the engine declines to report is a rate that fell below the threshold."
+     },
+     {
+      "index": 2,
+      "old": "427.9436 million USD of value at a discount rate of 10.0000 percent, correctly by the rule's own terms, with nothing on the card to show what the rejection cost.",
+      "new": "Nothing: the case is worth 392.8013 million USD at a discount rate of 10.0000 percent, and a rule written against a rate has no input on a case the engine gives none."
+     },
+     {
+      "index": 3,
+      "old": "The weakest of the three FPSO cases, which the sweep had already found at its minus 30 percent oil price end of 501.5628 million USD on the plan's own base.",
+      "new": "That it is the weakest of the three FPSO cases, which the sweep had already found at its minus 30 percent oil price end of 466.5563 million USD on the plan's own base."
+     }
+    ],
+    "explanation": {
+     "old": "14.4152 is less than 15, so the verdict is right and uninformative. The rejected case is worth 427.9436 and a reader who sees only the verdict cannot tell it from a worthless one.",
+     "new": "A missing verdict is not a negative one. The case is worth 392.8013 million USD, and a reader who sees an empty cell cannot tell it from a case worth nothing at all."
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 6,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "At 40.0000 USD a barrel the FPSO concept reports a rate of 8.2444 percent and an NPV of -161.0098 million USD. How do those two live together?",
+     "new": "A pack lists the FPSO at 40.0000 USD a barrel, worth -197.2391 million USD with no rate of return, beside a published case worth -92616.5020 that does carry one, -36.6747 percent at status ok. Why does one of them have a rate and the other not?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "The flow earns 8.2444 percent and the screening case charges 10.0000 percent for money, so a real positive root still leaves the value below zero.",
+      "new": "The published flow spends once and earns thereafter, so one root zeroes it, while the EGINA flow also pays 260.0000 million USD to abandon the field and changes sign twice."
+     },
+     {
+      "index": 1,
+      "old": "The two cannot both stand, so the rate of 8.2444 percent is a clamped figure and not a root.",
+      "new": "The published case is the deeper loss, and a rate is reported wherever the value sits far enough below zero for the search to isolate a single root against it."
+     },
+     {
+      "index": 2,
+      "old": "The root was found above the band the engine searches and reported anyway, which is the reading the status above-clamp exists to warn a reader about.",
+      "new": "The EGINA case is discounted at 10.0000 percent and the published case is not, so only one of the two leaves a flow the search can be run against at all."
+     },
+     {
+      "index": 3,
+      "old": "The rate was struck before royalty and tax and the value after both, so they differ.",
+      "new": "The published root is negative, and the engine verifies a rate below zero while it withholds any positive root found on a case whose value is negative."
+     }
+    ],
+    "explanation": {
+     "old": "The sign of the rate is not the test. The test is the rate against the rate money costs, and the NPV of -161.0098 has already made that comparison.",
+     "new": "A rate of -36.6747 percent is a verified root at status ok. A flow that changes sign twice has more than one rate that zeroes it, so the engine names none and the value of -197.2391 is what the row carries."
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 9,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "explanation": {
+     "old": "Missing prices read as 0 in that fixture. At 30.0000 USD a barrel EGINA reads multiple-roots too, on -898.3507, and picking one root is the reader's preference wearing the engine's authority.",
+     "new": "Missing prices read as 0 in that fixture. EGINA's own Base case reads multiple-roots too, on 2015.4123 with roots of -44.3414 and 29.5779, and picking one root is the reader's preference wearing the engine's authority."
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "explanation": {
+     "old": "The tell is that the number was exactly the boundary. The repaired engine reports null with the status no-root there, and the NPV of -1797.2732 sat on the same card the whole time.",
+     "new": "The tell is that the number was exactly the boundary. The repaired engine reports null with the status no-root there, and the NPV of -1834.1220 sat on the same card the whole time."
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "A case worth -1797.2732 million USD reports no rate of return at all with a status of no-root, and a sweep is drawn around it anyway. What does that chart carry?",
+     "new": "A case worth -1834.1220 million USD reports no rate of return at all with a status of no-root, and a sweep is drawn around it anyway. What does that chart carry?"
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 13,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "On the plan's own case the sweep's minus 30 percent oil price end is 501.5628 against a base of 2047.5653. What produced 501.5628?",
+     "new": "On the plan's own case the sweep's minus 30 percent oil price end is 466.5563 against a base of 2015.4123. What produced 466.5563?"
+    },
+    "options": [
+     {
+      "index": 3,
+      "old": "The worst of the eight runs, taken once the price fall had been combined with the capex overrun end of 1403.9781 to give the case its full downside.",
+      "new": "The worst of the eight runs, taken once the price fall had been combined with the capex overrun end of 1371.8250 to give the case its full downside."
+     }
+    ],
+    "explanation": {
+     "old": "Every row runs royalty, tax, the discount and the shape again. The Low price scenario is a different number, 427.9436 at 48.0000 USD a barrel.",
+     "new": "Every row runs royalty, tax, the discount and the shape again. The Low price scenario is a different number, 392.8013 at 48.0000 USD a barrel."
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 14,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The oil price swing is 3092.0051 and the production swing is 2839.5965 on the same 30 percent move. What separates them?",
+     "new": "The oil price swing is 3097.7119 and the production swing is 2844.8375 on the same 30 percent move. What separates them?"
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 15,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The sweep's CAPEX row runs from 2691.1526 at minus 30 percent to 1403.9781 at plus 30 percent. Which of the plan's figures did it move by 30 percent either way?",
+     "new": "The sweep's CAPEX row runs from 2658.9995 at minus 30 percent to 1371.8250 at plus 30 percent. Which of the plan's figures did it move by 30 percent either way?"
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "CAPEX runs from 2691.1526 at minus 30 percent to 1403.9781 at plus 30 percent, a swing of 1287.1745, while OPEX swings 323.8828 on the same move. Why is the capex row so much the wider?",
+     "new": "CAPEX runs from 2658.9995 at minus 30 percent to 1371.8250 at plus 30 percent, a swing of 1287.1745, while OPEX swings 326.3064 on the same move. Why is the capex row so much the wider?"
+    },
+    "explanation": {
+     "old": "The shares of base are 0.628637 for capex and 0.158179 for operating cost. Both rows still run high to low, because more money spent is less money kept.",
+     "new": "The shares of base are 0.638666 for capex and 0.161906 for operating cost. Both rows still run high to low, because more money spent is less money kept."
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 17,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "May the sweep's minus 30 percent oil price end of 501.5628 be labelled a P90 NPV?",
+     "new": "May the sweep's minus 30 percent oil price end of 466.5563 be labelled a P90 NPV?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "No, because a P-label belongs to a reserves distribution one fluid at a time, and 501.5628 is a single conditional run rather than a point on any distribution.",
+      "new": "No, because a P-label belongs to a reserves distribution one fluid at a time, and 466.5563 is a single conditional run rather than a point on any distribution."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 18,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The lowest figure anywhere in the sweep is 501.5628. Is that the worst the case can do?",
+     "new": "The lowest figure anywhere in the sweep is 466.5563. Is that the worst the case can do?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "Yes, since the widest single driver, at a swing of 3092.0051, already carries any combination of moves that could be made to the case and its four drivers at once.",
+      "new": "Yes, since the widest single driver, at a swing of 3097.7119, already carries any combination of moves that could be made to the case and its four drivers at once."
+     },
+     {
+      "index": 3,
+      "old": "No, because the capex overrun end of 1403.9781 is lower still than that figure.",
+      "new": "No, because the capex overrun end of 1371.8250 is lower still than that figure."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 28,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "The index is a ratio and the progress a percentage, so 1.795082 is accepted as 179.5082 percent of the plan and the 150 refused only because it was typed into the wrong field.",
+      "new": "The index is a ratio and the progress a percentage, so 1.795082 is accepted as a share of the plan and the 150 refused only because it was typed into the wrong field."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "In neither total, because the screening case carries capex and operating cost only, so a line can be in the plan, correct, and absent from the number the plan reports.",
+      "new": "In neither total, because an ABEX line is neither development capex nor an annual operating cost, and the case charges it in the final production year instead."
+     }
+    ],
+    "explanation": {
+     "old": "The engine totals are CAPEX 2250.0000 and OPEX 95.0000. The screening estimate does carry its own decommissioning figure of 204.5029, a different number from a different method.",
+     "new": "The engine totals are CAPEX 2250.0000 and OPEX 95.0000. The screening estimate carries its own decommissioning figure of 204.5029, which an ABEX cost item replaces rather than adds to."
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 35,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "A reader wants the rate of return that goes with the sweep's minus 30 percent oil price end of 501.5628. Where is it?",
+     "new": "A reader wants the rate of return that goes with the sweep's minus 30 percent oil price end of 466.5563. Where is it?"
+    },
+    "options": [
+     {
+      "index": 0,
+      "old": "In the scenario table at 14.4152 percent, since the Low price case at 48.0000 USD a barrel is that same downside read through a different card of the studio.",
+      "new": "In the scenario table at the Low price case, since 48.0000 USD a barrel is that same downside read through a different card of the studio."
+     },
+     {
+      "index": 1,
+      "old": "In the price rows at 8.2444 percent, because the sweep takes the price down to about the level the 40.0000 USD a barrel row prices and that row carries its own rate.",
+      "new": "In the price rows at the 40.0000 USD a barrel run, because the sweep takes the price down to about that level and that row carries a rate of its own."
+     },
+     {
+      "index": 2,
+      "old": "In the base at 29.5998 percent reduced in the proportion the driver moved, because a rate and a value both scale with the input the sweep has changed.",
+      "new": "In the base, reduced in the proportion the driver moved, because a rate and a value both scale with the input the sweep has changed."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 36,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "The NPV, defined for every cash flow at every discount rate whether or not a root exists, and reading -1797.2732 on that case.",
+      "new": "The NPV, defined for every cash flow at every discount rate whether or not a root exists, and reading -1834.1220 on that case."
+     },
+     {
+      "index": 3,
+      "old": "The swing, since the sweep re-runs each scenario across its four drivers and the widest of them, 3092.0051, exists for any case the engine is able to price.",
+      "new": "The swing, since the sweep re-runs each scenario across its four drivers and the widest of them, 3097.7119, exists for any case the engine is able to price."
+     }
+    ],
+    "explanation": {
+     "old": "The rate is missing on the stress case and the payback there is never. A card that leads with a rate has nothing to print on the case that most needs reading.",
+     "new": "The rate is missing on every one of the five and the payback at 18.0000 is never. A card that leads with a rate has nothing to print on any of them."
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "bank": "ec6a_exam",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 0,
+      "old": "The NPV of -1797.2732 and a payback of never, then the earned value, the actual cost and the completion ratio of 0.256839, and then nothing until a cost is entered.",
+      "new": "The NPV of -1834.1220 and a payback of never, then the earned value, the actual cost and the completion ratio of 0.256839, and then nothing until a cost is entered."
+     }
+    ]
+   }
+  }
+ ]
+}

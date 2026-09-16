@@ -1,0 +1,129 @@
+[
+ {
+  "died": false,
+  "diedAtFt": null,
+  "diedAtPsia": null,
+  "dpTotalPsi": 25.660585014555522,
+  "idIn": 7.981,
+  "muCp": 2.5,
+  "name": "teachingLineFlat",
+  "p1Psia": 900.0,
+  "p2Psia": 874.3394149854445,
+  "profile": [
+   {
+    "elevChangeFt": 0,
+    "lengthFt": 8800
+   },
+   {
+    "elevChangeFt": 0,
+    "lengthFt": 8800
+   },
+   {
+    "elevChangeFt": 0,
+    "lengthFt": 8800
+   }
+  ],
+  "qBpd": 12000,
+  "rhoLbFt3": 54.5,
+  "roughnessIn": 0.0018,
+  "stations": [
+   {
+    "distanceFt": 0.0,
+    "elevFt": 0.0,
+    "pPsia": 900.0
+   },
+   {
+    "distanceFt": 8800.0,
+    "elevFt": 0.0,
+    "pPsia": 891.4464716618148
+   },
+   {
+    "distanceFt": 17600.0,
+    "elevFt": 0.0,
+    "pPsia": 882.8929433236297
+   },
+   {
+    "distanceFt": 26400.0,
+    "elevFt": 0.0,
+    "pPsia": 874.3394149854445
+   }
+  ]
+ },
+ {
+  "died": false,
+  "diedAtFt": null,
+  "diedAtPsia": null,
+  "dpTotalPsi": 25.660585014555522,
+  "idIn": 7.981,
+  "muCp": 2.5,
+  "name": "teachingLineOverARidge",
+  "p1Psia": 900.0,
+  "p2Psia": 874.3394149854445,
+  "profile": [
+   {
+    "elevChangeFt": 420,
+    "lengthFt": 8800
+   },
+   {
+    "elevChangeFt": 0,
+    "lengthFt": 8800
+   },
+   {
+    "elevChangeFt": -420,
+    "lengthFt": 8800
+   }
+  ],
+  "qBpd": 12000,
+  "rhoLbFt3": 54.5,
+  "roughnessIn": 0.0018,
+  "stations": [
+   {
+    "distanceFt": 0.0,
+    "elevFt": 0.0,
+    "pPsia": 900.0
+   },
+   {
+    "distanceFt": 8800.0,
+    "elevFt": 420.0,
+    "pPsia": 732.4881383284732
+   },
+   {
+    "distanceFt": 17600.0,
+    "elevFt": 420.0,
+    "pPsia": 723.934609990288
+   },
+   {
+    "distanceFt": 26400.0,
+    "elevFt": 0.0,
+    "pPsia": 874.3394149854445
+   }
+  ]
+ },
+ {
+  "died": true,
+  "diedAtFt": 20000.0,
+  "diedAtPsia": -47328.48454748665,
+  "dpTotalPsi": null,
+  "idIn": 2.067,
+  "muCp": 8.0,
+  "name": "traverseIntoVacuum",
+  "p1Psia": 100.0,
+  "p2Psia": null,
+  "profile": [
+   {
+    "elevChangeFt": 0,
+    "lengthFt": 20000
+   }
+  ],
+  "qBpd": 20000,
+  "rhoLbFt3": 56.0,
+  "roughnessIn": 0.0018,
+  "stations": [
+   {
+    "distanceFt": 0.0,
+    "elevFt": 0.0,
+    "pPsia": 100.0
+   }
+  ]
+ }
+]

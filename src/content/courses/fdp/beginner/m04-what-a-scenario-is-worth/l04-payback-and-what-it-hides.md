@@ -18,11 +18,11 @@ The cumulative stands at -658.3750 after year 2 and at 137.4375 after year 3, so
 
 ## What it stops counting
 
-The instant the cumulative crosses zero, payback has said everything it has to say. Year 4 earns 709.5812, year 5 earns 631.9731, year 6 earns 562.1258, year 7 earns 499.2632, and the rest of the 21 rows follow them down the decline. None of that reaches the payback figure. Two cases with the same payback can hold completely different amounts of money after the crossing, and payback cannot tell them apart. The NPV can: it is 2047.5653 on this case, and it counts every one of the 21 rows.
+The instant the cumulative crosses zero, payback has said everything it has to say. Year 4 earns 709.5812, year 5 earns 631.9731, year 6 earns 562.1258, year 7 earns 499.2632, and the rest of the 21 rows follow them down the decline. None of that reaches the payback figure. Two cases with the same payback can hold completely different amounts of money after the crossing, and payback cannot tell them apart. The NPV can: it is 2015.4123 on this case, and it counts every one of the 21 rows.
 
 ## Faster is not richer
 
-The tie-back concept at the same price of 70.0000 USD a barrel pays back in 3.2035 years against the FPSO's 3.8273, so it is the quicker of the two. It is also worth less: 1048.6281 against 2047.5653. A reader ranking by payback alone puts the smaller value first. Price moves the figure as well: the same FPSO concept pays back in 3.0625 years at 92.0000 USD a barrel and 5.7734 years at 48.0000, and at 18.0000 it never pays back at all.
+The tie-back concept at the same price of 70.0000 USD a barrel pays back in 3.2035 years against the FPSO's 3.8273, so it is the quicker of the two. It is also worth less: 1013.7182 against 2015.4123. A reader ranking by payback alone puts the smaller value first. Price moves the figure as well: the same FPSO concept pays back in 3.0625 years at 92.0000 USD a barrel and 5.7734 years at 48.0000, and at 18.0000 it never pays back at all.
 
 ## The mistake
 
@@ -30,7 +30,7 @@ Reading a payback of never as the project life. It is null, and it means the cum
 
 ## What it refuses
 
-Payback carries no discount rate of its own and no judgement about what comes after the crossing. It will not rank concepts, and it will not be reported when there is nothing to report: a case that never recovers its capex returns never, in place of a number that would look like an answer. The 5.7734 years at 48.0000 USD a barrel and the never at 18.0000 are answers of the same kind, one measured and one refused.
+Payback carries no discount rate of its own and no judgement about what comes after the crossing. It is also the one figure on the scenario card computed without the plan's end-of-life cost of 260.0000 million USD, because the payback reader takes no abandonment argument at all. On these cases that changes nothing, since the cost falls in the last year and the money has been recovered long before it. It will not rank concepts, and it will not be reported when there is nothing to report: a case that never recovers its capex returns never, in place of a number that would look like an answer. The 5.7734 years at 48.0000 USD a barrel and the never at 18.0000 are answers of the same kind, one measured and one refused.
 
 ## Exercise
 

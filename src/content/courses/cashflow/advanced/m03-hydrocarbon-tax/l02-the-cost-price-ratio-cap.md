@@ -21,7 +21,7 @@ cpr_forfeiture has 40000000.00 of opex and 100000000.00 of capex over 5 years ag
 
 ## AKATA
 
-At 65 percent the cap binds twice. In 2032 the cap is 75826707.47 against opex 26225448.00 and 51000000.00 of allowance, and 1398740.53 defers; in 2033 the cap is 64849333.35 and the deferral grows to 14561618.62; in 2034 the cap is 55829921.49, the claim is 51384196.40 and the deferral clears. Set pia_cpr_limit_pct to 40 and HCT rises from 77020493.72 to 107354738.83, CIT from 86274711.53 to 117121931.63, and NPV falls from 42943268.01 to -1723561.25. The cap on a declining field is a tax on the decline.
+At 65 percent the cap binds twice. In 2032 the cap is 75826707.47 against opex 26225448.00 and 51000000.00 of allowance, and 1398740.53 defers; in 2033 the cap is 64849333.35 and the deferral grows to 14561618.62; in 2034 the cap is 55829921.49, the claim is 51384196.40 and the deferral clears. Set pia_cpr_limit_pct to 40 and HCT rises from 77020493.72 to 107354738.83, CIT from 85840666.18 to 117121931.63, and NPV falls from 43223505.88 to -1723561.25. The cap on a declining field is a tax on the decline.
 
 ## The mistake
 

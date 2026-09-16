@@ -326,15 +326,18 @@ describe('the wellhead: the choke goldens', () => {
     expect(rows).toHaveLength(12);
     rows.forEach((c) => {
       relNear(c.erosionalFtS, c.golden.erosionalFtS, 1e-12);
-      // ONE EXPLAINED CONSTANT DIFFERENCE, and it is not a method disagreement.
-      // Every value in this golden that does not cross the barrel to cubic foot
-      // conversion reproduces to 1e-12 or better. The two that do, the rate
-      // limit here and the mixture velocity below, sit 5.94e-8 apart because
-      // the engine carries that conversion as 5.614583 and the oracle carries
-      // it as 5.6145833333: (5.6145833333 - 5.614583) / 5.614583 = 5.936e-8,
-      // which is the observed gap to three figures on all fifteen of them. It
-      // is a truncated constant in the seventh figure, one part in seventeen
-      // million, and it moves no engineering decision.
+      // THE EXPLAINED CONSTANT DIFFERENCE IS GONE, and the note is kept
+      // because the reason is worth carrying. This value and the mixture
+      // velocity below are the only two in this golden that cross the barrel
+      // to cubic foot conversion, and they used to sit 5.94e-8 from the
+      // oracle because the engine carried that conversion truncated as
+      // 5.614583 while engines/facilities/lineHydraulics.js, one import away
+      // in the same chain, carried it exactly. FC2-0 (engines, 2026-09-16)
+      // gave the package ONE barrel in lib/units/fieldUnits.js, the exact
+      // one, which is what both oracles already used. The tolerance stays at
+      // 1e-7 here rather than tightening, because this lab pins a live
+      // course: the agreement is now about 1e-16 and anything that loosens it
+      // again should be read as a constant moving, not as noise.
       relNear(c.maxRateBpd_2441, c.golden.maxRateBpd_2441, 1e-7);
     });
   });

@@ -1,6 +1,6 @@
 # Two concepts, one price
 
-Read at the same 70.0000 USD a barrel, the FPSO concept is worth 2047.5653 million USD and the subsea tie-back 1048.6281, and the tie-back is the better of the two per million USD of capex it asks for.
+Read at the same 70.0000 USD a barrel, the FPSO concept is worth 2015.4123 million USD and the subsea tie-back 1013.7182, and the tie-back is the better of the two per million USD of capex it asks for.
 
 {{panel:ec-plan-explorer}}
 
@@ -17,14 +17,14 @@ These are two ways of developing one field, and almost nothing about them matche
 
 | scenario | concept | capex | NPV | IRR | payback years |
 | --- | --- | --- | --- | --- | --- |
-| Base | FPSO development | 2250.0000 | 2047.5653 | 29.5998 | 3.8273 |
-| Tie-back base | Subsea tie-back | 730.0000 | 1048.6281 | 40.4321 | 3.2035 |
+| Base | FPSO development | 2250.0000 | 2015.4123 | none | 3.8273 |
+| Tie-back base | Subsea tie-back | 730.0000 | 1013.7182 | none | 3.2035 |
 
-The FPSO earns nearly twice the value. The tie-back earns its money faster, at a rate of return of 40.4321 percent against 29.5998, and pays back in 3.2035 years against 3.8273. Both runs use the same price, the same royalty of 12.5000 percent, the same tax of 30.0000 percent and the same discount rate of 10.0000 percent, so the only things that differ between the two rows are the capex, the operating cost, the peak rate and the life that each concept carries on its own record.
+The FPSO earns nearly twice the value. The tie-back earns its money faster, paying back in 3.2035 years against 3.8273, and neither row carries a rate of return at all: both concepts pay to abandon the field at the end of their lives, so both report the status multiple-roots. Both runs use the same price, the same royalty of 12.5000 percent, the same tax of 30.0000 percent and the same discount rate of 10.0000 percent, so the only things that differ between the two rows are the capex, the operating cost, the peak rate and the life that each concept carries on its own record.
 
 ## Value per million of capex
 
-Divide each value by the capex that bought it and the ranking turns over. The tie-back returns 1.436477 per million USD of capex and the FPSO returns 0.910029. On a balance sheet with 730.0000 to spend and no more, the tie-back is the only one of the two that can be built at all. On a balance sheet that can carry 2250.0000, the FPSO leaves 2047.5653 where the tie-back would have left 1048.6281. The two measures answer different questions: one asks what the field is worth developed this way, the other asks what each million USD of the budget bought.
+Divide each value by the capex that bought it and the ranking turns over. The tie-back returns 1.388655 per million USD of capex and the FPSO returns 0.895739. On a balance sheet with 730.0000 to spend and no more, the tie-back is the only one of the two that can be built at all. On a balance sheet that can carry 2250.0000, the FPSO leaves 2015.4123 where the tie-back would have left 1013.7182. The two measures answer different questions: one asks what the field is worth developed this way, the other asks what each million USD of the budget bought.
 
 ## The mistake
 

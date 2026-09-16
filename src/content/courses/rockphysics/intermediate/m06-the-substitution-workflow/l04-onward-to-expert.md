@@ -24,7 +24,7 @@ At normal incidence that is a contrast in impedance, which this tier already com
 
 Away from normal incidence it becomes amplitude versus offset, and the response depends on the shear velocity as well, which is where the fluid blindness of the shear modulus finally pays off. The brine case is class I and the gas case class III, so the fluid substitution flips the AVO class.
 
-The tier also takes up resolution, because an anomaly has a thickness as well as an amplitude, and below the tuning thickness of 16 ms at 25 Hz the two stop being separable.
+The tier also takes up resolution, because an anomaly has a thickness as well as an amplitude, and below the tuning thickness the 25 Hz wavelet stops separating the two.
 
 ## Two things to expect
 

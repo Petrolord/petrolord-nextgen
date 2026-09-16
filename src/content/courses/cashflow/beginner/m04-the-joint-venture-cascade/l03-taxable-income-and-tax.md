@@ -41,7 +41,7 @@ The careful error is to deduct capex from the base. It turns 2029 into a loss wi
 
 ## What it refuses
 
-One rate, every year, on one base. There is no investment allowance, no tax credit, no minimum tax, no separate treatment of gas and no second tax stacked on the first; the five-tax PIA cascade is a different regime and a different tier. The tax is field-level on the row and is scaled by working interest afterward. And the engine does not let tax go negative: a loss is carried, never refunded.
+One rate, every year, on one base. There is no investment allowance, no tax credit, no minimum tax, no separate treatment of gas and no second tax stacked on the first; the five-tax PIA cascade is a different regime and a different tier. The tax the row prints is the partner's share: the rate runs once on the field's base and the interest scales the result, so 45250880.00 in 2029 at 100 percent reads 27150528.00 at 60. And the engine does not let tax go negative: a loss is carried, never refunded.
 
 ## Exercise
 

@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The sizing sweep runs the OGBIA duty through twelve bores. What does it hold still?",
+  "options": [
+   "The rate of 12000.000000 bpd, the crude at 54.500000 lb/ft3 and 2.500000 cp, the 26400.000000 ft of length and the roughness. The bore is the only thing that moves.",
+   "Everything except the bore and the roughness, since each nominal size carries its own wall condition with it.",
+   "The velocity, which is held at the design figure while the bore and the rate move together down the table.",
+   "The pressure drop, which is held at the budget the line was designed to, so each row reports a rate."
+  ],
+  "answer": 0,
+  "explanation": "That is what makes the sweep readable. A designer looking at 20803.315944 psi against 1.236026 psi is looking at one decision rather than at several tangled together."
+ },
+ {
+  "prompt": "Across the twelve bores, which row carries the highest velocity, and which the lowest?",
+  "options": [
+   "The highest is 33.463911 ft/s at 2.067000 in, which is the first row of the table and the smallest nominal size the vendored schedule carries, and the lowest is 0.635441 ft/s at 15.000000 in.",
+   "The highest is 38.027872 ft/s at 1.939000 in, and the lowest is 1.003216 ft/s at 11.938000 in, since the 16 in row is outside the range the erosional check was evaluated over.",
+   "The highest is 38.027872 ft/s at a bore of 1.939000 in, which is the 2 in schedule 80 row, and the lowest is 0.635441 ft/s at 15.000000 in.",
+   "The highest is 15.189621 ft/s at 3.068000 in, the widest bore still failing the erosional check."
+  ],
+  "answer": 2,
+  "explanation": "The smallest bore in the table is 1.939000 in and not 2.067000 in, because a heavier schedule is a thicker wall on the same outside diameter. That row also carries the largest total, 28841.350797 psi."
+ },
+ {
+  "prompt": "The sweep is ordered by nominal size and then by schedule. What does that ordering do?",
+  "options": [
+   "It puts the bores in ascending order, since a larger nominal size always carries a larger bore whatever the schedule, so a walk down the table is a walk up through the bores.",
+   "It is not the order of the bores. The heavier schedule sits after the lighter one and has the smaller bore, so reading down the table crosses back and forth over the bore a line actually needs.",
+   "It groups the failing rows at the top, since the erosional check fails on the smallest bores and the table is sorted so that a reader meets the disqualified candidates first.",
+   "It has no effect on anything, since the sweep returns twelve independent rows and the order they are printed in cannot change which of them a designer chooses."
+  ],
+  "answer": 1,
+  "explanation": "In table order the bores run 2.067000, 1.939000, 3.068000, 4.026000, 3.826000, 6.065000, 5.761000, 7.981000, 7.625000, 10.020000, 11.938000 and 15.000000. Code that stops at the first acceptable row has picked a row."
+ },
+ {
+  "prompt": "How many of the twelve bores pass the erosional check on this duty, and which fail?",
+  "options": [
+   "Seven pass, which are the rows whose velocity also sits under the 6.000000 ft/s ceiling, since the erosional check and the velocity ceiling remove the same five candidates from the table.",
+   "Ten pass, since only the two 2 in rows exceed the ceiling of 13.545709 ft/s, and the 3 in row at 15.189621 ft/s is inside it once the clean inhibited c factor is applied to the crude.",
+   "Twelve pass, since every row returns a finite ratio against the ceiling, and the boolean column reports whether the row was evaluated rather than whether it satisfied the limit.",
+   "Nine pass. The three that fail are the smallest bores, at ratios of 2.470444, 2.807374 and 1.121360."
+  ],
+  "answer": 3,
+  "explanation": "The 2 in schedule 40 row runs at 33.463911 ft/s, the 2 in schedule 80 at 38.027872 ft/s and the 3 in at 15.189621 ft/s, all above the 13.545709 ft/s ceiling."
+ },
+ {
+  "prompt": "A velocity ceiling of 6.000000 ft/s is applied alongside the erosional limit, and 7 of the 12 bores pass both. Which check removes the two 4 in rows?",
+  "options": [
+   "The velocity ceiling. They run at 8.820843 and 9.767147 ft/s, which is above 6.000000 ft/s, and both are inside the erosional limit at ratios of 0.651191 and 0.721051.",
+   "The erosional limit, since both 4 in rows sit above the ceiling of 13.545709 ft/s once the velocity is measured at the smaller schedule 80 bore of 3.826000 in rather than at 4.026000 in.",
+   "Both checks together, since the two criteria agree on every row of this sweep.",
+   "Neither check, since the two 4 in rows are among the seven that pass and the 6 in rows are removed instead."
+  ],
+  "answer": 0,
+  "explanation": "The velocity ceiling is a practice rather than a result of this method. Applied alongside the erosional limit it removes bores the erosional check alone would have allowed, which is the point of it."
+ },
+ {
+  "prompt": "Among the bores that pass both criteria, two rows each have a claim to being the answer. Which are they?",
+  "options": [
+   "The 8 in schedule 40 row at 7.981000 in, which is the bore the line was actually built at, and the 6 in schedule 40 row at 6.065000 in, which is the cheapest row that passes both criteria.",
+   "The 4 in schedule 40 row at 4.026000 in and the 16 in row at 15.000000 in, the cheapest on pressure.",
+   "The first in TABLE order, which is 6 in schedule 40 at a bore of 6.065000 in, and the smallest passing BORE, which is 6 in schedule 80 at 5.761000 in.",
+   "The 6 in schedule 40 row at 6.065000 in and the 8 in schedule 40 row at 7.981000 in, which are the two rows whose totals of 97.306913 psi and 25.660631 psi bracket a typical pressure budget."
+  ],
+  "answer": 2,
+  "explanation": "On this duty they are different rows. The first is the smallest nominal size that works, which is what a buyer wants, and the second is the tightest bore that works."
+ },
+ {
+  "prompt": "A pipe size is two numbers plus what is left. Which of the three does the hydraulics read?",
+  "options": [
+   "The outside diameter, since that is what the flanges, the supports and the fittings are built to, and the fittings are what the resistance sum on the isometric was counted from.",
+   "The bore and the wall together, since the wall thickness sets how much of the outside diameter is steel and the friction factor reads the wall through the relative roughness term.",
+   "All three, since the schedule row supplies the outside diameter to the erosional check, the wall to the pressure rating and the bore to the velocity, and the sweep reports all three columns.",
+   "The bore, and only the bore."
+  ],
+  "answer": 3,
+  "explanation": "A 6 in line is 6.625000 in on the outside in either schedule, because that is what the flanges are built to. The heavier schedule spends its extra steel inwards and the bore is what is left."
+ },
+ {
+  "prompt": "A line is uprated to a heavier schedule for reasons of pressure. What happens to it hydraulically at the same duty?",
+  "options": [
+   "Nothing changes, since the outside diameter is unaltered at 8.625000 in and the hydraulics reads the outside diameter, with the wall entering only the pressure rating and the corrosion allowance.",
+   "It becomes a faster line. On the 8 in rows the bore falls from 7.981000 in to 7.625000 in and the velocity rises from 2.244621 ft/s to 2.459110 ft/s.",
+   "It becomes a slower line, since the extra steel is added outwards and the flow area is unchanged.",
+   "It becomes a faster line, but only on the small sizes, since the wall thickness grows in proportion to the nominal size and the fractional loss of bore is therefore the same on every row."
+  ],
+  "answer": 1,
+  "explanation": "Every heavy-schedule bore in the table is smaller than its light-schedule partner and every heavy-schedule velocity is higher. The pressure drop and the erosional ratio both move with it."
+ },
+ {
+  "prompt": "A line is specified as 6 in. What does that name fix, and what does it leave open?",
+  "options": [
+   "It fixes the outside diameter at 6.625000 in and the fittings that go with it, and it leaves the bore open: 6.065000 in in schedule 40 and 5.761000 in in schedule 80.",
+   "It fixes the bore at 6.000000 in, which is what the nominal size states, and leaves the outside diameter open, since that grows with the wall thickness the schedule specifies for the service.",
+   "It fixes both, since a nominal size and the vendored schedule together name exactly one row of the table.",
+   "It fixes the wall thickness at 0.280000 in, and leaves the outside diameter and the bore to follow from it."
+  ],
+  "answer": 0,
+  "explanation": "Neither of the two 6 in bores is 6.000000 in. The nominal size is a label that fixes the outside diameter, and the bore underneath it follows from the schedule."
+ },
+ {
+  "prompt": "The sweep reports a ratio column beside the velocity column. What is it?",
+  "options": [
+   "The velocity divided by the 6.000000 ft/s practice ceiling, which is why the boundary between a passing and a failing row sits at 1.000000 and why seven of the twelve rows fall below it.",
+   "The total pressure drop of each row divided by the drop on the row the line was built at, so the 8 in schedule 40 row reads 0.165707 against itself and the others are quoted relative to it.",
+   "The bore of each row divided by the largest bore in the table, which is 15.000000 in, so the ratio falls as the bore opens and a reader can compare rows without reading two columns.",
+   "The velocity column rescaled by the ceiling of 13.545709 ft/s."
+  ],
+  "answer": 3,
+  "explanation": "The ceiling is the same on every row because it depends on the density and the c factor rather than on the bore. The ratio is the form in which a velocity becomes a verdict."
+ },
+ {
+  "prompt": "What can the sweep not decide on its own?",
+  "options": [
+   "What each bore spends in pressure, since the total column is reported only for the row the line was built at and the other eleven rows carry a velocity and a ratio alone.",
+   "Whether the duty is right, since the sweep holds the rate at 12000.000000 bpd throughout and a line that is oversized for its duty reports the same twelve rows as one that is correctly loaded.",
+   "Which bore to build. It is twelve answers to the question of what each bore costs, and choosing needs the erosional verdict, a view on velocity, and a price the table does not carry.",
+   "Which rows pass the erosional check, since the boolean column depends on a c factor the sweep takes as given and the three published rows are held for the literature in this course."
+  ],
+  "answer": 2,
+  "explanation": "Moving from 8.561327 psi to 3.689918 psi to 1.236026 psi saves real pressure, and each step is a heavier and dearer pipe buying less than the step before it. Nothing in the table prices that."
+ },
+ {
+  "prompt": "Four wall conditions are run against the same OGBIA duty. What is the spread in the friction loss, and what does it say?",
+  "options": [
+   "From 24.781425 psi on new plastic at 0.000060 in to 27.565372 psi on used steel at 0.006000 in, so on this line, at this Reynolds number, the wall is a modest influence.",
+   "From 24.781425 psi to 27.565372 psi, which shows that roughness is always a second-order effect on a liquid line.",
+   "From 24.854515 psi on internally coated pipe to 25.660631 psi on commercial steel, since the used steel row is a projection of wall condition over the line's life rather than a catalogue entry.",
+   "From 0.0000075179 to 0.0007517855, which is the relative roughness rather than the loss at all."
+  ],
+  "answer": 0,
+  "explanation": "That is a fact about this row rather than a general one. The friction factor's sensitivity to roughness depends on where the line is sitting, and a small spread here is not a licence to guess."
+ },
+ {
+  "prompt": "The catalogue stores an absolute roughness. What does the friction factor want instead, and what does the division mean?",
+  "options": [
+   "A height in feet rather than inches, which is why the division is by twelve, and the same steel is equally rough in any bore because the bumps themselves are what the wall term reads.",
+   "A fraction of the bore, so 0.001800 in in a 7.981000 in bore becomes 0.0002255356, and the same steel is hydraulically rougher in a small pipe than in a large one.",
+   "An average of the catalogue rows weighted by the pipe's age, since a line specified on new steel drifts toward the used row over its life and the friction factor reads the drifted figure.",
+   "A roughness Reynolds number, formed from the bumps and the velocity rather than from the bore."
+  ],
+  "answer": 1,
+  "explanation": "Used steel at 0.006000 in gives 0.0007517855 in the same bore. The bumps are the same height and the pipe they sit in is narrower, so they take up more of it."
+ },
+ {
+  "prompt": "A line costed on commercial steel is recomputed years later on the used steel row. What does that move cost, and what was done to the pipe to earn it?",
+  "options": [
+   "24.854515 psi becomes 25.660631 psi, and what earned it is an internal coating wearing off, which is the route by which a coated line arrives at the commercial steel row over its service life.",
+   "Nothing at all, since the catalogue ids describe the material the pipe is made of rather than the condition it is in, and commercial steel stays commercial steel however long a line has run.",
+   "25.660631 psi becomes 24.781425 psi, since deposits smooth the wall of a crude line over its life and the effective roughness falls rather than rises across the years the line is in service.",
+   "25.660631 psi becomes 27.565372 psi, and nothing was done to the pipe at all."
+  ],
+  "answer": 3,
+  "explanation": "The two rows differ only in the wall condition assumed for the same pipe. The four ids are catalogue entries rather than measurements of this line, so choosing among them is a statement about its condition."
+ },
+ {
+  "prompt": "A measured pressure drop disagrees with the computed one, and the roughness is adjusted until they match. What has that done?",
+  "options": [
+   "It has produced the correct answer by the only route available, since the roughness is the one input in the chain that cannot be measured directly on a buried line in service.",
+   "It has broken the relative roughness, since tuning the absolute figure leaves the bore unchanged and the fraction the correlation reads can no longer be recovered from the catalogue.",
+   "It has turned a measured discrepancy into an assertion about pipe condition that nobody inspected, because the catalogue entry describes a wall.",
+   "It has moved the line onto a different branch, since a tuned roughness can push the iteration past 2100."
+  ],
+  "answer": 2,
+  "explanation": "The crude reaches the friction factor through the Reynolds number and the pipe reaches it through the relative roughness. Confusing them means answering a question about a fluid by changing the pipe."
+ }
+]

@@ -14,7 +14,7 @@ Gas density needs the absolute pressure, the absolute temperature, the gas gravi
 | ABANA-2 | 614.700000 | 95.000000 | 0.680000 | 0.908065 | 2.239712 |
 | AGBAMI | 364.700000 | 110.000000 | 0.700000 | 0.947166 | 1.276898 |
 
-AGBAMI carries the heavier gas and still comes out lighter, because it sits at a little over half the pressure. Pressure dominates, and a gravity difference of 0.020000 does not come close to overcoming it.
+AGBAMI carries the heavier gas and still comes out lighter, because it sits at a little over half the pressure. Pressure dominates, and 0.700000 against 0.680000 does not come close to overcoming it.
 
 ## Why this number is the one that matters
 

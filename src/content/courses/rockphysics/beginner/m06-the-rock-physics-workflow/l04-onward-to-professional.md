@@ -12,20 +12,20 @@ The input is a real log point rather than a mineral recipe. The Ekene sand logs 
 
 The tier runs the problem in two directions. First it goes backwards, using inverse Gassmann to strip the brine out and recover the dry frame, which is the rock's own stiffness with nothing in the pores. Then it goes forwards, putting a different fluid back in and predicting what the logs would have read.
 
-| quantity | value |
+| quantity | where the Professional tier gets it |
 | --- | --- |
-| shear modulus, fluid blind | 7.29 GPa |
-| in situ saturated bulk modulus | 13.32 GPa |
-| dry frame bulk modulus | 7.350343061720982 GPa |
-| gas case compressional velocity | 2905.697 m/s |
+| shear modulus, fluid blind | from the logged shear velocity and density, and no fluid can move it |
+| in situ saturated bulk modulus | from the logged compressional velocity, with the shear modulus removed |
+| dry frame bulk modulus | by running Gassmann backwards to strip the brine out |
+| gas case compressional velocity | by running it forwards again with gas in the pores |
 
 Three things in that table are worth noticing now, because they set up everything the tier does.
 
 The shear modulus is described as fluid blind. Fluids have no shear stiffness, so a fluid change cannot move it, and that fact is the hinge the whole substitution turns on.
 
-The dry frame bulk modulus of 7.350343061720982 GPa is far below the 30.87940062475596 GPa you computed for the mineral frame at this tier. That is not a contradiction. The mineral frame is what the solid grains would do if they were welded into a solid block. The dry frame is what the actual rock does, with 25 percent of its volume as empty pore and its grains touching only at contacts. Porosity and grain contacts are what separates those two numbers, and learning to hold them apart is most of the tier.
+The dry frame bulk modulus comes out far below the 30.87940062475596 GPa you computed for the mineral frame at this tier. That is not a contradiction. The mineral frame is what the solid grains would do if they were welded into a solid block. The dry frame is what the actual rock does, with 25 percent of its volume as empty pore and its grains touching only at contacts. Porosity and grain contacts are what separates those two numbers, and learning to hold them apart is most of the tier.
 
-The substituted velocity falls from the logged 3200 m/s to 2905.697 m/s when the brine is replaced by gas. That is the number the seismic sees, and it is where the Beginner work finally pays off, because the fluid modulus that drives it is the one you computed here.
+The substituted velocity falls a long way below the logged 3200 m/s when the brine is replaced by gas. That is the number the seismic sees, and it is where the Beginner work finally pays off, because the fluid modulus that drives it is the one you computed here.
 
 ## Expert: turn the rock into a seismic response
 
@@ -35,7 +35,7 @@ It puts the Ekene shale over the sand and screens both cases, the logged brine s
 
 That flip is the point of the whole ladder. A class change is not a small numerical shift you have to argue about. It is a qualitative change in what an interpreter sees, and it can be predicted before a well is drilled from ingredients of the kind you built at this tier.
 
-The tier also takes up resolution. At 25 Hz the wedge model picks a tuning thickness of 16 ms, which is the thickness below which a bed's top and base reflections stop being separable and the amplitude starts to mislead. An anomaly can be perfectly real and still be the wrong thickness for the arithmetic anybody wants to do with it.
+The tier also takes up resolution. At 25 Hz the wedge model picks a tuning thickness, the thickness below which a bed's top and base reflections stop being separable and the amplitude starts to mislead. An anomaly can be perfectly real and still be the wrong thickness for the arithmetic anybody wants to do with it.
 
 ## The shape of the ladder
 
@@ -49,4 +49,4 @@ The same widening runs sideways across courses. Well data makes the logs trustwo
 
 Write one sentence for each tier saying what it does that the tier below it cannot. Then answer in one sentence: why is the Professional tier's dry frame bulk modulus so much smaller than the mineral frame bulk modulus you computed at this tier?
 
-As a self check: this tier computes fluids and a mineral frame at in situ conditions and mixes the pore fluid; the Professional tier recovers the dry frame with inverse Gassmann from a logged point at 3200 m/s, 1800 m/s and 2250 kg/m3, giving a fluid blind shear modulus of 7.29 GPa, an in situ saturated bulk modulus of 13.32 GPa and a dry frame bulk modulus of 7.350343061720982 GPa, then substitutes the fluid to predict a gas case velocity of 2905.697 m/s; and the Expert tier chains that into AVO, where the sand flips from class I under brine to class III under gas, and picks 16 ms of tuning at 25 Hz. The dry frame of 7.350343061720982 GPa is far below the mineral frame of 30.87940062475596 GPa because the mineral value describes solid grains welded into a block, while the dry frame describes a real rock that is a quarter pore space and whose grains touch only at contacts.
+As a self check: this tier computes fluids and a mineral frame at in situ conditions and mixes the pore fluid; the Professional tier recovers the dry frame with inverse Gassmann from a logged point at 3200 m/s, 1800 m/s and 2250 kg/m3, then substitutes the fluid to predict what the same rock would read with gas in its pores; and the Expert tier chains that into AVO, where the sand flips from class I under brine to class III under gas, and picks a tuning thickness at 25 Hz. The dry frame is far below the mineral frame of 30.87940062475596 GPa because the mineral value describes solid grains welded into a block, while the dry frame describes a real rock that is a quarter pore space and whose grains touch only at contacts. Compute the Professional values when you get there; this lesson deliberately does not print them.

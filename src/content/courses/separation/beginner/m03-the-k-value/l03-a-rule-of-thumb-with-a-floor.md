@@ -17,7 +17,7 @@ The module derates K by 0.01 for every 100 psi above 100 psig and refuses to let
 | horizontalNone | 1500.000000 | 0.250000 | 0.110000 | 0.120000 | true | true | false |
 | verticalNone | 3000.000000 | 0.180000 | -0.110000 | 0.120000 | true | true | false |
 
-Nothing happens up to 100.000000 psig. Above it the deduction is linear in pressure and identical for every row, which is the first thing to notice: it takes the same 0.050000 off a vertical mesh pad at 600.000000 psig as it takes off a bare drum at the same pressure, though the bare drum started at half the K.
+Nothing happens up to 100.000000 psig. Above it the deduction is linear in pressure and identical for every row, which is the first thing to notice: at 600.000000 psig it takes a vertical mesh pad from 0.350000 to 0.300000 and takes the same amount off a bare drum, though the bare drum started at half the K.
 
 ## Where it breaks
 

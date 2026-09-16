@@ -43,26 +43,26 @@ const LESSONS = [
     body: 'Volumes, an applied price, gross revenue, royalty, opex, capex, depreciation, taxable income, tax and net cash flow, in that order, and every headline number is a reading of those rows under a stated convention. A number without its convention is not a number.' },
   { n: 2, title: 'Rows become years before anything is priced',
     body: 'Per-well columns beat the rollup, a month index is folded to a calendar year, and a file that names no volume column, no usable date or no cost column is refused with the message that says so. The engine will not guess a column.' },
-  { n: 3, title: 'The joint venture ledger mixes two bases',
-    body: 'Gross revenue, volumes, opex, capex and depreciation stay at field level while royalty, taxable income, tax and net cash flow are the working-interest share. A reader who scales the wrong lines is wrong by the working interest, in one direction or the other.' },
+  { n: 3, title: 'The joint venture ledger is one base, the share',
+    body: 'Every monetary line and every volume is reported at the working interest, as the production sharing and PIA regimes always were. Until engines 3.10.0 revenue, volumes, opex, capex and depreciation stayed at field level while royalty, tax and net cash flow were the share, and a reader who scaled the wrong lines was wrong by the working interest.' },
   { n: 4, title: 'Depreciation is a deduction, never a cash flow',
     body: 'It reduces taxable income and therefore tax, and it never appears in net cash flow, which carries the capex it was built from instead. A shorter depreciation life moves NPV without moving a single cash flow.' },
-  { n: 5, title: 'Government take counts partners as government',
-    body: 'Take under joint venture terms is the field pre-take value minus the contractor SHARE of net cash flow, over the pre-take value, so below a full working interest the other partners share is counted as take. The course grades the number as the engine defines it.' },
+  { n: 5, title: 'Government take no longer moves with the working interest',
+    body: 'Take is the pre-take value at your share, revenue less capex less opex, minus the contractor net cash flow, over that pre-take value, so it reads the same at every working interest. Until engines 3.10.0 the numerator was the share and the denominator the whole field, so the other partners were counted as government and take rose as the interest fell.' },
   { n: 6, title: 'On the real basis NPV does not move with inflation',
     body: 'With the escalators set, deflating the flows and deflating the rate through the Fisher relation cancel, so the same NPV is reported at every inflation rate while the real total cash flow falls by a third. The convention that DOES move NPV is mid-year against end-year.' },
   { n: 7, title: 'Sunk is a decision, not a date',
     body: 'Valuing from a later year with prior rows kept adds a year of compounding. Valuing from the same year with prior rows SUNK nearly triples the NPV, reports the sunk flow separately, and returns a null IRR because nothing negative is left to bracket a root.' },
-  { n: 8, title: 'The profile point at the applied rate is not the headline',
-    body: 'The NPV profile evaluates its applied-rate point at the rate rounded to two decimals, so the labelled point sits a few tens of thousands of USD off the headline NPV that the same run reports. The profile does not pass through the number it claims to.' },
+  { n: 8, title: 'The profile point at the applied rate IS the headline',
+    body: 'The NPV profile labels its applied-rate point at the rate rounded to two decimals and evaluates it at the exact rate, so the profile passes through the headline NPV the same run reports. Until engines 3.10.0 it was evaluated at the label too, and the point sat tens of thousands of USD off the headline.' },
   { n: 9, title: 'IRR is a property of a curve, not of a project',
-    body: 'A cash flow with a terminal negative can have two rates that zero its NPV. The engine reports the root Newton reaches from 10 percent and does not say there is another; the oracle reports the root nearest zero. Both zero the NPV and neither is the project.' },
+    body: 'A cash flow with a terminal negative can have two rates that zero its NPV. The engine names a rate only when exactly one lies between -99 and 1000 percent; with several it returns null, says multiple-roots and lists them. Until engines 3.10.0 it reported whichever root Newton reached from 10 percent and said nothing about the others.' },
   { n: 10, title: 'A production sharing pool is never on the rows',
     body: 'Cost recovery under a cap defers cost into a pool the returned rows do not carry, so the pool at cessation has to be marched from the rows by hand. Below the cap that clears the pool, the field is uneconomic before a single fiscal rate changes.' },
   { n: 11, title: 'The PIA cascade is five taxes on three bases',
     body: 'Royalties on gross revenue, hydrocarbon tax and company income tax on their own taxable incomes, a development levy or an education tax depending on the framework the base year selects. The terrain string moves NPV by more than an oil price sweep does.' },
-  { n: 12, title: 'Three numbers the engine reports that a careful reader distrusts',
-    body: 'The profile point at the rounded rate, the single IRR on a multi-root profile, and a sinking fund that is working-interest scaled while the lump sum abandonment it replaces is not. Each one is a return value, and each one needs a sentence beside it.' },
+  { n: 12, title: 'Three numbers that used to need a sentence beside them',
+    body: 'The profile point at the rounded rate, the single IRR on a multi-root profile, and a fund scaled by the working interest while the lump sum was not. All three are repaired, and the habit they taught survives them: read the status word, read the convention, and never quote a rate the engine did not name.' },
 ];
 
 function ScopeGate() {
@@ -266,8 +266,9 @@ const CashflowLearningPage = () => {
                 as the sunk flow and an IRR of {cm.sunk2030.irrPct === null ? 'null' : pct(cm.sunk2030.irrPct)},
                 because nothing negative is left to bracket a root. A cash flow with a terminal
                 negative has two rates that zero its NPV: the published vector
-                {' '}[{cm.twoRoot.flows.join(', ')}] is zero at {pct(cm.twoRoot.oracleIrrPct, 4)} and
-                at {pct(cm.twoRoot.engineIrrPct, 4)}, the engine reports the second and the oracle
+                {' '}[{cm.twoRoot.flows.join(', ')}] is zero at
+                {' '}{cm.twoRoot.irrRootsPct ? cm.twoRoot.irrRootsPct.map((x) => pct(x, 4)).join(' and ') : 'two rates'},
+                so the engine returns null with the status {cm.twoRoot.irrStatus} and the oracle
                 the first, and {cm.disagreeCount} of the {cm.multiRootCount} published multi-root
                 vectors disagree the same way. And the PIA cascade is five taxes on three bases:
                 {' '}{AKATA_LABEL} pays {fmt(cm.pia.totalRoyalties)} USD of royalties,

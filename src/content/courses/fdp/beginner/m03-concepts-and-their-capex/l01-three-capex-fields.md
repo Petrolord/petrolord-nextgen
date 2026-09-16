@@ -21,11 +21,11 @@ It also refuses what it cannot use. A drilling capex of -520 comes back as "the 
 
 ## What the economics run on
 
-Every screening result for a concept runs on the sum of its own three fields. The FPSO's NPV of 2047.5653 million USD is a return on 2250.0000 of capex and the tie-back's 1048.6281 is a return on 730.0000, and the year 0 cash flow row of the FPSO Base case is -2250.0000, the whole capex in the year before production starts.
+Every screening result for a concept runs on the sum of its own three fields. The FPSO's NPV of 2015.4123 million USD is a return on 2250.0000 of capex and the tie-back's 1013.7182 is a return on 730.0000, and the year 0 cash flow row of the FPSO Base case is -2250.0000, the whole capex in the year before production starts.
 
 ## Value per million of capex
 
-Because the capex is read in full, the two concepts can be compared on what each million buys. At 70.0000 USD a barrel the tie-back returns 1.436477 of NPV per million USD of capex and the FPSO returns 0.910029. The FPSO is worth more in absolute terms, 2047.5653 million USD against 1048.6281, and the tie-back is more efficient with the money it uses.
+Because the capex is read in full, the two concepts can be compared on what each million buys. At 70.0000 USD a barrel the tie-back returns 1.388655 of NPV per million USD of capex and the FPSO returns 0.895739. The FPSO is worth more in absolute terms, 2015.4123 million USD against 1013.7182, and the tie-back is more efficient with the money it uses.
 
 ## The mistake
 

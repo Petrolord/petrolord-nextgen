@@ -1,0 +1,80 @@
+[
+ {
+  "f": 0.042666666666666665,
+  "re": 1500.0,
+  "regime": "laminar",
+  "relRough": 0.0
+ },
+ {
+  "f": 0.03750451801413035,
+  "re": 5000.0,
+  "regime": "turbulent",
+  "relRough": 0.0001
+ },
+ {
+  "f": 0.021926421294517554,
+  "re": 50000.0,
+  "regime": "turbulent",
+  "relRough": 0.0003
+ },
+ {
+  "f": 0.01994346584047675,
+  "re": 1000000.0,
+  "regime": "turbulent",
+  "relRough": 0.001
+ },
+ {
+  "f": 0.010859745053680484,
+  "re": 10000000.0,
+  "regime": "turbulent",
+  "relRough": 5e-05
+ },
+ {
+  "f": 0.04528880170348214,
+  "re": 3000.0,
+  "regime": "transitional",
+  "relRough": 0.002
+ },
+ {
+  "f": 0.03049070986183897,
+  "re": 2099.0,
+  "regime": "laminar",
+  "relRough": 0.0
+ },
+ {
+  "f": 0.04867858664517314,
+  "re": 2100.0,
+  "regime": "transitional",
+  "relRough": 0.0
+ },
+ {
+  "f": 0.04945544873018955,
+  "re": 2100.0,
+  "regime": "transitional",
+  "relRough": 0.001
+ },
+ {
+  "f": 0.040910389862846126,
+  "re": 4000.0,
+  "regime": "turbulent",
+  "relRough": 0.001
+ },
+ {
+  "f": 0.01963863283738832,
+  "re": 100000000.0,
+  "regime": "turbulent",
+  "relRough": 0.001
+ },
+ {
+  "f": 0.01798977308427384,
+  "re": 100000.0,
+  "regime": "turbulent",
+  "relRough": 0.0
+ },
+ {
+  "f": 0.07178092944113587,
+  "re": 100000.0,
+  "regime": "turbulent",
+  "relRough": 0.05
+ }
+]
