@@ -1,0 +1,450 @@
+# FC4 Gas Processing. Teaching digest.
+# Water contents, pressures, temperatures, circulations, diameters and ratios print to six decimals; pounds a day, gallons a day, Btu a gallon and lbmol a day to four; counts are whole numbers.
+# Field units: MMscfd of gas, psia, degF, lb of water per MMscf of gas, gal of solvent per lb of water, gpm, mol percent, Btu and MMBtu an hour.
+# Nothing here is read from a clock or a random number, so every line reproduces.
+# SECTION 14 IS WITHHELD PENDING FC4-0. See that section for what it will hold and why nothing stands in for it.
+
+# SECTION 1: What this engine conditions, and what it refuses (owned by Associate m01)
+
+# App surface: the Gas Processing Studio runs three units over one gas stream. Dehydration takes water out with glycol, sweetening takes acid gas out with amine, and the dew point unit cools the gas by letting it down.
+- This engine conditions a GAS STREAM. It answers how much water a gas carries, how much solvent it takes to remove it, what the regenerator costs to run, how wide the vessel has to be, and how far a let-down cools the gas.
+- The doctrine the module was written against is stated in its own header: everything that is a DESIGN CHOICE or a chart value is an INPUT with its customary range named, and everything computable from first principles is computed. The predecessor app hid three numbers inside constants; this one asks for them.
+- A state the method has no answer for comes back as an object with an `error` string. This module throws nothing. It has ONE export that breaks that contract by returning a bare number, and Section 15 reads it.
+- What is NOT in this engine: no hydrate boundary, no compositional flash, no rate-based absorber model, no stage efficiency, no molecular sieve, no refrigeration and no NGL recovery. A hydrate margin is the Production module Flow Assurance engine, and the phase envelope of a reservoir fluid is the Fluid engine.
+
+The three units, on the two teaching streams, end to end:
+- OBIAFU carries 53.449474 lb of water per MMscf at 950.000000 psia and 104.000000 degF, and at 62.000000 MMscfd a spec of 7.000000 lb per MMscf means taking out 2879.8674 lb a day, which at 3.200000 gal per lb is 6.399705 gpm of glycol and 0.697255 MMBtu an hour of reboiler.
+- UBIE arrives at 5.200000 mol percent CO2 and 1.400000 mol percent H2S, and meeting 2.000000 and 0.000400 means picking up 10666.0202 lbmol of acid gas a day, which at a swing to 0.480000 is 525.884105 gpm of solution and 25.242437 MMBtu an hour of regenerator.
+- The two contactors those streams go up are 3.182673 ft and 4.195403 ft across.
+
+# SECTION 2: The constants this module keeps to itself (owned by Associate m01 l04 and Expert m05)
+
+Every figure in this section is MEASURED out of the engine by asking it a question whose answer is the constant and nothing else. None is typed.
+- the standard cubic feet in a pound mole: 379.490000. Measured from the BTEX mole balance at one MMscfd, a million ppmv, a unit absorbed fraction and a unit molecular weight, where the answer is a million over this number and nothing else.
+- the molecular weight of water: 18.015280. Measured from the saturation answer divided by the mole fraction the same call returns, over the standard cubic feet just measured.
+- the water overhead the reboiler pays for: 1100.000000 Btu per lb. Measured at a circulation ratio of one gallon per pound and no reflux, where the vaporization term IS the overhead. The module's own comment calls this a latent heat of about 970 folded together with the sensible heat to the still; only the folded figure is in the code, and the 970 is not.
+- the minutes in a day: 1440.000000. Measured by dividing the gallons a day the engine returns by the gallons a minute the same call returns.
+- the days in a year over the pounds in a short ton: 0.182500. Measured as one BTEX answer divided by another from the same call. The two cannot be separated from outside, because they only ever appear as this ratio.
+- the hours in a day times the Btu in a MMBtu: 24000000. Measured as the gallons a day times the duty per gallon over the duty in MMBtu an hour.
+- the liquid density the contactor sizes against: 69.900000 lb per ft3. Measured from the gas density and the allowed velocity the same call returns, since the velocity is the K value times the root of the density ratio.
+- the pounds per gallon of water the amine gallons chain divides by: 8.340000. Measured from the acid gas the engine says it picked up, through the swing, the molecular weight and the solution gravity the amine table exports, against the circulation the engine returned.
+- the contactor's standard-condition group, base pressure over base temperature: 0.028173077 psia per degR. Measured from the allowed velocity and the diameter, which together give the actual volume the engine formed.
+- the gas constant over the Btu conversion in the Joule-Thomson routine: 1.985881. Measured at a unit heat capacity from the coefficient, the compressibility and the derivative the same call returns.
+- the water vapour pressure at the freezing point: 0.088609355 psia. This is the Magnus coefficient itself, because the exponent is exactly zero there.
+- the Rankine offset, from the gas properties module's own door: 459.670000 degR.
+- the molecular weight of dry air and the gas constant, both exported rather than measured: 28.962500 and 10.731600.
+
+Two of those are worth a second look, and BOTH comparisons below are computed on this page rather than asserted:
+- the module's comment says its 379.490000 standard cubic feet per pound mole are measured at 14.65 psia. The gas constant and the Rankine offset it also uses put the pressure that gives that molar volume at 60 degF at 14.695751 psia, which is 1.003123 times the 14.65 the comment names.
+- the contactor converts standard cubic feet to actual ones with a base group of 0.028173077 psia per degR. The group implied by the module's own pound mole at 519.670000 degR is 0.028279006 psia per degR, and the first is 0.996254 times the second. A diameter carries the square root of that, so the two bases move a contactor by 0.187469 percent.
+- the glycol density the contactor sizes against is 69.900000 lb per ft3. The glycol density the dehydration balance is handed by default is 9.300000 lb per gal, which is 69.568831 lb per ft3 at 231 cubic inches to the gallon and 1728 to the cubic foot, and the first is 1.004760 times the second. One module, one fluid, two densities.
+
+# SECTION 3: How much water a gas carries (owned by Associate m02)
+
+The method is ideal vapour-liquid equilibrium over liquid water: the mole fraction of water in the gas is the vapour pressure of water over the total pressure, and the mass follows from the pound mole.
+On OBIAFU at 950.000000 psia and 104.000000 degF the mole fraction is 0.001125908 and the content is 53.449474 lb per MMscf. The vapour pressure at that temperature alone is 1.069612 psia, and the mole fraction is that over the total pressure: 0.001125908 (derived, the two figures on this line divided).
+
+The surface, in lb per MMscf. Rows are degF, columns are psia:
+| degF | 200 psia | 600 psia | 1000 psia | 1500 psia |
+| --- | --- | --- | --- | --- |
+| 60.000000 | 60.720511 | 20.240170 | 12.144102 | 8.096068 |
+| 80.000000 | 120.145243 | 40.048414 | 24.029049 | 16.019366 |
+| 104.000000 | 253.885002 | 84.628334 | 50.777000 | 33.851334 |
+| 140.000000 | 689.320086 | 229.773362 | 137.864017 | 91.909345 |
+
+The vapour pressure alone, which is the whole temperature dependence and carries no pressure at all:
+| degF | vapour pressure, psia |
+| --- | --- |
+| 60.000000 | 0.255814 |
+| 80.000000 | 0.506169 |
+| 104.000000 | 1.069612 |
+| 140.000000 | 2.904091 |
+
+The published cases, engine against golden:
+| psia | degF | engine, lb/MMscf | golden, lb/MMscf | engine over golden |
+| --- | --- | --- | --- | --- |
+| 500.000000 | 100.000000 | 90.091686 | 89.923779 | 1.001867216 |
+| 1000.000000 | 120.000000 | 80.500351 | 80.166696 | 1.004162014 |
+| 200.000000 | 60.000000 | 60.720511 | 60.571532 | 1.002459548 |
+| 65.000000 | 40.000000 | 88.811461 | 88.248291 | 1.006381649 |
+The golden comes from a DIFFERENT published vapour-pressure equation from the one the engine uses, which is why the last column is near one rather than one. That is the whole value of the check: two independent fits of the same physical curve, meeting inside their shared band.
+
+# SECTION 4: Where the ideal answer stops (owned by Associate m02 l05 and Expert m05)
+
+Two separate limits sit on the water answer, and they are not the same limit.
+- THE CHART LIMIT. Above 1000.000000 psia the engine attaches a warning and keeps answering, because real-gas behaviour makes the true content higher than ideal mixing says. Read from both sides at the threshold itself: at 1000.000000 psia the warning is null and at 1000.000001 psia it is "ideal-mixing estimate: above about 1000 psia the real-gas correction of the McKetta-Wehe chart grows to tens of percent; use a chart reading for design".
+- THE FIT LIMIT. The vapour-pressure fit is guarded to a temperature band and refuses outside it. At -49.000000 degF it returns 0.001615 psia and at -49.000001 degF it returns NaN. At 212.000000 degF it returns 15.095051 psia and at 212.000001 degF it returns NaN.
+- The module's own docstring names a narrower upper edge than the guard enforces, at 140.000000 degF, where the fit returns 2.904091 psia. Between that and the guard the module answers without a note.
+- At the guard's own upper edge the fit puts the vapour pressure of water at 15.095051 psia. Water boils at one standard atmosphere there by definition, so the fit reads 1.027157 times the pressure the definition fixes (derived, the figure on this line over the standard atmosphere).
+
+What a refusal looks like, and what it protects:
+- a temperature below the fit: { error: "water saturation fit holds from -45 to 100 C" }
+- a temperature above the fit: { error: "water saturation fit holds from -45 to 100 C" }
+- a total pressure below the vapour pressure: { error: "total pressure must exceed the water vapor pressure" }
+- a total pressure exactly at the vapour pressure: { error: "total pressure must exceed the water vapor pressure" }
+The third and fourth are the same guard read from either side of its own limit. A gas at exactly its water vapour pressure is all water and nothing else, so refusing the equality is right rather than over-strict.
+
+# SECTION 5: The water a unit has to take out (owned by Associate m03)
+
+The spec sets the load. OBIAFU arrives at 53.449474 lb per MMscf and has to leave at 7.000000, so 46.449474 lb per MMscf comes out (derived, the two figures on this line subtracted), and at 62.000000 MMscfd that is 2879.8674 lb a day.
+
+The same stream against the spec, at a fixed rate and ratio:
+| outlet spec, lb/MMscf | water out, lb/day | circulation, gpm | reboiler, MMBtu/hr |
+| --- | --- | --- | --- |
+| 7.000000 | 2879.8674 | 6.399705 | 0.697255 |
+| 4.000000 | 3065.8674 | 6.813039 | 0.742288 |
+| 2.000000 | 3189.8674 | 7.088594 | 0.772310 |
+| 1.000000 | 3251.8674 | 7.226372 | 0.787322 |
+| 0.500000 | 3282.8674 | 7.295261 | 0.794827 |
+
+The same spec against the rate, which is the difference between an intensive answer and an extensive one:
+| rate, MMscfd | water out, lb/day | circulation, gpm | reboiler, MMBtu/hr | Btu per gallon |
+| --- | --- | --- | --- | --- |
+| 10.000000 | 464.4947 | 1.032211 | 0.112461 | 1815.8525 |
+| 30.000000 | 1393.4842 | 3.096632 | 0.337382 | 1815.8525 |
+| 62.000000 | 2879.8674 | 6.399705 | 0.697255 | 1815.8525 |
+| 120.000000 | 5573.9369 | 12.386526 | 1.349526 | 1815.8525 |
+| 250.000000 | 11612.3685 | 25.805263 | 2.811513 | 1815.8525 |
+The last column does not move down that table. The duty per gallon is a property of the glycol loop, and the rate only decides how many gallons there are.
+
+# SECTION 6: The circulation ratio is a choice (owned by Associate m03 l03)
+
+The gallons of glycol per pound of water removed is a DESIGN CHOICE the engine will not make. It is the one number that decides both how much glycol moves and how much heat each gallon needs.
+| gal per lb | circulation, gpm | Btu per gal | sensible, Btu/gal | overhead, Btu/gal | reboiler, MMBtu/hr | warning |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1.500000 | 2.999862 | 2302.8317 | 1386.1650 | 916.6667 | 0.414491 | yes |
+| 2.000000 | 3.999816 | 2073.6650 | 1386.1650 | 687.5000 | 0.497657 | no |
+| 2.500000 | 4.999770 | 1936.1650 | 1386.1650 | 550.0000 | 0.580823 | no |
+| 3.000000 | 5.999724 | 1844.4983 | 1386.1650 | 458.3333 | 0.663989 | no |
+| 3.200000 | 6.399705 | 1815.8525 | 1386.1650 | 429.6875 | 0.697255 | no |
+| 4.000000 | 7.999632 | 1729.9150 | 1386.1650 | 343.7500 | 0.830321 | no |
+| 5.000000 | 9.999540 | 1661.1650 | 1386.1650 | 275.0000 | 0.996653 | no |
+| 6.000000 | 11.999447 | 1615.3317 | 1386.1650 | 229.1667 | 1.162985 | yes |
+Three things move in that table and they do not move together. More glycol per pound means more gallons and therefore more sensible heat in total, but each gallon carries LESS water and so needs less heat to boil it out, which is why the Btu a gallon falls while the MMBtu an hour rises.
+
+The customary band, read from both sides of both edges:
+| gal per lb | warning |
+| --- | --- |
+| 1.999999 | "circulation ratio outside the customary 2 to 5 gal per lb" |
+| 2.000000 | null |
+| 5.000000 | null |
+| 5.000001 | "circulation ratio outside the customary 2 to 5 gal per lb" |
+Both edges are inclusive: the engine warns outside two to five and is silent at exactly two and exactly five. A guard that objected to its own customary limit would be as wrong as one that accepted anything.
+
+# SECTION 7: What the reboiler pays for (owned by Associate m04)
+
+The duty is assembled from named parts instead of arriving as one number. Two parts, and they answer different questions.
+- SENSIBLE: heating the glycol itself from the absorber to the still. On OBIAFU that is 375.000000 degF less 104.000000 degF of rise, on 9.300000 lb of glycol a gallon at 0.550000 Btu per lb per degF, which the engine returns as 1386.1650 Btu a gallon.
+- OVERHEAD: boiling the absorbed water back out, plus the reflux the still condenses and boils again. Each gallon carries 0.312500000 lb of water at this ratio (derived, one over the ratio), the overhead is 1100.000000 Btu a lb measured in Section 2, and the reflux ratio of 0.250000 adds that fraction again. The engine returns 429.6875 Btu a gallon.
+- The two sum to 1815.8525 Btu a gallon, and the sensible half is 0.763369 of the total (derived, the sensible over the sum).
+- At 9215.5757 gallons a day that is 0.697255 MMBtu an hour.
+
+The reflux ratio on its own, holding everything else:
+| reflux ratio | overhead, Btu/gal | total, Btu/gal | reboiler, MMBtu/hr |
+| --- | --- | --- | --- |
+| 0.000000 | 343.7500 | 1729.9150 | 0.664257 |
+| 0.100000 | 378.1250 | 1764.2900 | 0.677456 |
+| 0.200000 | 412.5000 | 1798.6650 | 0.690656 |
+| 0.250000 | 429.6875 | 1815.8525 | 0.697255 |
+| 0.400000 | 481.2500 | 1867.4150 | 0.717054 |
+| 0.600000 | 550.0000 | 1936.1650 | 0.743453 |
+
+The still temperature on its own, which moves only the sensible half:
+| reboiler degF | sensible, Btu/gal | overhead, Btu/gal | total, Btu/gal |
+| --- | --- | --- | --- |
+| 340.000000 | 1207.1400 | 429.6875 | 1636.8275 |
+| 360.000000 | 1309.4400 | 429.6875 | 1739.1275 |
+| 375.000000 | 1386.1650 | 429.6875 | 1815.8525 |
+| 390.000000 | 1462.8900 | 429.6875 | 1892.5775 |
+| 400.000000 | 1514.0400 | 429.6875 | 1943.7275 |
+
+# SECTION 8: The TEG published cases (owned by Associate m05)
+
+| rate | inlet | outlet | gal/lb | water, lb/day | gpm | Btu/gal | MMBtu/hr | BTEX, lb/day |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 50.000000 | 60.000000 | 7.000000 | 3.000000 | 2650.0000 | 5.520833 | 1890.5333 | 0.626239 | 181.8230 |
+| 120.000000 | 90.000000 | 4.000000 | 4.000000 | 10320.0000 | 28.666667 | 1789.7000 | 3.078284 | 1454.5838 |
+Against the golden, engine over golden on every field the published case carries:
+| case | water | gpm | Btu/gal | MMBtu/hr | BTEX |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 1.000000000000 | 1.000000000000 | 1.000000000000 | 1.000000000000 | 1.000000000000 |
+| 2 | 1.000000000000 | 1.000000000000 | 1.000000000000 | 1.000000000000 | 1.000000000000 |
+Every ratio is one to twelve decimals. Section 16 says what that does and does not prove.
+
+# SECTION 9: A contactor is a staged device (owned by Professional m01 and m02)
+
+The Kremser relation ties three things: the absorption factor, the number of theoretical stages, and the fraction of the solute the column removes. Give it any two and it gives the third.
+On the OBIAFU absorber at an absorption factor of 1.600000 over 6.000000 stages the removal is 0.976783371.
+
+The surface. Rows are stages, columns are the absorption factor:
+| stages | A = 0.6 | A = 0.8 | A = 1 | A = 1.2 | A = 1.5 | A = 2 | A = 3 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 0.375000000 | 0.444444444 | 0.500000000 | 0.545454545 | 0.600000000 | 0.666666667 | 0.750000000 |
+| 2 | 0.489795918 | 0.590163934 | 0.666666667 | 0.725274725 | 0.789473684 | 0.857142857 | 0.923076923 |
+| 3 | 0.540441176 | 0.661246612 | 0.750000000 | 0.813710879 | 0.876923077 | 0.933333333 | 0.975000000 |
+| 4 | 0.566273421 | 0.702522608 | 0.800000000 | 0.865620297 | 0.924170616 | 0.967741935 | 0.991735537 |
+| 6 | 0.588480076 | 0.746926678 | 0.857142857 | 0.922576074 | 0.968916950 | 0.992125984 | 0.999085087 |
+| 8 | 0.595927884 | 0.768995039 | 0.888888889 | 0.951920538 | 0.986646497 | 0.998043053 | 0.999898384 |
+| 12 | 0.599476889 | 0.788365257 | 0.923076923 | 0.979379999 | 0.997417616 | 0.999877915 | 0.999998746 |
+
+Read the columns, not the rows. Above an absorption factor of one every column climbs towards total removal as the stages are added. AT AND BELOW ONE IT DOES NOT, and the last column below is the gap between what 200 stages reach and the absorption factor itself:
+| A | removal at 12 stages | removal at 200 stages | A itself | 200 stages less A |
+| --- | --- | --- | --- | --- |
+| 0.600000000000 | 0.599476889 | 0.600000000 | 0.600000000 | 0.000000000000 |
+| 0.800000000000 | 0.788365257 | 0.800000000 | 0.800000000 | 0.000000000000 |
+| 0.950000000000 | 0.897258427 | 0.949998335 | 0.950000000 | -0.000001665057 |
+| 0.999999999000 | 0.923076923 | 0.995024876 | 0.999999999 | -0.004975123378 |
+| 1.000000000000 | 0.923076923 | 0.995024876 | 1.000000000 | -0.004975124378 |
+| 1.000000001000 | 0.923076923 | 0.995024876 | 1.000000001 | -0.004975124878 |
+| 1.200000000000 | 0.979379999 | 1.000000000 | 1.200000000 | -0.200000000000 |
+Below unity the removal never passes the absorption factor however many stages are bought, and the last column says how close 200 stages get. It is exactly zero for the lower factors, because the factor raised to the stage count has fallen below anything double precision can hold and the relation collapses to the factor itself. Only near one does 200 stages fall measurably short. AT AND ABOVE UNITY THAT COLUMN MEANS NOTHING, because there is no ceiling there to measure against: it is the distance from a removal that cannot exceed one to a factor that can, and it goes more negative the larger the factor, which is arithmetic about the column rather than physics about the absorber.
+At unity the closed form is indeterminate and the engine takes a separate branch, the stages over the stages plus one. Either side of unity by a billionth the answer is continuous with it, which is what says the branch is a limit rather than a patch.
+
+Solving the other way round, for the stages a spec demands:
+| A | removal wanted | stages | check: removal at those stages |
+| --- | --- | --- | --- |
+| 1.200000 | 0.900000 | 5.025685103 | 0.900000000 |
+| 1.600000 | 0.900000 | 3.140202390 | 0.900000000 |
+| 1.600000 | 0.990000 | 7.746472598 | 0.990000000 |
+| 2.000000 | 0.990000 | 5.658211483 | 0.990000000 |
+| 1.000000 | 0.900000 | 9.000000000 | 0.900000000 |
+And a spec a starved absorber cannot reach at any stage count: at an absorption factor of 0.800000 a removal of 0.900000 comes back as { error: "absorption factor at or below the required removal: no stage count reaches this spec; raise circulation" }. The refusal names the remedy, which is more solvent rather than more trays.
+
+The published cases, engine against golden. The golden here is a BRUTE FORCE STAGE CASCADE solved as a linear system, which is a genuinely different road to the same number:
+| A | stages | engine | golden | engine over golden |
+| --- | --- | --- | --- | --- |
+| 1.400000 | 6 | 0.958077213054 | 0.958077213054 | 1.000000000000 |
+| 2.000000 | 3 | 0.933333333333 | 0.933333333333 | 1.000000000000 |
+| 0.800000 | 8 | 0.768995038974 | 0.768995038974 | 1.000000000000 |
+| 1.000000 | 5 | 0.833333333333 | 0.833333333333 | 1.000000000000 |
+| 3.000000 | 2 | 0.923076923077 | 0.923076923077 | 1.000000000000 |
+
+# SECTION 10: Acid gas is removed by moles (owned by Professional m03)
+
+Sweetening is a mole balance from end to end. The gas carries a mole percent of CO2 and H2S, the spec says what may stay, and the difference is what the solution has to pick up. Nothing in that chain is a mass until the very last step.
+On UBIE: 5.200000 less 2.000000 mol percent of CO2 plus 1.400000 less 0.000400 of H2S is 4.599600000 mol percent removed (derived, the four figures on this line), which at 88.000000 MMscfd is 10666.0202 lbmol a day.
+Each mole of amine carries the swing, which is 0.480000 rich less 0.050000 lean, or 0.430000000 mol of acid gas per mol of amine (derived, the two figures on this line subtracted). The circulation follows: 525.884105 gpm.
+The regenerator then costs the stated 800.000000 Btu a gallon on every one of those gallons, which is 25.242437 MMBtu an hour.
+
+The swing is the whole lever. The rich end:
+| rich loading | swing | circulation, gpm | regenerator, MMBtu/hr | warning |
+| --- | --- | --- | --- | --- |
+| 0.300000 | 0.250000000 | 904.520661 | 43.416992 | no |
+| 0.380000 | 0.330000000 | 685.242925 | 32.891660 | no |
+| 0.440000 | 0.390000000 | 579.820936 | 27.831405 | no |
+| 0.480000 | 0.430000000 | 525.884105 | 25.242437 | no |
+| 0.500000 | 0.450000000 | 502.511478 | 24.120551 | no |
+| 0.550000 | 0.500000000 | 452.260330 | 21.708496 | yes |
+And the lean end, which costs regenerator duty to reach and buys circulation back:
+| lean loading | swing | circulation, gpm | regenerator, MMBtu/hr |
+| --- | --- | --- | --- |
+| 0.010000 | 0.470000000 | 481.128011 | 23.094145 |
+| 0.030000 | 0.450000000 | 502.511478 | 24.120551 |
+| 0.050000 | 0.430000000 | 525.884105 | 25.242437 |
+| 0.080000 | 0.400000000 | 565.325413 | 27.135620 |
+| 0.120000 | 0.360000000 | 628.139348 | 30.150689 |
+
+The corrosion warning, read from both sides of MDEA's own customary limit:
+| rich loading | warning |
+| --- | --- |
+| 0.500000000 | null |
+| 0.500001000 | "rich loading above the customary 0.5 for MDEA: corrosion territory" |
+
+Two refusals that look alike and are not:
+- a spec already met at the inlet: { error: "no acid gas to remove at these specs" }
+- a spec set above the inlet: { error: "no acid gas to remove at these specs" }
+- a lean loading at or above the rich: { error: "rich loading must exceed lean loading" }
+
+The published cases, engine against golden:
+| case | gpm engine | gpm golden | ratio | MMBtu/hr engine | MMBtu/hr golden | ratio |
+| --- | --- | --- | --- | --- | --- | --- |
+| MDEA | 372.397360 | 372.397360 | 1.000000000000 | 17.875073 | 17.875073 | 1.000000000000 |
+| DEA | 142.545406 | 142.545406 | 1.000000000000 | 8.125088 | 8.125088 | 1.000000000000 |
+
+# SECTION 11: Three amines, and what separates them (owned by Professional m04)
+
+The module carries a published property set for three amines, and every column of it is a design consequence rather than a piece of chemistry trivia.
+| amine | molecular weight | typical strength, wt % | customary rich limit | customary duty, Btu/gal | solution gravity |
+| --- | --- | --- | --- | --- | --- |
+| MEA | 61.080000 | 18.000000 | 0.350000 | 1100.000000 | 1.010000 |
+| DEA | 105.140000 | 28.000000 | 0.400000 | 950.000000 | 1.020000 |
+| MDEA | 119.160000 | 45.000000 | 0.500000 | 800.000000 | 1.040000 |
+
+The same duty put through all three, each at its OWN typical strength, rich limit and duty, which is what the table is for:
+| amine | circulation, gpm | regenerator, MMBtu/hr | rich used | MMBtu/hr per gpm |
+| --- | --- | --- | --- | --- |
+| MEA | 994.621295 | 65.645005 | 0.350000 | 0.066000000 |
+| DEA | 934.147775 | 53.246423 | 0.400000 | 0.057000000 |
+| MDEA | 502.511478 | 24.120551 | 0.500000 | 0.048000000 |
+The last column is derived, the two engine figures on each row divided. It is NOT a new fact. Divide each amine's customary duty in the table above by the minutes in a day measured in Section 2, times the minutes in an hour, and the same number comes back:
+| amine | MMBtu/hr per gpm, from the two engine figures | the table duty times 60 over a million |
+| --- | --- | --- |
+| MEA | 0.066000000 | 0.066000000 |
+| DEA | 0.057000000 | 0.057000000 |
+| MDEA | 0.048000000 | 0.048000000 |
+So the regenerator duty ranks the three amines in exactly the order the duty column of the property set already does, and the circulation ranks them in the same order again. All three orderings are the same ordering, and the interesting number is not which amine is cheapest but HOW FAR apart they are:
+| pair | circulation ratio | duty ratio |
+| --- | --- | --- |
+| MEA over MDEA | 1.979300649 | 2.721538393 |
+| DEA over MDEA | 1.858958085 | 2.207512726 |
+| MEA over DEA | 1.064736567 | 1.232852867 |
+The two ratio columns are NOT equal, and that is the whole point of the table: circulation is set by the rich limit and the strength, duty is set by the rich limit, the strength and the duty per gallon, so the same ordering is reached by two different routes and the gaps between the amines are different sizes on each.
+
+An amine the table does not carry: null, and the package asked for it returns { error: "unknown amine 'DIPA'" }. This is the one catalogue lookup in the module and it says it does not know.
+
+# SECTION 12: The vessel the gas goes up (owned by Professional m05)
+
+THE EQUATION IS NOT NEW. Souders-Brown, the K value and the settling velocity are owned by the Separation & Slug Catching course, which teaches the six published K rows and the mist extractor that sets them. What is new here is the DUTY: a contactor is a mass transfer column, not a knockout drum, and it is sized on the gas that has to rise through a descending liquid.
+
+On OBIAFU the gas weighs 3.424553 lb per ft3 at 950.000000 psia and 104.000000 degF with a compressibility of 0.876617747, the allowed velocity at a K of 0.300000 ft per s is 1.321752 ft per s, and the diameter is 3.182673 ft.
+On UBIE the gas weighs 3.831017 lb per ft3 at 985.000000 psia and 112.000000 degF with a compressibility of 0.861800291, the allowed velocity at a K of 0.250000 ft per s is 1.038202 ft per s, and the diameter is 4.195403 ft.
+
+The compressibility is NOT an input here. The engine computes it from the same DAK correlation the rest of the platform uses, off Sutton pseudo-criticals built from the gas gravity alone:
+| psia | degF | gravity | z the engine computes | gas density, lb/ft3 | allowed velocity, ft/s | diameter, ft |
+| --- | --- | --- | --- | --- | --- | --- |
+| 600.000000 | 100.000000 | 0.650000 | 0.919606033 | 2.045042 | 1.728068 | 3.574555 |
+| 950.000000 | 104.000000 | 0.660000 | 0.876617747 | 3.424553 | 1.321752 | 3.182673 |
+| 1400.000000 | 110.000000 | 0.700000 | 0.818461451 | 5.672520 | 1.009471 | 2.914145 |
+| 1400.000000 | 60.000000 | 0.700000 | 0.738367833 | 6.892825 | 0.907022 | 2.788936 |
+| 2000.000000 | 110.000000 | 0.750000 | 0.751811429 | 9.452149 | 0.758659 | 2.695499 |
+
+The K value, which is the one design choice in the whole sizing:
+| K, ft/s | allowed velocity, ft/s | diameter, ft |
+| --- | --- | --- |
+| 0.150000 | 0.660876 | 4.500979 |
+| 0.200000 | 0.881168 | 3.897962 |
+| 0.250000 | 1.101460 | 3.486443 |
+| 0.300000 | 1.321752 | 3.182673 |
+| 0.350000 | 1.542044 | 2.946582 |
+| 0.400000 | 1.762336 | 2.756276 |
+
+The published cases pass their compressibility IN rather than letting the engine compute one, so the golden checks the sizing and never the correlation:
+| rate | psia | degF | z given | diameter engine | diameter golden | ratio |
+| --- | --- | --- | --- | --- | --- | --- |
+| 50.000000 | 1000.000000 | 100.000000 | 0.850000 | 2.787172 | 2.787172 | 1.000000000000 |
+| 120.000000 | 1200.000000 | 110.000000 | 0.820000 | 3.890421 | 3.890421 | 1.000000000000 |
+The same first case with the z LEFT OUT, so the engine computes one: it returns 0.871027147 against the 0.850000 the case hands it, and the diameter moves from 2.787172 ft to 2.803309 ft, a factor of 1.005790011 (derived, the two diameters on this line divided).
+
+The liquid the gas is rising against is a TYPED CONSTANT of 69.900000 lb per ft3, measured in Section 2. It is the same number whether the column holds glycol or amine, and neither the glycol density the dehydration balance takes as an input nor the solution gravity the amine table carries reaches it. Section 16 takes that up.
+
+# SECTION 13: The still overhead nobody sells (owned by Expert m04)
+
+Aromatics dissolve in glycol in the contactor, ride round the loop and leave through the still overhead. The absorbed fraction is an OPERATING VALUE the engine takes as an input; the arithmetic from it is a mole balance and nothing else.
+On OBIAFU at 180.000000 ppmv and an absorbed fraction of 0.150000, the engine returns 405.8289 lb a day and 74.063770 short tons a year.
+
+| ppmv in | absorbed fraction | lb/day | short tons/yr |
+| --- | --- | --- | --- |
+| 60.000000 | 0.100000 | 90.1842 | 16.458616 |
+| 180.000000 | 0.100000 | 270.5526 | 49.375847 |
+| 180.000000 | 0.150000 | 405.8289 | 74.063770 |
+| 180.000000 | 0.200000 | 541.1052 | 98.751693 |
+| 400.000000 | 0.150000 | 901.8419 | 164.586155 |
+| 900.000000 | 0.150000 | 2029.1444 | 370.318849 |
+Both columns are linear in both inputs, and the table says so itself: tripling the ppmv from 60 to 180 at a fixed fraction multiplies the pounds a day by 3.000000000000, and doubling the fraction from 0.1 to 0.2 at a fixed ppmv multiplies it by 2.000000000000 (both derived, rows of the table above divided). A mole balance with one operating multiplier and no chemistry is exactly what those two figures describe.
+The molecular weight the balance uses is an input with a default of 92.000000, which is toluene. A real BTEX cut is four compounds, and the engine carries one number for all of them.
+
+# SECTION 14: WITHHELD. The Joule-Thomson chain (would be owned by Expert m01, m02 and m03)
+
+NOTHING IS PRINTED IN THIS SECTION AND NOTHING IN THIS DIGEST STANDS IN FOR IT.
+
+The module computes a Joule-Thomson coefficient from the temperature derivative of the same DAK compressibility correlation the contactor uses, marches it down a pressure drop in equal steps, and reports the temperature the gas arrives at and the water it can still hold there. Those are the numbers Expert m01, m02 and m03 are built on.
+
+The FC4-0 recon found that chain to be wrong by a factor that varies with the compressibility, and the repair is in flight. Numbers printed here today would be numbers a writer would learn, so this section prints none. When FC4-0 is vendored this section is rebuilt and it will carry: the coefficient across pressure, gravity and heat capacity; the derivative that produces it; the march and how many steps it takes to converge; the temperature at the cold separator; the water the cold gas can still hold; and the seam to the Production module Flow Assurance engine, which asks a caller to TYPE a Joule-Thomson coefficient and is the only other place in the package the quantity appears.
+
+A digest that prints a wrong number behind a warning has still taught it. This is the cheaper half of the repair-before-writing rule: fourteen Expert lessons and four of six Expert capstone fields wait, and none of them is written twice.
+
+# SECTION 15: What a refusal is, and what sits outside the contract (owned by Expert m05)
+
+The contract: a state the method has no answer for comes back as an object carrying an `error` string. Nothing in this module throws. Every refusal it makes:
+- a temperature outside the water fit: { error: "water saturation fit holds from -45 to 100 C" }
+- a total pressure at or below the water vapour pressure: { error: "total pressure must exceed the water vapor pressure" }
+- a dehydration duty with no gas rate: { error: "a gas rate is needed" }
+- an outlet spec at or above the inlet: { error: "inlet water content must exceed the outlet spec" }
+- a lean glycol strength outside 90 to 100 weight percent: { error: "lean TEG between 90 and 100 weight percent" }
+- a lean glycol strength of exactly 100 weight percent: { error: "lean TEG between 90 and 100 weight percent" }
+- an amine the table does not carry: { error: "unknown amine 'DIPA'" }
+- a sweetening duty with no gas rate: { error: "a gas rate is needed" }
+- a lean loading at or above the rich: { error: "rich loading must exceed lean loading" }
+- a spec that leaves nothing to remove: { error: "no acid gas to remove at these specs" }
+- a spec above the inlet: { error: "no acid gas to remove at these specs" }
+- a contactor with no gas rate: { error: "contactor sizing needs positive rate, pressure, gravity and a K value" }
+- a contactor at no pressure: { error: "contactor sizing needs positive rate, pressure, gravity and a K value" }
+- a contactor for a gas of no gravity: { error: "contactor sizing needs positive rate, pressure, gravity and a K value" }
+- a contactor at a K value of zero: { error: "contactor sizing needs positive rate, pressure, gravity and a K value" }
+- a Kremser stage count for an impossible removal: { error: "absorption factor at or below the required removal: no stage count reaches this spec; raise circulation" }
+- a Kremser stage count for a removal of one: { error: "Kremser needs 0 < fraction < 1 and a positive absorption factor" }
+- a Joule-Thomson screen at no pressure: { error: "JT screening needs positive pressure, gravity and Cp" }
+- a Joule-Thomson screen at no heat capacity: { error: "JT screening needs positive pressure, gravity and Cp" }
+- a let-down to a pressure above the inlet: { error: "JT drop needs p1 above p2 above zero" }
+- a let-down to zero: { error: "JT drop needs p1 above p2 above zero" }
+
+THE ONE EXPORT OUTSIDE THE CONTRACT. `kremserFractionRemoved` returns a BARE NUMBER rather than an object, so it has nowhere to put an error and returns a non-number instead:
+| absorption factor | stages | returns |
+| --- | --- | --- |
+| 0.000000 | 5.000000 | NaN |
+| -1.000000 | 5.000000 | NaN |
+| 2.000000 | 0.000000 | NaN |
+| 2.000000 | -3.000000 | NaN |
+A caller that checks a property finds none, because there is no object to check. This is the shape a downstream guard cannot see, and it is the reason the contract is worth stating as a contract.
+
+Every guard has a boundary, and the boundary is where the teaching is. Each one read from both sides:
+| guard | value | the engine |
+| --- | --- | --- |
+| the lean glycol strength, lower edge | 90.000000000 | refuses |
+| the lean glycol strength, just inside | 90.000001000 | answers |
+| the lean glycol strength, just under the top | 99.999999000 | answers |
+| the lean glycol strength, upper edge | 100.000000000 | refuses |
+| the outlet spec equal to the inlet | 60.000000000 | refuses |
+| the outlet spec a hair under the inlet | 59.999999000 | answers |
+| the water fit, lower edge | -49.000000000 | answers |
+| the water fit, below the lower edge | -49.000001000 | refuses |
+| the water fit, upper edge | 212.000000000 | answers |
+| the water fit, above the upper edge | 212.000001000 | refuses |
+| the amine swing at exactly zero | 0.480000000 | refuses |
+| the amine swing a hair above zero | 0.479999999 | answers |
+| the let-down with the two pressures equal | 500.000000000 | refuses |
+| the let-down a hair apart | 499.999999000 | answers |
+A guard that refuses its own limit is as wrong as one that accepts nonsense, which is why both sides are read rather than one.
+
+# SECTION 16: What the method does not know (owned by Expert m05 l05)
+
+Six things this course teaches as limits and never as answers:
+1. The real-gas departure of the saturated water content. HELD FOR LITERATURE. The engine says it reaches tens of percent by high pressure and warns above 1000.000000 psia, and nothing in this package stands behind a figure for it. Every graded water content in this course sits below that threshold for exactly this reason.
+2. The water overhead the reboiler pays for, 1100.000000 Btu a lb, measured in Section 2. HELD FOR LITERATURE. It is a typed constant, its own comment describes it as a latent heat of about 970 folded with a sensible heat, and neither half is sourced or separable from outside.
+3. The liquid density the contactor sizes against, 69.900000 lb per ft3, measured in Section 2. HELD FOR LITERATURE, and it is a GLYCOL density used for every column. The module's own amine table carries a solution gravity for each amine and the sizing never reads it, so an amine contactor is sized against a liquid that is not in it.
+4. The three amines' property set. HELD FOR LITERATURE. The molecular weights are chemistry; the typical strengths, the rich limits, the duties and the solution gravities are customary practice with no source in this package.
+5. The BTEX absorbed fraction and its single molecular weight. HELD FOR LITERATURE. The engine is explicit that the fraction is a chart or operating value, and the molecular weight is one compound standing for four.
+6. The published cases in this golden are SYNTHETIC. They come from an oracle written in Python against the same physics. One route in it is genuinely independent: the water content is checked against a DIFFERENT published vapour-pressure equation, and the Kremser relation is checked against a brute-force stage cascade solved as a linear system. THE OTHER THREE ROUTES ARE NOT INDEPENDENT, and Section 17 is the whole of that story.
+
+And two things that are not held but simply absent. THERE IS NO HYDRATE BOUNDARY IN THIS ENGINE, and there is no stage efficiency. A hydrate margin is the Production module Flow Assurance engine, which owns subcooling, the depression correlations and the inhibitor dose, and which refuses to compute a hydrate boundary of its own. Dehydration is the OTHER answer to the same question, and the seam between the two is a course boundary rather than a gap.
+
+# SECTION 17: What the published cases can and cannot catch (owned by Expert m05 l02 and l03)
+
+A gate that restates the engine's own formula validates nothing. Three of the five routes in this module's oracle do exactly that, and the digest can show it without leaving the engine.
+
+The two routes that ARE independent, and the evidence:
+- WATER CONTENT. The oracle uses a different published vapour-pressure equation. That is why the ratios in Section 3 sit near one rather than at one: the largest gap across the four published cases is 0.006381649 (derived, the largest absolute departure from one in the Section 3 table). A gate whose two sides agree to twelve decimals has not been shown to have two sides.
+- KREMSER. The oracle solves the stage cascade as a linear system. The closed form and the cascade agree to 0.000000000000 at worst across the five published cases (derived, the largest absolute departure from one in the Section 9 table), which is agreement between two genuinely different pieces of arithmetic rather than one piece run twice.
+
+The three routes that are NOT independent. In each case the oracle carries the SAME constant and the SAME expression shape as the engine, so regenerating the golden after a change to either makes the pair agree again at any value:
+- the dehydration balance carries the 1100.000000 Btu a lb overhead in both files;
+- the sweetening balance carries the same pounds per gallon of water, measured in Section 2 as 8.340000, in both files;
+- the contactor carries the same 69.900000 lb per ft3 liquid, the same base group and the same gas constant in both files.
+Those three are why every ratio in Sections 8, 10 and 12 is one to twelve decimals while the two independent ratios are not. IDENTICAL TO TWELVE DECIMALS IS NOT A STRONGER RESULT THAN AGREEING TO SIX. It is a weaker one, because it is what two copies of one calculation produce.
+
+And one whole routine with NO published case at all: the Joule-Thomson chain has no row in this golden, no oracle route and no check beyond a range. That is where the FC4-0 recon found its defect, and Section 14 is why this digest prints none of it.
+
+# SECTION 18: The Associate reading, one stream from the line to the still (owned by Associate m06)
+
+OBIAFU arrives at 950.000000 psia and 104.000000 degF carrying 53.449474 lb of water per MMscf, which is a mole fraction of 0.001125908 and nothing to do with the rate. A spec of 7.000000 lb per MMscf takes 46.449474 of that out (derived, the two figures on this line subtracted), and only now does the rate matter: at 62.000000 MMscfd it is 2879.8674 lb a day.
+The choice of 3.200000 gallons of glycol per pound turns that into 9215.5757 gallons a day, or 6.399705 gpm. Each of those gallons needs 1386.1650 Btu to reach the still and 429.6875 Btu to give its water up, 1815.8525 Btu in all, and the reboiler that does it is 0.697255 MMBtu an hour.
+The vessel that gas rises through is 3.182673 ft across, and the glycol loop carries 74.063770 short tons of aromatics a year out of the still overhead on the way.
+Six answers about one stream. Two of them, the water content and the duty per gallon, do not know the rate exists. Three of them are nothing but the rate applied to the first two. And the last one is about a vessel, which is the only part of the chain that cares what pressure the gas is at rather than only how wet it is.
+
+# SECTION 19: The Professional reading, one sour stream through two columns (owned by Professional m06)
+
+UBIE arrives at 5.200000 mol percent CO2 and 1.400000 mol percent H2S and has to leave at 2.000000 and 0.000400. As a mole balance that is 10666.0202 lbmol a day into the solution, which at a swing of 0.430000000 mol per mol on 45.000000 weight percent MDEA is 525.884105 gpm and 25.242437 MMBtu an hour.
+As a staged device the same column is read differently. At an absorption factor of 1.600000 the Kremser relation says 6.000000 theoretical stages remove 0.976783371 of what is there, and a removal of 0.990000 would demand 7.746472598.
+As a vessel it is 4.195403 ft across, because the gas weighs 3.831017 lb per ft3 at 985.000000 psia and may not rise faster than 1.038202 ft per s.
+Three answers about one column, and not one of them can be derived from the other two. The mole balance says how much solution has to move and says nothing about whether the column can reach the spec. The stage relation says whether the spec is reachable and says nothing about how many gallons a minute it takes. The vessel says how wide the steel has to be and knows neither.
+

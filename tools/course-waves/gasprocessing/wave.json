@@ -1,0 +1,93 @@
+{
+ "slug": "gasprocessing",
+ "prefix": "fc4",
+ "name": "Gas Processing",
+ "pathOrder": 42,
+ "module": "facilities",
+ "prerequisite": null,
+ "repo": "/root/wt-fc4-nextgen",
+ "branch": "feat/fc4-gasprocessing-course",
+ "goldens": [
+  "facilities/goldens/gasprocessing_cases.json"
+ ],
+ "engines": [
+  "engines/facilities/gasProcessing.js",
+  "engines/production/gasProperties.js"
+ ],
+ "enginesVendoredAt": "NextGen fa33717f. Five paths sha-identical with engines 709172f, which is byte-for-byte the stated FC4 canonical fa53f7f on every gas-processing path. Vendoring guard clean over 547 paths. MUST BE RE-VENDORED when FC4-0 lands.",
+ "constants": {
+  "379.49": "the standard cubic feet in a pound mole, MEASURED out of the BTEX mole balance. Its comment names 14.65 psia; the module's own gas constant and Rankine offset put the base at 14.695751 psia (digest Section 2)",
+  "18.01528": "the molecular weight of water, MEASURED from the saturation answer and the mole fraction the same call returns",
+  "1100": "the Btu a pound the reboiler pays to send water overhead, MEASURED at a circulation ratio of one and no reflux. HELD FOR LITERATURE, unsourced, and its comment names a 970 that is not in the code",
+  "1440": "the minutes in a day, MEASURED as the gallons a day over the gallons a minute of one call",
+  "0.1825": "the days in a year over the pounds in a short ton, MEASURED as one BTEX answer over another. The two are not separable from outside",
+  "24000000": "the hours in a day times the Btu in a MMBtu, MEASURED from the gallons a day, the duty per gallon and the duty in MMBtu an hour",
+  "69.9": "the liquid density the contactor sizes against, lb per ft3, MEASURED from the gas density and the allowed velocity. HELD FOR LITERATURE, and it is a GLYCOL density used for every column including amine",
+  "8.34": "the pounds per gallon of water the amine gallons chain divides by, MEASURED through the swing, the molecular weight and the solution gravity the amine table exports",
+  "0.028173077": "the contactor's base pressure over base temperature, psia per degR, MEASURED from the allowed velocity and the diameter. The group the module's own pound mole implies is 0.028279006, a factor of 0.996254 apart",
+  "1.985881": "the gas constant over the Btu conversion in the Joule-Thomson routine, MEASURED at a unit heat capacity. The only constant of that routine FC4-0 will not move",
+  "0.088609355": "the water vapour pressure at the freezing point, psia, which IS the Magnus coefficient because the exponent is exactly zero there",
+  "459.67": "the Rankine offset, exported by the gas properties module",
+  "28.9625": "the molecular weight of dry air, exported",
+  "10.7316": "the gas constant in psia ft3 per lbmol degR, exported",
+  "92": "the molecular weight the BTEX balance defaults to, which is toluene standing for a four-compound cut",
+  "231": "cubic inches in a gallon, a definition, used only in a stated conversion whose result is printed beside it",
+  "1728": "cubic inches in a cubic foot, on the same terms",
+  "14.6959487755142": "one standard atmosphere, psia, used only to state what the water fit reads at its own guard edge"
+ },
+ "leakScales": ["1", "x1e3", "x1e-3"],
+ "plan": {
+  "state": "FOUNDATION COMPLETE, WRITING HELD. Recon found 49 findings, one of them a live wrong answer on four screens. FC4-0 repairs before a lesson exists.",
+  "thesis": "Gas conditioning is three separate balances over one stream, and the discipline is knowing which of the numbers in front of you the engine COMPUTED, which one you CHOSE, and which one it simply kept to itself.",
+  "tiers": {
+   "beginner": "Associate. WATER, AND WHAT IT COSTS TO TAKE OUT. Why: the water chain is the only part of this engine that runs end to end in closed form, so a learner can watch a whole answer assemble before anything iterates or solves. It is also where the difference between an intensive answer and an extensive one is sharpest, because the water content knows nothing about the rate and the circulation is nothing but the rate applied to it. And it is where the module's own doctrine first bites: the circulation ratio is a CHOICE the engine refuses to make, and the reboiler duty is split into named parts instead of arriving as one number. The tier ends where one column becomes several stages.",
+   "intermediate": "Professional. STAGES, SOLVENTS AND WHAT A COLUMN COSTS. Why: a contactor is not a tank, and the moment it is read as a staged device a ceiling appears that no amount of steel can buy past. Below an absorption factor of one the removal cannot exceed the factor itself, however many trays are bought, and the engine's refusal says the remedy is more solvent rather than more stages. The amine half then answers the same shape of question by a completely different route, a mole balance with a loading swing, and the two arrive at a circulation for reasons that have nothing in common. The tier ends able to say which question a given number answers.",
+   "advanced": "Expert. THE COLD END, THE OVERHEAD, AND WHERE THE METHOD STOPS. Why: the two things left are the ones the rest of the platform hands to this engine and to nobody else. It is the only module in the package that COMPUTES a Joule-Thomson coefficient, and the Flow Assurance engine asks a caller to type one in; and the still overhead is the only emissions figure the Facilities engines produce at all. Then the audit, which on this engine is unusually rich: what was computed, what was chosen, what was kept, and the difference between a published case that could have caught an error and one that could not."
+  },
+  "modulesPerTier": 6,
+  "lessonsPerTier": 26,
+  "questionsPerTier": 132,
+  "questionsPerModuleBank": 15,
+  "examQuestions": 42,
+  "lessonLength": {
+   "band": "420 to 560 words, ranked by est_minutes within a tier",
+   "measure": "PROSE WORDS ONLY, counted the way lengths.py counts them: front matter, markdown table rows, headings and {{panel:...}} lines are all excluded. A raw `wc -w` over the whole file is NOT this measure and runs materially higher, so a lesson can be inside the band and still fail a raw word count. State which measure before quoting a number at a writer."
+  },
+  "capstones": {
+   "count": 3,
+   "gradedFieldsEach": 6,
+   "beginner": "IKOT ABASI, a TEG dehydration train: the saturated inlet water content, the water taken out in lb a day, the circulation in gpm and in gallons a day, the sensible heat per gallon, and the BTEX in short tons a year.",
+   "intermediate": "OTUMARA, a sour gas train: the removal at the stated stage count, the stages the contract spec demands, the acid gas picked up in lbmol a day, the amine circulation, the regenerator duty, and the circulation again after the regenerator is retuned to a leaner lean.",
+   "advanced": "ESCRAVOS, a dew point skid: the compressibility temperature derivative at the inlet, the water the warm gas carries, and then the Joule-Thomson coefficient, the cooling, the separator inlet temperature and the water the cold gas can still hold. FOUR OF THE SIX READ THE JOULE-THOMSON CHAIN AND ARE NOT CUT UNTIL FC4-0 IS VENDORED.",
+   "heldItemCheck": "Every held item is neutralised by CONSTRUCTION rather than by a lookup. The McKetta real-gas correction is held, so IKOT ABASI and both ESCRAVOS water reads sit BELOW the pressure at which the engine warns, verified by asserting the warning is null on all three. The 1100 Btu per lb overhead is held, so NO Associate graded field reads a reboiler duty: the SENSIBLE half, which is built entirely from stated inputs, is what is graded. The contactor's liquid density is held and is the wrong fluid for an amine, so NO Professional graded field reads a contactor diameter. The amine duty per gallon is customary, so OTUMARA states its own 920. The BTEX absorbed fraction and molecular weight are operating values and are stated on the one capstone that grades a BTEX figure."
+  },
+  "panels": {
+   "lab": "src/components/course/panels/gasprocessing/gasprocessingLab.js",
+   "ids": [
+    "fc-water-explorer (Associate, and Expert for the cold-end water read): the saturation surface across pressure and temperature, the spec, the water load, the circulation ratio sweep and the duty split into its two named parts",
+    "fc-absorber-explorer (Professional): the Kremser surface in both directions with the ceiling below unity, the amine property table, the loading swing at both ends, and the contactor diameter",
+    "fc-coldend-explorer (Expert, and Professional for the contactor): HELD until FC4-0 is vendored, because every exported value of it reads the Joule-Thomson chain"
+   ]
+  },
+  "route": "/dashboard/apps/gasprocessing",
+  "suiteApp": "/dashboard/apps/gas-treating-dehydration",
+  "migrations": [
+   "course and capstones",
+   "beginner deep seed",
+   "intermediate deep seed",
+   "advanced deep seed",
+   "go-live, HELD behind the one Facilities module upload"
+  ]
+ },
+ "gates": {
+  "gate_claims.mjs": "every relational claim in digest.txt re-computed from the engine. 26 checks. CAUGHT TWO FALSE CLAIMS in the first draft, one of them an ordering that was stated as different and was in fact identical.",
+  "gate_typed_literals.py": "no number is typed into the digest. Sweeps every string literal in fc4_dump.mjs with ${...} stripped at source level. 293 literals examined, 23 numeric literals swept in printed prose, 12 allowed with a reason and all 12 hit, 0 unexplained. Fails on a dead allowlist row.",
+  "gate_capstone_leak.py": "no capstone condition and no graded value reaches the digest or the generator. 25 conditions and 18 graded values at three renderings each. Fails on a dead shared row.",
+  "jest": "packages/engines __tests__/facilities.gasprocessing.test.js, 12 of 12 green. SEE FINDINGS F-O1 AND F-O2 BEFORE TRUSTING THAT NUMBER."
+ },
+ "digest": {
+  "lines": 450,
+  "sections": 19,
+  "withheld": "SECTION 14, the Joule-Thomson chain. It prints NOTHING rather than printing behind a banner, because a digest that prints a wrong number behind a warning has still taught it. Expert m01, m02 and m03 (14 lessons) and four of six Expert capstone fields wait on FC4-0."
+ }
+}
