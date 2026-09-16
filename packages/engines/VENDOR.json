@@ -513,247 +513,223 @@
       "path": "__tests__/facilities.compression.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "__tests__/facilities.controlvalve.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "__tests__/facilities.corrosion.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
-    },
-    {
-      "path": "__tests__/facilities.gasprocessing.test.js",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "__tests__/facilities.heattransfer.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "__tests__/facilities.linehydraulics.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "__tests__/facilities.producedwater.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "__tests__/facilities.pumps.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "__tests__/facilities.relief.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "__tests__/facilities.tanksmetering.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "engines/facilities/compression.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "engines/facilities/controlValve.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "engines/facilities/corrosion.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
-    },
-    {
-      "path": "engines/facilities/gasProcessing.js",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "engines/facilities/heatTransfer.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "engines/facilities/lineHydraulics.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "engines/facilities/metering.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "engines/facilities/producedWater.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "engines/facilities/pumps.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "engines/facilities/relief.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "engines/facilities/storageTank.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "test-data/facilities/goldens/compression_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "test-data/facilities/goldens/controlvalve_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "test-data/facilities/goldens/corrosion_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
-    },
-    {
-      "path": "test-data/facilities/goldens/gasprocessing_cases.json",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "test-data/facilities/goldens/heattransfer_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "test-data/facilities/goldens/linehydraulics_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "test-data/facilities/goldens/producedwater_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "test-data/facilities/goldens/pumps_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "test-data/facilities/goldens/relief_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "test-data/facilities/goldens/tanksmetering_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_compression.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_controlvalve.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_corrosion.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
-    },
-    {
-      "path": "tools/validation/facilities/oracle_gasprocessing.py",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_heattransfer.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_linehydraulics.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_producedwater.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_pumps.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_relief.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_tanksmetering.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
       "path": "__tests__/earthmodel.adjust.test.js",
