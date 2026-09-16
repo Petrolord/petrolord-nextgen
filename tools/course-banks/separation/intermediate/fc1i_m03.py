@@ -10,7 +10,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 q(0, "ABANA-2 puts 29.490437 ft3/s through 25.132741 ft2 at a level of 0.500000, which is 1.173387 ft/s. Where does that numerator come from?",
  "The 110.000000 MMscfd stream taken to 614.700000 psia, 95.000000 degF and a z of 0.908065, which is the volume the drum passes each second.",
  ["The 110.000000 MMscfd stream at standard conditions, which is 1273.148148 standard ft3/s and is the volume a separator running at 614.700000 psia has to move.",
-  "The gas density of 2.239712 lb/ft3 multiplied by the gas area, which turns a mass rate into the volume the gas space is asked to carry.",
+  "The gas density of 2.239712 lb/ft3 multiplied by the gas area of 25.132741 ft2, which turns a mass rate into the volume the gas space is asked to carry.",
   "The settling velocity of 1.958255 ft/s times the gas area of 25.132741 ft2."],
  "The vessel sees 29.490437 ft3/s and nothing else. Dividing 1273.148148 standard ft3/s by an area gives a velocity tens of times too high.")
 
@@ -45,7 +45,7 @@ q(2, "The verdict turns from false to true between the 6.000000 ft and the 7.000
 q(0, "A summary sheet rounds the 6.000000 ft drum's margin of 0.938751 to the nearest whole number. What has it reported?",
  "A margin of one on a drum whose verdict is false, because the rounded figure and the threshold are the same number.",
  ["The margin the engine would return at a level of 0.300000, since rounding a ratio has the same effect as moving the level that produced it.",
-  "Nothing that matters, since the verdict of false travels beside the margin and cannot be rounded away.",
+  "Nothing that matters, since the verdict of false travels beside the margin on every row and a verdict cannot be rounded away.",
   "The 7.000000 ft drum's margin in the place of the 6.000000 ft drum's."],
  "The 6.000000 ft drum reports gasCapacityOk false at 0.938751. A reader handed the verdict alone cannot tell 1.277745 from 2.607642 either, so the pair travels together.")
 
