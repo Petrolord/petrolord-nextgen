@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "What has to be true of a pair of items before the layout check counts it as a check?",
+  "options": [
+   "Both items are placed with usable coordinates and the requirement between them is positive, so a comparison can be made and can fail.",
+   "Both items are placed and the table carries an entry for the pair, whether that entry is a positive distance or the 0.000000 m it records for a valve beside a relief valve.",
+   "One of the two carries a computed setback, since a table figure is recorded rather than calculated and cannot by itself produce a check on a plan.",
+   "Both items are of a type the spacing table knows, which is what the unknown pair count of 12 on ERHA is recording."
+  ],
+  "answer": 0,
+  "explanation": "ERHA reports 69 checks against 21 zero-requirement pairs, 2 skipped items and 12 unknown type pairs. Only the first of those four numbers is a comparison that was made."
+ },
+ {
+  "prompt": "A separator beside a valve requires 0.000000 m, and the engine counts that pair separately rather than as a check. Why?",
+  "options": [
+   "Because the table figure of 0.000000 m is a null in disguise and the lookup is symmetric, so the pair is recorded in the unknown list instead of among the checks.",
+   "Because the two items are so close together that the haversine distance between them falls below the resolution the engine will report at site scale.",
+   "A comparison against zero can never fail, so counting it would pad the review with results that were settled before any distance was measured.",
+   "Because a zero requirement belongs to the computed half of the check rather than the table half."
+  ],
+  "answer": 2,
+  "explanation": "ERHA carries 21 such pairs beside its 69 checks. The published case s3ZeroRequirementPairOnly reports checked 0 with zeroRequirementPairs 1, where the retired rule reported checked 1 and passed on it."
+ },
+ {
+  "prompt": "ERHA reports checked 69, zeroRequirementPairs 21, skipped 2 and unknownPairs 12. What are the last three of those counts for?",
+  "options": [
+   "They are the three categories of breach the check found, ranked from the least serious to the most serious as the engine walked the plan.",
+   "They are the three things that were not comparisons, reported apart from the checks so that a reader can tell a quiet plot from an unexamined one.",
+   "They are the pairs that cleared their requirement, which is why they are kept out of the count of 69 comparisons that were made.",
+   "They are counts of items rather than of pairs, so each one says how many pieces of equipment on the plan fall into that category."
+  ],
+  "answer": 1,
+  "explanation": "Complete is false on ERHA because of the 2 skipped items and the 12 unknown pairs. A pair the table scores at zero takes nothing away from coverage: s3ZeroRequirementPairOnly reports zeroRequirementPairs 1 with complete true."
+ },
+ {
+  "prompt": "ERHA skips tk2 with reason bad-coordinates and fl2 with reason radiation-source-not-placed. What does each reason mean for the plan?",
+  "options": [
+   "One item sits outside the plot boundary the datum defines, and one is a source whose allowable radiation level was left blank on the input form.",
+   "One item has coordinates the engine read as a string rather than a number, and one is a duplicate of a source already on the plan and is dropped to avoid double counting.",
+   "One item failed its own comparison and was withdrawn from the count, and one produced a setback the engine could not compare because nothing was placed near it.",
+   "One item could not be located at all, and one radiation source is missing, so the setback it would have produced was never computed."
+  ],
+  "answer": 3,
+  "explanation": "Both are absences with names attached, which is what makes them actionable. radiationAndTableWithGhostSource skips a source called ghost and still reports checked 2 with 2 violations."
+ },
+ {
+  "prompt": "A tank beside a chemical injection skid returns null from the spacing table. What is the engine saying, and what would defaulting it to zero do?",
+  "options": [
+   "It is saying the table has no entry, and a zero would turn that silence into a positive statement that no separation is required between them.",
+   "It is saying the two items may be placed together, and a zero would record the same thing in a form the layout check can compare a distance against.",
+   "It is saying the pair needs a computed setback rather than a table figure, and a zero would send it down the table path instead.",
+   "It is saying the skid was skipped, and a zero would put it back into the count of checks where a reviewer could see it."
+  ],
+  "answer": 0,
+  "explanation": "ERHA reports 12 unknown type pairs from one skid, and a flow meter, a pig launcher or a booster package returns null in the same way. The lookup is symmetric, so null comes back in both directions."
+ },
+ {
+  "prompt": "Which published case is complete and failing, and which is passing and incomplete?",
+  "options": [
+   "s3ZeroRequirementPairOnly is complete and failing on its single zero-requirement pair, and unknownPairIncomplete is passing while two type pairs stayed unknown.",
+   "radiationAndTableWithGhostSource is complete and failing on 2 violations, and s3AllUnplacedNothingChecked is passing while both of its items went unplaced.",
+   "s4RankingsDisagree is complete with pass false on 2 violations, and s3SkippedItemPassesButIncomplete is pass true with complete false on one skipped item.",
+   "unknownPairIncomplete is complete and failing on its 1 violation, and s4RankingsDisagree is passing on all 6 of the comparisons it made."
+  ],
+  "answer": 2,
+  "explanation": "Complete is a statement about coverage and pass is a statement about results. Those two cases are the whole lesson, because each has one field true and the other false."
+ },
+ {
+  "prompt": "ERHA reports complete false and pass false. What are the two separate causes?",
+  "options": [
+   "Pass is false because 21 pairs carried no requirement and could not clear, and complete is false because only 69 of the pairs on the plan were reached at all before the run ended.",
+   "Pass is false because 6 comparisons came up short, and complete is false because 2 items were skipped and 12 type pairs are unknown.",
+   "Both are false for the same reason, the 2 skipped items.",
+   "Pass is false on the flare setback of 64.6458 m, and complete on the bund radius."
+  ],
+  "answer": 1,
+  "explanation": "The two fields answer different questions and move independently. Complete would still be false on ERHA if all 69 comparisons had cleared, because the remainder is what complete is about."
+ },
+ {
+  "prompt": "s3AllUnplacedNothingChecked and s3ZeroRequirementPairOnly both report pass null with passStatus nothing-checked. Why does complete differ between them?",
+  "options": [
+   "One was judged against the table and the other against a computed setback, and only a table comparison can leave a layout complete when nothing was checked on it.",
+   "One reports zeroRequirementPairs 1 and a zero-requirement pair counts toward coverage, while a skipped item is counted against it and also against the pass field.",
+   "One has two items and the other has one pair, and complete is set from the number of items a plan carries rather than from what stopped the comparisons.",
+   "One had two items it could not reach, and the other had nothing stopping the judgement at all."
+  ],
+  "answer": 3,
+  "explanation": "s3AllUnplacedNothingChecked skips w1 and s1 for bad coordinates and reports complete false. s3ZeroRequirementPairOnly skips nothing and reports complete true with checked 0."
+ },
+ {
+  "prompt": "A layout check reports pass null. Why is null the honest answer where true is not?",
+  "options": [
+   "Pass is a claim about the comparisons that were made, and with no comparisons there is no set to quantify over, so the question does not apply rather than being answered yes.",
+   "Because null is how the engine reports a plan it refused, and a plan with nothing to check is refused in the same way as a value that is not a list.",
+   "Because true is reserved for a plan that is also complete, and a plan with nothing checked can never be complete.",
+   "Because a boolean cannot carry a count, and pass has to hold both the verdict and the number of comparisons behind it."
+  ],
+  "answer": 0,
+  "explanation": "The retired rule reported pass true on both nothing-checked cases, which is an absence of violations read as a presence of compliance. A plan whose items lost their coordinates in an import came back green."
+ },
+ {
+  "prompt": "On ERHA worstAbsolute names Flare stack to Control room and worstRelative names Transfer pump A to Transfer pump B. What figure is each ranking built on?",
+  "options": [
+   "46.1777 m of measured distance for the flare pair, and 1.2067 m of measured distance for the pump pair, so both rankings sort on the distance that was measured.",
+   "90.0000 m of requirement for the flare pair, and 3.0000 m of requirement for the pump pair, so the rankings sort by how demanding each requirement is.",
+   "43.8223 m of shortfall for the flare pair, and 0.597753 of its own requirement for the pump pair.",
+   "0.486914 of the requirement for the flare pair, and 1.7933 m of shortfall for the pump pair, which is why the two rankings name different pairs on this plan."
+  ],
+  "answer": 2,
+  "explanation": "The pump pair is last on metres and first on fraction, and the flare pair is the other way round. Both namings are correct and neither is called the worst on its own."
+ },
+ {
+  "prompt": "Why does a works order written from the relative ranking alone go wrong on ERHA?",
+  "options": [
+   "It starts with the control room, because a fraction of 0.486914 outranks a fraction of 0.597753 whenever the requirement behind it is the larger of the two.",
+   "It starts with two pumps 1.7933 m apart from their requirement and buries the control room that is 43.8223 m short of its own.",
+   "It treats the 6 breaches as one list when 4 of them are radiation breaches against a computed setback and 2 are spacing breaches against a table figure.",
+   "It leaves out the 2 skipped items, which carry no shortfall at all."
+  ],
+  "answer": 1,
+  "explanation": "A fraction has no size in it. The pump pair is a chalk line and a day of steelwork; the flare pair is a different building or a different plot."
+ },
+ {
+  "prompt": "On radiationAndTableWithGhostSource and on unknownPairIncomplete the two rankings name the same pair. What does that show?",
+  "options": [
+   "That the two rankings are the same calculation reported twice, and they separate only where a plan carries both a table breach and a radiation breach on it.",
+   "That a plan with fewer than three breaches cannot separate the two rankings, since a ranking needs at least three entries before an ordering can differ.",
+   "That agreement is the normal case and ERHA disagrees only because its pump pair carries the smallest requirement the spacing table holds at 3.0000 m.",
+   "That the two orderings often agree, which is how a single ranking survived as long as it did."
+  ],
+  "answer": 3,
+  "explanation": "radiationAndTableWithGhostSource names f1 to t1 on both, 18.1988 m of 68.1427 m and 0.267069. s4RankingsDisagree is the case built to separate them, at 40.0561 m of 90.0000 m against 0.667041."
+ },
+ {
+  "prompt": "The retired code returned one ranking built on the relative shortfall and labelled it worst, reporting spacing p1 to p2 on s4RankingsDisagree. Which part of that is the defect?",
+  "options": [
+   "The label, because calling one of two orderings the worst hides the other one, where naming it the largest relative shortfall would have been true and would have invited the question about metres.",
+   "The ranking, because a relative shortfall is the wrong quantity to sort breaches by and an absolute shortfall in metres is the right one.",
+   "The pair, because spacing p1 to p2 is not a breach on that case at all and the retired code was reading a zero-requirement pair as a violation.",
+   "The count, because the retired code reported checked 6 where the repaired engine counts only the comparisons that carried a positive requirement."
+  ],
+  "answer": 0,
+  "explanation": "The retired pair is the one whose absolute shortfall is the smaller. worstAbsolute on that case is spacing f1 to c1, 40.0561 m of 90.0000 m, and worstRelative is p1 to p2 at 0.667041."
+ },
+ {
+  "prompt": "A reviewer proposes combining the two rankings into a single score so that one list can be escalated. What is wrong with that?",
+  "options": [
+   "Nothing is wrong with it, provided both are normalised against the largest requirement on the plan, which on ERHA is the 90.0000 m between a flare and a control room.",
+   "A shortfall in metres and a shortfall as a fraction are different quantities, so a combined index hides which of the two put a pair at the top of it.",
+   "The engine already returns such a score and the two rankings are the inputs to it, so a reviewer would be rebuilding a field that is printed.",
+   "The two rankings cover different sets of breaches, since worstAbsolute is drawn from spacing pairs and worstRelative from radiation pairs."
+  ],
+  "answer": 1,
+  "explanation": "On ERHA the pump pair leads on 0.597753 and the flare pair leads on 43.8223 m. A single number would rank them and would not say which quantity did the ranking."
+ },
+ {
+  "prompt": "A plan reports 69 checks. What does that number depend on besides how thorough the review was?",
+  "options": [
+   "The order the items were supplied in, since the engine walks the list in that order and stops counting once it reaches the first pair it cannot resolve from the spacing table.",
+   "The number of computed setbacks, because each radiation source multiplies the count by the number of items placed near it on the plan.",
+   "What happens to be on the plan: adding items adds pairs, and a plot with many zero-scored items can show a large count with nothing more examined.",
+   "The datum the coordinates were measured from, because a distance on a sphere is measured from the datum and the count follows the distances."
+  ],
+  "answer": 2,
+  "explanation": "ERHA reports 21 zero-requirement pairs beside its 69 checks, and the separate count is what makes the shape of the number visible to a reader."
+ }
+]

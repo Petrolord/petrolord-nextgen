@@ -1,0 +1,114 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC1 Associate m04, Settling. Digest section 4.
+
+q(1, "AGBAMI's oil is 27.000000 API and weighs 55.707256 lb/ft3, while the ABANA oil is 33.000000 API and weighs 53.675380 lb/ft3. What does that ordering show?",
+ "The API scale runs backwards against density, so the heavier oil carries the lower API figure.",
+ ["The scale is linear in density with a negative slope, which is why 141.5 and an offset of 131.5 appear in the conversion and why six degrees of API are worth the same everywhere on it.",
+  "The scale is measured against water at 62.4 lb per ft3, so an API above the midpoint of the scale gives an oil heavier than water and an API below it gives one lighter.",
+  "The scale runs with density, and the AGBAMI water gravity of 1.050000 lifts its oil."],
+ "The scale is built from 141.5 and an offset of 131.5, and it is not linear in density. The 27.000000 API oil is the heavier of the two crudes at 55.707256 lb/ft3."),
+
+q(0, "A reader uses 62.4 lb/ft3 for the ABANA water because a specific gravity of 1.040000 looked close enough to 1. What does that cost?",
+ "It replaces 64.896000 lb/ft3 with 62.4, and that moves the mixture, the settling velocity, the required area and the diameter.",
+ ["It replaces 64.896000 lb/ft3 with 62.4 and stops at the mixture, since the water density feeds nothing further and the gas load is built on the oil density of 53.675380 lb/ft3.",
+  "It is a hundredth or so in specific gravity, and the square root swallows it against a gas of 2.239712 lb/ft3.",
+  "It is exactly the salt contribution, so it cancels once the mixture is weighted by the two rates."],
+ "A specific gravity is a ratio against fresh water, so 1.040000 times 62.4 gives 64.896000 lb/ft3. Produced water is brine and its gravity is above 1 on all three streams here."),
+
+q(2, "On AGBAMI the mixture is 59.632353 lb/ft3 where the plain average of its two liquids is 60.613628. Which figure is right, and on what grounds?",
+ "59.632353, because the two densities are weighted by their volume rates of 12000.000000 and 8000.000000 bpd.",
+ ["60.613628, because the gas sits above the whole liquid surface and meets both phases equally.",
+  "59.632353, because the heavier phase always contributes less to a mixture and the weighting is therefore by the inverse of each density rather than by the two rates.",
+  "Either of them, since they differ by about one lb/ft3 and the settling velocity takes the density difference under a square root, which makes the choice immaterial."],
+ "An average weights the two liquids equally, which is a claim that they arrive in equal amounts. AGBAMI is 12000.000000 bpd of oil against 8000.000000 bpd of water, so the weighted figure sits below the average, nearer the oil."),
+
+q(3, "ABANA-1 and ABANA-2 hold identical oil at 53.675380 and identical water at 64.896000 lb/ft3, and their mixtures differ at 55.171463 and 55.919504. What moved?",
+ "The water cut, 400.000000 bpd in 3000.000000 against 6000.000000 bpd in 30000.000000.",
+ ["The gas rate, since the mixture is the liquid density the gas load sees and 110.000000 MMscfd loads the production separator far harder than the 18.000000 MMscfd on the test separator does.",
+  "The K value, since ABANA-1 runs a vertical mesh pad at 0.300000 and ABANA-2 a horizontal mesh pad at 0.400000, and the mixture is the density that K is applied to.",
+  "The pressure, because the two vessels take their liquid at slightly different points in the train and a liquid density moves with the gas that is still dissolved in it."],
+ "The mixture is a property of the stream rather than of the fluids, and it moves whenever the water cut moves. A field watering out over its life walks the figure upward year by year."),
+
+q(0, "Water cut rises on a producing field. What does that do to the two halves of a vessel's sizing?",
+ "The gas side gets easier and the liquid side gets harder, since a heavier mixture raises the settling velocity while more total liquid needs more retention volume.",
+ ["Both get easier, since a heavier mixture raises the settling velocity and the retention volume is set by the time alone.",
+  "Both get harder, since a heavier mixture narrows the difference against a gas of 2.239712 lb/ft3 and the extra liquid has to be held somewhere in the same drum.",
+  "Neither moves until the mixture reaches the water density of 64.896000 lb/ft3, which is where the gas begins to sit over water rather than over oil."],
+ "The two effects pull in opposite directions and land on different dimensions of the same vessel. Neither one cancels the other."),
+
+q(1, "Name everything the terminal velocity of 1.458422 ft/s on ABANA-1 took as an input.",
+ "K at 0.300000 and the two densities, 55.171463 lb/ft3 of liquid and 2.239712 lb/ft3 of gas.",
+ ["K at 0.300000, the two densities, and the droplet size the mist extractor is rated to remove, which is what separates a mesh pad row from a vane pack row in the published table.",
+  "K at 0.300000, the liquid density of 55.171463 lb/ft3 and the actual gas rate of 4.825708 ft3/s, since a velocity has to know how much gas is arriving before it can be a velocity.",
+  "K at 0.300000, the two densities and the diameter of 2.052551 ft."],
+ "Three inputs and nothing else: the hardware through K, and the two fluids through the densities. No droplet size, no viscosity, no vessel dimension and no rate appears in it."),
+
+q(2, "Why is the settling velocity forgiving of a small error in the liquid density and unforgiving of one in the gas density?",
+ "The liquid density is more than twenty times the larger, so the same error in lb/ft3 is a far smaller share of it.",
+ ["The gas density appears twice in the expression and the liquid density once, so the same proportional error in the gas moves the answer further.",
+  "The gas density is the one that moves with pressure and temperature, so an error in it compounds.",
+  "The liquid density is a rate-weighted mixture that already damps an error in either component."],
+ "Put a percent on each and the two move the velocity by the same amount in opposite directions, because the gas appearing twice exactly offsets the liquid being larger. The asymmetry is in lb/ft3: one figure is 55.171463 and the other 2.239712, so a pound per cubic foot is a rounding error on the liquid and nearly half the gas."),
+
+q(3, "AGBAMI settles at 3.549130 ft/s where ABANA-1 settles at 1.458422 ft/s. Of its two density terms, which did more of that work?",
+ "The gas density at 1.276898 lb/ft3 against 2.239712.",
+ ["The liquid density at 59.632353 lb/ft3 against 55.171463, because the density difference is the numerator under the square root and a heavier mixture widens it directly.",
+  "Neither of them. The two velocities differ because K differs, 0.525000 against 0.300000, and the densities on the two streams are close enough to leave the ratio where it was.",
+  "Both equally, since the gas density appears in two places and the liquid density in one, and the AGBAMI liquid is heavier by about the proportion that its gas is lighter."],
+ "A lighter gas raises the velocity through both of its occurrences. The liquid moved much less: 59.632353 against 55.171463 is a small change beside 1.276898 against 2.239712."),
+
+q(1, "souders0.45 carries the largest K of the three published cases at 0.450000 and returns the slowest velocity at 1.423025 ft/s. What overtook the K advantage?",
+ "Its gas at 5.000000 lb/ft3, twice the 2.500000 of souders0.35 and more than six times the 0.800000 of souders0.18.",
+ ["Its liquid at 55.000000 lb/ft3, which sits below the 62.400000 of souders0.18 and therefore gives it the smallest density difference of the three published cases.",
+  "Its pressure, which is not stated on the row and is the hidden variable behind 5.000000 lb/ft3.",
+  "Nothing overtook it. 1.423025 ft/s is the fastest of the three and the rows are ordered by K."],
+ "The three velocities sit within about a tenth of a foot per second of each other while K runs from 0.180000 to 0.450000. K does not decide the answer on its own."),
+
+q(2, "Of the three published settling cases, the one with no mist extractor returns the fastest velocity, 1.579494 ft/s. What does that warn a designer against?",
+ "Justifying a mist extractor on vessel size alone, since these three cases would size within a tenth or so of each other at equal rates.",
+ ["Reading a case at 62.400000 lb/ft3 of liquid as a real stream, since that is fresh water.",
+  "Comparing cases at different K values at all, since the table cannot be read across its rows.",
+  "Using a bare drum in low-pressure service, where the 0.800000 lb/ft3 gas made this case fast."],
+ "The bare drum case here is a low-pressure service and the high-K case is a high-pressure one. Pressure moves the gas density, and the gas density moves the velocity hard through the square root."),
+
+q(0, "A run reports { error: \"settling needs a positive K and a liquid denser than the gas\" }. What state has the method met?",
+ "The density difference has gone to zero or turned negative, so the square root has nothing real to return.",
+ ["K arrived as zero or below, which is the first of the two conditions the message names and the only one a user can produce by typing, since a density is read off the stream record.",
+  "The gas density was entered in the units of the liquid one, which this engine can detect.",
+  "The vessel was sized at a diameter where the gas velocity exceeds the settling velocity, so the margin fell below 1 and the settling step reported the state behind it."],
+ "It arrives as data rather than as a throw, because the inputs were valid and the method has no answer for the state they describe. Near the critical region of a rich gas the two phases really do converge."),
+
+q(3, "Rather than accept { error: \"a positive settling velocity is needed\" }, a user sizes on a settling velocity of a thousandth of a foot per second. What has the resulting diameter got behind it?",
+ "A state the method has already said it cannot describe.",
+ ["A conservative basis, since the area is the rate over the velocity and a smaller velocity always produces the larger and therefore the safer of the two candidate vessels.",
+  "The same answer the engine would have given, because the area is dominated by an actual gas rate of 4.825708 ft3/s and a velocity that small changes very little in the division.",
+  "A refusal further down, because the vertical sizing step tests the velocity against the one the fluids imply and rejects any figure inconsistent with the two densities."],
+ "The required area is the rate over the velocity, and dividing by zero would report a vessel of infinite diameter. The error string is the answer."),
+
+q(1, "Is 1.458422 ft/s the speed at which a drop in the ABANA-1 separator actually falls?",
+ "No. It is a design allowable built to be compared against a gas velocity, and its K was fitted to observed carryover behaviour.",
+ ["Yes. A terminal velocity is the speed a drop settles at once drag balances its weight.",
+  "Yes for the drop size the mesh pad is rated at, and no for any other, which is why the table carries six rows and why each arrangement has a coefficient of its own.",
+  "No. It is the gas velocity at the 2.000000 ft vessel, 1.536071 ft/s, rounded."],
+ "A real drop of a stated diameter falling through a stated viscosity is a different calculation. This one takes K and the two densities and nothing else."),
+
+q(2, "Which part of a Souders-Brown velocity carries an unchecked provenance, and which part is ordinary physics?",
+ "The K, because a base row is read from a table and then derated by a rule the module records as customary practice with an unchecked published form. The densities are ordinary physics.",
+ ["The densities, because a mixture of 55.171463 lb/ft3 is weighted by rates that were measured rather than derived, and a measured rate is the weakest figure on the row.",
+  "Neither part. The expression is published and the six base rows are published, so the whole velocity stands on the same footing as any other correlation in this course.",
+  "The square root, because that is the step turning a ratio of densities into a velocity, and the constant making those units work is named by no source in the module."],
+ "0.300000 on ABANA-1 is a derated 0.350000 and 0.525000 on AGBAMI is a derated 0.550000. Knowing which half is a table and which is physics is most of the skill in reading one of these figures."),
+
+q(0, "A stream looks similar to souders0.18 on the page, so a reviewer quotes 1.579494 ft/s for it. What is wrong with that?",
+ "That velocity is the answer for a liquid of 62.400000 and a gas of 0.800000 lb/ft3 at K 0.180000, and the answer to nothing else.",
+ ["Nothing is wrong with it, since ABANA-1 at 1.458422 ft/s sits between souders0.35 and souders0.45.",
+  "The case is synthetic, so its velocity is an oracle figure rather than an engine figure.",
+  "The case is horizontal and the stream is vertical, so the orientations do not match."],
+ "Confirming that a stream lands where the cases bracketing it suggest is a cheap sanity check and the only legitimate use of a case belonging to another vessel. Quoting its velocity is a different act."),
+
+emit(Q, '/root/fc-wip-separation/banks/fc1b_m04.json')
+finish()

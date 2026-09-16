@@ -1,0 +1,305 @@
+{
+  "app_slug": "separation",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-three-phases-in-one-vessel",
+      "title": "Three Phases in One Vessel",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-split-the-retentions-imply",
+          "title": "The split the retentions imply",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-interface-at-its-exact-height",
+          "title": "The interface at its exact height",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-level-somebody-pins",
+          "title": "A level somebody pins",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-retention-lengths",
+          "title": "Two retention lengths",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-three-phase-sizing-demands",
+          "title": "What three-phase sizing demands",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-droplets-and-verdicts",
+      "title": "Droplets and Verdicts",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-stokes-between-two-liquids",
+          "title": "Stokes between two liquids",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-water-out-of-the-oil",
+          "title": "Water out of the oil",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-oil-out-of-the-water",
+          "title": "Oil out of the water",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-residence-in-the-sized-vessel",
+          "title": "Residence in the sized vessel",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-verdict-that-used-to-fail-open",
+          "title": "A verdict that used to fail open",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-family-of-vessels",
+      "title": "The Family of Vessels",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-every-row-and-its-reasons",
+          "title": "Every row, and its reasons",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-smallest-one-that-works",
+          "title": "The smallest one that works",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-three-statuses",
+          "title": "Three statuses",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-band-is-an-input",
+          "title": "The band is an input",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-judging-a-layout",
+      "title": "Judging a Layout",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-counts-as-a-check",
+          "title": "What counts as a check",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-layout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-items-nobody-placed",
+          "title": "The items nobody placed",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-layout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-complete-is-not-pass",
+          "title": "Complete is not pass",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-layout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-rankings-that-disagree",
+          "title": "Two rankings that disagree",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-layout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-nothing-checked-is-not-a-pass",
+          "title": "Nothing checked is not a pass",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "fc-layout-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-what-the-method-does-not-know",
+      "title": "What the Method Does Not Know",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-derating-held-for-the-literature",
+          "title": "A derating held for the literature",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-settling-velocity-borrowed",
+          "title": "The settling velocity borrowed",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-tables-and-labels-without-a-source",
+          "title": "Tables and labels without a source",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "fc-layout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-goldens-that-are-not-measurements",
+          "title": "Goldens that are not measurements",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

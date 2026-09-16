@@ -175,6 +175,11 @@ export const PANELS = {
   'ec-plan-explorer': React.lazy(() => import('@/components/course/panels/fdp/PlanExplorer')),
   'ec-schedule-explorer': React.lazy(() => import('@/components/course/panels/fdp/ScheduleExplorer')),
   'ec-value-explorer': React.lazy(() => import('@/components/course/panels/fdp/ValueExplorer')),
+
+  // FC1 Separation & Slug Catching
+  'fc-separator-explorer': React.lazy(() => import('@/components/course/panels/separation/SeparatorExplorer')),
+  'fc-slug-explorer': React.lazy(() => import('@/components/course/panels/separation/SlugExplorer')),
+  'fc-layout-explorer': React.lazy(() => import('@/components/course/panels/separation/LayoutExplorer')),
 };
 
 export function resolvePanel(id) {
