@@ -42,7 +42,7 @@
 //   beside it.
 //
 // AND THE SEVENTY EIGHT SHIPPED LESSONS. They were written from
-// /root/pd-wip-flowassurance/digest.txt, so a lab value that disagrees with
+// tools/course-waves/flowassurance/digest.txt, so a lab value that disagrees with
 // that file breaks a lesson that is already written. The last block below
 // reads the shipped digest where it is available and checks the lab against
 // the lines the lessons quote, at the digest's own printed precision.
@@ -52,6 +52,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as L from './flowAssuranceLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const G = L.GOLDEN;
@@ -1449,15 +1450,23 @@ describe('the lab is pure, deterministic, and hands out fresh rows', () => {
 // 20. AGREEMENT WITH THE SHIPPED DIGEST.
 // ---------------------------------------------------------------------------
 
-const DIGEST_PATH = '/root/pd-wip-flowassurance/digest.txt';
-const digestAvailable = fs.existsSync(DIGEST_PATH);
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'flowassurance';
+const DIGEST_PATH = waveInput(WAVE_NAME, 'digest.txt');
+// The digest is committed under tools/course-waves, so the block below always
+// runs. It used to skip itself whenever the wave directory was absent, which on
+// every machine but its author's meant this whole agreement check passed
+// without comparing anything.
 
-describe.skipIf(!digestAvailable)('AGREEMENT WITH THE SHIPPED DIGEST that the 78 lessons quote', () => {
-  // A lab value that disagrees with /root/pd-wip-flowassurance/digest.txt
+describe('AGREEMENT WITH THE SHIPPED DIGEST that the 78 lessons quote', () => {
+  // A lab value that disagrees with tools/course-waves/flowassurance/digest.txt
   // breaks a lesson that is already written. Each entry pulls ONE line out of
   // the shipped file by an anchor the digest prints, reads the numbers off it,
   // and checks the lab against them at the digest's own printed precision.
-  const lines = digestAvailable ? fs.readFileSync(DIGEST_PATH, 'utf8').split('\n') : [];
+  const lines = fs.readFileSync(DIGEST_PATH, 'utf8').split('\n');
   const NUM = /-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/g;
   // Read the numbers AFTER the anchor only. Anchors carry digits of their own,
   // a diameter or a length or a fluid name, and a hyphen in a name reads as a

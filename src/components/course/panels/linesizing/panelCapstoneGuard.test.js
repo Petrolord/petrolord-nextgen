@@ -32,9 +32,15 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as L from './linesizingLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const FIELDS_JSON = '/root/fc-wip-linesizing/fields.json';
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'linesizing';
+const FIELDS_JSON = waveInput(WAVE_NAME, 'fields.json');
 const LEARNING_PAGE = path.resolve(HERE, '../../../../pages/apps/LineSizingLearningPage.jsx');
 
 const panelSources = fs

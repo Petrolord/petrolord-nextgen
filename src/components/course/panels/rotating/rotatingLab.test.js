@@ -1,5 +1,5 @@
 // Every value the FC3 lab exposes to a panel, a lesson or the grader is pinned
-// here against the teaching digest (/root/fc-wip-rotating/digest.txt), which is
+// here against the teaching digest (tools/course-waves/rotating/digest.txt), which is
 // itself nothing but the Pump Station Designer's and the Compressor Station
 // Designer's return values on the published goldens and on the teaching fields
 // OKONO P-1201 and SOKU K-2101.
@@ -12,7 +12,7 @@
 // digest.txt section by section and then whole.
 //
 // THE EIGHTEEN GRADED FIELDS of the ESCRAVOS, BONGA and BONNY capstone are
-// pinned separately and EXACTLY against /root/fc-wip-rotating/fields.json,
+// pinned separately and EXACTLY against tools/course-waves/rotating/fields.json,
 // READ FROM THE FILE.
 //
 // Then the gates:
@@ -51,21 +51,48 @@ import { execFileSync } from 'node:child_process';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import * as LAB_NS from './rotatingLab.js';
+import { waveDir, waveInput, mirrorDir, liveWaveDir } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const L = LAB_NS;
 const LAB = Object.fromEntries(Object.entries(L));
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../../../../..');
-const WAVE = '/root/fc-wip-rotating';
-const MIRROR = path.join(ROOT, 'tools/course-waves/rotating');
-const DIGEST = path.join(WAVE, 'digest.txt');
-const FIELDS_JSON = path.join(WAVE, 'fields.json');
-const DUMP_MJS = path.join(WAVE, 'fc3_dump.mjs');
-const FIELDS_MJS = path.join(WAVE, 'fc3_fields.mjs');
-const CAPSTONE_MJS = path.join(WAVE, 'fc3_fields_capstone.mjs');
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'rotating';
+const WAVE = waveDir(WAVE_NAME);
+const MIRROR = mirrorDir(WAVE_NAME);
+// The live wave directory, when this runs on a machine that has one. It is what
+// the MIRROR GATE below compares the committed copy against, and it is null on
+// a CI runner.
+const LIVE_WAVE = liveWaveDir(WAVE_NAME);
+const DIGEST = waveInput(WAVE_NAME, 'digest.txt');
+const FIELDS_JSON = waveInput(WAVE_NAME, 'fields.json');
+const DUMP_MJS = waveInput(WAVE_NAME, 'fc3_dump.mjs');
+const FIELDS_MJS = waveInput(WAVE_NAME, 'fc3_fields.mjs');
+const CAPSTONE_MJS = waveInput(WAVE_NAME, 'fc3_fields_capstone.mjs');
 const LAB_SOURCE = () => fs.readFileSync(path.join(HERE, 'rotatingLab.js'), 'utf8');
 const PANEL_FILES = ['PumpExplorer.jsx', 'SuctionExplorer.jsx', 'CompressorExplorer.jsx'];
+
+/**
+ * A panel source, PROVEN to be there before anything is asserted about it.
+ *
+ * The gates below walk PANEL_FILES. They used to open each one with
+ * `if (!fs.existsSync(p)) return;`, so a renamed or deleted panel made the
+ * assertion inside the loop vanish and the test pass. A gate that empties
+ * itself when its subject goes missing is the defect these gates exist to
+ * catch, so a name in PANEL_FILES that is not on disk is a failure here.
+ */
+const panelFile = (file) => {
+  const p = path.join(HERE, file);
+  expect(fs.existsSync(p), `PANEL_FILES names ${file}, which is not in ${HERE}: `
+    + 'either the panel moved and the list is stale, or the panel is gone. '
+    + 'Until the list is corrected every gate over PANEL_FILES checks nothing.').toBe(true);
+  return p;
+};
 
 // ---------------------------------------------------------------------------
 // The digest's formatting, verbatim from fc3_dump.mjs.
@@ -768,11 +795,31 @@ describe('the digest on disk, the in-repo mirror and the teaching fields', () =>
     const files = ['digest.txt', 'fields.json', 'precision.json', 'fc3_dump.mjs', 'fc3_fields.mjs', 'fc3_fields_capstone.mjs', 'fc3_capstone.mjs', 'wave.json', 'structure.py',
       'gen_course.py', 'gen_golive.py', 'gen_seeds.sh', 'dryrun_fc3.sh', 'apply_fc3_rotating.sh', 'verify_sql.py',
       'hdr_beginner.txt', 'hdr_intermediate.txt', 'hdr_advanced.txt'];
+    // FIRST, every file is committed and carries something. A byte comparison
+    // says nothing about a file that is absent from both sides, and a list that
+    // has quietly shrunk compares fewer files each time, so the count is pinned.
+    expect(files).toHaveLength(18);
     files.forEach((f) => {
-      const a = fs.readFileSync(path.join(WAVE, f), 'utf8');
-      const b = fs.readFileSync(path.join(MIRROR, f), 'utf8');
-      expect(b, `tools/course-waves/rotating/${f} has fallen behind the wave directory`).toBe(a);
+      const q = path.join(MIRROR, f);
+      expect(fs.existsSync(q), `tools/course-waves/rotating/${f} is not committed`).toBe(true);
+      expect(fs.statSync(q).size, `tools/course-waves/rotating/${f} is empty`).toBeGreaterThan(0);
     });
+    // THEN the comparison, against the live wave directory when this machine has
+    // one. A CI runner has none, and there the gate states the other true thing:
+    // that the files every gate above read ARE the committed ones, so all of them
+    // are statements about what ships.
+    if (LIVE_WAVE) {
+      files.forEach((f) => {
+        const a = fs.readFileSync(path.join(LIVE_WAVE, f), 'utf8');
+        const b = fs.readFileSync(path.join(MIRROR, f), 'utf8');
+        expect(b, `tools/course-waves/rotating/${f} has fallen behind ${LIVE_WAVE}`).toBe(a);
+      });
+      process.stdout.write(`mirror gate: ${files.length} file(s) compared byte for byte against ${LIVE_WAVE}\n`);
+    } else {
+      expect(path.resolve(WAVE), 'this suite did not read the committed copy').toBe(path.resolve(MIRROR));
+      process.stdout.write(`mirror gate: no live wave directory on this machine, so the `
+        + `${files.length} committed file(s) were confirmed present and are the ones this suite read\n`);
+    }
   });
 
   it('the teaching fields are copied verbatim from fc3_fields.mjs, which fc3_dump.mjs imports', () => {
@@ -1167,8 +1214,7 @@ describe('THE REFUSAL GATE: every refusal is the engine\'s own returned message'
   it('NO refusal message is written as a literal in a panel either', () => {
     allSoft().forEach((r) => {
       PANEL_FILES.forEach((file) => {
-        const p = path.join(HERE, file);
-        if (!fs.existsSync(p)) return;
+        const p = panelFile(file);
         expect(fs.readFileSync(p, 'utf8').includes(r.error), `${file} retypes: ${r.label}`).toBe(false);
       });
     });
@@ -1223,8 +1269,7 @@ describe('THE HELD GATE: the eight held quantities are marked, shown and never g
 
   it('each panel shows the wording that marks a held quantity unverified', () => {
     PANEL_FILES.forEach((file) => {
-      const p = path.join(HERE, file);
-      if (!fs.existsSync(p)) return;
+      const p = panelFile(file);
       const text = fs.readFileSync(p, 'utf8');
       expect(text, `${file} does not carry the held marker`).toContain(L.HELD_MARKER);
     });
@@ -1386,7 +1431,7 @@ describe('the ESCRAVOS, BONGA and BONNY capstone reproduces fields.json exactly'
   // being quoted. Tighten any tolerance below its class floor by hand and this
   // fails, which is the control that was run on all eighteen.
   it('THE ANSWERABILITY GATE: every graded field survives being quoted at the precision the course prints', () => {
-    const declared = JSON.parse(fs.readFileSync(path.join(WAVE, 'precision.json'), 'utf8'));
+    const declared = JSON.parse(fs.readFileSync(waveInput(WAVE_NAME, 'precision.json'), 'utf8'));
     const classes = Object.entries(declared);
     expect(classes.length, 'precision.json declares no classes').toBeGreaterThan(0);
     const seen = new Set();
@@ -1595,8 +1640,7 @@ describe('THE LEAK GATE: no teaching number may be a graded capstone answer', ()
   it('every number PRINTED IN A PANEL SOURCE stands clear of a graded answer', () => {
     const targets = L.leakGuardTargets(CAPSTONE_FIELDS);
     PANEL_FILES.forEach((file) => {
-      const p = path.join(HERE, file);
-      if (!fs.existsSync(p)) return;
+      const p = panelFile(file);
       const text = fs.readFileSync(p, 'utf8');
       const literals = (text.match(/-?\d+(?:\.\d+)?/g) || []).map(Number).filter(Number.isFinite);
       const hits = literals.map((v) => ({ v, t: L.leakGuardHit(v, targets) })).filter((x) => x.t)
@@ -1632,15 +1676,14 @@ describe('THE PROSE SWEEP: the lab\'s own comments are swept for claims the code
     ['pumps.js', 'compression.js', 'gasProperties.js'].forEach((m) => expect(comments).toContain(m));
     // And the vintage they are vendored at, which is the one the wave states.
     expect(comments).toContain('4fa37e6');
-    expect(fs.readFileSync(path.join(WAVE, 'wave.json'), 'utf8')).toContain('4fa37e6');
+    expect(fs.readFileSync(waveInput(WAVE_NAME, 'wave.json'), 'utf8')).toContain('4fa37e6');
     // No P label anywhere: nothing in this course is a distribution.
     expect(src).not.toMatch(/\bP10\b|\bP50\b|\bP90\b/);
   });
 
   it('every panel source is swept the same way', () => {
     PANEL_FILES.forEach((file) => {
-      const p = path.join(HERE, file);
-      if (!fs.existsSync(p)) return;
+      const p = panelFile(file);
       const text = fs.readFileSync(p, 'utf8');
       expect(text, `${file} carries an em dash or an en dash`).not.toMatch(/[–—]/);
       expect(text, `${file} carries a percentile label`).not.toMatch(/\bP10\b|\bP50\b|\bP90\b/);

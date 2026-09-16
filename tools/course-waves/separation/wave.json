@@ -1,0 +1,30 @@
+{
+ "slug": "separation",
+ "prefix": "fc1",
+ "name": "Separation & Slug Catching",
+ "goldens": [
+  "facilities/goldens/separator_cases.json",
+  "facilities/goldens/spacing_cases.json"
+ ],
+ "constants": {
+  "62.4": "water density lb/ft3 at specific gravity 1",
+  "141.5": "API gravity numerator",
+  "131.5": "API gravity offset",
+  "5.614583333333333": "ft3 per barrel",
+  "86400": "seconds per day",
+  "14.7": "atmospheric pressure psi",
+  "1440": "minutes per day",
+  "520": "standard temperature degR",
+  "459.67": "Rankine offset",
+  "9.80665": "gravity m/s2",
+  "6371008.8": "earth radius m",
+  "0.12": "the K floor",
+  "100": "percent"
+ },
+ "repo": "/root/wt-fc1-nextgen",
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3"
+ ]
+}

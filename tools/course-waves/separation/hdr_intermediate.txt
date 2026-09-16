@@ -1,0 +1,39 @@
+-- ============================================================================
+-- FC1 PROFESSIONAL DEEP SEED: Separation & Slug Catching, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE HORIZONTAL VESSEL AND THE PLOT. A circle cut by a
+-- level, and the areas, the gas height and the chord that follow; the two
+-- length requirements, the one that controls and the slenderness that falls
+-- out; gas capacity in the gas space, its margin and its verdict; slug
+-- catchers as a vessel and as a harp of fingers, sized from a working volume
+-- that is larger than the slug; and distances on a site, where a table figure
+-- is a table somebody copied and a flare or pool fire setback is computed
+-- from its own duty.
+--
+-- THE ENGINE FACT THIS TIER OWNS. Gas can only control a horizontal vessel
+-- that is already failing. The gas length is the velocity ratio times the gas
+-- height and the capacity rule caps that ratio at 1, so every published case
+-- where gas controls is a case where gasCapacityOk is false. A reader who
+-- expects the gas length to be the binding one on a healthy vessel has the
+-- verdict backwards.
+--
+-- THE TRAP THE TIER IS BUILT ON. Half full is an assumption, not a property.
+-- ABANA-2 at 8.000000 ft needs 23.270539 ft of length at a level of 0.500000
+-- and 46.113917 ft at 0.300000, the same duty in a vessel twice as long,
+-- because the level is an input a dump valve can move.
+--
+-- WHAT THE PROFESSIONAL AUDIT CAUGHT, and it is the shape of this tier's
+-- hazard. An exam stem called the heater treater's 9.3696 m the smallest
+-- shortfall on the plot. The plot's smallest is 1.7933 m, the pump pair the
+-- course teaches everywhere else as the small breach a reader scanning for
+-- large numbers walks past. 9.3696 m is the smallest of the four RADIATION
+-- breaches, and the stem now says so.
+--
+-- The only numbers that travel from this tier to the next are the
+-- cross-section geometry, the two length requirements and the layout check's
+-- four answers.
+-- ============================================================================

@@ -1,0 +1,395 @@
+# EC5 Capital Portfolio & Cost Control. Teaching digest.
+# Portfolio money is million USD to four decimals; probabilities and ratios to six; AFE money is whole units of the AFE currency (USD here); percents to four decimals.
+
+# SECTION 1: The portfolio engine, what it models and what it refuses (owned by Associate m01)
+
+- Risked EMV per project = pos x npv_p50 - (1 - pos) x fail_cost, pos the chance of success (0 to 1, default 1), fail_cost the loss if it fails (0 or more, default 0).
+- The optimizer funds each project in full or not at all (a 0/1 knapsack) and maximises the summed risked EMV with total capex within the limit on its grid.
+- Grid: 1 million USD per cell when the limit and every candidate capex are whole numbers and the limit is at most 5000; otherwise limit / 2000 per cell, each project weighing max(1, round(capex / cell)) cells.
+- A project with risked EMV of 0 or less is never funded; money may be left unspent.
+- Risk summary: emv and stdDev in closed form; probLoss, p90 (the low case, the 10th percentile of simulated portfolio NPV) and p10 (the high case) from a seeded Monte Carlo, default seed 20260829, default iterations 10000.
+- P-labels follow the exceedance convention on an NPV outcome: P90 is the low case, P10 the high case. A capex, a cost or a probability never carries a P-label.
+
+Refusals (published optimizeRefusals, engine messages verbatim):
+- negativeCapexRefused: PortfolioInputError: "Project "B" has a negative capex (-150); capex must be 0 or more"
+- negativeCapexUnnamed: PortfolioInputError: "Project "1" has a negative capex (-0.5); capex must be 0 or more"
+
+- published posAboveOneClamps: {"capex":10,"fail_cost":30,"id":"a","name":"a","npv_p50":80,"pos":1.4} gives risked EMV 80.0000 (golden 80.0000).
+- published posBelowZeroClamps: {"capex":10,"fail_cost":30,"id":"a","name":"a","npv_p50":80,"pos":-0.2} gives risked EMV -30.0000 (golden -30.0000).
+- published negativeFailCostIsZero: {"capex":10,"fail_cost":-30,"id":"a","name":"a","npv_p50":80,"pos":0.5} gives risked EMV 40.0000 (golden 40.0000).
+- published nonNumericPosIsDefault: {"capex":10,"fail_cost":30,"id":"a","name":"a","npv_p50":80,"pos":"n/a"} gives risked EMV 80.0000 (golden 80.0000).
+- published missingNpvIsZero: {"capex":10,"fail_cost":8,"id":"a","pos":0.25} gives risked EMV -6.0000 (golden -6.0000).
+- probe, npv_p50 80 and fail_cost 30 with pos left out: risked EMV 80.0000.
+- probe, npv_p50 80 and fail_cost 30 with pos null: risked EMV 80.0000.
+- probe, npv_p50 80 and fail_cost 30 with pos typed as an empty string "": risked EMV -30.0000.
+- probe, npv_p50 80 and fail_cost 30 with pos typed as "n/a": risked EMV 80.0000.
+# Commentary: an absent or null pos defaults to 1 (certain success) and a non-numeric one such as "n/a" is also read as 1, but an empty string is the number 0 and is read as certain failure (finding EC5-6).
+- probe, a project with capex "abc" beside one with capex 40 at a limit of 100: funded T + U, total capex 40.0000, total EMV 80.0000. A non-numeric capex is neither refused nor flagged; it counts as capex 0 and weighs one grid cell (finding EC5-7).
+# Commentary: the unnamed refusal names the project by its position counted from 0, so "Project "1"" is the second project in the list.
+
+# SECTION 2: Risking a project, the OKONO inventory (owned by Associate m02)
+
+| project | name | capex | npv_p50 | npv_p10 | npv_p90 | pos | fail_cost | risked EMV | success spread | mixture sd |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| OK-1 | Infill drilling | 120.0000 | 95.0000 | 150.0000 | 50.0000 | 0.950000 | 10.0000 | 89.7500 | 39.0153 | 44.3821 |
+| OK-2 | Gas compression | 180.0000 | 130.0000 | 190.0000 | 80.0000 | 0.900000 | 20.0000 | 115.0000 | 42.9168 | 60.6850 |
+| OK-3 | Exploration well | 90.0000 | 420.0000 | 700.0000 | 210.0000 | 0.250000 | 85.0000 | 41.2500 | 191.1747 | 238.6507 |
+| OK-4 | Waterflood | 240.0000 | 210.0000 | 320.0000 | 120.0000 | 0.800000 | 40.0000 | 160.0000 | 78.0305 | 121.9467 |
+| OK-5 | Workovers | 60.0000 | 38.0000 | 55.0000 | 22.0000 | 1.000000 | 0.0000 | 38.0000 | 12.8750 | 12.8750 |
+| OK-6 | Satellite tie-back | 310.0000 | 360.0000 | 560.0000 | 190.0000 | 0.550000 | 120.0000 | 144.0000 | 144.3564 | 261.6970 |
+(The success spread is (npv_p10 - npv_p90) / 2.5631, the normal-equivalent standard deviation from the entered percentiles; the mixture sd is the square root of the engine's projectMoments variance.)
+OK-3 by hand: 0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500 (engine). Its success-case NPV of 420.0000 is not its value: the EMV is 0.098214 of it (derived).
+
+- published unrisked: {"capex":100,"id":"a","name":"a","npv_p50":250} gives risked EMV 250.0000 (golden 250.0000).
+- published risked: {"capex":100,"fail_cost":50,"id":"a","name":"a","npv_p50":300,"pos":0.3} gives risked EMV 55.0000 (golden 55.0000).
+- published posZero: {"capex":10,"fail_cost":30,"id":"a","name":"a","npv_p50":80,"pos":0} gives risked EMV -30.0000 (golden -30.0000).
+- published successStdDev explicitStddev: {"npv_p10":200,"npv_p90":50,"npv_stddev":40} gives 40.0000 (golden 40.0000).
+- published successStdDev percentileFallback: {"npv_p10":200,"npv_p90":50} gives 58.5229 (golden 58.5229).
+- published successStdDev invertedPercentiles: {"npv_p10":50,"npv_p90":200} gives 0.0000 (golden 0.0000).
+- published successStdDev zeroStddevFallsBack: {"npv_p10":200,"npv_p90":50,"npv_stddev":0} gives 58.5229 (golden 58.5229).
+
+# SECTION 3: Choosing under a budget (owned by Associate m03)
+
+| capex limit | funded set | total capex | total risked EMV | total success NPV | unspent | resolution | overLimit |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 300.0000 | OK-1 + OK-2 | 300.0000 | 204.7500 | 225.0000 | 0.0000 (derived) | 1.0000 | false |
+| 450.0000 | OK-1 + OK-3 + OK-4 | 450.0000 | 291.0000 | 725.0000 | 0.0000 (derived) | 1.0000 | false |
+| 600.0000 | OK-1 + OK-2 + OK-4 + OK-5 | 600.0000 | 402.7500 | 473.0000 | 0.0000 (derived) | 1.0000 | false |
+| 750.0000 | OK-1 + OK-2 + OK-3 + OK-4 + OK-5 | 690.0000 | 444.0000 | 893.0000 | 60.0000 (derived) | 1.0000 | false |
+| 1000.0000 | OK-1 + OK-2 + OK-3 + OK-4 + OK-5 + OK-6 | 1000.0000 | 588.0000 | 1253.0000 | 0.0000 (derived) | 1.0000 | false |
+
+Ranking OKONO by risked EMV per million USD of capex (derived):
+- OK-1: 0.747917
+- OK-4: 0.666667
+- OK-2: 0.638889
+- OK-5: 0.633333
+- OK-6: 0.464516
+- OK-3: 0.458333
+Filling a 450.0000 limit greedily down that ranking funds OK-1 + OK-4 + OK-5 at capex 420.0000 and risked EMV 287.7500 (derived); the optimizer funds OK-1 + OK-3 + OK-4 at 291.0000.
+# Commentary: the optimizer keeps the first best set it builds and replaces it only with a strictly larger EMV, so the order projects are entered decides between tied sets; the result reports one set and no alternatives, and the risk summary is simulated for that set only.
+At 750.0000 the optimizer leaves 60.0000 unspent (derived): no remaining project fits, and OK-6 alone costs 310.0000.
+
+- published classic450: limit 450.0000; projects A capex 100.0000 risked EMV 60.0000; B capex 200.0000 risked EMV 100.0000; C capex 300.0000 risked EMV 120.0000; D capex 150.0000 risked EMV 90.0000; engine set A + B + D, capex 450.0000, EMV 250.0000; golden optimal sets [["A","B","D"]].
+- published riskedVsSure: limit 100.0000; projects X capex 100.0000 risked EMV 20.0000; Y capex 100.0000 risked EMV 50.0000; engine set Y, capex 100.0000, EMV 50.0000; golden optimal sets [["Y"]].
+- published negativeNeverForced: limit 200.0000; projects bad capex 50.0000 risked EMV -20.0000; good capex 50.0000 risked EMV 30.0000; engine set good, capex 50.0000, EMV 30.0000; golden optimal sets [["good"]].
+- published zeroEmvExcluded: limit 500.0000; projects zero capex 30.0000 risked EMV 0.0000; good capex 50.0000 risked EMV 30.0000; engine set good, capex 50.0000, EMV 30.0000; golden optimal sets [["good"]].
+- published negativeEmvHugeBudget: limit 10000.0000; projects neg capex 20.0000 risked EMV -44.0000; good capex 50.0000 risked EMV 30.0000; better capex 70.0000 risked EMV 45.0000; engine set good + better, capex 120.0000, EMV 75.0000; golden optimal sets [["good","better"]].
+- published limitBelowEveryProject: limit 30.0000; projects A capex 50.0000 risked EMV 60.0000; B capex 80.0000 risked EMV 100.0000; engine set none, capex 0.0000, EMV 0.0000; golden optimal sets [[]].
+- published tieIdenticalProjects: limit 100.0000; projects twinA capex 100.0000 risked EMV 50.0000; twinB capex 100.0000 risked EMV 50.0000; engine set twinA, capex 100.0000, EMV 50.0000; golden optimal sets [["twinA"],["twinB"]].
+- published tieDifferentComposition: limit 100.0000; projects A capex 100.0000 risked EMV 80.0000; B capex 40.0000 risked EMV 40.0000; C capex 60.0000 risked EMV 40.0000; engine set A, capex 100.0000, EMV 80.0000; golden optimal sets [["A"],["B","C"]].
+- published exactFit: limit 500.0000; projects A capex 100.0000 risked EMV 60.0000; B capex 200.0000 risked EMV 130.0000; C capex 300.0000 risked EMV 170.0000; D capex 150.0000 risked EMV 90.0000; engine set B + C, capex 500.0000, EMV 300.0000; golden optimal sets [["B","C"]].
+
+# SECTION 4: The efficient frontier (owned by Associate m04)
+
+OKONO frontier at limit 450.0000 (capex, best risked EMV):
+| point | capex | EMV | EMV gained over the previous point | capex added | EMV per extra million USD |
+| --- | --- | --- | --- | --- | --- |
+| 0 | 0.0000 | 0.0000 | none | none | none |
+| 1 | 60.0000 | 38.0000 | 38.0000 | 60.0000 | 0.633333 |
+| 2 | 90.0000 | 41.2500 | 3.2500 | 30.0000 | 0.108333 |
+| 3 | 120.0000 | 89.7500 | 48.5000 | 30.0000 | 1.616667 |
+| 4 | 180.0000 | 127.7500 | 38.0000 | 60.0000 | 0.633333 |
+| 5 | 210.0000 | 131.0000 | 3.2500 | 30.0000 | 0.108333 |
+| 6 | 240.0000 | 160.0000 | 29.0000 | 30.0000 | 0.966667 |
+| 7 | 270.0000 | 169.0000 | 9.0000 | 30.0000 | 0.300000 |
+| 8 | 300.0000 | 204.7500 | 35.7500 | 30.0000 | 1.191667 |
+| 9 | 360.0000 | 249.7500 | 45.0000 | 60.0000 | 0.750000 |
+| 10 | 420.0000 | 287.7500 | 38.0000 | 60.0000 | 0.633333 |
+| 11 | 450.0000 | 291.0000 | 3.2500 | 30.0000 | 0.108333 |
+(The last three columns are derived from consecutive rows.)
+Last point 450.0000, 291.0000: the optimum, OK-1 + OK-3 + OK-4.
+
+OKONO frontier at limit 600.0000 (capex, best risked EMV):
+| point | capex | EMV | EMV gained over the previous point | capex added | EMV per extra million USD |
+| --- | --- | --- | --- | --- | --- |
+| 0 | 0.0000 | 0.0000 | none | none | none |
+| 1 | 60.0000 | 38.0000 | 38.0000 | 60.0000 | 0.633333 |
+| 2 | 90.0000 | 41.2500 | 3.2500 | 30.0000 | 0.108333 |
+| 3 | 120.0000 | 89.7500 | 48.5000 | 30.0000 | 1.616667 |
+| 4 | 180.0000 | 127.7500 | 38.0000 | 60.0000 | 0.633333 |
+| 5 | 210.0000 | 131.0000 | 3.2500 | 30.0000 | 0.108333 |
+| 6 | 240.0000 | 160.0000 | 29.0000 | 30.0000 | 0.966667 |
+| 7 | 270.0000 | 169.0000 | 9.0000 | 30.0000 | 0.300000 |
+| 8 | 300.0000 | 204.7500 | 35.7500 | 30.0000 | 1.191667 |
+| 9 | 360.0000 | 249.7500 | 45.0000 | 60.0000 | 0.750000 |
+| 10 | 420.0000 | 287.7500 | 38.0000 | 60.0000 | 0.633333 |
+| 11 | 450.0000 | 291.0000 | 3.2500 | 30.0000 | 0.108333 |
+| 12 | 480.0000 | 313.0000 | 22.0000 | 30.0000 | 0.733333 |
+| 13 | 510.0000 | 329.0000 | 16.0000 | 30.0000 | 0.533333 |
+| 14 | 540.0000 | 364.7500 | 35.7500 | 30.0000 | 1.191667 |
+| 15 | 600.0000 | 402.7500 | 38.0000 | 60.0000 | 0.633333 |
+(The last three columns are derived from consecutive rows.)
+Last point 600.0000, 402.7500: the optimum, OK-1 + OK-2 + OK-4 + OK-5.
+
+The set behind each frontier point at 600.0000 (derived: every subset of OKONO whose capex and risked EMV equal the point):
+- point 0: none
+- point 1: OK-5
+- point 2: OK-3
+- point 3: OK-1
+- point 4: OK-1 + OK-5
+- point 5: OK-1 + OK-3
+- point 6: OK-4
+- point 7: OK-1 + OK-3 + OK-5
+- point 8: OK-1 + OK-2
+- point 9: OK-1 + OK-4
+- point 10: OK-1 + OK-4 + OK-5
+- point 11: OK-1 + OK-3 + OK-4
+- point 12: OK-2 + OK-4 + OK-5
+- point 13: OK-1 + OK-3 + OK-4 + OK-5
+- point 14: OK-1 + OK-2 + OK-4
+- point 15: OK-1 + OK-2 + OK-4 + OK-5
+From 450.0000 to 600.0000 the optimum gains 111.7500 of risked EMV for 150.0000 more capex (derived).
+Two budgets on one frontier: at 450.0000 the funded set is OK-1 + OK-3 + OK-4; at 600.0000 it is OK-1 + OK-2 + OK-4 + OK-5. OK-3 is funded at the smaller budget and dropped at the larger one, so the optimal sets are not nested.
+
+# SECTION 5: The grid under the answer (owned by Associate m05)
+
+- published rawDollars: limit 450000000.0000, resolution 225000.000000; projects A capex 100000000.0000 EMV 60.0000; B capex 200000000.0000 EMV 100.0000; C capex 300000000.0000 EMV 120.0000; D capex 150000000.0000 EMV 90.0000.
+  grid cells 2000; cell weights A 444, B 889, C 1333, D 667 (derived: max(1, round(capex / resolution))); unspent 0.0000 (derived).
+  engine set A + B + D, capex 450000000.0000, EMV 250.0000, overLimit false, overLimitBy 0.0000; exact optimum (golden) EMV 250.0000 on [["A","B","D"]]; gap 0.0000 (golden); set changed by the grid false.
+- published nonIntegerLimit: limit 450.5000, resolution 0.225250; projects A capex 100.0000 EMV 60.0000; B capex 200.0000 EMV 100.0000; C capex 300.0000 EMV 120.0000; D capex 150.0000 EMV 90.0000.
+  grid cells 2000; cell weights A 444, B 888, C 1332, D 666 (derived: max(1, round(capex / resolution))); unspent 0.5000 (derived).
+  engine set A + B + D, capex 450.0000, EMV 250.0000, overLimit false, overLimitBy 0.0000; exact optimum (golden) EMV 250.0000 on [["A","B","D"]]; gap 0.0000 (golden); set changed by the grid false.
+- published gridOvershoot: limit 6000.0000, resolution 3.000000; projects A capex 4000.0000 EMV 500.0000; B capex 2002.0000 EMV 300.0000; C capex 1995.0000 EMV 280.0000.
+  grid cells 2000; cell weights A 1333, B 667, C 665 (derived: max(1, round(capex / resolution))); unspent 0.0000 (derived).
+  engine set A + B, capex 6002.0000, EMV 800.0000, overLimit true, overLimitBy 2.0000; exact optimum (golden) EMV 780.0000 on [["A","C"]]; gap 20.0000 (golden); set changed by the grid true.
+- published gridUndershoot: limit 6000.0000, resolution 3.000000; projects W capex 1499.0000 EMV 200.0000; X capex 1499.0000 EMV 210.0000; Y capex 1499.0000 EMV 220.0000; Z capex 1502.0000 EMV 230.0000.
+  grid cells 2000; cell weights W 500, X 500, Y 500, Z 501 (derived: max(1, round(capex / resolution))); unspent 1500.0000 (derived).
+  engine set X + Y + Z, capex 4500.0000, EMV 660.0000, overLimit false, overLimitBy 0.0000; exact optimum (golden) EMV 860.0000 on [["W","X","Y","Z"]]; gap -200.0000 (golden); set changed by the grid true.
+- published freeProjectZeroLimit: limit 0.0000, resolution 1.000000; projects free capex 0.0000 EMV 10.0000.
+  grid cells 0; cell weights free 1 (derived: max(1, round(capex / resolution))); unspent 0.0000 (derived).
+  engine set none, capex 0.0000, EMV 0.0000, overLimit false, overLimitBy 0.0000; exact optimum (golden) EMV 10.0000 on [["free"]]; gap -10.0000 (golden); set changed by the grid true.
+- published freeProjectTightLimit: limit 100.0000, resolution 1.000000; projects free capex 0.0000 EMV 10.0000; A capex 100.0000 EMV 60.0000.
+  grid cells 100; cell weights free 1, A 100 (derived: max(1, round(capex / resolution))); unspent 0.0000 (derived).
+  engine set A, capex 100.0000, EMV 60.0000, overLimit false, overLimitBy 0.0000; exact optimum (golden) EMV 70.0000 on [["free","A"]]; gap -10.0000 (golden); set changed by the grid true.
+- published freeProjectSlack: limit 101.0000, resolution 1.000000; projects free capex 0.0000 EMV 10.0000; A capex 100.0000 EMV 60.0000.
+  grid cells 101; cell weights free 1, A 100 (derived: max(1, round(capex / resolution))); unspent 1.0000 (derived).
+  engine set free + A, capex 100.0000, EMV 70.0000, overLimit false, overLimitBy 0.0000; exact optimum (golden) EMV 70.0000 on [["free","A"]]; gap 0.0000 (golden); set changed by the grid false.
+The overshoot is now flagged (overLimit, overLimitBy) and still happens; the undershoot and the one cell charged to a free project are unchanged (findings D2 and D4).
+
+# SECTION 6: An AFE and its lines, OFON-1 (owned by Professional m01)
+
+OFON-1: currency USD, window 2027-02-01 to 2027-11-30.
+| code | description | budget | commitment | actual | entered forecast | progress percent |
+| --- | --- | --- | --- | --- | --- | --- |
+| DRL-01 | Rig and drilling services | 14200000 | 2600000 | 9800000 | none | 72.0000 |
+| CSG-02 | Casing and tubulars | 3900000 | 0 | 4300000 | none | 100.0000 |
+| CMT-03 | Cementing | 1250000 | 300000 | 640000 | 1400000 | 55.0000 |
+| LOG-04 | Logging and testing | 2100000 | 900000 | 350000 | none | 20.0000 |
+| CMP-05 | Completion | 5600000 | 1200000 | 0 | none | 0.0000 |
+Invoices: 2027-02-20 3100000; 2027-04-10 5200000; 2027-06-05 4400000; 2027-07-18 2390000; invoice total 15090000 (derived).
+Totals (engine): budget 27050000, commitments 5000000, actuals 15090000.
+The metrics read actuals from the cost lines; the S-curve reads actuals from invoices. On OFON-1 the two agree by construction; they need not.
+
+# SECTION 7: One forecast rule (owned by Professional m02)
+
+itemForecast: the entered forecast when it is positive, otherwise the larger of the budget and actual + commitment.
+| code | budget | actual + commitment | entered forecast | itemForecast | rule used | line variance (budget - itemForecast) |
+| --- | --- | --- | --- | --- | --- | --- |
+| DRL-01 | 14200000 | 12400000 (derived) | none | 14200000 | budget | 0 (derived) |
+| CSG-02 | 3900000 | 4300000 (derived) | none | 4300000 | actual + commitment | -400000 (derived) |
+| CMT-03 | 1250000 | 940000 (derived) | 1400000 | 1400000 | entered | -150000 (derived) |
+| LOG-04 | 2100000 | 1250000 (derived) | none | 2100000 | budget | 0 (derived) |
+| CMP-05 | 5600000 | 1200000 (derived) | none | 5600000 | budget | 0 (derived) |
+AFE totals (engine): EAC 27600000, variance at completion -550000 (negative means an overrun).
+- published "suite test: entered forecast": items [{"budget":100,"commitment":0,"actual":0,"forecast":140,"progress":0}]; engine EAC 140.0000, variance -40.0000.
+- published "suite test: under budget forecasts the budget": items [{"budget":100,"commitment":10,"actual":20,"progress":0}]; engine EAC 100.0000, variance 0.0000.
+- published "suite test: committed past the budget": items [{"budget":100,"commitment":60,"actual":70,"progress":0}]; engine EAC 130.0000, variance -30.0000.
+- published "negative entered forecast is ignored (the S-curve ignores it too)": items [{"budget":100,"actual":20,"commitment":0,"forecast":-50,"progress":10}]; engine EAC 100.0000, variance 0.0000.
+- CMT-03's budget, commitment and actual with entered forecast 0: itemForecast 1250000.
+- CMT-03's budget, commitment and actual with entered forecast 1 (below the 940000 already spent and committed): itemForecast 1.
+- CMT-03's budget, commitment and actual with entered forecast 900000 (below the 940000 already spent and committed): itemForecast 900000.
+- CMT-03's budget, commitment and actual with no entered forecast: itemForecast 1250000.
+# Commentary: a forecast of 0 is not positive and falls back to the formula; any positive entered forecast is taken as typed, even one below the money already spent and committed (finding EC5-1). A line with no entered forecast can never show a saving: its forecast is at least its budget, so its variance is 0 or negative. OFON-1's three variances of 0 are that floor, not evidence of being on budget.
+# App surface: before EC5-0 the screens disagreed on this rule: the Cost Breakdown table showed the budget as the forecast, the PDF and Excel variance was budget less actual, the Top 5 used budget less (forecast or actual), and editing a line copied the budget into its forecast. After the EC5-0 Suite repair the dashboard tiles, the Cost Breakdown table, the PDF and Excel exports and the Top 5 all use this one rule, and editing a line no longer copies the budget into its forecast.
+
+# SECTION 8: Earned value (owned by Professional m03)
+
+| code | budget | progress percent | earned value (budget x progress) | actual |
+| --- | --- | --- | --- | --- |
+| DRL-01 | 14200000 | 72.0000 | 10224000 (derived) | 9800000 |
+| CSG-02 | 3900000 | 100.0000 | 3900000 (derived) | 4300000 |
+| CMT-03 | 1250000 | 55.0000 | 687500 (derived) | 640000 |
+| LOG-04 | 2100000 | 20.0000 | 420000 (derived) | 350000 |
+| CMP-05 | 5600000 | 0.0000 | 0 (derived) | 0 |
+Engine: earned value 15231500, CPI 1.009377 (earned value over actuals), percent spent 55.7856, percent complete 56.3087.
+Planned value is the budget times the elapsed fraction of the window at the as-of date; SPI is earned value over planned value, and null where planned value is zero, except that an AFE whose budget is 0 reports SPI 1 by a guard that fires first (the published empty AFE below).
+- published "suite test: weighted earned value": engine EV 110.0000, AC 0.0000, CPI 1.000000, SPI 0.275000.
+- published "suite test: CPI 1.25": engine EV 100.0000, AC 80.0000, CPI 1.250000, SPI 0.500000.
+- published "progress beyond 100 percent earns beyond the budget": engine EV 150.0000, AC 90.0000, CPI 1.666667, SPI 1.500000.
+- published "suite test: empty AFE": engine EV 0.0000, AC 0.0000, CPI 1.000000, SPI 1.000000.
+
+# SECTION 9: The as-of date (owned by Professional m04)
+
+| as of | time progress | planned value | earned value | SPI | CPI |
+| --- | --- | --- | --- | --- | --- |
+| 2027-01-15 | 0.000000 | 0 | 15231500 | null | 1.009377 |
+| 2027-02-01 | 0.000000 | 0 | 15231500 | null | 1.009377 |
+| 2027-06-30 | 0.493377 | 13345861 | 15231500 | 1.141290 | 1.009377 |
+| 2027-08-15 | 0.645695 | 17466060 | 15231500 | 0.872063 | 1.009377 |
+| 2027-11-30 | 1.000000 | 27050000 | 15231500 | 0.563087 | 1.009377 |
+| 2028-01-10 | 1.000000 | 27050000 | 15231500 | 0.563087 | 1.009377 |
+Whole days in the OFON-1 window 2027-02-01 to 2027-11-30: 302 (derived). Elapsed whole days at 2027-06-30: 149; at 2027-08-15: 195 (derived). Time progress is elapsed over total: 0.493377 and 0.645695 (derived), matching the engine column.
+Only planned value, time progress and SPI move with the as-of date; earned value, actuals, CPI and EAC are read from the lines as entered.
+# Commentary: on the end day itself time progress is 1, so the whole budget is planned by the end date. An AFE with no dates still falls back to time progress 1 in the engine (the published no-dates case below): EC5-0 did not change that fallback; the repaired Suite labels SPI unavailable for such an AFE.
+# App surface: before EC5-0 the engine read the clock for time progress, so SPI on a live AFE changed from day to day, and before the start date it reported SPI as Infinity when value had been earned or NaN when not.
+On the start day no whole day has elapsed, so time progress is 0, planned value 0 and SPI null, exactly as before the start.
+- published "asOf mid-window: SPI against 256 of 729 days": window 2026-01-01 to 2027-12-31, asOf 2026-09-14; engine time progress 0.351166, SPI 1.139063.
+- published "asOf before the start: SPI null": window 2026-01-01 to 2027-12-31, asOf 2025-12-31; engine time progress 0.000000, SPI null.
+- published "asOf on the start day: no whole day elapsed, SPI null": window 2026-01-01 to 2027-12-31, asOf 2026-01-01; engine time progress 0.000000, SPI null.
+- published "asOf after the end: time progress 1": window 2026-01-01 to 2027-12-31, asOf 2028-06-30; engine time progress 1.000000, SPI 0.940000.
+- published "no dates: time progress 1": window none to none, asOf default; engine time progress 1.000000, SPI 0.250000.
+# App surface: before EC5-0 the AFE wizard asked for no dates, so time progress fell back to 1 and SPI equalled percent complete divided by 100 (earned value over the whole budget); the repaired wizard asks for the window and the dashboard passes today as the as-of date.
+
+# SECTION 10: The S-curve (owned by Professional m05)
+
+OFON-1 S-curve as of 2027-08-15:
+| point | label | Planned | Planned added since the previous point (derived) | Actual | Forecast |
+| --- | --- | --- | --- | --- | --- |
+| 0 | Feb 27 | 0 | none | 0 | 0 |
+| 1 | Mar 27 | 2507947 | 2507947 | 3100000 | 3100000 |
+| 2 | Apr 27 | 5284603 | 2776656 | 3100000 | 3100000 |
+| 3 | May 27 | 7971689 | 2687086 | 8300000 | 8300000 |
+| 4 | Jun 27 | 10748344 | 2776655 | 8300000 | 8300000 |
+| 5 | Jul 27 | 13435430 | 2687086 | 12700000 | 12700000 |
+| 6 | Aug 27 | 16212086 | 2776656 | 15090000 | 15090000 |
+| 7 | Sep 27 | 18988742 | 2776656 | null | 19374834 |
+| 8 | Oct 27 | 21675828 | 2687086 | null | 22116556 |
+| 9 | Nov 27 | 24452483 | 2776655 | null | 24949669 |
+# Commentary: a label is the month and a two-digit year ("Feb 27" is February 2027, not the 27th), and each point sits on the start date plus whole months (here the 1st). Actual at a point counts invoices dated on or before that day, so the 2027-07-18 invoice is not in the "Jul 27" point (12700000) and appears at "Aug 27". A month with more days adds more plan. After the as-of date Forecast ignores the actuals entirely and is the EAC spread from the start, so its jump at the first projected point comes from switching formulas, not from spending.
+# Commentary: this digest is built with the timezone pinned to UTC. The engine parses the window as UTC midnight but steps months and prints labels in local time, so the same AFE drawn in a timezone west of UTC (for example America/Los_Angeles) labels its first point "Jan 27" and shifts every Planned value (finding EC5-5); Lagos, Tokyo and UTC agree with this table.
+# App surface: before EC5-0 the curve kept walking past the end date to the current month (a 2020 AFE had 81 points on 2026-09-14 and gained one a month); it now stops at the end date.
+10 points, one per calendar month from the start date to the end date. The last Planned point is 24452483 against a budget of 27050000: the monthly buckets stop before the plan reaches the budget.
+After the as-of date Forecast is the EAC spread linearly from the start, so it jumps from the last actual 15090000 to 19374834 at the first projected point.
+- published "suite test: 1200 over 2020 with two invoices": window 2020-01-01 to 2020-12-31, asOf default, lines [{"budget":1200}], invoices [{"invoice_date":"2020-02-15","amount":100},{"invoice_date":"2020-06-15","amount":250}]; 12 points; first {"date":"Jan 20","Planned":0,"Actual":0,"Forecast":0}; last {"date":"Dec 20","Planned":1101,"Actual":350,"Forecast":350}.
+- published "past window, asOf mid-year: actuals to June, forecast projected after": window 2020-01-01 to 2020-12-31, asOf 2020-06-30, lines [{"budget":1200,"actual":200,"commitment":100,"forecast":1500}], invoices [{"invoice_date":"2020-02-15","amount":100},{"invoice_date":"2020-06-15","amount":250}]; 12 points; first {"date":"Jan 20","Planned":0,"Actual":0,"Forecast":0}; last {"date":"Dec 20","Planned":1101,"Actual":null,"Forecast":1377}.
+- published "future window ending on a bucket: the last forecast point is the whole EAC": window 2090-01-01 to 2091-01-01, asOf default, lines [{"budget":1200,"actual":900,"commitment":600},{"budget":500,"forecast":650},{"budget":300,"forecast":-10}], invoices []; 13 points; first {"date":"Jan 90","Planned":0,"Actual":null,"Forecast":0}; last {"date":"Jan 91","Planned":2000,"Actual":null,"Forecast":2450}.
+- published "past window, all invoices unpaid: none dated": window 2020-01-01 to 2020-12-31, asOf default, lines [{"budget":1200}], invoices [{"amount":100},{"invoice_date":null,"amount":200}]; 12 points; first {"date":"Jan 20","Planned":0,"Actual":0,"Forecast":0}; last {"date":"Dec 20","Planned":1101,"Actual":0,"Forecast":0}.
+
+# SECTION 11: Portfolio risk by simulation (owned by Expert m01)
+
+The published riskMethod cases, each run by the engine at its stated seed and iterations, beside the exact answer and the normal approximation the engine used before EC5-0:
+| case | kind | exact P(loss) | normal approximation P(loss) | engine P(loss) | standard error | z | exact P90 outcome | normal P90 | engine P90 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| singleWildcat | independent-binary | 0.700000 | 0.365832 | 0.696100 | 0.004583 | 0.8510 | -50.0000 | -150.5560 | -50.0000 |
+| identical2 | independent-binary | 0.490000 | 0.313855 | 0.487100 | 0.004999 | 0.5801 | -100.0000 | -180.7001 | -100.0000 |
+| identical3 | independent-binary | 0.343000 | 0.276275 | 0.343100 | 0.004747 | 0.0211 | -150.0000 | -191.0335 | -150.0000 |
+| identical6 | independent-binary | 0.117649 | 0.200464 | 0.118100 | 0.003222 | 0.1400 | -300.0000 | -173.5074 | -300.0000 |
+| identical8 | independent-binary | 0.255298 | 0.166046 | 0.251400 | 0.004360 | 0.8941 | -50.0000 | -141.4002 | -50.0000 |
+| threeMixed | independent-binary | 0.315000 | 0.266646 | 0.312800 | 0.004645 | 0.4736 | -155.0000 | -193.4633 | -155.0000 |
+| normalPairIndependent | pos1-normal | 0.001571 | 0.001571 | 0.001100 | 0.000396 | 1.1887 | 101.8974 (continuous) | 101.8945 | 101.6224 |
+| normalPairCorrelated | pos1-normal | 0.013570 | 0.013570 | 0.012700 | 0.001157 | 0.7518 | 75.5968 (continuous) | 75.5929 | 74.9360 |
+| normalThreeCorrelated | pos1-normal | 0.231959 | 0.231959 | 0.234200 | 0.004221 | 0.5309 | -33.7398 (continuous) | -33.7428 | -34.6018 |
+| mixtureWithSpread | independent-mixture | 0.079328 | 0.133629 | 0.079800 | 0.002702 | 0.1748 | 1.5838 (continuous) | -12.4175 | 1.7148 |
+| comonotoneIdentical3 | comonotone | 0.700000 | 0.365832 | 0.704800 | 0.004583 | 1.0474 | -150.0000 | -451.6680 | -150.0000 |
+| comonotoneMixed | comonotone | 0.600000 | 0.358293 | 0.607000 | 0.004899 | 1.4289 | -155.0000 | -463.0493 | -155.0000 |
+| copulaIdentical3 | copula-binary | 0.469561 | 0.337249 | 0.473300 | 0.004991 | 0.7493 | -150.0000 | -338.5074 | -150.0000 |
+| copulaThreeMixed | copula-binary | 0.401631 | 0.315422 | 0.404800 | 0.004902 | 0.6465 | -155.0000 | -305.0614 | -155.0000 |
+(exact, normal approximation, standard error and z are golden fields; the engine columns are this run.)
+Inputs of the method cases (correlation, then each project as pos / npv_p50 / fail_cost, with its success spread where one is given):
+- singleWildcat: rho 0.000000, seed 20260829, iterations 10000; 0.300000 / 300.0000 / 50.0000.
+- identical2: rho 0.000000, seed 20260829, iterations 10000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000.
+- identical3: rho 0.000000, seed 20260829, iterations 10000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000.
+- identical6: rho 0.000000, seed 20260829, iterations 10000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000.
+- identical8: rho 0.000000, seed 20260829, iterations 10000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000.
+- threeMixed: rho 0.000000, seed 20260829, iterations 10000; 0.300000 / 300.0000 / 50.0000; 0.250000 / 400.0000 / 60.0000; 0.400000 / 250.0000 / 45.0000.
+- normalPairIndependent: rho 0.000000, seed 20260829, iterations 10000; 1.000000 / 100.0000 / 0.0000 P10 160.0000 P90 40.0000; 1.000000 / 80.0000 / 0.0000 P10 130.0000 P90 30.0000.
+- normalPairCorrelated: rho 0.800000, seed 20260829, iterations 10000; 1.000000 / 100.0000 / 0.0000 P10 160.0000 P90 40.0000; 1.000000 / 80.0000 / 0.0000 P10 130.0000 P90 30.0000.
+- normalThreeCorrelated: rho 0.500000, seed 20260829, iterations 10000; 1.000000 / 20.0000 / 0.0000 sd 30.0000; 1.000000 / 10.0000 / 0.0000 sd 25.0000; 1.000000 / 15.0000 / 0.0000 sd 20.0000.
+- mixtureWithSpread: rho 0.000000, seed 20260829, iterations 10000; 0.500000 / 100.0000 / 40.0000 sd 20.0000; 1.000000 / 50.0000 / 0.0000 sd 10.0000.
+- comonotoneIdentical3: rho 1.000000, seed 20260829, iterations 10000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000.
+- comonotoneMixed: rho 1.000000, seed 20260829, iterations 10000; 0.300000 / 300.0000 / 50.0000; 0.250000 / 400.0000 / 60.0000; 0.400000 / 250.0000 / 45.0000.
+- copulaIdentical3: rho 0.500000, seed 20260829, iterations 10000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000; 0.300000 / 300.0000 / 50.0000.
+- copulaThreeMixed: rho 0.350000, seed 20260829, iterations 10000; 0.300000 / 300.0000 / 50.0000; 0.250000 / 400.0000 / 60.0000; 0.400000 / 250.0000 / 45.0000.
+
+Draw order per iteration: F1, F2, then for each project in array order e1, e2, all from randomNormal on mulberry32(seed). z1 = sqrt(rho) F1 + sqrt(1 - rho) e1 decides success (normalCDF(z1) < pos); z2 = sqrt(rho) F2 + sqrt(1 - rho) e2 scales the success spread. Every normal is drawn whether or not it is used.
+
+OKONO funded sets through the risk summary (correlation 0, the optimizer default; default seed and iterations):
+| limit | set | emv | stdDev | engine P(loss) | engine P90 | engine P10 | seed | iterations | what the normal approximation would have said, P(loss) (derived) | normal P90 (derived: emv - 1.2816 x stdDev) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 300.0000 | OK-1 + OK-2 | 204.7500 | 75.1827 | 0.007900 | 100.7698 | 295.7106 | 20260829 | 10000 | 0.003231 | 108.3959 |
+| 450.0000 | OK-1 + OK-3 + OK-4 | 291.0000 | 271.6522 | 0.123600 | -18.3574 | 738.1043 | 20260829 | 10000 | 0.142035 | -57.1494 |
+| 600.0000 | OK-1 + OK-2 + OK-4 + OK-5 | 402.7500 | 143.8374 | 0.001800 | 200.3575 | 580.5960 | 20260829 | 10000 | 0.002555 | 218.4079 |
+| 750.0000 | OK-1 + OK-2 + OK-3 + OK-4 + OK-5 | 444.0000 | 278.6455 | 0.012800 | 138.2474 | 879.3797 | 20260829 | 10000 | 0.055533 | 86.8879 |
+| 1000.0000 | OK-1 + OK-2 + OK-3 + OK-4 + OK-5 + OK-6 | 588.0000 | 382.2678 | 0.035800 | 120.7015 | 1099.4568 | 20260829 | 10000 | 0.062001 | 98.0856 |
+
+# SECTION 12: Correlation (owned by Expert m02)
+
+OKONO funded set at 600.0000 (OK-1 + OK-2 + OK-4 + OK-5): project sds 44.3821 / 60.6850 / 121.9467 / 12.8750; sum of variances 20689.2080; square of the summed sds 57546.6428 (derived).
+| rho | stdDev | independentStdDev | spread formula sqrt(sum var + rho x ((sum sd)^2 - sum var)) (derived) | emv | P(loss) | P90 | P10 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 0.000000 | 143.8374 | 143.8374 | 143.8374 | 402.7500 | 0.001800 | 200.3575 | 580.5960 |
+| 0.300000 | 178.1753 | 143.8374 | 178.1753 | 402.7500 | 0.008500 | 171.8711 | 610.9466 |
+| 0.600000 | 206.8905 | 143.8374 | 206.8905 | 402.7500 | 0.021900 | 137.2208 | 642.2010 |
+| 0.900000 | 232.0795 | 143.8374 | 232.0795 | 402.7500 | 0.049500 | 99.0437 | 666.8894 |
+| 1.000000 | 239.8888 | 143.8374 | 239.8888 | 402.7500 | 0.059000 | 87.9316 | 674.8353 |
+# Commentary: two models sit side by side in this table. stdDev is the closed-form moment formula with rho applied to the project outcomes; P(loss), P90 and P10 come from the simulation, where rho is applied to the latent drivers. The spread of the simulated values need not equal the stdDev printed beside them.
+Correlation widens the spread and leaves the mean alone. rho is the correlation of the latent drivers of success and of the success spread; the correlation it implies between two projects' success or failure events is lower than rho.
+- published riskMetrics correlation_0: correlation used 0.000000, stdDev 60.9438, P(loss) 0.002500; golden stdDev 60.9438.
+- published riskMetrics correlation_0p5: correlation used 0.500000, stdDev 74.4364, P(loss) 0.003000; golden stdDev 74.4364.
+- published riskMetrics correlation_1: correlation used 1.000000, stdDev 85.8336, P(loss) 0.017500; golden stdDev 85.8336.
+- published riskMetrics clampAbove: correlation used 1.000000, stdDev 85.8336, P(loss) 0.017500; golden stdDev 85.8336.
+- published riskMetrics clampBelow: correlation used 0.000000, stdDev 60.9438, P(loss) 0.002500; golden stdDev 60.9438.
+- published riskMetrics singleProject: correlation used 0.900000, stdDev 46.8183, P(loss) 0.014500; golden stdDev 46.8183.
+
+# SECTION 13: Joint venture shares (owned by Expert m03)
+
+OFON-1 budget 27050000 split by working interest:
+| party | working interest percent | share |
+| --- | --- | --- |
+| Ofon Energy | 40.0000 | 10820000 |
+| Enang Petroleum | 22.5000 | 6086250 |
+| Mfem Resources | 12.5000 | 3381250 |
+| operator | 25.0000 | 6762500 |
+partnerTotal 75.0000, valid true, note none. Shares sum to 27050000 (derived).
+Billing the actuals to date, 15090000: Ofon Energy 6036000; Enang Petroleum 3395250; Mfem Resources 1886250; operator 3772500.
+- published "suite test: 70 and 45 is more than the whole": cost 1000.00, interests [70,45]; partner amounts 700.00 / 450.00; operator share -15.0000, operator amount -150.00, valid false, note "Partner working interests total 115.00 percent, which is more than the whole. The operator share below is negative; correct the interests before billing.".
+- published "suite test: a 10 percent shortfall is valid": cost 1000.00, interests [10]; partner amounts 100.00; operator share 90.0000, operator amount 900.00, valid true, note none.
+- published "negative interest: refused, allocation still shown": cost 1000.00, interests [30,-20]; partner amounts 300.00 / -200.00; operator share 90.0000, operator amount 900.00, valid false, note "Partner "B" has a negative working interest (-20.00 percent). Correct the interests before billing.".
+- published "negative interest and a total over 100: both sentences, negative first": cost 1000.00, interests [130,-10]; partner amounts 1300.00 / -100.00; operator share -20.0000, operator amount -200.00, valid false, note "Partner "B" has a negative working interest (-10.00 percent). Correct the interests before billing. Partner working interests total 120.00 percent, which is more than the whole. The operator share below is negative; correct the interests before billing.".
+- published "suite test: no partners": cost 500.00, interests []; partner amounts none; operator share 100.0000, operator amount 500.00, valid true, note none.
+# App surface: before EC5-0 the AFE summary PDF billed two invented partners (Partner A at 30 percent and Partner B at 10 percent) whatever was saved; the repaired PDF bills the AFE's saved partners and prints the engine note when the split is invalid.
+
+# SECTION 14: Refusals and flags (owned by Expert m04)
+
+- portfolio negativeCapexRefused: PortfolioInputError: "Project "B" has a negative capex (-150); capex must be 0 or more"
+- portfolio negativeCapexUnnamed: PortfolioInputError: "Project "1" has a negative capex (-0.5); capex must be 0 or more"
+- AFE "invalid asOf: not a date": AfeInputError: "asOf is not a valid date"
+- AFE "invalid asOf: month 13": AfeInputError: "asOf is not a valid date"
+- AFE "invalid asOf: 30 February": AfeInputError: "asOf is not a valid date"
+- AFE "invalid asOf is refused even with no AFE dates": AfeInputError: "asOf is not a valid date"
+- AFE "negative progress named by code": AfeInputError: "Cost item "CMP-02" has negative progress (-20 percent). Progress runs from 0 to 100 percent."
+- AFE "negative progress named by description": AfeInputError: "Cost item "Completion" has negative progress (-0.5 percent). Progress runs from 0 to 100 percent."
+- AFE "negative progress as a string, named by index": AfeInputError: "Cost item "1" has negative progress (-12.5 percent). Progress runs from 0 to 100 percent."
+- flag: published gridOvershoot reports overLimit true, overLimitBy 2.0000 (capex 6002.0000 against 6000.0000).
+
+Repaired after this course was cut: an invoice the engine cannot date no longer reaches the S-curve at all, and the count of undated invoices is reported beside the curve, so the money is named instead of being counted from 1970 into every bucket. Repaired in EC5-0: the risk summary (simulation, seed shown), the overshoot flag, the negative capex refusal, the as-of date, SPI null, the S-curve bounded to its window, one forecast rule, negative progress refused, a negative working interest flagged. The Suite repair removed the invented partners and integrations, added AFE dates, one EAC rule on every screen and the resolution and overshoot on screen.
+Not repaired (findings, taught as properties): the grid undershoot (D4) and the free project charged a cell (D2); CPI reported as 1 before any money is spent; SPI 1 on a zero-budget AFE; time progress 1 on an AFE with no dates; an entered forecast below the money already spent taken as typed; progress above 100 percent accepted although the refusal message says progress runs from 0 to 100; a blank pos read as certain failure; a non-numeric capex neither refused nor flagged; S-curve labels and plan shifting with the viewer's timezone west of UTC; the S-curve plan stopping short of the budget and its forecast ignoring actuals after the as-of date; the correlation slider stopping at 0.9; the unused risk score.
+
+# SECTION 15: Numbers to distrust (owned by Expert m05)
+
+CPI before any spend: OFON-1 with every actual set to 0 (progress unchanged) reports CPI 1.000000 with earned value 15231500: the engine returns 1 whenever actuals are 0.
+An invoice with no date: published "past window, all invoices unpaid: none dated" (invoices [{"amount":100},{"invoice_date":null,"amount":200}]) gives a first point Actual of 0 and a last point Actual of 0. Neither invoice carries a date the engine can read, so neither reaches the curve at all, and the engine reports 2 undated invoices beside it so the money is named rather than dropped in silence.
+# Commentary: this case used to read 200 at every point. An amount whose date was null was counted from 1970, which is before any window, so it landed in every bucket and the first point reported spending from before the work began. The figure was plausible, it reconciled with nothing, and no screen said a date was missing. It is the reason this section exists.
+An overrun drawn as an underrun: OFON-1's last Forecast point on the S-curve is 24949669, below the budget of 27050000, while the EAC is 27600000 and the variance at completion -550000.
+A plan that never reaches the budget: OFON-1's last Planned point 24452483 is 2597517 short of the budget (derived).
+
+Iterations and the standard error, OKONO funded set at 450.0000:
+| seed | iterations | P(loss) | standard error sqrt(p(1 - p) / n) (derived) | P90 |
+| --- | --- | --- | --- | --- |
+| 20260829 | 1000 | 0.114000 | 0.010050 | -15.1262 |
+| 20260829 | 10000 | 0.123600 | 0.003291 | -18.3574 |
+| 20260829 | 40000 | 0.125975 | 0.001659 | -18.8524 |
+| 1 | 10000 | 0.128500 | 0.003346 | -21.8586 |
+| 2 | 10000 | 0.127700 | 0.003338 | -19.9023 |
+| 3 | 10000 | 0.119100 | 0.003239 | -15.3254 |
+A seed buys a reproducible number; iterations buy a smaller standard error. Neither buys a correct model of the projects.
+
+What a portfolio model cannot tell you, as properties of these modules: projects are funded whole; capex is spent in one period and never phased; there is no time value beyond the NPVs entered; correlation is one average number; the success spread is normal; the AFE plan is a straight line; earned value is only as good as the progress typed in.
+
+# SECTION 16: The teaching fields end to end, for the reading modules (owned by Associate m06, Professional m06 and Expert m06)
+
+- OKONO at 450.0000: OK-1 + OK-3 + OK-4, capex 450.0000, risked EMV 291.0000, P(loss) 0.123600, P90 -18.3574.
+- OKONO at 600.0000: OK-1 + OK-2 + OK-4 + OK-5, capex 600.0000, risked EMV 402.7500, P(loss) 0.001800, P90 200.3575.
+- OFON-1 as of 2027-08-15: EAC 27600000, variance -550000, EV 15231500, CPI 1.009377, SPI 0.872063.
+- OFON-1 operator share 25.0000 of 27050000: 6762500.
+

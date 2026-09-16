@@ -1,0 +1,18 @@
+{
+ "slug": "fdp",
+ "prefix": "ec6",
+ "name": "Field Development Planning",
+ "goldens": [
+  "economics/goldens/fdp_cases.json",
+  "economics/goldens/afe_cases.json"
+ ],
+ "constants": {
+  "100": "percent"
+ },
+ "repo": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen-ec6",
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3"
+ ]
+}
