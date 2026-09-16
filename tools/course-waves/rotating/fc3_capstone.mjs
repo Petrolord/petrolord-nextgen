@@ -17,6 +17,7 @@ import {
 } from '/root/fc-wip-rotating/fc3_fields_capstone.mjs';
 
 const OUT = process.env.FC3_FIELDS_OUT || '/root/fc-wip-rotating/fields.json';
+const PRECISION_OUT = process.env.FC3_PRECISION_OUT || '/root/fc-wip-rotating/precision.json';
 const ROOT = process.env.FC3_ENGINES || '/root/wt-fc3-nextgen/packages/engines';
 const P = await import(`${ROOT}/engines/facilities/pumps.js`);
 const C = await import(`${ROOT}/engines/facilities/compression.js`);
@@ -230,7 +231,32 @@ F.forEach(([, key, value, t], i) => {
   must(Math.abs(asQuoted - value) <= t,
     `${key} grades at ${t} but the digest prints it to ${dp} decimals, so a learner quoting ${asQuoted} is ${Math.abs(asQuoted - value)} out and would FAIL a correct answer`);
 });
+// THE PRECISION DECLARATION, derived here and never hand kept.
+//
+// `gradeprecision` reads a wave's stated precision off the digest header, and
+// this header states three of its four clauses with the word "decimals"
+// elided: "gas work to four (...); exponents, small factors and MMscfd to
+// nine". A word matcher sees only the six-decimal clause, reads the finest
+// precision this course prints as six, and reports the three nine-decimal
+// fields as graded finer than anything the course prints. They are not: the
+// digest prints exponent ratios, per-stage ratios and MMscfd to NINE, and
+// Expert m06/l02 tells a candidate so in those words.
+//
+// Word matching cannot settle it either way, because the word "ratio" is in
+// BOTH clauses: a pump speed ratio prints to six and a compression stage ratio
+// prints to nine. Only a per-field declaration can say which is which, so this
+// file writes one, out of the same PRINTED_DECIMALS and CLS the assertion
+// above uses. It cannot drift from the tolerances because it is the same
+// source, and a field added without a class fails the must() above first.
+const byClass = {};
+F.forEach(([, key], i) => { (byClass[CLS[i]] ||= []).push(key); });
+const PRECISION = Object.fromEntries(Object.entries(byClass).map(([cls, keys]) => [
+  cls, { decimals: PRINTED_DECIMALS[cls], match: `^(${keys.join('|')})$` },
+]));
+const PRECISION_PAYLOAD = `${JSON.stringify(PRECISION, null, 1)}\n`;
+
 fs.writeFileSync(OUT, PAYLOAD);
+fs.writeFileSync(PRECISION_OUT, PRECISION_PAYLOAD);
 
 console.log('FC3 capstone answers\n');
 console.log('ASSOCIATE, the ESCRAVOS transfer pump');
@@ -256,3 +282,5 @@ windowRows.forEach((r) => console.log(`    stage ${r.stage} ${r.pPsia.toFixed(2)
 console.log(`\nwrote ${F.length} graded fields to ${OUT}`);
 console.log(`engines root ${ROOT}`);
 console.log(`payload sha256 ${createHash('sha256').update(PAYLOAD).digest('hex')}`);
+console.log(`wrote ${Object.keys(PRECISION).length} precision classes to ${PRECISION_OUT}`);
+console.log(`precision sha256 ${createHash('sha256').update(PRECISION_PAYLOAD).digest('hex')}`);

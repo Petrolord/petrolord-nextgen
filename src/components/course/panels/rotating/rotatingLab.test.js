@@ -760,7 +760,7 @@ describe('the digest on disk, the in-repo mirror and the teaching fields', () =>
   it('THE MIRROR GATE: tools/course-waves/rotating is byte-identical to the wave directory', () => {
     // FC1 and FC2 both read /root only, so a mirror that fell behind would not
     // have been noticed by anything. This gate is the one that notices.
-    const files = ['digest.txt', 'fields.json', 'fc3_dump.mjs', 'fc3_fields.mjs', 'fc3_fields_capstone.mjs', 'fc3_capstone.mjs', 'wave.json', 'structure.py'];
+    const files = ['digest.txt', 'fields.json', 'precision.json', 'fc3_dump.mjs', 'fc3_fields.mjs', 'fc3_fields_capstone.mjs', 'fc3_capstone.mjs', 'wave.json', 'structure.py'];
     files.forEach((f) => {
       const a = fs.readFileSync(path.join(WAVE, f), 'utf8');
       const b = fs.readFileSync(path.join(MIRROR, f), 'utf8');
@@ -1362,6 +1362,41 @@ describe('the ESCRAVOS, BONGA and BONNY capstone reproduces fields.json exactly'
     expect(L.capstoneTolerances()).toEqual(
       Object.fromEntries(CAPSTONE_FIELDS.map(([, k, , t]) => [k, t])),
     );
+  });
+
+  // A GRADED FIELD A LEARNER CANNOT ANSWER FROM THE MATERIAL IS NOT A HARD
+  // FIELD, IT IS A BROKEN ONE. The tolerance lives in three places: the
+  // generator that derives it, the fields.json it writes, and the list above.
+  // The first two are checked by the mirror gate and the test above. What none
+  // of them check is whether the tolerance is answerable AT ALL, which is a
+  // different question and the one this gate asks: a figure quoted at the
+  // precision this course prints it to must grade CORRECT.
+  //
+  // precision.json is written by fc3_capstone.mjs out of the same
+  // PRINTED_DECIMALS the generator floors the tolerances with, so this is not
+  // circular in the way it looks: the generator floors, and this reads the
+  // SHIPPED fields.json back and asks whether the shipped number survives
+  // being quoted. Tighten any tolerance below its class floor by hand and this
+  // fails, which is the control that was run on all eighteen.
+  it('THE ANSWERABILITY GATE: every graded field survives being quoted at the precision the course prints', () => {
+    const declared = JSON.parse(fs.readFileSync(path.join(WAVE, 'precision.json'), 'utf8'));
+    const classes = Object.entries(declared);
+    expect(classes.length, 'precision.json declares no classes').toBeGreaterThan(0);
+    const seen = new Set();
+    CAPSTONE_FIELDS.forEach(([, key, value, tol]) => {
+      const hit = classes.filter(([, spec]) => new RegExp(spec.match).test(key));
+      expect(hit.length, `${key} is matched by ${hit.length} precision classes, not exactly one`).toBe(1);
+      const [cls, spec] = hit[0];
+      seen.add(cls);
+      // Half a unit in the last place the course prints this class, read from
+      // a literal rather than multiplied: 0.5 * 10 ** -4 is 4.9999...e-5 in
+      // binary and a tolerance is a number a human reads off a file.
+      const floor = Number(`5e-${spec.decimals + 1}`);
+      expect(tol, `${key} is graded at ${tol} but ${cls} prints to ${spec.decimals} decimals, whose half-unit is ${floor}: a correctly read figure would FAIL`).toBeGreaterThanOrEqual(floor);
+      const asQuoted = Number(value.toFixed(spec.decimals));
+      expect(Math.abs(asQuoted - value), `${key} quoted as ${asQuoted} is outside its own tolerance`).toBeLessThanOrEqual(tol);
+    });
+    expect(seen.size, 'precision.json declares a class no graded field uses').toBe(classes.length);
   });
 
   it('the capstone conditions are copied verbatim from fc3_fields_capstone.mjs', () => {
