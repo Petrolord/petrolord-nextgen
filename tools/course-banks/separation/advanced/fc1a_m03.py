@@ -7,7 +7,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 q(1, "A sweep returns a preferred diameter. Which tests produce it, and in which order are they applied?",
  "Feasible first, so the vessel carries its gas and clears its droplet verdicts, then inside the band that was passed in, and only then the smallest of whatever survived both of those tests.",
- ["Smallest first, then feasible, then in band, so the list is walked from the smallest diameter upward and the first row that answers to both flags is taken.",
+ ["Smallest first: the smallest diameter offered is taken and then tested, and a family whose smallest row fails either flag comes back with no preference at all.",
   "In band first, then the first such row in the order the diameters were supplied, which is the rule the sweep applied before FC1-0.",
   "Feasible first, then the largest surviving row, so the recommendation carries the most gas margin the vendor list can offer."],
  "ABANA-2 prefers 7.000000 ft with preferredStatus selected. Diameter drives cost and every larger feasible row also works, so smallest is an economic tie-break applied after the engineering tests.")
@@ -90,8 +90,8 @@ q(3, "d1ProbeVertical4ftGasOverloaded returns preferred null with status none-in
  "The 4.000000 ft row is inRange true and feasible false on gas capacity, while the 7.000000 ft and 8.000000 ft rows are feasible with ld-out-of-band. Feasible vessels exist, so the band is the thing to revisit.")
 
 q(1, "A sweep returns none-feasible and an engineer widens the band to bring more rows in. What will that achieve?",
- "Nothing at all, because no row in that family was ever excluded by its shape, and a band touches inRange and the reason list and reaches no further than that.",
- ["It will recover the rows that were excluded for slenderness, which on verticalNoneFeasible means the 2.000000 ft row at 21.616431 comes back into consideration.",
+ "Nothing at all, because shape alone was never what kept a row out there, and a band touches inRange and the reason list and reaches no further than that.",
+ ["It will recover the rows that were excluded for slenderness, which on verticalNoneFeasible brings the 2.000000 ft row at 21.616431 back into range and makes it the preference.",
   "It will return a preferred diameter once at least one row is in band, since a status of none-feasible is a statement about the band rather than about the vessels.",
   "It will move the status to none-in-band, which is the status a family reports once its band admits rows that do not work."],
  "verticalNoneFeasible carries a band of 1.000000 to 10.000000 already, and its 3.000000 ft and 4.000000 ft rows are inRange true and infeasible on gas capacity. Widening changes neither flag.")

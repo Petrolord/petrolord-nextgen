@@ -21,7 +21,7 @@ q(0, "Where does the four parts in a thousand between the field form and the SI 
 
 q(2, "A 500.000000 micron water drop settles at 0.017500 ft/s in 4.000000 cP oil. What does the same oil do to a 250.000000 micron drop?",
  "0.004375 ft/s, a quarter of the speed, because the settling velocity goes as the square of the droplet size.",
- ["Half the speed, because the settling velocity falls in proportion to the droplet diameter at a fixed viscosity of 4.000000 cP.",
+ ["0.008750 ft/s, half the 500.000000 micron figure, because a linear reading of the law makes the velocity fall in proportion to the droplet diameter at a fixed viscosity of 4.000000 cP.",
   "0.001575 ft/s, which is what the same oil gives at 150.000000 micron and the smallest velocity the table carries for a water drop in oil.",
   "0.017500 ft/s still, since the size sets the distance and the viscosity sets the speed."],
  "The table runs 0.017500, 0.008575, 0.004375, 0.001575 and 0.000700 ft/s at 500.000000, 350.000000, 250.000000, 150.000000 and 100.000000 micron. Halving the drop quarters the speed.")
@@ -76,7 +76,7 @@ q(3, "A report gives waterCarryover false for a three-phase vessel and no drople
  "AGBAMI clears at 500.000000 micron with 111.4796 s against 300.0000 s, and fails at 150.000000 micron with 1238.6620 s against the same residence. The vessel is identical in both runs.")
 
 q(1, "Before FC1-0 the carryunder check measured the rising oil drop against a water layer of 2.026834 ft on AGBAMI where the vessel holds 3.049149 ft. Which way did that error run?",
- "Permissive: a thinner layer is crossed sooner, so the comparison cleared on vessels that should have failed it.",
+ "Permissive: a thinner layer is crossed sooner, so the check came back with room the vessel does not give.",
  ["Conservative: a thinner layer leaves the drop less time inside the water band, so the check failed vessels that would in fact have separated the stream cleanly enough.",
   "Neither, because the same chord divisor was applied to the oil layer too and the two errors cancel.",
   "It depended on the level, since the chord equals the diameter only at a level of 0.500000."],

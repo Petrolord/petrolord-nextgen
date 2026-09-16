@@ -20,11 +20,11 @@ q(2, "A separator beside a valve requires 0.000000 m, and the engine counts that
  "ERHA carries 21 such pairs beside its 69 checks. The published case s3ZeroRequirementPairOnly reports checked 0 with zeroRequirementPairs 1, where the retired rule reported checked 1 and passed on it.")
 
 q(1, "ERHA reports checked 69, zeroRequirementPairs 21, skipped 2 and unknownPairs 12. What are the last three of those counts for?",
- "They are the reasons the layout was not fully judged, reported apart from the checks so that a reader can tell a quiet plot from an unexamined one.",
+ "They are the three things that were not comparisons, reported apart from the checks so that a reader can tell a quiet plot from an unexamined one.",
  ["They are the three categories of breach the check found, ranked from the least serious to the most serious as the engine walked the plan.",
   "They are the pairs that cleared their requirement, which is why they are kept out of the count of 69 comparisons that were made.",
   "They are counts of items rather than of pairs, so each one says how many pieces of equipment on the plan fall into that category."],
- "Complete is false on ERHA because of the 2 skipped items and the 12 unknown pairs, and it would still be false if every one of the 69 comparisons had cleared.")
+ "Complete is false on ERHA because of the 2 skipped items and the 12 unknown pairs. A pair the table scores at zero takes nothing away from coverage: s3ZeroRequirementPairOnly reports zeroRequirementPairs 1 with complete true.")
 
 q(3, "ERHA skips tk2 with reason bad-coordinates and fl2 with reason radiation-source-not-placed. What does each reason mean for the plan?",
  "One item could not be located at all, and one radiation source is missing, so the setback it would have produced was never computed.",

@@ -2,7 +2,7 @@
  {
   "prompt": "A sweep returns a preferred diameter. Which tests produce it, and in which order are they applied?",
   "options": [
-   "Smallest first, then feasible, then in band, so the list is walked from the smallest diameter upward and the first row that answers to both flags is taken.",
+   "Smallest first: the smallest diameter offered is taken and then tested, and a family whose smallest row fails either flag comes back with no preference at all.",
    "Feasible first, so the vessel carries its gas and clears its droplet verdicts, then inside the band that was passed in, and only then the smallest of whatever survived both of those tests.",
    "In band first, then the first such row in the order the diameters were supplied, which is the rule the sweep applied before FC1-0.",
    "Feasible first, then the largest surviving row, so the recommendation carries the most gas margin the vendor list can offer."
@@ -134,8 +134,8 @@
  {
   "prompt": "A sweep returns none-feasible and an engineer widens the band to bring more rows in. What will that achieve?",
   "options": [
-   "It will recover the rows that were excluded for slenderness, which on verticalNoneFeasible means the 2.000000 ft row at 21.616431 comes back into consideration.",
-   "Nothing at all, because no row in that family was ever excluded by its shape, and a band touches inRange and the reason list and reaches no further than that.",
+   "It will recover the rows that were excluded for slenderness, which on verticalNoneFeasible brings the 2.000000 ft row at 21.616431 back into range and makes it the preference.",
+   "Nothing at all, because shape alone was never what kept a row out there, and a band touches inRange and the reason list and reaches no further than that.",
    "It will return a preferred diameter once at least one row is in band, since a status of none-feasible is a statement about the band rather than about the vessels.",
    "It will move the status to none-in-band, which is the status a family reports once its band admits rows that do not work."
   ],

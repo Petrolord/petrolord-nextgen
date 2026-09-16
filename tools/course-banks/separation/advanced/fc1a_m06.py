@@ -75,12 +75,12 @@ q(0, "Why does this tier insist that a sized vessel and a judged plot are two ha
   "Because the spacing table scores a separator against a tank at 15.000000 m, which is the figure that sizes the plot the drum stands on."],
  "AGBAMI answers with a vessel of 12.311666 ft and a verdict at each droplet size. ERHA answers with 6 breaches, 2 skipped items and two rankings. Neither answer contains the other.")
 
-q(2, "The AGBAMI family prefers 7.000000 ft at a specification of 500.000000 micron and returns null with none-feasible at 150.000000 micron. What is the lesson for a procurement note?",
+q(2, "One three-phase family, swept twice at two droplet sizes, answers with a diameter once and with a null the other time. What is the lesson for a procurement note?",
  "The preference is an answer to the specification as well as to the stream, so a diameter quoted without the droplet size it was cleared at is unquotable.",
  ["The vendor list has to be widened, because a family that returns null at the tighter specification has been offered the wrong diameters for the duty it carries.",
   "The band has to be revisited, because none-feasible is the status a sweep returns once its rows fall outside the slenderness that was asked for.",
   "The 7.000000 ft vessel is the safe order in both cases, since a row that is feasible at one specification stays feasible and only its reason list changes."],
- "Every row keeps its length and slenderness between those two runs. The 7.000000 ft row is inRange true in both and carries water-carryover in the second.")
+ "The AGBAMI family prefers 7.000000 ft at 500.000000 micron and returns null with none-feasible at 150.000000 micron. Every row keeps its length and slenderness between those two runs, and the 7.000000 ft row is inRange true in both.")
 
 q(3, "A report gives the AGBAMI oil residence as 300.0000 s and the ERHA flare setback as 64.6458 m. What is the difference in what those two figures are worth?",
  "One is the 5.000000 minutes of retention typed in and read back, and one is computed from a heat release of 828000.0000 kW.",

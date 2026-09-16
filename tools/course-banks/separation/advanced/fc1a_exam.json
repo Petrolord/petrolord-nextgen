@@ -2,7 +2,7 @@
  {
   "prompt": "The interface repair moved a geometry figure and a verdict together. On AGBAMI, which verdict was reading a layer that was not in the vessel, and which way did the reading err?",
   "options": [
-   "The carryunder verdict, which was asking a rising oil drop to cross 2.026834 ft where the vessel holds 3.049149 ft of water, so the comparison cleared on drums that should have failed it.",
+   "The carryunder verdict, which was asking a rising oil drop to cross 2.026834 ft where the vessel holds 3.049149 ft of water, so every crossing it timed came out shorter than the vessel makes it.",
    "The carryover verdict, which was asking a falling water drop to cross a thicker oil layer than the drum holds, so it failed vessels that in fact separated.",
    "Both verdicts equally, since the chord divisor was applied to each layer and both crossings were shortened by the same factor.",
    "Neither verdict, since the chord rule fed the length calculation and the droplet checks were computed from the retention volumes."
@@ -217,7 +217,7 @@
    "The layout check measures centre to centre, so passing it the edge figure makes it short by half the bund."
   ],
   "answer": 3,
-  "explanation": "That was the defect the Suite layer carried, and it failed open. The pool is 18.000000 m across and the tank icon on the plan is the pool centre."
+  "explanation": "That was the defect the Suite layer carried. The pool is 18.000000 m across and the tank icon on the plan is the pool centre, so every pair measured against the bund was handed a requirement 9.0000 m too small."
  },
  {
   "prompt": "A vessel is sized, its verdicts clear and its plot reports pass true with complete false. What may be concluded?",
@@ -242,7 +242,7 @@
   "explanation": "The 6.000000 ft row is inRange true, feasible false, reasons gas-capacity at that band. A rule that takes the first row in band lets an input about shape overrule a physical test."
  },
  {
-  "prompt": "Which of these Expert answers is an input read back rather than a result?",
+  "prompt": "One figure in a proportional three-phase result was typed into the input form before the run and printed back out after it. Which one?",
   "options": [
    "The interface of 3.049149 ft, which is the depth the water share of 0.516129 was pinned at by the person who set the controller.",
    "The water share of 0.516129, which is the water cut of the stream arriving at the inlet of the vessel.",
@@ -264,15 +264,15 @@
   "explanation": "A vertical mesh pad falls from 0.350000 to 0.300000 at 600.000000 psig, and the settling velocity, the diameter, the margin and the feasibility of every row move with it."
  },
  {
-  "prompt": "The published case verticalNoneAt650psig returns K 0.125000, derated true, floored false. Why is that case worth teaching beside the floored one?",
+  "prompt": "A vessel is sized behind a mist extractor whose derated K sits a little above the floor, and the family it is swept in returns a preferred diameter. What has to travel with that preference?",
   "options": [
-   "It is the only published case where the derating produces a value between the base table figure and the floor, which is the range the rule was written for.",
-   "It shows the floor being applied without the floored flag being set, which is the reporting defect FC1-0 repaired in the K path of the engine.",
-   "It is the case a vendor override is compared against.",
-   "It reads like any robust derated value while sitting just above the floor of 0.120000, and nothing in the return says so."
+   "Nothing beyond the band it was swept in, since the K enters through the settling velocity and the gas margin printed on each row has already carried it into every feasibility flag the family reports.",
+   "The oracle ratio of 1.004184, because a K taken from the derating rule sits four parts in a thousand below the SI derivation in the same way the field form of Stokes law does on every published case.",
+   "The floored flag, which comes back true on any K this close to 0.120000 and marks the value as chosen rather than computed.",
+   "That the K is a rule of thumb held for the literature: verticalNoneAt650psig sits 0.005000 above the floor of 0.120000 and reads like any robust value, and the gas margin on every row came from it."
   ],
   "answer": 3,
-  "explanation": "At 0.01 per 100 psi, 50 psi more of operating pressure would floor it. floored is a cliff and there is no flag beside it for the approach to the cliff."
+  "explanation": "verticalNoneAt650psig returns K 0.125000 with derated true and floored false, which is 0.005000 above the floor and 50 psi of operating pressure away from being floored. The derating and the floor are held, so the uncertainty of the rule travels with every row the family reports."
  },
  {
   "prompt": "A carryunder result and a preferred diameter both come from a run made before FC1-0. What is the right handling of each?",
@@ -363,10 +363,10 @@
   "explanation": "Every published case where gas controls is a case where gasCapacityOk is false, and that is a consequence of one packaging choice rather than a fact about separation."
  },
  {
-  "prompt": "A plan contains one chemical injection skid and two items with unreadable coordinates. What does the layout check do with them?",
+  "prompt": "The ERHA plan carries one chemical injection skid, a tank whose coordinates cannot be read and a radiation source that was never placed. What does the layout check do with the three of them?",
   "options": [
    "It refuses the whole layout with an error object, because a list containing an item it cannot place is not a list of placed items in the sense the check requires.",
-   "It scores the unknown pairs at zero so the plan can be judged, and it counts the two unreadable items among the zero-requirement pairs for the same reason.",
+   "It scores the unknown pairs at zero so the plan can be judged, and it counts the two skipped items among the zero-requirement pairs for the same reason.",
    "It drops the three items and reports complete true on what remains, since a plan judged on the items that were placed is complete for those items.",
    "It records 12 unknown type pairs and 2 skipped items with their reasons, and it judges the rest of the plan."
   ],
@@ -398,7 +398,7 @@
  {
   "prompt": "A specification tightens from 500.000000 micron to 250.000000 micron. What does that ask of the vessel, in the language of the settling table?",
   "options": [
-   "Twice as long in the phase, because the settling velocity falls in proportion to the droplet diameter rather than to the square of it.",
+   "Twice as long in the phase, because a linear reading of the law halves 0.017500 ft/s to 0.008750 ft/s for a 250.000000 micron drop in the same 4.000000 cP oil.",
    "Four times as long in the phase, because 0.017500 ft/s becomes 0.004375 ft/s in 4.000000 cP oil.",
    "The same time in a thinner layer, because the crossing time depends on the layer and the specification decides only which drops are counted.",
    "Nothing, until the vessel is re-sized, because a droplet specification enters the calculation only through the length the retentions produce."
@@ -429,15 +429,15 @@
   "explanation": "Adding relief valves adds pairs to a plan and adding diameters adds rows to a family. ERHA carries 21 zero-requirement pairs beside its 69 checks."
  },
  {
-  "prompt": "Which single question does this tier ask of every figure in a design package?",
+  "prompt": "The retired Suite layer handed the layout check the pool setback of 50.5294 m measured from the bund edge, where the requirement at the tank is 59.5294 m. What did that cost on the crude tank to heater treater pair?",
   "options": [
-   "Whether it was computed, copied or refused, because a computed figure moves when its duty moves, a copied figure never moves, and a refusal names the input it is waiting for.",
-   "Whether it came from the repaired engine, since FC1-0 changed several answers and a figure from before it cannot be relied on without being run again.",
-   "Whether it has a published case behind it, since a figure with a golden has been checked against an independent implementation and a figure without one has not.",
-   "Whether it is printed to the right precision, since six decimals mark vessel work and four mark metres, kilowatts and seconds."
+   "The pair reads 9.3696 m short of the real requirement and only 0.3696 m short of the retired one, so the defect showed as a smaller number rather than as a pass.",
+   "The pair clears the retired figure outright at 50.1598 m against 50.5294 m, so the retired reading turned that breach into a pass and left the plot with 5 to report.",
+   "The pair reads 9.3696 m short either way, because the half bund falls out of a shortfall measured between the same two items on the same plan.",
+   "The pair is untouched, because a heater treater beside a tank is scored from the table at 30.000000 m rather than against a computed pool setback."
   ],
   "answer": 0,
-  "explanation": "The ERHA flare setback of 64.6458 m moves with 828000.0000 kW. The 90.0000 m to a control room does not move, and a SeparatorInputError on sgOil is a work instruction."
+  "explanation": "Every row of that comparison differs by the 9.0000 m half bund. Judged the retired way the plot still fails, 6 breaches against 6, so a reviewer saw 0.3696 m where the real shortfall is 9.3696 m and no change at all in the count."
  },
  {
   "prompt": "A three-phase result reports controlling liquid-retention with retentionPhase null, and a sweep row reports feasible true with ld-out-of-band. What do both pairs of fields illustrate?",

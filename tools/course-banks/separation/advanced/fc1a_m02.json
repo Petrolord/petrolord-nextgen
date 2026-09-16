@@ -24,7 +24,7 @@
  {
   "prompt": "A 500.000000 micron water drop settles at 0.017500 ft/s in 4.000000 cP oil. What does the same oil do to a 250.000000 micron drop?",
   "options": [
-   "Half the speed, because the settling velocity falls in proportion to the droplet diameter at a fixed viscosity of 4.000000 cP.",
+   "0.008750 ft/s, half the 500.000000 micron figure, because a linear reading of the law makes the velocity fall in proportion to the droplet diameter at a fixed viscosity of 4.000000 cP.",
    "0.001575 ft/s, which is what the same oil gives at 150.000000 micron and the smallest velocity the table carries for a water drop in oil.",
    "0.004375 ft/s, a quarter of the speed, because the settling velocity goes as the square of the droplet size.",
    "0.017500 ft/s still, since the size sets the distance and the viscosity sets the speed."
@@ -113,7 +113,7 @@
   "prompt": "Before FC1-0 the carryunder check measured the rising oil drop against a water layer of 2.026834 ft on AGBAMI where the vessel holds 3.049149 ft. Which way did that error run?",
   "options": [
    "Conservative: a thinner layer leaves the drop less time inside the water band, so the check failed vessels that would in fact have separated the stream cleanly enough.",
-   "Permissive: a thinner layer is crossed sooner, so the comparison cleared on vessels that should have failed it.",
+   "Permissive: a thinner layer is crossed sooner, so the check came back with room the vessel does not give.",
    "Neither, because the same chord divisor was applied to the oil layer too and the two errors cancel.",
    "It depended on the level, since the chord equals the diameter only at a level of 0.500000."
   ],
