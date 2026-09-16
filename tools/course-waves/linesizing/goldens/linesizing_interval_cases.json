@@ -1,0 +1,30 @@
+[
+ {
+  "dropoutBpd": 25.0,
+  "intervalDays": 4.854424444022531,
+  "maxSlugBbl": 250.0,
+  "refused": false,
+  "sweptBbl": 128.63938889943674
+ },
+ {
+  "dropoutBpd": 40.0,
+  "intervalDays": 3.5629151212759878,
+  "maxSlugBbl": 400.0,
+  "refused": false,
+  "sweptBbl": 257.4833951489605
+ },
+ {
+  "dropoutBpd": 25.0,
+  "intervalDays": 2.0,
+  "maxSlugBbl": 100.0,
+  "refused": false,
+  "sweptBbl": 50.0
+ },
+ {
+  "dropoutBpd": 25.0,
+  "intervalDays": null,
+  "maxSlugBbl": 50.0,
+  "refused": true,
+  "sweptBbl": 60.0
+ }
+]

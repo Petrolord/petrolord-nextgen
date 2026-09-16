@@ -1,0 +1,115 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC2 Associate m06, The Associate Reading. Digest section 6, the tier read end
+# to end, the capstone method, and what the next tier changes.
+
+q(1, "The Associate tier is built on six numbers about one line. What are they?",
+ "A velocity, a Reynolds number, a friction factor, a friction loss, a total loss and an erosional ceiling.",
+ ["A flow area, a velocity, a Reynolds number, a relative roughness, a friction factor and a pressure gradient, which is the chain in the order the engine runs it from the bore to the answer.",
+  "A rate, a bore, a length, a density, a viscosity and a roughness, which are the six inputs a liquid line call takes and the six the refusal message names when any of them is missing.",
+  "A velocity, a velocity head, a friction loss, a fittings loss, an elevation loss and a total, which is the pressure side of the chain with the three terms the engine keeps apart."],
+ "On OGBIA they are 2.244621 ft/s, 48431.2523, 0.0218149625, 25.660631 psi, a total of 25.660631 psi at zero rise, and 13.545709 ft/s at the continuous-service c factor."),
+
+q(3, "In the chain the engine runs, what does the friction factor consume and what does it feed?",
+ "It consumes the Reynolds number and the relative roughness, and it feeds the loss along with the length.",
+ ["It consumes the velocity and the relative roughness, and it feeds the Reynolds number, which is then compared against the two branch boundaries to settle which regime the line is in.",
+  "It consumes the Reynolds number alone, and it feeds both the friction loss and the erosional ceiling, which is why a change of bore moves the ratio as well as the pressure drop.",
+  "It consumes the velocity head and the length over the bore, and it feeds the gradient, which is the form the engine reports a loss in before the total is assembled from the three terms."],
+ "A bore gives an area, the area and the rate give a velocity, the velocity gives a Reynolds number, the Reynolds number and the relative roughness give a friction factor, and that and the length give the loss."),
+
+q(2, "A larger bore is bought for a line whose total carries all three terms. Which of the three does it change?",
+ "The friction and the fittings, both of which are built on a velocity head that falls with the square of the velocity, and not the elevation.",
+ ["All three, since every term in the return is formed from the velocity that opening the bore lowers.",
+  "The friction alone, since the fittings term is a count taken from the isometric and a count does not change.",
+  "The elevation and the friction, since a wider pipe holds a shorter column for the same volume of liquid, and the fittings term is the one that is fixed by the drawing rather than by the pipe."],
+ "Open the bore and the velocity falls, so the head falls with its square and both of the terms built on that head fall with it. The height of a static column is not something a pipe diameter can reach."),
+
+q(0, "The OGBIA line is rebored from 7.981000 in to 6.065000 in at the same duty. Of the six numbers this tier is built on, how many move?",
+ "Five of the six move with the bore. Only the erosional ceiling of 13.545709 ft/s stands still, because the bore appears nowhere inside it at all.",
+ ["All six, since the ceiling is what the line velocity is measured against and a change of bore moves the velocity first of anything.",
+  "Two, the velocity and the loss, since the Reynolds number and the friction factor are properties of the crude and the total is the loss under another name.",
+  "Three, since the velocity, the Reynolds number and the friction factor move while the loss and the total are recovered from the gradient, which the engine reports per foot."],
+ "At 6.065000 in the same duty runs at 3.886834 ft/s and spends 97.306913 psi. No bore appears in the ceiling, which reads a density and a c factor and nothing else."),
+
+q(1, "This tier has two properties that the next one does not. Name them.",
+ "Nothing in it compresses, so a barrel entering the line is a barrel leaving it, and nothing in it iterates except the friction factor, which settles before the rest of the chain reads it.",
+ ["Nothing in it compresses, and nothing in it carries a hill, since a static column belongs to the marched profiles of a later tier.",
+  "Nothing in it iterates at all, and nothing in it is read from a vendored table, since the bores and the roughnesses are computed rather than looked up.",
+  "Nothing in it is refused, and nothing in it is held for the literature, since every figure the tier prints is an engine return."],
+ "A barrel entering the line is a barrel leaving it, so 2.244621 ft/s stands at both ends. Both properties change in the next tier."),
+
+q(3, "Nothing in the OGBIA line compresses, so a barrel entering it is a barrel leaving it. What would change if it did compress?",
+ "The density would depend on the pressure, which is the quantity being solved for.",
+ ["The engine would refuse the line, since a density that varies along the run is one of the eighteen states Section 1 lists as having no answer at all in this method.",
+  "Only the erosional ceiling would move, since it is the one figure in the tier built from the density, and the friction chain reads the density solely through the Reynolds number.",
+  "Nothing in the reported numbers, since the density is taken at the inlet and the loss is reported over the whole line, so compressibility would reach the answer only through the gradient."],
+ "The velocity of 2.244621 ft/s stands at both ends because the density of 54.500000 lb/ft3 does. Let the fluid compress and the whole method changes shape."),
+
+q(0, "A graded question hands over a line and asks for a friction factor. What has to be read before the figure is used?",
+ "The regime the engine reports, because the two branches are different laws and the band between them is labelled rather than correlated.",
+ ["The relative roughness, because it is formed from the roughness and the bore and a question that states an absolute roughness has not yet stated the quantity the correlation actually reads.",
+  "The c factor, because a graded question always states one and both are reported on every row of the sweep.",
+  "The length, because the friction factor is solved over the length of the pipe it belongs to."],
+ "On OGBIA the Reynolds number of 48431.2523 is reported turbulent and the friction factor is 0.0218149625. Inside the band from 2100 to 4000 the label and the arithmetic disagree."),
+
+q(2, "Which input's unit is worth checking before any arithmetic, and why that one?",
+ "The length, because liquid work here is in feet while gas work is in miles, and the loss scales directly with the length.",
+ ["The viscosity, because it is the first input the chain consumes, so a centipoise mistaken for another unit is caught before the velocity is ever formed.",
+  "The bore, because a nominal size and a bore are both quoted in inches and both print as ordinary numbers.",
+  "The density, because it enters twice, once in the Reynolds number and once in the velocity head, so a unit error in it moves the friction factor and the loss in the same direction at once."],
+ "The engine accepts 5280.000000000 ft as a rise on a line 1.000000 mile long, so it knows the difference exactly. Both feet and miles are ordinary numbers and the answer comes back wrong by whatever the confusion was worth."),
+
+q(3, "Why does a graded erosional question in this course always state its own c factor?",
+ "Because the three published rows are held for the literature and are never graded.",
+ ["Because the three rows at 100.000000, 125.000000 and 175.000000 are overridable, so a question has to say which of them the engine was called with before the answer can be reproduced at all.",
+  "Because the recommended practice gives different c factors for liquid and for gas service, so a question about a crude line has to name which of the two families of figures it intends.",
+  "Because the c factor is the only input to the erosional velocity that the engine does not default, so a question that omitted it would receive a refusal rather than a number from the check."],
+ "A learner is never asked to supply one, only to use the one the question carries. An answer worked at a figure of its own is sound arithmetic aimed at a question nobody put, since the three rows give three different ceilings on the same fluid."),
+
+q(1, "A velocity comes back from a hand calculation wildly larger than anything the sweep reports. What is the likely cause?",
+ "One of the barrel, the day or the 144 went missing on the way from a rate in bpd to a velocity in ft/s.",
+ ["The regime was read as turbulent when the line is laminar, since the two branches give friction factors an order apart and the velocity is formed from the friction factor and the loss.",
+  "The erosional ceiling was used in place of the line velocity, since both are reported in ft/s and the ceiling of 13.545709 ft/s is several times the velocity of any sensible export line.",
+  "The bore was read from the nominal size rather than from the schedule row."],
+ "The chain from 12000.000000 bpd to 2.244621 ft/s runs through a flow area of 0.347410 ft2, the barrel of 5.6145833333333 cubic feet and the 86400.000000 seconds in a day."),
+
+q(0, "A friction factor comes back above one. What does that say about the line?",
+ "That it is laminar, so the regime is worth re-reading. The published case at 150.0000 bpd returns 4.1163843599 at a Reynolds number of 15.5476.",
+ ["That the relative roughness was entered as an absolute roughness in inches, since a value of 0.001800 in used directly as a fraction of the bore drives the wall term far past anything physical.",
+  "That the iteration failed to converge, since the turbulent law is solved by repeated substitution.",
+  "That the velocity head was included twice, since a friction factor is dimensionless to begin with."],
+ "The turbulent rows of the published cases sit at 0.0260878890, 0.0260794714 and 0.0249265571. The laminar case is the only one of the four whose friction factor is above one, and 4.1163843599 is not a figure the turbulent branch produces anywhere in this tier."),
+
+q(2, "A question asks for the friction loss and another asks for the total. When are those different questions?",
+ "Whenever a hill or a fitting list is in play. The second published case spends 56.140803 psi of friction inside a total of 153.516220 psi.",
+ ["Whenever the line is laminar, since the engine reports the fittings term against the turbulent velocity head.",
+  "Whenever the resistance sum is zero, since the engine then reports the fittings term as absent altogether.",
+  "Never, on a liquid line, since the engine keeps the three terms apart in the return and the total is reported for convenience rather than as a separate answer to a separate question."],
+ "On the level OGBIA line with no fittings the two are the same 25.660631 psi. Report the total and the terms behind it, because the question will have stated the hill or the list."),
+
+q(3, "What does this tier hold for the literature, and what does it say about it?",
+ "The three c factors, because the recommended practice calls its own figures conservative and the third row is operator practice.",
+ ["The pipe schedule and the roughness catalogue, since both are vendored tables the engine reads rather than computes, and nothing in this course stands behind the twelve bores or the four wall conditions.",
+  "The band between 2100 and 4000, since the engine computes it on the turbulent branch while labelling it transitional, and a figure computed on the wrong branch cannot be graded in any tier.",
+  "The published liquid cases, since they come from an oracle rather than from a measured pipeline."],
+ "Every graded erosional value in this course therefore states its own c factor. The discipline is to say what the method is and not to rest a conclusion on the part of it that nothing stands behind."),
+
+q(0, "A report names one bore out of a twelve-row sweep and calls it the recommendation. What has to be stated beside it?",
+ "Which criteria it applied, and the rule by which it ranked whatever survived them, because on this duty the same sweep defensibly returns two different rows as its answer.",
+ ["The pressure that row spends, since a recommendation nobody can check against a budget is not a recommendation and the totals are the only thing a sweep computes.",
+  "The c factor the erosional column was evaluated at, which is the one condition in the whole sweep that came from outside the pressure drop calculation.",
+  "The schedule, since a nominal size on its own does not name a bore, and a report that states the schedule has named exactly one row and needs nothing further."],
+ "A ranking is worth what its criteria are worth. Neither of the two applied here knows what the pipe costs, what the yard holds, what wall the rating demands or what the service does to it."),
+
+q(2, "The tier's closing lesson warns against one habit in particular. Which is it, and why?",
+ "Carrying a number to another line. Every figure belongs to a complete row, and the method travels where the numbers do not.",
+ ["Reading a refusal as a failure of the run, since a refused row stops a sizing sweep where it stands and the remaining bores have to be run again without it.",
+  "Quoting a friction factor without the Reynolds number and the relative roughness behind it, since both of those survive a change of bore and can be carried to any line built of the same steel.",
+  "Reporting the friction loss as the pressure drop, since the engine returns that term only on a bare and level line."],
+ "25.660631 psi belongs to that rate through that bore over that length on that roughness. The same duty through 6.065000 in spends 97.306913 psi."),
+
+emit(Q, '/root/fc-wip-linesizing/banks/fc2b_m06.json', expect_n=15)
+finish()

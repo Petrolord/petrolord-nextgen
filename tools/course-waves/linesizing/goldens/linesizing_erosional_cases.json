@@ -1,0 +1,122 @@
+[
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 100.0,
+  "erosionalFtS": 44.721359549995796,
+  "idIn": 7.981,
+  "maxRateBpd": 239085.48960880993,
+  "rhoLbFt3": 5.0
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 125.0,
+  "erosionalFtS": 55.90169943749474,
+  "idIn": 7.981,
+  "maxRateBpd": 298856.86201101245,
+  "rhoLbFt3": 5.0
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 175.0,
+  "erosionalFtS": 78.26237921249265,
+  "idIn": 7.981,
+  "maxRateBpd": 418399.6068154175,
+  "rhoLbFt3": 5.0
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 100.0,
+  "erosionalFtS": 22.360679774997898,
+  "idIn": 7.981,
+  "maxRateBpd": 119542.74480440497,
+  "rhoLbFt3": 20.0
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 125.0,
+  "erosionalFtS": 27.95084971874737,
+  "idIn": 7.981,
+  "maxRateBpd": 149428.43100550622,
+  "rhoLbFt3": 20.0
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 175.0,
+  "erosionalFtS": 39.13118960624632,
+  "idIn": 7.981,
+  "maxRateBpd": 209199.80340770874,
+  "rhoLbFt3": 20.0
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 100.0,
+  "erosionalFtS": 14.907119849998598,
+  "idIn": 7.981,
+  "maxRateBpd": 79695.16320293664,
+  "rhoLbFt3": 45.0
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 125.0,
+  "erosionalFtS": 18.63389981249825,
+  "idIn": 7.981,
+  "maxRateBpd": 99618.95400367082,
+  "rhoLbFt3": 45.0
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 175.0,
+  "erosionalFtS": 26.08745973749755,
+  "idIn": 7.981,
+  "maxRateBpd": 139466.53560513916,
+  "rhoLbFt3": 45.0
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 100.0,
+  "erosionalFtS": 12.659242088545833,
+  "idIn": 7.981,
+  "maxRateBpd": 67677.75227031797,
+  "rhoLbFt3": 62.4
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 125.0,
+  "erosionalFtS": 15.82405261068229,
+  "idIn": 7.981,
+  "maxRateBpd": 84597.19033789747,
+  "rhoLbFt3": 62.4
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 175.0,
+  "erosionalFtS": 22.15367365495521,
+  "idIn": 7.981,
+  "maxRateBpd": 118436.06647305647,
+  "rhoLbFt3": 62.4
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 100.0,
+  "erosionalFtS": 13.545709229571928,
+  "idIn": 7.981,
+  "maxRateBpd": 72416.90672731539,
+  "rhoLbFt3": 54.5
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 125.0,
+  "erosionalFtS": 16.932136536964908,
+  "idIn": 7.981,
+  "maxRateBpd": 90521.13340914421,
+  "rhoLbFt3": 54.5
+ },
+ {
+  "areaFt2": 0.34740975655903367,
+  "cFactor": 175.0,
+  "erosionalFtS": 23.704991151750875,
+  "idIn": 7.981,
+  "maxRateBpd": 126729.5867728019,
+  "rhoLbFt3": 54.5
+ }
+]

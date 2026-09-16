@@ -1,0 +1,34 @@
+-- ============================================================================
+-- FC2 PROFESSIONAL DEEP SEED: Pipeline & Line Sizing, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and every question row is generated
+-- from the committed bank JSON, which reproduces byte for byte from its
+-- committed generator.
+--
+-- What this tier owns: THE GAS LINE. The moment the fluid compresses,
+-- pressure stops being linear along the pipe and the whole method changes
+-- shape into a p-squared driving group at base conditions that are 14.65 psia
+-- and 520 degR and not atmospheric. Four published forms answer the same
+-- question and disagree by a third on one line. One elevation group is shared
+-- by all four and is the only place a static column enters a gas calculation.
+-- And the outlet pressure has no closed form in this engine at all, so this
+-- is where a reader first meets an answer that came out of a solver.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The outlet-pressure bracket is itself a
+-- piece of physics. Its ceiling is the inlet divided by the square root of e
+-- to the s, which on a climb sits BELOW the inlet and on a descent sits ABOVE
+-- it. A bracket that stopped at the inlet was wrong on both, and worst on the
+-- commoner case. On a descent the drop comes back negative, because the line
+-- arrives higher than it left.
+--
+-- THE TRAP THE TIER IS BUILT ON. Four numbers for one line is not four
+-- opinions to average. Each form carries its own diameter exponent, its own
+-- friction assumption and its own fitted range, and the question a reader has
+-- to answer is which one is still honest on the line in front of them.
+--
+-- HELD FOR THE LITERATURE, AND THEREFORE NOT GRADED: the transmission
+-- efficiency E, which is an unsourced multiplier. The capstone states its own
+-- E as a condition of the line, so no graded value looks one up.
+-- ============================================================================

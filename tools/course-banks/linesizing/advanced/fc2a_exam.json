@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "A route survey returns Class 2 where the design had assumed Class 1, on the SOKU pipe at 1200.000000 psig. What happens to the wall?",
+  "options": [
+   "The design factor falls from 0.720000 to 0.600000, so the pressure wall thickens from 0.204327 in to 0.245192 in and the required wall from 0.329327 in to 0.370192 in.",
+   "The design factor falls from 0.720000 to 0.500000, so the pressure wall thickens from 0.204327 in to 0.294231 in, since Class 2 is the second entry down the B31.8 table.",
+   "The design pressure rises above 1200.000000 psig to reflect the populated route, and the wall thickens in proportion to that rise while the factor of 0.720000 stands.",
+   "Nothing happens to the wall, because B31.4 uses a flat 0.720000 whatever the route, and a line already rolled to that factor is legal on any location class."
+  ],
+  "answer": 0,
+  "explanation": "Class 2 is the second row of the B31.8 table, at a factor of 0.600000. Every row of that table carries the same 0.125000 in between its pressure wall and its required wall."
+ },
+ {
+  "prompt": "A wall call with no design pressure and a wall call to a code named B99 are two different failures. What do they have in common, and where do they differ?",
+  "options": [
+   "Both throw, because a missing argument and an unknown code are the two cases in this engine that leave the ordinary path, and they differ only in the text of the message.",
+   "Both come back as a bare NaN, because the wall is a single number with nowhere to attach a message, and they differ in that only the unknown code is reported by the wrapping function.",
+   "Both come back as an object carrying an error string through the ordinary return path, and one names three inputs Barlow cannot proceed without while the other names the code it does not carry.",
+   "Both come back as an object carrying an error string, and they differ in that the missing design pressure is a physically meaningless input while the unknown code is a state the method simply has no answer for."
+  ],
+  "answer": 2,
+  "explanation": "This engine throws nothing. The first says wall thickness needs positive design pressure, OD and SMYS, and the second names the design code it does not know."
+ },
+ {
+  "prompt": "On the SOKU pipe at Class 1 the pressure wall is 0.235671 in at a temperature derate of 0.867000 and 0.211300 in at 0.967000. What does that pair establish about the derate?",
+  "options": [
+   "That it multiplies the design pressure, so a derate of 0.867000 asks the wall to hold a lower pressure than 1200.000000 psig and a thinner wall follows from it.",
+   "That it divides, so the wall thickens as it falls, which is the same behaviour the joint factor and the design factor show.",
+   "That it is a measured property of the delivered steel, recorded alongside the yield of 52000.000000 psi, which is why two values of it give two different walls on one pipe.",
+   "That it is added to the wall after Barlow has produced it, in the same way the corrosion allowance of 0.125000 in is added, which is why the two walls differ by a fixed amount."
+  ],
+  "answer": 1,
+  "explanation": "0.867000 gives the thicker of the two walls. The joint factor column behaves the same way, running from 0.340545 in at 0.600000 to 0.204327 in at 1.000000."
+ },
+ {
+  "prompt": "A capstone answer gives a wall figure with no class and no code beside it. Why is that answer incomplete even if the arithmetic is right?",
+  "options": [
+   "The engine refuses a wall call that has no class, so a figure produced without one cannot have come from the engine and must have been computed by hand.",
+   "A wall with no class stated defaults to Class 1 at a factor of 0.720000, which is legal only where the route survey has already returned an empty classification.",
+   "The corrosion allowance is set by the class, so without the class a reader cannot tell how much of the required wall is pressure-carrying steel.",
+   "The design factor comes from the code and the class rather than from the pipe, so a wall with no class named is a number nobody can check or reproduce."
+  ],
+  "answer": 3,
+  "explanation": "The same pipe at the same pressure needs 0.204327 in at Class 1 and 0.367788 in at Class 4. The location class and the code are stated conditions that have to travel with the answer."
+ },
+ {
+  "prompt": "The four published wall cases each agree with a golden to ten decimal places. What kind of agreement is that?",
+  "options": [
+   "Agreement with an independent implementation of the same physics in another unit system, which catches an arithmetic or a unit error and cannot catch a method wrong in both files.",
+   "Agreement with a measured wall taken off a pipe in service, which is the strongest evidence a wall calculation can carry and is why these four cases were chosen for the course.",
+   "Agreement between the sizing direction and the rating direction, which is the round trip closing and is the only check that can ever be made on a code factor.",
+   "Agreement with the published B31.8 tables themselves, which is what a golden for a code calculation has to be cut against if it is to say anything at all about the code."
+  ],
+  "answer": 0,
+  "explanation": "The four walls are 0.2451923077 in, 0.2051091270 in, 0.2053571429 in and 0.2261707785 in, and each golden reproduces its engine figure. No measured pipeline is in this course."
+ },
+ {
+  "prompt": "A rating is taken on 0.375000 in of wall at Class 3 with the corrosion allowance left out of the call, and 1529.411765 psig is quoted as the MAOP. Which of the engine's defences would have caught that?",
+  "options": [
+   "The corrosion allowance guard, which refuses a negative allowance, would have caught it if the call had passed 0.000000 in rather than omitting the argument entirely.",
+   "The round trip, which would have failed to return the 1200.000000 psig the line was designed at and thereby flagged the inconsistency between the two directions.",
+   "None of them, because every input was meaningful and fully formed, so the wrong question was asked correctly and no guard can see that.",
+   "The refusal contract, since a rating with no wall left after the allowance returns an error object and the same check covers a rating with no allowance at all."
+  ],
+  "answer": 2,
+  "explanation": "Both calls are legal, both are correct for what they were asked, and neither warns. The factor of 1.500000 between them is the gross wall over the net."
+ },
+ {
+  "prompt": "Three published pigging runs return line volumes of 33.2033 bbl, 1071.9949 bbl and 5149.6679 bbl. What entered those three figures?",
+  "options": [
+   "A bore, a length and the holdup of each run, since a line volume is reported at the conditions the line was carrying when the sphere was launched into it.",
+   "A bore, a length and a density, since barrels are a measure of mass in this engine and the 5.6145833333333 cubic feet per barrel converts between the two.",
+   "A bore, a length and a pig speed, since the three runs are all driven at 5.000000 ft/s and the volume is what the sphere sweeps over the time it is in the line.",
+   "A bore and a length in each case and nothing else, because a line volume is geometry and no fluid property reaches it."
+  ],
+  "answer": 3,
+  "explanation": "A line full of crude, a line full of gas and a line full of seawater are the same volume. The holdup enters one step later and turns a volume into a sweep."
+ },
+ {
+  "prompt": "Why does this engine take a holdup as an input rather than computing one?",
+  "options": [
+   "Because a holdup measured in the field is more reliable than one correlated, so the engine deliberately declines to compute a figure that an operator can supply.",
+   "Because the multiphase half is not in it at all: no flow regime, no slip, no holdup correlation and no slug model, so the number has to come from outside.",
+   "Because the holdup depends on the swept volume, which the engine has not computed at the point where the holdup is needed, so the dependency runs the wrong way to close.",
+   "Because the Beggs and Brill correlation inside this engine returns a holdup only for inclined lines, and a horizontal line has to be handed one instead."
+  ],
+  "answer": 1,
+  "explanation": "The swept volume is a line volume times a figure somebody else measured or assumed, so a pigging estimate is only as honest as that figure and nothing records where it came from."
+ },
+ {
+  "prompt": "On the OGBIA line the sweep at a holdup of 0.040000 is 65.3414 bbl and at 0.060000 it is 98.0121 bbl, and the intervals are 4.6165 days and 3.7997 days. Why does a rise of 0.020000 in holdup cost less than a day?",
+  "options": [
+   "Because the interval falls as the square root of the sweep, so equal steps in holdup cost progressively less as the sweep grows towards the catcher limit.",
+   "Because the engine holds the interval above a floor until the sweep exceeds the slug limit, at which point it stops reporting days at all rather than approaching zero.",
+   "Because the interval is the room left in the catcher over the dropout, and a sweep of 32.6707 bbl more takes that much room out of 250.000000 bbl at 40.000000 bpd.",
+   "Because the dropout of 40.000000 bpd falls as the holdup rises, so part of the room the sweep takes is returned by the slower accumulation behind it."
+  ],
+  "answer": 2,
+  "explanation": "The relation is linear in the room taken. The column runs 6.2500, 5.4332, 4.6165, 3.7997 and 2.1662 days before the engine refuses."
+ },
+ {
+  "prompt": "A designer meets the slug-limit refusal at a holdup of 0.200000 and proposes a third response: keep the interval and accept a thinner margin on the catcher. Why is that response not available on this row?",
+  "options": [
+   "There is no margin left to thin: the sweep of 326.7070 bbl is larger than the whole 250.000000 bbl the vessel holds, so the catcher is over its limit before a single day of dropout is counted.",
+   "The engine has already taken a margin off the slug limit before comparing it against the sweep, so the figure a caller supplies is not the one the refusal was raised against.",
+   "A thinner margin would return a negative interval, which the engine reports as a number rather than refusing, so the designer would be acting on a figure that cannot be scheduled.",
+   "The slug limit belongs to the separation work rather than to this chain, so it is the one input a caller of this engine is not permitted to move."
+  ],
+  "answer": 0,
+  "explanation": "The message names the only two levers there are, pig more often or resize the catcher. At a holdup of 0.100000 the same line still reports 2.1662 days, and the room the sweep leaves is what the dropout fills."
+ },
+ {
+  "prompt": "The holdup guard and the swept volume guard are both read on two sides. Which values does the engine accept, and what does accepting them say?",
+  "options": [
+   "A holdup just below 1.000000 and a sweep just above 0.000000, refusing the two limits themselves, since a full line and a dry line are degenerate cases the engine declines.",
+   "A holdup of 1.000000 and a swept volume of 0.000000, refusing 1.000001 and -0.000001, and accepting them says the engine recommends designing at those two conditions.",
+   "A holdup of 1.000001 and a swept volume of -0.000001, since the guards are written with strict comparisons and admit the first step past their own stated limits.",
+   "A holdup of 1.000000 and a swept volume of 0.000000, refusing 1.000001 and -0.000001, and accepting them says a liquid-full line and a dry line are real conditions to ask about."
+  ],
+  "answer": 3,
+  "explanation": "Each guard includes its own limit and refuses the first step past it. Accepting the question is not advice to design for it."
+ },
+ {
+  "prompt": "A pigging plan quotes a run of 2.444444 hours and the 3.000000 ft/s the sphere was driven at, and nothing else. What has been left out, and why does it matter?",
+  "options": [
+   "Nothing of substance, since the run and the speed the engine reports beside it are the two figures any pigging operation is scheduled from in practice.",
+   "The sweep and the interval, because the run says when the sphere arrives and the sweep says what arrives with it and the interval says how often.",
+   "The line velocity of 2.244621 ft/s, because a sphere is pushed by the fluid behind it and the two speeds have to be compared before a run time is credible.",
+   "The Reynolds number of 48431.2523, because a run is valid only where the flow behind the sphere is turbulent."
+  ],
+  "answer": 1,
+  "explanation": "A pigging plan needs all three. The run is 26400.000000 ft over 3.000000 ft/s, the sweep is 98.0121 bbl at a holdup of 0.060000, and the interval is 3.7997 days."
+ },
+ {
+  "prompt": "A line's duty puts its Reynolds number close to 2100, and the loss the engine reports jumps when the duty is nudged. What is the engineering response?",
+  "options": [
+   "Interpolate between the two branches at the duty in question, since the engine will return a value on each side and the truth lies somewhere between the pair.",
+   "Quote the transitional friction factor at the ten decimals the engine prints, since those digits record which of the two branches actually produced the number.",
+   "Move the bore or the rate until the flow is clearly laminar or clearly turbulent, which is a real fix rather than a presentational one.",
+   "Take the laminar value of 0.0304761905, since it is the lower of the two and a line sized on the smaller loss carries margin against the larger one."
+  ],
+  "answer": 2,
+  "explanation": "A pressure drop that depends on which side of an arbitrary boundary a Reynolds number lands on is not a design. The step across that boundary is 1.603040 times."
+ },
+ {
+  "prompt": "Inside the band from 2100 to 4000 the engine hands back a regime word and a friction factor together. What should a reader do with that pair?",
+  "options": [
+   "Carry both and record that they disagree, since the label and the arithmetic in that band rest on different assumptions and nothing in the return marks it.",
+   "Take the friction factor and discard the word, since the arithmetic is what the pressure drop needs and the label carries no information the number does not.",
+   "Take the regime word and discard the friction factor, since a value computed on a branch other than the one it is labelled for is not a quantity any design should carry forward.",
+   "Take neither, since the engine refuses to return a friction factor in the band and the pair a caller sees is the refusal object rather than a result."
+  ],
+  "answer": 0,
+  "explanation": "The regime word is not wrong and the friction factor is not a fabrication. The band is held for the literature and never graded."
+ },
+ {
+  "prompt": "A line is partly blocked by wax and a designer raises its relative roughness to 0.500000 to stand for the blockage, taking the 0.3308894263 that comes back. What is wrong with that, beyond the extrapolation?",
+  "options": [
+   "Nothing is wrong with the substitution itself and only the extrapolation is at fault, so the same approach is sound on any line wherever the value stays under the published 0.050000.",
+   "It is the wrong sign of correction, since a partly blocked bore lowers the loss a line reports and raising the roughness raises it, so the two effects work against each other.",
+   "The engine will refuse the run, because a relative roughness of 0.500000 describes a wall rougher than the bore is wide and the roughness guard is written to catch exactly that.",
+   "Wax changes the flow area and the geometry, so a real effect has been pushed into a term nobody fitted for it while the bore the whole chain computes over is still the clean one."
+  ],
+  "answer": 3,
+  "explanation": "Scale, wax and a partially blocked bore change the flow area. The engine answers 0.3308894263 and flags nothing, because the value is meaningful even where nobody fitted it."
+ },
+ {
+  "prompt": "On the 11.938000 in bore General Flow settles on 0.0112132010 and the figure that would make it match Weymouth is 0.0139989737. What may a designer do with that pair?",
+  "options": [
+   "Enter 0.0139989737 as the roughness-derived friction factor in a General Flow run, so that the two forms are brought into agreement on this bore before either rate is quoted.",
+   "State that Weymouth is assuming a rougher pipe than Colebrook computes here, and stop there, because nothing sources the law behind the implied figure.",
+   "Adjust the transmission efficiency until the two rates close on this bore, since a gap of that size is exactly the correction the multiplier exists to make.",
+   "Quote 0.0139989737 as the friction factor of the line, since it came out of a form with no roughness input to get wrong."
+  ],
+  "answer": 1,
+  "explanation": "The implied figure is above the computed one on all four bores and falls as the bore grows, which is the signature of a fully rough law. The law itself is held for the literature."
+ },
+ {
+  "prompt": "A designer picks Panhandle B because it gives the most favourable rate on a line and defends the choice by pointing out that the arithmetic is correct. What is wrong with that defence?",
+  "options": [
+   "All four forms are arithmetically correct, so correctness cannot choose between them, and the choice is an engineering judgement about which assumptions fit the line.",
+   "Panhandle B is the only one of the four that carries no efficiency multiplier, so its rate cannot be compared against the other three without one being applied first.",
+   "The arithmetic is not correct, since no form checks its own regime and a form applied outside the flow it was derived for returns a number that is wrong rather than inapplicable.",
+   "Panhandle B reports no friction factor, so there is no way to establish that its arithmetic is correct in the first place and the defence cannot be made at all."
+  ],
+  "answer": 0,
+  "explanation": "Each form was derived for a kind of line under a kind of flow and not one checks whether it was handed that kind of line. The judgement has to be made and recorded as a judgement."
+ },
+ {
+  "prompt": "Two loops in this module return their last iterate with no flag. The outlet-pressure solve handles a case it cannot answer differently. What is the difference?",
+  "options": [
+   "The outlet solve reports the number of iterations it ran, so a caller can see whether it converged, and the two loops report neither a count nor a residual.",
+   "The outlet solve returns the bracket it searched beside its answer, so a caller can see the interval the outlet was found in, and the two loops return no interval at all.",
+   "The outlet solve refuses in words when the line cannot carry the target rate, so it distinguishes an answer from the place it stopped, and the two loops have no such distinction available.",
+   "The outlet solve returns a NaN when it cannot answer, which a caller can test for, and the two loops return a plausible number that no test can distinguish."
+  ],
+  "answer": 2,
+  "explanation": "Both loops converge everywhere this digest looked. What is absent is the evidence, and a second run cannot supply it because nothing here reads a clock or a random number."
+ },
+ {
+  "prompt": "What is the contract every refusal in this engine keeps to, and why is the shape the useful part?",
+  "options": [
+   "A thrown exception carrying a sentence, which leaves the normal path so that no caller anywhere can read past a failure by accident, and which a single handler at the top of the chain can catch.",
+   "A null in the field the answer would have occupied, which is unambiguous because no valid result anywhere in this engine is ever null, so one test in one place covers every failure it has.",
+   "A documented sentinel, a negative value in a field that is otherwise positive, which is cheap to test for and cannot be produced by any legitimate calculation.",
+   "An object carrying an error string, arriving where the answer would have arrived, which cannot be confused with a pressure or a rate and carries a sentence naming what was missing."
+  ],
+  "answer": 3,
+  "explanation": "A thrown exception can unwind past the code that knew what to do. A sentinel is indistinguishable from a real answer that happens to equal it. A null says nothing about what went wrong."
+ },
+ {
+  "prompt": "A capstone answer reports a swept volume as null because the call behind it was refused. Why is that the wrong thing to write?",
+  "options": [
+   "A null is exactly what a refusal serialises to, so the form is right and the only thing lost is the message, which can be recovered by running the call again.",
+   "A refusal is a result, so the error string is the answer to give, and a null cannot say which guard or which documented exception produced it.",
+   "A null belongs to the friction factor at a negative relative roughness, so writing one anywhere else collides with a value the engine sets deliberately.",
+   "A swept volume of 0.000000 bbl is the correct answer when an input is missing, since the engine accepts that value and a dry line really does deliver nothing."
+  ],
+  "answer": 1,
+  "explanation": "Writing a number where the engine declined to produce one is the worst available answer. A NaN has no JSON spelling either, so a null in a record cannot be traced back to what produced it."
+ },
+ {
+  "prompt": "Three returns sit outside the refusal contract. What does each one return, and what is the pattern behind all three?",
+  "options": [
+   "NaN in all three, every one of them a bare number, the pattern being that a bare number is the only return a function can make when the failure happens before any object has been assembled to carry a message.",
+   "An error object for all three, the pattern being that they sit outside the contract in the sense that they are reached from outside the ordinary entry points rather than in their shape.",
+   "NaN in all three, bare for a Reynolds number with no viscosity and for a volume with no bore and beside a regime of invalid for the friction factor, the pattern being that a function refuses in words only where it has room for a message.",
+   "A null for the two bare numbers and NaN for the friction factor, the pattern being that a value with a field beside it can hold a null while a value on its own cannot."
+  ],
+  "answer": 2,
+  "explanation": "Neither of the two bare numbers is reached through the ordinary entry points, so the exception is contained by the design rather than by a convention somebody has to remember."
+ },
+ {
+  "prompt": "A saved case file from this engine contains a null where a friction factor should be. What can be concluded?",
+  "options": [
+   "Less than it looks: a NaN has no JSON spelling and prints as null, so the record cannot say whether the engine returned NaN or set a field to null on purpose.",
+   "That the friction factor call was refused at a negative relative roughness, since that is the one case in this engine that genuinely sets a friction factor to null.",
+   "That the encoder replaced a value it could not represent, which means the original figure is recoverable from the inputs by running the call again.",
+   "That the engine threw and the caller wrote a null in place of the missing result, since a refusal in this engine never reaches a saved file as a value."
+  ],
+  "answer": 0,
+  "explanation": "All three exceptions are a number that is not a number, and not one of them is a null the engine chose. The regime field is the only thing that distinguishes the third."
+ },
+ {
+  "prompt": "Six sentences in the meaningless-input catalogue appear twice. Which pair below is one sentence reached from two different entry points?",
+  "options": [
+   "The efficiency message, which answers a gas form for a multiplier above one and a liquid line for the same multiplier below zero.",
+   "The swept volume message about a positive bore and length, which answers a sweep call and the interval call that follows it.",
+   "The gas length message, which answers a transmission form and the elevation adjustment that feeds a value into it.",
+   "The elevation message, which answers a liquid line that rises further than its own length and a gas line that does the same."
+  ],
+  "answer": 3,
+  "explanation": "Three sentences serve two entry points each: roughness across a liquid friction call and a General Flow call, elevation across a liquid line and a gas line, and the corrosion allowance across a wall call and a rating call."
+ },
+ {
+  "prompt": "A reviewer tests the efficiency guard by passing an obviously absurd value and reports that the guard works. What is missing from that test?",
+  "options": [
+   "Whether the guard fires before or after the rate is formed, because an absurd efficiency that reached the form first would have produced a rate on the way to being refused.",
+   "Whether 1.000000 itself survives, because a guard that refuses its own limit is as wrong as one that accepts nonsense and is harder to notice.",
+   "Whether the same guard covers the negative side, because efficiency is refused above one and below zero by two different sentences that have to be tested separately.",
+   "Whether the value was passed to all four transmission forms, because the guard sits on General Flow alone and the other three carry no bound on the multiplier."
+  ],
+  "answer": 1,
+  "explanation": "An absurd value proves nothing that passing 1.000001 does not prove better. The engine answers at 1.000000 and refuses at 1.000001, which is where the boundary actually is."
+ },
+ {
+  "prompt": "Four of the five catalogues answer an unknown id with an absence and one answers with a row. How would a caller detect the odd one out?",
+  "options": [
+   "By comparing the id that came back against the id that went in, because the returned object is correctly labelled continuous service and the label is what reveals the substitution.",
+   "By testing the c factor against 100.000000, because a substituted row always carries that value and a genuine continuous-service lookup never does.",
+   "By checking for an error property, because the substituted row is the only one of the five returns that carries one and the four absences do not.",
+   "By serialising the return, because a genuine row prints as an object and a substituted one prints as null in the way the two bare NaN cases do."
+  ],
+  "answer": 0,
+  "explanation": "The object is internally consistent and it is not a corrupted row. What it is not is the service that was asked for, and four of the five lookups make that check unnecessary."
+ },
+ {
+  "prompt": "What does it mean in this course to say that a figure is held for the literature?",
+  "options": [
+   "That the figure is suspect and is carried only until a correct value can be derived, at which point it will be replaced and the affected results re-cut.",
+   "That the figure is bounded by the engine but not computed by it, so a caller may supply any value inside the bound and the course declines to recommend one.",
+   "That nobody in this package has read a source for it, so it is taught as a limit and never as an answer, and nothing graded rests on it.",
+   "That the figure comes from a table another engine owns, so this course records what it is handed and cannot change what an unknown entry in that table returns."
+  ],
+  "answer": 2,
+  "explanation": "A held item is not a wrong number. What is missing is the reading that would let anybody say how conservative it is."
+ },
+ {
+  "prompt": "Of the three API RP 14E c factors, one is weaker than the other two. Which, and why?",
+  "options": [
+   "100.000000 for continuous service, which the recommended practice does not itself carry and which this package supplied to fill the gap in the table.",
+   "175.000000 for clean inhibited service, which is labelled operator practice with no publication behind it at all.",
+   "125.000000 for intermittent service, which sits between the other two and was interpolated rather than published, so no source exists for it in principle.",
+   "175.000000 for clean inhibited service, which exceeds the bound the engine places on a c factor and is accepted only because the guard was never applied to that table."
+  ],
+  "answer": 1,
+  "explanation": "The recommended practice says its own figures are conservative, and the third row is labelled operator practice. All three are held, and one is held for a second reason."
+ },
+ {
+  "prompt": "Two of the four held items are about friction. Which two, and what separates them?",
+  "options": [
+   "The Colebrook roughness divisor and the laminar numerator, which are both coefficients the engine carries and neither of which has been read against a publication.",
+   "The relative roughness of the OGBIA pipe and the friction factor General Flow settles on, both of which are derived from figures nobody in this package has sourced.",
+   "The transmission efficiency and the API RP 14E c factors, both of which move a computed friction loss by a stated proportion on every line they touch.",
+   "The band between the branches, where no correlation exists at all, and the fully rough law Weymouth assumes, which does exist and has no source in this package."
+  ],
+  "answer": 3,
+  "explanation": "The four are the c factors, the efficiency multiplier, the band from 2100 to 4000 and the law Weymouth assumes. The step across that band is 1.603040 times."
+ },
+ {
+  "prompt": "A report says the goldens behind this course are green and concludes that the engine is validated against pipeline performance. Where does that go wrong?",
+  "options": [
+   "The goldens are synthetic, produced by an independent oracle from the same physics, so green means agreement about arithmetic rather than agreement with any measured line.",
+   "The goldens are green only on the published cases, so the conclusion overstates the coverage rather than the kind of evidence, and it would hold if every case had been swept.",
+   "The goldens are cut from the engine itself, so agreement is guaranteed by construction and the suite establishes nothing whatever about the engine's behaviour.",
+   "The goldens work in SI where the engine works in field units, so agreement between them is evidence about the conversions alone and cannot detect an arithmetic slip in either file."
+  ],
+  "answer": 0,
+  "explanation": "Arbitration between two implementations is the job a synthetic case does well. It is not a claim about any pipeline."
+ },
+ {
+  "prompt": "A barrel is measured out of lineHydraulics and out of chokePerformance by asking each module a question about itself. Why is that a better reading than opening either source file?",
+  "options": [
+   "A source file carries the constant in SI where the modules work in field units, so reading one would require a conversion that the measurement avoids making.",
+   "A source file is not vendored with the goldens, so the constant it carries cannot be reproduced by anybody reading this course from the package alone.",
+   "A source file says what somebody typed and a question put to the module says what the module returns, which is the figure every result in that module was actually computed with.",
+   "A source file states the constant to fewer digits than the modules return it at, so reading one would lose precision that the erosional and volume chains both need."
+  ],
+  "answer": 2,
+  "explanation": "A source file records an intention and a return records a behaviour. Every barrel the volume chain and the erosional chain have ever produced was produced with the figure the question gets back, whatever any file says."
+ },
+ {
+  "prompt": "A designer writes that a two-phase line was checked against this engine and passed. What is wrong with that sentence?",
+  "options": [
+   "It is right for the pressure drop and wrong for the wall, since only the liquid chain takes a density and the wall chain would have refused the call outright.",
+   "It is right as written, since the engine takes a holdup as an input and any line that supplies one has thereby declared itself two-phase to the engine.",
+   "It is wrong, and a guard on the holdup catches it, since a two-phase line is exactly the case that supplies a holdup outside the range the sweep will accept.",
+   "Nothing in the engine could have failed the line, because a mixture density is an ordinary number and no guard can be written for physics the module does not contain."
+  ],
+  "answer": 3,
+  "explanation": "A guard catches malformed input and a mixture density is perfectly well formed. The module carries no flow regime and no slug model that could have disagreed with the line it was handed."
+ },
+ {
+  "prompt": "A reviewer has the pressure drop for a line and asks for its wall and its slug on that basis. What is the answer?",
+  "options": [
+   "Neither can be reached from a pressure drop, because the three readings share a geometry and nothing else, and each needs inputs the other two never ask for.",
+   "The wall can be reached, since the pressure drop gives the operating pressure the wall must hold, but the slug cannot without a holdup.",
+   "The slug can be reached, since the pressure drop fixes the bore and the length, and the wall cannot without a location class.",
+   "Both can be reached once the design pressure is stated, since the pressure drop then gives the operating pressure and the bore gives the volume."
+  ],
+  "answer": 0,
+  "explanation": "A pressure drop needs a rate, a density and a viscosity. A wall needs a yield, a code and a class. A slug needs a holdup. None of those three sets contains the others."
+ },
+ {
+  "prompt": "Two figures come out of a wall sizing and only one of them is steel holding pressure. Which figure does an answer hand over for each purpose?",
+  "options": [
+   "The required wall for both, since it is the wall the design specified and the pressure wall is an intermediate the engine reports only for information.",
+   "The pressure wall when the question is how much steel is structural, and the required wall when the question is what to order from the mill.",
+   "The pressure wall for both, since the corrosion allowance holds no pressure at all and any figure including it overstates the pipe from the first day.",
+   "The rating for both, since it is the only one of the three figures that describes the pipe as built rather than the pipe as it was designed."
+  ],
+  "answer": 1,
+  "explanation": "On SOKU at Class 3 the two are 0.294231 in and 0.419231 in, separated by 0.125000 in of metal that holds nothing on the day the line is commissioned."
+ },
+ {
+  "prompt": "The volume chain runs in one direction and nothing downstream can contradict a figure it inherited. What follows for the way a capstone answer is checked?",
+  "options": [
+   "The interval is checked first, because it is the last figure in the chain and an error anywhere upstream shows up in it before it shows up anywhere else.",
+   "The holdup is checked first, because it is the only input from outside the engine and every figure in the chain is a multiple of it.",
+   "The bore and the length are checked first, because the volume and the run both depend on them and an error there reaches every figure after it.",
+   "Each step is checked against its own golden, because the chain offers no internal consistency check and the published cases are the only test available."
+  ],
+  "answer": 2,
+  "explanation": "Bore and length give the volume, the volume and a holdup give the sweep, length and a speed give the run, and the sweep against a catcher gives the interval."
+ },
+ {
+  "prompt": "A swept volume of 98.0121 bbl is quoted in a report with no other figure beside it. What has to be added before anybody can act on it?",
+  "options": [
+   "The run time of 2.444444 hours, because the sweep arrives with the sphere and a slug with no arrival time attached to it cannot be scheduled by anyone.",
+   "The Reynolds number of 48431.2523, because a sweep counts only where the flow ran turbulent.",
+   "The pressure drop of 25.660631 psi, because the sweep depends on what drives the sphere.",
+   "The holdup of 0.060000 it was multiplied by, because the sweep is a straight multiplication and that figure came from outside this engine."
+  ],
+  "answer": 3,
+  "explanation": "A catcher specified from 98.0121 bbl has been specified from somebody's estimate. Four inputs in this tier are stated conditions rather than results and this is one of them."
+ },
+ {
+  "prompt": "At what precision should an Expert answer report a swept volume and a pressure loss?",
+  "options": [
+   "The swept volume to four decimals and the pressure loss to six, which is what the engine returned in each case.",
+   "Both to six decimals, since that is the finest precision the engine prints and reporting at one convention avoids an argument about rounding.",
+   "Both to four decimals, since a barrel figure cannot be resolved beyond that and a pressure quoted finer would imply a precision the input never had.",
+   "The swept volume to six decimals and the pressure loss to four, since the volume chain carries the holdup and needs the extra digits to reproduce."
+  ],
+  "answer": 0,
+  "explanation": "A sweep of 98.0121 bbl and a loss of 25.660631 psi are each printed at the convention its own chain uses, and counts are whole numbers."
+ },
+ {
+  "prompt": "Three figures in this tier are a c factor of 100.000000, a holdup of 0.060000 and a loss of 25.660631 psi. Where did each of them come from?",
+  "options": [
+   "All three were computed, since each one is returned by the engine and a returned figure is the output of a calculation whatever its own inputs happened to be.",
+   "The c factor was computed from the erosional velocity, the holdup was measured on the line itself, and the loss was copied from one of the published friction cases.",
+   "The c factor was copied from a table, the holdup was assumed by somebody outside this engine, and the loss was computed from the duty.",
+   "The c factor was assumed, the holdup was copied from a published run, and the loss was computed, since the c factor is the one item with no publication behind it."
+  ],
+  "answer": 2,
+  "explanation": "A copied figure never moves, because it was never a function of anything. A loss moves when the duty moves, and an assumed figure moves when somebody changes their mind."
+ },
+ {
+  "prompt": "A friction factor from inside the band between 2100 and 4000 is handed to a reviewer alongside one at 48431.2523. What should be said about the pair?",
+  "options": [
+   "The first is the more reliable of the two, since a lower Reynolds number puts the flow closer to the laminar branch where the friction law is exact.",
+   "The second came from a correlation applied where it belongs and the first came from one that was not written for the band between the branches.",
+   "Both are equally sound, since the engine reports the regime beside each of them and a reader who carries the word has everything needed to use either.",
+   "The first cannot be quoted at all, since the engine refuses to return a friction factor between 2100 and 4000 and any figure there was computed by hand."
+  ],
+  "answer": 1,
+  "explanation": "The band from 2100 to 4000 is held for the literature, so a figure taken from inside it is a limit to state rather than an answer to quote. 48431.2523 sits well clear of it."
+ },
+ {
+  "prompt": "The wall chain and the volume chain both start from a pipe. What do they actually share?",
+  "options": [
+   "Almost nothing: the volume chain needs a bore and a length, and the wall chain needs an outside diameter, a yield, a code and a class.",
+   "The bore, since the wall is taken off the outside diameter to give the bore that the volume is then computed over in the same call.",
+   "The design pressure, since the wall is sized to it and the line volume is reported at the conditions that pressure implies.",
+   "The corrosion allowance, since it thickens the required wall and thins the bore the volume is taken over, so one figure appears in both chains with opposite signs."
+  ],
+  "answer": 0,
+  "explanation": "Not one of the three Expert readings can be derived from the other two. Each needs inputs the others never ask for."
+ },
+ {
+  "prompt": "Section 16 closes on two things the engine still accepts and arguably should not. What are they, and what does this course grade on either of them?",
+  "options": [
+   "Colebrook answering past the roughness it was fitted for and the band between the branches, both of which are graded through the friction factor a sizing sweep uses.",
+   "The two iterations that never report convergence and the three returns outside the refusal contract, both of which are graded through the gas rates that depend on them.",
+   "A liquid holdup of 1.000000 and a swept volume of 0.000000, both of which are graded through the pigging chain that accepts them as legal conditions.",
+   "The catalogue that answers an unknown service under the wrong label and the rating called without its allowance, and nothing graded in this course rests on either of the two."
+  ],
+  "answer": 3,
+  "explanation": "Neither is a number this course grades. One is a well-formed question answered under a label that was not asked for, and the other is a well-formed question that was the wrong question."
+ },
+ {
+  "prompt": "A wall round trip closes on nine cases and two gas forms agree to within 0.050011 on one duty. What do those two facts have in common?",
+  "options": [
+   "Both are checks the engine performs on itself and reports, so both are evidence that the guards in this module are correctly placed on both of their sides.",
+   "Both establish that the two directions of a relation are consistent, which is the strongest evidence available inside a package with no measured data in it.",
+   "Both are statements about arithmetic that say nothing about whether the method fits the line, and both are easy to read as confirmation that it does.",
+   "Both depend on a held item, the design factor in one case and the efficiency in the other."
+  ],
+  "answer": 2,
+  "explanation": "A round trip cannot reach a question about whether the code factor suits the route. Two forms agreeing on one duty is a fact about those forms at that duty, and the pair moves to 0.105013 at full duty."
+ },
+ {
+  "prompt": "A designer wants to write, on the strength of a green golden suite, that the line sizing in this studio has been validated. What is the defensible sentence?",
+  "options": [
+   "That the engine reproduces measured pipeline performance on the published cases, which is what an independent implementation in SI units establishes.",
+   "That the engine agrees with an independent implementation of the same assumptions, written in another unit system, across every published case.",
+   "That the engine has been validated within the limits of the four held items, which are the only part of the package the goldens cannot reach.",
+   "That the engine converges on every published case, which is what agreement between two implementations of the same implicit relations demonstrates."
+  ],
+  "answer": 1,
+  "explanation": "Agreement between two implementations is evidence about arithmetic and about nothing else. A defensible sentence names the implementation, the assumptions and the unit system, and stops short of the word pipeline."
+ }
+]

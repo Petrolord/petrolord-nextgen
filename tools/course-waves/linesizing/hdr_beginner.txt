@@ -1,0 +1,36 @@
+-- ============================================================================
+-- FC2 ASSOCIATE DEEP SEED: Pipeline & Line Sizing, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and every question row is generated
+-- from the committed bank JSON, which reproduces byte for byte from its
+-- committed generator.
+--
+-- What this tier owns: THE LIQUID LINE AND WHAT THE ENGINE REFUSES. The
+-- liquid line is the only part of this engine that is closed form end to end,
+-- so a reader can watch a whole answer assembled before anything iterates: a
+-- bore becomes an area, an area and a rate become a velocity, a velocity
+-- becomes a Reynolds number, and a Reynolds number and a relative roughness
+-- become a friction factor. Then the three losses are kept apart, the
+-- erosional limit stops being a wellhead idea and becomes the thing that
+-- decides a bore, and a recommendation ranks the schedule.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The three losses are three different
+-- things and only one of them is what a bigger pipe fixes. Friction falls
+-- steeply with bore, the fitting sum falls with it, and the elevation term
+-- does not move at all, because a static column is a density and a height and
+-- has no idea what bore it is standing in. A reader who treats the total as
+-- one quantity sizes the wrong pipe.
+--
+-- THE TRAP THE TIER IS BUILT ON. Every limit in this method is a different
+-- equation with a different domain. The friction factor has two branches and
+-- nothing honest between Reynolds 2100 and 4000, the erosional limit is not a
+-- pressure drop at all, and a number that prints perfectly can have come from
+-- an equation standing outside the range it was fitted in.
+--
+-- HELD FOR THE LITERATURE, AND THEREFORE NOT GRADED: the API RP 14E c factor
+-- rows, and the transition band between the two friction branches. Both are
+-- taught here as limits. The capstone states its own site c factor and runs
+-- above Reynolds 20000, so neither can reach a graded value.
+-- ============================================================================
