@@ -17,7 +17,12 @@ export default {
   // FC2 quotes no engine string that breaks the copy rule, so it pins nothing.
   // A wave that does quote one pins it here as {frag, src} and names enginesRoot.
   pinned: [],
-  cleared: [],
+  // "used to" here is EMPLOYED TO, not FORMERLY. The holdup is the thing the
+  // call is used to work the sweep out with; nothing about a past engine.
+  cleared: [
+    /the holdup that the same call used to work out/i,
+    /\b(?:is|are|be|being|been)\s+used to\b/i,
+  ],
   headings: [
   {
     id: 'fc2-one-pipe',

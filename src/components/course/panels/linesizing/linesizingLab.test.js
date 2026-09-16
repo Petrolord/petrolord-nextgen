@@ -131,7 +131,7 @@ const buildDigest = () => {
   w(`| relative roughness | f at Reynolds ${r4(s2.reLow)} | f at Reynolds ${r4(s2.reHigh)} |`);
   w('| --- | --- | --- |');
   s2.roughnessRows.forEach((r) => w(`| ${num(r.relRough, 6)} | ${num(r.fLow, 12)} | ${num(r.fHigh, 12)} |`));
-  w('A rough pipe stops caring about the Reynolds number and a smooth one never does: read the two columns against each other down the table.');
+  w(`A rough pipe stops caring about the Reynolds number and a smooth one never does, and the two columns say so: on the ${num(s2.roughnessSmoothest, 6)} row the second column is ${num(s2.smoothColumnRatioDerived, 10)} of the first, and on the ${num(s2.roughnessRoughest, 6)} row it is ${num(s2.roughColumnRatioDerived, 10)} (derived from the two columns on those rows). A thousandfold in Reynolds number moves the smooth pipe and leaves the rough one where it was.`);
   w();
   w('The OGBIA line walked from turbulent into laminar by viscosity alone, at its built bore:');
   w('| viscosity cp | velocity ft/s | Reynolds number | f | regime | friction loss psi |');
@@ -155,13 +155,13 @@ const buildDigest = () => {
   s3.fittings.forEach((f) => w(`| ${f.id} | ${f.count} | ${e6(f.kEach)} | ${e6(f.kTotal)} |`));
   w(`The engine's resistance sum for that list: ${e6(s3.sumK)} velocity heads (engine).`);
   w(`On the whole ${e6(s3.lengthFt)} ft line those fittings cost ${e6(s3.withKFittingsPsi)} psi against ${e6(s3.withKFrictionPsi)} psi of pipe friction, a share of ${e6(s3.withKShareDerived)} of the total (derived from the two engine values on this row).`);
-  w(`On a ${e6(s3.manifoldLengthFt)} ft manifold run carrying the same duty and the same fittings, the pipe costs ${e6(s3.shortFrictionPsi)} psi and the fittings cost ${e6(s3.shortFittingsPsi)} psi, a share of ${e6(s3.shortShareDerived)}. The fittings did not change; the pipe did.`);
+  w(`On a ${e6(s3.manifoldLengthFt)} ft manifold run carrying the same duty and the same fittings, the pipe costs ${e6(s3.shortFrictionPsi)} psi and the fittings cost ${e6(s3.shortFittingsPsi)} psi, a share of ${e6(s3.shortShareDerived)} (derived from the two engine values on this row). The fittings did not change; the pipe did.`);
   w();
   w('Elevation, the same line up and down:');
   w('| elevation change ft | friction psi | elevation psi | total psi | gradient psi per ft |');
   w('| --- | --- | --- | --- | --- |');
   s3.elevationRows.forEach((r) => w(`| ${e6(r.elevChangeFt)} | ${e6(r.dpFrictionPsi)} | ${e6(r.dpElevationPsi)} | ${e6(r.dpTotalPsi)} | ${num(r.gradientPsiPerFt, 10)} |`));
-  w('The friction term is identical in all three rows and the elevation term is symmetric about zero, so a hill is added to a pressure drop rather than mixed into it.');
+  w(`The friction column spreads ${e6(s3.frictionSpreadDerived)} psi across the three rows and the two non-zero elevation terms sum to ${e6(s3.elevationSumDerived)} psi (both derived from the table above), so a hill is added to a pressure drop rather than mixed into it.`);
   w();
   w('Roughness, which is the pipe and not the fluid:');
   w('| catalogue id | roughness in | relative roughness | f | friction loss psi |');
@@ -190,13 +190,13 @@ const buildDigest = () => {
   w('| c | erosional velocity ft/s | line velocity ft/s | ratio | exceeded | margin percent | largest rate bpd |');
   w('| --- | --- | --- | --- | --- | --- | --- |');
   s4.byCFactor.forEach((r) => w(`| ${e6(r.cFactor)} | ${e6(r.erosionalFtS)} | ${e6(r.velocityFtS)} | ${e6(r.ratio)} | ${r.exceeded} | ${e6(r.marginPct)} | ${r4(r.largestRateBpd)} |`));
-  w(`The engine's own flow area for that bore is ${e6(s4.areaFt2)} ft2, and the velocity the erosional check reads, ${e6(s4.checkVelocityFtS)} ft/s, is the same velocity the pressure drop read.`);
+  w(`The engine's own flow area for that bore is ${e6(s4.areaFt2)} ft2, and the velocity the erosional check reads, ${e6(s4.checkVelocityFtS)} ft/s, stands ${e6(s4.erosionalVelocityAgainstDropDerived)} ft/s from the velocity the pressure drop read (derived from the two engine values on this row).`);
   w();
   w('Density is the whole of the limit: the same c factor against four fluids.');
   w('| mixture density lb/ft3 | erosional velocity at c 100 | at c 125 | at c 175 |');
   w('| --- | --- | --- | --- |');
   s4.densityRows.forEach((r) => w(`| ${e6(r.rhoLbFt3)} | ${e6(r.at100)} | ${e6(r.at125)} | ${e6(r.at175)} |`));
-  w(`A light gas is allowed to run faster than a dense liquid by the square root of the density ratio: at the continuous-service c factor the ${e6(s4.lightRhoLbFt3)} lb/ft3 row stands at ${e6(s4.veLightFtS)} ft/s against ${e6(s4.veHeavyFtS)} ft/s at ${e6(s4.heavyRhoLbFt3)} lb/ft3, a ratio of ${e6(s4.densityRatioDerived)} (derived from the two rows above).`);
+  w(`A light gas is allowed to run faster than a dense liquid by the square root of the density ratio, and the two agree to ${ex3(s4.densitySqrtAgreementDerived)} (derived from the velocity ratio on this row and the square root of the two densities it names): at the continuous-service c factor the ${e6(s4.lightRhoLbFt3)} lb/ft3 row stands at ${e6(s4.veLightFtS)} ft/s against ${e6(s4.veHeavyFtS)} ft/s at ${e6(s4.heavyRhoLbFt3)} lb/ft3, a ratio of ${e6(s4.densityRatioDerived)} (derived from the two rows above).`);
   w();
   w('# HELD FOR LITERATURE, taught as a limit and never graded: the three c factor rows. The recommended practice itself says its own figures are conservative, and the third row is labelled as operator practice with no publication behind it. Every graded erosional value in this course states its own c factor.');
   w();
@@ -209,7 +209,7 @@ const buildDigest = () => {
   w('| nominal | schedule | outside diameter in | wall in | bore in | velocity ft/s | Reynolds | friction loss psi | total psi | erosional ft/s | ratio | inside the limit |');
   w('| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |');
   s5.rows.forEach((r) => w(`| ${r.nps} | ${r.schedule} | ${e6(r.odIn)} | ${e6(r.wallIn)} | ${e6(r.idIn)} | ${e6(r.vFtS)} | ${r4(r.re)} | ${e6(r.dpFrictionPsi)} | ${e6(r.dpTotalPsi)} | ${e6(r.erosionalFtS)} | ${e6(r.ratio)} | ${r.insideTheLimit} |`));
-  w(`The erosional velocity is the same on every row, ${e6(s5.erosionalFtS)} ft/s, because it depends on the density and the c factor and not on the bore. What changes down the table is the velocity that has to sit under it.`);
+  w(`The erosional velocity column spreads ${e6(s5.erosionalSpreadDerived)} ft/s across every row (derived from the column above) and reads ${e6(s5.erosionalFtS)} ft/s, because it depends on the density and the c factor and not on the bore. What changes down the table is the velocity that has to sit under it.`);
   w();
   w('The table is ordered by nominal size and then by schedule, and that order is NOT the order of the bores:');
   w(`bores in table order: ${s5.boresInTableOrder.map((x) => e6(x)).join(', ')}.`);
@@ -287,6 +287,7 @@ const buildDigest = () => {
   s9.rows.forEach((r) => w(`| ${e6(r.elevChangeFt)} | ${num(r.s, 10)} | ${num(r.es, 10)} | ${num(r.leFactor, 10)} |`));
   w(`A hill does two things and they are not the same thing. It scales the outlet pressure inside the driving group through e to the s, and it changes the length the friction acts over through the equivalent length factor. At zero elevation both collapse to ${num(1, 10)} on the row above, and the Weymouth rate with the hill set to zero is ${r4(s9.flatAgainScfd)} scfd against the Section 8 rate of ${r4(s9.sectionEightWeymouthScfd)} scfd, a difference of ${r4(s9.flatAgainDifferenceDerived)} scfd (derived from the two engine values on this row), so the flat form is what the adjusted form becomes.`);
   w(`The coefficient inside s, measured by asking the engine for s at a gravity of one, a thousand feet of rise, an absolute temperature of one and a compressibility of one, then dividing by the thousand feet: ${num(s9.coefficientDerived, 12)} (derived from the engine's ${num(s9.coefficientProbeS, 6)}).`);
+  w(`The rise is in FEET and the length is in MILES, and the forms guard one against the other, so the conversion is readable here rather than assumed: on a line ${e6(s9.mileProbeLengthMi)} mile long the largest rise the engine accepts is ${num(s9.mileFtAccepted, 9)} ft, and the next representable value above it, ${s9.mileGapFt.toExponential(3)} ft higher, is refused (engine).`);
   w();
   w('What the hill costs the trunk, by form:');
   w('| form | flat scfd | up scfd | down scfd | up as a fraction of flat | down as a fraction of flat |');
@@ -301,6 +302,7 @@ const buildDigest = () => {
   w();
   w('# App surface: this is the direction the studio actually works in. A designer knows the rate the terminal has contracted for and wants the pressure it will see, which is the inverse of every form above.');
   w('The engine has no closed inversion. It bisects on the outlet pressure, calling the published form at each step, inside a bracket that runs from atmospheric up to the pressure at which the driving group vanishes. That upper end is the inlet over the square root of e to the s, and it is NOT the inlet: a hill moves it.');
+  w(`The FLOOR of that bracket is atmospheric, which the module does not export, so it is measured the way every other constant here is: push the requested rate up until the solve refuses, and read the outlet it converges on at the largest rate it still accepts. The largest rate this trunk accepts is ${r4(s1.atmosphericLargestRateScfd)} scfd, the outlet there is ${e6(s1.atmosphericFloorPsia)} psia, and one scfd more is refused (engine). That floor is not the base the published forms report at: it stands ${e6(s1.baseAgainstAtmosphericDerived)} psi above the ${e6(s1.pbPsia)} psia of Section 7 (derived from the two figures on this row).`);
   w();
   w('Round trips on the flat trunk, each form solved back to the outlet it came from:');
   w('| form | rate scfd | outlet recovered psia | against the stated outlet psia |');
@@ -318,7 +320,7 @@ const buildDigest = () => {
   w();
   w(`Down ${e6(s10.steepDownFt)} ft, the trunk carries ${r4(s10.steepScfd)} scfd when its outlet stands at ${e6(s10.steepOutletPsia)} psia, which is ${e6(s10.steepAboveInletPsi)} psia ABOVE its inlet of ${e6(s10.p1Psia)} psia.`);
   w(`Given that same rate the inverse returns ${shape(s10.steepInverseShape)}, and the forward call and the inverse call now differ by ${e6(s10.steepInverseErrorDerived)} psi. The drop is NEGATIVE because the line arrives higher than it left, which is the honest reading of a descent and not an error state.`);
-  w(`THE CONTROL. Run the SAME descent with an outlet genuinely BELOW the inlet, ${e6(s10.controlP2Psia)} psia against ${e6(s10.p1Psia)} psia: the trunk carries ${r4(s10.controlScfd)} scfd and the inverse recovers ${e6(s10.controlRecoveredPsia)} psia, an error of ${e6(s10.controlErrorDerived)} psi. Both answers come out of the same bisection, and the one that used to be wrong was the one whose answer sat outside the bracket rather than the one the solver could not converge.`);
+  w(`THE CONTROL. Run the SAME descent with an outlet genuinely BELOW the inlet, ${e6(s10.controlP2Psia)} psia against ${e6(s10.p1Psia)} psia: the trunk carries ${r4(s10.controlScfd)} scfd and the inverse recovers ${e6(s10.controlRecoveredPsia)} psia, an error of ${e6(s10.controlErrorDerived)} psi. Both answers come out of the same bisection. A search whose answer lies outside its bracket and a search that cannot converge look identical from a single case, and only a case with its answer inside the bracket tells the two apart.`);
   w();
   w(`The climb is the same bracket read from the other side, and it is the commoner case. Up ${e6(s10.steepUpFt)} ft, asked for ${r4(s10.steepUpScfd)} scfd, the trunk delivers at ${e6(s10.upP2Psia)} psia for a drop of ${e6(s10.upDpPsi)} psi, and the ceiling on the table above, ${e6(s10.upCeilingPsiaDerived)} psia, stands ${e6(s10.upCeilingAboveDeliveredDerived)} psi above that delivery (derived from the two figures on this row) and is as close to the inlet as any rate can bring it.`);
   w(`And a climb the inlet cannot pay for at all is refused rather than answered. The same hill under a near-atmospheric inlet of ${e6(s10.starvedP1Psia)} psia: ${soft(s10.starvedError)}`);
@@ -370,7 +372,7 @@ const buildDigest = () => {
   w('| --- | --- | --- | --- | --- | --- |');
   s13.classRows.forEach((r) => w(`| B31.8 | ${r.locationClass} | ${e6(r.designFactor)} | ${e6(r.tPressureIn)} | ${e6(r.tRequiredIn)} | ${e6(r.maopPsig)} |`));
   w(`| B31.4 | any | ${e6(s13.b314Row.designFactor)} | ${e6(s13.b314Row.tPressureIn)} | ${e6(s13.b314Row.tRequiredIn)} | ${e6(s13.b314Row.maopPsig)} |`);
-  w(`Class 4 asks for ${e6(s13.class4OverClass1Derived)} times the pressure wall of Class 1 on the same pipe at the same pressure (derived from the two rows above). The route, not the fluid, is what moved it.`);
+  w(`Class 4 asks for ${e6(s13.class4OverClass1Derived)} times the pressure wall of Class 1 on the same pipe at the same pressure (derived from the two rows above). What moved it is the route rather than the fluid.`);
   w();
   w('The joint factor and the temperature derate, one at a time, at Class 1:');
   w('| joint factor | pressure wall in | temperature derate | pressure wall in |');
@@ -417,11 +419,11 @@ const buildDigest = () => {
   w(`The jump at the branch, again and exactly: on the OGBIA pipe the friction factor is ${num(s15.fJustBelow, 10)} at Reynolds ${num(s15.reJustBelow, 7)} and ${num(s15.fAtBranch, 10)} at Reynolds ${r4(s15.reAtBranch)}, a ratio of ${e6(s15.jumpRatioDerived)} (derived from the two engine values on this row).`);
   w('Nothing physical happens in that interval. The engine leaves the laminar law and starts the turbulent one, and the discontinuity is the price of having no correlation for the band between them.');
   w();
-  w('Colebrook past the roughness it was published for, which reaches about 0.05:');
+  w(`Colebrook past the roughness it was published for, which reaches about ${s15.colebrookPublishedTo}:`);
   w(`| relative roughness | f at Reynolds ${r4(s15.reForDomainSweep)} |`);
   w('| --- | --- |');
   s15.domainRows.forEach((r) => w(`| ${e6(r.relRough)} | ${num(r.f, 10)} |`));
-  w('The engine answers all five and flags none of them. The last two are extrapolations of a fitted curve into a region where the pipe is more obstruction than pipe.');
+  w(`The engine answers all ${s15.colebrookRowCount} and flags none of them. ${s15.colebrookPastPublished} of the rows stand above ${s15.colebrookPublishedTo} (derived from the column above), and every one of those is an extrapolation of a fitted curve into a region where the pipe is more obstruction than pipe.`);
   w();
   w('The friction Weymouth assumes, measured by asking General Flow what friction factor would make it agree:');
   w('| bore in | weymouth scfd | general scfd | the friction factor general settled on | the friction factor that would make general match weymouth |');
@@ -448,6 +450,7 @@ const buildDigest = () => {
   w();
   w('Inputs that have no physical meaning, and the message each one produces, verbatim:');
   s16.refusals.forEach((r) => w(`- ${r.label}: ${soft(r.error)}`));
+  w(`That catalogue is ${s16.refusalEntries} entries carrying ${s16.refusalDistinctDerived} distinct messages (derived by counting the rows above and the messages on them), so ${s16.refusalRepeatedDerived} messages appear more than once. They split ${s16.refusalTwoFunctionsDerived} and ${s16.refusalTwoValuesDerived} (derived from the function each row called): ${s16.refusalTwoFunctionsDerived} are ONE GUARD reached from TWO DIFFERENT FUNCTIONS, and ${s16.refusalTwoValuesDerived} are ONE FUNCTION refusing TWO DIFFERENT bad values. A reader who counts messages rather than entries is counting guards rather than ways in, and the two numbers are not the same number.`);
   w();
   w('Every one of those guards has a boundary, and the boundary is where the teaching is: a resistance sum of zero is a line with no fittings and is perfectly legal, an efficiency of exactly one is the ideal the forms are written for, a holdup of one is a line running full, and a line exactly as tall as it is long is vertical. The engine is handed the value on each side and says which it took:');
   w('| guard | value | the engine |');
@@ -467,7 +470,7 @@ const buildDigest = () => {
   w(`- a grade the table does not carry: gradeYield returns ${s16.catalogueAnswers.gradeYield}`);
   w(`- a pipe size the table does not carry: scheduleRow returns ${shape(s16.catalogueAnswers.scheduleRow)}`);
   w(`- an erosional service the table does not carry: erosionalC returns ${shape(s16.catalogueAnswers.erosionalC)}`);
-  w('Four of the five say they do not know. The fifth answers under a label that is not the one it was asked for, and it is the one that was NOT repaired: the RP 14E table belongs to the wellhead engine that two other studios read, so changing what an unknown service returns is a decision for that table rather than for this line-sizing chain.');
+  w('Four of the five say they do not know. The fifth answers under a label it was not asked for, and it stays that way because the RP 14E table belongs to the wellhead engine that two other studios read, so what an unknown service returns is a decision for that table rather than for this line-sizing chain.');
   w(`And the rating still over-rates a line if the caller drops the allowance, because the allowance is an argument of the rating rather than a property of the pipe. It is the pair the wall section already read: the same wall reads ${e6(s13.maopWithPsig)} psig with the allowance and ${e6(s13.maopWithoutPsig)} psig without, ${e6(s13.maopRatioDerived)} times the rating with the allowance, and the factor is the gross wall over the net rather than anything about this pipe. Both calls are legal, both are correct for what they were asked, and neither warns. A guard cannot fix a question that was fully formed and simply wrong.`);
   w();
 
@@ -487,14 +490,14 @@ const buildDigest = () => {
   w('One barrel for the package, measured out of each module by asking that module a question about itself rather than by reading either source:');
   w(`- from lineHydraulics, as the flow area times the length over the line volume: ${num(s17.bblFromLineHydraulicsDerived, 13)} cubic feet per barrel`);
   w(`- from chokePerformance, as the erosional velocity times the area times the seconds in a day over the erosional rate: ${num(s17.bblFromChokePerformanceDerived, 13)} cubic feet per barrel`);
-  w(`The ratio of the two is ${num(s17.bblRatioDerived, 13)} (derived from the two rows above). They were two different numbers one import apart, inside the single chain this studio composes, until the package gave them one definition. The one it kept is exact by definition rather than by measurement: forty-two gallons of two hundred and thirty-one cubic inches each, over the seventeen hundred and twenty-eight cubic inches in a cubic foot. Both modules' own oracles already worked from it, so the goldens said which half of the disagreement was right before anyone asked them.`);
+  w(`The ratio of the two is ${num(s17.bblRatioDerived, 13)} (derived from the two rows above). The package gives both modules one definition of a barrel, and it is exact by definition rather than by measurement: forty-two gallons of two hundred and thirty-one cubic inches each, over the seventeen hundred and twenty-eight cubic inches in a cubic foot. Each module's own oracle works from that definition, which is why asking the two modules separately is a check on the chain rather than a reading of one source.`);
   w();
 
   // Section 18
   const s18 = L.expertReading();
   w('# SECTION 18: The Expert reading, three questions and the pipes they are asked of (owned by Expert m06)');
   w();
-  w(`Three questions, and the three pipes they are asked of. As a hydraulic line the OGBIA bore of ${e6(s18.idIn)} in carries ${e6(s18.qBpd)} bpd at ${e6(s18.vFtS)} ft/s, Reynolds ${r4(s18.re)}, and spends ${e6(s18.dpTotalPsi)} psi over ${e6(s18.lengthFt)} ft, against an erosional ceiling of ${e6(s18.erosionalFtS)} ft/s that it uses ${e6(s18.usedFractionDerived)} of.`);
+  w(`Three questions, and the TWO pipes they are asked of. As a hydraulic line the OGBIA bore of ${e6(s18.idIn)} in carries ${e6(s18.qBpd)} bpd at ${e6(s18.vFtS)} ft/s, Reynolds ${r4(s18.re)}, and spends ${e6(s18.dpTotalPsi)} psi over ${e6(s18.lengthFt)} ft, against an erosional ceiling of ${e6(s18.erosionalFtS)} ft/s that it uses ${e6(s18.usedFractionDerived)} of.`);
   w(`As a pressure envelope the SOKU pipe at ${e6(s18.odIn)} in outside diameter and ${e6(s18.smysPsi)} psi of yield needs ${e6(s18.class3RequiredIn)} in of wall at Class 3 and ${e6(s18.class1RequiredIn)} in at Class 1, and the ${e6(s18.asBuiltIn)} in the mill rolled rates ${e6(s18.maopPsig)} psig. That is a different pipe from the one above it: its bore is the outside diameter less twice the wall, ${e6(s18.wallBoreDerivedIn)} in, which stands ${e6(s18.wallBoreAgainstOgbiaDerived)} in wider than the OGBIA bore (derived from the two figures on these rows).`);
   w(`As a volume the OGBIA line holds ${r4(s18.lineVolumeBbl)} bbl, a sphere crosses it in ${e6(s18.runHours)} hours, and at a measured holdup of ${e6(s18.nominalHoldup)} it delivers ${r4(s18.nominalSweptBbl)} bbl to whatever is waiting at the end, every ${r4(s18.nominalIntervalDays)} days.`);
   w('Three answers, and not one of them can be derived from the other two. The independence is not a trick of one pipe wearing three hats, which is why the wall reading above is stated on the pipe it belongs to: what a line spends in pressure, what wall a code demands of it and what liquid a pig pushes out of it are three separate questions, and an answer to any one of them carries no answer to another.');

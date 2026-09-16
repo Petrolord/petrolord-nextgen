@@ -334,30 +334,30 @@ export const SOFT_STATE_PROBES = [
  * came back as a number, a NaN or an Infinity with no error key at all.
  */
 export const REFUSAL_PROBES = [
-  { label: 'a negative resistance sum', call: () => liquidAt(OGBIA, { sumK: SUM_K_JUST_UNDER }) },
-  { label: 'a negative roughness', call: () => liquidAt(OGBIA, { roughnessIn: ROUGHNESS_JUST_UNDER }) },
-  { label: 'a liquid line that rises further than its own length', call: () => H.liquidLineDrop({ ...OGBIA, lengthFt: VERTICAL_RUN_FT, elevChangeFt: TALLER_THAN_LONG_FT }) },
-  { label: 'a traverse with no inlet pressure', call: () => H.liquidLineTraverse({ qBpd: OGBIA.qBpd, idIn: OGBIA.idIn, rhoLbFt3: OGBIA.rhoLbFt3, muCp: OGBIA.muCp, roughnessIn: OGBIA.roughnessIn, profile: OGBIA_PROFILE_FLAT }) },
-  { label: 'a gas line at an efficiency above one', call: () => H.weymouthQ({ ...SOKU, efficiency: EFFICIENCY_JUST_OVER }) },
-  { label: 'a gas line at a negative efficiency', call: () => H.weymouthQ({ ...SOKU, efficiency: -EFFICIENCY_AT_LIMIT }) },
-  { label: 'a gas line of no length', call: () => H.weymouthQ({ ...SOKU, lengthMi: 0 }) },
-  { label: 'a gas line of negative length', call: () => H.weymouthQ({ ...SOKU, lengthMi: -SOKU.lengthMi }) },
-  { label: 'a gas line of negative bore', call: () => H.weymouthQ({ ...SOKU, idIn: -SOKU.idIn }) },
-  { label: 'a gas at a compressibility of zero', call: () => H.weymouthQ({ ...SOKU, zAvg: 0 }) },
-  { label: 'a gas at an absolute temperature of zero', call: () => H.weymouthQ({ ...SOKU, tAvgR: 0 }) },
-  { label: 'a gas of no gravity', call: () => H.panhandleAQ({ ...SOKU, sg: 0 }) },
-  { label: 'a gas line that rises further than its own length', call: () => H.weymouthQ({ ...SOKU, lengthMi: MILE_PROBE_LENGTH_MI, elevChangeFt: SOKU_STEEP_UP_FT * 10 }) },
-  { label: 'General Flow with no gas viscosity', call: () => H.generalFlowQ({ ...SOKU, muCp: 0 }) },
-  { label: 'General Flow at a negative roughness', call: () => H.generalFlowQ({ ...SOKU, roughnessIn: ROUGHNESS_JUST_UNDER }) },
-  { label: 'an elevation group at a compressibility of zero', call: () => H.elevationAdjustment({ sg: SOKU.sg, elevChangeFt: SOKU_UP_FT, tAvgR: SOKU.tAvgR, zAvg: 0 }) },
-  { label: 'a wall at a joint factor of zero', call: () => H.requiredWallIn({ ...SOKU_WALL, jointFactor: 0 }) },
-  { label: 'a wall at a temperature derate of zero', call: () => H.requiredWallIn({ ...SOKU_WALL, tempDerate: 0 }) },
-  { label: 'a wall with a negative corrosion allowance', call: () => H.requiredWallIn({ ...SOKU_WALL, corrosionAllowanceIn: ALLOWANCE_JUST_UNDER }) },
-  { label: 'a rating with a negative corrosion allowance', call: () => H.maopPsig({ ...SOKU_WALL, wallIn: SOKU_WALL_AS_BUILT_IN, corrosionAllowanceIn: ALLOWANCE_JUST_UNDER }) },
-  { label: 'a sweep with no bore', call: () => H.sweptLiquidBbl({ idIn: 0, lengthFt: OGBIA_PIG.lengthFt, holdupFrac: OGBIA_HOLDUP_NOMINAL }) },
-  { label: 'a sweep of negative length', call: () => H.sweptLiquidBbl({ idIn: OGBIA_PIG.idIn, lengthFt: -OGBIA_PIG.lengthFt, holdupFrac: OGBIA_HOLDUP_NOMINAL }) },
-  { label: 'an interval on a negative sweep', call: () => H.piggingInterval({ maxSlugBbl: OGBIA_CATCHER_BBL, dropoutBpd: OGBIA_DROPOUT_BPD, sweptBbl: SWEPT_JUST_UNDER }) },
-  { label: 'an outlet solve on a climb the inlet cannot pay for', call: () => H.gasOutletPressure({ equation: 'weymouth', qScfd: SOKU_STEEP_UP_SCFD, ...SOKU, p1Psia: SOKU_STARVED_P1_PSIA, elevChangeFt: SOKU_STEEP_UP_FT }) },
+  { label: 'a negative resistance sum', call: () => liquidAt(OGBIA, { sumK: SUM_K_JUST_UNDER }), fn: 'liquidLineDrop' },
+  { label: 'a negative roughness', call: () => liquidAt(OGBIA, { roughnessIn: ROUGHNESS_JUST_UNDER }), fn: 'liquidLineDrop' },
+  { label: 'a liquid line that rises further than its own length', call: () => H.liquidLineDrop({ ...OGBIA, lengthFt: VERTICAL_RUN_FT, elevChangeFt: TALLER_THAN_LONG_FT }), fn: 'liquidLineDrop' },
+  { label: 'a traverse with no inlet pressure', call: () => H.liquidLineTraverse({ qBpd: OGBIA.qBpd, idIn: OGBIA.idIn, rhoLbFt3: OGBIA.rhoLbFt3, muCp: OGBIA.muCp, roughnessIn: OGBIA.roughnessIn, profile: OGBIA_PROFILE_FLAT }), fn: 'liquidLineTraverse' },
+  { label: 'a gas line at an efficiency above one', call: () => H.weymouthQ({ ...SOKU, efficiency: EFFICIENCY_JUST_OVER }), fn: 'weymouthQ' },
+  { label: 'a gas line at a negative efficiency', call: () => H.weymouthQ({ ...SOKU, efficiency: -EFFICIENCY_AT_LIMIT }), fn: 'weymouthQ' },
+  { label: 'a gas line of no length', call: () => H.weymouthQ({ ...SOKU, lengthMi: 0 }), fn: 'weymouthQ' },
+  { label: 'a gas line of negative length', call: () => H.weymouthQ({ ...SOKU, lengthMi: -SOKU.lengthMi }), fn: 'weymouthQ' },
+  { label: 'a gas line of negative bore', call: () => H.weymouthQ({ ...SOKU, idIn: -SOKU.idIn }), fn: 'weymouthQ' },
+  { label: 'a gas at a compressibility of zero', call: () => H.weymouthQ({ ...SOKU, zAvg: 0 }), fn: 'weymouthQ' },
+  { label: 'a gas at an absolute temperature of zero', call: () => H.weymouthQ({ ...SOKU, tAvgR: 0 }), fn: 'weymouthQ' },
+  { label: 'a gas of no gravity', call: () => H.panhandleAQ({ ...SOKU, sg: 0 }), fn: 'panhandleAQ' },
+  { label: 'a gas line that rises further than its own length', call: () => H.weymouthQ({ ...SOKU, lengthMi: MILE_PROBE_LENGTH_MI, elevChangeFt: SOKU_STEEP_UP_FT * 10 }), fn: 'weymouthQ' },
+  { label: 'General Flow with no gas viscosity', call: () => H.generalFlowQ({ ...SOKU, muCp: 0 }), fn: 'generalFlowQ' },
+  { label: 'General Flow at a negative roughness', call: () => H.generalFlowQ({ ...SOKU, roughnessIn: ROUGHNESS_JUST_UNDER }), fn: 'generalFlowQ' },
+  { label: 'an elevation group at a compressibility of zero', call: () => H.elevationAdjustment({ sg: SOKU.sg, elevChangeFt: SOKU_UP_FT, tAvgR: SOKU.tAvgR, zAvg: 0 }), fn: 'elevationAdjustment' },
+  { label: 'a wall at a joint factor of zero', call: () => H.requiredWallIn({ ...SOKU_WALL, jointFactor: 0 }), fn: 'requiredWallIn' },
+  { label: 'a wall at a temperature derate of zero', call: () => H.requiredWallIn({ ...SOKU_WALL, tempDerate: 0 }), fn: 'requiredWallIn' },
+  { label: 'a wall with a negative corrosion allowance', call: () => H.requiredWallIn({ ...SOKU_WALL, corrosionAllowanceIn: ALLOWANCE_JUST_UNDER }), fn: 'requiredWallIn' },
+  { label: 'a rating with a negative corrosion allowance', call: () => H.maopPsig({ ...SOKU_WALL, wallIn: SOKU_WALL_AS_BUILT_IN, corrosionAllowanceIn: ALLOWANCE_JUST_UNDER }), fn: 'maopPsig' },
+  { label: 'a sweep with no bore', call: () => H.sweptLiquidBbl({ idIn: 0, lengthFt: OGBIA_PIG.lengthFt, holdupFrac: OGBIA_HOLDUP_NOMINAL }), fn: 'sweptLiquidBbl' },
+  { label: 'a sweep of negative length', call: () => H.sweptLiquidBbl({ idIn: OGBIA_PIG.idIn, lengthFt: -OGBIA_PIG.lengthFt, holdupFrac: OGBIA_HOLDUP_NOMINAL }), fn: 'sweptLiquidBbl' },
+  { label: 'an interval on a negative sweep', call: () => H.piggingInterval({ maxSlugBbl: OGBIA_CATCHER_BBL, dropoutBpd: OGBIA_DROPOUT_BPD, sweptBbl: SWEPT_JUST_UNDER }), fn: 'piggingInterval' },
+  { label: 'an outlet solve on a climb the inlet cannot pay for', call: () => H.gasOutletPressure({ equation: 'weymouth', qScfd: SOKU_STEEP_UP_SCFD, ...SOKU, p1Psia: SOKU_STARVED_P1_PSIA, elevChangeFt: SOKU_STEEP_UP_FT }), fn: 'gasOutletPressure' },
 ];
 
 /** Every guard section 16 reads from both sides. */
@@ -523,6 +523,15 @@ export const frictionAndRegime = () => {
       return { re, f: r.f, regime: r.regime };
     }),
     ogbiaRelRoughDerived: relRough,
+    // THE TWO COLUMNS OF THE MOODY TABLE, compared rather than described: a
+    // rough pipe stops caring about the Reynolds number and a smooth one never
+    // does, and the ratio on each end row is what says so.
+    roughnessSmoothest: RELATIVE_ROUGHNESS_SWEEP[0],
+    roughnessRoughest: RELATIVE_ROUGHNESS_SWEEP[RELATIVE_ROUGHNESS_SWEEP.length - 1],
+    smoothColumnRatioDerived: H.frictionFactor({ re: RE_HIGH_FOR_ROUGHNESS_TABLE, relRough: RELATIVE_ROUGHNESS_SWEEP[0] }).f
+      / H.frictionFactor({ re: RE_LOW_FOR_ROUGHNESS_TABLE, relRough: RELATIVE_ROUGHNESS_SWEEP[0] }).f,
+    roughColumnRatioDerived: H.frictionFactor({ re: RE_HIGH_FOR_ROUGHNESS_TABLE, relRough: RELATIVE_ROUGHNESS_SWEEP[RELATIVE_ROUGHNESS_SWEEP.length - 1] }).f
+      / H.frictionFactor({ re: RE_LOW_FOR_ROUGHNESS_TABLE, relRough: RELATIVE_ROUGHNESS_SWEEP[RELATIVE_ROUGHNESS_SWEEP.length - 1] }).f,
     jumpFromF: jLo.f,
     jumpToF: jHi.f,
     jumpPercentDerived: (jHi.f / jLo.f - 1) * 100,
@@ -576,6 +585,11 @@ export const threeLosses = () => {
     withKFittingsPsi: withK.dpFittingsPsi,
     withKFrictionPsi: withK.dpFrictionPsi,
     withKShareDerived: withK.dpFittingsPsi / withK.dpTotalPsi,
+    // The elevation table, compared rather than described.
+    frictionSpreadDerived: Math.max(...OGBIA_ELEVATION_SWEEP_FT.map((dz) => liquidAt(OGBIA, { elevChangeFt: dz }).dpFrictionPsi))
+      - Math.min(...OGBIA_ELEVATION_SWEEP_FT.map((dz) => liquidAt(OGBIA, { elevChangeFt: dz }).dpFrictionPsi)),
+    elevationSumDerived: liquidAt(OGBIA, { elevChangeFt: OGBIA_ELEVATION_SWEEP_FT[1] }).dpElevationPsi
+      + liquidAt(OGBIA, { elevChangeFt: OGBIA_ELEVATION_SWEEP_FT[2] }).dpElevationPsi,
     manifoldLengthFt: OGBIA_MANIFOLD_LENGTH_FT,
     shortFrictionPsi: short.dpFrictionPsi,
     shortFittingsPsi: short.dpFittingsPsi,
@@ -660,6 +674,13 @@ export const erosionalLimit = () => ({
   veHeavyFtS: C.erosionalVelocityFtS({
     mixtureDensityLbFt3: EROSIONAL_DENSITY_SWEEP[3], cFactor: C.erosionalC('continuous').c,
   }),
+  // The erosional check reads the SAME velocity the pressure drop read, and the
+  // difference is exported so that is a subtraction rather than a claim.
+  erosionalVelocityAgainstDropDerived: C.mixtureVelocityFtS({ inSituBpd: OGBIA.qBpd, idIn: OGBIA.idIn })
+    - liquidAt(OGBIA).vFtS,
+  densitySqrtAgreementDerived: (C.erosionalVelocityFtS({ mixtureDensityLbFt3: EROSIONAL_DENSITY_SWEEP[0], cFactor: C.erosionalC('continuous').c })
+    / C.erosionalVelocityFtS({ mixtureDensityLbFt3: EROSIONAL_DENSITY_SWEEP[3], cFactor: C.erosionalC('continuous').c }))
+    - Math.sqrt(EROSIONAL_DENSITY_SWEEP[3] / EROSIONAL_DENSITY_SWEEP[0]),
   densityRatioDerived: C.erosionalVelocityFtS({
     mixtureDensityLbFt3: EROSIONAL_DENSITY_SWEEP[0], cFactor: C.erosionalC('continuous').c,
   }) / C.erosionalVelocityFtS({
@@ -693,6 +714,10 @@ export const boreChoice = () => {
       insideTheLimit: !chk.exceeded,
     })),
     erosionalFtS: sweep[0].chk.erosionalFtS,
+    // The column is the SAME on every row because it depends on the density
+    // and the c factor and not on the bore, and the spread says so.
+    erosionalSpreadDerived: Math.max(...sweep.map((r) => r.chk.erosionalFtS))
+      - Math.min(...sweep.map((r) => r.chk.erosionalFtS)),
     boresInTableOrder: P.PIPE_SCHEDULE.map((r) => r.id),
     schedulePairs: SCHEDULE_PAIR_NPS.map((nps) => {
       const a = P.scheduleRow(nps, '40');
@@ -857,6 +882,11 @@ export const elevationGroup = () => {
     }),
     coefficientDerived: coeff.s / 1000,
     coefficientProbeS: coeff.s,
+    // THE UNIT SEAM: a rise in FEET against a length in MILES, so the guard the
+    // four forms put on it is where the feet in a mile are readable.
+    mileProbeLengthMi: MILE_PROBE_LENGTH_MI,
+    mileFtAccepted: mileGuardProbe(MILE_PROBE_LENGTH_MI).lo,
+    mileGapFt: mileGuardProbe(MILE_PROBE_LENGTH_MI).gap,
     // At zero elevation the adjusted form IS the flat form, and the difference
     // is exported so that claim is read rather than asserted.
     flatAgainScfd: H.weymouthQ({ ...SOKU, elevChangeFt: 0 }).qScfd,
@@ -1289,6 +1319,9 @@ export const correlationLimits = () => {
     deadWeymouthScfd: deadW.qScfd,
     deadGeneralScfd: deadG.qScfd,
     deadGeneralFDarcy: deadG.fDarcy,
+    colebrookPublishedTo: 0.05,
+    colebrookRowCount: COLEBROOK_DOMAIN_SWEEP.length,
+    colebrookPastPublished: COLEBROOK_DOMAIN_SWEEP.filter((rr) => rr > 0.05).length,
     deadRatioDerived: deadW.qScfd / deadG.qScfd,
     fullDutyRatioDerived: q.weymouth.qScfd / q.general.qScfd,
     deadDistanceDerived: Math.abs(1 - deadW.qScfd / deadG.qScfd),
@@ -1333,6 +1366,25 @@ export const refusalCatalogue = () => {
       re: og.re, relRough: ROUGHNESS_JUST_UNDER / OGBIA.idIn,
     })),
     refusals: REFUSAL_PROBES.map(({ label, call }) => ({ label, error: softOf(call()) })),
+    // THE COUNTS A LESSON TEACHES AND TWO QUESTIONS GRADE ON, derived by
+    // counting the rows rather than by anybody counting them by hand. A
+    // message that repeats is a guard with more than one way in.
+    ...(() => {
+      const msgs = REFUSAL_PROBES.map(({ call, fn }) => [(call().error || ''), fn]);
+      const count = {}; const fns = {};
+      msgs.forEach(([m, f]) => {
+        count[m] = (count[m] || 0) + 1;
+        (fns[m] = fns[m] || []).push(f);
+      });
+      const repeated = Object.keys(count).filter((m) => count[m] > 1);
+      return {
+        refusalEntries: REFUSAL_PROBES.length,
+        refusalDistinctDerived: Object.keys(count).length,
+        refusalRepeatedDerived: repeated.length,
+        refusalTwoFunctionsDerived: repeated.filter((m) => new Set(fns[m]).size > 1).length,
+        refusalTwoValuesDerived: repeated.filter((m) => new Set(fns[m]).size === 1).length,
+      };
+    })(),
     boundaries: BOUNDARY_PROBES.map(({ label, value, call }) => ({
       label, value, refuses: Boolean(call().error),
     })),
@@ -1425,6 +1477,7 @@ export const expertReading = () => {
     // THE WALL READING IS A DIFFERENT PIPE. Its bore is the outside diameter
     // less twice the wall, and the gap against the OGBIA bore is exported so
     // the three readings cannot be described as one pipe.
+    pipeCount: 2,
     wallBoreDerivedIn: SOKU_WALL.odIn - 2 * SOKU_WALL_AS_BUILT_IN,
     wallBoreAgainstOgbiaDerived: SOKU_WALL.odIn - 2 * SOKU_WALL_AS_BUILT_IN - OGBIA.idIn,
     lineVolumeBbl: H.lineVolumeBbl(OGBIA_PIG),

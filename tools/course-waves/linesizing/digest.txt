@@ -84,7 +84,7 @@ Relative roughness alone, at one Reynolds number, which is the vertical axis of 
 | 0.003000 | 0.027470859836 | 0.026166325472 |
 | 0.010000 | 0.038503543527 | 0.037904323387 |
 | 0.050000 | 0.071780929441 | 0.071550904091 |
-A rough pipe stops caring about the Reynolds number and a smooth one never does: read the two columns against each other down the table.
+A rough pipe stops caring about the Reynolds number and a smooth one never does, and the two columns say so: on the 0.000000 row the second column is 0.3302135232 of the first, and on the 0.050000 row it is 0.9967954532 (derived from the two columns on those rows). A thousandfold in Reynolds number moves the smooth pipe and leaves the rough one where it was.
 
 The OGBIA line walked from turbulent into laminar by viscosity alone, at its built bore:
 | viscosity cp | velocity ft/s | Reynolds number | f | regime | friction loss psi |
@@ -116,7 +116,7 @@ The fittings on the isometric, and the resistance sum the schedule builds from t
 | suddenExit | 1 | 1.000000 | 1.000000 |
 The engine's resistance sum for that list: 4.500000 velocity heads (engine).
 On the whole 26400.000000 ft line those fittings cost 0.133351 psi against 25.660631 psi of pipe friction, a share of 0.005170 of the total (derived from the two engine values on this row).
-On a 300.000000 ft manifold run carrying the same duty and the same fittings, the pipe costs 0.291598 psi and the fittings cost 0.133351 psi, a share of 0.313805. The fittings did not change; the pipe did.
+On a 300.000000 ft manifold run carrying the same duty and the same fittings, the pipe costs 0.291598 psi and the fittings cost 0.133351 psi, a share of 0.313805 (derived from the two engine values on this row). The fittings did not change; the pipe did.
 
 Elevation, the same line up and down:
 | elevation change ft | friction psi | elevation psi | total psi | gradient psi per ft |
@@ -124,7 +124,7 @@ Elevation, the same line up and down:
 | 0.000000 | 25.660631 | 0.000000 | 25.660631 | 0.0009719936 |
 | 420.000000 | 25.660631 | 158.958333 | 184.618965 | 0.0069931426 |
 | -420.000000 | 25.660631 | -158.958333 | -133.297702 | -0.0050491554 |
-The friction term is identical in all three rows and the elevation term is symmetric about zero, so a hill is added to a pressure drop rather than mixed into it.
+The friction column spreads 0.000000 psi across the three rows and the two non-zero elevation terms sum to 0.000000 psi (both derived from the table above), so a hill is added to a pressure drop rather than mixed into it.
 
 Roughness, which is the pipe and not the fluid:
 | catalogue id | roughness in | relative roughness | f | friction loss psi |
@@ -161,7 +161,7 @@ The limit at the OGBIA crude density, and what each c factor allows through the 
 | 100.000000 | 13.545709 | 2.244621 | 0.165707 | false | 83.429284 | 72416.9067 |
 | 125.000000 | 16.932137 | 2.244621 | 0.132566 | false | 86.743427 | 90521.1334 |
 | 175.000000 | 23.704991 | 2.244621 | 0.094690 | false | 90.531019 | 126729.5868 |
-The engine's own flow area for that bore is 0.347410 ft2, and the velocity the erosional check reads, 2.244621 ft/s, is the same velocity the pressure drop read.
+The engine's own flow area for that bore is 0.347410 ft2, and the velocity the erosional check reads, 2.244621 ft/s, stands 0.000000 ft/s from the velocity the pressure drop read (derived from the two engine values on this row).
 
 Density is the whole of the limit: the same c factor against four fluids.
 | mixture density lb/ft3 | erosional velocity at c 100 | at c 125 | at c 175 |
@@ -170,7 +170,7 @@ Density is the whole of the limit: the same c factor against four fluids.
 | 20.000000 | 22.360680 | 27.950850 | 39.131190 |
 | 45.000000 | 14.907120 | 18.633900 | 26.087460 |
 | 62.400000 | 12.659242 | 15.824053 | 22.153674 |
-A light gas is allowed to run faster than a dense liquid by the square root of the density ratio: at the continuous-service c factor the 5.000000 lb/ft3 row stands at 44.721360 ft/s against 12.659242 ft/s at 62.400000 lb/ft3, a ratio of 3.532704 (derived from the two rows above).
+A light gas is allowed to run faster than a dense liquid by the square root of the density ratio, and the two agree to -4.441e-16 (derived from the velocity ratio on this row and the square root of the two densities it names): at the continuous-service c factor the 5.000000 lb/ft3 row stands at 44.721360 ft/s against 12.659242 ft/s at 62.400000 lb/ft3, a ratio of 3.532704 (derived from the two rows above).
 
 # HELD FOR LITERATURE, taught as a limit and never graded: the three c factor rows. The recommended practice itself says its own figures are conservative, and the third row is labelled as operator practice with no publication behind it. Every graded erosional value in this course states its own c factor.
 
@@ -191,7 +191,7 @@ The OGBIA duty in every bore the vendored schedule carries, with the RP 14E verd
 | 10 | 40 | 10.750000 | 0.365000 | 10.020000 | 1.424040 | 38575.8308 | 8.561327 | 8.561327 | 13.545709 | 0.105128 | true |
 | 12 | 40 | 12.750000 | 0.406000 | 11.938000 | 1.003216 | 32378.1056 | 3.689918 | 3.689918 | 13.545709 | 0.074062 | true |
 | 16 | 40 | 16.000000 | 0.500000 | 15.000000 | 0.635441 | 25768.6550 | 1.236026 | 1.236026 | 13.545709 | 0.046911 | true |
-The erosional velocity is the same on every row, 13.545709 ft/s, because it depends on the density and the c factor and not on the bore. What changes down the table is the velocity that has to sit under it.
+The erosional velocity column spreads 0.000000 ft/s across every row (derived from the column above) and reads 13.545709 ft/s, because it depends on the density and the c factor and not on the bore. What changes down the table is the velocity that has to sit under it.
 
 The table is ordered by nominal size and then by schedule, and that order is NOT the order of the bores:
 bores in table order: 2.067000, 1.939000, 3.068000, 4.026000, 3.826000, 6.065000, 5.761000, 7.981000, 7.625000, 10.020000, 11.938000, 15.000000.
@@ -294,6 +294,7 @@ The group all four forms share, on the SOKU trunk:
 | -3000.000000 | -0.1591953113 | 0.8528297754 | 0.9244633111 |
 A hill does two things and they are not the same thing. It scales the outlet pressure inside the driving group through e to the s, and it changes the length the friction acts over through the equivalent length factor. At zero elevation both collapse to 1.0000000000 on the row above, and the Weymouth rate with the hill set to zero is 66104956.1404 scfd against the Section 8 rate of 66104956.1404 scfd, a difference of 0.0000 scfd (derived from the two engine values on this row), so the flat form is what the adjusted form becomes.
 The coefficient inside s, measured by asking the engine for s at a gravity of one, a thousand feet of rise, an absolute temperature of one and a compressibility of one, then dividing by the thousand feet: 0.037500000000 (derived from the engine's 37.500000).
+The rise is in FEET and the length is in MILES, and the forms guard one against the other, so the conversion is readable here rather than assumed: on a line 1.000000 mile long the largest rise the engine accepts is 5280.000000000 ft, and the next representable value above it, 9.095e-13 ft higher, is refused (engine).
 
 What the hill costs the trunk, by form:
 | form | flat scfd | up scfd | down scfd | up as a fraction of flat | down as a fraction of flat |
@@ -308,6 +309,7 @@ Uphill is not the mirror of downhill, because the term is an exponential and an 
 
 # App surface: this is the direction the studio actually works in. A designer knows the rate the terminal has contracted for and wants the pressure it will see, which is the inverse of every form above.
 The engine has no closed inversion. It bisects on the outlet pressure, calling the published form at each step, inside a bracket that runs from atmospheric up to the pressure at which the driving group vanishes. That upper end is the inlet over the square root of e to the s, and it is NOT the inlet: a hill moves it.
+The FLOOR of that bracket is atmospheric, which the module does not export, so it is measured the way every other constant here is: push the requested rate up until the solve refuses, and read the outlet it converges on at the largest rate it still accepts. The largest rate this trunk accepts is 96619638.0494 scfd, the outlet there is 14.700000 psia, and one scfd more is refused (engine). That floor is not the base the published forms report at: it stands 0.050000 psi above the 14.650000 psia of Section 7 (derived from the two figures on this row).
 
 Round trips on the flat trunk, each form solved back to the outlet it came from:
 | form | rate scfd | outlet recovered psia | against the stated outlet psia |
@@ -332,7 +334,7 @@ A flat line ends its bracket at its own inlet. A DESCENT ends it above the inlet
 
 Down -3000.000000 ft, the trunk carries 29457958.5967 scfd when its outlet stands at 880.000000 psia, which is 30.000000 psia ABOVE its inlet of 850.000000 psia.
 Given that same rate the inverse returns {"p2Psia":880,"dpPsi":-30}, and the forward call and the inverse call now differ by 0.000000 psi. The drop is NEGATIVE because the line arrives higher than it left, which is the honest reading of a descent and not an error state.
-THE CONTROL. Run the SAME descent with an outlet genuinely BELOW the inlet, 700.000000 psia against 850.000000 psia: the trunk carries 65259103.7761 scfd and the inverse recovers 700.000000 psia, an error of 0.000000 psi. Both answers come out of the same bisection, and the one that used to be wrong was the one whose answer sat outside the bracket rather than the one the solver could not converge.
+THE CONTROL. Run the SAME descent with an outlet genuinely BELOW the inlet, 700.000000 psia against 850.000000 psia: the trunk carries 65259103.7761 scfd and the inverse recovers 700.000000 psia, an error of 0.000000 psi. Both answers come out of the same bisection. A search whose answer lies outside its bracket and a search that cannot converge look identical from a single case, and only a case with its answer inside the bracket tells the two apart.
 
 The climb is the same bracket read from the other side, and it is the commoner case. Up 3000.000000 ft, asked for 20000000.0000 scfd, the trunk delivers at 766.523922 psia for a drop of 83.476078 psi, and the ceiling on the table above, 784.964657 psia, stands 18.440735 psi above that delivery (derived from the two figures on this row) and is as close to the inlet as any rate can bring it.
 And a climb the inlet cannot pay for at all is refused rather than answered. The same hill under a near-atmospheric inlet of 15.500000 psia: { error: "the static gas column alone spends the inlet pressure: this line delivers nothing at any rate" }
@@ -383,7 +385,7 @@ The SOKU wall: 1200.000000 psig design on 12.750000 in outside diameter at a spe
 | B31.8 | 3 | 0.500000 | 0.294231 | 0.419231 | 1200.000000 |
 | B31.8 | 4 | 0.400000 | 0.367788 | 0.492788 | 1200.000000 |
 | B31.4 | any | 0.720000 | 0.204327 | 0.329327 | 1200.000000 |
-Class 4 asks for 1.800000 times the pressure wall of Class 1 on the same pipe at the same pressure (derived from the two rows above). The route, not the fluid, is what moved it.
+Class 4 asks for 1.800000 times the pressure wall of Class 1 on the same pipe at the same pressure (derived from the two rows above). What moved it is the route rather than the fluid.
 
 The joint factor and the temperature derate, one at a time, at Class 1:
 | joint factor | pressure wall in | temperature derate | pressure wall in |
@@ -446,7 +448,7 @@ Colebrook past the roughness it was published for, which reaches about 0.05:
 | 0.100000 | 0.1016731332 |
 | 0.200000 | 0.1557055485 |
 | 0.500000 | 0.3308894263 |
-The engine answers all five and flags none of them. The last two are extrapolations of a fitted curve into a region where the pipe is more obstruction than pipe.
+The engine answers all 5 and flags none of them. 3 of the rows stand above 0.05 (derived from the column above), and every one of those is an extrapolation of a fitted curve into a region where the pipe is more obstruction than pipe.
 
 The friction Weymouth assumes, measured by asking General Flow what friction factor would make it agree:
 | bore in | weymouth scfd | general scfd | the friction factor general settled on | the friction factor that would make general match weymouth |
@@ -496,6 +498,7 @@ Inputs that have no physical meaning, and the message each one produces, verbati
 - a sweep of negative length: { error: "a swept volume needs a positive bore and length" }
 - an interval on a negative sweep: { error: "a swept volume cannot be negative" }
 - an outlet solve on a climb the inlet cannot pay for: { error: "the static gas column alone spends the inlet pressure: this line delivers nothing at any rate" }
+That catalogue is 24 entries carrying 18 distinct messages (derived by counting the rows above and the messages on them), so 6 messages appear more than once. They split 3 and 3 (derived from the function each row called): 3 are ONE GUARD reached from TWO DIFFERENT FUNCTIONS, and 3 are ONE FUNCTION refusing TWO DIFFERENT bad values. A reader who counts messages rather than entries is counting guards rather than ways in, and the two numbers are not the same number.
 
 Every one of those guards has a boundary, and the boundary is where the teaching is: a resistance sum of zero is a line with no fittings and is perfectly legal, an efficiency of exactly one is the ideal the forms are written for, a holdup of one is a line running full, and a line exactly as tall as it is long is vertical. The engine is handed the value on each side and says which it took:
 | guard | value | the engine |
@@ -529,7 +532,7 @@ What the engine still accepts and arguably should not, and none of it is a numbe
 - a grade the table does not carry: gradeYield returns NaN
 - a pipe size the table does not carry: scheduleRow returns null
 - an erosional service the table does not carry: erosionalC returns {"id":"continuous","label":"RP 14E continuous service","c":100}
-Four of the five say they do not know. The fifth answers under a label that is not the one it was asked for, and it is the one that was NOT repaired: the RP 14E table belongs to the wellhead engine that two other studios read, so changing what an unknown service returns is a decision for that table rather than for this line-sizing chain.
+Four of the five say they do not know. The fifth answers under a label it was not asked for, and it stays that way because the RP 14E table belongs to the wellhead engine that two other studios read, so what an unknown service returns is a decision for that table rather than for this line-sizing chain.
 And the rating still over-rates a line if the caller drops the allowance, because the allowance is an argument of the rating rather than a property of the pipe. It is the pair the wall section already read: the same wall reads 1019.607843 psig with the allowance and 1529.411765 psig without, 1.500000 times the rating with the allowance, and the factor is the gross wall over the net rather than anything about this pipe. Both calls are legal, both are correct for what they were asked, and neither warns. A guard cannot fix a question that was fully formed and simply wrong.
 
 # SECTION 17: What the method does not know (owned by Expert m05)
@@ -546,11 +549,11 @@ And one thing that is not held but simply absent: THE MULTIPHASE HALF IS NOT IN 
 One barrel for the package, measured out of each module by asking that module a question about itself rather than by reading either source:
 - from lineHydraulics, as the flow area times the length over the line volume: 5.6145833333333 cubic feet per barrel
 - from chokePerformance, as the erosional velocity times the area times the seconds in a day over the erosional rate: 5.6145833333333 cubic feet per barrel
-The ratio of the two is 1.0000000000000 (derived from the two rows above). They were two different numbers one import apart, inside the single chain this studio composes, until the package gave them one definition. The one it kept is exact by definition rather than by measurement: forty-two gallons of two hundred and thirty-one cubic inches each, over the seventeen hundred and twenty-eight cubic inches in a cubic foot. Both modules' own oracles already worked from it, so the goldens said which half of the disagreement was right before anyone asked them.
+The ratio of the two is 1.0000000000000 (derived from the two rows above). The package gives both modules one definition of a barrel, and it is exact by definition rather than by measurement: forty-two gallons of two hundred and thirty-one cubic inches each, over the seventeen hundred and twenty-eight cubic inches in a cubic foot. Each module's own oracle works from that definition, which is why asking the two modules separately is a check on the chain rather than a reading of one source.
 
 # SECTION 18: The Expert reading, three questions and the pipes they are asked of (owned by Expert m06)
 
-Three questions, and the three pipes they are asked of. As a hydraulic line the OGBIA bore of 7.981000 in carries 12000.000000 bpd at 2.244621 ft/s, Reynolds 48431.2523, and spends 25.660631 psi over 26400.000000 ft, against an erosional ceiling of 13.545709 ft/s that it uses 0.165707 of.
+Three questions, and the TWO pipes they are asked of. As a hydraulic line the OGBIA bore of 7.981000 in carries 12000.000000 bpd at 2.244621 ft/s, Reynolds 48431.2523, and spends 25.660631 psi over 26400.000000 ft, against an erosional ceiling of 13.545709 ft/s that it uses 0.165707 of.
 As a pressure envelope the SOKU pipe at 12.750000 in outside diameter and 52000.000000 psi of yield needs 0.419231 in of wall at Class 3 and 0.329327 in at Class 1, and the 0.375000 in the mill rolled rates 1019.607843 psig. That is a different pipe from the one above it: its bore is the outside diameter less twice the wall, 12.000000 in, which stands 4.019000 in wider than the OGBIA bore (derived from the two figures on these rows).
 As a volume the OGBIA line holds 1633.5349 bbl, a sphere crosses it in 2.444444 hours, and at a measured holdup of 0.060000 it delivers 98.0121 bbl to whatever is waiting at the end, every 3.7997 days.
 Three answers, and not one of them can be derived from the other two. The independence is not a trick of one pipe wearing three hats, which is why the wall reading above is stated on the pipe it belongs to: what a line spends in pressure, what wall a code demands of it and what liquid a pig pushes out of it are three separate questions, and an answer to any one of them carries no answer to another.

@@ -216,7 +216,10 @@ w('| --- | --- | --- |');
 RELATIVE_ROUGHNESS_SWEEP.forEach((rr) => {
   w(`| ${num(rr, 6)} | ${num(H.frictionFactor({ re: RE_LOW_FOR_ROUGHNESS_TABLE, relRough: rr }).f, 12)} | ${num(H.frictionFactor({ re: RE_HIGH_FOR_ROUGHNESS_TABLE, relRough: rr }).f, 12)} |`);
 });
-w('A rough pipe stops caring about the Reynolds number and a smooth one never does: read the two columns against each other down the table.');
+const rrSmooth = RELATIVE_ROUGHNESS_SWEEP[0];
+const rrRoughest = RELATIVE_ROUGHNESS_SWEEP[RELATIVE_ROUGHNESS_SWEEP.length - 1];
+const fAt = (rr, re) => H.frictionFactor({ re, relRough: rr }).f;
+w(`A rough pipe stops caring about the Reynolds number and a smooth one never does, and the two columns say so: on the ${num(rrSmooth, 6)} row the second column is ${num(fAt(rrSmooth, RE_HIGH_FOR_ROUGHNESS_TABLE) / fAt(rrSmooth, RE_LOW_FOR_ROUGHNESS_TABLE), 10)} of the first, and on the ${num(rrRoughest, 6)} row it is ${num(fAt(rrRoughest, RE_HIGH_FOR_ROUGHNESS_TABLE) / fAt(rrRoughest, RE_LOW_FOR_ROUGHNESS_TABLE), 10)} (derived from the two columns on those rows). A thousandfold in Reynolds number moves the smooth pipe and leaves the rough one where it was.`);
 w();
 w('The OGBIA line walked from turbulent into laminar by viscosity alone, at its built bore:');
 w('| viscosity cp | velocity ft/s | Reynolds number | f | regime | friction loss psi |');
@@ -246,7 +249,7 @@ OGBIA_FITTINGS.forEach((f) => {
 w(`The engine's resistance sum for that list: ${e6(OGBIA_K.sumK)} velocity heads (engine).`);
 const OG_SHORT = liquidAt(OGBIA, { sumK: OGBIA_K.sumK, lengthFt: OGBIA_MANIFOLD_LENGTH_FT });
 w(`On the whole ${e6(OGBIA.lengthFt)} ft line those fittings cost ${e6(OG_K.dpFittingsPsi)} psi against ${e6(OG_K.dpFrictionPsi)} psi of pipe friction, a share of ${e6(OG_K.dpFittingsPsi / OG_K.dpTotalPsi)} of the total (derived from the two engine values on this row).`);
-w(`On a ${e6(OGBIA_MANIFOLD_LENGTH_FT)} ft manifold run carrying the same duty and the same fittings, the pipe costs ${e6(OG_SHORT.dpFrictionPsi)} psi and the fittings cost ${e6(OG_SHORT.dpFittingsPsi)} psi, a share of ${e6(OG_SHORT.dpFittingsPsi / OG_SHORT.dpTotalPsi)}. The fittings did not change; the pipe did.`);
+w(`On a ${e6(OGBIA_MANIFOLD_LENGTH_FT)} ft manifold run carrying the same duty and the same fittings, the pipe costs ${e6(OG_SHORT.dpFrictionPsi)} psi and the fittings cost ${e6(OG_SHORT.dpFittingsPsi)} psi, a share of ${e6(OG_SHORT.dpFittingsPsi / OG_SHORT.dpTotalPsi)} (derived from the two engine values on this row). The fittings did not change; the pipe did.`);
 w();
 w('Elevation, the same line up and down:');
 w('| elevation change ft | friction psi | elevation psi | total psi | gradient psi per ft |');
@@ -255,7 +258,8 @@ OGBIA_ELEVATION_SWEEP_FT.forEach((dz) => {
   const r = liquidAt(OGBIA, { elevChangeFt: dz });
   w(`| ${e6(dz)} | ${e6(r.dpFrictionPsi)} | ${e6(r.dpElevationPsi)} | ${e6(r.dpTotalPsi)} | ${num(r.gradientPsiPerFt, 10)} |`);
 });
-w('The friction term is identical in all three rows and the elevation term is symmetric about zero, so a hill is added to a pressure drop rather than mixed into it.');
+const elevRows = OGBIA_ELEVATION_SWEEP_FT.map((dz) => liquidAt(OGBIA, { elevChangeFt: dz }));
+w(`The friction column spreads ${e6(Math.max(...elevRows.map((r) => r.dpFrictionPsi)) - Math.min(...elevRows.map((r) => r.dpFrictionPsi)))} psi across the three rows and the two non-zero elevation terms sum to ${e6(elevRows[1].dpElevationPsi + elevRows[2].dpElevationPsi)} psi (both derived from the table above), so a hill is added to a pressure drop rather than mixed into it.`);
 w();
 w('Roughness, which is the pipe and not the fluid:');
 w('| catalogue id | roughness in | relative roughness | f | friction loss psi |');
@@ -293,7 +297,7 @@ EROSIONAL_C_IDS.forEach((id) => {
   const q = C.erosionalRateBpd({ idIn: OGBIA.idIn, mixtureDensityLbFt3: OGBIA.rhoLbFt3, cFactor: cF });
   w(`| ${e6(cF)} | ${e6(chk.erosionalFtS)} | ${e6(chk.velocityFtS)} | ${e6(chk.ratio)} | ${chk.exceeded} | ${e6(chk.marginPct)} | ${r4(q)} |`);
 });
-w(`The engine's own flow area for that bore is ${e6(C.pipeAreaFt2(OGBIA.idIn))} ft2, and the velocity the erosional check reads, ${e6(C.mixtureVelocityFtS({ inSituBpd: OGBIA.qBpd, idIn: OGBIA.idIn }))} ft/s, is the same velocity the pressure drop read.`);
+w(`The engine's own flow area for that bore is ${e6(C.pipeAreaFt2(OGBIA.idIn))} ft2, and the velocity the erosional check reads, ${e6(C.mixtureVelocityFtS({ inSituBpd: OGBIA.qBpd, idIn: OGBIA.idIn }))} ft/s, stands ${e6(C.mixtureVelocityFtS({ inSituBpd: OGBIA.qBpd, idIn: OGBIA.idIn }) - OG.vFtS)} ft/s from the velocity the pressure drop read (derived from the two engine values on this row).`);
 w();
 w('Density is the whole of the limit: the same c factor against four fluids.');
 w('| mixture density lb/ft3 | erosional velocity at c 100 | at c 125 | at c 175 |');
@@ -304,7 +308,7 @@ EROSIONAL_DENSITY_SWEEP.forEach((rho) => {
 const cCont = C.erosionalC('continuous').c;
 const veLight = C.erosionalVelocityFtS({ mixtureDensityLbFt3: EROSIONAL_DENSITY_SWEEP[0], cFactor: cCont });
 const veHeavy = C.erosionalVelocityFtS({ mixtureDensityLbFt3: EROSIONAL_DENSITY_SWEEP[3], cFactor: cCont });
-w(`A light gas is allowed to run faster than a dense liquid by the square root of the density ratio: at the continuous-service c factor the ${e6(EROSIONAL_DENSITY_SWEEP[0])} lb/ft3 row stands at ${e6(veLight)} ft/s against ${e6(veHeavy)} ft/s at ${e6(EROSIONAL_DENSITY_SWEEP[3])} lb/ft3, a ratio of ${e6(veLight / veHeavy)} (derived from the two rows above).`);
+w(`A light gas is allowed to run faster than a dense liquid by the square root of the density ratio, and the two agree to ${(veLight / veHeavy - Math.sqrt(EROSIONAL_DENSITY_SWEEP[3] / EROSIONAL_DENSITY_SWEEP[0])).toExponential(3)} (derived from the velocity ratio on this row and the square root of the two densities it names): at the continuous-service c factor the ${e6(EROSIONAL_DENSITY_SWEEP[0])} lb/ft3 row stands at ${e6(veLight)} ft/s against ${e6(veHeavy)} ft/s at ${e6(EROSIONAL_DENSITY_SWEEP[3])} lb/ft3, a ratio of ${e6(veLight / veHeavy)} (derived from the two rows above).`);
 w();
 w('# HELD FOR LITERATURE, taught as a limit and never graded: the three c factor rows. The recommended practice itself says its own figures are conservative, and the third row is labelled as operator practice with no publication behind it. Every graded erosional value in this course states its own c factor.');
 w();
@@ -324,7 +328,7 @@ const sweepRows = P.PIPE_SCHEDULE.map((row) => {
 sweepRows.forEach(({ row, r, chk }) => {
   w(`| ${row.nps} | ${row.schedule} | ${e6(row.od)} | ${e6(row.wall)} | ${e6(row.id)} | ${e6(r.vFtS)} | ${r4(r.re)} | ${e6(r.dpFrictionPsi)} | ${e6(r.dpTotalPsi)} | ${e6(chk.erosionalFtS)} | ${e6(chk.ratio)} | ${!chk.exceeded} |`);
 });
-w(`The erosional velocity is the same on every row, ${e6(sweepRows[0].chk.erosionalFtS)} ft/s, because it depends on the density and the c factor and not on the bore. What changes down the table is the velocity that has to sit under it.`);
+w(`The erosional velocity column spreads ${e6(Math.max(...sweepRows.map((r) => r.chk.erosionalFtS)) - Math.min(...sweepRows.map((r) => r.chk.erosionalFtS)))} ft/s across every row (derived from the column above) and reads ${e6(sweepRows[0].chk.erosionalFtS)} ft/s, because it depends on the density and the c factor and not on the bore. What changes down the table is the velocity that has to sit under it.`);
 w();
 w('The table is ordered by nominal size and then by schedule, and that order is NOT the order of the bores:');
 w(`bores in table order: ${P.PIPE_SCHEDULE.map((r) => e6(r.id)).join(', ')}.`);
@@ -431,6 +435,22 @@ const flatAgainQ = H.weymouthQ({ ...SOKU, elevChangeFt: 0 }).qScfd;
 w(`A hill does two things and they are not the same thing. It scales the outlet pressure inside the driving group through e to the s, and it changes the length the friction acts over through the equivalent length factor. At zero elevation both collapse to ${num(1, 10)} on the row above, and the Weymouth rate with the hill set to zero is ${r4(flatAgainQ)} scfd against the Section 8 rate of ${r4(SOKU_Q.weymouth.qScfd)} scfd, a difference of ${r4(flatAgainQ - SOKU_Q.weymouth.qScfd)} scfd (derived from the two engine values on this row), so the flat form is what the adjusted form becomes.`);
 const elevCoeff = H.elevationAdjustment({ sg: 1, elevChangeFt: 1000, tAvgR: 1, zAvg: 1 });
 w(`The coefficient inside s, measured by asking the engine for s at a gravity of one, a thousand feet of rise, an absolute temperature of one and a compressibility of one, then dividing by the thousand feet: ${num(elevCoeff.s / 1000, 12)} (derived from the engine's ${num(elevCoeff.s, 6)}).`);
+// THE UNIT SEAM OF THIS SECTION. The rise is in FEET and the length is in
+// MILES, and the four forms guard one against the other, so the feet in a mile
+// are readable here without being typed: halve between a rise the engine
+// accepts and a rise it refuses, on a line of a stated length.
+const proMileProbe = (() => {
+  const guardMessage = H.weymouthQ({ ...SOKU, lengthMi: MILE_PROBE_LENGTH_MI, elevChangeFt: 1e9 }).error;
+  const accepts = (dz) => H.weymouthQ({ ...SOKU, lengthMi: MILE_PROBE_LENGTH_MI, elevChangeFt: dz }).error !== guardMessage;
+  let lo = 0; let hi = 1e7;
+  for (let i = 0; i < 400; i += 1) {
+    const mid = (lo + hi) / 2;
+    if (mid === lo || mid === hi) break;
+    if (accepts(mid)) lo = mid; else hi = mid;
+  }
+  return { lo, gap: hi - lo };
+})();
+w(`The rise is in FEET and the length is in MILES, and the forms guard one against the other, so the conversion is readable here rather than assumed: on a line ${e6(MILE_PROBE_LENGTH_MI)} mile long the largest rise the engine accepts is ${num(proMileProbe.lo, 9)} ft, and the next representable value above it, ${proMileProbe.gap.toExponential(3)} ft higher, is refused (engine).`);
 w();
 w('What the hill costs the trunk, by form:');
 w('| form | flat scfd | up scfd | down scfd | up as a fraction of flat | down as a fraction of flat |');
@@ -449,6 +469,7 @@ w('# SECTION 10: The outlet pressure (owned by Professional m04)');
 w();
 w('# App surface: this is the direction the studio actually works in. A designer knows the rate the terminal has contracted for and wants the pressure it will see, which is the inverse of every form above.');
 w('The engine has no closed inversion. It bisects on the outlet pressure, calling the published form at each step, inside a bracket that runs from atmospheric up to the pressure at which the driving group vanishes. That upper end is the inlet over the square root of e to the s, and it is NOT the inlet: a hill moves it.');
+w(`The FLOOR of that bracket is atmospheric, which the module does not export, so it is measured the way every other constant here is: push the requested rate up until the solve refuses, and read the outlet it converges on at the largest rate it still accepts. The largest rate this trunk accepts is ${r4(bracketFloorPsia.largestRate)} scfd, the outlet there is ${e6(bracketFloorPsia.floor)} psia, and one scfd more is refused (engine). That floor is not the base the published forms report at: it stands ${e6(bracketFloorPsia.floor - H.BASE_CONDITIONS.pbPsia)} psi above the ${e6(H.BASE_CONDITIONS.pbPsia)} psia of Section 7 (derived from the two figures on this row).`);
 w();
 w('Round trips on the flat trunk, each form solved back to the outlet it came from:');
 w('| form | rate scfd | outlet recovered psia | against the stated outlet psia |');
@@ -480,7 +501,7 @@ w(`Down ${e6(SOKU_STEEP_DOWN_FT)} ft, the trunk carries ${r4(steepQ.qScfd)} scfd
 w(`Given that same rate the inverse returns ${shape(steepInv)}, and the forward call and the inverse call now differ by ${e6(steepOutletPsia - steepInv.p2Psia)} psi. The drop is NEGATIVE because the line arrives higher than it left, which is the honest reading of a descent and not an error state.`);
 const steepQ2 = H.weymouthQ({ ...SOKU, elevChangeFt: SOKU_STEEP_DOWN_FT, p2Psia: SOKU_STEEP_DOWN_P2_PSIA });
 const steepInv2 = H.gasOutletPressure({ equation: 'weymouth', qScfd: steepQ2.qScfd, ...SOKU, elevChangeFt: SOKU_STEEP_DOWN_FT });
-w(`THE CONTROL. Run the SAME descent with an outlet genuinely BELOW the inlet, ${e6(SOKU_STEEP_DOWN_P2_PSIA)} psia against ${e6(SOKU.p1Psia)} psia: the trunk carries ${r4(steepQ2.qScfd)} scfd and the inverse recovers ${e6(steepInv2.p2Psia)} psia, an error of ${e6(steepInv2.p2Psia - SOKU_STEEP_DOWN_P2_PSIA)} psi. Both answers come out of the same bisection, and the one that used to be wrong was the one whose answer sat outside the bracket rather than the one the solver could not converge.`);
+w(`THE CONTROL. Run the SAME descent with an outlet genuinely BELOW the inlet, ${e6(SOKU_STEEP_DOWN_P2_PSIA)} psia against ${e6(SOKU.p1Psia)} psia: the trunk carries ${r4(steepQ2.qScfd)} scfd and the inverse recovers ${e6(steepInv2.p2Psia)} psia, an error of ${e6(steepInv2.p2Psia - SOKU_STEEP_DOWN_P2_PSIA)} psi. Both answers come out of the same bisection. A search whose answer lies outside its bracket and a search that cannot converge look identical from a single case, and only a case with its answer inside the bracket tells the two apart.`);
 w();
 const upInv = H.gasOutletPressure({ equation: 'weymouth', qScfd: SOKU_STEEP_UP_SCFD, ...SOKU, elevChangeFt: SOKU_STEEP_UP_FT });
 const upEa = H.elevationAdjustment({ sg: SOKU.sg, elevChangeFt: SOKU_STEEP_UP_FT, tAvgR: SOKU.tAvgR, zAvg: SOKU.zAvg });
@@ -558,7 +579,7 @@ SOKU_WALL_CLASSES.forEach((locationClass) => {
 w(`| B31.4 | any | ${e6(b314.designFactor)} | ${e6(b314.tPressureIn)} | ${e6(b314.tRequiredIn)} | ${e6(H.maopPsig({ ...SOKU_WALL, code: 'B31.4', wallIn: b314.tRequiredIn }).maopPsig)} |`);
 const c1w = H.requiredWallIn({ ...SOKU_WALL, code: 'B31.8', locationClass: 1 });
 const c4w = H.requiredWallIn({ ...SOKU_WALL, code: 'B31.8', locationClass: 4 });
-w(`Class 4 asks for ${e6(c4w.tPressureIn / c1w.tPressureIn)} times the pressure wall of Class 1 on the same pipe at the same pressure (derived from the two rows above). The route, not the fluid, is what moved it.`);
+w(`Class 4 asks for ${e6(c4w.tPressureIn / c1w.tPressureIn)} times the pressure wall of Class 1 on the same pipe at the same pressure (derived from the two rows above). What moved it is the route rather than the fluid.`);
 w();
 w('The joint factor and the temperature derate, one at a time, at Class 1:');
 w('| joint factor | pressure wall in | temperature derate | pressure wall in |');
@@ -638,11 +659,15 @@ w();
 w(`The jump at the branch, again and exactly: on the OGBIA pipe the friction factor is ${num(jLo.f, 10)} at Reynolds ${num(RE_JUST_BELOW_BRANCH, 7)} and ${num(jHi.f, 10)} at Reynolds ${r4(RE_AT_BRANCH)}, a ratio of ${e6(jHi.f / jLo.f)} (derived from the two engine values on this row).`);
 w('Nothing physical happens in that interval. The engine leaves the laminar law and starts the turbulent one, and the discontinuity is the price of having no correlation for the band between them.');
 w();
-w('Colebrook past the roughness it was published for, which reaches about 0.05:');
+const COLEBROOK_PUBLISHED_TO = 0.05;
+const pastPublished = COLEBROOK_DOMAIN_SWEEP.filter((rr) => rr > COLEBROOK_PUBLISHED_TO);
+// PRINTED AS PUBLISHED, not to six decimals: "about 0.05" is the figure the
+// literature states and the figure every lesson and bank quotes.
+w(`Colebrook past the roughness it was published for, which reaches about ${COLEBROOK_PUBLISHED_TO}:`);
 w(`| relative roughness | f at Reynolds ${r4(RE_FOR_DOMAIN_SWEEP)} |`);
 w('| --- | --- |');
 COLEBROOK_DOMAIN_SWEEP.forEach((rr) => w(`| ${e6(rr)} | ${num(H.frictionFactor({ re: RE_FOR_DOMAIN_SWEEP, relRough: rr }).f, 10)} |`));
-w('The engine answers all five and flags none of them. The last two are extrapolations of a fitted curve into a region where the pipe is more obstruction than pipe.');
+w(`The engine answers all ${COLEBROOK_DOMAIN_SWEEP.length} and flags none of them. ${pastPublished.length} of the rows stand above ${COLEBROOK_PUBLISHED_TO} (derived from the column above), and every one of those is an extrapolation of a fitted curve into a region where the pipe is more obstruction than pipe.`);
 w();
 w('The friction Weymouth assumes, measured by asking General Flow what friction factor would make it agree:');
 w('| bore in | weymouth scfd | general scfd | the friction factor general settled on | the friction factor that would make general match weymouth |');
@@ -674,32 +699,50 @@ w(`- the volume of a line with no bore: ${raw(H.lineVolumeBbl({ idIn: 0, lengthF
 w(`- the friction factor at a negative relative roughness: ${shape(H.frictionFactor({ re: OG.re, relRough: ROUGHNESS_JUST_UNDER / OGBIA.idIn }))}`);
 w();
 w('Inputs that have no physical meaning, and the message each one produces, verbatim:');
-[
-  ['a negative resistance sum', () => liquidAt(OGBIA, { sumK: SUM_K_JUST_UNDER })],
-  ['a negative roughness', () => liquidAt(OGBIA, { roughnessIn: ROUGHNESS_JUST_UNDER })],
-  ['a liquid line that rises further than its own length', () => H.liquidLineDrop({ ...OGBIA, lengthFt: VERTICAL_RUN_FT, elevChangeFt: TALLER_THAN_LONG_FT })],
-  ['a traverse with no inlet pressure', () => H.liquidLineTraverse({ qBpd: OGBIA.qBpd, idIn: OGBIA.idIn, rhoLbFt3: OGBIA.rhoLbFt3, muCp: OGBIA.muCp, roughnessIn: OGBIA.roughnessIn, profile: OGBIA_PROFILE_FLAT })],
-  ['a gas line at an efficiency above one', () => H.weymouthQ({ ...SOKU, efficiency: EFFICIENCY_JUST_OVER })],
-  ['a gas line at a negative efficiency', () => H.weymouthQ({ ...SOKU, efficiency: -EFFICIENCY_AT_LIMIT })],
-  ['a gas line of no length', () => H.weymouthQ({ ...SOKU, lengthMi: 0 })],
-  ['a gas line of negative length', () => H.weymouthQ({ ...SOKU, lengthMi: -SOKU.lengthMi })],
-  ['a gas line of negative bore', () => H.weymouthQ({ ...SOKU, idIn: -SOKU.idIn })],
-  ['a gas at a compressibility of zero', () => H.weymouthQ({ ...SOKU, zAvg: 0 })],
-  ['a gas at an absolute temperature of zero', () => H.weymouthQ({ ...SOKU, tAvgR: 0 })],
-  ['a gas of no gravity', () => H.panhandleAQ({ ...SOKU, sg: 0 })],
-  ['a gas line that rises further than its own length', () => H.weymouthQ({ ...SOKU, lengthMi: MILE_PROBE_LENGTH_MI, elevChangeFt: SOKU_STEEP_UP_FT * 10 })],
-  ['General Flow with no gas viscosity', () => H.generalFlowQ({ ...SOKU, muCp: 0 })],
-  ['General Flow at a negative roughness', () => H.generalFlowQ({ ...SOKU, roughnessIn: ROUGHNESS_JUST_UNDER })],
-  ['an elevation group at a compressibility of zero', () => H.elevationAdjustment({ sg: SOKU.sg, elevChangeFt: SOKU_UP_FT, tAvgR: SOKU.tAvgR, zAvg: 0 })],
-  ['a wall at a joint factor of zero', () => H.requiredWallIn({ ...SOKU_WALL, jointFactor: 0 })],
-  ['a wall at a temperature derate of zero', () => H.requiredWallIn({ ...SOKU_WALL, tempDerate: 0 })],
-  ['a wall with a negative corrosion allowance', () => H.requiredWallIn({ ...SOKU_WALL, corrosionAllowanceIn: ALLOWANCE_JUST_UNDER })],
-  ['a rating with a negative corrosion allowance', () => H.maopPsig({ ...SOKU_WALL, wallIn: SOKU_WALL_AS_BUILT_IN, corrosionAllowanceIn: ALLOWANCE_JUST_UNDER })],
-  ['a sweep with no bore', () => H.sweptLiquidBbl({ idIn: 0, lengthFt: OGBIA_PIG.lengthFt, holdupFrac: OGBIA_HOLDUP_NOMINAL })],
-  ['a sweep of negative length', () => H.sweptLiquidBbl({ idIn: OGBIA_PIG.idIn, lengthFt: -OGBIA_PIG.lengthFt, holdupFrac: OGBIA_HOLDUP_NOMINAL })],
-  ['an interval on a negative sweep', () => H.piggingInterval({ maxSlugBbl: OGBIA_CATCHER_BBL, dropoutBpd: OGBIA_DROPOUT_BPD, sweptBbl: SWEPT_JUST_UNDER })],
-  ['an outlet solve on a climb the inlet cannot pay for', () => H.gasOutletPressure({ equation: 'weymouth', qScfd: SOKU_STEEP_UP_SCFD, ...SOKU, p1Psia: SOKU_STARVED_P1_PSIA, elevChangeFt: SOKU_STEEP_UP_FT })],
-].forEach(([label, fn]) => w(`- ${label}: ${soft(fn())}`));
+const REFUSAL_PROBES = [
+  ['a negative resistance sum', () => liquidAt(OGBIA, { sumK: SUM_K_JUST_UNDER }), 'liquidLineDrop'],
+  ['a negative roughness', () => liquidAt(OGBIA, { roughnessIn: ROUGHNESS_JUST_UNDER }), 'liquidLineDrop'],
+  ['a liquid line that rises further than its own length', () => H.liquidLineDrop({ ...OGBIA, lengthFt: VERTICAL_RUN_FT, elevChangeFt: TALLER_THAN_LONG_FT }), 'liquidLineDrop'],
+  ['a traverse with no inlet pressure', () => H.liquidLineTraverse({ qBpd: OGBIA.qBpd, idIn: OGBIA.idIn, rhoLbFt3: OGBIA.rhoLbFt3, muCp: OGBIA.muCp, roughnessIn: OGBIA.roughnessIn, profile: OGBIA_PROFILE_FLAT }), 'liquidLineTraverse'],
+  ['a gas line at an efficiency above one', () => H.weymouthQ({ ...SOKU, efficiency: EFFICIENCY_JUST_OVER }), 'weymouthQ'],
+  ['a gas line at a negative efficiency', () => H.weymouthQ({ ...SOKU, efficiency: -EFFICIENCY_AT_LIMIT }), 'weymouthQ'],
+  ['a gas line of no length', () => H.weymouthQ({ ...SOKU, lengthMi: 0 }), 'weymouthQ'],
+  ['a gas line of negative length', () => H.weymouthQ({ ...SOKU, lengthMi: -SOKU.lengthMi }), 'weymouthQ'],
+  ['a gas line of negative bore', () => H.weymouthQ({ ...SOKU, idIn: -SOKU.idIn }), 'weymouthQ'],
+  ['a gas at a compressibility of zero', () => H.weymouthQ({ ...SOKU, zAvg: 0 }), 'weymouthQ'],
+  ['a gas at an absolute temperature of zero', () => H.weymouthQ({ ...SOKU, tAvgR: 0 }), 'weymouthQ'],
+  ['a gas of no gravity', () => H.panhandleAQ({ ...SOKU, sg: 0 }), 'panhandleAQ'],
+  ['a gas line that rises further than its own length', () => H.weymouthQ({ ...SOKU, lengthMi: MILE_PROBE_LENGTH_MI, elevChangeFt: SOKU_STEEP_UP_FT * 10 }), 'weymouthQ'],
+  ['General Flow with no gas viscosity', () => H.generalFlowQ({ ...SOKU, muCp: 0 }), 'generalFlowQ'],
+  ['General Flow at a negative roughness', () => H.generalFlowQ({ ...SOKU, roughnessIn: ROUGHNESS_JUST_UNDER }), 'generalFlowQ'],
+  ['an elevation group at a compressibility of zero', () => H.elevationAdjustment({ sg: SOKU.sg, elevChangeFt: SOKU_UP_FT, tAvgR: SOKU.tAvgR, zAvg: 0 }), 'elevationAdjustment'],
+  ['a wall at a joint factor of zero', () => H.requiredWallIn({ ...SOKU_WALL, jointFactor: 0 }), 'requiredWallIn'],
+  ['a wall at a temperature derate of zero', () => H.requiredWallIn({ ...SOKU_WALL, tempDerate: 0 }), 'requiredWallIn'],
+  ['a wall with a negative corrosion allowance', () => H.requiredWallIn({ ...SOKU_WALL, corrosionAllowanceIn: ALLOWANCE_JUST_UNDER }), 'requiredWallIn'],
+  ['a rating with a negative corrosion allowance', () => H.maopPsig({ ...SOKU_WALL, wallIn: SOKU_WALL_AS_BUILT_IN, corrosionAllowanceIn: ALLOWANCE_JUST_UNDER }), 'maopPsig'],
+  ['a sweep with no bore', () => H.sweptLiquidBbl({ idIn: 0, lengthFt: OGBIA_PIG.lengthFt, holdupFrac: OGBIA_HOLDUP_NOMINAL }), 'sweptLiquidBbl'],
+  ['a sweep of negative length', () => H.sweptLiquidBbl({ idIn: OGBIA_PIG.idIn, lengthFt: -OGBIA_PIG.lengthFt, holdupFrac: OGBIA_HOLDUP_NOMINAL }), 'sweptLiquidBbl'],
+  ['an interval on a negative sweep', () => H.piggingInterval({ maxSlugBbl: OGBIA_CATCHER_BBL, dropoutBpd: OGBIA_DROPOUT_BPD, sweptBbl: SWEPT_JUST_UNDER }), 'piggingInterval'],
+  ['an outlet solve on a climb the inlet cannot pay for', () => H.gasOutletPressure({ equation: 'weymouth', qScfd: SOKU_STEEP_UP_SCFD, ...SOKU, p1Psia: SOKU_STARVED_P1_PSIA, elevChangeFt: SOKU_STEEP_UP_FT }), 'gasOutletPressure'],
+];
+REFUSAL_PROBES.forEach(([label, fn]) => w(`- ${label}: ${soft(fn())}`));
+// THE COUNTS A READER OF THIS CATALOGUE ACTUALLY NEEDS, derived by counting
+// the rows rather than by anybody counting them by hand. A message that
+// repeats is a guard with more than one way in, and the two kinds of way in
+// are worth separating: ONE GUARD REACHED FROM TWO FUNCTIONS, and ONE
+// FUNCTION REFUSING TWO DIFFERENT BAD VALUES.
+const refusalMsgs = REFUSAL_PROBES.map(([, fn, fname]) => [(fn().error || ''), fname]);
+const msgCount = {};
+const msgFns = {};
+refusalMsgs.forEach(([m, fname]) => {
+  msgCount[m] = (msgCount[m] || 0) + 1;
+  (msgFns[m] = msgFns[m] || []).push(fname);
+});
+const distinctMsgs = Object.keys(msgCount).length;
+const repeated = Object.keys(msgCount).filter((m) => msgCount[m] > 1);
+const twoFunctions = repeated.filter((m) => new Set(msgFns[m]).size > 1);
+const twoValues = repeated.filter((m) => new Set(msgFns[m]).size === 1);
+w(`That catalogue is ${REFUSAL_PROBES.length} entries carrying ${distinctMsgs} distinct messages (derived by counting the rows above and the messages on them), so ${repeated.length} messages appear more than once. They split ${twoFunctions.length} and ${twoValues.length} (derived from the function each row called): ${twoFunctions.length} are ONE GUARD reached from TWO DIFFERENT FUNCTIONS, and ${twoValues.length} are ONE FUNCTION refusing TWO DIFFERENT bad values. A reader who counts messages rather than entries is counting guards rather than ways in, and the two numbers are not the same number.`);
 w();
 w('Every one of those guards has a boundary, and the boundary is where the teaching is: a resistance sum of zero is a line with no fittings and is perfectly legal, an efficiency of exactly one is the ideal the forms are written for, a holdup of one is a line running full, and a line exactly as tall as it is long is vertical. The engine is handed the value on each side and says which it took:');
 w('| guard | value | the engine |');
@@ -756,7 +799,7 @@ w(`- a roughness the table does not carry: roughnessOf returns ${raw(P.roughness
 w(`- a grade the table does not carry: gradeYield returns ${raw(P.gradeYield('x55'))}`);
 w(`- a pipe size the table does not carry: scheduleRow returns ${shape(P.scheduleRow(5, '40'))}`);
 w(`- an erosional service the table does not carry: erosionalC returns ${shape(C.erosionalC(EROSIONAL_UNKNOWN_ID))}`);
-w('Four of the five say they do not know. The fifth answers under a label that is not the one it was asked for, and it is the one that was NOT repaired: the RP 14E table belongs to the wellhead engine that two other studios read, so changing what an unknown service returns is a decision for that table rather than for this line-sizing chain.');
+w('Four of the five say they do not know. The fifth answers under a label it was not asked for, and it stays that way because the RP 14E table belongs to the wellhead engine that two other studios read, so what an unknown service returns is a decision for that table rather than for this line-sizing chain.');
 w(`And the rating still over-rates a line if the caller drops the allowance, because the allowance is an argument of the rating rather than a property of the pipe. It is the pair the wall section already read: the same wall reads ${e6(maopWith.maopPsig)} psig with the allowance and ${e6(maopWithout.maopPsig)} psig without, ${e6(maopWithout.maopPsig / maopWith.maopPsig)} times the rating with the allowance, and the factor is the gross wall over the net rather than anything about this pipe. Both calls are legal, both are correct for what they were asked, and neither warns. A guard cannot fix a question that was fully formed and simply wrong.`);
 w();
 
@@ -779,13 +822,13 @@ const rateP = C.erosionalRateBpd({ idIn: OGBIA.idIn, mixtureDensityLbFt3: OGBIA.
 const bblChoke = (veP * C.pipeAreaFt2(OGBIA.idIn) * 86400) / rateP;
 w(`- from lineHydraulics, as the flow area times the length over the line volume: ${num(bblLine, 13)} cubic feet per barrel`);
 w(`- from chokePerformance, as the erosional velocity times the area times the seconds in a day over the erosional rate: ${num(bblChoke, 13)} cubic feet per barrel`);
-w(`The ratio of the two is ${num(bblLine / bblChoke, 13)} (derived from the two rows above). They were two different numbers one import apart, inside the single chain this studio composes, until the package gave them one definition. The one it kept is exact by definition rather than by measurement: forty-two gallons of two hundred and thirty-one cubic inches each, over the seventeen hundred and twenty-eight cubic inches in a cubic foot. Both modules' own oracles already worked from it, so the goldens said which half of the disagreement was right before anyone asked them.`);
+w(`The ratio of the two is ${num(bblLine / bblChoke, 13)} (derived from the two rows above). The package gives both modules one definition of a barrel, and it is exact by definition rather than by measurement: forty-two gallons of two hundred and thirty-one cubic inches each, over the seventeen hundred and twenty-eight cubic inches in a cubic foot. Each module's own oracle works from that definition, which is why asking the two modules separately is a check on the chain rather than a reading of one source.`);
 w();
 
 // --------------------------------------------------------------- SECTION 18
 w('# SECTION 18: The Expert reading, three questions and the pipes they are asked of (owned by Expert m06)');
 w();
-w(`Three questions, and the three pipes they are asked of. As a hydraulic line the OGBIA bore of ${e6(OGBIA.idIn)} in carries ${e6(OGBIA.qBpd)} bpd at ${e6(OG.vFtS)} ft/s, Reynolds ${r4(OG.re)}, and spends ${e6(OG.dpTotalPsi)} psi over ${e6(OGBIA.lengthFt)} ft, against an erosional ceiling of ${e6(sweepRows[0].chk.erosionalFtS)} ft/s that it uses ${e6(OG.vFtS / sweepRows[0].chk.erosionalFtS)} of.`);
+w(`Three questions, and the TWO pipes they are asked of. As a hydraulic line the OGBIA bore of ${e6(OGBIA.idIn)} in carries ${e6(OGBIA.qBpd)} bpd at ${e6(OG.vFtS)} ft/s, Reynolds ${r4(OG.re)}, and spends ${e6(OG.dpTotalPsi)} psi over ${e6(OGBIA.lengthFt)} ft, against an erosional ceiling of ${e6(sweepRows[0].chk.erosionalFtS)} ft/s that it uses ${e6(OG.vFtS / sweepRows[0].chk.erosionalFtS)} of.`);
 w(`As a pressure envelope the SOKU pipe at ${e6(SOKU_WALL.odIn)} in outside diameter and ${e6(SOKU_WALL.smysPsi)} psi of yield needs ${e6(withCa.tRequiredIn)} in of wall at Class 3 and ${e6(c1w.tRequiredIn)} in at Class 1, and the ${e6(SOKU_WALL_AS_BUILT_IN)} in the mill rolled rates ${e6(maopWith.maopPsig)} psig. That is a different pipe from the one above it: its bore is the outside diameter less twice the wall, ${e6(SOKU_WALL.odIn - 2 * SOKU_WALL_AS_BUILT_IN)} in, which stands ${e6(SOKU_WALL.odIn - 2 * SOKU_WALL_AS_BUILT_IN - OGBIA.idIn)} in wider than the OGBIA bore (derived from the two figures on these rows).`);
 w(`As a volume the OGBIA line holds ${r4(H.lineVolumeBbl(OGBIA_PIG))} bbl, a sphere crosses it in ${e6(H.pigRun(OGBIA_PIG).runHours)} hours, and at a measured holdup of ${e6(OGBIA_HOLDUP_NOMINAL)} it delivers ${r4(nomSwept.sweptBbl)} bbl to whatever is waiting at the end, every ${r4(nomIv.intervalDays)} days.`);
 w('Three answers, and not one of them can be derived from the other two. The independence is not a trick of one pipe wearing three hats, which is why the wall reading above is stated on the pipe it belongs to: what a line spends in pressure, what wall a code demands of it and what liquid a pig pushes out of it are three separate questions, and an answer to any one of them carries no answer to another.');
