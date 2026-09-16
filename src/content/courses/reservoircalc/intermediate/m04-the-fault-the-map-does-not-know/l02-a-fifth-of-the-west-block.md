@@ -50,7 +50,7 @@ Work out how much of the west block's booking the experiment leaves standing, an
 
 The west block books 9.855617 MMstb with the full control set and 7.865728 MMstb without Ekene-6. The difference of 1.989889 MMstb is larger than the entire east block's booking of 2.283591 MMstb by only a small margin, so the two are comparable in size.
 
-It is more than twice the 0.901423 MMstb that the boundary column convention was worth, and it is three times the 0.656868 MMstb that the Expert tier's property model is worth on the whole field.
+It is more than twice the 0.901423 MMstb that the boundary column convention was worth, and it is about three times what the Expert tier's property model turns out to be worth on the whole field.
 
 Rank them: cross fault control is the largest of the three, the tie break convention is second, and the property model is third. Only one of those three usually appears in a report.
 

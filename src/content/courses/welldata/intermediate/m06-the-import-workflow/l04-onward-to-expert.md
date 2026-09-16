@@ -8,14 +8,14 @@ That is a complete skill, and it is narrow in one direction on purpose. Everythi
 
 The Expert tier runs all six teaching files through the same pipeline as one import campaign and reports on the delivery as a whole. Its six readings are aggregates across the set rather than fields of any one file:
 
-* 24 curves imported across the six files, with the depth column excluded from the count
-* 1 file needing a depth conversion
-* 1 dead curve found in the delivery
-* 5 files carrying a uniform step
-* 161 depth samples parsed out of the wrapped LAS 1.2 file
-* 272 flagged nulls in nullheavy_20
+* the curves imported across the six files, with the depth column excluded from the count
+* the number of files needing a depth conversion
+* the number of dead curves found in the delivery
+* the number of files carrying a uniform step
+* the depth samples parsed out of the wrapped LAS 1.2 file
+* the flagged nulls in nullheavy_20
 
-Those numbers belong to that tier and they are listed here as a destination rather than as material. Do not go looking for them now, and do not try to reach them with the import panel, which runs the pipeline on one file at a time and does not compute campaign totals.
+Those readings belong to that tier and they are named here as a destination rather than as material. Their values are deliberately not printed: each one is a count you will produce yourself by running the campaign. Do not go looking for them now, and do not try to reach them with the import panel, which runs the pipeline on one file at a time and does not compute campaign totals.
 
 ## Why the aggregate is a different skill
 
@@ -47,4 +47,4 @@ Everything above this course consumes what you let through. The petrophysicist c
 
 For each of the six Expert campaign readings, name the check from your own two tiers that it rolls up, and say which module first taught it. Then answer in two sentences: which reading would you look at first on a new delivery of six files, and why is the import panel the wrong tool for producing any of these six numbers?
 
-As a self check: 24 curves imported with the depth column excluded rolls up the curve section and the index exclusion; 1 file needing a depth conversion rolls up depth units from module 2 of this tier; 1 dead curve and 272 flagged nulls in nullheavy_20 both roll up the Associate tier's null and dead curve work; 5 files with a uniform step rolls up module 5 of this tier, run once per file; and 161 depth samples in the wrapped LAS 1.2 file rolls up the Associate tier's wrapped mode. Any of the six can be defended as the first reading as long as you say what it would tell you, and the import panel is the wrong tool because it runs the pipeline on one teaching file at a time and reports that file's fields rather than any campaign total.
+As a self check: the imported curve count with the depth column excluded rolls up the curve section and the index exclusion; the count of files needing a depth conversion rolls up depth units from module 2 of this tier; the dead curve count and the flagged null total both roll up the Associate tier's null and dead curve work; the count of files with a uniform step rolls up module 5 of this tier, run once per file; and the wrapped sample count rolls up the Associate tier's wrapped mode. Any of the six can be defended as the first reading as long as you say what it would tell you, and the import panel is the wrong tool because it runs the pipeline on one teaching file at a time and reports that file's fields rather than any campaign total.
