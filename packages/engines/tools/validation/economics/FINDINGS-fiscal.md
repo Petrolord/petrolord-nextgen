@@ -92,12 +92,27 @@ The S-curve downsample is `i % Math.floor(iterations / 50) === 0`; below
 
 ### S6. getPortfolioMetrics reads a chance of success of 0 as certain
 
+**FIXED 2026-09-15 (EC1-10, owner decision).** The chance is read with `?? 1`,
+so only a missing or null chance means certainty, and a present chance that is
+not a finite number from 0 to 1 is refused with a RangeError naming the
+project (by name and index, or index alone). `portfolio_zero_chance` is no
+longer a recorded disagreement: its `engine` pin is removed and the engine
+gives the oracle's 20. The gate re-implements `|| 1.0` as the negative control
+(120). No other screening value moved. The text below is the finding as
+recorded.
+
 `(p.chanceOfSuccess || 1.0)` turns 0 into 1.0. `portfolio_zero_chance`
 (NPV 100 at chance 0 plus NPV 40 at chance 0.5): risked NPV should be 20;
 the engine reports 120. A project the user has written off as a certain
 failure is counted at full value.
 
 ### S7. Observations, no numerical disagreement
+
+**Resolved in part (EC3 repairs, owner decisions 2026-09-15).** The Production
+sensitivity carries variable opex since EC6-1 and the Low/High scenarios do
+since EC3-3; payback is null with `paybackStatus` 'not-recovered' when the
+project never pays back (EC3-2). The OPEX sensitivity still scales fixed opex
+only, as its label says.
 
 - The OPEX sensitivity and the Low/High scenarios scale FIXED opex only;
   variable opex is left untouched, and the Production sensitivity scales
@@ -112,6 +127,22 @@ failure is counted at full value.
 ## Fiscal regime sandbox (fiscalRegime.js, fiscalTemplates.js)
 
 ### F1. The capex sensitivity stops at 1.4, not the documented 1.5
+
+**FIXED 2026-09-15 (EC2-3, owner decision.)** The sweep runs on an integer
+step count, `CAPEX_SWEEP_MULTIPLIERS`, eight points built as (8 + k) / 10:
+0.8, 0.9, ... 1.5 exactly. Every swept value, the resilience verdict and its
+sentence now re-derive from eight points, and the golden carries one capex
+sweep rather than two readings of it (`insightsAsEngine`, `engineCapexPoints`
+and `capexLossesAsEngine` are retired; the losses are `capexLosses`). On the
+Designer's default comparison the verdict now reads 163.4 million USD for the
+PIA regime and 194.7 for the concession. The gate pins the multipliers, pins
+every swept value against the engine called directly at that multiplier, and
+keeps the retired accumulating loop as a negative control: it yields seven
+points ending at 1.4000000000000004 and never reaches 1.5. The published
+endpoint ledgers `capex_0.8_pia_default` and `capex_1.5_pia_default` are cases
+of their own.
+
+The text below is the finding as recorded.
 
 `for (let multiplier = 0.8; multiplier <= 1.5; multiplier += 0.1)`
 accumulates in floating point: 1.2000000000000002, 1.3000000000000003,
@@ -163,10 +194,21 @@ regimes give up 10909.0909 $MM, differing in the fifteenth figure) the
 strict `<` reduce in deriveInsights names whichever regime's floating point
 noise happened to be smallest. The engine names "USA - Gulf of Mexico",
 the oracle's arithmetic names "Brazil - Concession"; neither is a result.
-The golden carries the ranked quantities (`capexLossesAsEngine`,
+The golden carries the ranked quantities (`capexLosses`,
 `priceClimbs`) and the gate treats a tie as a tie. The PRICE half is closed
 by EC2-1 below: a lead under one percentage point now declines to rank, so
-noise can no longer name a winner there. The capex half is still open.
+noise can no longer name a winner there.
+
+**Capex half FIXED 2026-09-15 (EC2-4, owner decision).** The capex verdict
+uses the price verdict's rule through one helper, `leadOrTie`: each end is
+named alone only when it leads the next regime by at least one printed step
+(`CAPEX_RESILIENCE_MIN_SPREAD_MM`, 0.1 million USD), otherwise every regime
+within that step is named with it, and when the two ends share a regime no
+regime is ranked. `cmp_never_recovers` now reads "No regime can be ranked on
+resilience to cost overrun" and names all six; the comparison gate lost its
+tie branch because every verdict text is now exact. Goldens
+`insights_capex_all_tied`, `insights_capex_least_end_tied`,
+`insights_capex_one_step_ranks`, `insights_capex_ends_meet`.
 
 ### F6. The price sweep returned 0 percent when profit was not positive (EC2-1, FIXED 2026-09-14)
 
@@ -195,6 +237,11 @@ null.
 
 ### F4. IRR beyond the 102400 percent bracket reports the bracket
 
+**FIXED 2026-09-15 (EC2-5, owner decision).** See the EC2 section below: the
+fiscal IRR follows the screening engine's contract, and `irr_beyond_bracket`
+is now `irr_above_clamp_past_old_bracket`, null with status 'above-clamp'.
+The text below is the finding as recorded.
+
 The bisection brackets by doubling from 100 percent ten times and reports
 the bracket if NPV is still positive there. `irr_beyond_bracket` (ncf -1
 then +2000): true IRR 199900 percent, engine 102400. Pinned; a curiosity
@@ -202,25 +249,137 @@ rather than a defect at real project scale.
 
 ### F5. Observations, no numerical disagreement
 
-- The RRT uplift is `totalCapex * rrtUpliftPct / 100` deducted EVERY
-  year of the 25 year life, so at the default 20 percent the uplift over
-  the life is five times the capex. The engine calls this a screening
-  approximation; the oracle implements it as stated.
+- **FIXED 2026-09-15 (EC2-6, owner decision.)** The RRT uplift was
+  `totalCapex * rrtUpliftPct / 100` deducted EVERY year of the 25 year
+  life, so at the default 20 percent the relief over the life was five
+  times the capex. The engine called this a screening approximation; the
+  parameter name did not. It now sizes a ONE-TIME uplifted cost pool,
+  capex times (1 + rrtUpliftPct / 100), drawn down against the RRT base
+  year by year until it is exhausted, and never refilled. See EC2-6 below.
 - The R-factor is a ratio of cumulatives and is not monotone: on
   `rfactor_falls_back` it rises past 2.5 (split 30) and then falls back
   below it in year 23 as revenue declines while opex accrues, and the
   contractor's split steps back UP to 40. Real R-factor contracts usually
   ratchet; this one does not. Recorded as a property, gated as such.
-- Sliding-scale and R-factor tiers are selected as the LAST tier in list
-  order whose threshold is reached. Identical to "highest threshold
+- **FIXED 2026-09-15 (EC2-8).** Sliding-scale and R-factor tiers were
+  selected as the LAST tier in list order whose threshold is reached. Identical to "highest threshold
   reached" for sorted tiers (all templates and the Designer's defaults
   are sorted); an unsorted tier list would silently pick the wrong rate.
+  A sorted copy is now selected from (below every threshold, the lowest
+  tier), and a repeated threshold is refused naming the regime and table.
 - The price multiplier scales oil only; gas and NGL prices are untouched,
   so the price sweep is an oil price sweep.
+
+## EC2 decisions, all FIXED 2026-09-15 (owner decisions)
+
+Found while the EC2 Fiscal Systems course was written. Each is gated in
+`__tests__/economics.fiscal.test.js` (describe "EC2 owner decisions") with a
+negative control that re-implements the retired rule, and the oracle
+implements each rule from its statement.
+
+- **EC2-2.** `effectiveTaxRate` kept a zero fallback beside the null-safe
+  `governmentShareOfNetRevenuePct`. The key is now a DEPRECATED alias equal to
+  that field, null where it is null. The gate recomputes the legacy formula on
+  every comparison golden: no defined value moved (1e-9), and only the old
+  zeros become null.
+- **EC2-3.** The capex sweep accumulated 0.1 from 0.8 and stopped at 1.4 while
+  its axis and its verdict said 1.5. It runs eight points on an integer step
+  count now. Fixed as F1 above.
+- **EC2-4.** The capex verdict ranked ties with a strict reduce. Fixed as F3
+  above.
+- **EC2-6.** The RRT capital uplift was deducted in all 25 years. The uplift
+  now sizes one pool, capex times (1 + uplift), and the relief in a year is the
+  lesser of the contractor profit share and what is left of that pool, so the
+  relief over the life can never exceed the pool. The base before relief is the
+  contractor profit share, the CIT base: revenue after royalty, after cost
+  recovery and after the profit split, with nothing else deducted from it. The
+  pool is drawn in every year whose base is positive whatever the RRT rate and
+  whether or not the minimum tax binds, and `calculateCashFlowForRegime` now
+  carries the parameter documentation (`rrtUpliftPct` is not an annual
+  allowance; 0 is respected and still relieves the capex once). This moves the
+  Brazil (rrt 40) and Angola (rrt 50) templates and the Designer's default PIA
+  regime (rrt 20): on the default project the Brazil RRT alone goes from 62.58
+  to 350.72 million USD over the life and its first charged year from 4 to 7.
+  Goldens `rrt_pool_never_exhausted`, `rrt_pool_with_minimum_tax`,
+  `rrt_absent_uplift_has_no_effect`, and the recut notes on
+  `rrt_uplift_default_20` and `rrt_uplift_zero_respected`; oracle columns
+  `rrtUpliftRelief`, `rrtUpliftPoolRemaining` and `rrtUpliftPoolOpened` on
+  every row. The negative control recomputes the retired annual rule on the
+  engine's own rows: five times the capex relieved, and less tax charged.
+- **EC2-5.** `calculateIRR` returned 0 for a flow that never changes sign and
+  for one whose only root is negative, and reported its 102400 percent bracket
+  as a rate. The screening engine's EC6-1 contract now serves both engines
+  from `engines/economics/irrContract.js` (lifted out of screening.js
+  unchanged, so every screening golden holds): a rate only when it is a
+  verified root strictly inside -99 to 1000 percent, negative roots included;
+  otherwise null with 'no-sign-change', 'no-root', 'above-clamp' or
+  'multiple-roots' and the roots listed. Discounting stays year-end.
+  `calculateIRRResult` returns `{ irr, irrStatus, irrRoots }`; `calculateIRR`
+  returns the rate or null; the summary carries all three. The contractor
+  sentence states the status when there is no rate. Golden renames:
+  `irr_all_positive` to `irr_all_positive_no_sign_change`, `irr_npv0_negative`
+  to `irr_negative_root_reported` (-10 percent), `irr_beyond_bracket` to
+  `irr_above_clamp_past_old_bracket`; new `irr_above_clamp_inside_old_bracket`,
+  `irr_no_root_below_band`, `irr_multiple_roots_listed`.
+- **EC2-8.** Tiers are selected in threshold order; a repeated threshold is
+  refused. Fixed as the F5 observation above. Goldens
+  `tiers_unsorted_selected_by_threshold` and `tierRefusals`.
+- **EC2-9.** Three golden notes contradicted their values. The case
+  `capped_5pct_never_recovers` (renamed `capped_5pct_pool_never_clears`) said
+  "no payback, IRR 0" beside payback year 3 and a root at 54.6792 percent;
+  `rfactor_tranche_crossing` dated the 1.0 crossing to year 3 (it is year 2;
+  the 60 to 40 step in year 3 is the 1.6 threshold); `rfactor_falls_back` said
+  the R factor peaks "just above 2.5" (it peaks at 2.972625 in year 11). The
+  notes now state the engine's numbers and a gate ties each note to them.
+- **EC2-10.** The payback verdict named the first regime at the winning year.
+  It names every regime at that year ("both" or "all" when every regime ties).
+- **EC2-11.** Money read "$1339.3MM". `formatMillionUSD` in
+  fiscalConventions.js gives "1,339.3 million USD" for every insight sentence;
+  golden group `moneyFormat` pins it and a gate refuses "$" and "MM" in every
+  golden sentence.
+
+### Decided after EC2-5 (lead, delegated by the owner, 2026-09-15)
+
+1. **Null 'multiple-roots' IRRs on the fixed 25 year projects: the contract is
+   KEPT.** The sandbox runs a fixed 25 year life with no economic limit, so on
+   the Suite test project (fixed opex 60) late contractor cash flow turns
+   negative and the NPV is zero at a second, negative rate as well as the
+   familiar one: `flat_test_project` at -20.4061 and 124.5777 percent. 18 cash
+   flow goldens, `price_40_pia_default`, and all eight regimes in
+   `cmp_all_templates_test_project` and `cmp_flat_vs_complex` read null with
+   both roots listed; in every one the old IRR is one of the listed roots,
+   unchanged to 1e-6. The Designer's default project keeps its rates at the
+   deck price, but at 35 and 40 USD per bbl it too has two roots. Honest and
+   consistent with screening; the summary carries `irrRoots` and the contractor
+   sentence prints them. An economic limit would move graded EC2 values and is
+   a separate product decision, recorded as a FUTURE item.
+2. **A root above the band: FIXED 2026-09-15.** `capex_multiplier_0_7` has
+   roots at -20.4852 and 1095.4783 percent, and the contract used to report the
+   in-band one as 'ok'. `irrContract.js` now compares the sign of the NPV at
+   1000 percent with the sign it tends to as the rate grows without bound (the
+   earliest non-zero flow, under either discounting convention). When they
+   differ a root lies above the band: one in-band root is then null
+   'multiple-roots' with the in-band roots in `irrRoots` and
+   `irrRootAboveBand: true`; with no in-band root it stays 'above-clamp' (flag
+   true). Every other result carries `irrRootAboveBand: false`. Both engines
+   follow it. Goldens: fiscal `capex_multiplier_0_7` moved ok to
+   multiple-roots; new `irr_root_above_band_with_one_inside` in both oracles
+   (ncf -5, 84, -64: roots -20 and 1500 percent). One screening status moved
+   WITHOUT a root above the band: `payback_recrossed_from_first_period` (ncf
+   10, -15, 60, which has no real root at any rate) read 'above-clamp' only
+   because its NPV is positive at 1000 percent; it is 'no-root' now. No other
+   screening value moved. An even number of roots above the band is not
+   detected by the sign test.
 
 ## Breakeven (breakeven.js)
 
 ### B1. A one-sided tornado bar collapses to zero instead of flagging
+
+**FIXED 2026-09-15 (owner decision).** An end with no breakeven below $500 is
+null, the bar carries `unreachable: true` and no swing, unreachable bars sort
+first, and the insight names each one. `mc_one_bar_unreachable` pins a run
+where exactly one bar is open, with the retired zero-and-sort-last rule as the
+negative control. The text below is the finding as recorded.
 
 When one side of a swing cannot break even below $500 the bar's `swing` is
 0 and that side is drawn at 0 from the base case; the variable then sorts
@@ -244,3 +403,39 @@ The closed-form price solve agrees with the engine's 100 step bisection to
 1e-8 $/bbl on every case, the seeded sample is reproduced element for
 element on six seeds including the default (20260829) and a 2000 iteration
 run, and every verdict sentence matches character for character.
+
+## EC3 wave findings, all FIXED 2026-09-15 (owner decisions)
+
+Found while the EC3 Probabilistic Economics course was written (wave notes in
+the NextGen repo). Each fix is gated in `economics.screening.test.js` or
+`economics.breakeven.test.js` with a negative control for the retired rule.
+
+- **EC3-1.** Payback was taken at the first non-negative cumulative and never
+  revisited, so a cash-positive first year followed by more capex read payback
+  0 beside a negative peak exposure. `payback` stays the first crossing (the
+  definition cashflow.ts and fdp/costCalculations.js share); `paybackStatus`
+  'recrossed' flags a return below zero and `paybackLast` is the last crossing
+  into non-negative, null when the cumulative ends negative.
+- **EC3-2.** An all-positive case read IRR 0 and payback 0. IRR was already
+  null with 'no-sign-change' after EC6-1; payback is 0 with 'no-investment'
+  (nothing was at risk, the same 0 cashflow.ts reports) and null with
+  'not-recovered' where it used to be the project life.
+- **EC3-3.** The Low and High scenarios scaled oil volume without its variable
+  opex. They carry it now, as the Production sensitivity has since EC6-1.
+- **EC3-4.** The `payback_multi_year` note said "3 + 10/40 = 3.25 years" while
+  its own cumulative -100, -130, -70, -30, 10 pays back at 4 + 30/40 = 4.75,
+  the value the golden always gated. Note corrected; no value moved.
+- **EC3-5.** The breakeven base case and tornado read the STATED median while
+  the sample drew from the fitted triangle, which differs when the fit clamps.
+  An inexact fit now hands both the fitted triangle's 10th, 50th and 90th
+  percentiles (`beliefs`), with a note.
+- **EC3-6.** The Scenario Builder S-curve kept every floor(n/50)th sorted value,
+  so it never plotted the top of the sample and disagreed with the cards. It
+  is 51 points at 0, 2, ..., 100 percent read with the cards' quantile rule.
+- **EC3-7.** The Monte Carlo drew every year independently and never moved
+  variable opex, which narrowed the NPV spread far below the stated belief.
+  It draws one factor per variable per iteration for every year, reserves
+  carries variable opex, and a range outside 0 to 1 is refused.
+- **EC3-8.** Nothing bounded a belief. Capex and opex percentiles below 0 and
+  efficiency percentiles outside 0 to 100 are refused by name; a fitted draw
+  past a limit is held at it and counted in `clippedDraws`, with a note.

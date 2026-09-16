@@ -24,7 +24,7 @@ At 5000 iterations the medians of seeds 1 to 10 run from 72.6338 to 73.1287, a r
 
 ## What the seed buys
 
-The seed buys reproducibility. Seed 20260829 at 5000 iterations returns 73.3297 every time, and a reviewer can reproduce it exactly. It buys nothing about accuracy: seed 7 at the same count returns 72.8475. The Scenario Builder behaves the same way on NPV, where the Best case P50 at 1000 iterations is 81.1835 at the default seed and 79.0624 at seed 43.
+The seed buys reproducibility. Seed 20260829 at 5000 iterations returns 73.3297 every time, and a reviewer can reproduce it exactly. It buys nothing about accuracy: seed 7 at the same count returns 72.8475. The Scenario Builder behaves the same way on NPV, where the Best case P50 at 1000 iterations is 78.5315 at the default seed and 80.2233 at seed 43.
 
 ## What the engines refuse
 

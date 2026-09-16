@@ -1,6 +1,6 @@
 # Price against volume
 
-Price and production both scale revenue, so a 30 percent move in either should move the value by the same amount. It does not. On the EGINA plan the price swing is 3092.0051 and the production swing is 2839.5965.
+Price and production both scale revenue, so a 30 percent move in either should move the value by the same amount. It does not. On the EGINA plan the price swing is 3097.7119 and the production swing is 2844.8375.
 
 {{panel:ec-value-explorer}}
 
@@ -8,16 +8,16 @@ Price and production both scale revenue, so a 30 percent move in either should m
 
 | driver | minus 30 percent | plus 30 percent | base | swing | swing as a share of base |
 | --- | --- | --- | --- | --- | --- |
-| Oil Price | 501.5628 | 3593.5679 | 2047.5653 | 3092.0051 | 1.510089 |
-| Production | 627.7671 | 3467.3636 | 2047.5653 | 2839.5965 | 1.386816 |
+| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 | 1.537012 |
+| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 | 1.411541 |
 
-Price is wider at both ends. Its downside of 501.5628 sits below the production downside of 627.7671, and its upside of 3593.5679 sits above the production upside of 3467.3636. As a share of base that is 1.510089 against 1.386816.
+Price is wider at both ends. Its downside of 466.5563 sits below the production downside of 592.9935, and its upside of 3564.2683 sits above the production upside of 3437.8310. As a share of base that is 1.537012 against 1.411541.
 
 ## A barrel costs money and a dollar does not
 
 The reason is in the operating cost. The screening terms charge a variable operating cost of 5.0000 USD a barrel, so every barrel produced brings its revenue and takes its own cost away again. A dollar added to the price arrives with no cost attached at all.
 
-Raise production by 30 percent and the extra barrels raise both revenue and the variable operating cost that the barrels carry. Raise the price by 30 percent and only the revenue moves. The same relative move therefore hands more net cash flow to price than to volume, at both ends of the sweep. On the Base case the operating cost over the life is 3049.6464 million USD against revenue of 16095.0492, and it is that block of cost moving with the barrels that separates the two rows. Royalty and tax take their share of both drivers alike, at 2011.8812 and 3310.0565 on the Base case, so they are not what splits price from volume.
+Raise production by 30 percent and the extra barrels raise both revenue and the variable operating cost that the barrels carry. Raise the price by 30 percent and only the revenue moves. The same relative move therefore hands more net cash flow to price than to volume, at both ends of the sweep. On the Base case the operating cost over the life is 3049.6464 million USD against revenue of 16095.0492, and it is that block of cost moving with the barrels that separates the two rows. Royalty and tax take their share of both drivers alike, at 2011.8812 and 3276.9239 on the Base case, so they are not what splits price from volume.
 
 ## The same effect on other cases
 
@@ -27,7 +27,7 @@ Raise production by 30 percent and the extra barrels raise both revenue and the 
 | the example FPSO concept profile at 70 | 10032.1182 | 6167.1119 to 13897.1246 | 6482.6226 to 13581.6139 |
 | no royalty and no tax | 2738.0331 | 1651.9056 to 3824.1606 | 1735.4539 to 3740.6123 |
 
-Price is wider than production on every one of them, including the case that pays no royalty and no tax, which shows the gap is not a fiscal artefact. Removing the government take changes the base from 2047.5653 to 2738.0331 and leaves price the wider driver. The second row is worth reading twice: it runs the example FPSO concept profile, a much larger case with a base of 10032.1182, and the ordering survives the change of scale intact.
+Price is wider than production on every one of them, including the case that pays no royalty and no tax, which shows the gap is not a fiscal artefact. Removing the government take changes the base from 2015.4123 to 2738.0331 and leaves price the wider driver. The second row is worth reading twice: it runs the example FPSO concept profile, a much larger case with a base of 10032.1182, and the ordering survives the change of scale intact.
 
 ## Where it bites hardest
 

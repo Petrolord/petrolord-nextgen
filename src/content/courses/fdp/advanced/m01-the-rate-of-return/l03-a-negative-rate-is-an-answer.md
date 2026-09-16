@@ -15,7 +15,7 @@ Read plainly, -36.6747 percent says that the cash returned to the project over i
 | case | NPV | IRR | status |
 | --- | --- | --- | --- |
 | never pays back, 100000 capex | -92616.5020 | -36.6747 | ok |
-| EGINA at 18.0000 USD a barrel | -1797.2732 | none | no-root |
+| EGINA at 18.0000 USD a barrel | -1834.1220 | none | no-root |
 | a case that only spends | -524.1537 | none | no-sign-change |
 
 All three lose money. Only the first has a rate. The second changes sign and still has no rate the band contains, and the third never changes sign at all, so there is nothing to solve. A reader who files all three under "bad IRR" has lost the distinction between a project that returned money badly and a project that returned none.
@@ -26,7 +26,7 @@ A published deck case carries an NPV of 126.1636 and a status of `multiple-roots
 
 ## Positive does not mean profitable
 
-The mirror of this mistake is just as common. At 40.0000 USD a barrel the EGINA concept reports 8.2444 percent, a positive rate and a valid one, on an NPV of -161.0098 million USD. The rate is positive and the project destroys value, because the screening discount rate is 10.0000 percent and the flow only earns 8.2444. The sign of the rate is not the test. The test is the rate against the rate money costs, and the NPV already did that comparison.
+The mirror of this mistake is just as common. A rate above zero is not a project that pays: the test is the rate against the rate money costs, which is 10.0000 percent on every screening case here, and the NPV has already made that comparison in money. At 40.0000 USD a barrel the EGINA concept is worth -197.2391 million USD and reports no rate at all, so the value is the only figure on that row a reader can act on.
 
 ## The mistake
 

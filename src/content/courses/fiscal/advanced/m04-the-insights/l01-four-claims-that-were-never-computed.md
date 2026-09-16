@@ -22,7 +22,7 @@ The old rule named the second-best regime for the contractor and called it best 
 
 ## The two rankings nothing computed
 
-A capex-resilience ranking needs the capex sweep and a price-response ranking needs the price sweep, and the tab printed both without touching either. Run them on the default project: contractor NPV given up across the swept capex points runs from 84.8591 for Angola - Deepwater PSC to 228.7953 for USA - Gulf of Mexico, and the climb in government take across the swept prices runs from -17.2498 for USA - Gulf of Mexico to 12.1305 for Angola - Deepwater PSC. The same two regimes sit at opposite ends of both, which is a finding, and not one a hard-coded sentence could have produced.
+A capex-resilience ranking needs the capex sweep and a price-response ranking needs the price sweep, and the tab printed both without touching either. Run them on the default project: contractor NPV given up across the swept capex points runs from 88.6123 for Angola - Deepwater PSC to 267.7301 for USA - Gulf of Mexico, and the climb in government take across the swept prices runs from -17.2498 for USA - Gulf of Mexico to 20.5076 for Brazil - Concession. USA - Gulf of Mexico sits at the exposed end of both while the resilient end and the progressive end belong to different regimes, which is a finding, and not one a hard-coded sentence could have produced.
 
 ## What the function refuses
 

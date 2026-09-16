@@ -31,7 +31,7 @@ The base year hides the escalators, so prove a later row. AKATA 2030: applied_oi
 
 ## Step four: read down, not across
 
-With two rows proven, take the engine's columns and read the readings this tier owns. Cumulative: trough -121123680.00 in 2029, crossing between -29534809.71 and 19845806.34, payback 3.461632 years from the nominal running sum. Totals: revenue 857602518.80, capex 255000000.00, opex 183899092.34, tax 148425219.46. Boe 10970666.67 with gas at 6. Unit technical cost 40.006602, opex per boe 16.762800. Take 66.1723 percent. If the question is asked at a working interest, scale the money readings and leave the volumes and the unit costs alone, and quote the take from the 100 percent row, because that is the only row on which it is the government's share.
+With two rows proven, take the engine's columns and read the readings this tier owns. Cumulative: trough -121123680.00 in 2029, crossing between -29534809.71 and 19845806.34, payback 3.461632 years from the nominal running sum. Totals: revenue 857602518.80, capex 255000000.00, opex 183899092.34, tax 148425219.46. Boe 10970666.67 with gas at 6. Unit technical cost 40.006602, opex per boe 16.762800. Take 66.1723 percent. If the question is asked at a working interest, scale the money readings and the volumes alike, and quote the take and the unit costs as the engine prints them, because a ratio with the share on both sides does not move.
 
 ## Step five: the checks a reader makes
 

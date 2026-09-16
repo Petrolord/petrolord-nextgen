@@ -14,14 +14,14 @@ Under "USA - Gulf of Mexico", ODIDI sells 139.6563 in year 1 and pays royalty of
 
 | regime | contractor NCF | government cash flow | payback | NPV at 12 percent | IRR percent |
 | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 113.0236 | 312.9610 | 7 | -43.7842 | 7.4603 |
-| Ghana - Deepwater | 117.1399 | 308.8447 | 6 | -27.4074 | 8.7906 |
-| Brazil - Concession | 192.9896 | 232.9950 | 6 | -5.8662 | 11.4055 |
-| USA - Gulf of Mexico | 148.3166 | 277.6679 | 7 | -37.3123 | 8.4381 |
-| Angola - Deepwater PSC | 109.1947 | 316.7898 | 8 | -58.1813 | 6.4905 |
-| Generic Royalty/Tax | 183.8652 | 242.1194 | 7 | -13.3840 | 10.6728 |
+| Nigeria - PIA (2021) | 113.0236 | 312.9610 | 7 | -43.7842 | null |
+| Ghana - Deepwater | 117.1399 | 308.8447 | 6 | -27.4074 | null |
+| Brazil - Concession | 192.9896 | 232.9950 | 6 | -5.8662 | null |
+| USA - Gulf of Mexico | 148.3166 | 277.6679 | 7 | -37.3123 | null |
+| Angola - Deepwater PSC | 109.1947 | 316.7898 | 8 | -58.1813 | null |
+| Generic Royalty/Tax | 183.8652 | 242.1194 | 7 | -13.3840 | null |
 
-Every template leaves a closing pool on this field, from 19.3270 under Brazil to 192.1146 under Angola, and every one of the six returns a negative value at 12 percent while returning the contractor positive cash.
+Every template leaves a closing pool on this field, from 19.3270 under Brazil to 192.1146 under Angola, and every one of the six returns a negative value at 12 percent while returning the contractor positive cash. The rate column is null down its whole length, because on a field whose late years turn negative no single rate in the band the engine searches brings a ledger to zero, and a null with a reason is the answer rather than a gap.
 
 ## The conventions, each with its number
 

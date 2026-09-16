@@ -1,6 +1,6 @@
 # The NPV profile
 
-The profile is the same ledger read at seven rates, plus one point at the applied rate that the engine evaluates slightly wrong.
+The profile is the same ledger read at seven rates, plus one point at the applied rate that lands exactly on the headline.
 
 {{panel:ec-time-explorer}}
 
@@ -22,29 +22,30 @@ The profile is the reader's sensitivity to the discount rate in one glance. From
 
 ## The applied point
 
-The engine adds one point at the applied rate, and its header says that point always equals the headline NPV. On a nominal basis it does. jv_analytic_decision_kpis has an applied rate of 10.000000 percent, a profile point labelled 10 percent of 21590909.09 and a headline of 21590909.09, gap 0.00. multiyear_pia_nominal reads 203250580.21 at both, gap 0.00.
+The engine adds one point at the applied rate, and its header says that point always equals the headline NPV. It does. The point is labelled at the applied rate rounded to two decimals and evaluated at the exact rate, so only the label is rounded.
 
-On a real basis it does not. The engine labels and evaluates the point at the applied rate rounded to two decimals. AKATA's applied rate is 6.796117 percent; the profile point is labelled 6.8 and reads 72513070.98; the headline is 72534830.66. The gap is minus 21759.68 USD. The engine's own npv() at the exact 6.796117 percent on the same flows returns 72534830.66, so the headline is right and the profile point is the one at the wrong rate.
+AKATA's applied rate is 6.796117 percent. The point is labelled 6.8 and reads 72534830.66, which is the headline, so the gap is 0.00. The engine's own npv() at the exact rate on the same flows returns 72534830.66 as well.
 
 | case | point labelled 6.8 | headline at 6.796117 | gap |
 | --- | --- | --- | --- |
-| AKATA | 72513070.98 | 72534830.66 | -21759.68 |
-| multiyear_pia_real | 203209583.79 | 203250580.21 | -40996.42 |
-| multiyear_jv_real | 88086010.81 | 88104639.00 | -18628.18 |
-| multiyear_pia_midyear_real | 196633975.59 | 196677221.27 | -43245.68 |
-| pia_loss_relief | -5480342.37 | -5475212.04 | -5130.33 |
-| allowance_cap_midyear | 2405993.72 | 2406447.46 | -453.74 |
+| AKATA | 72534830.66 | 72534830.66 | 0.00 |
+| multiyear_pia_real | 203250580.21 | 203250580.21 | 0.00 |
+| multiyear_jv_real | 88104639.00 | 88104639.00 | 0.00 |
+| pia_loss_relief | -5475212.04 | -5475212.04 | 0.00 |
+| allowance_cap_midyear | 2406447.46 | 2406447.46 | 0.00 |
 
-The gap is always negative, because rounding 6.796117 up to 6.8 discounts harder, and it scales with the size of the field.
+## What the engine used to do
+
+Until engines 3.10.0 the point was evaluated at its rounded label. On a real basis whose Fisher rate is not a round number the profile then missed its own headline: AKATA's point read 72513070.98 against 72534830.66, a gap of -21759.68 USD, and the same defect cost -40996.42 on multiyear_pia_real, -18628.18 on multiyear_jv_real and -453.74 on allowance_cap_midyear. The gap was always negative, because 6.8 discounts harder than 6.796117, and it scaled with the size of the field. The golden records no profile disagreement now.
 
 ## The mistake
 
-A careful analyst reconciles the profile against the headline, finds 21759.68 USD unexplained on AKATA, and spends an afternoon looking for the error in their own spreadsheet. There is none. A second, worse reading takes the profile point as the more precise figure because it is on the chart. It is the less precise one. Report the headline, and if the profile is charted, know that its applied-rate marker sits a few thousandths of a percent to the right of where it claims to be.
+The careful mistake is to read the label as the rate. A marker printed at 6.8 on a chart was evaluated at 6.796117, so a reader who recomputes at 6.8 to check it finds a difference the engine never made. The older mistake, hunting a spreadsheet for the USD the profile used to lose, is worth knowing only so that a figure from an older report can be placed.
 
 ## What the profile refuses
 
-It refuses to sample anywhere but 0, 5, 8, 10, 12, 15 and 20 percent plus the applied rate, so the IRR is never a sampled point and a curve that turns between samples is not seen. It refuses to be on the nominal flows when the basis is real, which is why the 10 percent point of AKATA, 55805775.02, is not the configured 10 percent nominal answer. And it refuses to flag its own rounding.
+It refuses to sample anywhere but 0, 5, 8, 10, 12, 15 and 20 percent plus the applied rate, so the IRR is never a sampled point and a curve that turns between samples is not seen. It refuses to be on the nominal flows when the basis is real, which is why the 10 percent point of AKATA, 55805775.02, is not the configured 10 percent nominal answer.
 
 ## Exercise
 
-Read the profile point at the applied rate and the headline NPV and write the gap with its sign. Then say which of the two the engine's npv() agrees with at the exact rate.
+Read the profile point at the applied rate and the headline NPV and confirm the gap is 0.00. Then say why the point is still labelled 6.8 when the rate it was evaluated at is 6.796117.

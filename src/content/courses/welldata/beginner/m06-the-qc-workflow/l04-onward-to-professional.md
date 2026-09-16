@@ -14,7 +14,7 @@ Four things change.
 
 **Curves are recognised by kind.** The pipeline classifies mnemonics into standard curve kinds rather than treating every column as an anonymous array of numbers. On feet_20 it recognises four of them. Recognition is what lets downstream apps ask for the gamma ray without knowing whether this particular vendor called it GR, GRD or SGR, and it is the mechanism behind every automatic curve pick you have ever seen in an interpretation app.
 
-**The metric frame is computed at full precision.** The Associate panel rounds the feet_20 step to 0.6096 m because that is all a human eye needs. The pipeline keeps the frame at working precision: start 1493.52 m, stop 1584.96 m, step 0.609619 m. Over 150 samples the difference between a rounded step and the real one is not cosmetic, and anything that later stacks, resamples or ties on that frame inherits the error.
+**The metric frame is computed at full precision.** The Associate panel rounds the feet_20 step to 0.6096 m because that is all a human eye needs. The pipeline keeps the start, the stop and the step at working precision instead, carrying every figure the conversion produces rather than the two a tile shows. Over 150 samples the difference between a rounded step and the real one is not cosmetic, and anything that later stacks, resamples or ties on that frame inherits the error.
 
 **Uniformity becomes a verdict.** At this tier the step is not just displayed, it is judged. The pipeline returns a pass or a fail on whether the depth column is uniformly sampled, and irregular_20 fails it. That is the difference between noticing an uneven column and having software that refuses to pretend it is even.
 

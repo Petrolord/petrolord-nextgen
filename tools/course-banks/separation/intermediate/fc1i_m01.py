@@ -1,0 +1,116 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC1 Professional m01, the horizontal vessel: a circle cut by a level.
+# Every number is from digest Section 7 (and the level-driven figures Section 8
+# quotes for the same drum). ABANA-2 only.
+
+q(2, "On the 8.000000 ft drum a level fraction of 0.300000 stands 2.400000 ft deep and holds 12.682775 ft2 of the 50.265482 ft2 cross-section. Why is the liquid area well under three tenths of the circle?",
+ "The bottom of a circle is narrow, so a step in level buys far more area near the centreline than it buys near the invert.",
+ ["The figure quoted is what the liquid may occupy after a vapour allowance has been taken off the top of the segment, which is why it falls short of three tenths of 50.265482 ft2.",
+  "The level fraction was applied to the liquid depth of 2.400000 ft rather than to the diameter.",
+  "The engine bisects towards the depth and stops after 100 steps, so the area it prints is a converged approximation that lands a little under the exact three tenths of the shell."],
+ "Depth is linear in the level fraction and area is not. The same drum at 0.750000 holds 40.438525 ft2, well over three quarters, because by then the widest part of the circle is covered.")
+
+q(0, "Which quantity on a cross-section row moves in a straight line with the level fraction on the 8.000000 ft drum?",
+ "The liquid depth: a level of 0.300000 gives 2.400000 ft and a level of 0.750000 gives 6.000000 ft, each one the level fraction times the diameter.",
+ ["The liquid area, which is why 12.682775 ft2 can be carried up to 40.438525 ft2 by scaling the level fraction between the two rows, a segment being the share of the circle a level buys.",
+  "The gas-liquid chord, which climbs from 7.332121 ft at a level of 0.300000 to 8.000000 ft at a level of 0.500000 in even steps with the level.",
+  "The gas area, because the gas keeps whatever the liquid leaves behind and the total of 50.265482 ft2 never moves off any row of the table."],
+ "Depth is the level fraction times the diameter, so 0.300000 of 8.000000 ft is 2.400000 ft. The areas bend, and the chord turns round at half full and falls away again.")
+
+q(3, "An area of 15.678751 ft2 is handed back to the 8.000000 ft drum to recover the depth that produced it. What does the engine do with that request?",
+ "It bisects 100 times and returns 2.800000 ft, so the two directions agree.",
+ ["It inverts the segment formula in closed form and returns 2.800000 ft, which is exact because no iteration is involved anywhere in that step.",
+  "It interpolates between the six tabulated levels the drum is published at and returns the depth nearest 2.800000 ft, which is why the table carries those six rows.",
+  "It refuses, because an area is an output of the cut and a circular segment takes a depth or a level fraction as its input rather than an area."],
+ "The bisection resolves the depth to double precision. On the 10.000000 ft drum 49.202836 ft2 gives back 6.000000 ft in the same way.")
+
+q(1, "A segment area larger than the whole circle comes back as { error: \"the area must lie between zero and the full circle\" }, while a liquid level of 0 throws a SeparatorInputError. What separates those two answers?",
+ "A throw says the request was malformed, and a returned error says the request was well formed and the method has no answer for it.",
+ ["The throw carries no `input` property while the returned error names the field that failed, so only the returned form can be shown beside the box on a studio form.",
+  "The throw is reserved for anything the studio form can validate for itself, and the returned error for states only the geometry can discover once the cut has been attempted.",
+  "One is raised while the inputs are read and the other once the vessel has been sized."],
+ "A SeparatorInputError carries an `input` property naming the input, and no default or clamp stands in for it. The area message describes a state: the inputs were readable and the geometry is impossible.")
+
+q(0, "A sizing sheet arrives with liquidLevelFrac set to 1 and the engine answers \"liquidLevelFrac must lie strictly between 0 and 1 (got 1)\". What should a reader do with that answer?",
+ "Treat it as a statement about the input rather than about the drum: a full vessel has no gas space for anything to separate in, and the usual cause is a percentage typed where a fraction belongs.",
+ ["Catch the refusal and size the drum at 0.500000, the level the six teaching rows are centred on.",
+  "Read it as a verdict on the vessel, which at 8.000000 ft is too small to be run that full.",
+  "Round the level down to 0.750000, the highest level this drum is published at."],
+ "The word strictly is doing the work. A caught throw that carries on at 0.500000 has turned a refusal into an assumption, and the engine has no honest dimension for a full drum.")
+
+q(2, "Levels of 0.400000 and 0.600000 on the same drum both report a gas-liquid chord of 7.838367 ft. What does a chord on its own therefore fail to say about the operating state?",
+ "Whether the vessel is running high or low, because a chord the same distance above the centreline is as wide as one the same distance below it.",
+ ["Whether the drum is being sized or checked, since the engine writes a chord only for a level it was handed and leaves the field empty for a level it derived itself.",
+  "Which of the two duties of the gas space it belongs to, since the same width serves as the flow area and as the distance a droplet falls.",
+  "Whether the level sits inside the range the engine accepts at all."],
+ "The chord rises to the diameter at half full and falls away on both sides of it, so 7.838367 ft belongs to two levels. The level fraction is what tells the two apart.")
+
+q(1, "Old work passed the gas-liquid chord into a check on the water layer in a three-phase vessel. Why was that error so hard to see?",
+ "The chord is a width across the drum and a layer is a height, so the check was reading a layer that was not there while every figure on the page was still in feet.",
+ ["The chord and the water layer agree at a level of 0.500000, so the fault only showed itself once an operator moved the level controller off the centreline.",
+  "The check was advisory and printed no verdict of its own, so nothing downstream of it ever moved and no reviewer had a number to disagree with.",
+  "The chord was carried in metres while the layer was carried in feet, so the two disagreed by a factor any reviewer would read as an ordinary unit slip."],
+ "A number in feet that came out of the wrong geometry is the hardest sort of error to find. The chord is the width of the gas-liquid surface and an interface sits at its own height inside the liquid.")
+
+q(3, "Why would a spot check run at a level of 0.500000 never expose a chord used in the place of the diameter?",
+ "At half full the chord is 8.000000 ft, which is the diameter, so the two agree on that one row.",
+ ["Because the engine substitutes the diameter for the chord at half full, where the segment relation would otherwise be taken across the widest part of the circle.",
+  "Because a check at half full compares areas rather than widths, and the liquid and the gas both hold 25.132741 ft2 there whichever width was used to reach them.",
+  "Because the chord at 0.500000 is 7.838367 ft and the gap from the diameter is inside the tolerance a spot check applies to any vessel figure."],
+ "At a level of 0.300000 the chord is 7.332121 ft against a diameter of 8.000000 ft and the slip shows. Half full is the one level where the two are the same number.")
+
+q(2, "The published 6.000000 ft segment at a level of 0.750000 holds 22.746670 ft2 and the published 10.000000 ft segment at 0.300000 holds 19.816836 ft2. What does that pair establish?",
+ "A smaller drum run high holds more liquid than a larger drum run low, so a diameter on its own does not rank two vessels by liquid area.",
+ ["The segment routine loses accuracy on the larger bore, which is why the 12.000000 ft case at half full is published at 56.548668 ft2 as a check against it.",
+  "Liquid area scales with the bore and with the level in the same proportion, so the two published cases were chosen to land within a few ft2 of one another.",
+  "A level above 0.500000 sits outside the range the engine will size at."],
+ "22.746670 ft2 on a 6.000000 ft drum beats 19.816836 ft2 on a 10.000000 ft drum. The level decides how much of the circle the liquid is given.")
+
+q(0, "At a level of 0.300000 the 8.000000 ft drum gives the gas 37.582708 ft2 and 5.600000 ft. Which duty does each of those two numbers serve?",
+ "The area sets the velocity the gas travels at along the drum, and the height is the distance an entrained droplet has to fall before it reaches the liquid surface.",
+ ["The area sets the distance a droplet falls and the height sets the velocity, since gas rises through the vessel towards the outlet.",
+  "Both of them serve the velocity: the area divides the rate and the height corrects that result for the shape of the segment.",
+  "The area serves the capacity verdict and the height serves the slenderness the finished vessel is judged on."],
+ "Velocity is the actual rate over the gas area, 0.784681 ft/s on that row. The fall is across the gas height of 5.600000 ft, which is the diameter less the liquid depth.")
+
+q(1, "Two velocity errors are available in the gas space: dividing by the full 50.265482 ft2, and dividing the standard rate of 1273.148148 standard ft3/s by the gas area. Which one does more damage?",
+ "The full cross-section, because at half full it halves the velocity and gives a plausible figure saying the vessel has twice the room it has.",
+ ["The standard rate, because 1273.148148 standard ft3/s is what the drum actually passes once the pressure of 614.700000 psia and a z of 0.908065 have been applied to the stream.",
+  "Neither, because the capacity verdict is taken against the settling velocity of 1.958255 ft/s.",
+  "The standard rate, because a velocity tens of times too high still lands inside the band a reviewer expects to see on a drum of 8.000000 ft."],
+ "The absurd answer is usually caught and the halved one is not, and it errs in the comfortable direction. The drum passes 29.490437 ft3/s through 25.132741 ft2 at 1.173387 ft/s.")
+
+q(3, "What exactly does a level of 0.500000 buy on the 8.000000 ft drum?",
+ "Equal areas of 25.132741 ft2 and a chord equal to the diameter.",
+ ["The largest liquid area the drum can offer, which is why a retention volume is worked at half full before any other level is put to it.",
+  "A liquid area of 25.132741 ft2 that a level controller cannot drift away from without raising an alarm, which is what makes half full the design level.",
+  "The level at which the liquid and the gas ask for the same length, so the vessel is balanced between the two duties it has to serve."],
+ "At 0.750000 the liquid holds 40.438525 ft2, so half full is not the largest area available. What belongs to it is the symmetry of the areas and the chord of 8.000000 ft.")
+
+q(2, "A drum sized at a level of 0.500000 for 23.270539 ft of length is then run at 0.300000. What has changed?",
+ "The same duty now asks for 46.113917 ft in a vessel that was bought at 23.270539 ft, and no steel moved to bring that about.",
+ ["Nothing measurable, because 23.270539 ft is a property of the vessel itself.",
+  "The retention volume of 584.852431 ft3, which falls away with the level so that the length the drum was bought at still covers the duty.",
+  "The gas side, which is now worse off because a lower level leaves the gas 37.582708 ft2 to cross rather than 25.132741 ft2."],
+ "The liquid area fell from 25.132741 ft2 to 12.682775 ft2, so the same retention volume has to lie in a narrower trough. A length is meaningless without the level it was sized at.")
+
+q(1, "Every row of the cross-section table reports a total area of 50.265482 ft2 while the liquid area runs from 7.156723 ft2 up to 40.438525 ft2. What is that column for?",
+ "It fixes the shell: the level splits one circle into two shares and never changes how much circle there is.",
+ ["It records the area the engine held before the vapour allowance above the liquid was taken off the top of the segment on each row.",
+  "It is the area the gas flows through on every row, the liquid lying in the bottom of the circle without taking any of the cross-section away from the gas.",
+  "It is the area the two length requirements are divided into, which is what allows a liquid length and a gas length to be added on one row."],
+ "A liquid area of 7.156723 ft2 at a level of 0.200000 and 40.438525 ft2 at 0.750000 are two shares of the same 50.265482 ft2 of shell.")
+
+q(0, "Dropping the level from 0.500000 to 0.300000 takes the liquid requirement from 23.270539 ft to 46.113917 ft while the gas velocity falls from 1.173387 ft/s to 0.784681 ft/s. Why do the two sides move in opposite directions?",
+ "One cut divides the circle between them, so the liquid loses the area it needs for its volume in the same step that the gas gains the area it needs to slow down.",
+ ["The gas velocity is taken across the chord rather than across the gas area, and a chord narrows as the level falls while the liquid area narrows with it.",
+  "The retention volume rises as the gas area rises, so the liquid requirement grows for the same reason that the velocity falls away.",
+  "The settling velocity of 1.958255 ft/s climbs as the level drops, which slows the gas and lengthens the liquid in one move."],
+ "The liquid area fell to 12.682775 ft2 while the gas area rose to 37.582708 ft2 out of the same 50.265482 ft2. The drum got worse at holding liquid and better at carrying gas.")
+
+emit(Q, '/root/fc-wip-separation/banks/fc1i_m01.json', expect_n=15)
+finish()

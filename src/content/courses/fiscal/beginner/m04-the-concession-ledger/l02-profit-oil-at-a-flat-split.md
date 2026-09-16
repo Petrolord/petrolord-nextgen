@@ -34,7 +34,7 @@ A published case sets a 40 percent contractor split and a 20 percent royalty aga
 
 ## The mistake
 
-Profit oil is not profit. It carries no opex, no capex and no tax. Year 1 shows a residual of 0.0000 in a year whose contractor net cash flow is -310.0117, and a reader who treats the residual as earnings reads that year as break even. The other error is to expect a bigger residual to mean a better regime: Angola leaves the largest on this project, 1745.4841, and returns the contractor 545.1955 against 980.9313 under the Gulf of Mexico terms.
+Profit oil is not profit. It carries no opex, no capex and no tax. Year 1 shows a residual of 0.0000 in a year whose contractor net cash flow is -310.0117, and a reader who treats the residual as earnings reads that year as break even. The other error is to expect a bigger residual to mean a better regime: Angola leaves the largest on this project, 1745.4841, and returns the contractor 481.7318 against 980.9313 under the Gulf of Mexico terms.
 
 ## What it refuses
 

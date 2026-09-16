@@ -1,6 +1,6 @@
 # A fit that cannot pass through three points
 
-The breakeven engine fits each stated belief to a triangular whose CDF passes through all three percentiles. Some beliefs have no such triangular, and then the engine fits the nearest one there is, marks the fit inexact and writes a note into its insight.
+The breakeven engine fits each stated belief to a triangular whose CDF passes through all three percentiles. Some beliefs have no such triangular, and then the engine fits the nearest one there is, marks the fit inexact, and runs everything it reports on that fitted triangle.
 
 {{panel:ec-risk-explorer}}
 
@@ -13,31 +13,31 @@ The shape ratio of a belief is (50th - 10th) / (90th - 10th). A triangular with 
 | opex | 16 / 20 / 26 | 0.400000 | 13.3201 | 17.4160 | 30.8541 | true |
 | opex, narrow belief | 16 / 17 / 26 | 0.100000 | 15.1886 | 15.1886 | 31.0000 | false |
 
-At 0.100000 the stated median sits far too near the 10th percentile. The engine takes the most left-skewed triangular, with the mode at the minimum, and says so in words: "the stated median sits too near the 10th percentile for any triangular to pass through all three points; the fit uses the most left-skewed triangular there is (mode at the minimum)".
+At 0.100000 the stated median sits far too near the 10th percentile. The engine takes the most left-skewed triangular there is and says so: "the stated median sits too near the 10th percentile for any triangular to pass through all three points; the fit uses the most left-skewed triangular there is (mode at the minimum)".
 
-## Two beliefs in one result
+## One belief through the whole result
 
-Run ISIALA with the narrow belief and one result carries two opex beliefs at once. The base case and the tornado use the stated numbers; the sample uses the clamped triangle.
+Run ISIALA with the narrow belief and every number in the answer comes from the fitted triangle. The base case and the tornado use its own 10th, 50th and 90th percentiles, opex 16.0000 / 19.8197 / 26.0000, and the sample draws from that same triangle.
 
 | opex belief | 10th percentile of breakeven price | median | 90th percentile of breakeven price | base |
 | --- | --- | --- | --- | --- |
 | 16 / 20 / 26 | 62.1713 | 73.3297 | 85.5912 | 71.6277 |
-| 16 / 17 / 26 | 62.0843 | 73.1740 | 85.4599 | 67.2301 |
+| 16 / 17 / 26 | 62.0843 | 73.1740 | 85.4599 | 71.3621 |
 
-The base case at the stated median of 17 falls to 67.2301 USD per bbl. The sample barely moves, because the clamped triangle cannot put its median at 17. The tornado follows the stated numbers: Annual OPEX reads -1.4602 low and 13.2707 high around the base of 67.2301, against -5.8578 and 8.8730 on the belief that fits. The insight carries the fit note.
+The stated median of 17 appears nowhere in the answer. The engine could not honour it, said so, and stopped using it. The tornado follows the same belief: Annual OPEX reads -5.5922 low and 9.1387 high around the base of 71.3621, against -5.8578 and 8.8730 on the belief that fits exactly.
 
-## What used to happen
+## What it used to do
 
-Before the repair this engine read three stated percentiles as a minimum, a mode and a maximum, and 16 / 17 / 26 makes a perfectly good triangle on that reading. The old error never failed on this belief. It quietly cut the tails off every belief instead: capex stated as 150 / 180 / 220 came back as 164.4914, 182.5834 and 203.2668 at the three percentiles. A fit that admits it is inexact is the repair working.
+History, before the 2026-09-15 repair: the sample drew from the clamped triangle while the base case and the tornado read the stated median of 17. The base came out at 67.2301 and Annual OPEX read -1.4602 low and 13.2707 high, a bar far wider on its high side than the sample supports. One result carried two different opex beliefs, and only one of them had been fitted.
 
 ## What it refuses
 
-It does not refuse the belief, ask for another, or switch to another distribution family. It carries on with the clamped triangle, sets `exact` to false and appends the note. The published `mc_inexact_fit_note` clamps two beliefs at once, capex with its mode at the minimum and opex with its mode at the maximum, and its insight carries both notes.
+It does not refuse the belief, ask for another, or switch to another family of distribution. It carries on with the clamped triangle, sets `exact` to false, appends the note and prints the beliefs it used. The published `mc_inexact_fit_note` clamps two beliefs at once and reports the percentiles it used for each, capex 800.0000 / 990.9830 / 1300.0000 fitted and opex 50.0000 / 65.4508 / 75.0000 fitted, with a base of 177.6265.
 
 ## The mistake
 
-The careful mistake is quoting the base case beside the sample median as if both described one belief. On the narrow belief 67.2301 describes opex with a median of 17, and 73.1740 describes a triangle whose median is not 17. Read `exact` on every fit before quoting either.
+The careful mistake is quoting the stated belief in a report when the fit was inexact. On the narrow belief the answer runs at an opex median of 19.8197 and never at 17. Read `exact` on every fit, then read the beliefs line beside it, because that line names the numbers the base case and the tornado used.
 
 ## Exercise
 
-State the shape ratio of the narrow opex belief, the band it must sit in, and its fitted minimum, mode and maximum. Then give the base breakeven and the median breakeven price under the narrow belief, and say which of the two uses the stated median.
+State the shape ratio of the narrow opex belief, the band it must sit in, and its fitted minimum, mode and maximum. Then give the base breakeven under that belief, say which opex median produced it, and say what the retired engine reported instead.

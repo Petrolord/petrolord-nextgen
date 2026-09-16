@@ -50,7 +50,7 @@ const Defined = ({ label, definition, headline = false }) => (
 const MODES = [
   ['summary', 'Summary: the ranking, government take and government share of net revenue'],
   ['price', 'Price: the sweep, and the state each point carries'],
-  ['capex', 'Capex: seven swept points, an eighth called directly, two losses'],
+  ['capex', 'Capex: eight swept points reaching 1.5, checked against a direct call'],
   ['insights', 'Insights: the verdicts beside the quantities they rank'],
 ];
 
@@ -97,7 +97,7 @@ const Tbl = ({ head, rows, mark = () => false }) => (
   </div>
 );
 
-const Waiting = ({ what }) => <Note>Running {what} in the engine. This is a real comparison, not a cached table: it re-runs the whole ledger once per regime and again at nine prices and seven capex multipliers.</Note>;
+const Waiting = ({ what }) => <Note>Running {what} in the engine. This is a real comparison, not a cached table: it re-runs the whole ledger once per regime and again at nine prices and eight capex multipliers.</Note>;
 const Failed = ({ what }) => <Note>The engine returned nothing for {what}. A comparison needs a project carrying production, prices and costs and at least one regime carrying all four instruments; without them there is no summary to sort and no sweep to plot.</Note>;
 
 const CASE_OPTIONS = COMPARISON_IDS.map((id) => [id, COMPARISON_LABELS[id] || id]);
@@ -337,7 +337,7 @@ const Capex = () => {
   if (cs.status !== 'done') {
     return <>{picker}{cs.status === 'failed' ? <Failed what="this capex sweep" /> : <Waiting what="the capex sweep" />}</>;
   }
-  const bars = cs.value.series.map((d) => ({ name: d.name, seven: d.lossOverSevenSweptPointsDerived, eight: d.lossOverEightPointsDerived }));
+  const bars = cs.value.series.map((d) => ({ name: d.name, loss: d.lossOverSweptRangeDerived }));
   return (
     <>
       {picker}
@@ -347,14 +347,14 @@ const Capex = () => {
           <Tile label="Labels the engine returns" value={String(cs.value.labelCount)} />
           <Tile label="Last label" value={String(cs.value.lastLabel)} />
           <Tile label="Last label the axis promises" value="1.5" />
-          <Tile label="The multiplier the loop actually reaches" value="1.5000000000000004" />
+          <Tile label="Swept endpoint equals the direct call" value={cs.value.series.every((d) => d.endpointMatchesDirectCallDerived) ? 'yes, on every regime' : 'no'} />
         </TileGrid>
       </div>
       <Tbl
-        head={['regime', ...cs.value.labels.map((x) => `x${x}`), 'x1.5, called directly', 'loss over the SEVEN swept points', 'loss over EIGHT points', 'the label difference']}
+        head={['regime', ...cs.value.labels.map((x) => `x${x}`), 'x1.5, called directly', 'loss over the swept range, 0.8 to 1.5']}
         rows={cs.value.series.map((d) => [
           d.name, ...d.values.map((v) => mm(v)), mm(d.npvAtOneAndAHalfCalledDirectly),
-          mm(d.lossOverSevenSweptPointsDerived), mm(d.lossOverEightPointsDerived), mm(d.labelDifferenceDerived),
+          mm(d.lossOverSweptRangeDerived),
         ])}
       />
       <div className="h-64 mt-3">
@@ -365,27 +365,25 @@ const Capex = () => {
             <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'contractor NPV given up, million USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
             <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="seven" name="loss the chart measures, 0.8 to 1.4" fill="#38bdf8" isAnimationActive={false}>
+            <Bar dataKey="loss" name="contractor NPV given up, 0.8 to 1.5" fill="#38bdf8" isAnimationActive={false}>
               {bars.map((b) => <Cell key={b.name} fill="#38bdf8" />)}
             </Bar>
-            <Bar dataKey="eight" name="loss the axis promises, 0.8 to 1.5" fill="#f87171" isAnimationActive={false} />
           </BarChart>
         </ResponsiveContainer>
       </div>
-      <p className="text-xs text-slate-500 mt-4 mb-1">The seven published capex-sweep cases, at multipliers of 0.7 to 1.3</p>
+      <p className="text-xs text-slate-500 mt-4 mb-1">The published capex-sweep cases, at multipliers of 0.7 to 1.5</p>
       <Tbl
         head={['case', 'regime it actually runs', 'npv', 'irr, percent', 'totalContractorNCF', 'totalGovTake', 'paybackYear', 'rFactorPayoutYear']}
         rows={published.map((x) => [x.id, x.regimeName, mm(x.npv), pc(x.irrPct), mm(x.totalContractorNCF), mm(x.totalGovTake), yr(x.paybackYear), yr(x.rFactorPayoutYear)])}
       />
       <SweepRegimeCaution />
       <Note>
-        THE EIGHTH POINT IS NEVER REACHED. The sweep is written as a loop from a multiplier of 0.8 to 1.5 in steps of
-        0.1, and its axis is labelled 0.8 to 1.5. Adding a tenth to a binary floating point number does not land on
-        1.5: the accumulated multiplier reaches 1.5000000000000004, which fails the test, so the sweep has SEVEN
-        points and its last label reads 1.4. What "resilience to cost overrun" therefore measures is the NPV given up
-        between a 20 percent underspend and a 40 percent overrun, not the 50 percent overrun the axis promises. The
-        verdict sentence is not false; it is answering a narrower question than the label on the chart, and the label
-        difference column above is how much narrower.
+THE SWEEP NOW REACHES ITS ENDPOINT. The multipliers are an integer step count, each one written as eight plus
+        the step over ten, so the eighth point is exactly 1.5 and equals the engine called directly at 1.5, which the
+        column beside it checks. What "resilience to cost overrun" measures is therefore the NPV given up between a
+        20 percent underspend and a 50 percent overrun, the range the axis has always claimed. Until the 2026-09-15
+        repair the loop accumulated a tenth at a time, reached 1.5000000000000004, failed its own test and stopped at
+        1.4, so every resilience figure was the loss to a 40 percent overrun while the label promised 50.
       </Note>
     </>
   );

@@ -16,7 +16,7 @@ Set the population method to trend. That is the panel's default, so if you have 
 
 **Trend porosity at P-1: 0.207142**, tolerance 0.001. Read the lime circle's label on the map, or evaluate the plane at an easting and northing of 1600 m. Because P-1 sits exactly on a grid node, the two routes agree exactly.
 
-**Mean trend porosity over the oil nodes: 0.209368**, tolerance 0.001. The second mean tile. This is the plain average over the 169 oil bearing cells, not the volume weighted one.
+**Mean trend porosity over the oil nodes: 0.209368**, tolerance 0.0002. The second mean tile. This is the plain average over the 169 oil bearing cells, not the volume weighted one. Report the tile to at least four decimals. The tolerance is tighter than the others on purpose: one of the six well porosities the task hands you, 0.21, sits 0.00063 from this mean, and a wider tolerance would accept a number you copied instead of a model you ran.
 
 **Pore volume: 3.755847** million cubic metres, tolerance 0.02.
 
@@ -46,7 +46,7 @@ Confirm that the delta plus the Associate booking gives your STOIIP: $12.139208 
 
 ## The two common errors
 
-The first is reporting the volume weighted mean, 0.210822, where the node mean is asked for. Both are on the panel, they differ by 0.001455, and the tolerance on that field is 0.001, so the volume weighted value fails by half again the tolerance. Read the tile labels.
+The first is reporting the volume weighted mean, 0.210822, where the node mean is asked for. Both are on the panel, they differ by 0.001455, and the tolerance on that field is 0.0002, so the volume weighted value fails by more than seven times the tolerance. Read the tile labels.
 
 The second is computing the delta against the wrong baseline. The uplift is measured against the constant 0.20 booking from the Associate tier. Measuring it against the well average booking gives 0.252229, which is the spatial part alone and fails the tolerance by a wide margin.
 

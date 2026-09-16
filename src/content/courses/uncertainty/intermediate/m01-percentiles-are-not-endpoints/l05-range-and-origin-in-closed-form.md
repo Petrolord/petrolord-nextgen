@@ -35,7 +35,7 @@ Only m needed a search, and the ratio it searches on never falls as m rises, so 
 
 ## What it refuses
 
-The arithmetic never inspects what it produces. Nothing stops `min` falling below zero on a wide cost belief, or `max` passing 100 on an efficiency belief whose 90th percentile sits near the top. ISIALA's efficiency maximum of 99.9640 stays under 100 because of the belief, not because of any guard, and a negative capex or an efficiency above 100 percent would be sampled like any other value.
+The arithmetic never inspects what it produces. Nothing stops `min` falling below zero on a wide cost belief, or `max` passing 100 on an efficiency belief whose 90th percentile sits near the top. ISIALA's efficiency maximum of 99.9640 stays under 100 because of the belief and not because the fit guards it. The draw taken from such a fit is bounded even though the fit is not: a value past 100 percent, or a cost below zero, is held at the limit and counted in `clippedDraws`.
 
 ## The mistake
 

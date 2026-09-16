@@ -29,7 +29,7 @@ Take passes 100 percent whenever the contractor's total net cash flow is negativ
 
 ## The mistake
 
-Reading take as the government's share of revenue. Royalty plus tax over 857602518.80 is smaller than 66.1723 percent, and it is the number a press release prints; take is over value, not sales. The second mistake is the working interest one: AKATA at 25 percent prints a take of 91.5431 percent, which compares one partner's scaled net with the whole field's value and is not a fiscal statement. The third is to expect take to say something about timing: the one-year depreciation schedule lowers total tax from 148425219.46 to 116025219.46, and take moves only because less was collected, not because it was collected later.
+Reading take as the government's share of revenue. Royalty plus tax over 857602518.80 is smaller than 66.1723 percent, and it is the number a press release prints; take is over value, not sales. The second mistake is to expect the working interest to move it: AKATA prints 66.1723 percent at 100, at 60 and at 25 percent alike, because the share scales the government's lines and the contractor's together and cancels out of the ratio. Until the 2026-09-15 repair the same run printed 91.5431 percent at a 25 percent interest, a number about the partnership rather than about the regime. The third is to expect take to say something about timing: the one-year depreciation schedule lowers total tax from 148425219.46 to 116025219.46, and take moves only because less was collected, not because it was collected later.
 
 ## What it refuses
 

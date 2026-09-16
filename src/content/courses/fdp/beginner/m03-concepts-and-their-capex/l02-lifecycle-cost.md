@@ -19,11 +19,11 @@ Operating cost is 1900.0000 million USD on the FPSO, which is most of the way to
 
 ## Undiscounted, and that is the point
 
-Lifecycle cost is a plain sum. No discounting, no price, no royalty and no tax: 4150.0000 million USD is money as it is spent, whenever it is spent. That makes it useful for the question it answers, which is how much cash a concept consumes in total, and useless for ranking concepts by value. Value needs the timing, and the screening NPV supplies it: the FPSO is worth 2047.5653 million USD and the tie-back 1048.6281 at 70.0000 USD a barrel, an ordering the lifecycle totals do not give you.
+Lifecycle cost is a plain sum. No discounting, no price, no royalty and no tax: 4150.0000 million USD is money as it is spent, whenever it is spent. That makes it useful for the question it answers, which is how much cash a concept consumes in total, and useless for ranking concepts by value. Value needs the timing, and the screening NPV supplies it: the FPSO is worth 2015.4123 million USD and the tie-back 1013.7182 at 70.0000 USD a barrel, an ordering the lifecycle totals do not give you.
 
 ## The line the lifecycle leaves out
 
-The EGINA cost breakdown carries a decommissioning provision of 260.0000 million USD, typed as ABEX. The engine's totals are CAPEX 2250.0000 and OPEX 95.0000 a year, and that ABEX line is in neither of them, so it is not in the lifecycle figure and not in the screening case. Facilities carry their own estimate of the same thing, 204.5029 million USD for the Egina FPSO, at 15 percent of the capex the facility holds. Two figures for the end of life, both real, neither one inside the 4150.0000.
+The EGINA cost breakdown carries a decommissioning provision of 260.0000 million USD, typed as ABEX. The engine's totals are CAPEX 2250.0000 and OPEX 95.0000 a year, and that ABEX line is in neither of them, so it is not inside the 4150.0000. It does reach the screening case: the engine charges it as the plan's end-of-life cost in production year 20. Facilities carry their own estimate of the same thing, 204.5029 million USD for the Egina FPSO, at 15 percent of the capex the facility holds, and an ABEX cost item replaces that estimate rather than being added to it.
 
 ## The mistake
 

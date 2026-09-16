@@ -21,7 +21,7 @@ Year 1 pays 87.6000 million USD of tax on a profit share of 0.0000, and the tax 
 
 ## The maximum, not the sum
 
-The tax charged is the larger of the corporate income tax plus the resource rent tax, and the minimum tax. On the four run decomposition of "Brazil - Concession" over the Designer's default project, corporate income tax alone at 34 percent collects 502.1091 million USD, resource rent tax alone at 40 percent 62.5794, a 5 percent minimum tax alone 134.3464, and the published stack with the minimum at zero 564.6884.
+The tax charged is the larger of the corporate income tax plus the resource rent tax, and the minimum tax. On the four run decomposition of "Brazil - Concession" over the Designer's default project, corporate income tax alone at 34 percent collects 502.1091 million USD, resource rent tax alone at 40 percent 350.7165, a 5 percent minimum tax alone 134.3464, and the published stack with the minimum at zero 852.8256.
 
 Switching that 5 percent minimum on would change only the years where it is the larger figure. In year 1 the minimum reads 13.5994 million USD and the published stack reads 0.0000; in year 2, 12.2231 against 0.0000. From year 3 the stack reads 25.7707 against a minimum of 10.9864 and the minimum never binds again. A floor is only ever visible where the profits taxes are low.
 

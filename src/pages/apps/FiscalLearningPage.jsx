@@ -321,21 +321,28 @@ const FiscalLearningPage = () => {
                 {' '}{fmt(lab.tax.totalCitAlone)} million USD with company income tax alone,
                 {' '}{fmt(lab.tax.totalRrtAlone)} million USD with the resource rent tax alone and
                 {' '}{fmt(lab.tax.totalTaxAsPublished)} million USD with both, and the resource rent
-                charge is zero until year {lab.tax.firstYearWithRrt} because of the annual uplift.
+                charge is zero until year {lab.tax.firstYearWithRrt}, because the uplift opens a
+                one-time pool of capex times one plus the uplift that is drawn down against the
+                profit share and never refilled.
                 Its discounting is YEAR END, so a mid-year convention on identical flows would report
                 {' '}{fmt(lab.rateTwelve.npvMidYearDerived)} million USD where this one reports
                 {' '}{fmt(lab.rateTwelve.npvYearEnd)}, a ratio of exactly
-                {' '}{fmt(lab.rateTwelve.parityRatioDerived, 6)}. Its internal rate of return reports
-                0 both when no root exists and when the only root is negative, which are opposite
-                situations wearing one number.
+                {' '}{fmt(lab.rateTwelve.parityRatioDerived, 6)}. Its internal rate of return names a
+                rate only when exactly one rate between -99 and 1000 percent brings the NPV to zero,
+                and otherwise returns null with a status that says why: no-sign-change, no-root,
+                above-clamp, or multiple-roots with the roots it found. Until the 2026-09-15 repair
+                it reported 0 both when no root existed and when the only root was negative, two
+                opposite situations wearing one number, and it printed the top of its own search,
+                102400 percent, as a rate.
                 {cmp && (
                   <>
-                    {' '}Its capex sweep has {cmp.capex.labelCount} points and an axis labelled to
-                    1.5, because adding a tenth to a binary floating point number reaches
-                    1.5000000000000004 and fails the test, so the loss it reports for
-                    {' '}{cmp.capex.series[0].name} is {fmt(cmp.capex.series[0].lossOverSevenSweptPointsDerived)} million
-                    USD where the eighth point called directly gives
-                    {' '}{fmt(cmp.capex.series[0].lossOverEightPointsDerived)}. Its summary shows government share of
+                    {' '}Its capex sweep has {cmp.capex.labelCount} points and reaches the 1.5 its
+                    axis promises, each multiplier written as eight plus the step over ten, so the
+                    loss it reports for {cmp.capex.series[0].name} is
+                    {' '}{fmt(cmp.capex.series[0].lossOverSweptRangeDerived)} million USD over the whole
+                    labelled range, and the swept endpoint equals the engine called directly at 1.5.
+                    Until the 2026-09-15 repair the loop accumulated a tenth at a time, reached
+                    1.5000000000000004, failed its own test and stopped at 1.4. Its summary shows government share of
                     net revenue and its price chart government take, and the two differ by
                     {' '}{pct(cmp.summary.summary[0].effectiveTaxRateDifferenceDerived)} on the very
                     first row. Its government take curve has no value at any swept price for every

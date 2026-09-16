@@ -1,0 +1,112 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+q(1, "The plan's network runs 870 days and the dates typed on the same activities span 933 days. What are those two numbers answering?",
+ "How long the work must take, and how long the window somebody typed is, with 63 days of float already spent in the calendar.",
+ ["The same question worked two ways, the 933 being the 870 once weekends and holidays are put back into a network that counts working days only.",
+  "The duration before and after the repairs, the 933 being what the engine returned while every activity read critical.",
+  "The critical path and the longest path through the schedule, the 933 running through the activities with float."],
+ "The critical path method returns 870 days along a1, a3, a4, a7 and a8, and the calendar span between the typed dates is 933 days.")
+
+q(0, "Detailed engineering carries 180 days of float, topsides fabrication 180 and subsea installation 480. What does that float mean, and what did the engine once report instead?",
+ "Each can slip by that much without moving the end date, and before the repairs made ahead of this course every activity in the schedule read critical at a float of 0.",
+ ["Each finishes that far ahead of the 870 day network duration, and the engine once reported the float as a share of the 933 day calendar span instead of in days.",
+  "Each can slip by that much before the critical path moves to another chain, and the engine once carried a1, a3, a4, a7 and a8 as the only activities with any float at all.",
+  "Each is off the critical path by that many days of work, and the engine once reported float only on the activities a reader had typed dates against."],
+ "Float is late start minus early start, so a2 and a5 hold 180 days each and a6 holds 480, while a1, a3, a4, a7 and a8 hold 0 and cannot slip at all.")
+
+q(2, "A published case of four independent activities with no dependencies typed at all returns a duration of 7 days with all four marked critical. What does that result say about the project?",
+ "Almost nothing: with nothing linked, every activity starts on day 0 and the network is only as long as its longest single activity.",
+ ["That the four activities are genuinely concurrent and equally urgent, which is the same finding the engine reports when a chain of twelve activities returns a duration of 78 days.",
+  "That the schedule is unreadable and the critical path has fallen back on marking everything critical, which is what the engine did on every network before the repairs.",
+  "That the four activities share one resource, since four cannot run at once on one rig."],
+ "It is arithmetic rather than a finding about the project, and the method still has to be run on what is actually there.")
+
+q(3, "The well campaign takes 182 rig days and costs 141050000 USD. Where does the money come from?",
+ "A rig rate of 310000 USD a day with services at 1.5 times the rig cost, applied across the four wells.",
+ ["The four wells' measured depths priced at a rate for each trajectory, with 310000 USD a day charged only on the days a rig is actually turning to the right on a producer.",
+  "The plan's CAPEX total of 2250.0000 million USD apportioned to drilling, which is where the campaign's share of the development drilling line of 520.0000 is read from.",
+  "A rig rate of 310000 USD a day over the 182 rig days, with services carried separately in the plan's operating cost of 95.0000 million USD a year."],
+ "Every row divides to the same all-in day of 775000 USD, so trajectory and depth move the days while the day itself is priced the same for every well.")
+
+q(0, "The same four wells take 182 rig days of work but the campaign runs 95 days on two rigs and 76 days on three. What is the difference between those numbers?",
+ "Rig days are the work to be done and the campaign length is how long it takes once the work is shared out, each well going to the rig that comes free first.",
+ ["Rig days count only the days a rig is on the well while the campaign length adds the moves between locations, which is what puts 95 days against 182 rig days of work.",
+  "The 182 is the campaign on one rig and the shorter figures are what the same campaign costs in days once the rig rate of 310000 USD a day is renegotiated.",
+  "The 182 counts calendar days and the 95 and 76 count working days, which is the same distinction the schedule draws between 933 days and 870 days."],
+ "On one rig the campaign is 182 days, on two the rigs finish at 95 and 87 days, and on three they finish at 61, 45 and 76 days.")
+
+q(1, "The Egina FPSO carries a capex of 1363.3524 million USD and an oil utilisation of 1.000000 against the plan's peak. What do those two figures say together?",
+ "The capex follows from a type and a nameplate of 60000 bopd, and the plan's peak fills that nameplate exactly, so there is no headroom.",
+ ["The capex was costed against the plan's peak of 60.0000 kbpd, which is why the utilisation comes back at exactly 1.000000 rather than at some other ratio.",
+  "The vessel is fully paid for by the plan it serves, a utilisation of 1.000000 meaning the capex of 1363.3524 million USD is recovered over the concept's 20.0000 year life.",
+  "The facility is the binding constraint, a utilisation of 1.000000 firing the bottleneck the tie-back fires at 2.400000."],
+ "The plan peaks at 60.0000 kbpd, which is 60000 bopd, and the nameplate it is measured against is 60000 bopd, so the ratio is 1.000000 and the decommissioning allowance of 204.5029 follows the capex.")
+
+q(2, "The register reports a portfolio health of 58, a risk exposure of 269.0000 million USD and one unscored row carrying the largest cost impact in the register. How do those three readings sit together?",
+ "The unscored row contributes 0.0000 to the exposure and health reads 58 whether it is present or absent, so the register is the only place all three can be held together.",
+ ["Health of 58 already carries the unscored row as a Low, and the exposure of 269.0000 million USD carries its cost impact at the bottom factor of 0.05 in the same way.",
+  "The exposure of 269.0000 million USD is what a health of 58 costs, the two being one reading in two units, with the unscored row left out of both as incomplete.",
+  "Health of 58 is the average of the five rows and the exposure of 269.0000 million USD is their summed cost impacts, so both figures already count every row once."],
+ "An unscored risk neither helps nor hurts: it is reported as unscored, and its money never enters the 269.0000 million USD because no probability means no factor.")
+
+q(3, "The generated document reports a completeness of 100 percent across nine sections. What has that measured?",
+ "That each of the nine sections it checks carries something, Field Data through to Risks.",
+ ["That the nine sections agree with one another, which is what makes the concept capex of 2250.0000 million USD and the cost ledger's total of 2250.0000 million USD the same figure.",
+  "That every figure in the plan has been through the engine rather than typed, so the completeness check is what stands behind the headline NPV of 2015.4123 million USD.",
+  "That nine of the nine checks the studio runs came back without a warning, the same check that returns isValid true and an empty list of errors on this plan."],
+ "The document reports what is there and what is missing and does not fill gaps: the nine sections are Field Data, Subsurface, Concepts, Wells, Facilities, Schedule, Economics, HSE and Risks.")
+
+q(0, "A published cost ledger returns a CAPEX of 574.3000 and an OPEX of 0.5000, and an empty one returns 0.0000 and 0.0000. What do those two cases show about the roll-ups?",
+ "The roll-up adds only what the ledger holds, so an empty ledger totals zero rather than falling back on any other figure in the plan.",
+ ["The roll-up carries a default whenever a ledger is thin, which is why the published case totals 574.3000 while the plan's own ledger totals 2250.0000 million USD.",
+  "The roll-up is a check on the concept rather than a total, so an empty ledger reports 0.0000 to signal that the concept's capex should be read instead.",
+  "The roll-up reads the cost items and the facility cards together, which is why a ledger holding neither returns 0.0000 on both lines."],
+ "The plan's own roll-ups are a CAPEX of 2250.0000 and an OPEX of 95.0000 million USD a year, and each is the sum of the lines somebody wrote.")
+
+q(1, "A reader adds the document's headline P50 oil of 130.0000 MMbbl to its P50 gas of 70.0000 Bcf and writes 200.0000. What is wrong with that figure?",
+ "It is a number of nothing: the two are different fluids in different units and reserves are totalled one fluid at a time.",
+ ["It has taken a low case for a middle one, since adding a P50 of oil to a P50 of gas gives a figure that has to be labelled P90 once the two distributions are combined.",
+  "It has doubled the gas, since 70.0000 Bcf is already inside the 130.0000 MMbbl as the associated gas that the plan's gas-oil ratio of 640 scf a barrel produces.",
+  "It is out by the shrinkage between reservoir and stock tank volumes that separates the 130.0000 from a total."],
+ "Oil is MMbbl and gas is Bcf, and a sum of low cases is not the low case of a sum even within one fluid.")
+
+q(2, "The plan's capex is 2250.0000 million USD and its well campaign costs 141050000 USD. How do those two money figures relate?",
+ "They are written in different units, plan money in million USD to four decimals and well costs in whole currency units, and neither converts to the other by moving a decimal.",
+ ["The campaign cost is the drilling share of the 2250.0000, which is why the development drilling line of 520.0000 and the campaign agree once the decimal is moved.",
+  "The campaign cost is the capex of 2250.0000 expressed in whole currency units, the studio printing the same money twice for readers who prefer one unit or the other.",
+  "The campaign cost is outside the capex entirely, since a rig day is an operating cost and belongs in the 95.0000 million USD a year the plan carries."],
+ "A peak of 60.0000 kbpd is 60000 bopd and that conversion is exact, but a plan capex and a campaign cost are two different quantities in two different units.")
+
+q(3, "An activity carries no readable dates and a concept carries no capex. What does the studio return in each case?",
+ "A calendar span of null for the activity, and a refusal naming the missing figure for the concept.",
+ ["A calendar span of 0 for the activity, the same answer an empty schedule gives, and a capex of 100 million USD for the concept, which is the documented default.",
+  "A calendar span taken from the network instead, so the activity inherits the 870 days, and a concept capex read across from the facility card's 1363.3524 million USD.",
+  "A calendar span of null for the activity, and for the concept a capex of 0.0000 that carries through to a net present value the studio then reports as it stands."],
+ "A capex of 100 million USD was one of four figures substituted silently until the engine was repaired, and writing a plausible number into either gap turns a correct reading into a wrong answer.")
+
+q(0, "The Egina FPSO reads an oil utilisation of 1.000000 and the debottlenecked case reads 0.400000 against the same plan. Which of the two is the right answer?",
+ "Both, since they answer different questions about different facilities, and the work is knowing which nameplate the question named before anything is written down.",
+ ["The 1.000000, since the debottlenecked case is a study and the plan is assessed against the facility it actually holds at a nameplate of 60000 bopd.",
+  "The 0.400000, since a utilisation is read against the largest nameplate on the plan, which is what leaves 2589.2031 million USD of capacity to be filled.",
+  "Neither, since a utilisation is only meaningful where a bottleneck fires, as it does on the Deep tie-back at 2.400000 and 1.024000."],
+ "A facility reads 1.000000 at a nameplate of 60000 bopd and 0.400000 at 150000 against the same peak, and only one of the two was asked about.")
+
+q(1, "The concept's capex is 2250.0000 million USD, the cost ledger totals 2250.0000 million USD and the facility card carries 1363.3524 million USD. What is a reader supposed to do with three figures for overlapping scope?",
+ "Reconcile them, since three estimates of one cost by three methods is a question somebody has to answer before sanction rather than a number to average.",
+ ["Take the ledger's 2250.0000 million USD, since the concept agrees with it and two estimates against one settle which of the three methods the plan should be read on.",
+  "Take the facility card's 1363.3524 million USD, since a screening curve is the one figure no reader has adjusted.",
+  "Treat them as one estimate seen three ways, the card covering the facilities and the others the whole development."],
+ "The card's 1363.3524 is a screening estimate, the ledger is a line by line total and the concept holds drilling, facilities and subsea, and the plan's own facilities field reads 1350.0000.")
+
+q(2, "The document's headline figures read P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, total CAPEX 2250.0000, NPV 2015.4123 and IRR none, with 4 wells. Which of them carries a P label correctly?",
+ "The oil and the gas, since a P label belongs to a reserves distribution one fluid at a time.",
+ ["The oil, the gas and the CAPEX, since the capex of 2250.0000 is itself a screening distribution and the document reports its middle case alongside the volumes.",
+  "The oil, the gas and the NPV, since a net present value of 2015.4123 is carried at the same case as the reserves it was computed from and is labelled with them.",
+  "None of them, since a P label belongs to a distribution across reservoirs and the document reports one field, so its volumes are single figures rather than percentiles."],
+ "A capex, a rate, a cost, a duration, an index or a ratio never takes a P label, so the 2250.0000 and the 2015.4123 carry none.")
+
+emit(Q, '/root/ec-wip-fdp/banks/ec6i_m06.json')
+finish()

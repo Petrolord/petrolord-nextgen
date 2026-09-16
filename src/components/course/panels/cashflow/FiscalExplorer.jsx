@@ -411,28 +411,29 @@ const EndOfLife = () => {
         rows={delay.map((d) => [d.shiftYears, d.rows, d.byYear.map((q) => q.year).join(', '), usd(d.byYear[0].net), usd(d.npv), num(d.irrPct, 4), d.payback, usd(d.lossPoolAfterYearOne)])}
       />
       <div className="mt-3 rounded-md border-2 border-rose-500 bg-rose-900/30 p-3">
-        <p className="text-rose-200 font-bold text-sm mb-2">THREE NUMBERS TO DISTRUST</p>
-        <p className="text-xs text-rose-100 mb-1">1. The profile point at the applied rate is evaluated at the rate rounded to two decimals.</p>
+        <p className="text-rose-200 font-bold text-sm mb-2">THREE NUMBERS THAT USED TO BE WRONG, AND WHAT THE ENGINE REPORTS NOW</p>
+        <p className="text-xs text-rose-100 mb-1">1. The profile point at the applied rate is LABELLED at the rounded rate and EVALUATED at the exact one, so the gap is zero on every case. Until engines 3.10.0 it was evaluated at the label too, and the profile missed its own headline NPV.</p>
         <Tbl
           head={['case', 'engine profile point', 'at, %', 'headline or oracle', 'at, %', 'gap, USD']}
           rows={dist.profileGap.map((g) => [g.case, usd(g.engineNpv), num(g.engineRatePct, 6), usd(g.oracleNpv), num(g.oracleRatePct, 6), usd(g.gap)])}
         />
-        <p className="text-xs text-rose-100 mt-3 mb-1">2. IRR on a multi-root profile is whichever root Newton reaches from 10 percent, unflagged.</p>
+        <p className="text-xs text-rose-100 mt-3 mb-1">2. IRR on a multi-root profile is null with irrStatus multiple-roots and every root in the band listed. Until engines 3.10.0 it was whichever root Newton reached from 10 percent, reported as a rate with nothing to say there was another.</p>
         <Tbl
-          head={['vector', 'flows', 'engine IRR, %', 'oracle IRR, %', 'gap, percentage points']}
-          rows={dist.twoRoots.map((r) => [r.name, `[${r.flows.join(', ')}]`, num(r.engineIrrPct, 4), num(r.oracleIrrPct, 4), num(r.gap, 4)])}
+          head={['vector', 'flows', 'engine IRR, %', 'irrStatus', 'roots inside the band, %', 'a root above the band']}
+          rows={dist.twoRoots.map((r) => [r.name, `[${r.flows.join(', ')}]`, r.engineIrrPct === null ? 'null' : num(r.engineIrrPct, 4), r.irrStatus ?? '', r.irrRootsPct ? r.irrRootsPct.map((x) => num(x, 4)).join(' and ') : '', r.irrRootAboveBand ? 'yes' : 'no'])}
         />
-        <p className="text-xs text-rose-100 mt-3 mb-1">3. The sinking fund is working-interest scaled and the lump sum is not.</p>
+        <p className="text-xs text-rose-100 mt-3 mb-1">3. Abandonment is entered at the share under both funding modes, so a fund collects the amount that was typed. Until engines 3.10.0 the contributions were scaled by the working interest a second time while the cost they funded was not, so a 50 percent interest collected half.</p>
         <Tbl
           head={['case', 'WI, %', 'mode', 'total contributions', 'total_abandonment_cost', 'final row abandonment cost', 'unit technical cost', 'total boe']}
           rows={dist.sinkingFund.map((s) => [s.case, s.wiPct, s.mode, s.totalContributions === null ? 'not reported' : usd(s.totalContributions), usd(s.totalAbandonmentCost), s.finalRowAbandonmentCost === undefined ? '' : usd(s.finalRowAbandonmentCost), num(s.unitTechnicalCost, 6), num(s.totalBoe, 2)])}
         />
       </div>
       <Note>
-        The third row of the last table is the one to carry away. At 50 percent working interest the sinking fund
-        collects half the abandonment cost in contributions while total_abandonment_cost still reports the whole of
-        it; at 60 percent the lump sum charges the whole cost against the partner's share of the flows. One of those
-        is scaled and the other is not, and the KPI does not say which.
+The third row of the last table is the one to carry away. At 50 percent working interest the fund now collects
+        the 30,000,000 that was entered and total_abandonment_cost reports the same number, because the amount is the
+        share under both modes. Read the funding mode before the KPI all the same: a fund rides the opex lane and
+        relieves the profit taxes, while a lump sum lands post-tax in the final year, so the two still give different
+        NPVs and different IRRs for the same money.
       </Note>
     </>
   );

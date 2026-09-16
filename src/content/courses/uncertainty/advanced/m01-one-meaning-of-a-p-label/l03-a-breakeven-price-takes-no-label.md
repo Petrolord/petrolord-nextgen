@@ -18,7 +18,7 @@ The Probabilistic Breakeven Analyzer runs 5000 iterations at seed 20260829 and e
 | 50th percentile of breakeven price | 2500 | 73.3297 |
 | 90th percentile of breakeven price | 4500 | 85.5912 |
 | mean | all | 73.6242 |
-| base case at the stated medians | none | 71.6277 |
+| base case at the beliefs' medians | none | 71.6277 |
 
 The engine's own insight sentence uses the same words: "The median breakeven oil price is 73.33 per barrel, and its 90th percentile is 85.59: a 90 percent chance the breakeven price is below that."
 
@@ -34,11 +34,11 @@ Imagine a report that puts the exceedance label for 90 percent on ISIALA's break
 
 ## The mistake
 
-The careful mistake is carrying cases across from the NPV. A Low case NPV and a high breakeven price both describe a poor project. It is tempting to give 85.5912 the Low case NPV's label because the two seem to go together. They do not. They come from different engines and different samples. The breakeven engine draws fitted triangulars for capex, opex and efficiency, and it puts all capex in year 1. The Scenario Builder draws uniform ranges on price, capex and reserves. No iteration links 85.5912 to 48.7439, and a shared label would invent a link.
+The careful mistake is carrying cases across from the NPV. A Low case NPV and a high breakeven price both describe a poor project. It is tempting to give 85.5912 the Low case NPV's label because the two seem to go together. They do not. They come from different engines and different samples. The breakeven engine draws fitted triangulars for capex, opex and efficiency, and it puts all capex in year 1. The Scenario Builder draws uniform ranges on price, capex and reserves. No iteration links 85.5912 to 15.6063, and a shared label would invent a link.
 
 ## What the price refuses
 
-The breakeven distribution leaves out any iteration that cannot break even below the 500 USD per bbl top of its bracket. It excludes those iterations and counts them, and ISIALA has none. It also has no correlation between its three variables. The base case, 71.6277, is a single solve at the stated medians and is not a percentile of the sample.
+The breakeven distribution leaves out any iteration that cannot break even below the 500 USD per bbl top of its bracket. It excludes those iterations and counts them, and ISIALA has none. It also has no correlation between its three variables. The base case, 71.6277, is a single solve at the beliefs' medians, which for ISIALA are the stated ones, and it is not a percentile of the sample.
 
 ## Exercise
 

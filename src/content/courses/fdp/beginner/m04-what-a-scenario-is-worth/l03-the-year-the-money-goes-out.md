@@ -17,7 +17,7 @@ A screening case is a list of years, and the first of them carries the whole cap
 | 6 | 1117.5570 | 0.0000 | 174.8255 | 562.1258 | 2041.1177 |
 | 7 | 1005.8013 | 0.0000 | 166.8430 | 499.2632 | 2540.3809 |
 
-The profile has 21 rows in all. Year 0 is the build: the money goes out, the field produces nothing, and the cumulative position opens at -2250.0000, which is also the deepest cash position the case ever reaches. From year 1 the capex column is 0.0000 for the rest of the life, and every later row is revenue against royalty, operating cost and tax.
+The profile has 21 rows in all, and the last of them carries the plan's end-of-life cost of 260.0000 million USD, charged in production year 20. Year 0 is the build: the money goes out, the field produces nothing, and the cumulative position opens at -2250.0000, which is also the deepest cash position the case ever reaches. From year 1 the capex column is 0.0000 for the rest of the life, and every later row is revenue against royalty, operating cost and tax.
 
 ## Plateau, then decline
 
@@ -25,7 +25,7 @@ Years 1, 2 and 3 all earn 1533.0000 of gross revenue, because the concept's scre
 
 ## Why the order matters
 
-Discounting punishes late money, so a plan that spends first and earns later is worth less than the same totals in the other order. That ordering is also what makes the other two headline figures mean anything. A rate of return exists only where the cash flow changes sign, and payback can only be measured because there is a hole to climb out of. At 18.0000 USD a barrel the same concept never climbs out: the NPV is -1797.2732, the payback is never, and the rate of return has status no-root because no rate makes that flow worth zero. Timing is the whole reason those two figures are reportable at all, and a case whose years never change sign has neither of them.
+Discounting punishes late money, so a plan that spends first and earns later is worth less than the same totals in the other order. That ordering is also what makes the other two headline figures mean anything. A rate of return exists only where the cash flow changes sign, and payback can only be measured because there is a hole to climb out of. At 18.0000 USD a barrel the same concept never climbs out: the NPV is -1834.1220, the payback is never, and the rate of return has status no-root because no rate makes that flow worth zero. Timing is the whole reason those two figures are reportable at all, and a case whose years never change sign has neither of them.
 
 ## The mistake
 

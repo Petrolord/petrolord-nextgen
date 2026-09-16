@@ -192,8 +192,10 @@ const FdpLearningPage = () => {
               <p className="mt-1 text-gray-400">
                 A field development plan is a set of numbers that must agree with each other. The teaching field EGINA holds
                 {' '}{fmt(lab.res.oilP50)} MMbbl of oil and {fmt(lab.res.gasP50)} Bcf of gas, which are never added. Its base
-                case is worth {fmt(lab.e.base.npv)} million USD at {fmt(lab.e.base.oilPrice)} USD a barrel and returns
-                {' '}{fmt(lab.e.base.irr)} percent; the same plan stressed to {fmt(lab.e.stress.oilPrice)} USD a barrel is worth
+                case is worth {fmt(lab.e.base.npv)} million USD at {fmt(lab.e.base.oilPrice)} USD a barrel and, once the
+                plan&apos;s end of life cost is charged in its final producing year, has no single rate of return at all: its
+                flow changes sign twice, so the engine reports {lab.e.base.irrStatus} and lists every rate that zeros it.
+                The same plan stressed to {fmt(lab.e.stress.oilPrice)} USD a barrel is worth
                 {' '}{fmt(lab.e.stress.npv)} and has no rate of return at all, which the engine reports as
                 {' '}{lab.e.stress.irrStatus} rather than as a number. Its schedule needs {count(lab.e.network.duration)} days of
                 work inside a window of {count(lab.e.network.calendarSpan)}, and its register carries {lab.risk.levels.Unscored} risk

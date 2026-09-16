@@ -17,7 +17,7 @@ Nothing else on the row moves: royalty 217405145.76, HCT 284810956.27 and CIT 29
 | force_pia | pia_only | 25999871.36 | 0.00 | 604809283.90 | 135185570.34 | 86.1703 |
 | force_nta | nta_2025 | 0.00 | 41599794.17 | 620409206.71 | 119585647.53 | 87.7662 |
 
-On a one-year case NPV is the net cash flow, so the levy lands whole on the headline. AKATA shows the same switch on a seven-year ledger: forced to pia_only it pays TET of 3369056.19 in 2029 and reports NPV 49521778.87; left on auto with its 2029 base year it pays a development levy of 5390489.91 in 2029, 21007007.79 over the life, and reports NPV 42943268.01.
+On a one-year case NPV is the net cash flow, so the levy lands whole on the headline. AKATA shows the same switch on a seven-year ledger: forced to pia_only it pays TET of 3369056.19 in 2029 and reports NPV 49802016.74; left on auto with its 2029 base year it pays a development levy of 5390489.91 in 2029, 21007007.79 over the life, and reports NPV 43223505.88.
 
 ## Which profit
 

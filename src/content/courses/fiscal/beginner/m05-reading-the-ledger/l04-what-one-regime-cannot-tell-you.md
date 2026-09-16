@@ -6,7 +6,7 @@ A single ledger is one regime, one price deck and one capex, and three of the qu
 
 ## It cannot tell you the project is worth building
 
-The teaching field ODIDI runs 8000 bbl/d of oil declining 14 percent a year against 420.0000 of capex, and its value at the project's 12 percent is negative under every template: -5.8662 under Brazil, -13.3840 under Generic, -27.4074 under Ghana, -37.3123 under the Gulf of Mexico terms, -43.7842 under PIA and -58.1813 under Angola. Every one of those ledgers closes its cumulative in the black. Brazil returns 192.9896 of contractor cash and is still worth -5.8662, with an internal rate of 11.4055 percent against a discount rate of 12. Ranking six regimes does not rescue the field.
+The teaching field ODIDI runs 8000 bbl/d of oil declining 14 percent a year against 420.0000 of capex, and its value at the project's 12 percent is negative under every template: -5.8662 under Brazil, -13.3840 under Generic, -27.4074 under Ghana, -37.3123 under the Gulf of Mexico terms, -43.7842 under PIA and -58.1813 under Angola. Every one of those ledgers closes its cumulative in the black. Brazil returns 192.9896 of contractor cash and is still worth -5.8662, and the engine names no single internal rate for it at all, because its net present value is zero at two rates, -18.8 and 11.4 percent. Ranking six regimes does not rescue the field.
 
 ## It cannot tell you what the regime does at another price
 
@@ -14,7 +14,7 @@ One run is one deck. Swept across prices from 40 to 120 USD per bbl on ODIDI, go
 
 ## It cannot tell you what a cost overrun does
 
-The same field swept across capex multipliers gives up 150.9021 of contractor value under Ghana and 215.1075 under Angola. The instruments that recover cost decide who pays for an overrun, and one ledger at one capex never asks the question.
+The same field swept across capex multipliers gives up 181.1922 of contractor value under Ghana and 252.6075 under Angola. The instruments that recover cost decide who pays for an overrun, and one ledger at one capex never asks the question.
 
 ## The mistake
 

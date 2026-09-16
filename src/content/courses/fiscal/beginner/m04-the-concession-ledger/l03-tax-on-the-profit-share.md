@@ -24,11 +24,11 @@ The `tax` instrument holds three rates. Corporate income tax runs from 21 percen
 
 ## The rate does not rank the tax
 
-Life tax on the default project reads 260.7539 under the Gulf of Mexico terms at 21 percent, 174.0882 under PIA at 30, 230.9340 under Ghana at 35, 422.8854 under Generic at 30 and 564.6884 under Brazil at 34 with its resource rent tax. Ghana carries the highest corporate rate of the six and pays less than Generic, because its tiers hand a smaller share of profit oil to the contractor and the rate has less to act on.
+Life tax on the default project reads 260.7539 under the Gulf of Mexico terms at 21 percent, 174.0882 under PIA at 30, 230.9340 under Ghana at 35, 422.8854 under Generic at 30 and 852.8256 under Brazil at 34 with its resource rent tax. Ghana carries the highest corporate rate of the six and pays less than Generic, because its tiers hand a smaller share of profit oil to the contractor and the rate has less to act on.
 
 ## A default rate inside the instrument
 
-One setting inside the instrument carries a default, and two published cases pin it. On the same project, the same revenue of 7001.1938 and the same profit oil of 3523.7229, the run that leaves the uplift unstated collects 1638.5664 of tax and the run that sets it to zero collects 2607.5549. A number nobody typed moved the tax that far, which is reason to read a regime's unstated settings as carefully as its rates.
+One setting inside the instrument carries a default, and two published cases pin it. On the same project, the same revenue of 7001.1938 and the same profit oil of 3523.7229, the run that leaves the uplift unstated collects 2127.5549 of tax and the run that sets it to zero collects 2207.5549. The uplift sizes a one-time pool, total capex times one plus the uplift, drawn against the profit share and never refilled. A setting nobody typed chose between those two figures.
 
 ## The mistake
 

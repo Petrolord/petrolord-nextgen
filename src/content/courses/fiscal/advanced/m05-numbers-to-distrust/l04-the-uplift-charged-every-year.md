@@ -1,42 +1,44 @@
 # The uplift charged every year
 
-`rrtUpliftPct` reads like a one-off capital uplift and behaves like an annual allowance. It subtracts that percentage of total capex from the resource rent tax base in every one of the 25 years, and the engine calls the result a screening approximation in its own comment.
+`rrtUpliftPct` reads like a one-off capital uplift, and until the 2026-09-15 repair it behaved like an annual allowance. It sizes a pool now. The only way to tell which behaviour a parameter has is still to sweep it.
 
 {{panel:ec-comparison-explorer}}
 
-## What the base actually is
+## What the base is
 
-The resource rent tax base is the contractor profit share minus `totalCapex` times `rrtUpliftPct` divided by 100, and that subtraction happens once a year for the whole project life. At the default uplift of 20 percent the relief given over the life is five times the whole capex.
+The resource rent tax base is the contractor's profit share less relief drawn from a pool. The pool opens once, at total capex times one plus the uplift, so at the default 20 percent it holds 1.2 times the capex. In each year whose profit share is positive the relief is the lesser of that share and what is left of the pool, and the pool is never refilled. Relief over the life therefore never exceeds 1.2 times the capex. The rule this replaced subtracted total capex times the uplift over 100 in every one of the 25 years, five times the whole capex at the default.
 
 ## The sweep that shows it
 
-Take the Brazil - Concession instruments on the default project, whose total capex is 500.0000 million USD, and move the uplift:
+Take the Brazil - Concession instruments on the default project, whose total capex is 500.0000 million USD, set the corporate income tax to zero so the resource rent tax stands alone, and move the uplift:
 
 | rrtUpliftPct | total tax | total contractor NCF | total government cash flow | NPV at 10 percent | first year with a positive RRT charge |
 | --- | --- | --- | --- | --- | --- |
-| 0 | 590.7165 | 886.0748 | 859.4093 | 357.3957 | 3 |
-| 5 | 380.1066 | 1096.6848 | 648.7993 | 428.7343 | 3 |
-| 10 | 233.9725 | 1242.8188 | 502.6653 | 490.6506 | 3 |
-| 20 | 62.5794 | 1414.2120 | 331.2721 | 577.8474 | 4 |
-| 30 | 1.0282 | 1475.7631 | 269.7210 | 615.4871 | 4 |
-| 50 | 0.0000 | 1476.7914 | 268.6928 | 616.1893 | null |
+| 0 | 390.7165 | 1086.0748 | 659.4093 | 486.5404 | 6 |
+| 5 | 380.7165 | 1096.0748 | 649.4093 | 491.8603 | 7 |
+| 10 | 370.7165 | 1106.0748 | 639.4093 | 496.9919 | 7 |
+| 20 | 350.7165 | 1126.0748 | 619.4093 | 507.2550 | 7 |
+| 30 | 330.7165 | 1146.0748 | 599.4093 | 517.0923 | 8 |
+| 50 | 290.7165 | 1186.0748 | 559.4093 | 535.4514 | 9 |
 
-At the default of 20 the tax total is 62.5794, exactly what the four-run tax decomposition records for the resource rent tax alone on this regime and project, so the sweep isolates that one instrument. Ten percentage points of uplift, from 20 to 30, take the total from 62.5794 to 1.0282. At 50 the tax is 0.0000 and the first year with a positive charge is null: the instrument is switched off by a parameter that never mentions switching anything off.
+The total tax falls by a fixed amount for every point of uplift and the first charged year slides later, from year 6 at a zero uplift to year 9 at 50 percent. Nothing switches off. In the published decomposition the resource rent tax column is 0.0000 until year 7, reads 10.8703 there and 42.0276 in year 8, and then falls with the profit share to 4.1217 in year 25.
 
-The year-by-year shape says the same. In the published decomposition the resource rent tax column is 0.0000 until year 4, reads 21.0282, 19.3639, 12.9582, 7.2014 and 2.0276 across years 4 to 8, and is 0.0000 from year 9 onward. A tax on rent that stops after five years is the uplift eating the base.
+## A pool gives a fixed total
+
+That is the test. A pool moves the year the charge begins and leaves the total relief where it is; an annual allowance would change the total. `rrt_pool_never_exhausted` opens a pool of 10000 against a capex of 1000, larger than every profit share in the life put together, so the base is zero in all 25 years and the total tax of 1198.0658 million USD is the corporate income tax alone.
 
 ## The default is not neutral
 
-Omitting the field does not mean no uplift. `rrt_uplift_default_20` omits `rrtUpliftPct` and pays total tax of 1638.5664 with a contractor net cash flow of 1812.4483. `rrt_uplift_zero_respected` sets it to 0 and the same regime pays 2607.5549 with a contractor net cash flow of 843.4598. A blank field chose the first of those two.
+Omitting the field does not mean no uplift. `rrt_uplift_default_20` omits `rrtUpliftPct` and pays total tax of 2127.5549 million USD with a contractor net cash flow of 1323.4598. `rrt_uplift_zero_respected` sets it to 0, which opens the pool at the capex itself, and the same regime pays 2207.5549 with 1243.4598. A blank field chose the first of those two.
 
 ## What it refuses
 
-The engine will not spread the uplift over a schedule, will not stop granting it once the capex has been recovered, and will not report how much relief it granted. There is no line in the ledger for it.
+The engine will not spread the pool over a schedule and will not report how much relief it granted. There is no line in the ledger for it.
 
 ## The mistake
 
-The careful mistake is reading the parameter name and assuming a one-off. A reader who models a 20 percent capital uplift by typing 20 has granted five times the capex over the life and will report a resource rent tax that stops in year 8. The only way to know which behaviour you have is to sweep the parameter and watch the tax move.
+The careful mistake is reading a parameter name and assuming the behaviour behind it. The name now reads the way the code behaves, which is exactly when a reader stops checking. Sweep it anyway, and watch both the total and the timing.
 
 ## Exercise
 
-State the total tax at uplift 0, 20 and 50 from the sweep, and the first year each carries a positive charge. Then give the two published totals for the default and for an explicit zero, and say which a blank field gives.
+State the total tax at an uplift of 0, 20 and 50 from the isolated sweep, and the first year each carries a positive charge. Then give the two published totals for the default and for an explicit zero, and say which a blank field gives.

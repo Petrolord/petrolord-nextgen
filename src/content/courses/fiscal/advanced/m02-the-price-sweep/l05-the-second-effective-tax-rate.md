@@ -12,8 +12,8 @@ Government take is government cash flow divided by the project's pre-take net ca
 | --- | --- | --- | --- | --- |
 | Generic Royalty/Tax | 43.4694 | 33.7901 | 9.6793 | 1.286453 |
 | USA - Gulf of Mexico | 43.8018 | 34.0485 | 9.7533 | 1.286453 |
-| Brazil - Concession | 47.7450 | 37.1137 | 10.6313 | 1.286453 |
-| Angola - Deepwater PSC | 68.7654 | 53.4534 | 15.3119 | 1.286453 |
+| Brazil - Concession | 64.2526 | 49.9455 | 14.3071 | 1.286453 |
+| Angola - Deepwater PSC | 72.4012 | 56.2797 | 16.1215 | 1.286453 |
 | Ghana - Deepwater | 75.4293 | 58.6335 | 16.7958 | 1.286453 |
 | Nigeria - PIA (2021) | 76.7282 | 59.6432 | 17.0850 | 1.286453 |
 

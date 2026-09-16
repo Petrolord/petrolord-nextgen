@@ -11,11 +11,11 @@ The swing is the NPV at 1.3 minus the NPV at 0.7, derived from the two engine va
 | input | NPV at 0.7 | NPV at 1.3 | swing, high minus low (derived) |
 | --- | --- | --- | --- |
 | Oil Price | -17.3893 | 175.8952 | 193.2845 |
-| Production | -17.3893 | 175.8952 | 193.2845 |
+| Production | 4.1176 | 156.4596 | 152.3420 |
 | CAPEX | 126.2382 | 32.7547 | -93.4835 |
 | OPEX | 85.3696 | 76.7233 | -8.6463 |
 
-Sorted by width, Oil Price and Production tie at 193.2845, CAPEX follows at 93.4835 in width and OPEX sits at the bottom. The sign of the swing records direction: raising capex or opex lowers NPV, so their swings print negative. A chart that sorts on the signed number puts OPEX above CAPEX and both below everything positive, which is the wrong order.
+Sorted by width, Oil Price leads at 193.2845, Production follows at 152.3420, CAPEX comes next at 93.4835 in width, and OPEX sits at the bottom. The sign of the swing records direction: raising capex or opex lowers NPV, so their swings print negative. A chart that sorts on the signed number puts OPEX above CAPEX and both below everything positive, which is the wrong order.
 
 ## Why the two sides differ
 
@@ -25,7 +25,7 @@ The ledger explains both. ISIALA pays no tax in 2027 and 2028, and the engine ta
 
 ## The mistake
 
-The careful mistake is to compute one side and mirror it. A reader who runs only the price downside, sees -17.3893, and draws the upside as the same distance above 81.0464 overstates the upside, because part of the upside is taxed in 2027 while the matching part of the downside never was. The second mistake is to read the tie at the top as two independent risks. Production and Oil Price are one lever in this engine, since variable opex does not follow the volume, so the chart counts a single effect twice.
+The careful mistake is to compute one side and mirror it. A reader who runs only the price downside, sees -17.3893, and draws the upside as the same distance above 81.0464 overstates the upside, because part of the upside is taxed in 2027 while the matching part of the downside never was. The second mistake is to read the top two bars as one lever. They were one bar before the 2026-09-15 repair, when production scaled volume alone and both rows read -17.3893 and 175.8952. They separate now because production carries its variable opex, so its low end holds at 4.1176 where price falls to -17.3893.
 
 ## What it refuses
 

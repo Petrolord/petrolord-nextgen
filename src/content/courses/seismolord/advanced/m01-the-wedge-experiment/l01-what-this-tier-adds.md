@@ -22,7 +22,7 @@ From that model you will read five numbers and calculate a sixth.
 - The **peak amplitude** at that thickness, 0.1155947595834732.
 - The **tuning thickness** at 40 Hz, 10 ms.
 - The **peak amplitude** there, which is 0.1155947595834732 again, and the fact that those two amplitudes are the same number rather than two similar numbers is one of the results this tier exists to explain.
-- The **isolated reflector amplitude** at the thick end of the 25 Hz wedge, 0.07999999821186066, which is the top coefficient on its own once the base is too far away to interfere.
+- The **tuning amplitude relative to the isolated level** at 25 Hz, 1.4449345270902185. The isolated level is the reading at the thick end of the wedge, 0.07999999821186066, which is the top coefficient on its own once the base is too far away to interfere. The graded number is the ratio of the tuning amplitude to that level, because the ratio is what the interference decides: it is the same figure for any pair of coefficients, while the level is just the pair you were given.
 - The **theoretical tuning thickness** for a Ricker wavelet, $\sqrt{6}/(2\pi f)$, which at 25 Hz is 15.593936024673521 ms.
 
 Two of those fields are graded with no tolerance at all. The tuning thicknesses must be exactly 16 and 10, because they are readings off a 2 ms grid and there is no such thing as being nearly right about which sample the maximum sits on.

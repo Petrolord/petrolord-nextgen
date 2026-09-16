@@ -1,0 +1,116 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC1 Professional m02, two lengths and one vessel. Digest Section 8, with the
+# margin figures Section 9 publishes for the same family. ABANA-1 appears only
+# where the point is that the two vessels never share a figure.
+
+q(1, "The liquid requirement on the 8.000000 ft drum divides 584.852431 ft3 by 25.132741 ft2 at a level of 0.500000. What does dividing by the full 50.265482 ft2 instead do to the answer?",
+ "It halves the requirement at half full, and the slip grows as the level falls, since at 0.300000 the liquid holds 12.682775 ft2 of that circle.",
+ ["It leaves the requirement where it stands, because the retention volume of 584.852431 ft3 is itself built from the cross-section and the two slips cancel on every row.",
+  "It doubles the requirement to 46.113917 ft, which is the figure a level of 0.300000 gives, so the slip cannot be told apart from a level that was typed wrongly.",
+  "It moves no length at all and shifts only the slenderness."],
+ "584.852431 ft3 over 25.132741 ft2 is 23.270539 ft. The denominator is the area the level cut out, and at a level of 0.300000 the same slip is worth a factor of four.")
+
+q(3, "The retention volume of 584.852431 ft3 is a liquid rate held for a retention time. What happens to all six liquid lengths in the family if that retention time is doubled?",
+ "Every liquid length doubles, because the volume doubles while each row divides it by an area that has not moved.",
+ ["Every liquid length doubles and every gas length halves, because the drum keeps its cross-section of 50.265482 ft2 while the liquid takes a larger share of it.",
+  "Only the rows the liquid controls move, and on this family that is the 5.000000 ft row on its own.",
+  "Nothing moves until the level is raised, since retention is held in the liquid area."],
+ "The liquid requirement is the retention volume over the liquid area, so 23.270539 ft becomes twice that on the 8.000000 ft drum. A retention time is a specification somebody chose.")
+
+q(0, "Across the family the liquid requirement falls from 59.572579 ft at a bore of 5.000000 ft to 14.893145 ft at 10.000000 ft. Why is the fall so steep?",
+ "The liquid area rises with the square of the diameter while the retention volume of 584.852431 ft3 stays where it is, so a drum of twice the bore needs roughly a quarter of the length.",
+ ["The level is raised on the wider drums, which hands the liquid a larger share of a larger circle on every row of the table.",
+  "The retention volume falls away as the bore widens, because a wider drum holds the same liquid for longer.",
+  "The gas takes less of the circle on a wide drum and the liquid length follows the gas area down."],
+ "At a bore of 5.000000 ft the liquid has 9.817477 ft2 and at 10.000000 ft it has 39.269908 ft2. Two extra feet on the narrow drum is worth almost thirty feet of length.")
+
+q(2, "The gas requirement moves only from 3.834882 ft to 1.917441 ft across a doubling of the bore. What holds it inside such a narrow range?",
+ "Widening the drum raises the gas height and lowers the gas velocity at the same time, and the two work against each other.",
+ ["The gas length is held at the gas height by the capacity rule on every row, so it can follow the bore and never the duty it was given.",
+  "The settling velocity of 1.958255 ft/s is recomputed for each bore, and its rise with the diameter cancels most of the fall in the gas velocity.",
+  "The actual gas rate of 29.490437 ft3/s is shared out between the rows of the sweep, so no single row carries the whole stream."],
+ "The gas length is the gas height times the ratio of the gas velocity to the settling velocity. A wider drum lengthens the fall and slows the gas inside one product.")
+
+q(3, "On the 8.000000 ft drum the liquid asks for 23.270539 ft and the gas asks for 2.396801 ft, and the engine reports the controlling requirement as liquid. What does that label assert?",
+ "Only that the liquid number was the larger of the two, so the vessel is 23.270539 ft long.",
+ ["That the vessel has passed its gas check, since a requirement can only take control of a vessel whose other requirement the dimensions have already satisfied.",
+  "That the gas requirement of 2.396801 ft has been absorbed into the liquid requirement and no longer needs reporting on its own.",
+  "That the drum was sized for a liquid duty and its gas load was never read at all."],
+ "Controlling says which of two numbers was larger. The 5.000000 ft and 6.000000 ft rows are liquid controlled and fail on gas capacity, at margins of 0.651911 and 0.938751.")
+
+q(1, "The published 6.000000 ft case needs 20.684923 ft for its liquid and the published 8.000000 ft case at a level of 0.400000 needs 31.149488 ft. Why is the wider vessel the longer one?",
+ "It runs at a lower level with a larger duty and a longer hold, 30000.000000 bpd on 5.000000 minutes against 25000.000000 bpd on 3.000000 minutes.",
+ ["Its gas requirement of 4.157188 ft has taken control of the length, and a gas controlled vessel always runs longer than its liquid alone would ask for.",
+  "Its slenderness of 3.893686 sits higher in the band, and a higher slenderness is a longer drum at any bore.",
+  "Liquid area falls as the bore widens, so the 8.000000 ft drum holds less than the 6.000000 ft drum."],
+ "Both published cases are controlled by the liquid, at 20.684923 ft and 31.149488 ft. A level of 0.400000 gives the liquid less of the circle while the duty and the hold are both larger.")
+
+q(2, "The gas length uses the Souders-Brown velocity at the horizontal K as its droplet settling velocity. What may a reader conclude from the 2.396801 ft it produces?",
+ "That it is the engine's own answer with its provenance unverified, because that packaging has not been checked against API 12J or against Arnold and Stewart, so no design case may rest on it.",
+ ["That it is a published result out of API 12J, which is why the module quotes it to six decimals beside the liquid requirement.",
+  "That it is the droplet size the vessel was sized for, carried into a length by the capacity rule.",
+  "That it is a lower bound, since a stated droplet diameter would always ask for less length."],
+ "It is HELD FOR LITERATURE. If the published method sizes a gas length from a stated droplet diameter, the gas length and every conclusion resting on it change.")
+
+q(0, "What happens if the gas requirement of 2.396801 ft is written down as the vessel length on ABANA-2?",
+ "A drum is specified at 2.396801 ft against a real requirement of 23.270539 ft.",
+ ["The drum comes out short on gas and adequate on liquid, since the liquid requirement is met by any length that clears the gas height of 4.000000 ft.",
+  "The slenderness drops out of the band of 3.000000 to 5.000000, which is the check that catches the slip before the sheet leaves the desk.",
+  "Nothing at all, because the engine reports the larger of the two requirements as the length whichever figure was copied across."],
+ "It is the most expensive single error available in horizontal sizing. The gas requirement is one of two candidates and it is usually the smaller of them.")
+
+q(1, "The 8.000000 ft drum reads a slenderness of 2.908817 against a band of 3.000000 to 5.000000 and carries the reason ld-out-of-band. What has it failed?",
+ "A preference about fabrication and layout that somebody typed, while its margin of 1.668891 says it carries its gas.",
+ ["A physical limit on a horizontal drum, below which the liquid surface is too short for the retention volume of 584.852431 ft3 to settle across.",
+  "The capacity check, since a slenderness under the lower bound leaves the gas space too short for a droplet to land inside it.",
+  "Nothing at all, because a band is advisory and the row carries no reason with it."],
+ "A band is an input about nozzle spacing, supports, transport and the cost of heads against shell. The row holds its liquid in 23.270539 ft and carries its gas.")
+
+q(3, "Widening the band from 3.000000 to 5.000000 out to 3.000000 to 7.000000 brings the 6.000000 ft row inside it at 6.894974. What does that row become?",
+ "A row inside the band that still cannot carry its gas, so membership and feasibility stay separate readings.",
+ ["A feasible row, because a slenderness inside the band is what a sweep tests before it reports whether a vessel can carry the gas it was given.",
+  "A row the sweep drops, since a change of band invalidates the dimensions computed under the old bounds.",
+  "The shortest drum in the family, at 41.369847 ft."],
+ "The 6.000000 ft row reports a margin of 0.938751 and gasCapacityOk false whatever the band says. Membership is a preference and feasibility is a verdict.")
+
+q(0, "Which of the six ABANA-2 rows sits inside a band of 3.000000 to 5.000000, and what do the others report?",
+ "Only the 7.000000 ft row at 4.342025, with the narrow drums too long for their bore at 11.914516 and 6.894974 and the wide ones too short at 2.042955 and 1.489314.",
+ ["The 7.000000 ft and the 8.000000 ft rows, at 4.342025 and 2.908817, with the remaining four outside the bounds on one side or the other.",
+  "Every row above 7.000000 ft, because slenderness climbs with the bore on a fixed duty.",
+  "None of them, which is why the sweep reports the band as an input."],
+ "The 8.000000 ft row reads 2.908817 and misses the lower bound by a small amount. One row of six is inside that band.")
+
+q(2, "Which inputs does the liquid length requirement read?",
+ "A retention volume and a liquid area, and nothing about the gas, the pressure or the mist extractor.",
+ ["A retention volume, a liquid area and the settling velocity, since the liquid has to be given time to release the gas it carries into the space above it.",
+  "A retention volume, a liquid area and the gas velocity, which is what fixes how much of the drum the liquid is allowed to occupy.",
+  "A liquid rate, a retention time and the slenderness band the finished vessel is judged against."],
+ "It is one division: 584.852431 ft3 over 25.132741 ft2 gives 23.270539 ft. The gas side of the sheet does not enter it.")
+
+q(1, "The published gas-overloaded case reports a gas length of 16.976527 ft against a gas height of 3.000000 ft and names gas as the controlling requirement. What does that tell a reviewer?",
+ "That the vessel has already failed its capacity check, at a margin of 0.176715 with gasCapacityOk false.",
+ ["That the vessel is holding more liquid than its bore allows, so the gas requirement rose to cover the surface the retention volume needed.",
+  "That a droplet in that vessel lands well inside the gas space, which is why the requirement can exceed the gas height at all.",
+  "That the case was run at a level too low for the gas to be given a height."],
+ "The gas moves at 2.829421 ft/s against a settling velocity of 0.500000 ft/s, so a droplet rides more than five times the height of the gas space before it lands.")
+
+q(0, "On the 8.000000 ft drum the two requirements sit at 23.270539 ft and 2.396801 ft. What does a gap that wide tell a designer?",
+ "The vessel is entirely a liquid-holding problem, so effort spent on the gas side of the sizing will not move the length at all.",
+ ["The vessel is close to changing hands between its two requirements, so a small move in the level or in the duty could put the gas in control.",
+  "The gas requirement was taken on the wrong area, since two requirements are expected to land within a foot of each other.",
+  "The drum is oversized for its gas and should be narrowed to 5.000000 ft."],
+ "A vessel whose two numbers sit close together is a different animal. Here the liquid controls every row, from 59.572579 ft at 5.000000 ft of bore to 14.893145 ft at 10.000000 ft.")
+
+q(2, "ABANA-1 holds 35.091146 ft3 of retention volume and ABANA-2 holds 584.852431 ft3. What separates those two figures?",
+ "They belong to different vessels on one field: a vertical test separator holding 3000.000000 bpd for 3.000000 minutes, and a horizontal production separator carrying 24000.000000 bpd of oil with 6000.000000 bpd of water.",
+ ["They are one duty read at two levels, since a retention volume falls away with the level fraction the drum is run at.",
+  "They are one vessel before and after the retention time in its specification was doubled.",
+  "They are a liquid volume and a gas volume for the same stream."],
+ "A retention volume is a rate times a time and both are inputs. The two vessels share a field and never share a figure.")
+
+emit(Q, '/root/fc-wip-separation/banks/fc1i_m02.json', expect_n=15)
+finish()

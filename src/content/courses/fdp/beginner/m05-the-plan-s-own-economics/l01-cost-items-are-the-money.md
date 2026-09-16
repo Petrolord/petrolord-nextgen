@@ -31,7 +31,7 @@ Installation is 550.0000 because two lines sit in it, the mooring at 170.0000 an
 
 ## The plan's own case
 
-Run at 70.0000 USD a barrel on the FPSO concept's 20 year shape, with capex of 2250.0000 taken from the cost items and an operating cost of 95.0000 a year, the plan returns an NPV of 2047.5653 million USD, a rate of return of 29.5998 percent and a payback of 3.8273 years. The concept's own capex is also 2250.0000. The two agree here because this plan was costed against the concept it is running, and that agreement is a result, not a rule. The same studio will happily run a plan whose items total something else entirely, and it reports both figures without complaint.
+Run at 70.0000 USD a barrel on the FPSO concept's 20 year shape, with capex of 2250.0000 taken from the cost items, an operating cost of 95.0000 a year and the end-of-life cost in the last of those years, the plan returns an NPV of 2015.4123 million USD, no rate of return at all at the status multiple-roots, and a payback of 3.8273 years. The concept's own capex is also 2250.0000. The two agree here because this plan was costed against the concept it is running, and that agreement is a result, not a rule. The same studio will happily run a plan whose items total something else entirely, and it reports both figures without complaint.
 
 ## The mistake
 

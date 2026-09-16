@@ -148,6 +148,12 @@ export function computeIntermediate() {
     convertedCurves: feet.logs.filter((l) => l.converted).length,
     recognizedKinds: feet.logs.filter((l, i) => i > 0 && l.kind).length,
     irregularUniform: uniformStepM(irr.curves[0].data) === null ? 0 : 1,
+    // What the Professional capstone grades on irregular_20. The uniformity
+    // flag above is still true and still taught, but it is a yes/no: its own
+    // label had to print "1 yes / 0 no" to be answerable at all, which handed
+    // the answer to a coin flip. A sample count cannot be guessed and still
+    // requires loading the file.
+    irregularSamples: irr.curves[0].data.length,
     logs: feet.logs.map((l) => ({
       mnemonic: l.mnemonic, kind: l.kind, unit: l.unit,
       sourceUnit: l.sourceUnit, converted: l.converted,

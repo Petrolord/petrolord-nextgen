@@ -12,7 +12,7 @@ Total capex on the default project is 500.0000 million USD, spent in year 1. Gen
 
 ## It is not a tax rate
 
-Government cash flow is royalty plus the government's share of profit oil plus tax, so the numerator holds a great deal that no tax authority calls tax. Angola - Deepwater PSC pays 181.7318 million USD of tax on the default project inside government cash flow of 1200.2886, while its column reads 53.4534 percent. The Angola template's corporate income tax is 25 percent and its resource rent tax 50 percent, and no combination of those is what 53.4534 measures. USA - Gulf of Mexico is clearer still: its only tax is corporate income tax at 21 percent, its column reads 34.0485 percent, and a flat royalty of 18.75 percent contributes 503.7989 million USD of the 764.5528 collected. An earlier build labelled this column "effective tax rate", which invited exactly that misreading.
+Government cash flow is royalty plus the government's share of profit oil plus tax, so the numerator holds a great deal that no tax authority calls tax. Angola - Deepwater PSC pays 245.1955 million USD of tax on the default project inside government cash flow of 1263.7523, while its column reads 56.2797 percent. The Angola template's corporate income tax is 25 percent and its resource rent tax 50 percent, and no combination of those is what 56.2797 measures. USA - Gulf of Mexico is clearer still: its only tax is corporate income tax at 21 percent, its column reads 34.0485 percent, and a flat royalty of 18.75 percent contributes 503.7989 million USD of the 764.5528 collected. An earlier build labelled this column "effective tax rate", which invited exactly that misreading.
 
 ## The mistake
 

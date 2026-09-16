@@ -1,0 +1,116 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC1 Associate m03, The K Value. Digest section 3. The pressure derating and
+# the 0.120000 floor are HELD FOR LITERATURE: they are examined here for what
+# they are and for what is unverified about them.
+
+q(2, "Every horizontal row sits above its vertical counterpart, 0.450000 against 0.350000 with a mesh pad and 0.250000 against 0.180000 with nothing. What reason does the module give?",
+ "In a vertical vessel the drop falls against the rising gas, and in a horizontal one it falls across a gas travelling along the drum, so the two motions are perpendicular.",
+ ["A horizontal drum offers a larger gas area at the same diameter, so the same rate crosses it more slowly.",
+  "A horizontal mist extractor sits in the gas outlet nozzle rather than across the vessel, giving it a larger face area.",
+  "The rows are a fitted allowance rather than a derivation, so the ordering carries no reason at all."],
+ "0.450000 over 0.350000, 0.550000 over 0.420000 and 0.250000 over 0.180000 are not a constant ratio, which is the reminder that these are fitted allowances. The geometry is the reason for the ordering."),
+
+q(0, "Within this table, which moves K further: changing the orientation, or changing the internals?",
+ "The internals. A vertical vessel runs from 0.180000 with nothing to 0.420000 with a vane pack, a wider spread than any step from a vertical row to its horizontal counterpart.",
+ ["The orientation, because every horizontal row sits above its vertical counterpart and 0.250000 up to 0.550000 is the widest move offered.",
+  "They move it equally, since the table is two orientations against three arrangements and the six rows are evenly spaced between 0.180000 and 0.550000.",
+  "Neither, because K is derated for pressure before use and the same deduction comes off every row at 600.000000 psig."],
+ "0.180000 to 0.420000 inside the vertical half more than doubles the allowable velocity. The largest orientation step, 0.420000 to 0.550000 with a vane pack, is much smaller than that."),
+
+q(3, "K is raised by half on a stream whose fluids do not change. What happens to the gas area the vessel needs?",
+ "It falls by a third.",
+ ["It falls by half, because K multiplies the settling velocity directly and the area is the rate divided by that velocity, so the two move in exact and equal opposition to each other.",
+  "It falls by about a fifth, because K sits under the square root along with the density difference, so a change in it is damped the way a change in the gas density is damped.",
+  "It does not move until the pressure rule is applied again, since the deduction above 100 psig is a fixed subtraction and a higher base row keeps the same distance above the 0.120000 floor."],
+ "Half again on K divides the area by one and a half. Everything else in the settling velocity comes from the fluids, so K is where the hardware enters the sizing."),
+
+q(1, "At 600.000000 psig the module's rule takes a vertical mesh pad from 0.350000 to 0.300000 and takes the same amount off a bare drum at 0.180000. What follows from the deduction being identical?",
+ "It costs the bare drum a far larger share of its allowance, since 0.180000 starts at about half the mesh pad's 0.350000.",
+ ["Nothing follows. The deduction is proportional to the base row, so the step from 0.350000 to 0.300000 is the same fraction of it as the step taken off a base of 0.180000 at that pressure.",
+  "The bare drum reaches the 0.120000 floor at 600.000000 psig while the mesh pad does not, and that is the pressure at which the two rows stop being comparable with each other at all.",
+  "The rule is a percentage deduction written in absolute terms, which is why 0.300000 and 0.400000 appear."],
+ "The rule takes 0.01 off K every 100 psi, so the same absolute amount comes off both rows. On a base of 0.180000 that is why a bare drum reaches -0.010000 at 2000.000000 psig."),
+
+q(2, "At 3000.000000 psig the rule gives a bare vertical drum -0.110000 and the engine reports K 0.120000 with floored true. What is that 0.120000?",
+ "A bound the rule ran into, which is why the warning says a vendor K is the only honest input there.",
+ ["The lowest allowable velocity a bare drum has been observed to tolerate, recorded beneath the six base rows as a seventh published figure the module carries alongside them.",
+  "The value the deduction would have produced had it been applied to the horizontal bare drum row of 0.250000 rather than to the vertical row of 0.180000 at that pressure.",
+  "A conservative reading, since an allowable velocity that came out negative has been replaced by the smallest positive figure the method reports, and a smaller K sizes a larger vessel."],
+ "The warning says it outright: \"K is held at 0.12, and a vendor K is the only honest input here\". The floor sits above the -0.110000 the rule produced, so it is not the conservative reading of that rule either."),
+
+q(0, "One K comes back with derated true and floored false, another with both true. What does the second pair say that the first does not?",
+ "That the rule produced something the floor had to catch, so the K in use is a bound rather than a calculation.",
+ ["That the pressure was above 100 psig, where the deduction begins.",
+  "That a vendor figure was supplied and then limited, since a typed K reports source typed and the floor is the one check that an override does not bypass on its way through.",
+  "That the K in use is the arrangement's base row again, because the floor hands back the published figure the deduction started from."],
+ "Derated true says the pressure rule moved the value. Floored true says the floor caught what that rule produced. horizontalNoneAt1500psig reports K 0.120000 where the rule gives 0.110000."),
+
+q(1, "verticalNoneAt650psig returns K 0.125000 with derated true and floored false. Why does it deserve the same suspicion as a floored row?",
+ "It sits 0.005000 above the 0.120000 floor, so 50 psig more of operating pressure puts that vessel on the floor, which is what nearFloor true reports.",
+ ["It is a bare drum, and 0.180000 is the lowest base row in the table, so any derating at all on that row produces a figure the floor is on the point of catching.",
+  "Its derated flag is true and its floored flag is false, and that pairing cannot occur on a bare drum at all.",
+  "It returns the figure the table would give a bare vertical drum before any deduction, so the flag changed nothing."],
+ "0.005000 above the floor is half a step of a rule that deducts 0.01 per 100 psi. floored marks the cliff and nearFloor marks the approach to it, and the two are never true together."),
+
+q(3, "A horizontal bare drum at 1500.000000 psig and a vertical bare drum at 3000.000000 psig are both sized on K 0.120000. What is wrong with treating the two as equivalent?",
+ "The floor made them identical on paper, and the rule behind them gave 0.110000 on one and -0.110000 on the other.",
+ ["Nothing is wrong with it. Both rows carry floored true at that pressure.",
+  "The horizontal row starts at 0.250000 and the vertical at 0.180000, so the two should have been sized on K values a third apart, and the floor has lifted the wrong one of the pair.",
+  "They agree on K and differ on everything else, so the comparison holds as far as the mist extractor goes and the two vessels separate again at the settling velocity, where the fluids differ."],
+ "A floored K is a bound rather than a result. Two very different vessels came back at the same figure because the floor absorbed the difference between them."),
+
+q(1, "An override returns {\"k\":0.28,\"derated\":false,\"floored\":false,\"nearFloor\":false,\"source\":\"typed\",\"warning\":null}. Which of those fields does a reviewer need most?",
+ "source, because a K of 0.28 could have come from a table row, a derating, a floor or a supplier, and the vessel looks exactly the same in all four of those cases.",
+ ["warning, because a null there says the typed figure was compared against the table value and found reasonable.",
+  "derated, because false there is what separates a vendor figure from a table figure, and it is the flag the sizing steps downstream read when they decide whether to trust a K.",
+  "k, because the value sizes the vessel while the others describe a provenance nothing downstream reads."],
+ "The override replaces the whole lookup, so nothing was derated and nothing floored. What the other fields cannot say is where 0.28 came from, and source says typed."),
+
+q(2, "An override of zero is refused while leaving the override out entirely is fine. What difference does the message name?",
+ "Out means use the published table, and zero means a number was supplied that cannot be used, since it gives a settling velocity of zero and an unbounded area.",
+ ["Zero falls outside the span of every base row, which runs from 0.180000 to 0.550000, and the guard tests against it.",
+  "Zero is finite and non-negative, so it passes the guard and the settling step returns an error string later.",
+  "Out leaves the field undefined and zero fills it, and this engine refuses any field it was given."],
+ "\"kOverride must be a positive K in ft/s when it is given (got 0); leave it out to use the published table\". The message names the other route."),
+
+q(0, "A supplier's K far above every row of the published table is typed for a vessel whose own row would be a bare drum. What does the engine do with it?",
+ "It sizes on the typed figure, reports source typed with no warning, and never compares it against the table value at that pressure.",
+ ["It refuses it, because a typed figure outside the span from 0.180000 to 0.550000 is a transcription error.",
+  "It accepts it and fills the warning field, which is what that field exists for on a typed K.",
+  "It accepts it and derates it, because the pressure rule is applied once a K is established whatever its source, so a typed figure at 600.000000 psig reaches settling reduced by the same amount the table rows lose."],
+ "The engine accepts kOverride and says source typed. A K far outside the span from 0.180000 to 0.550000 is either unusual hardware or a transcription error, and nothing in the output separates the two."),
+
+q(3, "A vertical vessel is sized with 0.450000 because the reader took a mesh pad row without checking the orientation column. Does anything object, and what moves?",
+ "Nothing objects, and the vessel comes out smaller in area than the vertical row allows.",
+ ["Nothing objects, and the vessel comes out larger, since a higher K raises the settling velocity and the required area is that velocity multiplied by the rate the vessel passes.",
+  "The engine objects, because the id names the orientation in the same string as the arrangement, and horizontalMesh is refused on a run whose sizing mode was given as vertical.",
+  "Nothing objects, and only the margin moves, since the diameter came from a list of offered sizes and the settling velocity enters the verdict rather than the dimension itself."],
+ "0.450000 is a perfectly good number and the arithmetic has no opinion about it. The id is the guard, because verticalMesh and horizontalMesh cannot be confused once they are written down."),
+
+q(1, "The module records its deduction of 0.01 per 100 psi above 100 psig and its 0.120000 floor as customary practice whose published form is unchecked. How far does that qualification reach?",
+ "To the step from a base row to the K a vessel is sized with, and to every settling velocity and margin built on it. The six base rows stand on their own.",
+ ["To the whole table, since an unchecked rule casts the same doubt over the six base rows it modifies.",
+  "To the rows where floored is true only, since a derated value above 0.120000 is a plain subtraction.",
+  "To the 100 psig threshold only, since the deduction is arithmetic and the floor is an engine constant."],
+ "The deduction, the threshold and the floor are all taken on practice rather than on a reference, which is why no conclusion in this course rests on a derated K."),
+
+q(2, "A vessel is sized at 0.420000 with a vane pack, and the pack is later removed for cleaning and left out. What allowance is that vessel then running against?",
+ "A bare drum row of 0.180000, so it is operating at more than twice what the table gives that arrangement.",
+ ["A mesh pad row of 0.350000, which is the arrangement the module falls back to whenever the named internals are absent from the vessel that was sized with them.",
+  "The same 0.420000, because K is a design figure fixed when the vessel was sized.",
+  "A horizontal vane row of 0.550000, since the gas now crosses an empty drum and that is the row the table carries for a vessel with nothing in the gas path at all."],
+ "The vertical rows run 0.180000 with nothing, 0.350000 with a mesh pad and 0.420000 with a vane pack. A higher K buys a smaller vessel and brings a part that can be taken out."),
+
+q(0, "AGBAMI runs a horizontal vane pack at 350.000000 psig and is sized on K 0.525000. Where did that figure come from, and what should be stated beside it?",
+ "The base row of 0.550000 with the pressure rule applied, and beside it the provenance of that rule, which the module records as unchecked.",
+ ["A vendor quotation, since 0.525000 appears on no row of the published table.",
+  "The base row of 0.550000 with the floor applied, since 350.000000 psig is above the 100 psig threshold and every row above it reports either its base value or the floor of 0.120000.",
+  "The horizontal mesh row of 0.450000 lifted for the vane pack, a step the table takes inside one orientation."],
+ "The module records 0.550000 derated to 0.525000 at 350.000000 psig, with derated true and floored false. Every velocity built on it carries that provenance gap along with it."),
+
+emit(Q, '/root/fc-wip-separation/banks/fc1b_m03.json', expect_n=15)
+finish()
