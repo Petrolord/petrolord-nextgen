@@ -175,6 +175,11 @@ export const PANELS = {
   'ec-plan-explorer': React.lazy(() => import('@/components/course/panels/fdp/PlanExplorer')),
   'ec-schedule-explorer': React.lazy(() => import('@/components/course/panels/fdp/ScheduleExplorer')),
   'ec-value-explorer': React.lazy(() => import('@/components/course/panels/fdp/ValueExplorer')),
+
+  // FC2 Line Sizing & Hydraulics
+  'fc-liquid-explorer': React.lazy(() => import('@/components/course/panels/linesizing/LiquidExplorer')),
+  'fc-gasline-explorer': React.lazy(() => import('@/components/course/panels/linesizing/GasLineExplorer')),
+  'fc-wall-pig-explorer': React.lazy(() => import('@/components/course/panels/linesizing/WallPigExplorer')),
 };
 
 export function resolvePanel(id) {

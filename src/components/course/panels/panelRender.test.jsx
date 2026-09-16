@@ -66,6 +66,12 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('surveillance/ExceptionExplorer.jsx');
     expect(names).toContain('surveillance/ReadingExplorer.jsx');
   });
+  it('finds the FC2 line sizing panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('linesizing/LiquidExplorer.jsx');
+    expect(names).toContain('linesizing/GasLineExplorer.jsx');
+    expect(names).toContain('linesizing/WallPigExplorer.jsx');
+  });
   for (const [path, load] of entries) {
     it(path.split('/panels/')[1], async () => {
       const mod = await load();
