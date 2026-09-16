@@ -234,7 +234,7 @@ The spread from the lowest to the highest is 1.336801 (derived from the column a
 General Flow also returns the friction factor it settled on, 0.0112132010, which is the only one of the four that says anything about the pipe's roughness at all.
 
 The diameter exponent of each form, measured by doubling the bore and reading the engine:
-| form | rate at 10 in | rate at 20 in | measured exponent |
+| form | rate at 10.000000 in | rate at 20.000000 in | measured exponent |
 | --- | --- | --- | --- |
 | weymouth | 41217643.2456 | 261715720.9907 | 2.6666666667 |
 | panhandleA | 54628394.3526 | 335409354.2407 | 2.6182000000 |
@@ -548,7 +548,7 @@ One barrel for the package, measured out of each module by asking that module a 
 - from chokePerformance, as the erosional velocity times the area times the seconds in a day over the erosional rate: 5.6145833333333 cubic feet per barrel
 The ratio of the two is 1.0000000000000 (derived from the two rows above). They were two different numbers one import apart, inside the single chain this studio composes, until the package gave them one definition. The one it kept is exact by definition rather than by measurement: forty-two gallons of two hundred and thirty-one cubic inches each, over the seventeen hundred and twenty-eight cubic inches in a cubic foot. Both modules' own oracles already worked from it, so the goldens said which half of the disagreement was right before anyone asked them.
 
-# SECTION 18: The Expert reading, a line from bore to wall to pig (owned by Expert m06)
+# SECTION 18: The Expert reading, three questions and the pipes they are asked of (owned by Expert m06)
 
 Three questions, and the three pipes they are asked of. As a hydraulic line the OGBIA bore of 7.981000 in carries 12000.000000 bpd at 2.244621 ft/s, Reynolds 48431.2523, and spends 25.660631 psi over 26400.000000 ft, against an erosional ceiling of 13.545709 ft/s that it uses 0.165707 of.
 As a pressure envelope the SOKU pipe at 12.750000 in outside diameter and 52000.000000 psi of yield needs 0.419231 in of wall at Class 3 and 0.329327 in at Class 1, and the 0.375000 in the mill rolled rates 1019.607843 psig. That is a different pipe from the one above it: its bore is the outside diameter less twice the wall, 12.000000 in, which stands 4.019000 in wider than the OGBIA bore (derived from the two figures on these rows).

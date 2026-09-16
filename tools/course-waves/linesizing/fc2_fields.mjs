@@ -210,5 +210,10 @@ export const RE_FOR_DOMAIN_SWEEP = 1e6;
 export const SCHEDULE_PAIR_NPS = [2, 4, 6, 8];
 /** Bores for the Weymouth friction reading. */
 export const SOKU_BORE_SWEEP = [6.065, 7.981, 11.938, 15];
+/** The two bores the diameter exponent is measured across, one being twice the
+ *  other. They used to be typed inline in the generator and printed as bare
+ *  integers in a column header, so a bank quoting 20.000000 in resolved
+ *  against an unrelated viscosity row in another tier. */
+export const EXPONENT_PROBE_BORES_IN = [10, 20];
 /** The speed the published pigging golden states its run hours at. */
 export const GOLDEN_PIG_SPEED_FT_S = 5;

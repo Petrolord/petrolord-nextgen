@@ -31,7 +31,7 @@ q(2, "The band between the two branches is held for the literature rather than s
  ["Interpolating across the band would break the round trip, since a friction factor read back through the Reynolds number would no longer return the value it was computed from.",
   "The engine cannot interpolate, because the two branches live in different modules.",
   "An interpolation would move the boundary from 2100 to 4000, and a moving guard cannot be read on both sides."],
- "The band is taught as a limit and never graded, and the step across the boundary is 1.603040 times. Hiding it behind a smooth curve would remove the one signal a reader has.")
+ "Nothing physical happens between a Reynolds number of 2099.9999999 and one of 2100.0000. The friction factor moves from 0.0304761905 to 0.0488545386 because the engine changes laws there, which is a fact about the engine rather than about the flow.")
 
 q(3, "Colebrook was published for a relative roughness reaching about 0.05. Which of the five rows the digest walks at a Reynolds number of 1000000.0000 sit outside that range?",
  "The rows at 0.100000, 0.200000 and 0.500000, returning 0.1016731332, 0.1557055485 and 0.3308894263.",

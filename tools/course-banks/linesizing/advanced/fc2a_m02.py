@@ -17,14 +17,14 @@ q(0, "The package no longer types a barrel into either module. How is the figure
  ["By dividing the line volume of 1633.5349 bbl by the volume the golden oracle reports in SI units, which makes it a measured agreement between two implementations rather than a definition.",
   "By reading it from the catalogue the roughnesses and the grade yields come from, which is why an unknown entry is NaN.",
   "By the erosional velocity times the flow area over the seconds in a day, which is the form lineHydraulics is asked."],
- "Forty-two gallons of two hundred and thirty-one cubic inches each, over the seventeen hundred and twenty-eight cubic inches in a cubic foot. chokePerformance returns 5.6145833333333 to a question about itself and the ratio of the two is 1.0000000000000.")
+ "chokePerformance answers the same kind of question about itself with 5.6145833333333, and the ratio of the two is 1.0000000000000. A figure that is exact by definition is confirmed by asking two modules rather than by reading one source.")
 
 q(3, "The swept volume is 98.0121 bbl at a holdup of 0.060000 on a line holding 1633.5349 bbl. Where did that holdup of 0.060000 come from?",
  "From somebody outside this engine, because there is no flow regime, no slip and no holdup correlation anywhere in it and a holdup is taken as an input wherever one is needed.",
  ["From the Beggs and Brill correlation inside this engine, which works the holdup out from the rate and the inclination before the sweep is taken against it.",
   "From the line volume and the swept volume, since the engine solves for the holdup that reconciles the two and then reports it back beside the sweep it produced.",
   "From the erosional check, which returns the fraction of its ceiling a line is using and hands that same fraction on as the liquid standing in the bore."],
- "The engine says so in its own header. Two-phase pressure drop, flow regime and holdup are the Suite Beggs and Brill correlation, which is app code, and this engine takes the holdup as an input.")
+ "The engine's own header says the holdup is supplied. A sweep of 0.060000 on 1633.5349 bbl gives 98.0121 bbl, and every figure downstream of that sweep is worth exactly what the number somebody else measured is worth.")
 
 q(1, "In the holdup sweep the column reading the swept volume as a fraction of the line volume reproduces the holdup column exactly, 0.020000 against 0.020000 and 0.500000 against 0.500000. What does that establish?",
  "That the swept volume is the line volume scaled by the holdup with nothing else in the relation at all.",

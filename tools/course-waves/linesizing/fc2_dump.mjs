@@ -49,6 +49,7 @@ import {
   RELATIVE_ROUGHNESS_SWEEP, RE_LOW_FOR_ROUGHNESS_TABLE, RE_HIGH_FOR_ROUGHNESS_TABLE,
   COLEBROOK_DOMAIN_SWEEP, RE_FOR_DOMAIN_SWEEP,
   SCHEDULE_PAIR_NPS, SOKU_BORE_SWEEP, GOLDEN_PIG_SPEED_FT_S,
+  EXPONENT_PROBE_BORES_IN,
 } from '/root/fc-wip-linesizing/fc2_fields.mjs';
 
 const ROOT = process.env.FC2_ENGINES || '/root/wt-fc2-nextgen/packages/engines';
@@ -378,10 +379,11 @@ w(`The spread from the lowest to the highest is ${e6(Math.max(...gasForms.map(([
 w(`General Flow also returns the friction factor it settled on, ${num(SOKU_Q.general.fDarcy, 10)}, which is the only one of the four that says anything about the pipe's roughness at all.`);
 w();
 w('The diameter exponent of each form, measured by doubling the bore and reading the engine:');
-w('| form | rate at 10 in | rate at 20 in | measured exponent |');
+w(`| form | rate at ${e6(EXPONENT_PROBE_BORES_IN[0])} in | rate at ${e6(EXPONENT_PROBE_BORES_IN[1])} in | measured exponent |`);
 w('| --- | --- | --- | --- |');
 gasForms.forEach(([k, fn]) => {
-  const a = fn({ ...SOKU, idIn: 10 }).qScfd; const b = fn({ ...SOKU, idIn: 20 }).qScfd;
+  const a = fn({ ...SOKU, idIn: EXPONENT_PROBE_BORES_IN[0] }).qScfd;
+  const b = fn({ ...SOKU, idIn: EXPONENT_PROBE_BORES_IN[1] }).qScfd;
   w(`| ${k} | ${r4(a)} | ${r4(b)} | ${num(Math.log2(b / a), 10)} |`);
 });
 w('The exponent is derived as the base-two logarithm of the ratio of the two engine rates on each row. It is the single most important number in a gas form, because it is what says how much a bigger pipe buys.');
@@ -783,7 +785,7 @@ w(`The ratio of the two is ${num(bblLine / bblChoke, 13)} (derived from the two 
 w();
 
 // --------------------------------------------------------------- SECTION 18
-w('# SECTION 18: The Expert reading, a line from bore to wall to pig (owned by Expert m06)');
+w('# SECTION 18: The Expert reading, three questions and the pipes they are asked of (owned by Expert m06)');
 w();
 w(`Three questions, and the three pipes they are asked of. As a hydraulic line the OGBIA bore of ${e6(OGBIA.idIn)} in carries ${e6(OGBIA.qBpd)} bpd at ${e6(OG.vFtS)} ft/s, Reynolds ${r4(OG.re)}, and spends ${e6(OG.dpTotalPsi)} psi over ${e6(OGBIA.lengthFt)} ft, against an erosional ceiling of ${e6(sweepRows[0].chk.erosionalFtS)} ft/s that it uses ${e6(OG.vFtS / sweepRows[0].chk.erosionalFtS)} of.`);
 w(`As a pressure envelope the SOKU pipe at ${e6(SOKU_WALL.odIn)} in outside diameter and ${e6(SOKU_WALL.smysPsi)} psi of yield needs ${e6(withCa.tRequiredIn)} in of wall at Class 3 and ${e6(c1w.tRequiredIn)} in at Class 1, and the ${e6(SOKU_WALL_AS_BUILT_IN)} in the mill rolled rates ${e6(maopWith.maopPsig)} psig. That is a different pipe from the one above it: its bore is the outside diameter less twice the wall, ${e6(SOKU_WALL.odIn - 2 * SOKU_WALL_AS_BUILT_IN)} in, which stands ${e6(SOKU_WALL.odIn - 2 * SOKU_WALL_AS_BUILT_IN - OGBIA.idIn)} in wider than the OGBIA bore (derived from the two figures on these rows).`);

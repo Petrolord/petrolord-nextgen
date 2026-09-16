@@ -41,7 +41,7 @@
    "It does not return it, because the gas elevation term sits inside an exponential and equal distances up and down do not cancel there."
   ],
   "answer": 3,
-  "explanation": "On the 1500.000000 ft table the Weymouth row reads 0.932862 climbing against 1.063402 descending, which average to 0.998132 rather than to one. Marching is where a liquid and a gas part company."
+  "explanation": "A liquid line adds its elevation term and hands it back at the far side, which is why both marched cases arrive at 874.339369 psia. A gas line scales the outlet inside the driving group and moves the length the friction acts over at the same time, so a profile leaves a residue."
  },
  {
   "prompt": "The traverse spends 25.660631 psi over 26400.000000 ft in three segments and a single call over the same length spends 25.660631 psi. What follows from a difference of 0.000000 psi?",

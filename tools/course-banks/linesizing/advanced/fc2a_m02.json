@@ -19,7 +19,7 @@
    "By the erosional velocity times the flow area over the seconds in a day, which is the form lineHydraulics is asked."
   ],
   "answer": 0,
-  "explanation": "Forty-two gallons of two hundred and thirty-one cubic inches each, over the seventeen hundred and twenty-eight cubic inches in a cubic foot. chokePerformance returns 5.6145833333333 to a question about itself and the ratio of the two is 1.0000000000000."
+  "explanation": "chokePerformance answers the same kind of question about itself with 5.6145833333333, and the ratio of the two is 1.0000000000000. A figure that is exact by definition is confirmed by asking two modules rather than by reading one source."
  },
  {
   "prompt": "The swept volume is 98.0121 bbl at a holdup of 0.060000 on a line holding 1633.5349 bbl. Where did that holdup of 0.060000 come from?",
@@ -30,7 +30,7 @@
    "From somebody outside this engine, because there is no flow regime, no slip and no holdup correlation anywhere in it and a holdup is taken as an input wherever one is needed."
   ],
   "answer": 3,
-  "explanation": "The engine says so in its own header. Two-phase pressure drop, flow regime and holdup are the Suite Beggs and Brill correlation, which is app code, and this engine takes the holdup as an input."
+  "explanation": "The engine's own header says the holdup is supplied. A sweep of 0.060000 on 1633.5349 bbl gives 98.0121 bbl, and every figure downstream of that sweep is worth exactly what the number somebody else measured is worth."
  },
  {
   "prompt": "In the holdup sweep the column reading the swept volume as a fraction of the line volume reproduces the holdup column exactly, 0.020000 against 0.020000 and 0.500000 against 0.500000. What does that establish?",

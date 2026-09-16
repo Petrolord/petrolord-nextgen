@@ -255,6 +255,10 @@ export const RE_FOR_DOMAIN_SWEEP = 1e6;
 export const SCHEDULE_PAIR_NPS = [2, 4, 6, 8];
 /** Bores for the Weymouth friction reading. */
 export const SOKU_BORE_SWEEP = [6.065, 7.981, 11.938, 15];
+/** The two bores the diameter exponent is measured across, one being twice the
+ *  other. Named rather than typed inline, and printed at the wave's own
+ *  precision, so a bank quoting 20.000000 in resolves against THIS row. */
+export const EXPONENT_PROBE_BORES_IN = [10, 20];
 /** The speed the published pigging golden states its run hours at. */
 export const GOLDEN_PIG_SPEED_FT_S = 5;
 
@@ -802,9 +806,10 @@ export const transmissionForms = () => {
     })),
     spreadDerived: Math.max(...rates) / Math.min(...rates),
     generalFDarcy: q.general.fDarcy,
+    exponentProbeBoresIn: [...EXPONENT_PROBE_BORES_IN],
     exponents: gasFormList().map(([k, fn]) => {
-      const a = fn({ ...SOKU, idIn: 10 }).qScfd;
-      const b = fn({ ...SOKU, idIn: 20 }).qScfd;
+      const a = fn({ ...SOKU, idIn: EXPONENT_PROBE_BORES_IN[0] }).qScfd;
+      const b = fn({ ...SOKU, idIn: EXPONENT_PROBE_BORES_IN[1] }).qScfd;
       return {
         form: k, at10: a, at20: b, exponentDerived: Math.log2(b / a),
       };
@@ -1390,7 +1395,7 @@ export const heldItems = () => {
 };
 
 // ---------------------------------------------------------------------------
-// SECTION 18. The Expert reading, a line from bore to wall to pig.
+// SECTION 18. The Expert reading, three questions and the pipes they are asked of.
 // ---------------------------------------------------------------------------
 
 export const expertReading = () => {

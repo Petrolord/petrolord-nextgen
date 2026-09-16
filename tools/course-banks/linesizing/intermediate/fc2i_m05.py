@@ -33,7 +33,7 @@ q(3, "The ridge returns all of its elevation to an incompressible liquid. What d
  ["It returns slightly more than it took, because a descending gas line recovers more head than the matching climb spent and the two together leave the rate above where it started.",
   "It returns it as well, since the elevation term in a gas form is built from the same static column and a column is symmetric whatever fluid stands in it.",
   "It refuses the profile, because a gas call carries a single elevation change and an undulating route cannot be expressed as one figure."],
- "On the 1500.000000 ft table the Weymouth row reads 0.932862 climbing against 1.063402 descending, which average to 0.998132 rather than to one. Marching is where a liquid and a gas part company.")
+ "A liquid line adds its elevation term and hands it back at the far side, which is why both marched cases arrive at 874.339369 psia. A gas line scales the outlet inside the driving group and moves the length the friction acts over at the same time, so a profile leaves a residue.")
 
 q(0, "The traverse spends 25.660631 psi over 26400.000000 ft in three segments and a single call over the same length spends 25.660631 psi. What follows from a difference of 0.000000 psi?",
  "That the station list is the entire value of the call, so a reader is choosing between a number and a profile rather than between a rougher answer and a better one.",

@@ -255,7 +255,7 @@ const buildDigest = () => {
   w(`General Flow also returns the friction factor it settled on, ${num(s8.generalFDarcy, 10)}, which is the only one of the four that says anything about the pipe's roughness at all.`);
   w();
   w('The diameter exponent of each form, measured by doubling the bore and reading the engine:');
-  w('| form | rate at 10 in | rate at 20 in | measured exponent |');
+  w(`| form | rate at ${e6(s8.exponentProbeBoresIn[0])} in | rate at ${e6(s8.exponentProbeBoresIn[1])} in | measured exponent |`);
   w('| --- | --- | --- | --- |');
   s8.exponents.forEach((x) => w(`| ${x.form} | ${r4(x.at10)} | ${r4(x.at20)} | ${num(x.exponentDerived, 10)} |`));
   w('The exponent is derived as the base-two logarithm of the ratio of the two engine rates on each row. It is the single most important number in a gas form, because it is what says how much a bigger pipe buys.');
@@ -492,7 +492,7 @@ const buildDigest = () => {
 
   // Section 18
   const s18 = L.expertReading();
-  w('# SECTION 18: The Expert reading, a line from bore to wall to pig (owned by Expert m06)');
+  w('# SECTION 18: The Expert reading, three questions and the pipes they are asked of (owned by Expert m06)');
   w();
   w(`Three questions, and the three pipes they are asked of. As a hydraulic line the OGBIA bore of ${e6(s18.idIn)} in carries ${e6(s18.qBpd)} bpd at ${e6(s18.vFtS)} ft/s, Reynolds ${r4(s18.re)}, and spends ${e6(s18.dpTotalPsi)} psi over ${e6(s18.lengthFt)} ft, against an erosional ceiling of ${e6(s18.erosionalFtS)} ft/s that it uses ${e6(s18.usedFractionDerived)} of.`);
   w(`As a pressure envelope the SOKU pipe at ${e6(s18.odIn)} in outside diameter and ${e6(s18.smysPsi)} psi of yield needs ${e6(s18.class3RequiredIn)} in of wall at Class 3 and ${e6(s18.class1RequiredIn)} in at Class 1, and the ${e6(s18.asBuiltIn)} in the mill rolled rates ${e6(s18.maopPsig)} psig. That is a different pipe from the one above it: its bore is the outside diameter less twice the wall, ${e6(s18.wallBoreDerivedIn)} in, which stands ${e6(s18.wallBoreAgainstOgbiaDerived)} in wider than the OGBIA bore (derived from the two figures on these rows).`);
