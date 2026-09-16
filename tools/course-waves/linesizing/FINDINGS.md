@@ -544,7 +544,13 @@ of the original 37 is byte-identical, because no valid-input arithmetic changed
 anywhere in this wave. The engine suite went from 5750 passing to 5764 (179
 suites, 1 todo, 0 failures). The line-hydraulics gates went from 15 to 28. The
 FC2 oracle's refusal sweep went from **18 inputs it says must be refused and
-the engine does not, to 0**, over 45 cases rather than 33. All 18 graded
+the engine does not, to 0**, over 45 cases rather than 33. FC2's own goldens
+went from 183 cases to **201**: outlet 7 -> 13, refusals 33 -> 45, and the
+traverse block's three rows gained the die-out fields; nothing else moved.
+(The commit message on the foundation rebuild says 202. It is 201; the count
+is recorded here because a pushed branch is not worth rewriting for a digit,
+and because a figure quoted from arithmetic rather than from the count is
+exactly what this programme keeps catching.) All 18 graded
 capstone fields are unchanged, verified by re-running the capstone generator
 against the repaired engine and diffing `fields.json`, not by assuming.
 
