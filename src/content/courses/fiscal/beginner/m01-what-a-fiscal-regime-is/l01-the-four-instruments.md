@@ -19,7 +19,7 @@ Nothing else exists. There is no signature bonus, no domestic supply obligation,
 | RRT | 0 percent | 50 percent |
 | minimum tax | 0 percent | 0 percent |
 
-Run both on the Designer's default project and total revenue is 2686.9277 million USD either way, because a regime never touches production or price. Contractor net cash flow is 980.9313 million USD under the Gulf of Mexico terms and 545.1955 million USD under the Angola terms, and government cash flow is 764.5528 and 1200.2886 million USD.
+Run both on the Designer's default project and total revenue is 2686.9277 million USD either way, because a regime never touches production or price. Contractor net cash flow is 980.9313 million USD under the Gulf of Mexico terms and 481.7318 million USD under the Angola terms, and government cash flow is 764.5528 and 1263.7523 million USD.
 
 ## The mistake
 
@@ -33,4 +33,4 @@ They refuse to be a country's fiscal code. The engine's own header says this mod
 
 ## Exercise
 
-Write out the four fields for "Ghana - Deepwater" and for "Brazil - Concession". Then say which single field you would change to move the Brazil contractor result of 912.1029 million USD closest to the Ghana result of 428.8774 million USD, and why the CIT rates of 34 and 35 percent are not the field you picked.
+Write out the four fields for "Ghana - Deepwater" and for "Brazil - Concession". Then say which single field you would change to move the Brazil contractor result of 623.9658 million USD closest to the Ghana result of 428.8774 million USD, and why the CIT rates of 34 and 35 percent are not the field you picked.

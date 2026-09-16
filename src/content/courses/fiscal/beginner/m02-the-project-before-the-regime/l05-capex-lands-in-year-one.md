@@ -16,13 +16,13 @@ Cumulative net cash flow reaches 8.9905 million USD in year 3, which is why payb
 
 ## The multiplier
 
-The capex multiplier scales the total before it is charged. On the published test project the flat regime returns an NPV of 1262.3470 million USD and an IRR of 124.5777 percent. At a multiplier of 1.3 the same regime returns 1062.6176 million USD and 63.3364 percent, and at 0.7 it returns 1460.6941 million USD and 1095.4783 percent. The multiplier is the only capex control there is.
+The capex multiplier scales the total before it is charged. On the published test project the flat regime returns an NPV of 1262.3470 million USD. At a multiplier of 1.3 the same regime returns 1062.6176 million USD, and at 0.7 it returns 1460.6941 million USD. None of the three reports an internal rate of return: at 0.7 the net present value is zero at -20.4852 percent inside the searched band and again at 1095.4783 percent above it, so the engine returns null with the status multiple-roots rather than naming a rate. The multiplier is the only capex control there is.
 
 ## The mistake
 
 The careful reader spreads the spend, because a 500.0000 million USD deepwater development is not built in twelve months. The sandbox refuses a capex schedule outright and has no field to hold one. Faking a schedule by lowering the multiplier changes the total, not the timing, and quietly answers a different question.
 
-The consequence is discounting. All 500.0000 million USD sits at the year 1 exponent, so its present value is as large as it can be, while the revenue it buys is spread over 25 discounted years. Every NPV here is harsher on capital, and every IRR more sensitive to the capex number, than a phased model would be.
+The consequence is discounting. All 500.0000 million USD sits at the year 1 exponent, so its present value is as large as it can be, while the revenue it buys is spread over 25 discounted years. Every NPV here is harsher on capital, and any rate of return read off it more sensitive to the capex number, than a phased model would be.
 
 ## What capex refuses
 
