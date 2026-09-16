@@ -64,7 +64,7 @@ q(3, "The dehydration balance and the vessel sizing are shown to use one glycol 
   "An error in 9.300000 lb a gallon itself, which two agreeing routes would catch."],
  "Two numbers for one glycol is a defect whatever its size, and the ratio of 1.000000000000 says this module does not have one. It says nothing at all about whether 9.300000 is correct."),
 
-q(1, "A state arrives that the method has no answer for. What does the caller get?",
+q(1, "The studio hands one of this module's doors a state it has no answer for. What does the caller get?",
  "An object with an `error` key carrying a named string, because this module throws nothing at all.",
  ["A thrown error for a missing argument and an object for a value that is merely out of its domain, so a caller has to handle both shapes.",
   "The nearest answer inside the band with a note attached rather than a refusal.",
@@ -85,12 +85,12 @@ q(0, "Two questions this engine has no answer for are a hydrate margin and the p
   "Both belong to this module's dew point unit, which reaches the cold end where both would appear."],
  "They are two engines and two questions. This module carries neither, and the dew point unit cools a gas rather than drawing an envelope or a hydrate line."),
 
-q(3, "Why does the Associate tier begin with the water chain rather than with either of the other two units?",
- "The water chain is the only part of this engine that runs end to end in closed form, so nothing iterates and nothing solves.",
+q(3, "The Associate tier follows the water chain from the line conditions to the duty and leaves the other two units to later tiers. Which of these is true of that chain?",
+ "Nothing in it feeds back, so no step revises a step above it and a wrong duty can be traced in a single reading.",
  ["The water chain is the only one of the three carrying published cases, so it is the only unit whose answers a learner can check against something outside the engine.",
   "A glycol loop is the only one of the three units the Studio gives a tab of its own, so it is the only unit a learner can work end to end on the page.",
   "The water duty is the largest of the three on both teaching streams, which makes it the unit where an error costs the most and the one to meet first."],
- "Every figure in the chain has one parent and one operation above it, which is why a wrong duty can be traced in a single reading. The other two units carry published cases as well."),
+ "The chain runs one way, from the line conditions to the duty, so a wrong figure can be settled by reading it once. The other two units carry published cases as well, and the regenerator on the sour stream is much the larger duty of the two."),
 
 q(2, "UBIE arrives at 5.200000 mol percent CO2 and 1.400000 mol percent H2S and has to leave at 2.000000 and 0.000400. What does the engine report as going into the solution, and in what unit?",
  "10666.2009 lbmol of acid gas a day.",

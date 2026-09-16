@@ -110,7 +110,7 @@
   "explanation": "The minutes in a day turn gallons a day into gallons a minute. The group factor turns a Btu a day into MMBtu an hour, and they sit two steps apart in the chain."
  },
  {
-  "prompt": "An error creeps into a declared constant and into a measured one. How would each show up?",
+  "prompt": "A declared constant is simply the wrong number, and a measured one is exported under a name the engine does not use for it. How would each show up?",
   "options": [
    "The measured one shows up in the published cases, and the declared one as a ratio away from 1.000000000000.",
    "The measured one shows up as a ratio away from 1.000000000000, and the declared one shows up nowhere at all.",
@@ -118,7 +118,7 @@
    "The measured one shows up nowhere, since it was read out of the engine, and the declared one in the goldens."
   ],
   "answer": 1,
-  "explanation": "A derived constant is wrong only if its parent is wrong. A declared one has no publication in this repository to check it against, which is why knowing they are there is the whole of what a reader can do."
+  "explanation": "A measurement compares the name on the page with the number in use, so a mismatch is exactly what it catches. A declared value that is the wrong number has no publication in this repository to check it against, and pinning it only makes a change to it a reviewed act."
  },
  {
   "prompt": "The next tier reads one contactor three separate ways. Which three?",
@@ -145,13 +145,13 @@
  {
   "prompt": "UBIE goes to the Professional tier as a mole balance, at 10666.2009 lbmol of acid gas a day. What does that route have in common with the glycol chain?",
   "options": [
-   "Nothing. There is no water content in it, no circulation ratio, and the solvent comes from a property table.",
+   "Nothing in the method. There is no water content in it, no circulation ratio, and the solvent comes from a property table.",
    "The circulation ratio, which is what turns either pickup into a solution rate in gpm.",
    "The saturation step, which fixes what the gas carries before either spec is applied to it.",
-   "The reboiler duty per gallon, which is what both loops are regenerated on."
+   "The duty a gallon, which both loops assemble from a sensible term and an overhead term."
   ],
   "answer": 0,
-  "explanation": "Both end at a circulation and a duty and they get there by methods with nothing in common. The amine solvent is chosen from a published property table rather than assumed."
+  "explanation": "Both end at a circulation and a duty, and the methods that reach them have nothing in common. The amine duty a gallon is a stated figure rather than one assembled from named parts, and the solvent is chosen from a published property table."
  },
  {
   "prompt": "What does this course ask at every tier, with only the answers changing?",

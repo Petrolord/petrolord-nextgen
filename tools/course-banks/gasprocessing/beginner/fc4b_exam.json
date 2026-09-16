@@ -198,7 +198,7 @@
   "explanation": "A low ratio means fewer gallons each carrying more water. The sensible term sits at 1386.1650 the length of that table because the temperature rise per gallon never changed."
  },
  {
-  "prompt": "At 2.000000 gal per lb the rich glycol returns at 94.138775510 weight percent and the engine adds no second sentence to its warning. Why not?",
+  "prompt": "At 1.999999 gal per lb the engine warns that the ratio is outside the customary 2.000000 to 5.000000 gal per lb, and adds no second sentence to it. Why not?",
   "options": [
    "The ratio is inside the customary band, so no warning of any kind is raised.",
    "The rich strength is not reported at that ratio, so nothing can be said about it.",
@@ -206,7 +206,7 @@
    "The second sentence is attached to the lean strength rather than to the ratio."
   ],
   "answer": 2,
-  "explanation": "At 2.000000 gal per lb the ratio is at the customary edge and the loop is intact at the rich end. At 1.000000 gal per lb the rich returns at 89.568932039 and the sentence appears."
+  "explanation": "A millionth outside the customary edge is still a loop that is intact at the rich end, which at 2.000000 gal per lb returns at 94.138775510 weight percent. At 1.000000 gal per lb the rich returns at 89.568932039 and the sentence appears."
  },
  {
   "prompt": "A lean gallon carries 0.465000000 lb of water at 95.000000 weight percent and 0.009300000 lb at 99.900000. What is that table saying?",

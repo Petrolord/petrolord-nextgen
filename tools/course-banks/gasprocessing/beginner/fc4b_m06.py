@@ -78,12 +78,12 @@ q(0, "Two conversions appear in the worked reading, one at step four and one at 
   "7.480519480519 at step four and then 24000000 at step six."],
  "The minutes in a day turn gallons a day into gallons a minute. The group factor turns a Btu a day into MMBtu an hour, and they sit two steps apart in the chain."),
 
-q(1, "An error creeps into a declared constant and into a measured one. How would each show up?",
+q(1, "A declared constant is simply the wrong number, and a measured one is exported under a name the engine does not use for it. How would each show up?",
  "The measured one shows up as a ratio away from 1.000000000000, and the declared one shows up nowhere at all.",
  ["The measured one shows up in the published cases, and the declared one as a ratio away from 1.000000000000.",
   "Both show up as a ratio away from 1.000000000000, since a constant is measured under the name it is declared with.",
   "The measured one shows up nowhere, since it was read out of the engine, and the declared one in the goldens."],
- "A derived constant is wrong only if its parent is wrong. A declared one has no publication in this repository to check it against, which is why knowing they are there is the whole of what a reader can do."),
+ "A measurement compares the name on the page with the number in use, so a mismatch is exactly what it catches. A declared value that is the wrong number has no publication in this repository to check it against, and pinning it only makes a change to it a reviewed act."),
 
 q(3, "The next tier reads one contactor three separate ways. Which three?",
  "As a staged device, as a mole balance, and as a vessel.",
@@ -100,11 +100,11 @@ q(2, "The Professional tier introduces a limit that nothing in the Associate tie
  "In the water chain, tightening the spec always worked and an answer always came back. A staged column has a ceiling in it, and the engine says so rather than returning a number nobody can reach."),
 
 q(0, "UBIE goes to the Professional tier as a mole balance, at 10666.2009 lbmol of acid gas a day. What does that route have in common with the glycol chain?",
- "Nothing. There is no water content in it, no circulation ratio, and the solvent comes from a property table.",
+ "Nothing in the method. There is no water content in it, no circulation ratio, and the solvent comes from a property table.",
  ["The circulation ratio, which is what turns either pickup into a solution rate in gpm.",
   "The saturation step, which fixes what the gas carries before either spec is applied to it.",
-  "The reboiler duty per gallon, which is what both loops are regenerated on."],
- "Both end at a circulation and a duty and they get there by methods with nothing in common. The amine solvent is chosen from a published property table rather than assumed."),
+  "The duty a gallon, which both loops assemble from a sensible term and an overhead term."],
+ "Both end at a circulation and a duty, and the methods that reach them have nothing in common. The amine duty a gallon is a stated figure rather than one assembled from named parts, and the solvent is chosen from a published property table."),
 
 q(1, "What does this course ask at every tier, with only the answers changing?",
  "Which number the engine computed, which one you chose, and which one it kept to itself.",

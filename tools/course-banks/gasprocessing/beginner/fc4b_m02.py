@@ -94,7 +94,7 @@ q(3, "An engineer types 200.000000 degF into the gas temperature box of the Stud
 
 q(1, "A total pressure exactly equal to the water vapour pressure at the gas temperature is refused, in the same words as a pressure below it. Why refuse the equality?",
  "A gas at exactly its own water vapour pressure is all water and nothing else, so refusing the equal case is right rather than over strict.",
- ["The division would return a mole fraction of one, and a mole fraction of one is a finite number the chain below would carry all the way to a duty without objecting.",
+ ["The division would return a mole fraction above one at the equality, which is not a fraction at all, so the arithmetic below it fails on its own.",
   "The two cases share one guard, and a guard written with a strict comparison on one side has to refuse the equality on the other to stay consistent.",
   "The vapour pressure is quoted to four figures in the message."],
  "The refusal reads that the total pressure must exceed the water vapour pressure of 1.0696 psia at 104 degF, or the gas is not a gas. It is one guard read from either side of its own limit."),

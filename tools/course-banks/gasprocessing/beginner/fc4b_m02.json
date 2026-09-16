@@ -134,7 +134,7 @@
  {
   "prompt": "A total pressure exactly equal to the water vapour pressure at the gas temperature is refused, in the same words as a pressure below it. Why refuse the equality?",
   "options": [
-   "The division would return a mole fraction of one, and a mole fraction of one is a finite number the chain below would carry all the way to a duty without objecting.",
+   "The division would return a mole fraction above one at the equality, which is not a fraction at all, so the arithmetic below it fails on its own.",
    "A gas at exactly its own water vapour pressure is all water and nothing else, so refusing the equal case is right rather than over strict.",
    "The two cases share one guard, and a guard written with a strict comparison on one side has to refuse the equality on the other to stay consistent.",
    "The vapour pressure is quoted to four figures in the message."

@@ -140,12 +140,12 @@ q(0, "At 1.500000 gal per lb the overhead is 916.6667 Btu a gallon against a sen
   "The loop is lightly loaded, since a low ratio means fewer gallons and less water in each."],
  "A low ratio means fewer gallons each carrying more water. The sensible term sits at 1386.1650 the length of that table because the temperature rise per gallon never changed."),
 
-q(2, "At 2.000000 gal per lb the rich glycol returns at 94.138775510 weight percent and the engine adds no second sentence to its warning. Why not?",
+q(2, "At 1.999999 gal per lb the engine warns that the ratio is outside the customary 2.000000 to 5.000000 gal per lb, and adds no second sentence to it. Why not?",
  "The rich strength is still above the 90 the module accepts as a lean one.",
  ["The ratio is inside the customary band, so no warning of any kind is raised.",
   "The rich strength is not reported at that ratio, so nothing can be said about it.",
   "The second sentence is attached to the lean strength rather than to the ratio."],
- "At 2.000000 gal per lb the ratio is at the customary edge and the loop is intact at the rich end. At 1.000000 gal per lb the rich returns at 89.568932039 and the sentence appears."),
+ "A millionth outside the customary edge is still a loop that is intact at the rich end, which at 2.000000 gal per lb returns at 94.138775510 weight percent. At 1.000000 gal per lb the rich returns at 89.568932039 and the sentence appears."),
 
 q(0, "A lean gallon carries 0.465000000 lb of water at 95.000000 weight percent and 0.009300000 lb at 99.900000. What is that table saying?",
  "A stronger lean solution arrives at the contactor carrying less water of its own.",
