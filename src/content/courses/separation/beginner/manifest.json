@@ -1,0 +1,303 @@
+{
+  "app_slug": "separation",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-separator-is-for",
+      "title": "What a Separator Is For",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-one-vessel-one-job",
+          "title": "One vessel, one job",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-sizing-is-not-flashing",
+          "title": "Sizing is not flashing",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses-to-guess",
+          "title": "What it refuses to guess",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-units-it-works-in",
+          "title": "The units it works in",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-gas-at-separator-conditions",
+      "title": "The Gas at Separator Conditions",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-pressure-is-not-gauge-pressure",
+          "title": "Pressure is not gauge pressure",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-pseudo-criticals-from-gravity",
+          "title": "Pseudo-criticals from gravity",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-z-factor-and-its-range",
+          "title": "The z factor, and its range",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-density-from-the-gas-law",
+          "title": "Density from the gas law",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-rate-the-vessel-actually-sees",
+          "title": "The rate the vessel actually sees",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-k-value",
+      "title": "The K Value",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-six-published-rows",
+          "title": "Six published rows",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-a-mist-extractor-changes",
+          "title": "What a mist extractor changes",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-rule-of-thumb-with-a-floor",
+          "title": "A rule of thumb with a floor",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-vendor-number-beats-a-table",
+          "title": "A vendor number beats a table",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-settling",
+      "title": "Settling",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-two-densities",
+          "title": "The two densities",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-oil-water-and-the-mixture",
+          "title": "Oil, water and the mixture",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-souders-brown",
+          "title": "Souders-Brown",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-when-settling-has-no-answer",
+          "title": "When settling has no answer",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-published-cases",
+          "title": "The published cases",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-vertical-vessel",
+      "title": "The Vertical Vessel",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-diameter-the-gas-demands",
+          "title": "The diameter the gas demands",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-height-from-retention",
+          "title": "Height from retention",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-allowance-above-the-liquid",
+          "title": "The allowance above the liquid",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-diameter-somebody-chose",
+          "title": "A diameter somebody chose",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-margin-and-slenderness",
+          "title": "Margin, and slenderness",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-separator-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
