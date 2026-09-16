@@ -19,7 +19,7 @@
    "A non-finite value slipped past it is worse than having no guard at all."
   ],
   "answer": 3,
-  "explanation": "A caller that sees no error believes it has a number. That is why both modules were worked through input by input, and why the faults in this module came back as a number before they came back as a refusal."
+  "explanation": "A caller that sees no error believes it has a number. That is why both modules were worked through input by input: every fault in this module reached a caller with no error key on it before the guard beside it was written."
  },
  {
   "prompt": "A motor efficiency above one, a negative motor efficiency and a motor efficiency of zero all come back with the same sentence. Is that a defect?",

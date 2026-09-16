@@ -12,9 +12,9 @@ Split that across equal stages and each stage takes the root of the overall rati
 
 ## Why equal ratios
 
-Equal ratios are the customary split, and for a fixed overall ratio with the same inlet temperature at every stage they are also what keeps every stage inside one discharge-temperature envelope. A train with one hot stage and two lazy ones has the same overall job and a worse answer.
+Equal ratios are the split this engine applies. The equal-ratio rule gives the thermodynamic minimum number of stages for a given per-stage ratio, and that is the whole of what the rule is for here.
 
-That is why the ratio per stage is a single figure on the return rather than a list. The engine is not choosing a split. It is applying the equal-ratio rule and reporting the one number it produces.
+It is also why the ratio per stage is a single figure on the return rather than a list. The engine is not choosing a split. It is applying the equal-ratio rule and reporting the one number it produces, and the train of module 3 then runs on that one figure at every stage.
 
 ## The rule alone does not finish the job
 
@@ -32,4 +32,4 @@ The second mistake is treating the ratio rule as the answer because it is easy t
 
 ## Exercise
 
-Give the SOKU duty, its overall ratio and the ratio per stage the engine returns, and say how many stages the ratio rule alone demands. Then explain why equal ratios are the split the engine applies, and say what the ratio limit and the discharge temperature limit are each about.
+Give the SOKU duty, its overall ratio and the ratio per stage the engine returns, and say how many stages the ratio rule alone demands. Then say what the engine reports as the ratio per stage and why that comes back as one number rather than a list, and what the ratio limit and the discharge temperature limit are each about.

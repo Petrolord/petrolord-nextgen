@@ -34,7 +34,7 @@ A suction below the reduced pressure the fit data start at is accepted, exactly 
 
 That is the right call. The surface runs to the ideal-gas limit as the reduced pressure goes to zero, so a low-pressure suction is an ordinary machine. A window has two kinds of edge: extrapolation into unknown behaviour, and extrapolation toward known behaviour.
 
-## A window is a limit, and so are seven other things
+## A window is a limit, and so are eight other things
 
 A declared window is the well-behaved case, because the engine enforces it. Eight other things in this course are limits nobody enforces, held for literature: printed, used, and never deciding a graded answer.
 

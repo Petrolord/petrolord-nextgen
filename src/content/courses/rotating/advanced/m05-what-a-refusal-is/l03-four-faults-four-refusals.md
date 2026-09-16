@@ -1,6 +1,6 @@
 # Four faults, four refusals
 
-A refusal that names the wrong cause is worse than a bare one, because it sends a reader off to fix an input that was correct. Four faults in the compression module now have four messages, and each names the input that is actually wrong.
+A refusal that names the wrong cause is worse than a bare one, because it sends a reader off to fix an input that was correct. Four faults in the compression module have four messages, and each names the input that is actually wrong.
 
 {{panel:fc-compressor-explorer}}
 

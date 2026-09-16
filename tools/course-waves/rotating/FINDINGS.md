@@ -1281,3 +1281,96 @@ matching correctly refuses `60` against `60.000000`. It is prose in another
 agent's committed tier and it is a round-form question rather than a wrong
 figure, so it is reported rather than edited: the cheapest fix is for that
 lesson to cite the table's own values.
+
+
+---
+
+## wave.json SWEPT WHOLE, AND A GATE FALSE POSITIVE THAT IS NOT OURS. 2026-09-16.
+
+### The plan still carried the pre-repair audit paragraph
+
+`plan.tiers.advanced` was the second staleness found in this file after the
+screening thresholds, so it was swept whole rather than line by line. That one
+paragraph carried **seven claims the repair removed**, every one of them
+refuted by the digest the writers are told to work from:
+
+| the plan said | the digest says |
+| --- | --- |
+| "the train can break the very temperature limit it was staged against" | Section 13 prints **0 stages over the limit on every row** of both sweeps |
+| "eighteen returns that come back non-finite with no error key" | Section 15 prints a named refusal for each of them |
+| "two refusals that name the wrong cause" | Section 15 prints four faults each refused by its own name |
+| "a validity window one module in this package enforces and this one does not" | Section 15: this module IMPORTS the window from the module that declares it |
+| "two values of one gas constant" | Section 14 computes the two as ONE, difference 2.27e-13 |
+| "a gate that compares a value with itself" | Section 11 teaches the distinction between a check that can fail and an identity that cannot |
+| Expert m05 as an audit of what the engines accept | Expert m05 is now what a refusal IS |
+
+Re-cut onto what the sections teach now. **This is the same failure mode as the
+struck three-percent-head-drop promise**: a plan that outlives the engine it
+was written against tells a writer to teach something the digest does not
+carry, and a writer who trusts the plan writes it.
+
+`plan.capstones.heldItemCheck` item (7) also still read "the capstone generator
+must assert that rather than assume it, **because this module does not check
+it**", one clause away from a note added later saying the engine now does. The
+stale clause is gone.
+
+`plan.reCut` now opens with a PROVENANCE banner, because it is the one field
+whose job is to record what the plan used to say, and five history phrases
+legitimately live there. Nothing in it may reach a lesson.
+
+**Re-verified rather than assumed:** 6 modules and 26 lessons a tier against
+`structure.py`, 6 x 15 + 42 = 132 questions, 3 capstones x 6 graded fields = the
+18 rows `fields.json` carries, 3 panel ids, and every one of the 22 declared
+constants checked against the engine. Five of those constants do not appear in
+the digest as written, and that is CORRECT rather than stale: `constants` is a
+resolver source in its own right, and it carries the engine's exact values
+(0.7456998715822702, 379.48357185628737, 62.33766233766234) where the digest
+prints them rounded to its stated precision.
+
+### digestprose line 790 is a FALSE POSITIVE, and it is older than the repair
+
+The kit's `digestprose` fails line 790 as `[count-disagrees]`:
+
+    # The three tier readings, Associate m06, Professional m06 and Expert m06,
+      assemble the sections above; they introduce no number of their own.
+
+The rule reads "three" from the marker and then takes the largest numbered item
+in the block beneath, which is the **eight** held items, and calls the heading
+wrong. **They are two unrelated counts.** Three is the number of tier readings;
+eight is the number of held items, and the sentence that owns that list says so
+correctly two lines later: "Eight things are HELD FOR LITERATURE". The rule
+attributes the list to the nearest preceding `#` marker rather than to the
+plain-text sentence that actually introduces it.
+
+**It was asked whether the shared-section repair introduced it. It did not.**
+It fails identically on the digest before that repair AND on the original
+foundation digest at `dd9148bf`, which predates every heading change this wave
+made.
+
+**It is not being cleared by rewording**, and the kit's own doctrine is the
+reason: "A FRAMING MAY ONLY FAIL IF IT CANNOT BE READ INNOCENTLY... an
+ambiguous FAILURE is not [acceptable], because it makes an auditor reword a
+TRUE sentence to clear red." Rewording here would delete a correct count to
+satisfy a rule that picked the wrong list. Routed to the kit owner with the
+mechanism and a suggested fix: prefer a plain-text count sentence inside the
+block over the nearest `#` marker, or require the numbered list to begin before
+any other count sentence.
+
+Line 331 is a WARN rather than a fail, on "never used to refuse", which the
+kit's own benign list already names as reading equally as "is never employed
+to". It is correct English about present behaviour and is left alone.
+
+The five copy-rule failures at 441, 465 and 470 to 472 are the verbatim engine
+strings this wave already deferred. The kit gate reports `0 engine pin(s)`, so
+its deferral is not reaching them; the wave-local gate pins them by fragment
+and defers all five correctly. That mechanism is offered to the kit owner.
+
+### A gate caveat that changes how earlier results should be read
+
+`numsweep` accepts anything within 5e-7 relative at any significant-figure
+count, so mutating `417.801018` to `417.801019` in a real lesson reports **0
+unresolved**. **A numsweep zero says nothing about the last digit of a
+nine-figure literal.** FC3's "859 checked / 0 unresolved" is therefore weaker
+evidence than it reads, and is worth re-running once the kit compares at the
+precision the literal itself carries. Recorded here so no later reader takes
+that line at face value.

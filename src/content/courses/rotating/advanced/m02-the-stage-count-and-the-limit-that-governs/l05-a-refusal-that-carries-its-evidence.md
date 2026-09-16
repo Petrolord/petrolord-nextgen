@@ -6,7 +6,7 @@ A refusal that says only "it cannot be done" sends a reader back to the inputs w
 
 ## What comes back besides the sentence
 
-The return that gives up at the cap is an object, and alongside its error string it carries four numbers. The stage counts tried: 12. The coolest discharge those twelve equal stages could reach: 317.9889 degF. The limit it was measured against: 110.0000 degF. The inlet it was measured from: 100.0000 degF. It also carries the overall ratio it was working on, 1000.000000000.
+The return that gives up at the cap is an object, and alongside its error string it carries five numbers. The stage counts tried: 12. The coolest discharge those twelve equal stages could reach: 317.9889 degF. The limit it was measured against: 110.0000 degF. The inlet it was measured from: 100.0000 degF. And the overall ratio it was working on: 1000.000000000.
 
 Those are not decoration. Each one answers a question a reader would otherwise have to re-run the engine to answer.
 
@@ -34,4 +34,4 @@ The mistake is catching the error string and discarding the rest of the object. 
 
 ## Exercise
 
-List the four measurements the stage-count refusal carries beside its message and give each one for the probe that reaches the cap. Work out the gap between the coolest reachable discharge and the stated limit, and say what a gap that size tells a reader about which input is at fault.
+List the five measurements the stage-count refusal carries beside its message and give each one for the probe that reaches the cap. Work out the gap between the coolest reachable discharge and the stated limit, and say what a gap that size tells a reader about which input is at fault.

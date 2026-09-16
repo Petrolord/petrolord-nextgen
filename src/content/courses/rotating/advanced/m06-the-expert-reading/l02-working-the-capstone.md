@@ -32,7 +32,7 @@ Do not quote a head without saying which one it is. A polytropic head divided by
 
 ## Precision and words
 
-Gas work prints to four decimals for temperatures, heads, Btu per hr and acfm; exponents, small factors and MMscfd to nine; ratios and percentages to six; counts are whole numbers. Quote figures as the engine prints them.
+Gas work prints to four decimals for temperatures, heads, Btu per hr and acfm. Exponents, compressibilities, the ratios this tier computes and MMscfd print to nine places, which is where the ratio per stage and the overall ratio both belong, so neither of them is a six-decimal figure. The figures a duty states, and percentages, print to six, and counts are whole numbers. Quote figures as the engine prints them.
 
 Where an answer is a word rather than a number, give the word. "Governed by discharge temperature" is an answer, and it is the field that tells a reviewer which input to argue about.
 

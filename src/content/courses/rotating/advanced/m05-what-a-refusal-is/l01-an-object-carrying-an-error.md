@@ -8,7 +8,7 @@ Neither of these modules throws. A bad input comes back as an ordinary returned 
 
 A caller checks a property rather than catching an exception. That is a deliberate shape and it has one consequence worth stating plainly: the property check is the only check most callers ever make, so a non-finite value that slips past it is worse than having no guard at all. A caller that sees no `error` believes it has a number.
 
-That is why both modules were worked through input by input, and the faults below each came back as a number before they came back as a refusal.
+That is why both modules were worked through input by input. Every fault below reached a caller with no error key on it before the guard beside it was written, some as a plausible figure and some as a field that was quietly NaN or Infinity.
 
 ## The pump module, refusing by name
 
