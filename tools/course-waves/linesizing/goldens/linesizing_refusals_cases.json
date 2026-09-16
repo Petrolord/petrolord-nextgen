@@ -1,0 +1,401 @@
+[
+ {
+  "fn": "liquidLineDrop",
+  "input": {
+   "idIn": 6,
+   "lengthFt": 100,
+   "muCp": 1,
+   "qBpd": -5,
+   "rhoLbFt3": 55
+  },
+  "label": "a negative rate",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "liquidLineDrop",
+  "input": {
+   "idIn": 6,
+   "lengthFt": 100,
+   "muCp": 0,
+   "qBpd": 5000,
+   "rhoLbFt3": 55
+  },
+  "label": "no viscosity",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "liquidLineDrop",
+  "input": {
+   "idIn": 6.065,
+   "lengthFt": 15000,
+   "muCp": 3,
+   "qBpd": 5000,
+   "rhoLbFt3": 53,
+   "sumK": -5
+  },
+  "label": "a negative fitting sum",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "liquidLineDrop",
+  "input": {
+   "idIn": 6.065,
+   "lengthFt": 15000,
+   "muCp": 3,
+   "qBpd": 5000,
+   "rhoLbFt3": 53,
+   "roughnessIn": -0.01
+  },
+  "label": "a negative roughness",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "liquidLineDrop",
+  "input": {
+   "elevChangeFt": 9000,
+   "idIn": 6.065,
+   "lengthFt": 100,
+   "muCp": 3,
+   "qBpd": 5000,
+   "rhoLbFt3": 53
+  },
+  "label": "an elevation change longer than the line",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "liquidLineTraverse",
+  "input": {
+   "p1Psia": 100,
+   "profile": []
+  },
+  "label": "an empty profile",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "weymouthQ",
+  "input": {
+   "idIn": 8,
+   "lengthMi": 10,
+   "p1Psia": 500,
+   "p2Psia": 600,
+   "sg": 0.65,
+   "tAvgR": 540,
+   "zAvg": 0.9
+  },
+  "label": "a dead line",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "weymouthQ",
+  "input": {
+   "idIn": 12,
+   "lengthMi": 0,
+   "p1Psia": 900,
+   "p2Psia": 500,
+   "sg": 0.65,
+   "tAvgR": 530,
+   "zAvg": 0.88
+  },
+  "label": "a line of no length",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "weymouthQ",
+  "input": {
+   "idIn": 12,
+   "lengthMi": -50,
+   "p1Psia": 900,
+   "p2Psia": 500,
+   "sg": 0.65,
+   "tAvgR": 530,
+   "zAvg": 0.88
+  },
+  "label": "a negative length",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "weymouthQ",
+  "input": {
+   "idIn": -12,
+   "lengthMi": 50,
+   "p1Psia": 900,
+   "p2Psia": 500,
+   "sg": 0.65,
+   "tAvgR": 530,
+   "zAvg": 0.88
+  },
+  "label": "a negative bore",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "weymouthQ",
+  "input": {
+   "idIn": 12,
+   "lengthMi": 50,
+   "p1Psia": 900,
+   "p2Psia": 500,
+   "sg": 0.65,
+   "tAvgR": 530,
+   "zAvg": 0
+  },
+  "label": "a z factor of zero",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "weymouthQ",
+  "input": {
+   "idIn": 12,
+   "lengthMi": 50,
+   "p1Psia": 900,
+   "p2Psia": 500,
+   "sg": 0.65,
+   "tAvgR": 0,
+   "zAvg": 0.9
+  },
+  "label": "an absolute temperature of zero",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "weymouthQ",
+  "input": {
+   "efficiency": 3,
+   "idIn": 12,
+   "lengthMi": 50,
+   "p1Psia": 900,
+   "p2Psia": 500,
+   "sg": 0.65,
+   "tAvgR": 530,
+   "zAvg": 0.88
+  },
+  "label": "an efficiency above one",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "weymouthQ",
+  "input": {
+   "efficiency": -1,
+   "idIn": 12,
+   "lengthMi": 50,
+   "p1Psia": 900,
+   "p2Psia": 500,
+   "sg": 0.65,
+   "tAvgR": 530,
+   "zAvg": 0.88
+  },
+  "label": "a negative efficiency",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "panhandleAQ",
+  "input": {
+   "idIn": 12,
+   "lengthMi": 50,
+   "p1Psia": 900,
+   "p2Psia": 500,
+   "sg": 0,
+   "tAvgR": 530,
+   "zAvg": 0.88
+  },
+  "label": "a gas of no gravity",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "generalFlowQ",
+  "input": {
+   "idIn": 12,
+   "lengthMi": 50,
+   "muCp": 0,
+   "p1Psia": 900,
+   "p2Psia": 500,
+   "sg": 0.65,
+   "tAvgR": 530,
+   "zAvg": 0.88
+  },
+  "label": "a gas of no viscosity",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "gasOutletPressure",
+  "input": {
+   "equation": "nonsense",
+   "qScfd": 1
+  },
+  "label": "an unknown equation",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "gasOutletPressure",
+  "input": {
+   "equation": "weymouth",
+   "idIn": 8,
+   "lengthMi": 25,
+   "p1Psia": 1000,
+   "qScfd": 1000000000000.0,
+   "sg": 0.65,
+   "tAvgR": 540,
+   "zAvg": 0.87
+  },
+  "label": "a rate the line cannot carry",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "gasOutletPressure",
+  "input": {
+   "equation": "weymouth",
+   "idIn": 8,
+   "lengthMi": 25,
+   "p1Psia": 1000,
+   "qScfd": 0,
+   "sg": 0.65,
+   "tAvgR": 540,
+   "zAvg": 0.87
+  },
+  "label": "a rate of zero",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "requiredWallIn",
+  "input": {
+   "odIn": 8.625,
+   "smysPsi": 42000
+  },
+  "label": "no design pressure",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "requiredWallIn",
+  "input": {
+   "code": "B99",
+   "designPsig": 1000,
+   "odIn": 8.625,
+   "smysPsi": 42000
+  },
+  "label": "an unknown design code",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "requiredWallIn",
+  "input": {
+   "code": "B31.8",
+   "designPsig": 1000,
+   "locationClass": 9,
+   "odIn": 8.625,
+   "smysPsi": 42000
+  },
+  "label": "a location class that does not exist",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "requiredWallIn",
+  "input": {
+   "designPsig": 1000,
+   "odIn": 8.625,
+   "smysPsi": 42000,
+   "tempDerate": 0
+  },
+  "label": "a temperature derate of zero",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "requiredWallIn",
+  "input": {
+   "designPsig": 1000,
+   "jointFactor": 0,
+   "odIn": 8.625,
+   "smysPsi": 42000
+  },
+  "label": "a joint factor of zero",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "requiredWallIn",
+  "input": {
+   "corrosionAllowanceIn": -0.5,
+   "designPsig": 1000,
+   "odIn": 8.625,
+   "smysPsi": 42000
+  },
+  "label": "a negative corrosion allowance",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "maopPsig",
+  "input": {
+   "corrosionAllowanceIn": 0.0625,
+   "odIn": 8.625,
+   "smysPsi": 42000,
+   "wallIn": 0.04
+  },
+  "label": "no wall left after the allowance",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "sweptLiquidBbl",
+  "input": {
+   "holdupFrac": 1.4,
+   "idIn": 6,
+   "lengthFt": 100
+  },
+  "label": "a holdup above one",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "sweptLiquidBbl",
+  "input": {
+   "holdupFrac": 0.1,
+   "idIn": 0,
+   "lengthFt": 1000
+  },
+  "label": "no bore",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "sweptLiquidBbl",
+  "input": {
+   "holdupFrac": 0.1,
+   "idIn": 6,
+   "lengthFt": -100
+  },
+  "label": "a negative length",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "pigRun",
+  "input": {
+   "lengthFt": 100,
+   "pigSpeedFtS": 0
+  },
+  "label": "a pig that does not move",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "piggingInterval",
+  "input": {
+   "dropoutBpd": 25,
+   "maxSlugBbl": 10,
+   "sweptBbl": 50
+  },
+  "label": "a sweep larger than the catcher",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "piggingInterval",
+  "input": {
+   "dropoutBpd": 25,
+   "maxSlugBbl": 100,
+   "sweptBbl": -500
+  },
+  "label": "a negative sweep",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "piggingInterval",
+  "input": {
+   "dropoutBpd": 0,
+   "maxSlugBbl": 100,
+   "sweptBbl": 10
+  },
+  "label": "no dropout",
+  "oracleExpects": "refuse"
+ }
+]

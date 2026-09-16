@@ -1,0 +1,491 @@
+# FC2 Line Sizing & Hydraulics. Teaching digest.
+# Liquid work prints to six decimals (ft per s, psi, inches, ratios, friction factors); gas rates, Reynolds numbers, barrels, hours and days to four; counts are whole numbers.
+# Field units: bpd for liquid, scfd for gas, inches of bore, FEET of length for liquid work and MILES for gas work (the unit the published transmission forms are stated in), psia, degR, lb per ft3, cp.
+# Nothing here is read from a clock or a random number, so every line reproduces.
+
+# SECTION 1: What the engine sizes, and what it refuses (owned by Associate m01)
+
+# App surface: the Pipeline & Line Sizing Studio runs this chain live. A bore gives an area, the area and the rate give a velocity, the velocity gives a Reynolds number, the Reynolds number and the relative roughness give a friction factor, and the friction factor and the length give the loss.
+- This engine sizes ONE LINE. It says what a single pipe costs in pressure and what bore it needs. A system of lines that share a header is a network solve and lives in engines/production/networkSolve.js.
+- The multiphase half is NOT in this engine. Two-phase pressure drop, flow regime and holdup are the Suite Beggs and Brill correlation, which is app code, and the engine takes the holdup as an INPUT wherever it needs one.
+- A state the method has no answer for comes back as an object with an `error` string. This engine throws nothing: every refusal is a returned object, so a caller checks a property rather than catching.
+- Liquid rates are taken at LINE conditions, the dead-liquid case downstream of separation. A live-oil flowline upstream of separation carries full PVT and belongs elsewhere.
+
+States the method has no answer for, engine messages verbatim:
+- a liquid line with no rate: { error: "liquid line drop needs positive rate, bore, length, density and viscosity" }
+- a liquid line with a negative rate: { error: "liquid line drop needs positive rate, bore, length, density and viscosity" }
+- a liquid line with no bore: { error: "liquid line drop needs positive rate, bore, length, density and viscosity" }
+- a liquid line with no length: { error: "liquid line drop needs positive rate, bore, length, density and viscosity" }
+- a liquid line with no viscosity: { error: "liquid line drop needs positive rate, bore, length, density and viscosity" }
+- a traverse with no profile: { error: "a traverse needs at least one profile segment" }
+- a gas line whose outlet meets its inlet: { error: "no flow: outlet pressure meets or exceeds inlet head" }
+- an outlet-pressure solve on an unknown equation: { error: "unknown gas flow equation 'cylindrical'" }
+- an outlet-pressure solve with no rate: { error: "outlet-pressure solve needs a positive rate" }
+- an outlet-pressure solve the line cannot deliver: { error: "the line cannot carry the target rate even to atmospheric outlet" }
+- a wall with no design pressure: { error: "wall thickness needs positive design pressure, OD and SMYS" }
+- a wall to a code that does not exist: { error: "unknown design code 'B99'" }
+- a wall to a B31.8 location class that does not exist: { error: "B31.8 has no location class 9" }
+- a rating with no wall left after the allowance: { error: "no pressure-bearing wall left after corrosion allowance" }
+- a sweep with a holdup above one: { error: "holdup must be between 0 and 1" }
+- a pig that does not move: { error: "a pig run needs a positive length and speed" }
+- an interval with no dropout: { error: "an interval needs a positive slug limit and dropout rate" }
+- an interval whose sweep already overfills the catcher: { error: "the sweep alone already exceeds the slug limit: pig more often or resize the catcher" }
+
+# The units it works in. Four constants the module keeps to itself are measured here by asking the engine a question about itself, because a number typed into this file would not be an engine return.
+gc, measured as the liquid density times the velocity squared over twice 144 times the one-velocity-head fittings loss: 32.174000 lbm ft per lbf s2 (derived from the engine's own velocity 2.244621 ft/s and fittings loss 0.029634 psi at a resistance sum of one).
+one centipoise in lbm per ft per s, measured as the density times the velocity times the bore in feet over the viscosity times the Reynolds number: 6.7197000000e-4 (derived from the engine's velocity 2.244621 ft/s and Reynolds number 48431.2523).
+cubic feet per barrel, measured as the flow area times the length over the engine's line volume: 5.6145833333333 (derived from the engine's line volume 1633.5349 bbl).
+seconds per day, measured as the rate times the cubic feet per barrel above over the area times the velocity: 86400.000000 (derived on the row).
+seconds per hour, measured as a length over the pig speed times the engine's run hours: 3600.000000 (derived from the engine's run time 2.444444 h).
+A fifth, the feet in a mile, cannot be measured this way: the module declares it and then never uses it, so no engine call depends on it and nothing can be asked about it.
+The base conditions the published gas forms are stated at, which the module DOES export: 520.000000 degR and 14.650000 psia. That base pressure is not atmospheric, and the two are a quarter of a psi apart.
+
+# SECTION 2: Velocity, Reynolds and the friction factor (owned by Associate m02)
+
+The published friction cases, engine against golden:
+| Reynolds number | relative roughness | engine f | golden f | regime the engine reports |
+| --- | --- | --- | --- | --- |
+| 1500.0000 | 0.000000 | 0.042666666667 | 0.042666666667 | laminar |
+| 5000.0000 | 0.000100 | 0.037504518014 | 0.037504518014 | turbulent |
+| 50000.0000 | 0.000300 | 0.021926421295 | 0.021926421295 | turbulent |
+| 1000000.0000 | 0.001000 | 0.019943465840 | 0.019943465840 | turbulent |
+| 10000000.0000 | 0.000050 | 0.010859745054 | 0.010859745054 | turbulent |
+| 3000.0000 | 0.002000 | 0.045288801703 | 0.045288801703 | transitional |
+
+The two branches, walked across the boundary the engine draws at Reynolds 2100 and the one it draws at 4000, on a smooth pipe:
+| Reynolds number | f | regime |
+| --- | --- | --- |
+| 1500.0000 | 0.042666666667 | laminar |
+| 2099.0000 | 0.030490709862 | laminar |
+| 2100.0000 | 0.048678586645 | transitional |
+| 2500.0000 | 0.046053830366 | transitional |
+| 3000.0000 | 0.043519188769 | transitional |
+| 3999.0000 | 0.039909964901 | transitional |
+| 4000.0000 | 0.039907014056 | turbulent |
+| 5000.0000 | 0.037392727578 | turbulent |
+At the OGBIA relative roughness of 0.0002255356 (derived: the roughness over the bore) the friction factor goes from 0.0304761905 to 0.0488545386 across one unit of Reynolds number, a jump of 60.303955 percent (derived from the two engine values on this row).
+The lower value is reported as laminar and the upper as transitional, and the upper one is computed on the turbulent branch: the word and the arithmetic are saying different things in the band from 2100 to 4000.
+
+Relative roughness alone, at one Reynolds number, which is the vertical axis of the Moody chart:
+| relative roughness | f at Reynolds 100000.0000 | f at Reynolds 100000000.0000 |
+| --- | --- | --- |
+| 0.000000 | 0.017989773084 | 0.005940466352 |
+| 0.000010 | 0.018043802895 | 0.008187559103 |
+| 0.000100 | 0.018513866077 | 0.011999050555 |
+| 0.000300 | 0.019469127552 | 0.014945043721 |
+| 0.001000 | 0.022174535945 | 0.019638632837 |
+| 0.003000 | 0.027470859836 | 0.026166325472 |
+| 0.010000 | 0.038503543527 | 0.037904323387 |
+| 0.050000 | 0.071780929441 | 0.071550904091 |
+A rough pipe stops caring about the Reynolds number and a smooth one never does: read the two columns against each other down the table.
+
+The OGBIA line walked from turbulent into laminar by viscosity alone, at its built bore:
+| viscosity cp | velocity ft/s | Reynolds number | f | regime | friction loss psi |
+| --- | --- | --- | --- | --- | --- |
+| 1.000000 | 2.244621 | 121078.1307 | 0.0185483924 | turbulent | 21.818211 |
+| 2.500000 | 2.244621 | 48431.2523 | 0.0218149625 | turbulent | 25.660631 |
+| 5.000000 | 2.244621 | 24215.6261 | 0.0252475635 | turbulent | 29.698351 |
+| 10.000000 | 2.244621 | 12107.8131 | 0.0297536873 | turbulent | 34.998841 |
+| 20.000000 | 2.244621 | 6053.9065 | 0.0356879992 | turbulent | 41.979288 |
+| 30.000000 | 2.244621 | 4035.9377 | 0.0400309190 | turbulent | 47.087803 |
+| 40.000000 | 2.244621 | 3026.9533 | 0.0436032737 | transitional | 51.289913 |
+| 60.000000 | 2.244621 | 2017.9688 | 0.0317150585 | laminar | 37.305974 |
+| 120.000000 | 2.244621 | 1008.9844 | 0.0634301170 | laminar | 74.611948 |
+The velocity does not move, because velocity is rate over area and neither of those is the viscosity. Everything downstream of the Reynolds number does.
+
+# SECTION 3: Three losses kept apart (owned by Associate m03)
+
+The OGBIA crude export line as built: 12000.000000 bpd of 54.500000 lb/ft3 crude at 2.500000 cp, through 7.981000 in of bore over 26400.000000 ft, on commercial steel at 0.001800 in.
+Velocity 2.244621 ft/s, Reynolds number 48431.2523, regime turbulent, friction factor 0.0218149625.
+Friction 25.660631 psi, fittings 0.000000 psi, elevation 0.000000 psi, total 25.660631 psi, gradient 0.0009719936 psi per ft.
+The three are returned SEPARATELY because they answer different questions. Friction is what a bigger pipe fixes. Elevation is what no pipe fixes.
+
+The fittings on the isometric, and the resistance sum the schedule builds from them:
+| fitting | count | K each | K total |
+| --- | --- | --- | --- |
+| elbow90LR | 4 | 0.300000 | 1.200000 |
+| gateValve | 2 | 0.150000 | 0.300000 |
+| swingCheck | 1 | 2.000000 | 2.000000 |
+| suddenExit | 1 | 1.000000 | 1.000000 |
+The engine's resistance sum for that list: 4.500000 velocity heads (engine).
+On the whole 26400.000000 ft line those fittings cost 0.133351 psi against 25.660631 psi of pipe friction, a share of 0.005170 of the total (derived from the two engine values on this row).
+On a 300.000000 ft manifold run carrying the same duty and the same fittings, the pipe costs 0.291598 psi and the fittings cost 0.133351 psi, a share of 0.313805. The fittings did not change; the pipe did.
+
+Elevation, the same line up and down:
+| elevation change ft | friction psi | elevation psi | total psi | gradient psi per ft |
+| --- | --- | --- | --- | --- |
+| 0.000000 | 25.660631 | 0.000000 | 25.660631 | 0.0009719936 |
+| 420.000000 | 25.660631 | 158.958333 | 184.618965 | 0.0069931426 |
+| -420.000000 | 25.660631 | -158.958333 | -133.297702 | -0.0050491554 |
+The friction term is identical in all three rows and the elevation term is symmetric about zero, so a hill is added to a pressure drop rather than mixed into it.
+
+Roughness, which is the pipe and not the fluid:
+| catalogue id | roughness in | relative roughness | f | friction loss psi |
+| --- | --- | --- | --- | --- |
+| commercialSteel | 0.001800 | 0.0002255356 | 0.0218149625 | 25.660631 |
+| steelUsed | 0.006000 | 0.0007517855 | 0.0234342460 | 27.565372 |
+| internallyCoated | 0.000200 | 0.0000250595 | 0.0211296555 | 24.854515 |
+| hdpe | 0.000060 | 0.0000075179 | 0.0210675199 | 24.781425 |
+
+The published liquid cases, engine against golden:
+- 5000.0000 bpd in 6.065000 in over 15000.000000 ft, elevation 0.000000 ft, resistance sum 0.000000: velocity 1.619514 ft/s, Reynolds 21519.8423, f 0.0260878890, regime turbulent; friction 11.615250 psi, fittings 0.000000 psi, elevation 0.000000 psi, total 11.615250 psi.
+    golden: velocity 1.619514, Reynolds 21519.8751, f 0.0260878801, friction 11.615228 psi, total 11.615228 psi (golden).
+- 20000.0000 bpd in 10.020000 in over 52800.000000 ft, elevation 250.000000 ft, resistance sum 4.500000: velocity 2.373400 ft/s, Reynolds 20644.5578, f 0.0260794714, regime turbulent; friction 56.140803 psi, fittings 0.153195 psi, elevation 97.222222 psi, total 153.516220 psi.
+    golden: velocity 2.373400, Reynolds 20644.5892, f 0.0260794621, friction 56.140698 psi, total 153.516115 psi (golden).
+- 800.0000 bpd in 2.067000 in over 3000.000000 ft, elevation -60.000000 ft, resistance sum 2.000000: velocity 2.230927 ft/s, Reynolds 35684.4798, f 0.0249265571, regime turbulent; friction 14.550645 psi, fittings 0.067033 psi, elevation -26.000000 psi, total -11.382322 psi.
+    golden: velocity 2.230927, Reynolds 35684.5342, f 0.0249265509, friction 14.550619 psi, total -11.382348 psi (golden).
+- 150.0000 bpd in 2.067000 in over 5000.000000 ft, elevation 0.000000 ft, resistance sum 0.000000: velocity 0.418299 ft/s, Reynolds 15.5476, f 4.1163843599, regime laminar; friction 130.867123 psi, fittings 0.000000 psi, elevation 0.000000 psi, total 130.867123 psi.
+    golden: velocity 0.418299, Reynolds 15.5476, f 4.1163780818, friction 130.866726 psi, total 130.866726 psi (golden).
+
+# SECTION 4: The erosional limit (owned by Associate m04)
+
+# App surface: the studio puts an RP 14E verdict on every row of its sizing sweep, which is what stops a bore being chosen on pressure drop alone.
+The published c factor rows, all three overridable:
+| id | label | c |
+| --- | --- | --- |
+| continuous | RP 14E continuous service | 100.000000 |
+| intermittent | RP 14E intermittent service | 125.000000 |
+| cleanInhibited | Clean, inhibited service (operator practice) | 175.000000 |
+An id the table does not carry does not refuse and does not return null: erosionalC('sandLaden') comes back as {"id":"continuous","label":"RP 14E continuous service","c":100}, which is the first row under its own label.
+
+The limit at the OGBIA crude density, and what each c factor allows through the built bore:
+| c | erosional velocity ft/s | line velocity ft/s | ratio | exceeded | margin percent | largest rate bpd |
+| --- | --- | --- | --- | --- | --- | --- |
+| 100.000000 | 13.545709 | 2.244621 | 0.165707 | false | 83.429285 | 72416.9110 |
+| 125.000000 | 16.932137 | 2.244621 | 0.132566 | false | 86.743428 | 90521.1388 |
+| 175.000000 | 23.704991 | 2.244621 | 0.094690 | false | 90.531020 | 126729.5943 |
+The engine's own flow area for that bore is 0.347410 ft2, and the velocity the erosional check reads, 2.244621 ft/s, is the same velocity the pressure drop read.
+
+Density is the whole of the limit: the same c factor against four fluids.
+| mixture density lb/ft3 | erosional velocity at c 100 | at c 125 | at c 175 |
+| --- | --- | --- | --- |
+| 5.000000 | 44.721360 | 55.901699 | 78.262379 |
+| 20.000000 | 22.360680 | 27.950850 | 39.131190 |
+| 45.000000 | 14.907120 | 18.633900 | 26.087460 |
+| 62.400000 | 12.659242 | 15.824053 | 22.153674 |
+A light gas is allowed to run several times faster than a dense liquid, which is why the limit bites hardest on wet gas and hardly at all on crude.
+
+# HELD FOR LITERATURE, taught as a limit and never graded: the three c factor rows. The recommended practice itself says its own figures are conservative, and the third row is labelled as operator practice with no publication behind it. Every graded erosional value in this course states its own c factor.
+
+# SECTION 5: Choosing a bore (owned by Associate m05)
+
+The OGBIA duty in every bore the vendored schedule carries, with the RP 14E verdict at the continuous-service c factor:
+| nominal | schedule | outside diameter in | wall in | bore in | velocity ft/s | Reynolds | friction loss psi | total psi | erosional ft/s | ratio | inside the limit |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2 | 40 | 2.375000 | 0.154000 | 2.067000 | 33.463911 | 187000.3989 | 20803.315944 | 20803.315944 | 13.545709 | 2.470443 | false |
+| 2 | 80 | 2.375000 | 0.218000 | 1.939000 | 38.027872 | 199344.9327 | 28841.350797 | 28841.350797 | 13.545709 | 2.807374 | false |
+| 3 | 40 | 3.500000 | 0.216000 | 3.068000 | 15.189621 | 125987.5569 | 2820.384450 | 2820.384450 | 13.545709 | 1.121360 | false |
+| 4 | 40 | 4.500000 | 0.237000 | 4.026000 | 8.820843 | 96008.4015 | 728.175700 | 728.175700 | 13.545709 | 0.651191 | true |
+| 4 | 80 | 4.500000 | 0.337000 | 3.826000 | 9.767147 | 101027.1366 | 937.455844 | 937.455844 | 13.545709 | 0.721051 | true |
+| 6 | 40 | 6.625000 | 0.280000 | 6.065000 | 3.886834 | 63731.2159 | 97.306913 | 97.306913 | 13.545709 | 0.286942 | true |
+| 6 | 80 | 6.625000 | 0.432000 | 5.761000 | 4.307863 | 67094.2240 | 125.058374 | 125.058374 | 13.545709 | 0.318024 | true |
+| 8 | 40 | 8.625000 | 0.322000 | 7.981000 | 2.244621 | 48431.2523 | 25.660631 | 25.660631 | 13.545709 | 0.165707 | true |
+| 8 | 80 | 8.625000 | 0.500000 | 7.625000 | 2.459110 | 50692.4360 | 32.002404 | 32.002404 | 13.545709 | 0.181542 | true |
+| 10 | 40 | 10.750000 | 0.365000 | 10.020000 | 1.424040 | 38575.8308 | 8.561327 | 8.561327 | 13.545709 | 0.105128 | true |
+| 12 | 40 | 12.750000 | 0.406000 | 11.938000 | 1.003216 | 32378.1056 | 3.689918 | 3.689918 | 13.545709 | 0.074062 | true |
+| 16 | 40 | 16.000000 | 0.500000 | 15.000000 | 0.635441 | 25768.6550 | 1.236026 | 1.236026 | 13.545709 | 0.046911 | true |
+The erosional velocity is the same on every row, 13.545709 ft/s, because it depends on the density and the c factor and not on the bore. What changes down the table is the velocity that has to sit under it.
+
+The table is ordered by nominal size and then by schedule, and that order is NOT the order of the bores:
+bores in table order: 2.067000, 1.939000, 3.068000, 4.026000, 3.826000, 6.065000, 5.761000, 7.981000, 7.625000, 10.020000, 11.938000, 15.000000.
+A heavier schedule is a thicker wall and a smaller bore on the same outside diameter, and it sits after the lighter one, so reading down the table crosses back and forth over the bore that a line actually needs.
+
+The same outside diameter in two schedules:
+| nominal | outside diameter in | wall light | wall heavy | bore light | bore heavy | velocity light ft/s | velocity heavy ft/s | total psi light | total psi heavy |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2 | 2.375000 | 0.154000 | 0.218000 | 2.067000 | 1.939000 | 33.463911 | 38.027872 | 20803.315944 | 28841.350797 |
+| 4 | 4.500000 | 0.237000 | 0.337000 | 4.026000 | 3.826000 | 8.820843 | 9.767147 | 728.175700 | 937.455844 |
+| 6 | 6.625000 | 0.280000 | 0.432000 | 6.065000 | 5.761000 | 3.886834 | 4.307863 | 97.306913 | 125.058374 |
+| 8 | 8.625000 | 0.322000 | 0.500000 | 7.981000 | 7.625000 | 2.244621 | 2.459110 | 25.660631 | 32.002404 |
+
+Against a velocity ceiling of 6.000000 ft/s as well as the erosional limit, 7 of the 12 bores pass.
+The first of them in TABLE order is 6 in schedule 40, bore 6.065000 in. The smallest passing BORE is 6 in schedule 80, bore 5.761000 in. On this duty they are DIFFERENT rows.
+
+# SECTION 6: The Associate reading, one line end to end (owned by Associate m06)
+
+OGBIA end to end: 12000.000000 bpd of 54.500000 lb/ft3 crude at 2.500000 cp through 7.981000 in of bore over 26400.000000 ft gives a velocity of 2.244621 ft/s and a Reynolds number of 48431.2523, which is turbulent; at a relative roughness of 0.0002255356 the friction factor is 0.0218149625 and the pipe costs 25.660631 psi; the isometric's 4.500000 velocity heads add 0.133351 psi; and the erosional limit at the continuous-service c factor is 13.545709 ft/s, which this line uses 0.165707 of.
+Everything in that sentence is closed form. Nothing in it iterated except the friction factor, and nothing in it compressed. Both of those change in the next tier.
+
+# SECTION 7: A gas line is not a liquid line (owned by Professional m01)
+
+The SOKU gas trunk as the studio reads it: 850.000000 psia at the station, 620.000000 psia at the delivery point, 11.938000 in of bore over 32.000000 miles, gas gravity 0.670000, average flowing temperature 535.000000 degR, average compressibility 0.885000, efficiency 1.000000.
+The driving group is the difference of the SQUARES: 850.000000 squared less 620.000000 squared is 338100.0000 psia squared (derived, stated on the row). A liquid line subtracts pressures; a gas line subtracts their squares, because the density the friction sees is itself proportional to the pressure.
+The base the published forms report at: 520.000000 degR and 14.650000 psia. A rate in scfd is a rate AT THAT BASE, so two forms quoted at different bases are not comparable even when they agree.
+A line whose outlet meets its inlet has no answer at all: at 900.000000 psia out against 850.000000 psia in, the engine returns { error: "no flow: outlet pressure meets or exceeds inlet head" }.
+A line that is nearly dead does have one: at 845.000000 psia out, five psi below the inlet, Weymouth gives 10466013.4729 scfd.
+
+# SECTION 8: The four transmission forms (owned by Professional m02)
+
+The SOKU trunk through all four, on identical inputs:
+| form | rate scfd | against Weymouth |
+| --- | --- | --- |
+| weymouth | 66104956.1404 | 1.000000 |
+| panhandleA | 86864172.0167 | 1.314034 |
+| panhandleB | 88369202.2673 | 1.336801 |
+| general | 73861363.0502 | 1.117335 |
+The spread from the lowest to the highest is 1.336801 (derived from the column above). Four published answers to one question, and choosing between them is engineering rather than arithmetic.
+General Flow also returns the friction factor it settled on, 0.0112132010, which is the only one of the four that says anything about the pipe's roughness at all.
+
+The diameter exponent of each form, measured by doubling the bore and reading the engine:
+| form | rate at 10 in | rate at 20 in | measured exponent |
+| --- | --- | --- | --- |
+| weymouth | 41217643.2456 | 261715720.9907 | 2.6666666667 |
+| panhandleA | 54628394.3526 | 335409354.2407 | 2.6182000000 |
+| panhandleB | 56450013.6000 | 326039290.8986 | 2.5300000000 |
+| general | 46594890.2141 | 282004596.2750 | 2.5974750199 |
+The exponent is derived as the base-two logarithm of the ratio of the two engine rates on each row. It is the single most important number in a gas form, because it is what says how much a bigger pipe buys.
+
+The efficiency multiplier, which every form carries:
+| efficiency | weymouth scfd | panhandleA scfd | panhandleB scfd | general scfd |
+| --- | --- | --- | --- | --- |
+| 0.850000 | 56189212.7194 | 73834546.2142 | 75113821.9272 | 62616519.4059 |
+| 0.900000 | 59494460.5264 | 78177754.8151 | 79532282.0406 | 66364215.5127 |
+| 0.950000 | 62799708.3334 | 82520963.4159 | 83950742.1539 | 70112523.9958 |
+| 1.000000 | 66104956.1404 | 86864172.0167 | 88369202.2673 | 73861363.0502 |
+# HELD FOR LITERATURE, taught as a limit and never graded: the efficiency factor. It multiplies every form linearly and no publication in this package stands behind any particular value of it. Every graded gas value in this course states its own efficiency.
+
+The published gas cases, engine against golden:
+- weymouth, 12.000000 in over 50.000000 mi, 900.000000 to 500.000000 psia, elevation 0.000000 ft, efficiency 1.000000: engine 70590220.5870 scfd, golden 70644595.1840 scfd (golden).
+- weymouth, 6.065000 in over 10.000000 mi, 1200.000000 to 900.000000 psia, elevation 0.000000 ft, efficiency 0.950000: engine 24925322.1809 scfd, golden 24938848.6158 scfd (golden).
+- weymouth, 16.000000 in over 80.000000 mi, 700.000000 to 650.000000 psia, elevation 0.000000 ft, efficiency 0.920000: engine 39887572.7874 scfd, golden 39922125.7012 scfd (golden).
+- weymouth, 8.000000 in over 25.000000 mi, 1000.000000 to 600.000000 psia, elevation 800.000000 ft, efficiency 1.000000: engine 35264696.4591 scfd, golden 35286509.1170 scfd (golden).
+- weymouth, 8.000000 in over 25.000000 mi, 1000.000000 to 600.000000 psia, elevation -800.000000 ft, efficiency 1.000000: engine 36855536.7412 scfd, golden 36879505.1455 scfd (golden).
+- panhandleA, 12.000000 in over 50.000000 mi, 900.000000 to 500.000000 psia, elevation 0.000000 ft, efficiency 1.000000: engine 92892116.9539 scfd, golden 92892253.1793 scfd (golden).
+- panhandleA, 6.065000 in over 10.000000 mi, 1200.000000 to 900.000000 psia, elevation 0.000000 ft, efficiency 0.950000: engine 36406362.3068 scfd, golden 36406415.6964 scfd (golden).
+- panhandleA, 16.000000 in over 80.000000 mi, 700.000000 to 650.000000 psia, elevation 0.000000 ft, efficiency 0.920000: engine 46595261.4033 scfd, golden 46595329.7348 scfd (golden).
+- panhandleA, 8.000000 in over 25.000000 mi, 1000.000000 to 600.000000 psia, elevation 800.000000 ft, efficiency 1.000000: engine 48793391.4090 scfd, golden 48792595.2876 scfd (golden).
+- panhandleA, 8.000000 in over 25.000000 mi, 1000.000000 to 600.000000 psia, elevation -800.000000 ft, efficiency 1.000000: engine 51172143.3134 scfd, golden 51173062.3832 scfd (golden).
+- panhandleB, 12.000000 in over 50.000000 mi, 900.000000 to 500.000000 psia, elevation 0.000000 ft, efficiency 1.000000: engine 94339255.3131 scfd, golden 94340284.8879 scfd (golden).
+- panhandleB, 6.065000 in over 10.000000 mi, 1200.000000 to 900.000000 psia, elevation 0.000000 ft, efficiency 0.950000: engine 37233929.7642 scfd, golden 37234336.1181 scfd (golden).
+- panhandleB, 16.000000 in over 80.000000 mi, 700.000000 to 650.000000 psia, elevation 0.000000 ft, efficiency 0.920000: engine 49902446.8811 scfd, golden 49902991.4932 scfd (golden).
+- panhandleB, 8.000000 in over 25.000000 mi, 1000.000000 to 600.000000 psia, elevation 800.000000 ft, efficiency 1.000000: engine 50201570.7749 scfd, golden 50201274.5831 scfd (golden).
+- panhandleB, 8.000000 in over 25.000000 mi, 1000.000000 to 600.000000 psia, elevation -800.000000 ft, efficiency 1.000000: engine 52512554.8691 scfd, golden 52513946.9003 scfd (golden).
+- general, 12.000000 in over 50.000000 mi, 900.000000 to 500.000000 psia, elevation 0.000000 ft, efficiency 1.000000: engine 78870925.0881 scfd, golden 78870158.2684 scfd (golden).
+- general, 6.065000 in over 10.000000 mi, 1200.000000 to 900.000000 psia, elevation 0.000000 ft, efficiency 0.950000: engine 29438691.4770 scfd, golden 29439020.5777 scfd (golden).
+- general, 16.000000 in over 80.000000 mi, 700.000000 to 650.000000 psia, elevation 0.000000 ft, efficiency 0.920000: engine 42244687.4717 scfd, golden 42240040.1716 scfd (golden).
+- general, 8.000000 in over 25.000000 mi, 1000.000000 to 600.000000 psia, elevation 800.000000 ft, efficiency 1.000000: engine 40692276.6248 scfd, golden 40691505.0476 scfd (golden).
+- general, 8.000000 in over 25.000000 mi, 1000.000000 to 600.000000 psia, elevation -800.000000 ft, efficiency 1.000000: engine 42552177.2793 scfd, golden 42552833.2696 scfd (golden).
+
+# SECTION 9: The elevation adjustment (owned by Professional m03)
+
+The group all four forms share, on the SOKU trunk:
+| elevation change ft | s | e to the s | equivalent length factor |
+| --- | --- | --- | --- |
+| 0.000000 | 0.0000000000 | 1.0000000000 | 1.0000000000 |
+| 1500.000000 | 0.0795976556 | 1.0828513009 | 1.0408761444 |
+| -1500.000000 | -0.0795976556 | 0.9234878318 | 0.9612364537 |
+| -3000.000000 | -0.1591953113 | 0.8528297754 | 0.9244633111 |
+A hill does two things and they are not the same thing. It scales the outlet pressure inside the driving group through e to the s, and it changes the length the friction acts over through the equivalent length factor. At zero elevation both collapse to one and the flat form comes back exactly.
+The coefficient inside s, measured by asking the engine for s at a gravity of one, a thousand feet of rise, an absolute temperature of one and a compressibility of one, then dividing by the thousand feet: 0.037500000000 (derived from the engine's 37.500000).
+
+What the hill costs the trunk, by form:
+| form | flat scfd | up scfd | down scfd | up as a fraction of flat | down as a fraction of flat |
+| --- | --- | --- | --- | --- | --- |
+| weymouth | 66104956.1404 | 61666790.6494 | 70296168.5930 | 0.932862 | 1.063402 |
+| panhandleA | 86864172.0167 | 80589714.0893 | 92820112.7063 | 0.927767 | 1.068566 |
+| panhandleB | 88369202.2673 | 82321752.3402 | 94087628.1888 | 0.931566 | 1.064711 |
+| general | 73861363.0502 | 68827677.8048 | 78615728.3463 | 0.931850 | 1.064369 |
+Uphill is not the mirror of downhill. The two fractions on each row do not average to one, because the term is an exponential and an exponential is not symmetric about zero.
+
+# SECTION 10: The outlet pressure (owned by Professional m04)
+
+# App surface: this is the direction the studio actually works in. A designer knows the rate the terminal has contracted for and wants the pressure it will see, which is the inverse of every form above.
+The engine has no closed inversion. It bisects on the outlet pressure inside a bracket that runs from atmospheric to the inlet pressure, calling the published form at each step.
+
+Round trips on the flat trunk, each form solved back to the outlet it came from:
+| form | rate scfd | outlet recovered psia | against the stated outlet psia |
+| --- | --- | --- | --- |
+| weymouth | 66104956.1404 | 620.000000 | 0.000000 |
+| panhandleA | 86864172.0167 | 620.000000 | 0.000000 |
+| panhandleB | 88369202.2673 | 620.000000 | -0.000000 |
+| general | 73861363.0502 | 620.000000 | 0.000000 |
+
+The trunk asked for 60000000.0000 scfd through the Weymouth form arrives at 666.307057 psia, a drop of 183.692943 psi.
+A rate the line cannot carry at all is refused rather than approximated: { error: "the line cannot carry the target rate even to atmospheric outlet" }
+
+The bracket, and the case it cannot reach. On a steep DESCENT the column recovers more head than the friction spends, so the outlet pressure can legitimately be ABOVE the inlet, and that answer is outside the bracket the search runs in.
+Down -3000.000000 ft, the trunk carries 29457958.5967 scfd when its outlet stands at 880.000000 psia, which is 30.000000 psia ABOVE its inlet of 850.000000 psia.
+Given that same rate, the engine returns {"p2Psia":850,"dpPsi":0}: the inlet pressure, and a drop of zero.
+The forward call and the inverse call disagree by 30.000000 psi on one line, and the inverse reports no error.
+THE CONTROL, and it is the line that proves the bracket is the fault rather than the descent. Run the SAME descent with an outlet genuinely BELOW the inlet, 700.000000 psia against 850.000000 psia: the trunk carries 65259103.7761 scfd and the inverse recovers 700.000000 psia, an error of 0.000000 psi.
+So the bisection is exact when its answer lies inside the bracket and silently wrong when it does not. A reading that only ever tested outlets below the inlet would have found nothing.
+
+# SECTION 11: Marching a profile (owned by Professional m05)
+
+A traverse marches the line segment by segment and returns the pressure at every station, so a designer draws the hydraulic gradient instead of asserting one number.
+
+The OGBIA line flat, and the same line over a ridge, station by station:
+| station | distance ft | flat elevation ft | flat pressure psia | ridge elevation ft | ridge pressure psia |
+| --- | --- | --- | --- | --- | --- |
+| 0 | 0.000000 | 0.000000 | 900.000000 | 0.000000 | 900.000000 |
+| 1 | 8800.000000 | 0.000000 | 891.446456 | 420.000000 | 732.488123 |
+| 2 | 17600.000000 | 0.000000 | 882.892912 | 420.000000 | 723.934579 |
+| 3 | 26400.000000 | 0.000000 | 874.339369 | 0.000000 | 874.339369 |
+Both arrive at 874.339369 psia, having spent 25.660631 psi, because the ridge climbs 420.000000 ft and gives all of it back. The ARRIVAL is the same and the middle of the line is not: at the crest the ridge stands at 732.488123 psia against 891.446456 psia, a difference of 158.958333 psi. A line is sized on its worst station and not on its last one.
+
+Marched against one shot: the traverse spends 25.660631 psi over 26400.000000 ft and a single call over the same length spends 25.660631 psi, a difference of 0.000000 psi (derived from the two engine values on this row). A liquid is incompressible, so marching it buys the station list and nothing else.
+
+What a traverse drops: the one-shot call carrying the isometric's 4.500000 velocity heads spends 25.793983 psi, and the traverse of the same line spends 25.660631 psi. The gap of 0.133351 psi is exactly the fittings, because liquidLineTraverse has no resistance-sum argument at all.
+
+Where a line dies, and what the engine says about it: 20000.000000 bpd of 56.000000 lb/ft3 at 8.000000 cp through 2.067000 in over 20000.000000 ft, entering at 100.000000 psia, arrives at -47328.563502 psia having spent 47428.563502 psi.
+That arrival is far below zero absolute. The traverse reports it as a station like any other, with no error, because nothing in the march checks that a pressure stayed physical.
+
+# SECTION 12: The Professional reading, a trunk end to end (owned by Professional m06)
+
+SOKU end to end: 11.938000 in over 32.000000 miles from 850.000000 to 620.000000 psia gives a driving group of 338100.0000 psia squared (derived); Weymouth reads 66104956.1404 scfd, Panhandle A 86864172.0167, Panhandle B 88369202.2673 and General Flow 73861363.0502 at a friction factor of 0.0112132010; put the trunk up 1500.000000 ft and the Weymouth rate falls to 61666790.6494, down the same and it rises to 70296168.5930; and asked for 60000000.0000 scfd the line delivers at 666.307057 psia.
+Four forms, one line, and a spread wide enough that the form is a bigger decision than the bore.
+
+# SECTION 13: The wall a code demands (owned by Expert m01)
+
+The B31.8 location classes the module carries, and what B31.4 uses instead:
+| location class | design factor |
+| --- | --- |
+| 1 | 0.720000 |
+| 2 | 0.600000 |
+| 3 | 0.500000 |
+| 4 | 0.400000 |
+B31.4 uses a flat design factor of 0.720000 whatever the route, which is the same number B31.8 gives to Class 1.
+
+The SOKU wall: 1200.000000 psig design on 12.750000 in outside diameter at a specified minimum yield of 52000.000000 psi, joint factor 1.000000, temperature derate 1.000000, corrosion allowance 0.125000 in.
+| code | class | design factor | pressure wall in | required wall in | MAOP of the required wall psig |
+| --- | --- | --- | --- | --- | --- |
+| B31.8 | 1 | 0.720000 | 0.204327 | 0.329327 | 1200.000000 |
+| B31.8 | 2 | 0.600000 | 0.245192 | 0.370192 | 1200.000000 |
+| B31.8 | 3 | 0.500000 | 0.294231 | 0.419231 | 1200.000000 |
+| B31.8 | 4 | 0.400000 | 0.367788 | 0.492788 | 1200.000000 |
+| B31.4 | any | 0.720000 | 0.204327 | 0.329327 | 1200.000000 |
+Class 4 asks for 1.800000 times the pressure wall of Class 1 on the same pipe at the same pressure (derived from the two rows above). The route, not the fluid, is what moved it.
+
+The joint factor and the temperature derate, one at a time, at Class 1:
+| joint factor | pressure wall in | temperature derate | pressure wall in |
+| --- | --- | --- | --- |
+| 0.600000 | 0.340545 | 0.867000 | 0.235671 |
+| 0.800000 | 0.255409 | 0.900000 | 0.227030 |
+| 1.000000 | 0.204327 | 0.967000 | 0.211300 |
+Both sit in the denominator beside the design factor, so both make the wall thicker, and neither of them is strength: they are confidence in the seam and confidence in the steel when it is hot.
+
+The corrosion allowance is not strength either. At Class 3 the pressure part of the wall is 0.294231 in and the required wall is 0.419231 in, the difference being the 0.125000 in allowance added on top. It holds no pressure on the day it is installed and it is what lets the pipe still hold pressure years later.
+Read the rating back off the wall the mill actually rolled, 0.375000 in: with the allowance respected the line rates 1019.607843 psig, and with the allowance left out of the call it rates 1529.411765 psig, which is 1.500000 times higher (derived from the two engine values on this row). Both calls are legal and neither warns.
+
+The published wall cases, engine against golden:
+- B31.4 class 1, 1440.000000 psig on 12.750000 in at 52000.000000 psi, joint 1.000000, derate 1.000000, allowance 0.000000 in: design factor 0.720000, required wall 0.2451923077 in, MAOP back 1440.000000 psig; golden wall 0.2451923077 in and golden MAOP 1440.000000 psig (golden).
+- B31.8 class 1, 1000.000000 psig on 8.625000 in at 42000.000000 psi, joint 1.000000, derate 1.000000, allowance 0.062500 in: design factor 0.720000, required wall 0.2051091270 in, MAOP back 1000.000000 psig; golden wall 0.2051091270 in and golden MAOP 1000.000000 psig (golden).
+- B31.8 class 3, 1000.000000 psig on 8.625000 in at 42000.000000 psi, joint 1.000000, derate 1.000000, allowance 0.000000 in: design factor 0.500000, required wall 0.2053571429 in, MAOP back 1000.000000 psig; golden wall 0.2053571429 in and golden MAOP 1000.000000 psig (golden).
+- B31.8 class 4, 720.000000 psig on 6.625000 in at 35000.000000 psi, joint 1.000000, derate 0.967000, allowance 0.050000 in: design factor 0.400000, required wall 0.2261707785 in, MAOP back 720.000000 psig; golden wall 0.2261707785 in and golden MAOP 720.000000 psig (golden).
+
+# SECTION 14: The pig and what it pushes (owned by Expert m02)
+
+The OGBIA pigging duty: 7.981000 in of bore over 26400.000000 ft, swept by a sphere at 3.000000 ft/s.
+Line volume 1633.5349 bbl (engine). Run time 2.444444 hours (engine), which the engine reports beside the speed it was given, 3.000000 ft/s.
+
+THE HOLDUP IS AN INPUT AND NOT A RESULT. The engine says so in its own header: the swept volume is the line volume times a holdup somebody else measured or assumed, and a pigging estimate is only as honest as that number.
+| holdup | swept bbl | as a fraction of the line volume | days between runs at the nominal catcher |
+| --- | --- | --- | --- |
+| 0.000000 | 0.0000 | 0.000000 | 6.2500 |
+| 0.020000 | 32.6707 | 0.020000 | 5.4332 |
+| 0.040000 | 65.3414 | 0.040000 | 4.6165 |
+| 0.060000 | 98.0121 | 0.060000 | 3.7997 |
+| 0.100000 | 163.3535 | 0.100000 | 2.1662 |
+| 0.200000 | 326.7070 | 0.200000 | the sweep alone already exceeds the slug limit: pig more often or resize the catcher |
+| 0.500000 | 816.7674 | 0.500000 | the sweep alone already exceeds the slug limit: pig more often or resize the catcher |
+| 1.000000 | 1633.5349 | 1.000000 | the sweep alone already exceeds the slug limit: pig more often or resize the catcher |
+At a holdup of zero the sweep is 0.0000 bbl and at a holdup of one it is the whole line. The interval collapses as the holdup rises, and past a point the catcher cannot take the sweep at all and the engine refuses rather than returning a negative interval.
+
+At the nominal holdup of 0.060000 the sphere pushes 98.0121 bbl ahead of it into a 250.000000 bbl catcher, leaving 151.9879 bbl of room (derived on the row), which at 40.000000 bpd of dropout is 3.7997 days between runs (engine).
+Put the same sweep into a 60.000000 bbl catcher and there is no interval at all: { error: "the sweep alone already exceeds the slug limit: pig more often or resize the catcher" }
+That message is the handshake with the separation course: the slug a catcher has to hold is what this engine computes, and the vessel that holds it is sized elsewhere.
+
+The published pigging cases, engine against golden:
+- 6.065000 in over 30000.000000 ft at a holdup of 0.120000: volume 1071.9949 bbl, swept 128.6394 bbl, run 1.666667 h at 5.000000 ft/s; golden volume 1071.9949 bbl, golden swept 128.6394 bbl, golden run 1.666667 h (golden).
+- 10.020000 in over 52800.000000 ft at a holdup of 0.050000: volume 5149.6679 bbl, swept 257.4834 bbl, run 2.933333 h at 5.000000 ft/s; golden volume 5149.6679 bbl, golden swept 257.4834 bbl, golden run 2.933333 h (golden).
+- 2.067000 in over 8000.000000 ft at a holdup of 0.350000: volume 33.2033 bbl, swept 11.6211 bbl, run 0.444444 h at 5.000000 ft/s; golden volume 33.2033 bbl, golden swept 11.6211 bbl, golden run 0.444444 h (golden).
+
+# SECTION 15: Where the correlations stop (owned by Expert m03)
+
+The jump at the branch, again and exactly: on the OGBIA pipe the friction factor is 0.0304761905 at Reynolds 2099.9999999 and 0.0488545386 at Reynolds 2100.0000, a ratio of 1.603040 (derived from the two engine values on this row).
+Nothing physical happens in that interval. The engine leaves the laminar law and starts the turbulent one, and the discontinuity is the price of having no correlation for the band between them.
+
+Colebrook past the roughness it was published for, which reaches about 0.05:
+| relative roughness | f at Reynolds 1000000.0000 |
+| --- | --- |
+| 0.010000 | 0.0379647419 |
+| 0.050000 | 0.0715737539 |
+| 0.100000 | 0.1016731332 |
+| 0.200000 | 0.1557055485 |
+| 0.500000 | 0.3308894263 |
+The engine answers all five and flags none of them. The last two are extrapolations of a fitted curve into a region where the pipe is more obstruction than pipe.
+
+The friction Weymouth assumes, measured by asking General Flow what friction factor would make it agree:
+| bore in | weymouth scfd | general scfd | the friction factor general settled on | the friction factor that would make general match weymouth |
+| --- | --- | --- | --- | --- |
+| 6.065000 | 10863388.2986 | 12661538.2373 | 0.0129147931 | 0.0175440472 |
+| 7.981000 | 22589293.6682 | 25902462.3740 | 0.0121761733 | 0.0160098631 |
+| 11.938000 | 66104956.1404 | 73861363.0502 | 0.0112132010 | 0.0139989737 |
+| 15.000000 | 121523381.8036 | 133673158.8401 | 0.0107219615 | 0.0129730762 |
+The last column is derived from the two engine rates and the engine friction factor on each row, using the fact that a General Flow rate goes as one over the square root of f. It falls as the bore grows, which is the signature of a fully rough friction law that depends on the diameter and not on the Reynolds number.
+
+No form checks its own regime. The same nearly dead trunk through Weymouth and through General Flow:
+Weymouth 10466013.4729 scfd, General Flow 11016984.8816 scfd at a friction factor of 0.0126337788, a ratio of 0.949989 (derived).
+On the same line at its full duty the two sit at 0.894987 of each other. The forms agree better when the line is working than when it is barely flowing, and neither of them says so.
+
+Neither iteration in this module reports whether it converged. The friction factor solve runs a fixed point and the General Flow solve runs a rate and a friction factor against each other, and both return their last iterate with no flag beside it. They do converge everywhere this digest looked, which is exactly what makes the absence easy to miss.
+
+# SECTION 16: What it accepts and should not (owned by Expert m04)
+
+A refusal is an object with an `error`. These are not refusals. Each row is a real engine return on an input that has no physical meaning.
+
+Inputs accepted with a plausible number attached:
+- a negative resistance sum: fittings loss -0.148168 psi, total 25.512463 psi against 25.660631 psi with no fittings at all
+- a negative roughness: friction factor 0.0150452107 against the correct 0.0218149625, and friction 17.697468 psi against 25.660631 psi
+- an elevation change longer than the line: elevation 3406.250000 psi and a gradient of 34.063472 psi per ft
+- an efficiency above one: 198314868.4213 scfd against 66104956.1404 scfd at an efficiency of one
+- a negative efficiency: -66104956.1404 scfd, a gas flowing backwards
+- a gas with no viscosity: 75085580.6646 scfd at a friction factor of 0.0108505350, against 73861363.0502 scfd at 0.0112132010
+- a negative corrosion allowance: a required wall of -0.295673 in beside a pressure wall of 0.204327 in
+- a negative swept volume: 18.7500 days, against 3.7997 days at the real sweep
+
+Inputs accepted with something that is not a number, and still no error. The whole return is printed, because the SHAPE is the point:
+- a gas line of no length: {"qScfd":null}
+- a gas line of negative length: {"qScfd":null}
+- a gas line of negative bore: {"qScfd":null}
+- a gas at a compressibility of zero: {"qScfd":null}
+- a gas at an absolute temperature of zero: {"qScfd":null}
+- a gas of no gravity: {"qScfd":null}
+- a wall at a temperature derate of zero: {"designFactor":0.72,"tPressureIn":null,"tRequiredIn":null}
+- a wall at a joint factor of zero: {"designFactor":0.72,"tPressureIn":null,"tRequiredIn":null}
+- a sweep with no bore: {"sweptBbl":null}
+- a sweep of negative length: {"sweptBbl":null}
+
+The sweep is the sharpest of these, because it DOES guard one of its three inputs. It refuses a holdup above one with a proper message and then hands the bore and the length straight to the line volume, which returns a non-number by contract. One guard existing is what makes the other two look checked.
+
+The same class of question asked of the three catalogues, which answer it three different ways:
+- a fitting the table does not carry: fittingK returns NaN
+- a roughness the table does not carry: roughnessOf returns NaN
+- a grade the table does not carry: gradeYield returns NaN
+- a pipe size the table does not carry: scheduleRow returns null
+- an erosional service the table does not carry: erosionalC returns {"id":"continuous","label":"RP 14E continuous service","c":100}
+Four of the five say they do not know. The fifth answers under a label that is not the one it was asked for.
+
+# SECTION 17: What the method does not know (owned by Expert m05)
+
+Five things this course teaches as limits and never as answers:
+1. The API RP 14E c factors, 100.000000, 125.000000 and 175.000000. HELD FOR LITERATURE. The recommended practice says its own figures are conservative, and the third is labelled operator practice with no source.
+2. The efficiency multiplier on all four gas forms. HELD FOR LITERATURE. Nothing in this package stands behind any value of it, and it is unguarded in both directions.
+3. The band from Reynolds 2100 to 4000, where the engine computes on the turbulent branch and labels the answer transitional. HELD FOR LITERATURE. The step across the boundary is 1.603040 times.
+4. The fully rough friction law Weymouth assumes. HELD FOR LITERATURE. Section 15 measures it out of the engine and nothing sources it.
+5. The published cases in this golden are SYNTHETIC. They come from an independent oracle written in Python from the same physics, in SI units where the engine works in field units, which catches an arithmetic or a unit error and cannot catch a method that is wrong in both files. No measured pipeline is in this course.
+
+And one thing that is not held but simply absent: THE MULTIPHASE HALF IS NOT IN THIS ENGINE. There is no flow regime, no slip, no holdup correlation and no slug model anywhere in it. Wherever a holdup is needed the engine takes it as an input, which is honest and is also a seam a reader has to see rather than infer.
+
+Two values of one constant, one import apart. The barrel, measured out of each module by asking it a question about itself:
+- from lineHydraulics, as the flow area times the length over the line volume: 5.6145833333333 cubic feet per barrel
+- from chokePerformance, as the erosional velocity times the area times the seconds in a day over the erosional rate: 5.6145830000000 cubic feet per barrel
+The two differ by a ratio of 1.0000000593692 (derived from the two rows above). It is small and it is two numbers for one quantity inside the single chain this studio composes.
+
+# SECTION 18: The Expert reading, a line from bore to wall to pig (owned by Expert m06)
+
+One pipe, three questions. As a hydraulic line the OGBIA bore of 7.981000 in carries 12000.000000 bpd at 2.244621 ft/s, Reynolds 48431.2523, and spends 25.660631 psi over 26400.000000 ft, against an erosional ceiling of 13.545709 ft/s that it uses 0.165707 of.
+As a pressure envelope the SOKU pipe at 12.750000 in outside diameter and 52000.000000 psi of yield needs 0.419231 in of wall at Class 3 and 0.329327 in at Class 1, and the 0.375000 in the mill rolled rates 1019.607843 psig.
+As a volume it holds 1633.5349 bbl, a sphere crosses it in 2.444444 hours, and at a measured holdup of 0.060000 it delivers 98.0121 bbl to whatever is waiting at the end, every 3.7997 days.
+Three answers about one pipe, and not one of them can be derived from the other two.
+

@@ -1,0 +1,218 @@
+[
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 70590220.5869663,
+  "form": "weymouth",
+  "idIn": 12.0,
+  "ratio": 0.9992303077557615,
+  "siForm": 70644595.18397678
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 24925322.18087342,
+  "form": "weymouth",
+  "idIn": 6.065,
+  "ratio": 0.9994576159031958,
+  "siForm": 24938848.61575521
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 39887572.78739856,
+  "form": "weymouth",
+  "idIn": 16.0,
+  "ratio": 0.9991344921346437,
+  "siForm": 39922125.70119469
+ },
+ {
+  "elevChangeFt": 800.0,
+  "fieldForm": 35264990.90508573,
+  "form": "weymouth",
+  "idIn": 8.0,
+  "ratio": 0.9993653678908372,
+  "siForm": 35287385.41291717
+ },
+ {
+  "elevChangeFt": -800.0,
+  "fieldForm": 36855251.310549125,
+  "form": "weymouth",
+  "idIn": 8.0,
+  "ratio": 0.9993653678908375,
+  "siForm": 36878655.68959249
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 66104956.14042693,
+  "form": "weymouth",
+  "idIn": 11.938,
+  "ratio": 0.9992320331149145,
+  "siForm": 66155761.574573815
+ },
+ {
+  "elevChangeFt": 1500.0,
+  "fieldForm": 61668459.20940475,
+  "form": "weymouth",
+  "idIn": 11.938,
+  "ratio": 0.9992320331149142,
+  "siForm": 61715854.94228519
+ },
+ {
+  "elevChangeFt": -1500.0,
+  "fieldForm": 70294680.91586457,
+  "form": "weymouth",
+  "idIn": 11.938,
+  "ratio": 0.9992320331149144,
+  "siForm": 70348706.39278284
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 14779331.428016353,
+  "form": "weymouth",
+  "idIn": 11.938,
+  "ratio": 0.9992320331149149,
+  "siForm": 14790690.188288512
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 92892116.95388635,
+  "form": "panhandleA",
+  "idIn": 12.0,
+  "ratio": 0.9999985335119158,
+  "siForm": 92892253.17926875
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 36406362.30683192,
+  "form": "panhandleA",
+  "idIn": 6.065,
+  "ratio": 0.9999985335119157,
+  "siForm": 36406415.69640673
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 46595261.40326684,
+  "form": "panhandleA",
+  "idIn": 16.0,
+  "ratio": 0.9999985335119155,
+  "siForm": 46595329.73476269
+ },
+ {
+  "elevChangeFt": 800.0,
+  "fieldForm": 48793830.91781479,
+  "form": "panhandleA",
+  "idIn": 8.0,
+  "ratio": 0.9999985335119153,
+  "siForm": 48793902.47349138
+ },
+ {
+  "elevChangeFt": -800.0,
+  "fieldForm": 51171715.777895376,
+  "form": "panhandleA",
+  "idIn": 8.0,
+  "ratio": 0.9999985335119155,
+  "siForm": 51171790.82071688
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 86864172.01673242,
+  "form": "panhandleA",
+  "idIn": 11.938,
+  "ratio": 0.9999985335119158,
+  "siForm": 86864299.40219244
+ },
+ {
+  "elevChangeFt": 1500.0,
+  "fieldForm": 80592066.49100135,
+  "form": "panhandleA",
+  "idIn": 11.938,
+  "ratio": 0.9999985335119158,
+  "siForm": 80592184.67847987
+ },
+ {
+  "elevChangeFt": -1500.0,
+  "fieldForm": 92817993.5660839,
+  "form": "panhandleA",
+  "idIn": 11.938,
+  "ratio": 0.9999985335119157,
+  "siForm": 92818129.68276508
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 17258212.323431503,
+  "form": "panhandleA",
+  "idIn": 11.938,
+  "ratio": 0.9999985335119166,
+  "siForm": 17258237.632431332
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 94339255.31309488,
+  "form": "panhandleB",
+  "idIn": 12.0,
+  "ratio": 0.9999890865832365,
+  "siForm": 94340284.88794145
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 37233929.76424502,
+  "form": "panhandleB",
+  "idIn": 6.065,
+  "ratio": 0.9999890865832367,
+  "siForm": 37234336.11807298
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 49902446.88109201,
+  "form": "panhandleB",
+  "idIn": 16.0,
+  "ratio": 0.9999890865832365,
+  "siForm": 49902991.49323592
+ },
+ {
+  "elevChangeFt": 800.0,
+  "fieldForm": 50201998.32099985,
+  "form": "panhandleB",
+  "idIn": 8.0,
+  "ratio": 0.999989086583236,
+  "siForm": 50202546.20230917
+ },
+ {
+  "elevChangeFt": -800.0,
+  "fieldForm": 52512140.04778782,
+  "form": "panhandleB",
+  "idIn": 8.0,
+  "ratio": 0.9999890865832364,
+  "siForm": 52512713.14091172
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 88369202.26730502,
+  "form": "panhandleB",
+  "idIn": 11.938,
+  "ratio": 0.9999890865832365,
+  "siForm": 88370166.68776354
+ },
+ {
+  "elevChangeFt": 1500.0,
+  "fieldForm": 82324024.32471074,
+  "form": "panhandleB",
+  "idIn": 11.938,
+  "ratio": 0.9999890865832367,
+  "siForm": 82324922.77090295
+ },
+ {
+  "elevChangeFt": -1500.0,
+  "fieldForm": 94085597.19025157,
+  "form": "panhandleB",
+  "idIn": 11.938,
+  "ratio": 0.9999890865832368,
+  "siForm": 94086623.9967911
+ },
+ {
+  "elevChangeFt": 0.0,
+  "fieldForm": 19173884.934775934,
+  "form": "panhandleB",
+  "idIn": 11.938,
+  "ratio": 0.9999890865832373,
+  "siForm": 19174094.189656872
+ }
+]
