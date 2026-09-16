@@ -28,8 +28,8 @@
     },
     {
       "domain": "facilities",
-      "engineFiles": 11,
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "engineFiles": 10,
+      "reason": "NextGen vendors only the facilities engines its facilities courses need: separatorSizing.js and spacing.js for FC1 Separation, gasProcessing.js for FC4 Gas Processing. The rest of the facilities domain has no NextGen course yet and is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     }
   ],
   "localOnly": [
