@@ -8,15 +8,15 @@ Running the six templates over the teaching field returns a summary sorted by co
 
 ## Two sweeps and what they promise
 
-The price sweep runs nine oil prices and plots government take for each. On the teaching field it climbs 1.9971 points for Ghana and falls 37.6994 for USA Gulf of Mexico, so one regime captures upside and another gives it away. The capex sweep runs multipliers from 0.8 and stops at 1.4, seven points in all. Over that range Ghana gives up 150.9021 million USD of contractor net present value and Angola 215.1075. Read the axis before the verdict: what the loop reaches and what the label promises are not always the same thing.
+The price sweep runs nine oil prices and plots government take for each. On the teaching field it climbs 7.4752 points for Brazil and 1.9971 for Ghana and falls 37.6994 for USA Gulf of Mexico, so one regime captures upside and another gives it away. The capex sweep runs eight multipliers from 0.8 to 1.5, and its last point is exactly 1.5. Over that range Ghana gives up 181.1922 million USD of contractor net present value and Angola 252.6075. Read the axis against the points before the verdict: until the 2026-09-15 repair this loop stopped at 1.4 while the label promised 1.5.
 
 ## Verdicts that name a winner
 
-The engine derives up to five: best for the contractor, fastest capital recovery, best for the government, resilience to cost overrun and response to higher prices. On the teaching field they name Brazil, Brazil, Angola at 316.7898 million USD against 312.9610 for Nigeria PIA, Ghana and Ghana. Notice what the first one is saying. The best regime for the contractor here has a net present value of -5.8662 million USD. Being least bad is a real answer to a real question, and it is not the question most readers think they asked.
+The engine derives up to five: best for the contractor, fastest capital recovery, best for the government, resilience to cost overrun and response to higher prices. On the teaching field they name Brazil, then Brazil and Ghana together at year 6, then Angola at 316.7898 million USD against 312.9610 for Nigeria PIA, then Ghana, then Brazil. Notice what the first one is saying. The best regime for the contractor here has a net present value of -5.8662 million USD. Being least bad is a real answer to a real question, and it is not the question most readers think they asked.
 
 ## What to carry
 
-Three habits survive the move. Name the base before the rate, because 21 percent collected 260.7539 million USD where 35 percent collected 230.9340. Read the closing pool before believing a cost recovery total. And write down what a zero means before quoting it, because this package has already produced an internal rate of return of 0.0000 percent for a project that cannot lose and one that cannot win.
+Three habits survive the move. Name the base before the rate, because 21 percent collected 260.7539 million USD where 35 percent collected 230.9340. Read the closing pool before believing a cost recovery total. And write down what an empty cell means before quoting it, because this package used to print an internal rate of return of 0.0000 percent for a project that cannot lose and one that cannot win, and now returns null with a status word instead.
 
 ## Exercise
 

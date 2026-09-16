@@ -8,7 +8,7 @@ A sliding-scale royalty charges one rate on the whole of gross revenue, and the 
 
 A regime's royalty is either flat, carrying a single rate, or sliding on price, carrying a list of tiers keyed on the oil price. Both are charged on gross revenue, before any cost. "USA - Gulf of Mexico" is the flat case at 18.75 percent, and its implied rate, royalty over gross revenue, reads 0.187500 in year 1 and 0.187500 in year 25 on the Designer's default project and on the teaching field ODIDI alike. On the default project year 1 that is a royalty of 50.9979 million USD on gross revenue of 271.9889.
 
-The sliding case replaces the single rate with a walk. `getSlidingScaleRoyalty` starts at the first tier's rate, then walks the tier list in order and keeps the rate of every tier whose threshold the oil price has reached. The price it reads is the applied oil price for that year, after any price multiplier, so a price sweep moves the tier as well as the revenue.
+The sliding case replaces the single rate with a selection. `getSlidingScaleRoyalty` sorts a copy of the tier list by threshold and keeps the rate of the highest threshold the oil price has reached, falling back to the lowest tier's rate when the price has reached none of them. The price it reads is the applied oil price for that year, after any price multiplier, so a price sweep moves the tier as well as the revenue.
 
 ## The rate the price chooses
 

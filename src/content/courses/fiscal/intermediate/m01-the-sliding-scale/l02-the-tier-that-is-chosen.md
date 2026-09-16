@@ -4,11 +4,13 @@ One tier is selected each year and one rate is charged. Knowing which tier the e
 
 {{panel:ec-instrument-explorer}}
 
-## The walk
+## The selection
 
-`getSlidingScaleRoyalty` sets the rate to the first tier's rate, then walks the tier list in order. For each tier, if the oil price has reached that tier's threshold, the rate becomes that tier's rate. The walk does not stop at the first match and it does not compare a tier against the tier it is replacing. It keeps the last qualifying tier it met while walking, which for a sorted list is the highest threshold the price has reached.
+`getSlidingScaleRoyalty` sorts a copy of the tier list by threshold, then keeps the rate of the highest threshold the oil price has reached. Where the price has reached no threshold at all it charges the lowest tier's rate. The order the tiers were typed in cannot change the answer, and two tiers sharing one threshold are refused by name rather than resolved quietly.
 
-Two consequences follow. Below every threshold the first tier's rate still applies, so a sliding royalty is never zero unless a tier says so. And a price that reaches two thresholds pays the rate of the later one, not the sum and not a blend.
+Two consequences follow. Below every threshold a rate still applies, so a sliding royalty is never zero unless a tier says so. And a price that reaches two thresholds pays the rate of the higher one, not the sum and not a blend.
+
+Until the 2026-09-15 repair the rule was a walk that kept the last qualifying tier in list order, which matched the highest threshold only while the list was sorted.
 
 ## Where the step falls
 
@@ -42,7 +44,7 @@ Read a sweep's printed price column as a rounding of the price the engine used, 
 
 ## What it refuses
 
-The walk performs no validation. It does not sort the list, does not check that thresholds ascend, and does not warn on duplicates. It has no memory of last year's tier, so the rate can move up in one year and back down in the next. And it cannot key a threshold on anything but the oil price.
+Selecting a rate is the whole of what the function does. It has no memory of last year's tier, so the rate can move up in one year and back down in the next. It cannot key a threshold on anything but the oil price.
 
 ## Exercise
 
