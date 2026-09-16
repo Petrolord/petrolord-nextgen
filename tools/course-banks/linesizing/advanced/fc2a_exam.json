@@ -99,15 +99,15 @@
   "explanation": "The relation is linear in the room taken. The column runs 6.2500, 5.4332, 4.6165, 3.7997 and 2.1662 days before the engine refuses."
  },
  {
-  "prompt": "What is unusual about the message the engine returns when a sweep alone overfills the catcher?",
+  "prompt": "A designer meets the slug-limit refusal at a holdup of 0.200000 and proposes a third response: keep the interval and accept a thinner margin on the catcher. Why is that response not available on this row?",
   "options": [
-   "It prescribes two fixes by name, pig more often or resize the catcher, where the engine's other refusals only describe what was wrong.",
-   "It is the only message in the engine that is returned as a bare string rather than inside an object carrying an error property, which is why a caller has to test for it separately.",
-   "It is the only message that names a value the caller supplied, the slug limit, which lets a reader see the figure that was breached without inspecting the inputs again.",
-   "It is the only message raised by a calculation that had already produced a number, since the negative interval exists and is suppressed in favour of the sentence."
+   "There is no margin left to thin: the sweep of 326.7070 bbl is larger than the whole 250.000000 bbl the vessel holds, so the catcher is over its limit before a single day of dropout is counted.",
+   "The engine has already taken a margin off the slug limit before comparing it against the sweep, so the figure a caller supplies is not the one the refusal was raised against.",
+   "A thinner margin would return a negative interval, which the engine reports as a number rather than refusing, so the designer would be acting on a figure that cannot be scheduled.",
+   "The slug limit belongs to the separation work rather than to this chain, so it is the one input a caller of this engine is not permitted to move."
   ],
   "answer": 0,
-  "explanation": "Every other refusal in this engine names what went wrong and stops there. This one names what to do, and it is the handshake with the separation work, where the vessel itself is sized."
+  "explanation": "The message names the only two levers there are, pig more often or resize the catcher. At a holdup of 0.100000 the same line still reports 2.1662 days, and the room the sweep leaves is what the dropout fills."
  },
  {
   "prompt": "The holdup guard and the swept volume guard are both read on two sides. Which values does the engine accept, and what does accepting them say?",
@@ -154,15 +154,15 @@
   "explanation": "The regime word is not wrong and the friction factor is not a fabrication. The band is held for the literature and never graded."
  },
  {
-  "prompt": "Colebrook answers at a relative roughness of 0.500000 with 0.3308894263 and flags nothing. What is the danger in that return?",
+  "prompt": "A line is partly blocked by wax and a designer raises its relative roughness to 0.500000 to stand for the blockage, taking the 0.3308894263 that comes back. What is wrong with that, beyond the extrapolation?",
   "options": [
-   "It is large enough to dominate any pressure drop it enters, so a single extrapolated row can move a whole sizing sweep by more than any other input could.",
-   "It is returned with a regime of invalid, which a caller reading only the friction factor will miss, so the warning exists and sits in a field nobody reads.",
-   "It cannot be reproduced, since the fixed point does not settle at that roughness and the engine returns whatever iterate it had reached when it stopped.",
-   "It is plausible rather than absurd, arriving in the same field at the same precision as a friction factor from the middle of the fit, so nothing gives a reader a signal."
+   "Nothing is wrong with the substitution itself and only the extrapolation is at fault, so the same approach is sound on any line wherever the value stays under the published 0.050000.",
+   "It is the wrong sign of correction, since a partly blocked bore lowers the loss a line reports and raising the roughness raises it, so the two effects work against each other.",
+   "The engine will refuse the run, because a relative roughness of 0.500000 describes a wall rougher than the bore is wide and the roughness guard is written to catch exactly that.",
+   "Wax changes the flow area and the geometry, so a real effect has been pushed into a term nobody fitted for it while the bore the whole chain computes over is still the clean one."
   ],
   "answer": 3,
-  "explanation": "A correlation outside its range does not usually produce nonsense. The published range reaches about 0.05 and the last three rows of the table are past it."
+  "explanation": "Scale, wax and a partially blocked bore change the flow area. The engine answers 0.3308894263 and flags nothing, because the value is meaningful even where nobody fitted it."
  },
  {
   "prompt": "On the 11.938000 in bore General Flow settles on 0.0112132010 and the figure that would make it match Weymouth is 0.0139989737. What may a designer do with that pair?",
@@ -190,7 +190,7 @@
   "prompt": "Two loops in this module return their last iterate with no flag. The outlet-pressure solve handles a case it cannot answer differently. What is the difference?",
   "options": [
    "The outlet solve reports the number of iterations it ran, so a caller can see whether it converged, and the two loops report neither a count nor a residual.",
-   "The outlet solve is a bisection with a bracket, so it cannot fail to converge at all, and the two loops are fixed points with no bracket and therefore no guarantee.",
+   "The outlet solve returns the bracket it searched beside its answer, so a caller can see the interval the outlet was found in, and the two loops return no interval at all.",
    "The outlet solve refuses in words when the line cannot carry the target rate, so it distinguishes an answer from the place it stopped, and the two loops have no such distinction available.",
    "The outlet solve returns a NaN when it cannot answer, which a caller can test for, and the two loops return a plausible number that no test can distinguish."
   ],
@@ -222,9 +222,9 @@
  {
   "prompt": "Three returns sit outside the refusal contract. What does each one return, and what is the pattern behind all three?",
   "options": [
-   "NaN for all three, the pattern being that a bare number is the only return a function can make when the failure happens before any object has been assembled to carry a message.",
+   "NaN in all three, every one of them a bare number, the pattern being that a bare number is the only return a function can make when the failure happens before any object has been assembled to carry a message.",
    "An error object for all three, the pattern being that they sit outside the contract in the sense that they are reached from outside the ordinary entry points rather than in their shape.",
-   "NaN for a Reynolds number with no viscosity and for a volume with no bore, and a friction factor of null under a regime of invalid, the pattern being that a function refuses in words only where it has room for a message.",
+   "NaN in all three, bare for a Reynolds number with no viscosity and for a volume with no bore and beside a regime of invalid for the friction factor, the pattern being that a function refuses in words only where it has room for a message.",
    "A null for the two bare numbers and NaN for the friction factor, the pattern being that a value with a field beside it can hold a null while a value on its own cannot."
   ],
   "answer": 2,
@@ -239,12 +239,12 @@
    "That the engine threw and the caller wrote a null in place of the missing result, since a refusal in this engine never reaches a saved file as a value."
   ],
   "answer": 0,
-  "explanation": "Two of the three exceptions are a number that is not a number and one is a deliberate null. The regime field is the only thing that distinguishes the third."
+  "explanation": "All three exceptions are a number that is not a number, and not one of them is a null the engine chose. The regime field is the only thing that distinguishes the third."
  },
  {
   "prompt": "Six sentences in the meaningless-input catalogue appear twice. Which pair below is one sentence reached from two different entry points?",
   "options": [
-   "The efficiency message, which answers a General Flow call and a Weymouth call on the same multiplier.",
+   "The efficiency message, which answers a gas form for a multiplier above one and a liquid line for the same multiplier below zero.",
    "The swept volume message about a positive bore and length, which answers a sweep call and the interval call that follows it.",
    "The gas length message, which answers a transmission form and the elevation adjustment that feeds a value into it.",
    "The elevation message, which answers a liquid line that rises further than its own length and a gas line that does the same."
@@ -316,18 +316,18 @@
    "The goldens work in SI where the engine works in field units, so agreement between them is evidence about the conversions alone and cannot detect an arithmetic slip in either file."
   ],
   "answer": 0,
-  "explanation": "The suite found a real defect in a live chain, which is arbitration between two implementations and is the job a synthetic case does well. It is not a claim about any pipeline."
+  "explanation": "Arbitration between two implementations is the job a synthetic case does well. It is not a claim about any pipeline."
  },
  {
-  "prompt": "Two modules inside one chain were using different barrels. How was the disagreement settled, and what makes the answer defensible?",
+  "prompt": "A barrel is measured out of lineHydraulics and out of chokePerformance by asking each module a question about itself. Why is that a better reading than opening either source file?",
   "options": [
-   "The engine was re-cut against the oracle's SI figure, which is the only barrel anywhere in the package that was never typed in by hand and is the defensible one for that reason.",
-   "The larger of the two modules was taken as the reference and the smaller one was changed to match it, which is defensible because far more results in this studio depend on lineHydraulics.",
-   "Each module was asked a question about itself, both returned 5.6145833333333 cubic feet per barrel at a ratio of 1.0000000000000, and the value kept is exact by definition.",
-   "The two were averaged and both modules re-cut against the mean, which is defensible because neither module's own figure had a source standing behind it."
+   "A source file carries the constant in SI where the modules work in field units, so reading one would require a conversion that the measurement avoids making.",
+   "A source file is not vendored with the goldens, so the constant it carries cannot be reproduced by anybody reading this course from the package alone.",
+   "A source file says what somebody typed and a question put to the module says what the module returns, which is the figure every result in that module was actually computed with.",
+   "A source file states the constant to fewer digits than the modules return it at, so reading one would lose precision that the erosional and volume chains both need."
   ],
   "answer": 2,
-  "explanation": "They were two different numbers one import apart, inside the single chain this studio composes, until the package gave them one definition."
+  "explanation": "A source file records an intention and a return records a behaviour. Every barrel the volume chain and the erosional chain have ever produced was produced with the figure the question gets back, whatever any file says."
  },
  {
   "prompt": "A designer writes that a two-phase line was checked against this engine and passed. What is wrong with that sentence?",
@@ -459,6 +459,6 @@
    "That the engine converges on every published case, which is what agreement between two implementations of the same implicit relations demonstrates."
   ],
   "answer": 1,
-  "explanation": "Agreement between two implementations is evidence about arithmetic. Dismissing the goldens for that reason is the opposite mistake, since they settled a real disagreement inside a live chain."
+  "explanation": "Agreement between two implementations is evidence about arithmetic and about nothing else. A defensible sentence names the implementation, the assumptions and the unit system, and stops short of the word pipeline."
  }
 ]

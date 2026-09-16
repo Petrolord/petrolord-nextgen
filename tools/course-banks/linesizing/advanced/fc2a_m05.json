@@ -121,15 +121,15 @@
   "explanation": "The ratio of the two is 1.0000000000000. Neither figure was read out of a source file, which is what makes each one a measurement of the module rather than a reading of its code."
  },
  {
-  "prompt": "The two modules were one import apart inside a single chain and were using different barrels. How did the goldens settle which half to change?",
+  "prompt": "The barrel each of the two modules returns is 5.6145833333333 cubic feet, at a ratio of 1.0000000000000. What does that agreement rest on, and what does it not establish?",
   "options": [
-   "The goldens were re-cut against the figure the larger of the two modules carried, which made lineHydraulics the reference and chokePerformance the half that moved.",
-   "Both modules' own oracles already worked from the definition, so the goldens said which half of the disagreement was right before anyone asked them.",
-   "The goldens could not settle it, so the package took the value that is exact by definition and re-cut both oracles against it afterwards.",
-   "The goldens flagged the ratio of the two figures as differing from 1.0000000000000, which named the disagreement without ever saying which of its two sides was the wrong one."
+   "The golden oracle supplying the same figure to both modules in SI units, so what the agreement establishes is that the field-unit conversion inside each of the two modules has been applied once and in the right direction.",
+   "One shared definition, forty-two gallons of two hundred and thirty-one cubic inches each over the seventeen hundred and twenty-eight cubic inches in a cubic foot, and a definition is not a measurement.",
+   "The larger of the two modules standing as the reference the smaller is read against, so what the agreement establishes is that lineHydraulics is the half a reader should quote whenever the two modules are being read together.",
+   "The ratio being carried to thirteen decimals before it is compared, so what the agreement establishes is that a barrel reproduces to that precision and leaves open only whatever sits in the digits beyond it."
   ],
   "answer": 1,
-  "explanation": "The value kept is exact by definition rather than by measurement: forty-two gallons of two hundred and thirty-one cubic inches each, over the seventeen hundred and twenty-eight cubic inches in a cubic foot."
+  "explanation": "A definition fixes a conversion and says nothing whatever about a pipeline. What the pair of returns does show is that the erosional chain and the volume chain are counting the same barrel, which is the condition for reading either against the other at all."
  },
  {
   "prompt": "What does this engine contain of the multiphase half?",
@@ -162,6 +162,6 @@
    "Green means the engine agrees with an independent implementation of the same assumptions, and calling that agreement with measured pipeline performance changes the claim entirely."
   ],
   "answer": 3,
-  "explanation": "The goldens arbitrate between implementations and they do not speak for any measured pipeline. Dismissing them for the same reason is the opposite mistake, since they found a real defect in a live chain."
+  "explanation": "The goldens arbitrate between implementations and they do not speak for any measured pipeline. Refusing to run them for that reason is the opposite mistake, because arbitration is worth having on its own terms."
  }
 ]

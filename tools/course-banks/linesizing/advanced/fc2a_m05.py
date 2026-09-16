@@ -82,12 +82,12 @@ q(3, "One barrel was measured out of two modules by asking each module a questio
   "The published golden volume against the engine volume in each of the two modules, which is the only measurement available that does not read either source file."],
  "The ratio of the two is 1.0000000000000. Neither figure was read out of a source file, which is what makes each one a measurement of the module rather than a reading of its code.")
 
-q(1, "The two modules were one import apart inside a single chain and were using different barrels. How did the goldens settle which half to change?",
- "Both modules' own oracles already worked from the definition, so the goldens said which half of the disagreement was right before anyone asked them.",
- ["The goldens were re-cut against the figure the larger of the two modules carried, which made lineHydraulics the reference and chokePerformance the half that moved.",
-  "The goldens could not settle it, so the package took the value that is exact by definition and re-cut both oracles against it afterwards.",
-  "The goldens flagged the ratio of the two figures as differing from 1.0000000000000, which named the disagreement without ever saying which of its two sides was the wrong one."],
- "The value kept is exact by definition rather than by measurement: forty-two gallons of two hundred and thirty-one cubic inches each, over the seventeen hundred and twenty-eight cubic inches in a cubic foot.")
+q(1, "The barrel each of the two modules returns is 5.6145833333333 cubic feet, at a ratio of 1.0000000000000. What does that agreement rest on, and what does it not establish?",
+ "One shared definition, forty-two gallons of two hundred and thirty-one cubic inches each over the seventeen hundred and twenty-eight cubic inches in a cubic foot, and a definition is not a measurement.",
+ ["The golden oracle supplying the same figure to both modules in SI units, so what the agreement establishes is that the field-unit conversion inside each of the two modules has been applied once and in the right direction.",
+  "The larger of the two modules standing as the reference the smaller is read against, so what the agreement establishes is that lineHydraulics is the half a reader should quote whenever the two modules are being read together.",
+  "The ratio being carried to thirteen decimals before it is compared, so what the agreement establishes is that a barrel reproduces to that precision and leaves open only whatever sits in the digits beyond it."],
+ "A definition fixes a conversion and says nothing whatever about a pipeline. What the pair of returns does show is that the erosional chain and the volume chain are counting the same barrel, which is the condition for reading either against the other at all.")
 
 q(2, "What does this engine contain of the multiphase half?",
  "None of it. There is no flow regime, no slip, no holdup correlation and no slug model anywhere in it.",
@@ -108,7 +108,7 @@ q(3, "A report states that the golden suite for this engine is green and describ
  ["Green means every published wall, pigging and friction case reproduces, which says nothing at all about the cases that were never published, so the overstatement is one of coverage rather than one of kind.",
   "Green means the engine agrees with the oracle to the four decimals the goldens are stated at, and the overstatement is the precision the word validation implies.",
   "Green means the arithmetic closed on the day the goldens were cut, and since nothing here reads a clock the overstatement is that the result is current."],
- "The goldens arbitrate between implementations and they do not speak for any measured pipeline. Dismissing them for the same reason is the opposite mistake, since they found a real defect in a live chain.")
+ "The goldens arbitrate between implementations and they do not speak for any measured pipeline. Refusing to run them for that reason is the opposite mistake, because arbitration is worth having on its own terms.")
 
 emit(Q, '/root/fc-wip-linesizing/banks/fc2a_m05.json', expect_n=15)
 finish()

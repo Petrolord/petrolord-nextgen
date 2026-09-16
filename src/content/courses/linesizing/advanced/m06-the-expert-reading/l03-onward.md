@@ -20,7 +20,7 @@ Was it computed, copied or assumed?
 
 A computed figure moves when its duty moves. A copied figure never moves, because it was never a function of anything. An assumed figure moves when somebody changes their mind, and nothing in the answer records that it might.
 
-A swept volume looks computed and is half assumed. A c factor looks like a standard and is copied. A friction factor at a Reynolds number of 3000 looks like the others and came from a correlation that was not written for it.
+A swept volume looks computed and is half assumed. A c factor looks like a standard and is copied. A friction factor from inside the band between 2100 and 4000 looks like the others and came from a correlation that was not written for it.
 
 ## The habit that carries
 

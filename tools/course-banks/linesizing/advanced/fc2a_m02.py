@@ -12,7 +12,7 @@ q(2, "The OGBIA line holds 1633.5349 bbl at a bore of 7.981000 in over 26400.000
   "The holdup of 0.060000, which is the input that turns a bore and a length into the barrels a line is reported to hold."],
  "Bore and length are the only inputs. The holdup enters one step later and turns 1633.5349 bbl into the 98.0121 bbl a sphere pushes ahead of it.")
 
-q(0, "The package no longer types a barrel into either module. How is the figure of 5.6145833333333 cubic feet per barrel obtained from lineHydraulics, and what kind of figure is it?",
+q(0, "The package types a barrel into neither module. How is the figure of 5.6145833333333 cubic feet per barrel obtained from lineHydraulics, and what kind of figure is it?",
  "By asking that module for the flow area times the length over its own line volume, and what comes back is exact by definition rather than by measurement.",
  ["By dividing the line volume of 1633.5349 bbl by the volume the golden oracle reports in SI units, which makes it a measured agreement between two implementations rather than a definition.",
   "By reading it from the catalogue the roughnesses and the grade yields come from, which is why an unknown entry is NaN.",

@@ -28,7 +28,7 @@ What it is not is the service that was asked for. A caller who passes an unrecog
 
 ## Why it was left alone
 
-This one was not repaired, and the reason is ownership rather than difficulty. The RP 14E table belongs to the wellhead engine that two other studios read, so changing what an unknown service returns is a decision for that table rather than for this line-sizing chain. Repairing it here would fix one caller and change the behaviour of two applications that never asked.
+This one is left as it stands, and the reason is ownership rather than difficulty. The RP 14E table belongs to the wellhead engine that two other studios read, so changing what an unknown service returns is a decision for that table rather than for this line-sizing chain. Changing it here would fix one caller and change the behaviour of two applications that never asked.
 
 ## The second one is not a guard problem at all
 
@@ -46,4 +46,4 @@ The second mistake is expecting guards to be a complete defence. Guards catch ma
 
 ## Exercise
 
-Give what each of the five catalogues returns for an id it does not carry, and say which one differs and how a caller could detect it. Then explain why that one was left unrepaired, and state exactly what changes when a rating is called without its corrosion allowance.
+Give what each of the five catalogues returns for an id it does not carry, and say which one differs and how a caller could detect it. Then explain why that one is left as it stands, and state exactly what changes when a rating is called without its corrosion allowance.

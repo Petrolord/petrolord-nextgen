@@ -4,11 +4,11 @@ A guard is only understood when both of its sides are known. Knowing that an eng
 
 {{panel:fc-wall-pig-explorer}}
 
-## The limits are all legal values
+## The limits these seven guards sit at are all legal values
 
-Every guard in this engine sits at a value that is itself a real engineering condition.
+Every guard this tier reads on both sides sits at a value that is itself a real engineering condition.
 
-A resistance sum of zero is a line with no fittings on it. An efficiency of exactly one is the ideal the published forms are written for. A holdup of one is a line running liquid full. A line exactly as tall as it is long is vertical. A corrosion allowance of zero is a line that is not expected to corrode, and a swept volume of zero is a dry line.
+A resistance sum of zero is a line with no fittings on it. An absolute roughness of zero is a perfectly smooth wall. An efficiency of exactly one is the ideal the published forms are written for. A holdup of one is a line running liquid full. A line exactly as tall as it is long is vertical. A corrosion allowance of zero is a line that is not expected to corrode, and a swept volume of zero is a dry line.
 
 None of those is an edge case to be tolerated. Each is a condition somebody will legitimately ask about, so each has to be answered rather than refused.
 
@@ -47,7 +47,7 @@ That is why both sides are read. Testing only the bad side confirms that a guard
 
 ## The mistake
 
-The mistake is verifying a guard with an obviously absurd value. Passing an efficiency of 50 proves nothing that passing 1.000001 does not prove better, and it leaves the question of whether 1.000000 itself survives.
+The mistake is verifying a guard with an obviously absurd value. Passing an obviously impossible efficiency proves nothing that passing 1.000001 does not prove better, and it leaves the question of whether 1.000000 itself survives.
 
 The second mistake is reading an accepted limit as a recommendation. A holdup of 1.000000 is accepted because a liquid-full line is a real condition to ask about, and accepting the question is not advice to design for it.
 

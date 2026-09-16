@@ -1,6 +1,6 @@
 # The story so far
 
-This tier took the two questions a pressure drop cannot answer, the wall a code demands and the liquid a pig pushes, and then turned round and audited the whole engine. What follows is three questions and the three pipes they are asked of.
+This tier took the two questions a pressure drop cannot answer, the wall a code demands and the liquid a pig pushes, and then turned round and audited the whole engine. What follows is three questions, asked of the two pipes they belong to.
 
 ## As a hydraulic line
 
@@ -14,7 +14,7 @@ The SOKU pipe at 12.750000 in of outside diameter and 52000.000000 psi of yield 
 
 The OGBIA line holds 1633.5349 bbl, a sphere crosses it in 2.444444 hours, and at a measured holdup of 0.060000 it delivers 98.0121 bbl to whatever is waiting at the end, every 3.7997 days.
 
-Three answers, and not one of them can be derived from the other two. The independence has nothing to do with the pipes being the same, which is why the wall reading is stated on the pipe it belongs to. A reader who knows the pressure drop knows nothing about the wall, and a reader who knows the wall knows nothing about the slug.
+Three answers, and not one of them can be derived from the other two. Two of the three are asked of the same pipe and the independence does not rest on that, which is why the wall reading is stated on the pipe it belongs to. A reader who knows the pressure drop knows nothing about the wall, and a reader who knows the wall knows nothing about the slug.
 
 ## What the audit half added
 

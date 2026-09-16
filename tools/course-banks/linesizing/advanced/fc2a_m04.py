@@ -24,7 +24,7 @@ q(2, "Three returns in this engine sit outside the refusal contract on purpose. 
  ["The Reynolds number of a line with no viscosity, the volume of a line with no bore, and the interval whose sweep already overfills the catcher, which prescribes rather than describes.",
   "The friction factor at a negative relative roughness, the wall with no design pressure, and the outlet-pressure solve on an equation the engine does not carry by name.",
   "The volume of a line with no bore, the rating with no wall left after the allowance, and the sweep handed a holdup above one, all three of which answer with a bare number."],
- "The first two return NaN and the third returns a friction factor of null under a regime of invalid. The wall and the sweep cases refuse in the ordinary way, with an object carrying an error string.")
+ "All three return NaN, the first two bare and the third in a field beside a regime of invalid. The wall and the sweep cases refuse in the ordinary way, with an object carrying an error string.")
 
 q(0, "The Reynolds number and the line volume answer NaN while the friction factor answers with a regime of invalid. What explains the difference between those two treatments?",
  "The first two are bare numbers with nowhere to put a message, and the friction factor already returns an object with a regime field, so its refusal rides in a field that was there anyway.",
@@ -34,11 +34,11 @@ q(0, "The Reynolds number and the line volume answer NaN while the friction fact
  "Where a function has room for a message it refuses in words, and where it has none it returns a value that cannot be mistaken for a pressure or a rate. The friction factor's is the tidiest of the three.")
 
 q(1, "All three of the returns outside the contract print as null in a saved case file. Why, and what does it cost a reader?",
- "A NaN has no JSON spelling, so two of them are a number that is not a number while the third is a deliberate null, and the record cannot tell them apart.",
+ "A NaN has no JSON spelling, so all three print as null although not one of them is a null the engine chose, and the record cannot say which of the three it holds.",
  ["The encoder replaces any value outside the contract with null so that a stored case always parses, so a reader loses the distinction between a refusal and an ordinary answer.",
   "All three genuinely return null, and what a reader loses is only the message, since the engine attaches a message to an error object and none to a null.",
   "The engine serialises the regime field ahead of the friction factor, so the two bare numbers inherit the invalid regime and print under it, and the original values are gone."],
- "The engine returned NaN and null is what printing it produced. The regime field is the only thing that distinguishes the third, which is another reason that design is the better one.")
+ "The engine returned NaN in every one of the three and null is what printing it produced. The regime field is the only thing that distinguishes the third, which is another reason that design is the better one.")
 
 q(3, "The engine refuses two different classes of thing in the same shape. What is the distinction, and why does it matter to whoever reads the message?",
  "A state the method has no answer for had meaningful inputs and led nowhere, and a meaningless input was never attempted, so a reader who conflates them hunts for physics behind a typing error.",

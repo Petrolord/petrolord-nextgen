@@ -30,7 +30,7 @@ So a line volume is a hard number and a liquid inventory is not, even though one
 
 ## Where it declines to answer
 
-The volume call is one of three places in this engine that hands back a bare number with nowhere to attach a message. Asked for the volume of a line with no bore it returns NaN rather than an error object, and the functions wrapping it are what refuse in words. That shape is worth knowing about now and is taken apart properly in module 4.
+The volume call is one of two places in this engine that hands back a bare number with nowhere to attach a message, the Reynolds number being the other. Asked for the volume of a line with no bore it returns NaN rather than an error object, and the functions wrapping it are what refuse in words. It is one of three returns that sit outside the refusal contract, and all three are taken apart properly in module 4.
 
 ## The mistake
 
