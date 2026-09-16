@@ -415,7 +415,7 @@
    "State the K, the pressure it was quoted at, and that nothing reconciled it against the table."
   ],
   "answer": 3,
-  "explanation": "An override returns source typed with derated and floored both false, and no warning is raised when a typed K sits far from the table. A vendor K of 0.9 would be taken silently."
+  "explanation": "An override returns source typed with derated and floored both false, and no warning is raised when a typed K sits far from the table."
  },
  {
   "prompt": "A layout reports 69 checks and a sweep reports six rows. What do the two counts have in common as headline numbers?",

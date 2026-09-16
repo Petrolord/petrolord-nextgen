@@ -47,7 +47,7 @@ z is not monotonic in pressure in any simple way a reader can guess. It falls fr
 
 ## The mistake
 
-Holding z at a constant. The retired app used 0.850000 for every gas at every condition, and the four cases here return 0.871027, 0.986286, 0.828979 and 0.873908. The error runs from small to very large depending on where the stream sits, and it is largest exactly where a low-pressure stage sits.
+Holding z at a constant. The retired app used 0.85 for every gas at every condition, and the four cases here return 0.871027, 0.986286, 0.828979 and 0.873908. The error runs from small to very large depending on where the stream sits, and it is largest exactly where a low-pressure stage sits.
 
 ## Exercise
 

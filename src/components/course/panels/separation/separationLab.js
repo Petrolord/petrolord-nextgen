@@ -1432,6 +1432,28 @@ export const ejulebeRuns = () => {
 };
 
 /**
+ * THE GRADING FLOOR. A tolerance below half a unit in the last place the digest
+ * PRINTS a quantity grades a correctly-read figure WRONG: a learner reads the
+ * right row, quotes it exactly as the course told them to, and still fails. The
+ * kit has now found that shape three times each in FC2, FC3 and FC4, and none of
+ * the six independent tier audits across those waves caught any of them, because
+ * each looked at lessons, or banks, or the digest, and nobody looked across the
+ * seam between the stated precision and the grader.
+ *
+ * FC1's digest header states two precisions: vessel work (ft, ft2, lb per ft3,
+ * ft per s, ratios) to SIX decimals, site work (metres, kilowatts, seconds) to
+ * FOUR. So every tolerance below is derived rather than typed:
+ *
+ *     tol = max(stated, halfUlp(the decimals that class prints to))
+ *
+ * MAX AND NEVER MIN. It only ever loosens, so nothing that graded correct before
+ * this can grade wrong after it. On FC1 every stated tolerance already clears its
+ * floor, so this changes no number today; it is here so that a later change to a
+ * stated tolerance cannot silently drop below what the course prints.
+ */
+const gradeFloor = (stated, decimals) => Math.max(stated, 0.5 * 10 ** -decimals);
+
+/**
  * The eighteen graded fields as [tier, key, value, tolerance], in the order and
  * with the tolerances the capstone publishes. THE TOLERANCE IS ABSOLUTE, in the
  * field's own units: academy_submit_capstone grades abs(v_got - v_exp) <= v_tol.
@@ -1441,24 +1463,24 @@ export const ejulebeCapstoneFields = () => {
     c1, c1v, c2h, c2slug, c2fing, c2flare, c2pool, c33, c4sweep, c3lay,
   } = ejulebeRuns();
   return [
-    ['beginner', 'ejulebe1_gas_density_lbft3', c1.rhoGas, 1e-4],
-    ['beginner', 'ejulebe1_gas_actual_ft3s', c1.qGasActFt3S, 1e-4],
-    ['beginner', 'ejulebe1_terminal_velocity_fts', c1.vT, 1e-5],
-    ['beginner', 'ejulebe1_gas_diameter_ft', c1v.diameterGasFt, 1e-4],
-    ['beginner', 'ejulebe1_height_ft', c1v.heightFt, 1e-4],
-    ['beginner', 'ejulebe1_velocity_margin', c1v.velocityMargin, 1e-5],
-    ['intermediate', 'ejulebe2_liquid_length_ft', c2h.lengthLiquidFt, 1e-4],
-    ['intermediate', 'ejulebe2_gas_velocity_fts', c2h.gasVelocityFtS, 1e-5],
-    ['intermediate', 'ejulebe_slug_vessel_diameter_ft', c2slug.diameterFt, 1e-4],
-    ['intermediate', 'ejulebe_finger_length_ft', c2fing.fingerLengthFt, 1e-3],
-    ['intermediate', 'odeama_flare_setback_m', c2flare.distanceM, 1e-3],
-    ['intermediate', 'odeama_pool_setback_edge_m', c2pool.setbackFromEdgeM, 1e-3],
-    ['advanced', 'ejulebe3_interface_height_ft', c33.interfaceHeightFt, 1e-5],
-    ['advanced', 'ejulebe3_water_drop_fall_s', c33.dropChecks.waterDropFallS, 1e-3],
-    ['advanced', 'ejulebe3_oil_drop_rise_s', c33.dropChecks.oilDropRiseS, 1e-3],
-    ['advanced', 'ejulebe4_preferred_height_ft', c4sweep.preferred.lengthFt, 1e-4],
-    ['advanced', 'adanga_worst_absolute_shortfall_m', c3lay.worstAbsolute.shortfallM, 1e-4],
-    ['advanced', 'adanga_worst_relative_fraction', c3lay.worstRelative.shortfallFraction, 1e-6],
+    ['beginner', 'ejulebe1_gas_density_lbft3', c1.rhoGas, gradeFloor(1e-4, 6)],
+    ['beginner', 'ejulebe1_gas_actual_ft3s', c1.qGasActFt3S, gradeFloor(1e-4, 6)],
+    ['beginner', 'ejulebe1_terminal_velocity_fts', c1.vT, gradeFloor(1e-5, 6)],
+    ['beginner', 'ejulebe1_gas_diameter_ft', c1v.diameterGasFt, gradeFloor(1e-4, 6)],
+    ['beginner', 'ejulebe1_height_ft', c1v.heightFt, gradeFloor(1e-4, 6)],
+    ['beginner', 'ejulebe1_velocity_margin', c1v.velocityMargin, gradeFloor(1e-5, 6)],
+    ['intermediate', 'ejulebe2_liquid_length_ft', c2h.lengthLiquidFt, gradeFloor(1e-4, 6)],
+    ['intermediate', 'ejulebe2_gas_velocity_fts', c2h.gasVelocityFtS, gradeFloor(1e-5, 6)],
+    ['intermediate', 'ejulebe_slug_vessel_diameter_ft', c2slug.diameterFt, gradeFloor(1e-4, 6)],
+    ['intermediate', 'ejulebe_finger_length_ft', c2fing.fingerLengthFt, gradeFloor(1e-3, 6)],
+    ['intermediate', 'odeama_flare_setback_m', c2flare.distanceM, gradeFloor(1e-3, 4)],
+    ['intermediate', 'odeama_pool_setback_edge_m', c2pool.setbackFromEdgeM, gradeFloor(1e-3, 4)],
+    ['advanced', 'ejulebe3_interface_height_ft', c33.interfaceHeightFt, gradeFloor(1e-5, 6)],
+    ['advanced', 'ejulebe3_water_drop_fall_s', c33.dropChecks.waterDropFallS, gradeFloor(1e-3, 4)],
+    ['advanced', 'ejulebe3_oil_drop_rise_s', c33.dropChecks.oilDropRiseS, gradeFloor(1e-3, 4)],
+    ['advanced', 'ejulebe4_preferred_height_ft', c4sweep.preferred.lengthFt, gradeFloor(1e-4, 6)],
+    ['advanced', 'adanga_worst_absolute_shortfall_m', c3lay.worstAbsolute.shortfallM, gradeFloor(1e-4, 4)],
+    ['advanced', 'adanga_worst_relative_fraction', c3lay.worstRelative.shortfallFraction, gradeFloor(1e-6, 6)],
   ];
 };
 

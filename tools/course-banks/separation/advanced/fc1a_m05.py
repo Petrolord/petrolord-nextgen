@@ -31,7 +31,7 @@ q(3, "A vendor supplies K as an override and the engine returns source typed wit
  ["It records the table value beside the override so a reviewer can see both, which is what the derated and floored flags are reporting as false on that row.",
   "It refuses an override that sits more than one derating step away from the table value at that pressure, which is the guard that keeps a typed K honest.",
   "It applies the pressure derating to the override as well, so a typed K of 0.28 falls by 0.01 per 100 psi above 100 psig in the same way a table value does."],
- "An override wins outright and says so. A vendor K of 0.9 would be taken silently, which is why an override belongs in a report beside the pressure it was quoted for.")
+ "An override wins outright and says so. A vendor K far above every row of the table would be taken silently, which is why an override belongs in a report beside the pressure it was quoted for.")
 
 q(0, "A horizontal vessel needs a droplet settling velocity for its gas length. What does this engine use, and why is that held?",
  "It uses the Souders-Brown velocity at the horizontal K, which was written to say what velocity a gas may carry without lifting liquid out, and that packaging has not been read against a published method.",

@@ -27,12 +27,12 @@ q(3, "A liquid level of 0 and a liquid level of 1 are both finite numbers and bo
   "The presence of the value alone, so both reach the geometry and fail later."],
  "The message is \"liquidLevelFrac must lie strictly between 0 and 1 (got 0)\". A gauge pressure of -20 is refused the same way, a perfectly good number sitting outside its domain."),
 
-q(1, "The retired app held z at 0.850000, used one K at every pressure, sized two-phase vessels only, and took its gas velocity from the diameter of the previous render. Which of those four is hardest to catch?",
+q(1, "The retired app held z at 0.85, used one K at every pressure, sized two-phase vessels only, and took its gas velocity from the diameter of the previous render. Which of those four is hardest to catch?",
  "The velocity from the previous render, because what prints is a correct calculation on a diameter the user has already replaced.",
  ["The single K at every pressure, because a table row that never moves with pressure gives a settling velocity wrong by a fixed proportion on every vessel that app ever sized.",
   "The two-phase limit, because a drum holding oil and water is sized on one mixed density.",
-  "The held z of 0.850000, because the four published cases return 0.871027, 0.986286, 0.828979 and 0.873908, so the error differs on every stream and leaves no trace on any of them."],
- "A stale velocity is arithmetically correct against an input nobody can see any more. The other three are wrong in ways a reader can reproduce, and 0.850000 can be checked against 0.908065 at the ABANA conditions."),
+  "The held z of 0.85, because the four published cases return 0.871027, 0.986286, 0.828979 and 0.873908, so the error differs on every stream and leaves no trace on any of them."],
+ "A stale velocity is arithmetically correct against an input nobody can see any more. The other three are wrong in ways a reader can reproduce, and 0.85 can be checked against 0.908065 at the ABANA conditions."),
 
 q(3, "Two K lookups fail. One names no mist extractor at all, the other names verticalFoam. What does each message do that the other cannot?",
  "The first offers the other route by name, kOverride, and the second quotes the rejected string back so a typing error is visible.",
@@ -43,7 +43,7 @@ q(3, "Two K lookups fail. One names no mist extractor at all, the other names ve
 
 q(0, "A user types 614.700000 into the field the K lookup reads. What has gone wrong, and does anything object?",
  "The lookup derates against a pressure the vessel never sees, and nothing objects, because that figure is finite and non-negative.",
- ["The lookup refuses it, since a gauge pressure ending in .700000 is the signature of an absolute figure and the guard tests for it before the pressure rule is applied to a row.",
+ ["The lookup refuses it, since a gauge pressure carrying the atmospheric 14.7 in its decimals is the signature of an absolute figure and the guard tests for that before the pressure rule reaches a row.",
   "Nothing has gone wrong. The pressure rule is written against absolute pressure, so 600.000000 psig would be the error.",
   "The K comes back floored at 0.120000, because the extra 14.7 carries the deduction past the floor."],
  "The pressure rule is written against gauge pressure above 100 psig, and both pressures are live inside one sizing run. The label is the only thing separating 600.000000 psig from 614.700000 psia."),
@@ -81,7 +81,7 @@ q(3, "A caller catches the SeparatorInputError for a missing gas gravity and car
  ["A diameter that is right and a height that is wrong, because the gravity enters on the gas side of the calculation and the retention volume of 35.091146 ft3 is untouched by any of it.",
   "A refusal further down, because the substituted gravity fails the domain check at the reduced pair and the second guard catches what the first one was silenced on.",
   "The same answer as before, because the engine re-reads the gravity from the stream record when the density step runs and the substituted value never reaches that step at all."],
- "The gravity feeds Ppr and Tpr, then z, then the density, then the settling velocity and the diameter. That is what the retired app did by holding z at 0.850000: a full set of dimensions printed every time."),
+ "The gravity feeds Ppr and Tpr, then z, then the density, then the settling velocity and the diameter. That is what the retired app did by holding z at 0.85: a full set of dimensions printed every time."),
 
 q(1, "A user interface is being laid out for the studio. Which kind of refusal belongs beside the results, and which belongs on the input that produced it?",
  "The returned error string belongs beside the results, because the run continued and other candidates still have numbers, and the thrown error belongs on the input it names.",
@@ -104,8 +104,8 @@ q(2, "What claim is being made when a report states that ABANA-1 needs 2.052551 
   "That the gas leaves dry, which is the meaning of a velocity margin of 1.000000 at the gas-required diameter."],
  "A sized vessel and a stream that splits the way a flowsheet says it will are two separate claims. This method returns lengths and areas and never a composition."),
 
-q(1, "An engineer reads 600 off a drawing and hands it straight to the gas law. What one check would have caught that before a vessel was sized?",
- "An absolute pressure at these conditions ends in .700000, and 600 does not.",
+q(1, "An engineer reads the pressure off a drawing with no unit beside it and hands it straight to the gas law. What one check would have caught that before a vessel was sized?",
+ "An absolute pressure at these conditions is 614.700000 psia, and the drawing carries the gauge figure of 600.000000.",
  ["A reduced temperature outside the DAK range of 1.0 to 3.0, which is what an absolute pressure entered as a gauge figure produces at the ABANA conditions of 95.000000 degF.",
   "A gas density returning zero, which is what the gas law gives whenever a gauge pressure is handed to it in the place where an absolute pressure belongs.",
   "A velocity margin away from 1.000000 at the gas-required diameter, since the margin is built from the same pressure and would have moved along with it."],
