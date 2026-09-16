@@ -1,0 +1,305 @@
+{
+  "app_slug": "linesizing",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-gas-line-is-not-a-liquid-line",
+      "title": "A Gas Line Is Not a Liquid Line",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-the-pressures-are-squared",
+          "title": "Why the pressures are squared",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-base-conditions-are-a-choice",
+          "title": "Base conditions are a choice",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-miles-not-feet",
+          "title": "Miles, not feet",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-dead-line-returns",
+          "title": "What a dead line returns",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-four-transmission-forms",
+      "title": "The Four Transmission Forms",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-weymouth",
+          "title": "Weymouth",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-two-panhandles",
+          "title": "The two Panhandles",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-general-flow-and-its-iteration",
+          "title": "General Flow, and its iteration",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-four-answers-on-one-line",
+          "title": "Four answers on one line",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-diameter-exponent",
+          "title": "The diameter exponent",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-elevation-adjustment",
+      "title": "The Elevation Adjustment",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-static-column-in-a-flowing-line",
+          "title": "A static column in a flowing line",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-driving-group-changes-shape",
+          "title": "The driving group changes shape",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-equivalent-length-factor",
+          "title": "The equivalent length factor",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-things-a-hill-does",
+          "title": "Two things a hill does",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-outlet-pressure",
+      "title": "The Outlet Pressure",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-no-closed-form-in-this-engine",
+          "title": "No closed form in this engine",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ceiling-is-not-the-inlet",
+          "title": "The ceiling is not the inlet",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-rate-the-line-cannot-carry",
+          "title": "A rate the line cannot carry",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-downhill-where-the-drop-is-negative",
+          "title": "Downhill, where the drop is negative",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-uphill-where-the-ceiling-falls",
+          "title": "Uphill, where the ceiling falls",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-marching-a-profile",
+      "title": "Marching a Profile",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-one-segment-at-a-time",
+          "title": "One segment at a time",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-station-list",
+          "title": "The station list",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-marched-against-one-shot",
+          "title": "Marched against one shot",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-refusing-with-the-evidence-attached",
+          "title": "Refusing with the evidence attached",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-traverse-drops",
+          "title": "What a traverse drops",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-gasline-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
