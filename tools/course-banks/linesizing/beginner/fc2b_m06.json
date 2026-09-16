@@ -30,29 +30,29 @@
    "The elevation and the friction, since a wider pipe holds a shorter column for the same volume of liquid, and the fittings term is the one that is fixed by the drawing rather than by the pipe."
   ],
   "answer": 2,
-  "explanation": "Friction is what a bigger pipe fixes. Elevation is what no pipe fixes: the static column is the density times the height, and a wider pipe holds a wider column of exactly the same height."
+  "explanation": "Open the bore and the velocity falls, so the head falls with its square and both of the terms built on that head fall with it. The height of a static column is not something a pipe diameter can reach."
  },
  {
-  "prompt": "What does the erosional ceiling depend on, and what is it blind to?",
+  "prompt": "The OGBIA line is rebored from 7.981000 in to 6.065000 in at the same duty. Of the six numbers this tier is built on, how many move?",
   "options": [
-   "The density and the c factor. It is blind to the bore, which is why it reads 13.545709 ft/s on every row of the twelve-bore sweep.",
-   "The density, the c factor and the bore, since the check compares a velocity against a ceiling and both halves of that comparison change when a different row of the schedule is evaluated.",
-   "The velocity and the c factor, since the ratio of 0.165707 is what the check actually returns and a ratio needs both a line velocity and a service condition before it means anything.",
-   "The density and the bore, since the ceiling is really a rate limit expressed as a velocity."
+   "Five of the six move with the bore. Only the erosional ceiling of 13.545709 ft/s stands still, because the bore appears nowhere inside it at all.",
+   "All six, since the ceiling is what the line velocity is measured against and a change of bore moves the velocity first of anything.",
+   "Two, the velocity and the loss, since the Reynolds number and the friction factor are properties of the crude and the total is the loss under another name.",
+   "Three, since the velocity, the Reynolds number and the friction factor move while the loss and the total are recovered from the gradient, which the engine reports per foot."
   ],
   "answer": 0,
-  "explanation": "What changes down the sweep is the velocity that has to sit under the ceiling, running from 38.027872 ft/s to 0.635441 ft/s while the ceiling sits still."
+  "explanation": "At 6.065000 in the same duty runs at 3.886834 ft/s and spends 97.306913 psi. No bore appears in the ceiling, which reads a density and a c factor and nothing else."
  },
  {
-  "prompt": "Why is this tier described as closed form from end to end?",
+  "prompt": "This tier has two properties that the next one does not. Name them.",
   "options": [
-   "Because every step in it can be written as a single expression, the friction factor included, and evaluated in one pass.",
-   "Because nothing in the chain waits on anything except the friction factor, which iterates and then hands back a settled number the rest of the chain uses as an input.",
-   "Because the three losses are returned separately, so no term has to be solved against another one at all.",
-   "Because the fluid is incompressible, which is the only property a closed form needs anywhere in this chain."
+   "Nothing in it compresses, and nothing in it carries a hill, since a static column belongs to the marched profiles of a later tier.",
+   "Nothing in it compresses, so a barrel entering the line is a barrel leaving it, and nothing in it iterates except the friction factor, which settles before the rest of the chain reads it.",
+   "Nothing in it iterates at all, and nothing in it is read from a vendored table, since the bores and the roughnesses are computed rather than looked up.",
+   "Nothing in it is refused, and nothing in it is held for the literature, since every figure the tier prints is an engine return."
   ],
   "answer": 1,
-  "explanation": "The area is arithmetic, the velocity is a division and the Reynolds number is a product of four settled figures. Both of the tier's defining properties change in the next tier."
+  "explanation": "A barrel entering the line is a barrel leaving it, so 2.244621 ft/s stands at both ends. Both properties change in the next tier."
  },
  {
   "prompt": "Nothing in the OGBIA line compresses, so a barrel entering it is a barrel leaving it. What would change if it did compress?",
@@ -79,7 +79,7 @@
  {
   "prompt": "Which input's unit is worth checking before any arithmetic, and why that one?",
   "options": [
-   "The viscosity, because the Reynolds number is dimensionless and so carries no unit that could look wrong, and a centipoise mistaken for another unit still selects a branch and still prints.",
+   "The viscosity, because it is the first input the chain consumes, so a centipoise mistaken for another unit is caught before the velocity is ever formed.",
    "The bore, because a nominal size and a bore are both quoted in inches and both print as ordinary numbers.",
    "The length, because liquid work here is in feet while gas work is in miles, and the loss scales directly with the length.",
    "The density, because it enters twice, once in the Reynolds number and once in the velocity head, so a unit error in it moves the friction factor and the loss in the same direction at once."
@@ -118,7 +118,7 @@
    "That the velocity head was included twice, since a friction factor is dimensionless to begin with."
   ],
   "answer": 0,
-  "explanation": "The turbulent rows of the published cases sit at 0.0260878890, 0.0260794714 and 0.0249265571. The laminar branch puts the factor an order above those, and it is the only one of the four above one."
+  "explanation": "The turbulent rows of the published cases sit at 0.0260878890, 0.0260794714 and 0.0249265571. The laminar case is the only one of the four whose friction factor is above one, and 4.1163843599 is not a figure the turbulent branch produces anywhere in this tier."
  },
  {
   "prompt": "A question asks for the friction loss and another asks for the total. When are those different questions?",
@@ -143,23 +143,23 @@
   "explanation": "Every graded erosional value in this course therefore states its own c factor. The discipline is to say what the method is and not to rest a conclusion on the part of it that nothing stands behind."
  },
  {
-  "prompt": "Seven bores pass both criteria and two of them have a claim to being the recommendation. What is the disagreement actually about?",
+  "prompt": "A report names one bore out of a twelve-row sweep and calls it the recommendation. What has to be stated beside it?",
   "options": [
-   "What the word smallest was taken to mean. The first in table order is 6 in schedule 40 at 6.065000 in and the smallest bore is 6 in schedule 80 at 5.761000 in.",
-   "Which criterion ranks first, since the erosional limit applied before the 6.000000 ft/s ceiling leaves other survivors.",
-   "Whether the schedule 80 row is affordable, since a heavier wall is dearer and the sweep carries no price at all.",
-   "Which of the two bores the built line used, since the 8 in schedule 40 row at 7.981000 in is neither of them."
+   "Which criteria it applied, and the rule by which it ranked whatever survived them, because on this duty the same sweep defensibly returns two different rows as its answer.",
+   "The pressure that row spends, since a recommendation nobody can check against a budget is not a recommendation and the totals are the only thing a sweep computes.",
+   "The c factor the erosional column was evaluated at, which is the one condition in the whole sweep that came from outside the pressure drop calculation.",
+   "The schedule, since a nominal size on its own does not name a bore, and a report that states the schedule has named exactly one row and needs nothing further."
   ],
   "answer": 0,
-  "explanation": "The first is the smallest nominal size that works, which is what a buyer wants, and the second is the tightest bore that works. A recommendation that does not say which it ranked has not said much."
+  "explanation": "A ranking is worth what its criteria are worth. Neither of the two applied here knows what the pipe costs, what the yard holds, what wall the rating demands or what the service does to it."
  },
  {
-  "prompt": "What is the one habit this tier warns against carrying forward?",
+  "prompt": "The tier's closing lesson warns against one habit in particular. Which is it, and why?",
   "options": [
-   "Reading a refusal as a failure of the run, since an object carrying an error is the method reporting honestly on a state it has no answer for and other rows of a sweep still return numbers.",
-   "Quoting a friction factor without the Reynolds number and the relative roughness behind it, since neither of those survives a change of bore and the bore sits inside both of them.",
+   "Reading a refusal as a failure of the run, since a refused row stops a sizing sweep where it stands and the remaining bores have to be run again without it.",
+   "Quoting a friction factor without the Reynolds number and the relative roughness behind it, since both of those survive a change of bore and can be carried to any line built of the same steel.",
    "Carrying a number to another line. Every figure belongs to a complete row, and the method travels where the numbers do not.",
-   "Reporting the friction loss as the pressure drop, since it is one of three terms kept apart."
+   "Reporting the friction loss as the pressure drop, since the engine returns that term only on a bare and level line."
   ],
   "answer": 2,
   "explanation": "25.660631 psi belongs to that rate through that bore over that length on that roughness. The same duty through 6.065000 in spends 97.306913 psi."

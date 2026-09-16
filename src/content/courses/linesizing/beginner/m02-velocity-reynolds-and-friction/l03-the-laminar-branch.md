@@ -19,7 +19,7 @@ The numerator is an engine return as well, read back as the friction factor time
 | 1500.0000 | 0.042666666667 |
 | 1008.9844 | 0.0634301170 |
 
-Because the Reynolds number is underneath, a slower or thicker flow gives a larger friction factor. The values here are an order above the turbulent ones met elsewhere in this tier, and that is the branch behaving exactly as its law says.
+Because the Reynolds number is underneath, a slower or thicker flow gives a larger friction factor. Nothing puts a floor under that growth: the numerator is fixed at 64.000000 and the Reynolds number falls as far as a duty takes it, which is the branch behaving exactly as its law says.
 
 ## A small rate can be an expensive line
 

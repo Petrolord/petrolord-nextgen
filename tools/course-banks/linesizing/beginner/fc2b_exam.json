@@ -129,18 +129,18 @@
    "That the engine reads the four entries of the isometric separately, since a resistance sum of one is the elbow row and 4.500000 is the whole list."
   ],
   "answer": 0,
-  "explanation": "0.133351 psi is 4.500000 times 0.029634 psi, and neither figure survives a change of bore, because the head they are both built on is set by the velocity the duty makes."
+  "explanation": "The isometric costs the single head multiplied by 4.500000, and neither figure survives a change of bore, because the head they are both built on is set by the velocity the duty makes."
  },
  {
-  "prompt": "The OGBIA isometric carries four elbows, two gate valves, one swing check and one sudden exit. Which entry is the largest, and by how much does it beat the elbows?",
+  "prompt": "The same OGBIA isometric is moved onto a line of 6.065000 in bore carrying the same duty. What travels with it, and what does not?",
   "options": [
-   "The four elbows at 1.200000 together, which beats the swing check's own 2.000000 once the count of four is applied to the 0.300000 each of them carries.",
-   "The sudden exit at 1.000000, which beats every other entry because the stream loses its whole velocity head on leaving the pipe and nothing on a list can cost more than one entire head.",
-   "The swing check at 2.000000 velocity heads, against the four elbows' 1.200000 together.",
-   "The two gate valves at 0.300000 together, which beat the elbows because a valve stem sits permanently in the flow path while an elbow returns most of the head it borrows."
+   "Both travel, since a resistance sum is a pressure in psi accumulated from the fitting table and each entry on the list already carries its own cost in it.",
+   "Neither travels, since the K of each fitting is quoted for the bore it was tabulated in, so a change of bore needs a fresh lookup for every entry on the drawing.",
+   "The resistance sum of 4.500000 travels, because it is a count of velocity heads belonging to the shapes on the drawing. The 0.133351 psi does not, because the head it counts belongs to the stream.",
+   "The 0.133351 psi travels and the count does not, since the pressure a fitting costs is a property of the fitting while the count depends on how the drawing was read."
   ],
   "answer": 2,
-  "explanation": "The four K totals are 1.200000, 0.300000, 2.000000 and 1.000000 and they sum to the 4.500000 the engine reports. A check valve holds a disc in the path of the flow for the whole life of the line."
+  "explanation": "At 6.065000 in the same duty runs at 3.886834 ft/s instead of 2.244621 ft/s, and a velocity head carries the square of the velocity. The count belongs to the shape of the fitting and the pressure belongs to the stream it is placed in."
  },
  {
   "prompt": "An engineer leaves the isometric out of the calculation entirely. On which of the tier's two runs is that defensible, and what settles it?",
@@ -256,12 +256,12 @@
   "prompt": "Down the twelve bores the velocity falls from 38.027872 ft/s to 0.635441 ft/s while the total falls from 28841.350797 psi to 1.236026 psi. Why does the pressure fall so much further?",
   "options": [
    "Because the friction factor falls with the bore as well, so three separate effects compound.",
-   "Because the bore reaches the loss twice, through the square of the velocity in the head and again through the length over bore factor.",
+   "Because the bore is under the square of the velocity in the head and again in the length over bore factor, so both of the terms standing in front of the friction factor fall as it opens.",
    "Because the length over bore factor falls with the bore while the velocity head does not, so only one of the two terms in the loss follows the velocity down.",
    "Because the wide rows are evaluated at a reduced duty rather than at the same 12000.000000 bpd."
   ],
   "answer": 1,
-  "explanation": "A bore that grew less than eightfold took the cost down by more than four orders. That is why bore is the first thing reached for when a pressure budget will not close."
+  "explanation": "Read the velocity column and the total column of the sweep against each other and the totals fall away much the faster of the two. That is why bore is the first thing reached for when a pressure budget will not close."
  },
  {
   "prompt": "The 6.000000 ft/s practice ceiling is applied on top of the erosional limit. How many bores does each leave, and where does the difference come from?",
@@ -283,7 +283,7 @@
    "They fall, to 0.0210675199 and 24.781425 psi, since the catalogue runs roughest to smoothest."
   ],
   "answer": 2,
-  "explanation": "The bumps are the same height and the pipe they sit in is narrower, so they take up more of it. Across the whole catalogue this line lands between 24.781425 psi and 27.565372 psi."
+  "explanation": "Used steel at 0.006000 in is the roughest of the four catalogue rows and commercial steel at 0.001800 in the second roughest. Across the whole catalogue this line lands between 24.781425 psi and 27.565372 psi."
  },
  {
   "prompt": "The same 12000.000000 bpd is put through 6.065000 in instead of 7.981000 in. Give the velocity, the loss and the erosional ratio on that row.",
@@ -308,18 +308,18 @@
   "explanation": "Those four span Reynolds 5000.0000 to 10000000.0000 and relative roughness 0.000050 to 0.001000. Two independent implementations landing on the same digits is what the chain's standing rests on."
  },
  {
-  "prompt": "Why is the bore called the strongest lever in the chain?",
+  "prompt": "A sizing sweep varies the bore and holds everything else still. What makes so small a change of it move so much?",
   "options": [
    "Because it is the only input a designer is free to choose, since the rate, the density and the viscosity all arrive from outside the calculation and cannot be altered by a sizing decision.",
    "Because it enters the friction loss through the length over bore factor, which is the term the length sits in as well, so the two strongest influences on the loss share one factor.",
-   "Because the area goes as its square, so a velocity moves further than a change of bore looks as though it should, and the velocity is what four separate answers are then built on.",
+   "Because the area goes as the square of the bore, so the velocity moves by that square too, and the velocity is what four separate answers are then built on.",
    "Because it fixes the relative roughness, and the relative roughness is the axis of the Moody chart along which the friction factor moves furthest at any given Reynolds number."
   ],
   "answer": 2,
   "explanation": "A bore of 7.981000 in encloses 0.347410 ft2 and a bore twice as wide encloses four times that. One duty through 1.939000 in runs at 38.027872 ft/s and through 15.000000 in at 0.635441 ft/s."
  },
  {
-  "prompt": "The bore reaches the friction loss by more than one route. Name them, and say what the sweep shows for it.",
+  "prompt": "Two of the bore's routes into the friction loss stand outside the friction factor entirely. Name them, and say what the sweep shows for it.",
   "options": [
    "Through the relative roughness and through the Reynolds number, and across three neighbouring bores the loss falls from 97.306913 psi to 25.660631 psi to 8.561327 psi as the wall term relaxes.",
    "Through the length over bore factor and through the velocity head, and across three neighbouring bores the loss falls from 97.306913 psi to 25.660631 psi to 8.561327 psi.",
@@ -327,7 +327,7 @@
    "Through the length over bore factor alone, since the velocity head is built from the density and a velocity the duty had already fixed."
   ],
   "answer": 1,
-  "explanation": "6.065000 in, 7.981000 in and 10.020000 in are within a few inches of each other and the cost falls away steeply across them. That is why bore is the first thing reached for when a pressure budget will not close."
+  "explanation": "6.065000 in, 7.981000 in and 10.020000 in are within a few inches of each other and the cost falls away steeply across them. The bore is inside the friction factor as well, through the Reynolds number and the relative roughness, and those are the two routes this question set aside."
  },
  {
   "prompt": "The pressure drop and the erosional check are run on the OGBIA line. Which computed quantity do they both read?",
@@ -335,10 +335,10 @@
    "The velocity of 2.244621 ft/s, formed from the duty and the flow area of 0.347410 ft2.",
    "The friction factor of 0.0218149625, which reaches the loss through the length over bore factor and reaches the erosional check through the ceiling that the ratio is taken against.",
    "The viscosity of 2.500000 cp, which the loss reads through the Reynolds number of 48431.2523 and the erosional check reads through the ceiling of 13.545709 ft/s.",
-   "Nothing that either of them computed, since the erosional check re-derives a velocity of its own from the rate and the bore rather than reading the one the pressure drop had already formed."
+   "Nothing that either of them computed, since the erosional check works from the rate and the bore and never forms a velocity at all, comparing the rate against the largest rate the bore allows instead."
   ],
   "answer": 0,
-  "explanation": "From there the two ask different questions of it. One asks what the line costs and the other asks whether the line survives, and the length, the roughness and the viscosity reach only the first."
+  "explanation": "They share the density as well, 54.500000 lb/ft3 sitting in the velocity head and again under the root that gives 13.545709 ft/s. The velocity is the computed quantity both of them read, and the length, the roughness and the viscosity reach only the loss."
  },
  {
   "prompt": "A bore is chosen on the erosional check alone and the duty raised to the 72416.9067 bpd it allows. What has to be re-formed, and what has not moved?",
@@ -352,15 +352,15 @@
   "explanation": "Nothing in the erosional check reads a length, a roughness or a friction factor, so the loss at that rate is an entirely separate number and would have to be affordable on its own."
  },
  {
-  "prompt": "The 3 in schedule 40 row of the sweep reads a ratio of 1.121360 and a total of 2820.384450 psi. What does each of the two criteria conclude, and what is the difference between them?",
+  "prompt": "The 3 in schedule 40 row reads a ratio of 1.121360 and the 4 in schedule 40 row reads 0.651191. What lies between those two rows, and what does it buy?",
   "options": [
-   "The erosional check rejects it and the pressure budget accepts it, since 2820.384450 psi is an ordinary figure for a 26400.000000 ft line and the ratio is what removes the row.",
-   "The pressure budget rejects it and the erosional check accepts it, since 1.121360 is inside the limit once the clean inhibited c factor of 175.000000 is applied to the crude on that row.",
-   "Both reject it, but a pressure drop is a cost that can be traded against pumping or the route while an erosional ratio above 1.000000 is a verdict about the wall with nothing to trade.",
-   "Neither rejects it, since a ratio above 1.000000 is a caution rather than a verdict and a large enough pump covers the cost."
+   "One schedule, since 3.068000 in and 4.026000 in are the heavy and light walls of a single outside diameter, and dropping a schedule is what carries the verdict from false to true.",
+   "One nominal size. The bore goes from 3.068000 in to 4.026000 in, the velocity from 15.189621 ft/s to 8.820843 ft/s, the total from 2820.384450 psi to 728.175700 psi, and the verdict from false to true.",
+   "One c factor, since the 3 in row is read against continuous service and the 4 in row against the clean inhibited figure of 175.000000, which is what lifts the ceiling past the row's velocity.",
+   "Nothing the sweep varies, since both rows carry the same 12000.000000 bpd over the same 26400.000000 ft, so the whole of the difference between 2820.384450 psi and 728.175700 psi is the friction factor."
   ],
-  "answer": 2,
-  "explanation": "On this duty the two criteria happen to agree on the three smallest bores. That agreement belongs to this line: a short line at a high rate can post an affordable loss and still sit above its ceiling."
+  "answer": 1,
+  "explanation": "One step up the nominal sizes is where this duty crosses out of the failing rows. What it costs is a dearer pipe, and the sweep carries no price for that at all."
  },
  {
   "prompt": "What does the twelve-bore sweep hold still, and why does that matter to the reader?",
@@ -418,12 +418,12 @@
   "explanation": "A returned error travels back along the same path as a result, so it can be shown beside the other rows of a sizing sweep with the row that refused saying why."
  },
  {
-  "prompt": "A routine walks the sweep and returns the first row whose erosional verdict is true. Which row comes back, and what is wrong with calling it the smallest bore that works?",
+  "prompt": "A routine walks the sweep and returns the first row whose erosional verdict is true. What has it actually found?",
   "options": [
-   "The 4 in schedule 40 row at 4.026000 in, and nothing is wrong with it, since the table is ordered by nominal size and the bores rise steadily along with it.",
-   "The 6 in schedule 40 row at 6.065000 in, and 6 in schedule 80 at 5.761000 in passes as well.",
-   "The 4 in schedule 40 row at 4.026000 in, and the 4 in schedule 80 row at 3.826000 in is a smaller bore that passes as well.",
-   "The 3 in schedule 40 row at 3.068000 in, whose ratio of 1.121360 the walk would have to reject."
+   "The smallest bore that passes, since the table is ordered by nominal size and the bores rise steadily along with it.",
+   "The cheapest passing pipe, since the totals rise as the table is read downward and the first row to pass is therefore the last one still affordable.",
+   "A row rather than a bore. The very next line of the table carries a tighter bore than the one it stopped on, and that row passes as well.",
+   "Nothing usable, since the erosional verdict is a boolean and a walk that stops at the first true row cannot report a ratio for the rows it skipped."
   ],
   "answer": 2,
   "explanation": "In table order the bores run 2.067000, 1.939000, 3.068000, 4.026000, 3.826000 and onwards. A heavier schedule is a smaller bore and it sits after the lighter one."

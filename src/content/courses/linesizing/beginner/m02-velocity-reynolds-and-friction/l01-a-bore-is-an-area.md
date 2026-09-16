@@ -8,7 +8,7 @@ A bore is not yet a hydraulic quantity. The area it encloses is, 0.347410 ft2 on
 
 The bore arrives in inches and the area is wanted in square feet, so the 144 square inches in a square foot enter here. A bore of 7.981000 in encloses 0.347410 ft2, and that single number is what the rest of the chain works with.
 
-The relationship is a square. A bore twice as wide encloses four times the area, which is why bore changes move a velocity so much further than they look as though they should. The bore is the strongest lever in the chain.
+The relationship is a square. A bore twice as wide encloses four times the area, which is why bore changes move a velocity so much further than they look as though they should.
 
 ## From an area to a velocity
 

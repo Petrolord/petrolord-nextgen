@@ -84,7 +84,7 @@ q(3, "A report quotes 25.660631 psi for OGBIA crude. What is wrong with carrying
   "It needs rescaling by the ratio of the two bores and by nothing else, since the bore reaches the friction loss exactly once, through the length over bore factor that stands in front of the velocity head."],
  "12000.000000 bpd through 7.981000 in spends 25.660631 psi and through 6.065000 in spends 97.306913 psi. The method travels between lines and the numbers do not."),
 
-q(1, "One of the eighteen states Section 1 lists is about the shape of the input rather than about a physical impossibility. Which is it, and how does it arrive?",
+q(1, "On the liquid side, one of the states Section 1 lists is about the shape of the input rather than about a physical impossibility. Which is it, and how does it arrive?",
  "A traverse handed no profile segment, and it arrives exactly as the others do, as an object carrying { error: \"a traverse needs at least one profile segment\" }.",
  ["A liquid line handed a negative rate, and it arrives as a thrown exception, because a sign error is a fault in the calling code rather than a state the method has no answer for.",
   "A wall specified to a design code that does not exist, and it arrives as a null return so that a caller can test for it without having to read and compare a message string.",

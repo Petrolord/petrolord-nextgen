@@ -22,7 +22,7 @@ The ceiling is a velocity, and the flow area of the bore is 0.347410 ft2. A velo
 
 The ratio of 0.165707 is the line velocity measured against its ceiling. The margin of 83.429284 percent is the room left underneath. They are the same fact stated twice, and both belong to the c factor on their own row.
 
-A line at 0.165707 of its limit is nowhere near it. That is the normal condition for a crude export line, because the density that makes crude heavy is the same density that makes its erosional ceiling low and its velocity low at any sensible bore.
+A line at 0.165707 of its limit is nowhere near it. That is the normal condition for a crude export line. The density that makes crude heavy is what makes its erosional ceiling low, and the bores an export line is built in are wide enough to hold the velocity well under even a low ceiling.
 
 ## Capacity is one question among several
 
@@ -32,7 +32,7 @@ A line at 0.165707 of its limit is nowhere near it. That is the normal condition
 
 The margin column reports the room underneath the ceiling, 83.429284 percent at continuous service and 90.531019 percent at the clean, inhibited figure. It moves because the ceiling moved, while the line velocity of 2.244621 ft/s sat still.
 
-A margin like that is comfortable for a structural reason rather than a fortunate one. Crude is dense, so its erosional ceiling is low, and it is also dense enough that nobody would run it fast through an export line. The check and the design habit are pushing the same way.
+A margin like that is comfortable for a structural reason rather than a fortunate one. Crude is dense, so its erosional ceiling is low. It is also expensive to push, because the velocity head the friction loss is built on carries that same density, so an export line is bored wide enough to bring the velocity down long before erosion is consulted. The check and the design habit are pushing the same way.
 
 ## The mistake
 

@@ -121,7 +121,7 @@
   "explanation": "12000.000000 bpd through 7.981000 in spends 25.660631 psi and through 6.065000 in spends 97.306913 psi. The method travels between lines and the numbers do not."
  },
  {
-  "prompt": "One of the eighteen states Section 1 lists is about the shape of the input rather than about a physical impossibility. Which is it, and how does it arrive?",
+  "prompt": "On the liquid side, one of the states Section 1 lists is about the shape of the input rather than about a physical impossibility. Which is it, and how does it arrive?",
   "options": [
    "A liquid line handed a negative rate, and it arrives as a thrown exception, because a sign error is a fault in the calling code rather than a state the method has no answer for.",
    "A traverse handed no profile segment, and it arrives exactly as the others do, as an object carrying { error: \"a traverse needs at least one profile segment\" }.",

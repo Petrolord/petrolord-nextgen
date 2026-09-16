@@ -90,7 +90,7 @@
  {
   "prompt": "The limit table reports a ratio of 0.165707 and a margin of 83.429284 percent on the same row. What is the relationship between them?",
   "options": [
-   "The ratio is the velocity against the ceiling and the margin is the rate against the largest rate, so the two are different comparisons that happen to agree on this particular row.",
+   "The ratio is the velocity against the ceiling and the margin is the room left in the pressure budget, so one belongs to the erosional check and the other to the loss.",
    "The margin is the ratio expressed against the erosional velocity of 13.545709 ft/s rather than against the line velocity, which is why one is a fraction and the other a percentage.",
    "The ratio belongs to the c factor on its own row and the margin is taken against the continuous row throughout, so the margin is comparable between rows in a way the ratio is not.",
    "They are the same fact stated twice, one as the fraction of the ceiling used and the other as the room left underneath it."
@@ -140,7 +140,7 @@
    "The length, the roughness and the viscosity, the last of the three reaching the loss through the Reynolds number of 48431.2523."
   ],
   "answer": 3,
-  "explanation": "The two calculations meet at one velocity and then ask different questions of it. One asks what the line costs and the other asks whether the line survives."
+  "explanation": "The erosional check is handed the rate, the bore, the density and a c factor, and nothing else. Everything the loss needs beyond those three is a question about the pipe and the fluid on the way through it rather than about the wall."
  },
  {
   "prompt": "The OGBIA line is lengthened and everything else is held. What happens to the 25.660631 psi and to the 13.545709 ft/s?",

@@ -4,11 +4,11 @@ The erosional check and the pressure drop read the same velocity, 2.244621 ft/s,
 
 {{panel:fc-liquid-explorer}}
 
-## They share one number and nothing else
+## What they share, and what they do not
 
-The velocity the erosional check reads is the same velocity the pressure drop read, and the flow area behind it is the same 0.347410 ft2. From there the two calculations have nothing in common.
+The velocity the erosional check reads is the same velocity the pressure drop read, 2.244621 ft/s, and the flow area behind it is the same 0.347410 ft2. The density is in both as well. The 54.500000 lb/ft3 sits inside the velocity head that the pressure drop is built on, and it sits under the square root that gives the ceiling of 13.545709 ft/s.
 
-The pressure drop needs the length, the roughness, the viscosity through the Reynolds number, and the friction factor. The erosional limit needs the density and a c factor. Lengthen the OGBIA line and the 25.660631 psi grows while the 13.545709 ft/s ceiling does not move at all.
+What the pressure drop asks for and the erosional check never does is the length, the roughness and the viscosity, the last of the three reaching the loss through the Reynolds number. Lengthen the OGBIA line and the 25.660631 psi grows while the 13.545709 ft/s ceiling does not move at all. Change the density instead and both move, and they move opposite ways: the velocity head rises with it while the ceiling, which carries it under a root, falls. The density table shows that second half, where 45.000000 lb/ft3 is allowed 14.907120 ft/s against 13.545709 ft/s at 54.500000.
 
 ## The same ceiling on every bore
 
@@ -30,16 +30,16 @@ The Pipeline and Line Sizing Studio puts an RP 14E verdict on every row of its s
 
 A pressure drop is a cost, and a cost can be traded against pumping, against the bore, or against the route. An erosional verdict is a boolean about the wall, and a line that reads false on it is asking for a different bore rather than a larger allowance.
 
-## Three rows fail, and nothing else removes them
+## Three rows fail, and here the cost agrees with them
 
-The 2 in and 3 in rows come back false at ratios of 2.470444, 2.807374 and 1.121360. On this duty their pressure drops are enormous as well, so the two criteria happen to agree.
+The 2 in and 3 in rows come back false at ratios of 2.470444, 2.807374 and 1.121360. Their pressure drops on this duty are 20803.315944, 28841.350797 and 2820.384450 psi, so on this line the two criteria remove the same rows.
 
 That agreement belongs to this line. A short line at a high rate can post an affordable pressure drop and still sit above its ceiling, and then the boolean is what stands between the design and the wall.
 
 ## The mistake
 
-Sizing on pressure drop and checking erosion afterwards as a formality. On this duty the two criteria happen to agree, and they need not: a short line at a high rate can post an affordable loss and still sit above its ceiling, and then the boolean is the only thing standing between the design and the wall.
+Sizing on pressure drop and checking erosion afterwards as a formality. Here the two criteria happened to agree, so the formality would have cost nothing, and a habit that works because of a coincidence is a habit that has not yet been tested.
 
 ## Exercise
 
-Name the one quantity the erosional check and the pressure drop share, and three the pressure drop needs that the erosional check does not. Then say why the erosional velocity is identical on every row of the bore table, and what changes instead.
+Say what the erosional check and the pressure drop share besides the velocity, and name three things the pressure drop needs that the erosional check never asks for. Then say why the erosional velocity is identical on every row of the bore table, and what changes instead.

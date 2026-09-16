@@ -6,7 +6,7 @@ The Associate tier is closed form from end to end, and the next tier is where th
 
 A barrel of crude entering the line is a barrel leaving it. The density of 54.500000 lb/ft3 is the same at both ends, so the velocity of 2.244621 ft/s is the same at both ends, and the pressure falls in a straight line along the pipe.
 
-Let the fluid compress and that stops being true. The density then depends on the pressure, which is the thing being solved for, and the whole method changes shape. That is the Professional tier, and it is why the gas work is stated in miles while this tier works in feet.
+Let the fluid compress and that stops being true. The density then depends on the pressure, which is the thing being solved for, and the whole method changes shape. That is the Professional tier. Its work is stated in miles rather than in the feet this tier uses for a separate reason: miles is the unit the published transmission forms are written in.
 
 ## Nothing in it iterated except the friction factor
 

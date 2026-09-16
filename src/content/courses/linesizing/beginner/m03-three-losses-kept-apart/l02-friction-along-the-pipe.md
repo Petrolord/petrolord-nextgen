@@ -33,7 +33,7 @@ The oracle returns 11.615228, 56.140698, 14.550619 and 130.866726 psi on those f
 
 ## What the bore does to this term
 
-The bore is in the length-over-bore factor and it is inside the velocity head as well, so it reaches the friction loss twice. The sweep over the same OGBIA duty shows the size of that: 97.306913 psi at a bore of 6.065000 in, 25.660631 psi at 7.981000 in and 8.561327 psi at 10.020000 in.
+The bore reaches this term by more than one route. It stands in the length-over-bore factor and it is inside the velocity head, and those two are what a sweep over the bore is really moving. It is in the Reynolds number and in the relative roughness as well, so it reaches the friction factor too. The sweep over the same OGBIA duty shows what all of that comes to: 97.306913 psi at a bore of 6.065000 in, 25.660631 psi at 7.981000 in and 8.561327 psi at 10.020000 in.
 
 Three bores within a few inches of each other, and the cost falls away steeply across them. This is why bore is the first thing a designer reaches for when a pressure budget will not close.
 

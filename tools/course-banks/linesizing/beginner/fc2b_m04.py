@@ -65,7 +65,7 @@ q(2, "The erosional ceiling of 13.545709 ft/s is turned back into a rate through
 
 q(3, "The limit table reports a ratio of 0.165707 and a margin of 83.429284 percent on the same row. What is the relationship between them?",
  "They are the same fact stated twice, one as the fraction of the ceiling used and the other as the room left underneath it.",
- ["The ratio is the velocity against the ceiling and the margin is the rate against the largest rate, so the two are different comparisons that happen to agree on this particular row.",
+ ["The ratio is the velocity against the ceiling and the margin is the room left in the pressure budget, so one belongs to the erosional check and the other to the loss.",
   "The margin is the ratio expressed against the erosional velocity of 13.545709 ft/s rather than against the line velocity, which is why one is a fraction and the other a percentage.",
   "The ratio belongs to the c factor on its own row and the margin is taken against the continuous row throughout, so the margin is comparable between rows in a way the ratio is not."],
  "Both belong to the c factor on their own row. The margin runs 83.429284, 86.743427 and 90.531019 percent as the ceiling rises, while the line velocity sits still at 2.244621 ft/s."),
@@ -96,7 +96,7 @@ q(3, "Name the inputs the pressure drop has to be given that the erosional check
  ["The density of 54.500000 lb/ft3 and the c factor, since the ceiling is built from the velocity and the flow area of 0.347410 ft2 while the loss is what has to be told what the fluid weighs.",
   "The velocity of 2.244621 ft/s and the flow area, since the erosional check works from the rate and the bore directly and never forms the velocity the pressure chain had already computed.",
   "The bore alone, since the ceiling of 13.545709 ft/s is quoted per unit of flow area and the loss is the only one of the two that has to be told how wide the passage actually is."],
- "The two calculations meet at one velocity and then ask different questions of it. One asks what the line costs and the other asks whether the line survives."),
+ "The erosional check is handed the rate, the bore, the density and a c factor, and nothing else. Everything the loss needs beyond those three is a question about the pipe and the fluid on the way through it rather than about the wall."),
 
 q(0, "The OGBIA line is lengthened and everything else is held. What happens to the 25.660631 psi and to the 13.545709 ft/s?",
  "The loss grows, because the friction term follows the length directly, and the ceiling does not move at all, because no length appears in it.",
