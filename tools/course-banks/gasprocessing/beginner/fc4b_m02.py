@@ -55,7 +55,7 @@ q(2, "On the water content surface, what happens going down a column and what ha
  ["Down a column the content falls, because a hotter gas expands and holds its water at a lower mole fraction. Across a row it rises, because compression brings the gas and the water closer together.",
   "Down a column the content rises with the vapour pressure. Across a row it also rises, slowly, because the departure from ideal mixing grows with pressure and adds water back.",
   "Down a column the content rises with the vapour pressure. Across a row it holds nearly level, because the pressure cancels between the mole fraction and the pound mole."],
- "At 200.000000 psia the content runs from 60.721539 at 60.000000 degF to 689.331762 at 140.000000, and at 60.000000 degF it runs from 60.721539 at 200.000000 psia down to 8.096205 at 1500.000000."),
+ "At 200.000000 psia the content runs from 60.721539 at 60.000000 degF to 689.331762 at 140.000000, and at 60.000000 degF it runs from 60.721539 at 200.000000 psia down to 8.096205 in the 1500 psia column."),
 
 q(3, "Sixteen cells of the water surface vary gently and smoothly. What does that smoothness establish?",
  "Nothing about the gas. It is one formula evaluated at sixteen sets of inputs, so the smoothness belongs to the formula.",

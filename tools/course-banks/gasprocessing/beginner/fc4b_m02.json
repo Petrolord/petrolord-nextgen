@@ -74,7 +74,7 @@
    "Down a column the content rises with the vapour pressure. Across a row it holds nearly level, because the pressure cancels between the mole fraction and the pound mole."
   ],
   "answer": 2,
-  "explanation": "At 200.000000 psia the content runs from 60.721539 at 60.000000 degF to 689.331762 at 140.000000, and at 60.000000 degF it runs from 60.721539 at 200.000000 psia down to 8.096205 at 1500.000000."
+  "explanation": "At 200.000000 psia the content runs from 60.721539 at 60.000000 degF to 689.331762 at 140.000000, and at 60.000000 degF it runs from 60.721539 at 200.000000 psia down to 8.096205 in the 1500 psia column."
  },
  {
   "prompt": "Sixteen cells of the water surface vary gently and smoothly. What does that smoothness establish?",

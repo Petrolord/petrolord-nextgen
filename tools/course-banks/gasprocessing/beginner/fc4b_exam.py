@@ -84,7 +84,7 @@ q(0, "The module guards from -45 to 60 degC and the coefficients behind the fit 
 
 q(0, "Which of these is refused by the water answer rather than warned about?",
  "A gas temperature of -600 degF.",
- ["A total pressure of 1500.000000 psia.",
+ ["A total pressure of 1500 psia, which is the last column of the water surface.",
   "A gas temperature of 122.000001 degF.",
   "A circulation ratio of 6.000000 gal per lb."],
  "A temperature below absolute zero is refused by name, and so is a pressure of zero. The other two answer with a note attached, and one of them is not on the water answer at all."),

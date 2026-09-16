@@ -113,7 +113,7 @@
   "prompt": "Which of these is refused by the water answer rather than warned about?",
   "options": [
    "A gas temperature of -600 degF.",
-   "A total pressure of 1500.000000 psia.",
+   "A total pressure of 1500 psia, which is the last column of the water surface.",
    "A gas temperature of 122.000001 degF.",
    "A circulation ratio of 6.000000 gal per lb."
   ],

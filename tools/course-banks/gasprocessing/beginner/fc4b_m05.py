@@ -21,12 +21,12 @@ q(0, "No step in this chain revises a step above it. What does that property buy
   "A shorter calculation, since nothing has to be evaluated twice and no step waits on a step below it."],
  "If the duty is wrong then the gallons a day are wrong or one of the heat terms is wrong. An absorber with stages or a compressor with an efficiency curve gives no such single place to look."),
 
-q(3, "Two conditions enter at the top of the chain and are never mentioned again. Which two, and where is the last place they act?",
+q(3, "Two conditions enter at the top of the chain that runs from the line conditions to the duty, and are never mentioned again in it. Which two, and where is the last place they act?",
  "The pressure and the temperature, and the last place they act is the water content.",
  ["The pressure and the temperature, and the last place they act is the vessel the gas rises through.",
   "The spec and the rate, and the last place they act is the water removed a day.",
   "The gas temperature and the still temperature, and the last place the two of them act is the sensible heat term."],
- "Once the content is fixed the line conditions have no further say in this chain. The still temperature is a design choice entering much lower down, inside one of the two heat terms."),
+ "Once the content is fixed the line conditions have no further say in the chain that ends at the duty. The vessel the gas rises through does care what pressure the gas is at, and it sits outside this chain rather than inside it. The still temperature is a design choice entering much lower down, inside one of the two heat terms."),
 
 q(2, "A circulation of 6.399830 gpm is quoted on its own, with nothing beside it. What can be said about how it was arrived at?",
  "Nothing. Two of the load a day, the ratio and the circulation always give the third, and one of the three on its own gives none of them.",

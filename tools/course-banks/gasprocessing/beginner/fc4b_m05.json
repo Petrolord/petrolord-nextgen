@@ -22,7 +22,7 @@
   "explanation": "If the duty is wrong then the gallons a day are wrong or one of the heat terms is wrong. An absorber with stages or a compressor with an efficiency curve gives no such single place to look."
  },
  {
-  "prompt": "Two conditions enter at the top of the chain and are never mentioned again. Which two, and where is the last place they act?",
+  "prompt": "Two conditions enter at the top of the chain that runs from the line conditions to the duty, and are never mentioned again in it. Which two, and where is the last place they act?",
   "options": [
    "The pressure and the temperature, and the last place they act is the vessel the gas rises through.",
    "The spec and the rate, and the last place they act is the water removed a day.",
@@ -30,7 +30,7 @@
    "The pressure and the temperature, and the last place they act is the water content."
   ],
   "answer": 3,
-  "explanation": "Once the content is fixed the line conditions have no further say in this chain. The still temperature is a design choice entering much lower down, inside one of the two heat terms."
+  "explanation": "Once the content is fixed the line conditions have no further say in the chain that ends at the duty. The vessel the gas rises through does care what pressure the gas is at, and it sits outside this chain rather than inside it. The still temperature is a design choice entering much lower down, inside one of the two heat terms."
  },
  {
   "prompt": "A circulation of 6.399830 gpm is quoted on its own, with nothing beside it. What can be said about how it was arrived at?",
