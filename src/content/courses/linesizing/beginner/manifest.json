@@ -1,0 +1,303 @@
+{
+  "app_slug": "linesizing",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-line-sizing-engine-does",
+      "title": "What a Line Sizing Engine Does",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-one-line-one-answer",
+          "title": "One line, one answer",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-sizing-is-not-networking",
+          "title": "Sizing is not networking",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses-to-guess",
+          "title": "What it refuses to guess",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-units-it-works-in",
+          "title": "The units it works in",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-velocity-reynolds-and-friction",
+      "title": "Velocity, Reynolds and Friction",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-bore-is-an-area",
+          "title": "A bore is an area",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-reynolds-number-in-field-units",
+          "title": "The Reynolds number in field units",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-laminar-branch",
+          "title": "The laminar branch",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-colebrook-and-what-it-solves-for",
+          "title": "Colebrook, and what it solves for",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-band-with-no-correlation",
+          "title": "The band with no correlation",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-three-losses-kept-apart",
+      "title": "Three Losses Kept Apart",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-velocity-head",
+          "title": "The velocity head",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-friction-along-the-pipe",
+          "title": "Friction along the pipe",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-fittings-as-a-resistance-sum",
+          "title": "Fittings as a resistance sum",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-elevation-is-not-friction",
+          "title": "Elevation is not friction",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-gradient-and-what-it-averages",
+          "title": "The gradient, and what it averages",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-erosional-limit",
+      "title": "The Erosional Limit",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-c-over-root-rho",
+          "title": "C over root rho",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-three-published-rows-and-a-practice",
+          "title": "Three published rows and a practice",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-largest-rate-a-bore-can-carry",
+          "title": "The largest rate a bore can carry",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-limit-that-is-not-a-pressure-drop",
+          "title": "A limit that is not a pressure drop",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-choosing-a-bore",
+      "title": "Choosing a Bore",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-same-duty-in-every-size",
+          "title": "The same duty in every size",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-schedule-is-two-numbers",
+          "title": "A schedule is two numbers",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-velocity-against-pressure-drop",
+          "title": "Velocity against pressure drop",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-a-recommendation-ranks",
+          "title": "What a recommendation ranks",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-roughness-is-not-the-fluid",
+          "title": "Roughness is not the fluid",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-liquid-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
