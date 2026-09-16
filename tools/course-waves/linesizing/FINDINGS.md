@@ -778,3 +778,84 @@ the bracket it searches` and `l04 downhill past the inlet` also change**: the
 bracket is now correct and the descent is now computed, so the lesson is the
 ceiling and why it is not the inlet, which Section 10 prints as a table.
 `RECON.md` likewise still describes the engine at `709172f`.
+
+---
+
+# FC2-0b SUITE REPAIR, 2026-09-16: the RP 14E binding point
+
+The follow-up authorised after FC2-0 recorded it. Suite layer only; the
+engine was checked first and is NOT the home of this defect.
+
+### Where the defect lived
+
+`production/chokePerformance.js` owns API RP 14E and is correct:
+`erosionalVelocityFtS` is the pure `C / sqrt(rho_m)` formula, and
+`erosionalCheck` takes the velocity and the density as arguments. The
+engine never chooses WHERE along a line to evaluate them. The choice was
+the Suite composition layer's, in `sizeSweep`'s multiphase branch and in
+`LineSizingContext`'s `sizing`, both of which passed the INLET velocity
+and inlet mixture density. No engine change was needed or made.
+
+### FIXED. The check runs where the limit binds.
+
+The limit is `Ve = C / sqrt(rho_m)`, so the ratio is
+`v * sqrt(rho_m) / C`. **The binding station is the one that maximises
+`v * sqrt(rho_m)`, and that is independent of C**, so `multiphaseLine`
+finds it once while marching and any C factor can be checked against it.
+Both terms move along the line and they move in opposite directions: the
+gas expands so `v` rises, and the mixture density falls with it.
+
+**It is not simply the outlet, which is why the pass logic reads the
+maximum and not the far end.** On a descending line the pressure
+recovers, the gas is compressed and the mixture slows, so the limit
+binds at the INLET: on a 20000 ft line falling 1500 ft the inlet ratio
+is 0.1950 against 0.1814 at the outlet. A profile that falls and then
+rises binds in the middle. In the ascending and flat cases measured the
+binding station and the fastest station coincided, but the maximum is
+the quantity with the physical meaning, so that is what is tracked.
+
+New: `bindingVmFtS`, `bindingRhoMixLbFt3`, `bindingAtFt` on
+`multiphaseLine`, and `erosionalStatusAlongLine({ line, cFactor })`,
+which returns the binding verdict plus `inletRatio` so the app can show
+what the inlet alone would have said.
+
+### Blast radius, measured before the change
+
+Six representative sweeps, 72 rows, C = 100:
+
+| sweep | passing rows | flips | recommendation |
+| --- | --- | --- | --- |
+| studio default, 15000 ft | 8 -> 8 | 0 | 4 in sch 40, unchanged |
+| long, 50000 ft | 7 -> 7 | 0 | 6 in sch 80, unchanged |
+| **gassy, 20000 ft** | **6 -> 5** | **1** | **6 in sch 40 -> 8 in sch 80** |
+| gassy, 40000 ft, lower rate | 7 -> 7 | 0 | 6 in sch 80, unchanged |
+| high rate, 10000 ft | 7 -> 7 | 0 | 6 in sch 80, unchanged |
+| uphill gassy, 25000 ft | 6 -> 6 | 0 | 6 in sch 40, unchanged |
+
+The one flip: **6 in sch 40, inlet ratio 0.524 (PASS) against 1.159
+where it binds at 99 percent of the length (FAIL)**, the mixture going
+from 29.8 ft/s at the inlet to 146.0 ft/s at the far end. At C = 125
+nothing flips anywhere, because the same duty lands at 0.927.
+
+So the change is narrow and it is not cosmetic: where it fires, it fires
+on a line the studio was recommending.
+
+### RECORDED, NOT CHANGED: the gas path checks at MEAN pressure
+
+`sizeSweep`'s gas branch evaluates the velocity and the RP 14E limit at
+the MEAN of inlet and outlet pressure. That is the same defect in the
+single-phase gas path, and the fastest point of a gas line is its
+outlet. On a 30 mi, 30 MMscfd, 900 psia line:
+
+| bore | outlet psia | ratio at mean p | ratio at outlet |
+| --- | --- | --- | --- |
+| 8 in sch 40 | 513 | 0.304 (18.7 ft/s) | 0.363 (26.6 ft/s) |
+| 8 in sch 80 | 336 | 0.359 (23.8 ft/s) | **0.498 (45.9 ft/s)** |
+| 10 in sch 40 | 805 | 0.173 | 0.179 |
+| 12 in sch 40 | 864 | 0.120 | 0.121 |
+
+Up to a 39 percent understatement of the ratio on the case measured, and
+no row flips in it, but a lower outlet pressure would flip one. Left
+unchanged because this wave was scoped to the multiphase binding point;
+it needs its own authorisation, and the gas path is not marched, so the
+fix there is to evaluate at `p2` rather than at the mean.
