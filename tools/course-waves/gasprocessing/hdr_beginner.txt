@@ -1,0 +1,38 @@
+-- ============================================================================
+-- FC4 ASSOCIATE DEEP SEED: Gas Processing, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: WATER, AND WHAT IT COSTS TO TAKE OUT. What this engine
+-- conditions and what it refuses to answer; how much water a gas carries at a
+-- pressure and a temperature, and the band the fit stands behind; the water a
+-- unit takes out, which is the content difference applied to the rate; the
+-- circulation that takes it out; what the reboiler pays for, named part by
+-- named part rather than arriving as one number; and a dehydration answer read
+-- end to end.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A water CONTENT knows nothing about the rate
+-- and a water RATE is nothing but that content applied to it. The tier is built
+-- on the difference between an intensive answer and an extensive one, because
+-- it is the difference a reader most often loses, and the digest computes the
+-- two side by side rather than asserting they differ.
+--
+-- THE TRAP THE TIER IS BUILT ON. The circulation ratio is a CHOICE this engine
+-- refuses to make. It takes the gallons of glycol per pound of water as an
+-- input, flags a ratio outside the customary band, and computes everything
+-- downstream from the number it was handed. A reader who quotes a circulation
+-- without saying which ratio produced it has quoted an opinion.
+--
+-- HELD FOR LITERATURE, taught as a limit and never graded in any tier: the
+-- McKetta and Wehe real-gas correction above the pressure the engine warns at,
+-- the water overhead the reboiler pays for, the amine contactor's liquid
+-- density, the customary amine duty per gallon, and the BTEX absorbed fraction
+-- and molecular weight. The capstone grades none of them, and each is
+-- neutralised by construction rather than by hope.
+--
+-- The only numbers that travel from this tier to the next are the saturation
+-- fit and the shape of a circulation, which the amine half then reaches by a
+-- route with nothing in common.
+-- ============================================================================

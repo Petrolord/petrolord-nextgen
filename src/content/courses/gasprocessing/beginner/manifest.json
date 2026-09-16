@@ -1,0 +1,305 @@
+{
+  "app_slug": "gasprocessing",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-this-engine-conditions",
+      "title": "What This Engine Conditions",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-three-units-one-gas-stream",
+          "title": "Three units, one gas stream",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-every-design-choice-is-visible",
+          "title": "Every design choice is visible",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses-to-answer",
+          "title": "What it refuses to answer",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-units-and-the-standard-cubic-foot",
+          "title": "The units and the standard cubic foot",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-how-much-water-a-gas-carries",
+      "title": "How Much Water a Gas Carries",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-saturation-is-a-pressure-ratio",
+          "title": "Saturation is a pressure ratio",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-vapour-pressure-of-water",
+          "title": "The vapour pressure of water",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-mole-fraction-becomes-pounds",
+          "title": "A mole fraction becomes pounds",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-hotter-carries-more-and-tighter-carries-less",
+          "title": "Hotter carries more, tighter carries less",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-band-the-answer-is-honest-in",
+          "title": "The band the answer is honest in",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-water-a-unit-takes-out",
+      "title": "The Water a Unit Takes Out",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-outlet-spec-sets-the-load",
+          "title": "The outlet spec sets the load",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-pounds-a-day-and-why-the-rate-arrives-here",
+          "title": "Pounds a day, and why the rate arrives here",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-circulation-ratio-is-a-choice",
+          "title": "The circulation ratio is a choice",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-gallons-a-minute-out-of-pounds-a-day",
+          "title": "Gallons a minute out of pounds a day",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-customary-band-and-either-side-of-it",
+          "title": "The customary band, and either side of it",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-what-the-reboiler-pays-for",
+      "title": "What the Reboiler Pays For",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-sensible-heat-absorber-to-still",
+          "title": "Sensible heat, absorber to still",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-boiling-the-water-back-out",
+          "title": "Boiling the water back out",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-reflux-the-still-sends-back",
+          "title": "The reflux the still sends back",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-btu-a-gallon-becomes-mmbtu-an-hour",
+          "title": "Btu a gallon becomes MMBtu an hour",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-a-dehydration-answer-end-to-end",
+      "title": "A Dehydration Answer End to End",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-chain-from-line-conditions-to-duty",
+          "title": "The chain from line conditions to duty",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-moves-the-circulation",
+          "title": "What moves the circulation",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-moves-the-duty",
+          "title": "What moves the duty",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-three-levers-pulled-one-at-a-time",
+          "title": "The three levers, pulled one at a time",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-reading-an-answer-for-sense",
+          "title": "Reading an answer for sense",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-one-stream-one-answer",
+          "title": "One stream, one answer",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-capstone-worked",
+          "title": "The capstone worked",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

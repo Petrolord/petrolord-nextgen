@@ -1,0 +1,307 @@
+{
+  "app_slug": "gasprocessing",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-contactor-is-a-staged-device",
+      "title": "A Contactor Is a Staged Device",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-a-theoretical-stage-is",
+          "title": "What a theoretical stage is",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-absorption-factor",
+          "title": "The absorption factor",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-kremser-in-one-relation",
+          "title": "Kremser, in one relation",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-solving-it-the-other-way-round",
+          "title": "Solving it the other way round",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-what-the-absorption-factor-can-buy",
+      "title": "What the Absorption Factor Can Buy",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-more-stages-against-more-solvent",
+          "title": "More stages against more solvent",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ceiling-below-unity",
+          "title": "The ceiling below unity",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-unity-and-why-the-shape-changes-there",
+          "title": "Unity, and why the shape changes there",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-spec-more-trays-cannot-reach",
+          "title": "A spec more trays cannot reach",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-stages-on-paper-against-trays-in-steel",
+          "title": "Stages on paper against trays in steel",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-acid-gas-is-removed-by-moles",
+      "title": "Acid Gas Is Removed by Moles",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-spec-the-pipeline-sets",
+          "title": "The spec the pipeline sets",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-mole-percent-into-lbmol-a-day",
+          "title": "Mole percent into lbmol a day",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-lean-rich-and-the-swing-between-them",
+          "title": "Lean, rich, and the swing between them",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-from-moles-of-acid-gas-to-gallons",
+          "title": "From moles of acid gas to gallons",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-regenerator-a-sweetening-unit-needs",
+          "title": "The regenerator a sweetening unit needs",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-three-amines-and-what-separates-them",
+      "title": "Three Amines and What Separates Them",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-property-set-and-what-each-column-does",
+          "title": "The property set, and what each column does",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-strength-and-what-it-buys",
+          "title": "Strength, and what it buys",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-rich-limit-and-the-corrosion-warning",
+          "title": "The rich limit, and the corrosion warning",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-duty-per-gallon-and-the-same-ranking-twice",
+          "title": "Duty per gallon, and the same ranking twice",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-choosing-one-and-an-amine-the-table-lacks",
+          "title": "Choosing one, and an amine the table lacks",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-vessel-the-gas-goes-up",
+      "title": "The Vessel the Gas Goes Up",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-contactor-is-not-a-knockout-drum",
+          "title": "A contactor is not a knockout drum",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-gas-density-the-correlation-gives",
+          "title": "The gas density the correlation gives",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-k-value-as-the-one-choice",
+          "title": "The K value as the one choice",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-liquid-the-engine-assumes",
+          "title": "The liquid the engine assumes",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-one-column-three-questions",
+          "title": "One column, three questions",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-capstone-worked",
+          "title": "The capstone worked",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-absorber-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -36,8 +36,10 @@ import json
 import re
 import sys
 
-W = '/root/fc-wip-linesizing'
-REPO = '/root/wt-fc2-nextgen'
+import os
+
+W = os.environ.get('FC2_WAVE', '/root/fc-wip-linesizing')
+REPO = os.environ.get('FC2_REPO', '/root/wt-fc2-nextgen')
 OUT = f'{REPO}/migrations/20260922_fc2_linesizing_course.sql'
 
 SLUG = 'linesizing'

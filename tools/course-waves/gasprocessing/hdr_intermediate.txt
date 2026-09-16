@@ -1,0 +1,37 @@
+-- ============================================================================
+-- FC4 PROFESSIONAL DEEP SEED: Gas Processing, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: STAGES, SOLVENTS AND WHAT A COLUMN COSTS. A contactor
+-- read as a staged device rather than as a tank; what an absorption factor can
+-- buy and what it cannot; acid gas removed by MOLES rather than by volume;
+-- three amines and what actually separates them; the vessel the gas goes up;
+-- and the reading of which question a given number answers.
+--
+-- THE ENGINE FACT THIS TIER OWNS. Below an absorption factor of one the
+-- removal cannot exceed the factor itself, however many trays are bought. The
+-- engine refuses rather than returning a number, and the refusal says the
+-- remedy is more solvent and not more stages. That ceiling is a property of the
+-- Kremser relation and not a setting, which is why no input can move it.
+--
+-- THE TRAP THE TIER IS BUILT ON. Two circulations, arrived at by routes with
+-- nothing in common. The glycol circulation is a ratio applied to a water rate.
+-- The amine circulation is a mole balance closed by a loading swing. They carry
+-- the same unit and answer different questions, and a reader who treats one as
+-- a check on the other has checked nothing.
+--
+-- HELD FOR LITERATURE, taught as a limit and never graded in any tier: the
+-- McKetta and Wehe real-gas correction, the water overhead the reboiler pays
+-- for, the amine contactor's liquid density (which is the wrong fluid for an
+-- amine and is a typed constant with no source), the customary amine duty per
+-- gallon, and the BTEX absorbed fraction and molecular weight. NO graded field
+-- on this capstone reads a contactor diameter, and OTUMARA states its own duty
+-- per gallon rather than taking any table default.
+--
+-- The only numbers that travel from this tier to the next are the module's own
+-- error contract and the reading discipline. The cold end shares no stream,
+-- spec, loading or duty with the sour train.
+-- ============================================================================

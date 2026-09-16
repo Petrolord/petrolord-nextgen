@@ -22,13 +22,14 @@
     "inputs": [
       "digest.txt",
       "fields.json",
+      "precision.json",
       "fc2_dump.mjs",
       "fc2_fields.mjs",
       "fc2_fields_capstone.mjs"
     ],
     "pins": {
       "digest.txt": "9b9f02688e7a241b0ef8e6ae733b72e94dca7e21ca1245314584f4412426ca2b",
-      "fields.json": "7839c2a07f8835296646aacba4a33a73ea940079415179299d3bb01fc46127c8"
+      "fields.json": "c61a985b69c2e74b6d7caee29bdfa4cdf5c790d80c33a1258c29044d6ad403de"
     }
   },
   "rotating": {
@@ -45,6 +46,36 @@
     "pins": {
       "digest.txt": "d9a45ffb344fe564f8584f433fb60346fef0c9075e3606430a0be117dc11283f",
       "fields.json": "bf1fec1a554961059d49b9ca5ddafaf86559abd6bcd6754b9afb86c66e6d8c3b"
+    }
+  },
+  "gasprocessing": {
+    "course": "FC4",
+    "live": "/root/fc-wip-gasprocessing",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "fc4_dump.mjs",
+      "fc4_fields.mjs",
+      "fc4_fields_capstone.mjs",
+      "fc4_capstone.mjs",
+      "make_fields.mjs",
+      "structure.py",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "apply_fc4_gasprocessing.sh",
+      "dryrun_fc4.sh",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt"
+    ],
+    "pins": {
+      "digest.txt": "b96df3d3a8c5724652cb7a81a1761c511e98e57f033389dc6889358ee29c7d2c",
+      "fields.json": "12bb30b71ebdc8e5ce32f0d0b9c1c527642b4c3915f5a4a4aa5cb209fe220143"
     }
   },
   "fiscal": {

@@ -1634,41 +1634,137 @@ export const imoRuns = () => {
   };
 };
 
+/* ==========================================================================
+ * PRINTED DECIMALS, BY QUANTITY CLASS. The same table the wave's capstone
+ * generator carries, and the same one tools/course-waves/linesizing/
+ * precision.json is written out of, so the grader, the gate and the lab all
+ * read one statement of what this course prints at what precision.
+ *
+ * A graded capstone field is answered by a learner reading a figure and typing
+ * it back at the precision this course tells them to quote, so a tolerance
+ * tighter than half a unit in the last printed place is a field nobody can
+ * answer by doing as they were told. Each number below is confirmed twice, by
+ * the digest header sentence a learner reads and by the formatter in the dump
+ * that produced the page: ft per s, psi, inches and hours at six; friction
+ * factors and the elevation group factors at ten; gas rates, Reynolds numbers,
+ * barrels and days at four. The four published wall cases print inches to ten
+ * decimals, but those rows stand a golden beside an engine value, and the wall
+ * a reader is asked to report prints at six.
+ * ========================================================================== */
+export const PRINTED_DECIMALS = {
+  ftPerS: 6,
+  psi: 6,
+  in: 6,
+  hours: 6,
+  frictionFactor: 10,
+  elevationFactor: 10,
+  scfd: 4,
+  reynolds: 4,
+  bbl: 4,
+  days: 4,
+};
+
+/** The class each graded field's quantity belongs to, read off what the digest
+ *  prints for that quantity rather than off the shape of the key. */
+export const FIELD_CLASS = {
+  imo1_velocity_fts: 'ftPerS',
+  imo1_reynolds: 'reynolds',
+  imo1_friction_factor: 'frictionFactor',
+  imo1_friction_drop_psi: 'psi',
+  imo1_total_drop_psi: 'psi',
+  imo1_erosional_velocity_fts: 'ftPerS',
+  brass_elevation_factor: 'elevationFactor',
+  brass_weymouth_scfd: 'scfd',
+  brass_panhandleb_scfd: 'scfd',
+  brass_general_scfd: 'scfd',
+  brass_general_friction_factor: 'frictionFactor',
+  brass_outlet_pressure_psia: 'psi',
+  quaiboe_required_wall_in: 'in',
+  quaiboe_maop_as_built_psig: 'psi',
+  quaiboe_line_volume_bbl: 'bbl',
+  quaiboe_swept_volume_bbl: 'bbl',
+  quaiboe_pig_run_hours: 'hours',
+  quaiboe_pigging_interval_days: 'days',
+};
+
+/** Half a unit in the last printed place, formed as 5 over a power of ten so
+ *  it is the same double the literal 5e-N is. */
+export const halfUlp = (decimals) => 5 / 10 ** (decimals + 1);
+
+/**
+ * The tolerance a field is graded at: the STATED one, or the half-unit of its
+ * printed class, WHICHEVER IS LOOSER. MAX AND NEVER MIN, so this can only
+ * widen a tolerance and no answer that graded correct before can grade wrong.
+ */
+export const toleranceFor = (cls, stated) => {
+  const d = PRINTED_DECIMALS[cls];
+  if (d === undefined) throw new Error(`no printed precision declared for the class "${cls}"`);
+  return Math.max(stated, halfUlp(d));
+};
+
+/** What each quantity MEANS, chosen before anything about how many digits
+ *  print. The graded tolerance is this or the class half-unit, whichever is
+ *  looser. */
+export const STATED_TOLERANCES = {
+  imo1_velocity_fts: 1e-6,
+  imo1_reynolds: 1e-2,
+  imo1_friction_factor: 1e-9,
+  imo1_friction_drop_psi: 1e-5,
+  imo1_total_drop_psi: 1e-5,
+  imo1_erosional_velocity_fts: 1e-6,
+  brass_elevation_factor: 1e-9,
+  brass_weymouth_scfd: 1e3,
+  brass_panhandleb_scfd: 1e3,
+  brass_general_scfd: 1e3,
+  brass_general_friction_factor: 1e-9,
+  brass_outlet_pressure_psia: 1e-5,
+  quaiboe_required_wall_in: 1e-8,
+  quaiboe_maop_as_built_psig: 1e-5,
+  quaiboe_line_volume_bbl: 1e-4,
+  quaiboe_swept_volume_bbl: 1e-5,
+  quaiboe_pig_run_hours: 1e-7,
+  quaiboe_pigging_interval_days: 1e-7,
+};
+
 /**
  * The eighteen graded fields as [tier, key, value, tolerance], in the order and
  * with the tolerances the capstone publishes. THE TOLERANCE IS ABSOLUTE, in the
  * field's own units: academy_submit_capstone grades abs(v_got - v_exp) <= v_tol.
+ *
+ * Four of the eighteen are graded at their class half-unit rather than at the
+ * quantity's stated tolerance, because the stated one was tighter than
+ * anything this course prints: the required wall, the swept volume, the pig
+ * run and the pigging interval. A field that cannot be answered from the
+ * material is not a hard field, it is a broken one.
  */
 export const imoCapstoneFields = () => {
   const {
     imo, imoErosionalFtS, brassElev, brassWey, brassPhB, brassGen, brassOutlet,
     quaWall, quaMaop, quaVol, quaSwept, quaRun, quaInterval,
   } = imoRuns();
-  return [
-    ['beginner', 'imo1_velocity_fts', imo.vFtS, 1e-6],
-    ['beginner', 'imo1_reynolds', imo.re, 1e-2],
-    ['beginner', 'imo1_friction_factor', imo.f, 1e-9],
-    ['beginner', 'imo1_friction_drop_psi', imo.dpFrictionPsi, 1e-5],
-    ['beginner', 'imo1_total_drop_psi', imo.dpTotalPsi, 1e-5],
-    ['beginner', 'imo1_erosional_velocity_fts', imoErosionalFtS, 1e-6],
-    ['intermediate', 'brass_elevation_factor', brassElev.es, 1e-9],
-    ['intermediate', 'brass_weymouth_scfd', brassWey.qScfd, 1e3],
-    ['intermediate', 'brass_panhandleb_scfd', brassPhB.qScfd, 1e3],
-    ['intermediate', 'brass_general_scfd', brassGen.qScfd, 1e3],
-    ['intermediate', 'brass_general_friction_factor', brassGen.fDarcy, 1e-9],
-    ['intermediate', 'brass_outlet_pressure_psia', brassOutlet.p2Psia, 1e-5],
-    ['advanced', 'quaiboe_required_wall_in', quaWall.tRequiredIn, 1e-8],
-    ['advanced', 'quaiboe_maop_as_built_psig', quaMaop.maopPsig, 1e-5],
-    ['advanced', 'quaiboe_line_volume_bbl', quaVol, 1e-4],
-    ['advanced', 'quaiboe_swept_volume_bbl', quaSwept.sweptBbl, 1e-5],
-    // LOOSENED FROM 1e-7, WHICH NOTHING THIS COURSE PRINTS COULD SATISFY. Run
-    // hours print to six decimals and days to four, so at 1e-7 a learner
-    // reading correctly off the studio was graded on their luck at guessing
-    // unprinted digits. A field that cannot be answered from the material is
-    // not a hard field, it is a broken one.
-    ['advanced', 'quaiboe_pig_run_hours', quaRun.runHours, 5e-7],
-    ['advanced', 'quaiboe_pigging_interval_days', quaInterval.intervalDays, 5e-5],
+  const values = [
+    ['beginner', 'imo1_velocity_fts', imo.vFtS],
+    ['beginner', 'imo1_reynolds', imo.re],
+    ['beginner', 'imo1_friction_factor', imo.f],
+    ['beginner', 'imo1_friction_drop_psi', imo.dpFrictionPsi],
+    ['beginner', 'imo1_total_drop_psi', imo.dpTotalPsi],
+    ['beginner', 'imo1_erosional_velocity_fts', imoErosionalFtS],
+    ['intermediate', 'brass_elevation_factor', brassElev.es],
+    ['intermediate', 'brass_weymouth_scfd', brassWey.qScfd],
+    ['intermediate', 'brass_panhandleb_scfd', brassPhB.qScfd],
+    ['intermediate', 'brass_general_scfd', brassGen.qScfd],
+    ['intermediate', 'brass_general_friction_factor', brassGen.fDarcy],
+    ['intermediate', 'brass_outlet_pressure_psia', brassOutlet.p2Psia],
+    ['advanced', 'quaiboe_required_wall_in', quaWall.tRequiredIn],
+    ['advanced', 'quaiboe_maop_as_built_psig', quaMaop.maopPsig],
+    ['advanced', 'quaiboe_line_volume_bbl', quaVol],
+    ['advanced', 'quaiboe_swept_volume_bbl', quaSwept.sweptBbl],
+    ['advanced', 'quaiboe_pig_run_hours', quaRun.runHours],
+    ['advanced', 'quaiboe_pigging_interval_days', quaInterval.intervalDays],
   ];
+  return values.map(([tier, key, value]) => [
+    tier, key, value, toleranceFor(FIELD_CLASS[key], STATED_TOLERANCES[key]),
+  ]);
 };
 
 /** The graded answers keyed by field. A field list already in hand can be passed in. */
