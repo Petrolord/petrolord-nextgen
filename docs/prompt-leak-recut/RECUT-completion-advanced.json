@@ -1,0 +1,119 @@
+{
+ "app_slug": "completion",
+ "tier": "advanced",
+ "tier_name": "Expert",
+ "course": "Completion Design",
+ "generated": "2026-09-16",
+ "finding": "docs/gate-audit/promptleak.md section 5",
+ "old_text_source": "the live production row, read 2026-09-16 (select prompt, fields::text from public.academy_capstones)",
+ "new_text_source": "the live prompt with the substring replacements listed below, each asserted to match exactly once",
+ "prompt_changed": true,
+ "prompt_replacements": [
+  {
+   "old": "Six space-out values for the Associate capstone completion.",
+   "new": "Six space-out values for a NEW seal assembly landing."
+  },
+  {
+   "old": "Report: (1) the AVAILABLE travel for the elongation case in metres; (2) the AVAILABLE travel for the contraction case; (3) the REMAINING travel after the elongation case; (4) the REMAINING travel after the contraction case, WITH ITS SIGN; (5) the SMALLEST insertion depth at which BOTH cases pass with the margin, in metres; and (6) the SHORTEST polished bore that leaves any acceptable landing at all, in metres.",
+   "new": "Report: (1) the AVAILABLE travel for the elongation case in metres; (2) the REMAINING travel after the elongation case; (3) the REMAINING travel after the contraction case, WITH ITS SIGN; (4) the SMALLEST insertion depth at which BOTH cases pass with the margin, in metres; (5) the LARGEST insertion depth at which BOTH cases still pass, in metres; and (6) the SHORTEST polished bore that leaves any acceptable landing at all, in metres."
+  },
+  {
+   "old": "Getting those two the wrong way round swaps fields 1 and 2 and both remainings with them. Field 4 is NEGATIVE and the sign is part of the answer: this landing fails the contraction case. Field 5 comes from the CONTRACTION case, because that is the lower bound on the landing, and not from the elongation case.",
+   "new": "Getting those two the wrong way round is the error this tier exists to catch, and field 1 is where it shows. Field 3 is NEGATIVE and the sign is part of the answer: this landing fails the contraction case. Field 4 comes from the CONTRACTION case, which is the lower bound on the landing, and field 5 from the ELONGATION case, which is the upper one; taking both from the same case is the other way this tier is failed."
+  },
+  {
+   "old": "Free checks: fields 1 and 2 must sum to 5.35 exactly, because the insertion depth splits a fixed budget and never creates any; field 4 must equal field 2 less 3.15; field 5 must EXCEED the 2.28 m as landed, since the landing as given fails one case; and field 6 must be smaller than 5.35, since the band on this bore is open.",
+   "new": "Free checks: field 3 must equal the landing depth less 3.15, because the available travel against contraction IS the insertion depth; field 4 must EXCEED the 2.28 m as landed, since the landing as given fails one case; field 5 less field 4 is the width of the band, and it must equal 5.35 less field 6; and field 6 must be smaller than 5.35, since the band on this bore is open."
+  }
+ ],
+ "prompt_old": "Six space-out values for the Associate capstone completion. The seal assembly runs in a POLISHED BORE RECEPTACLE of 5.35 m and is landed 2.28 m into it. The two design cases are an ELONGATION of 0.65 m and a CONTRACTION of 3.15 m. The margin is 0.4 m, which is NOT the 0.5 m the lessons use. Report: (1) the AVAILABLE travel for the elongation case in metres; (2) the AVAILABLE travel for the contraction case; (3) the REMAINING travel after the elongation case; (4) the REMAINING travel after the contraction case, WITH ITS SIGN; (5) the SMALLEST insertion depth at which BOTH cases pass with the margin, in metres; and (6) the SHORTEST polished bore that leaves any acceptable landing at all, in metres. Traps. Elongation pushes the seals DEEPER, so its available travel is the bore length LESS the insertion depth, and contraction pulls them OUT, so its available travel IS the insertion depth. Getting those two the wrong way round swaps fields 1 and 2 and both remainings with them. Field 4 is NEGATIVE and the sign is part of the answer: this landing fails the contraction case. Field 5 comes from the CONTRACTION case, because that is the lower bound on the landing, and not from the elongation case. Field 6 is the whole SWING plus TWICE the margin, once at each end, and using one margin gives an answer 0.4 m short. Free checks: fields 1 and 2 must sum to 5.35 exactly, because the insertion depth splits a fixed budget and never creates any; field 4 must equal field 2 less 3.15; field 5 must EXCEED the 2.28 m as landed, since the landing as given fails one case; and field 6 must be smaller than 5.35, since the band on this bore is open.",
+ "prompt_new": "Six space-out values for a NEW seal assembly landing. The seal assembly runs in a POLISHED BORE RECEPTACLE of 5.35 m and is landed 2.28 m into it. The two design cases are an ELONGATION of 0.65 m and a CONTRACTION of 3.15 m. The margin is 0.4 m, which is NOT the 0.5 m the lessons use. Report: (1) the AVAILABLE travel for the elongation case in metres; (2) the REMAINING travel after the elongation case; (3) the REMAINING travel after the contraction case, WITH ITS SIGN; (4) the SMALLEST insertion depth at which BOTH cases pass with the margin, in metres; (5) the LARGEST insertion depth at which BOTH cases still pass, in metres; and (6) the SHORTEST polished bore that leaves any acceptable landing at all, in metres. Traps. Elongation pushes the seals DEEPER, so its available travel is the bore length LESS the insertion depth, and contraction pulls them OUT, so its available travel IS the insertion depth. Getting those two the wrong way round is the error this tier exists to catch, and field 1 is where it shows. Field 3 is NEGATIVE and the sign is part of the answer: this landing fails the contraction case. Field 4 comes from the CONTRACTION case, which is the lower bound on the landing, and field 5 from the ELONGATION case, which is the upper one; taking both from the same case is the other way this tier is failed. Field 6 is the whole SWING plus TWICE the margin, once at each end, and using one margin gives an answer 0.4 m short. Free checks: field 3 must equal the landing depth less 3.15, because the available travel against contraction IS the insertion depth; field 4 must EXCEED the 2.28 m as landed, since the landing as given fails one case; field 5 less field 4 is the width of the band, and it must equal 5.35 less field 6; and field 6 must be smaller than 5.35, since the band on this bore is open.",
+ "fields_old": [
+  {
+   "key": "available_elongation_m",
+   "tol": 5e-07,
+   "unit": "m",
+   "label": "Available, elongation",
+   "expected": 3.07
+  },
+  {
+   "key": "available_contraction_m",
+   "tol": 5e-07,
+   "unit": "m",
+   "label": "Available, contraction",
+   "expected": 2.28
+  },
+  {
+   "key": "remaining_elongation_m",
+   "tol": 5e-07,
+   "unit": "m",
+   "label": "Remaining after elongation",
+   "expected": 2.42
+  },
+  {
+   "key": "remaining_contraction_m",
+   "tol": 5e-07,
+   "unit": "m",
+   "label": "Remaining after contraction",
+   "expected": -0.8700000000000001
+  },
+  {
+   "key": "min_insertion_both_pass_m",
+   "tol": 5e-07,
+   "unit": "m",
+   "label": "Smallest insertion, both pass",
+   "expected": 3.5500000000000003
+  },
+  {
+   "key": "min_pbr_length_m",
+   "tol": 5e-07,
+   "unit": "m",
+   "label": "Shortest usable PBR",
+   "expected": 4.6000000000000005
+  }
+ ],
+ "fields_new": [
+  {
+   "key": "available_elongation_m",
+   "tol": 5e-07,
+   "unit": "m",
+   "label": "Available, elongation",
+   "expected": 3.07
+  },
+  {
+   "key": "remaining_elongation_m",
+   "tol": 5e-07,
+   "unit": "m",
+   "label": "Remaining after elongation",
+   "expected": 2.42
+  },
+  {
+   "key": "remaining_contraction_m",
+   "tol": 5e-07,
+   "unit": "m",
+   "label": "Remaining after contraction",
+   "expected": -0.8700000000000001
+  },
+  {
+   "key": "min_insertion_both_pass_m",
+   "tol": 5e-07,
+   "unit": "m",
+   "label": "Smallest insertion, both pass",
+   "expected": 3.5500000000000003
+  },
+  {
+   "key": "max_insertion_both_pass_m",
+   "label": "Largest insertion, both pass",
+   "unit": "m",
+   "expected": 4.299999999999999,
+   "tol": 5e-07
+  },
+  {
+   "key": "min_pbr_length_m",
+   "tol": 5e-07,
+   "unit": "m",
+   "label": "Shortest usable PBR",
+   "expected": 4.6000000000000005
+  }
+ ]
+}

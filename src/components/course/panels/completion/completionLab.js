@@ -358,10 +358,10 @@ export const capstoneValues = () => {
     annulus_above_packer_m3: v.annulusAbovePackerM3,
     below_packer_m3: v.belowPackerM3,
     available_elongation_m: so.up.availableM,
-    available_contraction_m: so.down.availableM,
     remaining_elongation_m: so.up.remainingM,
     remaining_contraction_m: so.down.remainingM,
     min_insertion_both_pass_m: capstoneBand().loM,
+    max_insertion_both_pass_m: capstoneBand().hiM,
     min_pbr_length_m: minPbrLength(CAPSTONE.dlUpM, CAPSTONE.dlDownM, CAPSTONE.marginM),
   };
 };

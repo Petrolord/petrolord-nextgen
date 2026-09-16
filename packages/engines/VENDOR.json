@@ -1,0 +1,2092 @@
+{
+  "$comment": "Vendoring contract for packages/engines. Checked by tools/check-vendored-engines.mjs; see that file for the model. Every deviation from canonical is enumerated below with a reason, and every differing or extra path is pinned to the blob currently vendored, so a second drift on an already-known path still fails.",
+  "canonical": {
+    "repo": "git@github.com:Petrolord/petrolord-engines.git",
+    "commit": "709172f162e1063fb9958204ced726dbf66010fc",
+    "manifest": "VENDOR.manifest"
+  },
+  "floors": {
+    "manifestPaths": 700,
+    "vendoredPaths": 500,
+    "testSuites": 100
+  },
+  "excludedDomains": [
+    {
+      "domain": "downstream",
+      "engineFiles": 11,
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "domain": "wellsite",
+      "engineFiles": 11,
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "domain": "stratigraphy",
+      "engineFiles": 10,
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "domain": "facilities",
+      "engineFiles": 11,
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    }
+  ],
+  "localOnly": [
+    "__tests__/sim.ekene.test.js",
+    "__tests__/waterflood.ekene.test.js",
+    "test-data/ekene-dynamic/sim.json"
+  ],
+  "knownTestFailures": {
+    "$comment": "Suites that already fail against the vendored engines, from before this guard existed. tools/run-vendored-engine-tests.mjs refuses any NEW failing suite and refuses a suite listed here that now passes, so the list can only shrink.",
+    "suites": [
+      {
+        "suite": "__tests__/economics.fdp.test.js",
+        "failing": 22,
+        "reason": "NextGen vendors newer fdp tests and goldens than the engines/economics/fdp/* code beside them. Cleared by the audit's Group 4 economics re-vendor, which must carry the EC6 recut."
+      },
+      {
+        "suite": "__tests__/economics.screening.test.js",
+        "failing": 2,
+        "reason": "Same cause: newer screening tests than engines/economics/screening.js. Cleared by Group 4, which must carry the EC3 recut."
+      }
+    ]
+  },
+  "knownDeviations": [
+    {
+      "path": "__tests__/downstream.carbonAbatement.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/downstream.crudeAssay.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/downstream.energyEfficiency.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/downstream.flareToValue.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/downstream.fuelPricing.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/downstream.lpgCng.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/downstream.modularRefinery.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/downstream.productBlending.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/downstream.refineryPlanning.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/downstream.streamModel.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/downstream.terminalDepot.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/stratigraphy.agedepth.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "__tests__/stratigraphy.basinlayers.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "__tests__/stratigraphy.column.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "__tests__/stratigraphy.intervals.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "__tests__/stratigraphy.lithology.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "__tests__/stratigraphy.sequence.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "__tests__/stratigraphy.stratmaps.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "__tests__/stratigraphy.stretch.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "__tests__/stratigraphy.timescale.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "__tests__/stratigraphy.vocabulary.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "__tests__/stratigraphy.wheeler.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "__tests__/wellsite.depth.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/wellsite.description.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/wellsite.events.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/wellsite.lag.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/wellsite.pumps.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/wellsite.reports.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/wellsite.sampleprogram.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/wellsite.shows.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/wellsite.time.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/wellsite.tops.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/downstream/carbonAbatement.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/downstream/crudeAssay.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/downstream/energyEfficiency.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/downstream/flareToValue.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/downstream/fuelPricing.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/downstream/lpgCng.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/downstream/modularRefinery.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/downstream/productBlending.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/downstream/refineryPlanning.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/downstream/streamModel.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/downstream/terminalDepot.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/stratigraphy/ageDepth.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "engines/stratigraphy/basinLayers.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "engines/stratigraphy/column.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "engines/stratigraphy/intervals.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "engines/stratigraphy/sequence.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "engines/stratigraphy/stratMaps.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "engines/stratigraphy/stretch.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "engines/stratigraphy/timescale.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "engines/stratigraphy/vocabulary.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "engines/stratigraphy/wheeler.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "engines/wellsite/abbreviations.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/wellsite/depth.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/wellsite/descriptionVocabulary.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/wellsite/events.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/wellsite/lag.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/wellsite/pumps.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/wellsite/reports.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/wellsite/sampleProgram.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/wellsite/shows.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/wellsite/time.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "engines/wellsite/tops.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "test-data/stratigraphy/README.md",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "test-data/stratigraphy/wheeler-synthetic.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "path": "test-data/wellsite/README.md",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "test-data/wellsite/description-goldens.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "test-data/wellsite/lag-goldens.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "test-data/wellsite/report-day.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "test-data/wellsite/show-goldens.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "test-data/wellsite/ws0-goldens.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "tools/validation/wellsite/gen_report_day.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "tools/validation/wellsite/genfixtures.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "tools/validation/wellsite/oracle_lag.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "tools/validation/wellsite/oracle_ws0.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
+    },
+    {
+      "path": "__tests__/facilities.compression.test.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "__tests__/facilities.controlvalve.test.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "__tests__/facilities.corrosion.test.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "__tests__/facilities.gasprocessing.test.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "__tests__/facilities.heattransfer.test.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "__tests__/facilities.linehydraulics.test.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "__tests__/facilities.producedwater.test.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "__tests__/facilities.pumps.test.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "__tests__/facilities.relief.test.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "__tests__/facilities.tanksmetering.test.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "engines/facilities/compression.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "engines/facilities/controlValve.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "engines/facilities/corrosion.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "engines/facilities/gasProcessing.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "engines/facilities/heatTransfer.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "engines/facilities/lineHydraulics.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "engines/facilities/metering.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "engines/facilities/producedWater.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "engines/facilities/pumps.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "engines/facilities/relief.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "engines/facilities/storageTank.js",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "test-data/facilities/goldens/compression_cases.json",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "test-data/facilities/goldens/controlvalve_cases.json",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "test-data/facilities/goldens/corrosion_cases.json",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "test-data/facilities/goldens/gasprocessing_cases.json",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "test-data/facilities/goldens/heattransfer_cases.json",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "test-data/facilities/goldens/linehydraulics_cases.json",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "test-data/facilities/goldens/producedwater_cases.json",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "test-data/facilities/goldens/pumps_cases.json",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "test-data/facilities/goldens/relief_cases.json",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "test-data/facilities/goldens/tanksmetering_cases.json",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_compression.py",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_controlvalve.py",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_corrosion.py",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_gasprocessing.py",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_heattransfer.py",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_linehydraulics.py",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_producedwater.py",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_pumps.py",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_relief.py",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_tanksmetering.py",
+      "kind": "missing",
+      "group": "0-partial-domain-facilities",
+      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+    },
+    {
+      "path": "__tests__/earthmodel.adjust.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/earthmodel.derived.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/economics.npvOnly.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/engine.copy.lint.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The canonical copy lint. NOT vendored yet because 126 vendored engine files still carry the em dashes it refuses; it can only land once Groups 3 and 4 bring their domains to canonical."
+    },
+    {
+      "path": "__tests__/fluid.blackOil.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/fluid.characterization.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/fluid.components.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/fluid.envelope.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/fluid.experiments.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/fluid.flash.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/fluid.labTune.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/fluid.pr78.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/fluid.separator.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/fluid.transport.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/fluid.tuning.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/gridding.rotation.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/importExtensions.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/lp.simplex.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/mapping.kriging.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/mapping.structurepoints.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/petrophysics.conditioning.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/petrophysics.mineral.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/petrophysics.pipeline.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/petrophysics.probabilistic.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/petrophysics.rw.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/petrophysics.scanTrace.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/seismolord.stratal.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/welldata.checkshots.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "__tests__/welldata.las3blocks.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/earthmodel/adjust_cases.json",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/mapping/goldens/kriging_cases.json",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/mapping/goldens/rotation_cases.json",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/mapping/goldens/structure_points_cases.json",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/petrophysics/chart_points.json",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/checkshots_cases.json",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_comma_30.A34H.f32",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_comma_30.DEPT.f32",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_comma_30.GR.f32",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_comma_30.P40H.f32",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_comma_30.RHOB[1].f32",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_comma_30.RHOB[2].f32",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_comma_30.json",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_intervals_30.intervals.json",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_space_30.DEPT.f32",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_space_30.DT.f32",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_space_30.GR.f32",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_space_30.NPHI.f32",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_space_30.RHOB.f32",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/goldens/las3_space_30.json",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/las/las3_comma_30.las",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/las/las3_intervals_30.las",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "test-data/wells/las/las3_space_30.las",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/earthmodel/oracle_adjust.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/fluid/README.md",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/fluid/genfixtures.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/fluid/oracle.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/fluid/run-validation.mjs",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/mapping/oracle_kriging.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/mapping/oracle_rotation.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/mapping/oracle_structure_points.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_allocation.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_choke.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_esp.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_flowassurance.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_gaslift.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_gaswell.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_intervention.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_liftadvisor.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_liftscreening.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_network.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_nodal.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_rodpump.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/production/oracle_surveillance.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "tools/validation/wells/oracle_checkshots.py",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
+    },
+    {
+      "path": "engines/drilling/cementing.js",
+      "kind": "differing",
+      "group": "2-copy-pass-held",
+      "vendoredSha": "44da61f84f33e2b3ad658668ba2c9d3054988950",
+      "reason": "Printed precision only (ECD toFixed(0) to (1), standoff toFixed(0) to (2)), but three cementing/advanced lesson files quote the string 'Minimum standoff 60% vs the API 67% target.' verbatim, which canonical prints as '60.00%'. REJECTED from the zero-risk wave: it needs a lesson copy pass in the same commit."
+    },
+    {
+      "path": "engines/waterflood/vrrLedger.js",
+      "kind": "differing",
+      "group": "2-copy-pass-held",
+      "vendoredSha": "94fea91a5a5027ba28d96cc494a045f258ec0166",
+      "reason": "Printed precision only (allocation sums toFixed(3) to (6)) plus two reworded withheld reasons, but waterflood/intermediate m01-allocation lesson prose quotes 'allocation fractions sum to 1.200 (> 1)' and 'fractions sum to 0.900; the remaining 0.100' verbatim, which canonical prints at six decimals. REJECTED from the zero-risk wave: it needs a lesson copy pass in the same commit."
+    },
+    {
+      "path": "engines/production/allocation.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "ee18333728bb341fa718bc1d8a7ba7a43618d115",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/data/espCatalog.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "604c307c24f3702674d2f0e5147041c68c27dfb7",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/espDesign.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "26f5ac28af2a82d7d2e1a76689897dbc24d7add7",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/espMotorCable.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "1e0a97948cab1f8a8d94be251b9a51dbe2058cfe",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/espPump.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "c910584f83a0fff8141596f198cf14a3fd1ca756",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/flowlineThermal.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "294e90d32b1794a163fb5c36f27cf6f405aa63a9",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/gasLiftDesign.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "a076c1a5e7a8cc08cd7d10c90c6ab7354dfb8074",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/gasWellLoading.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "8088ee1f9294216cd08ff20c18aeb2efe525f094",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/hydrateInhibition.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "478143489a169e49f4a716806d828f744304c80f",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/interventionDiagnostics.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "dffc165e4c1ebb03cf731ef9110750405b287deb",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/liftAdvisor.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "891acef05ab175f0f47c69d0f8b241b34b89cffb",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/liftScreening.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "d6ef9e8734312d38c191466a6bb1b86ab9f6d600",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/networkSolve.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "68d450394a179fd2b3c6846b64fa20668b078a45",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/nodal.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "996c08e50bb68ed87d855ea578ed77de939cdf37",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/plungerLift.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "065e7e61ea527d69065ebb8a9d7fa29fe947ab10",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/pumpingUnit.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "bb59e6251eacc4385a4f70067d828a9ee2c806ee",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/rodDynamics.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "68456e722a4201061f51c88714514b1868101f69",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/rodPumpDesign.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "a0a8ae3a1c504bc53dae8c7f3b1abd1c6165f6de",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/rodString.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "ab6cb60bca898aab79765cb83b916e93b31c03b0",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/production/surveillance.js",
+      "kind": "differing",
+      "group": "3-production-revendor",
+      "vendoredSha": "c5104183e614e3177fd53ea1dbe70a8bcd37e39a",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+    },
+    {
+      "path": "engines/economics/afe.js",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "f5262a523739be110b3a1c7b04e8c70ec2d1ce37",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/economics/cashflow.ts",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "17a3af1c129ce97de2630ac2b224efc4cc54f2ee",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/economics/decisionTree.js",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "0e6b723987506b5da772c85bdbddd35b150940fc",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/economics/fdp/costCalculations.js",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "42363da0f2ca7e6f919d29c58ed8d50d99902f1a",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/economics/fdp/facilitiesCalculations.js",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "d20c1d97a81f570555f09c3fe5ec701fe781360f",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/economics/fdp/fdpCalculations.js",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "bc641603fcd05a6054018051af9a68b34d3c5aa6",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/economics/fdp/scheduleCalculations.js",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "6727c25f942087e98f44707c4d1fed16bcb0121d",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/economics/fdp/wellCalculations.js",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "a35fc3034598dbbe9419e5058931d63d796d6cd1",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/economics/fiscalRegime.js",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "64f4811fdfce3228647d76dc5f7140fbcabc29db",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/economics/montecarlo.ts",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "3f73b78488c9996848443b26375c3e25cc5e429a",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/economics/portfolio.js",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "9255c481cd30269195c0396729425f6664cce075",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/economics/screening.js",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "9cc861c81de21005fdbed7083806d354b9d1beda",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/economics/voi.js",
+      "kind": "differing",
+      "group": "4-economics-revendor",
+      "vendoredSha": "04302a01f008a12cde1b703825b13ba289155800",
+      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+    },
+    {
+      "path": "engines/drilling/profileDesign.js",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "a7f4157d75f8c63e4f1049b58d7dfbd0dd4993a5",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+    },
+    {
+      "path": "engines/earthmodeling/properties.js",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "6358e51349f81218a8639f3122ad1d1a8dc75696",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+    },
+    {
+      "path": "engines/facilities/separatorSizing.js",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "5dacfaa6402e940bfa6a02f9465e32458a7ecf56",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+    },
+    {
+      "path": "engines/mapping/surface.js",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "6ed1972cc43dd3ea0d249a369203e1b56459f51e",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+    },
+    {
+      "path": "engines/mbal/mbalEngine.ts",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "233b930e736558c0eeb1e7693356f35b8a2f9e93",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+    },
+    {
+      "path": "engines/petrophysics/crossplot.js",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "f8e7fb20c06ca5620e1db586221a2f8a944da945",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+    },
+    {
+      "path": "engines/petrophysics/rw.js",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "2cea71a5134c6e18ad6a65c455671b6349564f42",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+    },
+    {
+      "path": "engines/welldata/lasParse.js",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "cd8f62364211f23819b6a2f0dc635c5c4a3e2f9e",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+    },
+    {
+      "path": "engines/welltest/derivative.js",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "372a51650943b72c82bfe226b07a7d777b223846",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+    },
+    {
+      "path": "lib/gridding/gridding.js",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "27595c5461bd21aaf290a4e430f21fb1ac2f7f62",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+    },
+    {
+      "path": "lib/gridding/gridmath.js",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "99ce518e1db185d71fe8b37f01cea606e0e16e2e",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+    },
+    {
+      "path": "lib/gridding/surfaceImport.js",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "a7ada422163167a2fae84c6cf1a1ab1250201463",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+    },
+    {
+      "path": "__tests__/dca.montecarlo.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "a3e06588927a3950418d631f509fb9f00e882e5d",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/drilling.cementing.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "b16d30e6d66c25ede89b25249a3b3e169cff6412",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/drilling.perfsand.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "ac40a5737bf8d320d858ad48acc26cf83e7d8955",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/drilling.profiledesign.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "a7ac4f7a599889dab12ab9a023dd940c1fa3b515",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/drilling.wellcost.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "d34bd602f1ceccb112519599ce6d74754f847486",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/drilling.wellintegrity.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "a29d9d91c597d7ffd9c2a2c3c485b6e793629379",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/economics.afe.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "b83184db6a07f9424f1e3568285ff326d7adad39",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/economics.breakeven.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "149d7f08d7d5332bdfbbae7c9421426055f7138b",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/economics.cashflow.test.ts",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "2cc14b59b2b926b3c3447bce9b73bc85f45f17a1",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/economics.decision.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "5fe20d6cdcb3f3486af6becee530250a6b4f4a96",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/economics.fdp.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "95fcc172b5cbbb864fc7c207fe2405e8d43c1f9d",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/economics.fiscal.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "5a04444c186779e497221976054ed67121640607",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/economics.montecarlo.test.ts",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "05ef37def1868014e3aabe4fe5f3a3265a303fa3",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/economics.portfolio.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "c5513c156fbb87ce31ece53063c0c7a3678bf74e",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/economics.screening.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "1c3fdb897f50436f94fe37270c8f6e3f77412aeb",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/facilities.separator.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "0eb3442d5556e1443d99064b20f50a378dc87611",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/mbal.test.ts",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "fc095f9ef2915fadff96dc698940c8b96e8670b2",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/production.allocation.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "8d7b828ab154f5ba3afbbd7704fcf87429b90722",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/production.esp.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "39098604d6f4139a7dffa7afc58e7d9043676f8e",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/production.flowassurance.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "77a820bce59711b639327db6f8220fc5a83ba1e0",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/production.gaslift.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "e916337654699aeae6f4b404d0d80f0e779fd17a",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/production.gaswell.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "d99fdafbd03547fd7c163239e7b5e23c677a2879",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/production.intervention.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "d5955f61f73bc0a401525295922ae26ab96fb11e",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/production.liftadvisor.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "d0b4281ea734274b25d95f9fd91886c3745ed043",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/production.liftscreening.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "c206505f116856efc8ca082c7102eae702c8b9b0",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/production.network.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "5bb85d265442e584b940cd2a2504e8063aaeb0c6",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/production.nodal.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "59043f4c92e0c8bd7864e82222a2139a35983639",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/production.rodpump.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "7ebda937fb8c237b3da395b11690593f3434d37f",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/production.surveillance.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "b5b242313b5d26505b20e523f480dfeea918606a",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/seismolord.import.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "0a19753656d56b82a9f0c700ec1cf9b946bc0ad4",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/smoke.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "2c51ef34e9718f41cb669ae446599c29d2d560aa",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/waterflood.vrrledger.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "07e6137243190e1575971716c509250dc84b7df1",
+      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "test-data/economics/goldens/afe_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "148b45a792da2d12c677d0181b1af7941888ba19",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/economics/goldens/cashflow_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "009c83b44b8d5277bc9873e41b1e0be7d7e9fa25",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/economics/goldens/decision_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "d41f49d6a6b564dd8ed0680862972f2340b16ee7",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/economics/goldens/fdp_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "3c35c0ba1b8e807fa3cb239397dd30fdfc0390ee",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/economics/goldens/fiscal_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "96a06d1e9bdacf08470c75ba48fbc1374d018d5a",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/economics/goldens/montecarlo_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "a6742b34b710ca9117c2281edb04f7bed92fb4f4",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/economics/goldens/portfolio_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "198a864f94fb5d0518db5e621ebf90903a8ca12b",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/economics/goldens/screening_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "c3785d94b23ccd717db9edb59667a9bd5ed601b3",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/ekene-dynamic/waterflood.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "531ebbddb8c22d0324e92619ba0954feae3bf9d7",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/facilities/goldens/separator_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "0898a90b87d8733587406911b94bda8548ee40a3",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/mbal/ahmed-ex-11-1-combination.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "d4f768d6f989e1f130f8dddea8ea8f5906ee09dc",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/petrophysics/README.md",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "64c6ddec1317f9fe3e734256fa1ec74bc3b9051e",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/petrophysics/analytic_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "c64f85e81540810afc54b3bf62322955c7e03058",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/petrophysics/goldens.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "e47f14a078a98488fbcb17f0f5a0db1b465a891e",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/petrophysics/typewell.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "6396e2d5da1a0d4e6c0a27d3a2a2881763f827e1",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/production/goldens/esp_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "9e803fccf4f3cb71da105a270505608902e47ab6",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/production/goldens/flowassurance_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "fa0eeb719f0c9cc98d0d8d391975b28e5a58351d",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/production/goldens/gaslift_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "9a8baa37d1e78b02c90e2dfa5a933cb5ff2acc8c",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/production/goldens/gaswell_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "e21efa54b3a2e0d0a8c87a651bb87e1df1c6d9fb",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/production/goldens/lift_advisor_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "6ca79e33472dcfa5f0e3176eb8ade5a60d9c96f9",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/production/goldens/rodpump_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "0d43e4e18312b0b324756694737b1ca5b29dcd73",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/production/goldens/surveillance_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "b9d81d2f4b3c4bb975e73cdb98a9d510f21dcfce",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/wells/README.md",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "191bbdce2d9189a881c096d3c4f48834de242b18",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "tools/ekene-dynamic/generate.mjs",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "7d8f8d3460c2c826783d77bc2c8fe174e2ae29cc",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/drilling/oracle_completion.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "00c24307a67ce92161401a9184ab3572a107717a",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/FINDINGS-cashflow.md",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "a3cd23b057abff4a5081fc897f12d0aa544c50b2",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/FINDINGS-decision.md",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "3290956d27e095e9d1fbf4dd2477940bf576ad4c",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/FINDINGS-fdp.md",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "39ab04456e67460bd1bae27502698622d14dfd45",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/FINDINGS-fiscal.md",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "ebc26ff67e56d219b0209e98b617edd48fe5e0e1",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/oracle_afe.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "db98222c7f6d7fef9791cb73ddde472275ef3f50",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/oracle_breakeven.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "2a4588d80945687377658c40464cba27592274cd",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/oracle_cashflow.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "da0fcadd8d664aba8c90193aba988093879a0d06",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/oracle_decision.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "7d4fa9822562024f82b7d2a26684c188a62a4f8c",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/oracle_fdp.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "ba6e3767f6deb9750750375879924fcbc1f1d8cd",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/oracle_fiscal.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "9d1e1a4eeb20a169c333f425308cf99a8eab2ce6",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/oracle_montecarlo.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "07ea0264b059969de9ed637f7694b35bd87550ca",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/oracle_portfolio.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "0c5b88c52cd19b6d6e4395673d6a99736d4e9bab",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/economics/oracle_screening.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "718089853edf9ec07834b3c4f4e032e7eb619608",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/facilities/FINDINGS-separation.md",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "4bce102e031aea3148f37cab9431dbda5b51c564",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_separator.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "8875fde79c92bf917fd3dd99aecc9e8a561bc659",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/petrophysics/genfixtures.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "b383875f13e78a70aee9d4173aacddc9e424a454",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/petrophysics/oracle.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "a6090dd8359ff55d132bd4c7f2f21ff0e2de7e6c",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/wells/genfixtures.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "8e381a8f9361818069b969e73f9db5d864d90d28",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/wells/oracle.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "f017649e941c0d366b340fa56c6d5f1f99545f1f",
+      "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "README.md",
+      "kind": "differing",
+      "group": "7-vendor-readme",
+      "vendoredSha": "aa51c0243e29f73ab6c47f70016dd248d6ba4fe6",
+      "reason": "The vendored README carries NextGen's own vendoring note rather than the canonical package README. Cosmetic and deliberate."
+    },
+    {
+      "path": "__tests__/sim.ekene.test.js",
+      "kind": "extra",
+      "group": "local-only",
+      "vendoredSha": "07c7b1702ac088f849737b8e32982b0254264f6d",
+      "reason": "Authored in NextGen and never upstreamed to the engines repo. A whole-tree subtree pull would delete it, which is how the Suite lost 24 files on 2026-09-14."
+    },
+    {
+      "path": "__tests__/waterflood.ekene.test.js",
+      "kind": "extra",
+      "group": "local-only",
+      "vendoredSha": "5e4a18db7a0cfb1e3534b1f6644cd30dc8576fdb",
+      "reason": "Authored in NextGen and never upstreamed to the engines repo. A whole-tree subtree pull would delete it, which is how the Suite lost 24 files on 2026-09-14."
+    },
+    {
+      "path": "test-data/ekene-dynamic/sim.json",
+      "kind": "extra",
+      "group": "local-only",
+      "vendoredSha": "e54c1b25a05e2fc5102c020a44ea2957688e7b66",
+      "reason": "Authored in NextGen and never upstreamed to the engines repo. A whole-tree subtree pull would delete it, which is how the Suite lost 24 files on 2026-09-14."
+    }
+  ]
+}

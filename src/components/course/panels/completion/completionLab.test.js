@@ -405,7 +405,7 @@ describe('the capstone', () => {
     near(V.annulus_above_packer_m3, 67.27585926805148, 1e-6);
     near(V.below_packer_m3, 5.715910666870907, 1e-6);
     near(V.available_elongation_m, 3.07, 1e-9);
-    near(V.available_contraction_m, 2.28, 1e-9);
+    near(V.max_insertion_both_pass_m, 4.3, 1e-9);
     near(V.remaining_elongation_m, 2.42, 1e-9);
     near(V.remaining_contraction_m, -0.87, 1e-9);
     near(V.min_insertion_both_pass_m, 3.55, 1e-7);
@@ -420,7 +420,7 @@ describe('the capstone', () => {
       ['spm_clearance_m', 5e-8], ['through_bore_min_id_m', 5e-8],
       ['through_bore_at_packer_id_m', 5e-8], ['annulus_above_packer_m3', 5e-7],
       ['below_packer_m3', 5e-7], ['available_elongation_m', 5e-7],
-      ['available_contraction_m', 5e-7], ['remaining_elongation_m', 5e-7],
+      ['max_insertion_both_pass_m', 5e-7], ['remaining_elongation_m', 5e-7],
       ['remaining_contraction_m', 5e-7], ['min_insertion_both_pass_m', 5e-7],
       ['min_pbr_length_m', 5e-7],
     ];
@@ -454,8 +454,15 @@ describe('the capstone', () => {
   it('closes each tier on a sum the learner can check', () => {
     near(V.bottom_md_m, CAPSTONE.components.reduce((a, c) => a + c.lengthM, 0), 1e-9);
     expect(V.string_displacement_m3).toBeGreaterThan(V.string_capacity_m3);
-    near(V.available_elongation_m + V.available_contraction_m, CAPSTONE.pbrLengthM, 1e-9);
-    near(V.remaining_contraction_m, V.available_contraction_m - Math.abs(CAPSTONE.dlDownM), 1e-9);
+    // The budget identity, stated against the landing depth itself, which IS
+    // the available contraction travel. That travel is no longer a graded
+    // field (it restated the prompt's own input), so the identity is checked
+    // here against CAPSTONE rather than against a capstone value.
+    near(V.available_elongation_m + CAPSTONE.insertLengthM, CAPSTONE.pbrLengthM, 1e-9);
+    near(V.remaining_contraction_m, CAPSTONE.insertLengthM - Math.abs(CAPSTONE.dlDownM), 1e-9);
+    // The band the two graded edges enclose is exactly the spare bore.
+    near(V.max_insertion_both_pass_m - V.min_insertion_both_pass_m,
+      CAPSTONE.pbrLengthM - V.min_pbr_length_m, 1e-7);
     near(V.min_pbr_length_m, CAPSTONE.dlUpM - CAPSTONE.dlDownM + 2 * CAPSTONE.marginM, 1e-7);
     // the two tight rows share a governing drift, so their clearances differ
     // by exactly the difference of the two outside diameters

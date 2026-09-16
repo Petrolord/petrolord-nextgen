@@ -19,7 +19,7 @@ Before this course's repair the engine did not refuse. One caller filled the mis
 
 ## Zero typed and zero assumed
 
-A scenario priced at zero is accepted and returns an NPV of -3517.4133 million USD. A typed zero is a number somebody chose, and the engine owes them the answer to the question they asked. A missing year is a question nobody asked, and an engine that answers it has made up the input and the output together.
+A scenario priced at zero is accepted and returns an NPV of -3554.2621 million USD. A typed zero is a number somebody chose, and the engine owes them the answer to the question they asked. A missing year is a question nobody asked, and an engine that answers it has made up the input and the output together.
 
 ## The mistake
 

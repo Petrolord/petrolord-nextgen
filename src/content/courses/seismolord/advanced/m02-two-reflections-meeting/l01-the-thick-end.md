@@ -8,9 +8,9 @@ Every measurement needs a reference level, and the wedge supplies its own at the
 
 Set the frequency to 25 Hz and the thickness to 60 ms, then look at the lower chart. The trace shows a clean positive event at the top interface and a clean negative event at the base, 60 ms apart, with a quiet stretch between them. Nothing about the display suggests the two are related.
 
-Read the amplitude. The model reports **0.07999999821186066**, and the capstone grades that figure as the isolated reflector amplitude.
+Read the amplitude. The model reports **0.07999999821186066**. This is the reference level every tuned amplitude in the tier is measured against. The capstone does not grade the level on its own, because the prompt states the reflection pair and this reading is simply that pair's top coefficient; what it grades is the ratio of the tuning amplitude to this level.
 
-It is the top reflection coefficient, 0.08. The trailing digits are not a measurement result and they are not an error. The model stores its traces as 32 bit floats, and 0.08 has no exact representation in binary, so the nearest storable value is 0.07999999821186066. Every trace in the panel carries the same rounding. The capstone allows 0.002 either way, so entering 0.08 passes comfortably, and so does the full stored figure. What matters is understanding that the two are the same number rather than two different answers.
+It is the top reflection coefficient, 0.08. The trailing digits are not a measurement result and they are not an error. The model stores its traces as 32 bit floats, and 0.08 has no exact representation in binary, so the nearest storable value is 0.07999999821186066. Every trace in the panel carries the same rounding. Either form may be used as the denominator of the graded ratio: against the stored 0.07999999821186066 it comes to 1.4449345270902185, against the exact 0.08 to 1.444934494793415, and the capstone's tolerance of 0.001 covers both. What matters is understanding that the two are the same number rather than two different answers.
 
 ## Why the answer is the coefficient itself
 

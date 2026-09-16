@@ -211,7 +211,9 @@ export const ScenariosMode = ({ sc, price, onPrice }) => {
       />
       <p className="text-xs text-slate-400 mt-2 mb-0">
         A rate of return of none is an answer. The status beside it says which of the five things happened, and the engine
-        reports no rate at all rather than the edge of the band it searched.
+        reports no rate at all rather than the edge of the band it searched. Every case above is charged the plan&apos;s end of
+        life cost of {four(sc.abandonment.amountMM)} million USD in production year {sc.abandonment.year}, which is what puts a
+        second change of sign in the flow. The payback column is the one figure here computed without it.
       </p>
       <div className="mt-3">
         <TileGrid>
@@ -279,7 +281,7 @@ export const CostsMode = ({ pe, rules }) => {
         <TileGrid>
           <Tile label={<CapexLabel>CAPEX total</CapexLabel>} value={four(pe.capexTotal)} unit="million USD" />
           <Tile label={<CostLabel>OPEX total</CostLabel>} value={four(pe.opexTotal)} unit="million USD a year" />
-          <Tile label={<CostLabel>The ABEX line</CostLabel>} value={four(pe.abexAmount)} unit="million USD, in neither total" />
+          <Tile label={<CostLabel>The ABEX line</CostLabel>} value={four(pe.abexAmount)} unit="million USD, in neither total, and charged as the end of life cost" />
           <Tile label={<CapexLabel>The concept&apos;s own capex</CapexLabel>} value={four(pe.conceptCapex)} unit="million USD" />
         </TileGrid>
       </div>
@@ -290,9 +292,23 @@ export const CostsMode = ({ pe, rules }) => {
       <p className="text-xs text-slate-400 mt-2 mb-0">
         The plan&apos;s own case runs the cost items rather than the concept card: capex {four(pe.planRun.capex)} million USD,
         operating cost {four(pe.planRun.annualOpex)} a year, {pe.planRun.years} producing years at {four(pe.planRun.priceUsd)} USD
-        a barrel. NPV {four(pe.planRun.npv)} million USD, rate of return {pe.planRun.irr === null ? 'none' : four(pe.planRun.irr)} percent,
+        a barrel, and the plan&apos;s end of life cost in the last of them. NPV {four(pe.planRun.npv)} million USD,
+        {' '}{pe.planRun.irr === null ? `no single rate of return, status ${pe.planRun.irrStatus}` : `rate of return ${four(pe.planRun.irr)} percent`},
         payback {four(pe.planRun.payback)} years.
       </p>
+      <div className="mt-3">
+        <TileGrid>
+          <Tile label={<CostLabel>End of life cost charged</CostLabel>} value={four(pe.abandonment.amountMM)}
+            unit={`million USD, source ${pe.abandonment.source}, in production year ${pe.abandonment.year}`} />
+          <Tile label="The same case with no end of life cost" value={four(pe.abandonment.withoutNpv)} unit="million USD" />
+          <Tile label={<CostLabel>What charging it costs the plan</CostLabel>} value={four(pe.abandonment.costDerived)} unit="million USD of present value, derived" />
+        </TileGrid>
+      </div>
+      <Note>
+        {pe.abandonment.basis} An ABEX cost item replaces the facility decommissioning estimate and is never added to it.
+        Until September 2026 the line sat on this screen and reached no cash flow, so the NPV was the value of a plan that
+        never paid to abandon the field.
+      </Note>
       <div className="h-48 mt-3">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={bars} layout="vertical" margin={{ top: 10, right: 20, bottom: 5, left: 70 }}>

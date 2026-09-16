@@ -10,7 +10,7 @@ A plan is a set of numbers that must agree with each other, and the work of plan
 | --- | --- | --- |
 | concept capex against the plan's cost items | 2250.0000 and 2250.0000 | agreed |
 | the network against the calendar | 870 days and 933 days | 63 days |
-| the scenario NPV against the plan's own NPV | 2047.5653 and 2047.5653 | 0.0000 |
+| the scenario NPV against the plan's own NPV | 2015.4123 and 2015.4123 | 0.0000 |
 
 The economics difference is 0.0000, and it is zero only because the plan was costed against the concept it is running. A difference of zero earned by reconciliation is a finding. A difference of zero assumed in advance is nothing at all.
 
@@ -20,7 +20,7 @@ The facility screening estimate of 1363.3524 million USD sits beside the concept
 
 ## When the answer is that there is none
 
-The strongest reading a plan gives is sometimes a refusal. At 18.0000 USD a barrel the FPSO scenario returns an NPV of -1797.2732 million USD, no rate of return at all with a status of no-root, and a payback of never. A search that clamped at its own boundary used to print 1000 percent here, in green.
+The strongest reading a plan gives is sometimes a refusal. At 18.0000 USD a barrel the FPSO scenario returns an NPV of -1834.1220 million USD, no rate of return at all with a status of no-root, and a payback of never. A search that clamped at its own boundary used to print 1000 percent here, in green.
 
 The same discipline runs through the risk register, where an unscored risk carrying a cost impact of 400.0000 million USD contributes 0.0000 to an exposure of 269.0000 million USD. It runs through earned value, where a project with no costed task reports no index rather than an invented ratio of one labelled as under budget.
 

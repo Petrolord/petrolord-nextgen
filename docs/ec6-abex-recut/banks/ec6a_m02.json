@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "A published case is negative in every single year and reports the status no-sign-change. Why does no rate exist for it?",
+  "options": [
+   "The search runs from -99 to 1000 percent, and a loss this deep needs a rate somewhere under the floor of that band, which the engine declines to report.",
+   "Discounting shrinks every year by the same factor, so a flow whose years all point one way keeps that sign at every rate the search visits.",
+   "A rate needs at least three producing years to solve against, and a case with no positive year offers nothing to iterate on.",
+   "The engine refuses to price a flow it cannot verify, so the status stands in place of the rate and of the value."
+  ],
+  "answer": 1,
+  "explanation": "Raising the rate on a flow that only spends makes the loss smaller and never reaches zero; the case that only spends is worth -524.1537."
+ },
+ {
+  "prompt": "The published zero capex case is worth 717.9604 and reports no-sign-change. What does that status say about the case?",
+  "options": [
+   "It was priced before its capex was entered, so the 717.9604 is a partial result the engine will revise once a capex field carries a figure.",
+   "It is the strongest of the published cases, since a flow positive in every year carries a rate somewhere above the clamp of 1000 percent.",
+   "It failed a completeness check, since a concept with no capex at all is refused by name and returns no value a reader can use.",
+   "It never asked for money up front, so there is no investment for a return to be a return on."
+  ],
+  "answer": 3,
+  "explanation": "Four of the five no-sign-change cases lose money and this one makes it, and none of the five carries a rate; the 717.9604 is the whole answer."
+ },
+ {
+  "prompt": "All five published no-sign-change cases withhold a rate. Which figure still reads for every one of them?",
+  "options": [
+   "The net present value, which is defined for any cash flow at any discount rate and is stated in money rather than in percent.",
+   "The payback, which is recorded as the project life whenever the cumulative offers the engine no crossing at all to measure against.",
+   "The rate at the floor of the band, -99 percent, which is what a bounded search reports whenever it finds no crossing above that floor.",
+   "The status alone, since a case with no rate carries no value either and only the reason survives."
+  ],
+  "answer": 0,
+  "explanation": "On the case with royalty at 100 percent the value of -1464.8989 is the whole story: the state took the gross revenue and the contractor carried the costs."
+ },
+ {
+  "prompt": "One published no-sign-change case records a rate of 0 and a payback equal to the project life, on a value of -979.6325. What is that 0?",
+  "options": [
+   "A solved root, since a flow with no production crosses zero at the origin and the search confirms it there.",
+   "The floor of the reportable range, substituted for a null so that a screening card always carries a number.",
+   "A convention belonging to that published case, standing in for a flow with no revenue at all rather than reporting a root the engine solved and verified.",
+   "The rate the case would earn once production were restored, held as a placeholder until a profile is entered."
+  ],
+  "answer": 2,
+  "explanation": "None of the five statuses means zero. A rate of 0 here answers a flow with no revenue, alongside a value of -979.6325 and a payback taken by convention."
+ },
+ {
+  "prompt": "The tiny capex case is worth 133.3087, its status is above-clamp, and the golden records a root of 15389.6875 percent. What is that status saying?",
+  "options": [
+   "The rate is so large the engine treats it as an overflow and reports the clamp in place of a number nobody could reproduce.",
+   "No return exists for this case at all, and above-clamp is the status used when a search leaves the band without a root.",
+   "The value of 133.3087 is too small for a root to be resolved against it, so the golden carries what the engine declines to state.",
+   "A root exists and it sits above the 1000 percent top of the band the engine searched."
+  ],
+  "answer": 3,
+  "explanation": "Reporting a root it did not find is how a card ends up carrying a number nobody can reproduce; the second such case reads 2305.7875 on a value of 1074.4692."
+ },
+ {
+  "prompt": "How can a case worth only 133.3087 carry a root of 15389.6875 percent?",
+  "options": [
+   "The root compounds across the whole project life, so a value as small as 133.3087 spread over the twenty years of the profile reaches four figures of percent.",
+   "The rate divides out scale: a very small outlay followed by a large single year needs an enormous rate to shrink the receipt back down to the outlay.",
+   "The value was struck at 10.0000 percent and the root at the top of the band, and the gap between the two rates is the difference.",
+   "The case earns its whole return in one year, and a rate measured on a single year is multiplied by the years the flow leaves unused."
+  ],
+  "answer": 1,
+  "explanation": "The money stays small at 133.3087 while the ratio explodes; the second above-clamp case is three fat years on a capex of 20 at 2305.7875 percent."
+ },
+ {
+  "prompt": "A screening case comes back above-clamp. What is the first thing to check?",
+  "options": [
+   "The band, which should be widened until the root appears so that 15389.6875 percent can be carried onto the management page.",
+   "The value, since a case above the clamp is a marginal one and belongs with the failures until its rate can be stated properly.",
+   "The capex, since a case clearing 1000 percent usually has one that is wrong, missing or entered in the wrong units.",
+   "The discount rate, since a root above the band means the case was struck at a rate too low for the shape the concept implies."
+  ],
+  "answer": 2,
+  "explanation": "A real development case sits far inside the band: every rate that zeroes an EGINA flow falls between -66.9344 and 43.8661 percent, so a four figure root is a prompt about the inputs."
+ },
+ {
+  "prompt": "Three of the five statuses withhold a rate for three different reasons. Which reading of them is right?",
+  "options": [
+   "no-sign-change says no root exists, above-clamp says a root exists above the band the search covers, and no-root says the flow changes sign and no rate inside the band zeroes it.",
+   "no-sign-change says the search ran out of iterations, above-clamp says the root sits at the edge of the band, and no-root says the value came out negative.",
+   "no-sign-change says the capex is missing, above-clamp says the capex is too small, and no-root says the price deck is shorter than the profile.",
+   "no-sign-change says the rate is zero, above-clamp says the rate is 1000 percent, and no-root says the rate is somewhere the engine will not name."
+  ],
+  "answer": 0,
+  "explanation": "None of the three means zero and none of them is a rate. At 18.0000 USD a barrel the status is no-root on a value of -1834.1220 million USD."
+ },
+ {
+  "prompt": "The published case whose price deck stops before the profile does reports multiple-roots. Where does its second change of sign come from?",
+  "options": [
+   "The last price in the deck is held flat to the end of the profile, and a flat price set against a steadily declining shape drags the late years under zero.",
+   "The missing prices are read as 0, so the uncovered years produce barrels at no price while still carrying their operating cost and turn negative again.",
+   "A second capex phase is inserted where the deck ends, so the flow spends again part way through its life and crosses zero once more.",
+   "The uncovered years are dropped from the profile entirely, which shortens the life below the point at which the cumulative had turned positive."
+  ],
+  "answer": 1,
+  "explanation": "The flow goes down, then up, then down, so the curve touches zero twice; the case is worth 126.1636 and neither crossing has a claim to be the answer."
+ },
+ {
+  "prompt": "The golden for that shortened deck case records a root of -52.4425 percent. Why is that still not its rate of return?",
+  "options": [
+   "Another root exists and is equally valid, so the case has no single rate at all and -52.4425 percent is one crossing of two.",
+   "It sits below the floor of the search at -99 percent, so the engine never visited that part of the band and the golden records it from outside.",
+   "A negative root is never reported as a rate by the engine, which is why the status names a refusal in place of carrying the number.",
+   "It was solved on the deck as entered rather than on the profile, so it describes a shorter case."
+  ],
+  "answer": 0,
+  "explanation": "A negative root is unremarkable arithmetic; what gets a rate withheld is the shape of the flow, and this flow crosses zero more than once on a value of 126.1636."
+ },
+ {
+  "prompt": "At 30.0000 USD a barrel the concept reads no-root and at 70.0000 USD a barrel it reads multiple-roots. What is the difference between those two answers?",
+  "options": [
+   "How far each value sits below zero, since a loss as shallow as -935.1995 still admits roots and a deeper one does not.",
+   "Whether a payback exists, since the case at 70.0000 USD a barrel pays back in 3.8273 years and the case at 30.0000 never does, which is what the two statuses record.",
+   "Which search was run, since multiple-roots comes from the band of -99 to 1000 percent and no-root from a second pass made outside that band.",
+   "Whether any rate zeroes the flow at all, since one crosses zero more than once and the other crosses nowhere the band reaches."
+  ],
+  "answer": 3,
+  "explanation": "Reading the two as synonyms loses the finding: at 30.0000 USD a barrel no rate zeroes the flow at all, and at 70.0000 two do, on values of -935.1995 and 2015.4123."
+ },
+ {
+  "prompt": "In the studio's plan path a price deck that does not cover the profile is not padded. What happens instead?",
+  "options": [
+   "The deck is extended at its last price and the case is priced, with the status carrying the extension so a reader can see it was made.",
+   "The uncovered years are priced at 0 and the case comes back multiple-roots, which is the signal to go back and finish the deck properly.",
+   "The case is refused by name: \"the price deck has no price for production year 3: enter a price for every year of the profile\".",
+   "The profile is truncated to the length of the deck and the case is priced over that shorter life, which is worth 126.1636."
+  ],
+  "answer": 2,
+  "explanation": "Reading a missing price as 0 is what produces the second sign change; the plan path refuses instead, so no value is struck on a deck that stops early."
+ },
+ {
+  "prompt": "At 18.0000 USD a barrel the concept is worth -1834.1220 million USD. Before the repair the engine reported a rate there. What was the number, and what was it a property of?",
+  "options": [
+   "1000 percent, the top of its own search band, which is a property of the search and not of the cash flow it was run on.",
+   "1000 percent, the highest rate the flow reaches at any point in its life, verified before it was returned.",
+   "A null with no status, which readers filled in by hand because a card would not draw without a number.",
+   "The floor of -99 percent, since a loss this deep drives the search to the bottom of the band."
+  ],
+  "answer": 0,
+  "explanation": "The flow does change sign, since year 0 spends 2250.0000 and later years earn, so a naive search starts looking and simply never finds a crossing."
+ },
+ {
+  "prompt": "The clamp of 1000 percent survived a long time on the cards. What made it so hard to notice?",
+  "options": [
+   "It appeared only on cases the engine refused elsewhere as well, so the rate was never the number a reader was actually looking at on the card.",
+   "It moved with the price deck as a solved rate would, so no reader could tell it apart from the rates the engine reports on the cases that have one.",
+   "It cleared every threshold anyone would set, so it was coloured green on a case whose value of -1834.1220 million USD says the opposite.",
+   "It was printed with no status beside it, and the four statuses that name a refusal arrived only in the repair that removed the clamp."
+  ],
+  "answer": 2,
+  "explanation": "Nothing about 1000 percent announces that it came from the boundary; the failure is silent, and the contradicting value was printed next to it the whole time."
+ },
+ {
+  "prompt": "What is the tell that a reported rate came from a boundary rather than from a solution?",
+  "options": [
+   "It carries the status ok, which the repaired engine now keeps for a verified root and which the clamped search set on every single run it made.",
+   "It sits exactly on the limit of the search range, where the engine's genuine answers do not: -36.6747 percent on the published case, or the roots -44.3414 and 29.5779 on the plan's own.",
+   "It appears beside a payback of never, which is the pairing the repaired engine refuses and the clamped search produced freely.",
+   "It is printed to one decimal place while a solved root carries four, which is how a boundary can be spotted on a card."
+  ],
+  "answer": 1,
+  "explanation": "A solver landing precisely on its own limit has returned a return code; the published tax floor case is the same shape at -944.3201 with the status no-root."
+ }
+]

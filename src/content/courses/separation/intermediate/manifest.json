@@ -1,0 +1,305 @@
+{
+  "app_slug": "separation",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-horizontal-vessel",
+      "title": "The Horizontal Vessel",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-circle-cut-by-a-level",
+          "title": "A circle cut by a level",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-gas-space",
+          "title": "The gas space",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-chord-and-what-it-is-not",
+          "title": "The chord, and what it is not",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-level-the-engine-refuses",
+          "title": "A level the engine refuses",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-half-full-is-an-assumption",
+          "title": "Half full is an assumption",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-two-lengths-one-vessel",
+      "title": "Two Lengths, One Vessel",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-length-the-liquid-needs",
+          "title": "The length the liquid needs",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-length-the-gas-needs",
+          "title": "The length the gas needs",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-which-one-controls",
+          "title": "Which one controls",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-slenderness-in-a-horizontal-vessel",
+          "title": "Slenderness in a horizontal vessel",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-gas-capacity",
+      "title": "Gas Capacity",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-velocity-in-the-gas-space",
+          "title": "Velocity in the gas space",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-margin-and-the-verdict",
+          "title": "The margin, and the verdict",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-vessel-that-cannot-carry-its-gas",
+          "title": "A vessel that cannot carry its gas",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-gas-length-cannot-exceed",
+          "title": "What the gas length cannot exceed",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-slug-catchers",
+      "title": "Slug Catchers",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-where-the-slug-volume-comes-from",
+          "title": "Where the slug volume comes from",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-working-volume",
+          "title": "The working volume",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-vessel-from-a-volume",
+          "title": "A vessel from a volume",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-fingers-instead-of-a-vessel",
+          "title": "Fingers instead of a vessel",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-slug-catcher-refuses",
+          "title": "What a slug catcher refuses",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-distances-on-a-site",
+      "title": "Distances on a Site",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-table-is-a-table",
+          "title": "A table is a table",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-layout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-distance-on-a-sphere",
+          "title": "Distance on a sphere",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-layout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-flare-setback-is-computed",
+          "title": "A flare setback is computed",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-layout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-pool-fire-and-its-edge",
+          "title": "A pool fire, and its edge",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-layout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-point-source-cannot-say",
+          "title": "What a point source cannot say",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-layout-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-slug-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

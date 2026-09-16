@@ -1,34 +1,41 @@
 # More than one root
 
-A cash flow that changes sign more than once can be driven to zero at more than one discount rate. When that happens there is no such thing as the rate of return, and the engine reports the status `multiple-roots` with no number.
+A cash flow that changes sign more than once can be driven to zero at more than one discount rate. When that happens there is no such thing as the rate of return, and the engine reports the status `multiple-roots` with no number at all.
 
 {{panel:ec-value-explorer}}
 
-## Why a second crossing creates a second root
+## What puts a second crossing in a development plan
 
-The NPV of a flow is a curve drawn against the discount rate, and a root is a place where that curve touches zero. One change of sign gives a curve that crosses once. Two give a curve that can bend back and cross again, and both crossings are genuine: at each of them the NPV really is zero, and neither has any claim to be the answer.
+The EGINA plan spends 2250.0000 million USD in year 0, earns for twenty years, and pays 260.0000 million USD to abandon the field in the last of them. Its net cash flow therefore changes sign twice, down then up then down again, and by Descartes' rule a flow that changes sign twice can be zeroed at more than one rate. The engine finds every root rather than stopping at the first one it meets, and when it finds two it reports neither.
 
-## The two cases the digest records
+## The rates that zero each case
 
-| case | NPV | IRR | status |
+| case | NPV | status | the rates that zero this flow, percent |
 | --- | --- | --- | --- |
-| EGINA at 30.0000 USD a barrel | -898.3507 | none | multiple-roots |
-| price deck shorter than the profile | 126.1636 | none | multiple-roots |
+| Base, 70 USD a barrel | 2015.4123 | multiple-roots | -44.3414 and 29.5779 |
+| Low price, 48 USD a barrel | 392.8013 | multiple-roots | -26.6855 and 14.2149 |
+| High price, 92 USD a barrel | 3638.0233 | multiple-roots | -66.9344 and 43.8661 |
+| Tie-back base, 70 USD a barrel | 1013.7182 | multiple-roots | -24.3411 and 40.4136 |
+| At 18 USD a barrel | -1834.1220 | no-root | none: the flow is negative at every rate the engine searches |
 
-The second shows where a second sign change comes from in practice. The published case runs a price deck that does not cover the whole production profile, and the missing prices are read as 0. The years the deck covers earn money; the years past the end of the deck produce barrels at a price of 0 while still carrying their operating cost, so those years go negative again. The flow goes down, up and down, and the curve crosses zero twice. The golden records that the root the band hides is -52.4425 percent, and even that recorded root is not the return, because another one exists.
+The cases carrying two roots are the ones that earn. A case that never climbs out of its hole reports `no-root` instead: at 18.0000 USD a barrel the value is -1834.1220 and at 30.0000 USD a barrel it is -935.1995, and both of those flows change sign without any rate inside the band zeroing them.
 
-## The value is still one number
+## Neither root is the rate of return
 
-The NPV is defined whatever the flow does. At 30.0000 USD a barrel the EGINA case is worth -898.3507 million USD and its payback is never. The published deck case is worth 126.1636. Those numbers are unambiguous at the discount rate they were struck at, and they are what a reader should take from a `multiple-roots` case: the ambiguity lives in the rate and nowhere else. Reporting nothing there is less convenient than reporting something, and the gain is that no reader is handed a rate a second, equally valid rate contradicts.
+The two figures on a row are the discount rates at which that flow is worth nothing, and between them the plan is worth more than nothing. Quoting the higher one alone is the mistake the status exists to stop, and quoting the lower one as a loss is the same mistake upside down. A rate of return only ever summarises a flow that spends once and earns thereafter. Charge a real end-of-life cost and most development plans stop being that shape, which is why the value, and not the rate, is what a plan is judged on.
 
-## The input is usually the finding
+## One line of cost, and the question loses its answer
 
-A case that flips sign twice is normally telling you something about the inputs rather than about the geology. A deck that stops before the profile does, an abandonment cost in the middle of the life, a second capex phase: any of these will do it. In the studio's plan path a price deck that does not cover the profile is refused by name rather than padded, with the message "the price deck has no price for production year 3: enter a price for every year of the profile".
+The same Base case run with no end-of-life cost at all is worth 2047.5653 million USD and reports a single rate of 29.5998 percent at the status `ok`. Charging the 260.0000 costs the plan 32.1530 million USD of present value and takes the rate away entirely.
+
+## The published case that does the same thing
+
+A deck shorter than its profile reads the missing prices as 0, so the uncovered years produce barrels at no revenue while still paying to lift them. That case is worth 126.1636, and the golden records a root the band hides at -52.4425 percent. It is not the return either, because another root exists. In the studio's plan path such a deck is refused by name rather than padded: "the price deck has no price for production year 3: enter a price for every year of the profile".
 
 ## The mistake
 
-The mistake is picking one root, usually the one nearest a familiar number, and calling it the return. Neither root is more true than the other, and the choice is the reader's preference wearing the engine's authority. The second mistake is reading `multiple-roots` as a synonym for `no-root`. At 30.0000 USD a barrel the status is `multiple-roots` and at 18.0000 it is `no-root`, and the difference is whether any rate zeroes the flow at all.
+Reading `multiple-roots` as a synonym for `no-root`. Both withhold a rate and they say opposite things about the flow: one says more than one rate zeroes it, the other says none does.
 
 ## Exercise
 
-State the NPV and status of both `multiple-roots` cases. Then explain, from the way the shortened price deck is read, how a flow acquires a second change of sign, and say why -52.4425 percent is still not the rate of return of that case.
+Give the two rates that zero the Base flow and say why neither is the rate of return. Then state the status and the value at 30.0000 USD a barrel and at 18.0000 USD a barrel, and say what separates a flow with two roots from one with none.

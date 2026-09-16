@@ -55,7 +55,7 @@ Compare the two wells after that first year. Ekene-3 has come down from 150 stb/
 
 {{panel:dca-fit-explorer}}
 
-Select Ekene-3 with the window on Primary. The fit returns Hyperbolic with qi 150, Di 0.002 and a $b$ tile reading 0.49999999999999994 rather than a tidy 0.5. That is not an error and it is not noise: the engine searches $b$ in steps of 0.05 built up by repeated addition, and binary floating point does not add 0.05 to itself an exact number of times. The tile shows you the raw number the engine actually holds. Trust it and read it as one half; the Professional tier takes the search mechanism apart properly.
+Select Ekene-3 with the window on Primary. The fit returns Hyperbolic with qi 150, Di 0.002 and a $b$ tile reading a long trail of nines rather than a tidy one half. That is not an error and it is not noise: the engine searches $b$ in steps of 0.05 built up by repeated addition, and binary floating point does not add 0.05 to itself an exact number of times. The tile shows you the raw number the engine actually holds. Trust it and read it as one half; the Professional tier takes the search mechanism apart properly.
 
 Now switch to Ekene-6 and read its $b$ tile, then flip between the two wells on the semilog axis and watch the curvature. Both bend upward away from a straight line instead of holding the ruler-straight track Ekene-1 holds. Ekene-3 shows the stronger bend, carrying both the larger $b$ and the larger $D_i$; the next two lessons separate those two effects properly.
 

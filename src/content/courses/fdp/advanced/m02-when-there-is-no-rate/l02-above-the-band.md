@@ -25,7 +25,7 @@ The engine as published reports `above-clamp` and leaves the rate null. That sta
 
 ## Why the band is bounded at all
 
-A search has to stop somewhere. The bound at 1000 percent is a choice about the range of rates a screening tool expects to meet, and a real development case sits far inside it: the EGINA Base is 29.5998 percent and the tie-back is 40.4321 percent. Cases that clear 1000 percent are almost always cases whose capex is wrong, missing or entered in the wrong units, and the status is a prompt to go and look at the inputs.
+A search has to stop somewhere. The bound at 1000 percent is a choice about the range of rates a screening tool expects to meet, and a real development case sits far inside it: every rate that zeroes an EGINA flow falls between -66.9344 and 43.8661 percent. Cases that clear 1000 percent are almost always cases whose capex is wrong, missing or entered in the wrong units, and the status is a prompt to go and look at the inputs.
 
 ## The mistake
 

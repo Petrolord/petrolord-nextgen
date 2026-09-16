@@ -31,7 +31,7 @@ A generic error sends the reader back through the whole plan. A message that nam
 
 ## A missing figure and a zero are different
 
-A zero is an answer. Price the same concept at zero and the engine runs it and returns an NPV of -3517.4133 million USD, because somebody decided the price. A blank price is not a decision, and the engine will not decide it for you.
+A zero is an answer. Price the same concept at zero and the engine runs it and returns an NPV of -3554.2621 million USD, because somebody decided the price. A blank price is not a decision, and the engine will not decide it for you.
 
 ## Before the repair
 
@@ -43,4 +43,4 @@ The mistake is to read a clean result as a complete plan. An engine that answers
 
 ## Exercise
 
-Write out the messages for a concept with no capex and for a scenario with no oil price. Then explain why a scenario priced at zero returns -3517.4133 million USD while a scenario with a blank price returns nothing at all.
+Write out the messages for a concept with no capex and for a scenario with no oil price. Then explain why a scenario priced at zero returns -3554.2621 million USD while a scenario with a blank price returns nothing at all.

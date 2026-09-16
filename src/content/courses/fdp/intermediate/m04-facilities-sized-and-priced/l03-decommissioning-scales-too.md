@@ -24,11 +24,11 @@ Before the repairs made ahead of this course the allowance was 15 percent of the
 
 ## The plan's own provision is a different number
 
-The plan's cost ledger carries a decommissioning provision of 260.0000 as an ABEX line, and the screening case puts ABEX in neither the CAPEX total of 2250.0000 nor the operating cost of 95.0000 a year. So the plan holds one removal figure that a person wrote and the facility card holds another that a curve produced. Reconciling them is planning work. Averaging them is not, and neither is quietly deleting whichever one is less convenient.
+The plan's cost ledger carries a decommissioning provision of 260.0000 as an ABEX line. It sits in neither the CAPEX total of 2250.0000 nor the operating cost of 95.0000 a year, and the screening case charges it as the plan's end-of-life cost in the final production year. So the plan holds one removal figure that a person wrote and the facility card holds another that a curve produced, and an ABEX cost item replaces the card's estimate rather than being added to it. Reconciling them is planning work. Averaging them is not, and neither is quietly deleting whichever one is less convenient.
 
 ## The mistake
 
-The mistake is to read the allowance as a funded liability. It is a share of a screening estimate, it carries no abandonment study, no well plugging scope and no regulatory basis, and it does not enter the screening NPV at all. Quoting 204.5029 as the cost of removing the vessel gives a precise answer to a question nobody has costed.
+The mistake is to read the allowance as a funded liability. It is a share of a screening estimate, it carries no abandonment study, no well plugging scope and no regulatory basis, and on this plan it does not enter the screening NPV at all, because the ledger's own ABEX line of 260.0000 is what the case charges instead. Quoting 204.5029 as the cost of removing the vessel gives a precise answer to a question nobody has costed.
 
 ## Exercise
 

@@ -26,7 +26,7 @@ One scale runs the register, the HSE tab and the matrix: Critical 1, High 1, Med
 
 ## What the document adds up
 
-Completeness reads 100 percent across nine sections: Field Data, Subsurface, Concepts, Wells, Facilities, Schedule, Economics, HSE and Risks. The headline figures it carries are P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, total CAPEX 2250.0000 million USD, NPV 2047.5653 million USD, IRR 29.5998 percent and 4 wells. The cost roll-ups are a total CAPEX of 2250.0000 and a total OPEX of 95.0000 million USD a year, and they add only what the ledger holds: a published example returns a CAPEX of 574.3000 and an OPEX of 0.5000, and an empty ledger returns 0.0000 and 0.0000.
+Completeness reads 100 percent across nine sections: Field Data, Subsurface, Concepts, Wells, Facilities, Schedule, Economics, HSE and Risks. The headline figures it carries are P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, total CAPEX 2250.0000 million USD, NPV 2015.4123 million USD, IRR none and 4 wells. The cost roll-ups are a total CAPEX of 2250.0000 and a total OPEX of 95.0000 million USD a year, and they add only what the ledger holds: a published example returns a CAPEX of 574.3000 and an OPEX of 0.5000, and an empty ledger returns 0.0000 and 0.0000.
 
 ## Exercise
 

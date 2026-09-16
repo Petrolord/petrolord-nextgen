@@ -4,11 +4,11 @@ A plan that holds together in time and space still has to survive a reader hunti
 
 ## The rate that may not exist
 
-A rate of return exists only when a cash flow changes sign, and it is not unique when the flow changes sign more than once. The engine searches between -99 and 1000 percent and reports a rate only when it verifies a root inside that band. Otherwise it returns no rate and a status: no-sign-change, above-clamp, multiple-roots, no-root or ok. On the teaching field 18.0000 USD a barrel gives a net present value of -1797.2732 and a status of no-root, and 30.0000 USD a barrel gives -898.3507 and multiple-roots. A clamped search once reported 1000 percent here, in green.
+A rate of return exists only when a cash flow changes sign, and it is not unique when the flow changes sign more than once. The engine searches between -99 and 1000 percent and reports a rate only when it verifies a root inside that band. Otherwise it returns no rate and a status: no-sign-change, above-clamp, multiple-roots, no-root or ok. On the teaching field 18.0000 USD a barrel gives a net present value of -1834.1220 and 30.0000 USD a barrel gives -935.1995, and both report the status no-root. The cases that carry more than one root are the ones that earn: the Base case at 70.0000 USD a barrel is worth 2015.4123 and is zeroed at two rates, -44.3414 and 29.5779, because the plan pays 260.0000 million USD to abandon the field in its final production year. A clamped search once reported 1000 percent at 18.0000 USD a barrel, in green.
 
 ## What a sensitivity is worth
 
-Moving one driver at a time by 30 percent gives a swing of 3092.0051 on oil price, 2839.5965 on production, 1287.1745 on capex and 323.8828 on operating cost. The ranking and the widths are real. What is absent is any statement of how likely a 30 percent move is.
+Moving one driver at a time by 30 percent gives a swing of 3097.7119 on oil price, 2844.8375 on production, 1287.1745 on capex and 326.3064 on operating cost. The ranking and the widths are real. What is absent is any statement of how likely a 30 percent move is.
 
 ## Progress measured to a date
 

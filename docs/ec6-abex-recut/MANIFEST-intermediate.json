@@ -1,0 +1,160 @@
+{
+ "app_slug": "fdp",
+ "course": "Field Development Planning",
+ "tier": "intermediate",
+ "generated": "2026-09-16",
+ "what_this_is": "What this wave actually recut in this tier. Every old_ value is the text of the LIVE production row or of the committed lesson line it replaces.",
+ "counts": {
+  "lessons_recut": 4,
+  "questions_recut": 5,
+  "keyed_option_text_rewritten": 1,
+  "stems_rewritten": 1
+ },
+ "lessons_recut": [
+  {
+   "path": "src/content/courses/fdp/intermediate/m04-facilities-sized-and-priced/l03-decommissioning-scales-too.md",
+   "retitled": null,
+   "old_lines": [
+    "The plan's cost ledger carries a decommissioning provision of 260.0000 as an ABEX line, and the screening case puts ABEX in neither the CAPEX total of 2250.0000 nor the operating cost of 95.0000 a year. So the plan holds one removal figure that a person wrote and the facility card holds another that a curve produced. Reconciling them is planning work. Averaging them is not, and neither is quietly deleting whichever one is less convenient.",
+    "The mistake is to read the allowance as a funded liability. It is a share of a screening estimate, it carries no abandonment study, no well plugging scope and no regulatory basis, and it does not enter the screening NPV at all. Quoting 204.5029 as the cost of removing the vessel gives a precise answer to a question nobody has costed."
+   ],
+   "new_lines": [
+    "The plan's cost ledger carries a decommissioning provision of 260.0000 as an ABEX line. It sits in neither the CAPEX total of 2250.0000 nor the operating cost of 95.0000 a year, and the screening case charges it as the plan's end-of-life cost in the final production year. So the plan holds one removal figure that a person wrote and the facility card holds another that a curve produced, and an ABEX cost item replaces the card's estimate rather than being added to it. Reconciling them is planning work. Averaging them is not, and neither is quietly deleting whichever one is less convenient.",
+    "The mistake is to read the allowance as a funded liability. It is a share of a screening estimate, it carries no abandonment study, no well plugging scope and no regulatory basis, and on this plan it does not enter the screening NPV at all, because the ledger's own ABEX line of 260.0000 is what the case charges instead. Quoting 204.5029 as the cost of removing the vessel gives a precise answer to a question nobody has costed."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/intermediate/m06-the-professional-reading/l01-the-story-so-far.md",
+   "retitled": null,
+   "old_lines": [
+    "Completeness reads 100 percent across nine sections: Field Data, Subsurface, Concepts, Wells, Facilities, Schedule, Economics, HSE and Risks. The headline figures it carries are P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, total CAPEX 2250.0000 million USD, NPV 2047.5653 million USD, IRR 29.5998 percent and 4 wells. The cost roll-ups are a total CAPEX of 2250.0000 and a total OPEX of 95.0000 million USD a year, and they add only what the ledger holds: a published example returns a CAPEX of 574.3000 and an OPEX of 0.5000, and an empty ledger returns 0.0000 and 0.0000."
+   ],
+   "new_lines": [
+    "Completeness reads 100 percent across nine sections: Field Data, Subsurface, Concepts, Wells, Facilities, Schedule, Economics, HSE and Risks. The headline figures it carries are P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, total CAPEX 2250.0000 million USD, NPV 2015.4123 million USD, IRR none and 4 wells. The cost roll-ups are a total CAPEX of 2250.0000 and a total OPEX of 95.0000 million USD a year, and they add only what the ledger holds: a published example returns a CAPEX of 574.3000 and an OPEX of 0.5000, and an empty ledger returns 0.0000 and 0.0000."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
+   "retitled": null,
+   "old_lines": [
+    "When the engine has no answer it says so, and the honest answer is the one it gives. A case with a net present value of -1797.2732 returns no rate of return and a status of no-root. An activity with no readable dates returns a calendar span of null. A project with no costed task returns no schedule index, no cost index and no percent complete, with the basis stated: no costed task, so there is no planned value. A concept with no capex is refused by name. Writing a plausible figure into any of those gaps turns a correct reading into a wrong answer."
+   ],
+   "new_lines": [
+    "When the engine has no answer it says so, and the honest answer is the one it gives. A case with a net present value of -1834.1220 returns no rate of return and a status of no-root. An activity with no readable dates returns a calendar span of null. A project with no costed task returns no schedule index, no cost index and no percent complete, with the basis stated: no costed task, so there is no planned value. A concept with no capex is refused by name. Writing a plausible figure into any of those gaps turns a correct reading into a wrong answer."
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/intermediate/m06-the-professional-reading/l03-onward.md",
+   "retitled": null,
+   "old_lines": [
+    "A rate of return exists only when a cash flow changes sign, and it is not unique when the flow changes sign more than once. The engine searches between -99 and 1000 percent and reports a rate only when it verifies a root inside that band. Otherwise it returns no rate and a status: no-sign-change, above-clamp, multiple-roots, no-root or ok. On the teaching field 18.0000 USD a barrel gives a net present value of -1797.2732 and a status of no-root, and 30.0000 USD a barrel gives -898.3507 and multiple-roots. A clamped search once reported 1000 percent here, in green.",
+    "Moving one driver at a time by 30 percent gives a swing of 3092.0051 on oil price, 2839.5965 on production, 1287.1745 on capex and 323.8828 on operating cost. The ranking and the widths are real. What is absent is any statement of how likely a 30 percent move is."
+   ],
+   "new_lines": [
+    "A rate of return exists only when a cash flow changes sign, and it is not unique when the flow changes sign more than once. The engine searches between -99 and 1000 percent and reports a rate only when it verifies a root inside that band. Otherwise it returns no rate and a status: no-sign-change, above-clamp, multiple-roots, no-root or ok. On the teaching field 18.0000 USD a barrel gives a net present value of -1834.1220 and 30.0000 USD a barrel gives -935.1995, and both report the status no-root. The cases that carry more than one root are the ones that earn: the Base case at 70.0000 USD a barrel is worth 2015.4123 and is zeroed at two rates, -44.3414 and 29.5779, because the plan pays 260.0000 million USD to abandon the field in its final production year. A clamped search once reported 1000 percent at 18.0000 USD a barrel, in green.",
+    "Moving one driver at a time by 30 percent gives a swing of 3097.7119 on oil price, 2844.8375 on production, 1287.1745 on capex and 326.3064 on operating cost. The ranking and the widths are real. What is absent is any statement of how likely a 30 percent move is."
+   ]
+  }
+ ],
+ "questions_recut": [
+  {
+   "scope": "module",
+   "module_key": "m04-facilities-sized-and-priced",
+   "ord": 9,
+   "bank": "ec6i_m04",
+   "keyed_answer_text_changed": true,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "Nowhere: it sits in neither the CAPEX total of 2250.0000 nor the operating cost of 95.0000 a year, and the card's own allowance of 204.5029 does not enter the screening NPV either.",
+      "new": "In the final production year: it sits in neither the CAPEX total of 2250.0000 nor the operating cost of 95.0000 a year, and the case charges it there as the plan's end-of-life cost."
+     },
+     {
+      "index": 3,
+      "old": "In place of the facility card's allowance of 204.5029, the studio preferring the figure a person wrote whenever the ledger carries a removal line of its own.",
+      "new": "Inside the facility card's allowance of 204.5029, which the ledger line is added to so that one removal figure covers the vessel and the field at once."
+     }
+    ],
+    "explanation": {
+     "old": "The plan holds one removal figure a person wrote and the card holds another a curve produced, and reconciling 260.0000 against 204.5029 is planning work.",
+     "new": "An ABEX cost item replaces the facility estimate rather than being added to it, so the case charges the plan's own 260.0000 and the card's 204.5029 never enters the NPV."
+    }
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 8,
+   "bank": "ec6i_m06",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 1,
+      "old": "That every figure in the plan has been through the engine rather than typed, so the completeness check is what stands behind the headline NPV of 2047.5653 million USD.",
+      "new": "That every figure in the plan has been through the engine rather than typed, so the completeness check is what stands behind the headline NPV of 2015.4123 million USD."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 15,
+   "bank": "ec6i_m06",
+   "keyed_answer_text_changed": false,
+   "stem_changed": true,
+   "fields": {
+    "prompt": {
+     "old": "The document's headline figures read P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, total CAPEX 2250.0000, NPV 2047.5653 and IRR 29.5998, with 4 wells. Which of them carries a P label correctly?",
+     "new": "The document's headline figures read P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, total CAPEX 2250.0000, NPV 2015.4123 and IRR none, with 4 wells. Which of them carries a P label correctly?"
+    },
+    "options": [
+     {
+      "index": 1,
+      "old": "The oil, the gas and the NPV, since a net present value of 2047.5653 is carried at the same case as the reserves it was computed from and is labelled with them.",
+      "new": "The oil, the gas and the NPV, since a net present value of 2015.4123 is carried at the same case as the reserves it was computed from and is labelled with them."
+     }
+    ],
+    "explanation": {
+     "old": "A capex, a rate, a cost, a duration, an index or a ratio never takes a P label, so the 2250.0000, the 2047.5653 and the 29.5998 carry none.",
+     "new": "A capex, a rate, a cost, a duration, an index or a ratio never takes a P label, so the 2250.0000 and the 2015.4123 carry none."
+    }
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 22,
+   "bank": "ec6i_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "options": [
+     {
+      "index": 2,
+      "old": "Its lines enter the screening economics, while the card's capex is reported beside the plan and left out of them in the way the ABEX line is left out.",
+      "new": "Its lines enter the screening economics, while the card's capex is left out of them because a screening estimate and an ABEX line are treated in exactly the same way."
+     }
+    ]
+   }
+  },
+  {
+   "scope": "final",
+   "module_key": null,
+   "ord": 26,
+   "bank": "ec6i_exam",
+   "keyed_answer_text_changed": false,
+   "stem_changed": false,
+   "fields": {
+    "explanation": {
+     "old": "The plan holds one removal figure a person wrote and the card holds another a curve produced, and the screening case carries capex and operating cost only.",
+     "new": "The plan holds one removal figure a person wrote and the card holds another a curve produced, and the case charges the ledger's ABEX line in the final production year while the card's allowance never enters it."
+    }
+   }
+  }
+ ]
+}

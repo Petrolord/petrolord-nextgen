@@ -6,13 +6,13 @@ A search that stops at its own boundary has not found a rate. Before this course
 
 ## The case that produced it
 
-The EGINA concept priced at 18.0000 USD a barrel is worth -1797.2732 million USD, its status is `no-root`, and its payback is never. The flow does change sign, because year 0 spends 2250.0000 and later years earn, so a naive search is entitled to start looking. It simply never finds a crossing: no discount rate between -99 and 1000 percent makes that NPV zero, because the NPV is negative across the whole band.
+The EGINA concept priced at 18.0000 USD a barrel is worth -1834.1220 million USD, its status is `no-root`, and its payback is never. The flow does change sign, because year 0 spends 2250.0000 and later years earn, so a naive search is entitled to start looking. It simply never finds a crossing: no discount rate between -99 and 1000 percent makes that NPV zero, because the NPV is negative across the whole band.
 
 The old behaviour ran to the end of the band and returned where it stopped. 1000 percent is not a property of the cash flow. It is a property of the search.
 
 ## Why nobody caught it
 
-The number was plausible in the worst way. It cleared every screening threshold anyone would set, so it was coloured green on the card, and a reader scanning a portfolio saw a strong return on a case that never returns its money. Green on a case worth -1797.2732 million USD is the exact opposite of the reading the arithmetic supports, and the failure is silent: nothing about 1000 percent announces that it came from the boundary rather than from a solution.
+The number was plausible in the worst way. It cleared every screening threshold anyone would set, so it was coloured green on the card, and a reader scanning a portfolio saw a strong return on a case that never returns its money. Green on a case worth -1834.1220 million USD is the exact opposite of the reading the arithmetic supports, and the failure is silent: nothing about 1000 percent announces that it came from the boundary rather than from a solution.
 
 ## The repaired behaviour
 
@@ -30,11 +30,11 @@ At 18.0000 USD a barrel the status is `no-root`. The published tax floor case is
 
 ## Round numbers deserve suspicion
 
-The tell is that the reported rate was exactly the boundary. A solver that lands precisely on the limit of its own search range has almost certainly returned a return code rather than a solution. The engine's genuine answers do not look like that: 29.5998 percent on the Base case, 40.4321 percent on the tie-back, 14.4152 percent on the low price case, and -36.6747 percent on the published case that never pays back. That last one is worth holding beside 1000 percent, because it shows the repaired engine reporting an ugly verified root rather than hiding it.
+The tell is that the reported rate was exactly the boundary. A solver that lands precisely on the limit of its own search range has almost certainly returned a return code rather than a solution. The engine's genuine answers do not look like that: -36.6747 percent on the published case that never pays back, and, on the EGINA flows that carry two roots, figures such as -44.3414 and 29.5779. That first one is worth holding beside 1000 percent, because it shows the repaired engine reporting an ugly verified root rather than hiding it.
 
 ## The mistake
 
-The mistake is trusting a rate without checking the sign of the value it came with. An IRR of 1000 percent beside an NPV of -1797.2732 million USD is a contradiction on the face of the card, and the two numbers were printed next to each other the whole time. Read the NPV first, then the status, then the rate.
+The mistake is trusting a rate without checking the sign of the value it came with. An IRR of 1000 percent beside an NPV of -1834.1220 million USD is a contradiction on the face of the card, and the two numbers were printed next to each other the whole time. Read the NPV first, then the status, then the rate.
 
 ## Exercise
 
