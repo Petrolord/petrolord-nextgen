@@ -92,6 +92,38 @@ export const SOKU_STEEP_DOWN_ABOVE_INLET_PSI = 30;
  *  succeeds can be told apart from one that merely stopped at the bracket. */
 export const SOKU_STEEP_DOWN_P2_PSIA = 700;
 
+/** The same trunk CLIMBING steeply. A climb is the other half of the outlet
+ *  bracket: the static column costs head the rate never gets back, so the
+ *  outlet cannot reach the inlet at ANY rate. */
+export const SOKU_STEEP_UP_FT = 3000;
+/** A modest rate for that climb, well inside what the trunk can carry, so the
+ *  outlet lands just under the ceiling rather than against it. */
+export const SOKU_STEEP_UP_SCFD = 20e6;
+/** A near-atmospheric inlet on the same climb, where the column alone spends
+ *  more than the line has and there is no outlet at any rate at all. */
+export const SOKU_STARVED_P1_PSIA = 15.5;
+
+/** EITHER SIDE OF A GUARD. Each pair is handed to the engine and the engine
+ *  says which it took, so a boundary is read rather than asserted. */
+export const SUM_K_AT_LIMIT = 0;
+export const SUM_K_JUST_UNDER = -0.000001;
+export const ROUGHNESS_AT_LIMIT = 0;
+export const ROUGHNESS_JUST_UNDER = -0.000001;
+export const EFFICIENCY_AT_LIMIT = 1;
+export const EFFICIENCY_JUST_OVER = 1.000001;
+export const HOLDUP_AT_LIMIT = 1;
+export const HOLDUP_JUST_OVER = 1.000001;
+export const ALLOWANCE_AT_LIMIT = 0;
+export const ALLOWANCE_JUST_UNDER = -0.000001;
+export const SWEPT_AT_LIMIT = 0;
+export const SWEPT_JUST_UNDER = -0.000001;
+/** A line exactly as tall as it is long is vertical and legal; taller is not
+ *  a line. */
+export const VERTICAL_RUN_FT = 100;
+export const TALLER_THAN_LONG_FT = 100.000001;
+/** One mile, for recovering the feet in a mile out of the elevation guard. */
+export const MILE_PROBE_LENGTH_MI = 1;
+
 /** An efficiency sweep. E is an unsourced multiplier and is HELD. */
 export const SOKU_EFFICIENCY_SWEEP = [0.85, 0.9, 0.95, 1];
 

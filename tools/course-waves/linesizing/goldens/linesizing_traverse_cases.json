@@ -1,5 +1,8 @@
 [
  {
+  "died": false,
+  "diedAtFt": null,
+  "diedAtPsia": null,
   "dpTotalPsi": 25.660585014555522,
   "idIn": 7.981,
   "muCp": 2.5,
@@ -47,6 +50,9 @@
   ]
  },
  {
+  "died": false,
+  "diedAtFt": null,
+  "diedAtPsia": null,
   "dpTotalPsi": 25.660585014555522,
   "idIn": 7.981,
   "muCp": 2.5,
@@ -94,12 +100,15 @@
   ]
  },
  {
-  "dpTotalPsi": 47428.48454748665,
+  "died": true,
+  "diedAtFt": 20000.0,
+  "diedAtPsia": -47328.48454748665,
+  "dpTotalPsi": null,
   "idIn": 2.067,
   "muCp": 8.0,
   "name": "traverseIntoVacuum",
   "p1Psia": 100.0,
-  "p2Psia": -47328.48454748665,
+  "p2Psia": null,
   "profile": [
    {
     "elevChangeFt": 0,
@@ -114,11 +123,6 @@
     "distanceFt": 0.0,
     "elevFt": 0.0,
     "pPsia": 100.0
-   },
-   {
-    "distanceFt": 20000.0,
-    "elevFt": 0.0,
-    "pPsia": -47328.48454748665
    }
   ]
  }

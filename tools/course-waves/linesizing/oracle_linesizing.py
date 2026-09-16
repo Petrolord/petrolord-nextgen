@@ -157,11 +157,20 @@ def liquid_traverse(p1_psia, q_bpd, id_in, rho_lbft3, mu_cp, rough_in, profile):
     for seg in profile:
         r = liquid_line(q_bpd, id_in, seg["lengthFt"], seg.get("elevChangeFt", 0.0),
                         rho_lbft3, mu_cp, rough_in, 0.0)
-        p -= r["dpTotalPsi"]
+        nxt = p - r["dpTotalPsi"]
         x += seg["lengthFt"]
         z += seg.get("elevChangeFt", 0.0)
+        # A march is only a march while the pressure is a pressure. An
+        # absolute pressure at or below zero is not one, and the rate that
+        # produced it is a rate the line cannot pass. The oracle says DIED
+        # where an unguarded march says -47328.563502 psia.
+        if nxt <= 0.0:
+            return {"stations": stations, "died": True, "diedAtFt": x,
+                    "diedAtPsia": nxt, "p2Psia": None, "dpTotalPsi": None}
+        p = nxt
         stations.append({"distanceFt": x, "elevFt": z, "pPsia": p})
-    return {"stations": stations, "p2Psia": p, "dpTotalPsi": p1_psia - p}
+    return {"stations": stations, "died": False, "diedAtFt": None,
+            "diedAtPsia": None, "p2Psia": p, "dpTotalPsi": p1_psia - p}
 
 
 # -------------------------------------------------------------- gas lines
@@ -333,7 +342,7 @@ def gas_q(form, p1, p2, d_in, l_mi, sg, t_r, z, eff=1.0, dz_ft=0.0,
 
 
 def gas_outlet_closed_form(form, q_target, p1, d_in, l_mi, sg, t_r, z,
-                           eff=1.0, dz_ft=0.0):
+                           eff=1.0, dz_ft=0.0, mu_cp=0.011, rough_in=0.0007):
     """Invert the three CLOSED-FORM gas equations for p2 exactly.
 
     Each is q = A * driving^b, so driving = (q/A)^(1/b) and
@@ -355,6 +364,17 @@ def gas_outlet_closed_form(form, q_target, p1, d_in, l_mi, sg, t_r, z,
         a = (737.0 * eff * (TB_R / PB_PSIA) ** 1.02 * d_in ** 2.53
              / (sg ** 0.961 * t_r * le * z) ** 0.51)
         b = 0.51
+    elif form == "general":
+        # General Flow inverts in ONE step where it iterates forwards: the
+        # Reynolds number depends on the RATE and not on the outlet
+        # pressure, so a known rate fixes the friction factor outright.
+        rho_b = PB_PA * (M_AIR * sg) / (R_UNIVERSAL * TB_K)
+        mdot = rho_b * (q_target * FT ** 3 / DAY)
+        re = 4.0 * mdot / (math.pi * (d_in * IN) * (mu_cp * CP))
+        f = darcy_f(re, rough_in / d_in)
+        a = GENERAL_K * eff * (TB_R / PB_PSIA) * d_in ** 2.5 / math.sqrt(
+            sg * t_r * le * z * f)
+        b = 0.5
     else:
         return None
     driving = (q_target / a) ** (1.0 / b)
@@ -527,7 +547,16 @@ OUTLET_CASES = [
     ("weymouth", 1000.0, 8.0, 25.0, 0.65, 540.0, 0.87, 1.0, -800.0, 700.0),
     # the descending line whose true outlet pressure is ABOVE its inlet
     ("weymouth", 1000.0, 8.0, 25.0, 0.65, 540.0, 0.87, 1.0, -3000.0, 1010.0),
+    ("panhandleA", 1000.0, 8.0, 25.0, 0.65, 540.0, 0.87, 1.0, -3000.0, 1010.0),
     ("panhandleB", 1000.0, 8.0, 25.0, 0.65, 540.0, 0.87, 1.0, -3000.0, 1010.0),
+    ("general", 1000.0, 8.0, 25.0, 0.65, 540.0, 0.87, 1.0, -3000.0, 1010.0),
+    ("weymouth", 1000.0, 8.0, 25.0, 0.65, 540.0, 0.87, 1.0, -3000.0, 1050.0),
+    # THE ASCENT, which is the same bracket read from the other side: the
+    # static column spends 75 psi, so the outlet cannot reach the inlet at
+    # ANY rate, and a modest rate lands just under that ceiling.
+    ("weymouth", 1000.0, 8.0, 25.0, 0.65, 540.0, 0.87, 1.0, 3000.0, 900.0),
+    ("weymouth", 1000.0, 8.0, 25.0, 0.65, 540.0, 0.87, 1.0, 3000.0, 920.0),
+    ("general", 1000.0, 8.0, 25.0, 0.65, 540.0, 0.87, 1.0, 3000.0, 900.0),
 ]
 
 # Inputs that must be REFUSED or must come back with an `error`. The oracle
@@ -567,6 +596,20 @@ REFUSAL_CASES = [
     ("piggingInterval", "a sweep larger than the catcher", {"maxSlugBbl": 10, "dropoutBpd": 25, "sweptBbl": 50}, "refuse"),
     ("piggingInterval", "a negative sweep", {"maxSlugBbl": 100, "dropoutBpd": 25, "sweptBbl": -500}, "refuse"),
     ("piggingInterval", "no dropout", {"maxSlugBbl": 100, "dropoutBpd": 0, "sweptBbl": 10}, "refuse"),
+    # Added by the FC2-0 repair wave: inputs of the same classes that the
+    # first sweep did not reach.
+    ("liquidLineTraverse", "no inlet pressure", {"qBpd": 5000, "idIn": 6, "rhoLbFt3": 55, "muCp": 2, "profile": [{"lengthFt": 1000}]}, "refuse"),
+    ("liquidLineTraverse", "a rate the line cannot carry to the end", {"p1Psia": 100, "qBpd": 20000, "idIn": 2.067, "rhoLbFt3": 56, "muCp": 8, "profile": [{"lengthFt": 20000}]}, "refuse"),
+    ("liquidLineTraverse", "a segment longer than its own elevation change", {"p1Psia": 500, "qBpd": 5000, "idIn": 6.065, "rhoLbFt3": 53, "muCp": 3, "profile": [{"lengthFt": 100, "elevChangeFt": 9000}]}, "refuse"),
+    ("weymouthQ", "an elevation change longer than the line", {"p1Psia": 900, "p2Psia": 500, "idIn": 12, "lengthMi": 1, "sg": 0.65, "tAvgR": 530, "zAvg": 0.88, "elevChangeFt": 9000}, "refuse"),
+    ("weymouthQ", "an efficiency of zero", {"p1Psia": 900, "p2Psia": 500, "idIn": 12, "lengthMi": 50, "sg": 0.65, "tAvgR": 530, "zAvg": 0.88, "efficiency": 0}, "refuse"),
+    ("weymouthQ", "an outlet pressure of zero", {"p1Psia": 900, "p2Psia": 0, "idIn": 12, "lengthMi": 50, "sg": 0.65, "tAvgR": 530, "zAvg": 0.88}, "refuse"),
+    ("generalFlowQ", "a negative roughness", {"p1Psia": 900, "p2Psia": 500, "idIn": 12, "lengthMi": 50, "sg": 0.65, "tAvgR": 530, "zAvg": 0.88, "roughnessIn": -0.01}, "refuse"),
+    ("gasOutletPressure", "a climb whose static column alone spends the inlet", {"equation": "weymouth", "qScfd": 1e6, "p1Psia": 15.5, "idIn": 8, "lengthMi": 25, "sg": 0.65, "tAvgR": 540, "zAvg": 0.87, "elevChangeFt": 3000}, "refuse"),
+    ("gasOutletPressure", "a bore the line does not have", {"equation": "weymouth", "qScfd": 1e6, "p1Psia": 1000, "idIn": -8, "lengthMi": 25, "sg": 0.65, "tAvgR": 540, "zAvg": 0.87}, "refuse"),
+    ("maopPsig", "a negative corrosion allowance", {"wallIn": 0.375, "odIn": 12.75, "smysPsi": 52000, "corrosionAllowanceIn": -0.5}, "refuse"),
+    ("maopPsig", "a joint factor of zero", {"wallIn": 0.375, "odIn": 12.75, "smysPsi": 52000, "jointFactor": 0}, "refuse"),
+    ("elevationAdjustment", "a compressibility of zero", {"sg": 0.65, "elevChangeFt": 800, "tAvgR": 540, "zAvg": 0}, "refuse"),
 ]
 
 
@@ -723,6 +766,8 @@ O.traverse.forEach((c) => { const r = H.liquidLineTraverse({ p1Psia: c.p1Psia, q
     rhoLbFt3: c.rhoLbFt3, muCp: c.muCp, roughnessIn: c.roughnessIn, profile: c.profile });
   res.traverse.push({ name: c.name, oracleP2: c.p2Psia, engineP2: r.error ? null : r.p2Psia,
                       oracleDp: c.dpTotalPsi, engineDp: r.error ? null : r.dpTotalPsi,
+                      oracleDied: !!c.died, engineError: r.error || null,
+                      oracleDiedAtFt: c.diedAtFt ?? null, engineDiedAtFt: r.diedAtFt ?? null,
                       stations: r.error ? null : r.stations.map((s, i) => ({ oracle: c.stations[i].pPsia, engine: s.pPsia })) }); });
 O.outlet.forEach((c) => { const r = H.gasOutletPressure({ equation: c.equation, qScfd: c.qScfd, p1Psia: c.p1Psia,
     idIn: c.idIn, lengthMi: c.lengthMi, sg: c.sg, tAvgR: c.tAvgR, zAvg: c.zAvg, efficiency: c.efficiency, elevChangeFt: c.elevChangeFt });
@@ -733,7 +778,7 @@ O.refusals.forEach((c) => {
                 weymouthQ: H.weymouthQ, panhandleAQ: H.panhandleAQ, generalFlowQ: H.generalFlowQ,
                 gasOutletPressure: H.gasOutletPressure, requiredWallIn: H.requiredWallIn,
                 maopPsig: H.maopPsig, sweptLiquidBbl: H.sweptLiquidBbl, pigRun: H.pigRun,
-                piggingInterval: H.piggingInterval };
+                piggingInterval: H.piggingInterval, elevationAdjustment: H.elevationAdjustment };
   const a = call(fns[c.fn], c.input);
   let verdict, detail;
   if (!a.ok) { verdict = 'threw'; detail = a.err; }
@@ -747,6 +792,17 @@ O.refusals.forEach((c) => {
     detail = nums.length > 180 ? `${nums.slice(0, 180)}...` : nums;
   }
   res.refusals.push({ fn: c.fn, label: c.label, expects: c.oracleExpects, verdict, detail }); });
+// The barrel, measured out of each module by asking it a question about
+// itself rather than by reading either source.
+{
+  const idIn = 7.981; const lengthFt = 26400; const rho = 54.5; const cF = 100;
+  const area = (Math.PI * idIn * idIn) / (4 * 144);
+  const fromLine = (area * lengthFt) / H.lineVolumeBbl({ idIn, lengthFt });
+  const ve = C.erosionalVelocityFtS({ mixtureDensityLbFt3: rho, cFactor: cF });
+  const fromChoke = (ve * C.pipeAreaFt2(idIn) * 86400)
+    / C.erosionalRateBpd({ idIn, mixtureDensityLbFt3: rho, cFactor: cF });
+  res.barrel = { fromLine, fromChoke, exact: (42 * 231) / 1728 };
+}
 console.log(JSON.stringify(res));
 '''
 
@@ -877,13 +933,24 @@ def compare(engines_root):
     for x in r["erosional"]:
         dv = rel(x["oracleVe"], x["engineVe"])
         dq = rel(x["oracleRate"], x["engineRate"])
-        flag = "  <<<" if dq > 1e-6 else ""
+        # THE RATE CROSSES THE BARREL and the velocity does not, which is why
+        # this pair is the measurement that found the two constants. Held at
+        # 1e-12 rather than 1e-6 so a truncated barrel cannot hide here again.
+        flag = "  <<<" if dq > 1e-12 else ""
         print(f"  rho {x['rhoLbFt3']:<6g} C {x['cFactor']:<6g} Ve rel {dv:.3e} rate rel {dq:.3e}{flag}")
-        if dq > 1e-6:
+        if dq > 1e-12:
             worst.append(("erosional", f"rho {x['rhoLbFt3']} C {x['cFactor']}", dq))
 
     print("\n=== TRAVERSE ===")
     for x in r["traverse"]:
+        if x["oracleDied"] or x["engineError"]:
+            agree = x["oracleDied"] and bool(x["engineError"])
+            print(f"  {x['name']}: oracle {'DIES at %g ft' % x['oracleDiedAtFt'] if x['oracleDied'] else 'completes'}, "
+                  f"engine {x['engineError'] or 'completes'} "
+                  f"(engine died at {x['engineDiedAtFt']} ft){'' if agree else '  <<< DISAGREE'}")
+            if not agree:
+                worst.append(("traverse", x["name"], float('inf')))
+            continue
         d = rel(x["oracleP2"], x["engineP2"])
         print(f"  {x['name']}: oracle p2 {x['oracleP2']:.6f} engine p2 {x['engineP2']:.6f} rel {d:.3e}")
         if d > 1e-6:
@@ -898,6 +965,14 @@ def compare(engines_root):
               f"err {x['engineError']}{flag}")
         if d is None or d > 1e-6:
             worst.append(("outlet", f"{x['equation']} dz {x['elevChangeFt']} p2 {x['p2Set']}", d if d else float('inf')))
+
+    print("\n=== ONE BARREL FOR THE PACKAGE ===")
+    b = r["barrel"]
+    print(f"  lineHydraulics {b['fromLine']:.13f}  chokePerformance {b['fromChoke']:.13f}  "
+          f"exact {b['exact']:.13f}  ratio {b['fromLine'] / b['fromChoke']:.13f}")
+    if b["fromLine"] != b["fromChoke"]:
+        worst.append(("barrel", "the two modules disagree",
+                      abs(b["fromLine"] / b["fromChoke"] - 1.0)))
 
     print("\n=== REFUSAL BRANCHES ===")
     fails_open = []

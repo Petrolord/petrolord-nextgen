@@ -30,6 +30,7 @@ States the method has no answer for, engine messages verbatim:
 - a pig that does not move: { error: "a pig run needs a positive length and speed" }
 - an interval with no dropout: { error: "an interval needs a positive slug limit and dropout rate" }
 - an interval whose sweep already overfills the catcher: { error: "the sweep alone already exceeds the slug limit: pig more often or resize the catcher" }
+Those are states the METHOD has no answer for. Inputs that are not physically meaningful at all, a negative roughness or an efficiency above one or a corrosion allowance that removes metal, are refused as well, and the catalogue of them with the boundary either side is in Section 16.
 
 # The units it works in. Four constants the module keeps to itself are measured here by asking the engine a question about itself, because a number typed into this file would not be an engine return.
 gc, measured as the liquid density times the velocity squared over twice 144 times the one-velocity-head fittings loss: 32.174000 lbm ft per lbf s2 (derived from the engine's own velocity 2.244621 ft/s and fittings loss 0.029634 psi at a resistance sum of one).
@@ -37,7 +38,7 @@ one centipoise in lbm per ft per s, measured as the density times the velocity t
 cubic feet per barrel, measured as the flow area times the length over the engine's line volume: 5.6145833333333 (derived from the engine's line volume 1633.5349 bbl).
 seconds per day, measured as the rate times the cubic feet per barrel above over the area times the velocity: 86400.000000 (derived on the row).
 seconds per hour, measured as a length over the pig speed times the engine's run hours: 3600.000000 (derived from the engine's run time 2.444444 h).
-A fifth, the feet in a mile, cannot be measured this way: the module declares it and then never uses it, so no engine call depends on it and nothing can be asked about it.
+the feet in a mile, measured as the largest rise the engine accepts on a gas line 1.000000 mile long: 5280.000000000 ft is accepted and the next representable value above it, 9.095e-13 ft higher, is refused (engine).
 The base conditions the published gas forms are stated at, which the module DOES export: 520.000000 degR and 14.650000 psia. That base pressure is not atmospheric, and the two are a quarter of a psi apart.
 
 # SECTION 2: Velocity, Reynolds and the friction factor (owned by Associate m02)
@@ -151,9 +152,9 @@ An id the table does not carry does not refuse and does not return null: erosion
 The limit at the OGBIA crude density, and what each c factor allows through the built bore:
 | c | erosional velocity ft/s | line velocity ft/s | ratio | exceeded | margin percent | largest rate bpd |
 | --- | --- | --- | --- | --- | --- | --- |
-| 100.000000 | 13.545709 | 2.244621 | 0.165707 | false | 83.429285 | 72416.9110 |
-| 125.000000 | 16.932137 | 2.244621 | 0.132566 | false | 86.743428 | 90521.1388 |
-| 175.000000 | 23.704991 | 2.244621 | 0.094690 | false | 90.531020 | 126729.5943 |
+| 100.000000 | 13.545709 | 2.244621 | 0.165707 | false | 83.429284 | 72416.9067 |
+| 125.000000 | 16.932137 | 2.244621 | 0.132566 | false | 86.743427 | 90521.1334 |
+| 175.000000 | 23.704991 | 2.244621 | 0.094690 | false | 90.531019 | 126729.5868 |
 The engine's own flow area for that bore is 0.347410 ft2, and the velocity the erosional check reads, 2.244621 ft/s, is the same velocity the pressure drop read.
 
 Density is the whole of the limit: the same c factor against four fluids.
@@ -172,7 +173,7 @@ A light gas is allowed to run several times faster than a dense liquid, which is
 The OGBIA duty in every bore the vendored schedule carries, with the RP 14E verdict at the continuous-service c factor:
 | nominal | schedule | outside diameter in | wall in | bore in | velocity ft/s | Reynolds | friction loss psi | total psi | erosional ft/s | ratio | inside the limit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2 | 40 | 2.375000 | 0.154000 | 2.067000 | 33.463911 | 187000.3989 | 20803.315944 | 20803.315944 | 13.545709 | 2.470443 | false |
+| 2 | 40 | 2.375000 | 0.154000 | 2.067000 | 33.463911 | 187000.3989 | 20803.315944 | 20803.315944 | 13.545709 | 2.470444 | false |
 | 2 | 80 | 2.375000 | 0.218000 | 1.939000 | 38.027872 | 199344.9327 | 28841.350797 | 28841.350797 | 13.545709 | 2.807374 | false |
 | 3 | 40 | 3.500000 | 0.216000 | 3.068000 | 15.189621 | 125987.5569 | 2820.384450 | 2820.384450 | 13.545709 | 1.121360 | false |
 | 4 | 40 | 4.500000 | 0.237000 | 4.026000 | 8.820843 | 96008.4015 | 728.175700 | 728.175700 | 13.545709 | 0.651191 | true |
@@ -290,25 +291,35 @@ Uphill is not the mirror of downhill. The two fractions on each row do not avera
 # SECTION 10: The outlet pressure (owned by Professional m04)
 
 # App surface: this is the direction the studio actually works in. A designer knows the rate the terminal has contracted for and wants the pressure it will see, which is the inverse of every form above.
-The engine has no closed inversion. It bisects on the outlet pressure inside a bracket that runs from atmospheric to the inlet pressure, calling the published form at each step.
+The engine has no closed inversion. It bisects on the outlet pressure, calling the published form at each step, inside a bracket that runs from atmospheric up to the pressure at which the driving group vanishes. That upper end is the inlet over the square root of e to the s, and it is NOT the inlet: a hill moves it.
 
 Round trips on the flat trunk, each form solved back to the outlet it came from:
 | form | rate scfd | outlet recovered psia | against the stated outlet psia |
 | --- | --- | --- | --- |
 | weymouth | 66104956.1404 | 620.000000 | 0.000000 |
 | panhandleA | 86864172.0167 | 620.000000 | 0.000000 |
-| panhandleB | 88369202.2673 | 620.000000 | -0.000000 |
+| panhandleB | 88369202.2673 | 620.000000 | 0.000000 |
 | general | 73861363.0502 | 620.000000 | 0.000000 |
 
 The trunk asked for 60000000.0000 scfd through the Weymouth form arrives at 666.307057 psia, a drop of 183.692943 psi.
 A rate the line cannot carry at all is refused rather than approximated: { error: "the line cannot carry the target rate even to atmospheric outlet" }
 
-The bracket, and the case it cannot reach. On a steep DESCENT the column recovers more head than the friction spends, so the outlet pressure can legitimately be ABOVE the inlet, and that answer is outside the bracket the search runs in.
+The ceiling the bracket ends at, on the SOKU trunk, derived on each row as the inlet over the square root of the engine's own e to the s:
+| elevation change ft | e to the s | the outlet the rate approaches as it falls to nothing, psia | against the inlet, psi |
+| --- | --- | --- | --- |
+| 0.000000 | 1.0000000000 | 850.000000 | 0.000000 |
+| 1500.000000 | 1.0828513009 | 816.835331 | -33.164669 |
+| -1500.000000 | 0.9234878318 | 884.511201 | 34.511201 |
+| 3000.000000 | 1.1725669398 | 784.964657 | -65.035343 |
+| -3000.000000 | 0.8528297754 | 920.423606 | 70.423606 |
+A flat line ends its bracket at its own inlet. A DESCENT ends it above the inlet, because the column recovers more head than the friction spends. A CLIMB ends it below, because the column costs head that no rate gets back. Reading the fourth column is reading how much of the answer a bracket of atmospheric-to-the-inlet would have been unable to express.
+
 Down -3000.000000 ft, the trunk carries 29457958.5967 scfd when its outlet stands at 880.000000 psia, which is 30.000000 psia ABOVE its inlet of 850.000000 psia.
-Given that same rate, the engine returns {"p2Psia":850,"dpPsi":0}: the inlet pressure, and a drop of zero.
-The forward call and the inverse call disagree by 30.000000 psi on one line, and the inverse reports no error.
-THE CONTROL, and it is the line that proves the bracket is the fault rather than the descent. Run the SAME descent with an outlet genuinely BELOW the inlet, 700.000000 psia against 850.000000 psia: the trunk carries 65259103.7761 scfd and the inverse recovers 700.000000 psia, an error of 0.000000 psi.
-So the bisection is exact when its answer lies inside the bracket and silently wrong when it does not. A reading that only ever tested outlets below the inlet would have found nothing.
+Given that same rate the inverse returns {"p2Psia":880,"dpPsi":-30}, and the forward call and the inverse call now differ by 0.000000 psi. The drop is NEGATIVE because the line arrives higher than it left, which is the honest reading of a descent and not an error state.
+THE CONTROL. Run the SAME descent with an outlet genuinely BELOW the inlet, 700.000000 psia against 850.000000 psia: the trunk carries 65259103.7761 scfd and the inverse recovers 700.000000 psia, an error of 0.000000 psi. Both answers come out of the same bisection, and the one that used to be wrong was the one whose answer sat outside the bracket rather than the one the solver could not converge.
+
+The climb is the same bracket read from the other side, and it is the commoner case. Up 3000.000000 ft, asked for 20000000.0000 scfd, the trunk delivers at 766.523922 psia for a drop of 83.476078 psi, and the ceiling on the table above, 784.964657 psia, is as close to the inlet as any rate can bring it.
+And a climb the inlet cannot pay for at all is refused rather than answered. The same hill under a near-atmospheric inlet of 15.500000 psia: { error: "the static gas column alone spends the inlet pressure: this line delivers nothing at any rate" }
 
 # SECTION 11: Marching a profile (owned by Professional m05)
 
@@ -327,8 +338,10 @@ Marched against one shot: the traverse spends 25.660631 psi over 26400.000000 ft
 
 What a traverse drops: the one-shot call carrying the isometric's 4.500000 velocity heads spends 25.793983 psi, and the traverse of the same line spends 25.660631 psi. The gap of 0.133351 psi is exactly the fittings, because liquidLineTraverse has no resistance-sum argument at all.
 
-Where a line dies, and what the engine says about it: 20000.000000 bpd of 56.000000 lb/ft3 at 8.000000 cp through 2.067000 in over 20000.000000 ft, entering at 100.000000 psia, arrives at -47328.563502 psia having spent 47428.563502 psi.
-That arrival is far below zero absolute. The traverse reports it as a station like any other, with no error, because nothing in the march checks that a pressure stayed physical.
+Where a line dies, and what the engine says about it: 20000.000000 bpd of 56.000000 lb/ft3 at 8.000000 cp through 2.067000 in over 20000.000000 ft, entering at 100.000000 psia.
+The traverse refuses: { error: "the line cannot carry this rate: the pressure reaches zero absolute before 20000 ft" }
+It refuses with the evidence attached rather than instead of it. The stations it managed to stand behind: 1, the last of them at 0.000000 ft and 100.000000 psia. The distance it died at: 20000.000000 ft. The pressure the arithmetic actually produced there: -47328.563502 psia, which is not a pressure.
+The single call underneath still answers, because a DROP is not a PRESSURE and nothing about it is unphysical: the same line spends 47428.563502 psi. A rate that costs more than the inlet holds is a rate the line cannot pass, and the traverse is the call that knows the inlet.
 
 # SECTION 12: The Professional reading, a trunk end to end (owned by Professional m06)
 
@@ -430,41 +443,67 @@ On the same line at its full duty the two sit at 0.894987 of each other. The for
 
 Neither iteration in this module reports whether it converged. The friction factor solve runs a fixed point and the General Flow solve runs a rate and a friction factor against each other, and both return their last iterate with no flag beside it. They do converge everywhere this digest looked, which is exactly what makes the absence easy to miss.
 
-# SECTION 16: What it accepts and should not (owned by Expert m04)
+# SECTION 16: What it refuses, and what a refusal looks like (owned by Expert m04)
 
-A refusal is an object with an `error`. These are not refusals. Each row is a real engine return on an input that has no physical meaning.
+A refusal in this engine is an object carrying an `error` string. It is never a thrown exception, never a null and never a bare number, and the shape is the contract: a caller checks a property rather than inspecting a value. That is exactly why a NaN or an Infinity returned WITHOUT an error is worse than no guard at all. It passes the check and then propagates into whatever is downstream, which for this engine is a sizing sweep, a marched profile and a wall specification.
+Three returns sit outside that contract on purpose. The Reynolds number and the line volume are bare numbers with nowhere to put a message, so they answer NaN by documented contract and the functions that wrap them refuse in words. The friction factor carries its refusal in the regime it already returns. Read the next three rows knowing that a NaN has no JSON spelling and serialises as null: the engine returns NaN, and null is what printing it does.
+- the Reynolds number of a line with no viscosity: NaN
+- the volume of a line with no bore: NaN
+- the friction factor at a negative relative roughness: {"f":null,"regime":"invalid"}
 
-Inputs accepted with a plausible number attached:
-- a negative resistance sum: fittings loss -0.148168 psi, total 25.512463 psi against 25.660631 psi with no fittings at all
-- a negative roughness: friction factor 0.0150452107 against the correct 0.0218149625, and friction 17.697468 psi against 25.660631 psi
-- an elevation change longer than the line: elevation 3406.250000 psi and a gradient of 34.063472 psi per ft
-- an efficiency above one: 198314868.4213 scfd against 66104956.1404 scfd at an efficiency of one
-- a negative efficiency: -66104956.1404 scfd, a gas flowing backwards
-- a gas with no viscosity: 75085580.6646 scfd at a friction factor of 0.0108505350, against 73861363.0502 scfd at 0.0112132010
-- a negative corrosion allowance: a required wall of -0.295673 in beside a pressure wall of 0.204327 in
-- a negative swept volume: 18.7500 days, against 3.7997 days at the real sweep
+Inputs that have no physical meaning, and the message each one produces, verbatim:
+- a negative resistance sum: { error: "a fitting resistance sum cannot be negative: fittings spend pressure, they do not return it" }
+- a negative roughness: { error: "absolute roughness is a length and cannot be negative" }
+- a liquid line that rises further than its own length: { error: "elevation change cannot exceed line length" }
+- a traverse with no inlet pressure: { error: "a traverse needs a positive absolute inlet pressure" }
+- a gas line at an efficiency above one: { error: "transmission efficiency must be greater than 0 and at most 1" }
+- a gas line at a negative efficiency: { error: "transmission efficiency must be greater than 0 and at most 1" }
+- a gas line of no length: { error: "a gas line needs a positive length in miles" }
+- a gas line of negative length: { error: "a gas line needs a positive length in miles" }
+- a gas line of negative bore: { error: "a gas line needs a positive bore" }
+- a gas at a compressibility of zero: { error: "a gas line needs a positive average compressibility" }
+- a gas at an absolute temperature of zero: { error: "a gas line needs a positive absolute average temperature" }
+- a gas of no gravity: { error: "a gas line needs a positive gas gravity" }
+- a gas line that rises further than its own length: { error: "elevation change cannot exceed line length" }
+- General Flow with no gas viscosity: { error: "General Flow needs a positive gas viscosity" }
+- General Flow at a negative roughness: { error: "absolute roughness is a length and cannot be negative" }
+- an elevation group at a compressibility of zero: { error: "the elevation adjustment needs a positive gas gravity, absolute temperature and compressibility" }
+- a wall at a joint factor of zero: { error: "the longitudinal joint factor must be greater than 0 and at most 1" }
+- a wall at a temperature derate of zero: { error: "the temperature derating factor must be greater than 0 and at most 1" }
+- a wall with a negative corrosion allowance: { error: "a corrosion allowance is metal added to the wall and cannot be negative" }
+- a rating with a negative corrosion allowance: { error: "a corrosion allowance is metal added to the wall and cannot be negative" }
+- a sweep with no bore: { error: "a swept volume needs a positive bore and length" }
+- a sweep of negative length: { error: "a swept volume needs a positive bore and length" }
+- an interval on a negative sweep: { error: "a swept volume cannot be negative" }
+- an outlet solve on a climb the inlet cannot pay for: { error: "the static gas column alone spends the inlet pressure: this line delivers nothing at any rate" }
 
-Inputs accepted with something that is not a number, and still no error. The whole return is printed, because the SHAPE is the point:
-- a gas line of no length: {"qScfd":null}
-- a gas line of negative length: {"qScfd":null}
-- a gas line of negative bore: {"qScfd":null}
-- a gas at a compressibility of zero: {"qScfd":null}
-- a gas at an absolute temperature of zero: {"qScfd":null}
-- a gas of no gravity: {"qScfd":null}
-- a wall at a temperature derate of zero: {"designFactor":0.72,"tPressureIn":null,"tRequiredIn":null}
-- a wall at a joint factor of zero: {"designFactor":0.72,"tPressureIn":null,"tRequiredIn":null}
-- a sweep with no bore: {"sweptBbl":null}
-- a sweep of negative length: {"sweptBbl":null}
+Every one of those guards has a boundary, and the boundary is where the teaching is: a resistance sum of zero is a line with no fittings and is perfectly legal, an efficiency of exactly one is the ideal the forms are written for, a holdup of one is a line running full, and a line exactly as tall as it is long is vertical. The engine is handed the value on each side and says which it took:
+| guard | value | the engine |
+| --- | --- | --- |
+| the resistance sum | 0.000000 | answers |
+| the resistance sum | -0.000001 | refuses |
+| the absolute roughness | 0.000000 | answers |
+| the absolute roughness | -0.000001 | refuses |
+| the rise of a liquid line against its length | 100.000000 | answers |
+| the rise of a liquid line against its length | 100.000001 | refuses |
+| the transmission efficiency | 1.000000 | answers |
+| the transmission efficiency | 1.000001 | refuses |
+| the liquid holdup | 1.000000 | answers |
+| the liquid holdup | 1.000001 | refuses |
+| the corrosion allowance | 0.000000 | answers |
+| the corrosion allowance | -0.000001 | refuses |
+| the swept volume | 0.000000 | answers |
+| the swept volume | -0.000001 | refuses |
+A guard that refuses its own limit is as wrong as one that accepts nonsense, which is why both sides are read rather than one.
 
-The sweep is the sharpest of these, because it DOES guard one of its three inputs. It refuses a holdup above one with a proper message and then hands the bore and the length straight to the line volume, which returns a non-number by contract. One guard existing is what makes the other two look checked.
-
-The same class of question asked of the three catalogues, which answer it three different ways:
+What the engine still accepts and arguably should not, and none of it is a number this course grades. The same class of question asked of the catalogues, which answer it three different ways:
 - a fitting the table does not carry: fittingK returns NaN
 - a roughness the table does not carry: roughnessOf returns NaN
 - a grade the table does not carry: gradeYield returns NaN
 - a pipe size the table does not carry: scheduleRow returns null
 - an erosional service the table does not carry: erosionalC returns {"id":"continuous","label":"RP 14E continuous service","c":100}
-Four of the five say they do not know. The fifth answers under a label that is not the one it was asked for.
+Four of the five say they do not know. The fifth answers under a label that is not the one it was asked for, and it is the one that was NOT repaired: the RP 14E table belongs to the wellhead engine that two other studios read, so changing what an unknown service returns is a decision for that table rather than for this line-sizing chain.
+And the rating still over-rates a line if the caller drops the allowance, because the allowance is an argument of the rating rather than a property of the pipe. It is the pair the wall section already read: the same wall reads 1019.607843 psig with the allowance and 1529.411765 psig without, 1.500000 times higher, and the factor is the gross wall over the net rather than anything about this pipe. Both calls are legal, both are correct for what they were asked, and neither warns. A guard cannot fix a question that was fully formed and simply wrong.
 
 # SECTION 17: What the method does not know (owned by Expert m05)
 
@@ -477,10 +516,10 @@ Five things this course teaches as limits and never as answers:
 
 And one thing that is not held but simply absent: THE MULTIPHASE HALF IS NOT IN THIS ENGINE. There is no flow regime, no slip, no holdup correlation and no slug model anywhere in it. Wherever a holdup is needed the engine takes it as an input, which is honest and is also a seam a reader has to see rather than infer.
 
-Two values of one constant, one import apart. The barrel, measured out of each module by asking it a question about itself:
+One barrel for the package, measured out of each module by asking that module a question about itself rather than by reading either source:
 - from lineHydraulics, as the flow area times the length over the line volume: 5.6145833333333 cubic feet per barrel
-- from chokePerformance, as the erosional velocity times the area times the seconds in a day over the erosional rate: 5.6145830000000 cubic feet per barrel
-The two differ by a ratio of 1.0000000593692 (derived from the two rows above). It is small and it is two numbers for one quantity inside the single chain this studio composes.
+- from chokePerformance, as the erosional velocity times the area times the seconds in a day over the erosional rate: 5.6145833333333 cubic feet per barrel
+The ratio of the two is 1.0000000000000 (derived from the two rows above). They were two different numbers one import apart, inside the single chain this studio composes, until the package gave them one definition. The one it kept is exact by definition rather than by measurement: forty-two gallons of two hundred and thirty-one cubic inches each, over the seventeen hundred and twenty-eight cubic inches in a cubic foot. Both modules' own oracles already worked from it, so the goldens said which half of the disagreement was right before anyone asked them.
 
 # SECTION 18: The Expert reading, a line from bore to wall to pig (owned by Expert m06)
 

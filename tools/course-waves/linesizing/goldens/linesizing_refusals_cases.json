@@ -397,5 +397,179 @@
   },
   "label": "no dropout",
   "oracleExpects": "refuse"
+ },
+ {
+  "fn": "liquidLineTraverse",
+  "input": {
+   "idIn": 6,
+   "muCp": 2,
+   "profile": [
+    {
+     "lengthFt": 1000
+    }
+   ],
+   "qBpd": 5000,
+   "rhoLbFt3": 55
+  },
+  "label": "no inlet pressure",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "liquidLineTraverse",
+  "input": {
+   "idIn": 2.067,
+   "muCp": 8,
+   "p1Psia": 100,
+   "profile": [
+    {
+     "lengthFt": 20000
+    }
+   ],
+   "qBpd": 20000,
+   "rhoLbFt3": 56
+  },
+  "label": "a rate the line cannot carry to the end",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "liquidLineTraverse",
+  "input": {
+   "idIn": 6.065,
+   "muCp": 3,
+   "p1Psia": 500,
+   "profile": [
+    {
+     "elevChangeFt": 9000,
+     "lengthFt": 100
+    }
+   ],
+   "qBpd": 5000,
+   "rhoLbFt3": 53
+  },
+  "label": "a segment longer than its own elevation change",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "weymouthQ",
+  "input": {
+   "elevChangeFt": 9000,
+   "idIn": 12,
+   "lengthMi": 1,
+   "p1Psia": 900,
+   "p2Psia": 500,
+   "sg": 0.65,
+   "tAvgR": 530,
+   "zAvg": 0.88
+  },
+  "label": "an elevation change longer than the line",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "weymouthQ",
+  "input": {
+   "efficiency": 0,
+   "idIn": 12,
+   "lengthMi": 50,
+   "p1Psia": 900,
+   "p2Psia": 500,
+   "sg": 0.65,
+   "tAvgR": 530,
+   "zAvg": 0.88
+  },
+  "label": "an efficiency of zero",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "weymouthQ",
+  "input": {
+   "idIn": 12,
+   "lengthMi": 50,
+   "p1Psia": 900,
+   "p2Psia": 0,
+   "sg": 0.65,
+   "tAvgR": 530,
+   "zAvg": 0.88
+  },
+  "label": "an outlet pressure of zero",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "generalFlowQ",
+  "input": {
+   "idIn": 12,
+   "lengthMi": 50,
+   "p1Psia": 900,
+   "p2Psia": 500,
+   "roughnessIn": -0.01,
+   "sg": 0.65,
+   "tAvgR": 530,
+   "zAvg": 0.88
+  },
+  "label": "a negative roughness",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "gasOutletPressure",
+  "input": {
+   "elevChangeFt": 3000,
+   "equation": "weymouth",
+   "idIn": 8,
+   "lengthMi": 25,
+   "p1Psia": 15.5,
+   "qScfd": 1000000.0,
+   "sg": 0.65,
+   "tAvgR": 540,
+   "zAvg": 0.87
+  },
+  "label": "a climb whose static column alone spends the inlet",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "gasOutletPressure",
+  "input": {
+   "equation": "weymouth",
+   "idIn": -8,
+   "lengthMi": 25,
+   "p1Psia": 1000,
+   "qScfd": 1000000.0,
+   "sg": 0.65,
+   "tAvgR": 540,
+   "zAvg": 0.87
+  },
+  "label": "a bore the line does not have",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "maopPsig",
+  "input": {
+   "corrosionAllowanceIn": -0.5,
+   "odIn": 12.75,
+   "smysPsi": 52000,
+   "wallIn": 0.375
+  },
+  "label": "a negative corrosion allowance",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "maopPsig",
+  "input": {
+   "jointFactor": 0,
+   "odIn": 12.75,
+   "smysPsi": 52000,
+   "wallIn": 0.375
+  },
+  "label": "a joint factor of zero",
+  "oracleExpects": "refuse"
+ },
+ {
+  "fn": "elevationAdjustment",
+  "input": {
+   "elevChangeFt": 800,
+   "sg": 0.65,
+   "tAvgR": 540,
+   "zAvg": 0
+  },
+  "label": "a compressibility of zero",
+  "oracleExpects": "refuse"
  }
 ]
