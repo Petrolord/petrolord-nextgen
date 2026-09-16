@@ -151,6 +151,9 @@ const buildDigest = () => {
   w('| --- | --- | --- | --- | --- | --- | --- | --- |');
   s4.rows.forEach((s) => w(`| ${s.name} | ${s.conceptName} | ${m(s.oilPrice)} | ${m(s.capex)} | ${m(s.npv)} | ${s.irr === null ? 'none' : pc(s.irr)} | ${s.irrStatus} | ${s.payback === null ? 'never' : m(s.payback)} |`));
   w();
+  w(`Every case in that table carries the plan's end-of-life cost: source ${s4.abandonment.source}, ${m(s4.abandonment.amountMM)} million USD, charged in production year ${s4.abandonment.year} (engine). The basis the engine states: "${s4.abandonment.basis}"`);
+  w('# Commentary: the payback column is the one figure in that table computed WITHOUT the end-of-life cost. scenarioPayback takes no abandonment argument, so the card reports the payback of a plan that never pays to abandon. On these cases it changes nothing, because the cost falls in the last year and the money has been recovered long before it; on a plan that only recovers at the end it would.');
+  w();
   w(`The Base case in full: revenue ${m(s4.base.totalRevenue)}, royalty ${m(s4.base.totalRoyalty)}, tax ${m(s4.base.totalTax)}, capex ${m(s4.base.totalCapex)}, operating cost ${m(s4.base.totalOpex)}, government take ${m(s4.base.totalGovTake)}, deepest cash position ${m(s4.base.maxExposure)}.`);
   w(`Government take is ${r(s4.base.govTakeShareDerived)} of gross revenue (derived).`);
   w();
@@ -173,11 +176,18 @@ const buildDigest = () => {
   w('| cost item | type | phase | amount |');
   w('| --- | --- | --- | --- |');
   s5.items.forEach((c) => w(`| ${c.name} | ${c.type} | ${c.phase} | ${m(c.amount)} |`));
-  w(`Engine totals: CAPEX ${m(s5.capexTotal)}, OPEX ${m(s5.opexTotal)} a year. The ABEX line of ${m(s5.abexAmount)} is in neither (derived: the screening case carries capex and operating cost only).`);
+  w(`Engine totals: CAPEX ${m(s5.capexTotal)}, OPEX ${m(s5.opexTotal)} a year. The ABEX line of ${m(s5.abexAmount)} is in neither of those two totals (derived), because it is neither development capex nor an annual operating cost. It is the plan's end-of-life cost and the case carries it in the final production year.`);
   w('By phase (engine):');
   s5.byPhase.forEach((x) => w(`- ${x.phase}: ${m(x.total)}`));
   w();
-  w(`The plan's own case: capex ${m(s5.planRun.capex)} from the cost items, operating cost ${m(s5.planRun.annualOpex)} a year, the FPSO concept's ${s5.planRun.years} year shape at $70/bbl. NPV ${m(s5.planRun.npv)}, IRR ${s5.planRun.irr === null ? 'none' : pc(s5.planRun.irr)}, payback ${m(s5.planRun.payback)} years (engine).`);
+  w(`The plan's own case: capex ${m(s5.planRun.capex)} from the cost items, operating cost ${m(s5.planRun.annualOpex)} a year, the FPSO concept's ${s5.planRun.years} year shape at $70/bbl, and the end-of-life cost in the last of those years. NPV ${m(s5.planRun.npv)}, IRR ${s5.planRun.irr === null ? `none (${s5.planRun.irrStatus})` : pc(s5.planRun.irr)}, payback ${m(s5.planRun.payback)} years (engine).`);
+  w();
+  w('The end-of-life cost, and what leaving it out was worth (engine):');
+  w(`- the engine resolves it as source ${s5.abandonment.source}, ${m(s5.abandonment.amountMM)} million USD, charged in production year ${s5.abandonment.year}, on the basis "${s5.abandonment.basis}"`);
+  w('- an ABEX cost item replaces the facility decommissioning estimate, it is never added to it. Without any ABEX line the same plan would take the screening estimate of its facility instead.');
+  w(`- the same case run with no end-of-life cost at all: NPV ${m(s5.abandonment.withoutNpv)}, IRR ${s5.abandonment.withoutIrr === null ? `none (${s5.abandonment.withoutIrrStatus})` : pc(s5.abandonment.withoutIrr)} (engine). That is the number this studio reported until September 2026.`);
+  w(`- charging it costs the plan ${m(s5.abandonment.costDerived)} million USD of present value (derived), against a cash cost of ${m(s5.abandonment.amountMM)} paid twenty years out and deductible for tax in the year it falls.`);
+  w();
   w(`The concept's own capex is ${m(s5.conceptCapex)} and the cost items total ${m(s5.capexTotal)}: the two agree here because the plan was costed against the concept (derived). They are two different numbers and they are meant to be compared.`);
   w();
   w('A price deck that does not cover the profile is refused, not padded:');
@@ -359,6 +369,16 @@ const buildDigest = () => {
     w(`- ${s13.recovered.name}: NPV ${m(s13.recovered.npv)}, IRR ${pc(s13.recovered.irr)} percent, status ${s13.recovered.irrStatus}. A negative rate is a real answer: it says what the money earned, which is less than none.`);
   }
   w('# Commentary: a clamped search that stops at its own boundary has not found a rate. Reporting the boundary as the answer put an internal rate of return of exactly 1000 percent, the upper edge of the band, in green on cards for projects that never return their money.');
+  w();
+  w('MORE THAN ONE ROOT, which is what an end-of-life cost does to a rate of return:');
+  const mr = s13.multipleRoots;
+  w(`The EGINA plan spends ${m(mr.capexMM)} in year 0, earns for ${mr.years} years, and pays ${m(mr.abandonmentMM)} to abandon in the last of them. Its net cash flow therefore changes sign TWICE, and by Descartes' rule a flow that changes sign twice can be zeroed at more than one discount rate. The engine finds every root, reports irr null and irrStatus multiple-roots, and lists them:`);
+  w('| case | NPV | status | the rates that zero this flow, percent |');
+  w('| --- | --- | --- | --- |');
+  mr.rows.forEach((x) => w(`| ${x.label} | ${m(x.npv)} | ${x.irrStatus} | ${x.roots === null ? 'none: the flow is negative at every rate the engine searches' : x.roots.map((y) => pc(y)).join(' and ')} |`));
+  w(`- The same Base case with no end-of-life cost reports a single rate of ${pc(mr.withoutEnd.irr)} percent at status ${mr.withoutEnd.irrStatus} (engine). One line of cost, and the question "what is the rate of return" stops having an answer.`);
+  w('- NEITHER root is the rate of return. They are the two discount rates at which this flow is worth nothing, and between them the plan is worth more than nothing. Quoting the higher one alone is the mistake the multiple-roots status exists to stop, and quoting the lower one as a loss is the same mistake upside down.');
+  w('- A rate of return is only a summary of a flow that spends once and earns thereafter. Charge a real end-of-life cost and most development plans stop being that shape, which is why the NPV, and not the rate, is what a plan is judged on.');
   w();
   w('The payback the same cases report:');
   s13.paybacks.forEach((x) => w(`- ${x.label}: ${x.payback === null ? 'never pays back (null, not the project life)' : `${m(x.payback)} years`} (engine).`));
@@ -571,12 +591,27 @@ describe('what the teaching fields show', () => {
     expect(L.reconciliations().schedule.spentFloatDerived).toBe(63);
   });
 
-  it('EC6-0: a rate of return is null with a status when there is no root in the band', () => {
-    const rows = L.rateOfReturn().rows;
+  it('EC6-8: charging the end-of-life cost leaves the Base case with two roots and no single rate', () => {
+    const ror = L.rateOfReturn();
+    const rows = ror.rows;
     const stress = rows.find((x) => x.label === 'EGINA at 18 USD a barrel');
     expect(stress.irr).toBeNull();
     expect(stress.irrStatus).toBe('no-root');
-    expect(rows.find((x) => x.label === 'EGINA Base, 70 USD a barrel').irrStatus).toBe('ok');
+    const base = rows.find((x) => x.label === 'EGINA Base, 70 USD a barrel');
+    // The repair: the same case reported 'ok' and a single rate while the
+    // plan's ABEX line reached no cash flow.
+    expect(base.irr).toBeNull();
+    expect(base.irrStatus).toBe('multiple-roots');
+    expect(ror.multipleRoots.withoutEnd.irrStatus).toBe('ok');
+    expect(ror.multipleRoots.withoutEnd.irr).toBeGreaterThan(0);
+    const baseRoots = ror.multipleRoots.rows[0].roots;
+    expect(baseRoots).toHaveLength(2);
+    expect(baseRoots[0]).toBeLessThan(0);
+    expect(baseRoots[1]).toBeGreaterThan(0);
+    // Every earning case is two-rooted now, and the losing one has no root.
+    expect(ror.multipleRoots.rows.map((x) => x.irrStatus)).toEqual(
+      ['multiple-roots', 'multiple-roots', 'multiple-roots', 'multiple-roots', 'no-root'],
+    );
     expect([...new Set(rows.map((x) => x.irrStatus))].every((s) => L.IRR_STATUSES.includes(s))).toBe(true);
     // Not a clamp: nothing reports the boundary of the search band as an answer.
     expect(rows.every((x) => x.irr !== L.IRR_BAND.high)).toBe(true);
@@ -607,6 +642,26 @@ describe('what the teaching fields show', () => {
     expect(e.mid.spiBasis).toBe('planned value time-phased to the as-of date');
     expect(e.ahead.spi).toBeGreaterThan(1);
     expect(e.uncosted.spiBasis).toBe('no costed task, so there is no planned value');
+  });
+
+  it('EC6-8: every EGINA screening case carries the plan\'s ABEX line as its end-of-life cost', () => {
+    const s4 = L.scenarioValues();
+    const s5 = L.planEconomics();
+    expect(s4.abandonment.source).toBe('abex-item');
+    expect(s4.abandonment.amountMM).toBe(s5.abexAmount);
+    // Charged in the final production year, which is the twentieth.
+    expect(s4.abandonment.year).toBe(s5.planRun.years);
+    expect(s5.abandonment.source).toBe('abex-item');
+    // Leaving it out was worth real money, and both numbers are engine NPVs.
+    expect(s5.abandonment.withoutNpv).toBeGreaterThan(s5.planRun.npv);
+    expect(s5.abandonment.costDerived).toBeCloseTo(s5.abandonment.withoutNpv - s5.planRun.npv, 12);
+    // The capstone is charged its own plan's ABEX line, not EGINA's.
+    const runs = L.ukotRuns();
+    expect(runs.base.abandonmentSource).toBe('abex-item');
+    expect(runs.base.abandonmentMM).not.toBe(s5.abexAmount);
+    expect(runs.base.metrics.irrStatus).toBe('multiple-roots');
+    expect(runs.base.metrics.irr).toBeNull();
+    expect(runs.base.metrics.irrRoots).toHaveLength(2);
   });
 
   it('the as-of reader refuses a date the digest does not print', () => {
