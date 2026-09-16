@@ -197,9 +197,10 @@ const Recovery = () => {
         recovery is NOT: it is not a deduction against tax, because the tax base here is the contractor profit share
         and cost oil is credited to the contractor separately; it is not depreciation and there is no schedule; and
         an unrecovered balance is not a loss carried forward, it is only a claim on future revenue after royalty.
-        Note also that capped_5pct_never_recovers pays back in year 3 despite its own note, because the revenue that
-        cannot be recovered becomes profit oil and that regime splits profit oil wholly to the contractor. Cost
-        recovery is not the only way capital comes home.
+        Note also that capped_5pct_pool_never_clears pays back in year 3 although its pool never clears, because the
+        revenue that cannot be recovered becomes profit oil and that regime splits profit oil wholly to the
+        contractor. Cost recovery is not the only way capital comes home. Its NPV is zero at two rates, so the
+        engine reports no internal rate of return for it and says multiple-roots instead.
       </Note>
     </>
   );

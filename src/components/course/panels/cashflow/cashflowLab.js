@@ -31,6 +31,7 @@ import {
   applyJV, applyPSC, pscTrancheShare,
   deriveOilRoyaltyRate, deriveGasRoyaltyRate, derivePriceRoyaltyRate, deriveHctRate,
   computeProductionAllowance, determineFiscalFramework,
+  irrResult,
 } from '@petrolord/engines/engines/economics/cashflow.ts';
 
 export {
@@ -1101,27 +1102,52 @@ export const akataPiaVariants = () => AKATA_PIA_VARIANTS.map(([label, patch]) =>
 // ---------------------------------------------------------------------------
 
 export const distrustTable = () => {
-  const profileGap = cases.disagreements
-    .filter((d) => d.quantity && /npv_profile/.test(d.quantity))
-    .map((d) => ({ case: d.case, engineNpv: d.engine.npv, engineRatePct: d.engine.rate_pct, oracleNpv: d.oracle.npv, oracleRatePct: d.oracle.rate_pct, gap: d.gap, gapUnit: d.gap_unit }));
-  const akata = akataProfile();
-  const twoRoots = cases.disagreements
-    .filter((d) => /^irr:/.test(d.case))
-    .map((d) => {
-      const name = d.case.replace(/^irr:/, '');
-      const v = cases.irr.find((x) => x.name === name);
-      return { case: d.case, name, flows: v.flows, engineIrrPct: d.engine.irr_pct, oracleIrrPct: d.oracle.irr_pct, gap: d.gap, gapUnit: d.gap_unit, methodStatement: d.method_statement };
+  // EC1-1. The applied-rate point is labelled at the rounded rate and
+  // EVALUATED at the exact one, so every gap below is zero. The golden records
+  // no profile disagreement any more; the rows are the engine's own readings.
+  const profileGap = profileGapCases().map((g) => ({
+    case: g.label,
+    engineNpv: g.labelledPointNpv,
+    engineRatePct: g.appliedRateLabelPct,
+    oracleNpv: g.headlineNpv,
+    oracleRatePct: g.appliedRatePct,
+    gap: g.gap,
+    gapUnit: 'USD',
+  }));
+  // EC1-2. A profile with several roots returns null with irrStatus
+  // multiple-roots and lists the roots inside the band, so there is no single
+  // unflagged root to distrust. These are the engine's own vectors, read
+  // through the shared contract rather than through a golden disagreement
+  // list, which the repair emptied.
+  // Every published vector the ENGINE flags multiple-roots, read from its own
+  // status rather than from a hand-kept list, so a vector the contract starts
+  // or stops flagging cannot go missing from the table.
+  const twoRoots = cases.irr
+    .map((v) => ({ v, res: irrResult(v.flows) }))
+    .filter(({ res }) => (res.irr_status ?? res.irrStatus) === 'multiple-roots')
+    .map(({ v, res }) => {
+      const roots = res.irr_roots ?? res.irrRoots ?? null;
+      const rate = res.irr ?? null;
+      return {
+        case: `irr:${v.name}`,
+        name: v.name,
+        flows: v.flows,
+        engineIrrPct: rate === null ? null : rate * 100,
+        irrStatus: res.irr_status ?? res.irrStatus ?? null,
+        irrRootsPct: roots ? roots.map((x) => x * 100) : null,
+        irrRootAboveBand: res.irr_root_above_band ?? res.irrRootAboveBand ?? false,
+        goldenIrrPct: v.irr_pct ?? null,
+      };
     });
   const a = run(goldenCase('pia_sinking_fund_wi_50')).kpis;
   const b = run(goldenCase('pia_sinking_fund')).kpis;
   const cRes = run(goldenCase('jv_abandonment_wi_60'));
   const cK = cRes.kpis;
   return {
-    profileGap: [
-      { case: AKATA_LABEL, engineNpv: akata.labelledPointNpv, engineRatePct: akata.appliedRateLabelPct, oracleNpv: akata.headlineNpv, oracleRatePct: akata.appliedRatePct, gap: akata.gap, gapUnit: 'USD' },
-      ...profileGap,
-    ],
+    profileGap,
     twoRoots,
+    // EC1-3. The fund is grossed by one over the working interest, so the
+    // amount entered is the share under both modes.
     sinkingFund: [
       { case: 'pia_sinking_fund', wiPct: 100, totalContributions: b.total_decom_fund_contributions, totalAbandonmentCost: b.total_abandonment_cost, unitTechnicalCost: b.unit_technical_cost_usd_per_boe, totalBoe: b.total_boe, mode: 'sinking_fund' },
       { case: 'pia_sinking_fund_wi_50', wiPct: a.working_interest_pct, totalContributions: a.total_decom_fund_contributions, totalAbandonmentCost: a.total_abandonment_cost, unitTechnicalCost: a.unit_technical_cost_usd_per_boe, totalBoe: a.total_boe, mode: 'sinking_fund' },

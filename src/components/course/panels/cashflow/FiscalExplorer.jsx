@@ -419,8 +419,8 @@ const EndOfLife = () => {
         />
         <p className="text-xs text-rose-100 mt-3 mb-1">2. IRR on a multi-root profile is null with irrStatus multiple-roots and every root in the band listed. Until engines 3.10.0 it was whichever root Newton reached from 10 percent, reported as a rate with nothing to say there was another.</p>
         <Tbl
-          head={['vector', 'flows', 'engine IRR, %', 'oracle IRR, %', 'gap, percentage points']}
-          rows={dist.twoRoots.map((r) => [r.name, `[${r.flows.join(', ')}]`, num(r.engineIrrPct, 4), num(r.oracleIrrPct, 4), num(r.gap, 4)])}
+          head={['vector', 'flows', 'engine IRR, %', 'irrStatus', 'roots inside the band, %', 'a root above the band']}
+          rows={dist.twoRoots.map((r) => [r.name, `[${r.flows.join(', ')}]`, r.engineIrrPct === null ? 'null' : num(r.engineIrrPct, 4), r.irrStatus ?? '', r.irrRootsPct ? r.irrRootsPct.map((x) => num(x, 4)).join(' and ') : '', r.irrRootAboveBand ? 'yes' : 'no'])}
         />
         <p className="text-xs text-rose-100 mt-3 mb-1">3. Abandonment is entered at the share under both funding modes, so a fund collects the amount that was typed. Until engines 3.10.0 the contributions were scaled by the working interest a second time while the cost they funded was not, so a 50 percent interest collected half.</p>
         <Tbl
