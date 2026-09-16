@@ -15,7 +15,7 @@ A check is a comparison between two placed items with a positive requirement. Ev
 
 Sixty-nine comparisons carried a positive requirement and were made. Twenty-one pairs had a requirement of zero. Two items could not be reached at all. Twelve pairs had a type combination the table does not carry.
 
-Only the first of those four is a check. The other three are the reasons the layout was not fully judged, and they are reported separately so that a reader can tell a quiet plot from an unexamined one.
+Only the first of those four is a check. The other three are counted apart from it so that a reader can tell a quiet plot from an unexamined one. Two of them, the skipped items and the unknown type pairs, are what make complete false.
 
 ## A requirement of zero is not a requirement
 
@@ -27,7 +27,7 @@ The published case s3ZeroRequirementPairOnly isolates this. It has one pair, the
 
 A count of 69 checks sounds like a thorough review, and on ERHA it is one. A count of 69 on a plan whose valves outnumber its vessels could be mostly zero-requirement comparisons dressed as work. The engine keeps the two apart so the question can be asked.
 
-It is worth saying plainly that `checked` still depends on what happens to be on the plan. Adding six relief valves adds pairs, and a reviewer who reads only the headline number will see a bigger review where nothing more was examined. The count of zero-requirement pairs beside it is what makes that visible.
+`checked` still depends on what happens to be on the plan. Adding six relief valves adds pairs, and a reviewer who reads only the headline number will see a bigger review where nothing more was examined. The count of zero-requirement pairs beside it is what makes that visible.
 
 ## What a check compares against
 

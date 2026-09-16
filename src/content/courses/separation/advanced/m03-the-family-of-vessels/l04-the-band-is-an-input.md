@@ -31,7 +31,7 @@ A band that runs backwards is refused outright: SeparatorInputError on `ldMax`, 
 
 ## The mistake
 
-The mistake is widening the band until an answer appears. The answer that appears is a vessel that was always there, and if the sweep was returning none-feasible then widening changes nothing at all, because none of the rows was ever excluded by shape.
+The mistake is widening the band until an answer appears. The answer that appears is a vessel that was always there, and if the sweep was returning none-feasible then widening changes nothing at all, because shape alone was never what kept a row out.
 
 The second mistake is quoting a preferred diameter without its band. The band is part of the question, so 7.000000 ft in a band of 3.000000 to 5.000000 and a null in a band of 4.000000 to 5.000000 are two honest answers about the same family, and a report that gives one of them without saying which band it asked has left out half the input.
 

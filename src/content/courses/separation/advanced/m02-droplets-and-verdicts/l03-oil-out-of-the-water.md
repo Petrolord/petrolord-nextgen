@@ -19,7 +19,7 @@ The water check runs downward through the oil layer and the oil check runs upwar
 
 This is the check the interface repair was made for. Before FC1-0 the layer thickness came from dividing the water area by the gas-liquid chord, which on AGBAMI gave a water layer of 2.026834 ft against the exact 3.049149 ft.
 
-A rising drop was therefore asked to cross a layer far thinner than the one the vessel holds. It crossed in less time, the comparison against the water residence looked comfortable, and the carryunder check passed on a vessel that should not have passed it. The arithmetic was honest and the geometry it was fed was not. The direction never varies, so the verdict always failed in the permissive direction.
+A rising drop was therefore asked to cross a layer far thinner than the one the vessel holds. It crossed in less time, the comparison against the water residence looked comfortable, and a vessel sitting close to the line could clear a check it should have failed. The arithmetic was honest and the geometry it was fed was not. The direction never varies, so the verdict always failed in the permissive direction.
 
 ## A low level makes it harder
 

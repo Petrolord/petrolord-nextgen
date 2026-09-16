@@ -14,7 +14,7 @@ The repair is a refusal by name: SeparatorInputError on `sgOil`, "sgOil is requi
 
 ## A layer that was not there
 
-The other fail-open was geometric. The retired rule divided the water area by the gas-liquid chord to get a layer thickness, which on AGBAMI gave 2.026834 ft where the exact inversion gives 3.049149 ft. The carryunder check then asked a rising oil drop to cross a layer thinner than the one in the vessel, so it cleared a comparison it should have failed.
+The other fail-open was geometric. The retired rule divided the water area by the gas-liquid chord to get a layer thickness, which on AGBAMI gave 2.026834 ft where the exact inversion gives 3.049149 ft. The carryunder check then asked a rising oil drop to cross a layer thinner than the one in the vessel, so every crossing it timed came back shorter than the drum makes it.
 
 ## Why all of them point the same way
 

@@ -26,11 +26,11 @@ A chord is the width of one line across the circle. A segment narrows toward the
 | lowLevelSmallOilDropCarryunder | 1.249328 | 1.249328 | 1.750672 | 0.617770 | 1.544424 |
 | gasOverloaded6ftGasControls | 1.524415 | 1.524415 | 1.475585 | 0.942478 | 1.413717 |
 
-Every retired water figure sits below its exact one and every retired oil figure above, because the two layers have to share a fixed liquid depth and an understated water layer hands the difference to the oil.
+Every retired figure sits below its exact one, the oil as well as the water, because the two retired layers are each an area over the same chord and never had to add back to the liquid depth the way the exact pair does.
 
 ## Why the direction matters
 
-An understated water layer makes the water look thin, and a thin layer is quick to cross, so a rising oil drop appears to escape it in less time than it really needs. An overstated oil layer does the opposite to the falling water drop, which makes that check look harder than it is. One repair moved both verdicts, and only one of them moved toward safety.
+An understated water layer makes the water look thin, and a thin layer is quick to cross, so a rising oil drop appears to escape it in less time than it really needs. The oil layer came out thin in the same way, so neither crossing was ever made to look harder than it is. Both errors ran the permissive way, and the carryunder check is the one the repair is pinned against.
 
 ## The mistake
 
