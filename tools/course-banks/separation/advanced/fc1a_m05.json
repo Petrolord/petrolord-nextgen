@@ -107,7 +107,7 @@
    "Compute a setback for it from the duty of the nearer item, which is what the engine does for a flare or a pool fire when no table figure exists."
   ],
   "answer": 2,
-  "explanation": "ERHA reports 12 unknown type pairs from one skid, and a flow meter, a pig launcher or a booster package returns null the same way. Complete is false on almost any real plot for that reason."
+  "explanation": "The table is recorded with no source checked and is meant to be replaced by a site standard wholesale. A pair it does not carry is a question for that standard rather than a gap to fill in."
  },
  {
   "prompt": "Every published case in this course is synthetic. What can that kind of golden prove?",

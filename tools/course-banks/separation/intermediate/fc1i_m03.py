@@ -10,7 +10,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 q(0, "ABANA-2 puts 29.490437 ft3/s through 25.132741 ft2 at a level of 0.500000, which is 1.173387 ft/s. Where does that numerator come from?",
  "The 110.000000 MMscfd stream taken to 614.700000 psia, 95.000000 degF and a z of 0.908065, which is the volume the drum passes each second.",
  ["The 110.000000 MMscfd stream at standard conditions, which is 1273.148148 standard ft3/s and is the volume a separator running at 614.700000 psia has to move.",
-  "The gas density of 2.239712 lb/ft3 multiplied by the gas area, which turns a mass rate into the volume the gas space is asked to carry.",
+  "The gas density of 2.239712 lb/ft3 multiplied by the gas area of 25.132741 ft2, which turns a mass rate into the volume the gas space is asked to carry.",
   "The settling velocity of 1.958255 ft/s times the gas area of 25.132741 ft2."],
  "The vessel sees 29.490437 ft3/s and nothing else. Dividing 1273.148148 standard ft3/s by an area gives a velocity tens of times too high.")
 
@@ -21,7 +21,7 @@ q(2, "The same 29.490437 ft3/s runs at 3.003871 ft/s in the 5.000000 ft drum and
   "The level was raised on the wider drums to keep the margin comfortable."],
  "From 5.000000 ft to 6.000000 ft the velocity falls from 3.003871 ft/s to 2.086022 ft/s. From 9.000000 ft to 10.000000 ft the same foot is worth 0.927121 ft/s down to 0.750968 ft/s.")
 
-q(1, "What does the margin of 1.668891 on the 8.000000 ft drum measure?",
+q(1, "A margin of 1.668891 is reported beside ABANA-2. Which division produced it?",
  "The settling velocity of 1.958255 ft/s divided by the gas velocity of 1.173387 ft/s, so the gas in the gas space moves more slowly than a droplet falls through it.",
  ["The gas velocity divided by the settling velocity, so any figure above one says the gas is winning and liquid is leaving with it.",
   "The gas area of 25.132741 ft2 as a share of the whole cross-section of 50.265482 ft2.",
@@ -45,7 +45,7 @@ q(2, "The verdict turns from false to true between the 6.000000 ft and the 7.000
 q(0, "A summary sheet rounds the 6.000000 ft drum's margin of 0.938751 to the nearest whole number. What has it reported?",
  "A margin of one on a drum whose verdict is false, because the rounded figure and the threshold are the same number.",
  ["The margin the engine would return at a level of 0.300000, since rounding a ratio has the same effect as moving the level that produced it.",
-  "Nothing that matters, since the verdict of false travels beside the margin and cannot be rounded away.",
+  "Nothing that matters, since the verdict of false travels beside the margin on every row and a verdict cannot be rounded away.",
   "The 7.000000 ft drum's margin in the place of the 6.000000 ft drum's."],
  "The 6.000000 ft drum reports gasCapacityOk false at 0.938751. A reader handed the verdict alone cannot tell 1.277745 from 2.607642 either, so the pair travels together.")
 
@@ -112,5 +112,5 @@ q(1, "Why does the repaired sweep report the rows that fail rather than dropping
   "The engine cannot tell a failing row from a passing one until a band is supplied."],
  "A sweep that printed only the vessels that worked would hide the boundary. Every row carries its own reasons, so 41.369847 ft at 6.000000 ft of bore is visible as a failure.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1i_m03.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1i_m03.json', expect_n=15)
 finish()

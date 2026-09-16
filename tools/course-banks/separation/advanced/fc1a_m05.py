@@ -73,7 +73,7 @@ q(2, "The spacing table returns null for a tank beside a skid. What is the right
  ["Substitute the nearest comparable pair from the table, such as the 15.000000 m recorded between a separator and a tank, and note the substitution in the report.",
   "Treat the pair as skipped, since an item the table cannot score is an item the layout check could not reach and belongs in the skipped list with a reason.",
   "Compute a setback for it from the duty of the nearer item, which is what the engine does for a flare or a pool fire when no table figure exists."],
- "ERHA reports 12 unknown type pairs from one skid, and a flow meter, a pig launcher or a booster package returns null the same way. Complete is false on almost any real plot for that reason.")
+ "The table is recorded with no source checked and is meant to be replaced by a site standard wholesale. A pair it does not carry is a question for that standard rather than a gap to fill in.")
 
 q(1, "Every published case in this course is synthetic. What can that kind of golden prove?",
  "That two implementations written by different people in different unit systems agree on the arithmetic, which catches a slip or a dropped conversion and cannot catch a method that is wrong in both files.",
@@ -110,5 +110,5 @@ q(1, "A reviewer dismisses the whole golden set because every case is synthetic.
   "That the distance cases are not synthetic, since haversine and Vincenty are published methods and their agreement at 89.4099 m is an external check."],
  "The mistake runs both ways. Reading a green suite as agreement with measured separator performance upgrades the claim, and dismissing the suite throws away the arithmetic evidence it does carry.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1a_m05.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1a_m05.json', expect_n=15)
 finish()

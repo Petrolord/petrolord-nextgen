@@ -110,5 +110,5 @@ q(2, "The ABANA-2 rows at 5.000000 ft and 6.000000 ft both carry two reasons. Wh
   "They are equally bad, since two reasons on a row of a sweep is the worst score a row can be given and both of them carry it."],
  "Reasons are not a severity ranking. Both rows are infeasible on gas capacity and both are out of band, and the 5.000000 ft row needs 59.572579 ft of length against the 41.369847 ft of the 6.000000 ft row.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1a_m03.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1a_m03.json', expect_n=15)
 finish()

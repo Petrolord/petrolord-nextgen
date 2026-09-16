@@ -112,5 +112,5 @@ q(2, "ABANA-1 holds 35.091146 ft3 of retention volume and ABANA-2 holds 584.8524
   "They are a liquid volume and a gas volume for the same stream."],
  "A retention volume is a rate times a time and both are inputs. The two vessels share a field and never share a figure.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1i_m02.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1i_m02.json', expect_n=15)
 finish()

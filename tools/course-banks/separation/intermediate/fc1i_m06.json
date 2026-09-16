@@ -118,7 +118,7 @@
    "Because a capstone is marked to the digit."
   ],
   "answer": 2,
-  "explanation": "Precision is part of the reading. The 6.000000 ft drum reports 0.938751 with gasCapacityOk false, and a rounded margin reverses the verdict."
+  "explanation": "Six decimals on a vessel and four on a site are the precisions the two halves of this engine print. A figure rounded on the way to an answer is a different answer, and a reader cannot tell which they were handed."
  },
  {
   "prompt": "A sheet quotes a liquid requirement of 23.270539 ft for the 8.000000 ft drum on ABANA-2, with the duty named and the requirement labelled. Which condition is still missing?",

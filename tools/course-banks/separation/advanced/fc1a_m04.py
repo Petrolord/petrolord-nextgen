@@ -110,5 +110,5 @@ q(2, "A plan reports 69 checks. What does that number depend on besides how thor
   "The datum the coordinates were measured from, because a distance on a sphere is measured from the datum and the count follows the distances."],
  "ERHA reports 21 zero-requirement pairs beside its 69 checks, and the separate count is what makes the shape of the number visible to a reader.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1a_m04.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1a_m04.json', expect_n=15)
 finish()

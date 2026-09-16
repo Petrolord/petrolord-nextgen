@@ -97,7 +97,7 @@ q(1, "The height falls and the margin rises all the way from 2.000000 to 4.00000
  "Both changes are improvements in this calculation and both cost money in the yard. Margin rises with diameter for free here, and a vessel at 3.797800 carries capacity nobody asked for."),
 
 q(2, "A margin of 2.136263 is a ratio against what?",
- "An allowable velocity whose K was read from a table and then derated by a rule the module records as customary practice with an unchecked published form.",
+ "The allowable velocity the vessel was sized on, so a margin is worth exactly what the K behind it is worth.",
  ["A measured carryover velocity for that arrangement, since the six base rows were fitted to observed carryover.",
   "The settling velocity of a drop of the size the mesh pad is rated to remove.",
   "The gas velocity at 2.000000 ft of 1.536071 ft/s, which is the reference every other diameter on the list is measured against."],
@@ -110,5 +110,5 @@ q(0, "The gas-required diameter of 2.052551 ft describes a vessel with a floor a
   "None of them. All three are inputs to the area of 3.308855 ft2, and the height is a second calculation reusing figures the diameter has already consumed."],
  "The liquid supplies the height. The area of 3.308855 ft2 came from the actual gas rate and the settling velocity, and the liquid reaches that velocity only through the mixture density."),
 
-emit(Q, '/root/fc-wip-separation/banks/fc1b_m05.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1b_m05.json', expect_n=15)
 finish()

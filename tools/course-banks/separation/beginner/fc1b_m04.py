@@ -110,5 +110,5 @@ q(0, "A stream looks similar to souders0.18 on the page, so a reviewer quotes 1.
   "The case is horizontal and the stream is vertical, so the orientations do not match."],
  "Confirming that a stream lands where the cases bracketing it suggest is a cheap sanity check and the only legitimate use of a case belonging to another vessel. Quoting its velocity is a different act."),
 
-emit(Q, '/root/fc-wip-separation/banks/fc1b_m04.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1b_m04.json', expect_n=15)
 finish()
