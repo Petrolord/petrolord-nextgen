@@ -42,7 +42,7 @@ Payback lands in 2032 because the cumulative moves from -29534809.71 to 19845806
 
 ## The five conventions
 
-Everything in this tier is a stated convention, and each has a number that proves it. A year is a row, and per-well columns sum into it. A price is applied per year by escalator or deck, so 82 became 85.312800. Royalty is a share of gross, so a year that nets -121123680.00 still pays 27904800.00. Depreciation is for tax only, so the 2029 net is -121123680.00 and not 21000000.00 lower. Working interest scales results, so at 60 percent the 2029 net is -72674208.00 while the gross revenue printed is still 186032000.00.
+Everything in this tier is a stated convention, and each has a number that proves it. A year is a row, and per-well columns sum into it. A price is applied per year by escalator or deck, so 82 became 85.312800. Royalty is a share of gross, so a year that nets -121123680.00 still pays 27904800.00. Depreciation is for tax only, so the 2029 net is -121123680.00 and not 21000000.00 lower. Working interest is a share of results, so at 60 percent the 2029 net is -72674208.00 and the gross revenue printed is 111619200.00, while the take holds at 66.1723 percent.
 
 ## What the tier has not done
 

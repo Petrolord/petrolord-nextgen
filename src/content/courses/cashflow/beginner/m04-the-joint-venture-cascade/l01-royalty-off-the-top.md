@@ -39,7 +39,7 @@ A careful person who has read a production sharing contract tries to take the ro
 
 ## What it refuses
 
-The JV royalty is one rate on every stream in every year. It has no tiers by production rate, no price component, no terrain and no allowance; those belong to the PIA regime and to the Expert tier. It cannot see cost, so a year with 210000000.00 of capex and a year with none pay the same 15 percent of whatever they sold. And it is field-level: the row prints the field's royalty, and working interest is applied to it afterward.
+The JV royalty is one rate on every stream in every year. It has no tiers by production rate, no price component, no terrain and no allowance; those belong to the PIA regime and to the Expert tier. It cannot see cost, so a year with 210000000.00 of capex and a year with none pay the same 15 percent of whatever they sold. And it is blind to the interest: the cascade runs once on the whole field and the row prints the partner's share of the result, 16742880.00 USD in 2029 at a 60 percent interest against 27904800.00 at 100.
 
 ## Exercise
 
