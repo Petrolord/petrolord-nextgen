@@ -19,7 +19,7 @@ q(0, "Within this table, which moves K further: changing the orientation, or cha
  ["The orientation, because every horizontal row sits above its vertical counterpart and 0.250000 up to 0.550000 is the widest move offered.",
   "They move it equally, since the table is two orientations against three arrangements and the six rows are evenly spaced between 0.180000 and 0.550000.",
   "Neither, because K is derated for pressure before use and the same deduction comes off every row at 600.000000 psig."],
- "0.180000 to 0.420000 inside the vertical half more than doubles the allowable velocity. The largest orientation step, 0.180000 to 0.250000 with no mist extractor, is much smaller than that."),
+ "0.180000 to 0.420000 inside the vertical half more than doubles the allowable velocity. The largest orientation step, 0.420000 to 0.550000 with a vane pack, is much smaller than that."),
 
 q(3, "K is raised by half on a stream whose fluids do not change. What happens to the gas area the vessel needs?",
  "It falls by a third.",
@@ -46,7 +46,7 @@ q(0, "One K comes back with derated true and floored false, another with both tr
  "That the rule produced something the floor had to catch, so the K in use is a bound rather than a calculation.",
  ["That the pressure was above 100 psig, where the deduction begins.",
   "That a vendor figure was supplied and then limited, since a typed K reports source typed and the floor is the one check that an override does not bypass on its way through.",
-  "That the result fell below 0.120000, which is the figure the engine prints whenever a derated value lands under the floor and the two flags are raised together on one row."],
+  "That the K in use is the arrangement's base row again, because the floor hands back the published figure the deduction started from."],
  "Derated true says the pressure rule moved the value. Floored true says the floor caught what that rule produced. horizontalNoneAt1500psig reports K 0.120000 where the rule gives 0.110000."),
 
 q(1, "verticalNoneAt650psig returns K 0.125000 with derated true and floored false. Why does it deserve the same suspicion as a floored row?",

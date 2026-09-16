@@ -25,13 +25,13 @@ A margin of exactly 1.000000 on a result is a signature: it says the diameter wa
 
 ## Area moves as the square
 
-Diameter enters through area, so the relationship between duty and diameter is a square root. The two published cases put 12.000000 and 30.000000 ft3/s through 4.239711 and 5.641896 ft, where the rate rose by two and a half times and the diameter by about a third.
+Diameter enters through area, so the relationship between duty and diameter is a square root. The two published cases put 12.000000 and 30.000000 ft3/s through 4.239711 and 5.641896 ft, where the rate rose by two and a half times and the diameter by about a third. A square root alone would have given nearer six tenths more, so the remainder is the settling velocity, which is not the same on the two cases. Read the pair for the direction and not for the exponent.
 
 That is the reason gas duty alone rarely drives a vertical vessel to an unreasonable size, and also the reason a small increase in diameter buys a surprisingly large increase in capacity.
 
 ## What this diameter ignores
 
-It knows nothing about the liquid. No retention time, no liquid rate and no allowance has entered it, so the vessel it describes has a floor area and no height at all. The liquid supplies the height, and where the liquid is heavy the height can become the awkward dimension long before the diameter does.
+It knows nothing about how much liquid there is. No retention time, no liquid rate and no allowance has entered it, so the vessel it describes has a floor area and no height at all. The liquid density did reach it, through the mixture and the settling velocity, but the liquid volume has not. The liquid supplies the height, and where the liquid is heavy the height can become the awkward dimension long before the diameter does.
 
 It also assumes the gas uses the whole cross-section evenly. A real inlet arrangement puts the gas in at one side, and the allowance above the liquid exists partly to give that maldistribution room to even out.
 

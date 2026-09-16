@@ -40,7 +40,7 @@ Each K carries derated and floored as separate booleans. Derated true says the p
 | verticalNoneAt3000psig | 0.120000 | -0.110000 | true | true |
 | horizontalNoneAt1500psig | 0.120000 | 0.110000 | true | true |
 
-verticalNoneAt650psig is the row worth staring at. Its K of 0.125000 is above the floor and so it is reported as an ordinary derated value, while sitting a thousandth or two from the point where the method admits it has nothing left. Nothing in the output marks it as fragile.
+verticalNoneAt650psig is the row worth staring at. Its K of 0.125000 is above the floor and so it is reported as an ordinary derated value, while sitting 0.005000 above the 0.120000 where the method admits it has nothing left. That is half a step of a rule that takes 0.01 off every 100 psi, so 50 psig more of operating pressure puts this vessel on the floor. Nothing in the output marks it as fragile.
 
 ## Why it is held
 

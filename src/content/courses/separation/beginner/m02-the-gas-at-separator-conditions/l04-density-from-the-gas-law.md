@@ -39,7 +39,7 @@ Each input is guarded by name. A missing absolute pressure gives "pPsia must be 
 
 ## The mistake
 
-Leaving z out, or holding it at 1. At the ABANA conditions that would report a gas about a tenth lighter than it is, which makes drops appear to fall faster than they do and sizes a vessel smaller than the duty needs. The direction is the unforgiving one: the error flatters the design.
+Leaving z out, or holding it at 1. At the ABANA conditions that would report a gas about a tenth lighter than 2.239712 lb/ft3, which makes drops appear to fall faster than they do. It would also report more gas arriving, because the actual rate is scaled by z as well, so a z held at 1 inflates 4.825708 ft3/s in the same proportion. The two errors pull against each other and the rate wins: the gas-required diameter comes out a little above 2.052551 ft rather than below it. So the mistake is not that the error flatters the design. It is that the rate and the velocity are both wrong, and a vessel that lands on the safe side of two errors that happen to oppose each other is not a vessel anybody sized.
 
 ## Exercise
 

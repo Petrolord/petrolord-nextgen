@@ -48,11 +48,11 @@ q(1, "Name everything the terminal velocity of 1.458422 ft/s on ABANA-1 took as 
  "Three inputs and nothing else: the hardware through K, and the two fluids through the densities. No droplet size, no viscosity, no vessel dimension and no rate appears in it."),
 
 q(2, "Why is the settling velocity forgiving of a small error in the liquid density and unforgiving of one in the gas density?",
- "The gas density appears twice, once inside the difference and once underneath it, while the liquid density appears once.",
- ["The liquid density is the larger of the two figures, so the same absolute error is a smaller proportion of it, and the square root then halves whatever proportion survives into the answer.",
+ "The liquid density is more than twenty times the larger, so the same error in lb/ft3 is a far smaller share of it.",
+ ["The gas density appears twice in the expression and the liquid density once, so the same proportional error in the gas moves the answer further.",
   "The gas density is the one that moves with pressure and temperature, so an error in it compounds.",
   "The liquid density is a rate-weighted mixture that already damps an error in either component."],
- "The expression is K times the square root of the density difference over the gas density. AGBAMI settles at 3.549130 ft/s partly because its gas weighs 1.276898 lb/ft3 against the ABANA 2.239712."),
+ "Put a percent on each and the two move the velocity by the same amount in opposite directions, because the gas appearing twice exactly offsets the liquid being larger. The asymmetry is in lb/ft3: one figure is 55.171463 and the other 2.239712, so a pound per cubic foot is a rounding error on the liquid and nearly half the gas."),
 
 q(3, "AGBAMI settles at 3.549130 ft/s where ABANA-1 settles at 1.458422 ft/s. Of its two density terms, which did more of that work?",
  "The gas density at 1.276898 lb/ft3 against 2.239712.",
@@ -68,7 +68,7 @@ q(1, "souders0.45 carries the largest K of the three published cases at 0.450000
   "Nothing overtook it. 1.423025 ft/s is the fastest of the three and the rows are ordered by K."],
  "The three velocities sit within about a tenth of a foot per second of each other while K runs from 0.180000 to 0.450000. K does not decide the answer on its own."),
 
-q(2, "souders0.18 carries the smallest K of the three published cases and returns the fastest velocity at 1.579494 ft/s. What does that warn a designer against?",
+q(2, "Of the three published settling cases, the one with no mist extractor returns the fastest velocity, 1.579494 ft/s. What does that warn a designer against?",
  "Justifying a mist extractor on vessel size alone, since these three cases would size within a tenth or so of each other at equal rates.",
  ["Reading a case at 62.400000 lb/ft3 of liquid as a real stream, since that is fresh water.",
   "Comparing cases at different K values at all, since the table cannot be read across its rows.",

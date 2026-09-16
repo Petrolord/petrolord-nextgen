@@ -18,7 +18,7 @@ Three inputs and nothing else: the hardware through K, and the two fluids throug
 
 The density difference sits over the gas density under a square root, so the expression is dominated by how much lighter the gas is than the liquid. Halving the gas density does not halve the velocity, it raises it by about four tenths in proportion, which is why AGBAMI at 1.276898 lb/ft3 of gas settles so much faster than ABANA at 2.239712.
 
-The square root also means the velocity is forgiving of small errors in the liquid density and unforgiving of errors in the gas density, because the gas density appears twice, once in the difference and once underneath it.
+The velocity is also forgiving of small errors in the liquid density and unforgiving of errors in the gas density, and the reason is the size of the two numbers rather than the shape of the expression. Put the same percentage on each and the velocity moves by the same amount either way, because the gas density appearing twice, once in the difference and once underneath it, exactly offsets the liquid density being the larger figure. Put the same pound per cubic foot on each and the picture changes completely: it is a rounding error against 55.171463 and nearly half of 2.239712.
 
 ## Where K comes from and what it carries
 

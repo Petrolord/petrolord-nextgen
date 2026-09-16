@@ -70,11 +70,11 @@ q(1, "The retired app held z at 0.850000. Read against the four published densit
  "0.850000 against 0.986286 is the widest of the four gaps, and a low-pressure stage is exactly where it sits. Density is proportional to one over z, so the error runs straight into the density."),
 
 q(2, "What happens to a vertical vessel sized with z left at 1 in place of 0.908065?",
- "It comes out too small, because the gas is reported about a tenth lighter than it is and drops appear to fall faster than they do.",
- ["It comes out too large, because a higher z means a larger volume at conditions and a larger gas area.",
+ "It comes out a little larger, because z scales the actual rate as well as the density, and the inflated rate outweighs the faster settling.",
+ ["It comes out smaller, because the gas is reported about a tenth lighter than it is and drops appear to fall faster than they do, which is the half of the effect that is easy to see.",
   "It is unchanged, because z enters the density and enters the actual rate again, and those two occurrences move the required area in opposite directions by the same proportion.",
   "It is refused, because a z of exactly 1 describes an ideal gas and the engine tests it against the DAK range."],
- "Density is proportional to one over z, so at 0.908065 the real gas is denser than an ideal one. A lighter gas raises the settling velocity and shrinks the area, and the direction is the unforgiving one: the error flatters the design."),
+ "Density goes as one over z, so a z of 1 reports a lighter gas and a faster settling velocity. The actual rate is scaled by z as well, so it rises in the same proportion, and the rate carries the area further than the velocity pulls it back. The gas-required diameter moves up from 2.052551 ft, not down."),
 
 q(0, "AGBAMI carries the heavier gas at 0.700000 gravity and its gas weighs 1.276898 lb/ft3 against the 2.239712 lb/ft3 on the ABANA streams. What is doing that?",
  "Pressure. AGBAMI sits at 364.700000 psia against 614.700000 psia.",

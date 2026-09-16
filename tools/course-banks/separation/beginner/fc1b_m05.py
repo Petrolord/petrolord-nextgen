@@ -20,11 +20,11 @@ q(0, "A result reports a velocity margin of exactly 1.000000. What does that tel
  "At the gas-required diameter the gas velocity equals the settling velocity, so the margin is 1.000000 by construction. Both published vertical cases report it for that reason."),
 
 q(3, "Two published vertical cases put 12.000000 and 30.000000 ft3/s through diameters of 4.239711 and 5.641896 ft. Why did a rate two and a half times larger buy so little diameter?",
- "Diameter enters through area, so duty and diameter are related by a square root.",
+ "Diameter enters through area, so duty and diameter are related by a square root, and these two cases do not even share a settling velocity.",
  ["The two cases carry retention times of 3.000000 and 2.000000 minutes, and the shorter hold took most of the extra duty out of the larger vessel before its gas was sized at all.",
-  "The faster of the two settling velocities absorbed the extra rate.",
+  "The larger case was sized on its liquid rather than on its gas, so 5.641896 ft came from the retention volume and not from the rate.",
   "A vertical vessel takes the larger of its gas and liquid diameters."],
- "The rate rose by two and a half times and the diameter by about a third. A small increase in diameter buys a surprisingly large increase in capacity."),
+ "A square root on its own would have taken 4.239711 ft to about six tenths more, not a third more. The rest is the settling velocity, which is not the same on the two cases, so these two diameters are not a clean square-root pair."),
 
 q(1, "A basis says to hold the oil 3.000000 minutes, and 2600.000000 bpd of oil is used in place of the 3000.000000 bpd of total liquid. What does the vessel lose?",
  "The 400.000000 bpd of water, which occupies the vessel whether or not the retention basis was written for it.",
@@ -104,7 +104,7 @@ q(2, "A margin of 2.136263 is a ratio against what?",
  "The margin inherits whatever the allowable is worth. 1.458422 ft/s on ABANA-1 was built from a K of 0.300000 that the module derated from a base row of 0.350000."),
 
 q(0, "The gas-required diameter of 2.052551 ft describes a vessel with a floor and no height. Which liquid quantities have not entered it?",
- "The retention time, the liquid rate and the allowance.",
+ "The retention time, the total liquid rate and the allowance.",
  ["The liquid density of 55.171463 lb/ft3, which arrives only later, when the retention volume of 35.091146 ft3 is turned into a depth against the floor area.",
   "The water cut, since a mixture of 55.171463 lb/ft3 is computed from the oil density alone until a three-phase vessel is being sized and the water rate is read in.",
   "None of them. All three are inputs to the area of 3.308855 ft2, and the height is a second calculation reusing figures the diameter has already consumed."],
