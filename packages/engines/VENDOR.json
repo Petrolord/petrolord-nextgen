@@ -1382,13 +1382,6 @@
       "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
-      "path": "engines/economics/fdp/economics.js",
-      "kind": "differing",
-      "group": "4-economics-revendor",
-      "vendoredSha": "bfa56305da90d6ceaaa9a45a607cab607fba876e",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
-    },
-    {
       "path": "engines/economics/fdp/facilitiesCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
@@ -1400,13 +1393,6 @@
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "bc641603fcd05a6054018051af9a68b34d3c5aa6",
-      "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
-    },
-    {
-      "path": "engines/economics/fdp/scenarioCalculations.js",
-      "kind": "differing",
-      "group": "4-economics-revendor",
-      "vendoredSha": "644000182910985975d835898b31411b11c16c20",
       "reason": "Value moving. Audit Group 4: 271 test moves. EC1, EC2 and EC3 recuts are written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
     },
     {
