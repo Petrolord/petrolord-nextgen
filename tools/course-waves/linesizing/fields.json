@@ -75,7 +75,7 @@
   "advanced",
   "quaiboe_required_wall_in",
   0.46236211651154774,
-  1e-8
+  5e-7
  ],
  [
   "advanced",
@@ -93,7 +93,7 @@
   "advanced",
   "quaiboe_swept_volume_bbl",
   2342.7305216769605,
-  0.00001
+  0.00005
  ],
  [
   "advanced",

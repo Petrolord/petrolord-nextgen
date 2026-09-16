@@ -1,0 +1,54 @@
+{
+ "Btu/gal": {
+  "decimals": 4,
+  "match": "^(?:sensiblePerGal)$"
+ },
+ "MMBtu/hr": {
+  "decimals": 6,
+  "match": "^(?:reboilerMMBtuHr)$"
+ },
+ "degF": {
+  "decimals": 6,
+  "match": "^(?:dropF|t2F)$"
+ },
+ "degF/psi": {
+  "decimals": 6,
+  "match": "^(?:muFPerPsi)$"
+ },
+ "fraction": {
+  "decimals": 6,
+  "match": "^(?:fractionRemoved)$"
+ },
+ "gal/day": {
+  "decimals": 4,
+  "match": "^(?:circGpd)$"
+ },
+ "gpm": {
+  "decimals": 6,
+  "match": "^(?:circGpm|circGpmRetuned)$"
+ },
+ "lb/MMscf": {
+  "decimals": 6,
+  "match": "^(?:inletLbMMscf|waterInLbMMscf|waterOutLbMMscf)$"
+ },
+ "lb/day": {
+  "decimals": 4,
+  "match": "^(?:waterLbDay)$"
+ },
+ "lbmol/day": {
+  "decimals": 4,
+  "match": "^(?:acidMolesDay)$"
+ },
+ "per degR": {
+  "decimals": 6,
+  "match": "^(?:dzdT)$"
+ },
+ "short tons/yr": {
+  "decimals": 6,
+  "match": "^(?:btexTonsYear)$"
+ },
+ "stages": {
+  "decimals": 6,
+  "match": "^(?:stagesNeeded)$"
+ }
+}
