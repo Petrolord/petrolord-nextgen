@@ -859,3 +859,147 @@ no row flips in it, but a lower outlet pressure would flip one. Left
 unchanged because this wave was scoped to the multiphase binding point;
 it needs its own authorisation, and the gas path is not marched, so the
 fix there is to evaluate at `p2` rather than at the mean.
+
+---
+
+# FC2-0c SUITE REPAIR, 2026-09-16: the gas branch's mean-pressure check
+
+Authorised after FC2-0b recorded it. Suite layer only, engine checked
+first and again not the home of the defect.
+
+### Where it lived
+
+`lineHydraulics.js` defines **no** erosional function at all (its header
+points at chokePerformance), and `chokePerformance.js` carries only the
+point formula, `erosionalCheck` (velocity and density as arguments) and
+`erosionalRateBpd`. Nothing in either engine computes a gas velocity
+profile or chooses a station. The mean-pressure choice was
+`sizeSweep`'s gas branch in this layer. No engine file touched.
+
+### FIXED. The check runs where the limit binds.
+
+For a gas line the velocity goes as `z / p` and the density as `p / z`,
+so the severity `v * sqrt(rho)` goes as **`sqrt(z / p)`**: it rises as
+the pressure falls. Confirmed numerically rather than assumed, by
+dividing severity by `sqrt(z/p)` along a line and finding it constant to
+the digit (858.3 at both ends of 8 in sch 40, 940.3 for 8 in sch 80).
+
+The mean is not a station the check should ever have used. Measured
+understatement of the ratio: **1.8 percent on 5 mi, 19.3 percent on
+30 mi (8 in sch 40), 39.0 percent on 30 mi (8 in sch 80)**.
+
+`gasErosionalAlongLine` walks the line in 12 stations by applying the
+published transmission equation to each sub-length, which is what
+`gasLineTraverse` already does, so the layer gains no physics. The
+binding station is SEARCHED FOR, not assumed to be the outlet.
+
+**In every gas line that could be constructed here it WAS the outlet**,
+including a 4000 ft descent, because friction keeps the pressure falling
+where the multiphase descending case had it binding at the inlet. The
+search is kept anyway: it costs nothing, it is the same rule as FC2-0b,
+and a non-monotonic profile is then handled by code rather than by an
+assumption that happens to hold today.
+
+Cost about 25 ms for a 12-bore sweep. The answer does not depend on the
+station count: the binding severity is **49.848662 at 6 stations and at
+96**, identical to six digits, because the binding point is a feature of
+the line and not of the discretisation.
+
+### Blast radius, measured before the change
+
+A 9 x 6 x 6 grid of rate (10 to 80 MMscfd), length (5 to 60 mi) and
+inlet pressure (250 to 1200 psia), crossed with all 12 bores, at C = 100
+and C = 125:
+
+**13 (bore, duty, C) combinations flip from pass to fail: 9 at C = 100,
+4 at C = 125.** Sharpest cases:
+
+| duty | bore | C | mean ratio | binding ratio | velocity |
+| --- | --- | --- | --- | --- | --- |
+| 30 MMscfd, 10 mi, 900 psia | 6 in sch 40 | 100 | 0.620 PASS | **1.199 FAIL** | 45.0 -> 168.0 ft/s |
+| 25 MMscfd, 20 mi, 1200 psia | 6 in sch 80 | 100 | 0.524 PASS | **2.401 FAIL** | 34.8 -> 729.6 ft/s |
+| 40 MMscfd, 10 mi, 1200 psia | 6 in sch 40 | 100 | 0.705 PASS | **1.379 FAIL** | 43.6 -> 166.6 ft/s |
+| 80 MMscfd, 20 mi, 900 psia | 10 in sch 40 | 100 | 0.591 PASS | **1.008 FAIL** | 41.7 -> 121.7 ft/s |
+| 60 MMscfd, 5 mi, 700 psia | 8 in sch 80 | 125 | 0.700 PASS | **1.177 FAIL** | 70.7 -> 199.8 ft/s |
+
+**Five of the six flipping duties move the recommended size**, e.g.
+30 MMscfd/10 mi/900 psia moves from 6 in sch 40 to 8 in sch 80. This is
+a wider blast radius than FC2-0b's single row, which is consistent with
+the mean being a worse estimate of the worst point than the inlet is on
+a short multiphase line.
+
+Six earlier sweeps chosen without knowing where flips lived produced
+zero flips at either C factor, so the change is narrow in ordinary duty
+and bites on high-rate, long or low-outlet-pressure lines.
+
+### CAVEAT, engine-side, NOT fixed
+
+The vendored `gasOutletPressure` still brackets at `[14.7, p1Psia]`
+(section A, D1) at Suite main `dabfb44aa`, so engines #196 has not
+reached the vendored copy. A line whose outlet would sit ABOVE its inlet
+is clamped to the inlet, and the station walk inherits that clamp where
+it fires. Every descending case measured here still falls, so none of
+the numbers above is affected, but a steeply descending gas line is
+still wrong for that separate reason.
+
+### RECORDED, NOT CHANGED
+
+**The gas-mode result card carries no RP 14E verdict at all.** It shows
+outlet pressure, drop, gradient and z; the only erosional verdict for a
+gas line is in the sweep table. Adding one is new function rather than a
+repair, so it is recorded here and in the status doc's open list.
+
+---
+
+# FC2-0d, 2026-09-16: the gas card states its verdict
+
+The item FC2-0c recorded, now closed. The gas result card carried no
+RP 14E verdict at all while the gas sweep had been judging every row at
+its binding station since FC2-0c, so a gas line that fails the check
+looked identical to one that passes. A verdict computed and not shown is
+close to a verdict not held.
+
+The card now carries what the multiphase card carries, from the same
+`gasErosionalAlongLine` check, for the SELECTED bore: the ratio, the
+velocity against the limit at the binding station, the distance of that
+station, the mean-pressure velocity the old check reported, and the
+number of stations walked, so the reader can see it is a marched result
+rather than a point check. Both cards lead with the ratio now, so the
+two modes read the same way.
+
+Suite layer and its two components only. No engine file touched.
+
+### The incoming re-vendor does not threaten any of this
+
+The Suite's vendored engines sit at `709172f` while engines main is at
+`da9693b6` (#195, #196), and a separate agent owns re-vendoring them.
+Checked rather than assumed, by running `gasOutletPressure` from both
+revisions over every input the FC2-0c tests use:
+
+| case | vendored 709172f | engines da9693b6 |
+| --- | --- | --- |
+| flip case, 6 in sch 40, 10 mi | p2 149.900758 | p2 149.900758 |
+| its 1/12 sub-segment | 862.770259 | 862.770259 |
+| 8 in sch 80 duty | 760.053047 | 760.053047 |
+| short boundary, 2 mi | 897.748610 | 897.748610 |
+| existing traverse gates, 12 in | 894.877122 | 894.877122 |
+| 2 in overload, 4 in overload | both refuse | both refuse, same message |
+| ascending +1500, descending -1500 | 473.545406 / 553.749538 | identical |
+| **D1 case, descending -3000** | **1000 (clamped)** | **1010** |
+
+Every number the FC2-0c tests rest on is bit-identical. The only case
+that moves is the one D1 was about, a descent steep enough that the
+outlet sits ABOVE the inlet, and no test in this series uses one. The
+new bracket is `hi = p1 / sqrt(es)`, which for a flat or ascending line
+is at or below `p1`, so the root the bisection finds is unchanged.
+
+Two behaviour changes in that range are worth knowing even though they
+break nothing here: `liquidLineDrop` now refuses a negative `sumK`, a
+negative roughness and an elevation change longer than the line, and the
+transmission forms now refuse an efficiency above 1. The studio's own
+defaults and every gate in this series sit inside all of those.
+
+
+HELD ITEMS. Five things were found and deliberately not fixed, four of
+them behind a coordinator hold on Sections 1 to 6. They are recorded with
+their reasons and their repairs in HELD-PENDING.md beside this file.
