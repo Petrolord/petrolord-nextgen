@@ -1435,6 +1435,13 @@
       "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
     },
     {
+      "path": "engines/facilities/gasProcessing.js",
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "vendoredSha": "f11acae5601d194e2eca63bc8173ad352653d4a4",
+      "reason": "Vendored at engines 82ec6d4, the FC4-0 repair, which is AHEAD of the pinned canonical 709172f. It corrects a Joule-Thomson coefficient that was wrong by a factor of 1/z on four screens of the live Suite studio, narrows the water fit's band to its own docstring, makes the lean glycol strength drive the loop water balance, and puts kremserFractionRemoved inside the module's own error contract. FC4's digest and capstone are built from THIS revision, so it moves only with a recut of that course."
+    },
+    {
       "path": "engines/facilities/separatorSizing.js",
       "kind": "differing",
       "group": "5-unaudited-difference",
@@ -1608,6 +1615,13 @@
       "group": "6-test-layer-drift",
       "vendoredSha": "1c3fdb897f50436f94fe37270c8f6e3f77412aeb",
       "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
+    },
+    {
+      "path": "__tests__/facilities.gasprocessing.test.js",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "e571c174b6619c09d2ccf8f2662e476178a96eed",
+      "reason": "Vendored at engines 82ec6d4, the FC4-0 gas-conditioning repair, which is AHEAD of the pinned canonical. The FC4 Gas Processing course grades against this revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails."
     },
     {
       "path": "__tests__/facilities.separator.test.js",
@@ -1790,6 +1804,13 @@
       "group": "6-test-layer-drift",
       "vendoredSha": "531ebbddb8c22d0324e92619ba0954feae3bf9d7",
       "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+    },
+    {
+      "path": "test-data/facilities/goldens/gasprocessing_cases.json",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "af9b1a2d8a2e7814120d5ad32d23d6c8d6758f69",
+      "reason": "Vendored at engines 82ec6d4, the FC4-0 gas-conditioning repair, which is AHEAD of the pinned canonical. The FC4 Gas Processing course grades against this revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails."
     },
     {
       "path": "test-data/facilities/goldens/separator_cases.json",
@@ -1998,8 +2019,15 @@
       "path": "tools/validation/facilities/FINDINGS-separation.md",
       "kind": "differing",
       "group": "6-test-layer-drift",
-      "vendoredSha": "4bce102e031aea3148f37cab9431dbda5b51c564",
+      "vendoredSha": "51f2594a1b48f5dc8268f38be48979b0b3dd812b",
       "reason": "Validation tooling vendored at a different revision from canonical."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_gasprocessing.py",
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "vendoredSha": "be8be21aefd2d1124c882364fe28a2d6ae6e6d49",
+      "reason": "Vendored at engines 82ec6d4, the FC4-0 gas-conditioning repair, which is AHEAD of the pinned canonical. The FC4 Gas Processing course grades against this revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails."
     },
     {
       "path": "tools/validation/facilities/oracle_separator.py",
@@ -2042,6 +2070,13 @@
       "group": "7-vendor-readme",
       "vendoredSha": "aa51c0243e29f73ab6c47f70016dd248d6ba4fe6",
       "reason": "The vendored README carries NextGen's own vendoring note rather than the canonical package README. Cosmetic and deliberate."
+    },
+    {
+      "path": "tools/validation/facilities/FINDINGS-gasprocessing.md",
+      "kind": "extra",
+      "group": "8-repair-record",
+      "vendoredSha": "711b8935c93f2cbf64a163e230c12a07bd8bd93e",
+      "reason": "The FC4-0 repair's own findings record, which does not exist at the pinned canonical because the repair is ahead of it. Vendored for the same reason FINDINGS-separation.md is. IT IS NOT TEACHING TRUTH: it describes the engine BEFORE the repair, and FC4's RECON.md says so in as many words."
     },
     {
       "path": "__tests__/sim.ekene.test.js",
