@@ -24,9 +24,9 @@ Apply the floor rule to the Scenario Builder's 1000 ISIALA NPVs and set it besid
 
 | case | averaging rule | floor rule | difference (derived) |
 | --- | --- | --- | --- |
-| Low case P90 (`p10`) | 48.7439 | 48.8335 | -0.0896 |
-| Best case P50 (`p50`) | 81.1835 | 81.1952 | -0.0116 |
-| High case P10 (`p90`) | 109.8980 | 109.9036 | -0.0056 |
+| Low case P90 (`p10`) | 15.6063 | 15.6619 | -0.0556 |
+| Best case P50 (`p50`) | 78.5315 | 78.5836 | -0.0521 |
+| High case P10 (`p90`) | 152.0653 | 152.1794 | -0.1142 |
 
 Every difference is negative, and that is no accident. When n x q is whole, the averaging rule blends the value at that index with the one just before it. The floor rule takes the value at the index, which is the upper of the two. On this sample the floor rule cannot sit below the averaging rule.
 

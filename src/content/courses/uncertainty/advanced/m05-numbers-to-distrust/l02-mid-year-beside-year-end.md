@@ -25,7 +25,7 @@ Moving from year end to mid-year shortens every exponent by exactly one half, so
 
 ## What the convention does not move
 
-Undiscounted numbers never see it. ISIALA's payback of 3.2746 years and its peak exposure of -44.6035 are the same under both. The IRR survives as well, because multiplying every term by one factor leaves the rate that makes the sum zero where it was: `irr_known_21pct` solves to 21.0000 percent, and both roots of `irr_two_roots`, 10 and 20 percent, are the year-end roots. At a zero rate the factor is one and the conventions agree: the published 10 year base case discounted at 0 percent has an NPV of 908.4827, exactly its final cumulative of 908.4827.
+Undiscounted numbers never see it. ISIALA's payback of 3.2746 years and its peak exposure of -44.6035 are the same under both. The IRR survives as well, because multiplying every term by one factor leaves the rate that makes the sum zero where it was: `irr_known_21pct` solves to 21.0000 percent, and `irr_two_roots` reports no single IRR while listing both of its roots, 10.0000 and 20.0000 percent, which are the year-end roots. At a zero rate the factor is one and the conventions agree: the published 10 year base case discounted at 0 percent has an NPV of 908.4827, exactly its final cumulative of 908.4827.
 
 ## What the engine refuses
 

@@ -1,0 +1,36 @@
+{
+ "course": "EC2 Fiscal Regime Design (app_slug fiscal), the URUAN capstone",
+ "engines": "main 709172f (PR #190, decisions EC2-3 and EC2-6)",
+ "method": "Every OLD value below was read from a dump of the LIVE production rows, not retyped. The course's own field computation (/root/ec-wip-fiscal/ec2_fields.mjs) was run twice, against the engine vendored in this repo and against engines main 709172f. All 18 live values reproduced character for character on the vendored engine (36 of 36 across both courses, 0 mismatches) before any value was declared moved.",
+ "collision": {
+  "key": "cmp_psc_capex_loss_seven_point_musd",
+  "published": 140.9798310836312,
+  "on_repaired_engine": 169.10768926905132,
+  "neighbour_key": "cmp_psc_capex_loss_eight_point_musd",
+  "neighbour_value": 169.10768926905132,
+  "why": "With the sweep repaired to eight points reaching 1.5, the loss across the sweep IS the loss to 1.5, so the graded pair stops discriminating. The value is not moved; the field is retired and replaced."
+ },
+ "swap": {
+  "array_position": 4,
+  "removed": "cmp_psc_capex_loss_seven_point_musd",
+  "added": "cmp_psc_capex_loss_last_tenth_musd",
+  "expected": 28.127858185420223,
+  "derivation": "swept point at 1.4 (-125.86586806663306) minus swept point at 1.5 (-153.99372625205328)",
+  "tol": 0.001,
+  "unit": "million USD",
+  "label": "Capex loss over the last tenth of the sweep, 1.4 to 1.5",
+  "digest_leak_check": "0 literals in /root/ec-wip-fiscal/digest.txt within 10 tolerances of 28.127858185420223"
+ },
+ "unchanged_count": 17,
+ "ec2_6_note": "EC2-6 (the RRT capital uplift as a one-time pool) moves no graded field: both URUAN regimes set an RRT of 0.",
+ "prompt": {
+  "tier": "advanced",
+  "published_md5": "78e2c54a19db1503432fd43888d8d192",
+  "recut_md5": "d3c59d3cf5a65713173c9514c348a8b4",
+  "why": "Field 4's definition, field 5's ('the same loss' is no longer the same loss) and the trap that told the learner the loop never reaches its labelled endpoint."
+ },
+ "prompts_unchanged": {
+  "beginner": "4f3ed4f51fbf1b10e8cfd5a779409978",
+  "intermediate": "5be2b3a132aec8daf747058cda0298e3"
+ }
+}

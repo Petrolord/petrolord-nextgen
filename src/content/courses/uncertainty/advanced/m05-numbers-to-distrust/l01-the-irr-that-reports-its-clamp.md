@@ -1,45 +1,46 @@
-# The IRR that reports its clamp
+# The IRR that says why it is missing
 
-The screening engine solves IRR by Newton iteration from 10 percent and clamps the guess at 1000 percent. When the iteration runs to the clamp, the engine as published reports the clamp as the rate (finding S1), including on a project that loses money.
+The screening engine returns either a rate it solved, with `irrStatus` ok, or null with a word for why there is no answer. The five statuses are ok, no-sign-change, no-root, above-clamp and multiple-roots.
 
 {{panel:ec-risk-explorer}}
 
-## Two fields, one rate
+## Three fields, three readings
 
-| field | npv | irr percent | payback | maxExposure |
-| --- | --- | --- | --- | --- |
-| NTEJE | -123.9923 | 1000.0000 | 20.0000 | -169.0209 |
-| OKPOMA | 167.4389 | 1000.0000 | 0.0000 | -2.2287 |
-| ISIALA | 81.0464 | 53.7148 | 3.2746 | -44.6035 |
+| field | npv | irr percent | irrStatus | payback | paybackStatus |
+| --- | --- | --- | --- | --- | --- |
+| NTEJE | -123.9923 | null | no-root | null | not-recovered |
+| OKPOMA | 167.4389 | -54.7919 | ok | 0.0000 | recrossed |
+| ISIALA | 81.0464 | 53.7148 | ok | 3.2746 | ok |
 
-NTEJE loses 123.9923 million USD at 12 percent, its cumulative ends at -154.5906, it never pays back, and its payback reports the project life of 20. OKPOMA is worth 167.4389. Both report 1000.0000 percent. The same rate stands on a project that destroys value and on one that creates it, and it makes the NPV of neither zero.
+NTEJE loses 123.9923 million USD at 12 percent and its cumulative ends at -154.5906. No rate in the engine's band zeroes its NPV, so the IRR is null and the status names the reason: no-root. It never pays back either, and the payback is null with not-recovered rather than a number that looks like a year.
 
-## Why the guard lets it through
+## A solved root can be negative
 
-The engine looks for an IRR only when the cash flow has at least one negative year and one positive year, and otherwise reports 0. OKPOMA earns 9.2498 in 2027, loses 11.4786 in 2028 and earns 57.8806 in 2029; NTEJE's cash flow changes sign too. Both pass the guard, Newton wanders to the clamp, and nothing checks that the last guess makes NPV zero. The guard asks whether the years differ in sign, never whether the NPV changes sign across the rates Newton visits, and for NTEJE no rate makes the NPV zero at all.
+OKPOMA's IRR is -54.7919 percent with irrStatus ok, which is a rate the engine found rather than a failure it hid. Its cash flow earns 9.2498 million USD in 2027, loses 11.4786 in 2028 and earns 57.8806 in 2029, and a project worth 167.4389 at 12 percent can still have its root below zero when the flow starts positive. A status of ok says a rate zeroes the NPV. It never says the rate is a sensible screening number.
 
-## The published clamp cases
+## What the statuses replaced
 
-| case | engine irr | what the golden records |
+History, before the 2026-09-15 repair: NTEJE reported an IRR of 1000.0000 percent, the Newton clamp (finding S1), and a payback of 20.0000, which was the project life. OKPOMA reported the same 1000.0000 percent. One rate stood on a project that destroyed value and on one that created it, and it zeroed the NPV of neither. Anyone ranking projects by IRR put NTEJE at the top of the list.
+
+## The published cases now
+
+| case | irr | status |
 | --- | --- | --- |
-| `irr_beyond_clamp`, ncf -1 then 100 | 1000.0000 | a root at 9900 |
-| `tr_hand_2yr_depr2`, ncf -2.5 then 47.5 | 1000.0000 | a root at 1800 |
-| `fdp_never_pays_back` | 1000.0000 | npv -92616.5020, never pays back |
+| `irr_beyond_clamp`, ncf -1 then 100 | null | above-clamp |
+| `irr_two_roots`, ncf -100, 230, -132 | null | multiple-roots, irrRoots 10.0000 and 20.0000 percent |
+| `irr_no_sign_change`, all-positive flow | null | no-sign-change |
+| `fdp_never_pays_back` | -36.6747 | ok |
 
-The first two are the gentle form: a real root exists past the clamp. The third is the serious form, a project losing 92616.5020 million USD that reports the same rate, and NTEJE is that form on a teaching field.
-
-## Round numbers are return codes
-
-Three IRRs from this engine are what the solver hands back when it did not solve. 1000.0000 is the clamp. 10.0000 is the starting guess, returned when the derivative guard fires on tiny cash flows (finding S2, `irr_tiny_cash_flows_derivative_guard`, whose golden root is 21). 0.0000 is the answer with no sign change, which ISIALA's High scenario reports on an NPV of 237.8860 because none of its years is negative.
+Each null names a different thing. above-clamp says a root exists beyond 1000 percent, and that golden records it at 9900. multiple-roots says several rates zero the NPV, lists every one, and reports no single IRR. no-sign-change says the flow never turns. The fourth row is the other half of the lesson: a solved rate of -36.6747 percent on a project whose NPV is -92616.5020 and which never pays back.
 
 ## The payback on the same field
 
-OKPOMA carries a second defect, the payback re-crossing (finding EC3-1). Its cumulative is 9.2498 after 2027, so payback reads 0.0000; then the second capex half takes the cumulative to -2.2287 in 2028, and the payback is never revisited. A project under water in its second year reports that it paid back at once.
+OKPOMA's cumulative is 9.2498 after 2027, so the payback, which is the first crossing, is 0.0000. The second capex half takes the cumulative to -2.2287 in 2028, so the status is recrossed and `paybackLast` records where it turns non-negative for good: 2 + 2.2287 / 57.8806 = 2.0385 years. Both crossings are reported, and the status says which number is which.
 
 ## The mistake
 
-The careful mistake is a magnitude check. A reader who rejects 1000.0000 as absurd has caught it; a reader who ranks projects by IRR has put NTEJE at the top, and an IRR screen at any hurdle passes it. Read the NPV, the final cumulative and the sign of every year before the IRR, and treat 1000.0000, 10.0000 and 0.0000 as flags.
+The careful mistake is reading a null as a zero. A null IRR is the engine declining to name a rate, and the status word says whether a root sits past the clamp, sits in several places, or does not exist. Read the status before the number, and read a payback of 0.0000 with its status too: on OKPOMA it means recrossed, and 2.0385 is the year a reader wants.
 
 ## Exercise
 
-For NTEJE and OKPOMA, state the NPV, IRR and payback, and say for each whether the IRR is a rate its cash flow earns. Then explain from OKPOMA's first two cumulative values why its payback reads 0.0000.
+For NTEJE and OKPOMA, give the NPV, the IRR with its status and the payback with its status, and say for each whether a rate its cash flow earns exists. Then explain what paybackLast 2.0385 records on OKPOMA and why the payback still reads 0.0000.

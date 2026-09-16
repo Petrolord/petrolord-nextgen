@@ -19,12 +19,12 @@ In 2027 revenue less royalty, capex and opex is negative, so tax is 0.0000 and t
 
 ## Step three: value, one flag at a time
 
-Discount by the mid-year factor: 2029's 35.9654 over 1.327532 is 27.0919, and the twenty rows sum to 81.0464. Read payback from the cumulative column, 3 + 8.6381 / 31.4546 = 3.2746. Check the net cash flow changes sign before trusting the IRR of 53.7148 percent. Read peak exposure with its sign, -44.6035.
+Discount by the mid-year factor: 2029's 35.9654 over 1.327532 is 27.0919, and the twenty rows sum to 81.0464. Read payback from the cumulative column, 3 + 8.6381 / 31.4546 = 3.2746. Read irrStatus ok beside the IRR of 53.7148 percent. Read peak exposure with its sign, -44.6035.
 
-Then check each against its flag. A payback equal to the life, 20.0000, means never. A payback of 0.0000 means the first year was non-negative and must be checked for a later dip, as OKPOMA's -2.2287 in 2028 shows. An IRR of 0, 10 or 1000 is a fixed return until the ledger proves otherwise: NTEJE reports 1000.0000 on an NPV of -123.9923.
+Then read each beside its status. A payback of null with paybackStatus not-recovered means the cumulative never turned non-negative. A payback of 0.0000 says no-investment when no year was under water and recrossed when a later year was, as OKPOMA's -2.2287 in 2028 shows, where paybackLast 2.0385 is the real recovery. An IRR of null names its reason: NTEJE reports irrStatus no-root on an NPV of -123.9923.
 ## Step four: the range, with its limits
 
-Name what each sensitivity row scales: Production matches Oil Price, -17.3893 and 175.8952, only because variable opex does not follow the volume. Read the scenarios' NPVs first, -72.1531, 81.0464 and 237.8860, and treat Low's 20.0000 payback and High's 0.0000 IRR as flags. Never write a P-label on a scenario.
+Name what each sensitivity row scales: Production is narrower than Oil Price, 4.1176 against -17.3893 at 0.7, because variable opex follows the volume. Read the scenarios' NPVs first, -57.8151, 81.0464 and 226.0140, and read Low's payback and High's IRR with the status printed beside them. Never write a P-label on a scenario.
 
 ## Step five: three closing checks
 
@@ -32,7 +32,7 @@ The totals must close: 864.1699 less royalty 129.6255, capex 180.0000, opex 210.
 
 ## The mistake
 
-The careful mistake is to read the metrics straight off the summary card. Every number on it is true to the engine, and payback and IRR can be fixed returns.
+The careful mistake is to read the metrics straight off the summary card. Every number on it is true to the engine, and payback and IRR can be a status.
 
 ## What the method refuses
 
