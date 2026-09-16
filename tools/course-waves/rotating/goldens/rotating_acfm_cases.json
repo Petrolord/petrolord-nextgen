@@ -1,0 +1,58 @@
+[
+ {
+  "gasSg": 0.65,
+  "pPsia": 200.0,
+  "qMMscfd": 20.0,
+  "tF": 100.0,
+  "zIsAnInput": true
+ },
+ {
+  "gasSg": 0.65,
+  "pPsia": 50.0,
+  "qMMscfd": 20.0,
+  "tF": 100.0,
+  "zIsAnInput": true
+ },
+ {
+  "gasSg": 0.65,
+  "pPsia": 800.0,
+  "qMMscfd": 20.0,
+  "tF": 100.0,
+  "zIsAnInput": true
+ },
+ {
+  "gasSg": 0.65,
+  "pPsia": 100.0,
+  "qMMscfd": 400.0,
+  "tF": 100.0,
+  "zIsAnInput": true
+ },
+ {
+  "gasSg": 0.65,
+  "pPsia": 400.0,
+  "qMMscfd": 0.5,
+  "tF": 100.0,
+  "zIsAnInput": true
+ },
+ {
+  "gasSg": 0.65,
+  "pPsia": 80.0,
+  "qMMscfd": 15.0,
+  "tF": 100.0,
+  "zIsAnInput": true
+ },
+ {
+  "gasSg": 0.6,
+  "pPsia": 14.7,
+  "qMMscfd": 100.0,
+  "tF": 60.0,
+  "zIsAnInput": true
+ },
+ {
+  "gasSg": 0.72,
+  "pPsia": 350.0,
+  "qMMscfd": 75.0,
+  "tF": 140.0,
+  "zIsAnInput": true
+ }
+]

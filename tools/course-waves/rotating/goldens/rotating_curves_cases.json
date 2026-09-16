@@ -1,0 +1,172 @@
+[
+ {
+  "c0": 520.804255319149,
+  "c1": -35.024468085106385,
+  "c2": -307.00531914893617,
+  "orthogonalityResidualExactlyZero": true,
+  "points": [
+   {
+    "headFt": 520.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 470.0,
+    "qGpm": 800.0
+   },
+   {
+    "headFt": 330.0,
+    "qGpm": 1600.0
+   },
+   {
+    "headFt": 180.0,
+    "qGpm": 2200.0
+   }
+  ],
+  "rSquared": 0.999754150605518,
+  "scale": 2200.0,
+  "shutoffHeadFt": 520.804255319149
+ },
+ {
+  "c0": 180.06257760119195,
+  "c1": 1.1403029550533896,
+  "c2": -99.28979389123417,
+  "orthogonalityResidualExactlyZero": true,
+  "points": [
+   {
+    "headFt": 180.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 168.0,
+    "qGpm": 500.0
+   },
+   {
+    "headFt": 130.0,
+    "qGpm": 1000.0
+   },
+   {
+    "headFt": 82.0,
+    "qGpm": 1400.0
+   }
+  ],
+  "rSquared": 0.999983354491247,
+  "scale": 1400.0,
+  "shutoffHeadFt": 180.06257760119195
+ },
+ {
+  "c0": 639.1428571428571,
+  "c1": 14.857142857142858,
+  "c2": -502.85714285714283,
+  "orthogonalityResidualExactlyZero": true,
+  "points": [
+   {
+    "headFt": 640.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 610.0,
+    "qGpm": 600.0
+   },
+   {
+    "headFt": 520.0,
+    "qGpm": 1200.0
+   },
+   {
+    "headFt": 370.0,
+    "qGpm": 1800.0
+   },
+   {
+    "headFt": 150.0,
+    "qGpm": 2400.0
+   }
+  ],
+  "rSquared": 0.9999297481471073,
+  "scale": 2400.0,
+  "shutoffHeadFt": 639.1428571428571
+ },
+ {
+  "c0": 94.95,
+  "c1": -0.15,
+  "c2": -42.75,
+  "orthogonalityResidualExactlyZero": true,
+  "points": [
+   {
+    "headFt": 95.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 90.0,
+    "qGpm": 250.0
+   },
+   {
+    "headFt": 76.0,
+    "qGpm": 500.0
+   },
+   {
+    "headFt": 52.0,
+    "qGpm": 750.0
+   }
+  ],
+  "rSquared": 0.9999550662772411,
+  "scale": 750.0,
+  "shutoffHeadFt": 94.95
+ },
+ {
+  "c0": 411.4117881980307,
+  "c1": 6.072691592646147,
+  "c2": -227.39299731460443,
+  "orthogonalityResidualExactlyZero": true,
+  "points": [
+   {
+    "headFt": 410.0,
+    "qGpm": 200.0
+   },
+   {
+    "headFt": 372.0,
+    "qGpm": 900.0
+   },
+   {
+    "headFt": 300.0,
+    "qGpm": 1500.0
+   },
+   {
+    "headFt": 190.0,
+    "qGpm": 2100.0
+   }
+  ],
+  "rSquared": 0.9999947744915092,
+  "scale": 2100.0,
+  "shutoffHeadFt": 411.4117881980307
+ },
+ {
+  "c0": 1199.142857142857,
+  "c1": 34.857142857142854,
+  "c2": -902.8571428571429,
+  "orthogonalityResidualExactlyZero": true,
+  "points": [
+   {
+    "headFt": 1200.0,
+    "qGpm": 0.0
+   },
+   {
+    "headFt": 1150.0,
+    "qGpm": 1000.0
+   },
+   {
+    "headFt": 990.0,
+    "qGpm": 2000.0
+   },
+   {
+    "headFt": 720.0,
+    "qGpm": 3000.0
+   },
+   {
+    "headFt": 330.0,
+    "qGpm": 4000.0
+   }
+  ],
+  "rSquared": 0.9999778292631556,
+  "scale": 4000.0,
+  "shutoffHeadFt": 1199.142857142857
+ }
+]

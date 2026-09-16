@@ -1,0 +1,56 @@
+[
+ {
+  "brakeHp": 100.0,
+  "headFt": 300.0,
+  "outBrakeHp": 51.20000000000001,
+  "outHeadFt": 192.0,
+  "outQGpm": 800.0,
+  "qGpm": 1000.0,
+  "speedRatio": 0.8
+ },
+ {
+  "brakeHp": 100.0,
+  "headFt": 300.0,
+  "outBrakeHp": 100.0,
+  "outHeadFt": 300.0,
+  "outQGpm": 1000.0,
+  "qGpm": 1000.0,
+  "speedRatio": 1.0
+ },
+ {
+  "brakeHp": 100.0,
+  "headFt": 300.0,
+  "outBrakeHp": 172.79999999999998,
+  "outHeadFt": 432.0,
+  "outQGpm": 1200.0,
+  "qGpm": 1000.0,
+  "speedRatio": 1.2
+ },
+ {
+  "brakeHp": 123.9,
+  "headFt": 352.371,
+  "outBrakeHp": 34.0260375,
+  "outHeadFt": 148.8767475,
+  "outQGpm": 980.7629000000001,
+  "qGpm": 1508.866,
+  "speedRatio": 0.65
+ },
+ {
+  "brakeHp": 60.0,
+  "headFt": 180.0,
+  "outBrakeHp": 7.5,
+  "outHeadFt": 45.0,
+  "outQGpm": 1100.0,
+  "qGpm": 2200.0,
+  "speedRatio": 0.5
+ },
+ {
+  "brakeHp": 12.0,
+  "headFt": 95.0,
+  "outBrakeHp": 18.250499999999995,
+  "outHeadFt": 125.63749999999997,
+  "outQGpm": 459.99999999999994,
+  "qGpm": 400.0,
+  "speedRatio": 1.15
+ }
+]

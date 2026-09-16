@@ -1,0 +1,105 @@
+{
+ "slug": "rotating",
+ "prefix": "fc3",
+ "name": "Rotating Equipment",
+ "pathOrder": 42,
+ "pathOrderNote": "FC1 separation took 39 and FC2 linesizing took 41, and NOTHING took 40. No migration claims it and neither FC2 artefact gives a reason. FC3 takes 42, the next free slot, so it cannot collide with whatever 40 turns out to be. THE GAP AT 40 IS FLAGGED FOR THE LEAD and is deliberately not closed here, because closing it would reorder the Facilities path and that is a curriculum decision.",
+ "module": "facilities",
+ "prerequisite": null,
+ "repo": "/root/wt-fc3-nextgen",
+ "branch": "feat/fc3-rotating-course",
+ "route": "/dashboard/apps/rotating",
+ "goldens": [
+  "facilities/goldens/pumps_cases.json",
+  "facilities/goldens/compression_cases.json"
+ ],
+ "engines": [
+  "engines/facilities/pumps.js",
+  "engines/facilities/compression.js",
+  "engines/production/gasProperties.js"
+ ],
+ "enginesVendoredAt": "709172f, pumps.js and compression.js sha-identical with engines main, with their two goldens, their two oracles and their two jest gates (36 tests, green on the vendored copy)",
+ "apps": [
+  "Pump Station Designer (Facilities F10), src/pages/apps/PumpStationDesigner.jsx, route apps/facilities/pump-station-designer",
+  "Compressor Station Designer (Facilities F9), src/pages/apps/CompressorStationDesigner.jsx, route apps/facilities/compressor-station-designer"
+ ],
+ "constants": {
+  "2.31": "feet of head per psi at specific gravity 1, measured out of psiToHeadFt",
+  "62.33766233766234": "the water density BOTH pump packagings imply, lb per ft3, derived from 144 over 2.31 and again from 33000 over 3960 times 1728 over 231. The two agree exactly and that agreement is computed, not claimed",
+  "3960": "the field horsepower packaging, gpm times ft times SG over 3960",
+  "33000": "ft lbf per minute per horsepower, the definition of a horsepower",
+  "0.7457": "kilowatts per horsepower as the engine rounds it; derived 0.7456998715822702",
+  "0.94": "the default motor efficiency",
+  "144": "square inches per square foot",
+  "459.67": "the Rankine offset",
+  "1545.349": "the universal gas constant in ft lbf per lbmol degR as compression.js carries it; gasProperties.js carries the same constant as 10.7316 psia ft3, which is 1545.3504",
+  "379.49": "standard cubic feet per lbmol, the 14.696 psia and 519.67 degR base",
+  "28.9625": "the molecular weight of dry air",
+  "2544.43": "Btu per horsepower hour as the engine rounds it; derived 2544.433577644024",
+  "14.7": "the standard pressure actualInletCfm uses, psia",
+  "520": "the standard temperature actualInletCfm uses, degR",
+  "1440": "minutes per day",
+  "24": "hours per day",
+  "100": "percent"
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3"
+ ],
+ "plan": {
+  "thesis": "A rotating machine has no operating point until it is connected to something, and every number that follows from it, the power, the suction margin, the stage count, the discharge temperature, is a consequence of where that point landed and of which limit was allowed to put it there. The discipline is knowing which limit set your answer, and whether the machine will still be there in a year.",
+  "tiers": {
+   "beginner": "Associate. THE PUMP AND THE SYSTEM IT WORKS INTO. Why: this is the only place in the Facilities module where a whole answer is assembled from two objects that are each incomplete on their own. A pump curve says what the machine makes and a system curve says what the piping demands, and neither has an operating point; the duty is SOLVED as their intersection, and the power, the conversion to pressure and the judgement of where the duty landed all hang off that one solved number. It is also the tier where the two field packagings, 2.31 and 3960, turn out to be one constant. The tier ends before the suction side, which is where selections actually fail.",
+   "intermediate": "Professional. THE SUCTION SIDE, THE CHANGES, AND THE SECOND MACHINE. Why: a duty point that works on paper fails in three ways, and this tier is all three. It fails on suction, where NPSH available is built from the real suction side and the margin over required is not the same thing as adequacy. It fails on change, where a speed change follows the affinity laws exactly and a trim does not, and where applying either law to a duty point does not give you a new duty point because the system curve did not move. And it fails on the fluid, because a catalogue curve is a water curve. The tier ends with two pumps in parallel delivering far less than twice one pump, which is the result the engine exists to make visible.",
+   "advanced": "Expert. THE COMPRESSOR, AND WHERE BOTH ENGINES STOP. Why: compression is the same discipline with the fluid no longer incompressible and the machine no longer describable by a curve the user can type in, so every answer comes out of a thermodynamic path instead of an intersection. The polytropic exponent is not the isentropic one; the stage count is the larger of two limits and the engine names which; the train can break the very temperature limit it was staged against. Then the audit: eighteen returns that come back non-finite with no error key, two refusals that name the wrong cause, a validity window one module in this package enforces and this one does not, two values of one gas constant, and a gate that compares a value with itself."
+  },
+  "modulesPerTier": 6,
+  "lessonsPerTier": 26,
+  "questionsPerTier": 132,
+  "questionsPerModuleBank": 15,
+  "examQuestions": 42,
+  "modules": {
+   "beginner": [
+    "m01 What these engines size, and what they refuse (4 lessons). Two machines and two modules, and the scope seam said out loud: there is no surge line, no recycle, no seal or bearing calculation, no machine curve and no wheel selection anywhere in this package, and the Compressor studio's own help guide says so. Every refusal message in both modules, verbatim.",
+    "m02 Two curves, and why neither has an operating point (5). The system curve stated through a friction head at a flow rather than an abstract coefficient; the least-squares quadratic through catalogue points and what its R squared means; the shutoff head; and the warning that fires when a fitted curve does not droop.",
+    "m03 The duty point, solved (5). The intersection; the two refusals that are real answers rather than hidden errors, a pump that cannot start its system and a pair of curves that do not cross below the search limit; and what moves the point.",
+    "m04 Power, head and pressure (4). Hydraulic, brake and motor input power; the two field packagings measured out of the engine; and the single water density they both imply, printed with the difference between them.",
+    "m05 Where the duty landed (5). The four regions either side of best efficiency flow, what each costs in the engine's own words, the boundaries, and why the region is judged per machine and not on the combined flow.",
+    "m06 The Associate reading (3). One pump end to end, the capstone worked, and what the suction side changes."
+   ],
+   "intermediate": [
+    "m01 NPSH available, from the real suction side (5). The pressure head over the vapour pressure, the static height and the suction friction; the flashing warning; and why an available figure on its own decides nothing.",
+    "m02 The margin, and what a check does not check (4). The customary rule, the three severities, why NPSHr is itself measured at a three percent head drop so bare equality is already cavitation, and what the check returns when it is handed an available head it cannot read.",
+    "m03 A speed change and a trim are not the same thing (5). The exact cube law against the trim shortfall; ideal and real side by side; the vendor limit the warning names; and the boundary where the shortfall is supposed to begin.",
+    "m04 An affinity law applied to a duty point is not a new duty point (4). The system curve does not move when the machine changes, so the answer is a new intersection and not a scaled old one. The two answers, and how far apart they get.",
+    "m05 Two pumps, and a catalogue curve that is a water curve (5). Parallel adds flow at equal head and series adds head at equal flow, and on a friction-dominated system the second machine buys far less than double; then the Hydraulic Institute correction, its correlating parameter, its three factors and its two warnings.",
+    "m06 The Professional reading (3)."
+   ],
+   "advanced": [
+    "m01 A stage is not a pump (5). The polytropic exponent against the isentropic one and what using the wrong one costs; the discharge temperature that follows; compressibility evaluated at both ends and averaged; both heads reported so neither is quoted as the other; and why the two power routes must agree.",
+    "m02 The stage count, and the limit that governs (5). The equal-ratio rule, the discharge-temperature limit, the engine naming which one bound, the twelve-stage cap, and the closed form the search is converging on.",
+    "m03 The train, its cooling, and the limit it can break (5). Equal ratios chained, interstage cooling as a real exchanger duty, and the case where the stage count was chosen against the suction temperature while the stages actually run from the cooled temperature, so the train exceeds the very limit it was staged against without a word.",
+    "m04 The machine, the driver and the fuel (4). Actual inlet volume and why it falls with pressure; the four screening branches including the honest 'either'; the driver's fuel taken out of the stream being compressed; and the thermal efficiency that has no upper guard.",
+    "m05 What these engines accept and should not (4). The eighteen returns that come back non-finite with no error key; the refusals that name the wrong cause; the compressibility window that one module in this package enforces by name and this one does not; two values of one gas constant; and a published gate that compares a value with itself.",
+    "m06 The Expert reading (3)."
+   ]
+  },
+  "capstones": {
+   "count": 3,
+   "gradedFieldsEach": 6,
+   "beginner": "A crude transfer pump against a stated station. The catalogue points, the static head, the friction head at its stated flow, the specific gravity and the pump efficiency are all given. Graded: the duty flow, the duty head, the hydraulic power, the brake power, the motor input in kilowatts, and the duty head expressed as a discharge pressure.",
+   "intermediate": "The same station's suction side and a proposed speed change. The suction pressure, the vapour pressure, the static suction height, the suction friction and the speed ratio are all stated. Graded: the pressure-head component of NPSH available, NPSH available, NPSH available again at a stated raised suction pressure, the flow after the speed change, the head after the speed change, and the duty flow of two identical machines in parallel solved as a fresh intersection.",
+   "advanced": "A gas compression train. The rate, suction pressure and temperature, discharge pressure, gas gravity, k, the polytropic and mechanical efficiencies, the maximum ratio per stage, the maximum discharge temperature, the intercooling approach and the driver heat rate and fuel heating value are all stated. Graded: the polytropic exponent ratio, the ratio per stage, the first stage's discharge temperature, the first stage's polytropic head, the first stage's gas horsepower, and the driver fuel in MMscfd.",
+   "heldItemCheck": "NONE of the eighteen reads a held item, and each held item is neutralised by construction rather than by hope. (1) The HYDRAULIC INSTITUTE viscosity correction is an unsourced empirical form, so no capstone runs it and no graded field is a corrected flow, head or efficiency. (2) The TRIM SHORTFALL model has no publication behind it, so the Professional capstone grades a SPEED change, where the affinity laws are exact, and never a trim. (3) The OPERATING REGION bands at 50, 70, 120 and 140 percent are customary and unsourced, so no graded field is a region, a percentage of best efficiency flow or a verdict. (4) The NPSH MARGIN RULE, the larger of 3 ft and 35 percent, is customary and unsourced, so the Professional capstone grades NPSH AVAILABLE and never the required margin, the pass flag or the severity. (5) The comparison of the engine's implied water density to a published water density is held, but the packagings themselves are the engine's own definitions, so a power and a pressure conversion are gradeable. (6) The MACHINE SCREENING thresholds (500 and 20000 acfm, ratios of 4 and 6, 200 and 10000 bhp) are unsourced, so no graded field is a recommendation. (7) The compressor capstone's suction and discharge states are chosen INSIDE the DAK validity window, Tpr between 1.0 and 3.0 and Ppr at or below 30, and the capstone generator must assert that rather than assume it, because this module does not check it. (8) The three discriminating conditions, the maximum ratio per stage, the maximum discharge temperature and the intercooling approach, are STATED in the prompt, so no graded value depends on a default."
+  },
+  "panels": {
+   "lab": "src/components/course/panels/rotating/rotatingLab.js",
+   "ids": [
+    "fc-pump-explorer (Associate): the two curves on one axis with the crossing marked, the duty solved as that crossing, the power chain, and the four regions",
+    "fc-suction-explorer (Professional): NPSH available assembled from its three parts, the margin and its severities, a trim against a speed change with the ideal beside the real, parallel and series re-solved, and the Hydraulic Institute factors",
+    "fc-compressor-explorer (Expert, with the inlet-volume view open to Professional): the two staging limits and which governed, the train stage by stage with its cooling duty, the machine screen, the driver fuel, and the domain limits"
+   ]
+  }
+ }
+}

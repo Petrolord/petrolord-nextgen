@@ -1,0 +1,25 @@
+{
+ "atFlowGpm": 1500.0,
+ "frictionHeadFt": 200.0,
+ "mustBeReportedAsAMismatch": true,
+ "points": [
+  {
+   "headFt": 520.0,
+   "qGpm": 0.0
+  },
+  {
+   "headFt": 470.0,
+   "qGpm": 800.0
+  },
+  {
+   "headFt": 330.0,
+   "qGpm": 1600.0
+  },
+  {
+   "headFt": 180.0,
+   "qGpm": 2200.0
+  }
+ ],
+ "qGpm": 1523.9546578511633,
+ "staticHeadFt": 150.0
+}

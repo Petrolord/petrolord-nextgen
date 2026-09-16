@@ -1,0 +1,530 @@
+[
+ {
+  "expect": "refusal",
+  "fn": "systemCurve",
+  "input": {
+   "atFlowGpm": 0,
+   "frictionHeadFt": 200,
+   "staticHeadFt": 100
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "systemCurve",
+  "input": {
+   "atFlowGpm": 1500,
+   "frictionHeadFt": -50,
+   "staticHeadFt": 100
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "silent",
+  "fn": "systemCurve",
+  "input": {
+   "atFlowGpm": 1500,
+   "frictionHeadFt": 200
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "fitPumpCurve",
+  "input": {
+   "points": [
+    {
+     "headFt": 100,
+     "qGpm": 0
+    },
+    {
+     "headFt": 90,
+     "qGpm": 100
+    }
+   ]
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "fitPumpCurve",
+  "input": {
+   "points": [
+    {
+     "headFt": 50,
+     "qGpm": 100
+    },
+    {
+     "headFt": 60,
+     "qGpm": 100
+    },
+    {
+     "headFt": 70,
+     "qGpm": 100
+    }
+   ]
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "fitPumpCurve",
+  "input": {
+   "points": [
+    {
+     "headFt": -5,
+     "qGpm": 0
+    },
+    {
+     "headFt": 50,
+     "qGpm": 100
+    },
+    {
+     "headFt": 40,
+     "qGpm": 200
+    }
+   ]
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "pumpPower",
+  "input": {
+   "efficiency": 0.78,
+   "headFt": 300,
+   "qGpm": 0,
+   "sg": 0.85
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "pumpPower",
+  "input": {
+   "efficiency": 0.78,
+   "headFt": 300,
+   "qGpm": 1500,
+   "sg": 0
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "pumpPower",
+  "input": {
+   "efficiency": 0,
+   "headFt": 300,
+   "qGpm": 1500,
+   "sg": 0.85
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "pumpPower",
+  "input": {
+   "efficiency": 1.0001,
+   "headFt": 300,
+   "qGpm": 1500,
+   "sg": 0.85
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "silent",
+  "fn": "pumpPower",
+  "input": {
+   "efficiency": 0.78,
+   "headFt": 300,
+   "motorEfficiency": 0,
+   "qGpm": 1500,
+   "sg": 0.85
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "npshAvailable",
+  "input": {
+   "sg": 0,
+   "suctionPressurePsia": 14.7,
+   "vapourPressurePsia": 0.5
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "npshAvailable",
+  "input": {
+   "sg": 0.85,
+   "vapourPressurePsia": 0.5
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "npshAvailable",
+  "input": {
+   "sg": 0.85,
+   "suctionPressurePsia": 14.7
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "npshCheck",
+  "input": {
+   "npshaFt": 20,
+   "npshrFt": 0
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "silent",
+  "fn": "npshCheck",
+  "input": {
+   "npshrFt": 12
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "speedChange",
+  "input": {
+   "brakeHp": 100,
+   "headFt": 300,
+   "qGpm": 1000,
+   "speedRatio": 0
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "speedChange",
+  "input": {
+   "brakeHp": 100,
+   "headFt": 300,
+   "qGpm": 1000,
+   "speedRatio": -1
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "silent",
+  "fn": "speedChange",
+  "input": {
+   "speedRatio": 0.8
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "impellerTrim",
+  "input": {
+   "brakeHp": 100,
+   "diameterRatio": 1.2,
+   "headFt": 300,
+   "qGpm": 1000
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "impellerTrim",
+  "input": {
+   "brakeHp": 100,
+   "diameterRatio": 0,
+   "headFt": 300,
+   "qGpm": 1000
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "silent",
+  "fn": "impellerTrim",
+  "input": {
+   "diameterRatio": 0.8
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "viscosityCorrection",
+  "input": {
+   "headBepFt": 300,
+   "qBepGpm": 0,
+   "viscosityCSt": 100
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "viscosityCorrection",
+  "input": {
+   "headBepFt": 300,
+   "qBepGpm": 1500,
+   "viscosityCSt": 0
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "silent",
+  "fn": "viscosityCorrection",
+  "input": {
+   "headBepFt": 300,
+   "qBepGpm": 1500,
+   "speedRpm": 0,
+   "viscosityCSt": 100
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "silent",
+  "fn": "viscosityCorrection",
+  "input": {
+   "headBepFt": 300,
+   "qBepGpm": 1500,
+   "speedRpm": -3560,
+   "viscosityCSt": 100
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "combineParallel",
+  "input": {
+   "n": 2
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "combineParallel",
+  "input": {
+   "n": 0.5
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "combineSeries",
+  "input": {
+   "n": 0
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "operatingRegion",
+  "input": {
+   "qBepGpm": 0,
+   "qGpm": 1000
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "operatingRegion",
+  "input": {
+   "qBepGpm": 1000,
+   "qGpm": -5
+  },
+  "module": "pumps"
+ },
+ {
+  "expect": "refusal",
+  "fn": "stageCount",
+  "input": {
+   "k": 1.28,
+   "pDischargePsia": 50,
+   "pSuctionPsia": 100,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "stageCount",
+  "input": {
+   "k": 1.28,
+   "pDischargePsia": 100,
+   "pSuctionPsia": 100,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "stageCount",
+  "input": {
+   "k": 0.9,
+   "pDischargePsia": 1000,
+   "pSuctionPsia": 100,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "stageCount",
+  "input": {
+   "k": 1.4,
+   "maxDischargeF": 250,
+   "pDischargePsia": 200,
+   "pSuctionPsia": 100,
+   "polytropicEfficiency": 0.5,
+   "tSuctionF": 300
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "silent",
+  "fn": "stageCount",
+  "input": {
+   "k": 1.28,
+   "maxRatioPerStage": 1,
+   "pDischargePsia": 1000,
+   "pSuctionPsia": 100,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "silent",
+  "fn": "stageCount",
+  "input": {
+   "k": 1.28,
+   "maxRatioPerStage": -4,
+   "pDischargePsia": 1000,
+   "pSuctionPsia": 100,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "compressionStage",
+  "input": {
+   "gasSg": 0.65,
+   "k": 1.28,
+   "pSuctionPsia": 100,
+   "qMMscfd": 0,
+   "ratio": 3,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "compressionStage",
+  "input": {
+   "gasSg": 0.65,
+   "k": 1.28,
+   "pSuctionPsia": 100,
+   "qMMscfd": 20,
+   "ratio": 1,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "compressionStage",
+  "input": {
+   "gasSg": 0,
+   "k": 1.28,
+   "pSuctionPsia": 100,
+   "qMMscfd": 20,
+   "ratio": 3,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "compressionStage",
+  "input": {
+   "gasSg": 0.65,
+   "k": 1,
+   "pSuctionPsia": 100,
+   "qMMscfd": 20,
+   "ratio": 3,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "silent",
+  "fn": "compressionStage",
+  "input": {
+   "gasSg": 0.65,
+   "k": 1.28,
+   "pSuctionPsia": 100,
+   "polytropicEfficiency": 0,
+   "qMMscfd": 20,
+   "ratio": 3.16,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "silent",
+  "fn": "compressionStage",
+  "input": {
+   "gasSg": 0.65,
+   "k": 1.28,
+   "mechanicalEfficiency": 0,
+   "pSuctionPsia": 100,
+   "qMMscfd": 20,
+   "ratio": 3.16,
+   "tSuctionF": 100
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "machineScreen",
+  "input": {
+   "qMMscfd": 0
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "driverFuel",
+  "input": {
+   "brakeHp": 0
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "driverFuel",
+  "input": {
+   "brakeHp": 1000,
+   "heatRateBtuHpHr": 0
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "refusal",
+  "fn": "driverFuel",
+  "input": {
+   "brakeHp": 1000,
+   "gasLhvBtuScf": 0
+  },
+  "module": "compression"
+ },
+ {
+  "expect": "silent",
+  "fn": "actualInletCfm",
+  "input": {
+   "gasSg": 0.65,
+   "pPsia": 200,
+   "qMMscfd": 0,
+   "tF": 100
+  },
+  "module": "compression"
+ }
+]
