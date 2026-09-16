@@ -32,7 +32,7 @@ Where the derating bites, a vendor K is the only honest input, and the engine sa
 
 ## Nothing reconciles a vendor number
 
-An override wins outright and says so, returning `source` as typed with `derated`, `floored` and `nearFloor` all false. It is never compared against the table value at that pressure and no warning is raised when the two are far apart, so a vendor K far above every row of the table would be taken silently.
+An override wins outright and says so, returning `source` as typed with `derated`, `floored` and `nearFloor` all false. It is never compared against the table value at that pressure and no warning is raised when the two are far apart, so a vendor K far from the table would be taken silently.
 
 ## The mistake
 
