@@ -1,0 +1,42 @@
+{
+ "bbl": {
+  "decimals": 4,
+  "match": "^(?:quaiboe_line_volume_bbl|quaiboe_swept_volume_bbl)$"
+ },
+ "days": {
+  "decimals": 4,
+  "match": "^(?:quaiboe_pigging_interval_days)$"
+ },
+ "elevationFactor": {
+  "decimals": 10,
+  "match": "^(?:brass_elevation_factor)$"
+ },
+ "frictionFactor": {
+  "decimals": 10,
+  "match": "^(?:brass_general_friction_factor|imo1_friction_factor)$"
+ },
+ "ftPerS": {
+  "decimals": 6,
+  "match": "^(?:imo1_erosional_velocity_fts|imo1_velocity_fts)$"
+ },
+ "hours": {
+  "decimals": 6,
+  "match": "^(?:quaiboe_pig_run_hours)$"
+ },
+ "in": {
+  "decimals": 6,
+  "match": "^(?:quaiboe_required_wall_in)$"
+ },
+ "psi": {
+  "decimals": 6,
+  "match": "^(?:brass_outlet_pressure_psia|imo1_friction_drop_psi|imo1_total_drop_psi|quaiboe_maop_as_built_psig)$"
+ },
+ "reynolds": {
+  "decimals": 4,
+  "match": "^(?:imo1_reynolds)$"
+ },
+ "scfd": {
+  "decimals": 4,
+  "match": "^(?:brass_general_scfd|brass_panhandleb_scfd|brass_weymouth_scfd)$"
+ }
+}

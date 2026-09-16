@@ -17,9 +17,28 @@
 set -u
 
 REF=${1:-HEAD}
-REPO=/root/wt-fc2-nextgen
-LINKED=/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen
+REPO=${FC2_REPO:-/root/wt-fc2-nextgen}
+LINKED=${FC2_LINKED:-/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen}
 RUN=$(mktemp -d /tmp/fc2dry.XXXXXX)
+
+# THE NEGATIVE CONTROL. A dry run that passes proves nothing unless the same
+# ladder, deliberately broken, FAILS BY NAME. With NEGATIVE_CONTROL=1 the
+# Expert MAOP tolerance is widened to 50 psi before the SQL is handed to
+# Postgres, which puts the graded 1586.484375 psig within its own band of the
+# 1633.5349 the digest publishes as the OGBIA line volume and must make the
+# go-live's PUBLISHED-GOLDEN assertion raise. The run then INVERTS its verdict:
+# a clean pass is the failure.
+#
+# 50 IS CHOSEN, NOT GUESSED. The nearest quantity held for the literature is
+# 2100, which stands 513 psi away, so the widening cannot trip the held sweep
+# first and report the wrong gate as the one that works. The nearest number
+# handed to a learner in a prompt is 1450, 136 psi away, for the same reason.
+#
+# That control is the one this wave needs, because widening a tolerance is what
+# this wave does, and a wider band is exactly how a graded field can come to
+# sit on a figure the digest already publishes.
+NEG=${NEGATIVE_CONTROL:-0}
+NEG_EXPECT=${NEG_EXPECT:-'sit within their own tolerance of a value the goldens or the digest publish'}
 
 FILES="20260922_fc2_linesizing_course
 20260922_fc2_linesizing_beginner_deep
@@ -53,7 +72,10 @@ echo "### PRODUCTION BEFORE"
   echo "begin;"
   for f in $FILES; do
     echo "-- ================= $f"
-    if [ "$REF" = WORKTREE ]; then cat "$REPO/migrations/$f.sql"; else git -C "$REPO" show "$REF:migrations/$f.sql"; fi || exit 3
+    if [ "$REF" = WORKTREE ]; then cat "$REPO/migrations/$f.sql"; else git -C "$REPO" show "$REF:migrations/$f.sql"; fi \
+      | if [ "$NEG" = 1 ] && [ "$f" = 20260922_fc2_linesizing_course ]; then
+          sed "s/'key','quaiboe_maop_as_built_psig'\(.*\)'tol',[0-9.eE+-]*)/'key','quaiboe_maop_as_built_psig'\1'tol',50)/"
+        else cat; fi || exit 3
     echo
   done
   cat <<'SQL'
@@ -82,10 +104,23 @@ SQL
 
 echo
 echo "### THE LADDER, IN ONE TRANSACTION THAT ENDS IN ROLLBACK ($(wc -l < "$RUN/ladder.sql") lines)"
+[ "$NEG" = 1 ] && echo "  NEGATIVE CONTROL: the Expert MAOP tolerance widened to 50 psi on the way in."
 ( cd "$LINKED" && supabase db query --linked -f "$RUN/ladder.sql" 2>&1 ) > "$RUN/out.txt"
 RC=$?
 grep -E '"what"|"v"|ERROR|NOTICE|error' "$RUN/out.txt" | sed 's/^/  /'
-if [ $RC -ne 0 ] || grep -qi 'ERROR' "$RUN/out.txt"; then
+if [ "$NEG" = 1 ]; then
+  if grep -qF "$NEG_EXPECT" "$RUN/out.txt"; then
+    echo
+    echo "NEGATIVE CONTROL FIRED BY NAME: the go-live refused with"
+    grep -oF "$NEG_EXPECT" "$RUN/out.txt" | head -1 | sed 's/^/    /'
+  else
+    echo
+    echo "NEGATIVE CONTROL DID NOT FIRE. The gate cannot see a graded field landing on a"
+    echo "published figure, so a clean run on the real ladder means nothing."
+    sed -n '1,40p' "$RUN/out.txt"
+    exit 2
+  fi
+elif [ $RC -ne 0 ] || grep -qi 'ERROR' "$RUN/out.txt"; then
   echo
   echo "DRY RUN FAILED (rc $RC). Nothing was applied, and the transaction rolled back."
   sed -n '1,40p' "$RUN/out.txt"

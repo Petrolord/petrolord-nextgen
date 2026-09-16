@@ -29,7 +29,7 @@ import re
 import subprocess
 import sys
 
-REPO = '/root/wt-fc2-nextgen'
+REPO = os.environ.get('FC2_REPO', '/root/wt-fc2-nextgen')
 SLUG = 'linesizing'
 PREFIX = 'fc2'
 DATE = '20260922'

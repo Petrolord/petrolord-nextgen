@@ -22,13 +22,14 @@
     "inputs": [
       "digest.txt",
       "fields.json",
+      "precision.json",
       "fc2_dump.mjs",
       "fc2_fields.mjs",
       "fc2_fields_capstone.mjs"
     ],
     "pins": {
       "digest.txt": "9b9f02688e7a241b0ef8e6ae733b72e94dca7e21ca1245314584f4412426ca2b",
-      "fields.json": "7839c2a07f8835296646aacba4a33a73ea940079415179299d3bb01fc46127c8"
+      "fields.json": "c61a985b69c2e74b6d7caee29bdfa4cdf5c790d80c33a1258c29044d6ad403de"
     }
   },
   "rotating": {
