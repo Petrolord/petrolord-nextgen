@@ -898,6 +898,19 @@ w();
 // a ratio printed beside the two numbers it came from.
 w('# SECTION 20: What this engine was repaired for, and how to teach it (owned by Expert m05 l01)');
 w();
+w('THE EXPERT TIER READS THIS DIGEST OUT OF ORDER, so the mapping is stated here once rather than inferred from six section headers. It was resolved by SUBJECT:');
+w('| Expert lesson | where it reads from |');
+w('| --- | --- |');
+[['m05 l01, What was repaired, and what was not', 'Section 20'],
+ ['m05 l02, What a refusal is', 'Section 15'],
+ ['m05 l03, The contract read on one export', 'Section 15, the whole-contract table'],
+ ['m05 l04, Constants measured out of the engine', 'Section 2'],
+ ['m05 l05, What a published case can catch', 'Section 17'],
+ ['m06 l01, What the method does not know', 'Section 16'],
+ ['m06 l02, The capstone worked', 'its own capstone rather than this digest'],
+ ['m06 l03, Where this engine hands over', 'Sections 14 and 16'],
+].forEach(([a, b]) => w(`| ${a} | ${b} |`));
+w();
 w('EVERYTHING IN THIS SECTION IS HISTORY AND IS LABELLED AS HISTORY. Nothing above this line is. If you teach any of it, say plainly that it is what the engine used to do, the way this section does. A sentence about former behaviour that reads as current behaviour is the defect; the subject itself is not.');
 w();
 w('This module was repaired after a recon found 49 findings in it, its published cases and the studio that composes it. Four of those are worth teaching because each one is a general lesson that happens to have an example here.');

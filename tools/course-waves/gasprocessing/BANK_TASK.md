@@ -143,6 +143,20 @@ nothing about any of them is in the digest, which is how it stays. If you
 find yourself wanting a number that is not in the digest, that is the
 mechanism working.
 
+## WHERE THE DIGEST PRINTS A TABLE AND NO RATIO
+
+The Associate writer found the right move here and it is now the house
+pattern for this wave: **teach the DIRECTION the table shows, then tell the
+learner not to form the ratio, and say why.**
+
+The digest prints a ratio whenever it is entitled to one. Where it prints a
+table and no ratio, that is not an oversight: it means the two figures are
+not in a relationship this engine computes, and a learner who divides them
+produces a number nothing stands behind. Saying so out loud turns the digest
+rule into part of the curriculum rather than an invisible constraint on the
+writer, and it teaches the more useful habit, which is asking whether a
+quantity is entitled to be compared before comparing it.
+
 ## Question quality
 
 - A question whose answer can be reached by eliminating three absurdities has

@@ -119,6 +119,20 @@ their source.
   figures the digest carries and then say something about the relationship
   between them.
 
+## WHERE THE DIGEST PRINTS A TABLE AND NO RATIO
+
+Your Associate colleague found the right move here and it is now the house
+pattern for this wave: **teach the DIRECTION the table shows, then tell the
+learner not to form the ratio, and say why.**
+
+The digest prints a ratio whenever it is entitled to one. Where it prints a
+table and no ratio, that is not an oversight: it means the two figures are
+not in a relationship this engine computes, and a learner who divides them
+produces a number nothing stands behind. Saying so out loud turns the digest
+rule into part of the curriculum rather than an invisible constraint on you,
+and it teaches the more useful habit, which is asking whether a quantity is
+entitled to be compared before comparing it.
+
 ## Owner copy rule, and it applies to headings
 
 **No em dashes. No en dashes. No "X, not Y" contrastive anywhere a learner

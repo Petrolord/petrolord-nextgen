@@ -19,6 +19,56 @@ import {
 const ROOT = process.env.FC4_ENGINES || '/root/wt-fc4-nextgen/packages/engines';
 const G = await import(`${ROOT}/engines/facilities/gasProcessing.js`);
 
+/**
+ * PRINTED DECIMALS, BY QUANTITY CLASS.
+ *
+ * A graded field is answered by a learner reading a figure and typing it
+ * back, so a tolerance tighter than the precision the course prints at is a
+ * field NOBODY CAN ANSWER. Three of these were: a dimensionless fraction at
+ * 1e-9, a compressibility derivative at 1e-12 and a coefficient at 1e-9,
+ * against a digest whose own header declares six decimals for every one of
+ * those classes. A learner reading the right figure off the right row and
+ * quoting it to the precision the course tells them to would have FAILED.
+ *
+ * The classes below are the digest header's own words, which is the only
+ * declaration a learner has:
+ *   "Water contents, pressures, temperatures, circulations, diameters and
+ *    ratios print to six decimals; pounds a day, gallons a day, Btu a gallon
+ *    and lbmol a day to four; counts are whole numbers."
+ *
+ * A dimensionless fraction, a coefficient in degF per psi and a derivative
+ * per degR are all RATIOS in that sentence, so all three are six.
+ */
+export const PRINTED_DECIMALS = {
+  'lb/MMscf': 6,          // a water content
+  'lb/day': 4,            // an extensive daily mass
+  gpm: 6,                 // a circulation
+  'gal/day': 4,           // an extensive daily volume
+  'Btu/gal': 4,           // an intensive duty
+  'short tons/yr': 6,     // printed with the ratios
+  fraction: 6,            // dimensionless
+  stages: 6,              // dimensionless
+  'lbmol/day': 4,         // an extensive daily mole count
+  'MMBtu/hr': 6,          // printed with the circulations it tracks
+  'per degR': 6,          // a derivative, a ratio in the header's sentence
+  'degF/psi': 6,          // a coefficient, likewise
+  degF: 6,                // a temperature
+};
+
+/**
+ * The tolerance a field is graded at: the STATED one, or half a unit in the
+ * last printed place, WHICHEVER IS LOOSER.
+ *
+ * MAX AND NEVER MIN. This only ever widens a tolerance, so a value that
+ * graded correct before still grades correct, and nothing that graded wrong
+ * before starts grading right for any reason but being answerable.
+ */
+export const toleranceFor = (unit, stated) => {
+  const d = PRINTED_DECIMALS[unit];
+  if (d === undefined) throw new Error(`no printed precision declared for the unit "${unit}"`);
+  return Math.max(stated, 0.5 * 10 ** -d);
+};
+
 /** The graded fields MEASURED to be bit-identical across the FC4-0
  *  vendoring. Verified by gate_movement.mjs, never asserted from reasoning
  *  about which quantities a repair touches. */

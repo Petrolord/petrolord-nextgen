@@ -122,6 +122,28 @@ FC4-0 is merged and vendored. `make_fields.mjs` regenerates `fields.json`
 from the generator, eighteen fields with a declared tolerance each, and it
 refuses if any field has no tolerance declared for it.
 
+## A TOLERANCE IS DERIVED FROM THE PRINTED PRECISION, NEVER TYPED
+
+`PRINTED_DECIMALS` in `fc4_capstone.mjs` declares, per quantity class, the
+precision this course prints at, taken from the digest header's own words.
+`make_fields.mjs` grades each field at the stated tolerance OR half a unit in
+the last printed place, **whichever is LOOSER. Max and never min**, so this
+only ever widens and nothing that graded correct before grades wrong now.
+
+Three fields were unanswerable before this: a dimensionless fraction at 1e-9,
+a derivative at 1e-12 and a coefficient at 1e-9, all against six declared
+decimals. A learner reading the right figure off the right row and quoting it
+to the precision the course tells them to would have FAILED the field. All
+three are now 5e-7, and none is trivially wide: 5.1e-7, 5.2e-4 and 8.3e-6
+relative. **Not one of the eighteen values moved.**
+
+`make_fields.mjs --bare-stated-tolerances` is the negative control. It skips
+the widening and leaves `PRINTED_DECIMALS` ALONE, and the generator exits 1
+naming the field, the tolerance, the precision, the figure a learner could
+quote and the error that quoting it carries. Mutating `PRINTED_DECIMALS`
+instead would move the floor and the tolerance together and could not fail,
+which is how a sibling wave's first attempt at this control was useless.
+
 ## A STABILITY CLAIM IS MEASURED HERE, NEVER REASONED ABOUT
 
 An earlier ordering of the Expert capstone led with the compressibility
@@ -148,6 +170,20 @@ Not from the intuition the prompt was written with. A previous wave's first
 clean go-live run refused because the assertion encoded an expectation the
 course itself disproved. Run the generator, read the number, assert the
 number.
+
+## WHERE THE DIGEST PRINTS A TABLE AND NO RATIO
+
+The Associate writer found the right move here and it is now the house
+pattern for this wave: **teach the DIRECTION the table shows, then tell the
+learner not to form the ratio, and say why.**
+
+The digest prints a ratio whenever it is entitled to one. Where it prints a
+table and no ratio, that is not an oversight: it means the two figures are
+not in a relationship this engine computes, and a learner who divides them
+produces a number nothing stands behind. Saying so out loud turns the digest
+rule into part of the curriculum rather than an invisible constraint on the
+writer, and it teaches the more useful habit, which is asking whether a
+quantity is entitled to be compared before comparing it.
 
 ## The leak gate
 

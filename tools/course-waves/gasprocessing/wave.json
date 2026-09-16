@@ -41,8 +41,7 @@
   "-40": "the narrower band the Magnus coefficients were published over, low, degC. EXPORTED",
   "10.7316": "the gas constant, psia ft3 per lbmol degR. Exported by the gas properties door",
   "28.9625": "the molecular weight of dry air. Exported by the gas properties door",
-  "459.67": "the Rankine offset, degF to degR. Exported by the gas properties door",
-  "1.0000169391883849": "THE STANDARD-BASE FACTOR. Measured, not typed: the old typed 379.49 over the derived value above. Eleven of the eighteen graded capstone fields moved by exactly this when the repair was vendored"
+  "459.67": "the Rankine offset, degF to degR. Exported by the gas properties door"
  },
  "leakScales": [
   "1",
@@ -72,7 +71,8 @@
    "beginner": "IKOT ABASI, a TEG dehydration train: the saturated inlet water content, the water taken out in lb a day, the circulation in gpm and in gallons a day, the sensible heat per gallon, and the BTEX in short tons a year.",
    "intermediate": "OTUMARA, a sour gas train: the removal at the stated stage count, the stages the contract spec demands, the acid gas picked up in lbmol a day, the amine circulation, the regenerator duty, and the circulation again after the regenerator is retuned to a leaner lean.",
    "advanced": "ESCRAVOS, a dew point skid: the compressibility temperature derivative at the inlet, the Joule-Thomson coefficient, the cooling, the separator inlet temperature, and the water the gas carries at the inlet and can still hold at the cold spot. Ordered so the one field MEASURED to be stable across the vendoring leads.",
-   "heldItemCheck": "Every held item is neutralised by CONSTRUCTION rather than by a lookup. The McKetta real-gas correction is held, so IKOT ABASI and both ESCRAVOS water reads sit BELOW the pressure at which the engine warns, verified by asserting the warning is null on all three. The 1100 Btu per lb overhead is held, so NO Associate graded field reads a reboiler duty: the SENSIBLE half, which is built entirely from stated inputs, is what is graded. The contactor's liquid density is held and is the wrong fluid for an amine, so NO Professional graded field reads a contactor diameter. The amine duty per gallon is customary, so OTUMARA states its own 920. The BTEX absorbed fraction and molecular weight are operating values and are stated on the one capstone that grades a BTEX figure. STABILITY IS MEASURED, NOT REASONED: gate_movement.mjs re-measures all eighteen fields against the pre-vendoring engine and fails if the declared stable set is not exactly what held. Four hold; an earlier ordering wrongly reasoned that the inlet water content would, and it moves by the standard-base factor."
+   "heldItemCheck": "Every held item is neutralised by CONSTRUCTION rather than by a lookup. The McKetta real-gas correction is held, so IKOT ABASI and both ESCRAVOS water reads sit BELOW the pressure at which the engine warns, verified by asserting the warning is null on all three. The 1100 Btu per lb overhead is held, so NO Associate graded field reads a reboiler duty: the SENSIBLE half, which is built entirely from stated inputs, is what is graded. The contactor's liquid density is held and is the wrong fluid for an amine, so NO Professional graded field reads a contactor diameter. The amine duty per gallon is customary, so OTUMARA states its own 920. The BTEX absorbed fraction and molecular weight are operating values and are stated on the one capstone that grades a BTEX figure. STABILITY IS MEASURED, NOT REASONED: gate_movement.mjs re-measures all eighteen fields against the pre-vendoring engine and fails if the declared stable set is not exactly what held. Four hold; an earlier ordering wrongly reasoned that the inlet water content would, and it moves by the standard-base factor.",
+   "tolerances": "Derived, never typed. PRINTED_DECIMALS in fc4_capstone.mjs declares the precision each quantity class prints at, from the digest header own words, and make_fields.mjs grades at the stated tolerance or half a unit in the last printed place, WHICHEVER IS LOOSER. Three fields were tighter than the course prints and therefore unanswerable: a fraction at 1e-9, a derivative at 1e-12 and a coefficient at 1e-9, all now 5e-7 and none trivially wide. NOT ONE OF THE EIGHTEEN VALUES MOVED. fields.json is the single source; the teaching lab must READ it rather than restate a number from it, which is the three-copy trap a sibling wave hit."
   },
   "panels": {
    "lab": "src/components/course/panels/gasprocessing/gasprocessingLab.js",
@@ -93,7 +93,7 @@
   ]
  },
  "gates": {
-  "gate_claims.mjs": "every relational claim in digest.txt re-computed from the engine. CAUGHT TWO FALSE CLAIMS in the first draft, one an ordering stated as different that was identical.",
+  "gate_claims.mjs": "every relational claim in digest.txt re-computed from the engine, plus two classes the kit heading sweep cannot see because they sit on ordinary prose lines: a COUNTED claim over a block with a different count, and a COST-AND-BUY sentence over a table whose two named columns move the same way. Both shipped in one rebuild and both have a negative control. CAUGHT TWO FALSE CLAIMS in the first draft, one an ordering stated as different that was identical.",
   "gate_typed_literals.py": "no number is typed into the digest. Sweeps every string literal in fc4_dump.mjs with substitutions stripped at source level by brace depth. Fails on a dead allowlist row.",
   "gate_capstone_leak.py": "no capstone condition and no graded value reaches the digest or the generator, at three renderings each. CAUGHT ONE REAL LEAK into the digest duty table. Fails on a dead shared row.",
   "gate_copy_rule.py": "the owner copy rule over the digest, every lesson body and every manifest title. CAUGHT TWO CONTRASTIVES an eye sweep had passed.",
@@ -101,17 +101,20 @@
   "harvest_truth.py": "harvests the digest into truth-gasprocessing.json so numsweep has a resolver. FC3 shipped none and its sweep reported 396 of 412 unresolved, measuring the resolver rather than the lessons.",
   "sweep_literals.py": "the FULL-literal sweep with no significant-figure floor, over banks or lessons. numsweep skipped 56 of 119 literals on this wave own probe run, so a green numsweep is roughly half a sweep. Refuses an empty sweep.",
   "jest": "packages/engines __tests__/facilities.gasprocessing.test.js, 47 of 47 green, up from 12. The separator suite it now shares a module with is 63 of 63.",
-  "digestprose.mjs (the kit gate, with this wave rules file)": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules /root/fc-wip-gasprocessing. Headings against their own blocks in the digest AND the lessons, repair history, and the copy rule. 721 lines, 20 section titles and 25 in-body markers, 30 history framings, 33 ENGINE FRAGMENTS PINNED so an upstream engine edit turns it red. 3 warned, all inside Section 20 and re-read by hand on every rebuild rather than cleared. CAUGHT A STALE SECTION TITLE on the rebuild and a repair-history sentence in this wave own new prose."
+  "digestprose.mjs (the kit gate, with this wave rules file)": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules /root/fc-wip-gasprocessing. Headings against their own blocks in the digest AND the lessons, repair history with a framed-is-curriculum split, and the copy rule. 758 lines, 20 section titles and 33 in-body markers, 32 history framings, 33 ENGINE FRAGMENTS PINNED so an upstream engine edit turns it red. 4 warned, all inside Section 20 and re-read by hand on every rebuild rather than cleared.",
+  "gate_wavejson.mjs": "every claim wave.json makes that can be checked against a file, checked against that file. It exists because this file gave TWO ANSWERS for its own digest in one place: a digest block and a gates entry that disagreed on both the line count and the section count. Refuses below ten claims.",
+  "make_fields.mjs": "regenerates fields.json and REFUSES any field graded tighter than its class prints, naming the field, the tolerance, the precision, the figure a learner could quote and the error that quoting it carries. --bare-stated-tolerances is the negative control and leaves PRINTED_DECIMALS alone, because mutating that would move the floor and the tolerance together and could not fail."
  },
  "digest": {
-  "lines": 675,
-  "sections": 19,
+  "lines": 758,
+  "sections": 20,
   "withheld": null,
-  "note": "Section 14 was WITHHELD while the Joule-Thomson chain was under repair and printed NOTHING rather than printing behind a banner. It is built. No lesson ever took a wrong coefficient, which is what the withholding bought."
+  "note": "Section 14 was WITHHELD while the Joule-Thomson chain was under repair and printed NOTHING rather than printing behind a banner. It is built. No lesson ever took a wrong coefficient, which is what the withholding bought. SECTION 20 is the one section whose subject is history and it is framed in its own title and first line."
  },
  "history": {
   "position": "FRAMED HISTORY IS CURRICULUM, UNFRAMED HISTORY IS A DEFECT. Digest SECTION 20 is the one section whose subject is what this engine used to do; it says so in its title and its first line, and nothing above it is history. Expert m05 l01, \"What was repaired, and what was not\", owns it, with the frame in the HEADING where the gate and the reader both look for it.",
   "engineComments": "Repair-history comment lines in the engine source are PROVENANCE. Digest Section 20 COUNTS them by reading the source and states the rule it counted with, rather than quoting a figure from a report. A sentence lifted out of a comment arrives with no frame, and a writer cannot frame what they did not know was history. Every writer brief in this wave says so.",
-  "framingRule": "Framing comes from the HEADING above a passage or the line immediately before it. An inline prefix inside a sentence is not framing and the gate does not read it as one."
+  "framingRule": "Framing comes from the HEADING above a passage or the line immediately before it. An inline prefix inside a sentence is not framing and the gate does not read it as one.",
+  "standardBaseFactor": "1.0000169391883849, the old typed 379.49 over the derived standard molar volume. Eleven of the eighteen graded capstone fields moved by exactly this when the repair was vendored, and three more by that factor amplified by a typed spec. MEASURED by gate_movement.mjs and deliberately NOT a wave constant: it is a fact about the vendoring and no lesson resolves a number against it."
  }
 }

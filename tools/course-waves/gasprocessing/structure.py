@@ -3,7 +3,9 @@
 # Panel ids: W the water explorer (the saturation surface, the spec, the water
 # load, the circulation ratio and the duty split), A the absorber explorer
 # (the Kremser surface in both directions, the amine property table, the
-# loading swing and the contactor), C the cold end explorer (HELD, see below).
+# loading swing at both ends and the contactor), C the cold end explorer
+# (the coefficient and the derivative behind it, the march against its own
+# converged answer, and the four-state water table).
 #
 # Titles carry COUNTS only, never a measurement.
 #
@@ -18,18 +20,21 @@
 #
 # Engine: engines/facilities/gasProcessing.js over
 # engines/production/gasProperties.js for the Sutton pseudo-criticals, the DAK
-# compressibility correlation and the Rankine door. Vendored at NextGen
-# fa33717f, sha-identical with engines 709172f.
+# compressibility correlation and the Rankine door, and over
+# engines/facilities/separatorSizing.js for the DAK validity band. Vendored
+# sha-identical with engines 82ec6d4, the FC4-0 repair.
 #
 # ---------------------------------------------------------------------------
-# The Expert tier's m01, m02 and m03 are built on digest Section 14, which was
-# WITHHELD while the Joule-Thomson chain was under repair and printed nothing
-# rather than printing behind a banner. It is built now. Nothing is held.
+# NOTHING IS HELD. Digest Section 14, which carries the Joule-Thomson chain,
+# was WITHHELD and printed nothing while that chain was under repair, and it
+# is built. All 78 lessons have their source. `HELD` below is empty and is
+# the authority; this comment agrees with it on purpose, because a plan that
+# outlives its engine has already produced defects on a sibling wave.
 #
-# m01 is shaped around WHERE THE NUMBER COMES FROM and around the seam to the
-# Flow Assurance engine, which takes a Joule-Thomson coefficient as a typed
-# input and never computes one. That subject was chosen so it would survive
-# the repair unchanged, and it did: only its figures moved.
+# Expert m01 is shaped around WHERE THE NUMBER COMES FROM and around the seam
+# to the Flow Assurance engine, which takes a Joule-Thomson coefficient as a
+# typed input and never computes one. That subject was chosen so it would
+# survive the repair unchanged, and it did: only its figures moved.
 #
 # SCOPE SEAMS, all three checked against the 47 live course slugs:
 #  * Souders-Brown, the K value and the settling velocity are OWNED by
@@ -131,11 +136,7 @@ TIERS = {
     ('l03-what-the-next-tier-changes', 'What the next tier changes', 12, []),
   ]),
  ],
- # -------------------------------------------------------------------------
- # EXPERT m01, m02 and m03 ARE HELD. Fourteen lessons with no digest source
- # until FC4-0 is vendored and Section 14 is built. m04, m05 and m06 are
- # twelve lessons that can be written today from Sections 13, 15, 16 and 17.
- # -------------------------------------------------------------------------
+ # The Expert tier draws on digest Sections 13, 14, 15, 16, 17 and 20.
  'advanced': [
   ('m01-dew-point-control-by-expansion', 'Dew Point Control by Expansion', [
     ('l01-what-a-dew-point-skid-sells', 'What a dew point skid sells', 13, [C]),

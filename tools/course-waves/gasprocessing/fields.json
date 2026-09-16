@@ -39,7 +39,7 @@
   "intermediate",
   "fractionRemoved",
   0.9782550162942297,
-  1e-9
+  5e-7
  ],
  [
   "intermediate",
@@ -75,13 +75,13 @@
   "advanced",
   "dzdT",
   0.0009683744638956019,
-  1e-12
+  5e-7
  ],
  [
   "advanced",
   "muFPerPsi",
   0.06026080453221084,
-  1e-9
+  5e-7
  ],
  [
   "advanced",

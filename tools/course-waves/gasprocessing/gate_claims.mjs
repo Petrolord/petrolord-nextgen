@@ -2,7 +2,9 @@
 const ROOT='/root/wt-fc4-nextgen/packages/engines';
 const G=await import(`${ROOT}/engines/facilities/gasProcessing.js`);
 const F=await import('/root/fc-wip-gasprocessing/fc4_fields.mjs');
-const fs=await import('fs');
+const fsmod=(await import('node:fs')).default;
+const fs=fsmod;
+const DIGEST_TEXT=fs.readFileSync('/root/fc-wip-gasprocessing/digest.txt','utf8');
 const GOLD=JSON.parse(fs.readFileSync(`${ROOT}/test-data/facilities/goldens/gasprocessing_cases.json`,'utf8'));
 const OB_SAT=G.saturatedWaterContent(F.OBIAFU_LINE);
 const teg=(o)=>G.tegPackage({...F.OBIAFU,inletLbMMscf:OB_SAT.lbPerMMscf,...o});
@@ -91,8 +93,8 @@ let bad=0; const ck=(claim,ok,detail)=>{ if(!ok) bad++; console.log(`${ok?'OK  '
 // C8 S1/S10/S19: lean loading, rich loading and the swing are THREE numbers
 // sharing no word. A writer met this as an ambiguity and refused to use
 // either figure, which was right; this is the check that keeps them apart.
-{const fs=require('fs');
- const dig=fs.readFileSync('/root/fc-wip-gasprocessing/digest.txt','utf8').split('\n');
+{
+ const dig=DIGEST_TEXT.split('\n');
  const r=G.aminePackage(F.UBIE);
  const lean=F.UBIE.leanLoading, rich=r.richLoadingUsed, swing=rich-lean;
  ck('S10 the three loadings are three different numbers', lean!==rich && rich!==swing && lean!==swing,
@@ -111,15 +113,27 @@ let bad=0; const ck=(claim,ok,detail)=>{ if(!ok) bad++; console.log(`${ok?'OK  '
 // either, because both sat on a sentence beginning with a lowercase word and
 // the kit surfaces only section titles, hash headings and capitalised
 // markers. They are checked here, where the digest is read as text.
-{const fs2=require('fs');
- const D=fs2.readFileSync('/root/fc-wip-gasprocessing/digest.txt','utf8').split('\n');
+{
+ const D=DIGEST_TEXT.split('\n');
  const WORDS={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12};
  const NOUN=/\b(refusals?|things?|names?|limits?|kinds?|routes?|columns?|items?|bullets?)\b/i;
  const badCounts=[];
+ // A COUNTED CLAIM INTRODUCES A BLOCK, and in this digest that means the
+ // line ENDS IN A COLON and the number sits directly on its noun. Without
+ // both conditions the sweep matches "the last TWO COLUMNS together" and
+ // "three amines, and every column", which are five false positives on this
+ // file and would have made the check noise a reader learns to scroll past.
+ // The word before the number must not be an article or a superlative,
+ // which is what separates "four columns of it" from "the last two columns",
+ // and the number must sit DIRECTLY on its noun, which is what separates
+ // "four columns" from "an absorption factor of one every column climbs".
+ const NOT_A_COUNT=/\b(the|last|every|all|these|those|first|same)$/i;
  D.forEach((l,i)=>{
    if(l.startsWith('|')||l.startsWith('#')) return;
-   const m=new RegExp(`\\\\b(${Object.keys(WORDS).join('|')})\\\\b[^.]{0,45}${NOUN.source}`,'i').exec(l);
+   if(!l.trimEnd().endsWith(':')) return;
+   const m=new RegExp(`\\b(${Object.keys(WORDS).join('|')})\\s+${NOUN.source}`,'i').exec(l);
    if(!m) return;
+   if(NOT_A_COUNT.test(l.slice(0,m.index).trimEnd())) return;
    const claimed=WORDS[m[1].toLowerCase()], noun=m[2].toLowerCase();
    if(/column/.test(noun)){
      const hdr=D.slice(i+1,i+4).find(x=>x.startsWith('| '));
@@ -143,20 +157,37 @@ let bad=0; const ck=(claim,ok,detail)=>{ if(!ok) bad++; console.log(`${ok?'OK  '
  // lean-loading table has every column falling together, because the duty per
  // gallon is a stated input and the duty is therefore the circulation in
  // other units.
+ // A cost-and-buy sentence names TWO quantities and claims they move in
+ // OPPOSITE directions. The first version of this check compared every
+ // monotone column in the table and asked whether they all agreed, which is
+ // the wrong question: the first column is the independent variable and the
+ // swing is derived from it, so they disagree by construction and the check
+ // passed its own founding case. It now finds the two columns the SENTENCE
+ // names, by matching its words against the table's own headers, and asks
+ // whether those two move the way the sentence says.
  const badDir=[];
  D.forEach((l,i)=>{
    if(!/costs? [^.]*\band buys\b|buys [^.]*\bback\b|costs? [^.]* to reach\b/i.test(l)) return;
-   const rows=[]; for(let k=i+1;k<D.length;k++){ if(D[k].startsWith('| ')){ if(!/^\| ---/.test(D[k])) rows.push(D[k]); } else if(rows.length) break; }
-   if(rows.length<3) return;
-   const cells=rows.map(r=>r.split('|').map(x=>x.trim()).filter(Boolean));
-   const width=Math.min(...cells.map(c=>c.length));
-   const dirs=[];
-   for(let c=1;c<width;c++){
-     const v=cells.map(x=>parseFloat(x[c])); if(v.some(x=>!Number.isFinite(x))) continue;
-     const up=v.every((x,k)=>k===0||x>v[k-1]), dn=v.every((x,k)=>k===0||x<v[k-1]);
-     if(up||dn) dirs.push(up?1:-1);
+   const all=[]; for(let k=i+1;k<D.length;k++){ if(D[k].startsWith('| ')) all.push(D[k]); else if(all.length) break; }
+   if(all.length<4) return;
+   const head=all[0].split('|').map(x=>x.trim()).filter(Boolean);
+   const rows=all.filter((r,idx)=>idx>0 && !/^\| ---/.test(r))
+                 .map(r=>r.split('|').map(x=>x.trim()).filter(Boolean));
+   const dirOf=(c)=>{const v=rows.map(r=>parseFloat(r[c])); if(v.some(x=>!Number.isFinite(x))) return 0;
+     if(v.every((x,k)=>k===0||x>v[k-1])) return 1;
+     if(v.every((x,k)=>k===0||x<v[k-1])) return -1; return 0;};
+   // Which column does each side of the sentence name?
+   const find=(words)=>head.findIndex(h=>words.some(w=>h.toLowerCase().includes(w)));
+   const costWords=/costs? ([a-z ]+?) (?:to reach|and buys)/i.exec(l);
+   const buyWords=/buys ([a-z ]+?)(?: back|$|,)/i.exec(l);
+   if(!costWords||!buyWords) return;
+   const ci=find(costWords[1].trim().split(/\s+/).filter(w=>w.length>3));
+   const bi=find(buyWords[1].trim().split(/\s+/).filter(w=>w.length>3));
+   if(ci<0||bi<0||ci===bi) return;
+   const cd=dirOf(ci), bd=dirOf(bi);
+   if(cd!==0 && bd!==0 && cd===bd){
+     badDir.push(`line ${i+1}: says "${costWords[1].trim()}" is a cost and "${buyWords[1].trim()}" is bought, but columns "${head[ci]}" and "${head[bi]}" both move the same way`);
    }
-   if(dirs.length>=2 && new Set(dirs).size===1) badDir.push(`line ${i+1}: says cost-and-buy over a table whose columns all move the same way`);
  });
  ck('no cost-and-buy sentence sits over a table whose columns all move together', badDir.length===0, badDir.length?badDir.join('; '):'0 backwards glosses');
 
