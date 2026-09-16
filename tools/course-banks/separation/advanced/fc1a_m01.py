@@ -110,5 +110,5 @@ q(1, "Before FC1-0 a three-phase call with no oil gravity still produced two dro
   "Only the carryunder verdict came back, because the water gravity was present and the rising drop leans on that one."],
  "The repair is a refusal by name, a SeparatorInputError on sgOil. A verdict for an input the engine could not read said nothing, and it said nothing in the reassuring direction.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1a_m01.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1a_m01.json', expect_n=15)
 finish()

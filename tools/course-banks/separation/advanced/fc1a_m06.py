@@ -110,5 +110,5 @@ q(2, "A handover writes 350 psi for the AGBAMI operating pressure and reports th
   "Nothing is broken, since 350.000000 psig and 3.049149 ft are the engine figures and a handover may round either of them for a reader."],
  "AGBAMI runs at 350.000000 psig, which is a gauge pressure. Metres, kilowatts and seconds print to four decimals and counts are whole numbers, so the precision itself says what kind of quantity is being read.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1a_m06.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1a_m06.json', expect_n=15)
 finish()

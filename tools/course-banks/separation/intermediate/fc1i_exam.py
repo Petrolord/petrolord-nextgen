@@ -300,5 +300,5 @@ q(2, "A reviewer is given one line for ABANA-2 at 8.000000 ft. Which line carrie
   "2.396801 ft of gas requirement at a margin of 1.668891, with the liquid figure reported separately."],
  "Three answers and a preference travel together: the length, which requirement set it, whether the vessel carries its gas and by how much, and where the shape sits against a typed band.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1i_exam.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1i_exam.json', expect_n=42)
 finish()

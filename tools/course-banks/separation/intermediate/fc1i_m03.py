@@ -112,5 +112,5 @@ q(1, "Why does the repaired sweep report the rows that fail rather than dropping
   "The engine cannot tell a failing row from a passing one until a band is supplied."],
  "A sweep that printed only the vessels that worked would hide the boundary. Every row carries its own reasons, so 41.369847 ft at 6.000000 ft of bore is visible as a failure.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1i_m03.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1i_m03.json', expect_n=15)
 finish()

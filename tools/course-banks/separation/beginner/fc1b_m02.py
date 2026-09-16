@@ -111,5 +111,5 @@ q(0, "ABANA-1 and AGBAMI both carry 18.000000 MMscfd and arrive at 4.825708 and 
   "It is a measure of duty on the liquid side, since retention is built from bpd."],
  "AGBAMI sits at 364.700000 psia against 614.700000 psia, so nearly twice the room for the same gas rate. The standard rate says nothing about how much room the gas needs until the conditions are applied to it."),
 
-emit(Q, '/root/fc-wip-separation/banks/fc1b_m02.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1b_m02.json', expect_n=15)
 finish()

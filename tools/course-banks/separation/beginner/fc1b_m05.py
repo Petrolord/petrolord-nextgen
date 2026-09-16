@@ -110,5 +110,5 @@ q(0, "The gas-required diameter of 2.052551 ft describes a vessel with a floor a
   "None of them. All three are inputs to the area of 3.308855 ft2, and the height is a second calculation reusing figures the diameter has already consumed."],
  "The liquid supplies the height. The area of 3.308855 ft2 came from the actual gas rate and the settling velocity, and the liquid reaches that velocity only through the mixture density."),
 
-emit(Q, '/root/fc-wip-separation/banks/fc1b_m05.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1b_m05.json', expect_n=15)
 finish()

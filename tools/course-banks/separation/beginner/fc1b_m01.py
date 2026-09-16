@@ -111,5 +111,5 @@ q(1, "An engineer reads 600 off a drawing and hands it straight to the gas law. 
   "A velocity margin away from 1.000000 at the gas-required diameter, since the margin is built from the same pressure and would have moved along with it."],
  "The absolute figure is the gauge figure plus 14.7, so 600.000000 psig is 614.700000 psia. At separator pressures the error moves Ppr, z, the density, the settling velocity and the diameter by amounts too small to look wrong."),
 
-emit(Q, '/root/fc-wip-separation/banks/fc1b_m01.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1b_m01.json', expect_n=15)
 finish()

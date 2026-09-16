@@ -111,5 +111,5 @@ q(1, "A study sets the drum's 3665.075231 ft3 against the harp's 2456.380208 ft3
   "Nothing, since both were sized from the same 350.000000 bbl slug."],
  "The gap is part fill fraction and part the 41.666667 bbl of normal inflow that the finger form never counted.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1i_m04.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1i_m04.json', expect_n=15)
 finish()

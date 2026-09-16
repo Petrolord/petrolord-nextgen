@@ -110,5 +110,5 @@ q(1, "A reviewer dismisses the whole golden set because every case is synthetic.
   "That the distance cases are not synthetic, since haversine and Vincenty are published methods and their agreement at 89.4099 m is an external check."],
  "The mistake runs both ways. Reading a green suite as agreement with measured separator performance upgrades the claim, and dismissing the suite throws away the arithmetic evidence it does carry.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1a_m05.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1a_m05.json', expect_n=15)
 finish()

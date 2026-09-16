@@ -112,5 +112,5 @@ q(0, "AGBAMI runs a horizontal vane pack at 350.000000 psig and is sized on K 0.
   "The horizontal mesh row of 0.450000 lifted for the vane pack, a step the table takes inside one orientation."],
  "The module records 0.550000 derated to 0.525000 at 350.000000 psig, with derated true and floored false. Every velocity built on it carries that provenance gap along with it."),
 
-emit(Q, '/root/fc-wip-separation/banks/fc1b_m03.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1b_m03.json', expect_n=15)
 finish()

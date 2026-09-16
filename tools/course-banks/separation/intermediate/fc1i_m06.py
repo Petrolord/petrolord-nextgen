@@ -111,5 +111,5 @@ q(2, "This tier treats the liquid in a horizontal drum as one phase. What does t
   "A wider slenderness band, which moves the chord with it."],
  "Reading the chord as the height of a water layer is the error the retired app made. The chord is a width across the drum and an interface is a height inside the liquid.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1i_m06.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1i_m06.json', expect_n=15)
 finish()

@@ -110,5 +110,5 @@ q(2, "A droplet arrives with no viscosity to fall through, and a separate call h
   "With an error object in the first case and a throw in the second, since a missing viscosity is an absent input while a reversed pair of gravities is a value outside its domain."],
  "Both are fair questions the method cannot answer, so neither is a throw. The thrown refusals live upstream, on the named inputs a three-phase call has to be given before settling is reached.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1a_m02.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1a_m02.json', expect_n=15)
 finish()

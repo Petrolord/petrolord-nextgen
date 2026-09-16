@@ -112,5 +112,5 @@ q(1, "The flare stands 46.1777 m from the control room, against a table figure o
   "That the plot passes on radiation and fails on spacing."],
  "The pair fails both. A table cannot know a relief rate, so a flare well inside a 90.000000 m rule can still exceed its allowable.")
 
-emit(Q, '/root/fc-wip-separation/banks/fc1i_m05.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1i_m05.json', expect_n=15)
 finish()

@@ -300,5 +300,5 @@ q(3, "The method names one input as the place where operating experience enters 
   "The offered diameter, since a vessel is bought in the sizes a fabricator rolls."],
  "Nothing in the fluid properties produces a retention time. 3.000000 minutes on ABANA-1 gives a retention volume of 35.091146 ft3, and the figure was chosen rather than derived."),
 
-emit(Q, '/root/fc-wip-separation/banks/fc1b_exam.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1b_exam.json', expect_n=42)
 finish()

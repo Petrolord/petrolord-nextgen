@@ -111,5 +111,5 @@ q(0, "What can this tier not tell a reader about the K it sized every vessel wit
   "Whether it was measured, since every figure in the table is an allowable velocity coefficient fitted to observed carryover and the module states the sample each row was fitted to."],
  "The six base rows are published. The step from 0.350000 to 0.300000 and the 0.120000 floor beneath it are the part to treat as provisional, and the discipline is to rest no conclusion on the unchecked part."),
 
-emit(Q, '/root/fc-wip-separation/banks/fc1b_m06.json')
+emit(Q, '/root/fc-wip-separation/banks/fc1b_m06.json', expect_n=15)
 finish()
