@@ -57,11 +57,11 @@ q(2, "What must a writer establish about a sentence found in an engine source co
  "Engine source comments are provenance. A sentence lifted out of one arrives with no frame around it, and a writer cannot frame what they did not know was history.")
 
 q(3, "State the error contract this module keeps, and what it asks of a caller.",
- "Every export answers with an object, and one that cannot answer puts a named string on an error key, so a caller checks one property and never catches.",
- ["Every export answers with an object, and one that cannot answer returns a non-finite value on the answer key, so a caller checks that the number is finite.",
+ "Every export called with a named-argument object answers with an object, and one that cannot answer puts a named string on an error key, so a caller checks one property and never catches.",
+ ["Every export called with a named-argument object answers with an object, and one that cannot answer returns a non-finite value on the answer key, so a caller checks that the number it was handed is finite.",
   "Every export either answers or throws a named error, so a caller wraps the call and reads the message off what it caught.",
-  "Most exports answer with an object and the rest answer with a bare number, so a caller checks the type of what came back before reading it."],
- "Nothing in this module throws. An exception travels up a stack and gets caught somewhere the caller did not choose, and an error on a returned object stays exactly where the question was asked.")
+  "Every export in the module keeps that one shape, the scalar helpers included, so a caller never has to know which kind of export it is holding."],
+ "Nothing in this module throws. The 9 exports the studio calls are doors and all of them keep that shape. The other 4 take a single positional value, answer with a bare number or one row of a table, and say they have no answer with a NaN or a null that the door consuming them turns into a named refusal.")
 
 q(1, "A gas at 140.000001 degF is refused by the water routine. What does the message carry beyond the fact of the refusal?",
  "The band in both units and the temperature it was handed, converted into the units the band is stated in.",
@@ -70,12 +70,12 @@ q(1, "A gas at 140.000001 degF is refused by the water routine. What does the me
   "The water content the fit would have returned, flagged so that a caller can use it as a screening figure."],
  "A caller is told what to change and by how much. The same habit runs through the module: an unknown solvent names the three the module carries, and a removal no stage count reaches names raising the circulation as the remedy.")
 
-q(0, "Four refusals in this module hand back evidence beside the message. Which of them carries the most fields, and how many?",
- "A march that walks off the correlation, with 7.",
- ["A compressibility off the correlation band, with 7.",
-  "The capped stage count, with 6.",
-  "A contactor whose liquid is lighter than its gas, with 6."],
- "The march returns 7, a compressibility off band returns 6, and the capped stage count and the contactor liquid return 3 each. A refusal with its evidence can be acted on without re-running anything.")
+q(0, "The refusal a capped absorption factor produces hands back three fields of evidence beside its message. What are they?",
+ "The absorption factor, the removal that was asked for, and the ceiling the factor caps the removal at.",
+ ["The stage count the search reached, the removal it reached there, and the ceiling, so a caller can see how many more stages would close the gap.",
+  "The absorption factor, the liquid and gas molar rates behind it, and the equilibrium ratio between the two phases at the column's conditions.",
+  "The removal asked for, the removal the solvent allows, and the circulation that would reach the spec, which is the remedy in figures."],
+ "It hands back absorptionFactor, fractionRemoved and ceiling. None of the liquid rate, the gas rate or the equilibrium ratio is an argument of any export here, so no refusal can hand one back, and the remedy is named in the message rather than computed: raise the circulation rather than add stages.")
 
 q(2, "The water fit answers at exactly -49.000000000 degF and at exactly 140.000000000 degF, while the lean glycol strength refuses at exactly 90 and at exactly 100 weight percent. Why do the two guards behave differently at their own edges?",
  "The fit holds at its stated limits, and a strength of 100 weight percent is unreachable while a loop below 90 is a different kind of loop.",
@@ -84,7 +84,7 @@ q(2, "The water fit answers at exactly -49.000000000 degF and at exactly 140.000
   "The water guard protects a correlation and the strength guard protects a balance, and a balance is always guarded more tightly than a fit."],
  "A guard that refused its own stated limit would be as wrong as one that accepted anything. Each edge is read from both sides for exactly that reason.")
 
-q(3, "The contract is read on one export, the Kremser removal, at five sets of arguments. What makes that one export enough to read a whole contract on?",
+q(3, "The contract is read on one door, the Kremser removal, at five sets of arguments. What makes that one door enough to read the door contract on?",
  "It takes two arguments and the four refusals cover both of them at two kinds of bad value each.",
  ["It is the only export that returns a bare fraction.",
   "It is the export the studio calls most often.",

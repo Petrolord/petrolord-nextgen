@@ -103,11 +103,11 @@
   "options": [
    "The outlet content cannot be quoted at all until a rate is supplied, and a depression in degF is quotable without one.",
    "The cooling is the property of the unit and the water content is the property of the state the gas ends at, which is a pressure as well as a temperature.",
-   "The depression is what the engine returns, and the outlet content is a second call a reader has to make for themselves.",
+   "The depression is what the engine returns, and no export here can give the content at the state the gas arrives in.",
    "The outlet content is a saturated figure, and a saturated figure is a limit rather than an answer, so only the temperature difference can be sold."
   ],
   "answer": 1,
-  "explanation": "On this let-down the cooling is 36.316483434 degF. Change the outlet pressure and the same cooling leaves the gas at a different content."
+  "explanation": "On this let-down the cooling is 36.316483434 degF. Change the outlet pressure and the same cooling leaves the gas at a different content. The saturation routine will give the content at either state, so what is sold is the cooling rather than the read that follows it."
  },
  {
   "prompt": "There is no hydrate boundary in this engine. Is that a held item or an absence, and what follows?",

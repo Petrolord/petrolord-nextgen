@@ -292,11 +292,11 @@ q(3, "A learner meets the phrase dew point in the Fluid course. What does it mea
  "It is a pressure rather than a temperature, it belongs to a reservoir fluid rather than a treated sales gas, and it has nothing to do with water.")
 
 q(0, "Why does the studio never have to decide what a blank means?",
- "Because the engine never hands it one, since every refusal arrives as a named string on an error key.",
+ "Because the tab reads a door, and a door with no answer hands back a named fault rather than an empty value.",
  ["Because the studio validates every input before the engine is called, so a blank never reaches it.",
   "Because a blank is rendered as the value the engine last returned, which is what keeps the screen consistent.",
   "Because the engine returns a non-finite value for a fault, which the studio renders as a dash."],
- "Type an absorption factor of zero into the absorber tab and the studio has a named fault to render. Type one that works and it has a fraction.")
+ "Type an absorption factor of zero into the absorber tab and the studio has a named fault to render. Type one that works and it has a fraction. A scalar helper read straight from a tab would be the real defect, because its bare NaN passes an error check.")
 
 q(1, "A course states that the glycol density this module uses has been verified. What claim has it just made?",
  "That something in this package checks a number nothing in this package can check.",

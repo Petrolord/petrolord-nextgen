@@ -75,9 +75,9 @@ q(2, "What does the shape of that four-row table recommend as a method, wherever
 q(1, "Why is what a dew point skid sells described as a depression rather than as an outlet water content?",
  "The cooling is the property of the unit and the water content is the property of the state the gas ends at, which is a pressure as well as a temperature.",
  ["The outlet content cannot be quoted at all until a rate is supplied, and a depression in degF is quotable without one.",
-  "The depression is what the engine returns, and the outlet content is a second call a reader has to make for themselves.",
+  "The depression is what the engine returns, and no export here can give the content at the state the gas arrives in.",
   "The outlet content is a saturated figure, and a saturated figure is a limit rather than an answer, so only the temperature difference can be sold."],
- "On this let-down the cooling is 36.316483434 degF. Change the outlet pressure and the same cooling leaves the gas at a different content.")
+ "On this let-down the cooling is 36.316483434 degF. Change the outlet pressure and the same cooling leaves the gas at a different content. The saturation routine will give the content at either state, so what is sold is the cooling rather than the read that follows it.")
 
 q(0, "There is no hydrate boundary in this engine. Is that a held item or an absence, and what follows?",
  "An absence, because no correlation is coded and disabled and no figure is recorded and unchecked here.",
