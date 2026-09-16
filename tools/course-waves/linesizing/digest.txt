@@ -32,14 +32,15 @@ States the method has no answer for, engine messages verbatim:
 - an interval whose sweep already overfills the catcher: { error: "the sweep alone already exceeds the slug limit: pig more often or resize the catcher" }
 Those are states the METHOD has no answer for. Inputs that are not physically meaningful at all, a negative roughness or an efficiency above one or a corrosion allowance that removes metal, are refused as well, and the catalogue of them with the boundary either side is in Section 16.
 
-# The units it works in. Four constants the module keeps to itself are measured here by asking the engine a question about itself, because a number typed into this file would not be an engine return.
+# The units it works in. Seven constants the module keeps to itself are measured here by asking the engine a question about itself, because a number typed into this file would not be an engine return.
 gc, measured as the liquid density times the velocity squared over twice 144 times the one-velocity-head fittings loss: 32.174000 lbm ft per lbf s2 (derived from the engine's own velocity 2.244621 ft/s and fittings loss 0.029634 psi at a resistance sum of one).
 one centipoise in lbm per ft per s, measured as the density times the velocity times the bore in feet over the viscosity times the Reynolds number: 6.7197000000e-4 (derived from the engine's velocity 2.244621 ft/s and Reynolds number 48431.2523).
 cubic feet per barrel, measured as the flow area times the length over the engine's line volume: 5.6145833333333 (derived from the engine's line volume 1633.5349 bbl).
 seconds per day, measured as the rate times the cubic feet per barrel above over the area times the velocity: 86400.000000 (derived on the row).
 seconds per hour, measured as a length over the pig speed times the engine's run hours: 3600.000000 (derived from the engine's run time 2.444444 h).
 the feet in a mile, measured as the largest rise the engine accepts on a gas line 1.000000 mile long: 5280.000000000 ft is accepted and the next representable value above it, 9.095e-13 ft higher, is refused (engine).
-The base conditions the published gas forms are stated at, which the module DOES export: 520.000000 degR and 14.650000 psia. That base pressure is not atmospheric, and the two are a quarter of a psi apart.
+atmospheric pressure, measured as the floor of the outlet-pressure bracket: the largest rate this trunk accepts is 96619638.0494 scfd, the outlet the solve converges on there is 14.700000 psia, and one scfd more is refused (engine).
+The base conditions the published gas forms are stated at, which the module DOES export: 520.000000 degR and 14.650000 psia. That base pressure is not atmospheric: the two differ by 0.050000 psi (derived from the two figures on these rows).
 
 # SECTION 2: Velocity, Reynolds and the friction factor (owned by Associate m02)
 
@@ -66,6 +67,11 @@ The two branches, walked across the boundary the engine draws at Reynolds 2100 a
 | 5000.0000 | 0.037392727578 | turbulent |
 At the OGBIA relative roughness of 0.0002255356 (derived: the roughness over the bore) the friction factor goes from 0.0304761905 to 0.0488545386 across one unit of Reynolds number, a jump of 60.303955 percent (derived from the two engine values on this row).
 The lower value is reported as laminar and the upper as transitional, and the upper one is computed on the turbulent branch: the word and the arithmetic are saying different things in the band from 2100 to 4000.
+
+# The three constants of the two friction laws. The module exports none of them, so each is measured by choosing inputs that isolate it and reading back what the engine returns.
+the laminar numerator, measured on a smooth pipe below the branch as the friction factor times its own Reynolds number: 64.000000 (derived from the engine's 0.064000000000 at Reynolds 1000.0000).
+the Colebrook Reynolds numerator, measured on a SMOOTH pipe where the roughness term is exactly zero, as the Reynolds number times ten to the power of minus half the inverse square root of f, divided by that same inverse square root: 2.510000 (derived from the engine's 0.017989773084 at Reynolds 100000.0000).
+the Colebrook roughness divisor, measured in the FULLY ROUGH limit where the Reynolds term falls away, as the relative roughness times ten to the power of half the inverse square root of f: 3.700000 (derived from the engine's 0.037903711893 at Reynolds 100000000000000.0000 and relative roughness 0.010000).
 
 Relative roughness alone, at one Reynolds number, which is the vertical axis of the Moody chart:
 | relative roughness | f at Reynolds 100000.0000 | f at Reynolds 100000000.0000 |
@@ -164,7 +170,7 @@ Density is the whole of the limit: the same c factor against four fluids.
 | 20.000000 | 22.360680 | 27.950850 | 39.131190 |
 | 45.000000 | 14.907120 | 18.633900 | 26.087460 |
 | 62.400000 | 12.659242 | 15.824053 | 22.153674 |
-A light gas is allowed to run several times faster than a dense liquid, which is why the limit bites hardest on wet gas and hardly at all on crude.
+A light gas is allowed to run faster than a dense liquid by the square root of the density ratio: at the continuous-service c factor the 5.000000 lb/ft3 row stands at 44.721360 ft/s against 12.659242 ft/s at 62.400000 lb/ft3, a ratio of 3.532704 (derived from the two rows above).
 
 # HELD FOR LITERATURE, taught as a limit and never graded: the three c factor rows. The recommended practice itself says its own figures are conservative, and the third row is labelled as operator practice with no publication behind it. Every graded erosional value in this course states its own c factor.
 
@@ -286,7 +292,7 @@ What the hill costs the trunk, by form:
 | panhandleA | 86864172.0167 | 80589714.0893 | 92820112.7063 | 0.927767 | 1.068566 |
 | panhandleB | 88369202.2673 | 82321752.3402 | 94087628.1888 | 0.931566 | 1.064711 |
 | general | 73861363.0502 | 68827677.8048 | 78615728.3463 | 0.931850 | 1.064369 |
-Uphill is not the mirror of downhill. The two fractions on each row do not average to one, because the term is an exponential and an exponential is not symmetric about zero.
+Uphill is not the mirror of downhill, because the term is an exponential and an exponential is not symmetric about zero. Averaging the two fractions on the Weymouth row gives 0.998132 (derived from the two fractions on that row), which is close to one and is not one.
 
 # SECTION 10: The outlet pressure (owned by Professional m04)
 
@@ -439,7 +445,7 @@ The last column is derived from the two engine rates and the engine friction fac
 
 No form checks its own regime. The same nearly dead trunk through Weymouth and through General Flow:
 Weymouth 10466013.4729 scfd, General Flow 11016984.8816 scfd at a friction factor of 0.0126337788, a ratio of 0.949989 (derived).
-On the same line at its full duty the two sit at 0.894987 of each other. The forms agree better when the line is working than when it is barely flowing, and neither of them says so.
+On the same line at its full duty the two sit at 0.894987 of each other, so the distance from agreement is 0.050011 on the nearly dead line against 0.105013 at full duty (derived from the two ratios on these rows), and neither form says which it is on.
 
 Neither iteration in this module reports whether it converged. The friction factor solve runs a fixed point and the General Flow solve runs a rate and a friction factor against each other, and both return their last iterate with no flag beside it. They do converge everywhere this digest looked, which is exactly what makes the absence easy to miss.
 
@@ -509,7 +515,7 @@ And the rating still over-rates a line if the caller drops the allowance, becaus
 
 Five things this course teaches as limits and never as answers:
 1. The API RP 14E c factors, 100.000000, 125.000000 and 175.000000. HELD FOR LITERATURE. The recommended practice says its own figures are conservative, and the third is labelled operator practice with no source.
-2. The efficiency multiplier on all four gas forms. HELD FOR LITERATURE. Nothing in this package stands behind any value of it, and it is unguarded in both directions.
+2. The efficiency multiplier on all four gas forms. HELD FOR LITERATURE. Nothing in this package stands behind any value of it, and the engine bounding it to above zero and at most one is a bound rather than a source.
 3. The band from Reynolds 2100 to 4000, where the engine computes on the turbulent branch and labels the answer transitional. HELD FOR LITERATURE. The step across the boundary is 1.603040 times.
 4. The fully rough friction law Weymouth assumes. HELD FOR LITERATURE. Section 15 measures it out of the engine and nothing sources it.
 5. The published cases in this golden are SYNTHETIC. They come from an independent oracle written in Python from the same physics, in SI units where the engine works in field units, which catches an arithmetic or a unit error and cannot catch a method that is wrong in both files. No measured pipeline is in this course.

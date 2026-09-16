@@ -1,9 +1,10 @@
 # FC2 Line Sizing & Hydraulics. Three tiers, six modules each, 26 lessons a
 # tier. Panel ids: L the liquid line explorer (regime, the three losses, the
-# erosional limit, the bore sweep), G the gas line explorer (the four forms,
-# the elevation group, the ceiling and the inverse solve, the marched
-# profile), W the wall and pigging explorer (the code design factors, MAOP,
-# line volume, the holdup sweep, and the domain limits).
+# erosional limit, the bore sweep, and the marched profile, which is a LIQUID
+# traverse in digest Section 11), G the gas line explorer (the four forms, the
+# elevation group, the ceiling and the inverse solve), W the wall and pigging
+# explorer (the code design factors, MAOP, line volume, the holdup sweep, and
+# the domain limits).
 #
 # Titles carry COUNTS only, never a measurement.
 #
@@ -85,7 +86,10 @@ TIERS = {
   ('m01-a-gas-line-is-not-a-liquid-line', 'A Gas Line Is Not a Liquid Line', [
     ('l01-why-the-pressures-are-squared', 'Why the pressures are squared', 13, [G]),
     ('l02-base-conditions-are-a-choice', 'Base conditions are a choice', 13, [G]),
-    ('l03-miles-not-feet', 'Miles, not feet', 12, [G]),
+    # Retitled 2026-09-16: "Miles, not feet" used the "X, not Y" contrastive
+    # the owner's copy rule forbids in anything a learner reads. The KEY is
+    # left alone because the Professional tier is already committed at it.
+    ('l03-miles-not-feet', 'The engine works in miles', 12, [G]),
     ('l04-what-a-dead-line-returns', 'What a dead line returns', 12, [G]),
   ]),
   ('m02-the-four-transmission-forms', 'The Four Transmission Forms', [
@@ -112,9 +116,15 @@ TIERS = {
     ('l05-uphill-where-the-ceiling-falls', 'Uphill, where the ceiling falls', 14, [G]),
   ]),
   ('m05-marching-a-profile', 'Marching a Profile', [
-    ('l01-one-segment-at-a-time', 'One segment at a time', 13, [G]),
-    ('l02-the-station-list', 'The station list', 12, [G]),
-    ('l03-marched-against-one-shot', 'Marched against one shot', 14, [G]),
+    # Retagged 2026-09-16 from the gas explorer to the liquid one. Digest
+    # Section 11, which this module owns, is entirely a LIQUID traverse: the
+    # engine's only marching function is liquidLineTraverse, and the gas
+    # analogue lives in the Suite layer and is not vendored. l04 and l05 were
+    # already tagged L, so the module was pointing at two panels for one
+    # subject and three of its lessons at a panel that cannot show it.
+    ('l01-one-segment-at-a-time', 'One segment at a time', 13, [L]),
+    ('l02-the-station-list', 'The station list', 12, [L]),
+    ('l03-marched-against-one-shot', 'Marched against one shot', 14, [L]),
     ('l04-refusing-with-the-evidence-attached', 'Refusing with the evidence attached', 13, [L]),
     ('l05-what-a-traverse-drops', 'What a traverse drops', 13, [L]),
   ]),

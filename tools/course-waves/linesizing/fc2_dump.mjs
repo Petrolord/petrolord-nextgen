@@ -90,6 +90,20 @@ const gasForms = [
 ];
 const SOKU_Q = Object.fromEntries(gasForms.map(([k, fn]) => [k, fn(SOKU)]));
 
+/** Atmospheric, the FLOOR of the outlet-pressure bracket. The module does not
+ *  export it, so it is measured the way the mile is: push the requested rate
+ *  up until the solve refuses, and the outlet it converges on at the largest
+ *  rate it still accepts is the floor itself. */
+const bracketFloorPsia = (() => {
+  const at = (q) => H.gasOutletPressure({ equation: 'weymouth', qScfd: q, ...SOKU });
+  let lo = 1e6; let hi = 1e12;
+  for (let i = 0; i < 200; i += 1) {
+    const mid = (lo + hi) / 2;
+    if (at(mid).error) hi = mid; else lo = mid;
+  }
+  return { floor: at(lo).p2Psia, largestRate: lo };
+})();
+
 // ------------------------------------------------------------------ header
 w('# FC2 Line Sizing & Hydraulics. Teaching digest.');
 w('# Liquid work prints to six decimals (ft per s, psi, inches, ratios, friction factors); gas rates, Reynolds numbers, barrels, hours and days to four; counts are whole numbers.');
@@ -129,7 +143,7 @@ w('States the method has no answer for, engine messages verbatim:');
 ].forEach(([label, fn]) => w(`- ${label}: ${soft(fn())}`));
 w('Those are states the METHOD has no answer for. Inputs that are not physically meaningful at all, a negative roughness or an efficiency above one or a corrosion allowance that removes metal, are refused as well, and the catalogue of them with the boundary either side is in Section 16.');
 w();
-w('# The units it works in. Four constants the module keeps to itself are measured here by asking the engine a question about itself, because a number typed into this file would not be an engine return.');
+w('# The units it works in. Seven constants the module keeps to itself are measured here by asking the engine a question about itself, because a number typed into this file would not be an engine return.');
 const mGc = liquidAt(OGBIA, { sumK: 1 });
 w(`gc, measured as the liquid density times the velocity squared over twice 144 times the one-velocity-head fittings loss: ${e6((OGBIA.rhoLbFt3 * mGc.vFtS * mGc.vFtS) / (2 * 144 * mGc.dpFittingsPsi))} lbm ft per lbf s2 (derived from the engine's own velocity ${e6(mGc.vFtS)} ft/s and fittings loss ${e6(mGc.dpFittingsPsi)} psi at a resistance sum of one).`);
 w(`one centipoise in lbm per ft per s, measured as the density times the velocity times the bore in feet over the viscosity times the Reynolds number: ${(((OGBIA.rhoLbFt3 * OG.vFtS * (OGBIA.idIn / 12)) / (OGBIA.muCp * OG.re))).toExponential(10)} (derived from the engine's velocity ${e6(OG.vFtS)} ft/s and Reynolds number ${r4(OG.re)}).`);
@@ -153,7 +167,8 @@ for (let i = 0; i < 200; i += 1) {
   if (mileAccepts(mid)) mLo = mid; else mHi = mid;
 }
 w(`the feet in a mile, measured as the largest rise the engine accepts on a gas line ${e6(MILE_PROBE_LENGTH_MI)} mile long: ${num(mLo, 9)} ft is accepted and the next representable value above it, ${(mHi - mLo).toExponential(3)} ft higher, is refused (engine).`);
-w(`The base conditions the published gas forms are stated at, which the module DOES export: ${e6(H.BASE_CONDITIONS.tbR)} degR and ${e6(H.BASE_CONDITIONS.pbPsia)} psia. That base pressure is not atmospheric, and the two are a quarter of a psi apart.`);
+w(`atmospheric pressure, measured as the floor of the outlet-pressure bracket: the largest rate this trunk accepts is ${r4(bracketFloorPsia.largestRate)} scfd, the outlet the solve converges on there is ${e6(bracketFloorPsia.floor)} psia, and one scfd more is refused (engine).`);
+w(`The base conditions the published gas forms are stated at, which the module DOES export: ${e6(H.BASE_CONDITIONS.tbR)} degR and ${e6(H.BASE_CONDITIONS.pbPsia)} psia. That base pressure is not atmospheric: the two differ by ${e6(bracketFloorPsia.floor - H.BASE_CONDITIONS.pbPsia)} psi (derived from the two figures on these rows).`);
 w();
 
 // ---------------------------------------------------------------- SECTION 2
@@ -178,6 +193,18 @@ const jLo = H.frictionFactor({ re: RE_JUST_BELOW_BRANCH, relRough: OGBIA.roughne
 const jHi = H.frictionFactor({ re: RE_AT_BRANCH, relRough: OGBIA.roughnessIn / OGBIA.idIn });
 w(`At the OGBIA relative roughness of ${num(OGBIA.roughnessIn / OGBIA.idIn, 10)} (derived: the roughness over the bore) the friction factor goes from ${num(jLo.f, 10)} to ${num(jHi.f, 10)} across one unit of Reynolds number, a jump of ${e6((jHi.f / jLo.f - 1) * 100)} percent (derived from the two engine values on this row).`);
 w(`The lower value is reported as ${jLo.regime} and the upper as ${jHi.regime}, and the upper one is computed on the turbulent branch: the word and the arithmetic are saying different things in the band from 2100 to 4000.`);
+w();
+const LAM_RE = 1000;
+const lamF = H.frictionFactor({ re: LAM_RE, relRough: 0 }).f;
+const SMOOTH_RE = 1e5;
+const xSmooth = 1 / Math.sqrt(H.frictionFactor({ re: SMOOTH_RE, relRough: 0 }).f);
+const ROUGH_RR = 0.01;
+const ROUGH_RE = 1e14;
+const xRough = 1 / Math.sqrt(H.frictionFactor({ re: ROUGH_RE, relRough: ROUGH_RR }).f);
+w('# The three constants of the two friction laws. The module exports none of them, so each is measured by choosing inputs that isolate it and reading back what the engine returns.');
+w(`the laminar numerator, measured on a smooth pipe below the branch as the friction factor times its own Reynolds number: ${e6(lamF * LAM_RE)} (derived from the engine's ${num(lamF, 12)} at Reynolds ${r4(LAM_RE)}).`);
+w(`the Colebrook Reynolds numerator, measured on a SMOOTH pipe where the roughness term is exactly zero, as the Reynolds number times ten to the power of minus half the inverse square root of f, divided by that same inverse square root: ${e6(SMOOTH_RE * Math.pow(10, -xSmooth / 2) / xSmooth)} (derived from the engine's ${num(H.frictionFactor({ re: SMOOTH_RE, relRough: 0 }).f, 12)} at Reynolds ${r4(SMOOTH_RE)}).`);
+w(`the Colebrook roughness divisor, measured in the FULLY ROUGH limit where the Reynolds term falls away, as the relative roughness times ten to the power of half the inverse square root of f: ${e6(ROUGH_RR * Math.pow(10, xRough / 2))} (derived from the engine's ${num(H.frictionFactor({ re: ROUGH_RE, relRough: ROUGH_RR }).f, 12)} at Reynolds ${r4(ROUGH_RE)} and relative roughness ${e6(ROUGH_RR)}).`);
 w();
 w('Relative roughness alone, at one Reynolds number, which is the vertical axis of the Moody chart:');
 w(`| relative roughness | f at Reynolds ${r4(RE_LOW_FOR_ROUGHNESS_TABLE)} | f at Reynolds ${r4(RE_HIGH_FOR_ROUGHNESS_TABLE)} |`);
@@ -270,7 +297,10 @@ w('| --- | --- | --- | --- |');
 EROSIONAL_DENSITY_SWEEP.forEach((rho) => {
   w(`| ${e6(rho)} | ${e6(C.erosionalVelocityFtS({ mixtureDensityLbFt3: rho, cFactor: 100 }))} | ${e6(C.erosionalVelocityFtS({ mixtureDensityLbFt3: rho, cFactor: 125 }))} | ${e6(C.erosionalVelocityFtS({ mixtureDensityLbFt3: rho, cFactor: 175 }))} |`);
 });
-w('A light gas is allowed to run several times faster than a dense liquid, which is why the limit bites hardest on wet gas and hardly at all on crude.');
+const cCont = C.erosionalC('continuous').c;
+const veLight = C.erosionalVelocityFtS({ mixtureDensityLbFt3: EROSIONAL_DENSITY_SWEEP[0], cFactor: cCont });
+const veHeavy = C.erosionalVelocityFtS({ mixtureDensityLbFt3: EROSIONAL_DENSITY_SWEEP[3], cFactor: cCont });
+w(`A light gas is allowed to run faster than a dense liquid by the square root of the density ratio: at the continuous-service c factor the ${e6(EROSIONAL_DENSITY_SWEEP[0])} lb/ft3 row stands at ${e6(veLight)} ft/s against ${e6(veHeavy)} ft/s at ${e6(EROSIONAL_DENSITY_SWEEP[3])} lb/ft3, a ratio of ${e6(veLight / veHeavy)} (derived from the two rows above).`);
 w();
 w('# HELD FOR LITERATURE, taught as a limit and never graded: the three c factor rows. The recommended practice itself says its own figures are conservative, and the third row is labelled as operator practice with no publication behind it. Every graded erosional value in this course states its own c factor.');
 w();
@@ -390,7 +420,7 @@ gasForms.forEach(([k, fn]) => {
   const dn = fn({ ...SOKU, elevChangeFt: SOKU_DOWN_FT }).qScfd;
   w(`| ${k} | ${r4(flat)} | ${r4(up)} | ${r4(dn)} | ${e6(up / flat)} | ${e6(dn / flat)} |`);
 });
-w('Uphill is not the mirror of downhill. The two fractions on each row do not average to one, because the term is an exponential and an exponential is not symmetric about zero.');
+w(`Uphill is not the mirror of downhill, because the term is an exponential and an exponential is not symmetric about zero. Averaging the two fractions on the Weymouth row gives ${e6((H.weymouthQ({ ...SOKU, elevChangeFt: SOKU_UP_FT }).qScfd / SOKU_Q.weymouth.qScfd + H.weymouthQ({ ...SOKU, elevChangeFt: SOKU_DOWN_FT }).qScfd / SOKU_Q.weymouth.qScfd) / 2)} (derived from the two fractions on that row), which is close to one and is not one.`);
 w();
 
 // --------------------------------------------------------------- SECTION 10
@@ -586,7 +616,7 @@ w('No form checks its own regime. The same nearly dead trunk through Weymouth an
 const deadW = H.weymouthQ({ ...SOKU, p2Psia: SOKU_NEARLY_DEAD_P2_PSIA });
 const deadG = H.generalFlowQ({ ...SOKU, p2Psia: SOKU_NEARLY_DEAD_P2_PSIA });
 w(`Weymouth ${r4(deadW.qScfd)} scfd, General Flow ${r4(deadG.qScfd)} scfd at a friction factor of ${num(deadG.fDarcy, 10)}, a ratio of ${e6(deadW.qScfd / deadG.qScfd)} (derived).`);
-w(`On the same line at its full duty the two sit at ${e6(SOKU_Q.weymouth.qScfd / SOKU_Q.general.qScfd)} of each other. The forms agree better when the line is working than when it is barely flowing, and neither of them says so.`);
+w(`On the same line at its full duty the two sit at ${e6(SOKU_Q.weymouth.qScfd / SOKU_Q.general.qScfd)} of each other, so the distance from agreement is ${e6(Math.abs(1 - deadW.qScfd / deadG.qScfd))} on the nearly dead line against ${e6(Math.abs(1 - SOKU_Q.weymouth.qScfd / SOKU_Q.general.qScfd))} at full duty (derived from the two ratios on these rows), and neither form says which it is on.`);
 w();
 w('Neither iteration in this module reports whether it converged. The friction factor solve runs a fixed point and the General Flow solve runs a rate and a friction factor against each other, and both return their last iterate with no flag beside it. They do converge everywhere this digest looked, which is exactly what makes the absence easy to miss.');
 w();
@@ -664,7 +694,7 @@ w('# SECTION 17: What the method does not know (owned by Expert m05)');
 w();
 w('Five things this course teaches as limits and never as answers:');
 w(`1. The API RP 14E c factors, ${e6(C.erosionalC('continuous').c)}, ${e6(C.erosionalC('intermittent').c)} and ${e6(C.erosionalC('cleanInhibited').c)}. HELD FOR LITERATURE. The recommended practice says its own figures are conservative, and the third is labelled operator practice with no source.`);
-w('2. The efficiency multiplier on all four gas forms. HELD FOR LITERATURE. Nothing in this package stands behind any value of it, and it is unguarded in both directions.');
+w('2. The efficiency multiplier on all four gas forms. HELD FOR LITERATURE. Nothing in this package stands behind any value of it, and the engine bounding it to above zero and at most one is a bound rather than a source.');
 w(`3. The band from Reynolds 2100 to 4000, where the engine computes on the turbulent branch and labels the answer transitional. HELD FOR LITERATURE. The step across the boundary is ${e6(jHi.f / jLo.f)} times.`);
 w('4. The fully rough friction law Weymouth assumes. HELD FOR LITERATURE. Section 15 measures it out of the engine and nothing sources it.');
 w('5. The published cases in this golden are SYNTHETIC. They come from an independent oracle written in Python from the same physics, in SI units where the engine works in field units, which catches an arithmetic or a unit error and cannot catch a method that is wrong in both files. No measured pipeline is in this course.');

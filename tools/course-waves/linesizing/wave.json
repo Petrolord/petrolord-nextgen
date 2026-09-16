@@ -53,9 +53,13 @@
   "questionsPerTier": 132,
   "questionsPerModuleBank": 15,
   "examQuestions": 42,
+  "lessonLength": {
+   "band": "420 to 560 words, ranked by est_minutes within a tier",
+   "measure": "PROSE WORDS ONLY, counted the way lengths.py counts them: front matter, markdown table rows, headings and {{panel:...}} lines are all excluded. A raw `wc -w` over the whole file is NOT this measure and runs materially higher, so a lesson can be inside the band and still fail a raw word count. State which measure before quoting a number at a writer."
+  },
   "modules": {
    "beginner": [
-    "m01 What a line-sizing engine does, and what it refuses (4 lessons). The scope seam: this engine sizes ONE line. It is not a network and it is not a multiphase trace, and it says which is which. Its l04 now measures five constants out of the engine, the mile among them.",
+    "m01 What a line-sizing engine does, and what it refuses (4 lessons). The scope seam: this engine sizes ONE line. It is not a network and it is not a multiphase trace, and it says which is which. Its l04 measures SEVEN constants out of the engine, none of them typed: gc, the centipoise, the barrel, the day, the hour, the mile and atmospheric.",
     "m02 Velocity, Reynolds and the friction factor (5). Bore to area to velocity, the Reynolds number in field units, the two branches, and the band between them that has no correlation.",
     "m03 The liquid line, three losses kept apart (5). Darcy-Weisbach, the velocity head, fittings as a resistance sum, elevation as a static column, and the gradient.",
     "m04 The erosional limit as a sizing criterion (4). RP 14E, C over root rho, the c factor as an input, and the largest rate a bore can carry.",
@@ -95,8 +99,8 @@
   "panels": {
    "lab": "src/components/course/panels/linesizing/linesizingLab.js",
    "ids": [
-    "fc-liquid-explorer (Associate): regime and friction factor, the three losses, the erosional limit, the bore sweep",
-    "fc-gasline-explorer (Professional and Expert): the four forms side by side, the elevation group, the ceiling table in both signs, the inverse solve, the marched profile",
+    "fc-liquid-explorer (Associate and Professional): regime and friction factor, the three losses, the erosional limit, the bore sweep, and the marched profile, which is a LIQUID traverse and is why Professional m05 tags this panel and not the gas one",
+    "fc-gasline-explorer (Professional and Expert): the four forms side by side, the elevation group, the ceiling table in both signs, and the inverse solve",
     "fc-wall-pig-explorer (Expert and Professional): the code design factors, wall and MAOP, line volume and the holdup sweep, the guard boundaries, and the domain limits"
    ]
   },

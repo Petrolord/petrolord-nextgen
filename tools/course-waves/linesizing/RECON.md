@@ -309,9 +309,42 @@ capstone field moved under the repairs**, verified twice by the repair wave.
 ### The repairs, and what they do to the plan
 
 `FINDINGS.md` Part 2 is the authority. In summary: the ten fails-open and
-the ten fails-silent are repaired, twenty-one inputs now return a named
-error, the outlet bracket is corrected in both directions, and the barrel is
-unified on the exact definition. **Not repaired, and still teaching
+the ten fails-silent are repaired, the outlet bracket is corrected in both
+directions, and the barrel is unified on the exact definition.
+
+**On the refusal count, corrected against the digest rather than inherited.**
+Earlier drafts of this file and of several briefs said "twenty-one inputs now
+return a named error". That figure appears nowhere in the digest and should
+not be repeated. What the file actually carries, counted from it: **Section 1
+lists 18 states the method has no answer for**, and **Section 16 is a separate
+catalogue of 24 rows carrying 18 DISTINCT messages** (six messages appear
+twice, because three guards have two entry points and three catch two
+different bad values). 18 and 24 are different counts of different things and
+neither is 21.
+
+### REPAIR HISTORY IS NOT TEACHING TRUTH. Do not quote these to a writer.
+
+Everything in this section 8 is true of the WORK and is not printed by
+`digest.txt`. That distinction cost a writer real effort once already, so it
+is marked here rather than left to be rediscovered. A figure that is not a
+digest line is not available to a lesson, a bank question or a panel,
+whatever its provenance. The following are all repair history:
+
+- the 75 psi ascent error and the 10 to 50 psi descent errors of the old
+  bracket;
+- the claim that the corrected solve matches the closed-form inverse to about
+  3e-16;
+- the old code's mechanism, the `[14.7, p1]` bracket and its NaN branch;
+- the refusal key names `{ error, stations, diedAtFt, diedAtPsia }`;
+- the statement that the traverse "used to return a number";
+- the 21 named refusals corrected immediately above.
+
+**The digest-grounded replacement is better than any of them**, and it is what
+a writer should reach for: Section 10's ceiling table prints the ceiling
+falling **65.035343 psi BELOW the inlet up 3000 ft** and rising **70.423606
+psi above it down 3000 ft**, on the same trunk. An inlet-capped bracket is
+therefore too short on a descent and too long on a climb, and both halves of
+that sentence are engine values on one printed row. **Not repaired, and still teaching
 material:** G1 the transition discontinuity, G2 the missing convergence
 flags, G3 Colebrook past its roughness, G5 the traverse's absent `sumK`, G6
 `erosionalC`'s wrong label (it belongs to a table PD1 and the wellhead studio
