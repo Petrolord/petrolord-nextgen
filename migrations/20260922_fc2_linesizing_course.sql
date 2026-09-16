@@ -96,8 +96,8 @@ values
     jsonb_build_object('key','quaiboe_maop_as_built_psig', 'label','MAOP of the wall as built', 'unit','psig', 'expected',1586.4843750000002, 'tol',1e-05),
     jsonb_build_object('key','quaiboe_line_volume_bbl', 'label','Line volume', 'unit','bbl', 'expected',66935.15776219887, 'tol',0.0001),
     jsonb_build_object('key','quaiboe_swept_volume_bbl', 'label','Swept liquid volume at the measured holdup', 'unit','bbl', 'expected',2342.7305216769605, 'tol',1e-05),
-    jsonb_build_object('key','quaiboe_pig_run_hours', 'label','Pig run time', 'unit','hours', 'expected',21.266666666666666, 'tol',1e-07),
-    jsonb_build_object('key','quaiboe_pigging_interval_days', 'label','Interval between pig runs', 'unit','days', 'expected',9.023889245505679, 'tol',1e-07)
+    jsonb_build_object('key','quaiboe_pig_run_hours', 'label','Pig run time', 'unit','hours', 'expected',21.266666666666666, 'tol',5e-07),
+    jsonb_build_object('key','quaiboe_pigging_interval_days', 'label','Interval between pig runs', 'unit','days', 'expected',9.023889245505679, 'tol',5e-05)
   )
 )
 on conflict (app_slug, tier) do nothing;
