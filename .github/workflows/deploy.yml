@@ -53,6 +53,18 @@ jobs:
     - name: Committed wave inputs
       run: node tools/course-waves/check-wave-inputs.mjs
 
+    # A bank ships as a PAIR: the .py that builds the questions and the .json
+    # it writes, which is what the seed migrations carry. Repair a question in
+    # the JSON alone and everything downstream is correct while the next re-cut
+    # reverts the repair in silence. FC2 shipped with ten of its twenty one
+    # sources in that state, twenty four questions, three of them keyed
+    # answers, and nothing here said so. This runs every committed source and
+    # compares the bytes it writes with the bytes committed beside it.
+    - name: Committed bank sources reproduce their JSON
+      run: |
+        python3 tools/course-banks/check-bank-sources.py --selftest
+        python3 tools/course-banks/check-bank-sources.py
+
     - name: Course panel and lab gates
       run: npx vitest run src/components/course/panels --reporter=basic
 

@@ -67,12 +67,12 @@ const C = await import(`${ROOT}/engines/production/chokePerformance.js`);
  *                     in as inputs, not volumes the engine returned.
  *   4   days          r4. "3.7997 days".
  *
- * ONE DISAGREEMENT WORTH RECORDING RATHER THAN RESOLVING HERE. The comment on
- * r4 in fc2_dump.mjs lists hours among the four-decimal quantities and every
- * hours call site uses e6, so the comment is stale and the page is right. The
- * Expert m06 bank question on the capstone conventions carries the same stale
- * claim in its keyed answer. Neither is a tolerance and neither is changed by
- * this file. Hours print to six.
+ * HOURS ARE LIQUID WORK AND THEY PRINT TO SIX. Every place this course states
+ * the convention says so: the digest header, the e6 comment in fc2_dump.mjs
+ * that produced the page, the Expert capstone lesson and the Expert m06 bank
+ * question on the conventions. Barrels and days are four-decimal quantities
+ * and hours are a six-decimal one, which is why quaiboe_pig_run_hours is
+ * graded at the half-unit of six places.
  * ========================================================================== */
 export const PRINTED_DECIMALS = {
   ftPerS: 6,
