@@ -81,7 +81,7 @@ q(2, "Why does this tier insist that a vessel figure is quoted to six decimals a
  ["Because the goldens are recorded at those precisions and a figure quoted any other way is refused by the studio form before it can reach a marking sheet at all.",
   "Because vessel work is in feet and site work in metres, and a metre carries fewer significant figures.",
   "Because a capstone is marked to the digit."],
- "Precision is part of the reading. The 6.000000 ft drum reports 0.938751 with gasCapacityOk false, and a rounded margin reverses the verdict.")
+ "Six decimals on a vessel and four on a site are the precisions the two halves of this engine print. A figure rounded on the way to an answer is a different answer, and a reader cannot tell which they were handed.")
 
 q(3, "A sheet quotes a liquid requirement of 23.270539 ft for the 8.000000 ft drum on ABANA-2, with the duty named and the requirement labelled. Which condition is still missing?",
  "The level of 0.500000, since the same drum on the same duty asks for 46.113917 ft at 0.300000.",

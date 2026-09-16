@@ -87,7 +87,7 @@ q(2, "A three-phase run before FC1-0 was given no oil gravity and reported water
  ["The engine substituted a default oil gravity taken from the published cases, sized the vessel on it, and reported the verdicts that default produced without flagging it.",
   "The engine skipped both droplet checks and returned the initialised values of the two fields, which a caller could detect from the empty warning string beside them.",
   "The engine fell back to the water gravity for both phases, leaving a density difference of zero."],
- "The repair is a SeparatorInputError on sgOil. A verdict computed from an input the engine could not read is a verdict that says nothing, and it said nothing in the reassuring direction.")
+ "Nothing was computed. A Stokes velocity needs a density difference, and a difference taken against a gravity the engine could not read is NaN, so both crossing times were NaN as well.")
 
 q(0, "A NaN gravity read as a passing comparison, a chord-rule water layer and one dropletMicron standing for two checks. What do the three retired behaviours have in common?",
  "Not one of them ever raised a false alarm, so each was quiet in exactly the way a defect that fails open is quiet and stayed in the engine until somebody went looking.",

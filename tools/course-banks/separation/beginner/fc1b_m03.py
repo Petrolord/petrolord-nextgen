@@ -28,12 +28,12 @@ q(3, "K is raised by half on a stream whose fluids do not change. What happens t
   "It does not move until the pressure rule is applied again, since the deduction above 100 psig is a fixed subtraction and a higher base row keeps the same distance above the 0.120000 floor."],
  "Half again on K divides the area by one and a half. Everything else in the settling velocity comes from the fluids, so K is where the hardware enters the sizing."),
 
-q(1, "At 600.000000 psig the module's rule takes 0.050000 off a vertical mesh pad and the same 0.050000 off a bare vertical drum. What follows from the deduction being identical?",
+q(1, "At 600.000000 psig the module's rule takes a vertical mesh pad from 0.350000 to 0.300000 and takes the same amount off a bare drum at 0.180000. What follows from the deduction being identical?",
  "It costs the bare drum a far larger share of its allowance, since 0.180000 starts at about half the mesh pad's 0.350000.",
- ["Nothing follows. The deduction is proportional to the base row, so 0.050000 off 0.350000 is the same fraction of it as the deduction taken off a base of 0.180000 at that pressure.",
+ ["Nothing follows. The deduction is proportional to the base row, so the step from 0.350000 to 0.300000 is the same fraction of it as the step taken off a base of 0.180000 at that pressure.",
   "The bare drum reaches the 0.120000 floor at 600.000000 psig while the mesh pad does not, and that is the pressure at which the two rows stop being comparable with each other at all.",
   "The rule is a percentage deduction written in absolute terms, which is why 0.300000 and 0.400000 appear."],
- "0.050000 off 0.350000 leaves the 0.300000 the module records at 600.000000 psig. The same deduction on a base of 0.180000 is why a bare drum reaches -0.010000 at 2000.000000 psig."),
+ "The rule takes 0.01 off K every 100 psi, so the same absolute amount comes off both rows. On a base of 0.180000 that is why a bare drum reaches -0.010000 at 2000.000000 psig."),
 
 q(2, "At 3000.000000 psig the rule gives a bare vertical drum -0.110000 and the engine reports K 0.120000 with floored true. What is that 0.120000?",
  "A bound the rule ran into, which is why the warning says a vendor K is the only honest input there.",
@@ -64,11 +64,11 @@ q(3, "A horizontal bare drum at 1500.000000 psig and a vertical bare drum at 300
  "A floored K is a bound rather than a result. Two very different vessels came back at the same figure because the floor absorbed the difference between them."),
 
 q(1, "An override returns {\"k\":0.28,\"derated\":false,\"floored\":false,\"nearFloor\":false,\"source\":\"typed\",\"warning\":null}. Which of those fields does a reviewer need most?",
- "source, because a K of 0.280000 could have come from a table row, a derating, a floor or a supplier, and the vessel looks the same in all four cases.",
+ "source, because a K of 0.28 could have come from a table row, a derating, a floor or a supplier, and the vessel looks exactly the same in all four of those cases.",
  ["warning, because a null there says the typed figure was compared against the table value and found reasonable.",
   "derated, because false there is what separates a vendor figure from a table figure, and it is the flag the sizing steps downstream read when they decide whether to trust a K.",
   "k, because the value sizes the vessel while the others describe a provenance nothing downstream reads."],
- "The override replaces the whole lookup, so nothing was derated and nothing floored. What the other fields cannot say is where 0.280000 came from, and source says typed."),
+ "The override replaces the whole lookup, so nothing was derated and nothing floored. What the other fields cannot say is where 0.28 came from, and source says typed."),
 
 q(2, "An override of zero is refused while leaving the override out entirely is fine. What difference does the message name?",
  "Out means use the published table, and zero means a number was supplied that cannot be used, since it gives a settling velocity of zero and an unbounded area.",
@@ -81,7 +81,7 @@ q(0, "A supplier's K far above every row of the published table is typed for a v
  "It sizes on the typed figure, reports source typed with no warning, and never compares it against the table value at that pressure.",
  ["It refuses it, because a typed figure outside the span from 0.180000 to 0.550000 is a transcription error.",
   "It accepts it and fills the warning field, which is what that field exists for on a typed K.",
-  "It accepts it and derates it, because the pressure rule is applied once a K is established whatever its source, so a typed figure at 600.000000 psig reaches settling reduced by 0.050000."],
+  "It accepts it and derates it, because the pressure rule is applied once a K is established whatever its source, so a typed figure at 600.000000 psig reaches settling reduced by the same amount the table rows lose."],
  "The engine accepts kOverride and says source typed. A K far outside the span from 0.180000 to 0.550000 is either unusual hardware or a transcription error, and nothing in the output separates the two."),
 
 q(3, "A vertical vessel is sized with 0.450000 because the reader took a mesh pad row without checking the orientation column. Does anything object, and what moves?",

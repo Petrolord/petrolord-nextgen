@@ -22,7 +22,7 @@
   "explanation": "From 5.000000 ft to 6.000000 ft the velocity falls from 3.003871 ft/s to 2.086022 ft/s. From 9.000000 ft to 10.000000 ft the same foot is worth 0.927121 ft/s down to 0.750968 ft/s."
  },
  {
-  "prompt": "What does the margin of 1.668891 on the 8.000000 ft drum measure?",
+  "prompt": "A margin of 1.668891 is reported beside ABANA-2. Which division produced it?",
   "options": [
    "The gas velocity divided by the settling velocity, so any figure above one says the gas is winning and liquid is leaving with it.",
    "The settling velocity of 1.958255 ft/s divided by the gas velocity of 1.173387 ft/s, so the gas in the gas space moves more slowly than a droplet falls through it.",

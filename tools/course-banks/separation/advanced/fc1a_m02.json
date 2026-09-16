@@ -129,7 +129,7 @@
    "The engine fell back to the water gravity for both phases, leaving a density difference of zero."
   ],
   "answer": 2,
-  "explanation": "The repair is a SeparatorInputError on sgOil. A verdict computed from an input the engine could not read is a verdict that says nothing, and it said nothing in the reassuring direction."
+  "explanation": "Nothing was computed. A Stokes velocity needs a density difference, and a difference taken against a gravity the engine could not read is NaN, so both crossing times were NaN as well."
  },
  {
   "prompt": "A NaN gravity read as a passing comparison, a chord-rule water layer and one dropletMicron standing for two checks. What do the three retired behaviours have in common?",

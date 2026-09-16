@@ -6,12 +6,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # FC1 Associate final exam. 42 questions across m01 to m06, written to need
 # two modules at once wherever the material allows it.
 
-q(0, "A drawing is labelled 600 with no unit beside it. The reader hands that figure to the gas law and to the K lookup. Which of the two uses is defensible?",
- "The K lookup, since the module's pressure rule is written against a gauge reading, while the gas law needed 614.700000 psia.",
- ["The gas law, since 600.000000 is the absolute figure Ppr 0.922896 was built from.",
-  "Neither of them, since a figure with no unit beside it is refused by both guards, one demanding a positive absolute pressure and the other a non-negative gauge one.",
-  "Both of them, since each step is guarded on the domain of a value rather than on its label."],
- "A diagram saying 600 is almost always saying psig. Ppr 0.922896 and a density of 2.239712 lb/ft3 were built from 614.700000 psia, and the mesh pad at 600.000000 psig is what the module records as 0.300000."),
+q(0, "The golden expectations for gasDensity carry a status word on every case, and three of them read refused-tpr-below-range, refused-tpr-above-range and refused-ppr-above-range. What is that word doing that the message does not?",
+ "It pins which bound the case crossed, so a run cannot pass by refusing a cold gas for a pressure reason.",
+ ["It records only that the case was expected to refuse, since a message is free text and a golden cannot hold an engine to a string.",
+  "It carries the reduced figure the case reached, 0.848, 3.176 and 37.306.",
+  "It marks the four cases whose status reads ok."],
+ "All four accepted cases read ok, including the one that comes back with a note. The three refusals name the bound, so refusing for the wrong reason is a failure and not a pass.")
 
 q(2, "The actual rate of 4.825708 ft3/s is the numerator of the gas area. What is the denominator, and what would the standard figure give in its place?",
  "The settling velocity of 1.458422 ft/s, and 208.333333 standard ft3/s would give a vessel that is absurd rather than subtly wrong.",
@@ -27,12 +27,12 @@ q(1, "The ABANA-1 mesh pad is recorded at a base of 0.350000 and used at 0.30000
   "It raises it, since a lower allowable velocity holds the gas to a slower crossing."],
  "K multiplies the whole expression, so the velocity moves with it. The step from 0.350000 to 0.300000 is the part the module records as unverified."),
 
-q(3, "Everything about ABANA-1 is held except the water cut, which rises. Which dimension of the vertical vessel gets easier and which gets harder?",
- "The diameter gets easier as the mixture and the settling velocity rise, and the height gets harder as the retention volume grows.",
- ["The diameter gets harder, since a heavier liquid carries more gas in solution and the actual rate at conditions rises with it, while the height is untouched by a change of water cut.",
-  "Both get easier, since the mixture rises toward 64.896000 lb/ft3 and a heavier liquid settles faster.",
-  "Both get harder, since the mixture narrows the difference against the gas and the volume grows."],
- "The two effects pull in opposite directions and land on different dimensions of the same vessel. 35.091146 ft3 is the retention volume at 3000.000000 bpd, and more liquid needs more of it."),
+q(3, "ABANA-1 mixes at 55.171463 lb/ft3 and ABANA-2 at 55.919504 from the same oil at 53.675380 and the same water at 64.896000. How far can that figure travel over a field life?",
+ "As far as 64.896000 lb/ft3, which is where the mixture lands when the oil stops and only the water is still arriving.",
+ ["As far as 60.613628 lb/ft3, which is the plain average of two liquid densities and the ceiling a weighted mixture works toward.",
+  "No further than 55.919504 lb/ft3, the higher of the two rows.",
+  "As far as 53.675380 lb/ft3, since a mixture walks toward the larger stream."],
+ "The mixture is two densities weighted by their volume rates, so it walks with the water cut. A vessel sized at first oil was sized against the driest mixture it will ever see.")
 
 q(0, "Which of these arrives as a throw and which as data: a gas gravity of undefined, and a z factor at Ppr 37.306?",
  "The gravity is thrown and names itself, and the z factor outside the range comes back as an error a caller can display.",
@@ -48,12 +48,12 @@ q(1, "A bare drum at high pressure is sized on a floored K of 0.120000 and repor
   "Nothing that can be computed, since a floored K raises the floored flag."],
  "The warning says K is held at 0.12 and a vendor K is the only honest input there. A margin inherits whatever the allowable it was built on is worth."),
 
-q(2, "Ppr 0.149225 returns a note and Tpr 0.848 returns a refusal. Which of the two is the engine more worried about?",
- "Tpr 0.848, because the gas is below its pseudo-critical temperature and the correlation may be describing a region holding no single-phase gas at all.",
- ["Ppr 0.149225, because it sits below the data the fit was built on.",
-  "Neither more than the other. A refusal and a note are one instrument at two severities.",
-  "Ppr 0.149225, because an ordinary low-pressure separator sits there, so the note is attached to the case a reader is most likely to meet."],
- "One is refused with the reason stated and the other is answered with a caution. The low-pressure corner runs toward the ideal gas limit, which is why z 0.986286 is worth returning."),
+q(2, "One run comes back refused with \"Tpr 0.848 is below the DAK validity range of 1.0 to 3.0\" and another comes back with K held at 0.120000 and floored true. Both are the method declining to extrapolate. What separates the two answers?",
+ "The refusal returns no z at all and the floored K returns a number with a warning: one has nothing to give and the other has a rule of thumb it will not run past.",
+ ["Nothing separates them. Both return a value with a warning attached, and both name the bound that was crossed in the text of the message.",
+  "The refusal is a returned error object and the floored K is a thrown SeparatorInputError, which is the difference between a state and a bad input.",
+  "The refusal names a range of 1.000000 to 3.000000 and the floor names 0.120000, so one is a validity bound and the other is a domain check on an input."],
+ "The z refusal is stated verbatim and hands back nothing. At 3000.000000 psig the K comes back as 0.120000 with the rule's own -0.110000 quoted beside it in the warning.")
 
 q(3, "Two vessels are offered for ABANA-1, at 2.000000 and 2.500000 ft. What separates them?",
  "One carries its gas at a margin of 1.483516 and the other does not at 0.949450.",
@@ -90,12 +90,12 @@ q(3, "A candidate reports a margin of exactly 1.000000 on a vessel they say came
   "That the K was neither derated nor floored, since only an undisturbed base row gives a settling velocity matching the gas velocity exactly at a diameter somebody chose."],
  "At the gas-required diameter the gas velocity equals the settling velocity by construction. A diameter chosen from a list lands somewhere else, at 0.949450 or 2.136263."),
 
-q(1, "Which figure in a sizing run arrives in minutes, and what does it become?",
- "The retention time, which becomes a volume of 35.091146 ft3 once a liquid rate in bpd has been held for it.",
- ["The residence time, which becomes a depth once it has been divided by the floor area of the vessel the liquid is being held in at that particular diameter.",
-  "The retention time, which becomes a length in one orientation and a depth in the other, and which reaches the diameter through the gas area in both of them.",
-  "The allowance above the liquid, given in minutes of level-controller travel."],
- "A liquid rate in bpd, converted through 5.614583333333333 ft3 per barrel and the 1440 minutes in a day and held 3.000000 minutes, is 35.091146 ft3."),
+q(1, "ABANA-1 holds 35.091146 ft3 of liquid, standing 10.605223 ft deep at the gas-required 2.052551 ft and 2.792465 ft deep at 4.000000 ft. What is fixed across those two vessels, and what is not?",
+ "The 35.091146 ft3 is fixed, because it is a rate held for a time. The depth is what a floor area does to that volume.",
+ ["The depth is fixed at the level the controller holds, and the volume grows with the floor area from 35.091146 ft3 upward.",
+  "Both are fixed, since 3000.000000 bpd held 3.000000 minutes settles the volume and the allowance of 6.000000 ft settles the rest of the height.",
+  "Neither, since a wider drum slows the gas and needs less volume."],
+ "A retention volume reads a liquid rate and a holding time and nothing at all about the vessel. The same 35.091146 ft3 stands 10.605223 ft deep on one floor and 2.792465 ft deep on a wider one.")
 
 q(0, "A vessel is re-sized after a vendor K arrives above the derated table figure. Which way do the required diameter and the margin move?",
  "The required diameter falls and the margin at any fixed diameter rises.",
@@ -139,26 +139,26 @@ q(0, "An engineer asks for the shortest vessel on the ABANA-1 list. Which is it,
   "The 3.000000 ft vessel at 10.964382 ft, which the studio prefers on that criterion."],
  "Height falls and margin rises with diameter. A wider drum costs more steel per foot, and at 4.000000 ft the slenderness of 2.198116 is approaching a shape that is more a tank than a separator."),
 
-q(3, "Two streams carry 18.000000 MMscfd. One needs 4.825708 ft3/s of room and the other 8.713371. Which inputs had to be stated before either figure could be computed?",
- "The pressure, the temperature and the gas gravity of each.",
- ["The mist extractor on each, since the room a stream needs is the area it takes at its settling velocity and K is what sets that velocity in either of the vessels.",
-  "The liquid rates on each, since the actual gas rate is what remains once the liquid has been taken out of the stream at conditions and both of these are two-phase.",
-  "The retention time on each, since a volume per second becomes room inside a vessel only once it has been held for a stated time against the liquid below it."],
- "The standard rate is scaled by 14.7 over the absolute pressure, by the absolute temperature over 520 degR, and by z, and z comes from the gravity through the reduced pair."),
+q(3, "The ABANA-1 chain runs 600.000000 psig to 614.700000 psia, a gravity of 0.680000 to Ppr 0.922896 and Tpr 1.488478, a z of 0.908065, a gas at 2.239712 lb/ft3 arriving at 4.825708 ft3/s, settling at 1.458422 ft/s and 2.052551 ft of diameter. Which of those would read differently tomorrow?",
+ "None of them. Not one figure in the chain reads a clock or a random number.",
+ ["The z of 0.908065, since the DAK fit is solved again on every call and its iteration is seeded from the run that asks for it.",
+  "The diameter of 2.052551 ft, since it is reached by bisection and a bisection stops on a tolerance rather than on an exact figure.",
+  "The settling velocity of 1.458422 ft/s, since it reads a mixture density and a mixture is re-weighted from whatever rates arrive that day."],
+ "Every figure here moves with the pressure, the temperature, the gravity, the rates or the mist extractor, and with nothing else. A run that reproduces is what lets a reviewer argue with a number.")
 
-q(1, "An interface offers a default mist extractor so that the K field is never empty. What does the engine make of that?",
- "It refuses the empty case on purpose, because a silent default would put a mesh pad in every vessel on paper, including the ones nobody intends to fit one to.",
- ["It accepts a default, since the six rows include one for no mist extractor at 0.180000 for exactly that purpose and an empty field amounts to choosing it.",
-  "It refuses the empty case only where no pressure was given as well, since the pressure rule needs a base row before it has anything at all to deduct from.",
-  "It has no view, since a default is a matter for the caller and the engine sees only the id it is handed, which is why the message quotes an unknown id back."],
- "\"internalsId is required: name a mist extractor from K_BASE or give kOverride\". There is no default, and naming something the table does not carry is refused as well."),
+q(1, "A studio fills an empty mist extractor field with the vertical mesh pad so the K box is never blank. On a vertical drum nobody intends to fit one to, what does that default cost at 0.000000 psig?",
+ "It sizes on 0.350000 where the honest row is 0.180000, so the vessel is built on close to twice the settling velocity it will have.",
+ ["Nothing at 0.000000 psig, since the rule deducts nothing below 100.000000 psig.",
+  "It sizes on 0.350000 where the honest row is 0.250000, the horizontal one.",
+  "Only the report, since a reviewer can put 0.180000 in its place and re-read it."],
+ "K enters the settling velocity directly and the whole vessel follows the row that was chosen. The engine refuses an empty field rather than choose a row on the caller's behalf.")
 
-q(2, "Why is the mixture density called a property of the stream rather than of the fluids?",
- "It moves with the water cut, so ABANA-1 and ABANA-2 differ at 55.171463 and 55.919504 while holding identical oil and water.",
- ["It is computed at the conditions in the vessel, so it moves with pressure and temperature.",
-  "It is weighted by mass rather than by volume, so it moves when either phase changes density.",
-  "It is read off the analysis rather than computed, so it belongs to the sample that was taken rather than to the two pure densities of 53.675380 and 64.896000 lb/ft3."],
- "A field watering out over its life walks the figure upward year by year, and a vessel sized at first oil was sized against the driest mixture it will ever see."),
+q(2, "The published table carries six rows and this course runs three streams. How many of the six rows do the streams themselves use?",
+ "Three: verticalMesh, horizontalMesh and horizontalVane. The other three appear only in the published cases.",
+ ["All six, since each stream is swept across the table before a pad is chosen and the row with the largest K is the one preferred.",
+  "Two, since the ABANA streams share verticalMesh and AGBAMI takes horizontalVane.",
+  "One, since every other figure is a derating of 0.350000."],
+ "The three streams carry 0.300000, 0.400000 and 0.525000 after derating. verticalNone and horizontalNone are the rows that reach the floor of 0.120000, and they are here as published cases rather than as vessels.")
 
 q(0, "Which sentence belongs on a report beside a K of 0.300000?",
  "A base row of 0.350000 with the module's pressure rule applied, a rule whose published form has not been checked against a source.",
@@ -209,12 +209,12 @@ q(2, "Why is the gas-required diameter called a floor rather than a design?",
   "Because offered sizes are quoted in whole and half feet and a list rounds upward."],
  "A drop at the gas-required diameter neither rises nor falls. At 2.052551 ft the vessel has no margin against a rate that rises, a pressure that falls or a mist extractor that fouls."),
 
-q(3, "Which of these does the sizing engine take as given rather than compute?",
- "The gas rate and the liquid rates.",
- ["The actual gas rate at conditions, since the standard figure is what a meter reports and the conversion to 29.490437 ft3/s belongs to the flowsheet rather than to the vessel.",
-  "The settling velocity, since it is an allowable read from a table of six rows and the engine applies it rather than deriving it from anything in the stream.",
-  "The liquid mixture density, since it is a property of the two phases that the analysis reports and the engine reads it beside the oil and water densities."],
- "It takes the gas rate and the liquid rates as given, reads them at conditions, and sizes a drum around them. The mixture, the velocity and the actual rate are all computed."),
+q(3, "AGBAMI is on every table in this tier: 8.713371 ft3/s of gas, a mixture at 59.632353 lb/ft3 and a settling velocity of 3.549130 ft/s. Why does the tier never give it a vessel?",
+ "Because it is the three-phase stream, and the only vessel this tier sizes is a vertical two-phase drum.",
+ ["Because its Ppr of 0.549797 sits below the 0.200000 where the fit data start, so its z of 0.947166 carries a note and no vessel is sized on a noted z.",
+  "Because 3.549130 ft/s is faster than the vertical sizing accepts, and a settling velocity that high comes back as a state rather than as a vessel.",
+  "Because a horizontal vane pack has no vertical counterpart in the published table, so no K is available to size a vertical drum for it."],
+ "The three streams are here for their conditions, their densities and their settling velocities. ABANA-1 is the one this tier sizes, and what it gets is a vertical drum.")
 
 q(0, "Two streams are sized with the same mist extractor at the same pressure and their settling velocities differ. What can that be?",
  "Their densities, since K is the same on both and the rest of the expression is the two fluids.",
@@ -223,12 +223,12 @@ q(0, "Two streams are sized with the same mist extractor at the same pressure an
   "Nothing. One arrangement at one pressure gives one K and one velocity."],
  "The velocity is K times the square root of the density difference over the gas density. Hold K and the two fluids are all that is left to move."),
 
-q(1, "What does this tier hand to the one above it, and what does it keep?",
- "It hands over a stream read at conditions and a settling velocity, and it keeps the vertical vessel, which is settled by an area and a depth.",
- ["It hands over the vertical vessel for a second check against slenderness and keeps the conditions.",
-  "It hands over the six base rows and keeps the pressure rule for vertical arrangements.",
-  "It hands over the refusals and keeps the gas density and the mixture."],
- "A vertical drum is sized by an area and a depth. Laid on its side the cross-section becomes a circle cut by a level, and the vessel gains a length with two requirements on it."),
+q(1, "ABANA-2 has a settling velocity of 1.958255 ft/s on this tier's table and no vessel anywhere in this tier. Where does that figure get used?",
+ "In the tier above, where ABANA-2 is the drum lying on its side and the velocity in its gas space is measured against it.",
+ ["Nowhere. It is printed for comparison against ABANA-1's 1.458422 ft/s.",
+  "In the retention volume, since a faster drop shortens the holding time.",
+  "In the mixture density of 55.919504 lb/ft3 that produced it."],
+ "One Souders-Brown expression serves both orientations at the K the orientation carries. 0.400000 on a horizontal mesh pad against 0.300000 on a vertical one is the whole of the difference between the two ABANA velocities.")
 
 q(2, "Ppr on the ABANA streams is 0.922896 and on AGBAMI 0.549797. Which two figures produced each of them?",
  "614.700000 psia over 666.055360 psia, and 364.700000 psia over 663.336000 psia.",

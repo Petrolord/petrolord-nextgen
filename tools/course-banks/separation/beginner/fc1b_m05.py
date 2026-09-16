@@ -97,7 +97,7 @@ q(1, "The height falls and the margin rises all the way from 2.000000 to 4.00000
  "Both changes are improvements in this calculation and both cost money in the yard. Margin rises with diameter for free here, and a vessel at 3.797800 carries capacity nobody asked for."),
 
 q(2, "A margin of 2.136263 is a ratio against what?",
- "An allowable velocity whose K was read from a table and then derated by a rule the module records as customary practice with an unchecked published form.",
+ "The allowable velocity the vessel was sized on, so a margin is worth exactly what the K behind it is worth.",
  ["A measured carryover velocity for that arrangement, since the six base rows were fitted to observed carryover.",
   "The settling velocity of a drop of the size the mesh pad is rated to remove.",
   "The gas velocity at 2.000000 ft of 1.536071 ft/s, which is the reference every other diameter on the list is measured against."],

@@ -21,7 +21,7 @@ q(2, "The same 29.490437 ft3/s runs at 3.003871 ft/s in the 5.000000 ft drum and
   "The level was raised on the wider drums to keep the margin comfortable."],
  "From 5.000000 ft to 6.000000 ft the velocity falls from 3.003871 ft/s to 2.086022 ft/s. From 9.000000 ft to 10.000000 ft the same foot is worth 0.927121 ft/s down to 0.750968 ft/s.")
 
-q(1, "What does the margin of 1.668891 on the 8.000000 ft drum measure?",
+q(1, "A margin of 1.668891 is reported beside ABANA-2. Which division produced it?",
  "The settling velocity of 1.958255 ft/s divided by the gas velocity of 1.173387 ft/s, so the gas in the gas space moves more slowly than a droplet falls through it.",
  ["The gas velocity divided by the settling velocity, so any figure above one says the gas is winning and liquid is leaving with it.",
   "The gas area of 25.132741 ft2 as a share of the whole cross-section of 50.265482 ft2.",

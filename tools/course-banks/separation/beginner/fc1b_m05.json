@@ -147,7 +147,7 @@
   "options": [
    "A measured carryover velocity for that arrangement, since the six base rows were fitted to observed carryover.",
    "The settling velocity of a drop of the size the mesh pad is rated to remove.",
-   "An allowable velocity whose K was read from a table and then derated by a rule the module records as customary practice with an unchecked published form.",
+   "The allowable velocity the vessel was sized on, so a margin is worth exactly what the K behind it is worth.",
    "The gas velocity at 2.000000 ft of 1.536071 ft/s, which is the reference every other diameter on the list is measured against."
   ],
   "answer": 2,

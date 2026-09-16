@@ -13,33 +13,33 @@ q(2, "An operator drops the level on the 8.000000 ft drum from 0.500000 to 0.300
   "The gas requirement takes control, because a lower level leaves the gas 5.600000 ft of height to cross."],
  "One cut divides the circle. The liquid loses area and needs 46.113917 ft, and the gas gains area and slows down, so the gap between the two requirements widens.")
 
-q(0, "A reviewer is handed a velocity of 1.173387 ft/s for ABANA-2 and asks where the rate behind it came from. What is the correct account?",
- "110.000000 MMscfd is 1273.148148 standard ft3/s, and at 614.700000 psia, 95.000000 degF and a z of 0.908065 the drum passes 29.490437 ft3/s, which crosses 25.132741 ft2 of gas area.",
- ["110.000000 MMscfd is 1273.148148 standard ft3/s, and that figure crosses the gas area of 25.132741 ft2 once the mist extractor has been chosen.",
-  "29.490437 ft3/s crosses the full cross-section of 50.265482 ft2, which is what the gas has available in a drum at any level.",
-  "The gas density of 2.239712 lb/ft3 is divided into the settling velocity of 1.958255 ft/s."],
- "The vessel sees the actual rate and nothing else. 29.490437 ft3/s over 25.132741 ft2 is 1.173387 ft/s at a level of 0.500000.")
+q(0, "Drop ABANA-2 from a level of 0.500000 to 0.300000 and the gas velocity falls from 1.173387 ft/s to 0.784681 ft/s while the vessel lengthens from 23.270539 ft to 46.113917 ft. What did that one move do?",
+ "The same 29.490437 ft3/s crossed a gas area grown to 37.582708 ft2, and the same retention volume spread over a liquid area shrunk to 12.682775 ft2.",
+ ["The rate was taken again at the lower level, since a level setting changes the conditions the stream is read at and 29.490437 ft3/s belongs to 0.500000.",
+  "The settling velocity of 1.958255 ft/s was re-derived at the new level, which moved the velocity, and the margin of 2.495607 forced the longer drum.",
+  "Only the liquid moved. 0.784681 ft/s is the velocity along the liquid space and the gas above it still crosses 25.132741 ft2."],
+ "One move with two consequences, and they point opposite ways. The gas requirement falls from 2.396801 ft to 2.243943 ft while the liquid requirement doubles.")
 
-q(1, "The liquid requirement on ABANA-2 at 8.000000 ft is one division. Which two figures are divided?",
- "The retention volume of 584.852431 ft3 and the liquid area of 25.132741 ft2, which give 23.270539 ft.",
- ["The retention volume of 584.852431 ft3 and the gas area of 25.132741 ft2, which are the same figure at half full and diverge at every other level of the drum.",
-  "The liquid rate of 24000.000000 bpd and the retention time of 3.000000 minutes, which are the two inputs behind the requirement.",
-  "The total cross-section of 50.265482 ft2 and the level fraction of 0.500000."],
- "A volume over an area gives a length. Nothing in that division reads the gas, the pressure or the mist extractor.")
+q(1, "The retention volume of 584.852431 ft3 is the same on every row of the ABANA-2 family. What does that fix about the liquid requirement column?",
+ "Every row of it is that one volume over that row's liquid area: 25.132741 ft2 gives 23.270539 ft and 39.269908 ft2 gives 14.893145 ft.",
+ ["Nothing, since the volume is taken again on each row from that row's liquid area and the retention time of 3.000000 minutes.",
+  "That the column falls in proportion to the bore, so 59.572579 ft at 5.000000 ft and 14.893145 ft at 10.000000 ft stand in the ratio of their diameters.",
+  "That the column is flat and what moves across the family is the gas requirement."],
+ "A volume over an area is a length. The duty fixes the volume and the bore and the level fix the area, so the column is one division repeated six times.")
 
-q(3, "What does a margin of 0.938751 on the 6.000000 ft drum say, and what does the engine report beside it?",
- "The gas is moving faster than a droplet falls, and gasCapacityOk comes back false.",
- ["The gas has 0.938751 of the room it needs, so the engine reports the shortfall as a reason and withholds the dimensions of that row entirely.",
-  "The vessel is inside the check by a small amount, and gasCapacityOk comes back true with a note that the row is marginal.",
-  "The slenderness of 6.894974 has failed, which is what a margin under one records on a horizontal drum."],
- "A margin below one says the gas is winning, and liquid that should be landing on the surface leaves with it. The row still returns 41.369847 ft and a slenderness of 6.894974.")
+q(3, "ABANA-2 at 6.000000 ft runs its gas at 2.086022 ft/s against a settling velocity of 1.958255 ft/s. How much more bore does the family say that vessel needs?",
+ "One foot. The 7.000000 ft row runs 1.532587 ft/s at a margin of 1.277745.",
+ ["None at all, since a margin of 0.938751 is within a twentieth of one and the row is reported with gasCapacityOk true.",
+  "Two feet, because the row has to clear the band of 3.000000 to 5.000000 as well, and the 7.000000 ft row sits at a slenderness of 4.342025.",
+  "Four feet, because the gas area has to double before the velocity falls under the settling figure and 39.269908 ft2 is the first row that gives it."],
+ "The 6.000000 ft row is the last one the gas overruns. At 7.000000 ft the gas area is 19.242255 ft2 and the verdict turns true.")
 
-q(2, "A designer wants a horizontal vessel whose length is set by its gas requirement and which still passes its capacity check. Why can that not be arranged on a real liquid duty?",
- "The gas length is the velocity ratio times the gas height, passing holds that ratio at one or below, and a real liquid duty always asks for more than the gas height.",
- ["Because the capacity check is taken before the lengths are computed, so a vessel that passes has its gas requirement set aside and only the liquid figure is reported.",
-  "Because the gas requirement of 2.396801 ft is a fixed property of the stream and cannot rise whatever bore or level the vessel is given.",
-  "Because gas control is only reported for three-phase vessels."],
- "On the 8.000000 ft drum the gas height is 4.000000 ft against a liquid requirement of 23.270539 ft. Gas controls only a vessel that is overloaded or wider than its duty needs.")
+q(2, "gasOverloaded6ftGasControls runs its gas at 2.829421 ft/s against a settling velocity of 0.500000 ft/s and asks for 16.976527 ft where the gas height is 3.000000 ft. A designer has to cure it. What works?",
+ "More bore, because the length is long only while the velocity ratio is above one, and building the drum longer leaves that ratio exactly where it stands.",
+ ["A longer drum, since 16.976527 ft is the requirement the engine returned on that row and building a vessel to a stated requirement is what satisfies the check.",
+  "A lower liquid level, because the gas space shrinks as the liquid falls and a smaller gas area is what raises a margin of 0.176715.",
+  "A smaller K on the mist extractor, because 0.500000 ft/s is the figure the gas is measured against and lowering it opens the margin."],
+ "The gas length is the velocity ratio carried onto the gas height, and at a margin of 0.176715 that ratio is far above one. Bore is what moves a velocity.")
 
 q(1, "Four figures sit on one separation sheet: a slug of 350.000000 bbl, a spacing requirement of 90.000000 m, a flare setback of 64.6458 m and a catcher volume of 3665.075231 ft3. Which of them does this engine produce?",
  "The setback and the catcher volume, while the slug arrives from the line sizing studio and the spacing requirement is read out of a table.",
@@ -83,12 +83,12 @@ q(3, "The ERHA layout returns two rankings. What would be lost by quoting only t
   "The count of comparisons that carried a positive requirement, which travels with the relative ranking alone."],
  "worstAbsolute names the flare and the control room at 43.8223 m short. worstRelative names Transfer pump A against Transfer pump B at 0.597753. They are different pairs.")
 
-q(0, "A status pack prints gasCapacityOk true for one drum and a margin of 0.9 for another, each without its partner figure. What has each reader been denied?",
- "The first cannot tell a margin of 1.277745 from one of 2.607642, and the second has been handed a rounded figure that reads as a pass while the verdict on that row is false.",
- ["The first has lost the reason list that records whether the slenderness was inside the band, and the second has lost the level the reading was taken at.",
-  "The first has lost the length of the vessel and the second has lost its bore, which are the two figures a verdict is attached to.",
-  "Neither has lost anything, since a verdict and a margin are two readings of one comparison."],
- "The verdict says whether the vessel carries its gas and the margin says by how much. 0.938751 rounds to one, and one is a pass.")
+q(0, "A status pack prints a margin of 0.9 for one drum of the ABANA-2 family and gives no bore beside it. Which row is it, and what does the print cost the reader?",
+ "The 6.000000 ft row at 0.938751, and what is lost is the verdict: it is the one row in the family whose margin sits near enough to one to be mistaken for a pass.",
+ ["The 7.000000 ft row at 0.927121, and nothing is lost, since every reading below one carries gasCapacityOk false whatever the bore turns out to be.",
+  "The 5.000000 ft row at 0.651911, and what is lost is the size of the shortfall rather than the verdict.",
+  "No row at all: every margin this family reports is under 0.651911 or over 1.277745, so a figure of 0.9 has come from another run."],
+ "The family runs 0.651911, 0.938751, 1.277745, 1.668891, 2.112190 and 2.607642. Only one of those is close enough to one for the verdict to be the thing a reader needs.")
 
 q(1, "A studio catches the SeparatorInputError for a liquid level of 0 and carries on at 0.500000. What has it produced?",
  "A fully dimensioned vessel for a level nobody typed, which is a refusal turned into an assumption.",
@@ -167,12 +167,12 @@ q(3, "The operating pressure on ABANA-2 moves. Which figures on its row travel w
   "Nothing travels, the vessel having been sized at 614.700000 psia."],
  "Souders-Brown reads K with both densities, so the margin of 1.668891 is not a fixed property of a vessel. The liquid area of 25.132741 ft2 belongs to the bore and the level.")
 
-q(0, "ABANA's harp holds 2456.380208 ft3 and the drum holds 3665.075231 ft3 for the same arriving slug. Which figure is the like for like comparison a reader wants?",
- "Neither on its own, because the drum was sized on 391.666667 bbl at a fill of 0.600000 while the harp was sized on 350.000000 bbl at a fill of 0.800000.",
- ["The harp, since 1125.921751 ft of pipe is the quantity a project actually buys and supports, and a drum volume has no equivalent anywhere in a procurement schedule.",
-  "The drum, since a vessel volume is always the larger of the two and a conservative reader takes the larger figure.",
-  "The harp, because a fill fraction of 0.800000 is the stricter of the two."],
- "The finger form ignores the normal inflow entirely. The gap between the two volumes is part fill fraction and part the 41.666667 bbl the harp never counted.")
+q(0, "finger1500bbl6x24in holds 10527.343750 ft3 and finger500bbl4x16in holds 3743.055556 ft3. Which figures on those two cases are the ones a project actually buys?",
+ "The pipe totals, 3350.957591 ft and 2680.766073 ft, because a harp is bought and supported as pipe and the volumes are what that pipe contains.",
+ ["The volumes, since a catcher is specified by the liquid it has to hold and 10527.343750 ft3 against 3743.055556 ft3 is the whole of the comparison.",
+  "The per finger lengths, 558.492932 ft and 670.191518 ft, because the shorter finger is the cheaper harp whatever the count of them.",
+  "Neither, because both cases were sized on a slug alone and no harp can be costed until a normal inflow has been added to it."],
+ "The finger form sizes on the slug alone. 1500.000000 bbl at a fill of 0.800000 needs 3350.957591 ft of pipe, and 500.000000 bbl at 0.750000 needs 2680.766073 ft in a longer finger of smaller bore.")
 
 q(1, "One reviewer halves the relief rate on the ERHA flare and another drops ABANA-2 from a level of 0.500000 to 0.300000. What moves in each case?",
  "The setback of 64.6458 m moves while the table figure of 90.000000 m does not, and on the vessel the areas, the requirement and the velocity all move while the 50.265482 ft2 of shell stays put.",
@@ -195,19 +195,19 @@ q(0, "A sheet carries three requirements for one plot: a band of 3.000000 to 5.0
   "Three preferences, since all of them can be restated by a project."],
  "Moving the band moves which rows carry ld-out-of-band and changes no dimension. A site standard replaces the table wholesale. The radius follows an 18.000000 m bund.")
 
-q(3, "Why can the gas-liquid chord never serve as the height of a water layer?",
- "A chord is a width across the drum and a layer is a height inside the liquid.",
- ["Because the chord is reported only at the level the drum is sized at, while a water layer has to be known at every level the vessel is run at during its life.",
-  "Because the chord of 8.000000 ft is the diameter at half full, so using it would place the interface at the top of the vessel on every three-phase case.",
-  "Because a chord is an area and a layer is a length, so the two cannot be compared without the vessel length."],
- "Reading a width as a height is how a check came to report on a layer that was not there, with every figure on the page still in feet.")
+q(3, "On the 8.000000 ft drum at a level of 0.200000 the gas height and the gas-liquid chord are both 6.400000 ft. What should a reader make of that?",
+ "A coincidence of that one row. The two are a height and a width, and they part company on every other level the table prints.",
+ ["That the chord equals the gas height wherever the level sits below half, which is what the table shows at 0.300000 with a chord of 7.332121 ft.",
+  "That the section is square at that level, so the gas space can be read as 6.400000 ft by 6.400000 ft and its area taken as the product of the two.",
+  "That 0.200000 is where the chord reaches its largest, since a chord widens as the liquid falls and the table stops there."],
+ "At a level of 0.500000 the chord is the full 8.000000 ft and the gas height is 4.000000 ft. Two equal figures on one row of a table are not a relationship.")
 
-q(2, "Suppose the literature turns out to size a gas length from a stated droplet diameter. What on the ABANA-2 family would have to be read again from scratch?",
- "The gas requirement of 2.396801 ft and the bound tying it to the gas height, since the velocity ratio would stop being the quantity the capacity check compares.",
- ["The liquid requirement of 23.270539 ft as well, because a retention volume is divided by an area that the settling velocity had already fixed for the level in question.",
-  "Nothing on this family, since liquid controls every row and a requirement that is never the larger of the two cannot change a length.",
-  "The slenderness of 2.908817, taken on a length the gas requirement helped to set."],
- "It is HELD FOR LITERATURE. The bound is a property of this method rather than a fact about separators, and it rests on that borrowed velocity.")
+q(2, "The ABANA-2 family reports liquid controlling on all six rows, with gas requirements from 3.834882 ft down to 1.917441 ft. If the borrowed settling velocity moved, how much of that table would be read again?",
+ "The gas column and the controlling column, since a gas requirement computed another way could win a row, and the liquid column stands.",
+ ["The whole table, because the liquid lengths from 59.572579 ft down to 14.893145 ft are divisions by an area the same velocity fixed.",
+  "None of it, because liquid controls every row and a requirement that never wins cannot change a length.",
+  "The slenderness column alone, since L/D is computed from a length and the lengths are what a moved packaging touches."],
+ "It is held for the literature, so the packaging is a property of this method. A liquid requirement is a retention volume over a liquid area and reads no settling velocity at all.")
 
 q(1, "The engine carries four radiation levels with labels, from 1.580000 kW/m2 for continuous exposure up to 9.460000 kW/m2 for an escape route. What is their status?",
  "They are the API 521 customary levels as this engine records them, with the labels held for the literature and no source checked.",
@@ -251,12 +251,12 @@ q(2, "A velocity is taken by dividing 29.490437 ft3/s by 50.265482 ft2, on the g
   "The gas area is the figure a droplet falls across and the total is the figure it travels along."],
  "At a level of 0.750000 the gas holds 9.826958 ft2 of that same circle. Dividing 29.490437 ft3/s by 50.265482 ft2 says the vessel has room it does not have.")
 
-q(0, "A published catcher is quoted at 8.650995 ft with 34.603982 ft, and another at 13.984106 ft with 69.920531 ft. How can a reader tell that neither pair was picked up from the wrong row of the sweep?",
- "Each length is its own diameter times its own ratio, 4.000000 on the first case and 5.000000 on the second, so a pair that fails that check has been mixed with another run.",
- ["Each volume divided by its length gives back the bore, which is the check the engine applies before it prints a row of a catcher sweep.",
-  "The two cases carry different slugs, 200.000000 bbl and 1200.000000 bbl, and a larger slug always gives a larger bore.",
-  "Both pairs are inside the slenderness band of 3.000000 to 5.000000."],
- "The relationship between the two dimensions is the input that was typed. 10739.004630 ft3 at a ratio of 5.000000 gives 13.984106 ft and 69.920531 ft.")
+q(0, "A sheet quotes ABANA's catcher, 391.666667 bbl of working volume at a fill of 0.600000 and a slenderness of 4.000000, as 10.527155 ft across and 34.603982 ft long. Which dimension came from another run?",
+ "The length. That bore at a ratio of 4.000000 gives 42.108619 ft, and 34.603982 ft belongs to the published 200.000000 bbl catcher at a bore of 8.650995 ft.",
+ ["The bore, since a length of 34.603982 ft at a ratio of 4.000000 asks for 8.650995 ft, which is the catcher the smaller published slug produced.",
+  "Neither, since a catcher is sized from its volume and both figures sit comfortably with 3665.075231 ft3 once the fill of 0.600000 has been applied.",
+  "Both, since 391.666667 bbl at a fill of 0.600000 comes to 3665.075231 ft3 and neither quoted dimension belongs to a drum of that volume."],
+ "The two dimensions of a catcher are one volume split by one typed ratio, so they either agree or one has been carried over. 3665.075231 ft3 at 4.000000 is 10.527155 ft by 42.108619 ft.")
 
 q(3, "Two pool fire answers reach a reviewer, the ERHA bund at beyond-pool-edge and a published case at within-pool-edge. What does that pair of statuses settle?",
  "Whether each answer may be used as a distance or only as a lower bound.",
@@ -272,12 +272,12 @@ q(1, "A report quotes a liquid requirement of 46.113917 ft for ABANA-2 and a rev
   "Neither, since a liquid requirement cannot be quoted without the gas requirement beside it."],
  "The same drum and the same duty give both. A length is meaningless without the level it was sized at, which is why the level belongs in the record.")
 
-q(2, "The 5.000000 ft drum carries a gas velocity of 3.003871 ft/s and the 10.000000 ft drum carries 0.750968 ft/s on the same stream. What is the practical lesson for a bore decision?",
- "Widening a narrow drum buys a great deal of gas room and widening a wide one buys very little, because the area goes with the square of the bore.",
- ["Each foot of bore is worth about the same fall in velocity, which is what makes a sweep at one foot steps the right way to read a family of vessels.",
-  "The velocity falls in proportion to the bore, so a reader can interpolate a velocity for any bore between the published rows of the table.",
-  "The wider drum is always preferred, since 2.607642 is the largest margin the family reports."],
- "From 5.000000 ft to 6.000000 ft the velocity falls to 2.086022 ft/s. From 9.000000 ft to 10.000000 ft the same extra foot moves 0.927121 ft/s to 0.750968 ft/s.")
+q(2, "Going from 8.000000 ft to 9.000000 ft on ABANA-2 shortens the vessel from 23.270539 ft to 18.386599 ft. What else does that foot buy, and what does it cost?",
+ "It buys margin, 1.668891 up to 2.112190, and it costs shape, 2.908817 down to 2.042955 and further below the band.",
+ ["It costs margin, since the wider drum passes the same rate at 0.927121 ft/s against the 1.173387 ft/s of the narrower one.",
+  "It buys a smaller liquid area, since 31.808626 ft2 holds the same retention volume in a shorter drum than 25.132741 ft2 does.",
+  "It buys and costs nothing measurable, because both rows already carry gasCapacityOk true and both already sit outside the band of 3.000000 to 5.000000."],
+ "Every extra foot on this family shortens the drum, raises the margin and lowers the slenderness at the same time. The two rows differ in degree on all three.")
 
 q(0, "Three answers arrive with something attached to them: a harp whose fingers reach 1563.780209 ft, a pool radius of 2.2745 m, and a lookup for a tank against a skid. What came with each?",
  "A warning about buildability with the dimensions still returned, a status saying the distance is only a lower bound, and a null, which is the table saying it holds no figure for that pair at all.",
@@ -293,12 +293,12 @@ q(1, "What single reading tells a reviewer that the ERHA flare is a problem for 
   "The 12 unknown type pairs, which include the control room."],
  "A table cannot know a relief rate, so the two findings are separate. The radiation shortfall on that pair is 18.4681 m and the spacing shortfall is 43.8223 m.")
 
-q(2, "A reviewer is given one line for ABANA-2 at 8.000000 ft. Which line carries the whole answer?",
- "23.270539 ft long at a level of 0.500000, liquid controlling against a gas requirement of 2.396801 ft, gasCapacityOk true at a margin of 1.668891, slenderness 2.908817 outside a band of 3.000000 to 5.000000.",
- ["23.270539 ft long with a slenderness of 2.908817, which is outside the band and therefore the only reading a reviewer needs before rejecting the row.",
-  "23.270539 ft long, liquid controlling, with a total cross-section of 50.265482 ft2 and a liquid area of 25.132741 ft2 at half full.",
-  "2.396801 ft of gas requirement at a margin of 1.668891, with the liquid figure reported separately."],
- "Three answers and a preference travel together: the length, which requirement set it, whether the vessel carries its gas and by how much, and where the shape sits against a typed band.")
+q(2, "horizontal8ftAt40pctLiquidControlledInBand reports liquid 31.149488 ft, gas 4.157188 ft, length 31.149488 ft, controlling liquid, L/D 3.893686 and a gas velocity of 0.952689 ft/s. Which of the six cannot be recovered from the rest?",
+ "The gas velocity of 0.952689 ft/s, because it is the only figure on the row that says how much room the gas had, and the capacity verdict rests on it.",
+ ["The controlling requirement, since two lengths of 31.149488 ft and 4.157188 ft standing side by side do not say which of them set the vessel.",
+  "The slenderness of 3.893686, since a bore of 8.000000 ft and a length of 31.149488 ft do not produce it without the band being stated too.",
+  "The length of 31.149488 ft, since a total length is computed separately from the two requirements that were compared to arrive at it."],
+ "The length is the larger of the two requirements and the controlling field names which one, and 31.149488 ft over a bore of 8.000000 ft is the slenderness. Only the velocity carries the gas headroom.")
 
 emit(Q, '/root/fc-wip-separation/banks/fc1i_exam.json', expect_n=42)
 finish()
