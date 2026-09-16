@@ -55,7 +55,7 @@
   "explanation": "Suction and vapour pressures are in psia, flows in gpm, power in brake horsepower, and ratios, factors and quotients are dimensionless."
  },
  {
-  "prompt": "This tier contains two refusals, one from the margin check and one from the machine combinations. What do they have in common?",
+  "prompt": "The margin check refuses an available head it cannot read, and the machine combinations refuse a count that is not a whole number. What do those two refusals have in common?",
   "options": [
    "Each is raised after the arithmetic has run, so the figures are still on the return beside the message.",
    "Each is a pass flag set to false, which is how this package reports an input it cannot use.",
@@ -132,15 +132,15 @@
   "explanation": "The trim's implied efficiency ratio is held with the model it falls out of, and the corrected figures with the correlation behind theirs."
  },
  {
-  "prompt": "What do the published cases in this course establish about the engine?",
+  "prompt": "16 published cases sit beside the 22 exported functions of these two modules, and on two of them the engine reads 43.590588 ft against a golden 43.573343 ft and 62.791667 ft against a golden 62.758690 ft. What do those cases establish about the engine?",
   "options": [
-   "That its answers have been checked against measured pump tests and vendor performance runs.",
+   "That its answers have been checked against measured pump tests and vendor performance runs, which is what those two quotients measure.",
    "That its arithmetic is the arithmetic those cases describe, and no more, because every one of them was written by an oracle.",
-   "That its answers reproduce, since a published case is by definition a reproducible one.",
-   "That the correlations behind them describe a real machine, which is what a published case is for."
+   "That it is wrong on both of those cases, since a published figure is the answer and 1.000395783 and 1.000525448 are the size of the error.",
+   "That the correlations behind them describe a real machine, which is the whole reason a package publishes its cases beside its own answers."
   ],
   "answer": 1,
-  "explanation": "There is no measured pump test, no vendor performance run and no field compressor datasheet anywhere in this course."
+  "explanation": "The goldens were written through a different route at a water density their own oracle states, so a gate against one carries a tolerance chosen from the size of that disagreement, which is 0.0005254484459904507 at its largest. There is no measured pump test, no vendor performance run and no field compressor datasheet anywhere in this course."
  },
  {
   "prompt": "A candidate cannot remember whether a required margin is graded and writes a plausible figure. What should they have done?",

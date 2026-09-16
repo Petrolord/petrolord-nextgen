@@ -94,7 +94,7 @@ q(3, "The third label arrives with a pass of true and a null note on a suction h
 q(0, "Two of the three severities come back with a pass of false. What does a caller reading only the boolean lose?",
  "The difference between a pump that will cavitate and one that clears its vendor requirement with thinner cover than convention wants.",
  ["The ratio and the required margin, which the engine attaches to the label rather than to the flag and drops when the flag is read alone.",
-  "The distinction between a failure and a refusal, since an unreadable available head also comes back with the pass flag set to false.",
+  "The required margin of 4.200000 ft, which is the one field the two false cases differ on and the only one a boolean cannot carry.",
   "Nothing that matters, since both false cases call for the same work: more available head, or a different pump."],
  "One needs more available head or a different pump. The other needs vendor agreement and a look at how steady the suction is.")
 

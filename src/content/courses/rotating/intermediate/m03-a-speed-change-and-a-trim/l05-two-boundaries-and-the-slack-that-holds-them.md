@@ -31,7 +31,7 @@ The rule is written in whole percent and the value it is compared against is not
 
 The warning turns on at the same kind of comparison and carries the same treatment. At a trim ratio of 0.800000 the trim percent comes out at 19.999999999999996, and the warning is null.
 
-That is the exclusive threshold doing its job on a value that missed the whole number by a hair in the other direction. A bare test would have been just as wrong here, and in the direction that fires a warning on a trim that sits exactly at the vendor limit.
+Read that against the first row, because the hair went the other way there. A trim percent above five would have drawn a shortfall out of a comparison with no slack in it. A trim percent below twenty draws no warning however the comparison is written, so what the slack covers at this boundary is the other direction, a value a hair above twenty.
 
 ## Why this generalises
 

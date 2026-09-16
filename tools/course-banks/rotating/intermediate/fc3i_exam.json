@@ -68,7 +68,7 @@
  {
   "prompt": "In the crossover table, what is the column headed \"the available head that exactly satisfies it\"?",
   "options": [
-   "The available head at which the pass flag turns true, which is 16.200000 ft at a required NPSH of 12.000000 ft and is one row above it.",
+   "The available head a padding sweep would have to reach before the required margin column stopped holding at one figure across every row of it.",
    "The smallest available head the engine will judge without a warning at that required NPSH.",
    "The available head at which the margin is exactly the required margin, which is 16.200000 ft at a required NPSH of 12.000000 ft.",
    "The available head at which the floor and the fraction return the same required margin."
@@ -385,7 +385,7 @@
   "explanation": "A single de-rated answer would carry no evidence of the de-rating. On the no-correction branches of the viscosity method the corrected fields are the catalogue values themselves."
  },
  {
-  "prompt": "Two refusals in this tier name two different inputs. What does each name?",
+  "prompt": "The margin check and the parallel combination each refuse, and the two messages name two different inputs. What does each name?",
   "options": [
    "One names a required NPSH that is not finite; the other names a pump curve that does not fall with flow.",
    "One names a machine count; the other names a curve whose crossing with a system is not a duty point.",

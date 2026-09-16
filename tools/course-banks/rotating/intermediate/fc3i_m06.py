@@ -43,7 +43,7 @@ q(0, "A candidate writes a margin in gpm and a viscosity in rpm. Which reading h
   "Reading the warning field first, since the engine flags a figure whose unit does not match the field it was written into."],
  "Suction and vapour pressures are in psia, flows in gpm, power in brake horsepower, and ratios, factors and quotients are dimensionless.")
 
-q(2, "This tier contains two refusals, one from the margin check and one from the machine combinations. What do they have in common?",
+q(2, "The margin check refuses an available head it cannot read, and the machine combinations refuse a count that is not a whole number. What do those two refusals have in common?",
  "Each is a returned object whose message names the input that defeated it, rather than a value invented over it.",
  ["Each is raised after the arithmetic has run, so the figures are still on the return beside the message.",
   "Each is a pass flag set to false, which is how this package reports an input it cannot use.",
@@ -92,12 +92,12 @@ q(2, "Two unsourced models sit in this tier, one on a change and one on a fluid.
   "Both are graded at a wider tolerance than the rest of the course, chosen from the size of their disagreement."],
  "The trim's implied efficiency ratio is held with the model it falls out of, and the corrected figures with the correlation behind theirs.")
 
-q(1, "What do the published cases in this course establish about the engine?",
+q(1, "16 published cases sit beside the 22 exported functions of these two modules, and on two of them the engine reads 43.590588 ft against a golden 43.573343 ft and 62.791667 ft against a golden 62.758690 ft. What do those cases establish about the engine?",
  "That its arithmetic is the arithmetic those cases describe, and no more, because every one of them was written by an oracle.",
- ["That its answers have been checked against measured pump tests and vendor performance runs.",
-  "That its answers reproduce, since a published case is by definition a reproducible one.",
-  "That the correlations behind them describe a real machine, which is what a published case is for."],
- "There is no measured pump test, no vendor performance run and no field compressor datasheet anywhere in this course.")
+ ["That its answers have been checked against measured pump tests and vendor performance runs, which is what those two quotients measure.",
+  "That it is wrong on both of those cases, since a published figure is the answer and 1.000395783 and 1.000525448 are the size of the error.",
+  "That the correlations behind them describe a real machine, which is the whole reason a package publishes its cases beside its own answers."],
+ "The goldens were written through a different route at a water density their own oracle states, so a gate against one carries a tolerance chosen from the size of that disagreement, which is 0.0005254484459904507 at its largest. There is no measured pump test, no vendor performance run and no field compressor datasheet anywhere in this course.")
 
 q(0, "A candidate cannot remember whether a required margin is graded and writes a plausible figure. What should they have done?",
  "Left it, because nothing in this course is graded on a held item and a guessed figure is worse than an absent one.",

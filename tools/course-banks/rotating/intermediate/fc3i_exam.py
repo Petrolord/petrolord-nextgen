@@ -51,7 +51,7 @@ q(3, "The 5.500000 ft of suction friction arrives as a stated number. Which work
 
 q(2, "In the crossover table, what is the column headed \"the available head that exactly satisfies it\"?",
  "The available head at which the margin is exactly the required margin, which is 16.200000 ft at a required NPSH of 12.000000 ft.",
- ["The available head at which the pass flag turns true, which is 16.200000 ft at a required NPSH of 12.000000 ft and is one row above it.",
+ ["The available head a padding sweep would have to reach before the required margin column stopped holding at one figure across every row of it.",
   "The smallest available head the engine will judge without a warning at that required NPSH.",
   "The available head at which the floor and the fraction return the same required margin."],
  "The boundary is where the margin equals the required margin exactly. At a required NPSH of 30.000000 ft it is 40.500000 ft.")
@@ -252,7 +252,7 @@ q(2, "Two held models in this tier print something beside their own answer. Whic
   "Both of them, since each returns the uncorrected figure beside the corrected one."],
  "A single de-rated answer would carry no evidence of the de-rating. On the no-correction branches of the viscosity method the corrected fields are the catalogue values themselves.")
 
-q(3, "Two refusals in this tier name two different inputs. What does each name?",
+q(3, "The margin check and the parallel combination each refuse, and the two messages name two different inputs. What does each name?",
  "One names an available NPSH that is not finite; the other names a machine count that is not a whole number at least one.",
  ["One names a required NPSH that is not finite; the other names a pump curve that does not fall with flow.",
   "One names a machine count; the other names a curve whose crossing with a system is not a duty point.",

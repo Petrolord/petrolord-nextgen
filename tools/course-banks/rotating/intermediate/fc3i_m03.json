@@ -103,7 +103,7 @@
   "options": [
    "The 0.800000 row falls inside the shortfall model's cap of 0.12, and a capped row is reported without a comment.",
    "The 0.799900 row is a deeper trim than the 0.800000 row by enough to cross the casing limit the message names.",
-   "The engine warns on the trim percent and the 0.800000 row returns its trim percent as 19.999999999999996, which is below the threshold and outside the slack.",
+   "The engine warns on the trim ratio rather than the trim percent, and a ratio of 0.800000 sits at the bottom of the range the shortfall model covers.",
    "The threshold is exclusive, so the vendor limit itself does not warn."
   ],
   "answer": 3,

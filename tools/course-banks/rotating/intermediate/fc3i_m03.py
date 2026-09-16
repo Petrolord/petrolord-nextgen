@@ -76,7 +76,7 @@ q(3, "At a trim ratio of 0.799900 the engine warns about a 20.0 percent trim, an
  "The threshold is exclusive, so the vendor limit itself does not warn.",
  ["The 0.800000 row falls inside the shortfall model's cap of 0.12, and a capped row is reported without a comment.",
   "The 0.799900 row is a deeper trim than the 0.800000 row by enough to cross the casing limit the message names.",
-  "The engine warns on the trim percent and the 0.800000 row returns its trim percent as 19.999999999999996, which is below the threshold and outside the slack."],
+  "The engine warns on the trim ratio rather than the trim percent, and a ratio of 0.800000 sits at the bottom of the range the shortfall model covers."],
  "The message at 0.799900 reads \"a 20.0 percent trim is beyond what most casings tolerate: efficiency falls away and the vendor limit usually sits near 20 percent\".")
 
 q(0, "A speed ratio of 0.800000 gives 987.562375 gpm and a trim ratio of 0.800000 gives a real flow of 943.122068 gpm. What separates them?",
