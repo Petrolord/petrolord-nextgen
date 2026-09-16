@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
-"""Lesson length gate: prose words (tables, headings, front matter, panel
-lines excluded) must sit in 420..560 and rank with est_minutes per tier."""
+"""Lesson length gate: prose words must sit in 420..560 and rank with
+est_minutes per tier.
+
+WHAT IS EXCLUDED, MEASURED FROM THE CODE BELOW RATHER THAN CLAIMED: front
+matter, markdown TABLE ROWS (lines starting with |) and PANEL markers
+(lines starting with {{panel). HEADINGS ARE COUNTED.
+
+THE DOCSTRING USED TO SAY HEADINGS WERE EXCLUDED AND THE CODE NEVER DID.
+LESSON_TASK.md repeated the docstring. A writer who trusted either ran 20
+to 40 words LIGHT against the band, on every lesson. Corrected to match the
+code, because the counts of every wave already written were produced by the
+code."""
 import json, os, re, sys
 W = '/root/wt-fc4-nextgen/src/content/courses/gasprocessing'
 bad = 0

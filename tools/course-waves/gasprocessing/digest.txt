@@ -9,12 +9,12 @@
 # App surface: the Gas Processing Studio runs three units over one gas stream. Dehydration takes water out with glycol, sweetening takes acid gas out with amine, and the dew point unit cools the gas by letting it down.
 - This engine conditions a GAS STREAM. It answers how much water a gas carries, how much solvent it takes to remove it, what the regenerator costs to run, how wide the vessel has to be, and how far a let-down cools the gas.
 - The doctrine is stated in the module's own header: everything that is a DESIGN CHOICE or a chart value is an INPUT with its customary range named, and everything computable from first principles is computed. The circulation ratio, the BTEX absorbed fraction, the glycol properties, the water overhead and the contactor liquid are all inputs with defaults, and a reader can see each one on the page rather than having to find it in the source.
-- A state the method has no answer for comes back as an object with an `error` string. This module throws nothing. It has ONE export that breaks that contract by returning a bare number, and Section 15 reads it.
+- A state the method has no answer for comes back as an object with an `error` string. This module throws nothing, and there is no export outside that contract: every one of them answers with an object and every refusal puts a named string on an `error` key. Section 15 reads the contract and the evidence a refusal carries with it.
 - What is NOT in this engine: no hydrate boundary, no compositional flash, no rate-based absorber model, no stage efficiency, no molecular sieve, no refrigeration and no NGL recovery. A hydrate margin is the Production module Flow Assurance engine, and the phase envelope of a reservoir fluid is the Fluid engine.
 
 The three units, on the two teaching streams, end to end:
 - OBIAFU carries 53.450380 lb of water per MMscf at 950.000000 psia and 104.000000 degF, and at 62.000000 MMscfd a spec of 7.000000 lb per MMscf means taking out 2879.9235 lb a day, which at 3.200000 gal per lb is 6.399830 gpm of glycol and 0.697269 MMBtu an hour of reboiler.
-- UBIE arrives at 5.200000 mol percent CO2 and 1.400000 mol percent H2S, and meeting 2.000000 and 0.000400 means picking up 10666.2009 lbmol of acid gas a day, which at a swing to 0.480000 is 525.893013 gpm of solution and 25.242865 MMBtu an hour of regenerator.
+- UBIE arrives at 5.200000 mol percent CO2 and 1.400000 mol percent H2S, and meeting 2.000000 and 0.000400 means picking up 10666.2009 lbmol of acid gas a day. Loaded from a LEAN LOADING of 0.050000 to a RICH LOADING of 0.480000 mol of acid gas per mol of amine, which is a LOADING SWING of 0.430000000 (derived, the two loadings on this line subtracted), that is 525.893013 gpm of solution and 25.242865 MMBtu an hour of regenerator.
 - The two contactors those streams go up are 3.192661 ft and 4.208602 ft across.
 
 # SECTION 2: The numbers this module stands on (owned by Associate m01 l04 and Expert m05)
@@ -59,7 +59,7 @@ KIND THREE: DECLARED. These are customary or chart values with no publication an
 | the customary circulation band, low | 2.000000 |
 | the customary circulation band, high | 5.000000 |
 | the pressure the chart warning starts at, psia | 1000.000000 |
-And the amine property set, four columns of it, declared on the same terms:
+And the amine property set, five declared columns of it beside the name, on the same terms:
 | amine | molecular weight | solution gravity | rich limit | duty, Btu/gal | typical strength, wt % |
 | --- | --- | --- | --- | --- | --- |
 | MEA | 61.080000 | 1.010000 | 0.350000 | 1100.000000 | 18.000000 |
@@ -273,6 +273,21 @@ Look at the last column rather than the others. The mass balance columns sit at 
 # SECTION 9: A contactor is a staged device (owned by Professional m01 and m02)
 
 The Kremser relation ties three things: the absorption factor, the number of theoretical stages, and the fraction of the solute the column removes. Give it any two and it gives the third.
+
+THE ABSORPTION FACTOR, WRITTEN OUT. It is the liquid rate over the gas rate times the equilibrium constant:
+    A = L / (V K)
+with L the solvent molar rate down the column, V the gas molar rate up it, and K the equilibrium ratio of the solute between the two phases at the column's conditions. It is dimensionless, it is the ONE number that carries the equilibrium, and THIS MODULE DOES NOT COMPUTE IT: none of L, V or K is an argument of any export here, and the factor arrives as a typed input taken from equilibrium data. That is the seam, and it is why every table in this section is indexed by A rather than by a rate.
+
+THE RELATION ITSELF, in the two branches the module carries:
+    f = (A^(N+1) - A) / (A^(N+1) - 1)      for A other than 1
+    f = N / (N + 1)                        for A = 1
+with f the fraction removed and N the number of theoretical stages. The second branch is not a special case bolted on: the first is indeterminate at A = 1, where numerator and denominator both vanish, and N over N plus one is its limit there. The table below reads across that limit from both sides to show the two agreeing.
+
+AND INVERTED, which is the form a spec demands. Solving the first branch for N:
+    A^(N+1) = (A - f) / (1 - f)
+    N = log( (A - f) / (1 - f) ) / log(A) - 1
+    N = f / (1 - f)                        for A = 1
+Read the first of those three lines rather than the second and the ceiling falls straight out: the left side is positive for any real N, so the right side must be too, and with f below one that needs A above f. An absorption factor at or below the removal a spec asks for has no stage count at all, which is the refusal this section ends on.
 On the OBIAFU absorber at an absorption factor of 1.600000 over 6.000000 stages the removal is 0.976783371.
 
 The surface. Rows are stages, columns are the absorption factor:
@@ -321,8 +336,15 @@ The published cases, engine against golden. The golden here is a BRUTE FORCE STA
 # SECTION 10: Acid gas is removed by moles (owned by Professional m03)
 
 Sweetening is a mole balance from end to end. The gas carries a mole percent of CO2 and H2S, the spec says what may stay, and the difference is what the solution has to pick up. Nothing in that chain is a mass until the very last step.
+THREE NAMES, AND THEY ARE THREE DIFFERENT NUMBERS. A reader who collapses them has lost the whole section, so they are separated here before any of them is used, and they are the engine's own words:
+- the LEAN LOADING: what a mole of amine is still carrying when it comes back from the regenerator and enters the contactor. An input. On UBIE, 0.050000 mol of acid gas per mol of amine.
+- the RICH LOADING: what a mole of amine is carrying when it leaves the contactor. An input, and the engine echoes back the one it used as `richLoadingUsed`. On UBIE, 0.480000.
+- the LOADING SWING: the DIFFERENCE between them, which is what each mole of amine actually carries round the loop and is therefore what sets the circulation. NOT an input, and the engine does not return it under any name. On UBIE it is 0.430000000, derived from the two figures above.
+The rich loading is a CEILING that corrosion sets. The swing is a THROUGHPUT that the regenerator buys. Raising the rich loading raises the swing; lowering the lean loading also raises the swing, and costs regenerator duty rather than corrosion margin. That is why this section reads both ends separately.
+The engine's own refusal uses all three words in one sentence when the swing vanishes: { error: "rich loading must exceed lean loading: 0.48 against 0.48 mol acid gas per mol amine leaves no swing to circulate on" }
+
 On UBIE: 5.200000 less 2.000000 mol percent of CO2 plus 1.400000 less 0.000400 of H2S is 4.599600000 mol percent removed (derived, the four figures on this line), which at 88.000000 MMscfd is 10666.2009 lbmol a day.
-Each mole of amine carries the swing, which is 0.480000 rich less 0.050000 lean, or 0.430000000 mol of acid gas per mol of amine (derived, the two figures on this line subtracted). The circulation follows: 525.893013 gpm.
+Each mole of amine carries the LOADING SWING round the loop: a rich loading of 0.480000 less a lean loading of 0.050000 is a swing of 0.430000000 mol of acid gas per mol of amine (derived, the two loadings on this line subtracted). The circulation follows from the swing and not from either loading on its own: 525.893013 gpm.
 The regenerator then costs the stated 800.000000 Btu a gallon on every one of those gallons, which is 25.242865 MMBtu an hour.
 
 The swing is the whole lever. The rich end:
@@ -334,14 +356,17 @@ The swing is the whole lever. The rich end:
 | 0.480000 | 0.430000000 | 525.893013 | 25.242865 | no |
 | 0.500000 | 0.450000000 | 502.519990 | 24.120960 | no |
 | 0.550000 | 0.500000000 | 452.267991 | 21.708864 | yes |
-And the lean end, which costs regenerator duty to reach and buys circulation back:
-| lean loading | swing | circulation, gpm | regenerator, MMBtu/hr |
-| --- | --- | --- | --- |
-| 0.010000 | 0.470000000 | 481.136161 | 23.094536 |
-| 0.030000 | 0.450000000 | 502.519990 | 24.120960 |
-| 0.050000 | 0.430000000 | 525.893013 | 25.242865 |
-| 0.080000 | 0.400000000 | 565.334989 | 27.136079 |
-| 0.120000 | 0.360000000 | 628.149988 | 30.151199 |
+And the lean end. READ THE LAST TWO COLUMNS TOGETHER BEFORE READING ANY SENTENCE ABOUT THEM, because this is where the model and the plant part company:
+| lean loading | swing | circulation, gpm | regenerator, MMBtu/hr | MMBtu/hr per gpm |
+| --- | --- | --- | --- | --- |
+| 0.010000 | 0.470000000 | 481.136161 | 23.094536 | 0.048000000 |
+| 0.030000 | 0.450000000 | 502.519990 | 24.120960 | 0.048000000 |
+| 0.050000 | 0.430000000 | 525.893013 | 25.242865 | 0.048000000 |
+| 0.080000 | 0.400000000 | 565.334989 | 27.136079 | 0.048000000 |
+| 0.120000 | 0.360000000 | 628.149988 | 30.151199 | 0.048000000 |
+IN THIS MODEL A LEANER LEAN COSTS NOTHING. Going from a lean loading of 0.120000 to 0.010000 takes the circulation from 628.149988 to 481.136161 gpm AND the regenerator from 30.151199 to 23.094536 MMBtu an hour. Both fall. The last column says why: the duty per gallon is a STATED input, 800.000000 Btu on every gallon circulated, so the regenerator duty is nothing but the circulation in other units and the ratio does not move down the table.
+THAT IS THE MODEL AND NOT THE PLANT. Stripping a solution leaner is work, and on a real regenerator it is bought with reboiler duty per gallon, more stripping steam and a taller still. NONE OF THAT IS IN THIS ENGINE: the duty per gallon is a number the caller types and the engine never changes it, so nothing here can make a leaner lean cost anything. A reader who takes this table as the economics of a regenerator has been told the opposite of the truth by a model that is doing exactly what it says it does.
+WHAT THE TABLE IS HONESTLY FOR: it says how much SOLUTION a given lean loading has to move. That is a real answer and it is the one the mole balance is entitled to give. What it costs to reach that lean loading is a question for a rate-based still model, and the seam is here rather than further down.
 
 The corrosion warning, read from both sides of MDEA's own customary limit:
 | rich loading | warning |
@@ -349,7 +374,7 @@ The corrosion warning, read from both sides of MDEA's own customary limit:
 | 0.500000000 | null |
 | 0.500001000 | "rich loading above the customary 0.5 for MDEA: corrosion territory" |
 
-Two refusals that look alike and are not:
+Three refusals that look alike and are not:
 - a spec already met at the inlet: { error: "no acid gas to remove at these specs: CO2 5.2 to 5.2 and H2S 1.4 to 1.4 mol percent" }
 - a spec set above the inlet: { error: "a spec above the inlet is already met: CO2 7.5 against 5.2 mol percent, H2S 0 against 1.4" }
 - a lean loading at or above the rich: { error: "rich loading must exceed lean loading: 0.48 against 0.48 mol acid gas per mol amine leaves no swing to circulate on" }
@@ -552,7 +577,7 @@ The third row is the one that surprises a reader: letting the gas down WITHOUT c
 
 And this is the seam. Dehydration and a cold separator are two answers to one question, and a third answer, injecting an inhibitor so the water that is there cannot form a hydrate, belongs to the Flow Assurance course along with the hydrate boundary itself. Nothing in this engine computes a hydrate boundary. What this section computes is where the cold spot is and how much free water arrives at it, which is the input that question takes.
 
-# SECTION 15: What a refusal is, and what one always carries with it (owned by Expert m05)
+# SECTION 15: What a refusal is, and what one always carries with it (owned by Expert m05 l02 and l03)
 
 The contract: a state the method has no answer for comes back as an object carrying an `error` string. Nothing in this module throws. Every refusal it makes:
 - a temperature outside the water fit: { error: "the Magnus water-saturation fit holds from -45 to 60 degC (-49 to 140 degF); 140.000001 degF is 60.0 degC" }
@@ -618,13 +643,13 @@ Every guard has a boundary, and the boundary is where the teaching is. Each one 
 | the water fit, below the lower edge | -49.000001000 | refuses |
 | the water fit, upper edge | 140.000000000 | answers |
 | the water fit, above the upper edge | 140.000001000 | refuses |
-| the amine swing at exactly zero | 0.480000000 | refuses |
-| the amine swing a hair above zero | 0.479999999 | answers |
+| the lean loading raised to the rich, so the swing is exactly zero | 0.480000000 | refuses |
+| the lean loading a billionth below the rich, so the swing is barely positive | 0.479999999 | answers |
 | the let-down with the two pressures equal | 500.000000000 | refuses |
 | the let-down a hair apart | 499.999999000 | answers |
 A guard that refuses its own limit is as wrong as one that accepts nonsense, which is why both sides are read rather than one.
 
-# SECTION 16: What the method does not know (owned by Expert m05 l05)
+# SECTION 16: What the method does not know (owned by Expert m06 l01)
 
 Six things this course teaches as limits and never as answers:
 1. The real-gas departure of the saturated water content. HELD FOR LITERATURE. The engine warns above 1000.000000 psia that the correction reaches tens of percent, and nothing in this package stands behind a figure for it. Every graded water content in this course sits below that threshold for exactly this reason.
@@ -640,7 +665,7 @@ And two things that are not held but simply ABSENT. THERE IS NO HYDRATE BOUNDARY
 
 One more absence worth naming, because a reader will look for it. Nothing here models a real absorber. A theoretical stage is not a tray, there is no stage efficiency, no rate-based mass transfer and no approach to equilibrium. Section 9 gives a stage count and Section 10 gives a circulation, and turning either into steel needs a vendor.
 
-# SECTION 17: What a published case can and cannot catch (owned by Expert m05 l02 and l03)
+# SECTION 17: What a published case can and cannot catch (owned by Expert m05 l05)
 
 A check that restates the thing it is checking validates nothing. This module's published cases come from an oracle that says, route by route, which of its routes are independent of the engine and which are not, and that distinction is the whole of this section.
 
@@ -682,6 +707,20 @@ So the published cases divide into two kinds, and a reader has to know which kin
 
 THE RULE A READER SHOULD LEAVE WITH. Agreement to twelve decimals between two things that share their arithmetic is a weaker result than agreement to six between two things that do not. The first says a transcription was faithful. The second says two roads met. When a published case agrees exactly, the question to ask is not how close it came but how far apart the two sides were to begin with.
 
+# SECTION 18: The Associate reading, one stream from the line to the still (owned by Associate m06)
+
+OBIAFU arrives at 950.000000 psia and 104.000000 degF carrying 53.450380 lb of water per MMscf, which is a mole fraction of 0.001125908 and nothing to do with the rate. A spec of 7.000000 lb per MMscf takes 46.450380 of that out (derived, the two figures on this line subtracted), and only now does the rate matter: at 62.000000 MMscfd it is 2879.9235 lb a day.
+The choice of 3.200000 gallons of glycol per pound turns that into 9215.7553 gallons a day, or 6.399830 gpm. Each of those gallons needs 1386.1650 Btu to reach the still and 429.6875 Btu to give its water up, 1815.8525 Btu in all, and the reboiler that does it is 0.697269 MMBtu an hour.
+The vessel that gas rises through is 3.192661 ft across, and the glycol loop carries 74.065024 short tons of aromatics a year out of the still overhead on the way.
+Six answers about one stream. Two of them, the water content and the duty per gallon, do not know the rate exists. Three of them are nothing but the rate applied to the first two. And the last one is about a vessel, which is the only part of the chain that cares what pressure the gas is at rather than only how wet it is.
+
+# SECTION 19: The Professional reading, one sour stream through two columns (owned by Professional m06)
+
+UBIE arrives at 5.200000 mol percent CO2 and 1.400000 mol percent H2S and has to leave at 2.000000 and 0.000400. As a mole balance that is 10666.2009 lbmol a day into the solution. Between a LEAN LOADING of 0.050000 and a RICH LOADING of 0.480000 the LOADING SWING is 0.430000000 mol per mol (derived, the two loadings on this line subtracted), and on 45.000000 weight percent MDEA that is 525.893013 gpm and 25.242865 MMBtu an hour.
+As a staged device the same column is read differently. At an absorption factor of 1.600000 the Kremser relation says 6.000000 theoretical stages remove 0.976783371 of what is there, and a removal of 0.990000 would demand 7.746472598.
+As a vessel it is 4.208602 ft across, because the gas weighs 3.831017 lb per ft3 at 985.000000 psia and may not rise faster than 1.035597 ft per s.
+Three answers about one column, and not one of them can be derived from the other two. The mole balance says how much solution has to move and says nothing about whether the column can reach the spec. The stage relation says whether the spec is reachable and says nothing about how many gallons a minute it takes. The vessel says how wide the steel has to be and knows neither.
+
 # SECTION 20: What this engine was repaired for, and how to teach it (owned by Expert m05 l01)
 
 EVERYTHING IN THIS SECTION IS HISTORY AND IS LABELLED AS HISTORY. Nothing above this line is. If you teach any of it, say plainly that it is what the engine used to do, the way this section does. A sentence about former behaviour that reads as current behaviour is the defect; the subject itself is not.
@@ -703,19 +742,5 @@ Those are the repaired engine's compressibilities, and the last column is one ov
 
 4. ONE FLUID WITH TWO DENSITIES, AND ONE MODULE WITH TWO STANDARD BASES. Two numbers for one glycol, and a standard cubic foot defined at one pressure and converted at another. Neither gap was large. Both are defects whatever their size, because nothing downstream can tell which of the two numbers it is holding. Section 2 now shows one of each, and shows the derived ones being derived.
 
-WHERE THE REST OF IT LIVES, AND HOW TO READ IT. The engine's own source comments record what changed, because a good repair records what it changed: there are 9 such comment lines in this module and 59 across the vendored engines, counted by reading the source for a comment line carrying "used to", "no longer" or the repair's own name. THEY ARE PROVENANCE. A comment is not the digest, and a sentence lifted out of one into a lesson arrives with no frame around it. If you want to teach any of it, frame it the way this section does, and never present it as what the engine does now.
-
-# SECTION 18: The Associate reading, one stream from the line to the still (owned by Associate m06)
-
-OBIAFU arrives at 950.000000 psia and 104.000000 degF carrying 53.450380 lb of water per MMscf, which is a mole fraction of 0.001125908 and nothing to do with the rate. A spec of 7.000000 lb per MMscf takes 46.450380 of that out (derived, the two figures on this line subtracted), and only now does the rate matter: at 62.000000 MMscfd it is 2879.9235 lb a day.
-The choice of 3.200000 gallons of glycol per pound turns that into 9215.7553 gallons a day, or 6.399830 gpm. Each of those gallons needs 1386.1650 Btu to reach the still and 429.6875 Btu to give its water up, 1815.8525 Btu in all, and the reboiler that does it is 0.697269 MMBtu an hour.
-The vessel that gas rises through is 3.192661 ft across, and the glycol loop carries 74.065024 short tons of aromatics a year out of the still overhead on the way.
-Six answers about one stream. Two of them, the water content and the duty per gallon, do not know the rate exists. Three of them are nothing but the rate applied to the first two. And the last one is about a vessel, which is the only part of the chain that cares what pressure the gas is at rather than only how wet it is.
-
-# SECTION 19: The Professional reading, one sour stream through two columns (owned by Professional m06)
-
-UBIE arrives at 5.200000 mol percent CO2 and 1.400000 mol percent H2S and has to leave at 2.000000 and 0.000400. As a mole balance that is 10666.2009 lbmol a day into the solution, which at a swing of 0.430000000 mol per mol on 45.000000 weight percent MDEA is 525.893013 gpm and 25.242865 MMBtu an hour.
-As a staged device the same column is read differently. At an absorption factor of 1.600000 the Kremser relation says 6.000000 theoretical stages remove 0.976783371 of what is there, and a removal of 0.990000 would demand 7.746472598.
-As a vessel it is 4.208602 ft across, because the gas weighs 3.831017 lb per ft3 at 985.000000 psia and may not rise faster than 1.035597 ft per s.
-Three answers about one column, and not one of them can be derived from the other two. The mole balance says how much solution has to move and says nothing about whether the column can reach the spec. The stage relation says whether the spec is reachable and says nothing about how many gallons a minute it takes. The vessel says how wide the steel has to be and knows neither.
+WHERE THE REST OF IT LIVES, AND HOW TO READ IT. The engine's own source comments record what changed, because a good repair records what it changed: there are 9 such comment lines in this module and 59 across the vendored engines, counted here rather than quoted, by reading 226 vendored engine modules under packages/engines/engines and taking every COMMENT line carrying "used to", "no longer" or the repair's own name. Both the tree and the rule are stated because a count of this kind means nothing without them: widen the rule to the nine keywords this file also sweeps with and this module alone reads 18, and count the canonical engines repository instead of the subset NextGen vendors and the tree figure more than doubles. A number quoted without its tree and its rule is not checkable and should not be repeated. THEY ARE PROVENANCE. A comment is not the digest, and a sentence lifted out of one into a lesson arrives with no frame around it. If you want to teach any of it, frame it the way this section does, and never present it as what the engine does now.
 

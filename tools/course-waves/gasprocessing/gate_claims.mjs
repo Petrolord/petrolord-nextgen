@@ -88,6 +88,89 @@ let bad=0; const ck=(claim,ok,detail)=>{ if(!ok) bad++; console.log(`${ok?'OK  '
  ck('S6 the engine states the outlet spec is typed', /typed/.test(a.outletSpecBasis||''), a.outletSpecBasis);
  ck('S6 a low enough ratio floods the loop and the engine says so',
     /LEAN strength/.test(G.tegPackage({...F2.OBIAFU,inletLbMMscf:OB_SAT.lbPerMMscf,circulationGalPerLb:F2.RATIO_THAT_FLOODS_THE_LOOP}).warning||''));}
+// C8 S1/S10/S19: lean loading, rich loading and the swing are THREE numbers
+// sharing no word. A writer met this as an ambiguity and refused to use
+// either figure, which was right; this is the check that keeps them apart.
+{const fs=require('fs');
+ const dig=fs.readFileSync('/root/fc-wip-gasprocessing/digest.txt','utf8').split('\n');
+ const r=G.aminePackage(F.UBIE);
+ const lean=F.UBIE.leanLoading, rich=r.richLoadingUsed, swing=rich-lean;
+ ck('S10 the three loadings are three different numbers', lean!==rich && rich!==swing && lean!==swing,
+    `lean ${lean} rich ${rich} swing ${swing}`);
+ // Every prose line naming a swing must carry the DIFFERENCE, never a loading.
+ const bad=dig.filter(l=>!l.startsWith('|') && /swing (of|to) [0-9]/.test(l))
+              .filter(l=>!new RegExp(`swing of ${swing.toFixed(9)}|swing of ${swing}`).test(l));
+ ck('S1/S19 no prose line calls a loading a swing', bad.length===0, bad.length? bad[0].slice(0,90):'0 offending lines');
+ // The engine returns the rich it used and does NOT return the swing.
+ ck('S10 the engine returns richLoadingUsed and returns no swing under any name',
+    r.richLoadingUsed===rich && !('swing' in r) && !('loadingSwing' in r));
+ ck('S10 the digest names all three before the section uses any of them',
+    dig.some(l=>/THREE NAMES, AND THEY ARE THREE DIFFERENT NUMBERS/.test(l)));}
+// C9: COUNTED CLAIMS AND DIRECTION CLAIMS ON ORDINARY PROSE LINES.
+// Two of these shipped in one rebuild and the kit's heading sweep cannot see
+// either, because both sat on a sentence beginning with a lowercase word and
+// the kit surfaces only section titles, hash headings and capitalised
+// markers. They are checked here, where the digest is read as text.
+{const fs2=require('fs');
+ const D=fs2.readFileSync('/root/fc-wip-gasprocessing/digest.txt','utf8').split('\n');
+ const WORDS={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12};
+ const NOUN=/\b(refusals?|things?|names?|limits?|kinds?|routes?|columns?|items?|bullets?)\b/i;
+ const badCounts=[];
+ D.forEach((l,i)=>{
+   if(l.startsWith('|')||l.startsWith('#')) return;
+   const m=new RegExp(`\\\\b(${Object.keys(WORDS).join('|')})\\\\b[^.]{0,45}${NOUN.source}`,'i').exec(l);
+   if(!m) return;
+   const claimed=WORDS[m[1].toLowerCase()], noun=m[2].toLowerCase();
+   if(/column/.test(noun)){
+     const hdr=D.slice(i+1,i+4).find(x=>x.startsWith('| '));
+     if(!hdr) return;
+     const cols=hdr.split('|').map(x=>x.trim()).filter(Boolean).length-1;
+     if(cols!==claimed) badCounts.push(`line ${i+1}: claims ${claimed} ${noun}, table has ${cols}`);
+   } else {
+     let n=0;
+     for(let k=i+1;k<D.length;k++){
+       if(D[k].startsWith('- ')) n++;
+       else if(n>0) break;
+       else if(D[k].trim()==='' ) break;
+     }
+     if(n>0&&n!==claimed) badCounts.push(`line ${i+1}: claims ${claimed} ${noun}, block has ${n}`);
+   }
+ });
+ ck('every counted claim in the digest matches what follows it', badCounts.length===0, badCounts.length?badCounts.join('; '):'0 miscounts');
+
+ // DIRECTION. A sentence saying one quantity is a COST and another is BOUGHT
+ // claims they move in OPPOSITE directions down the table under it. The
+ // lean-loading table has every column falling together, because the duty per
+ // gallon is a stated input and the duty is therefore the circulation in
+ // other units.
+ const badDir=[];
+ D.forEach((l,i)=>{
+   if(!/costs? [^.]*\band buys\b|buys [^.]*\bback\b|costs? [^.]* to reach\b/i.test(l)) return;
+   const rows=[]; for(let k=i+1;k<D.length;k++){ if(D[k].startsWith('| ')){ if(!/^\| ---/.test(D[k])) rows.push(D[k]); } else if(rows.length) break; }
+   if(rows.length<3) return;
+   const cells=rows.map(r=>r.split('|').map(x=>x.trim()).filter(Boolean));
+   const width=Math.min(...cells.map(c=>c.length));
+   const dirs=[];
+   for(let c=1;c<width;c++){
+     const v=cells.map(x=>parseFloat(x[c])); if(v.some(x=>!Number.isFinite(x))) continue;
+     const up=v.every((x,k)=>k===0||x>v[k-1]), dn=v.every((x,k)=>k===0||x<v[k-1]);
+     if(up||dn) dirs.push(up?1:-1);
+   }
+   if(dirs.length>=2 && new Set(dirs).size===1) badDir.push(`line ${i+1}: says cost-and-buy over a table whose columns all move the same way`);
+ });
+ ck('no cost-and-buy sentence sits over a table whose columns all move together', badDir.length===0, badDir.length?badDir.join('; '):'0 backwards glosses');
+
+ // And the positive statement the digest now makes in that place, MEASURED.
+ const lo=G.aminePackage({...F.UBIE,leanLoading:F.UBIE_LEAN_SWEEP[0]});
+ const hi=G.aminePackage({...F.UBIE,leanLoading:F.UBIE_LEAN_SWEEP[F.UBIE_LEAN_SWEEP.length-1]});
+ ck('S10 a leaner lean lowers BOTH the circulation and the regenerator duty',
+    lo.circGpm<hi.circGpm && lo.reboilerMMBtuHr<hi.reboilerMMBtuHr,
+    `gpm ${lo.circGpm.toFixed(3)}<${hi.circGpm.toFixed(3)}, MMBtu/hr ${lo.reboilerMMBtuHr.toFixed(3)}<${hi.reboilerMMBtuHr.toFixed(3)}`);
+ const ratios=F.UBIE_LEAN_SWEEP.map(ll=>{const r=G.aminePackage({...F.UBIE,leanLoading:ll});return r.reboilerMMBtuHr/r.circGpm;});
+ ck('S10 the duty per gpm does not move with the lean loading, which is why',
+    Math.max(...ratios)-Math.min(...ratios)<1e-12, `spread ${(Math.max(...ratios)-Math.min(...ratios)).toExponential(2)}`);
+ ck('S10 that ratio IS the stated duty per gallon in other units',
+    Math.abs(ratios[0]-(F.UBIE.dutyBtuPerGal*60/1e6))<1e-12, `${ratios[0]} vs ${F.UBIE.dutyBtuPerGal*60/1e6}`);}
 // C7 S15: the contract is whole
 {ck('S15 kremserFractionRemoved returns an OBJECT carrying an error',
     !!G.kremserFractionRemoved({absorptionFactor:0,stages:5}).error &&

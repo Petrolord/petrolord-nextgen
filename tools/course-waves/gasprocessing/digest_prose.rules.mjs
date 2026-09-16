@@ -18,6 +18,16 @@ export default {
 
   // Heading claims this digest makes that a block could contradict. Each is
   // a real way one of THESE section titles could go stale, not a generic one.
+  //
+  // TWO CLASSES ARE DELIBERATELY NOT HERE. A false COUNT ("Two refusals" over
+  // three bullets) and a backwards DIRECTION ("costs duty and buys
+  // circulation back" over a table where both columns fall) both shipped in
+  // one rebuild, and both sat on ORDINARY PROSE LINES introducing a block.
+  // The kit surfaces section titles, hash headings and capitalised markers;
+  // none of those shapes matches a sentence beginning "Two refusals that look
+  // alike", so a rule here would be a dead row reporting a clean sweep. Both
+  // are checked in gate_claims.mjs, which reads the digest as text, and both
+  // have a negative control there.
   headings: [
     {
       id: 'fc4-withheld',
@@ -26,10 +36,24 @@ export default {
       why: 'a heading says WITHHELD over a block that prints content. Section 14 carried this for one wave and the words must go when the content arrives',
     },
     {
+      // NOTE FOR LESSON SWEEPS. This rule fires on LESSON headings too, and
+      // it is meant to: an H1 or H2 asserting that an export sits outside the
+      // contract is now false of this engine. The Expert tier retitled its
+      // m05 l03 for exactly this reason and kept the lesson KEY, so banks,
+      // capstones and manifests did not have to move with it.
+      // A TRIPWIRE, NOT A GUARANTEE, and it is worth saying which. This rule
+      // asks whether a heading and its block AGREE. It does not ask whether
+      // the heading is TRUE. Tested against the stale Expert m05 l03 title as
+      // that lesson was actually written, it reported nothing, because the
+      // body used the phrase "bare number" inside a hypothetical and the two
+      // therefore agreed. It is kept because it costs nothing and still
+      // catches the digest-side version, and it is NARROWED to assert the
+      // engine's current fact as well: any heading claiming an export is
+      // outside the contract is false of this engine, whatever its block says.
       id: 'fc4-outside-contract',
-      heading: /outside the contract/i,
-      body: (b) => !/BARE NUMBER|bare number/i.test(b),
-      why: 'a heading claims an export sits outside the error contract and the block shows none. This exact title went stale on the FC4-0 rebuild, because the one export that was outside the contract was brought inside it',
+      heading: /outside the contract|breaks (that|the) contract/i,
+      body: () => true,
+      why: 'a heading claims an export sits outside the error contract. Since FC4-0 no export does, so the claim is false of this engine whatever the block under it says. The Expert tier retitled its m05 l03 for this reason and kept the lesson KEY, so banks, capstones and manifests did not move with it',
     },
     {
       id: 'fc4-does-not-move',

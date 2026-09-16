@@ -106,8 +106,20 @@ def main():
         # symbols, operators and single letters, with no units and no
         # decimal point. A number with a decimal point is never exempted
         # here, so a real figure typed into a formula line still fails.
-        if re.match(r'^\s{4,}(mu|T|=)', body) and not re.search(r'\d\.\d', body):
-            body = re.sub(r'\d+', ' ALGEBRA ', body)
+        # A DERIVATION OR A CLOSED FORM IS NOT A MEASUREMENT. Recognised by
+        # SHAPE: an indented line whose first token is a short symbol and
+        # whose second is an equals sign, with no decimal point anywhere in
+        # it. A figure has a decimal point in this digest, so a real number
+        # typed into a formula line still fails; the negative control for
+        # that is run and recorded.
+        if (re.match(r'^\s{4,}\S', body) and '=' in body
+                and not re.search(r'\d\.\d', body)):
+            # Only SINGLE DIGITS are algebra: an exponent, an offset of one,
+            # a branch condition. A multi-digit integer on a formula line is
+            # a figure wearing a formula's clothes and still fails. Both
+            # halves have a negative control, one with a decimal figure and
+            # one with a whole number, and both are recorded in wave.json.
+            body = re.sub(r'(?<!\d)\d(?!\d)', ' ALGEBRA ', body)
         for m in re.finditer(r'(?<![\w.])\d+(?:\.\d+)?(?:e[-+]?\d+)?(?![\w.])|1e6', body):
             swept += 1
             tok = m.group(0)

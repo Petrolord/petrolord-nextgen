@@ -100,12 +100,12 @@ w();
 w('# App surface: the Gas Processing Studio runs three units over one gas stream. Dehydration takes water out with glycol, sweetening takes acid gas out with amine, and the dew point unit cools the gas by letting it down.');
 w('- This engine conditions a GAS STREAM. It answers how much water a gas carries, how much solvent it takes to remove it, what the regenerator costs to run, how wide the vessel has to be, and how far a let-down cools the gas.');
 w('- The doctrine is stated in the module\'s own header: everything that is a DESIGN CHOICE or a chart value is an INPUT with its customary range named, and everything computable from first principles is computed. The circulation ratio, the BTEX absorbed fraction, the glycol properties, the water overhead and the contactor liquid are all inputs with defaults, and a reader can see each one on the page rather than having to find it in the source.');
-w('- A state the method has no answer for comes back as an object with an `error` string. This module throws nothing. It has ONE export that breaks that contract by returning a bare number, and Section 15 reads it.');
+w('- A state the method has no answer for comes back as an object with an `error` string. This module throws nothing, and there is no export outside that contract: every one of them answers with an object and every refusal puts a named string on an `error` key. Section 15 reads the contract and the evidence a refusal carries with it.');
 w('- What is NOT in this engine: no hydrate boundary, no compositional flash, no rate-based absorber model, no stage efficiency, no molecular sieve, no refrigeration and no NGL recovery. A hydrate margin is the Production module Flow Assurance engine, and the phase envelope of a reservoir fluid is the Fluid engine.');
 w();
 w('The three units, on the two teaching streams, end to end:');
 w(`- OBIAFU carries ${e6(OB_SAT.lbPerMMscf)} lb of water per MMscf at ${e6(OBIAFU_LINE.pPsia)} psia and ${e6(OBIAFU_LINE.tF)} degF, and at ${e6(OBIAFU.gasMMscfd)} MMscfd a spec of ${e6(OBIAFU.outletLbMMscf)} lb per MMscf means taking out ${r4(OB.waterLbDay)} lb a day, which at ${e6(OBIAFU.circulationGalPerLb)} gal per lb is ${e6(OB.circGpm)} gpm of glycol and ${e6(OB.reboilerMMBtuHr)} MMBtu an hour of reboiler.`);
-w(`- UBIE arrives at ${e6(UBIE.co2MolPct)} mol percent CO2 and ${e6(UBIE.h2sMolPct)} mol percent H2S, and meeting ${e6(UBIE.co2SpecMolPct)} and ${e6(UBIE.h2sSpecMolPct)} means picking up ${r4(UB.acidMolesDay)} lbmol of acid gas a day, which at a swing to ${e6(UB.richLoadingUsed)} is ${e6(UB.circGpm)} gpm of solution and ${e6(UB.reboilerMMBtuHr)} MMBtu an hour of regenerator.`);
+w(`- UBIE arrives at ${e6(UBIE.co2MolPct)} mol percent CO2 and ${e6(UBIE.h2sMolPct)} mol percent H2S, and meeting ${e6(UBIE.co2SpecMolPct)} and ${e6(UBIE.h2sSpecMolPct)} means picking up ${r4(UB.acidMolesDay)} lbmol of acid gas a day. Loaded from a LEAN LOADING of ${e6(UBIE.leanLoading)} to a RICH LOADING of ${e6(UB.richLoadingUsed)} mol of acid gas per mol of amine, which is a LOADING SWING of ${num(UB.richLoadingUsed - UBIE.leanLoading, 9)} (derived, the two loadings on this line subtracted), that is ${e6(UB.circGpm)} gpm of solution and ${e6(UB.reboilerMMBtuHr)} MMBtu an hour of regenerator.`);
 w(`- The two contactors those streams go up are ${e6(OB_CONT.diameterFt)} ft and ${e6(UB_CONT.diameterFt)} ft across.`);
 w();
 
@@ -173,7 +173,7 @@ w('| --- | --- |');
   ['the customary circulation band, high', G.DECLARED_CONSTANTS.CUSTOMARY_CIRCULATION_HI],
   ['the pressure the chart warning starts at, psia', G.DECLARED_CONSTANTS.CHART_WARNING_PSIA],
 ].forEach(([label, v]) => w(`| ${label} | ${num(v, 6)} |`));
-w('And the amine property set, four columns of it, declared on the same terms:');
+w('And the amine property set, five declared columns of it beside the name, on the same terms:');
 w('| amine | molecular weight | solution gravity | rich limit | duty, Btu/gal | typical strength, wt % |');
 w('| --- | --- | --- | --- | --- | --- |');
 G.AMINES.forEach((a) => w(`| ${a.id} | ${e6(a.mw)} | ${e6(a.sgSolution)} | ${e6(a.maxLoading)} | ${e6(a.heatBtuPerGal)} | ${e6(a.wtPctTypical)} |`));
@@ -383,6 +383,21 @@ w();
 w('# SECTION 9: A contactor is a staged device (owned by Professional m01 and m02)');
 w();
 w('The Kremser relation ties three things: the absorption factor, the number of theoretical stages, and the fraction of the solute the column removes. Give it any two and it gives the third.');
+w();
+w('THE ABSORPTION FACTOR, WRITTEN OUT. It is the liquid rate over the gas rate times the equilibrium constant:');
+w('    A = L / (V K)');
+w('with L the solvent molar rate down the column, V the gas molar rate up it, and K the equilibrium ratio of the solute between the two phases at the column\'s conditions. It is dimensionless, it is the ONE number that carries the equilibrium, and THIS MODULE DOES NOT COMPUTE IT: none of L, V or K is an argument of any export here, and the factor arrives as a typed input taken from equilibrium data. That is the seam, and it is why every table in this section is indexed by A rather than by a rate.');
+w();
+w('THE RELATION ITSELF, in the two branches the module carries:');
+w('    f = (A^(N+1) - A) / (A^(N+1) - 1)      for A other than 1');
+w('    f = N / (N + 1)                        for A = 1');
+w('with f the fraction removed and N the number of theoretical stages. The second branch is not a special case bolted on: the first is indeterminate at A = 1, where numerator and denominator both vanish, and N over N plus one is its limit there. The table below reads across that limit from both sides to show the two agreeing.');
+w();
+w('AND INVERTED, which is the form a spec demands. Solving the first branch for N:');
+w('    A^(N+1) = (A - f) / (1 - f)');
+w('    N = log( (A - f) / (1 - f) ) / log(A) - 1');
+w('    N = f / (1 - f)                        for A = 1');
+w('Read the first of those three lines rather than the second and the ceiling falls straight out: the left side is positive for any real N, so the right side must be too, and with f below one that needs A above f. An absorption factor at or below the removal a spec asks for has no stage count at all, which is the refusal this section ends on.');
 w(`On the OBIAFU absorber at an absorption factor of ${e6(OBIAFU_ABSORPTION_FACTOR)} over ${e6(OBIAFU_STAGES)} stages the removal is ${num(kNum({ absorptionFactor: OBIAFU_ABSORPTION_FACTOR, stages: OBIAFU_STAGES }), 9)}.`);
 w();
 w('The surface. Rows are stages, columns are the absorption factor:');
@@ -425,8 +440,15 @@ w();
 w('# SECTION 10: Acid gas is removed by moles (owned by Professional m03)');
 w();
 w('Sweetening is a mole balance from end to end. The gas carries a mole percent of CO2 and H2S, the spec says what may stay, and the difference is what the solution has to pick up. Nothing in that chain is a mass until the very last step.');
+w('THREE NAMES, AND THEY ARE THREE DIFFERENT NUMBERS. A reader who collapses them has lost the whole section, so they are separated here before any of them is used, and they are the engine\'s own words:');
+w(`- the LEAN LOADING: what a mole of amine is still carrying when it comes back from the regenerator and enters the contactor. An input. On UBIE, ${e6(UBIE.leanLoading)} mol of acid gas per mol of amine.`);
+w(`- the RICH LOADING: what a mole of amine is carrying when it leaves the contactor. An input, and the engine echoes back the one it used as \`richLoadingUsed\`. On UBIE, ${e6(UB.richLoadingUsed)}.`);
+w(`- the LOADING SWING: the DIFFERENCE between them, which is what each mole of amine actually carries round the loop and is therefore what sets the circulation. NOT an input, and the engine does not return it under any name. On UBIE it is ${num(UB.richLoadingUsed - UBIE.leanLoading, 9)}, derived from the two figures above.`);
+w('The rich loading is a CEILING that corrosion sets. The swing is a THROUGHPUT that the regenerator buys. Raising the rich loading raises the swing; lowering the lean loading also raises the swing, and costs regenerator duty rather than corrosion margin. That is why this section reads both ends separately.');
+w(`The engine's own refusal uses all three words in one sentence when the swing vanishes: ${soft(G.aminePackage({ ...UBIE, leanLoading: UBIE.richLoading }))}`);
+w();
 w(`On UBIE: ${e6(UBIE.co2MolPct)} less ${e6(UBIE.co2SpecMolPct)} mol percent of CO2 plus ${e6(UBIE.h2sMolPct)} less ${e6(UBIE.h2sSpecMolPct)} of H2S is ${num((UBIE.co2MolPct - UBIE.co2SpecMolPct) + (UBIE.h2sMolPct - UBIE.h2sSpecMolPct), 9)} mol percent removed (derived, the four figures on this line), which at ${e6(UBIE.gasMMscfd)} MMscfd is ${r4(UB.acidMolesDay)} lbmol a day.`);
-w(`Each mole of amine carries the swing, which is ${e6(UB.richLoadingUsed)} rich less ${e6(UBIE.leanLoading)} lean, or ${num(UB.richLoadingUsed - UBIE.leanLoading, 9)} mol of acid gas per mol of amine (derived, the two figures on this line subtracted). The circulation follows: ${e6(UB.circGpm)} gpm.`);
+w(`Each mole of amine carries the LOADING SWING round the loop: a rich loading of ${e6(UB.richLoadingUsed)} less a lean loading of ${e6(UBIE.leanLoading)} is a swing of ${num(UB.richLoadingUsed - UBIE.leanLoading, 9)} mol of acid gas per mol of amine (derived, the two loadings on this line subtracted). The circulation follows from the swing and not from either loading on its own: ${e6(UB.circGpm)} gpm.`);
 w(`The regenerator then costs the stated ${e6(UBIE.dutyBtuPerGal)} Btu a gallon on every one of those gallons, which is ${e6(UB.reboilerMMBtuHr)} MMBtu an hour.`);
 w();
 w('The swing is the whole lever. The rich end:');
@@ -436,13 +458,20 @@ UBIE_RICH_SWEEP.forEach((rl) => {
   const r = G.aminePackage({ ...UBIE, richLoading: rl });
   w(`| ${e6(rl)} | ${num(rl - UBIE.leanLoading, 9)} | ${e6(r.circGpm)} | ${e6(r.reboilerMMBtuHr)} | ${r.warning ? 'yes' : 'no'} |`);
 });
-w('And the lean end, which costs regenerator duty to reach and buys circulation back:');
-w('| lean loading | swing | circulation, gpm | regenerator, MMBtu/hr |');
-w('| --- | --- | --- | --- |');
+w('And the lean end. READ THE LAST TWO COLUMNS TOGETHER BEFORE READING ANY SENTENCE ABOUT THEM, because this is where the model and the plant part company:');
+w('| lean loading | swing | circulation, gpm | regenerator, MMBtu/hr | MMBtu/hr per gpm |');
+w('| --- | --- | --- | --- | --- |');
 UBIE_LEAN_SWEEP.forEach((ll) => {
   const r = G.aminePackage({ ...UBIE, leanLoading: ll });
-  w(`| ${e6(ll)} | ${num(UBIE.richLoading - ll, 9)} | ${e6(r.circGpm)} | ${e6(r.reboilerMMBtuHr)} |`);
+  w(`| ${e6(ll)} | ${num(UBIE.richLoading - ll, 9)} | ${e6(r.circGpm)} | ${e6(r.reboilerMMBtuHr)} | ${num(r.reboilerMMBtuHr / r.circGpm, 9)} |`);
 });
+(() => {
+  const lo = G.aminePackage({ ...UBIE, leanLoading: UBIE_LEAN_SWEEP[0] });
+  const hi = G.aminePackage({ ...UBIE, leanLoading: UBIE_LEAN_SWEEP[UBIE_LEAN_SWEEP.length - 1] });
+  w(`IN THIS MODEL A LEANER LEAN COSTS NOTHING. Going from a lean loading of ${e6(UBIE_LEAN_SWEEP[UBIE_LEAN_SWEEP.length - 1])} to ${e6(UBIE_LEAN_SWEEP[0])} takes the circulation from ${e6(hi.circGpm)} to ${e6(lo.circGpm)} gpm AND the regenerator from ${e6(hi.reboilerMMBtuHr)} to ${e6(lo.reboilerMMBtuHr)} MMBtu an hour. Both fall. The last column says why: the duty per gallon is a STATED input, ${e6(UBIE.dutyBtuPerGal)} Btu on every gallon circulated, so the regenerator duty is nothing but the circulation in other units and the ratio does not move down the table.`);
+  w(`THAT IS THE MODEL AND NOT THE PLANT. Stripping a solution leaner is work, and on a real regenerator it is bought with reboiler duty per gallon, more stripping steam and a taller still. NONE OF THAT IS IN THIS ENGINE: the duty per gallon is a number the caller types and the engine never changes it, so nothing here can make a leaner lean cost anything. A reader who takes this table as the economics of a regenerator has been told the opposite of the truth by a model that is doing exactly what it says it does.`);
+  w('WHAT THE TABLE IS HONESTLY FOR: it says how much SOLUTION a given lean loading has to move. That is a real answer and it is the one the mole balance is entitled to give. What it costs to reach that lean loading is a question for a rate-based still model, and the seam is here rather than further down.');
+})();
 w();
 w('The corrosion warning, read from both sides of MDEA\'s own customary limit:');
 w('| rich loading | warning |');
@@ -451,7 +480,7 @@ w('| --- | --- |');
   w(`| ${num(rl, 9)} | ${shape(G.aminePackage({ ...UBIE, richLoading: rl }).warning)} |`);
 });
 w();
-w('Two refusals that look alike and are not:');
+w('Three refusals that look alike and are not:');
 w(`- a spec already met at the inlet: ${soft(G.aminePackage({ ...UBIE, ...UBIE_SPEC_ALREADY_MET }))}`);
 w(`- a spec set above the inlet: ${soft(G.aminePackage({ ...UBIE, ...UBIE_SPEC_ABOVE_INLET }))}`);
 w(`- a lean loading at or above the rich: ${soft(G.aminePackage({ ...UBIE, leanLoading: UBIE.richLoading }))}`);
@@ -690,7 +719,7 @@ w();
 w('And this is the seam. Dehydration and a cold separator are two answers to one question, and a third answer, injecting an inhibitor so the water that is there cannot form a hydrate, belongs to the Flow Assurance course along with the hydrate boundary itself. Nothing in this engine computes a hydrate boundary. What this section computes is where the cold spot is and how much free water arrives at it, which is the input that question takes.');
 w();
 // --------------------------------------------------------------- SECTION 15
-w('# SECTION 15: What a refusal is, and what one always carries with it (owned by Expert m05)');
+w('# SECTION 15: What a refusal is, and what one always carries with it (owned by Expert m05 l02 and l03)');
 w();
 w('The contract: a state the method has no answer for comes back as an object carrying an `error` string. Nothing in this module throws. Every refusal it makes:');
 [
@@ -764,8 +793,8 @@ w('| --- | --- | --- |');
   ['the water fit, below the lower edge', FIT_BELOW_LOW_EDGE_F, () => G.saturatedWaterContent({ pPsia: 500, tF: FIT_BELOW_LOW_EDGE_F })],
   ['the water fit, upper edge', FIT_HIGH_EDGE_F, () => G.saturatedWaterContent({ pPsia: 500, tF: FIT_HIGH_EDGE_F })],
   ['the water fit, above the upper edge', FIT_ABOVE_HIGH_EDGE_F, () => G.saturatedWaterContent({ pPsia: 500, tF: FIT_ABOVE_HIGH_EDGE_F })],
-  ['the amine swing at exactly zero', UBIE.richLoading, () => G.aminePackage({ ...UBIE, leanLoading: UBIE.richLoading })],
-  ['the amine swing a hair above zero', UBIE.richLoading - 1e-9, () => G.aminePackage({ ...UBIE, leanLoading: UBIE.richLoading - 1e-9 })],
+  ['the lean loading raised to the rich, so the swing is exactly zero', UBIE.richLoading, () => G.aminePackage({ ...UBIE, leanLoading: UBIE.richLoading })],
+  ['the lean loading a billionth below the rich, so the swing is barely positive', UBIE.richLoading - 1e-9, () => G.aminePackage({ ...UBIE, leanLoading: UBIE.richLoading - 1e-9 })],
   ['the let-down with the two pressures equal', 500, () => G.jtDrop({ p1Psia: 500, p2Psia: 500, tF: 100, gasSg: 0.65 })],
   ['the let-down a hair apart', 499.999999, () => G.jtDrop({ p1Psia: 500, p2Psia: 499.999999, tF: 100, gasSg: 0.65 })],
 ].forEach(([guard, value, fn]) => w(`| ${guard} | ${num(value, 9)} | ${fn().error ? 'refuses' : 'answers'} |`));
@@ -773,7 +802,7 @@ w('A guard that refuses its own limit is as wrong as one that accepts nonsense, 
 w();
 
 // --------------------------------------------------------------- SECTION 16
-w('# SECTION 16: What the method does not know (owned by Expert m05 l05)');
+w('# SECTION 16: What the method does not know (owned by Expert m06 l01)');
 w();
 w('Six things this course teaches as limits and never as answers:');
 w(`1. The real-gas departure of the saturated water content. HELD FOR LITERATURE. The engine warns above ${num(G.DECLARED_CONSTANTS.CHART_WARNING_PSIA, 6)} psia that the correction reaches tens of percent, and nothing in this package stands behind a figure for it. Every graded water content in this course sits below that threshold for exactly this reason.`);
@@ -791,7 +820,7 @@ w('One more absence worth naming, because a reader will look for it. Nothing her
 w();
 
 // --------------------------------------------------------------- SECTION 17
-w('# SECTION 17: What a published case can and cannot catch (owned by Expert m05 l02 and l03)');
+w('# SECTION 17: What a published case can and cannot catch (owned by Expert m05 l05)');
 w();
 w('A check that restates the thing it is checking validates nothing. This module\'s published cases come from an oracle that says, route by route, which of its routes are independent of the engine and which are not, and that distinction is the whole of this section.');
 w();
@@ -842,6 +871,24 @@ w('| --- | --- | --- |');
 w();
 w('THE RULE A READER SHOULD LEAVE WITH. Agreement to twelve decimals between two things that share their arithmetic is a weaker result than agreement to six between two things that do not. The first says a transcription was faithful. The second says two roads met. When a published case agrees exactly, the question to ask is not how close it came but how far apart the two sides were to begin with.');
 w();
+// --------------------------------------------------------------- SECTION 18
+w('# SECTION 18: The Associate reading, one stream from the line to the still (owned by Associate m06)');
+w();
+w(`OBIAFU arrives at ${e6(OBIAFU_LINE.pPsia)} psia and ${e6(OBIAFU_LINE.tF)} degF carrying ${e6(OB_SAT.lbPerMMscf)} lb of water per MMscf, which is a mole fraction of ${num(OB_SAT.yWater, 9)} and nothing to do with the rate. A spec of ${e6(OBIAFU.outletLbMMscf)} lb per MMscf takes ${e6(OB_SAT.lbPerMMscf - OBIAFU.outletLbMMscf)} of that out (derived, the two figures on this line subtracted), and only now does the rate matter: at ${e6(OBIAFU.gasMMscfd)} MMscfd it is ${r4(OB.waterLbDay)} lb a day.`);
+w(`The choice of ${e6(OBIAFU.circulationGalPerLb)} gallons of glycol per pound turns that into ${r4(OB.circGpd)} gallons a day, or ${e6(OB.circGpm)} gpm. Each of those gallons needs ${r4(OB.sensiblePerGal)} Btu to reach the still and ${r4(OB.vaporPerGal)} Btu to give its water up, ${r4(OB.dutyBtuPerGal)} Btu in all, and the reboiler that does it is ${e6(OB.reboilerMMBtuHr)} MMBtu an hour.`);
+w(`The vessel that gas rises through is ${e6(OB_CONT.diameterFt)} ft across, and the glycol loop carries ${e6(OB.btexTonsYear)} short tons of aromatics a year out of the still overhead on the way.`);
+w('Six answers about one stream. Two of them, the water content and the duty per gallon, do not know the rate exists. Three of them are nothing but the rate applied to the first two. And the last one is about a vessel, which is the only part of the chain that cares what pressure the gas is at rather than only how wet it is.');
+w();
+
+// --------------------------------------------------------------- SECTION 19
+w('# SECTION 19: The Professional reading, one sour stream through two columns (owned by Professional m06)');
+w();
+w(`UBIE arrives at ${e6(UBIE.co2MolPct)} mol percent CO2 and ${e6(UBIE.h2sMolPct)} mol percent H2S and has to leave at ${e6(UBIE.co2SpecMolPct)} and ${e6(UBIE.h2sSpecMolPct)}. As a mole balance that is ${r4(UB.acidMolesDay)} lbmol a day into the solution. Between a LEAN LOADING of ${e6(UBIE.leanLoading)} and a RICH LOADING of ${e6(UB.richLoadingUsed)} the LOADING SWING is ${num(UB.richLoadingUsed - UBIE.leanLoading, 9)} mol per mol (derived, the two loadings on this line subtracted), and on ${e6(UBIE.amineWtPct)} weight percent MDEA that is ${e6(UB.circGpm)} gpm and ${e6(UB.reboilerMMBtuHr)} MMBtu an hour.`);
+w(`As a staged device the same column is read differently. At an absorption factor of ${e6(OBIAFU_ABSORPTION_FACTOR)} the Kremser relation says ${e6(OBIAFU_STAGES)} theoretical stages remove ${num(kNum({ absorptionFactor: OBIAFU_ABSORPTION_FACTOR, stages: OBIAFU_STAGES }), 9)} of what is there, and a removal of ${e6(0.99)} would demand ${num(G.kremserStagesFor({ absorptionFactor: OBIAFU_ABSORPTION_FACTOR, fractionRemoved: 0.99 }).stages, 9)}.`);
+w(`As a vessel it is ${e6(UB_CONT.diameterFt)} ft across, because the gas weighs ${e6(UB_CONT.rhoG)} lb per ft3 at ${e6(UBIE_CONTACTOR.pPsia)} psia and may not rise faster than ${e6(UB_CONT.vAllowFtS)} ft per s.`);
+w('Three answers about one column, and not one of them can be derived from the other two. The mole balance says how much solution has to move and says nothing about whether the column can reach the spec. The stage relation says whether the spec is reachable and says nothing about how many gallons a minute it takes. The vessel says how wide the steel has to be and knows neither.');
+w();
+
 // --------------------------------------------------------------- SECTION 20
 // FRAMED HISTORY. This section is the one place in the digest where the
 // subject IS what the engine used to do, and it says so in its own title and
@@ -874,30 +921,18 @@ w();
 // The comment counts are MEASURED by reading the engine source, not typed,
 // for the same reason every other figure in this digest is measured.
 const HIST_RE = /^\s*(\*|\/\/).*(used to|no longer|until FC4-0)/;
+// The same sweep with a wider keyword list, so the digest can say how much
+// the RULE moves the answer instead of asserting that it does.
+const HIST_RE_WIDE = /^\s*(\*|\/\/).*(used to|no longer|before the repair|formerly|had been|prior to|was the bug|instead of|was on screen)/i;
+const countWide = (file) => fs.readFileSync(file, 'utf8').split('\n').filter((l) => HIST_RE_WIDE.test(l)).length;
 const countHist = (file) => fs.readFileSync(file, 'utf8').split('\n').filter((l) => HIST_RE.test(l)).length;
 const walkJs = (dir) => fs.readdirSync(dir, { withFileTypes: true })
   .flatMap((e) => (e.isDirectory() ? walkJs(`${dir}/${e.name}`) : (e.name.endsWith('.js') ? [`${dir}/${e.name}`] : [])));
 const THIS_MODULE_HIST = countHist(`${ROOT}/engines/facilities/gasProcessing.js`);
-const ALL_ENGINE_HIST = walkJs(`${ROOT}/engines`).reduce((a, f) => a + countHist(f), 0);
-w(`WHERE THE REST OF IT LIVES, AND HOW TO READ IT. The engine's own source comments record what changed, because a good repair records what it changed: there are ${THIS_MODULE_HIST} such comment lines in this module and ${ALL_ENGINE_HIST} across the vendored engines, counted by reading the source for a comment line carrying "used to", "no longer" or the repair's own name. THEY ARE PROVENANCE. A comment is not the digest, and a sentence lifted out of one into a lesson arrives with no frame around it. If you want to teach any of it, frame it the way this section does, and never present it as what the engine does now.`);
-w();
-
-// --------------------------------------------------------------- SECTION 18
-w('# SECTION 18: The Associate reading, one stream from the line to the still (owned by Associate m06)');
-w();
-w(`OBIAFU arrives at ${e6(OBIAFU_LINE.pPsia)} psia and ${e6(OBIAFU_LINE.tF)} degF carrying ${e6(OB_SAT.lbPerMMscf)} lb of water per MMscf, which is a mole fraction of ${num(OB_SAT.yWater, 9)} and nothing to do with the rate. A spec of ${e6(OBIAFU.outletLbMMscf)} lb per MMscf takes ${e6(OB_SAT.lbPerMMscf - OBIAFU.outletLbMMscf)} of that out (derived, the two figures on this line subtracted), and only now does the rate matter: at ${e6(OBIAFU.gasMMscfd)} MMscfd it is ${r4(OB.waterLbDay)} lb a day.`);
-w(`The choice of ${e6(OBIAFU.circulationGalPerLb)} gallons of glycol per pound turns that into ${r4(OB.circGpd)} gallons a day, or ${e6(OB.circGpm)} gpm. Each of those gallons needs ${r4(OB.sensiblePerGal)} Btu to reach the still and ${r4(OB.vaporPerGal)} Btu to give its water up, ${r4(OB.dutyBtuPerGal)} Btu in all, and the reboiler that does it is ${e6(OB.reboilerMMBtuHr)} MMBtu an hour.`);
-w(`The vessel that gas rises through is ${e6(OB_CONT.diameterFt)} ft across, and the glycol loop carries ${e6(OB.btexTonsYear)} short tons of aromatics a year out of the still overhead on the way.`);
-w('Six answers about one stream. Two of them, the water content and the duty per gallon, do not know the rate exists. Three of them are nothing but the rate applied to the first two. And the last one is about a vessel, which is the only part of the chain that cares what pressure the gas is at rather than only how wet it is.');
-w();
-
-// --------------------------------------------------------------- SECTION 19
-w('# SECTION 19: The Professional reading, one sour stream through two columns (owned by Professional m06)');
-w();
-w(`UBIE arrives at ${e6(UBIE.co2MolPct)} mol percent CO2 and ${e6(UBIE.h2sMolPct)} mol percent H2S and has to leave at ${e6(UBIE.co2SpecMolPct)} and ${e6(UBIE.h2sSpecMolPct)}. As a mole balance that is ${r4(UB.acidMolesDay)} lbmol a day into the solution, which at a swing of ${num(UB.richLoadingUsed - UBIE.leanLoading, 9)} mol per mol on ${e6(UBIE.amineWtPct)} weight percent MDEA is ${e6(UB.circGpm)} gpm and ${e6(UB.reboilerMMBtuHr)} MMBtu an hour.`);
-w(`As a staged device the same column is read differently. At an absorption factor of ${e6(OBIAFU_ABSORPTION_FACTOR)} the Kremser relation says ${e6(OBIAFU_STAGES)} theoretical stages remove ${num(kNum({ absorptionFactor: OBIAFU_ABSORPTION_FACTOR, stages: OBIAFU_STAGES }), 9)} of what is there, and a removal of ${e6(0.99)} would demand ${num(G.kremserStagesFor({ absorptionFactor: OBIAFU_ABSORPTION_FACTOR, fractionRemoved: 0.99 }).stages, 9)}.`);
-w(`As a vessel it is ${e6(UB_CONT.diameterFt)} ft across, because the gas weighs ${e6(UB_CONT.rhoG)} lb per ft3 at ${e6(UBIE_CONTACTOR.pPsia)} psia and may not rise faster than ${e6(UB_CONT.vAllowFtS)} ft per s.`);
-w('Three answers about one column, and not one of them can be derived from the other two. The mole balance says how much solution has to move and says nothing about whether the column can reach the spec. The stage relation says whether the spec is reachable and says nothing about how many gallons a minute it takes. The vessel says how wide the steel has to be and knows neither.');
+const ENGINE_FILES = walkJs(`${ROOT}/engines`);
+const ALL_ENGINE_HIST = ENGINE_FILES.reduce((a, f) => a + countHist(f), 0);
+const THIS_MODULE_WIDE = countWide(`${ROOT}/engines/facilities/gasProcessing.js`);
+w(`WHERE THE REST OF IT LIVES, AND HOW TO READ IT. The engine's own source comments record what changed, because a good repair records what it changed: there are ${THIS_MODULE_HIST} such comment lines in this module and ${ALL_ENGINE_HIST} across the vendored engines, counted here rather than quoted, by reading ${ENGINE_FILES.length} vendored engine modules under packages/engines/engines and taking every COMMENT line carrying "used to", "no longer" or the repair's own name. Both the tree and the rule are stated because a count of this kind means nothing without them: widen the rule to the nine keywords this file also sweeps with and this module alone reads ${THIS_MODULE_WIDE}, and count the canonical engines repository instead of the subset NextGen vendors and the tree figure more than doubles. A number quoted without its tree and its rule is not checkable and should not be repeated. THEY ARE PROVENANCE. A comment is not the digest, and a sentence lifted out of one into a lesson arrives with no frame around it. If you want to teach any of it, frame it the way this section does, and never present it as what the engine does now.`);
 w();
 
 console.log(out.join('\n'));
