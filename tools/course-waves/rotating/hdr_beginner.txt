@@ -1,0 +1,38 @@
+-- ============================================================================
+-- FC3 ASSOCIATE DEEP SEED: Rotating Equipment, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE PUMP AND THE SYSTEM IT WORKS INTO. What these two
+-- modules size and what they refuse to guess (they size MACHINES, and what
+-- the piping costs in pressure is a line sizing question living in
+-- lineHydraulics.js); the fitted pump curve and the conditioning that fit
+-- costs; the system curve, which is a static head plus a friction head that
+-- goes as the square of flow; the duty SOLVED as their intersection; the
+-- power that duty costs, hydraulic then brake then motor input; the
+-- conversion of a head to a pressure; and the reading of where the duty
+-- landed.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The two field packagings are ONE constant.
+-- The 2.31 ft of head per psi at specific gravity 1 and the 3960 in the
+-- horsepower packaging both imply a water density of 62.33766233766234 lb per
+-- ft3, and the two agree exactly. The digest computes that agreement rather
+-- than claiming it.
+--
+-- THE TRAP THE TIER IS BUILT ON. A pump has NO operating point until it is
+-- connected to something. A curve says what the machine makes and a system
+-- curve says what the piping demands, and neither has a duty. Every number
+-- after the duty moves when the system moves, which is why a reader who
+-- quotes a flow off a catalogue curve has quoted nothing.
+--
+-- HELD FOR LITERATURE, taught as a limit and never graded in any tier: the
+-- Hydraulic Institute viscosity correction, the trim shortfall model, the
+-- operating region bands of 50, 70, 120 and 140 percent, the NPSH margin rule
+-- of the larger of 3 ft and 35 percent of required, and the machine screening
+-- thresholds. The capstone never calls any of them.
+--
+-- The only numbers that travel from this tier to the next are the duty solve
+-- itself and the power packagings.
+-- ============================================================================

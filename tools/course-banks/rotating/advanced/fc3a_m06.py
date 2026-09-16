@@ -1,0 +1,114 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC3 Expert m06, The Expert Reading. Digest sections 16 and 17.
+
+q(0, "How many published cases does this course carry, and against how many exported functions?",
+ "16 published cases against the 22 exported functions of the two modules.",
+ ["22 published cases against the 16 exported functions of the two modules.",
+  "16 published cases against the 14 exported functions of the pump module alone.",
+  "10 published cases against the 22 exported functions of the two modules."],
+ "The pump goldens carry 10 cases in five blocks and the compression goldens 6 cases in two. Both counts are read off the files themselves.")
+
+q(2, "One published staging case runs from 200.000000 psia to 600.000000 psia at 110.0000 degF with k of 1.250000. What is unusual about its answer?",
+ "It comes back as a single stage, and the engine still names a governing rule, which is both equally.",
+ ["It comes back as a single stage with no governing rule, since a one-stage answer has nothing to compare.",
+  "It comes back governed by the ratio limit, which is the only published case where the ratio rule wins alone.",
+  "It comes back with a ratio per stage above its overall ratio."],
+ "The ratio per stage on that case is 3.000000000, which is the whole job in one bite. Where the two demands are equal the engine says so rather than picking one.")
+
+q(3, "Two other published staging cases return 3 stages at a ratio per stage of 2.154434690 and 4 stages at 2.213363839. What governed each?",
+ "Discharge temperature governed both.",
+ ["The ratio limit governed the three-stage case and discharge temperature the four-stage one.",
+  "Discharge temperature governed the three-stage case and both equally the four-stage one.",
+  "Both equally governed the three-stage case and the ratio limit the four-stage one."],
+ "The first runs 100.000000 to 1000.000000 psia at 100.0000 degF and the second 50.000000 to 1200.000000 psia at 90.0000 degF. The temperature limit is the usual binding rule on these duties.")
+
+q(1, "A published stage case takes 20.000000 MMscfd through a ratio of 3.160000 with k of 1.280000 at an efficiency of 0.750000. What does the engine return against the file?",
+ "A head of 61985.4682, a discharge of 323.1720 degF, 1725.5940 gas hp and a z average of 0.986868979.",
+ ["A head of 61985.4682, a discharge of 397.5060 degF, 1725.5940 gas hp and a z average of 0.993426696.",
+  "A head of 43087.9193, a discharge of 266.2663 degF, 3105.2431 gas hp and a z average of 0.956986144.",
+  "A head of 84758.5707, a discharge of 323.1720 degF, 567.2037 gas hp and a z average of 0.986868979."],
+ "Those four fields are the readable ones quoted for each published stage case, and the file carries more besides them.")
+
+q(2, "Of the three published stage cases, one takes 5.000000 MMscfd through a ratio of 4.000000 and another 50.000000 MMscfd through 2.500000. The first returns the larger head and the smaller gas power. How?",
+ "Head is work per pound and power is that head carried by the mass, so the higher ratio gives the first the larger head and the ten times larger rate gives the second the larger power.",
+ ["The larger head comes from the higher k of 1.300000, and the smaller power comes from the lower efficiency of 0.720000.",
+  "The two are quoted at different z averages, 0.993426696 against 0.956986144, which is what reverses the ordering.",
+  "The smaller rate is a single stage and the larger one is a train, so only the second figure carries every stage."],
+ "The first returns a head of 84758.5707 with 567.2037 gas hp and the second a head of 43087.9193 with 3105.2431 gas hp.")
+
+q(0, "Every published field is compared against the engine on every case rather than sampled. What does that comparison show?",
+ "That 2 of the 5 fields come back bit for bit and 3 do not, and neither answer is a failure.",
+ ["That 5 of the 5 fields come back bit for bit, which is why the gate can be written without a tolerance.",
+  "That 3 of the 5 fields come back bit for bit and 2 do not, the exceptions being the two mass fields.",
+  "That none of the 5 fields comes back bit for bit, because the file and the engine carry different precisions."],
+ "The two that agree exactly are massLbHr and zAvg. The file is written by a Python oracle carrying fifty digits and the engine is double precision.")
+
+q(1, "Which published stage field carries the worst relative gap against the engine, and how large is it?",
+ "tDischargeF, at 1.522776943887805e-11.",
+ ["gasHp, at 1.0639229984758982e-12.",
+  "headPolyFtLbfLbm, at 3.107080181448693e-14.",
+  "zAvg, at 1.522776943887805e-11."],
+ "On a field where the two routes take different arithmetic they land a little apart, and that gap is the size of the disagreement rather than the size of an error.")
+
+q(3, "A gate written against one of those goldens therefore has to carry a tolerance. Where should the tolerance come from?",
+ "From the size of the disagreement the two routes really have.",
+ ["From the precision the digest prints that field at, so the gate and the course agree.",
+  "From the worst gap on the whole table, applied to every field so one number covers them all.",
+  "From the tolerance the published file declares beside each case it carries."],
+ "Demanding equality on that table would fail on arithmetic rather than on error, and a tolerance chosen because it looks tidy is a tolerance chosen against nothing.")
+
+q(0, "There is a second end to that choice, and it is the one worth thinking about. What is it?",
+ "A tolerance loose enough to swallow a mis-transcribed constant catches nothing at all, so the useful question is what error it is still small enough to see.",
+ ["A tolerance tight enough to see a mis-transcribed constant will also fail on rounding, so the two ends cannot both be had.",
+  "A tolerance has to be widened each time the oracle's precision rises, since the gap moves with it.",
+  "A tolerance stated in relative terms behaves differently on a field near zero, which is why zAvg is compared absolutely."],
+ "The two ends are the same question asked twice. Too tight and the gate fails on arithmetic, too loose and it stops being able to see the thing it was written for.")
+
+q(2, "What is the standing of all 16 published cases in this course?",
+ "They are held for literature, because every one of them was written by an oracle.",
+ ["They are the graded truth for the compression half, since the compression goldens agree bit for bit.",
+  "They are held only where the engine and the file disagree, and gradeable where the two match exactly.",
+  "They are vendor performance runs, which is why the gate against them carries a tolerance."],
+ "There is no measured pump test, no vendor performance run and no field compressor datasheet anywhere in this course.")
+
+q(1, "A figure is held for literature. What does that mean in practice?",
+ "It is used, it is printed, its gap in provenance is stated with it, and no graded answer rests on it.",
+ ["It is computed but suppressed, so a learner never meets it and no answer can rest on it.",
+  "It is quoted from a publication that this repository carries, so any answer that rests on it is already checkable.",
+  "It is frozen at its present value until somebody reads a source against it, so the engine will not recompute it."],
+ "Held does not mean wrong and it does not mean ignore. It means no conclusion is allowed to rest on it until somebody reads a source against it.")
+
+q(3, "The impeller trim shortfall model is held because the engine calls it a published shortfall and names no publication. What did the engine do about its power leg?",
+ "Left it as the ideal cube, and reported the efficiency its own answer implies rather than modelling a second one.",
+ ["Removed it, so a trim return carries a flow and a head and no power at all.",
+  "Applied the shortfall to it whole, exactly as it does to the head, since the power leg is the one that sizes a driver.",
+  "Replaced it with the affinity speed law for the power leg, which is exact and needs no publication behind it at all."],
+ "A second unsourced model was not invented to sit beside the first. The affinity speed band is held on the same footing, as a sanity bound rather than a correlation limit.")
+
+q(2, "The 300 degF discharge limit is one of the eight held items. What exactly is held about it?",
+ "The default itself, which is the figure the engine uses when a caller states none.",
+ ["The whole comparison, so no hot-stage warning is ever raised.",
+  "The value only above 300 degF, since below it the figure is measurable out of the engine.",
+  "The bisection that measured it, since a bracket is evidence about the search and not about the figure."],
+ "The warning is measured against whatever the caller does state, and three of the four stated-limit probes raise one. The default is customary and nothing graded rests on it.")
+
+q(0, "Four subjects are absent from these engines altogether. Which set is it?",
+ "Surge and its controls, seal and bearing calculations, machine curves and wheel selection, and a required-NPSH-against-flow curve.",
+ ["Interstage cooling duties, driver fuel, machine screening and the compressibility window.",
+  "Viscosity correction, operating regions, the affinity laws and parallel operation.",
+  "The polytropic exponent, the stage count search, the twelve-stage cap and the train totals."],
+ "Naming a seam is more useful than producing a number from a correlation the package does not have. A surge margin quoted from memory reads exactly like a computed one.")
+
+q(1, "Given those absences, what does this course actually answer?",
+ "The duty a vendor should be quoting against, the power and the stage count to expect, the suction margin a selection has to survive, and the reasons behind all four.",
+ ["The machine type to buy, the wheel to select and the surge margin to design the recycle valve for.",
+  "The vendor curve at the duty flow, the required NPSH at that flow, and the bearing life that follows.",
+  "The valve dynamics and rod loading a reciprocating machine will see once the stage count is fixed."],
+ "The reasons are the part that survives a change of inputs. A number with no reason attached cannot be argued about at a design review.")
+
+emit(Q, '/root/wt-fc3-nextgen/tools/course-banks/rotating/advanced/fc3a_m06.json', expect_n=15)
+finish()

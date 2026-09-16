@@ -28,8 +28,8 @@
     },
     {
       "domain": "facilities",
-      "engineFiles": 10,
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, and lineHydraulics.js for FC2 Pipeline & Line Sizing. The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) and FC2 landed after it was measured."
+      "engineFiles": 8,
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, and pumps.js and compression.js for FC3 Rotating Equipment. The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2 and FC3 all landed after it was measured."
     }
   ],
   "localOnly": [
@@ -511,9 +511,10 @@
     },
     {
       "path": "__tests__/facilities.compression.test.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "fbbf68ed7522d1dc140d5c87aa562a6d2090eb92"
     },
     {
       "path": "__tests__/facilities.controlvalve.test.js",
@@ -554,9 +555,10 @@
     },
     {
       "path": "__tests__/facilities.pumps.test.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "183c9e4a10796bb794ae84c5d1153ab8bac70a73"
     },
     {
       "path": "__tests__/facilities.relief.test.js",
@@ -579,9 +581,10 @@
     },
     {
       "path": "engines/facilities/compression.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "776f654f8561c0337bf7ca0e653e1a280bb5ba14"
     },
     {
       "path": "engines/facilities/controlValve.js",
@@ -628,9 +631,10 @@
     },
     {
       "path": "engines/facilities/pumps.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "c3651e2ba41bc98d234f2f341662b3046f811990"
     },
     {
       "path": "engines/facilities/relief.js",
@@ -655,14 +659,15 @@
       "path": "lib/units/fieldUnits.js",
       "kind": "extra",
       "group": "0-partial-domain-facilities",
-      "reason": "Pulled by the FC2-0 vendor (NextGen 27de8d90) because the repaired lineHydraulics.js and chokePerformance.js import their barrel and their field constants from it rather than keeping private roundings. It did not exist at the canonical pin 709172f, so it reads as extra. Engines main has since grown a power and energy block on it for the FC3-0 wave; NextGen holds the #196-era file, and the two reconcile when canonical is next advanced.",
-      "vendoredSha": "c533d478b177a4dd930c9cd024764c8e898f2938"
+      "reason": "Pulled by the FC2-0 vendor (NextGen 27de8d90) because the repaired lineHydraulics.js and chokePerformance.js import their barrel and their field constants from it rather than keeping private roundings. It did not exist at the canonical pin 709172f, so it reads as extra. FC3 now carries the engines-main power and energy block on it too (J_PER_FT_LBF, FT_LBF_PER_MIN_PER_HP, W_PER_HP, KW_PER_HP, J_PER_BTU, BTU_PER_HP_HR), which pumps.js and compression.js import instead of the roundings 0.7457 and 2544.43 that FC3-0 removed. The blob is engines main at 4fa37e6, and the two reconcile when canonical is next advanced.",
+      "vendoredSha": "d2f96efc8d4f16d1c07a09c1e387f13d114ad682"
     },
     {
       "path": "test-data/facilities/goldens/compression_cases.json",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "42c28da29567f3022527f1a5712d5b3e65eebf12"
     },
     {
       "path": "test-data/facilities/goldens/controlvalve_cases.json",
@@ -702,12 +707,6 @@
       "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
-      "path": "test-data/facilities/goldens/pumps_cases.json",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
-    },
-    {
       "path": "test-data/facilities/goldens/relief_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
@@ -720,10 +719,18 @@
       "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
     },
     {
-      "path": "tools/validation/facilities/oracle_compression.py",
-      "kind": "missing",
+      "path": "tools/validation/facilities/FINDINGS-rotating.md",
+      "kind": "extra",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
+      "reason": "The FC3-0 rotating wave's own findings file, written by engines PR #197 and absent from the canonical pin 709172f, so it reads as extra. It is vendored with the pumps and compression family it documents, for the same reason FINDINGS-separation.md is vendored with the separator family. It clears when canonical is next advanced.",
+      "vendoredSha": "eefa0fb4c4b766ed4d167d0aafea0f1fe030d706"
+    },
+    {
+      "path": "tools/validation/facilities/oracle_compression.py",
+      "kind": "differing",
+      "group": "0-partial-domain-facilities",
+      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "10fe384cf62c1efad9953b3e64ad3ec3a29d6ea3"
     },
     {
       "path": "tools/validation/facilities/oracle_controlvalve.py",
@@ -758,12 +765,6 @@
     },
     {
       "path": "tools/validation/facilities/oracle_producedwater.py",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."
-    },
-    {
-      "path": "tools/validation/facilities/oracle_pumps.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
       "reason": "NextGen vendors only the two facilities engines its FC1 Separation course needs (separatorSizing.js, spacing.js). The rest of the facilities domain has no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135) landed after the audit was measured."

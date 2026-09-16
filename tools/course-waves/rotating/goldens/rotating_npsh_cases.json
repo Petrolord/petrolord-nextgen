@@ -1,0 +1,90 @@
+[
+ {
+  "flashingWarningExpected": false,
+  "npshaFt": 43.59058823529412,
+  "npshaFtVia999kgm3": 43.573342645082704,
+  "pressureHeadFt": 38.59058823529412,
+  "sg": 0.85,
+  "staticSuctionLiftFt": 8.0,
+  "suctionFrictionFt": 3.0,
+  "suctionPressurePsia": 14.7,
+  "vapourPressurePsia": 0.5
+ },
+ {
+  "flashingWarningExpected": false,
+  "npshaFt": 62.791666666666664,
+  "npshaFtVia999kgm3": 62.75869021042321,
+  "pressureHeadFt": 73.79166666666667,
+  "sg": 0.72,
+  "staticSuctionLiftFt": -5.0,
+  "suctionFrictionFt": 6.0,
+  "suctionPressurePsia": 35.0,
+  "vapourPressurePsia": 12.0
+ },
+ {
+  "flashingWarningExpected": false,
+  "npshaFt": 147.55894736842106,
+  "npshaFtVia999kgm3": 147.496356998017,
+  "pressureHeadFt": 140.05894736842106,
+  "sg": 0.95,
+  "staticSuctionLiftFt": 12.0,
+  "suctionFrictionFt": 4.5,
+  "suctionPressurePsia": 60.0,
+  "vapourPressurePsia": 2.4
+ },
+ {
+  "flashingWarningExpected": false,
+  "npshaFt": 21.608064516129033,
+  "npshaFtVia999kgm3": 21.60689900883964,
+  "pressureHeadFt": 2.608064516129032,
+  "sg": 0.62,
+  "staticSuctionLiftFt": 20.0,
+  "suctionFrictionFt": 1.0,
+  "suctionPressurePsia": 14.7,
+  "vapourPressurePsia": 14.0
+ },
+ {
+  "flashingWarningExpected": false,
+  "npshaFt": 273.0,
+  "npshaFtVia999kgm3": 272.86861554192325,
+  "pressureHeadFt": 294.0,
+  "sg": 0.55,
+  "staticSuctionLiftFt": -12.0,
+  "suctionFrictionFt": 9.0,
+  "suctionPressurePsia": 250.0,
+  "vapourPressurePsia": 180.0
+ },
+ {
+  "flashingWarningExpected": false,
+  "npshaFt": 219.78,
+  "npshaFtVia999kgm3": 219.681783414299,
+  "pressureHeadFt": 219.78,
+  "sg": 1.05,
+  "staticSuctionLiftFt": 0.0,
+  "suctionFrictionFt": 0.0,
+  "suctionPressurePsia": 100.0,
+  "vapourPressurePsia": 0.1
+ },
+ {
+  "flashingWarningExpected": false,
+  "npshaFt": 13.590588235294117,
+  "npshaFtVia999kgm3": 13.573342645082704,
+  "pressureHeadFt": 38.59058823529412,
+  "sg": 0.85,
+  "staticSuctionLiftFt": -22.0,
+  "suctionFrictionFt": 3.0,
+  "suctionPressurePsia": 14.7,
+  "vapourPressurePsia": 0.5
+ },
+ {
+  "flashingWarningExpected": false,
+  "npshaFt": 36.55384615384615,
+  "npshaFtVia999kgm3": 36.538493903982975,
+  "pressureHeadFt": 34.353846153846156,
+  "sg": 0.78,
+  "staticSuctionLiftFt": 4.4,
+  "suctionFrictionFt": 2.2,
+  "suctionPressurePsia": 18.3,
+  "vapourPressurePsia": 6.7
+ }
+]

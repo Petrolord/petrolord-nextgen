@@ -185,6 +185,11 @@ export const PANELS = {
   'fc-liquid-explorer': React.lazy(() => import('@/components/course/panels/linesizing/LiquidExplorer')),
   'fc-gasline-explorer': React.lazy(() => import('@/components/course/panels/linesizing/GasLineExplorer')),
   'fc-wall-pig-explorer': React.lazy(() => import('@/components/course/panels/linesizing/WallPigExplorer')),
+
+  // FC3 Rotating Equipment
+  'fc-pump-explorer': React.lazy(() => import('@/components/course/panels/rotating/PumpExplorer')),
+  'fc-suction-explorer': React.lazy(() => import('@/components/course/panels/rotating/SuctionExplorer')),
+  'fc-compressor-explorer': React.lazy(() => import('@/components/course/panels/rotating/CompressorExplorer')),
 };
 
 export function resolvePanel(id) {

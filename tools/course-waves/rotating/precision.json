@@ -1,0 +1,46 @@
+{
+ "gpm": {
+  "decimals": 6,
+  "match": "^(escravos_duty_flow_gpm|bonga_speed_flow_gpm|bonga_parallel_flow_gpm)$"
+ },
+ "ft": {
+  "decimals": 6,
+  "match": "^(escravos_duty_head_ft|bonga_pressure_head_ft|bonga_npsha_ft|bonga_npsha_raised_ft|bonga_speed_head_ft)$"
+ },
+ "pumpHp": {
+  "decimals": 6,
+  "match": "^(escravos_hydraulic_hp|escravos_brake_hp)$"
+ },
+ "kW": {
+  "decimals": 6,
+  "match": "^(escravos_motor_input_kw)$"
+ },
+ "psi": {
+  "decimals": 6,
+  "match": "^(escravos_discharge_psi)$"
+ },
+ "exponent": {
+  "decimals": 9,
+  "match": "^(bonny_exponent_ratio)$"
+ },
+ "ratio": {
+  "decimals": 9,
+  "match": "^(bonny_ratio_per_stage)$"
+ },
+ "degF": {
+  "decimals": 4,
+  "match": "^(bonny_stage1_discharge_f)$"
+ },
+ "ftLbfPerLbm": {
+  "decimals": 4,
+  "match": "^(bonny_stage1_poly_head)$"
+ },
+ "gasHp": {
+  "decimals": 4,
+  "match": "^(bonny_stage1_gas_hp)$"
+ },
+ "MMscfd": {
+  "decimals": 9,
+  "match": "^(bonny_fuel_mmscfd)$"
+ }
+}

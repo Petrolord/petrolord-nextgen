@@ -1,0 +1,72 @@
+[
+ {
+  "cpBtuLbF": 0.55,
+  "gasSg": 0.65,
+  "interstageCoolToF": 110.0,
+  "k": 1.28,
+  "maxDischargeF": 300.0,
+  "maxRatioPerStage": 4.0,
+  "mechanicalEfficiency": 0.97,
+  "pDischargePsia": 1000.0,
+  "pSuctionPsia": 100.0,
+  "polytropicEfficiency": 0.75,
+  "qMMscfd": 20.0,
+  "tSuctionF": 100.0
+ },
+ {
+  "cpBtuLbF": 0.55,
+  "gasSg": 0.65,
+  "interstageCoolToF": 100.0,
+  "k": 1.28,
+  "maxDischargeF": 300.0,
+  "maxRatioPerStage": 4.0,
+  "mechanicalEfficiency": 0.97,
+  "pDischargePsia": 1000.0,
+  "pSuctionPsia": 100.0,
+  "polytropicEfficiency": 0.75,
+  "qMMscfd": 20.0,
+  "tSuctionF": 100.0
+ },
+ {
+  "cpBtuLbF": 0.55,
+  "gasSg": 0.65,
+  "interstageCoolToF": 250.0,
+  "k": 1.28,
+  "maxDischargeF": 300.0,
+  "maxRatioPerStage": 4.0,
+  "mechanicalEfficiency": 0.97,
+  "pDischargePsia": 1000.0,
+  "pSuctionPsia": 100.0,
+  "polytropicEfficiency": 0.75,
+  "qMMscfd": 20.0,
+  "tSuctionF": 100.0
+ },
+ {
+  "cpBtuLbF": 0.54,
+  "gasSg": 0.62,
+  "interstageCoolToF": 105.0,
+  "k": 1.26,
+  "maxDischargeF": 300.0,
+  "maxRatioPerStage": 4.0,
+  "mechanicalEfficiency": 0.98,
+  "pDischargePsia": 1400.0,
+  "pSuctionPsia": 200.0,
+  "polytropicEfficiency": 0.78,
+  "qMMscfd": 50.0,
+  "tSuctionF": 95.0
+ },
+ {
+  "cpBtuLbF": 0.58,
+  "gasSg": 0.7,
+  "interstageCoolToF": 95.0,
+  "k": 1.3,
+  "maxDischargeF": 280.0,
+  "maxRatioPerStage": 4.0,
+  "mechanicalEfficiency": 0.96,
+  "pDischargePsia": 600.0,
+  "pSuctionPsia": 40.0,
+  "polytropicEfficiency": 0.72,
+  "qMMscfd": 5.0,
+  "tSuctionF": 85.0
+ }
+]

@@ -1,0 +1,305 @@
+{
+  "app_slug": "rotating",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-npsh-available",
+      "title": "NPSH Available, From the Real Suction Side",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-pressure-head-over-the-vapour-pressure",
+          "title": "The pressure head over the vapour pressure",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-static-column-and-the-friction",
+          "title": "The static column and the suction friction",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-padding-the-drum",
+          "title": "Padding the drum",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-liquid-already-flashing",
+          "title": "A liquid already flashing",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-an-available-figure-decides-nothing-alone",
+          "title": "An available figure decides nothing on its own",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-margin-and-the-rule-it-is-judged-against",
+      "title": "The Margin, and the Rule It Is Judged Against",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-margin-rule-measured",
+          "title": "The margin rule, measured",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-where-the-floor-and-the-fraction-change-places",
+          "title": "Where the floor and the fraction change places",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-three-severities",
+          "title": "The three severities",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-verdict-needs-an-input",
+          "title": "A verdict needs an input",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-a-speed-change-and-a-trim",
+      "title": "A Speed Change and a Trim Are Not the Same Thing",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-affinity-laws-as-a-subtraction",
+          "title": "The affinity laws, printed as a subtraction",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-band-reported-without-comment",
+          "title": "The band the engine reports without comment",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-trim-shortfall-ideal-beside-real",
+          "title": "The trim shortfall, ideal beside real",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-efficiency-the-trim-implies",
+          "title": "The efficiency the trim implies",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-two-boundaries-and-the-slack-that-holds-them",
+          "title": "Two boundaries and the slack that holds them",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-an-affinity-law-is-not-a-duty-point",
+      "title": "An Affinity Law Applied to a Duty Point Is Not a New Duty Point",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-system-curve-did-not-move",
+          "title": "The system curve did not move",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-factors-read-out-of-the-engine",
+          "title": "Scaling factors read out of the engine",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-crossing-and-the-map",
+          "title": "The crossing and the map, side by side",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-how-far-apart-they-get",
+          "title": "How far apart they get",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-two-pumps-and-a-water-curve",
+      "title": "Two Pumps, and a Catalogue Curve That Is a Water Curve",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-parallel-adds-flow-at-equal-head",
+          "title": "Parallel adds flow at equal head",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-series-adds-head-at-equal-flow",
+          "title": "Series adds head at equal flow",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-count-is-a-number-of-machines",
+          "title": "A count is a number of machines",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-hydraulic-institute-correction",
+          "title": "The Hydraulic Institute correction",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-where-the-correlation-stops",
+          "title": "Where the correlation stops",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-suction-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

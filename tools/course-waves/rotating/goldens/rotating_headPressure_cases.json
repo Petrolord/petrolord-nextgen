@@ -1,0 +1,44 @@
+[
+ {
+  "headFt": 231.0,
+  "psi": 100.0,
+  "roundTripHeadFt": 231.0,
+  "sg": 1.0
+ },
+ {
+  "headFt": 100.0,
+  "psi": 36.7965367965368,
+  "roundTripHeadFt": 100.00000000000001,
+  "sg": 0.85
+ },
+ {
+  "headFt": 100.0,
+  "psi": 51.94805194805195,
+  "roundTripHeadFt": 100.0,
+  "sg": 1.2
+ },
+ {
+  "headFt": 2.31,
+  "psi": 1.0,
+  "roundTripHeadFt": 2.31,
+  "sg": 1.0
+ },
+ {
+  "headFt": 352.371,
+  "psi": 129.6603246753247,
+  "roundTripHeadFt": 352.3710000000001,
+  "sg": 0.85
+ },
+ {
+  "headFt": 1.0,
+  "psi": 0.21645021645021645,
+  "roundTripHeadFt": 1.0,
+  "sg": 0.5
+ },
+ {
+  "headFt": 500.0,
+  "psi": 227.27272727272728,
+  "roundTripHeadFt": 500.0,
+  "sg": 1.05
+ }
+]

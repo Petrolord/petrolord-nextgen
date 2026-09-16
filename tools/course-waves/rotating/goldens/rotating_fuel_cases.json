@@ -1,0 +1,50 @@
+[
+ {
+  "brakeHp": 2000.0,
+  "fuelBtuHr": 16000000.0,
+  "fuelMMscfd": 0.4042105263157895,
+  "gasLhvBtuScf": 950.0,
+  "heatRateBtuHpHr": 8000.0,
+  "thermalEfficiencyPct": 31.805419720550297
+ },
+ {
+  "brakeHp": 2000.0,
+  "fuelBtuHr": 13000000.0,
+  "fuelMMscfd": 0.32842105263157895,
+  "gasLhvBtuScf": 950.0,
+  "heatRateBtuHpHr": 6500.0,
+  "thermalEfficiencyPct": 39.14513196375422
+ },
+ {
+  "brakeHp": 500.0,
+  "fuelBtuHr": 4750000.0,
+  "fuelMMscfd": 0.11176470588235293,
+  "gasLhvBtuScf": 1020.0,
+  "heatRateBtuHpHr": 9500.0,
+  "thermalEfficiencyPct": 26.783511343621303
+ },
+ {
+  "brakeHp": 12000.0,
+  "fuelBtuHr": 86400000.0,
+  "fuelMMscfd": 2.291270718232044,
+  "gasLhvBtuScf": 905.0,
+  "heatRateBtuHpHr": 7200.0,
+  "thermalEfficiencyPct": 35.339355245055884
+ },
+ {
+  "brakeHp": 150.0,
+  "fuelBtuHr": 1320000.0,
+  "fuelMMscfd": 0.03334736842105263,
+  "gasLhvBtuScf": 950.0,
+  "heatRateBtuHpHr": 8800.0,
+  "thermalEfficiencyPct": 28.914017927773
+ },
+ {
+  "brakeHp": 3333.94,
+  "fuelBtuHr": 26671520.0,
+  "fuelMMscfd": 0.6738068210526316,
+  "gasLhvBtuScf": 950.0,
+  "heatRateBtuHpHr": 8000.0,
+  "thermalEfficiencyPct": 31.805419720550297
+ }
+]

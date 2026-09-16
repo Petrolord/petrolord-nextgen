@@ -1,0 +1,301 @@
+{
+  "app_slug": "rotating",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-these-engines-size",
+      "title": "What These Engines Size, and What They Refuse",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-two-machines-and-two-modules",
+          "title": "Two machines and two modules",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-where-this-package-stops",
+          "title": "Where this package stops",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-refusal-is-a-returned-object",
+          "title": "A refusal is a returned object",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-five-that-return-a-bare-number",
+          "title": "The five that return a bare number",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-two-curves-and-no-operating-point",
+      "title": "Two Curves, and Why Neither Has an Operating Point",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-catalogue-is-four-points",
+          "title": "A catalogue is four points",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-least-squares-quadratic",
+          "title": "The least-squares quadratic",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-r-squared-and-when-it-is-null",
+          "title": "R squared, and when it is null",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-conditioning-behind-the-fit",
+          "title": "The conditioning behind the fit",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-droop-flag-and-what-reads-it",
+          "title": "The droop flag, and what reads it",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-duty-point-solved",
+      "title": "The Duty Point, Solved",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-crossing",
+          "title": "The crossing",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-report-the-solve-leaves-behind",
+          "title": "The report the solve leaves behind",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-flag-that-can-come-out-false",
+          "title": "A flag that can come out false",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-three-refusals-that-are-real-answers",
+          "title": "Three refusals that are real answers",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-moves-the-point",
+          "title": "What moves the point",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-power-head-and-pressure",
+      "title": "Power, Head and Pressure",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-hydraulic-brake-and-motor-input",
+          "title": "Hydraulic, brake and motor input",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-head-belongs-to-the-machine",
+          "title": "Head belongs to the machine and pressure to the fluid",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-packagings-measured",
+          "title": "Two packagings measured out of the engine",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-one-water-density-twice",
+          "title": "One water density, twice",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-where-the-duty-landed",
+      "title": "Where the Duty Landed",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-percentage-of-best-efficiency-flow",
+          "title": "The percentage of best efficiency flow",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-four-bands",
+          "title": "The four bands",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-both-sides-of-every-boundary",
+          "title": "Both sides of every boundary",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-each-region-costs",
+          "title": "What each region costs",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-note-that-names-its-own-limit",
+          "title": "The note that names its own limit",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-pump-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

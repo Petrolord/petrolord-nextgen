@@ -1,0 +1,32 @@
+-- ============================================================================
+-- FC3 PROFESSIONAL DEEP SEED: Rotating Equipment, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE SUCTION SIDE, THE CHANGES, AND THE SECOND MACHINE.
+-- A duty point that works on paper fails in three ways and this tier is all
+-- three. It fails on suction, where NPSH available is built from the real
+-- suction side and a margin over required is not the same thing as adequacy.
+-- It fails on change, where a speed change follows the affinity laws exactly
+-- and a trim does not. And it fails on the fluid, because a catalogue curve
+-- is a water curve.
+--
+-- THE ENGINE FACT THIS TIER OWNS. Applying an affinity law to a duty point
+-- does not give you a new duty point. The machine moves and the system curve
+-- stays where it was, so the scaled point is off the system curve by a
+-- visible head. The tier ends with two pumps in parallel delivering far less
+-- than twice one pump, which is the result the engine exists to make visible.
+--
+-- HELD FOR LITERATURE, taught as a limit and never graded: the NPSH margin
+-- rule is the larger of 3 ft and 35 percent of required, and those two change
+-- places at a required NPSH of 8.571428571 ft, which the digest finds by
+-- bisecting the engine rather than by quoting anybody. The trim shortfall
+-- model and the Hydraulic Institute viscosity correction are taught here and
+-- graded nowhere, which is why the capstone grades a SPEED change and states
+-- no kinematic viscosity and no required NPSH at all.
+--
+-- The only numbers that travel from this tier to the next are none: the
+-- Expert tier changes fluid, machine and method together.
+-- ============================================================================

@@ -1,0 +1,86 @@
+[
+ {
+  "percentOfBep": 100.0,
+  "preferred": true,
+  "qBepGpm": 1000.0,
+  "qGpm": 1000.0,
+  "region": "preferred"
+ },
+ {
+  "percentOfBep": 70.0,
+  "preferred": true,
+  "qBepGpm": 1000.0,
+  "qGpm": 700.0,
+  "region": "preferred"
+ },
+ {
+  "percentOfBep": 69.99,
+  "preferred": false,
+  "qBepGpm": 1000.0,
+  "qGpm": 699.9,
+  "region": "allowable, low"
+ },
+ {
+  "percentOfBep": 120.0,
+  "preferred": true,
+  "qBepGpm": 1000.0,
+  "qGpm": 1200.0,
+  "region": "preferred"
+ },
+ {
+  "percentOfBep": 120.00999999999999,
+  "preferred": false,
+  "qBepGpm": 1000.0,
+  "qGpm": 1200.1,
+  "region": "allowable, high"
+ },
+ {
+  "percentOfBep": 140.0,
+  "preferred": false,
+  "qBepGpm": 1000.0,
+  "qGpm": 1400.0,
+  "region": "allowable, high"
+ },
+ {
+  "percentOfBep": 140.01,
+  "preferred": false,
+  "qBepGpm": 1000.0,
+  "qGpm": 1400.1,
+  "region": "outside"
+ },
+ {
+  "percentOfBep": 50.0,
+  "preferred": false,
+  "qBepGpm": 1000.0,
+  "qGpm": 500.0,
+  "region": "allowable, low"
+ },
+ {
+  "percentOfBep": 49.989999999999995,
+  "preferred": false,
+  "qBepGpm": 1000.0,
+  "qGpm": 499.9,
+  "region": "outside"
+ },
+ {
+  "percentOfBep": 0.0,
+  "preferred": false,
+  "qBepGpm": 1000.0,
+  "qGpm": 0.0,
+  "region": "outside"
+ },
+ {
+  "percentOfBep": 250.0,
+  "preferred": false,
+  "qBepGpm": 1000.0,
+  "qGpm": 2500.0,
+  "region": "outside"
+ },
+ {
+  "percentOfBep": 100.59106666666666,
+  "preferred": true,
+  "qBepGpm": 1500.0,
+  "qGpm": 1508.866,
+  "region": "preferred"
+ }
+]
