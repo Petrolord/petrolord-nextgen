@@ -1,0 +1,247 @@
+{
+ "app_slug": "fdp",
+ "course": "Field Development Planning",
+ "tier": "intermediate",
+ "tier_name": "Professional",
+ "generated": "2026-09-16",
+ "repair": "EC6-8 end-of-life cost: the teaching lab and the capstone now pass planAbandonment, so every screening case is charged the plan's ABEX cost item in its final production year.",
+ "engines": "engines main 709172f (economics/fdp/economics.js and scenarioCalculations.js vendored)",
+ "old_digest": "/root/ec-wip-fdp/digest.txt at 511 lines, as the live course was written from",
+ "new_digest": "/root/ec-wip-fdp/digest.txt at 534 lines, rebuilt by ec6_dump.mjs, byte-reproducible and byte-identical under a second timezone",
+ "counts": {
+  "lessons_live": 26,
+  "lessons_falsified": 4,
+  "questions_live": 132,
+  "questions_falsified": 4,
+  "questions_falsified_module_bank": 2,
+  "questions_falsified_final_exam": 2,
+  "keyed_answer_affected": 0,
+  "stem_affected": 1,
+  "superlative_stems_among_falsified": 0
+ },
+ "method": {
+  "corpus": "ALL 78 lessons (src/content/courses/fdp/**/*.md) and ALL 396 LIVE questions, the questions read out of the applied seed migrations 20260918_ec6_fdp_seed_{beginner,intermediate,advanced}.sql rather than out of the wave's bank JSONs, so the manifest describes what production actually serves.",
+  "moved_values": "Every numeric literal the old teaching digest printed and the rebuilt digest does not, matched in its canonical four-decimal form AND in every rounded (0 to 3 dp) and comma-grouped restatement, each with a numeric boundary on both sides so a match is never a fragment of a longer number.",
+  "moved_referent": "Three values the rebuilt digest still prints, but now labels as the case WITHOUT the end-of-life cost (2047.5653, 29.5998, 1048.6281). Quoting them as the plan's answer is false even though the literal survives.",
+  "falsified_claims": "Six prose patterns with no moved number of their own, each paired with the digest line that settles it.",
+  "two_defects_found_in_this_sweep_and_fixed": [
+   "An exact-literal sweep alone was checked against a rounded-restatement sweep. 0 of 404 value-hits turned out to be rounded-only, but the check had to be run: the corpus quotes the digest's canonical four-decimal forms. An earlier substring version of that check reported 32 false hits for '628' because 628 sits inside 0.628637, which is why every match here carries a numeric boundary.",
+   "The claim patterns first used [^.] as a sentence guard. A decimal point inside a number ends that window, so 'at 30.0000 USD a barrel gives -898.3507 and multiple-roots' was invisible to it and intermediate/m06/l03-onward.md was missed. The guard is now (?:[^.\\n]|\\.(?=\\d)), which found 17 further claim instances and two further questions."
+  ]
+ },
+ "lessons_falsified": [
+  {
+   "path": "src/content/courses/fdp/intermediate/m04-facilities-sized-and-priced/l03-decommissioning-scales-too.md",
+   "module": "m04-facilities-sized-and-priced",
+   "lesson": "l03-decommissioning-scales-too.md",
+   "moved_values": [],
+   "falsified_claims": [
+    {
+     "claim": "abex-reaches-no-cash-flow",
+     "quote": "decommissioning provision of 260.0000 as an ABEX line, and the screening case puts ABEX in neither",
+     "settled_by": "Engine totals: CAPEX 2250.0000, OPEX 95.0000 a year. The ABEX line of 260.0000 is in neither of those two totals (derived) ... It is the plan's end-of-life cost and the case carries it in the final production year."
+    }
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/intermediate/m06-the-professional-reading/l01-the-story-so-far.md",
+   "module": "m06-the-professional-reading",
+   "lesson": "l01-the-story-so-far.md",
+   "moved_values": [
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "0000 million USD, NPV 2047."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "5653 million USD, IRR 29."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "path": "src/content/courses/fdp/intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
+   "module": "m06-the-professional-reading",
+   "lesson": "l02-working-the-capstone.md",
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "A case with a net present value of -1797."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "path": "src/content/courses/fdp/intermediate/m06-the-professional-reading/l03-onward.md",
+   "module": "m06-the-professional-reading",
+   "lesson": "l03-onward.md",
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "0000 USD a barrel gives a net present value of -1797."
+    },
+    {
+     "value": "-898.3507",
+     "kind": "retired",
+     "settled_by": "| EGINA at 30 USD a barrel | -935.1995 | none | no-root |",
+     "quoted_as": [
+      "898",
+      "-898",
+      "-898.3507"
+     ],
+     "example": "0000 USD a barrel gives -898."
+    },
+    {
+     "value": "2839.5965",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "2839.5965"
+     ],
+     "example": "0051 on oil price, 2839."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "Moving one driver at a time by 30 percent gives a swing of 3092."
+    },
+    {
+     "value": "323.8828",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "323.8828"
+     ],
+     "example": "1745 on capex and 323."
+    }
+   ],
+   "falsified_claims": [
+    {
+     "claim": "thirty-usd-is-the-multiple-roots-case",
+     "quote": "30.0000 USD a barrel gives -898.3507 and multiple-roots",
+     "settled_by": "| EGINA at 30 USD a barrel | -935.1995 | none | no-root |"
+    }
+   ]
+  }
+ ],
+ "questions_falsified": [
+  {
+   "bank": "ec6i_m06",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 8,
+   "prompt_head": "The generated document reports a completeness of 100 percent across nine sections. What has that measured?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "That every figure in the plan has been through the engine rather than typed, so the completeness check is what stands behind the headline NPV of 2047."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6i_m06",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 15,
+   "prompt_head": "The document's headline figures read P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, total CAPEX 2250.0000, NPV 2047.5653 and IRR 29.5998, with",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "0000, NPV 2047."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "5653 and IRR 29."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6i_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 22,
+   "prompt_head": "The FPSO card's capex of 1363.3524 is a screening figure, and the plan's ledger carries hull and topsides at 1180.0000 with mooring and inst",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [],
+   "falsified_claims": [
+    {
+     "claim": "abex-reaches-no-cash-flow",
+     "quote": "ABEX line is left out",
+     "settled_by": "Engine totals: CAPEX 2250.0000, OPEX 95.0000 a year. The ABEX line of 260.0000 is in neither of those two totals (derived) ... It is the plan's end-of-life cost and the case carries it in the final production year."
+    }
+   ]
+  },
+  {
+   "bank": "ec6i_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "prompt_head": "The document's roll-ups read a total CAPEX of 2250.0000 and a total OPEX of 95.0000, and a published empty ledger returns 0.0000 and 0.0000.",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [],
+   "falsified_claims": [
+    {
+     "claim": "abex-reaches-no-cash-flow",
+     "quote": "ABEX line of 260.0000 is in neither",
+     "settled_by": "Engine totals: CAPEX 2250.0000, OPEX 95.0000 a year. The ABEX line of 260.0000 is in neither of those two totals (derived) ... It is the plan's end-of-life cost and the case carries it in the final production year."
+    }
+   ]
+  }
+ ]
+}

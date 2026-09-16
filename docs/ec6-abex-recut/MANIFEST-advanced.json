@@ -1,0 +1,2941 @@
+{
+ "app_slug": "fdp",
+ "course": "Field Development Planning",
+ "tier": "advanced",
+ "tier_name": "Expert",
+ "generated": "2026-09-16",
+ "repair": "EC6-8 end-of-life cost: the teaching lab and the capstone now pass planAbandonment, so every screening case is charged the plan's ABEX cost item in its final production year.",
+ "engines": "engines main 709172f (economics/fdp/economics.js and scenarioCalculations.js vendored)",
+ "old_digest": "/root/ec-wip-fdp/digest.txt at 511 lines, as the live course was written from",
+ "new_digest": "/root/ec-wip-fdp/digest.txt at 534 lines, rebuilt by ec6_dump.mjs, byte-reproducible and byte-identical under a second timezone",
+ "counts": {
+  "lessons_live": 26,
+  "lessons_falsified": 14,
+  "questions_live": 132,
+  "questions_falsified": 52,
+  "questions_falsified_module_bank": 35,
+  "questions_falsified_final_exam": 17,
+  "keyed_answer_affected": 13,
+  "stem_affected": 30,
+  "superlative_stems_among_falsified": 9
+ },
+ "method": {
+  "corpus": "ALL 78 lessons (src/content/courses/fdp/**/*.md) and ALL 396 LIVE questions, the questions read out of the applied seed migrations 20260918_ec6_fdp_seed_{beginner,intermediate,advanced}.sql rather than out of the wave's bank JSONs, so the manifest describes what production actually serves.",
+  "moved_values": "Every numeric literal the old teaching digest printed and the rebuilt digest does not, matched in its canonical four-decimal form AND in every rounded (0 to 3 dp) and comma-grouped restatement, each with a numeric boundary on both sides so a match is never a fragment of a longer number.",
+  "moved_referent": "Three values the rebuilt digest still prints, but now labels as the case WITHOUT the end-of-life cost (2047.5653, 29.5998, 1048.6281). Quoting them as the plan's answer is false even though the literal survives.",
+  "falsified_claims": "Six prose patterns with no moved number of their own, each paired with the digest line that settles it.",
+  "two_defects_found_in_this_sweep_and_fixed": [
+   "An exact-literal sweep alone was checked against a rounded-restatement sweep. 0 of 404 value-hits turned out to be rounded-only, but the check had to be run: the corpus quotes the digest's canonical four-decimal forms. An earlier substring version of that check reported 32 false hits for '628' because 628 sits inside 0.628637, which is why every match here carries a numeric boundary.",
+   "The claim patterns first used [^.] as a sentence guard. A decimal point inside a number ends that window, so 'at 30.0000 USD a barrel gives -898.3507 and multiple-roots' was invisible to it and intermediate/m06/l03-onward.md was missed. The guard is now (?:[^.\\n]|\\.(?=\\d)), which found 17 further claim instances and two further questions."
+  ]
+ },
+ "lessons_falsified": [
+  {
+   "path": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l01-the-rate-that-zeroes-the-value.md",
+   "module": "m01-the-rate-of-return",
+   "lesson": "l01-the-rate-that-zeroes-the-value.md",
+   "moved_values": [
+    {
+     "value": "-161.0098",
+     "kind": "retired",
+     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
+     "quoted_as": [
+      "-161.0098",
+      "-161",
+      "161"
+     ],
+     "example": "0000 | -161."
+    },
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "0000 USD a barrel reads no rate at all, status `no-root`, on an NPV of -1797."
+    },
+    {
+     "value": "19.4279",
+     "kind": "retired",
+     "settled_by": "- 55.0000 USD a barrel: NPV 909.0866, IRR none (multiple-roots).",
+     "quoted_as": [
+      "19.4279"
+     ],
+     "example": "2778 | 19."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "0000 percent the NPV is 2047."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "The rate that would drive that same NPV to zero is 29."
+    },
+    {
+     "value": "3151.8529",
+     "kind": "retired",
+     "settled_by": "- 85.0000 USD a barrel: NPV 3121.7380, IRR none (multiple-roots).",
+     "quoted_as": [
+      "3151.8529"
+     ],
+     "example": "0000 | 3151."
+    },
+    {
+     "value": "39.3813",
+     "kind": "retired",
+     "settled_by": "- 85.0000 USD a barrel: NPV 3121.7380, IRR none (multiple-roots).",
+     "quoted_as": [
+      "39.3813"
+     ],
+     "example": "8529 | 39."
+    },
+    {
+     "value": "8.2444",
+     "kind": "retired",
+     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
+     "quoted_as": [
+      "8.2444"
+     ],
+     "example": "0098 | 8."
+    },
+    {
+     "value": "943.2778",
+     "kind": "retired",
+     "settled_by": "- 55.0000 USD a barrel: NPV 909.0866, IRR none (multiple-roots).",
+     "quoted_as": [
+      "943.2778",
+      "943"
+     ],
+     "example": "0000 | 943."
+    }
+   ],
+   "falsified_claims": [
+    {
+     "claim": "base-case-carries-a-single-rate",
+     "quote": "EGINA Base case reads `ok`",
+     "settled_by": "MORE THAN ONE ROOT ... | EGINA Base, 70 USD a barrel | 2015.4123 | multiple-roots | -44.3414 and 29.5779 |"
+    },
+    {
+     "claim": "payback-or-status-paired-with-a-retired-rate",
+     "quote": "29.5998 percent, and the engine reports the status `ok`",
+     "settled_by": "| EGINA Base, 70 USD a barrel | 2015.4123 | none | multiple-roots |"
+    }
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l02-reading-it-beside-the-npv.md",
+   "module": "m01-the-rate-of-return",
+   "lesson": "l02-reading-it-beside-the-npv.md",
+   "moved_values": [
+    {
+     "value": "0.910029",
+     "kind": "retired",
+     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
+     "quoted_as": [
+      "0.910029"
+     ],
+     "example": "436477 for the tie-back and 0."
+    },
+    {
+     "value": "1.436477",
+     "kind": "retired",
+     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
+     "quoted_as": [
+      "1.436477"
+     ],
+     "example": "Value per million of capex is 1."
+    },
+    {
+     "value": "1048.6281",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "1048.6281"
+     ],
+     "example": "0000 | 1048."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "0000 | 2047."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "5653 | 29."
+    },
+    {
+     "value": "40.4321",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "40.4321"
+     ],
+     "example": "6281 | 40."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l03-a-negative-rate-is-an-answer.md",
+   "module": "m01-the-rate-of-return",
+   "lesson": "l03-a-negative-rate-is-an-answer.md",
+   "moved_values": [
+    {
+     "value": "-161.0098",
+     "kind": "retired",
+     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
+     "quoted_as": [
+      "-161.0098",
+      "-161",
+      "161"
+     ],
+     "example": "2444 percent, a positive rate and a valid one, on an NPV of -161."
+    },
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "0000 USD a barrel | -1797."
+    },
+    {
+     "value": "8.2444",
+     "kind": "retired",
+     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
+     "quoted_as": [
+      "8.2444"
+     ],
+     "example": "0000 USD a barrel the EGINA concept reports 8."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l04-payback-and-the-honest-null.md",
+   "module": "m01-the-rate-of-return",
+   "lesson": "l04-payback-and-the-honest-null.md",
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "0000 | -1797."
+    },
+    {
+     "value": "-898.3507",
+     "kind": "retired",
+     "settled_by": "| EGINA at 30 USD a barrel | -935.1995 | none | no-root |",
+     "quoted_as": [
+      "898",
+      "-898",
+      "-898.3507"
+     ],
+     "example": "0000 USD a barrel, on an NPV of -898."
+    },
+    {
+     "value": "1048.6281",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "1048.6281"
+     ],
+     "example": "0000 | 1048."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "0000 | 2047."
+    },
+    {
+     "value": "3667.1870",
+     "kind": "retired",
+     "settled_by": "| High price | FPSO development | 92.0000 | 2250.0000 | 3638.0233 | none | multiple-roots | 3.0625 |",
+     "quoted_as": [
+      "3667.1870",
+      "3667"
+     ],
+     "example": "0000 | 3667."
+    },
+    {
+     "value": "427.9436",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "427.9436"
+     ],
+     "example": "0000 | 427."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l05-what-the-hurdle-hides.md",
+   "module": "m01-the-rate-of-return",
+   "lesson": "l05-what-the-hurdle-hides.md",
+   "moved_values": [
+    {
+     "value": "1048.6281",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "1048.6281"
+     ],
+     "example": "0000 | 1048."
+    },
+    {
+     "value": "14.4152",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "14.4152"
+     ],
+     "example": "9436 | 14."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "0000 | 2047."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "5653 | 29."
+    },
+    {
+     "value": "3667.1870",
+     "kind": "retired",
+     "settled_by": "| High price | FPSO development | 92.0000 | 2250.0000 | 3638.0233 | none | multiple-roots | 3.0625 |",
+     "quoted_as": [
+      "3667.1870",
+      "3667"
+     ],
+     "example": "0000 | 3667."
+    },
+    {
+     "value": "40.4321",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "40.4321"
+     ],
+     "example": "6281 | 40."
+    },
+    {
+     "value": "427.9436",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "427.9436"
+     ],
+     "example": "0000 | 427."
+    },
+    {
+     "value": "43.8693",
+     "kind": "retired",
+     "settled_by": "| High price | FPSO development | 92.0000 | 2250.0000 | 3638.0233 | none | multiple-roots | 3.0625 |",
+     "quoted_as": [
+      "43.8693"
+     ],
+     "example": "1870 | 43."
+    }
+   ],
+   "falsified_claims": [
+    {
+     "claim": "base-case-carries-a-single-rate",
+     "quote": "The Base rate of 29.5998",
+     "settled_by": "MORE THAN ONE ROOT ... | EGINA Base, 70 USD a barrel | 2015.4123 | multiple-roots | -44.3414 and 29.5779 |"
+    }
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m02-when-there-is-no-rate/l02-above-the-band.md",
+   "module": "m02-when-there-is-no-rate",
+   "lesson": "l02-above-the-band.md",
+   "moved_values": [
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "The bound at 1000 percent is a choice about the range of rates a screening tool expects to meet, and a real development case sits far inside it: the EGINA Base is 29."
+    },
+    {
+     "value": "40.4321",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "40.4321"
+     ],
+     "example": "5998 percent and the tie-back is 40."
+    }
+   ],
+   "falsified_claims": [
+    {
+     "claim": "base-case-carries-a-single-rate",
+     "quote": "EGINA Base is 29.5998",
+     "settled_by": "MORE THAN ONE ROOT ... | EGINA Base, 70 USD a barrel | 2015.4123 | multiple-roots | -44.3414 and 29.5779 |"
+    }
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m02-when-there-is-no-rate/l03-more-than-one-root.md",
+   "module": "m02-when-there-is-no-rate",
+   "lesson": "l03-more-than-one-root.md",
+   "moved_values": [
+    {
+     "value": "-898.3507",
+     "kind": "retired",
+     "settled_by": "| EGINA at 30 USD a barrel | -935.1995 | none | no-root |",
+     "quoted_as": [
+      "898",
+      "-898",
+      "-898.3507"
+     ],
+     "example": "0000 USD a barrel | -898."
+    }
+   ],
+   "falsified_claims": [
+    {
+     "claim": "thirty-usd-is-the-multiple-roots-case",
+     "quote": "30.0000 USD a barrel | -898.3507 | none | multiple-roots",
+     "settled_by": "| EGINA at 30 USD a barrel | -935.1995 | none | no-root |"
+    }
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m02-when-there-is-no-rate/l04-a-clamp-is-not-an-answer.md",
+   "module": "m02-when-there-is-no-rate",
+   "lesson": "l04-a-clamp-is-not-an-answer.md",
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "0000 USD a barrel is worth -1797."
+    },
+    {
+     "value": "14.4152",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "14.4152"
+     ],
+     "example": "4321 percent on the tie-back, 14."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "The engine's genuine answers do not look like that: 29."
+    },
+    {
+     "value": "40.4321",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "40.4321"
+     ],
+     "example": "5998 percent on the Base case, 40."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m03-what-a-sensitivity-says/l01-one-driver-at-a-time.md",
+   "module": "m03-what-a-sensitivity-says",
+   "lesson": "l01-one-driver-at-a-time.md",
+   "moved_values": [
+    {
+     "value": "1403.9781",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "1403.9781"
+     ],
+     "example": "1526 | 1403."
+    },
+    {
+     "value": "1885.6239",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "1885.6239"
+     ],
+     "example": "5067 | 1885."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "5679 | 2047."
+    },
+    {
+     "value": "2209.5067",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "2209.5067"
+     ],
+     "example": "| OPEX | 2209."
+    },
+    {
+     "value": "2691.1526",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "2691.1526",
+      "2691"
+     ],
+     "example": "| CAPEX | 2691."
+    },
+    {
+     "value": "2839.5965",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "2839.5965"
+     ],
+     "example": "5653 | 2839."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "5653 | 3092."
+    },
+    {
+     "value": "323.8828",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "323.8828"
+     ],
+     "example": "5653 | 323."
+    },
+    {
+     "value": "3467.3636",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "3467",
+      "3467.3636"
+     ],
+     "example": "7671 | 3467."
+    },
+    {
+     "value": "3593.5679",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3593.5679"
+     ],
+     "example": "5628 | 3593."
+    },
+    {
+     "value": "501.5628",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "501.5628"
+     ],
+     "example": "| Oil Price | 501."
+    },
+    {
+     "value": "627.7671",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "627.7671"
+     ],
+     "example": "| Production | 627."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m03-what-a-sensitivity-says/l02-price-against-volume.md",
+   "module": "m03-what-a-sensitivity-says",
+   "lesson": "l02-price-against-volume.md",
+   "moved_values": [
+    {
+     "value": "1.386816",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 | 1.411541 (derived) |",
+     "quoted_as": [
+      "1.386816"
+     ],
+     "example": "5965 | 1."
+    },
+    {
+     "value": "1.510089",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 | 1.537012 (derived) |",
+     "quoted_as": [
+      "1.510089"
+     ],
+     "example": "0051 | 1."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "5679 | 2047."
+    },
+    {
+     "value": "2839.5965",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "2839.5965"
+     ],
+     "example": "0051 and the production swing is 2839."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "On the EGINA plan the price swing is 3092."
+    },
+    {
+     "value": "3310.0565",
+     "kind": "retired",
+     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
+     "quoted_as": [
+      "3310",
+      "3310.0565"
+     ],
+     "example": "8812 and 3310."
+    },
+    {
+     "value": "3467.3636",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "3467",
+      "3467.3636"
+     ],
+     "example": "7671 | 3467."
+    },
+    {
+     "value": "3593.5679",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3593.5679"
+     ],
+     "example": "5628 | 3593."
+    },
+    {
+     "value": "501.5628",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "501.5628"
+     ],
+     "example": "| Oil Price | 501."
+    },
+    {
+     "value": "627.7671",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "627.7671"
+     ],
+     "example": "| Production | 627."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m03-what-a-sensitivity-says/l03-the-bar-that-runs-backwards.md",
+   "module": "m03-what-a-sensitivity-says",
+   "lesson": "l03-the-bar-that-runs-backwards.md",
+   "moved_values": [
+    {
+     "value": "0.158179",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 | 0.161906 (derived) |",
+     "quoted_as": [
+      "0.158179"
+     ],
+     "example": "8828, a share of base of 0."
+    },
+    {
+     "value": "0.628637",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 | 0.638666 (derived) |",
+     "quoted_as": [
+      "0.628637"
+     ],
+     "example": "1745 million USD, a share of base of 0."
+    },
+    {
+     "value": "1403.9781",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "1403.9781"
+     ],
+     "example": "1526 and its plus 30 percent end is the low one at 1403."
+    },
+    {
+     "value": "1885.6239",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "1885.6239"
+     ],
+     "example": "5067 | 1885."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "The other mistake is assuming the capex bar is symmetric about the base of 2047."
+    },
+    {
+     "value": "2209.5067",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "2209.5067"
+     ],
+     "example": "| OPEX | 2209."
+    },
+    {
+     "value": "2691.1526",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "2691.1526",
+      "2691"
+     ],
+     "example": "Its minus 30 percent end is the high one at 2691."
+    },
+    {
+     "value": "2839.5965",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "2839.5965"
+     ],
+     "example": "3636 | 2839."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "5679 | 3092."
+    },
+    {
+     "value": "323.8828",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "323.8828"
+     ],
+     "example": "6239 | 323."
+    },
+    {
+     "value": "3467.3636",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "3467",
+      "3467.3636"
+     ],
+     "example": "7671 | 3467."
+    },
+    {
+     "value": "3593.5679",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3593.5679"
+     ],
+     "example": "5628 | 3593."
+    },
+    {
+     "value": "501.5628",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "501.5628"
+     ],
+     "example": "| Oil Price | 501."
+    },
+    {
+     "value": "627.7671",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "627.7671"
+     ],
+     "example": "| Production | 627."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m03-what-a-sensitivity-says/l04-what-a-tornado-is-not.md",
+   "module": "m03-what-a-sensitivity-says",
+   "lesson": "l04-what-a-tornado-is-not.md",
+   "moved_values": [
+    {
+     "value": "0.158179",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 | 0.161906 (derived) |",
+     "quoted_as": [
+      "0.158179"
+     ],
+     "example": "8828 | 0."
+    },
+    {
+     "value": "0.628637",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 | 0.638666 (derived) |",
+     "quoted_as": [
+      "0.628637"
+     ],
+     "example": "1745 | 0."
+    },
+    {
+     "value": "1.386816",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 | 1.411541 (derived) |",
+     "quoted_as": [
+      "1.386816"
+     ],
+     "example": "5965 | 1."
+    },
+    {
+     "value": "1.510089",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 | 1.537012 (derived) |",
+     "quoted_as": [
+      "1.510089"
+     ],
+     "example": "0051 | 1."
+    },
+    {
+     "value": "1403.9781",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "1403.9781"
+     ],
+     "example": "1526 | 1403."
+    },
+    {
+     "value": "1885.6239",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "1885.6239"
+     ],
+     "example": "5067 | 1885."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "The base of 2047."
+    },
+    {
+     "value": "2209.5067",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "2209.5067"
+     ],
+     "example": "| OPEX | 2209."
+    },
+    {
+     "value": "2691.1526",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "2691.1526",
+      "2691"
+     ],
+     "example": "| CAPEX | 2691."
+    },
+    {
+     "value": "2839.5965",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "2839.5965"
+     ],
+     "example": "3636 | 2839."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "5679 | 3092."
+    },
+    {
+     "value": "323.8828",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "323.8828"
+     ],
+     "example": "6239 | 323."
+    },
+    {
+     "value": "3467.3636",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "3467",
+      "3467.3636"
+     ],
+     "example": "7671 | 3467."
+    },
+    {
+     "value": "3593.5679",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3593.5679"
+     ],
+     "example": "5628 | 3593."
+    },
+    {
+     "value": "501.5628",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "501.5628"
+     ],
+     "example": "| Oil Price | 501."
+    },
+    {
+     "value": "627.7671",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "627.7671"
+     ],
+     "example": "| Production | 627."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m06-reading-a-plan-against-itself/l01-three-estimates-of-one-cost.md",
+   "module": "m06-reading-a-plan-against-itself",
+   "lesson": "l01-three-estimates-of-one-cost.md",
+   "moved_values": [],
+   "falsified_claims": [
+    {
+     "claim": "abex-reaches-no-cash-flow",
+     "quote": "ABEX line is in neither",
+     "settled_by": "Engine totals: CAPEX 2250.0000, OPEX 95.0000 a year. The ABEX line of 260.0000 is in neither of those two totals (derived) ... It is the plan's end-of-life cost and the case carries it in the final production year."
+    }
+   ]
+  },
+  {
+   "path": "src/content/courses/fdp/advanced/m06-reading-a-plan-against-itself/l03-the-question-in-the-difference.md",
+   "module": "m06-reading-a-plan-against-itself",
+   "lesson": "l03-the-question-in-the-difference.md",
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "0000 USD a barrel the FPSO scenario returns an NPV of -1797."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "| the scenario NPV against the plan's own NPV | 2047."
+    }
+   ],
+   "falsified_claims": []
+  }
+ ],
+ "questions_falsified": [
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 1,
+   "prompt_head": "The EGINA Base scenario reports an internal rate of return of 29.5998 percent with the status ok. Where does that number come from?",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "It is the discount rate the net present value of 2047."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "The EGINA Base scenario reports an internal rate of return of 29."
+    }
+   ],
+   "falsified_claims": [
+    {
+     "claim": "base-case-status-is-ok",
+     "quote": "EGINA Base scenario reports an internal rate of return of 29.5998 percent with the status ok",
+     "settled_by": "| EGINA Base, 70 USD a barrel | 2015.4123 | none | multiple-roots |"
+    },
+    {
+     "claim": "egina-has-one-rate-of-return",
+     "quote": "EGINA Base scenario reports an internal rate of return of 29.5998",
+     "settled_by": "MORE THAN ONE ROOT ... The engine finds every root, reports irr null and irrStatus multiple-roots, and lists them."
+    },
+    {
+     "claim": "base-case-carries-a-single-rate",
+     "quote": "EGINA Base scenario reports an internal rate of return of 2",
+     "settled_by": "MORE THAN ONE ROOT ... | EGINA Base, 70 USD a barrel | 2015.4123 | multiple-roots | -44.3414 and 29.5779 |"
+    },
+    {
+     "claim": "payback-or-status-paired-with-a-retired-rate",
+     "quote": "29.5998 percent with the status ok",
+     "settled_by": "| EGINA Base, 70 USD a barrel | 2015.4123 | none | multiple-roots |"
+    }
+   ]
+  },
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 2,
+   "prompt_head": "At 40.0000 USD a barrel the same concept reports a rate of 8.2444 percent and a net present value of -161.0098 million USD. How are both tru",
+   "keyed_answer_affected": true,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "-161.0098",
+     "kind": "retired",
+     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
+     "quoted_as": [
+      "-161.0098",
+      "-161",
+      "161"
+     ],
+     "example": "2444 percent and a net present value of -161."
+    },
+    {
+     "value": "8.2444",
+     "kind": "retired",
+     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
+     "quoted_as": [
+      "8.2444"
+     ],
+     "example": "0000 USD a barrel the same concept reports a rate of 8."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 3,
+   "prompt_head": "The Base cumulative runs -2250.0000, then -1454.1875, then -658.3750, then 137.4375. Why can a rate be solved for this flow at all?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [
+    "all"
+   ],
+   "moved_values": [
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "The net present value of 2047."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 4,
+   "prompt_head": "What makes the Base net present value of 2047.5653 million USD and the tie-back's 1048.6281 comparable numbers?",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "1048.6281",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "1048.6281"
+     ],
+     "example": "5653 million USD and the tie-back's 1048."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "What makes the Base net present value of 2047."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "4321 against 29."
+    },
+    {
+     "value": "40.4321",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "40.4321"
+     ],
+     "example": "The rates differ, 40."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 5,
+   "prompt_head": "Value per million of capex is 1.436477 for the tie-back and 0.910029 for the FPSO. What does that pair establish?",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "0.910029",
+     "kind": "retired",
+     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
+     "quoted_as": [
+      "0.910029"
+     ],
+     "example": "436477 for the tie-back and 0."
+    },
+    {
+     "value": "1.436477",
+     "kind": "retired",
+     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
+     "quoted_as": [
+      "1.436477"
+     ],
+     "example": "Value per million of capex is 1."
+    },
+    {
+     "value": "1048.6281",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "1048.6281"
+     ],
+     "example": "910029 per million on it, which is why 1048."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "6281 is less than 2047."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 6,
+   "prompt_head": "Two cash flows differ by a factor of three in every single year. What do their rates of return read?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [
+    "every"
+   ],
+   "moved_values": [
+    {
+     "value": "1048.6281",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "1048.6281"
+     ],
+     "example": "0000 million USD of capex, which is why 1048."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "6281 sits under a higher rate than 2047."
+    },
+    {
+     "value": "40.4321",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "40.4321"
+     ],
+     "example": "The tie-back's 40."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 8,
+   "prompt_head": "Three cases all lose money: one reads -92616.5020 with a rate, one reads -1797.2732 with the status no-root, and one reads -524.1537 with no",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [
+    "all"
+   ],
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "5020 with a rate, one reads -1797."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 9,
+   "prompt_head": "A team suppresses any rate below zero on their screening cards, on the grounds that a minus sign looks like an error. What have they given u",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "14.4152",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "14.4152"
+     ],
+     "example": "8693 and 14."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "What have they given up? Nothing at all, since the EGINA rates run 29."
+    },
+    {
+     "value": "40.4321",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "40.4321"
+     ],
+     "example": "5998, 40."
+    },
+    {
+     "value": "43.8693",
+     "kind": "retired",
+     "settled_by": "| High price | FPSO development | 92.0000 | 2250.0000 | 3638.0233 | none | multiple-roots | 3.0625 |",
+     "quoted_as": [
+      "43.8693"
+     ],
+     "example": "4321, 43."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 10,
+   "prompt_head": "The Base case reports payback of 3.8273 years. What does that figure record?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "0187 to find where the rate of 29."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 11,
+   "prompt_head": "At 30.0000 USD a barrel the concept is worth -898.3507 million USD and the cumulative never reaches zero. What should the payback column car",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [
+    "never"
+   ],
+   "moved_values": [
+    {
+     "value": "-898.3507",
+     "kind": "retired",
+     "settled_by": "| EGINA at 30 USD a barrel | -935.1995 | none | no-root |",
+     "quoted_as": [
+      "898",
+      "-898",
+      "-898.3507"
+     ],
+     "example": "0000 USD a barrel the concept is worth -898."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 13,
+   "prompt_head": "The Low price scenario returns 14.4152 percent and fails a screening hurdle of 15 percent. What did the hurdle reject?",
+   "keyed_answer_affected": true,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "14.4152",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "14.4152"
+     ],
+     "example": "The Low price scenario returns 14."
+    },
+    {
+     "value": "427.9436",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "427.9436"
+     ],
+     "example": "What did the hurdle reject? A case worth 427."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 14,
+   "prompt_head": "A screening process filters on a hurdle and then sorts the survivors by how far each cleared it. What does that do to the EGINA scenarios?",
+   "keyed_answer_affected": true,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "1048.6281",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "1048.6281"
+     ],
+     "example": "5998, so 1048."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "What does that do to the EGINA scenarios? It produces an order that matches the values, since the margin above a hurdle grows with the size of the case and 2047."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "4321 percent against 29."
+    },
+    {
+     "value": "40.4321",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "40.4321"
+     ],
+     "example": "It places the tie-back above the Base, 40."
+    }
+   ],
+   "falsified_claims": [
+    {
+     "claim": "base-case-carries-a-single-rate",
+     "quote": "the Base, 40.4321 percent against 29.5998",
+     "settled_by": "MORE THAN ONE ROOT ... | EGINA Base, 70 USD a barrel | 2015.4123 | multiple-roots | -44.3414 and 29.5779 |"
+    }
+   ]
+  },
+  {
+   "bank": "ec6a_m01",
+   "scope": "module",
+   "module_key": "m01-the-rate-of-return",
+   "ord": 15,
+   "prompt_head": "A screening case is discounted at 10.0000 percent and a hurdle of 15 percent is then applied to its rate. How do the two relate?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "14.4152",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "14.4152"
+     ],
+     "example": "9436 million USD is positive, and fails the second at 14."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "The hurdle replaces the discount rate for any case the engine returns a rate for, so the Base value of 2047."
+    },
+    {
+     "value": "427.9436",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "427.9436"
+     ],
+     "example": "The Low price case passes the first test, since 427."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m02",
+   "scope": "module",
+   "module_key": "m02-when-there-is-no-rate",
+   "ord": 7,
+   "prompt_head": "A screening case comes back above-clamp. What is the first thing to check?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "A real development case sits far inside the band, the Base at 29."
+    },
+    {
+     "value": "40.4321",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "40.4321"
+     ],
+     "example": "5998 percent and the tie-back at 40."
+    }
+   ],
+   "falsified_claims": [
+    {
+     "claim": "base-case-carries-a-single-rate",
+     "quote": "the Base at 29.5998",
+     "settled_by": "MORE THAN ONE ROOT ... | EGINA Base, 70 USD a barrel | 2015.4123 | multiple-roots | -44.3414 and 29.5779 |"
+    }
+   ]
+  },
+  {
+   "bank": "ec6a_m02",
+   "scope": "module",
+   "module_key": "m02-when-there-is-no-rate",
+   "ord": 8,
+   "prompt_head": "Three of the five statuses withhold a rate for three different reasons. Which reading of them is right?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "0000 USD a barrel the status is no-root on a value of -1797."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m02",
+   "scope": "module",
+   "module_key": "m02-when-there-is-no-rate",
+   "ord": 11,
+   "prompt_head": "At 30.0000 USD a barrel the concept reads multiple-roots and at 18.0000 it reads no-root. What is the difference between those two answers?",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "3507 against -1797."
+    },
+    {
+     "value": "-898.3507",
+     "kind": "retired",
+     "settled_by": "| EGINA at 30 USD a barrel | -935.1995 | none | no-root |",
+     "quoted_as": [
+      "898",
+      "-898",
+      "-898.3507"
+     ],
+     "example": "What is the difference between those two answers? How far each value sits below zero, -898."
+    }
+   ],
+   "falsified_claims": [
+    {
+     "claim": "thirty-usd-is-the-multiple-roots-case",
+     "quote": "30.0000 USD a barrel the concept reads multiple-roots",
+     "settled_by": "| EGINA at 30 USD a barrel | -935.1995 | none | no-root |"
+    }
+   ]
+  },
+  {
+   "bank": "ec6a_m02",
+   "scope": "module",
+   "module_key": "m02-when-there-is-no-rate",
+   "ord": 13,
+   "prompt_head": "At 18.0000 USD a barrel the concept is worth -1797.2732 million USD. Before the repair the engine reported a rate there. What was the number",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "0000 USD a barrel the concept is worth -1797."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m02",
+   "scope": "module",
+   "module_key": "m02-when-there-is-no-rate",
+   "ord": 14,
+   "prompt_head": "The clamp of 1000 percent survived a long time on the cards. What made it so hard to notice?",
+   "keyed_answer_affected": true,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "It cleared every threshold anyone would set, so it was coloured green on a case whose value of -1797."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "It moved with the price deck as a solved rate would, so no reader could tell it apart from the 29."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m02",
+   "scope": "module",
+   "module_key": "m02-when-there-is-no-rate",
+   "ord": 15,
+   "prompt_head": "What is the tell that a reported rate came from a boundary rather than from a solution?",
+   "keyed_answer_affected": true,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "14.4152",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "14.4152"
+     ],
+     "example": "4321, 14."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "It sits exactly on the limit of the search range, where the engine's genuine answers do not: 29."
+    },
+    {
+     "value": "40.4321",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "40.4321"
+     ],
+     "example": "5998, 40."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 1,
+   "prompt_head": "The minus 30 percent oil price end of the EGINA sweep is 501.5628. How was that figure produced?",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "How was that figure produced? By scaling the base of 2047."
+    },
+    {
+     "value": "3593.5679",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3593.5679"
+     ],
+     "example": "5628 and 3593."
+    },
+    {
+     "value": "501.5628",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "501.5628"
+     ],
+     "example": "The minus 30 percent oil price end of the EGINA sweep is 501."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 2,
+   "prompt_head": "What combination of moves can the EGINA sweep never show?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [
+    "never"
+   ],
+   "moved_values": [
+    {
+     "value": "501.5628",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "501.5628"
+     ],
+     "example": "The worst single figure in the table is 501."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 3,
+   "prompt_head": "Ranked by swing the EGINA drivers run Oil Price, Production, CAPEX, OPEX. What does that ordering establish?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "Which input carries the most money, since a swing of 3092."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 4,
+   "prompt_head": "A reviewer sets the EGINA price swing of 3092.0051 against a swing reported on a different project. What is wrong with that?",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "1.510089",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 | 1.537012 (derived) |",
+     "quoted_as": [
+      "1.510089"
+     ],
+     "example": "As a share of its own base the EGINA price swing is 1."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "A reviewer sets the EGINA price swing of 3092."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 5,
+   "prompt_head": "A 30 percent move in price and a 30 percent move in production both scale revenue, yet the price swing is 3092.0051 and the production swing",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "2839.5965",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "2839.5965"
+     ],
+     "example": "0051 and the production swing 2839."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "A 30 percent move in price and a 30 percent move in production both scale revenue, yet the price swing is 3092."
+    },
+    {
+     "value": "3310.0565",
+     "kind": "retired",
+     "settled_by": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\"",
+     "quoted_as": [
+      "3310",
+      "3310.0565"
+     ],
+     "example": "8812 and tax at 3310."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 6,
+   "prompt_head": "The published case with no royalty and no tax has a base of 2738.0331, price ends of 1651.9056 to 3824.1606 and production ends of 1735.4539",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "What does it settle? That the government take is what separates the two, since the base moves from 2047."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 8,
+   "prompt_head": "What would close the gap between the price row and the production row of a sweep?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "2839.5965",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "2839.5965"
+     ],
+     "example": "0051 from 2839."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "0000 USD a barrel is what splits 3092."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 9,
+   "prompt_head": "The CAPEX row of the EGINA sweep reads 2691.1526 at one end and 1403.9781 at the other. Which end is the overrun?",
+   "keyed_answer_affected": true,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "1403.9781",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "1403.9781"
+     ],
+     "example": "1526 at one end and 1403."
+    },
+    {
+     "value": "2691.1526",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "2691.1526",
+      "2691"
+     ],
+     "example": "The CAPEX row of the EGINA sweep reads 2691."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 10,
+   "prompt_head": "Capex swings the value by 1287.1745 and operating cost by 323.8828 on the same relative move. What accounts for the difference?",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "0.158179",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 | 0.161906 (derived) |",
+     "quoted_as": [
+      "0.158179"
+     ],
+     "example": "628637 against 0."
+    },
+    {
+     "value": "0.628637",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 | 0.638666 (derived) |",
+     "quoted_as": [
+      "0.628637"
+     ],
+     "example": "As a share of base that is 0."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "The capex bar is symmetric about the base of 2047."
+    },
+    {
+     "value": "323.8828",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "323.8828"
+     ],
+     "example": "1745 and operating cost by 323."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 11,
+   "prompt_head": "A chart ranks the four bars by their right hand end rather than by their swing. What does that do?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "1885.6239",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "1885.6239"
+     ],
+     "example": "5067 and 1885."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "What does that do? It puts the base of 2047."
+    },
+    {
+     "value": "2209.5067",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "2209.5067"
+     ],
+     "example": "It drops OPEX from the chart, since its ends of 2209."
+    },
+    {
+     "value": "2839.5965",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "2839.5965"
+     ],
+     "example": "0051, 2839."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "The swings are 3092."
+    },
+    {
+     "value": "323.8828",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "323.8828"
+     ],
+     "example": "1745 and 323."
+    },
+    {
+     "value": "3467.3636",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "3467",
+      "3467.3636"
+     ],
+     "example": "5679 and 3467."
+    },
+    {
+     "value": "3593.5679",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3593.5679"
+     ],
+     "example": "It reverses the ranking of Oil Price and Production, whose right hand ends of 3593."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 12,
+   "prompt_head": "On the published marginal case the capex ends are 470.1383 and -44.7315. What does reading that row backwards produce?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "0.628637",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 | 0.638666 (derived) |",
+     "quoted_as": [
+      "0.628637"
+     ],
+     "example": "A swing read at the wrong sign, which the share of base of 0."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 13,
+   "prompt_head": "Why may the figure 501.5628 not be labelled a P90 NPV?",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "501.5628",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "501.5628"
+     ],
+     "example": "Why may the figure 501."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 14,
+   "prompt_head": "A manager reads the eight ends of a tornado as the range the project could land in. What is missing from that reading?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "What is missing from that reading? The base of 2047."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m03",
+   "scope": "module",
+   "module_key": "m03-what-a-sensitivity-says",
+   "ord": 15,
+   "prompt_head": "What is a tornado chart genuinely good for?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "8828 does not repay much study on this case and one with a swing of 3092."
+    },
+    {
+     "value": "323.8828",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "323.8828"
+     ],
+     "example": "A driver with a swing of 323."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m06",
+   "scope": "module",
+   "module_key": "m06-reading-a-plan-against-itself",
+   "ord": 10,
+   "prompt_head": "The Base scenario on the concept's capex returns an NPV of 2047.5653 million USD and the plan's own cost items at the same price return 2047",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "The Base scenario on the concept's capex returns an NPV of 2047."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_m06",
+   "scope": "module",
+   "module_key": "m06-reading-a-plan-against-itself",
+   "ord": 13,
+   "prompt_head": "At 18.0000 USD a barrel the FPSO scenario returns an NPV of -1797.2732 million USD. What does it report for the rate of return and for the p",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "0000 USD a barrel the FPSO scenario returns an NPV of -1797."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 1,
+   "prompt_head": "The scenario card colours a rate of 15 percent or more green, and the sweep ranks the plan's drivers Oil Price, Production, CAPEX, OPEX. A r",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "Only that the base is sound, since a green rate and a driver ranking are both properties of a case whose value of 2047."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "A reviewer reads a green 29."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "What has that reading assumed? Nothing that is not already stated, since the colour applies the only hurdle rate in the studio and the widest swing of 3092."
+    },
+    {
+     "value": "40.4321",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "40.4321"
+     ],
+     "example": "That the tie-back was screened on the same terms, since 40."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "prompt_head": "At 70.0000 USD a barrel the subsea tie-back returns 40.4321 percent on a capex of 730.0000 and the FPSO returns 29.5998 percent on 2250.0000",
+   "keyed_answer_affected": true,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "0.910029",
+     "kind": "retired",
+     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
+     "quoted_as": [
+      "0.910029"
+     ],
+     "example": "436477 for the tie-back and 0."
+    },
+    {
+     "value": "1.436477",
+     "kind": "retired",
+     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
+     "quoted_as": [
+      "1.436477"
+     ],
+     "example": "Which reading is sound? Both measures are true at once, since value per million of capex is 1."
+    },
+    {
+     "value": "1048.6281",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "1048.6281"
+     ],
+     "example": "0000, while the tie-back is worth 1048."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "6281 million USD and the FPSO 2047."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "0000 and the FPSO returns 29."
+    },
+    {
+     "value": "40.4321",
+     "kind": "retired",
+     "settled_by": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |",
+     "quoted_as": [
+      "40.4321"
+     ],
+     "example": "0000 USD a barrel the subsea tie-back returns 40."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 3,
+   "prompt_head": "A reviewer divides the FPSO's NPV of 2047.5653 million USD by the facility screening estimate of 1363.3524 and sets the result beside the ti",
+   "keyed_answer_affected": true,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "0.910029",
+     "kind": "retired",
+     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
+     "quoted_as": [
+      "0.910029"
+     ],
+     "example": "0000, so the FPSO's like for like figure is 0."
+    },
+    {
+     "value": "1.436477",
+     "kind": "retired",
+     "settled_by": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived).",
+     "quoted_as": [
+      "1.436477"
+     ],
+     "example": "3524 and sets the result beside the tie-back's value per million of capex of 1."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "A reviewer divides the FPSO's NPV of 2047."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 5,
+   "prompt_head": "Run the EGINA scenarios past a screening threshold of 15 percent on the rate and the Low price case at 14.4152 percent fails. What has just ",
+   "keyed_answer_affected": true,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "14.4152",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "14.4152"
+     ],
+     "example": "Run the EGINA scenarios past a screening threshold of 15 percent on the rate and the Low price case at 14."
+    },
+    {
+     "value": "427.9436",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "427.9436"
+     ],
+     "example": "427."
+    },
+    {
+     "value": "501.5628",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "501.5628"
+     ],
+     "example": "The weakest of the three FPSO cases, which the sweep had already found at its minus 30 percent oil price end of 501."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 6,
+   "prompt_head": "At 40.0000 USD a barrel the FPSO concept reports a rate of 8.2444 percent and an NPV of -161.0098 million USD. How do those two live togethe",
+   "keyed_answer_affected": true,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "-161.0098",
+     "kind": "retired",
+     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
+     "quoted_as": [
+      "-161.0098",
+      "-161",
+      "161"
+     ],
+     "example": "2444 percent and an NPV of -161."
+    },
+    {
+     "value": "8.2444",
+     "kind": "retired",
+     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
+     "quoted_as": [
+      "8.2444"
+     ],
+     "example": "0000 USD a barrel the FPSO concept reports a rate of 8."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 9,
+   "prompt_head": "The published case whose price deck is shorter than its profile is worth 126.1636, reports multiple-roots, and has a recorded hidden root of",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "-898.3507",
+     "kind": "retired",
+     "settled_by": "| EGINA at 30 USD a barrel | -935.1995 | none | no-root |",
+     "quoted_as": [
+      "898",
+      "-898",
+      "-898.3507"
+     ],
+     "example": "0000 USD a barrel EGINA reads multiple-roots too, on -898."
+    }
+   ],
+   "falsified_claims": [
+    {
+     "claim": "thirty-usd-is-the-multiple-roots-case",
+     "quote": "30.0000 USD a barrel EGINA reads multiple-roots",
+     "settled_by": "| EGINA at 30 USD a barrel | -935.1995 | none | no-root |"
+    }
+   ]
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "prompt_head": "Before the repair the studio printed 1000 percent, in green, against the EGINA concept at 18.0000 USD a barrel. What was that figure?",
+   "keyed_answer_affected": false,
+   "stem_affected": false,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "The repaired engine reports null with the status no-root there, and the NPV of -1797."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "prompt_head": "A case worth -1797.2732 million USD reports no rate of return at all with a status of no-root, and a sweep is drawn around it anyway. What d",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [
+    "all"
+   ],
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "A case worth -1797."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 13,
+   "prompt_head": "On the plan's own case the sweep's minus 30 percent oil price end is 501.5628 against a base of 2047.5653. What produced 501.5628?",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "1403.9781",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "1403.9781"
+     ],
+     "example": "The worst of the eight runs, taken once the price fall had been combined with the capex overrun end of 1403."
+    },
+    {
+     "value": "2047.5653",
+     "kind": "moved_referent",
+     "settled_by": "- the same case run with no end-of-life cost at all: NPV 2047.5653, IRR 29.5998 (engine). That is the number this studio reported until September 2026.",
+     "quoted_as": [
+      "2047.5653"
+     ],
+     "example": "5628 against a base of 2047."
+    },
+    {
+     "value": "427.9436",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "427.9436"
+     ],
+     "example": "The Low price scenario is a different number, 427."
+    },
+    {
+     "value": "501.5628",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "501.5628"
+     ],
+     "example": "On the plan's own case the sweep's minus 30 percent oil price end is 501."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 14,
+   "prompt_head": "The oil price swing is 3092.0051 and the production swing is 2839.5965 on the same 30 percent move. What separates them?",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "2839.5965",
+     "kind": "retired",
+     "settled_by": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |",
+     "quoted_as": [
+      "2839.5965"
+     ],
+     "example": "0051 and the production swing is 2839."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "The oil price swing is 3092."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 15,
+   "prompt_head": "The sweep's CAPEX row runs from 2691.1526 at minus 30 percent to 1403.9781 at plus 30 percent. Which of the plan's figures did it move by 30",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "1403.9781",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "1403.9781"
+     ],
+     "example": "1526 at minus 30 percent to 1403."
+    },
+    {
+     "value": "2691.1526",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "2691.1526",
+      "2691"
+     ],
+     "example": "The sweep's CAPEX row runs from 2691."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "prompt_head": "CAPEX runs from 2691.1526 at minus 30 percent to 1403.9781 at plus 30 percent, a swing of 1287.1745, while OPEX swings 323.8828 on the same ",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "0.158179",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 | 0.161906 (derived) |",
+     "quoted_as": [
+      "0.158179"
+     ],
+     "example": "628637 for capex and 0."
+    },
+    {
+     "value": "0.628637",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 | 0.638666 (derived) |",
+     "quoted_as": [
+      "0.628637"
+     ],
+     "example": "The shares of base are 0."
+    },
+    {
+     "value": "1403.9781",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "1403.9781"
+     ],
+     "example": "1526 at minus 30 percent to 1403."
+    },
+    {
+     "value": "2691.1526",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "2691.1526",
+      "2691"
+     ],
+     "example": "CAPEX runs from 2691."
+    },
+    {
+     "value": "323.8828",
+     "kind": "retired",
+     "settled_by": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |",
+     "quoted_as": [
+      "323.8828"
+     ],
+     "example": "1745, while OPEX swings 323."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 17,
+   "prompt_head": "May the sweep's minus 30 percent oil price end of 501.5628 be labelled a P90 NPV?",
+   "keyed_answer_affected": true,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "501.5628",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "501.5628"
+     ],
+     "example": "May the sweep's minus 30 percent oil price end of 501."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 18,
+   "prompt_head": "The lowest figure anywhere in the sweep is 501.5628. Is that the worst the case can do?",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [
+    "lowest",
+    "worst"
+   ],
+   "moved_values": [
+    {
+     "value": "1403.9781",
+     "kind": "retired",
+     "settled_by": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |",
+     "quoted_as": [
+      "1403.9781"
+     ],
+     "example": "No, because the capex overrun end of 1403."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "Is that the worst the case can do? Yes, since the widest single driver, at a swing of 3092."
+    },
+    {
+     "value": "501.5628",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "501.5628"
+     ],
+     "example": "The lowest figure anywhere in the sweep is 501."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 35,
+   "prompt_head": "A reader wants the rate of return that goes with the sweep's minus 30 percent oil price end of 501.5628. Where is it?",
+   "keyed_answer_affected": false,
+   "stem_affected": true,
+   "superlatives_in_stem": [],
+   "moved_values": [
+    {
+     "value": "14.4152",
+     "kind": "retired",
+     "settled_by": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |",
+     "quoted_as": [
+      "14.4152"
+     ],
+     "example": "Where is it? In the scenario table at 14."
+    },
+    {
+     "value": "29.5998",
+     "kind": "moved_referent",
+     "settled_by": "- The same Base case with no end-of-life cost reports a single rate of 29.5998 percent at status ok (engine).",
+     "quoted_as": [
+      "29.5998"
+     ],
+     "example": "In the base at 29."
+    },
+    {
+     "value": "501.5628",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "501.5628"
+     ],
+     "example": "A reader wants the rate of return that goes with the sweep's minus 30 percent oil price end of 501."
+    },
+    {
+     "value": "8.2444",
+     "kind": "retired",
+     "settled_by": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots).",
+     "quoted_as": [
+      "8.2444"
+     ],
+     "example": "In the price rows at 8."
+    }
+   ],
+   "falsified_claims": [
+    {
+     "claim": "base-case-carries-a-single-rate",
+     "quote": "the base at 29.5998",
+     "settled_by": "MORE THAN ONE ROOT ... | EGINA Base, 70 USD a barrel | 2015.4123 | multiple-roots | -44.3414 and 29.5779 |"
+    }
+   ]
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 36,
+   "prompt_head": "Which measure is defined for every one of the five EGINA scenarios, including the case at 18.0000 USD a barrel?",
+   "keyed_answer_affected": true,
+   "stem_affected": false,
+   "superlatives_in_stem": [
+    "every"
+   ],
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "The NPV, defined for every cash flow at every discount rate whether or not a root exists, and reading -1797."
+    },
+    {
+     "value": "3092.0051",
+     "kind": "retired",
+     "settled_by": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |",
+     "quoted_as": [
+      "3092.0051",
+      "3092"
+     ],
+     "example": "The swing, since the sweep re-runs each scenario across its four drivers and the widest of them, 3092."
+    }
+   ],
+   "falsified_claims": []
+  },
+  {
+   "bank": "ec6a_exam",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "prompt_head": "Three reports arrive: a scenario with no rate of return, a project whose schedule index is none because one costed task carries no dates, an",
+   "keyed_answer_affected": true,
+   "stem_affected": false,
+   "superlatives_in_stem": [
+    "all"
+   ],
+   "moved_values": [
+    {
+     "value": "-1797.2732",
+     "kind": "retired",
+     "settled_by": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |",
+     "quoted_as": [
+      "-1797",
+      "1797",
+      "-1797.2732"
+     ],
+     "example": "What does a reader take to a decision from each? The NPV of -1797."
+    }
+   ],
+   "falsified_claims": []
+  }
+ ]
+}

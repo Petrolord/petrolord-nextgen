@@ -1,0 +1,256 @@
+{
+ "app_slug": "fdp",
+ "course": "Field Development Planning (EC6)",
+ "generated": "2026-09-16",
+ "what_this_is": "The falsified-text manifest for the EC6 end-of-life (ABEX) repair. It records every claim in the LIVE course that charging the plan's abandonment cost falsifies, with the rebuilt digest line that settles each one. It recuts nothing: a later wave recuts the lessons, the banks and the capstone rows from this manifest.",
+ "defect": "The FDP teaching lab called runScenario and runFdpSensitivity with no abandonment argument. EGINA carries an ABEX cost item of 260 and UKOT one of 190, and neither reached any cash flow, so the whole course taught a field development plan that never pays to abandon the field.",
+ "verified_moved_capstone_values": [
+  {
+   "field": "ukot_base_npv_mm",
+   "old": 1717.6860327539478,
+   "new": 1694.0731982105392,
+   "tol": 0.05,
+   "tier": "beginner"
+  },
+  {
+   "field": "ukot_alternative_npv_mm",
+   "old": 721.0656772144272,
+   "new": 695.4146347459839,
+   "tol": 0.05,
+   "tier": "beginner"
+  },
+  {
+   "field": "ukot_stress_npv_mm",
+   "old": -771.0011900805065,
+   "new": -797.9291563861506,
+   "tol": 0.05,
+   "tier": "advanced"
+  },
+  {
+   "field": "ukot_price_swing_mm",
+   "old": 2202.685546432514,
+   "new": 2206.7509870934814,
+   "tol": 0.05,
+   "tier": "advanced"
+  },
+  {
+   "field": "ukot_base_irr_pct",
+   "old": 37.66903234346082,
+   "new": null,
+   "new_engine_answer": "irr null, irrStatus multiple-roots, irrRoots [-43.22592817326132, 37.65929157034489]",
+   "tier": "beginner",
+   "action": "RETIRED and replaced"
+  }
+ ],
+ "verification": "All five were reproduced by calling engines main 709172f directly, and again through the vendored copy, before anything was written. The thirteen unmoved graded values were reproduced character for character on both, so only a real engine move is declared a move.",
+ "irr_field_decision": {
+  "retired": "ukot_base_irr_pct (37.66903234346082, tol 0.01)",
+  "replacement": "ukot_base_irr_low_root_pct = -43.22592817326132, tol 0.01, labelled as the lower of the two rates at which the Board case NPV is zero",
+  "why": [
+   "The engine refuses a single IRR for this flow and returns irr null with irrStatus multiple-roots. A numerically graded field cannot grade a null, so the field had to be redesigned rather than reseeded, as EC2's non-discriminating capex-loss field was.",
+   "Both roots ARE engine return values (metrics.irrRoots), so grading one grades an engine answer and not a hand computation.",
+   "The HIGHER root, 37.65929157034489, was rejected on evidence: it sits 0.00974 from the retired answer of 37.66903234346082, INSIDE the retired tolerance of 0.01, so a learner who ran the pre-repair case would score full marks on the repaired field. That is precisely the non-discriminating shape the EC2 audit retired.",
+   "A root COUNT of 2 was rejected: a small integer answer collides with half the teaching digest and discriminates nothing, a gotcha this wave already recorded when it dropped a payback field.",
+   "The LOWER root cannot be reached by any single-IRR method: not by the pre-repair engine, not by Newton from a ten percent guess, not by negating or averaging the roots. Producing it requires reading that there are two, which is the judgement the repair exposes.",
+   "The tier still holds exactly six graded fields, and no graded value depends on a held or disputed literature item: every one is a return value of the sanctioned screening engine on stated inputs."
+  ],
+  "discrimination_evidence": "Seven naive routes checked; the closest (the higher root negated) misses by 556.7 tolerances, the pre-repair single rate by 8089.5. 0 WEAK.",
+  "gates_rerun_on_the_new_field": "digestleak 0, collisions 0 fatal, promptleak 0 cross-tier and 0 same-tier."
+ },
+ "totals": {
+  "lessons_live": 78,
+  "lessons_falsified": 34,
+  "questions_live": 396,
+  "questions_falsified": 107,
+  "keyed_answers_affected": 26,
+  "stems_affected": 57,
+  "superlative_stems_among_falsified": 15,
+  "digest_lines_changed": 30,
+  "digest_lines_before": 511,
+  "digest_lines_after": 534
+ },
+ "per_tier": {
+  "beginner": {
+   "lessons": "16/26",
+   "questions": "51/132",
+   "keyed": 13
+  },
+  "intermediate": {
+   "lessons": "4/26",
+   "questions": "4/132",
+   "keyed": 0
+  },
+  "advanced": {
+   "lessons": "14/26",
+   "questions": "52/132",
+   "keyed": 13
+  }
+ },
+ "failure_modes_named_wrongly": [
+  {
+   "finding": "30 USD a barrel is no longer the multiple-roots case. Charging the end-of-life cost turns it no-root, and turns the EARNING cases (70, 48, 92 USD) into the multiple-root ones. Four items name the failure mode wrongly because of it.",
+   "items": [
+    "advanced/m02-when-there-is-no-rate/l03-more-than-one-root.md",
+    "intermediate/m06-the-professional-reading/l03-onward.md",
+    "advanced/m02-when-there-is-no-rate module bank ord 11",
+    "advanced final exam ord 9"
+   ],
+   "note": "advanced/m02/l03 is the worst of them: its whole contrast is 'at 30.0000 the status is multiple-roots and at 18.0000 it is no-root', and both halves are now the same status. The repair also hands that lesson a far better example than the published short-price-deck case it reaches for: the plan's own base case.",
+   "settled_by": "| EGINA at 30 USD a barrel | -935.1995 | none | no-root |  and  | EGINA Base, 70 USD a barrel | 2015.4123 | multiple-roots | -44.3414 and 29.5779 |"
+  },
+  {
+   "finding": "Eight items present the EGINA Base case as carrying a single rate of return, usually 29.5998 percent at status ok. It now carries two roots and no rate.",
+   "settled_by": "| EGINA Base, 70 USD a barrel | 2015.4123 | none | multiple-roots |"
+  },
+  {
+   "finding": "Eight items teach that the ABEX line reaches no cash flow. It now falls in the final production year and is deductible for tax there.",
+   "settled_by": "Engine totals: CAPEX 2250.0000, OPEX 95.0000 a year. The ABEX line of 260.0000 is in neither of those two totals (derived), because it is neither development capex nor an annual operating cost. It is the plan's end-of-life cost and the case carries it in the final production year."
+  }
+ ],
+ "superlatives_in_stems": {
+  "note": "55 of the 396 live stems carry a superlative; 15 of those sit in questions this repair falsifies and are listed per tier. Two are keyed on the superlative itself and need the closest reading in the recut.",
+  "keyed_on_the_superlative": [
+   "advanced final exam ord 36 (which measure is defined for EVERY one of the five EGINA scenarios: still the NPV, but the reason moves, since four of the five now have no rate rather than one)",
+   "advanced final exam ord 41 (three reports, ALL of them nulls)"
+  ],
+  "unfalsified_but_worth_a_look": "advanced/m02/l01 says no-sign-change is 'the most informative of the five statuses'. The repair does not falsify it and the lesson is otherwise untouched, so it is left."
+ },
+ "capstone_recut_this_manifest_implies": {
+  "migrations/20260918_ec6_fdp_course.sql": "the Associate capstone's field 5 (key, label, expected, and the prompt sentence that asks for a rate to four decimals) and the four moved expected values",
+  "migrations/20260918_ec6_fdp_go_live.sql": "the v_u_base_irr_pct variable and its assertions, the published-golden list (2047.5653, 29.5998, 3.8273, 3092.0051, -1797.2732 all moved) and the ordered-pair checks on the five screening fields",
+  "how": "as a NEW recut migration against the live rows, the way 20260920_ec1_recut_cashflow_capstone.sql and 20260920_ec2_recut_fiscal_capstone.sql were written. The five applied 20260918 migrations are the record of what is live and are not edited in place."
+ },
+ "recorded_not_fixed": [
+  "THE SUITE APP CANNOT YET PRODUCE THESE ANSWERS. petrolord-suite main vendors an FDP engine with no resolveAbandonment at all, and src/components/fdp/modules/scenarios/ScenarioManager.jsx calls runScenario(scenario, concept) with no abandonment. Until the Suite is repaired and shipped, a learner sitting this capstone in the FDP Accelerator sees the pre-repair numbers. The Suite repair is a prerequisite for the recut going live, not for this branch.",
+  "scenarioPayback takes no abandonment argument, so the payback the card shows is the payback of a plan that never pays to abandon. On these cases it changes nothing because the cost falls in the last year, but on a plan that only recovers at the end it would. The digest says so in Section 4.",
+  "Vendoring the remaining engines/economics/fdp files (the reserves-against-profile check, the H2S partial-pressure screen, an empty schedule spanning null, and the newer goldens with seven more published plan cases) moves twelve further digest lines and is a separate wave. Measured, not guessed: the digest was rebuilt against that tree to count them.",
+  "The lab constant STRESS_PRICES.multipleRoots was renamed alsoNoRoot, because 30 USD a barrel is no longer a multiple-roots case. A constant whose name asserts a retired status is the same defect class as a golden case name that does."
+ ],
+ "files": [
+  "MANIFEST-beginner.json",
+  "MANIFEST-intermediate.json",
+  "MANIFEST-advanced.json"
+ ],
+ "settled_by_digest_line_changes": [
+  {
+   "old_line": "- a scenario priced at zero, which is a number somebody typed: accepted, NPV -3517.4133.",
+   "new_line": "- a scenario priced at zero, which is a number somebody typed: accepted, NPV -3554.2621."
+  },
+  {
+   "old_line": "| Base | FPSO development | 70.0000 | 2250.0000 | 2047.5653 | 29.5998 | ok | 3.8273 |",
+   "new_line": "| Base | FPSO development | 70.0000 | 2250.0000 | 2015.4123 | none | multiple-roots | 3.8273 |"
+  },
+  {
+   "old_line": "| Low price | FPSO development | 48.0000 | 2250.0000 | 427.9436 | 14.4152 | ok | 5.7734 |",
+   "new_line": "| Low price | FPSO development | 48.0000 | 2250.0000 | 392.8013 | none | multiple-roots | 5.7734 |"
+  },
+  {
+   "old_line": "| High price | FPSO development | 92.0000 | 2250.0000 | 3667.1870 | 43.8693 | ok | 3.0625 |",
+   "new_line": "| High price | FPSO development | 92.0000 | 2250.0000 | 3638.0233 | none | multiple-roots | 3.0625 |"
+  },
+  {
+   "old_line": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1797.2732 | none | no-root | never |",
+   "new_line": "| Stress | FPSO development | 18.0000 | 2250.0000 | -1834.1220 | none | no-root | never |"
+  },
+  {
+   "old_line": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1048.6281 | 40.4321 | ok | 3.2035 |",
+   "new_line": "| Tie-back base | Subsea tie-back | 70.0000 | 730.0000 | 1013.7182 | none | multiple-roots | 3.2035 |"
+  },
+  {
+   "old_line": "The Base case in full: revenue 16095.0492, royalty 2011.8812, tax 3310.0565, capex 2250.0000, operating cost 3049.6464, government take 5321.9377, deepest cash position -2250.0000.",
+   "new_line": "Every case in that table carries the plan's end-of-life cost: source abex-item, 260.0000 million USD, charged in production year 20 (engine). The basis the engine states: \"The plan's ABEX cost item: Decommissioning provision.\""
+  },
+  {
+   "old_line": "Government take is 0.330657 of gross revenue (derived).",
+   "new_line": "# Commentary: the payback column is the one figure in that table computed WITHOUT the end-of-life cost. scenarioPayback takes no abandonment argument, so the card reports the payback of a plan that never pays to abandon. On these cases it changes nothing, because the cost falls in the last year and the money has been recovered long before it; on a plan that only recovers at the end it would."
+  },
+  {
+   "old_line": "- 40.0000 USD a barrel: NPV -161.0098, IRR 8.2444.",
+   "new_line": "- 40.0000 USD a barrel: NPV -197.2391, IRR none (multiple-roots)."
+  },
+  {
+   "old_line": "- 55.0000 USD a barrel: NPV 943.2778, IRR 19.4279.",
+   "new_line": "- 55.0000 USD a barrel: NPV 909.0866, IRR none (multiple-roots)."
+  },
+  {
+   "old_line": "- 70.0000 USD a barrel: NPV 2047.5653, IRR 29.5998.",
+   "new_line": "- 70.0000 USD a barrel: NPV 2015.4123, IRR none (multiple-roots)."
+  },
+  {
+   "old_line": "- 85.0000 USD a barrel: NPV 3151.8529, IRR 39.3813.",
+   "new_line": "- 85.0000 USD a barrel: NPV 3121.7380, IRR none (multiple-roots)."
+  },
+  {
+   "old_line": "The tie-back at 70 USD a barrel earns 1048.6281 on capex 730.0000; the FPSO earns 2047.5653 on 2250.0000. Value per million of capex: tie-back 1.436477, FPSO 0.910029 (derived).",
+   "new_line": "The tie-back at 70 USD a barrel earns 1013.7182 on capex 730.0000; the FPSO earns 2015.4123 on 2250.0000. Value per million of capex: tie-back 1.388655, FPSO 0.895739 (derived)."
+  },
+  {
+   "old_line": "Engine totals: CAPEX 2250.0000, OPEX 95.0000 a year. The ABEX line of 260.0000 is in neither (derived: the screening case carries capex and operating cost only).",
+   "new_line": "Engine totals: CAPEX 2250.0000, OPEX 95.0000 a year. The ABEX line of 260.0000 is in neither of those two totals (derived), because it is neither development capex nor an annual operating cost. It is the plan's end-of-life cost and the case carries it in the final production year."
+  },
+  {
+   "old_line": "The plan's own case: capex 2250.0000 from the cost items, operating cost 95.0000 a year, the FPSO concept's 20 year shape at $70/bbl. NPV 2047.5653, IRR 29.5998, payback 3.8273 years (engine).",
+   "new_line": "The plan's own case: capex 2250.0000 from the cost items, operating cost 95.0000 a year, the FPSO concept's 20 year shape at $70/bbl, and the end-of-life cost in the last of those years. NPV 2015.4123, IRR none (multiple-roots), payback 3.8273 years (engine)."
+  },
+  {
+   "old_line": "| Oil Price | 501.5628 | 3593.5679 | 2047.5653 | 3092.0051 (derived) |",
+   "new_line": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 (derived) |"
+  },
+  {
+   "old_line": "| CAPEX | 2691.1526 | 1403.9781 | 2047.5653 | 1287.1745 (derived) |",
+   "new_line": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 (derived) |"
+  },
+  {
+   "old_line": "| OPEX | 2209.5067 | 1885.6239 | 2047.5653 | 323.8828 (derived) |",
+   "new_line": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 (derived) |"
+  },
+  {
+   "old_line": "| Production | 627.7671 | 3467.3636 | 2047.5653 | 2839.5965 (derived) |",
+   "new_line": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 (derived) |"
+  },
+  {
+   "old_line": "- the headline figures it carries: P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, total CAPEX 2250.0000 $MM, NPV 2047.5653 $MM, IRR 29.5998, wells 4.",
+   "new_line": "- the headline figures it carries: P50 oil 130.0000 MMbbl, P50 gas 70.0000 Bcf, total CAPEX 2250.0000 $MM, NPV 2015.4123 $MM, IRR none, wells 4."
+  },
+  {
+   "old_line": "| EGINA Base, 70 USD a barrel | 2047.5653 | 29.5998 | ok |",
+   "new_line": "| EGINA Base, 70 USD a barrel | 2015.4123 | none | multiple-roots |"
+  },
+  {
+   "old_line": "| EGINA at 18 USD a barrel | -1797.2732 | none | no-root |",
+   "new_line": "| EGINA at 18 USD a barrel | -1834.1220 | none | no-root |"
+  },
+  {
+   "old_line": "| EGINA at 30 USD a barrel | -898.3507 | none | multiple-roots |",
+   "new_line": "| EGINA at 30 USD a barrel | -935.1995 | none | no-root |"
+  },
+  {
+   "old_line": "| Oil Price | 501.5628 | 3593.5679 | 2047.5653 | 3092.0051 | 1.510089 (derived) |",
+   "new_line": "| Oil Price | 466.5563 | 3564.2683 | 2015.4123 | 3097.7119 | 1.537012 (derived) |"
+  },
+  {
+   "old_line": "| CAPEX | 2691.1526 | 1403.9781 | 2047.5653 | 1287.1745 | 0.628637 (derived) |",
+   "new_line": "| CAPEX | 2658.9995 | 1371.8250 | 2015.4123 | 1287.1745 | 0.638666 (derived) |"
+  },
+  {
+   "old_line": "| OPEX | 2209.5067 | 1885.6239 | 2047.5653 | 323.8828 | 0.158179 (derived) |",
+   "new_line": "| OPEX | 2178.5655 | 1852.2591 | 2015.4123 | 326.3064 | 0.161906 (derived) |"
+  },
+  {
+   "old_line": "| Production | 627.7671 | 3467.3636 | 2047.5653 | 2839.5965 | 1.386816 (derived) |",
+   "new_line": "| Production | 592.9935 | 3437.8310 | 2015.4123 | 2844.8375 | 1.411541 (derived) |"
+  },
+  {
+   "old_line": "- The capex bar runs the other way: more capex is less value. At minus 30 percent capex the NPV is 2691.1526 and at plus 30 percent it is 1403.9781 (engine).",
+   "new_line": "- The capex bar runs the other way: more capex is less value. At minus 30 percent capex the NPV is 2658.9995 and at plus 30 percent it is 1371.8250 (engine)."
+  },
+  {
+   "old_line": "- the Base scenario on the concept's capex: NPV 2047.5653 (engine);",
+   "new_line": "- the Base scenario on the concept's capex: NPV 2015.4123 (engine);"
+  },
+  {
+   "old_line": "- the plan's own cost items at the same price: NPV 2047.5653 (engine);",
+   "new_line": "- the plan's own cost items at the same price: NPV 2015.4123 (engine);"
+  }
+ ]
+}
