@@ -60,6 +60,12 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('intervention/ChannelExplorer.jsx');
     expect(names).toContain('intervention/CandidateExplorer.jsx');
   });
+  it('finds the FC3 rotating equipment panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('rotating/PumpExplorer.jsx');
+    expect(names).toContain('rotating/SuctionExplorer.jsx');
+    expect(names).toContain('rotating/CompressorExplorer.jsx');
+  });
   it('finds the PD9 production surveillance panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);
     expect(names).toContain('surveillance/LedgerExplorer.jsx');
