@@ -191,6 +191,10 @@ export const PANELS = {
   'fc-suction-explorer': React.lazy(() => import('@/components/course/panels/rotating/SuctionExplorer')),
   'fc-compressor-explorer': React.lazy(() => import('@/components/course/panels/rotating/CompressorExplorer')),
 
+  // FC4 Gas Processing
+  'fc-water-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/WaterExplorer')),
+  'fc-absorber-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/AbsorberExplorer')),
+  'fc-coldend-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/ColdEndExplorer')),
   // FC5 Relief & Flare Systems
   'fc-sizing-explorer': React.lazy(() => import('@/components/course/panels/relief/SizingExplorer')),
   'fc-fire-drum-explorer': React.lazy(() => import('@/components/course/panels/relief/FireDrumExplorer')),

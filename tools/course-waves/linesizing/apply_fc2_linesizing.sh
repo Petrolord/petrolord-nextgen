@@ -72,6 +72,28 @@ REF=${REF:-origin/main}
 # The five files, and the sha256 of each one's content as merged. Reprint with
 # `pin <ref>` if a later PR legitimately changes a seed, and say in the commit
 # which PR moved it.
+#
+# RE-PINNED TWICE, and each time for one file.
+#
+# First for the precision PR, which moved `20260922_fc2_linesizing_course` and
+# nothing else. Two Expert tolerances were widened to the half-unit of the
+# precision this course prints those quantities at, because at the tighter
+# figure a learner quoting the wall to six decimals and the swept volume to
+# four was graded wrong for reading correctly: the required wall from 1e-8 to
+# 5e-7 and the swept volume from 1e-5 to 5e-5.
+#
+# Then for the hours-convention PR, which moved
+# `20260922_fc2_linesizing_advanced_deep` and nothing else. The Expert m06
+# question on the capstone conventions keyed an answer saying hours print to
+# four decimals where the page prints six, so a reader who quoted the run hours
+# as that question instructed failed a graded field. The question is re-keyed to
+# the convention the digest states. No graded value and no tolerance moved, so
+# the course migration is unchanged, and the digest and fields.json reproduce
+# byte for byte and keep their pins in tools/course-waves/waves.json.
+#
+# Production carried no `linesizing` row, 0 structures, 0 questions, 0 capstones
+# and 0 graded fields on both occasions, so the migration content could move in
+# place and no correction migration is needed.
 FILES="
 20260922_fc2_linesizing_course
 20260922_fc2_linesizing_beginner_deep
@@ -81,10 +103,10 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20260922_fc2_linesizing_course              ) echo 520333b80dbb31de101ad11fe42c6dee15f4a887343bf035dd50b5303bcf35a6 ;;
+    20260922_fc2_linesizing_course              ) echo 9a53c2c98aa7364fcbf7e526a659fa11464b227918b06d3f9af75068e8d5a28f ;;
     20260922_fc2_linesizing_beginner_deep       ) echo 6f7ffaf71a9b0df1f5954b8ad0fa73c87fd9aa6f668b691166cd19c648aa9588 ;;
     20260922_fc2_linesizing_intermediate_deep   ) echo 887474ce014bf3519831eff288ee11643614c1bc469c200844192fdba5d619dd ;;
-    20260922_fc2_linesizing_advanced_deep       ) echo 31c494acd0c6c131337fb66128b03aa3fe4bee5bc9878661a50e9c2ce249ee23 ;;
+    20260922_fc2_linesizing_advanced_deep       ) echo 0fcbcbf3ca0050683c6e19c9a81004603bd1c8669de973b43a7c9d4d13554029 ;;
     20260922_fc2_linesizing_go_live             ) echo 3c3eab336ab0354b0939f866f9f0b263bc86e59adf04960d75b6d8e3d0e5be97 ;;
     *) echo UNPINNED ;;
   esac

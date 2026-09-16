@@ -1,0 +1,38 @@
+-- ============================================================================
+-- FC4 EXPERT DEEP SEED: Gas Processing, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE COLD END, THE OVERHEAD, AND WHERE THE METHOD STOPS.
+-- Dew point control by expansion; marching a pressure drop rather than taking
+-- one step across it; the cold separator; the still overhead nobody sells; what
+-- was computed, what was chosen and what was kept; and the reading.
+--
+-- THE ENGINE FACT THIS TIER OWNS. This is the only module in the package that
+-- COMPUTES a Joule-Thomson coefficient. The Flow Assurance engine asks a caller
+-- to type one in, and the still overhead is the only emissions figure the
+-- Facilities engines produce at all. Both are taught as what the rest of the
+-- platform hands to this engine and to nobody else.
+--
+-- THE TRAP THE TIER IS BUILT ON. A coefficient evaluated at the inlet and
+-- applied across the whole let-down is not the drop. The engine marches the
+-- expansion, and the march and the one-step answer differ by an amount that
+-- grows with the size of the let-down, which is exactly where a reader's
+-- intuition is weakest.
+--
+-- SECTION 20 OF THE DIGEST IS HISTORY AND IS FRAMED AS HISTORY. Expert m05 l01
+-- owns it. Before the FC4-0 repair the Joule-Thomson routine divided by a
+-- compressibility the relation does not carry; the discrepancy was nothing in
+-- the ideal-gas limit and grew with pressure, so it was smallest exactly where
+-- a sanity check is easiest. Every prompt that touches it says it is history.
+--
+-- HELD FOR LITERATURE, taught as a limit and never graded in any tier: the
+-- McKetta and Wehe real-gas correction, the water overhead the reboiler pays
+-- for, the amine contactor's liquid density, the customary amine duty per
+-- gallon, and the BTEX absorbed fraction and molecular weight. ESCRAVOS lets
+-- down from BELOW the pressure the engine warns at, so neither of its two
+-- graded water contents leans on the held chart correction, and its conditions
+-- sit on no published case.
+-- ============================================================================

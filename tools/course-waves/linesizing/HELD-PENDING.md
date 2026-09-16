@@ -84,3 +84,144 @@ and refused, naming the one file that moved and leaving the other four alone.
 It has since been re-pinned with `pin HEAD`.
 
 NOTHING IS OUTSTANDING FROM THIS PASS.
+
+
+## THE PRECISION CHECK ITSELF, 2026-09-16 (the gradeprecision close-out)
+
+The item above closed two tolerances. It did not close the CHECK. Run again
+once `gradeprecision.py` had been repaired to print `N OF M CLASSIFIED` and to
+REFUSE when N is not M, FC2 came back at **7 of 18**: eleven graded tolerances
+had never been examined at all, because the gate classifies a field by matching
+its KEY against the digest header's English and eleven of these keys carry none
+of those words. Seven checks had been standing in for eighteen, and the run
+before the repair exited 0.
+
+WHAT WAS DONE. `fc2_capstone.mjs` now carries one table of what this course
+prints at what precision, keyed by quantity class, with the digest evidence for
+each line beside it, and a `FIELD_CLASS` map putting each of the eighteen in
+one class. Each number was read off the digest and confirmed twice, by the
+header sentence a learner reads and by the formatter in `fc2_dump.mjs` that
+produced the page. `precision.json` is GENERATED from that table, in the shape
+the gate reads, so the gate and the grader cannot disagree: there is one
+statement of the precision, not two. The gate now reports 18 OF 18 CLASSIFIED
+and exits 0.
+
+THE RULE, unchanged and applied to all eighteen rather than to two:
+`tol = max(stated, halfUlp(printed decimals of that class))`, MAX AND NEVER
+MIN, so it can only widen and nothing that graded correct before can grade
+wrong now. TWO MORE MOVED, both Expert, both the same defect the item above
+closed for hours and days:
+
+    quaiboe_required_wall_in   1e-8 -> 5e-7   inches print to six decimals, so
+                                              0.462362 is 1.17e-7 out, 11.7
+                                              tolerances, and a reader doing
+                                              exactly as told FAILED
+    quaiboe_swept_volume_bbl   1e-5 -> 5e-5   barrels print to four decimals,
+                                              so 2342.7305 is 2.17e-5 out,
+                                              2.2 tolerances
+
+The other sixteen did not move. `--bare-stated-tolerances` on the generator is
+the negative control: it grades against the stated figures alone and must name
+all four fields and exit 1.
+
+THE LADDER was recut and re-pinned for the one migration whose content moved,
+`20260922_fc2_linesizing_course` at 9a53c2c9. Both collision sweeps were re-run
+AT THE WIDER TOLERANCES, because widening can reveal a collision a tighter
+tolerance hid: 0 against the 46 published headline figures, 0 against the 9
+held quantities, 0 against the 37 numbers handed to a learner in a prompt, 0
+pairwise, 0 cross-tier. The whole five-migration ladder then ran against
+production inside one rolled-back transaction and every assertion passed, with
+production re-read afterwards and unchanged. `dryrun_fc2.sh` now carries the
+negative control that proves it: `NEGATIVE_CONTROL=1` widens the Expert MAOP
+band to 50 psi, which puts the graded 1586.484375 psig within its own band of
+the 1633.5349 the digest publishes, and the go-live refuses BY NAME.
+
+THE SEED WAS NOT APPLIED when this landed. Production was read: no `linesizing`
+row in `academy_apps`, 0 structures, 0 questions, 0 capstones, 0 graded fields,
+catalogue 44 available and 0 coming_soon. So no learner had ever been graded
+against either tolerance, the migration content could move in place, and no
+correction migration is needed. An owner apply of the re-pinned ladder is what
+puts the answerable tolerances on production.
+
+## TWO THINGS FOUND HERE AND DELIBERATELY NOT FIXED
+
+ITEM A. HOURS PRINT TO SIX DECIMALS AND TWO PLACES SAY FOUR. The digest header
+and every hours call site in `fc2_dump.mjs` agree on six: 2.444444 hours,
+1.666667 h. The comment on `r4` in the dump lists hours among the four-decimal
+quantities, and the Expert m06 question on the capstone conventions carries the
+same claim in its keyed answer and in its explanation. Neither is a tolerance,
+and a graded value and a question are both out of scope for a precision pass,
+so both are recorded rather than touched. The tolerance was derived from what
+the page prints, which is six, and that is the figure that protects a learner.
+A reader who quotes the pig run to four decimals as that question tells them to
+is 6.7e-5 out against a 5e-7 band and fails. THAT IS A LIVE DEFECT IN A KEYED
+ANSWER and it needs the question re-keyed or the convention restated.
+
+ITEM B. TEN OF THE TWENTY-ONE BANK SOURCES NO LONGER REPRODUCE THEIR JSON.
+`bankrepro.py` on the wave directory: fc2a_exam (9 questions), fc2a_m02,
+fc2a_m04, fc2a_m05, fc2i_exam, fc2i_m01, fc2i_m02, fc2i_m03, fc2i_m04,
+fc2i_m06. The JSON was edited without its `.py`, so the next re-emit reverts
+those edits silently. The shipped SQL is correct: `verify_sql.py` compares all
+396 migration rows against the committed JSON field for field and AGREES, so
+nothing a learner sees is wrong today. It is the SOURCE that is stale, and the
+hazard is the next person who regenerates a bank.
+
+
+## BOTH OF THOSE TWO ARE NOW CLOSED, 2026-09-16
+
+ITEM A, THE HOURS CONVENTION. The repair chosen was to make every statement of
+the convention say what the page prints, which is SIX decimals for hours, and
+to re-key the one question that said four. Restating the course to four was the
+alternative and it was rejected: hours are printed at six by every call site in
+`fc2_dump.mjs`, the digest header already says six, and
+`quaiboe_pig_run_hours` is graded at the half-unit of six places, so moving the
+convention to four would have meant reprinting a column, re-deriving a
+tolerance and re-sweeping 78 lessons to gain nothing.
+
+The digest did NOT move. It already stated the convention correctly on line 2,
+so `digest.txt` and `fields.json` reproduce byte for byte and their pins in
+`tools/course-waves/waves.json` are untouched. Five places moved:
+
+  * `fc2_dump.mjs`, the `r4` comment, which listed hours among the four-decimal
+    quantities. Its `e6` neighbour listed friction factors, which print at ten;
+    `e6` prints the B31.8 location-class design factors. Both comments now name
+    what they format.
+  * the Expert capstone lesson, `advanced/m06-the-expert-reading/
+    l02-working-the-capstone.md`, which said "Barrels, hours and days print to
+    four". NOBODY HAD REPORTED THIS ONE and it is the worst of the five,
+    because it is the sentence a learner reads immediately before working the
+    graded fields. It now states the six-decimal run time and gives the OGBIA
+    figures for all three quantities.
+  * the Expert m06 keyed answer, which is now the true convention.
+  * the m06 explanation, which now names 2.444444 hours.
+  * `fc2_capstone.mjs`, whose recorded disagreement is no longer a
+    disagreement.
+
+Barrels and days were checked with the same care and they were right
+everywhere: `r4` at every call site, four decimals in the digest header, four
+in the Expert lesson, four in the m06 key and four in the Expert exam question
+on the swept volume. Only hours were ever wrong.
+
+ITEM B, THE TEN BANK SOURCES. The edits were in the REPOSITORY copies all
+along. `tools/course-banks/linesizing/` held the repaired `.py` for all ten,
+because the audit's writer edited the committed source and ran it, and a bank
+source writes its JSON into THIS directory whatever tree it is run from. So the
+wave directory kept the pre-audit sources and the wave directory is what
+`bankrepro.py` was pointed at. The ten wave sources were brought up to the
+committed ones and all 21 now reproduce. The JSON was never regenerated from a
+stale source, so no repair was lost.
+
+THE GUARD. `tools/course-banks/check-bank-sources.py` runs every committed bank
+source in the repository and compares the BYTES it writes with the bytes
+committed beside it, and CI runs it on every pull request. It refuses on an
+empty tree, on a wave with no pairs, and on a `.json` or a `.py` with no
+partner; a source that will not run is a failure and not a skip. Its selftest
+plants a key repaired in the JSON alone and a re-indented JSON and proves both
+are caught. It compares clean over every wave committed here, which was 63
+pairs and 1188 questions for FC1 to FC3 and is 84 pairs and 1584 questions once
+FC4 landed, and that is the same verdict `bankrepro.py` reaches with the wave
+kit's own `bankkit`.
+
+`gen_seeds.sh` took its repository path from a hardcoded worktree, so a run
+from any other worktree cut the seeds out of a tree the caller was not working
+in. It now reads `REPO` and keeps that path as the default.

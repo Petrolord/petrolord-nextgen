@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Six answers are reported on OBIAFU. Which of them did not come through the water chain at all?",
+  "options": [
+   "The circulation of 6.399830 gpm and the reboiler duty of 0.697269 MMBtu an hour, which are sizes.",
+   "The water content of 53.450380 lb per MMscf and the load of 46.450380 lb per MMscf.",
+   "The contactor diameter of 3.192661 ft and the 74.065024 short tons of aromatics a year.",
+   "The 9215.7553 gallons a day and the duty per gallon of 1815.8525 Btu."
+  ],
+  "answer": 2,
+  "explanation": "One belongs to a vessel calculation and the other to a mole balance, and both are taught in later tiers. Everything else on the reading is a step of the chain or the rate applied to one."
+ },
+ {
+  "prompt": "The gas pressure alone moves and nothing else on the sheet changes. Which of the six answers is the one that cares about pressure for a reason other than how wet the gas is?",
+  "options": [
+   "The contactor diameter, which is sized on what the gas weighs and how fast it may rise.",
+   "The reboiler duty, which is charged on gallons and the gallons follow the pressure through the loop.",
+   "The duty per gallon, which carries the still and absorber temperatures.",
+   "The circulation, which the line conditions reach directly."
+  ],
+  "answer": 0,
+  "explanation": "Pressure reaches the water chain through the inlet content and nowhere else. The vessel is sized by what the gas weighs, which is a question the water chain never asked."
+ },
+ {
+  "prompt": "What is the practical use of sorting the six answers into properties, sizes and the vessel figure?",
+  "options": [
+   "It says which of the six the engine computed and which of them a person typed in.",
+   "It says which of the six the published TEG cases cover and which have no golden behind them.",
+   "It says which of the six carry a warning at OBIAFU's conditions and which come back clean.",
+   "It says which figures to re-derive when the rate moves, which to leave alone, and which to check against a separate method."
+  ],
+  "answer": 3,
+  "explanation": "Six figures on a data sheet arrive in the same font in the same table, and nothing on the page says that two are properties, three are sizes and one belongs to a different calculation."
+ },
+ {
+  "prompt": "Step one of the worked reading takes 950.000000 psia and 104.000000 degF to 53.450380 lb per MMscf. Which constants did it consume?",
+  "options": [
+   "The three Magnus coefficients, the gallons in a cubic foot and the glycol density of 9.300000 lb a gallon.",
+   "The three Magnus coefficients, the standard base of 14.696000 psia and 519.670000 degR, and the molecular weight of water.",
+   "The standard base, the 1440.000000000 minutes in a day and the molecular weight of water.",
+   "The Rankine offset of 459.670000 degR alone, since the fit is written on the absolute scale."
+  ],
+  "answer": 1,
+  "explanation": "The coefficients give the vapour pressure, the standard base gives the standard cubic feet a pound mole of 379.483571856287, and 18.015280 turns a share of moles into pounds."
+ },
+ {
+  "prompt": "Step two takes the content to a load of 46.450380 lb per MMscf. What did that step consume?",
+  "options": [
+   "The gas rate of 62.000000 MMscfd, which is what makes a content into a load.",
+   "The circulation ratio of 3.200000 gal per lb, which is what the spec is applied through.",
+   "No constant at all, and no rate has been mentioned yet.",
+   "The molecular weight of water."
+  ],
+  "answer": 2,
+  "explanation": "A contract allows 7.000000 lb per MMscf out, and the load is one subtraction. The rate arrives at the next step and the ratio at the one after that."
+ },
+ {
+  "prompt": "Step three multiplies the load by 62.000000 MMscfd to give 2879.9235 lb a day. What changed about the answer at that step?",
+  "options": [
+   "It stopped being a property of the gas and became a property of the plant.",
+   "It stopped being a mole figure and became a mass, since the rate is what carries the pound mole into it.",
+   "It stopped being a design choice and became a computed result, since the rate is given to the plant rather than chosen.",
+   "It stopped being intensive and became a ratio."
+  ],
+  "answer": 0,
+  "explanation": "One multiplication, and the answer scales with how much gas there is from that point down. Everything above the step is per MMscf and knows nothing about the rate."
+ },
+ {
+  "prompt": "Step four turns 2879.9235 lb a day into 6.399830 gpm. Which figure in that step came from a person?",
+  "options": [
+   "The 9215.7553 gallons a day, read off the loop the plant actually runs.",
+   "The 1440.000000000 minutes in a day, which the module declares under a name.",
+   "The 6.399830 gpm itself.",
+   "The circulation ratio of 3.200000 gal of glycol per lb of water."
+  ],
+  "answer": 3,
+  "explanation": "The load came from the contract and the conditions, and the minutes in a day were measured out of the engine. The ratio is the one number here that somebody chose."
+ },
+ {
+  "prompt": "Step five consumes two constants that no publication in this repository stands behind. Which two?",
+  "options": [
+   "The standard cubic feet a pound mole and the molecular weight of water.",
+   "The glycol at 9.300000 lb a gallon and the still overhead at 1100.000000 Btu a lb.",
+   "The minutes in a day and the group factor.",
+   "The gallons in a cubic foot of 7.480519480519 and the Rankine offset of 459.670000 degR."
+  ],
+  "answer": 1,
+  "explanation": "Both are declared, and the step spends them on the two halves of the duty. The measured and derived figures in the reading belong to steps one, four and six."
+ },
+ {
+  "prompt": "Step six takes 9215.7553 gallons a day at 1815.8525 Btu a gallon to 0.697269 MMBtu an hour. What stands between them?",
+  "options": [
+   "The 1440.000000000 minutes in a day.",
+   "The gallons in a cubic foot, 7.480519480519.",
+   "The group factor of 24000000.",
+   "The sensible share of 0.763369."
+  ],
+  "answer": 2,
+  "explanation": "The group carries the hours in a day and the Btu in a MMBtu together, because this module never uses the two separately and nothing outside it can pull them apart."
+ },
+ {
+  "prompt": "Two conversions appear in the worked reading, one at step four and one at step six. Which is which?",
+  "options": [
+   "1440.000000000 at step four and 24000000 at step six.",
+   "24000000 at step four and then 1440.000000000 at step six.",
+   "1440.000000000 at both of them, once on the gallons and once on the Btu.",
+   "7.480519480519 at step four and then 24000000 at step six."
+  ],
+  "answer": 0,
+  "explanation": "The minutes in a day turn gallons a day into gallons a minute. The group factor turns a Btu a day into MMBtu an hour, and they sit two steps apart in the chain."
+ },
+ {
+  "prompt": "A declared constant is simply the wrong number, and a measured one is exported under a name the engine does not use for it. How would each show up?",
+  "options": [
+   "The measured one shows up in the published cases, and the declared one as a ratio away from 1.000000000000.",
+   "The measured one shows up as a ratio away from 1.000000000000, and the declared one shows up nowhere at all.",
+   "Both show up as a ratio away from 1.000000000000, since a constant is measured under the name it is declared with.",
+   "The measured one shows up nowhere, since it was read out of the engine, and the declared one in the goldens."
+  ],
+  "answer": 1,
+  "explanation": "A measurement compares the name on the page with the number in use, so a mismatch is exactly what it catches. A declared value that is the wrong number has no publication in this repository to check it against, and pinning it only makes a change to it a reviewed act."
+ },
+ {
+  "prompt": "The next tier reads one contactor three separate ways. Which three?",
+  "options": [
+   "As a staged device, as a heat balance, and as a vessel to size.",
+   "As a mole balance, as a water balance, and as a dew point chart.",
+   "As a staged device, as a mole balance, and as a hydrate margin.",
+   "As a staged device, as a mole balance, and as a vessel."
+  ],
+  "answer": 3,
+  "explanation": "The mole balance says how much solution has to move. The stage relation says whether the spec is reachable. The vessel says how wide the steel has to be, and not one of the three derives from the other two."
+ },
+ {
+  "prompt": "The Professional tier introduces a limit that nothing in the Associate tier prepares a reader for. What is it?",
+  "options": [
+   "A duty the reboiler cannot pass however hot the still is run, whose remedy is a lower circulation ratio.",
+   "A width the contactor cannot pass however fast the gas rises, whose remedy is a second column in parallel.",
+   "A removal the column cannot pass however many stages are added, whose remedy is more solvent rather than more steel.",
+   "A spec the loop cannot pass however strong the lean solution is, whose remedy is a colder gas at the inlet."
+  ],
+  "answer": 2,
+  "explanation": "In the water chain, tightening the spec always worked and an answer always came back. A staged column has a ceiling in it, and the engine says so rather than returning a number nobody can reach."
+ },
+ {
+  "prompt": "UBIE goes to the Professional tier as a mole balance, at 10666.2009 lbmol of acid gas a day. What does that route have in common with the glycol chain?",
+  "options": [
+   "Nothing in the method. There is no water content in it, no circulation ratio, and the solvent comes from a property table.",
+   "The circulation ratio, which is what turns either pickup into a solution rate in gpm.",
+   "The saturation step, which fixes what the gas carries before either spec is applied to it.",
+   "The duty a gallon, which both loops assemble from a sensible term and an overhead term."
+  ],
+  "answer": 0,
+  "explanation": "Both end at a circulation and a duty, and the methods that reach them have nothing in common. The amine duty a gallon is a stated figure rather than one assembled from named parts, and the solvent is chosen from a published property table."
+ },
+ {
+  "prompt": "What does this course ask at every tier, with only the answers changing?",
+  "options": [
+   "Which number the published cases cover, which one the golden reaches by a second road, and which one nothing checks.",
+   "Which number the engine computed, which one you chose, and which one it kept to itself.",
+   "Which number is intensive, which is extensive, and which belongs to a vessel.",
+   "Which number the studio prints, which one the digest prints, and which one only the engine holds."
+  ],
+  "answer": 1,
+  "explanation": "The discipline is the reason the water chain came first. The three questions are the same on a Kremser removal and on a Joule-Thomson coefficient as on a circulation in gpm."
+ }
+]
