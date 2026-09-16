@@ -27,9 +27,9 @@ Five of these come from feet_20.las and one comes from irregular_20.las. The tol
 | depth step converted | 0.609619140625 m | 0.001 |
 | curves unit-converted | 2 | 0, must be exact |
 | curve kinds recognised | 4 | 0, must be exact |
-| irregular_20 has a uniform step | 0, meaning no | 0 |
+| irregular_20 depth samples | 121 | 0, must be exact |
 
-Notice the shape of that table. The first three are continuous quantities with a tolerance, so an answer close enough passes and the interesting question is what "close enough" means. The last three are counts and verdicts with no tolerance at all, so an answer that is one off fails outright, and the interesting question is what a careful reader miscounts.
+Notice the shape of that table. The first three are continuous quantities with a tolerance, so an answer close enough passes and the interesting question is what "close enough" means. The last three are counts with no tolerance at all, so an answer that is one off fails outright, and the interesting question is what a careful reader miscounts.
 
 Both halves have a trap in them, and both traps are worth naming now.
 
@@ -49,6 +49,6 @@ The panel below runs the import pipeline on any of the six teaching files and re
 
 ## Exercise
 
-Open the panel on feet_20.las and locate all five of its readings, then open it on irregular_20.las and locate the sixth. For each reading, write one sentence naming the module that will explain it and one sentence saying what you would have to believe to get it wrong. Then answer this without looking: which two of the six are graded with no tolerance at all because they are counts, and which one is graded with no tolerance because it is a verdict.
+Open the panel on feet_20.las and locate all five of its readings, then open it on irregular_20.las and locate the sixth. For each reading, write one sentence naming the module that will explain it and one sentence saying what you would have to believe to get it wrong. Then answer this without looking: which three of the six are graded with no tolerance at all, and what those three have in common.
 
-Self-check: the counts with no tolerance are the two curves unit-converted and the four curve kinds recognised, and the verdict with no tolerance is whether irregular_20 has a uniform step, which is 0 meaning no. To get the converted count wrong you have to believe unit conversion is a property of the depth column alone; to get the kind count wrong you have to believe the index curve is a measurement like the others; to get the uniformity verdict wrong you have to believe an average step is evidence about the interior of a depth column.
+Self-check: the three with no tolerance are the two curves unit-converted, the four curve kinds recognised and the 121 depth samples in irregular_20. All three are counts, and a count is right or it is wrong. To get the converted count wrong you have to believe unit conversion is a property of the depth column alone; to get the kind count wrong you have to believe the index curve is a measurement like the others; and to get the sample count wrong you have to have opened the wrong file, since irregular_20 is the only one of the six whose reading this tier takes.
