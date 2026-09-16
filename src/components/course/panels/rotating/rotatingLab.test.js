@@ -232,13 +232,13 @@ const buildDigest = () => {
   w();
   w('A curve that RISES with flow is not a centrifugal head curve, so where it crosses a system curve is not a duty point:');
   w(`- ${soft(s3.risingRefusal)}`);
-  w('That is the `droops` flag of Section 2 being read. The fit and the duty are two halves of one module, they used to disagree about the same curve, and the trusting half was the bug.');
+  w('That is the `droops` flag of Section 2 being read. The fit and the duty are two halves of one module asked about the same curve, and the flag is how the half that judges the shape tells the half that solves on it. Two halves of one module that answer differently about one curve are a module contradicting itself, and the half that trusts is the one to doubt.');
   w();
   w('The two refusals that are real answers rather than hidden errors:');
   w(`- a system the pump cannot start: ${soft(s3.tooHigh.error)}`);
   w(`  it hands back the evidence: shutoff head ${e6(s3.tooHigh.shutoffHeadFt)} ft against a system static head of ${e6(s3.tooHigh.systemStaticHeadFt)} ft (engine). The gap is ${e6(s3.tooHigh.gapDerivedFt)} ft (derived from the two figures on this line).`);
   w(`- a search limit set below the crossing: ${soft(s3.searchLimitRefusal)}`);
-  w('  That one is a question about the search, not about the machine, and the message says which.');
+  w('  That one is a question about the search rather than about the machine, and the message says which.');
   w();
 
   // Section 4
@@ -356,7 +356,7 @@ const buildDigest = () => {
   w(`- the lower end, walked up from a ratio of ${e6(s8.bandLowFrom)}: ${n(s8.bandLow, 12)}`);
   w(`- the upper end, walked down from a ratio of ${e6(s8.bandHighFrom)}: ${n(s8.bandHigh, 12)}`);
   w(`- at a ratio of ${e6(s8.farRatio)} the laws still apply, and the engine still applies them: ${e6(s8.far.qGpm)} gpm, ${e6(s8.far.headFt)} ft, ${e6(s8.far.brakeHp)} brake hp, with "${s8.far.warning}"`);
-  w('That band is a SANITY BOUND and not a published correlation limit. No publication in this repository says where the affinity laws stop describing a real machine, so the two ends above are a judgement about when a reader should be told to think, not a measurement of where the physics fails. It is warned on and never used to refuse, and nothing computed from it decides a value.');
+  w('That band is a SANITY BOUND rather than a published correlation limit. No publication in this repository says where the affinity laws stop describing a real machine, so the two ends above are a judgement about when a reader should be told to think rather than a measurement of where the physics fails. It is warned on and never used to refuse, and nothing computed from it decides a value.');
   w();
   w('An impeller trim, which does not:');
   w('| trim ratio | trim percent | ideal flow gpm | real flow gpm | ideal head ft | real head ft | shortfall percent | brake hp | implied efficiency ratio | warning |');
@@ -461,12 +461,12 @@ const buildDigest = () => {
   w(`- compressibility note: ${q(s11.zNote)}`);
   w(`- warning: ${q(s11.warning)}`);
   w();
-  w('THE HOT-STAGE WARNING FIRES ON THE LIMIT THE CALLER STATED, not on a threshold written into the module. The same stage against four different stated limits, everything else held:');
+  w('THE HOT-STAGE WARNING FIRES ON THE LIMIT THE CALLER STATED, rather than on a threshold written into the module. The same stage against four different stated limits, everything else held:');
   w('| stated limit degF | discharge degF | warned | the warning |');
   w('| --- | --- | --- | --- |');
   s11.statedLimits.forEach((r) => w(`| ${r4(r.statedLimitF)} | ${r4(r.tDischargeF)} | ${r.warned} | ${q(r.warning)} |`));
   w(`The discharge on all four rows is the same ${r4(s11.tDischargeF)} degF, because the limit is a limit and not an input to the thermodynamics.`);
-  w(`THE DEFAULT IS MEASURED, not typed. With no limit stated the warning turns on between a ratio of ${s11.defaultBracket.lowRatio} and ${s11.defaultBracket.highRatio}, and the discharge temperatures either side of that crossing are ${s11.defaultBracket.lowDischargeF} and ${s11.defaultBracket.highDischargeF} degF (engine), which brackets the default the engine applies when the caller states none. That default is a customary figure with no publication behind it in this repository.`);
+  w(`THE DEFAULT IS MEASURED RATHER THAN TYPED. With no limit stated the warning turns on between a ratio of ${s11.defaultBracket.lowRatio} and ${s11.defaultBracket.highRatio}, and the discharge temperatures either side of that crossing are ${s11.defaultBracket.lowDischargeF} and ${s11.defaultBracket.highDischargeF} degF (engine), which brackets the default the engine applies when the caller states none. That default is a customary figure with no publication behind it in this repository.`);
   w();
   w('THE TWO POWER ROUTES AGREE BECAUSE THEY ARE THE SAME EXPRESSION, which is worth showing rather than admiring. The exponent ratio times the polytropic efficiency is the isentropic exponent ratio, exactly, for every pair:');
   w('| k | polytropic efficiency | exponent ratio | times the efficiency | the isentropic exponent ratio | difference |');
@@ -521,7 +521,7 @@ const buildDigest = () => {
   w(`- the inlet it was measured from: ${r4(s12.cap.hottestInletF)} degF (engine)`);
   w(`- the overall ratio it was working on: ${f9(s12.cap.overallRatio)} (engine)`);
   w(`The gap between the coolest reachable discharge and the stated limit is ${r4(s12.cap.gapDerivedF)} degF (derived from the two rows above), which is what tells a reader whether it is the approach or the limit that is impossible rather than sending them off to intercool harder.`);
-  w('That sentence used to be the answer to four unrelated faults as well as this one. Section 15 shows each of those four refused by name instead.');
+  w('Section 15 puts four other faults that reach this same function beside the refusal that names each of them, so a refusal here means the twelve-stage cap and not one of those four.');
   w();
 
   // Section 13
@@ -619,10 +619,10 @@ const buildDigest = () => {
   w('EVERY REFUSAL IS A RETURNED OBJECT CARRYING AN `error` STRING, and it names the input that is actually wrong. Neither module throws. A caller checks a property rather than catching, and the property it checks is the only check most callers make, which is why a non-finite value slipped past it is worse than no guard at all.');
   w('Note on reading these: a NaN and an Infinity have no spelling in JSON and both come out as null through JSON.stringify. The lines below are printed by a hand-rolled serialiser for that reason, so they say NaN and Infinity where the engine returned them.');
   w();
-  w('The pump module, on the inputs that used to come back as a number instead:');
+  w('The pump module, on the inputs where handing back a number rather than a refusal would be the dangerous answer:');
   s15.pumpProbes.forEach((r) => w(`- ${r.label}: ${shape(r.shape)}`));
   w(`- a system curve with no static head: ${shape(s15.systemNoStatic)}`);
-  w('  That one was the sharpest of the set: the object looked healthy, the coefficient was right, and the failure only appeared when the curve was called. A static head may be NEGATIVE, because the destination can sit below the pump, so the guard is finiteness and not positivity, and the message says so.');
+  w('  That one is the sharpest of the set: a curve object can look healthy and carry a correct coefficient while the function hanging off it is unusable, so this guard catches at construction what would otherwise surface only at the call. A static head may be NEGATIVE, because the destination can sit below the pump, so the guard is finiteness and not positivity, and the message says so.');
   w();
   w('The compression module, the same way:');
   s15.compressionProbes.forEach((r) => w(`- ${r.label}: ${shape(r.shape)}`));

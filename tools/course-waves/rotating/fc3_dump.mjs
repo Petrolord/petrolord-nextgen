@@ -316,14 +316,14 @@ w('| --- | --- | --- |');
 w();
 w('A curve that RISES with flow is not a centrifugal head curve, so where it crosses a system curve is not a duty point:');
 w(`- ${soft(P.dutyPoint({ pump: NOT_FIT, system: OK_SYS, qMaxGpm: OKONO_Q_MAX_GPM }))}`);
-w('That is the `droops` flag of Section 2 being read. The fit and the duty are two halves of one module, they used to disagree about the same curve, and the trusting half was the bug.');
+w('That is the `droops` flag of Section 2 being read. The fit and the duty are two halves of one module asked about the same curve, and the flag is how the half that judges the shape tells the half that solves on it. Two halves of one module that answer differently about one curve are a module contradicting itself, and the half that trusts is the one to doubt.');
 w();
 w('The two refusals that are real answers rather than hidden errors:');
 const TOO_HIGH = P.dutyPoint({ pump: OK_CURVE, system: P.systemCurve(OKONO_TOO_HIGH_SYSTEM), qMaxGpm: OKONO_Q_MAX_GPM });
 w(`- a system the pump cannot start: ${soft(TOO_HIGH)}`);
 w(`  it hands back the evidence: shutoff head ${e6(TOO_HIGH.shutoffHeadFt)} ft against a system static head of ${e6(TOO_HIGH.systemStaticHeadFt)} ft (engine). The gap is ${e6(TOO_HIGH.systemStaticHeadFt - TOO_HIGH.shutoffHeadFt)} ft (derived from the two figures on this line).`);
 w(`- a search limit set below the crossing: ${soft(P.dutyPoint({ pump: OK_CURVE, system: OK_SYS, qMaxGpm: 200 }))}`);
-w('  That one is a question about the search, not about the machine, and the message says which.');
+w('  That one is a question about the search rather than about the machine, and the message says which.');
 w();
 
 // ---------------------------------------------------------------- SECTION 4
@@ -498,7 +498,7 @@ w(`- the lower end, walked up from a ratio of ${e6(0.01)}: ${n(speedEdge(0.01, 1
 w(`- the upper end, walked down from a ratio of ${e6(5)}: ${n(speedEdge(5, 1), 12)}`);
 const FAR_SPEED = P.speedChange({ qGpm: OK_DUTY.qGpm, headFt: OK_DUTY.headFt, brakeHp: OK_POWER.brakeHp, speedRatio: 100 });
 w(`- at a ratio of ${e6(100)} the laws still apply, and the engine still applies them: ${e6(FAR_SPEED.qGpm)} gpm, ${e6(FAR_SPEED.headFt)} ft, ${e6(FAR_SPEED.brakeHp)} brake hp, with "${FAR_SPEED.warning}"`);
-w('That band is a SANITY BOUND and not a published correlation limit. No publication in this repository says where the affinity laws stop describing a real machine, so the two ends above are a judgement about when a reader should be told to think, not a measurement of where the physics fails. It is warned on and never used to refuse, and nothing computed from it decides a value.');
+w('That band is a SANITY BOUND rather than a published correlation limit. No publication in this repository says where the affinity laws stop describing a real machine, so the two ends above are a judgement about when a reader should be told to think rather than a measurement of where the physics fails. It is warned on and never used to refuse, and nothing computed from it decides a value.');
 w();
 w('An impeller trim, which does not:');
 w('| trim ratio | trim percent | ideal flow gpm | real flow gpm | ideal head ft | real head ft | shortfall percent | brake hp | implied efficiency ratio | warning |');
@@ -667,7 +667,7 @@ w(`- brake horsepower ${r4(SOKU_ST.brakeHp)} at a mechanical efficiency of ${e6(
 w(`- compressibility note: ${SOKU_ST.zNote === null ? 'null' : `"${SOKU_ST.zNote}"`}`);
 w(`- warning: ${SOKU_ST.warning === null ? 'null' : `"${SOKU_ST.warning}"`}`);
 w();
-w('THE HOT-STAGE WARNING FIRES ON THE LIMIT THE CALLER STATED, not on a threshold written into the module. The same stage against four different stated limits, everything else held:');
+w('THE HOT-STAGE WARNING FIRES ON THE LIMIT THE CALLER STATED, rather than on a threshold written into the module. The same stage against four different stated limits, everything else held:');
 w('| stated limit degF | discharge degF | warned | the warning |');
 w('| --- | --- | --- | --- |');
 [200, 250, 300, 400].forEach((lim) => {
@@ -685,7 +685,7 @@ for (let i = 0; i < 200; i += 1) {
   if (mid === dlo || mid === dhi) break;
   if (warnsAt(mid)) dhi = mid; else dlo = mid;
 }
-w(`THE DEFAULT IS MEASURED, not typed. With no limit stated the warning turns on between a ratio of ${dlo} and ${dhi}, and the discharge temperatures either side of that crossing are ${C.compressionStage({ ...SOKU_STAGE, ratio: dlo, maxDischargeF: undefined }).tDischargeF} and ${C.compressionStage({ ...SOKU_STAGE, ratio: dhi, maxDischargeF: undefined }).tDischargeF} degF (engine), which brackets the default the engine applies when the caller states none. That default is a customary figure with no publication behind it in this repository.`);
+w(`THE DEFAULT IS MEASURED RATHER THAN TYPED. With no limit stated the warning turns on between a ratio of ${dlo} and ${dhi}, and the discharge temperatures either side of that crossing are ${C.compressionStage({ ...SOKU_STAGE, ratio: dlo, maxDischargeF: undefined }).tDischargeF} and ${C.compressionStage({ ...SOKU_STAGE, ratio: dhi, maxDischargeF: undefined }).tDischargeF} degF (engine), which brackets the default the engine applies when the caller states none. That default is a customary figure with no publication behind it in this repository.`);
 w();
 w('THE TWO POWER ROUTES AGREE BECAUSE THEY ARE THE SAME EXPRESSION, which is worth showing rather than admiring. The exponent ratio times the polytropic efficiency is the isentropic exponent ratio, exactly, for every pair:');
 w('| k | polytropic efficiency | exponent ratio | times the efficiency | the isentropic exponent ratio | difference |');
@@ -761,7 +761,7 @@ w(`- the limit it was measured against: ${r4(CAP_REFUSAL.maxDischargeF)} degF (e
 w(`- the inlet it was measured from: ${r4(CAP_REFUSAL.hottestInletF)} degF (engine)`);
 w(`- the overall ratio it was working on: ${f9(CAP_REFUSAL.overallRatio)} (engine)`);
 w(`The gap between the coolest reachable discharge and the stated limit is ${r4(CAP_REFUSAL.coolestReachedF - CAP_REFUSAL.maxDischargeF)} degF (derived from the two rows above), which is what tells a reader whether it is the approach or the limit that is impossible rather than sending them off to intercool harder.`);
-w('That sentence used to be the answer to four unrelated faults as well as this one. Section 15 shows each of those four refused by name instead.');
+w('Section 15 puts four other faults that reach this same function beside the refusal that names each of them, so a refusal here means the twelve-stage cap and not one of those four.');
 w();
 
 // --------------------------------------------------------------- SECTION 13
@@ -913,7 +913,7 @@ w();
 w('EVERY REFUSAL IS A RETURNED OBJECT CARRYING AN `error` STRING, and it names the input that is actually wrong. Neither module throws. A caller checks a property rather than catching, and the property it checks is the only check most callers make, which is why a non-finite value slipped past it is worse than no guard at all.');
 w('Note on reading these: a NaN and an Infinity have no spelling in JSON and both come out as null through JSON.stringify. The lines below are printed by a hand-rolled serialiser for that reason, so they say NaN and Infinity where the engine returned them.');
 w();
-w('The pump module, on the inputs that used to come back as a number instead:');
+w('The pump module, on the inputs where handing back a number rather than a refusal would be the dangerous answer:');
 UNGUARDED_PUMP_PROBES.forEach(([label, fn, inp]) => {
   let r;
   if (fn === 'combineParallelCount') r = P.combineParallel({ pump: OK_CURVE, n: inp.n });
@@ -922,7 +922,7 @@ UNGUARDED_PUMP_PROBES.forEach(([label, fn, inp]) => {
 });
 const SYS_NO_STATIC = P.systemCurve({ frictionHeadFt: 200, atFlowGpm: 1500 });
 w(`- a system curve with no static head: ${shape(SYS_NO_STATIC)}`);
-w('  That one was the sharpest of the set: the object looked healthy, the coefficient was right, and the failure only appeared when the curve was called. A static head may be NEGATIVE, because the destination can sit below the pump, so the guard is finiteness and not positivity, and the message says so.');
+w('  That one is the sharpest of the set: a curve object can look healthy and carry a correct coefficient while the function hanging off it is unusable, so this guard catches at construction what would otherwise surface only at the call. A static head may be NEGATIVE, because the destination can sit below the pump, so the guard is finiteness and not positivity, and the message says so.');
 w();
 w('The compression module, the same way:');
 UNGUARDED_COMPRESSION_PROBES.forEach(([label, fn, inp]) => {

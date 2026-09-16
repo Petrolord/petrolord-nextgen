@@ -12,7 +12,7 @@ The reason is algebra. The exponent ratio times the polytropic efficiency is the
 
 ## So the comparison cannot come out false
 
-The engine's own gate used to call the agreement of those two routes its strongest available check that neither head had been transcribed wrong. It is an algebraic identity. It holds for every input, including a transcribed one, and it validated nothing at all.
+It is tempting to read the agreement of those two routes as a strong check that neither head is transcribed wrong. It is an algebraic identity. It holds for every input, including one that is transcribed wrong, so it validates nothing at all.
 
 It is kept, and it is labelled as the shape property it is. A shape property is useful, because it says the two expressions really are the same expression and a refactor can break that. It just does not say that either of them is right.
 

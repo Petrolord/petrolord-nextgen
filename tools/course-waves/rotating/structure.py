@@ -191,13 +191,18 @@ if __name__ == '__main__':
                 key = (tier, mslug, lslug)
                 assert key not in seen, key
                 seen.add(key)
-                # Owner copy rule: no em dashes anywhere, in a module title or
-                # a lesson title. FC2 shipped one and the manifest fix did not
-                # reach the lesson text, so this is gated at the source.
+                # Owner copy rule: no em dash (U+2014), no EN DASH (U+2013)
+                # and no double hyphen, in a module title or a lesson title.
+                # FC2 shipped one and the manifest fix did not reach the lesson
+                # text, so this is gated at the source. The en dash was missing
+                # from this assert while gate_copy_rule.py checked both; nothing
+                # had shipped through the gap, but a gate with a hole in it is
+                # the thing this file exists to stop.
                 for text in (mtitle, ltitle):
-                    assert chr(0x2014) not in text and '--' not in text, text
+                    for bad in (chr(0x2014), chr(0x2013), '--'):
+                        assert bad not in text, (bad, text)
                     assert not re.search(r',\s+not\s+\w', text), text
                 assert lslug.startswith(('l0', 'l1')), lslug
                 assert mslug.startswith('m0'), mslug
                 assert 9 <= q <= 15, (lslug, q)
-    print('6 modules and 26 lessons in every tier, 78 lessons, no em dash and no contrastive in any title')
+    print('6 modules and 26 lessons in every tier, 78 lessons, no em dash, no en dash and no contrastive in any title')

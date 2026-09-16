@@ -24,9 +24,9 @@ The limit and the inlet are both reported because the two together say how much 
 
 The count tried is there for the same reason. It says the search ran to its bound rather than stopping early on some other condition, so a reader knows this refusal came from the cap and not from one of the guards ahead of it.
 
-## One sentence used to answer several questions
+## One refusal, and the four faults it is not
 
-That message once stood in for four unrelated faults as well as this one. Each of those four now has its own refusal naming its own input, which is the difference between being told something is wrong and being told what is wrong.
+Four other faults reach this same function, and Section 15 puts each of them beside the refusal that names its own input. That is the difference between being told something is wrong and being told what is wrong, and it is why a refusal here means the cap and not one of those four.
 
 ## The mistake
 

@@ -27,7 +27,7 @@ Three of those eight rows are one guard fired three ways. A motor efficiency abo
 
 ## The guard that is finiteness rather than positivity
 
-The last row is the sharpest of the set, because the object looked healthy. The coefficient was right and the failure only appeared when the curve was called.
+The last row is the sharpest of the set, because a curve object can look healthy and carry a correct coefficient while the function hanging off it is unusable. The guard catches at construction what would otherwise surface only at the call.
 
 Its guard also had to be written carefully. A static head may legitimately be negative, because the destination can sit below the pump, so testing for positivity would refuse a real station. Testing for finiteness refuses only the missing one, and the message says exactly that.
 

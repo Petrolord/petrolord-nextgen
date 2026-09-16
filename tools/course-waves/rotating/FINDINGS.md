@@ -981,3 +981,203 @@ from 1751 literals with two planted answers caught; promptleak none; the wave
 oracle 446 comparisons across 14 blocks with 65 of 65 refusal branches as
 expected, 0 silent, and both negative controls caught at 9.901e-3 and 1.750e-4;
 `fields.json` byte identical; `structure.py` gate green.
+
+
+---
+
+## THE PROSE SWEEP, 2026-09-16. A third class, and a correction to the split.
+
+The Associate writer, writing against the digest, found a sentence in it that
+the digest's own banners forbid. Two sweeps had already run over this file, for
+two-figure characterisations and then for headings; **repair-history framing
+inside a teaching section is a third class**, and it had already produced hits
+twice without being named as a class: three in-body markers in the heading pass,
+and now one deeper inside a block.
+
+**809 lines examined**, every line of the digest, three times: once for the
+"used to" family, once for plain past-tense narrative, and once for the owner
+copy rule. **Eight lines changed, 0 added, 0 removed**, all one-for-one at the
+generator: **809 to 809 lines, all 17 section start lines unchanged, all 257
+table rows byte identical, and the numeric-literal multiset identical at 1752**,
+so no figure moved anywhere and the Associate tier's committed sweep of 373
+literals across Sections 1 to 5, 16 and 17 still resolves.
+
+### A. Repair history inside a teaching section. Four, of which the writer found one.
+
+`digest.txt` is the ONE file writers are told is teaching truth. RECON.md and
+FINDINGS.md both open with a banner saying they are provenance; **the digest
+has no such licence, so a "used to" sentence is worse there than anywhere
+else.** The writer refused line 174 and taught the droop flag with no
+before-and-after, which was right.
+
+| line | section | was | now |
+| --- | --- | --- | --- |
+| 174 | 3, Associate m03 | "they used to disagree about the same curve, and the trusting half was the bug" | the flag is how the half that judges the shape tells the half that solves on it, and the half that trusts is the one to doubt |
+| 551 | 12, Expert m02 | "That sentence used to be the answer to four unrelated faults as well as this one" | Section 15 puts four other faults that reach this same function beside the refusal that names each |
+| 671 | 15, Expert m05 | "on the inputs that used to come back as a number instead" | "on the inputs where handing back a number rather than a refusal would be the dangerous answer" |
+| 683 | 15, Expert m05 | "That one WAS the sharpest of the set: the object looked healthy, the coefficient was right, and the failure only appeared when the curve was called" | a curve object CAN look healthy and carry a correct coefficient while the function hanging off it is unusable, so the guard catches at construction what would otherwise surface only at the call |
+
+**683 is the interesting one.** It is repair history told in plain past tense
+with no trigger word, so no keyword sweep finds it; it came out of a manual
+past-tense pass. That hole is now named in the gate and covered by a WARN
+family rather than pretended away.
+
+Four lines matched the history patterns and were checked and CLEARED: "never
+used to refuse" (present-tense usage), "the old duty point" (the pre-change
+duty, a live concept), "no longer affordable" (a live sweep), and "the golden
+was written through SI watts" (the provenance of a file, which is a live
+property of that file).
+
+### B. The owner copy rule, and a correction to which lines are ours
+
+Four lines of this file's own prose: **180, 331, 467, 475**, each a `", not "`
+contrastive, each rewritten to `rather than`. No em dash or en dash anywhere in
+the digest.
+
+**The coordinator's split listed 441 among the five for FC3 to fix. It is not
+ours.** `digest.txt:441` is `pumps.js:572` quoted verbatim, the viscosity
+warning ending "vendor viscous test data, not a corrected centrifugal curve".
+It belongs with 465 and 470 to 472, which are `compression.js:420`, the
+hot-stage warning ending "become the limit, not the thermodynamics". The
+deferred set is therefore **five lines across two engine modules, not four
+across one**, and it was not edited here.
+
+### DEFERRED ENGINES ITEM. Do not fix these locally.
+
+**`digest.txt` lines 441, 465, 470, 471 and 472 break the owner copy rule
+inside text the engine itself returns.** Both strings are user-facing in the
+live Suite panels, so the rule arguably does reach them. They are **not** being
+changed now, and the reason is recorded so nobody "helpfully" fixes them:
+
+- changing one churns the engine, its tests, this digest, and any lesson
+  quoting it verbatim, with two writers mid-flight;
+- **Section 15 exists precisely to quote refusal messages EXACTLY**, so an
+  edit here desyncs the quote from the engine it is quoting;
+- it is programme-wide rather than FC3's: the same contrastive shape is likely
+  in other engine modules' messages.
+
+**It becomes an engines-repo copy sweep after FC3's writers land.** The two
+sources are `engines/facilities/pumps.js:572` and
+`engines/facilities/compression.js:420`.
+
+`digest_prose.mjs` **pins both fragments** and fails if either leaves its
+module, so an engine edit turns the gate red rather than leaving a stale quote
+passing quietly. Negative control run: a copy of `pumps.js` with the phrase
+reworded makes the gate report the broken pin.
+
+### C. structure.py's title gate had a hole
+
+It asserted on `chr(0x2014)` and `'--'` and not on the **en dash U+2013**,
+while `gate_copy_rule.py` checks both. Nothing had shipped through the gap, so
+this closes a hole rather than fixing a defect. Negative control: an en dash
+planted in a lesson title now exits 1 with the character and the title in the
+message.
+
+### The gate, consolidated
+
+`digest_headings.mjs` is **retired** and replaced by `digest_prose.mjs`, which
+covers all three families in one file, because two half-gates that must both be
+run is a trap and a gate whose name no longer matches its scope is its own
+small defect. It reports:
+
+- headings against the block beneath each, a section title owning everything
+  down to the next section;
+- repair history, failed;
+- past-tense narrative, **WARNED for a human read**, because the keyword net
+  has a known hole and pretending otherwise is how line 683 survived;
+- the owner copy rule, failed for our prose and **deferred** for pinned engine
+  quotes.
+
+| run | result |
+| --- | --- |
+| the rebuilt digest | **0 failing, 0 warned**, 5 deferred |
+| the digest before these eight edits | **7 failing, 1 warned** (the warn is line 683, the hole it was written for) |
+| the shipped foundation digest `dd9148bf` | 3 failing, 4 deferred |
+| `pumps.js` with the pinned phrase reworded | the broken pin reported by name |
+
+
+---
+
+## THE RESOLVER, AND WHAT THE PROSE SWEEP BROKE DOWNSTREAM. 2026-09-16.
+
+### A gate that was measuring nothing: truth-rotating.json
+
+**The wave directory shipped no `truth-rotating.json`.** FC1 and FC2 both ship
+one. `numsweep.mjs` builds its resolver from every `truth-*.json` a wave
+produced plus the goldens `wave.json` names and the constants it declares, so a
+wave that emits a TEXT digest and no JSON resolves against almost nothing. Run
+raw against the Professional tier it reported **396 of 412 literals
+unresolved**, which measures the RESOLVER and not the lessons. Both writers who
+hit it worked around it privately, one harvesting into a scratch copy of the
+wave dir (correctly declining to write into the shared one) and one building
+its own value set from the digest sections it owns. **Solving it twice in
+private is the cost of not shipping it once.**
+
+Harvested with `/root/dc-wavekit/harvest_digest.py`: **432 digest lines
+carrying 1606 numeric literals, 799 distinct**, which `numsweep` combines with
+the goldens and the declared constants into **864 derived values from 3
+sources**. Against all 78 committed lessons:
+
+    rotating: sweeping 78 lesson file(s) against 864 derived values from 3 source(s)
+      => literals with 7+ significant figures checked: 859   unresolved: 0
+
+**And the gate can fail, which is the half that matters**, because a resolver
+that resolves everything is as useless as one that resolves nothing:
+
+| control | planted | result |
+| --- | --- | --- |
+| A, a fabricated literal that is no engine value | `1234.5678901` | **UNRESOLVED, exit 1**, named with its file and line |
+| B, real engine values of the same length | `1234.452969` and `417.801018` | resolved, exit 0, checked count rises by 2 |
+
+Declared hole, which `numsweep` prints itself: **676 round literals are skipped
+for trailing zeros** and never checked. That is the gate's own documented blind
+spot, not this wave's.
+
+### What the prose sweep broke, and it was the gates working
+
+The eight one-for-one digest edits went red downstream immediately, which is
+the correct behaviour of a well-built gate rather than a problem:
+
+- **`src/components/course/panels/rotating/rotatingLab.test.js`** rebuilds
+  `digest.txt` BYTE FOR BYTE from the panel's own computed values and asserts
+  equality. It pinned all eight changed lines and went **7 failed / 64 passed**
+  the moment the digest moved. The same eight edits were carried into its
+  mirror, plus the `SANITY BOUND` clause on the same line: **71 of 71 green**
+  again. The lab agent's gate did exactly what it was built to do.
+
+### Three repair-history leaks that had already reached LIVE LESSON TEXT
+
+This is the harm the banners exist to prevent, and it had already happened.
+Found by sweeping all 78 committed lessons for the same patterns:
+
+| file | was | why it is wrong |
+| --- | --- | --- |
+| `advanced/m05-what-a-refusal-is/l01-an-object-carrying-an-error.md` | "the object looked healthy. The coefficient was right and the failure only appeared when the curve was called" | taken in good faith from digest line 683, which is the sentence this sweep re-pointed. Now present tense: a curve object CAN look healthy while the function hanging off it is unusable |
+| `advanced/m02-.../l05-a-refusal-that-carries-its-evidence.md` | the H2 heading "One sentence used to answer several questions", and a paragraph "That message once stood in for four unrelated faults" | repair history in a lesson HEADING, the same class as the digest heading defect, one level down. Now "One refusal, and the four faults it is not" |
+| `advanced/m01-a-stage-is-not-a-pump/l05-an-identity-is-not-a-check.md` | "The engine's own gate used to call the agreement of those two routes its strongest available check" | NOT from the current digest, which was corrected in the heading pass. It came from the engine's own source comment or an earlier read. Now "It is tempting to read the agreement as a strong check" |
+
+**The writers were not at fault on the first two**: they took what the digest
+said, and the digest is the one file they are told is teaching truth. That is
+precisely why a forbidden sentence in it is worse than the same sentence in a
+provenance file. The third shows a second route for history to reach a lesson:
+the engine's own source comments are full of it, and nothing gates a writer
+reading those.
+
+After the fixes, a sweep of all 78 lessons for
+`used to call|answer|be|come|disagree|return|report|give|stand`, `once stood`,
+`looked healthy`, `was the bug`, `before the repair`, `no longer has`,
+`the old engine` returns **nothing**.
+
+### Two items recorded and NOT acted on
+
+- **The panel wiring is not landed.** `panelRegistry.js` has no `rotating`
+  entry and none of `fc-pump-explorer`, `fc-suction-explorer`,
+  `fc-compressor-explorer` appears in it, so **74 `{{panel:}}` markers across
+  the three tiers will not render**. That is the lab agent's work and it is
+  still running. Recorded here so it is not lost, not touched.
+- **Digest Section 6 gap, for whenever it is next rebuilt.** Its two flashing
+  rows state a pressure head and an NPSH available but not the static column or
+  the suction friction behind them, so they read as a separate suction with no
+  stated geometry. A writer correctly refused to infer it. Fixing it costs a
+  line and would move Section 6's line numbers, so it waits for a rebuild
+  rather than being slipped in while three tiers are pinned to this file.

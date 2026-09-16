@@ -171,13 +171,13 @@ Moving the system moves the duty, which is the point of solving it rather than t
 
 A curve that RISES with flow is not a centrifugal head curve, so where it crosses a system curve is not a duty point:
 - { error: "this curve does not fall with flow, so it is not a centrifugal head curve and its crossing with a system curve is not a duty point: check the catalogue points" }
-That is the `droops` flag of Section 2 being read. The fit and the duty are two halves of one module, they used to disagree about the same curve, and the trusting half was the bug.
+That is the `droops` flag of Section 2 being read. The fit and the duty are two halves of one module asked about the same curve, and the flag is how the half that judges the shape tells the half that solves on it. Two halves of one module that answer differently about one curve are a module contradicting itself, and the half that trusts is the one to doubt.
 
 The two refusals that are real answers rather than hidden errors:
 - a system the pump cannot start: { error: "the system needs more head at zero flow than the pump makes at shutoff: this pump cannot start this system" }
   it hands back the evidence: shutoff head 540.203016 ft against a system static head of 700.000000 ft (engine). The gap is 159.796984 ft (derived from the two figures on this line).
 - a search limit set below the crossing: { error: "the curves do not cross below 200 gpm: raise the search limit or check the system curve" }
-  That one is a question about the search, not about the machine, and the message says which.
+  That one is a question about the search rather than about the machine, and the message says which.
 
 # SECTION 4: Power, head and pressure, and the constants measured out of the engine (owned by Associate m04)
 
@@ -328,7 +328,7 @@ THE LAWS ARE EXACT AND THE MACHINE IS NOT, so the engine carries a band it will 
 - the lower end, walked up from a ratio of 0.010000: 0.500000000000
 - the upper end, walked down from a ratio of 5.000000: 1.500000000000
 - at a ratio of 100.000000 the laws still apply, and the engine still applies them: 123445.296915 gpm, 4178010.181407 ft, 183041883.582474 brake hp, with "a speed ratio of 100 is far outside the range over which the affinity laws describe a real machine: the power leg goes as the cube, so this is an extrapolation on the number that sizes the driver"
-That band is a SANITY BOUND and not a published correlation limit. No publication in this repository says where the affinity laws stop describing a real machine, so the two ends above are a judgement about when a reader should be told to think, not a measurement of where the physics fails. It is warned on and never used to refuse, and nothing computed from it decides a value.
+That band is a SANITY BOUND rather than a published correlation limit. No publication in this repository says where the affinity laws stop describing a real machine, so the two ends above are a judgement about when a reader should be told to think rather than a measurement of where the physics fails. It is warned on and never used to refuse, and nothing computed from it decides a value.
 
 An impeller trim, which does not:
 | trim ratio | trim percent | ideal flow gpm | real flow gpm | ideal head ft | real head ft | shortfall percent | brake hp | implied efficiency ratio | warning |
@@ -464,7 +464,7 @@ The SOKU K-2101 stage: 26.000000 MMscfd of a 0.648000 gravity gas at 92.000000 p
 - compressibility note: "Ppr 0.137 against 0.2 at 92 psia and 104 F is below the 0.2 where the DAK fit data start; the z-factor here runs toward the ideal-gas limit"
 - warning: "discharge at 333.6 F is above the stated limit of 300.0 F: the valves and the lube oil become the limit, not the thermodynamics"
 
-THE HOT-STAGE WARNING FIRES ON THE LIMIT THE CALLER STATED, not on a threshold written into the module. The same stage against four different stated limits, everything else held:
+THE HOT-STAGE WARNING FIRES ON THE LIMIT THE CALLER STATED, rather than on a threshold written into the module. The same stage against four different stated limits, everything else held:
 | stated limit degF | discharge degF | warned | the warning |
 | --- | --- | --- | --- |
 | 200.0000 | 333.5954 | true | "discharge at 333.6 F is above the stated limit of 200.0 F: the valves and the lube oil become the limit, not the thermodynamics" |
@@ -472,7 +472,7 @@ THE HOT-STAGE WARNING FIRES ON THE LIMIT THE CALLER STATED, not on a threshold w
 | 300.0000 | 333.5954 | true | "discharge at 333.6 F is above the stated limit of 300.0 F: the valves and the lube oil become the limit, not the thermodynamics" |
 | 400.0000 | 333.5954 | false | null |
 The discharge on all four rows is the same 333.5954 degF, because the limit is a limit and not an input to the thermodynamics.
-THE DEFAULT IS MEASURED, not typed. With no limit stated the warning turns on between a ratio of 2.7616873004480746 and 2.761687300448075, and the discharge temperatures either side of that crossing are 299.99999999999994 and 300.00000000000006 degF (engine), which brackets the default the engine applies when the caller states none. That default is a customary figure with no publication behind it in this repository.
+THE DEFAULT IS MEASURED RATHER THAN TYPED. With no limit stated the warning turns on between a ratio of 2.7616873004480746 and 2.761687300448075, and the discharge temperatures either side of that crossing are 299.99999999999994 and 300.00000000000006 degF (engine), which brackets the default the engine applies when the caller states none. That default is a customary figure with no publication behind it in this repository.
 
 THE TWO POWER ROUTES AGREE BECAUSE THEY ARE THE SAME EXPRESSION, which is worth showing rather than admiring. The exponent ratio times the polytropic efficiency is the isentropic exponent ratio, exactly, for every pair:
 | k | polytropic efficiency | exponent ratio | times the efficiency | the isentropic exponent ratio | difference |
@@ -548,7 +548,7 @@ A REFUSAL CARRIES ITS EVIDENCE, because the diagnosis has to survive it. That re
 - the inlet it was measured from: 100.0000 degF (engine)
 - the overall ratio it was working on: 1000.000000000 (engine)
 The gap between the coolest reachable discharge and the stated limit is 207.9889 degF (derived from the two rows above), which is what tells a reader whether it is the approach or the limit that is impossible rather than sending them off to intercool harder.
-That sentence used to be the answer to four unrelated faults as well as this one. Section 15 shows each of those four refused by name instead.
+Section 15 puts four other faults that reach this same function beside the refusal that names each of them, so a refusal here means the twelve-stage cap and not one of those four.
 
 # SECTION 13: The train, its cooling, and the limit that buys the stages (owned by Expert m03)
 
@@ -668,7 +668,7 @@ THE COMPRESSION CONSTANTS, measured out of the engine the same way:
 EVERY REFUSAL IS A RETURNED OBJECT CARRYING AN `error` STRING, and it names the input that is actually wrong. Neither module throws. A caller checks a property rather than catching, and the property it checks is the only check most callers make, which is why a non-finite value slipped past it is worse than no guard at all.
 Note on reading these: a NaN and an Infinity have no spelling in JSON and both come out as null through JSON.stringify. The lines below are printed by a hand-rolled serialiser for that reason, so they say NaN and Infinity where the engine returned them.
 
-The pump module, on the inputs that used to come back as a number instead:
+The pump module, on the inputs where handing back a number rather than a refusal would be the dangerous answer:
 - a motor efficiency above one: { error: "motor efficiency must be greater than 0 and at most 1" }
 - a negative motor efficiency: { error: "motor efficiency must be greater than 0 and at most 1" }
 - a motor efficiency of zero: { error: "motor efficiency must be greater than 0 and at most 1" }
@@ -680,7 +680,7 @@ The pump module, on the inputs that used to come back as a number instead:
 - a head to pressure conversion at zero gravity: NaN
 - two and a half pumps in parallel: { error: "parallel operation needs a pump curve and a whole number of machines, at least one" }
 - a system curve with no static head: { error: "a system curve needs a static head: it may be negative, but it cannot be missing" }
-  That one was the sharpest of the set: the object looked healthy, the coefficient was right, and the failure only appeared when the curve was called. A static head may be NEGATIVE, because the destination can sit below the pump, so the guard is finiteness and not positivity, and the message says so.
+  That one is the sharpest of the set: a curve object can look healthy and carry a correct coefficient while the function hanging off it is unusable, so this guard catches at construction what would otherwise surface only at the call. A static head may be NEGATIVE, because the destination can sit below the pump, so the guard is finiteness and not positivity, and the message says so.
 
 The compression module, the same way:
 - a per-stage ratio limit of one: { error: "the maximum ratio per stage must be greater than 1: a stage at a ratio of 1 adds no pressure, so no number of them reaches the discharge" }
