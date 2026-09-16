@@ -294,16 +294,41 @@ A("""  -- ---------------------------------------------------------------- shape
   end if;
 
   -- ------------------------------- the HELD-FOR-LITERATURE assertion --
-  -- The RP 14E c factor rows, the transmission efficiency E and the Reynolds
-  -- 2100 to 4000 transition band are taught as limits and are never graded.
+  -- Three things are taught here as limits and held for the literature: the
+  -- three RP 14E c factor rows, the transmission efficiency E, and the
+  -- Reynolds 2100 to 4000 transition band. None may be graded.
+  --
+  -- The hold is neutralised by STATING each of them as a condition of the
+  -- line, so a label that mentions a c factor is not the defect. A label that
+  -- names a LOOKUP is. The dry run found the crude version of this gate
+  -- refusing 'Erosional velocity at the agreed c factor', which is the field
+  -- that proves the hold rather than breaks it.
   select count(*) into v_graded
     from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f
    where c.app_slug = 'linesizing'
-     and (f->>'label' ilike '%c factor%'    or f->>'label' ilike '%efficiency%'
-       or f->>'label' ilike '%transition%'  or f->>'label' ilike '%schedule%'
-       or f->>'label' ilike '%location class%');
+     and (f->>'label' ilike '%published c factor%'   or f->>'label' ilike '%rp 14e%'
+       or f->>'label' ilike '%c factor row%'         or f->>'label' ilike '%from the table%'
+       or f->>'label' ilike '%transmission efficiency%' or f->>'label' ilike '%efficiency factor%'
+       or f->>'label' ilike '%transition band%'      or f->>'label' ilike '%schedule%'
+       or f->>'label' ilike '%roughness table%'      or f->>'label' ilike '%location class%');
   if v_graded <> 0 then
-    raise exception 'FC2 go-live refused: % graded field(s) reach into a quantity held for the literature', v_graded;
+    raise exception 'FC2 go-live refused: % graded field(s) name a lookup into a quantity held for the literature', v_graded;
+  end if;
+
+  -- And the same hold read off the VALUES, which is the half a label cannot
+  -- be trusted for: no graded value is one of the three published c factor
+  -- rows, one of the four efficiencies the digest tabulates, or either end of
+  -- the transition band.
+  select count(*) into v_graded
+    from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f,
+         (values (100), (125), (175),          -- the three RP 14E rows
+                 (0.85), (0.9), (0.95), (1),   -- the tabulated efficiencies
+                 (2100), (4000)                -- the transition band
+         ) as held(v)
+   where c.app_slug = 'linesizing'
+     and abs(abs((f->>'expected')::numeric) - held.v) <= (f->>'tol')::numeric;
+  if v_graded <> 0 then
+    raise exception 'FC2 go-live refused: % graded field(s) land on a quantity held for the literature', v_graded;
   end if;""")
 
 # The comma belongs BEFORE the comment, or the separator ends up inside it
@@ -437,6 +462,16 @@ A(f"""
   end if;
   if not ({V['imo1_velocity_fts']} < {V['imo1_erosional_velocity_fts']}) then
     raise exception 'FC2 go-live refused: IMO-1 runs above its own erosional limit, which is not the passing line the tier grades';
+  end if;
+
+  -- THE HOLD, READ BACK OFF THE GRADED VALUE ITSELF. v times the square root
+  -- of the density recovers the c factor the engine was called with, and it
+  -- has to be the site's 120 and none of the three published RP 14E rows.
+  if abs({V['imo1_erosional_velocity_fts']} * sqrt(52.3) - 120) > 1e-9
+     or abs({V['imo1_erosional_velocity_fts']} * sqrt(52.3) - 100) < 1
+     or abs({V['imo1_erosional_velocity_fts']} * sqrt(52.3) - 125) < 1
+     or abs({V['imo1_erosional_velocity_fts']} * sqrt(52.3) - 175) < 1 then
+    raise exception 'FC2 go-live refused: the erosional velocity implies a c factor of %, which is not the site figure of 120 the prompt states', {V['imo1_erosional_velocity_fts']} * sqrt(52.3);
   end if;
 
   -- ==================== PROFESSIONAL: the BRASS trunk =====================
