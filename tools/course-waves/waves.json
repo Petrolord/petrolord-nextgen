@@ -263,6 +263,7 @@
       "fields.json",
       "precision.json",
       "wave.json",
+      "truth-relief.json",
       "build_digest.sh",
       "fc5_dump.mjs",
       "fc5_fields.mjs",
@@ -271,13 +272,23 @@
       "make_fields.mjs",
       "discriminate.mjs",
       "structure.py",
+      "scaffold.py",
       "gate_capstone_leak.py",
       "gate_copy_rule.py",
       "gate_typed_literals.py",
-      "gate_movement.mjs"
+      "gate_movement.mjs",
+      "gate_wavejson.mjs",
+      "digest_prose.rules.mjs",
+      "sweep_literals.py",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md",
+      "finalise.sh"
     ],
     "pins": {
-      "digest.txt": "f761f536ad3abc0f8e7711969d21e2ea7bc4e1c62058fa74bbd186ba9e3147e6",
+      "digest.txt": "e681a406aaf5e3d1915ea45e117f80ae86d20bf54c8da5d0792565f53c7b9601",
       "fields.json": "fc0b8561b287aa99308ce90ce973b92e07d174c609585c9da467f67670f1338c"
     }
   }

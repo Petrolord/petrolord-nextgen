@@ -110,6 +110,30 @@ const success = (label, r) => {
   return r;
 };
 
+/**
+ * Solve a 3 by 3 linear system by Gaussian elimination with partial pivoting.
+ * Used to recover a published FIT from the engine's own answers at three
+ * inputs. An asymptotic reading is not good enough for either fit here: at a
+ * Reynolds number of 1e18 the inverse-root term of the Kv fit is still 2.9e-9,
+ * and subtracting an intercept that carries that residue put the next
+ * coefficient out by more than one percent. Three exact equations recover all
+ * three at once.
+ */
+const solve3 = (rows) => {
+  const m = rows.map((r) => [...r]);
+  for (let c = 0; c < 3; c += 1) {
+    let pv = c;
+    for (let r = c + 1; r < 3; r += 1) if (Math.abs(m[r][c]) > Math.abs(m[pv][c])) pv = r;
+    [m[c], m[pv]] = [m[pv], m[c]];
+    for (let r = 0; r < 3; r += 1) {
+      if (r === c) continue;
+      const f = m[r][c] / m[c][c];
+      for (let cc = c; cc < 4; cc += 1) m[r][cc] -= f * m[c][cc];
+    }
+  }
+  return [m[0][3] / m[0][0], m[1][3] / m[1][1], m[2][3] / m[2][2]];
+};
+
 /** One bisection routine, used everywhere a threshold is MEASURED. */
 const bisect = (lo, hi, pred) => {
   let a = lo; let b = hi;
@@ -194,9 +218,13 @@ const FIRE_EXP = Math.log(R.fireHeatInput({ wettedFt2: EA2 }).qBtuHr
 // The Kv fit, term by term, out of the UNCLAMPED export so the asymptote is
 // reachable. 1/Kv is a linear combination of 1, Re^-0.5 and Re^-1.5, so three
 // Reynolds numbers solve for all three coefficients and nothing is typed.
-const KV_A = 1 / R.liquidKvUnclamped(1e18);
-const KV_B = (() => { const re = 1e4; return (1 / R.liquidKvUnclamped(re) - KV_A) * Math.sqrt(re); })();
-const KV_C = (() => { const re = 4; return (1 / R.liquidKvUnclamped(re) - KV_A - KV_B / Math.sqrt(re)) * re ** 1.5; })();
+// 1/Kv is a + b Re^-0.5 + c Re^-1.5, so THREE Reynolds numbers solve for all
+// three coefficients exactly. All three sit below the clamp, so the raw fit is
+// what is being read.
+const [KV_A, KV_B, KV_C] = (() => {
+  const REs = [4, 100, 1e4];
+  return solve3(REs.map((re) => [1, re ** -0.5, re ** -1.5, 1 / R.liquidKvUnclamped(re)]));
+})();
 // The asymptote the unclamped fit reaches, and the Reynolds number at which
 // the clamp starts holding the correction at one.
 const KV_ASYMPTOTE = R.liquidKvUnclamped(1e18);
@@ -204,26 +232,29 @@ const KV_CLAMP_RE = bisect(1e3, 1e7, (re) => R.liquidKvUnclamped(re) < 1);
 
 // The Napier fit: KN is a ratio of two lines in P, so three pressures above
 // the threshold solve the fit up to one scale.
+// KN is a ratio of two lines in the pressure, (aP + b)/(cP + d), and a ratio of
+// lines is UNCHANGED when all four coefficients are scaled together. So only
+// THREE of the four are measurable, and the published quartet is one scaling of
+// them. The digest normalises the DENOMINATOR SLOPE to one and prints the three
+// that remain, which is the honest statement of what can be recovered:
+//   KN = (A P + B) / (P + D),  A = a/c, B = b/c, D = d/c
+// Three pressures above the threshold solve it exactly.
 const NAPIER = (() => {
   const P = [1700, 2100, 2600];
-  const K = P.map((p) => R.steamKn(p));
-  const m = P.map((p, i) => [p, 1, -K[i] * p, K[i]]);
-  for (let c = 0; c < 3; c += 1) {
-    let pv = c; for (let r2 = c + 1; r2 < 3; r2 += 1) if (Math.abs(m[r2][c]) > Math.abs(m[pv][c])) pv = r2;
-    [m[c], m[pv]] = [m[pv], m[c]];
-    for (let r2 = 0; r2 < 3; r2 += 1) {
-      if (r2 === c) continue;
-      const f = m[r2][c] / m[c][c];
-      for (let cc = c; cc < 4; cc += 1) m[r2][cc] -= f * m[c][cc];
-    }
-  }
-  return { a: m[0][3] / m[0][0], b: m[1][3] / m[1][1], c: m[2][3] / m[2][2], d: 1 };
+  const [A, B, D] = solve3(P.map((p) => {
+    const k = R.steamKn(p);
+    return [p, 1, -k, k * p];
+  }));
+  return { A, B, D };
 })();
 
 // Thresholds, every one bisected out of the engine's own behaviour.
 const KN_THRESHOLD = bisect(...BISECT.napierThreshold, (p) => R.steamKn(p) === 1);
 const KN_TOP = bisect(...BISECT.napierTop, (p) => !Number.isNaN(R.steamKn(p)));
-const KN_UNITY_CROSSING = bisect(...BISECT.napierUnityCrossing, (p) => R.steamKn(p) < 1);
+// The crossing back through unity. The bracket may NOT start on the threshold:
+// KN is exactly 1.0 there, so the predicate is false at both ends and there is
+// nothing to bracket. It starts just inside the band where KN is below one.
+const KN_UNITY_CROSSING = bisect(KN_THRESHOLD + 1e-6, BISECT.napierUnityCrossing[1], (p) => R.steamKn(p) < 1);
 const LATENT_WARN = bisect(...BISECT.latentWarning, (L) => R.fireReliefLoad({ qBtuHr: 1e7, latentBtuLb: L }).warning === null);
 const KV_WARN = (() => {
   const mu = bisect(1, 1e9, (m2) => (R.liquidArea({ qGpm: 500, p1Psig: 250, p2Psig: 50, sg: 0.9, muCp: m2 }).warning === null));
@@ -240,16 +271,22 @@ const BACKP_WARN_RATIO = (() => {
 const DRAG_CAP = (() => {
   const f = (mu) => R.dropoutVelocityFtS({ dropletMicron: 50, rhoLLbFt3: 50, rhoVLbFt3: 0.5, muVCp: mu });
   const muAt = bisect(0.001, 1e7, (mu) => f(mu).dragC < 239.999999999);
-  const just = f(muAt * 1.0000001);
-  return { c: just.dragC, re: f(muAt * 0.9999999).reynolds, muAt };
+  // the cap itself is read well INSIDE the capped region, so the figure is the
+  // cap rather than the cap plus whatever the fit still contributes at the edge
+  return { c: f(muAt * 100).dragC, re: f(muAt * 0.9999999).reynolds, muAt };
 })();
 // The L over D at which the drum's note changes, in both directions, measured
 // by walking the diameter at a fixed duty.
+// The two edges of the drum's own note band. BOTH ends of any diameter range
+// carry a note, one saying go wider and the other saying go smaller, so
+// bisecting for the ABSENCE of a note brackets nothing and returns NaN. Each
+// edge is bisected on the note that is actually changing there.
 const LD_NOTE = (() => {
   const base = { qVaporAcfs: 120, udFtS: 1.73, liquidFraction: 0.25 };
-  const hi = bisect(1, 40, (d) => R.koDrumHorizontal({ ...base, diameterFt: d }).note === 'L/D above 6: go to a larger diameter');
-  const lo = bisect(1, 40, (d) => R.koDrumHorizontal({ ...base, diameterFt: d }).note === null);
-  return { hiLd: R.koDrumHorizontal({ ...base, diameterFt: hi }).ld, loLd: R.koDrumHorizontal({ ...base, diameterFt: lo }).ld };
+  const at = (d) => R.koDrumHorizontal({ ...base, diameterFt: d });
+  const hi = bisect(1, 40, (d) => at(d).note === 'L/D above 6: go to a larger diameter');
+  const lo = bisect(1, 40, (d) => at(d).note === 'L/D below 2: a smaller drum may do');
+  return { hiLd: at(hi).ld, loLd: at(lo).ld, hiD: hi, loD: lo };
 })();
 // The default time limit. Measured from BELOW rather than by walking maxS,
 // because a march with a tiny orifice and the default step runs into the step
@@ -400,6 +437,86 @@ const afiRad = success('AFIESERE, the radiant intensity at the fence', R.radiati
   fractionRadiated: AFIESERE_FLARE.fractionRadiated, transmissivity: AFIESERE_FLARE.transmissivity,
 }));
 
+/* --------------------------------------------------------------------------
+ * EVERY MEASURED CONSTANT AND EVERY MEASURED EDGE MUST BE FINITE.
+ *
+ * This block exists because two of them were NOT. A bisection whose predicate
+ * is false at BOTH ends of its bracket has nothing to bracket and returns NaN,
+ * and the digest printed "NaN" for the Napier unity crossing and "undefined"
+ * for the lower edge of the drum's note band. Both read as a measurement on the
+ * page, both were wrong, and NO gate in this wave looked at them: the label
+ * assertions check what a CALL did and a numeric sweep resolves figures against
+ * the digest, and neither asks whether a printed figure is a number.
+ * -------------------------------------------------------------------------- */
+
+const MEASURED = {
+  ATM, ATM_CONFIRM, ATM_BLOWDOWN, C520, C735, C38, C515, C21000, C34500,
+  DRAINAGE_FACTOR, FIRE_EXP, KV_A, KV_B, KV_C, KV_ASYMPTOTE, KV_CLAMP_RE,
+  'NAPIER.A': NAPIER.A, 'NAPIER.B': NAPIER.B, 'NAPIER.D': NAPIER.D,
+  KN_THRESHOLD, KN_TOP, KN_UNITY_CROSSING, 'NAPIER_UNITY_PSIA': R.NAPIER_UNITY_PSIA,
+  LATENT_WARN, KV_WARN, BACKP_WARN_RATIO, 'DRAG_CAP.c': DRAG_CAP.c, 'DRAG_CAP.re': DRAG_CAP.re,
+  'LD_NOTE.hiLd': LD_NOTE.hiLd, 'LD_NOTE.loLd': LD_NOTE.loLd, BLOWDOWN_LIMIT,
+  RGAS_UNIVERSAL, FOUR_PI, 'SETTLE_GROUP.a': SETTLE_GROUP.a, 'SETTLE_GROUP.b': SETTLE_GROUP.b,
+  'SETTLE_GROUP.c': SETTLE_GROUP.c, 'SETTLE_COEFF_SQ.coeffSq': SETTLE_COEFF_SQ.coeffSq, C2800,
+  'POINT_ROUNDTRIP.k1': POINT_ROUNDTRIP.k1, 'POINT_ROUNDTRIP.d2': POINT_ROUNDTRIP.d2,
+};
+Object.entries(MEASURED).forEach(([name, v]) => {
+  must(`the measured constant ${name} is a finite number`, Number.isFinite(v), String(v));
+});
+must('every measured constant was examined', Object.keys(MEASURED).length >= 40,
+  `${Object.keys(MEASURED).length} measured constants and edges checked`);
+
+/* --------------------------------------------------------------------------
+ * AND EVERY MEASURED LEADING CONSTANT MUST BE THE PUBLISHED FIGURE.
+ *
+ * This block exists because one of them was not. The subcritical probe ran at
+ * the engine's DEFAULT discharge coefficient instead of at unit coefficients,
+ * so it recovered the leading constant times 0.975 and the digest printed
+ * 716.625 where the standard prints 735. It read exactly like a measurement,
+ * it was a real engine return, and no other gate could see it: the finite check
+ * passes on a wrong finite number, and a sweep that resolves figures against
+ * the digest resolves a wrong figure against itself.
+ *
+ * The expected values are typed HERE, inside the assertion machinery, which
+ * never reaches the digest. That is the point: a measurement is only worth
+ * something when something independent says what it should have been.
+ * -------------------------------------------------------------------------- */
+
+const PUBLISHED = [
+  ['the gas coefficient leading constant', C520, 520, 1e-9],
+  ['the subcritical leading constant', C735, 735, 1e-9],
+  ['the liquid leading constant', C38, 38, 1e-9],
+  ['the liquid Reynolds constant', C2800, 2800, 1e-6],
+  ['the steam leading constant', C515, 51.5, 1e-9],
+  ['the pool fire constant with drainage', C21000, 21000, 1e-6],
+  ['the pool fire constant without drainage', C34500, 34500, 1e-6],
+  ['the pool fire exponent', FIRE_EXP, 0.82, 1e-9],
+  ['the universal gas constant', RGAS_UNIVERSAL, 1545.349, 1e-6],
+  ['the solid angle in the point source', FOUR_PI, 4 * Math.PI, 1e-9],
+  ['the default outlet pressure', ATM, 14.7, 1e-9],
+  ['the Napier threshold', KN_THRESHOLD, 1500, 1e-6],
+  ['the top of the published Napier range', KN_TOP, 3200, 1e-6],
+  ['the drag coefficient cap', DRAG_CAP.c, 240, 1e-9],
+  ['the Kv fit intercept', KV_A, 0.9935, 1e-9],
+  ['the Kv fit inverse-root term', KV_B, 2.878, 1e-9],
+  ['the Kv fit inverse-three-halves term', KV_C, 342.75, 1e-6],
+  ['the Napier numerator slope over the denominator slope', NAPIER.A, 0.1906 / 0.2292, 1e-9],
+  ['the Napier numerator intercept over the denominator slope', NAPIER.B, -1000 / 0.2292, 1e-9],
+  ['the Napier denominator intercept over the denominator slope', NAPIER.D, -1061 / 0.2292, 1e-9],
+  ['the blowdown time limit', BLOWDOWN_LIMIT, 7200, 1e-4],
+  ['the back-pressure ratio the bellows warning fires above', BACKP_WARN_RATIO, 0.3, 1e-9],
+  ['the Kv the envelope warning fires below', KV_WARN, 0.5, 1e-9],
+  ['the latent heat the near-critical warning fires below', LATENT_WARN, 50, 1e-9],
+  ['the go-wider note edge in L over D', LD_NOTE.hiLd, 6, 1e-9],
+  ['the smaller-drum note edge in L over D', LD_NOTE.loLd, 2, 1e-9],
+];
+PUBLISHED.forEach(([name, got, want, tol]) => {
+  must(`${name} measures the published figure`, Math.abs(got / want - 1) <= tol,
+    `measured ${got}, published ${want}, relative difference ${Math.abs(got / want - 1).toExponential(3)}`);
+});
+must('enough leading constants and edges were checked against a published figure',
+  PUBLISHED.length >= 20, `${PUBLISHED.length} checked`);
+
 /* ------------------------------------- the claims this file goes on to make */
 
 must('ATM is measured the same three ways to twelve figures',
@@ -444,7 +561,7 @@ w();
 
 /* ------------------------------------------------------------- SECTION 1 */
 
-w('# SECTION 1: What this engine sizes, and what it refuses (owned by Associate m01)');
+w('# SECTION 1: What this engine sizes, and what it refuses (owned by Associate m01, and shared with Professional m01 because THE ENGINE NEVER CHOOSES THE CASE is that module own subject)');
 w();
 w('# App surface: the Relief & Flare Studio answers four questions over one facility. What orifice a pressure safety valve needs, what load a pool fire puts on it, what drum keeps liquid out of the flare header, and how long a vessel takes to depressure.');
 w('- This engine sizes a PRESSURE RELIEF DEVICE and the flare system behind it. The word relief here always means pressure relief. A relief WELL is a drilling subject and belongs to another course.');
@@ -496,15 +613,14 @@ w(`| the pool fire constant with drainage, Btu/hr per ft2^0.82 | ${e12(C21000)} 
 w(`| the pool fire constant without drainage | ${e12(C34500)} | the same call with the drainage answer false |`);
 w(`| the drainage factor between them | ${e12(DRAINAGE_FACTOR)} | the ratio of the two rows above |`);
 w(`| the pool fire exponent | ${e12(FIRE_EXP)} | the log ratio of two duties at ${EA1} and ${EA2} ft2 over the log ratio of the areas |`);
-w(`| the Kv fit intercept | ${e12(KV_A)} | 1/Kv from the UNCLAMPED export at a Reynolds number of 1e18 |`);
-w(`| the Kv fit inverse-root term | ${e12(KV_B)} | the same at 1e4, with the intercept removed and the result scaled by sqrt(Re) |`);
-w(`| the Kv fit inverse-three-halves term | ${e12(KV_C)} | the same at 4, with both terms above removed |`);
+w(`| the Kv fit intercept | ${e12(KV_A)} | 1/Kv is the sum of three terms in the Reynolds number, so THREE readings of the UNCLAMPED export solve for all three coefficients exactly. Reading them one at a time does not work: at a Reynolds number of 1e18 the inverse-root term is still ${(KV_B * 1e-9).toExponential(3)}, and subtracting an intercept carrying that residue puts the next coefficient out by more than one percent |`);
+w(`| the Kv fit inverse-root term | ${e12(KV_B)} | the same three-equation solve |`);
+w(`| the Kv fit inverse-three-halves term | ${e12(KV_C)} | the same three-equation solve |`);
 w(`| the Kv asymptote the unclamped fit reaches | ${e12(KV_ASYMPTOTE)} | liquidKvUnclamped at 1e18 |`);
 w(`| the Reynolds number the clamp starts holding Kv at one | ${e12(KV_CLAMP_RE)} | bisection on where the unclamped fit crosses one |`);
-w(`| the Napier numerator slope | ${e12(NAPIER.a)} | three pressures above the threshold solving the ratio of two lines |`);
-w(`| the Napier numerator intercept | ${e12(NAPIER.b)} | the same |`);
-w(`| the Napier denominator slope | ${e12(NAPIER.c)} | the same |`);
-w(`| the Napier denominator intercept | ${e12(NAPIER.d)} | the scale the other three are solved against |`);
+w(`| the Napier numerator slope over the denominator slope | ${e12(NAPIER.A)} | three pressures above the threshold solving the ratio of two lines. A ratio of two lines is unchanged when all four of its coefficients are scaled together, so only THREE of the four are measurable and the published quartet is one scaling of these three |`);
+w(`| the Napier numerator intercept over the denominator slope | ${e12(NAPIER.B)} | the same solve |`);
+w(`| the Napier denominator intercept over the denominator slope | ${e12(NAPIER.D)} | the same solve |`);
 w(`| the liquid Reynolds constant | ${e12(C2800)} | the returned Reynolds number rearranged against the area it belongs to |`);
 w(`| the universal gas constant the march uses, ft.lbf/(lbmol.degR) | ${e12(RGAS_UNIVERSAL)} | the mass the march reports for its own start state, rearranged |`);
 w(`| the solid angle in the point source | ${e12(FOUR_PI)} | one intensity rearranged against its own stated release, fraction, transmissivity and distance |`);

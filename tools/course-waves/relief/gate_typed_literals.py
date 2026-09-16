@@ -50,24 +50,17 @@ ALLOWED = {
  '14.696': 'the package standard pressure in psia, named in the prose that states the drum rate conversion whose result is printed beside it',
  '519.67': 'the package standard temperature in degR, on the same terms',
  '520':  'the standard temperature in degR the app own drum conversion uses, named beside the package base in the same sentence',
- # MEASUREMENT PROBE NAMES. Each names the constant the probe RECOVERS, and the
- # recovered value is printed on the same row.
- '21000': 'the name of the probe that MEASURES the pool fire constant with drainage; the measured value is printed on the same row',
- '34500': 'the same for the constant without drainage',
- '2800':  'the same for the liquid Reynolds constant',
- '38':    'the same for the liquid leading constant',
- '51.5':  'the same for the steam leading constant',
- '735':   'the same for the subcritical leading constant',
+ # MEASUREMENT PROBE NAMES used to be listed here. They are not any more: a
+ # probe's name is an argument to the assertion machinery, which never reaches
+ # the digest, and strip_calls removes the whole call before the sweep. A dead
+ # row would have hidden that, which is why a dead row fails this gate.
  '0.82':  'the exponent named in the column heading of the row that MEASURES it, printed on that row',
- '1e18':  'the Reynolds number the Kv asymptote probe is asked at, stated in the how-it-was-asked column beside the answer',
- '1e4':   'the Reynolds number the Kv inverse-root probe is asked at, on the same terms',
+ '1e18':  'the Reynolds number the how-it-was-asked column names when it explains why the three coefficients are solved together rather than read one at a time',
  # ROW AND COLUMN LABELS naming a stated input of the row they head
  '0.8':   'the pressure ratio the F2 column of the section 4 table is evaluated at, stated in that column heading',
  '0.83':  'the superheated KSH the same case is re-run at, stated in the sentence whose answer is printed beside it',
  '0.1':   'a depth fraction naming a row of the table printed directly above',
  '0.75':  'a second depth fraction naming another row of the same table',
- '0.30':  'a holdup naming a row of the section 18 sweep, in the sentence that reads two of its rows',
- '0.90':  'the other holdup naming a row of the same sweep',
  '0.3':   'the environment factor of a variant row of the section 16 table, stated in that row label',
  '2.0':   'a trimmed level in feet naming a variant row of the same table, and an orifice in inches naming a closed-form row',
  '8.0':   'a raised level in feet naming a variant row of the same table',
@@ -76,6 +69,81 @@ ALLOWED = {
  '1800':  'a start pressure in psia naming a closed-form row of section 21',
  '14':    'a drum diameter in feet naming a note row of section 26',
 }
+
+def strip_decls(text, names):
+    """Remove whole `const NAME = [...]` or `const NAME = {...}` declarations,
+    matching brackets by DEPTH.
+
+    WHY. MEASURED and PUBLISHED are the assertion TABLES: one lists every
+    measured constant so a non-finite one fails, and the other pairs each
+    measured leading constant with the PUBLISHED figure it must equal. Their
+    numbers are what an assertion compares against and none of them reaches the
+    digest. A sweep that read them would fail this gate on the very table that
+    caught the 716.625 defect.
+    """
+    out, i, n = [], 0, len(text)
+    while i < n:
+        hit = None
+        for name in names:
+            for kw in ('const ', 'let '):
+                pref = kw + name + ' = '
+                if text.startswith(pref, i):
+                    hit = pref
+                    break
+            if hit:
+                break
+        if hit:
+            i += len(hit)
+            if i < n and text[i] in '[{':
+                open_c, close_c = text[i], (']' if text[i] == '[' else '}')
+                depth = 1
+                i += 1
+                while i < n and depth:
+                    if text[i] == open_c:
+                        depth += 1
+                    elif text[i] == close_c:
+                        depth -= 1
+                    i += 1
+            out.append(' ASSERTIONTABLE ')
+        else:
+            out.append(text[i])
+            i += 1
+    return ''.join(out)
+
+
+def strip_calls(text, names):
+    """Remove whole CALL EXPRESSIONS to the named functions, matching parentheses
+    by DEPTH so a nested call or an object literal goes with them.
+
+    WHY. This gate's question is "did a number reach the DIGEST as prose". The
+    assertion machinery in the dump (`must`, `refusal`, `success`, `agree`) takes
+    string arguments that never reach the digest at all: they are the claim and
+    the detail a failed assertion prints to stderr, and they legitimately carry
+    tolerances like 1e-6. Sweeping them made the gate report three typed numbers
+    that no reader can ever see, which is a gate failing on its own scaffolding.
+    """
+    out, i, n = [], 0, len(text)
+    while i < n:
+        hit = None
+        for name in names:
+            if text.startswith(name + '(', i) and (i == 0 or not (text[i - 1].isalnum() or text[i - 1] in '_$.')):
+                hit = name
+                break
+        if hit:
+            i += len(hit) + 1
+            depth = 1
+            while i < n and depth:
+                if text[i] == '(':
+                    depth += 1
+                elif text[i] == ')':
+                    depth -= 1
+                i += 1
+            out.append(' ASSERTION ')
+        else:
+            out.append(text[i])
+            i += 1
+    return ''.join(out)
+
 
 def strip_substitutions(text):
     """Remove every ${...} group, matching braces by DEPTH so a substitution
@@ -106,7 +174,18 @@ def main():
     # so a gate that only read w() arguments would miss exactly the strings a
     # writer is most likely to type a number into. Line comments are stripped
     # first so the module header's own prose is not swept as output.
-    body_src = re.sub(r'^\s*//.*$', '', src, flags=re.M)
+    # BLOCK COMMENTS FIRST, and this matters more than it looks. A /* */ block
+    # holding an apostrophe breaks the pairing of the single-quote literal regex
+    # below, so everything after it is paired from the wrong quote and the gate
+    # starts sweeping CODE as though it were printed prose. Observed: it
+    # reported a units conversion inside an expression and two figures from an
+    # explanatory comment as typed digest numbers. Strip both comment shapes.
+    body_src = re.sub(r'/\*.*?\*/', ' ', src, flags=re.S)
+    body_src = re.sub(r'^\s*//.*$', '', body_src, flags=re.M)
+    # THE ASSERTION MACHINERY IS NOT OUTPUT. Its string arguments are what a
+    # failed assertion prints to stderr, never what the digest carries.
+    body_src = strip_calls(body_src, ['must', 'refusal', 'success', 'agree'])
+    body_src = strip_decls(body_src, ['MEASURED', 'PUBLISHED'])
     # Strip every ${...} at SOURCE level first. A nested backtick template
     # inside a substitution would otherwise split the outer literal in two and
     # feed the gate a fragment of code as if it were prose.

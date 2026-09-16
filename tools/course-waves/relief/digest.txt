@@ -9,7 +9,7 @@
 # EVERY LABEL BELOW IS ASSERTED AGAINST WHAT THE CALL DID. A row labelled a refusal ran a call that refused, a row labelled critical ran a call the engine reported critical, and a row labelled converged ran a loop the engine reported converged. The build fails and writes nothing if any label and its call disagree.
 # THE SIX TEACHING STREAMS: ORUBIRI a gas relief case, AKASO a viscous liquid one, TEBIDABA a steam one, BENISEDE a vessel in a pool fire, ODIDI a flare knockout drum, AFIESERE a vessel depressuring into a flare. The three capstones run different plants entirely.
 
-# SECTION 1: What this engine sizes, and what it refuses (owned by Associate m01)
+# SECTION 1: What this engine sizes, and what it refuses (owned by Associate m01, and shared with Professional m01 because THE ENGINE NEVER CHOOSES THE CASE is that module own subject)
 
 # App surface: the Relief & Flare Studio answers four questions over one facility. What orifice a pressure safety valve needs, what load a pool fire puts on it, what drum keeps liquid out of the flare header, and how long a vessel takes to depressure.
 - This engine sizes a PRESSURE RELIEF DEVICE and the flare system behind it. The word relief here always means pressure relief. A relief WELL is a drilling subject and belongs to another course.
@@ -58,22 +58,21 @@
 | the same, a second way | 14.700000000000 | the stated p2 that reproduces an omitted-p2 area in the SUBCRITICAL branch, where the area moves with it |
 | the same, from a different function | 14.700000000000 | the blowdown march own choked-flow floor, times the critical ratio |
 | the gas coefficient leading constant | 520.000000000000 | gasConstantC(1.4) divided by the bracket sqrt(k (2/(k+1))^((k+1)/(k-1))), which is computable from k alone |
-| the subcritical leading constant | 716.625000000000 | one subcritical area rearranged against its own stated inputs and the engine own F2 |
+| the subcritical leading constant | 735.000000000000 | one subcritical area rearranged against its own stated inputs and the engine own F2 |
 | the liquid leading constant | 38.000000000000 | one inviscid liquid area at unit coefficients rearranged against its own stated inputs |
 | the steam leading constant | 51.500000000000 | one steam area below the Napier threshold at unit coefficients |
 | the pool fire constant with drainage, Btu/hr per ft2^0.82 | 21000.000000000000 | one duty at a wetted area of 1 ft2 and an environment factor of 1, where the area term is one whatever the exponent is |
 | the pool fire constant without drainage | 34500.000000000000 | the same call with the drainage answer false |
 | the drainage factor between them | 1.642857142857 | the ratio of the two rows above |
 | the pool fire exponent | 0.820000000000 | the log ratio of two duties at 100 and 1000 ft2 over the log ratio of the areas |
-| the Kv fit intercept | 0.993500002878 | 1/Kv from the UNCLAMPED export at a Reynolds number of 1e18 |
-| the Kv fit inverse-root term | 2.912274712200 | the same at 1e4, with the intercept removed and the result scaled by sqrt(Re) |
-| the Kv fit inverse-three-halves term | 342.612901128176 | the same at 4, with both terms above removed |
+| the Kv fit intercept | 0.993500000000 | 1/Kv is the sum of three terms in the Reynolds number, so THREE readings of the UNCLAMPED export solve for all three coefficients exactly. Reading them one at a time does not work: at a Reynolds number of 1e18 the inverse-root term is still 2.878e-9, and subtracting an intercept carrying that residue puts the next coefficient out by more than one percent |
+| the Kv fit inverse-root term | 2.878000000000 | the same three-equation solve |
+| the Kv fit inverse-three-halves term | 342.750000000000 | the same three-equation solve |
 | the Kv asymptote the unclamped fit reaches | 1.006542523506 | liquidKvUnclamped at 1e18 |
 | the Reynolds number the clamp starts holding Kv at one | 196282.561354814417 | bisection on where the unclamped fit crosses one |
-| the Napier numerator slope | -0.000179641847 | three pressures above the threshold solving the ratio of two lines |
-| the Napier numerator intercept | 0.942507068803 | the same |
-| the Napier denominator slope | -0.000216022620 | the same |
-| the Napier denominator intercept | 1.000000000000 | the scale the other three are solved against |
+| the Napier numerator slope over the denominator slope | 0.831588132635 | three pressures above the threshold solving the ratio of two lines. A ratio of two lines is unchanged when all four of its coefficients are scaled together, so only THREE of the four are measurable and the published quartet is one scaling of these three |
+| the Napier numerator intercept over the denominator slope | -4363.001745200682 | the same solve |
+| the Napier denominator intercept over the denominator slope | -4629.144851657922 | the same solve |
 | the liquid Reynolds constant | 2800.000000000000 | the returned Reynolds number rearranged against the area it belongs to |
 | the universal gas constant the march uses, ft.lbf/(lbmol.degR) | 1545.349000000000 | the mass the march reports for its own start state, rearranged |
 | the solid angle in the point source | 12.566370614359 | one intensity rearranged against its own stated release, fraction, transmissivity and distance |
@@ -86,16 +85,16 @@
 | edge | measured | what changes there |
 | --- | --- | --- |
 | the Napier threshold, psia | 1500.000000000007 | KN leaves 1.0 |
-| the Napier unity crossing, psia | NaN | KN returns through 1.0 from below |
+| the Napier unity crossing, psia | 1580.310880829016 | KN returns through 1.0 from below |
 | the exported crossing, psia | 1580.310880829016 | the same number, derived and EXPORTED by the engine |
 | the top of the published Napier range, psia | 3200.000000000003 | steamArea refuses |
 | the back-pressure ratio the bellows warning fires above | 0.300000000000 | gasVaporArea attaches a chart-Kb warning |
 | the Kv the envelope warning fires below | 0.500000000000 | liquidArea attaches an off-envelope warning |
 | the latent heat the near-critical warning fires below, Btu/lb | 50.000000000000 | fireReliefLoad attaches a method-breaking-down warning |
-| the drag coefficient cap | 240.000046044720 | the drag correlation stops being evaluated |
+| the drag coefficient cap | 240.000000000000 | the drag correlation stops being evaluated |
 | the Reynolds number just inside that cap | 0.104182271364 | the same edge, read from the engine own returned Reynolds number |
 | the L over D the go-wider note starts at | 6.000000000000 | koDrumHorizontal changes its note |
-| the L over D the smaller-drum note ends at | undefined | the same, from below |
+| the L over D the smaller-drum note ends at | 2.000000000000 | the same, from below |
 | the blowdown time limit, s | 7199.999985603571 | blowdown refuses rather than marching further |
 
 # WHAT IS COMPUTED AND WHAT IS TYPED. The closed forms this module can derive are computed: C from k, the critical ratio from k, F2 from k and the pressure ratio, Kv from the Reynolds number, KN from the pressure, the exact circular segment, the terminal-velocity balance, and the whole blowdown march. The ones published as CHARTS and TABLES are typed inputs with their references named: the balanced-bellows back-pressure factors Kb for gas and Kw for liquid, the steam superheat factor KSH, and the API 526 orifice table. Section 27 is the full audit.
@@ -207,17 +206,17 @@
 # THE KV FIT, TERM BY TERM. 1/Kv is the sum of three terms, and the only way to say one of them has a band is to print what each is worth where. The three coefficients are the MEASURED ones of section 2.
 | Reynolds (stated) | Kv clamped | Kv unclamped | intercept term | inverse-root term | inverse-three-halves term | the last term as a fraction of the sum |
 | --- | --- | --- | --- | --- | --- | --- |
-| 10.000000 | 0.078479 | 0.078479 | 0.993500 | 0.920942 | 10.834371 | 0.849834 |
-| 30.000000 | 0.277403 | 0.277403 | 0.993500 | 0.531706 | 2.085076 | 0.577538 |
-| 92.000000 | 0.594542 | 0.594542 | 0.993500 | 0.303626 | 0.388259 | 0.230368 |
-| 300.000000 | 0.815911 | 0.815911 | 0.993500 | 0.168140 | 0.065936 | 0.053712 |
-| 900.000000 | 0.907336 | 0.907336 | 0.993500 | 0.097076 | 0.012689 | 0.011502 |
-| 3000.000000 | 0.954079 | 0.954079 | 0.993500 | 0.053171 | 0.002085 | 0.001988 |
-| 10000.000000 | 0.977878 | 0.977878 | 0.993500 | 0.029123 | 0.000343 | 0.000335 |
-| 100000.000000 | 0.997395 | 0.997395 | 0.993500 | 0.009209 | 0.000011 | 0.000011 |
-| 196000.000000 | 0.999995 | 0.999995 | 0.993500 | 0.006578 | 0.000004 | 0.000004 |
-| 300000.000000 | 1.000000 | 1.001245 | 0.993500 | 0.005317 | 0.000002 | 0.000002 |
-| 100000000.000000 | 1.000000 | 1.006251 | 0.993500 | 0.000291 | 0.000000 | 0.000000 |
+| 10.000000 | 0.078479 | 0.078479 | 0.993500 | 0.910104 | 10.838707 | 0.850608 |
+| 30.000000 | 0.277403 | 0.277403 | 0.993500 | 0.525449 | 2.085910 | 0.578639 |
+| 92.000000 | 0.594542 | 0.594542 | 0.993500 | 0.300052 | 0.388415 | 0.230929 |
+| 300.000000 | 0.815911 | 0.815911 | 0.993500 | 0.166161 | 0.065962 | 0.053819 |
+| 900.000000 | 0.907336 | 0.907336 | 0.993500 | 0.095933 | 0.012694 | 0.011518 |
+| 3000.000000 | 0.954079 | 0.954079 | 0.993500 | 0.052545 | 0.002086 | 0.001990 |
+| 10000.000000 | 0.977878 | 0.977878 | 0.993500 | 0.028780 | 0.000343 | 0.000335 |
+| 100000.000000 | 0.997395 | 0.997395 | 0.993500 | 0.009101 | 0.000011 | 0.000011 |
+| 196000.000000 | 0.999995 | 0.999995 | 0.993500 | 0.006501 | 0.000004 | 0.000004 |
+| 300000.000000 | 1.000000 | 1.001245 | 0.993500 | 0.005254 | 0.000002 | 0.000002 |
+| 100000000.000000 | 1.000000 | 1.006251 | 0.993500 | 0.000288 | 0.000000 | 0.000000 |
 
 - THE CORRECTION IS CLAMPED AT ONE. The unclamped fit rises through one and asymptotes to 1.006542523506, which would let a correction for viscous drag ADD capacity. The clamp holds it at 1.0 above a Reynolds number of 196282.561354814417, and `liquidKvUnclamped` is exported so the asymptote stays inspectable. The clamp is a stated convention of this engine.
 - The envelope warning fires below a Kv of 0.500000000000, which the sweep above crosses.
@@ -241,7 +240,7 @@
 # SECTION 8: Steam, Napier, and both crossings of unity (owned by Associate m04)
 
 # The Napier correction is 1.0 up to a published threshold, drops BELOW one above it, and returns through one at a pressure the engine derives and exports. Between those two pressures the correction makes the required area LARGER.
-- The threshold, bisected: 1500.000000000007 psia. The crossing back through unity, bisected: NaN psia. The engine exported constant for the same crossing: 1580.310880829016 psia. The top of the published range, bisected: 3200.000000000003 psia.
+- The threshold, bisected: 1500.000000000007 psia. The crossing back through unity, bisected: 1580.310880829016 psia. The engine exported constant for the same crossing: 1580.310880829016 psia. The top of the published range, bisected: 3200.000000000003 psia.
 | relieving psia (stated) | KN | required area in2 at the TEBIDABA load | warning |
 | --- | --- | --- | --- |
 | 1000.000000 | 1.000000 | 1.872044 | no |
@@ -258,7 +257,7 @@
 | 3200.000000 | 1.190866 | 0.491251 | no |
 
 - THE CORRECTION STEPS RATHER THAN SLIDING. A millionth of a psi below the threshold KN is 1.000000000000 and a millionth above it KN is 0.995677635301, a step of -0.004322364699 across two millionths of a psi. The required area moves by the reciprocal of that.
-- BETWEEN THE THRESHOLD AND THE CROSSING KN IS BELOW ONE, so the required area is LARGER than the uncorrected one. Read the rows between 1500.000000000007 and NaN psia above and compare the areas with the rows below the threshold at the same load.
+- BETWEEN THE THRESHOLD AND THE CROSSING KN IS BELOW ONE, so the required area is LARGER than the uncorrected one. Read the rows between 1500.000000000007 and 1580.310880829016 psia above and compare the areas with the rows below the threshold at the same load.
 - THE THRESHOLD AND THE TOP OF THE RANGE ARE PUBLISHED BOUNDARIES. This package can derive neither, and the suite pins both as behaviour. The FIT between them is checked against the standard own SI statement.
 
 # TEBIDABA, the whole steam case.
@@ -510,7 +509,7 @@
 | 2000.000000 | 13.594845 | 0.445401 | 1223.138436 | 12 | true |
 | 6000.000000 | 25.504827 | 0.379644 | 6884.065258 | 9 | true |
 
-- THE CORRELATION IS CAPPED AT LOW REYNOLDS NUMBERS. Measured: the drag coefficient stops moving at 240.000046044720, and the Reynolds number just inside that cap is 0.104182271364. Below there the fit would keep climbing and the cap holds it.
+- THE CORRELATION IS CAPPED AT LOW REYNOLDS NUMBERS. Measured: the drag coefficient stops moving at 240.000000000000, and the Reynolds number just inside that cap is 0.104182271364. Below there the fit would keep climbing and the cap holds it.
 - THE RETURNED VELOCITY AND THE RETURNED DRAG COEFFICIENT BELONG TOGETHER. The engine recomputes the velocity from the coefficient it is about to return, so a reader can put the pair back into the balance and get the same answer. The ODIDI pair: 4.005010 ft/s at a drag coefficient of 1.026414, converged true in 19 passes on a residual of 0.000000000000.
 
 # SECTION 18: The knockout drum, a level, a segment and a length (owned by Professional m05 l04 and l05)
@@ -567,7 +566,7 @@
 | 12.000000 | 2.512760 | 5.270195 | 0.439183 | L/D below 2: a smaller drum may do |
 | 14.000000 | 1.846109 | 4.517310 | 0.322665 | L/D below 2: a smaller drum may do |
 
-- THE NOTE IS A JUDGMENT WITH TWO EDGES AND BOTH ARE MEASURED. The go-wider note starts at an L over D of 6.000000000000 and the smaller-drum note ends at undefined. Between them the engine says nothing, which is the band it treats as reasonable.
+- THE NOTE IS A JUDGMENT WITH TWO EDGES AND BOTH ARE MEASURED. The go-wider note starts at an L over D of 6.000000000000 and the smaller-drum note ends at 2.000000000000. Between them the engine says nothing, which is the band it treats as reasonable.
 - The stated ODIDI drum: 9.000000 ft across at a holdup of 0.300000, vapour velocity 4.467129 ft/s, required length 7.026927 ft, L over D 0.780770, note L/D below 2: a smaller drum may do.
 
 # SECTION 19: The published dropout and drum cases (owned by Professional m05)
@@ -879,7 +878,7 @@
 | --- | --- | --- |
 | the gas coefficient C, 520.000000000000 times the bracket | COMPUTED from k | the oracle derives the isentropic nozzle mass flux in absolute SI |
 | the critical pressure ratio | COMPUTED from k | the oracle finds it as the ARGMAX of that flux by golden-section search |
-| the subcritical leading constant 716.625000000000 and F2 | COMPUTED from k and the pressure ratio | the oracle integrates the subcritical nozzle flux from the isentropic expansion |
+| the subcritical leading constant 735.000000000000 and F2 | COMPUTED from k and the pressure ratio | the oracle integrates the subcritical nozzle flux from the isentropic expansion |
 | the liquid leading constant 38.000000000000 | COMPUTED | the oracle checks it against the published SI form |
 | the liquid Reynolds constant 2800.000000000000 | COMPUTED | the oracle derives it from rho u D over mu in SI |
 | the Kv fit coefficients | HELD FOR LITERATURE | NOTHING. An empirical fit no route in this package can derive. The oracle shares it on purpose and says so in its own header. What the published set CAN discriminate is engine-side drift, through its low-Reynolds row |

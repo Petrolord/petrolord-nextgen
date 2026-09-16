@@ -98,6 +98,36 @@
 S = 'fc-sizing-explorer'
 F = 'fc-fire-drum-explorer'
 B = 'fc-blowdown-explorer'
+PANEL_IDS = [S, F, B]
+
+# ---------------------------------------------------------------------------
+# PER-LESSON WORD COUNTS.
+#
+# THE BAND IS 420 TO 560 PROSE WORDS for every lesson in this wave, and the
+# measure is the one lengths.py uses: PROSE WORDS ONLY, with front matter,
+# markdown table rows, headings and {{panel:...}} lines all excluded. A raw
+# `wc -w` over the whole file is NOT this measure and runs materially higher, so
+# a lesson can be inside the band and still fail a raw word count. Say which
+# measure before quoting a number at a writer.
+#
+# The MINIMUM is per lesson and is derived from the estimated minutes rather
+# than typed, so the ranking by est_minutes and the ranking by length cannot
+# disagree. A twelve-minute lesson must clear 420 words, a thirteen-minute one
+# 460, a fourteen-minute one 500, and the ceiling is 560 for all of them. That
+# leaves every lesson at least 60 words of room, which is what stops the
+# minimum and the maximum meeting.
+# ---------------------------------------------------------------------------
+BAND = (420, 560)
+MIN_BY_MINUTES = {12: 420, 13: 460, 14: 500}
+
+
+def min_words(est_minutes):
+    """The minimum prose words a lesson of this length must carry."""
+    if est_minutes not in MIN_BY_MINUTES:
+        raise ValueError(
+            f'no minimum word count is declared for {est_minutes} estimated minutes; '
+            f'declared: {sorted(MIN_BY_MINUTES)}')
+    return MIN_BY_MINUTES[est_minutes]
 
 # Lessons whose source section of the digest does not exist until FC5-0, the
 # engine repair, has landed and the digest has been rebuilt against it. A
@@ -234,3 +264,98 @@ TIERS = {
   ]),
  ],
 }
+
+
+# ---------------------------------------------------------------------------
+# THE CHECKS THIS FILE RUNS ON ITSELF. Run `python3 structure.py` to see them.
+# A structure file that is wrong about its own shape is a structure file every
+# later phase inherits, so it states its counts rather than being read for them.
+# ---------------------------------------------------------------------------
+
+def flat():
+    """Every lesson in the wave as (tier, module_key, module_title, order,
+    lesson_key, lesson_title, est_minutes, panels, min_words)."""
+    out = []
+    for tier, mods in TIERS.items():
+        for mi, (mkey, mtitle, lessons) in enumerate(mods, 1):
+            for li, (lkey, ltitle, est, panels) in enumerate(lessons, 1):
+                out.append((tier, mkey, mtitle, mi, li, lkey, ltitle, est, panels, min_words(est)))
+    return out
+
+
+def check():
+    rows = flat()
+    problems = []
+    per_tier = {}
+    for r in rows:
+        per_tier.setdefault(r[0], 0)
+        per_tier[r[0]] += 1
+    for tier, n in per_tier.items():
+        if n != 26:
+            problems.append(f'{tier} has {n} lessons, expected 26')
+        if len(TIERS[tier]) != 6:
+            problems.append(f'{tier} has {len(TIERS[tier])} modules, expected 6')
+    if len(rows) != 78:
+        problems.append(f'{len(rows)} lessons in the wave, expected 78')
+    # every panel tag is one of the three declared ids
+    for r in rows:
+        for pid in r[8]:
+            if pid not in PANEL_IDS:
+                problems.append(f'{r[0]}/{r[5]} tags an unknown panel {pid}')
+    # no duplicate keys within a tier, and no duplicate module keys
+    for tier, mods in TIERS.items():
+        mkeys = [m[0] for m in mods]
+        if len(set(mkeys)) != len(mkeys):
+            problems.append(f'{tier} repeats a module key')
+        for mkey, _, lessons in mods:
+            lkeys = [l[0] for l in lessons]
+            if len(set(lkeys)) != len(lkeys):
+                problems.append(f'{tier}/{mkey} repeats a lesson key')
+    # THE OWNER COPY RULE, over every title a learner reads
+    import re
+    for tier, mods in TIERS.items():
+        for mkey, mtitle, lessons in mods:
+            titles = [mtitle] + [l[1] for l in lessons]
+            for t in titles:
+                if re.search('[\u2013\u2014]', t):
+                    problems.append(f'{tier}: title carries a dash: {t}')
+                if re.search(r',\s+not\s+\w', t):
+                    problems.append(f'{tier}: title carries a contrastive: {t}')
+    # A TITLE CARRIES COUNTS ONLY, NEVER A MEASUREMENT. A count is a small whole
+    # number of things the structure itself fixes; a measurement is a figure a
+    # writer cannot check until the digest exists.
+    # A NAMED PUBLISHED SYMBOL IS NOT A MEASUREMENT. F2 is the name of the
+    # subcritical flow factor and API 520, 521 and 526 are the names of
+    # standards, so those tokens are removed before the digit check rather than
+    # allowlisted title by title, which would rot.
+    SYMBOLS = re.compile(r'\bF2\b|\bAPI\s+5\d\d\b|\bKSH\b')
+    for tier, mods in TIERS.items():
+        for mkey, mtitle, lessons in mods:
+            for t in [mtitle] + [l[1] for l in lessons]:
+                if re.search(r'\d', SYMBOLS.sub(' ', t)):
+                    problems.append(f'{tier}: title carries a digit, which is a measurement rather than a count: {t}')
+    # the HELD list must name lessons that exist
+    keys = {(r[0], r[1], r[5]) for r in rows}
+    for h in HELD:
+        if h not in keys:
+            problems.append(f'HELD names a lesson that does not exist: {h}')
+    minutes = sorted({r[7] for r in rows})
+    print(f'FC5 relief structure: {len(rows)} lessons, '
+          f'{sum(len(m) for m in TIERS.values())} modules, 3 tiers')
+    for tier in ('beginner', 'intermediate', 'advanced'):
+        mods = TIERS[tier]
+        print(f'  {tier:13s} {len(mods)} modules, {per_tier[tier]} lessons, '
+              f'panel tags {sum(len(l[3]) for m in mods for l in m[2])}')
+    print(f'  estimated minutes present: {minutes}, '
+          f'minimum prose words: {[MIN_BY_MINUTES[m] for m in minutes]}, band ceiling {BAND[1]}')
+    print(f'  panels declared: {PANEL_IDS}')
+    print(f'  lessons HELD until the engine repair landed: {len(HELD)} (the repair is merged, so none is held now)')
+    print(f'  PROBLEMS: {len(problems)}')
+    for p in problems:
+        print(f'   {p}')
+    return problems
+
+
+if __name__ == '__main__':
+    import sys
+    sys.exit(1 if check() else 0)

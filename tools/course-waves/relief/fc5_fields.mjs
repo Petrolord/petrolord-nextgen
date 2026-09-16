@@ -138,7 +138,10 @@ export const PROBES = {
   // same k, leaves 520 alone.
   cAtK: 1.4,
   // 735: one subcritical area against its own inputs and its own F2.
-  subcritical: { wLbHr: 10000, p1Psia: 500, p2Psia: 400, tR: 600, mw: 20, z: 1, k: 1.3 },
+  // AT UNIT CERTIFIED COEFFICIENTS. Without kd and kc the probe recovers the
+  // leading constant TIMES the engine's default discharge coefficient, which is
+  // a different number and reads exactly like the right one.
+  subcritical: { wLbHr: 10000, p1Psia: 500, p2Psia: 400, tR: 600, mw: 20, z: 1, k: 1.3, kd: 1, kc: 1 },
   // 38: one inviscid liquid area against its own inputs.
   liquidBare: { qGpm: 100, p1Psig: 100, p2Psig: 0, sg: 1, kd: 1, kw: 1, kc: 1 },
   // 51.5: one steam area below the Napier threshold, at unit factors.
