@@ -33,7 +33,7 @@ One more check that costs nothing. Ekene-5 has `wcMax` 0 and no breakthrough dat
 
 Leave the window exactly where it was and change the well selector to Ekene-6. Keep the model on Exponential; auto-select lands on Exponential here anyway.
 
-The tiles now read $q_i$ 58.134557068111256 stb/d, $D_i$ 0.0013275893489185155 per day, R2 0.9477350438026422, quality Good. That $D_i$ is the graded value, and the tolerance of 0.00002 is 1.5 percent of it.
+The tiles now read $q_i$ 58.134557068111256 stb/d, $D_i$ 0.0013275893489185155 per day, R2 0.9477350438026422, quality Good. That $D_i$ is the graded value, and the tolerance of 0.000002 is 0.15 percent of it, tight enough that a decline fitted on a neighbouring well or a neighbouring window will not pass in its place.
 
 This is the field people fail while doing good engineering. Having just learned that the flood's decline constant is 0.00035 per day and that all four wells recover it, the instinct is to report the reservoir's decline. The field does not ask for that. It asks what a fit of this well's oil stream on this window returns, which is 3.793112425481473 times larger, because Ekene-6's water cut climbs toward 45 percent across those twenty rows and every one of them carries water.
 
