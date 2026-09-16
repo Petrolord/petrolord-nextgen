@@ -1,12 +1,12 @@
 # How many steps are enough
 
-A step count is a choice, and like every choice in this module it is an input with a default rather than a hidden constant. The way to decide it is to measure the answer against itself at a step count nothing downstream would ever use.
+A step count is a choice, and like every choice in this module it is an input with a default rather than a hidden constant. Decide it by measuring the answer against itself at a step count nothing downstream would ever use.
 
 {{panel:fc-coldend-explorer}}
 
 ## The reference march
 
-The same routine, on the same let-down, marched at twenty thousand steps reports a cooling of 36.316559445 degF. It has no special authority beyond being far finer than anything a design pass would run, which is exactly what a reference needs to be. It is the engine checked against itself rather than against a second method.
+The same routine, on the same let-down, marched at twenty thousand steps reports a cooling of 36.316559445 degF. It has no authority beyond being far finer than anything a design pass would run, which is what a reference needs to be. It is the engine checked against itself rather than against a second method.
 
 | steps | cooling, degF | arrival, degF | cooling over the 20000-step answer |
 | --- | --- | --- | --- |
@@ -20,7 +20,7 @@ The same routine, on the same let-down, marched at twenty thousand steps reports
 
 ## Reading the last column
 
-Each row's last entry is that row's cooling over the reference cooling. The column climbs towards one and it does so quickly, which is the second-order behaviour of the midpoint step showing itself on a real let-down rather than in an argument about orders.
+Each row's last entry is that row's cooling over the reference cooling. The digest prints one such ratio per row and prints no comparison between rows, so any statement about how the column behaves is a reading you take from the rows rather than a figure the engine handed over. Take it deliberately.
 
 Twenty steps is the module's default, and on this let-down it lands at 0.999997906978 of the reference. Two hundred steps lands at 0.999999979778. A reader who needs to justify the default has the two figures to justify it with.
 
@@ -32,9 +32,9 @@ A table this clean invites the wrong conclusion. Converging beautifully to a wro
 
 ## Why a self-check is still worth running
 
-A check against your own arithmetic is the weakest kind of check there is, and this course says so in as many words elsewhere. It is still worth having, because it answers a question no independent oracle answers. An oracle tells you whether two roads reach the same place. A convergence table tells you whether you have walked far enough down one of them to have arrived anywhere at all.
+A check against your own arithmetic is the weakest kind there is, and this course says so elsewhere. It is still worth having, because it answers a question no oracle answers. An oracle tells you whether two roads reach the same place. A convergence table tells you whether you have walked far enough down one of them to have arrived anywhere.
 
-The two failures are genuinely different. A wrong identity marched to convergence is a precise wrong answer. A right identity marched at one step is an imprecise right answer. Only one of the two can be cured by turning a dial, and this table is how you find out which one you are holding.
+The two failures differ. A wrong identity marched to convergence is a precise wrong answer. A right identity marched at one step is an imprecise right answer. Only one can be cured by turning a dial, and this table is how you find out which you are holding.
 
 ## Choosing a count
 
@@ -42,4 +42,4 @@ For a screening pass the default sits far inside anything the inputs can support
 
 ## Exercise
 
-Record the cooling, the arrival temperature and the ratio to the reference at one, five, twenty and two hundred steps, and record the reference cooling itself. Say which step count the module uses by default and what ratio it reaches. Then write one sentence naming a question this table cannot answer about the march.
+Record the cooling, the arrival temperature and the ratio to the reference at one, five, twenty and two hundred steps, and record the reference cooling itself. Say which step count the module uses by default and what ratio it reaches. Then take the ratios at two steps and at ten steps, read each against the row above it, and say what the pattern you find does and does not establish about the order of the method. Finally, write one sentence naming a question this table cannot answer about the march.

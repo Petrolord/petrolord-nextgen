@@ -14,7 +14,7 @@ Both halves move. The engine moves both.
 
 ## What second order means here
 
-A second-order march has an error that falls with the square of the step size, so halving the step quarters the error. That is the property the convergence table in the next lesson measures, and it is the reason twenty steps buys as much as it does on this let-down.
+A second-order march has an error that falls with the square of the step size. That is a statement about the method rather than a prediction about any particular let-down, and the convergence table in the next lesson is where it gets measured on this one.
 
 On AGBADA from 1180.000000 psia to 640.000000 psia over twenty steps the gas arrives at 59.683516566 degF, having cooled 36.316483434 degF.
 
