@@ -17,7 +17,7 @@
 // arithmetic on numbers the engine returned, with the arithmetic stated, and
 // the key name says Derived: a difference of two water contents, a ratio of two
 // coefficients, a share of a duty, a mole percent subtracted from another. The
-// lab and /root/fc-wip-gasprocessing/digest.txt agree because both call the
+// lab and tools/course-waves/gasprocessing/digest.txt agree because both call the
 // engine on the same inputs, not because either copied the other.
 //
 // CONSTANTS ARE MEASURED, NEVER TYPED. Where the engine keeps a packaging to
@@ -93,7 +93,7 @@ const kNum = (args) => G.kremserFractionRemoved(args).fractionRemoved;
 
 // ---------------------------------------------------------------------------
 // THE TEACHING FIELDS, copied VERBATIM from
-// /root/fc-wip-gasprocessing/fc4_fields.mjs, which fc4_dump.mjs imports. The
+// tools/course-waves/gasprocessing/fc4_fields.mjs, which fc4_dump.mjs imports. The
 // lab test compares each declaration with the wave file text and fails on any
 // drift, so these cannot be edited here alone.
 // ---------------------------------------------------------------------------
@@ -1472,7 +1472,7 @@ export const professionalReading = () => {
 // pressure, temperature, gravity, spec, ratio, strength, loading or duty with
 // the teaching fields above.
 //
-// Copied VERBATIM from /root/fc-wip-gasprocessing/fc4_fields_capstone.mjs.
+// Copied VERBATIM from tools/course-waves/gasprocessing/fc4_fields_capstone.mjs.
 // ---------------------------------------------------------------------------
 
 export const IKOT_ABASI_LINE = { pPsia: 880, tF: 109 };

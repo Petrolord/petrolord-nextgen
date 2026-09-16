@@ -1,5 +1,5 @@
 // Every value the FC4 lab exposes to a panel, a lesson or the grader is pinned
-// here against the teaching digest (/root/fc-wip-gasprocessing/digest.txt),
+// here against the teaching digest (tools/course-waves/gasprocessing/digest.txt),
 // which is itself nothing but the Gas Processing engine's return values on the
 // published goldens and on the teaching streams OBIAFU, UBIE and AGBADA.
 //
@@ -13,7 +13,7 @@
 //
 // THE EIGHTEEN GRADED FIELDS of the IKOT ABASI, OTUMARA and ESCRAVOS capstone
 // are pinned separately and EXACTLY against
-// /root/fc-wip-gasprocessing/fields.json, READ FROM THE FILE.
+// tools/course-waves/gasprocessing/fields.json, READ FROM THE FILE.
 //
 // Then the gates:
 //   THE MIRROR GATE    the wave directory is truth and the in-repo copy under
@@ -59,6 +59,9 @@ import { execFileSync } from 'node:child_process';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import * as LAB_NS from './gasprocessingLab.js';
+import {
+  waveDir, waveInput, mirrorDir, liveWaveDir,
+} from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const L = LAB_NS;
 const LAB = Object.fromEntries(Object.entries(L));
@@ -66,15 +69,39 @@ const LAB = Object.fromEntries(Object.entries(L));
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../../../../..');
 
-const WAVE = '/root/fc-wip-gasprocessing';
-const MIRROR = path.join(ROOT, 'tools/course-waves/gasprocessing');
-const DIGEST = path.join(WAVE, 'digest.txt');
-const FIELDS_JSON = path.join(WAVE, 'fields.json');
-const DUMP_MJS = path.join(WAVE, 'fc4_dump.mjs');
-const FIELDS_MJS = path.join(WAVE, 'fc4_fields.mjs');
-const CAPSTONE_MJS = path.join(WAVE, 'fc4_fields_capstone.mjs');
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// DEFAULT, which is what lets this suite run on a CI runner at all; a wave
+// author points it at a live wave directory mid-build with NEXTGEN_WAVE_DIR or
+// NEXTGEN_WAVE_DIR_GASPROCESSING. A missing input throws and names itself
+// rather than skipping: see tools/course-waves/waveInputs.mjs. No path into
+// anybody's scratch directory appears in this file.
+const WAVE_NAME = 'gasprocessing';
+const WAVE = waveDir(WAVE_NAME);
+const MIRROR = mirrorDir(WAVE_NAME);
+/** The live wave directory when this machine has one, else null. The mirror
+ *  gate is the only thing that may read it, and it asserts something true
+ *  either way. */
+const LIVE_WAVE = liveWaveDir(WAVE_NAME);
+const DIGEST = waveInput(WAVE_NAME, 'digest.txt');
+const FIELDS_JSON = waveInput(WAVE_NAME, 'fields.json');
+const DUMP_MJS = waveInput(WAVE_NAME, 'fc4_dump.mjs');
+const FIELDS_MJS = waveInput(WAVE_NAME, 'fc4_fields.mjs');
+const CAPSTONE_MJS = waveInput(WAVE_NAME, 'fc4_fields_capstone.mjs');
 const ENGINES = path.join(ROOT, 'packages/engines');
 const LAB_SOURCE = () => fs.readFileSync(path.join(HERE, 'gasprocessingLab.js'), 'utf8');
+/** A panel source, or a FAILURE NAMING IT. Three gates below used to guard this
+ *  read with `existsSync` and a bare `return` inside a forEach, which deletes
+ *  the assertion after it and leaves the test green: renaming a panel would have
+ *  emptied the refusal-literal gate, the held-marker gate and the panel leak
+ *  gate all at once, and nothing would have said so. */
+const panelSource = (file) => {
+  const p = path.join(HERE, file);
+  if (!fs.existsSync(p)) {
+    throw new Error(`panel source missing: ${file} is named in PANEL_FILES and is not in ${HERE}. `
+      + 'A renamed or deleted panel fails here rather than emptying the gates that read it.');
+  }
+  return fs.readFileSync(p, 'utf8');
+};
 const PANEL_FILES = ['WaterExplorer.jsx', 'AbsorberExplorer.jsx', 'ColdEndExplorer.jsx'];
 
 // ---------------------------------------------------------------------------
@@ -873,9 +900,18 @@ const MIRRORED = [
   'build_digest.sh', 'digest.txt', 'digest_prose.rules.mjs', 'fc4_capstone.mjs', 'fc4_dump.mjs',
   'fc4_fields.mjs', 'fc4_fields_capstone.mjs', 'fields.json', 'gate_capstone_leak.py',
   'gate_claims.mjs', 'gate_copy_rule.py', 'gate_movement.mjs', 'gate_typed_literals.py', 'gate_wavejson.mjs',
-  'harvest_truth.py', 'lengths.py', 'make_fields.mjs', 'scaffold.py', 'structure.py',
-  'sweep_literals.py', 'truth-gasprocessing.json', 'wave.json',
+  'harvest_truth.py', 'lengths.py', 'make_fields.mjs', 'oracle_gasprocessing.py', 'precision.json',
+  'scaffold.py', 'structure.py', 'sweep_literals.py', 'truth-gasprocessing.json', 'wave.json',
+  // The seed ladder and its verifier. A generator repaired in the wave
+  // directory and not mirrored leaves the repository holding a generator that
+  // produces something else, which is the whole reason these are named.
+  'gen_course.py', 'gen_golive.py', 'gen_seeds.sh', 'verify_sql.py',
+  'apply_fc4_gasprocessing.sh', 'dryrun_fc4.sh',
+  'hdr_beginner.txt', 'hdr_intermediate.txt', 'hdr_advanced.txt',
 ];
+/** Pinned, because a list that has quietly shrunk compares fewer files each
+ *  time and says so to nobody. */
+const MIRRORED_COUNT = 39;
 const MIRROR_ONLY = ['README.md'];
 
 describe('the digest on disk, the in-repo mirror and the teaching fields', () => {
@@ -885,28 +921,45 @@ describe('the digest on disk, the in-repo mirror and the teaching fields', () =>
     expect(Object.keys(sections(readDigest()))).toEqual(SECTION_KEYS);
   });
 
-  it('THE MIRROR GATE: every mirrored file is byte-identical to the wave directory', () => {
-    // BOTH DIRECTIONS OR NEITHER. Reading the wave directory alone leaves the
-    // committed mirror unchecked; reading the mirror alone goes green on a
-    // stale copy. So the wave file is read as truth, the mirror is compared
-    // with it, and the mirror's own listing is compared with this list so a
-    // file cannot be added to the mirror without being named here.
-    expect(MIRRORED).toHaveLength(28);
+  it('THE MIRROR GATE: tools/course-waves/gasprocessing is the wave, byte for byte', () => {
+    // NOTHING HERE SKIPS. A CI runner has no live wave directory, and this gate
+    // still asserts something true there: that every file it names is committed,
+    // carries bytes, and IS THE FILE THIS SUITE READ. When a live wave directory
+    // is present it additionally compares the two byte for byte, which is the
+    // only way to catch drift in either direction.
+    //
+    // The whole tooling and not only the numbers: the five-migration ladder is
+    // generated by gen_course.py, gen_golive.py and gen_seeds.sh and verified by
+    // verify_sql.py, so a generator repaired in the wave directory and not
+    // mirrored would leave the repository holding a generator that produces
+    // something else. The three tier headers are here for the same reason.
+    expect(MIRRORED).toHaveLength(MIRRORED_COUNT);
     MIRRORED.forEach((f) => {
-      const a = fs.readFileSync(path.join(WAVE, f), 'utf8');
-      const b = fs.readFileSync(path.join(MIRROR, f), 'utf8');
-      expect(b, `tools/course-waves/gasprocessing/${f} has fallen behind the wave directory`).toBe(a);
+      const q = path.join(MIRROR, f);
+      expect(fs.existsSync(q), `tools/course-waves/gasprocessing/${f} is not committed`).toBe(true);
+      expect(fs.statSync(q).size, `tools/course-waves/gasprocessing/${f} is empty`).toBeGreaterThan(0);
     });
     const onDisk = fs.readdirSync(MIRROR, { withFileTypes: true })
       .filter((e) => e.isFile()).map((e) => e.name).sort();
     expect(onDisk, 'the mirror carries a file this gate does not name')
       .toEqual([...MIRRORED, ...MIRROR_ONLY].sort());
-  });
-
-  it('NEGATIVE CONTROL: the mirror gate sees a one-byte drift', () => {
-    const a = fs.readFileSync(path.join(WAVE, 'fields.json'), 'utf8');
-    expect(a.replace('[', '[ ')).not.toBe(a);
-    expect(fs.readFileSync(path.join(MIRROR, 'fields.json'), 'utf8')).toBe(a);
+    if (LIVE_WAVE) {
+      MIRRORED.forEach((f) => {
+        const a = fs.readFileSync(path.join(LIVE_WAVE, f), 'utf8');
+        const b = fs.readFileSync(path.join(MIRROR, f), 'utf8');
+        expect(b, `tools/course-waves/gasprocessing/${f} has fallen behind ${LIVE_WAVE}`).toBe(a);
+      });
+      // NEGATIVE CONTROL, and it belongs in the branch that does the comparing:
+      // a one byte change to fields.json is a different string, so the equality
+      // above is an equality and not a tautology.
+      const a = fs.readFileSync(path.join(LIVE_WAVE, 'fields.json'), 'utf8');
+      expect(a.replace('[', '[ ')).not.toBe(a);
+      process.stdout.write(`mirror gate: ${MIRRORED.length} file(s) compared byte for byte against ${LIVE_WAVE}\n`);
+    } else {
+      expect(path.resolve(WAVE), 'this suite did not read the committed copy').toBe(path.resolve(MIRROR));
+      process.stdout.write('mirror gate: no live wave directory on this machine, so the '
+        + `${MIRRORED.length} committed file(s) were confirmed present and are the ones this suite read\n`);
+    }
   });
 
   it('the teaching fields are copied verbatim from fc4_fields.mjs, which fc4_dump.mjs imports', () => {
@@ -1325,11 +1378,12 @@ describe('THE REFUSAL GATE: every refusal is the engine\'s own returned message'
   });
 
   it('NO refusal message is written as a literal in a panel either', () => {
+    // A MISSING PANEL IS A FAILURE, NOT A SKIP. This used to read
+    // `if (!fs.existsSync(p)) return;` inside the forEach, so renaming a panel
+    // deleted the assertion and left the test green.
     allSoft().forEach((r) => {
       PANEL_FILES.forEach((file) => {
-        const p = path.join(HERE, file);
-        if (!fs.existsSync(p)) return;
-        expect(fs.readFileSync(p, 'utf8').includes(r.error), `${file} retypes: ${r.label}`).toBe(false);
+        expect(panelSource(file).includes(r.error), `${file} retypes: ${r.label}`).toBe(false);
       });
     });
   });
@@ -1407,10 +1461,9 @@ describe('THE HELD GATE: the held quantities are marked, shown and never graded'
   });
 
   it('each panel shows the wording that marks a held quantity unverified', () => {
+    // A MISSING PANEL IS A FAILURE, NOT A SKIP: see above.
     PANEL_FILES.forEach((file) => {
-      const p = path.join(HERE, file);
-      if (!fs.existsSync(p)) return;
-      const text = fs.readFileSync(p, 'utf8');
+      const text = panelSource(file);
       expect(text, `${file} does not carry the held marker`).toContain(L.HELD_MARKER);
     });
   });
@@ -1604,7 +1657,7 @@ describe('the IKOT ABASI, OTUMARA and ESCRAVOS capstone reproduces fields.json e
     });
     // The declared stable set is the generator's, word for word.
     expect(src.includes('fc4_capstone')).toBe(false);
-    const gen = fs.readFileSync(path.join(WAVE, 'fc4_capstone.mjs'), 'utf8');
+    const gen = fs.readFileSync(waveInput(WAVE_NAME, 'fc4_capstone.mjs'), 'utf8');
     L.CAPSTONE_STABLE.forEach((row) => expect(gen, row).toContain(`'${row}'`));
     expect(L.CAPSTONE_STABLE).toHaveLength(4);
   });
@@ -1625,9 +1678,19 @@ describe('the IKOT ABASI, OTUMARA and ESCRAVOS capstone reproduces fields.json e
 
 /** Exports that TAKE AN ARGUMENT. */
 const ARG_REQUIRED = ['leakGuardTargets', 'leakGuardHit', 'collectNumbers',
-  'capstoneValues', 'countHistoryComments', 'countHistoryCommentsWide'];
+  'capstoneValues', 'countHistoryComments', 'countHistoryCommentsWide',
+  // THE CENSUS MACHINERY. `takesNamedArguments` and `returnShape` each take the
+  // thing they are reading, and this gate caught both the moment they were
+  // added: an export with a required argument that nothing declares gets called
+  // bare by the teaching-surface walk, which is how a reader that needs an
+  // argument would silently contribute nothing to the leak sweep.
+  'takesNamedArguments', 'returnShape'];
 const GATE_MACHINERY = ['LEAK_GUARD_MARGIN', 'LEAK_GUARD_SCALINGS', 'LEAK_GUARD_RELATIVE_CAP',
-  'HISTORY_COMMENT_RE', 'HISTORY_COMMENT_RE_WIDE'];
+  'HISTORY_COMMENT_RE', 'HISTORY_COMMENT_RE_WIDE',
+  // The census probe table holds CALL ARGUMENTS and not teaching values, and
+  // `contractCensus` reads it. Its numbers are the pressures and strengths the
+  // contract is read at, all of which are already swept where they are taught.
+  'CONTRACT_CENSUS_PROBES', 'P_ABOVE_DAK_PSIA', 'AMINE_NOT_CARRIED', 'STEPS_REFUSED'];
 
 /**
  * A surface smaller than this is not the lab: refuse to call it clean. The
@@ -1792,11 +1855,12 @@ describe('THE LEAK GATE: no teaching number may be a graded capstone answer', ()
   });
 
   it('every number PRINTED IN A PANEL SOURCE stands clear of a graded answer', () => {
+    // A MISSING PANEL IS A FAILURE, NOT A SKIP, and on THIS assertion it was the
+    // worst of the three: a renamed panel would have emptied the only numeric
+    // check that a panel source does not print a graded capstone answer.
     const targets = L.leakGuardTargets(CAPSTONE_FIELDS);
     PANEL_FILES.forEach((file) => {
-      const p = path.join(HERE, file);
-      if (!fs.existsSync(p)) return;
-      const text = fs.readFileSync(p, 'utf8');
+      const text = panelSource(file);
       const literals = (text.match(/-?\d+(?:\.\d+)?/g) || []).map(Number).filter(Number.isFinite);
       const hits = literals.map((v) => ({ v, t: L.leakGuardHit(v, targets) })).filter((x) => x.t)
         .map(({ v, t }) => `${file} prints ${v}, within ${t.band} of ${t.key} ${t.tag}`);
@@ -1841,7 +1905,7 @@ describe('THE PROSE SWEEP: the lab\'s own comments are swept for claims the code
     ['gasProcessing.js', 'gasProperties.js'].forEach((m) => expect(flat).toContain(m));
     // And the vintage they are vendored at, which is the one the wave states.
     expect(flat).toContain('82ec6d4');
-    expect(fs.readFileSync(path.join(WAVE, 'wave.json'), 'utf8')).toContain('82ec6d4');
+    expect(fs.readFileSync(waveInput(WAVE_NAME, 'wave.json'), 'utf8')).toContain('82ec6d4');
     // The three capstone streams, named in the capstone banner and nowhere else
     // in the teaching half.
     expect(flat).toContain('IKOT ABASI, OTUMARA AND ESCRAVOS ONLY');
