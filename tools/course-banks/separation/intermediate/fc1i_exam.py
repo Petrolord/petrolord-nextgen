@@ -83,12 +83,12 @@ q(3, "The ERHA layout returns two rankings. What would be lost by quoting only t
   "The count of comparisons that carried a positive requirement, which travels with the relative ranking alone."],
  "worstAbsolute names the flare and the control room at 43.8223 m short. worstRelative names Transfer pump A against Transfer pump B at 0.597753. They are different pairs.")
 
-q(0, "A status pack prints a margin of 0.9 for one drum of the ABANA-2 family and gives no bore beside it. Which row is it, and what does the print cost the reader?",
- "The 6.000000 ft row at 0.938751, and what is lost is the verdict: it is the one row in the family whose margin sits near enough to one to be mistaken for a pass.",
- ["The 7.000000 ft row at 0.927121, and nothing is lost, since every reading below one carries gasCapacityOk false whatever the bore turns out to be.",
-  "The 5.000000 ft row at 0.651911, and what is lost is the size of the shortfall rather than the verdict.",
-  "No row at all: every margin this family reports is under 0.651911 or over 1.277745, so a figure of 0.9 has come from another run."],
- "The family runs 0.651911, 0.938751, 1.277745, 1.668891, 2.112190 and 2.607642. Only one of those is close enough to one for the verdict to be the thing a reader needs.")
+q(0, "Round every margin on the ABANA-2 family to the nearest whole number. Which rows stop being distinguishable, and what does that cost?",
+ "0.651911, 0.938751 and 1.277745 all read as one, and two of those three carry gasCapacityOk false while the third carries true, so the rounding puts a failing drum and a passing drum on the same figure.",
+ ["1.668891 and 2.112190 both read as two, which is the only collision the rounding makes and costs nothing.",
+  "No rows collide, since the six margins run from 0.651911 to 2.607642 and a whole number falls between each one and the next.",
+  "Every row reads as one or more, so the rounding costs the size of each margin and never a verdict."],
+ "The family runs 0.651911, 0.938751, 1.277745, 1.668891, 2.112190 and 2.607642, and the threshold sits at one. Rounding across a threshold costs a verdict rather than a decimal place.")
 
 q(1, "A studio catches the SeparatorInputError for a liquid level of 0 and carries on at 0.500000. What has it produced?",
  "A fully dimensioned vessel for a level nobody typed, which is a refusal turned into an assumption.",

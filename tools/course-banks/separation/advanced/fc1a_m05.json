@@ -41,7 +41,7 @@
    "Nothing at all: it never compares the two and raises no warning when they are far apart."
   ],
   "answer": 3,
-  "explanation": "An override wins outright and says so. A vendor K of 0.9 would be taken silently, which is why an override belongs in a report beside the pressure it was quoted for."
+  "explanation": "An override wins outright and says so. A vendor K far above every row of the table would be taken silently, which is why an override belongs in a report beside the pressure it was quoted for."
  },
  {
   "prompt": "A horizontal vessel needs a droplet settling velocity for its gas length. What does this engine use, and why is that held?",

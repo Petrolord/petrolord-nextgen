@@ -18,7 +18,7 @@ q(3, "\"pPsia must be a finite, positive absolute pressure\" and \"pPsig must be
  ["The absolute figure divides into a pseudo-critical pressure of 666.055360 psia to give Ppr, and a division by zero is the outcome the stricter wording exists to prevent.",
   "A gauge figure is read against the atmosphere and can go below it in a vessel under vacuum, so its guard has to admit the whole range down to and beneath zero.",
   "The two words belong to the steps they guard: a density may legitimately be zero where an allowable velocity may not, so the stricter one attaches to the input reaching the settling velocity."],
- "A gas at 0.000000 psig is a gas at 14.700000 psia. Feed a gauge pressure into the gas law and the density falls to zero at atmospheric conditions."),
+ "A gas at 0.000000 psig is a gas at 14.7 psia. Feed a gauge pressure into the gas law and the density falls to zero at atmospheric conditions."),
 
 q(0, "Raising the gas gravity from 0.680000 to 0.700000 takes Tpc from 372.642400 to 377.590000 degR and Ppc from 666.055360 to 663.336000 psia. At fixed conditions, what does that do to the reduced pair?",
  "It lowers Tpr and raises Ppr, and the two shifts add rather than cancel.",
@@ -62,12 +62,12 @@ q(3, "Across the published cases z reads 0.986286 at Ppr 0.149225, 0.871027 at 1
   "Reading z as a correction that always falls as pressure rises, which these cases show."],
  "z falls from 0.986286 to 0.828979 across these cases and turns and rises again further up the pressure axis. That shape is the reason a correlation exists at all."),
 
-q(1, "The retired app held z at 0.850000. Read against the four published density cases, where was that substitution worst?",
+q(1, "The retired app held z at 0.85. Read against the four published density cases, where was that substitution worst?",
  "At the low-pressure case, where the correlation returns 0.986286 and a gas near the ideal limit was being corrected as though it were dense.",
  ["At the 2500.000000 psia case, where the correlation returns 0.828979 and the density reaches 9.344827 lb/ft3.",
   "At the 1000.000000 psia case, where the correlation returns 0.871027, because that is the condition an ordinary separator runs at, so it is the error most often made in practice.",
-  "Nowhere in particular, since 0.850000 sits between 0.828979 and 0.986286 on the four cases."],
- "0.850000 against 0.986286 is the widest of the four gaps, and a low-pressure stage is exactly where it sits. Density is proportional to one over z, so the error runs straight into the density."),
+  "Nowhere in particular, since 0.85 sits between 0.828979 and 0.986286 on the four cases."],
+ "0.85 against 0.986286 is the widest of the four gaps, and a low-pressure stage is exactly where it sits. Density is proportional to one over z, so the error runs straight into the density."),
 
 q(2, "What happens to a vertical vessel sized with z left at 1 in place of 0.908065?",
  "It comes out a little larger, because z scales the actual rate as well as the density, and the inflated rate outweighs the faster settling.",

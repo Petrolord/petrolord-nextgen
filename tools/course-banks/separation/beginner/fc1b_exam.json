@@ -321,7 +321,7 @@
  {
   "prompt": "AGBAMI is on every table in this tier: 8.713371 ft3/s of gas, a mixture at 59.632353 lb/ft3 and a settling velocity of 3.549130 ft/s. Why does the tier never give it a vessel?",
   "options": [
-   "Because its Ppr of 0.549797 sits below the 0.200000 where the fit data start, so its z of 0.947166 carries a note and no vessel is sized on a noted z.",
+   "Because its Ppr of 0.549797 sits below the 0.2 where the fit data start, so its z of 0.947166 carries a note and no vessel is sized on a noted z.",
    "Because 3.549130 ft/s is faster than the vertical sizing accepts, and a settling velocity that high comes back as a state rather than as a vessel.",
    "Because a horizontal vane pack has no vertical counterpart in the published table, so no K is available to size a vertical drum for it.",
    "Because it is the three-phase stream, and the only vessel this tier sizes is a vertical two-phase drum."
@@ -443,7 +443,7 @@
   "prompt": "A stream is reported at 0.000000 psig. What does each of the two pressure guards do with it?",
   "options": [
    "Both accept it, and the vessel that comes back is built on a gas with no density at all, which is the failure the two different wordings were written to prevent.",
-   "The K lookup accepts it, since zero gauge is ordinary atmospheric, and the gas law needs 14.700000 psia rather than zero.",
+   "The K lookup accepts it, since zero gauge is ordinary atmospheric, and the gas law needs 14.7 psia rather than zero.",
    "Both refuse it, one because a gauge pressure has to be positive and the other on the DAK fit data.",
    "The K lookup refuses it, since the rule needs a figure above 100 psig, and the gas law accepts it."
   ],

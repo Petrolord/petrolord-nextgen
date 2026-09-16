@@ -271,7 +271,7 @@ q(3, "What is the honest way to report a vessel sized with a vendor K?",
  ["State the K and the derated table value beside it, since the engine returns both on an override so that a reviewer can compare them at that pressure.",
   "State the K alone, since an override wins outright and the table value at that pressure has no bearing on the vessel that was sized from it.",
   "State the K and the floor of 0.120000, since the floor is the only part of the table that still applies once an override has been supplied to the engine."],
- "An override returns source typed with derated and floored both false, and no warning is raised when a typed K sits far from the table. A vendor K of 0.9 would be taken silently.")
+ "An override returns source typed with derated and floored both false, and no warning is raised when a typed K sits far from the table.")
 
 q(2, "A layout reports 69 checks and a sweep reports six rows. What do the two counts have in common as headline numbers?",
  "Each depends on what was put in front of the engine, so a bigger count is not a better review or a better family.",

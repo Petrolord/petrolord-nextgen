@@ -27,7 +27,7 @@ q(2, "On AGBAMI the mixture is 59.632353 lb/ft3 where the plain average of its t
  "An average weights the two liquids equally, which is a claim that they arrive in equal amounts. AGBAMI is 12000.000000 bpd of oil against 8000.000000 bpd of water, so the weighted figure sits below the average, nearer the oil."),
 
 q(3, "ABANA-1 and ABANA-2 hold identical oil at 53.675380 and identical water at 64.896000 lb/ft3, and their mixtures differ at 55.171463 and 55.919504. What moved?",
- "The water cut, 400.000000 bpd in 3000.000000 against 6000.000000 bpd in 30000.000000.",
+ "The water cut, 400.000000 bpd of water against 2600.000000 of oil on one, and 6000.000000 against 24000.000000 on the other.",
  ["The gas rate, since the mixture is the liquid density the gas load sees and 110.000000 MMscfd loads the production separator far harder than the 18.000000 MMscfd on the test separator does.",
   "The K value, since ABANA-1 runs a vertical mesh pad at 0.300000 and ABANA-2 a horizontal mesh pad at 0.400000, and the mixture is the density that K is applied to.",
   "The pressure, because the two vessels take their liquid at slightly different points in the train and a liquid density moves with the gas that is still dissolved in it."],
