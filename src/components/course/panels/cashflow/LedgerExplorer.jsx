@@ -365,16 +365,19 @@ const AddingUp = () => {
         The government keeps royalties plus tax {usd(take.totalTax)}; the contractor keeps the total real net cash flow
         {' '}{usd(take.totalRealNetCashFlow)}. Take {pc(take.takePct)} undiscounted.
       </div>
-      <p className="text-xs text-slate-500 mt-4 mb-1">Working interest on the teaching field: every money line scales, no volume does</p>
+      <p className="text-xs text-slate-500 mt-4 mb-1">Working interest on the teaching field: every money line and every volume is the share</p>
       <Tbl
         head={['WI, %', 'year 1 gross revenue', 'year 1 royalty', 'year 1 tax', 'year 1 net', 'total oil, bbl', 'IRR, %', 'take, %', 'unit technical cost, USD/boe', 'reported WI']}
         rows={wi.map((r) => [r.wiPct, usd(r.year1GrossRevenue), usd(r.year1Royalty), usd(r.year1Tax), usd(r.year1Net), num(r.totalOilBbl, 0), num(r.irrPct, 4), num(r.takePct, 4), num(r.unitTechnicalCost, 6), r.reportedWiPct])}
       />
       <Note>
-        The reported gross revenue and the total oil do not move with working interest, the money lines do, and
-        the IRR and the unit technical cost do not move at all, because both are ratios of things that scaled
-        together. A learner who reads the field ledger where the share ledger was wanted is wrong on every money
-        line by the same factor and right on every ratio, which is the most dangerous kind of wrong.
+Every line is the share: gross revenue and the total oil move with the working interest alongside royalty,
+        tax and net cash flow, the way the production sharing and PIA regimes always did. The IRR, the unit technical
+        cost and the government take do not move at all, because each is a ratio of things that scaled together, and
+        a take that no longer moves with the interest is the point of the repair. Until engines 3.10.0 the joint
+        venture ledger kept revenue, volumes, opex, capex and depreciation at FIELD level while reporting royalty,
+        tax and net cash flow at the share, so take counted the partners' share as government take and read 79.7034
+        percent at a 60 percent interest where it now reads 66.1723 at every interest.
       </Note>
     </>
   );

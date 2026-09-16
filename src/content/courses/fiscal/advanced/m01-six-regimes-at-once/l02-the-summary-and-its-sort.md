@@ -12,12 +12,12 @@ The rows come back ordered by contractor NPV, largest first, at the comparison's
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Generic Royalty/Tax | 397.0445 | 44.6574 | 3 | 758.7514 | 33.7901 |
 | 2 | USA - Gulf of Mexico | 382.0660 | 40.2125 | 3 | 764.5528 | 34.0485 |
-| 3 | Brazil - Concession | 357.8728 | 43.0919 | 3 | 833.3812 | 37.1137 |
-| 4 | Angola - Deepwater PSC | 223.7100 | 32.5073 | 4 | 1200.2886 | 53.4534 |
+| 3 | Brazil - Concession | 287.2804 | 44.0823 | 3 | 1121.5184 | 49.9455 |
+| 4 | Angola - Deepwater PSC | 211.3787 | 32.3741 | 4 | 1263.7523 | 56.2797 |
 | 5 | Ghana - Deepwater | 172.7531 | 33.2329 | 3 | 1316.6067 | 58.6335 |
 | 6 | Nigeria - PIA (2021) | 154.8286 | 28.2129 | 4 | 1339.2784 | 59.6432 |
 
-Read the IRR column down the ranks and it is already out of order: rank 2 returns 40.2125 percent and rank 3 returns 43.0919 percent. The higher NPV and the higher IRR belong to different regimes, and the sort picks one of them to rank by without saying so.
+Read the IRR column down the ranks and it is already out of order: rank 2 returns 40.2125 percent and rank 3 returns 44.0823 percent. The higher NPV and the higher IRR belong to different regimes, and the sort picks one of them to rank by without saying so.
 
 ## Where the mirror breaks
 

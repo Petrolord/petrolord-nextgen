@@ -12,7 +12,7 @@ The consequence is measurable. On the Suite test project, tightening the limit r
 
 | case | total cost recovered | total profit oil | total tax | closing pool |
 | --- | --- | --- | --- | --- |
-| capped_5pct_never_recovers | 306.3022 | 5819.7423 | 1745.9227 | 2543.7575 |
+| capped_5pct_pool_never_clears | 306.3022 | 5819.7423 | 1745.9227 | 2543.7575 |
 | flat_test_project | 2770.6665 | 3355.3781 | 1006.6134 | 79.3932 |
 
 Recovering 306.3022 instead of 2770.6665 leaves 5819.7423 of profit oil rather than 3355.3781, and the tax follows the profit oil to 1745.9227. If cost recovery were a deduction, less recovery would mean a smaller base. It means a larger one.

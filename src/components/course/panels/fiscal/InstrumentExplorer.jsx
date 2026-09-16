@@ -33,7 +33,7 @@ const MODES = [
   ['royalty', 'Royalty: the sliding scale, the crossing and the threshold itself'],
   ['recovery', 'Recovery: four limits, the pool and the carryforward'],
   ['rfactor', 'R factor: the ratio of cumulatives and the split it selects'],
-  ['tax', 'Tax: three charges decomposed, and the uplift charged every year'],
+  ['tax', 'Tax: three charges decomposed, and the uplift as a one-time pool'],
   ['rate', 'Rate: the discount sweep, the mid-year parity and five IRR vectors'],
 ];
 
@@ -197,9 +197,10 @@ const Recovery = () => {
         recovery is NOT: it is not a deduction against tax, because the tax base here is the contractor profit share
         and cost oil is credited to the contractor separately; it is not depreciation and there is no schedule; and
         an unrecovered balance is not a loss carried forward, it is only a claim on future revenue after royalty.
-        Note also that capped_5pct_never_recovers pays back in year 3 despite its own note, because the revenue that
-        cannot be recovered becomes profit oil and that regime splits profit oil wholly to the contractor. Cost
-        recovery is not the only way capital comes home.
+        Note also that capped_5pct_pool_never_clears pays back in year 3 although its pool never clears, because the
+        revenue that cannot be recovered becomes profit oil and that regime splits profit oil wholly to the
+        contractor. Cost recovery is not the only way capital comes home. Its NPV is zero at two rates, so the
+        engine reports no internal rate of return for it and says multiple-roots instead.
       </Note>
     </>
   );
@@ -294,9 +295,9 @@ const Tax = () => {
           <Tile label={`Minimum tax alone at ${td.minTaxPct} percent, total`} value={mm(td.totalMinTaxAlone)} unit="million USD" />
           <Tile label="Tax as published, total" value={mm(td.totalTaxAsPublished)} unit="million USD" />
           <Tile label="First year with a positive RRT charge" value={yr(td.firstYearWithRrt)} />
-          <Tile label="RRT uplift, percent of the WHOLE capex, every year" value={String(td.rrtUpliftPct)} />
+          <Tile label="RRT uplift, percent added to the one-time pool" value={String(td.rrtUpliftPct)} />
           <Tile label="Total capex on this project" value={mm(capex)} unit="million USD" />
-          <Tile label="Uplift relief over the life at 20 percent" value={`${(td.rrtUpliftPct / 100) * 25} times the whole capex`} />
+          <Tile label="Uplift relief over the life at 20 percent" value={`at most ${(1 + td.rrtUpliftPct / 100).toFixed(1)} times the whole capex`} />
         </TileGrid>
       </div>
       <div className="h-56 mt-3">

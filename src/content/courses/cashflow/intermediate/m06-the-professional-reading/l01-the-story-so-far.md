@@ -16,15 +16,15 @@ Valuing AKATA from 2030 with prior years kept gives 77464382.26. Valuing from 20
 
 ## NPV and its profile
 
-The profile reads 117362408.71 at 0 percent, 83023565.60 at 5, 65968275.69 at 8, 55805775.02 at 10, 46487466.07 at 12, 33900281.71 at 15 and 16026160.80 at 20. The point labelled 6.8 reads 72513070.98 against a headline of 72534830.66 at 6.796117 percent, a gap of -21759.68, because the point is evaluated at the rate rounded to two decimals.
+The profile reads 117362408.71 at 0 percent, 83023565.60 at 5, 65968275.69 at 8, 55805775.02 at 10, 46487466.07 at 12, 33900281.71 at 15 and 16026160.80 at 20. The point labelled 6.8 reads 72534830.66, the headline at 6.796117 percent, so the gap is 0.00: the point is labelled at the rounded rate and evaluated at the exact one. Until engines 3.10.0 it was evaluated at the label too and read 72513070.98, a gap of -21759.68.
 
 ## The internal rate of return
 
-29.2361 percent on the nominal flows, unmoved by rate, basis, convention or working interest. On [-100, 208, -108.12] the engine reports 6.0000 percent and the oracle 2.0000; both zero the NPV. AKATA with an abandonment of 60000000 reports 23.2570 percent and has a second root it does not mention; with 200000000 it reports null.
+29.2361 percent on the nominal flows, unmoved by rate, basis, convention or working interest. The engine names a rate only where exactly one rate in the band from -99 to 1000 percent zeroes the NPV, and otherwise returns null with a status. [-100, 208, -108.12] is zero at 2 percent and at 6, so it is null with irrStatus multiple-roots; it reported 6.0000 against the oracle's 2.0000 before the repair. AKATA with an abandonment of 60000000 is null for the same reason, and with 200000000 because no rate zeroes it at all.
 
 ## Sweeps and the breakeven
 
-At 60 USD/bbl AKATA's NPV is -21406234.12 and at 70 it is 22132715.69; the breakeven is 64.916777, where the IRR reads 10.0002 percent. At a nominal rate of 25 percent the NPV is 11736532.11 and the discounted take 94.1819 percent. At 20 percent decline the published PIA field loses four years to the economic limit and its take reads 105.7792 percent.
+At 60 USD/bbl AKATA's NPV is -21406234.12 and at 70 it is 22132715.69; the breakeven is 64.916777, where the IRR reads 10.0002 percent. At a nominal rate of 25 percent the NPV is 11736532.11 and the discounted take 94.1819 percent.
 
 ## The sentence the tier ends on
 

@@ -4,7 +4,7 @@ Four instruments and two solvers. The Professional tier is what moves inside the
 
 ## A royalty that moves with price
 
-The sliding scale keeps the rate of every tier whose threshold the applied oil price has reached, starting at the first tier's. Swept on the default project, the implied rate holds at 0.075000 to a multiplier of 0.710000, an applied 49.700000 USD per bbl, and steps to 0.100000 at 0.720000, an applied 50.400000. Nothing is interpolated, and the threshold belongs to the tier above it, because the engine compares with greater than or equal: decks at 49.990000, 50.000000 and 50.010000 USD per bbl pay 0.075000, 0.100000 and 0.100000. On the teaching field it steps mid life, 0.075000 in years 1 to 5 and 0.100000 from year 6.
+The sliding scale keeps the rate of the highest threshold the applied oil price has reached, read off a sorted copy of the list. Swept on the default project, the implied rate holds at 0.075000 to a multiplier of 0.710000, an applied 49.700000 USD per bbl, and steps to 0.100000 at 0.720000, an applied 50.400000. Nothing is interpolated, and the threshold belongs to the tier above it, because the engine compares with greater than or equal. On the teaching field the rate steps mid life, 0.075000 in years 1 to 5 and 0.100000 from year 6.
 
 ## A pool, a limit and a carryforward
 
@@ -16,11 +16,11 @@ The R factor is cumulative revenue over cumulative cost, computed before the spl
 
 ## A stack with one base
 
-Tax is charged on the contractor's profit share, and the stack decomposes exactly: 502.1091 million USD for a 34 percent corporate income tax alone, 62.5794 for a 40 percent resource rent tax alone, 134.3464 for a 5 percent minimum tax alone, 564.6884 for the published stack. The resource rent tax collects so little because its uplift is charged in all 25 years: on the Suite test project the same regime pays 1638.5664 at the default 20 percent uplift and 2607.5549 at 0.
+Tax is charged on the contractor's profit share, and the stack decomposes exactly: 502.1091 million USD for a 34 percent corporate income tax alone, 350.7165 for a 40 percent resource rent tax alone, 134.3464 for a 5 percent minimum tax alone, 852.8256 for the published stack. The resource rent tax starts late because its uplift opens a pool, drawn down and never refilled: on the Suite test project the same regime pays 2127.5549 at the default 20 percent uplift and 2207.5549 at 0.
 
 ## Two solvers
 
-Net present value discounts at year end: 382.0660 million USD at 10 percent for one regime against a mid-year 400.7142, a ratio of 1.048809 that depends on the rate alone. The internal rate of return is 80 bisections inside a bracket: 40.2125 percent on that ledger, 0.0000 percent for two opposite failures, 102400.0000 when the bracket itself is reported.
+Net present value discounts at year end: 382.0660 million USD at 10 percent for one regime against a mid-year 400.7142, a ratio of 1.048809 that depends on the rate alone. The internal rate of return is a search of one band, negative 99 to 1000 percent: 40.2125 percent on that ledger, and null with a status word wherever the band holds no single root.
 
 ## The sentence the tier ends on
 

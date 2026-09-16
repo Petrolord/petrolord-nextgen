@@ -15,16 +15,16 @@ Watch a regime that gives the contractor 100 percent of profit oil, so the profi
 | 1 | 271.9889 | 0.0000 | 0.0000 |
 | 2 | 244.4628 | 0.0000 | 0.0000 |
 | 3 | 219.7286 | 75.7962 | 25.7707 |
-| 4 | 197.5024 | 152.5706 | 72.9022 |
-| 5 | 191.1513 | 148.4098 | 69.8233 |
+| 4 | 197.5024 | 152.5706 | 51.8740 |
+| 5 | 191.1513 | 148.4098 | 50.4593 |
 
 Years 1 and 2 sell 271.9889 and 244.4628 million USD and pay 0.0000 in tax, because a 100 percent recovery limit takes the whole of that early revenue back against the 500.0000 million USD of capex and leaves profit oil at 0.0000.
 
 ## The three instruments
 
-Corporate income tax is the rate on the base in any year the base is positive. Resource rent tax is charged on the base minus an annual capital uplift, and only when that difference is positive. The minimum tax is a percent of gross revenue, not of the base. The tax charged is the larger of the sum of the first two and the minimum, not the sum of all three.
+Corporate income tax is the rate on the base in any year the base is positive. Resource rent tax is charged on what is left of the base after relief drawn from a one-time uplift pool, and only when that remainder is positive. The minimum tax is a percent of gross revenue, not of the base. The tax charged is the larger of the sum of the first two and the minimum, not the sum of all three.
 
-Because none of the three rates enters the base, the stack decomposes exactly: set two of the three to zero and the third comes back on its own. On this regime and project, corporate income tax alone totals 502.1091 million USD over the life, the resource rent tax alone 62.5794, a 5 percent minimum tax alone 134.3464, and the stack as published 564.6884.
+Because none of the three rates enters the base, the stack decomposes exactly: set two of the three to zero and the third comes back on its own. On this regime and project, corporate income tax alone totals 502.1091 million USD over the life, the resource rent tax alone 350.7165, a 5 percent minimum tax alone 134.3464, and the stack as published 852.8256.
 
 ## The mistake
 
@@ -32,7 +32,7 @@ A reader who has met a corporate tax return builds the base out of revenue minus
 
 ## What it refuses
 
-There is no loss carryforward. A year whose base is not positive pays nothing and passes nothing to the next year, so the 25.7707 million USD charged in year 3 carries no relief for the two years before it. There is no depreciation and no capital allowance, so capex reaches the tax line by no route at all, and the base is never reduced by the royalty, taken off gross revenue before cost recovery began.
+There is no loss carryforward. A year whose base is not positive pays nothing and passes nothing to the next year, so the 25.7707 million USD charged in year 3 carries no relief for the two years before it. There is no depreciation and no capital allowance, so the only route capex takes to the tax line is the size of the resource rent tax pool, and the base is never reduced by the royalty, taken off gross revenue before cost recovery began.
 
 ## Exercise
 

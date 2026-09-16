@@ -21,7 +21,7 @@ Opex is 25.0037 million USD in year 1, falls to 12.3405 by year 25 and totals 39
 
 ## Step three: take the implied royalty rate, year by year
 
-Under a flat 18.75 percent royalty the teaching field pays 26.1856 million USD on gross revenue of 139.6563 in year 1 and 1.2953 on 6.9081 in year 25, an implied 0.187500 in both. Under the Nigerian sliding royalty the implied rate is 0.075000 in years 1 to 5 and 0.100000 from year 6, because the deck steps from 45 to 65 USD per bbl at year 6. A royalty rate that changes mid life is a sliding scale, and the year it changes is a price event, not a production one.
+Under a flat 18.75 percent royalty the teaching field pays 26.1856 million USD on gross revenue of 139.6563 in year 1 and 1.2953 on 6.9081 in year 25, an implied 0.187500 in both. Under the Nigerian sliding royalty the implied rate is 0.075000 in years 1 to 5 and 0.100000 from year 6, because the deck steps from 45 to 65 USD per bbl at year 6. A royalty rate that changes mid life is a sliding scale, and the year it changes is a price event.
 
 ## Step four: check the limit against the closing pool
 
@@ -37,14 +37,14 @@ The field's own discount rate is 12 percent.
 
 | regime | NPV at 12 percent | IRR percent | payback year |
 | --- | --- | --- | --- |
-| Brazil - Concession | -5.8662 | 11.4055 | 6 |
-| Generic Royalty/Tax | -13.3840 | 10.6728 | 7 |
-| Ghana - Deepwater | -27.4074 | 8.7906 | 6 |
-| USA - Gulf of Mexico | -37.3123 | 8.4381 | 7 |
-| Nigeria - PIA (2021) | -43.7842 | 7.4603 | 7 |
-| Angola - Deepwater PSC | -58.1813 | 6.4905 | 8 |
+| Brazil - Concession | -5.8662 | null | 6 |
+| Generic Royalty/Tax | -13.3840 | null | 7 |
+| Ghana - Deepwater | -27.4074 | null | 6 |
+| USA - Gulf of Mexico | -37.3123 | null | 7 |
+| Nigeria - PIA (2021) | -43.7842 | null | 7 |
+| Angola - Deepwater PSC | -58.1813 | null | 8 |
 
-Every net present value is negative because every rate of return is below 12. Say that once, rather than reporting six negatives as six disasters.
+Every net present value is negative, and no regime here has a single rate of return to set beside the 12 percent, because the contractor's cash flow turns negative late in the life.
 
 ## Step seven: rank, and say what the ranking is of
 
@@ -52,12 +52,12 @@ The summary sorts by contractor net present value descending, so Brazil is first
 
 ## The mistake
 
-The careful mistake is answering with a number and no regime, or a net present value with no rate. A total contractor net cash flow of 192.9896 million USD means nothing until you say Brazil, and -5.8662 means nothing until you say 12 percent.
+The careful mistake is answering with a number and no label. A total contractor net cash flow of 192.9896 million USD means nothing until you say Brazil, and -5.8662 means nothing until you say 12 percent.
 
 ## What it refuses
 
-The method produces labelled readings, never a recommendation. It cannot say which regime a government should offer or a contractor should sign, only what each does to this ledger.
+The method produces labelled readings, never a recommendation. It cannot say which regime a government should offer or a contractor should sign.
 
 ## Exercise
 
-Work the seven steps under Ghana Deepwater: 117.1399 contractor net cash flow, 308.8447 government cash flow, 74.7196 tax, 788.5887 recovered, 21.6250 left in the pool, payback year 6, -27.4074 at 12 percent and 8.7906 percent. Write each with the label that makes it an answer.
+Work the seven steps under Ghana Deepwater: 117.1399 contractor net cash flow, 308.8447 government cash flow, 74.7196 tax, 788.5887 recovered, 21.6250 left in the pool, payback year 6 and -27.4074 at 12 percent. Write each with the label that makes it an answer, and say why the rate column is empty.

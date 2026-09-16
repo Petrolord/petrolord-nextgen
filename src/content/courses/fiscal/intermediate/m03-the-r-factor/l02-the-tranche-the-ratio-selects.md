@@ -6,7 +6,7 @@ The R factor does no work by itself. It selects a tranche, the tranche carries a
 
 ## The walk
 
-`getTieredSplit` sets the split to the first tier's split, then walks the tier list in order and keeps the split of every tier whose threshold the R factor has reached. It is the same shape of walk the sliding royalty uses on price, with the R factor in place of the oil price.
+`getTieredSplit` sorts a copy of the tranche list by threshold and keeps the split of the highest threshold the R factor has reached, falling back to the lowest tranche's split when it has reached none. It is the same selection the sliding royalty makes on price, with the R factor in place of the oil price.
 
 Three of the six templates split profit oil this way. "Nigeria - PIA (2021)" gives the contractor 60 percent at R 1, 40 percent at R 1.6 and 30 percent at R 2.5. "Ghana - Deepwater" gives 70 percent at R 1, 50 percent at R 1.25 and 35 percent at R 2. "Angola - Deepwater PSC" gives 70 percent at R 1, 50 percent at R 1.5 and 30 percent at R 2. In all three the contractor's share falls as the project's cumulative revenue outruns its cumulative cost.
 
@@ -22,7 +22,7 @@ The split is not a printed column. What is printed is profit oil and the pieces 
 | 10 | 2.494773 | 90.1428 | 36.0571 | 0.400000 |
 | 11 | 2.581420 | 80.0217 | 24.0065 | 0.300000 |
 
-Year 1 is the important row. The R factor is 0.512217, below every threshold, and the implied split is 0.600000. The first tier's split is the default, used before any threshold is reached, exactly as the first tier's rate is on a sliding royalty. Year 4 at 1.525756 has not reached 1.6, so 0.600000 still stands. Year 10 at 2.494773 has not reached 2.5, so 0.400000 still stands.
+Year 1 is the important row. The R factor is 0.512217, below every threshold, and the implied split is 0.600000. The lowest tranche's split is the default, used before any threshold is reached, exactly as the lowest tier's rate is on a sliding royalty. Year 4 at 1.525756 has not reached 1.6, so 0.600000 still stands. Year 10 at 2.494773 has not reached 2.5, so 0.400000 still stands.
 
 ## The mistake
 

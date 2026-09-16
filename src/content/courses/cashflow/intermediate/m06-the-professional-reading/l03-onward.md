@@ -4,7 +4,7 @@ The Professional tier ends with IRR as a property of a curve. The Expert tier be
 
 ## Where terminal negatives come from
 
-AKATA with an abandonment of 60000000 in 2035 ends in -29598201.95 and reports IRR 23.2570 percent and NPV 38666394.86. With 200000000 it ends in -169598201.95, reports NPV -40359955.35 and IRR null, its NPV negative at every sampled rate, -58362170.82 at 0 percent. Abandonment is one source of a terminal negative, and where it comes from, as a lump sum or as a sinking fund, is the Expert tier's to teach. A tail kept past its economic limit is another, and the decline sweep shows the limit at work: at 20 percent decline the limit year is 2030 and four years are trimmed; at 40 percent seven are trimmed and three rows remain. With the limit off those years would stay, and each would carry a loss to the end of the vector.
+AKATA with an abandonment of 60000000 in 2035 ends in -29598201.95, reports NPV 38666394.86 and returns IRR null, because a curve that ends negative crosses zero twice and the engine names a rate only where one rate in the band does. With 200000000 it reports NPV -40359955.35 and returns null for the opposite reason, its NPV negative at every sampled rate, -58362170.82 at 0 percent. Abandonment is one source of a terminal negative, and where it comes from, as a lump sum or as a sinking fund, is the Expert tier's to teach. A tail kept past its economic limit is another: at 20 percent decline the limit year is 2030 and four years are trimmed, and with the limit off those years would stay, each carrying a loss to the end of the vector.
 
 ## Where the cascade gets longer
 
@@ -12,7 +12,7 @@ The price sweep on oil_price_multiyear_pia_real carries columns AKATA under join
 
 ## What travels
 
-The discounted readings travel with their labels: 72534830.66 end-year on the real basis, 70188970.32 mid-year, 6.796117 percent applied. The profile gap of -21759.68 travels as the first number to distrust. The two-root vector [-100, 208, -108.12] travels as the second, with the engine's 6.0000 and the oracle's 2.0000. The third number to distrust belongs to the Expert tier, and it is about abandonment too.
+The discounted readings travel with their labels: 72534830.66 end-year on the real basis, 70188970.32 mid-year, 6.796117 percent applied. Two readings that used to travel as numbers to distrust no longer do. The point labelled 6.8 now reads 72534830.66, the headline, where before the 2026-09-15 repair it read 72513070.98. The vector [-100, 208, -108.12] now returns null with irrStatus multiple-roots, where before it returned 6.0000 percent against the oracle's 2.0000. What travels instead is the habit of asking what the engine did to reach a number.
 
 ## What to carry
 
@@ -20,4 +20,4 @@ Three habits. Name the convention before the number. Write the sign of the last 
 
 ## Exercise
 
-Take AKATA's flow vector, [-121123680.00, 31746007.20, 64468245.07, 53959532.44, 44874457.77, 37311468.65, 30401798.05], and say which single entry an abandonment changes, what its sign becomes, and what that does to the count of IRR roots.
+Take AKATA's flow vector, [-121123680.00, 31746007.20, 64468245.07, 53959532.44, 44874457.77, 37311468.65, 30401798.05], and say which single entry an abandonment changes, what its sign becomes, and what that does both to the count of IRR roots and to what the engine returns.
