@@ -405,6 +405,20 @@ HEADER = f"""-- ================================================================
 --     cold content is additionally chained to the graded separator temperature,
 --     so a recut of the let-down moves it.
 --
+--     THESE TWO ARE BANDS AND NOT IDENTITIES, and the dry run MEASURED what
+--     each one catches rather than leaving it to be discovered. Sixteen of the
+--     eighteen graded values are refused at ONE PART IN 1e7. These two are not,
+--     because a correlation band cannot see a move that small. waterInLbMMscf is
+--     refused at 0.38 percent and not at 0.35; waterOutLbMMscf is refused at
+--     0.16 percent and not at 0.15, the tighter of the two because the engine's
+--     Magnus fit already sits 0.345 percent above Antoine at the cold spot and
+--     has less of the band left. Both are therefore pinned to about a third of a
+--     percent rather than to a part in ten million, and saying which is the point:
+--     a reader is entitled to know which of the eighteen is weakly held. The
+--     inlet content is pinned far more tightly than that by SECOND ROUTE, the
+--     Associate water-a-day identity that depends on it, which does refuse at one
+--     part in 1e7.
+--
 -- NOTHING GRADED DEPENDS ON A HELD-FOR-LITERATURE QUANTITY, and that is
 -- asserted rather than asserted-by-comment. Digest Section 16 holds six things
 -- and names two absences: the real-gas departure of the saturated water
