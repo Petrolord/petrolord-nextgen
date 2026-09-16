@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The API RP 14E erosional velocity takes how many inputs, and which are they?",
+  "options": [
+   "Three, being the c factor, the density and the bore, since a velocity ceiling has to know the passage it is a ceiling for before it can be stated as a number in ft per second.",
+   "Four, being the c factor, the density, the viscosity and the rate, since erosion depends on how much fluid passes the wall as well as on how fast and how heavy that fluid is.",
+   "Two, being the c factor and the mixture velocity, since the check compares a velocity against a ceiling and both halves of that comparison are velocities in the same units.",
+   "Two: a c factor and the fluid density."
+  ],
+  "answer": 3,
+  "explanation": "At the OGBIA crude density of 54.500000 lb/ft3 and a c factor of 100.000000 the ceiling is 13.545709 ft/s. No bore, no length, no roughness, no viscosity and no rate appear in it."
+ },
+ {
+  "prompt": "Why can an erosional velocity be quoted before a bore has been chosen?",
+  "options": [
+   "Because the engine assumes the smallest bore in the vendored schedule until a real one is supplied, which gives the most conservative ceiling any candidate bore could produce for that fluid.",
+   "Because it is a ceiling on the fluid at its density, and the sizing question then becomes which bores keep the line underneath it.",
+   "Because the ceiling is stated per unit of flow area, so it is quoted first as a rate per square foot and only becomes a velocity once a bore has fixed the 0.347410 ft2 it acts over.",
+   "Because the c factor already carries a nominal bore inside it, which is what the three published rows differ by."
+  ],
+  "answer": 1,
+  "explanation": "The expression contains the c factor and the density and nothing else. Which bores sit under 13.545709 ft/s is the sizing question, and the ceiling itself is settled before it is asked."
+ },
+ {
+  "prompt": "The same c factor of 100.000000 is applied to fluids at 5.000000 and at 62.400000 lb/ft3. What is the ratio of the two allowances, and what sets it?",
+  "options": [
+   "3.532704, which is the square root of the ratio of the two densities, so the allowance runs 44.721360 ft/s against 12.659242 ft/s.",
+   "The ratio of the two densities themselves rather than its square root, so the light fluid is allowed to run proportionally faster in exactly the measure that it is lighter than the heavy one.",
+   "The ratio of the widest published c factor to the narrowest, since the density settles which row applies.",
+   "3.532704, which is the square of the ratio of the two densities, and squaring is what holds the change down when a density spans more than a factor of ten between two fluids."
+  ],
+  "answer": 0,
+  "explanation": "The density sits under a root, so the allowance moves more slowly than the density does. Read down any column of the density table and the allowance falls as the fluid gets heavier."
+ },
+ {
+  "prompt": "Reading ACROSS a row of the density table rather than down a column is reading what?",
+  "options": [
+   "The density alone, since each column of the table is computed at a different density and the c factor is held at the continuous-service figure of 100.000000 throughout the whole table.",
+   "Both at once, since the c factor and the density enter the expression together and a row crosses three services at three different densities as the table is laid out.",
+   "The c factor alone, because it multiplies the whole expression and the density on that row does not change.",
+   "Neither, since a row of the table is three separate calls with nothing in common, and only the diagonal of the table holds the density and the c factor in a fixed proportion to each other."
+  ],
+  "answer": 2,
+  "explanation": "At 5.000000 lb/ft3 the allowance runs 44.721360, 55.901699 and 78.262379 ft/s across the three columns. Down a column the density is doing the work and across a row the service is."
+ },
+ {
+  "prompt": "The module carries three c factor rows. What is the provenance of each?",
+  "options": [
+   "All three are API RP 14E, at 100.000000, 125.000000 and 175.000000, with the third applying only to clean and inhibited duty.",
+   "One is API RP 14E at 100.000000, and the other two at 125.000000 and 175.000000 are operator practice, so only they are overridable.",
+   "Two are API RP 14E at 100.000000 and 175.000000, and the middle row at 125.000000 is an interpolation the module supplies for service that is neither fully continuous nor fully intermittent.",
+   "Two are API RP 14E, at 100.000000 for continuous and 125.000000 for intermittent service, and the third at 175.000000 is recorded as operator practice."
+  ],
+  "answer": 3,
+  "explanation": "The third row is labelled clean, inhibited service and carries the operator practice note. All three are overridable, so a company figure can be used directly with its own provenance."
+ },
+ {
+  "prompt": "A caller asks the table for a service id it does not carry, such as a sand laden duty. What comes back?",
+  "options": [
+   "The continuous row, under its own id and its own label at c 100.000000, so a caller reading the label sees which row it got and a caller reading only the c factor sees no sign of the substitution.",
+   "An object carrying an error string naming the id it was given, which is what every other unknown-name lookup in this chain returns and is why the label can be trusted to match the request.",
+   "A null, so that a caller can test for the failure without having to compare a returned label against the string it asked for, which is the cheaper of the two checks to write.",
+   "The most conservative row the table carries, which is the continuous row at 100.000000, deliberately chosen and labelled as a substitution so that the answer errs on the safe side."
+  ],
+  "answer": 0,
+  "explanation": "It does not throw, it does not come back empty, and it does not carry the name it was asked for. The label is the guard here, and it works only for a caller who reads it."
+ },
+ {
+  "prompt": "The three c factors are held for the literature in this course. What does that mean for a graded question?",
+  "options": [
+   "Graded questions avoid the erosional check entirely and confine themselves to the pressure drop chain.",
+   "Every graded erosional value in this course states its own c factor, so the c factor is a stated condition rather than something a learner is expected to know.",
+   "Graded questions use the continuous row at 100.000000 by convention, since it is the most conservative of the three and the one the recommended practice puts first in its own table.",
+   "Graded questions state the erosional velocity itself, so the learner reads the ceiling directly rather than forming it."
+  ],
+  "answer": 1,
+  "explanation": "The recommended practice says its own figures are conservative and the third row is operator practice with no publication behind it. When a c factor is not stated, the honest answer names the one it assumed."
+ },
+ {
+  "prompt": "The erosional ceiling of 13.545709 ft/s is turned back into a rate through the OGBIA bore. What enters that conversion?",
+  "options": [
+   "The friction factor of 0.0218149625 and the length, since a largest rate has to be the rate at which the line both reaches its ceiling and still delivers against the pressure available.",
+   "The density of 54.500000 lb/ft3 a second time, since the ceiling was formed by dividing by its square root and the conversion back to a volumetric rate has to undo that division.",
+   "The flow area of 0.347410 ft2, and then the barrel and the day, giving 72416.9067 bpd. Nothing new enters, so the largest rate is the erosional velocity wearing different units.",
+   "The c factor of 100.000000 again, applied to the flow area rather than to the density, which is why the three rows of the limit table report three different largest rates."
+  ],
+  "answer": 2,
+  "explanation": "The three largest rates are 72416.9067, 90521.1334 and 126729.5868 bpd at the three c factors, against the 12000.000000 bpd the line actually carries."
+ },
+ {
+  "prompt": "The limit table reports a ratio of 0.165707 and a margin of 83.429284 percent on the same row. What is the relationship between them?",
+  "options": [
+   "The ratio is the velocity against the ceiling and the margin is the rate against the largest rate, so the two are different comparisons that happen to agree on this particular row.",
+   "The margin is the ratio expressed against the erosional velocity of 13.545709 ft/s rather than against the line velocity, which is why one is a fraction and the other a percentage.",
+   "The ratio belongs to the c factor on its own row and the margin is taken against the continuous row throughout, so the margin is comparable between rows in a way the ratio is not.",
+   "They are the same fact stated twice, one as the fraction of the ceiling used and the other as the room left underneath it."
+  ],
+  "answer": 3,
+  "explanation": "Both belong to the c factor on their own row. The margin runs 83.429284, 86.743427 and 90.531019 percent as the ceiling rises, while the line velocity sits still at 2.244621 ft/s."
+ },
+ {
+  "prompt": "Across the three rows of the OGBIA limit table, what stays fixed and what moves?",
+  "options": [
+   "The line velocity of 2.244621 ft/s stays fixed, because the duty and the bore did not change, and the ceiling it is measured against is what moves.",
+   "The ceiling of 13.545709 ft/s stays fixed, because it is set by the density, and the line velocity is what moves.",
+   "Both stay fixed and only the ratio moves, because the ratio is reported against the continuous row whatever c factor the call was made at, which is what makes the three rows comparable.",
+   "The margin stays fixed at 83.429284 percent, because the room underneath the ceiling is a property of the duty."
+  ],
+  "answer": 0,
+  "explanation": "The ceilings are 13.545709, 16.932137 and 23.704991 ft/s and the ratios are 0.165707, 0.132566 and 0.094690. Every column after the line velocity follows from the c factor."
+ },
+ {
+  "prompt": "What is wrong with reading 72416.9067 bpd as the design capacity of the OGBIA bore?",
+  "options": [
+   "It is a rate at line conditions rather than at stock tank conditions, so it overstates what a tank farm would actually receive once the crude has been taken back to standard.",
+   "It is computed at the clean inhibited c factor of 175.000000, which is the most generous row in the table, so an ordinary continuous-service line is allowed rather less than it states.",
+   "It is the rate at which one specific check stops being satisfied, at one stated c factor, and a line has to satisfy every check it is subject to rather than the most generous one.",
+   "It is the rate at which the ratio reaches 0.165707 rather than 1.000000, so it is the design point the line was actually built at rather than any kind of ceiling on it."
+  ],
+  "answer": 2,
+  "explanation": "Nothing in the erosional check looked at pressure at all. The pressure drop at 72416.9067 bpd would be an entirely different number and would have to be affordable as well."
+ },
+ {
+  "prompt": "The erosional velocity is 13.545709 ft/s on every row of the twelve-bore sweep. Why, and what changes instead?",
+  "options": [
+   "Because the sweep holds the ceiling at the value computed for the built bore of 7.981000 in, which is an approximation the engine makes so that the twelve rows stay comparable with each other.",
+   "Because it depends on the density and the c factor and not on the bore. What changes down the table is the velocity that has to sit under it.",
+   "Because every row carries the same 12000.000000 bpd and the ceiling is formed from the rate and the density.",
+   "Because the ratio column is what actually varies and the ceiling is printed once and repeated, so the figure on each row after the first is a display convenience rather than a separate result."
+  ],
+  "answer": 1,
+  "explanation": "The velocity runs from 38.027872 ft/s down to 0.635441 ft/s across the twelve bores while the ceiling sits still. The ratio column is the velocity column rescaled by that one figure."
+ },
+ {
+  "prompt": "Name the inputs the pressure drop has to be given that the erosional check never asks for.",
+  "options": [
+   "The density of 54.500000 lb/ft3 and the c factor, since the ceiling is built from the velocity and the flow area of 0.347410 ft2 while the loss is what has to be told what the fluid weighs.",
+   "The velocity of 2.244621 ft/s and the flow area, since the erosional check works from the rate and the bore directly and never forms the velocity the pressure chain had already computed.",
+   "The bore alone, since the ceiling of 13.545709 ft/s is quoted per unit of flow area and the loss is the only one of the two that has to be told how wide the passage actually is.",
+   "The length, the roughness and the viscosity, the last of the three reaching the loss through the Reynolds number of 48431.2523."
+  ],
+  "answer": 3,
+  "explanation": "The two calculations meet at one velocity and then ask different questions of it. One asks what the line costs and the other asks whether the line survives."
+ },
+ {
+  "prompt": "The OGBIA line is lengthened and everything else is held. What happens to the 25.660631 psi and to the 13.545709 ft/s?",
+  "options": [
+   "The loss grows, because the friction term follows the length directly, and the ceiling does not move at all, because no length appears in it.",
+   "Both grow, because a longer line spends more pressure and the check reads the velocity at the outlet.",
+   "The loss grows and the ceiling falls, because a longer line gives the crude more wall to act on and the check tightens in proportion to the exposure the wall receives over the route.",
+   "Neither moves, because the engine reports both per unit length, so a longer line changes the total and leaves the gradient and the ceiling exactly where they were on the shorter one."
+  ],
+  "answer": 0,
+  "explanation": "Lengthening the line is a change to the pressure budget and not to the wall check. That is the cleanest statement of the two being different questions asked of one velocity."
+ },
+ {
+  "prompt": "The 2 in schedule 40 row comes back at an erosional ratio of 2.470444. How does that verdict differ in kind from a total the pressure budget cannot meet?",
+  "options": [
+   "It does not differ in kind, since either can be answered by raising the c factor to the clean inhibited row at 175.000000.",
+   "The ratio is the softer of the two, since 2.470444 is a caution attached to a row that still returns every one of its numbers.",
+   "A loss is a cost and a cost can be traded against pumping, against the route or against the duty. A ratio above 1.000000 is a verdict about the wall and there is nothing in it to trade.",
+   "The length, since the ratio is evaluated over the whole route and shortening the run brings the velocity down in proportion."
+  ],
+  "answer": 2,
+  "explanation": "On this duty that row also spends 20803.315944 psi, so the two criteria happen to agree. The answers to the ratio are a larger bore, a different c factor with a reason behind it, or a different fluid."
+ }
+]

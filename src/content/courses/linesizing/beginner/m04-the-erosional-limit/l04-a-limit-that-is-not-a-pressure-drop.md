@@ -38,7 +38,7 @@ That agreement belongs to this line. A short line at a high rate can post an aff
 
 ## The mistake
 
-Sizing on pressure drop and checking erosion afterwards as a formality. On this duty the three smallest bores fail the erosional check while still returning a perfectly ordinary pressure drop, so the check is what removes them rather than the cost.
+Sizing on pressure drop and checking erosion afterwards as a formality. On this duty the two criteria happen to agree, and they need not: a short line at a high rate can post an affordable loss and still sit above its ceiling, and then the boolean is the only thing standing between the design and the wall.
 
 ## Exercise
 
