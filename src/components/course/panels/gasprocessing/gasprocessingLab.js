@@ -897,6 +897,91 @@ export const REFUSAL_PROBES = [
   ['a contactor liquid lighter than its gas', () => G.contactorDiameter({ gasMMscfd: 50, pPsia: 900, tF: 100, gasSg: 0.65, rhoLLbFt3: 0.5 })],
 ];
 
+/**
+ * THE CONTRACT, MEASURED RATHER THAN LISTED. One accepted call and one refused
+ * call for every export this module answers a duty with. The gate asks what
+ * each call RETURNS rather than naming which ones are objects, so an export
+ * that quietly starts handing back a bare number is caught by the measurement
+ * instead of by somebody remembering to add it to a list.
+ */
+export const CONTRACT_PROBES = [
+  ['saturatedWaterContent', () => G.saturatedWaterContent({ pPsia: 500, tF: 100 }), () => G.saturatedWaterContent({ pPsia: 500, tF: FIT_ABOVE_HIGH_EDGE_F })],
+  ['kremserFractionRemoved', () => G.kremserFractionRemoved({ absorptionFactor: 1.6, stages: 6 }), () => G.kremserFractionRemoved({ absorptionFactor: 0, stages: 6 })],
+  ['kremserStagesFor', () => G.kremserStagesFor({ absorptionFactor: 1.6, fractionRemoved: 0.9 }), () => G.kremserStagesFor({ absorptionFactor: A_WELL_UNDER_UNITY, fractionRemoved: UNREACHABLE_SPEC })],
+  ['tegPackage', () => G.tegPackage({ ...OBIAFU, inletLbMMscf: 60 }), () => G.tegPackage({ ...OBIAFU, inletLbMMscf: 60, gasMMscfd: 0 })],
+  ['aminePackage', () => G.aminePackage(UBIE), () => G.aminePackage({ ...UBIE, amineId: 'DIPA' })],
+  ['amineOf', () => G.amineOf('MDEA'), () => G.amineOf('DIPA')],
+  ['contactorDiameter', () => G.contactorDiameter({ gasMMscfd: 50, pPsia: 900, tF: 100, gasSg: 0.65 }), () => G.contactorDiameter({ gasMMscfd: 0, pPsia: 900, tF: 100, gasSg: 0.65 })],
+  ['zAtState', () => G.zAtState({ pPsia: 900, tF: 100, gasSg: 0.65 }), () => G.zAtState({ pPsia: 30000, tF: 100, gasSg: 0.65 })],
+  ['jouleThomsonFPerPsi', () => G.jouleThomsonFPerPsi({ pPsia: 900, tF: 100, gasSg: 0.65 }), () => G.jouleThomsonFPerPsi({ pPsia: 0, tF: 100, gasSg: 0.65 })],
+  ['jtDrop', () => G.jtDrop(AGBADA), () => G.jtDrop({ ...AGBADA, steps: 0 })],
+];
+
+/**
+ * The one number-returning function in the module, measured rather than
+ * asserted. `waterSatPsia` is a vapour-pressure HELPER: the saturation answer
+ * reads it and wraps it in the module's object contract, and the digest prints
+ * it beside the mole fraction it produces. Outside its own fit band it returns
+ * NaN, which is the value a panel has to guard against by asking whether the
+ * number is finite rather than by asking for an `error` key.
+ */
+export const vapourPressureHelper = () => ({
+  insideBandPsia: G.waterSatPsia(OBIAFU_LINE.tF),
+  atLowerEdgePsia: G.waterSatPsia(FIT_LOW_EDGE_F),
+  atUpperEdgePsia: G.waterSatPsia(FIT_HIGH_EDGE_F),
+  belowBand: G.waterSatPsia(FIT_BELOW_LOW_EDGE_F),
+  aboveBand: G.waterSatPsia(FIT_ABOVE_HIGH_EDGE_F),
+  returnsBareNumber: typeof G.waterSatPsia(OBIAFU_LINE.tF) === 'number',
+});
+
+/**
+ * TWO FLAGS AND THE PREDICATES THAT LOOK LIKE THEM. A returned flag needs a
+ * negative control on the FLAG rather than only on the value, so each of these
+ * carries a lookalike predicate that does NOT separate the cases the engine's
+ * own answer separates.
+ *
+ * `ceiling`: an absorption factor below unity looks like the thing that refuses
+ * a stage count. It is not. What refuses is a factor at or below the REMOVAL
+ * the spec asks for, so a factor of 0.95 against a removal of 0.9 answers while
+ * a factor of 0.8 against the same removal refuses, and the below-unity
+ * predicate is true for both.
+ *
+ * `marchDeath`: a deep outlet looks like the thing that kills the march. It is
+ * not. What kills it is a COLD INLET walking the gas off the compressibility
+ * correlation part way down, so the deepest let-down here answers and the cold
+ * inlet refuses, and the deep-outlet predicate is true for both.
+ */
+export const flagControls = () => {
+  const ceilingCases = [
+    { absorptionFactor: 1.2, fractionRemoved: 0.9 },
+    { absorptionFactor: 0.95, fractionRemoved: 0.9 },
+    { absorptionFactor: A_WELL_UNDER_UNITY, fractionRemoved: UNREACHABLE_SPEC },
+  ].map((c) => {
+    const r = G.kremserStagesFor(c);
+    return {
+      ...c,
+      refused: Boolean(r.error),
+      belowUnityPredicate: c.absorptionFactor < 1,
+      ceilingPredicate: c.absorptionFactor <= c.fractionRemoved,
+      ceiling: r.ceiling ?? null,
+    };
+  });
+  const marchCases = [
+    { label: 'the stated let-down', tF: AGBADA.tF, p2Psia: AGBADA.p2Psia },
+    { label: 'a far deeper let-down from the same warm inlet', tF: AGBADA.tF, p2Psia: 8 },
+    { label: 'a cold inlet, let down only part as far', tF: AGBADA_COLD_INLET_F, p2Psia: AGBADA_COLD_P2_PSIA },
+  ].map((c) => {
+    const r = G.jtDrop({ ...AGBADA, tF: c.tF, p2Psia: c.p2Psia });
+    return {
+      ...c,
+      refused: Boolean(r.error),
+      deepOutletPredicate: c.p2Psia <= AGBADA_DEEP_P2_PSIA,
+      diedAtStep: r.diedAtStep ?? null,
+    };
+  });
+  return { ceilingCases, marchCases };
+};
+
 /** The calls that read the Kremser contract from both sides. */
 export const KREMSER_CONTRACT_CALLS = [[0, 5], [-1, 5], [2, 0], [2, -3], [1.6, 6]];
 
@@ -1107,9 +1192,21 @@ export const publishedCaseReach = () => {
  */
 export const HISTORY_COMMENT_RE = /^\s*(\*|\/\/).*(used to|no longer|until FC4-0)/;
 
-/** How many history comment lines a source text carries, by that rule. */
+/**
+ * THE SAME SWEEP WITH A WIDER KEYWORD LIST, so a reader can be told how much
+ * the RULE moves the answer rather than asserted at that it does. A count of
+ * comment lines means nothing without the tree it walked and the rule it
+ * counted with, and both rules live here so neither can be quoted alone.
+ */
+export const HISTORY_COMMENT_RE_WIDE = /^\s*(\*|\/\/).*(used to|no longer|before the repair|formerly|had been|prior to|was the bug|instead of|was on screen)/i;
+
+/** How many history comment lines a source text carries, by the narrow rule. */
 export const countHistoryComments = (text) => text.split('\n')
   .filter((l) => HISTORY_COMMENT_RE.test(l)).length;
+
+/** The same count under the wider rule. */
+export const countHistoryCommentsWide = (text) => text.split('\n')
+  .filter((l) => HISTORY_COMMENT_RE_WIDE.test(l)).length;
 
 /**
  * Section 20. FRAMED HISTORY, and the only reader in this lab whose subject is
@@ -1249,28 +1346,40 @@ export const capstoneRuns = () => {
   };
 };
 
-/** The eighteen graded fields, six a tier, in the published order. */
+/**
+ * The eighteen graded fields, six a tier, in the published order.
+ *
+ * THIS LAB HOLDS NO GRADING TOLERANCE. It used to carry a fourth column, which
+ * made it the THIRD place an absolute tolerance had to be right: the
+ * generator's rule, the published fields.json, and here. A tolerance living in
+ * three places that must agree is how a sibling wave shipped a stale one, and
+ * three of these went stale the day the tolerance rule changed. So the column
+ * is gone rather than corrected: fields.json is the one place a tolerance
+ * lives, the grader reads it, and the lab pins the VALUES it has to reproduce.
+ * The leak guard takes the published field list as an argument for exactly the
+ * same reason.
+ */
 export const capstoneFields = () => {
   const r = capstoneRuns();
   return [
-    ['beginner', 'inletLbMMscf', r.ikSat.lbPerMMscf, 0.0001],
-    ['beginner', 'waterLbDay', r.ikPack.waterLbDay, 0.01],
-    ['beginner', 'circGpm', r.ikPack.circGpm, 0.00001],
-    ['beginner', 'circGpd', r.ikPack.circGpd, 0.01],
-    ['beginner', 'sensiblePerGal', r.ikPack.sensiblePerGal, 0.0001],
-    ['beginner', 'btexTonsYear', r.ikPack.btexTonsYear, 0.00001],
-    ['intermediate', 'fractionRemoved', r.otFrac.fractionRemoved, 1e-9],
-    ['intermediate', 'stagesNeeded', r.otStages.stages, 0.000001],
-    ['intermediate', 'acidMolesDay', r.otAmine.acidMolesDay, 0.01],
-    ['intermediate', 'circGpm', r.otAmine.circGpm, 0.00001],
-    ['intermediate', 'reboilerMMBtuHr', r.otAmine.reboilerMMBtuHr, 0.00001],
-    ['intermediate', 'circGpmRetuned', r.otRetuned.circGpm, 0.00001],
-    ['advanced', 'dzdT', r.esMu.dzdT, 1e-12],
-    ['advanced', 'muFPerPsi', r.esMu.muFPerPsi, 1e-9],
-    ['advanced', 'dropF', r.esDrop.dropF, 0.0001],
-    ['advanced', 't2F', r.esDrop.t2F, 0.0001],
-    ['advanced', 'waterInLbMMscf', r.esWaterIn.lbPerMMscf, 0.0001],
-    ['advanced', 'waterOutLbMMscf', r.esWaterOut.lbPerMMscf, 0.0001],
+    ['beginner', 'inletLbMMscf', r.ikSat.lbPerMMscf],
+    ['beginner', 'waterLbDay', r.ikPack.waterLbDay],
+    ['beginner', 'circGpm', r.ikPack.circGpm],
+    ['beginner', 'circGpd', r.ikPack.circGpd],
+    ['beginner', 'sensiblePerGal', r.ikPack.sensiblePerGal],
+    ['beginner', 'btexTonsYear', r.ikPack.btexTonsYear],
+    ['intermediate', 'fractionRemoved', r.otFrac.fractionRemoved],
+    ['intermediate', 'stagesNeeded', r.otStages.stages],
+    ['intermediate', 'acidMolesDay', r.otAmine.acidMolesDay],
+    ['intermediate', 'circGpm', r.otAmine.circGpm],
+    ['intermediate', 'reboilerMMBtuHr', r.otAmine.reboilerMMBtuHr],
+    ['intermediate', 'circGpmRetuned', r.otRetuned.circGpm],
+    ['advanced', 'dzdT', r.esMu.dzdT],
+    ['advanced', 'muFPerPsi', r.esMu.muFPerPsi],
+    ['advanced', 'dropF', r.esDrop.dropF],
+    ['advanced', 't2F', r.esDrop.t2F],
+    ['advanced', 'waterInLbMMscf', r.esWaterIn.lbPerMMscf],
+    ['advanced', 'waterOutLbMMscf', r.esWaterOut.lbPerMMscf],
   ];
 };
 
@@ -1278,16 +1387,12 @@ export const capstoneValues = (fieldList) => Object.fromEntries(
   (fieldList || capstoneFields()).map(([, k, v]) => [k, v]),
 );
 
-export const capstoneTolerances = (fieldList) => Object.fromEntries(
-  (fieldList || capstoneFields()).map(([, k, , t]) => [k, t]),
-);
-
 /** Every capstone-only export, by name. The panel guard greps for these. */
 export const CAPSTONE_ONLY_EXPORTS = [
   'IKOT_ABASI_LINE', 'IKOT_ABASI',
   'OTUMARA_ABSORBER', 'OTUMARA_REQUIRED_REMOVAL', 'OTUMARA', 'OTUMARA_RETUNED_LEAN_LOADING',
   'ESCRAVOS',
-  'CAPSTONE_STABLE', 'capstoneRuns', 'capstoneFields', 'capstoneValues', 'capstoneTolerances',
+  'CAPSTONE_STABLE', 'capstoneRuns', 'capstoneFields', 'capstoneValues',
   'CAPSTONE_ONLY_EXPORTS',
 ];
 
@@ -1306,17 +1411,37 @@ export const LEAK_GUARD_SCALINGS = [
 ];
 
 /**
+ * THE CUSHION CANNOT OUTGROW WHAT A RESTATEMENT PRESERVES. The margin above is
+ * a cushion around the grader's own band, and a cushion that grows to half a
+ * percent of the answer stops meaning "this IS the answer" and starts meaning
+ * "this is a number of about that size". A dimensionless removal fraction of
+ * 0.968 is not a temperature derivative of 0.000968 per degR restated in other
+ * units, and a guard that says it is reports a coincidence of scale as a leak.
+ *
+ * So the band is capped at one part in ten thousand of the target's own
+ * magnitude, and floored at the grader's band itself so the guard always covers
+ * every value the grader would accept. This became load-bearing the day three
+ * published tolerances were loosened: the shifted bands grew five thousandfold
+ * and swept up two Kremser removals and a compressibility.
+ */
+export const LEAK_GUARD_RELATIVE_CAP = 1e-4;
+
+/**
  * Every forbidden neighbourhood: eighteen answers, three shiftings, ten times
  * the grading band, the band SCALED with the shifting because the grader's
- * tolerance is absolute in the field's own units.
+ * tolerance is absolute in the field's own units, then capped and floored as
+ * above.
  */
 export const leakGuardTargets = (fieldList) => {
   const out = [];
   fieldList.forEach(([tier, key, v, tol]) => {
     LEAK_GUARD_SCALINGS.forEach(({ factor, tag }) => {
       const gradingBand = tol * Math.abs(factor);
+      const value = v * factor;
+      const cushioned = LEAK_GUARD_MARGIN * gradingBand;
+      const capped = Math.min(cushioned, LEAK_GUARD_RELATIVE_CAP * Math.abs(value));
       out.push({
-        tier, key, tag, value: v * factor, gradingBand, band: LEAK_GUARD_MARGIN * gradingBand,
+        tier, key, tag, value, gradingBand, band: Math.max(gradingBand, capped),
       });
     });
   });

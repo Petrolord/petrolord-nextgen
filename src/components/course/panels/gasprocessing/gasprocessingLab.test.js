@@ -749,6 +749,19 @@ const buildDigest = () => {
   // read as history by accident.
   w('# SECTION 20: What this engine was repaired for, and how to teach it (owned by Expert m05 l01)');
   w();
+  w('THE EXPERT TIER READS THIS DIGEST OUT OF ORDER, so the mapping is stated here once rather than inferred from six section headers. It was resolved by SUBJECT:');
+  w('| Expert lesson | where it reads from |');
+  w('| --- | --- |');
+  [['m05 l01, What was repaired, and what was not', 'Section 20'],
+    ['m05 l02, What a refusal is', 'Section 15'],
+    ['m05 l03, The contract read on one export', 'Section 15, the whole-contract table'],
+    ['m05 l04, Constants measured out of the engine', 'Section 2'],
+    ['m05 l05, What a published case can catch', 'Section 17'],
+    ['m06 l01, What the method does not know', 'Section 16'],
+    ['m06 l02, The capstone worked', 'its own capstone rather than this digest'],
+    ['m06 l03, Where this engine hands over', 'Sections 14 and 16'],
+  ].forEach(([a, b]) => w(`| ${a} | ${b} |`));
+  w();
   w('EVERYTHING IN THIS SECTION IS HISTORY AND IS LABELLED AS HISTORY. Nothing above this line is. If you teach any of it, say plainly that it is what the engine used to do, the way this section does. A sentence about former behaviour that reads as current behaviour is the defect; the subject itself is not.');
   w();
   w('This module was repaired after a recon found 49 findings in it, its published cases and the studio that composes it. Four of those are worth teaching because each one is a general lesson that happens to have an example here.');
@@ -767,7 +780,7 @@ const buildDigest = () => {
   w();
   w('4. ONE FLUID WITH TWO DENSITIES, AND ONE MODULE WITH TWO STANDARD BASES. Two numbers for one glycol, and a standard cubic foot defined at one pressure and converted at another. Neither gap was large. Both are defects whatever their size, because nothing downstream can tell which of the two numbers it is holding. Section 2 now shows one of each, and shows the derived ones being derived.');
   w();
-  w(`WHERE THE REST OF IT LIVES, AND HOW TO READ IT. The engine's own source comments record what changed, because a good repair records what it changed: there are ${hist.thisModule} such comment lines in this module and ${hist.allEngines} across the vendored engines, counted here rather than quoted, by reading ${hist.engineFileCount} vendored engine modules under packages/engines/engines and taking every COMMENT line carrying "used to", "no longer" or the repair's own name. Both the tree and the rule are stated because a count of this kind means nothing without them: widen the rule to the nine keywords this file also sweeps with and this module alone reads 18, and count the canonical engines repository instead of the subset NextGen vendors and the tree figure more than doubles. A number quoted without its tree and its rule is not checkable and should not be repeated. THEY ARE PROVENANCE. A comment is not the digest, and a sentence lifted out of one into a lesson arrives with no frame around it. If you want to teach any of it, frame it the way this section does, and never present it as what the engine does now.`);
+  w(`WHERE THE REST OF IT LIVES, AND HOW TO READ IT. The engine's own source comments record what changed, because a good repair records what it changed: there are ${hist.thisModule} such comment lines in this module and ${hist.allEngines} across the vendored engines, counted here rather than quoted, by reading ${hist.engineFileCount} vendored engine modules under packages/engines/engines and taking every COMMENT line carrying "used to", "no longer" or the repair's own name. Both the tree and the rule are stated because a count of this kind means nothing without them: widen the rule to the nine keywords this file also sweeps with and this module alone reads ${hist.thisModuleWide}, and count the canonical engines repository instead of the subset NextGen vendors and the tree figure more than doubles. A number quoted without its tree and its rule is not checkable and should not be repeated. THEY ARE PROVENANCE. A comment is not the digest, and a sentence lifted out of one into a lesson arrives with no frame around it. If you want to teach any of it, frame it the way this section does, and never present it as what the engine does now.`);
   w();
 
 
@@ -784,9 +797,11 @@ const walkJs = (dir) => fs.readdirSync(dir, { withFileTypes: true })
 
 const historyCounts = () => {
   const files = walkJs(path.join(ENGINES, 'engines'));
+  const thisModuleSrc = fs.readFileSync(path.join(ENGINES, 'engines/facilities/gasProcessing.js'), 'utf8');
   return {
     engineFileCount: files.length,
-    thisModule: L.countHistoryComments(fs.readFileSync(path.join(ENGINES, 'engines/facilities/gasProcessing.js'), 'utf8')),
+    thisModule: L.countHistoryComments(thisModuleSrc),
+    thisModuleWide: L.countHistoryCommentsWide(thisModuleSrc),
     allEngines: files.reduce((a, f) => a + L.countHistoryComments(fs.readFileSync(f, 'utf8')), 0),
   };
 };
@@ -829,7 +844,7 @@ const MIRRORED = [
   'BANK_TASK.md', 'FINDINGS.md', 'KEY_TRUTH_TASK.md', 'LESSON_TASK.md', 'PANELS.md', 'RECON.md',
   'build_digest.sh', 'digest.txt', 'digest_prose.rules.mjs', 'fc4_capstone.mjs', 'fc4_dump.mjs',
   'fc4_fields.mjs', 'fc4_fields_capstone.mjs', 'fields.json', 'gate_capstone_leak.py',
-  'gate_claims.mjs', 'gate_copy_rule.py', 'gate_movement.mjs', 'gate_typed_literals.py',
+  'gate_claims.mjs', 'gate_copy_rule.py', 'gate_movement.mjs', 'gate_typed_literals.py', 'gate_wavejson.mjs',
   'harvest_truth.py', 'lengths.py', 'make_fields.mjs', 'scaffold.py', 'structure.py',
   'sweep_literals.py', 'truth-gasprocessing.json', 'wave.json',
 ];
@@ -848,7 +863,7 @@ describe('the digest on disk, the in-repo mirror and the teaching fields', () =>
     // stale copy. So the wave file is read as truth, the mirror is compared
     // with it, and the mirror's own listing is compared with this list so a
     // file cannot be added to the mirror without being named here.
-    expect(MIRRORED).toHaveLength(27);
+    expect(MIRRORED).toHaveLength(28);
     MIRRORED.forEach((f) => {
       const a = fs.readFileSync(path.join(WAVE, f), 'utf8');
       const b = fs.readFileSync(path.join(MIRROR, f), 'utf8');
@@ -972,5 +987,873 @@ describe('THE DIGEST, REBUILT FROM LAB RETURN VALUES, BYTE FOR BYTE', () => {
     expect(sections(moved).S14).not.toBe(onDisk.S14);
     expect(sections(moved).S13).toBe(onDisk.S13);
     expect(sections(moved).S15).toBe(onDisk.S15);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// What the teaching fields show: the results the course is built on.
+// ---------------------------------------------------------------------------
+
+describe('what the teaching fields show', () => {
+  it('THE JT GATE: the coefficient is the derivative chain, and the digest prints every term of it', () => {
+    const jt = L.coldEnd();
+    // The four terms the relation is built from, all present and all finite.
+    [jt.z, jt.ppr, jt.tpr, jt.dzdT, jt.muFPerPsi].forEach((v) => expect(Number.isFinite(v)).toBe(true));
+    // The derivative is the only term carrying real-gas behaviour, and it
+    // GROWS with pressure while the compressibility falls. Read off the sweep
+    // rather than asserted of the physics.
+    const answered = jt.pressureSweep.filter((r) => !r.refused);
+    expect(answered).toHaveLength(6);
+    for (let i = 1; i < answered.length; i += 1) {
+      expect(answered[i].z, `z at ${answered[i].pPsia} psia`).toBeLessThan(answered[i - 1].z);
+      expect(answered[i].dzdT, `dz/dT at ${answered[i].pPsia} psia`).toBeGreaterThan(answered[i - 1].dzdT);
+    }
+    // And the coefficient does NOT vanish as the pressure falls, which is the
+    // reading the section turns on.
+    expect(answered[0].pPsia).toBe(50);
+    expect(answered[0].muFPerPsi).toBeGreaterThan(0.05);
+    // The heat capacity enters exactly once and as a divisor: the product is
+    // one number down the whole sweep.
+    const products = new Set(jt.cpSweep.map((r) => r.cpTimesMuDerived.toFixed(12)));
+    expect(products.size, 'Cp times mu moves down the table').toBe(1);
+  });
+
+  it('THE JT GATE: the march is measured against its own 20000-step answer, and 20 steps is worth four nines', () => {
+    const jt = L.coldEnd();
+    expect(L.AGBADA_STEP_REFERENCE).toBe(20000);
+    expect(jt.steps).toBe(20);
+    const byStep = Object.fromEntries(jt.stepSweep.map((r) => [r.steps, r]));
+    expect(Object.keys(byStep).map(Number)).toEqual([1, 2, 5, 10, 20, 50, 200]);
+    // Monotone towards the reference, and the default lands inside 1e-5 of it.
+    for (let i = 1; i < jt.stepSweep.length; i += 1) {
+      expect(jt.stepSweep[i].overReferenceDerived)
+        .toBeGreaterThan(jt.stepSweep[i - 1].overReferenceDerived);
+      expect(jt.stepSweep[i].overReferenceDerived).toBeLessThan(1);
+    }
+    expect(Math.abs(1 - byStep[20].overReferenceDerived)).toBeLessThan(1e-5);
+    expect(Math.abs(1 - byStep[1].overReferenceDerived)).toBeGreaterThan(1e-3);
+    // The twenty-step march IS the march the digest headlines.
+    expect(byStep[20].dropF).toBe(jt.dropF);
+    expect(byStep[20].t2F).toBe(jt.t2F);
+  });
+
+  it('THE JT GATE: three march coefficients, and the inlet measured against the mean', () => {
+    const jt = L.coldEnd();
+    // Three different numbers, in the order the march produces them: the
+    // coefficient rises as the gas is let down, so the inlet is the smallest.
+    expect(jt.muInletFPerPsi).toBeLessThan(jt.muMeanFPerPsi);
+    expect(jt.muMeanFPerPsi).toBeLessThan(jt.muLastStepFPerPsi);
+    expect(new Set([jt.muInletFPerPsi, jt.muMeanFPerPsi, jt.muLastStepFPerPsi]).size).toBe(3);
+    // The inlet coefficient is the screening coefficient, to the last bit.
+    expect(jt.muInletFPerPsi).toBe(jt.muFPerPsi);
+    // The mean is the cooling over the pressure drop, measured rather than
+    // taken on trust.
+    expect(jt.muMeanFPerPsi)
+      .toBeCloseTo(jt.dropF / (L.AGBADA.p1Psia - L.AGBADA.p2Psia), 12);
+    // THE FIGURE THE PANEL HEADLINES, verified against the digest rather than
+    // taken from a report: the inlet is this fraction of the mean, so quoting
+    // the inlet beside the arrival overstates the slope the answer was built
+    // from. FC3's lab named a count after the wrong thing and the number
+    // happened to agree, so this is checked against the digest text itself.
+    expect(num(jt.inletOverMeanDerived, 9)).toBe('0.916066108');
+    expect(readDigest()).toContain(`The inlet coefficient is ${num(jt.inletOverMeanDerived, 9)} times the mean`);
+    expect(jt.inletOverMeanDerived).toBeLessThan(1);
+  });
+
+  it('THE WATER TABLE: letting the gas down without cooling it lets it hold MORE water', () => {
+    const jt = L.coldEnd();
+    const rows = jt.fourStates;
+    expect(rows).toHaveLength(4);
+    expect(rows.map((r) => r.label)).toEqual([
+      'at the inlet',
+      'cooled, but still at inlet pressure',
+      'let down, but not yet cooled',
+      'at the cold separator',
+    ]);
+    rows.forEach((r) => expect(r.error, r.label).toBeNull());
+    const [inlet, cooled, letDown, cold] = rows;
+    // THE THIRD ROW IS THE POINT. The let-down alone WETS the gas.
+    expect(letDown.lbPerMMscf).toBeGreaterThan(inlet.lbPerMMscf);
+    // The cooling alone dries it, and harder than the let-down wets it.
+    expect(cooled.lbPerMMscf).toBeLessThan(inlet.lbPerMMscf);
+    expect(cold.lbPerMMscf).toBeLessThan(inlet.lbPerMMscf);
+    expect(cold.lbPerMMscf).toBeGreaterThan(cooled.lbPerMMscf);
+    // The two states either side of the cold separator are the same states the
+    // headline numbers came from.
+    expect(inlet.lbPerMMscf).toBe(jt.waterInLbMMscf);
+    expect(cold.lbPerMMscf).toBe(jt.waterOutLbMMscf);
+    expect(jt.dropOutLbMMscfDerived).toBeGreaterThan(0);
+    expect(jt.heldFractionDerived).toBeLessThan(1);
+  });
+
+  it('A FLAG NEEDS A CONTROL ON THE FLAG: the ceiling is A against the removal, not A against one', () => {
+    const { ceilingCases } = L.flagControls();
+    expect(ceilingCases).toHaveLength(3);
+    const refused = ceilingCases.map((c) => c.refused);
+    expect(refused).toEqual([false, false, true]);
+    // The lookalike predicate does NOT separate them: it is true for the
+    // accepted 0.95 case and for the refused 0.8 case alike.
+    expect(ceilingCases.map((c) => c.belowUnityPredicate)).toEqual([false, true, true]);
+    // The engine's own predicate does.
+    expect(ceilingCases.map((c) => c.ceilingPredicate)).toEqual(refused);
+    // And the refusal hands back the ceiling it capped at.
+    expect(ceilingCases[2].ceiling).toBe(ceilingCases[2].absorptionFactor);
+    expect(ceilingCases[0].ceiling).toBeNull();
+  });
+
+  it('A FLAG NEEDS A CONTROL ON THE FLAG: a cold inlet kills the march, a deep outlet does not', () => {
+    const { marchCases } = L.flagControls();
+    expect(marchCases).toHaveLength(3);
+    const refused = marchCases.map((c) => c.refused);
+    expect(refused).toEqual([false, false, true]);
+    // The lookalike predicate is true for the deepest let-down, which ANSWERS,
+    // and false for the cold inlet, which is the one that dies.
+    expect(marchCases.map((c) => c.deepOutletPredicate)).toEqual([false, true, false]);
+    // The refusal says where it died, part way down rather than at the end.
+    expect(marchCases[2].diedAtStep).toBeGreaterThan(0);
+    expect(marchCases[2].diedAtStep).toBeLessThan(L.coldEnd().coldSteps);
+    expect(marchCases[0].diedAtStep).toBeNull();
+  });
+
+  it('the constants are MEASURED out of the engine, and every measurement is its own export', () => {
+    const c = L.moduleConstants();
+    c.measuredRows.forEach(([label, exported, measured]) => {
+      expect(measured / exported, label).toBeCloseTo(1, 12);
+    });
+    expect(c.measuredMinutes).toBeCloseTo(1440, 9);
+    expect(c.measuredReboilerGroup).toBeCloseTo(24e6, 0);
+    expect(c.glycolDensityRatioDerived).toBeCloseTo(1, 12);
+    // The derived standard cubic feet is the gas constant chain and nothing else.
+    expect(c.lbmolScfDerived).toBe(c.lbmolScf);
+  });
+
+  it('the golden splits into the routes that discriminate and the routes that do not', () => {
+    const r = L.publishedCaseReach();
+    // The independent routes do NOT agree exactly, which is the evidence that
+    // they are independent.
+    expect(r.waterWorstDerived).toBeGreaterThan(0);
+    expect(r.kremserWorstDerived).toBeGreaterThan(0);
+    // The molar signature is one number across every molar row, and the mass
+    // rows carry none of it.
+    const molar = r.molarRows.filter((x) => x.molar);
+    const mass = r.molarRows.filter((x) => !x.molar);
+    expect(molar.length).toBeGreaterThanOrEqual(8);
+    expect(mass.length).toBeGreaterThanOrEqual(3);
+    expect(r.molarSpreadDerived).toBeLessThan(1e-14);
+    expect(r.massWorstDerived).toBeLessThan(1e-14);
+    expect(r.signatureDerived).not.toBe(1);
+    expect(Math.abs(r.signatureDerived - 1)).toBeGreaterThan(1e-9);
+  });
+
+  it('no reader reads the clock or a random number: the lab source makes no Date and draws nothing', () => {
+    const code = LAB_SOURCE().replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+    expect(code).not.toContain('Math.random');
+    expect(code).not.toContain('Date');
+  });
+});
+
+describe('every reader is pure and deterministic', () => {
+  it('there is one reader per digest section', () => {
+    expect(READERS).toHaveLength(20);
+    expect(SECTION_KEYS.filter((k) => k !== 'preamble')).toHaveLength(20);
+    READERS.forEach((name) => expect(typeof LAB[name], name).toBe('function'));
+  });
+
+  it('two calls agree, and mutating a result changes neither the next call nor the fields', () => {
+    READERS.forEach((name) => {
+      const a = LAB[name]();
+      const b = LAB[name]();
+      expect(JSON.stringify(b), name).toBe(JSON.stringify(a));
+      if (a && typeof a === 'object') {
+        a.mutatedByTheGate = 'no reader may be a shared object';
+        expect(LAB[name]().mutatedByTheGate, name).toBeUndefined();
+      }
+    });
+    // And the field literals the readers run on are unchanged by all of that.
+    expect(L.OBIAFU.gasMMscfd).toBe(62);
+    expect(L.UBIE.gasMMscfd).toBe(88);
+    expect(L.AGBADA.p1Psia).toBe(1180);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// THE REFUSAL GATE. Every refusal a panel can show is the engine's own message,
+// never written as a literal anywhere in the lab or in a panel.
+// ---------------------------------------------------------------------------
+
+describe('THE REFUSAL GATE: every refusal is the engine\'s own returned message', () => {
+  const allSoft = () => {
+    const s4 = L.honestBand();
+    const s6 = L.circulationChoice();
+    const s9 = L.stagedDevice();
+    const s10 = L.acidGasByMoles();
+    const s11 = L.threeAmines();
+    const s14 = L.coldEnd();
+    const s15 = L.refusalContract();
+    return [
+      ...s15.refusals,
+      ...s4.otherRefusals,
+      ...s4.fitLimit.map((r) => ({ label: `the water fit at ${r.tF} degF`, error: r.error })),
+      { label: 'the studio temperature box', error: s4.studioRefusal },
+      ...s6.strengthBand.map((r) => ({ label: `the lean strength at ${r.leanTegWtPct}`, error: r.error })),
+      ...s9.solvedBack.map((r) => ({ label: `the stages for ${r.fractionRemoved} at A ${r.absorptionFactor}`, error: r.error })),
+      { label: 'a starved absorber', error: s9.starvedRefusal },
+      ...s10.lookalikeRefusals,
+      { label: 'the swing vanishing', error: s10.swingVanishesRefusal },
+      { label: 'an amine the table does not carry', error: s11.unknownAmineRefusal },
+      ...s14.stepRefusals.map((r) => ({ label: `a march of ${r.steps} steps`, error: r.error })),
+      { label: 'a let-down backwards', error: s14.backwardsRefusal },
+      { label: 'a let-down of nothing', error: s14.equalPressureRefusal },
+      ...s14.deeperLetDown.map((r) => ({ label: `a let-down to ${r.p2Psia} psia`, error: r.error })),
+      { label: 'a cold inlet march', error: s14.coldInletRefusal },
+      ...s14.gravityEdge.map((r) => ({ label: `a gravity of ${r.gasSg}`, error: r.error })),
+      ...s14.fourStates.map((r) => ({ label: `the water ${r.label}`, error: r.error })),
+      ...s15.kremserContract.map((r) => ({ label: `kremser at A ${r.absorptionFactor}`, error: r.error })),
+    ].filter((r) => r.error !== null);
+  };
+
+  it('there are refusals to check, so a rename cannot silently empty this gate', () => {
+    expect(L.REFUSAL_PROBES).toHaveLength(33);
+    expect(L.BOUNDARY_PROBES).toHaveLength(14);
+    expect(L.EVIDENCE_PROBES).toHaveLength(4);
+    expect(L.KREMSER_CONTRACT_CALLS).toHaveLength(5);
+    expect(L.CONTRACT_PROBES).toHaveLength(10);
+    expect(allSoft().length).toBeGreaterThanOrEqual(45);
+  });
+
+  it('every refusal carries a message, and the count of DISTINCT MESSAGES is measured rather than quoted', () => {
+    const rows = allSoft();
+    rows.forEach((r) => {
+      expect(typeof r.error, r.label).toBe('string');
+      expect(r.error.length, `${r.label} carries no message`).toBeGreaterThan(10);
+    });
+    const distinct = new Set(rows.map((r) => r.error));
+    // NAMED FOR WHAT IT COUNTS: this is the number of DISTINCT MESSAGE STRINGS
+    // across the refusals the panels can reach, which is smaller than the
+    // number of refusals because one guard reached from two sides returns two
+    // messages that differ only in the value they quote, and several guards are
+    // shared between exports.
+    // eslint-disable-next-line no-console
+    console.log(`refusal gate: ${rows.length} refusals carrying ${distinct.size} distinct engine messages`);
+    expect(distinct.size).toBeGreaterThanOrEqual(30);
+    expect(distinct.size).toBeLessThanOrEqual(rows.length);
+  });
+
+  it('NOTHING IN THIS MODULE THROWS: every probe returns rather than raising', () => {
+    [...L.REFUSAL_PROBES, ...L.EVIDENCE_PROBES].forEach(([label, fn]) => {
+      expect(() => fn(), `${label} threw instead of returning`).not.toThrow();
+    });
+    L.BOUNDARY_PROBES.forEach(([label, , fn]) => {
+      expect(() => fn(), `${label} threw instead of returning`).not.toThrow();
+    });
+    L.CONTRACT_PROBES.forEach(([name, ok, bad]) => {
+      expect(() => ok(), `${name} accepted`).not.toThrow();
+      expect(() => bad(), `${name} refused`).not.toThrow();
+    });
+  });
+
+  it('THE CONTRACT, MEASURED: every answering export returns an object on both sides, and the count of bare-number answers is zero', () => {
+    // FC4-0 put kremserFractionRemoved inside the contract, so the contract is
+    // whole and this gate pins it AS IT IS. The measurement is `typeof`, not a
+    // list of which exports are objects, because a list goes stale silently.
+    const bareNumberAnswers = L.CONTRACT_PROBES.filter(([, ok, bad]) => typeof ok() === 'number' || typeof bad() === 'number');
+    expect(bareNumberAnswers.map(([n]) => n), 'an answering export returns a bare number').toEqual([]);
+    L.CONTRACT_PROBES.forEach(([name, ok, bad]) => {
+      expect(typeof ok(), `${name} accepted`).toBe('object');
+      // amineOf is the one catalogue lookup and says it does not know by
+      // returning null, which is an object type and no error key.
+      const refused = bad();
+      expect(typeof refused, `${name} refused`).toBe('object');
+      if (refused !== null) {
+        expect(typeof refused.error, `${name} refused with no message`).toBe('string');
+      }
+    });
+    // kremserFractionRemoved, specifically, on both branches.
+    const k = L.refusalContract().kremserContract;
+    expect(k.filter((r) => r.error === null)).toHaveLength(1);
+    expect(k.filter((r) => r.error !== null)).toHaveLength(4);
+    expect(k.find((r) => r.error === null).fractionRemoved).toBeGreaterThan(0.9);
+  });
+
+  it('THE ONE BARE NUMBER is the vapour-pressure helper, and it is measured rather than assumed', () => {
+    const v = L.vapourPressureHelper();
+    expect(v.returnsBareNumber).toBe(true);
+    expect(Number.isFinite(v.insideBandPsia)).toBe(true);
+    expect(Number.isFinite(v.atLowerEdgePsia)).toBe(true);
+    expect(Number.isFinite(v.atUpperEdgePsia)).toBe(true);
+    // Outside its band it is NaN, which a panel guards with Number.isFinite
+    // rather than with an error key. The saturation answer that wraps it does
+    // carry the key, and the digest reads that one.
+    expect(Number.isNaN(v.belowBand)).toBe(true);
+    expect(Number.isNaN(v.aboveBand)).toBe(true);
+    expect(L.honestBand().fitLimit.filter((r) => r.error !== null)).toHaveLength(2);
+  });
+
+  it('NO refusal message is written as a literal in the lab: every one comes back from the engine', () => {
+    const src = LAB_SOURCE();
+    allSoft().forEach((r) => {
+      expect(src.includes(r.error), `${r.label}: the message is retyped in the lab`).toBe(false);
+    });
+  });
+
+  it('NO refusal message is written as a literal in a panel either', () => {
+    allSoft().forEach((r) => {
+      PANEL_FILES.forEach((file) => {
+        const p = path.join(HERE, file);
+        if (!fs.existsSync(p)) return;
+        expect(fs.readFileSync(p, 'utf8').includes(r.error), `${file} retypes: ${r.label}`).toBe(false);
+      });
+    });
+  });
+
+  it('CONTROL: calling the engine directly gives the same message the reader reports', () => {
+    const reported = L.refusalContract().refusals;
+    L.REFUSAL_PROBES.forEach(([label, fn], i) => {
+      const direct = fn();
+      expect(direct && direct.error ? direct.error : null, label).toBe(reported[i].error);
+      expect(reported[i].label, `probe ${i}`).toBe(label);
+    });
+  });
+
+  it('CONTROL: a probe that is accepted reports no error, so the gate is not reading every call as a refusal', () => {
+    const answered = L.honestBand().fitLimit.filter((r) => r.error === null);
+    expect(answered).toHaveLength(2);
+    answered.forEach((r) => expect(Number.isFinite(r.lbPerMMscf)).toBe(true));
+    expect(L.refusalContract().refusals.every((r) => r.error !== null)).toBe(true);
+    expect(L.refusalContract().boundaries.filter((b) => !b.refused).length).toBeGreaterThan(0);
+  });
+
+  it('a refusal carries EVIDENCE beside the message, and the field counts are measured', () => {
+    const rows = L.refusalContract().evidence;
+    expect(rows).toHaveLength(4);
+    rows.forEach((row) => {
+      expect(row.fieldCount, row.label).toBeGreaterThan(0);
+      expect(row.fields, row.label).toHaveLength(row.fieldCount);
+      expect(row.fields, row.label).not.toContain('error');
+    });
+    // The ceiling, the reduced state and the two densities are the evidence a
+    // panel is entitled to show beside the message.
+    expect(rows[0].fields).toContain('ceiling');
+    expect(rows[2].fields).toEqual(expect.arrayContaining(['ppr', 'tpr', 'atPsia', 'atF']));
+    expect(rows[3].fields).toEqual(expect.arrayContaining(['rhoG', 'rhoLLbFt3']));
+  });
+});
+
+// ---------------------------------------------------------------------------
+// THE HELD GATE. Six quantities held, two capabilities absent, and eight things
+// in all taught as limits and never as answers.
+// ---------------------------------------------------------------------------
+
+describe('THE HELD GATE: the held quantities are marked, shown and never graded', () => {
+  it('there are six held and two absent, counted and NAMED FOR WHAT THEY ARE', () => {
+    // The digest says SIX things are taught as limits and then names TWO
+    // ABSENCES. They are two different kinds of thing, so the lab keeps them
+    // apart and the gate counts each rather than reporting one total under the
+    // other's name.
+    expect(L.HELD_ITEMS).toHaveLength(6);
+    expect(L.ABSENT_CAPABILITIES).toHaveLength(2);
+    expect(L.heldItems().heldCount).toBe(6);
+    expect(L.heldItems().absenceCount).toBe(2);
+    expect(L.heldItems().limitsTaughtNeverAnswered).toBe(8);
+    expect(L.HELD_ITEMS.map((h) => h.id)).toEqual([
+      'mcketta-real-gas-correction', 'water-overhead-btu-per-lb', 'glycol-density',
+      'water-density-amine-gallons', 'amine-property-set', 'btex-fraction-and-mw',
+    ]);
+    L.HELD_ITEMS.forEach((h) => {
+      expect(h.note, h.id).toContain(L.HELD_MARKER);
+      expect(h.note, h.id).toMatch(/never as an answer/);
+      expect(Number.isInteger(h.section), h.id).toBe(true);
+    });
+    L.ABSENT_CAPABILITIES.forEach((a) => {
+      expect(a.note, a.id).not.toContain(L.HELD_MARKER);
+      expect(Number.isInteger(a.section), a.id).toBe(true);
+    });
+  });
+
+  it('the digest marks them the same way, and says how many of each', () => {
+    const text = readDigest();
+    expect(text).toContain('Six things this course teaches as limits and never as answers');
+    expect(text).toContain('HELD FOR LITERATURE');
+    expect(text).toContain('two things that are not held but simply ABSENT');
+    expect((text.match(/DECLARED/g) || []).length).toBeGreaterThanOrEqual(5);
+  });
+
+  it('each panel shows the wording that marks a held quantity unverified', () => {
+    PANEL_FILES.forEach((file) => {
+      const p = path.join(HERE, file);
+      if (!fs.existsSync(p)) return;
+      const text = fs.readFileSync(p, 'utf8');
+      expect(text, `${file} does not carry the held marker`).toContain(L.HELD_MARKER);
+    });
+  });
+
+  it('NO graded capstone field reads a held quantity, and the neutralisations hold AT THIS ENGINE', () => {
+    const capstoneSrc = fs.readFileSync(CAPSTONE_MJS, 'utf8');
+    const r = L.capstoneRuns();
+    // The McKetta correction is held, so every graded water content sits BELOW
+    // the pressure the engine warns at. Asserted on the RETURNED WARNING rather
+    // than on the pressure, because the threshold is the engine's to move.
+    expect(r.ikSat.warning, 'the Associate inlet water content carries a chart warning').toBeNull();
+    expect(r.esWaterIn.warning, 'the Expert inlet water content carries a chart warning').toBeNull();
+    expect(r.esWaterOut.warning, 'the Expert cold water content carries a chart warning').toBeNull();
+    // The water overhead is held, so NO Associate graded field is a reboiler
+    // duty: the SENSIBLE half is what is graded.
+    const keys = L.capstoneFields().filter(([t]) => t === 'beginner').map(([, k]) => k);
+    expect(keys).toContain('sensiblePerGal');
+    expect(keys).not.toContain('reboilerMMBtuHr');
+    expect(keys).not.toContain('dutyBtuPerGal');
+    expect(keys).not.toContain('vaporPerGal');
+    // The contactor liquid is held and is the wrong fluid for an amine, so no
+    // graded field anywhere is a contactor diameter, and the generator never
+    // calls the export.
+    expect(L.capstoneFields().map(([, k]) => k)).not.toContain('diameterFt');
+    expect(capstoneSrc).not.toContain('contactorDiameter');
+    expect(LAB_SOURCE().split('THE CAPSTONE. IKOT ABASI, OTUMARA AND ESCRAVOS ONLY')[1])
+      .not.toContain('contactorDiameter');
+    // The amine duty per gallon is customary, so the Professional stream states
+    // its own rather than taking the table default.
+    expect(L.OTUMARA.dutyBtuPerGal).toBe(920);
+    // The BTEX fraction and molecular weight are operating values and are
+    // stated on the capstone that grades a BTEX figure.
+    expect(L.IKOT_ABASI.btexAbsorbedFrac).toBeDefined();
+    expect(L.IKOT_ABASI.btexMw).toBeDefined();
+    // Every graded field answered rather than refusing.
+    L.capstoneFields().forEach(([tier, key, v]) => {
+      expect(Number.isFinite(v), `${tier}/${key} is not a finite answer`).toBe(true);
+    });
+    [r.ikSat, r.ikPack, r.otFrac, r.otStages, r.otAmine, r.otRetuned, r.esMu, r.esDrop,
+      r.esWaterIn, r.esWaterOut].forEach((x, i) => expect(x.error, `capstone call ${i}`).toBeUndefined());
+  });
+});
+
+// ---------------------------------------------------------------------------
+// THE CLOCK GATE.
+// ---------------------------------------------------------------------------
+
+describe('THE CLOCK GATE: no reader reads the system date', () => {
+  afterEach(() => { vi.useRealTimers(); });
+
+  const snapshot = () => JSON.stringify(READERS.map((name) => [name, LAB[name]()])
+    .concat([['capstoneFields', L.capstoneFields()], ['flagControls', L.flagControls()]]));
+
+  it('identical output under two faked system dates, one long before FC4 and one far after', () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2019-03-03T12:00:00Z'));
+    const early = snapshot();
+    vi.setSystemTime(new Date('2094-11-21T12:00:00Z'));
+    const late = snapshot();
+    expect(late.length).toBeGreaterThan(10000);
+    expect(late).toBe(early);
+  });
+
+  it('CONTROL: the fake clock did move', () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2019-03-03T12:00:00Z'));
+    const t1 = Date.now();
+    vi.setSystemTime(new Date('2094-11-21T12:00:00Z'));
+    const t2 = Date.now();
+    expect(new Date(t1).getUTCFullYear()).toBe(2019);
+    expect(new Date(t2).getUTCFullYear()).toBe(2094);
+    expect(t2).toBeGreaterThan(t1);
+  });
+
+  it('CONTROL: there is no dated or seeded surface to fake, and the stripper carries its own control', () => {
+    // Comments are stripped first: the gate is about the CODE, and a comment
+    // explaining that nothing falls back to today is not a clock surface. FC1
+    // learned this the hard way, and a numeric sweep cannot see prose.
+    const code = LAB_SOURCE().replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+    expect(code.length).toBeGreaterThan(5000);
+    ['asOf', 'today', 'seed', 'Math.random', 'Date'].forEach((needle) => {
+      expect(code, `${needle} appears in the lab's code`).not.toContain(needle);
+    });
+    // CONTROL ON THE STRIPPER: it really does remove comment prose, and it
+    // really does keep code. Without this the gate could be passing because the
+    // stripper deleted the whole file.
+    const sample = '// a comment mentioning Date and Math.random\n/* and a block one about today */\nconst x = 1;\n';
+    const stripped = sample.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+    expect(stripped).not.toContain('Math.random');
+    expect(stripped).not.toContain('today');
+    expect(stripped).toContain('const x = 1;');
+    // And the lab's own comments DO mention a clock, which is why the stripper
+    // is here at all.
+    expect(LAB_SOURCE()).toContain('THE CLOCK.');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// THE TIMEZONE GATE. The whole rebuild, a second time, west of Greenwich.
+// ---------------------------------------------------------------------------
+
+const TZ_CHILD_TZ = 'America/Los_Angeles';
+
+describe('THE TIMEZONE GATE: the digest rebuilds byte for byte west of Greenwich', () => {
+  it(`the whole rebuild under TZ=${TZ_CHILD_TZ} is the digest, byte for byte`, () => {
+    if (process.env.FC4_TZ_CHILD) return; // the child does not re-spawn itself
+    const sidecar = path.join(ROOT, 'node_modules', '.fc4-tz-rebuild.json');
+    if (fs.existsSync(sidecar)) fs.unlinkSync(sidecar);
+    execFileSync(path.join(ROOT, 'node_modules/.bin/vitest'), ['run', '--reporter=dot', '--config', 'vitest.config.js', 'src/components/course/panels/gasprocessing/gasprocessingLab.test.js'], {
+      cwd: ROOT,
+      env: {
+        ...process.env, TZ: TZ_CHILD_TZ, FC4_TZ_CHILD: '1', FC4_WRITE_BUILT: sidecar,
+      },
+      stdio: 'pipe',
+      timeout: 600000,
+    });
+    const child = JSON.parse(fs.readFileSync(sidecar, 'utf8'));
+    fs.unlinkSync(sidecar);
+    // CONTROL: the child really did run west of Greenwich.
+    expect(child.timeZone).toBe(TZ_CHILD_TZ);
+    expect(child.offsetMinutes, 'the child ran at a UTC offset of zero').not.toBe(0);
+    expect(child.text).toBe(readDigest());
+  }, 600000);
+});
+
+// ---------------------------------------------------------------------------
+// THE CAPSTONE: the eighteen graded fields reproduce fields.json exactly.
+// ---------------------------------------------------------------------------
+
+const CAPSTONE_FIELDS = JSON.parse(fs.readFileSync(FIELDS_JSON, 'utf8'));
+
+describe('the IKOT ABASI, OTUMARA and ESCRAVOS capstone reproduces fields.json exactly', () => {
+  it('fields.json is the eighteen published fields, six per tier, in the published order', () => {
+    expect(CAPSTONE_FIELDS).toHaveLength(18);
+    expect(CAPSTONE_FIELDS.map((x) => x[0])).toEqual([
+      ...Array(6).fill('beginner'), ...Array(6).fill('intermediate'), ...Array(6).fill('advanced'),
+    ]);
+  });
+
+  it('every one of the eighteen graded answers is EXACTLY the published value', () => {
+    const built = L.capstoneFields();
+    expect(built).toHaveLength(18);
+    built.forEach(([tier, key, value], i) => {
+      const [pTier, pKey, pValue] = CAPSTONE_FIELDS[i];
+      expect(tier, `${key} tier`).toBe(pTier);
+      expect(key, `field ${i}`).toBe(pKey);
+      expect(value, `${key} value`).toBe(pValue);
+    });
+    expect(L.capstoneValues()).toEqual(
+      Object.fromEntries(CAPSTONE_FIELDS.map(([, k, v]) => [k, v])),
+    );
+  });
+
+  it('THE LAB HOLDS NO TOLERANCE: fields.json is the one place a grading band lives', () => {
+    // A tolerance in three places that must agree is how a sibling wave shipped
+    // a stale one. The lab's rows are triples, so there is nothing here to go
+    // stale when the tolerance rule moves, and the published bands are checked
+    // for SHAPE rather than restated.
+    L.capstoneFields().forEach((row, i) => {
+      expect(row, `field ${i} carries a tolerance`).toHaveLength(3);
+    });
+    expect(Object.keys(L).filter((k) => /tolerance/i.test(k)), 'the lab exports a tolerance')
+      .toEqual([]);
+    expect(LAB_SOURCE()).toContain('THIS LAB HOLDS NO GRADING TOLERANCE');
+    CAPSTONE_FIELDS.forEach(([tier, key, , tol]) => {
+      expect(Number.isFinite(tol), `${tier}/${key} tolerance`).toBe(true);
+      expect(tol, `${tier}/${key} tolerance`).toBeGreaterThan(0);
+    });
+  });
+
+  it('the capstone conditions are copied verbatim from fc4_fields_capstone.mjs', () => {
+    const src = fs.readFileSync(CAPSTONE_MJS, 'utf8');
+    const lab = LAB_SOURCE();
+    const NAMES = ['IKOT_ABASI_LINE', 'OTUMARA_ABSORBER', 'OTUMARA_REQUIRED_REMOVAL',
+      'OTUMARA_RETUNED_LEAN_LOADING', 'ESCRAVOS'];
+    NAMES.forEach((name) => {
+      const a = src.match(new RegExp(`^export const ${name} = ([\\s\\S]*?);$`, 'm'));
+      const b = lab.match(new RegExp(`^export const ${name} = ([\\s\\S]*?);$`, 'm'));
+      expect(a, `${name} in fc4_fields_capstone.mjs`).not.toBeNull();
+      expect(b, `${name} in the lab`).not.toBeNull();
+      expect(b[1], name).toBe(a[1]);
+    });
+    // IKOT_ABASI and OTUMARA carry explanatory comments inside the literal in
+    // the wave file, so they are compared field by field rather than as text.
+    [['IKOT_ABASI', L.IKOT_ABASI, 12], ['OTUMARA', L.OTUMARA, 10]].forEach(([name, obj, n]) => {
+      const body = src.match(new RegExp(`^export const ${name} = \\{([\\s\\S]*?)\\n\\};$`, 'm'))[1];
+      Object.entries(obj).forEach(([k, v]) => {
+        expect(body, `${name}.${k}`).toMatch(new RegExp(`${k}: '?${String(v).replace('.', '\\.')}'?`));
+      });
+      expect(Object.keys(obj), name).toHaveLength(n);
+    });
+    // The declared stable set is the generator's, word for word.
+    expect(src.includes('fc4_capstone')).toBe(false);
+    const gen = fs.readFileSync(path.join(WAVE, 'fc4_capstone.mjs'), 'utf8');
+    L.CAPSTONE_STABLE.forEach((row) => expect(gen, row).toContain(`'${row}'`));
+    expect(L.CAPSTONE_STABLE).toHaveLength(4);
+  });
+
+  it('the capstone never touches the teaching digest, and the digest never names a capstone stream', () => {
+    const digest = readDigest().toLowerCase();
+    ['ikot', 'otumara', 'escravos'].forEach((name) => expect(digest).not.toContain(name));
+    const dump = fs.readFileSync(DUMP_MJS, 'utf8');
+    ['ikot', 'otumara', 'escravos'].forEach((name) => expect(dump.toLowerCase()).not.toContain(name));
+    expect(dump).not.toMatch(/readFileSync\([^)]*fields\.json/);
+    expect(dump).not.toContain('fc4_fields_capstone');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// THE LEAK GATE: no teaching number may be a graded capstone answer.
+// ---------------------------------------------------------------------------
+
+/** Exports that TAKE AN ARGUMENT. */
+const ARG_REQUIRED = ['leakGuardTargets', 'leakGuardHit', 'collectNumbers',
+  'capstoneValues', 'countHistoryComments', 'countHistoryCommentsWide'];
+const GATE_MACHINERY = ['LEAK_GUARD_MARGIN', 'LEAK_GUARD_SCALINGS', 'LEAK_GUARD_RELATIVE_CAP',
+  'HISTORY_COMMENT_RE', 'HISTORY_COMMENT_RE_WIDE'];
+
+/**
+ * A surface smaller than this is not the lab: refuse to call it clean. The
+ * floors are MEASURED from the real surface and set below it by less than any
+ * one large reader, so losing a reader to a rename trips them.
+ */
+const MIN_SURFACE_ENTRIES = 60;
+const MIN_SURFACE_NUMBERS = 1500;
+
+/** Every teaching export evaluated: constants as they are, readers called bare. */
+const teachingSurface = () => {
+  const out = [];
+  Object.entries(L).forEach(([name, value]) => {
+    if (L.CAPSTONE_ONLY_EXPORTS.includes(name) || ARG_REQUIRED.includes(name) || GATE_MACHINERY.includes(name)) return;
+    out.push({ name, value: typeof value === 'function' ? value() : value });
+  });
+  return out;
+};
+
+const surfaceNumbers = (surface) => surface.flatMap((s) => L.collectNumbers(s.value, s.name));
+
+const assertPlausible = (surface, numbers) => {
+  if (surface.length < MIN_SURFACE_ENTRIES || numbers.length < MIN_SURFACE_NUMBERS) {
+    throw new Error(`the teaching surface has only ${surface.length} entries and ${numbers.length} numbers: refusing to call it clean`);
+  }
+};
+
+const leakHits = (surface, targets) => surfaceNumbers(surface)
+  .map((x) => ({ x, t: L.leakGuardHit(x.value, targets) }))
+  .filter((h) => h.t)
+  .map(({ x, t }) => `${x.path} = ${x.value} is within ${t.band} of ${t.key} ${t.tag} (${Math.abs(x.value - t.value) / t.gradingBand} grading bands)`);
+
+describe('THE LEAK GATE: the guard itself', () => {
+  const targets = L.leakGuardTargets(CAPSTONE_FIELDS);
+
+  it('the guard is built from all eighteen fields in all three unit shiftings, with the band scaled', () => {
+    expect(targets).toHaveLength(18 * 3);
+    expect(L.LEAK_GUARD_MARGIN).toBe(10);
+    expect(L.LEAK_GUARD_SCALINGS.map((s) => s.factor)).toEqual([1, 1000, 0.001]);
+    const t = (key, tag) => targets.find((x) => x.key === key && x.tag === tag);
+    // Derived from the published bands rather than restated, so a tolerance
+    // that moves in fields.json moves here with it.
+    const published = Object.fromEntries(CAPSTONE_FIELDS.map(([, k, , tol]) => [k, tol]));
+    targets.forEach((x) => {
+      // Never narrower than the band the grader itself accepts.
+      expect(x.band, `${x.key} ${x.tag}`).toBeGreaterThanOrEqual(x.gradingBand);
+      // Never wider than the cushion, and never wider than one part in ten
+      // thousand of the answer unless the grader's own band is wider.
+      expect(x.band, `${x.key} ${x.tag}`).toBeLessThanOrEqual(L.LEAK_GUARD_MARGIN * x.gradingBand);
+      const cap = L.LEAK_GUARD_RELATIVE_CAP * Math.abs(x.value);
+      expect(x.band <= Math.max(cap, x.gradingBand) + 1e-18, `${x.key} ${x.tag} band ${x.band} against cap ${cap}`).toBe(true);
+    });
+    // A wide absolute band is left alone: the water load's cushion is the full
+    // ten times its published tolerance.
+    expect(t('waterLbDay', 'as graded').band).toBeCloseTo(10 * published.waterLbDay, 15);
+    // A band that would have outgrown the answer is capped back to the
+    // grader's own, which is what stops a coincidence of scale reading as a
+    // leak.
+    expect(t('dzdT', 'x1000').band).toBeCloseTo(t('dzdT', 'x1000').gradingBand, 15);
+    expect(t('dzdT', 'x1000').band).toBeLessThan(10 * t('dzdT', 'x1000').gradingBand);
+  });
+
+  it('every reader answers, and the surface is large enough to mean something', () => {
+    const surface = teachingSurface();
+    surface.forEach((s) => expect(s.value, `${s.name} returned nothing`).not.toBeUndefined());
+    const numbers = surfaceNumbers(surface);
+    // eslint-disable-next-line no-console
+    console.log(`teaching surface: ${surface.length} entries, ${numbers.length} numbers`);
+    expect(() => assertPlausible(surface, numbers)).not.toThrow();
+  });
+
+  it('THE GUARD REFUSES AN EMPTY OR TINY SURFACE rather than calling it clean', () => {
+    const surface = teachingSurface();
+    expect(() => assertPlausible([], [])).toThrow(/refusing/);
+    expect(() => assertPlausible(surface.slice(0, 3), surfaceNumbers(surface.slice(0, 3)))).toThrow(/refusing/);
+  });
+
+  it('every export is accounted for: walked bare, walked with arguments, capstone or machinery', () => {
+    const exported = Object.keys(L);
+    ARG_REQUIRED.forEach((k) => expect(exported, k).toContain(k));
+    exported.filter((k) => typeof LAB[k] === 'function' && LAB[k].length > 0
+      && !ARG_REQUIRED.includes(k) && !L.CAPSTONE_ONLY_EXPORTS.includes(k))
+      .forEach((k) => expect(LAB[k].length, `${k} has a required argument and is not in ARG_REQUIRED`).toBe(0));
+  });
+
+  it('the teaching surface names no capstone export and no capstone stream, and carries no em dash or en dash', () => {
+    const text = JSON.stringify(teachingSurface());
+    L.CAPSTONE_ONLY_EXPORTS.forEach((name) => {
+      if (name === 'CAPSTONE_ONLY_EXPORTS') return;
+      expect(text, `${name} appears in the teaching surface`).not.toContain(name);
+    });
+    ['ikot', 'otumara', 'escravos'].forEach((x) => expect(text.toLowerCase()).not.toContain(x));
+    expect(text).not.toMatch(/[–—]/);
+  });
+
+  it('THE GUARD IS LIVE: every graded answer, planted, is caught in every shifting, however deep', () => {
+    CAPSTONE_FIELDS.forEach(([, key, v]) => {
+      // The drift is 0.9 of the target's OWN band rather than 0.9 of the
+      // uncapped cushion, so a capped target is still planted inside its guard.
+      const bandOf = (tag) => targets.find((x) => x.key === key && x.tag === tag).band;
+      [[1, 'as graded'], [1000, 'x1000'], [0.001, 'x0.001']].forEach(([factor, tag]) => {
+        const drift = 0.9 * bandOf(tag);
+        [0, drift, -drift].forEach((d) => {
+          expect(L.leakGuardHit(v * factor + d, targets), `${key} ${tag} ${d}`).not.toBeNull();
+        });
+      });
+      const buried = L.collectNumbers({ a: [{ b: v }] })[0].value;
+      expect(targets.filter((t) => Math.abs(buried - t.value) < t.band).map((t) => t.key), key).toContain(key);
+    });
+  });
+
+  it('THE GUARD GOES RED ON A PLANTED LEAK in a real reader\'s output, and is clean again without it', () => {
+    // A GATE THAT HAS NEVER FAILED IS NOT A GATE. This plants one graded answer
+    // into the water content the Associate panel headlines, shows the sweep go
+    // red naming the probe by its path, and shows the same surface clean once
+    // the plant is removed. The plant lives here permanently so the gate stays
+    // proven on every run rather than on the day somebody tried it once.
+    const surface = teachingSurface();
+    const graded = CAPSTONE_FIELDS.find((x) => x[1] === 'waterLbDay')[2];
+    const planted = surface.map((s) => (s.name === 'waterToTakeOut'
+      ? { ...s, value: { ...s.value, waterLbDay: graded + 0.004 } }
+      : s));
+    const hits = leakHits(planted, targets);
+    expect(hits).toHaveLength(1);
+    expect(hits[0]).toMatch(/^waterToTakeOut\.waterLbDay = .* of waterLbDay as graded/);
+    expect(leakHits(surface, targets)).toEqual([]);
+  });
+
+  it('THE GUARD IS NOT TRIGGER HAPPY: the teaching headlines pass', () => {
+    const w = L.waterToTakeOut();
+    const a = L.acidGasByMoles();
+    const c = L.coldEnd();
+    expect(L.leakGuardHit(w.waterLbDay, targets)).toBeNull();
+    expect(L.leakGuardHit(w.inletLbMMscf, targets)).toBeNull();
+    expect(L.leakGuardHit(a.circGpm, targets)).toBeNull();
+    expect(L.leakGuardHit(c.muFPerPsi, targets)).toBeNull();
+    [NaN, Infinity, -Infinity].forEach((x) => expect(L.leakGuardHit(x, targets)).toBeNull());
+    expect(L.collectNumbers({
+      a: NaN, b: null, c: 'text', d: undefined,
+    })).toEqual([]);
+  });
+});
+
+describe('THE LEAK GATE: no teaching number may be a graded capstone answer', () => {
+  it('NO number returned by any teaching export is within ten grading bands of a graded answer, in any shifting', () => {
+    const targets = L.leakGuardTargets(CAPSTONE_FIELDS);
+    const surface = teachingSurface();
+    assertPlausible(surface, surfaceNumbers(surface));
+    expect(leakHits(surface, targets)).toEqual([]);
+  });
+
+  it('every number PRINTED IN THE DIGEST stands clear of a graded answer too', () => {
+    // A substring search over a page of six decimal figures is meaningless: the
+    // digits 12 sit inside 1250.542488. So the digest's own literals are parsed
+    // and run through the same numeric guard.
+    const targets = L.leakGuardTargets(CAPSTONE_FIELDS);
+    const literals = (readDigest().match(/-?\d+(?:\.\d+)?/g) || []).map(Number).filter(Number.isFinite);
+    expect(literals.length).toBeGreaterThan(1000);
+    const hits = literals.map((v) => ({ v, t: L.leakGuardHit(v, targets) })).filter((x) => x.t)
+      .map(({ v, t }) => `the digest prints ${v}, within ${t.band} of ${t.key} ${t.tag}`);
+    expect([...new Set(hits)]).toEqual([]);
+  });
+
+  it('every number PRINTED IN A PANEL SOURCE stands clear of a graded answer', () => {
+    const targets = L.leakGuardTargets(CAPSTONE_FIELDS);
+    PANEL_FILES.forEach((file) => {
+      const p = path.join(HERE, file);
+      if (!fs.existsSync(p)) return;
+      const text = fs.readFileSync(p, 'utf8');
+      const literals = (text.match(/-?\d+(?:\.\d+)?/g) || []).map(Number).filter(Number.isFinite);
+      const hits = literals.map((v) => ({ v, t: L.leakGuardHit(v, targets) })).filter((x) => x.t)
+        .map(({ v, t }) => `${file} prints ${v}, within ${t.band} of ${t.key} ${t.tag}`);
+      expect([...new Set(hits)]).toEqual([]);
+    });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// THE PROSE SWEEP. A numeric sweep cannot see prose, including prose inside a
+// code comment. FC1 shipped a stale comment in separationLab.js that survived
+// every numeric gate and was caught only by a phrase sweep, so this course
+// sweeps its own comments.
+// ---------------------------------------------------------------------------
+
+describe('THE PROSE SWEEP: the lab\'s own comments are swept for claims the code no longer makes', () => {
+  it('no comment claims a count, a name or a behaviour the code contradicts', () => {
+    const src = LAB_SOURCE();
+    const comments = [
+      ...(src.match(/\/\*[\s\S]*?\*\//g) || []),
+      ...(src.match(/^\s*\/\/.*$/gm) || []),
+    ].join('\n');
+    const flat = comments.replace(/\n\s*\*/g, ' ').replace(/\n\s*\/\//g, ' ').replace(/\s+/g, ' ');
+    expect(comments.length).toBeGreaterThan(3000);
+    // Owner copy rule, applied to the lab's own prose as well as to the panels.
+    expect(comments, 'the lab carries an em dash or an en dash').not.toMatch(/[–—]/);
+    // THE CLAIMS THE COMMENTS ACTUALLY MAKE, each checked against the code.
+    // The held counts, which the comments state in words.
+    expect(L.HELD_ITEMS).toHaveLength(6);
+    expect(L.ABSENT_CAPABILITIES).toHaveLength(2);
+    expect(flat).toContain('SIX of these and then names TWO ABSENCES');
+    expect(flat).toContain('eight things in all');
+    expect(flat).not.toMatch(/\beight held\b/);
+    // The reader count, which the section header states.
+    expect(flat).toContain('THE TWENTY READERS');
+    expect(READERS).toHaveLength(20);
+    // The contract, which FC4-0 made whole. No comment may still say one export
+    // returns a bare number answer.
+    expect(flat).toContain('returns an object like every other export');
+    expect(flat).not.toMatch(/bare number, so a non-positive/);
+    // The comments name the engines the lab actually imports.
+    ['gasProcessing.js', 'gasProperties.js'].forEach((m) => expect(flat).toContain(m));
+    // And the vintage they are vendored at, which is the one the wave states.
+    expect(flat).toContain('82ec6d4');
+    expect(fs.readFileSync(path.join(WAVE, 'wave.json'), 'utf8')).toContain('82ec6d4');
+    // The three capstone streams, named in the capstone banner and nowhere else
+    // in the teaching half.
+    expect(flat).toContain('IKOT ABASI, OTUMARA AND ESCRAVOS ONLY');
+    // No P label anywhere: nothing in this course is a distribution.
+    expect(src).not.toMatch(/\bP10\b|\bP50\b|\bP90\b/);
+  });
+
+  it('the comment that frames the history reader is the only place the lab claims history', () => {
+    const src = LAB_SOURCE();
+    // Comment prose is wrapped, so it is unwrapped before any phrase is looked
+    // for: a sweep that only sees single lines misses every claim that runs
+    // over a line break, which is most of them.
+    const flat = src.replace(/\n\s*\*/g, ' ').replace(/\n\s*\/\//g, ' ').replace(/\s+/g, ' ');
+    // Section 20 is framed history and the lab's reader for it says so. Every
+    // other reader describes what the engine does NOW, so a past-tense claim
+    // about the engine outside the history reader is the defect this sweeps
+    // for.
+    expect(flat).toContain('FRAMED HISTORY, and the only reader in this lab whose subject is what the engine USED TO DO');
+    expect(flat).toContain('Nothing else in this lab is history.');
+    const beforeHistory = flat.split('THE RULE Section 20 counts')[0];
+    ['used to divide', 'was range checked', 'the engine used to', 'it used to return']
+      .forEach((phrase) => expect(beforeHistory, `an unframed history claim: ${phrase}`).not.toContain(phrase));
+  });
+
+  it('every panel source is swept the same way, and no panel imports an engine or reads a clock', () => {
+    expect(PANEL_FILES.filter((f) => fs.existsSync(path.join(HERE, f))), 'the panels are missing')
+      .toHaveLength(3);
+    PANEL_FILES.forEach((file) => {
+      const p = path.join(HERE, file);
+      const text = fs.readFileSync(p, 'utf8');
+      expect(text.length, file).toBeGreaterThan(2000);
+      expect(text, `${file} carries an em dash or an en dash`).not.toMatch(/[–—]/);
+      expect(text, `${file} carries a percentile label`).not.toMatch(/\bP10\b|\bP50\b|\bP90\b/);
+      // NO PANEL IMPORTS AN ENGINE DIRECTLY: every number it shows comes
+      // through the lab, which comes through the vendored engine.
+      expect(text, `${file} imports an engine directly`).not.toMatch(/@petrolord\/engines/);
+      // NO PANEL READS A CLOCK.
+      expect(text, `${file} reads a clock`).not.toMatch(/new Date\(|Date\.now|Math\.random/);
+      // And a panel renders its empty state before any engine value exists.
+      expect(text, `${file} has no empty-state guard`).toMatch(/if \(!/);
+    });
   });
 });
