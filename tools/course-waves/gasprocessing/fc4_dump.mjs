@@ -314,7 +314,7 @@ KREMSER_STAGES.forEach((n) => {
   w(`| ${n} | ${KREMSER_FACTORS.map((a) => num(G.kremserFractionRemoved({ absorptionFactor: a, stages: n }), 9)).join(' | ')} |`);
 });
 w();
-w('Read the columns, not the rows. Above an absorption factor of one every column climbs towards total removal as the stages are added. AT AND BELOW ONE IT DOES NOT, and the last column below is the gap between what 200 stages reach and the absorption factor itself:');
+w('Read the columns rather than the rows. Above an absorption factor of one every column climbs towards total removal as the stages are added. AT AND BELOW ONE IT DOES NOT, and the last column below is the gap between what 200 stages reach and the absorption factor itself:');
 w('| A | removal at 12 stages | removal at 200 stages | A itself | 200 stages less A |');
 w('| --- | --- | --- | --- | --- |');
 [0.6, A_WELL_UNDER_UNITY, 0.95, A_JUST_UNDER_UNITY, A_AT_UNITY, A_JUST_OVER_UNITY, 1.2].forEach((a) => {
@@ -440,7 +440,7 @@ w();
 // --------------------------------------------------------------- SECTION 12
 w('# SECTION 12: The vessel the gas goes up (owned by Professional m05)');
 w();
-w('THE EQUATION IS NOT NEW. Souders-Brown, the K value and the settling velocity are owned by the Separation & Slug Catching course, which teaches the six published K rows and the mist extractor that sets them. What is new here is the DUTY: a contactor is a mass transfer column, not a knockout drum, and it is sized on the gas that has to rise through a descending liquid.');
+w('THE EQUATION IS NOT NEW. Souders-Brown, the K value and the settling velocity are owned by the Separation & Slug Catching course, which teaches the six published K rows and the mist extractor that sets them. What is new here is the DUTY: a contactor is a mass transfer column rather than a knockout drum, and it is sized on the gas that has to rise through a descending liquid.');
 w();
 w(`On OBIAFU the gas weighs ${e6(OB_CONT.rhoG)} lb per ft3 at ${e6(OBIAFU_LINE.pPsia)} psia and ${e6(OBIAFU_LINE.tF)} degF with a compressibility of ${num(OB_CONT.z, 9)}, the allowed velocity at a K of ${e6(OBIAFU_CONTACTOR.ksFtS)} ft per s is ${e6(OB_CONT.vAllowFtS)} ft per s, and the diameter is ${e6(OB_CONT.diameterFt)} ft.`);
 w(`On UBIE the gas weighs ${e6(UB_CONT.rhoG)} lb per ft3 at ${e6(UBIE_CONTACTOR.pPsia)} psia and ${e6(UBIE_CONTACTOR.tF)} degF with a compressibility of ${num(UB_CONT.z, 9)}, the allowed velocity at a K of ${e6(UBIE_CONTACTOR.ksFtS)} ft per s is ${e6(UB_CONT.vAllowFtS)} ft per s, and the diameter is ${e6(UB_CONT.diameterFt)} ft.`);

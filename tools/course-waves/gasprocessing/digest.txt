@@ -187,7 +187,7 @@ The surface. Rows are stages, columns are the absorption factor:
 | 8 | 0.595927884 | 0.768995039 | 0.888888889 | 0.951920538 | 0.986646497 | 0.998043053 | 0.999898384 |
 | 12 | 0.599476889 | 0.788365257 | 0.923076923 | 0.979379999 | 0.997417616 | 0.999877915 | 0.999998746 |
 
-Read the columns, not the rows. Above an absorption factor of one every column climbs towards total removal as the stages are added. AT AND BELOW ONE IT DOES NOT, and the last column below is the gap between what 200 stages reach and the absorption factor itself:
+Read the columns rather than the rows. Above an absorption factor of one every column climbs towards total removal as the stages are added. AT AND BELOW ONE IT DOES NOT, and the last column below is the gap between what 200 stages reach and the absorption factor itself:
 | A | removal at 12 stages | removal at 200 stages | A itself | 200 stages less A |
 | --- | --- | --- | --- | --- |
 | 0.600000000000 | 0.599476889 | 0.600000000 | 0.600000000 | 0.000000000000 |
@@ -294,7 +294,7 @@ An amine the table does not carry: null, and the package asked for it returns { 
 
 # SECTION 12: The vessel the gas goes up (owned by Professional m05)
 
-THE EQUATION IS NOT NEW. Souders-Brown, the K value and the settling velocity are owned by the Separation & Slug Catching course, which teaches the six published K rows and the mist extractor that sets them. What is new here is the DUTY: a contactor is a mass transfer column, not a knockout drum, and it is sized on the gas that has to rise through a descending liquid.
+THE EQUATION IS NOT NEW. Souders-Brown, the K value and the settling velocity are owned by the Separation & Slug Catching course, which teaches the six published K rows and the mist extractor that sets them. What is new here is the DUTY: a contactor is a mass transfer column rather than a knockout drum, and it is sized on the gas that has to rise through a descending liquid.
 
 On OBIAFU the gas weighs 3.424553 lb per ft3 at 950.000000 psia and 104.000000 degF with a compressibility of 0.876617747, the allowed velocity at a K of 0.300000 ft per s is 1.321752 ft per s, and the diameter is 3.182673 ft.
 On UBIE the gas weighs 3.831017 lb per ft3 at 985.000000 psia and 112.000000 degF with a compressibility of 0.861800291, the allowed velocity at a K of 0.250000 ft per s is 1.038202 ft per s, and the diameter is 4.195403 ft.

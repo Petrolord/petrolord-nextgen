@@ -35,7 +35,11 @@
   "1728": "cubic inches in a cubic foot, on the same terms",
   "14.6959487755142": "one standard atmosphere, psia, used only to state what the water fit reads at its own guard edge"
  },
- "leakScales": ["1", "x1e3", "x1e-3"],
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3"
+ ],
  "plan": {
   "state": "FOUNDATION COMPLETE, WRITING HELD. Recon found 49 findings, one of them a live wrong answer on four screens. FC4-0 repairs before a lesson exists.",
   "thesis": "Gas conditioning is three separate balances over one stream, and the discipline is knowing which of the numbers in front of you the engine COMPUTED, which one you CHOSE, and which one it simply kept to itself.",
@@ -83,7 +87,8 @@
   "gate_claims.mjs": "every relational claim in digest.txt re-computed from the engine. 26 checks. CAUGHT TWO FALSE CLAIMS in the first draft, one of them an ordering that was stated as different and was in fact identical.",
   "gate_typed_literals.py": "no number is typed into the digest. Sweeps every string literal in fc4_dump.mjs with ${...} stripped at source level. 293 literals examined, 23 numeric literals swept in printed prose, 12 allowed with a reason and all 12 hit, 0 unexplained. Fails on a dead allowlist row.",
   "gate_capstone_leak.py": "no capstone condition and no graded value reaches the digest or the generator. 25 conditions and 18 graded values at three renderings each. Fails on a dead shared row.",
-  "jest": "packages/engines __tests__/facilities.gasprocessing.test.js, 12 of 12 green. SEE FINDINGS F-O1 AND F-O2 BEFORE TRUSTING THAT NUMBER."
+  "jest": "packages/engines __tests__/facilities.gasprocessing.test.js, 12 of 12 green. SEE FINDINGS F-O1 AND F-O2 BEFORE TRUSTING THAT NUMBER.",
+  "gate_copy_rule.py": "the owner copy rule over everything a learner reads: no em dashes, no en dashes, no 'X, not Y' contrastive, in the digest, in every lesson body and in every manifest title. 4 files and 547 lines and titles examined, 0 violations. CAUGHT TWO CONTRASTIVES in the digest that an eye sweep had passed."
  },
  "digest": {
   "lines": 450,
