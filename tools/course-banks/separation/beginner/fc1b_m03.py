@@ -50,11 +50,11 @@ q(0, "One K comes back with derated true and floored false, another with both tr
  "Derated true says the pressure rule moved the value. Floored true says the floor caught what that rule produced. horizontalNoneAt1500psig reports K 0.120000 where the rule gives 0.110000."),
 
 q(1, "verticalNoneAt650psig returns K 0.125000 with derated true and floored false. Why does it deserve the same suspicion as a floored row?",
- "It sits thousandths above the 0.120000 floor, so a little more operating pressure would floor it, and nothing in the return says the answer is on the edge of the range.",
+ "It sits 0.005000 above the 0.120000 floor, so 50 psig more of operating pressure puts that vessel on the floor, and the return carries no flag for it.",
  ["It is a bare drum, and 0.180000 is the lowest base row in the table, so any derating at all on that row produces a figure the floor is on the point of catching.",
   "Its derated flag is true and its floored flag is false, and that pairing cannot occur on a bare drum at all.",
   "It returns the figure the table would give a bare vertical drum before any deduction, so the flag changed nothing."],
- "The rule deducts 0.01 per 100 psi, so the figure is one step of it from the floor. The return has a flag for the cliff and none for the approach to the cliff."),
+ "0.005000 above the floor is half a step of a rule that deducts 0.01 per 100 psi. The return has a flag for the cliff and none for the approach to the cliff."),
 
 q(3, "A horizontal bare drum at 1500.000000 psig and a vertical bare drum at 3000.000000 psig are both sized on K 0.120000. What is wrong with treating the two as equivalent?",
  "The floor made them identical on paper, and the rule behind them gave 0.110000 on one and -0.110000 on the other.",
@@ -95,7 +95,7 @@ q(1, "The module records its deduction of 0.01 per 100 psi above 100 psig and it
  "To the step from a base row to the K a vessel is sized with, and to every settling velocity and margin built on it. The six base rows stand on their own.",
  ["To the whole table, since an unchecked rule casts the same doubt over the six base rows it modifies.",
   "To the rows where floored is true only, since a derated value above 0.120000 is a plain subtraction.",
-  "To the 100 psig threshold only, since the deduction per 100 psi is arithmetic and the floor is an engine constant the code carries, which leaves the threshold as the single unverified choice."],
+  "To the 100 psig threshold only, since the deduction is arithmetic and the floor is an engine constant."],
  "The deduction, the threshold and the floor are all taken on practice rather than on a reference, which is why no conclusion in this course rests on a derated K."),
 
 q(2, "A vessel is sized at 0.420000 with a vane pack, and the pack is later removed for cleaning and left out. What allowance is that vessel then running against?",
