@@ -1,0 +1,559 @@
+# FC1 Separation & Slug Catching. Teaching digest.
+# Vessel work prints to six decimals: every ft, ft2, lb per ft3 and ft per s figure, so each density, velocity, diameter, height, length, margin, fraction and actual gas rate carries six. Site work prints to four decimals: every metre, kilowatt and second, so each setback, shortfall and drop crossing time carries four. Counts are whole numbers.
+# Field units: MMscfd, bpd, psig and psia, degF, ft, minutes. Site work is in metres.
+# Nothing here is read from a clock or a random number, so every line reproduces.
+
+# SECTION 1: What the sizing engine does, and what it refuses (owned by Associate m01)
+
+# App surface: the Separator & Slug Catcher Designer runs this chain live. Conditions give z and the densities, the mist extractor gives K, K and the densities give the settling velocity, and the vessel follows from the settling velocity and the retention time.
+- This engine sizes a VESSEL. It says how big the drum must be for the stream to separate in it. What LEAVES each stage of a separation train at a given pressure and temperature is a flash calculation and lives in engines/fluid/separator.js.
+- A named input that is missing, not a number, or outside its domain throws a SeparatorInputError whose `input` property names the input. No default, clamp or fallback stands in for it.
+- A state the inputs are valid for but the method is not (a z factor outside the DAK range, a settling velocity that is not positive, an area outside the circle) comes back as an object with an `error` string, not a throw.
+- The retired Suite app it replaced hardcoded z at 0.85, used one K at every pressure, sized only two-phase vessels, and took its gas velocity from the diameter of the PREVIOUS render.
+
+Refusals, engine messages verbatim:
+- kValue with no mist extractor and no override: SeparatorInputError on internalsId: "internalsId is required: name a mist extractor from K_BASE or give kOverride"
+- kValue with a mist extractor that is not in the table: SeparatorInputError on internalsId: "internalsId 'verticalFoam' is not a mist extractor in K_BASE"
+- kValue with no pressure: SeparatorInputError on pPsig: "pPsig must be a finite, non-negative gauge pressure (got undefined)"
+- kValue at a negative gauge pressure: SeparatorInputError on pPsig: "pPsig must be a finite, non-negative gauge pressure (got -20)"
+- kValue with an override of zero: SeparatorInputError on kOverride: "kOverride must be a positive K in ft/s when it is given (got 0); leave it out to use the published table"
+- gas density with no pressure: SeparatorInputError on pPsia: "pPsia must be a finite, positive absolute pressure (got undefined)"
+- gas density with a temperature that is not a number: SeparatorInputError on tF: "tF must be a finite temperature in degF (got warm)"
+- gas density with no gas gravity: SeparatorInputError on gasSg: "gasSg must be a finite, positive gas gravity with air = 1 (got undefined)"
+- a liquid level of zero: SeparatorInputError on liquidLevelFrac: "liquidLevelFrac must lie strictly between 0 and 1 (got 0)"
+- a liquid level of one: SeparatorInputError on liquidLevelFrac: "liquidLevelFrac must lie strictly between 0 and 1 (got 1)"
+- a sweep over an empty diameter list: SeparatorInputError on diametersFt: "diametersFt must be a non-empty list of positive diameters in ft"
+- a sweep whose band runs backwards: SeparatorInputError on ldMax: "ldMax must be a number no smaller than ldMin (got 3)"
+- a slug catcher with a length-to-diameter ratio of zero: SeparatorInputError on ldRatio: "ldRatio must be a positive length-to-diameter ratio (got 0)"
+- a slug catcher with a negative hold time: SeparatorInputError on holdMin: "holdMin must be a non-negative hold time in minutes (got -5)"
+- a slug catcher with a negative normal liquid rate: SeparatorInputError on qLiquidBpd: "qLiquidBpd must be a non-negative liquid rate when it is given (got -100)"
+- a harp with two and a half fingers: SeparatorInputError on nFingers: "nFingers must be a whole number of at least 1 (got 2.5)"
+- three-phase sizing with the retired droplet argument: SeparatorInputError on dropletMicron: "dropletMicron was retired: give waterDropletMicron (water drops falling out of the oil) and oilDropletMicron (oil drops rising out of the water)"
+
+States the method has no answer for, returned rather than thrown:
+- an unknown sizing mode: { error: "unknown sizing mode 'cylindrical'" }
+- a settling velocity of zero in a vertical vessel: { error: "a positive settling velocity is needed" }
+- a gas denser than the liquid: { error: "settling needs a positive K and a liquid denser than the gas" }
+- a segment area larger than the circle: { error: "the area must lie between zero and the full circle" }
+- a slug catcher with no slug: { error: "a slug volume is needed (the line sizing studio computes it)" }
+- a slug catcher filled to the brim: { error: "the fill fraction must be between 0 and 1" }
+- a droplet with no viscosity to fall through: { error: "settling needs a droplet size and viscosity" }
+- a light phase denser than the heavy phase: { error: "the heavy phase must be denser than the light phase" }
+- a layout check over something that is not a list: { error: "a list of placed items is needed" }
+- a distance with one coordinate pair: { error: "two coordinate pairs are needed" }
+- a flare setback with no relief rate: { error: "a flare setback needs a relief rate and a heating value" }
+- a pool fire with no pool: { error: "a pool diameter is needed" }
+
+# SECTION 2: The gas at separator conditions (owned by Associate m02)
+
+The three teaching streams, as the studio reads them:
+| stream | gas MMscfd | gauge psig | absolute psia | degF | gas gravity |
+| --- | --- | --- | --- | --- | --- |
+| ABANA-1 test separator | 18.000000 | 600.000000 | 614.700000 | 95.000000 | 0.680000 |
+| ABANA-2 production separator | 110.000000 | 600.000000 | 614.700000 | 95.000000 | 0.680000 |
+| AGBAMI three-phase | 18.000000 | 350.000000 | 364.700000 | 110.000000 | 0.700000 |
+The absolute pressure is the gauge pressure plus 14.7 (derived, stated on the row).
+
+Sutton pseudo-criticals and the DAK reduced pair:
+| stream | Tpc degR | Ppc psia | Ppr | Tpr | z | gas density lb/ft3 | actual gas ft3/s |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| ABANA-1 | 372.642400 | 666.055360 | 0.922896 | 1.488478 | 0.908065 | 2.239712 | 4.825708 |
+| ABANA-2 | 372.642400 | 666.055360 | 0.922896 | 1.488478 | 0.908065 | 2.239712 | 29.490437 |
+| AGBAMI | 377.590000 | 663.336000 | 0.549797 | 1.508700 | 0.947166 | 1.276898 | 8.713371 |
+ABANA-1 and ABANA-2 share a stream, so they share Ppr, Tpr, z and gas density; only the gas RATE differs, 18.000000 against 110.000000 MMscfd.
+Rankine at ABANA conditions: 554.670000 degR (engine).
+
+# App surface: the actual rate is the standard rate scaled by 14.7 over the absolute pressure, by the absolute temperature over 520 degR, and by z. That is the volume the vessel has to pass every second.
+ABANA-2 carries 110.000000 MMscfd at standard conditions, which is 1273.148148 standard ft3/s (derived: rate times a million over 86400), and 29.490437 ft3/s at 614.700000 psia and 95.000000 degF (engine).
+
+Standard against actual, for all three streams:
+| stream | gas MMscfd | standard ft3/s | absolute psia | degF | degR | z | actual ft3/s | shrinkage |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ABANA-1 | 18.000000 | 208.333333 | 614.700000 | 95.000000 | 554.670000 | 0.908065 | 4.825708 | 43.171559 |
+| ABANA-2 | 110.000000 | 1273.148148 | 614.700000 | 95.000000 | 554.670000 | 0.908065 | 29.490437 | 43.171559 |
+| AGBAMI | 18.000000 | 208.333333 | 364.700000 | 110.000000 | 569.670000 | 0.947166 | 8.713371 | 23.909612 |
+The standard rate is the rate times a million over 86400 (derived on each row). The shrinkage is the standard rate over the actual rate (derived from the two columns on each row), and it is what the pressure, the temperature and z do to a volume between the sales meter and the vessel.
+
+The DAK validity range this module enforces: Tpr from 1.0 to 3.0, Ppr up to 30. Below Ppr 0.2 the fit data stop and the answer is accepted with a note, because the surface runs to the ideal gas limit there and that is where an ordinary low-pressure separator sits.
+Published gasDensity cases:
+- sg065At1000psia100F (1000.000000 psia, 100.000000 degF, gravity 0.650000): Ppr 1.492250, Tpr 1.532881, z 0.871027, density 3.598498 lb/ft3
+- sg065At100psia100FBelowFitPpr (100.000000 psia, 100.000000 degF, gravity 0.650000): Ppr 0.149225, Tpr 1.532881, z 0.986286, density 0.317797 lb/ft3, note "Ppr 0.149 is below the 0.2 where the DAK fit data start; the z-factor here runs toward the ideal-gas limit"
+- sg070At2500psia150F (2500.000000 psia, 150.000000 degF, gravity 0.700000): Ppr 3.768829, Tpr 1.614635, z 0.828979, density 9.344827 lb/ft3
+- sg080At500psia60F (500.000000 psia, 60.000000 degF, gravity 0.800000): Ppr 0.769591, Tpr 1.294515, z 0.873908, density 2.377049 lb/ft3
+- coldGasTprBelowRange (1000.000000 psia, -150.000000 degF, gravity 0.650000): refused: "Tpr 0.848 is below the DAK validity range of 1.0 to 3.0: the z-factor would be an extrapolation below the critical temperature, so it is refused"
+- hotGasTprAboveRange (500.000000 psia, 700.000000 degF, gravity 0.650000): refused: "Tpr 3.176 is above the DAK validity range of 1.0 to 3.0, so the z-factor is refused"
+- pprAboveRange (25000.000000 psia, 150.000000 degF, gravity 0.650000): refused: "Ppr 37.306 is above the DAK validity limit of 30, so the z-factor is refused"
+The golden expectations carry a status word for each: sg065At1000psia100F ok; sg065At100psia100FBelowFitPpr ok; sg070At2500psia150F ok; sg080At500psia60F ok; coldGasTprBelowRange refused-tpr-below-range; hotGasTprAboveRange refused-tpr-above-range; pprAboveRange refused-ppr-above-range (golden).
+
+# SECTION 3: The K value (owned by Associate m03)
+
+The published base table, six rows, all overridable:
+| id | label | orientation | base K ft/s |
+| --- | --- | --- | --- |
+| verticalMesh | Vertical, wire mesh pad | vertical | 0.350000 |
+| verticalVane | Vertical, vane pack | vertical | 0.420000 |
+| verticalNone | Vertical, no mist extractor | vertical | 0.180000 |
+| horizontalMesh | Horizontal, wire mesh pad | horizontal | 0.450000 |
+| horizontalVane | Horizontal, vane pack | horizontal | 0.550000 |
+| horizontalNone | Horizontal, no mist extractor | horizontal | 0.250000 |
+The derating floor is 0.120000 (engine constant K_FLOOR).
+
+K at pressure, for the teaching streams and around them:
+| mist extractor | psig | base K | derated K | K used | derated | floored | nearFloor |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| verticalMesh | 0.000000 | 0.350000 | 0.350000 | 0.350000 | false | false | false |
+| verticalMesh | 100.000000 | 0.350000 | 0.350000 | 0.350000 | false | false | false |
+| verticalMesh | 600.000000 | 0.350000 | 0.300000 | 0.300000 | true | false | false |
+| horizontalMesh | 600.000000 | 0.450000 | 0.400000 | 0.400000 | true | false | false |
+| horizontalVane | 350.000000 | 0.550000 | 0.525000 | 0.525000 | true | false | false |
+| verticalNone | 2000.000000 | 0.180000 | -0.010000 | 0.120000 | true | true | false |
+| horizontalNone | 1500.000000 | 0.250000 | 0.110000 | 0.120000 | true | true | false |
+| verticalNone | 3000.000000 | 0.180000 | -0.110000 | 0.120000 | true | true | false |
+The floored warning, verbatim: "The 0.12 floor bound: the published derating gives K = -0.110 at 3000 psig, below the floor where the rule of thumb stops meaning anything. K is held at 0.12, and a vendor K is the only honest input here."
+An override wins outright and says so: {"k":0.28,"derated":false,"floored":false,"nearFloor":false,"source":"typed","warning":null}
+
+Published kValue cases:
+- verticalMeshAt50psig: K 0.350000, the rule gives 0.350000, derated false, floored false, nearFloor false.
+- verticalMeshAt1100psig: K 0.250000, the rule gives 0.250000, derated true, floored false, nearFloor false.
+- horizontalVaneAt2500psig: K 0.310000, the rule gives 0.310000, derated true, floored false, nearFloor false.
+- verticalNoneAt650psig: K 0.125000, the rule gives 0.125000, derated true, floored false, nearFloor true.
+- verticalNoneAt3000psig: K 0.120000, the rule gives -0.110000, derated true, floored true, nearFloor false.
+- horizontalNoneAt1500psig: K 0.120000, the rule gives 0.110000, derated true, floored true, nearFloor false.
+
+How close a derated K can sit to the floor, and the flag that says so: verticalNoneAt650psig returns K 0.125000 with derated true, floored false and nearFloor true, which is 0.005000 above the floor of 0.120000 (derived: the two figures on this row). The rule takes 0.01 off K every 100 psi, so 50 psig more of operating pressure puts that vessel on the floor. nearFloor is true when one more 100 psi step of that same rule would floor the value, so it marks the approach to the cliff that floored marks the edge of, and the two are never true together.
+
+# HELD FOR LITERATURE, taught as a limit and never graded: the derating of 0.01 per 100 psi above 100 psig, and the 0.12 floor, are the customary rule of thumb as this module records it. The published form has not been checked against the source, so a vendor K is the only honest input where the derating bites.
+
+# SECTION 4: Settling (owned by Associate m04)
+
+Liquid densities, and the mixture the gas load sees:
+| stream | oil API | oil lb/ft3 | water SG | water lb/ft3 | oil bpd | water bpd | mixture lb/ft3 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| ABANA-1 | 33.000000 | 53.675380 | 1.040000 | 64.896000 | 2600.000000 | 400.000000 | 55.171463 |
+| ABANA-2 | 33.000000 | 53.675380 | 1.040000 | 64.896000 | 24000.000000 | 6000.000000 | 55.919504 |
+| AGBAMI | 27.000000 | 55.707256 | 1.050000 | 65.520000 | 12000.000000 | 8000.000000 | 59.632353 |
+The mixture is the two densities weighted by their volume rates (derived from the columns on each row). It is not their average: on AGBAMI the average would be 60.613628 lb/ft3 against the weighted 59.632353.
+
+Souders-Brown settling at the K each stream carries:
+| stream | K | liquid lb/ft3 | gas lb/ft3 | terminal velocity ft/s |
+| --- | --- | --- | --- | --- |
+| ABANA-1 vertical mesh | 0.300000 | 55.171463 | 2.239712 | 1.458422 |
+| ABANA-2 horizontal mesh | 0.400000 | 55.919504 | 2.239712 | 1.958255 |
+| AGBAMI horizontal vane | 0.525000 | 59.632353 | 1.276898 | 3.549130 |
+Published soudersBrown cases:
+- souders0.35 (K 0.350000, liquid 52.000000, gas 2.500000): 1.557402 ft/s.
+- souders0.45 (K 0.450000, liquid 55.000000, gas 5.000000): 1.423025 ft/s.
+- souders0.18 (K 0.180000, liquid 62.400000, gas 0.800000): 1.579494 ft/s.
+
+# SECTION 5: The vertical vessel (owned by Associate m05)
+
+ABANA-1 sized by its gas load: the gas needs an area of 3.308855 ft2 (derived: actual gas rate over the terminal velocity), which is a diameter of 2.052551 ft (engine).
+At that diameter the liquid stands 10.605223 ft deep, the vessel is 16.605223 ft tall with the 6.000000 ft allowance, the slenderness is 8.090042, and the velocity margin is exactly 1.000000 because the diameter was chosen to make it so.
+The retention volume is 35.091146 ft3: 3000.000000 bpd of liquid held 3.000000 minutes.
+
+The same stream in the diameters a vendor actually offers:
+| diameter ft | liquid ft | height ft | L/D | gas velocity ft/s | margin | carries the gas |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2.000000 | 11.169859 | 17.169859 | 8.584929 | 1.536071 | 0.949450 | false |
+| 2.500000 | 7.148710 | 13.148710 | 5.259484 | 0.983085 | 1.483516 | true |
+| 3.000000 | 4.964382 | 10.964382 | 3.654794 | 0.682698 | 2.136263 | true |
+| 3.500000 | 3.647301 | 9.647301 | 2.756372 | 0.501574 | 2.907691 | true |
+| 4.000000 | 2.792465 | 8.792465 | 2.198116 | 0.384018 | 3.797800 | true |
+The height falls and the margin rises with diameter, because the same liquid volume spreads over a larger floor and the same gas crosses a larger area.
+
+Published vertical cases:
+- vertical12ft3sGasSized (12.000000 ft3/s, 3000.000000 bpd, 3.000000 min, allowance 6.000000 ft): diameter 4.239711 ft, liquid 2.485623 ft, height 8.485623 ft, L/D 2.001463, margin 1.000000.
+- vertical30ft3sGasSized (30.000000 ft3/s, 8000.000000 bpd, 2.000000 min, allowance 7.000000 ft): diameter 5.641896 ft, liquid 2.495370 ft, height 9.495370 ft, L/D 1.683011, margin 1.000000.
+
+# SECTION 6: The Associate reading, one chain end to end (owned by Associate m06)
+
+ABANA-1, step by step: 600.000000 psig becomes 614.700000 psia; the gravity 0.680000 gives Ppr 0.922896 and Tpr 1.488478; DAK returns z 0.908065; the gas weighs 2.239712 lb/ft3 and arrives at 4.825708 ft3/s; the liquid weighs 55.171463 lb/ft3; the wire mesh pad gives K 0.300000 after derating from 0.350000; settling is 1.458422 ft/s; the gas needs 2.052551 ft of diameter; and at the 3 ft vessel the studio prefers, the height is 10.964382 ft.
+Every one of those numbers moves if the pressure, the temperature, the gravity, the rates or the mist extractor move. None of them moves if the day changes.
+
+# SECTION 7: The horizontal vessel, a circle cut by a level (owned by Professional m01)
+
+ABANA-2 is built at 8.000000 ft. The cross-section at a range of levels:
+| level fraction | liquid depth ft | liquid area ft2 | gas area ft2 | gas height ft | gas-liquid chord ft | total area ft2 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.200000 | 1.600000 | 7.156723 | 43.108759 | 6.400000 | 6.400000 | 50.265482 |
+| 0.300000 | 2.400000 | 12.682775 | 37.582708 | 5.600000 | 7.332121 | 50.265482 |
+| 0.400000 | 3.200000 | 18.775668 | 31.489815 | 4.800000 | 7.838367 | 50.265482 |
+| 0.500000 | 4.000000 | 25.132741 | 25.132741 | 4.000000 | 8.000000 | 50.265482 |
+| 0.600000 | 4.800000 | 31.489815 | 18.775668 | 3.200000 | 7.838367 | 50.265482 |
+| 0.750000 | 6.000000 | 40.438525 | 9.826958 | 2.000000 | 6.928203 | 50.265482 |
+The chord is the WIDTH of the gas-liquid surface. It is not the oil-water interface, which three-phase sizing places itself, and it is not a length.
+Half full is a special case and not a law: at half full the two areas are equal, 25.132741 ft2 each, and the chord is the full diameter.
+
+Published segments cases:
+- segment8ftAt0.5: liquid area 25.132741 ft2.
+- segment10ftAt0.3: liquid area 19.816836 ft2.
+- segment6ftAt0.75: liquid area 22.746670 ft2.
+- segment12ftAt0.5: liquid area 56.548668 ft2.
+
+The area of a segment and the depth that produces it are exact inverses (the engine bisects 100 times, which resolves the depth to double precision):
+- a drum of 8.000000 ft at level 0.350000: depth 2.800000 ft gives area 15.678751 ft2, and that area gives the depth back as 2.800000 ft.
+- a drum of 10.000000 ft at level 0.600000: depth 6.000000 ft gives area 49.202836 ft2, and that area gives the depth back as 6.000000 ft.
+
+# SECTION 8: Two lengths, one vessel (owned by Professional m02)
+
+ABANA-2 at 8.000000 ft and level 0.500000: the liquid needs 23.270539 ft and the gas needs 2.396801 ft, so the vessel is 23.270539 ft long, controlled by the liquid, at a slenderness of 2.908817.
+The liquid requirement is the retention volume 584.852431 ft3 over the liquid area 25.132741 ft2 (derived from the two engine values on this row).
+Drop the level to 0.300000 and the same duty in the same drum needs 46.113917 ft, because the liquid area falls to 12.682775 ft2 while the gas gets 37.582708 ft2 and slows to 0.784681 ft/s.
+The gas side of that same drum at level 0.300000: gas height 5.600000 ft, gas-liquid chord 7.332121 ft, margin 2.495607, gas length 2.243943 ft, gasCapacityOk true, controlling liquid, total length 46.113917 ft, slenderness 5.764240.
+Lowering the level lengthens the vessel and relieves the gas at the same time: the liquid requirement rises from 23.270539 ft to 46.113917 ft while the gas requirement falls from 2.396801 ft to 2.243943 ft (derived from the two figures in each pair).
+
+The two lengths across the family, at the level ABANA-2 runs:
+| diameter ft | liquid area ft2 | gas area ft2 | liquid length ft | gas length ft | length ft | controlling | L/D |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 5.000000 | 9.817477 | 9.817477 | 59.572579 | 3.834882 | 59.572579 | liquid | 11.914516 |
+| 6.000000 | 14.137167 | 14.137167 | 41.369847 | 3.195735 | 41.369847 | liquid | 6.894974 |
+| 7.000000 | 19.242255 | 19.242255 | 30.394173 | 2.739202 | 30.394173 | liquid | 4.342025 |
+| 8.000000 | 25.132741 | 25.132741 | 23.270539 | 2.396801 | 23.270539 | liquid | 2.908817 |
+| 9.000000 | 31.808626 | 31.808626 | 18.386599 | 2.130490 | 18.386599 | liquid | 2.042955 |
+| 10.000000 | 39.269908 | 39.269908 | 14.893145 | 1.917441 | 14.893145 | liquid | 1.489314 |
+
+Gas height, liquid depth and the gas-liquid chord per bore, at the level ABANA-2 runs:
+| diameter ft | liquid depth ft | gas height ft | gas-liquid chord ft | gas area ft2 | liquid area ft2 |
+| --- | --- | --- | --- | --- | --- |
+| 5.000000 | 2.500000 | 2.500000 | 5.000000 | 9.817477 | 9.817477 |
+| 6.000000 | 3.000000 | 3.000000 | 6.000000 | 14.137167 | 14.137167 |
+| 7.000000 | 3.500000 | 3.500000 | 7.000000 | 19.242255 | 19.242255 |
+| 8.000000 | 4.000000 | 4.000000 | 8.000000 | 25.132741 | 25.132741 |
+| 9.000000 | 4.500000 | 4.500000 | 9.000000 | 31.808626 | 31.808626 |
+| 10.000000 | 5.000000 | 5.000000 | 10.000000 | 39.269908 | 39.269908 |
+At a level of 0.500000 the gas height is half the bore and the chord is the whole bore, which is why the gas length requirement at this level is the gas velocity ratio times half the diameter.
+
+Published horizontal cases:
+- horizontal6ftHalfFullLiquidControlledInBand (6.000000 ft, level 0.500000, 10.000000 ft3/s, 25000.000000 bpd, 3.000000 min): liquid 20.684923 ft, gas 2.496548 ft, length 20.684923 ft, controlling liquid, L/D 3.447487, gas velocity 0.707355 ft/s.
+- horizontal8ftAt40pctLiquidControlledInBand (8.000000 ft, level 0.400000, 30.000000 ft3/s, 30000.000000 bpd, 5.000000 min): liquid 31.149488 ft, gas 4.157188 ft, length 31.149488 ft, controlling liquid, L/D 3.893686, gas velocity 0.952689 ft/s.
+
+# SECTION 9: Gas capacity (owned by Professional m03)
+
+A horizontal vessel carries its gas when the velocity in the GAS SPACE stays under the Souders-Brown velocity. ABANA-2 at 8.000000 ft runs 1.173387 ft/s against 1.958255 ft/s, a margin of 1.668891, so gasCapacityOk is true.
+The margin across the family:
+| diameter ft | gas area ft2 | gas velocity ft/s | margin | carries the gas |
+| --- | --- | --- | --- | --- |
+| 5.000000 | 9.817477 | 3.003871 | 0.651911 | false |
+| 6.000000 | 14.137167 | 2.086022 | 0.938751 | false |
+| 7.000000 | 19.242255 | 1.532587 | 1.277745 | true |
+| 8.000000 | 25.132741 | 1.173387 | 1.668891 | true |
+| 9.000000 | 31.808626 | 0.927121 | 2.112190 | true |
+| 10.000000 | 39.269908 | 0.750968 | 2.607642 | true |
+
+# HELD FOR LITERATURE, taught as a limit and never graded: a horizontal vessel uses the Souders-Brown velocity at the horizontal K as the droplet SETTLING velocity in the gas length requirement. That packaging has not been checked against API 12J or Arnold and Stewart.
+A consequence the engine gate pins: the gas length is the gas velocity over the settling velocity, times the gas height. Under the capacity rule that ratio is at most 1, so the gas length is at most the gas HEIGHT, and gas can control only a vessel that is gas overloaded or shorter than its own diameter.
+The published gas-overloaded three-phase case is the shape to look at:
+- gasOverloaded6ftGasControls: gas velocity 2.829421 ft/s against a settling velocity of 0.500000 ft/s, margin 0.176715, gasCapacityOk false, gas length 16.976527 ft against a gas height of 3.000000 ft, and the controlling requirement is gas.
+
+# SECTION 10: Slug catchers (owned by Professional m04)
+
+# App surface: the slug VOLUME is not computed here. It comes from the line, where the pigging tab of the line sizing studio works it out, and it is typed into this tab as a number somebody else stands behind.
+ABANA takes a 350.000000 bbl slug with 12000.000000 bpd still arriving and a 5.000000 minute hold: the normal inflow adds 41.666667 bbl, the working volume is 391.666667 bbl, and at a fill fraction of 0.600000 the vessel is 3665.075231 ft3.
+At a slenderness of 4.000000 that is a drum 10.527155 ft across and 42.108619 ft long.
+
+The same slug in a harp: 5.000000 fingers of 20.000000 inch bore, filled to 0.800000, need 2456.380208 ft3, which is 225.184350 ft per finger over an area of 2.181662 ft2 each and 1125.921751 ft of pipe in total.
+The harp ignores the normal inflow entirely: the finger volume comes from the slug alone, so 391.666667 bbl of working volume in the vessel answers 350.000000 bbl in the fingers.
+Squeeze the same slug into 2.000000 fingers of 12.000000 inch bore and each one is 1563.780209 ft long, with the warning: "fingers longer than about 1500 ft each: add fingers or a larger bore rather than building a very long harp"
+
+Published slug catcher cases:
+- vessel200bblSlugLd4 (200.000000 bbl, 5000.000000 bpd, 5.000000 min, fill 0.600000, L/D 4.000000): normal 17.361111 bbl, volume 2033.986786 ft3, diameter 8.650995 ft, length 34.603982 ft.
+- vessel1200bblSlugLd5 (1200.000000 bbl, 20000.000000 bpd, 10.000000 min, fill 0.700000, L/D 5.000000): normal 138.888889 bbl, volume 10739.004630 ft3, diameter 13.984106 ft, length 69.920531 ft.
+- finger1500bbl6x24in (1500.000000 bbl, 6.000000 x 24.000000 inch, fill 0.800000): volume 10527.343750 ft3, 558.492932 ft per finger, 3350.957591 ft of pipe.
+- finger500bbl4x16in (500.000000 bbl, 4.000000 x 16.000000 inch, fill 0.750000): volume 3743.055556 ft3, 670.191518 ft per finger, 2680.766073 ft of pipe.
+
+# SECTION 11: Distances and computed setbacks on a site (owned by Professional m05)
+
+# App surface: the Facility Layout Mapper has always advertised safety distances and never computed any. This engine is that missing half. It keeps two kinds of answer apart: a TABLE figure, which is a table, and a COMPUTED setback, which moves when the duty moves.
+Table figures used by the ERHA station, in metres:
+| pair | required m |
+| --- | --- |
+| wellhead to wellhead | 3.000000 |
+| wellhead to separator | 15.000000 |
+| separator to tank | 15.000000 |
+| tank to pump | 15.000000 |
+| heaterTreater to tank | 30.000000 |
+| flare to tank | 60.000000 |
+| flare to control | 90.000000 |
+| pump to pump | 3.000000 |
+| valve to psv | 0.000000 |
+| separator to valve | 0.000000 |
+| tank to skid | null, the table has no figure |
+The lookup is symmetric, and a pair the table does not carry comes back as null rather than a guess.
+
+Distances on the ERHA site, from the datum at 4.741200 north, 7.183600 east (the engine measures on a sphere, because a site plan at a real latitude is not a flat grid):
+The sphere it measures on, read out of the engine rather than typed: a quarter turn along the equator comes back as 10007557.2210 m (engine), so the radius in use is 6371008.8000 m (derived: that distance times two over pi).
+| from | to | distance m |
+| --- | --- | --- |
+| Wellhead 1 | Wellhead 2 | 5.0281 |
+| Wellhead 1 | Inlet separator | 60.6850 |
+| Inlet separator | Crude tank | 75.2397 |
+| Crude tank | Transfer pump A | 43.1555 |
+| Transfer pump A | Transfer pump B | 1.2067 |
+| Crude tank | Flare stack | 182.5778 |
+| Flare stack | Control room | 46.1777 |
+Published distance cases, against an independent Vincenty solution and the three-dimensional chord:
+- portHarcourt90m: haversine 89.4099 m, Vincenty 89.4099 m (golden), chord 89.4099 m (golden).
+- portHarcourtDueNorth: haversine 489.2584 m, Vincenty 489.2584 m (golden), chord 489.2584 m (golden).
+- highLatitudeSmallDLon: haversine 55.5975 m, Vincenty 55.5975 m (golden), chord 55.5975 m (golden).
+- equator: haversine 1111.9508 m, Vincenty 1111.9508 m (golden), chord 1111.9508 m (golden).
+
+The ERHA flare relieves 18.000000 kg/s of gas at 46000.000000 kJ/kg, which is 828000.0000 kW of heat release (engine). With 0.300000 of it radiated and an allowable of 4.730000 kW/m2, the point source model puts the setback at 64.6458 m.
+The published allowable levels this engine carries (API 521 customary):
+- 1.580000 kW/m2: Continuous exposure, no time limit (site boundary, control room)
+- 4.730000 kW/m2: Emergency action of several minutes, with clothing
+- 6.310000 kW/m2: Emergency action up to about a minute
+- 9.460000 kW/m2: Seconds only: escape route
+Published flare cases:
+- flare20kgsAt4p73 (20.000000 kg/s, 46000.000000 kJ/kg, allowable 4.730000, radiated 0.300000, transmissivity 1.000000): 920000.0000 kW, 68.1427 m; the intensity back at that distance is 4.7300 kW/m2 (golden).
+- flare5kgsAt1p58 (5.000000 kg/s, 43000.000000 kJ/kg, allowable 1.580000, radiated 0.250000, transmissivity 0.900000): 215000.0000 kW, 49.3602 m; the intensity back at that distance is 1.5800 kW/m2 (golden).
+
+The ERHA bund is 18.000000 m across, which is 254.4690 m2 of pool burning at 0.055000 kg/m2/s, so 13.9958 kg/s and 601819.1967 kW (engine). The flame stands 23.7996 m tall by Thomas.
+The radius at which the intensity falls to 4.730000 kW/m2 is 59.5294 m FROM THE POOL CENTRE, and the setback from the pool EDGE is 50.5294 m, status beyond-pool-edge. The difference is half the pool diameter, 9.0000 m (derived).
+That difference is the S1 defect the Suite layer carried: the layout check measures centre to centre and the tank icon is the pool centre, so passing the setback from the EDGE made the check short by half the bund and failed open.
+Published pool fire cases:
+- pool20mAt4p73 (20.000000 m pool, burn 0.055000, 43000.000000 kJ/kg, allowable 4.730000): 742986.6626 kW, flame 25.6078 m, radius 66.1438 m, edge setback 56.1438 m, status beyond-pool-edge.
+- pool6mAt1p58 (6.000000 m pool, burn 0.055000, 43000.000000 kJ/kg, allowable 1.580000): 66868.7996 kW, flame 11.0910 m, radius 34.3330 m, edge setback 31.3330 m, status beyond-pool-edge.
+- pool40mAt4p73Tau0p9 (40.000000 m pool, burn 0.062000, 44000.000000 kJ/kg, allowable 4.730000): 3428105.9036 kW, flame 44.5990 m, radius 134.7867 m, edge setback 114.7867 m, status beyond-pool-edge.
+- withinPoolEdgeEdgeCase (20.000000 m pool, burn 0.055000, 43000.000000 kJ/kg, allowable 4000.000000): 742986.6626 kW, flame 25.6078 m, radius 2.2745 m, edge setback 0.0000 m, status within-pool-edge.
+    note: "the point-source radius of 2.3 m lies within the pool edge at 10.0 m from the centre, so the setback from the edge is reported as 0 with setbackStatus 'within-pool-edge': a point source says nothing reliable this close to the fire. the computed radius is inside the flame height, so the point-source model is being used close to the flame where it under-predicts: treat this as a lower bound and use a solid-flame view factor for design"
+
+# HELD FOR LITERATURE, taught as a limit and never graded: the spacing TABLE figures are the customary onshore production-facility values as this engine records them, with no source checked, and they are meant to be replaced by a site standard. The API 521 radiation LABELS are recorded the same way. A course may teach what a table is; it may not treat a table figure as a calculation.
+The pool fire model is a POINT SOURCE. It computes no view factor and no solid-flame surface emissive power, and inside the flame height it under-predicts, which is why the engine flags that case rather than answering it flat.
+
+# SECTION 12: The Professional reading, a station judged (owned by Professional m06)
+
+The ERHA station, checked against the table and against its own two computed setbacks: 69 comparisons carried a positive requirement, 21 pairs had none, 6 comparisons failed, complete is false, pass is false (checked).
+| kind | from | to | actual m | required m | shortfall m | shortfall fraction |
+| --- | --- | --- | --- | --- | --- | --- |
+| spacing | Flare stack | Control room | 46.1777 | 90.0000 | 43.8223 | 0.486914 |
+| radiation | Flare stack | Control room | 46.1777 | 64.6458 | 18.4681 | 0.285681 |
+| radiation | Crude tank | Transfer pump A | 43.1555 | 59.5294 | 16.3739 | 0.275056 |
+| radiation | Crude tank | Transfer pump B | 44.1452 | 59.5294 | 15.3842 | 0.258430 |
+| radiation | Crude tank | Heater treater | 50.1598 | 59.5294 | 9.3696 | 0.157395 |
+| spacing | Transfer pump A | Transfer pump B | 1.2067 | 3.0000 | 1.7933 | 0.597753 |
+worstAbsolute is Flare stack to Control room, 43.8223 m short. worstRelative is Transfer pump A to Transfer pump B, 0.597753 of its requirement. They are different pairs.
+Skipped: [{"id":"tk2","reason":"bad-coordinates"},{"id":"fl2","reason":"radiation-source-not-placed"}]. Unknown type pairs: 12.
+
+What the half-bund correction is worth on this plot. The retired Suite layer handed the check the setback from the pool EDGE, 50.5294 m, where the check measures centre to centre and the requirement is 59.5294 m. The same plot judged both ways:
+| pair | actual m | required from the centre m | shortfall m | required as the retired edge figure m | residual shortfall under the retired figure m |
+| --- | --- | --- | --- | --- | --- |
+| Crude tank to Transfer pump A | 43.1555 | 59.5294 | 16.3739 | 50.5294 | 7.3739 |
+| Crude tank to Transfer pump B | 44.1452 | 59.5294 | 15.3842 | 50.5294 | 6.3842 |
+| Crude tank to Heater treater | 50.1598 | 59.5294 | 9.3696 | 50.5294 | 0.3696 |
+Every row's two shortfalls differ by 9.0000 m, the half bund (derived from the two requirement columns). The heater treater is the row that shows what the defect cost: 9.3696 m short of the real requirement, and only 0.3696 m short of the retired one.
+Judged the retired way the plot still fails, 6 breaches against 6, so the defect never showed as a pass: it showed as a smaller number, which is the harder kind to notice.
+
+What every item has around it, which is the other half of a layout review:
+| item | nearest | distance m | table requirement m |
+| --- | --- | --- | --- |
+| Wellhead 1 | Wellhead 2 | 5.0281 | 3.000000 |
+| Wellhead 2 | Wellhead 1 | 5.0281 | 3.000000 |
+| Production manifold | Chemical injection skid | 5.8533 | null |
+| Inlet separator | Separator dump valve | 2.8348 | 0.000000 |
+| Separator dump valve | Separator relief valve | 2.8348 | 0.000000 |
+| Separator relief valve | Separator dump valve | 2.8348 | 0.000000 |
+| Chemical injection skid | Production manifold | 5.8533 | null |
+| Heater treater | Separator relief valve | 19.4836 | 0.000000 |
+| Crude tank | Transfer pump A | 43.1555 | 15.000000 |
+| Transfer pump A | Transfer pump B | 1.2067 | 3.000000 |
+| Transfer pump B | Transfer pump A | 1.2067 | 3.000000 |
+| Flare stack | Control room | 46.1777 | 90.000000 |
+| Control room | Flare stack | 46.1777 | 90.000000 |
+
+# SECTION 13: Three phases in one vessel (owned by Expert m01)
+
+AGBAMI at 10.000000 ft, level 0.500000, with 12000.000000 bpd of oil held 5.000000 minutes and 8000.000000 bpd of water held 8.000000 minutes.
+The split is retention-proportional: the water takes 0.516129 of the liquid cross-section, which is 20.268340 ft2 against 19.001568 ft2 of oil in a liquid area of 39.269908 ft2.
+The interface sits at 3.049149 ft, the exact depth whose circular segment has the water area. The water layer is 3.049149 ft and the oil layer above it 1.950851 ft, and the two add to the liquid level 5.000000 ft (derived).
+The retired rule divided the water area by the GAS-LIQUID CHORD of 10.000000 ft, which gives 2.026834 ft (derived from two engine values on this row) and understates the water layer, so the D2 carryunder check was reading a layer that was not there.
+One liquid retention requirement follows from the proportional split: 12.311666 ft, with phaseRetentionLengthsFt null and retentionPhase null.
+
+Pin the interface instead, at a water share of 0.300000: the split is explicit, the interface drops to 2.074313 ft, the oil layer grows to 2.925687 ft, and the two phases now need DIFFERENT lengths, 8.510368 ft for the oil and 21.181362 ft for the water. The requirement is the larger, 21.181362 ft, and retentionPhase names the water.
+Two retention lengths are the same length within a relative gap of 1e-9 (engine constant RETENTION_TIE_REL), and then retentionPhase is null rather than a coin toss.
+
+Published threePhase cases:
+- d2Probe10ftHalfFull40pctWaterExplicit (10.000000 ft, level 0.500000, pinned at 0.400000): share 0.400000, interface 2.540691 ft, water 2.540691 ft, oil 2.459309 ft, retention length 4.964382 ft, length 4.964382 ft, controlling liquid-retention, retentionPhase null.
+    the retired chord rule on the same case gave a water layer of 1.570796 ft and an oil layer of 2.356194 ft (golden).
+- explicit25pctWaterWaterRetentionSets (10.000000 ft, level 0.500000, pinned at 0.250000): share 0.250000, interface 1.826477 ft, water 1.826477 ft, oil 3.173523 ft, retention length 7.943011 ft, length 7.943011 ft, controlling liquid-retention, retentionPhase water.
+    the retired chord rule on the same case gave a water layer of 0.981748 ft and an oil layer of 2.945243 ft (golden).
+- proportionalSplitLiquidRetention (10.000000 ft, level 0.500000): share 0.400000, interface 2.540691 ft, water 2.540691 ft, oil 2.459309 ft, retention length 4.964382 ft, length 4.964382 ft, controlling liquid-retention, retentionPhase null.
+    the retired chord rule on the same case gave a water layer of 1.570796 ft and an oil layer of 2.356194 ft (golden).
+- thickOilWaterCarryover (10.000000 ft, level 0.500000): share 0.769231, interface 4.088701 ft, water 4.088701 ft, oil 0.911299 ft, retention length 2.581478 ft, length 2.581478 ft, controlling liquid-retention, retentionPhase null.
+    the retired chord rule on the same case gave a water layer of 3.020762 ft and an oil layer of 0.906229 ft (golden).
+- lowLevelSmallOilDropCarryunder (10.000000 ft, level 0.300000): share 0.285714, interface 1.249328 ft, water 1.249328 ft, oil 1.750672 ft, retention length 8.263614 ft, length 8.263614 ft, controlling liquid-retention, retentionPhase null.
+    the retired chord rule on the same case gave a water layer of 0.617770 ft and an oil layer of 1.544424 ft (golden).
+- gasOverloaded6ftGasControls (6.000000 ft, level 0.500000): share 0.400000, interface 1.524415 ft, water 1.524415 ft, oil 1.475585 ft, retention length 0.689497 ft, length 16.976527 ft, controlling gas, retentionPhase null.
+    the retired chord rule on the same case gave a water layer of 0.942478 ft and an oil layer of 1.413717 ft (golden).
+
+What three-phase sizing demands, refused by name and with no default:
+- no oil rate: SeparatorInputError on qOilBpd: "qOilBpd is required: the oil rate in bpd (a vessel with no oil to separate is a two-phase vessel) (got undefined)"
+- no water rate: SeparatorInputError on qWaterBpd: "qWaterBpd is required: the water rate in bpd (a vessel with no water to separate is a two-phase vessel) (got undefined)"
+- no oil retention time: SeparatorInputError on oilRetentionMin: "oilRetentionMin is required: the oil retention time in minutes (got undefined)"
+- no oil gravity: SeparatorInputError on sgOil: "sgOil is required: the oil specific gravity (got undefined)"
+- water lighter than the oil: SeparatorInputError on sgWater: "sgWater (1) must exceed sgOil (1.1) for the water to settle"
+- no oil viscosity: SeparatorInputError on muOilCp: "muOilCp is required: the oil viscosity in cP (got undefined)"
+- no water droplet size: SeparatorInputError on waterDropletMicron: "waterDropletMicron is required: the size in microns of the water drops to remove from the oil (got undefined)"
+- no oil droplet size: SeparatorInputError on oilDropletMicron: "oilDropletMicron is required: the size in microns of the oil drops to remove from the water (got undefined)"
+- a pinned water share of zero: SeparatorInputError on waterFracOfLiquid: "waterFracOfLiquid must lie strictly between 0 and 1 when it is given (got 0)"
+
+# SECTION 14: Droplets, and the verdicts they carry (owned by Expert m02)
+
+Stokes settling between two liquids, in the field form the standards use, beside the oracle that re-derives it in SI from g d2 dRho over 18 mu:
+- stokes500um (500.000000 micron, heavy 1.050000, light 0.850000, 2.000000 cP): engine 0.044500 ft/s, oracle 0.044686 ft/s (golden), a ratio of 1.004184 (derived from the two figures on this row).
+- stokes150um (150.000000 micron, heavy 1.020000, light 0.800000, 5.000000 cP): engine 0.001762 ft/s, oracle 0.001770 ft/s (golden), a ratio of 1.004184 (derived from the two figures on this row).
+- stokes1000um (1000.000000 micron, heavy 1.080000, light 0.900000, 1.000000 cP): engine 0.320400 ft/s, oracle 0.321740 ft/s (golden), a ratio of 1.004184 (derived from the two figures on this row).
+The field constant 1.78e-6 is a rounded packaging of the SI group, so the engine sits about four parts in a thousand below the SI derivation on every case, in the same direction each time. That is the size of the disagreement a droplet verdict is decided on when a residence time is close.
+The velocity goes as the SQUARE of the droplet size and inversely with viscosity, so halving the drop quarters the speed:
+- a 500.000000 micron water drop in 4.000000 cP oil: 0.017500 ft/s.
+- a 350.000000 micron water drop in 4.000000 cP oil: 0.008575 ft/s.
+- a 250.000000 micron water drop in 4.000000 cP oil: 0.004375 ft/s.
+- a 150.000000 micron water drop in 4.000000 cP oil: 0.001575 ft/s.
+- a 100.000000 micron water drop in 4.000000 cP oil: 0.000700 ft/s.
+Read that as a straight line and a 250.000000 micron drop would settle at half the 500.000000 micron speed, 0.008750 ft/s (derived: 0.017500 halved). The engine gives 0.004375 ft/s, a quarter, because the law is in the square of the diameter. The two differ by 0.004375 ft/s (derived from the two figures on this row), which is the whole of the error in reading the law as linear.
+
+AGBAMI as sized: the vessel is 12.311666 ft long, so the oil stays 300.0000 s and the water 480.0000 s.
+A 500.000000 micron water drop falls at 0.017500 ft/s and needs 111.4796 s to cross the 1.950851 ft oil layer, so waterCarryover is false.
+A 200.000000 micron oil drop rises at 0.014000 ft/s and needs 217.8010 s to cross the 3.049149 ft water layer, so oilCarryunder is false.
+Under the proportional split the residence times are the retention times that were typed in, in seconds, because the split was made to give both phases the same length. Reading a residence back as a result there is reading an input.
+Tighten the water specification to 150.000000 micron and nothing about the vessel changes except the verdict: the drop falls at 0.001575 ft/s, needs 1238.6620 s against 300.0000 s of residence, and waterCarryover is true.
+The warning, verbatim: "A 150 micron water drop needs 1239 s to fall through the 1.95 ft oil layer and the oil stays 300 s: expect water carryover into the oil outlet, so raise the oil retention or lower the interface."
+On the pinned split the residence times separate: 746.6667 s for the oil against 480.0000 s for the water, because the length is set by one phase and the areas by another.
+Before FC1-0 a missing oil gravity did not refuse: the two droplet checks read NaN and came back false, so a vessel that carried water over reported no carryover. A verdict for an input it could not read is a verdict that says nothing.
+
+# SECTION 15: The family of vessels (owned by Expert m03)
+
+ABANA-1, the vertical family, band 2 to 4:
+| diameter ft | length ft | L/D | in band | feasible | reasons |
+| --- | --- | --- | --- | --- | --- |
+| 2.000000 | 17.169859 | 8.584929 | false | false | gas-capacity, ld-out-of-band |
+| 2.500000 | 13.148710 | 5.259484 | false | true | ld-out-of-band |
+| 3.000000 | 10.964382 | 3.654794 | true | true | none |
+| 3.500000 | 9.647301 | 2.756372 | true | true | none |
+| 4.000000 | 8.792465 | 2.198116 | true | true | none |
+preferred 3.000000 ft, preferredStatus selected, band 2.000000 to 4.000000.
+
+ABANA-2, the horizontal family, band 3 to 5:
+| diameter ft | length ft | L/D | in band | feasible | reasons |
+| --- | --- | --- | --- | --- | --- |
+| 5.000000 | 59.572579 | 11.914516 | false | false | gas-capacity, ld-out-of-band |
+| 6.000000 | 41.369847 | 6.894974 | false | false | gas-capacity, ld-out-of-band |
+| 7.000000 | 30.394173 | 4.342025 | true | true | none |
+| 8.000000 | 23.270539 | 2.908817 | false | true | ld-out-of-band |
+| 9.000000 | 18.386599 | 2.042955 | false | true | ld-out-of-band |
+| 10.000000 | 14.893145 | 1.489314 | false | true | ld-out-of-band |
+preferred 7.000000 ft, preferredStatus selected, band 3.000000 to 5.000000.
+The same family judged against a band widened to 3 to 7, which is an INPUT and not a property of the vessel:
+| diameter ft | length ft | L/D | in band | feasible | reasons |
+| --- | --- | --- | --- | --- | --- |
+| 5.000000 | 59.572579 | 11.914516 | false | false | gas-capacity, ld-out-of-band |
+| 6.000000 | 41.369847 | 6.894974 | true | false | gas-capacity |
+| 7.000000 | 30.394173 | 4.342025 | true | true | none |
+| 8.000000 | 23.270539 | 2.908817 | false | true | ld-out-of-band |
+| 9.000000 | 18.386599 | 2.042955 | false | true | ld-out-of-band |
+| 10.000000 | 14.893145 | 1.489314 | false | true | ld-out-of-band |
+preferred 7.000000 ft, preferredStatus selected, band 3.000000 to 7.000000.
+Widening the band admits a row the narrow band excluded, and the preferred vessel does not move: the 6.000000 ft row is now inRange true and still infeasible for gas-capacity, so the smallest FEASIBLE row in band is still 7.000000 ft. A rule that took the first row in band would have moved.
+
+AGBAMI, the three-phase family at the 500.000000 micron specification, band 3 to 5:
+| diameter ft | length ft | L/D | in band | feasible | reasons |
+| --- | --- | --- | --- | --- | --- |
+| 6.000000 | 34.199073 | 5.699846 | false | true | ld-out-of-band |
+| 7.000000 | 25.125850 | 3.589407 | true | true | none |
+| 8.000000 | 19.236979 | 2.404622 | false | true | ld-out-of-band |
+| 9.000000 | 15.199588 | 1.688843 | false | true | ld-out-of-band |
+| 10.000000 | 12.311666 | 1.231167 | false | true | ld-out-of-band |
+preferred 7.000000 ft, preferredStatus selected, band 3.000000 to 5.000000.
+The same family at the 150.000000 micron specification:
+| diameter ft | length ft | L/D | in band | feasible | reasons |
+| --- | --- | --- | --- | --- | --- |
+| 6.000000 | 34.199073 | 5.699846 | false | false | water-carryover, ld-out-of-band |
+| 7.000000 | 25.125850 | 3.589407 | true | false | water-carryover |
+| 8.000000 | 19.236979 | 2.404622 | false | false | water-carryover, ld-out-of-band |
+| 9.000000 | 15.199588 | 1.688843 | false | false | water-carryover, ld-out-of-band |
+| 10.000000 | 12.311666 | 1.231167 | false | false | water-carryover, ld-out-of-band |
+preferred null, preferredStatus none-feasible, band 3.000000 to 5.000000.
+A droplet verdict gates feasibility, because a vessel that carries water into the oil outlet has not separated the stream, whatever its slenderness.
+The same family at the 500.000000 micron specification with the band narrowed to 4.000000 to 5.000000:
+| diameter ft | length ft | L/D | in band | feasible | reasons |
+| --- | --- | --- | --- | --- | --- |
+| 6.000000 | 34.199073 | 5.699846 | false | true | ld-out-of-band |
+| 7.000000 | 25.125850 | 3.589407 | false | true | ld-out-of-band |
+| 8.000000 | 19.236979 | 2.404622 | false | true | ld-out-of-band |
+| 9.000000 | 15.199588 | 1.688843 | false | true | ld-out-of-band |
+| 10.000000 | 12.311666 | 1.231167 | false | true | ld-out-of-band |
+preferred null, preferredStatus none-in-band, band 4.000000 to 5.000000.
+Three statuses, and they mean different things: selected is a vessel, none-in-band means feasible vessels exist and none of them is inside the slenderness the band asks for, and none-feasible means no vessel in the list works at all.
+
+Published sweep cases, with the row the retired rule would have preferred:
+- d1ProbeVertical4ftGasOverloaded (vertical2, band 3.000000 to 5.000000): preferred null, status none-in-band; the retired rule preferred 4.000000 ft (golden).
+    4.000000 ft: L/D 3.827054, length 15.308216 ft, inRange true, feasible false, reasons gas-capacity.
+    6.000000 ft: L/D 1.689497, length 10.136985 ft, inRange false, feasible false, reasons gas-capacity, ld-out-of-band.
+    7.000000 ft: L/D 1.291345, length 9.039417 ft, inRange false, feasible true, reasons ld-out-of-band.
+    8.000000 ft: L/D 1.040882, length 8.327054 ft, inRange false, feasible true, reasons ld-out-of-band.
+- verticalUnsortedListSmallestFeasible (vertical2, band 1.000000 to 2.000000): preferred 7.000000 ft, status selected; the retired rule preferred 8.000000 ft (golden).
+    4.000000 ft: L/D 3.827054, length 15.308216 ft, inRange false, feasible false, reasons gas-capacity, ld-out-of-band.
+    6.000000 ft: L/D 1.689497, length 10.136985 ft, inRange true, feasible false, reasons gas-capacity.
+    7.000000 ft: L/D 1.291345, length 9.039417 ft, inRange true, feasible true, reasons none.
+    8.000000 ft: L/D 1.040882, length 8.327054 ft, inRange true, feasible true, reasons none.
+    10.000000 ft: L/D 0.748931, length 7.489314 ft, inRange false, feasible true, reasons ld-out-of-band.
+- verticalNoneFeasible (vertical2, band 1.000000 to 10.000000): preferred null, status none-feasible; the retired rule preferred 3.000000 ft (golden).
+    2.000000 ft: L/D 21.616431, length 43.232862 ft, inRange false, feasible false, reasons gas-capacity, ld-out-of-band.
+    3.000000 ft: L/D 7.515980, length 22.547939 ft, inRange true, feasible false, reasons gas-capacity.
+    4.000000 ft: L/D 3.827054, length 15.308216 ft, inRange true, feasible false, reasons gas-capacity.
+- horizontal2InBandButGasOverloaded (horizontal2, band 3.000000 to 5.000000): preferred 8.500000 ft, status selected; the retired rule preferred 7.500000 ft (golden).
+    6.000000 ft: L/D 9.193299, length 55.159796 ft, inRange false, feasible false, reasons gas-capacity, ld-out-of-band.
+    7.000000 ft: L/D 5.789366, length 40.525564 ft, inRange false, feasible false, reasons gas-capacity, ld-out-of-band.
+    7.500000 ft: L/D 4.706969, length 35.302269 ft, inRange true, feasible false, reasons gas-capacity.
+    8.500000 ft: L/D 3.233467, length 27.484466 ft, inRange true, feasible true, reasons none.
+    10.000000 ft: L/D 1.985753, length 19.857526 ft, inRange false, feasible true, reasons ld-out-of-band.
+- horizontal3DropletVerdictsGateFeasibility (horizontal3, band 1.000000 to 7.000000): preferred null, status none-feasible; the retired rule preferred 8.000000 ft (golden).
+    8.000000 ft: L/D 4.848029, length 38.784231 ft, inRange true, feasible false, reasons gas-capacity.
+    10.000000 ft: L/D 2.482191, length 24.821908 ft, inRange true, feasible false, reasons water-carryover.
+    12.000000 ft: L/D 1.436453, length 17.237436 ft, inRange true, feasible false, reasons water-carryover.
+    14.000000 ft: L/D 0.904588, length 12.664239 ft, inRange false, feasible false, reasons water-carryover, ld-out-of-band.
+
+# SECTION 16: Judging a layout (owned by Expert m04)
+
+What counts as a check: a comparison between two PLACED items with a POSITIVE requirement. A table figure of zero is no requirement and is counted separately, an item without coordinates is skipped, and a radiation source whose item is not on the plan is skipped.
+On ERHA: checked 69, zeroRequirementPairs 21, skipped 2, unknownPairs 12, complete false, pass false, passStatus checked.
+Complete and pass answer different questions. Complete says the layout was fully judged; pass says the comparisons that were made all cleared. A layout can pass and be incomplete, and the retired rule reported pass true for a plan where NOTHING was checked.
+
+Published layout cases:
+- s4RankingsDisagree: checked 6, zero-requirement 0, violations 2, skipped [], unknown [], complete true, pass false (checked).
+    the retired rule reported checked 6, pass false, worst ["spacing","p1","p2"] (golden).
+    worstAbsolute spacing f1 to c1, 40.0561 m of 90.0000 m; worstRelative spacing p1 to p2, 0.667041.
+- s3AllUnplacedNothingChecked: checked 0, zero-requirement 0, violations 0, skipped [{"id":"w1","reason":"bad-coordinates"},{"id":"s1","reason":"bad-coordinates"}], unknown [], complete false, pass null (nothing-checked).
+    the retired rule reported checked 0, pass true, worst null (golden).
+- s3ZeroRequirementPairOnly: checked 0, zero-requirement 1, violations 0, skipped [], unknown [], complete true, pass null (nothing-checked).
+    the retired rule reported checked 1, pass true, worst null (golden).
+- s3SkippedItemPassesButIncomplete: checked 3, zero-requirement 0, violations 0, skipped [{"id":"x1","reason":"bad-coordinates"}], unknown [], complete false, pass true (checked).
+    the retired rule reported checked 3, pass true, worst null (golden).
+- radiationAndTableWithGhostSource: checked 2, zero-requirement 0, violations 2, skipped [{"id":"ghost","reason":"radiation-source-not-placed"}], unknown [], complete false, pass false (checked).
+    the retired rule reported checked 2, pass false, worst ["radiation","f1","t1"] (golden).
+    worstAbsolute radiation f1 to t1, 18.1988 m of 68.1427 m; worstRelative radiation f1 to t1, 0.267069.
+- unknownPairIncomplete: checked 1, zero-requirement 0, violations 1, skipped [], unknown [{"typeA":"unicorn","typeB":"tank"},{"typeA":"unicorn","typeB":"wellhead"}], complete false, pass false (checked).
+    the retired rule reported checked 1, pass false, worst ["spacing","b","c"] (golden).
+    worstAbsolute spacing b to c, 22.0090 m of 30.0000 m; worstRelative spacing b to c, 0.733633.
+Two rankings are returned and neither is called the worst on its own. A pair 2.0011 m short of 3.0000 m is the worst RELATIVE breach; a control room 40.0561 m short of 90.0000 m is the worst ABSOLUTE one. The retired code returned one ranking, built on the relative shortfall, and called it worst.
+
+# SECTION 17: What the method does not know (owned by Expert m05)
+
+Four things this course teaches as limits and never as answers:
+1. The K derating of 0.01 per 100 psi above 100 psig and the floor at 0.120000 are a rule of thumb recorded here, not a checked publication. At 600.000000 psig the vertical mesh K falls from 0.350000 to 0.300000, which moves every vessel dimension that follows it.
+2. A horizontal vessel borrows the Souders-Brown velocity at the horizontal K as its droplet settling velocity. If the published method sizes the gas length from a droplet diameter instead, the gas length and every conclusion drawn from it changes.
+3. The spacing table and the radiation labels are recorded values with no source checked. A site standard replaces the table wholesale.
+4. The published cases in these two goldens are SYNTHETIC. They come from an independent oracle written in Python from the same physics, in SI units where the engine works in field units, which catches an arithmetic or a unit error and cannot catch a method that is wrong in both files. No measured separator is in this course.
+
+The DAK range is enforced rather than extrapolated, and the two directions are treated differently:
+- a cold gas below the range: refused, "Tpr 0.848 is below the DAK validity range of 1.0 to 3.0: the z-factor would be an extrapolation below the critical temperature, so it is refused"
+- a hot gas above the range: refused, "Tpr 3.176 is above the DAK validity range of 1.0 to 3.0, so the z-factor is refused"
+- a pressure above the range: refused, "Ppr 37.306 is above the DAK validity limit of 30, so the z-factor is refused"
+- a low-pressure separator below the fit data: accepted, z 0.986286, density 0.317797 lb/ft3, note "Ppr 0.149 is below the 0.2 where the DAK fit data start; the z-factor here runs toward the ideal-gas limit"
+The DAK bounds as this module states them: Tpr 1.000000 to 3.000000, Ppr up to 30.000000, with the fit data starting at Ppr 0.200000.
+
+# SECTION 18: The Expert reading, a stream and a site together (owned by Expert m06)
+
+AGBAMI end to end: 350.000000 psig and 110.000000 degF give Ppr 0.549797, Tpr 1.508700, z 0.947166 and a gas density of 1.276898 lb/ft3; the vane pack gives K 0.525000; settling is 3.549130 ft/s; the gas arrives at 8.713371 ft3/s; at 10.000000 ft the interface sits at 3.049149 ft, the vessel needs 12.311666 ft with the controlling requirement liquid-retention, and both droplet verdicts pass at the 500.000000 micron specification and the water one fails at 150.000000 micron.
+ERHA end to end: the flare setback is 64.6458 m from 828000.0000 kW, the bund radius is 59.5294 m from the centre and 50.5294 m from the edge, and checking the site against both plus the table leaves 6 breaches, the largest of them 43.8223 m and the sharpest 0.597753 of its requirement, on a plan that is not complete because 2 things were skipped.
+A sized vessel and a judged site are the two halves of one answer: a drum that separates the stream and a plot that can hold the drum.
+

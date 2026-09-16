@@ -1,5 +1,5 @@
 // Every value the EC4 lab exposes to a panel, a lesson or the grader is pinned
-// here against the teaching digest (/root/ec-wip-decision/digest.txt), which is
+// here against the teaching digest (tools/course-waves/decision/digest.txt), which is
 // itself nothing but the decision tree engine's and the VOI Analyzer's return
 // values on the published goldens and on the teaching fields EKPAN, OKRIKA and
 // IRRI. The digest prints money to four decimals in million USD, probabilities
@@ -15,7 +15,7 @@
 // a digest that is rebuilt with a changed number all fail here.
 //
 // THE EIGHTEEN GRADED FIELDS of the ABALAMA capstone are pinned separately and
-// EXACTLY against /root/ec-wip-decision/fields.json, READ FROM THE FILE.
+// EXACTLY against tools/course-waves/decision/fields.json, READ FROM THE FILE.
 //
 // Then the leak gate: no teaching export may return a number within ten times
 // a graded field's ABSOLUTE tolerance of a graded answer, in any of three unit
@@ -27,14 +27,20 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as L from './decisionLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const LAB = Object.fromEntries(Object.entries(L));
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DIGEST = '/root/ec-wip-decision/digest.txt';
-const FIELDS_JSON = '/root/ec-wip-decision/fields.json';
-const DUMP_MJS = '/root/ec-wip-decision/ec4_dump.mjs';
-const FIELDS_MJS = '/root/ec-wip-decision/ec4_fields.mjs';
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'decision';
+const DIGEST = waveInput(WAVE_NAME, 'digest.txt');
+const FIELDS_JSON = waveInput(WAVE_NAME, 'fields.json');
+const DUMP_MJS = waveInput(WAVE_NAME, 'ec4_dump.mjs');
+const FIELDS_MJS = waveInput(WAVE_NAME, 'ec4_fields.mjs');
 
 // ---------------------------------------------------------------------------
 // The digest's formatting, verbatim from ec4_dump.mjs.

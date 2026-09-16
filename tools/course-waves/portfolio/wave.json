@@ -1,0 +1,22 @@
+{
+ "slug": "portfolio",
+ "prefix": "ec5",
+ "name": "Capital Portfolio & Cost Control",
+ "goldens": [
+  "economics/goldens/portfolio_cases.json",
+  "economics/goldens/afe_cases.json"
+ ],
+ "constants": {
+  "100": "percent",
+  "2000": "the knapsack grid's cell budget",
+  "5000": "the largest limit the exact 1 million USD grid is used for",
+  "2.5631": "twice z at 0.90, the P10 to P90 spread divisor",
+  "1.2816": "z at 0.90"
+ },
+ "repo": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen-ec6",
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3"
+ ]
+}

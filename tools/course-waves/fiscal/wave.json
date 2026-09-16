@@ -1,0 +1,16 @@
+{
+ "slug": "fiscal",
+ "prefix": "ec2",
+ "name": "Fiscal Regime Design",
+ "goldens": [
+  "economics/goldens/fiscal_cases.json"
+ ],
+ "constants": {
+  "365": "days per year",
+  "25": "years of project life, the sandbox's fixed horizon",
+  "6000": "scf of gas per barrel of oil equivalent, as the engine writes it",
+  "1000": "scf per Mscf",
+  "1000000": "USD per million USD",
+  "100": "percent"
+ }
+}

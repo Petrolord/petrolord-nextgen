@@ -1,0 +1,13 @@
+{
+ "slug": "gaslift",
+ "prefix": "pd2",
+ "name": "Gas Lift Design",
+ "goldens": [
+  "production/goldens/gaslift_cases.json"
+ ],
+ "constants": {
+  "0.3048": "metres per foot",
+  "6894.757293168": "pascals per psi",
+  "9.869233e-16": "square metres per darcy"
+ }
+}

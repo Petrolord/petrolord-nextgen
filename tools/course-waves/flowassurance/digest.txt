@@ -1,0 +1,1308 @@
+PD6 Flow Assurance: TEACHING DIGEST
+
+THIS FILE RUNS THE PUBLISHED CASES. THE CAPSTONE RUNS DIFFERENT CONDITIONS
+ENTIRELY. Every line below comes from a PUBLISHED golden case out of
+packages/engines/test-data/production/goldens/flowassurance_cases.json, from
+the shipped engine re-run on those published inputs, from a sweep this
+generator ran on published inputs, or from the one TEACHING LINE this wave
+designed for itself. The generator never opens pd6_fields.mjs and never reads
+the capstone line: no capstone pipe, insulation, trench, length, rate,
+temperature, pressure, hydrate boundary, dose or graded answer is reachable
+from here.
+
+A leak guard, pd6_leakcheck.mjs, reads the capstone graded field list out of
+fields.json and every number on every line of this file, and rejects the
+digest if any number lands within TEN TIMES a graded field tolerance of that
+field value, in three unit shiftings (as printed, times 1000, times 0.001).
+academy_submit_capstone grades with abs(got - expected) <= tol, so tol is
+ABSOLUTE in the field own units and is not a fraction of anything. Ten times
+it is under three ten-thousandths of a Btu/(hr ft2 degF) on a bare U, under
+four ten-thousandths of a degF on an arrival temperature, and under two
+hundredths of a foot on a relaxation length. This file passed that guard.
+
+Generator: /root/pd-wip-flowassurance/pd6_dump.mjs
+Engine:    packages/engines/engines/production/flowlineThermal.js
+           packages/engines/engines/production/hydrateInhibition.js
+Goldens:   packages/engines/test-data/production/goldens/flowassurance_cases.json
+Golden oracle: tools/validation/production/oracle_flowassurance.py. It works in
+           SI throughout, watts and metres and kelvin and seconds, and converts
+           only at the boundary, so every resistance, every relaxation length
+           and every cooldown crosses a unit system before it can be compared.
+           It computes both inhibitor relations in CELSIUS with the metric
+           constants, 1297 for Hammerschmidt and 72 for Nielsen-Bucklin, and
+           converts the answer, so the field constants the engine carries have
+           to fall out of the metric ones.
+Gate:      __tests__/production.flowassurance.test.js
+Units: degF, psia never psig, weight percent, lbm/ft3, lbm/ft, ft, in, hr,
+       Btu/(hr ft2 degF) for U, Btu/(hr ft degF) for k, Btu/(lb degF) for Cp,
+       hr ft degF/Btu per foot of pipe for a resistance, bbl/d. Never SI
+       except where a golden is explicitly published in SI and is labelled so.
+
+WHAT PROVENANCE LABEL MEANS WHAT
+  golden ...    a value committed in flowassurance_cases.json, cut by the
+                independent SI oracle named above. Three overall U values, one
+                burial limit, three relaxation lengths, three arrival
+                temperatures with their ntu, one cooldown, 24 inhibitor rows
+                and two constants.
+  engine ...    the shipped engine re-run on PUBLISHED golden inputs. Where a
+                golden carries the same quantity, the two are printed together
+                so a lesson can see the agreement or the divergence.
+  derived ...   a sweep, a refinement or a second route run by this generator
+                on PUBLISHED inputs, or an identity checked between two engine
+                returns. A sweep point is not a published case. Say so if you
+                print one.
+  teaching ...  a construct this wave invented: the line AKASO SPUR and every
+                fluid, pressure, hydrate boundary, water rate and dose that
+                goes with it. Not a published case, not a real line, and never
+                to be presented as either. No oracle has ever checked it.
+
+THE PUBLISHED CASES AT A GLANCE
+  the pipe         6.065 in bore, 6.625 in steel outside diameter at k 26,
+                   then 2.0 in of syntactic polypropylene foam to 8.625 in at
+                   k 0.09. Inside film 250, outside film 200. U referred to
+                   the 6.065 in bore. Published in three builds: bare, which
+                   is the steel layer alone; insulated, which adds the foam;
+                   and buried4ft, which adds a 4.0 ft trench to centreline in
+                   wet soil at k 1.2.
+  the burial limit one value, the ground resistance of a pipe LYING ON the
+                   bottom, H = D/2 on the 8.625 in coated diameter, published
+                   in SI as K m / W rather than in field units.
+  the fluid        180.0 degF in, 40.0 degF ambient, 120000.0 lb/hr, Cp 0.5,
+                   through the insulated build. Three relaxation lengths at
+                   60000.0 and 120000.0 lb/hr and Cp 0.5 and 0.6, and three
+                   arrivals at 5280.0, 26400.0 and 105600.0 ft. NO PRESSURES
+                   ARE SET ANYWHERE IN THE GOLDENS, so the Joule-Thomson term
+                   is zero in every published case.
+  the cooldown     one case. 150.0 degF start, 40.0 degF ambient, 70.0 degF
+                   target, contents at 55.0 lbm/ft3 and Cp 0.5, steel shell at
+                   490 lbm/ft3 and Cp 0.11, through the insulated build.
+  the inhibitors   24 rows. Four fluids, methanol, MEG, DEG and TEG, each at
+                   5.0, 10.0, 20.0, 30.0, 40.0 and 50.0 weight percent, each
+                   carrying a Hammerschmidt and a Nielsen-Bucklin depression.
+  the constants    the Hammerschmidt constant reached through the metric round
+                   trip, and the Nielsen-Bucklin constant reached the same way.
+
+THE TEACHING LINE
+  AKASO SPUR   a 60000.0 ft buried subsea gas line on a 9.562 in bore, designed
+             so that the number of transfer units is near enough to one that
+             the Joule-Thomson damping factor is visibly not one, so that the
+             hydrate verdict changes sign between the three ways of applying
+             the Joule-Thomson term, and so that pushing the same line to
+             three times its length drives the engine arrival below the
+             seabed. Every fluid property, pressure, hydrate temperature,
+             water rate and inhibitor lean strength on it is a TEACHING
+             number this wave chose. It is a TEACHING LINE.
+
+THE ONE THING NEITHER ENGINE COMPUTES
+  The hydrate boundary. Both module headers say so in as many words:
+  flowlineThermal says hydrate and wax boundaries "are fluid properties, they
+  come from a lab or a compositional flash, and the consumer supplies them",
+  and hydrateInhibition says it "does NOT compute where the hydrate boundary
+  is in the first place". Every hydrate temperature and every subcooling
+  printed anywhere in this file is therefore a TEACHING INPUT, never an engine
+  output, and every margin computed against one is conditional on it.
+
+# SECTION 1: THE PUBLISHED CONSTANTS, AND EVERY CATALOG VALUE THE ENGINES OFFER
+# The two published constants are inhibitor constants, reached by the oracle
+# through its metric round trip. The catalogs below are what the engine ships
+# as DEFAULTS: every layer still takes its own k as an input, and the film
+# coefficients are exposed precisely because they are the uncertain ones.
+# Associate m01 and m02 own this section.
+golden constant, Hammerschmidt K from the metric round trip = 2334.600000 degF weight percent basis
+golden constant, Nielsen-Bucklin constant from the metric round trip = 129.600000 degF
+engine constant, NIELSEN_BUCKLIN_CONSTANT_F = 129.600000 degF
+engine constant, WATER_MOLECULAR_WEIGHT = 18.015000
+engine constant, HAMMERSCHMIDT_RELIABLE_WT_PCT = 25.0 weight percent
+engine constant, MAX_PRACTICAL_WT_PCT = 70.0 weight percent
+engine constant, STEEL_DENSITY_LB_FT3 = 490.0 lbm/ft3
+
+# The Hammerschmidt constant the engine actually uses is carried PER INHIBITOR
+# rather than as one global, so a user with a different source can match it.
+# All four ship the same value.
+engine inhibitor, methanol: label = Methanol, molecular weight = 32.04, k = 2335.0, liquid density = 6.6000 lb/gal, Nielsen-Bucklin available = true
+engine inhibitor, meg: label = Monoethylene glycol (MEG), molecular weight = 62.07, k = 2335.0, liquid density = 9.3000 lb/gal, Nielsen-Bucklin available = false
+engine inhibitor, deg: label = Diethylene glycol (DEG), molecular weight = 106.12, k = 2335.0, liquid density = 9.3000 lb/gal, Nielsen-Bucklin available = false
+engine inhibitor, teg: label = Triethylene glycol (TEG), molecular weight = 150.17, k = 2335.0, liquid density = 9.4000 lb/gal, Nielsen-Bucklin available = false
+
+# Thermal conductivities, Btu/(hr ft degF). The whole range from steel to
+# aerogel is three and a half orders of magnitude, which is why an insulation
+# layer can carry most of a stack while a steel wall carries almost none.
+engine conductivity, steel (Carbon steel) = 26.0000 Btu/(hr ft degF), ratio to carbon steel = 1.00000000
+engine conductivity, concrete (Concrete weight coat) = 0.9000 Btu/(hr ft degF), ratio to carbon steel = 0.03461538
+engine conductivity, polypropylene (Solid polypropylene) = 0.1300 Btu/(hr ft degF), ratio to carbon steel = 0.00500000
+engine conductivity, syntacticPP (Syntactic polypropylene foam) = 0.0900 Btu/(hr ft degF), ratio to carbon steel = 0.00346154
+engine conductivity, polyurethane (Polyurethane foam) = 0.0700 Btu/(hr ft degF), ratio to carbon steel = 0.00269231
+engine conductivity, aerogel (Aerogel blanket) = 0.0120 Btu/(hr ft degF), ratio to carbon steel = 0.00046154
+engine conductivity, soilWet (Wet soil / seabed) = 1.2000 Btu/(hr ft degF), ratio to carbon steel = 0.04615385
+engine conductivity, soilDry (Dry soil) = 0.5000 Btu/(hr ft degF), ratio to carbon steel = 0.01923077
+engine conductivity, unknown id 'aerogelBlanket' = n/a
+# That n/a is a NaN and it is deliberate. The header says an earlier version
+# returned carbon steel for an unknown id, so a typo in an insulation id made a
+# line look two thousand times better insulated than it is. Note the ratio
+derived, carbon steel to aerogel conductivity ratio = 2166.666667 (the reciprocal of the aerogel row above)
+# above: aerogel to steel is 0.00046154, and the
+# reciprocal on the line before this one is what the mistake was worth on
+# one layer.
+
+# Outside film coefficients, Btu/(hr ft2 degF).
+engine outside film, seawaterCurrent (Seabed with current) = 200.0000 Btu/(hr ft2 degF)
+engine outside film, seawaterStill (Still water) = 50.0000 Btu/(hr ft2 degF)
+engine outside film, airWindy (Air, exposed and windy) = 6.0000 Btu/(hr ft2 degF)
+engine outside film, airStill (Air, sheltered) = 2.0000 Btu/(hr ft2 degF)
+# Bore-side film coefficients, Btu/(hr ft2 degF). Kept in their own catalog.
+engine inside film, liquidFlowing (Flowing liquid) = 300.0000 Btu/(hr ft2 degF)
+engine inside film, multiphaseFlowing (Flowing multiphase) = 200.0000 Btu/(hr ft2 degF)
+engine inside film, gasFlowing (Flowing gas) = 25.0000 Btu/(hr ft2 degF)
+engine inside film, stagnant (Shut in / stagnant) = 5.0000 Btu/(hr ft2 degF)
+engine film coefficient, unknown id 'seabedStill' = n/a
+derived, ratio of the flowing-liquid inside film to the shut-in stagnant one = 60.000000
+# The inside film is very nearly a short circuit WHILE THE LINE FLOWS. A shut-in
+# line has a stagnant bore, and then it matters, which is the header saying so.
+
+# SECTION 2: THE PUBLISHED PIPE IN THREE BUILDS, GOLDEN U AGAINST ENGINE U
+# THE SAME QUANTITY IS COMPUTED TWO WAYS HERE AND BOTH ARE PRINTED. The golden
+# U is the oracle stacking the same resistances in SI, watts and metres and
+# kelvin, and converting back at the end. The engine U is the shipped
+# JavaScript stacking them in field units and never leaving them. They agree to
+# the conversion factors, and the residual relative difference printed on each
+# row is the round trip, not a disagreement about physics. Associate m02 owns
+# this section.
+golden U, published pipe bare (steel wall only) = 105.9799308356 Btu/(hr ft2 degF)
+engine U, published pipe bare (steel wall only) = 105.9799311355 Btu/(hr ft2 degF)
+derived, relative difference golden against engine, bare = 2.829978e-9
+golden U, published pipe insulated (steel + 2.0 in foam) = 1.334879072040 Btu/(hr ft2 degF)
+engine U, published pipe insulated (steel + 2.0 in foam) = 1.334879113149 Btu/(hr ft2 degF)
+derived, relative difference golden against engine, insulated = 3.079607e-8
+golden U, published pipe buried 4.0 ft in wet soil = 0.713200015595 Btu/(hr ft2 degF)
+engine U, published pipe buried 4.0 ft in wet soil = 0.713200037662 Btu/(hr ft2 degF)
+derived, relative difference golden against engine, buried4ft = 3.094143e-8
+golden, total resistance of the insulated build, PUBLISHED IN SI = 0.272601445462 K m / W
+engine, total resistance of the insulated build, in field units = 0.471800753818 hr ft degF/Btu per foot of pipe
+# A per-length resistance in K m / W and one in hr ft degF/Btu per foot differ
+# by exactly the same factor that separates a conductivity in W/(m K) from one
+# in Btu/(hr ft degF), because a resistance is the reciprocal of a conductance
+# and the length cancels on both sides. The oracle carries that factor rounded
+# to eight figures. The exact value is the international Btu in joules over
+# 609.6, and both of those are printed on the next line.
+engine constant, the international Btu = 1055.05585262 J, over 609.6
+derived, the oracle SI-to-field factor as the oracle carries it = 1.7307346000 W/(m K) per Btu/(hr ft degF)
+derived, the same factor exactly = 1.7307346664 W/(m K) per Btu/(hr ft degF)
+derived, relative difference of those two factors = 3.834868e-8
+derived, golden SI resistance carried into field units with the oracle factor = 0.471800753671 hr ft degF/Btu per foot
+derived, golden SI resistance carried into field units with the exact factor = 0.471800771764 hr ft degF/Btu per foot
+derived, relative difference, engine total against the oracle-factor conversion = 3.121045e-10
+derived, relative difference, engine total against the exact-factor conversion = 3.803658e-8
+
+# What each build costs and buys, as ratios rather than as numbers.
+derived, U ratio bare to insulated on the published pipe = 79.39290539
+derived, U ratio insulated to buried4ft on the published pipe = 1.87167561
+derived, U ratio bare to buried4ft on the published pipe = 148.59776436
+# Two inches of foam is worth more than seventy times the bare U on this pipe.
+# Four feet of wet soil is worth less than a factor of two on top of it. The
+# stack adds, and once one term dominates the next one added has little left to
+# do.
+
+# SECTION 3: THE RESISTANCE STACK, EVERY LAYER, EVERY SHARE, ON FIVE BUILDS
+# A share is a PROPERTY OF A BUILD, not a number to memorise, so the same
+# stack is printed five times with one thing changed each time. Every
+# resistance is per foot of pipe, hr ft degF/Btu, and the shares on each build
+# sum to 100. The engine returns the shares itself, in the sharePct field of
+# each entry of the resistances array. Associate m02 and m03 own this section.
+#
+# Read the burial row as the ground term, the layer rows outward from the bore,
+# and the two film rows as the boundary layers on each face.
+engine build PUBLISHED BARE (steel wall only, no burial): overall U = 105.9799311355 Btu/(hr ft2 degF), referred to 6.065 in, total resistance = 0.0059426060 hr ft degF/Btu per foot, 3 terms
+engine build PUBLISHED BARE (steel wall only, no burial), term insideFilm: resistance = 0.0025191879 hr ft degF/Btu per foot, share = 42.39197245 percent
+engine build PUBLISHED BARE (steel wall only, no burial), term layer0 (carbon steel wall): resistance = 0.0005406116 hr ft degF/Btu per foot, share = 9.09721378 percent
+engine build PUBLISHED BARE (steel wall only, no burial), term outsideFilm: resistance = 0.0028828065 hr ft degF/Btu per foot, share = 48.51081376 percent
+derived build PUBLISHED BARE (steel wall only, no burial): shares sum to 100.00000000 percent
+
+engine build PUBLISHED INSULATED (steel + 2.0 in syntactic foam, no burial): overall U = 1.3348791131 Btu/(hr ft2 degF), referred to 6.065 in, total resistance = 0.4718007538 hr ft degF/Btu per foot, 4 terms
+engine build PUBLISHED INSULATED (steel + 2.0 in syntactic foam, no burial), term insideFilm: resistance = 0.0025191879 hr ft degF/Btu per foot, share = 0.53395165 percent
+engine build PUBLISHED INSULATED (steel + 2.0 in syntactic foam, no burial), term layer0 (carbon steel wall): resistance = 0.0005406116 hr ft degF/Btu per foot, share = 0.11458472 percent
+engine build PUBLISHED INSULATED (steel + 2.0 in syntactic foam, no burial), term layer1 (syntactic PP foam): resistance = 0.4665266247 hr ft degF/Btu per foot, share = 98.88212788 percent
+engine build PUBLISHED INSULATED (steel + 2.0 in syntactic foam, no burial), term outsideFilm: resistance = 0.0022143296 hr ft degF/Btu per foot, share = 0.46933576 percent
+derived build PUBLISHED INSULATED (steel + 2.0 in syntactic foam, no burial): shares sum to 100.00000000 percent
+
+engine build PUBLISHED BURIED4FT (steel + foam + 4.0 ft trench, wet soil k 1.2): overall U = 0.7132000377 Btu/(hr ft2 degF), referred to 6.065 in, total resistance = 0.8830579621 hr ft degF/Btu per foot, 5 terms
+engine build PUBLISHED BURIED4FT (steel + foam + 4.0 ft trench, wet soil k 1.2), term insideFilm: resistance = 0.0025191879 hr ft degF/Btu per foot, share = 0.28528002 percent
+engine build PUBLISHED BURIED4FT (steel + foam + 4.0 ft trench, wet soil k 1.2), term layer0 (carbon steel wall): resistance = 0.0005406116 hr ft degF/Btu per foot, share = 0.06122039 percent
+engine build PUBLISHED BURIED4FT (steel + foam + 4.0 ft trench, wet soil k 1.2), term layer1 (syntactic PP foam): resistance = 0.4665266247 hr ft degF/Btu per foot, share = 52.83080440 percent
+engine build PUBLISHED BURIED4FT (steel + foam + 4.0 ft trench, wet soil k 1.2), term burial: resistance = 0.4112572083 hr ft degF/Btu per foot, share = 46.57193819 percent
+engine build PUBLISHED BURIED4FT (steel + foam + 4.0 ft trench, wet soil k 1.2), term outsideFilm: resistance = 0.0022143296 hr ft degF/Btu per foot, share = 0.25075700 percent
+derived build PUBLISHED BURIED4FT (steel + foam + 4.0 ft trench, wet soil k 1.2): shares sum to 100.00000000 percent
+
+derived build PUBLISHED PIPE, INSULATED, STILL WATER OUTSIDE (outside film 50): overall U = 1.3163448815 Btu/(hr ft2 degF), referred to 6.065 in, total resistance = 0.4784437427 hr ft degF/Btu per foot, 4 terms
+derived build PUBLISHED PIPE, INSULATED, STILL WATER OUTSIDE (outside film 50), term insideFilm: resistance = 0.0025191879 hr ft degF/Btu per foot, share = 0.52653795 percent
+derived build PUBLISHED PIPE, INSULATED, STILL WATER OUTSIDE (outside film 50), term layer0 (carbon steel wall): resistance = 0.0005406116 hr ft degF/Btu per foot, share = 0.11299376 percent
+derived build PUBLISHED PIPE, INSULATED, STILL WATER OUTSIDE (outside film 50), term layer1 (syntactic PP foam): resistance = 0.4665266247 hr ft degF/Btu per foot, share = 97.50919137 percent
+derived build PUBLISHED PIPE, INSULATED, STILL WATER OUTSIDE (outside film 50), term outsideFilm: resistance = 0.0088573186 hr ft degF/Btu per foot, share = 1.85127692 percent
+derived build PUBLISHED PIPE, INSULATED, STILL WATER OUTSIDE (outside film 50): shares sum to 100.00000000 percent
+
+derived build PUBLISHED PIPE, INSULATED, SHUT IN AND STAGNANT INSIDE (inside film 5): overall U = 1.0580538200 Btu/(hr ft2 degF), referred to 6.065 in, total resistance = 0.5952409603 hr ft degF/Btu per foot, 4 terms
+derived build PUBLISHED PIPE, INSULATED, SHUT IN AND STAGNANT INSIDE (inside film 5), term insideFilm: resistance = 0.1259593944 hr ft degF/Btu per foot, share = 21.16107640 percent
+derived build PUBLISHED PIPE, INSULATED, SHUT IN AND STAGNANT INSIDE (inside film 5), term layer0 (carbon steel wall): resistance = 0.0005406116 hr ft degF/Btu per foot, share = 0.09082231 percent
+derived build PUBLISHED PIPE, INSULATED, SHUT IN AND STAGNANT INSIDE (inside film 5), term layer1 (syntactic PP foam): resistance = 0.4665266247 hr ft degF/Btu per foot, share = 78.37609570 percent
+derived build PUBLISHED PIPE, INSULATED, SHUT IN AND STAGNANT INSIDE (inside film 5), term outsideFilm: resistance = 0.0022143296 hr ft degF/Btu per foot, share = 0.37200559 percent
+derived build PUBLISHED PIPE, INSULATED, SHUT IN AND STAGNANT INSIDE (inside film 5): shares sum to 100.00000000 percent
+
+# The same foam layer, the same 2.0 in of syntactic polypropylene, across the
+# five builds above. Its RESISTANCE never changes. Its SHARE does, and it is
+# the share that tells a lesson what to look at.
+derived, foam layer on build PUBLISHED INSULATED: resistance = 0.4665266247 hr ft degF/Btu per foot, share = 98.88212788 percent
+derived, foam layer on build PUBLISHED BURIED4FT: resistance = 0.4665266247 hr ft degF/Btu per foot, share = 52.83080440 percent
+derived, foam layer on build STILL WATER OUTSIDE: resistance = 0.4665266247 hr ft degF/Btu per foot, share = 97.50919137 percent
+derived, foam layer on build SHUT IN AND STAGNANT: resistance = 0.4665266247 hr ft degF/Btu per foot, share = 78.37609570 percent
+derived, spread of the foam share across those four builds = 46.05132348 percentage points
+# And the steel wall, for contrast. It is the strongest material in the stack
+# and it carries almost nothing, because a resistance is ln(Do/Di) over k and
+# the steel has both the thinnest log and the largest k.
+derived, steel wall on build PUBLISHED BARE: resistance = 0.000540611570 hr ft degF/Btu per foot, share = 9.09721378 percent
+derived, steel wall on build PUBLISHED INSULATED: resistance = 0.000540611570 hr ft degF/Btu per foot, share = 0.11458472 percent
+derived, steel wall on build PUBLISHED BURIED4FT: resistance = 0.000540611570 hr ft degF/Btu per foot, share = 0.06122039 percent
+derived, the steel wall log term, ln(6.625 / 6.065) = 0.0883158295
+derived, the foam log term, ln(8.625 / 6.625) = 0.2638145910
+derived, ratio of those two log terms = 2.98717220
+derived, ratio of the two conductivities, steel over foam = 288.88888889
+derived, product of those two ratios, which is the foam resistance over the steel resistance = 862.960859
+derived, the same ratio taken straight from the two engine resistances = 862.960859
+
+# SECTION 4: WHAT THICKER FOAM BUYS, AND WHERE IT STOPS BUYING IT
+# A sweep on PUBLISHED inputs: the published pipe, the published films, the
+# published foam conductivity, with only the foam outside diameter moved. The
+# published build is the 8.625 in row and it is marked. Every other row is a
+# DERIVED SWEEP POINT and is not a published case. Associate m03 owns this.
+# The last two columns are a contiguous slice: each row against the one above
+# it, so a marginal return reads as a sequence.
+derived sweep point, foam outside diameter 6.625 in (wall 0.0000 in): U = 105.9799311355 Btu/(hr ft2 degF), total resistance = 0.0059426060, foam resistance = none, foam share = 0.000000 percent, U ratio to the previous row = n/a
+derived sweep point, foam outside diameter 7.125 in (wall 0.2500 in): U = 4.6857421371 Btu/(hr ft2 degF), total resistance = 0.1344070914, foam resistance = 0.1286667877, foam share = 95.729166 percent, U ratio to the previous row = 22.61753379
+derived sweep point, foam outside diameter 7.625 in (wall 0.5000 in): U = 2.4778766919 Btu/(hr ft2 degF), total resistance = 0.2541680036, foam resistance = 0.2486034706, foam share = 97.810687 percent, U ratio to the previous row = 1.89103120
+derived sweep point, foam outside diameter 8.125 in (wall 0.7500 in): U = 1.7192055844 Btu/(hr ft2 degF), total resistance = 0.3663302269, foam resistance = 0.3609198314, foam share = 98.523082 percent, U ratio to the previous row = 1.44129167
+engine PUBLISHED BUILD, foam outside diameter 8.625 in (wall 1.0000 in): U = 1.3348791131 Btu/(hr ft2 degF), total resistance = 0.4718007538, foam resistance = 0.4665266247, foam share = 98.882128 percent, U ratio to the previous row = 1.28791107
+derived sweep point, foam outside diameter 9.625 in (wall 1.5000 in): U = 0.9462648797 Btu/(hr ft2 degF), total resistance = 0.6655609706, foam resistance = 0.6605169018, foam share = 99.242133 percent, U ratio to the previous row = 1.41068230
+derived sweep point, foam outside diameter 10.625 in (wall 2.0000 in): U = 0.7496047834 Btu/(hr ft2 degF), total resistance = 0.8401720290, foam resistance = 0.8353147149, foam share = 99.421867 percent, U ratio to the previous row = 1.26235171
+derived sweep point, foam outside diameter 12.625 in (wall 3.0000 in): U = 0.5500987291 Btu/(hr ft2 degF), total resistance = 1.1448798889, foam resistance = 1.1403073296, foam share = 99.600608 percent, U ratio to the previous row = 1.36267318
+derived sweep point, foam outside diameter 16.625 in (wall 5.0000 in): U = 0.3860878878 Btu/(hr ft2 degF), total resistance = 1.6312269608, foam resistance = 1.6270183738, foam share = 99.741999 percent, U ratio to the previous row = 1.42480183
+# The FIRST quarter inch of foam wall, the step from the bare 6.625 in to
+# 7.125 in, divides U by more than twenty two. The step from 12.625 in to
+# 16.625 in, which is two more inches of wall, eight times the WALL THICKNESS
+# of that first step and about seventeen times the MATERIAL, since the material
+# is an annulus and grows as the difference of two squares, divides it by less
+# than one and a half. The reason is in the log: a layer
+# resistance goes as ln(Do/Di), so equal THICKNESS added far out is less log
+# than the same thickness added close in.
+derived, ln(7.125 / 6.625), the first quarter inch of foam wall = 0.0727593543
+derived, ln(16.625 / 16.125), a quarter inch of wall added at the outside = 0.0305367239
+derived, ratio of those two log terms = 2.38268370
+
+# The same sweep in the other material. Aerogel at k 0.012 against syntactic
+# foam at k 0.09, both on the PUBLISHED pipe and the PUBLISHED foam outside
+# diameter. DERIVED SWEEP POINTS, not published cases.
+derived sweep point, 2.0 in of syntactic PP foam at k 0.0900: U = 1.3348791131 Btu/(hr ft2 degF), layer resistance = 0.4665266247, layer share = 98.882128 percent
+derived sweep point, 2.0 in of polyurethane foam at k 0.0700: U = 1.0408248861 Btu/(hr ft2 degF), layer resistance = 0.5998199461, layer share = 99.128379 percent
+derived sweep point, 2.0 in of solid polypropylene at k 0.1300: U = 1.9186263682 Btu/(hr ft2 degF), layer resistance = 0.3229799710, layer share = 98.393279 percent
+derived sweep point, 2.0 in of aerogel blanket at k 0.0120: U = 0.1797250990 Btu/(hr ft2 degF), layer resistance = 3.4989496854, layer share = 99.849492 percent
+derived sweep point, 2.0 in of concrete weight coat at k 0.9000: U = 12.1285554677 Btu/(hr ft2 degF), layer resistance = 0.0466526625, layer share = 89.843145 percent
+# The layer resistance is exactly inverse in k, so a lesson can read the whole
+# table off one row and a division. What is NOT inverse in k is the U, because
+# the films and the steel do not move.
+derived, ratio of the aerogel layer resistance to the syntactic foam one = 7.50000000
+derived, ratio of the two U values from those same two builds = 7.42733831
+
+# SECTION 5: THE BURIAL TERM, ITS DEPTH SWEEP, ITS SOIL SWEEP, AND ITS FLOOR
+# THE H = D/2 LIMIT IS COMPUTED TWO WAYS HERE AND THE TWO ARE IN DIFFERENT
+# UNITS ON PURPOSE. The golden publishes it in SI, K m / W, because the whole
+# oracle is SI; the engine returns it in hr ft degF/Btu per foot. Both are
+# floating point residue of an exact zero, and the two residues are different
+# sizes because the two arithmetics reach acosh(1) by different routes. Do not
+# read them as a disagreement and do not convert one into the other.
+# Associate m04 owns this section.
+golden, ground resistance of a pipe LYING ON the bottom, H = D/2 on 8.625 in, wet soil = 1.6148921380e-9 K m / W
+engine, the same case, burialResistance({ odIn: 8.625, burialFt: 8.625/24, kSoil: 1.2 }) = 0.000000000000 hr ft degF/Btu per foot
+derived, the exact answer both are approximating, acosh(1) / (2 pi k) = 0.000000000000
+# A pipe lying on the seabed adds no ground resistance at all, and that is the
+# right answer rather than a limitation. It is also the check that the shape
+# factor is the right one, because acosh(2H/D) has to vanish there.
+
+# Depth sweep on the PUBLISHED coated diameter of 8.625 in in the PUBLISHED wet
+# soil at k 1.2. The 4.0 ft row is the published build and is marked. Every
+# other row is a DERIVED SWEEP POINT.
+derived sweep point, burial to centreline 0.359375 ft: 2H/D = 1.00000000, acosh(2H/D) = 0.0000000000, ground resistance = 0.0000000000 hr ft degF/Btu per foot, U of the full buried build = 1.3348791131, ground share = 0.000000 percent
+derived sweep point, burial to centreline 0.400000 ft: 2H/D = 1.11304348, acosh(2H/D) = 0.4711170417, ground resistance = 0.0624838383 hr ft degF/Btu per foot, U of the full buried build = 1.1787668616, ground share = 11.694861 percent
+derived sweep point, burial to centreline 0.500000 ft: 2H/D = 1.39130435, acosh(2H/D) = 0.8580828860, ground resistance = 0.1138067774 hr ft degF/Btu per foot, U of the full buried build = 1.0754591399, ground share = 19.433968 percent
+derived sweep point, burial to centreline 1.000000 ft: 2H/D = 2.78260870, acosh(2H/D) = 1.6825620278, ground resistance = 0.2231567198 hr ft degF/Btu per foot, U of the full buried build = 0.9062381451, ground share = 32.110845 percent
+derived sweep point, burial to centreline 2.000000 ft: 2H/D = 5.56521739, acosh(2H/D) = 2.4015118047, ground resistance = 0.3185103955 hr ft degF/Btu per foot, U of the full buried build = 0.7968974908, ground share = 40.301898 percent
+derived sweep point, burial to centreline 3.000000 ft: 2H/D = 8.34782609, acosh(2H/D) = 2.8115413651, ground resistance = 0.3728922550 hr ft degF/Btu per foot, U of the full buried build = 0.7455927364, ground share = 44.145299 percent
+engine PUBLISHED DEPTH, burial to centreline 4.000000 ft: 2H/D = 11.13043478, acosh(2H/D) = 3.1008062984, ground resistance = 0.4112572083 hr ft degF/Btu per foot, U of the full buried build = 0.7132000377, ground share = 46.571938 percent
+derived sweep point, burial to centreline 6.000000 ft: 2H/D = 16.69565217, acosh(2H/D) = 3.5073974305, ground resistance = 0.4651830320 hr ft degF/Btu per foot, U of the full buried build = 0.6721535435, ground share = 49.646860 percent
+derived sweep point, burial to centreline 10.000000 ft: 2H/D = 27.82608696, acosh(2H/D) = 4.0187981085, ground resistance = 0.5330096535 hr ft degF/Btu per foot, U of the full buried build = 0.6267818956, ground share = 53.045793 percent
+derived sweep point, burial to centreline 20.000000 ft: 2H/D = 55.65217391, acosh(2H/D) = 4.7121875928, ground resistance = 0.6249732901 hr ft degF/Btu per foot, U of the full buried build = 0.5742267291, ground share = 56.982867 percent
+# Doubling the depth does NOT double the ground term, because acosh grows like
+# a logarithm once 2H/D is past about two. Depth is cheap insulation at first
+# and then it is nothing.
+derived, acosh(2H/D) at 2.0 ft over acosh at 1.0 ft = 1.42729466
+derived, acosh(2H/D) at 20.0 ft over acosh at 10.0 ft = 1.17253653
+
+# Soil sweep at the PUBLISHED 4.0 ft depth on the PUBLISHED coated diameter.
+# The k 1.2 row is the published soil and is marked. The ground term is exactly
+# inverse in k, the same as any other conduction layer.
+engine PUBLISHED SOIL, soil k 1.2000 Btu/(hr ft degF) (wet soil / seabed): ground resistance = 0.4112572083 hr ft degF/Btu per foot, U of the full buried build = 0.7132000377, ground share = 46.571938 percent
+derived sweep point, soil k 0.5000 Btu/(hr ft degF) (dry soil): ground resistance = 0.9870172999 hr ft degF/Btu per foot, U of the full buried build = 0.4317172866, ground share = 67.658698 percent
+derived sweep point, soil k 0.9000 Btu/(hr ft degF) (concrete-like backfill): ground resistance = 0.5483429444 hr ft degF/Btu per foot, U of the full buried build = 0.6173610374, ground share = 53.751540 percent
+derived sweep point, soil k 2.0000 Btu/(hr ft degF) (a wetter, denser seabed): ground resistance = 0.2467543250 hr ft degF/Btu per foot, U of the full buried build = 0.8764769611, ground share = 34.340349 percent
+
+# WHAT THE BURIAL TERM ASSUMES, and it is stated in the engine header. It is
+# the classical conduction shape factor for an ISOTHERMAL cylinder in a
+# SEMI-INFINITE medium, out of the method of images. That means one uniform
+# soil conductivity everywhere, a flat surface at ambient, no groundwater
+# movement, no seasonal front, and a burial measured to the CENTRELINE and not
+# to the top of pipe. None of those is checked by anything in the module.
+derived, burial to the TOP of the coated pipe rather than the centreline, 4.0 ft read as 4.0 + D/2 = 4.359375 ft: ground resistance = 0.4227104126 hr ft degF/Btu per foot
+derived, the same quantity read to the centreline at 4.0 ft = 0.4112572083 hr ft degF/Btu per foot
+derived, relative difference of those two readings of the same trench = 2.784925 percent
+
+# SECTION 6: THE GROUND TERM THAT IS CAUGHT AND DROPPED RATHER THAN REFUSED
+# burialResistance returns NaN when the burial is shallower than half the
+# coated diameter, because 2H/D is then below 1 and acosh has no real value
+# there. overallU guards that NaN with Number.isFinite BEFORE pushing the term,
+# so the term never reaches the refusal three lines later that would have
+# caught it. A buried line comes back as an EXPOSED line, with ok true and no
+# note. Everything in this section is run on the PUBLISHED pipe, the PUBLISHED
+# films and the PUBLISHED wet soil, with only the trench depth moved.
+# Expert m02 owns this section.
+derived, half the published coated diameter, D/2 on 8.625 in = 0.35937500 ft. Below this the term is NaN.
+engine, burialResistance at 3.00 ft on the published coated diameter = 0.3728922550 (2H/D = 8.34782609)
+engine, burialResistance at 0.30 ft on the published coated diameter = n/a (2H/D = 0.83478261)
+derived, trench entered as 3.0 ft: ok = true, terms returned = 5, a burial term is present = true, U = 0.7455927364 Btu/(hr ft2 degF)
+derived, the SAME trench entered as 0.3 ft: ok = true, terms returned = 4, a burial term is present = false, U = 1.3348791131 Btu/(hr ft2 degF)
+derived, error in U from the dropped ground term = 79.035960 percent, and it is returned with ok true and no note
+derived, ground share of the correct 3.0 ft stack, which is what was silently removed = 44.145299 percent
+derived, U of the SWALLOWED result against the engine's own no-burial build = 1.3348791131 against 1.3348791131, identical to 0.0000e+0 relative
+# That last line is the whole finding: the buried answer and the exposed answer
+# are the same number. Nothing in the return says a trench was asked for.
+
+# The same module refuses a bad LAYER properly. Two failures, one input class,
+# opposite treatment.
+engine, a layer with an unresolvable conductivity: ok = false, error = A layer could not be resolved: every layer needs an inside diameter, a larger outside diameter and a positive conductivity.
+engine, a layer whose outside diameter is smaller than its inside: ok = false, error = A layer could not be resolved: every layer needs an inside diameter, a larger outside diameter and a positive conductivity.
+engine, no layers at all: ok = false, error = A pipe needs at least one layer: its own wall.
+engine, a bad TRENCH on the same pipe: ok = true, error = none, the call succeeded
+# The conductivity helper header states the discipline the trench branch does
+# not follow: "A NaN propagates into a refusal; a plausible wrong number does
+# not." Here the NaN is caught and swallowed, and what comes back is a
+# plausible wrong number.
+
+# SECTION 7: WHAT A U IS REFERRED TO, ON ONE PHYSICAL LINE, TWO WAYS
+# THE SAME PHYSICAL LINE IS EXPRESSED TWICE HERE AND THE TWO NUMBERS ARE
+# DIFFERENT BY DESIGN. Nothing about the pipe changes between the two rows
+# below: the same layers, the same films, the same trench, the same total
+# resistance to the last figure. Only referenceIdIn moves, from the 6.065 in
+# bore to the 8.625 in coated outside diameter. U is a resistance divided by an
+# AREA, so naming a different area gives a different U for identical physics.
+# The engine reports which one it used, in referenceIdIn. Associate m02 owns
+# this section and Expert m05 prices it.
+engine, published buried build referred to the 6.065 in BORE: U = 0.713200037662 Btu/(hr ft2 degF), referenceIdIn = 6.065 in, total resistance = 0.883057962117
+engine, the SAME build referred to the 8.625 in COATED OUTSIDE DIAMETER: U = 0.501513997498 Btu/(hr ft2 degF), referenceIdIn = 8.625 in, total resistance = 0.883057962117
+derived, the two total resistances are identical to 0.0000e+0 relative. The physics did not move.
+derived, ratio of the two U values = 1.4220939819
+derived, ratio of the two reference diameters, 8.625 / 6.065 = 1.4220939819
+derived, difference between those two ratios = 4.4409e-16
+# THE INVARIANT. U times its reference diameter is the same number whichever
+# reference is chosen, because that product is the conductance per foot of
+# pipe and a conductance per foot does not care what area you name.
+derived, U times reference diameter, bore reference = 0.360463185702 Btu/(hr ft degF) per foot of pipe
+derived, U times reference diameter, coated outside diameter reference = 0.360463185702 Btu/(hr ft degF) per foot of pipe
+derived, U times reference diameter is the SAME on either reference, and pi times it is one over the total resistance = 0.360463185702 Btu/(hr ft degF) per foot of pipe
+
+# The same on the insulated build, so that the invariant reads as a rule.
+engine, published insulated build referred to the bore: U = 1.334879113149, referenceIdIn = 6.065 in
+engine, published insulated build referred to the coated outside diameter: U = 0.938671515507, referenceIdIn = 8.625 in
+derived, ratio of those two = 1.4220939819, against the diameter ratio 1.4220939819
+
+# THE OMISSION. relaxationLengthFt, steadyStateProfile and cooldownTime each
+# take a bare idIn. None of the three takes the overallU result, and none of
+# them can see referenceIdIn. The field is reported and no consumer in the
+# module accepts it, so keeping the pair together is the caller job and nothing
+# complains when the caller does not.
+
+# SECTION 8: WHAT A CONSUMER DOES WHEN IT TAKES THE OTHER REFERENCE
+# Same published fluid, 180.0 degF in, 40.0 degF ambient, 120000.0 lb/hr, Cp
+# 0.5, on the published buried build. Three rows: the pair kept together at the
+# bore, the pair kept together at the coated outside diameter, and the
+# OD-referred U handed to the consumer with the BORE diameter, which is
+# dimensionally consistent and raises no complaint anywhere. Expert m05 owns
+# this section.
+derived, bore-referred U with the bore diameter, CORRECT: U = 0.7132000377, diameter handed to the consumer = 6.065 in, relaxation length = 52983.477727 ft, ntu over 26400.0 ft = 0.4982685383, arrival = 125.06144556 degF
+derived, OD-referred U with the coated outside diameter, ALSO CORRECT: U = 0.5015139975, diameter handed to the consumer = 8.625 in, relaxation length = 52983.477727 ft, ntu over 26400.0 ft = 0.4982685383, arrival = 125.06144556 degF
+derived, OD-referred U with the BORE diameter, MIXED: U = 0.5015139975, diameter handed to the consumer = 6.065 in, relaxation length = 75347.484814 ft, ntu over 26400.0 ft = 0.3503766591, arrival = 138.61917975 degF
+derived, the two correct routes agree on relaxation length to 2.7465e-16 relative and on arrival to 1.4211e-14 degF
+derived, the mixed route is wrong on arrival by 13.55773419 degF at 26400.0 ft
+derived, the mixed route is wrong on relaxation length by 42.209398 percent
+derived, that percentage against the diameter ratio 8.625 / 6.065 = 42.209398 percent. It is exactly the reference ratio and nothing else.
+
+# The error is an error in ntu, and ntu sits in an exponent, so its size in degF
+# depends on where the line already is on its own exponential. On the three
+# PUBLISHED lengths it runs from a few degF to more than fifteen:
+derived, at 5280.0 ft on the buried build: correct arrival = 166.72111348 degF, mixed-reference arrival = 170.52530171 degF, error = 3.80418823 degF, correct ntu = 0.09965371, mixed ntu = 0.07007533
+derived, at 26400.0 ft on the buried build: correct arrival = 125.06144556 degF, mixed-reference arrival = 138.61917975 degF, error = 13.55773419 degF, correct ntu = 0.49826854, mixed ntu = 0.35037666
+derived, at 105600.0 ft on the buried build: correct arrival = 59.07861872 degF, mixed-reference arrival = 74.47159964 degF, error = 15.39298092 degF, correct ntu = 1.99307415, mixed ntu = 1.40150664
+
+# SECTION 9: BOTH MASSES, AND THE LAYERS THAT CARRY NONE
+# The module has exactly two mass helpers. pipeMassLbPerFt takes an annulus and
+# a density and returns lbm per foot; contentsMassLbPerFt takes a bore and a
+# fluid density and does the same. Both are geometry and nothing else. The
+# published cooldown case supplies the two densities used here: 490 lbm/ft3 for
+# steel, which is the engine default, and 55.0 lbm/ft3 for the contents.
+# Associate m05 owns this section.
+engine, published pipe steel mass, 6.065 in to 6.625 in at 490.0 lbm/ft3 = 18.9921056882 lbm/ft
+engine, published contents mass, 6.065 in bore at 55.0 lbm/ft3 = 11.0344753586 lbm/ft
+derived, steel cross sectional area, (pi/4)(Do2 - Di2) = 0.0387593994 ft2
+derived, bore cross sectional area, (pi/4)Di2 = 0.2006268247 ft2
+derived, ratio of the steel mass to the contents mass on this pipe = 1.72116073
+# The cooldown header says leaving the pipe heat capacity out is "a common and
+# optimistic error: on an insulated small-bore line the steel can hold as much
+# heat as the oil in it". On this pipe it holds more mass than the contents do,
+# and once the two specific heats are applied the balance changes again.
+derived, contents heat capacity per foot at Cp 0.50 = 5.5172376793 Btu/(ft degF)
+derived, steel heat capacity per foot at Cp 0.11 = 2.0891316257 Btu/(ft degF)
+derived, total M Cp of the published cooldown case = 7.6063693050 Btu/(ft degF)
+derived, contents share of that M Cp = 72.534444 percent
+
+# THE LAYERS THAT CARRY NONE. overallU takes an UNBOUNDED layer list.
+# cooldownTime has exactly two mass slots, contents and shell. There is no slot
+# for a coating, no helper that lumps one, and no warning anywhere when the
+# layer list is longer than two. On the published insulated build the foam
+# carries almost the whole resistance and, as the API reads, none of the mass.
+derived, foam share of the published insulated resistance = 98.882128 percent
+derived, foam share of the published buried resistance = 52.830804 percent
+derived, layers overallU accepted on the published insulated build = 2, mass slots cooldownTime offers = 2, of which the foam fits into = 0
+teaching, syntactic polypropylene foam density taken as 44.0 lbm/ft3 and Cp 0.28 Btu/(lb degF). THESE ARE TEACHING NUMBERS. No golden publishes them and the engine has no catalog of them.
+teaching, published pipe foam mass, 6.625 in to 8.625 in at 44.0 lbm/ft3 = 7.3194745506 lbm/ft
+teaching, foam heat capacity per foot at Cp 0.28 = 2.0494528742 Btu/(ft degF)
+teaching, that as a fraction of the published cooldown M Cp = 26.943904 percent of it, and none of it is in the published cooldown at all
+
+# The two mass helpers refuse what they cannot compute, and they do refuse.
+engine, pipeMassLbPerFt with an outside diameter no larger than the inside = n/a
+engine, contentsMassLbPerFt with a zero density = n/a
+engine, contentsMassLbPerFt with a zero bore = n/a
+# Those are NaN, and what cooldownTime does with a NaN mass is the SAME SHAPE
+# as what overallU does with a NaN trench. cooldownTime reads its masses as
+# (contents?.massLbPerFt || 0), and NaN is falsy in JavaScript, so a NaN mass
+# becomes a zero mass. If BOTH slots are NaN the total M Cp is zero and the
+# call is refused. If only ONE is, the term is silently dropped and the answer
+# comes back with ok true.
+derived, published cooldown with both masses good: ok = true, no-touch time = 4.6627248553 hr, time constant = 3.5886907719 hr
+derived, the same call with BOTH masses NaN: ok = false, error = Cooldown needs a heat capacity for what is cooling and a heat transfer coefficient.
+derived, the same call with ONLY the contents mass NaN: ok = true, no-touch time = 1.2806433091 hr, time constant = 0.9856538758 hr, note = none
+derived, that dropped-mass no-touch time against the correct one = -72.534444 percent, returned with ok true and no note
+
+# SECTION 10: THE PUBLISHED RELAXATION LENGTHS, GOLDEN AGAINST ENGINE
+# Lc = m Cp / (U pi D), the distance over which the fluid gives up 63 percent
+# of its excess temperature over ambient. Three published cases, all on the
+# published insulated U and the 6.065 in bore, with the mass rate doubled
+# between the first two and the heat capacity raised between the last two.
+# THE SAME QUANTITY IS COMPUTED TWO WAYS: the golden is the oracle in SI, the
+# engine is the shipped function in field units. Professional m01 owns this.
+golden relaxation case 1: mass rate = 60000.0 lb/hr, Cp = 0.50 Btu/(lb degF), U = 1.334879072040 Btu/(hr ft2 degF), bore = 6.065 in, relaxation length = 14154.02315291 ft
+engine relaxation case 1: same inputs, relaxation length = 14154.02305043 ft, relative difference to the golden = 7.240504e-9
+golden relaxation case 2: mass rate = 120000.0 lb/hr, Cp = 0.50 Btu/(lb degF), U = 1.334879072040 Btu/(hr ft2 degF), bore = 6.065 in, relaxation length = 28308.04630582 ft
+engine relaxation case 2: same inputs, relaxation length = 28308.04610085 ft, relative difference to the golden = 7.240504e-9
+golden relaxation case 3: mass rate = 120000.0 lb/hr, Cp = 0.60 Btu/(lb degF), U = 1.334879072040 Btu/(hr ft2 degF), bore = 6.065 in, relaxation length = 33969.65556698 ft
+engine relaxation case 3: same inputs, relaxation length = 33969.65532102 ft, relative difference to the golden = 7.240504e-9
+derived, relaxation length is exactly linear in mass rate: case 2 over case 1 = 2.0000000000, against the mass rate ratio 2.0000000000
+derived, and exactly linear in heat capacity: case 3 over case 2 = 1.2000000000, against the Cp ratio 1.2000000000
+# It is also exactly inverse in U and in the bore diameter, which is why the
+# mixed-reference error carries straight through it.
+derived, relaxation length at 120000.0 lb/hr and Cp 0.5 on the published bare build: U = 105.9799311355, Lc = 356.55635841 ft
+derived, relaxation length at 120000.0 lb/hr and Cp 0.5 on the published insulated build: U = 1.3348791131, Lc = 28308.04522908 ft
+derived, relaxation length at 120000.0 lb/hr and Cp 0.5 on the published buried4ft build: U = 0.7132000377, Lc = 52983.47772700 ft
+# The relaxation length REFUSES rather than guessing. It is a bare NaN and not
+# an object, so a caller who does not check gets a NaN everywhere downstream.
+engine, relaxationLengthFt with a zero U = n/a
+engine, relaxationLengthFt with a zero mass rate = n/a
+engine, relaxationLengthFt with a zero heat capacity = n/a
+
+# SECTION 11: THE PUBLISHED ARRIVAL TEMPERATURES AND THEIR NTU
+# One fluid, 180.0 degF in against a 40.0 degF ambient at 120000.0 lb/hr and
+# Cp 0.5 through the published insulated build, at one mile, five miles and
+# twenty miles. NO PRESSURES ARE SET IN ANY PUBLISHED CASE, so the Joule-Thomson
+# term is exactly zero in every row here. Professional m01 owns this section.
+golden, the relaxation length these three share = 28308.04630582 ft
+engine, the same relaxation length = 28308.04610085 ft
+golden profile point 1: length = 5280.0 ft, ntu = 0.186519406637, arrival = 156.177944028181 degF
+engine profile point 1: length = 5280.0 ft, ntu = 0.186519407987, arrival = 156.177943871283 degF, relative difference in arrival = 1.004609e-9
+derived profile point 1: exp(-ntu) = 0.829842457344, excess over ambient retained = 82.98424573 percent, excess lost = 17.01575427 percent
+golden profile point 2: length = 26400.0 ft, ntu = 0.932597033183, arrival = 95.094251896906 degF
+engine profile point 2: length = 26400.0 ft, ntu = 0.932597039935, arrival = 95.094251524883 degF, relative difference in arrival = 3.912144e-9
+derived profile point 2: exp(-ntu) = 0.393530370692, excess over ambient retained = 39.35303707 percent, excess lost = 60.64696293 percent
+golden profile point 3: length = 105600.0 ft, ntu = 3.730388132730, arrival = 43.357693533435 degF
+engine profile point 3: length = 105600.0 ft, ntu = 3.730388159740, arrival = 43.357693442744 degF, relative difference in arrival = 2.091692e-9
+derived profile point 3: exp(-ntu) = 0.023983525239, excess over ambient retained = 2.39835252 percent, excess lost = 97.60164748 percent
+# NTU IS THE WHOLE STORY. It is the length measured in relaxation lengths, and
+# the arrival depends on nothing else once the inlet and the ambient are fixed.
+derived, at ntu = 1 exactly the retained excess is exp(-1) = 0.367879441171, which is where the 63 percent in the module header comes from: 63.21205588 percent has been lost
+derived sweep point, ntu = 0.1000: exp(-ntu) = 0.904837418036, arrival on a 180.0 degF inlet against a 40.0 degF ambient = 166.6772385250 degF, excess over ambient remaining = 126.6772385250 degF
+derived sweep point, ntu = 0.2500: exp(-ntu) = 0.778800783071, arrival on a 180.0 degF inlet against a 40.0 degF ambient = 149.0321096300 degF, excess over ambient remaining = 109.0321096300 degF
+derived sweep point, ntu = 0.5000: exp(-ntu) = 0.606530659713, arrival on a 180.0 degF inlet against a 40.0 degF ambient = 124.9142923598 degF, excess over ambient remaining = 84.9142923598 degF
+derived sweep point, ntu = 1.0000: exp(-ntu) = 0.367879441171, arrival on a 180.0 degF inlet against a 40.0 degF ambient = 91.5031217640 degF, excess over ambient remaining = 51.5031217640 degF
+derived sweep point, ntu = 1.5000: exp(-ntu) = 0.223130160148, arrival on a 180.0 degF inlet against a 40.0 degF ambient = 71.2382224208 degF, excess over ambient remaining = 31.2382224208 degF
+derived sweep point, ntu = 2.0000: exp(-ntu) = 0.135335283237, arrival on a 180.0 degF inlet against a 40.0 degF ambient = 58.9469396531 degF, excess over ambient remaining = 18.9469396531 degF
+derived sweep point, ntu = 3.0000: exp(-ntu) = 0.049787068368, arrival on a 180.0 degF inlet against a 40.0 degF ambient = 46.9701895715 degF, excess over ambient remaining = 6.9701895715 degF
+derived sweep point, ntu = 4.0000: exp(-ntu) = 0.018315638889, arrival on a 180.0 degF inlet against a 40.0 degF ambient = 42.5641894444 degF, excess over ambient remaining = 2.5641894444 degF
+derived sweep point, ntu = 5.0000: exp(-ntu) = 0.006737946999, arrival on a 180.0 degF inlet against a 40.0 degF ambient = 40.9433125799 degF, excess over ambient remaining = 0.9433125799 degF
+# A line much shorter than its relaxation length arrives hot whatever the
+# ambient. A line much longer than it arrives at ambient whatever it started
+# at. Past ntu 4 there is nothing left to insulate for.
+
+# SECTION 12: THE PUBLISHED PROFILE STATION BY STATION, AT THE LONGEST LENGTH
+# The engine returns 21 stations by default and the golden publishes only the
+# arrival, so this table is ENGINE on PUBLISHED inputs: the 105600.0 ft point,
+# 180.0 degF in, 40.0 degF ambient, 120000.0 lb/hr, Cp 0.5, published insulated
+# U, 6.065 in bore, and no pressures anywhere. The pPsia column is NaN in every
+# row for exactly that reason and it is printed rather than hidden.
+# Professional m05 owns this section.
+engine, published profile at 105600.0 ft: ok = true, stations returned = 21, relaxation length = 28308.04610085 ft, ntu = 3.730388159740, arrival = 43.357693442744 degF
+engine station 00: x = 0.00 ft, temperature = 180.0000000000 degF, pressure = n/a psia, excess over ambient = 140.0000000000 degF, fraction of the inlet excess remaining = 1.000000000000
+engine station 01: x = 5280.00 ft, temperature = 156.1779438713 degF, pressure = n/a psia, excess over ambient = 116.1779438713 degF, fraction of the inlet excess remaining = 0.829842456223
+engine station 02: x = 10560.00 ft, temperature = 136.4093903011 degF, pressure = n/a psia, excess over ambient = 96.4093903011 degF, fraction of the inlet excess remaining = 0.688638502151
+engine station 03: x = 15840.00 ft, temperature = 120.0046052505 degF, pressure = n/a psia, excess over ambient = 80.0046052505 degF, fraction of the inlet excess remaining = 0.571461466075
+engine station 04: x = 21120.00 ft, temperature = 106.3912181303 degF, pressure = n/a psia, excess over ambient = 66.3912181303 degF, fraction of the inlet excess remaining = 0.474222986645
+engine station 05: x = 26400.00 ft, temperature = 95.0942515249 degF, pressure = n/a psia, excess over ambient = 55.0942515249 degF, fraction of the inlet excess remaining = 0.393530368035
+engine station 06: x = 31680.00 ft, temperature = 85.7195490092 degF, pressure = n/a psia, excess over ambient = 45.7195490092 degF, fraction of the inlet excess remaining = 0.326568207209
+engine station 07: x = 36960.00 ft, temperature = 77.9400228472 degF, pressure = n/a psia, excess over ambient = 37.9400228472 degF, fraction of the inlet excess remaining = 0.271000163194
+engine station 08: x = 42240.00 ft, temperature = 71.4842417487 degF, pressure = n/a psia, excess over ambient = 31.4842417487 degF, fraction of the inlet excess remaining = 0.224887441062
+engine station 09: x = 47520.00 ft, temperature = 66.1269605051 degF, pressure = n/a psia, excess over ambient = 26.1269605051 degF, fraction of the inlet excess remaining = 0.186621146465
+engine station 10: x = 52800.00 ft, temperature = 61.6812610792 degF, pressure = n/a psia, excess over ambient = 21.6812610792 degF, fraction of the inlet excess remaining = 0.154866150566
+engine station 11: x = 58080.00 ft, temperature = 57.9920309480 degF, pressure = n/a psia, excess over ambient = 17.9920309480 degF, fraction of the inlet excess remaining = 0.128514506771
+engine station 12: x = 63360.00 ft, temperature = 54.9305511543 degF, pressure = n/a psia, excess over ambient = 14.9305511543 degF, fraction of the inlet excess remaining = 0.106646793959
+engine station 13: x = 68640.00 ft, temperature = 52.3900052427 degF, pressure = n/a psia, excess over ambient = 12.3900052427 degF, fraction of the inlet excess remaining = 0.088500037448
+engine station 14: x = 73920.00 ft, temperature = 50.2817523832 degF, pressure = n/a psia, excess over ambient = 10.2817523832 degF, fraction of the inlet excess remaining = 0.073441088451
+engine station 15: x = 79200.00 ft, temperature = 48.5322346520 degF, pressure = n/a psia, excess over ambient = 8.5322346520 degF, fraction of the inlet excess remaining = 0.060944533228
+engine station 16: x = 84480.00 ft, temperature = 47.0804105607 degF, pressure = n/a psia, excess over ambient = 7.0804105607 degF, fraction of the inlet excess remaining = 0.050574361148
+engine station 17: x = 89760.00 ft, temperature = 45.8756252907 degF, pressure = n/a psia, excess over ambient = 5.8756252907 degF, fraction of the inlet excess remaining = 0.041968752077
+engine station 18: x = 95040.00 ft, temperature = 44.8758433231 degF, pressure = n/a psia, excess over ambient = 4.8758433231 degF, fraction of the inlet excess remaining = 0.034827452308
+engine station 19: x = 100320.00 ft, temperature = 44.0461817994 degF, pressure = n/a psia, excess over ambient = 4.0461817994 degF, fraction of the inlet excess remaining = 0.028901298567
+engine station 20: x = 105600.00 ft, temperature = 43.3576934427 degF, pressure = n/a psia, excess over ambient = 3.3576934427 degF, fraction of the inlet excess remaining = 0.023983524591
+# WHERE THE LINE IS COLDEST is the far end and only the far end, because the
+# profile is a monotone exponential with nothing else in it. That is true of
+# the published cases because they set no pressures. It stops being true the
+# moment a Joule-Thomson term is added, and it was never true of a real line
+# with a seabed that changes depth.
+derived, station spacing on a 21 station profile over 105600.0 ft = 5280.0000 ft
+derived, temperature drop over the FIRST station interval = 23.8220561287 degF
+derived, temperature drop over the LAST station interval = 0.6884883567 degF
+derived, ratio of those two drops = 34.60052142
+# That ratio is NOT exp(ntu). The two intervals are equal in length, so each
+# drop carries the same (1 - exp(-dx/Lc)) factor and the ratio is the ratio of
+# the two starting excesses, which is exp(ntu x 19/20), the distance between
+# the start of the first interval and the start of the last.
+derived, exp(ntu x 19 / 20) on this line, which is what that ratio has to be = 34.60052142
+derived, exp(ntu) on this line, for contrast, which is the ratio the whole-line excess falls by = 41.69528946
+
+# HOW MANY STATIONS THE PROFILE NEEDS. The station count is a RESOLUTION
+# setting and nothing more: the arrival is a closed form and does not move.
+# This is a contiguous slice, coarsest first, and the ugly two station row is
+# kept rather than dropped because it is the one that proves the point.
+derived sweep point, nStations =   2: stations returned =   2, arrival = 43.35769344274401 degF, difference from the 21 station arrival = 0.0000e+0 degF
+derived sweep point, nStations =   3: stations returned =   3, arrival = 43.35769344274401 degF, difference from the 21 station arrival = 0.0000e+0 degF
+derived sweep point, nStations =   5: stations returned =   5, arrival = 43.35769344274401 degF, difference from the 21 station arrival = 0.0000e+0 degF
+derived sweep point, nStations =  11: stations returned =  11, arrival = 43.35769344274401 degF, difference from the 21 station arrival = 0.0000e+0 degF
+derived sweep point, nStations =  21: stations returned =  21, arrival = 43.35769344274401 degF, difference from the 21 station arrival = 0.0000e+0 degF
+derived sweep point, nStations =  51: stations returned =  51, arrival = 43.35769344274401 degF, difference from the 21 station arrival = 0.0000e+0 degF
+derived sweep point, nStations = 101: stations returned = 101, arrival = 43.35769344274401 degF, difference from the 21 station arrival = 0.0000e+0 degF
+derived sweep point, nStations = 501: stations returned = 501, arrival = 43.35769344274401 degF, difference from the 21 station arrival = 0.0000e+0 degF
+# Every row is the same number to the last figure. Refining a profile buys
+# resolution in the middle of the line and buys nothing at the end of it.
+
+# WHAT THE PROFILE REFUSES.
+engine, steadyStateProfile with a zero length: ok = false, error = The profile needs a length, a mass rate, a heat capacity and a heat transfer coefficient.
+engine, steadyStateProfile with a zero U: ok = false, error = The profile needs a length, a mass rate, a heat capacity and a heat transfer coefficient.
+engine, steadyStateProfile with an inlet 20.0 degF BELOW the 40.0 degF ambient: ok = true, arrival = 39.5203295082 degF
+# That last one is not a refusal and should not be. A line colder than its
+# surroundings warms towards them on the same exponential, and the engine
+# handles it correctly with no special case. It is the one direction of this
+# balance that needs none.
+
+# SECTION 13: TEACHING LINE AKASO SPUR, THE WHOLE DEFINITION
+# EVERY NUMBER IN THIS SECTION IS A TEACHING NUMBER. No golden publishes any
+# of it, no oracle has checked any of it, and it is not a real line. It exists
+# because the published cases set no pressures, carry no coating, sit in no
+# trench that can be got wrong, and have no hydrate boundary, so four things
+# this course has to teach cannot be shown on them at all. Say TEACHING LINE
+# whenever you quote from it.
+teaching, AKASO SPUR geometry: bore = 9.562 in, steel wall to 10.750 in at k 26.00, polyurethane foam to 13.750 in at k 0.070, concrete weight coat to 16.750 in at k 0.90
+teaching, AKASO SPUR wall thicknesses: steel 0.5940 in, foam 1.5000 in, weight coat 1.5000 in
+teaching, AKASO SPUR boundary: inside film 200.0 Btu/(hr ft2 degF) (flowing multiphase), outside film 200.0 Btu/(hr ft2 degF) (seabed with current), buried 3.00 ft to centreline in wet soil at k 1.20
+teaching, AKASO SPUR reference diameters offered: bore 9.562 in and coated outside diameter 16.750 in
+teaching, AKASO SPUR fluid: 90000.0 lb/hr, Cp 0.620 Btu/(lb degF), inlet 195.00 degF, seabed 45.00 degF, length 60000.0 ft
+teaching, AKASO SPUR pressures: inlet 2400.0 psia, outlet 1500.0 psia, pressure drop 900.0 psi, Joule-Thomson coefficient 0.0280 degF/psi
+teaching, AKASO SPUR HYDRATE BOUNDARY, A LABORATORY INPUT AND NOT AN ENGINE OUTPUT: 71.00 degF flowing, 78.00 degF once the line packs up after a shutdown
+teaching, AKASO SPUR masses: contents at 8.60 lbm/ft3 and Cp 0.620, steel at 490.0 lbm/ft3 and Cp 0.110, foam at 44.00 lbm/ft3 and Cp 0.280, weight coat at 190.00 lbm/ft3 and Cp 0.210
+teaching, AKASO SPUR produced water 420.0 bbl/d, shut-in subcooling to kill 36.00 degF, safety margin 5.00 degF, lean methanol 96.00 weight percent, lean MEG 89.00 weight percent
+
+# The resistance stack of the teaching line, so that the shares from the
+# published pipe can be read against a build with a coating and a trench on it.
+teaching build TEACHING LINE AKASO SPUR, referred to the 9.562 in bore: overall U = 0.4529728566 Btu/(hr ft2 degF), referred to 9.562 in, total resistance = 0.8818819532 hr ft degF/Btu per foot, 6 terms
+teaching build TEACHING LINE AKASO SPUR, referred to the 9.562 in bore, term insideFilm: resistance = 0.0019973429 hr ft degF/Btu per foot, share = 0.22648643 percent
+teaching build TEACHING LINE AKASO SPUR, referred to the 9.562 in bore, term layer0 (carbon steel wall): resistance = 0.0007168635 hr ft degF/Btu per foot, share = 0.08128792 percent
+teaching build TEACHING LINE AKASO SPUR, referred to the 9.562 in bore, term layer1 (polyurethane foam): resistance = 0.5596184954 hr ft degF/Btu per foot, share = 63.45730212 percent
+teaching build TEACHING LINE AKASO SPUR, referred to the 9.562 in bore, term layer2 (concrete weight coat): resistance = 0.0349008106 hr ft degF/Btu per foot, share = 3.95753768 percent
+teaching build TEACHING LINE AKASO SPUR, referred to the 9.562 in bore, term burial: resistance = 0.2835082263 hr ft degF/Btu per foot, share = 32.14809253 percent
+teaching build TEACHING LINE AKASO SPUR, referred to the 9.562 in bore, term outsideFilm: resistance = 0.0011402145 hr ft degF/Btu per foot, share = 0.12929333 percent
+derived build TEACHING LINE AKASO SPUR, referred to the 9.562 in bore: shares sum to 100.00000000 percent
+
+teaching build TEACHING LINE AKASO SPUR, the SAME stack referred to the 16.750 in coated outside diameter: overall U = 0.2585866540 Btu/(hr ft2 degF), referred to 16.750 in, total resistance = 0.8818819532 hr ft degF/Btu per foot, 6 terms
+teaching build TEACHING LINE AKASO SPUR, the SAME stack referred to the 16.750 in coated outside diameter, term insideFilm: resistance = 0.0019973429 hr ft degF/Btu per foot, share = 0.22648643 percent
+teaching build TEACHING LINE AKASO SPUR, the SAME stack referred to the 16.750 in coated outside diameter, term layer0 (carbon steel wall): resistance = 0.0007168635 hr ft degF/Btu per foot, share = 0.08128792 percent
+teaching build TEACHING LINE AKASO SPUR, the SAME stack referred to the 16.750 in coated outside diameter, term layer1 (polyurethane foam): resistance = 0.5596184954 hr ft degF/Btu per foot, share = 63.45730212 percent
+teaching build TEACHING LINE AKASO SPUR, the SAME stack referred to the 16.750 in coated outside diameter, term layer2 (concrete weight coat): resistance = 0.0349008106 hr ft degF/Btu per foot, share = 3.95753768 percent
+teaching build TEACHING LINE AKASO SPUR, the SAME stack referred to the 16.750 in coated outside diameter, term burial: resistance = 0.2835082263 hr ft degF/Btu per foot, share = 32.14809253 percent
+teaching build TEACHING LINE AKASO SPUR, the SAME stack referred to the 16.750 in coated outside diameter, term outsideFilm: resistance = 0.0011402145 hr ft degF/Btu per foot, share = 0.12929333 percent
+derived build TEACHING LINE AKASO SPUR, the SAME stack referred to the 16.750 in coated outside diameter: shares sum to 100.00000000 percent
+teaching, ratio of those two U values = 1.7517255804, against the diameter ratio 1.7517255804
+teaching, U times reference diameter, both references = 0.360943871248 and 0.360943871248 Btu/(hr ft degF) per foot
+
+# The same teaching line with the foam taken out and the weight coat carried
+# from the steel wall straight to the same 16.750 in outside diameter, so the
+# line is the same size on the outside. The coat is now a thicker layer as well
+# as a larger share, so BOTH its resistance and its share move, and the trench
+# term, which did not move at all, goes from a third of the stack to more than
+# three quarters of it.
+teaching build TEACHING LINE AKASO SPUR, FOAM REMOVED, weight coat carried straight from the steel: overall U = 1.0920727942 Btu/(hr ft2 degF), referred to 9.562 in, total resistance = 0.3657893408 hr ft degF/Btu per foot, 5 terms
+teaching build TEACHING LINE AKASO SPUR, FOAM REMOVED, weight coat carried straight from the steel, term insideFilm: resistance = 0.0019973429 hr ft degF/Btu per foot, share = 0.54603640 percent
+teaching build TEACHING LINE AKASO SPUR, FOAM REMOVED, weight coat carried straight from the steel, term layer0 (carbon steel wall): resistance = 0.0007168635 hr ft degF/Btu per foot, share = 0.19597715 percent
+teaching build TEACHING LINE AKASO SPUR, FOAM REMOVED, weight coat carried straight from the steel, term layer1 (concrete weight coat): resistance = 0.0784266935 hr ft degF/Btu per foot, share = 21.44039883 percent
+teaching build TEACHING LINE AKASO SPUR, FOAM REMOVED, weight coat carried straight from the steel, term burial: resistance = 0.2835082263 hr ft degF/Btu per foot, share = 77.50587419 percent
+teaching build TEACHING LINE AKASO SPUR, FOAM REMOVED, weight coat carried straight from the steel, term outsideFilm: resistance = 0.0011402145 hr ft degF/Btu per foot, share = 0.31171343 percent
+derived build TEACHING LINE AKASO SPUR, FOAM REMOVED, weight coat carried straight from the steel: shares sum to 100.00000000 percent
+teaching, U ratio without the foam to with it = 2.41090118
+teaching, weight coat resistance with the foam present = 0.0349008106, share 3.957538 percent
+teaching, weight coat resistance with the foam removed = 0.0784266935, share 21.440399 percent
+teaching, trench resistance in both builds = 0.2835082263 and 0.2835082263, shares 32.148093 percent and 77.505874 percent
+
+# THE TRENCH THAT IS SWALLOWED, on the teaching line, where the coated diameter
+# is large enough that a plausible typo falls below D/2.
+teaching, half the AKASO SPUR coated diameter, D/2 on 16.750 in = 0.69791667 ft
+teaching, the 3.00 ft trench entered as 0.3 ft: ok = true, terms returned = 5 against 6, a burial term is present = false, U = 0.6675904532 against the correct 0.4529728566
+teaching, error in U from that one swallowed term = 47.379792 percent, with ok true and no note
+
+# SECTION 14: THE TEACHING LINE ENERGY BALANCE, HEAT LOSS ONLY
+# TEACHING LINE. This is the AKASO SPUR profile with NO pressures passed, so
+# the Joule-Thomson term is zero and this is the pure exponential. The three
+# ways of applying the Joule-Thomson term are set against this row in SECTION 27, so
+# this is the baseline the whole Expert argument is measured from.
+# Professional m01 owns this section.
+teaching, AKASO SPUR overall U referred to the bore = 0.452972856617 Btu/(hr ft2 degF)
+teaching, AKASO SPUR relaxation length = 49209.01299043 ft
+teaching, AKASO SPUR ntu over 60000.0 ft = 1.219288832549
+teaching, AKASO SPUR exp(-ntu) = 0.295440199685
+teaching, AKASO SPUR inlet excess over the seabed = 150.0000 degF
+teaching, AKASO SPUR arrival with heat loss only = 89.316029952695 degF
+teaching, AKASO SPUR arrival excess over the seabed = 44.3160299527 degF
+teaching, AKASO SPUR margin against the 71.00 degF flowing hydrate boundary, heat loss only = 18.3160299527 degF OUTSIDE the hydrate region
+teaching, AKASO SPUR stations returned = 21, station spacing = 3000.00 ft
+teaching station 00: x = 0.00 ft, temperature = 195.0000000000 degF, excess over the seabed = 150.0000000000 degF, margin against the flowing boundary = 124.0000000000 degF
+teaching station 02: x = 6000.00 ft, temperature = 177.7816979418 degF, excess over the seabed = 132.7816979418 degF, margin against the flowing boundary = 106.7816979418 degF
+teaching station 04: x = 12000.00 ft, temperature = 162.5398620554 degF, excess over the seabed = 117.5398620554 degF, margin against the flowing boundary = 91.5398620554 degF
+teaching station 06: x = 18000.00 ft, temperature = 149.0476163970 degF, excess over the seabed = 104.0476163970 degF, margin against the flowing boundary = 78.0476163970 degF
+teaching station 08: x = 24000.00 ft, temperature = 137.1041278133 degF, excess over the seabed = 92.1041278133 degF, margin against the flowing boundary = 66.1041278133 degF
+teaching station 10: x = 30000.00 ft, temperature = 126.5316165233 degF, excess over the seabed = 81.5316165233 degF, margin against the flowing boundary = 55.5316165233 degF
+teaching station 12: x = 36000.00 ft, temperature = 117.1727098527 degF, excess over the seabed = 72.1727098527 degF, margin against the flowing boundary = 46.1727098527 degF
+teaching station 14: x = 42000.00 ft, temperature = 108.8880997287 degF, excess over the seabed = 63.8880997287 degF, margin against the flowing boundary = 37.8880997287 degF
+teaching station 16: x = 48000.00 ft, temperature = 101.5544690683 degF, excess over the seabed = 56.5544690683 degF, margin against the flowing boundary = 30.5544690683 degF
+teaching station 18: x = 54000.00 ft, temperature = 95.0626561939 degF, excess over the seabed = 50.0626561939 degF, margin against the flowing boundary = 24.0626561939 degF
+teaching station 20: x = 60000.00 ft, temperature = 89.3160299527 degF, excess over the seabed = 44.3160299527 degF, margin against the flowing boundary = 18.3160299527 degF
+# Only the even stations are listed, so a lesson quoting from this table must
+# say which station it took. The arrival is station 20 and it is printed above
+# on its own line.
+teaching, the station at which this line first falls below the 71.00 degF flowing boundary with heat loss only = none of the 21, the coldest point is the arrival at 89.31602995 degF
+
+# SECTION 15: THE INVERSE, THE U A TARGET ARRIVAL NEEDS, AND WHERE IT REFUSES
+# uForArrivalTemp inverts the same exponential: U = m Cp ln((Tin - Ta)/(Tt -
+# Ta)) / (pi D L). It returns the ntu the target implies alongside the U, which
+# is the same ntu the forward profile would report. Both PUBLISHED and TEACHING
+# cases are here and each row says which. Professional m02 owns this section.
+# THE PUBLISHED FLUID, 180.0 degF in against a 40.0 degF ambient at 120000.0
+# lb/hr and Cp 0.5 through the 6.065 in bore over 26400.0 ft.
+derived, target arrival 160.00 degF: U needed = 0.220644616732 Btu/(hr ft2 degF), ntu implied = 0.154150679827, forward profile on that U arrives at 160.000000000000 degF, round trip error = 0.0000e+0 degF
+derived, target arrival 140.00 degF: U needed = 0.481611808482 Btu/(hr ft2 degF), ntu implied = 0.336472236621, forward profile on that U arrives at 140.000000000000 degF, round trip error = 0.0000e+0 degF
+derived, target arrival 120.00 degF: U needed = 0.801009837807 Btu/(hr ft2 degF), ntu implied = 0.559615787935, forward profile on that U arrives at 120.000000000000 degF, round trip error = 0.0000e+0 degF
+derived, target arrival 100.00 degF: U needed = 1.212785515268 Btu/(hr ft2 degF), ntu implied = 0.847297860387, forward profile on that U arrives at 100.000000000000 degF, round trip error = 0.0000e+0 degF
+derived, target arrival 80.00 degF: U needed = 1.793150736343 Btu/(hr ft2 degF), ntu implied = 1.252762968495, forward profile on that U arrives at 80.000000000000 degF, round trip error = 0.0000e+0 degF
+derived, target arrival 60.00 degF: U needed = 2.785291634878 Btu/(hr ft2 degF), ntu implied = 1.945910149055, forward profile on that U arrives at 60.000000000000 degF, round trip error = 7.1054e-15 degF
+derived, target arrival 45.00 degF: U needed = 4.769573431949 Btu/(hr ft2 degF), ntu implied = 3.332204510175, forward profile on that U arrives at 45.000000000000 degF, round trip error = 0.0000e+0 degF
+derived, target arrival 41.00 degF: U needed = 7.073253258346 Btu/(hr ft2 degF), ntu implied = 4.941642422609, forward profile on that U arrives at 41.000000000000 degF, round trip error = 0.0000e+0 degF
+derived, target arrival 40.00 degF: REFUSED, reason = A line cannot arrive above ambient (40 F) no matter how well it is insulated. The target has to be above it.
+derived, target arrival 39.00 degF: REFUSED, reason = A line cannot arrive above ambient (40 F) no matter how well it is insulated. The target has to be above it.
+derived, target arrival 180.00 degF: REFUSED, reason = The fluid already enters below the target, so insulation is not the problem.
+derived, target arrival 185.00 degF: REFUSED, reason = The fluid already enters below the target, so insulation is not the problem.
+# THE TWO REFUSALS ARE DIFFERENT REFUSALS AND THE MESSAGES SAY SO. A target at
+# or below ambient is a physical impossibility, no insulation reaches it. A
+# target at or above the inlet is not a cooling problem at all. Read the
+# 40.00 and 39.00 rows against the 180.00 and 185.00 rows above.
+
+# The same inverse on the TEACHING LINE, against its own hydrate boundary and a
+# band of targets around it.
+teaching, AKASO SPUR target arrival 100.00 degF: U needed = 0.372732538977 Btu/(hr ft2 degF), ntu implied = 1.003302108864, ratio to the U this line actually has = 0.82285844
+teaching, AKASO SPUR target arrival 90.00 degF: U needed = 0.447282863507 Btu/(hr ft2 degF), ntu implied = 1.203972804326, ratio to the U this line actually has = 0.98743856
+teaching, AKASO SPUR target arrival 80.00 degF: U needed = 0.540647627826 Btu/(hr ft2 degF), ntu implied = 1.455287232607, ratio to the U this line actually has = 1.19355414
+teaching, AKASO SPUR target arrival 71.00 degF: U needed = 0.651078288819 Btu/(hr ft2 degF), ntu implied = 1.752538756075, ratio to the U this line actually has = 1.43734504
+teaching, AKASO SPUR target arrival 60.00 degF: U needed = 0.855423685787 Btu/(hr ft2 degF), ntu implied = 2.302585092994, ratio to the U this line actually has = 1.88846566
+teaching, AKASO SPUR target arrival 50.00 degF: U needed = 1.263564508066 Btu/(hr ft2 degF), ntu implied = 3.401197381662, ratio to the U this line actually has = 2.78949277
+teaching, AKASO SPUR actual U = 0.452972856617, and the U needed for the 71.00 degF boundary is above it, which is the same statement as the arrival being above the boundary
+
+# SECTION 16: THE PUBLISHED COOLDOWN, GOLDEN AGAINST ENGINE, STATION BY STATION
+# Lumped capacitance after a shutdown: (M Cp) dT/dt = -U A (T - Ta), so the
+# time to fall from a start to a target is tau ln((T0 - Ta)/(Tt - Ta)) with tau
+# = M Cp / (U A). ONE published case: 150.0 degF start, 40.0 degF ambient, 70.0
+# degF target, through the published insulated U on the 6.065 in bore, with the
+# contents at 55.0 lbm/ft3 and Cp 0.5 and the steel shell at 490 lbm/ft3 and Cp
+# 0.11. THE SAME QUANTITY IS COMPUTED TWO WAYS: golden in SI seconds, engine in
+# field hours. Professional m03 owns this section.
+golden, published cooldown no-touch time = 4.662725032604 hr
+engine, published cooldown no-touch time = 4.662724855250 hr, relative difference = 3.803658e-8
+golden, published cooldown time constant = 3.588690908413 hr
+engine, published cooldown time constant = 3.588690771912 hr, relative difference = 3.803658e-8
+golden, the U the published cooldown uses = 1.334879072040 Btu/(hr ft2 degF), which is the published insulated build
+derived, U A per foot of pipe = 2.119538792399 Btu/(hr ft degF)
+derived, M Cp of this case = 7.606369304989 Btu/(ft degF)
+derived, tau = M Cp / (U A) = 3.588690771912 hr
+derived, the log term, ln((150.0 - 40.0)/(70.0 - 40.0)) = 1.299282984130
+derived, tau times that log term = 4.662724855250 hr
+derived, no-touch time in time constants = 1.299282984130
+# The station table runs to 1.5 times the answer, so the last station is always
+# below the target. Stations returned = 25.
+engine cooldown station 00: t = 0.00000000 hr, temperature = 150.0000000000 degF, excess over ambient = 110.0000000000 degF
+engine cooldown station 02: t = 0.58284061 hr, temperature = 133.5101505820 degF, excess over ambient = 93.5101505820 degF
+engine cooldown station 04: t = 1.16568121 hr, temperature = 119.4922569260 degF, excess over ambient = 79.4922569260 degF
+engine cooldown station 06: t = 1.74852182 hr, temperature = 107.5757537750 degF, excess over ambient = 67.5757537750 degF
+engine cooldown station 08: t = 2.33136243 hr, temperature = 97.4456264654 degF, excess over ambient = 57.4456264654 degF
+engine cooldown station 10: t = 2.91420303 hr, temperature = 88.8340834641 degF, excess over ambient = 48.8340834641 degF
+engine cooldown station 12: t = 3.49704364 hr, temperature = 81.5134772569 degF, excess over ambient = 41.5134772569 degF
+engine cooldown station 14: t = 4.07988425 hr, temperature = 75.2902864498 degF, excess over ambient = 35.2902864498 degF
+engine cooldown station 16: t = 4.66272486 hr, temperature = 70.0000000000 degF, excess over ambient = 30.0000000000 degF
+engine cooldown station 18: t = 5.24556546 hr, temperature = 65.5027683405 degF, excess over ambient = 25.5027683405 degF
+engine cooldown station 20: t = 5.82840607 hr, temperature = 61.6797064344 degF, excess over ambient = 21.6797064344 degF
+engine cooldown station 22: t = 6.41124668 hr, temperature = 58.4297510296 degF, excess over ambient = 18.4297510296 degF
+engine cooldown station 24: t = 6.99408728 hr, temperature = 55.6669890360 degF, excess over ambient = 15.6669890360 degF
+# The cooldown U here is the FLOWING U. A shut-in line has a stagnant bore and
+# its inside film falls from 250 to something near the catalog stagnant value.
+# The engine will take whichever U it is given and nothing in cooldownTime asks
+# whether the U it got was measured on a flowing line.
+derived, the same cooldown through the STAGNANT-BORE U of 1.0580538200: no-touch time = 5.8826629631 hr, time constant = 4.5276225695 hr
+derived, that against the flowing-U answer = 1.26163631 times longer
+
+# SECTION 17: THE TEACHING LINE COOLDOWN, THE SAME LINE WITH TWO DIFFERENT MASSES
+# THE SAME QUANTITY IS COMPUTED TWO WAYS HERE AND THEY ARE LABELLED
+# DIFFERENTLY. The API reading is what cooldownTime signature leads a caller to:
+# contents in one slot, the steel shell in the other, and no slot for a coating.
+# The lumped reading puts the foam and the weight coat into the shell slot by
+# hand, which is the only way the API allows it. Both are the same line at the
+# same U. Professional m03 owns this section.
+teaching, AKASO SPUR contents mass = 4.2886768072 lbm/ft at 8.60 lbm/ft3
+teaching, AKASO SPUR steel mass = 64.4900327983 lbm/ft at 490.0 lbm/ft3
+teaching, AKASO SPUR foam mass = 17.6387337530 lbm/ft at 44.00 lbm/ft3
+teaching, AKASO SPUR weight coat mass = 94.8204657685 lbm/ft at 190.00 lbm/ft3
+teaching, AKASO SPUR mass the API reading carries = 68.7787096055 lbm/ft, mass it leaves out = 112.4591995215 lbm/ft
+teaching, AKASO SPUR resistance share of the two layers the API reading leaves out = 67.414840 percent
+teaching, AKASO SPUR M Cp on the API reading = 9.7528832283 Btu/(ft degF)
+teaching, AKASO SPUR M Cp on the lumped reading = 34.6040264905 Btu/(ft degF)
+teaching, AKASO SPUR ratio of those two heat capacities = 3.54808170
+teaching, AKASO SPUR cooldown from 120.00 degF to the 71.00 degF flowing boundary against a 45.00 degF seabed
+teaching, API READING: no-touch time = 9.1117122206 hr, time constant = 8.6008917110 hr, stations = 25
+teaching, LUMPED READING, insulation and weight coat folded into the shell slot at their own heat capacities: no-touch time = 32.3290993724 hr, time constant = 30.5166664712 hr
+teaching, ratio of the lumped no-touch time to the API one = 3.5480816986
+teaching, ratio of the two time constants = 3.5480816986
+teaching, difference in no-touch time = 23.2173871518 hr, which the API reading gives away
+# The two ratios are the same number because the log term is identical in both:
+# only M Cp moved. That is why the whole finding can be stated as a ratio of
+# heat capacities and needs no second temperature.
+teaching, the shared log term, ln((120.0 - 45.0)/(71.0 - 45.0)) = 1.0593915755
+# On this GAS line the contents carry about a quarter of the heat capacity the
+# API reading sees and the steel carries the rest. On the PUBLISHED liquid-
+# filled case the split runs the other way. Neither reading includes a coating.
+teaching, contents share of the API M Cp on this gas line = 27.263524 percent
+derived, contents share of the M Cp on the PUBLISHED liquid-filled cooldown = 72.534444 percent
+
+# SECTION 18: THE COOLDOWN THAT RUNS BACKWARDS, AND THE ONE THAT DOES NOT
+# cooldownTime guards startTempF > ambientTempF and targetTempF > ambientTempF.
+# It never checks startTempF > targetTempF. When the target is above the start,
+# Math.log of a ratio below 1 is negative and the function returns a negative
+# number of hours as a normal answer. The three branches are printed together
+# so the missing one reads as the gap in a set. Professional m03 owns this and
+# Expert may cite it. TEACHING LINE conditions throughout.
+teaching, BRANCH 1, start 40.0 degF already below the 45.0 degF seabed: ok = false, error = The fluid is already at or below ambient, so there is nothing to cool.
+teaching, BRANCH 2, target 40.0 degF below the 45.0 degF seabed: ok = true, hours = Infinity, time constant = 8.6008917110 hr, stations = 0, note = The line settles at ambient (45 F), which is above the target, so it never reaches it. There is no cooldown limit here.
+# That is the branch the module DOES handle, and it handles it well: an
+# Infinity, a time constant that is still meaningful, an empty station list and
+# a written note. It is the shape the missing branch should have had.
+teaching, BRANCH 3, THE MISSING ONE. The line stops with its far end at the engine arrival of 64.1160299527 degF, and once it packs up the hydrate boundary moves to 78.00 degF, which is ABOVE the temperature the line is at.
+teaching, cooldownTime asked for the time to fall from 64.1160299527 degF to 78.00 degF against a 45.0 degF seabed: ok = true, hours = -4.6959175559, time constant = 8.6008917110 hr, note = none, error = none
+teaching, the log term that produced it, ln((64.1160 - 45.0)/(78.0 - 45.0)) = -0.5459803139
+teaching, stations returned on that call = 25, and they run BACKWARDS in time and WARM UP
+teaching backwards station 00: t = 0.0000000000 hr, temperature = 64.1160299527 degF
+teaching backwards station 04: t = -1.1739793890 hr, temperature = 66.9117347374 degF
+teaching backwards station 08: t = -2.3479587779 hr, temperature = 70.1163092121 degF
+teaching backwards station 12: t = -3.5219381669 hr, temperature = 73.7895502570 degF
+teaching backwards station 16: t = -4.6959175559 hr, temperature = 78.0000000000 degF
+teaching backwards station 20: t = -5.8698969448 hr, temperature = 82.8262248031 degF
+teaching backwards station 24: t = -7.0438763338 hr, temperature = 88.3582812985 degF
+teaching, temperature RISE across that station table = 24.2422513458 degF, on a line that has just been shut in against a colder seabed
+# The right answer is that there is NO no-touch time: the line is inside the
+# shut-in hydrate envelope from the moment it stops. The mirror of this case is
+# already handled in the same module. uForArrivalTemp refuses an inlet at or
+# below its target with a written reason, and cooldownTime itself has the
+# Infinity branch above. This one branch was missed.
+teaching, the mirror question put to uForArrivalTemp, inlet 64.1160 degF and target 78.00 degF: ok = false, reason = The fluid already enters below the target, so insulation is not the problem.
+# Two functions in one module, opposite positions on the same pair of
+# temperatures.
+
+# SECTION 19: THE 24 PUBLISHED INHIBITOR ROWS, GOLDEN AGAINST ENGINE
+# The oracle computes BOTH relations for ALL FOUR fluids, in Celsius with the
+# metric constants, and converts. The engine computes Hammerschmidt for all
+# four and returns Nielsen-Bucklin ONLY for methanol, because the catalog
+# carries nielsenBucklin = false on the three glycols. So the golden publishes
+# a check the engine declines to report. Expert m03 and m04 own this section.
+golden inhibitor row, methanol at 5.0 weight percent: Hammerschmidt = 3.8350088705 degF, Nielsen-Bucklin = 3.7795926053 degF
+engine inhibitor row, methanol at 5.0 weight percent: hammerschmidtF = 3.8356659439 degF, nielsenBucklinF = 3.7795926053 degF, recommendedF = 3.8356659439 degF, basis = hammerschmidt, reliable = true, spreadF = 0.0560733386
+derived, relative difference golden against engine Hammerschmidt, methanol 5.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for methanol at 5.0 weight percent, recomputed by this generator = 3.7795926053 degF, relative difference against the golden = 1.174966e-16
+golden inhibitor row, methanol at 10.0 weight percent: Hammerschmidt = 8.0961298377 degF, Nielsen-Bucklin = 7.8537784436 degF
+engine inhibitor row, methanol at 10.0 weight percent: hammerschmidtF = 8.0975169926 degF, nielsenBucklinF = 7.8537784436 degF, recommendedF = 8.0975169926 degF, basis = hammerschmidt, reliable = true, spreadF = 0.2437385490
+derived, relative difference golden against engine Hammerschmidt, methanol 10.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for methanol at 10.0 weight percent, recomputed by this generator = 7.8537784436 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, methanol at 20.0 weight percent: Hammerschmidt = 18.2162921348 degF, Nielsen-Bucklin = 17.0456465761 degF
+engine inhibitor row, methanol at 20.0 weight percent: hammerschmidtF = 18.2194132335 degF, nielsenBucklinF = 17.0456465761 degF, recommendedF = 18.2194132335 degF, basis = hammerschmidt, reliable = true, spreadF = 1.1737666573
+derived, relative difference golden against engine Hammerschmidt, methanol 20.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for methanol at 20.0 weight percent, recomputed by this generator = 17.0456465761 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, methanol at 30.0 weight percent: Hammerschmidt = 31.2279293740 degF, Nielsen-Bucklin = 27.9798914770 degF
+engine inhibitor row, methanol at 30.0 weight percent: hammerschmidtF = 31.2332798288 degF, nielsenBucklinF = 27.9798914770 degF, recommendedF = 27.9798914770 degF, basis = nielsenBucklin, reliable = false, spreadF = 3.2533883518
+derived, relative difference golden against engine Hammerschmidt, methanol 30.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for methanol at 30.0 weight percent, recomputed by this generator = 27.9798914770 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, methanol at 40.0 weight percent: Hammerschmidt = 48.5767790262 degF, Nielsen-Bucklin = 41.2568938316 degF
+engine inhibitor row, methanol at 40.0 weight percent: hammerschmidtF = 48.5851019559 degF, nielsenBucklinF = 41.2568938316 degF, recommendedF = 41.2568938316 degF, basis = nielsenBucklin, reliable = false, spreadF = 7.3282081243
+derived, relative difference golden against engine Hammerschmidt, methanol 40.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for methanol at 40.0 weight percent, recomputed by this generator = 41.2568938316 degF, relative difference against the golden = 1.722240e-16
+golden inhibitor row, methanol at 50.0 weight percent: Hammerschmidt = 72.8651685393 degF, Nielsen-Bucklin = 57.8193913158 degF
+engine inhibitor row, methanol at 50.0 weight percent: hammerschmidtF = 72.8776529338 degF, nielsenBucklinF = 57.8193913158 degF, recommendedF = 57.8193913158 degF, basis = nielsenBucklin, reliable = false, spreadF = 15.0582616180
+derived, relative difference golden against engine Hammerschmidt, methanol 50.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for methanol at 50.0 weight percent, recomputed by this generator = 57.8193913158 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, meg at 5.0 weight percent: Hammerschmidt = 1.9795985856 degF, Nielsen-Bucklin = 1.9647521987 degF
+engine inhibitor row, meg at 5.0 weight percent: hammerschmidtF = 1.9799377613 degF, nielsenBucklinF = null, recommendedF = 1.9799377613 degF, basis = hammerschmidt, reliable = true, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, meg 5.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for meg at 5.0 weight percent, recomputed by this generator = 1.9647521987 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, meg at 10.0 weight percent: Hammerschmidt = 4.1791525697 degF, Nielsen-Bucklin = 4.1134350660 degF
+engine inhibitor row, meg at 10.0 weight percent: hammerschmidtF = 4.1798686071 degF, nielsenBucklinF = null, recommendedF = 4.1798686071 degF, basis = hammerschmidt, reliable = true, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, meg 10.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for meg at 10.0 weight percent, recomputed by this generator = 4.1134350660 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, meg at 20.0 weight percent: Hammerschmidt = 9.4030932818 degF, Nielsen-Bucklin = 9.0781657565 degF
+engine inhibitor row, meg at 20.0 weight percent: hammerschmidtF = 9.4047043660 degF, nielsenBucklinF = null, recommendedF = 9.4047043660 degF, basis = hammerschmidt, reliable = true, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, meg 20.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for meg at 20.0 weight percent, recomputed by this generator = 9.0781657565 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, meg at 30.0 weight percent: Hammerschmidt = 16.1195884830 degF, Nielsen-Bucklin = 15.1940690789 degF
+engine inhibitor row, meg at 30.0 weight percent: hammerschmidtF = 16.1223503418 degF, nielsenBucklinF = null, recommendedF = 16.1223503418 degF, basis = hammerschmidt, reliable = false, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, meg 30.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for meg at 30.0 weight percent, recomputed by this generator = 15.1940690789 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, meg at 40.0 weight percent: Hammerschmidt = 25.0749154181 degF, Nielsen-Bucklin = 22.9240121646 degF
+engine inhibitor row, meg at 40.0 weight percent: hammerschmidtF = 25.0792116428 degF, nielsenBucklinF = null, recommendedF = 25.0792116428 degF, basis = hammerschmidt, reliable = false, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, meg 40.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for meg at 40.0 weight percent, recomputed by this generator = 22.9240121646 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, meg at 50.0 weight percent: Hammerschmidt = 37.6123731271 degF, Nielsen-Bucklin = 33.0254224092 degF
+engine inhibitor row, meg at 50.0 weight percent: hammerschmidtF = 37.6188174642 degF, nielsenBucklinF = null, recommendedF = 37.6188174642 degF, basis = hammerschmidt, reliable = false, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, meg 50.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for meg at 50.0 weight percent, recomputed by this generator = 33.0254224092 degF, relative difference against the golden = 2.151502e-16
+golden inhibitor row, deg at 5.0 weight percent: Hammerschmidt = 1.1578748983 degF, Nielsen-Bucklin = 1.1528039324 degF
+engine inhibitor row, deg at 5.0 weight percent: hammerschmidtF = 1.1580732835 degF, nielsenBucklinF = null, recommendedF = 1.1580732835 degF, basis = hammerschmidt, reliable = true, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, deg 5.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for deg at 5.0 weight percent, recomputed by this generator = 1.1528039324 degF, relative difference against the golden = 1.926126e-16
+golden inhibitor row, deg at 10.0 weight percent: Hammerschmidt = 2.4444025631 degF, Nielsen-Bucklin = 2.4217842660 degF
+engine inhibitor row, deg at 10.0 weight percent: hammerschmidtF = 2.4448213762 degF, nielsenBucklinF = null, recommendedF = 2.4448213762 degF, basis = hammerschmidt, reliable = true, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, deg 10.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for deg at 10.0 weight percent, recomputed by this generator = 2.4217842660 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, deg at 20.0 weight percent: Hammerschmidt = 5.4999057671 degF, Nielsen-Bucklin = 5.3867299829 degF
+engine inhibitor row, deg at 20.0 weight percent: hammerschmidtF = 5.5008480965 degF, nielsenBucklinF = null, recommendedF = 5.5008480965 degF, basis = hammerschmidt, reliable = true, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, deg 20.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for deg at 20.0 weight percent, recomputed by this generator = 5.3867299829 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, deg at 30.0 weight percent: Hammerschmidt = 9.4284098864 degF, Nielsen-Bucklin = 9.1017689856 degF
+engine inhibitor row, deg at 30.0 weight percent: hammerschmidtF = 9.4300253083 degF, nielsenBucklinF = null, recommendedF = 9.4300253083 degF, basis = hammerschmidt, reliable = false, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, deg 30.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for deg at 30.0 weight percent, recomputed by this generator = 9.1017689856 degF, relative difference against the golden = 1.951661e-16
+golden inhibitor row, deg at 40.0 weight percent: Hammerschmidt = 14.6664153788 degF, Nielsen-Bucklin = 13.8950878063 degF
+engine inhibitor row, deg at 40.0 weight percent: hammerschmidtF = 14.6689282573 degF, nielsenBucklinF = null, recommendedF = 14.6689282573 degF, basis = hammerschmidt, reliable = false, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, deg 40.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for deg at 40.0 weight percent, recomputed by this generator = 13.8950878063 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, deg at 50.0 weight percent: Hammerschmidt = 21.9996230682 degF, Nielsen-Bucklin = 20.3211703323 degF
+engine inhibitor row, deg at 50.0 weight percent: hammerschmidtF = 22.0033923860 degF, nielsenBucklinF = null, recommendedF = 22.0033923860 degF, basis = hammerschmidt, reliable = false, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, deg 50.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for deg at 50.0 weight percent, recomputed by this generator = 20.3211703323 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, teg at 5.0 weight percent: Hammerschmidt = 0.8182305668 degF, Nielsen-Bucklin = 0.8157085873 degF
+engine inhibitor row, teg at 5.0 weight percent: hammerschmidtF = 0.8183707588 degF, nielsenBucklinF = null, recommendedF = 0.8183707588 degF, basis = hammerschmidt, reliable = true, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, teg 5.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for teg at 5.0 weight percent, recomputed by this generator = 0.8157085873 degF, relative difference against the golden = 1.361053e-16
+golden inhibitor row, teg at 10.0 weight percent: Hammerschmidt = 1.7273756409 degF, Nielsen-Bucklin = 1.7160703860 degF
+engine inhibitor row, teg at 10.0 weight percent: hammerschmidtF = 1.7276716018 degF, nielsenBucklinF = null, recommendedF = 1.7276716018 degF, basis = hammerschmidt, reliable = true, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, teg 10.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for teg at 10.0 weight percent, recomputed by this generator = 1.7160703860 degF, relative difference against the golden = 1.293913e-16
+golden inhibitor row, teg at 20.0 weight percent: Hammerschmidt = 3.8865951921 degF, Nielsen-Bucklin = 3.8296896203 degF
+engine inhibitor row, teg at 20.0 weight percent: hammerschmidtF = 3.8872611041 degF, nielsenBucklinF = null, recommendedF = 3.8872611041 degF, basis = hammerschmidt, reliable = true, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, teg 20.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for teg at 20.0 weight percent, recomputed by this generator = 3.8296896203 degF, relative difference against the golden = 0.000000e+0
+golden inhibitor row, teg at 30.0 weight percent: Hammerschmidt = 6.6627346151 degF, Nielsen-Bucklin = 6.4975123654 degF
+engine inhibitor row, teg at 30.0 weight percent: hammerschmidtF = 6.6638761784 degF, nielsenBucklinF = null, recommendedF = 6.6638761784 degF, basis = hammerschmidt, reliable = false, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, teg 30.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for teg at 30.0 weight percent, recomputed by this generator = 6.4975123654 degF, relative difference against the golden = 1.366951e-16
+golden inhibitor row, teg at 40.0 weight percent: Hammerschmidt = 10.3642538456 degF, Nielsen-Bucklin = 9.9712741596 degF
+engine inhibitor row, teg at 40.0 weight percent: hammerschmidtF = 10.3660296109 degF, nielsenBucklinF = null, recommendedF = 10.3660296109 degF, basis = hammerschmidt, reliable = false, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, teg 40.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for teg at 40.0 weight percent, recomputed by this generator = 9.9712741596 degF, relative difference against the golden = 1.781474e-16
+golden inhibitor row, teg at 50.0 weight percent: Hammerschmidt = 15.5463807685 degF, Nielsen-Bucklin = 14.6832365505 degF
+engine inhibitor row, teg at 50.0 weight percent: hammerschmidtF = 15.5490444163 degF, nielsenBucklinF = null, recommendedF = 15.5490444163 degF, basis = hammerschmidt, reliable = false, spreadF = null
+derived, relative difference golden against engine Hammerschmidt, teg 50.0 = 1.713062e-4
+derived, the Nielsen-Bucklin the ORACLE publishes for teg at 50.0 weight percent, recomputed by this generator = 14.6832365505 degF, relative difference against the golden = 1.209786e-16
+# Every Hammerschmidt relative difference on those rows is the same number to
+# four figures, because it is one constant against another and nothing else.
+# Every Nielsen-Bucklin relative difference is at the round trip. The engine
+# and the oracle disagree on Hammerschmidt by a fixed ratio and agree on
+# Nielsen-Bucklin to the conversion. Section 21 says why.
+
+# SECTION 20: WHERE THE TWO RELATIONS SEPARATE, AND WHERE THE ENGINE DRAWS ITS LINE
+# HAMMERSCHMIDT_RELIABLE_WT_PCT is 25. Below it the engine reports
+# Hammerschmidt as recommendedF; above it, for methanol, it switches to
+# Nielsen-Bucklin. The switch is a report, not a redesign. Expert m04 owns it.
+engine methanol at 5.0 weight percent: hammerschmidtF = 3.8356659439 degF, nielsenBucklinF = 3.7795926053 degF, spreadF = 0.0560733386 degF, ratio Hammerschmidt over Nielsen-Bucklin = 1.0148358155, reliable = true, basis = hammerschmidt
+engine methanol at 10.0 weight percent: hammerschmidtF = 8.0975169926 degF, nielsenBucklinF = 7.8537784436 degF, spreadF = 0.2437385490 degF, ratio Hammerschmidt over Nielsen-Bucklin = 1.0310345588, reliable = true, basis = hammerschmidt
+engine methanol at 15.0 weight percent: hammerschmidtF = 12.8607622824 degF, nielsenBucklinF = 12.2606690615 degF, spreadF = 0.6000932210 degF, ratio Hammerschmidt over Nielsen-Bucklin = 1.0489445737, reliable = true, basis = hammerschmidt
+engine methanol at 20.0 weight percent: hammerschmidtF = 18.2194132335 degF, nielsenBucklinF = 17.0456465761 degF, spreadF = 1.1737666573 degF, ratio Hammerschmidt over Nielsen-Bucklin = 1.0688602015, reliable = true, basis = hammerschmidt
+engine methanol at 25.0 weight percent: hammerschmidtF = 24.2925509779 degF, nielsenBucklinF = 22.2632773467 degF, spreadF = 2.0292736312 degF, ratio Hammerschmidt over Nielsen-Bucklin = 1.0911489175, reliable = true, basis = hammerschmidt
+engine methanol at 30.0 weight percent: hammerschmidtF = 31.2332798288 degF, nielsenBucklinF = 27.9798914770 degF, spreadF = 3.2533883518 degF, ratio Hammerschmidt over Nielsen-Bucklin = 1.1162759460, reliable = false, basis = nielsenBucklin
+engine methanol at 35.0 weight percent: hammerschmidtF = 39.2418131182 degF, nielsenBucklinF = 34.2771256170 degF, spreadF = 4.9646875013 degF, ratio Hammerschmidt over Nielsen-Bucklin = 1.1448396682, reliable = false, basis = nielsenBucklin
+engine methanol at 40.0 weight percent: hammerschmidtF = 48.5851019559 degF, nielsenBucklinF = 41.2568938316 degF, spreadF = 7.3282081243 degF, ratio Hammerschmidt over Nielsen-Bucklin = 1.1776238452, reliable = false, basis = nielsenBucklin
+engine methanol at 45.0 weight percent: hammerschmidtF = 59.6271705822 degF, nielsenBucklinF = 49.0485355232 degF, spreadF = 10.5786350591 degF, ratio Hammerschmidt over Nielsen-Bucklin = 1.2156768790, reliable = false, basis = nielsenBucklin
+engine methanol at 50.0 weight percent: hammerschmidtF = 72.8776529338 degF, nielsenBucklinF = 57.8193913158 degF, spreadF = 15.0582616180 degF, ratio Hammerschmidt over Nielsen-Bucklin = 1.2604361837, reliable = false, basis = nielsenBucklin
+derived, the spread at the reliability line itself, 25.0 weight percent methanol = 2.0292736312 degF, which is 9.114892 percent of the Nielsen-Bucklin value, and the engine still reports reliable = true
+# The two relations do not start disagreeing at 25 weight percent. They
+# disagree at every concentration and the gap simply grows. 25 is where the
+# engine changes which one it PRINTS, not where the physics changes.
+
+# SECTION 21: THREE VALUES OF ONE CONSTANT, AND THE DILUTE LIMIT THAT DECIDES IT
+# The module carries k = 2335 on all four inhibitors and
+# NIELSEN_BUCKLIN_CONSTANT_F = 129.6. Those two are not independent.
+# Hammerschmidt in mole terms is (K / MW_water) times the inhibitor to water
+# mole ratio, and Nielsen-Bucklin is -129.6 ln(1 - x), whose leading term is
+# 129.6 x. For the module own two relations to meet as the solution goes
+# dilute, K has to be 129.6 times 18.015. The oracle metric round trip,
+# 1297 times 1.8, gives a third value. Expert m05 owns this.
+engine constant, the Hammerschmidt K the module carries = 2335.000000
+derived, the Hammerschmidt K that makes the module own two relations meet in the dilute limit, 129.6 times 18.015 = 2334.744000
+golden constant, the Hammerschmidt K the oracle reaches through the metric round trip, 1297 times 1.8 = 2334.600000
+derived, ratio of the carried K to the meeting K = 1.0001096480
+derived, ratio of the carried K to the metric K = 1.0001713356
+derived, ratio of the meeting K to the metric K = 1.0000616808
+engine methanol at 1 weight percent: hammerschmidtF = 0.7361379084225526 degF, nielsenBucklinF = 0.7339748803996604 degF, ratio = 1.0029470055
+engine methanol at 0.1 weight percent: hammerschmidtF = 0.0729506035373701 degF, nielsenBucklinF = 0.0729220861281794 degF, ratio = 1.0003910668
+engine methanol at 0.01 weight percent: hammerschmidtF = 0.0072884941427976 degF, nielsenBucklinF = 0.0072874901676978 degF, ratio = 1.0001377669
+engine methanol at 0.001 weight percent: hammerschmidtF = 0.0007287838171765 degF, nielsenBucklinF = 0.0007287018676155 degF, ratio = 1.0001124597
+# The ratio walks down toward the carried-K over meeting-K ratio as the
+# solution goes dilute, and what is left over is the series correction on the
+# logarithm. The gap is a constant, not a curvature.
+derived, the harness relative tolerance on Hammerschmidt = 5.0000e-4, on Nielsen-Bucklin = 1.0000e-9, ratio of the two tolerances = 500000.0
+derived, the actual relative gap between the carried K and the metric K = 1.713356e-4, which is inside the looser tolerance and would not survive the tighter one
+
+# SECTION 22: THE REQUIREMENT CHAIN ON TEACHING LINE AKASO SPUR, METHANOL
+# EVERY NUMBER IN THIS SECTION IS A TEACHING NUMBER. The subcooling, the
+# margin, the produced water rate and the lean strength were all chosen by
+# this wave. inhibitionRequirement SIZES with the Hammerschmidt inverse and
+# CHECKS with Nielsen-Bucklin, and nothing in the function compares the two.
+# Expert m04 owns this section.
+teaching, AKASO SPUR asks for 36.00 degF of shut-in subcooling plus a 5.00 degF margin, so neededDepressionF = 41.00 degF
+teaching, inhibitionRequirement methanol returns: ok = true, required = true, weightPct = 36.0035520084 weight percent, error = none
+teaching, and in the SAME returned object: depressionCheck.hammerschmidtF = 41.0000000000 degF, depressionCheck.nielsenBucklinF = 35.6195882812 degF, depressionCheck.recommendedF = 35.6195882812 degF, basis = nielsenBucklin, reliable = false
+teaching, the sized depression against the delivered depression: sized 41.0000000000 degF, delivered 35.6195882812 degF
+teaching, SHORTFALL against what was asked for = 5.3804117188 degF, which is 13.122955 percent of the need
+teaching, SHORTFALL against the BARE subcooling with no margin at all = 0.3804117188 degF
+teaching, injectionRate on that dose: rateBpd = 307.7753251096 bbl/d, streamDensityLbGal = 6.6696000000 lb/gal, massLbDay = 86215.008951, pureMassLbDay = 82766.408593
+derived, inverting NIELSEN-BUCKLIN instead for the same 41.00 degF need gives 39.8251780234 weight percent methanol
+derived, that is 3.8216260150 weight percent more than the engine sized, and its Nielsen-Bucklin depression is 41.0000000000 degF
+derived, the injection rate at that concentration on the teaching line = 362.0655724349 bbl/d, which is 54.2902473253 bbl/d and 17.639571 percent more methanol
+# The engine returns ok = true on a design whose own check, printed in an
+# adjacent field of the same object, does not reach the subcooling it was
+# handed. Nothing in the function reads depressionCheck back.
+
+# SECTION 23: HOW SHORT IS SHORT, ACROSS A SWEEP OF NEEDS
+# A sweep this generator ran on the teaching line water rate and lean
+# strength. A SWEEP POINT IS NOT A PUBLISHED CASE. Only the need moves.
+derived sweep, need 15.0 degF: sized weightPct = 17.0691859639, delivered hammerschmidt = 15.0000000000 degF, shortfall = -0.0000000000 degF, shortfall percent = -0.000000, reliable = true, ok = true
+derived sweep, need 20.0 degF: sized weightPct = 21.5337052221, delivered hammerschmidt = 20.0000000000 degF, shortfall = 0.0000000000 degF, shortfall percent = 0.000000, reliable = true, ok = true
+derived sweep, need 25.0 degF: sized weightPct = 25.5420918367, delivered nielsenBucklin = 22.8576327543 degF, shortfall = 2.1423672457 degF, shortfall percent = 8.569469, reliable = false, ok = true
+derived sweep, need 30.0 degF: sized weightPct = 29.1608518901, delivered nielsenBucklin = 26.9823691235 degF, shortfall = 3.0176308765 degF, shortfall percent = 10.058770, reliable = false, ok = true
+derived sweep, need 35.0 degF: sized weightPct = 32.4441615554, delivered nielsenBucklin = 30.9798680083 degF, shortfall = 4.0201319917 degF, shortfall percent = 11.486091, reliable = false, ok = true
+derived sweep, need 41.0 degF: sized weightPct = 36.0035520084, delivered nielsenBucklin = 35.6195882812 degF, shortfall = 5.3804117188 degF, shortfall percent = 13.122955, reliable = false, ok = true
+derived sweep, need 50.0 degF: sized weightPct = 40.6908813818, delivered nielsenBucklin = 42.2818508589 degF, shortfall = 7.7181491411 degF, shortfall percent = 15.436298, reliable = false, ok = true
+derived sweep, need 60.0 degF: sized weightPct = 45.1543195377, delivered nielsenBucklin = 49.3036127042 degF, shortfall = 10.6963872958 degF, shortfall percent = 17.827312, reliable = false, ok = true
+# The shortfall is zero nowhere and negative nowhere. Below the reliability
+# line the engine reports Hammerschmidt as the delivered depression, which is
+# the same relation it sized with, so the shortfall reads as exactly zero and
+# the check has proved nothing at all. Above it the check switches relation
+# and the shortfall appears in one step.
+
+# SECTION 24: NO CHECK AT ALL FOR MEG, AND THE MOLE FRACTION THAT GIVES IT AWAY
+# TEACHING LINE conditions, MEG at its own lean strength. The catalog carries
+# nielsenBucklin = false on MEG, so depressionCheck.nielsenBucklinF is null,
+# basis stays hammerschmidt, and recommendedF is the sizing relation reported
+# back as the check. Expert m04 owns this.
+teaching, inhibitionRequirement MEG on the same 41.00 degF need returns: ok = true, required = true, weightPct = 52.1503646614 weight percent
+teaching, its depressionCheck: hammerschmidtF = 41.0000000000 degF, nielsenBucklinF = null, recommendedF = 41.0000000000 degF, basis = hammerschmidt, spreadF = null, reliable = false
+teaching, so the MEG design reads as delivering 41.0000000000 degF against a need of 41.00 degF, a shortfall of 0.0000000000 degF
+teaching, injectionRate on the MEG dose: rateBpd = 466.5311621077 bbl/d, streamDensityLbGal = 9.1944000000 lb/gal
+derived, running nielsenBucklinDepression on that MEG concentration by hand gives 35.6195882812 degF
+derived, the methanol dose and the MEG dose sit at the same mole fraction: methanol 0.2403082363926517, MEG 0.2403082363926517, difference 0.0000e+0
+# That is not a coincidence. The Hammerschmidt inverse fixes the inhibitor to
+# water MOLE RATIO at 18.015 times the depression over K, and K is the same
+# 2335 on all four fluids, so every fluid sized for the same depression lands
+# on the same mole fraction and therefore on the same Nielsen-Bucklin answer.
+# The check the engine declines to run for MEG is the check it already ran
+# for methanol, to the last figure.
+
+# SECTION 25: THE CEILING MEASURED IN THE COORDINATES OF THE RELATION IT DOES NOT TRUST
+# MAX_PRACTICAL_WT_PCT is 70 and inhibitionRequirement compares against it the
+# concentration it got from the HAMMERSCHMIDT inverse. So the refusal boundary
+# is drawn in the coordinates of the over-predicting relation. Expert m05.
+engine, methanol at the 70.0 weight percent ceiling: hammerschmidtDepression = 170.0478568456 degF, nielsenBucklinDepression = 108.6168490752 degF
+derived, the BAND the engine will design inside and the chemistry it checks against cannot deliver = 61.4310077704 degF wide
+derived, ratio of the ceiling in Hammerschmidt coordinates to the ceiling in Nielsen-Bucklin coordinates = 1.5655753071
+engine, MEG at the same 70.0 weight percent ceiling: hammerschmidtDepression = 87.7772407497 degF, and depression() reports nielsenBucklinF = null there as everywhere
+derived, running nielsenBucklinDepression on 70.0 weight percent MEG by hand = 67.0209843317 degF
+derived sweep, need 80.0 degF methanol: ok = true, sized weightPct = 52.3294271365, delivered nielsenBucklin = 62.2995393132 degF, shortfall = 17.7004606868 degF, ACCEPTED
+derived sweep, need 100.0 degF methanol: ok = true, sized weightPct = 57.8443762412, delivered nielsenBucklin = 74.1102214571 degF, shortfall = 25.8897785429 degF, ACCEPTED
+derived sweep, need 120.0 degF methanol: ok = true, sized weightPct = 62.2156056830, delivered nielsenBucklin = 84.9338967494 degF, shortfall = 35.0661032506 degF, ACCEPTED
+derived sweep, need 140.0 degF methanol: ok = true, sized weightPct = 65.7654751781, delivered nielsenBucklin = 94.9228840490 degF, shortfall = 45.0771159510 degF, ACCEPTED
+derived sweep, need 160.0 degF methanol: ok = true, sized weightPct = 68.7056048463, delivered nielsenBucklin = 104.1967543907 degF, shortfall = 55.8032456093 degF, ACCEPTED
+derived sweep, need 175.0 degF methanol: ok = false, weightPct = 70.5993452531, REFUSED, error = Killing 175.0 F of subcooling would take 70.6 weight percent methanol in the water, past the 70 percent anything is actually run at. This much subcooling is a thermal or a dosing-strategy problem -- insulation, heating, or displacing the line -- not an inhibitor-concentration one.
+# The last accepted row and the first refused row are both above what 70
+# weight percent methanol can actually kill. The ceiling is not a safety
+# limit in the coordinates the module says to believe.
+
+# SECTION 26: leanWtPct AS A WEIGHT PERCENT AND AS A VOLUME PERCENT, ONE LINE APART
+# Inside injectionRate the gross-up treats lean as a WEIGHT percent, which it
+# is, and the density blend on the next line weights the component densities
+# by the same number, which is the VOLUME fraction rule. The mass-fraction
+# form of an ideal blend is 1/rho = w_i/rho_i + w_w/rho_w. Expert m05.
+teaching, methanol lean 96.0 weight percent: engine streamDensityLbGal = 6.6696000000 lb/gal, mass-fraction blend = 6.6555426582 lb/gal, engine value high by 0.211213 percent
+teaching, methanol rate as the engine returns it = 307.7753251096 bbl/d, with the mass-fraction density = 308.4253852443 bbl/d, engine rate LOW by 0.211213 percent
+teaching, meg lean 89.0 weight percent: engine streamDensityLbGal = 9.1944000000 lb/gal, mass-fraction blend = 9.1837169650 lb/gal, engine value high by 0.116326 percent
+teaching, meg rate as the engine returns it = 466.5311621077 bbl/d, with the mass-fraction density = 467.0738583526 bbl/d, engine rate LOW by 0.116326 percent
+# Because the arithmetic mean of two densities always exceeds the harmonic
+# mean, the engine stream density comes out HIGH and, since the rate is a
+# mass over a density, the rate comes out LOW. Always LOW, never high.
+derived sweep, lean methanol 90.0 weight percent: engine blend = 6.7740000000 lb/gal, mass-fraction blend = 6.7406318883 lb/gal, rate LOW by 0.495029 percent
+derived sweep, lean methanol 80.0 weight percent: engine blend = 6.9480000000 lb/gal, mass-fraction blend = 6.8873873874 lb/gal, rate LOW by 0.880052 percent
+derived sweep, lean methanol 70.0 weight percent: engine blend = 7.1220000000 lb/gal, mass-fraction blend = 7.0406753645 lb/gal, rate LOW by 1.155069 percent
+derived sweep, lean methanol 60.0 weight percent: engine blend = 7.2960000000 lb/gal, mass-fraction blend = 7.2009419152 lb/gal, rate LOW by 1.320078 percent
+derived sweep, lean methanol 50.0 weight percent: engine blend = 7.4700000000 lb/gal, mass-fraction blend = 7.3686746988 lb/gal, rate LOW by 1.375082 percent
+# The error is a fraction of a percent on a strong lean stream and grows as
+# the stream is diluted. It cannot be both conventions, and one line has to
+# change.
+
+
+
+# SECTION 27: THE JOULE-THOMSON TERM, THREE WAYS, ON THE TEACHING LINE
+# TEACHING LINE. Section 14 promised this row and the generator that wrote
+# it never emitted the section, so the largest finding in the course had no
+# numbers behind it. This section supplies them. NO PUBLISHED CASE SETS ANY
+# PRESSURE, so the Joule-Thomson term cannot be shown on a golden at all and
+# the oracle, which sets no pressures either, never sees any of this.
+# The engine applies the term as jtDrop = jtCoeff * dp * frac, so at the
+# outlet frac is 1 and THE WHOLE TERM LANDS UNDAMPED. The cooling is in fact
+# laid down ALONG the line, and each increment of it then decays toward
+# ambient over the length that remains, which damps the delivered term by
+# (1 - exp(-ntu)) / ntu. Expert m01 owns this section.
+teaching, AKASO SPUR overall U from overallU on the Section 13 stack = 0.452972856617 Btu/(hr ft2 degF), referred to 9.562 in, ok = true
+teaching, AKASO SPUR ntu = 1.219288832549, exp(-ntu) = 0.295440199685
+teaching, AKASO SPUR full Joule-Thomson term, jtCoeff times the 900.0 psi drop = 25.2000000000 degF
+derived, the correct damping factor ntu / (1 - exp(-ntu)) = 1.730568266886
+derived, the Joule-Thomson term the engine applies = 25.2000000000 degF
+derived, the Joule-Thomson term correctly damped = 14.5616907938 degF
+derived, the term the engine applies in excess of the damped one = 10.6383092062 degF
+derived, the engine term as a multiple of the damped term = 1.730568266886
+
+# THE THREE ARRIVALS, against the 71.00 degF FLOWING hydrate boundary, which
+# is a laboratory input and not an engine output.
+teaching, ARRIVAL 1 heat loss only, no pressures passed = 89.316029952695 degF, margin = 18.3160299527 degF, OUTSIDE the hydrate region
+derived, ARRIVAL 2 heat loss plus the CORRECTLY DAMPED term = 74.754339158867 degF, margin = 3.7543391589 degF, OUTSIDE the hydrate region
+engine, ARRIVAL 3 what steadyStateProfile RETURNS, term undamped = 64.116029952695 degF, margin = -6.8839700473 degF, INSIDE the hydrate region
+derived, the engine arrival below the correctly damped one = 10.6383092062 degF
+derived, ok on all three profiles = true and true, note = none, error = none
+# THE VERDICT FLIPS. Arrivals 1 and 2 sit above the boundary and arrival 3,
+# which is the one the shipped engine returns, sits below it. The whole
+# difference between a line that is safe and a line that is hydrating is one
+# damping factor that is not applied.
+
+# SECTION 28: PUSH THE LINE LONGER, AND THE SIZE OF THE EXCURSION
+# TEACHING LINE, derived sweep on teaching inputs. Every row is a sweep point
+# and not a published case.
+# READ THE SIGN CAREFULLY, BECAUSE THE OBVIOUS READING OF THIS TABLE IS
+# WRONG. As the line lengthens the heat loss arrival approaches the 45.00
+# degF seabed from above, which is correct, and the undamped Joule-Thomson
+# term does not shrink with it, so the returned arrival crosses the seabed.
+# BUT A BELOW-AMBIENT ARRIVAL IS NOT BY ITSELF IMPOSSIBLE. A Joule-Thomson
+# term is a genuine heat SINK inside the line, not a modelling artefact, and
+# a real sink can hold fluid below the temperature of what surrounds it. The
+# CORRECTLY DAMPED column below goes under the seabed too, from 150000.0 ft
+# onward. So the defect is NOT that the engine returns a sub-seabed arrival.
+# THE DEFECT IS THE SIZE OF THE EXCURSION, and the excursion rows price it.
+# A SECOND THING THIS TABLE DOES NOT SHOW. uForArrivalTemp carries NO
+# Joule-Thomson term at all, so when it refuses one of these temperatures it
+# is refusing a target unreachable BY HEAT LOSS ALONE, which is a different
+# question from the one steadyStateProfile answered. The two functions are
+# each self-consistent and neither knows the other was asked. That is a SEAM
+# between two APIs, not one function contradicting another about physics,
+# and a lesson that calls it a contradiction is overclaiming.
+# Expert m01 owns this too.
+derived sweep point, length 60000.0 ft: ntu = 1.2192888325, heat loss arrival = 89.3160299527 degF, damped arrival = 74.7543391589 degF, engine arrival = 64.1160299527 degF
+derived excursion at 60000.0 ft: the CORRECT reading is 29.7543391589 degF above the seabed, the ENGINE is 19.1160299527 degF above the seabed, and the engine excursion exceeds the correct one by 10.6383092062 degF
+derived sweep point, length 90000.0 ft: ntu = 1.8289332488, heat loss arrival = 69.0877170663 degF, damped arrival = 57.5218146220 degF, engine arrival = 43.8877170663 degF
+derived excursion at 90000.0 ft: the CORRECT reading is 12.5218146220 degF above the seabed, the ENGINE is 1.1122829337 degF BELOW the seabed, and the engine excursion exceeds the correct one by 13.6340975558 degF
+derived sweep point, length 120000.0 ft: ntu = 2.4385776651, heat loss arrival = 58.0927367385 degF, damped arrival = 48.6608369236 degF, engine arrival = 32.8927367385 degF
+derived excursion at 120000.0 ft: the CORRECT reading is 3.6608369236 degF above the seabed, the ENGINE is 12.1072632615 degF BELOW the seabed, and the engine excursion exceeds the correct one by 15.7681001851 degF
+derived sweep point, length 150000.0 ft: ntu = 3.0482220814, heat loss arrival = 52.1164799400 degF, damped arrival = 44.2415841059 degF, engine arrival = 26.9164799400 degF
+derived excursion at 150000.0 ft: the CORRECT reading is 0.7584158941 degF BELOW the seabed, the ENGINE is 18.0835200600 degF BELOW the seabed, and the engine excursion exceeds the correct one by 17.3251041659 degF
+derived sweep point, length 180000.0 ft: ntu = 3.6578664976, heat loss arrival = 48.8681207564 degF, damped arrival = 42.1565155820 degF, engine arrival = 23.6681207564 degF
+derived excursion at 180000.0 ft: the CORRECT reading is 2.8434844180 degF BELOW the seabed, the ENGINE is 21.3318792436 degF BELOW the seabed, and the engine excursion exceeds the correct one by 18.4883948256 degF
+derived sweep point, length 210000.0 ft: ntu = 4.2675109139, heat loss arrival = 47.1024942545 degF, damped arrival = 41.2801820293 degF, engine arrival = 21.9024942545 degF
+derived excursion at 210000.0 ft: the CORRECT reading is 3.7198179707 degF BELOW the seabed, the ENGINE is 23.0975057455 degF BELOW the seabed, and the engine excursion exceeds the correct one by 19.3776877748 degF
+
+# WHAT THE INVERSE SAYS ABOUT THE SAME TEMPERATURE.
+derived, at 180000.0 ft steadyStateProfile RETURNS 23.6681207564 degF with ok = true, and uForArrivalTemp asked for that same temperature returns ok = false, reason = "A line cannot arrive above ambient (45 F) no matter how well it is insulated. The target has to be above it."
+derived, at 210000.0 ft steadyStateProfile RETURNS 21.9024942545 degF with ok = true, and uForArrivalTemp asked for that same temperature returns ok = false, reason = "A line cannot arrive above ambient (45 F) no matter how well it is insulated. The target has to be above it."
+# ONE FUNCTION RETURNS THE TEMPERATURE AND THE OTHER REFUSES IT, AND THE
+# REASON IS THAT THEY ARE ANSWERING DIFFERENT QUESTIONS. uForArrivalTemp has
+# no pressure argument and no Joule-Thomson term, so it prices heat loss
+# alone and is right to refuse a sub-ambient target on that basis. The seam
+# is that nothing in either signature tells a caller the two are not
+# comparable, and the refusal text names ambient as the reason without
+# saying which mechanisms were considered.
+
+# SECTION 29: THE CEILING REFUSES ON CONCENTRATION AND NEVER ON SHORTFALL
+# derived sweep on the shipped engine. Every row calls inhibitionRequirement
+# with methanol and reads its OWN depressionCheck back. The refusal branch
+# in the function compares weightPct against maxWtPct and NOTHING compares
+# the delivered depression against the need, so the shortfall below grows
+# monotonically while ok stays true, and the one row that IS refused is
+# refused for exceeding the concentration ceiling rather than for being the
+# worst answer in the table. Expert m05 owns this section.
+engine, the Hammerschmidt reliability limit = 25.0 weight percent, the practical ceiling = 70.0 weight percent
+derived, Hammerschmidt at the 70.0 weight percent ceiling, methanol = 170.0478568456 degF
+derived, Nielsen-Bucklin at the same 70.0 weight percent, methanol = 108.6168490752 degF
+
+derived sweep point, subcooling 60.0 degF: ok = true, design = 45.1543195377 weight percent, Nielsen-Bucklin delivers = 49.3036127042 degF, short by = 10.6963872958 degF, ACCEPTED
+derived sweep point, subcooling 80.0 degF: ok = true, design = 52.3294271365 weight percent, Nielsen-Bucklin delivers = 62.2995393132 degF, short by = 17.7004606868 degF, ACCEPTED
+derived sweep point, subcooling 100.0 degF: ok = true, design = 57.8443762412 weight percent, Nielsen-Bucklin delivers = 74.1102214571 degF, short by = 25.8897785429 degF, ACCEPTED
+derived sweep point, subcooling 120.0 degF: ok = true, design = 62.2156056830 weight percent, Nielsen-Bucklin delivers = 84.9338967494 degF, short by = 35.0661032506 degF, ACCEPTED
+derived sweep point, subcooling 140.0 degF: ok = true, design = 65.7654751781 weight percent, Nielsen-Bucklin delivers = 94.9228840490 degF, short by = 45.0771159510 degF, ACCEPTED
+derived sweep point, subcooling 160.0 degF: ok = true, design = 68.7056048463 weight percent, Nielsen-Bucklin delivers = 104.1967543907 degF, short by = 55.8032456093 degF, ACCEPTED
+derived sweep point, subcooling 170.0 degF: ok = true, design = 69.9940887712 weight percent, Nielsen-Bucklin delivers = 108.5961499505 degF, short by = 61.4038500495 degF, ACCEPTED
+derived sweep point, subcooling 180.0 degF: ok = false, design = 71.1806669793 weight percent, Nielsen-Bucklin delivers = 112.8510939641 degF, short by = 67.1489060359 degF, REFUSED on concentration
+# THE SHORTFALL IS MONOTONE IN THE NEED AND ok IS TRUE FOR ALL BUT THE LAST
+# ROW. The last row is not refused for being short by the most; it is refused
+# for asking for a concentration above the ceiling. Sort this table by
+# shortfall and the refusal is still in the same place.
+
+# THE INPUT THAT IS NOT THERE, and it is the same NaN-is-falsy habit as the
+# swallowed trench and the swallowed mass, in the one place where the
+# fails-open answer is the dangerous one.
+engine, inhibitionRequirement called with NO subcoolingF at all: ok = true, required = false, neededDepressionF = NaN, weightPct = none, note = "The fluid sits outside the hydrate region by NaN F. No inhibitor is needed to keep it there."
+# The guard is !(need > 0), which is TRUE for a NaN, so the branch meant for
+# "the fluid is already outside the hydrate region" also catches "nobody said
+# where the fluid is". The caller is told NO INHIBITOR IS NEEDED, with ok
+# true, and the note prints the words NaN F to a user.
+
+# SECTION 30: ONE NEED, FOUR FLUIDS, ONE MOLE FRACTION, ONE CHECK
+# derived on the shipped engine. The catalog sets nielsenBucklin true on
+# methanol and FALSE on all three glycols, so `depression` returns a null
+# check for three of the four fluids and a glycol design has no cross
+# relation at all. The stated reason is that Nielsen-Bucklin was developed
+# for methanol. THE ARITHMETIC DOES NOT SUPPORT THAT REASON.
+# Hammerschmidt is dT = k w / (MW (100 - w)), so its inverse fixes the group
+# r = w / (MW (100 - w)) at dT / k. The mole fraction is r / (r + 1/18.015),
+# WHICH CONTAINS NO MOLECULAR WEIGHT. Every inhibitor in the catalog carries
+# the same k of 2335. So any two fluids sized to one need land on one mole
+# fraction, and Nielsen-Bucklin, which is -129.6 ln(1 - x), returns one
+# number for all of them. Expert m04 owns this section.
+derived, the need every row below is sized to = 36.0 degF
+engine, methanol: k = 2335.0, molecular weight = 32.040, design = 33.0646363417 weight percent, mole fraction = 0.21737265128002306, Hammerschmidt back = 36.0000000000 degF, Nielsen-Bucklin = 31.7647816499 degF, what depression() RETURNS as its check = 31.7647816499
+engine, meg: k = 2335.0, molecular weight = 62.070, design = 48.9005409759 weight percent, mole fraction = 0.21737265128002303, Hammerschmidt back = 36.0000000000 degF, Nielsen-Bucklin = 31.7647816499 degF, what depression() RETURNS as its check = null
+engine, deg: k = 2335.0, molecular weight = 106.120, design = 62.0653353522 weight percent, mole fraction = 0.21737265128002306, Hammerschmidt back = 36.0000000000 degF, Nielsen-Bucklin = 31.7647816499 degF, what depression() RETURNS as its check = null
+engine, teg: k = 2335.0, molecular weight = 150.170, design = 69.8364061014 weight percent, mole fraction = 0.21737265128002312, Hammerschmidt back = 36.0000000000 degF, Nielsen-Bucklin = 31.7647816499 degF, what depression() RETURNS as its check = null
+# FOUR DIFFERENT CONCENTRATIONS, ONE MOLE FRACTION TO WITHIN A SINGLE ULP,
+# ONE IDENTICAL NIELSEN-BUCKLIN. The check that is suppressed for three of
+# these fluids is the SAME NUMBER it computes for the fourth. Suppressing it
+# removes a check and changes no answer, and a reader who sees a glycol
+# design come back with a null check should not conclude it was validated
+# some other way. It was not validated at all.
+
+# SECTION 31: A HALF SPECIFIED PRESSURE INPUT, AND THE TELL IT DESTROYS
+# engine, on the teaching line. The pressure drop is computed only when BOTH
+# inletPsia and outletPsia are finite, and dp falls back to zero otherwise,
+# which is the right default. But the station pressure column is written as
+# pPsia = Number.isFinite(inletPsia) ? inletPsia - dp * frac : NaN, and that
+# guard reads the INLET ALONE. Supply an inlet and forget the outlet and the
+# column comes back fully populated and FLAT at the inlet pressure, while the
+# Joule-Thomson term is silently zero. THE n/a COLUMN IS HOW A READER KNOWS
+# THE TERM WAS NOT APPLIED, and a half specified input replaces that tell
+# with a plausible one. The failure is ASYMMETRIC: forget the INLET instead
+# and the column is honestly n/a. Expert m01 and m02 may both cite it.
+engine, BOTH pressures, the correct call: ok = true, arrival = 64.1160299527 degF, pressure column = [2400.0, 2175.0, 1950.0, 1725.0, 1500.0], note = none, error = none
+engine, NEITHER pressure, heat loss only: ok = true, arrival = 89.3160299527 degF, pressure column = [n/a, n/a, n/a, n/a, n/a], note = none, error = none
+engine, INLET ONLY, the outlet forgotten: ok = true, arrival = 89.3160299527 degF, pressure column = [2400.0, 2400.0, 2400.0, 2400.0, 2400.0], note = none, error = none
+engine, OUTLET ONLY, the inlet forgotten: ok = true, arrival = 89.3160299527 degF, pressure column = [n/a, n/a, n/a, n/a, n/a], note = none, error = none
+# THE TWO MIDDLE ROWS RETURN THE SAME ARRIVAL AND DIFFERENT PRESSURE COLUMNS.
+# One says plainly that no pressure was known. The other shows a pressure at
+# every station, none of which the line ever had, and neither carries a note.
+
+# SECTION 32: THREE MORE THINGS THE ENGINE DOES NOT CHECK
+# engine, on the published pipe. Expert m02 and m05 may cite any of these.
+
+# A. overallU NEVER CHECKS THAT ITS LAYERS ARE A STACK. Neither contiguity
+# nor order. The outer diameter it uses for BOTH the outside film AND the
+# burial term is list[list.length - 1].odIn, so passing the same two layers
+# in the wrong order silently moves both, and on a buried build it moves the
+# TRENCH. Nothing in the return says the stack was not a stack.
+engine, layers in the CORRECT order: ok = true, U = 1.3348791131 Btu/(hr ft2 degF), total resistance = 0.471800753818
+engine, the SAME two layers REVERSED: ok = true, U = 1.2208652757 Btu/(hr ft2 degF), total resistance = 0.472256288017, error in U = -8.541136 percent
+engine, a coat FLOATING IN SPACE, bore 20 in to 30 in outside a 6.625 in pipe: ok = true, U = 0.8738488344 Btu/(hr ft2 degF), error = none
+engine, BURIED 4.0 ft correct order: U = 0.7132000377, burial resistance = 0.4112572083
+engine, BURIED 4.0 ft REVERSED: U = 0.6276431337, burial resistance = 0.4463569689, error in U = -11.996200 percent
+
+# B. depression() IS DISCONTINUOUS AT THE RELIABILITY LINE. recommendedF
+# switches which relation it reports at 25 weight percent. Neither relation
+# moves across the step; only which one is reported does.
+engine methanol at 24.900 weight percent: recommendedF = 24.1631632231 degF, basis = hammerschmidt, reliable = true
+engine methanol at 24.999 weight percent: recommendedF = 24.2912553925 degF, basis = hammerschmidt, reliable = true
+engine methanol at 25.000 weight percent: recommendedF = 24.2925509779 degF, basis = hammerschmidt, reliable = true
+engine methanol at 25.001 weight percent: recommendedF = 22.2643683426 degF, basis = nielsenBucklin, reliable = false
+engine methanol at 25.100 weight percent: recommendedF = 22.3724755825 degF, basis = nielsenBucklin, reliable = false
+derived, the JUMP in recommendedF across 0.002 weight percent = 2.0268870499 degF
+
+# C. reliable IS STRANGER FOR A GLYCOL THAN FOR METHANOL, and this is the
+# unarguable form of the print-switch reading. For methanol a false flag at
+# least comes with a SWITCH of relation. For a glycol nielsenBucklinF is null,
+# so the flag flips to false, the basis stays hammerschmidt, spreadF stays
+# null, and recommendedF stays THE SAME NUMBER the engine just called
+# unreliable. It declares its own answer unreliable and then reports it, with
+# nothing to compare it against.
+engine methanol at 20.0 weight percent: recommendedF = 18.2194132335 degF, basis = hammerschmidt, spreadF = 1.17376666, nielsenBucklinF = 17.04564658, reliable = true
+engine methanol at 30.0 weight percent: recommendedF = 27.9798914770 degF, basis = nielsenBucklin, spreadF = 3.25338835, nielsenBucklinF = 27.97989148, reliable = false
+engine methanol at 40.0 weight percent: recommendedF = 41.2568938316 degF, basis = nielsenBucklin, spreadF = 7.32820812, nielsenBucklinF = 41.25689383, reliable = false
+engine meg at 20.0 weight percent: recommendedF = 9.4047043660 degF, basis = hammerschmidt, spreadF = null, nielsenBucklinF = null, reliable = true
+engine meg at 30.0 weight percent: recommendedF = 16.1223503418 degF, basis = hammerschmidt, spreadF = null, nielsenBucklinF = null, reliable = false
+engine meg at 40.0 weight percent: recommendedF = 25.0792116428 degF, basis = hammerschmidt, spreadF = null, nielsenBucklinF = null, reliable = false
+
+# D. THE uForArrivalTemp REFUSAL STRING SAYS THE OPPOSITE OF WHAT ITS GUARD
+# ENFORCES. The guard is !(targetTempF > ambientTempF), so it fires on a
+# target AT OR BELOW ambient, and the physics is that a line cannot arrive
+# BELOW ambient by heat loss alone. The string says "above". It also
+# contradicts its own second clause, which says the target has to be above
+# ambient. This reaches a USER in the product, not only a learner.
+engine, target 40.00 degF against a 45.00 degF ambient: ok = false, reason = "A line cannot arrive above ambient (45 F) no matter how well it is insulated. The target has to be above it."
+# The first clause should read BELOW. As written the sentence contradicts
+# the sentence that follows it.

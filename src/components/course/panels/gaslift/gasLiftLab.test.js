@@ -25,7 +25,7 @@
 // and a lesson reading another is exactly the failure this file exists to stop.
 //
 // AND THE SEVENTY EIGHT SHIPPED LESSONS are pinned too. They were written from
-// /root/pd-wip-gaslift/digest.txt, so a lab value that disagrees with that file
+// tools/course-waves/gaslift/digest.txt, so a lab value that disagrees with that file
 // breaks a lesson that is already written. `teachingDigestLines()` is compared
 // with it LINE FOR LINE, at the digest's own printed precision, which is a
 // stronger statement than a label map: every teaching number in this lab flows
@@ -38,6 +38,7 @@ import * as path from 'node:path';
 import * as crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import * as L from './gasLiftLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const G = L.GOLDEN;
@@ -58,7 +59,7 @@ const relNear = (a, b, tol) => expect(rel(a, b)).toBeLessThan(tol);
  * be.
  *
  * Every one of them is a return value of the gas lift engines, produced by the
- * capstone derivation in /root/pd-wip-gaslift/pd2_fields.mjs and carried here
+ * capstone derivation in tools/course-waves/gaslift/pd2_fields.mjs and carried here
  * verbatim so the grader, the lessons and this file all pin one set of numbers.
  * `capstoneValues()` in the lab reproduces the same derivation call for call,
  * and the test below is what proves the two have not drifted.
@@ -1031,8 +1032,16 @@ describe('the capstone derivation', () => {
 // 4. THE SEVENTY EIGHT SHIPPED LESSONS.
 // ---------------------------------------------------------------------------
 
-const DIGEST_PATH = '/root/pd-wip-gaslift/digest.txt';
-const digestAvailable = fs.existsSync(DIGEST_PATH);
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'gaslift';
+const DIGEST_PATH = waveInput(WAVE_NAME, 'digest.txt');
+// The digest is committed under tools/course-waves, so the block below always
+// runs. It used to skip itself whenever the wave directory was absent, which on
+// every machine but its author's meant this whole agreement check passed
+// without comparing anything.
 
 /**
  * The one place the VENDORED ENGINE is now ahead of the shipped digest.
@@ -1119,15 +1128,13 @@ describe('the teaching digest', () => {
   });
 });
 
-describe.skipIf(!digestAvailable)('AGREEMENT WITH THE SHIPPED DIGEST that the 78 lessons quote', () => {
-  // A lab value that disagrees with /root/pd-wip-gaslift/digest.txt breaks a
+describe('AGREEMENT WITH THE SHIPPED DIGEST that the 78 lessons quote', () => {
+  // A lab value that disagrees with tools/course-waves/gaslift/digest.txt breaks a
   // lesson that is already written, so this is compared LINE FOR LINE at the
   // digest's own printed precision rather than spot checked. Every teaching
   // number in this lab reaches a line of this file, and every line of this file
   // is rendered from an accessor, so the two statements are one statement.
-  const shipped = digestAvailable
-    ? fs.readFileSync(DIGEST_PATH, 'utf8').replace(/\n$/, '').split('\n')
-    : [];
+  const shipped = fs.readFileSync(DIGEST_PATH, 'utf8').replace(/\n$/, '').split('\n');
   const lab = L.teachingDigestLines();
 
   it('is the same length', () => {

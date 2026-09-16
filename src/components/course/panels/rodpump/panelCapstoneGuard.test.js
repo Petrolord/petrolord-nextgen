@@ -46,11 +46,17 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as L from './rodPumpLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
-const FIELDS_PATH = '/root/pd-wip-rodpump/fields.json';
-const DIGEST_PATH = '/root/pd-wip-rodpump/digest.txt';
+// THE WAVE INPUTS. Read from the committed copy under tools/course-waves by
+// default, which is what lets this suite run anywhere, CI included. Point it
+// at a live wave directory mid-build with NEXTGEN_WAVE_DIR. A missing input
+// throws and names itself rather than skipping: see tools/course-waves/waveInputs.mjs.
+const WAVE_NAME = 'rodpump';
+const FIELDS_PATH = waveInput(WAVE_NAME, 'fields.json');
+const DIGEST_PATH = waveInput(WAVE_NAME, 'digest.txt');
 
 /**
  * THE EIGHTEEN GRADED FIELDS, as [tier, key, value, tolerance], carried here so
@@ -105,11 +111,7 @@ const SHIFTS = Object.freeze([
   { tag: 'psig from psia', apply: (v) => v - PSI_ATM, bandFactor: 1 },
 ]);
 
-const fieldsOnDisk = fs.existsSync(FIELDS_PATH)
-  ? JSON.parse(fs.readFileSync(FIELDS_PATH, 'utf8'))
-  : null;
-
-const digestAvailable = fs.existsSync(DIGEST_PATH);
+const fieldsOnDisk = JSON.parse(fs.readFileSync(FIELDS_PATH, 'utf8'));
 
 /** Every forbidden neighbourhood: eighteen graded answers in five shiftings,
  * each with a band ten times the grader's own. */
@@ -170,7 +172,7 @@ describe('the guard is built from the graded fields themselves', () => {
       .toBe(0.0046);
   });
 
-  it.skipIf(!fieldsOnDisk)('and the copy still matches fields.json, which is the authority', () => {
+  it('and the copy still matches fields.json, which is the authority', () => {
     expect(fieldsOnDisk).toHaveLength(CAPSTONE_FIELDS.length);
     fieldsOnDisk.forEach((row, i) => {
       expect(row).toEqual([...CAPSTONE_FIELDS[i]]);
@@ -203,7 +205,7 @@ describe('no teaching number lands within ten grading bands of a graded answer',
     expect(hits).toEqual([]);
   }, 300000);
 
-  it.skipIf(!digestAvailable)('NOR ONE anywhere in the digest the 78 lessons were written from', () => {
+  it('NOR ONE anywhere in the digest the 78 lessons were written from', () => {
     const numbers = digestNumbers();
     expect(numbers.length).toBeGreaterThan(5000);
     const hits = [];
@@ -214,7 +216,7 @@ describe('no teaching number lands within ten grading bands of a graded answer',
     expect(hits).toEqual([]);
   }, 300000);
 
-  it.skipIf(!digestAvailable)('and the closest either surface comes is many bands away', () => {
+  it('and the closest either surface comes is many bands away', () => {
     const closest = (rows) => {
       let best = null;
       rows.forEach(({ label, value }) => {

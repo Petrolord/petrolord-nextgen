@@ -10,7 +10,7 @@
 // assertion below.
 //
 // THE DIGEST IS THE AUTHORITY, not this file. The 78 shipped lessons were
-// written from /root/pd-wip-rodpump/digest.txt, so a lab value that disagrees
+// written from tools/course-waves/rodpump/digest.txt, so a lab value that disagrees
 // with that file breaks a lesson that is already written. Every number below is
 // quoted from it, at the number of decimals the digest printed, which is why the
 // assertions compare formatted strings rather than floats: a match on

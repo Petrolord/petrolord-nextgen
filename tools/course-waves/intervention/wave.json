@@ -1,0 +1,15 @@
+{
+ "slug": "intervention",
+ "prefix": "pd8",
+ "name": "Well Intervention",
+ "goldens": [
+  "production/goldens/intervention_cases.json"
+ ],
+ "constants": {
+  "0.75": "the 3/4 of the pseudo-steady-state radial denominator ln(re/rw) - 3/4 + S",
+  "0.3048": "metres per foot",
+  "6894.757": "pascals per psi",
+  "9.869233e-16": "square metres per darcy",
+  "0.001": "pascal seconds per centipoise"
+ }
+}

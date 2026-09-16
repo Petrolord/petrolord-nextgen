@@ -1,0 +1,1144 @@
+PD7 PRODUCTION NETWORKS: THE TEACHING DIGEST
+
+THE ONLY NUMBERS A LESSON MAY QUOTE. Every line names its source: a PUBLISHED
+golden value out of packages/engines/test-data/production/goldens/network_cases.json,
+a PUBLISHED fixture or table out of the shipped module or its gate, a DERIVED
+re-run or sweep on published inputs, or the one TEACHING NETWORK this wave
+designed for itself. NOTHING in this file comes from the graded capstone. The
+capstone conditions and its eighteen graded answers live in separate files that
+the generator of this digest never opens.
+
+A leak guard, pd7_leakcheck.mjs, reads the capstone graded field list and every
+number on every line of this file and rejects the digest if any number lands
+within TEN TIMES a graded field tolerance of that field value, in five unit
+shiftings: the three the wave standard requires (as printed, times 1000, times
+0.001) and two this domain needs (times 100 and times 0.01, because a fraction
+against a percentage is the live confusion in a conservation gap).
+academy_submit_capstone grades with abs(got - expected) <= tol, so tol is
+ABSOLUTE in the field own units and is not a fraction of anything. The guard
+lives in its own file and this generator never imports the capstone.
+
+Generator: /root/pd-wip-network/pd7_dump.mjs
+Engines:   packages/engines/engines/production/networkSolve.js
+           packages/engines/engines/production/pipeSchedule.js
+Goldens:   packages/engines/test-data/production/goldens/network_cases.json
+Oracle:    tools/validation/production/oracle_network.py
+Gate:      packages/engines/__tests__/production.network.test.js
+
+UNITS. Mass rate lb/d everywhere, because the module header says so:
+"MASS IS THE CURRENCY. Every flow in here is a mass rate, lb/d. Surface
+volumes do not add across pressures and mixing two of them is a mistake that
+hides for a long time." Absolute pressure psia, never psig. A pressure
+DIFFERENCE and a wall rating in psi. Length ft, bore and wall and outside
+diameter in, yield psi, oil and water stb/d, gas Mscf/d, conductance for a
+turbulent branch in lb/d per root psi, conductance for a linear branch in
+lb/d per psi. Those last two are NOT the same quantity and never compare.
+
+WHAT PROVENANCE LABEL MEANS WHAT
+  golden ...    a value committed in network_cases.json by the independent
+                stdlib oracle: Gauss-Seidel sweeps with a bracketed bisection
+                at each node, no Jacobian and no linear algebra anywhere. The
+                engine solves the same networks by Newton with a numerically
+                differenced Jacobian and a backtracking line search. The two
+                share no numerical machinery at all.
+  published ... a fixture or a table shipped inside the engine package: a row
+                of PIPE_SCHEDULE, a fitting K, a grade yield, or one of the
+                fixtures the gate asserts on.
+  derived ...   the shipped engine re-run on PUBLISHED inputs, or a sweep this
+                generator ran around them. A sweep point is not a published
+                case. Say so if you print one.
+  teaching ...  the network AGBADA WEST, its line, its streams, and every
+                sweep on it. Invented by this wave to carry the Expert
+                results. Not a published case, not a real gathering system,
+                and never to be shown as either.
+
+THE PUBLISHED CASES AT A GLANCE
+  linear_star      two linear wells on one header, one linear trunk, separator
+                   at 150 psia. The ONLY case with a closed form.
+  turbulent_tree   three Vogel wells, two headers in series, turbulent
+                   branches, separator at 180 psia. No closed form.
+  looped           two Vogel wells, two parallel paths to the separator at
+                   200 psia. A loop is what makes a network a network.
+  wells_fight      the same header solved with one well, then two, then three,
+                   separator at 180 psia.
+  the line         the gate Barlow and equivalent-length case: 6.625 in od,
+                   0.28 in wall, API 5L X52, design factor 0.72, bore
+                   6.065 in, friction factor 0.018 and 0.012, four long
+                   radius elbows and two gate valves.
+
+THE ONE TEACHING NETWORK
+  AGBADA WEST   four wells, three junctions, one loop, eight branches, seven
+                unknown pressures, a separator at 265 psia. One well is held
+                to a facility allocation on a flowline that cannot pass the
+                whole of it, which is what makes the pinning, the residual
+                blindness, the initial-guess dependence and the stream mass
+                gap all reachable on one case a lesson may quote.
+
+# SECTION 0: TWO MODULES, SIX FUNCTIONS, ONE ANSWER
+# Associate m01 l04. Everything in this course belongs to exactly one of these,
+# and naming which one owns a number is most of what the Associate tier is for.
+#   pipeSchedule.js   the LINE. Published tables and two closed forms. Nothing
+#                     in it iterates and nothing in it knows there is a network.
+#   buildNetwork      the TOPOLOGY. Validates and indexes, and every failure is
+#                     a refusal with a reason rather than a repair.
+#   solveNetwork      the SOLVE. Newton on the nodal mass balance, with a
+#                     numerically differenced Jacobian and a line search.
+#   propagateStreams  the SPLIT. Component rates added along the solved flow
+#                     directions. Exact, and it never mixes a ratio.
+#   checkConservation the AUDIT. What the wells put in against what the
+#                     delivery points took out.
+#   diagnose          the READING. Bottleneck, biggest drop, backflows, dead
+#                     legs.
+# ONLY solveNetwork ITERATES. Every defect this course teaches is either in the
+# iteration or in something that was never compared against it.
+derived module, node kinds the module accepts = well, junction, sink
+derived module, MIN_PRESSURE_PSIA = 14.7 psia, the floor no node is allowed below
+derived module, DEFAULT_TOLERANCE_LB_D = 0.000001, and its own comment says "Newton stops when the worst nodal imbalance is below this, lb/d"
+derived module, DEFAULT_MAX_ITER = 200
+# SECTION 23 SHOWS THAT THE TOLERANCE CONSTANT IS NOT IN LB/D. Read it before
+# quoting the default as a mass.
+
+# SECTION 1: THE PIPE TABLE, AND THE REDUNDANCY THAT IS ITS ONLY SELF CHECK
+# Associate m02 l01 and l02. PUBLISHED. Every row carries the outside diameter,
+# the wall AND the published bore, even though the third is arithmetically the
+# first two, because that redundancy is the check. The module header says a
+# transcription error in any one of the three makes od minus two walls equal to
+# the bore fail. Run that as written, in double precision, and one row already
+# fails. The shipped gate does not use equality: it uses toBeCloseTo at three
+# decimals, which passes anything within five ten-thousandths of an inch.
+published pipe table, rows = 12
+published pipe row, NPS 2 schedule 40: od = 2.375 in, wall = 0.154 in, published bore = 2.067 in, od minus two walls = 2.067 in, residual = 0.0000e+0 in, strict equality holds = true, inside the gate band of 5e-4 in = true
+published pipe row, NPS 2 schedule 80: od = 2.375 in, wall = 0.218 in, published bore = 1.939 in, od minus two walls = 1.939 in, residual = 0.0000e+0 in, strict equality holds = true, inside the gate band of 5e-4 in = true
+published pipe row, NPS 3 schedule 40: od = 3.5 in, wall = 0.216 in, published bore = 3.068 in, od minus two walls = 3.068 in, residual = 0.0000e+0 in, strict equality holds = true, inside the gate band of 5e-4 in = true
+published pipe row, NPS 4 schedule 40: od = 4.5 in, wall = 0.237 in, published bore = 4.026 in, od minus two walls = 4.026 in, residual = 0.0000e+0 in, strict equality holds = true, inside the gate band of 5e-4 in = true
+published pipe row, NPS 4 schedule 80: od = 4.5 in, wall = 0.337 in, published bore = 3.826 in, od minus two walls = 3.826 in, residual = 0.0000e+0 in, strict equality holds = true, inside the gate band of 5e-4 in = true
+published pipe row, NPS 6 schedule 40: od = 6.625 in, wall = 0.28 in, published bore = 6.065 in, od minus two walls = 6.0649999999999995 in, residual = -8.8818e-16 in, strict equality holds = false, inside the gate band of 5e-4 in = true
+published pipe row, NPS 6 schedule 80: od = 6.625 in, wall = 0.432 in, published bore = 5.761 in, od minus two walls = 5.761 in, residual = 0.0000e+0 in, strict equality holds = true, inside the gate band of 5e-4 in = true
+published pipe row, NPS 8 schedule 40: od = 8.625 in, wall = 0.322 in, published bore = 7.981 in, od minus two walls = 7.981 in, residual = 0.0000e+0 in, strict equality holds = true, inside the gate band of 5e-4 in = true
+published pipe row, NPS 8 schedule 80: od = 8.625 in, wall = 0.5 in, published bore = 7.625 in, od minus two walls = 7.625 in, residual = 0.0000e+0 in, strict equality holds = true, inside the gate band of 5e-4 in = true
+published pipe row, NPS 10 schedule 40: od = 10.75 in, wall = 0.365 in, published bore = 10.02 in, od minus two walls = 10.02 in, residual = 0.0000e+0 in, strict equality holds = true, inside the gate band of 5e-4 in = true
+published pipe row, NPS 12 schedule 40: od = 12.75 in, wall = 0.406 in, published bore = 11.938 in, od minus two walls = 11.938 in, residual = 0.0000e+0 in, strict equality holds = true, inside the gate band of 5e-4 in = true
+published pipe row, NPS 16 schedule 40: od = 16 in, wall = 0.5 in, published bore = 15 in, od minus two walls = 15 in, residual = 0.0000e+0 in, strict equality holds = true, inside the gate band of 5e-4 in = true
+derived pipe table, rows failing strict equality = 1 of 12
+derived pipe table, the largest residual is NPS 6 schedule 40 at -8.8818e-16 in
+derived pipe table, the gate band is 5.0000e-4 in and the largest residual is 8.8818e-16 in, so the band is 5.6295e+11 times wider than anything the table actually needs
+# THE SIZE OF THE HOLE. A band of five ten-thousandths of an inch admits a real
+# transcription error larger than the redundancy exists to catch. A strict check
+# at 1e-12 in would be true of every row and nearly nine orders of magnitude
+# stricter than what runs today (5e-4 over 1e-12 is 5e+8). Expert m05 owns
+# this. There is no Python oracle for pipeSchedule.js
+# anywhere, so this gate is the only thing standing behind the table.
+derived pipe table, a bore typed 4 ten-thousandths of an inch wrong on NPS 6 schedule 40: 6.065 in against 6.0654 in, and the gate at three decimals still passes = true
+published pipe table, a size not in the table returns null rather than a nearby one: scheduleRow(5, '40') = null, scheduleRow(6, '160') = null
+# A HEAVIER SCHEDULE IS A THICKER WALL AND A SMALLER BORE ON THE SAME OUTSIDE
+# DIAMETER, which is the whole idea of a schedule.
+published schedule pair, NPS 2: od = 2.375 in on both, wall 0.154 against 0.218 in, bore 2.067 against 1.939 in, bore lost = 0.128000 in, flow area lost = 12.001622 percent
+published schedule pair, NPS 4: od = 4.5 in on both, wall 0.237 against 0.337 in, bore 4.026 against 3.826 in, bore lost = 0.200000 in, flow area lost = 9.688638 percent
+published schedule pair, NPS 6: od = 6.625 in on both, wall 0.28 against 0.432 in, bore 6.065 against 5.761 in, bore lost = 0.304000 in, flow area lost = 9.773494 percent
+published schedule pair, NPS 8: od = 8.625 in on both, wall 0.322 against 0.5 in, bore 7.981 against 7.625 in, bore lost = 0.356000 in, flow area lost = 8.722219 percent
+
+# SECTION 2: WHAT A WALL CAN HOLD. BARLOW.
+# Associate m02 l03 and l04. PUBLISHED gate case first, then sweeps around it.
+# P = 2 S t f / D with D the OUTSIDE diameter. The design factor is an INPUT and
+# is never defaulted: the module header says burying one in here would be
+# pretending a jurisdiction. Leave it out and you get the bare hoop stress, which
+# is not a rating anyone may operate to.
+published grades, gradeB = 35000 psi, x42 = 42000 psi, x52 = 52000 psi, x60 = 60000 psi, x65 = 65000 psi
+published grades, an unknown grade id resolves to NaN and never to a default: gradeYield('x55') = NaN
+published barlow, the gate case: od 6.625 in, wall 0.28 in, x52 at 52000 psi, design factor 0.72: rating = 3164.739623 psi
+derived barlow, the same wall with NO design factor: bare hoop = 4395.471698 psi, which is 1.388889 times the rated pressure
+derived barlow, doubling the wall to 0.56 in doubles it: 6329.479245 psi
+derived barlow, doubling the outside diameter to 13.25 in halves it: 1582.369811 psi
+# DERIVED SWEEP: the same published pipe through every grade the module ships,
+# at the gate design factor. Grade is the cheapest lever on a rating and the one
+# most often quoted without its design factor.
+derived barlow grade, od 6.625 in, wall 0.28 in, gradeB at 35000 psi, design factor 0.72: rating = 2130.113208 psi
+derived barlow grade, od 6.625 in, wall 0.28 in, x42 at 42000 psi, design factor 0.72: rating = 2556.135849 psi
+derived barlow grade, od 6.625 in, wall 0.28 in, x52 at 52000 psi, design factor 0.72: rating = 3164.739623 psi
+derived barlow grade, od 6.625 in, wall 0.28 in, x60 at 60000 psi, design factor 0.72: rating = 3651.622642 psi
+derived barlow grade, od 6.625 in, wall 0.28 in, x65 at 65000 psi, design factor 0.72: rating = 3955.924528 psi
+# TEACHING LINE. A heavier schedule in a bigger size and a higher grade, so a
+# lesson has a second rating to compare that is not the gate case.
+teaching line, NPS 8 schedule 80: od = 8.625 in, wall = 0.5 in, bore = 7.625 in, grade x65 at 65000 psi, design factor 0.72
+teaching line, rating = 5426.086957 psi
+teaching line, bare hoop with no design factor = 7536.231884 psi
+# DERIVED SWEEP: the design factor alone, on the teaching line, holding the pipe
+# and the grade fixed. This is the whole regulatory content of the number and it
+# is the one a reader is most likely to inherit from somebody else.
+derived barlow design factor, teaching line at design factor 0.4: rating = 3014.492754 psi
+derived barlow design factor, teaching line at design factor 0.5: rating = 3768.115942 psi
+derived barlow design factor, teaching line at design factor 0.72: rating = 5426.086957 psi
+derived barlow design factor, teaching line at design factor 0.8: rating = 6028.985507 psi
+derived barlow design factor, teaching line at design factor 1: rating = 7536.231884 psi
+derived barlow refusal, a missing yield returns NaN rather than a number: NaN
+derived barlow refusal, a zero wall returns NaN: NaN
+
+# SECTION 3: FITTINGS AS A LENGTH OF PIPE
+# Associate m03. PUBLISHED table, then the gate case, then sweeps. The
+# equivalence is L_eq = sum(K) * D / f, and the friction factor belongs in it
+# because the equivalence is between a K loss and a length of PIPE, and a length
+# of pipe only knows what it costs once it knows its own friction factor.
+# A FIXED DIAMETERS COUNT IS A FRICTION FACTOR IN DISGUISE. The count is
+# sum(K) / f, and sum(K) on this published set is 1.5, so a rule that puts the
+# WHOLE set at thirty diameters is assuming f = 0.05. It is NOT assuming 0.02:
+# that would put the same set at 75.000000 diameters, and that row is in the
+# sweep below, beside the engine's 83.333333 at f 0.018.
+# READ THE RULE'S SCOPE BEFORE READING ITS SIGN. Stated the conventional way,
+# thirty diameters PER FITTING, six fittings come to 180 diameters and the rule
+# OVERSTATES against the engine. Applied once to the whole list, which is what
+# the line below does, it gives thirty diameters and UNDERSTATES by nearly three
+# times. The bias changes sign with the reading, so anything written on this
+# line must say which reading it is using.
+published fitting, elbow90LR: K = 0.3, 90 degree elbow, long radius
+published fitting, elbow90Std: K = 0.75, 90 degree elbow, standard
+published fitting, elbow45: K = 0.35, 45 degree elbow
+published fitting, teeLine: K = 0.2, Tee, straight through
+published fitting, teeBranch: K = 1, Tee, branch flow
+published fitting, gateValve: K = 0.15, Gate valve, fully open
+published fitting, ballValve: K = 0.05, Ball valve, fully open
+published fitting, globeValve: K = 10, Globe valve, fully open
+published fitting, swingCheck: K = 2, Swing check valve
+published fitting, suddenExit: K = 1, Exit into a vessel
+published fitting, an unknown id resolves to NaN and never to a default: fittingK('elbow90') = NaN
+published roughness, commercialSteel: 0.0018 in, Commercial steel, new
+published roughness, steelUsed: 0.006 in, Steel, in service
+published roughness, internallyCoated: 0.0002 in, Internally coated
+published roughness, hdpe: 0.00006 in, HDPE
+published roughness, an unknown id resolves to NaN: roughnessOf('nonsense') = NaN
+published equivalent length, the gate case: four elbow90LR and two gateValve on a 6.065 in bore at friction factor 0.018: sum K = 1.500000, length = 42.118056 ft
+published equivalent length, the SAME fittings on a smoother line at friction factor 0.012: length = 63.177083 ft, which is 1.500000 times as long
+# THE SMOOTHER LINE IS WORTH MORE FEET. A friction factor in the denominator
+# means the same fitting count is a LONGER equivalent length on a better pipe,
+# which reads backwards until you remember what the equivalence is between.
+# DERIVED SWEEP: friction factor alone, on the published fitting count and bore.
+derived equivalent length, friction factor 0.010: length = 75.812500 ft, diameters of pipe = 150.000000
+derived equivalent length, friction factor 0.014: length = 54.151786 ft, diameters of pipe = 107.142857
+derived equivalent length, friction factor 0.018: length = 42.118056 ft, diameters of pipe = 83.333333
+derived equivalent length, friction factor 0.020: length = 37.906250 ft, diameters of pipe = 75.000000
+derived equivalent length, friction factor 0.025: length = 30.325000 ft, diameters of pipe = 60.000000
+derived equivalent length, friction factor 0.030: length = 25.270833 ft, diameters of pipe = 50.000000
+derived equivalent length, the thirty-diameters rule on the same bore would give 15.162500 ft for this K, against the engine 42.118056 ft at friction factor 0.018
+# DERIVED SWEEP: bore alone, on the published fitting count and friction factor.
+derived equivalent length by bore, NPS 2 schedule 40 bore 2.067 in at friction factor 0.018: length = 14.354167 ft
+derived equivalent length by bore, NPS 3 schedule 40 bore 3.068 in at friction factor 0.018: length = 21.305556 ft
+derived equivalent length by bore, NPS 4 schedule 40 bore 4.026 in at friction factor 0.018: length = 27.958333 ft
+derived equivalent length by bore, NPS 6 schedule 40 bore 6.065 in at friction factor 0.018: length = 42.118056 ft
+derived equivalent length by bore, NPS 8 schedule 40 bore 7.981 in at friction factor 0.018: length = 55.423611 ft
+derived equivalent length by bore, NPS 10 schedule 40 bore 10.02 in at friction factor 0.018: length = 69.583333 ft
+derived equivalent length by bore, NPS 12 schedule 40 bore 11.938 in at friction factor 0.018: length = 82.902778 ft
+derived equivalent length by bore, NPS 16 schedule 40 bore 15 in at friction factor 0.018: length = 104.166667 ft
+teaching line fittings, three elbow90Std, two teeBranch, four ballValve and one globeValve on a 7.625 in bore at friction factor 0.017: sum K = 14.450000, length = 540.104167 ft
+teaching line fittings, elbow90Std x 3 contributes K = 2.250000, which is 15.570934 percent of the total, and 84.099265 ft
+teaching line fittings, teeBranch x 2 contributes K = 2.000000, which is 13.840830 percent of the total, and 74.754902 ft
+teaching line fittings, ballValve x 4 contributes K = 0.200000, which is 1.384083 percent of the total, and 7.475490 ft
+teaching line fittings, globeValve x 1 contributes K = 10.000000, which is 69.204152 percent of the total, and 373.774510 ft
+# ONE GLOBE VALVE IS WORTH MORE THAN EVERYTHING ELSE ON THAT LIST PUT TOGETHER,
+# which is the reason a fitting count is never a detail.
+derived equivalent length refusal, an unknown fitting: ok = false, message: No resistance coefficient for reducer.
+derived equivalent length refusal, no bore and no friction factor: message: An equivalent length needs a bore and a friction factor.
+
+# SECTION 4: WHAT buildNetwork REFUSES, AND WHY EACH REFUSAL IS A REFUSAL
+# Associate m01 l03 and m04. PUBLISHED fixtures out of the gate. Every failure
+# here is a REFUSAL with a reason, never a repair: the module header says a
+# network with a well that cannot reach a delivery point is not a network with a
+# small problem, it is a drawing mistake, and solving it anyway would produce a
+# confident answer about a system that does not exist.
+published refusal 1, a node with no route to a delivery point: ok = false, message: This node has no route to a delivery point: Manifold B. Nothing sets its pressure, so the network cannot be solved. Connect it or take it out.
+published refusal 2, no delivery point at all: ok = false, message: A network needs a delivery point: a node with a pressure the system is flowing against.
+published refusal 3, a delivery point with no pressure: ok = false, message: The delivery point "Sep" needs a pressure. It is the boundary the whole system is solved against.
+published refusal 4, no wells at all: ok = false, message: A network needs at least one well. Nothing else puts anything into it.
+published refusal 5, two nodes sharing an id: ok = false, message: Two nodes share the id "w".
+published refusal 6, a branch that starts and ends at the same node: ok = false, message: Branch "a" starts and ends at the same node.
+published refusal 7, a branch to a node that is not there: ok = false, message: Branch "a" ends at "ghost", which is not a node.
+published refusal 8, a node kind the module does not have: ok = false, message: Node "K-1" has kind "compressor", which is not one of well, junction, sink.
+published refusal 9, a node with no id: ok = false, message: Every node needs an id.
+published refusal 10, a branch with no id: ok = false, message: Every branch needs an id.
+published refusal 11, no nodes at all: ok = false, message: A network needs at least one node.
+# AND WHAT IT ACCEPTS. A valid network is indexed rather than copied, and the
+# index is what every later function reads.
+teaching topology, AGBADA WEST: ok = true, nodes = 8, branches = 8, unknown pressures = 7, delivery points = 1
+teaching topology, the unknowns in the order the solver will index them: t1, t2, t3, t4, ha, hb, hc
+teaching topology, node t1 (AGBADA-2) is a well with 1 branch on it
+teaching topology, node t2 (AGBADA-6) is a well with 1 branch on it
+teaching topology, node t3 (AGBADA-9) is a well with 1 branch on it
+teaching topology, node t4 (AGBADA-12) is a well with 1 branch on it
+teaching topology, node ha (North manifold) is a junction with 5 branches on it
+teaching topology, node hb (Loop tee) is a junction with 3 branches on it
+teaching topology, node hc (Trunk tee) is a junction with 3 branches on it
+teaching topology, node sep (Separator) is a sink with 1 branch on it
+
+# SECTION 5: THE ONE CASE WITH A CLOSED FORM
+# Professional m01 l01, and Expert m03 l01. PUBLISHED golden linear_star. Give
+# the solver LINEAR branch resistances and the whole network collapses to a
+# weighted graph Laplacian, whose solution is a matrix inverse. Newton iteration
+# and Gaussian elimination share no code and no reasoning, so their agreeing to
+# machine precision says the assembly, the signs and the boundary handling are
+# all right. This is the ONLY branch relation against which the solver can be
+# checked with no tolerance at all.
+golden linear_star, conditions: linear conductances b1 = 80, b2 = 120, b3 = 400 lb/d per psi, linear wells w1 = 60000 lb/d at 900 psia and w2 = 40000 lb/d at 700 psia, separator at 150 psia
+golden linear_star, pressure h = 252.222222222 psia
+golden linear_star, pressure s = 150.000000000 psia
+golden linear_star, pressure w1 = 546.666666666 psia
+golden linear_star, pressure w2 = 396.666666667 psia
+golden linear_star, flow b1 = 23555.555555544 lb/d
+golden linear_star, flow b2 = 17333.333333329 lb/d
+golden linear_star, flow b3 = 40888.888888870 lb/d
+golden linear_star, produced = 40888.888888906 lb/d, delivered = 40888.888888870 lb/d, oracle conservation gap = 3.656896e-8 lb/d, oracle sweeps = 19
+derived linear_star, closed form solveLinearNetwork pressure w1 = 546.666666667 psia
+derived linear_star, Newton solveNetwork pressure w1 = 546.666666667 psia, difference from the closed form = 0.0000e+0 psia, relative = 0.0000e+0
+derived linear_star, Newton against the bisection ORACLE at w1: difference = 1.8679e-10 psia
+derived linear_star, closed form solveLinearNetwork pressure w2 = 396.666666667 psia
+derived linear_star, Newton solveNetwork pressure w2 = 396.666666667 psia, difference from the closed form = -5.6843e-14 psia, relative = 1.4330e-16
+derived linear_star, Newton against the bisection ORACLE at w2: difference = 8.7311e-11 psia
+derived linear_star, closed form solveLinearNetwork pressure h = 252.222222222 psia
+derived linear_star, Newton solveNetwork pressure h = 252.222222222 psia, difference from the closed form = -2.8422e-14 psia, relative = 1.1269e-16
+derived linear_star, Newton against the bisection ORACLE at h: difference = 4.7777e-11 psia
+derived linear_star, closed form solveLinearNetwork pressure s = 150.000000000 psia
+derived linear_star, Newton solveNetwork pressure s = 150.000000000 psia, difference from the closed form = 0.0000e+0 psia, relative = 0.0000e+0
+derived linear_star, Newton against the bisection ORACLE at s: difference = 0.0000e+0 psia
+derived linear_star, Newton converged = true in 2 iterations, reported residual = 7.2760e-12 lb/d, pinned = none, warnings = none
+# NEWTON IS EXACT ON A LINEAR SYSTEM, so needing many steps here would mean the
+# Jacobian is wrong rather than that the problem is hard. The gate asserts three
+# iterations or fewer for exactly that reason.
+derived linear_star, checkConservation: produced = 40888.888888889 lb/d, delivered = 40888.888888889 lb/d, gap = 7.275958e-12 lb/d, relative = 1.779446e-16
+derived linear_star, nodal imbalance at w1 = 0.000000e+0 lb/d
+derived linear_star, nodal imbalance at w2 = 0.000000e+0 lb/d
+derived linear_star, nodal imbalance at h = 7.275958e-12 lb/d
+# THE TOPOLOGY REDUCES THE WAY A NETWORK MUST. PUBLISHED gate fixtures: two
+# linear resistances in series behave as one by the reciprocal rule, and two in
+# parallel behave as their sum. These are the two facts a reader already has
+# from a circuit, and they hold here because a linear branch is a resistor.
+published series, two linear branches of 200 and 300 lb/d per psi in series: wellhead = 183.333333333 psia
+published series, the single equivalent branch by the reciprocal rule = 120.000000000 lb/d per psi: wellhead = 183.333333333 psia, difference = 0.0000e+0 psia
+published parallel, two linear branches of 200 and 300 lb/d per psi in parallel: wellhead = 120.000000000 psia
+published parallel, the single equivalent branch of 500 lb/d per psi: wellhead = 120.000000000 psia, difference = 0.0000e+0 psia
+# NEITHER RULE SURVIVES A TURBULENT BRANCH. Section 6 is where the closed form
+# runs out and everything after it is an iterate.
+
+# SECTION 6: A TREE OF TURBULENT BRANCHES AND VOGEL INFLOWS
+# Professional m01 l02 and m02. PUBLISHED golden turbulent_tree. Nothing here
+# has a closed form. The engine solves it by Newton; the oracle solved it by
+# sweeping node by node and bisecting each node own mass balance, with no
+# Jacobian and no linear algebra at all. Two methods with nothing in common
+# landing on the same pressures is evidence about the PHYSICS rather than about
+# the code.
+golden turbulent_tree, conditions: turbulent conductances b1 = 140, b2 = 95, b3 = 160, b4 = 260, b5 = 410 lb/d per root psi, Vogel wells w1 = 4200 lb/d at 2600 psia, w2 = 2900 lb/d at 2200 psia, w3 = 5100 lb/d at 3000 psia, separator at 180 psia
+golden turbulent_tree, pressure h1 = 936.962342067 psia
+derived turbulent_tree, engine pressure h1 = 936.962342064 psia, difference from the oracle = -3.9037e-9 psia
+golden turbulent_tree, pressure h2 = 620.599162365 psia
+derived turbulent_tree, engine pressure h2 = 620.599162363 psia, difference from the oracle = -1.8767e-9 psia
+golden turbulent_tree, pressure s = 180.000000000 psia
+derived turbulent_tree, engine pressure s = 180.000000000 psia, difference from the oracle = 0.0000e+0 psia
+golden turbulent_tree, pressure w1 = 1352.491889436 psia
+derived turbulent_tree, engine pressure w1 = 1352.491889435 psia, difference from the oracle = -1.6912e-9 psia
+golden turbulent_tree, pressure w2 = 1284.365022331 psia
+derived turbulent_tree, engine pressure w2 = 1284.365022329 psia, difference from the oracle = -2.0416e-9 psia
+golden turbulent_tree, pressure w3 = 1239.853017648 psia
+derived turbulent_tree, engine pressure w3 = 1239.853017595 psia, difference from the oracle = -5.2681e-8 psia
+golden turbulent_tree, flow b1 = 2853.835862209 lb/d
+derived turbulent_tree, engine flow b1 = 2853.835862217 lb/d, difference from the oracle = 7.5975e-9 lb/d
+golden turbulent_tree, flow b2 = 1770.680431185 lb/d
+derived turbulent_tree, engine flow b2 = 1770.680431190 lb/d, difference from the oracle = 4.7453e-9 lb/d
+golden turbulent_tree, flow b3 = 3981.569878231 lb/d
+derived turbulent_tree, engine flow b3 = 3981.569878068 lb/d, difference from the oracle = -1.6333e-7 lb/d
+golden turbulent_tree, flow b4 = 4624.516293397 lb/d
+derived turbulent_tree, engine flow b4 = 4624.516293382 lb/d, difference from the oracle = -1.4814e-8 lb/d
+golden turbulent_tree, flow b5 = 8606.086171631 lb/d
+derived turbulent_tree, engine flow b5 = 8606.086171612 lb/d, difference from the oracle = -1.8328e-8 lb/d
+golden turbulent_tree, well rate w1 = 2853.835862210 lb/d
+derived turbulent_tree, engine well rate w1 = 2853.835862213 lb/d, difference from the oracle = 2.8203e-9 lb/d
+golden turbulent_tree, well rate w2 = 1770.680431186 lb/d
+derived turbulent_tree, engine well rate w2 = 1770.680431189 lb/d, difference from the oracle = 3.0520e-9 lb/d
+golden turbulent_tree, well rate w3 = 3981.569878232 lb/d
+derived turbulent_tree, engine well rate w3 = 3981.569878309 lb/d, difference from the oracle = 7.7132e-8 lb/d
+derived turbulent_tree, engine converged = true in 6 iterations, reported residual = 2.4176e-7 lb/d, pinned = none
+derived turbulent_tree, checkConservation: produced = 8606.086171711 lb/d, delivered = 8606.086171612 lb/d, gap = 9.890573e-8 lb/d, relative = 1.149253e-11
+golden turbulent_tree, oracle sweeps = 48, engine Newton iterations = 6
+# THE ORACLE TOOK DOZENS OF SWEEPS AND THE ENGINE TOOK A HANDFUL OF STEPS. That
+# is the whole argument for a Jacobian, and Section 25 is what it costs.
+
+# SECTION 7: A LOOP IS WHAT MAKES A NETWORK A NETWORK
+# Professional m02 l03. PUBLISHED golden looped. Two parallel paths from the
+# header to the separator. A solver that quietly assumed a tree falls over here,
+# because in a tree every branch flow is fixed by the flows downstream of it and
+# in a loop it is not: the split between the two paths is decided by the
+# pressures, and the pressures are decided by the split.
+golden looped, conditions: turbulent conductances b1 = 150, b2 = 130, b3 = 300, b4 = 180, b5 = 220 lb/d per root psi, Vogel wells w1 = 6000 lb/d at 2800 psia, w2 = 4500 lb/d at 2400 psia, separator at 200 psia
+golden looped, pressure h = 621.148550879 psia
+derived looped, engine pressure h = 621.148550864 psia, difference from the oracle = -1.4308e-8 psia
+golden looped, pressure m = 473.868277305 psia
+derived looped, engine pressure m = 473.868277313 psia, difference from the oracle = 7.4974e-9 psia
+golden looped, pressure s = 200.000000000 psia
+derived looped, engine pressure s = 200.000000000 psia, difference from the oracle = 0.0000e+0 psia
+golden looped, pressure w1 = 1402.860196258 psia
+derived looped, engine pressure w1 = 1402.860196249 psia, difference from the oracle = -8.8346e-9 psia
+golden looped, pressure w2 = 1204.872468976 psia
+derived looped, engine pressure w2 = 1204.872468967 psia, difference from the oracle = -8.8062e-9 psia
+golden looped, flow b1 = 4193.865999413 lb/d
+derived looped, engine flow b1 = 4193.865999428 lb/d, difference from the oracle = 1.4682e-8 lb/d
+golden looped, flow b2 = 3140.849282574 lb/d
+derived looped, engine flow b2 = 3140.849282589 lb/d, difference from the oracle = 1.4802e-8 lb/d
+golden looped, flow b3 = 3640.772530877 lb/d
+derived looped, engine flow b3 = 3640.772530607 lb/d, difference from the oracle = -2.6951e-7 lb/d
+golden looped, flow b4 = 3693.942751108 lb/d
+derived looped, engine flow b4 = 3693.942751046 lb/d, difference from the oracle = -6.2748e-8 lb/d
+golden looped, flow b5 = 3640.772530876 lb/d
+derived looped, engine flow b5 = 3640.772530926 lb/d, difference from the oracle = 4.9834e-8 lb/d
+derived looped, the direct leg b4 carries 50.362456 percent of what reaches the separator and the midpoint leg b5 carries 49.637544 percent
+derived looped, both parallel paths carry something and neither is dead: b4 = 3693.942751 lb/d, b5 = 3640.772531 lb/d
+derived looped, engine converged = true in 6 iterations, reported residual = 3.6364e-7 lb/d, oracle sweeps = 42
+# DERIVED SWEEP: walk the midpoint leg conductance and watch the split move. The
+# two legs are not two independent pipes, they are one decision the solve makes.
+derived loop split, midpoint leg conductance 60 lb/d per root psi: header = 949.106108 psia, midpoint = 920.294335 psia, direct leg = 4926.564514 lb/d, midpoint leg = 1610.297987 lb/d, midpoint share = 24.634111 percent, total delivered = 6536.862501 lb/d
+derived loop split, midpoint leg conductance 100 lb/d per root psi: header = 822.200173 psia, midpoint = 759.980156 psia, direct leg = 4489.909309 lb/d, midpoint leg = 2366.389984 lb/d, midpoint share = 34.514100 percent, total delivered = 6856.299293 lb/d
+derived loop split, midpoint leg conductance 220 lb/d per root psi: header = 621.148551 psia, midpoint = 473.868277 psia, direct leg = 3693.942751 lb/d, midpoint leg = 3640.772531 lb/d, midpoint share = 49.637544 percent, total delivered = 7334.715282 lb/d
+derived loop split, midpoint leg conductance 340 lb/d per root psi: header = 543.931055 psia, midpoint = 350.553477 psia, direct leg = 3338.168088 lb/d, midpoint leg = 4171.808000 lb/d, midpoint share = 55.550217 percent, total delivered = 7509.976087 lb/d
+derived loop split, midpoint leg conductance 500 lb/d per root psi: header = 502.317598 psia, midpoint = 280.025247 psia, direct leg = 3129.710878 lb/d, midpoint leg = 4472.841563 lb/d, midpoint share = 58.833419 percent, total delivered = 7602.552441 lb/d
+derived loop split, midpoint leg conductance 800 lb/d per root psi: header = 476.212272 psia, midpoint = 234.053568 psia, direct leg = 2991.534324 lb/d, midpoint leg = 4668.434789 lb/d, midpoint share = 60.945870 percent, total delivered = 7659.969113 lb/d
+
+# SECTION 8: THE RESULT THE WHOLE STUDIO EXISTS FOR. WELLS FIGHT.
+# Professional m03. PUBLISHED golden wells_fight, and the engine re-run on the
+# same ladder. Solve one header with one well, then two, then three. The header
+# climbs as more is pushed through the same trunk, and every well already on it
+# makes strictly less. Nothing about this is subtle once it is written down, and
+# that is the point: it is invisible to any amount of single-well analysis,
+# because every single-well study is run against a wellhead pressure somebody
+# typed in.
+golden wells_fight, 1 well on the header: header = 253.813945361 psia
+derived wells_fight, 1 well: engine header = 253.813945361 psia, difference from the oracle = -2.7001e-12 psia, iterations = 7, converged = true
+golden wells_fight, 1 well case, w0 rate = 3522.516744485 lb/d
+derived wells_fight, 1 well case, engine w0 rate = 3522.516744485 lb/d, difference from the oracle = -1.4234e-10 lb/d, wellhead = 886.881507360 psia
+golden wells_fight, 2 wells on the header: header = 370.837866311 psia
+derived wells_fight, 2 wells: engine header = 370.837866311 psia, difference from the oracle = -2.8024e-11 psia, iterations = 7, converged = true
+golden wells_fight, 2 well case, w0 rate = 3421.411637345 lb/d
+derived wells_fight, 2 well case, engine w0 rate = 3421.411637345 lb/d, difference from the oracle = 1.2278e-10 lb/d, wellhead = 968.085702646 psia
+golden wells_fight, 2 well case, w1 rate = 2242.495611803 lb/d
+derived wells_fight, 2 well case, engine w1 rate = 2242.495611803 lb/d, difference from the oracle = -1.5098e-10 lb/d, wellhead = 928.044134340 psia
+golden wells_fight, 3 wells on the header: header = 670.128002137 psia
+derived wells_fight, 3 wells: engine header = 670.128002136 psia, difference from the oracle = -4.5986e-10 psia, iterations = 6, converged = true
+golden wells_fight, 3 well case, w0 rate = 3137.891322295 lb/d
+derived wells_fight, 3 well case, engine w0 rate = 3137.891322296 lb/d, difference from the oracle = 9.3905e-10 lb/d, wellhead = 1172.493407776 psia
+golden wells_fight, 3 well case, w1 rate = 2007.745062176 lb/d
+derived wells_fight, 3 well case, engine w1 rate = 2007.745062182 lb/d, difference from the oracle = 6.1104e-9 lb/d, wellhead = 1116.780659716 psia
+golden wells_fight, 3 well case, w2 rate = 3931.285844958 lb/d
+derived wells_fight, 3 well case, engine w2 rate = 3931.285844968 lb/d, difference from the oracle = 9.3605e-9 lb/d, wellhead = 1273.839267551 psia
+golden wells_fight, W-0 makes 3522.516744485 lb/d on its own header and 3137.891322295 lb/d sharing it with two others
+derived wells_fight, W-0 loses 384.625422 lb/d to the other two wells, which is 10.919052 percent of itself
+derived wells_fight, W-1 makes 2242.495611803 lb/d with one companion and 2007.745062176 lb/d with two, a loss of 10.468272 percent
+derived wells_fight, the header rose from 253.813945 psia to 670.128002 psia across the ladder, which is 416.314057 psi
+derived wells_fight, total delivered rose from 3522.516744 lb/d to 9076.922229 lb/d, so adding two wells bought 5554.405485 lb/d
+# THE FIGURE BELOW IS NOT A SOLO SUM AND AN EARLIER VERSION OF THIS LINE CALLED
+# IT ONE. W-1 and W-2 are never solved ALONE anywhere in this wave, so no solo
+# sum exists for this ladder. 6173.781457 is W-1's rate WITH ONE COMPANION
+# (2242.495611803) plus W-2's rate IN THE FULL THREE WELL CASE (3931.285844958),
+# and the second of those is already inside the 9076.922229 lb/d total it is
+# being set against. Quote it as what it is or not at all: the distinction
+# between a solo rate and a rate on the system is the thing this section exists
+# to teach.
+derived wells_fight, W-1 with one companion plus W-2 in the three well case = 6173.781457 lb/d, which is NOT a solo sum
+# DERIVED SWEEP: the same three wells against a separator pressure walked down.
+# Backing the boundary off is the one lever that helps every well at once, and
+# it is the lever a single-well study cannot price because the boundary is the
+# thing it was told.
+derived separator sweep, separator at 120 psia: header = 624.301508 psia, total = 9207.229955 lb/d, w0 = 3183.657116, w1 = 2045.729998, w2 = 3977.842841 lb/d
+derived separator sweep, separator at 150 psia: header = 647.220534 psia, total = 9142.361389 lb/d, w0 = 3160.876422, w1 = 2026.828113, w2 = 3954.656854 lb/d
+derived separator sweep, separator at 180 psia: header = 670.128002 psia, total = 9076.922229 lb/d, w0 = 3137.891322, w1 = 2007.745062, w2 = 3931.285845 lb/d
+derived separator sweep, separator at 220 psia: header = 700.654704 psia, total = 8988.773875 lb/d, w0 = 3106.923901, w1 = 1982.015209, w2 = 3899.834764 lb/d
+derived separator sweep, separator at 300 psia: header = 761.658338 psia, total = 8809.356763 lb/d, w0 = 3043.874795, w1 = 1929.553599, w2 = 3835.928369 lb/d
+derived separator sweep, separator at 400 psia: header = 837.839001 psia, total = 8579.087131 lb/d, w0 = 2962.927699, w1 = 1862.030633, w2 = 3754.128800 lb/d
+
+# SECTION 9: ONE WELL ON ITS OWN, ON THE TEACHING NETWORK
+# Associate m05 and m06 l02. TEACHING. Each AGBADA well solved on its own
+# flowline against the separator, with nothing else on the system. This is the
+# layer a single-well studio already gives you: one well, one line, one boundary,
+# and a wellhead pressure that falls straight out of the two. Every number here
+# is a baseline the next section destroys.
+teaching solo, the boundary is the separator at 265 psia and each well keeps its own flowline conductance
+teaching solo t1 (AGBADA-2), conditions: Vogel qmax = 8100 lb/d at reservoir pressure 2750 psia, flowline conductance 275 lb/d per root psi
+teaching solo t1, wellhead = 892.889543025 psia, rate = 6890.874160167 lb/d, line drop = 627.889543025 psi
+teaching solo t1, converged = true in 7 iterations, reported residual = 9.0949e-13 lb/d, pinned = none, warnings = none
+teaching solo t1, checkConservation gap = 9.094947e-13 lb/d, relative = 1.319854e-16
+teaching solo t1, drawdown from reservoir pressure to wellhead = 1857.110457 psi, and the Vogel curve at that wellhead would give 6890.874160167 lb/d
+teaching solo t2 (AGBADA-6), conditions: Vogel qmax = 3300 lb/d at reservoir pressure 1650 psia, flowline conductance 365 lb/d per root psi
+teaching solo t2, wellhead = 335.147329090 psia, rate = 3057.021085629 lb/d, line drop = 70.147329090 psi
+teaching solo t2, converged = true in 7 iterations, reported residual = 4.5475e-13 lb/d, pinned = none, warnings = none
+teaching solo t2, checkConservation gap = -4.547474e-13 lb/d, relative = 1.487551e-16
+teaching solo t2, drawdown from reservoir pressure to wellhead = 1314.852671 psi, and the Vogel curve at that wellhead would give 3057.021085629 lb/d
+teaching solo t3 (AGBADA-9), conditions: Vogel qmax = 5750 lb/d at reservoir pressure 2350 psia, flowline conductance 198 lb/d per root psi
+teaching solo t3, wellhead = 840.553310094 psia, rate = 4750.157046765 lb/d, line drop = 575.553310094 psi
+teaching solo t3, converged = true in 7 iterations, reported residual = 0.0000e+0 lb/d, pinned = none, warnings = none
+teaching solo t3, checkConservation gap = 0.000000e+0 lb/d, relative = 0.000000e+0
+teaching solo t3, drawdown from reservoir pressure to wellhead = 1509.446690 psi, and the Vogel curve at that wellhead would give 4750.157046765 lb/d
+teaching solo t4 (AGBADA-12), conditions: Vogel qmax = 2100 lb/d at reservoir pressure 1450 psia, flowline conductance 126 lb/d per root psi, held to an allocation of 985 lb/d on a line capped at 640 lb/d
+teaching solo t4, wellhead = 303.714448989 psia, rate = 985.000000000 lb/d, line drop = 38.714448989 psi
+teaching solo t4, converged = true in 4 iterations, reported residual = 0.0000e+0 lb/d, pinned = t4, warnings = One node carried nothing and nothing depended on its pressure, so it was left where it sits: t4. That is what a shut-in well on a dead line looks like.
+teaching solo t4, checkConservation gap = 3.450000e+2 lb/d, relative = 3.502538e-1
+teaching solo t4, drawdown from reservoir pressure to wellhead = 1146.285551 psi, and the Vogel curve at that wellhead would give 1938.321311203 lb/d
+# NOTE THE FOURTH WELL. ITS SOLO ANSWER IS ALREADY WRONG AND THE ENGINE SAYS IT
+# CONVERGED. Its allocation is larger than its flowline can pass, so the line
+# saturates, the node goes flat, it is pinned, and the difference stops being
+# counted. Section 18 takes it apart. On its own line it is already the case
+# the whole Expert tier is about.
+
+# SECTION 10: THE TEACHING NETWORK, SOLVED
+# Professional m01 through m04, and the case every Expert section returns to.
+# TEACHING. Four wells, three junctions, one loop, eight branches, seven unknown
+# pressures. Every condition is printed so a lesson can restate the case without
+# reaching for anything else.
+teaching network, separator at 265 psia
+teaching network condition, t1 (AGBADA-2): Vogel qmax = 8100 lb/d at reservoir pressure 2750 psia
+teaching network condition, t2 (AGBADA-6): Vogel qmax = 3300 lb/d at reservoir pressure 1650 psia
+teaching network condition, t3 (AGBADA-9): Vogel qmax = 5750 lb/d at reservoir pressure 2350 psia
+teaching network condition, t4 (AGBADA-12): Vogel qmax = 2100 lb/d at reservoir pressure 1450 psia, allocation 985 lb/d, flowline capacity 640 lb/d in either direction
+teaching network condition, branch e1 (AGBADA-2 flowline) runs t1 to ha with conductance 275 lb/d per root psi
+teaching network condition, branch e2 (AGBADA-6 flowline) runs t2 to ha with conductance 365 lb/d per root psi
+teaching network condition, branch e3 (AGBADA-9 flowline) runs t3 to hb with conductance 198 lb/d per root psi
+teaching network condition, branch e4 (AGBADA-12 flowline) runs t4 to ha with conductance 126 lb/d per root psi
+teaching network condition, branch c1 (North bypass) runs ha to hc with conductance 690 lb/d per root psi
+teaching network condition, branch c2 (Crosslink) runs ha to hb with conductance 540 lb/d per root psi
+teaching network condition, branch c3 (Loop leg) runs hb to hc with conductance 245 lb/d per root psi
+teaching network condition, branch tk (Trunk) runs hc to sep with conductance 720 lb/d per root psi
+teaching network, tolerance asked = 1e-12, iteration cap left at the module default 200
+teaching network, converged = true, ok = true, iterations = 11, reported residualLbD = 1.546141e-11, pinned = t4
+teaching network, pressure t1 (AGBADA-2) = 1257.276513629 psia
+teaching network, pressure t2 (AGBADA-6) = 820.813328309 psia
+teaching network, pressure t3 (AGBADA-9) = 1188.244679299 psia
+teaching network, pressure t4 (AGBADA-12) = 831.176261907 psia
+teaching network, pressure ha (North manifold) = 780.469728020 psia
+teaching network, pressure hb (Loop tee) = 781.662938843 psia
+teaching network, pressure hc (Trunk tee) = 588.783893593 psia
+teaching network, pressure sep (Separator) = 265.000000000 psia
+teaching network, flow e1 (AGBADA-2 flowline) = 6004.874117054 lb/d, signed from t1 to ha
+teaching network, flow e2 (AGBADA-6 flowline) = 2318.356346320 lb/d, signed from t2 to ha
+teaching network, flow e3 (AGBADA-9 flowline) = 3992.446687538 lb/d, signed from t3 to hb
+teaching network, flow e4 (AGBADA-12 flowline) = 640.000000000 lb/d, signed from t4 to ha
+teaching network, flow c1 (North bypass) = 9553.095088544 lb/d, signed from ha to hc
+teaching network, flow c2 (Crosslink) = -589.864625170 lb/d, signed from ha to hb
+teaching network, flow c3 (Loop leg) = 3402.582062368 lb/d, signed from hb to hc
+teaching network, flow tk (Trunk) = 12955.677150912 lb/d, signed from hc to sep
+teaching network, well rate t1 = 6004.874117054 lb/d
+teaching network, well rate t2 = 2318.356346320 lb/d
+teaching network, well rate t3 = 3992.446687538 lb/d
+teaching network, well rate t4 = 985.000000000 lb/d
+teaching network, nodal imbalance at t1 = 0.000000e+0 lb/d
+teaching network, nodal imbalance at t2 = 0.000000e+0 lb/d
+teaching network, nodal imbalance at t3 = 9.094947e-13 lb/d
+teaching network, nodal imbalance at t4 = 3.450000e+2 lb/d
+teaching network, nodal imbalance at ha = -1.546141e-11 lb/d
+teaching network, nodal imbalance at hb = 1.364242e-11 lb/d
+teaching network, nodal imbalance at hc = 1.818989e-12 lb/d
+teaching network, warnings from the engine: One node carried nothing and nothing depended on its pressure, so it was left where it sits: t4. That is what a shut-in well on a dead line looks like.
+# EVERY UNKNOWN NODE IS AT ZERO IMBALANCE EXCEPT ONE, AND THE ONE THAT IS NOT
+# IS THE ONE THE REPORTED RESIDUAL CANNOT SEE. Section 19.
+
+# SECTION 11: WHAT THE NETWORK COSTS EACH WELL
+# Professional m03 l03, and Expert m01 l01. TEACHING. The same four wells, first
+# alone on their own flowlines and then on the system together. The comparison
+# is the entire reason this module exists, and neither column can be got at from
+# the other by any single-well method.
+teaching fight, t1 (AGBADA-2): alone = 6890.874160167 lb/d at 892.889543 psia, on the system = 6004.874117054 lb/d at 1257.276514 psia, lost = 886.000043113 lb/d, which is 12.857585591 percent of itself, and its wellhead rose by 364.386971 psi
+teaching fight, t2 (AGBADA-6): alone = 3057.021085629 lb/d at 335.147329 psia, on the system = 2318.356346320 lb/d at 820.813328 psia, lost = 738.664739309 lb/d, which is 24.162893177 percent of itself, and its wellhead rose by 485.665999 psi
+teaching fight, t3 (AGBADA-9): alone = 4750.157046765 lb/d at 840.553310 psia, on the system = 3992.446687538 lb/d at 1188.244679 psia, lost = 757.710359227 lb/d, which is 15.951269648 percent of itself, and its wellhead rose by 347.691369 psi
+teaching fight, t4 (AGBADA-12): alone = 985.000000000 lb/d at 303.714449 psia, on the system = 985.000000000 lb/d at 831.176262 psia, lost = 0.000000000 lb/d, which is 0.000000000 percent of itself, and its wellhead rose by 527.461813 psi
+teaching fight, the four solo rates add to 15683.052292561 lb/d and the system produces 13300.677150912 lb/d, so the network costs 2382.375141650 lb/d, which is 15.190761959 percent
+# THE WEAK WELL LOSES MOST. A well with a low reservoir pressure has the least
+# margin over the header, so a header that rises takes a larger share of what it
+# had. Ranking wells by what they lose is not the same as ranking them by what
+# they make, and the second ranking is the one every allocation meeting uses.
+teaching fight, ranked by percentage lost: t2 at 24.1629, t3 at 15.9513, t1 at 12.8576, t4 at 0.0000 percent
+teaching fight, ranked by rate on the system: t1 at 6004.8741, t3 at 3992.4467, t2 at 2318.3563, t4 at 985.0000 lb/d
+# DERIVED SWEEP on the teaching network: take one well off the system at a time
+# and watch what the survivors gain. The gain is not the rate the shut well was
+# making, and reading it as though it were is the standard way a deferment
+# number is overstated.
+teaching shut-in, with t1 taken off the system: total from the rest = 8290.169036003 lb/d, the survivors gained 994.366002145 lb/d between them, against the 6004.874117054 lb/d t1 was reported to be making, so the true deferment is 5010.508114909 lb/d
+teaching shut-in, with t2 taken off the system: total from the rest = 11451.346557099 lb/d, the survivors gained 469.025752507 lb/d between them, against the 2318.356346320 lb/d t2 was reported to be making, so the true deferment is 1849.330593813 lb/d
+teaching shut-in, with t3 taken off the system: total from the rest = 10075.309781275 lb/d, the survivors gained 767.079317902 lb/d between them, against the 3992.446687538 lb/d t3 was reported to be making, so the true deferment is 3225.367369636 lb/d
+teaching shut-in, with t4 taken off the system: total from the rest = 12504.659991952 lb/d, the survivors gained 188.982841040 lb/d between them, against the 985.000000000 lb/d t4 was reported to be making, so the true deferment is 796.017158960 lb/d
+# READ THE t4 ROW TWICE. Its "true deferment" is measured from t4's REPORTED
+# rate of 985.000000000 lb/d, and t4 is the PINNED node: its flowline passes
+# only 640.000000000 lb/d, and the 345.000000000 lb/d between those two numbers
+# is the conservation gap the Expert tier is built on. So this row overstates a
+# deferment by exactly that gap, in the section whose whole subject is that
+# deferment numbers are overstated. Measured from the rate the network actually
+# DELIVERED, the deferment is the derived line below. The other three rows are
+# not affected this way, because t4 stays on the system in all of them.
+derived, the t4 deferment measured from the 640.000000000 lb/d its flowline actually delivers rather than the 985.000000000 lb/d it reports = 451.017158960 lb/d, which is 345.000000000 lb/d below the row above
+# This line is arithmetic on two generated lines and nothing else: the survivors'
+# gain and the delivered flow are both engine returns printed above.
+
+# SECTION 12: A DRAWN ARROW IS NOT A FLOW DIRECTION
+# Professional m02 l04, and Expert m02 l01. TEACHING. The crosslink on AGBADA
+# WEST is drawn from the north manifold to the loop tee and the solve returns it
+# NEGATIVE, so it carries mass the other way. A learner who takes the drawing
+# arrow at face value gets the sign, the stream split and the whole downstream
+# reading wrong. diagnose names it, and the name is the only thing in the return
+# that does.
+teaching direction, crosslink c2 is drawn ha to hb and the solve returns -589.864625170 lb/d
+teaching direction, so it actually carries 589.864625170 lb/d from hb into ha
+teaching direction, the pressure across it is -1.193210823 psi in the drawn sense, so the drawn downstream end is the HIGHER of the two
+teaching direction, diagnose backflows = c2 (Crosslink) at -589.864625 lb/d
+teaching direction, diagnose dead legs = none
+# WHY IT REVERSES. The loop tee is fed by one well through a stiff flowline and
+# the north manifold is fed by three through slacker ones, so at the solution the
+# loop tee sits ABOVE the manifold and the crosslink drains toward the manifold.
+# The drawing was a guess made before anybody solved anything.
+# DERIVED SWEEP: walk the crosslink conductance and watch the direction hold and
+# then the magnitude grow. The sign is a property of the SOLUTION and not of the
+# branch.
+teaching crosslink sweep, conductance 60 lb/d per root psi: manifold = 771.802819 psia, loop tee = 805.201424 psia, crosslink = -346.749154 lb/d, dp in the drawn sense = -33.398604 psi, trunk = 12949.424167 lb/d
+teaching crosslink sweep, conductance 150 lb/d per root psi: manifold = 777.638390 psia, loop tee = 789.225300 psia, crosslink = -510.593269 lb/d, dp in the drawn sense = -11.586911 psi, trunk = 12953.908263 lb/d
+teaching crosslink sweep, conductance 300 lb/d per root psi: manifold = 779.804050 psia, loop tee = 783.429774 psia, crosslink = -571.240028 lb/d, dp in the drawn sense = -3.625724 psi, trunk = 12955.285062 lb/d
+teaching crosslink sweep, conductance 540 lb/d per root psi: manifold = 780.469728 psia, loop tee = 781.662939 psia, crosslink = -589.864625 lb/d, dp in the drawn sense = -1.193211 psi, trunk = 12955.677151 lb/d
+teaching crosslink sweep, conductance 900 lb/d per root psi: manifold = 780.676772 psia, loop tee = 781.114804 psia, crosslink = -595.655783 lb/d, dp in the drawn sense = -0.438032 psi, trunk = 12955.796123 lb/d
+teaching crosslink sweep, conductance 1400 lb/d per root psi: manifold = 780.746949 psia, loop tee = 780.929167 psia, crosslink = -597.618496 lb/d, dp in the drawn sense = -0.182218 psi, trunk = 12955.836128 lb/d
+
+# SECTION 13: THE BOTTLENECK IS NOT THE BIGGEST DROP
+# Professional m05. PUBLISHED gate fixture first, then TEACHING. The bottleneck
+# is the branch eating the most pressure per unit of what it carries, not simply
+# the one with the biggest drop: a trunk line carrying everything is SUPPOSED to
+# have the biggest drop, and pointing at it every time would be useless. The
+# units of the intensity are arbitrary; only the ranking is used.
+published diagnose case 1, branch big (W-1 flowline): dp = 100.000000 psi, mass = 40000.000000 lb/d, intensity = 2.500000e-3 psi per lb/d
+published diagnose case 1, branch choked (W-2 flowline): dp = 600.000000 psi, mass = 2000.000000 lb/d, intensity = 3.000000e-1 psi per lb/d
+published diagnose case 1, branch trunk (Trunk): dp = 200.000000 psi, mass = 42000.000000 lb/d, intensity = 4.761905e-3 psi per lb/d
+published diagnose case 1, biggest drop = choked, bottleneck = choked
+published diagnose case 2, branch big (W-1 flowline): dp = 50.000000 psi, mass = 40000.000000 lb/d, intensity = 1.250000e-3 psi per lb/d
+published diagnose case 2, branch choked (W-2 flowline): dp = 150.000000 psi, mass = 300.000000 lb/d, intensity = 5.000000e-1 psi per lb/d
+published diagnose case 2, branch trunk (Trunk): dp = 250.000000 psi, mass = 40300.000000 lb/d, intensity = 6.203474e-3 psi per lb/d
+published diagnose case 2, biggest drop = trunk, bottleneck = choked
+# IN THE SECOND CASE THE TRUNK HAS THE BIGGEST DROP AND THE RANKING STILL PICKS
+# THE INTENSE LEG. That is the whole design of the function.
+teaching diagnose, branch e1 (AGBADA-2 flowline): dp = 476.806785609 psi, mass = 6004.874117054 lb/d, intensity = 7.940329e-2 psi per lb/d, backflow = false
+teaching diagnose, branch e2 (AGBADA-6 flowline): dp = 40.343600289 psi, mass = 2318.356346320 lb/d, intensity = 1.740181e-2 psi per lb/d, backflow = false
+teaching diagnose, branch e3 (AGBADA-9 flowline): dp = 406.581740456 psi, mass = 3992.446687538 lb/d, intensity = 1.018377e-1 psi per lb/d, backflow = false
+teaching diagnose, branch e4 (AGBADA-12 flowline): dp = 50.706533886 psi, mass = 640.000000000 lb/d, intensity = 7.922896e-2 psi per lb/d, backflow = false
+teaching diagnose, branch c1 (North bypass): dp = 191.685834427 psi, mass = 9553.095088544 lb/d, intensity = 2.006531e-2 psi per lb/d, backflow = false
+teaching diagnose, branch c2 (Crosslink): dp = -1.193210823 psi, mass = -589.864625170 lb/d, intensity = 2.022855e-3 psi per lb/d, backflow = true
+teaching diagnose, branch c3 (Loop leg): dp = 192.879045250 psi, mass = 3402.582062368 lb/d, intensity = 5.668608e-2 psi per lb/d, backflow = false
+teaching diagnose, branch tk (Trunk): dp = 323.783893593 psi, mass = 12955.677150912 lb/d, intensity = 2.499166e-2 psi per lb/d, backflow = false
+teaching diagnose, biggest drop = e1 (AGBADA-2 flowline) at 476.806786 psi
+teaching diagnose, bottleneck = e3 (AGBADA-9 flowline) at intensity 1.018377e-1
+# A RANKING THAT FAILS OPEN, AND IT COSTS NOTHING HERE. The intensity is
+# |dp| / |mass| with only a guard at a billionth of a pound a day. A leg carrying
+# a millionth of a pound a day with one psi across it scores a million and wins
+# the ranking every time, and it is the one leg nothing can be done about.
+derived ranking guard, the whisper leg carrying 1.00e-8 lb/d with 1 psi across it: intensity = 1.000000e+8, bottleneck = whisper, biggest drop = main
+derived ranking guard, the whisper leg carrying 1.00e-6 lb/d with 1 psi across it: intensity = 1.000000e+6, bottleneck = whisper, biggest drop = main
+derived ranking guard, the whisper leg carrying 1.00e-3 lb/d with 1 psi across it: intensity = 1.000000e+3, bottleneck = whisper, biggest drop = main
+derived ranking guard, the whisper leg carrying 1.00e+0 lb/d with 1 psi across it: intensity = 1.000000e+0, bottleneck = whisper, biggest drop = main
+derived ranking guard, the whisper leg carrying 1.00e+2 lb/d with 1 psi across it: intensity = 1.000000e-2, bottleneck = whisper, biggest drop = main
+# A RELATIVE FLOOR, SUCH AS ONE PART IN TEN THOUSAND OF THE LARGEST BRANCH MASS,
+# would close it. Expert m05 owns this one as a note rather than a defect,
+# because on a real case the ranking behaves exactly as its header says.
+
+# SECTION 14: STREAMS ADD BY RATE AND NEVER BY RATIO
+# Professional m04. PUBLISHED gate fixture, then TEACHING. Component rates ADD.
+# That is the entire algorithm and it is exact: a header carrying a dry well and
+# a wet one carries the sum of both, and its water cut is a consequence rather
+# than an input. Mixing RATIOS, averaging two water cuts or two gas-oil ratios,
+# is the classic way to get this wrong, and it is wrong by a factor that depends
+# on how unequal the rates are.
+published streams, a big dry well at 2700 stb/d oil, 300 stb/d water, 1600 Mscf/d gas and 30000 lb/d mass, and a small wet one at 200 stb/d oil, 800 stb/d water, 90 Mscf/d gas and 10000 lb/d mass
+published streams, the trunk carries oil = 2900.000000 stb/d, water = 1100.000000 stb/d, gas = 1690.000000 Mscf/d, mass = 40000.000000 lb/d
+published streams, the trunk water cut = 27.500000 percent
+published streams, the two well water cuts are 10.000000 and 80.000000 percent, and their plain average is 45.000000 percent
+published streams, so averaging the ratios is wrong by 17.500000 percentage points, a factor of 1.636364 on the number a facility would be sized against
+# A NODE WITH MORE THAN ONE WAY OUT SPLITS ITS STREAM BY MASS, which is the only
+# split that conserves anything. PUBLISHED gate fixture.
+published stream split, a well of 400 stb/d oil on 1000 lb/d splitting 750 and 250 lb/d: leg x oil = 300.000000000 stb/d, leg y oil = 100.000000000 stb/d, sum = 400.000000000 stb/d
+# A RECIRCULATING LOOP IS REPORTED, NOT ITERATED ON. PUBLISHED gate fixture.
+published stream refusal, a recirculating loop: ok = false, message: The solved flow directions form a loop, so the network is recirculating. A gathering system does not do that; check for a branch connected backwards.
+# TEACHING. The same propagation on AGBADA WEST, along the directions the solve
+# actually found, which includes the crosslink running backwards.
+teaching stream input, t1 (AGBADA-2) is tested at oil = 1690 stb/d, water = 214 stb/d, gas = 1305 Mscf/d, and is handed in with the mass the solve gave it
+teaching stream input, t2 (AGBADA-6) is tested at oil = 605 stb/d, water = 738 stb/d, gas = 542 Mscf/d, and is handed in with the mass the solve gave it
+teaching stream input, t3 (AGBADA-9) is tested at oil = 1042 stb/d, water = 369 stb/d, gas = 1613 Mscf/d, and is handed in with the mass the solve gave it
+teaching stream input, t4 (AGBADA-12) is tested at oil = 118 stb/d, water = 401 stb/d, gas = 76 Mscf/d, and is handed in with the mass the solve gave it
+teaching stream, branch e1 (AGBADA-2 flowline): oil = 1690.000000000 stb/d, water = 214.000000000 stb/d, gas = 1305.000000000 Mscf/d, mass = 6004.874117054 lb/d
+teaching stream, branch e2 (AGBADA-6 flowline): oil = 605.000000000 stb/d, water = 738.000000000 stb/d, gas = 542.000000000 Mscf/d, mass = 2318.356346320 lb/d
+teaching stream, branch e3 (AGBADA-9 flowline): oil = 1042.000000000 stb/d, water = 369.000000000 stb/d, gas = 1613.000000000 Mscf/d, mass = 3992.446687538 lb/d
+teaching stream, branch e4 (AGBADA-12 flowline): oil = 118.000000000 stb/d, water = 401.000000000 stb/d, gas = 76.000000000 Mscf/d, mass = 985.000000000 lb/d
+teaching stream, branch c1 (North bypass): oil = 2566.950443808 stb/d, water = 1407.517959468 stb/d, gas = 2161.312923093 Mscf/d, mass = 9898.095088544 lb/d
+teaching stream, branch c2 (Crosslink): oil = 153.950443808 stb/d, water = 54.517959468 stb/d, gas = 238.312923093 Mscf/d, mass = 589.864625170 lb/d
+teaching stream, branch c3 (Loop leg): oil = 888.049556192 stb/d, water = 314.482040532 stb/d, gas = 1374.687076907 Mscf/d, mass = 3402.582062368 lb/d
+teaching stream, branch tk (Trunk): oil = 3455.000000000 stb/d, water = 1722.000000000 stb/d, gas = 3536.000000000 Mscf/d, mass = 13300.677150912 lb/d
+teaching stream, the trunk water cut = 33.262507244 percent
+teaching stream, the plain average of the four well water cuts = 42.401682837 percent, wrong by 9.139175594 percentage points
+teaching stream, t1 water cut on its own = 11.239495798 percent
+teaching stream, t2 water cut on its own = 54.951600894 percent
+teaching stream, t3 water cut on its own = 26.151665485 percent
+teaching stream, t4 water cut on its own = 77.263969171 percent
+teaching stream, what arrives at the separator: oil = 3455.000000000 stb/d, water = 1722.000000000 stb/d, gas = 3536.000000000 Mscf/d, mass = 13300.677150912 lb/d
+teaching stream, the four wells were tested at 3455.000000 stb/d oil, 1722.000000 stb/d water and 3536.000000 Mscf/d gas between them
+# THE SEPARATOR IS TOLD IT RECEIVES ALL OF IT. Section 17 is why that is a lie
+# on this network, and why nothing in the return says so.
+
+# SECTION 15: TWO SIGN CONVENTIONS UNDER ONE WORD
+# Expert m02 l02. TEACHING. flows[b] is signed from the branch drawn `from` to
+# its drawn `to`. branchStreams[b].massLbD is the stream along the SOLVED
+# direction, so it is always positive. On a branch that runs backwards the two
+# disagree in sign, and a consumer differencing them to check itself gets twice
+# the flow and reads it as a conservation failure. Both conventions are
+# defensible; carrying both under the same word in the same result is not.
+teaching sign, branch e1 (AGBADA-2 flowline): flows = 6004.874117054 lb/d, branchStreams mass = 6004.874117054 lb/d, difference = 0.000000000 lb/d
+teaching sign, branch e2 (AGBADA-6 flowline): flows = 2318.356346320 lb/d, branchStreams mass = 2318.356346320 lb/d, difference = 0.000000000 lb/d
+teaching sign, branch e3 (AGBADA-9 flowline): flows = 3992.446687538 lb/d, branchStreams mass = 3992.446687538 lb/d, difference = 0.000000000 lb/d
+teaching sign, branch e4 (AGBADA-12 flowline): flows = 640.000000000 lb/d, branchStreams mass = 985.000000000 lb/d, difference = 345.000000000 lb/d
+teaching sign, branch c1 (North bypass): flows = 9553.095088544 lb/d, branchStreams mass = 9898.095088544 lb/d, difference = 345.000000000 lb/d
+teaching sign, branch c2 (Crosslink): flows = -589.864625170 lb/d, branchStreams mass = 589.864625170 lb/d, difference = 1179.729250341 lb/d
+teaching sign, branch c3 (Loop leg): flows = 3402.582062368 lb/d, branchStreams mass = 3402.582062368 lb/d, difference = 0.000000000 lb/d
+teaching sign, branch tk (Trunk): flows = 12955.677150912 lb/d, branchStreams mass = 13300.677150912 lb/d, difference = 345.000000000 lb/d
+teaching sign, on the one branch that runs backwards the difference is 1179.729250341 lb/d, which is exactly twice the 589.864625170 lb/d it carries
+# TWO DIFFERENT CAUSES ARE SHOWING UP IN ONE COLUMN, AND ONLY ONE OF THEM IS
+# THIS SECTION'S FINDING. SEPARATE THEM BEFORE WRITING ANYTHING ON THIS TABLE.
+#   THE SIGN CONVENTION, which is this section: c2 alone. It is the one branch
+#   that runs BACKWARDS, and its difference of 1179.729250341 lb/d is exactly
+#   twice the 589.864625170 lb/d it carries. That factor of two is the
+#   signature, and no other branch here has it.
+#   THE PINNED-WELL MASS HOLE, which is Section 19's finding and not this one:
+#   e4, c1 and tk each show 345.000000000 lb/d, and every one of those three ran
+#   the way it was drawn. That number is the conservation gap propagating along
+#   the path out of the pinned node, not a convention disagreement.
+# So it is NOT true that differencing the two finds zero everywhere the network
+# ran as drawn. It finds zero on four branches, the doubled flow on the one that
+# reversed, and the conservation gap on the three that carry the pinned well's
+# reported mass. A consumer differencing them sees one column and two diseases.
+
+# THE RANKING BASIS diagnose USES, stated here because no published case
+# distinguishes it and two readers have had to guess. BOTH rankings are on
+# MAGNITUDE: biggestDrop reduces on Math.abs(dpPsi) and intensity is
+# Math.abs(dp) / Math.abs(q), so a backflow branch is ranked on the size of its
+# drop and its mass, not their sign. The two rankings differ in their
+# POPULATION, and that difference is real: bottleneck ranks only over branches
+# CARRYING mass above 1e-9, while biggestDrop ranks over EVERY branch including
+# a dead one. A dead leg with a large pressure difference across it can
+# therefore be the reported biggest drop and can never be the bottleneck.
+
+# SECTION 16: A NODE THAT NOTHING DEPENDS ON IS PINNED
+# Expert m01 l01 and l02. PUBLISHED gate fixture first. A node whose Jacobian
+# ROW is entirely zero is a node whose pressure changes nothing that flows. The
+# module pins it at its current pressure and takes it out of the system rather
+# than dragging a perfectly good network down with it, and it reports which
+# nodes were pinned, because a pinned node is a fact about the answer and not an
+# implementation detail.
+published pinning, the gate own fixture: a well whose inflow is a constant 2000 lb/d on a branch whose flow is a constant 1000 lb/d, so neither depends on any pressure
+published pinning, ok = true, converged = true, pinned = w, reported residualLbD = 0.000000e+0, iterations = 1
+published pinning, warning: One node carried nothing and nothing depended on its pressure, so it was left where it sits: w. That is what a shut-in well on a dead line looks like.
+published pinning, the node own imbalance = 1000.000000 lb/d, and the well makes 2000.000000 lb/d while the line passes 1000.000000 lb/d
+published pinning, checkConservation: produced = 2000.000000 lb/d, delivered = 1000.000000 lb/d, gap = 1000.000000 lb/d, relative = 0.500000000
+# THE GATE ASSERTS ok, pinned AND THE WARNING TEXT ON THIS EXACT CASE, AND NEVER
+# LOOKS AT THE HOLE IT JUST CREATED. The published fixture is a thousand pounds
+# a day of production that goes into the network and never comes out, under a
+# reported residual of zero.
+# A LIVE NETWORK REPORTS NOTHING PINNED, which is what makes the flag readable.
+published pinning, the same topology with a real branch and a real inflow: pinned = none, warnings = none, wellhead = 153.846153846 psia, rate = 16153.846153843 lb/d
+# THE CONTRACT GAP BEHIND IT. The module header requires wellInflow to be
+# monotone DECREASING in p. A well held to a facility allocation, a choke limit
+# or a compressor slot is monotone NON-increasing, with a flat top, and the flat
+# top is precisely what makes its node pinnable. TEACHING: AGBADA-12 is exactly
+# such a well and its flowline is capacity limited below its allocation.
+teaching pinning, AGBADA-12 is allocated 985 lb/d and its flowline cannot pass more than 640 lb/d, a shortfall of 345 lb/d by construction
+teaching pinning, on the solved network: pinned = t4, its node pressure = 831.176261907 psia, its reported rate = 985.000000000 lb/d, its flowline passes 640.000000000 lb/d
+teaching pinning, its own nodal imbalance = 345.000000000 lb/d, and the engine carries that number in the returned imbalance object where nothing consults it
+teaching pinning, the reported residualLbD = 1.546141e-11 lb/d, which is the worst imbalance over the UNPINNED nodes only
+# THE FLAT TOP IS WHAT DOES IT. Below the pressure where the allocation binds the
+# well is a Vogel curve and its node is perfectly live. Above it the inflow stops
+# depending on pressure, and once the line saturates as well, the node loses both
+# its row and its column.
+# DERIVED SWEEP: walk the allocation on the teaching network from below the line
+# capacity to well above it, and watch the node go from live to pinned.
+teaching allocation sweep, allocation 300 lb/d: converged = true, pinned = none, reported residual = 1.2164e-11 lb/d, AGBADA-12 rate = 300.000000 lb/d, its flowline = 300.000000 lb/d, conservation gap = 0.000000 lb/d, relative = 0.000000000
+teaching allocation sweep, allocation 500 lb/d: converged = true, pinned = none, reported residual = 7.0031e-11 lb/d, AGBADA-12 rate = 500.000000 lb/d, its flowline = 500.000000 lb/d, conservation gap = -0.000000 lb/d, relative = 0.000000000
+teaching allocation sweep, allocation 620 lb/d: converged = true, pinned = none, reported residual = 1.4688e-10 lb/d, AGBADA-12 rate = 620.000000 lb/d, its flowline = 620.000000 lb/d, conservation gap = -0.000000 lb/d, relative = 0.000000000
+teaching allocation sweep, allocation 640 lb/d: converged = true, pinned = none, reported residual = 1.9133e-10 lb/d, AGBADA-12 rate = 640.000000 lb/d, its flowline = 640.000000 lb/d, conservation gap = 0.000000 lb/d, relative = 0.000000000
+teaching allocation sweep, allocation 660 lb/d: converged = true, pinned = t4, reported residual = 6.5211e-10 lb/d, AGBADA-12 rate = 660.000000 lb/d, its flowline = 640.000000 lb/d, conservation gap = 20.000000 lb/d, relative = 0.001541345
+teaching allocation sweep, allocation 800 lb/d: converged = true, pinned = t4, reported residual = 7.2305e-11 lb/d, AGBADA-12 rate = 800.000000 lb/d, its flowline = 640.000000 lb/d, conservation gap = 160.000000 lb/d, relative = 0.012199141
+teaching allocation sweep, allocation 985 lb/d: converged = true, pinned = t4, reported residual = 1.5461e-11 lb/d, AGBADA-12 rate = 985.000000 lb/d, its flowline = 640.000000 lb/d, conservation gap = 345.000000 lb/d, relative = 0.025938529
+teaching allocation sweep, allocation 1300 lb/d: converged = true, pinned = t4, reported residual = 1.5007e-11 lb/d, AGBADA-12 rate = 1300.000000 lb/d, its flowline = 640.000000 lb/d, conservation gap = 660.000000 lb/d, relative = 0.048473535
+# THE SWEEP CROSSES THE LINE CAPACITY AND NOTHING IN THE RETURN CHANGES EXCEPT
+# THE WORD pinned AND A GAP NOBODY IS SHOWN.
+
+# SECTION 17: THE REPORTED RESIDUAL CANNOT SEE ITS OWN ERROR
+# Expert m01 l03, l04 and l05. THE HEADLINE OF THIS COURSE. TEACHING, and the
+# mechanism is one line of the module. normOf is built as the maximum over the
+# unknowns FILTERED to exclude the pinned ones, and `converged` is tested
+# against that norm, so a pinned node is removed from the measurement by
+# construction. Everything below is the size of what that hides.
+teaching residual, the engine reports converged = true with residualLbD = 1.546141e-11 lb/d after 11 iterations
+teaching residual, checkConservation on the same answer: produced = 13300.677150912 lb/d, delivered = 12955.677150912 lb/d, gap = 345.000000000 lb/d, relative = 0.025938529000
+teaching residual, the conservation gap as a percentage of what the engine says was produced = 2.593852900 percent
+teaching residual, the gap divided by the reported residual = 2.231362e+13
+teaching residual, the worst imbalance over ALL unknown nodes including the pinned one = 345.000000000 lb/d
+teaching residual, the worst imbalance over the UNPINNED nodes only, which is what the engine reports = 1.546141e-11 lb/d
+# checkConservation IS IN THE SAME FILE. Its own header says it is "the only
+# check that catches a sign error in the assembly" and that a solver which
+# converged on a wrong residual function converges just as smugly as one that did
+# not. solveNetwork never calls it. Nothing in the return of solveNetwork is a
+# check on the answer that was not computed by the same iteration that produced
+# the answer.
+# TWO CANDIDATE FIXES, BOTH CHEAP. Report a pinned imbalance alongside the
+# residual, or refuse to set converged while any pinned node net is non-zero.
+# The second is the honest one, because a pinned node with a non-zero net is not
+# a solved network.
+# WHAT THE FIRST FIX WOULD PRINT ON THIS CASE, computed here rather than by the
+# engine, purely to size it:
+teaching residual, if the engine reported a pinned imbalance it would report 345.000000000 lb/d at node t4
+# AND THE MESSAGE ASSERTS A DIAGNOSIS IT HAS NOT CHECKED. Expert m01 l05.
+teaching residual, the engine warning on this network: One node carried nothing and nothing depended on its pressure, so it was left where it sits: t4. That is what a shut-in well on a dead line looks like.
+teaching residual, but AGBADA-12 is producing 985.000000000 lb/d and its flowline is passing 640.000000000 lb/d, so it is neither shut in nor on a dead line
+# THE SENTENCE IS THE MODULE TELLING THE USER THE ONE STORY IN WHICH THE PINNING
+# IS HARMLESS, ON A CASE WHERE IT IS NOT. Naming the node net imbalance in the
+# message would make the difference visible at no cost.
+
+# SECTION 18: THE SAME NETWORK, DIFFERENT ANSWERS, DEPENDING ON THE GUESS
+# Expert m03 l01 through l04. TEACHING. A pinned node pressure is wherever the
+# last accepted step happened to leave it, and it is returned in `pressures`
+# alongside every node that was actually solved, with nothing to tell them
+# apart. Change nothing but initialPressures and watch the answer move. Every
+# run below reports converged.
+teaching initial guess, engine default, every unknown at the separator pressure: converged = true, iterations = 11, reported residual = 1.5461e-11 lb/d, pinned node pressure = 831.176262 psia, its flowline = 640.000000 lb/d, its reported rate = 985.000000 lb/d, manifold = 780.469728 psia, trunk = 12955.677151 lb/d, conservation gap = 345.000000 lb/d
+teaching initial guess, the pinned node started at 400 psia: converged = true, iterations = 7, reported residual = 2.2737e-12 lb/d, pinned node pressure = 400.000000 psia, its flowline = -640.000000 lb/d, its reported rate = 985.000000 lb/d, manifold = 710.131972 psia, trunk = 12046.088615 lb/d, conservation gap = 1625.000000 lb/d
+teaching initial guess, the pinned node started at 600 psia: converged = true, iterations = 7, reported residual = 2.2737e-12 lb/d, pinned node pressure = 600.000000 psia, its flowline = -640.000000 lb/d, its reported rate = 985.000000 lb/d, manifold = 710.131972 psia, trunk = 12046.088615 lb/d, conservation gap = 1625.000000 lb/d
+teaching initial guess, the pinned node started at 831 psia: converged = true, iterations = 7, reported residual = 1.8917e-10 lb/d, pinned node pressure = 831.000000 psia, its flowline = 640.000000 lb/d, its reported rate = 985.000000 lb/d, manifold = 780.469728 psia, trunk = 12955.677151 lb/d, conservation gap = 345.000000 lb/d
+teaching initial guess, the pinned node started at 1200 psia: converged = true, iterations = 7, reported residual = 1.8917e-10 lb/d, pinned node pressure = 1182.577035 psia, its flowline = 640.000000 lb/d, its reported rate = 640.000000 lb/d, manifold = 780.469728 psia, trunk = 12955.677151 lb/d, conservation gap = 0.000000 lb/d
+teaching initial guess, the pinned node started at 2000 psia: converged = true, iterations = 7, reported residual = 1.8917e-10 lb/d, pinned node pressure = 2000.000000 psia, its flowline = 640.000000 lb/d, its reported rate = 0.000000 lb/d, manifold = 780.469728 psia, trunk = 12955.677151 lb/d, conservation gap = -640.000000 lb/d
+teaching initial guess, every unknown started at 1500 psia: converged = true, iterations = 8, reported residual = 1.5461e-11 lb/d, pinned node pressure = 841.695631 psia, its flowline = 640.000000 lb/d, its reported rate = 985.000000 lb/d, manifold = 780.469728 psia, trunk = 12955.677151 lb/d, conservation gap = 345.000000 lb/d
+# READ THE FLOWLINE COLUMN. At a high enough starting pressure the pinned node is
+# left ABOVE the manifold and its capacity limited line runs the wrong way at its
+# limit, so the pinned node undetermined pressure propagates into every other
+# node answer. At a high enough starting pressure the reported well rate goes to
+# a number the allocation never permitted. Every one of these says converged.
+# AGREEMENT BETWEEN TWO RUNS IS NOT EVIDENCE EITHER. Two of the rows above agree
+# on the manifold to the last bit while disagreeing about what the network
+# produced.
+# THREE MORE THINGS THIS TABLE SAYS, AND THEY ARE SHARPER THAN THE HEADING.
+#   THE REPORTED RESIDUAL MOVES AGAINST THE TRUTH ACROSS THIS SWEEP. The two
+#   worst runs on the table, the 400 psia and 600 psia starts at a conservation
+#   gap of 1625.000000 lb/d, carry the SMALLEST reported residual on it,
+#   2.2737e-12 lb/d. The default run, at a gap of 345.000000 lb/d, reports
+#   1.5461e-11. It is not merely that the residual cannot see the pinned node.
+#   On this sweep the residual gets BETTER as the answer gets WORSE, so a reader
+#   ranking these runs by their reported residual would pick the two worst.
+derived t4 curve, AGBADA-12 Vogel qmax = 2100.0 lb/d at reservoir pressure 1450.0 psia, allocation = 985.0 lb/d, line capacity = 640.0 lb/d
+derived t4 curve, the pressure at which the Vogel inflow falls to the allocation, so the flat top ENDS = 1013.848652 psia
+derived t4 curve, the pressure at which the Vogel inflow falls to the LINE CAPACITY, where the mass balance closes = 1182.577035 psia
+derived t4 curve, the width of the flat top in pressure, from zero up to where the allocation stops binding = 1013.848652 psia
+#   SEE ALSO SECTION 18B, WHICH PRINTS THE COLUMN THIS TABLE OMITS. The rows
+#   below are labelled "pinned node pressure" for all seven runs, and on the
+#   1200 psia run NOTHING IS PINNED. That is not a detail, it is the mechanism:
+#   the node solves precisely when it is not pinned, and every pinned run is
+#   mass-imbalanced.
+#   THE ONE ROW WHERE CONSERVATION CLOSES IS THE ONLY ROW THAT IS A SOLUTION,
+#   AND THE DEFAULT GUESS DOES NOT FIND IT. Read this one carefully, because the
+#   obvious reading is backwards. AGBADA-12 is a Vogel well, qmax 2100 lb/d at
+#   a reservoir pressure of 1450 psia, held to an allocation of 985 lb/d, on a
+#   line that passes at most 640.000000 lb/d. Its allocation stops binding at
+#   1013.848652 psia, and its Vogel inflow equals the line capacity at
+#   1182.577035 psia, WHICH IS THE PRESSURE THE 1200 PSIA START RETURNS, to the
+#   last digit printed. At that pressure the well delivers 640.000000 lb/d, the
+#   line carries 640.000000 lb/d, and the mass balance closes. THAT IS THE
+#   SOLUTION. It is not an accident and the well was not throttled: a well
+#   cannot push 985 lb/d through a line that passes 640, and the pressure at its
+#   node rises until its inflow matches what leaves. Every other row on this
+#   table is mass-imbalanced and none of them is a solution: the 400, 600 and
+#   831 psia starts sit where the allocation still binds, report 985.000000 lb/d
+#   into a 640.000000 lb/d line and lose 345.000000 lb/d, and the 2000 psia
+#   start reports a well making nothing while its line carries 640.000000 lb/d.
+#   SO THE FINDING IS STRONGER THAN "THE PINNED PRESSURE IS UNDETERMINED". A
+#   correct answer EXISTS, the solver CAN reach it, and the engine default, every
+#   unknown at the separator pressure, reliably converges to a non-solution and
+#   reports converged. The flat top of the allocation is a trap the default guess
+#   starts inside.
+#   THE 400 AND 600 PSIA STARTS ARE IDENTICAL IN EVERY FIELD BUT ONE. Same 7
+#   iterations, same 2.2737e-12 residual, same -640.000000 lb/d flowline, same
+#   985.000000 lb/d reported rate, same 710.131972 psia manifold, same
+#   12046.088615 lb/d trunk, same 1625.000000 lb/d gap, and a pinned pressure
+#   200 psia apart. That is the cleanest proof available that the pinned entry
+#   is DECOUPLED from every other number in the same object.
+# FOR SCALE: a pure REORDERING of the nodes array, which changes no physics at
+# all, moves the unpinned nodes by nothing anyone can see. The solver iteration
+# order does depend on the array order, because unknownIds is built from it, the
+# Jacobian column order is that same order, and the dense solve pivots on it.
+teaching node order, node t1: original = 1257.276513628954 psia, reversed node array = 1257.276513628954 psia, movement = 0.0000e+0 psia
+teaching node order, node t2: original = 820.813328309357 psia, reversed node array = 820.813328309357 psia, movement = -1.1369e-13 psia
+teaching node order, node t3: original = 1188.244679299341 psia, reversed node array = 1188.244679299341 psia, movement = 0.0000e+0 psia
+teaching node order, node t4: original = 831.176261906558 psia, reversed node array = 831.176261912029 psia, movement = 5.4710e-9 psia
+teaching node order, node ha: original = 780.469728020218 psia, reversed node array = 780.469728020218 psia, movement = -1.1369e-13 psia
+teaching node order, node hb: original = 781.662938843358 psia, reversed node array = 781.662938843358 psia, movement = 0.0000e+0 psia
+teaching node order, node hc: original = 588.783893593083 psia, reversed node array = 588.783893593083 psia, movement = 0.0000e+0 psia
+teaching node order, the largest movement among the UNPINNED nodes = 1.1369e-13 psia
+teaching node order, the movement at the PINNED node = 5.4710e-9 psia
+# SO THE SOLVED NODES ARE REPRODUCIBLE TO THE LAST BITS UNDER A REORDERING AND
+# THE PINNED ONE IS NOT REPRODUCIBLE AT ALL UNDER A CHANGE OF GUESS. Those are
+# two different kinds of number wearing the same label in the same object.
+
+# SECTION 18B: THE PINNING COLUMN SECTION 18 DOES NOT PRINT, AND IT IS
+# THE MECHANISM. engine, on the teaching network, same seven runs as
+# Section 18. THE NODE SOLVES PRECISELY WHEN IT IS NOT PINNED, and the two
+# line up perfectly across the sweep: every run that pins the node is
+# mass-imbalanced, and the one run that pins NOTHING is the one whose
+# balance closes.
+# WHY, and this is better than saying a right answer exists and the default
+# misses it. A node is pinned when nothing that flows depends on its
+# pressure. On the FLAT TOP of the allocation the well delivers its
+# allocation whatever the pressure, so the row is flat, the node is pinned,
+# it is dropped from normOf, and the mass the line cannot pass VANISHES
+# FROM THE RESIDUAL. Above 1013.848652 psia the allocation no longer binds,
+# the inflow depends on pressure again, the node keeps its Jacobian row, it
+# is solved rather than left, and the balance closes. THE PINNING IS THE
+# NON-SOLUTION. Expert m01 and m03.
+engine initial guess, engine default, every unknown at the separator pressure: node pinned = true, conservation gap = 345.000000000 lb/d, balance closes = false
+engine initial guess, the pinned node started at 400 psia: node pinned = true, conservation gap = 1625.000000000 lb/d, balance closes = false
+engine initial guess, the pinned node started at 600 psia: node pinned = true, conservation gap = 1625.000000000 lb/d, balance closes = false
+engine initial guess, the pinned node started at 831 psia: node pinned = true, conservation gap = 345.000000000 lb/d, balance closes = false
+engine initial guess, the pinned node started at 1200 psia: node pinned = false, conservation gap = 0.000000000 lb/d, balance closes = true
+engine initial guess, the pinned node started at 2000 psia: node pinned = true, conservation gap = -640.000000000 lb/d, balance closes = false
+engine initial guess, every unknown started at 1500 psia: node pinned = true, conservation gap = 345.000000000 lb/d, balance closes = false
+# READ THE TWO COLUMNS TOGETHER. pinned true appears on six rows and every
+# one of them is out of balance. pinned false appears once and that row is
+# the answer. A caller handed `pinned` already has the signal that the
+# residual is hiding, and nothing in the module says so.
+
+# SECTION 19: THE STREAM MASS NOBODY COMPARES
+# Expert m02 l03 and l04. TEACHING. propagateStreams carries a SECOND mass for
+# every branch and nothing forces it to agree with the solve. wellStreams[id]
+# .massLbD is supplied by the caller and is never compared with wellRates[id],
+# so whatever hole the solve left propagates straight into the surface split.
+teaching stream mass, branch e1 (AGBADA-2 flowline): the solve says 6004.874117054 lb/d, the stream says 6004.874117054 lb/d, gap = 0.000000000 lb/d
+teaching stream mass, branch e2 (AGBADA-6 flowline): the solve says 2318.356346320 lb/d, the stream says 2318.356346320 lb/d, gap = 0.000000000 lb/d
+teaching stream mass, branch e3 (AGBADA-9 flowline): the solve says 3992.446687538 lb/d, the stream says 3992.446687538 lb/d, gap = 0.000000000 lb/d
+teaching stream mass, branch e4 (AGBADA-12 flowline): the solve says 640.000000000 lb/d, the stream says 985.000000000 lb/d, gap = 345.000000000 lb/d
+teaching stream mass, branch c1 (North bypass): the solve says 9553.095088544 lb/d, the stream says 9898.095088544 lb/d, gap = 345.000000000 lb/d
+teaching stream mass, branch c2 (Crosslink): the solve says 589.864625170 lb/d, the stream says 589.864625170 lb/d, gap = 0.000000000 lb/d
+teaching stream mass, branch c3 (Loop leg): the solve says 3402.582062368 lb/d, the stream says 3402.582062368 lb/d, gap = 0.000000000 lb/d
+teaching stream mass, branch tk (Trunk): the solve says 12955.677150912 lb/d, the stream says 13300.677150912 lb/d, gap = 345.000000000 lb/d
+# THE SAME SHORTFALL APPEARS ON EVERY BRANCH DOWNSTREAM OF THE PINNED WELL AND
+# NOTHING IN THE RESULT MENTIONS IT. The separator is told it receives the whole
+# of a well test on a line the solve says only passes part of it.
+# THE GENERAL FORM IS WORSE THAN THE SPECIFIC ONE. Hand the same network well
+# streams whose masses are simply wrong and the module propagates them without a
+# word. DERIVED sweep on the teaching network.
+teaching stream lie, every well stream mass multiplied by 0.80: ok = true, trunk stream mass = 10640.541721 lb/d against a solved trunk of 12955.677151 lb/d, warnings from the engine = none, the module does not compare them
+teaching stream lie, every well stream mass multiplied by 0.90: ok = true, trunk stream mass = 11970.609436 lb/d against a solved trunk of 12955.677151 lb/d, warnings from the engine = none, the module does not compare them
+teaching stream lie, every well stream mass multiplied by 1.00: ok = true, trunk stream mass = 13300.677151 lb/d against a solved trunk of 12955.677151 lb/d, warnings from the engine = none, the module does not compare them
+teaching stream lie, every well stream mass multiplied by 1.10: ok = true, trunk stream mass = 14630.744866 lb/d against a solved trunk of 12955.677151 lb/d, warnings from the engine = none, the module does not compare them
+teaching stream lie, every well stream mass multiplied by 1.25: ok = true, trunk stream mass = 16625.846439 lb/d against a solved trunk of 12955.677151 lb/d, warnings from the engine = none, the module does not compare them
+teaching stream lie, every well stream mass multiplied by 2.00: ok = true, trunk stream mass = 26601.354302 lb/d against a solved trunk of 12955.677151 lb/d, warnings from the engine = none, the module does not compare them
+# ONE COMPARISON AGAINST wellRates AT THE TOP OF THE FUNCTION WOULD CATCH BOTH
+# THE CALLER MISTAKE AND THE SOLVE OWN HOLE.
+# AND THE COMPONENT RATES ARE UNTOUCHED BY ANY OF IT. The oil, water and gas the
+# separator is told to expect do not move when the mass is wrong, because the
+# split is by mass SHARE at a junction and the shares are unchanged.
+teaching stream lie, at a doubled mass the separator oil = 3455.000000000 stb/d against 3455.000000000 stb/d at the honest mass, a difference of 0.0000e+0 stb/d
+
+# SECTION 20: THE TOLERANCE IS NOT IN LB/D
+# Expert m04 l01 and l02. The constant is named DEFAULT_TOLERANCE_LB_D and its
+# comment says "Newton stops when the worst nodal imbalance is below this,
+# lb/d". What the solver actually stops at is a SCALED target: it takes the
+# largest single well inflow evaluated at the sink pressure, calls it the scale,
+# and stops at the tolerance times that scale. Nothing in the return says which
+# criterion was in force, and the residual it reports is absolute.
+teaching tolerance, the scale on AGBADA WEST = 7883.717950413 lb/d, which is the largest SINGLE well inflow evaluated at the separator pressure of 265 psia
+teaching tolerance, well t1 evaluated at the separator pressure would make 7883.717950413 lb/d
+teaching tolerance, well t2 evaluated at the separator pressure would make 3125.903030303 lb/d
+teaching tolerance, well t3 evaluated at the separator pressure would make 5561.824807605 lb/d
+teaching tolerance, well t4 evaluated at the separator pressure would make 985.000000000 lb/d
+teaching tolerance, the four of them together would make 17556.445788322 lb/d, and the scale uses only the largest of them
+teaching tolerance, at the module documented default of 0.000001 the target is actually 7.883718e-3 lb/d, which is looser than the name promises by a factor of 7883.717950
+teaching tolerance, at the tolerance this digest asks for, 1e-12, the target is 7.883718e-9 lb/d
+# THAT IS DEFENSIBLE AS A DESIGN. A relative criterion is the right thing on a
+# system that might move a million pounds a day. The name, the comment and the
+# returned residual are all absolute, and nothing tells the caller which one is
+# in force.
+# AND THE SCALE IS THE LARGEST SINGLE WELL, NOT THE TOTAL, so the effective
+# criterion TIGHTENS as wells are added, which is the opposite of what a relative
+# scale is for. DERIVED on the published wells_fight ladder.
+derived tolerance scale, wells_fight with 1 well: scale = 4125.742011834 lb/d, total inflow at the sink pressure = 4125.742011834 lb/d, ratio = 1.000000000, engine iterations = 7
+derived tolerance scale, wells_fight with 2 wells: scale = 4125.742011834 lb/d, total inflow at the sink pressure = 6962.756887867 lb/d, ratio = 1.687637489, engine iterations = 7
+derived tolerance scale, wells_fight with 3 wells: scale = 5024.112000000 lb/d, total inflow at the sink pressure = 11986.868887867 lb/d, ratio = 2.385868167, engine iterations = 6
+# ON A FORTY WELL GATHERING SYSTEM THE TWO DIFFER BY MORE THAN AN ORDER OF
+# MAGNITUDE, so the criterion a caller gets depends on how many wells are on the
+# system and on which one of them is biggest.
+# DERIVED SWEEP: what a loosened tolerance actually costs, on the TEACHING
+# network. Read the converged column and the answer column together.
+teaching tolerance sweep, tolerance 1.0e-12: target = 7.8837e-9 lb/d, converged = true, iterations = 11, reported residual = 1.5461e-11 lb/d, worst junction pressure moved = 0.0000e+0 psi, trunk moved = 0.0000e+0 lb/d, crosslink moved = 0.0000e+0 lb/d
+teaching tolerance sweep, tolerance 1.0e-10: target = 7.8837e-7 lb/d, converged = true, iterations = 10, reported residual = 3.2147e-8 lb/d, worst junction pressure moved = 9.1632e-11 psi, trunk moved = 2.0009e-11 lb/d, crosslink moved = 3.1164e-8 lb/d
+teaching tolerance sweep, tolerance 1.0e-8: target = 7.8837e-5 lb/d, converged = true, iterations = 10, reported residual = 3.2147e-8 lb/d, worst junction pressure moved = 9.1632e-11 psi, trunk moved = 2.0009e-11 lb/d, crosslink moved = 3.1164e-8 lb/d
+teaching tolerance sweep, tolerance 1.0e-6: target = 7.8837e-3 lb/d, converged = true, iterations = 9, reported residual = 3.8768e-3 lb/d, worst junction pressure moved = 1.1055e-5 psi, trunk moved = 2.4945e-6 lb/d, crosslink moved = 3.7601e-3 lb/d
+teaching tolerance sweep, tolerance 1.0e-4: target = 7.8837e-1 lb/d, converged = true, iterations = 9, reported residual = 3.8768e-3 lb/d, worst junction pressure moved = 1.1055e-5 psi, trunk moved = 2.4945e-6 lb/d, crosslink moved = 3.7601e-3 lb/d
+teaching tolerance sweep, tolerance 1.0e-3: target = 7.8837e+0 lb/d, converged = true, iterations = 8, reported residual = 2.2013e+0 lb/d, worst junction pressure moved = 6.2665e-3 psi, trunk moved = 1.3912e-3 lb/d, crosslink moved = 2.1352e+0 lb/d
+teaching tolerance sweep, tolerance 1.0e-2: target = 7.8837e+1 lb/d, converged = true, iterations = 7, reported residual = 5.2700e+1 lb/d, worst junction pressure moved = 2.1224e-1 psi, trunk moved = -8.4055e-1 lb/d, crosslink moved = 5.0843e+1 lb/d
+teaching tolerance sweep, tolerance 1.0e-1: target = 7.8837e+2 lb/d, converged = true, iterations = 6, reported residual = 4.6571e+2 lb/d, worst junction pressure moved = 1.7153e+1 psi, trunk moved = 2.1126e+2 lb/d, crosslink moved = 2.4182e+2 lb/d
+# A USER WHO READS THE DEFAULT AS "A MILLIONTH OF A POUND A DAY" IS OFF BY THE
+# SCALE, AND A USER WHO LOOSENS IT TO "A THOUSANDTH OF A POUND A DAY" IS OFF BY
+# THE SCALE AGAIN AND STILL GETS converged = true.
+# ONE SMALLER THING RIDES ALONG. The FIRST convergence test, before the loop, is
+# against the raw tolerance; every test inside the loop is against the scaled
+# target. Since the target is never smaller than the tolerance the mismatch can
+# only cost a wasted Newton step and never a false convergence, but the same
+# criterion is spelled two different ways in one function and only one of the two
+# is the one that decides.
+
+# SECTION 21: EVERY FAILURE COMES BACK ok, AND THE MESSAGE PRINTS ZERO
+# Expert m04 l03 and l04. buildNetwork trains the caller to key on ok: it
+# refuses a stranded node, a missing sink, a duplicate id and an unknown kind,
+# each with ok false and a reason. solveNetwork never returns ok false except on
+# a singular Jacobian. It returns ok true when the iteration cap is hit, when the
+# line search stalls, and when the solve sits on a cusp it cannot resolve.
+# DERIVED SWEEP: the iteration cap on the TEACHING network. Read the ok column.
+teaching iteration cap, maxIter 1: ok = true, converged = false, iterations run = 1, reported residual = 7.545876e+3 lb/d, manifold = 267.202639 psia, trunk = 806.447063 lb/d, conservation gap = 16740.257197 lb/d
+teaching iteration cap, maxIter 1, the message the engine printed: The solve ran 1 iterations without meeting its tolerance. The worst nodal imbalance is 7545.876 lb/d.
+teaching iteration cap, maxIter 2: ok = true, converged = false, iterations run = 2, reported residual = 5.456522e+3 lb/d, manifold = 352.030033 psia, trunk = 5199.159519 lb/d, conservation gap = 11917.121949 lb/d
+teaching iteration cap, maxIter 2, the message the engine printed: The solve ran 2 iterations without meeting its tolerance. The worst nodal imbalance is 5456.522 lb/d.
+teaching iteration cap, maxIter 3: ok = true, converged = false, iterations run = 3, reported residual = 1.503768e+3 lb/d, manifold = 676.735873 psia, trunk = 11472.407575 lb/d, conservation gap = 3075.664586 lb/d
+teaching iteration cap, maxIter 3, the message the engine printed: The solve ran 3 iterations without meeting its tolerance. The worst nodal imbalance is 1503.768 lb/d.
+teaching iteration cap, maxIter 4: ok = true, converged = false, iterations run = 4, reported residual = 1.318365e+3 lb/d, manifold = 781.229414 psia, trunk = 12953.274475 lb/d, conservation gap = 351.415731 lb/d
+teaching iteration cap, maxIter 4, the message the engine printed: The solve ran 4 iterations without meeting its tolerance. The worst nodal imbalance is 1318.365 lb/d., One node carried nothing and nothing depended on its pressure, so it was left where it sits: t4. That is what a shut-in well on a dead line looks like.
+teaching iteration cap, maxIter 6: ok = true, converged = false, iterations run = 6, reported residual = 4.657099e+2 lb/d, manifold = 797.622975 psia, trunk = 13166.936352 lb/d, conservation gap = 41.125860 lb/d
+teaching iteration cap, maxIter 6, the message the engine printed: The solve ran 6 iterations without meeting its tolerance. The worst nodal imbalance is 465.710 lb/d., One node carried nothing and nothing depended on its pressure, so it was left where it sits: t4. That is what a shut-in well on a dead line looks like.
+teaching iteration cap, maxIter 8: ok = true, converged = false, iterations run = 8, reported residual = 2.201349e+0 lb/d, manifold = 780.472084 psia, trunk = 12955.678542 lb/d, conservation gap = 345.000012 lb/d
+teaching iteration cap, maxIter 8, the message the engine printed: The solve ran 8 iterations without meeting its tolerance. The worst nodal imbalance is 2.201 lb/d., One node carried nothing and nothing depended on its pressure, so it was left where it sits: t4. That is what a shut-in well on a dead line looks like.
+teaching iteration cap, maxIter 10: ok = true, converged = false, iterations run = 10, reported residual = 3.214654e-8 lb/d, manifold = 780.469728 psia, trunk = 12955.677151 lb/d, conservation gap = 345.000000 lb/d
+teaching iteration cap, maxIter 10, the message the engine printed: The solve ran 10 iterations without meeting its tolerance. The worst nodal imbalance is 0.000 lb/d., One node carried nothing and nothing depended on its pressure, so it was left where it sits: t4. That is what a shut-in well on a dead line looks like.
+teaching iteration cap, maxIter 11: ok = true, converged = true, iterations run = 11, reported residual = 1.546141e-11 lb/d, manifold = 780.469728 psia, trunk = 12955.677151 lb/d, conservation gap = 345.000000 lb/d
+teaching iteration cap, maxIter 11, the message the engine printed: One node carried nothing and nothing depended on its pressure, so it was left where it sits: t4. That is what a shut-in well on a dead line looks like.
+teaching iteration cap, maxIter 12: ok = true, converged = true, iterations run = 11, reported residual = 1.546141e-11 lb/d, manifold = 780.469728 psia, trunk = 12955.677151 lb/d, conservation gap = 345.000000 lb/d
+teaching iteration cap, maxIter 12, the message the engine printed: One node carried nothing and nothing depended on its pressure, so it was left where it sits: t4. That is what a shut-in well on a dead line looks like.
+teaching iteration cap, maxIter 30: ok = true, converged = true, iterations run = 11, reported residual = 1.546141e-11 lb/d, manifold = 780.469728 psia, trunk = 12955.677151 lb/d, conservation gap = 345.000000 lb/d
+teaching iteration cap, maxIter 30, the message the engine printed: One node carried nothing and nothing depended on its pressure, so it was left where it sits: t4. That is what a shut-in well on a dead line looks like.
+# AT A LOW CAP THE RETURN CARRIES A FULL SET OF PRESSURES, FLOWS AND WELL RATES
+# THAT LOOK EXACTLY LIKE AN ANSWER, under ok = true.
+# AND THE FAILURE MESSAGE PRINTS THE NUMBER IT JUST FAILED ON WITH toFixed(3).
+# On the one line whose whole job is to tell the user how far off the answer is,
+# a residual smaller than a thousandth of a pound a day reads as zero. A reader
+# who takes it at face value concludes the solve met its tolerance and the flag
+# is wrong, which is the exact opposite of the truth.
+teaching toFixed, maxIter 9: the true reported residual = 3.876838925407e-3 lb/d
+teaching toFixed, maxIter 9: the engine printed it as "0.004" lb/d in the sentence: The solve ran 9 iterations without meeting its tolerance. The worst nodal imbalance is 0.004 lb/d. One node carried nothing and nothing depended on its pressure, so it was left where it sits: t4. That is what a shut-in well on a dead line looks like.
+teaching toFixed, maxIter 9: toPrecision(3) would have printed 0.00388 and an exponential format would have printed 3.8768e-3, either of which changes no arithmetic
+teaching toFixed, maxIter 10: the true reported residual = 3.214654498152e-8 lb/d
+teaching toFixed, maxIter 10: the engine printed it as "0.000" lb/d in the sentence: The solve ran 10 iterations without meeting its tolerance. The worst nodal imbalance is 0.000 lb/d. One node carried nothing and nothing depended on its pressure, so it was left where it sits: t4. That is what a shut-in well on a dead line looks like.
+teaching toFixed, maxIter 10: toPrecision(3) would have printed 3.21e-8 and an exponential format would have printed 3.2147e-8, either of which changes no arithmetic
+teaching toFixed, maxIter 11: converged, no failure message
+# THE ONE THING THAT DOES COME BACK ok FALSE IS A SINGULAR JACOBIAN, and its
+# message is a real diagnosis rather than a repair.
+derived singular, solveLinear on a singular two by two returns null rather than an array of infinities
+derived singular, solveLinear on a well posed two by two returns 1.000000000, 3.000000000
+derived singular, and it pivots, so a zero on the diagonal is not a failure: 3.000000000, 2.000000000
+
+# SECTION 22: THE CUSP. A CONTINUOUS RELATION IS NOT ENOUGH FOR A JACOBIAN.
+# Expert m04 l05, and Expert m05 l01. The module contract on a branch relation is
+# that it must be "continuous and monotone decreasing in pTo", and it says a pipe
+# relation built from a characteristic curve satisfies that by construction. The
+# turbulent law q = k sign(dp) sqrt(|dp|) is continuous and monotone. It is NOT
+# differentiable at zero pressure difference, and a numerically differenced
+# Jacobian needs more than continuity.
+teaching cusp, the Jacobian step is max(1e-3, |p| * 1e-5), which at the teaching network junction pressures is about 0.007805 psi
+teaching cusp, branch e1 (AGBADA-2 flowline) sits at dp = 476.806785609 psi, which is 37923.780524 Jacobian steps from zero
+teaching cusp, branch e2 (AGBADA-6 flowline) sits at dp = 40.343600289 psi, which is 4915.076169 Jacobian steps from zero
+teaching cusp, branch e3 (AGBADA-9 flowline) sits at dp = 406.581740456 psi, which is 34217.004927 Jacobian steps from zero
+teaching cusp, branch e4 (AGBADA-12 flowline) sits at dp = 50.706533886 psi, which is 6100.575318 Jacobian steps from zero
+teaching cusp, branch c1 (North bypass) sits at dp = 191.685834427 psi, which is 24560.316377 Jacobian steps from zero
+teaching cusp, branch c2 (Crosslink) sits at dp = -1.193210823 psi, which is 152.883678 Jacobian steps from zero
+teaching cusp, branch c3 (Loop leg) sits at dp = 192.879045250 psi, which is 24675.475280 Jacobian steps from zero
+teaching cusp, branch tk (Trunk) sits at dp = 323.783893593 psi, which is 54991.975344 Jacobian steps from zero
+# WALK THE LOOP LEG UPWARD AND THE CROSSLINK IS DRIVEN TOWARDS ZERO PRESSURE
+# DIFFERENCE. Nothing else about the network changes. When the difference is
+# smaller than the step, the two central-difference evaluations straddle zero and
+# the entry the solver uses is a chord across a square root rather than a
+# derivative: it comes out as roughly the conductance over the square root of the
+# step, which is a function of the node own pressure rather than of the flow.
+teaching cusp walk, loop leg conductance 245 lb/d per root psi: crosslink dp = -1.193211e+0 psi, crosslink flow = -589.864625 lb/d, iterations = 11, converged = true, ok = true, reported residual = 1.5461e-11 lb/d
+teaching cusp walk, loop leg conductance 300 lb/d per root psi: crosslink dp = -1.573794e-2 psi, crosslink flow = -67.743516 lb/d, iterations = 17, converged = true, ok = true, reported residual = 1.5748e-9 lb/d
+teaching cusp walk, loop leg conductance 340 lb/d per root psi: crosslink dp = 2.755492e-1 psi, crosslink flow = 283.461039 lb/d, iterations = 13, converged = true, ok = true, reported residual = 4.3048e-10 lb/d
+teaching cusp walk, loop leg conductance 360 lb/d per root psi: crosslink dp = 6.647285e-1 psi, crosslink flow = 440.266762 lb/d, iterations = 19, converged = false, ok = true, reported residual = 4.5926e+1 lb/d
+teaching cusp walk, loop leg conductance 372 lb/d per root psi: crosslink dp = 9.895846e-1 psi, crosslink flow = 537.180482 lb/d, iterations = 28, converged = false, ok = true, reported residual = 2.6983e+1 lb/d
+teaching cusp walk, loop leg conductance 376 lb/d per root psi: crosslink dp = 1.111514e+0 psi, crosslink flow = 569.313221 lb/d, iterations = 28, converged = false, ok = true, reported residual = 2.6827e+1 lb/d
+teaching cusp walk, loop leg conductance 378 lb/d per root psi: crosslink dp = 1.171971e+0 psi, crosslink flow = 584.591036 lb/d, iterations = 29, converged = false, ok = true, reported residual = 2.4953e+1 lb/d
+teaching cusp walk, loop leg conductance 380 lb/d per root psi: crosslink dp = 1.235327e+0 psi, crosslink flow = 600.184455 lb/d, iterations = 30, converged = false, ok = true, reported residual = 2.4569e+1 lb/d
+teaching cusp walk, loop leg conductance 385 lb/d per root psi: crosslink dp = 1.399139e+0 psi, crosslink flow = 638.740070 lb/d, iterations = 28, converged = false, ok = true, reported residual = 2.7868e+1 lb/d
+teaching cusp walk, loop leg conductance 400 lb/d per root psi: crosslink dp = 1.927574e+0 psi, crosslink flow = 749.720411 lb/d, iterations = 36, converged = false, ok = true, reported residual = 2.2405e+1 lb/d
+teaching cusp walk, loop leg conductance 460 lb/d per root psi: crosslink dp = 4.555807e+0 psi, crosslink flow = 1152.594221 lb/d, iterations = 9, converged = true, ok = true, reported residual = 5.4902e-9 lb/d
+teaching cusp walk, loop leg conductance 600 lb/d per root psi: crosslink dp = 1.218345e+1 psi, crosslink flow = 1884.858788 lb/d, iterations = 9, converged = true, ok = true, reported residual = 2.7285e-12 lb/d
+# THE ITERATION COUNT CLIMBS AS THE BRANCH APPROACHES ITS OWN CUSP AND FALLS
+# AGAIN ONCE IT PASSES THROUGH. A branch parked near zero pressure difference is
+# the most expensive branch on a network to solve, and nothing in the return
+# points at it.
+# NOT A BUG IN THE MODULE SO MUCH AS AN UNSTATED PRECONDITION. The header should
+# say that a branch relation also has to be DIFFERENTIABLE at zero pressure
+# difference, or the Jacobian should widen its step when it detects a sign change
+# across it. Either fix is small; the contract as written invites the case.
+# AND THE LINE SEARCH IS WHAT SAVES IT MOST OF THE TIME. A full Newton step on a
+# network with a nearly dead leg will happily jump a node below atmospheric;
+# halving until the residual actually improves turns a divergence into a solve,
+# and the module tries thirty halvings before it gives up.
+published pressure floor, a weak well against a 20 psia separator through a very slack line: wellhead = 20.003996803 psia, and the module floor is 14.7 psia
+published pressure floor, converged = true, rate = 19.984012790 lb/d, pinned = none
+
+# SECTION 23: WHAT THE ORACLE COVERS AND WHAT IT DOES NOT
+# Expert m06 l01, and the honest frame for the whole tier. oracle_network.py is a
+# genuinely independent referee for the PHYSICS: Gauss-Seidel with a bracketed
+# bisection at each node, no Jacobian, no linear algebra, not even the same
+# iteration structure. It records NO defects at all and it publishes four clean
+# cases. Everything this course teaches at Expert is about the parts of the
+# module that no oracle touches.
+golden coverage, the oracle publishes 4 cases: linear_star, looped, turbulent_tree, wells_fight
+golden coverage, its own conservation gaps: linear_star 3.6569e-8 lb/d, turbulent_tree -2.4284e-9 lb/d, looped 2.5057e-9 lb/d
+golden coverage, its sweep counts: linear_star 19, turbulent_tree 48, looped 42, against a cap of 4000 it never reaches
+# WHAT IT NEVER TOUCHES:
+#   the PINNING PATH. The oracle has no concept of a pinned node; bisection on a
+#   flat residual simply returns a bracket endpoint. Every one of its four cases
+#   is a plain Vogel-plus-turbulent system in which no node can go flat.
+#   the CONVERGENCE TEST ITSELF. The oracle converges on how far the pressures
+#   MOVED between sweeps; the engine converges on a mass residual scaled by a
+#   factor the caller never sees. The two criteria are not comparable and the
+#   goldens publish neither one.
+#   checkConservation, diagnose and propagateStreams. The oracle computes its own
+#   conservation gap from its own solve and never calls the engine. It never ranks
+#   a bottleneck and it never propagates a stream at all.
+#   solveLinearNetwork. The oracle has no linear case of its own; linear_star is
+#   solved by the same Gauss-Seidel as everything else. The engine closed form is
+#   exercised only by the JS gate, on a three node star with no loop.
+#   pipeSchedule.js IN ITS ENTIRETY. The oracle does not import it and there is no
+#   Python referee for it anywhere.
+# WHAT THE ENGINE GATE HOLDS THE TWO ROUTES TO, so anything smaller is invisible
+# to the published comparison by construction:
+derived gate bands, turbulent_tree pressures to 5 decimals and flows to 4 decimals
+derived gate bands, looped pressures to 5 decimals
+derived gate bands, wells_fight header and rates to 4 decimals
+derived gate bands, linear_star Newton against the closed form at a relative 1e-12, and against the oracle to 6 decimals
+derived gate bands, the pipe table self consistency at 3 decimals, which is the loosest assertion in the file
+
+# SECTION 24: WHAT THIS MODULE REFUSES AND WHAT IT DOES NOT MODEL AT ALL
+# Associate m01 l03, and the closing lesson of every tier. Every capability comes
+# with a limit, and these are the limits stated as refusals rather than caveats.
+published refusal, a node with no route to a delivery point: This node has no route to a delivery point: Manifold B. Nothing sets its pressure, so the network cannot be solved. Connect it or take it out.
+published refusal, no delivery point at all: A network needs a delivery point: a node with a pressure the system is flowing against.
+published refusal, a delivery point with no pressure: The delivery point "Sep" needs a pressure. It is the boundary the whole system is solved against.
+published refusal, no wells at all: A network needs at least one well. Nothing else puts anything into it.
+published refusal, a recirculating solved flow direction: The solved flow directions form a loop, so the network is recirculating. A gathering system does not do that; check for a branch connected backwards.
+published refusal, a singular Jacobian returns ok false with the message the module writes for it: "The system is singular: two or more nodes move together, so their pressures are not separately determined. That is usually a branch connected differently from the way the drawing suggests."
+published refusal, an unknown fitting id: No resistance coefficient for reducer.
+published refusal, an equivalent length with no bore: An equivalent length needs a bore and a friction factor.
+# AND WHAT IT WARNS ABOUT RATHER THAN REFUSING:
+derived warning, a pinned node, which is reported as a fact about the answer
+derived warning, a solve that stopped making progress before it met its tolerance
+derived warning, a solve that ran its iteration cap without meeting its tolerance
+# WHAT THE MODULE DOES NOT MODEL AT ALL, so no number in this file speaks to it:
+# the pipe hydraulics themselves, which are a callback the consumer supplies;
+# the well inflow, which is another callback; temperature anywhere, so no
+# thermal coupling and no cooldown; slugging, holdup and any transient at all,
+# because every equation here is steady state; compressibility along a branch,
+# since mass in equals mass out on every branch by construction; any equipment
+# between nodes, so no pump, no compressor and no choke as a node kind; a
+# separator that does anything but accept whatever arrives at a fixed pressure;
+# and the pipe wall, the burial and the insulation, which live in other modules
+# entirely.
+# THE THREE NODE KINDS ARE THE WHOLE VOCABULARY. A well injects and its pressure
+# is unknown. A junction injects nothing and everything that arrives leaves. A
+# sink has a FIXED pressure and takes whatever arrives. Anything a real gathering
+# system has that is not one of those three has to be written as a branch
+# relation or left out.
+
+# END OF DIGEST

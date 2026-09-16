@@ -1,0 +1,24 @@
+{
+ "slug": "uncertainty",
+ "prefix": "ec3",
+ "name": "Probabilistic Economics",
+ "goldens": [
+  "economics/goldens/breakeven_cases.json",
+  "economics/goldens/screening_cases.json"
+ ],
+ "constants": {
+  "365": "days per year",
+  "1000000": "USD per million USD",
+  "100": "percent",
+  "20": "the quick input profile's fixed life in years, and the histogram's bin count",
+  "500": "the breakeven bracket's upper price in USD per bbl, and the Monte Carlo's default iteration count",
+  "50": "the S-curve's downsample divisor",
+  "20260829": "the default Monte Carlo seed of both engines"
+ },
+ "repo": "/root/wt-ec3-recut",
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3"
+ ]
+}
