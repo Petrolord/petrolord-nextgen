@@ -190,6 +190,11 @@ export const PANELS = {
   'fc-pump-explorer': React.lazy(() => import('@/components/course/panels/rotating/PumpExplorer')),
   'fc-suction-explorer': React.lazy(() => import('@/components/course/panels/rotating/SuctionExplorer')),
   'fc-compressor-explorer': React.lazy(() => import('@/components/course/panels/rotating/CompressorExplorer')),
+
+  // FC5 Relief & Flare Systems
+  'fc-sizing-explorer': React.lazy(() => import('@/components/course/panels/relief/SizingExplorer')),
+  'fc-fire-drum-explorer': React.lazy(() => import('@/components/course/panels/relief/FireDrumExplorer')),
+  'fc-blowdown-explorer': React.lazy(() => import('@/components/course/panels/relief/BlowdownExplorer')),
 };
 
 export function resolvePanel(id) {

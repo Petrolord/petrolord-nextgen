@@ -32,21 +32,45 @@ const FIELDS = JSON.parse(fs.readFileSync(waveInput(WAVE_NAME, 'fields.json'), '
 
 /**
  * WHAT THIS DIRECTORY IS EXPECTED TO HOLD AT THIS PHASE OF THE WAVE, declared so
- * the sweep cannot go vacuous. The foundation phase ships the tolerance
- * derivation and this guard. The panels phase adds the lab and the three panel
- * components and MUST extend this list in the same commit, because a listing
- * that does not match fails.
+ * the sweep cannot go vacuous. The foundation phase shipped the tolerance
+ * derivation and this guard. THE PANELS PHASE ADDED the teaching lab and the
+ * three panel components, and extended this list in the same commit, because a
+ * listing that does not match the declared inventory fails in either direction.
  */
 const EXPECTED_SOURCES = [
+  'BlowdownExplorer.jsx',
+  'FireDrumExplorer.jsx',
+  'SizingExplorer.jsx',
   'gradedAnswerGuard.js',
   'gradedTolerance.js',
+  'reliefLab.js',
 ];
+
+/**
+ * THE COURSE LEARNING PAGE IS SWEPT TOO. It imports the lab directly, so it can
+ * reach every teaching reader, and a graded answer printed there would reach the
+ * learner sitting the assessment with every other gate still green. It is proven
+ * to be there rather than skipped: a page that moved makes this list stale, and a
+ * stale list is what empties a gate.
+ */
+const LEARNING_PAGE = path.resolve(HERE, '../../../../pages/apps/ReliefLearningPage.jsx');
 
 const sources = fs
   .readdirSync(HERE)
   .filter((f) => (f.endsWith('.js') || f.endsWith('.jsx')) && !f.includes('.test.'))
   .sort()
-  .map((f) => ({ file: f, text: fs.readFileSync(path.join(HERE, f), 'utf8') }));
+  .map((f) => ({ file: f, text: fs.readFileSync(path.join(HERE, f), 'utf8') }))
+  .concat([{
+    file: 'ReliefLearningPage.jsx',
+    text: (() => {
+      if (!fs.existsSync(LEARNING_PAGE)) {
+        throw new Error(`[relief guard] the course learning page is not at ${LEARNING_PAGE}. `
+          + 'This guard sweeps it because it imports the teaching lab. A missing page is a failure '
+          + 'rather than one fewer file to check.');
+      }
+      return fs.readFileSync(LEARNING_PAGE, 'utf8');
+    })(),
+  }]);
 
 describe('THE FC5 PANEL GUARD: no source in this directory may carry a graded capstone answer', () => {
   it('reads its inputs through the course-wave resolver and says which copy it read', () => {
@@ -58,9 +82,48 @@ describe('THE FC5 PANEL GUARD: no source in this directory may carry a graded ca
   });
 
   it('there are sources to check, and the listing matches the declared inventory', () => {
-    expect(sources.map((s) => s.file)).toEqual(EXPECTED_SOURCES);
+    expect(sources.map((s) => s.file)).toEqual([...EXPECTED_SOURCES, 'ReliefLearningPage.jsx']);
     expect(sources.length).toBeGreaterThan(1);
     sources.forEach((s) => expect(s.text.length, s.file).toBeGreaterThan(500));
+    // The lab and all three panels are on the list, so the sweep below covers
+    // every file a graded answer could be printed from.
+    ['reliefLab.js', 'SizingExplorer.jsx', 'FireDrumExplorer.jsx', 'BlowdownExplorer.jsx', 'ReliefLearningPage.jsx']
+      .forEach((f) => expect(sources.map((s) => s.file), `${f} is not being swept`).toContain(f));
+  });
+
+  it('NEGATIVE CONTROL, both plants at once: every one of the eighteen is caught at FULL FLOAT and at NINE digits', () => {
+    // The foundation proved this on the first field. It is proved here on ALL
+    // EIGHTEEN, because a guard that catches one shape of one answer is not a
+    // guard over eighteen: a field whose full float and nine-digit renderings
+    // both fall under MIN_CHARS would be unsearchable and nothing would say so.
+    const r = allRenderings(FIELDS);
+    const missed = [];
+    const nineOnlyMisses = [];
+    const nineOnlyCatchesByPrefix = [];
+    FIELDS.forEach(([tier, key, value]) => {
+      const full = `const x = ${value}; // a panel printing \${value} with no formatter`;
+      const nine = `const x = ${value.toPrecision(9).replace(/0+$/, '').replace(/\.$/, '')};`;
+      if (!leaksIn(full, r).some((h) => h.key === key && h.shape === 'full')) missed.push(`${tier}/${key} at full float`);
+      if (!leaksIn(nine, r).some((h) => h.key === key && h.shape === 'nine')) missed.push(`${tier}/${key} at nine digits`);
+      // WHAT THE NINE-ONLY MATCHER THE SIBLING WAVE SHIPPED DOES WITH THE FULL
+      // FLOAT, split rather than claimed. On a field whose ninth digit rounds UP
+      // the nine-digit string is not a prefix of the full float and the nine-only
+      // matcher is blind to it. On a field whose ninth digit rounds DOWN it is a
+      // prefix, and the nine-only matcher finds the full float by accident. The
+      // first group is what makes the four shapes necessary; the second is why a
+      // guard cannot be left resting on that accident, because which group a
+      // field falls in is decided by its tenth digit.
+      const nineOnly = r.filter((x) => x.shape === 'nine' && x.key === key);
+      (leaksIn(full, nineOnly).length === 0 ? nineOnlyMisses : nineOnlyCatchesByPrefix).push(key);
+    });
+    expect(missed, 'the guard does not go red on both plants for every graded field').toEqual([]);
+    // The four shapes are NECESSARY, and this is the measurement that says so.
+    expect(nineOnlyMisses.length, 'a nine-digit-only matcher would have caught every full float, so the '
+      + 'four shapes would be unnecessary here').toBeGreaterThan(0);
+    expect(nineOnlyMisses.length + nineOnlyCatchesByPrefix.length).toBe(18);
+    console.log(`[relief guard] BOTH PLANTS on all 18 fields: full float and nine digits both caught by the four `
+      + `shapes. A nine-digit-only matcher is BLIND to the full float on ${nineOnlyMisses.length} of the 18 `
+      + `(${nineOnlyMisses.join(', ')}) and finds it only by prefix on the other ${nineOnlyCatchesByPrefix.length}.`);
   });
 
   it('the guard holds four shapes of every graded answer, and enough of them to search for', () => {
