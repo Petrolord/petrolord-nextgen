@@ -124,16 +124,25 @@ against `digest.txt`.** There are two sweeps and you run both:
 Run both. Report both counts. **"The gate went green" and "the gate examined
 my files" are two separate claims and both need a number beside them.**
 
-## SECTION 14 IS WITHHELD AND THREE EXPERT MODULE BANKS ARE HELD WITH IT
+## SECTION 14 IS BUILT AND NOTHING IS HELD BEHIND IT ANY MORE
 
-Expert m01, m02 and m03 have no lessons, because the Joule-Thomson chain is
-under repair and digest Section 14 prints nothing. **Do not write those three
-module banks, and do not write any exam question that touches the
-Joule-Thomson coefficient, the marched let-down, the cold separator
-temperature or the water the cold gas can hold.** That is 45 module-bank
-questions and however many exam questions would have drawn on them.
+**CORRECTED. This heading used to say Section 14 was WITHHELD and that three
+Expert module banks were held with it. That is stale and was stale by the time
+the banks were written.** The Joule-Thomson repair landed as FC4-0, the
+engine was re-vendored sha-identical, and digest Section 14 prints in full
+from line 484 to line 580: the coefficient, the march, the march's
+three coefficients and the cold separator. `wave.json` says `"state": "... Digest
+Section 14 BUILT"` and `"withheld": null`, and `gate_wavejson.mjs` checks that
+against the digest, so the two cannot disagree silently again.
 
-The Expert exam is written LAST, after those three modules exist.
+So: Expert m01, m02 and m03 ARE writable and ARE written, the Joule-Thomson
+coefficient, the marched let-down, the cold separator temperature and the
+water the cold gas can hold are all fair game, and the Expert exam may draw
+on all six modules. Nothing in this wave is held behind a withheld section.
+
+WHAT IS STILL TRUE, AND THE ONLY PART OF THE OLD RULE THAT SURVIVES: the
+Expert exam is written LAST, after all six Expert modules exist, because an
+exam is a sample of what the tier actually taught.
 
 ## Do not leak the capstone
 

@@ -1,6 +1,6 @@
 # Strength, and what it buys
 
-Strength is the weight percent of amine in the solution that circulates. It sits in the middle of the circulation chain, between pounds of amine and pounds of solution, and it is one of the two properties the digest names as setting the circulation.
+Strength is the weight percent of amine in the solution that circulates. It sits in the middle of the circulation chain, between pounds of amine and pounds of solution, and it is one of the two properties that set the circulation.
 
 ## The three typical strengths
 

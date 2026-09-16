@@ -52,6 +52,7 @@ import {
   UNREACHABLE_SPEC,
   LBMOL_PROBE, OVERHEAD_PROBE, MINUTES_PROBE, TONS_PROBE, RHO_L_PROBE,
   AMINE_DENSITY_PROBE, REBOILER_GROUP_PROBE,
+  contractCensus,
 } from '/root/fc-wip-gasprocessing/fc4_fields.mjs';
 
 const ROOT = process.env.FC4_ENGINES || '/root/wt-fc4-nextgen/packages/engines';
@@ -68,6 +69,22 @@ const r4 = (x) => num(x, 4);     // lb/day, gal/day, Btu/gal, lbmol/day
 const raw = (x) => String(x);
 const soft = (r) => (r && r.error ? `{ error: "${r.error}" }` : 'no error');
 const shape = (r) => JSON.stringify(r);
+/**
+ * A ROW LABELLED A REFUSAL MUST ACTUALLY REFUSE. This exists because one did
+ * not: the evidence block called the AGBADA deep let-down, which ANSWERS, and
+ * printed its seven SUCCESS fields under a refusal heading. Every number on
+ * that line was real engine output, so no numeric sweep could see it, and the
+ * digest taught an evidence shape the engine never returns. The generator now
+ * refuses to build rather than print such a line, which turns the class into
+ * a build failure instead of a sentence somebody has to notice. It guards
+ * EVERY refusal-labelled block in this file, not only the one that was wrong.
+ */
+const mustRefuse = (label, r) => {
+  if (!r || typeof r.error !== 'string') {
+    throw new Error(`GENERATOR REFUSES: the row "${label}" is labelled a refusal and the engine ANSWERED it. A refusal row computed from a successful call prints real numbers under a false heading, which no numeric sweep can see. Keys returned: ${r && typeof r === 'object' ? Object.keys(r).join(', ') : String(r)}`);
+  }
+  return r;
+};
 /** FC4-0 put `kremserFractionRemoved` inside the module's error contract:
  *  it returns { fractionRemoved } or { error } where it used to return a
  *  bare number. Every read of it here goes through this, so the digest can
@@ -86,6 +103,13 @@ const OB_CONT = G.contactorDiameter({
 const UB = G.aminePackage(UBIE);
 const UB_CONT = G.contactorDiameter({ gasMMscfd: UBIE.gasMMscfd, ...UBIE_CONTACTOR });
 
+/* THE CONTRACT CENSUS, run once. Every export of the module enumerated,
+ * every callable one asked a question it can answer and a question it
+ * cannot, and the shape of both answers READ OFF the return value. The
+ * digest's contract block is printed from this and states nothing the
+ * census did not measure. See fc4_fields.mjs for why. */
+const CENSUS = contractCensus(G);
+
 // ------------------------------------------------------------------ header
 w('# FC4 Gas Processing. Teaching digest.');
 w('# Water contents, pressures, temperatures, circulations, diameters and ratios print to six decimals; pounds a day, gallons a day, Btu a gallon and lbmol a day to four; counts are whole numbers.');
@@ -100,7 +124,7 @@ w();
 w('# App surface: the Gas Processing Studio runs three units over one gas stream. Dehydration takes water out with glycol, sweetening takes acid gas out with amine, and the dew point unit cools the gas by letting it down.');
 w('- This engine conditions a GAS STREAM. It answers how much water a gas carries, how much solvent it takes to remove it, what the regenerator costs to run, how wide the vessel has to be, and how far a let-down cools the gas.');
 w('- The doctrine is stated in the module\'s own header: everything that is a DESIGN CHOICE or a chart value is an INPUT with its customary range named, and everything computable from first principles is computed. The circulation ratio, the BTEX absorbed fraction, the glycol properties, the water overhead and the contactor liquid are all inputs with defaults, and a reader can see each one on the page rather than having to find it in the source.');
-w('- A state the method has no answer for comes back as an object with an `error` string. This module throws nothing, and there is no export outside that contract: every one of them answers with an object and every refusal puts a named string on an `error` key. Section 15 reads the contract and the evidence a refusal carries with it.');
+w(`- A state the method has no answer for comes back as an object with an \`error\` string, and this module throws nothing at all. The contract belongs to the ${CENSUS.doors.length} exports that are called with a NAMED-ARGUMENT OBJECT, which is every door the studio calls: each of them answers with an object, and each refusal puts a named string on an \`error\` key. The other ${CENSUS.helpers.length} callable exports take a single positional value and are scalar helpers. They answer with a bare number or with one row of a table, and they say they have no answer with a bare NaN or a null, which the door that consumes them turns into a named refusal. Section 15 reads every export of the module from both sides and names the ${CENSUS.helpers.length}.`);
 w('- What is NOT in this engine: no hydrate boundary, no compositional flash, no rate-based absorber model, no stage efficiency, no molecular sieve, no refrigeration and no NGL recovery. A hydrate margin is the Production module Flow Assurance engine, and the phase envelope of a reservoir fluid is the Fluid engine.');
 w();
 w('The three units, on the two teaching streams, end to end:');
@@ -193,7 +217,12 @@ w('The method is ideal vapour-liquid equilibrium over liquid water: the mole fra
 w(`On OBIAFU at ${e6(OBIAFU_LINE.pPsia)} psia and ${e6(OBIAFU_LINE.tF)} degF the mole fraction is ${num(OB_SAT.yWater, 9)} and the content is ${e6(OB_SAT.lbPerMMscf)} lb per MMscf. The vapour pressure at that temperature alone is ${e6(G.waterSatPsia(OBIAFU_LINE.tF))} psia, and the mole fraction is that over the total pressure: ${num(G.waterSatPsia(OBIAFU_LINE.tF) / OBIAFU_LINE.pPsia, 9)} (derived, the two figures on this line divided).`);
 w();
 w('The surface, in lb per MMscf. Rows are degF, columns are psia:');
-w(`| degF | ${SATURATION_P.map((p) => `${p} psia`).join(' | ')} |`);
+// The column heads print at the SAME precision as every pressure in this
+// digest, which its own header line promises. They used to print bare, so
+// `1500.000000` existed only in Section 14 and the tier sweep read an
+// Associate lesson quoting this table's own column as reaching forward into
+// an Expert section.
+w(`| degF | ${SATURATION_P.map((p) => `${e6(p)} psia`).join(' | ')} |`);
 w(`| --- | ${SATURATION_P.map(() => '---').join(' | ')} |`);
 SATURATION_T.forEach((t) => {
   w(`| ${e6(t)} | ${SATURATION_P.map((p) => e6(G.saturatedWaterContent({ pPsia: p, tF: t }).lbPerMMscf)).join(' | ')} |`);
@@ -254,7 +283,7 @@ w('The other refusals on the water answer, and what each protects:');
   ['a total pressure of zero', () => G.saturatedWaterContent({ pPsia: 0, tF: 104 })],
   ['a temperature below absolute zero', () => G.saturatedWaterContent({ pPsia: 500, tF: -600 })],
   ['no temperature at all', () => G.saturatedWaterContent({ pPsia: 500 })],
-].forEach(([label, fn]) => w(`- ${label}: ${soft(fn())}`));
+].forEach(([label, fn]) => w(`- ${label}: ${soft(mustRefuse(label, fn()))}`));
 w('The first two are one guard read from either side of its own limit. A gas at exactly its water vapour pressure is all water and nothing else, so refusing the equality is right rather than over-strict.');
 w();
 // ---------------------------------------------------------------- SECTION 5
@@ -442,9 +471,18 @@ w();
 w('Sweetening is a mole balance from end to end. The gas carries a mole percent of CO2 and H2S, the spec says what may stay, and the difference is what the solution has to pick up. Nothing in that chain is a mass until the very last step.');
 w('THREE NAMES, AND THEY ARE THREE DIFFERENT NUMBERS. A reader who collapses them has lost the whole section, so they are separated here before any of them is used, and they are the engine\'s own words:');
 w(`- the LEAN LOADING: what a mole of amine is still carrying when it comes back from the regenerator and enters the contactor. An input. On UBIE, ${e6(UBIE.leanLoading)} mol of acid gas per mol of amine.`);
-w(`- the RICH LOADING: what a mole of amine is carrying when it leaves the contactor. An input, and the engine echoes back the one it used as \`richLoadingUsed\`. On UBIE, ${e6(UB.richLoadingUsed)}.`);
+w(`- the RICH LOADING: what a mole of amine is carrying when it leaves the contactor. An input. On UBIE, ${e6(UB.richLoadingUsed)}.`);
 w(`- the LOADING SWING: the DIFFERENCE between them, which is what each mole of amine actually carries round the loop and is therefore what sets the circulation. NOT an input, and the engine does not return it under any name. On UBIE it is ${num(UB.richLoadingUsed - UBIE.leanLoading, 9)}, derived from the two figures above.`);
 w('The rich loading is a CEILING that corrosion sets. The swing is a THROUGHPUT that the regenerator buys. Raising the rich loading raises the swing; lowering the lean loading also raises the swing, and costs regenerator duty rather than corrosion margin. That is why this section reads both ends separately.');
+// WHICH INPUTS THE ENGINE ECHOES, MEASURED FROM THE ANSWER. This line used to
+// say the engine echoes back "the one it used as `richLoadingUsed`", under the
+// RICH LOADING bullet and nowhere else, which reads as though the rich loading
+// is the echoed one. It is not: the answer carries a `...Used` key for EVERY
+// typed input in this chain. Two bank questions were defective on that
+// sentence, because "the lean loading, as leanLoadingUsed" and "both loadings"
+// were both true as distractors. The set is now read off the answer's keys.
+const AMINE_ECHOES = Object.keys(UB).filter((k) => k.endsWith('Used')).sort();
+w(`The engine echoes back EVERY typed input this chain used, each under its own name ending in Used. There are ${AMINE_ECHOES.length} of them, measured by reading the keys of the answer itself: ${AMINE_ECHOES.map((k) => `\`${k}\` = ${e6(UB[k])}`).join(', ')}. So an echoed name tells a reader the value was TYPED and which value was taken, and it never means the figure was computed. THE LOADING SWING IS NOT AMONG THEM, and that absence is the point of the bullet above: the engine returns every number it was given and does not return the one it derived from two of them.`);
 w(`The engine's own refusal uses all three words in one sentence when the swing vanishes: ${soft(G.aminePackage({ ...UBIE, leanLoading: UBIE.richLoading }))}`);
 w();
 w(`On UBIE: ${e6(UBIE.co2MolPct)} less ${e6(UBIE.co2SpecMolPct)} mol percent of CO2 plus ${e6(UBIE.h2sMolPct)} less ${e6(UBIE.h2sSpecMolPct)} of H2S is ${num((UBIE.co2MolPct - UBIE.co2SpecMolPct) + (UBIE.h2sMolPct - UBIE.h2sSpecMolPct), 9)} mol percent removed (derived, the four figures on this line), which at ${e6(UBIE.gasMMscfd)} MMscfd is ${r4(UB.acidMolesDay)} lbmol a day.`);
@@ -543,6 +581,7 @@ const amRows = UBIE_AMINE_IDS.map((id) => ({ id, r: G.aminePackage({
 w('The two ratio columns are NOT equal, and that is the whole point of the table: circulation is set by the rich limit and the strength, duty is set by the rich limit, the strength and the duty per gallon, so the same ordering is reached by two different routes and the gaps between the amines are different sizes on each.');
 w();
 w(`An amine the table does not carry: ${shape(G.amineOf('DIPA'))}, and the package asked for it returns ${soft(G.aminePackage({ ...UBIE, amineId: 'DIPA' }))}. This is the one catalogue lookup in the module and it says it does not know.`);
+w(`\`amineOf\` is one of the ${CENSUS.helpers.length} scalar helpers Section 15 names. It hands back a null where a door would hand back an object with an \`error\` key, and \`aminePackage\`, the door that consumes it, is what turns that null into the named refusal printed above. A caller of the LOOKUP therefore tests for a null; a caller of the PACKAGE reads one property, the way it does at every other door.`);
 w();
 
 // --------------------------------------------------------------- SECTION 12
@@ -756,9 +795,19 @@ w('The contract: a state the method has no answer for comes back as an object ca
   ['a gas gravity Sutton cannot carry', () => G.jouleThomsonFPerPsi({ pPsia: 900, tF: 100, gasSg: SG_SUTTON_BREAKS })],
   ['a compressibility above the correlation band', () => G.contactorDiameter({ gasMMscfd: 50, pPsia: 30000, tF: 100, gasSg: 0.65 })],
   ['a contactor liquid lighter than its gas', () => G.contactorDiameter({ gasMMscfd: 50, pPsia: 900, tF: 100, gasSg: 0.65, rhoLLbFt3: 0.5 })],
-].forEach(([label, fn]) => w(`- ${label}: ${soft(fn())}`));
+].forEach(([label, fn]) => w(`- ${label}: ${soft(mustRefuse(label, fn()))}`));
 w();
-w('THE CONTRACT IS WHOLE. Every export answers with an object, and every one that cannot answer puts a named string on an `error` key. A caller checks one property and never catches, and there is no export it has to check differently:');
+w(`THE CONTRACT, EXACTLY. This module exports ${CENSUS.names.length} names. ${CENSUS.values.length} of them are values, the constants and the amine property table, and ${CENSUS.callable.length} are callable. Every callable one is asked here a question it can answer and a question it cannot, and the shape below is read off what came back rather than stated:`);
+w('| export | called with | answering | with no answer | where a no-answer is named |');
+w('| --- | --- | --- | --- | --- |');
+CENSUS.rows.forEach((r) => {
+  w(`| ${r.name} | ${r.door ? 'a named-argument object' : 'one positional value'} | ${r.answers} | ${r.refuses} | ${r.caughtBy ? `\`${r.caughtBy}\`, which returns ${r.caughtShape}` : 'the call itself'} |`);
+});
+w(`Read the table by its second column. THE ERROR CONTRACT IS THE DOORS: all ${CENSUS.doors.length} exports called with a named-argument object answer with an object, and every one of them that cannot answer puts a named string on an \`error\` key. That is every door the studio calls, so a caller of a door checks one property and never catches, and there is no door it has to check differently.`);
+w(`The other ${CENSUS.helpers.length} are SCALAR HELPERS, called with one positional value, and they are named here so nobody has to discover them at a call site: ${CENSUS.helpers.map((r) => `\`${r.name}\``).join(', ')}. A helper answers with a bare number or with one row of the property table, and says it has no answer with a bare NaN or a null. None of those reaches a studio tab as a blank, because each one is consumed by a door, and the last column above is that door being handed the helper's no-answer and refusing BY NAME. The engine's own header says so of the first of them: the saturation fit is a correlation with nowhere to put an error key, and its one caller turns the NaN into a named refusal.`);
+w('A helper read straight from a studio tab would be the real defect, because a bare NaN passes an `error` check and surfaces far downstream as an empty field, and an empty field looks exactly like a field nobody filled in. That is what the audit asks of a module: which exports are doors, which are helpers, and whether anything reads a helper where it should have read a door.');
+w();
+w('The contract read on ONE door, from five directions:');
 w('| call | absorption factor | stages | returns |');
 w('| --- | --- | --- | --- |');
 [[0, 5], [-1, 5], [2, 0], [2, -3], [1.6, 6]].forEach(([a, n]) => {
@@ -770,11 +819,11 @@ w();
 w('A refusal also hands back the EVIDENCE it stands on, so a caller can say what to change rather than only that something failed:');
 [
   ['the stage count a spec needs when the solvent caps it', () => G.kremserStagesFor({ absorptionFactor: A_WELL_UNDER_UNITY, fractionRemoved: UNREACHABLE_SPEC })],
-  ['a march that walks off the correlation', () => G.jtDrop({ ...AGBADA, p2Psia: AGBADA_DEEP_P2_PSIA })],
+  ['a march that walks off the correlation part way down', () => G.jtDrop({ ...AGBADA, tF: AGBADA_COLD_INLET_F, p2Psia: AGBADA_COLD_P2_PSIA })],
   ['a compressibility off the correlation band', () => G.zAtState({ pPsia: 30000, tF: 100, gasSg: 0.65 })],
   ['a contactor whose liquid is lighter than its gas', () => G.contactorDiameter({ gasMMscfd: 50, pPsia: 900, tF: 100, gasSg: 0.65, rhoLLbFt3: 0.5 })],
 ].forEach(([label, fn]) => {
-  const r = fn();
+  const r = mustRefuse(label, fn());
   const keys = Object.keys(r).filter((k) => k !== 'error');
   w(`- ${label}: besides the message it returns ${keys.length} field${keys.length === 1 ? '' : 's'}, ${keys.join(', ')}.`);
 });
@@ -903,7 +952,7 @@ w('| Expert lesson | where it reads from |');
 w('| --- | --- |');
 [['m05 l01, What was repaired, and what was not', 'Section 20'],
  ['m05 l02, What a refusal is', 'Section 15'],
- ['m05 l03, The contract read on one export', 'Section 15, the whole-contract table'],
+ ['m05 l03, The contract read on one door', 'Section 15, the export census and the one-door table'],
  ['m05 l04, Constants measured out of the engine', 'Section 2'],
  ['m05 l05, What a published case can catch', 'Section 17'],
  ['m06 l01, What the method does not know', 'Section 16'],

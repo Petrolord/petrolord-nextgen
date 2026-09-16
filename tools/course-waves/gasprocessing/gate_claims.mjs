@@ -202,10 +202,120 @@ let bad=0; const ck=(claim,ok,detail)=>{ if(!ok) bad++; console.log(`${ok?'OK  '
     Math.max(...ratios)-Math.min(...ratios)<1e-12, `spread ${(Math.max(...ratios)-Math.min(...ratios)).toExponential(2)}`);
  ck('S10 that ratio IS the stated duty per gallon in other units',
     Math.abs(ratios[0]-(F.UBIE.dutyBtuPerGal*60/1e6))<1e-12, `${ratios[0]} vs ${F.UBIE.dutyBtuPerGal*60/1e6}`);}
-// C7 S15: the contract is whole
-{ck('S15 kremserFractionRemoved returns an OBJECT carrying an error',
-    !!G.kremserFractionRemoved({absorptionFactor:0,stages:5}).error &&
-    typeof G.kremserFractionRemoved({absorptionFactor:1.6,stages:6}).fractionRemoved==='number');}
+// C7 S15: THE CONTRACT, EXACTLY. The digest used to claim the contract was
+// WHOLE and this check read ONE export, so it could not have caught the
+// claim being false: it restated the repaired export and called that a
+// contract. It now re-measures the whole census the digest prints and
+// checks the digest's own counts and shape words against it.
+{const C=F.contractCensus(G);
+ // NEGATIVE CONTROL on the classifier. A classifier that answered the same
+ // way for everything would make every row below pass by construction, so
+ // the split itself is asserted first.
+ ck('S15 NEGATIVE CONTROL: the door/helper classifier SPLITS the callable exports',
+    C.doors.length>0 && C.helpers.length>0 && C.doors.length+C.helpers.length===C.callable.length,
+    `${C.doors.length} doors + ${C.helpers.length} helpers = ${C.callable.length} callable of ${C.names.length} exports`);
+ ck('S15 every callable export is probed, none skipped', C.rows.length===C.callable.length,
+    `${C.rows.length} probed of ${C.callable.length}`);
+ const ERR='an object with a named string on an `error` key';
+ ck('S15 EVERY door answers with an object and refuses with a named string on an error key',
+    C.doors.every(r=>r.answers==='an object of named results' && r.refuses===ERR),
+    C.doors.map(r=>r.name).join(', '));
+ ck('S15 NOT every export does, which is why the digest no longer says so',
+    C.helpers.some(r=>r.refuses!==ERR),
+    C.helpers.map(r=>`${r.name} -> ${r.refuses}`).join('; '));
+ ck('S15 every helper no-answer is turned into a NAMED refusal by the door that consumes it',
+    C.helpers.every(r=>r.caughtBy && r.caughtShape===ERR && typeof r.caughtMessage==='string' && r.caughtMessage.length>0),
+    C.helpers.map(r=>`${r.name} -> ${r.caughtBy}`).join('; '));
+ // The digest's printed counts and names must be the measured ones.
+ const D=DIGEST_TEXT;
+ ck('S15 the digest prints the MEASURED export census',
+    D.includes(`This module exports ${C.names.length} names. ${C.values.length} of them are values`)
+    && D.includes(`and ${C.callable.length} are callable`),
+    `${C.names.length}/${C.values.length}/${C.callable.length}`);
+ ck('S15 the digest prints the MEASURED door and helper counts in all three places',
+    D.includes(`all ${C.doors.length} exports called with a named-argument object`)
+    && D.includes(`The other ${C.helpers.length} are SCALAR HELPERS`)
+    && D.includes(`the ${C.doors.length} exports that are called with a NAMED-ARGUMENT OBJECT`)
+    && D.includes(`The other ${C.helpers.length} callable exports take a single positional value`)
+    && D.includes(`one of the ${C.helpers.length} scalar helpers Section 15 names`),
+    `doors ${C.doors.length}, helpers ${C.helpers.length}`);
+ ck('S15 the digest names every helper it says it names',
+    C.helpers.every(r=>D.includes(`\`${r.name}\``)), C.helpers.map(r=>r.name).join(', '));
+ ck('S15 no surviving sentence still claims EVERY export answers with an object',
+    !/[Ee]very export answers with an object|no export outside that contract|THE CONTRACT IS WHOLE/.test(D),
+    'swept digest.txt for the three wordings the old claim used');
+ // The one thing the old claim got right, kept and still measured.
+ ck('S15 the sole `throw` in the module source sits inside a comment, so nothing throws',
+    (()=>{const src=fs.readFileSync(`${ROOT}/engines/facilities/gasProcessing.js`,'utf8').split('\n');
+      const hits=src.map((l,i)=>[i+1,l]).filter(([,l])=>/\bthrow\b/.test(l));
+      return hits.length>0 && hits.every(([,l])=>/^\s*[*]|^\s*\/\//.test(l));})(),
+    'every throw line in the engine source is a comment line');}
+// C11 S15: A ROW LABELLED A REFUSAL MUST REFUSE, and the EVIDENCE COUNT the
+// digest prints must be the count that refusal actually carries. The digest
+// said a march off the correlation returns SEVEN fields. It does not: the
+// generator's row called the AGBADA DEEP let-down, which ANSWERS, so the
+// seven were its SUCCESS keys printed under a refusal heading. Every figure
+// on the line was real engine output, which is why no numeric sweep saw it.
+// The calls below are written out HERE rather than imported from the
+// generator, so this is a second opinion and not the same mistake twice.
+{const D=DIGEST_TEXT;
+ const ev=[
+  ['the stage count a spec needs when the solvent caps it',
+   G.kremserStagesFor({absorptionFactor:F.A_WELL_UNDER_UNITY,fractionRemoved:F.UNREACHABLE_SPEC})],
+  ['a march that walks off the correlation part way down',
+   G.jtDrop({...F.AGBADA,tF:F.AGBADA_COLD_INLET_F,p2Psia:F.AGBADA_COLD_P2_PSIA})],
+  ['a compressibility off the correlation band',
+   G.zAtState({pPsia:F.P_ABOVE_DAK_PSIA,tF:F.OBIAFU_LINE.tF,gasSg:F.OBIAFU_CONTACTOR.gasSg})],
+  ['a contactor whose liquid is lighter than its gas',
+   G.contactorDiameter({gasMMscfd:F.UBIE.gasMMscfd,...F.UBIE_CONTACTOR,rhoLLbFt3:0.5})],
+ ];
+ ck('S15 every evidence row the digest labels a refusal DOES refuse',
+    ev.every(([,r])=>typeof r.error==='string'),
+    ev.map(([l,r])=>`${l}: ${r.error?'refuses':'ANSWERS'}`).join('; '));
+ const wrong=[];
+ ev.forEach(([label,r])=>{
+   const keys=Object.keys(r).filter(k=>k!=='error');
+   const want=`- ${label}: besides the message it returns ${keys.length} field${keys.length===1?'':'s'}, ${keys.join(', ')}.`;
+   if(!D.includes(want)) wrong.push(`${label} -> engine says ${keys.length} [${keys.join(',')}]`);
+ });
+ ck('S15 the digest prints the MEASURED evidence count and key names for all four',
+    wrong.length===0, wrong.length?wrong.join('; '):`4 rows, counts ${ev.map(([,r])=>Object.keys(r).filter(k=>k!=='error').length).join('/')}`);
+ // The two marches are DIFFERENT calls and only one of them refuses. If the
+ // deep let-down ever started refusing, the row above would be ambiguous.
+ ck('S15 NEGATIVE CONTROL: the DEEP let-down still ANSWERS, so it could never have been the refusal row',
+    !G.jtDrop({...F.AGBADA,p2Psia:F.AGBADA_DEEP_P2_PSIA}).error,
+    `deep let-down arrives at ${G.jtDrop({...F.AGBADA,p2Psia:F.AGBADA_DEEP_P2_PSIA}).t2F.toFixed(6)} degF with no error`);
+ ck('S15 no surviving sentence claims a march off the correlation returns seven fields',
+    !/march that walks off the correlation( part way down)? returns 7 fields|walks off the correlation: besides the message it returns 7/.test(D),
+    'swept digest.txt for the retired seven-field wording');}
+// C12 S10: WHICH INPUTS THE AMINE PACKAGE ECHOES. The digest named ONE echo,
+// `richLoadingUsed`, under the rich-loading bullet, and the engine echoes
+// FOUR. Two bank questions were defective on that one line, because two
+// distractors naming the other echoes were TRUE. The set is re-measured here.
+{const D=DIGEST_TEXT; const r=G.aminePackage(F.UBIE);
+ const echoes=Object.keys(r).filter(k=>k.endsWith('Used')).sort();
+ ck('S10 NEGATIVE CONTROL: the answer carries MORE THAN ONE echoed input, so naming one was wrong',
+    echoes.length>1, `${echoes.length} echoes: ${echoes.join(', ')}`);
+ ck('S10 the digest states the MEASURED number of echoes',
+    D.includes(`There are ${echoes.length} of them, measured by reading the keys of the answer itself`),
+    `engine says ${echoes.length}`);
+ ck('S10 the digest names every echoed key the engine returns',
+    echoes.every(k=>D.includes(`\`${k}\` = `)), echoes.join(', '));
+ ck('S10 no surviving sentence singles out the rich loading as THE echo',
+    !/echoes back the one it used/.test(D), 'swept digest.txt for the retired single-echo wording');
+ ck('S10 the LOADING SWING is still absent from the answer under any name',
+    !Object.keys(r).some(k=>/swing/i.test(k)), Object.keys(r).join(', '));}
+// C13 S12: THE UBIE TEACHING CONTACTOR IS SIZED AT THE GLYCOL DEFAULT, which
+// is what Professional m05 l01 now says of its own table. That lesson used to
+// say the engine "is told which liquid each is running against", which was
+// false of the row printed three lines above it.
+{const ub=G.contactorDiameter({gasMMscfd:F.UBIE.gasMMscfd,...F.UBIE_CONTACTOR});
+ ck('S12 the UBIE teaching column IS sized at the module default glycol density',
+    ub.rhoLLbFt3===G.TEG_LB_PER_FT3 && !('rhoLLbFt3' in F.UBIE_CONTACTOR),
+    `rhoL ${ub.rhoLLbFt3.toFixed(6)} = glycol ${G.TEG_LB_PER_FT3.toFixed(6)}, no rhoLLbFt3 in the teaching fields`);
+ ck('S12 NEGATIVE CONTROL: the amine solution density is a DIFFERENT number, so the default is a real choice',
+    Math.abs(G.amineSolutionLbPerFt3(F.UBIE.amineId)-G.TEG_LB_PER_FT3)>1,
+    `MDEA solution ${G.amineSolutionLbPerFt3(F.UBIE.amineId).toFixed(6)} against glycol ${G.TEG_LB_PER_FT3.toFixed(6)}`);}
 // C6 S17:
 // C6 S17: the two INDEPENDENT routes must NOT agree to twelve decimals
 {const w=Math.max(...GOLD.water.map(row=>Math.abs(G.saturatedWaterContent(row).lbPerMMscf/row.lbPerMMscf-1)));

@@ -1,12 +1,12 @@
-# The contract read on one export
+# The contract read on one door
 
-A contract is worth nothing unless it holds at every door. This module's error contract is read on one export, from five directions, and what the five readings establish is that a caller never has to ask which door it is standing at.
+A contract is worth nothing unless it holds at every door. This module's error contract is read here on one door, from five directions, and the five establish that a caller never has to ask which door it stands at.
 
 {{panel:fc-absorber-explorer}}
 
 ## Five calls into one function
 
-The Kremser removal takes an absorption factor and a stage count and returns the fraction the column removes. Here it is asked four questions it cannot answer and one it can.
+The Kremser removal takes an absorption factor and a stage count and returns the fraction removed. Here it is asked four questions it cannot answer and one it can.
 
 | call | absorption factor | stages | returns |
 | --- | --- | --- | --- |
@@ -18,28 +18,30 @@ The Kremser removal takes an absorption factor and a stage count and returns the
 
 ## Read the last row against the four above it
 
-The same call shape returns a fraction or a refusal. The caller tells them apart by asking for a property rather than by inspecting a type, checking a sentinel or catching an exception.
+The same call shape returns a fraction or a refusal. The caller tells them apart by asking for a property rather than by inspecting a type or catching an exception.
 
-That is what the contract buys. A guard downstream cannot be written wrongly, because there is only one way to write it. Read the error key; if it is there, report it; if it is absent, read the answer key. The same four lines work against every export in the module.
+That is what the contract buys. A guard downstream cannot be written wrongly, because there is one way to write it. Read the error key; if it is there, report it; if it is absent, read the answer key. Those four lines work at every door in the module.
 
-## Why one export can carry the reading
+## Why one door can carry the reading
 
-The contract is whole across the module. Every export answers with an object, and every one that cannot answer puts a named string on an error key. So a reading at one door is a reading of the contract, provided the door was chosen for the variety of its faults.
+The contract is the doors. All nine exports called with an object of named arguments answer with an object, and every one that cannot answer puts a named string on an error key. So a reading at one door is a reading of the contract, provided the door was chosen for the variety of its faults.
 
-This one qualifies. It takes two arguments, and the four refusals cover both of them at two kinds of bad value each.
+It qualifies: it takes two arguments, and the four refusals cover both at two kinds of bad value each.
 
-## What a bare number would cost
+## The four exports that are not doors
 
-Suppose one export in a module returned a bare number and used a non-finite value to signal a fault. Every caller guarding on an error property would sail straight past it. The failure would surface far downstream as an empty field, and an empty field looks exactly like a field nobody filled in.
+Four exports take a single positional value and answer like the scalars they are. waterSatPsia and solutionLbPerFt3 hand back a bare number, and a bare NaN where they have none. amineOf hands back one row of the amine table, and a null; amineSolutionLbPerFt3 a bare number, and a null.
 
-That is why uniformity matters more than the individual message. A contract with one exception is not a contract a caller can rely on, because relying on it means knowing the exception, and the point of a contract is not having to.
+None is a defect, because each is consumed by a door and the door is where the no-answer gets its name. The saturation fit's NaN becomes the Magnus band refusal, the lookup's null becomes the unknown amine refusal, and either density's no-answer becomes the liquid density refusal at the contactor.
+
+A helper read from a studio tab would be the real defect: a bare NaN passes an error check and surfaces far downstream as an empty field that looks exactly like a field nobody filled in. So the audit asks which exports are doors, which are helpers, and whether anything reads a helper where a door belonged.
 
 ## Reading it in the studio
 
-The same reading is available from the app rather than from a test. Type an absorption factor of zero into the absorber tab and the studio has a named fault to render. Type one that works and it has a fraction. The user interface never has to decide what a blank means, because the engine never hands it a blank.
+The same reading is available from the app. Type an absorption factor of zero into the absorber tab and the studio has a named fault to render. Type one that works and it has a fraction. The interface never has to decide what a blank means, because no door hands it one.
 
-That is worth doing whenever you meet a new module. Ask it a question it cannot answer and look at what comes back. A module that answers a bad question with a plausible number is telling you something about its good answers too.
+Whenever you meet a new module, ask it a question it cannot answer and look at what comes back. A module that answers a bad question with a plausible number is telling you about its good answers too.
 
 ## Exercise
 
-Record the five calls above with their arguments and their returns. Write the four lines of caller code the contract implies. Then say what would have to be true of a module for a caller to need more than one way of checking a result, and what that would cost the caller.
+Record the five calls above with their arguments and their returns. Write the four lines of caller code the contract implies. Then name the four exports that are not doors, what each hands back with no answer, and the door that names each refusal.

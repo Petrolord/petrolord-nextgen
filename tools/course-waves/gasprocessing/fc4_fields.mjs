@@ -231,3 +231,178 @@ export const AMINE_DENSITY_PROBE = {
 /** The reboiler group: circGpd times the duty per gallon over the answer
  *  in MMBtu an hour is the hours in a day times the Btu in a MMBtu. */
 export const REBOILER_GROUP_PROBE = { gasMMscfd: 25, inletLbMMscf: 60, outletLbMMscf: 5 };
+
+/* ------------------------------------------------------------------ *
+ * THE CONTRACT PROBES. One answering call and one refusing call for
+ * EVERY callable export of the module, so the digest can state the
+ * module's return contract by MEASURING it instead of asserting it.
+ *
+ * WHY THIS EXISTS. The digest used to say that every export answers
+ * with an object and that every refusal puts a string on an `error`
+ * key. That is true of the exports called with a named-argument object
+ * and false of four scalar helpers, and three separate places in the
+ * course had three different accounts of which and how many. Nothing
+ * here declares the answer: each row names a call, and the SHAPE of
+ * what comes back is read off the return value at build time. An
+ * upstream engine change therefore moves the digest rather than
+ * leaving a stale sentence standing.
+ *
+ * `arg` is the single argument the export takes, or a function of the
+ * engine module where the argument is itself an engine value.
+ * `caughtBy` names the export that CONSUMES a helper's no-answer, with
+ * a function that builds that consumer's argument from the no-answer
+ * value, so the digest can show where a NaN or a null becomes a named
+ * refusal. A door has no `caughtBy`: a door's refusal is already named.
+ * ------------------------------------------------------------------ */
+
+/** A pressure above the DAK validity limit, so the z-factor door refuses. */
+export const P_ABOVE_DAK_PSIA = 30000;
+
+/** A solvent the amine table does not carry. */
+export const AMINE_NOT_CARRIED = 'DIPA';
+
+export const CONTRACT_PROBES = [
+  {
+    name: 'waterSatPsia',
+    answer: OBIAFU_LINE.tF,
+    refuse: GAS_ABOVE_FIT_F,
+    caughtBy: 'saturatedWaterContent',
+    caughtArgs: () => ({ pPsia: OBIAFU_LINE.pPsia, tF: GAS_ABOVE_FIT_F }),
+  },
+  {
+    name: 'saturatedWaterContent',
+    answer: OBIAFU_LINE,
+    refuse: { pPsia: OBIAFU_LINE.pPsia, tF: GAS_ABOVE_FIT_F },
+  },
+  {
+    name: 'kremserFractionRemoved',
+    answer: { absorptionFactor: OBIAFU_ABSORPTION_FACTOR, stages: OBIAFU_STAGES },
+    refuse: { absorptionFactor: 0, stages: OBIAFU_STAGES },
+  },
+  {
+    name: 'kremserStagesFor',
+    answer: { absorptionFactor: OBIAFU_ABSORPTION_FACTOR, fractionRemoved: UNREACHABLE_SPEC },
+    refuse: { absorptionFactor: A_WELL_UNDER_UNITY, fractionRemoved: UNREACHABLE_SPEC },
+  },
+  {
+    name: 'tegPackage',
+    answer: { ...OBIAFU, inletLbMMscf: SATURATION_T[3] },
+    refuse: { ...OBIAFU, inletLbMMscf: SATURATION_T[3], circulationGalPerLb: -RATIO_AT_LOWER_CUSTOM },
+  },
+  {
+    name: 'amineOf',
+    answer: UBIE.amineId,
+    refuse: AMINE_NOT_CARRIED,
+    caughtBy: 'aminePackage',
+    caughtArgs: () => ({ ...UBIE, amineId: AMINE_NOT_CARRIED }),
+  },
+  {
+    name: 'solutionLbPerFt3',
+    answer: (G) => G.amineOf(UBIE.amineId).sgSolution,
+    refuse: undefined,
+    caughtBy: 'contactorDiameter',
+    caughtArgs: (noAnswer) => ({
+      gasMMscfd: UBIE.gasMMscfd, ...UBIE_CONTACTOR, rhoLLbFt3: noAnswer,
+    }),
+  },
+  {
+    name: 'amineSolutionLbPerFt3',
+    answer: UBIE.amineId,
+    refuse: AMINE_NOT_CARRIED,
+    caughtBy: 'contactorDiameter',
+    caughtArgs: (noAnswer) => ({
+      gasMMscfd: UBIE.gasMMscfd, ...UBIE_CONTACTOR, rhoLLbFt3: noAnswer,
+    }),
+  },
+  {
+    name: 'aminePackage',
+    answer: UBIE,
+    refuse: { ...UBIE, amineId: AMINE_NOT_CARRIED },
+  },
+  {
+    name: 'zAtState',
+    answer: { pPsia: OBIAFU_LINE.pPsia, tF: OBIAFU_LINE.tF, gasSg: OBIAFU_CONTACTOR.gasSg },
+    refuse: { pPsia: P_ABOVE_DAK_PSIA, tF: OBIAFU_LINE.tF, gasSg: OBIAFU_CONTACTOR.gasSg },
+  },
+  {
+    name: 'contactorDiameter',
+    answer: { gasMMscfd: UBIE.gasMMscfd, ...UBIE_CONTACTOR },
+    refuse: { gasMMscfd: UBIE.gasMMscfd, ...UBIE_CONTACTOR, ksFtS: 0 },
+  },
+  {
+    name: 'jouleThomsonFPerPsi',
+    answer: {
+      pPsia: AGBADA.p1Psia, tF: AGBADA.tF, gasSg: AGBADA.gasSg,
+      cpBtuLbmolF: AGBADA.cpBtuLbmolF,
+    },
+    refuse: {
+      pPsia: 0, tF: AGBADA.tF, gasSg: AGBADA.gasSg,
+      cpBtuLbmolF: AGBADA.cpBtuLbmolF,
+    },
+  },
+  {
+    name: 'jtDrop',
+    answer: AGBADA,
+    refuse: { ...AGBADA, steps: AGBADA_STEPS_REFUSED[0] },
+  },
+];
+
+/**
+ * Is this export called with a NAMED-ARGUMENT OBJECT? Read off the
+ * function's OWN SOURCE rather than declared in a list here, so a
+ * signature change upstream moves the census instead of leaving a stale
+ * count standing. gate_claims.mjs runs a negative control on it and
+ * fails if it ever puts every callable export in one bucket.
+ */
+export const takesNamedArguments = (fn) => /^\(?\s*\{/.test(String(fn).trim());
+
+/** What a return value IS, read off the value. No probe knows in advance. */
+export const returnShape = (v) => {
+  if (v === null) return 'null';
+  if (typeof v === 'number') return Number.isNaN(v) ? 'a bare NaN' : 'a bare number';
+  if (Array.isArray(v)) return 'an array';
+  if (typeof v === 'object') {
+    return (typeof v.error === 'string')
+      ? 'an object with a named string on an `error` key'
+      : 'an object of named results';
+  }
+  return typeof v;
+};
+
+/**
+ * THE CONTRACT CENSUS. Enumerates every export of the module, splits the
+ * callable ones by how they are called, runs both probes against each and
+ * reads the shape off what came back. Every count and every shape word in
+ * the digest's contract block comes from here.
+ */
+export const contractCensus = (G) => {
+  const names = Object.keys(G).sort();
+  const callable = names.filter((n) => typeof G[n] === 'function');
+  const values = names.filter((n) => typeof G[n] !== 'function');
+  const rows = CONTRACT_PROBES.map((p) => {
+    const fn = G[p.name];
+    const arg = (a) => (typeof a === 'function' ? a(G) : a);
+    const answered = fn(arg(p.answer));
+    const refused = fn(arg(p.refuse));
+    const row = {
+      name: p.name,
+      door: takesNamedArguments(fn),
+      answers: returnShape(answered),
+      refuses: returnShape(refused),
+      caughtBy: p.caughtBy || null,
+      caughtShape: null,
+      caughtMessage: null,
+    };
+    if (p.caughtBy) {
+      const caught = G[p.caughtBy](p.caughtArgs(refused));
+      row.caughtShape = returnShape(caught);
+      row.caughtMessage = caught && caught.error ? caught.error : null;
+    }
+    return row;
+  });
+  return {
+    names, callable, values, rows,
+    doors: rows.filter((r) => r.door),
+    helpers: rows.filter((r) => !r.door),
+  };
+};

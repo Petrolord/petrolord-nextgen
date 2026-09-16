@@ -40,6 +40,41 @@ const out = rows.map((r) => {
   return [r.tier, r.key, r.value, tol];
 });
 fs.writeFileSync('/root/fc-wip-gasprocessing/fields.json', `${JSON.stringify(out, null, 1)}\n`);
+
+/* ------------------------------------------------------------------ *
+ * precision.json, GENERATED FROM THE SAME SOURCE as the tolerances.
+ *
+ * `gradeprecision.py` classifies each graded field by matching its KEY
+ * against the digest header's words, and on this wave that reached 3 of
+ * 18: the header names quantities in English ("water contents",
+ * "circulations") and the keys are code ("inletLbMMscf", "circGpm"), so
+ * thirteen field keys matched no header word and their tolerances went
+ * UNCHECKED. A precision check covering a fifth of the answer key is not
+ * a pass.
+ *
+ * The fix is NOT a second hand-written table. PRINTED_DECIMALS in
+ * fc4_capstone.mjs is this wave's ONE statement of what prints at what
+ * precision, and `toleranceFor` already grades against it. This writes
+ * the same map out in the shape the gate reads, keyed by the exact field
+ * keys that carry each unit, so the gate and the grader cannot disagree.
+ * A field whose unit is not in PRINTED_DECIMALS has already thrown above.
+ * ------------------------------------------------------------------ */
+const byUnit = new Map();
+rows.forEach((r) => {
+  if (!byUnit.has(r.unit)) byUnit.set(r.unit, new Set());
+  byUnit.get(r.unit).add(r.key);
+});
+const precision = {};
+[...byUnit.entries()].sort((x, y) => (x[0] < y[0] ? -1 : 1)).forEach(([unit, keys]) => {
+  precision[unit] = {
+    decimals: PRINTED_DECIMALS[unit],
+    match: `^(?:${[...keys].sort().join('|')})$`,
+  };
+});
+fs.writeFileSync('/root/fc-wip-gasprocessing/precision.json', `${JSON.stringify(precision, null, 1)}\n`);
+const covered = new Set(rows.filter((r) => new RegExp(precision[r.unit].match, 'i').test(r.key)).map((r) => `${r.tier}/${r.key}`));
+console.log(`  wrote precision.json: ${Object.keys(precision).length} class(es) from PRINTED_DECIMALS, covering ${covered.size} of ${rows.length} graded fields`);
+if (covered.size !== rows.length) { console.log('  REFUSES: precision.json does not cover every graded field'); process.exit(2); }
 const widened = out.filter((row, i) => row[3] !== TOL[rows[i].key]);
 console.log(`  wrote fields.json: ${out.length} graded fields`);
 console.log(`  tolerances widened to the printed precision: ${widened.length} -> ${widened.map((r) => `${r[0]}/${r[1]}`).join(', ') || 'none'}`);

@@ -16,7 +16,7 @@ Each of those gallons takes 1386.1650 Btu to reach the still and 429.6875 Btu to
 
 Two conditions enter at the top and never appear again. One contract number enters at the spec. One rate enters at the load. One design choice enters at the circulation. Three more design choices enter inside the heat terms, being the still temperature, the specific heat and the reflux ratio.
 
-Nothing enters twice and nothing feeds back. The content does not depend on the circulation, the circulation does not depend on the duty, and no step ever revises a step above it. That is why this chain can be written as a list rather than drawn as a diagram with arrows going both ways.
+Nothing enters twice and nothing feeds back. The content does not depend on the circulation, the circulation does not depend on the duty, and no step ever revises a step above it. THE DEHYDRATION CHAIN means exactly these five steps, from line conditions to the reboiler duty. It stops before the vessel, so the contactor diameter is a sixth answer about the same stream rather than a step in this chain. That is why the dehydration chain can be written as a list rather than drawn as a diagram with arrows going both ways.
 
 ## Why a closed form chain is worth spending a tier on
 

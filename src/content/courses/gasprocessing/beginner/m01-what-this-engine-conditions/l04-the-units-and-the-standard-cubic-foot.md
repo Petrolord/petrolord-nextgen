@@ -21,7 +21,7 @@ The interesting kind. A constant is exported under a name, and the digest then a
 | the contactor liquid, lb a ft3 | 69.568831168831 | 69.568831168831 | 1.000000000000 |
 | the molecular weight of water | 18.015280000000 | 18.015280000000 | 1.000000000000 |
 
-Three more can only be measured as groups, because the engine never uses their parts apart. The minutes in a day come out as 1440.000000000. The hours in a day times the Btu in a MMBtu come out as 24000000.
+Three more can only be measured as groups, because the engine never uses their parts apart. The minutes in a day come out as 1440.000000000. The days in a year over the pounds in a short ton come out as 0.182500000000. The hours in a day times the Btu in a MMBtu come out as 24000000.
 
 ## Declared
 

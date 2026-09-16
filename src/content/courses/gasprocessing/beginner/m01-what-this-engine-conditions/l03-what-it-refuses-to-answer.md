@@ -8,7 +8,9 @@ An engine that answers everything is telling you something false. This one refus
 
 When the method cannot answer, the engine hands back an object carrying an error string. It does not throw. A caller gets a result that can be looked at and reported, so the studio can print the refusal rather than falling over. The refusal says what was wrong and what would fix it.
 
-One export breaks that contract by returning a bare number instead. The Expert tier audits it, and it is worth knowing early that the contract has an exception, because an exception you have not been told about is how a caller ends up treating a refusal as a result.
+That contract belongs to the doors. Nine exports are called the same way, by handing them one object of named arguments, and those nine are every door the studio calls. Each answers with an object, and each refusal puts a named string on an error key.
+
+Four more exports are called differently, with a single positional value, and they are helpers rather than doors. A helper hands back a bare number, or one row of a table, and when it has no answer it hands back a bare NaN or a null. None of that reaches the page as a blank, because every helper is consumed by a door, and the door is what turns the NaN or the null into a refusal with a name on it. The Expert tier reads all thirteen exports from both sides. Carry this much: you can see which kind you are calling from the call itself.
 
 ## A question it never had
 

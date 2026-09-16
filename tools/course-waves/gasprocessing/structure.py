@@ -173,7 +173,7 @@ TIERS = {
     # digest_prose.rules.mjs carries a rule whose own text says this exact title
     # went stale on the FC4-0 rebuild. The key is unchanged so banks, capstones
     # and migrations keyed on it are unaffected.
-    ('l03-the-one-export-outside-the-contract', 'The contract read on one export', 13, [A]),
+    ('l03-the-one-export-outside-the-contract', 'The contract read on one door', 13, [A]),
     ('l04-constants-measured-out-of-the-engine', 'Constants measured out of the engine', 14, [W]),
     ('l05-what-a-published-case-can-catch', 'What a published case can catch', 14, [A]),
   ]),

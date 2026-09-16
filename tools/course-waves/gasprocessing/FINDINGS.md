@@ -268,3 +268,80 @@ engine AS FOUND, and the repairs will move most of them. A lesson that
 quotes this document quotes a state of the world that no longer exists.
 The digest is the only source a writer reads, and Section 14 of it is
 WITHHELD for exactly this reason.
+
+## FC4-1. The return contract: the decision, and what was NOT changed
+
+**Added after the course was written, when the Associate bank writer could not
+key a question about the module's return contract because three sources of
+teaching truth disagreed with each other and with the engine.** Digest Sections
+1 and 15 said every export answers with an object and every refusal lands on an
+`error` key; Section 11 said `amineOf` returns null; Associate m01 l03 said one
+export returns a bare number.
+
+### The ground truth, established by RUNNING every export, not by reading it
+
+Thirty exports. Seventeen are values. Thirteen are callable, and each was
+called in both its answering and its refusing mode:
+
+| group | how it is called | how many | answering | with no answer |
+| --- | --- | --- | --- | --- |
+| package doors | one named-argument object | 9 | an object of named results | an object with a named string on `error` |
+| scalar helpers | one positional value | 4 | a bare number, or one row of the amine table | a bare NaN, or a null |
+
+The four helpers are `waterSatPsia`, `amineOf`, `solutionLbPerFt3` and
+`amineSolutionLbPerFt3`. Nothing in the module throws: the only `throw` in the
+source is inside a comment.
+
+### The decision: REPAIR THE DIGEST, not the engine
+
+The programme's standing preference is to repair the engine. It was not taken
+here, for reasons that were measured rather than argued:
+
+1. **The variation is real, systematic and visible at the call site.** The
+   split is exactly positional argument against named-argument object. A
+   caller can see which kind it is holding from the call it is writing.
+2. **None of the four can fail open.** Each helper's NaN or null was handed to
+   the door that consumes it, and each came back as a NAMED refusal, with a
+   negative control proving the good value still answers. `waterSatPsia` to
+   `saturatedWaterContent`, `amineOf` to `aminePackage`, and both densities to
+   `contactorDiameter`.
+3. **That is exactly what separates them from the defect FC4-0 did repair.**
+   `kremserFractionRemoved` was a DOOR returning a bare number, so a caller's
+   `if (r.error)` guard passed and the Suite rendered an empty dash. The
+   engine's own header documents the remaining case: the saturation fit is a
+   correlation with nowhere to put an error key.
+4. **Blast radius.** This is a live app's engine, vendored sha-identical, and
+   FC4-0 (engines #199) has merged. A second engine PR would need a golden, an
+   oracle, a re-vendor, a digest rebuild and a re-proof of every FC4 literal,
+   in order to make four scalar helpers pretend to be doors.
+
+So the digest now states the contract EXACTLY as it is and names the
+exceptions. `gate_claims.mjs` re-measures the whole census on every run, with a
+negative control on the door/helper classifier.
+
+### Held for a later engines PR, NOT teaching truth
+
+`solutionLbPerFt3` is the one export in the module with NO input guard at all:
+a non-numeric specific gravity returns a bare NaN silently. It fails closed at
+`contactorDiameter`, which refuses by name, so it is not urgent and no lesson
+depends on it. It is the only one of the four with no design note behind it and
+is worth a guard whenever this engine is next opened.
+
+### Also repaired in the same pass
+
+* **A ROW LABELLED A REFUSAL THAT CALLED A CASE WHICH SUCCEEDED.** The evidence
+  block printed the AGBADA deep let-down's SEVEN success keys under a refusal
+  heading. The true refusal carries FOUR. Every figure on that line was real
+  engine output, so no numeric sweep could see it. `fc4_dump.mjs` now REFUSES TO
+  BUILD if any row in any refusal-labelled block answers, which turns the class
+  into a build failure. Three blocks are guarded.
+* **ONE ECHO NAMED WHERE THE ENGINE MAKES FOUR.** `aminePackage` echoes every
+  typed input it used, under four `...Used` keys. The digest named only
+  `richLoadingUsed`, which made two distractors true. The set is now read off
+  the answer's own keys.
+* **THE SATURATION COLUMN HEADS** printed bare while the digest header promises
+  six decimals, so `1500.000000` existed only in an Expert section and an
+  Associate lesson quoting its own table read as reaching forward.
+* **precision.json** is now GENERATED from `PRINTED_DECIMALS`, the wave's one
+  statement of printed precision, so `gradeprecision` reaches 18 of 18
+  classified instead of 3 of 18, with no second hand-written table.

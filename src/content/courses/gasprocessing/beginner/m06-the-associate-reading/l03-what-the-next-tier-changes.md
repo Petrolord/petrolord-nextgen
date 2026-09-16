@@ -10,7 +10,7 @@ Those three readings do not derive from each other. The mole balance says how mu
 
 ## A ceiling that steel cannot buy past
 
-The sharpest new idea is that a column can have a limit which more trays do not reach. In the water chain, tightening the spec always worked: the load rose, the circulation rose, the duty rose, and an answer came back. A staged column is not like that. Below a certain condition the removal has an upper bound however many stages are added, and the engine says the remedy is more solvent rather than more steel.
+The sharpest new idea is that a column can have a limit which more trays do not reach. In the dehydration chain, tightening the spec always worked: the load rose, the circulation rose, the duty rose, and an answer came back. A staged column is not like that. Below a certain condition the removal has an upper bound however many stages are added, and the engine says the remedy is more solvent rather than more steel.
 
 Nothing in this tier prepares you for that, because nothing in this tier had a ceiling in it. That is the point of meeting it separately.
 

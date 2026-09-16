@@ -9,7 +9,7 @@
 # App surface: the Gas Processing Studio runs three units over one gas stream. Dehydration takes water out with glycol, sweetening takes acid gas out with amine, and the dew point unit cools the gas by letting it down.
 - This engine conditions a GAS STREAM. It answers how much water a gas carries, how much solvent it takes to remove it, what the regenerator costs to run, how wide the vessel has to be, and how far a let-down cools the gas.
 - The doctrine is stated in the module's own header: everything that is a DESIGN CHOICE or a chart value is an INPUT with its customary range named, and everything computable from first principles is computed. The circulation ratio, the BTEX absorbed fraction, the glycol properties, the water overhead and the contactor liquid are all inputs with defaults, and a reader can see each one on the page rather than having to find it in the source.
-- A state the method has no answer for comes back as an object with an `error` string. This module throws nothing, and there is no export outside that contract: every one of them answers with an object and every refusal puts a named string on an `error` key. Section 15 reads the contract and the evidence a refusal carries with it.
+- A state the method has no answer for comes back as an object with an `error` string, and this module throws nothing at all. The contract belongs to the 9 exports that are called with a NAMED-ARGUMENT OBJECT, which is every door the studio calls: each of them answers with an object, and each refusal puts a named string on an `error` key. The other 4 callable exports take a single positional value and are scalar helpers. They answer with a bare number or with one row of a table, and they say they have no answer with a bare NaN or a null, which the door that consumes them turns into a named refusal. Section 15 reads every export of the module from both sides and names the 4.
 - What is NOT in this engine: no hydrate boundary, no compositional flash, no rate-based absorber model, no stage efficiency, no molecular sieve, no refrigeration and no NGL recovery. A hydrate margin is the Production module Flow Assurance engine, and the phase envelope of a reservoir fluid is the Fluid engine.
 
 The three units, on the two teaching streams, end to end:
@@ -80,7 +80,7 @@ The method is ideal vapour-liquid equilibrium over liquid water: the mole fracti
 On OBIAFU at 950.000000 psia and 104.000000 degF the mole fraction is 0.001125908 and the content is 53.450380 lb per MMscf. The vapour pressure at that temperature alone is 1.069612 psia, and the mole fraction is that over the total pressure: 0.001125908 (derived, the two figures on this line divided).
 
 The surface, in lb per MMscf. Rows are degF, columns are psia:
-| degF | 200 psia | 600 psia | 1000 psia | 1500 psia |
+| degF | 200.000000 psia | 600.000000 psia | 1000.000000 psia | 1500.000000 psia |
 | --- | --- | --- | --- | --- |
 | 60.000000 | 60.721539 | 20.240513 | 12.144308 | 8.096205 |
 | 80.000000 | 120.147278 | 40.049093 | 24.029456 | 16.019637 |
@@ -338,9 +338,10 @@ The published cases, engine against golden. The golden here is a BRUTE FORCE STA
 Sweetening is a mole balance from end to end. The gas carries a mole percent of CO2 and H2S, the spec says what may stay, and the difference is what the solution has to pick up. Nothing in that chain is a mass until the very last step.
 THREE NAMES, AND THEY ARE THREE DIFFERENT NUMBERS. A reader who collapses them has lost the whole section, so they are separated here before any of them is used, and they are the engine's own words:
 - the LEAN LOADING: what a mole of amine is still carrying when it comes back from the regenerator and enters the contactor. An input. On UBIE, 0.050000 mol of acid gas per mol of amine.
-- the RICH LOADING: what a mole of amine is carrying when it leaves the contactor. An input, and the engine echoes back the one it used as `richLoadingUsed`. On UBIE, 0.480000.
+- the RICH LOADING: what a mole of amine is carrying when it leaves the contactor. An input. On UBIE, 0.480000.
 - the LOADING SWING: the DIFFERENCE between them, which is what each mole of amine actually carries round the loop and is therefore what sets the circulation. NOT an input, and the engine does not return it under any name. On UBIE it is 0.430000000, derived from the two figures above.
 The rich loading is a CEILING that corrosion sets. The swing is a THROUGHPUT that the regenerator buys. Raising the rich loading raises the swing; lowering the lean loading also raises the swing, and costs regenerator duty rather than corrosion margin. That is why this section reads both ends separately.
+The engine echoes back EVERY typed input this chain used, each under its own name ending in Used. There are 4 of them, measured by reading the keys of the answer itself: `amineWtPctUsed` = 45.000000, `dutyBtuPerGalUsed` = 800.000000, `leanLoadingUsed` = 0.050000, `richLoadingUsed` = 0.480000. So an echoed name tells a reader the value was TYPED and which value was taken, and it never means the figure was computed. THE LOADING SWING IS NOT AMONG THEM, and that absence is the point of the bullet above: the engine returns every number it was given and does not return the one it derived from two of them.
 The engine's own refusal uses all three words in one sentence when the swing vanishes: { error: "rich loading must exceed lean loading: 0.48 against 0.48 mol acid gas per mol amine leaves no swing to circulate on" }
 
 On UBIE: 5.200000 less 2.000000 mol percent of CO2 plus 1.400000 less 0.000400 of H2S is 4.599600000 mol percent removed (derived, the four figures on this line), which at 88.000000 MMscfd is 10666.2009 lbmol a day.
@@ -417,6 +418,7 @@ So the regenerator duty ranks the three amines in exactly the order the duty col
 The two ratio columns are NOT equal, and that is the whole point of the table: circulation is set by the rich limit and the strength, duty is set by the rich limit, the strength and the duty per gallon, so the same ordering is reached by two different routes and the gaps between the amines are different sizes on each.
 
 An amine the table does not carry: null, and the package asked for it returns { error: "unknown amine 'DIPA'; this module carries MEA, DEA, MDEA" }. This is the one catalogue lookup in the module and it says it does not know.
+`amineOf` is one of the 4 scalar helpers Section 15 names. It hands back a null where a door would hand back an object with an `error` key, and `aminePackage`, the door that consumes it, is what turns that null into the named refusal printed above. A caller of the LOOKUP therefore tests for a null; a caller of the PACKAGE reads one property, the way it does at every other door.
 
 # SECTION 12: The vessel the gas goes up (owned by Professional m05)
 
@@ -614,7 +616,27 @@ The contract: a state the method has no answer for comes back as an object carry
 - a compressibility above the correlation band: { error: "Ppr 44.767 against 30.0 is above the DAK validity limit of 30, at 30000 psia and 100 degF, so the z-factor is refused" }
 - a contactor liquid lighter than its gas: { error: "the liquid must be denser than the gas for Souders-Brown to mean anything: liquid 0.50 against gas 3.20 lb/ft3 at 900 psia and 100 degF" }
 
-THE CONTRACT IS WHOLE. Every export answers with an object, and every one that cannot answer puts a named string on an `error` key. A caller checks one property and never catches, and there is no export it has to check differently:
+THE CONTRACT, EXACTLY. This module exports 30 names. 17 of them are values, the constants and the amine property table, and 13 are callable. Every callable one is asked here a question it can answer and a question it cannot, and the shape below is read off what came back rather than stated:
+| export | called with | answering | with no answer | where a no-answer is named |
+| --- | --- | --- | --- | --- |
+| waterSatPsia | one positional value | a bare number | a bare NaN | `saturatedWaterContent`, which returns an object with a named string on an `error` key |
+| saturatedWaterContent | a named-argument object | an object of named results | an object with a named string on an `error` key | the call itself |
+| kremserFractionRemoved | a named-argument object | an object of named results | an object with a named string on an `error` key | the call itself |
+| kremserStagesFor | a named-argument object | an object of named results | an object with a named string on an `error` key | the call itself |
+| tegPackage | a named-argument object | an object of named results | an object with a named string on an `error` key | the call itself |
+| amineOf | one positional value | an object of named results | null | `aminePackage`, which returns an object with a named string on an `error` key |
+| solutionLbPerFt3 | one positional value | a bare number | a bare NaN | `contactorDiameter`, which returns an object with a named string on an `error` key |
+| amineSolutionLbPerFt3 | one positional value | a bare number | null | `contactorDiameter`, which returns an object with a named string on an `error` key |
+| aminePackage | a named-argument object | an object of named results | an object with a named string on an `error` key | the call itself |
+| zAtState | a named-argument object | an object of named results | an object with a named string on an `error` key | the call itself |
+| contactorDiameter | a named-argument object | an object of named results | an object with a named string on an `error` key | the call itself |
+| jouleThomsonFPerPsi | a named-argument object | an object of named results | an object with a named string on an `error` key | the call itself |
+| jtDrop | a named-argument object | an object of named results | an object with a named string on an `error` key | the call itself |
+Read the table by its second column. THE ERROR CONTRACT IS THE DOORS: all 9 exports called with a named-argument object answer with an object, and every one of them that cannot answer puts a named string on an `error` key. That is every door the studio calls, so a caller of a door checks one property and never catches, and there is no door it has to check differently.
+The other 4 are SCALAR HELPERS, called with one positional value, and they are named here so nobody has to discover them at a call site: `waterSatPsia`, `amineOf`, `solutionLbPerFt3`, `amineSolutionLbPerFt3`. A helper answers with a bare number or with one row of the property table, and says it has no answer with a bare NaN or a null. None of those reaches a studio tab as a blank, because each one is consumed by a door, and the last column above is that door being handed the helper's no-answer and refusing BY NAME. The engine's own header says so of the first of them: the saturation fit is a correlation with nowhere to put an error key, and its one caller turns the NaN into a named refusal.
+A helper read straight from a studio tab would be the real defect, because a bare NaN passes an `error` check and surfaces far downstream as an empty field, and an empty field looks exactly like a field nobody filled in. That is what the audit asks of a module: which exports are doors, which are helpers, and whether anything reads a helper where it should have read a door.
+
+The contract read on ONE door, from five directions:
 | call | absorption factor | stages | returns |
 | --- | --- | --- | --- |
 | kremserFractionRemoved | 0.000000 | 5.000000 | { error: "absorption factor must be a finite number above zero (got 0)" } |
@@ -626,7 +648,7 @@ Read the last row against the four above it. The same call shape returns a fract
 
 A refusal also hands back the EVIDENCE it stands on, so a caller can say what to change rather than only that something failed:
 - the stage count a spec needs when the solvent caps it: besides the message it returns 3 fields, absorptionFactor, fractionRemoved, ceiling.
-- a march that walks off the correlation: besides the message it returns 7 fields, t2F, dropF, steps, muMeanFPerPsi, muInletFPerPsi, muLastStepFPerPsi, warning.
+- a march that walks off the correlation part way down: besides the message it returns 4 fields, diedAtStep, diedAtPsia, diedAtF, steps.
 - a compressibility off the correlation band: besides the message it returns 6 fields, ppr, tpr, tpcR, ppcPsia, atPsia, atF.
 - a contactor whose liquid is lighter than its gas: besides the message it returns 3 fields, rhoG, rhoLLbFt3, z.
 
@@ -728,7 +750,7 @@ THE EXPERT TIER READS THIS DIGEST OUT OF ORDER, so the mapping is stated here on
 | --- | --- |
 | m05 l01, What was repaired, and what was not | Section 20 |
 | m05 l02, What a refusal is | Section 15 |
-| m05 l03, The contract read on one export | Section 15, the whole-contract table |
+| m05 l03, The contract read on one door | Section 15, the export census and the one-door table |
 | m05 l04, Constants measured out of the engine | Section 2 |
 | m05 l05, What a published case can catch | Section 17 |
 | m06 l01, What the method does not know | Section 16 |

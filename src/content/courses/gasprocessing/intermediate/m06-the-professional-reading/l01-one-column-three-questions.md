@@ -38,9 +38,9 @@ The vessel says how wide the steel has to be. It knows neither of the other two 
 
 The discipline this tier teaches is knowing which of those questions a number in front of you is answering. They arrive on the same screen, about the same vessel, in the same session, and they are independent. A circulation cannot rescue a spec the stage count says is unreachable. A stage count cannot size a pump. A diameter cannot tell you either.
 
-The engine is honest about this and keeps the three calls separate. What it will not do is stop somebody quoting one of them in answer to a question about another, and that is the reader's job.
+The engine keeps the three calls separate. What it will not do is stop somebody quoting one in answer to a question about another, and that is the reader's job.
 
-The habit that makes it easy is the one this tier has repeated in every module. Before reading any figure, write down what was chosen to produce it. The swing, the strength and the duty per gallon sit behind the first two answers. The absorption factor sits behind the next two. The K value and the liquid density sit behind the last. Six chosen numbers, three independent answers, and the engine computed everything in between.
+The habit that makes it easy is the one every module has repeated. Before reading a figure, write down what was chosen to produce it. The lean loading, the rich loading, the strength and the duty per gallon sit behind the first two answers. The absorption factor and the stage count sit behind the next two. The K value and the liquid density sit behind the last. Eight chosen numbers, three independent answers, and the engine computed the rest. The SWING is not one of the eight: it is the difference of two of them, derived rather than chosen.
 
 ## Exercise
 

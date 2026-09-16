@@ -17,7 +17,7 @@ The arithmetic of the width happens to be the same arithmetic. The reason for it
 | OBIAFU, a glycol contactor | 950.000000 | 104.000000 | 3.192661 |
 | UBIE, an amine contactor | 985.000000 | 112.000000 | 4.208602 |
 
-Those are the vessels the two streams of this course go up. Both are sized by the same call, and the inputs behind them differ in more than pressure and temperature. One is a glycol column and one is an amine column, and the engine is told which liquid each is running against rather than assuming.
+Those are the vessels the two streams go up, and both rows were sized against the same liquid: the module's DEFAULT, which is glycol. That is right for OBIAFU and wrong in kind for UBIE, an amine column. The density is an input, so nothing is assumed and nothing is detected: a sweetening caller has to pass the amine's own, and these rows show what a caller who does not gets. The last lesson in this module is about which liquid a diameter was measured against.
 
 ## Where the width sits in the answer
 

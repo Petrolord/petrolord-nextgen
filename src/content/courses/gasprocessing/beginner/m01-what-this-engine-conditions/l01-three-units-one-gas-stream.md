@@ -16,7 +16,9 @@ The two contactors those streams go up are 3.192661 ft and 4.208602 ft across.
 
 ## Why the tier starts with water
 
-The water chain is the only part of this engine that runs end to end in closed form. Line conditions give a water content, a spec gives a load, a rate makes the load extensive, a circulation ratio turns it into gallons, and named heat terms turn the gallons into a duty. Nothing iterates and nothing solves, so a learner can watch a whole answer assemble before any part of it hides inside a loop.
+The dehydration chain runs end to end in closed form. Line conditions give a water content, a spec gives a load, a rate makes the load extensive, a circulation ratio turns it into gallons, and named heat terms turn the gallons into a duty. Nothing iterates and nothing solves, so a learner can watch a whole answer assemble before any part of it hides inside a loop.
+
+The sweetening balance is closed form too. The module's one loop is the marched let-down and its one solve is the compressibility, neither in this tier. The dehydration chain starts from a STATE, and the sweetening balance does not: the water content is computed from a pressure and a temperature, where the acid gas load begins at typed mole percents.
 
 It is also where the difference between an intensive answer and an extensive one is sharpest. The 53.450380 lb per MMscf knows nothing whatever about the rate. The 2879.9235 lb a day is a removal per MMscf with the rate applied to it, and it moves the moment the rate moves. Confusing the two is the commonest way a gas conditioning answer goes wrong, and this tier spends five modules making the distinction hard to lose.
 

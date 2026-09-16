@@ -40,7 +40,7 @@ Some constants above are derived, computed from something else the module export
 
 Which group a constant sits in tells you what an error in it would look like. A derived one is wrong only if its parent is wrong. A measured one shows up as a ratio away from 1.000000000000. A declared one shows up nowhere, which is why it is worth knowing they are there.
 
-## The two figures from outside the water chain
+## The two figures from outside the dehydration chain
 
 The contactor is 3.192661 ft across and the still overhead carries 74.065024 short tons of aromatics a year. Neither came through any step above. The first belongs to a vessel calculation and the second to a mole balance, and both are taught in later tiers.
 

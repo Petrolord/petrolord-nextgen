@@ -6,7 +6,9 @@ A refusal is an answer. This module treats it as one, and the shape it gives a r
 
 ## The contract
 
-A state the method has no answer for comes back as an object carrying an `error` string. Nothing in this module throws. A caller checks one property and never catches, and there is no export it has to check differently.
+A state the method has no answer for comes back as an object carrying an `error` string. Nothing in this module throws. A caller checks one property and never catches, and there is no door it has to check differently.
+
+The contract is the doors: the nine exports called with an object of named arguments. Four more take one positional value and answer like the scalars they are, and l03 puts each beside its consuming door.
 
 That is a design decision with consequences a reader feels immediately. Exceptions travel up a stack and get caught somewhere the caller did not choose. An error on a returned object stays exactly where the question was asked.
 
@@ -18,7 +20,7 @@ A caller is therefore told what to change and by how much rather than only that 
 
 ## A refusal carries evidence
 
-Beside the message, several refusals hand back the fields the judgement was made on. The stage count a spec needs when the solvent caps it returns 3 fields. A march that walks off the correlation returns 7 fields. A compressibility off the correlation band returns 6 fields. A contactor whose liquid is lighter than its gas returns 3 fields.
+Beside the message, several refusals hand back the fields the judgement was made on. The stage count a spec needs when the solvent caps it returns 3 fields. A march that walks off the correlation part way down returns 4 fields. A compressibility off the correlation band returns 6 fields. A contactor whose liquid is lighter than its gas returns 3 fields.
 
 That is the difference between an answer that is missing and an answer nobody can tell is missing. A refusal with its evidence can be acted on without re-running anything.
 

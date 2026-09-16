@@ -37,23 +37,38 @@ export default {
     },
     {
       // NOTE FOR LESSON SWEEPS. This rule fires on LESSON headings too, and
-      // it is meant to: an H1 or H2 asserting that an export sits outside the
-      // contract is now false of this engine. The Expert tier retitled its
-      // m05 l03 for exactly this reason and kept the lesson KEY, so banks,
-      // capstones and manifests did not have to move with it.
-      // A TRIPWIRE, NOT A GUARANTEE, and it is worth saying which. This rule
-      // asks whether a heading and its block AGREE. It does not ask whether
-      // the heading is TRUE. Tested against the stale Expert m05 l03 title as
-      // that lesson was actually written, it reported nothing, because the
-      // body used the phrase "bare number" inside a hypothetical and the two
-      // therefore agreed. It is kept because it costs nothing and still
-      // catches the digest-side version, and it is NARROWED to assert the
-      // engine's current fact as well: any heading claiming an export is
-      // outside the contract is false of this engine, whatever its block says.
+      // it is meant to.
+      //
+      // WHAT THE ENGINE ACTUALLY DOES, MEASURED. The error contract belongs
+      // to the DOORS: the nine exports called with an object of named
+      // arguments all answer with an object and all put a named string on an
+      // `error` key when they cannot. The four exports called with one
+      // POSITIONAL value are scalar helpers and answer with a bare number, a
+      // bare NaN, one row of the amine table or a null. Every count and shape
+      // word in that sentence is re-measured by gate_claims.mjs, which also
+      // proves each helper's no-answer is turned into a NAMED refusal by the
+      // door that consumes it, and runs a negative control on the classifier.
+      //
+      // WHY THE RULE STAYS. A heading of the shape "the export outside the
+      // contract" or "what breaks the contract" reads as a live DEFECT, and
+      // the live defect of that shape was repaired by FC4-0: a DOOR that
+      // returned a bare number, so `if (r.error)` passed and the Suite
+      // rendered an empty dash. No door does that now. A heading asserting
+      // otherwise is stale whatever its block says, and the Expert tier
+      // retitled its m05 l03 to "The contract read on one door" for exactly
+      // that reason, keeping the lesson KEY so banks, capstones and manifests
+      // did not have to move with it.
+      //
+      // A TRIPWIRE, NOT A GUARANTEE. It asks about the HEADING and not about
+      // the block, because tested against the stale m05 l03 title as that
+      // lesson was actually written it reported nothing: the body used the
+      // phrase "bare number" inside a hypothetical, so heading and block
+      // agreed and the pair was consistent and wrong together. The wave gate
+      // is what checks the substance.
       id: 'fc4-outside-contract',
       heading: /outside the contract|breaks (that|the) contract/i,
       body: () => true,
-      why: 'a heading claims an export sits outside the error contract. Since FC4-0 no export does, so the claim is false of this engine whatever the block under it says. The Expert tier retitled its m05 l03 for this reason and kept the lesson KEY, so banks, capstones and manifests did not move with it',
+      why: 'a heading says an export sits outside or breaks the error contract, which reads as a live defect. The contract belongs to the doors and no door sits outside it since FC4-0. The four scalar helpers do answer with a bare number, a bare NaN or a null, and that variation is stated by name in digest Section 1, Section 11 and Section 15 and re-measured by gate_claims.mjs, so a heading is the wrong place to raise it. The Expert tier retitled its m05 l03 to "The contract read on one door" and kept the lesson KEY, so banks, capstones and manifests did not move with it',
     },
     {
       id: 'fc4-does-not-move',

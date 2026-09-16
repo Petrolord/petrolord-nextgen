@@ -20,13 +20,13 @@ Two of them do not know the rate exists. The water content of 53.450380 lb per M
 
 Three of them are the first two with the rate applied. The water removed a day, the circulation and the reboiler duty an hour all scale with how much gas there is, and none of them is a new piece of physics.
 
-The last one is about a vessel, and it is the only part of the chain that cares what pressure the gas is at rather than only how wet it is. A contactor is sized by what the gas weighs and how fast it may rise, and neither of those questions came up anywhere in the water chain.
+The last one is about a vessel and sits outside the dehydration chain altogether. THE ASSOCIATE READING is those five steps plus this sixth answer, and the sixth is the only one that cares what pressure the gas is at rather than only how wet it is. A contactor is sized by what the gas weighs and how fast it may rise, and neither of those questions came up anywhere in the dehydration chain.
 
 ## What the sorting is for
 
 Six figures on a data sheet look alike. They arrive in the same font in the same table, and nothing on the page says that two of them are properties, three are sizes, and one belongs to a different calculation altogether.
 
-Being able to sort them is the practical output of this tier. It tells you which figures to re-derive when the rate changes, which to leave alone, and which one to check against a completely separate method because it never came through the water chain at all.
+Being able to sort them is the practical output of this tier. It tells you which figures to re-derive when the rate changes, which to leave alone, and which one to check against a completely separate method because it never came through the dehydration chain at all.
 
 ## Exercise
 

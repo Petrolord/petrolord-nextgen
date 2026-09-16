@@ -101,12 +101,12 @@
   "harvest_truth.py": "harvests the digest into truth-gasprocessing.json so numsweep has a resolver. FC3 shipped none and its sweep reported 396 of 412 unresolved, measuring the resolver rather than the lessons.",
   "sweep_literals.py": "the FULL-literal sweep with no significant-figure floor, over banks or lessons. numsweep skipped 56 of 119 literals on this wave own probe run, so a green numsweep is roughly half a sweep. Refuses an empty sweep.",
   "jest": "packages/engines __tests__/facilities.gasprocessing.test.js, 47 of 47 green, up from 12. The separator suite it now shares a module with is 63 of 63.",
-  "digestprose.mjs (the kit gate, with this wave rules file)": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules /root/fc-wip-gasprocessing. Headings against their own blocks in the digest AND the lessons, repair history with a framed-is-curriculum split, and the copy rule. 758 lines, 20 section titles and 33 in-body markers, 32 history framings, 33 ENGINE FRAGMENTS PINNED so an upstream engine edit turns it red. 4 warned, all inside Section 20 and re-read by hand on every rebuild rather than cleared.",
+  "digestprose.mjs (the kit gate, with this wave rules file)": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules /root/fc-wip-gasprocessing. Headings against their own blocks in the digest AND the lessons, repair history with a framed-is-curriculum split, and the copy rule. 780 lines, 20 section titles and 33 in-body markers, 32 history framings, 33 ENGINE FRAGMENTS PINNED so an upstream engine edit turns it red. 4 warned, all inside Section 20 and re-read by hand on every rebuild rather than cleared.",
   "gate_wavejson.mjs": "every claim wave.json makes that can be checked against a file, checked against that file. It exists because this file gave TWO ANSWERS for its own digest in one place: a digest block and a gates entry that disagreed on both the line count and the section count. Refuses below ten claims.",
   "make_fields.mjs": "regenerates fields.json and REFUSES any field graded tighter than its class prints, naming the field, the tolerance, the precision, the figure a learner could quote and the error that quoting it carries. --bare-stated-tolerances is the negative control and leaves PRINTED_DECIMALS alone, because mutating that would move the floor and the tolerance together and could not fail."
  },
  "digest": {
-  "lines": 758,
+  "lines": 780,
   "sections": 20,
   "withheld": null,
   "note": "Section 14 was WITHHELD while the Joule-Thomson chain was under repair and printed NOTHING rather than printing behind a banner. It is built. No lesson ever took a wrong coefficient, which is what the withholding bought. SECTION 20 is the one section whose subject is history and it is framed in its own title and first line."

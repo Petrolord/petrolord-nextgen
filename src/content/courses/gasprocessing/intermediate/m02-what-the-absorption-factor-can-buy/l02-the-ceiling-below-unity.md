@@ -34,4 +34,4 @@ So when a removal target is missed, the first question is which side of one the 
 
 ## Exercise
 
-Record the removal at 12 stages and at 200 stages for the columns at A = 0.6 and A = 0.95, and the value of the factor itself in each case. Then say what the final column of that table is measuring on those two rows, and why the same column carries no meaning on the row at 1.200000000000.
+Record the removal at 12 stages and at 200 stages for the columns at A = 0.600000000000 and A = 0.950000000000, and the value of the factor itself in each case. Then say what the final column of that table is measuring on those two rows, and why the same column carries no meaning on the row at 1.200000000000.
