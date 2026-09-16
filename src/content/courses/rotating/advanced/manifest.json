@@ -1,0 +1,305 @@
+{
+  "app_slug": "rotating",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-stage-is-not-a-pump",
+      "title": "A Stage Is Not a Pump",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-the-polytropic-exponent",
+          "title": "The polytropic exponent against the isentropic one",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-discharge-temperature-that-follows",
+          "title": "The discharge temperature that follows",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-compressibility-at-both-ends",
+          "title": "Compressibility at both ends",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-heads-so-neither-is-quoted-as-the-other",
+          "title": "Two heads, so neither is quoted as the other",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-an-identity-is-not-a-check",
+          "title": "An identity is not a check",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-stage-count-and-the-limit-that-governs",
+      "title": "The Stage Count, and the Limit That Governs",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-equal-ratio-rule",
+          "title": "The equal-ratio rule",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-tested-at-the-inlet-the-stages-have",
+          "title": "The temperature limit, tested at the inlet the stages have",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-which-limit-governed",
+          "title": "Which limit governed",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-twelve-stage-cap",
+          "title": "The twelve-stage cap",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-refusal-that-carries-its-evidence",
+          "title": "A refusal that carries its evidence",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-train-and-what-buys-the-stages",
+      "title": "The Train, Its Cooling, and the Limit That Buys the Stages",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-equal-ratios-chained",
+          "title": "Equal ratios chained",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-cooling-as-an-exchanger-duty",
+          "title": "Interstage cooling as an exchanger duty",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-moving-the-approach-across-the-suction",
+          "title": "Moving the approach across the suction",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-hotter-approach-is-paid-in-machines",
+          "title": "A hotter approach is paid in machines",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-trade-that-reverses",
+          "title": "The trade that reverses",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-machine-the-driver-and-the-fuel",
+      "title": "The Machine, the Driver and the Fuel",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-actual-inlet-volume",
+          "title": "Actual inlet volume",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-four-screening-branches",
+          "title": "The four screening branches",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-fuel-out-of-the-stream-compressed",
+          "title": "Fuel out of the stream being compressed",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-heat-rate-the-first-law-refuses-below",
+          "title": "The heat rate the first law refuses below",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-what-a-refusal-is",
+      "title": "What a Refusal Is, and Where Each Guard Turns Over",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-an-object-carrying-an-error",
+          "title": "An object carrying an error",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-bare-number-contract",
+          "title": "The bare-number contract",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-four-faults-four-refusals",
+          "title": "Four faults, four refusals",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-window-declared-in-one-place",
+          "title": "A window declared in one place",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-story-so-far",
+          "title": "The story so far",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-working-the-capstone",
+          "title": "Working the capstone",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-compressor-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-onward",
+          "title": "Onward",
+          "order": 3,
+          "est_minutes": 9,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
