@@ -1661,8 +1661,13 @@ export const imoCapstoneFields = () => {
     ['advanced', 'quaiboe_maop_as_built_psig', quaMaop.maopPsig, 1e-5],
     ['advanced', 'quaiboe_line_volume_bbl', quaVol, 1e-4],
     ['advanced', 'quaiboe_swept_volume_bbl', quaSwept.sweptBbl, 1e-5],
-    ['advanced', 'quaiboe_pig_run_hours', quaRun.runHours, 1e-7],
-    ['advanced', 'quaiboe_pigging_interval_days', quaInterval.intervalDays, 1e-7],
+    // LOOSENED FROM 1e-7, WHICH NOTHING THIS COURSE PRINTS COULD SATISFY. Run
+    // hours print to six decimals and days to four, so at 1e-7 a learner
+    // reading correctly off the studio was graded on their luck at guessing
+    // unprinted digits. A field that cannot be answered from the material is
+    // not a hard field, it is a broken one.
+    ['advanced', 'quaiboe_pig_run_hours', quaRun.runHours, 5e-7],
+    ['advanced', 'quaiboe_pigging_interval_days', quaInterval.intervalDays, 5e-5],
   ];
 };
 

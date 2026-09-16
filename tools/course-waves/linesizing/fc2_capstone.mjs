@@ -80,8 +80,16 @@ const F = [
   ['advanced', 'quaiboe_maop_as_built_psig', quaMaop.maopPsig, 1e-5],
   ['advanced', 'quaiboe_line_volume_bbl', quaVol, 1e-4],
   ['advanced', 'quaiboe_swept_volume_bbl', quaSwept.sweptBbl, 1e-5],
-  ['advanced', 'quaiboe_pig_run_hours', quaRun.runHours, 1e-7],
-  ['advanced', 'quaiboe_pigging_interval_days', quaInterval.intervalDays, 1e-7],
+  // LOOSENED 2026-09-16 FROM 1e-7, WHICH NOTHING THIS COURSE PRINTS COULD
+  // SATISFY. Run hours print to six decimals and days to four, so at 1e-7 a
+  // learner reading correctly off the studio was graded on their luck at
+  // guessing unprinted digits: 21.266667 is 3.3e-7 out and 9.0239 is 1.1e-5
+  // out. A FIELD THAT CANNOT BE ANSWERED FROM THE MATERIAL IS NOT A HARD
+  // FIELD, IT IS A BROKEN ONE. Each is now half a unit in the last place the
+  // course actually prints that quantity, which is still 2.4e-8 and 5.5e-6
+  // relative, so neither is trivially wide.
+  ['advanced', 'quaiboe_pig_run_hours', quaRun.runHours, 5e-7],
+  ['advanced', 'quaiboe_pigging_interval_days', quaInterval.intervalDays, 5e-5],
 ];
 
 fs.writeFileSync('/root/fc-wip-linesizing/fields.json', JSON.stringify(F, null, 1));
