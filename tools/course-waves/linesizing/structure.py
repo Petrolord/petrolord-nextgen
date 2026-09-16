@@ -1,21 +1,42 @@
 # FC2 Line Sizing & Hydraulics. Three tiers, six modules each, 26 lessons a
 # tier. Panel ids: L the liquid line explorer (regime, the three losses, the
 # erosional limit, the bore sweep), G the gas line explorer (the four forms,
-# the elevation group, the inverse solve, the marched profile), W the wall
-# and pigging explorer (the code design factors, MAOP, line volume, the
-# holdup sweep, and the domain limits).
+# the elevation group, the ceiling and the inverse solve, the marched
+# profile), W the wall and pigging explorer (the code design factors, MAOP,
+# line volume, the holdup sweep, and the domain limits).
 #
 # Titles carry COUNTS only, never a measurement.
 #
-# Engine, vendored at engines main 709172f:
+# Engine, as REPAIRED by the FC2-0 wave (engines PR #196, vendored at NextGen
+# 27de8d90, all eight paths sha-identical with the engines branch):
 # engines/facilities/lineHydraulics.js (the Pipeline & Line Sizing Studio:
 # Colebrook friction with a laminar branch, Darcy-Weisbach with the three
-# losses kept apart, a marched liquid profile, the four published gas
-# transmission forms with the shared elevation adjustment, the outlet
-# pressure by bisection, Barlow to B31.4 and B31.8 with the four location
-# classes, and the pigging chain), over engines/production/chokePerformance.js
-# for the API RP 14E erosional limit and engines/production/pipeSchedule.js
-# for the bores and the roughness catalogue.
+# losses kept apart, a marched liquid profile that refuses with its evidence
+# attached, the four published gas transmission forms with the shared
+# elevation adjustment, the outlet pressure bracketed at the pressure where
+# the driving group vanishes, Barlow to B31.4 and B31.8 with the four
+# location classes, and the pigging chain), over
+# engines/production/chokePerformance.js for the API RP 14E erosional limit
+# and engines/production/pipeSchedule.js for the bores and the roughness
+# catalogue.
+#
+# RE-CUT 2026-09-16 after FC2-0. Two modules changed subject because the
+# defects they were built on were repaired:
+#   * Expert m04 was "What It Accepts and Should Not", five lessons on
+#     unguarded inputs. Twenty-one of those inputs now return a named error,
+#     so four of the five described behaviour that no longer exists. It is
+#     now built on digest Section 16: what a refusal IS, the contract, the
+#     messages, the boundary either side of every guard, and the two things
+#     the engine still accepts and should not.
+#   * Professional m04's l02 and l04 described a bracket that was wrong and a
+#     descent that was mishandled. Both are now correct, and the ceiling the
+#     bracket really ends at is the most interesting physics in the course,
+#     so the module is re-cut around it, with the ASCENT promoted to its own
+#     lesson because it is the commoner case and the one that was wrong by
+#     the widest margin.
+#   * Professional m05 l04 was "Where a line dies", written when the traverse
+#     marched past zero absolute and returned a number. It now refuses and
+#     hands back the evidence, which is a better lesson under a new title.
 L = 'fc-liquid-explorer'
 G = 'fc-gasline-explorer'
 W = 'fc-wall-pig-explorer'
@@ -80,18 +101,21 @@ TIERS = {
     ('l03-the-equivalent-length-factor', 'The equivalent length factor', 14, [G]),
     ('l04-two-things-a-hill-does', 'Two things a hill does', 13, [G]),
   ]),
+  # RE-CUT. Built on digest Section 10 as it now stands: the bracket ends
+  # where the driving group vanishes, which is the inlet over the square root
+  # of e to the s, and a hill moves it in whichever direction the hill runs.
   ('m04-the-outlet-pressure', 'The Outlet Pressure', [
     ('l01-no-closed-form-in-this-engine', 'No closed form in this engine', 13, [G]),
-    ('l02-the-bracket-it-searches', 'The bracket it searches', 14, [G]),
+    ('l02-the-ceiling-is-not-the-inlet', 'The ceiling is not the inlet', 14, [G]),
     ('l03-a-rate-the-line-cannot-carry', 'A rate the line cannot carry', 13, [G]),
-    ('l04-downhill-past-the-inlet', 'Downhill, past the inlet', 14, [G]),
-    ('l05-round-tripping-a-form', 'Round tripping a form', 12, [G]),
+    ('l04-downhill-where-the-drop-is-negative', 'Downhill, where the drop is negative', 13, [G]),
+    ('l05-uphill-where-the-ceiling-falls', 'Uphill, where the ceiling falls', 14, [G]),
   ]),
   ('m05-marching-a-profile', 'Marching a Profile', [
     ('l01-one-segment-at-a-time', 'One segment at a time', 13, [G]),
     ('l02-the-station-list', 'The station list', 12, [G]),
     ('l03-marched-against-one-shot', 'Marched against one shot', 14, [G]),
-    ('l04-where-a-line-dies', 'Where a line dies', 13, [G]),
+    ('l04-refusing-with-the-evidence-attached', 'Refusing with the evidence attached', 13, [L]),
     ('l05-what-a-traverse-drops', 'What a traverse drops', 13, [L]),
   ]),
   ('m06-the-professional-reading', 'The Professional Reading', [
@@ -122,12 +146,16 @@ TIERS = {
     ('l04-four-forms-and-no-regime-check', 'Four forms and no regime check', 13, [G]),
     ('l05-an-iteration-that-never-reports', 'An iteration that never reports', 13, [G]),
   ]),
-  ('m04-what-it-accepts-and-should-not', 'What It Accepts and Should Not', [
-    ('l01-a-refusal-is-not-a-nan', 'A refusal is not a NaN', 13, [L]),
-    ('l02-the-inputs-nobody-guards', 'The inputs nobody guards', 14, [G]),
-    ('l03-a-wall-of-infinite-thickness', 'A wall of infinite thickness', 13, [W]),
-    ('l04-a-sweep-that-comes-back-empty', 'A sweep that comes back empty', 13, [W]),
-    ('l05-pressures-below-the-vacuum', 'Pressures below the vacuum', 13, [L]),
+  # RE-CUT. Was "What It Accepts and Should Not", five lessons on defects the
+  # FC2-0 wave repaired. Built now on digest Section 16: the refusal CONTRACT,
+  # the returns that sit outside it on purpose, the messages themselves, the
+  # boundary either side of every guard, and what is still accepted.
+  ('m04-what-a-refusal-is', 'What a Refusal Is', [
+    ('l01-an-object-carrying-an-error', 'An object carrying an error', 13, [L]),
+    ('l02-three-returns-outside-the-contract', 'Three returns outside the contract', 14, [L]),
+    ('l03-the-messages-and-what-each-protects', 'The messages, and what each protects', 13, [G]),
+    ('l04-both-sides-of-every-guard', 'Both sides of every guard', 14, [W]),
+    ('l05-what-it-still-accepts', 'What it still accepts', 13, [W]),
   ]),
   ('m05-what-the-method-does-not-know', 'What the Method Does Not Know', [
     ('l01-items-held-for-the-literature', 'Items held for the literature', 13, [G]),
