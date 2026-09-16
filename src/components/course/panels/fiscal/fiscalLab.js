@@ -30,7 +30,7 @@
 
 import golden from '@petrolord/engines/test-data/economics/goldens/fiscal_cases.json';
 import {
-  calculateNPV, calculateIRR, calculateCashFlowForRegime, deriveInsights, runFiscalComparison,
+  calculateNPV, calculateIRR, calculateIRRResult, calculateCashFlowForRegime, deriveInsights, runFiscalComparison,
   GOVERNMENT_SHARE_STATES, commonShareWindow,
 } from '@petrolord/engines/engines/economics/fiscalRegime.js';
 import { fiscalTemplates } from '@petrolord/engines/engines/economics/fiscalTemplates.js';
@@ -489,8 +489,8 @@ export const templateTotals = (projectKey) => {
 // ---------------------------------------------------------------------------
 
 export const STALE_NOTES = {
-  capped_5pct_never_recovers:
-    'CAUTION, THIS NOTE IS WRONG AND THE GOLDEN\'S OWN NUMBERS SAY SO. The note claims "no payback, IRR 0"; the golden records paybackYear 3 and irr 54.6792, and the engine returns the same. Only the pool half of the note is right. Read the values, not the note.',
+  capped_5pct_pool_never_clears:
+    'READ THE PAYBACK AND THE POOL AS TWO DIFFERENT QUESTIONS. The pool never clears, 2543.7575 is still unrecovered in year 25, and the contractor still pays back in year 3, because the flat regime hands it 100 percent of the profit oil the cap leaves. Its NPV is zero at 54.6792 percent and again at -14.2614 percent, so under EC2-5 the IRR is null with status multiple-roots.',
   rfactor_tranche_crossing:
     'CAUTION, THIS NOTE MISATTRIBUTES ITS OWN STEPS. The R factor crosses 1.0 between year 1 (0.781480) and year 2 (1.383252), not in year 3, and that crossing steps NOTHING because 60 percent is already the first tier\'s split. The step to 40 percent in year 3 is the 1.6 threshold (1.383252 to 1.846809). Only the 2.5 crossing in year 6 is as the note describes. The table in Section 14 is the record.',
   rfactor_falls_back:
@@ -647,7 +647,7 @@ export const costRecoverySweep = (limits = COST_RECOVERY_LIMITS) => limits.map((
   };
 });
 
-export const COST_RECOVERY_CASE_IDS = ['capped_5pct_never_recovers', 'capped_40pct', 'never_recovers_huge_capex'];
+export const COST_RECOVERY_CASE_IDS = ['capped_5pct_pool_never_clears', 'capped_40pct', 'never_recovers_huge_capex'];
 
 export const costRecoveryCases = () => COST_RECOVERY_CASE_IDS.map((id) => {
   const c = goldenCase(id);
@@ -792,8 +792,11 @@ export const taxCases = () => TAX_CASE_IDS.map((id) => {
 export const UPLIFT_SWEEP_PCT = [0, 5, 10, 20, 30, 50];
 
 /**
- * The RRT base is the contractor profit share MINUS totalCapex times the
- * uplift percent, and that subtraction happens in EVERY one of the 25 years.
+ * EC2-6. The uplift sizes a ONE-TIME pool, total capex times one plus the
+ * uplift, drawn down against the contractor profit share until it is
+ * exhausted and never refilled, so relief over the life never exceeds that
+ * pool. The rule it replaced subtracted totalCapex times the uplift in every
+ * one of the 25 years, five times the capex at the default 20 percent.
  * CIT is set to zero here so the RRT is the whole of the tax.
  */
 export const upliftSweep = () => {
@@ -859,13 +862,20 @@ export const irrCases = () => golden.irr.map((c) => ({
 
 export const IRR_BRACKET_RATES = [0, 100, 1600, 25600, 102400, 199900, 400000];
 
-/** The bracket made visible: NPV of the runaway vector at a range of rates. */
+/**
+ * EC2-5. The band made visible: NPV of the runaway vector at a range of rates.
+ * The engine now returns null with irrStatus above-clamp rather than the
+ * 102400 percent bracket its retired doubling search reached.
+ */
 export const irrBracketEvidence = () => {
-  const c = IRRC.irr_beyond_bracket;
+  const c = IRRC.irr_above_clamp_past_old_bracket;
+  const res = calculateIRRResult(c.cashFlows);
   return {
     id: c.id,
     cashFlows: c.cashFlows,
-    engineIrrPct: calculateIRR(c.cashFlows),
+    engineIrrPct: res.irr,
+    irrStatus: res.irrStatus,
+    irrRootAboveBand: res.irrRootAboveBand ?? false,
     trueIrrPct: c.trueIrr ?? null,
     npvByRate: IRR_BRACKET_RATES.map((ratePct) => ({ ratePct, npv: calculateNPV(c.cashFlows, ratePct) })),
   };
@@ -1108,11 +1118,11 @@ export const publishedPriceSweep = () => golden.priceSweep.map((x) => ({
 }));
 
 /**
- * SECTION 20. The capex sweep, the SEVEN points the loop reaches, and the
- * eighth the loop never reaches, called directly at a multiplier of 1.5.
- * Adding 0.1 to a binary floating point number does not land on 1.5: the
- * accumulated multiplier reaches 1.5000000000000004, which fails the test, so
- * the axis is labelled 0.8 to 1.5 and its last label reads "1.4".
+ * SECTION 20. The capex sweep, EIGHT points reaching the endpoint the axis
+ * promises (EC2-3). CAPEX_SWEEP_MULTIPLIERS is an integer step count, each
+ * multiplier written (8 + k) / 10, so the last point is exactly 1.5 and equals
+ * the engine called directly at 1.5. The loop it replaced accumulated 0.1,
+ * reached 1.5000000000000004, failed its own test and stopped at 1.4.
  */
 export const capexSweep = async (caseId) => {
   const { projectInputs, regimes, note } = comparisonInputs(caseId);
@@ -1131,15 +1141,15 @@ export const capexSweep = async (caseId) => {
         name: g.name,
         values: d.values,
         npvAtOneAndAHalfCalledDirectly: at15,
-        lossOverSevenSweptPointsDerived: d.values[0] - d.values[d.values.length - 1],
-        lossOverEightPointsDerived: d.values[0] - at15,
-        labelDifferenceDerived: (d.values[0] - at15) - (d.values[0] - d.values[d.values.length - 1]),
+        lossOverSweptRangeDerived: d.values[0] - d.values[d.values.length - 1],
+        lossToOneAndAHalfCalledDirectlyDerived: d.values[0] - at15,
+        endpointMatchesDirectCallDerived: d.values[d.values.length - 1] === at15,
       };
     }),
   };
 };
 
-/** The seven published capex-sweep cases, at multipliers of 0.7 to 1.3. */
+/** The published capex-sweep cases, at multipliers of 0.7 to 1.5. */
 export const publishedCapexSweep = () => golden.capexSweep.map((x) => ({
   id: x.id,
   regimeName: x.regime.name,
@@ -1510,7 +1520,12 @@ export const uruanCapstoneFields = async () => {
     ['advanced', 'cmp_top_npv_musd', cmp.summary[0].npv, URUAN_MONEY],
     ['advanced', 'cmp_psc_effective_tax_rate_pct', sPsc.effectiveTaxRate, URUAN_PCT],
     ['advanced', 'cmp_psc_price_sweep_at_60_pct', priceSweepOf(URUAN_PSC.id)[at60], URUAN_PCT],
-    ['advanced', 'cmp_psc_capex_loss_seven_point_musd', pscCapex[0] - pscCapex[pscCapex.length - 1], URUAN_MONEY],
+    // EC2-3. On the repaired eight-point sweep the loss ACROSS the sweep is the
+    // loss to 1.5, so the old cmp_psc_capex_loss_seven_point_musd computed to
+    // exactly the field below it and the pair stopped discriminating. It is
+    // retired and replaced by the last tenth of the sweep, 1.4 to 1.5, which
+    // the repair is what made readable.
+    ['advanced', 'cmp_psc_capex_loss_last_tenth_musd', pscCapex[pscCapex.length - 2] - pscCapex[pscCapex.length - 1], URUAN_MONEY],
     ['advanced', 'cmp_psc_capex_loss_eight_point_musd', pscCapex[0] - pscAtOneAndAHalf, URUAN_MONEY],
     ['advanced', 'cmp_con_price_climb_pct_points', conPrice[conPrice.length - 1] - conPrice[0], URUAN_PCT],
   ];

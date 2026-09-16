@@ -33,7 +33,7 @@ const MODES = [
   ['royalty', 'Royalty: the sliding scale, the crossing and the threshold itself'],
   ['recovery', 'Recovery: four limits, the pool and the carryforward'],
   ['rfactor', 'R factor: the ratio of cumulatives and the split it selects'],
-  ['tax', 'Tax: three charges decomposed, and the uplift charged every year'],
+  ['tax', 'Tax: three charges decomposed, and the uplift as a one-time pool'],
   ['rate', 'Rate: the discount sweep, the mid-year parity and five IRR vectors'],
 ];
 
@@ -294,9 +294,9 @@ const Tax = () => {
           <Tile label={`Minimum tax alone at ${td.minTaxPct} percent, total`} value={mm(td.totalMinTaxAlone)} unit="million USD" />
           <Tile label="Tax as published, total" value={mm(td.totalTaxAsPublished)} unit="million USD" />
           <Tile label="First year with a positive RRT charge" value={yr(td.firstYearWithRrt)} />
-          <Tile label="RRT uplift, percent of the WHOLE capex, every year" value={String(td.rrtUpliftPct)} />
+          <Tile label="RRT uplift, percent added to the one-time pool" value={String(td.rrtUpliftPct)} />
           <Tile label="Total capex on this project" value={mm(capex)} unit="million USD" />
-          <Tile label="Uplift relief over the life at 20 percent" value={`${(td.rrtUpliftPct / 100) * 25} times the whole capex`} />
+          <Tile label="Uplift relief over the life at 20 percent" value={`at most ${(1 + td.rrtUpliftPct / 100).toFixed(1)} times the whole capex`} />
         </TileGrid>
       </div>
       <div className="h-56 mt-3">

@@ -445,7 +445,9 @@ export const akataValuationYears = () => VALUATION_YEARS.flatMap((valuationYear)
 }));
 
 // ---------------------------------------------------------------------------
-// SECTION 8. The NPV profile, and the point that misses.
+// SECTION 8. The NPV profile, and the point that used to miss (EC1-1: the
+// applied-rate point is labelled at the rounded rate and evaluated at the
+// exact one, so the profile passes through the headline NPV).
 // ---------------------------------------------------------------------------
 
 export const STANDARD_PROFILE_RATES_PCT = [0, 5, 8, 10, 12, 15, 20];
@@ -1093,7 +1095,9 @@ export const akataPiaVariants = () => AKATA_PIA_VARIANTS.map(([label, patch]) =>
 });
 
 // ---------------------------------------------------------------------------
-// SECTION 21. Three numbers to distrust.
+// SECTION 21. Three numbers that used to be wrong: the profile point (EC1-1),
+// the IRR of a multi-root profile (EC1-2, now null with a status) and the
+// abandonment fund at a partial working interest (EC1-3).
 // ---------------------------------------------------------------------------
 
 export const distrustTable = () => {
