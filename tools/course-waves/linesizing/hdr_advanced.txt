@@ -1,0 +1,32 @@
+-- ============================================================================
+-- FC2 EXPERT DEEP SEED: Pipeline & Line Sizing, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and every question row is generated
+-- from the committed bank JSON, which reproduces byte for byte from its
+-- committed generator.
+--
+-- What this tier owns: THE WALL, THE PIG, AND WHERE THE METHOD STOPS. The two
+-- things left are the ones nobody can size from a pressure drop: the wall a
+-- code demands, and the liquid a pig will push in front of it. Then the
+-- audit. Where the correlations stop being honest, what a refusal is and what
+-- each message protects, and what this engine does not know at all.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The holdup is an INPUT and never a result.
+-- The swept volume, the arriving slug and the interval between runs all
+-- inherit it whole, so a measured loading and an assumed one produce answers
+-- that look exactly alike and differ by whatever the assumption was worth.
+--
+-- THE TRAP THE TIER IS BUILT ON. A required wall and a rating are not the
+-- same calculation run twice. The wall is what the code demands of a design
+-- pressure; the rating is what the mill actually rolled, read back through
+-- the same corrosion allowance. A location class is a fact about the route,
+-- and assuming Class 1 is the mistake the classes exist to prevent.
+--
+-- WHAT THIS TIER PUBLISHES AS HELD. The audit modules name the items this
+-- method records without having checked them against a source, the goldens
+-- that are generator-written rather than measured, and the multiphase half
+-- that is not in this engine at all. None of them is graded: the capstone
+-- states every bore, roughness, class, factor and holdup it uses.
+-- ============================================================================

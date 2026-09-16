@@ -2,7 +2,7 @@
  "slug": "linesizing",
  "prefix": "fc2",
  "name": "Line Sizing & Hydraulics",
- "pathOrder": 41,
+ "pathOrder": 40,
  "module": "facilities",
  "prerequisite": null,
  "repo": "/root/wt-fc2-nextgen",
