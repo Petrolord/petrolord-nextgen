@@ -46,6 +46,12 @@
 #   * Associate m02 and m03 gain what the solve now reports about itself: the
 #     conditioning behind a fit, an R squared that can be null, and a
 #     convergence flag with a case that makes it false.
+#   * Professional m02 was "What a Check Does Not Check". What it did not check
+#     was an available head it could not read, and it now refuses that, so the
+#     title named a shortcoming the section no longer shows. It is re-cut onto
+#     what digest Section 7 does show: the margin rule measured out of the
+#     engine, both halves of its maximum, where they change places, and why a
+#     margin rule and a ratio rule are not the same rule.
 P = 'fc-pump-explorer'
 S = 'fc-suction-explorer'
 C = 'fc-compressor-explorer'
@@ -98,7 +104,7 @@ TIERS = {
     ('l04-a-liquid-already-flashing', 'A liquid already flashing', 14, [S]),
     ('l05-an-available-figure-decides-nothing-alone', 'An available figure decides nothing on its own', 13, [S]),
   ]),
-  ('m02-the-margin-and-what-a-check-does-not-check', 'The Margin, and What a Check Does Not Check', [
+  ('m02-the-margin-and-the-rule-it-is-judged-against', 'The Margin, and the Rule It Is Judged Against', [
     ('l01-the-margin-rule-measured', 'The margin rule, measured', 13, [S]),
     ('l02-where-the-floor-and-the-fraction-change-places', 'Where the floor and the fraction change places', 14, [S]),
     ('l03-the-three-severities', 'The three severities', 13, [S]),

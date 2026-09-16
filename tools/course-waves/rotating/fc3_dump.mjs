@@ -342,7 +342,7 @@ w('| gravity | head ft | discharge psi |');
 w('| --- | --- | --- |');
 [0.62, 0.85, 1.00, OKONO_SG, 1.25].forEach((sg) => w(`| ${e6(sg)} | ${e6(OK_DUTY.headFt)} | ${e6(P.headFtToPsi({ headFt: OK_DUTY.headFt, sg }))} |`));
 w();
-w('THE CONSTANTS. pumps.js exports no constants and names none internally: every packaging is written inline at its point of use. Each one below is MEASURED by asking the engine a question about itself.');
+w('THE CONSTANTS. pumps.js exports no constants; the three it names internally are a percentage slack and the two ends of the speed band, all three measured out of the engine in Section 8, and every packaging it computes with is written inline at its point of use or imported. Each one below is MEASURED by asking the engine a question about itself.');
 const M_231 = P.psiToHeadFt({ psi: 1, sg: 1 });
 const UNIT_POWER = P.pumpPower({ qGpm: 1, headFt: 1, sg: 1, efficiency: 1 });
 const M_3960 = 1 / UNIT_POWER.hydraulicHp;
@@ -417,7 +417,7 @@ w('The second row is the one worth reading twice: the pressure head is negative 
 w();
 
 // ---------------------------------------------------------------- SECTION 7
-w('# SECTION 7: The margin, and what a check does not check (owned by Professional m02)');
+w('# SECTION 7: The margin, and the rule it is judged against (owned by Professional m02)');
 w();
 w(`Against the vendor\'s stated required NPSH of ${e6(OKONO_NPSHR_FT)} ft, across the same suction sweep:`);
 w('| suction psia | NPSH available ft | margin ft | required margin ft | ratio | pass | severity |');
@@ -696,7 +696,7 @@ IDENTITY_PAIRS.forEach(({ k, polytropicEfficiency }) => {
   w(`| ${e6(k)} | ${e6(polytropicEfficiency)} | ${f9(e)} | ${e * polytropicEfficiency} | ${ke} | ${e * polytropicEfficiency - ke} |`);
 });
 w('The last column is derived on each row. Because that identity holds, dividing the isentropic head by the isentropic efficiency and dividing the polytropic head by the polytropic efficiency are one expression, so the two horsepower figures above cannot disagree for any input at all.');
-w('A COMPARISON THAT CANNOT COME OUT FALSE IS NOT A CHECK. The engine\'s gate used to call the agreement of those two routes its strongest available check that neither head is transcribed wrong; it is an algebraic identity, it holds for every input including a transcribed one, and it validated nothing. It is kept, labelled as the shape property it is, and the real check is a numerical quadrature of the integral of v dp along the polytropic path with a negative control that moves the exponent and must break the comparison.');
+w('A COMPARISON THAT CANNOT COME OUT FALSE IS NOT A CHECK. Two routes through one expression agree for every input, including an input that is transcribed wrong, so their agreement is a shape property and not evidence about either head. The engine gate asserts it and labels it as that, and the check that CAN fail beside it is a numerical quadrature of the integral of v dp along the polytropic path, with a negative control that moves the exponent and must break the comparison.');
 w('The same rule applies to every gate a reader will meet: ask what input would make it fail, and if there is none, it is a restatement of the formula and not a test of it.');
 w();
 w('The exponent, the discharge and the head against the polytropic efficiency, everything else held:');
@@ -765,7 +765,7 @@ w('That sentence used to be the answer to four unrelated faults as well as this 
 w();
 
 // --------------------------------------------------------------- SECTION 13
-w('# SECTION 13: The train, its cooling, and the limit it can break (owned by Expert m03)');
+w('# SECTION 13: The train, its cooling, and the limit that buys the stages (owned by Expert m03)');
 w();
 w(`SOKU as a train, cooled back to ${r4(SOKU.interstageCoolToF)} degF between stages against a suction of ${r4(SOKU.tSuctionF)} degF:`);
 w('| stage | suction psia | discharge psia | in degF | out degF | ratio | z average | polytropic head ft lbf per lbm | gas hp | brake hp | cooling Btu per hr | cooled to degF | warning |');
@@ -943,7 +943,7 @@ w('| --- | --- | --- |');
 ].forEach(([fn, label, f]) => w(`| ${fn} | ${label} | ${String(f())} |`));
 w('Read the two control rows against the rest. A contract that says NaN is only worth anything if the same function returns a real number when it can, and those two rows are what makes the others mean something.');
 w();
-w('FOUR FAULTS THAT USED TO SHARE ONE SENTENCE, each now refused by its own name. Not one of the four is about the temperature the shared sentence blamed:');
+w('FOUR FAULTS, FOUR REFUSALS, and each names the input that is actually wrong rather than the one a reader would check first:');
 [
   ['a polytropic efficiency of zero', { pSuctionPsia: 100, pDischargePsia: 1000, tSuctionF: 100, k: 1.28, polytropicEfficiency: 0 }],
   ['a polytropic efficiency above one', { pSuctionPsia: 100, pDischargePsia: 1000, tSuctionF: 100, k: 1.28, polytropicEfficiency: 1.5 }],
@@ -952,7 +952,7 @@ w('FOUR FAULTS THAT USED TO SHARE ONE SENTENCE, each now refused by its own name
 ].forEach(([label, inp]) => w(`- ${label}: ${soft(C.stageCount(inp))}`));
 w('Two of those messages carry the value that was typed, because two typed values reach one guard from opposite directions: a 0 and a 1.5 are not the same mistake, and a reader told only the rule has to work out which of them they made. A refusal that names the wrong cause sends a reader to fix an input that was correct, and that is worse than a bare refusal.');
 w();
-w('AND THE ONE THAT USED TO REACH THE NEXT FUNCTION BEFORE IT FAILED:');
+w('AND THE SAME FAULT ASKED THROUGH BOTH FUNCTIONS, SO THE MESSAGE CANNOT DRIFT BETWEEN THEM:');
 const RATIO_ONE = C.stageCount({ pSuctionPsia: 100, pDischargePsia: 1000, tSuctionF: 100, k: 1.28, maxRatioPerStage: 1 });
 w(`- a per-stage ratio limit of one, through stageCount: ${shape(RATIO_ONE)}`);
 w(`- the same through compressorTrain: ${soft(C.compressorTrain({ qMMscfd: 20, pSuctionPsia: 100, tSuctionF: 100, pDischargePsia: 1000, gasSg: 0.65, k: 1.28, maxRatioPerStage: 1 }))}`);

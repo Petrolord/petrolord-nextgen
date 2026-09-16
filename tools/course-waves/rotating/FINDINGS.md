@@ -909,3 +909,75 @@ as second opinions on the CASE rather than on the engine.
 | capstone anti-trap protocol | file absent after a failed run | pointed at a missing engines tree: exits 1, writes nothing: **caught** |
 | capstone droop assertion | passes on the real case | fed a rising point set: exits 1, writes nothing: **caught** |
 | `dutyPoint.converged` | `true` on every real solve | non-finite head inside the bracket: `false` with a 154.78 ft residual, where a bracket-only flag would have said `true`: **caught** |
+
+
+---
+
+## THE HEADING SWEEP, 2026-09-16. Six more, and the sweep that was missing.
+
+The two-figure sweep above covered PROSE. It did not cover HEADINGS, and a
+section title survived it reading **"the limit it can break"** over a table
+whose seventh column is the stated limit less the hottest stage and which
+records **0 stages over the limit on every row**, with the prose beneath saying
+so in as many words. The body had been re-cut and the heading above it had not.
+
+**That is the commonest shape of the defect this programme keeps paying for**,
+and it is the same one FC2 hit twice: once where a writer fixed a paragraph and
+left the section heading contradicting it, and once where fixing `structure.py`
+and regenerating a manifest did not propagate into the lesson text. Headings
+need a sweep of their own, because a heading is read first and is the thing a
+writer builds a module on.
+
+Six found, all fixed at the generator as **one-line-for-one-line replacements**
+so no line number moved: **809 to 809 lines, 0 added, 6 changed, 0 removed,
+across 6 blocks**, at lines 201, 272, 485, 553, 713 and 720.
+
+| line | heading | why it failed | now |
+| --- | --- | --- | --- |
+| 553 | `# SECTION 13: The train, its cooling, and the limit it can break` | names a behaviour the repair removed and the section's own table refutes | `...and the limit that buys the stages`, matching `structure.py` and `wave.json`, which were already re-cut |
+| 272 | `# SECTION 7: The margin, and what a check does not check` | what the check did not check was an available head it could not read; it now refuses that, so the body says the opposite of the title | `# SECTION 7: The margin, and the rule it is judged against` |
+| 201 | `THE CONSTANTS. pumps.js exports no constants and names none internally: every packaging is written inline at its point of use.` | true at `709172f`, false at `4fa37e6`: `pumps.js` names `PCT_SLACK`, `SPEED_RATIO_MIN` and `SPEED_RATIO_MAX` and imports `KW_PER_HP` | names the three, says all three are measured out of the engine in Section 8, and says a packaging is inline or imported |
+| 485 | `A COMPARISON THAT CANNOT COME OUT FALSE IS NOT A CHECK. The engine's gate used to call...` | the principle is teaching truth, the framing was repair-history | re-pointed at what the identity table beneath it shows |
+| 713 | `FOUR FAULTS THAT USED TO SHARE ONE SENTENCE` | repair-history framing, and its "not one of the four is about the temperature" was loose: two of the four ARE temperature faults | `FOUR FAULTS, FOUR REFUSALS, and each names the input that is actually wrong rather than the one a reader would check first` |
+| 720 | `AND THE ONE THAT USED TO REACH THE NEXT FUNCTION BEFORE IT FAILED` | same class | `AND THE SAME FAULT ASKED THROUGH BOTH FUNCTIONS, SO THE MESSAGE CANNOT DRIFT BETWEEN THEM` |
+
+Lines 485, 713 and 720 were found by the gate below rather than by eye, after
+the first three had been fixed by hand.
+
+### Two more outside the digest, same class
+
+- **`structure.py`** carried Professional m02 as *The Margin, and What a Check
+  Does Not Check* with the slug to match. Retitled to
+  *The Margin, and the Rule It Is Judged Against*, slug
+  `m02-the-margin-and-the-rule-it-is-judged-against`. Free to change now,
+  because no lesson is written against it yet; after the writers start it would
+  not be.
+- **`wave.json`**'s Professional m02 said the module would teach *"why NPSHr is
+  itself measured at a three percent head drop"*. **Nothing in this repository
+  carries that** and the digest does not compute it, so a writer taking the
+  plan at its word would have written an unsourced number into a live course.
+  **Struck rather than held**, and the plan now says why: a held item is one the
+  engine uses, and this is one the engine has never heard of.
+
+### The gate, and the gate's own founding failure
+
+`digest_headings.mjs` sweeps all 17 section titles and all 22 in-body ALL-CAPS
+markers against the block beneath each, and exits 1 on a hit. It passes clean
+on the rebuilt digest and **flags all six on the pre-fix one**, which is its
+negative control.
+
+**Its first version missed the very defect it was written for.** It gave a
+section title the same short block as an in-body marker, so Section 13's block
+stopped at `NOW MOVE THE INTERCOOLER APPROACH` and never reached the table that
+refutes the title. A section title now owns everything down to the next
+section. Recorded because a gate that cannot catch its own founding case is
+precisely the thing it was built to stop, and the first run of it looked green
+on five of six.
+
+### Battery re-run after the heading fixes
+
+Digest byte-identical across six timezones and a repeat; digestleak 0 of 54
+from 1751 literals with two planted answers caught; promptleak none; the wave
+oracle 446 comparisons across 14 blocks with 65 of 65 refusal branches as
+expected, 0 silent, and both negative controls caught at 9.901e-3 and 1.750e-4;
+`fields.json` byte identical; `structure.py` gate green.
