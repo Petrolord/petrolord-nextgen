@@ -1,0 +1,46 @@
+{
+ "course": "EC1 Cash Flow & NPV (app_slug cashflow), the IKPOTO capstone",
+ "engines": "main 709172f (PR #193, decision EC1-4), ENGINE_VERSION 3.9.0 -> 3.10.0",
+ "method": "Every OLD value below was read from a dump of the LIVE production rows, not retyped. The course's own field computation (/root/ec-wip-cashflow/ec1_fields.mjs, driven by scratchpad/d3-ec1/capstone.mjs) was run twice, against the engine vendored in this repo and against engines main 709172f. All 18 live values reproduced character for character on the vendored engine (36 of 36 across both courses, 0 mismatches) before any value was declared moved.",
+ "moved": [
+  {
+   "tier": "beginner",
+   "key": "jv_2033_gross_revenue_usd",
+   "published": 83024596.47999997,
+   "recut": 66419677.183999985,
+   "tol": 1
+  },
+  {
+   "tier": "beginner",
+   "key": "jv_total_boe",
+   "published": 6788275.2,
+   "recut": 5430620.16,
+   "tol": 1
+  },
+  {
+   "tier": "beginner",
+   "key": "jv_government_take_pct",
+   "published": 80.07659344822196,
+   "recut": 75.09574181027746,
+   "tol": 0.0001
+  },
+  {
+   "tier": "intermediate",
+   "key": "jv_dpi",
+   "published": 0.14002119133320534,
+   "recut": 0.17502648916650668,
+   "tol": 1e-06
+  }
+ ],
+ "unchanged_count": 14,
+ "prompt": {
+  "tier": "beginner",
+  "published_md5": "c336411be1b76babcfe822dbc67da883",
+  "recut_md5": "2a4a309b4556d24a9e1445fb5fd2163b",
+  "why": "Two sentences taught the retired split ledger: that revenue, volumes, opex, capex and depreciation stay at field level while royalty, tax and net cash flow are the share, and that government take is measured against a field pre-take value. After EC1-4 every line is the share and take is working-interest invariant."
+ },
+ "prompts_unchanged": {
+  "intermediate": "d0a7c52f2cac2386ea42f3846b26f06e",
+  "advanced": "b0f91aa94c9b66864a6dcec45641f044"
+ }
+}
