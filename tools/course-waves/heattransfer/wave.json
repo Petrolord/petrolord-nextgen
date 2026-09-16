@@ -1,0 +1,122 @@
+{
+ "slug": "heattransfer",
+ "prefix": "fc6",
+ "name": "Heat Exchange & Cooling",
+ "pathOrder": 44,
+ "module": "facilities",
+ "prerequisite": null,
+ "repo": "/root/wt-fc6-nextgen",
+ "branch": "feat/fc6-heattransfer-course",
+ "goldens": [
+  "facilities/goldens/heattransfer_cases.json"
+ ],
+ "engines": [
+  "engines/facilities/heatTransfer.js"
+ ],
+ "enginesVendoredAt": "NextGen, sha-identical with engines e4377b3 (the FC6-0 repair, engines PR #202). FIVE paths and three edges, and the closure was WALKED rather than listed: heatTransfer.js imports NOTHING AT ALL, so the family is the engine, its golden, its jest suite, its oracle and its findings record, and the only edges are the suite to the engine, the suite to the golden and the oracle to the golden. Proved three independent ways, path by path: git blob hash against engines e4377b3, md5 byte compare, and a byte compare against the Suite's own vendoring of the same repair (Suite PR #499, merge 8a371c94, vendor pin e4377b3e). Vendoring guard clean over 563 paths compared byte for byte, 311 recorded deviations. The canonical pin stays at 709172f, so four paths are ledgered as differing with their blobs pinned and FINDINGS-heattransfer.md as extra.",
+ "constants": {
+  "$classification": "Every constant this module carries, classified. DECLARED means the module states it and no publication in this repository checks it. EXPORTED means it is on DECLARED_CONSTANTS and a caller can read it. DERIVED means it is a rounding of an exact derivation whose residual is MEASURED. FITTED means it is a correlation coefficient no oracle can validate and the gate pins it BY LITERAL. HELD means the module records that it cannot source it and says so in its returns. A FITTED or HELD item is on no graded path in this wave.",
+  "0.023": "the Dittus-Boelter coefficient. FITTED, pinned by literal. No graded field reads it",
+  "0.8": "the Dittus-Boelter Reynolds exponent. FITTED, pinned by literal. No graded field reads it",
+  "0.4": "the Dittus-Boelter Prandtl exponent, the HEATING form. FITTED, pinned by literal, and its cooling counterpart is HELD and REFUSED rather than invented. No graded field reads either",
+  "0.14": "the Sieder-Tate viscosity ratio exponent. FITTED, pinned by literal, and its band is HELD. No graded field reads it",
+  "3.66": "the laminar constant-wall-temperature Nusselt number. FITTED, pinned by literal. No graded field reads it",
+  "2300": "the lower edge of the transition band. DECLARED and EXPORTED. Below it the engine uses the laminar limit and warns",
+  "10000": "the upper edge of the transition band. DECLARED and EXPORTED. Between the two the engine REFUSES and hands back the Reynolds number that put the case there, which is a LIVE behaviour",
+  "2.4191": "centipoise to lb per ft per hour. DERIVED and rounded: the oracle derives 2.4190883105022247 from the exact pound, foot and hour, a 4.83 ppm rounding. NOT MOVED, because moving it would move every shipped number that reads it, and the engine gate asserts that the residual it causes downstream EQUALS the rounding. It is on the Reynolds and Prandtl path, and neither of those is graded in this wave",
+  "10.7316": "the gas constant, psia ft3 per lbmol degR. DERIVED and rounded: 10.73157708901629 from the SI gas constant, a 2.13 ppm rounding. Same decision and same assertion. It is on the air density path, which no graded field reads",
+  "28.9625": "the molecular weight of dry air. DECLARED and EXPORTED",
+  "14.7": "the standard barometric base. DECLARED and EXPORTED, and it is an INPUT now, because the duty of an air cooler is set by air density and this was hard-wired at sea level",
+  "0.24": "the air specific heat the cooler's air balance uses. DECLARED. The oracle's air-cooler route states plainly that this is the one thing it cannot check. It is on the air mass path, which no graded field reads, and Section 17 MEASURES it out of the engine's own answer rather than quoting it",
+  "6356": "the fan constant. HELD, and MEASURED rather than cited: it implies a water density of 62.303335 lb per ft3, which the golden carries and the gate asserts, so moving it in the engine and the oracle together still fails. It is on the fan power path and no graded field reads a fan power",
+  "26": "the default wall conductivity. HELD, because it names no material. UBIT states its own conductivity as a condition of the study, so no graded field reads this default",
+  "0.6": "the default fan static pressure. HELD, because it names no machine. OKWORI states its own",
+  "0.65": "the default fan efficiency. HELD, on the same terms. OKWORI states its own",
+  "0.92": "the default motor efficiency. HELD, on the same terms. OKWORI states its own",
+  "459.67": "the Rankine offset, a literal inside the air density helper rather than a row of DECLARED_CONSTANTS. DERIVED from the definition of the scale and exact, and MEASURED in digest Section 20 out of two density calls, because it cannot be read off the constants table",
+  "6": "maxShellPasses. A DECLARED BOUND and stated as declared in the refusal itself. It is not a published limit: it exists because F climbs toward one as shells are added, so an unbounded box makes any duty reachable by typing a bigger number",
+  "10": "controllingMarginPct. A DECLARED BOUND and stated as declared. It is a reporting threshold rather than a physical one: below it the answer carries a note telling a reader to treat two terms as jointly controlling",
+  "BUNDLE_K": "eight layout and pass-count pairs. HELD, source not established in this repository, and the 45 and 90 degree rows are BYTE-IDENTICAL in all four pass counts. The engine attaches a layoutNote saying so and the engine gate ASSERTS the equality so it cannot drift into looking meaningful. No graded field reads a bundle or shell diameter",
+  "crossFlowF": "HELD. An air cooler is a cross-flow machine and the closed form for its correction factor is not established here, so fCorrection is null with a note rather than a silent one. It sets the design AREA of a bay, and no graded field reads that area. THE HOT-DAY RATING DOES NOT DEPEND ON IT, because it holds effectiveness from its definition at fixed UA",
+  "dittusBoelterBand": "HELD. The validity band in Reynolds and in Prandtl is not established here. Every call returns both numbers with a correlation block whose validityBand is explicitly null, so a caller can check them against the source they trust",
+  "goldenIsSynthetic": "DECLARED, with its reason. This repository carries no published heat exchanger case, so no row is taken from one and no citation is invented. What stands in is route independence, the constant pins, and ANALYTIC LIMITS: the thin wall as a flat plate, the log mean below the arithmetic mean, F tending to one as P tends to zero, the two ceilings, the collapse at a capacity ratio of zero, and counter-current having no ceiling. The thin-wall limit is what caught a wall factor that had been moved in BOTH the engine and the oracle"
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3"
+ ],
+ "plan": {
+  "state": "FOUNDATION COMPLETE. Engine vendored sha-identical at e4377b3, digest built and reproducible, eighteen graded fields cut with their tolerances derived in one place, gates ported and run, scaffold written. No lesson, bank, panel, lab, capstone prompt or migration written yet.",
+  "thesis": "An exchanger is four questions in a chain and the chain is a LOOP, and the discipline is knowing which of the numbers in front of you the engine computed, which one you chose, and which one it declined to invent.",
+  "tiers": {
+   "beginner": "Associate. THE DUTY, THE DRIVING FORCE AND THE SURFACE. Why: this is the only part of the module that runs end to end in closed form, so a learner can watch a whole answer assemble before anything iterates. It is also where the difference between a stream and a machine is sharpest: the balance knows a stream by one number, its capacity rate, and everything after that is about the machine. The tier ends with the studio's own default case walked end to end, including the tube count closing as a loop, which is the one thing a reader can check against a live app.",
+   "intermediate": "Professional. WHAT DECIDES THE DRIVING FORCE AND WHAT DECIDES THE COEFFICIENT. Why: two corrections stand between a log mean and a real exchanger, and both are places a design goes quietly wrong. The correction factor is an EQUATION and this module computes it where its predecessor made the user type one. The coefficient is a SUM OF FIVE NAMED RESISTANCES, and naming the largest is the point of assembling it at all. This is also where the tier meets the one fitted correlation in the module, learns what its validity band is not, and meets a refusal that is the right answer.",
+   "advanced": "Expert. RATING, THE HOT DAY, AND THE SECOND METHOD. Why: the two things left are the questions a plant actually asks. Given the machine, what does it deliver, and what does it still deliver in August. The rating half carries the two ceilings and the one arrangement that has none, which is the claim a live help text got backwards. The air cooler half is the clearest instance in the whole Facilities module of what an independent second method buys you: the hot day is rated by effectiveness-NTU and checked by solving the surface equation, and the two agree where the engine before this repair satisfied NEITHER."
+  },
+  "modulesPerTier": 6,
+  "lessonsPerTier": 26,
+  "questionsPerTier": 132,
+  "questionsPerModuleBank": 15,
+  "examQuestions": 42,
+  "lessonLength": {
+   "band": "420 to 560 words, ranked by est_minutes within a tier",
+   "measure": "PROSE WORDS ONLY, counted the way lengths.py counts them: front matter, markdown table rows, headings and {{panel:...}} lines are all excluded. A raw wc -w over the whole file is NOT this measure and runs materially higher, so a lesson can be inside the band and still fail a raw word count. State which measure before quoting a number at a writer."
+  },
+  "capstones": {
+   "count": 3,
+   "gradedFieldsEach": 6,
+   "beginner": "AMENAM, a crude cooler on a flow station: the duty the specified hot outlet sets, the cold outlet it implies, the counter-current log mean, the surface, the outside surface of one tube, and the overshoot the pass-count rounding leaves.",
+   "intermediate": "UBIT, a shell-and-tube train: the correction factor at one shell pass, the equivalent single-shell P at two shells in series, the clean and dirty coefficients built from five stated resistances, what the fouling costs, and how far the controlling resistance leads the next one.",
+   "advanced": "OKWORI, an air cooler bay: the design log mean, the effectiveness taken from its definition, the capacity ratio, the surface the bay holds on the hot day, the NTU at that fixed UA, and where the process actually leaves on the afternoon it is judged on.",
+   "heldItemCheck": "EVERY HELD AND FITTED ITEM IS NEUTRALISED BY CONSTRUCTION AND THE GENERATOR ASSERTS IT. The five fitted numbers live in tubeSideFilm and nowhere else, and this capstone never calls it: both films on UBIT are STATED as conditions the way FC1 stated a vendor K, and the generator proves by reading its own source that the film was never called. The held BUNDLE_K table sets only the bundle and shell diameters, and no graded field is a diameter. The held cross-flow F sets only the design area of a bay, and no graded field is that area. The held fan constant sets only the fan and motor power, and OKWORI states its own static pressure and both efficiencies so not one of the three held air-cooler defaults is even read. The held wall conductivity default is replaced by a stated one. The held cooling exponent is refused by the engine and no capstone tube side is a cooled one. The hot-day block reads NO CONSTANT AT ALL: it is pure algebra on the design point, which is why the spine of the wave sits there.",
+   "tolerances": "Derived, never typed, and in ONE PLACE. src/components/course/panels/heattransfer/gradedTolerance.js holds the quantity class and the stated tolerance of each field and derives the rest; fc6_capstone.mjs and the teaching lab both import it, and fields.json and precision.json are written out of the same derivation, so the shipped grader, the lab and the generator cannot drift. The rule is max(stated, half a unit in the last place the course prints that class), MAX AND NEVER MIN. Six of the eighteen were widened by it and not one of the eighteen VALUES moved. gradeprecision.py reports 18 OF 18 CLASSIFIED, which is what it refuses below. --bare-stated-tolerances is the negative control, it exits 1 naming all six, and it WRITES NOTHING, because a control that overwrote the answer key with the tolerances it is proving unanswerable would be the defect rather than the control.",
+   "integerFieldsAreNotGraded": "MEASURED, NOT REASONED. The first cut graded the AMENAM tube count. A count prints to zero decimals, so its floor is half a unit, and the kit's digest leak gate guards at ten tolerances: digestleak reported SEVENTEEN leaks, every one of them that one field against an unrelated number in the 63 to 73 band, which this digest is full of. The count is taught instead, and the rounding that produces it is graded through the area margin, which cannot be right unless the count is."
+  },
+  "panels": {
+   "lab": "src/components/course/panels/heattransfer/heattransferLab.js",
+   "ids": [
+    "fc-exchanger-explorer (Associate throughout): the balance across its three statings, the two log-mean pairings against the arithmetic mean, the surface, and the tube count closing as a loop with its trail",
+    "fc-coefficient-explorer (Professional throughout): the five resistances with their shares and the margin that decided the verdict, the thin-wall limit against the flat plate, and the film across the three regimes with the transition band drawn as the refusal it is",
+    "fc-rating-explorer (Expert throughout): effectiveness against NTU in three arrangements with the two ceilings drawn and the counter-current curve drawn with none, the collapse at a capacity ratio of zero, and the hot day with the four columns that do not move beside the two that do"
+   ]
+  },
+  "route": "/dashboard/apps/heattransfer",
+  "suiteApp": "/dashboard/apps/facilities/heat-exchanger-sizer",
+  "migrations": [
+   "course and capstones",
+   "beginner deep seed",
+   "intermediate deep seed",
+   "advanced deep seed",
+   "go-live, HELD behind the one Facilities module upload"
+  ]
+ },
+ "gates": {
+  "closure.py": "walks the import closure in the engines repository and proves the vendored copy sha-identical PATH BY PATH, by git blob hash and by md5. It refuses if a seed is absent, if an edge resolves to nothing, or if it resolved nothing at all. FC4's closure was ten paths where four were expected; this one is five and the walk says why.",
+  "fc6_capstone.mjs": "writes fields.json and precision.json from the ONE tolerance derivation, asserts every held-item neutralisation rather than stating it, proves by reading its own source that it never called the film, and refuses any field graded tighter than its class prints. --bare-stated-tolerances is the negative control and writes nothing.",
+  "discriminate.mjs": "60 plausible WRONG ROUTES over the eighteen graded fields, three or more a field, each one either a defect FC6-0 repaired or the mistake the arithmetic invites. It reports the closest miss IN TOLERANCES. It found two things that are not wrong routes at all but IDENTITIES: the fouling penalty in percent IS the fouling share of the resistance stack, and scaling the duty by the ratio of the two log means AT THE RATED OUTLET is what a fixed UA means. Both are now taught and asserted instead of planted.",
+  "gate_golden_collision.py": "no capstone case is a published golden case, in either direction, at set level rather than by a single shared integer, and no capstone condition set collides with FC1's separationLab. Four controls, all firing.",
+  "gate_claims.mjs": "every relational claim in digest.txt re-computed from the engine, including the two classes the kit's heading sweep cannot see because they sit on ordinary prose lines: a COUNTED claim over a block with a different count, and a DIRECTION claim over a table whose columns move the other way. Every claim has a negative control.",
+  "gate_typed_literals.py": "no number is typed into the digest. Sweeps every string literal in fc6_dump.mjs with substitutions stripped at source level by brace depth, and fails on a dead allowlist row.",
+  "gate_capstone_leak.py": "no capstone condition and no graded value reaches the digest or the generator, at three renderings each, and it fails on a dead shared row.",
+  "gate_copy_rule.py": "the owner copy rule over the digest, every brief and every manifest title.",
+  "gate_movement.mjs": "all eighteen graded fields re-measured against the PRE-VENDORING engine at 709172f, with a named and verified cause for each that moved and a declared stable set that must be exactly what held.",
+  "gate_wavejson.mjs": "every claim this file makes that can be checked against a file, checked against that file. It refuses below ten claims.",
+  "sweep_literals.py": "the FULL-literal sweep with no significant-figure floor, over banks or lessons, taken from FC4's REPAIRED copy: the original iterated the field NAMES as strings and therefore swept options only.",
+  "the digest generator's own guard": "auditRefusals() in fc6_dump.mjs. Two halves: no line may carry the refusal prefix unless the refusal guard printed it, and EVERY engine call site in the generator must be labelled, by a wrapper or by an explicit read of its own error key. 45 refusal-labelled calls, 317 answer-labelled calls, 120 call sites all labelled, 7 exempt by name because they have no error contract. Four negative controls, all firing.",
+  "jest": "packages/engines __tests__/facilities.heattransfer.test.js, 70 of 70 green, up from 19. The whole vendored set is 114 suites and 3895 tests with 24 failures, all of them allow-listed in VENDOR.json from before this wave.",
+  "digestprose.mjs (the kit gate, with this wave's rules file)": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules /root/fc-wip-heattransfer. 765 lines, 21 section titles and 9 in-body markers against their own blocks, 32 history framings, 48 ENGINE FRAGMENTS PINNED so an upstream engine edit turns it red. 0 failing, 13 warned for a human read and re-read on every rebuild, 3 deferred as verbatim engine strings."
+ },
+ "digest": {
+  "lines": 765,
+  "sections": 21,
+  "withheld": null,
+  "note": "Nothing is withheld. SECTION 21 is the one section whose subject is what this engine was repaired for, and it says so in its title and in its first line. Nothing above it is history. SEVEN REFUSAL ROWS QUOTE AN ENGINE MESSAGE THAT ITSELF CARRIES HISTORY, and each one is preceded by a printed frame saying so, on the line immediately before, because framing four rows above frames nothing."
+ },
+ "history": {
+  "position": "FRAMED HISTORY IS CURRICULUM, UNFRAMED HISTORY IS A DEFECT. Digest SECTION 21 is the one section whose subject is what this engine was repaired for; it says so in its title and its first line, and nothing above it is history. Expert m05 l01 owns it.",
+  "engineComments": "Repair-history comment lines in the engine source are PROVENANCE. Digest Section 21 COUNTS them by reading the vendored source and states the rule it counted with, rather than quoting a figure from a report. A sentence lifted out of a comment arrives with no frame, and a writer cannot frame what they did not know was history.",
+  "engineMessages": "AND THE ENGINE'S OWN REFUSAL MESSAGES CARRY HISTORY TOO, which no earlier wave in this module had to handle: four of them say what the engine used to return. They are quoted verbatim, because truncating an engine message changes what the engine says, and each is FRAMED on the line immediately before it by the generator itself rather than by a writer remembering to.",
+  "framingRule": "Framing comes from the HEADING above a passage or the line immediately before it. An inline prefix inside a sentence is not framing and the gate does not read it as one."
+ }
+}

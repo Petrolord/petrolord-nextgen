@@ -253,5 +253,26 @@
       "digest.txt": "090d101c45aa4e8aaa93b1b301342d4834efc5210c87387395b1f778278fe8a9",
       "fields.json": "7bfa8d45e9edcee50eac517130cfa75b2cbb2d66de40bb12a4a37b5d55894c53"
     }
+  },
+  "heattransfer": {
+    "course": "FC6",
+    "live": "/root/fc-wip-heattransfer",
+    "kit": "inputs",
+    "kitNote": "The whole kit lives in the wave directory and the FOUNDATION phase mirrors the files the suites read plus every generator that spells a section heading or a graded field name: the digest, the graded answers, the precision declaration, wave.json, the dump, the teaching fields, the capstone generator, the capstone conditions and the structure. The lessons, banks, seeds, oracle mirror and verifier land with the phases that write them, and the kit becomes \"full\" then.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "fc6_dump.mjs",
+      "fc6_fields.mjs",
+      "fc6_capstone.mjs",
+      "fc6_fields_capstone.mjs",
+      "structure.py"
+    ],
+    "pins": {
+      "digest.txt": "b7ffa9ad56ae380f0a357b54484b622f8fa3ea7905d6f628b66efc7fe4032eb4",
+      "fields.json": "ba4c8e63d1dd591e11e7b213bca81a6e306fe3cef006b836b3264c771dca1dcd"
+    }
   }
 }
