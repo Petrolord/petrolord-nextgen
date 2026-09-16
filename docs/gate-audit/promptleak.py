@@ -229,7 +229,9 @@ def parse_fields_expr(expr):
             except ValueError:
                 continue
             fields.append({'key': unquote(d['key']) or d['key'],
-                           'expected': expected, 'tol': tol})
+                           'expected': expected, 'tol': tol,
+                           'label': unquote(d.get('label', '')) or '',
+                           'unit': unquote(d.get('unit', '')) or ''})
     return fields
 
 
@@ -308,7 +310,10 @@ def records_from_sql(path):
                     f'{path}: {slug}/{tier} has no parseable graded fields. '
                     f'Refusing rather than guessing.')
             records.append({'app_slug': slug, 'tier': tier,
-                            'prompt': prompt, 'fields': fields})
+                            'prompt': prompt,
+                            'title': unquote(row.get('title', '')) or '',
+                            'dataset': unquote(row.get('dataset', '')) or '',
+                            'fields': fields})
     if found_insert and not records:
         raise Refused(
             f'{path} contains an academy_capstones INSERT that this gate could '
@@ -323,6 +328,7 @@ def records_from_sql(path):
 DB_QUERY = """
 select coalesce(jsonb_agg(jsonb_build_object(
   'app_slug', app_slug, 'tier', tier, 'prompt', prompt,
+  'title', title, 'dataset', dataset,
   'fields', fields) order by app_slug, tier), '[]'::jsonb) as dump
 from public.academy_capstones where active;
 """
@@ -348,12 +354,14 @@ def records_from_db(workdir):
     out = []
     for r in rows:
         fields = [{'key': f.get('key'), 'expected': f.get('expected'),
-                   'tol': f.get('tol')} for f in (r.get('fields') or [])]
+                   'tol': f.get('tol'), 'label': f.get('label') or '',
+                   'unit': f.get('unit') or ''} for f in (r.get('fields') or [])]
         fields = [f for f in fields
                   if isinstance(f['expected'], (int, float))
                   and isinstance(f['tol'], (int, float))]
         out.append({'app_slug': r['app_slug'], 'tier': r['tier'],
-                    'prompt': r['prompt'] or '', 'fields': fields})
+                    'prompt': r['prompt'] or '', 'title': r.get('title') or '',
+                    'dataset': r.get('dataset') or '', 'fields': fields})
     return out
 
 
@@ -397,6 +405,28 @@ def literal_quantum(raw):
     return q * 10.0 ** int(exp) if exp else q
 
 
+SURFACE_KINDS = ('prompt', 'title', 'dataset', 'label', 'unit')
+
+
+def surfaces_of(rec):
+    """Every learner-reachable text academy_get_capstone serves for one row.
+
+    The RPC returns app_slug, tier, cert_tier, dataset, title, prompt and, per
+    graded field, key + label + unit. It does NOT return expected or tol. The
+    learning pages render the title, the prompt and, for each field,
+    "{label} ({unit})" above its input box; dataset and key reach the browser in
+    the payload without being drawn. All of it is learner-reachable, so all of
+    it is swept. Sweeping only the prompt is how a label came to carry two
+    graded answers for months.
+    """
+    yield ('prompt', None, rec.get('prompt') or '')
+    yield ('title', None, rec.get('title') or '')
+    yield ('dataset', None, rec.get('dataset') or '')
+    for f in rec['fields']:
+        yield ('label', f.get('key'), f.get('label') or '')
+        yield ('unit', f.get('key'), f.get('unit') or '')
+
+
 def sweep(records, course=None):
     """Return (findings, stats). Raises Refused on an empty sweep."""
     by_course = {}
@@ -412,30 +442,44 @@ def sweep(records, course=None):
     numbers_examined = 0
     fields_total = 0
     courses_examined = 0
+    surfaces_examined = {k: 0 for k in SURFACE_KINDS}
+    texts_examined = {k: 0 for k in SURFACE_KINDS}
 
     for slug, rows in sorted(by_course.items()):
-        graded = [(r['tier'], f['key'], f['expected'], f['tol'])
+        graded = [(r['tier'], f['key'], f['expected'], f['tol'] or 0.0)
                   for r in rows for f in r['fields']]
         if not graded:
             raise Refused(f'course "{slug}" has no graded fields to sweep against')
         fields_total += len(graded)
         courses_examined += 1
         for r in rows:
-            if not r['prompt'].strip():
+            if not (r.get('prompt') or '').strip():
                 raise Refused(f'{slug}/{r["tier"]} has an empty prompt')
             prompts_examined += 1
-            for raw, v in numbers_in(r['prompt']):
-                numbers_examined += 1
-                if v == 0:
-                    continue
-                for gtier, key, expected, tol in graded:
-                    if tol <= 0 or expected == 0:
-                        continue
-                    for scale, slabel in SCALES:
-                        shifted = abs(v) / scale
-                        n = abs(shifted - abs(expected)) / tol
-                        if n > REPORT_TOL:
-                            continue
+            for kind, owner, text in surfaces_of(r):
+                surfaces_examined[kind] += 1
+                if text.strip():
+                    texts_examined[kind] += 1
+                for raw, v in numbers_in(text):
+                    numbers_examined += 1
+                    for gtier, key, expected, tol in graded:
+                        # A FIELD GRADED TO ZERO TOLERANCE, OR GRADED AT ZERO,
+                        # USED TO BE SKIPPED ENTIRELY. Both were unswept on every
+                        # surface, and both are the EASIEST kind to leak: the
+                        # answer has to be typed exactly, and a surface that
+                        # prints it prints it exactly. 40 of the 793 live fields
+                        # are tol 0. They are swept by exact equality instead.
+                        exact = tol <= 0 or expected == 0
+                        for scale, slabel in SCALES:
+                            shifted = abs(v) / scale
+                            if exact:
+                                if shifted != abs(expected):
+                                    continue
+                                n = 0.0
+                            else:
+                                n = abs(shifted - abs(expected)) / tol
+                                if n > REPORT_TOL:
+                                    continue
                         # A UNIT RESTATEMENT IS EXACT; AN APPROXIMATION IS NOISE.
                         # At scale 1 the grader itself would accept the literal,
                         # so its own tolerance is the whole test. Under a
@@ -444,28 +488,31 @@ def sweep(records, course=None):
                         # at x1000 because 0.18 is within 0.005 of it. A genuine
                         # restatement in another unit ROUNDS the value, so it
                         # must agree relatively as well.
-                        if scale != 1.0:
-                            rel = abs(shifted - abs(expected)) / max(abs(expected), 1e-30)
-                            if rel > 1e-4:
-                                continue
-                            # AND IT MUST BE WRITTEN PRECISELY ENOUGH TO BE ONE.
-                            # A third false-positive class, found by re-running
-                            # this gate over the 2026-09-16 recut. DCA's Expert
-                            # prompt says "b = 1.2", an Arps exponent, and
-                            # 1.2/1000 is EXACTLY the 0.0012 per day decline the
-                            # Associate tier is graded on, so the relative test
-                            # above cannot reject it. But "1.2" is written to one
-                            # decimal: it carries +/- 0.05 of its own, which is
-                            # +/- 5e-05 once shifted, and the field's tolerance is
-                            # 2e-05. A number cannot be a restatement of a value
-                            # it is not written precisely enough to resolve. The
-                            # same quantity written "1.2000", or "0.0012", still
-                            # matches and is still reported.
-                            if literal_quantum(raw) / scale > tol:
-                                continue
-                        if True:
+                            if scale != 1.0:
+                                rel = (abs(shifted - abs(expected))
+                                       / max(abs(expected), 1e-30))
+                                if rel > 1e-4:
+                                    continue
+                                # AND IT MUST BE WRITTEN PRECISELY ENOUGH TO BE ONE.
+                                # A third false-positive class, found by
+                                # re-running this gate over the 2026-09-16 recut.
+                                # DCA's Expert prompt says "b = 1.2", an Arps
+                                # exponent, and 1.2/1000 is EXACTLY the 0.0012 per
+                                # day decline the Associate tier is graded on, so
+                                # the relative test above cannot reject it. But
+                                # "1.2" is written to one decimal: it carries
+                                # +/- 0.05 of its own, which is +/- 5e-05 once
+                                # shifted, against a tolerance of 2e-05. A number
+                                # cannot restate a value it is not written
+                                # precisely enough to resolve. The same quantity
+                                # written "1.2000", or "0.0012", still matches.
+                                if not exact and literal_quantum(raw) / scale > tol:
+                                    continue
+                            self_field = owner is not None and owner == key
                             findings.append({
                                 'course': slug,
+                                'surface': kind,
+                                'owner': owner,
                                 'prompt_tier': r['tier'],
                                 'field_tier': gtier,
                                 'key': key,
@@ -478,18 +525,33 @@ def sweep(records, course=None):
                                 'cross_tier': gtier != r['tier'],
                                 'downward': TIER_RANK[r['tier']] < TIER_RANK[gtier],
                                 'accepted': n <= ACCEPT_TOL,
-                                'small_int': float(expected).is_integer()
-                                             and abs(expected) < SMALL_INT_LIMIT,
+                                'self_field': self_field,
+                                'exact_zero_tol': exact,
+                                # A LABEL'S OWN NUMBER MATCHING ITS OWN FIELD IS
+                                # NEVER A COINCIDENCE. The small-integer band
+                                # exists because two small integers agreeing in
+                                # prose has a high prior; a field's own label
+                                # printing that field's own answer has none. It
+                                # is the answer, written above the box it is
+                                # typed into.
+                                'small_int': (float(expected).is_integer()
+                                              and abs(expected) < SMALL_INT_LIMIT
+                                              and not self_field),
                             })
                             break
 
     if prompts_examined == 0:
         raise Refused('the sweep examined ZERO prompts. That is not a pass.')
     if numbers_examined == 0:
-        raise Refused('the sweep found no numbers in any prompt. That is not a pass.')
+        raise Refused('the sweep found no numbers on any surface. That is not a pass.')
+    if texts_examined['label'] == 0:
+        raise Refused('the sweep examined ZERO labels. academy_get_capstone serves a '
+                      'label for every graded field and the learner reads it above '
+                      'the box, so a sweep that saw none read the wrong thing.')
 
     stats = {'courses': courses_examined, 'prompts': prompts_examined,
-             'numbers': numbers_examined, 'fields': fields_total}
+             'numbers': numbers_examined, 'fields': fields_total,
+             'surfaces': dict(surfaces_examined), 'texts': dict(texts_examined)}
     return findings, stats
 
 
@@ -515,7 +577,8 @@ def dedupe(findings):
     """
     best = {}
     for f in findings:
-        k = (f['course'], f['prompt_tier'], f['field_tier'], f['key'])
+        k = (f['course'], f['surface'], f['owner'], f['prompt_tier'],
+             f['field_tier'], f['key'])
         score = (not f['accepted'], f['scale'] != '', f['tolerances'])
         if k not in best or score < best[k][0]:
             best[k] = (score, f)
@@ -525,50 +588,75 @@ def dedupe(findings):
 def report(findings, stats, quiet=False):
     findings = dedupe(findings)
     out = []
+    sc = stats.get('surfaces', {})
     out.append(f"\nswept {stats['prompts']} prompt(s) across {stats['courses']} "
                f"course(s): {stats['numbers']} numbers against {stats['fields']} "
                f"graded fields, {len(SCALES)} unit shiftings")
-    hard = [f for f in findings if f['accepted'] and f['cross_tier'] and not f['small_int']]
-    soft = [f for f in findings if f['accepted'] and not f['cross_tier'] and not f['small_int']]
-    near = [f for f in findings if not f['accepted'] and not f['small_int']]
+    out.append(f"  learner-visible surfaces swept: {sc.get('prompt', 0)} prompts, "
+               f"{sc.get('title', 0)} titles, {sc.get('dataset', 0)} datasets, "
+               f"{sc.get('label', 0)} labels, {sc.get('unit', 0)} units")
+    own = [f for f in findings if f['accepted'] and f['self_field'] and not f['small_int']]
+    hard = [f for f in findings if f['accepted'] and f['cross_tier']
+            and not f['small_int'] and not f['self_field']]
+    soft = [f for f in findings if f['accepted'] and not f['cross_tier']
+            and not f['small_int'] and not f['self_field']]
+    for f in rank(own):
+        out.append(f"  OWN-FIELD LEAK   {f['course']}: the {f['prompt_tier']} "
+                   f"{f['surface']} of {f['key']} states {f['literal']}, which IS "
+                   f"that field's graded answer {f['expected']} (tol {f['tol']})")
+    near = [f for f in findings if not f['accepted'] and not f['small_int']
+            and not f['self_field']]
     notes = [f for f in findings if f['small_int']]
     for f in rank(hard):
         via = '' if not f['scale'] else f" ({f['scale']})"
-        out.append(f"  CROSS-TIER LEAK  {f['course']}: the {f['prompt_tier']} prompt "
-                   f"states {f['literal']}{via}, which the grader ACCEPTS for "
+        out.append(f"  CROSS-TIER LEAK  {f['course']}: the {f['prompt_tier']} "
+                   f"{f['surface']}"
+                   + (f" of {f['owner']}" if f['owner'] else '')
+                   + f" states {f['literal']}{via}, which the grader ACCEPTS for "
                    f"{f['field_tier']}.{f['key']} = {f['expected']} (tol {f['tol']})"
                    + ('  [DOWNWARD]' if f['downward'] else ''))
     for f in rank(soft):
         via = '' if not f['scale'] else f" ({f['scale']})"
-        out.append(f"  SELF LEAK        {f['course']}: the {f['prompt_tier']} prompt "
-                   f"states {f['literal']}{via}, which the grader ACCEPTS for its own "
-                   f"tier's {f['key']} = {f['expected']} (tol {f['tol']})")
+        out.append(f"  SELF LEAK        {f['course']}: the {f['prompt_tier']} "
+                   f"{f['surface']}"
+                   + (f" of {f['owner']}" if f['owner'] else '')
+                   + f" states {f['literal']}{via}, which the grader ACCEPTS for its "
+                   f"own tier's {f['key']} = {f['expected']} (tol {f['tol']})")
     if not quiet:
         for f in rank(near)[:20]:
+            where = f"{f['surface']}" + (f"[{f['owner']}]" if f['owner'] else '')
             out.append(f"  near ({f['tolerances']:.1f} tol) {f['course']} "
-                       f"{f['prompt_tier']} prompt {f['literal']} ~ "
+                       f"{f['prompt_tier']} {where} {f['literal']} ~ "
                        f"{f['field_tier']}.{f['key']} = {f['expected']}")
         for f in rank(notes)[:20]:
-            out.append(f"  note (small integer) {f['course']} {f['prompt_tier']} prompt "
+            where = f"{f['surface']}" + (f"[{f['owner']}]" if f['owner'] else '')
+            out.append(f"  note (small integer) {f['course']} {f['prompt_tier']} {where} "
                        f"{f['literal']} ~ {f['field_tier']}.{f['key']} = {f['expected']}")
-    out.append(f"\ncross-tier leaks: {len(hard)}   self leaks: {len(soft)}   "
-               f"near misses: {len(near)}   small-integer notes: {len(notes)}")
-    return '\n'.join(out), (len(hard) + len(soft))
+    out.append(f"\nown-field leaks: {len(own)}   cross-tier leaks: {len(hard)}   "
+               f"self leaks: {len(soft)}   near misses: {len(near)}   "
+               f"small-integer notes: {len(notes)}")
+    return '\n'.join(out), (len(own) + len(hard) + len(soft))
 
 
 # --------------------------------------------------------- negative control
 
 SELFTEST_CLEAN = [
-    {'app_slug': 'zz', 'tier': 'beginner', 'fields': [
-        {'key': 'b_rate', 'expected': 1234.5678, 'tol': 0.001}],
+    {'app_slug': 'zz', 'tier': 'beginner', 'title': 'Read the ZZ ledger',
+     'dataset': 'zz/ledger', 'fields': [
+        {'key': 'b_rate', 'expected': 1234.5678, 'tol': 0.001,
+         'label': 'Stage rate', 'unit': 'bbl/d'}],
      'prompt': 'Read the ledger for the ZZ field at a duty of 310 bbl/d and a '
                'gravity of 0.86, then give the stage rate.'},
-    {'app_slug': 'zz', 'tier': 'intermediate', 'fields': [
-        {'key': 'i_head', 'expected': 98765.4321, 'tol': 0.01}],
+    {'app_slug': 'zz', 'tier': 'intermediate', 'title': 'Head on the ZZ pump',
+     'dataset': 'zz/pump', 'fields': [
+        {'key': 'i_head', 'expected': 98765.4321, 'tol': 0.01,
+         'label': 'Pump head', 'unit': 'ft'}],
      'prompt': 'For the same ZZ field, give the head the pump develops at the '
                'rate you found, with a stage count of 42.'},
-    {'app_slug': 'zz', 'tier': 'advanced', 'fields': [
-        {'key': 'a_npv', 'expected': 55555.5, 'tol': 0.5}],
+    {'app_slug': 'zz', 'tier': 'advanced', 'title': 'Value ZZ',
+     'dataset': 'zz/economics', 'fields': [
+        {'key': 'a_npv', 'expected': 55555.5, 'tol': 0.5,
+         'label': 'Net present value', 'unit': 'USD'}],
      'prompt': 'Value the ZZ development at a discount rate of 9 percent and '
                'state the net present value.'},
 ]
@@ -652,6 +740,43 @@ def selftest():
     check('the same shifting written to full precision is still caught',
           any(f['accepted'] and f['key'] == 'a_decline' for f in findings))
 
+    # 4d. LABELS ARE SWEPT. A field's own label printing its own answer is the
+    # worst shape there is: it sits directly above the box it is typed into.
+    lab = [dict(r) for r in SELFTEST_CLEAN]
+    lab[0] = dict(lab[0], fields=[dict(SELFTEST_CLEAN[0]['fields'][0],
+                                       label='Stage rate, 1234.5678 bbl/d')])
+    findings, _ = sweep(lab)
+    check('a label that prints its own field answer goes RED',
+          any(f['surface'] == 'label' and f['accepted'] and f['self_field']
+              and f['key'] == 'b_rate' for f in findings))
+
+    # 4e. and the small-integer excuse must NOT apply to it.
+    si = [dict(r) for r in SELFTEST_CLEAN]
+    si[1] = dict(si[1], fields=[{'key': 'i_stages', 'expected': 42, 'tol': 0.5,
+                                 'label': 'Stage count (42 stages)', 'unit': 'count'}])
+    findings, _ = sweep(si)
+    check('a small-integer label matching its OWN field is not excused',
+          any(f['surface'] == 'label' and f['accepted'] and not f['small_int']
+              and f['key'] == 'i_stages' for f in findings))
+
+    # 4f. a zero-tolerance field was skipped entirely by the old sweep.
+    zt = [dict(r) for r in SELFTEST_CLEAN]
+    zt[2] = dict(zt[2], fields=[{'key': 'a_nodes', 'expected': 174, 'tol': 0,
+                                 'label': 'Block 1 node count', 'unit': 'count'}],
+                 prompt='Count the live nodes, which the panel draws as 174 cells.')
+    findings, _ = sweep(zt)
+    check('a zero-tolerance field leaked on a surface is caught',
+          any(f['key'] == 'a_nodes' and f['accepted'] and f['exact_zero_tol']
+              for f in findings))
+
+    # 4g. the title and the dataset are served to the browser too.
+    td = [dict(r) for r in SELFTEST_CLEAN]
+    td[0] = dict(td[0], dataset='zz/ledger, the 98765.4321 ft head case')
+    findings, _ = sweep(td)
+    check('a dataset string carrying another tier answer is caught',
+          any(f['surface'] == 'dataset' and f['accepted'] and f['cross_tier']
+              and f['key'] == 'i_head' for f in findings))
+
     # 5. REFUSALS. These are the whole point of the rewrite.
     def refuses(name, fn):
         try:
@@ -675,6 +800,10 @@ def selftest():
                             'fields': [{'key': 'k', 'expected': 1.0, 'tol': 0.1}]}]))
     refuses('an unknown course name is REFUSED',
             lambda: sweep([dict(r) for r in SELFTEST_CLEAN], course='nope'))
+    refuses('a sweep that sees no labels at all is REFUSED',
+            lambda: sweep([{'app_slug': 'zz', 'tier': 'beginner',
+                            'prompt': 'Give the rate at 310 bbl/d.',
+                            'fields': [{'key': 'k', 'expected': 1.0, 'tol': 0.1}]}]))
 
     # 6. the comment/apostrophe defect, end to end
     with tempfile.TemporaryDirectory() as d:
