@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "What does a theoretical stage claim about the hardware it stands for?",
+  "options": [
+   "That the gas and the liquid were in contact for a stated time on it.",
+   "That one tray does the work of one stage at the service's efficiency.",
+   "Nothing at all, since only the equilibrium leaving it is specified.",
+   "That the tray spacing is whatever the allowed velocity implies."
+  ],
+  "answer": 2,
+  "explanation": "Equilibrium leaving the stage is the only thing asserted. Everything mechanical about the vessel is left to whoever turns a count into steel."
+ },
+ {
+  "prompt": "Hand the Kremser relation an absorption factor and a stage count. What comes back?",
+  "options": [
+   "The fraction of the solute the column removes.",
+   "The circulation the column needs, in gpm.",
+   "The diameter the column needs, in ft.",
+   "The lbmol a day the solvent picks up."
+  ],
+  "answer": 0,
+  "explanation": "The relation is closed in all three of its variables, so the same expression rates a column that exists and sizes one that does not. A circulation and a diameter are separate calls."
+ },
+ {
+  "prompt": "In A = L / (V K), what is K?",
+  "options": [
+   "The Souders-Brown K value of the vessel, in ft per s.",
+   "The ratio of the rich loading to the lean loading on the solvent.",
+   "The fraction of the solute the column is asked to remove.",
+   "The equilibrium ratio of the solute between the two phases at the column's conditions."
+  ],
+  "answer": 3,
+  "explanation": "L is the solvent molar rate down the column and V is the gas molar rate up it. The factor is dimensionless and K is where the equilibrium sits."
+ },
+ {
+  "prompt": "Why does this module take the absorption factor as a typed input?",
+  "options": [
+   "The factor changes between the top and the bottom of a real column.",
+   "None of L, V or K is an argument of any export in it.",
+   "The factor is a chart reading.",
+   "The factor is returned by the sweetening call for the same stream."
+  ],
+  "answer": 1,
+  "explanation": "Equilibrium data comes from outside this engine. What it answers is what a stated factor buys, and where that factor came from belongs to whoever typed it."
+ },
+ {
+  "prompt": "A column runs at an absorption factor of 1.600000 with 6.000000 stages, and the relation returns 0.976783371. What is that a fraction of?",
+  "options": [
+   "The gas arriving at the column, in MMscfd.",
+   "The solvent circulating round the loop.",
+   "The solute arriving in the gas.",
+   "The acid gas the spec allows to stay."
+  ],
+  "answer": 2,
+  "explanation": "A fraction carries no unit and no rate. Two columns removing the same fraction of very different gas rates return the very same figure."
+ },
+ {
+  "prompt": "At an absorption factor of 1.000000 a spec of 0.900000 comes back as 9.000000000 stages. Which form produced it?",
+  "options": [
+   "N = f / (1 - f), the branch the inverse takes at unity.",
+   "N = log( (A - f) / (1 - f) ) / log(A) - 1, evaluated at A = 1.000000.",
+   "N = A / (A - f).",
+   "N = (1 - f) / f, the reciprocal of the branch."
+  ],
+  "answer": 0,
+  "explanation": "The general form is indeterminate at unity in both directions, so the inverse has to match the forward branch rather than the general form, and the golden carries a case there for that reason."
+ },
+ {
+  "prompt": "One stage at an absorption factor of 0.6 removes how much?",
+  "options": [
+   "0.444444444.",
+   "0.375000000.",
+   "0.500000000.",
+   "0.600000000."
+  ],
+  "answer": 1,
+  "explanation": "0.444444444 is one stage at 0.8 and 0.500000000 is one stage at 1. The factor itself, 0.600000000, is the ceiling that column approaches over 200 stages rather than what one stage reaches."
+ },
+ {
+  "prompt": "A spec of 0.990000 is asked of a column at an absorption factor of 2.000000. What stage count comes back?",
+  "options": [
+   "7.746472598.",
+   "3.140202390.",
+   "5.025685103.",
+   "5.658211483."
+  ],
+  "answer": 3,
+  "explanation": "7.746472598 is the same spec at 1.600000, and the other two are a removal of 0.900000 at 1.600000 and at 1.200000. A better supplied column needs fewer stages for one spec."
+ },
+ {
+  "prompt": "Two hundred stages at an absorption factor of 0.800000 reach what removal?",
+  "options": [
+   "0.768995039.",
+   "0.788365257.",
+   "0.800000000.",
+   "0.888888889."
+  ],
+  "answer": 2,
+  "explanation": "0.768995039 is eight stages and 0.788365257 is twelve on that column. The ceiling is the factor, and 200 stages land on it to the last place printed."
+ },
+ {
+  "prompt": "A column at an absorption factor of 1.200000000000 carries 12 stages. What would 200 stages take the removal to?",
+  "options": [
+   "1.000000000, because above unity there is no ceiling short of total removal.",
+   "1.200000000, which is the factor and therefore the ceiling on that row.",
+   "0.995024876, which is where 200 stages land on every row near unity.",
+   "0.979379999, since the removal stops moving once the stages pass twelve."
+  ],
+  "answer": 0,
+  "explanation": "The removal at 12 stages on that row is 0.979379999. The 0.995024876 belongs to the rows at and either side of unity, and a factor above one is not a ceiling at all."
+ },
+ {
+  "prompt": "What does the refusal on an unreachable removal hand back besides its message?",
+  "options": [
+   "The absorption factor, the stage count tried and the ceiling.",
+   "The absorption factor, the fraction removed and the ceiling.",
+   "The ceiling, the spec and the circulation that would reach it.",
+   "The message alone, since a refusal carries no fields."
+  ],
+  "answer": 1,
+  "explanation": "Three fields beside the message, and between them they let a caller say what to change rather than only that something failed."
+ },
+ {
+  "prompt": "At an absorption factor of 0.950000000000, how far do 200 stages fall short of the ceiling?",
+  "options": [
+   "0.000000000000.",
+   "-0.004975123378.",
+   "-0.000001665057.",
+   "-0.000001665057 at 12 stages and nothing at 200."
+  ],
+  "answer": 2,
+  "explanation": "The factors well below unity print exactly 0.000000000000 there, because the factor raised to the stage count falls below anything double precision holds. Only close to unity is the shortfall measurable at all."
+ },
+ {
+  "prompt": "The Kremser golden runs an absorption factor of 1.400000 over 6 stages. What do the engine and the cascade both return?",
+  "options": [
+   "0.933333333333.",
+   "0.833333333333.",
+   "0.768995038974.",
+   "0.958077213054."
+  ],
+  "answer": 3,
+  "explanation": "Those three are the other published cases: a factor of 2.000000 over 3 stages, one of 1.000000 over 5, and one of 0.800000 over 8. All five ratios of engine over golden come back at 1.000000000000."
+ },
+ {
+  "prompt": "A vendor turns a theoretical count into real trays. What decides how much taller the real column comes out?",
+  "options": [
+   "The tray efficiency of the service.",
+   "The absorption factor the count was worked at.",
+   "The removal the contract asked for.",
+   "The allowed velocity the vessel was sized on."
+  ],
+  "answer": 0,
+  "explanation": "It is a property of the service rather than of the arithmetic, and this package does not carry it. The count is still the right number for comparing two designs and for asking whether a spec is reachable."
+ },
+ {
+  "prompt": "What is 10666.2009 on the UBIE stream?",
+  "options": [
+   "The acid gas going into the solution, in lb a day.",
+   "The acid gas going into the solution, in lbmol a day.",
+   "The amine going round the loop, in lbmol a day.",
+   "The solution going round the loop, in gallons a day."
+  ],
+  "answer": 1,
+  "explanation": "It is the mole percent removed applied to 88.000000 MMscfd through the standard cubic feet in a pound mole. The amine a day follows from it only after the swing has been divided out."
+ },
+ {
+  "prompt": "Which figure divides the acid gas rate on the way to a circulation?",
+  "options": [
+   "The rich loading.",
+   "The lean loading.",
+   "The loading swing.",
+   "The solution gravity."
+  ],
+  "answer": 2,
+  "explanation": "Each mole of amine carries the swing round the loop, so the swing is what sets how many moles of amine there have to be. Either loading on its own sets nothing."
+ },
+ {
+  "prompt": "Which of the three loading figures does the engine return on a sweetening answer?",
+  "options": [
+   "The lean loading it used.",
+   "The swing it circulated on.",
+   "All three, on named keys.",
+   "The rich loading it used."
+  ],
+  "answer": 3,
+  "explanation": "Nothing on the answer object is called a swing. What comes back is the loading the engine applied, and forming the difference between the two ends is the reader's own step."
+ },
+ {
+  "prompt": "Two spec refusals look alike. What separates a spec already met at the inlet from a spec set above it?",
+  "options": [
+   "The first says the gas is on spec and the second says a figure larger than the inlet was typed beside it.",
+   "The first is a warning and the second is a refusal.",
+   "The first names both gases and the second names only the one at fault.",
+   "The first is raised on the loadings and the second on the mole percentages."
+  ],
+  "answer": 0,
+  "explanation": "Both messages quote both sides so the comparison can be made at a glance. The third refusal in that family is about the solvent loop rather than the gas, and it is the one that names the swing."
+ },
+ {
+  "prompt": "Down the lean loading table the MMBtu an hour per gpm column holds at 0.048000000. Why?",
+  "options": [
+   "The regenerator duty is independent of the circulation in this model.",
+   "The duty per gallon is a stated input the engine never changes.",
+   "The lean loading enters the duty and the circulation in the same place.",
+   "The swing cancels out of the ratio of the two engine figures."
+  ],
+  "answer": 1,
+  "explanation": "800.000000 Btu on every gallon circulated means the regenerator duty is the circulation in other units, so a leaner lean costs nothing here. On a real still it is bought with reboiler duty, stripping steam and a taller column."
+ },
+ {
+  "prompt": "Which step of the gallons chain is chemistry rather than practice or process?",
+  "options": [
+   "The strength of the solution as it circulates.",
+   "The customary rich limit of the amine.",
+   "The molecular weight of the amine.",
+   "The duty per gallon circulated."
+  ],
+  "answer": 2,
+  "explanation": "It is a property of the molecule and there is nothing customary about it. The strength, the limits and the duties are operating practice with no publication behind them in this repository."
+ },
+ {
+  "prompt": "The plant is turned down. Which pair moves together?",
+  "options": [
+   "The mole percent removed and the lbmol a day.",
+   "The mole percent removed and the gpm.",
+   "The swing and the lbmol a day.",
+   "The lbmol a day and the gpm."
+  ],
+  "answer": 3,
+  "explanation": "A mole percent and a swing are intensive and know nothing about how much gas there is. Everything extensive below them moves with the rate, the duty included."
+ },
+ {
+  "prompt": "Which column of the property set makes an MEA gallon dearer to regenerate than an MDEA one?",
+  "options": [
+   "The duty, 1100.000000 against 800.000000 Btu a gallon.",
+   "The typical strength, 18.000000 against 45.000000 weight percent.",
+   "The rich limit, 0.350000 against 0.500000.",
+   "The molecular weight, 61.080000 against 119.160000."
+  ],
+  "answer": 0,
+  "explanation": "The other three decide how many gallons there are rather than what a gallon costs to strip. Both effects run the same way here, which is why the duty gap between the two amines is wider than the circulation gap."
+ },
+ {
+  "prompt": "One duty put through all three amines gives 994.638143 gpm on one of them. Which?",
+  "options": [
+   "DEA.",
+   "MEA.",
+   "MDEA.",
+   "All three, since the gallons follow the duty."
+  ],
+  "answer": 1,
+  "explanation": "DEA moves 934.163599 gpm and MDEA 502.519990 gpm on the same duty. The gallons follow the rich limit and the strength, which differ on every row."
+ },
+ {
+  "prompt": "A loading of 0.500001000 is asked of MDEA. What comes back?",
+  "options": [
+   "An answer with no note on it.",
+   "A refusal naming the customary limit.",
+   "An answer carrying a corrosion warning.",
+   "An answer with the rich loading reset to 0.500000."
+  ],
+  "answer": 2,
+  "explanation": "The limit itself is clean and a millionth past it is flagged. The message names the limit, names the amine it belongs to, and says what kind of trouble is being risked."
+ },
+ {
+  "prompt": "DEA over MDEA is 1.858958085 on one measure and 2.207512726 on another. Which is which?",
+  "options": [
+   "1.858958085 is the duty ratio and 2.207512726 is the circulation ratio.",
+   "1.858958085 is the strength ratio.",
+   "1.858958085 is the gravity ratio.",
+   "1.858958085 is the circulation ratio and 2.207512726 is the duty ratio."
+  ],
+  "answer": 3,
+  "explanation": "Circulation is set by the rich limit and the strength; duty adds the duty per gallon, which is where the extra gap comes from. The same ordering is reached by two routes and the gaps are different sizes on each."
+ },
+ {
+  "prompt": "The module is asked for an amine it does not carry. What happens?",
+  "options": [
+   "The lookup returns null and the package declines by name.",
+   "The lookup returns the nearest row and the package answers on it.",
+   "The lookup returns null and the default row answers.",
+   "The lookup refuses and returns an empty set."
+  ],
+  "answer": 0,
+  "explanation": "A lookup that falls back to a default produces a complete and plausible answer for a solvent nobody asked about. This one gives the correction and the catalogue in one line."
+ },
+ {
+  "prompt": "Which two properties move together across the three amine rows?",
+  "options": [
+   "The strength and the molecular weight.",
+   "The rich limit and the solution gravity.",
+   "The strength and the rich limit.",
+   "The duty per gallon and the molecular weight."
+  ],
+  "answer": 2,
+  "explanation": "Each row is a whole operating case rather than one property swapped out. Moving one input at a time is what the panel beside the lesson is for."
+ },
+ {
+  "prompt": "All three ways of ranking the amines agree. What is the useful question left?",
+  "options": [
+   "Which of the three rankings is the correct one to quote.",
+   "How far apart the three are, which the two ratio columns answer differently.",
+   "Whether the rankings would reverse at another duty.",
+   "Which ranking the engine applies when it orders the property table."
+  ],
+  "answer": 1,
+  "explanation": "A ranking stable across two measures is a real ranking. The size of the advantage is not stable, and quoting one ratio when the decision turns on the other is a mistake a single ordering hides completely."
+ },
+ {
+  "prompt": "At 950.000000 psia and 104.000000 degF on a gravity of 0.660000, what does the engine form?",
+  "options": [
+   "A compressibility of 0.919606033 and a gas density of 2.045042 lb per ft3.",
+   "A compressibility of 0.818461451 and a gas density of 5.672520 lb per ft3.",
+   "A compressibility of 0.861800291 and a gas density of 3.831017 lb per ft3.",
+   "A compressibility of 0.876617747 and a gas density of 3.424553 lb per ft3."
+  ],
+  "answer": 3,
+  "explanation": "The first two of the others are rows at 600.000000 and 1400.000000 psia on different gravities, and the last is the UBIE column at 985.000000 psia and 112.000000 degF."
+ },
+ {
+  "prompt": "A K of 0.300000 on that same column gives what?",
+  "options": [
+   "An allowed velocity of 1.098713 ft per s and a diameter of 3.497385 ft.",
+   "An allowed velocity of 1.318455 ft per s and a diameter of 3.192661 ft.",
+   "An allowed velocity of 1.538198 ft per s and a diameter of 2.955830 ft.",
+   "An allowed velocity of 1.035597 ft per s and a diameter of 4.208602 ft."
+  ],
+  "answer": 1,
+  "explanation": "The first two others are the K of 0.250000 and 0.350000 rows on the same stream. The last belongs to UBIE, which is a different stream sized at a different K."
+ },
+ {
+  "prompt": "What density does a DEA column rise against?",
+  "options": [
+   "63.635283 lb per ft3.",
+   "63.011408 lb per ft3.",
+   "64.883034 lb per ft3.",
+   "69.568831 lb per ft3."
+  ],
+  "answer": 0,
+  "explanation": "Every row of the amine table carries a solution gravity and the module turns it into a density. A column sized on the default instead is measured against a fluid it will never contain."
+ },
+ {
+  "prompt": "What do the three published contactor cases that pass a compressibility in actually check?",
+  "options": [
+   "The correlation, and never the sizing arithmetic.",
+   "Both, since the compressibility is checked against the one supplied.",
+   "The sizing arithmetic, and never the correlation.",
+   "Neither, since a supplied compressibility makes the case a restatement."
+  ],
+  "answer": 2,
+  "explanation": "A supplied compressibility takes the correlation out of the test entirely, so those cases speak only to the arithmetic that follows it. Two further cases exist for the other half."
+ },
+ {
+  "prompt": "A sizing answer comes back reporting zSource as supplied by the caller. What does that tell a reader?",
+  "options": [
+   "The compressibility was formed by DAK at those conditions.",
+   "The compressibility fell outside the correlation's validity band.",
+   "The compressibility was read from the amine property table.",
+   "The compressibility is somebody's assertion rather than a correlation's answer."
+  ],
+  "answer": 3,
+  "explanation": "A reader of the answer is never guessing which branch produced the number in front of them, and the two branches are genuinely different claims."
+ },
+ {
+  "prompt": "Two columns on one duty come out 3.828818705 ft and 3.900134220 ft. What is the 1.018625984 between them?",
+  "options": [
+   "The factor between a column sized at two different K values.",
+   "The factor between a column sized against glycol and one sized against MDEA solution.",
+   "The factor between the engine and the golden on the amine case.",
+   "The factor between a column at 950.000000 psia and one at 985.000000 psia."
+  ],
+  "answer": 1,
+  "explanation": "A glycol density and an amine solution density are different numbers, and a column sized against the wrong one is confidently the wrong width."
+ },
+ {
+  "prompt": "This module gives a stage count and a diameter for one column. What ties them together?",
+  "options": [
+   "The allowed velocity, which both readings share.",
+   "The liquid density, which the stage relation also reads.",
+   "Nothing here, because the module carries no tray hydraulics.",
+   "The absorption factor, which sets the liquid load the vessel sees."
+  ],
+  "answer": 2,
+  "explanation": "Tray hydraulics really do tie the two on a plant. The module does not pretend to a link it cannot compute, so a column can be six theoretical stages tall and any width the gas rate demands."
+ },
+ {
+  "prompt": "Three answers about one sour column. What is true of them?",
+  "options": [
+   "Not one of them can be derived from the other two.",
+   "Each is a check on the other two at the seam.",
+   "Two are engine answers and the third is a chart reading.",
+   "Each is computed from the same six inputs in a different order."
+  ],
+  "answer": 0,
+  "explanation": "The mole balance says how much solution has to move, the stage relation says whether the spec is reachable, and the vessel says how wide the steel has to be. They arrive on one screen about one vessel and they are independent."
+ },
+ {
+  "prompt": "Which reading answers how much solution has to move?",
+  "options": [
+   "The stage relation.",
+   "The vessel sizing.",
+   "The regenerator duty.",
+   "The mole balance."
+  ],
+  "answer": 3,
+  "explanation": "The regenerator duty is that same answer priced per gallon rather than a reading of its own. A stage count cannot size a pump and a diameter cannot either."
+ },
+ {
+  "prompt": "How many chosen numbers sit behind the three Professional readings of one column?",
+  "options": [
+   "Three, one for each of the readings.",
+   "Six, and the engine computes everything in between.",
+   "Nine, three for each of the readings.",
+   "None, since every figure in the tier is computed."
+  ],
+  "answer": 1,
+  "explanation": "The swing, the strength and the duty per gallon sit behind the first. The absorption factor sits behind the second. The K value and the liquid density sit behind the third."
+ },
+ {
+  "prompt": "A graded question asks for a figure the engine declines to produce. What is the answer?",
+  "options": [
+   "The nearest figure the engine would have returned.",
+   "A zero, since the engine produced nothing.",
+   "That it declines, with the reason it gives.",
+   "The figure worked by hand from the same inputs."
+  ],
+  "answer": 2,
+  "explanation": "Writing a plausible figure into that gap turns a correct reading into a wrong answer, and the gap was the point of the question. A refusal names what to change and by how much."
+ },
+ {
+  "prompt": "In what units are a circulation and a regenerator duty written in this tier?",
+  "options": [
+   "A circulation is in gpm and a regenerator duty is in MMBtu an hour.",
+   "A circulation is in gpm and a regenerator duty is in Btu a gallon.",
+   "A circulation is in gallons a day and a duty is in MMBtu an hour.",
+   "A circulation is in lbmol a day and a duty is in MMBtu an hour."
+  ],
+  "answer": 0,
+  "explanation": "Btu a gallon is the duty per gallon that prices the loop rather than the regenerator size, gallons a day is the same circulation before the minutes in a day, and lbmol a day is the acid gas the solution picks up."
+ },
+ {
+  "prompt": "Why can a diameter quoted on its own not be reproduced?",
+  "options": [
+   "It is conditional on a compressibility the engine may or may not have formed.",
+   "It is conditional on the liquid the caller named, which the answer does not report.",
+   "It is conditional on the stage count, which the sizing call is never given.",
+   "It is conditional on a K value somebody chose, and that choice is not in the figure."
+  ],
+  "answer": 3,
+  "explanation": "The answer does report both the liquid and where the compressibility came from. Every choice in this module is an input on the page with its customary value named, and a figure lifted away from those choices is a number without a question."
+ },
+ {
+  "prompt": "Which quantity does this engine compute that the Flow Assurance engine takes as a typed input?",
+  "options": [
+   "The hydrate boundary.",
+   "The Joule-Thomson coefficient.",
+   "The compressibility of the gas.",
+   "The Souders-Brown allowed velocity."
+  ],
+  "answer": 1,
+  "explanation": "A caller of that engine has to bring the figure from somewhere, and this module is where it is formed from a correlation. Working the chain it feeds is the tier above this one."
+ }
+]
