@@ -47,6 +47,36 @@
       "fields.json": "bf1fec1a554961059d49b9ca5ddafaf86559abd6bcd6754b9afb86c66e6d8c3b"
     }
   },
+  "gasprocessing": {
+    "course": "FC4",
+    "live": "/root/fc-wip-gasprocessing",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "fc4_dump.mjs",
+      "fc4_fields.mjs",
+      "fc4_fields_capstone.mjs",
+      "fc4_capstone.mjs",
+      "make_fields.mjs",
+      "structure.py",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "apply_fc4_gasprocessing.sh",
+      "dryrun_fc4.sh",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt"
+    ],
+    "pins": {
+      "digest.txt": "0dfb4b75a8b5bb83e7add310e9274a55563f1ed63118068b947ebc49fd401ac2",
+      "fields.json": "12bb30b71ebdc8e5ce32f0d0b9c1c527642b4c3915f5a4a4aa5cb209fe220143"
+    }
+  },
   "fiscal": {
     "course": "EC2",
     "live": "/root/ec-wip-fiscal",
