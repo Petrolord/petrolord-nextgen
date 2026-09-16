@@ -46,6 +46,13 @@ describe('seismolord expert: wedge tuning', () => {
     // 1.4449345271; against the exact 0.08 it is 1.4449344948.
     expect(A.f25.tuneAmp / A.f25.isoAmp).toBeCloseTo(1.4449345270902185, 10);
     expect(A.f25.tuneAmp / WEDGE.rcTop).toBeCloseTo(1.444934494793415, 10);
+    // This ratio IS the Expert capstone's tune25_iso_ratio field, tolerance
+    // 0.001. It replaced iso25_amp, which was the reflection coefficient the
+    // prompt states and so was answerable by copying an input. Both routes
+    // above land inside the tolerance, and the ratio is scale invariant, so
+    // no statement of the coefficients can give it away.
+    expect(Math.abs(A.f25.tuneAmp / A.f25.isoAmp - 1.4449345270902185)).toBeLessThan(0.001);
+    expect(Math.abs(A.f25.tuneAmp / WEDGE.rcTop - 1.4449345270902185)).toBeLessThan(0.001);
   });
 
   it('is a function of frequency times thickness only', () => {
