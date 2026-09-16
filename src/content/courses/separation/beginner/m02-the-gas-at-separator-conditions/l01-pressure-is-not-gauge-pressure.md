@@ -16,7 +16,7 @@ The absolute column is the gauge column plus 14.7. The engine states that on the
 
 ## Why the gas law will not take a gauge pressure
 
-Density is proportional to absolute pressure. A gas at 0.000000 psig is not a gas with no density, it is a gas at 14.700000 psia. Feed a gauge pressure into the gas law and the density falls to zero at atmospheric conditions.
+Density is proportional to absolute pressure. A gas at 0.000000 psig is not a gas with no density, it is a gas at 14.7 psia. Feed a gauge pressure into the gas law and the density falls to zero at atmospheric conditions.
 
 At separator pressures the error is quieter. Using 600.000000 in place of 614.700000 moves Ppr, z, the density, the settling velocity and the diameter, all by amounts too small to look wrong on a report.
 
@@ -34,7 +34,7 @@ Read the two messages side by side and the naming does the teaching: pPsia must 
 
 ## The mistake
 
-Taking the pressure off a drawing without reading its label. A diagram that says 600 is almost always saying psig, and a correlation that wants psia will accept it without complaint. The check is cheap: an absolute pressure here should end in .700000, and one that does not has skipped a step.
+Taking the pressure off a drawing without reading its label. A diagram carrying a bare pressure is almost always saying psig, and a correlation that wants psia will accept it without complaint. The check is cheap: at these conditions the absolute figure is 614.700000 psia against a gauge 600.000000 psig, and a number that has not been moved by the atmosphere has skipped a step.
 
 ## Exercise
 

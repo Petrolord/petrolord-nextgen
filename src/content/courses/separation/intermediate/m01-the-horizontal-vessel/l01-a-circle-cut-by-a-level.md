@@ -21,7 +21,7 @@ Every row is the same drum. The total area holds at 50.265482 ft2 because the sh
 
 The liquid depth is the level fraction times the diameter, so 0.300000 of 8.000000 ft stands 2.400000 ft deep and 0.750000 stands 6.000000 ft deep. The areas refuse to follow that straight line. At a level of 0.300000 the liquid holds 12.682775 ft2 out of 50.265482 ft2, well under three tenths of the circle, because the bottom of a circle is narrow. At 0.750000 the liquid holds 40.438525 ft2, well over three quarters, because by then the widest part of the circle is already covered.
 
-That is why a horizontal vessel is sized on areas. A step of 0.100000 in the level fraction is worth more liquid area near the centreline, where the circle is wide, than near the bottom of the drum, where it is narrow.
+That is why a horizontal vessel is sized on areas. A step of one tenth in the level fraction is worth more liquid area near the centreline, where the circle is wide, than near the bottom of the drum, where it is narrow.
 
 ## The inverse is exact
 

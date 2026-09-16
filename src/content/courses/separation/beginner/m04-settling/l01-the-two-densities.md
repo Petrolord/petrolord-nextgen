@@ -34,7 +34,7 @@ Density sets which phase ends up on top and how fast a drop crosses. It says not
 
 ## The mistake
 
-Using a water density of 62.4 because the specific gravity looked close to 1. On ABANA that would be 2.496000 lb/ft3 of error, which moves the mixture, the settling velocity, the required area and the diameter. Produced water is brine, its gravity is stated on the analysis, and it is above 1 on all three streams here.
+Using a water density of 62.4 because the specific gravity looked close to 1. On ABANA that puts 62.4 in the place of 64.896000 lb/ft3, which moves the mixture, the settling velocity, the required area and the diameter. Produced water is brine, its gravity is stated on the analysis, and it is above 1 on all three streams here.
 
 ## Exercise
 
