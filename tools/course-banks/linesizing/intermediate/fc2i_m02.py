@@ -110,5 +110,5 @@ q(3, "One published case runs 16.000000 in over 80.000000 miles from 700.000000 
   "It is the case whose engine value and golden agree most closely across all four forms, which is why the set is anchored on it and the shorter cases read against it."],
  "Bores in the set run from 6.065000 in to 16.000000 in and lengths from 10.000000 to 80.000000 miles, so a reader can separate a bore error from a length error.")
 
-emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m02.json')
+emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m02.json', expect_n=15)
 finish()

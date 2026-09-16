@@ -113,5 +113,5 @@ q(3, "Of the eight conditions the SOKU trunk is stated at, which ones does a tra
   "The two pressures and the average flowing temperature of 535.000000 degR, all three of which appear inside the driving group of 338100.0000 psia squared."],
  "Eight conditions, and the first two never appear in a gas form on their own. They appear squared, as 338100.0000 psia squared.")
 
-emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m01.json')
+emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m01.json', expect_n=15)
 finish()

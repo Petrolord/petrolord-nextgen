@@ -8,7 +8,7 @@
    "11.938000 in over 32.000000 miles at an average flowing temperature of 535.000000 degR and an average compressibility of 0.885000, the eight conditions being the reading and the rates following from them."
   ],
   "answer": 1,
-  "explanation": "Four forms, one line, and a spread wide enough that the form is a bigger decision than the bore. A rate alone does not say which of the four produced it."
+  "explanation": "Four forms and one line, with a spread of 1.336801 across them and a step of bore that moves the answer further still. A rate alone does not say which of the four produced it."
  },
  {
   "prompt": "The Professional reading carries one figure the engine could not evaluate and had to search a bracket for. Which is it?",
@@ -48,7 +48,7 @@
   "options": [
    "The form, since the four rates on any one line are distinct and a rate can therefore be matched back against whichever of the four produced it.",
    "None of them, because the form, the efficiency, the elevation and the base are all stated rather than discovered and the answer carries no record of any of them.",
-   "The efficiency, because it multiplies the rate linearly and can be divided back out once the rate at an efficiency of 1.000000 is known.",
+   "The efficiency, because it scales the rate directly and can be divided back out once that same form's rate at an efficiency of 1.000000 is known.",
    "The base, since a rate in scfd is by definition counted at 520.000000 degR and 14.650000 psia, and no figure reported in those units could have been counted at any other base."
   ],
   "answer": 1,
@@ -156,7 +156,7 @@
  {
   "prompt": "Which figures on the Professional reading would move if the trunk were re-run at a different transmission efficiency?",
   "options": [
-   "All four rates and the delivered pressure at a contracted rate, because the efficiency multiplies every form linearly and the inverse solves against the form it was given.",
+   "All four rates and the delivered pressure at a contracted rate, because every one of the four forms carries the efficiency and the inverse solves against the form it was given.",
    "The four rates alone, since the inverse is solved on the driving group and the efficiency enters after the pressure has been found.",
    "The four rates and the driving group of 338100.0000 psia squared, since the efficiency enters the group before any of the four forms is evaluated.",
    "None of them, because an efficiency of 1.000000 is the reference the ratio column of 1.000000, 1.314034, 1.336801 and 1.117335 is built on, and a reading is quoted against that column."

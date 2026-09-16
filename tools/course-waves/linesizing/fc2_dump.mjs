@@ -68,6 +68,11 @@ const soft = (r) => (r && r.error ? `{ error: "${r.error}" }` : 'no error');
  *  answers: the whole return, so the SHAPE is on the page and not only the
  *  number. */
 const shape = (r) => JSON.stringify(r);
+/** A DIFFERENCE that may be nothing but floating point noise. Printed in
+ *  exponential form, because a fixed-decimal rendering turns a last-bit
+ *  artefact into "0.000000" or, worse, into "-0.000000", and a digest sentence
+ *  that then calls the two figures equal has drifted from its own evidence. */
+const ex3 = (x) => (Number.isFinite(x) ? Number(x).toExponential(3) : String(x));
 
 /* ------------------------------------------------------------------ *
  * The chain the Pipeline & Line Sizing Studio runs on a liquid line:
@@ -387,7 +392,22 @@ w('| --- | --- | --- | --- | --- |');
 SOKU_EFFICIENCY_SWEEP.forEach((efficiency) => {
   w(`| ${e6(efficiency)} | ${gasForms.map(([, fn]) => r4(fn({ ...SOKU, efficiency }).qScfd)).join(' | ')} |`);
 });
-w('# HELD FOR LITERATURE, taught as a limit and never graded: the efficiency factor. It multiplies every form linearly and no publication in this package stands behind any particular value of it. Every graded gas value in this course states its own efficiency.');
+w();
+w("What that multiplier actually does to each form, derived on every row as the form's own rate at that efficiency over its own rate at an efficiency of 1.000000, and then that same ratio less the efficiency the row was computed at:");
+w('| efficiency | weymouth | panhandleA | panhandleB | general | weymouth less e | panhandleA less e | panhandleB less e | general less e |');
+w('| --- | --- | --- | --- | --- | --- | --- | --- | --- |');
+const effDeviation = {};
+SOKU_EFFICIENCY_SWEEP.forEach((efficiency) => {
+  const ratios = gasForms.map(([k, fn]) => fn({ ...SOKU, efficiency }).qScfd / SOKU_Q[k].qScfd);
+  effDeviation[efficiency] = ratios.map((v) => v - efficiency);
+  w(`| ${e6(efficiency)} | ${ratios.map((v) => num(v, 12)).join(' | ')} | ${effDeviation[efficiency].map(ex3).join(' | ')} |`);
+});
+const EFF_LOW = SOKU_EFFICIENCY_SWEEP[0];
+const effLinearWorst = Math.max(...SOKU_EFFICIENCY_SWEEP.flatMap((eff) => effDeviation[eff].slice(0, 3).map((v) => Math.abs(v))));
+const effGeneralWorst = Math.max(...SOKU_EFFICIENCY_SWEEP.map((eff) => Math.abs(effDeviation[eff][3])));
+w(`The four right-hand columns are each form's ratio less the efficiency on that row, in exponential form so that a last-bit artefact cannot be read as a deviation. Across every row the largest of them on Weymouth, Panhandle A and Panhandle B is ${ex3(effLinearWorst)}, which is one step of a double beside one and is what a plain multiplier looks like. The largest on General Flow is ${ex3(effGeneralWorst)}, at an efficiency of ${e6(EFF_LOW)}, and the second over the first is ${ex3(effGeneralWorst / effLinearWorst)} (derived from the two figures on this row). General Flow solves a friction factor against the rate it settles on, so a lower efficiency lowers the rate, the rate moves the Reynolds number, and the friction factor moves with it.`);
+w();
+w(`# HELD FOR LITERATURE, taught as a limit and never graded: the efficiency factor. Three of the four forms carry it as a plain multiplier and General Flow carries it by the amounts the table above derives, and no publication in this package stands behind any particular value of it. Every graded gas value in this course states its own efficiency.`);
 w();
 w('The published gas cases, engine against golden:');
 G.gas.forEach((c) => {
@@ -407,7 +427,8 @@ w('| --- | --- | --- | --- |');
   const ea = H.elevationAdjustment({ sg: SOKU.sg, elevChangeFt: dz, tAvgR: SOKU.tAvgR, zAvg: SOKU.zAvg });
   w(`| ${e6(dz)} | ${num(ea.s, 10)} | ${num(ea.es, 10)} | ${num(ea.leFactor, 10)} |`);
 });
-w('A hill does two things and they are not the same thing. It scales the outlet pressure inside the driving group through e to the s, and it changes the length the friction acts over through the equivalent length factor. At zero elevation both collapse to one and the flat form comes back exactly.');
+const flatAgainQ = H.weymouthQ({ ...SOKU, elevChangeFt: 0 }).qScfd;
+w(`A hill does two things and they are not the same thing. It scales the outlet pressure inside the driving group through e to the s, and it changes the length the friction acts over through the equivalent length factor. At zero elevation both collapse to ${num(1, 10)} on the row above, and the Weymouth rate with the hill set to zero is ${r4(flatAgainQ)} scfd against the Section 8 rate of ${r4(SOKU_Q.weymouth.qScfd)} scfd, a difference of ${r4(flatAgainQ - SOKU_Q.weymouth.qScfd)} scfd (derived from the two engine values on this row), so the flat form is what the adjusted form becomes.`);
 const elevCoeff = H.elevationAdjustment({ sg: 1, elevChangeFt: 1000, tAvgR: 1, zAvg: 1 });
 w(`The coefficient inside s, measured by asking the engine for s at a gravity of one, a thousand feet of rise, an absolute temperature of one and a compressibility of one, then dividing by the thousand feet: ${num(elevCoeff.s / 1000, 12)} (derived from the engine's ${num(elevCoeff.s, 6)}).`);
 w();
@@ -463,7 +484,8 @@ w(`THE CONTROL. Run the SAME descent with an outlet genuinely BELOW the inlet, $
 w();
 const upInv = H.gasOutletPressure({ equation: 'weymouth', qScfd: SOKU_STEEP_UP_SCFD, ...SOKU, elevChangeFt: SOKU_STEEP_UP_FT });
 const upEa = H.elevationAdjustment({ sg: SOKU.sg, elevChangeFt: SOKU_STEEP_UP_FT, tAvgR: SOKU.tAvgR, zAvg: SOKU.zAvg });
-w(`The climb is the same bracket read from the other side, and it is the commoner case. Up ${e6(SOKU_STEEP_UP_FT)} ft, asked for ${r4(SOKU_STEEP_UP_SCFD)} scfd, the trunk delivers at ${e6(upInv.p2Psia)} psia for a drop of ${e6(upInv.dpPsi)} psi, and the ceiling on the table above, ${e6(SOKU.p1Psia / Math.sqrt(upEa.es))} psia, is as close to the inlet as any rate can bring it.`);
+const upCeilingPsia = SOKU.p1Psia / Math.sqrt(upEa.es);
+w(`The climb is the same bracket read from the other side, and it is the commoner case. Up ${e6(SOKU_STEEP_UP_FT)} ft, asked for ${r4(SOKU_STEEP_UP_SCFD)} scfd, the trunk delivers at ${e6(upInv.p2Psia)} psia for a drop of ${e6(upInv.dpPsi)} psi, and the ceiling on the table above, ${e6(upCeilingPsia)} psia, stands ${e6(upCeilingPsia - upInv.p2Psia)} psi above that delivery (derived from the two figures on this row) and is as close to the inlet as any rate can bring it.`);
 w(`And a climb the inlet cannot pay for at all is refused rather than answered. The same hill under a near-atmospheric inlet of ${e6(SOKU_STARVED_P1_PSIA)} psia: ${soft(H.gasOutletPressure({ equation: 'weymouth', qScfd: SOKU_STEEP_UP_SCFD, ...SOKU, p1Psia: SOKU_STARVED_P1_PSIA, elevChangeFt: SOKU_STEEP_UP_FT }))}`);
 w();
 
@@ -487,7 +509,7 @@ const oneShot = liquidAt(OGBIA, { lengthFt: OGBIA_PROFILE_FLAT.reduce((a, s) => 
 w(`Marched against one shot: the traverse spends ${e6(trFlat.dpTotalPsi)} psi over ${e6(OGBIA_PROFILE_FLAT.reduce((a, s) => a + s.lengthFt, 0))} ft and a single call over the same length spends ${e6(oneShot.dpTotalPsi)} psi, a difference of ${e6(trFlat.dpTotalPsi - oneShot.dpTotalPsi)} psi (derived from the two engine values on this row). A liquid is incompressible, so marching it buys the station list and nothing else.`);
 w();
 const trWithK = liquidAt(OGBIA, { sumK: OGBIA_K.sumK, lengthFt: OGBIA_PROFILE_FLAT.reduce((a, s) => a + s.lengthFt, 0) });
-w(`What a traverse drops: the one-shot call carrying the isometric's ${e6(OGBIA_K.sumK)} velocity heads spends ${e6(trWithK.dpTotalPsi)} psi, and the traverse of the same line spends ${e6(trFlat.dpTotalPsi)} psi. The gap of ${e6(trWithK.dpTotalPsi - trFlat.dpTotalPsi)} psi is exactly the fittings, because liquidLineTraverse has no resistance-sum argument at all.`);
+w(`What a traverse drops: the one-shot call carrying the isometric's ${e6(OGBIA_K.sumK)} velocity heads spends ${e6(trWithK.dpTotalPsi)} psi, and the traverse of the same line spends ${e6(trFlat.dpTotalPsi)} psi. The gap of ${e6(trWithK.dpTotalPsi - trFlat.dpTotalPsi)} psi is the one-shot call's own fittings term, which the engine returns separately as ${e6(trWithK.dpFittingsPsi)} psi, the two differing by ${ex3((trWithK.dpTotalPsi - trFlat.dpTotalPsi) - trWithK.dpFittingsPsi)} psi (derived from the three engine values on this row), because liquidLineTraverse has no resistance-sum argument at all.`);
 w();
 const DL = OGBIA_DEAD_LINE;
 const trVac = H.liquidLineTraverse({
@@ -500,14 +522,19 @@ const trVacDrop = H.liquidLineDrop({
 w(`Where a line dies, and what the engine says about it: ${e6(DL.qBpd)} bpd of ${e6(DL.rhoLbFt3)} lb/ft3 at ${e6(DL.muCp)} cp through ${e6(DL.idIn)} in over ${e6(DL.lengthFt)} ft, entering at ${e6(DL.p1Psia)} psia.`);
 w(`The traverse refuses: ${soft(trVac)}`);
 w(`It refuses with the evidence attached rather than instead of it. The stations it managed to stand behind: ${trVac.stations.length}, the last of them at ${e6(trVac.stations[trVac.stations.length - 1].distanceFt)} ft and ${e6(trVac.stations[trVac.stations.length - 1].pPsia)} psia. The distance it died at: ${e6(trVac.diedAtFt)} ft. The pressure the arithmetic actually produced there: ${e6(trVac.diedAtPsia)} psia, which is not a pressure.`);
-w(`The single call underneath still answers, because a DROP is not a PRESSURE and nothing about it is unphysical: the same line spends ${e6(trVacDrop.dpTotalPsi)} psi. A rate that costs more than the inlet holds is a rate the line cannot pass, and the traverse is the call that knows the inlet.`);
+w(`The single call underneath still answers, because a DROP is not a PRESSURE and nothing about it is unphysical: the same line spends ${e6(trVacDrop.dpTotalPsi)} psi, and the inlet less that drop is ${e6(DL.p1Psia - trVacDrop.dpTotalPsi)} psia (derived from the two figures on this row), which is the figure the traverse reported at the far end. A rate that costs more than the inlet holds is a rate the line cannot pass, and the traverse is the call that knows the inlet.`);
 w();
 
 // --------------------------------------------------------------- SECTION 12
 w('# SECTION 12: The Professional reading, a trunk end to end (owned by Professional m06)');
 w();
 w(`SOKU end to end: ${e6(SOKU.idIn)} in over ${e6(SOKU.lengthMi)} miles from ${e6(SOKU.p1Psia)} to ${e6(SOKU.p2Psia)} psia gives a driving group of ${r4(SOKU.p1Psia * SOKU.p1Psia - SOKU.p2Psia * SOKU.p2Psia)} psia squared (derived); Weymouth reads ${r4(SOKU_Q.weymouth.qScfd)} scfd, Panhandle A ${r4(SOKU_Q.panhandleA.qScfd)}, Panhandle B ${r4(SOKU_Q.panhandleB.qScfd)} and General Flow ${r4(SOKU_Q.general.qScfd)} at a friction factor of ${num(SOKU_Q.general.fDarcy, 10)}; put the trunk up ${e6(SOKU_UP_FT)} ft and the Weymouth rate falls to ${r4(H.weymouthQ({ ...SOKU, elevChangeFt: SOKU_UP_FT }).qScfd)}, down the same and it rises to ${r4(H.weymouthQ({ ...SOKU, elevChangeFt: SOKU_DOWN_FT }).qScfd)}; and asked for ${r4(SOKU_TARGET_SCFD)} scfd the line delivers at ${e6(tgt.p2Psia)} psia.`);
-w('Four forms, one line, and a spread wide enough that the form is a bigger decision than the bore.');
+const formSpread = Math.max(...gasForms.map(([k]) => SOKU_Q[k].qScfd)) / Math.min(...gasForms.map(([k]) => SOKU_Q[k].qScfd));
+const boreLoIn = SOKU_BORE_SWEEP[SOKU_BORE_SWEEP.length - 2];
+const boreHiIn = SOKU_BORE_SWEEP[SOKU_BORE_SWEEP.length - 1];
+const qBoreLo = H.weymouthQ({ ...SOKU, idIn: boreLoIn }).qScfd;
+const qBoreHi = H.weymouthQ({ ...SOKU, idIn: boreHiIn }).qScfd;
+w(`Four forms and one line. The spread across the four forms is ${e6(formSpread)}. One step of bore on the same trunk through Weymouth, from ${e6(boreLoIn)} in to ${e6(boreHiIn)} in, runs ${r4(qBoreLo)} scfd to ${r4(qBoreHi)} scfd, a spread of ${e6(qBoreHi / qBoreLo)} (derived from the two engine rates on this row). The bore spread over the form spread is ${e6((qBoreHi / qBoreLo) / formSpread)} (derived from the two figures on this row), so on this trunk one step of bore moves the answer further than the choice of form does, and a designer has to defend both.`);
 w();
 
 // --------------------------------------------------------------- SECTION 13
@@ -548,7 +575,7 @@ const withCa = H.requiredWallIn({ ...SOKU_WALL, code: 'B31.8', locationClass: 3 
 w(`The corrosion allowance is not strength either. At Class 3 the pressure part of the wall is ${e6(withCa.tPressureIn)} in and the required wall is ${e6(withCa.tRequiredIn)} in, the difference being the ${e6(SOKU_WALL.corrosionAllowanceIn)} in allowance added on top. It holds no pressure on the day it is installed and it is what lets the pipe still hold pressure years later.`);
 const maopWith = H.maopPsig({ ...SOKU_WALL, code: 'B31.8', locationClass: 3, wallIn: SOKU_WALL_AS_BUILT_IN });
 const maopWithout = H.maopPsig({ odIn: SOKU_WALL.odIn, smysPsi: SOKU_WALL.smysPsi, code: 'B31.8', locationClass: 3, jointFactor: SOKU_WALL.jointFactor, tempDerate: SOKU_WALL.tempDerate, wallIn: SOKU_WALL_AS_BUILT_IN });
-w(`Read the rating back off the wall the mill actually rolled, ${e6(SOKU_WALL_AS_BUILT_IN)} in: with the allowance respected the line rates ${e6(maopWith.maopPsig)} psig, and with the allowance left out of the call it rates ${e6(maopWithout.maopPsig)} psig, which is ${e6(maopWithout.maopPsig / maopWith.maopPsig)} times higher (derived from the two engine values on this row). Both calls are legal and neither warns.`);
+w(`Read the rating back off the wall the mill actually rolled, ${e6(SOKU_WALL_AS_BUILT_IN)} in: with the allowance respected the line rates ${e6(maopWith.maopPsig)} psig, and with the allowance left out of the call it rates ${e6(maopWithout.maopPsig)} psig, which is ${e6(maopWithout.maopPsig / maopWith.maopPsig)} times the rating the allowance produces (derived from the two engine values on this row). Both calls are legal and neither warns.`);
 w();
 w('The published wall cases, engine against golden:');
 G.barlow.forEach((c) => {
@@ -572,7 +599,7 @@ OGBIA_HOLDUP_SWEEP.forEach((holdupFrac) => {
   const iv = H.piggingInterval({ maxSlugBbl: OGBIA_CATCHER_BBL, dropoutBpd: OGBIA_DROPOUT_BPD, sweptBbl: s.sweptBbl });
   w(`| ${e6(holdupFrac)} | ${r4(s.sweptBbl)} | ${e6(s.sweptBbl / H.lineVolumeBbl(OGBIA_PIG))} | ${iv.error ? iv.error : r4(iv.intervalDays)} |`);
 });
-w(`At a holdup of zero the sweep is ${r4(H.sweptLiquidBbl({ ...OGBIA_PIG, holdupFrac: 0 }).sweptBbl)} bbl and at a holdup of one it is the whole line. The interval collapses as the holdup rises, and past a point the catcher cannot take the sweep at all and the engine refuses rather than returning a negative interval.`);
+w(`At a holdup of zero the sweep is ${r4(H.sweptLiquidBbl({ ...OGBIA_PIG, holdupFrac: 0 }).sweptBbl)} bbl, and at a holdup of one it is ${r4(H.sweptLiquidBbl({ ...OGBIA_PIG, holdupFrac: HOLDUP_AT_LIMIT }).sweptBbl)} bbl against a line volume of ${r4(H.lineVolumeBbl(OGBIA_PIG))} bbl, the two differing by ${r4(H.sweptLiquidBbl({ ...OGBIA_PIG, holdupFrac: HOLDUP_AT_LIMIT }).sweptBbl - H.lineVolumeBbl(OGBIA_PIG))} bbl (derived from the two engine values on this row), which is the whole line. The interval collapses as the holdup rises, and past a point the catcher cannot take the sweep at all and the engine refuses rather than returning a negative interval.`);
 w();
 const nomSwept = H.sweptLiquidBbl({ ...OGBIA_PIG, holdupFrac: OGBIA_HOLDUP_NOMINAL });
 const nomIv = H.piggingInterval({ maxSlugBbl: OGBIA_CATCHER_BBL, dropoutBpd: OGBIA_DROPOUT_BPD, sweptBbl: nomSwept.sweptBbl });
@@ -587,6 +614,22 @@ G.pigging.forEach((c) => {
   const p = H.pigRun({ lengthFt: c.lengthFt, pigSpeedFtS: GOLDEN_PIG_SPEED_FT_S });
   w(`- ${e6(c.idIn)} in over ${e6(c.lengthFt)} ft at a holdup of ${e6(c.holdupFrac)}: volume ${r4(v)} bbl, swept ${r4(s.sweptBbl)} bbl, run ${e6(p.runHours)} h at ${e6(GOLDEN_PIG_SPEED_FT_S)} ft/s; golden volume ${r4(c.lineVolumeBbl)} bbl, golden swept ${r4(c.sweptBbl)} bbl, golden run ${e6(c.runHoursAt5FtS)} h (golden).`);
 });
+w();
+// The run time is a length over a speed, and the engine reports it in HOURS
+// while it is handed feet and feet per second. The seconds in that hour are
+// therefore measurable here without typing one, by asking the engine for the
+// run time of two of the published cases and reading the SLOPE between them:
+// the extra length over the speed times the extra run time. Section 1 measures
+// the same constant from the OGBIA duty; this is the pigging section measuring
+// it out of the pigging goldens, so an Expert reader never has to leave the
+// tier to see where the number came from.
+const pigSlopeA = G.pigging[0];
+const pigSlopeB = G.pigging[1];
+const pigHoursA = H.pigRun({ lengthFt: pigSlopeA.lengthFt, pigSpeedFtS: GOLDEN_PIG_SPEED_FT_S }).runHours;
+const pigHoursB = H.pigRun({ lengthFt: pigSlopeB.lengthFt, pigSpeedFtS: GOLDEN_PIG_SPEED_FT_S }).runHours;
+w('The seconds in an hour, measured out of this section rather than assumed. The engine is handed feet and feet per second and answers in HOURS, so the conversion it keeps to itself is the slope of the run time against the length:');
+w(`the seconds per hour, measured as the extra length between two published cases over the speed times the extra run time the engine reports for them: ${e6((pigSlopeB.lengthFt - pigSlopeA.lengthFt) / (GOLDEN_PIG_SPEED_FT_S * (pigHoursB - pigHoursA)))} (derived from the engine's run times ${e6(pigHoursA)} h over ${e6(pigSlopeA.lengthFt)} ft and ${e6(pigHoursB)} h over ${e6(pigSlopeB.lengthFt)} ft, both at ${e6(GOLDEN_PIG_SPEED_FT_S)} ft/s).`);
+w(`The single-case reading agrees: the OGBIA duty's own length over its speed times its run time is ${e6(OGBIA_PIG.lengthFt / (OGBIA_PIG.pigSpeedFtS * H.pigRun(OGBIA_PIG).runHours))}, the two differing by ${e6((pigSlopeB.lengthFt - pigSlopeA.lengthFt) / (GOLDEN_PIG_SPEED_FT_S * (pigHoursB - pigHoursA)) - OGBIA_PIG.lengthFt / (OGBIA_PIG.pigSpeedFtS * H.pigRun(OGBIA_PIG).runHours))} (derived from the two figures on this row).`);
 w();
 
 // --------------------------------------------------------------- SECTION 15
@@ -679,6 +722,34 @@ w('| --- | --- | --- |');
 ].forEach(([guard, value, fn]) => w(`| ${guard} | ${num(value, 6)} | ${fn().error ? 'refuses' : 'answers'} |`));
 w('A guard that refuses its own limit is as wrong as one that accepts nonsense, which is why both sides are read rather than one.');
 w();
+// The gas elevation guard compares a rise in FEET against a length in MILES,
+// so reading its boundary measures the feet in a mile the guard is built on.
+// The engine is asked, never told: bisect between a rise it accepts and a rise
+// it refuses, on two lengths, and divide. Section 1 reads the same guard once
+// on a one mile line; this is Section 16 reading it as a guard, on both sides,
+// which is what every other row of this section does.
+const guardMileProbe = (lengthMi) => {
+  // The guard's own message, ASKED OF THE ENGINE with a rise no line could
+  // have, so no refusal string is typed into this probe.
+  const guardMessage = H.weymouthQ({ ...SOKU, lengthMi, elevChangeFt: 1e9 }).error;
+  const accepts = (dz) => H.weymouthQ({ ...SOKU, lengthMi, elevChangeFt: dz }).error !== guardMessage;
+  let lo = 0; let hi = 1e7;
+  for (let i = 0; i < 400; i += 1) {
+    const mid = (lo + hi) / 2;
+    if (mid === lo || mid === hi) break;
+    if (accepts(mid)) lo = mid; else hi = mid;
+  }
+  return { lo, gap: hi - lo, perMile: lo / lengthMi };
+};
+const guardMileRows = [MILE_PROBE_LENGTH_MI, SOKU.lengthMi].map((mi) => ({ mi, ...guardMileProbe(mi) }));
+w('That guard on the gas forms is the one that measures a constant. It compares a rise in FEET against a length in MILES, so the largest rise it accepts, divided by the length, is the feet in a mile the module keeps to itself. The engine is handed a rise and says which side of the guard it fell on:');
+w('| line length mi | largest rise accepted ft | the next value above it, refused, is higher by ft | accepted rise per mile ft |');
+w('| --- | --- | --- | --- |');
+guardMileRows.forEach((r) => {
+  w(`| ${e6(r.mi)} | ${num(r.lo, 9)} | ${r.gap.toExponential(3)} | ${num(r.perMile, 9)} |`);
+});
+w(`The last column is the second divided by the first on each row (derived). The two rows differ by ${num(guardMileRows[1].perMile - guardMileRows[0].perMile, 9)} ft per mile (derived from the two figures in that column), so the guard is built on one constant and not on a tolerance. The third column is the floating point step at each magnitude, which is why it grows with the length and is not a band the engine chose.`);
+w();
 w('What the engine still accepts and arguably should not, and none of it is a number this course grades. The same class of question asked of the catalogues, which answer it three different ways:');
 w(`- a fitting the table does not carry: fittingK returns ${raw(P.fittingK('reducer'))}`);
 w(`- a roughness the table does not carry: roughnessOf returns ${raw(P.roughnessOf('glass'))}`);
@@ -686,13 +757,13 @@ w(`- a grade the table does not carry: gradeYield returns ${raw(P.gradeYield('x5
 w(`- a pipe size the table does not carry: scheduleRow returns ${shape(P.scheduleRow(5, '40'))}`);
 w(`- an erosional service the table does not carry: erosionalC returns ${shape(C.erosionalC(EROSIONAL_UNKNOWN_ID))}`);
 w('Four of the five say they do not know. The fifth answers under a label that is not the one it was asked for, and it is the one that was NOT repaired: the RP 14E table belongs to the wellhead engine that two other studios read, so changing what an unknown service returns is a decision for that table rather than for this line-sizing chain.');
-w(`And the rating still over-rates a line if the caller drops the allowance, because the allowance is an argument of the rating rather than a property of the pipe. It is the pair the wall section already read: the same wall reads ${e6(maopWith.maopPsig)} psig with the allowance and ${e6(maopWithout.maopPsig)} psig without, ${e6(maopWithout.maopPsig / maopWith.maopPsig)} times higher, and the factor is the gross wall over the net rather than anything about this pipe. Both calls are legal, both are correct for what they were asked, and neither warns. A guard cannot fix a question that was fully formed and simply wrong.`);
+w(`And the rating still over-rates a line if the caller drops the allowance, because the allowance is an argument of the rating rather than a property of the pipe. It is the pair the wall section already read: the same wall reads ${e6(maopWith.maopPsig)} psig with the allowance and ${e6(maopWithout.maopPsig)} psig without, ${e6(maopWithout.maopPsig / maopWith.maopPsig)} times the rating with the allowance, and the factor is the gross wall over the net rather than anything about this pipe. Both calls are legal, both are correct for what they were asked, and neither warns. A guard cannot fix a question that was fully formed and simply wrong.`);
 w();
 
 // --------------------------------------------------------------- SECTION 17
 w('# SECTION 17: What the method does not know (owned by Expert m05)');
 w();
-w('Five things this course teaches as limits and never as answers:');
+w('Five things this course teaches as limits and never as answers. The first four are items HELD FOR THE LITERATURE, which means a figure the course uses and no publication in this package stands behind. The fifth is not a figure at all: it is what the published cases in this golden are.');
 w(`1. The API RP 14E c factors, ${e6(C.erosionalC('continuous').c)}, ${e6(C.erosionalC('intermittent').c)} and ${e6(C.erosionalC('cleanInhibited').c)}. HELD FOR LITERATURE. The recommended practice says its own figures are conservative, and the third is labelled operator practice with no source.`);
 w('2. The efficiency multiplier on all four gas forms. HELD FOR LITERATURE. Nothing in this package stands behind any value of it, and the engine bounding it to above zero and at most one is a bound rather than a source.');
 w(`3. The band from Reynolds 2100 to 4000, where the engine computes on the turbulent branch and labels the answer transitional. HELD FOR LITERATURE. The step across the boundary is ${e6(jHi.f / jLo.f)} times.`);
@@ -714,10 +785,10 @@ w();
 // --------------------------------------------------------------- SECTION 18
 w('# SECTION 18: The Expert reading, a line from bore to wall to pig (owned by Expert m06)');
 w();
-w(`One pipe, three questions. As a hydraulic line the OGBIA bore of ${e6(OGBIA.idIn)} in carries ${e6(OGBIA.qBpd)} bpd at ${e6(OG.vFtS)} ft/s, Reynolds ${r4(OG.re)}, and spends ${e6(OG.dpTotalPsi)} psi over ${e6(OGBIA.lengthFt)} ft, against an erosional ceiling of ${e6(sweepRows[0].chk.erosionalFtS)} ft/s that it uses ${e6(OG.vFtS / sweepRows[0].chk.erosionalFtS)} of.`);
-w(`As a pressure envelope the SOKU pipe at ${e6(SOKU_WALL.odIn)} in outside diameter and ${e6(SOKU_WALL.smysPsi)} psi of yield needs ${e6(withCa.tRequiredIn)} in of wall at Class 3 and ${e6(c1w.tRequiredIn)} in at Class 1, and the ${e6(SOKU_WALL_AS_BUILT_IN)} in the mill rolled rates ${e6(maopWith.maopPsig)} psig.`);
-w(`As a volume it holds ${r4(H.lineVolumeBbl(OGBIA_PIG))} bbl, a sphere crosses it in ${e6(H.pigRun(OGBIA_PIG).runHours)} hours, and at a measured holdup of ${e6(OGBIA_HOLDUP_NOMINAL)} it delivers ${r4(nomSwept.sweptBbl)} bbl to whatever is waiting at the end, every ${r4(nomIv.intervalDays)} days.`);
-w('Three answers about one pipe, and not one of them can be derived from the other two.');
+w(`Three questions, and the three pipes they are asked of. As a hydraulic line the OGBIA bore of ${e6(OGBIA.idIn)} in carries ${e6(OGBIA.qBpd)} bpd at ${e6(OG.vFtS)} ft/s, Reynolds ${r4(OG.re)}, and spends ${e6(OG.dpTotalPsi)} psi over ${e6(OGBIA.lengthFt)} ft, against an erosional ceiling of ${e6(sweepRows[0].chk.erosionalFtS)} ft/s that it uses ${e6(OG.vFtS / sweepRows[0].chk.erosionalFtS)} of.`);
+w(`As a pressure envelope the SOKU pipe at ${e6(SOKU_WALL.odIn)} in outside diameter and ${e6(SOKU_WALL.smysPsi)} psi of yield needs ${e6(withCa.tRequiredIn)} in of wall at Class 3 and ${e6(c1w.tRequiredIn)} in at Class 1, and the ${e6(SOKU_WALL_AS_BUILT_IN)} in the mill rolled rates ${e6(maopWith.maopPsig)} psig. That is a different pipe from the one above it: its bore is the outside diameter less twice the wall, ${e6(SOKU_WALL.odIn - 2 * SOKU_WALL_AS_BUILT_IN)} in, which stands ${e6(SOKU_WALL.odIn - 2 * SOKU_WALL_AS_BUILT_IN - OGBIA.idIn)} in wider than the OGBIA bore (derived from the two figures on these rows).`);
+w(`As a volume the OGBIA line holds ${r4(H.lineVolumeBbl(OGBIA_PIG))} bbl, a sphere crosses it in ${e6(H.pigRun(OGBIA_PIG).runHours)} hours, and at a measured holdup of ${e6(OGBIA_HOLDUP_NOMINAL)} it delivers ${r4(nomSwept.sweptBbl)} bbl to whatever is waiting at the end, every ${r4(nomIv.intervalDays)} days.`);
+w('Three answers, and not one of them can be derived from the other two. The independence is not a trick of one pipe wearing three hats, which is why the wall reading above is stated on the pipe it belongs to: what a line spends in pressure, what wall a code demands of it and what liquid a pig pushes out of it are three separate questions, and an answer to any one of them carries no answer to another.');
 w();
 
 console.log(out.join('\n'));

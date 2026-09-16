@@ -112,5 +112,5 @@ q(0, "A designer wants to know in advance whether a target outlet is answerable 
   "That a target above the ceiling is reachable at a low enough rate, the ceiling being the outlet at the largest rate the line will pass rather than at the smallest."],
  "The ceiling needs the inlet and the elevation group, both of which the engine already returns. Knowing it in advance turns a refusal from a surprise into a confirmation.")
 
-emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m04.json')
+emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m04.json', expect_n=15)
 finish()

@@ -112,5 +112,5 @@ q(1, "Of the evidence the refusal carries on that failing line, which piece is t
   "The number of stations the march stood behind, because it locates the failure along the profile in the same way a worst station does on a line that completes."],
  "That figure is the difference between resizing a bore and rethinking a scheme. The error string says only that the line cannot carry the rate, which is what the designer already suspected.")
 
-emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m05.json')
+emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m05.json', expect_n=15)
 finish()

@@ -11,7 +11,7 @@ q(1, "A reviewer is handed one line for the SOKU trunk. Which reading carries th
  ["11.938000 in over 32.000000 miles carrying 66104956.1404 scfd, which is the Weymouth rate and therefore the conservative figure a reviewer should work from.",
   "A driving group of 338100.0000 psia squared and a spread of 1.336801 across the four forms, the individual rates being recoverable from those two figures and the ratio column.",
   "11.938000 in over 32.000000 miles at an average flowing temperature of 535.000000 degR and an average compressibility of 0.885000, the eight conditions being the reading and the rates following from them."],
- "Four forms, one line, and a spread wide enough that the form is a bigger decision than the bore. A rate alone does not say which of the four produced it.")
+ "Four forms and one line, with a spread of 1.336801 across them and a step of bore that moves the answer further still. A rate alone does not say which of the four produced it.")
 
 q(3, "The Professional reading carries one figure the engine could not evaluate and had to search a bracket for. Which is it?",
  "The 666.307057 psia the trunk delivers at 60000000.0000 scfd.",
@@ -37,7 +37,7 @@ q(2, "The ceiling on the flat SOKU trunk is 850.000000 psia, on a 3000.000000 ft
 q(1, "A gas rate arrives on a report with no other figure beside it. Which of the conditions behind it can be recovered from the rate alone?",
  "None of them, because the form, the efficiency, the elevation and the base are all stated rather than discovered and the answer carries no record of any of them.",
  ["The form, since the four rates on any one line are distinct and a rate can therefore be matched back against whichever of the four produced it.",
-  "The efficiency, because it multiplies the rate linearly and can be divided back out once the rate at an efficiency of 1.000000 is known.",
+  "The efficiency, because it scales the rate directly and can be divided back out once that same form's rate at an efficiency of 1.000000 is known.",
   "The base, since a rate in scfd is by definition counted at 520.000000 degR and 14.650000 psia, and no figure reported in those units could have been counted at any other base."],
  "Every answer on the reading is conditional on something stated. A gas figure travels with its conditions or it does not travel at all.")
 
@@ -105,11 +105,11 @@ q(3, "What two questions about a pipe does the Expert tier take up that no press
  "Everything in this tier treated the pipe as a bore. A pipe is also a wall a code demands, and a line is also a volume that collects liquid.")
 
 q(0, "Which figures on the Professional reading would move if the trunk were re-run at a different transmission efficiency?",
- "All four rates and the delivered pressure at a contracted rate, because the efficiency multiplies every form linearly and the inverse solves against the form it was given.",
+ "All four rates and the delivered pressure at a contracted rate, because every one of the four forms carries the efficiency and the inverse solves against the form it was given.",
  ["The four rates alone, since the inverse is solved on the driving group and the efficiency enters after the pressure has been found.",
   "The four rates and the driving group of 338100.0000 psia squared, since the efficiency enters the group before any of the four forms is evaluated.",
   "None of them, because an efficiency of 1.000000 is the reference the ratio column of 1.000000, 1.314034, 1.336801 and 1.117335 is built on, and a reading is quoted against that column."],
  "Weymouth moves from 66104956.1404 scfd at 1.000000 to 56189212.7194 scfd at 0.850000. Every graded gas figure in this course states the efficiency it belongs to.")
 
-emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m06.json')
+emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m06.json', expect_n=15)
 finish()

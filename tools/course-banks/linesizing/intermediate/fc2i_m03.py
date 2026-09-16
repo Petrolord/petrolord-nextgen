@@ -111,5 +111,5 @@ q(3, "A result is being reproduced by hand, and the multiplier is taken from the
   "The length factor is the one part of the adjustment the engine does not return, which is why it has to be taken from a publication and reconciled against the multiplier afterwards."],
  "There are not two elevation inputs and there is no way to have one without the other. They correspond only when every input behind s matches.")
 
-emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m03.json')
+emit(Q, '/root/fc-wip-linesizing/banks/fc2i_m03.json', expect_n=15)
 finish()

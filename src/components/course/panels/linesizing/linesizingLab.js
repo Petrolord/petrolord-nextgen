@@ -391,7 +391,7 @@ export const HELD_ITEMS = [
   {
     id: 'transmission-efficiency',
     title: 'The efficiency multiplier on all four gas forms',
-    note: 'HELD FOR LITERATURE, taught as a limit and never as an answer: the efficiency factor. It multiplies every form linearly and no publication in this package stands behind any particular value of it. Every graded gas value in this course states its own efficiency.',
+    note: 'HELD FOR LITERATURE, taught as a limit and never as an answer: the efficiency factor. Three of the four forms carry it as a plain multiplier and General Flow carries it by the amounts the efficiency table derives, and no publication in this package stands behind any particular value of it. Every graded gas value in this course states its own efficiency.',
   },
   {
     id: 'transition-band',
@@ -775,6 +775,24 @@ export const gasLineBasics = () => ({
 // SECTION 8. The four transmission forms.
 // ---------------------------------------------------------------------------
 
+/** Each form's rate at each swept efficiency, over that SAME form's rate at an
+ *  efficiency of one, and that ratio less the efficiency the row was computed
+ *  at. A deviation of a last-bit size is a plain multiplier; anything larger is
+ *  a form that does something else with the number. */
+const efficiencyRows = () => {
+  const base = sokuRates();
+  return SOKU_EFFICIENCY_SWEEP.map((efficiency) => {
+    const rates = gasFormList().map(([, fn]) => fn({ ...SOKU, efficiency }).qScfd);
+    const ratios = gasFormList().map(([k, fn]) => fn({ ...SOKU, efficiency }).qScfd / base[k].qScfd);
+    return {
+      efficiency,
+      rates,
+      ratiosDerived: ratios,
+      deviationsDerived: ratios.map((v) => v - efficiency),
+    };
+  });
+};
+
 export const transmissionForms = () => {
   const q = sokuRates();
   const rates = GAS_FORMS.map((k) => q[k].qScfd);
@@ -791,10 +809,22 @@ export const transmissionForms = () => {
         form: k, at10: a, at20: b, exponentDerived: Math.log2(b / a),
       };
     }),
-    efficiencyRows: SOKU_EFFICIENCY_SWEEP.map((efficiency) => ({
-      efficiency,
-      rates: gasFormList().map(([, fn]) => fn({ ...SOKU, efficiency }).qScfd),
-    })),
+    efficiencyRows: efficiencyRows(),
+    // WHAT THE MULTIPLIER ACTUALLY DOES. Weymouth, Panhandle A and Panhandle B
+    // carry the efficiency as a plain multiplier, so a form's rate over its own
+    // rate at an efficiency of one IS the efficiency. General Flow solves a
+    // friction factor against the rate it settles on, so its ratio sits under
+    // the efficiency by a real amount. The deviations are exported rather than
+    // characterised, so no prose can drift from them.
+    efficiencyLinearWorstDerived: Math.max(...efficiencyRows()
+      .flatMap((r) => r.deviationsDerived.slice(0, 3).map((v) => Math.abs(v)))),
+    efficiencyGeneralWorstDerived: Math.max(...efficiencyRows()
+      .map((r) => Math.abs(r.deviationsDerived[3]))),
+    efficiencyWorstRatioDerived: Math.max(...efficiencyRows()
+      .map((r) => Math.abs(r.deviationsDerived[3])))
+      / Math.max(...efficiencyRows()
+        .flatMap((r) => r.deviationsDerived.slice(0, 3).map((v) => Math.abs(v)))),
+    efficiencyLowest: SOKU_EFFICIENCY_SWEEP[0],
     held: { ...HELD_ITEMS[1] },
     published: G.gas.map((c) => {
       const fn = Object.fromEntries(gasFormList())[c.equation];
@@ -822,6 +852,12 @@ export const elevationGroup = () => {
     }),
     coefficientDerived: coeff.s / 1000,
     coefficientProbeS: coeff.s,
+    // At zero elevation the adjusted form IS the flat form, and the difference
+    // is exported so that claim is read rather than asserted.
+    flatAgainScfd: H.weymouthQ({ ...SOKU, elevChangeFt: 0 }).qScfd,
+    sectionEightWeymouthScfd: H.weymouthQ(SOKU).qScfd,
+    flatAgainDifferenceDerived: H.weymouthQ({ ...SOKU, elevChangeFt: 0 }).qScfd
+      - H.weymouthQ(SOKU).qScfd,
     upFt: SOKU_UP_FT,
     downFt: SOKU_DOWN_FT,
     byForm: gasFormList().map(([k, fn]) => {
@@ -919,6 +955,7 @@ export const outletPressure = () => {
     upP2Psia: upInv.p2Psia,
     upDpPsi: upInv.dpPsi,
     upCeilingPsiaDerived: SOKU.p1Psia / Math.sqrt(upEa.es),
+    upCeilingAboveDeliveredDerived: SOKU.p1Psia / Math.sqrt(upEa.es) - upInv.p2Psia,
     starvedP1Psia: SOKU_STARVED_P1_PSIA,
     starvedError: softOf(H.gasOutletPressure({
       equation: 'weymouth',
@@ -987,6 +1024,11 @@ export const profileMarch = () => {
     sumK: k.sumK,
     withKPsi: withK.dpTotalPsi,
     fittingsGapDerived: withK.dpTotalPsi - flat.dpTotalPsi,
+    // The gap between the two calls, AND the engine's own fittings term on the
+    // one-shot call, so "the gap is the fittings" is a difference on the page
+    // rather than a claim about two figures that never meet.
+    withKFittingsPsi: withK.dpFittingsPsi,
+    fittingsGapAgainstTermDerived: (withK.dpTotalPsi - flat.dpTotalPsi) - withK.dpFittingsPsi,
     // THE REFUSAL THAT KEEPS ITS EVIDENCE. The traverse hands back the stations
     // it can stand behind, the distance it died at and the pressure the
     // arithmetic produced, so a die-out is diagnosable rather than a bare
@@ -1001,6 +1043,7 @@ export const profileMarch = () => {
       diedAtPsia: dead.diedAtPsia,
       stations: dead.stations.map((s) => ({ ...s })),
       singleCallPsi: deadDrop.dpTotalPsi,
+      inletLessDropDerived: OGBIA_DEAD_LINE.p1Psia - deadDrop.dpTotalPsi,
     },
   };
 };
@@ -1028,6 +1071,19 @@ export const professionalReading = () => {
     downScfd: H.weymouthQ({ ...SOKU, elevChangeFt: SOKU_DOWN_FT }).qScfd,
     targetScfd: SOKU_TARGET_SCFD,
     targetP2Psia: target.p2Psia,
+    // THE FORM AGAINST THE BORE. Both are decisions a designer defends, and
+    // which one moves the answer further is a division rather than an opinion.
+    formSpreadDerived: Math.max(...GAS_FORMS.map((k) => q[k].qScfd))
+      / Math.min(...GAS_FORMS.map((k) => q[k].qScfd)),
+    boreLoIn: SOKU_BORE_SWEEP[SOKU_BORE_SWEEP.length - 2],
+    boreHiIn: SOKU_BORE_SWEEP[SOKU_BORE_SWEEP.length - 1],
+    boreLoScfd: H.weymouthQ({ ...SOKU, idIn: SOKU_BORE_SWEEP[SOKU_BORE_SWEEP.length - 2] }).qScfd,
+    boreHiScfd: H.weymouthQ({ ...SOKU, idIn: SOKU_BORE_SWEEP[SOKU_BORE_SWEEP.length - 1] }).qScfd,
+    boreSpreadDerived: H.weymouthQ({ ...SOKU, idIn: SOKU_BORE_SWEEP[SOKU_BORE_SWEEP.length - 1] }).qScfd
+      / H.weymouthQ({ ...SOKU, idIn: SOKU_BORE_SWEEP[SOKU_BORE_SWEEP.length - 2] }).qScfd,
+    boreOverFormDerived: (H.weymouthQ({ ...SOKU, idIn: SOKU_BORE_SWEEP[SOKU_BORE_SWEEP.length - 1] }).qScfd
+      / H.weymouthQ({ ...SOKU, idIn: SOKU_BORE_SWEEP[SOKU_BORE_SWEEP.length - 2] }).qScfd)
+      / (Math.max(...GAS_FORMS.map((k) => q[k].qScfd)) / Math.min(...GAS_FORMS.map((k) => q[k].qScfd))),
   };
 };
 
@@ -1142,6 +1198,9 @@ export const pigging = () => {
       };
     }),
     zeroHoldupSweptBbl: H.sweptLiquidBbl({ ...OGBIA_PIG, holdupFrac: 0 }).sweptBbl,
+    fullHoldupSweptBbl: H.sweptLiquidBbl({ ...OGBIA_PIG, holdupFrac: HOLDUP_AT_LIMIT }).sweptBbl,
+    fullHoldupAgainstVolumeDerived:
+      H.sweptLiquidBbl({ ...OGBIA_PIG, holdupFrac: HOLDUP_AT_LIMIT }).sweptBbl - volume,
     nominalHoldup: OGBIA_HOLDUP_NOMINAL,
     nominalSweptBbl: nominal.sweptBbl,
     catcherBbl: OGBIA_CATCHER_BBL,
@@ -1164,6 +1223,29 @@ export const pigging = () => {
       goldenSweptBbl: c.sweptBbl,
       goldenRunHours: c.runHoursAt5FtS,
     })),
+    // THE SECONDS IN AN HOUR, MEASURED IN THIS SECTION. The engine is handed
+    // feet and feet per second and answers in hours, so the conversion it keeps
+    // to itself is the slope of the run time against the length. Two published
+    // cases give that slope without any figure being typed, and the single-case
+    // reading is carried beside it so the agreement is a subtraction.
+    secondsPerHourCaseA: {
+      lengthFt: G.pigging[0].lengthFt,
+      runHours: H.pigRun({ lengthFt: G.pigging[0].lengthFt, pigSpeedFtS: GOLDEN_PIG_SPEED_FT_S }).runHours,
+    },
+    secondsPerHourCaseB: {
+      lengthFt: G.pigging[1].lengthFt,
+      runHours: H.pigRun({ lengthFt: G.pigging[1].lengthFt, pigSpeedFtS: GOLDEN_PIG_SPEED_FT_S }).runHours,
+    },
+    secondsPerHourSlopeDerived: (G.pigging[1].lengthFt - G.pigging[0].lengthFt)
+      / (GOLDEN_PIG_SPEED_FT_S
+        * (H.pigRun({ lengthFt: G.pigging[1].lengthFt, pigSpeedFtS: GOLDEN_PIG_SPEED_FT_S }).runHours
+          - H.pigRun({ lengthFt: G.pigging[0].lengthFt, pigSpeedFtS: GOLDEN_PIG_SPEED_FT_S }).runHours)),
+    secondsPerHourSingleDerived: OGBIA_PIG.lengthFt / (OGBIA_PIG.pigSpeedFtS * run.runHours),
+    secondsPerHourAgreementDerived: (G.pigging[1].lengthFt - G.pigging[0].lengthFt)
+      / (GOLDEN_PIG_SPEED_FT_S
+        * (H.pigRun({ lengthFt: G.pigging[1].lengthFt, pigSpeedFtS: GOLDEN_PIG_SPEED_FT_S }).runHours
+          - H.pigRun({ lengthFt: G.pigging[0].lengthFt, pigSpeedFtS: GOLDEN_PIG_SPEED_FT_S }).runHours))
+      - OGBIA_PIG.lengthFt / (OGBIA_PIG.pigSpeedFtS * run.runHours),
   };
 };
 
@@ -1215,6 +1297,23 @@ export const correlationLimits = () => {
 // SECTION 16. What it refuses, and what a refusal looks like.
 // ---------------------------------------------------------------------------
 
+/** Bisect the gas elevation guard on a line of a given length: the largest
+ *  rise the engine accepts, and the next representable value above it, which it
+ *  refuses. Nothing here is typed; the engine is asked on both sides. */
+const mileGuardProbe = (lengthMi) => {
+  // The guard's own message, ASKED OF THE ENGINE with a rise no line could
+  // have, so no refusal string is ever typed into this file.
+  const guardMessage = H.weymouthQ({ ...SOKU, lengthMi, elevChangeFt: 1e9 }).error;
+  const accepts = (dz) => H.weymouthQ({ ...SOKU, lengthMi, elevChangeFt: dz }).error !== guardMessage;
+  let lo = 0; let hi = 1e7;
+  for (let i = 0; i < 400; i += 1) {
+    const mid = (lo + hi) / 2;
+    if (mid === lo || mid === hi) break;
+    if (accepts(mid)) lo = mid; else hi = mid;
+  }
+  return { lo, gap: hi - lo };
+};
+
 export const refusalCatalogue = () => {
   const og = liquidAt(OGBIA);
   return {
@@ -1232,6 +1331,22 @@ export const refusalCatalogue = () => {
     boundaries: BOUNDARY_PROBES.map(({ label, value, call }) => ({
       label, value, refuses: Boolean(call().error),
     })),
+    // THE GUARD THAT MEASURES A CONSTANT. The gas elevation guard compares a
+    // rise in FEET against a length in MILES, so bisecting it on two lengths
+    // and dividing recovers the feet in a mile the module keeps to itself,
+    // asked of the engine rather than typed.
+    mileGuardRows: [MILE_PROBE_LENGTH_MI, SOKU.lengthMi].map((lengthMi) => {
+      const probe = mileGuardProbe(lengthMi);
+      return {
+        lengthMi,
+        largestAcceptedFt: probe.lo,
+        nextValueGapFt: probe.gap,
+        perMileDerived: probe.lo / lengthMi,
+      };
+    }),
+    mileGuardPerMileDifferenceDerived:
+      mileGuardProbe(SOKU.lengthMi).lo / SOKU.lengthMi
+      - mileGuardProbe(MILE_PROBE_LENGTH_MI).lo / MILE_PROBE_LENGTH_MI,
     catalogueAnswers: {
       fittingK: String(P.fittingK('reducer')),
       roughnessOf: String(P.roughnessOf('glass')),
@@ -1302,6 +1417,11 @@ export const expertReading = () => {
     class1RequiredIn: c1.tRequiredIn,
     asBuiltIn: SOKU_WALL_AS_BUILT_IN,
     maopPsig: maopWith.maopPsig,
+    // THE WALL READING IS A DIFFERENT PIPE. Its bore is the outside diameter
+    // less twice the wall, and the gap against the OGBIA bore is exported so
+    // the three readings cannot be described as one pipe.
+    wallBoreDerivedIn: SOKU_WALL.odIn - 2 * SOKU_WALL_AS_BUILT_IN,
+    wallBoreAgainstOgbiaDerived: SOKU_WALL.odIn - 2 * SOKU_WALL_AS_BUILT_IN - OGBIA.idIn,
     lineVolumeBbl: H.lineVolumeBbl(OGBIA_PIG),
     runHours: H.pigRun(OGBIA_PIG).runHours,
     nominalHoldup: OGBIA_HOLDUP_NOMINAL,

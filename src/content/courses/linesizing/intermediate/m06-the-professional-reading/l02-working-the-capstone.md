@@ -8,7 +8,7 @@ A graded gas exercise is marked on the figure produced, and the figures most oft
 
 A gas rate is meaningless without the conditions it was computed at, and there are more of them here than in the liquid half. Before working anything, write down the bore, the length in miles, both pressures in psia, the gas gravity, the average flowing temperature, the average compressibility, the elevation change in feet and the transmission efficiency.
 
-The efficiency deserves its own line. It multiplies every form linearly, it is held for the literature in this course, and every graded gas figure states the efficiency it belongs to. A rate computed at an efficiency the question did not name is a different answer to a different question.
+The efficiency deserves its own line. Every form carries it, it is held for the literature in this course, and every graded gas figure states the efficiency it belongs to. A rate computed at an efficiency the question did not name is a different answer to a different question.
 
 The same applies to the form. Four forms answer the same inputs with four rates, so a figure quoted without the form that produced it is not checkable by anybody.
 

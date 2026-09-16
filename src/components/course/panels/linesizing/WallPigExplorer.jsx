@@ -128,7 +128,8 @@ export const WallMode = ({ w }) => {
         The corrosion allowance is not strength either. It holds no pressure on the day it is installed and it is what
         lets the pipe still hold pressure years later. Read the rating back off the wall the mill actually rolled and
         the allowance decides the answer: {six(w.maopWithPsig)} psig with it respected against {six(w.maopWithoutPsig)}
-        {' '}psig with it left out of the call, which is {six(w.maopRatioDerived)} times higher. Both calls are legal,
+        {' '}psig with it left out of the call, which is {six(w.maopRatioDerived)} times the rating with the
+        {' '}allowance respected. Both calls are legal,
         both are correct for what they were asked, and neither warns. A guard cannot fix a question that was fully
         formed and simply wrong.
       </p>
@@ -183,7 +184,9 @@ export const PigMode = ({ p }) => {
         </ResponsiveContainer>
       </div>
       <p className="text-xs text-slate-400 mt-2 mb-0">
-        At a holdup of zero the sweep is {four(p.zeroHoldupSweptBbl)} bbl and at a holdup of one it is the whole line.
+        At a holdup of zero the sweep is {four(p.zeroHoldupSweptBbl)} bbl, and at a holdup of one it
+        is {four(p.fullHoldupSweptBbl)} bbl against a line volume of {four(p.lineVolumeBbl)} bbl, which is the whole
+        line.
         The interval collapses as the holdup rises, and past a point the catcher cannot take the sweep at all and the
         engine refuses rather than returning a negative interval. The line on the chart stops where that happens.
       </p>

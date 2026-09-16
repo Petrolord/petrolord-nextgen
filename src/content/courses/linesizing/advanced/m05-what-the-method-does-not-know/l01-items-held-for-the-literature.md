@@ -8,7 +8,7 @@ Four figures in this course are recorded rather than checked. They are not error
 
 **The API RP 14E c factors.** 100.000000 for continuous service, 125.000000 for intermittent, and 175.000000 for clean inhibited service. The recommended practice says its own figures are conservative, and the third row is labelled operator practice with no publication behind it at all.
 
-**The efficiency multiplier on all four gas forms.** Nothing in this package stands behind any particular value of it, and it multiplies every form linearly, so a change in efficiency moves every rate by the same proportion. The engine does bound it, refusing anything at or below zero and anything above 1.000000, but a bound is not a source.
+**The efficiency multiplier on all four gas forms.** Nothing in this package stands behind any particular value of it. Three of the four forms carry it as a plain multiplier, so a change in efficiency moves those rates by exactly that proportion, and General Flow moves by a shade less because it solves its own friction factor against the rate it settles on. The engine does bound it, refusing anything at or below zero and anything above 1.000000, but a bound is not a source.
 
 **The band from a Reynolds number of 2100 to 4000.** The engine computes on the turbulent branch there and labels the answer transitional, and the step across the boundary is 1.603040 times.
 

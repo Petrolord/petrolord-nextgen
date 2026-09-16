@@ -35,7 +35,7 @@ What survives the hold is the qualitative statement, which the four rows establi
 
 The mistake is treating Weymouth as a form with no assumptions because it has no friction argument. Every form has a friction assumption. Weymouth's is baked in, Panhandle A and Panhandle B each carry their own, and General Flow's is the only one a reader can see and change.
 
-The second mistake is tuning the efficiency to close the gap between two forms. The efficiency multiplies every form linearly and it is itself held, so moving it to make Weymouth agree with General Flow buries a structural disagreement inside a number that nothing stands behind.
+The second mistake is tuning the efficiency to close the gap between two forms. The efficiency scales every form and it is itself held, so moving it to make Weymouth agree with General Flow buries a structural disagreement inside a number that nothing stands behind.
 
 ## Exercise
 

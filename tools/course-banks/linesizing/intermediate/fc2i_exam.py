@@ -13,7 +13,7 @@ q(2, "A contract sheet carries a gas rate and nothing else. A reviewer wants to 
  ["The bore and the length, which are the only two things a transmission form knows about the pipe and therefore the only two a reproduction needs.",
   "The friction factor, which is the sole self-description a gas answer carries and can be used to recover whichever of the four forms produced the rate.",
   "The driving group, since the two pressures can be recovered from it and every other condition of a gas form follows from the pressures."],
- "Four forms span 66104956.1404 to 88369202.2673 scfd on one line, the efficiency multiplies each linearly, and two bases are not comparable. The rate carries no record of any of it.")
+ "Four forms span 66104956.1404 to 88369202.2673 scfd on one line, the efficiency scales every one of them, and two bases are not comparable. The rate carries no record of any of it.")
 
 q(0, "An operator moves the SOKU delivery point from 620.000000 psia up to 845.000000 psia and then to 900.000000 psia, holding the inlet at 850.000000 psia. Describe the three answers.",
  "66104956.1404 scfd, then 10466013.4729 scfd, then a refusal naming no flow, because the driving group first shrinks and then goes altogether.",
@@ -286,7 +286,7 @@ q(1, "What has to be true of a figure before this course will grade it?",
  ["That it is one of the published cases carrying a golden, since a figure with no measured counterpart cannot be marked.",
   "That it is printed to six decimals, which is the precision the grading tolerance is set against for every quantity in the course.",
   "That it comes from the forward direction, since a figure produced by a search carries the uncertainty of its bracket and cannot be marked exactly."],
- "The efficiency multiplies every form linearly and no publication in this package stands behind any particular value of it. It is taught as a limit and never graded.")
+ "Every one of the four forms carries the efficiency and no publication in this package stands behind any particular value of it. It is taught as a limit and never graded.")
 
 q(0, "Reading across the whole tier, which single change to the method is the one the rest of it follows from?",
  "The pressures enter squared, so the quantity that moves along the pipe is a driving group rather than a difference.",

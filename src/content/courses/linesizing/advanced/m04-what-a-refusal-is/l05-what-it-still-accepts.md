@@ -32,7 +32,7 @@ This one was not repaired, and the reason is ownership rather than difficulty. T
 
 ## The second one is not a guard problem at all
 
-The rating over-rates a line whenever the caller drops the corrosion allowance, because the allowance is an argument of the rating call rather than a property of the pipe. The same wall reads 1019.607843 psig with the allowance and 1529.411765 psig without it, 1.500000 times higher, and that factor is the gross wall over the net rather than anything about this pipe.
+The rating over-rates a line whenever the caller drops the corrosion allowance, because the allowance is an argument of the rating call rather than a property of the pipe. The same wall reads 1019.607843 psig with the allowance and 1529.411765 psig without it, 1.500000 times the rating with the allowance, and that factor is the gross wall over the net rather than anything about this pipe.
 
 What moved is a magnitude. No verdict flipped and nothing was miscounted. Both calls are legal, both are correct for what they were asked, and neither warns.
 

@@ -8,7 +8,7 @@
    "The driving group, since the two pressures can be recovered from it and every other condition of a gas form follows from the pressures."
   ],
   "answer": 2,
-  "explanation": "Four forms span 66104956.1404 to 88369202.2673 scfd on one line, the efficiency multiplies each linearly, and two bases are not comparable. The rate carries no record of any of it."
+  "explanation": "Four forms span 66104956.1404 to 88369202.2673 scfd on one line, the efficiency scales every one of them, and two bases are not comparable. The rate carries no record of any of it."
  },
  {
   "prompt": "An operator moves the SOKU delivery point from 620.000000 psia up to 845.000000 psia and then to 900.000000 psia, holding the inlet at 850.000000 psia. Describe the three answers.",
@@ -437,7 +437,7 @@
    "That it comes from the forward direction, since a figure produced by a search carries the uncertainty of its bracket and cannot be marked exactly."
   ],
   "answer": 1,
-  "explanation": "The efficiency multiplies every form linearly and no publication in this package stands behind any particular value of it. It is taught as a limit and never graded."
+  "explanation": "Every one of the four forms carries the efficiency and no publication in this package stands behind any particular value of it. It is taught as a limit and never graded."
  },
  {
   "prompt": "Reading across the whole tier, which single change to the method is the one the rest of it follows from?",

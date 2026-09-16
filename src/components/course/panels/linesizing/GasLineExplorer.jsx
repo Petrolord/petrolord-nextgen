@@ -160,8 +160,10 @@ export const ElevationMode = ({ e }) => {
       <p className="text-xs text-slate-400 mt-2 mb-0">
         A hill does two things and they are not the same thing. It scales the outlet pressure inside the driving group
         through e to the s, and it changes the length the friction acts over through the equivalent length factor. At
-        zero elevation both collapse to one and the flat form comes back exactly. The coefficient inside s, measured
-        out of the engine rather than typed, is {Number(e.coefficientDerived).toFixed(12)}.
+        zero elevation both collapse to one, and the Weymouth rate with the hill set to zero stands
+        {' '}{four(e.flatAgainDifferenceDerived)} scfd from the flat rate, so the flat form is what the adjusted form
+        becomes. The coefficient inside s, measured out of the engine rather than typed,
+        is {Number(e.coefficientDerived).toFixed(12)}.
       </p>
       <Tbl
         head={['form', 'flat scfd', 'up scfd', 'down scfd', 'up as a fraction', 'down as a fraction']}
@@ -346,7 +348,10 @@ export const TrunkReadingMode = ({ r }) => {
         {' '}{four(r.targetScfd)} scfd the line delivers at {six(r.targetP2Psia)} psia.
       </p>
       <Note>
-        Four forms, one line, and a spread wide enough that the form is a bigger decision than the bore.
+        Four forms and one line. The spread across the four forms is {six(r.formSpreadDerived)}, one step of bore
+        from {six(r.boreLoIn)} in to {six(r.boreHiIn)} in is {six(r.boreSpreadDerived)}, and the second over the first
+        is {six(r.boreOverFormDerived)}. On this trunk one step of bore moves the answer further than the choice of
+        form does, and a designer has to defend both.
       </Note>
     </>
   );

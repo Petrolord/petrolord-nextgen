@@ -8,11 +8,11 @@ General Flow reads 73861363.0502 scfd on the SOKU trunk, 1.117335 against Weymou
 
 The other three forms are evaluated. Their inputs go in and a rate comes out in one pass. General Flow cannot work that way, because the rate it is computing and the friction factor it needs depend on each other: the friction factor belongs to the flow, and the flow is what the friction factor is being used to find. So the form is iterated until the two agree, and the friction factor it settled on is returned beside the rate rather than discarded.
 
-That returned factor is the only statement any of these four forms makes about the surface of the pipe. A Weymouth or a Panhandle answer carries no roughness at all, so it cannot be asked what pipe it assumed.
+That returned factor is the only statement any of these four forms makes about the surface of the pipe, and it is why a Weymouth answer cannot be asked what pipe it assumed.
 
 ## Why the other three cannot iterate
 
-An iteration needs something to iterate about. The other three forms say nothing about the roughness of the pipe, so there is no friction factor inside them to refine and nothing for a rate to be reconciled against. They are closed expressions in their inputs and they answer in one pass because nothing is left unresolved. General Flow is the only one of the four carrying a description of the pipe surface, and carrying it is exactly what obliges it to solve.
+An iteration needs something to iterate about. The other three forms say nothing about the roughness of the pipe, so there is no friction factor inside them to refine and nothing for a rate to be reconciled against. General Flow is the only one of the four carrying a description of the pipe surface, and carrying it is exactly what obliges it to solve.
 
 ## Where it sits among the four
 
@@ -34,6 +34,8 @@ General Flow is the second lowest of the four on this line, closer to Weymouth t
 | 0.950000 | 70112523.9958 |
 | 1.000000 | 73861363.0502 |
 
+That column is not the efficiency times the rate at 1.000000. General Flow re-solves its friction factor at the rate it settles on, so at an efficiency of 0.850000 its rate is 0.847757431221 of the full one while the other three read exactly 0.850000.
+
 | bore in | length miles | rise ft | engine scfd | golden scfd |
 | --- | --- | --- | --- | --- |
 | 12.000000 | 50.000000 | 0.000000 | 78870925.0881 | 78870158.2684 |
@@ -42,7 +44,7 @@ General Flow is the second lowest of the four on this line, closer to Weymouth t
 | 8.000000 | 25.000000 | 800.000000 | 40692276.6248 | 40691505.0476 |
 | 8.000000 | 25.000000 | -800.000000 | 42552177.2793 | 42552833.2696 |
 
-The engine value and the golden are printed side by side on all five cases, so an iterated form can be checked case by case rather than trusted in general.
+The engine value and the golden are printed side by side on all five cases, so an iterated form is checked case by case.
 
 ## Reading the friction factor it returns
 
@@ -50,7 +52,7 @@ The friction factor is a result rather than an input, so it is the one figure on
 
 ## What the returned factor is worth in a review
 
-It is the one number on a gas answer that can be sanity checked before anything else is. A reviewer who knows roughly what a friction factor should look like on a trunk of this size can read 0.0112132010 and form a view immediately, and no Weymouth or Panhandle answer offers that. It is also the figure to quote when a rate may have to be reproduced later, because it records what the form settled on rather than only what it was asked for.
+It is the one number on a gas answer that can be sanity checked first. A reviewer who knows what a friction factor should look like on a trunk of this size can read 0.0112132010 and form a view at once, and no Weymouth or Panhandle answer offers that.
 
 ## The mistake
 
