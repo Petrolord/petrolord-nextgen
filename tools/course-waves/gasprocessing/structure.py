@@ -166,7 +166,13 @@ TIERS = {
   ('m05-computed-chosen-and-kept', 'Computed, Chosen and Kept', [
     ('l01-what-was-repaired-and-what-was-not', 'What was repaired, and what was not', 13, [W]),
     ('l02-what-a-refusal-is', 'What a refusal is', 14, [A]),
-    ('l03-the-one-export-outside-the-contract', 'The one export outside the contract', 13, [A]),
+    # TITLE CORRECTED by the Expert writer. The old title asserted, in an H1,
+    # that one export sits outside the module's error contract. Digest Section
+    # 15 prints the opposite as current behaviour (THE CONTRACT IS WHOLE), and
+    # digest_prose.rules.mjs carries a rule whose own text says this exact title
+    # went stale on the FC4-0 rebuild. The key is unchanged so banks, capstones
+    # and migrations keyed on it are unaffected.
+    ('l03-the-one-export-outside-the-contract', 'The contract read on one export', 13, [A]),
     ('l04-constants-measured-out-of-the-engine', 'Constants measured out of the engine', 14, [W]),
     ('l05-what-a-published-case-can-catch', 'What a published case can catch', 14, [A]),
   ]),
