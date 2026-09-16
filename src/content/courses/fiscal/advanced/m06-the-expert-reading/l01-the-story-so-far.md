@@ -12,15 +12,15 @@ Government share of net revenue, in the summary, adds total capex back to the co
 
 ## Two sweeps with edges
 
-The price sweep runs nine points from 40 to 120 USD per bbl and scales oil only, so gas and NGL prices never move. Across it Angola - Deepwater PSC climbs 12.1305 percentage points while the climb for USA - Gulf of Mexico is -17.2498. The capex sweep is labelled 0.8 to 1.5 and delivers seven points ending at 1.4, because the accumulator reaches 1.5000000000000004 and fails its own test. USA - Gulf of Mexico gives up 228.7953 over the swept points and 267.7301 over the range the label promised.
+The price sweep runs nine points from 40 to 120 USD per bbl and scales oil only, so gas and NGL prices never move. Across it Brazil - Concession climbs 20.5076 percentage points while the climb for USA - Gulf of Mexico is -17.2498. The capex sweep is labelled 0.8 to 1.5 and delivers eight points ending there, on a step count rather than the accumulation that used to reach 1.5000000000000004 and fail its own test. USA - Gulf of Mexico gives up 267.7301 over that range.
 
 ## Verdicts and their quantities
 
-`deriveInsights` replaced four hard-coded claims with five keyed verdicts and omits any it cannot support: three on a single regime, none on an empty list. Each sentence rounds to one decimal place, which is why `cmp_never_recovers` names a most and a least resilient regime whose losses are both 10909.090909.
+`deriveInsights` replaced four hard-coded claims with five keyed verdicts and omits any it cannot support: three on a single regime, none on an empty list. Each sentence rounds to one decimal place and each sweep verdict refuses to rank inside one printed step, which is why `cmp_never_recovers` names no resilient regime and reports all six at 12,727.3 million USD.
 
 ## Numbers to distrust
 
-`calculateIRR` returns 102400 percent when the root is past its bracket and 0 for two unlike situations, one of them a project that loses money at every rate. `rrtUpliftPct` is charged annually, so at the default 20 the total resource rent tax is 62.5794 against 590.7165 at zero uplift.
+`calculateIRR` names a rate only inside the band from -99 to 1000 percent and otherwise returns null with a status, where the retired bisection printed 102400 percent and printed 0 for two unlike situations. `rrtUpliftPct` sizes a one-time pool, so on the isolated sweep the resource rent tax totals 350.7165 at the default 20 against 390.7165 at a zero uplift.
 
 ## The field it all lands on
 

@@ -14,12 +14,12 @@ At the deck's own first-year price of 70 USD per bbl on `cmp_all_templates_defau
 | --- | --- | --- | --- |
 | Generic Royalty/Tax | 43.4694 | 33.7901 | 9.6793 |
 | USA - Gulf of Mexico | 43.8018 | 34.0485 | 9.7533 |
-| Brazil - Concession | 47.7450 | 37.1137 | 10.6313 |
-| Angola - Deepwater PSC | 68.7654 | 53.4534 | 15.3119 |
+| Brazil - Concession | 64.2526 | 49.9455 | 14.3071 |
+| Angola - Deepwater PSC | 72.4012 | 56.2797 | 16.1215 |
 | Ghana - Deepwater | 75.4293 | 58.6335 | 16.7958 |
 | Nigeria - PIA (2021) | 76.7282 | 59.6432 | 17.0850 |
 
-On the Designer's own two defaults, Concessionary (Royalty/Tax) reads 59.6210 as government take and 46.3452 as government share of net revenue, a difference of 13.2758, and Nigerian PIA (PSC) reads 71.4471 against 55.5380, a difference of 15.9091.
+On the Designer's own two defaults, Concessionary (Royalty/Tax) reads 59.6210 as government take and 46.3452 as government share of net revenue, a difference of 13.2758, and Nigerian PIA (PSC) reads 72.7302 against 56.5354, a difference of 16.1948.
 
 Neither number is wrong. They answer different questions, and the danger was only ever the shared label.
 
