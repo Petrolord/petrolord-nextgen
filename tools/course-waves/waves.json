@@ -253,5 +253,32 @@
       "digest.txt": "090d101c45aa4e8aaa93b1b301342d4834efc5210c87387395b1f778278fe8a9",
       "fields.json": "7bfa8d45e9edcee50eac517130cfa75b2cbb2d66de40bb12a4a37b5d55894c53"
     }
+  },
+  "relief": {
+    "course": "FC5",
+    "live": "/root/fc-wip-relief",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "build_digest.sh",
+      "fc5_dump.mjs",
+      "fc5_fields.mjs",
+      "fc5_fields_capstone.mjs",
+      "fc5_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "structure.py",
+      "gate_capstone_leak.py",
+      "gate_copy_rule.py",
+      "gate_typed_literals.py",
+      "gate_movement.mjs"
+    ],
+    "pins": {
+      "digest.txt": "f761f536ad3abc0f8e7711969d21e2ea7bc4e1c62058fa74bbd186ba9e3147e6",
+      "fields.json": "fc0b8561b287aa99308ce90ce973b92e07d174c609585c9da467f67670f1338c"
+    }
   }
 }
