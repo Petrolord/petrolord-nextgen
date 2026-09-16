@@ -43,3 +43,37 @@ WHAT REMAINS, and it is not a defect:
   earlier tier is what backward reaches are for, which is why they report
   without failing. Left deliberately.
 
+
+## THE SEED LADDER, AND THE ONE ITEM IT HANDS ON (added by the migration pass)
+
+The five migrations are cut and pinned: `20260922_fc2_linesizing_course`,
+three deep seeds and `20260922_fc2_linesizing_go_live`. The ladder is
+content-addressed by sha256 in `apply_fc2_linesizing.sh`, so it cannot be
+applied against SQL that is not the SQL it was proved on.
+
+HANDED ON, NOT FIXED HERE. `gradeprecision.py` (commit ef5d67fc, the precision
+pass running in parallel in this same worktree) reports two graded Expert
+fields whose tolerance is not satisfiable at the precision this course prints:
+
+    quaiboe_pig_run_hours        graded at 1e-7, hours print to six decimals
+    quaiboe_pigging_interval_days graded at 1e-7, days print to four decimals
+
+The Expert capstone lesson `advanced/m06-the-expert-reading/l02` still states
+"Barrels, hours and days print to four decimals", which the Professional side
+of that same claim has already been corrected for. A learner who quotes the
+printed precision fails both fields.
+
+WHY THE MIGRATION PASS DID NOT CHANGE IT. The fix is to a tolerance in
+`fc2_capstone.mjs` or to a printed precision, both of which are the capstone's
+contract, and the precision pass owns that contract and is mid-flight in this
+worktree. Two editors in one worktree is a failure this programme has already
+paid for. Nothing is lost by waiting: the ladder pins file CONTENT, so if the
+tolerances move, `apply_fc2_linesizing.sh verify` REFUSES, names the file that
+drifted and prints the `pin` command that reprints the table. A repaired
+capstone cannot be applied as the unrepaired one, and an unrepaired one cannot
+be applied silently after the repair lands.
+
+WHAT TO DO WHEN THE HOLD LIFTS. Repair the tolerance or the precision claim,
+re-run `gen_course.py` and `gen_golive.py`, re-run `verify_sql.py` and
+`dryrun_fc2.sh`, then `apply_fc2_linesizing.sh pin <ref>` and paste the new
+table into the script with the PR number that moved it.
