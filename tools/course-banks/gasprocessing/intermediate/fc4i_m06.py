@@ -34,7 +34,7 @@ q(1, "Read as a vessel, what does the same column come to?",
  ["4.208602 ft across, on a gas weighing 3.424553 lb per ft3 that may not rise faster than 1.318455 ft per s.",
   "3.192661 ft across, on a gas weighing 3.831017 lb per ft3 that may not rise faster than 1.035597 ft per s.",
   "4.208602 ft across, on a solution weighing 64.883034 lb per ft3 that may not rise faster than 1.035597 ft per s."],
- "The gas is at 985.000000 psia and 112.000000 degF. The 3.424553 and 1.318455 belong to OBIAFU, and 64.883034 lb per ft3 is the MDEA solution the gas rises against rather than the gas itself.")
+ "The gas is at 985.000000 psia and 112.000000 degF. The 3.424553 and 1.318455 belong to OBIAFU, and 64.883034 lb per ft3 is an MDEA solution density rather than a gas density.")
 
 q(0, "Which of the three readings makes no use of the gas rate at all?",
  "The stage relation, because a removal is a fraction of whatever arrives.",

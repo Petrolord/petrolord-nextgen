@@ -176,15 +176,15 @@
   "explanation": "Each mole of amine carries the swing round the loop, so the swing is what sets how many moles of amine there have to be. Either loading on its own sets nothing."
  },
  {
-  "prompt": "Which of the three loading figures does the engine return on a sweetening answer?",
+  "prompt": "A sweetening answer echoes back the rich loading it applied. Why does it need to?",
   "options": [
-   "The lean loading it used.",
-   "The swing it circulated on.",
-   "All three, on named keys.",
-   "The rich loading it used."
+   "Because the rich loading is the one end of the loop a caller cannot type.",
+   "Because the corrosion warning names the rich loading it was handed rather than the limit.",
+   "Because the swing comes back on the same key once the lean loading is subtracted.",
+   "Because the rich loading defaults to the customary limit of the amine that was named."
   ],
   "answer": 3,
-  "explanation": "Nothing on the answer object is called a swing. What comes back is the loading the engine applied, and forming the difference between the two ends is the reader's own step."
+  "explanation": "Every figure below it in the chain stands on that value. What comes back under no name at all is the swing, and forming the difference between the two ends is the reader's own step."
  },
  {
   "prompt": "Two spec refusals look alike. What separates a spec already met at the inlet from a spec set above it?",
@@ -286,15 +286,15 @@
   "explanation": "A lookup that falls back to a default produces a complete and plausible answer for a solvent nobody asked about. This one gives the correction and the catalogue in one line."
  },
  {
-  "prompt": "Which two properties move together across the three amine rows?",
+  "prompt": "A rich limit from one row of the amine property set is used with a strength from another. What is wrong with that?",
   "options": [
-   "The strength and the molecular weight.",
-   "The rich limit and the solution gravity.",
-   "The strength and the rich limit.",
-   "The duty per gallon and the molecular weight."
+   "The engine refuses the pair, because it checks the strength and the limit against the amine named.",
+   "The circulation comes back right and only the regenerator duty is wrong.",
+   "Each row is one amine at its own strength and its own limit, so the pair describes nothing real.",
+   "Nothing, because the strength and the rich limit enter the chain at different steps."
   ],
   "answer": 2,
-  "explanation": "Each row is a whole operating case rather than one property swapped out. Moving one input at a time is what the panel beside the lesson is for."
+  "explanation": "The engine will answer for any strength and any rich loading a caller types. What it cannot do is tell a reader that the pair describes no real plant, which is why the property set is read a row at a time."
  },
  {
   "prompt": "All three ways of ranking the amines agree. What is the useful question left?",
@@ -407,15 +407,15 @@
   "explanation": "The regenerator duty is that same answer priced per gallon rather than a reading of its own. A stage count cannot size a pump and a diameter cannot either."
  },
  {
-  "prompt": "How many chosen numbers sit behind the three Professional readings of one column?",
+  "prompt": "Every figure in the three Professional readings of one column stands on numbers somebody chose. Which of these is NOT one of those chosen numbers?",
   "options": [
-   "Three, one for each of the readings.",
-   "Six, and the engine computes everything in between.",
-   "Nine, three for each of the readings.",
-   "None, since every figure in the tier is computed."
+   "The lean loading the solution comes back from the regenerator on.",
+   "The loading swing the circulation follows.",
+   "The absorption factor the column is read at.",
+   "The Souders-Brown K value the vessel is sized at."
   ],
   "answer": 1,
-  "explanation": "The swing, the strength and the duty per gallon sit behind the first. The absorption factor sits behind the second. The K value and the liquid density sit behind the third."
+  "explanation": "The swing is the difference between two loadings a caller chose, so it is formed rather than typed. Write the rest down before reading any answer: the two loadings, the strength and the duty per gallon behind the mole balance, the absorption factor and the stage count behind the staged reading, and the K value and the liquid behind the vessel."
  },
  {
   "prompt": "A graded question asks for a figure the engine declines to produce. What is the answer?",

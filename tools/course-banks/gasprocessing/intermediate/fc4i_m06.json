@@ -41,7 +41,7 @@
    "4.208602 ft across, on a solution weighing 64.883034 lb per ft3 that may not rise faster than 1.035597 ft per s."
   ],
   "answer": 1,
-  "explanation": "The gas is at 985.000000 psia and 112.000000 degF. The 3.424553 and 1.318455 belong to OBIAFU, and 64.883034 lb per ft3 is the MDEA solution the gas rises against rather than the gas itself."
+  "explanation": "The gas is at 985.000000 psia and 112.000000 degF. The 3.424553 and 1.318455 belong to OBIAFU, and 64.883034 lb per ft3 is an MDEA solution density rather than a gas density."
  },
  {
   "prompt": "Which of the three readings makes no use of the gas rate at all?",

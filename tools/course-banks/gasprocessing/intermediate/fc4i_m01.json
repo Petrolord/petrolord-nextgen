@@ -137,7 +137,7 @@
    "That the two directions are inverses of one another rather than two pieces of arithmetic that happen to sit near each other.",
    "That the stage counts are converged, because the engine iterates towards them and stops when the removal stops moving.",
    "That the removals asked for are reachable at those factors, which is what the ceiling would otherwise have to be consulted for.",
-   "That rounding the fractional stage count to a whole number leaves the removal within the precision the digest prints."
+   "That rounding the fractional stage count to a whole number leaves the removal within the precision this course prints."
   ],
   "answer": 0,
   "explanation": "It returns the removal that was asked for on every row. That is the cheapest possible test of a two-way relation, and most published correlations cannot pass it."

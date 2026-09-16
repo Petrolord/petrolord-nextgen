@@ -66,12 +66,12 @@ q(2, "What is the LEAN LOADING?",
   "The lowest loading before a corrosion warning."],
  "It is an input. On UBIE it is 0.050000 mol of acid gas per mol of amine, and the rich loading at the other end of the loop is 0.480000.")
 
-q(1, "The engine echoes one of the loadings back on every sweetening answer. Which one, and under what name?",
- "The rich loading, as richLoadingUsed.",
- ["The lean loading, as leanLoadingUsed.",
-  "The loading swing, as the figure the circulation came from.",
-  "Both loadings, as one pair on the answer object."],
- "Each amine's customary rich limit is offered as the default, so the answer says which rich loading it actually used. The swing is not returned under any name, and a reader forms it by subtracting.")
+q(1, "The engine returns no loading swing under any name. How does a reader get one?",
+ "By subtracting the lean loading from the rich, since the swing is a difference.",
+ ["By reading it off the amine property table, which carries a customary swing on every row.",
+  "By dividing the circulation by the acid gas rate, which is the step the swing sits in.",
+  "By asking for it, since the engine forms one when a caller names the field."],
+ "The swing is what each mole of amine carries round the loop and it is what sets the circulation. It is still not a figure the engine hands back, so a reader forms it from the two loadings and carries it themselves.")
 
 q(0, "On UBIE the rich loading is 0.480000 and the lean loading is 0.050000. What is the LOADING SWING, and what does it do?",
  "0.430000000 mol per mol, and it sets the circulation.",
