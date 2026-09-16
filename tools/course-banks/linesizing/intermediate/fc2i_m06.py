@@ -56,7 +56,7 @@ q(0, "The digest prints gas rates to four decimals and the friction factor Gener
  "The engine chose how many digits to print and the course grades what the engine returned. Quoting at that precision is one of the capstone habits.")
 
 q(2, "The transmission efficiency is held for the literature in this course. What does the Professional reading do with it?",
- "States it as a condition of every gas figure, because it multiplies each form linearly and no publication in this package stands behind any particular value.",
+ "States it as a condition of every gas figure, since a rate is not reproducible without it and this package defends no particular value.",
  ["Omits it, since a held item may not appear in a course's teaching material and the reading is confined to figures the engine stands behind.",
   "Fixes it at 1.000000, which is the only value the four forms were fitted at and therefore the only one a reading may quote.",
   "Reports it as a range across the published cases, whose efficiencies of 0.920000, 0.950000 and 1.000000 bracket what a real line achieves and are the three values a reading may quote."],
@@ -69,12 +69,12 @@ q(3, "A summary reports a descending line's drop as a positive number. What has 
   "Nothing, provided the profile is stated alongside it, because the magnitude is the quantity a summary reports and the direction is read off the survey."],
  "On the 3000.000000 ft descent the inverse returns an outlet of 880.000000 psia against an inlet of 850.000000 psia and a drop of -30.000000 psi. Taking the absolute value is the mistake.")
 
-q(1, "What single property of the SOKU trunk makes the choice of transmission form a larger decision than the choice of bore?",
+q(1, "What single property of the SOKU trunk is it that obliges a designer to defend the choice of transmission form?",
  "The spread of 1.336801 from the lowest of the four rates to the highest on identical inputs.",
  ["The diameter exponent of 2.6666666667, which every one of the four forms carries and which therefore fixes what a change of bore is worth whichever form is chosen.",
   "The friction factor of 0.0112132010, which is the only description of the pipe any of the four forms carries and therefore the only figure a bore decision can be checked against.",
   "The driving group of 338100.0000 psia squared, which is fixed by the two pressures and leaves the bore as the only remaining variable in the reading."],
- "A spread of that width across the answers is wider than many of the decisions a designer is actually weighing. It is settled by engineering rather than by anything on the table.")
+ "A spread of that width across the answers has to be defended. One step of bore from 11.938000 in to 15.000000 in spreads 1.838340 on the same trunk, so the bore moves the answer further still and both choices are defended rather than defaulted.")
 
 q(0, "A reviewer wants to check a gas answer before anything else on the sheet. Which figure lets them do it, and why?",
  "The friction factor General Flow settled on, because it is the one number on a gas answer that reports what the form concluded about the pipe rather than what it was told.",

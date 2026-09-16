@@ -93,7 +93,7 @@
    "That it is computed at an efficiency of 1.000000, which is the only value the course will grade against and the reason the published cases at 0.950000 and 0.920000 are taught rather than examined.",
    "That it states the efficiency it was computed at, because every form carries it and no publication in this package stands behind any particular value of it.",
    "That it is quoted as a ratio against Weymouth rather than as a rate, since a ratio between two forms at one efficiency is independent of what that efficiency was.",
-   "That it carries the friction factor the form settled on, which is the figure that records what was assumed about the pipe when no efficiency can be defended."
+   "That it carries the friction factor the form settled on, which records what the pipe was assumed to be when no efficiency can be defended."
   ],
   "answer": 1,
   "explanation": "Weymouth moves from 56189212.7194 scfd at 0.850000 to 66104956.1404 scfd at 1.000000 on one pipe. A rate quoted without its efficiency is not a reproducible number."

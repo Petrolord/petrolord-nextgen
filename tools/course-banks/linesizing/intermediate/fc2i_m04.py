@@ -26,7 +26,7 @@ q(0, "Asked for 60000000.0000 scfd through Weymouth, the flat trunk arrives at 6
  ["A closed-form result, since the Weymouth relation can be solved for the outlet directly once the rate is known and only the other three forms require a search.",
   "An interpolated value, taken between the two nearest rows of the published Weymouth cases and therefore carrying the uncertainty of that table rather than of a solver.",
   "A measured value, since the 60000000.0000 scfd duty is one of the published cases this package carries a golden for."],
- "This is the first figure in the course that no equation produced. A closed-form answer can be wrong in its algebra, and a bracketed answer can be wrong by never having contained the answer at all.")
+ "No equation produced it. A closed-form answer can be wrong in its algebra, and a bracketed answer can be wrong by never having contained the answer at all.")
 
 q(2, "The bracket the solver searches runs from atmospheric up to a ceiling. What is that ceiling?",
  "The pressure at which the driving group vanishes, which is the inlet divided by the square root of e to the s, and which is not the inlet itself on any sloping line.",
@@ -66,7 +66,7 @@ q(3, "Equal hills of 3000.000000 ft put the ceiling 65.035343 psi below the inle
 q(1, "A bracket that runs from atmospheric to the inlet is used on a descent and then on a climb. How does it fail in each case?",
  "On the descent it is too short and cannot reach an answer lying above the inlet, and on the climb it is too long and reaches past the pressure where the group has already vanished.",
  ["On the descent it is too long, since the real ceiling sits below the inlet there, and on the climb it is too short, since the real ceiling sits above it.",
-  "On the descent it fails to converge and reports so, and on the climb it converges on the floor, which is why only the descending case was ever noticed.",
+  "On the descent it fails to converge and reports so, and on the climb it converges on the floor, so only the descending case produces a visible symptom.",
   "On both it returns the inlet with a drop of 0.000000 psi, the search collapsing to its upper bound whenever the answer lies outside the interval."],
  "The two failures are opposite and both return numbers. On a climb the band from 784.964657 psia up to 850.000000 psia has no physical content, because there is no rate to be found above the ceiling.")
 
@@ -82,7 +82,7 @@ q(0, "The same descent is run again with its outlet genuinely below the inlet, a
  ["It is the calibration row, since a case whose answer sits below the inlet is the only one a bracket of any width can be relied on to contain, and the first row is scaled against it.",
   "It shows that the solver is more accurate at lower outlet pressures, which is why a descending line should be worked from an outlet below the inlet wherever the profile allows it.",
   "It establishes the floor of the bracket, because 700.000000 psia is the lowest outlet this trunk will deliver at on that hill."],
- "If the search were the weak part, both rows would suffer. The conclusion follows directly: the fault was in the range the search was given rather than in the search.")
+ "A weakness in the search itself would show on both rows at once, so a difference between them points at the range the search was given rather than at the search.")
 
 q(3, "Asked for 20000000.0000 scfd up the 3000.000000 ft hill, the trunk delivers at 766.523922 psia for a drop of 83.476078 psi. What does that figure sit beside?",
  "The ceiling of 784.964657 psia, which is as close to the inlet as any rate can bring the outlet.",

@@ -83,7 +83,7 @@ q(1, "A review quotes a marched liquid line's total as the pressure drop of that
  ["It overstates the drop by the fittings, since a march accumulates a velocity head at each of its three segment boundaries that a single call over the whole length applies once.",
   "It is correct as a total but cannot be attributed to any station, since the traverse distributes the fittings evenly along the line rather than placing them.",
   "It mixes two conventions, the traverse reporting an absolute arrival pressure and a pressure drop being a difference, so the two cannot be quoted as the same quantity."],
- "The gap of 0.133351 psi is exactly the fittings and nothing else. The omission is in the signature rather than in the arithmetic, so it is visible before the call is made.")
+ "The gap of 0.133351 psi is the fittings and nothing else. The omission is in the signature rather than in the arithmetic, so it is visible before the call is made.")
 
 q(3, "At 1500.000000 ft of rise on the SOKU trunk the engine returns 1.0828513009 and 1.0408761444. What is each one for?",
  "The first scales the outlet's square inside the driving group and the second scales the length friction acts over.",
@@ -125,7 +125,7 @@ q(2, "The Weymouth up and down fractions at 1500.000000 ft average to 0.998132. 
  ["That an undulating route may be netted to its total elevation change, the residual of that averaging being small enough to disregard on any ordinary profile.",
   "That the descent is the more expensive half on every form, so a profile with more fall than rise in it is the one to check first.",
   "That the engine applies a correction of that size to a flat-line rate before reporting it for a route with relief, which is why the figure is printed."],
- "It is close to one and it is not one. The climb loses more than the descent gains on every row, and the engine will answer a netted figure honestly for a line that climbs once.")
+ "It is close to one and it is not one. On the Weymouth row the climb loses more than the descent gains, and the engine will answer a netted figure honestly for a line that climbs once.")
 
 q(1, "A terminal contracts for 60000000.0000 scfd on the flat SOKU trunk. What does the studio report, and what kind of trust does the figure carry?",
  "666.307057 psia at a drop of 183.692943 psi, and the trust of a search rather than of an equation, since it is only as good as the bracket it ran in and the form it called.",

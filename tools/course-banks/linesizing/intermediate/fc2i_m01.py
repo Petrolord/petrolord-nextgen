@@ -107,7 +107,7 @@ q(0, "The same trunk reads 66104956.1404 scfd at an outlet of 620.000000 psia an
  "The pipe did not change and neither did the gas. Held at 620.000000 psia the group is 338100.0000 psia squared, and brought up to 845.000000 psia it is very much smaller.")
 
 q(3, "Of the eight conditions the SOKU trunk is stated at, which ones does a transmission form square?",
- "The inlet of 850.000000 psia and the outlet of 620.000000 psia, and none of the other six conditions, every one of which enters a transmission form exactly as it stands.",
+ "The inlet of 850.000000 psia and the outlet of 620.000000 psia, and none of the other six conditions, no one of which is squared anywhere in a transmission form.",
  ["The inlet of 850.000000 psia and the outlet of 620.000000 psia, and also the bore of 11.938000 in, since a gas form carries an area and an area is a squared length.",
   "The inlet of 850.000000 psia alone, the outlet entering the group linearly, which is what makes the group asymmetric between the two ends of a line.",
   "The two pressures and the average flowing temperature of 535.000000 degR, all three of which appear inside the driving group of 338100.0000 psia squared."],

@@ -74,7 +74,7 @@ q(0, "Averaging the Weymouth up and down fractions of 0.932862 and 1.063402 give
  ["That it is close to one, so an undulating profile may be netted to its total elevation change with an error small enough to ignore on any ordinary route.",
   "That it is below one, which is the correction the engine returns on every call carrying an elevation change and applies to the rate before reporting it.",
   "That it is the correction a designer applies to a flat-line rate before quoting it for a route with relief on it, which is why it is computed from the Weymouth row."],
- "The term is an exponential and an exponential is not symmetric about zero. The climb loses more than the descent gains on every row of that table, which is why the average falls below one rather than above it.")
+ "The term is an exponential and an exponential is not symmetric about zero. On that row the climb loses more than the descent gains, which is why the average falls below one rather than above it.")
 
 q(3, "All four forms share one elevation term and the four still respond to the same hill by different amounts. Why?",
  "Each form combines the shared adjustment with its own friction treatment.",

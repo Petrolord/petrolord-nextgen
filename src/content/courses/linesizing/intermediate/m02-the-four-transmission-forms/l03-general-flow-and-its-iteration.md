@@ -6,7 +6,7 @@ General Flow reads 73861363.0502 scfd on the SOKU trunk, 1.117335 against Weymou
 
 ## The form that has to be solved
 
-The other three forms are evaluated. Their inputs go in and a rate comes out in one pass. General Flow cannot work that way, because the rate it is computing and the friction factor it needs depend on each other: the friction factor belongs to the flow, and the flow is what the friction factor is being used to find. So the form is iterated until the two agree, and the friction factor it settled on is returned beside the rate rather than discarded.
+The other three forms are evaluated. Their inputs go in and a rate comes out in one pass. General Flow cannot work that way, because the rate it is computing and the friction factor it needs depend on each other: the friction factor belongs to the flow, and the flow is what the friction factor is there to find. So the form is iterated until the two agree, and the friction factor it settled on is returned beside the rate rather than discarded.
 
 That returned factor is the only statement any of these four forms makes about the surface of the pipe, and it is why a Weymouth answer cannot be asked what pipe it assumed.
 

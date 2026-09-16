@@ -62,10 +62,10 @@ q(2, "General Flow at an efficiency of 0.850000 reads 62616519.4059 scfd and at 
  "General Flow reads 73861363.0502 scfd against Weymouth's 66104956.1404 scfd at equal efficiency. Two forms at two efficiencies can be ordered any way the efficiencies please, so the efficiency travels with the rate.")
 
 q(1, "The efficiency is held for the literature in this course. What does that status require of a graded gas figure?",
- "That it states the efficiency it was computed at, because the multiplier is linear and no publication in this package stands behind any particular value of it.",
+ "That it states the efficiency it was computed at, because every form carries it and no publication in this package stands behind any particular value of it.",
  ["That it is computed at an efficiency of 1.000000, which is the only value the course will grade against and the reason the published cases at 0.950000 and 0.920000 are taught rather than examined.",
   "That it is quoted as a ratio against Weymouth rather than as a rate, since a ratio between two forms at one efficiency is independent of what that efficiency was.",
-  "That it carries the friction factor the form settled on, which is the figure that records what was assumed about the pipe when no efficiency can be defended."],
+  "That it carries the friction factor the form settled on, which records what the pipe was assumed to be when no efficiency can be defended."],
  "Weymouth moves from 56189212.7194 scfd at 0.850000 to 66104956.1404 scfd at 1.000000 on one pipe. A rate quoted without its efficiency is not a reproducible number.")
 
 q(3, "Every published case in this package prints the engine rate and the golden beside it. What does agreement on all four forms prove?",
@@ -94,7 +94,7 @@ q(1, "What position does General Flow occupy among the four forms on the SOKU tr
  ["Second highest at 1.117335 against Weymouth, standing between the two Panhandles because its measured exponent of 2.5974750199 falls between theirs.",
   "Lowest of the four at 1.117335 against Weymouth, since the iteration it runs converges from below and settles under every form that is evaluated in a single pass.",
   "Highest of the four at 1.117335 against Weymouth, the ratio column being read against Panhandle B as the reference rather than against Weymouth."],
- "General Flow sits nearer the bottom of the four than the top. It stands about a third of the way from Weymouth to Panhandle B rather than halfway between them.")
+ "General Flow sits nearer the bottom of the four than the top. Against Weymouth it reads 1.117335 while Panhandle A reads 1.314034 and Panhandle B reads 1.336801.")
 
 q(0, "A reviewer takes the exponent of 2.6666666667 and uses it to scale a Panhandle B answer to a larger bore. What has gone wrong?",
  "An exponent belongs to the correlation that carries it, and on this table the spread across the four is wide enough to reverse an ordering between two of them.",
