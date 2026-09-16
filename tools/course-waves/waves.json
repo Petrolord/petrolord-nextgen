@@ -369,5 +369,45 @@
       "fields.json": "ba4c8e63d1dd591e11e7b213bca81a6e306fe3cef006b836b3264c771dca1dcd"
     },
     "headingsNoGeneratorSpells": 21
+  },
+  "corrosion": {
+    "course": "FC9",
+    "live": "/root/fc-wip-corrosion",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "fc9_dump.mjs",
+      "fc9_fields.mjs",
+      "fc9_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "gate_collisions.mjs",
+      "gate_capstone_leak.py",
+      "gate_copy_rule.py",
+      "gate_typed_literals.py",
+      "gate_movement.mjs",
+      "gate_wavejson.mjs",
+      "gate_claims.mjs",
+      "sweep_literals.py",
+      "digest_prose.rules.mjs",
+      "structure.py",
+      "scaffold.py",
+      "build_digest.sh",
+      "finalise.sh",
+      "truth-corrosion.json",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md"
+    ],
+    "pins": {
+      "digest.txt": "5a7943901bc9a245443800a40aa0b1e4ee9813ac1d8b88ef5812c187245a4651",
+      "fields.json": "44edd802bdf49afb88e53f25290de25b3ded9296e092767b5ea980ea17ebf98f"
+    },
+    "note": "FULL kit. Everything this wave is rebuilt from is committed: the digest and its generator, the teaching streams, the capstone generator, the answer key and its precision declaration, every gate that reads either, the build and re-pin scripts, the structure and scaffold, and all five writer briefs. The gates read /root paths by DEFAULT and every one takes an override, which is what makes the committed copy the thing the vitest suites read on a CI runner."
   }
 }

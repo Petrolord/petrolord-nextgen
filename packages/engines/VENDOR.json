@@ -28,8 +28,8 @@
     },
     {
       "domain": "facilities",
-      "engineFiles": 7,
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. The remaining five facilities engines have no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
+      "engineFiles": 4,
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, heatTransfer.js for FC6 Heat Exchange & Cooling, and corrosion.js for FC9 Corrosion & Integrity. The remaining four facilities engines have no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5, FC6 and FC9 all landed after it was measured."
     }
   ],
   "localOnly": [
@@ -523,12 +523,6 @@
       "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
-      "path": "__tests__/facilities.corrosion.test.js",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
-    },
-    {
       "path": "__tests__/facilities.heattransfer.test.js",
       "kind": "differing",
       "group": "0-partial-domain-facilities",
@@ -584,12 +578,6 @@
     },
     {
       "path": "engines/facilities/controlValve.js",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
-    },
-    {
-      "path": "engines/facilities/corrosion.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
       "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
@@ -668,12 +656,6 @@
       "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
-      "path": "test-data/facilities/goldens/corrosion_cases.json",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
-    },
-    {
       "path": "test-data/facilities/goldens/heattransfer_cases.json",
       "kind": "differing",
       "group": "0-partial-domain-facilities",
@@ -722,12 +704,6 @@
     },
     {
       "path": "tools/validation/facilities/oracle_controlvalve.py",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
-    },
-    {
-      "path": "tools/validation/facilities/oracle_corrosion.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
       "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
@@ -2048,6 +2024,48 @@
       "group": "8-repair-record",
       "vendoredSha": "711b8935c93f2cbf64a163e230c12a07bd8bd93e",
       "reason": "The FC4-0 repair's own findings record, which does not exist at the pinned canonical because the repair is ahead of it. Vendored for the same reason FINDINGS-separation.md is. IT IS NOT TEACHING TRUTH: it describes the engine BEFORE the repair, and FC4's RECON.md says so in as many words."
+    },
+    {
+      "path": "__tests__/facilities.corrosion.test.js",
+      "kind": "differing",
+      "group": "9-fc9-corrosion-course",
+      "reason": "Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path.",
+      "vendoredSha": "052ace797772a9178db35a92e296cc6d0221256c"
+    },
+    {
+      "path": "engines/facilities/corrosion.js",
+      "kind": "differing",
+      "group": "9-fc9-corrosion-course",
+      "reason": "Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path.",
+      "vendoredSha": "d000a5fa978e1565f6f9abb610fff16c9ef123a8"
+    },
+    {
+      "path": "test-data/facilities/goldens/corrosion_cases.json",
+      "kind": "differing",
+      "group": "9-fc9-corrosion-course",
+      "reason": "Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path.",
+      "vendoredSha": "b0965cb3c04a3c1442a78ce2d3700a40106181da"
+    },
+    {
+      "path": "tools/validation/facilities/FINDINGS-corrosion.md",
+      "kind": "extra",
+      "group": "9-fc9-corrosion-course",
+      "vendoredSha": "51d1b136f3c4053eb243a8c0ca468dc2c4e41ff0",
+      "reason": "The FC9-0 repair record. Added to canonical after 709172f, so it is extra against the pinned manifest. Same shape as FINDINGS-gasprocessing.md. Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path."
+    },
+    {
+      "path": "tools/validation/facilities/RECON-corrosion.md",
+      "kind": "extra",
+      "group": "9-fc9-corrosion-course",
+      "vendoredSha": "c7f042f93c26a1fe7705a40628366a9affa16274",
+      "reason": "The FC9-0 recon the repair record cites, 55 findings. Added to canonical after 709172f, so it is extra against the pinned manifest. Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_corrosion.py",
+      "kind": "differing",
+      "group": "9-fc9-corrosion-course",
+      "reason": "Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path.",
+      "vendoredSha": "fe1a229337feb4a0afc5b8b7f399dde9a6bbf435"
     },
     {
       "path": "__tests__/sim.ekene.test.js",

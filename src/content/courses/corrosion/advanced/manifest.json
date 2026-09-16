@@ -1,0 +1,339 @@
+{
+ "app_slug": "corrosion",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-this-module-holds-back",
+   "title": "What This Module Holds Back",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-eleven-items-and-one-withdrawal",
+     "title": "Eleven items and one withdrawal",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-constant-in-two-files",
+     "title": "A constant that lives in two files",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-measuring-rather-than-reading",
+     "title": "Measuring rather than reading an export",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-a-synthetic-case-can-prove",
+     "title": "What a synthetic case can prove",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-what-no-case-can-discriminate",
+     "title": "What no case here can discriminate",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-what-the-module-does-not-have",
+   "title": "What the Module Does Not Have",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-no-interval-no-thickness",
+     "title": "No interval and no thickness",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-no-erosional-velocity",
+     "title": "No erosional velocity",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-no-pitting-and-no-cracking",
+     "title": "No pitting and no cracking criterion",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-the-allowance-is-taken-off",
+     "title": "What the allowance is taken off",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-the-label-and-the-band",
+   "title": "The Label and the Band",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-four-words-three-boundaries",
+     "title": "Four words and three boundaries",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-label-is-not-a-measurement",
+     "title": "A label is not a measurement",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-optimistic-by-a-step-or-two",
+     "title": "Optimistic by a step or two",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-default-case-reads-high",
+     "title": "The default case reads high",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-summary-that-was-missing",
+   "title": "The Summary That Was Missing",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-seven-numbers-and-no-verdict",
+     "title": "Seven numbers and no verdict",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-order-is-the-claim",
+     "title": "The order is the claim",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-would-i-change-first",
+     "title": "What would I change first",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-constraint-is-not-a-recommendation",
+     "title": "A constraint is not a recommendation",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-inversion-against-a-limit",
+   "title": "Inversion Against a Limit",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-what-rate-can-i-tolerate",
+     "title": "What rate can I tolerate",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-availability-do-i-need",
+     "title": "What availability do I need",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-allowance-reinstates-the-life",
+     "title": "What allowance reinstates the life",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-two-fields-two-questions",
+     "title": "Two fields answering two questions",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "fc-chemistry-explorer",
+      "fc-rate-explorer",
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-what-this-engine-used-to-do",
+   "title": "What This Engine Used To Do",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-an-invented-curve-wearing-authority",
+     "title": "An invented curve wearing authority",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-an-input-that-moved-nothing",
+     "title": "An input that moved nothing",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-least-limiting-default",
+     "title": "The least limiting default",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-guard-switched-off-at-its-own-default",
+     "title": "A guard switched off at its own default",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

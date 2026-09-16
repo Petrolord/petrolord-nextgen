@@ -1,0 +1,1075 @@
+# FC9 TEACHING DIGEST: Corrosion & Integrity
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below, and every brief in this wave quotes this file by name. The wave recon and findings reports, the engine source comments and the repair record vendored beside the oracle are PROVENANCE and not teaching truth: two figures in a sibling course brief came from a recon report and were wrong.
+
+# PRECISION. Partial pressures in bar and in psia, wall thicknesses and allowances in mm, corrosion rates in mm/yr, lives in years, percentages, percentage points and every dimensionless ratio print to SIX decimals; Reynolds numbers print to FOUR, because a number in the hundreds of thousands carries no information in its millionths; measured constants and ratios of them print to TWELVE; counts are whole numbers.
+
+# ENGINE. engines/facilities/corrosion.js, vendored sha-identical with petrolord-engines d4c19ad, 775 lines, importing nothing. The vendoring closure walked from the jest suite is SIX paths. The vendored golden test-data/facilities/goldens/corrosion_cases.json carries 110 rows in 17 blocks.
+
+# THE GOLDEN IS SYNTHETIC AND IT SAYS SO. golden provenance.published is false. The golden's own words: "No published de Waard-Milliams case, no MR0175 or ISO 15156 clause and no corrosion rate-band table exists anywhere in this repository, so every row here is SYNTHETIC. Route independence and the gate's pins carry the load instead. A number recalled from memory is not a published datum and none is typed here."
+
+# WHAT IS NEVER GRADED IN THIS COURSE. No corrosion rate the correlation produced, no rate category, no sour severity region, no material choice, no inspection interval and no retirement thickness. Section 21 lists every held item and section 3 pins every held constant. The eighteen graded capstone fields are the stream bookkeeping, the flow definition, the inhibitor arithmetic and the allowance arithmetic, and the capstone states any rate it needs from an inspection survey.
+
+# SECTION 1: What this engine computes, and what it refuses to compute (owned by Associate m01, and shared with Expert m01 because WHAT IS NOT HERE is that module's subject)
+
+The engine is a CO2 corrosion rate screen with a remaining-life calculation on the end of it. It answers one question about one mechanism, and the list of what it does not answer is longer than the list of what it does.
+
+| door | what it returns | what it needs |
+| --- | --- | --- |
+| `co2FugacityCoefficient` | the fugacity coefficient of CO2, a bare number | a temperature and a total pressure |
+| `co2Fugacity` | the CO2 partial pressure, the coefficient, the fugacity and whether the pressure cap was applied | a temperature, a total pressure and a CO2 mole fraction |
+| `dwmReactionRate` | the reaction rate term in mm/yr, a bare number | a temperature and a CO2 fugacity |
+| `dwmMassTransferRate` | the mass-transfer rate term in mm/yr, a bare number | a velocity, a diameter and a CO2 fugacity |
+| `scaleFactor` | the protective-film multiplier, clamped at 1 | a temperature and a CO2 fugacity |
+| `scaleOnsetTC` | the temperature at which that multiplier leaves 1 | a CO2 fugacity |
+| `phFactor` | the pH multiplier and the reference it is taken against, or a refusal | an in-situ pH |
+| `corrosionRate` | the whole rate with every factor reported separately | the conditions, the wetting regime and the inhibitor programme |
+| `wallShearStressPa` | the Reynolds number, the friction branch, the friction factor, the wall shear and a film-risk word | a velocity, a diameter, a density and a viscosity |
+| `sourServiceScreen` | the H2S partial pressure in bar and psia, the threshold in both, and whether the stream is above it | an H2S partial pressure |
+| `corrosionRegime` | which corrosion product governs, and whether the CO2 rate model applies at all | the H2S and CO2 partial pressures |
+| `remainingLife` | the remaining allowance, the remaining years, the allowance a target life demands and the shortfall | a rate, an allowance, a consumed depth and optionally a design life |
+| `rateCategory` | a band label, and nothing else | a rate in mm/yr |
+| `screen` | all of the above reconciled, plus a BINDING CONSTRAINT and a withheld block | everything |
+
+The engine states its own absences in two exported lists. `NOT_PROVIDED` carries 8 items and `HELD_FOR_LITERATURE` carries 11, and `screen` returns both, so a caller shows them rather than discovering them.
+
+NOT_PROVIDED, verbatim from the engine:
+- a sour-service severity region: withdrawn, see the module header
+- material selection or metallurgy guidance: withdrawn, see the module header
+- an inspection interval
+- a minimum or retirement thickness
+- a fitness-for-service assessment
+- an erosional velocity limit
+- a pitting, SSC or HIC criterion
+- a localised-attack rate: the one rate here is a general uniform rate
+
+THE ONE RATE THIS ENGINE RETURNS IS A GENERAL UNIFORM RATE. It is not a pitting rate. It is not a weld rate and it is not a top-of-line rate, and the engine says so in the list above. A learner who reads a uniform rate as a wall-loss prediction for the worst spot on the line has read it wrong, and the engine cannot warn them because it has no localised model to compare against.
+
+# SECTION 2: THE WITHDRAWAL. A curve carrying a standard's name told engineers what steel to buy, and it was invented here (owned by Expert m06, and the headline lesson of this whole course)
+
+This section is about behaviour the engine SHIPS TODAY, which is a refusal to answer. It is not repair history: the absence is current, declared and permanent, and section 25 is where the history lives.
+
+An earlier version of this file computed a sour-service severity region from an expression of its own invention, labelled it with the names of two standards, and served three named material recommendations off it. The repair did not retune the expression. It WITHDREW the claim, because a curve that carries a standard's name and tells an engineer what steel to buy is not a tolerance question.
+
+WHAT THE ENGINE NOW RETURNS IN ITS PLACE, measured at the shipped app defaults:
+
+| field | value | what it means |
+| --- | --- | --- |
+| `ph2sBar` | 0.051000 | the H2S partial pressure, the total pressure times the H2S mole fraction |
+| `ph2sPsia` | 0.739699 | the same, converted by the engine's exact bar to psia factor |
+| `thresholdBar` | 0.003500 | the screening threshold, whose VALUE is held |
+| `thresholdPsia` | 0.050763208303 | the same threshold, derived rather than rounded |
+| `thresholdHeld` | true | the engine declares that the number is not sourced in the repository |
+| `sour` | true | above the threshold or below it, and nothing more |
+| `decadesAboveThreshold` | 1.163506 | how far above, in powers of ten |
+| `regionProvided` | false | THE ABSENCE IS A FIELD, so a caller cannot read it as a missing value |
+| `materialGuidanceProvided` | false | the same for the material recommendation |
+| `label` | Above the H2S screening threshold | the whole verdict, in words |
+
+THE ABSENCE IS PROVED THREE WAYS, and each is a separate check this file ran: the function `sourServiceRegion` is not exported, so `typeof` it is undefined; none of the three material guidance strings and neither standard name appears anywhere in the 775 lines of the engine source; and no returned string anywhere in three whole screenings names either standard.
+
+THE GENERAL LESSON, which is why this is the course's headline and not a footnote. A fit that is wrong by a factor of two in a number is a tolerance problem and you fix it by measuring. A fit that is invented and then labelled with somebody else's authority is a different kind of thing: the number was never the claim. The claim was "this is what the standard says", and no amount of retuning makes that true. The only repair available is to stop claiming it, and the only honest replacement is the sentence that the thing is not provided.
+
+THE THRESHOLD VALUE ITSELF STAYED WHERE IT WAS. Changing a live number without a source would have repeated the same mistake with the sign flipped, so the engine keeps its threshold, declares it held, and prints it in both units so nobody has to guess which.
+
+# SECTION 3: The numbers this module stands on, MEASURED out of the engine rather than typed, and pinned against a third copy (shared by Associate m01 and Expert m01)
+
+NONE of these is sourced in this repository. Every one of them is HELD FOR LITERATURE, every one is measured below by asking the engine a question whose answer is that constant and nothing else, and every measured value is compared against a literal typed in this generator, which is a THIRD location. A constant that lives in the engine and in the oracle cannot be validated by comparing the engine with the oracle, and a paired battery proved that: fifteen of seventeen constants moved in both files at once left the suite green.
+
+MEASURING RATHER THAN READING THE EXPORT IS DELIBERATE. An export tells you what the module declares. A measurement tells you what it actually uses. Both are below, and the two columns disagreeing would be a finding.
+
+| constant | measured out of the engine | literal in this gate | relative difference | how it was measured |
+| --- | --- | --- | --- | --- |
+| the fugacity coefficient constant A | 0.003100000000 | 0.003100000000 | 1.119e-15 | log10 of the coefficient divided by the pressure is linear in the reciprocal temperature, so 20 C and 180 C at 10 bar solve for both constants |
+| the fugacity coefficient constant B | 1.400000000000 | 1.400000000000 | 6.344e-16 | the same pair |
+| the fugacity pressure cap, bar | 250.000000000000 | 250.000000000000 | 2.274e-16 | bisected on the pressure at which the coefficient stops moving, at 60 C |
+| the reaction constant A | 4.930000000000 | 4.930000000000 | 1.802e-16 | log10 of the reaction rate at fCO2 1 bar and 60 C, with the B term removed |
+| the reaction constant B | 1119.000000000000 | 1119.000000000000 | 2.032e-16 | the slope of log10 of the reaction rate against the reciprocal temperature, 20 C against 180 C at fCO2 1 bar |
+| the reaction fugacity exponent | 0.580000000000 | 0.580000000000 | 1.914e-16 | the slope of log10 of the reaction rate against log10 fCO2, 1 bar against 10 bar at 60 C |
+| the mass-transfer coefficient | 2.450000000000 | 2.450000000000 | 0 | the mass-transfer rate at velocity 1, diameter 1 and fCO2 1, where every power is unity |
+| the mass-transfer velocity exponent | 0.800000000000 | 0.800000000000 | 2.776e-16 | the base-two log of the doubling ratio in velocity, at diameter 1 and fCO2 1 |
+| the mass-transfer diameter exponent | 0.200000000000 | 0.200000000000 | 9.714e-16 | the negative base-two log of the doubling ratio in diameter, at velocity 1 and fCO2 1 |
+| the mass-transfer fugacity exponent, which is exactly one | 1.000000000000 | 1.000000000000 | 0 | the base-two log of the doubling ratio in fCO2, which is a PROPERTY and not a typed constant: the term is exactly linear in fugacity |
+| the scale constant A | 2399.999999999998 | 2400.000000000000 | 9.474e-16 | the slope of log10 of the scale factor against the reciprocal temperature at 150 C and 200 C, WHERE THE FACTOR IS UNCLAMPED. Below the onset the engine returns exactly 1 and this slope would be zero |
+| the scale constant C | 6.700000000000 | 6.700000000000 | 7.954e-16 | the same pair, with the A term removed |
+| the scale fugacity exponent | 0.600000000000 | 0.600000000000 | 5.551e-16 | the slope of log10 of the scale factor against log10 fCO2 at 150 C, again above the onset |
+| the pH slope | -0.500000000000 | -0.500000000000 | 0 | log10 of the ratio of the factors at pH 5 and pH 7, over two pH units |
+| the pH reference | 4.000000000000 | 4.000000000000 | 0 | bisected on the pH at which the engine stops returning a factor and starts returning a refusal |
+| the Blasius exponent | -0.200000000000 | -0.200000000000 | 1.388e-16 | the log ratio of the friction factor at Reynolds 200000 and 800000 |
+| the Blasius coefficient | 0.046000000000 | 0.046000000000 | 3.017e-16 | the friction factor at Reynolds 200000 with the measured exponent removed |
+| the laminar constant | 16.000000000000 | 16.000000000000 | 2.220e-16 | the friction factor times the Reynolds number, at Reynolds 1500 |
+| the friction branch switch Reynolds number | 4000.000000000000 | 4000.000000000000 | 0 | bisected on the branch NAME the engine returns |
+| the film-stripping threshold, Pa | 100.000000000000 | 100.000000000000 | 2.842e-16 | the velocity at which the risk word turns high is bisected, and the shear is read there |
+| the moderate band, Pa | 50.000000000000 | 50.000000000000 | 1.421e-16 | the velocity at which the risk word leaves low is bisected, and the shear is read there |
+| the sour screening threshold, bar | 0.003500000000 | 0.003500000000 | 3.717e-16 | bisected on the sour flag |
+| the bar to psia factor | 14.503773800722 | 14.503773800722 | 0 | the psia value the engine reports for a partial pressure of exactly 1 bar |
+| the carbonate boundary as an H2S to CO2 ratio | 0.002000000000 | 0.002000000000 | 0 | bisected on the regime WORD at a CO2 partial pressure of 1 bar |
+| the mixed boundary as an H2S to CO2 ratio | 0.050000000000 | 0.050000000000 | 0 | bisected on the regime WORD at the same CO2 partial pressure |
+| the low category band, mm/yr | 0.100000000000 | 0.100000000000 | 0 | bisected on the category WORD |
+| the moderate category band, mm/yr | 0.500000000000 | 0.500000000000 | 3.331e-16 | bisected on the category WORD |
+| the high category band, mm/yr | 1.000000000000 | 1.000000000000 | 0 | bisected on the category WORD |
+| the controlling reporting margin | 0.100000000000 | 0.100000000000 | 8.049e-15 | the velocity that puts the mass-transfer term a stated ratio above the reaction term is solved, and the word the engine returns is bisected on that ratio |
+| the inhibitor shortfall trigger, percentage points | 0.100000000000 | 0.100000000000 | 5.468e-14 | at a 50 percent efficiency the availability at which the warning first appears is bisected, and the shortfall it corresponds to is derived from it |
+
+30 constants pinned, every one against a literal in a third file, and the whole table is re-measured on every rebuild of this digest.
+
+THE ENGINE EXPORTS FIFTEEN OF THESE. An export agreeing with a measurement checks the export; a measurement on its own checks the behaviour. Both columns are here so a disagreement between them would be visible.
+
+| export | declared value | measured from behaviour | relative difference |
+| --- | --- | --- | --- |
+| `BAR_TO_PSIA` | 14.503773800722 | 14.503773800722 | 0 |
+| `FUGACITY_CAP_BAR` | 250.000000000000 | 250.000000000000 | 2.274e-16 |
+| `PH_REFERENCE` | 4.000000000000 | 4.000000000000 | 0 |
+| `FILM_STRIP_PA` | 100.000000000000 | 100.000000000000 | 2.842e-16 |
+| `FILM_MODERATE_PA` | 50.000000000000 | 50.000000000000 | 1.421e-16 |
+| `SHEAR_SWITCH_RE` | 4000.000000000000 | 4000.000000000000 | 0 |
+| `SOUR_THRESHOLD_BAR` | 0.003500000000 | 0.003500000000 | 3.717e-16 |
+| `SOUR_THRESHOLD_PSIA` | 0.050763208303 | 0.050763208303 | 2.734e-16 |
+| `REGIME_CARBONATE_MAX` | 0.002000000000 | 0.002000000000 | 0 |
+| `REGIME_MIXED_MAX` | 0.050000000000 | 0.050000000000 | 0 |
+| `CONTROLLING_MARGIN` | 0.100000000000 | 0.100000000000 | 8.049e-15 |
+| `INHIBITOR_SHORTFALL_PP` | 0.100000000000 | 0.100000000000 | 5.468e-14 |
+| `RATE_CATEGORY_BANDS.low` | 0.100000000000 | 0.100000000000 | 0 |
+| `RATE_CATEGORY_BANDS.moderate` | 0.500000000000 | 0.500000000000 | 3.331e-16 |
+| `RATE_CATEGORY_BANDS.high` | 1.000000000000 | 1.000000000000 | 0 |
+
+THE SOUR THRESHOLD IS NOT 0.05 PSIA. Measured out of the engine it is 0.050763208303 psia, and 0.05 psia would be 0.003447378640 bar. The gap between the two, as a fraction of the smaller, is 1.526417 percent. The engine prints both numbers and the vendored gate asserts the psia value is not 0.05. Section 25 is where the comment that claimed otherwise belongs.
+
+THE GOLDEN CARRIES ITS OWN COPY of these constants in a `heldConstants` block, which is the FOURTH location, and the vendored jest suite cross-pins that against its own literals. Moving a constant in the engine and in the oracle together now fails the pin before any measurement runs. The golden block, read from the file:
+
+| golden key | golden value | measured out of the engine | relative difference |
+| --- | --- | --- | --- |
+| `fugacityA` | 0.003100000000 | 0.003100000000 | 1.119e-15 |
+| `fugacityB` | 1.400000000000 | 1.400000000000 | 6.344e-16 |
+| `fugacityCapBar` | 250.000000000000 | 250.000000000000 | 2.274e-16 |
+| `dwmA` | 4.930000000000 | 4.930000000000 | 1.802e-16 |
+| `dwmB` | 1119.000000000000 | 1119.000000000000 | 2.032e-16 |
+| `dwmN` | 0.580000000000 | 0.580000000000 | 1.914e-16 |
+| `vmC` | 2.450000000000 | 2.450000000000 | 0 |
+| `vmUExp` | 0.800000000000 | 0.800000000000 | 2.776e-16 |
+| `vmDExp` | 0.200000000000 | 0.200000000000 | 9.714e-16 |
+| `scaleA` | 2400.000000000000 | 2399.999999999998 | 9.474e-16 |
+| `scaleC` | 6.700000000000 | 6.700000000000 | 7.954e-16 |
+| `scaleN` | 0.600000000000 | 0.600000000000 | 5.551e-16 |
+| `phSlope` | -0.500000000000 | -0.500000000000 | 0 |
+| `phReference` | 4.000000000000 | 4.000000000000 | 0 |
+| `blasiusC` | 0.046000000000 | 0.046000000000 | 3.017e-16 |
+| `blasiusN` | -0.200000000000 | -0.200000000000 | 1.388e-16 |
+| `laminarC` | 16.000000000000 | 16.000000000000 | 2.220e-16 |
+| `switchRe` | 4000.000000000000 | 4000.000000000000 | 0 |
+| `filmStripPa` | 100.000000000000 | 100.000000000000 | 2.842e-16 |
+| `filmModeratePa` | 50.000000000000 | 50.000000000000 | 1.421e-16 |
+| `sourThresholdBar` | 0.003500000000 | 0.003500000000 | 3.717e-16 |
+| `barToPsia` | 14.503773800722 | 14.503773800722 | 0 |
+| `regimeCarbonateMax` | 0.002000000000 | 0.002000000000 | 0 |
+| `regimeMixedMax` | 0.050000000000 | 0.050000000000 | 0 |
+| `categoryLow` | 0.100000000000 | 0.100000000000 | 0 |
+| `categoryModerate` | 0.500000000000 | 0.500000000000 | 3.331e-16 |
+| `categoryHigh` | 1.000000000000 | 1.000000000000 | 0 |
+| `controllingMargin` | 0.100000000000 | 0.100000000000 | 8.049e-15 |
+
+28 of the golden's 28 held constants are re-measured here against the engine's behaviour, so the golden, the engine and this generator are three independent copies and any two of them agreeing is no longer enough.
+
+# SECTION 4: CO2 partial pressure, CO2 fugacity, and the difference the screen printed for a year without explaining (owned by Associate m02)
+
+TWO QUANTITIES, ONE MOLECULE, AND THEY ARE NOT THE SAME NUMBER. The partial pressure is the total pressure times the mole fraction. The fugacity is the partial pressure times a coefficient below one at high pressure, and it is the fugacity that drives the RATE. The H2S threshold and the film-governing ratio use PARTIAL PRESSURES, and no fugacity correction is applied to H2S at all, which the engine declares in a field.
+
+At the shipped app defaults: partial pressure 1.530013 bar, coefficient 0.878581, fugacity 1.344240 bar. `ph2sFugacityApplied` is false.
+
+| total pressure bar | coefficient | CO2 partial pressure bar | CO2 fugacity bar | cap applied | note |
+| --- | --- | --- | --- | --- | --- |
+| 1.000000 | 0.997465 | 0.030000 | 0.029924 | false | none |
+| 10.000000 | 0.974938 | 0.300000 | 0.292481 | false | none |
+| 50.000000 | 0.880814 | 1.500000 | 1.321222 | false | none |
+| 100.000000 | 0.775834 | 3.000000 | 2.327502 | false | none |
+| 200.000000 | 0.601919 | 6.000000 | 3.611511 | false | none |
+| 249.000000 | 0.531526 | 7.470000 | 3.970499 | false | none |
+| 250.000000 | 0.530179 | 7.500000 | 3.976339 | false | none |
+| 251.000000 | 0.530179 | 7.530000 | 3.992245 | true | the engine says the coefficient is held at its cap value |
+| 400.000000 | 0.530179 | 12.000000 | 6.362143 | true | the engine says the coefficient is held at its cap value |
+
+THE CAP IS A REPORTED LIMIT, NOT A SILENT ONE. At 249.000000 bar the coefficient is 0.531526 and `pressureCapApplied` is false. At 400.000000 bar the coefficient is 0.530179, identical to its value at the cap, `pressureCapApplied` is true, and the engine returns this note verbatim:
+
+> the fugacity coefficient is held at its 250 bar value: 399.99999999999994 bar is above the cap and what the correlation does above it is not established here
+
+WHAT THE CORRELATION DOES ABOVE THE CAP IS HELD. The engine holds the coefficient flat and says it is doing so. That is a stated convention and not a prediction, and no graded field in this course sits above the cap.
+
+THE REFUSALS THIS DOOR OWNS, each one a call this file made and labelled:
+| what was asked | the engine's own message |
+| --- | --- |
+| a non-finite temperature | a finite temperature is required |
+| a temperature at absolute zero | a temperature above absolute zero is required: -273.15 C is at or below -273.15 C |
+| a temperature below absolute zero | a temperature above absolute zero is required: -300 C is at or below -273.15 C |
+| a zero total pressure | a positive total pressure is required |
+| a blank CO2 mole fraction | a finite CO2 mole fraction is required |
+| a CO2 mole fraction of 3, meaning 300 mol percent | the CO2 mole fraction must be between 0 and 1: 3 is outside it |
+
+The bare coefficient door returns NaN rather than a finite number below absolute zero: `co2FugacityCoefficient` at -300 C returns NaN. A finite number there would be read as an answer by anything that only tests for an error key.
+
+# SECTION 5: Two resistances in series, and which one is holding the rate back (owned by Associate m03)
+
+The rate is not the reaction rate and it is not the transport rate. It is the two in series: the reciprocal of the sum of the reciprocals. That has a consequence a learner should be able to state before they see a number, and the table below is the proof of it: the combined rate is always BELOW BOTH TERMS, and it sits close to whichever term is smaller.
+
+| stream | reaction mm/yr | mass transfer mm/yr | combined mm/yr | combined over the smaller term | controlling | margin |
+| --- | --- | --- | --- | --- | --- | --- |
+| Etelebou | 30.302325 | 5.597610 | 4.724817 | 0.844077 | mass transfer | 4.413440 |
+| Kanbi | 149.987114 | 8.264482 | 7.832881 | 0.947776 | mass transfer | 17.148398 |
+| Tunu | 44.114126 | 70.689594 | 27.162967 | 0.615743 | reaction kinetics | 0.602425 |
+| Opukushi | 27.663205 | 2.341081 | 2.158418 | 0.921975 | mass transfer | 10.816423 |
+| Diebu | 38.740377 | 7.560298 | 6.325799 | 0.836713 | mass transfer | 4.124187 |
+| Angiama | 10.013808 | 0.091971 | 0.091134 | 0.990899 | mass transfer | 107.879479 |
+
+THE SERIES IDENTITY IS CHECKED ON EVERY ROW ABOVE and it holds to twelve figures: the reciprocal of the combined rate minus the reciprocal of each term is zero. That is what makes the combination a claim you can argue with rather than a black box.
+
+THE CONTROLLING WORD HAS A REPORTING MARGIN. Within 10.000000 percent the engine answers "comparable" rather than naming one term, because a bare comparison of two nearly equal numbers flips on floating-point noise. The margin is a REPORTING threshold and the engine says so: it is not a claim about where mass transfer stops mattering.
+
+THE MASS-TRANSFER TERM IS A POWER LAW, AND THE POWERS ARE MEASURABLE PROPERTIES. Doubling the velocity multiplies the term by a fixed factor whatever the other inputs are, and the same for halving the diameter. The two ratio columns below are scale free, which is what makes them a test of the FORM rather than of the constants.
+
+| diameter m | mass transfer at 1 m/s | at 2 m/s | ratio | at 4 m/s | ratio |
+| --- | --- | --- | --- | --- | --- |
+| 0.050800 | 6.669367 | 11.612042 | 1.741101126592 | 20.217739 | 1.741101126592 |
+| 0.101600 | 5.806021 | 10.108870 | 1.741101126592 | 17.600564 | 1.741101126592 |
+| 0.203200 | 5.054435 | 8.800282 | 1.741101126592 | 15.322181 | 1.741101126592 |
+| 0.406400 | 4.400141 | 7.661091 | 1.741101126592 | 13.338734 | 1.741101126592 |
+
+Both ratio columns are constant down the table and equal to each other, which is what a power law in velocity means. The measured exponent is 0.800000000000 and the diameter exponent is 0.200000000000, both pinned in section 3.
+
+AN ABSENT VELOCITY IS NOT AN UNLIMITED TRANSPORT CAPACITY. The mass-transfer door returns NaN when the velocity or the diameter is missing, and the gate asserts it is NaN and not infinity, because an infinite transport rate makes the series combination equal the reaction rate exactly and the engine would then name the reaction as controlling from an input nobody supplied.
+
+| what was asked | the bare term returns |
+| --- | --- |
+| a blank velocity | NaN |
+| a blank diameter | NaN |
+| a zero velocity | NaN |
+| a negative diameter | NaN |
+
+# SECTION 6: The protective film, and an onset temperature that MOVES (owned by Associate m04)
+
+Once iron carbonate plates out on the steel the rate FALLS with further heating, which a naive extrapolation of the low-temperature equation gets exactly backwards. The engine handles that with a multiplier clamped at one, and the temperature at which the multiplier leaves one is COMPUTED rather than quoted, because it moves with the CO2 fugacity.
+
+| CO2 fugacity bar | computed onset C | factor at 60 C | factor at the onset | factor 20 C above the onset |
+| --- | --- | --- | --- | --- |
+| 0.050000 | 132.297731 | 1.000000 | 1.000000000000 | 0.526907 |
+| 0.200000 | 108.978001 | 1.000000 | 1.000000000000 | 0.487114 |
+| 1.000000 | 85.058955 | 1.000000 | 1.000000000000 | 0.442281 |
+| 2.000000 | 75.655878 | 1.000000 | 1.000000000000 | 0.423517 |
+| 5.000000 | 63.957912 | 1.000000 | 1.000000000000 | 0.399278 |
+| 20.000000 | 47.679108 | 0.528864 | 1.000000000000 | 0.363944 |
+| 60.000000 | 35.853960 | 0.273572 | 1.000000000000 | 0.337174 |
+
+THE ONSET IS NOT A FIXED TEMPERATURE. Across the fugacities above it moves by 96.443771 degrees Celsius. At the shipped app defaults, where the fugacity is 1.344240 bar, the engine computes the onset at 80.984504 C and the factor at the app's own 60.000000 C is 1.000000000000, exactly one. A help guide that says the film appears at a round temperature is wrong at every fugacity except one.
+
+| temperature C | factor at the Kanbi fugacity | rate mm/yr | is the film credited |
+| --- | --- | --- | --- |
+| 40.000000 | 1.000000000000 | 1.270135 | no |
+| 55.000000 | 1.000000000000 | 1.401052 | no |
+| 70.000000 | 1.000000000000 | 1.508421 | no |
+| 85.000000 | 0.820838044032 | 1.311185 | yes |
+| 100.000000 | 0.435371430361 | 0.728051 | yes |
+| 115.000000 | 0.242520118987 | 0.421113 | yes |
+| 130.000000 | 0.141105882050 | 0.252905 | yes |
+| 150.000000 | 0.072757985058 | 0.135116 | yes |
+
+The Kanbi stream runs at 119.400000 C with a fugacity of 1.467680 bar, so its computed onset is 79.792274 C and its factor is 0.206012. The Etelebou stream runs at 58.200000 C with a fugacity of 0.753085 bar, so its onset is 89.053653 C and its factor is 1.000000000000. One number, two streams, two different answers about whether a film exists.
+
+WHAT TEMPERATURE THE PUBLISHED CORRELATION TURNS AT IS HELD, and so is a much larger question. The engine forms the series combination FIRST and then multiplies by this factor, so it applies a protective-film correction to a rate that mass transfer may be controlling. Multiplying the reaction term instead is a DIFFERENT physical claim and gives a materially different answer whenever mass transfer controls, which it does at the app's own defaults. Which of the two the published correlation intends is not established here, the engine says so in its own held list, and NOTHING DOWNSTREAM OF THIS FACTOR IS GRADED IN THIS COURSE.
+
+WHERE THE FACTOR IS EXACTLY ONE THE QUESTION CANNOT BITE, because multiplying by one in either place gives the same number to the last bit. Of the six streams, 5 have a factor of exactly one: Etelebou, Tunu, Opukushi, Diebu, Angiama. Every capstone scenario in this course is deliberately below its own computed onset for that reason, and the capstone generator asserts it.
+
+# SECTION 7: pH, the reference it is taken against, and why below it the engine refuses (owned by Associate m05)
+
+The correction is a multiplier relative to the pH the correlation was fitted at. The reference is 4.000000, measured by bisecting the pH at which the engine stops returning a factor, and at the reference the factor is exactly one by definition rather than by a clamp.
+
+| pH | factor | factor relative to the reference | rate at the Etelebou stream mm/yr |
+| --- | --- | --- | --- |
+| 4.000000 | 1.000000 | 1.000000 | 4.724817 |
+| 4.500000 | 0.562341 | 0.562341 | 2.656960 |
+| 5.000000 | 0.316228 | 0.316228 | 1.494118 |
+| 5.500000 | 0.177828 | 0.177828 | 0.840204 |
+| 6.000000 | 0.100000 | 0.100000 | 0.472482 |
+| 7.000000 | 0.031623 | 0.031623 | 0.149412 |
+| 8.000000 | 0.010000 | 0.010000 | 0.047248 |
+| 9.000000 | 0.003162 | 0.003162 | 0.014941 |
+
+THE RATE FALLS STRICTLY WITH pH across the whole band above the reference: from 4.724817 mm/yr at pH 4.000000 to 0.014941 mm/yr at pH 9.000000, a factor of 316.227766. Every step down the column is smaller than the one above it, and this generator asserts that on every rebuild.
+
+EXACTLY ONE DECADE PER TWO pH UNITS is a PROPERTY of the correction and it is scale free, so it tests the form rather than the slope. Measured across the swept band: 0.100000000000, 0.100000000000, 0.100000000000, 0.100000000000. Every one is the same number.
+
+BELOW THE REFERENCE THE ENGINE REFUSES. It does not return a factor of one, and that distinction is the whole of this lesson: a more acid water is not a less corrosive one, so a factor of one is the LEAST LIMITING possible answer to a question the module cannot answer. What the published correction does below its reference is held.
+
+| pH | what the engine returns |
+| --- | --- |
+| 2.000000 | a refusal, and it carries `phReference` 4.000000 so a caller can print the boundary |
+| 3.000000 | a refusal, and it carries `phReference` 4.000000 so a caller can print the boundary |
+| 3.500000 | a refusal, and it carries `phReference` 4.000000 so a caller can print the boundary |
+| 3.999900 | a refusal, and it carries `phReference` 4.000000 so a caller can print the boundary |
+| 4.000000 | a factor of exactly 1.000000000000, which is the boundary and is reached by definition |
+
+THE BOUNDARY IS SHARP AND IT IS SUPPOSED TO BE. The engine's own message, verbatim, for one pH below it:
+
+> the pH correction is only defined at or above its reference pH of 4, and pH 3.5 is below it. What the correlation does below the reference is not established in this module, so no factor is returned rather than a factor of 1
+
+THE RANGE GUARD IS SEPARATE FROM THE REFERENCE GUARD, and they say different things:
+| pH | the engine's own message |
+| --- | --- |
+| -1.000000 | an in-situ pH between 0 and 14 is required: -1 is outside it |
+| 14.500000 | an in-situ pH between 0 and 14 is required: 14.5 is outside it |
+| a blank box | a finite in-situ pH is required |
+
+# SECTION 8: Water wetting, and the largest single lever in this model (owned by Professional m01)
+
+Steel does not corrode where it is oil wet. The engine treats that as a REGIME and not as a multiplier applied always, which matters because the multiplier for the oil-wet regime is zero and a zero rate is the strongest reassurance a screen can give.
+
+| regime | wetting factor | rate mm/yr | category | life | what the engine says |
+| --- | --- | --- | --- | --- | --- |
+| waterWet | 1.000000 | 1.676428 | severe | 1.655305 yr | the model applies |
+| intermittent | 0.370000 | 0.620278 | high | 4.473797 yr | the model applies |
+| oilWet | 0.000000 | 0.000000 | WITHHELD | WITHHELD | the wetting regime is oil wet, so the rate is zero because that was assumed and not because it was calculated. An unbounded life off a dropdown is the strongest reassurance on the screen arriving from the weakest input. |
+
+THE OIL-WET CASE WITHHOLDS ITS CATEGORY AND ITS LIFE, and it says why. The engine's own words:
+
+> the wetting regime is oil wet, so the rate is zero because that was assumed and not because it was calculated. An unbounded life off a dropdown is the strongest reassurance on the screen arriving from the weakest input.
+
+AND THE INHIBITION FIGURE IS `null` RATHER THAN ZERO: null. A reported zero percent inhibition on a line that has an inhibitor programme is a statement, and it would be a false one. There is nothing to be effective against when the rate is zero by assumption.
+
+THE REGIME NAME IS MATCHED CASE AND PUNCTUATION INSENSITIVELY, and an unrecognised string refuses rather than falling through to the least limiting regime:
+| what was typed | what the engine did |
+| --- | --- |
+| `oilWet` | resolved to `oilWet` |
+| `OILWET` | resolved to `oilWet` |
+| `oil-wet` | resolved to `oilWet` |
+| `Oil Wet` | resolved to `oilWet` |
+| `oil_wet` | resolved to `oilWet` |
+| "wet" | refused: the wetting regime must be one of waterWet, intermittent or oilWet: "wet" is not recognised |
+| "waterwette" | refused: the wetting regime must be one of waterWet, intermittent or oilWet: "waterwette" is not recognised |
+| "" | refused: the wetting regime must be one of waterWet, intermittent or oilWet: "" is not recognised |
+| "gasWet" | refused: the wetting regime must be one of waterWet, intermittent or oilWet: "gasWet" is not recognised |
+
+THE WATER CUT IS ONLY READ IN THE INTERMITTENT REGIME, and it is range checked there:
+| regime | water cut | wetting factor | rate mm/yr |
+| --- | --- | --- | --- |
+| waterWet | 0.370000 | 1.000000 | 1.676428 |
+| intermittent | 0.000000 | 0.000000 | 0.000000 |
+| intermittent | 0.370000 | 0.370000 | 0.620278 |
+| intermittent | 1.000000 | 1.000000 | 1.676428 |
+| intermittent | 5 | refused | the water cut fraction must be between 0 and 1: 5 is outside it |
+| intermittent | -0.1 | refused | the water cut fraction must be between 0 and 1: -0.1 is outside it |
+| intermittent | NaN | refused | the intermittent regime needs a finite water cut fraction |
+
+ONE ABSENT INPUT STILL REACHES A DEFAULT, AND IT IS WORTH KNOWING WHICH. `waterCutFrac` carries a DEFAULT PARAMETER of one in the engine signature, so an argument that is genuinely missing, rather than not-a-number, becomes a water cut of one hundred percent in the intermittent regime. A water cut typed as not-a-number refuses, which is what the studio layer produces from a blank box, so the live app is not exposed. A direct caller that omits the key is.
+Measured: with the key omitted the wetting factor is 1.000000 and the rate is 1.676428 mm/yr, the same as the water-wet answer. The direction is CONSERVATIVE, because a wetting factor of one is the most limiting value the regime can take, which is why it is recorded here rather than treated as a defect. The H2S mole fraction in section 17 has the same shape and the opposite direction.
+
+# SECTION 9: The inhibitor, and the arithmetic that surprises people (owned by Professional m02, and the one lesson this module exists to teach)
+
+A 95 percent inhibitor running 80 percent of the time is not a 95 percent solution. The uninhibited rate applies for the fraction of the time the inhibitor is off, and it is that time average that eats the wall. The engine takes EFFICIENCY and AVAILABILITY as separate inputs and returns the effective protection, the shortfall in percentage points, and a warning that names the metal-loss ratio.
+
+| efficiency percent | availability percent | effective protection percent | shortfall pp | rate mm/yr | metal loss against the datasheet number |
+| --- | --- | --- | --- | --- | --- |
+| 95.000000 | 100.000000 | 95.000000 | 0.000000 | 0.083821 | 1.000000 |
+| 95.000000 | 98.000000 | 93.100000 | 1.900000 | 0.115674 | 1.380000 |
+| 95.000000 | 95.000000 | 90.250000 | 4.750000 | 0.163452 | 1.950000 |
+| 95.000000 | 90.000000 | 85.500000 | 9.500000 | 0.243082 | 2.900000 |
+| 95.000000 | 80.000000 | 76.000000 | 19.000000 | 0.402343 | 4.800000 |
+| 95.000000 | 70.000000 | 66.500000 | 28.500000 | 0.561603 | 6.700000 |
+| 95.000000 | 50.000000 | 47.500000 | 47.500000 | 0.880125 | 10.500000 |
+| 95.000000 | 25.000000 | 23.750000 | 71.250000 | 1.278276 | 15.250000 |
+
+READ THE 80 PERCENT ROW TWICE. A 95 percent inhibitor at 80 percent availability delivers 76.000000 percent effective protection, which is 19.000000 percentage points short of the datasheet figure, and the metal loss is 4.800000 times what the datasheet number would give. AVAILABILITY IS WHAT LIMITS IT. Efficiency does not. The engine's own warning on that case, verbatim:
+
+> a 95 percent inhibitor at 80 percent availability gives 76.0 percent effective protection, which is 4.80 times the metal loss of the datasheet number: availability, not efficiency, is what limits it
+
+THE WARNING FIRES ON THE EFFECTIVE SHORTFALL AT ANY EFFICIENCY. The trigger, measured by bisecting the availability at which it appears, is 0.100000 percentage points of shortfall. At the shipped app defaults of a 90 percent inhibitor at 95 percent availability the effective protection is 85.500000 percent, the shortfall is 4.500000 percentage points, and the warning is present.
+
+| clamped input | what the engine did | the clamp it named |
+| --- | --- | --- |
+| efficiency -5.000000, availability 90.000000 | effective protection 0.000000 percent | the inhibitor efficiency was clamped from -5 to 0 percent |
+| efficiency 120.000000, availability 90.000000 | effective protection 90.000000 percent | the inhibitor efficiency was clamped from 120 to 100 percent |
+| efficiency 90.000000, availability 130.000000 | effective protection 90.000000 percent | the inhibitor availability was clamped from 130 to 100 percent |
+
+A TYPED 100 PERCENT EFFICIENCY GIVES EXACTLY THE AVAILABILITY. At 100 percent efficiency and 95 percent availability the effective protection is 95.000000 percent, with no clamp and no hidden ceiling, and the engine adds a note saying what that arithmetic is and is not:
+
+> an efficiency of 100 percent is the arithmetic of the number typed in, not a prediction: no inhibitor removes all metal loss while it is on.
+
+EVERY NUMBER IN THIS SECTION IS ARITHMETIC OVER TWO TYPED PERCENTAGES, with no correlation constant anywhere in the chain. That is why the inhibitor arithmetic is the one part of this engine a capstone can grade without leaning on a number nobody can source, and section 21 says which of the eighteen graded fields rest on it.
+
+# SECTION 10: Wall shear, the friction branch, and a discontinuity that is reported rather than smoothed (owned by Professional m03)
+
+The wall shear is what decides whether an inhibitor film survives, so it is the number the rate now depends on. It is built from a friction factor, and the friction factor has TWO BRANCHES with a hard switch between them.
+
+| stream | Reynolds | branch | friction factor | wall shear Pa | film risk |
+| --- | --- | --- | --- | --- | --- |
+| Etelebou | 313781.4400 | turbulent | 0.003660 | 10.914770 | low |
+| Kanbi | 363816.0533 | turbulent | 0.003553 | 5.438833 | low |
+| Tunu | 1063231.0691 | turbulent | 0.002867 | 369.638295 | high |
+| Opukushi | 193290.8250 | turbulent | 0.004032 | 3.436459 | low |
+| Diebu | 364215.6800 | turbulent | 0.003552 | 16.299002 | low |
+| Angiama | 3.3754 | laminar | 4.740191 | 8.031496 | low |
+
+| velocity m/s | Reynolds | branch | wall shear Pa | film risk | is the credit removed |
+| --- | --- | --- | --- | --- | --- |
+| 0.500000 | 31643.7818 | turbulent | 0.661251 | low | false |
+| 1.000000 | 63287.5636 | turbulent | 2.302609 | low | false |
+| 2.000000 | 126575.1273 | turbulent | 8.018151 | low | false |
+| 4.000000 | 253150.2545 | turbulent | 27.920824 | low | false |
+| 8.000000 | 506300.5091 | turbulent | 97.225957 | moderate | false |
+| 12.000000 | 759450.7636 | turbulent | 201.718855 | high | true |
+| 18.000000 | 1139176.1455 | turbulent | 418.514742 | high | true |
+| 25.000000 | 1582189.0909 | turbulent | 755.983414 | high | true |
+
+THE STRIPPING VELOCITY IS A NUMBER, NOT A REGION. For the Tunu stream it is 8.126015 m/s, found by bisecting the velocity at which `filmStripped` turns true, and the shear there is 100.000000 Pa against the measured threshold of 100.000000 Pa. The threshold value itself is HELD: it drives a coloured word, a warning paragraph and now the rate, and it is not sourced.
+
+THE BRANCH SWITCH IS A GENUINE DISCONTINUITY. At the measured switch of Reynolds 4000.000000 the wall shear jumps by a factor of 2.189815 across two ten-thousandths of the Reynolds number, which is a fraction of a percent of velocity. The engine does NOT smooth it, because smoothing it would be a third invented correlation. It reports it:
+
+| Reynolds | branch | friction factor | wall shear Pa | nearSwitch |
+| --- | --- | --- | --- | --- |
+| 2000.0000 | laminar | 0.008000 | 0.001600 | false |
+| 3600.0000 | laminar | 0.004444 | 0.002880 | true |
+| 3960.0000 | laminar | 0.004040 | 0.003168 | true |
+| 4000.0000 | laminar | 0.004000 | 0.003200 | true |
+| 4040.0000 | turbulent | 0.008739 | 0.007132 | true |
+| 4400.0000 | turbulent | 0.008591 | 0.008317 | false |
+| 8000.0000 | turbulent | 0.007623 | 0.024394 | false |
+
+Inside ten percent of the switch the engine sets `nearSwitch` and returns this note verbatim:
+
+> Reynolds 4080 sits on the laminar to turbulent switch at 4000, where this friction factor is discontinuous and the shear jumps by about a factor of two. Read this number as a bracket, not a value.
+
+THE ANGIAMA STREAM IS THE LAMINAR CASE, and it is there so a lesson has one. It is viscous, small and slow, and the friction factor it gets comes from the other branch entirely.
+Angiama: Reynolds 3.3754, branch laminar, friction factor 4.740191, wall shear 8.031496 Pa, film risk low.
+
+THIS MODULE OWNS A SECOND FRICTION FACTOR AND A SECOND REYNOLDS NUMBER. The line hydraulics module has its own, with a different correlation and a different transition, and the two will not agree. The engine says so in its own docstring. Section 23 is where that seam is written down, because a course that teaches two friction factors without naming the seam teaches a contradiction.
+
+| what was asked | the engine's own message |
+| --- | --- |
+| a blank velocity | wall shear stress needs a positive velocity |
+| a blank diameter | wall shear stress needs a positive line inside diameter |
+| a blank density | wall shear stress needs a positive density |
+| a blank viscosity | wall shear stress needs a positive viscosity |
+| a zero viscosity | wall shear stress needs a positive viscosity |
+
+# SECTION 11: THE COUPLING. The shear verdict now acts on the rate, so the number and the sentence beside it agree (owned by Professional m04)
+
+This is the design decision at the centre of the engine as it ships. When the wall shear says the inhibitor film is gone, the rate is computed WITH THE CREDIT REMOVED, and the credited rate is reported beside it so the cost of that verdict is visible rather than implied. No new correlation was invented to do it: the credit is simply not taken.
+
+| stream | film stripped | rate mm/yr | rate with the credit kept mm/yr | ratio | life yr | life with the credit kept yr |
+| --- | --- | --- | --- | --- | --- | --- |
+| Etelebou | false | 1.676428 | 1.676428 | 1.000000 | 1.655305 | 1.655305 |
+| Kanbi | false | 0.361255 | 0.361255 | 1.000000 | 7.681561 | 7.681561 |
+| Tunu | true | 17.138674 | 3.647110 | 4.699248 | 0.161915 | 0.760876 |
+| Opukushi | false | 0.076842 | 0.076842 | 1.000000 | 36.112878 | 36.112878 |
+| Diebu | false | 0.513135 | 0.513135 | 1.000000 | WITHHELD | 5.407938 |
+| Angiama | false | 0.014444 | 0.014444 | 1.000000 | 192.123424 | 192.123424 |
+
+THE RATIO IS PURE INHIBITOR ARITHMETIC. For the Tunu stream the stripped rate is 4.699248 times the credited rate, and that factor is exactly the reciprocal of the retained fraction the inhibitor programme leaves. Nothing in the correlation is in it: the two rates share the whole chain and it divides out. That property is asserted here to twelve figures, and it is why one of the eighteen graded capstone fields can be a ratio of two lives without leaning on a held constant.
+
+THE ENGINE'S OWN WARNING when the credit is removed, verbatim:
+
+> the inhibitor credit has been removed: the wall shear at these conditions strips the film, so the 82 percent on the datasheet is not what this line sees and the rate above is the uninhibited rate
+
+AND THE BINDING CONSTRAINT NAMES THE SHEAR, so the summary and the rate do not disagree:
+
+> wall shear 370 Pa is above the 100 Pa at which this module takes the film to be stripped, so the inhibitor credit is removed and the rate is 4.70 times what the datasheet efficiency would give. Slowing the line changes this answer before anything else does.
+
+`screen` COMPUTES THE SHEAR FIRST, and that order is the point. The rate depends on the shear verdict, so a shear that cannot be computed means the screening is incomplete and NO RATE IS ISSUED. A missing density is not a missing row on a summary, it is a refusal:
+
+| what was left blank | what `screen` did |
+| --- | --- |
+| the density | screening incomplete: the inhibitor film survival check did not run. wall shear stress needs a positive density |
+| the viscosity | screening incomplete: the inhibitor film survival check did not run. wall shear stress needs a positive viscosity |
+| the velocity | screening incomplete: the inhibitor film survival check did not run. wall shear stress needs a positive velocity |
+| the line inside diameter | screening incomplete: the inhibitor film survival check did not run. wall shear stress needs a positive line inside diameter |
+
+# SECTION 12: H2S, a threshold comparison, and nothing more (owned by Professional m05)
+
+This door compares one partial pressure against one threshold and reports the comparison in two units. It does not classify severity and it does not choose a material. Section 2 is why.
+
+| H2S partial pressure bar | psia | above the threshold | decades above | label |
+| --- | --- | --- | --- | --- |
+| 0.000010000000 | 0.000145037738 | false | -2.544068 | Below the H2S screening threshold |
+| 0.000100000000 | 0.001450377380 | false | -1.544068 | Below the H2S screening threshold |
+| 0.003496500000 | 0.050712445094 | false | -0.000435 | Below the H2S screening threshold |
+| 0.003500000000 | 0.050763208303 | true | 0.000000 | Above the H2S screening threshold |
+| 0.003503500000 | 0.050813971511 | true | 0.000434 | Above the H2S screening threshold |
+| 0.010000000000 | 0.145037738007 | true | 0.455932 | Above the H2S screening threshold |
+| 0.100000000000 | 1.450377380072 | true | 1.455932 | Above the H2S screening threshold |
+| 1.000000000000 | 14.503773800722 | true | 2.455932 | Above the H2S screening threshold |
+| 10.000000000000 | 145.037738007218 | true | 3.455932 | Above the H2S screening threshold |
+
+AT ZERO H2S the decade count is null rather than minus infinity, and `sour` is false. The logarithm of zero is not a screening result.
+
+THE THRESHOLD IS HELD AND THE ENGINE SAYS SO IN A FIELD: `thresholdHeld` is true. Its value, measured by bisecting the sour flag, is 0.003500000000 bar, which is 0.050763208303 psia. The engine prints both in its note so nobody has to convert, and section 3 shows why the second number matters.
+
+THE ENGINE'S OWN NOTE above the threshold, verbatim:
+
+> H2S partial pressure 5.000e-2 bar (7.252e-1 psia) is at or above the 0.0035 bar (0.050763 psia) screening threshold used here. This module does not classify a severity region and does not recommend materials. The threshold value itself is not sourced here.
+
+| what was asked | the engine's own message |
+| --- | --- |
+| a blank H2S partial pressure | a finite H2S partial pressure is required |
+| a negative H2S partial pressure | the H2S partial pressure must be non-negative |
+
+WHAT THIS DOOR DOES NOT DO, stated because a learner will look for it: no severity region, no material selection, no hardness limit, no weldment qualification, no sulphide stress cracking criterion and no hydrogen induced cracking criterion. All of that needs the standard, and the standard is not in this repository.
+
+# SECTION 13: Which film governs, from a ratio that needs no pressure at all (owned by Professional m06)
+
+Above a certain H2S to CO2 ratio iron sulphide starts to compete with iron carbonate, and above a higher one a CO2-only rate model has stopped describing the surface. The engine answers in four words and it says whether its own rate model applies.
+
+THE RATIO IS PRESSURE FREE, and that is the single most useful thing about it. Both arguments are PARTIAL PRESSURES, both are the total pressure times a mole fraction, so the total pressure divides out and the ratio equals the ratio of the mole fractions at any pressure whatsoever. Reaching it through mole fractions is what catches an H2S partial pressure built from the total pressure with the mole fraction dropped, and an H2S partial pressure fed a CO2 FUGACITY where the partial pressure belongs.
+
+| total pressure bar | CO2 mol fraction | H2S mol fraction | ratio from partial pressures | ratio from mole fractions | difference |
+| --- | --- | --- | --- | --- | --- |
+| 10.000000 | 0.020000 | 0.000800 | 0.040000000000 | 0.040000000000 | 0 |
+| 50.000000 | 0.020000 | 0.000800 | 0.040000000000 | 0.040000000000 | 0 |
+| 137.400000 | 0.020000 | 0.000800 | 0.040000000000 | 0.040000000000 | 0 |
+| 250.000000 | 0.020000 | 0.000800 | 0.040000000000 | 0.040000000000 | 0 |
+| 400.000000 | 0.020000 | 0.000800 | 0.040000000000 | 0.040000000000 | 0 |
+
+The last column is zero at every pressure, which is the whole claim. A ratio that moved with pressure would be built from the wrong quantity.
+
+| CO2 mol fraction | H2S mol fraction | ratio | regime | does the CO2 rate model apply | is the rate an upper bound |
+| --- | --- | --- | --- | --- | --- |
+| 0.020000 | 0.000010 | 0.000500000000 | carbonate | true | false |
+| 0.020000 | 0.000030 | 0.001500000000 | carbonate | true | false |
+| 0.020000 | 0.000200 | 0.010000000000 | mixed | true | true |
+| 0.020000 | 0.000800 | 0.040000000000 | mixed | true | true |
+| 0.020000 | 0.001200 | 0.060000000000 | sulphide | false | false |
+| 0.020000 | 0.006000 | 0.300000000000 | sulphide | false | false |
+| 0.020000 | 0.020000 | 1.000000000000 | sulphide | false | false |
+| 0.000000 | 0.001000 | none | unknown | null | false |
+
+FOUR ANSWERS, ALL REACHED ABOVE: carbonate, mixed, sulphide, unknown. The boundaries, measured by bisecting the regime word, are 0.002000000000 and 0.050000000000, and BOTH ARE HELD.
+
+BOTH UNKNOWN BRANCHES CARRY A NOTE, which they did not always. A panel that prints the note unconditionally rendered an empty paragraph whenever the branch had none:
+| what was asked | regime | the engine's own note |
+| --- | --- | --- |
+| a zero CO2 partial pressure | unknown | with no CO2 partial pressure there is no H2S to CO2 ratio, so which film governs is not known here. A CO2 rate model is not the right model for this stream. |
+| a blank CO2 partial pressure | unknown | the H2S to CO2 ratio needs finite partial pressures for both, so which film governs is not known here. |
+| a blank H2S partial pressure | unknown | the H2S to CO2 ratio needs finite partial pressures for both, so which film governs is not known here. |
+
+THE SULPHIDE REGIME WITHHOLDS THE CATEGORY AND THE LIFE AND KEEPS THE RATE AS A STATED UPPER BOUND. That is a design decision and it is worth stating as one: the engine could have refused the rate entirely, and it could have graded it as if nothing had changed. It does neither. The Diebu stream is the case:
+
+Diebu: ratio 0.140495867769, regime sulphide, category null, life null, and the withheld block names the rate as an upper bound of 0.513135 mm/yr.
+
+> the H2S to CO2 ratio puts this stream in the sulphide regime, where a CO2-only rate model no longer describes the surface. The rate above is retained only as an upper bound.
+
+THE MIXED REGIME STAYS GRADED AND IS MARKED. It sets `rateIsUpperBound` and carries its own note, because a mixed film is not a reason to withhold a screening number, only a reason to read it as a ceiling:
+
+> mixed sulphide and carbonate films: the CO2 rate is an upper bound and the real rate depends on which film persists
+
+# SECTION 14: The allowance, the remaining life, and a zero rate that is not a pass (owned by Expert m02)
+
+This door divides a remaining allowance by a rate and stops. That is its whole scope, and what it does NOT do is the subject of section 21.
+
+| stream | rate mm/yr | allowance mm | consumed mm | remaining mm | remaining yr | allowance the design life demands mm | shortfall mm | meets the design life |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Etelebou | 1.676428 | 3.175000 | 0.400000 | 2.775000 | 1.655305 | 33.528563 | 30.753563 | false |
+| Kanbi | 0.361255 | 3.175000 | 0.400000 | 2.775000 | 7.681561 | 7.225094 | 4.450094 | false |
+| Tunu | 17.138674 | 3.175000 | 0.400000 | 2.775000 | 0.161915 | 342.773473 | 339.998473 | false |
+| Opukushi | 0.076842 | 3.175000 | 0.400000 | 2.775000 | 36.112878 | 1.536848 | 0.000000 | true |
+| Diebu | 0.513135 | 3.175000 | 0.400000 | WITHHELD | WITHHELD | WITHHELD | WITHHELD | WITHHELD |
+| Angiama | 0.014444 | 3.175000 | 0.400000 | 2.775000 | 192.123424 | 0.288877 | 0.000000 | true |
+
+THE REQUIRED ALLOWANCE IGNORES WHAT HAS ALREADY GONE, and that is a subtlety worth an Expert lesson rather than a footnote. `requiredAllowanceMm` is the rate times the design life. It is the allowance a NEW line would need. The shortfall compares it against what is LEFT, so the two fields answer two different questions and only one of them is the allowance a reinstatement would have to specify.
+
+Worked at a stated rate of 0.250000 mm/yr, a 4 mm allowance with 1.2 mm gone and a 20 year design life: `requiredAllowanceMm` is 5.000000 mm, the remaining allowance is 2.800000 mm, the shortfall is 2.200000 mm, and the allowance that actually reinstates the design life, found by bisecting the allowance until `meetsDesignLife` turns true, is 6.200000 mm. The gap between the last two numbers is exactly the consumed depth, and this generator asserts that.
+
+A ZERO RATE DOES NOT RETURN AN UNBOUNDED LIFE WITH A PASSING VERDICT. It returns no life, no verdict, and a note telling the reader to find out why the rate is zero first, because the strongest reassurance on the screen would otherwise arrive from the weakest input.
+
+At a zero rate: `remainingYears` is null, `meetsDesignLife` is null, `unbounded` is true, and the note reads:
+
+> the corrosion rate is zero, so no finite life comes out of this division. Check WHY the rate is zero before reading it as a pass: an oil-wet assumption, a stream with no CO2 and a perfect inhibitor all land here.
+
+FOUR SEPARATE PATHS REACH A ZERO RATE, and a learner should be able to list them: an oil-wet wetting regime, a stream with no CO2 in it, a 100 percent inhibitor at 100 percent availability, and a typed zero CO2 mole fraction. The golden's own zero-rate row records the same shape: remainingYears null, unbounded true, meetsDesignLife null.
+
+| what was asked | the engine's own message |
+| --- | --- |
+| a blank allowance | a positive corrosion allowance is needed |
+| a zero allowance | a positive corrosion allowance is needed |
+| a negative consumed depth | the consumed allowance must be a non-negative number |
+| a negative rate | the corrosion rate must be a finite non-negative number |
+| a blank rate | the corrosion rate must be a finite non-negative number |
+| a design life that is not a number | the design life must be a finite number of years, or left out |
+| an allowance already fully consumed | the corrosion allowance is already consumed: this is an inspection and fitness-for-service question, not a design one |
+| an allowance consumed past its own depth | the corrosion allowance is already consumed: this is an inspection and fitness-for-service question, not a design one |
+
+THE FULLY CONSUMED CASE IS THE ONE TO READ TWICE. The engine does not return a negative life or a zero one. It says the question has changed, in its own words above: a line whose allowance is gone is an inspection and fitness-for-service question, and this module has neither.
+
+A DESIGN LIFE IS OPTIONAL AND ITS ABSENCE IS NOT A ZERO:
+With the design life left out: remaining years 13.333333, `meetsDesignLife` null, `requiredAllowanceMm` null, shortfall 0.000000.
+
+# SECTION 15: The rate category is a LABEL, and the label is held (owned by Expert m03)
+
+Four words, three boundaries, no source. The engine says in its own held list that the bands are looser than those commonly cited for carbon steel in production service, so a label here may be optimistic by one or two steps.
+
+| rate mm/yr | category |
+| --- | --- |
+| 0.000000 | negligible |
+| 0.050000 | low |
+| 0.099900 | low |
+| 0.100000 | moderate |
+| 0.100100 | moderate |
+| 0.499900 | moderate |
+| 0.500000 | high |
+| 0.500100 | high |
+| 0.999900 | high |
+| 1.000000 | severe |
+| 1.000100 | severe |
+| 4.200000 | severe |
+
+| what was asked | what the label door returns |
+| --- | --- |
+| a blank rate | null |
+| a NaN rate | null |
+| a negative rate | negligible |
+
+THE BOUNDARIES, MEASURED BY BISECTING THE WORD: 0.100000000000, 0.500000000000 and 1.000000000000 mm/yr. All three are HELD and NONE of them is graded anywhere in this course. The engine's own sentence about them, from its held list, verbatim:
+
+> the rate category bands of 0.1, 0.5 and 1.0 mm/yr, which carry no source and may be optimistic by one or two steps against the bands commonly cited for carbon steel in production service
+
+THE GOLDEN CARRIES 12 CATEGORY ROWS, both sides of all three bands. Read from the file and re-run through the engine:
+
+| golden rate mm/yr | golden category | engine category | agree |
+| --- | --- | --- | --- |
+| 0.000000 | negligible | negligible | yes |
+| 0.000000 | low | low | yes |
+| 0.099900 | low | low | yes |
+| 0.100000 | moderate | moderate | yes |
+| 0.100100 | moderate | moderate | yes |
+| 0.499900 | moderate | moderate | yes |
+| 0.500000 | high | high | yes |
+| 0.500100 | high | high | yes |
+| 0.999900 | high | high | yes |
+| 1.000000 | severe | severe | yes |
+| 1.000100 | severe | severe | yes |
+| 12.300000 | severe | severe | yes |
+
+READ THE APP'S OWN DEFAULT ROW. At the shipped defaults the rate is 0.754524 mm/yr and the label is "high". A band set one step tighter would call the same number something worse, and nothing in this repository says which band set is right. That is what "held" means in practice: the word on the screen is not a measurement.
+
+# SECTION 16: The binding constraint, which is the summary this module did not have (owned by Expert m04)
+
+A screen that returns seven independent numbers and reconciles none of them is a screen the reader has to summarise themselves, and they will summarise it by reading the largest number. The engine now names WHICH OF ITS OWN LIMITS governs the answer, in descending order of what would change first, and every one of them is derived from what is already computed.
+
+| stream | binding constraint | the value it turns on | why, in the engine's own words |
+| --- | --- | --- | --- |
+| Etelebou | the corrosion allowance against the design life | 1.7 yr of 20 yr | at 1.676 mm/yr the allowance runs out in 1.7 years against a 20 year design life, short by 30.75 mm of allowance. |
+| Kanbi | the corrosion allowance against the design life | 7.7 yr of 20 yr | at 0.361 mm/yr the allowance runs out in 7.7 years against a 20 year design life, short by 4.45 mm of allowance. |
+| Tunu | wall shear on the inhibitor film | 370 Pa wall shear | wall shear 370 Pa is above the 100 Pa at which this module takes the film to be stripped, so the inhibitor credit is removed and the rate is 4.70 times what the datasheet efficiency would give. Slowing the line changes this answer before anything else does. |
+| Opukushi | mass transfer to the wall | 2.34 mm/yr transport limit | the transport term 2.34 mm/yr is below the reaction term 27.66 mm/yr, so velocity and line size move this rate and the chemistry does not. |
+| Diebu | the model does not apply | none, the model does not apply | the H2S to CO2 ratio puts this stream in the sulphide regime, where a CO2-only rate model no longer describes the surface. The rate above is retained only as an upper bound. |
+| Angiama | mass transfer to the wall | 0.09 mm/yr transport limit | the transport term 0.09 mm/yr is below the reaction term 10.01 mm/yr, so velocity and line size move this rate and the chemistry does not. |
+
+4 DIFFERENT CONSTRAINTS ACROSS SIX STREAMS: mass transfer to the wall; the corrosion allowance against the design life; the model does not apply; wall shear on the inhibitor film. A summary that always said the same thing would be a heading and not a summary.
+
+THE ORDER IS THE CLAIM. The engine checks, in this sequence: does the model apply at all; is the film being stripped; does the allowance fail the design life; are the two resistances comparable; is transport controlling; otherwise kinetics. Each step answers "what would I change first", and a lower step is only reached because every step above it is satisfied.
+
+| case | binding | what the reader should do about it |
+| --- | --- | --- |
+| the shipped app defaults | the corrosion allowance against the design life | 4.2 yr of 20 yr |
+| the same at 60 ft per second | wall shear on the inhibitor film | 362 Pa wall shear |
+| the same at 1 mol percent H2S | the model does not apply | read the withheld block, because no rate verdict is being offered |
+| the same oil wet | the model does not apply | read the withheld block, because no rate verdict is being offered |
+
+A BINDING CONSTRAINT IS NOT A RECOMMENDATION. It names the limit that governs the number, and it is silent about what to buy, when to inspect and what thickness to retire at, because the module has none of those.
+
+# SECTION 17: The whole screening in one call, and the order that makes it honest (owned by Expert m05)
+
+`screen` returns 18 top-level fields. The order in which it computes them is the design decision: the wall shear FIRST, because the rate depends on whether the film survives it, then the rate, then the credited rate beside it, then the sour comparison, then the regime, then the withholding, then the category, then the life, then the binding constraint.
+
+Top-level fields: rate, rateWithFilmCreditMmYr, filmStripped, shear, sour, regime, life, category, categoryHeld, ph2sBar, ph2sFugacityApplied, withheld, binding, screeningComplete, clamps, notProvided, notes, limits.
+
+| field | at the shipped app defaults | what it is |
+| --- | --- | --- |
+| `rate.rateMmYr` | 0.754524 | the rate the whole screen is about |
+| `rate.uninhibitedMmYr` | 5.203611 | the same case with no inhibitor credit at all |
+| `rateWithFilmCreditMmYr` | 0.754524 | the rate the datasheet efficiency would give, reported beside the rate whether or not the credit was taken |
+| `filmStripped` | false | whether the shear verdict removed the credit |
+| `shear.tauPa` | 14.408065 | the wall shear the verdict is taken on |
+| `shear.filmRisk` | low | the risk word, from two HELD thresholds |
+| `sour.sour` | true | above the H2S screening threshold or below it |
+| `regime.regime` | mixed | which corrosion product governs |
+| `category` | high | the band label, HELD |
+| `categoryHeld` | true | the engine declaring that the band is not sourced |
+| `life.remainingYears` | 4.207953 | the allowance divided by the rate |
+| `life.meetsDesignLife` | false | against the stated design life |
+| `ph2sBar` | 0.051000 | the H2S partial pressure, the total pressure times the mole fraction |
+| `ph2sFugacityApplied` | false | declared false, because no fugacity correction is applied to H2S |
+| `withheld` | null | null here, an object naming what is withheld and why when the model does not apply |
+| `binding.what` | the corrosion allowance against the design life | the limit that governs |
+| `screeningComplete` | true | present only when every part of the screening ran |
+| `clamps` | none | every input the engine moved, named |
+| `notProvided` | 8 items | what the module will not pretend to answer |
+| `limits` | 11 items | every number in the module with no source in the repository |
+
+THE INPUT GUARDS `screen` OWNS THAT NOTHING BELOW IT OWNS:
+| what was asked | the engine's own message |
+| --- | --- |
+| an H2S mole fraction that is not a number | a finite H2S mole fraction is required |
+| an H2S mole fraction of 3 | the H2S mole fraction must be between 0 and 1: 3 is outside it |
+| a negative H2S mole fraction | the H2S mole fraction must be between 0 and 1: -0.01 is outside it |
+| CO2 and H2S mole fractions summing above one | the CO2 and H2S mole fractions sum to 1.1000, so their partial pressures would exceed the total pressure |
+
+AND ONE DEFAULT PARAMETER THAT POINTS THE OTHER WAY, which a reader should know about because it is the shape section 25 item three is about. `h2sMolFrac` carries a DEFAULT PARAMETER of zero in the screen signature. An H2S mole fraction that is NOT A NUMBER refuses, which is what the studio layer produces from a blank box, so the live app is not exposed. But a direct caller that OMITS the key entirely gets a positive assertion of zero H2S: not sour, the carbonate regime, and a graded category and life.
+Measured: with the key omitted the H2S partial pressure is 0.000000 bar, `sour` is false, the regime is carbonate, and the category is issued as "high". Compare the shipped defaults, which carry 0.1 mol percent H2S: `sour` is true and the regime is mixed. The direction here is the LEAST limiting one, and the reason the live studio is safe from it is the layer above. This default is not what protects it.
+
+AND TWO THINGS `screen` STILL SWALLOWS, WHICH THIS DIGEST RECORDS BECAUSE THE SECTION ABOVE TEACHES THE OPPOSITE. The order argument is that an unavailable wall shear makes the screening incomplete, so `screen` refuses rather than putting the error in a field and returning normally. That is true of the shear. It is NOT true of the remaining life, and the two cases below are the same shape one field along.
+
+| what was asked | top-level error | `life` | `withheld` | `screeningComplete` | what a caller checking `if (result.error)` sees |
+| --- | --- | --- | --- | --- | --- |
+| a blank corrosion allowance box | undefined | null | null | true | nothing |
+| an allowance that is not a number | undefined | null | null | true | nothing |
+| an allowance already consumed past its own depth | undefined | an ERROR OBJECT: the corrosion allowance is already consumed: this is an inspection and fitness-for-service question, not a design one | null | true | nothing |
+| a negative consumed depth | undefined | an ERROR OBJECT: the consumed allowance must be a non-negative number | null | true | nothing |
+
+READ THE FIRST TWO ROWS AGAINST THE BINDING CONSTRAINT THEY CAME WITH. The blank-allowance case returns `mass transfer to the wall` as its binding constraint and a complete screening, so a summary rail simply has no remaining-life row and nothing on the screen says why. The last two rows put the life door's own refusal INSIDE the `life` field, so a caller's `if (result.error)` passes, `result.life.remainingYears` is undefined, and the refusal message never reaches anyone.
+
+WHAT TO DO WITH THIS AS A LEARNER, AND IT IS THE GENERAL LESSON OF THIS WHOLE COURSE. A repair that names a defect and fixes one instance of it has not removed the CLASS. The shear case and the life case are one shape: a function that puts a failure into a field and returns a success. The way to find the next one is to read what the function returns rather than what its comment says it returns, and to ask of every field whether its absence is DECLARED or merely missing. This module declares the withdrawn region's absence in two fields and does not declare this one.
+
+THE SAME SHAPE ONCE MORE, IN A DEFAULT PARAMETER RATHER THAN A SWALLOWED ERROR, and pointing the least-limiting way:
+With the H2S key OMITTED the partial pressure is 0.000000 bar, `sour` is false, the regime is carbonate and the category is issued as "high". An H2S mole fraction that is NOT A NUMBER refuses, and the studio layer produces not-a-number from a blank box, so the live screen is protected by the layer above rather than by this default.
+
+THE SUM GUARD IS THE ONE PEOPLE MISS. Two mole fractions each inside nought to one can still add to more than one, and their partial pressures would then exceed the total pressure. The engine checks the SUM against the total and not just each fraction against its own range.
+
+A sum of exactly one is accepted: CO2 0.600000 and H2S 0.400000 give a partial pressure sum of 51.000427 bar against a total of 51.000427 bar, and the screening runs.
+
+# SECTION 18: Every refusal this module can produce, in one table (owned by Expert m05 l04)
+
+A refusal is the module telling you it cannot answer, and the difference between a refusal and a least-limiting default is the difference between a screening tool and a liability. Every row below is a call this generator made, labelled a refusal, and asserted to have returned an error key and no non-finite number alongside it.
+
+| door | what was asked | the engine's own message |
+| --- | --- | --- |
+| `co2Fugacity` | a blank temperature | a finite temperature is required |
+| `co2Fugacity` | a temperature at or below absolute zero | a temperature above absolute zero is required: -273.15 C is at or below -273.15 C |
+| `co2Fugacity` | a blank total pressure | a positive total pressure is required |
+| `co2Fugacity` | a blank CO2 mole fraction | a finite CO2 mole fraction is required |
+| `co2Fugacity` | a CO2 mole fraction outside nought to one | the CO2 mole fraction must be between 0 and 1: 1.4 is outside it |
+| `phFactor` | a blank pH | a finite in-situ pH is required |
+| `phFactor` | a pH outside nought to fourteen | an in-situ pH between 0 and 14 is required: 15 is outside it |
+| `phFactor` | a pH below the reference | the pH correction is only defined at or above its reference pH of 4, and pH 3.9 is below it. What the correlation does below the reference is not established in this module, so no factor is returned rather than a factor of 1 |
+| `corrosionRate` | a blank velocity | a positive velocity is required: an absent velocity is not an unlimited mass-transfer capacity |
+| `corrosionRate` | a blank line inside diameter | a positive line inside diameter is required: an absent diameter is not an unlimited mass-transfer capacity |
+| `corrosionRate` | an unrecognised wetting regime | the wetting regime must be one of waterWet, intermittent or oilWet: "damp" is not recognised |
+| `corrosionRate` | a water cut outside nought to one | the water cut fraction must be between 0 and 1: 5 is outside it |
+| `corrosionRate` | a non-finite inhibitor efficiency | the inhibitor efficiency and availability must be finite percentages |
+| `wallShearStressPa` | a blank density | wall shear stress needs a positive density |
+| `wallShearStressPa` | a blank viscosity | wall shear stress needs a positive viscosity |
+| `sourServiceScreen` | a blank H2S partial pressure | a finite H2S partial pressure is required |
+| `sourServiceScreen` | a negative H2S partial pressure | the H2S partial pressure must be non-negative |
+| `remainingLife` | a blank allowance | a positive corrosion allowance is needed |
+| `remainingLife` | a negative consumed depth | the consumed allowance must be a non-negative number |
+| `remainingLife` | a negative rate | the corrosion rate must be a finite non-negative number |
+| `remainingLife` | an allowance already consumed | the corrosion allowance is already consumed: this is an inspection and fitness-for-service question, not a design one |
+| `screen` | an H2S mole fraction that is not a number | a finite H2S mole fraction is required |
+| `screen` | mole fractions summing above one | the CO2 and H2S mole fractions sum to 1.1000, so their partial pressures would exceed the total pressure |
+| `screen` | a blank density, so the film check cannot run | screening incomplete: the inhibitor film survival check did not run. wall shear stress needs a positive density |
+| `screen` | a blank viscosity, so the film check cannot run | screening incomplete: the inhibitor film survival check did not run. wall shear stress needs a positive viscosity |
+| `screen` | a blank pH | a finite in-situ pH is required |
+| `screen` | a pH below the reference | the pH correction is only defined at or above its reference pH of 4, and pH 3.5 is below it. What the correlation does below the reference is not established in this module, so no factor is returned rather than a factor of 1 |
+| `screen` | a blank temperature | a finite temperature is required |
+| `screen` | a blank CO2 mole fraction | a finite CO2 mole fraction is required |
+| `screen` | a temperature below absolute zero | a temperature above absolute zero is required: -300 C is at or below -273.15 C |
+
+30 REFUSALS, every one of them a call this file made and asserted. The golden carries 16 refusal rows of its own and the vendored jest suite asserts every one refuses with a message that names the input, and REFUSES ITSELF rather than passing when the module answers.
+
+A TYPED ZERO IS NOT A BLANK, and the difference is the whole of this table. A typed zero CO2 mole fraction is a positive assertion that there is no CO2, so the engine takes its no-CO2 branch, withholds the category and the life, and says what a rate of zero means there. A BLANK CO2 box is a question the engine cannot answer, so it refuses.
+
+A typed zero: rate 0.000000 mm/yr, `rateApplies` false, category null, life null, and the note reads:
+
+> no CO2 in the stream, so this CO2 model has nothing to predict. A rate of zero here means the model does not apply, not that the line is not corroding: any corrosion at these conditions is another mechanism.
+
+A blank box, on the same screen: a finite CO2 mole fraction is required
+
+# SECTION 19: The live studio's own defaults, end to end, and every number a user has been shown (owned by Associate m06, and shared with Professional m06)
+
+The Corrosion & Integrity Studio ships with a case already filled in, so the first thing any user sees is this. Every figure below is this generator running the engine on the studio's own default inputs, converted with the studio's own factors, which are stated in section 24.
+
+| studio input | as typed | in the engine's units |
+| --- | --- | --- |
+| temperature | 140 F | 60.000000 C |
+| pressure | 725 psig | 51.000427 bar |
+| CO2 | 3 mol% | 0.030000 mole fraction |
+| H2S | 0.1 mol% | 0.001000 mole fraction |
+| in-situ pH | 4.5 | 4.500000 |
+| velocity | 10 ft/s | 3.048000 m/s |
+| line inside diameter | 6 in | 0.152400 m |
+| density | 56 lb/ft3 | 897.036000 kg/m3 |
+| viscosity | 1 cp | 1.000000 mPa s |
+| wetting regime | water wet | waterWet |
+| water cut | 100 percent | 1.000000 |
+| inhibitor efficiency | 90 percent | 90.000000 |
+| inhibitor availability | 95 percent | 95.000000 |
+| corrosion allowance | 0.125 in | 3.175000 mm |
+| consumed | 0 in | 0.000000 mm |
+| design life | 20 yr | 20.000000 yr |
+
+| what the screen shows | value |
+| --- | --- |
+| CO2 partial pressure | 1.530013 bar |
+| fugacity coefficient | 0.878581 |
+| CO2 fugacity | 1.344240 bar |
+| reaction term | 44.225132 mm/yr |
+| mass-transfer term | 11.701938 mm/yr |
+| combined | 9.253475 mm/yr |
+| controlling | mass transfer |
+| controlling margin | 2.779300 |
+| scale factor | 1.000000000000 |
+| computed film onset | 80.984504 C |
+| pH factor | 0.562341 |
+| pH reference | 4.000000 |
+| water wetting factor | 1.000000 |
+| uninhibited rate | 5.203611 mm/yr, which is 204.866591 mpy |
+| effective inhibition | 85.500000 percent |
+| inhibitor shortfall | 4.500000 percentage points |
+| RATE | 0.754524 mm/yr, which is 29.705656 mpy |
+| rate with the film credit kept | 0.754524 mm/yr |
+| category | high, and `categoryHeld` is true |
+| Reynolds | 416686.8569 |
+| friction branch | turbulent |
+| wall shear | 14.408065 Pa |
+| film risk | low |
+| film stripped | false |
+| H2S partial pressure | 0.051000 bar, which is 0.739699 psia |
+| above the sour threshold | true |
+| decades above it | 1.163506 |
+| severity region | NOT PROVIDED |
+| material guidance | NOT PROVIDED |
+| H2S to CO2 ratio | 0.033333333333 |
+| regime | mixed |
+| the rate is an upper bound | true |
+| remaining allowance | 3.175000 mm |
+| remaining life | 4.207953 yr |
+| allowance the design life demands | 15.090473 mm |
+| shortfall | 11.915473 mm |
+| meets the design life | false |
+| BINDING CONSTRAINT | the corrosion allowance against the design life |
+| and the value it turns on | 4.2 yr of 20 yr |
+
+THE WARNING ON THAT SCREEN, verbatim:
+
+> a 90 percent inhibitor at 95 percent availability gives 85.5 percent effective protection, which is 1.45 times the metal loss of the datasheet number: availability, not efficiency, is what limits it
+
+AND THE BINDING CONSTRAINT, verbatim:
+
+> at 0.755 mm/yr the allowance runs out in 4.2 years against a 20 year design life, short by 11.92 mm of allowance.
+
+FIVE CHANGES TO THAT ONE CASE, each of which reaches a different part of the module:
+
+| change | rate mm/yr | category | remaining life yr | what else moved |
+| --- | --- | --- | --- | --- |
+| nothing, the shipped defaults | 0.754524 | high | 4.207953 | the corrosion allowance against the design life |
+| velocity from 10 to 60 ft/s | 13.080024 | severe | 0.242737 | wall shear on the inhibitor film |
+| H2S from 0.1 to 1 mol% | 0.754524 | WITHHELD | WITHHELD | the model does not apply |
+| the wetting regime to oil wet | 0.000000 | WITHHELD | WITHHELD | the model does not apply |
+| pH from 4.5 to 4.0 | 1.341754 | severe | 2.366306 | the corrosion allowance against the design life |
+
+AT 60 FT PER SECOND the wall shear is 362.474888 Pa against the measured stripping threshold of 100.000000 Pa, the film risk is high, the credit is removed, and the rate is 13.080024 mm/yr against a credited 1.896603 mm/yr. The ratio between those two is 6.896552, and the remaining life falls from 4.207953 yr to 0.242737 yr.
+
+AT 1 MOL PERCENT H2S the ratio is 0.333333333333, the regime is sulphide, and the rate is unchanged at 0.754524 mm/yr. That last fact is the lesson: the CO2 rate does not move with H2S at all, because H2S is not in the correlation. What changes is that the category and the life are now WITHHELD and the rate is kept only as a stated upper bound of 0.754524 mm/yr.
+
+AT pH 4.0, which is the reference and the boundary, the rate is 1.341754 mm/yr against 0.754524 mm/yr at the shipped 4.5. Below 4.0 the engine refuses. A learner should be able to say why those two facts belong together.
+
+EVERY RATE ON THAT SCREEN NOW CARRIES MPY BESIDE MM/YR, because every input on it is in field units. The conversion is a division by 25.4 and a multiplication by a thousand, and it is stated rather than assumed:
+
+| quantity | mm/yr | mpy |
+| --- | --- | --- |
+| the rate | 0.754524 | 29.705656 |
+| the uninhibited rate | 5.203611 | 204.866591 |
+| the rate with the credit kept | 0.754524 | 29.705656 |
+| the reaction term | 44.225132 | 1741.146915 |
+| the mass-transfer term | 11.701938 | 460.706213 |
+
+# SECTION 20: What the vendored cases can and cannot discriminate (owned by Expert m01 l05 and Expert m05 l02)
+
+The vendored golden carries 110 rows in 17 blocks and NOT ONE OF THEM IS PUBLISHED. `provenance.published` is false, and the file says why in its own words, quoted in this digest's header. There is no published de Waard-Milliams case, no clause of either sour-service standard and no corrosion rate-band table anywhere in this repository, so a number recalled from memory would be the only alternative and that is not a published datum.
+
+| block | rows | what it covers |
+| --- | --- | --- |
+| `cases` | 17 | whole corrosionRate cases with every factor and the shear alongside |
+| `categoryBands` | 1 | the three band edges, as the oracle read them |
+| `categoryRows` | 12 | the category word either side of all three bands, plus a non-finite rate |
+| `heldConstants` | 1 | the oracle's own copy of every held constant, cross-pinned in section 3 |
+| `inhibitor` | 9 | the inhibitor time average, rebuilt as an hour-by-hour duty cycle |
+| `inhibitorClamps` | 3 | the three clamped inputs and the clamp count each produces |
+| `lifeRows` | 5 | remaining life, reached by marching the wall loss forward rather than by dividing |
+| `lifeZeroRate` | 1 | the zero-rate row, where the life is null and the verdict is null |
+| `phRows` | 10 | the pH factor at and above its reference, and the two-unit decade property |
+| `provenance` | 1 | the statement that none of this is published, and why |
+| `refusalBase` | 1 | the input set every refusal row is a single change away from |
+| `refusals` | 16 | sixteen input sets that must refuse, each naming its input |
+| `regimeRows` | 9 | the H2S to CO2 ratio at five pressures, reaching all four regimes |
+| `scaleOnset` | 7 | the film onset at seven fugacities, found by bisection and by the closed form |
+| `screenRows` | 9 | nine whole screenings, every field, three different binding constraints |
+| `sourRows` | 7 | the threshold comparison above and below, done in psia against the engine doing it in bar |
+| `sourThreshold` | 1 | the threshold in both units, and the bar value that would be exactly 0.05 psia |
+
+THE GOLDEN IS THE ORACLE'S ANSWER AND THE ENGINE IS A SECOND DERIVATION, so agreement is a RESULT WITH A SIZE and this digest prints the size. Below, every one of the seventeen whole cases, engine against golden, with the relative difference in its own column:
+
+| case | golden rate mm/yr | engine rate mm/yr | relative difference, tolerance 1e-3 | golden combined | engine combined | relative difference, tolerance 1e-9 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 5.083726 | 5.083726 | 1.223e-15 | 9.040286 | 9.040286 | 1.179e-15 |
+| 2 | 0.653305 | 0.653305 | 8.497e-16 | 15.364833 | 15.364833 | 3.122e-15 |
+| 3 | 4.099106 | 4.099106 | 0 | 4.099106 | 4.099106 | 0 |
+| 4 | 0.185264 | 0.185264 | 1.498e-16 | 22.821316 | 22.821316 | 1.401e-15 |
+| 5 | 1.679557 | 1.679557 | 2.644e-16 | 2.114437 | 2.114437 | 4.201e-16 |
+| 6 | 1.912746 | 1.912746 | 4.643e-16 | 10.850643 | 10.850643 | 2.456e-15 |
+| 7 | 0.773945 | 0.773876 | 8.901e-5 | 39.052007 | 39.052007 | 5.458e-16 |
+| 8 | 0.654841 | 0.654841 | 3.391e-16 | 0.979796 | 0.979796 | 3.399e-16 |
+| 9 | 1.679205 | 1.679205 | 3.967e-16 | 2.512487 | 2.512487 | 3.535e-16 |
+| 10 | 1.702939 | 1.702939 | 2.608e-16 | 2.547999 | 2.547999 | 3.486e-16 |
+| 11 | 11.055613 | 11.055613 | 4.820e-16 | 15.616468 | 15.616468 | 3.412e-16 |
+| 12 | 8.107604 | 8.107604 | 6.573e-16 | 11.452295 | 11.452295 | 6.204e-16 |
+| 13 | 0.000000 | 0.000000 | 0 | 10.850643 | 10.850643 | 2.456e-15 |
+| 14 | 0.097072 | 0.097072 | 1.430e-16 | 10.850643 | 10.850643 | 2.456e-15 |
+| 15 | 8.685779 | 8.685779 | 4.499e-15 | 24.479852 | 24.479852 | 4.354e-15 |
+| 16 | 16.919257 | 16.919257 | 1.470e-15 | 265.610382 | 265.610382 | 4.066e-15 |
+| 17 | 0.095857 | 0.095857 | 2.896e-16 | 0.107554 | 0.107554 | 3.871e-16 |
+
+WHAT THE ROUTES BEHIND THOSE NUMBERS ACTUALLY PROVE, and what they cannot. The oracle's work is split three ways and the file says which is which. Section 25 item five is the reason that split exists.
+
+| route | independent because | cannot check |
+| --- | --- | --- |
+| the series combination | solved by bisection on the reciprocal rather than formed as a reciprocal, with the residual identity checked separately | nothing |
+| the inhibitor time average | rebuilt as an explicit 8760 hour duty cycle, which rounds to whole hours, so the agreement is loose and that looseness IS the independence | nothing |
+| the wall shear | reached through a momentum balance over a stated length, with the pipe force balance checked as an identity | the Blasius pair, the laminar constant and the branch switch |
+| the film onset | found by bisection on the unclamped expression and cross-checked against the closed form | the three scale constants |
+| the remaining life | reached by marching the wall loss forward in small steps rather than by dividing, held to one step absolute | nothing |
+| the allowance shortfall | formed as a deficit of YEARS times the rate rather than as a subtraction of two allowances | nothing |
+| the H2S to CO2 ratio | formed from MOLE FRACTIONS, so it needs no pressure at all | the two boundary ratios |
+| the sour comparison | done entirely in psia against the engine doing it in bar | the threshold value |
+
+THE MOLE-FRACTION ROUTE IS THE ONE THAT EARNS ITS KEEP, and section 13 is the proof. It catches an H2S partial pressure built from the total pressure with the mole fraction dropped, and an H2S partial pressure fed a fugacity where the partial pressure belongs. Neither could ever be caught by writing the engine's own ratio out again.
+
+WHAT NO CASE IN THIS FILE CAN DISCRIMINATE, named here rather than left to be discovered: every held constant in section 3. A case generated by an oracle that shares a constant with the engine cannot test that constant, whatever tolerance it is checked at. The PINS are what carry those, and a pin is a comparison against a third copy rather than a validation against a source.
+
+# SECTION 21: What is HELD, what is NOT PROVIDED, and what this course therefore never grades (owned by Expert m01, and read by every writer before the first lesson)
+
+The engine exports its own list. `HELD_FOR_LITERATURE` carries 11 items, `screen` returns them in `limits`, and the studio prints them behind a disclosure. Verbatim, in the engine's order:
+
+1. every de Waard-Milliams constant (0.0031, 1.4, the 250 bar cap, 4.93, 1119, 0.58, 2.45, the 0.8 velocity exponent, the 0.2 diameter exponent) and the published validity band of each
+2. whether the protective-scale factor multiplies the REACTION term or the COMBINED rate. This module multiplies the COMBINED rate, after the series combination. The two give materially different answers whenever mass transfer controls, which it does at typical line conditions, and which of them is the published form is not established here
+3. the scale factor constants 2400, 0.6 and 6.7, and the temperature at which the published correlation turns protective
+4. the pH correction slope of -0.5 per pH unit, its reference pH of 4, and what the correlation does BELOW that reference. This module refuses below the reference rather than returning 1
+5. the 250 bar fugacity cap and what the correlation does above it
+6. the H2S partial pressure threshold of 0.0035 bar
+7. the H2S to CO2 transition ratios of 1/500 and 1/20
+8. the 100 Pa film-stripping threshold and the 50 Pa moderate band
+9. the rate category bands of 0.1, 0.5 and 1.0 mm/yr, which carry no source and may be optimistic by one or two steps against the bands commonly cited for carbon steel in production service
+10. the Blasius coefficients 0.046 and -0.2 and the laminar to turbulent switch at Reynolds 4000
+11. an erosional-velocity criterion, a pitting criterion, and an SSC or HIC criterion, none of which this module has
+
+AND THE ONE WITHDRAWAL, which is not on that list because it is not held pending a source. It is gone: the sour-service severity region and the material guidance that went with it. Section 2 is the whole of it.
+
+WHAT THAT MEANS FOR THE EIGHTEEN GRADED CAPSTONE FIELDS. Not one of them is a corrosion rate the correlation produced. None is a band label; none is a threshold verdict; and none is a region or a material. The three capstones grade four things:
+
+| what is graded | why it is clear of every held item |
+| --- | --- |
+| the stream bookkeeping: the CO2 partial pressure, the H2S partial pressure in bar and in psia, and the H2S to CO2 mole ratio | each is the total pressure times a mole fraction, or a ratio of two mole fractions, or a conversion by a factor exact by the definition of the bar. No correlation constant, no fugacity coefficient, no threshold and no boundary is in any chain |
+| the flow definition: the Reynolds number | density times velocity times diameter over viscosity is a definition. The Blasius pair and the branch switch act on the friction factor DOWNSTREAM of it, and no graded field reads a friction factor or a shear stress |
+| the inhibitor arithmetic: the effective protection, the shortfall, the retained fraction and the metal-loss ratio | all four are arithmetic over two typed percentages, and the two that are ratios of engine rates share the whole correlation chain so it divides out exactly. The capstone generator MEASURES that invariance rather than claiming it, by re-running at conditions that move the rate by more than half and cross the fugacity cap |
+| the allowance arithmetic: the remaining life, the required allowance, the tolerable rate and the allowance a reinstatement needs | the remaining-life door takes an allowance, a consumed depth, a design life and A RATE THE CAPSTONE STATES from an inspection survey. No correlation constant is reachable from it, and the Expert fields are found by bisecting the engine's own verdict rather than by an algebraic shortcut around it |
+
+AND THE SCALE-FACTOR QUESTION IS CLEARED BY AN IDENTITY. Every capstone scenario is below its own computed film onset, so its scale factor is exactly one, so whether that factor belongs on the reaction term or on the combined rate cannot move any number in any of the three capstones. Multiplying by one in either place gives the same double.
+
+FOUR THINGS THIS MODULE IS ASKED FOR AND DOES NOT HAVE. It is called a Corrosion & Integrity studio, and a learner will look for all four: an inspection interval, a minimum thickness, a retirement thickness and a fitness-for-service assessment. Producing any of them means adopting a standard this module does not carry. They are in `NOT_PROVIDED`, the studio lists them, and this course teaches the word integrity narrowly: the integrity arithmetic here is an allowance divided by a rate, and that is all it is.
+
+| what a reader will look for | what the engine has | what it does not have |
+| --- | --- | --- |
+| when to inspect next | a remaining life against a stated allowance | an interval, a risk basis and any inspection standard |
+| what thickness to retire at | a corrosion allowance the caller types in | a minimum thickness, a pressure-containing calculation and any retirement criterion |
+| whether the line is fit for service | nothing | a fitness-for-service method of any kind |
+| whether the velocity is erosional | a wall shear and a film-risk word | an erosional-velocity criterion. Section 23 names the course that cites one |
+| whether it will pit | a general uniform rate | a pitting criterion, a localised rate and any pit-depth model |
+| whether it will crack | an H2S threshold comparison | a sulphide-stress-cracking criterion, a hydrogen-induced-cracking criterion and any hardness limit |
+
+THREE SUITE APPS TAKE A CORROSION ALLOWANCE AND DO NOT KNOW ABOUT EACH OTHER. This studio CONSUMES an allowance to give a life. The pipeline and line sizing studio ADDS one to a pressure-containing wall. The storage tank studio ADDS one to a shell course. The wall this studio is eating is not the wall either of those sized, there is no link between them and no minimum thickness anywhere. That is recorded, it is stated in the studio's help, and it is deliberately not wired up: a link between three apps is a design decision.
+
+# SECTION 22: THREE VOCABULARY COLLISIONS, LEGISLATED HERE BEFORE ANY LESSON IS WRITTEN (binding on every writer in this wave, and on every reviewer)
+
+A sibling course shipped one word carrying three different quantities and it had to be gated out afterwards. These three collisions are named now, with the rule for each, so no writer meets one without knowing it is a collision. The rule is BINDING: a lesson, a bank question, a key truth or a panel string that breaks one of these is a defect and the copy gate catches it.
+
+| the word | what it already means elsewhere in the Academy | what it means HERE | THE RULE |
+| --- | --- | --- | --- |
+| inhibitor | a HYDRATE inhibitor in the Flow Assurance course: methanol or monoethylene glycol, injected to depress a hydrate formation temperature, and dosed in mass fraction of the water phase | a CORROSION inhibitor: a filming amine on the steel, with an efficiency and an availability, which removes a fraction of the metal loss while it is present | ALWAYS write "corrosion inhibitor" on first use in every lesson and every bank question, and never write bare "inhibitor" in a prompt, an option or a heading. The two are different chemicals doing different jobs in different phases, and a learner who has taken Flow Assurance will read the bare word the other way |
+| erosion | a GEOLOGICAL process in the Basin Modelling course: material removed from a sedimentary column over geological time, which changes a burial history | MECHANICAL wall loss from entrained solids or from liquid impingement, which this module DOES NOT MODEL AT ALL | ALWAYS write "mechanical erosion" or "erosional wall loss", and every use in this course must be accompanied by the statement that the engine has no erosional-velocity criterion. Never write bare "erosion" as though this module measured it |
+| friction factor and Reynolds number | owned by the Pipeline & Line Sizing course, which computes both with a DIFFERENT correlation and a DIFFERENT laminar to turbulent transition | this module's own Fanning friction factor, on a two-branch Blasius form switching at Reynolds 4000.000000, used only to reach a wall shear | ALWAYS write "the corrosion module's friction factor" or "this module's Reynolds number" when the number is this one, and ALWAYS state that the line sizing course computes its own and that the two will not agree. Never present either number as the platform's single answer |
+
+THE THIRD COLLISION IS NOT A NAMING PROBLEM, IT IS A REAL DISAGREEMENT. Two modules on one platform compute a friction factor for the same pipe with different correlations. The engine says so in its own docstring. Removing the duplicate is a cross-module decision and it was deliberately left alone by the repair, so this course's job is to name the seam rather than to hide it. The measured constants of THIS module's friction factor are the Blasius pair 0.046000000000 and -0.200000000000, the laminar constant 16.000000000000 and the switch at Reynolds 4000.000000, all four HELD and all four pinned in section 3.
+
+AND TWO MORE WORDS THAT ARE NOT COLLISIONS BUT ARE MISREADINGS:
+| the word | the misreading | the rule |
+| --- | --- | --- |
+| integrity | that this module assesses fitness for service, computes a minimum thickness or sets an inspection interval | in this course "integrity" means one arithmetic: a corrosion allowance divided by a rate. Say so wherever the word appears |
+| rate | that the single rate this module returns applies to the worst spot on the line | it is a GENERAL UNIFORM rate and the engine says so. Never write it as a wall-loss prediction for a weld, a bend, a top-of-line film or a pit |
+
+# SECTION 23: The scope seams. What to CITE rather than teach, and the one course that points at this one (binding on every writer)
+
+Five quantities in this course's neighbourhood are already owned by a live course. A lesson that re-derives an owned quantity teaches a second answer to a settled question. CITE THE OWNER, state what this module does differently, and stop.
+
+| quantity | owned by | what to say here |
+| --- | --- | --- |
+| the erosional velocity criterion | the Casing & Tubing Design Expert tier, and cited again in Nodal Analysis and Gas Well Deliverability | name the owner, and state plainly that THIS engine has no erosional-velocity limit and computes a wall shear for a completely different purpose, which is whether an inhibitor film survives |
+| wall loss taken to a derated burst pressure | the Torque & Drag Expert tier | name the owner. This module consumes an allowance and never computes a pressure, so the comparison is a pivot and not a derivation |
+| the Barlow thin-wall relation with a design factor | the Pipeline Network Associate tier | name the owner. This module has no minimum thickness, so it cannot say what the allowance is being taken off |
+| fugacity and partial pressure | the Fluid Properties Expert tier | name the owner for the thermodynamics, then teach what is specific here: which quantity drives the RATE, which drives the H2S threshold and the film ratio, and that no fugacity correction is applied to H2S at all |
+| the corrosion allowance as a wall thickness component | the Pipeline & Line Sizing and Storage Tank studios, which both ADD one | state the seam as section 21 states it: three apps, one word, no link, and the wall this studio eats is not the wall either of those sized |
+
+AND ONE COURSE POINTS AT THIS ONE. The Well Integrity and P&A course in the Drilling module is about barrier envelopes and abandonment, and it EXPLICITLY REFUSES corrosion: it states in its own scope that it carries no corrosion model, no wall loss and no remaining life. FC9 fills exactly that refusal. A lesson here may name it as the course that owns barrier logic, and must not borrow its vocabulary: a barrier envelope is not a corrosion allowance.
+
+WHAT HAS NEVER BEEN TAUGHT ANYWHERE IN THE ACADEMY, and is therefore this course's own ground: the de Waard-Milliams correlation, iron carbonate and its protective film, sour-service screening, sulphide stress cracking and hydrogen induced cracking as NAMED ABSENCES, pitting as a named absence, in-line inspection, non-destructive testing, and fitness-for-service as a named absence. None of those words appears in any live course.
+
+# SECTION 24: Units. The studio's field units, the engine's correlation units, and one factor that is truncated (owned by Associate m01 l05)
+
+The engine works in the units the correlations are published in: temperature in degrees Celsius, pressures in bar, rates in millimetres a year, velocity in metres a second, diameter in metres, density in kilograms a cubic metre and viscosity in pascal seconds. The studio takes Fahrenheit, psig, mol percent, feet a second, inches, pounds a cubic foot and centipoise, and converts. The conversions are the studio's own and they are listed here because a learner reading a number off the app needs to know which layer produced it.
+
+| studio field | the studio's conversion | the engine's unit |
+| --- | --- | --- |
+| temperature | subtract 32, divide by 1.8 | degrees Celsius |
+| pressure | add 14.7, divide by 14.5038 | bar absolute |
+| CO2 and H2S | divide by 100 | mole fraction |
+| velocity | multiply by 0.3048 | metres a second |
+| line inside diameter | multiply by 0.0254 | metres |
+| density | multiply by 16.0185 | kilograms a cubic metre |
+| viscosity | multiply by 0.001 | pascal seconds |
+| corrosion allowance and consumed depth | multiply by 25.4 | millimetres |
+| every rate on the way back out | divide by 25.4, multiply by 1000 | mils a year alongside millimetres a year |
+
+ONE OF THOSE FACTORS IS TRUNCATED AND THE ENGINE'S OWN IS NOT. The studio divides a psig pressure by 14.5038 to reach bar. The engine exports the exact factor, which is 14.503773800722, exact by the definition of the bar and of the pound-force, and measured here out of the psia the engine reports for a 1 bar partial pressure. The studio's divisor is therefore larger than the exact factor by 1.806e-6 as a fraction, so a pressure converted through the studio and a pressure converted through the engine's own factor differ in the sixth significant figure.
+
+WHAT THAT IS WORTH, measured rather than argued. The shipped defaults through the studio's divisor give a total pressure of 51.000427474179 bar and a rate of 0.754523654262 mm/yr. Through the engine's exact factor they give 51.000519600160 bar and 0.754524736514 mm/yr. The two rates differ by 1.434e-6 as a fraction, which is far below anything a screening decision turns on and far above zero.
+
+THIS IS WHY NO GRADED FIELD IN THIS COURSE IS CONVERTED THROUGH THE STUDIO. The three capstones state their conditions in the ENGINE'S units, and they say so on the page. Grading a learner on which rounding the app happened to use would grade them on the app rather than on corrosion, and the difference is large enough to fail a tolerance while being far too small to matter to an engineer. A capstone that did that would be measuring the wrong thing on purpose.
+
+AND THE SAME TRUNCATION ONCE REACHED A HINT A USER READ. The sour threshold was labelled 0.05 psia and it is 0.050763208303 psia; a threshold of exactly 0.05 psia would be 0.003447378640 bar, which is 1.503467 percent below the threshold the engine actually uses. The engine now derives and prints both numbers, and the vendored gate asserts the psia value is not 0.05.
+
+# SECTION 25: WHAT THIS ENGINE USED TO DO. THIS SECTION IS REPAIR HISTORY, and nothing follows it (owned by Expert m06)
+
+# THIS SECTION, AND ONLY THIS SECTION, DESCRIBES BEHAVIOUR THIS ENGINE NO LONGER HAS. Every sentence above this line is about the engine as it ships today. Every sentence below is about what it did before the repair that preceded this course, and each item is a GENERAL LESSON that happens to have an example here. A sentence about former behaviour that reads as current behaviour is a defect, and the frame for this material is this heading and this paragraph.
+
+- THE ENGINE SOURCE CARRIES THIS HISTORY IN ITS COMMENTS, and a sentence lifted out of a comment arrives with no frame around it. Counted by reading engines/facilities/corrosion.js: 0 comment lines carry the repair marker, and 5 comment lines are written in a past tense about former behaviour. The rule that counted them: a line that begins with a comment marker and contains one of "used to", "previous version", "earlier version", "before", "no longer", "silently" or "would have".
+- The module is 775 lines long, so roughly one line in 155 of it is a sentence about what it used to do. Engine source comments are PROVENANCE. So are the wave recon and findings reports, and so is the repair's own findings record vendored beside the oracle. None of the four is teaching truth.
+
+# ITEM ONE. THE HEADLINE. AN INVENTED CURVE WEARING SOMEBODY ELSE'S AUTHORITY.
+- The general lesson, and it is the largest one in this course: a calculation can be wrong in a way that no amount of measurement repairs, because the number was never the claim. If a curve is labelled with a standard's name, the claim is "this is what the standard says". Retuning the curve does not make that true. The only honest repair is to withdraw the claim and say the thing is not provided.
+- Before the repair this engine computed a sour-service severity region from an expression of its own, labelled it with two standards, and served three named material recommendations off it: what steel to buy, when to control hardness, and when to qualify weldments. Four measurements settled what the expression was worth. Moving its pH pivot by a whole unit left the validation suite entirely green. Widening one of its region boundaries by a factor of two left the suite green. A missing pH made the expression not-a-number, both of its comparisons failed, and it fell through to the HARDEST material recommendation in the file from an input nobody had supplied.
+- Today the function is gone, nothing replaces it, and section 2 is the current statement of that absence. The absence is a FIELD rather than a missing value: `regionProvided` is false and `materialGuidanceProvided` is false, so a caller cannot read the gap as an unset property. The threshold value the screen still uses stayed exactly where it was, because changing a live number without a source is the same mistake with the sign flipped.
+
+# ITEM TWO. AN INPUT THAT MOVED NOTHING, BESIDE A SCREEN THAT SAID IT MATTERED.
+- The general lesson: when one input reaches the answer by two routes and the route that decides the headline ignores it, the box on the screen is decoration. The test is arithmetic and it takes one sweep: walk the input across its range and print the spread of the answer.
+- Before the repair the pH correction returned one for any pH at or below its reference, so pH 2.0, 3.0, 3.5 and 4.0 all produced the identical rate to sixteen figures. Two decades of hydrogen-ion activity moved the headline number by exactly nothing, while a second calculation on the same screen moved its answer four times across the same span. A more acid water is not a less corrosive one, so a factor of one was the least limiting possible answer to a question the module could not answer.
+- Today the rate is strictly monotonic in pH across the whole band above the reference, which section 7 measures: from 4.724817 mm/yr at pH 4.000000 down to 0.014941 mm/yr at pH 9.000000. Below the reference the engine refuses, and the refusal names the reference so a caller can print the boundary.
+
+# ITEM THREE. AN ABSENT INPUT GIVEN ITS LEAST LIMITING VALUE.
+- The general lesson: every absent input has a value that makes the answer look best, and a calculation that supplies that value has answered a question nobody asked. The shape to look for is a function that returns infinity, zero or one where it should return nothing.
+- Before the repair a blank velocity or a blank line diameter made the mass-transfer term INFINITE. An infinite transport capacity makes the series combination exactly equal the reaction term, so the engine then named reaction kinetics as the controlling mechanism from an input that had never been supplied, and the rate came out several times the correct one. A blank temperature made the fugacity not-a-number, which failed a greater-than test, which sent the engine down its NO-CO2 branch: a rate of zero, a negligible label in green, an unbounded life and a passing verdict, printed under a CO2 box that still read three percent.
+- Today the transport term returns not-a-number rather than infinity and the vendored gate asserts it is not infinity; the whole-screen door refuses when any of six boxes is blank, and the message names the box; and a TYPED zero is treated differently from a blank, which section 18 sets out. A typed zero is a positive assertion of no CO2, so the module withholds its category and its life and says what a rate of zero means there.
+
+# ITEM FOUR. A WARNING THAT COULD NOT FIRE AT THE APP'S OWN DEFAULTS.
+- The general lesson: a guard written with a strict comparison against a round number is switched off at exactly that number, and a shipped default sitting on the boundary is the likeliest value in the whole input space. Test a guard at the default before testing it anywhere else.
+- Before the repair the inhibitor warning fired only when the efficiency was strictly greater than ninety percent. The studio shipped with an efficiency of exactly ninety. So the one lesson this module exists to teach was silent on the first screen every user saw: the studio computed the effective protection, printed it in green because the colour was chosen from the presence of a warning, and said nothing. The same guard was equally silent at ninety percent efficiency and fifty percent availability.
+- Today the warning fires on the EFFECTIVE SHORTFALL at any efficiency, with a trigger measured in section 3 at 0.100000 percentage points, and it states the effective figure and the metal-loss ratio in its own words. At the shipped defaults it is present, and section 19 quotes it verbatim.
+
+# ITEM FIVE. A VALIDATION SUITE THAT COULD NOT FAIL.
+- The general lesson, in two halves. A validation case is worth what it can TELL APART, and it can be worth nothing in two different ways: it can be missing, so a route has no case at all; or it can be present and unable to discriminate, because the thing it is supposed to check is shared with whatever produced the expected answer. The second is the harder one to see, and the arithmetic of it is simple: A CONSTANT THAT LIVES IN TWO FILES CANNOT BE VALIDATED BY COMPARING THOSE TWO FILES.
+- Before the repair, thirteen defects planted one at a time in this engine left its suite entirely green, including a sour threshold moved by a factor of ten and a mass-transfer coefficient moved by a sixth. Worse, fifteen of seventeen constants moved in the engine AND in the oracle together also left it green, and the oracle caught none of the seventeen, because five of its routes were the engine's own expressions written out again and one was the engine's own line rearranged algebraically. Its docstring called that an independent re-derivation.
+- Today the work is split three ways and the file says which is which: genuinely independent routes, constant-free invariants, and PINS. Section 20 lists the routes with what each one cannot check. Section 3 is the pins: 30 held constants, each MEASURED out of the engine's behaviour and compared against a literal in a third file, with the golden's own copy as a fourth. Sections 5, 6, 7 and 13 are the constant-free invariants: the series residual, the factor being exactly one at its own computed onset, one decade per two pH units, and a ratio that is provably free of pressure.
+
+# NOTHING FOLLOWS THIS SECTION.
