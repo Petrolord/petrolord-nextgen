@@ -112,7 +112,7 @@ const bracketFloorPsia = (() => {
 
 // ------------------------------------------------------------------ header
 w('# FC2 Line Sizing & Hydraulics. Teaching digest.');
-w('# Liquid work prints to six decimals (ft per s, psi, inches, ratios, friction factors); gas rates, Reynolds numbers, barrels, hours and days to four; counts are whole numbers.');
+w('# Liquid work prints to six decimals (ft per s, psi, inches, ratios, hours); friction factors and the elevation group factors print to ten decimals, which is the precision a field graded to a billionth actually needs; gas rates, Reynolds numbers, barrels and days print to four decimals; counts are whole numbers.');
 w('# Field units: bpd for liquid, scfd for gas, inches of bore, FEET of length for liquid work and MILES for gas work (the unit the published transmission forms are stated in), psia, degR, lb per ft3, cp.');
 w('# Nothing here is read from a clock or a random number, so every line reproduces.');
 w();

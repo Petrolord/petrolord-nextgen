@@ -29,7 +29,8 @@ The inverse also has a sign to get right. A drop is negative on a descent, and t
 | temperature | degR, absolute |
 | the driving group | psia squared |
 | gas rates and Reynolds numbers | four decimals |
-| pressures, ratios and friction factors | six decimals |
+| pressures, ratios and inches | six decimals |
+| friction factors and the elevation group factors | ten decimals |
 
 A length in feet handed to a gas form is not a long line, and a gauge pressure squared is wrong by an amount no later step recovers.
 
@@ -37,7 +38,7 @@ A length in feet handed to a gas form is not a long line, and a gauge pressure s
 
 When the engine refuses, the refusal is the answer. An outlet meeting its inlet, a rate the line cannot carry to atmosphere, a climb the static column alone pays for: each of those returns an error string rather than a number, and each names a state the method has no answer for. Writing a plausible figure into that gap turns a correct reading into a wrong one, and the gap was the finding.
 
-Quote figures at the precision the engine prints rather than rounding on the way. A gas rate is printed to four decimals and a friction factor to six, and rounding a friction factor to three digits changes the fourth figure of the rate it produced.
+Quote figures at the precision the engine prints rather than rounding on the way. A gas rate is printed to four decimals and a friction factor to TEN, and a friction factor rounded to six is already outside a field graded to a billionth.
 
 ## One habit behind the other three
 
