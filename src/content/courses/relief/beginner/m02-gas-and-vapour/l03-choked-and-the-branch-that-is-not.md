@@ -2,12 +2,50 @@
 
 {{panel:fc-sizing-explorer}}
 
-<!-- FC5 SCAFFOLD PLACEHOLDER: replace this body. Do not change the H1 or the panel line. -->
+This is the lesson most likely to correct something you already believe. Almost everyone arrives expecting the outlet pressure to matter to the size of a relief valve. Across the lower part of the range of a relief case it does not matter at all, and the engine will show you that in five rows.
 
-This lesson is not written yet. It belongs to beginner module Gas and Vapour (m02-gas-and-vapour) and must carry between 500 and 560 PROSE WORDS, counted the way lengths.py counts them: front matter, markdown table rows, headings and panel lines are all excluded.
+## The evidence
 
-Every figure in it must be quoted from digest.txt at the precision the digest prints, and no figure may come from RECON.md, FINDINGS.md, the engine source comments or the vendored FINDINGS-relief.md, all four of which are provenance rather than teaching truth.
+The ORUBIRI load and the ORUBIRI valve, with the back pressure at the relief valve outlet walked as a fraction of the relieving pressure so that no row carries a pressure of its own. The engine returns a critical ratio of 0.551208 for this gas.
+
+| back pressure ratio (stated) | branch | required area in2 | F2 where subcritical |
+| --- | --- | --- | --- |
+| 0.100000 | critical | 2.223779 | n/a |
+| 0.200000 | critical | 2.223779 | n/a |
+| 0.300000 | critical | 2.223779 | n/a |
+| 0.400000 | critical | 2.223779 | n/a |
+| 0.500000 | critical | 2.223779 | n/a |
+| 0.549800 | critical | 2.223779 | n/a |
+| 0.600000 | subcritical | 2.237461 | 0.735763 |
+| 0.700000 | subcritical | 2.352545 | 0.808025 |
+| 0.800000 | subcritical | 2.658695 | 0.875668 |
+| 0.900000 | subcritical | 3.504623 | 0.939468 |
+
+In choked flow the required area does not move with the back pressure at all. Read the first five rows: the area is identical across every one of them, because once the downstream pressure is low enough the flow through the throat is set entirely by the upstream condition. That is the whole meaning of choked, and it is a live behaviour of the shipped studio rather than a simplification made for teaching.
+
+Above the critical ratio the area does move, and it moves steeply. The last critical row printed sits at a ratio of 0.549800 and the first subcritical row at 0.600000, so the step across the crossing is visible on the page instead of asserted.
+
+## What the flat part is worth knowing
+
+Two practical readings come out of that flatness. The first is that on a choked case, arguing about the header pressure is arguing about something the size does not depend on. The second is the reverse, and it is the one that catches people: once a case is subcritical, the header pressure is part of the sizing answer, so a header modification can invalidate a valve that was adequate.
+
+Do not divide one subcritical area by another and describe the quotient as how the branch behaves. The digest prints no ratio between those rows, so there is nothing standing behind such a number. 
+
+## A typed factor that is ignored, and the engine says so
+
+The balanced bellows factor Kb is a chart input. In choked flow it divides the area, so it changes the answer. Above the critical ratio the subcritical equation has no Kb in it at all, and the engine tells you so rather than leaving it to be discovered.
+
+| branch | back pressure ratio (stated) | Kb (stated) | required area in2 | warning |
+| --- | --- | --- | --- | --- |
+| critical | 0.200000 | 1.000000 | 2.223779 | no |
+| critical | 0.200000 | 0.720000 | 3.088582 | no |
+| subcritical | 0.800000 | 1.000000 | 2.658695 | no |
+| subcritical | 0.800000 | 0.720000 | 2.658695 | yes |
+
+The two subcritical rows are identical to twelve decimals, 2.658695041098 in2 and 2.658695041098 in2, and the second one carries the engine's own words: `subcritical flow uses F2, not Kb; the typed Kb was ignored`. The two choked rows are not identical, 2.223779 in2 and 3.088582 in2, because there Kb divides.
+
+A separate warning fires on the chart Kb itself once the back pressure ratio passes 0.300000000000, which is the point past which a balanced bellows valve needs its published chart factor. Kb is held for literature in this course: it is a chart, it is typed, and nothing graded here rests on its value.
 
 ## Exercise
 
-Not written yet.
+Write down the required area at the four lowest back pressure ratios and say what changed between them. Then explain, in one sentence each, why a typed Kb moves the answer on one branch and is ignored on the other.
