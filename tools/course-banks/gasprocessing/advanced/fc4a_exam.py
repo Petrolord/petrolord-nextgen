@@ -1,0 +1,316 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC4 Expert tier exam, 42 questions across all six modules. Seven per module,
+# each asked from an angle its own module bank does not use.
+
+# --- the cold end and the coefficient (m01) ---
+
+q(0, "A dew point skid carries no refrigerant and no external duty. What pays for the cooling?",
+ "The pressure the stream already had.",
+ ["The reboiler on the glycol loop the same plant runs.",
+  "The compressibility of the gas, which falls across the valve and releases the difference.",
+  "The heat capacity the caller supplies, which is the duty term in the identity."],
+ "The gas is dropped across a valve into a lower pressure and whatever falls out of the colder gas is caught underneath. A skid with pressure to spare is attractive for exactly that reason.")
+
+q(2, "In mu = (R T^2 / (Cp P)) (dz/dT)_P, which term carries any real-gas behaviour at all?",
+ "The temperature derivative of the compressibility.",
+ ["The heat capacity, which is where a real gas departs from an ideal one.",
+  "The temperature squared, which is the term an ideal gas would not carry.",
+  "The gas constant, which is formed at the module's own standard pressure and temperature."],
+ "Everything else in the expression is a state variable or a caller input. The derivative is also the term the module differentiates rather than assumes.")
+
+q(1, "A coefficient formed here is carried to a caller in another app. What has to travel with it?",
+ "The state it was formed at, the gravity and heat capacity that produced it, and the pressure interval it is honest over.",
+ ["The step count of the march and the published case nearest to the state, so that the receiving engine can bound the error it is inheriting.",
+  "The compressibility and its derivative, since a receiving engine cannot re-form the reduced pair from a gas gravity on its own.",
+  "The arrival temperature and the cooling, since a coefficient without the answer it produced cannot be checked."],
+ "A coefficient alone is not portable. Hand it on with what it was formed from and the receiving engine can at least tell whether its own conditions are close.")
+
+q(3, "At 2200.000000 psia the temperature derivative is the largest of the six rows at 0.001585158042 per degR, and yet the coefficient there is the smallest at 0.045082772 degF per psi. What has happened?",
+ "The pressure the derivative is divided by has grown faster than the derivative itself.",
+ ["The compressibility has fallen to 0.766549366, and the coefficient is multiplied by it.",
+  "The temperature squared in the numerator falls as the gas is compressed, which more than offsets the derivative.",
+  "The heat capacity rises with pressure, and it divides the whole answer."],
+ "Both the derivative and the pressure it is divided by rise as the table is read downwards. Which of the two is growing faster decides which way the coefficient moves, and by the deepest rows it is the pressure.")
+
+q(0, "Match each sense of the phrase dew point to the engine that owns it.",
+ "The water sense is this engine, the hydrocarbon sense needs a flash in the Fluid engine, and the PVT sense is a saturation pressure of a reservoir fluid.",
+ ["The water sense is this engine, the hydrocarbon sense is this engine at the cold spot, and the PVT sense belongs to Flow Assurance.",
+  "All three belong to this engine, since a cold separator state fixes a water dew point, a hydrocarbon dew point and a saturation pressure at once.",
+  "The water sense is the Fluid engine, the hydrocarbon sense is this engine, and the PVT sense belongs to the reservoir side of the platform."],
+ "Carry the PVT sense into a gas plant and every number in this module reads as the wrong quantity, because it is a pressure and it has nothing to do with water.")
+
+q(1, "The refusal at a gas gravity of 5.080000 names two figures beside its message. What are they, and what do they let a reader see?",
+ "A pseudo-critical temperature of 35.0 degR and a pseudo-critical pressure of -1.6 psia, so the negative pressure is visible rather than inferred.",
+ ["A reduced pressure and a reduced temperature, so the reader can see which of the two left the correlation band first.",
+  "The compressibility and its derivative at that gravity, so the reader can see that the chain broke at the derivative.",
+  "The gravity and the coefficient the engine would have returned, so the reader can judge whether the refusal was worth making."],
+ "Sutton's pressure correlation turns negative above a gravity of about 5.080000, and a gas that heavy is not a natural gas. Naming both pseudo-criticals costs the engine nothing.")
+
+q(2, "Which of the following does a dew point skid designed in this module NOT deliver?",
+ "An outlet composition at the cold spot.",
+ ["A cold spot with a known temperature.",
+  "A quantity of free water arriving at that cold spot.",
+  "A cooling figure across the let-down."],
+ "There is no compositional flash anywhere in this module, so what condenses as hydrocarbon at the cold spot is a question the engine hands on intact.")
+
+# --- marching a pressure drop (m02) ---
+
+q(3, "Why is a finite pressure drop an integration rather than a multiplication?",
+ "Because the coefficient is a slope, and the slope changes as the march walks the pressure and the temperature down.",
+ ["Because the pressure drop is large compared with the pressure, so the arithmetic has to be done in stages to stay accurate.",
+  "Because the coefficient is defined only at a state.",
+  "Because the cooling is the integral of the heat capacity, and the coefficient is only the first term of that integral."],
+ "A single multiplication is one rectangle under a curve, drawn at its left-hand edge, and it assumes the slope holds all the way down.")
+
+q(0, "What step count does this module march at by default, and what does its own convergence table say that count is worth on the teaching let-down?",
+ "Twenty steps, reaching 0.999997906978 of the reference cooling.",
+ ["Twenty steps, reaching 0.999999979778 of the reference cooling.",
+  "Two hundred steps, reaching 0.999999979778 of the reference cooling.",
+  "Fifty steps, reaching 0.999999672610 of the reference cooling."],
+ "0.999999979778 is what two hundred steps reach and 0.999999672610 is what fifty reach. A reader who needs to justify the default has those figures to justify it with.")
+
+q(1, "What would be wrong with treating the twenty-thousand-step march as a golden for this routine?",
+ "It is the engine checked against its own arithmetic, so it cannot say whether the identity being marched is the right one.",
+ ["It is far finer than any design pass, so its own rounding error dominates and it is less trustworthy than the default count is.",
+  "It was run on a single let-down, and a golden has to cover the whole range of inlet pressures that this module accepts.",
+  "It reports a cooling rather than an arrival temperature, and a golden has to carry every field the routine returns."],
+ "A convergence table tells you whether you have walked far enough down one road. An oracle tells you whether two roads reach the same place, and the published cases are where that is answered.")
+
+q(2, "Two questions follow any marched answer and neither is optional. What are they?",
+ "How the step was taken, and how many steps were taken.",
+ ["What the coefficient was at the inlet, and what it was at the outlet.",
+  "Which published case the state sits nearest to, and how far from it the answer is.",
+  "What the step size was in psi, and whether the outlet pressure divides into it exactly."],
+ "A step evaluated at the start of an interval and a step evaluated at its middle converge at different rates, and an answer is only as good as the count makes it. The convergence table answers the second and the method answers the first.")
+
+q(3, "When should the step count be raised above the module default?",
+ "When the let-down is deep, because a deeper drop walks the coefficient further and a fixed count then spans more change per step.",
+ ["When the inlet is cold, because the march is then closer to the state at which it would be refused.",
+  "When the gas gravity is high, because the pseudo-criticals move and the compressibility is less certain.",
+  "When the heat capacity is low, because the coefficient is larger and the temperature moves faster per step."],
+ "Lower it only after measuring what lowering it costs on your own case, which is what the convergence table shows a reader how to do.")
+
+q(0, "What does a completed march hand back besides an arrival temperature?",
+ "A cooling and three coefficients, the inlet one, the one at the last half step and the mean.",
+ ["A cooling and the mean coefficient, which is the only one the march has to form.",
+  "A cooling, a step count and the water the gas can hold at the state it arrived in.",
+  "A cooling and the compressibility at the outlet, which the next engine needs in order to use it."],
+ "On the teaching let-down those three are 0.061607962, 0.071833233 and 0.067252747, and they are three different numbers.")
+
+q(2, "A march comes back refused at step 11 of 20. What does the message say went wrong?",
+ "The gas had cooled past the reduced temperature its compressibility correlation is valid at.",
+ ["The pressure had fallen below the band the correlation is valid at, so the compressibility could not be formed.",
+  "The step size had fallen below what double precision can resolve at that pressure.",
+  "The arrival temperature had gone below absolute zero, which the temperature guard refuses."],
+ "It died at 690.000000 psia and -105.517249 degF, and what kills a march is a cold inlet rather than a deep outlet.")
+
+# --- the cold separator (m03) ---
+
+q(3, "The teaching stream carries 33.801656743 lb per MMscf at its inlet, and let down without any cooling it could hold 62.321804620 lb per MMscf. What follows for an expansion with no cooling in it?",
+ "No water would drop out at all, because the gas would be further from saturation than when it arrived.",
+ ["The same water would drop out, because the quantity of water in the stream has not changed.",
+  "More water would drop out, because a gas at a lower pressure holds less water at the same temperature.",
+  "The engine would refuse the state, because a content above the inlet content is not physical."],
+ "A skid that only dropped the pressure would deliver nothing at all to the boot. The cooling is the part of an expansion that dries a gas, and the pressure drop on its own works against it.")
+
+q(0, "Which of these four figures from the cold end carries no units?",
+ "0.555085832",
+ ["18.762820770",
+  "15.038835973",
+  "33.801656743"],
+ "The other three are contents or a difference between contents in lb per MMscf. A ratio of two contents is dimensionless, and quoting it with a unit is the mistake this figure invites.")
+
+q(1, "A designer asks how well the cold separator actually separates. What does this module answer?",
+ "It does not answer, because it models no vessel internals at the cold end.",
+ ["It answers with the Souders-Brown sizing, which sets the diameter the liquid disengages across.",
+  "It answers with a separation efficiency taken from the declared constants.",
+  "It answers with the residence time in the boot, which follows from the free water and the rate."],
+ "What it tells you is how much free water arrives at a cold spot whose temperature you now know. The vessel that catches it is somebody else's answer.")
+
+q(2, "Which outlet state is dry in absolute terms rather than on a condition?",
+ "The glycol contactor outlet, at line pressure.",
+ ["The cold separator outlet, at the cold spot.",
+  "The inhibited stream, at whatever conditions it meets.",
+  "All three, since each of the three units is bought to deal with the same water."],
+ "A contactor takes the water out of the gas. The other two leave the gas holding water and rely on something else staying true, which is a temperature in one case and a dose in the other.")
+
+q(3, "Why is refusing to compute a hydrate boundary the right behaviour for this engine?",
+ "Because a boundary guessed from a gravity correlation would be an answer its inputs cannot support, and it would compete with a course that owns the subject.",
+ ["Because the boundary depends on the inhibitor dose, which is an input this engine has no way of taking.",
+  "Because the boundary would have to be computed at every step of the march, which the step count makes too expensive.",
+  "Because the boundary is a held item in this package, waiting on a publication to be read against it."],
+ "Two answers to one question with no stated precedence teaches a learner to trust whichever screen they opened, and hydrates are the one place where being wrong is expensive.")
+
+q(0, "Which of the three answers to the water question moves the problem to a colder temperature rather than removing water in the absolute sense?",
+ "The cold separator.",
+ ["The glycol contactor.",
+  "The inhibitor injection.",
+  "All three, since none of them changes the water that is physically present in the stream."],
+ "A contactor leaves the gas drier in absolute terms at the same pressure it arrived at. An inhibitor removes no water at all and stops what is there from freezing.")
+
+q(1, "Two skids run at very different rates at the same pressure and temperature. What do they share at the cold end, and what differs?",
+ "The same two water contents per MMscf, and different quantities of liquid to drain.",
+ ["The same quantity of liquid, since the difference between two saturated contents is fixed by the states alone.",
+  "The same cooling and the same contents, since neither takes a rate.",
+  "Nothing, since every cold end figure is formed from the rate."],
+ "The saturation answer is an intensive property of the gas at a state. The multiplication by a rate is a separate step, and the moment it happens the answer becomes a property of the plant.")
+
+# --- the still overhead (m04) ---
+
+q(2, "The still overhead comes back as 2029.1788 lb a day. Which inputs produced it?",
+ "900.000000 ppmv at an absorbed fraction of 0.150000.",
+ ["400.000000 ppmv at an absorbed fraction of 0.150000.",
+  "180.000000 ppmv at an absorbed fraction of 0.200000.",
+  "900.000000 ppmv at an absorbed fraction of 0.100000."],
+ "400.000000 ppmv at the same fraction gives 901.8572, and 180.000000 ppmv at a fraction of 0.200000 gives 541.1143. Both columns are linear in both inputs, so a reader can walk between the rows.")
+
+q(3, "Which of these does the BTEX chain contain?",
+ "A molecular weight, a mole fraction, a rate and an operating multiplier.",
+ ["A partition coefficient between the gas and the glycol.",
+  "A temperature dependence taken at the contactor conditions.",
+  "An equilibrium between the aromatics in the gas and the aromatics in the solvent."],
+ "There is no chemistry in it at all. One concentration, one fraction, one rate and a molecular weight, and every step is a multiplication.")
+
+q(0, "Which of these is measured out of the engine on its own rather than only as part of a group?",
+ "The molecular weight of water, 18.015280000000.",
+ ["The minutes in a day, 1440.000000000.",
+  "The days in a year over the pounds in a short ton, 0.182500000000.",
+  "The hours in a day times the Btu in a MMBtu, 24000000."],
+ "The other three can only be measured together, because the engine never uses their parts separately and nothing outside can pull them apart. A group cannot say which of its parts is wrong when the group is.")
+
+q(1, "In the BTEX answer, which half is the reader's and which is the engine's?",
+ "The absorbed fraction and the molecular weight are the reader's, and the mole balance from them is the engine's.",
+ ["The concentration in ppmv is the reader's, and the absorbed fraction and the mole balance that follows are both the engine's.",
+  "The whole calculation is the engine's, and what the reader supplies is only the stream and the rate it is run on.",
+  "The mass is the reader's, since the conversion of moles to a mass needs a molecular weight the reader chooses."],
+ "Everything that is a design choice or a chart value is an input with its customary value visible on the page, and everything computable from first principles is computed. This is the clearest case of that doctrine in the module.")
+
+q(2, "Benzene is usually the compound a permit cares about most. What does this module offer for splitting the cut?",
+ "Nothing, because it carries no speciation at all.",
+ ["A second molecular weight for benzene alone, which the caller supplies beside the cut average.",
+  "The absorbed fraction, which can be set per compound where a chart gives four values.",
+  "The published cases, which carry the four compounds separately even though the engine reports the total."],
+ "The default molecular weight of 92.000000 is toluene standing for four compounds, and representing the cut that way trades accuracy on the species of most interest for a single tractable number.")
+
+q(3, "A reader converts 405.8358 lb a day into short tons a year by hand. What had the engine already given them?",
+ "74.065024 short tons a year, from the same mole balance.",
+ ["49.376683 short tons a year, which is the same stream at the customary absorbed fraction.",
+  "0.182500000000 short tons a year, which is the annual figure per pound a day.",
+  "Nothing, since the annual figure is a conversion the reader is expected to perform."],
+ "The annual figure was on the answer already. Redoing it by hand introduces a factor the engine had no need of and gives a reader two numbers whose agreement they now have to check.")
+
+q(0, "Of 180.000000 ppmv, an absorbed fraction of 0.150000, 405.8358 lb a day and 74.065024 short tons a year, which did the engine compute?",
+ "The last two.",
+ ["The last one only, with the pounds a day supplied as the basis for it.",
+  "The last three, since the concentration is the only condition of the stream.",
+  "All four, since the customary fraction is read from the module's declared constants."],
+ "The concentration is a property of the gas the caller states and the absorbed fraction is an operating value the caller supplies. What the engine does with them is a mole balance and nothing else.")
+
+# --- computed, chosen and kept (m05) ---
+
+q(1, "Digest Section 20 is the one section whose subject is what this engine used to do, and it says so in its title and its first line. What does the course require of a sentence drawn from it?",
+ "That it say plainly that this is what the engine used to do.",
+ ["That it name the finding number the repair recorded it under, so a reader can trace it.",
+  "That it be quoted verbatim, because a paraphrase of a historical claim cannot be checked against the source.",
+  "That it be accompanied by the current behaviour in the same sentence, so the two cannot be confused."],
+ "A sentence about former behaviour that reads as current behaviour is the defect. The subject itself is curriculum, and the frame belongs in the heading where a reader looks for it.")
+
+q(2, "A compressibility refused for being off the correlation band hands back six fields beside its message. What are they?",
+ "The reduced pair, the two pseudo-criticals, and the pressure and temperature it was asked at.",
+ ["The reduced pair, the gravity, the step the march had reached, and the pressure and temperature it was asked at.",
+  "The compressibility it would have returned, its derivative, the reduced pair and the two pseudo-criticals.",
+  "The band limits, the reduced pair and the state it was asked at."],
+ "A refusal that hands back the evidence it stands on can be acted on without re-running anything, which is the difference between an answer that is missing and an answer nobody can tell is missing.")
+
+q(3, "The mass-balance rows of the published cases agree exactly and the molar rows do not. Which is the stronger result?",
+ "The molar rows, because the two sides reached the same number by different roads and the small gap is what says so.",
+ ["The mass rows, because an exact agreement is the strongest evidence a published case can offer.",
+  "The mass rows, because they are the only rows whose quantities a plant actually measures.",
+  "Neither, because both are the same oracle checking the same engine and neither is independent of it."],
+ "Agreement to twelve decimals between two things that share their arithmetic says a transcription was faithful. When a published case agrees exactly, ask how far apart the two sides were to begin with.")
+
+q(0, "Across the four published water-content cases the largest departure from one is 0.006379500. Why is that a result rather than a failure?",
+ "The oracle uses a different published vapour-pressure equation from the engine's, so two independent fits of one physical curve are meeting inside their shared band.",
+ ["The departure is within the tolerance the published cases are graded at, so the two sides agree for practical purposes.",
+  "The departure is the real-gas correction the ideal-mixing method leaves out, measured against a chart reading.",
+  "The departure is the ratio of the two gas constants, which every quantity carrying a molar volume shows."],
+ "Two copies of one fit agreeing exactly would say nothing at all. The signature of the two gas constants is a different measurement on a different set of rows.")
+
+q(1, "The oracle holds its own copy of the customary densities and the customary overhead, under a name that says they are shared. What does that buy?",
+ "A tripwire, so that changing one of them breaks the published cases and makes the change a reviewed act.",
+ ["A validation, since a second copy agreeing with the first is what a published case is for.",
+  "A derivation, since a constant held on both sides can be measured out of either one of them.",
+  "A margin, since the oracle can vary its copy and report how far the answers move."],
+ "There is nothing in this repository to check any of those values against, and the oracle says as much in its own comment. It is worth having and it is not a validation.")
+
+q(2, "How was the standard cubic feet in a pound mole measured out of the engine rather than read from an export?",
+ "By running the BTEX mole balance at one MMscfd, a million ppmv, a unit absorbed fraction and a unit molecular weight, where the answer is a million over the constant and nothing else.",
+ ["By dividing the gas constant by the standard pressure and multiplying by the standard temperature, which are all exported.",
+  "By taking the saturation answer over the mole fraction the same call returns, which leaves the constant alone.",
+  "By comparing the engine's water content against the golden's, since the golden builds the same volume from the SI gas constant."],
+ "To measure a constant, ask the engine a question whose answer is that constant and nothing else, then print the ratio of the measurement to the export. The saturation route is how the molecular weight of water was measured.")
+
+q(3, "The US gallons in a cubic foot is 7.480519480519. Which kind of constant is it?",
+ "Derived, and exact as 1728 cubic inches to the cubic foot over 231 to the gallon.",
+ ["Measured, because the engine can be asked a question whose answer is the gallons in a cubic foot alone.",
+  "Declared, because no publication here fixes the cubic inches.",
+  "A group, because the cubic inches and the gallon conversion are never used separately."],
+ "A derived constant cannot be wrong without the thing it is computed from being wrong as well, so there is nothing independent to check.")
+
+# --- the expert reading (m06) ---
+
+q(0, "Beside the six limits the tier names two things that are simply absent. What are they?",
+ "A hydrate boundary and a stage efficiency.",
+ ["A hydrate boundary and the real-gas departure of the water content.",
+  "A compositional flash and the BTEX absorbed fraction.",
+  "A stage efficiency and the glycol density."],
+ "The departure is held for literature and the absorbed fraction and the density are declared, so all three are limits. An absence is a subject this engine does not contain at all.")
+
+q(1, "Working the cold end chain, which single input divides the coefficient and enters nowhere else?",
+ "The molar heat capacity.",
+ ["The gas gravity.",
+  "The inlet pressure.",
+  "The step count of the march."],
+ "The gravity sets the pseudo-criticals and therefore everything downstream of them. The heat capacity enters once and as a divisor, which the module can be asked to show from outside by holding the state fixed and moving only that input.")
+
+q(2, "Which of these prints as a whole number in this course rather than to six decimals?",
+ "A count, such as the number of steps a march took.",
+ ["A water content in lb per MMscf.",
+  "A ratio between two engine figures.",
+  "A temperature in degF."],
+ "Water contents, pressures, temperatures, circulations, diameters and ratios print to six decimals. Quoting a figure at a precision the course does not print is how an answer stops being checkable.")
+
+q(3, "A learner meets the phrase dew point in the Fluid course. What does it mean there?",
+ "The saturation pressure of a reservoir fluid.",
+ ["The temperature at which liquid hydrocarbon condenses out of a treated sales gas.",
+  "The temperature at which liquid water appears in a gas at a stated pressure.",
+  "The cricondentherm of the phase envelope, which is its highest temperature."],
+ "It is a pressure rather than a temperature, it belongs to a reservoir fluid rather than a treated sales gas, and it has nothing to do with water.")
+
+q(0, "Why does the studio never have to decide what a blank means?",
+ "Because the engine never hands it one, since every refusal arrives as a named string on an error key.",
+ ["Because the studio validates every input before the engine is called, so a blank never reaches it.",
+  "Because a blank is rendered as the value the engine last returned, which is what keeps the screen consistent.",
+  "Because the engine returns a non-finite value for a fault, which the studio renders as a dash."],
+ "Type an absorption factor of zero into the absorber tab and the studio has a named fault to render. Type one that works and it has a fraction.")
+
+q(1, "A course states that the glycol density this module uses has been verified. What claim has it just made?",
+ "That something in this package checks a number nothing in this package can check.",
+ ["That the density was measured out of the engine, which is a weaker claim than a derivation.",
+  "That the published cases hold a second copy of it, which is what a verification of a constant means.",
+  "That the density is used in one place only, which is what makes a single value checkable."],
+ "The figure is 9.300000 lb a gallon, it is customary, and no publication in this repository stands behind it. What a gate can do is record that a change would be a reviewed act, which is a different statement from the number being right.")
+
+q(2, "What does this tier ask a reader to establish about every figure in front of them?",
+ "Whether the engine computed it, the reader chose it, or it is a declared constant nothing here can check.",
+ ["Whether it is intensive or extensive, and therefore whether the rate has been applied to it yet.",
+  "Whether it came from the engine or from the oracle, and therefore whether a published case stands behind it.",
+  "Whether it prints to six decimals or as a whole number, and therefore what precision it may be quoted at."],
+ "That is the habit the whole course is written to build, and it is why the constants are sorted into three kinds and the choices are inputs a reader can see on the page.")
+
+emit(Q, '/root/wt-fc4-nextgen/tools/course-banks/gasprocessing/advanced/fc4a_exam.json', expect_n=42)
+finish()

@@ -1,0 +1,115 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC4 Expert m01, Dew Point Control by Expansion. Digest section 14 head,
+# with the scope seams from sections 1 and 16. 15 questions.
+
+q(2, "The Joule-Thomson coefficient belongs to the Flow Assurance course, which owns it over a whole module. Why does this Gas Processing course teach it at all?",
+ "Because this is the only engine in the package that computes one, and the flowline thermal engine takes a coefficient as a typed input from its caller and never forms one.",
+ ["Because the flowline thermal engine forms a coefficient of its own and this module recomputes it, so that a designer has two independent answers to compare before using either of them.",
+  "Because a hydrate margin cannot be formed without a coefficient, and this is the engine that computes the hydrate boundary the margin is taken against.",
+  "Because the product of a coefficient and a pressure drop is what this module hands across the seam, which leaves the receiving engine with no arithmetic of its own left to do."],
+ "The coefficient and the product of it with a pressure drop both belong to Flow Assurance. What this course owns is where the number a caller types comes from.")
+
+q(0, "A dew point skid takes AGBADA from 1180.000000 psia to 640.000000 psia. What are the two products the unit actually sells?",
+ "A cold spot at 59.683516566 degF and 15.038835973 lb per MMscf of free water arriving there.",
+ ["An outlet composition at the cold spot and the hydrocarbon dew point that composition implies.",
+  "A hydrate margin at 640.000000 psia and the inhibitor dose that holds it.",
+  "An absolute dryness of 18.762820770 lb per MMscf and the internals to deliver it."],
+ "There is no compositional flash, no hydrate boundary and no vessel internals model at the cold end. The arrival temperature and the free water are the two inputs a downstream phase question takes.")
+
+q(3, "In the derivation the module prints, the molar volume appears twice inside the bracket and cancels. What is left in the final form?",
+ "A temperature squared over a pressure, divided by a heat capacity, multiplying the temperature derivative of the compressibility.",
+ ["A compressibility in the denominator multiplying that same group, which is what makes the answer grow with pressure across the range a plant runs at.",
+  "The molar volume itself, because only one of the two occurrences cancels.",
+  "An enthalpy departure evaluated at the reduced pair of this state."],
+ "The relation is mu = (R T^2 / (Cp P)) (dz/dT)_P. Every term in it is either the caller's or comes from the validated compressibility correlation.")
+
+q(1, "Two gases have the same gravity of 0.680000 but different compositions, one rich in condensate and one lean and dry. What does this method give them at the same state?",
+ "The same compressibility and the same slope, because nothing about the gas beyond its gravity enters the chain.",
+ ["Different compressibilities, because the Sutton pseudo-criticals are formed from the composition before the reduced pair is taken from them.",
+  "The same compressibility but different slopes, because the derivative is taken on the composition.",
+  "Different slopes, because the module reads a heat capacity for each composition."],
+ "The gravity sets the pseudo-criticals, the pseudo-criticals set the reduced pair, and the reduced pair sets the compressibility and its derivative. That is the method's reach and its limit in one line.")
+
+q(0, "Holding the AGBADA state fixed and moving only the heat capacity gives 7.103036, 6.355348, 5.750076 and 5.031317 degF per 100 psi, and each multiplied by its own heat capacity gives 0.603758030. What does that flat column establish?",
+ "That the heat capacity enters the answer exactly once and as a divisor.",
+ ["That the coefficient is independent of the heat capacity across the range the four rows cover, since the product of the two does not move at all.",
+  "That the heat capacity and the compressibility derivative happen to be the same size at this state, which is what holds their product constant.",
+  "That the product of the coefficient and the heat capacity is a property of this gas, so it can be carried to any other state of the same stream."],
+ "Everything the gas contributes sits in the other factor, untouched by which heat capacity was typed. A caller who changes only the heat capacity changes the coefficient by a clean reciprocal.")
+
+q(2, "At 50.000000 psia the compressibility is 0.992446573 and the temperature derivative has fallen to 0.000043882457 per degR, yet the coefficient there is 0.054913819 degF per psi. Why has it not fallen towards zero as well?",
+ "The identity divides that derivative by the pressure, and the quotient tends to a finite limit even as the compressibility tends to one.",
+ ["The temperature squared in the numerator grows quickly enough at low pressure to hold the whole product up where it is.",
+  "The heat capacity falls with the pressure as well, so the two reductions cancel one another inside the quotient.",
+  "The compressibility itself multiplies the answer, so a compressibility close to one leaves the coefficient close to its full value."],
+ "A gas at near-atmospheric pressure still cools when it expands. A method that treated the departure from ideality as the whole story would say that it does not.")
+
+q(1, "At a gravity of 5.070000 the engine refuses with a message about the DAK validity range, and at 5.080000 with a message about the Sutton pseudo-criticals. Why two messages rather than one?",
+ "They are different faults. The first says the correlation was asked for a state outside its band, and the second says the pseudo-criticals themselves are not physical.",
+ ["The first is a warning a caller is free to ignore and the second is a refusal, so the two cannot be carried on one message.",
+  "The second is the first one re-issued after the engine retried at a wider band, so both describe one fault caught at two different stages.",
+  "One comes from the compressibility routine and the other from the water routine, and the two guards were written to different conventions."],
+ "At 5.080000 the message names a pseudo-critical temperature of 35.0 degR and a pseudo-critical pressure of -1.6 psia, so a reader can see that the pressure has gone negative.")
+
+q(3, "The march across the AGBADA let-down reports 0.061607962 at the inlet, 0.071833233 at the last half step and 0.067252747 as the mean. Which of the three belongs beside the arrival temperature, and what does the digest print for the inlet against it?",
+ "The mean, and the inlet coefficient is 0.916066108 of it.",
+ ["The last half step, because that is the state the gas actually leaves in, and the inlet coefficient is 0.916066108 of the last half step.",
+  "The inlet coefficient, because it is the state the caller supplied, and the last half step is 0.916066108 of the mean.",
+  "The inlet, and the mean is 0.916066108 of it."],
+ "The mean is the cooling over the pressure drop and is the only one of the three that reproduces the arrival temperature when a reader multiplies it out.")
+
+q(0, "A sales contract specifies a hydrocarbon dew point. Why can this module not answer against it?",
+ "Finding it needs a compositional flash, and there is no compositional flash anywhere in this module.",
+ ["The module answers it only above the pressure at which the ideal-mixing chart warning starts, which is 1000.000000 psia, and a sales gas sits below that.",
+  "It answers it as a temperature where the contract is written as a mass.",
+  "The march refuses any let-down that would cross it, so it is never returned."],
+ "A skid sized here is sized on its cooling and on the water it drops. The phase envelope of a fluid belongs to the Fluid engine.")
+
+q(2, "A reservoir engineer brings the phrase dew point from their own advanced tier. What quantity are they carrying?",
+ "A saturation pressure of a reservoir fluid, which is a pressure rather than a temperature and has nothing to do with water.",
+ ["A water dew point at reservoir conditions, which is the same quantity this module computes and needs only a change of pressure base to use here.",
+  "A hydrocarbon dew point of a treated sales gas, which is what a dew point skid is sold on commercially and which this module does compute.",
+  "A cricondentherm read from the phase envelope of the same fluid."],
+ "Three senses of one phrase. The PVT sense belongs to a reservoir fluid, the hydrocarbon sense needs a flash this module does not have, and the water sense is the one the cold separator delivers.")
+
+q(3, "Asked what dew point a given lean glycol strength can deliver, what does the engine do?",
+ "It reports the loop balance and states that basis on every answer, because the dew point a strength delivers is a chart reading and no chart is in this module.",
+ ["It derives the dew point from the outlet water content, which is the design figure the loop balance was built around in the first place.",
+  "It refuses by name, the way it refuses a temperature outside the water fit, and names the chart that a reader should go to instead.",
+  "It answers with an extrapolation note attached, because the strength guard runs from 90 to 100 weight percent and a chart reading sits outside the balance."],
+ "The outlet water content is a typed design input. The engine does not pretend to derive one from the other, and saying so on every answer is what keeps the gap visible.")
+
+q(1, "AGBADA carries 33.801656743 lb of water per MMscf at its inlet and can hold 18.762820770 lb per MMscf at the cold separator. Which figure does the separator boot catch?",
+ "15.038835973 lb per MMscf, the difference between the two.",
+ ["18.762820770 lb per MMscf, the content at the cold state, since that is the state the gas is held at while the liquid drains.",
+  "0.555085832 lb per MMscf, the cold content read against the warm one.",
+  "33.801656743 lb per MMscf, the inlet content."],
+ "The gas leaves the separator saturated at the cold state and carries 18.762820770 lb per MMscf onward. The figure 0.555085832 is a ratio and carries no units at all.")
+
+q(2, "Across the six pressures the module prints at the AGBADA gravity and inlet temperature, where does the coefficient reach its largest value?",
+ "At 1000.000000 psia, where it is 0.061694982 degF per psi.",
+ ["At 50.000000 psia, where the compressibility is nearest to one of the six rows at 0.992446573.",
+  "At 2200.000000 psia, where the temperature derivative is the largest of the six at 0.001585158042 per degR.",
+  "At 1500.000000 psia, where the compressibility has fallen to 0.801154097 and the derivative is still climbing."],
+ "The derivative rises all the way down the table, and so does the pressure it is divided by. The quotient turns over between 1000.000000 and 1500.000000 psia.")
+
+q(0, "Why is a single typed Joule-Thomson coefficient a screening figure by construction?",
+ "The coefficient is a property of a state rather than of a stream, so every step down the pressure ladder offers a slightly different slope.",
+ ["The typed figure is rounded to six decimals before the receiving engine reads it.",
+  "A typed coefficient carries no heat capacity with it, so the receiver assumes one.",
+  "The receiving engine marches the typed figure over twenty steps by default."],
+ "A single typed coefficient is honest only over an interval narrow enough that the slope has not moved much across it. A flowline model cannot check that, because it was handed the number rather than forming it.")
+
+q(3, "Of the figures a dew point skid produces on AGBADA, which pair does a hydrate margin calculation consume?",
+ "The arrival temperature with the pressure it was reached at, and the free water arriving there.",
+ ["The inlet pressure and the inlet temperature, because a margin is taken against the conditions the gas was delivered at.",
+  "The cooling and the inlet coefficient, because a margin is a temperature difference and the coefficient is what produced it.",
+  "The ratio of the two water contents and the gravity, because a margin is expressed as a fraction of the saturation at the cold spot."],
+ "A subcooling question needs a state and a water condition. This engine produces both and then stops, because it contains no hydrate boundary of its own.")
+
+emit(Q, '/root/wt-fc4-nextgen/tools/course-banks/gasprocessing/advanced/fc4a_m01.json', expect_n=15)
+finish()
