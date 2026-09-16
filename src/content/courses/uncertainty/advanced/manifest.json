@@ -166,7 +166,7 @@
     },
     {
       "key": "m04-edges-that-used-to-break",
-      "title": "Repaired Edges and One Still Open",
+      "title": "Edges That Used to Break",
       "order": 4,
       "lessons": [
         {
@@ -218,7 +218,7 @@
       "lessons": [
         {
           "key": "l01-the-irr-that-reports-its-clamp",
-          "title": "The IRR that reports its clamp",
+          "title": "The IRR that says why it is missing",
           "order": 1,
           "est_minutes": 13,
           "panels": [

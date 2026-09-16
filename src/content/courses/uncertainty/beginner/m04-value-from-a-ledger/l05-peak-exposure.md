@@ -15,17 +15,17 @@ That is only about a quarter of the capex because the quick form produces from i
 | case | maxExposure | what it says |
 | --- | --- | --- |
 | ISIALA | -44.6035 | under water through 2029 |
-| ISIALA Low scenario | -146.2765 | a far deeper hole |
+| ISIALA Low scenario | -138.4263 | a far deeper hole |
 | NTEJE | -169.0209 | closes at -154.5906, never recovers |
 | OKPOMA | -2.2287 | dips below zero after a positive year |
-| ISIALA High scenario | 27.7707 | never under water |
+| ISIALA High scenario | 25.0565 | never under water |
 | payback_first_period_positive | 5.0000 | positive from the first period |
 
-A positive peak exposure is the lowest cumulative of a project that was never below zero. ISIALA's High scenario, with capex scaled down and revenue up, earns more than it spends even in 2027 and bottoms out at 27.7707.
+A positive peak exposure is the lowest cumulative of a project that was never below zero. ISIALA's High scenario, with capex scaled down and revenue up, earns more than it spends even in 2027 and bottoms out at 25.0565.
 
 ## The mistake
 
-The careful mistake is to read the number as a size and drop its sign. Written as "exposure 27.7707", the High scenario looks like it needs funding when it needs none. The second mistake is to take peak exposure as the funding requirement. It is struck on annual rows, so a capex bill paid in the first months of 2027 against oil sold later that year can put the real trough deeper than the row shows. The third is to discount it: `maxExposure` is plain cash, and it will not agree with the discounted rows.
+The careful mistake is to read the number as a size and drop its sign. Written as "exposure 25.0565", the High scenario looks like it needs funding when it needs none. The second mistake is to take peak exposure as the funding requirement. It is struck on annual rows, so a capex bill paid in the first months of 2027 against oil sold later that year can put the real trough deeper than the row shows. The third is to discount it: `maxExposure` is plain cash, and it will not agree with the discounted rows.
 
 It also does not say when. OKPOMA's trough is 2028, after a 2027 that closed at 9.2498, and the metric prints -2.2287 with no year beside it. The cumulative column is the only place the year can be read. ISIALA's trough is 2028 because 2029 is its first year of positive net cash flow, 35.9654, and the trough year is when the money must already be in place.
 

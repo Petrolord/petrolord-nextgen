@@ -24,23 +24,23 @@ The two halves are stored as separate arrays, and the tools that vary a case tou
 | input | NPV at 0.7 | base NPV | NPV at 1.3 |
 | --- | --- | --- | --- |
 | OPEX | 85.3696 | 81.0464 | 76.7233 |
-| Production | -17.3893 | 81.0464 | 175.8952 |
+| Production | 4.1176 | 81.0464 | 156.4596 |
 | Oil Price | -17.3893 | 81.0464 | 175.8952 |
 
-The OPEX bar scales opexFixed ONLY, and opexVariable is untouched. The Production bar scales oil volume ONLY, and variable opex does not follow the volume. That is why Production and Oil Price give identical NPVs: more barrels arrive with no extra variable cost, exactly as a higher price would.
+The OPEX bar scales opexFixed ONLY, and opexVariable is untouched. The Production bar scales oil volume AND the variable opex those barrels carry. That is why Production is the narrower of the two revenue bars: at 0.7 the field keeps 4.1176 because part of its variable cost left with the volume, where the price bar loses the same revenue and still pays every barrel's cost, reaching -17.3893. Before the 2026-09-15 repair the Production bar scaled volume alone and printed the price bar's pair, -17.3893 and 175.8952.
 
-`generateScenarios` behaves the same way. The Low scenario multiplies production by 0.8 and fixed opex by 1.2, and its totalOpex is 220.4887. The High scenario reverses both and reads 200.4887. The two sit the same distance either side of the Base 210.4887, and all of that distance is fixed opex, although Low produces less oil than High.
+`generateScenarios` moves the two halves the same way. The Low scenario multiplies production and variable opex by 0.8 and fixed opex by 1.2, and its totalOpex is 188.3910. The High scenario mirrors it and reads 232.5864, above the Base 210.4887 because High lifts more oil. Before the repair the two cases held variable opex at the base volume and read 220.4887 and 200.4887.
 
 ## The mistake
 
 The careful mistake is to read the OPEX bar as the sensitivity to operating cost. Its swing of -8.6463 moves only 2.5 million USD a year, the small half of ISIALA's opex. The variable half, 20.8780 in the first year alone, is never flexed by that bar. A reader who concludes that ISIALA barely cares about opex has measured the wrong half.
 
-The matching error is to trust a Production bar that equals the price bar. On a field with variable opex those two should differ, and here they do not, because the case holds variable opex as fixed millions per year once it has been built.
+The matching error is to read the Production bar as a pure volume effect. It carries the operating cost with it, so 4.1176 is a smaller field with a smaller opex bill, and a shortfall that leaves the cost where it was is worth less.
 
 ## What opex refuses
 
-It refuses escalation, a cost per well, a cost that stops when production stops and any link between variable opex and a volume that has been scaled after expansion. Opex is never sampled by the Scenario Builder's Monte Carlo at all.
+It refuses escalation, a cost per well and a cost that stops when production stops. Fixed opex is never sampled by the Scenario Builder's Monte Carlo, and the variable half moves only as a passenger of the reserves factor.
 
 ## Exercise
 
-Write ISIALA's fixed, variable and ledger opex for 2027 and 2046, and say which half is larger in each year. Then explain why the Production and Oil Price bars both read -17.3893 at 0.7, and what the OPEX bar's -8.6463 swing leaves out.
+Write ISIALA's fixed, variable and ledger opex for 2027 and 2046, and say which half is larger in each year. Then explain why the Production bar reads 4.1176 at 0.7 where the Oil Price bar reads -17.3893, and what the OPEX bar's -8.6463 swing leaves out.

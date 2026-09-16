@@ -10,8 +10,8 @@ These are ISIALA's numbers at the app's settings: 1000 iterations, price, capex 
 
 | engine key | old card | case now | NPV, million USD |
 | --- | --- | --- | --- |
-| `p10` | "P10 (Optimistic)" | Low case P90 | 48.7439 |
-| `p90` | "P90 (Conservative)" | High case P10 | 109.8980 |
+| `p10` | "P10 (Optimistic)" | Low case P90 | 15.6063 |
+| `p90` | "P90 (Conservative)" | High case P10 | 152.0653 |
 
 The card called conservative held the larger number. A reader who used it as the cautious case was given a value that only 10 percent of the sample meets or exceeds.
 
@@ -19,7 +19,7 @@ The card called conservative held the larger number. A reader who used it as the
 
 The keys look like labels. `p90` is the 90th percentile of the sorted NPVs, which is the high end. The engine's own documentation now says the keys are plain percentiles: `p10` is the low NPV and `p90` the high NPV. Print a key as though it were a P-label under the exceedance meaning, and both outer numbers land on the wrong cards.
 
-The middle card never changed. The `p50` key is the Best case P50 under either reading, and it reads 81.1835. A panel whose middle number is right looks right at a glance.
+The middle card never changed. The `p50` key is the Best case P50 under either reading, and it reads 78.5315. A panel whose middle number is right looks right at a glance.
 
 ## What EC3-0 changed
 
@@ -29,7 +29,7 @@ The same repair seeded the run. `runMonteCarlo` now draws from mulberry32 with a
 
 ## Reading an old report
 
-Any saved screen or slide with a "P90 (Conservative)" card is showing a High case. Change its label, not its place in the ranking: the number on it is the value that 10 percent of that run's sample met or exceeded. Do not expect it to match 109.8980. The old engine called an unseeded generator, so that run's sample cannot be rebuilt. Only the direction of the error can be fixed.
+Any saved screen or slide with a "P90 (Conservative)" card is showing a High case. Change its label, not its place in the ranking: the number on it is the value that 10 percent of that run's sample met or exceeded. Do not expect it to match 152.0653. The old engine called an unseeded generator, so that run's sample cannot be rebuilt. Only the direction of the error can be fixed.
 
 ## The mistake
 
@@ -37,7 +37,7 @@ The careful mistake is fixing the swap by exchanging the two numbers and keeping
 
 ## What the fix refuses
 
-The repair changed words and added a seed. It did not change how an NPV is calculated. It cannot make a past unseeded run reproducible. It adds none of the uncertainty the Scenario Builder leaves out: opex, royalty and tax are still never sampled.
+The repair changed words and added a seed. It did not change how an NPV is calculated. It cannot make a past unseeded run reproducible. It adds none of the uncertainty the Scenario Builder leaves out: fixed opex, royalty and tax are still never sampled.
 
 ## Exercise
 

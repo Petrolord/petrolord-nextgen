@@ -20,13 +20,13 @@ The shape shows what the table cannot. The steep middle between the 10th and 90t
 
 ## Two conventions a step apart
 
-The percentile rule takes index floor(q n), while the curve places index i at (i + 1) / n. That is why the height at index 2500 reads 0.500200 and not a round half, and why reading the curve at exactly half lands one step to the left of the reported median. On 5000 iterations the gap is tiny, but checked against the table to four decimals it is a disagreement that is only a convention.
+The percentile rule takes index floor(q n), while the curve places index i at (i + 1) / n. That is why the height at index 2500 reads 0.500200 and not a round half, and why reading the curve at exactly half lands one step to the left of the reported median. On 5000 iterations the gap is tiny, and it is a convention rather than an error.
 
 ## What the curve refuses
 
 It shows only what was sampled. Under 50.7415 the curve reads zero and past 107.6755 it reads one. Neither says ISIALA's breakeven cannot fall outside that span; these draws simply did not reach further.
 
-It also belongs to this engine alone. The Scenario Builder's NPV S-curve is downsampled to 50 points with a last probability of 98.0000, and two such curves on one chart compare two conventions as well as two quantities.
+It also belongs to this engine alone. The Scenario Builder's NPV S-curve is drawn at 51 points, at probabilities of 0.0000, 2.0000 and so on to 100.0000 percent, so it starts at the sample's lowest NPV and ends at its highest. The curve that shipped before the 2026-09-15 repair kept every twentieth sorted value instead, 50 points ending at 98.0000 percent, short of the highest NPV it had drawn. Two such curves on one chart compare two conventions as well as two quantities.
 
 ## The mistake
 

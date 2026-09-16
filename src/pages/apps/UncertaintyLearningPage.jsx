@@ -41,7 +41,7 @@ const LESSONS = [
   { n: 3, title: 'The ledger takes royalty off the top and tax only on a positive base',
     body: 'Royalty comes off gross revenue, capex is expensed in the year it is spent, and a year whose taxable income is not positive pays no tax at all.' },
   { n: 4, title: 'Value is read off the ledger, and payback lands part way through a year',
-    body: 'Each year is discounted at its middle. Payback is the year the cumulative crosses zero plus the shortfall over that year\'s cash. The IRR is Newton, clamped, and a clamp is not a root.' },
+    body: 'Each year is discounted at its middle. Payback is the first year the cumulative crosses zero plus the shortfall over that year\'s cash, and a status says whether it stayed there. The IRR is Newton inside a band, and where it lands on no root the engine returns nothing and says why.' },
   { n: 5, title: 'One number becomes three, and a scenario is not a probability',
     body: 'A sensitivity bar scales one input at a time, and not always the input its name suggests. Low, Base and High move several inputs together by a fixed step and say nothing about likelihood.' },
   { n: 6, title: 'Three stated percentiles are not a minimum, a mode and a maximum',
@@ -54,10 +54,10 @@ const LESSONS = [
     body: 'On an outcome where more is better, the low case takes the exceedance label and the engine key that holds it is its 10th percentile. The results cards once printed those the other way round.' },
   { n: 10, title: 'Two percentile rules live in one module, and every percentile wobbles',
     body: 'The screening rule averages two neighbours and the breakeven rule takes one sorted value, so the same sample gives two answers. Across seeds and iteration counts a percentile moves, and more iterations do not say which seed was right.' },
-  { n: 11, title: 'Some edges were repaired and one is still open',
-    body: 'Every range at zero, a short run and a belief no triangle honours now report what happened. A tornado bar whose high end never breaks even is still printed with that side as zero.' },
+  { n: 11, title: 'Edges that used to break',
+    body: 'Every range at zero, a short run and a belief no triangle honours now report what happened. A tornado bar whose high end never breaks even is left open and sorts first, and a fitted tail past a physical limit is held there and counted.' },
   { n: 12, title: 'Some numbers are there to be distrusted',
-    body: 'An IRR that reports its clamp where no positive root exists, a payback read once and never revisited, a mid-year NPV beside a year-end one, and two breakevens for one field that are two different quantities.' },
+    body: 'A missing IRR that says which of four things happened, a payback that flags a cumulative going back below zero, a mid-year NPV beside a year-end one, and two breakevens for one field that are two different quantities.' },
 ];
 
 function ScopeGate() {
@@ -265,16 +265,18 @@ const UncertaintyLearningPage = () => {
                 These are SCREENING engines. The quick form builds a fixed life with royalty and tax only,
                 no production sharing terms, no working interest and no inflation basis; those live in
                 Petroleum Economics Studio. There is no economic limit, so a year that loses money is still
-                produced and charged. The IRR reports its Newton clamp where no positive root exists: NTEJE
-                loses {fmt(lab.d.nteje.npv)} million USD and never pays back, and the engine reports an IRR of
-                {' '}{fmt(lab.d.nteje.irr)} percent; OKPOMA is worth {fmt(lab.d.okpoma.npv)} million USD and
-                reports the same {fmt(lab.d.okpoma.irr)}. Payback is read once and never revisited, so OKPOMA
-                reports {fmt(lab.d.okpoma.payback)} years although its cumulative falls to
-                {' '}{fmt(lab.d.okpoma.maxExposure)} million USD in its second year. Discounting is mid-year: on
+                produced and charged. An IRR is reported only where the search lands on a root: NTEJE
+                loses {fmt(lab.d.nteje.npv)} million USD, never pays back, and the engine returns no IRR at all with
+                the status {lab.d.nteje.irrStatus} and no payback with the status {lab.d.nteje.paybackStatus}; OKPOMA is worth
+                {' '}{fmt(lab.d.okpoma.npv)} million USD and its one real root, {fmt(lab.d.okpoma.irr)} percent, is negative.
+                Payback stays the first crossing, so OKPOMA reports {fmt(lab.d.okpoma.payback)} years with the status
+                {' '}{lab.d.okpoma.paybackStatus}, because its cumulative falls to {fmt(lab.d.okpoma.maxExposure)} million USD in its
+                second year and turns non-negative for good only at {fmt(lab.d.okpoma.paybackLast)} years. Discounting is mid-year: on
                 ISIALA&apos;s own cash flows the engine&apos;s {fmt(lab.d.midYear.engineNpv)} million USD is
                 {' '}{fmt(lab.d.midYear.ratioDerived, 6)} times the year-end {fmt(lab.d.midYear.yearEndNpvDerived)}.
-                The Scenario Builder draws every year independently and never samples opex, and the fitted
-                triangles carry no physical bounds. None of this is an investment decision. It is the
+                The Scenario Builder draws one factor per uncertain variable per iteration and applies it to every
+                year, with the variable operating cost following the volume, and it never samples fixed opex, royalty
+                or tax. None of this is an investment decision. It is the
                 arithmetic under one, and the judgement stays with the engineer who signs it.
               </CardDescription>
             </CardHeader>

@@ -20,15 +20,15 @@ n x 0.1 = 100 and n x 0.5 = 500 are whole numbers on an even length. So is n x 0
 
 | case | engine key | averaging rule, million USD | floor rule on the same sample |
 | --- | --- | --- | --- |
-| Low case P90 | `p10` | 48.7439 | 48.8335 |
-| Best case P50 | `p50` | 81.1835 | 81.1952 |
-| High case P10 | `p90` | 109.8980 | 109.9036 |
+| Low case P90 | `p10` | 15.6063 | 15.6619 |
+| Best case P50 | `p50` | 78.5315 | 78.5836 |
+| High case P10 | `p90` | 152.0653 | 152.1794 |
 
 The last column is the single sorted value at index `floor(q n)`, which is the rule the Breakeven Analyzer uses.
 
 ## A value no iteration produced
 
-Because it averages, 48.7439 is not one of the 1000 NPVs. It sits halfway between two neighbours, and the upper neighbour is the floor rule's 48.8335. The same is true of 81.1835 and 109.8980. Search the sorted `allValues` array for any of the three card values and nothing matches.
+Because it averages, 15.6063 is not one of the 1000 NPVs. It sits halfway between two neighbours, and the upper neighbour is the floor rule's 15.6619. The same is true of 78.5315 and 152.0653. Search the sorted `allValues` array for any of the three card values and nothing matches.
 
 ## When the rule stops averaging
 
@@ -46,4 +46,4 @@ The rule does no weighting and no interpolation beyond a single midpoint, and it
 
 ## Exercise
 
-State the rule's three branches. Say which branch applies to ISIALA's 1000 NPVs at q of 0.1, 0.5 and 0.9, and give the three cases with their engine keys. Then explain why 48.7439 cannot be found in the sorted sample, and which neighbour of it 48.8335 is.
+State the rule's three branches. Say which branch applies to ISIALA's 1000 NPVs at q of 0.1, 0.5 and 0.9, and give the three cases with their engine keys. Then explain why 15.6063 cannot be found in the sorted sample, and which neighbour of it 15.6619 is.
