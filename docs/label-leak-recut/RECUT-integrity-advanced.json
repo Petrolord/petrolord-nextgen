@@ -1,0 +1,106 @@
+{
+ "app_slug": "integrity",
+ "tier": "advanced",
+ "tier_name": "Expert",
+ "generated": "2026-09-16",
+ "old_text_source": "the live production row, read 2026-09-16",
+ "prompt_old": "Six values for a permanent abandonment of the Associate capstone well. FIVE plugs are proposed across two flowing zones plus a surface phase, at 35 percent excess. Report: (1) the SLURRY VOLUME of the reservoir primary plug in cubic metres; (2) its SPACER BEHIND volume; (3) the SETTLE of that plug, meaning how much DEEPER its final top sits than its as-pumped top, in metres; (4) the ABOVE SOURCE MARGIN for the reservoir zone in metres, WITH ITS SIGN; (5) the ANNULAR CEMENT MARGIN in metres, WITH ITS SIGN; and (6) the TOTAL SLURRY TAKEOFF across the whole programme. Traps. Field 3 is not caused by the excess. The as-pumped column stands in the annulus PLUS the stinger bore, which together are narrower than the full hole, so when the stinger is pulled the same slurry redistributes across the wider bore and the top drops. It would drop even at ZERO excess; the excess only adds to it, and at zero excess the settled top lands exactly on the design top, which is the identity that anchors every other figure here. Fields 4 and 5 are NEGATIVE and their signs are the answer: each is a SHORTFALL in metres rather than a failure code, and a reader who reports a magnitude has thrown away the direction. Field 6 sums every plug including the two the programme does not design a placement for, so it is not the sum of the designed slurries alone. Free checks: field 2 must be far smaller than field 1, since the spacer behind balances a spacer ahead across a capacity ratio; field 3 must be positive, because a plug always settles DOWNWARD; and fields 4 and 5 must both be negative, because this programme fails and the Expert tier is built on reading why.",
+ "prompt_new": "Six values for a permanent abandonment of the Associate capstone well. FIVE plugs are proposed across two flowing zones plus a surface phase, at 35 percent excess. Report: (1) the SLURRY VOLUME of the reservoir primary plug in cubic metres; (2) its SPACER BEHIND volume; (3) the SETTLE of that plug, meaning how much DEEPER its final top sits than its as-pumped top, in metres; (4) the ABOVE SOURCE MARGIN for the reservoir zone in metres, WITH ITS SIGN; (5) the ANNULAR CEMENT MARGIN in metres, WITH ITS SIGN; and (6) the TOTAL SLURRY TAKEOFF across the whole programme. Traps. Field 3 is not caused by the excess. The as-pumped column stands in the annulus PLUS the stinger bore, which together are narrower than the full hole, so when the stinger is pulled the same slurry redistributes across the wider bore and the top drops. It would drop even at ZERO excess; the excess only adds to it, and at zero excess the settled top lands exactly on the design top, which is the identity that anchors every other figure here. Fields 4 and 5 are NEGATIVE and their signs are the answer: each is a SHORTFALL in metres rather than a failure code, and a reader who reports a magnitude has thrown away the direction. Field 6 sums every plug including the two the programme does not design a placement for, so it is not the sum of the designed slurries alone. Free checks: field 2 must be far smaller than field 1, since the spacer behind balances a spacer ahead across a capacity ratio; field 3 must be positive, because a plug always settles DOWNWARD; and fields 4 and 5 must both be negative, because this programme fails and the Expert tier is built on reading why.",
+ "dataset_old": "a five plug abandonment of the Associate capstone well at 35 percent excess, which FAILS on a 7.5 metre shortfall",
+ "dataset_new": "a five plug abandonment of the Associate capstone well at 35 percent excess, which FAILS on a shortfall above the source",
+ "fields_old": [
+  {
+   "key": "plug_slurry_m3",
+   "tol": 5e-07,
+   "unit": "m3",
+   "label": "Reservoir plug slurry",
+   "expected": 4.620238645056858
+  },
+  {
+   "key": "plug_spacer_behind_m3",
+   "tol": 5e-08,
+   "unit": "m3",
+   "label": "Spacer behind",
+   "expected": 0.5279360645295814
+  },
+  {
+   "key": "plug_top_settle_m",
+   "tol": 5e-06,
+   "unit": "m",
+   "label": "Plug top settle",
+   "expected": 21.154551869215993
+  },
+  {
+   "key": "above_source_margin_m",
+   "tol": 5e-06,
+   "unit": "m",
+   "label": "Above source margin",
+   "expected": -7.5
+  },
+  {
+   "key": "annular_cement_margin_m",
+   "tol": 5e-06,
+   "unit": "m",
+   "label": "Annular cement margin",
+   "expected": -26.5
+  },
+  {
+   "key": "program_slurry_takeoff_m3",
+   "tol": 5e-07,
+   "unit": "m3",
+   "label": "Programme slurry takeoff",
+   "expected": 18.197179289478704
+  }
+ ],
+ "fields_new": [
+  {
+   "key": "plug_slurry_m3",
+   "tol": 5e-07,
+   "unit": "m3",
+   "label": "Reservoir plug slurry",
+   "expected": 4.620238645056858
+  },
+  {
+   "key": "plug_spacer_behind_m3",
+   "tol": 5e-08,
+   "unit": "m3",
+   "label": "Spacer behind",
+   "expected": 0.5279360645295814
+  },
+  {
+   "key": "plug_top_settle_m",
+   "tol": 5e-06,
+   "unit": "m",
+   "label": "Plug top settle",
+   "expected": 21.154551869215993
+  },
+  {
+   "key": "above_source_margin_m",
+   "tol": 5e-06,
+   "unit": "m",
+   "label": "Above source margin",
+   "expected": -7.5
+  },
+  {
+   "key": "annular_cement_margin_m",
+   "tol": 5e-06,
+   "unit": "m",
+   "label": "Annular cement margin",
+   "expected": -26.5
+  },
+  {
+   "key": "program_slurry_takeoff_m3",
+   "tol": 5e-07,
+   "unit": "m3",
+   "label": "Programme slurry takeoff",
+   "expected": 18.197179289478704
+  }
+ ],
+ "prompt_replacements": [],
+ "dataset_replacements": [
+  {
+   "old": "which FAILS on a 7.5 metre shortfall",
+   "new": "which FAILS on a shortfall above the source"
+  }
+ ]
+}
