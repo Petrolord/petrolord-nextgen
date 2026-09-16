@@ -6,7 +6,9 @@
 // fit, every draw, every breakeven price, every percentile and every insight
 // sentence below is a return value of engines/economics/screening.js (the NPV
 // Scenario Builder), engines/economics/breakeven.js (the Probabilistic
-// Breakeven Analyzer) or lib/stats/stats.js, as repaired in EC3-0. Every
+// Breakeven Analyzer) or lib/stats/stats.js, as repaired in EC3-0, in the EC6-1
+// IRR repair (engines #180) and in the EC3 wave findings of 2026-09-15
+// (engines #182, with the #187 performance pass). Every
 // percentile word is a return value of lib/conventions/percentile.js, imported
 // and never retyped.
 //
@@ -16,6 +18,11 @@
 // and the key name says Derived. The lab and /root/ec-wip-uncertainty/digest.txt
 // agree because both call the engines on the same inputs, not because either
 // copied the other.
+//
+// HISTORY. The digest's lines that begin "History, before the 2026-09-15
+// repair" are return values of a frozen copy of the RETIRED engines that lives
+// outside this repository. This lab never imports it and computes none of
+// them; the test pins those lines as literal digest strings only.
 //
 // UNITS. Money is millions of United States dollars, prices USD per bbl,
 // production bbl a year, rates percent 0 to 100, draws and ratios plain
@@ -81,10 +88,12 @@ export const ISIALA = { initialRate: 4400, declineRate: 12, oilPrice: 70, capex:
 // that no triangular can honour.
 export const BELIEF = { capex: [150, 180, 220], opex: [16, 20, 26], eff: [85, 91, 96] };
 export const NARROW_OPEX = [16, 17, 26];
-// Two edge fields. OKPOMA pays back inside its first year, dips below zero in
-// its second and still reports a payback of 0; its only IRR root is negative
-// and the engine reports its Newton clamp of 1000. NTEJE never pays back, has
-// no root at all, and still reports an IRR of 1000.
+// Two edge fields. OKPOMA is cash positive in its first year and dips below
+// zero in its second: payback (the first crossing) is 0, paybackStatus is
+// 'recrossed' and paybackLast says where it turns non-negative for good; its
+// only IRR root is negative and the engine reports it. NTEJE never pays back
+// (payback null, 'not-recovered') and no rate zeroes its NPV (irr null,
+// 'no-root').
 export const OKPOMA = { initialRate: 6800, declineRate: 18, oilPrice: 78, capex: 260, fixedOpex: 4, opexPerBbl: 10, royaltyRate: 10, taxRate: 40, discountRate: 10, startYear: 2027 };
 export const NTEJE = { initialRate: 3000, declineRate: 20, oilPrice: 66, capex: 240, fixedOpex: 6, opexPerBbl: 14, royaltyRate: 15, taxRate: 30, discountRate: 12, startYear: 2027 };
 export const APP_MC = { iterations: 1000, uncertainties: { price: 0.2, capex: 0.2, reserves: 0.2 } };
@@ -130,14 +139,69 @@ const beInputs = (belief, opex = belief.opex, extra = {}) => ({
 /** The engine key that holds a parameter percentile: q10 is kept under `p10`. */
 const engineKeyOf = (q) => `p${PARAMETER_PERCENTILES[q]}`;
 
-/** The engine's tornado as rows, in the engine's own rank order. */
-export const tornadoRows = (tornadoData) => tornadoData.y.map((name, i) => ({
-  rank: i + 1,
-  variable: name,
-  low: tornadoData.low[i],
-  high: tornadoData.high[i],
-  swingDerived: tornadoData.high[i] - tornadoData.low[i],
-}));
+/**
+ * The engine's tornado as rows, in the engine's own rank order. A side with no
+ * breakeven below the bracket is null and its bar is unreachable (B1, fixed
+ * 2026-09-15); such a bar has no swing.
+ */
+export const tornadoRows = (tornadoData) => tornadoData.y.map((name, i) => {
+  const low = tornadoData.low[i];
+  const high = tornadoData.high[i];
+  return {
+    rank: i + 1,
+    variable: name,
+    low,
+    high,
+    unreachable: tornadoData.unreachable ? tornadoData.unreachable[i] : null,
+    swingDerived: low === null || high === null ? null : high - low,
+  };
+});
+
+/** The engine's beliefs block (EC3-5): the percentiles the base case and the tornado use. */
+const beliefsOf = (res) => Object.fromEntries(['capex', 'opex', 'efficiency'].map((k) => [k, { ...res.beliefs[k] }]));
+
+/** IRR and payback exactly as the engine returns them, with their statuses. */
+const statusOf = (mt) => ({
+  irr: mt.irr,
+  irrStatus: mt.irrStatus,
+  irrRoots: mt.irrRoots,
+  payback: mt.payback,
+  paybackStatus: mt.paybackStatus,
+  paybackLast: mt.paybackLast,
+});
+
+/**
+ * Where a recrossed cumulative turns non-negative for good, read by hand:
+ * (L + 1) + |cumulative at L| / (ncf at L + 1), L the last negative row. Null
+ * when the cumulative ends negative or never goes negative.
+ */
+const lastCrossingByHand = (cashflow) => {
+  let last = -1;
+  cashflow.forEach((x, i) => { if (x.cumulativeNCF < 0) last = i; });
+  if (last < 0 || last === cashflow.length - 1) return null;
+  return {
+    index: last + 1,
+    carriedIn: cashflow[last].cumulativeNCF,
+    ncfThatYear: cashflow[last + 1].ncf,
+    paybackLastDerived: last + 1 + Math.abs(cashflow[last].cumulativeNCF) / cashflow[last + 1].ncf,
+  };
+};
+
+/** The engine's IRR status words, and the payback status words. */
+export const STATUS_WORDS_LINE = 'The four payback statuses: ok (the cumulative crosses zero once and stays non-negative), recrossed (it turns non-negative and later goes back below zero; payback stays the FIRST crossing and paybackLast is where it turns non-negative for good, null if it never does), no-investment (never negative, payback 0), not-recovered (never non-negative, payback null). The five IRR statuses: ok, no-sign-change, no-root, above-clamp (still positive at 1000 percent), multiple-roots (every root listed in irrRoots, irr null).';
+
+/**
+ * A golden IRR note written before the EC6-1 IRR repair still describes the
+ * retired Newton answer. Such a note is shown as history, never as the
+ * engine's present behaviour.
+ */
+export const STALE_IRR_NOTE = /reports the clamp|lands on one of them|starting guess/;
+export const STALE_IRR_NOTE_PREFIX = 'Golden note, kept as published and written before the EC6-1 IRR repair (engines #180), so its engine sentence is history:';
+const irrNoteOf = (note) => ({
+  note,
+  noteIsHistory: STALE_IRR_NOTE.test(note),
+  shownNote: STALE_IRR_NOTE.test(note) ? `${STALE_IRR_NOTE_PREFIX} "${note}"` : note,
+});
 
 /** A breakeven run's three percentiles, worded by the convention module. */
 const pricePercentiles = (res) => {
@@ -239,7 +303,9 @@ export const ledger = (fieldKey = 'isiala') => {
     positiveTaxYearCount: res.cashflow.filter((x) => x.tax > 0).length,
     zeroTaxYears: res.cashflow.filter((x) => x.tax === 0).map((x) => x.year),
     // The first row whose cumulative is non-negative, which is the row the
-    // engine's payback reads. On OKPOMA that is row 0 and it is never revisited.
+    // engine's payback (the FIRST crossing) reads. On OKPOMA that is row 0; the
+    // cumulative then dips below zero, so paybackStatus is 'recrossed' and
+    // paybackLast is where it turns non-negative for good.
     paybackIndex,
     paybackRowYear: paybackIndex >= 0 ? res.cashflow[paybackIndex].year : null,
   };
@@ -276,7 +342,8 @@ export const depreciationCases = () => screeningGolden.depreciation.map((c) => {
   const res = calculateEconomics(clone(c.inputs));
   return {
     id: c.id, note: c.note,
-    npv: res.metrics.npv, irr: res.metrics.irr, payback: res.metrics.payback, totalTax: res.metrics.totalTax,
+    npv: res.metrics.npv, irr: res.metrics.irr, irrStatus: res.metrics.irrStatus,
+    payback: res.metrics.payback, paybackStatus: res.metrics.paybackStatus, totalTax: res.metrics.totalTax,
   };
 });
 
@@ -307,26 +374,36 @@ export const value = (fieldKey = 'isiala') => {
       return { year: row.year, ncf: row.ncf, factorDerived: factor, discountedNcfDerived: row.ncf / factor };
     }),
     npv: res.metrics.npv,
-    irr: res.metrics.irr,
-    payback: res.metrics.payback,
+    ...statusOf(res.metrics),
     maxExposure: res.metrics.maxExposure,
     paybackByHand: byHand,
+    statusWords: STATUS_WORDS_LINE,
   };
 };
 
 export const paybackCases = () => screeningGolden.payback.map((c) => {
   const res = calculateEconomics(clone(c.inputs));
-  return { id: c.id, note: c.note, payback: res.metrics.payback, maxExposure: res.metrics.maxExposure };
+  return {
+    id: c.id,
+    note: c.note,
+    ...statusOf(res.metrics),
+    maxExposure: res.metrics.maxExposure,
+    cumulative: res.cashflow.map((x) => x.cumulativeNCF),
+    paybackLastByHand: res.metrics.paybackStatus === 'recrossed' ? lastCrossingByHand(res.cashflow) : null,
+  };
 });
 
-/** The engine's IRR beside the golden's, with every root the oracle found. */
+/** The engine's IRR and its status beside the golden's, with every root the oracle found. */
 export const irrCases = () => screeningGolden.irr.map((c) => {
   const res = calculateEconomics(clone(c.inputs));
   return {
     id: c.id,
-    note: c.note,
+    ...irrNoteOf(c.note),
     engineIrr: res.metrics.irr,
+    engineIrrStatus: res.metrics.irrStatus,
+    engineIrrRoots: res.metrics.irrRoots,
     goldenIrr: c.expected.metrics.irr,
+    goldenIrrStatus: c.expected.metrics.irrStatus,
     goldenRoots: c.expected.metrics.irrRoots,
     recordedEngine: c.engine ?? null,
   };
@@ -334,7 +411,10 @@ export const irrCases = () => screeningGolden.irr.map((c) => {
 
 export const sweeps = () => screeningGolden.sweeps.map((c) => {
   const res = calculateEconomics(clone(c.inputs));
-  return { id: c.id, npv: res.metrics.npv, irr: res.metrics.irr, payback: res.metrics.payback };
+  return {
+    id: c.id, npv: res.metrics.npv, irr: res.metrics.irr, irrStatus: res.metrics.irrStatus, irrRoots: res.metrics.irrRoots,
+    payback: res.metrics.payback, paybackStatus: res.metrics.paybackStatus,
+  };
 });
 
 // ---------------------------------------------------------------------------
@@ -346,7 +426,7 @@ export const SENSITIVITY_SCALES = {
   'Oil Price': 'price.oil',
   CAPEX: 'capex',
   OPEX: 'opexFixed ONLY (opexVariable is untouched)',
-  Production: 'production.oil ONLY (variable opex does not follow the volume)',
+  Production: 'production.oil AND opexVariable, so the variable opex follows the volume (EC6-1, engines #180)',
 };
 
 export const SENSITIVITY_FACTORS = { low: 0.7, high: 1.3 };
@@ -360,7 +440,7 @@ export const sensitivity = (fieldKey = 'isiala') => runSensitivityAnalysis(expan
   scales: SENSITIVITY_SCALES[s.name],
 }));
 
-export const SCENARIO_RULE = 'Low: price and production x0.8, capex and fixed opex x1.2; High: the mirror';
+export const SCENARIO_RULE = 'Low: price, production and variable opex x0.8, capex and fixed opex x1.2; High: the mirror';
 export const SCENARIO_ORDER = ['Low', 'Base', 'High'];
 
 export const scenarios = (fieldKey = 'isiala') => {
@@ -431,10 +511,15 @@ export const fits = () => {
   };
 };
 
-/** The published case whose two fits both clamp. Runs 300 breakeven iterations. */
+/**
+ * The published case whose two fits both clamp. Runs 300 breakeven iterations.
+ * Its beliefs are the percentiles the base case and the tornado use (EC3-5):
+ * the fitted triangle's own where a fit clamps.
+ */
 export const publishedInexactFit = () => {
   const c = BC.monteCarlo.mc_inexact_fit_note;
-  return { id: c.id, note: c.note, fits: generateBreakevenData(clone(c.inputs)).distributionFits };
+  const res = generateBreakevenData(clone(c.inputs));
+  return { id: c.id, note: c.note, fits: res.distributionFits, beliefs: beliefsOf(res), baseBreakeven: res.baseBreakeven };
 };
 
 // ---------------------------------------------------------------------------
@@ -503,7 +588,11 @@ const baseArgs = () => ({
 
 export const breakevenCurve = () => {
   const args = baseArgs();
+  // The beliefs do not depend on the sample, so a one iteration run reads them.
+  const beliefs = beliefsOf(generateBreakevenData(beInputs(BELIEF, BELIEF.opex, { iterations: 1 })));
   return {
+    beliefs,
+    allStated: Object.values(beliefs).every((b) => b.source === 'stated'),
     capexMM: args.capexMM,
     opexMM: args.opexMM,
     efficiency: args.efficiency,
@@ -557,6 +646,8 @@ const runSummary = (res, iterations) => {
     seed: res.seed,
     sampleSize: n,
     excluded: res.excludedIterations,
+    clippedDraws: { ...res.clippedDraws },
+    beliefs: beliefsOf(res),
     percentiles: pricePercentiles(res),
     mean: res.kpis.mean,
     baseBreakeven: res.baseBreakeven,
@@ -593,6 +684,8 @@ export const publishedBreakevenRuns = () => {
       id: c.id, note: c.note, seed: res.seed, iterations: c.inputs.iterations,
       p10: res.kpis.p10, p50: res.kpis.p50, p90: res.kpis.p90, mean: res.kpis.mean,
       baseBreakeven: res.baseBreakeven, excluded: res.excludedIterations,
+      beliefSources: { capex: res.beliefs.capex.source, opex: res.beliefs.opex.source, efficiency: res.beliefs.efficiency.source },
+      clippedDraws: { ...res.clippedDraws },
     };
   });
   const allUnr = BC.monteCarlo.mc_all_unreachable_throws;
@@ -601,8 +694,16 @@ export const publishedBreakevenRuns = () => {
   return {
     runs,
     allUnreachable: { id: allUnr.id, note: allUnr.note, iterations: allUnr.inputs.iterations, error: thrown },
+    refused: refusedBeliefs(),
   };
 };
+
+/** The published beliefs the engine refuses by name (EC3-8), with its own error. Nothing is sampled. */
+export const refusedBeliefs = () => breakevenGolden.monteCarlo.filter((c) => c.expected.refused).map((c) => {
+  let error = null;
+  try { generateBreakevenData(clone(c.inputs)); } catch (e) { error = e.message; }
+  return { id: c.id, note: c.note, error };
+});
 
 const unreachableRun = () => {
   const c = BC.monteCarlo.mc_with_unreachable;
@@ -611,11 +712,41 @@ const unreachableRun = () => {
     id: c.id, note: c.note, iterations: c.inputs.iterations, excluded: res.excludedIterations,
     p10: res.kpis.p10, p50: res.kpis.p50, p90: res.kpis.p90,
     tornado: tornadoRows(res.tornadoData),
+    order: [...res.tornadoData.y],
   };
 };
 
 /** The published case where part of the sample never breaks even (120 iterations). */
 export const publishedUnreachable = () => unreachableRun();
+
+/**
+ * B1 with exactly one bar open (published mc_one_bar_unreachable, 120
+ * iterations): the open side is null and that bar sorts FIRST.
+ */
+export const publishedOneBarUnreachable = () => {
+  const c = BC.monteCarlo.mc_one_bar_unreachable;
+  const res = generateBreakevenData(clone(c.inputs));
+  return {
+    id: c.id, note: c.note, iterations: c.inputs.iterations, excluded: res.excludedIterations,
+    order: [...res.tornadoData.y],
+    tornado: tornadoRows(res.tornadoData),
+    insights: res.insights,
+  };
+};
+
+/**
+ * EC3-8 (published mc_efficiency_past_100, 300 iterations): a fitted tail past
+ * 100 percent efficiency; the draws past it are held at 100 and counted.
+ */
+export const publishedEfficiencyPast100 = () => {
+  const c = BC.monteCarlo.mc_efficiency_past_100;
+  const res = generateBreakevenData(clone(c.inputs));
+  return {
+    id: c.id, note: c.note, iterations: c.inputs.iterations,
+    efficiencyFit: { ...res.distributionFits.efficiency },
+    clippedDraws: { ...res.clippedDraws },
+  };
+};
 
 /**
  * The two-sided tornado for ISIALA. The tornado does not depend on the sample,
@@ -681,9 +812,21 @@ export const scenarioBuilderCases = async (seed = DEFAULT_MC_SEED) => {
 // ---------------------------------------------------------------------------
 
 export const MC_SAMPLING_LINES = [
-  '- Sampling: each value v with a range r is drawn uniformly on [v(1 - r), v(1 + r)], one draw per year per array, in the order oil volume, gas volume, oil price, gas price, capex, with a falsy range consuming no draw.',
-  '- reserves scales oil AND gas volumes; price scales oil AND gas prices; capex scales capex; opex and royalty and tax are never sampled.',
+  '- Sampling: ONE factor per uncertain variable per iteration, uniform on [1 - r, 1 + r], applied to every year; drawn in the order reserves, price, capex, with a falsy range drawing nothing (EC3-7).',
+  '- reserves scales oil AND gas volumes AND the variable opex those volumes carry; price scales oil AND gas prices; capex scales every capex entry; fixed opex, royalty and tax are never sampled.',
 ];
+
+/** The published Monte Carlo settings the engine refuses by name (EC3-7), with its own error. */
+export const refusedMonteCarlo = async () => {
+  const out = [];
+  for (const c of screeningGolden.monteCarloRefused) {
+    let error = null;
+    // eslint-disable-next-line no-await-in-loop
+    try { await runMonteCarlo(clone(c.inputs), clone(c.settings)); } catch (e) { error = e.message; }
+    out.push({ id: c.id, note: c.note, error });
+  }
+  return out;
+};
 
 export const scenarioBuilderMonteCarlo = async (settings = APP_MC) => {
   const s = clone(settings);
@@ -706,16 +849,28 @@ export const scenarioBuilderMonteCarlo = async (settings = APP_MC) => {
       widthDerived: mc.histogram[0].binEnd - mc.histogram[0].binStart,
       counts: mc.histogram.map((b) => b.count),
     },
-    sCurve: {
-      pointCount: mc.cdf.length,
-      stepDerived: Math.max(1, Math.floor(mc.iterations / 50)),
-      firstProbability: mc.cdf[0].probability,
-      lastProbability: mc.cdf[mc.cdf.length - 1].probability,
-      // EC3-6: the S-curve reads SORTED values, so its point at probability 10
-      // is a single sorted NPV, not the screening rule's average on the Low case card.
-      valueAtTenPercent: (mc.cdf.find((x) => Math.abs(x.probability - 10) < 1e-9) ?? { value: null }).value,
-      points: mc.cdf,
-    },
+    // EC3-6: 51 points at probability 0, 2, ..., 100 percent, each read with the
+    // cards' quantile rule, so the curve starts at the lowest NPV, ends at the
+    // highest, and its heights at 10, 50 and 90 percent are the card values.
+    sCurve: (() => {
+      const at = (prob) => (mc.cdf.find((x) => x.probability === prob) ?? { value: null }).value;
+      const first = mc.cdf[0];
+      const last = mc.cdf[mc.cdf.length - 1];
+      const heights = { at10: at(10), at50: at(50), at90: at(90) };
+      return {
+        pointCount: mc.cdf.length,
+        firstProbabilities: mc.cdf.slice(0, 3).map((x) => x.probability),
+        firstProbability: first.probability,
+        lastProbability: last.probability,
+        firstValue: first.value,
+        lastValue: last.value,
+        firstEqualsLowest: first.value === mc.allValues[0],
+        lastEqualsHighest: last.value === mc.allValues[mc.allValues.length - 1],
+        heights,
+        heightsEqualCards: heights.at10 === mc.p10 && heights.at50 === mc.p50 && heights.at90 === mc.p90,
+        points: mc.cdf,
+      };
+    })(),
   };
 };
 
@@ -804,13 +959,14 @@ export const wobbleCollect = (results) => {
 export const wobble = (opts = {}) => wobbleCollect(wobbleSteps(opts).map(wobbleStep));
 
 // ---------------------------------------------------------------------------
-// SECTION 15. Repaired edges and one still open, B1 (the one-sided tornado bar).
+// SECTION 15. Edges that used to break, B1 included (the one-sided tornado bar).
 // ---------------------------------------------------------------------------
 
 export const edges = async () => {
   const zero = await runMonteCarlo(expanded('isiala'), { iterations: 30, uncertainties: { price: 0, capex: 0, reserves: 0 }, seed: DEFAULT_MC_SEED });
   const short = await runMonteCarlo(expanded('isiala'), { ...clone(APP_MC), iterations: 40, seed: DEFAULT_MC_SEED });
   const unr = unreachableRun();
+  const lastPoint = short.cdf[short.cdf.length - 1];
   return {
     zeroRanges: {
       iterations: 30,
@@ -818,8 +974,15 @@ export const edges = async () => {
       deterministicNpv: economics('isiala').metrics.npv,
       binZeroCount: zero.histogram[0].count,
     },
-    fortyIterations: { iterations: 40, sCurvePoints: short.cdf.length },
-    oneSidedTornado: { id: unr.id, rows: unr.tornado },
+    fortyIterations: {
+      iterations: 40,
+      sCurvePoints: short.cdf.length,
+      lastValue: lastPoint.value,
+      lastEqualsHighest: lastPoint.value === short.allValues[short.allValues.length - 1],
+    },
+    oneSidedTornado: { id: unr.id, rows: unr.tornado, order: unr.order },
+    oneBarOpen: publishedOneBarUnreachable(),
+    efficiencyPast100: publishedEfficiencyPast100(),
   };
 };
 
@@ -830,10 +993,12 @@ export const narrowBeliefRun = ({ iterations = 5000 } = {}) => {
     stated: [...NARROW_OPEX],
     statedLabels: beliefLabels('opex'),
     opexFit: res.distributionFits.opex,
+    beliefs: beliefsOf(res),
     percentiles: pricePercentiles(res),
     baseBreakeven: res.baseBreakeven,
     tornado: tornadoRows(res.tornadoData),
     insightCarriesFitNote: res.insights.includes('the stated median sits too near'),
+    insightCarriesBeliefsNote: res.insights.includes("the fitted triangle's 10th, 50th and 90th percentiles"),
     insights: res.insights,
   };
 };
@@ -855,18 +1020,26 @@ export const distrust = () => {
   return {
     nteje: {
       line: quickLine(NTEJE),
-      npv: nt.metrics.npv, irr: nt.metrics.irr, payback: nt.metrics.payback, maxExposure: nt.metrics.maxExposure,
+      npv: nt.metrics.npv, ...statusOf(nt.metrics), maxExposure: nt.metrics.maxExposure,
       finalCumulative: nt.cashflow[nt.cashflow.length - 1].cumulativeNCF,
     },
     okpoma: {
-      npv: ok.metrics.npv, irr: ok.metrics.irr, payback: ok.metrics.payback, maxExposure: ok.metrics.maxExposure,
+      npv: ok.metrics.npv, ...statusOf(ok.metrics), maxExposure: ok.metrics.maxExposure,
       firstRows: ok.cashflow.slice(0, 3).map((row) => Object.fromEntries(OKPOMA_FIRST_ROW_COLUMNS.map((k) => [k, row[k]]))),
+      // The second capex year's cumulative, and paybackLast read by hand from it.
+      dipCumulative: ok.cashflow[1].cumulativeNCF,
+      paybackLastByHand: lastCrossingByHand(ok.cashflow),
     },
     irrCases: IRR_DISTRUST_CASE_IDS.map((id) => {
       const c = SC.irr[id];
-      return { id, note: c.note, engineIrr: calculateEconomics(clone(c.inputs)).metrics.irr, goldenRoots: c.expected.metrics.irrRoots };
+      const mt = calculateEconomics(clone(c.inputs)).metrics;
+      return {
+        id, ...irrNoteOf(c.note),
+        engineIrr: mt.irr, engineIrrStatus: mt.irrStatus, engineIrrRoots: mt.irrRoots,
+        goldenRoots: c.expected.metrics.irrRoots,
+      };
     }),
-    fdpNeverPaysBack: { id: fdp.id, note: fdp.note, npv: fdpRes.metrics.npv, irr: fdpRes.metrics.irr, payback: fdpRes.metrics.payback },
+    fdpNeverPaysBack: { id: fdp.id, note: fdp.note, npv: fdpRes.metrics.npv, ...statusOf(fdpRes.metrics) },
     midYear: {
       engineNpv: is.metrics.npv,
       yearEndNpvDerived: yearEnd,
@@ -887,7 +1060,7 @@ export const endToEnd = async (run = breakevenRun()) => {
   const cases = await scenarioBuilderCases(DEFAULT_MC_SEED);
   const mc = await scenarioBuilderMonteCarlo(APP_MC);
   return {
-    deterministic: { npv: led.metrics.npv, irr: led.metrics.irr, payback: led.metrics.payback, maxExposure: led.metrics.maxExposure },
+    deterministic: { npv: led.metrics.npv, ...statusOf(led.metrics), maxExposure: led.metrics.maxExposure },
     scenarios: sc.map((x) => ({ name: x.name, npv: x.metrics.npv })),
     breakeven: { baseBreakeven: run.baseBreakeven, percentiles: run.percentiles },
     scenarioBuilder: { rows: cases.rows, emv: mc.emv, seed: mc.seed },

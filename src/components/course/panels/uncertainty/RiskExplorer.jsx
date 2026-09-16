@@ -13,8 +13,8 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 
 // Risk explorer, the Expert tier. ONE CONVENTION AND WHAT TO DISTRUST: one
 // meaning of a P-label, the Scenario Builder's Monte Carlo, two percentile
-// rules in one module and how much a percentile wobbles, the repaired edges and
-// the one still open (B1), and the numbers to distrust.
+// rules in one module and how much a percentile wobbles, the edges that used to
+// break (B1 among them, fixed 2026-09-15), and the numbers to distrust.
 //
 // Every figure on this page is a return value from uncertaintyLab, which is a
 // return value from the vendored screening and breakeven engines. Nothing here
@@ -34,8 +34,8 @@ export const MODES = [
   ['labels', 'Labels: one meaning of a P-label, and the cards that were swapped'],
   ['montecarlo', 'Monte Carlo: the uniform rule, the histogram, the S-curve, the seed'],
   ['rules', 'Rules: two percentile rules, and the wobble'],
-  ['edges', 'Edges: repaired edges, and one still open'],
-  ['distrust', 'Distrust: the clamp, the payback, mid-year beside year-end'],
+  ['edges', 'Edges: the edges that used to break'],
+  ['distrust', 'Distrust: what a missing number says, mid-year beside year-end'],
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -170,7 +170,7 @@ export const MonteCarloMode = ({ mc, seeds, priceOnly }) => {
         rows={[
           [<InputLabel key="p">price range</InputLabel>, mc.uncertainties.price, 'oil and gas prices, every year'],
           [<InputLabel key="c">capex range</InputLabel>, mc.uncertainties.capex, 'capex, every year'],
-          [<InputLabel key="r">reserves range</InputLabel>, mc.uncertainties.reserves, 'oil and gas volumes, every year'],
+          [<InputLabel key="r">reserves range</InputLabel>, mc.uncertainties.reserves, 'oil and gas volumes, and the variable opex those volumes carry, every year'],
         ]}
       />
       <div className="mt-3">
@@ -210,15 +210,19 @@ export const MonteCarloMode = ({ mc, seeds, priceOnly }) => {
         </ResponsiveContainer>
       </div>
       <p className="text-xs text-slate-500 mt-1 mb-0">
-        The S-curve keeps {mc.sCurve.pointCount} points, one every {mc.sCurve.stepDerived} sorted values, from {four(mc.sCurve.firstProbability)} and stopping at {four(mc.sCurve.lastProbability)} percent, never 100.
+        The S-curve is {mc.sCurve.pointCount} points at probability {mc.sCurve.firstProbabilities.map((x) => four(x)).join(', ')} and so on to {four(mc.sCurve.lastProbability)} percent,
+        each read with the same quantile rule as the cards (EC3-6). It starts at the lowest NPV, {mm(mc.sCurve.firstValue)},
+        and ends at the highest, {mm(mc.sCurve.lastValue)}.
       </p>
       <div className="mt-3">
         <TileGrid>
-          <Tile label="S-curve point at 10 percent, one sorted NPV" value={mm(mc.sCurve.valueAtTenPercent)} unit="million USD" />
-          <Tile label={<>Low case card, <Outcome>{OUTCOME_LABELS.p90}</Outcome>, the screening rule&apos;s average</>} value={mm(mc.p10)} unit="million USD" />
+          <Tile label="S-curve height at 10 percent" value={mm(mc.sCurve.heights.at10)} unit="million USD" />
+          <Tile label={<>Low case card, <Outcome>{OUTCOME_LABELS.p90}</Outcome>, the same quantile rule</>} value={mm(mc.p10)} unit="million USD" />
         </TileGrid>
         <p className="text-xs text-slate-500 mt-1 mb-0">
-          The two disagree and both are what the engine returns (EC3-6): the S-curve reads sorted values, while the card averages two neighbours. The chart&apos;s dashed lines are the cards.
+          The curve and the cards agree: its heights at 10, 50 and 90 percent are the three card values (EC3-6), which is
+          {mc.sCurve.heightsEqualCards ? ' what the engine returns here' : ' not what the engine returns here'}. The chart&apos;s dashed lines are the cards.
+          Before the repair the curve kept every twentieth sorted value, stopped short of the top of the sample, and read single values where the cards averaged.
         </p>
       </div>
       {seeds && (
@@ -232,9 +236,11 @@ export const MonteCarloMode = ({ mc, seeds, priceOnly }) => {
       )}
       {priceOnly && <p className="text-xs text-slate-400 mt-2 mb-0">{priceOnly.id}: {priceOnly.note}</p>}
       <Note>
-        The seed guarantees the sample and nothing about its accuracy. Every year of every array takes its own
-        independent draw, so one iteration can pair a high price in one year with a low price in the next, and opex,
-        royalty and tax are never sampled (EC3-7). A range here is not the whole of the uncertainty in the case.
+        The seed guarantees the sample and nothing about its accuracy. An iteration draws ONE factor for each
+        uncertain variable and applies it to every year (EC3-7), so a case that is 20 percent light on reserves is
+        light in every year, and the variable operating cost follows the volume. Fixed opex, royalty and tax are
+        never sampled, and a range outside 0 to 1 is refused by name. A range here is not the whole of the
+        uncertainty in the case.
       </Note>
     </>
   );
@@ -294,14 +300,29 @@ export const EdgesMode = ({ e, narrow, onNarrow, narrowRunning }) => (
           <Tile label="Deterministic NPV beside it" value={mm(e.zeroRanges.deterministicNpv)} unit="million USD" />
           <Tile label="Repaired, S4. Iterations in bin 0" value={`${e.zeroRanges.binZeroCount} of ${e.zeroRanges.iterations}`} />
           <Tile label={`Repaired, S5. S-curve points at ${e.fortyIterations.iterations} iterations`} value={String(e.fortyIterations.sCurvePoints)} />
+          <Tile label="Repaired, EC3-8. Efficiency draws held at 100 percent" value={`${e.efficiencyPast100.clippedDraws.efficiency} of ${e.efficiencyPast100.iterations}`} />
         </TileGrid>
         <Tbl
-          head={['STILL OPEN, B1: published mc_with_unreachable tornado', 'low side, from the base', 'high side, from the base']}
-          rows={e.oneSidedTornado.rows.map((x) => [x.variable, four(x.low), four(x.high)])}
+          head={['Repaired, B1: published mc_with_unreachable tornado', 'low side, from the base', 'high side, from the base', 'open end']}
+          rows={e.oneSidedTornado.rows.map((x) => [x.variable,
+            x.low === null ? 'no breakeven below the bracket' : four(x.low),
+            x.high === null ? 'no breakeven below the bracket' : four(x.high),
+            x.unreachable ? 'yes, sorts first' : 'no'])}
+        />
+        <Tbl
+          head={['Repaired, B1: published mc_one_bar_unreachable, one bar open', 'low side, from the base', 'high side, from the base', 'open end']}
+          rows={e.oneBarOpen.tornado.map((x) => [x.variable,
+            x.low === null ? 'no breakeven below the bracket' : four(x.low),
+            x.high === null ? 'no breakeven below the bracket' : four(x.high),
+            x.unreachable ? 'yes, sorts first' : 'no'])}
         />
         <p className="text-xs text-slate-500 mt-1 mb-0">
-          B1 is not repaired. Every high side prints as {e.oneSidedTornado.rows.length ? four(e.oneSidedTornado.rows[0].high) : 'null'}: the high end never broke even below the bracket, and the engine still prints the missing side as zero rather than saying it is missing. Read a zero side there as no price at all, never as no change.
+          An end with no breakeven below the bracket is null, its bar carries no swing, and the bar sorts FIRST:
+          on mc_one_bar_unreachable the engine&apos;s order is {e.oneBarOpen.order.join(', ')}. Read an open end as no price at
+          all. Before the repair that side was drawn at the base case with a swing of zero, so the bar sorted last,
+          below every bar the sample could price.
         </p>
+        <p className="text-xs text-slate-300 mt-2 mb-0"><span className="text-slate-500">The engine&apos;s insight on that run:</span> {e.oneBarOpen.insights}</p>
       </>
     ) : <Note>The edge runs are running.</Note>}
     <div className="mt-3 flex items-center gap-3">
@@ -319,14 +340,20 @@ export const EdgesMode = ({ e, narrow, onNarrow, narrowRunning }) => (
         </TileGrid>
         <p className="text-xs text-slate-300 mt-2 mb-0"><span className="text-slate-500">The engine&apos;s insight, which now carries the fit note (repaired):</span> {narrow.insights}</p>
         <p className="text-xs text-slate-300 mt-2 mb-0">
-          The sample draws opex from the clamped triangle, but the base breakeven and the tornado run at the stated <InputLabel>{narrow.statedLabels[1]}</InputLabel>, {narrow.stated[1]}, which that triangle does not pass through (EC3-5). The base and the sample describe two different opex beliefs.
+          The sample draws opex from the clamped triangle, and the base breakeven and the tornado now run at that
+          triangle&apos;s own percentiles (EC3-5): the opex median they use is {four(narrow.beliefs.opex.p50)}, reported as a fitted
+          belief, where the stated <InputLabel>{narrow.statedLabels[1]}</InputLabel> is {narrow.stated[1]}. The base case and the sample describe
+          one belief. Before the repair the base case and the tornado read the stated median while the sample drew
+          from the fitted triangle, so one screen carried two different opex beliefs.
         </p>
       </>
     )}
     <Note>
       Repaired in EC3-0: every range at zero no longer divides by a zero bin width and throws (S4), fewer than fifty
       iterations no longer leave an empty S-curve (S5), and a belief no triangle honours now puts its fit note into
-      the insight. Still open: B1, the tornado bar with one side printed as zero.
+      the insight. Repaired on 2026-09-15: a tornado end with no breakeven is left open and sorts first (B1), a
+      clamped fit hands the base case and the tornado its own percentiles (EC3-5), and a belief a field cannot have
+      is refused while a fitted tail past a physical limit is held there and counted (EC3-8).
     </Note>
   </>
 );
@@ -337,24 +364,33 @@ export const DistrustMode = ({ d }) => {
     <>
       <TileGrid>
         <Tile label="NTEJE NPV" value={mm(d.nteje.npv)} unit="million USD" />
-        <Tile label="NTEJE IRR, the Newton clamp" value={four(d.nteje.irr)} unit="percent" />
-        <Tile label="NTEJE payback, the project life" value={four(d.nteje.payback)} unit="years" />
+        <Tile label="NTEJE IRR" value={Number.isFinite(d.nteje.irr) ? four(d.nteje.irr) : 'not defined'} unit={Number.isFinite(d.nteje.irr) ? 'percent' : d.nteje.irrStatus} />
+        <Tile label="NTEJE payback" value={Number.isFinite(d.nteje.payback) ? four(d.nteje.payback) : 'not recovered'} unit={Number.isFinite(d.nteje.payback) ? 'years' : d.nteje.paybackStatus} />
         <Tile label="NTEJE final cumulative" value={mm(d.nteje.finalCumulative)} unit="million USD" />
         <Tile label="OKPOMA NPV" value={mm(d.okpoma.npv)} unit="million USD" />
-        <Tile label="OKPOMA IRR, the Newton clamp again" value={four(d.okpoma.irr)} unit="percent" />
-        <Tile label="OKPOMA payback" value={four(d.okpoma.payback)} unit="years" />
+        <Tile label="OKPOMA IRR, its one real root" value={Number.isFinite(d.okpoma.irr) ? four(d.okpoma.irr) : 'not defined'} unit={Number.isFinite(d.okpoma.irr) ? `percent, ${d.okpoma.irrStatus}` : d.okpoma.irrStatus} />
+        <Tile label="OKPOMA payback, the first crossing" value={Number.isFinite(d.okpoma.payback) ? four(d.okpoma.payback) : 'not recovered'} unit={`years, ${d.okpoma.paybackStatus}`} />
+        <Tile label="OKPOMA paybackLast, non-negative for good" value={Number.isFinite(d.okpoma.paybackLast) ? four(d.okpoma.paybackLast) : 'never'} unit={Number.isFinite(d.okpoma.paybackLast) ? 'years' : ''} />
         <Tile label="OKPOMA peak exposure" value={mm(d.okpoma.maxExposure)} unit="million USD" />
       </TileGrid>
       <Tbl head={OKPOMA_FIRST_ROW_COLUMNS} rows={d.okpoma.firstRows.map((x) => OKPOMA_FIRST_ROW_COLUMNS.map((k) => (k === 'year' ? x[k] : mm(x[k]))))} />
       <p className="text-xs text-slate-500 mt-1 mb-0">
-        Neither IRR is a root. OKPOMA&apos;s only root is negative and NTEJE has no root at all; where no positive root exists the engine reports its Newton clamp (FINDINGS S1).
+        OKPOMA&apos;s only root is negative and the engine reports it; NTEJE has no root at all, so its IRR is null with
+        the status {d.nteje.irrStatus} and its payback is null with the status {d.nteje.paybackStatus}. A missing number that says why it is
+        missing can be read. Before the repairs both read 1000 percent, the Newton clamp, and NTEJE&apos;s payback read
+        the project life, which cannot be told apart from paying back on the last day.
       </p>
-      <p className="text-xs text-slate-500 mt-1 mb-0">The cumulative is positive after year 1, so the payback reads 0; the second capex year takes it below zero and the payback is never revisited.</p>
+      <p className="text-xs text-slate-500 mt-1 mb-0">
+        The cumulative is non-negative at the first row, so the payback, which is the FIRST crossing, is {four(d.okpoma.payback)}. The second
+        capex year takes the cumulative to {mm(d.okpoma.dipCumulative)}, so the status is {d.okpoma.paybackStatus} and paybackLast, where the
+        cumulative turns non-negative for good, is {four(d.okpoma.paybackLast)} years: {d.okpoma.paybackLastByHand.index} plus {mm(Math.abs(d.okpoma.paybackLastByHand.carriedIn))} over {mm(d.okpoma.paybackLastByHand.ncfThatYear)}.
+      </p>
       <Tbl
-        head={['published IRR case', 'engine IRR, percent', 'every root the oracle found']}
+        head={['published IRR case', 'engine IRR, percent', 'IRR status', 'every root the oracle found']}
         rows={[
-          ...d.irrCases.map((x) => [x.id, four(x.engineIrr), x.goldenRoots.map((z) => four(z)).join(', ')]),
-          [d.fdpNeverPaysBack.id, four(d.fdpNeverPaysBack.irr), `npv ${mm(d.fdpNeverPaysBack.npv)}, payback ${four(d.fdpNeverPaysBack.payback)}`],
+          ...d.irrCases.map((x) => [x.id, Number.isFinite(x.engineIrr) ? four(x.engineIrr) : 'null', x.engineIrrStatus, x.goldenRoots.map((z) => four(z)).join(', ')]),
+          [d.fdpNeverPaysBack.id, Number.isFinite(d.fdpNeverPaysBack.irr) ? four(d.fdpNeverPaysBack.irr) : 'null', d.fdpNeverPaysBack.irrStatus,
+            `npv ${mm(d.fdpNeverPaysBack.npv)}, payback ${Number.isFinite(d.fdpNeverPaysBack.payback) ? four(d.fdpNeverPaysBack.payback) : d.fdpNeverPaysBack.paybackStatus}`],
         ]}
       />
       <div className="mt-3">
@@ -412,7 +448,7 @@ const RiskExplorer = ({ initialMode = 'labels' }) => {
   return (
     <PanelShell
       title="Risk explorer"
-      subtitle="One meaning of a P-label, the Scenario Builder's Monte Carlo, two percentile rules and how much a percentile wobbles, the repaired edges and the one still open, and the numbers to distrust."
+      subtitle="One meaning of a P-label, the Scenario Builder's Monte Carlo, two percentile rules and how much a percentile wobbles, the edges that used to break, and the numbers to distrust."
     >
       <FieldGrid>
         <SelectField label="View" value={mode} onChange={setMode} options={MODES} />

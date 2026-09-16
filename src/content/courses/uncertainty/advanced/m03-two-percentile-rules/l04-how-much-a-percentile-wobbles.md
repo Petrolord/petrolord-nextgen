@@ -43,7 +43,7 @@ The median does not settle in one direction. It rises from 72.7058 to 72.9806, f
 
 ## The same wobble on an NPV
 
-The Scenario Builder shows the same effect on an outcome. At 1000 iterations, the Best case P50 is 81.1835 at seed 20260829 and 79.0624 at seed 43. On one sample, the two percentile rules differ by only -0.0116 at that median (derived). The seed moves the answer far more than the rule does. Arguing over which rule to use settles nothing while the seed is uncontrolled.
+The Scenario Builder shows the same effect on an outcome. At 1000 iterations, the Best case P50 is 78.5315 at seed 20260829 and 80.2233 at seed 43. On one sample, the two percentile rules differ by only -0.0521 at that median (derived). The seed moves the answer far more than the rule does. Arguing over which rule to use settles nothing while the seed is uncontrolled.
 
 ## The mistake
 

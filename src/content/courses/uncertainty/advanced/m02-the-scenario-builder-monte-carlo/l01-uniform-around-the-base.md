@@ -1,43 +1,43 @@
 # Uniform around the base
 
-The Scenario Builder's Monte Carlo draws each sampled value uniformly within its range, above and below the base case value. It takes one draw per year for each array.
+The Scenario Builder's Monte Carlo draws one factor for each uncertain variable in each iteration, uniformly around the base case, and applies that factor to every year.
 
 {{panel:ec-risk-explorer}}
 
 ## The rule
 
-Each value v with a range r is drawn uniformly on [v(1 - r), v(1 + r)]. The app's settings give price, capex and reserves a range of plus or minus 20 percent. So every sampled value lands between 0.8 and 1.2 times its base value. Every point in that interval is equally likely, and nothing lands outside it.
+A variable with a range r takes one draw per iteration, uniform on [1 - r, 1 + r]. The app's settings give price, capex and reserves a range of plus or minus 20 percent, so each factor lands between 0.8 and 1.2. A base value v in any year becomes v times its variable's factor, so a 2027 value is drawn from [v(1 - r), v(1 + r)] and every later year moves by the same proportion.
 
-The draws come from mulberry32(20260829) in a fixed order within each iteration: oil volume, gas volume, oil price, gas price, capex, one draw for each year of each array. A falsy range consumes no draw. The generator's first draw is 0.936239. It goes to ISIALA's 2027 oil volume of 1606000.0000 bbl and puts that year near the top of its range.
+The draws come from mulberry32(20260829) in a fixed order within each iteration: reserves, price, capex. A falsy range consumes no draw. The generator's first draw is 0.936239, which puts the reserves factor of the first iteration near the top of its interval, and ISIALA's 2027 oil volume of 1606000.0000 bbl is scaled by it along with all twenty years.
 
 ## A uniform range is not a belief
 
-A uniform range has no mode. A value just inside the upper edge is exactly as likely as the base value, and a value just outside is impossible. Compare the Breakeven Analyzer. It fits a triangular through three stated percentiles: ISIALA's capex belief of 150 / 180 / 220 becomes 127.2260 / 168.6738 / 252.3607. That shape has a peak, and its tails reach past the stated 10th and 90th percentiles. Plus or minus 20 percent is neither a percentile nor a pair of believed endpoints. It is only a width.
+A uniform range has no mode. A value just inside the upper edge is exactly as likely as the base value, and a value just outside is impossible. The Breakeven Analyzer instead fits a triangular through three stated percentiles: ISIALA's capex belief of 150 / 180 / 220 becomes 127.2260 / 168.6738 / 252.3607. That shape has a peak and tails past the stated 10th and 90th percentiles. Plus or minus 20 percent is neither a percentile nor a believed endpoint, only a width.
 
-## Independent in every year
+## One factor for a whole life
 
-Every year's price is drawn on its own. An iteration with a 2027 price near 0.8 times base can have a 2028 price near 1.2 times. No draw is shared between years or between variables. Twenty independent yearly draws partly cancel each other out. The sample ends up much narrower than any single move applied to the whole life.
+An iteration's price factor multiplies 2027 and 2046 by the same number, so a profile and a price deck keep their shape. A factor held for a whole life is what a scenario does, and the spread is wide:
 
 | quantity | NPV, million USD |
 | --- | --- |
-| scenario Low | -72.1531 |
-| Monte Carlo lowest of 1000 | 16.3054 |
-| Low case P90 | 48.7439 |
-| Best case P50 | 81.1835 |
-| High case P10 | 109.8980 |
-| Monte Carlo highest of 1000 | 149.3540 |
-| scenario High | 237.8860 |
+| scenario Low | -57.8151 |
+| Monte Carlo lowest of 1000 | -46.1564 |
+| Low case P90 | 15.6063 |
+| Best case P50 | 78.5315 |
+| High case P10 | 152.0653 |
+| Monte Carlo highest of 1000 | 208.9685 |
+| scenario High | 226.0140 |
 
-The scenarios move price and production to 0.8 times base, and capex and fixed opex to 1.2 times, in every year at once, then do the mirror image. Not one of the 1000 random iterations came near either scenario.
+The two scenarios still sit outside the sample at both ends. They move price, production and variable opex to 0.8 times base and capex and fixed opex to 1.2 times in one direction, while the three sampled factors are drawn independently and fixed opex is never drawn at all.
 
 ## The mistake
 
-The careful mistake is reading plus or minus 20 percent on price as "the price could stay 20 percent lower for the life of the field". That is a scenario. The Monte Carlo's price range applies to each year separately. Independence across years and variables is why its Low case P90 of 48.7439 sits so far above the scenario Low of -72.1531. If you want a price that stays low, build it as a scenario.
+The careful mistake is reading plus or minus 20 percent on the inputs as plus or minus 20 percent on the answer. A price factor of 0.8 takes a fifth of the revenue away while royalty, tax, fixed opex and capex follow their own rules, and the low tail of a case worth 81.0464 million USD reaches -46.1564. A range on an input says nothing directly about the width of the outcome.
 
 ## What it refuses
 
-It has no correlation between years or between variables, and no shape inside the range. It never samples opex, royalty, tax or the discount rate.
+It holds no correlation between its three variables and no shape inside a range. It never samples fixed opex, royalty, tax or the discount rate, and one factor covers the whole life, so it cannot model a price that falls only in the later years.
 
 ## Exercise
 
-Write the interval ISIALA's 2027 oil volume is drawn from at the app's settings, in the form [v(1 - r), v(1 + r)] with v and r filled in. Say which draw of seed 20260829 that volume takes and roughly where in the interval it lands. Then explain why the lowest sampled NPV, 16.3054, sits above the scenario Low.
+Write the interval ISIALA's 2027 oil volume is drawn from at the app's settings, in the form [v(1 - r), v(1 + r)] with v and r filled in. Say which variable takes the first draw of an iteration and roughly where a draw of 0.936239 lands in its interval. Then explain why the scenario Low of -57.8151 still sits below the lowest sampled NPV of -46.1564.

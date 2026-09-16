@@ -16,22 +16,26 @@ ISIALA's narrow opex belief is 16 / 17 / 26 million USD a year. Its shape ratio 
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | opex, narrow belief | 16 / 17 / 26 | 0.100000 | 15.1886 | 15.1886 | 31.0000 | 0.000001 | false |
 
-The engine clamps the ratio to the band's lower edge, fits the most left-skewed triangle there is, and says so: "the stated median sits too near the 10th percentile for any triangular to pass through all three points; the fit uses the most left-skewed triangular there is (mode at the minimum)". The flag `exact` reads false, and the note rides along in the run's insight.
+The engine clamps the ratio to the band's lower edge, fits the most left-skewed triangle there is, and says so: "the stated median sits too near the 10th percentile for any triangular to pass through all three points; the fit uses the most left-skewed triangular there is (mode at the minimum)".
 
-The clamped triangle still passes through the stated 10th and 90th percentiles, because origin and range are solved from those two. It gives up the median: no triangle's median can sit as close to 16 as 17 does, so the fitted median lands well above what the engineer wrote. The published `mc_inexact_fit_note` shows the mirror case as well, an opex median too near its 90th percentile, clamped to "the most right-skewed triangular there is (mode at the maximum)".
+The clamped triangle still passes through the stated 10th and 90th percentiles, because origin and range are solved from those two. It gives up only the median.
+
+## The beliefs the run reports
+
+The flag `exact` reads false, the note rides along in the run's insight, and beside them the run prints `beliefs`, the three percentiles it actually used, each marked stated or fitted. On the narrow belief they read opex 16.0000 / 19.8197 / 26.0000, fitted, and the deterministic base case and every tornado bar run at those, so the stated median of 17 is used nowhere. Before the 2026-09-15 repair the base case read the stated median whatever the fit.
 
 ## Why m reads 0.000001
 
-The note says mode at the minimum, yet m prints as 0.000001. When m is below 0.1, the quantiles at 0.1, 0.5 and 0.9 all sit on the upper branch of the quantile function, and there the shape ratio stops changing with m. Every m in that stretch gives exactly the edge ratio, so floating point noise decides where the bisection stops, and min and mode still agree to four decimals at 15.1886. A matching flat stretch sits above 0.9, which is why every exact fit has an m between 0.1 and 0.9.
+The note says mode at the minimum, yet m prints as 0.000001. When m is below 0.1, the quantiles at 0.1, 0.5 and 0.9 all sit on the upper branch of the quantile function, and there the shape ratio stops changing with m. Every m in that stretch gives exactly the edge ratio, so floating point noise decides where the bisection stops, and min and mode still agree to four decimals at 15.1886.
 
 ## What it refuses
 
-It refuses to reject the belief. The run goes ahead on a distribution the engineer did not state, signalled only by `exact` false and a sentence in the insight. Nor will it move the 10th or 90th percentile to rescue the median.
+It will not reject a belief it can clamp, and it will not move the 10th or 90th percentile to rescue the median. It does refuse a belief that is not physically possible, naming the variable as it goes: "OPEX percentiles must not be negative." and "Production efficiency percentiles must lie between 0 and 100 percent."
 
 ## The mistake
 
-The mistake is reading the run as if the belief had been honoured. A reviewer who sees opex entered as 16 / 17 / 26 assumes half of all draws cost under 17. The clamped fit draws far fewer than half that cheap, so every downstream price carries more opex than the belief. The other mistake is nudging the median until the flag turns true without asking whether the 90th percentile was written in a hurry.
+The mistake is reading the run as if the belief had been honoured. A reviewer who sees opex entered as 16 / 17 / 26 assumes half of all draws cost under 17, when the fitted median the run reports is 19.8197. The other mistake is nudging the median until the flag turns true without asking whether the 90th percentile was written in a hurry.
 
 ## Exercise
 
-Compute the shape ratio of 16 / 17 / 26, name the band edge it is clamped to, and quote the engine's note. Say which two stated points the clamped fit still honours and which one it gives up. Then explain why the fit prints m of 0.000001 rather than 0.
+Compute the shape ratio of 16 / 17 / 26, name the band edge it is clamped to, and quote the engine's note. Write the three opex beliefs the run reports and say which of them the base case uses. Then explain why the fit prints m of 0.000001 rather than 0.

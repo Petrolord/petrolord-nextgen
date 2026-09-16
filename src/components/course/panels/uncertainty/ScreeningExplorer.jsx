@@ -134,7 +134,7 @@ export const LedgerMode = ({ led, fieldKey, onField }) => {
         Money is million USD. The bold row is the first whose cumulative net cash flow is zero or above, which is the
         row the engine&apos;s payback reads.
         {led.paybackIndex === -1 ? ' On this field there is no such row and nothing is marked.' : ''}
-        {led.paybackIndex === 0 ? ' On this field it is the very first row, and the payback is never revisited when the cumulative dips below zero again.' : ''}
+        {led.paybackIndex === 0 ? ' On this field it is the very first row. The cumulative dips below zero again afterwards, so the engine flags the payback status as recrossed and reports a paybackLast, the point where the cumulative turns non-negative for good.' : ''}
       </p>
       <div className="h-64 mt-3">
         <ResponsiveContainer width="100%" height="100%">
@@ -170,10 +170,12 @@ export const ValueMode = ({ v, paybacks, irrs }) => {
     <>
       <TileGrid>
         <Tile label={`NPV at ${v.discountRate} percent, mid-year`} value={mm(v.npv)} unit="million USD" />
-        <Tile label="IRR" value={four(v.irr)} unit="percent" />
-        <Tile label="Payback" value={four(v.payback)} unit="years" />
+        <Tile label="IRR" value={Number.isFinite(v.irr) ? four(v.irr) : 'not defined'} unit={Number.isFinite(v.irr) ? 'percent' : v.irrStatus} />
+        <Tile label="Payback" value={Number.isFinite(v.payback) ? four(v.payback) : 'not recovered'} unit={Number.isFinite(v.payback) ? `years, ${v.paybackStatus}` : v.paybackStatus} />
+        <Tile label="Payback for good (paybackLast)" value={Number.isFinite(v.paybackLast) ? four(v.paybackLast) : 'never'} unit={Number.isFinite(v.paybackLast) ? 'years' : ''} />
         <Tile label="Peak exposure" value={mm(v.maxExposure)} unit="million USD" />
       </TileGrid>
+      <p className="text-xs text-slate-500 mt-2 mb-0">{v.statusWords}</p>
       <Tbl
         head={['year', 'net cash flow', 'mid-year factor (derived)', 'discounted net cash flow (derived)']}
         rows={v.factorRows.map((x) => [x.year, mm(x.ncf), ratio(x.factorDerived), mm(x.discountedNcfDerived)])}
@@ -189,20 +191,25 @@ export const ValueMode = ({ v, paybacks, irrs }) => {
       )}
       {paybacks && (
         <Tbl
-          head={['published payback case', 'engine payback, years', 'peak exposure']}
-          rows={paybacks.map((x) => [x.id, four(x.payback), mm(x.maxExposure)])}
+          head={['published payback case', 'engine payback, years', 'payback status', 'paybackLast, years', 'peak exposure']}
+          rows={paybacks.map((x) => [x.id, Number.isFinite(x.payback) ? four(x.payback) : 'null', x.paybackStatus, Number.isFinite(x.paybackLast) ? four(x.paybackLast) : 'null', mm(x.maxExposure)])}
         />
       )}
       {irrs && (
         <Tbl
-          head={['published IRR case', 'engine IRR, percent', 'every root the oracle found', 'oracle disagreement']}
-          rows={irrs.map((x) => [x.id, four(x.engineIrr), x.goldenRoots.length ? x.goldenRoots.map((z) => four(z)).join(', ') : 'none', x.recordedEngine ? x.recordedEngine.disagreement : ''])}
+          head={['published IRR case', 'engine IRR, percent', 'IRR status', 'roots the engine lists', 'every root the oracle found']}
+          rows={irrs.map((x) => [x.id, Number.isFinite(x.engineIrr) ? four(x.engineIrr) : 'null', x.engineIrrStatus,
+            x.engineIrrRoots && x.engineIrrRoots.length ? x.engineIrrRoots.map((z) => four(z)).join(', ') : 'none',
+            x.goldenRoots.length ? x.goldenRoots.map((z) => four(z)).join(', ') : 'none'])}
         />
       )}
       <Note>
-        IRR is Newton from 10 percent on the same mid-year exponent, clamped at 1000 percent and reported as 0 when
-        the cash flow never changes sign. A clamp is reported as if it were a root: read the roots column before
-        trusting a round number.
+        IRR is Newton from 10 percent on the same mid-year exponent, inside a band that runs from -99 to 1000
+        percent. A number is reported only when the search lands strictly inside that band and the net present value
+        there is zero to within a tolerance scaled by the size of the cash flow. Otherwise the IRR is null and the
+        status says what happened: no-sign-change, no-root, above-clamp, or multiple-roots with every root listed.
+        Before the repairs of 2026-09-15 the engine reported the 1000 percent clamp, or a plain 0, as though either
+        were a root.
       </Note>
     </>
   );
@@ -235,14 +242,18 @@ export const RangeMode = ({ sens, scen }) => {
       </div>
       <p className="text-xs text-slate-500 mt-1 mb-0">The chart plots the NPV the engine returned at each end, with the base NPV it returned beside them as the dashed line.</p>
       <Tbl
-        head={['scenario', 'NPV', 'IRR, percent', 'payback, years', 'peak exposure', 'total revenue', 'total tax']}
-        rows={scen.map((x) => [x.name, mm(x.metrics.npv), four(x.metrics.irr), four(x.metrics.payback), mm(x.metrics.maxExposure), mm(x.metrics.totalRevenue), mm(x.metrics.totalTax)])}
+        head={['scenario', 'NPV', 'IRR, percent', 'IRR status', 'payback, years', 'payback status', 'peak exposure', 'total revenue', 'total opex', 'total tax']}
+        rows={scen.map((x) => [x.name, mm(x.metrics.npv),
+          Number.isFinite(x.metrics.irr) ? four(x.metrics.irr) : 'null', x.metrics.irrStatus,
+          Number.isFinite(x.metrics.payback) ? four(x.metrics.payback) : 'null', x.metrics.paybackStatus,
+          mm(x.metrics.maxExposure), mm(x.metrics.totalRevenue), mm(x.metrics.totalOpex), mm(x.metrics.totalTax)])}
       />
       <Note>
         {SCENARIO_RULE}. A scenario moves several inputs together by a fixed step and says nothing about how likely
-        it is. Price and production scale revenue identically, so their bars are the same bar; OPEX scales the fixed
-        part only. The High case clears its capex in year 1, so its payback and IRR read 0 for a project that never
-        goes negative.
+        it is. Production carries its variable operating cost with it, in the scenarios and in the sensitivity sweep
+        alike, so the production bar is no longer the price bar; OPEX scales the fixed part only. A case whose
+        cumulative never goes negative reports a payback of 0 with the status no-investment and no IRR at all, with
+        the status no-sign-change, because nothing was ever at risk.
       </Note>
     </>
   );

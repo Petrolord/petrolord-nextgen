@@ -25,7 +25,7 @@ OKPOMA shows the same in a sharper form. Its royalty rate is 10 percent, and in 
 
 ## Royalty follows revenue exactly
 
-Because it is a fixed fraction of the first line, royalty scales one for one with revenue. The Low scenario, with price and production times 0.8, reads totalRevenue 553.0688 and totalRoyalty 82.9603. The High scenario reads 1244.4047 and 186.6607. Tax does not behave that way, because tax depends on costs as well, and the Low scenario's totalTax of 62.9637 is less than half the Base 136.0307.
+Because it is a fixed fraction of the first line, royalty scales one for one with revenue. The Low scenario, with price and production times 0.8, reads totalRevenue 553.0688 and totalRoyalty 82.9603. The High scenario reads 1244.4047 and 186.6607. Tax does not behave that way, because tax depends on costs as well, and the Low scenario's totalTax of 71.4503 is barely over half the Base 136.0307.
 
 ## The mistake
 

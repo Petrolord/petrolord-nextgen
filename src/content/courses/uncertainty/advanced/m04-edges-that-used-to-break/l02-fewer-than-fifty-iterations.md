@@ -1,35 +1,33 @@
 # Fewer than fifty iterations
 
-The Scenario Builder thins its S-curve before drawing it, keeping one sorted value in every so many. The engine as published kept nothing when a run had fewer than fifty iterations (finding S5); as repaired in EC3-0 a short run keeps every point.
+A run of forty iterations draws the same S-curve a run of a thousand draws: 51 points read from whatever sample exists. The engine as published returned nothing at all below fifty iterations (finding S5).
 
 {{panel:ec-risk-explorer}}
 
-## The downsample rule
+## What a short run draws
 
-The S-curve keeps sorted index i when i divided by a step leaves no remainder, and the step is the iteration count divided by 50, rounded down. ISIALA's Scenario Builder run has 1000 iterations, so the step is 20:
+The curve reads the sorted sample at 51 probabilities, 0.0000, 2.0000 and so on to 100.0000 percent, whatever the iteration count. Forty iterations on ISIALA give 51 points, and the last of them is 183.6938 million USD, the highest of those forty. The first and last points always sit on the lowest and the highest value of the run, so the ends of the curve are the ends of the sample.
 
-| iterations | S-curve points | kept | first probability | last probability |
-| --- | --- | --- | --- | --- |
-| 1000 | 50 | one every 20 sorted values | 0.0000 | 98.0000 |
+## Why it used to return nothing
 
-At 40 iterations the step rounds down to zero. The published rule then asked for the remainder of a division by zero, which in JavaScript is not a number, the test failed at every index, and the curve came back as an empty array. There was no error and no warning, only a blank chart. The repair floors the step at 1, and forty iterations on ISIALA now give 40 S-curve points.
+History, before the 2026-09-15 repair: the chart kept sorted index i when i divided by a step left no remainder, and the step was the iteration count divided by 50, rounded down. At forty iterations the step rounded down to zero. The rule then asked for the remainder of a division by zero, which in JavaScript is not a number, the test failed at every index, and the curve came back as an empty array. There was no error and no warning, only a blank chart.
 
 ## A silent failure is worse than a throw
 
-Finding S4 threw, so a user knew something had broken. S5 returned the three NPV cases, the emv and the histogram beside an S-curve with nothing in it, and the chart looked like a rendering fault.
+Finding S4 threw, so a user knew something had broken. S5 returned the three NPV cases, the emv and the histogram beside an S-curve with nothing in it, and the chart looked like a rendering fault. A curve that always draws carries the opposite hazard: a run of forty and a run of a thousand now look alike on the screen.
 
-## The top of the curve is not the top of the sample
+## The point count is not the sample size
 
-At 1000 iterations the first point sits at probability 0.0000 and the last at 98.0000, because the kept indices climb in steps of 20 and stop short of the end. ISIALA's highest NPV, 149.3540 million USD, is in the sample and in the histogram, and it is not on the S-curve. Read the extremes from the lowest and highest values, 16.3054 and 149.3540, never off the ends of the plotted curve.
+The 51 points describe forty NPVs as readily as a thousand, and nothing in the output says which. The breakeven engine at the default seed shows how far a short run sits from a long one: its 90th percentile of breakeven price is 86.3529 on 100 iterations and 85.4380 on 20000. Record the iteration count beside every curve, because the picture will not tell anyone.
 
 ## What the repair refuses
 
-The repair makes a short run drawable. It does not make one trustworthy. Forty NPVs give a curve of forty steps, and nothing in the output says the run was short. The breakeven engine at the default seed shows how far a short run can sit from a long one: its 90th percentile of breakeven price is 86.3529 on 100 iterations and 85.4380 on 20000.
+The repair makes a short run drawable. It does not make one trustworthy, it adds no warning, and it reports the iteration count nowhere on the chart. Forty draws of three factors are forty draws however smooth the curve looks.
 
 ## The mistake
 
-The careful mistake is choosing a small iteration count for a quick look and then reading the curve as the distribution. The second is reading the last plotted point as the maximum outcome. At 1000 iterations the curve ends at 98.0000, and the top of the sample is left off.
+The careful mistake is choosing a small iteration count for a quick look and then reading the curve as the distribution. A second mistake belongs to the old curve and is worth knowing when an old chart turns up: its last plotted point sat at probability 98.0000 with the top of the sample left off, so its right end was not the maximum. On the repaired curve it is.
 
 ## Exercise
 
-State the S-curve step and point count for ISIALA's 1000 iteration run, and the probability of its first and last point. Then say what the published engine returned for the S-curve at 40 iterations, why it did, and how many points the repaired engine returns.
+State how many S-curve points ISIALA's forty iteration run returns and what its last value equals. Then say what the published engine returned for that same run, why it did, and which finding records it.
