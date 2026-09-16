@@ -1,13 +1,29 @@
 # FC4 Gas Processing. Wave working files.
 
-The in-repo mirror of `/root/fc-wip-gasprocessing`, which is where these run.
-The scripts carry absolute paths into that directory, as the FC2 wave's do.
+The in-repo mirror of `/root/fc-wip-gasprocessing`. This directory is the
+DEFAULT the suites read: `tools/course-waves/waveInputs.mjs` resolves it, and
+`NEXTGEN_WAVE_DIR_GASPROCESSING` points them at the live wave directory when a
+wave author wants the files the generators actually write to. The seed ladder
+here resolves its own repository from this file's location, so a fresh clone
+needs no environment at all.
 
 ## State
 
-**FOUNDATION COMPLETE AND RE-VENDORED AT THE REPAIR. ALL 78 LESSONS ARE
-WRITABLE.** No lesson, bank, capstone answer file, panel or migration exists
-yet.
+**COMPLETE.** 78 lessons over three tiers, 396 questions in 21 banks, three
+explorer panels, the teaching lab, three capstones with eighteen graded fields,
+and the five-migration seed ladder at prefix `20260924`. The go-live is HELD
+behind a production upload carrying `/dashboard/apps/gasprocessing`.
+
+The digest is 780 lines, `md5 aa48d60b`, and rebuilds byte for byte from
+`fc4_dump.mjs` under any timezone. It is pinned by sha256 in
+`tools/course-waves/waves.json`, so a re-cut has to re-pin in the same commit.
+
+**Section 20 no longer quotes a count across the whole vendored tree.** It did,
+and the figure moved when FC2 and FC3 vendored three engines of their own: 59
+over 226 modules became 81 over 229 and the committed digest stopped
+reproducing, with nothing in gas processing having changed. The two counts it
+keeps are taken over `gasProcessing.js` alone, which is the thing this course
+teaches and the thing a reader can check.
 
 The recon found 49 findings. FC4-0 repaired them (engines `82ec6d4`) and this
 wave is re-vendored against it. **Digest Section 14 was WITHHELD and printed
