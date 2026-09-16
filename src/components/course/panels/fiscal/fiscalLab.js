@@ -853,11 +853,20 @@ export const irrCases = () => golden.irr.map((c) => ({
   note: c.note,
   cashFlows: c.cashFlows,
   engineIrrPct: calculateIRR(c.cashFlows),
-  goldenExpectedPct: c.expected,
+  goldenExpectedPct: (c.expected && typeof c.expected === 'object') ? (c.expected.irr ?? null) : (c.expected ?? null),
+  goldenIrrStatus: (c.expected && typeof c.expected === 'object') ? (c.expected.irrStatus ?? null) : null,
+  goldenIrrRootsPct: (c.expected && typeof c.expected === 'object') ? (c.expected.irrRoots ?? null) : null,
+  goldenIrrRootAboveBand: (c.expected && typeof c.expected === 'object') ? (c.expected.irrRootAboveBand ?? false) : false,
   trueIrrPct: c.trueIrr ?? null,
   npvAt10: c.npvAt10,
   disagreement: c.engine?.disagreement ?? null,
-  agrees: Math.abs(calculateIRR(c.cashFlows) - c.expected) < 1e-6,
+  // Both may be null under the repaired contract, and null is an agreement.
+  agrees: (() => {
+    const got = calculateIRR(c.cashFlows);
+    const want = (c.expected && typeof c.expected === 'object') ? (c.expected.irr ?? null) : (c.expected ?? null);
+    if (got === null || want === null) return got === want;
+    return Math.abs(got - want) < 1e-6;
+  })(),
 }));
 
 export const IRR_BRACKET_RATES = [0, 100, 1600, 25600, 102400, 199900, 400000];
@@ -1373,9 +1382,15 @@ export const paybackTieEvidence = async () => {
       caseId,
       namesInTheSentence: named,
       secondNamed: named[1] ?? null,
+      // EC2-10. The sentence lists EVERY regime tied at the fastest year and
+      // then one more, so the name that is the slowest of the rest is the
+      // LAST one, not the second. secondNamed is kept for the history the
+      // lessons quote and is only the slowest of the rest when nothing tied.
+      lastNamed: named.length ? named[named.length - 1] : null,
       slowestOfTheRest,
       runnerUp,
       secondNamedIsTheSlowestOfTheRest: named.length > 1 && named[1] === slowestOfTheRest,
+      lastNamedIsTheSlowestOfTheRest: named.length > 1 && named[named.length - 1] === slowestOfTheRest,
       rows: res.summary.map((s, i) => ({ position: i + 1, id: s.id, name: s.name, npv: s.npv, paybackPeriod: s.paybackPeriod })),
       paybackYears: years,
       distinctPaybackYears: [...new Set(years)],
