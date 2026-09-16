@@ -1,6 +1,6 @@
 # The laminar branch
 
-Below a Reynolds number of 2100 the engine uses the laminar law, where the friction factor is a fixed numerator divided by the Reynolds number. At 1500.0000 that gives 0.042666666667.
+Below a Reynolds number of 2100 the engine uses the laminar law, where the friction factor is 64.000000 divided by the Reynolds number. At 1500.0000 that gives 0.042666666667.
 
 {{panel:fc-liquid-explorer}}
 
@@ -8,7 +8,7 @@ Below a Reynolds number of 2100 the engine uses the laminar law, where the frict
 
 The laminar expression contains the Reynolds number and nothing else. No roughness appears in it, so on this branch the wall makes no difference to the friction factor at all: a coated pipe and a used steel pipe of the same bore give the same answer.
 
-That is a real physical statement rather than a simplification. In laminar flow the fluid moves in layers and the wall roughness sits inside a layer that is not being stirred, so the bumps have nothing to disturb.
+The numerator is an engine return as well, read back as the friction factor times its own Reynolds number below the branch. That is a real physical statement rather than a simplification. In laminar flow the fluid moves in layers and the wall roughness sits inside a layer that is not being stirred, so the bumps have nothing to disturb.
 
 ## The friction factor grows as the flow slows
 

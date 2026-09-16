@@ -19,11 +19,11 @@ That is why the limit can be quoted before a bore has been chosen. It is a ceili
 | 45.000000 | 14.907120 | 18.633900 | 26.087460 |
 | 62.400000 | 12.659242 | 15.824053 | 22.153674 |
 
-A light gas is allowed to run several times faster than a dense liquid, which is why the limit bites hardest on wet gas and hardly at all on crude. Read down any column and the allowance falls as the fluid gets heavier.
+A light gas is allowed to run faster than a dense liquid by the square root of the density ratio. At the continuous-service c factor the 5.000000 lb/ft3 row stands at 44.721360 ft/s against 12.659242 ft/s at 62.400000 lb/ft3, a ratio of 3.532704. Read down any column and the allowance falls as the fluid gets heavier.
 
 ## The square root is what softens it
 
-Because the density sits under a root, the allowance moves more slowly than the density does. Going from the lightest row of the table to the heaviest is a large change in the fluid and a much smaller change in the ceiling, which is the shape the root imposes.
+Because the density sits under a root, the allowance moves more slowly than the density does. That ratio of 3.532704 between the lightest row and the heaviest is the square root of their density ratio, and holding the change down to a root is the whole of what the square root does here.
 
 ## What the limit is protecting
 

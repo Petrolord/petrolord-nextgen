@@ -12,7 +12,7 @@ So the pipe reaches the friction factor as a proportion rather than as a length.
 
 ## It is solved rather than evaluated
 
-The friction factor appears on both sides of the turbulent expression, so it cannot be rearranged into an answer. The engine iterates until the value stops moving and returns the settled figure, which is why this is the one step in the tier that does not simply substitute.
+The friction factor appears on both sides of the turbulent expression, so it cannot be rearranged into an answer. The engine iterates until the value stops moving and returns the settled figure, which is why this is the one step in the tier that does not simply substitute. Its two coefficients are measured by isolating each one: 2.510000 on a smooth pipe, where the roughness term is exactly zero, and 3.700000 in the fully rough limit, where the Reynolds term falls away.
 
 The published cases show it converging to the oracle's answer digit for digit, at 0.037504518014, 0.021926421295, 0.019943465840 and 0.010859745054 across four widely separated conditions. From 5000.0000 to 10000000.0000 in the Reynolds number, and no disagreement in the printed digits.
 
