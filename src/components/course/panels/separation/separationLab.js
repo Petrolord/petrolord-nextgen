@@ -480,11 +480,12 @@ export const kValueTable = () => ({
     const k = S.kValue({ internalsId: id, pPsig });
     return {
       internalsId: id, pPsig, kBase: k.kBase, kDerated: k.kDerated, k: k.k, derated: k.derated, floored: k.floored,
+      nearFloor: k.nearFloor,
     };
   }),
   flooredWarning: S.kValue({ internalsId: 'verticalNone', pPsig: 3000 }).warning,
   override: S.kValue({ kOverride: K_OVERRIDE_PROBE }),
-  // How close a derated K sits to the floor without the return saying so. The
+  // How close a derated K sits to the floor, and the flag that says so. The
   // case is a published one, so the name is the golden's own.
   nearFloor: (() => {
     const c = G.kValue.find((x) => x.input.internalsId === 'verticalNone' && x.input.pPsig === 650);
@@ -494,6 +495,7 @@ export const kValueTable = () => ({
       k: near.k,
       derated: near.derated,
       floored: near.floored,
+      nearFloor: near.nearFloor,
       floor: S.K_FLOOR,
       gapAboveFloorDerived: near.k - S.K_FLOOR,
     };
@@ -501,7 +503,7 @@ export const kValueTable = () => ({
   published: G.kValue.map((c) => {
     const k = S.kValue(c.input);
     return {
-      name: c.name, k: k.k, kDerated: k.kDerated, derated: k.derated, floored: k.floored,
+      name: c.name, k: k.k, kDerated: k.kDerated, derated: k.derated, floored: k.floored, nearFloor: k.nearFloor,
     };
   }),
   held: HELD_ITEMS[0],

@@ -6,13 +6,13 @@ The K value falls by 0.01 for every 100 psi above 100 psig and stops at a floor 
 
 ## What the rule does
 
-| mist extractor | psig | base K | derated K | K used | derated | floored |
-| --- | --- | --- | --- | --- | --- | --- |
-| verticalMesh | 100.000000 | 0.350000 | 0.350000 | 0.350000 | false | false |
-| verticalMesh | 600.000000 | 0.350000 | 0.300000 | 0.300000 | true | false |
-| horizontalVane | 350.000000 | 0.550000 | 0.525000 | 0.525000 | true | false |
-| horizontalNone | 1500.000000 | 0.250000 | 0.110000 | 0.120000 | true | true |
-| verticalNone | 3000.000000 | 0.180000 | -0.110000 | 0.120000 | true | true |
+| mist extractor | psig | base K | derated K | K used | derated | floored | nearFloor |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| verticalMesh | 100.000000 | 0.350000 | 0.350000 | 0.350000 | false | false | false |
+| verticalMesh | 600.000000 | 0.350000 | 0.300000 | 0.300000 | true | false | false |
+| horizontalVane | 350.000000 | 0.550000 | 0.525000 | 0.525000 | true | false | false |
+| horizontalNone | 1500.000000 | 0.250000 | 0.110000 | 0.120000 | true | true | false |
+| verticalNone | 3000.000000 | 0.180000 | -0.110000 | 0.120000 | true | true | false |
 
 A vertical mesh pad at 600.000000 psig falls from 0.350000 to 0.300000, and every dimension downstream of K moves with it: the settling velocity, the diameter the gas demands, the gas margin and the feasibility of every row in a sweep.
 
@@ -22,7 +22,7 @@ At 3000.000000 psig the derating gives -0.110000, a negative settling coefficien
 
 A linear rule extrapolated far enough produces a negative number, the clearest possible signal that it is being used outside the range anybody intended. The floor is a guard rail rather than a physical limit, and 0.120000 has no derivation behind it in this module.
 
-Nothing marks the approach to that cliff. The published case verticalNoneAt650psig returns K 0.125000 with `derated` true and `floored` false, which reads like any robust derated value. Against the floor of 0.120000 it sits 0.005000 clear, and at 0.01 per 100 psi that is 50 psi of pressure away from being floored.
+A flag marks the approach to that cliff. verticalNoneAt650psig returns K 0.125000 with `derated` true, `floored` false and `nearFloor` true: it sits 0.005000 above the floor of 0.120000, which at 0.01 per 100 psi is 50 psi from being floored. `nearFloor` is true when one more 100 psi step would floor the value.
 
 ## Why it is held
 
@@ -32,7 +32,7 @@ Where the derating bites, a vendor K is the only honest input, and the engine sa
 
 ## Nothing reconciles a vendor number
 
-An override wins outright and says so, returning `source` as typed with `derated` and `floored` both false. It is never compared against the table value at that pressure and no warning is raised when the two are far apart, so a vendor K of 0.9 would be taken silently.
+An override wins outright and says so, returning `source` as typed with `derated`, `floored` and `nearFloor` all false. It is never compared against the table value at that pressure and no warning is raised when the two are far apart, so a vendor K of 0.9 would be taken silently.
 
 ## The mistake
 

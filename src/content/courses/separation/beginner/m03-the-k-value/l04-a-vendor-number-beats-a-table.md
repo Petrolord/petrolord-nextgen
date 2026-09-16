@@ -1,12 +1,12 @@
 # A vendor number beats a table
 
-Give the engine a K and it uses it, with no derating and no floor, and it labels the result so a reader knows where the number came from: {"k":0.28,"derated":false,"floored":false,"source":"typed","warning":null}.
+Give the engine a K and it uses it, with no derating and no floor, and it labels the result so a reader knows where the number came from: {"k":0.28,"derated":false,"floored":false,"nearFloor":false,"source":"typed","warning":null}.
 
 {{panel:fc-separator-explorer}}
 
 ## The override wins outright
 
-An override is not blended with the table and it is not derated afterwards. It replaces the whole lookup. The four fields returned beside it say exactly that: the value stands, nothing was derated, nothing was floored, and the source is typed rather than the published table.
+An override is not blended with the table and it is not derated afterwards. It replaces the whole lookup. The five fields returned beside the value say exactly that: nothing was derated, nothing was floored, nothing sits near the floor, the source is typed rather than the published table, and no warning is raised.
 
 The source field is the part worth keeping. A K of 0.280000 could have come from a table row, a derating, a floor or a supplier, and the vessel built on it looks the same in all four cases.
 
@@ -34,4 +34,4 @@ Typing a supplier's number for one arrangement against another's service. A vane
 
 ## Exercise
 
-Write the four fields an override returns and say what each tells a reviewer. Then give the message for an override of zero, say how it differs from leaving the override out, and name the check the engine does not perform on a typed K.
+Write the six fields an override returns and say what each tells a reviewer. Then give the message for an override of zero, say how it differs from leaving the override out, and name the check the engine does not perform on a typed K.

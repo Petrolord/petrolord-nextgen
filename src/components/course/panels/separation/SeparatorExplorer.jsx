@@ -143,8 +143,8 @@ export const KValueMode = ({ k }) => {
         higher K than a vertical one at the same mist extractor, and a vessel with no mist extractor carries the lowest.
       </p>
       <Tbl
-        head={['mist extractor', 'psig', 'base K', 'K the rule gives', 'K used', 'derated', 'floored']}
-        rows={k.atPressure.map((r) => [r.internalsId, six(r.pPsig), six(r.kBase), six(r.kDerated), six(r.k), String(r.derated), String(r.floored)])}
+        head={['mist extractor', 'psig', 'base K', 'K the rule gives', 'K used', 'derated', 'floored', 'nearFloor']}
+        rows={k.atPressure.map((r) => [r.internalsId, six(r.pPsig), six(r.kBase), six(r.kDerated), six(r.k), String(r.derated), String(r.floored), String(r.nearFloor)])}
       />
       <div className="h-48 mt-3">
         <ResponsiveContainer width="100%" height="100%">
@@ -173,15 +173,16 @@ export const KValueMode = ({ k }) => {
         produced: {k.flooredWarning}
       </p>
       <Tbl
-        head={['published kValue case', 'K used ft/s', 'K the rule gives', 'derated', 'floored']}
-        rows={k.published.map((c) => [c.name, six(c.k), six(c.kDerated), String(c.derated), String(c.floored)])}
+        head={['published kValue case', 'K used ft/s', 'K the rule gives', 'derated', 'floored', 'nearFloor']}
+        rows={k.published.map((c) => [c.name, six(c.k), six(c.kDerated), String(c.derated), String(c.floored), String(c.nearFloor)])}
       />
       <p className="text-xs text-slate-400 mt-2 mb-0">
-        A derated K can sit close to the floor without the return saying so. {k.nearFloor.name} comes back at
-        {' '}{six(k.nearFloor.k)} ft/s with floored {String(k.nearFloor.floored)}, which is only
-        {' '}{six(k.nearFloor.gapAboveFloorDerived)} ft/s above the floor of {six(k.nearFloor.floor)} ft/s. Another 50 psig
-        of operating pressure puts that vessel on the floor, and nothing in the return flags a value sitting on the edge
-        of the range where the rule of thumb stops meaning anything.
+        A derated K can sit close to the floor and still read like a robust one, so the return carries a flag for it.
+        {' '}{k.nearFloor.name} comes back at {six(k.nearFloor.k)} ft/s with floored {String(k.nearFloor.floored)} and
+        {' '}nearFloor {String(k.nearFloor.nearFloor)}, which is only {six(k.nearFloor.gapAboveFloorDerived)} ft/s above
+        {' '}the floor of {six(k.nearFloor.floor)} ft/s. Another 50 psig of operating pressure puts that vessel on the
+        {' '}floor. nearFloor is true when one more 100 psi step of the same rule would floor the value, and it is never
+        {' '}true at the same time as floored.
       </p>
       <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
         <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>

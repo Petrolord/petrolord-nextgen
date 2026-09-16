@@ -6,16 +6,16 @@ The module derates K by 0.01 for every 100 psi above 100 psig and refuses to let
 
 ## What the rule does
 
-| mist extractor | psig | base K | derated K | K used | derated | floored |
-| --- | --- | --- | --- | --- | --- | --- |
-| verticalMesh | 0.000000 | 0.350000 | 0.350000 | 0.350000 | false | false |
-| verticalMesh | 100.000000 | 0.350000 | 0.350000 | 0.350000 | false | false |
-| verticalMesh | 600.000000 | 0.350000 | 0.300000 | 0.300000 | true | false |
-| horizontalMesh | 600.000000 | 0.450000 | 0.400000 | 0.400000 | true | false |
-| horizontalVane | 350.000000 | 0.550000 | 0.525000 | 0.525000 | true | false |
-| verticalNone | 2000.000000 | 0.180000 | -0.010000 | 0.120000 | true | true |
-| horizontalNone | 1500.000000 | 0.250000 | 0.110000 | 0.120000 | true | true |
-| verticalNone | 3000.000000 | 0.180000 | -0.110000 | 0.120000 | true | true |
+| mist extractor | psig | base K | derated K | K used | derated | floored | nearFloor |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| verticalMesh | 0.000000 | 0.350000 | 0.350000 | 0.350000 | false | false | false |
+| verticalMesh | 100.000000 | 0.350000 | 0.350000 | 0.350000 | false | false | false |
+| verticalMesh | 600.000000 | 0.350000 | 0.300000 | 0.300000 | true | false | false |
+| horizontalMesh | 600.000000 | 0.450000 | 0.400000 | 0.400000 | true | false | false |
+| horizontalVane | 350.000000 | 0.550000 | 0.525000 | 0.525000 | true | false | false |
+| verticalNone | 2000.000000 | 0.180000 | -0.010000 | 0.120000 | true | true | false |
+| horizontalNone | 1500.000000 | 0.250000 | 0.110000 | 0.120000 | true | true | false |
+| verticalNone | 3000.000000 | 0.180000 | -0.110000 | 0.120000 | true | true | false |
 
 Nothing happens up to 100.000000 psig. Above it the deduction is linear in pressure and identical for every row, which is the first thing to notice: it takes the same 0.050000 off a vertical mesh pad at 600.000000 psig as it takes off a bare drum at the same pressure, though the bare drum started at half the K.
 
@@ -27,20 +27,20 @@ The floor catches it and says so, in these words: "The 0.12 floor bound: the pub
 
 That warning is the most useful output in this module, because it does not pretend the floor is a result. It says the method has run out and names what would replace it.
 
-## The two flags
+## The three flags
 
-Each K carries derated and floored as separate booleans. Derated true says the pressure rule moved the value. Floored true says the rule produced something the floor had to catch, which means the K in use is a bound rather than a calculation.
+Each K carries derated, floored and nearFloor as separate booleans. Derated true says the pressure rule moved the value. Floored true says the rule produced something the floor had to catch, which means the K in use is a bound rather than a calculation.
 
-| case | K | the rule gives | derated | floored |
-| --- | --- | --- | --- | --- |
-| verticalMeshAt50psig | 0.350000 | 0.350000 | false | false |
-| verticalMeshAt1100psig | 0.250000 | 0.250000 | true | false |
-| horizontalVaneAt2500psig | 0.310000 | 0.310000 | true | false |
-| verticalNoneAt650psig | 0.125000 | 0.125000 | true | false |
-| verticalNoneAt3000psig | 0.120000 | -0.110000 | true | true |
-| horizontalNoneAt1500psig | 0.120000 | 0.110000 | true | true |
+| case | K | the rule gives | derated | floored | nearFloor |
+| --- | --- | --- | --- | --- | --- |
+| verticalMeshAt50psig | 0.350000 | 0.350000 | false | false | false |
+| verticalMeshAt1100psig | 0.250000 | 0.250000 | true | false | false |
+| horizontalVaneAt2500psig | 0.310000 | 0.310000 | true | false | false |
+| verticalNoneAt650psig | 0.125000 | 0.125000 | true | false | true |
+| verticalNoneAt3000psig | 0.120000 | -0.110000 | true | true | false |
+| horizontalNoneAt1500psig | 0.120000 | 0.110000 | true | true | false |
 
-verticalNoneAt650psig is the row worth staring at. Its K of 0.125000 is above the floor and so it is reported as an ordinary derated value, while sitting 0.005000 above the 0.120000 where the method admits it has nothing left. That is half a step of a rule that takes 0.01 off every 100 psi, so 50 psig more of operating pressure puts this vessel on the floor. Nothing in the output marks it as fragile.
+verticalNoneAt650psig is the row worth staring at. Its K of 0.125000 is above the floor, so floored is false, while it sits 0.005000 above the 0.120000 where the method admits it has nothing left. That is half a step of a rule that takes 0.01 off every 100 psi, so 50 psig more of operating pressure puts this vessel on the floor, and nearFloor comes back true to say so.
 
 ## Why it is held
 
