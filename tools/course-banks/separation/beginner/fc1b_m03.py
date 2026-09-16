@@ -50,11 +50,11 @@ q(0, "One K comes back with derated true and floored false, another with both tr
  "Derated true says the pressure rule moved the value. Floored true says the floor caught what that rule produced. horizontalNoneAt1500psig reports K 0.120000 where the rule gives 0.110000."),
 
 q(1, "verticalNoneAt650psig returns K 0.125000 with derated true and floored false. Why does it deserve the same suspicion as a floored row?",
- "It sits 0.005000 above the 0.120000 floor, so 50 psig more of operating pressure puts that vessel on the floor, and the return carries no flag for it.",
+ "It sits 0.005000 above the 0.120000 floor, so 50 psig more of operating pressure puts that vessel on the floor, which is what nearFloor true reports.",
  ["It is a bare drum, and 0.180000 is the lowest base row in the table, so any derating at all on that row produces a figure the floor is on the point of catching.",
   "Its derated flag is true and its floored flag is false, and that pairing cannot occur on a bare drum at all.",
   "It returns the figure the table would give a bare vertical drum before any deduction, so the flag changed nothing."],
- "0.005000 above the floor is half a step of a rule that deducts 0.01 per 100 psi. The return has a flag for the cliff and none for the approach to the cliff."),
+ "0.005000 above the floor is half a step of a rule that deducts 0.01 per 100 psi. floored marks the cliff and nearFloor marks the approach to it, and the two are never true together."),
 
 q(3, "A horizontal bare drum at 1500.000000 psig and a vertical bare drum at 3000.000000 psig are both sized on K 0.120000. What is wrong with treating the two as equivalent?",
  "The floor made them identical on paper, and the rule behind them gave 0.110000 on one and -0.110000 on the other.",
@@ -63,11 +63,11 @@ q(3, "A horizontal bare drum at 1500.000000 psig and a vertical bare drum at 300
   "They agree on K and differ on everything else, so the comparison holds as far as the mist extractor goes and the two vessels separate again at the settling velocity, where the fluids differ."],
  "A floored K is a bound rather than a result. Two very different vessels came back at the same figure because the floor absorbed the difference between them."),
 
-q(1, "An override returns {\"k\":0.28,\"derated\":false,\"floored\":false,\"source\":\"typed\",\"warning\":null}. Which of those fields does a reviewer need most?",
+q(1, "An override returns {\"k\":0.28,\"derated\":false,\"floored\":false,\"nearFloor\":false,\"source\":\"typed\",\"warning\":null}. Which of those fields does a reviewer need most?",
  "source, because a K of 0.280000 could have come from a table row, a derating, a floor or a supplier, and the vessel looks the same in all four cases.",
  ["warning, because a null there says the typed figure was compared against the table value and found reasonable.",
   "derated, because false there is what separates a vendor figure from a table figure, and it is the flag the sizing steps downstream read when they decide whether to trust a K.",
-  "k, because the value sizes the vessel while the other three describe a provenance nothing downstream reads."],
+  "k, because the value sizes the vessel while the others describe a provenance nothing downstream reads."],
  "The override replaces the whole lookup, so nothing was derated and nothing floored. What the other fields cannot say is where 0.280000 came from, and source says typed."),
 
 q(2, "An override of zero is refused while leaving the override out entirely is fine. What difference does the message name?",

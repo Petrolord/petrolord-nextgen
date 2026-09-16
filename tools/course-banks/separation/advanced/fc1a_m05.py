@@ -12,12 +12,12 @@ q(2, "The K derating and its floor are held for the literature. What may a desig
   "It may quote the rule where a vessel is vertical, and it may not where a vessel is horizontal, because only the vertical rows of the table carry a checked derating."],
  "What is unchecked is the published form: whether the slope is 0.01 per 100 psi, whether it starts at 100 psig, and whether any source puts a floor there at all. A conclusion built on a derated K carries the uncertainty of the rule.")
 
-q(0, "verticalNoneAt650psig returns K 0.125000 with derated true and floored false, against the floor of 0.120000. What does that return fail to tell the reader?",
- "That the answer is sitting on the edge of the range, since at 0.01 per 100 psi it is only 50 psi of operating pressure away from being floored, and nothing beside floored flags the approach to that cliff.",
- ["That the K was derated at all, since derated true is set on any row the table produced and says nothing about the pressure it was produced at.",
-  "That the floor of 0.120000 applies to this mist extractor, because the floor is a property of the internals rather than of the derating rule.",
-  "That the value came from the table rather than from an override, which is what the source field would have carried had it been printed."],
- "floored is a cliff and there is no flag beside it for the approach to the cliff. At 3000.000000 psig the rule gives -0.110000 and the floor holds K at 0.120000, which is the same rule far past the point where it means anything.")
+q(0, "verticalNoneAt650psig returns K 0.125000 with derated true, floored false and nearFloor true, against the floor of 0.120000. What is nearFloor reporting?",
+ "That the floor did not catch this K, and that one more 100 psi step of the same rule would put it under, so the value sits 0.005000 from the edge of the range where the rule of thumb stops meaning anything.",
+ ["That the engine has replaced the value the rule produced, since a K landing within one step of 0.120000 is reported at the floor rather than at the figure the derating actually gave for that row.",
+  "That a warning has been raised on this row, which is the engine asking for a vendor K wherever the derating comes close enough to the floor that the rule behind it stops meaning anything.",
+  "That the derating rule ran twice on this row, which is how a bare drum starting from 0.180000 falls to within half a step of the floor at an operating pressure as modest as this one."],
+ "nearFloor is true when the floor did not catch the value and one more 100 psi step of the rule would. It is a flag and not a warning: the return on that row still carries a null warning, and floored and nearFloor are never true together.")
 
 q(1, "At 3000.000000 psig the derating gives -0.110000 and the engine returns 0.120000 with floored true. How should that number be read?",
  "As the engine declining to extrapolate, so the K it returned was chosen rather than computed, and a vendor K is the only honest input at that pressure.",

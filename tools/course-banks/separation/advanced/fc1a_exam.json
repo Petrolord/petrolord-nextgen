@@ -269,7 +269,7 @@
    "Nothing beyond the band it was swept in, since the K enters through the settling velocity and the gas margin printed on each row has already carried it into every feasibility flag the family reports.",
    "The oracle ratio of 1.004184, because a K taken from the derating rule sits four parts in a thousand below the SI derivation in the same way the field form of Stokes law does on every published case.",
    "The floored flag, which comes back true on any K this close to 0.120000 and marks the value as chosen rather than computed.",
-   "That the K is a rule of thumb held for the literature: verticalNoneAt650psig sits 0.005000 above the floor of 0.120000 and reads like any robust value, and the gas margin on every row came from it."
+   "That the K is a rule of thumb held for the literature: verticalNoneAt650psig sits 0.005000 above the floor of 0.120000 with nearFloor true, and the gas margin on every row came from it."
   ],
   "answer": 3,
   "explanation": "verticalNoneAt650psig returns K 0.125000 with derated true and floored false, which is 0.005000 above the floor and 50 psi of operating pressure away from being floored. The derating and the floor are held, so the uncertainty of the rule travels with every row the family reports."

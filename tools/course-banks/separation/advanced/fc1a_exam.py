@@ -176,7 +176,7 @@ q(0, "A reviewer asks why the course teaches the K derating at all if it is held
  "A vertical mesh pad falls from 0.350000 to 0.300000 at 600.000000 psig, and the settling velocity, the diameter, the margin and the feasibility of every row move with it.")
 
 q(3, "A vessel is sized behind a mist extractor whose derated K sits a little above the floor, and the family it is swept in returns a preferred diameter. What has to travel with that preference?",
- "That the K is a rule of thumb held for the literature: verticalNoneAt650psig sits 0.005000 above the floor of 0.120000 and reads like any robust value, and the gas margin on every row came from it.",
+ "That the K is a rule of thumb held for the literature: verticalNoneAt650psig sits 0.005000 above the floor of 0.120000 with nearFloor true, and the gas margin on every row came from it.",
  ["Nothing beyond the band it was swept in, since the K enters through the settling velocity and the gas margin printed on each row has already carried it into every feasibility flag the family reports.",
   "The oracle ratio of 1.004184, because a K taken from the derating rule sits four parts in a thousand below the SI derivation in the same way the field form of Stokes law does on every published case.",
   "The floored flag, which comes back true on any K this close to 0.120000 and marks the value as chosen rather than computed."],

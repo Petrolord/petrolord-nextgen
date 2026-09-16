@@ -69,12 +69,12 @@
   "prompt": "verticalNoneAt650psig returns K 0.125000 with derated true and floored false. Why does it deserve the same suspicion as a floored row?",
   "options": [
    "It is a bare drum, and 0.180000 is the lowest base row in the table, so any derating at all on that row produces a figure the floor is on the point of catching.",
-   "It sits 0.005000 above the 0.120000 floor, so 50 psig more of operating pressure puts that vessel on the floor, and the return carries no flag for it.",
+   "It sits 0.005000 above the 0.120000 floor, so 50 psig more of operating pressure puts that vessel on the floor, which is what nearFloor true reports.",
    "Its derated flag is true and its floored flag is false, and that pairing cannot occur on a bare drum at all.",
    "It returns the figure the table would give a bare vertical drum before any deduction, so the flag changed nothing."
   ],
   "answer": 1,
-  "explanation": "0.005000 above the floor is half a step of a rule that deducts 0.01 per 100 psi. The return has a flag for the cliff and none for the approach to the cliff."
+  "explanation": "0.005000 above the floor is half a step of a rule that deducts 0.01 per 100 psi. floored marks the cliff and nearFloor marks the approach to it, and the two are never true together."
  },
  {
   "prompt": "A horizontal bare drum at 1500.000000 psig and a vertical bare drum at 3000.000000 psig are both sized on K 0.120000. What is wrong with treating the two as equivalent?",
@@ -88,12 +88,12 @@
   "explanation": "A floored K is a bound rather than a result. Two very different vessels came back at the same figure because the floor absorbed the difference between them."
  },
  {
-  "prompt": "An override returns {\"k\":0.28,\"derated\":false,\"floored\":false,\"source\":\"typed\",\"warning\":null}. Which of those fields does a reviewer need most?",
+  "prompt": "An override returns {\"k\":0.28,\"derated\":false,\"floored\":false,\"nearFloor\":false,\"source\":\"typed\",\"warning\":null}. Which of those fields does a reviewer need most?",
   "options": [
    "warning, because a null there says the typed figure was compared against the table value and found reasonable.",
    "source, because a K of 0.280000 could have come from a table row, a derating, a floor or a supplier, and the vessel looks the same in all four cases.",
    "derated, because false there is what separates a vendor figure from a table figure, and it is the flag the sizing steps downstream read when they decide whether to trust a K.",
-   "k, because the value sizes the vessel while the other three describe a provenance nothing downstream reads."
+   "k, because the value sizes the vessel while the others describe a provenance nothing downstream reads."
   ],
   "answer": 1,
   "explanation": "The override replaces the whole lookup, so nothing was derated and nothing floored. What the other fields cannot say is where 0.280000 came from, and source says typed."
