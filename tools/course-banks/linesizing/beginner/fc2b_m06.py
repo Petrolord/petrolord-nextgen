@@ -67,7 +67,7 @@ q(3, "Why does a graded erosional question in this course always state its own c
  ["Because the three rows at 100.000000, 125.000000 and 175.000000 are overridable, so a question has to say which of them the engine was called with before the answer can be reproduced at all.",
   "Because the recommended practice gives different c factors for liquid and for gas service, so a question about a crude line has to name which of the two families of figures it intends.",
   "Because the c factor is the only input to the erosional velocity that the engine does not default, so a question that omitted it would receive a refusal rather than a number from the check."],
- "The recommended practice describes its own figures as conservative and the third row is operator practice with no publication behind it. An answer computed at a remembered c factor is a correct calculation of something nobody asked for."),
+ "A learner is never asked to supply one, only to use the one the question carries. An answer worked at a figure of its own is sound arithmetic aimed at a question nobody put, since the three rows give three different ceilings on the same fluid."),
 
 q(1, "A velocity comes back from a hand calculation wildly larger than anything the sweep reports. What is the likely cause?",
  "One of the barrel, the day or the 144 went missing on the way from a rate in bpd to a velocity in ft/s.",
