@@ -1,6 +1,6 @@
 # Three refusals that are real answers
 
-Three of the duty solver's refusals deserve reading as findings in their own right. Each one tells you something true about the station you described, and in two of the three the engine hands back the evidence it judged on.
+Three of the duty solver's refusals deserve reading as findings in their own right. Each one names where the fault actually is, and they do not all point at the same place: the first at the catalogue, the second at the machine against the station, the third at the question. Only one of the three carries figures back, and it is the one that needs to.
 
 {{panel:fc-pump-explorer}}
 
@@ -26,7 +26,7 @@ Nothing is wrong with the pump and nothing is wrong with the station. The search
 
 ## Why the distinction matters
 
-The first two are statements about the machine and the station. The third is a statement about how the question was asked, and a caller that treats all refusals alike will go looking for a bigger pump when the fix was a search limit.
+The first is a statement about the readings the curve was built from. The second is a statement about the machine and the station together. The third is a statement about how the question was asked, and a caller that treats all refusals alike will go looking for a bigger pump when the fix was a search limit.
 
 ## The mistake
 
@@ -34,4 +34,4 @@ Treating a refusal as a failure of the tool. Two of these three are answers a co
 
 ## Exercise
 
-Write the three messages and say for each whether it is about the machine, the station or the question. Then give the two figures the shutoff refusal hands back and the gap between them.
+Write the three messages and say for each whether it is about the catalogue, the machine against the station, or the question. Then say which of the three returns figures alongside its message, give the two figures it hands back and the gap between them.

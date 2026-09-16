@@ -16,7 +16,7 @@ The first is that a machine has no operating point until it is connected to some
 
 The second is that a return is more than an answer. The fit reports its own conditioning, the solve reports the bracket and the residual it finished on, and the region carries a note. Each of those fields exists because somebody asked what could go wrong and made it visible in the return.
 
-The third is that a flag is only worth what its false case is worth. The converged flag has a case that makes it false, and the tier ran it. The droops flag has one, and the tier ran that too. A flag with no reachable false case is decoration.
+The third is that a flag is only worth what its false case is worth. This tier carries two flags that judge a calculation rather than label a result, converged and droops, and it ran the input that clears each of them rather than describing it. A flag with no reachable false case is decoration.
 
 ## What the tier deliberately did not do
 
@@ -28,4 +28,4 @@ Every mistake in this tier has been a version of one mistake: taking a number ou
 
 ## Exercise
 
-Write the OKONO chain end to end, from four catalogue points to the operating region, naming what each step consumes from the step before it. Then name the two flags in the chain that have a reachable false case, and say what input produces it in each.
+Write the OKONO chain end to end, from four catalogue points to the operating region, naming what each step consumes from the step before it. Then name the two judging flags in the chain, converged and droops, and say what input clears each of them.

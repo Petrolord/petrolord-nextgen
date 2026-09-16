@@ -44,15 +44,15 @@
   "explanation": "Applying the product once reaches the same supply figure and produces no shaft figure at all."
  },
  {
-  "prompt": "A motor is selected at 183.041884 hp for the OKONO station. What is wrong with that selection?",
+  "prompt": "The OKONO electrical load list is built on 183.041884 hp. What is wrong with that?",
   "options": [
-   "That is the hydraulic power, so the selection omits the pump losses too.",
-   "That is the brake power, so the motor is being asked to deliver its own rating with nothing left for its own losses.",
-   "That is the motor input in kilowatts read as horsepower.",
-   "Nothing is wrong. Brake power is what a driver is specified against."
+   "Nothing. That is the motor input, which is the figure a load list is built on.",
+   "That is the hydraulic power, so the list omits the losses of both the pump and the motor.",
+   "That is the brake power, which is what the shaft receives. The supply has to carry the motor's own losses on top, a further 15.916686 hp here.",
+   "That is the motor input of 198.958569 hp expressed in kilowatts and read back as horsepower."
   ],
-  "answer": 1,
-  "explanation": "Brake power is what the shaft absorbs and the supply has to cover the motor's own losses on top, a further 15.916686 hp here."
+  "answer": 2,
+  "explanation": "Brake power is the right figure to select the motor against, because a motor is rated on what its shaft delivers. It is the wrong figure for the cable, the starter and the running cost, which all carry the supply figure of 198.958569 hp."
  },
  {
   "prompt": "The OKONO duty head of 417.801018 ft is converted to a discharge pressure and then converted back. What comes back?",
@@ -145,13 +145,13 @@
  {
   "prompt": "The feet-per-psi packaging and the horsepower packaging are each unpicked for the water density they carry. What comes out?",
   "options": [
-   "62.337662337662 lb per ft3 from the first and a slightly different figure from the second, the gap being what the power gate tolerance is built from.",
+   "62.337662337662 lb per ft3 from the first and a figure 0.999553114 of it from the second, which is the gap the power gate tolerance is built from.",
    "Two densities that cannot be compared, because one is formed from a pressure over a height and the other from a rate times a height.",
    "62.337662337662 lb per ft3 from the first alone. The horsepower packaging carries a volumetric conversion rather than a density.",
    "62.337662337662 lb per ft3 from both, a difference of 0 lb per ft3."
   ],
   "answer": 3,
-  "explanation": "144 square inches per square foot over the measured 2.310000000 gives one, and 33000 ft lbf per minute per horsepower over the measured 3960.000000 with 1728 over 231 gives the other."
+  "explanation": "144 square inches per square foot over the measured 2.310000000 gives one, and 33000 ft lbf per minute per horsepower over the measured 3960.000000 with 1728 over 231 gives the other. The 0.999553114 is a different gap entirely: it is the engine against the published power goldens, whose oracle worked through SI watts at a water density of its own."
  },
  {
   "prompt": "What is 1714.285714285714 in this module?",

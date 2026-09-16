@@ -6,17 +6,18 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # FC3 Associate final exam, 42 questions across digest Sections 1 to 5, with
 # Section 17 read again for what "held for literature" means. No key is a
 # region, a percentage of best efficiency flow or a preferred flag, because
-# Section 5 holds its bands for literature. The Section 16 golden figures are
-# not quoted: that section sits inside the Expert span of the digest.
+# Section 5 holds its bands for literature. Sections 16 and 17 are SHARED by
+# the three tier readings, so their figures are in range and are quoted where
+# they carry the argument rather than decorate it.
 
 # --- what these engines size, and what they refuse ---
 
 q(0, "A single units file is read by both pumps.js and compression.js. What does that arrangement buy?",
- "One definition of a horsepower serving the liquid machine and the gas machine, so a kilowatt in a pump return and a kilowatt in a compression return are the same conversion applied twice.",
+ "One definition of a horsepower serving the liquid machine and the gas machine, so the kilowatt a pump return prints and the Btu per horsepower-hour a compression return works in rest on the same foot, pound and standard gravity.",
  ["A single point at which a caller can override the packagings for a project working in other units.",
   "A guarantee that the two modules were written at the same time and carry the same vintage of every constant.",
   "A place for the two modules to keep the compressibility window they both have to work inside."],
- "Two modules that each need a horsepower could have written one each. They read one file instead, which is what makes their two returns comparable."),
+ "Two modules that each need a horsepower could have written one each. They read one file instead. pumps.js takes the kilowatt conversion from it and compression.js takes the two it needs."),
 
 q(2, "A junior engineer reports that a pump sizing call raised no exception, so the inputs must have been accepted. What is the flaw?",
  "Neither module throws, so a refused call comes back as an ordinary object with an error string in it and nothing is raised at all.",
@@ -190,12 +191,12 @@ q(3, "A pump is quoted at 188.100891 psi in produced-water service. What travels
   "The brake power, since the pump efficiency belongs to the machine rather than to the fluid."],
  "A curve in feet is a property of the machine alone, which is why one catalogue serves every service the machine will ever see."),
 
-q(1, "pumps.js names almost nothing internally and exports no constants. What follows for a course that wants to state what is inside it?",
- "Every packaging has to be measured by asking the engine a question it can answer only one way.",
- ["Every packaging has to be quoted from the handbook the module was written against.",
-  "Every packaging has to be taken from the published goldens, which record the constants their oracle used.",
-  "Every packaging has to be read out of the module source, since an inline literal has no other definition."],
- "Choose inputs that make every other term in the expression equal to one, call the export, and read the packaging off the return."),
+q(1, "The engine gate against the published power goldens is written with a tolerance rather than demanding equality. What has to set the size of that tolerance?",
+ "The size of the disagreement the two routes really have, which across the published power and NPSH cases is 0.0005254484459904507 at its largest.",
+ ["The precision this course prints pump work to, six decimals, since a gate cannot see past the figures it is shown.",
+  "Nothing sets it. A golden written by an oracle carrying fifty digits is exact, so the gate demands equality and the tolerance exists only to absorb the print formatting.",
+  "Whatever is loose enough that no published case has ever failed it, since a gate that fails on arithmetic rather than on error is worse than no gate at all."],
+ "The engine's 123.834499 hp meets a golden 123.889863 hp because the golden was written through SI watts at a water density its own oracle states. A tolerance loose enough to swallow a mis-transcribed constant catches nothing, so the useful question about any tolerance is what error it is still small enough to see."),
 
 q(2, "Two of the four figures measured out of pumps.js are field packagings and two are not. Which two are the packagings?",
  "2.310000000 and 3960.000000.",
@@ -213,10 +214,10 @@ q(0, "The motor efficiency argument is left off the power call and three complet
 
 q(3, "Two packagings written into different functions for different purposes are each unpicked for the density they carry. What is the finding?",
  "They agree exactly, both implying 62.337662337662 lb per ft3.",
- ["They differ in the sixth decimal, which is the tolerance the power gate is written to.",
+ ["They differ by a quotient of 0.999553114, which is the disagreement the power gate is written with a tolerance to cover.",
   "Only one of them carries a density.",
   "They differ by the ratio 1714.285714285714."],
- "The alternative would have been two slightly different waters living in one engine, and a pressure and a power that quietly disagreed about the same fluid."),
+ "They agree exactly. The 0.999553114 belongs to a different comparison, the engine against the published power goldens, where 123.834499 hp meets a golden 123.889863 hp. The alternative would have been two slightly different waters living in one engine."),
 
 q(1, "What is held for literature about the water density this tier measures?",
  "What that implied density is away from real water, because the handbook figure it approximates is not in this repository.",
@@ -297,7 +298,7 @@ q(0, "What is the single habit this tier has been teaching, made concrete by the
  ["Measure every packaging before quoting it, since none of them is exported or named.",
   "State every efficiency explicitly.",
   "Solve every crossing before quoting a flow."],
- "The capstone is built so that it pays. A flag with no reachable false case is decoration, and this tier ran the false case of both of its flags."),
+ "The capstone is built so that it pays. A judging flag with no reachable false case is decoration, and this tier ran the false case of both converged and droops."),
 
 q(1, "Two answers from the capstone are held up: the duty flow and the discharge pressure. What is each a property of?",
  "The duty flow of the pump and the station together, and the discharge pressure of the pump, the station and the fluid together.",

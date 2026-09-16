@@ -2,13 +2,13 @@
  {
   "prompt": "A single units file is read by both pumps.js and compression.js. What does that arrangement buy?",
   "options": [
-   "One definition of a horsepower serving the liquid machine and the gas machine, so a kilowatt in a pump return and a kilowatt in a compression return are the same conversion applied twice.",
+   "One definition of a horsepower serving the liquid machine and the gas machine, so the kilowatt a pump return prints and the Btu per horsepower-hour a compression return works in rest on the same foot, pound and standard gravity.",
    "A single point at which a caller can override the packagings for a project working in other units.",
    "A guarantee that the two modules were written at the same time and carry the same vintage of every constant.",
    "A place for the two modules to keep the compressibility window they both have to work inside."
   ],
   "answer": 0,
-  "explanation": "Two modules that each need a horsepower could have written one each. They read one file instead, which is what makes their two returns comparable."
+  "explanation": "Two modules that each need a horsepower could have written one each. They read one file instead. pumps.js takes the kilowatt conversion from it and compression.js takes the two it needs."
  },
  {
   "prompt": "A junior engineer reports that a pump sizing call raised no exception, so the inputs must have been accepted. What is the flaw?",
@@ -275,15 +275,15 @@
   "explanation": "A curve in feet is a property of the machine alone, which is why one catalogue serves every service the machine will ever see."
  },
  {
-  "prompt": "pumps.js names almost nothing internally and exports no constants. What follows for a course that wants to state what is inside it?",
+  "prompt": "The engine gate against the published power goldens is written with a tolerance rather than demanding equality. What has to set the size of that tolerance?",
   "options": [
-   "Every packaging has to be quoted from the handbook the module was written against.",
-   "Every packaging has to be measured by asking the engine a question it can answer only one way.",
-   "Every packaging has to be taken from the published goldens, which record the constants their oracle used.",
-   "Every packaging has to be read out of the module source, since an inline literal has no other definition."
+   "The precision this course prints pump work to, six decimals, since a gate cannot see past the figures it is shown.",
+   "The size of the disagreement the two routes really have, which across the published power and NPSH cases is 0.0005254484459904507 at its largest.",
+   "Nothing sets it. A golden written by an oracle carrying fifty digits is exact, so the gate demands equality and the tolerance exists only to absorb the print formatting.",
+   "Whatever is loose enough that no published case has ever failed it, since a gate that fails on arithmetic rather than on error is worse than no gate at all."
   ],
   "answer": 1,
-  "explanation": "Choose inputs that make every other term in the expression equal to one, call the export, and read the packaging off the return."
+  "explanation": "The engine's 123.834499 hp meets a golden 123.889863 hp because the golden was written through SI watts at a water density its own oracle states. A tolerance loose enough to swallow a mis-transcribed constant catches nothing, so the useful question about any tolerance is what error it is still small enough to see."
  },
  {
   "prompt": "Two of the four figures measured out of pumps.js are field packagings and two are not. Which two are the packagings?",
@@ -310,13 +310,13 @@
  {
   "prompt": "Two packagings written into different functions for different purposes are each unpicked for the density they carry. What is the finding?",
   "options": [
-   "They differ in the sixth decimal, which is the tolerance the power gate is written to.",
+   "They differ by a quotient of 0.999553114, which is the disagreement the power gate is written with a tolerance to cover.",
    "Only one of them carries a density.",
    "They differ by the ratio 1714.285714285714.",
    "They agree exactly, both implying 62.337662337662 lb per ft3."
   ],
   "answer": 3,
-  "explanation": "The alternative would have been two slightly different waters living in one engine, and a pressure and a power that quietly disagreed about the same fluid."
+  "explanation": "They agree exactly. The 0.999553114 belongs to a different comparison, the engine against the published power goldens, where 123.834499 hp meets a golden 123.889863 hp. The alternative would have been two slightly different waters living in one engine."
  },
  {
   "prompt": "What is held for literature about the water density this tier measures?",
@@ -437,7 +437,7 @@
    "Solve every crossing before quoting a flow."
   ],
   "answer": 0,
-  "explanation": "The capstone is built so that it pays. A flag with no reachable false case is decoration, and this tier ran the false case of both of its flags."
+  "explanation": "The capstone is built so that it pays. A judging flag with no reachable false case is decoration, and this tier ran the false case of both converged and droops."
  },
  {
   "prompt": "Two answers from the capstone are held up: the duty flow and the discharge pressure. What is each a property of?",

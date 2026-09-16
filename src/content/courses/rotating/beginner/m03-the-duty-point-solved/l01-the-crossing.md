@@ -28,7 +28,7 @@ Check the agreement at that flow. The pump makes 417.801018 ft and the system de
 
 ## One crossing, and only one
 
-There is exactly one such flow, and the two shapes guarantee it. The pump head falls from its shutoff value as the flow rises, and the system head climbs from its static value as the flow rises, so the gap between them shrinks steadily and changes sign once. A falling curve and a rising curve that start apart can meet only once, which is why the engine can go looking for a single answer rather than for a set of them.
+There is exactly one such flow, and the two shapes are why. The pump head comes away from its shutoff value and falls, and the system head climbs from its static value, so the difference between them starts positive, ends negative and changes sign once across the range. That single sign change is what the engine goes looking for, which is why it can search for one answer rather than for a set of them.
 
 That also explains one of the refusals further into this module. If the station demands more head at zero flow than the pump makes at shutoff, the gap never starts positive and there is nothing to find.
 

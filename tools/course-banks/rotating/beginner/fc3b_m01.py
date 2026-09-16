@@ -7,7 +7,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # Digest Section 1 only, plus the module wiring stated in the digest preamble.
 # Nothing here grades a held item.
 
-q(2, "Which module supplies the two power packagings that both pumps.js and compression.js compute with?",
+q(2, "compression.js takes its two power packagings from one module, and pumps.js takes its kilowatt conversion from the same one. Which module?",
  "lib/units/fieldUnits.js, which both of them read, so one definition of a horsepower serves the liquid machine and the gas machine alike.",
  ["engines/production/gasProperties.js, which already holds the gas constant and the molecular weight of air and is therefore where the shared packagings live.",
   "engines/facilities/separatorSizing.js, which already supplies the compressibility window and is the nearest shared facilities module.",

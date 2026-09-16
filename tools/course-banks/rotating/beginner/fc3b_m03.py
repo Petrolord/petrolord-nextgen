@@ -20,11 +20,11 @@ q(3, "At the solved OKONO duty the pump makes 417.801018 ft and the system deman
  "Both figures come off the engine, the second read back off the return. The duty is the one flow at which both descriptions hold at once."),
 
 q(1, "Why can the engine go looking for a single answer rather than a set of them?",
- "The pump head falls from shutoff as flow rises and the system head climbs from static, so the gap shrinks steadily and changes sign once.",
+ "The pump head falls away from shutoff while the system head climbs from static, so their difference changes sign exactly once.",
  ["A quadratic and a quadratic cross at two flows at most, and the module discards whichever root falls outside the published catalogue range.",
   "The bisection is capped at 200 halvings, so it returns the first crossing it meets and never has the budget to look for a second.",
   "The system curve is linear in flow and a line crosses a parabola once, which is the property the solve is built on."],
- "A falling curve and a rising curve that start apart can meet only once. That shape is also why a system demanding more head at zero flow than the pump makes at shutoff has nothing to find."),
+ "One sign change is all a bisection needs. That shape is also why a system demanding more head at zero flow than the pump makes at shutoff has nothing to find."),
 
 q(2, "What are the four pieces of evidence the OKONO duty return carries about the search that produced it?",
  "The halvings taken, the bracket it stopped on, the head difference at the flow it returned, and a convergence flag.",

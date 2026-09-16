@@ -34,8 +34,8 @@ Every figure above was asked at the solved duty flow and head, so none of them i
 
 ## The mistake
 
-Sizing a motor on brake power. Brake power is what the shaft absorbs, and the supply has to cover the motor's own losses on top. On OKONO that is a further 15.916686 hp, and a motor selected at 183.041884 hp is being asked to deliver its own rating.
+Building the electrical side on brake power. A motor is rated on what its shaft delivers, so 183.041884 hp is the right figure to select the machine against. It is the wrong figure for the cable, the starter, the load list and the running cost, because every one of those carries what the supply delivers rather than what the shaft receives. On OKONO the supply carries a further 15.916686 hp, and a load list built on the shaft figure is short by exactly that.
 
 ## Exercise
 
-Give the three powers at the OKONO duty and say which piece of equipment each one is used to specify. Then give the loss in the pump and the loss in the motor, and say what is lost by collapsing the two efficiencies into one product.
+Give the three powers at the OKONO duty and say which piece of equipment each one is used to specify. Then give the loss in the pump and the loss in the motor, and say which of the three figures the electrical load list is built on and why the shaft figure will not do.

@@ -4,9 +4,10 @@ Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # FC3 Associate m04, Power, Head and Pressure. Digest Section 4 only.
-# The published power goldens of Section 16 are taught here as a concept and
-# their figures are deliberately not quoted: Section 16 sits inside the Expert
-# span of the digest, so an Associate bank quoting them reaches forward.
+# Section 16 is SHARED by the three tier readings, so its published power
+# goldens are in range here and their figures are quoted where they sharpen
+# the distinction between the engine's own agreement and the engine against a
+# golden. Nothing here grades a held item.
 
 q(1, "At the OKONO duty of 1234.452969 gpm and 417.801018 ft on a fluid of gravity 1.040000, through a pump of efficiency 0.740000 and a motor of 0.920000, what are the three powers?",
  "Hydraulic 135.450994 hp, brake 183.041884 hp and motor input 198.958569 hp.",
@@ -36,12 +37,12 @@ q(0, "What is lost by multiplying the pump efficiency and the motor efficiency t
   "The hydraulic figure, which can no longer be recovered."],
  "Applying the product once reaches the same supply figure and produces no shaft figure at all."),
 
-q(1, "A motor is selected at 183.041884 hp for the OKONO station. What is wrong with that selection?",
- "That is the brake power, so the motor is being asked to deliver its own rating with nothing left for its own losses.",
- ["That is the hydraulic power, so the selection omits the pump losses too.",
-  "That is the motor input in kilowatts read as horsepower.",
-  "Nothing is wrong. Brake power is what a driver is specified against."],
- "Brake power is what the shaft absorbs and the supply has to cover the motor's own losses on top, a further 15.916686 hp here."),
+q(2, "The OKONO electrical load list is built on 183.041884 hp. What is wrong with that?",
+ "That is the brake power, which is what the shaft receives. The supply has to carry the motor's own losses on top, a further 15.916686 hp here.",
+ ["Nothing. That is the motor input, which is the figure a load list is built on.",
+  "That is the hydraulic power, so the list omits the losses of both the pump and the motor.",
+  "That is the motor input of 198.958569 hp expressed in kilowatts and read back as horsepower."],
+ "Brake power is the right figure to select the motor against, because a motor is rated on what its shaft delivers. It is the wrong figure for the cable, the starter and the running cost, which all carry the supply figure of 198.958569 hp."),
 
 q(3, "The OKONO duty head of 417.801018 ft is converted to a discharge pressure and then converted back. What comes back?",
  "417.801018 ft, because one packaging is used in both directions.",
@@ -101,10 +102,10 @@ q(1, "Why is a default worth measuring at all?",
 
 q(3, "The feet-per-psi packaging and the horsepower packaging are each unpicked for the water density they carry. What comes out?",
  "62.337662337662 lb per ft3 from both, a difference of 0 lb per ft3.",
- ["62.337662337662 lb per ft3 from the first and a slightly different figure from the second, the gap being what the power gate tolerance is built from.",
+ ["62.337662337662 lb per ft3 from the first and a figure 0.999553114 of it from the second, which is the gap the power gate tolerance is built from.",
   "Two densities that cannot be compared, because one is formed from a pressure over a height and the other from a rate times a height.",
   "62.337662337662 lb per ft3 from the first alone. The horsepower packaging carries a volumetric conversion rather than a density."],
- "144 square inches per square foot over the measured 2.310000000 gives one, and 33000 ft lbf per minute per horsepower over the measured 3960.000000 with 1728 over 231 gives the other."),
+ "144 square inches per square foot over the measured 2.310000000 gives one, and 33000 ft lbf per minute per horsepower over the measured 3960.000000 with 1728 over 231 gives the other. The 0.999553114 is a different gap entirely: it is the engine against the published power goldens, whose oracle worked through SI watts at a water density of its own."),
 
 q(2, "What is 1714.285714285714 in this module?",
  "The quotient of the two measured packagings, which is what ties them together and is measurable directly out of the pair.",

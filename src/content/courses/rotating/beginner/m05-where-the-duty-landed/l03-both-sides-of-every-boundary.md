@@ -30,7 +30,7 @@ Every boundary is crossed exactly where the band definition says it should be, a
 
 ## Why walking the edges is the test that counts
 
-A band table that is asked only at 30, 60, 85 and 130 percent will look correct however its comparisons are written. A comparison written with the wrong kind of inequality misclassifies one value, the boundary value itself, and behaves perfectly at every other flow. That is a defect which hides everywhere except at the edge.
+A band table that is asked only at 30.000000, 60.000000, 85.000000 and 130.000000 percent will look correct however its comparisons are written. A comparison written with the wrong kind of inequality misclassifies one value, the boundary value itself, and behaves perfectly at every other flow. That is a defect which hides everywhere except at the edge.
 
 So the table pairs each boundary with a point one tenth of a percent outside it. 50.000000 percent is asked beside 49.900000, and 120.000000 percent is asked beside 120.100000. Four boundaries, four pairs, and each pair pins down which side of the comparison the boundary value falls on.
 
@@ -50,4 +50,4 @@ Testing a classifier only in the middle of its bands. The middle is where every 
 
 ## Exercise
 
-Give the region either side of each of the four boundaries, using the percentages in the table. Then say which band a value sitting exactly on a boundary is given to, and explain why a test at 60 and 130 percent alone would not have found an error at 70 percent.
+Give the region either side of each of the four boundaries, using the percentages in the table. Then say which band a value sitting exactly on a boundary is given to, and explain why a test at 60.000000 and 130.000000 percent alone would not have found an error at 70.000000 percent.

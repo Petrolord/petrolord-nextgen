@@ -8,8 +8,8 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # its own, so it is written to ask about the SHAPE of the chain, the order the
 # capstone is worked in and the dependencies between its six graded answers,
 # rather than re-asking the facts m01 to m05 already carry.
-# The held items whose figures live only in Section 17 are named without their
-# figures: those figures sit in the Expert span of the digest.
+# Sections 16 and 17 are SHARED by the three tier readings, so their figures
+# are in range here; the held items are still named rather than graded.
 
 q(1, "Put the OKONO chain in the order the engine runs it.",
  "Fit the catalogue points, build the system curve, solve the crossing, then ask the power, the pressure and the region there.",
@@ -32,12 +32,12 @@ q(0, "Three ideas run through this tier. Which set is it?",
   "Every constant is measured; every band is held; every refusal is returned."],
  "Everything after the duty in the chain is a consequence of where the duty landed, so everything after it moves when the station moves."),
 
-q(2, "Name the two flags in this tier that have a reachable false case, and the input that produces each.",
+q(2, "Two flags in this tier judge a calculation rather than label a result. Name them and the input that clears each.",
  "Converged, made false by a curve returning a non-finite head over part of its range, and droops, made false by a point set that rises with flow.",
  ["Converged, made false by a search limit below the crossing, and droops, made false by a negative head among the catalogue points.",
   "Preferred, made false by a duty outside its band, and converged, made false by a fixed halving count with no stopping test.",
   "Droops, made false by three identical heads, and preferred, made false by a best efficiency flow the caller did not supply."],
- "A flag with no reachable false case is decoration. The tier ran the case that clears each of these two rather than describing it."),
+ "A judging flag with no reachable false case is decoration. The tier ran the input that clears each of these two rather than describing it. The preferred flag is a label rather than a judgement, so it is not one of the two."),
 
 q(1, "What did this tier deliberately not do?",
  "It did not go near the suction side, did not change the machine by speed or by trim, did not put a second one beside it, and did not touch a compressor.",

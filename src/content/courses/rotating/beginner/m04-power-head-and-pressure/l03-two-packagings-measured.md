@@ -1,6 +1,6 @@
 # Two packagings measured out of the engine
 
-pumps.js exports no constants and names none internally. Every packaging in it is written inline at the point where it is used. So the only honest way to say what is inside it is to ask the engine a question it can only answer one way.
+pumps.js exports no constants. It names three internally, a percentage slack and the two ends of the speed band, and all three belong to work the Professional tier does rather than to this one. Every packaging it computes with is written inline at the point where it is used or imported. So the only honest way to say what is inside it is to ask the engine a question it can only answer one way.
 
 {{panel:fc-pump-explorer}}
 
@@ -17,7 +17,7 @@ The method is the same each time. Choose inputs that make every other term in th
 
 The first two are the field packagings this course lives in. 2.310000000 turns feet of head into psi and back, and 3960.000000 turns gallons per minute, feet and specific gravity into horsepower. Both of them carry a density inside, which is the subject of the next lesson.
 
-The third is a unit conversion rather than a field packaging. It comes from the shared units file that both of these engine modules read, so the kilowatt figure in a pump return and the kilowatt figure in a compression return are the same conversion applied twice.
+The third is a unit conversion rather than a field packaging. It comes from the shared units file that both of these engine modules read. pumps.js takes the kilowatt conversion from it and compression.js takes the two it needs from the same file, so one definition of a horsepower serves the liquid machine and the gas machine.
 
 The fourth is not a constant at all. It is a default: the motor efficiency the engine assumes when the caller states none. The power lesson stated a motor efficiency of 0.920000 and the engine used it. Omit the argument and the engine quietly uses 0.940000000000.
 

@@ -1,6 +1,6 @@
 # Working the capstone
 
-The capstone is a crude transfer pump against a stated station. Everything you need is given: the catalogue points, the static head, the friction head at its stated flow, the specific gravity and the pump efficiency. Six answers are graded.
+The capstone is a crude transfer pump against a stated station. Everything you need is given: the catalogue points, the static head, the friction head at its stated flow, the specific gravity, the pump efficiency and the motor efficiency. Read that last one off the prompt rather than letting the engine apply its own default, because the kilowatt answer is graded and the two figures are not the same. Six answers are graded.
 
 {{panel:fc-pump-explorer}}
 
@@ -20,7 +20,7 @@ Only then ask for the power, and only then convert the head to a pressure.
 
 ## Where the two efficiencies go
 
-The pump efficiency turns hydraulic power into brake power. The motor efficiency turns brake power into motor input. Keep them in that order, keep the shaft figure separate from the supply figure, and state the motor efficiency explicitly rather than letting the engine apply its own default.
+The pump efficiency turns hydraulic power into brake power. The motor efficiency turns brake power into motor input. Keep them in that order, keep the shaft figure separate from the supply figure, and pass the motor efficiency the prompt states.
 
 The kilowatt figure is the motor input, converted. Converting the brake power instead leaves out the whole of the motor's own loss.
 

@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "Which module supplies the two power packagings that both pumps.js and compression.js compute with?",
+  "prompt": "compression.js takes its two power packagings from one module, and pumps.js takes its kilowatt conversion from the same one. Which module?",
   "options": [
    "engines/production/gasProperties.js, which already holds the gas constant and the molecular weight of air and is therefore where the shared packagings live.",
    "engines/facilities/separatorSizing.js, which already supplies the compressibility window and is the nearest shared facilities module.",

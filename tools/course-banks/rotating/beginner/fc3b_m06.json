@@ -33,7 +33,7 @@
   "explanation": "Everything after the duty in the chain is a consequence of where the duty landed, so everything after it moves when the station moves."
  },
  {
-  "prompt": "Name the two flags in this tier that have a reachable false case, and the input that produces each.",
+  "prompt": "Two flags in this tier judge a calculation rather than label a result. Name them and the input that clears each.",
   "options": [
    "Converged, made false by a search limit below the crossing, and droops, made false by a negative head among the catalogue points.",
    "Preferred, made false by a duty outside its band, and converged, made false by a fixed halving count with no stopping test.",
@@ -41,7 +41,7 @@
    "Droops, made false by three identical heads, and preferred, made false by a best efficiency flow the caller did not supply."
   ],
   "answer": 2,
-  "explanation": "A flag with no reachable false case is decoration. The tier ran the case that clears each of these two rather than describing it."
+  "explanation": "A judging flag with no reachable false case is decoration. The tier ran the input that clears each of these two rather than describing it. The preferred flag is a label rather than a judgement, so it is not one of the two."
  },
  {
   "prompt": "What did this tier deliberately not do?",
