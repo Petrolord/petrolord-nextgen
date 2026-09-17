@@ -2,7 +2,7 @@
 
 {{panel:fc-fire-drum-explorer}}
 
-One level on a horizontal vessel has an answer you can work out on the back of an envelope, and it is exactly half full. There the wetted shell is half the cylinder's lateral surface, which is a diameter, a length and pi. Everywhere else the answer needs the segment.
+One level on a horizontal vessel has an answer you can work out on the back of an envelope, and it is exactly half full. There the wetted shell is half the cylinder's lateral surface, a diameter, a length and pi. Everywhere else needs the segment.
 
 ## The identity, printed rather than asserted
 
@@ -13,21 +13,15 @@ One level on a horizontal vessel has an answer you can work out on the back of a
 | half the lateral surface of the cylinder | 848.2300 ft2 |
 | ratio of the two | 1.000000000000 |
 
-The ratio is printed because a ratio nobody computed reads exactly like one somebody did. This one is computed, it is unity to twelve decimals, and that is the whole claim.
+The ratio is printed because a ratio nobody computed reads exactly like one somebody did. This one is computed, unity to twelve decimals, and that is the claim.
 
-## Why one exact point is a weak test
-
-Here is the trap, and it is the reason the teaching sweep walks the level from empty to full rather than stopping at the middle. Any geometry that is wrong away from half full can still be exactly right there. Swap the segment for something that happens to agree at the midpoint and the half-full check passes, cheerfully, while every other level is wrong.
-
-So half full is a useful sanity check and a poor gate. It tells you the constants are in the right place. It cannot tell you the arc is.
-
-## A sanity check and a gate
+## A good sanity check and a poor gate
 
 Both uses are legitimate and only one is a test.
 
-As a sanity check, half full is excellent. It takes seconds, it needs no tooling, and it catches a family of gross errors: a radius used where a diameter belongs, a length left out, a factor of two in the wrong place.
+As a sanity check it is excellent. It takes seconds, needs no tooling, and catches a family of gross errors: a radius used where a diameter belongs, a length left out, a factor of two misplaced.
 
-As a gate it is nearly worthless, for a reason that generalises far beyond this route. A gate has to be able to fail. One point of agreement between two expressions is a single equation, and a great many wrong expressions satisfy any single equation you care to write down. Before trusting a check, ask what wrong answer it would have caught.
+As a gate it is nearly worthless, for a reason that generalises far beyond this route. A gate has to be able to fail, and one point of agreement is a single equation that many wrong expressions satisfy. Swap the segment for anything agreeing at the midpoint and the check passes while every other level is wrong. Before trusting a check, ask what wrong answer it would have caught.
 
 ## The level walked end to end
 
@@ -43,16 +37,37 @@ As a gate it is nearly worthless, for a reason that generalises far beyond this 
 | 10.800000 | 0.900000 | 1348.9694 |
 | 12.000000 | 1.000000 | 1696.4600 |
 
-Read the column and two things stand out. It rises the whole way, which it must. And the steps are uneven: near the bottom a little more liquid buys a lot more wetted shell, and near the top it buys less.
+It rises the whole way, which it must. The last row is the other analytic point: at 12.000000 ft the area is 1696.4600 ft2, the whole lateral surface. Two levels here have closed-form answers.
 
-The last row is the other analytic point. At a level of 12.000000 ft the area is 1696.4600 ft2, the whole lateral surface of the cylinder. Two levels on this vessel have closed-form answers, at the middle and at the top.
+What the column cannot tell you is where it rises fastest, because its levels are spaced unevenly and a steepness read off unevenly spaced rows is a steepness nobody computed.
 
-## What the table does not license
+## What a foot of level buys
 
-The table prints levels and areas. It prints no ratio between any two of its rows, and that is deliberate. Divide the half-full area by the tenth-of-a-diameter area and you get a number this engine never computes and nothing stands behind. Where a ratio belongs in this course it is printed, as it is for the identity above. Where it is absent, forming one is the reader's invention.
+So the digest walks it again in equal bands of a tenth of the diameter.
 
-That is the more useful habit than any single figure here. Before comparing two quantities, ask whether the comparison is one the engine makes.
+| band ft | horizontal wetted gained ft2 | gained per foot ft2 |
+| --- | --- | --- |
+| 0.000000 to 1.200000 | 347.4906 | 289.5755 |
+| 1.200000 to 2.400000 | 153.2488 | 127.7073 |
+| 2.400000 to 3.600000 | 125.2715 | 104.3929 |
+| 3.600000 to 4.800000 | 113.4858 | 94.5715 |
+| 4.800000 to 6.000000 | 108.7333 | 90.6111 |
+| 6.000000 to 7.200000 | 108.7333 | 90.6111 |
+| 7.200000 to 8.400000 | 113.4858 | 94.5715 |
+| 8.400000 to 9.600000 | 125.2715 | 104.3929 |
+| 9.600000 to 10.800000 | 153.2488 | 127.7073 |
+| 10.800000 to 12.000000 | 347.4906 | 289.5755 |
+
+The column is a mirror. The bottom band gains 347.4906 ft2 and so does the top, at a printed ratio of 1.000000000000. The flat part is the middle, where the two middle bands gain 108.7333 ft2 each, at a printed end-to-middle ratio of 3.195807278241.
+
+That is the arc doing what an arc must: it grows fastest where the circle wall is steepest, at the bottom and the top in equal measure. Eyeballing the level sweep instead invites the conclusion that the gains tail off towards the top, because its rows up there sit closer together. They do not. They are the largest in the vessel.
+
+## What the tables do and do not license
+
+The level sweep prints no ratio between any two of its rows, and that is deliberate. The band table is the other case, and the difference is the point: a comparison the course wants you to make is computed and printed.
+
+So before comparing two quantities, ask whether the comparison is one the engine makes. If it matters and nobody has, compute it rather than estimate it off a table printed for another purpose.
 
 ## Exercise
 
-Record the half-full level, the two areas and the printed ratio between them. Then explain in two sentences why an exact agreement at half full is a weak test of the geometry, and name the other level on this vessel that has a closed-form answer.
+Record the half-full level, the two areas and the printed ratio. Explain why agreement at half full is a weak test of the geometry, and name the other level with a closed-form answer. Then, from the band table, give the bands that gain most and least and the printed ratio between the ends.

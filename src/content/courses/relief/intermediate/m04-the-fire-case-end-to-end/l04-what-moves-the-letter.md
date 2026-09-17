@@ -2,7 +2,7 @@
 
 {{panel:fc-fire-drum-explorer}}
 
-A letter is the end of the chain and the only part of it that is discrete. This lesson takes the stated case and changes exactly one input at a time, carrying each change all the way through to the orifice, so you can see which inputs move the answer and by how much.
+A letter is the end of the chain and its only discrete part. This lesson changes one input at a time and carries each change through to the orifice.
 
 ## One input at a time
 
@@ -16,32 +16,39 @@ A letter is the end of the chain and the only part of it that is discrete. This 
 | latent heat 90 Btu/lb | 683.6960 | 4434115.2612 | 49267.9473 | 2.244651 | L |
 | read standing up | 158.3363 | 1336211.5771 | 10439.1529 | 0.475609 | G |
 
-Read the wetted area column first. It changes on three rows only: the two level changes and the orientation change. Everywhere else the geometry is untouched and the movement starts further down the chain.
-
-Then the duty column. It changes on every row except the latent heat one, because the latent heat enters after the duty is finished. Then the load column, which changes on every row. And finally the orifice column, which is the one a purchase order carries.
-
-## What the table shows about the ladder
-
-Six changes, and four different letters between them: G, J, K, L. The letters do not step evenly with the required area, because the ladder is a published table of discrete areas and a required area lands wherever it lands. Two quite different required areas can share a letter, as the two overpressure allowances in the previous lesson do, and two rather similar ones can fall either side of a boundary.
-
-So the sensitivity of the letter is not the sensitivity of the required area. Judging how robust a selection is means knowing where the required area sits inside its letter, which is what the margin tells you.
+Read the wetted area column first. It changes on three rows only, the two level changes and the orientation. Everywhere else the geometry is untouched and the movement starts further down the chain. Then the duty column, which changes on every row except the latent heat one. Then the load column, which changes on every row. And finally the orifice column, the one a purchase order carries.
 
 ## Which inputs move nothing
 
-The table is as useful for the columns that stay still. The drainage answer, the environment factor and the latent heat all leave the wetted area exactly where it was, at 683.6960 ft2, because none of them is geometry. The latent heat leaves the duty exactly where it was as well.
+The table is as useful for the columns that stay still. The drainage answer, the environment factor and the latent heat all leave the wetted area at 683.6960 ft2, because none is geometry, and the latent heat leaves the duty alone too. That is the chain's order made visible: an input moves only the steps below where it enters.
 
-That pattern is the chain's order made visible. An input moves only the steps below where it enters, so knowing where it enters tells you which figures can respond to it at all.
+## The same table, ranked
+
+A ranking is an answer, so the digest computes this one rather than leaving it to be read off the rows above by eye.
+
+| changed input | duty factor against the stated case | direction | orifice | rungs moved on the ladder |
+| --- | --- | --- | --- | --- |
+| environment factor 0.3 | 3.333333333333 | down | G | -3 |
+| read standing up | 3.318423022984 | down | G | -3 |
+| drainage answered false | 1.642857142857 | up | L | +1 |
+| level raised to 8.0 ft | 1.401330610749 | up | L | +1 |
+| level trimmed to 2.0 ft | 1.398501724833 | down | J | -1 |
+| latent heat 90 Btu/lb | 1.000000000000 | up | L | +1 |
+
+Read the last row first. The latent heat changes the duty by a factor of 1.000000000000, because it enters after the duty is finished, and it still moves the letter a rung. A duty ranking and a letter ranking differ, because the ladder is a table of discrete areas and a required area lands wherever it lands. Two quite different required areas can share a letter and two similar ones can fall either side of a boundary, so judging a selection means knowing where the required area sits inside its letter, which is what the margin tells you.
 
 ## The two cheapest ways to get this wrong
 
-Two rows in the table are a single field each and both are the largest moves on it. The drainage answer is one word and it takes the case from K to L. The orientation is one word and it takes the case from K to G, two letters in the other direction.
+Two rows are a single word each, and that is what makes them cheap to get wrong rather than what makes them large.
 
-Neither is a calculation error. Both are a description of the plant somebody entered, and the answer that follows is correct for the plant described. That is this tier's whole subject in one table.
+The orientation takes the case from K to G, 3 rungs and joint furthest in the table. The drainage answer takes it from K to L, 1 rung, the smallest non-zero move there is and shared with three other rows. They sit at opposite ends of the ranking, and the one reading as more consequential is the smaller.
+
+Neither is a calculation error. Both describe the plant somebody entered, and the answer that follows is correct for that plant.
 
 ## What the table does not license
 
-Every figure above is an engine return on a stated case. The table prints no ratio between any two of its rows, so form none. If you want to know how much a change is worth, change that input in the studio and read both answers, rather than dividing two numbers off this page.
+The one-input table prints no ratio between any two of its rows, so form none off it. The ranking table is where the comparisons live, and it prints them because they are answers somebody has to be right about: its figures were computed against the stated case rather than formed by eye. For any other change, change that input in the studio and read both answers rather than dividing two numbers off this page.
 
 ## Exercise
 
-Copy the table and mark, for each row, which column is the first one to move. Then list the two single-word inputs that move the letter furthest and the direction each moves it, and say why the sensitivity of the letter differs from the sensitivity of the required area.
+Mark, for each row of the one-input table, the first column to move. Then, from the ranking table, name the two rows that move the letter furthest and by how many rungs, give the rung move of each single-word input, and say why the letter's sensitivity differs from the required area's. Finish with the row whose duty factor is 1.000000000000 and explain how it still moves the letter.
