@@ -38,15 +38,35 @@ const FIELDS = JSON.parse(fs.readFileSync(waveInput(WAVE_NAME, 'fields.json'), '
  * does not match fails.
  */
 const EXPECTED_SOURCES = [
+  'ChemistryExplorer.jsx',
+  'InhibitorIntegrityExplorer.jsx',
+  'RateExplorer.jsx',
+  'corrosionLab.js',
   'gradedAnswerGuard.js',
   'gradedTolerance.js',
 ];
+
+/**
+ * The course page imports the lab too, so it is swept with the panel sources. It
+ * lives outside this directory, so it is READ BY NAME and a missing file throws
+ * rather than quietly shrinking the sweep.
+ */
+const LEARNING_PAGE = 'CorrosionLearningPage.jsx';
+const LEARNING_PAGE_PATH = path.resolve(HERE, '../../../../pages/apps', LEARNING_PAGE);
+const readLearningPage = () => {
+  if (!fs.existsSync(LEARNING_PAGE_PATH)) {
+    throw new Error(`the course page is missing: ${LEARNING_PAGE_PATH}. It imports the teaching lab, so a `
+      + 'rename here must move this gate with it rather than emptying it.');
+  }
+  return fs.readFileSync(LEARNING_PAGE_PATH, 'utf8');
+};
 
 const sources = fs
   .readdirSync(HERE)
   .filter((f) => (f.endsWith('.js') || f.endsWith('.jsx')) && !f.includes('.test.'))
   .sort()
-  .map((f) => ({ file: f, text: fs.readFileSync(path.join(HERE, f), 'utf8') }));
+  .map((f) => ({ file: f, text: fs.readFileSync(path.join(HERE, f), 'utf8') }))
+  .concat([{ file: LEARNING_PAGE, text: readLearningPage() }]);
 
 describe('THE FC9 PANEL GUARD: no source in this directory may carry a graded capstone answer', () => {
   it('reads its inputs through the course-wave resolver and says which copy it read', () => {
@@ -57,7 +77,7 @@ describe('THE FC9 PANEL GUARD: no source in this directory may carry a graded ca
   });
 
   it('there are sources to check, and the listing matches the declared inventory', () => {
-    expect(sources.map((s) => s.file)).toEqual(EXPECTED_SOURCES);
+    expect(sources.map((s) => s.file)).toEqual([...EXPECTED_SOURCES, LEARNING_PAGE]);
     expect(sources.length).toBeGreaterThan(1);
     sources.forEach((s) => expect(s.text.length, s.file).toBeGreaterThan(500));
   });
