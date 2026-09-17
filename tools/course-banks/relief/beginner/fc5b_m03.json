@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Where does viscosity enter the liquid sizing route?",
+  "options": [
+   "In a correction applied to the area equation, written Kv, which is a function of one Reynolds number.",
+   "In the area equation itself, as a term beside the specific gravity and the differential across the valve.",
+   "In the certified discharge coefficient Kd, which the manufacturer measures on the service the valve will see.",
+   "In the leading constant of 38.000000000000, which carries the unit packaging of the whole equation."
+  ],
+  "answer": 0,
+  "explanation": "The sizing equation has no viscosity in it. Kv sits in front of that equation and depends on a Reynolds number and nothing else, and Kd is a certified figure belonging to the hardware."
+ },
+ {
+  "prompt": "AKASO returns an area of 1.839323 in2 with the viscosity left out and 1.867758 in2 with 85.000000 cp stated. What else does the viscous call report?",
+  "options": [
+   "A Kv of 1.015459516779, a Reynolds number of 17412.317969, six passes, converged true and a residual of 0.000000000000.",
+   "A Kv of 0.984776, a Reynolds number of 17546.394776, one pass, converged true and a residual of 0.000000000000.",
+   "A Kv of 0.984776, a Reynolds number of 17412.317969, six passes, converged true and a residual of 0.000000000000.",
+   "A Kv of 0.984776, a Reynolds number of 17412.317969, six passes, converged false and a residual it names."
+  ],
+  "answer": 2,
+  "explanation": "The correction sits below one and the loop reports itself converged in six passes. The 1.015459516779 is the ratio of the two areas and 17546.394776 is the Reynolds number a single pass would have used."
+ },
+ {
+  "prompt": "The digest prints 1.015459516779 for AKASO. What is that figure?",
+  "options": [
+   "The ratio of the inviscid area to the viscous one.",
+   "The ratio of the viscous area to the inviscid one.",
+   "The ratio of the converged area to the one pass area.",
+   "The reciprocal of the correction the loop settled on."
+  ],
+  "answer": 1,
+  "explanation": "It is the viscous area over the inviscid one, and it is quoted only because the digest computes and prints it. The converged area over the one pass area is a separate printed ratio of 1.000083905751."
+ },
+ {
+  "prompt": "A single pass through the liquid loop gives 1.867601 in2 at a Kv of 0.984858. What does the converged answer of 1.867758 in2 say about the shortcut?",
+  "options": [
+   "On this case the loop moves the area by about one part in a hundred, which is enough to change the orifice letter the case selects.",
+   "On this case the loop and the single pass agree exactly, so the iteration exists only for viscosities far above the one stated.",
+   "On this case the single pass gives the larger area, so a hand calculation done that way is conservative for any liquid.",
+   "On this case the loop moves the area by about one part in ten thousand, and the single pass remains an approximation to the correct construction."
+  ],
+  "answer": 3,
+  "explanation": "The digest prints the ratio of the converged area to the one pass area as 1.000083905751. The single pass answer is the smaller of the two, and knowing the size of an approximation is not the same as being allowed to ignore it."
+ },
+ {
+  "prompt": "At 1.000000 cp and at 5.000000 cp the engine returns the inviscid area of 1.839323 in2, although a Reynolds number was computed on both rows. Why?",
+  "options": [
+   "Both rows sit above the Reynolds number of 196282.561354814417 at which the correction is held at one.",
+   "Both rows sit below the Reynolds number of 196282.561354814417 at which the correction is held at one.",
+   "Both viscosities are below the 50.000000 at which the engine stops evaluating the fit and returns the uncorrected area.",
+   "Both rows converged on the first pass, and the engine returns the starting area whenever the loop takes a single pass."
+  ],
+  "answer": 0,
+  "explanation": "Those two Reynolds numbers are 1491443.555990 and 298288.711198, both above the clamp. A stated viscosity that changes nothing there is the clamp doing its declared job."
+ },
+ {
+  "prompt": "The unclamped fit is exported beside the clamped one. What does it show, and why does that matter?",
+  "options": [
+   "It falls away from one and asymptotes to 0.993500000000, so a correction for viscous drag would remove capacity without limit.",
+   "It rises through one and asymptotes to 1.006542523506, so a correction for viscous drag would add capacity if nothing held it.",
+   "It reproduces the clamped fit exactly at every Reynolds number, so the clamp is a statement about the inputs rather than the output.",
+   "It rises through one only below the clamp, so the two exports part company at the low Reynolds end of the range."
+  ],
+  "answer": 1,
+  "explanation": "The asymptote is what the clamp is protecting against, and it stays inspectable because the raw fit is exported. The 0.993500000000 is the intercept term of the fit rather than an asymptote."
+ },
+ {
+  "prompt": "Which of these is true of the three coefficients of the Kv fit?",
+  "options": [
+   "The oracle derives all three of them from the definition of a Reynolds number in absolute SI units.",
+   "They are pinned by the published liquid cases, one of which sits low enough on the range to check each one.",
+   "Nothing in the package derives them, and the validation oracle shares the same three on purpose.",
+   "They are computed together from the leading constant of 38.000000000000 and the Reynolds constant of 2800."
+  ],
+  "answer": 2,
+  "explanation": "The fit is held for literature. What the oracle does check on this route is the Reynolds constant, derived from rho u D over mu in SI, and the leading constant of the area equation against the published SI form."
+ },
+ {
+  "prompt": "At a Reynolds number of 10.000000 the steepest term of the fit is 0.850608 of the sum, and by 3000.000000 it is 0.001990. What does that table settle?",
+  "options": [
+   "That the fit has a band it does real work in, and that outside that band its steepest coefficient could move a long way without changing an answer.",
+   "That the fit is wrong outside that band, which is why the correction is clamped at one above a Reynolds number of 196282.561354814417.",
+   "That the intercept term is the one worth checking, since it is the only term that changes with the Reynolds number at all.",
+   "That a published case anywhere in the range exercises all three terms, since the three of them always sum to one divided by Kv."
+  ],
+  "answer": 0,
+  "explanation": "The intercept sits at 0.993500 on every row, so it is the term that does not move. The clamp is a stated convention about the output rather than a statement that the fit is wrong, and a case at a high Reynolds number exercises the steepest term hardly at all."
+ },
+ {
+  "prompt": "Why does the published liquid set include a row at a Reynolds number of 92.428866?",
+  "options": [
+   "So that the clamp at one is exercised by at least one published case.",
+   "So that the envelope warning below a Kv of 0.500000000000 is reached at least once.",
+   "So that the Reynolds constant of 2800.000000000000 can be measured from a published row.",
+   "So that the steepest term of the fit is worth something on at least one published case."
+  ],
+  "answer": 3,
+  "explanation": "Read the term table at that end of the range and compare the fraction there with the fraction at the other rows. That row carries a Kv of 0.595745, which is above the warning edge, and the clamp acts at the opposite end of the range."
+ },
+ {
+  "prompt": "Where does the liquid Reynolds constant of 2800.000000000000 come from, and what checks it?",
+  "options": [
+   "It is recovered from one inviscid area at unit coefficients, and the oracle checks it against the published SI form of the area equation.",
+   "It is recovered from the engine own returned Reynolds number rearranged against the area it belongs to, and the oracle derives it from rho u D over mu in SI.",
+   "It is read from the module source, and the oracle pins it as behaviour because no independent derivation of it exists.",
+   "It is recovered from three readings of the unclamped correction, and the oracle shares it with the engine on purpose."
+  ],
+  "answer": 1,
+  "explanation": "The oracle takes the diameter as the square root of four times the area divided by pi, which arrives at the constant from the definition of a Reynolds number. The inviscid rearrangement is how the leading constant of 38.000000000000 was measured instead."
+ },
+ {
+  "prompt": "The pass count runs 0 with no viscosity, 1 at 1.000000 cp and at 5.000000 cp, and 12 at 5000.000000 cp. What does a high pass count tell a reader?",
+  "options": [
+   "That the loop is struggling to converge on that case, so the returned area should be read with the convergence flag against it.",
+   "That the case sits outside the certified envelope, so the engine has attached its off envelope notice to the answer.",
+   "That the correction is doing real work on that case, so a hand calculation stopped after one pass is furthest from the converged answer.",
+   "That the area is changing between passes by more than the residual the loop reports, so the residual understates the movement."
+  ],
+  "answer": 2,
+  "explanation": "Every row in that sweep is reported converged, so a high count is work rather than difficulty. The envelope notice is a separate warning that fires on the correction rather than on the pass count."
+ },
+ {
+  "prompt": "Below what value of the correction does the engine attach its off envelope notice, and what does the notice change?",
+  "options": [
+   "Below 0.500000000000, and it refuses the case rather than returning an area at all.",
+   "Below 0.801154, the lowest correction the viscosity sweep reaches, and it changes nothing about the area.",
+   "Below 0.993500000000, the intercept of the fit, and it holds the area at its value on the previous pass.",
+   "Below 0.500000000000, and it changes nothing about the area, which the engine returns as usual."
+  ],
+  "answer": 3,
+  "explanation": "The edge was found by walking the engine until the notice appeared. It is a notice rather than a refusal, and the 0.993500000000 is the intercept term of the fit rather than an edge of any kind."
+ },
+ {
+  "prompt": "The viscosity is walked from 0.000000 to 5000.000000 cp on one liquid case. Which set of directions does that sweep show?",
+  "options": [
+   "A lower Kv, a larger area, a lower Reynolds number and more passes as the liquid thickens.",
+   "A lower Kv, a smaller area, a lower Reynolds number and more passes as the liquid thickens.",
+   "A lower Kv, a larger area, a higher Reynolds number and fewer passes as the liquid thickens.",
+   "A higher Kv, a larger area, a lower Reynolds number and more passes as the liquid thickens."
+  ],
+  "answer": 0,
+  "explanation": "All four directions hold across every row of the sweep. A viscous liquid is harder to push through an orifice, so the valve has to be larger to pass the same rate."
+ },
+ {
+  "prompt": "With no viscosity stated at all, what does the liquid route return for the Reynolds number?",
+  "options": [
+   "A zero, which is the figure the loop starts from before it takes its first pass.",
+   "A very large number standing in for the inviscid limit of the fit.",
+   "A null, because with no viscosity there is no Reynolds number to report.",
+   "The value the clamp acts at, since the correction comes back at one."
+  ],
+  "answer": 2,
+  "explanation": "The digest prints that field as absent on the inviscid row rather than as a figure. A caller doing arithmetic on it gets zero, which is a perfectly plausible looking Reynolds number, so the absence has to be handled as an absence."
+ },
+ {
+  "prompt": "AKASO states a Kd of 0.650000 while the gas and steam streams state 0.975000. What kind of figure is that?",
+  "options": [
+   "A chart factor that is held for literature, read against the service condition and then typed in by the caller.",
+   "The valve manufacturer own certified discharge coefficient, validated on the way in as a fraction of an ideal.",
+   "A closed form the engine evaluates from the specific gravity and the differential.",
+   "A published table entry that the oracle checks against its own SI statement."
+  ],
+  "answer": 1,
+  "explanation": "A certified coefficient is measured on a real device on a test stand, and every coefficient is validated on the way in as above zero and no more than one. A liquid service figure and a vapour one are different quantities."
+ }
+]

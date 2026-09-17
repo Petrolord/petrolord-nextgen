@@ -1,0 +1,117 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC5 Associate m02, Gas And Vapour. Written from digest.txt Sections 4 and 5,
+# which are the five lessons of this module: the coefficient C, the critical
+# pressure ratio, the branch and the flat area across it, what F2 replaces,
+# and the whole ORUBIRI case beside the five published gas rows.
+
+q(2, "The coefficient C in the critical gas equation is what kind of number in this engine?",
+ "A closed form evaluated on every call, from the isentropic exponent alone.",
+ ["A chart value the caller types in, with its published reference named beside it.",
+  "A closed form evaluated on every call, from the exponent and the pressure ratio.",
+  "A table the engine carries, interpolated between the exponents it lists."],
+ "C is computed from the exponent and nothing else, which is why the digest can walk it across a column of stated exponents. The factor needing two inputs is F2, and the typed factor on this route is Kb."),
+
+q(0, "Walked from an exponent of 1.050000 to one of 1.800000, C runs from 321.187587 to 387.182334. What does that direction mean for a fixed load?",
+ "A stiffer gas has a larger C, and a larger C gives a smaller required area.",
+ ["A stiffer gas has a larger C, and a larger C gives a larger required area.",
+  "A stiffer gas has a larger C, and the required area is unchanged by it.",
+  "A stiffer gas has a smaller C, and a smaller C gives a larger required area."],
+ "C rises monotonically across every exponent printed, and it sits where a larger value shrinks the area the same load needs. The column is a property of the closed form rather than a fit to measurements."),
+
+q(3, "Across the same range the critical pressure ratio falls from 0.595386 to 0.469042. What does a smaller critical ratio mean in practice?",
+ "A stiffer gas stays choked down to a lower outlet pressure, because the branch turns over at a smaller fraction of the relieving pressure.",
+ ["A stiffer gas leaves the choked branch sooner, because the branch turns over at a smaller fraction of the relieving pressure.",
+  "A stiffer gas needs a larger area on the choked branch, because the ratio and the coefficient C move in the same direction.",
+  "A stiffer gas carries a larger subcritical factor at any ratio, because F2 is the reciprocal of the critical ratio."],
+ "The branch turns over where the outlet fraction passes the critical ratio, so a smaller critical ratio leaves more of the range choked. The ratio and C move in opposite directions across the same exponents."),
+
+q(1, "ORUBIRI states an isentropic exponent of 1.270000 and its outlet pressure works out at a fraction of 0.104258 of the relieving pressure. Which branch runs, and why?",
+ "Critical, because 0.104258 is below the critical ratio of 0.551208 the engine returns at that exponent.",
+ ["Subcritical, because 0.104258 is below the critical ratio of 0.551208 the engine returns at that exponent.",
+  "Critical, because 0.104258 is below the measured 0.300000 at which the balanced bellows warning fires.",
+  "Critical, because the stated back pressure of 35.000000 psig is below the atmospheric constant of 14.700000000000 psia."],
+ "At or below the critical ratio the flow is choked and the critical equation runs. The 0.300000 edge is where a chart Kb warning fires and decides no branch, and 35.000000 psig is above one atmosphere rather than below it."),
+
+q(2, "Walked as a fraction of the relieving pressure from 0.100000 to 0.551207, the required area stays at 2.223779 in2 on all six rows. What does that say?",
+ "In choked flow the throat is set by the upstream condition, so the area does not move with the outlet pressure at all.",
+ ["The six rows are too close together for the engine to resolve, so the area is printed at the same six decimals throughout.",
+  "The outlet pressure moves the area only through Kb, and Kb was held at 1.000000 across all six of those rows.",
+  "The engine holds the area at its value on the first row until the branch turns over, and recomputes it afterwards."],
+ "That flatness is the meaning of choked and it is live behaviour rather than a simplification. It holds at a Kb of 1.000000 and at a Kb of 0.720000 alike, since Kb divides an area that is itself unmoved by the outlet pressure."),
+
+q(3, "The two rows either side of the crossing sit at 0.551207 and 0.551209. What do the areas do across them?",
+ "The area steps from 2.223779 in2 to 2.224962 in2, so the branch changes without the answer jumping.",
+ ["The area steps from 2.223779 in2 to 2.658695 in2, so the branch change carries a visible discontinuity.",
+  "The area is unchanged at 2.223779 in2, so the two branches agree exactly at the crossing.",
+  "The area falls from 2.223779 in2 to 2.112125 in2, so the subcritical form gives the smaller answer at the crossing."],
+ "The two probes are placed either side of the measured critical ratio of 0.551208 so the size of the step is visible rather than asserted. The area 2.658695 in2 belongs to a fraction of 0.800000, much further up the subcritical branch."),
+
+q(0, "The same call is run at a Kb of 1.000000 and a Kb of 0.720000 on both branches. What happens?",
+ "On the critical branch the area moves from 2.223779 in2 to 3.088582 in2, and on the subcritical branch both calls give 2.658695041098 in2.",
+ ["On the critical branch both calls give 2.223779 in2, and on the subcritical branch the area moves from 2.658695 in2 to 3.088582 in2.",
+  "Both branches move, since Kb divides the area wherever it is typed, and the two branches differ only in the size of the step it makes.",
+  "Neither branch moves, since the engine ignores a typed Kb on both of them and attaches a warning saying so."],
+ "In critical flow Kb divides the area, so a smaller Kb demands a larger one. The subcritical form has no place for Kb at all, the two areas agree to twelve decimals, and the engine attaches a warning rather than leaving that to be discovered."),
+
+q(1, "Why can F2 not be tabulated the way the coefficient C can?",
+ "It is computed from the isentropic exponent and the pressure ratio together, so a chart of it needs two axes.",
+ ["It is computed from the isentropic exponent and the relieving pressure together, so a chart of it needs two axes.",
+  "It is recomputed on every pass of an iteration, so no single value of it belongs to a case at all.",
+  "It is a published fit rather than a closed form, and the coefficients of that fit are held for literature."],
+ "F2 is the one factor in this module that needs two inputs. It is a closed form checked by an oracle that integrates the subcritical nozzle flux, so nothing about it is held for literature."),
+
+q(3, "Walked from 0.600000 to 0.900000, F2 rises from 0.735763 to 0.939468 and the required area rises with it from 2.237461 in2 to 3.504623 in2. How should that pairing be read?",
+ "As two readings of one call, because the differential across the valve shrinks as the outlet pressure climbs and moves the answer harder than the rising factor does.",
+ ["As cause and effect, because a larger F2 divides into a fixed numerator and a larger divisor leaves a larger area behind.",
+  "As cause and effect, because F2 multiplies the area directly once the subcritical form is running.",
+  "As two readings of one call, because the engine recomputes the coefficient C alongside F2 and the two corrections compound."],
+ "Two things move at once. The subcritical form divides by the square root of the relieving pressure multiplied by the differential, and that differential collapses as the outlet pressure rises. C leaves the equation entirely above the critical ratio."),
+
+q(2, "Where did the subcritical leading constant of 735.000000000000 come from?",
+ "From one subcritical area rearranged against its own stated inputs and the engine own F2.",
+ ["From the module source, where it is exported beside the coefficient C for inspection.",
+  "From the published standard, quoted here because no arrangement of calls can reach it.",
+  "From the critical leading constant of 520.000000000000 scaled by the ratio of the two forms."],
+ "Nothing in this module exports it. Recovering it means arranging a call in which every other factor is one, which is why the figure is quoted as a measurement with the question that produced it named beside it."),
+
+q(1, "ORUBIRI runs at 68000.000000 lb/hr and no warning fires. Why not?",
+ "Its outlet fraction of 0.104258 is below the 0.300000 at which the chart Kb warning fires, and no other edge on this route is reached.",
+ ["Its outlet fraction of 0.104258 is below the critical ratio of 0.551208, and a choked case never carries a warning of any kind.",
+  "Its typed Kb of 1.000000 changes nothing on this call, and the engine attaches a warning only where a typed factor was ignored on the branch that ran.",
+  "Its required area of 2.223779 in2 sits inside the published orifice ladder, and a case that selects a letter without refusing carries no warning."],
+ "The bellows warning fires above a measured outlet fraction of 0.300000 whichever branch is running. A choked case above that fraction does carry it, and the ignored Kb warning belongs to the subcritical branch."),
+
+q(0, "Five gas rows are published for this route. What can the single row at a Kd of 0.900000, a Kb of 0.880000 and a Kc of 0.900000 check that the other four cannot?",
+ "That the three coefficients divide the area rather than multiplying it.",
+ ["That the branch decision is made on the outlet fraction rather than on the outlet pressure.",
+  "That the coefficients are each validated as a fraction of an ideal on the way in.",
+  "That a certified coefficient belongs to the valve rather than to the fluid it passes."],
+ "A case run at coefficients of one cannot tell the two arrangements apart, because one divided by one and one multiplied by one are the same number. That one row is a thin margin for an important property."),
+
+q(2, "Two of the five published gas rows share a flow of 80000.0000 lb/hr and a relieving pressure of 514.700000 psia, differing only in an outlet pressure of 300.000000 against 400.000000 psia. What does that pair establish?",
+ "That the subcritical branch responds to the outlet pressure, with the areas at 2.334502 in2 and 2.693414 in2.",
+ ["That the branch decision itself is correct, since the pair straddles the crossing between the two forms.",
+  "That the outlet pressure is read as an absolute figure, since a gauge reading would have put both rows on the critical branch.",
+  "That the published areas and the engine areas agree more closely on the critical branch than on the subcritical one."],
+ "Both rows are subcritical, so neither one tests the branch decision. The relative difference on this pair is 5.295e-4 against 1.061e-3 on the critical rows, which is the smaller figure rather than the larger."),
+
+q(1, "How does the validation oracle check the critical pressure ratio?",
+ "It takes the argmax of the isentropic nozzle mass flux over the throat ratio by golden section search.",
+ ["It evaluates the same closed form again in absolute SI units and compares the two answers digit for digit.",
+  "It reads the ratio straight from the published table the standard prints against the isentropic exponent.",
+  "It bisects the engine own branch flag and confirms that the crossing sits exactly where the ratio says it does."],
+ "The critical ratio is the ratio at which the flux through the throat is greatest, so searching for that maximum recovers it from a different construction. A gate that restates the formula under test validates nothing."),
+
+q(0, "Which two figures on a gas case are worked out from the same single input?",
+ "The coefficient C and the critical pressure ratio, both functions of the isentropic exponent alone.",
+ ["The critical pressure ratio and the outlet fraction, both dimensionless readings of the same two pressures.",
+  "The factor F2 and the typed Kb, both of which belong to the form that runs above the critical ratio.",
+  "The required area and the margin, both of them settled as soon as the load and the conditions are stated."],
+ "C rises with the exponent and the critical ratio falls with it, and the two are computed on every call from that one figure. The margin needs a published rung as well as an area, and Kb has no place in the subcritical form."),
+
+emit(Q, '/root/wt-fc5-nextgen/tools/course-banks/relief/beginner/fc5b_m02.json', label='fc5b_m02', expect_n=15)
+finish()
