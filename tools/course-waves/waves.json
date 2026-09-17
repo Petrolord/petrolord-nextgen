@@ -308,7 +308,12 @@
       "gen_seeds.sh",
       "dryrun_fc6.sh",
       "verify_sql.py",
-      "apply_fc6_heattransfer.sh"
+      "apply_fc6_heattransfer.sh",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "oracle_heattransfer.py",
+      "source_prose.rules.mjs",
+      "truth-heattransfer.json"
     ],
     "pins": {
       "digest.txt": "a7f7b44a42e673348f15a2ddce929decf2e58f406cf9d42bc90cf28406292a1e",

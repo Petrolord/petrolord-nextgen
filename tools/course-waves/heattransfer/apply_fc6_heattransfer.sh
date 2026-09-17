@@ -82,11 +82,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20260925_fc6_heattransfer_course           ) echo f1c35cee6ce1604a3545056bd1a62feb4d2d9ac4d01a191867a38a9581f8cfe6 ;;
-    20260925_fc6_heattransfer_beginner_deep    ) echo 07e0734592a397349e379d16d57cfa08afe878fe75b0d60a713344116b27a4a7 ;;
-    20260925_fc6_heattransfer_intermediate_deep) echo dd2e2b7c25281d568fcdb21b0d1986775dccfe638d51e18edcac6ad312df2a62 ;;
-    20260925_fc6_heattransfer_advanced_deep    ) echo 43785d4763072073723a3ab5707a69875641e2c65f82fd1dc4d083e823ab8fb6 ;;
-    20260925_fc6_heattransfer_go_live          ) echo 4ecfaeae4aba48c749a6efe55ace81a95a5527ca78c59a4785b0f2733cd4732d ;;
+    20260925_fc6_heattransfer_course           ) echo 36c096ef26ed04732390bee5282b8a1c5685ab0500257e05c05bb4dca9ac5e18 ;;
+    20260925_fc6_heattransfer_beginner_deep    ) echo bb922176fe5c1f61f162bfa5fc40a27678cee93d36919e56702c701d5121ef8c ;;
+    20260925_fc6_heattransfer_intermediate_deep) echo ac20f953dc1d709b0b0b0ee99a33c287f799fc6757dfcee01f8307e9d498927f ;;
+    20260925_fc6_heattransfer_advanced_deep    ) echo d0f98a515b707052016483c97b756f8d3e9b09e66ffa8e8ce54643b4b12d6daa ;;
+    20260925_fc6_heattransfer_go_live          ) echo bf35ab1cc9e6ac43a247530abb55b82b7828cb4c340dab51a8878a0792497e56 ;;
     *) echo UNPINNED ;;
   esac
 }
