@@ -2,14 +2,71 @@
 
 {{panel:fc-rate-explorer}}
 
-<!-- FC9 SCAFFOLD PLACEHOLDER: replace this body. Do not change the H1 or the panel line. -->
+Almost every input on this screen is a measured quantity with a unit. The
+wetting regime is a word chosen from a list, and water wetting is the largest
+single lever in this model. At one fixed set of
+conditions the rate is 1.676428 mm/yr water wet, 0.620278 mm/yr intermittent at
+a water cut of 0.370000, and 0.000000 mm/yr oil wet, with nothing else
+touched.
 
-This lesson is not written yet. It belongs to intermediate module The Wetting Regime (m01-the-wetting-regime) and must carry between 460 and 560 PROSE WORDS, counted the way lengths.py counts them: front matter, markdown table rows, headings and panel lines are all excluded.
+## The engine reads the word generously and then stops
 
-Every figure in it must be quoted from digest.txt at the precision the digest prints, and no figure may come from RECON.md, FINDINGS.md, the engine source comments or the vendored FINDINGS-corrosion.md and RECON-corrosion.md, all five of which are provenance rather than teaching truth.
+The regime name is matched case insensitively and punctuation insensitively, so
+a user typing the same idea five ways reaches the same branch.
 
-NOTHING IN THIS COURSE GRADES A CORROSION RATE THE CORRELATION PRODUCED, a rate category, a threshold verdict, a severity region or a material choice. Digest section 21 lists every held and withdrawn item and says why each of the eighteen graded capstone fields is clear of all of them.
+| what was typed | what the engine did |
+| --- | --- |
+| `oilWet` | resolved to `oilWet` |
+| `OILWET` | resolved to `oilWet` |
+| `oil-wet` | resolved to `oilWet` |
+| `Oil Wet` | resolved to `oilWet` |
+| `oil_wet` | resolved to `oilWet` |
+
+What it does not do is guess. A string it cannot resolve refuses by name:
+
+> the wetting regime must be one of waterWet, intermittent or oilWet: "wet" is
+> not recognised
+
+The same happens for "waterwette", for the empty string and for "gasWet". Read
+that against the size of the lever. An unrecognised regime that fell through to
+one of the three branches would be choosing the largest input in the model on
+the user's behalf from a typing mistake, and whichever branch it chose would be
+wrong some of the time and silent all of the time.
+
+## Generous matching and a refusal are the same design
+
+Both halves say the engine will work hard to understand what you meant and will
+never invent what you meant. Five spellings of oil wet resolve because they are
+unambiguous. An empty string refuses because it is not a regime at all, and the
+empty case is the one a form produces when nobody has chosen yet.
+
+## The list is closed and short
+
+Three regimes, and no fourth. There is no gas-wet option, no stratified option
+and no annular option, because this module carries no flow-pattern model and a
+longer list would imply one. A reader coming from a multiphase flow background
+will notice the absence, and the honest reading of it is that the three entries
+here are a coarse interpretation the engineer supplies rather than a regime map
+the module has derived.
+
+## What this costs the reader
+
+It costs a decision that cannot be delegated. The module will not tell you
+which regime a line is in, and it holds no flow-pattern model to work it out
+from. The Pipeline and Line Sizing course owns line hydraulics on this
+platform, and this module's own friction factor and this module's own Reynolds
+number exist here only to reach a wall shear, with the line sizing course
+computing its own on a different correlation and a different transition. Neither
+of them classifies a wetting regime either.
+
+So the regime arrives from an engineer. At this tier the useful discipline is to
+write down where the choice came from at the moment you make it, because every
+number below it inherits that choice and nothing on the screen records it.
 
 ## Exercise
 
-Not written yet.
+Record the rate the engine returns for each of the three regimes at one set of
+conditions, then try an unrecognised regime string and record the message it
+returns. State the difference between the rate spread across the three regimes
+and the spread you get from any single measured input you choose to move, and
+say which one a reader should check first.

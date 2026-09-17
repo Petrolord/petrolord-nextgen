@@ -2,14 +2,67 @@
 
 {{panel:fc-chemistry-explorer}}
 
-<!-- FC9 SCAFFOLD PLACEHOLDER: replace this body. Do not change the H1 or the panel line. -->
+Which corrosion product governs the surface is decided here by one number: the
+ratio of the H2S partial pressure to the CO2 partial pressure. The single most
+useful thing about that number is that it does not need a pressure at all.
 
-This lesson is not written yet. It belongs to intermediate module Which Film Governs (m06-which-film-governs) and must carry between 460 and 560 PROSE WORDS, counted the way lengths.py counts them: front matter, markdown table rows, headings and panel lines are all excluded.
+Both arguments are partial pressures. A partial pressure is the total pressure
+multiplied by a mole fraction, so when you divide one by the other the total
+pressure cancels and the ratio equals the ratio of the two mole fractions at any
+pressure whatsoever.
 
-Every figure in it must be quoted from digest.txt at the precision the digest prints, and no figure may come from RECON.md, FINDINGS.md, the engine source comments or the vendored FINDINGS-corrosion.md and RECON-corrosion.md, all five of which are provenance rather than teaching truth.
+| total pressure bar | CO2 mol fraction | H2S mol fraction | ratio from partial pressures | ratio from mole fractions | difference |
+| --- | --- | --- | --- | --- | --- |
+| 10.000000 | 0.020000 | 0.000800 | 0.040000000000 | 0.040000000000 | 0 |
+| 50.000000 | 0.020000 | 0.000800 | 0.040000000000 | 0.040000000000 | 0 |
+| 137.400000 | 0.020000 | 0.000800 | 0.040000000000 | 0.040000000000 | 0 |
+| 250.000000 | 0.020000 | 0.000800 | 0.040000000000 | 0.040000000000 | 0 |
+| 400.000000 | 0.020000 | 0.000800 | 0.040000000000 | 0.040000000000 | 0 |
 
-NOTHING IN THIS COURSE GRADES A CORROSION RATE THE CORRELATION PRODUCED, a rate category, a threshold verdict, a severity region or a material choice. Digest section 21 lists every held and withdrawn item and says why each of the eighteen graded capstone fields is clear of all of them.
+The last column is zero at every pressure, and that is the whole claim. A ratio
+that moved with pressure would have been built from the wrong quantity.
+
+## Why this course checks it that way
+
+Reaching the same number by two routes catches two specific mistakes. The first
+is an H2S partial pressure built from the total pressure with the mole fraction
+dropped. The second is an H2S partial pressure that has been handed a CO2
+fugacity where a partial pressure belongs. Neither could ever be caught by
+writing the engine's own ratio out a second time, because a copy of an
+expression agrees with the expression whatever either of them is doing.
+
+That is the general shape of an independent check. Two routes that share a step
+cannot test the step they share.
+
+## What the ratio is for
+
+The regime word the next lesson covers is the only thing this ratio produces.
+It does not enter the rate, it does not move the wall shear and it does not
+touch the allowance division. Its whole job is to say whether a CO2 rate model
+is still the right model for the surface, and a reader who understands that will
+not go looking for the ratio's fingerprints anywhere else on the screen.
+
+Because it needs no pressure, the ratio is also the one chemistry number on this
+form you can form from the two mole fractions in your head. Two mole percentages
+out of a gas analysis are enough. Everything else on the chemistry panel needs a
+total pressure and a temperature before it means anything.
+
+## Partial pressure and fugacity are different quantities here
+
+The rate is driven by the CO2 FUGACITY, which is the CO2 partial pressure times
+a coefficient. This ratio, and the H2S screening threshold in the next lesson
+but one, are driven by PARTIAL PRESSURES. No fugacity correction is applied to
+H2S at all, and the engine declares that in a field of its own rather than
+leaving it as a convention a reader has to infer. The Fluid Properties course at
+its Expert tier owns the thermodynamics of fugacity and partial pressure; what
+is specific here is which quantity drives which answer.
+
+On the studio's shipped default case the H2S to CO2 ratio is 0.033333333333.
 
 ## Exercise
 
-Not written yet.
+Record the ratio the engine returns at total pressures of 10.000000, 137.400000
+and 400.000000 bar with the mole fractions held fixed. Then form the ratio of
+the two mole fractions by hand and compare. State what the agreement between
+your figure and the engine's tells you about which quantity the ratio is built
+from.
