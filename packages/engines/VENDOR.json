@@ -284,8 +284,8 @@
       "path": "__tests__/facilities.producedwater.test.js",
       "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-0 repair merged (engines PR #201, merge 8b8fb6a), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 8b8fb6a, proved path by path over the walked IMPORT CLOSURE and byte-compared against the Suite's own vendoring of the same repair (Suite PR #498, merge 3c327474b), so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC7 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "6b2e99a2e959809da7494a5adb1c340e89f45441"
+      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-1 repair merged (engines PR #206, merge 9874d583), which is ahead of the canonical pin at 709172f. FC7-1 followed FC7-0 (#201) and repaired the three defects the FC7 course foundation found in it: a bed area that moved nothing below 1 m/hr, the one device threshold nobody had declared, and a silent way back to the quantised median. The vendored blob is sha-identical with engines origin/main at 9874d583, proved path by path over the WALKED import closure, which was re-walked at the new commit rather than assumed and is still five paths and three edges, and proved three independent ways: git blob hash, md5, and sha256 plus cmp over a fresh git-archive extraction. The Suite comparison used at FC7-0 is NOT available here, because the Suite's packages/engines is still pinned at FC9-0 (engines d4c19ad, an ancestor of 9874d583) and has not vendored FC7-1 yet. So this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
+      "vendoredSha": "d97f186d5da65c128f6d335d3971c0e4bb20254f"
     },
     {
       "path": "__tests__/facilities.pumps.test.js",
@@ -935,8 +935,8 @@
       "path": "engines/facilities/producedWater.js",
       "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-0 repair merged (engines PR #201, merge 8b8fb6a), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 8b8fb6a, proved path by path over the walked IMPORT CLOSURE and byte-compared against the Suite's own vendoring of the same repair (Suite PR #498, merge 3c327474b), so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC7 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "2b40bc1e2188faee572641f61026c97fc99be7d7"
+      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-1 repair merged (engines PR #206, merge 9874d583), which is ahead of the canonical pin at 709172f. FC7-1 followed FC7-0 (#201) and repaired the three defects the FC7 course foundation found in it: a bed area that moved nothing below 1 m/hr, the one device threshold nobody had declared, and a silent way back to the quantised median. The vendored blob is sha-identical with engines origin/main at 9874d583, proved path by path over the WALKED import closure, which was re-walked at the new commit rather than assumed and is still five paths and three edges, and proved three independent ways: git blob hash, md5, and sha256 plus cmp over a fresh git-archive extraction. The Suite comparison used at FC7-0 is NOT available here, because the Suite's packages/engines is still pinned at FC9-0 (engines d4c19ad, an ancestor of 9874d583) and has not vendored FC7-1 yet. So this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
+      "vendoredSha": "bb18c78f9f6bcefc05302295f4eedb0c80d291e7"
     },
     {
       "path": "engines/facilities/pumps.js",
@@ -1419,8 +1419,8 @@
       "path": "test-data/facilities/goldens/producedwater_cases.json",
       "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-0 repair merged (engines PR #201, merge 8b8fb6a), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 8b8fb6a, proved path by path over the walked IMPORT CLOSURE and byte-compared against the Suite's own vendoring of the same repair (Suite PR #498, merge 3c327474b), so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC7 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "a5634377bf2eae223c2b55372f608a3e6901dc01"
+      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-1 repair merged (engines PR #206, merge 9874d583), which is ahead of the canonical pin at 709172f. FC7-1 followed FC7-0 (#201) and repaired the three defects the FC7 course foundation found in it: a bed area that moved nothing below 1 m/hr, the one device threshold nobody had declared, and a silent way back to the quantised median. The vendored blob is sha-identical with engines origin/main at 9874d583, proved path by path over the WALKED import closure, which was re-walked at the new commit rather than assumed and is still five paths and three edges, and proved three independent ways: git blob hash, md5, and sha256 plus cmp over a fresh git-archive extraction. The Suite comparison used at FC7-0 is NOT available here, because the Suite's packages/engines is still pinned at FC9-0 (engines d4c19ad, an ancestor of 9874d583) and has not vendored FC7-1 yet. So this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
+      "vendoredSha": "7df7ee90c17f99869ef30457bdeb7fb99f484789"
     },
     {
       "path": "test-data/facilities/goldens/relief_cases.json",
@@ -1806,8 +1806,8 @@
       "path": "tools/validation/facilities/FINDINGS-producedwater.md",
       "kind": "extra",
       "group": "0-partial-domain-facilities",
-      "reason": "The FC7-0 produced water wave's own findings file, written by engines PR #201 and absent from the canonical pin 709172f, so it reads as extra. It is vendored with the produced water family it documents, for the same reason FINDINGS-rotating.md is vendored with the pumps and compression family. It clears when canonical is next advanced.",
-      "vendoredSha": "d8a7faaa63c78711d550f00df4a1e27de4c483ce"
+      "reason": "The produced water wave's own findings file, written by engines PR #201 and extended by #206, and absent from the canonical pin 709172f, so it reads as extra. It is vendored with the produced water family it documents, for the same reason FINDINGS-rotating.md is vendored with the pumps and compression family. It clears when canonical is next advanced.",
+      "vendoredSha": "fd7659042cfcb311951dcfd53ee0dc93372605fc"
     },
     {
       "path": "tools/validation/facilities/FINDINGS-rotating.md",
@@ -1866,8 +1866,8 @@
       "path": "tools/validation/facilities/oracle_producedwater.py",
       "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-0 repair merged (engines PR #201, merge 8b8fb6a), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 8b8fb6a, proved path by path over the walked IMPORT CLOSURE and byte-compared against the Suite's own vendoring of the same repair (Suite PR #498, merge 3c327474b), so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC7 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "65ecd02e8ba59a362972e8e6b2616c53723ec32c"
+      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-1 repair merged (engines PR #206, merge 9874d583), which is ahead of the canonical pin at 709172f. FC7-1 followed FC7-0 (#201) and repaired the three defects the FC7 course foundation found in it: a bed area that moved nothing below 1 m/hr, the one device threshold nobody had declared, and a silent way back to the quantised median. The vendored blob is sha-identical with engines origin/main at 9874d583, proved path by path over the WALKED import closure, which was re-walked at the new commit rather than assumed and is still five paths and three edges, and proved three independent ways: git blob hash, md5, and sha256 plus cmp over a fresh git-archive extraction. The Suite comparison used at FC7-0 is NOT available here, because the Suite's packages/engines is still pinned at FC9-0 (engines d4c19ad, an ancestor of 9874d583) and has not vendored FC7-1 yet. So this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
+      "vendoredSha": "a62407100785677cbf823185dc2882e1b1844ef0"
     },
     {
       "path": "tools/validation/facilities/oracle_relief.py",
