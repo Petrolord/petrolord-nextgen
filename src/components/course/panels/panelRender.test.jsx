@@ -78,6 +78,13 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('linesizing/GasLineExplorer.jsx');
     expect(names).toContain('linesizing/WallPigExplorer.jsx');
   });
+  it('finds the FC8 metering, control valve and storage panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('metering/MeterRunExplorer.jsx');
+    expect(names).toContain('metering/ChokingExplorer.jsx');
+    expect(names).toContain('metering/VentingExplorer.jsx');
+    expect(names).toContain('metering/WithheldExplorer.jsx');
+  });
   for (const [path, load] of entries) {
     it(path.split('/panels/')[1], async () => {
       const mod = await load();

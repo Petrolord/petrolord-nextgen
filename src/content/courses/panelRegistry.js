@@ -200,6 +200,11 @@ export const PANELS = {
   'fc-exchanger-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/ExchangerExplorer')),
   'fc-coefficient-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/CoefficientExplorer')),
   'fc-rating-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/RatingExplorer')),
+  // FC8 Metering, Control Valves & Storage
+  'fc-meterrun-explorer': React.lazy(() => import('@/components/course/panels/metering/MeterRunExplorer')),
+  'fc-choking-explorer': React.lazy(() => import('@/components/course/panels/metering/ChokingExplorer')),
+  'fc-venting-explorer': React.lazy(() => import('@/components/course/panels/metering/VentingExplorer')),
+  'fc-withheld-explorer': React.lazy(() => import('@/components/course/panels/metering/WithheldExplorer')),
 };
 
 export function resolvePanel(id) {
