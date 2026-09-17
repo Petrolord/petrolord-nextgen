@@ -61,11 +61,12 @@ import {
   VISC_T_SWEEP, VISC_TDS_SWEEP, API_SWEEP, VISC_BAND, DENSITY_BAND, TDS_BAND, API_BAND,
   NBINS_SWEEP, SPAN_SWEEP, SIGMA_SWEEP, GRADE_RATIOS, GRADE_SHARPNESS,
   BASIN_AREA_SWEEP, SHORT_CIRCUIT_SWEEP, SHORT_CIRCUIT_REFUSED, PLATE_COUNT_SWEEP,
-  LINER_SWEEP, LINER_REFUSED, LINER_STARVED, LINER_GEOMETRY_SWEEP,
+  LINER_SWEEP, LINER_REFUSED, LINER_STARVED, LINER_GEOMETRY_SWEEP, LINER_BORE_LEG_LENGTH_M,
   CORE_FRACTION_SWEEP, CORE_FRACTION_REFUSED,
   BUBBLE_SWEEP, GAS_RATIO_SWEEP, CELL_DEPTH_SWEEP, CELL_ARRANGEMENT,
   ARRANGEMENT_TOTAL_GAS_RATIO, IGF_PRESET, DAF_PRESET, FLOTATION_REFUSED,
-  BED_DEPTH_SWEEP, MEDIA_SWEEP, LOADING_AREA_SWEEP, RISE_GAP_SWEEP,
+  BED_DEPTH_SWEEP, MEDIA_SWEEP, LOADING_AREA_SWEEP,
+  FILTER_FLOOR_ANSWER_AREAS, FILTER_FLOOR_REFUSED_AREAS, RISE_GAP_SWEEP,
   STOKES_PROBE_MICRON, DUST_CUT_MICRON, BUBBLE_REFERENCE_MICRON, KOKORI_TRAIN_INLET,
   IDENTICAL_STAGE_CUT_MICRON, IDENTICAL_STAGE_COUNT, BROKEN_PLATE_AREA,
   contractCensus,
@@ -142,6 +143,14 @@ const num = (x, n) => {
 const f6 = (x) => num(x, 6);      // kg/m3, micron, ppm, percent, g, ratios
 const f12 = (x) => num(x, 12);    // Pa.s, m/s, volume fractions
 const yn = (b) => (b ? 'yes' : 'no');
+/** A small count as a word, so a count read off a sweep is never typed twice. */
+const NUMBER_WORD = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+const word = (n) => {
+  if (!Number.isInteger(n) || n < 0 || n >= NUMBER_WORD.length) {
+    throw new Error(`GENERATOR REFUSES: ${String(n)} has no word in this table, so a count would be printed as a bare digit where the prose spells it`);
+  }
+  return NUMBER_WORD[n];
+};
 
 /**
  * A ROW LABELLED AN ANSWER MUST ANSWER. Every engine call whose result is
@@ -226,6 +235,98 @@ const warnLabel = (r, conditions) => {
   return fired.length ? fired.join(' and ') : 'none';
 };
 
+/* ------------------------------------------- the section owner clauses */
+/**
+ * SECTION OWNER CLAUSES ARE BUILT FROM structure.py, NEVER TYPED.
+ *
+ * They used to be hand-typed string literals, one per section, with the module
+ * key written into the middle of a prose sentence as a RUNNING COUNTER. A
+ * counter drifts the moment a section stops being one module: Section 8
+ * correctly co-owns Professional m01, Section 9 was typed m01 again, and the
+ * whole run from 9 to 12 then read one module low. Six clauses across the
+ * Professional and Expert sides named a module that does not teach the section,
+ * and two of them named an l05 in a module that has only four lessons. Nothing
+ * caught any of it, because nothing read the curriculum.
+ *
+ * `owners()` renders the clause from tier, module and lesson keys and REFUSES
+ * at build time when any of them is absent from structure.py. A module key that
+ * does not exist, or a lesson key that is not in the module named beside it,
+ * stops the build and says what the curriculum actually carries.
+ *
+ * litsweep keys ALL of its gating off the TIER WORD, so a wrong module key was
+ * never able to misplace content or open a leak. It misleads the writer or the
+ * auditor placing a question, which is the whole job of the clause.
+ */
+const STRUCTURE = (() => {
+  const src = fs.readFileSync('/root/fc-wip-producedwater/structure.py', 'utf8');
+  const tiers = new Map();
+  let tier = null;
+  let mod = null;
+  for (const line of src.split('\n')) {
+    // THE APOSTROPHES IN THESE THREE PATTERNS ARE ESCAPED AS \x27 ON PURPOSE.
+    // gate_typed_literals pairs quotes to find the printed prose, and a bare
+    // apostrophe inside a regex shifts that pairing and makes it sweep code as
+    // if it were a sentence. This family has already paid for that once.
+    let m = /^ {4}\x27(\w+)\x27: \[\s*$/.exec(line);
+    if (m) { tier = m[1]; tiers.set(tier, new Map()); mod = null; continue; }
+    if (!tier) continue;
+    m = /^ {8}\(\x27(m\d\d)[^\x27]*\x27, \x27([^\x27]*)\x27, \[\s*$/.exec(line);
+    if (m) { mod = m[1]; tiers.get(tier).set(mod, { title: m[2], lessons: new Set() }); continue; }
+    m = /^ {12}\(\x27(l\d\d)[^\x27]*\x27, \x27/.exec(line);
+    if (m && mod) tiers.get(tier).get(mod).lessons.add(m[1]);
+  }
+  // THE PARSE IS CHECKED AGAINST WHAT THIS WAVE IS, so a structure.py that
+  // moves under this generator, or a regex that stops matching it, stops the
+  // build instead of quietly yielding an empty curriculum that validates
+  // nothing at all.
+  let lessons = 0;
+  for (const [t, mods] of tiers) {
+    if (mods.size !== 6) throw new Error(`GENERATOR REFUSES: structure.py gives tier ${t} ${mods.size} modules and this wave is six a tier`);
+    for (const [k, v] of mods) {
+      if (!v.lessons.size) throw new Error(`GENERATOR REFUSES: structure.py gives ${t} ${k} no lessons, so the owner clauses cannot be checked`);
+      lessons += v.lessons.size;
+    }
+  }
+  if (tiers.size !== 3) throw new Error(`GENERATOR REFUSES: structure.py gives ${tiers.size} tiers and this wave is three`);
+  if (lessons !== 78) throw new Error(`GENERATOR REFUSES: structure.py gives ${lessons} lessons and this wave is 78`);
+  return tiers;
+})();
+
+const TIER_WORD = { beginner: 'Associate', intermediate: 'Professional', advanced: 'Expert' };
+
+/**
+ * One owner clause. Each argument is [tier, module] or [tier, module, lesson].
+ * Consecutive entries in the same tier share one tier word, and consecutive
+ * entries in the same module share one module key, which is the form the clean
+ * waves write by hand: "Associate m01 l04 and Expert m06", "Expert m05 l02 and
+ * l03", "Associate m04 and m05".
+ */
+const owners = (...spec) => {
+  const parts = spec.map(([tier, mkey, lkey]) => {
+    const word = TIER_WORD[tier];
+    if (!word) throw new Error(`GENERATOR REFUSES: an owner clause names the tier "${tier}", which is not one of ${Object.keys(TIER_WORD).join(', ')}`);
+    const mods = STRUCTURE.get(tier);
+    if (!mods.has(mkey)) {
+      throw new Error(`GENERATOR REFUSES: an owner clause names ${word} ${mkey}, and structure.py gives that tier ${[...mods.keys()].join(', ')}`);
+    }
+    if (lkey && !mods.get(mkey).lessons.has(lkey)) {
+      throw new Error(`GENERATOR REFUSES: an owner clause names ${word} ${mkey} ${lkey}, and "${mods.get(mkey).title}" carries only ${[...mods.get(mkey).lessons].join(', ')}`);
+    }
+    return { word, mkey, lkey };
+  });
+  const words = parts.map((p, i) => {
+    const prev = i ? parts[i - 1] : null;
+    const key = p.lkey ? `${p.mkey} ${p.lkey}` : p.mkey;
+    if (prev && prev.word === p.word && prev.mkey === p.mkey && p.lkey) return p.lkey;
+    if (prev && prev.word === p.word) return key;
+    return `${p.word} ${key}`;
+  });
+  return `(owned by ${words.join(' and ')})`;
+};
+
+/** One `# SECTION n:` heading, with its owner clause built rather than typed. */
+const sec = (no, title, ...spec) => `# SECTION ${no}: ${title} ${owners(...spec)}`;
+
 /* ------------------------------------------------------------------ setup */
 const uzQ = m3PerSecond(UZERE_BWPD);
 const uzMu = A('UZERE viscosity', P.waterViscosityPaS(UZERE_WATER));
@@ -276,7 +377,7 @@ w(`# Built against engines ${VENDOR.head}, vendored sha-identical over a walked 
 w();
 
 /* ============================================================== SECTION 1 */
-w('# SECTION 1: What this engine treats, and what it refuses (owned by Associate m01)');
+w(sec(1, 'What this engine treats, and what it refuses', ['beginner', 'm01']));
 w();
 w('# App surface: the Produced Water Treatment Studio builds a train of up to three stages over one water stream, and reports what each stage removes, what the droplets left look like, and what comes out.');
 w('- This engine answers ONE question in several ways: given this water, this oil and this equipment, what fraction of the dispersed oil comes out, and what is left in the water afterwards.');
@@ -292,7 +393,7 @@ w(`- OGBOTOBO is ${OGBOTOBO_BWPD} bwpd of ${OGBOTOBO_INLET.oiwPpm} ppm oil at d5
 w();
 
 /* ============================================================== SECTION 2 */
-w('# SECTION 2: The numbers this module stands on, in four kinds (owned by Associate m01 l04 and Expert m06)');
+w(sec(2, 'The numbers this module stands on, in four kinds', ['beginner', 'm01', 'l04'], ['advanced', 'm06']));
 w();
 w('Every number in this module that is a CHOICE rather than a derivation lives in one frozen `DECLARED_CONSTANTS`, and the engine reads each one from there rather than inlining it. The four kinds below are the most useful distinction in this course, and a reader who can place a number in the right kind has learned the main thing this module teaches.');
 w();
@@ -375,7 +476,7 @@ w('- the shape and scale constants in KIND TWO, one at a time. They are pinned b
 w();
 
 /* ============================================================== SECTION 3 */
-w('# SECTION 3: Where temperature and salinity finally matter (owned by Associate m02)');
+w(sec(3, 'Where temperature and salinity finally matter', ['beginner', 'm02']));
 w();
 w('The predecessor model collected a temperature and a salinity and used neither. In produced water they are most of the story, because they set the water viscosity and the density difference, and those two set what any of these devices can catch.');
 w();
@@ -417,7 +518,7 @@ w('The last column is derived, the brine density on the row above this table min
 w();
 
 /* ============================================================== SECTION 4 */
-w('# SECTION 4: Oil in water is a distribution (owned by Associate m03)');
+w(sec(4, 'Oil in water is a distribution', ['beginner', 'm03']));
 w();
 w('A concentration is one number and it cannot say how hard the oil is to remove. The distribution can. This module takes it as log-normal in droplet volume, described by a median diameter d50 and a log-standard-deviation sigma, and discretises it into volume bins so that a grade efficiency can be integrated against it exactly.');
 w();
@@ -460,7 +561,7 @@ w(`The module warns outside ${D.sigmaCustomaryMin} to ${D.sigmaCustomaryMax} and
 w();
 
 /* ============================================================== SECTION 5 */
-w('# SECTION 5: A droplet\'s rise, and the band it is honest in (owned by Associate m04 and Expert m01)');
+w(sec(5, 'A droplet\'s rise, and the band it is honest in', ['beginner', 'm04'], ['advanced', 'm04']));
 w();
 w('Everything gravity and everything centrifugal in this module comes from one balance: a droplet rises because it is lighter than the water, and the drag on it balances that buoyancy. Stokes law is that balance in CREEPING FLOW.');
 w();
@@ -492,7 +593,7 @@ w('Every device in this module reports the Reynolds number of its OWN cut drople
 w();
 
 /* ============================================================== SECTION 6 */
-w('# SECTION 6: The gravity devices: a cut size is a surface loading inverted (owned by Associate m04 and m05)');
+w(sec(6, 'The gravity devices: a cut size is a surface loading inverted', ['beginner', 'm04'], ['beginner', 'm05']));
 w();
 w('An API 421 basin removes the droplet that can rise the depth of the water in the time the water spends in the basin. Write that out and the depth cancels: what is left is the FLOW OVER THE PLAN AREA, the surface loading, times an allowance F for turbulence and short-circuiting. Invert the Stokes balance at that rise velocity and the cut size falls out.');
 w();
@@ -550,7 +651,7 @@ w(`The effective area is the projected plate area times the plate count times an
 w();
 
 /* ============================================================== SECTION 7 */
-w('# SECTION 7: The published gravity cases (owned by Associate m05)');
+w(sec(7, 'The published gravity cases', ['beginner', 'm05']));
 w();
 w(`The golden file carries ${Object.keys(GOLD).filter((k) => Array.isArray(GOLD[k])).reduce((s, k) => s + GOLD[k].length, 0)} rows in ${Object.keys(GOLD).filter((k) => Array.isArray(GOLD[k])).length} groups. The basin and plate rows are printed here as the golden holds them, beside the engine's own answer at the same inputs.`);
 w();
@@ -580,7 +681,7 @@ w(`The plate rows also carry \`channelHeightIndependence\`, which is the oracle 
 w();
 
 /* ============================================================== SECTION 8 */
-w('# SECTION 8: What a device does to a distribution (owned by Associate m05 and Professional m01)');
+w(sec(8, 'What a device does to a distribution', ['beginner', 'm05'], ['intermediate', 'm01']));
 w();
 w('A cut size on its own does not say what a device removes. The REMOVAL is the grade efficiency integrated against the distribution, and the OUTLET DISTRIBUTION is what the next device sees. That coupling is the whole point of a train.');
 w();
@@ -606,7 +707,7 @@ const dust = A('a device at a cut far below the water', P.applyDevice({ bins: uz
 w(`- a ${DUST_CUT_MICRON} micron cut on this water removes ${f12(dust.removalFraction * 100)} percent, leaves a surviving volume of ${dust.survivingVolume.toExponential(3)}, reports \`outletNormalised\` ${yn(dust.outletNormalised)}, and warns: ${dust.warning}`);
 w();
 /* ============================================================== SECTION 9 */
-w('# SECTION 9: The hydrocyclone, on stated geometry (owned by Professional m01)');
+w(sec(9, 'The hydrocyclone, on stated geometry', ['intermediate', 'm02']));
 w();
 w('A de-oiling hydrocyclone spins the water so that the same buoyancy acts in a field hundreds of times gravity. The model states its geometry so the answer can be checked by marching a droplet through it: the liner is a tube, the residence time is its volume over the flow through it, the inlet spreads droplets over the cross-section BY AREA so the median droplet starts at the half-area radius, a droplet is captured when it reaches the oil core, and the cut size is the droplet whose radial migration just crosses that gap in the residence time.');
 w();
@@ -619,13 +720,34 @@ w(`- the bank this flow would want at its design point: ${koCyc.linersAtDesignFl
 w(`- cut basis, on every return: ${koCyc.cutBasis}`);
 w();
 w('THE GEOMETRY BITES, and both dimensions bite for different reasons:');
-w('| bore m | length m | volume m3 | residence s | travel m | cut micron |');
-w('| --- | --- | --- | --- | --- | --- |');
+w('| bore m | length m | volume m3 | residence s | travel m | field g | cut micron |');
+w('| --- | --- | --- | --- | --- | --- | --- |');
+// THE FIELD COLUMN IS THE POINT OF THE TABLE, not decoration. The claim under
+// it is that the bore cannot reach the field, and a claim a reader cannot check
+// against a printed column is a claim they have to take on trust.
+const boreLeg = [];
 LINER_GEOMETRY_SWEEP.forEach((g) => {
   const r = A(`a liner ${g.linerDiameterM} by ${g.linerLengthM}`, P.hydrocyclone({ flowM3S: koQ, ...KOKORI_LINERS, ...g, ...koFluid }));
-  w(`| ${g.linerDiameterM} | ${g.linerLengthM} | ${f12(r.linerVolumeM3)} | ${f6(r.residenceS)} | ${f12(r.radialTravelM)} | ${f6(r.d50cMicron)} |`);
+  if (g.linerLengthM === LINER_BORE_LEG_LENGTH_M) boreLeg.push({ bore: g.linerDiameterM, cut: r.d50cMicron });
+  w(`| ${g.linerDiameterM} | ${g.linerLengthM} | ${f12(r.linerVolumeM3)} | ${f6(r.residenceS)} | ${f12(r.radialTravelM)} | ${f6(r.gField)} | ${f6(r.d50cMicron)} |`);
 });
-w('A longer liner buys residence time at the same travel. A wider bore buys residence time and costs travel at the same time, and the travel loses: the cut gets coarser. Both used to be invisible.');
+// The leg is read in TABLE order and swept in BORE order, which are not the
+// same order: the shipped 0.035 liner sits in the length leg above.
+// THE CONSTANT PRODUCT IS MEASURED ACROSS THE LEG, never typed, and the build
+// stops if the rows do not actually hold it: the sentence below states an
+// EXACT power law, and a stated power law that the printed rows do not obey is
+// the same defect as the direction this sentence used to get backwards.
+boreLeg.sort((a, b) => a.bore - b.bore);
+const boreProducts = boreLeg.map((b) => b.cut * Math.sqrt(b.bore));
+const boreSpread = Math.max(...boreProducts) - Math.min(...boreProducts);
+if (boreLeg.length < 4) throw new Error(`GENERATOR REFUSES: the bore leg is ${boreLeg.length} rows and one or two rows cannot establish a direction`);
+if (!(boreSpread < 1e-9)) throw new Error(`GENERATOR REFUSES: the bore leg is stated to go as one over the root of the bore and the products spread by ${boreSpread}`);
+for (let i = 1; i < boreLeg.length; i += 1) {
+  if (!(boreLeg[i].cut < boreLeg[i - 1].cut)) {
+    throw new Error(`GENERATOR REFUSES: the bore leg is stated to be monotone and a bore of ${boreLeg[i].bore} cuts ${boreLeg[i].cut} against ${boreLeg[i - 1].cut} at ${boreLeg[i - 1].bore}`);
+  }
+}
+w(`A longer liner buys residence time at the same travel, and the cut gets finer with it. A WIDER BORE ALSO CUTS FINER, and the reason is worth following, because a bore buys residence time and costs travel at the same time and it is not obvious which wins. THE BORE CANNOT REACH THE FIELD: the field is set by the turndown, which is the flow through one liner over its design flow, and no dimension of the liner enters it, which is why the field column above reads ${f6(koCyc.gField)} g on every row. What is left is a race between the residence and the travel. The residence goes as the SQUARE of the bore, because the liner volume does, while the travel from the half-area radius to the core goes only as the bore itself, so the residence wins by exactly one power and the cut goes as ONE OVER THE SQUARE ROOT OF THE BORE. The ${word(boreLeg.length)} rows at ${LINER_BORE_LEG_LENGTH_M} m of length are that sweep, over a tenfold span of bore from ${boreLeg[0].bore} to ${boreLeg[boreLeg.length - 1].bore} m: the cut times the square root of the bore is ${f6(boreProducts[0])} on every one of them (derived, the bore and the cut on each row, the root taken and multiplied). THE DIRECTION DOES NOT TURN OVER ANYWHERE, and that is a statement about the law rather than about the rows: one over a square root has no turning point, so there is no bore at which a wider liner starts cutting coarser, and a reader hunting this table for the crossover will not find one.`);
 w();
 w('Where the oil core is taken to sit, which is a DECLARED choice and is the travel the median droplet has to make:');
 w('| core radius fraction | travel m | cut micron |');
@@ -639,7 +761,7 @@ w(`The refusal is a real criterion and not a range check: past one over the root
 w();
 
 /* ============================================================= SECTION 10 */
-w('# SECTION 10: The envelope, the ceiling and the refusal (owned by Professional m02)');
+w(sec(10, 'The envelope, the ceiling and the refusal', ['intermediate', 'm03']));
 w();
 w('A liner bank is sized in LINERS, and the flow each liner carries is what sets its field. This is the one place in this module where the arithmetic and the engineering pull in opposite directions, and it is the most important section in the course.');
 w();
@@ -687,7 +809,7 @@ w(`The last column is the golden\'s own field, and it is the most interesting nu
 w();
 
 /* ============================================================= SECTION 11 */
-w('# SECTION 11: Flotation is attachment kinetics (owned by Professional m03)');
+w(sec(11, 'Flotation is attachment kinetics', ['intermediate', 'm04']));
 w();
 w('Gas flotation does not settle droplets, it CARRIES them. Gas is fed to the cell, the bubbles rise, oil droplets collide with them and stick, and the froth is skimmed. So the cut size is a rate question rather than a settling question: the cut is the droplet the cell removes half of in the time the water is in it.');
 w();
@@ -723,6 +845,40 @@ wRefusalLine(`a gas to water ratio of ${FLOTATION_REFUSED.gasRatio}`, P.flotatio
 wRefusalLine(`a ${FLOTATION_REFUSED.bubbleMicron} micron bubble`, P.flotation({ flowM3S: koQ, ...KOKORI_FLOTATION, bubbleMicron: FLOTATION_REFUSED.bubbleMicron, ...koFluid }));
 wRefusalLine(`an attachment efficiency of ${FLOTATION_REFUSED.attachmentEfficiency}`, P.flotation({ flowM3S: koQ, ...KOKORI_FLOTATION, attachmentEfficiency: FLOTATION_REFUSED.attachmentEfficiency, ...koFluid }));
 w();
+// THE RESIDENCE WARNING IS DEMONSTRATED RATHER THAN ASSERTED. The section
+// printed the KOKORI residence and never the warning or its threshold, so the
+// one device warning this module carries that is about the CELL rather than
+// about the gas was the only one a reader had to take on trust.
+//
+// THE STRADDLE IS THE PUBLISHED ONE, chosen off the golden's own fields rather
+// than invented here, because a cell shrunk on the KOKORI stream until it warns
+// also drives the holdup past its own limit and fires BOTH warnings at once,
+// which demonstrates neither. These two rows differ in cell volume alone and
+// the holdup is inside the swarm limit on both.
+const residenceStraddle = (() => {
+  const cand = GOLD.flotation.filter((c) => 'expectResidenceWarning' in c && c.expectHoldupWarning === false);
+  const sorted = [...cand].sort((a, b) => Math.abs(a.residenceS - D.flotationResidenceWarnS) - Math.abs(b.residenceS - D.flotationResidenceWarnS));
+  const pair = sorted.slice(0, 2).sort((a, b) => b.residenceS - a.residenceS);
+  if (pair.length !== 2 || pair[0].expectResidenceWarning !== false || pair[1].expectResidenceWarning !== true) {
+    throw new Error('GENERATOR REFUSES: the golden carries no clean pair straddling the flotation residence threshold with the holdup warning off on both sides');
+  }
+  return pair;
+})();
+w(`THE RESIDENCE WARNING, AND THE THRESHOLD IT IS JUDGED AGAINST. The residence is the total cell volume over the flow, the threshold is DECLARED as \`flotationResidenceWarnS\` at ${D.flotationResidenceWarnS} s, and the warning quotes the figure it judged against so a reader can disagree with it. The KOKORI cells sit at ${f6(koFlot.residenceS)} s, far above it. The published pair that straddles the threshold runs ${residenceStraddle[0].flowM3S} m3/s through one cell of ${residenceStraddle[0].cellDepthM} m depth at a gas ratio of ${residenceStraddle[0].gasRatio} and a ${residenceStraddle[0].bubbleMicron} micron bubble, and the two rows differ in the CELL VOLUME alone:`);
+w('| cell m3 | residence s | holdup | cut micron | warning |');
+w('| --- | --- | --- | --- | --- |');
+const straddleRows = residenceStraddle.map((c) => {
+  const r = A(`the published residence straddle at ${c.cellVolumeM3} m3`, P.flotation({
+    flowM3S: c.flowM3S, cellVolumeM3: c.cellVolumeM3, nCells: c.nCells, cellDepthM: c.cellDepthM,
+    gasRatio: c.gasRatio, bubbleMicron: c.bubbleMicron,
+    rhoWater: c.rhoWater, rhoOil: c.rhoOil, muPaS: c.muPaS,
+  }));
+  w(`| ${c.cellVolumeM3} | ${f6(r.residenceS)} | ${f12(r.gasHoldup)} | ${f6(r.d50cMicron)} | ${flotWarn(r)} |`);
+  return r;
+});
+w(`- the warning in full, as the engine returns it: ${straddleRows[1].warning}`);
+w(`Two seconds of residence either side of the threshold is the whole difference between those rows, and the holdup is under the ${D.gasHoldupWarn} swarm limit on both, so this warning is shown on its own rather than tangled with the other one. THE CUT SIZE IS THE SAME NUMBER ON BOTH ROWS, ${f6(straddleRows[0].d50cMicron)} micron, and that is not a coincidence: a smaller cell is a shorter residence AND a higher gas flux through a smaller plan area, the rate carries the flux and the cut is the droplet for which the rate times the residence is the log of two, so the cell volume cancels out of the cut entirely. The warning is a statement about the CELL and about how little time the attachment process is being given, and the cut size beside it will not show it.`);
+w();
 w('The cell depth, which is what turns a cell volume into the plan area the gas rises through, and is an input:');
 w('| cell depth m | plan area m2 | superficial gas m/s | cut micron |');
 w('| --- | --- | --- | --- |');
@@ -734,7 +890,7 @@ w('A DEEPER cell at the same volume is a NARROWER cell, so the same gas rises th
 w();
 
 /* ============================================================= SECTION 12 */
-w('# SECTION 12: Two kinds of cell, and an invariance (owned by Professional m03 l05 and m04)');
+w(sec(12, 'Two kinds of cell, and an invariance', ['intermediate', 'm04', 'l05'], ['intermediate', 'm06']));
 w();
 w('Induced gas flotation entrains coarse bubbles mechanically. Dissolved gas flotation saturates water under pressure and releases very fine bubbles at a low gas rate. They are two boxes on the same model, and the model is what makes them different devices:');
 w('| preset | gas ratio | bubble micron | superficial gas m/s | cut micron |');
@@ -767,7 +923,7 @@ w(`The cell count DOES move the answer when the gas ratio is held instead, and i
 w();
 
 /* ============================================================= SECTION 13 */
-w('# SECTION 13: The bed, and a cut size that is an inversion rather than a second opinion (owned by Professional m05)');
+w(sec(13, 'The bed, and a cut size that is an inversion rather than a second opinion', ['intermediate', 'm05']));
 w();
 w('A walnut shell or media bed does not screen droplets out, it captures them on the grains as the water passes: DEPTH FILTRATION. The penetration through a depth falls exponentially, the filter coefficient of a droplet goes as the square of its diameter and the inverse cube of the grain, and it falls with loading rate. The cut size is then the droplet the bed removes half of over its own depth, which is an INVERSION of that same law and not a rival to it.');
 w();
@@ -807,6 +963,37 @@ LOADING_AREA_SWEEP.forEach((areaM2) => {
 });
 w(`Lambda falls as the loading rate to the power ${D.filterLoadingExponent}, from a value DECLARED at ${D.filterReferenceLoadingMHr} m/hr, and the module warns above ${D.filterBreakthroughLoadingMHr} m/hr because a bed loses depth capture at that rate and breaks through early. The reference triple, ${D.filterCoefficientPerM} per m at a ${D.filterReferenceDropletMicron} micron droplet, ${D.filterReferenceMediaMicron} micron media and ${D.filterReferenceLoadingMHr} m/hr, is ONE calibration of this module with no published source here.`);
 w();
+// THE FLOOR IS THE FC7-1 REPAIR AND THIS SECTION OWNS IT. A device whose one
+// refusal is never shown refusing is a device a reader can only take the
+// declared constant's word for, which is what both tier writers had to do.
+const floorRefusals = FILTER_FLOOR_REFUSED_AREAS.map((areaM2) => mustRefuse(
+  `a ${areaM2} m2 bed on this flow`,
+  P.mediaFilter({ flowM3S: koQ, ...KOKORI_FILTER, areaM2 }),
+));
+// THE BED AT THE FLOOR IS READ OFF THE REFUSAL, never computed here. The
+// refusal's job is to name the bed that would work, and a digest that computed
+// that number itself would be checking its own arithmetic rather than the
+// engine's answer.
+const areaAtFloor = floorRefusals[0].areaAtFloorM2;
+floorRefusals.forEach((r) => {
+  if (r.areaAtFloorM2 !== areaAtFloor) {
+    throw new Error(`GENERATOR REFUSES: two refusals on one flow name different beds at the floor, ${r.areaAtFloorM2} and ${areaAtFloor}`);
+  }
+});
+w(`THE FLOOR UNDER THE LOADING RATE, which is the one place this device REFUSES. Widening a bed lowers its loading, and past a point the loading falls under the ${D.filterMinLoadingMHr} m/hr this module answers above. The reason is on the refusal rather than in a range check: the filter coefficient is DECLARED at ${D.filterReferenceLoadingMHr} m/hr, the loading exponent is the only velocity dependence in this model, and at the floor the declared law is already claiming several times the one coefficient there is any calibration for. On the KOKORI flow, the last beds that answer:`);
+w('| area m2 | loading m/hr | lambda per m | cut micron |');
+w('| --- | --- | --- | --- |');
+FILTER_FLOOR_ANSWER_AREAS.forEach((areaM2) => {
+  const r = A(`a ${areaM2} m2 bed above the floor`, P.mediaFilter({ flowM3S: koQ, ...KOKORI_FILTER, areaM2 }));
+  w(`| ${areaM2} | ${f6(r.loadingMHr)} | ${f12(r.filterCoefficientPerM)} | ${f6(r.d50cMicron)} |`);
+});
+w('And the beds that do not, each refused by name:');
+FILTER_FLOOR_REFUSED_AREAS.forEach((areaM2) => {
+  wRefusalLine(`a ${areaM2} m2 bed on this flow`, P.mediaFilter({ flowM3S: koQ, ...KOKORI_FILTER, areaM2 }));
+});
+w(`- the bed that would run this flow AT the floor, which every one of those refusals names and which the return carries as \`areaAtFloorM2\`: ${f6(areaAtFloor)} m2, against the ${KOKORI_FILTER.areaM2} m2 bed this stream actually runs.`);
+w(`THE REFUSAL NAMES FOUR THINGS and each of them is doing work: the loading it was given, the floor it is under, the reference loading the coefficient is declared at, and the bed that would reach the floor. A reader who wanted an answer below ${D.filterMinLoadingMHr} m/hr is told what to change and by how much. What a bed really does far below its design rate is HELD FOR LITERATURE, which is why this is a refusal rather than a warning: the module will not extend a one-point calibration downward by three orders of magnitude and then report the result as a cut size.`);
+w();
 w('The published bed cases, beside the engine:');
 w('| area m2 | depth m | media micron | golden loading m/hr | golden lambda per m | golden cut micron | engine cut micron |');
 w('| --- | --- | --- | --- | --- | --- | --- |');
@@ -822,7 +1009,7 @@ GOLD.mediaFilter.forEach((c, i) => {
 w('The golden carries no removal fraction for this device and the engine returns none: there is ONE route through this model now, and the cut size the train reads is an inversion of the depth filtration the oracle marches layer by layer.');
 w();
 /* ============================================================= SECTION 14 */
-w('# SECTION 14: The train, and why three good devices are not one great one (owned by Professional m06 and Expert m02)');
+w(sec(14, 'The train, and why three good devices are not one great one', ['intermediate', 'm06'], ['advanced', 'm01']));
 w();
 w('A train carries the OUTLET distribution forward at every stage. Each device removes the droplets it is good at, so the next device faces finer water than the inlet did and performs worse on it than its own cut size suggests. A table of fixed efficiencies throws exactly that away.');
 w();
@@ -890,7 +1077,7 @@ w('The golden values in that table are not the engine\'s own answer recorded bac
 w();
 
 /* ============================================================= SECTION 15 */
-w('# SECTION 15: The two medians, and the grid they are measured on (owned by Expert m02 l05 and m03)');
+w(sec(15, 'The two medians, and the grid they are measured on', ['advanced', 'm02']));
 w();
 w('A train reports two droplet medians, an inlet one and an outlet one, and a reader is going to compare them. That only means something if they are measured the same way.');
 w();
@@ -920,7 +1107,7 @@ GOLD.binGrid.forEach((c) => {
 w();
 
 /* ============================================================= SECTION 16 */
-w('# SECTION 16: A refusal, a withheld verdict, and the difference (owned by Expert m03 and m04)');
+w(sec(16, 'A refusal, a withheld verdict, and the difference', ['advanced', 'm03'], ['advanced', 'm04']));
 w();
 w('This module has three ways of not answering, and telling them apart is most of what an Expert reader is for.');
 w();
@@ -943,7 +1130,7 @@ wRefusalLine(`${TDS_BAND.negative} ppm TDS`, P.waterViscosityPaS({ tC: 40, tdsPp
 wRefusalLine(`${API_BAND.aboveHigh} API`, P.oilDensityKgM3({ apiGravity: API_BAND.aboveHigh, tC: 40 }));
 wRefusalLine(`${API_BAND.infinite} API, where the specific gravity denominator is zero`, P.oilDensityKgM3({ apiGravity: API_BAND.infinite, tC: 40 }));
 wRefusalLine('an oil heavier than the water', P.stokesRiseMS({ dMicron: 30, rhoWater: 860, rhoOil: 1010, muPaS: 6e-4 }));
-w(`And the same bad fluid through all four device doors, each refusing in its own words rather than through one shared sentence:`);
+w(`THAT RISE VELOCITY REFUSAL IS THE FIRST OF FIVE DOORS ON ONE BAD FLUID, and the count is worth stating exactly, because it is the count the repair was about and a reader will be asked to hold it. FIVE DOORS, FOUR OF THEM DEVICES: \`stokesRiseMS\` above is the door that is not a device, and the four below are the devices. Each refuses in its own words rather than through one shared sentence:`);
 const badFluid = { rhoWater: 860, rhoOil: 1010, muPaS: 6e-4 };
 wRefusalLine('a gravity separator on an oil heavier than its water', P.apiSeparator({ flowM3S: 0.02, lengthM: 10, widthM: 3, depthM: 1.2, ...badFluid }));
 wRefusalLine('a plate pack on the same fluid', P.plateInterceptor({ flowM3S: 0.02, plateAreaM2: 2, nPlates: 40, ...badFluid }));
@@ -992,7 +1179,7 @@ w(`NEITHER OF THOSE TWO FIGURES IS A LIMIT. They are two arbitrary numbers, chos
 w();
 
 /* ============================================================= SECTION 17 */
-w('# SECTION 17: What the method does not know (owned by Expert m06 l01)');
+w(sec(17, 'What the method does not know', ['advanced', 'm06', 'l01']));
 w();
 w('Six things are HELD FOR LITERATURE in this module. Held means the repository carries no publication for the number, so the module states the absence rather than guessing, and no gate pretends to validate it. A reader who can list these six has the most useful map of the module there is.');
 w();
@@ -1050,7 +1237,7 @@ w(`AND ONE STATEMENT ABOUT THE HYDROCYCLONE CUT ITSELF. The capture this model c
 w();
 
 /* ============================================================= SECTION 18 */
-w('# SECTION 18: What an independent oracle is (owned by Expert m05 l02 and l03)');
+w(sec(18, 'What an independent oracle is', ['advanced', 'm05', 'l02'], ['advanced', 'm05', 'l03']));
 w();
 w('A gate that restates the formula the engine uses validates nothing. The golden file this course prints from is written by an oracle that reaches every answer BY A DIFFERENT METHOD, and the difference is the whole value of it.');
 w();
@@ -1097,7 +1284,7 @@ w('The two exact routes, the basin and the plate pack, agree to rounding, and so
 w();
 
 /* ============================================================= SECTION 19 */
-w('# SECTION 19: What a published case can and cannot catch (owned by Expert m05 l04 and l05)');
+w(sec(19, 'What a published case can and cannot catch', ['advanced', 'm05', 'l04'], ['advanced', 'm05', 'l05']));
 w();
 w('A golden file and a green suite are not the same thing as a validated engine. The only way to know what a gate can catch is to break the engine on purpose and watch.');
 w();
@@ -1139,13 +1326,47 @@ w('Every one of those fields is straddled in the table above: it is true on at l
 w();
 w('AT LEAST ONE ROW PER DEVICE STATES NONE OF THAT DEVICE\'S DEFAULTS, so a default is never the only thing a case exercises. That is a rule a golden file has to be built to, because a suite whose every case runs at the defaults cannot tell a default from a derivation.');
 w();
+// THE GROUP TABLE ABOVE PROMISED THIS GROUP IN WORDS AND NOTHING DELIVERED IT.
+// A row of a summary table that describes seven cases is not the seven cases,
+// and this is the one group whose subject is a REFUSAL, which is the thing a
+// summary can least afford to stand in for.
+w(`THE NEWEST GROUP IN FULL, because it is the only group in this file whose subject is a refusal and the only one a reader cannot infer from a cut size. Every row runs ${GOLD.mediaFilterFloor[0].flowM3S} m3/s through a bed, and the only input that moves is the AREA:`);
+w('| bed area m2 | loading m/hr | the golden expects | the engine |');
+w('| --- | --- | --- | --- |');
+GOLD.mediaFilterFloor.forEach((c, i) => {
+  const r = P.mediaFilter({ flowM3S: c.flowM3S, areaM2: c.areaM2 });
+  const refused = Boolean(r && typeof r.error === 'string');
+  if (refused !== c.expectRefusal) {
+    throw new Error(`GENERATOR REFUSES: golden floor row ${i + 1} expects ${c.expectRefusal ? 'a refusal' : 'an answer'} at ${c.areaM2} m2 and the engine ${refused ? 'refused' : 'answered'}`);
+  }
+  if (r.areaAtFloorM2 !== undefined && f6(r.areaAtFloorM2) !== f6(c.areaAtFloorM2)) {
+    throw new Error(`GENERATOR REFUSES: golden floor row ${i + 1} names ${c.areaAtFloorM2} m2 at the floor and the engine names ${r.areaAtFloorM2}`);
+  }
+  w(`| ${c.areaM2} | ${f6(c.loadingMHr)} | ${c.expectRefusal ? 'REFUSED' : 'an answer'} | ${refused ? 'refused' : 'answered'} |`);
+});
+const floorGroup = GOLD.mediaFilterFloor;
+// THE GROUP IS TWO DEMONSTRATIONS, and they are told apart by how far the
+// loading sits from the floor rather than by their position in the file: the
+// FLAT rows are the beds that used to give one answer across a hundredfold of
+// area, and the NEAR rows pin the floor to the value the module declares.
+const nearFloor = floorGroup.filter((c) => Math.abs(c.loadingMHr - D.filterMinLoadingMHr) / D.filterMinLoadingMHr < 0.05);
+const flatRows = floorGroup.filter((c) => !nearFloor.includes(c));
+const nearRefused = nearFloor.filter((c) => c.expectRefusal);
+const nearAnswered = nearFloor.filter((c) => !c.expectRefusal);
+if (!flatRows.length || nearRefused.length !== 1 || !nearAnswered.length) {
+  throw new Error(`GENERATOR REFUSES: the floor group does not split into flat rows and a straddle: ${flatRows.length} flat, ${nearRefused.length} refused near the floor, ${nearAnswered.length} answered near it`);
+}
+const areaSpan = Math.max(...flatRows.map((c) => c.areaM2)) / Math.min(...flatRows.map((c) => c.areaM2));
+w(`The first ${word(flatRows.length)} beds span ${f6(areaSpan)} times in area (derived, the largest of those areas over the smallest) and every one of them is refused. THOSE ARE THE FOUR BEDS A CLAMP MAKES IDENTICAL, which is the whole reason this group exists: a hundredfold of bed area is the widest thing a reader could vary, and a module that answered the same on all four would be caught here and nowhere else in the file.`);
+w(`The ${word(nearFloor.length)} rows beside them are the STRADDLE, and they are what pins the floor to the declared value rather than to somewhere below it: ${f6(nearRefused[0].loadingMHr)} m/hr is REFUSED and ${f6(nearAnswered[0].loadingMHr)} m/hr ANSWERS, which is a gap of ${f6((nearAnswered[0].loadingMHr - nearRefused[0].loadingMHr) / D.filterMinLoadingMHr)} of the floor itself (derived, the two loadings subtracted and taken over the floor). And ${f6(floorGroup[0].areaAtFloorM2)} m2 is \`areaAtFloorM2\` on all ${word(floorGroup.length)} rows, golden and engine alike, which is the bed that would run that flow at the floor.`);
+w();
 w(`THE PLANTING BATTERY, which is the real measure of the gate. FC7-0 planted thirty five defects, twenty seven in the engine alone and eight in the engine and the oracle together, run one at a time against the suite. Before that repair, 22 of those 35 left the suite fully green: 16 of the 27 planted in the engine alone and 6 of the eight planted in both files. After it, 0 of 35 do. FC7-1 re-ran all 35 against the repaired source and added twenty four of its own plus one self-test of the runner, and none of the sixty leaves the suite green. The suite this digest was built beside carries ${SUITE_TESTS} tests, counted off the vendored file.`);
 w('The eight planted in both files at once are the interesting half, because a golden regenerated from a bent oracle agrees with a bent engine perfectly. What catches them now is a mixture of three things: a route with no place to type the constant, the identities that need no source, and an explicit PIN with the value typed by hand in the test file.');
 w('Every family in the suite also carries a NEGATIVE CONTROL that is asserted to fire and to name a case. One of them records a fact about its own subject rather than a round number: the cyclone control fails on four of five rows and not five, because a turndown of exactly one is the one case a wrong field exponent cannot move.');
 w();
 
 /* ============================================================= SECTION 20 */
-w('# SECTION 20: The Associate reading, one stream from the water to the plate pack (owned by Associate m06)');
+w(sec(20, 'The Associate reading, one stream from the water to the plate pack', ['beginner', 'm06']));
 w();
 w(`UZERE, ${UZERE_BWPD} bwpd of ${UZERE_INLET.oiwPpm} ppm oil at ${UZERE_WATER.tC} C and ${UZERE_WATER.tdsPpm} ppm TDS, ${UZERE_OIL.apiGravity} API, droplets at d50 ${UZERE_INLET.d50Micron} micron and sigma ${UZERE_INLET.sigma}.`);
 w();
@@ -1175,7 +1396,7 @@ w(`Step ${stepN} is the point of the whole tier. The engine has just computed el
 w();
 
 /* ============================================================= SECTION 21 */
-w('# SECTION 21: The Professional reading, one de-oiling train through three unlike devices (owned by Professional m06)');
+w(sec(21, 'The Professional reading, one de-oiling train through three unlike devices', ['intermediate', 'm06']));
 w();
 w(`KOKORI, ${KOKORI_BWPD} bwpd at ${KOKORI_WATER.tC} C and ${KOKORI_WATER.tdsPpm} ppm TDS, ${KOKORI_OIL.apiGravity} API. The water is ${f12(koMu.muPaS)} Pa.s, ${f6(koRw.rhoKgM3)} kg/m3 against ${f6(koRo.rhoKgM3)} kg/m3 of oil, a difference of ${f6(koRw.rhoKgM3 - koRo.rhoKgM3)} kg/m3 (derived).`);
 w();
@@ -1205,13 +1426,13 @@ w('The three cut sizes in that table come from three completely different argume
 w();
 
 /* ============================================================= SECTION 22 */
-w('# SECTION 22: HISTORY. What this engine was repaired for, and how to teach it (owned by Expert m05 l01)');
+w(sec(22, 'HISTORY. What this engine was repaired for, and how to teach it', ['advanced', 'm05', 'l01']));
 w();
 w('THIS SECTION IS HISTORY. It is the one section of this digest whose subject is what the engine USED TO DO, it is framed as history in its title and in this first line, and nothing above it is history at all. Every figure in the rest of this digest is the repaired engine answering now.');
 w();
 w('Five things this module did before FC7-0, each of which is a lesson rather than an anecdote:');
-w('- THE HYDROCYCLONE REWARDED BUYING FEWER LINERS. The field went as the square of the flow with nothing above it, so the cut size fell without limit as liners were removed from the bank, and the studio\'s own shipped default ran its liners at 7.7 times their design flow. A studio that tells a designer to buy less equipment for a better answer is worse than no studio. THE LESSON IS THE SWEEP: sweep the input a user is most tempted to reduce, and look at the direction of the answer. Section 10 is that sweep on the repaired model, and it now turns over.');
-w('- FOUR DEVICES TRUSTED WHAT A FIFTH REFUSED. Given an oil heavier than its water, one export refused by name and four returned a cut size of NaN with no error at all, and the train then skipped those stages and returned a spec verdict computed over whatever ran. THE LESSON IS THE RULE: when two halves of one module disagree, THE TRUSTING HALF IS THE BUG. Section 16 runs the identical bad fluid through all five doors at once.');
+w('- THE HYDROCYCLONE REWARDED BUYING FEWER LINERS. The field went as the square of the flow with nothing above it, so the cut size fell without limit as liners were removed from the bank, and the studio\'s own shipped default ran its liners at 7.7 times their design flow. A studio that tells a designer to buy less equipment for a better answer is worse than no studio. THE LESSON IS THE SWEEP: sweep the input a user is most tempted to reduce, and look at the direction of the answer. Section 10 is that sweep on the repaired model, and it now turns over. THE LINER ITSELF WAS NOT A MODEL EITHER, which is the same defect one level down: the liner LENGTH was not an input at all, and the bore reached the answer through a bare divisor on a velocity the source called residence-scaled rather than through any residence time. Section 9 is the stated geometry the repair put there, where both dimensions move the answer for a reason a reader can follow.');
+w('- FOUR DEVICES TRUSTED WHAT A FIFTH REFUSED. Given an oil heavier than its water, `stokesRiseMS` refused by name and the four devices returned a cut size of NaN with no error at all, and the train then skipped those stages and returned a spec verdict computed over whatever ran. THE LESSON IS THE RULE: when two halves of one module disagree, THE TRUSTING HALF IS THE BUG. Section 16 runs the identical bad fluid through all five of those doors at once, the rise velocity function and the four devices, and every one of them now refuses in its own words.');
 w('- TWO MODELS WERE DEAD. An attachment fraction that was exactly one across every input a user could type made the bubble size, the gas rate and the residence time decorative, and made induced and dissolved gas flotation the same device behind two menu entries. A media filter computed its removal twice by two routes that disagreed, and the train read the route the gate did not validate. THE LESSON IS THE PROBE: sweep every input and check it moves the answer, and if a module holds two opinions about one quantity, delete one.');
 w('- A MEDIAN WAS REPORTED AGAINST A DIFFERENT KIND OF NUMBER. The inlet median was the typed d50 and the outlet median was measured off the bins, so a train that removed nothing showed the median falling. THE LESSON IS THE BASIS: two numbers a reader will compare must be measured the same way, and the module should say on its own return that they are.');
 w('- THE GATE COULD NOT CATCH ANY OF IT. Sixteen defects planted in the engine alone left the suite fully green, and six more survived being planted in the engine and the oracle together. THE LESSON IS SECTION 19: a green suite is a measurement of the suite, until somebody plants a defect and watches.');

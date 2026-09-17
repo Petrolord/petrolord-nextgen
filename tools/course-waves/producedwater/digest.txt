@@ -166,7 +166,7 @@ Sigma is the input a reader is least likely to have measured and it matters more
 | 1.5 | 68.402514 | 5.944722 | sigma outside the customary band |
 The module warns outside 0.5 to 1 and refuses above 2, because a wider spread than that is not what produced water carries.
 
-# SECTION 5: A droplet's rise, and the band it is honest in (owned by Associate m04 and Expert m01)
+# SECTION 5: A droplet's rise, and the band it is honest in (owned by Associate m04 and Expert m04)
 
 Everything gravity and everything centrifugal in this module comes from one balance: a droplet rises because it is lighter than the water, and the drag on it balances that buoyancy. Stokes law is that balance in CREEPING FLOW.
 
@@ -274,7 +274,7 @@ The same water through one device at several cut sizes, so the removal and the o
 The surviving volume column is what the outlet bins are normalised by. Below a floor the module stops reporting a median at all, because the shape of numerical dust means nothing:
 - a 0.001 micron cut on this water removes 99.999999999904 percent, leaves a surviving volume of 9.618e-13, reports `outletNormalised` no, and warns: this device leaves 9.62e-13 of the oil volume behind: what is left is numerical dust and no outlet droplet median is reported for it
 
-# SECTION 9: The hydrocyclone, on stated geometry (owned by Professional m01)
+# SECTION 9: The hydrocyclone, on stated geometry (owned by Professional m02)
 
 A de-oiling hydrocyclone spins the water so that the same buoyancy acts in a field hundreds of times gravity. The model states its geometry so the answer can be checked by marching a droplet through it: the liner is a tube, the residence time is its volume over the flow through it, the inlet spreads droplets over the cross-section BY AREA so the median droplet starts at the half-area radius, a droplet is captured when it reaches the oil core, and the cut size is the droplet whose radial migration just crosses that gap in the residence time.
 
@@ -287,13 +287,16 @@ The KOKORI bank, 75000 bwpd through 200 liners:
 - cut basis, on every return: an ideal capture: the median droplet crossing from the half-area radius to the oil core in the residence time. Re-entrainment, the reject split and the shear the liner itself applies are not in it, and field de-oilers are customarily credited with a coarser cut than this
 
 THE GEOMETRY BITES, and both dimensions bite for different reasons:
-| bore m | length m | volume m3 | residence s | travel m | cut micron |
-| --- | --- | --- | --- | --- | --- |
-| 0.035 | 0.5 | 0.000481056375 | 0.697134 | 0.003624368671 | 5.242462 |
-| 0.035 | 0.7 | 0.000673478925 | 0.975987 | 0.003624368671 | 4.430689 |
-| 0.035 | 1 | 0.000962112750 | 1.394267 | 0.003624368671 | 3.706980 |
-| 0.06 | 0.7 | 0.001979203372 | 2.868207 | 0.006213203436 | 3.383995 |
-A longer liner buys residence time at the same travel. A wider bore buys residence time and costs travel at the same time, and the travel loses: the cut gets coarser. Both used to be invisible.
+| bore m | length m | volume m3 | residence s | travel m | field g | cut micron |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.035 | 0.5 | 0.000481056375 | 0.697134 | 0.003624368671 | 1322.687929 | 5.242462 |
+| 0.035 | 0.7 | 0.000673478925 | 0.975987 | 0.003624368671 | 1322.687929 | 4.430689 |
+| 0.035 | 1 | 0.000962112750 | 1.394267 | 0.003624368671 | 1322.687929 | 3.706980 |
+| 0.01 | 0.7 | 0.000054977871 | 0.079672 | 0.001035533906 | 1322.687929 | 8.289060 |
+| 0.02 | 0.7 | 0.000219911486 | 0.318690 | 0.002071067812 | 1322.687929 | 5.861251 |
+| 0.06 | 0.7 | 0.001979203372 | 2.868207 | 0.006213203436 | 1322.687929 | 3.383995 |
+| 0.1 | 0.7 | 0.005497787144 | 7.967241 | 0.010355339059 | 1322.687929 | 2.621231 |
+A longer liner buys residence time at the same travel, and the cut gets finer with it. A WIDER BORE ALSO CUTS FINER, and the reason is worth following, because a bore buys residence time and costs travel at the same time and it is not obvious which wins. THE BORE CANNOT REACH THE FIELD: the field is set by the turndown, which is the flow through one liner over its design flow, and no dimension of the liner enters it, which is why the field column above reads 1322.687929 g on every row. What is left is a race between the residence and the travel. The residence goes as the SQUARE of the bore, because the liner volume does, while the travel from the half-area radius to the core goes only as the bore itself, so the residence wins by exactly one power and the cut goes as ONE OVER THE SQUARE ROOT OF THE BORE. The five rows at 0.7 m of length are that sweep, over a tenfold span of bore from 0.01 to 0.1 m: the cut times the square root of the bore is 0.828906 on every one of them (derived, the bore and the cut on each row, the root taken and multiplied). THE DIRECTION DOES NOT TURN OVER ANYWHERE, and that is a statement about the law rather than about the rows: one over a square root has no turning point, so there is no bore at which a wider liner starts cutting coarser, and a reader hunting this table for the crossover will not find one.
 
 Where the oil core is taken to sit, which is a DECLARED choice and is the travel the median droplet has to make:
 | core radius fraction | travel m | cut micron |
@@ -305,7 +308,7 @@ Where the oil core is taken to sit, which is a DECLARED choice and is the travel
 - a core at 0.75 of the radius: REFUSED: the oil core must sit inside the half-area radius for the median droplet to have anything to cross, so its radius fraction lies between 0 and 0.7071, and this is 0.75
 The refusal is a real criterion and not a range check: past one over the root of two the core is OUTSIDE the half-area radius, so the median droplet starts inside the core and there is nothing for it to cross.
 
-# SECTION 10: The envelope, the ceiling and the refusal (owned by Professional m02)
+# SECTION 10: The envelope, the ceiling and the refusal (owned by Professional m03)
 
 A liner bank is sized in LINERS, and the flow each liner carries is what sets its field. This is the one place in this module where the arithmetic and the engineering pull in opposite directions, and it is the most important section in the course.
 
@@ -340,7 +343,7 @@ The published liner cases, beside the engine at the same inputs:
 | 40 | 0.03 | 1.250000 | 1562.500000 | 3.154806 | 3.154806 | 0.500455 |
 The last column is the golden's own field, and it is the most interesting number in the file: the oracle takes the cut size the engine reports, fires droplets of that size from starting radii spread uniformly BY AREA across the liner, marches each one, and counts how many reach the core. It comes out at 0.500455 against the one half a cut size is DEFINED as. That is a different method agreeing with the definition, which is the only kind of agreement worth anything.
 
-# SECTION 11: Flotation is attachment kinetics (owned by Professional m03)
+# SECTION 11: Flotation is attachment kinetics (owned by Professional m04)
 
 Gas flotation does not settle droplets, it CARRIES them. Gas is fed to the cell, the bubbles rise, oil droplets collide with them and stick, and the froth is skimmed. So the cut size is a rate question rather than a settling question: the cut is the droplet the cell removes half of in the time the water is in it.
 
@@ -379,6 +382,14 @@ The gas rate, at one bubble size:
 - a 5 micron bubble: REFUSED: the bubble diameter must lie between 20 and 2000 micron for this attachment model and this is 5
 - an attachment efficiency of 0: REFUSED: the attachment efficiency is the probability that a collision sticks, so it lies between 0 and 1, and this is 0
 
+THE RESIDENCE WARNING, AND THE THRESHOLD IT IS JUDGED AGAINST. The residence is the total cell volume over the flow, the threshold is DECLARED as `flotationResidenceWarnS` at 60 s, and the warning quotes the figure it judged against so a reader can disagree with it. The KOKORI cells sit at 434.751720 s, far above it. The published pair that straddles the threshold runs 0.1 m3/s through one cell of 3 m depth at a gas ratio of 0.05 and a 300 micron bubble, and the two rows differ in the CELL VOLUME alone:
+| cell m3 | residence s | holdup | cut micron | warning |
+| --- | --- | --- | --- | --- |
+| 6.1 | 61.000000 | 0.063497860502 | 74.465948 | none |
+| 5.9 | 59.000000 | 0.065650330350 | 74.465948 | less than the 60 s of residence this module warns below |
+- the warning in full, as the engine returns it: 59.0 s of flotation residence is under the 60 s this module warns below: the attachment process needs time and this cell is too small for the flow
+Two seconds of residence either side of the threshold is the whole difference between those rows, and the holdup is under the 0.2 swarm limit on both, so this warning is shown on its own rather than tangled with the other one. THE CUT SIZE IS THE SAME NUMBER ON BOTH ROWS, 74.465948 micron, and that is not a coincidence: a smaller cell is a shorter residence AND a higher gas flux through a smaller plan area, the rate carries the flux and the cut is the droplet for which the rate times the residence is the log of two, so the cell volume cancels out of the cut entirely. The warning is a statement about the CELL and about how little time the attachment process is being given, and the cut size beside it will not show it.
+
 The cell depth, which is what turns a cell volume into the plan area the gas rises through, and is an input:
 | cell depth m | plan area m2 | superficial gas m/s | cut micron |
 | --- | --- | --- | --- |
@@ -388,7 +399,7 @@ The cell depth, which is what turns a cell volume into the plan area the gas ris
 | 6 | 2.000000 | 0.017251225578 | 16.213651 |
 A DEEPER cell at the same volume is a NARROWER cell, so the same gas rises through less plan area, the gas flux is higher and the cut is finer. Nothing about that is obvious from a residence time, which is why the depth had to become an input.
 
-# SECTION 12: Two kinds of cell, and an invariance (owned by Professional m03 l05 and m04)
+# SECTION 12: Two kinds of cell, and an invariance (owned by Professional m04 l05 and m06)
 
 Induced gas flotation entrains coarse bubbles mechanically. Dissolved gas flotation saturates water under pressure and releases very fine bubbles at a low gas rate. They are two boxes on the same model, and the model is what makes them different devices:
 | preset | gas ratio | bubble micron | superficial gas m/s | cut micron |
@@ -448,6 +459,18 @@ The loading rate, which is the only thing the area changes:
 | 80 | 6.210441 | 8.280121470276 | 6.469629 | none |
 Lambda falls as the loading rate to the power 0.5, from a value DECLARED at 10 m/hr, and the module warns above 25 m/hr because a bed loses depth capture at that rate and breaks through early. The reference triple, 3.5 per m at a 20 micron droplet, 800 micron media and 10 m/hr, is ONE calibration of this module with no published source here.
 
+THE FLOOR UNDER THE LOADING RATE, which is the one place this device REFUSES. Widening a bed lowers its loading, and past a point the loading falls under the 1 m/hr this module answers above. The reason is on the refusal rather than in a range check: the filter coefficient is DECLARED at 10 m/hr, the loading exponent is the only velocity dependence in this model, and at the floor the declared law is already claiming several times the one coefficient there is any calibration for. On the KOKORI flow, the last beds that answer:
+| area m2 | loading m/hr | lambda per m | cut micron |
+| --- | --- | --- | --- |
+| 200 | 2.484176 | 13.092021574467 | 5.145107 |
+| 400 | 1.242088 | 18.514914469492 | 4.326502 |
+| 490 | 1.013950 | 20.492255142381 | 4.112471 |
+And the beds that do not, each refused by name:
+- a 600 m2 bed on this flow: REFUSED: a loading of 0.828 m/hr is below the 1 m/hr floor this module answers above: the filter coefficient is DECLARED at 10 m/hr, its loading exponent is the only velocity dependence in this model, and at the floor the declared law is already claiming 3.162 times the one coefficient there is any calibration for. 496.8 m2 of bed would run this flow at the floor. What a bed really does far below its design rate needs bed data this module does not carry
+- a 2000 m2 bed on this flow: REFUSED: a loading of 0.248 m/hr is below the 1 m/hr floor this module answers above: the filter coefficient is DECLARED at 10 m/hr, its loading exponent is the only velocity dependence in this model, and at the floor the declared law is already claiming 3.162 times the one coefficient there is any calibration for. 496.8 m2 of bed would run this flow at the floor. What a bed really does far below its design rate needs bed data this module does not carry
+- the bed that would run this flow AT the floor, which every one of those refusals names and which the return carries as `areaAtFloorM2`: 496.835297 m2, against the 20 m2 bed this stream actually runs.
+THE REFUSAL NAMES FOUR THINGS and each of them is doing work: the loading it was given, the floor it is under, the reference loading the coefficient is declared at, and the bed that would reach the floor. A reader who wanted an answer below 1 m/hr is told what to change and by how much. What a bed really does far below its design rate is HELD FOR LITERATURE, which is why this is a refusal rather than a warning: the module will not extend a one-point calibration downward by three orders of magnitude and then report the result as a cut size.
+
 The published bed cases, beside the engine:
 | area m2 | depth m | media micron | golden loading m/hr | golden lambda per m | golden cut micron | engine cut micron |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -461,7 +484,7 @@ The published bed cases, beside the engine:
 | 4 | 1.1 | 650 | 1.080000 | 19.855739099768 | 3.562821 | 3.562898 |
 The golden carries no removal fraction for this device and the engine returns none: there is ONE route through this model now, and the cut size the train reads is an inversion of the depth filtration the oracle marches layer by layer.
 
-# SECTION 14: The train, and why three good devices are not one great one (owned by Professional m06 and Expert m02)
+# SECTION 14: The train, and why three good devices are not one great one (owned by Professional m06 and Expert m01)
 
 A train carries the OUTLET distribution forward at every stage. Each device removes the droplets it is good at, so the next device faces finer water than the inlet did and performs worse on it than its own cut size suggests. A table of fixed efficiencies throws exactly that away.
 
@@ -508,7 +531,7 @@ The published train cases, beside the engine at the same inputs. These carry the
 | fine sheared inlet water | 1233.553482 | 1233.361979 | 8.162947 | 8.163726 | 400000 |
 The golden values in that table are not the engine's own answer recorded back: they are 400,000 droplets each carrying a surviving weight through every stage, with no binning anywhere. That is what validates the quadrature, the coupling, the outlet concentration, every stage and both medians at once.
 
-# SECTION 15: The two medians, and the grid they are measured on (owned by Expert m02 l05 and m03)
+# SECTION 15: The two medians, and the grid they are measured on (owned by Expert m02)
 
 A train reports two droplet medians, an inlet one and an outlet one, and a reader is going to compare them. That only means something if they are measured the same way.
 
@@ -574,7 +597,7 @@ The band edges, each refused by name and each stated on the refusal:
 - 100.1 API: REFUSED: this module holds API gravity to 5 to 100 degrees and this is 100.1
 - -131.5 API, where the specific gravity denominator is zero: REFUSED: this module holds API gravity to 5 to 100 degrees and this is -131.5
 - an oil heavier than the water: REFUSED: the oil must be lighter than the water for it to rise
-And the same bad fluid through all four device doors, each refusing in its own words rather than through one shared sentence:
+THAT RISE VELOCITY REFUSAL IS THE FIRST OF FIVE DOORS ON ONE BAD FLUID, and the count is worth stating exactly, because it is the count the repair was about and a reader will be asked to hold it. FIVE DOORS, FOUR OF THEM DEVICES: `stokesRiseMS` above is the door that is not a device, and the four below are the devices. Each refuses in its own words rather than through one shared sentence:
 - a gravity separator on an oil heavier than its water: REFUSED: the oil must be lighter than the water for it to rise
 - a plate pack on the same fluid: REFUSED: the oil must be lighter than the water for it to rise
 - a hydrocyclone on the same fluid: REFUSED: the oil must be lighter than the water for it to rise
@@ -706,6 +729,19 @@ Every one of those fields is straddled in the table above: it is true on at leas
 
 AT LEAST ONE ROW PER DEVICE STATES NONE OF THAT DEVICE'S DEFAULTS, so a default is never the only thing a case exercises. That is a rule a golden file has to be built to, because a suite whose every case runs at the defaults cannot tell a default from a derivation.
 
+THE NEWEST GROUP IN FULL, because it is the only group in this file whose subject is a refusal and the only one a reader cannot infer from a cut size. Every row runs 0.001 m3/s through a bed, and the only input that moves is the AREA:
+| bed area m2 | loading m/hr | the golden expects | the engine |
+| --- | --- | --- | --- |
+| 20 | 0.180000 | REFUSED | refused |
+| 200 | 0.018000 | REFUSED | refused |
+| 600 | 0.006000 | REFUSED | refused |
+| 2000 | 0.001800 | REFUSED | refused |
+| 3.61 | 0.997230 | REFUSED | refused |
+| 3.6 | 1.000000 | an answer | answered |
+| 3.5 | 1.028571 | an answer | answered |
+The first four beds span 100.000000 times in area (derived, the largest of those areas over the smallest) and every one of them is refused. THOSE ARE THE FOUR BEDS A CLAMP MAKES IDENTICAL, which is the whole reason this group exists: a hundredfold of bed area is the widest thing a reader could vary, and a module that answered the same on all four would be caught here and nowhere else in the file.
+The three rows beside them are the STRADDLE, and they are what pins the floor to the declared value rather than to somewhere below it: 0.997230 m/hr is REFUSED and 1.000000 m/hr ANSWERS, which is a gap of 0.002770 of the floor itself (derived, the two loadings subtracted and taken over the floor). And 3.600000 m2 is `areaAtFloorM2` on all seven rows, golden and engine alike, which is the bed that would run that flow at the floor.
+
 THE PLANTING BATTERY, which is the real measure of the gate. FC7-0 planted thirty five defects, twenty seven in the engine alone and eight in the engine and the oracle together, run one at a time against the suite. Before that repair, 22 of those 35 left the suite fully green: 16 of the 27 planted in the engine alone and 6 of the eight planted in both files. After it, 0 of 35 do. FC7-1 re-ran all 35 against the repaired source and added twenty four of its own plus one self-test of the runner, and none of the sixty leaves the suite green. The suite this digest was built beside carries 78 tests, counted off the vendored file.
 The eight planted in both files at once are the interesting half, because a golden regenerated from a bent oracle agrees with a bent engine perfectly. What catches them now is a mixture of three things: a route with no place to type the constant, the identities that need no source, and an explicit PIN with the value typed by hand in the test file.
 Every family in the suite also carries a NEGATIVE CONTROL that is asserted to fire and to name a case. One of them records a fact about its own subject rather than a round number: the cyclone control fails on four of five rows and not five, because a turndown of exactly one is the one case a wrong field exponent cannot move.
@@ -758,8 +794,8 @@ The three cut sizes in that table come from three completely different arguments
 THIS SECTION IS HISTORY. It is the one section of this digest whose subject is what the engine USED TO DO, it is framed as history in its title and in this first line, and nothing above it is history at all. Every figure in the rest of this digest is the repaired engine answering now.
 
 Five things this module did before FC7-0, each of which is a lesson rather than an anecdote:
-- THE HYDROCYCLONE REWARDED BUYING FEWER LINERS. The field went as the square of the flow with nothing above it, so the cut size fell without limit as liners were removed from the bank, and the studio's own shipped default ran its liners at 7.7 times their design flow. A studio that tells a designer to buy less equipment for a better answer is worse than no studio. THE LESSON IS THE SWEEP: sweep the input a user is most tempted to reduce, and look at the direction of the answer. Section 10 is that sweep on the repaired model, and it now turns over.
-- FOUR DEVICES TRUSTED WHAT A FIFTH REFUSED. Given an oil heavier than its water, one export refused by name and four returned a cut size of NaN with no error at all, and the train then skipped those stages and returned a spec verdict computed over whatever ran. THE LESSON IS THE RULE: when two halves of one module disagree, THE TRUSTING HALF IS THE BUG. Section 16 runs the identical bad fluid through all five doors at once.
+- THE HYDROCYCLONE REWARDED BUYING FEWER LINERS. The field went as the square of the flow with nothing above it, so the cut size fell without limit as liners were removed from the bank, and the studio's own shipped default ran its liners at 7.7 times their design flow. A studio that tells a designer to buy less equipment for a better answer is worse than no studio. THE LESSON IS THE SWEEP: sweep the input a user is most tempted to reduce, and look at the direction of the answer. Section 10 is that sweep on the repaired model, and it now turns over. THE LINER ITSELF WAS NOT A MODEL EITHER, which is the same defect one level down: the liner LENGTH was not an input at all, and the bore reached the answer through a bare divisor on a velocity the source called residence-scaled rather than through any residence time. Section 9 is the stated geometry the repair put there, where both dimensions move the answer for a reason a reader can follow.
+- FOUR DEVICES TRUSTED WHAT A FIFTH REFUSED. Given an oil heavier than its water, `stokesRiseMS` refused by name and the four devices returned a cut size of NaN with no error at all, and the train then skipped those stages and returned a spec verdict computed over whatever ran. THE LESSON IS THE RULE: when two halves of one module disagree, THE TRUSTING HALF IS THE BUG. Section 16 runs the identical bad fluid through all five of those doors at once, the rise velocity function and the four devices, and every one of them now refuses in its own words.
 - TWO MODELS WERE DEAD. An attachment fraction that was exactly one across every input a user could type made the bubble size, the gas rate and the residence time decorative, and made induced and dissolved gas flotation the same device behind two menu entries. A media filter computed its removal twice by two routes that disagreed, and the train read the route the gate did not validate. THE LESSON IS THE PROBE: sweep every input and check it moves the answer, and if a module holds two opinions about one quantity, delete one.
 - A MEDIAN WAS REPORTED AGAINST A DIFFERENT KIND OF NUMBER. The inlet median was the typed d50 and the outlet median was measured off the bins, so a train that removed nothing showed the median falling. THE LESSON IS THE BASIS: two numbers a reader will compare must be measured the same way, and the module should say on its own return that they are.
 - THE GATE COULD NOT CATCH ANY OF IT. Sixteen defects planted in the engine alone left the suite fully green, and six more survived being planted in the engine and the oracle together. THE LESSON IS SECTION 19: a green suite is a measurement of the suite, until somebody plants a defect and watches.

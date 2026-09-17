@@ -116,13 +116,27 @@ export const PLATE_COUNT_SWEEP = [10, 30, 60, 120];
 export const LINER_SWEEP = [600, 460, 350, 280, 230, 200, 177, 150, 120];
 export const LINER_REFUSED = [115, 1];
 export const LINER_STARVED = 700;
-/** The liner geometry, swept on the two dimensions that set the residence time. */
+/**
+ * The liner geometry, swept on the two dimensions that set the residence time.
+ *
+ * THE BORE LEG IS FIVE ROWS AT ONE LENGTH, over a tenfold span of bore, because
+ * ONE row cannot show a direction and cannot show that the direction holds. The
+ * first draft carried a single wider bore beside the length leg and the
+ * sentence under the table read the pair backwards, asserting a coarser cut
+ * where the engine had printed a finer one. A sweep is the cheapest thing in
+ * this file and it is the only thing that settles a direction.
+ */
 export const LINER_GEOMETRY_SWEEP = [
   { linerDiameterM: 0.035, linerLengthM: 0.5 },
   { linerDiameterM: 0.035, linerLengthM: 0.7 },
   { linerDiameterM: 0.035, linerLengthM: 1.0 },
+  { linerDiameterM: 0.01, linerLengthM: 0.7 },
+  { linerDiameterM: 0.02, linerLengthM: 0.7 },
   { linerDiameterM: 0.06, linerLengthM: 0.7 },
+  { linerDiameterM: 0.1, linerLengthM: 0.7 },
 ];
+/** The length the bore leg above is swept at, and the rows that make it up. */
+export const LINER_BORE_LEG_LENGTH_M = 0.7;
 export const CORE_FRACTION_SWEEP = [0.2, 0.35, 0.5, 0.65];
 export const CORE_FRACTION_REFUSED = 0.75;
 
@@ -148,6 +162,22 @@ export const FLOTATION_REFUSED = { gasRatio: 4, bubbleMicron: 5, attachmentEffic
 export const BED_DEPTH_SWEEP = [0.1, 0.4, 0.8, 1.6, 3.0, 10.0];
 export const MEDIA_SWEEP = [400, 650, 800, 1200, 1600];
 export const LOADING_AREA_SWEEP = [8, 12, 20, 40, 80];
+/**
+ * THE LOADING FLOOR, which is the FC7-1 repair and the subject this whole wave
+ * is named for. The digest promised a refusal, a bed below the floor and the
+ * bed that runs the flow at the floor, and carried none of the three, so both
+ * the Professional and the Expert writer taught the floor from the declared
+ * constant alone with no worked example anywhere to quote.
+ *
+ * THE ANSWERING AREAS STOP SHORT OF THE FLOOR ON PURPOSE. The bed that runs
+ * this flow exactly at the floor is an irrational area, and the six-decimal
+ * form a reader would type back is LARGER than it, which loads lower and is
+ * REFUSED. A row that answers at a printed area a reader cannot reproduce is
+ * worse than no row, so the floor area is stated as the quantity the refusal
+ * names and the answering rows sit inside it.
+ */
+export const FILTER_FLOOR_ANSWER_AREAS = [200, 400, 490];
+export const FILTER_FLOOR_REFUSED_AREAS = [600, 2000];
 
 /** The droplet the Stokes group constant is measured out of the engine with. */
 export const STOKES_PROBE_MICRON = 100;
