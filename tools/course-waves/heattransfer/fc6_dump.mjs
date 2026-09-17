@@ -67,6 +67,92 @@ const n0 = (x) => num(x, 0);      // counts
 const yn = (b) => (b === true ? 'yes' : (b === false ? 'no' : 'null'));
 
 /* ------------------------------------------------------------------ *
+ * WHO OWNS EACH SECTION, IN ONE PLACE.
+ *
+ * This clause used to be typed into the middle of each of the twenty one
+ * header sentences, so the digest and structure.py were two independent
+ * hand-maintained copies of the same fact. The module key was typed as a
+ * RUNNING COUNTER, and it drifted the moment a section stopped being one per
+ * module: SECTION 2 absorbs both the capacity rate module and the refusals
+ * module, and from there every later Associate header read one module low.
+ * The same drift ran through the other two tiers.
+ *
+ * The map below is the authority inside this generator and structure.py is
+ * the authority outside it. A section that genuinely covers two modules names
+ * both, which is what the kit's owner-clause parser reads and what a reader
+ * needs: litsweep takes the TIER words from this clause for its reach checks
+ * and the module keys for its advisory resolve descriptions.
+ * ------------------------------------------------------------------ */
+const SECTION_OWNERS = {
+  'SECTION 1': 'Associate m01',
+  'SECTION 2': 'Associate m02 and m03',
+  'SECTION 3': 'Associate m04',
+  'SECTION 4': 'Associate m05',
+  'SECTION 5': 'Associate m05',
+  'SECTION 6': 'Associate m06 and Professional m06',
+  'SECTION 7': 'Professional m01',
+  'SECTION 8': 'Professional m02',
+  'SECTION 9': 'Professional m03',
+  'SECTION 10': 'Professional m03 and m04',
+  'SECTION 11': 'Professional m04',
+  'SECTION 12': 'Professional m05',
+  'SECTION 13': 'Professional m05',
+  'SECTION 14': 'Expert m05',
+  'SECTION 15': 'Expert m01',
+  'SECTION 16': 'Expert m02',
+  'SECTION 17': 'Expert m03',
+  'SECTION 18': 'Expert m04',
+  'SECTION 19': 'Expert m04',
+  'SECTION 20': 'Expert m02 and m05',
+  'SECTION 21': 'Expert m05 l01',
+};
+
+const TIER_WORDS = ['Associate', 'Professional', 'Expert'];
+const emittedSections = new Set();
+const sectionNo = (ref) => {
+  const m = /^SECTION (\d+)$/.exec(ref);
+  if (!m) {
+    throw new Error(`GENERATOR REFUSES: ${ref} is not a section reference. Sections are addressed `
+      + 'by name here so that a section number is never a bare figure in this file, which is how '
+      + 'the capstone leak gate tells an address from a quantity.');
+  }
+  return Number(m[1]);
+};
+
+const sectionHead = (ref, title) => {
+  const no = sectionNo(ref);
+  const owner = SECTION_OWNERS[ref];
+  if (typeof owner !== 'string' || !owner) {
+    throw new Error(`GENERATOR REFUSES: ${ref} has no entry in SECTION_OWNERS. A header whose `
+      + 'owner clause is guessed is how the last map drifted.');
+  }
+  if (!TIER_WORDS.some((t) => owner.includes(t))) {
+    throw new Error(`GENERATOR REFUSES: the owner clause for ${ref} names no tier: ${owner}`);
+  }
+  for (const key of owner.match(/\bm\d+\b/g) || []) {
+    const n = Number(key.slice(1));
+    if (!/^m0[1-9]$/.test(key) || n < 1 || n > 6) {
+      throw new Error(`GENERATOR REFUSES: ${ref} names a module key this course has no module `
+        + `for: ${key}. structure.py carries six modules a tier.`);
+    }
+  }
+  if (emittedSections.has(no)) {
+    throw new Error(`GENERATOR REFUSES: ${ref} was emitted twice.`);
+  }
+  emittedSections.add(no);
+  return `# ${ref}: ${title} (owned by ${owner})`;
+};
+
+const auditSectionOwners = () => {
+  const declared = Object.keys(SECTION_OWNERS).map(sectionNo).sort((a, b) => a - b);
+  const emitted = [...emittedSections].sort((a, b) => a - b);
+  if (declared.join(',') !== emitted.join(',')) {
+    throw new Error(`GENERATOR REFUSES: SECTION_OWNERS declares ${declared.join(',')} and the run `
+      + `emitted ${emitted.join(',')}. A declared owner nobody printed is a dead row.`);
+  }
+};
+
+/* ------------------------------------------------------------------ *
  * THE REFUSAL GUARD, and it is a BUILD-TIME guard over every refusal
  * block in this file rather than a rule somebody remembers.
  *
@@ -280,7 +366,7 @@ w(`# Built against engines e4377b3, vendored sha-identical. Every figure below i
 w('# A GOLDEN LINE IS NOT THE ENGINE ANSWERING. The published case file is written by the oracle, which reaches each answer by a different route, so a golden figure beside an engine figure is two methods agreeing to as many digits as the two of them agree to.');
 w();
 // ---------------------------------------------------------------- SECTION 1
-w('# SECTION 1: What this engine rates and sizes, and what it refuses (owned by Associate m01)');
+w(sectionHead('SECTION 1', 'What this engine rates and sizes, and what it refuses'));
 w();
 w('# App surface: the Heat Exchanger & Cooling Studio has three tabs over one exchanger. Sizing takes a duty and returns a surface and a bundle, Rating takes a surface and returns what it delivers, and Air Cooler sizes a bay and then rates it on a hot afternoon.');
 w('- This engine answers four questions about one exchanger. What duty do these two streams exchange, what driving force do they exchange it across, what coefficient does the surface carry, and how much surface and how many tubes does that take. It then rates a machine you already have, in both directions, and sizes an air cooler.');
@@ -298,7 +384,7 @@ w('- The one scalar helper is the air density, and the module documents the exce
 w();
 
 // ---------------------------------------------------------------- SECTION 2
-w('# SECTION 2: The energy balance, its four terminals, and the refusals that protect it (owned by Associate m02)');
+w(sectionHead('SECTION 2', 'The energy balance, its four terminals, and the refusals that protect it'));
 w();
 w('- A capacity rate is a mass flow times a heat capacity, in Btu an hour per degF. It is the whole of what the balance knows about a stream.');
 w('| stream | lb an hour | Btu per lb per degF | capacity rate, Btu an hour per degF |');
@@ -352,7 +438,7 @@ refusal('an arrangement this module does not carry', H.lmtd({ ...STUDIO_TERMINAL
 w();
 
 // ---------------------------------------------------------------- SECTION 3
-w('# SECTION 3: The log mean, the two pairings, and the arithmetic mean it sits below (owned by Associate m03)');
+w(sectionHead('SECTION 3', 'The log mean, the two pairings, and the arithmetic mean it sits below'));
 w();
 w('- The driving force is the log mean of the two END temperature differences. Which two ends they are is what the arrangement decides: counter-current pairs each inlet with the other outlet, parallel flow pairs the two inlets and then the two outlets.');
 w('| case | arrangement | end one, degF | end two, degF | log mean, degF | arithmetic mean, degF (derived, the two ends added and halved) | equal ends |');
@@ -378,12 +464,19 @@ w('- A 1-2 shell exchanger asks for the log mean too, and gets the counter-curre
 {
   const sh = answers('the shell1 reading of the studio case', H.lmtd({ thIn: STUDIO_TERMINALS.thIn, thOut: ST.bal.thOut, tcIn: STUDIO_TERMINALS.tcIn, tcOut: ST.bal.tcOut, arrangement: 'shell1' }));
   w(`- On the studio case: log mean ${e6(sh.lmtdF)} degF, basis reported as "${sh.basis}", note "${sh.note}".`);
+  // THE KEY COUNT ON THE SHELL READING IS MEASURED HERE, because Section 1's door
+  // census probes one arrangement and this door does not answer every arrangement
+  // with the same number of keys. A lesson that teaches the note as a key of its own
+  // needs the count that says so, and a count nobody measured is a count nobody has.
+  const co = answers('the counter reading of the studio case', H.lmtd({ thIn: STUDIO_TERMINALS.thIn, thOut: ST.bal.thOut, tcIn: STUDIO_TERMINALS.tcIn, tcOut: ST.bal.tcOut, arrangement: 'counter' }));
+  const pa = answers('the parallel reading of the studio case', H.lmtd({ thIn: STUDIO_TERMINALS.thIn, thOut: ST.bal.thOut, tcIn: STUDIO_TERMINALS.tcIn, tcOut: ST.bal.tcOut, arrangement: 'parallel' }));
+  w(`- The note rides along as a key of its own, so the three arrangements do not answer with the same number of keys: the counter reading carries ${n0(Object.keys(co).length)}, the parallel reading ${n0(Object.keys(pa).length)} and the shell reading ${n0(Object.keys(sh).length)} (counted here by reading the three answers).`);
 }
 refusal('a log mean asked for on three terminals', H.lmtd({ thIn: STUDIO_TERMINALS.thIn, thOut: ST.bal.thOut, tcIn: STUDIO_TERMINALS.tcIn }));
 refusal('a log mean across streams that have crossed', H.lmtd({ thIn: STUDIO_TERMINALS.thIn, thOut: STUDIO_TERMINALS.tcIn, tcIn: STUDIO_TERMINALS.tcIn, tcOut: STUDIO_TERMINALS.thIn }), ['dt1', 'dt2']);
 w();
 // ---------------------------------------------------------------- SECTION 4
-w('# SECTION 4: Area from the duty, the coefficient and the driving force (owned by Associate m04)');
+w(sectionHead('SECTION 4', 'Area from the duty, the coefficient and the driving force'));
 w();
 w('- The surface is the duty divided by the coefficient, the correction factor and the log mean. Nothing else. Which means every error in any of those three arrives in the area unchanged.');
 w('| case | duty, Btu an hour | U dirty, Btu an hour per ft2 per degF | F | log mean, degF | area, ft2 |');
@@ -405,7 +498,7 @@ refusal('an area asked for at an F above one', H.areaRequired({ qBtuHr: ST.bal.q
 w();
 
 // ---------------------------------------------------------------- SECTION 5
-w('# SECTION 5: Tubes: the surface of one, the count, the pass rounding, and the overshoot (owned by Associate m05)');
+w(sectionHead('SECTION 5', 'Tubes: the surface of one, the count, the pass rounding, and the overshoot'));
 w();
 w('- One tube carries pi times its outside diameter in feet times its length. The count is the area divided by that, ROUNDED UP twice: once to a whole tube, and again to a whole multiple of the pass count, because a multi-pass bundle puts the same number of tubes in every pass.');
 w('| case | area asked for, ft2 | one tube, ft2 | passes | tubes | tubes a pass | actual area, ft2 | overshoot, percent |');
@@ -425,7 +518,7 @@ refusal('a tube count asked for at a zero area', H.tubeCount({ areaFt2: 0, doIn:
 w();
 
 // ---------------------------------------------------------------- SECTION 6
-w('# SECTION 6: The studio default case, end to end, with the tube count closed (owned by Associate m06 and Professional m06)');
+w(sectionHead('SECTION 6', 'The studio default case, end to end, with the tube count closed'));
 w();
 w('- This is the case the Heat Exchanger & Cooling Studio opens with. Every figure in this section is on that screen, and a reader can check the whole chain against an app.');
 w('- The chain is a LOOP. It is not a line. The film needs a tube count, the count needs an area, the area needs the coefficient, and the coefficient needs the film. The map is a contraction, so plain iteration settles, and the trail is worth seeing settle.');
@@ -485,7 +578,7 @@ w(`- On the studio case: U times area times F times the log mean is ${r4(ST_LOOP
 w(`- On ORON: ${r4(OR_LOOP.u.uDirtyBtuHrFt2F * OR_LOOP.area.areaFt2 * 1 * OR.l.lmtdF)} Btu an hour against ${r4(OR.bal.qBtuHr)}.`);
 w();
 // ---------------------------------------------------------------- SECTION 7
-w('# SECTION 7: P and R, and a correction factor computed rather than typed (owned by Professional m01)');
+w(sectionHead('SECTION 7', 'P and R, and a correction factor computed rather than typed'));
 w();
 w('- P and R are the two dimensionless groups the correction factor is written in. P is the cold rise over the span between the two inlets. R is the hot drop over the cold rise.');
 w('| case | P | R | F at one shell pass | warning |');
@@ -531,7 +624,7 @@ refusal('R given at zero', H.lmtdCorrectionF({ p: SHELL_P, r: 0, shellPasses: 1 
 w();
 
 // ---------------------------------------------------------------- SECTION 8
-w('# SECTION 8: Shells in series, a declared bound, and the equivalent single-shell P (owned by Professional m02)');
+w(sectionHead('SECTION 8', 'Shells in series, a declared bound, and the equivalent single-shell P'));
 w();
 w(`- One duty, at P of ${e6(SHELL_P)} and R of ${e6(SHELL_R)}, bought with one shell up to the declared maximum of ${n0(DB.maxShellPasses)}:`);
 w('| shells in series | equivalent single-shell P | F | warning |');
@@ -567,7 +660,7 @@ w('- That is the shape to carry away. A configuration can be infeasible rather t
 w();
 
 // ---------------------------------------------------------------- SECTION 9
-w('# SECTION 9: The overall coefficient, assembled from five named resistances (owned by Professional m03)');
+w(sectionHead('SECTION 9', 'The overall coefficient, assembled from five named resistances'));
 w();
 w(`- The coefficient is a sum of resistances in series, and it is referred to the OUTSIDE tube surface. The engine says which area on every answer: "${ST_LOOP.u.referenceArea}". This matters inside this package, because a second export in the production domain is called overallU and is referred to a stated BORE instead. A coefficient without its reference area is not a number you can use.`);
 w('- The five terms, on the studio case at its converged tube count:');
@@ -607,7 +700,7 @@ refusal('an inside diameter above the outside one', H.overallUOutside({ ...STUDI
 w();
 
 // --------------------------------------------------------------- SECTION 10
-w('# SECTION 10: The controlling resistance, its runner up, and the margin that decided it (owned by Professional m03)');
+w(sectionHead('SECTION 10', 'The controlling resistance, its runner up, and the margin that decided it'));
 w();
 w('- Naming the largest resistance is the point of assembling U from its parts, because that is the term worth spending money on. A one-word verdict decided by a two percent gap is a coin toss wearing a result clothes, so the engine reports the runner up and the margin as well.');
 w('| case | controlling | runner up | margin, percent of the controlling term | clear of the declared threshold |');
@@ -635,7 +728,7 @@ w(`- THE THRESHOLD IS DECLARED BY THIS MODULE AT ${n0(DB.controllingMarginPct)} 
 }
 w();
 // --------------------------------------------------------------- SECTION 11
-w('# SECTION 11: The thin-wall limit, and the factor it fixes (owned by Professional m04)');
+w(sectionHead('SECTION 11', 'The thin-wall limit, and the factor it fixes'));
 w();
 w('- A cylindrical wall resistance carries the outside diameter times the logarithm of the diameter ratio, over twice the conductivity. As the wall gets thin that expression has to collapse onto the flat plate, which is the thickness over the conductivity and nothing else. THAT LIMIT IS A KNOWN TRUTH AND NEEDS NO PUBLICATION, and it is the limit that fixes the factor of two.');
 w(`- Measured by asking the engine for a coefficient with both films made negligible, at an outside diameter of ${e6(WALL_DO_IN)} inches, so the total resistance IS the wall:`);
@@ -665,7 +758,7 @@ w(`- The wall is the smallest of the five terms on the studio case, at ${e6(ST_L
 w();
 
 // --------------------------------------------------------------- SECTION 12
-w('# SECTION 12: The tube-side film: Reynolds, Prandtl, three regimes, and a band nobody here can state (owned by Professional m04)');
+w(sectionHead('SECTION 12', 'The tube-side film: Reynolds, Prandtl, three regimes, and a band nobody here can state'));
 w();
 w('- The film coefficient inside the tubes is computed, and it is the only place in this module where a FITTED correlation is used. Reynolds and Prandtl come out on every call so they can be checked.');
 w(`- At the studio's converged count of ${n0(ST_LOOP.tubes.nTubes)} tubes in ${n0(STUDIO_GEOMETRY.passes)} passes, which is ${n0(ST_LOOP.film.tubesPerPass)} tubes a pass: Reynolds ${e6(ST_LOOP.film.re)}, Prandtl ${e6(ST_LOOP.film.pr)}, regime ${ST_LOOP.film.regime}, film coefficient ${e6(ST_LOOP.film.hBtuHrFt2F)}.`);
@@ -718,8 +811,12 @@ w(`- On the studio case that block reports a validity band of ${String(ST_LOOP.f
 w('- That is the honest shape for a held item. The numbers a reader would need to check the band against their own source are handed over, and nothing here grades them.');
 w();
 w('The published film cases:');
-w('| flow, lb an hour | bore, inches | viscosity, cp | Reynolds | golden Reynolds | Prandtl | film coefficient | golden film coefficient |');
-w('| --- | --- | --- | --- | --- | --- | --- | --- |');
+// TWO OF THESE ROWS CARRY THE SAME FLOW, THE SAME BORE AND THE SAME VISCOSITY and
+// different film coefficients, and the wall viscosity is the whole of the difference.
+// Printed rather than left out: a published table whose discriminator is off the page
+// reads as the same case answered twice.
+w('| flow, lb an hour | bore, inches | viscosity, cp | wall viscosity, cp | Reynolds | golden Reynolds | Prandtl | film coefficient | golden film coefficient |');
+w('| --- | --- | --- | --- | --- | --- | --- | --- | --- |');
 GOLD.tubeFilm.forEach((row, i) => {
   const f = H.tubeSideFilm({
     mLbHr: row.mLbHr, diIn: row.diIn, muCp: row.muCp, kBtuHrFtF: row.kBtuHrFtF, cpBtuLbF: row.cpBtuLbF,
@@ -728,13 +825,13 @@ GOLD.tubeFilm.forEach((row, i) => {
     ...(row.passes !== undefined ? { passes: row.passes } : {}),
   });
   answers(`golden film row ${i}`, f);
-  w(`| ${r4(row.mLbHr)} | ${e6(row.diIn)} | ${e6(row.muCp)} | ${e6(f.re)} | ${e6(row.re)} | ${e6(f.pr)} | ${e6(f.hBtuHrFt2F)} | ${e6(row.hBtuHrFt2F)} |`);
+  w(`| ${r4(row.mLbHr)} | ${e6(row.diIn)} | ${e6(row.muCp)} | ${row.muWallCp === undefined ? 'none' : e6(row.muWallCp)} | ${e6(f.re)} | ${e6(row.re)} | ${e6(f.pr)} | ${e6(f.hBtuHrFt2F)} | ${e6(row.hBtuHrFt2F)} |`);
 });
 w();
 w('- THE ENGINE AND THE ORACLE DISAGREE IN THE LAST DIGITS OF THOSE COLUMNS AND THE DISAGREEMENT IS UNDERSTOOD. The oracle forms no flow area at all, taking Reynolds as four times the mass flow over pi times the diameter times the viscosity, and it derives every unit conversion from the SI definitions rather than typing one. The engine types a rounded viscosity conversion. Section 20 measures that rounding and shows the residual it causes is exactly it.');
 w();
 // --------------------------------------------------------------- SECTION 13
-w('# SECTION 13: The cooling exponent this module declines to invent (owned by Professional m05)');
+w(sectionHead('SECTION 13', 'The cooling exponent this module declines to invent'));
 w();
 w('- The correlation carries a Prandtl exponent, and the heating form and the cooling form use DIFFERENT ones. Only the heating form is established in this repository.');
 w('- So a cooled tube side is REFUSED. Not answered with the heating exponent, and not answered with a cooling exponent invented here:');
@@ -751,7 +848,7 @@ w('- Nothing in this course grades a cooled tube side, and nothing in it grades 
 w();
 
 // --------------------------------------------------------------- SECTION 14
-w('# SECTION 14: The bundle, the shell, and the two layout rows that are identical (owned by Expert m04)');
+w(sectionHead('SECTION 14', 'The bundle, the shell, and the two layout rows that are identical'));
 w();
 w(`- A bundle diameter comes from a fitted geometry form: the tube outside diameter times the tube count over a constant, raised to the reciprocal of an exponent. The constant and the exponent depend on the layout angle and the pass count, and this module carries ${n0(Object.keys(H.bundleConstants()).length)} layouts across ${n0(Object.keys(H.bundleConstants()['30']).length)} pass counts.`);
 w(`- One area of ${e6(BUNDLE_AREA_FT2)} ft2 at the studio's tube size, across every layout and pass count the module carries:`);
@@ -800,7 +897,7 @@ w('- The oracle reaches the bundle diameter by BISECTING on the diameter until t
 w();
 
 // --------------------------------------------------------------- SECTION 15
-w('# SECTION 15: Effectiveness and NTU in both directions, two ceilings, and the arrangement with none (owned by Expert m01)');
+w(sectionHead('SECTION 15', 'Effectiveness and NTU in both directions, two ceilings, and the arrangement with none'));
 w();
 w('- A rating asks the other question. Given a surface, what fraction of the most heat that could possibly be moved does this machine actually move. Effectiveness is that fraction, and NTU is the surface written dimensionlessly.');
 w(`| NTU | ${CR_SWEEP.map((cr) => `counter at Cr ${e6(cr)}`).join(' | ')} | ${CR_SWEEP.map((cr) => `parallel at Cr ${e6(cr)}`).join(' | ')} | ${CR_SWEEP.map((cr) => `1-2 shell at Cr ${e6(cr)}`).join(' | ')} |`);
@@ -851,14 +948,20 @@ w('| --- | --- | --- | --- | --- | --- |');
 GOLD.epsNtu.forEach((row, i) => {
   const e = answers(`golden eps row ${i}`, H.effectivenessFromNtu({ ntu: row.ntu, cr: row.cr, arrangement: row.arrangement }));
   const back = H.ntuFromEffectiveness({ effectiveness: e.effectiveness, cr: row.cr, arrangement: row.arrangement });
-  w(`| ${e6(row.ntu)} | ${e6(row.cr)} | ${row.arrangement} | ${e6(e.effectiveness)} | ${e6(row.effectiveness)} | ${back.error ? 'refused' : e6(back.ntu)} |`);
+  // THE GOLDEN EFFECTIVENESS IS CARRIED ON `epsOde`, WHICH IS THE ORACLE'S OWN KEY NAME.
+  // This row read `row.effectiveness`, which no golden row has, so num() rendered
+  // undefined as 'null' on all thirteen rows and the column the prose beneath calls
+  // THE EVIDENCE printed nothing at all. A missing key is not a missing value: the
+  // oracle marched the equations for every one of these and the file carries the
+  // answer beside its route.
+  w(`| ${e6(row.ntu)} | ${e6(row.cr)} | ${row.arrangement} | ${e6(e.effectiveness)} | ${e6(row.epsOde)} | ${back.error ? 'refused' : e6(back.ntu)} |`);
 });
 w();
 w('- The last column is the inversion returning the NTU the row started with. That is a self-consistency check and it is NOT evidence that either direction is right: an identity between a function and its own inverse holds whether or not either one is correct. The golden column is the evidence, because the oracle reaches it by marching the differential equations rather than by algebra.');
 w();
 
 // --------------------------------------------------------------- SECTION 16
-w('# SECTION 16: The capacity ratio at zero, where all three arrangements collapse onto one curve (owned by Expert m01)');
+w(sectionHead('SECTION 16', 'The capacity ratio at zero, where all three arrangements collapse onto one curve'));
 w();
 w('- A capacity ratio of zero is a stream changing phase: it absorbs heat without changing temperature. At that limit the arrangement stops mattering, and all three collapse onto the same curve.');
 w('| NTU | counter | parallel | 1-2 shell | the three all equal |');
@@ -873,7 +976,7 @@ w(`- The ceiling at that limit is ${e6(answers('the ceiling at a capacity ratio 
 w('- The published cases include one row in each arrangement at that limit, so the collapse is in the golden file and not only in this table.');
 w();
 // --------------------------------------------------------------- SECTION 17
-w('# SECTION 17: The air cooler: the air balance, the draft type, the barometer, and the correction it declines (owned by Expert m02)');
+w(sectionHead('SECTION 17', 'The air cooler: the air balance, the draft type, the barometer, and the correction it declines'));
 w();
 w('- An air cooler has no cooling water. It has ambient air, a fan and a bundle, and the ambient temperature is the thing the design is hostage to.');
 w('- The design point of the two teaching bays:');
@@ -939,7 +1042,7 @@ refusal('a process outlet above the process inlet', H.airCooler({ ...STUDIO_AIR,
 w();
 
 // --------------------------------------------------------------- SECTION 18
-w('# SECTION 18: The hot day, rated at fixed UA and fixed air mass (owned by Expert m03)');
+w(sectionHead('SECTION 18', 'The hot day, rated at fixed UA and fixed air mass'));
 w();
 w('- A bay is bought for its worst afternoon. So the question is not what it does on its design day, it is what it still does when the air arrives hotter than the day it was sized on.');
 w('- WHAT A MACHINE ACTUALLY HOLDS ON A HOT AFTERNOON IS ITS SURFACE AND ITS AIR MASS. Those two fix UA and both capacity rates, so they fix NTU and the capacity ratio, so they fix the EFFECTIVENESS. The duty then follows from the inlet temperature difference alone, and the new process outlet and the new air rise come out with it.');
@@ -1010,7 +1113,7 @@ w('- The surface column moves and the last three do not. A learner who has seen 
 w();
 
 // --------------------------------------------------------------- SECTION 19
-w('# SECTION 19: The second method, and what two methods agreeing buys (owned by Expert m03)');
+w(sectionHead('SECTION 19', 'The second method, and what two methods agreeing buys'));
 w();
 w('- The hot day above was rated by effectiveness-NTU. There is another classical way to the same answer, and it is genuinely independent: solve the duty out of the surface equation itself, at the fixed UA and at whatever log mean the new outlet and the new air rise produce.');
 w('- If both methods are right they must agree, because a rated answer has to satisfy the surface equation it came from. So the product of the fixed UA and the hot-day log mean is a CHECK and not a restatement:');
@@ -1047,7 +1150,7 @@ w('- Read the last column for what it does NOT contain: a second copy of the fir
 w();
 
 // --------------------------------------------------------------- SECTION 20
-w('# SECTION 20: What no route here can check: the held register, the fitted numbers and two measured roundings (owned by Expert m05)');
+w(sectionHead('SECTION 20', 'What no route here can check: the held register, the fitted numbers and two measured roundings'));
 w();
 w(`- The module exports a register of what it cannot source, and it carries ${n0(Object.keys(HELD).length)} entries, counted here by reading the register itself. Every return that depends on one says so. No citation is invented for any of them, and NOTHING IN THIS COURSE GRADES ONE.`);
 w(`- AND THE MODULE'S OWN HEADER SAYS SIX. Read the register: ${Object.keys(HELD).join(', ')}. That is ${n0(Object.keys(HELD).length)} entries against a header sentence that says six, and the register is the authority because it is the thing the returns point at. A COUNT IS WORTH MEASURING RATHER THAN QUOTING, even from the module that owns it, and this is the cheapest possible demonstration of why.`);
@@ -1116,7 +1219,7 @@ w('| --- | --- |');
 w();
 
 // --------------------------------------------------------------- SECTION 21
-w('# SECTION 21: HISTORY, and it is labelled as history in this title and in the line below it: what this engine was repaired for, and what each case teaches (owned by Expert m05 l01)');
+w(sectionHead('SECTION 21', 'HISTORY, and it is labelled as history in this title and in the line below it: what this engine was repaired for, and what each case teaches'));
 w();
 w('EVERYTHING IN THIS SECTION IS HISTORY AND IS LABELLED AS HISTORY. Nothing above this line is. If you teach any of it, say plainly that it is what the engine used to do, the way this section does. A sentence about former behaviour that reads as current behaviour is the defect; the subject itself is not.');
 w();
@@ -1151,5 +1254,6 @@ w();
 w('- RECON.md, FINDINGS.md and FINDINGS-heattransfer.md are provenance too, and their numbers are STALE BY CONSTRUCTION: the repair changed the app own defaults, so a figure from before it is a figure about a machine that no longer exists. Read them to understand the work. Never quote one.');
 w();
 
+auditSectionOwners();
 auditRefusals();
 console.log(out.join('\n'));

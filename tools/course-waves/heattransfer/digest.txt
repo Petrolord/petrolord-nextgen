@@ -32,7 +32,7 @@ Every door, asked a question it can answer and a question it cannot:
 - Read the fourth column first: every door refuses with a NAMED string, so one guard shape works everywhere. Then read the last one. On these probes 3 of the 12 doors handed back MORE than a message, which is the numbers that produced the state they refused. A panel that shows only the message throws that away.
 - The one scalar helper is the air density, and the module documents the exception rather than making it silently: a leaf correlation has nowhere to put an error key.
 
-# SECTION 2: The energy balance, its four terminals, and the refusals that protect it (owned by Associate m02)
+# SECTION 2: The energy balance, its four terminals, and the refusals that protect it (owned by Associate m02 and m03)
 
 - A capacity rate is a mass flow times a heat capacity, in Btu an hour per degF. It is the whole of what the balance knows about a stream.
 | stream | lb an hour | Btu per lb per degF | capacity rate, Btu an hour per degF |
@@ -71,7 +71,7 @@ And the arrangement itself, read three ways:
 - Given as Parallel, with a capital letter, the same case answers 120.584840 degF, because case and surrounding space no longer decide which method runs.
 - REFUSED, an arrangement this module does not carry: unknown arrangement "crossflow": this module carries counter, parallel, shell1 and will not fall back to one of them
 
-# SECTION 3: The log mean, the two pairings, and the arithmetic mean it sits below (owned by Associate m03)
+# SECTION 3: The log mean, the two pairings, and the arithmetic mean it sits below (owned by Associate m04)
 
 - The driving force is the log mean of the two END temperature differences. Which two ends they are is what the arrangement decides: counter-current pairs each inlet with the other outlet, parallel flow pairs the two inlets and then the two outlets.
 | case | arrangement | end one, degF | end two, degF | log mean, degF | arithmetic mean, degF (derived, the two ends added and halved) | equal ends |
@@ -92,10 +92,11 @@ And the arrangement itself, read three ways:
 - Drive the two ends to the same number and the engine says so rather than dividing by a logarithm of one: log mean 280.000000 degF with equal ends reported as yes.
 - A 1-2 shell exchanger asks for the log mean too, and gets the counter-current one with a note attached. The note is the point: that figure is not the corrected driving force, and the correction is the next section.
 - On the studio case: log mean 130.064846 degF, basis reported as "counter", note "a 1-2 shell exchanger is rated on the counter-current log mean multiplied by F; this is the log mean, not the corrected driving force".
+- The note rides along as a key of its own, so the three arrangements do not answer with the same number of keys: the counter reading carries 5, the parallel reading 5 and the shell reading 6 (counted here by reading the three answers).
 - REFUSED, a log mean asked for on three terminals: the log mean needs all four terminal temperatures; tcOut was not given
 - REFUSED, a log mean across streams that have crossed: temperature cross: in counter flow the two ends of this exchanger have driving forces of 0.00 and 0.00 F, and one of them is not positive.  [evidence beside the message: dt1 0.000000, dt2 0.000000]
 
-# SECTION 4: Area from the duty, the coefficient and the driving force (owned by Associate m04)
+# SECTION 4: Area from the duty, the coefficient and the driving force (owned by Associate m05)
 
 - The surface is the duty divided by the coefficient, the correction factor and the log mean. Nothing else. Which means every error in any of those three arrives in the area unchanged.
 | case | duty, Btu an hour | U dirty, Btu an hour per ft2 per degF | F | log mean, degF | area, ft2 |
@@ -298,7 +299,7 @@ The published coefficient cases, and the defaults row:
 - REFUSED, a wall conductivity of zero: the wall conductivity must be positive Btu/hr.ft.F; it was 0. Zero used to return a U of zero with the wall named as the controlling resistance, and a negative value used to raise U above its own clean value.
 - REFUSED, an inside diameter above the outside one: the tube outside diameter must exceed the inside diameter: 0.62 in against 0.75 in
 
-# SECTION 10: The controlling resistance, its runner up, and the margin that decided it (owned by Professional m03)
+# SECTION 10: The controlling resistance, its runner up, and the margin that decided it (owned by Professional m03 and m04)
 
 - Naming the largest resistance is the point of assembling U from its parts, because that is the term worth spending money on. A one-word verdict decided by a two percent gap is a coin toss wearing a result clothes, so the engine reports the runner up and the margin as well.
 | case | controlling | runner up | margin, percent of the controlling term | clear of the declared threshold |
@@ -335,7 +336,7 @@ The published coefficient cases, and the defaults row:
 - THE LIMIT IS WHAT A TRANSCRIPTION CANNOT CATCH. Move that factor of two the same way in the engine and in the oracle and the two files go on agreeing with each other perfectly, and neither of them agrees with the flat plate. An independent method is worth more than a matching one, and an analytic limit is worth more than both when the method is the thing in doubt.
 - The wall is the smallest of the five terms on the studio case, at 2.107398 percent of the total. That is usual for metal and it is not a reason to skip it: the three conductivity columns above stand in inverse proportion to their conductivities, so a less conductive wall moves the term by the same factor in the other direction.
 
-# SECTION 12: The tube-side film: Reynolds, Prandtl, three regimes, and a band nobody here can state (owned by Professional m04)
+# SECTION 12: The tube-side film: Reynolds, Prandtl, three regimes, and a band nobody here can state (owned by Professional m05)
 
 - The film coefficient inside the tubes is computed, and it is the only place in this module where a FITTED correlation is used. Reynolds and Prandtl come out on every call so they can be checked.
 - At the studio's converged count of 74 tubes in 2 passes, which is 37 tubes a pass: Reynolds 44051.846000, Prandtl 15.119375, regime turbulent, film coefficient 547.762384.
@@ -377,12 +378,12 @@ The published coefficient cases, and the defaults row:
 - That is the honest shape for a held item. The numbers a reader would need to check the band against their own source are handed over, and nothing here grades them.
 
 The published film cases:
-| flow, lb an hour | bore, inches | viscosity, cp | Reynolds | golden Reynolds | Prandtl | film coefficient | golden film coefficient |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 150000.0000 | 0.620000 | 0.500000 | 30560.968162 | 30561.115839 | 7.559687 | 309.843653 | 309.844251 |
-| 400000.0000 | 0.834000 | 1.200000 | 33658.051800 | 33658.214442 | 8.294057 | 1129.767467 | 1129.769651 |
-| 150000.0000 | 0.620000 | 0.500000 | 30560.968162 | 30561.115839 | 7.559687 | 332.813879 | 332.814522 |
-| 2000.0000 | 0.620000 | 50.000000 | 4.074796 | 4.074815 | 755.968750 | 5.667097 | 5.667097 |
+| flow, lb an hour | bore, inches | viscosity, cp | wall viscosity, cp | Reynolds | golden Reynolds | Prandtl | film coefficient | golden film coefficient |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 150000.0000 | 0.620000 | 0.500000 | none | 30560.968162 | 30561.115839 | 7.559687 | 309.843653 | 309.844251 |
+| 400000.0000 | 0.834000 | 1.200000 | none | 33658.051800 | 33658.214442 | 8.294057 | 1129.767467 | 1129.769651 |
+| 150000.0000 | 0.620000 | 0.500000 | 0.300000 | 30560.968162 | 30561.115839 | 7.559687 | 332.813879 | 332.814522 |
+| 2000.0000 | 0.620000 | 50.000000 | none | 4.074796 | 4.074815 | 755.968750 | 5.667097 | 5.667097 |
 
 - THE ENGINE AND THE ORACLE DISAGREE IN THE LAST DIGITS OF THOSE COLUMNS AND THE DISAGREEMENT IS UNDERSTOOD. The oracle forms no flow area at all, taking Reynolds as four times the mass flow over pi times the diameter times the viscosity, and it derives every unit conversion from the SI definitions rather than typing one. The engine types a rounded viscosity conversion. Section 20 measures that rounding and shows the residual it causes is exactly it.
 
@@ -401,7 +402,7 @@ The published film cases:
 - What a caller does instead: type the film coefficient. The module takes a stated inside film, and the studio offers that box, so a hot tube side is designed with a coefficient the engineer stands behind rather than one the engine guessed.
 - Nothing in this course grades a cooled tube side, and nothing in it grades a film coefficient at all, for exactly this reason.
 
-# SECTION 14: The bundle, the shell, and the two layout rows that are identical (owned by Expert m04)
+# SECTION 14: The bundle, the shell, and the two layout rows that are identical (owned by Expert m05)
 
 - A bundle diameter comes from a fitted geometry form: the tube outside diameter times the tube count over a constant, raised to the reciprocal of an exponent. The constant and the exponent depend on the layout angle and the pass count, and this module carries 3 layouts across 4 pass counts.
 - One area of 980.000000 ft2 at the studio's tube size, across every layout and pass count the module carries:
@@ -481,23 +482,23 @@ The published bundle cases:
 - The two directions are inverses, and the engine is checked in both. The published cases run each way:
 | NTU | capacity ratio | arrangement | effectiveness | golden effectiveness | NTU recovered from that effectiveness |
 | --- | --- | --- | --- | --- | --- |
-| 1.000000 | 0.500000 | counter | 0.564733 | null | 1.000000 |
-| 2.000000 | 0.800000 | counter | 0.710909 | null | 2.000000 |
-| 3.000000 | 1.000000 | counter | 0.750000 | null | 3.000000 |
-| 0.500000 | 0.250000 | counter | 0.377589 | null | 0.500000 |
-| 1.000000 | 0.500000 | parallel | 0.517913 | null | 1.000000 |
-| 2.000000 | 0.700000 | parallel | 0.568604 | null | 2.000000 |
-| 0.500000 | 1.000000 | parallel | 0.316060 | null | 0.500000 |
-| 1.000000 | 0.500000 | shell1 | 0.539940 | null | 1.000000 |
-| 2.000000 | 0.700000 | shell1 | 0.634231 | null | 2.000000 |
-| 3.000000 | 0.900000 | shell1 | 0.607210 | null | 3.000000 |
-| 1.500000 | 0.000000 | counter | 0.776870 | null | 1.500000 |
-| 1.500000 | 0.000000 | parallel | 0.776870 | null | 1.500000 |
-| 1.500000 | 0.000000 | shell1 | 0.776870 | null | 1.500000 |
+| 1.000000 | 0.500000 | counter | 0.564733 | 0.564733 | 1.000000 |
+| 2.000000 | 0.800000 | counter | 0.710909 | 0.710909 | 2.000000 |
+| 3.000000 | 1.000000 | counter | 0.750000 | 0.750000 | 3.000000 |
+| 0.500000 | 0.250000 | counter | 0.377589 | 0.377589 | 0.500000 |
+| 1.000000 | 0.500000 | parallel | 0.517913 | 0.517913 | 1.000000 |
+| 2.000000 | 0.700000 | parallel | 0.568604 | 0.568604 | 2.000000 |
+| 0.500000 | 1.000000 | parallel | 0.316060 | 0.316060 | 0.500000 |
+| 1.000000 | 0.500000 | shell1 | 0.539940 | 0.539940 | 1.000000 |
+| 2.000000 | 0.700000 | shell1 | 0.634231 | 0.634231 | 2.000000 |
+| 3.000000 | 0.900000 | shell1 | 0.607210 | 0.607210 | 3.000000 |
+| 1.500000 | 0.000000 | counter | 0.776870 | 0.776870 | 1.500000 |
+| 1.500000 | 0.000000 | parallel | 0.776870 | 0.776870 | 1.500000 |
+| 1.500000 | 0.000000 | shell1 | 0.776870 | 0.776870 | 1.500000 |
 
 - The last column is the inversion returning the NTU the row started with. That is a self-consistency check and it is NOT evidence that either direction is right: an identity between a function and its own inverse holds whether or not either one is correct. The golden column is the evidence, because the oracle reaches it by marching the differential equations rather than by algebra.
 
-# SECTION 16: The capacity ratio at zero, where all three arrangements collapse onto one curve (owned by Expert m01)
+# SECTION 16: The capacity ratio at zero, where all three arrangements collapse onto one curve (owned by Expert m02)
 
 - A capacity ratio of zero is a stream changing phase: it absorbs heat without changing temperature. At that limit the arrangement stops mattering, and all three collapse onto the same curve.
 | NTU | counter | parallel | 1-2 shell | the three all equal |
@@ -513,7 +514,7 @@ The published bundle cases:
 - The ceiling at that limit is 1.000000 for every arrangement, because with nothing limiting the cold side there is no arrangement penalty left to pay.
 - The published cases include one row in each arrangement at that limit, so the collapse is in the golden file and not only in this table.
 
-# SECTION 17: The air cooler: the air balance, the draft type, the barometer, and the correction it declines (owned by Expert m02)
+# SECTION 17: The air cooler: the air balance, the draft type, the barometer, and the correction it declines (owned by Expert m03)
 
 - An air cooler has no cooling water. It has ambient air, a fan and a bundle, and the ambient temperature is the thing the design is hostage to.
 - The design point of the two teaching bays:
@@ -573,7 +574,7 @@ Six states a bay will not compute, every one of them a box in the studio:
 - REFUSED, an empty design ambient temperature: the design ambient temperature is empty or not a number; it was NaN F
 - REFUSED, a process outlet above the process inlet: a cooler takes the process DOWN: the inlet is 250 F and the outlet 251 F
 
-# SECTION 18: The hot day, rated at fixed UA and fixed air mass (owned by Expert m03)
+# SECTION 18: The hot day, rated at fixed UA and fixed air mass (owned by Expert m04)
 
 - A bay is bought for its worst afternoon. So the question is not what it does on its design day, it is what it still does when the air arrives hotter than the day it was sized on.
 - WHAT A MACHINE ACTUALLY HOLDS ON A HOT AFTERNOON IS ITS SURFACE AND ITS AIR MASS. Those two fix UA and both capacity rates, so they fix NTU and the capacity ratio, so they fix the EFFECTIVENESS. The duty then follows from the inlet temperature difference alone, and the new process outlet and the new air rise come out with it.
@@ -628,7 +629,7 @@ The published hot-day cases, which the oracle reaches by the OTHER method:
 
 - The surface column moves and the last three do not. A learner who has seen that understands what the rating holds fixed better than any sentence about it can teach them.
 
-# SECTION 19: The second method, and what two methods agreeing buys (owned by Expert m03)
+# SECTION 19: The second method, and what two methods agreeing buys (owned by Expert m04)
 
 - The hot day above was rated by effectiveness-NTU. There is another classical way to the same answer, and it is genuinely independent: solve the duty out of the surface equation itself, at the fixed UA and at whatever log mean the new outlet and the new air rise produce.
 - If both methods are right they must agree, because a rated answer has to satisfy the surface equation it came from. So the product of the fixed UA and the hot-day log mean is a CHECK and not a restatement:
@@ -667,7 +668,7 @@ The published hot-day cases, which the oracle reaches by the OTHER method:
 
 - Read the last column for what it does NOT contain: a second copy of the first. Where a route could only have been a transcription, the golden file would tell you the two files agree and nothing more.
 
-# SECTION 20: What no route here can check: the held register, the fitted numbers and two measured roundings (owned by Expert m05)
+# SECTION 20: What no route here can check: the held register, the fitted numbers and two measured roundings (owned by Expert m02 and m05)
 
 - The module exports a register of what it cannot source, and it carries 7 entries, counted here by reading the register itself. Every return that depends on one says so. No citation is invented for any of them, and NOTHING IN THIS COURSE GRADES ONE.
 - AND THE MODULE'S OWN HEADER SAYS SIX. Read the register: bundleConstants, dittusBoelterBand, dittusBoelterCoolingExponent, siederTateExponent, crossFlowF, defaultsProvenance, fanConstantWaterDensity. That is 7 entries against a header sentence that says six, and the register is the authority because it is the thing the returns point at. A COUNT IS WORTH MEASURING RATHER THAN QUOTING, even from the module that owns it, and this is the cheapest possible demonstration of why.
@@ -762,4 +763,4 @@ This module was repaired after a recon raised findings against it, its published
 
 - RECON.md, FINDINGS.md and FINDINGS-heattransfer.md are provenance too, and their numbers are STALE BY CONSTRUCTION: the repair changed the app own defaults, so a figure from before it is a figure about a machine that no longer exists. Read them to understand the work. Never quote one.
 
-# GENERATOR AUDIT: 45 refusal-labelled call(s), every one of which the engine refused; 317 answer-labelled call(s), every one of which the engine answered; 120 engine call site(s) in this generator, 120 labelled, 7 exempt by name because they have no error contract to check (bundleConstants, airDensityLbFt3).
+# GENERATOR AUDIT: 45 refusal-labelled call(s), every one of which the engine refused; 319 answer-labelled call(s), every one of which the engine answered; 122 engine call site(s) in this generator, 122 labelled, 7 exempt by name because they have no error contract to check (bundleConstants, airDensityLbFt3).
