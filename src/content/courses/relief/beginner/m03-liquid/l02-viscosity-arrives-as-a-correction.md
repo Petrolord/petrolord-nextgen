@@ -25,7 +25,7 @@ The same case with the viscosity walked from nothing to a heavy oil.
 | 1200.000000 | 1.995916 | 0.921543 | 1193.117870 | 8 |
 | 5000.000000 | 2.295843 | 0.801154 | 266.989810 | 12 |
 
-Four directions come straight off that table. A more viscous liquid gives a lower Kv, a larger required area, a lower Reynolds number and more passes through the loop. All four hold across every row, and the iteration count is the engine's own report rather than something counted from outside.
+Four directions come straight off that table. A more viscous liquid gives a lower Kv, a larger required area, a lower Reynolds number and more passes through the loop. None of the four ever reverses across the rows printed, and two rows leave three of them unmoved. The iteration count is the engine's own report.
 
 The two rows at 1.000000 and 5.000000 cp are the interesting ones. Both return exactly the inviscid area of 1.839323 in2 at a Kv of 1.000000, even though a Reynolds number was computed and reported for each. The correction is held at one above a Reynolds number of 196282.561354814417, and both of those rows sit above it. So a stated viscosity that changes nothing is not a bug in the call. It is the clamp doing its declared job, and the last lesson of this module takes the clamp apart.
 

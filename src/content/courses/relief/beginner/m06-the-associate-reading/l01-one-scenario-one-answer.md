@@ -36,7 +36,7 @@ Two of the three streams end at the same letter from different required areas. T
 
 ## One train, three answers, no ranking
 
-There is no largest case here and no governing case, because these three cases protect three different pieces of equipment. Choosing between scenarios happens within one protected item, across the contingencies that item can face. That is the work the next tier begins, where a load stops being an input and starts being something computed from a vessel, a fire and a geometry.
+There is no largest case here and no governing case. The digest states only that these are three relief cases on one train, and it ranks nothing among them. Choosing between scenarios happens within one protected item, across the contingencies that item can face. That is the work the next tier begins, where a load stops being an input and starts being something computed from a vessel, a fire and a geometry.
 
 ## Exercise
 

@@ -20,7 +20,7 @@ q(2, "Which letters does the published ladder skip between D and T?",
  ["I, O and U.",
   "I, S and V.",
   "O, S and X."],
- "Read the exported table top to bottom: D, E, F, G, H, J, K, L, M, N, P, Q, R and T. The three absent letters are the ones easiest to confuse with a digit or with each other on a drawing."),
+ "Read the exported table top to bottom: D, E, F, G, H, J, K, L, M, N, P, Q, R and T. Fourteen letters are printed across a span of seventeen, and the three absent ones are what is left. Why the published table leaves them out is not something the engine or the digest says."),
 
 q(0, "State the selection rule this engine applies.",
  "Return the smallest listed orifice whose area is at or above the required area.",
@@ -55,7 +55,7 @@ q(2, "The three streams of this tier end at 2.223779 in2, 1.867758 in2 and 0.949
  ["L, K and J, at margins of 1.282951, 1.527500 and 1.354759.",
   "L, L and J, at margins of 1.282951, 1.354759 and 1.527500.",
   "L, L and K, at margins of 1.282951, 1.527500 and 1.838000."],
- "Two of the three land on the same letter from quite different required areas, because there is nothing between K and L to buy. The 1.838000 is the K orifice area rather than a margin."),
+ "Read each required area up to the first rung at or above it, then divide that rung by it. The 1.838000 is the K orifice area rather than a margin, and the two margins belong to the streams in the order the areas were given."),
 
 q(3, "Two cases with identical engineering behind them come back with very different margins. What does that say about a margin?",
  "That it is an artefact of where a required area fell between two rungs.",

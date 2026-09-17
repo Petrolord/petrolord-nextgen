@@ -83,7 +83,7 @@ q(1, "ORUBIRI runs at 68000.000000 lb/hr and no warning fires. Why not?",
  ["Its outlet fraction of 0.104258 is below the critical ratio of 0.551208, and a choked case never carries a warning of any kind.",
   "Its typed Kb of 1.000000 changes nothing on this call, and the engine attaches a warning only where a typed factor was ignored on the branch that ran.",
   "Its required area of 2.223779 in2 sits inside the published orifice ladder, and a case that selects a letter without refusing carries no warning."],
- "The bellows warning fires above a measured outlet fraction of 0.300000 whichever branch is running. A choked case above that fraction does carry it, and the ignored Kb warning belongs to the subcritical branch."),
+ "The bellows warning fires on a choked case above a measured outlet fraction of 0.300000, and a choked case above that fraction does carry it. A subcritical row at a fraction of 0.800000 and a Kb of 1.000000 carries no warning at all, and the ignored Kb notice is the separate one that belongs to that branch."),
 
 q(0, "Five gas rows are published for this route. What can the single row at a Kd of 0.900000, a Kb of 0.880000 and a Kc of 0.900000 check that the other four cannot?",
  "That the three coefficients divide the area rather than multiplying it.",

@@ -39,12 +39,12 @@ q(1, "A reader is shown 0.104258 and 0.551208 on one gas case. What are they, an
   "Two readings of the outlet fraction, one before the atmospheric constant is added and one after it."],
  "The measured edge at which the chart Kb warning fires is 0.300000, a separate figure again. The critical ratio comes from the isentropic exponent and the outlet fraction comes from two pressures."),
 
-q(0, "Four figures on a steam case read 1928.700000, 1.021727, 0.949984 and 1.287000. Which one did nobody have to look up and nobody had to state?",
+q(0, "Four figures on a steam case read 1928.700000, 1.021727, 0.949984 and 1.287000. Which one is the correction this route applies?",
  "1.021727, the correction the engine worked out from the relieving pressure.",
  ["1928.700000, the relieving pressure the engine worked out from the stated set pressure.",
   "0.949984, the required area the engine worked out from the load and the pressure.",
   "1.287000, the orifice area the engine returned from its own exported table."],
- "The question is narrower than it looks. The relieving pressure and the required area are also computed, but the orifice area is a published table entry, and the one figure asked for here is the correction on that route."),
+ "The relieving pressure and the required area are both worked out too, but neither is a correction, and the orifice area is a published table entry. The correction on this route is the one figure that reads dimensionless and near one."),
 
 q(2, "A gas case comes back critical, at a required area of 2.223779 in2 and a margin of 1.282951. Which of those readings move if the caller types a different Kb?",
  "Both the required area and the margin, since Kb divides the area on the choked branch.",
@@ -232,12 +232,12 @@ q(1, "A gauge pressure is fed to the gas route where an absolute one was wanted.
   "It returns an area with a warning, because the outlet fraction lands outside its usual band."],
  "No guard anywhere in the module catches a unit. The error is about one atmosphere, which is small enough to read as a rounding difference and large enough to matter."),
 
-q(2, "Which of the three sizing routes in this tier never needs the atmospheric constant?",
- "The liquid route, which works on a difference of two gauge pressures.",
- ["The steam route, which works from a stated relieving pressure directly.",
-  "The gas route, which works on an outlet fraction rather than on a pressure.",
-  "None of them, since every relieving pressure in the tier is built with it."],
- "A difference of two gauge pressures is the same difference in absolute, so the datum never enters. The steam route needs its relieving pressure in psia, and the gas route needs both of its pressures absolute before a fraction can be formed."),
+q(2, "Two of the three sizing routes in this tier have to raise a stated set pressure to an absolute one before the equation runs. Which two, and what forces it?",
+ "Gas and steam, because a mass flux through a throat depends on an absolute upstream pressure.",
+ ["Gas and liquid, because a fraction of two pressures is only meaningful once both are absolute.",
+  "Steam and liquid, because the published forms of both were written at an absolute datum.",
+  "All three of them, because a relieving pressure is an absolute pressure by the definition this course uses."],
+ "The gas route does form a fraction of two pressures, but both of them are absolute before that fraction exists, so forming it is not what forces the conversion. The steam route forms no fraction at all and still needs its pressure in psia."),
 
 q(3, "A reading is reported to four decimals where the engine returned 2.223779 in2. What is wrong with that?",
  "It is quoted at a precision this course does not declare for an area, which is six decimals.",
@@ -274,7 +274,7 @@ q(1, "What is the one shape every column of the three stream summary shares?",
  ["A stated load and conditions, a relieving pressure, two computed factors, a stated coefficient, an area and a letter.",
   "A stated load and conditions, a relieving pressure, one computed factor, one typed factor, an area, a letter and a governing case.",
   "A stated load, a set pressure, an outlet pressure, a branch, one computed factor, an area and a letter."],
- "Nothing in the tier ranks one of the three against another, because they protect three different pieces of equipment. Choosing between scenarios happens within one protected item."),
+ "Nothing in the tier ranks one of the three against another, and the digest prints no relation between them. Choosing between scenarios happens within one protected item."),
 
 q(3, "A candidate reports a branch as 0.551208 rather than as a word. What has gone wrong?",
  "A branch is a regime the engine reports, and 0.551208 is the critical ratio that decides it.",
@@ -304,12 +304,12 @@ q(3, "A learner asks which of two relief cases on a train is the governing one. 
   "The one whose margin is smallest, since that case is the closest to needing a larger orifice."],
  "Two cases on different equipment cannot be ranked at all, and the loads are not even in the same units. A larger required area within one protected item is a different question from a comparison across a train."),
 
-q(2, "Of everything this tier teaches, what would a reader have to go and read a standard to check?",
+q(2, "Which four figures in this tier arrive as TYPED inputs, so a reader would have to go and read a chart or a table to check them?",
  "Kb, Kw, KSH and the fourteen published orifice areas.",
  ["Kb, Kw, KSH and the three coefficients of the viscosity fit.",
   "The two Napier boundaries, the coefficient C and the fourteen published orifice areas.",
   "Kd, Kc, the critical pressure ratio and the fourteen published orifice areas."],
- "Those four are the typed set: three chart or table factors and one published table of areas. The viscosity fit is held for literature as well, but nothing in the tier types it as an input, and the coefficient C and the critical ratio are closed forms."),
+ "Those four are the typed set: three chart or table factors and one published table of areas. The viscosity fit is held for literature as well, but no caller types it in, because the engine evaluates it, and the coefficient C and the critical ratio are closed forms."),
 
 emit(Q, '/root/wt-fc5-nextgen/tools/course-banks/relief/beginner/fc5b_exam.json', label='fc5b_exam', expect_n=42)
 finish()

@@ -44,7 +44,7 @@
   "explanation": "The measured edge at which the chart Kb warning fires is 0.300000, a separate figure again. The critical ratio comes from the isentropic exponent and the outlet fraction comes from two pressures."
  },
  {
-  "prompt": "Four figures on a steam case read 1928.700000, 1.021727, 0.949984 and 1.287000. Which one did nobody have to look up and nobody had to state?",
+  "prompt": "Four figures on a steam case read 1928.700000, 1.021727, 0.949984 and 1.287000. Which one is the correction this route applies?",
   "options": [
    "1.021727, the correction the engine worked out from the relieving pressure.",
    "1928.700000, the relieving pressure the engine worked out from the stated set pressure.",
@@ -52,7 +52,7 @@
    "1.287000, the orifice area the engine returned from its own exported table."
   ],
   "answer": 0,
-  "explanation": "The question is narrower than it looks. The relieving pressure and the required area are also computed, but the orifice area is a published table entry, and the one figure asked for here is the correction on that route."
+  "explanation": "The relieving pressure and the required area are both worked out too, but neither is a correction, and the orifice area is a published table entry. The correction on this route is the one figure that reads dimensionless and near one."
  },
  {
   "prompt": "A gas case comes back critical, at a required area of 2.223779 in2 and a margin of 1.282951. Which of those readings move if the caller types a different Kb?",
@@ -341,15 +341,15 @@
   "explanation": "No guard anywhere in the module catches a unit. The error is about one atmosphere, which is small enough to read as a rounding difference and large enough to matter."
  },
  {
-  "prompt": "Which of the three sizing routes in this tier never needs the atmospheric constant?",
+  "prompt": "Two of the three sizing routes in this tier have to raise a stated set pressure to an absolute one before the equation runs. Which two, and what forces it?",
   "options": [
-   "The steam route, which works from a stated relieving pressure directly.",
-   "The gas route, which works on an outlet fraction rather than on a pressure.",
-   "The liquid route, which works on a difference of two gauge pressures.",
-   "None of them, since every relieving pressure in the tier is built with it."
+   "Gas and liquid, because a fraction of two pressures is only meaningful once both are absolute.",
+   "Steam and liquid, because the published forms of both were written at an absolute datum.",
+   "Gas and steam, because a mass flux through a throat depends on an absolute upstream pressure.",
+   "All three of them, because a relieving pressure is an absolute pressure by the definition this course uses."
   ],
   "answer": 2,
-  "explanation": "A difference of two gauge pressures is the same difference in absolute, so the datum never enters. The steam route needs its relieving pressure in psia, and the gas route needs both of its pressures absolute before a fraction can be formed."
+  "explanation": "The gas route does form a fraction of two pressures, but both of them are absolute before that fraction exists, so forming it is not what forces the conversion. The steam route forms no fraction at all and still needs its pressure in psia."
  },
  {
   "prompt": "A reading is reported to four decimals where the engine returned 2.223779 in2. What is wrong with that?",
@@ -404,7 +404,7 @@
    "A stated load, a set pressure, an outlet pressure, a branch, one computed factor, an area and a letter."
   ],
   "answer": 1,
-  "explanation": "Nothing in the tier ranks one of the three against another, because they protect three different pieces of equipment. Choosing between scenarios happens within one protected item."
+  "explanation": "Nothing in the tier ranks one of the three against another, and the digest prints no relation between them. Choosing between scenarios happens within one protected item."
  },
  {
   "prompt": "A candidate reports a branch as 0.551208 rather than as a word. What has gone wrong?",
@@ -451,7 +451,7 @@
   "explanation": "Two cases on different equipment cannot be ranked at all, and the loads are not even in the same units. A larger required area within one protected item is a different question from a comparison across a train."
  },
  {
-  "prompt": "Of everything this tier teaches, what would a reader have to go and read a standard to check?",
+  "prompt": "Which four figures in this tier arrive as TYPED inputs, so a reader would have to go and read a chart or a table to check them?",
   "options": [
    "Kb, Kw, KSH and the three coefficients of the viscosity fit.",
    "The two Napier boundaries, the coefficient C and the fourteen published orifice areas.",
@@ -459,6 +459,6 @@
    "Kd, Kc, the critical pressure ratio and the fourteen published orifice areas."
   ],
   "answer": 2,
-  "explanation": "Those four are the typed set: three chart or table factors and one published table of areas. The viscosity fit is held for literature as well, but nothing in the tier types it as an input, and the coefficient C and the critical ratio are closed forms."
+  "explanation": "Those four are the typed set: three chart or table factors and one published table of areas. The viscosity fit is held for literature as well, but no caller types it in, because the engine evaluates it, and the coefficient C and the critical ratio are closed forms."
  }
 ]

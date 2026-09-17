@@ -2,7 +2,7 @@
 
 {{panel:fc-sizing-explorer}}
 
-Back pressure is the most overloaded phrase in this academy. It already means the choke setting in managed pressure drilling, and it already means the term in the Rawlins and Schellhardt equation in nodal analysis and well testing. Three different quantities elsewhere on this platform are called back pressure, and none of them is the one this course means.
+Back pressure is an overloaded phrase on this platform. It already means the choke setting in managed pressure drilling, and it already means the term in the Rawlins and Schellhardt equation in nodal analysis and well testing. Three different quantities elsewhere on this platform are called back pressure, and none of them is the one this course means.
 
 ## The one sense this course uses
 

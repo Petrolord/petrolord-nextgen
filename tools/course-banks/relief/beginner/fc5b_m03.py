@@ -97,7 +97,7 @@ q(0, "The viscosity is walked from 0.000000 to 5000.000000 cp on one liquid case
  ["A lower Kv, a smaller area, a lower Reynolds number and more passes as the liquid thickens.",
   "A lower Kv, a larger area, a higher Reynolds number and fewer passes as the liquid thickens.",
   "A higher Kv, a larger area, a lower Reynolds number and more passes as the liquid thickens."],
- "All four directions hold across every row of the sweep. A viscous liquid is harder to push through an orifice, so the valve has to be larger to pass the same rate."),
+ "Not one of the four ever reverses across the sweep, and two rows leave three of them standing still where the clamp holds the correction at one. A viscous liquid is harder to push through an orifice, so the valve has to be larger to pass the same rate."),
 
 q(2, "With no viscosity stated at all, what does the liquid route return for the Reynolds number?",
  "A null, because with no viscosity there is no Reynolds number to report.",

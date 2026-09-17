@@ -2,7 +2,7 @@
 
 {{panel:fc-sizing-explorer}}
 
-The liquid route is the shortest equation in this module and the only one with a loop inside it. This lesson takes it in its simplest state, with the viscosity left out entirely, so that the loop can be introduced afterwards against a known answer.
+The liquid route is the only one of the three sizing routes in this tier with a loop inside it. This lesson takes it in its simplest state, with the viscosity left out entirely, so that the loop can be introduced afterwards against a known answer.
 
 ## AKASO, stated
 

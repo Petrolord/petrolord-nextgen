@@ -16,7 +16,7 @@ q(1, "The Relief and Flare Studio answers four questions over one facility. Whic
   "What orifice a pressure safety valve needs, what relief load each contingency puts on it, what drum keeps the flare header dry, and what setback the flare tip demands."],
  "A set pressure is stated by the caller rather than worked out, a setback belongs to the separation course, and nothing here ranks one contingency against another."),
 
-q(3, "Six sizing routes take a relief load as an input. Which route computes its own load, and from what?",
+q(3, "Every sizing route in this module takes a relief load as an input except one. Which route computes its own load, and from what?",
  "The API 521 fire case, from the geometry of the vessel, a drainage answer and an environment factor that the caller states.",
  ["The gas and vapour route, from the relieving pressure and the gas properties, since a choked throat fixes a mass flux.",
   "The steam route, because saturated steam at a stated pressure is a defined state the published equation folds up.",

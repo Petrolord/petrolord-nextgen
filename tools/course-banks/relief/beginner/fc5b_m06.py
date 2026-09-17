@@ -13,7 +13,7 @@ q(2, "Three relief cases on one train are gathered on one page, one gas, one liq
  ["That the three cases can be ranked against each other by load, which is how the governing case on a train is chosen.",
   "That the three required areas stand in a relationship this engine works out for itself and then prints as a ratio.",
   "That the three cases protect one vessel, so exactly one of them is the size that vessel is built to."],
- "A load and a set of conditions arrive, a relieving pressure is worked out, one factor is computed and one is typed, a coefficient is stated, and out comes an area, a letter and a margin. The three cases protect three different pieces of equipment."),
+ "A load and a set of conditions arrive, a relieving pressure is worked out, one factor is computed and one is typed, a coefficient is stated, and out comes an area, a letter and a margin. The digest states only that these are three relief cases on one train, and it ranks nothing among them."),
 
 q(1, "Which pairing of a computed factor with a typed one is correct?",
  "Gas has a critical ratio computed and Kb typed, liquid has Kv computed and Kw typed, steam has KN computed and KSH typed.",
@@ -48,14 +48,14 @@ q(0, "Two of the three streams end at the L orifice from required areas of 2.223
  ["A coincidence about the plant, since two unrelated cases rarely need the same valve.",
   "That the two cases carry the same margin, since they select the same purchased area.",
   "That the liquid area was rounded up to the gas one before the selection was made."],
- "Their margins are 1.527500 and 1.282951, which are quite different figures for the same purchased area. A margin is an artefact of where a required area fell between two rungs."),
+ "The purchased area is 2.853000 in2 on both, and the rung under it at 1.838000 in2 is too small for either. Nothing about the plant put them together and nothing about the two cases is alike."),
 
 q(1, "Which list is entirely computed by this engine?",
  "The coefficient C from the exponent, the critical ratio from the exponent, F2 from the exponent and the ratio, Kv from the Reynolds number, and KN from the pressure.",
  ["The coefficient C from the exponent, the critical ratio from the exponent, F2 from the exponent and the ratio, Kv from the Reynolds number, and Kb from the ratio.",
   "The coefficient C from the exponent, the critical ratio from the exponent, Kw from the differential, Kv from the Reynolds number, and KN from the pressure.",
   "The coefficient C from the exponent, KSH from the temperature, F2 from the exponent and the ratio, Kv from the Reynolds number, and KN from the pressure."],
- "The typed set in this tier is Kb for gas, Kw for liquid, the superheat factor KSH for steam and the API 526 orifice table. Everything else in the list is a closed form evaluated on the inputs the caller gave."),
+ "Take the three wrong lists one at a time. Kb is read against a back pressure ratio on a chart rather than worked out from one, Kw is read the same way for liquid, and KSH is a table entry against a superheat state rather than a function of a temperature. None of the three is evaluated anywhere in this package."),
 
 q(3, "What kind of number is Kd, and how is it treated?",
  "The valve manufacturer own certified discharge coefficient, always stated, with the engine defaults standing in as placeholders for it.",
@@ -103,7 +103,7 @@ q(1, "Which two things does this tier teach and never grade, and for what reason
  "The viscosity fit and the orifice letter, because one is an empirical fit the package cannot derive and the other a published table it can only check as behaviour.",
  ["The critical ratio and the orifice letter, because one is decided by an input the caller states and the other by a published table.",
   "The viscosity fit and the Napier correction, because both are published fits that the validation oracle shares with the engine.",
-  "The superheat factor and the margin, because one is a typed table entry and the other is arithmetic on a typed area."],
+  "The superheat factor and the critical pressure ratio, because both are published table entries the package cannot derive."],
  "Grading a figure nobody in the package can derive would be grading a reader copy of a standard. The critical ratio and the Napier correction are both computed and both checked by an independent derivation."),
 
 q(2, "A learner changes an outlet pressure on a gas case and the required area does not move. What should they check first?",

@@ -140,7 +140,7 @@
    "A higher Kv, a larger area, a lower Reynolds number and more passes as the liquid thickens."
   ],
   "answer": 0,
-  "explanation": "All four directions hold across every row of the sweep. A viscous liquid is harder to push through an orifice, so the valve has to be larger to pass the same rate."
+  "explanation": "Not one of the four ever reverses across the sweep, and two rows leave three of them standing still where the clamp holds the correction at one. A viscous liquid is harder to push through an orifice, so the valve has to be larger to pass the same rate."
  },
  {
   "prompt": "With no viscosity stated at all, what does the liquid route return for the Reynolds number?",

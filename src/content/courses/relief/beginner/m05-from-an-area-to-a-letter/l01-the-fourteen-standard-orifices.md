@@ -27,7 +27,7 @@ A required area is a continuous number and a valve you can buy is not. The bridg
 
 That third column is the reason it is printed. A reader who assumes a constant step between orifices will be wrong, and the ratios say so: the smallest printed step is 1.205556 and the largest is 1.781818, and they do not move in any tidy direction as you go up the ladder. The engine computes each of those ratios from the two areas either side of it, which is why this course is allowed to quote them. They are comparisons the digest works out.
 
-Notice also what the letters do. Between D and T the sequence skips I, O and S, three letters that are easy to confuse with digits or with each other when handwritten on a drawing. That is a convention of the published table rather than anything the engine decided.
+Notice also what the letters do. Between D and T the sequence skips I, O and S. Read the exported table and count: fourteen letters are printed across a span of seventeen. Why those three are absent is not a question the engine or the digest answers, and this course does not invent a reason. The letters are a convention of the published table rather than anything the engine decided.
 
 ## The table is held for literature
 
