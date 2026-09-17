@@ -304,6 +304,7 @@
       "discriminate.mjs",
       "structure.py",
       "scaffold.py",
+      "lengths.py",
       "gate_capstone_leak.py",
       "gate_copy_rule.py",
       "gate_typed_literals.py",
@@ -319,7 +320,7 @@
       "finalise.sh"
     ],
     "pins": {
-      "digest.txt": "e681a406aaf5e3d1915ea45e117f80ae86d20bf54c8da5d0792565f53c7b9601",
+      "digest.txt": "7f912439c06dd3f783a23828615610847a7e3e2211a44ceef3ecb142a9d31ab9",
       "fields.json": "fc0b8561b287aa99308ce90ce973b92e07d174c609585c9da467f67670f1338c"
     }
   }

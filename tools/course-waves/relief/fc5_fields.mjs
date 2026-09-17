@@ -60,7 +60,21 @@ export const AFIESERE = {
 
 // The back pressure walked across the branch, as a RATIO of the relieving
 // pressure, so the row labels carry no pressure of their own.
-export const ORUBIRI_BACK_RATIOS = [0.10, 0.20, 0.30, 0.40, 0.50, 0.5497, 0.5498, 0.60, 0.70, 0.80, 0.90];
+//
+// THE TWO PROBE ROWS EITHER SIDE OF THE CROSSING ARE NOT LISTED HERE, because
+// the crossing is a MEASUREMENT. This list used to carry 0.5497 and 0.5498 as
+// typed probes and the section heading above them said they were chosen either
+// side of the engine's own critical ratio. Both sat BELOW that ratio, 0.551208,
+// and both came back critical, so the one demonstration the rows existed to
+// make was never made. The dump now derives the pair from the ratio the engine
+// reports and asserts that they land on opposite branches, which is a claim a
+// typed pair cannot keep.
+export const ORUBIRI_BACK_RATIOS = [0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90];
+
+// How far either side of the measured critical ratio the two probe rows sit.
+// Wide enough to survive the digest's six-decimal printing as two distinct
+// numbers, which is what stopped Section 10's 0.503 pair being readable.
+export const CRITICAL_PROBE_OFFSET = 1e-6;
 
 // k walked across the range the standard covers, for C and the ratio.
 export const K_SWEEP = [1.05, 1.10, 1.20, 1.30, 1.40, 1.50, 1.60, 1.80];

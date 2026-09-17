@@ -330,8 +330,10 @@ describe('SECTION 3: set, overpressure, relieving, and the pressure at the valve
       line(row([e6(r.overpressurePct), e6(r.relievingPsia), e6(r.areaIn2), r.critical ? 'critical' : 'subcritical']),
         `the overpressure row at ${r.overpressurePct} percent`);
     });
-    line(`- The same AKASO differential read both ways: set ${e6(p.liquidRelievingPsig)} psig against back `
-      + `${e6(p.liquidBackPsig)} psig is a differential of ${e6(p.liquidDifferentialPsi)} psi.`, 'the liquid differential');
+    line(`- The same AKASO differential read both ways: a set pressure of ${e6(L.AKASO.setPsig)} psig raised `
+      + `by ${e6(L.AKASO.overpressurePct)} percent is a relieving pressure of ${e6(p.liquidRelievingPsig)} psig, `
+      + `and against back ${e6(p.liquidBackPsig)} psig that is a differential of `
+      + `${e6(p.liquidDifferentialPsi)} psi.`, 'the liquid differential');
   });
 });
 
@@ -387,23 +389,27 @@ describe('SECTION 5: the published gas cases', () => {
       r4(g.wLbHr), e6(g.p1Psia), e6(g.p2Psia), e6(g.tR), e6(g.mw), e6(g.z), e6(g.k), e6(g.kd), e6(g.kb), e6(g.kc),
       e6(g.areaIn2), e6(g.engineAreaIn2), sci(g.relDiff), g.engineCritical ? 'critical' : 'subcritical',
     ]), `the published gas row at ${g.wLbHr} lb/hr and ${g.p2Psia} psia`));
-    // A DIGEST DEFECT, FOUND AND NOT FIXED. The digest's prose beside this block
-    // reads "Three of the 5 rows carry certified coefficients away from the
-    // defaults", and the golden file contradicts it: exactly ONE of the five
-    // rows carries a coefficient away from the engine's defaults. The three in
-    // the digest is a literal in the generator's prose rather than a count of
-    // the data, which is the one class of claim the wave's own movement gate
-    // does not read. The count is MEASURED here and the sentence is asserted to
-    // be the one the digest prints, so the disagreement is recorded rather than
-    // either figure being repeated as truth.
+    // THE COUNT IS MEASURED AT BOTH ENDS. The digest used to say "Three of the 5
+    // rows carry certified coefficients away from the defaults" while the golden
+    // file carried exactly one, because the three was a word typed in the
+    // generator's prose rather than a read of the data. The generator now
+    // derives it, and the defaults it is counted against are MEASURED from the
+    // engine rather than typed, which is what the lab does here too.
+    const d = p.measuredDefaults;
+    expect(d.kd).toBeCloseTo(0.975, 12);
+    expect(d.kb).toBeCloseTo(1, 12);
+    expect(d.kc).toBeCloseTo(1, 12);
     expect(p.awayFromDefaults, 'the golden gas block no longer carries exactly one row away from the defaults')
       .toBe(1);
     expect(p.awayFromDefaultsRows).toEqual([{ wLbHr: 25000, kd: 0.9, kb: 0.88, kc: 0.9 }]);
-    line(`- Three of the ${p.count} rows carry certified coefficients away from the defaults`,
-      'the digest prose that disagrees with its own data');
-    console.log('[relief lab] OPEN FINDING in the wave generator: digest section 5 states three golden gas rows '
-      + `carry coefficients away from the defaults; the golden file carries ${p.awayFromDefaults}. `
-      + 'The count is a literal in fc5_dump.mjs prose rather than a read of GOLD.gas.');
+    line(`- Rows carrying certified coefficients away from the engine own defaults: ${p.awayFromDefaults} `
+      + `of the ${p.count} rows. Those defaults are the MEASURED Kd ${e6(d.kd)}, Kb ${e6(d.kb)} and Kc `
+      + `${e6(d.kc)} of section 2 rather than a figure typed here, and a row away from all three is the only `
+      + 'way a published case can check that the coefficients divide rather than multiply.',
+    'the measured count of rows away from the defaults');
+    const off = p.awayFromDefaultsRows[0];
+    line(`- The row away from the defaults is the one at ${r4(off.wLbHr)} lb/hr, at Kd ${e6(off.kd)}, `
+      + `Kb ${e6(off.kb)} and Kc ${e6(off.kc)}.`, 'the row away from the defaults');
   });
 });
 
@@ -512,19 +518,46 @@ describe('SECTION 10: from a required area to a standard orifice', () => {
       `the stream row for ${r.stream}`));
   });
 
-  it('THE BISECTION THE DIGEST PRINTS DOES NOT BRACKET, and the lab reports the same non answer', () => {
-    // The digest walks the ORUBIRI load from half the stated load to two and a
-    // half times it and bisects for the load at which the selection changes.
-    // The stated selection is L, and the letter is something else at BOTH ends
-    // of that bracket, so the predicate is false at both and the bisection
-    // returns no answer. The lab returns what the digest prints, the flag says
-    // it did not bracket, and NO PANEL SHOWS THIS FIGURE. It is recorded here
-    // as an open finding in the wave generator rather than papered over.
-    expect(o.letterFlipBracketed).toBe(false);
-    expect(Number.isNaN(o.letterFlipLoadLbHr)).toBe(true);
-    line(`Bisected, the load at which it changes is ${r4(o.letterFlipLoadLbHr)} lb/hr`, 'the non answer the digest prints');
-    line(`- The ratio of that load to the stated one: ${e12(o.letterFlipRatioDerived)}.`, 'the ratio of the non answer');
-    PANEL_FILES.forEach((f) => expect(sourceOf(f), `${f} shows a figure the bisection never produced`)
+  it('THE BRACKET IS GROWN UNTIL IT HOLDS THE LETTER CHANGE, and the bisection inside it lands on the orifice area', () => {
+    // The bracket used to run from half the stated load to two and a half times
+    // it. The selection is L at the stated load and a different letter at each
+    // of those ends, so the predicate was false at both, the bisection had
+    // nothing to find, and the digest printed the NaN it returned as a
+    // measurement. The bracket is now grown from the stated load by a fixed
+    // step until the letter first changes, so the root is inside it by
+    // construction, and the three claims that answer supports are each asserted
+    // rather than described.
+    const b = o.letterFlipBracket;
+    expect(b.loLbHr).toBe(L.ORUBIRI.wLbHr);
+    expect(b.letterAtLo).toBe(o.streams[0].orifice);
+    expect(b.letterAtHi).not.toBe(o.streams[0].orifice);
+    expect(b.steps).toBeGreaterThan(0);
+    expect(b.hiLbHr).toBeCloseTo(b.loLbHr * (b.stepFactor ** b.steps), 6);
+    expect(o.letterFlipBracketed).toBe(true);
+    expect(Number.isFinite(o.letterFlipLoadLbHr)).toBe(true);
+    // THE ANSWER IS THE ORIFICE AREA. At the load where the letter changes the
+    // required area is the L orifice area itself, which is the arithmetic the
+    // selection rule makes unavoidable.
+    expect(o.letterFlipAreaIn2).toBeCloseTo(o.streams[0].orificeAreaIn2, 9);
+    // AND THE RATIO IS THE MARGIN. In critical flow the required area is
+    // proportional to the load, so the ratio of the two loads is the margin of
+    // the ORUBIRI selection.
+    expect(o.letterFlipRatioDerived).toBeCloseTo(o.streams[0].margin, 9);
+    line(`- At ${r4(L.ORUBIRI.wLbHr)} lb/hr the selection is ${o.streams[0].orifice}. THE BRACKET IS GROWN `
+      + `RATHER THAN ASSUMED: the load is multiplied by ${e6(b.stepFactor)} until the letter changes, which `
+      + `takes ${b.steps} steps and ends at ${r4(b.hiLbHr)} lb/hr, where the letter is ${b.letterAtHi}. A `
+      + 'bisection needs the answer inside its bracket and cannot tell you when it is not.',
+    'the grown bracket');
+    line(`- Bisected inside that bracket, the load at which the letter changes is ${r4(o.letterFlipLoadLbHr)} `
+      + `lb/hr, where the required area is ${e6(o.letterFlipAreaIn2)} in2. That is the ${o.streams[0].orifice} `
+      + 'orifice area itself, which is the arithmetic the selection rule makes unavoidable.',
+    'the bisected letter-change load');
+    line(`- The ratio of that load to the stated one: ${e12(o.letterFlipRatioDerived)}. In critical flow the `
+      + 'required area is proportional to the load, so that ratio IS the margin of the ORUBIRI selection, '
+      + `printed as ${e6(o.streams[0].margin)} in the table above.`, 'the ratio of that load to the stated one');
+    // NO PANEL SHOWS THIS FIGURE. It is a digest measurement, and a panel that
+    // showed it would be showing a load no learner is asked to reach.
+    PANEL_FILES.forEach((f) => expect(sourceOf(f), `${f} shows a figure no panel is meant to carry`)
       .not.toMatch(/letterFlip/));
   });
 });
@@ -995,11 +1028,13 @@ describe('SECTION 29: the one framed history section', () => {
 
   it('the engine own source comments are counted rather than quoted', () => {
     const engine = fs.readFileSync(path.join(ROOT, 'packages/engines/engines/facilities/relief.js'), 'utf8');
-    // COUNTED THE WAY THE GENERATOR COUNTS IT. fc5_dump.mjs splits on newlines
-    // without stripping the trailing one, so its figure is one more than the
-    // number of lines carrying text. The digest prints that figure, and this
-    // gate reproduces the same count rather than a different one.
-    const lines = engine.split('\n').length;
+    // COUNTED THE WAY THE GENERATOR COUNTS IT, which is the way wc -l counts.
+    // The generator used to split on newlines without stripping the trailing
+    // one, so its figure was one more than the number of lines carrying text
+    // and the digest printed that. It now strips it, and this gate reproduces
+    // the same count rather than a different one.
+    expect(engine.endsWith('\n')).toBe(true);
+    const lines = engine.split('\n').length - 1;
     const history = L.countHistoryComments(engine);
     const markers = L.countHistoryMarkers(engine);
     expect(markers).toBeGreaterThan(0);
@@ -1007,7 +1042,8 @@ describe('SECTION 29: the one framed history section', () => {
     line(`Counted by reading engines/facilities/relief.js: ${markers} comment lines carry the repair marker, `
       + `and ${history} comment lines are written in a past tense about former behaviour.`,
     'the engine history comment count');
-    line(`- The module is ${lines} lines long`, 'the engine line count');
+    line(`- The module is ${lines} lines of text long, counting a line as a run ending in a newline the way `
+      + 'wc -l does', 'the engine line count');
     console.log(`[relief lab] the vendored engine is ${lines} lines with ${markers} repair markers and `
       + `${history} past-tense comment lines, none of which is teaching truth`);
   });
@@ -1497,6 +1533,24 @@ const DECLARED_HISTORY_LINES = [
     file: 'ReliefLearningPage.jsx',
     text: 'The one module whose subject is what this engine used to do',
     frame: 'the module title above it is What Was Repaired, and What Was Not',
+  },
+  {
+    file: 'reliefLab.js',
+    text: 'the pair that used to be',
+    frame: 'the heading above it declares the probe rows as DERIVED rather than listed, and the sentence '
+      + 'says what the typed pair did before they were derived',
+  },
+  {
+    file: 'reliefLab.js',
+    text: 'It used to run from half the',
+    frame: 'the heading above it is THE BRACKET IS GROWN UNTIL IT HOLDS THE ROOT, so the current behaviour '
+      + 'is stated before the former one',
+  },
+  {
+    file: 'reliefLab.js',
+    text: 'This used to nudge the sixth probe',
+    frame: 'the heading above it is THE PROBE IS THE NUMBER IN THE TABLE, so the current behaviour is '
+      + 'stated before the former one',
   },
 ];
 

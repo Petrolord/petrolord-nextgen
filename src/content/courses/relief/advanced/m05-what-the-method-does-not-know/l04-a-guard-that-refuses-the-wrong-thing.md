@@ -26,7 +26,7 @@ That refusal is not about physics. It is about the gap between a screen and a fu
 
 ## Three kinds of message
 
-A refusal returns no answer. Its object carries the `error` key, and on one of them a second field comes too, naming how many of the largest standard orifices the area needs.
+A refusal returns no answer. Its object carries the `error` key, and on one of them a second field comes too: `selectOrifice` past the largest returns `multipleOfT`, a whole number of valves. A guard reading only `error` throws that figure away.
 
 A warning comes with a usable answer and flags a condition. Six are run and printed, including the two you have met on the blowdown march and the subcritical branch. Read that as the number exercised rather than as a total: a count of the conditions a module can reach is a claim somebody has to check.
 

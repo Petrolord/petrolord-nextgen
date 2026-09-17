@@ -48,7 +48,7 @@
 import fs from 'fs';
 import {
   ORUBIRI, AKASO, TEBIDABA, BENISEDE, ODIDI, AFIESERE,
-  ORUBIRI_BACK_RATIOS, K_SWEEP, AKASO_MU_SWEEP, KV_RE_SWEEP, KN_P_SWEEP,
+  ORUBIRI_BACK_RATIOS, CRITICAL_PROBE_OFFSET, K_SWEEP, AKASO_MU_SWEEP, KV_RE_SWEEP, KN_P_SWEEP,
   BISECT, BENISEDE_LEVEL_SWEEP, ENV_SWEEP, FIRE_EXPONENT_PROBE,
   ODIDI_DROPLET_SWEEP, ODIDI_HOLDUP_SWEEP, ODIDI_DIAMETER_SWEEP,
   AFIESERE_ORIFICE_SWEEP, AFIESERE_STEP_SWEEP, AFIESERE_FLARE,
@@ -374,6 +374,50 @@ const oruCall = {
 const oru = success('ORUBIRI, the gas relief case', R.gasVaporArea(oruCall));
 const oruOrifice = success('ORUBIRI, the orifice selection', R.selectOrifice(oru.areaIn2));
 
+// THE GAS ROUTE'S OWN DEFAULT CERTIFIED COEFFICIENTS, MEASURED. The required
+// area is inversely proportional to the product Kd Kb Kc, so the ratio of the
+// area at unit coefficients to the area with ONE of them left out is exactly
+// that one's default. Nothing here types 0.975, and nothing below counts rows
+// "away from the defaults" against a number a reader cannot check.
+const GAS_DEFAULTS = (() => {
+  const unit = { ...oruCall, kd: 1, kb: 1, kc: 1 };
+  const a1 = success('the unit-coefficient gas probe', R.gasVaporArea(unit)).areaIn2;
+  const without = (drop) => {
+    const c = { ...unit };
+    delete c[drop];
+    return success(`the default ${drop} probe`, R.gasVaporArea(c)).areaIn2;
+  };
+  return { kd: a1 / without('kd'), kb: a1 / without('kb'), kc: a1 / without('kc') };
+})();
+
+// THE EXTRA KEYS selectOrifice's REFUSAL CARRIES BESIDE `error`, read off the
+// returned object rather than listed. The contract table below says every
+// object route returns "either a finite result or an object carrying an `error`
+// string", and on this one route the refusal carries a usable figure too. The
+// Expert tier taught that shape with no name for the key and no figure, because
+// the digest printed the value under a prose column heading and never named the
+// field. A writer cannot name what the digest will not spell.
+const ORIFICE_REFUSAL_EXTRA = (() => {
+  const r = refusal('the orifice refusal, read for its key names', R.selectOrifice, 1e6);
+  const extra = Object.keys(r).filter((k2) => k2 !== 'error');
+  must('the orifice refusal carries exactly one key beside `error`', extra.length === 1,
+    `keys [${keys(r)}]`);
+  must('that key is a whole number of valves, one or more',
+    Number.isInteger(r[extra[0]]) && r[extra[0]] >= 1, `${extra[0]}=${r[extra[0]]}`);
+  return extra;
+})();
+
+// THE TWO PROBE RATIOS EITHER SIDE OF THE CROSSING, derived from the ratio the
+// engine reports rather than typed, and asserted to land on opposite branches.
+const CRIT_LO = oru.criticalRatio - CRITICAL_PROBE_OFFSET;
+const CRIT_HI = oru.criticalRatio + CRITICAL_PROBE_OFFSET;
+const ORU_RATIO_WALK = [...ORUBIRI_BACK_RATIOS, CRIT_LO, CRIT_HI].sort((a, b) => a - b);
+
+// AKASO's RELIEVING pressure in psig. It is NOT the set pressure: the set
+// pressure is 310 psig and this is that raised by the allowed overpressure.
+// Section 3 used to call this figure AKASO's set pressure while Sections 6 and
+// 11 printed 310 as the set pressure and this as the relieving one, so the
+// digest disagreed with itself about which of two printed numbers was which.
 const akaP1 = AKASO.setPsig * (1 + AKASO.overpressurePct / 100);
 const akaBase = {
   qGpm: AKASO.qGpm, p1Psig: akaP1, p2Psig: AKASO.backPsig, sg: AKASO.sg,
@@ -459,12 +503,39 @@ const MEASURED = {
   RGAS_UNIVERSAL, FOUR_PI, 'SETTLE_GROUP.a': SETTLE_GROUP.a, 'SETTLE_GROUP.b': SETTLE_GROUP.b,
   'SETTLE_GROUP.c': SETTLE_GROUP.c, 'SETTLE_COEFF_SQ.coeffSq': SETTLE_COEFF_SQ.coeffSq, C2800,
   'POINT_ROUNDTRIP.k1': POINT_ROUNDTRIP.k1, 'POINT_ROUNDTRIP.d2': POINT_ROUNDTRIP.d2,
+  'GAS_DEFAULTS.kd': GAS_DEFAULTS.kd, 'GAS_DEFAULTS.kb': GAS_DEFAULTS.kb,
+  'GAS_DEFAULTS.kc': GAS_DEFAULTS.kc, CRIT_LO, CRIT_HI,
 };
 Object.entries(MEASURED).forEach(([name, v]) => {
   must(`the measured constant ${name} is a finite number`, Number.isFinite(v), String(v));
 });
 must('every measured constant was examined', Object.keys(MEASURED).length >= 40,
   `${Object.keys(MEASURED).length} measured constants and edges checked`);
+
+/* THE TWO PROBE ROWS REALLY DO STRADDLE THE CROSSING. A heading that says a
+   pair was chosen either side of a boundary is a claim about the engine, so it
+   is asserted here against what the engine returned rather than trusted. Both
+   halves: the ratios sit either side of the measured one, and the two calls
+   come back on DIFFERENT branches. The pair this replaced satisfied neither. */
+const critLoRun = success('the probe row just below the critical ratio',
+  R.gasVaporArea({ ...oruCall, p2Psia: CRIT_LO * oruP1 }));
+const critHiRun = success('the probe row just above the critical ratio',
+  R.gasVaporArea({ ...oruCall, p2Psia: CRIT_HI * oruP1 }));
+must('the two probe ratios sit either side of the measured critical ratio',
+  CRIT_LO < oru.criticalRatio && oru.criticalRatio < CRIT_HI,
+  `${e12(CRIT_LO)} < ${e12(oru.criticalRatio)} < ${e12(CRIT_HI)}`);
+must('the two probe rows come back on DIFFERENT branches',
+  critLoRun.critical === true && critHiRun.critical === false,
+  `critical below ${critLoRun.critical}, critical above ${critHiRun.critical}`);
+must('the two probe ratios print as two DISTINCT numbers at six decimals',
+  e6(CRIT_LO) !== e6(CRIT_HI), `${e6(CRIT_LO)} and ${e6(CRIT_HI)}`);
+
+/* AND THE MEASURED DEFAULT COEFFICIENTS ARE FRACTIONS OF AN IDEAL. A default
+   recovered as a ratio of two areas could come back as anything if the
+   proportionality assumed above were wrong, so the shape is checked. */
+Object.entries(GAS_DEFAULTS).forEach(([k2, v]) => {
+  must(`the measured default ${k2} is above zero and no more than one`, v > 0 && v <= 1, e12(v));
+});
 
 /* --------------------------------------------------------------------------
  * AND EVERY MEASURED LEADING CONSTANT MUST BE THE PUBLISHED FIGURE.
@@ -593,6 +664,7 @@ OBJ_EXPORTS.forEach((name) => { w(`| ${name} | function | an object, carrying ei
 w();
 w(`- ${BARE_NUMBER_EXPORTS.length} exports return a bare number and signal a refusal with NaN. ${OBJ_EXPORTS.length} return an object. ${DATA_EXPORTS.length} are published tables and ${CONSTANT_EXPORTS.length} is a derived constant.`);
 w('- THE CONTRACT EVERY OBJECT ROUTE KEEPS: either a finite result, or an object carrying an `error` string. A non-finite number with no `error` is what a caller\'s `if (r.error)` guard cannot see, and every route in this module is checked against both halves of that contract in section 26.');
+w(`- ONE REFUSAL CARRIES MORE THAN AN \`error\`. selectOrifice past the largest orifice returns \`error\` and \`${ORIFICE_REFUSAL_EXTRA[0]}\`, a whole number of valves, and section 10 prints both. Every other refusal in this module carries the \`error\` alone. A caller that stops at the \`error\` throws away the only figure the refusal worked out.`);
 w();
 
 /* ------------------------------------------------------------- SECTION 2 */
@@ -668,8 +740,10 @@ w('| --- | --- | --- | --- |');
 });
 w();
 w('- THREE DIFFERENT QUANTITIES ARE CALLED BACK PRESSURE ELSEWHERE IN THIS PLATFORM and none of them is this one. Here it means the pressure at the relief valve OUTLET, in the header the valve discharges into. It is always written that way in this course.');
-w('- The gas route is the only one that takes an absolute back pressure. The liquid route takes set and back pressures in psig and works on their DIFFERENCE, so the atmospheric constant never enters it.');
-w(`- The same AKASO differential read both ways: set ${e6(akaP1)} psig against back ${e6(AKASO.backPsig)} psig is a differential of ${e6(akaP1 - AKASO.backPsig)} psi.`);
+w('- The gas route is the only one that takes an absolute back pressure. The liquid route takes its two pressures in psig and works on their DIFFERENCE, so the atmospheric constant never enters it. The engine names that upstream argument for the SET pressure and this course passes the RELIEVING pressure into it, which is what API 520 sizes a liquid valve on.');
+w(`- The same AKASO differential read both ways: a set pressure of ${e6(AKASO.setPsig)} psig raised by ${e6(AKASO.overpressurePct)} percent is a relieving pressure of ${e6(akaP1)} psig, and against back ${e6(AKASO.backPsig)} psig that is a differential of ${e6(akaP1 - AKASO.backPsig)} psi.`);
+must('AKASO relieving and set pressures are two different numbers', akaP1 !== AKASO.setPsig,
+  `relieving ${e6(akaP1)} psig against set ${e6(AKASO.setPsig)} psig`);
 w();
 
 /* ------------------------------------------------------------- SECTION 4 */
@@ -684,19 +758,34 @@ K_SWEEP.forEach((k) => {
   w(`| ${e6(k)} | ${e6(R.gasConstantC(k))} | ${e6(R.criticalPressureRatio(k))} | ${e6(f2)} |`);
 });
 w();
-w('# The branch. ORUBIRI load and ORUBIRI valve, with the back pressure walked as a RATIO of the relieving pressure, so the rows carry no pressure of their own. The crossing rows are chosen either side of the engine own critical ratio.');
+w('# The branch. ORUBIRI load and ORUBIRI valve, with the back pressure walked as a RATIO of the relieving pressure, so the rows carry no pressure of their own. The two crossing rows are DERIVED from the engine own critical ratio and sit either side of it.');
 w(`- ORUBIRI critical ratio at k = ${e6(ORUBIRI.k)}: ${e6(oru.criticalRatio)}.`);
 w('| back pressure ratio (stated) | branch | required area in2 | F2 where subcritical | warning |');
 w('| --- | --- | --- | --- | --- |');
-ORUBIRI_BACK_RATIOS.forEach((ratio) => {
+const oruBranchRows = ORU_RATIO_WALK.map((ratio) => {
   const p2 = ratio * oruP1;
   const r = success(`ORUBIRI at a back-pressure ratio of ${ratio}`, R.gasVaporArea({ ...oruCall, p2Psia: p2 }));
   const f2 = r.critical ? null : R.subcriticalF2({ k: ORUBIRI.k, r: ratio });
   w(`| ${e6(ratio)} | ${r.critical ? 'critical' : 'subcritical'} | ${e6(r.areaIn2)} | ${f2 === null ? 'n/a' : e6(f2)} | ${r.warning ? 'yes' : 'no'} |`);
+  return { ratio, critical: r.critical, areaIn2: r.areaIn2 };
 });
 w();
-w('- IN CRITICAL FLOW THE AREA DOES NOT MOVE WITH THE BACK PRESSURE AT ALL. Read the first five rows: the required area is identical across them, because the flow through the throat is set by the upstream condition once the downstream pressure is low enough. That is the whole meaning of choked.');
-w('- The two crossing rows above are the last critical row and the first subcritical one, and the areas either side of the crossing are printed so the size of the step is visible rather than asserted.');
+// THE LENGTH OF THE RUN IS COUNTED, NOT TYPED. This bullet said "the first five
+// rows" while SEVEN consecutive rows printed the same area. A count that
+// describes rows on the same page is read off those rows here.
+const choke = (() => {
+  let n = 1;
+  while (n < oruBranchRows.length
+    && e12(oruBranchRows[n].areaIn2) === e12(oruBranchRows[0].areaIn2)) n += 1;
+  return n;
+})();
+must('the run of identical critical areas is longer than one row and shorter than the table',
+  choke > 1 && choke < oruBranchRows.length, `${choke} of ${oruBranchRows.length} rows`);
+must('every row in the identical run is one the engine called critical',
+  oruBranchRows.slice(0, choke).every((r) => r.critical === true), `${choke} rows`);
+w(`- IN CRITICAL FLOW THE AREA DOES NOT MOVE WITH THE BACK PRESSURE AT ALL. Read the first ${choke} rows: the required area is identical across them, because the flow through the throat is set by the upstream condition once the downstream pressure is low enough. That is the whole meaning of choked.`);
+w(`- The crossing is the measured critical ratio ${e6(oru.criticalRatio)}.`);
+w(`- The two probe rows are chosen either side of that critical ratio, the last critical row at ${e6(CRIT_LO)} and the first subcritical one at ${e6(CRIT_HI)}, and the areas across the crossing are printed so the size of the step is visible rather than asserted.`);
 w();
 w('# Kb IS IGNORED IN SUBCRITICAL FLOW, and the engine says so rather than leaving it to be discovered. The same call at two different balanced-bellows factors, on both branches.');
 w('| branch | back pressure ratio (stated) | Kb (stated) | required area in2 | warning present |');
@@ -732,7 +821,18 @@ GOLD.gas.forEach((g, i) => {
 });
 w();
 w('- THE VALIDATION ORACLE DOES NOT RESTATE THIS ROUTE. For the critical rows it derives the isentropic nozzle mass flux from the gas constant, the molecular weight, the temperature and the pressure in absolute SI, so the USC leading constant is CHECKED against a different derivation rather than repeated. For the subcritical rows it integrates the subcritical nozzle flux from the isentropic expansion, so F2 is checked rather than restated. For the critical ratio it takes the ARGMAX of that flux over the throat ratio by golden-section search.');
-w(`- Three of the ${GOLD.gas.length} rows carry certified coefficients away from the defaults, which is the only way a published case can check that the coefficients divide rather than multiply.`);
+// THE COUNT IS READ OFF THE GOLDEN FILE, and the defaults it is counted
+// against are the MEASURED ones above. This line used to say "Three" as a word
+// typed in this generator: the numeric-literal gate sweeps numbers and could
+// not see a spelled one, and the movement gate compares figures the data
+// produced and this was not one. Exactly ONE row is away from the defaults.
+const offDefault = GOLD.gas.filter((g) => g.kd !== GAS_DEFAULTS.kd
+  || g.kb !== GAS_DEFAULTS.kb || g.kc !== GAS_DEFAULTS.kc);
+must('the published gas rows are neither all at the engine defaults nor all away from them',
+  offDefault.length > 0 && offDefault.length < GOLD.gas.length,
+  `${offDefault.length} of ${GOLD.gas.length} away from the defaults`);
+w(`- Rows carrying certified coefficients away from the engine own defaults: ${offDefault.length} of the ${GOLD.gas.length} rows. Those defaults are the MEASURED Kd ${e6(GAS_DEFAULTS.kd)}, Kb ${e6(GAS_DEFAULTS.kb)} and Kc ${e6(GAS_DEFAULTS.kc)} of section 2 rather than a figure typed here, and a row away from all three is the only way a published case can check that the coefficients divide rather than multiply.`);
+w(`- The row away from the defaults is the one at ${r4(offDefault[0].wLbHr)} lb/hr, at Kd ${e6(offDefault[0].kd)}, Kb ${e6(offDefault[0].kb)} and Kc ${e6(offDefault[0].kc)}.`);
 w();
 
 /* ------------------------------------------------------------- SECTION 6 */
@@ -856,13 +956,23 @@ w();
 w('# Selection walked across and ON the boundaries. The rows at an exact listed area are the ones that decide whether the comparison is at-or-above or strictly-above.');
 w('| required area in2 (stated) | orifice | orifice area in2 | margin | note |');
 w('| --- | --- | --- | --- | --- |');
-[0.05, 0.11, 0.110001, 0.5, 0.503, 0.5030001, 1.287, 2.0, 6.38, 11.05, 16.0, 25.999999, 26.0].forEach((a) => {
+// EVERY PROBE MUST BE READABLE AT THE PRECISION THIS PAGE PRINTS. The probe
+// just above G used to be 0.5030001, which prints as 0.503000 at six decimals,
+// so the table carried two rows both reading 0.503000, one returning G and one
+// returning H. The boundary the rows exist to demonstrate was unreadable
+// exactly where it was being demonstrated. 0.503001 is the same demonstration
+// and survives the printing.
+const ORIFICE_PROBES = [0.05, 0.11, 0.110001, 0.5, 0.503, 0.503001, 1.287, 2.0, 6.38, 11.05, 16.0, 25.999999, 26.0];
+must('no two orifice probes print the same stated area at six decimals',
+  new Set(ORIFICE_PROBES.map(e6)).size === ORIFICE_PROBES.length,
+  `${new Set(ORIFICE_PROBES.map(e6)).size} distinct of ${ORIFICE_PROBES.length}`);
+ORIFICE_PROBES.forEach((a) => {
   const r = success(`the orifice selection at a required area of ${a} in2`, R.selectOrifice(a));
   w(`| ${e6(a)} | ${r.orifice} | ${e6(r.areaIn2)} | ${e6(r.margin)} | ${a === r.areaIn2 ? 'exactly a listed area' : ''} |`);
 });
 w();
-w('# Past the largest orifice the engine refuses and says how many valves the area needs.');
-w('| required area in2 (stated) | refusal | multiple of the largest |');
+w(`# Past the largest orifice the engine refuses and says how many valves the area needs. THE REFUSAL CARRIES A SECOND KEY BESIDE \`error\`, and its name, read off the returned object rather than listed, is \`${ORIFICE_REFUSAL_EXTRA.join('` and `')}\`.`);
+w(`| required area in2 (stated) | refusal | ${ORIFICE_REFUSAL_EXTRA[0]}, the engine own second key |`);
 w('| --- | --- | --- |');
 [26.000001, 26.0001, 40, 79, 105].forEach((a) => {
   const r = refusal(`the orifice selection at a required area of ${a} in2`, R.selectOrifice, a);
@@ -881,9 +991,35 @@ w();
 w('# What it takes to move a letter. The ORUBIRI load walked until the selection changes, and the load at which it does, bisected.');
 const oruAreaAt = (wLbHr) => R.gasVaporArea({ ...oruCall, wLbHr }).areaIn2;
 const oruLetterAt = (wLbHr) => R.selectOrifice(oruAreaAt(wLbHr)).orifice;
-const oruFlip = bisect(ORUBIRI.wLbHr * 0.5, ORUBIRI.wLbHr * 2.5, (x) => oruLetterAt(x) === oruOrifice.orifice);
-w(`- At ${r4(ORUBIRI.wLbHr)} lb/hr the selection is ${oruOrifice.orifice}. Bisected, the load at which it changes is ${r4(oruFlip)} lb/hr, where the required area is ${e6(oruAreaAt(oruFlip))} in2.`);
-w(`- The ratio of that load to the stated one: ${e12(oruFlip / ORUBIRI.wLbHr)}.`);
+// THE BRACKET IS WALKED OUT UNTIL IT HOLDS THE ROOT, not assumed to. This
+// bisection ran from half to two and a half times the stated load, and the
+// selection is a DIFFERENT letter at each of those ends, J below and P above,
+// so the predicate was false at both and there was no root between them. The
+// bisect helper returned NaN, correctly, and the digest printed "the load at
+// which it changes is NaN lb/hr" and "the required area is undefined in2" as
+// measurements. A bracket is now grown from the stated load by a fixed step
+// until the letter first changes, and both ends are asserted before bisecting.
+const oruBracket = (() => {
+  const here = oruOrifice.orifice;
+  let hi = ORUBIRI.wLbHr;
+  for (let i = 0; i < 200 && oruLetterAt(hi) === here; i += 1) hi *= 1.05;
+  return { lo: ORUBIRI.wLbHr, hi, steps: Math.round(Math.log(hi / ORUBIRI.wLbHr) / Math.log(1.05)) };
+})();
+must('the bisection bracket holds the letter change it is asked for',
+  oruLetterAt(oruBracket.lo) === oruOrifice.orifice
+  && oruLetterAt(oruBracket.hi) !== oruOrifice.orifice,
+  `${oruLetterAt(oruBracket.lo)} at ${r4(oruBracket.lo)} lb/hr and ${oruLetterAt(oruBracket.hi)} at ${r4(oruBracket.hi)} lb/hr`);
+const oruFlip = bisect(oruBracket.lo, oruBracket.hi, (x) => oruLetterAt(x) === oruOrifice.orifice);
+must('the bisected load is a finite number', Number.isFinite(oruFlip), String(oruFlip));
+must('the bisected load lands on the orifice area it should',
+  Math.abs(oruAreaAt(oruFlip) - oruOrifice.areaIn2) < oruOrifice.areaIn2 * 1e-9,
+  `${e12(oruAreaAt(oruFlip))} against the ${oruOrifice.orifice} orifice at ${e12(oruOrifice.areaIn2)}`);
+w(`- At ${r4(ORUBIRI.wLbHr)} lb/hr the selection is ${oruOrifice.orifice}. THE BRACKET IS GROWN RATHER THAN ASSUMED: the load is multiplied by ${e6(1.05)} until the letter changes, which takes ${oruBracket.steps} steps and ends at ${r4(oruBracket.hi)} lb/hr, where the letter is ${oruLetterAt(oruBracket.hi)}. A bisection needs the answer inside its bracket and cannot tell you when it is not.`);
+w(`- Bisected inside that bracket, the load at which the letter changes is ${r4(oruFlip)} lb/hr, where the required area is ${e6(oruAreaAt(oruFlip))} in2. That is the ${oruOrifice.orifice} orifice area itself, which is the arithmetic the selection rule makes unavoidable.`);
+w(`- The ratio of that load to the stated one: ${e12(oruFlip / ORUBIRI.wLbHr)}. In critical flow the required area is proportional to the load, so that ratio IS the margin of the ORUBIRI selection, printed as ${e6(oruOrifice.margin)} in the table above.`);
+must('the letter-change load is the stated load times the margin',
+  Math.abs(oruFlip / ORUBIRI.wLbHr - oruOrifice.margin) < oruOrifice.margin * 1e-9,
+  `${e12(oruFlip / ORUBIRI.wLbHr)} against ${e12(oruOrifice.margin)}`);
 w();
 
 /* ------------------------------------------------------------ SECTION 11 */
@@ -1433,8 +1569,17 @@ w('| route | note |');
 w('| --- | --- |');
 w(`| fireHeatInput | ${benDuty.note} |`);
 w(`| koDrumHorizontal, at the ODIDI drum | ${odiDrum.note || 'none at this L over D'} |`);
-w(`| koDrumHorizontal, at a 5 ft drum on the same duty | ${R.koDrumHorizontal({ ...odiDrumCall, diameterFt: 5 }).note} |`);
-w(`| koDrumHorizontal, at a 14 ft drum on the same duty | ${R.koDrumHorizontal({ ...odiDrumCall, diameterFt: 14 }).note} |`);
+// A ROUTE THAT RETURNS NO NOTE RETURNS `null`, AND THIS TABLE PRINTED THAT WORD
+// in the column where a note belongs, which reads as an engine that answered
+// "null". The absence is now said in words. Found by the whole-digest
+// non-number pass at the foot of this file, which nothing else was looking for.
+const noteOf = (label, r) => {
+  must(`the note on ${label} is a string or is absent`,
+    r.note === null || typeof r.note === 'string', `note is ${typeof r.note}`);
+  return r.note === null ? 'none: the engine left no note on this call' : r.note;
+};
+w(`| koDrumHorizontal, at a 5 ft drum on the same duty | ${noteOf('a 5 ft drum', R.koDrumHorizontal({ ...odiDrumCall, diameterFt: 5 }))} |`);
+w(`| koDrumHorizontal, at a 14 ft drum on the same duty | ${noteOf('a 14 ft drum', R.koDrumHorizontal({ ...odiDrumCall, diameterFt: 14 }))} |`);
 w();
 
 /* ------------------------------------------------------------ SECTION 27 */
@@ -1545,7 +1690,17 @@ w();
 const HIST = SRC.split('\n').filter((l) => l.includes('FC5-0'));
 const HIST_LINES = SRC.split('\n').map((l, i) => [i + 1, l]).filter(([, l]) => /^\s*(\*|\/\/|\/\*)/.test(l) && /used to|previous version|before|no longer|turned|silently/i.test(l));
 w(`- THE ENGINE SOURCE CARRIES THIS HISTORY IN ITS COMMENTS, and a sentence lifted out of a comment arrives with no frame around it. Counted by reading engines/facilities/relief.js: ${HIST.length} comment lines carry the repair marker, and ${HIST_LINES.length} comment lines are written in a past tense about former behaviour. The rule that counted them: a line that begins with a comment marker and contains one of "used to", "previous version", "before", "no longer", "turned" or "silently".`);
-w(`- The module is ${SRC.split('\n').length} lines long, so roughly one line in ${Math.round(SRC.split('\n').length / Math.max(HIST_LINES.length, 1))} of it is a sentence about what it used to do. Engine source comments are PROVENANCE. So are the wave RECON.md and FINDINGS.md, and so is the repair own findings record vendored beside the oracle. None of the four is teaching truth.`);
+// A COUNT CARRIES ITS RULE. This said the module was 620 lines long, which was
+// `split('\n').length` on a file of 619 lines that ends in a newline: the split
+// counts the empty string after the final terminator as a line. The rule is now
+// stated beside the number and the number is what `wc -l` reports, because that
+// is the count a reader can reproduce.
+const SRC_LINES = SRC.split('\n');
+const SRC_TEXT_LINES = SRC_LINES.length - (SRC_LINES[SRC_LINES.length - 1] === '' ? 1 : 0);
+must('the engine line count is the one wc -l reports',
+  SRC_TEXT_LINES === SRC.split('\n').length - 1 && SRC.endsWith('\n'),
+  `${SRC_TEXT_LINES} lines of text, split gives ${SRC.split('\n').length}, ends with a newline ${SRC.endsWith('\n')}`);
+w(`- The module is ${SRC_TEXT_LINES} lines of text long, counting a line as a run ending in a newline the way wc -l does, so roughly one line in ${Math.round(SRC_TEXT_LINES / Math.max(HIST_LINES.length, 1))} of it is a sentence about what it used to do. Engine source comments are PROVENANCE. So are the wave RECON.md and FINDINGS.md, and so is the repair own findings record vendored beside the oracle. None of the four is teaching truth.`);
 w();
 w('# ITEM ONE. AN OUTPUT THAT READ AS REASSURANCE.');
 w('- The general lesson: the worst failure of a calculation is not a wrong number, it is a wrong number shaped like the answer somebody wanted. A depressuring study is run to ask whether a vessel is down inside the customary time, and the failure answered yes.');
@@ -1568,6 +1723,95 @@ w('- Before the repair, twenty defects planted one at a time in the engine left 
 w(`- Today the published set carries ${Object.keys(GOLD).length} blocks and the suite is materially larger, the five transcriptions are independent derivations, and the two routes nothing can discriminate are NAMED in section 28 rather than left to be discovered. Section 27 and section 28 are the standing form of that lesson, about the engine as it is now.`);
 w();
 w('# NOTHING FOLLOWS THIS SECTION.');
+
+/* ------------------------------------------- TWO WHOLE-DIGEST FINAL PASSES
+
+   Both exist because a defect the per-row assertions above cannot see got all
+   the way onto the page. They run over the ASSEMBLED OUTPUT, so no section is
+   outside them, and they fail the build like any other assertion: nothing is
+   written.
+
+   ONE. NO NON-NUMBER IN A MEASUREMENT SLOT. The finite check in the
+   measurements block covered the constants of section 2 and nothing else, so
+   the other 28 sections had nothing looking at them, and section 10 printed
+   "the load at which it changes is NaN lb/hr" and "the required area is
+   undefined in2". Every line of the digest is swept for NaN, undefined,
+   Infinity or null standing where a figure belongs.
+
+   TWO. NO COUNT SPELLED AS A WORD. Section 5 said "Three of the 5 rows carry
+   certified coefficients away from the defaults" when exactly one did. The word
+   was typed in this generator, so the numeric-literal gate, which sweeps
+   NUMBERS, could not see it, and the movement gate, which compares figures the
+   data produced, was never shown one. Any English cardinal word that could be a
+   count of printed rows must be declared here BY EXACT SENTENCE, and a
+   declaration that stops matching fails, so the ledger cannot go stale.       */
+
+const NON_NUMBERS = /(?<![A-Za-z`])(NaN|undefined|Infinity|-Infinity|null)(?![A-Za-z`])/g;
+// The only places these words are legitimate: the digest TEACHES the NaN
+// refusal contract and prints `null` for a field the engine leaves unset. Each
+// is declared by the exact substring that makes it legitimate.
+const NON_NUMBER_OK = [
+  // The contract table's own words for the seven bare-number exports.
+  'a bare number, and NaN where it refuses',
+  // The bullet that counts them.
+  'signal a refusal with NaN',
+  // The inviscid liquid row: the engine leaves the Reynolds number unset when
+  // there is no viscosity to build one from, and `null` is what it returns.
+  'Reynolds null',
+  // A refusal row whose INPUT was the null, quoted so the message and the input
+  // that caused it are on one row.
+  'a liquid level fraction given as null',
+];
+const nnHits = [];
+const nnUsed = new Set();
+out.forEach((line, i) => {
+  if (!NON_NUMBERS.test(line)) return;
+  NON_NUMBERS.lastIndex = 0;
+  const ok = NON_NUMBER_OK.find((d) => line.includes(d));
+  if (ok) { nnUsed.add(ok); return; }
+  nnHits.push(`line ${i + 1}: ${line.slice(0, 160)}`);
+});
+must('NO NON-NUMBER STANDS WHERE A MEASUREMENT BELONGS, in any section',
+  nnHits.length === 0, nnHits.length ? nnHits.join(' | ') : `${out.length} lines swept, ${nnUsed.size} declared contract line(s) hit`);
+must('every declared non-number contract line is still live',
+  nnUsed.size === NON_NUMBER_OK.length,
+  `${nnUsed.size} of ${NON_NUMBER_OK.length} hit; dead: [${NON_NUMBER_OK.filter((d) => !nnUsed.has(d)).join(' | ')}]`);
+
+// A COUNT OF PRINTED ROWS IS A NUMERAL, NEVER A WORD. This is the whole rule,
+// and it needs no ledger of exemptions: ordinary prose uses "two" and "three"
+// freely and nothing here objects, but the two shapes that STATE A COUNT OF
+// ROWS, "<n> of the <total> rows" and "the first <n> rows", must carry a digit.
+// A digit is a figure the typed-literal gate can sweep, the movement gate can
+// compare and digestfigures can recompute against the table. A word is
+// invisible to all three, which is how "Three of the 5 rows" reached a page
+// where exactly one row did what it claimed.
+const SPELLED = '(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|'
+  + 'thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty)';
+// NO NUMERIC QUANTIFIER APPEARS IN THIS PATTERN, deliberately: the wave's typed
+// literal gate sweeps this file for numbers it cannot explain, and a `{0,2}`
+// inside a regex reads to it as two typed numbers. An optional single adjective
+// before the noun does the same work.
+const SPELLED_ROW_COUNT = new RegExp(
+  `\\b${SPELLED}\\b\\s+of\\s+(?:the\\s+)?\\S+\\s+(?:rows?|cases?|entries|lines)\\b`
+  + `|\\bfirst\\s+${SPELLED}\\b\\s+(?:\\w+\\s+)?(?:rows?|lines)\\b`
+  + `|\\blast\\s+${SPELLED}\\b\\s+(?:\\w+\\s+)?(?:rows?|lines)\\b`, 'i');
+const swHits = [];
+out.forEach((line, i) => {
+  const m = line.match(SPELLED_ROW_COUNT);
+  if (m) swHits.push(`line ${i + 1} [${m[0]}]: ${line.slice(0, 140)}`);
+});
+must('EVERY COUNT OF PRINTED ROWS IS A NUMERAL, in any section',
+  swHits.length === 0,
+  swHits.length ? swHits.join(' | ') : `${out.length} lines swept for a spelled row count`);
+// NEGATIVE CONTROL: the rule must be able to fail. The sentence that made this
+// guard necessary is run through it verbatim, and a guard that passes it is not
+// a guard.
+must('the spelled-row-count rule catches the sentence it was written for',
+  SPELLED_ROW_COUNT.test('- Three of the 5 rows carry certified coefficients away from the defaults.')
+  && SPELLED_ROW_COUNT.test('Read the first five rows: the required area is identical across them.')
+  && !SPELLED_ROW_COUNT.test('- Rows carrying certified coefficients away from the engine own defaults: 1 of the 5 rows.')
+  && !SPELLED_ROW_COUNT.test('- THREE DIFFERENT QUANTITIES ARE CALLED BACK PRESSURE ELSEWHERE.'),
+  'both false sentences caught, both good ones passed');
 
 /* ------------------------------------------------------- THE ASSERTIONS */
 

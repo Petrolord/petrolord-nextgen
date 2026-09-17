@@ -147,7 +147,13 @@ export const AFIESERE = {
   mw: 20, k: 1.28, z: 0.88, orificeDIn: 1.25, cd: 0.82,
 };
 
-export const ORUBIRI_BACK_RATIOS = [0.10, 0.20, 0.30, 0.40, 0.50, 0.5497, 0.5498, 0.60, 0.70, 0.80, 0.90];
+export const ORUBIRI_BACK_RATIOS = [0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90];
+// THE TWO PROBE ROWS EITHER SIDE OF THE CROSSING ARE DERIVED rather than
+// listed. HISTORY, and the frame is this heading: the pair that used to be
+// typed here, 0.5497 and 0.5498, both sat BELOW the critical ratio 0.551208 and
+// both came back critical, so the section that exists to show the crossing
+// never showed it.
+export const CRITICAL_PROBE_OFFSET = 1e-6;
 export const K_SWEEP = [1.05, 1.10, 1.20, 1.30, 1.40, 1.50, 1.60, 1.80];
 export const AKASO_MU_SWEEP = [0, 1, 5, 20, 85, 300, 1200, 5000];
 export const KV_RE_SWEEP = [10, 30, 92, 300, 900, 3000, 10000, 100000, 196000, 300000, 1e8];
@@ -275,9 +281,15 @@ export const FIRE_AREA_SWEEP = [50, 100, 250, 500, 1000, 2500, 5000];
 export const SEGMENT_FRACTIONS = [0, 0.10, 0.25, 0.50, 0.75, 0.90, 0.99];
 
 /** The required areas the API 526 selection is walked across and ON, section 10. */
+/** The factor the letter-change bracket is grown by until the letter changes. */
+export const LETTER_FLIP_STEP = 1.05;
+
 export const ORIFICE_SELECTION_PROBES = [
   [0.05, ''], [0.11, 'exactly a listed area'], [0.110001, ''],
-  [0.5, ''], [0.503, 'exactly a listed area'], [0.503, ''],
+  // 0.503001 rather than a second 0.503: the digest prints six decimals, so a
+  // probe a ten-millionth above the boundary printed as 0.503000 and the table
+  // carried two rows reading the same stated area and returning G and H.
+  [0.5, ''], [0.503, 'exactly a listed area'], [0.503001, ''],
   [1.287, 'exactly a listed area'], [2.0, ''],
   [6.38, 'exactly a listed area'], [11.05, 'exactly a listed area'],
   [16.0, 'exactly a listed area'], [25.999999, ''], [26.0, 'exactly a listed area'],
@@ -707,7 +719,11 @@ export const gasBranch = () => {
       f2AtPointEight: R.subcriticalF2({ k, r: 0.8 }),
     })),
     criticalRatio: R.criticalPressureRatio(ORUBIRI.k),
-    branchRows: ORUBIRI_BACK_RATIOS.map((ratio) => {
+    branchRows: [
+      ...ORUBIRI_BACK_RATIOS,
+      R.criticalPressureRatio(ORUBIRI.k) - CRITICAL_PROBE_OFFSET,
+      R.criticalPressureRatio(ORUBIRI.k) + CRITICAL_PROBE_OFFSET,
+    ].sort((a, b) => a - b).map((ratio) => {
       const r = R.gasVaporArea({ ...call, p2Psia: ratio * p1 });
       return {
         backRatio: ratio,
@@ -742,6 +758,40 @@ export const gasBranch = () => {
   };
 };
 
+/**
+ * The engine's OWN default certified coefficients, measured rather than typed.
+ * The gas area is inversely proportional to the product Kd Kb Kc, so the area
+ * at unit coefficients divided by the area with one of the three omitted is
+ * exactly that one's default.
+ */
+const GAS_DEFAULTS = () => {
+  const unit = {
+    wLbHr: ORUBIRI.wLbHr,
+    p1Psia: relievingPsia(ORUBIRI.setPsig, ORUBIRI.overpressurePct),
+    p2Psia: ORUBIRI.backPsig + ATM(),
+    tR: ORUBIRI.tF + 459.67,
+    mw: ORUBIRI.mw,
+    z: ORUBIRI.z,
+    k: ORUBIRI.k,
+    kd: 1,
+    kb: 1,
+    kc: 1,
+  };
+  const a1 = R.gasVaporArea(unit).areaIn2;
+  const without = (drop) => {
+    const c = { ...unit };
+    delete c[drop];
+    return R.gasVaporArea(c).areaIn2;
+  };
+  return { kd: a1 / without('kd'), kb: a1 / without('kb'), kc: a1 / without('kc') };
+};
+
+/** The published gas rows carrying a coefficient away from those defaults. */
+const awayFromGasDefaults = () => {
+  const d = GAS_DEFAULTS();
+  return GOLD.gas.filter((g) => g.kd !== d.kd || g.kb !== d.kb || g.kc !== d.kc);
+};
+
 /** Digest section 5. The published gas cases, re-run. */
 export const gasPublished = () => ({
   rows: GOLD.gas.map((g) => {
@@ -754,14 +804,14 @@ export const gasPublished = () => ({
     };
   }),
   count: GOLD.gas.length,
-  // MEASURED rather than quoted. The digest's prose beside this block states a
-  // count of three, which the golden file itself contradicts: only one of the
-  // five rows carries a coefficient away from the engine's defaults. The count
-  // here is read off the data, and the lab test records the disagreement as an
-  // open finding in the wave generator rather than repeating either figure.
-  awayFromDefaults: GOLD.gas.filter((g) => g.kd !== 0.975 || g.kb !== 1 || g.kc !== 1).length,
-  awayFromDefaultsRows: GOLD.gas
-    .filter((g) => g.kd !== 0.975 || g.kb !== 1 || g.kc !== 1)
+  // THE DEFAULTS ARE MEASURED, so a row counted as away from them is counted
+  // against a number a reader can check. The area is inversely proportional to
+  // the product Kd Kb Kc, so the area at unit coefficients divided by the area
+  // with ONE of them left out is exactly that one's default. Nothing here types
+  // 0.975. The digest derives the same three the same way.
+  measuredDefaults: GAS_DEFAULTS(),
+  awayFromDefaults: awayFromGasDefaults().length,
+  awayFromDefaultsRows: awayFromGasDefaults()
     .map((g) => ({ wLbHr: g.wLbHr, kd: g.kd, kb: g.kb, kc: g.kc })),
 });
 
@@ -951,16 +1001,29 @@ export const orificeLadder = () => {
     kb: ORUBIRI.kb,
     kc: ORUBIRI.kc,
   }).areaIn2;
-  // THE BISECTION THE DIGEST PRINTS DOES NOT BRACKET, and that is reported
-  // rather than hidden. The bracket runs from half the stated load to two and a
-  // half times it, and the stated selection is L at both of those loads' letters
-  // being something else, so the predicate is false at both ends and the
-  // bisection returns no answer. The lab returns the same non-answer the digest
-  // prints, and the flag says so, because a panel must not present a
-  // non-answer as a load.
+  // THE BRACKET IS GROWN UNTIL IT HOLDS THE ROOT. It used to run from half the
+  // stated load to two and a half times it, where the selection is J and P, so
+  // the predicate was false at BOTH ends and the bisection had nothing to find.
+  // The lab reported that non-answer honestly and the digest printed it as a
+  // measurement, "the load at which it changes is NaN lb/hr". Growing the
+  // bracket from the stated load is the repair: the predicate is true at the
+  // stated load by construction, and the walk stops the first time it is false.
+  const letterAt = (x) => R.selectOrifice(gasAreaAt(x)).orifice;
+  const letterFlipBracket = (() => {
+    let hi = ORUBIRI.wLbHr;
+    for (let i = 0; i < 200 && letterAt(hi) === gas.orifice; i += 1) hi *= LETTER_FLIP_STEP;
+    return {
+      loLbHr: ORUBIRI.wLbHr,
+      hiLbHr: hi,
+      stepFactor: LETTER_FLIP_STEP,
+      steps: Math.round(Math.log(hi / ORUBIRI.wLbHr) / Math.log(LETTER_FLIP_STEP)),
+      letterAtLo: letterAt(ORUBIRI.wLbHr),
+      letterAtHi: letterAt(hi),
+    };
+  })();
   const letterFlipLoadLbHr = bisect(
-    ORUBIRI.wLbHr * 0.5, ORUBIRI.wLbHr * 2.5,
-    (x) => R.selectOrifice(gasAreaAt(x)).orifice === gas.orifice,
+    letterFlipBracket.loLbHr, letterFlipBracket.hiLbHr,
+    (x) => letterAt(x) === gas.orifice,
   );
   return {
     ladder: table.map((row, i) => ({
@@ -969,15 +1032,13 @@ export const orificeLadder = () => {
       ratioToTheOneBelow: i === 0 ? null : row.areaIn2 / table[i - 1].areaIn2,
     })),
     rowCount: table.length,
-    selectionRows: ORIFICE_SELECTION_PROBES.map(([requiredAreaIn2, note], i) => {
-      // The two rows at 0.503 are the same required area read against two
-      // different orifices, which is the pair that decides whether the
-      // comparison is at-or-above or strictly above. The second is the one the
-      // digest prints as the next orifice up.
-      const strictlyAbove = i === 5;
-      const r = strictlyAbove
-        ? R.selectOrifice(requiredAreaIn2 * (1 + 1e-12))
-        : R.selectOrifice(requiredAreaIn2);
+    selectionRows: ORIFICE_SELECTION_PROBES.map(([requiredAreaIn2, note]) => {
+      // THE PROBE IS THE NUMBER IN THE TABLE. This used to nudge the sixth probe
+      // by a part in a million million and print the un-nudged value, so the row
+      // the reader saw was not the row the engine was asked about, and two rows
+      // read identically while returning different letters. The pair either side
+      // of G is now two distinct stated areas, 0.503 and 0.503001.
+      const r = R.selectOrifice(requiredAreaIn2);
       return {
         requiredAreaIn2, orifice: r.orifice, orificeAreaIn2: r.areaIn2, margin: r.margin, note,
       };
@@ -997,8 +1058,10 @@ export const orificeLadder = () => {
         stream: 'TEBIDABA', fluid: 'steam', areaIn2: steam.areaIn2, orifice: steam.orifice, orificeAreaIn2: steam.orificeAreaIn2, margin: steam.margin,
       },
     ],
+    letterFlipBracket,
     letterFlipLoadLbHr,
     letterFlipBracketed: Number.isFinite(letterFlipLoadLbHr),
+    letterFlipAreaIn2: gasAreaAt(letterFlipLoadLbHr),
     letterFlipRatioDerived: letterFlipLoadLbHr / ORUBIRI.wLbHr,
   };
 };
