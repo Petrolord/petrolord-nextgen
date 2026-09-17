@@ -1,0 +1,40 @@
+-- ============================================================================
+-- FC6 PROFESSIONAL DEEP SEED: Heat Exchange & Cooling, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: WHAT DECIDES THE DRIVING FORCE AND WHAT DECIDES THE
+-- COEFFICIENT. P and R and a correction factor computed rather than typed;
+-- shells in series and the equivalent single-shell P they are read through; the
+-- overall coefficient assembled from five named resistances; the wall and the
+-- thin-wall limit that fixes a factor; the tube-side film, its three regimes
+-- and the band it does not have; and a professional reading end to end.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The correction factor is an EQUATION and this
+-- module computes it, where the predecessor Suite app made the user type an Ft.
+-- The coefficient is a SUM OF FIVE NAMED RESISTANCES, and naming the largest is
+-- the entire point of assembling it from parts rather than quoting one number.
+--
+-- THE TRAP THE TIER IS BUILT ON. A controlling resistance is a VERDICT WITH A
+-- MARGIN, and the margin is what says whether the verdict is worth acting on.
+-- At the studio's own shipped defaults that verdict rested on a gap of about
+-- two percent and the screen printed one word and no margin. The engine now
+-- returns the margin, the runner up and whether the lead is clear, and UBIT is
+-- built on a stack where the lead is clear so the reader can see what clear
+-- looks like before meeting a coin toss.
+--
+-- HELD FOR LITERATURE, taught as a limit and never graded in any tier: the
+-- Dittus-Boelter coefficient and its two exponents, the Sieder-Tate viscosity
+-- exponent, the laminar Nusselt number, the correlation's validity band in
+-- Reynolds and in Prandtl, the cooling Prandtl exponent the module REFUSES
+-- rather than invents, and the default wall conductivity, which names no
+-- material. UBIT states both film coefficients and its own wall conductivity as
+-- conditions of the study, so every graded coefficient on this tier is built
+-- from numbers on the page and the film is never called.
+--
+-- The transition band between Reynolds 2300 and 10000 is REFUSED rather than
+-- interpolated, and that refusal is taught as the right answer rather than as a
+-- gap. It is the one place in this module where the honest output is no number.
+-- ============================================================================

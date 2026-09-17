@@ -288,8 +288,8 @@
   "heattransfer": {
     "course": "FC6",
     "live": "/root/fc-wip-heattransfer",
-    "kit": "inputs",
-    "kitNote": "The whole kit lives in the wave directory and the FOUNDATION phase mirrors the files the suites read plus every generator that spells a section heading or a graded field name: the digest, the graded answers, the precision declaration, wave.json, the dump, the teaching fields, the capstone generator, the capstone conditions and the structure. The lessons, banks, seeds, oracle mirror and verifier land with the phases that write them, and the kit becomes \"full\" then.",
+    "kit": "full",
+    "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest, the graded answers, the precision declaration, wave.json, the dump, the teaching fields, the capstone generator, the capstone conditions, the structure, the three migration headers, the course, go-live and seed generators, the SQL verifier, the dry run and the owner's apply script. The kit became \"full\" with the seed ladder.",
     "inputs": [
       "digest.txt",
       "fields.json",
@@ -299,11 +299,21 @@
       "fc6_fields.mjs",
       "fc6_capstone.mjs",
       "fc6_fields_capstone.mjs",
-      "structure.py"
+      "structure.py",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "dryrun_fc6.sh",
+      "verify_sql.py",
+      "apply_fc6_heattransfer.sh"
     ],
     "pins": {
-      "digest.txt": "b7ffa9ad56ae380f0a357b54484b622f8fa3ea7905d6f628b66efc7fe4032eb4",
+      "digest.txt": "a7f7b44a42e673348f15a2ddce929decf2e58f406cf9d42bc90cf28406292a1e",
       "fields.json": "ba4c8e63d1dd591e11e7b213bca81a6e306fe3cef006b836b3264c771dca1dcd"
-    }
+    },
+    "headingsNoGeneratorSpells": 21
   }
 }
