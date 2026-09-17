@@ -90,9 +90,13 @@ you report it.
   is 560 for all of them. Both numbers are in each lesson's manifest entry as
   `min_prose_words` and `max_prose_words`.
 - The measure is **PROSE WORDS**, counted the way `lengths.py` counts them:
-  front matter, markdown table rows, headings and `{{panel:...}}` lines are all
-  excluded. A raw `wc -w` runs materially higher and is NOT the measure. Say
-  which measure before quoting a number at anyone.
+  front matter, markdown table rows and `{{panel:...}}` lines are all excluded
+  and **HEADINGS ARE COUNTED**. A raw `wc -w` runs materially higher and is NOT
+  the measure. Say which measure before quoting a number at anyone. Headings in
+  this wave carry 22 to 50 words each: counting them the other way aims you 22
+  to 50 words light on every lesson, which is the trap every sibling wave's
+  `lengths.py` docstring already records. Run `python3 lengths.py` and read what
+  it prints rather than counting by hand.
 - H1 is the lesson title from `structure.py`, exactly. Panels are tagged where
   `structure.py` says and nowhere else. Every lesson ends with `## Exercise`.
 - The scaffold has already written all 78 files with a placeholder body and the

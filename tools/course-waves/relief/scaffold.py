@@ -32,8 +32,8 @@ def body(tier, mkey, mtitle, lkey, ltitle, est, panels, minw):
         '',
         f'This lesson is not written yet. It belongs to {tier} module {mtitle} '
         f'({mkey}) and must carry between {minw} and {S.BAND[1]} PROSE WORDS, counted '
-        'the way lengths.py counts them: front matter, markdown table rows, headings '
-        'and panel lines are all excluded.',
+        'the way lengths.py counts them: front matter, markdown table rows and '
+        'panel lines are all excluded and HEADINGS ARE COUNTED.',
         '',
         'Every figure in it must be quoted from digest.txt at the precision the digest '
         'prints, and no figure may come from RECON.md, FINDINGS.md, the engine source '

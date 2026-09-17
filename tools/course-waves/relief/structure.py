@@ -105,10 +105,16 @@ PANEL_IDS = [S, F, B]
 #
 # THE BAND IS 420 TO 560 PROSE WORDS for every lesson in this wave, and the
 # measure is the one lengths.py uses: PROSE WORDS ONLY, with front matter,
-# markdown table rows, headings and {{panel:...}} lines all excluded. A raw
-# `wc -w` over the whole file is NOT this measure and runs materially higher, so
-# a lesson can be inside the band and still fail a raw word count. Say which
-# measure before quoting a number at a writer.
+# markdown table rows and {{panel:...}} lines all excluded and HEADINGS COUNTED.
+# A raw `wc -w` over the whole file is NOT this measure and runs materially
+# higher, so a lesson can be inside the band and still fail a raw word count.
+# Say which measure before quoting a number at a writer.
+#
+# THIS COMMENT USED TO SAY HEADINGS WERE EXCLUDED, and so did BRIEF.md,
+# LESSON_TASK.md, the scaffold placeholder and wave.json, while no lengths.py
+# existed in this wave at all to settle it. Every sibling wave's lengths.py
+# COUNTS headings. FC5's headings carry between 22 and 50 words each, a mean of
+# 37, so a writer trusting the old wording aimed that far light on every lesson.
 #
 # The MINIMUM is per lesson and is derived from the estimated minutes rather
 # than typed, so the ranking by est_minutes and the ranking by length cannot

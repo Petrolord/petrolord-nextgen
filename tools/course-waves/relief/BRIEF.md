@@ -181,8 +181,10 @@ figure in it.
 - The word band is in `structure.py`: a twelve-minute lesson clears 420 prose
   words, a thirteen-minute one 460 and a fourteen-minute one 500, and the
   ceiling is 560 for all of them. The measure is PROSE WORDS as `lengths.py`
-  counts them, with front matter, table rows, headings and `{{panel:...}}`
-  lines excluded. A raw `wc -w` is NOT this measure.
+  counts them, with front matter, table rows and `{{panel:...}}` lines excluded
+  and HEADINGS COUNTED. A raw `wc -w` is NOT this measure. Headings in this wave
+  carry 22 to 50 words each, so which way they are counted moves a lesson by
+  more than a tenth of its band.
 - Every number is copied from the digest at the digest's precision, or is
   arithmetic on digest numbers stated in the lesson.
 - Quote a published case's NUMBERS, never a published case's description.
