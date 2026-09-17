@@ -1,0 +1,310 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC5 Expert tier exam, 42 questions across the whole tier.
+# Sections 21 to 29, plus section 2 where the audit measures a constant.
+# Section 24, the published blowdown cases, is reached only here: no lesson in
+# this tier quotes a figure from it.
+
+# --- the march, section 21 ---
+q(0, "A station of the AFIESERE trajectory at 100.000000 s reads 524.991018 psia and 451.589391 degR. What does a station carry, and what is missing from it?",
+ "A time, a pressure and a temperature. No mass, so an inventory profile cannot be read off the call.",
+ ["A time, a pressure and a mass. No temperature, which is reported only for the end state.",
+  "A time and a pressure. No temperature at all, which the digest derives from the pressure ratio instead.",
+  "A time, a pressure, a temperature and a mass, which is why the return needs 270 of them."],
+ "The march reports the mass at the two ends only, 3469.2925 lb and 648.7449 lb. Getting a quantity a route does not return means calling it repeatedly, which is how the end-pressure table was built.")
+
+q(2, "The digest compares the march against a closed form at the stated case, at a 2.0 in orifice, at a discharge coefficient of 0.60 and from 1800 psia. What is varied across those four rows, and what is not?",
+ "The geometry and the start pressure move; the ratio stays within a part in a million of one.",
+ ["The isentropic exponent moves; the time stays inside the printing precision.",
+  "The step size moves across the four; the closed-form time stays fixed because it does not use one.",
+  "The compressibility moves across the four; the marched time stays fixed because it holds it constant."],
+ "Four different cases agreeing with a second derivation is a stronger statement than one case doing so. A coefficient applied twice or an exponent off by one would move every row of the column together.")
+
+q(1, "With the compressibility held constant and the flow choked throughout, the mass balance becomes separable. What does that buy?",
+ "An exact integral for the time between two masses, because the rate of mass loss goes as the mass raised to (k+1)/2.",
+ ["A closed form for the final temperature, which is why the orifice sweep returns one value across it.",
+  "A march that needs no step size, since the balance can be evaluated at the end state directly.",
+  "A proof that the two model decisions are harmless, since the integral makes neither of them."],
+ "The closed form is built from the engine's own gas coefficient, the gas constant recovered from the start mass, and the stated geometry. The validation oracle runs the same integral in SI.")
+
+q(3, "AFIESERE reports 2685 steps, 0 substeps, 270 stations and a time step of 0.100000 s. Which of those four is an input the route takes rather than something the march produced?",
+ "The time step.",
+ ["The station count.",
+  "The step count.",
+  "The subdivided count."],
+ "The other three are what the march did with it, and all three are returned so the run can be audited. A step of zero or a negative one is refused rather than accepted, because a march whose clock never advances can never reach its own time limit.")
+
+q(2, "The AFIESERE pressure falls from 1240.000000 psia to 1133.641018 psia over the first ten seconds and from 153.996263 psia to 145.000000 psia at the end. Why is the early fall the steeper one?",
+ "The rate through a choked orifice scales with the upstream pressure, which is highest at the start.",
+ ["The step size is finer early in the march, so more mass leaves in the first printed interval.",
+  "The compressibility is furthest from its stated value early on, which the march then corrects as it goes.",
+  "The temperature is highest early, and the mass rate through the throat rises with temperature."],
+ "The temperature column follows the pressure down for the same reason, since the temperature here is carried by the pressure through the isentropic relation and by nothing else.")
+
+q(0, "A blowdown discharge coefficient of 1.000000 returns 220.103588 s. What does a coefficient of one mean on this call?",
+ "The top of the range the engine allows, since a certified coefficient is a fraction of an ideal.",
+ ["A default the engine applies when the caller states nothing, which is why the time is the shortest of the three.",
+  "An ideal nozzle, which the engine treats as a limiting case and flags with a warning on the return.",
+  "A coefficient the march computes for itself from the isentropic exponent at that geometry."],
+ "It is the caller's own figure at the top of the range the engine admits for it, and the march applies it once. The time at that value, 220.103588 s, is the shortest of the three the digest walks.")
+
+# --- the customary time, section 22 ---
+q(3, "At an orifice of 0.750000 in the march returns 745.608268 s, which is 12.426804 min. What does the engine make of that figure?",
+ "Nothing. It returns the time and stops, and the comparison against any limit is the caller's act.",
+ ["It compares it against the customary fifteen minutes and returns a passing flag on the result.",
+  "It records the margin against fifteen minutes in the warning field and leaves the field empty otherwise.",
+  "It rounds the figure to the customary limit's own precision so that the two can be compared directly."],
+ "The practical consequence is a discipline. Write the limit you are judging against, and where it came from, in the same place you write the time, because a bare time in a report looks exactly like a passing time.")
+
+q(1, "At an end pressure of 40.000000 psia the march runs 462.482817 s, ends at 257.134963 degR and has removed 0.931629 of the inventory. Which of the three is the answer a depressuring study went looking for?",
+ "It depends on the question asked, and a study that quotes one of them should say which question it answered.",
+ ["The time, since the customary criterion is itself stated as a time and the other two are by-products of it.",
+  "The final temperature, since it is the only one of the three that the orifice cannot change.",
+  "The fraction removed, since it is the only one of the three derived rather than returned."],
+ "A depressuring study is run for the clock and for the cold end, and a single march answers both. The fraction removed is derived from the two masses and is a third reading off the same run.")
+
+q(3, "The end-pressure table runs from 600.000000 psia down to 25.000000 psia against a choked floor of 26.758009 psia. Which is the deepest row still clear of that floor?",
+ "40.000000 psia, where the march runs 462.482817 s and ends at 257.134963 degR.",
+ ["80.000000 psia, where the march runs 354.644554 s and ends at 299.234348 degR.",
+  "25.000000 psia, where the march runs 540.397236 s and ends at 232.011700 degR.",
+  "145.000000 psia, where the march runs 268.419002 s and ends at 340.807983 degR."],
+ "The rows that cross the floor carry the engine's own warning, and only the bottom row of this table does. An answer taken above the floor with an empty warning field does not rest on the choked assumption at all.")
+
+q(0, "On a relief valve a larger orifice is a larger answer to the same question. On a blowdown it is not. What does it change instead?",
+ "Only the clock, since the end state is already fixed by the two pressures and the exponent.",
+ ["Only the cold end, since a larger hole expands the gas faster and takes it further down.",
+  "Both the clock and the cold end, in the same proportion, which is what the orifice sweep prints out.",
+  "Only the step count, since the march adjusts its step to the rate the orifice permits."],
+ "That inversion is worth holding onto because it cuts against the intuition the Associate tier builds. Across eight orifices the digest counts the distinct final temperatures at 1.")
+
+q(2, "An orifice of 0.500000 in gives 1677.618587 s, which is 27.960310 min, over 16777 steps. Which of those three figures would a reviewer challenge first?",
+ "The time, because it is the reading the study rests on and it carries every stated input with it.",
+ ["The step count, because a count that large means the march has spent its budget on this row.",
+  "The minutes, because the conversion is the digest's arithmetic rather than an engine return.",
+  "None of the three, because all three of them come back from the same call and stand or fall together."],
+ "The curve is a property of the vessel and the assumptions together. Move the volume, either pressure, the gas properties, the discharge coefficient or the step and the whole curve moves with it.")
+
+q(2, "A published row of 500.000000 ft3 from 1014.700000 psia to 114.700000 psia through 1.000000 in at a discharge coefficient of 0.850000 carries 268.353614 s, against the engine's 268.068607 s, a relative difference of 1.062e-3. What is that difference?",
+ "Step error in the march, measured against an oracle that solves the same balance in closed form in SI.",
+ ["The tolerance the published row is checked at, which the engine is required to stay inside.",
+  "A unit packaging error between the USC march and the SI oracle, carried through the conversion.",
+  "Drift since the golden file was first cut, which is what a re-run of the published inputs exists to catch."],
+ "A march and a closed-form integral have almost nothing in common as computations, and they land about a thousandth apart for a reason you can name and measure. That is a result, and a shared fit reproducing itself perfectly is not.")
+
+q(3, "Two of the five published blowdown rows carry a relative difference of 2.654e-4 and three carry 1.062e-3. Which two are the tighter pair?",
+ "The 5.000000 ft3 row through 4.000000 in and the 500.000000 ft3 row through 38.000000 in.",
+ ["The two rows at 500.000000 ft3 through 1.000000 in and through 2.000000 in.",
+  "The 2000.000000 ft3 row through 1.500000 in and the 5.000000 ft3 row through 4.000000 in.",
+  "The two rows whose discharge coefficient is 0.850000 rather than 0.800000."],
+ "Those are two of the three small-vessel and large-orifice geometries the step study runs, where every step is subdivided. A published set without them cannot discriminate a march that stops before it starts.")
+
+q(1, "Three published rows finish at 338.611469 degR and one at 405.931108 degR. What sets that apart?",
+ "That row states a different start temperature, a different pair of pressures and a different isentropic exponent.",
+ ["That row uses a larger orifice, and a larger orifice takes the vessel further down before it stops.",
+  "That row is the one whose relative difference is 2.654e-4 rather than 1.062e-3, at a finer effective step.",
+  "That row holds a different compressibility, which is the only one of the stated inputs the end state reads."],
+ "The end state follows from the pressure ratio across the blowdown, the start temperature and the exponent. The three rows that agree are the three given the same three figures.")
+
+# --- a step size is an answer, section 23 ---
+q(3, "Of the fields a blowdown call returns, which is an accounting field rather than part of the answer?",
+ "The number of steps that had to be subdivided.",
+ ["The mass remaining at the end of the march.",
+  "The final pressure the march actually reached.",
+  "The trajectory of stations the march returned."],
+ "Six of the eleven fields are the answer, four are the account and the eleventh is the warning slot. The account is the step size, the step count, the subdivided count and the pressure below which the choked assumption stops holding.")
+
+q(2, "Two columns of the refinement study never move: the substeps and the final temperature. Do those absences mean the same thing?",
+ "No. The budget never bit at these geometries, while refinement could not have moved the temperature at all.",
+ ["Yes. Both say the march is converged, which is what a column that holds still across a refinement means.",
+  "Yes. Both are fixed by the two pressures and the exponent, and the step size enters neither of them.",
+  "No. The substeps are fixed by the end pressure, while the temperature is fixed by the step size."],
+ "A convergence table with several columns looks like a convergence statement about all of them. It is only a statement about the columns that moved, and reading a constant column as confirmation is reading an absence of evidence as evidence.")
+
+q(0, "Across the sixty-four-fold refinement the time moves by 0.002015907907 s in total. Why is that figure quoted against the digest's own printing precision?",
+ "Because a time prints to six decimals, so a movement below that has stopped being an interesting question.",
+ ["Because the published rows are checked at that precision, so anything smaller is inside the tolerance.",
+  "Because the engine returns its time at that precision, so a smaller movement cannot be represented.",
+  "Because the customary limit is stated in minutes, and a movement that small cannot cross it."],
+ "It establishes convergence in the march's own terms. It establishes nothing about whether the balance being marched is the right balance, and the instrument for that is the closed-form comparison.")
+
+q(1, "What would you compare on any march to find out whether it quantises its answer to one step?",
+ "The final pressure it reports against the pressure you asked for, at full precision.",
+ ["The time it reports against the same run at half the step, which doubles if the answer is quantised.",
+  "The step count against the station count, since a quantised march returns one station per step.",
+  "The final temperature against the isentropic end state, which a quantised march overshoots."],
+ "A route that hands the target back to you rather than what it reached has hidden the question instead of answering it, so the comparison has to be made at full precision rather than at the precision the figure is printed to.")
+
+q(3, "A march subdivides a step that would remove more than a twentieth of the inventory. What does it hand back so that you can see it happened?",
+ "The count of steps it subdivided, beside the count of steps it took.",
+ ["A warning on the return, which names the geometry as the reason for the subdivision.",
+  "The finest step it fell back on, which replaces the step size the caller stated.",
+  "A flag on each affected station of the trajectory, so the subdivided interval can be located."],
+ "A non-zero count is not a fault. It is the budget working, and it tells you the geometry sits in the corner where a fixed step struggles, which is worth knowing before you quote the time.")
+
+q(2, "Why can a validation case chosen because it is extreme fail in a way a typical case cannot?",
+ "It is chosen against a known failure mode, so a failure on it names what went wrong.",
+ ["It sits outside the tolerance band, so any movement shows.",
+  "It runs the march at its finest effective step, where the step error is smallest and visible.",
+  "It is the only kind of case an independent oracle can be written for, so it alone can go red."],
+ "The three hardest geometries in this study each report 34 steps and 34 substeps and each reaches its end pressure with a time above zero. Put the hardest geometry in a set deliberately, and put it there because you know what it is hard for.")
+
+q(0, "The heat release of 1193971.5392 kW is derived from a stated rate and a stated heating value. Suppose the heating value were wrong. Where would that show?",
+ "In every intensity and every distance this flare produces, with nothing in the package able to notice it.",
+ ["In the transmissivity, which the engine would then have to carry the whole of the error in.",
+  "In the refusal the route raises on a release outside the range a flare of that size can reach.",
+  "In the round trip between the two directions, which would stop closing at a ratio of 1.000000000000."],
+ "The engine takes a heat release in kW and knows nothing about rates or heating values, so that arithmetic is the caller's and the caller owns any error in it. A round trip would close perfectly on a wrong release, because the same figure goes into both directions.")
+
+q(1, "The stated flare gives 1.427138 kW/m2 at a transmissivity of 0.920000 and 1.551237 kW/m2 at 1.000000, with everything else held. Which way has the change moved the answer, and why?",
+ "Upward, because a transmissivity of one lets all of the radiation across the air between the flame and the receiver.",
+ ["Downward, because a higher transmissivity spreads the same release over more of the sphere before it arrives.",
+  "Upward, because the engine treats a transmissivity of one as a signal to drop the radiated fraction from the relation entirely.",
+  "Neither way on its own, because the transmissivity and the radiated fraction are applied as a product and only their product moves the result."],
+ "Both are fractions and both multiply the release that reaches the receiver, so raising either raises the intensity. The engine validates each of them as a coefficient that cannot add capacity, above zero and no more than one.")
+
+q(2, "Suppose the test asserting the two allowable-intensity tables stay equal did not exist. What would a learner be exposed to?",
+ "Two sets of words for one published table, met in two different studios.",
+ ["Two different sets of values for one published table, one of which would be wrong.",
+  "A table with no source at all, since the assertion is what stands in for a reference here.",
+  "A graded answer resting on a held figure, since nothing else keeps the table out of the answer key."],
+ "The test stops the two copies drifting apart, which makes a change to either a reviewed act rather than a quiet one. It does not make either copy right, because it compares them to each other and to nothing else.")
+
+q(3, "This course carries a point-source model and a route that returns a distance, and computes no setback at all. What does it teach in place of one?",
+ "That the relief engine holds a second copy of one model, and what keeps the two copies the same.",
+ ["That the point source is a screening model and a setback needs a solid-flame one instead.",
+  "That a setback cannot be computed without a flame height, which this engine has no route for.",
+  "That the four customary intensities are held, so no distance solved against one may be reported."],
+ "Two engines in one package holding the same screening relation is a fact about the package rather than about flare radiation, and it raises a question a single copy never would.")
+
+q(0, "The published radiation rows and the published setback rows are re-run together in the audit. What do the two blocks establish between them?",
+ "That both directions of the same relation agree with an oracle built from a quadrature and a bisection on it.",
+ ["That the forward route is checked and the inverse inherits that check through the round trip.",
+  "That the four customary intensities are correct, since the setback rows solve against two of them.",
+  "That the relation is exact, since both blocks agree to the last bits double precision holds."],
+ "A published row at 12000.0000 kW and 35.000000 m gives 0.175395 kW/m2, and one at 6.310000 kW/m2 gives 5.835288 m. Agreement at the size of rounding is the expected outcome when a quadrature and a closed form are two roads to the same sphere.")
+
+q(1, "Which four inputs does the forward radiation route take?",
+ "A heat release, a distance, a radiated fraction and a transmissivity.",
+ ["A heat release, a distance, an allowable intensity and a transmissivity.",
+  "A relief rate, a heating value, a radiated fraction and a distance.",
+  "A heat release, a flame height, a radiated fraction and a transmissivity."],
+ "The inverse takes the same four with an allowable intensity in place of the distance, and refuses the same bad ones. Checking that an inverse validates as much as its forward route is a cheap test with a real failure mode behind it.")
+
+# --- the audit, sections 2, 26, 27 and 28 ---
+q(3, "Each of the 42 refusals in the audit is run as one bad input with everything else sound. Why that way?",
+ "So the message and the input that caused it sit on the same row and neither has to be inferred.",
+ ["So the refusal order inside each route can be read straight off the rows, which is what a caller needs.",
+  "So every route reaches the same number of refusals, which is what makes the count comparable.",
+  "So a refusal cannot be reached by two bad inputs at once, which would leave the message ambiguous."],
+ "The build asserts every row too: a row labelled a refusal whose call had succeeded would print success fields under a refusal heading, and no numeric sweep can see that.")
+
+q(2, "Six warnings are run and printed in the audit. How should that figure be read?",
+ "As the number exercised, since a count of every condition a module can reach is a claim somebody has to check.",
+ ["As the total the module can produce, since the audit enumerates the module's whole warning surface.",
+  "As the number that fire on the teaching streams, since a warning outside them is not printed.",
+  "As the number of routes carrying a warning, since each of the six belongs to a different route."],
+ "A warning comes with a usable answer and flags a condition, which is read differently from a refusal, which returns no answer, and from a note, which names a decision left to the caller.")
+
+q(0, "The audit prints a drum call at 5.000000 ft on the same duty and records the note as none. What is that row doing?",
+ "Showing that the note is a judgment with edges rather than something attached to every call.",
+ ["Showing that a drum that small refuses, so no note can be attached to the result.",
+  "Showing that a note is suppressed whenever the L over D falls below the go-wider edge of the band.",
+  "Showing that the engine leaves no note when a warning is present on the same call."],
+ "The go-wider note starts at an L over D of 6.000000000000 and the smaller-drum note ends at 2.000000000000. Between those two the engine says nothing, which is the band it treats as reasonable.")
+
+q(1, "Two figures in this module are held with no pin, no partial check and no unit conversion standing in for the physics. Which two?",
+ "The Kv viscosity fit's coefficients and the sphere-drag correlation.",
+ ["The Napier boundaries and the four customary allowable intensities with their labels.",
+  "The pool fire constants with their exponent and the 25 ft wetted-height limit.",
+  "The API 526 orifice table and the balanced-bellows factor Kb for gas."],
+ "The Napier boundaries are pinned as behaviour, the pool fire pair is hedged by a unit check, and the 25 ft limit is a caller's decision rather than a constant. Those two are held with nothing behind them at all.")
+
+q(0, "The crossing back through unity at 1580.310880829016 psia is both derived by the engine and exported by it. Which class does the audit put it in?",
+ "Computed, because it falls out of the fit that the oracle checks.",
+ ["Typed, because it is a published boundary the engine takes as an input and names.",
+  "Held for literature, because it sits between two boundaries nothing in the package derives.",
+  "A stated convention, because exporting a figure is what makes it a decision of this engine."],
+ "The threshold at 1500.000000000007 psia and the top of the range at 3200.000000000003 psia are the held pair, pinned by the suite as behaviour. The crossing between them is arithmetic on a fit, which is a different status.")
+
+q(3, "The unclamped viscosity fit is exported alongside the clamped one, and it reaches 1.006542523506. Why export the unclamped form at all?",
+ "So the asymptote stays inspectable, which is what a stated convention owes a reader.",
+ ["So a caller can choose which of the two to apply, since the clamp is a convention rather than a rule.",
+  "So the oracle has a route to the fit that is independent of the engine's own clamped one.",
+  "So the published set can place a case above the clamp, where the fit is worth the most."],
+ "The clamp at one is a stated convention of this engine and the suite pins it. A correction for viscous drag that ran above one would be adding capacity, which is what the clamp prevents and what the export lets you see.")
+
+q(2, "The internal time limit of 7199.999985603571 s was bisected out of the engine's behaviour rather than read off a constant. What does that buy?",
+ "A figure that describes what the engine does rather than what its source says.",
+ ["A figure at twelve decimals, which is the precision a measured constant prints at.",
+  "A figure the oracle can check, since a bisected edge is an independent derivation of it.",
+  "A figure the caller can override, since a measured limit is an input."],
+ "Every threshold in the audit is measured the same way, by asking the engine a question whose answer is that edge and nothing else. Where a constant is not exported, this digest measures it and says which question it asked.")
+
+q(1, "A refusal, a warning and a note are three different things this module returns. What separates them?",
+ "A refusal returns no answer, a warning comes with a usable one, and a note names a decision left to you.",
+ ["A refusal and a warning both return an answer, and only a note withholds one until the caller acts.",
+  "A refusal names an input, a warning names a route, and a note names the section of the standard behind it.",
+  "A refusal stops the call, a warning stops the march, and a note stops the answer being graded."],
+ "Read them in that order of severity. The clearest note is the one on the fire duty, where the engine cannot know the plot elevation and so states the rule and hands the truncation back.")
+
+q(0, "One section of the digest has former behaviour as its subject, and nothing follows it. What is the reason for that placement?",
+ "Every sentence above it is about the engine as it ships, so the boundary is visible to a reader.",
+ ["The section is the newest and was appended when the repair landed, so it sits where it was added.",
+  "The material is ordered by tier, and the reading module of the last tier is the final one.",
+  "A digest ends with its provenance, and the repair record is the provenance of this one."],
+ "A sentence about former behaviour that reads as current behaviour is a defect, and the frame for that material is its heading and its opening paragraph. Everywhere else in this course, such a sentence would be the defect.")
+
+q(3, "Before the repair, three whole routes had no published case and no oracle route at all. Which kind of empty gate is that?",
+ "A missing one, which is a different fault from a case that is present and cannot discriminate.",
+ ["A transcribed one, where the checking side is reading the same derivation as the engine.",
+  "A shared one, where the constant under test sits in both of the files and moves in both at once.",
+  "A slack one, where the tolerance is wider than the movement that a realistic defect would produce."],
+ "A route with no case at all is the easier fault to see and the easier to repair: write the case. The harder one is a case that exists, runs and passes while the figure under it moves, which is why the audit names its two.")
+
+q(1, "Which of these would be a defect if it appeared in a lesson of this course outside this one module?",
+ "A sentence about former behaviour that reads as current behaviour.",
+ ["A refusal message quoted verbatim inside backticks as the engine's own wording.",
+  "A figure quoted at the precision the digest prints that quantity class at.",
+  "A statement that a figure is held for literature and is never graded here."],
+ "Framing comes from the heading above a passage or the line immediately before it. This module carries the frame in its own title and in its opening paragraph, and nothing in the course after it describes a former state.")
+
+q(1, "Four habits close this tier and none of them is about relief valves. Which is the one about agreement?",
+ "When two things agree, ask how independent they were before they were compared.",
+ ["When two things agree, ask how many decimals they agreed to.",
+  "When two things agree, ask which of the two was written first and check the later one.",
+  "When two things agree, ask whether the tolerance they were compared at could admit a defect."],
+ "Exact agreement between an engine and a copy of itself is the weakest result on offer. The other three habits are to ask what a number rests on, to measure a constant out of behaviour, and to walk an input across its range.")
+
+q(0, "This course stops deliberately at five boundaries. Which subject does it hand to the Flow Assurance course?",
+ "Cooldown and no-touch time.",
+ ["The flare setback and the customary allowable intensities.",
+  "Critical against subcritical flow through a port.",
+  "What a flare knockout drum is for."],
+ "That course names no depressurisation as its own scope exclusion, which is the one place the live catalogue points at this one. A final temperature is a gas temperature at the end of an adiabatic expansion, and the metal is a different model.")
+
+q(3, "The capstone asks for a figure to be recorded at the precision its quantity class prints at. What is the reason given?",
+ "Rounding further is a different answer, and a grader and a reader cannot then disagree about what a correct reading is worth.",
+ ["A tighter figure would fail the tolerance, which is derived from the class rather than stated.",
+  "The engine returns at that precision, so anything else is a figure it never produced.",
+  "The published cases are checked at that precision, so an answer must match them to be gradeable."],
+ "A time, a temperature, a pressure, an intensity and a distance print to six decimals, and a mass to four. The other half of the method is to say, of every figure handed in, whether the engine computed it, typed it, or holds it for literature.")
+
+q(1, "What did the Expert tier add to a course whose thesis is that the engine never chooses the case?",
+ "The question of whether anything in the package would notice if a number an answer rests on moved.",
+ ["The question of which correction the engine computed and which one somebody had copied off a chart.",
+  "The question of what a stated fraction is a fraction of, which the drum and the segment both settle.",
+  "The question of which scenario governs, which the fire case answers from geometry."],
+ "For most of this engine the answer is yes and the digest names the route that would notice. For the viscosity fit and the sphere-drag correlation the answer is no, and the digest names those too.")
+
+q(2, "A limit that has been located, written down and kept out of everything graded is treated here as acceptable. Why?",
+ "Because an unlocated limit is the dangerous kind, and naming one is what stops a reader resting on it.",
+ ["Because a limit kept out of the answer key cannot affect any figure the engine returns.",
+  "Because a limit named in the audit is one the validation oracle has an independent route to.",
+  "Because a limit that has been written down is one the published set has a case placed against."],
+ "Move either shared fit in both files and every published case still passes. The honest response is to say so where a reader will look, and then to keep every answer key clear of both.")
+
+emit(Q, '/root/wt-fc5-nextgen/tools/course-banks/relief/advanced/fc5a_exam.json', label='fc5a_exam', expect_n=42)
+finish()
