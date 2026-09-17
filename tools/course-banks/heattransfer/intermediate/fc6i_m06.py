@@ -62,7 +62,7 @@ q(2, "Of the figures in the studio chain, which one did a fitted correlation pro
  ["The overall coefficient.",
   "The log mean driving force.",
   "The correction factor."],
- "The outside film and the wall conductivity on this case are stated inputs. The inside film is the only fitted number in the module, and it is the reason the graded work in this course states both films.")
+ "The outside film and the wall conductivity on this case are stated inputs. The inside film is the one quantity a correlation produced, and that correlation is the module's only fitted one, which is the reason the graded work in this course states both films.")
 
 q(1, "Why does this course state both film coefficients wherever a coefficient is worked?",
  "So that no figure a reader produces rests on a fit whose validity band nobody here can state.",

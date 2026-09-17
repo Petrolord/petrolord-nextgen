@@ -85,7 +85,7 @@
    "The correction factor."
   ],
   "answer": 2,
-  "explanation": "The outside film and the wall conductivity on this case are stated inputs. The inside film is the only fitted number in the module, and it is the reason the graded work in this course states both films."
+  "explanation": "The outside film and the wall conductivity on this case are stated inputs. The inside film is the one quantity a correlation produced, and that correlation is the module's only fitted one, which is the reason the graded work in this course states both films."
  },
  {
   "prompt": "Why does this course state both film coefficients wherever a coefficient is worked?",

@@ -11,7 +11,7 @@
   "explanation": "Metal conducts well and a tube wall is thin, so the term is small on almost every exchanger anybody builds. Small is a reason to check it once rather than a reason to leave it out."
  },
  {
-  "prompt": "Two things move the wall term and there are no others. Which two?",
+  "prompt": "That wall table was measured at an outside diameter held at 1.000000 inches. Two things move the term across it. Which two?",
   "options": [
    "The wall thickness and the conductivity.",
    "The tube count and the wall thickness.",
@@ -19,7 +19,7 @@
    "The tube count and the two film coefficients."
   ],
   "answer": 0,
-  "explanation": "The three conductivity columns in that table stand in inverse proportion to their conductivities, so a less conductive wall moves the term by the same factor in the other direction. That is the whole of the dependence."
+  "explanation": "The three conductivity columns in that table stand in inverse proportion to their conductivities, so a less conductive wall moves the term by the same factor in the other direction. The outside diameter is the third thing that moves it, and holding it is what leaves only those two."
  },
  {
   "prompt": "How is the cylindrical wall resistance written on this engine?",

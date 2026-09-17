@@ -38,4 +38,4 @@ When the engine declines, the decline is the answer. A configuration that cannot
 
 ## Exercise
 
-Take each of the six quantities in turn and write down the conditions it depends on, before working any of them. Then name which two of the six are affected by the fouling allowances, and say which quantity in the question arrives stated rather than computed and why.
+Take each of the six quantities in turn and write down the conditions it depends on, before working any of them. Then name which three of the six the fouling allowances reach, and say which quantity in the question arrives stated rather than computed and why.

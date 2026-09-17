@@ -8,7 +8,7 @@ At the converged count of 74 tubes in 2 passes, which is 37 tubes a pass, the tu
 
 That film goes into the stack, and the stack gives U clean 134.459410 and U dirty 92.110348, with a fouling penalty of 31.495796 percent. The controlling resistance is the outside film, the runner up is the inside fouling allowance, and the margin between them is 51.612903 percent, which the engine reports as clear of the declared threshold.
 
-The outside film and the wall conductivity on this case are stated inputs. The inside film is the one quantity here a correlation produced, and it is the only fitted number in the module. That is why the graded work in this course states both films: a figure a reader is asked to produce should not rest on a fit whose validity band nobody here can state.
+The outside film and the wall conductivity on this case are stated inputs. The inside film is the one quantity here a correlation produced, and that correlation is the module's only fitted one. That is why the graded work in this course states both films: a figure a reader is asked to produce should not rest on a fit whose validity band nobody here can state.
 
 {{panel:fc-coefficient-explorer}}
 

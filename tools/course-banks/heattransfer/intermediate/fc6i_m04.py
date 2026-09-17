@@ -15,12 +15,12 @@ q(3, "On the studio case the wall carries 0.000228791 hr.ft2.F per Btu. What sha
   "9.211035 percent, the smallest of the five terms on that case."],
  "Metal conducts well and a tube wall is thin, so the term is small on almost every exchanger anybody builds. Small is a reason to check it once rather than a reason to leave it out.")
 
-q(0, "Two things move the wall term and there are no others. Which two?",
+q(0, "That wall table was measured at an outside diameter held at 1.000000 inches. Two things move the term across it. Which two?",
  "The wall thickness and the conductivity.",
  ["The tube count and the wall thickness.",
   "The conductivity and the fouling allowance.",
   "The tube count and the two film coefficients."],
- "The three conductivity columns in that table stand in inverse proportion to their conductivities, so a less conductive wall moves the term by the same factor in the other direction. That is the whole of the dependence.")
+ "The three conductivity columns in that table stand in inverse proportion to their conductivities, so a less conductive wall moves the term by the same factor in the other direction. The outside diameter is the third thing that moves it, and holding it is what leaves only those two.")
 
 q(2, "How is the cylindrical wall resistance written on this engine?",
  "The outside diameter times the logarithm of the diameter ratio, over twice the conductivity.",

@@ -19,7 +19,7 @@ The five add to the total. That is stated rather than assumed: the five rows abo
 
 ## Where the two films come from
 
-Both film coefficients are inputs to this door. The outside film is always an input in this module, because a rigorous shell side coefficient needs stream analysis that belongs in a dedicated rating package, and the module says so rather than inventing one. The inside film can be computed, and the last module of this tier is about that computation, but it can also simply be typed.
+Both film coefficients are inputs to this door. The outside film is always an input in this module, because a rigorous shell side coefficient needs stream analysis that belongs in a dedicated rating package, and the module says so rather than inventing one. The inside film can be computed, and the fifth module of this tier is about that computation, but it can also simply be typed.
 
 That has a consequence worth stating early: in this course the films arrive stated. Wherever a coefficient is worked here, the two films are given conditions of the case rather than things a reader derives. This is deliberate. It keeps every coefficient in this course clear of the one fitted correlation in the module, so that a figure you are asked to produce depends on nothing held for the literature and nothing pinned by a value that a review could change.
 

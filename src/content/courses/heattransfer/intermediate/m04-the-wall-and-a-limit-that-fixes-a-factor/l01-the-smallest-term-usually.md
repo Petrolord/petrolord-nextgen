@@ -19,7 +19,7 @@ That is the subject of the next three lessons. The reason it is worth three is t
 | 0.010000 | 0.000093531 | 0.000032376 | 0.000013153 |
 | 0.002000 | 0.000018556 | 0.000006423 | 0.000002609 |
 
-Two things move it and there are no others. The thickness, read down any column, and the conductivity, read across any row. The three columns stand in inverse proportion to their conductivities, so a less conductive wall moves the term by the same factor in the other direction. That is the whole of the conductivity dependence and there is nothing else in it.
+Two things move it inside that table, which was measured at an outside diameter held at 1.000000 inches throughout. The thickness, read down any column, and the conductivity, read across any row. The three columns stand in inverse proportion to their conductivities, so a less conductive wall moves the term by the same factor in the other direction. That is the whole of the conductivity dependence and there is nothing else in it.
 
 So the case where the wall stops being negligible is a thick tube in a poor conductor. A heavy wall in a low conductivity alloy can carry a share of the stack worth arguing about, and the table above is how to find out rather than a reason to assume.
 

@@ -16,9 +16,9 @@ The Expert tier also meets a correction this module cannot source at all, and wa
 
 ## The hot afternoon, and a second method
 
-A bay is bought for its worst day, so the sharpest question in the course is what a machine still holds when the air arrives hotter than the day it was sized on. The answer is that its surface and its air mass are what it holds, and four columns of the rating do not move across any ambient at all while two of them do.
+A bay is bought for its worst day, so the question the Expert tier turns on is what a machine still holds when the air arrives hotter than the day it was sized on. The answer is that its surface and its air mass are what it holds, and four columns of the rating do not move across any ambient at all while two of them do.
 
-Then the whole module is audited. What was computed, what was chosen, what is pinned, what is held for the literature, and what a second method buys that a second copy of the first cannot. That last question is the sharpest thing in the course, which is why the Expert tier closes on what the method does not know.
+Then the whole module is audited. What was computed, what was chosen, what is pinned, what is held for the literature, and what a second method buys that a second copy of the first cannot. That last question is the lesson of this whole course, stated once, which is why the Expert tier closes on what the method does not know.
 
 ## Exercise
 
