@@ -301,7 +301,8 @@
       "fc7_fields.mjs",
       "fc7_capstone.mjs",
       "fc7_fields_capstone.mjs",
-      "structure.py"
+      "structure.py",
+      "vendor/closure.json"
     ],
     "headingsNoGeneratorSpells": 22,
     "headingsNote": "ALL 22 are assembled, and deliberately so. The owner clause on every section heading used to be a hand-typed string literal carrying the module key as a running counter, and the counter drifted: six clauses named a module that does not teach the section and two named a lesson that does not exist. fc7_dump.mjs builds every clause from structure.py now and refuses at build time when one names a module or a lesson the curriculum does not carry, with three negative controls fired. The section TITLES are still spelled in the generator; only the clause is computed, which is why the whole heading string no longer matches. The guards against a hand-edited heading are the digest.txt sha256 pinned here, the byte-identical rebuild under four timezones, and that build-time refusal.",

@@ -195,6 +195,11 @@ export const PANELS = {
   'fc-water-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/WaterExplorer')),
   'fc-absorber-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/AbsorberExplorer')),
   'fc-coldend-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/ColdEndExplorer')),
+
+  // FC7 Produced Water Treatment
+  'pw-water-explorer': React.lazy(() => import('@/components/course/panels/producedwater/WaterExplorer')),
+  'pw-device-explorer': React.lazy(() => import('@/components/course/panels/producedwater/DeviceExplorer')),
+  'pw-train-explorer': React.lazy(() => import('@/components/course/panels/producedwater/TrainExplorer')),
 };
 
 export function resolvePanel(id) {

@@ -34,7 +34,16 @@ const DIGEST = fs.readFileSync(waveInput(WAVE, 'digest.txt'), 'utf8');
  * without being listed fails, a panel renamed fails, and the guard can never
  * quietly sweep nothing. When the explorers land, add them here.
  */
-const SWEPT = ['gradedTolerance.js'];
+const SWEPT = ['DeviceExplorer.jsx', 'TrainExplorer.jsx', 'WaterExplorer.jsx',
+  'gradedTolerance.js', 'producedWaterLab.js'];
+
+/**
+ * THE THREE EXPLORERS. The engine import rule below is scoped to these, because
+ * the LAB is the one file in this directory that is allowed to import an engine
+ * and is the reason the panels never have to: everything a panel shows comes
+ * through the lab, so every number a learner sees has been through a gate.
+ */
+const PANEL_FILES = ['DeviceExplorer.jsx', 'TrainExplorer.jsx', 'WaterExplorer.jsx'];
 
 const sources = fs.readdirSync(HERE)
   .filter((f) => (f.endsWith('.js') || f.endsWith('.jsx')) && !f.includes('.test.'))
@@ -185,10 +194,24 @@ describe('FC7 panel sources do not reach the capstone', () => {
       });
     });
 
-    it(`${file} carries no em dash, no en dash, reads no clock and imports no engine`, () => {
-      expect(text).not.toMatch(/[–—]/);
+    it(`${file} carries no em dash, no en dash and reads no clock`, () => {
+      expect(text).not.toMatch(/[\u2013\u2014]/);
       expect(text).not.toMatch(/new Date\(|Date\.now|Math\.random/);
-      expect(text).not.toMatch(/@petrolord\/engines/);
+    });
+
+    it(`${file} imports an engine only if it is the lab`, () => {
+      // A PANEL NEVER IMPORTS AN ENGINE. The lab does, once, and it is the only
+      // route by which a number reaches a panel at all.
+      const isPanel = PANEL_FILES.includes(file);
+      const importsEngine = /@petrolord\/engines/.test(text);
+      if (isPanel) {
+        expect(importsEngine, `${file} imports an engine directly`).toBe(false);
+        expect(text, `${file} does not read the lab`).toMatch(/producedWaterLab/);
+      } else if (file === 'producedWaterLab.js') {
+        expect(importsEngine, 'the lab no longer reads the vendored engine').toBe(true);
+      } else {
+        expect(importsEngine, `${file} imports an engine and is not the lab`).toBe(false);
+      }
     });
   });
 });
