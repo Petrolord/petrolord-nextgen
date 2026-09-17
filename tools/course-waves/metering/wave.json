@@ -127,10 +127,10 @@
   "digest reproducibility": "byte-identical across two consecutive rebuilds, five timezones (Pacific/Kiritimati, UTC, Pacific/Niue, America/Sao_Paulo, Asia/Kathmandu) and four locales (C, de_DE.UTF-8, tr_TR.UTF-8, ar_EG.UTF-8): 12 builds in all, every one byte-identical. md5 03fb67866328c1f3e0fdf7f6884c48c4 over 1277 lines. build_digest.sh is mode 755 and EXECUTABLE, which finalise.sh asserts before it runs anything: a sibling wave shipped a mode 644 build script and its reproducibility gate had therefore never once run."
  },
  "leakScales": [
-  1,
-  1000,
-  0.001,
-  42,
-  2000
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
  ]
 }

@@ -7,8 +7,8 @@ lesson body, or in any manifest title. Headings included.
 The digest is swept because every lesson is written from it, so a contrastive in
 the digest becomes a contrastive in a lesson.
 
-FOUR STRINGS THE ENGINES THEMSELVES OWN. The vendored engines' own note and
-refusal text carries four contrastives, and the digest quotes those messages
+FIVE STRINGS THE ENGINES THEMSELVES OWN. The vendored engines' own note and
+refusal text carries five contrastives, and the digest quotes those messages
 VERBATIM, because a digest that paraphrases a message teaches a sentence the
 learner will never see on the screen. They are exempted BY EXACT FRAGMENT in
 ENGINE_TEXT below, with the finding recorded against the engine, and a DEAD
@@ -16,6 +16,15 @@ exemption fails this gate: a row that clears nothing is a claim about work never
 done. Every writer brief in this wave says the same thing: quote the message
 inside backticks as the engine's own words and never write a contrastive of your
 own.
+
+A CONTRASTIVE THAT WRAPS IS STILL A CONTRASTIVE. This gate scanned one line at
+a time, so a sentence whose comma landed at the end of a line and whose "not"
+opened the next one was invisible to it. liquidValve's flashing message is
+exactly that shape in the digest, where the wrap falls after "FLASHING, not",
+and this wave was therefore passing on where its text happened to break rather
+than on what its text says. Each line is now also scanned joined to the one
+after it, and only a match that crosses the join is reported from the seam, so
+nothing is counted twice.
 
 REFUSALS. Exit 2 if the digest is missing, if fewer than 500 lines were read, or
 if the course directory exists with lesson files in it and not one was examined.
@@ -50,17 +59,31 @@ ENGINE_TEXT = {
         "shellCourse's note when the hydrostatic test governs. It is the one sentence in "
         "the tank module that names the mistake it exists to prevent, so the exact wording "
         "is the lesson.",
+    'this service is FLASHING, not cavitating':
+        "liquidValve's note when the outlet sits at or below the vapour pressure. It is the "
+        "sentence that stops a flashing service being treated as a cavitating one, which is "
+        "the difference between hardened trim with an expanded outlet and a trim that buys "
+        "nothing. The exemption is EXACT and CASE SENSITIVE, so a writer's own paraphrase "
+        "of the same shape is still a violation.",
 }
 
 
 def sweep(label, text):
     out = []
-    for i, line in enumerate(text.split('\n'), 1):
+    lines = text.split('\n')
+    for i, line in enumerate(lines, 1):
         if DASHES.search(line):
             out.append((label, i, 'dash', line.strip()[:110], None))
         for _m in CONTRASTIVE.finditer(line):
             hit = next((k for k in ENGINE_TEXT if k in line), None)
             out.append((label, i, 'contrastive', line.strip()[:110], hit))
+        if i < len(lines):
+            head = line.rstrip()
+            joined = head + ' ' + lines[i].lstrip()
+            for m in CONTRASTIVE.finditer(joined):
+                if m.start() < len(head) < m.end():
+                    hit = next((k for k in ENGINE_TEXT if k in joined), None)
+                    out.append((label, i, 'contrastive', joined.strip()[:110], hit))
     return out
 
 
