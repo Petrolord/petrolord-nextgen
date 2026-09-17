@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "Which single input on this screen produces the widest span in the answer?",
+  "options": [
+   "The wetting regime, which is chosen from a list of three.",
+   "The in-situ pH, which moves the rate by a decade every two units.",
+   "The velocity, which reaches the rate twice.",
+   "The corrosion inhibitor availability."
+  ],
+  "answer": 0,
+  "explanation": "Water wetting is the largest single lever in this model. Almost every other input is a measured quantity with a unit, and this one is a word."
+ },
+ {
+  "prompt": "Two of the three regimes ignore the water cut box entirely. What wetting factor does each of them use?",
+  "options": [
+   "0.370000 water wet and 0.000000 oil wet.",
+   "1.000000 water wet and 1.000000 oil wet.",
+   "1.000000 water wet and 0.000000 oil wet.",
+   "Whatever the box says, the regime word only labelling the row."
+  ],
+  "answer": 2,
+  "explanation": "The box sits on the screen all the time and is read in one branch only. In the other two the factor is pinned at the top and at the bottom of its range."
+ },
+ {
+  "prompt": "A user types waterwette into the regime box. What comes back?",
+  "options": [
+   "The water-wet branch, reached by the matcher's fuzzy spelling rules.",
+   "A refusal quoting the string and naming the three regimes the engine accepts.",
+   "The intermittent branch, which is the middle of the three.",
+   "A screening with the regime row marked as assumed."
+  ],
+  "answer": 1,
+  "explanation": "Five spellings of oil wet resolve because they are unambiguous. A string the matcher cannot resolve refuses, because an unrecognised regime falling through would choose the largest input in the model from a typing mistake."
+ },
+ {
+  "prompt": "Which of these is not one of the three wetting regimes this engine accepts?",
+  "options": [
+   "oilWet.",
+   "waterWet.",
+   "intermittent.",
+   "gasWet."
+  ],
+  "answer": 3,
+  "explanation": "The list is closed at three and there is no gas-wet, stratified or annular option, because this module carries no flow-pattern model and a longer list would imply one."
+ },
+ {
+  "prompt": "On an oil-wet case one reported field becomes null rather than zero. Which?",
+  "options": [
+   "The wetting factor, which the regime sets.",
+   "The effective corrosion inhibition.",
+   "The wall shear, which no longer has a film to act on.",
+   "The water cut."
+  ],
+  "answer": 1,
+  "explanation": "With the rate zero by assumption, a percentage describing how much metal loss was removed has no subject. Reporting an absence is how the engine avoids making a claim about the chemical it was never in a position to make."
+ },
+ {
+  "prompt": "The regime is intermittent and the water cut box reads 0.000000. What comes back?",
+  "options": [
+   "A wetting factor of 0.000000, which lands on the oil-wet answer from the other end.",
+   "A refusal, because a water cut of zero is not a water cut at all.",
+   "A wetting factor of 1.000000, supplied by the default parameter.",
+   "A wetting factor of 0.370000, which is the shipped intermittent figure."
+  ],
+  "answer": 0,
+  "explanation": "Both ends of the intermittent range coincide with one of the other two branches, and that is what makes it an interpolation rather than a third mechanism of its own."
+ },
+ {
+  "prompt": "Nought to one on every fraction is one of the range guards this module enforces. Which of these is another?",
+  "options": [
+   "A velocity below an erosional limit for the line.",
+   "A wall shear below the film-stripping threshold.",
+   "Nought to fourteen on the in-situ pH.",
+   "A rate below the top band edge the category table carries."
+  ],
+  "answer": 2,
+  "explanation": "The four are nought to one on every fraction, nought to fourteen on pH, a temperature above absolute zero, and the partial-pressure sum against the total. Every published validity band of every correlation is held rather than enforced."
+ },
+ {
+  "prompt": "Which row of the corrosion inhibitor table carries an effective protection of 90.250000 percent?",
+  "options": [
+   "An efficiency of 95.000000 at an availability of 90.000000 percent.",
+   "An efficiency of 95.000000 at an availability of 95.000000 percent.",
+   "An efficiency of 90.000000 at an availability of 95.000000 percent.",
+   "An efficiency of 95.000000 at an availability of 98.000000 percent."
+  ],
+  "answer": 1,
+  "explanation": "Its shortfall is 4.750000 percentage points and its metal loss is 1.950000 times the datasheet number. Two inputs reach that figure and the engine asks for them one at a time."
+ },
+ {
+  "prompt": "Two percentage points of availability are lost, from 100.000000 to 98.000000, at an efficiency of 95.000000 percent. What is the metal loss then?",
+  "options": [
+   "1.000000 times it.",
+   "1.950000 times it, which is what a lower availability row carries.",
+   "1.900000 times it, which is the shortfall in percentage points.",
+   "1.380000 times the datasheet number."
+  ],
+  "answer": 3,
+  "explanation": "The effective protection on that row is 93.100000 percent, a shortfall of 1.900000 percentage points, which reads as almost nothing. A reader who summarises by the protection column and one who summarises by the loss column are looking at the same row."
+ },
+ {
+  "prompt": "At 95.000000 percent efficiency and 70.000000 percent availability, what is the shortfall?",
+  "options": [
+   "25.000000 percentage points, the drop in the availability.",
+   "6.700000 percentage points, which is the metal loss ratio there.",
+   "28.500000 percentage points short of the datasheet figure.",
+   "19.000000 percentage points, which the row above it carries."
+  ],
+  "answer": 2,
+  "explanation": "The effective protection there is 66.500000 percent and the metal loss is 6.700000 times the datasheet number. The chemical is the same 95 percent product on every row of that table."
+ },
+ {
+  "prompt": "On one row of the corrosion inhibitor table the effective protection and the shortfall are the same number. Which availability?",
+  "options": [
+   "25.000000 percent, where both read 23.750000.",
+   "50.000000 percent, where both read 47.500000.",
+   "95.000000 percent, where both read 90.250000.",
+   "100.000000 percent, where both read 95.000000."
+  ],
+  "answer": 1,
+  "explanation": "Half the datasheet efficiency is delivered and half of it is lost, so the two columns meet. The metal loss on that row is 10.500000 times the datasheet number."
+ },
+ {
+  "prompt": "The availability box reads 130.000000 percent beside an efficiency of 90.000000. What protection is reported?",
+  "options": [
+   "90.000000 percent.",
+   "130.000000 percent, the availability being taken as typed.",
+   "100.000000 percent, which is where the availability was clamped to.",
+   "0.000000 percent, the whole case being rejected as impossible."
+  ],
+  "answer": 0,
+  "explanation": "The engine moved the availability to its ceiling and recorded that move on the screening in a field of its own. That field is empty on the studio's shipped case, where nothing was moved."
+ },
+ {
+  "prompt": "The warning on the studio's shipped screen names a metal loss. What figure does it give?",
+  "options": [
+   "4.80 times it, which is the figure at 80 percent availability.",
+   "1.000000 times it.",
+   "2.900000 times it.",
+   "1.45 times the metal loss of the datasheet number."
+  ],
+  "answer": 3,
+  "explanation": "The shipped programme is a 90 percent corrosion inhibitor at 95 percent availability, giving 85.5 percent effective protection. Those are the engine's own words and the shortfall behind them is 4.500000 percentage points."
+ },
+ {
+  "prompt": "An efficiency of 120.000000 percent is typed. What does the engine report about it?",
+  "options": [
+   "That it was rejected.",
+   "That the efficiency was clamped from 120 to 100 percent.",
+   "That the efficiency was accepted as typed, the arithmetic being valid.",
+   "That the availability was clamped instead, to keep the product below one."
+  ],
+  "answer": 1,
+  "explanation": "A percentage slightly outside its range is almost always a typing slip on a quantity whose intent is obvious, and the nearest valid value carries that intent. The declaration is what stops the convenience becoming a silent assumption."
+ },
+ {
+  "prompt": "Only one of the six screened streams falls outside the turbulent branch. Name it.",
+  "options": [
+   "Tunu, at a Reynolds number of 1063231.0691.",
+   "Opukushi, at a Reynolds number of 193290.8250.",
+   "Angiama, at a Reynolds number of 3.3754.",
+   "Etelebou, at a Reynolds number of 313781.4400."
+  ],
+  "answer": 2,
+  "explanation": "Every other stream in that table sits in the hundreds of thousands or above. This one is small, slow and viscous, so it lands on a branch of its own."
+ },
+ {
+  "prompt": "The digest's swept branch table carries seven rows. How many of them are flagged as near the switch?",
+  "options": [
+   "Four.",
+   "Seven, every row on the table being inside the flagged band.",
+   "One, which is the row sitting exactly on the switch itself.",
+   "Three."
+  ],
+  "answer": 0,
+  "explanation": "The flag is set at 3600.0000, 3960.0000, 4000.0000 and 4040.0000, and clear at 2000.0000, 4400.0000 and 8000.0000."
+ },
+ {
+  "prompt": "On the two swept rows either side of the branch change, what pair of friction factors comes back?",
+  "options": [
+   "It goes from 0.003660 to 0.002867, which is the spread across the streams.",
+   "It stays at 0.046000000000, which is the Blasius coefficient itself.",
+   "It goes from 4.740191 to 0.008591, which is a fall of three orders.",
+   "It goes from 0.004000 to 0.008739."
+  ],
+  "answer": 3,
+  "explanation": "Those two rows sit at 4000.0000 and 4040.0000. The wall shear across them goes from 0.003200 Pa to 0.007132 Pa, which is the jump of 2.189815."
+ },
+ {
+  "prompt": "The velocity sweep runs at 8.000000 m/s. What wall shear does this module return there?",
+  "options": [
+   "100.000000 Pa, which is where the film-stripping verdict turns.",
+   "97.225957 Pa.",
+   "201.718855 Pa, which is the row at 12.000000 m/s.",
+   "27.920824 Pa, which is the row at 4.000000 m/s."
+  ],
+  "answer": 1,
+  "explanation": "That row is below the stripping threshold and the corrosion inhibitor credit is still taken on it. At 12.000000 m/s the shear is 201.718855 Pa and the credit is removed."
+ },
+ {
+  "prompt": "The engine's own note near the friction branch switch ends with an instruction. What is it?",
+  "options": [
+   "To lower the velocity until the Reynolds number leaves the switch.",
+   "To take the laminar value.",
+   "To read the shear as a bracket rather than as a single value.",
+   "To average the two branch values."
+  ],
+  "answer": 2,
+  "explanation": "Near the switch the shear is a range with two candidates in it. Away from the switch it is a single number, which is what the flag is telling you."
+ },
+ {
+  "prompt": "The velocity box is blank and the shear door is called. What is the engine's own message?",
+  "options": [
+   "Wall shear stress needs a positive velocity.",
+   "A positive velocity is required, an absent velocity not being unlimited capacity.",
+   "Screening incomplete, because the film survival check could not be run.",
+   "The velocity must be finite."
+  ],
+  "answer": 0,
+  "explanation": "Four inputs reach that door and each of the four refusals names its own box. The longer sentences belong to other doors on the same engine, and quoting the wrong one attributes a message to a call that never produced it."
+ },
+ {
+  "prompt": "One digest stream has a friction factor of 4.740191 and another has 0.002867. Why are they so far apart?",
+  "options": [
+   "One is a Fanning factor and the other is a Darcy factor.",
+   "One was measured on the engine and the other read from its export.",
+   "One is this module's factor and the other is the line sizing course's.",
+   "They come from two different expressions, one on each branch."
+  ],
+  "answer": 3,
+  "explanation": "Neither branch is wrong on its own ground, and nothing in either expression requires the two to agree at any particular Reynolds number. Both expressions and the switch between them are held for literature."
+ },
+ {
+  "prompt": "Of the six streams the digest screens, how many have their corrosion inhibitor film stripped?",
+  "options": [
+   "None, every one of the six sitting below the threshold.",
+   "One.",
+   "Three, being the three with the highest wall shear figures.",
+   "Six, the credit being removed on every stream in the table."
+  ],
+  "answer": 1,
+  "explanation": "On the five others the rate column and the credited rate column carry the same figure and the two life columns carry the same figure, so the ratio between them is 1.000000."
+ },
+ {
+  "prompt": "On the one stripped stream, what are the two remaining lives the engine reports?",
+  "options": [
+   "1.655305 yr against 7.681561 yr.",
+   "4.207953 yr, against 0.242737 yr once the credit has been kept.",
+   "0.161915 yr, against 0.760876 yr with the credit kept.",
+   "36.112878 yr against 192.123424 yr."
+  ],
+  "answer": 2,
+  "explanation": "That is the cost of the shear verdict stated in years on the same row as the verdict itself. The two lives carry the same information as the two rates, because the allowance is common to both."
+ },
+ {
+  "prompt": "The engine's warning when the credit is removed says two useful things. What are they?",
+  "options": [
+   "It names the datasheet figure that stopped applying, and says the rate above is now the uninhibited one.",
+   "It names the stripping threshold, and gives the velocity that would restore the film.",
+   "It names the band label, and gives the allowance a reinstatement would need.",
+   "It names the wetting regime, and gives the water cut the regime was read at."
+  ],
+  "answer": 0,
+  "explanation": "The reader can see which number stopped applying and what the headline figure now is, rather than working the second out from the first."
+ },
+ {
+  "prompt": "Why does a stripped rate divided by its credited rate carry no held constant at all?",
+  "options": [
+   "Because the constants cancel between the two branches of the friction factor.",
+   "Because the two run the same chain on the same inputs, so everything but one factor divides out.",
+   "Because the quotient is formed from mole fractions, which need no pressure.",
+   "Because the engine forms the quotient from the typed percentages directly."
+  ],
+  "answer": 1,
+  "explanation": "They differ in exactly one factor, which is the corrosion inhibitor credit. Every coefficient and every correction appears identically on both sides."
+ },
+ {
+  "prompt": "On a case where the corrosion inhibitor credit was taken in full, what does the credited rate column show?",
+  "options": [
+   "A blank.",
+   "The uninhibited rate, which is what the credit was taken off.",
+   "The rate the datasheet would give at one hundred percent availability.",
+   "The same figure the rate column shows."
+  ],
+  "answer": 3,
+  "explanation": "The engine reports both on every case whether or not the credit was actually taken. Printing a figure twice looks redundant until you meet the case where they differ."
+ },
+ {
+  "prompt": "Why is a blank density here not simply a missing row on the summary?",
+  "options": [
+   "Because the density is an argument of the correlation the rate comes from.",
+   "Because a remaining life cannot be divided without a density for the stream.",
+   "Because the rate depends on the film verdict, so the module would not know which of two rates to issue.",
+   "Because the wetting regime is resolved from the density of the phase."
+  ],
+  "answer": 2,
+  "explanation": "The screening computes the wall shear first for exactly this reason. Issuing a rate while the credit question is open would be choosing between two candidates on the reader's behalf."
+ },
+ {
+  "prompt": "On the studio's shipped default case, what does the film verdict say and at what wall shear?",
+  "options": [
+   "Not stripped, at a wall shear of 14.408065 Pa.",
+   "Stripped, at a wall shear of 362.474888 Pa.",
+   "Not stripped, at a wall shear of 369.638295 Pa.",
+   "Stripped, at a wall shear of 100.000000 Pa."
+  ],
+  "answer": 0,
+  "explanation": "Nothing was taken away on that screen, so the two rate columns carry one figure between them. The verdict moves only once the velocity is raised."
+ },
+ {
+  "prompt": "Which two figures does the shipped screening set against each other to reach its design life verdict?",
+  "options": [
+   "The 3.175000 mm allowance, against the 15.090473 mm demanded.",
+   "The 4.207953 yr the allowance reaches, against the 20.000000 yr asked for.",
+   "The 11.915473 mm gap, against the 3.175000 mm allowance.",
+   "The remaining allowance, against a minimum thickness held internally."
+  ],
+  "answer": 1,
+  "explanation": "The engine prints the life it actually reaches beside the life it was given, and it says which of the two governs. There is no minimum thickness anywhere in this module to compare anything against."
+ },
+ {
+  "prompt": "Put a consumed depth into the box on a case that had none. Which fields move?",
+  "options": [
+   "The required allowance alone.",
+   "The rate and the band label, both of which are taken off the wall that is left.",
+   "The wall shear and the film verdict, which are taken on the reduced bore.",
+   "The remaining allowance and the remaining life."
+  ],
+  "answer": 3,
+  "explanation": "The allowance a design life demands is the rate multiplied by that design life. It is the allowance a new line would need, so it takes no account of what has already been consumed."
+ },
+ {
+  "prompt": "Two of the digest's streams report remaining lives of 36.112878 yr and 192.123424 yr. What does a life of that size tell you?",
+  "options": [
+   "How long the typed allowance lasts at the computed rate, and nothing more.",
+   "When the line should next be inspected, counted in years from today's date onwards.",
+   "How long before the wall reaches its retirement thickness.",
+   "Whether the line remains fit for service over that period."
+  ],
+  "answer": 0,
+  "explanation": "An inspection interval, a minimum thickness, a retirement thickness and a fitness-for-service assessment are all listed by the engine as not provided. A reader who treats the years as an inspection date has read a division as a programme."
+ },
+ {
+  "prompt": "The wall this studio is consuming an allowance off is which wall?",
+  "options": [
+   "The pressure-containing wall the line sizing studio sized.",
+   "The shell course the storage tank studio sized.",
+   "One the module knows nothing about, since it holds no thickness of its own.",
+   "The wall the vendored golden's own cases were built against."
+  ],
+  "answer": 2,
+  "explanation": "Nothing carries a thickness from one app to another and no minimum thickness exists anywhere in this module. If somebody sizes a line in one studio and screens it in this one, the two allowances agree only because a person made them agree."
+ },
+ {
+  "prompt": "How many entries does each of the engine's two absence lists carry?",
+  "options": [
+   "Eleven not provided and eight held for literature.",
+   "Eight not provided and eleven held for literature.",
+   "Eight in each of the two lists the engine exports.",
+   "Eleven in each of the two lists the engine exports."
+  ],
+  "answer": 1,
+  "explanation": "The screening returns both so a caller shows the absences rather than meeting them one at a time. The studio prints the second list behind a disclosure."
+ },
+ {
+  "prompt": "How should the name of this studio be expanded honestly?",
+  "options": [
+   "A fitness-for-service assessment with a corrosion rate feeding it.",
+   "An inspection planning tool built on a sour-service severity region.",
+   "A wall thickness calculator that sizes a line against a design life.",
+   "A CO2 corrosion rate screen with a remaining-life division on the end of it."
+  ],
+  "answer": 3,
+  "explanation": "That is a useful tool and a narrower one than the title suggests. The word integrity here means one arithmetic, and a reader who takes the remaining life for an inspection plan has crossed into what a standard would have to supply."
+ },
+ {
+  "prompt": "What does this module hold that would let it say how much wall sits under the allowance?",
+  "options": [
+   "Nothing at all, because it carries no minimum thickness of any kind.",
+   "A thin-wall relation with a design factor typed in beside it.",
+   "A retirement thickness, which the reader supplies on the form.",
+   "The wall the line sizing studio computed for the same pipe."
+  ],
+  "answer": 0,
+  "explanation": "A corrosion allowance divided by a rate is the whole arithmetic here. What the allowance is being taken off is a question this studio cannot reach, and the course names the owner and stops."
+ },
+ {
+  "prompt": "One digest stream sits at an H2S to CO2 ratio of 0.140495867769. What does the engine report for it?",
+  "options": [
+   "The mixed regime, with the rate flagged as an upper bound.",
+   "The carbonate regime, the CO2 rate model applying in full.",
+   "The sulphide regime, with the band label and the life both null.",
+   "The unknown regime, with a note saying that no ratio at all could be formed."
+  ],
+  "answer": 2,
+  "explanation": "Its withheld block names the rate as an upper bound. The engine could have refused the rate entirely or graded it as if nothing had changed, and it does neither."
+ },
+ {
+  "prompt": "A stream carries a CO2 mole fraction of 0.020000 and an H2S mole fraction of 0.000010. Which regime?",
+  "options": [
+   "Mixed, at a ratio of 0.000500000000.",
+   "Carbonate, at a ratio of 0.000500000000.",
+   "Sulphide, at a ratio of 0.050000000000.",
+   "Unknown, the H2S fraction being too small to form a ratio."
+  ],
+  "answer": 1,
+  "explanation": "In that regime the CO2 rate model applies and the rate is issued plainly, with no upper-bound flag on it. The ratio is the same at any total pressure whatever."
+ },
+ {
+  "prompt": "Raise the H2S mole fraction on that stream to 0.000800 with the CO2 unchanged. What happens?",
+  "options": [
+   "The ratio becomes 0.040000000000 and the regime stays carbonate.",
+   "The ratio becomes 0.040000000000 and the regime becomes mixed.",
+   "The ratio falls and the regime becomes sulphide.",
+   "The ratio is unchanged."
+  ],
+  "answer": 1,
+  "explanation": "In the mixed regime the model still applies and the rate is issued with a flag saying it is a ceiling. Three regimes are three positions on the same question about one rate."
+ },
+ {
+  "prompt": "The sour door is handed a blank H2S partial pressure. What comes back?",
+  "options": [
+   "The H2S partial pressure must be non-negative.",
+   "A comparison taken at zero.",
+   "The unknown regime, with a note about the missing ratio.",
+   "A finite H2S partial pressure is required."
+  ],
+  "answer": 3,
+  "explanation": "That door owns two refusals and each names its input. A negative partial pressure gets the other of the two, and a partial pressure of exactly zero is answered rather than refused."
+ },
+ {
+  "prompt": "An H2S partial pressure of zero reaches the sour door. Is that a refusal?",
+  "options": [
+   "No. The comparison is answered, and the decade count is reported as an absence.",
+   "Yes, because a partial pressure of zero fails the finiteness check.",
+   "Yes, because the logarithm the door forms is undefined there.",
+   "No, and the decade count comes back as minus infinity."
+  ],
+  "answer": 0,
+  "explanation": "A typed zero is a positive assertion and a blank box is a question the engine cannot answer, and this module treats the two differently throughout."
+ },
+ {
+  "prompt": "The threshold this door compares against is printed in psia as 0.050763208303. How was that figure reached?",
+  "options": [
+   "It was read from the published standard the threshold comes from.",
+   "It was rounded to twelve figures from a value of exactly 0.05 psia.",
+   "It was derived from the bar value rather than rounded or typed separately.",
+   "It was fitted so that the golden's psia rows would agree with the engine."
+  ],
+  "answer": 2,
+  "explanation": "Carrying a second rounded literal is how two copies of one threshold drift apart. The engine prints both units from one number, and it declares in a field of its own that the VALUE is held for literature."
+ },
+ {
+  "prompt": "Where does the H2S to CO2 ratio reach, once it has produced its regime word?",
+  "options": [
+   "Nowhere else. It does not enter the rate, the wall shear or the allowance division.",
+   "The rate, which it multiplies by a sulphide correction factor.",
+   "The wall shear, through the density of the sour phase.",
+   "The allowance division, which it shortens in the sulphide regime."
+  ],
+  "answer": 0,
+  "explanation": "Its whole job is to say whether a CO2 rate model is still the right model for the surface. A reader who understands that will not go looking for its fingerprints anywhere else on the screen."
+ }
+]
