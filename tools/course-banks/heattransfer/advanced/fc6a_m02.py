@@ -39,7 +39,7 @@ q(1, "What makes a check discriminating?",
  ["It passes on every published case in the file.",
   "It is run on every rebuild rather than once at review.",
   "It compares the engine against a second implementation."],
- "Passing is a weaker requirement than discriminating. A second implementation that shares a constant with the first cannot fail for the reason that matters, which is what the wall factor of two showed.")
+ "Passing is a weaker requirement than discriminating. A second implementation that shares a constant with the first cannot fail for the reason that matters, which is why moving the wall factor of two the same way in both files leaves every published case green.")
 
 q(3, "Imagine a mistyped coefficient in the 1-2 shell closed form alone. How does the collapse row expose it when an ordinary case at a capacity ratio of 0.650000 does not?",
  "At the collapse the row must carry one figure three times, so a single wrong branch turns the equality report from yes to no. At 0.650000 the three legitimately differ, so nothing says which figure the odd one should have been.",

@@ -52,7 +52,7 @@
    "It compares the engine against a second implementation."
   ],
   "answer": 1,
-  "explanation": "Passing is a weaker requirement than discriminating. A second implementation that shares a constant with the first cannot fail for the reason that matters, which is what the wall factor of two showed."
+  "explanation": "Passing is a weaker requirement than discriminating. A second implementation that shares a constant with the first cannot fail for the reason that matters, which is why moving the wall factor of two the same way in both files leaves every published case green."
  },
  {
   "prompt": "Imagine a mistyped coefficient in the 1-2 shell closed form alone. How does the collapse row expose it when an ordinary case at a capacity ratio of 0.650000 does not?",

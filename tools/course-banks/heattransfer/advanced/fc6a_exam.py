@@ -106,7 +106,7 @@ q(2, "One of the analytic limits this module leans on is self-consistency across
  ["A wall term whose factor of two has been moved in the engine and in the oracle together.",
   "A closed form whose constant is wrong at high NTU, which shows as a ceiling never reached.",
   "Three separate branches of the code that must return one figure at a capacity ratio of zero."],
- "The other three limits named there are the thin wall against the flat plate, the two ceilings, and the collapse where three branches meet.")
+ "The three limits named in the other options are the thin wall against the flat plate, the two ceilings, and the collapse where three branches meet.")
 
 # --- the air cooler --------------------------------------------------------
 q(3, "ANTAN carries a duty of 15500000.0000 Btu an hour across an air rise of 26.000000 degF. What air mass follows?",

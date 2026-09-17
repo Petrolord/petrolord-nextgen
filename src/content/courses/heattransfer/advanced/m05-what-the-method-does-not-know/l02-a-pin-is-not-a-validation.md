@@ -42,7 +42,7 @@ Every return that depends on one of the seven says so in a field of its own. The
 
 ## When agreement proves nothing
 
-Move a shared constant in the engine and in the oracle together and every published case stays green. Every case green is then the finding rather than a reassurance, and that is how a wall factor of two survived in both files until an analytic limit was asked.
+Move a shared constant in the engine and in the oracle together and every published case stays green. Every case green is then the finding rather than a reassurance, and the factor of two in the wall term is what an analytic limit has to settle instead.
 
 The fan constant is the counter-example. The oracle's fan route goes through pascals and carries no customary constant, so it measures the water density the engine's constant implies, at 62.303335 lb per ft3. Moving that constant in both files still fails, because one of them never read it.
 
