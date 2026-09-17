@@ -38,7 +38,7 @@ A refusal would have been the easier answer to write and the wrong one. The rela
 
 ## What the answer carries
 
-Both doors answer with three fields. The direction they were asked in, the arrangement they used, and a ceiling. On the four rows above the ceiling is empty, because counter-current flow has none, and an empty field is a statement rather than a missing value.
+The answer carries three fields, the same three the other direction carries. The NTU, the arrangement it was computed for, and a ceiling. On the four rows above the ceiling is empty, because counter-current flow has none, and an empty field is a statement rather than a missing value.
 
 ## Where UA enters instead
 

@@ -1,6 +1,6 @@
 # Three closed forms and one answer
 
-The collapse at a capacity ratio of zero is not a curiosity. It is the sharpest discriminating check this module has, and it costs nothing to run. Three separate closed forms, written in three separate branches of the code, have to produce the same figure on every row of one sweep. A wrong constant in any one of the three breaks the row it sits on and leaves the other two untouched.
+The collapse at a capacity ratio of zero is not a curiosity. It is an analytic limit and it discriminates, and it costs nothing to run. Three separate closed forms, written in three separate branches of the code, have to produce the same figure on every row of one sweep. A wrong constant in any one of the three breaks the row it sits on and leaves the other two untouched.
 
 {{panel:fc-rating-explorer}}
 

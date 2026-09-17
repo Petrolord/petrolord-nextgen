@@ -25,7 +25,7 @@ That has a consequence worth stating early: in this course the films arrive stat
 
 ## The answer, and what it carries
 
-This door returns thirteen keys. The two coefficients, the five resistances, their five shares, the total, the reference area, the fouling penalty, and three keys about which term is controlling. Nothing in that list is optional, and nothing in it has to be computed by the caller from the others.
+This door returns thirteen keys, and everything this lesson reads sits on them. The two coefficients, the five resistances with their shares, the total, the reference area, the fouling penalty, and the verdict on which term is controlling. Counting the items in that sentence does not give thirteen, because several of them arrive grouped under one key. Nothing in the list is optional, and nothing in it has to be computed by the caller from the others.
 
 So the reading discipline is simple. Read the shares before the coefficient. A reader who knows that the outside film carries 46.055174 percent of this stack understands the exchanger. A reader who knows only that U dirty is 92.110348 knows the answer and nothing about where it came from.
 

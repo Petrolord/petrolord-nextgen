@@ -34,7 +34,7 @@ That is why this course teaches the count and checks the rounding through the ma
 
 It is tempting to look at that last column and conclude that a bigger bundle overshoots less. Do not. Published case 2 has 638 tubes at 0.216806 percent and published case 4 has 274 tubes at 0.092603 percent, so the smaller bundle overshot less. Published case 3 has 232 tubes and the third largest overshoot in the table, because its pass rounding moved the count.
 
-What is true is a ceiling. The overshoot cannot exceed what one extra tube adds, which is a smaller share of a larger bundle. Where it lands inside that range depends on where the fraction fell. Read the column as seven separate answers and do not divide one by another.
+Two roundings are at work and only the first has a ceiling. It adds one tube at most. The second, on to a whole multiple of the passes, can add up to one tube short of the pass count, so a four-pass row can overshoot further than a two-pass one. Read the column as seven separate answers and do not divide one by another.
 
 ## Exercise
 

@@ -15,7 +15,7 @@ That is how to isolate one term inside a sum of five. Make the other four vanish
 | 0.010000 | 0.000093531 | 0.000032376 | 0.000013153 | 0.000092593 | 0.000032051 | 0.000013021 |
 | 0.002000 | 0.000018556 | 0.000006423 | 0.000002609 | 0.000018519 | 0.000006410 | 0.000002604 |
 
-Read the left half against the right half row by row, at any one of the three conductivities. At the thickest wall the two are clearly different numbers. By the thinnest they agree to four significant figures, and the convergence is orderly all the way down in all three pairs.
+Read the left half against the right half row by row, at any one of the three conductivities. At the thickest wall the two are clearly different numbers. By the thinnest they have all but met, and the ratio table below says by how much: 1.002005 at the middle conductivity. The convergence is orderly all the way down in all three pairs.
 
 {{panel:fc-coefficient-explorer}}
 
