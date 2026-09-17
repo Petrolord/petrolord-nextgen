@@ -12,7 +12,7 @@ Three things about that factor are new ideas rather than new arithmetic. It is c
 
 The coefficient you took on trust is a sum of five named resistances in series, all referred to the outside tube surface. Once it is assembled from parts, the parts are visible and the one that dominates can be named. On the studio case the controlling resistance is reported as outsideFilm with insideFouling as its runner up and a margin of 51.612903 percent between them.
 
-The wall is one of those five terms, and it comes with the most instructive check in the course: a thin wall has to behave like a flat plate, and that requirement pins a factor no comparison against a file could pin.
+The wall is one of those five terms, and it comes with a check that needs no file at all: a thin wall has to behave like a flat plate, and that requirement pins a factor no comparison against a file could pin.
 
 ## The film, and a band it declines
 

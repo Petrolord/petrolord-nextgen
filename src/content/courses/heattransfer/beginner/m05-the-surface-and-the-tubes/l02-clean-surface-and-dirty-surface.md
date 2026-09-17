@@ -29,7 +29,7 @@ The area door refuses a non-positive coefficient by name: the area needs a posit
 
 ## A factor above one
 
-The other refusal on this door is on the correction factor, which must be greater than zero and at most one. Given 1.000001 it refuses and quotes the value back.
+The door also refuses on the correction factor, which must be greater than zero and at most one. Given 1.000001 it refuses and quotes the value back.
 
 The band is closed at one on purpose. A correction factor above one would say the arrangement in question delivers more driving force than counter-current flow does at the same terminals, and nothing does. Refusing at a millionth over the boundary looks fussy until you remember what a factor slightly above one would do to a surface, which is to make it slightly too small for a reason nobody would ever find.
 

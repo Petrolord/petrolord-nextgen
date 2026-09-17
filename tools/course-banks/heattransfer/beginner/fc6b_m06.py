@@ -92,7 +92,7 @@ q(2, "The studio screen reports a controlling resistance of outsideFilm with ins
   "It says how far the dirty coefficient sits below the clean one, which is what the fouling allowances cost."],
  "Naming the largest resistance is the point of assembling a coefficient from parts, because that is the term worth spending money on. The parts themselves belong to the next tier."),
 
-q(0, "On the studio table of the reading, which figures were chosen by a person?",
+q(0, "The studio reading is worked from a hot inlet of 300 F, a cold inlet of 100 F and a coefficient this tier takes as given. Which other figures behind it were chosen by a person rather than computed?",
  "The two mass flows, the two heat capacities, the hot outlet, the tube geometry and the passes.",
  ["The two capacity rates, the duty, the hot outlet and the passes, with everything below them computed.",
   "The two mass flows, the two heat capacities, the hot outlet and the correction factor of 1.000000.",

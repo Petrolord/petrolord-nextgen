@@ -1,6 +1,6 @@
 # The surface of one tube
 
-One tube is a cylinder, so its surface is pi times its outside diameter times its length. The diameter is given in inches and the length in feet, so the diameter is divided by twelve before the multiplication. That is the whole calculation, and it is the only step in this chain with no judgement in it at all.
+One tube is a cylinder, so its surface is pi times its outside diameter times its length. The diameter is given in inches and the length in feet, so the diameter is divided by twelve before the multiplication. That is the whole calculation, and there is no judgement anywhere in it.
 
 {{panel:fc-exchanger-explorer}}
 

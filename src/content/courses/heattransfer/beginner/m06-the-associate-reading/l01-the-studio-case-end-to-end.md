@@ -38,8 +38,8 @@ One caution. Use the area required rather than the actual area. The actual area 
 
 ## Which number came from where
 
-Four figures on that table were chosen by a person. The two mass flows, the two heat capacities and the hot outlet are inputs, and so are the tube geometry and the passes. Everything else was computed. The correction factor is one because the arrangement is counter, and that is the engine deciding rather than anybody typing.
+Every figure on that table was computed. The chosen figures sit behind it: the two inlets, the two mass flows, the two heat capacities, the hot outlet, the tube geometry, the passes, and the films and fouling allowances behind the coefficient. The correction factor is one because the arrangement is counter, and that is the engine deciding rather than anybody typing.
 
 ## Exercise
 
-Work the whole table from the inputs, in the order the lines are printed, without looking at any value until you have produced it. Then run the self-consistency check. Finally, mark every line as chosen or computed, and count how many of each you have.
+Work the whole table from the inputs, in the order the lines are printed, without looking at any value until you have produced it. Then run the self-consistency check. Finally, name the chosen figures the whole table was worked from.

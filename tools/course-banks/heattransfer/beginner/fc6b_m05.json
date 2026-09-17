@@ -74,7 +74,7 @@
    "Pi times the inside diameter times the length, because the tube-side fluid is what the surface is there to carry."
   ],
   "answer": 2,
-  "explanation": "This is the only step in the chain with no judgement in it at all. There is no correlation, no exponent and no fitted constant, so if the diameter and the length are right then the figure is right."
+  "explanation": "There is no judgement anywhere in this step. There is no correlation, no exponent and no fitted constant, so if the diameter and the length are right then the figure is right."
  },
  {
   "prompt": "The seven tube-count cases in this course show only two per-tube surfaces, 3.141593 and 5.235988 ft2. What does that tell you?",

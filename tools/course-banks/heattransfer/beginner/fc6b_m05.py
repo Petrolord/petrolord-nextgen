@@ -55,7 +55,7 @@ q(2, "How is the surface of one tube formed?",
  ["Pi times the mean of the inside and the outside diameter times the length, which is the surface that the wall term of the coefficient is referred to.",
   "Pi times the outside diameter squared times the length over four, which is the volume the tube encloses divided by the bore that carries the flow.",
   "Pi times the inside diameter times the length, because the tube-side fluid is what the surface is there to carry."],
- "This is the only step in the chain with no judgement in it at all. There is no correlation, no exponent and no fitted constant, so if the diameter and the length are right then the figure is right."),
+ "There is no judgement anywhere in this step. There is no correlation, no exponent and no fitted constant, so if the diameter and the length are right then the figure is right."),
 
 q(3, "The seven tube-count cases in this course show only two per-tube surfaces, 3.141593 and 5.235988 ft2. What does that tell you?",
  "Something about the cases rather than about the engine, since each was set up on one of two tube sizes.",
