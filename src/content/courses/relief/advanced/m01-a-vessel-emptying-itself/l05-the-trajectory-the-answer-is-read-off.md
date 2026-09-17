@@ -24,7 +24,7 @@ The time to the end pressure is the headline, and on AFIESERE it is 268.419002 s
 | 21 | 210.000000 | 222.032848 | 374.101352 |
 | 27 | 268.419002 | 145.000000 | 340.807983 |
 
-Those rows come from the listing of every tenth station, so they stand ten seconds apart and the last of them is the end of the march.
+Those rows are taken from the listing of every tenth station, whose rows stand ten seconds apart, and the last of them is the end of the march.
 
 ## The mass, which the curve does not carry
 

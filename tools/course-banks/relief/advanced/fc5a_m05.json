@@ -70,7 +70,7 @@
   "options": [
    "The fit coefficients themselves, since the term table prints what each is worth at that Reynolds number.",
    "The clamp at one, which would show up first at a low Reynolds number.",
-   "Engine-side drift, since it sits where the inverse-three-halves term of the fit is worth most.",
+   "Engine-side drift, since it sits where the inverse-three-halves term is still worth something.",
    "Nothing at all, since a shared fit leaves every case on that route unable to tell anything apart."
   ],
   "answer": 2,

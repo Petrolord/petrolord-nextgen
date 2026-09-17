@@ -7,12 +7,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # is the one framed history section. Every prompt here frames its material as
 # a former state before it describes it.
 
-q(2, "This module is the one place in the course whose subject is what the engine used to do. Three other places carry the same history without a frame. Which are they?",
- "The engine's own source comments, the wave's recon record, and the repair's findings file.",
+q(2, "This module is the one place in the course whose subject is what the engine used to do. Four other places carry the same history without a frame. Which are they?",
+ "Engine comments, the wave's recon and findings records, and the repair's findings file.",
  ["The digest's audit section, the published golden file, and the validation oracle's header.",
   "The lesson exercises, the teaching lab, and the three explorer panels that are built on it.",
   "The refusal messages, the warning texts, and the notes the engine returns on a successful call."],
- "All three are provenance. A sentence lifted out of one arrives with no frame around it, and nobody can frame what they did not know was history. Counted by reading the module, 12 comment lines carry the repair marker and 16 are written in a past tense about former behaviour.")
+ "All four are provenance. A sentence lifted out of one arrives with no frame around it, and nobody can frame what they did not know was history. Counted by reading the module, 12 comment lines carry the repair marker and 16 are written in a past tense about former behaviour.")
 
 q(0, "Before the repair, a first step that would have removed more mass than the vessel held broke the loop with the clock still at zero. What did the caller receive?",
  "A time of zero seconds, the vessel still at its start pressure, and no error key at all.",

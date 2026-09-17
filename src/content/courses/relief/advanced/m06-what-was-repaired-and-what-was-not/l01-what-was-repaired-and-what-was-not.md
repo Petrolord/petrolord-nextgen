@@ -9,7 +9,7 @@ Everything in this lesson is history. It describes what this engine did before i
 This module went through a repair before the course was written. Read every paragraph below as an account of a former state.
 
 
-Three other places carry this history without a frame: the engine's source comments, the wave's recon record, and the repair's findings file. All three are provenance. A sentence lifted out of one arrives with no frame, and nobody can frame what they did not know was history.
+Four other places carry this history unframed: the engine's source comments, the wave's recon and findings records, and the repair's findings file. All three are provenance. A sentence lifted out of one arrives with no frame, and nobody can frame what they did not know was history.
 
 ## Item one, an output that read as reassurance
 
@@ -31,4 +31,4 @@ Today the input is the liquid level as a fraction of the diameter, which is what
 
 ## Exercise
 
-State the frame in your own words and name the three unframed places this history also lives in. Then write out the two general lessons without reference to this engine, and beside each name the repaired behaviour that replaced the former one.
+State the frame in your own words and name the four unframed places this history also lives in. Then write out the two general lessons without reference to this engine, and beside each name the repaired behaviour that replaced the former one.

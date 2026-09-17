@@ -21,7 +21,7 @@ Those relative differences are at the size of floating-point rounding. On this r
 
 ## The block that does not
 
-The published blowdown rows carry relative differences of 1.062e-3 on three rows and 2.654e-4 on two, against an oracle that solves the same march in closed form in SI.
+The published blowdown rows carry relative differences of 1.062e-3, 1.060e-3 and 1.062e-3 on three rows and 2.654e-4 on two, against an oracle that solves the same march in closed form in SI.
 
 Both sets of figures above are relative differences the digest prints, and the digest computes no comparison between them. Do not divide one by the other. The two numbers are answering different questions: one is how closely a quadrature reproduces a closed form, the other is how closely an explicit march reproduces the exact integral of its own balance. A quotient of the two would be a figure about nothing.
 

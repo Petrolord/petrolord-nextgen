@@ -48,7 +48,7 @@ q(1, "Move the Kv fit coefficients in both the engine and its oracle and every p
  "The same holds for the sphere-drag correlation. Both are shared between the engine and its oracle on purpose, because no route here can derive either, and nothing graded in this course rests on either of them.")
 
 q(2, "The published set places a liquid case at a Reynolds number of 92.428866. What can that case discriminate, given that the fit it sits on is shared with the oracle?",
- "Engine-side drift, since it sits where the inverse-three-halves term of the fit is worth most.",
+ "Engine-side drift, since it sits where the inverse-three-halves term is still worth something.",
  ["The fit coefficients themselves, since the term table prints what each is worth at that Reynolds number.",
   "The clamp at one, which would show up first at a low Reynolds number.",
   "Nothing at all, since a shared fit leaves every case on that route unable to tell anything apart."],

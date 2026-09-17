@@ -31,7 +31,7 @@ Nothing graded in this course rests on either of them. That is the practical hal
 
 It is a tripwire. Two copies have to change together, so an accidental edit to one goes red. It cannot catch a deliberate change to both, or a value that was wrong when first written down.
 
-It can also discriminate ENGINE-SIDE DRIFT even when it cannot discriminate the constant. The published set places a liquid case at a Reynolds number of 92.428866, which is where the inverse-three-halves term of the Kv fit is worth most, so a change in how the engine uses the fit shows up there even though a change to the fit itself would not.
+It can also discriminate ENGINE-SIDE DRIFT even when it cannot discriminate the constant. The published set places a liquid case at a Reynolds number of 92.428866, where the inverse-three-halves term of the Kv fit is still worth something, so a change in how the engine uses the fit shows up there even though a change to the fit itself would not.
 
 ## The other kind of empty case
 

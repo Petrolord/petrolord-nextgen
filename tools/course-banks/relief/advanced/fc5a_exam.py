@@ -94,19 +94,19 @@ q(2, "A published row of 500.000000 ft3 from 1014.700000 psia to 114.700000 psia
   "Drift since the golden file was first cut, which is what a re-run of the published inputs exists to catch."],
  "A march and a closed-form integral have almost nothing in common as computations, and they land about a thousandth apart for a reason you can name and measure. That is a result, and a shared fit reproducing itself perfectly is not.")
 
-q(3, "Two of the five published blowdown rows carry a relative difference of 2.654e-4 and three carry 1.062e-3. Which two are the tighter pair?",
+q(3, "Two of the five published blowdown rows carry a relative difference of 2.654e-4 and the other three sit near 1.062e-3. Which two are the tighter pair?",
  "The 5.000000 ft3 row through 4.000000 in and the 500.000000 ft3 row through 38.000000 in.",
  ["The two rows at 500.000000 ft3 through 1.000000 in and through 2.000000 in.",
   "The 2000.000000 ft3 row through 1.500000 in and the 5.000000 ft3 row through 4.000000 in.",
   "The two rows whose discharge coefficient is 0.850000 rather than 0.800000."],
  "Those are two of the three small-vessel and large-orifice geometries the step study runs, where every step is subdivided. A published set without them cannot discriminate a march that stops before it starts.")
 
-q(1, "Three published rows finish at 338.611469 degR and one at 405.931108 degR. What sets that apart?",
+q(1, "Four published rows finish at 338.611469 degR and one at 405.931108 degR. What sets that apart?",
  "That row states a different start temperature, a different pair of pressures and a different isentropic exponent.",
  ["That row uses a larger orifice, and a larger orifice takes the vessel further down before it stops.",
   "That row is the one whose relative difference is 2.654e-4 rather than 1.062e-3, at a finer effective step.",
   "That row holds a different compressibility, which is the only one of the stated inputs the end state reads."],
- "The end state follows from the pressure ratio across the blowdown, the start temperature and the exponent. The three rows that agree are the three given the same three figures.")
+ "The end state follows from the pressure ratio across the blowdown, the start temperature and the exponent. The four rows that agree are the four given the same three figures.")
 
 # --- a step size is an answer, section 23 ---
 q(3, "Of the fields a blowdown call returns, which is an accounting field rather than part of the answer?",
