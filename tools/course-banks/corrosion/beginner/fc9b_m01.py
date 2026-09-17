@@ -42,12 +42,12 @@ q(2, "The screening threshold the sour door still compares against was left exac
   "A threshold only ever drives a boolean flag, so its value cannot reach any number the screening actually prints and there was nothing at all to be gained."],
  "`thresholdHeld` comes back true, which is the engine saying the number is not sourced in this repository. The engine prints the threshold in both units so nobody has to guess which one a comparison was made against."),
 
-q(0, "A colleague says the sour screening threshold is 0.05 psia. What does the digest measure it at, and how far apart are the two?",
- "The engine works to 0.050763208303 psia, and 0.05 psia would be 0.003447378640 bar. Section 3 gives the gap between the two as a fraction of the smaller.",
- ["The two agree to six decimals in psia and part company only in bar, because the conversion back through the exact factor is what introduces the difference.",
+q(0, "A colleague quotes the sour screening threshold as a round 0.05 psia. What is wrong with that, and what must a writer watch when saying how far off it is?",
+ "The round figure is not the one the engine works to, and two sections state two different relationships for the same pair of numbers.",
+ ["The two agree to six decimals in psia and part company only in bar, because the conversion back through the engine's own exact factor is what introduces the difference in the first place.",
   "The round figure is what the studio displays, so the two live at different layers.",
-  "The round figure is what the engine uses and the derived one is what the gate asserts against."],
- "Section 3 states the gap as 1.526417 percent of the smaller of the two. Section 24 states a different relationship for the same pair, so quote whichever section you are teaching from and never weld one figure to the other's wording."),
+  "Nothing is wrong with it, since the threshold value is held and a held number carries no precision claim."],
+ "Section 3 gives the gap between the two as a fraction of THE SMALLER, at 1.526417 percent. Section 24 says a threshold of exactly 0.05 psia is 1.503467 percent BELOW THE ONE THE ENGINE ACTUALLY USES. Quote whichever section you are teaching from and weld neither figure to the other's wording."),
 
 q(1, "Digest section 3 measures every held constant out of the engine's behaviour and also prints what the engine exports. Why print both columns?",
  "An export says what the module declares and a measurement says what it actually uses, so the two disagreeing would itself be a finding.",

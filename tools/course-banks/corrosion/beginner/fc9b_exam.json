@@ -113,7 +113,7 @@
   "prompt": "Only four range guards are enforced in this module and may be taught as enforced. Which set is right?",
   "options": [
    "The published validity band of each correlation, the fugacity cap, the pH reference and the film stripping threshold.",
-   "Nought to one on every fraction, the fugacity cap of 250.000000000000 bar, the pH reference of 4.000000 and a positive velocity.",
+   "Nought to one on every fraction, the fugacity pressure cap, the pH reference and a positive velocity on the transport term.",
    "Nought to one on every fraction, nought to fourteen on pH, a temperature above absolute zero, and the partial pressure sum against the total.",
    "A temperature above absolute zero, a positive total pressure, a positive velocity and a positive line inside diameter."
   ],
