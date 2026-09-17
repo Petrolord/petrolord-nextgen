@@ -68,7 +68,7 @@
  {
   "prompt": "Two mole fractions are each inside nought to one and the engine still refuses. What has it checked?",
   "options": [
-   "The sum of the two against one, because a stream cannot be made of more gas than it contains.",
+   "The sum of the two against the water cut fraction, since the three together describe how the stream divides at the wall.",
    "The sum of the two against the total pressure, because two fractions inside their own range can still put the partial pressures above the total.",
    "Each fraction against the other, because the ratio between them has to fall inside the regime boundaries before a regime word can be issued.",
    "The sum of the two against the fugacity cap, because above the cap the coefficient is held and the sum can no longer be resolved."
@@ -421,7 +421,7 @@
   "prompt": "A learner writes that this module computes the friction factor for a line. What is missing from that sentence?",
   "options": [
    "That the friction factor is held for literature, which is the standing of every constant in this engine.",
-   "That the friction factor is used to reach a wall shear rather than a pressure drop, which is the whole of the difference.",
+   "That the friction factor is read across from the line sizing module, which is where every friction factor on this platform is computed.",
    "That the two courses agree on the same pipe whenever the branch is turbulent and part company only in the laminar branch.",
    "That it is this module's own friction factor, and that the line sizing course computes its own with a different correlation and a different transition."
   ],

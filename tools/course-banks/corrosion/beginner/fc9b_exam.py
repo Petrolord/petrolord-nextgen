@@ -56,7 +56,7 @@ q(3, "The sour door prints its threshold in both units inside its own note. Why?
 
 q(1, "Two mole fractions are each inside nought to one and the engine still refuses. What has it checked?",
  "The sum of the two against the total pressure, because two fractions inside their own range can still put the partial pressures above the total.",
- ["The sum of the two against one, because a stream cannot be made of more gas than it contains.",
+ ["The sum of the two against the water cut fraction, since the three together describe how the stream divides at the wall.",
   "Each fraction against the other, because the ratio between them has to fall inside the regime boundaries before a regime word can be issued.",
   "The sum of the two against the fugacity cap, because above the cap the coefficient is held and the sum can no longer be resolved."],
  "The message names the sum it formed. A sum of exactly one is accepted, and the screening runs with a partial pressure sum of 51.000427 bar against a total of 51.000427 bar."),
@@ -291,7 +291,7 @@ q(1, "The studio's shipped case types a density of 56 lb/ft3 and a viscosity of 
 q(3, "A learner writes that this module computes the friction factor for a line. What is missing from that sentence?",
  "That it is this module's own friction factor, and that the line sizing course computes its own with a different correlation and a different transition.",
  ["That the friction factor is held for literature, which is the standing of every constant in this engine.",
-  "That the friction factor is used to reach a wall shear rather than a pressure drop, which is the whole of the difference.",
+  "That the friction factor is read across from the line sizing module, which is where every friction factor on this platform is computed.",
   "That the two courses agree on the same pipe whenever the branch is turbulent and part company only in the laminar branch."],
  "The two will not agree on the same pipe and the engine says so in its own docstring. Removing the duplicate is a cross module decision and the repair deliberately left it alone."),
 
