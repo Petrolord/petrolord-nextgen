@@ -44,7 +44,7 @@ q(0, "The engine carries 2.419100 for the centipoise conversion and the publishe
 q(2, "The engine's gas constant is 10.731600 and the figure derived from the SI gas constant is 10.731577. What ratio does that pair give?",
  "1.000002134913.",
  ["1.000004832191.",
-  "1.000000000000, because the two agree at the precision the engine works to.",
+  "A ratio of exactly one, because the two agree at the precision the engine works to.",
   "0.500000, which is what the Reynolds check on the same path returns."],
  "The figure 1.000004832191 is the viscosity conversion ratio. The Reynolds ratio of 0.500000 is a separate check, on a quantity inversely proportional to viscosity.")
 
