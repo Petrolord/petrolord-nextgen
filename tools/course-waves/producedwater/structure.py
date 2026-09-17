@@ -2,10 +2,13 @@
 #
 # Lesson tuple: (key, title, est_minutes, min_prose_words, panels).
 #
-# MIN_PROSE_WORDS IS PROSE WORDS, the way lengths.py counts them: front matter,
-# markdown table rows, headings and {{panel:...}} lines are all excluded. A raw
-# `wc -w` is a different and larger measure, so a lesson can sit inside the band
-# and fail a raw count. The band for this wave is 420 to 560.
+# MIN_PROSE_WORDS IS PROSE WORDS, the way lengths.py counts them: the front
+# matter, markdown table rows and {{panel:...}} lines are excluded, and HEADINGS
+# ARE COUNTED, including the # in front of them. This comment used to say
+# headings were excluded and no copy of the code has ever excluded them, which
+# aimed a writer 20 to 40 words light on every lesson. A raw `wc -w` is a third
+# and larger measure again, so a lesson can sit inside the band and fail a raw
+# count. The band for this wave is 420 to 560.
 #
 # Panel ids: W the water explorer (viscosity, density, the droplet distribution
 # and the two gravity cuts), D the device explorer (the liner sweep with its
@@ -24,9 +27,9 @@
 # Unframed history is still a defect.
 #
 # Engine: engines/facilities/producedWater.js, which imports nothing, vendored
-# sha-identical with engines 8b8fb6a, the FC7-0 repair.
+# sha-identical with engines 9874d58, the FC7-1 repair, which followed FC7-0.
 #
-# NOTHING IS HELD. FC7-0 is merged and vendored, every digest section is built,
+# NOTHING IS HELD. Both repairs are merged and vendored, every digest section is built,
 # and all 78 lessons have their source. HELD below is empty and is the authority.
 #
 # SCOPE SEAMS, checked against the live catalogue. FC1 separation already owns

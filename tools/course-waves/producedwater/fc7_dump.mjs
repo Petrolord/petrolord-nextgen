@@ -13,10 +13,20 @@
 // Usage:  sh /root/fc-wip-producedwater/build_digest.sh > digest.tmp \
 //           && mv digest.tmp /root/fc-wip-producedwater/digest.txt
 //
-// Engine, vendored sha-identical with engines 8b8fb6a (the FC7-0 repair):
-// engines/facilities/producedWater.js, which imports NOTHING. The walked
-// import closure of the whole family is five paths and they are all in this
-// wave's VENDOR record.
+// Engine: engines/facilities/producedWater.js, which imports NOTHING. The
+// walked import closure of the whole family is in this wave's VENDOR record.
+//
+// THE COMMIT THIS DIGEST WAS BUILT AGAINST IS NOT TYPED HERE, AND THE HEADER
+// LINE THAT STATES IT IS NOT TYPED EITHER. It was, once, and it went stale the
+// moment the engine was repaired again: the header kept naming the FC7-0
+// commit while the generator was reading the FC7-1 engine, and every gate in
+// the wave passed, because a sha is not a number any numeric sweep looks at
+// and no gate compared the sentence to the file it describes. The sha and the
+// closure size are now READ from vendor/closure.json, which the closure walker
+// writes and which it refuses to write unless every vendored path is identical
+// to that commit, and `assertVendorRecord` below re-hashes the engine this
+// generator actually imported and refuses if it is not the blob that record
+// names. A label and the thing it labels are checked against each other.
 //
 // EVERY NUMBER PRINTED HERE IS A RETURN VALUE OF THE ENGINE, except where a
 // line says "golden" (read from a published case) or "derived" (arithmetic on
@@ -38,6 +48,7 @@
 // have seen it.
 
 import fs from 'fs';
+import crypto from 'crypto';
 import {
   m3PerSecond, BARREL_M3,
   UZERE_WATER, UZERE_OIL, UZERE_BWPD, UZERE_INLET, UZERE_BASIN, UZERE_PLATES,
@@ -61,7 +72,54 @@ import {
 } from '/root/fc-wip-producedwater/fc7_fields.mjs';
 
 const ROOT = process.env.FC7_ENGINES || '/root/wt-fc7-nextgen/packages/engines';
-const P = await import(`${ROOT}/engines/facilities/producedWater.js`);
+const ENGINE_REL = 'engines/facilities/producedWater.js';
+const P = await import(`${ROOT}/${ENGINE_REL}`);
+
+/**
+ * THE VENDOR RECORD, RE-CHECKED AGAINST THE FILE THIS GENERATOR IMPORTED.
+ *
+ * closure.json is written by vendor/closure.py, which walks the import closure
+ * in the engines repository and refuses to write anything unless every path is
+ * sha-identical with a named commit. That makes it a record of WHAT WAS
+ * VENDORED. It does not, on its own, prove the generator read that copy, so
+ * this re-computes the git blob hash of the engine module actually imported
+ * above and refuses when it differs. The hash is computed here rather than
+ * shelled out to git, so the digest build needs no repository at all.
+ */
+const gitBlobSha = (buf) => crypto.createHash('sha1')
+  .update(Buffer.concat([Buffer.from(`blob ${buf.length}\u0000`, 'utf8'), buf])).digest('hex');
+const assertVendorRecord = () => {
+  const rec = JSON.parse(fs.readFileSync('/root/fc-wip-producedwater/vendor/closure.json', 'utf8'));
+  const drift = rec.closure.filter((r) => !r.identical).map((r) => r.path);
+  if (drift.length) {
+    throw new Error(`GENERATOR REFUSES: the vendor record carries ${drift.length} path(s) that are not sha-identical with engines ${rec.enginesHead}: ${drift.join(', ')}. Re-vendor before rebuilding the digest.`);
+  }
+  const row = rec.closure.find((r) => r.path === ENGINE_REL);
+  if (!row) throw new Error(`GENERATOR REFUSES: the vendor record names no row for ${ENGINE_REL}, so it cannot say what engine this digest was built against.`);
+  const actual = gitBlobSha(fs.readFileSync(`${ROOT}/${ENGINE_REL}`));
+  if (actual !== row.vendoredBlob) {
+    throw new Error(`GENERATOR REFUSES: the engine this generator imported hashes to ${actual} and the vendor record says ${row.vendoredBlob}. The header would have named a commit this digest was not built against.`);
+  }
+  return { head: rec.enginesHead.slice(0, 7), paths: rec.closure.length };
+};
+const VENDOR = assertVendorRecord();
+
+/**
+ * THE SIZE OF THE JEST SUITE, MEASURED OFF THE VENDORED SUITE FILE rather than
+ * typed into the prose that reports it. It was typed once, and it went stale
+ * the moment the suite grew: the digest told a reader the suite had 68 tests
+ * while the file it was built beside had more, and the typed-literal
+ * gate could not see the figure because it ended a sentence. Both halves are
+ * repaired, and this is the half that cannot go stale again.
+ */
+const SUITE_TESTS = (() => {
+  const src = fs.readFileSync(`${ROOT}/__tests__/facilities.producedwater.test.js`, 'utf8');
+  const n = (src.match(/^\s*(?:test|it)\(/gm) || []).length;
+  if (!(n > 0)) {
+    throw new Error('GENERATOR REFUSES: no test declarations were found in the vendored produced water suite, so the suite size cannot be reported.');
+  }
+  return n;
+})();
 const GOLD = JSON.parse(fs.readFileSync(
   `${ROOT}/test-data/facilities/goldens/producedwater_cases.json`, 'utf8'));
 const D = P.DECLARED_CONSTANTS;
@@ -120,7 +178,12 @@ const wRefusal = (label, r) => {
 };
 /** The three conditions a flotation return warns on, named off its own values. */
 const flotWarn = (r) => warnLabel(r, [
-  ['less than a minute of residence', r.residenceS < 60],
+  // READ THE DECLARED CONSTANT, NEVER RESTATE IT. This line carried its own
+  // inlined 60 while the engine carried a bare one too; FC7-1 declared the
+  // threshold, so there is now exactly one place it lives and this reads it. A
+  // second copy of a threshold is the same defect as an undeclared one, one step
+  // further from the engine.
+  [`less than the ${D.flotationResidenceWarnS} s of residence this module warns below`, r.residenceS < D.flotationResidenceWarnS],
   ['a gas holdup past the swarm limit', r.gasHoldup > D.gasHoldupWarn],
   ['a cut coarser than produced water carries', r.d50cMicron > D.coarseCutWarnMicron],
 ]);
@@ -209,7 +272,7 @@ w('# FC7 Produced Water Treatment. Teaching digest.');
 w('# Densities in kg/m3, cut sizes and droplet medians in micron, concentrations in ppm, removals in percent, centrifugal fields in g and dimensionless ratios print to six decimals; viscosities in Pa.s, velocities in m/s and volume fractions print to twelve.');
 w('# Field units: bwpd of water, degrees C, ppm of total dissolved solids, degrees API, micron for droplets and bubbles, m3/s and m for the equipment, ppm of oil in water.');
 w('# Nothing here is read from a clock or a random number, so every line reproduces.');
-w('# Built against engines 8b8fb6a, vendored sha-identical over a walked import closure of five paths. Every figure below is that engine\'s own answer at the inputs named beside it.');
+w(`# Built against engines ${VENDOR.head}, vendored sha-identical over a walked import closure of ${VENDOR.paths} paths. Every figure below is that engine's own answer at the inputs named beside it.`);
 w();
 
 /* ============================================================== SECTION 1 */
@@ -285,6 +348,10 @@ const DECLARED_ROWS = [
   ['filterReferenceLoadingMHr', 'the loading rate it is declared at'],
   ['filterLoadingExponent', 'how fast capture falls with loading rate'],
   ['filterBreakthroughLoadingMHr', 'the loading this module warns past'],
+  ['filterMinLoadingMHr', 'the loading this module REFUSES below, because the coefficient is declared at one rate'],
+  ['flotationResidenceWarnS', 'the flotation residence this module warns below'],
+  ['minNBins', 'the fewest bins the distribution will be described on'],
+  ['minSpanSigma', 'the fewest sigma either side of the median the grid must span'],
   ['stokesReynoldsLimit', 'the Reynolds number Stokes law is stated to here'],
   ['tdsMaxPpm', 'the salinity the linear correction is stated to'],
   ['sigmaMax', 'the widest droplet spread this module will describe'],
@@ -525,7 +592,7 @@ GRADE_RATIOS.forEach((ratio) => {
     P.gradeEfficiency({ dMicron: ratio * 10, d50cMicron: 10, sharpness }))));
   w(`| ${ratio} | ${cells[0]} | ${cells[1]} |`);
 });
-w(`Both curves pass through one half at a ratio of one, which is the definition. The sharper curve separates better either side of the cut: at four times the cut size it removes ${f6(100 * P.gradeEfficiency({ dMicron: 40, d50cMicron: 10, sharpness: 3 }))} percent against ${f6(100 * P.gradeEfficiency({ dMicron: 40, d50cMicron: 10, sharpness: 2 }))}, and at a quarter of it ${f6(100 * P.gradeEfficiency({ dMicron: 2.5, d50cMicron: 10, sharpness: 3 }))} percent against ${f6(100 * P.gradeEfficiency({ dMicron: 2.5, d50cMicron: 10, sharpness: 2 }))}. Sharpness ${D.defaultSharpness} is DECLARED for the gravity and centrifugal devices. Sharpness ${D.interceptionSharpness} is DERIVED for the two interception devices.`);
+w(`Both curves in the table above pass through one half at a ratio of one, which is the definition. The sharper curve separates better either side of the cut: at four times the cut size it removes ${f6(100 * P.gradeEfficiency({ dMicron: 40, d50cMicron: 10, sharpness: 3 }))} percent against ${f6(100 * P.gradeEfficiency({ dMicron: 40, d50cMicron: 10, sharpness: 2 }))}, and at a quarter of it ${f6(100 * P.gradeEfficiency({ dMicron: 2.5, d50cMicron: 10, sharpness: 3 }))} percent against ${f6(100 * P.gradeEfficiency({ dMicron: 2.5, d50cMicron: 10, sharpness: 2 }))}. Sharpness ${D.defaultSharpness} is DECLARED for the gravity and centrifugal devices. Sharpness ${D.interceptionSharpness} is DERIVED for the two interception devices.`);
 w();
 w('The same water through one device at several cut sizes, so the removal and the outlet can be read together:');
 w('| cut micron | removal percent | surviving volume | outlet median micron |');
@@ -845,7 +912,7 @@ w('| --- | --- | --- |');
 w('The medians fall monotonically as the cut tightens, which is the property a quantised median cannot have. A jest test asserts it.');
 w();
 w('The published bin grid cases:');
-w('| d50 | sigma | bins | span | golden median | golden truncated tail |');
+w('| d50 (stated) | sigma (stated) | bins (stated) | span (stated) | golden median | golden truncated tail |');
 w('| --- | --- | --- | --- | --- | --- |');
 GOLD.binGrid.forEach((c) => {
   w(`| ${c.d50} | ${c.sigma} | ${c.nBins ?? D.defaultNBins} | ${c.spanSigma ?? D.defaultSpanSigma} | ${f6(c.medianMicron)} | ${f12(c.truncatedTailFraction)} |`);
@@ -1045,7 +1112,8 @@ const GROUP_NOTE = {
   cdf: 'the error function series against the C library, on an absolute tolerance that is the series own published accuracy',
   flotation: 'the whole attachment chain, with the holdup and residence warnings straddled',
   hydrocyclone: 'the field, the envelope, the shear penalty and the captured fraction at the cut',
-  mediaFilter: 'depth filtration, the inverted cut, the grain size and the breakthrough warning',
+  mediaFilter: 'depth filtration, the inverted cut, the grain size and the breakthrough warning, with three rows added at low loading where the bed area used to move nothing',
+  mediaFilterFloor: 'the loading floor: five beds REFUSED below it, two answered at and above it, and the bed area that would run the flow at the floor',
   oilDensity: 'the crude density FUNCTION, called rather than fed its own answers back',
   plateInterceptor: 'the pack cut and the channel height independence',
   properties: 'the viscosity and brine density fits, including the one published check in the file',
@@ -1058,7 +1126,7 @@ groups.forEach((k) => {
   w(`| ${k} | ${GOLD[k].length} | ${GROUP_NOTE[k]} |`);
 });
 w();
-w('THE WARNINGS ARE GOLDEN VALUES, which is unusual and is deliberate. The golden carries `expectVelocityWarning`, `expectStarvedWarning`, `expectOverloadWarning`, `expectResidenceWarning`, `expectHoldupWarning` and `expectBreakthroughWarning`, each straddled by rows on both sides of the threshold, so a warning that stops firing fails a case rather than going quietly. Counted off the file:');
+w('THE WARNINGS ARE GOLDEN VALUES, which is unusual and is deliberate. The golden carries `expectVelocityWarning`, `expectStarvedWarning`, `expectOverloadWarning`, `expectResidenceWarning`, `expectHoldupWarning` and `expectBreakthroughWarning`, each straddled by rows on both sides of the threshold, so a warning that stops firing fails a case rather than going quietly. Counted off the file, in the table below:');
 const WARN_KEYS = ['expectVelocityWarning', 'expectStarvedWarning', 'expectOverloadWarning', 'expectResidenceWarning', 'expectHoldupWarning', 'expectBreakthroughWarning'];
 w('| golden warning field | rows carrying it | rows where it is true |');
 w('| --- | --- | --- |');
@@ -1067,11 +1135,11 @@ WARN_KEYS.forEach((key) => {
   if (!rows.length) throw new Error(`GENERATOR REFUSES: no golden row carries ${key}`);
   w(`| ${key} | ${rows.length} | ${rows.filter((c) => c[key] === true).length} |`);
 });
-w('Every one of those fields is straddled: it is true on at least one row and false on at least one other, which is what makes it evidence that the threshold is where the module says it is.');
+w('Every one of those fields is straddled in the table above: it is true on at least one row and false on at least one other, which is what makes it evidence that the threshold is where the module says it is.');
 w();
 w('AT LEAST ONE ROW PER DEVICE STATES NONE OF THAT DEVICE\'S DEFAULTS, so a default is never the only thing a case exercises. That is a rule a golden file has to be built to, because a suite whose every case runs at the defaults cannot tell a default from a derivation.');
 w();
-w('THE PLANTING BATTERY, which is the real measure of the gate. Thirty five defects, twenty seven planted in the engine alone and eight planted in the engine and the oracle together, run one at a time against the suite. Before the FC7-0 repair, 22 of those 35 left the suite fully green: 16 of the 27 planted in the engine alone and 6 of the eight planted in both files. After it, 0 of 35 do. The suite went from 20 tests to 68.');
+w(`THE PLANTING BATTERY, which is the real measure of the gate. FC7-0 planted thirty five defects, twenty seven in the engine alone and eight in the engine and the oracle together, run one at a time against the suite. Before that repair, 22 of those 35 left the suite fully green: 16 of the 27 planted in the engine alone and 6 of the eight planted in both files. After it, 0 of 35 do. FC7-1 re-ran all 35 against the repaired source and added twenty four of its own plus one self-test of the runner, and none of the sixty leaves the suite green. The suite this digest was built beside carries ${SUITE_TESTS} tests, counted off the vendored file.`);
 w('The eight planted in both files at once are the interesting half, because a golden regenerated from a bent oracle agrees with a bent engine perfectly. What catches them now is a mixture of three things: a route with no place to type the constant, the identities that need no source, and an explicit PIN with the value typed by hand in the test file.');
 w('Every family in the suite also carries a NEGATIVE CONTROL that is asserted to fire and to name a case. One of them records a fact about its own subject rather than a round number: the cyclone control fails on four of five rows and not five, because a turndown of exactly one is the one case a wrong field exponent cannot move.');
 w();
@@ -1147,6 +1215,11 @@ w('- FOUR DEVICES TRUSTED WHAT A FIFTH REFUSED. Given an oil heavier than its wa
 w('- TWO MODELS WERE DEAD. An attachment fraction that was exactly one across every input a user could type made the bubble size, the gas rate and the residence time decorative, and made induced and dissolved gas flotation the same device behind two menu entries. A media filter computed its removal twice by two routes that disagreed, and the train read the route the gate did not validate. THE LESSON IS THE PROBE: sweep every input and check it moves the answer, and if a module holds two opinions about one quantity, delete one.');
 w('- A MEDIAN WAS REPORTED AGAINST A DIFFERENT KIND OF NUMBER. The inlet median was the typed d50 and the outlet median was measured off the bins, so a train that removed nothing showed the median falling. THE LESSON IS THE BASIS: two numbers a reader will compare must be measured the same way, and the module should say on its own return that they are.');
 w('- THE GATE COULD NOT CATCH ANY OF IT. Sixteen defects planted in the engine alone left the suite fully green, and six more survived being planted in the engine and the oracle together. THE LESSON IS SECTION 19: a green suite is a measurement of the suite, until somebody plants a defect and watches.');
+w();
+w('Three more, found by THIS COURSE when it built the digest against the repaired engine and repaired in FC7-1, each of them a class FC7-0 had already named in a place FC7-0 did not look:');
+w(`- A BED AREA THAT MOVED NOTHING. The media filter clamped its own loading rate up to a floor and said nothing, so under that rate four beds of completely different area reported the same filter coefficient and the same cut size to every digit. The clamp was in the oracle too, so the independent check agreed with it. THE LESSON IS THE SILENT CLAMP: a guard that quietly moves an input is a guard that deletes the input, and the repair is to REFUSE by name. This module now answers above ${num(D.filterMinLoadingMHr, 0)} m/hr and says why below it, because its filter coefficient is declared at ${num(D.filterReferenceLoadingMHr, 0)} m/hr and what a bed does far under its design rate is held for literature.`);
+w(`- A THRESHOLD NOBODY HAD DECLARED. The flotation residence warning compared against a bare ${num(D.flotationResidenceWarnS, 0)} written inside the sentence that reported it, and the droplet grid's two floors were bare the same way, in a module whose stated doctrine is that every number which is a choice rather than a derivation lives in one frozen object. THE LESSON IS THE LEDGER: a threshold a reader cannot find is a threshold nobody reviews, and a warning should quote the figure it judged against so the reader can disagree with it.`);
+w('- A SILENT WAY BACK TO THE QUANTISED MEDIAN. The volume median interpolated when a bin carried its edges and fell back to the bin midpoint when it did not, which is the quantised answer FC7-0 had just removed, reachable again by one caller handing over midpoints alone, with nothing on the return saying which route ran. THE LESSON IS THE FALLBACK: a fallback that answers is worse than a refusal, because it is an answer nobody can tell from the right one. The leaf returns NaN now and the callers turn it into a named refusal.');
 w();
 w('HOW TO TEACH THIS, and it is the rule for the whole course. Repair history is PROVENANCE: it belongs in this section, framed, or nowhere. A number from the old model has no place in a lesson, a panel or a question, because a reader who meets it without the frame has simply been told something false about how this engine works. Every figure in every section above this one is the repaired engine\'s own answer at the inputs named beside it.');
 w();

@@ -116,7 +116,7 @@ export default {
     { frag: 'there is a floor under any outlet this train can reach', src: 'engines/facilities/producedWater.js' },
     { frag: 'only the fixed-velocity half of the API 421 horizontal velocity rule is applied here', src: 'engines/facilities/producedWater.js' },
     { frag: 'a log-standard-deviation of', src: 'engines/facilities/producedWater.js' },
-    { frag: 'the distribution must span at least 3 sigma', src: 'engines/facilities/producedWater.js' },
+    { frag: 'sigma either side of the median and this spans', src: 'engines/facilities/producedWater.js' },
     { frag: 'the distribution needs a whole number of bins', src: 'engines/facilities/producedWater.js' },
   ],
 };

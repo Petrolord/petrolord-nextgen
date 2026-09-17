@@ -2,7 +2,7 @@
 # Densities in kg/m3, cut sizes and droplet medians in micron, concentrations in ppm, removals in percent, centrifugal fields in g and dimensionless ratios print to six decimals; viscosities in Pa.s, velocities in m/s and volume fractions print to twelve.
 # Field units: bwpd of water, degrees C, ppm of total dissolved solids, degrees API, micron for droplets and bubbles, m3/s and m for the equipment, ppm of oil in water.
 # Nothing here is read from a clock or a random number, so every line reproduces.
-# Built against engines 8b8fb6a, vendored sha-identical over a walked import closure of five paths. Every figure below is that engine's own answer at the inputs named beside it.
+# Built against engines 9874d58, vendored sha-identical over a walked import closure of 5 paths. Every figure below is that engine's own answer at the inputs named beside it.
 
 # SECTION 1: What this engine treats, and what it refuses (owned by Associate m01)
 
@@ -65,10 +65,14 @@ KIND TWO: DECLARED. Customary or chosen values with no publication anywhere in t
 | filterReferenceLoadingMHr | 10 | the loading rate it is declared at |
 | filterLoadingExponent | 0.5 | how fast capture falls with loading rate |
 | filterBreakthroughLoadingMHr | 25 | the loading this module warns past |
+| filterMinLoadingMHr | 1 | the loading this module REFUSES below, because the coefficient is declared at one rate |
+| flotationResidenceWarnS | 60 | the flotation residence this module warns below |
+| minNBins | 10 | the fewest bins the distribution will be described on |
+| minSpanSigma | 3 | the fewest sigma either side of the median the grid must span |
 | stokesReynoldsLimit | 1 | the Reynolds number Stokes law is stated to here |
 | tdsMaxPpm | 300000 | the salinity the linear correction is stated to |
 | sigmaMax | 2 | the widest droplet spread this module will describe |
-Read straight off the frozen export, which carries 51 keys in all. The 16 not in the table above are band edges and customary limits printed where they bite, in Sections 4, 10, 12, 13 and 16.
+Read straight off the frozen export, which carries 55 keys in all. The 16 not in the table above are band edges and customary limits printed where they bite, in Sections 4, 10, 12, 13 and 16.
 
 KIND THREE: A CALIBRATION, and there is exactly one.
 - `attachmentEfficiency` is 0.01. It is the probability that a droplet colliding with a bubble sticks, and it is the ONE number in this module with no derivation at all: it was chosen so that a cell at the module's own default conditions cuts in the ten to twenty micron range induced gas flotation is customarily credited with. It is an input, so a caller with a vendor curve can move it. Nothing in this course presents it as published, and no graded capstone answer depends on it.
@@ -229,7 +233,7 @@ The effective area is the projected plate area times the plate count times an ef
 
 # SECTION 7: The published gravity cases (owned by Associate m05)
 
-The golden file carries 65 rows in 13 groups. The basin and plate rows are printed here as the golden holds them, beside the engine's own answer at the same inputs.
+The golden file carries 77 rows in 14 groups. The basin and plate rows are printed here as the golden holds them, beside the engine's own answer at the same inputs.
 
 | case | golden cut micron | engine cut micron | engine over golden | golden Reynolds | velocity warning expected |
 | --- | --- | --- | --- | --- | --- |
@@ -257,7 +261,7 @@ The reduced-efficiency curve, at both sharpnesses this module uses:
 | 1.5 | 0.692307692308 | 0.771428571429 |
 | 2 | 0.800000000000 | 0.888888888889 |
 | 4 | 0.941176470588 | 0.984615384615 |
-Both curves pass through one half at a ratio of one, which is the definition. The sharper curve separates better either side of the cut: at four times the cut size it removes 98.461538 percent against 94.117647, and at a quarter of it 1.538462 percent against 5.882353. Sharpness 3 is DECLARED for the gravity and centrifugal devices. Sharpness 2 is DERIVED for the two interception devices.
+Both curves in the table above pass through one half at a ratio of one, which is the definition. The sharper curve separates better either side of the cut: at four times the cut size it removes 98.461538 percent against 94.117647, and at a quarter of it 1.538462 percent against 5.882353. Sharpness 3 is DECLARED for the gravity and centrifugal devices. Sharpness 2 is DERIVED for the two interception devices.
 
 The same water through one device at several cut sizes, so the removal and the outlet can be read together:
 | cut micron | removal percent | surviving volume | outlet median micron |
@@ -452,6 +456,9 @@ The published bed cases, beside the engine:
 | 4 | 1.2 | 800 | 81.000000 | 1.229774645621 | 13.706606 | 13.706903 |
 | 16 | 3 | 1200 | 11.250000 | 1.173273473969 | 8.875096 | 8.875288 |
 | 16 | 0.1 | 800 | 20.702250 | 2.432535964550 | 33.760097 | 33.760828 |
+| 1.2 | 0.9 | 800 | 3.000000 | 6.390096504227 | 6.943179 | 6.943329 |
+| 2 | 0.9 | 800 | 1.800000 | 8.249579113843 | 6.110773 | 6.110906 |
+| 4 | 1.1 | 650 | 1.080000 | 19.855739099768 | 3.562821 | 3.562898 |
 The golden carries no removal fraction for this device and the engine returns none: there is ONE route through this model now, and the cut size the train reads is an inversion of the depth filtration the oracle marches layer by layer.
 
 # SECTION 14: The train, and why three good devices are not one great one (owned by Professional m06 and Expert m02)
@@ -521,7 +528,7 @@ WHY INTERPOLATION RATHER THAN THE BIN MIDPOINT. One step of this grid is a few p
 The medians fall monotonically as the cut tightens, which is the property a quantised median cannot have. A jest test asserts it.
 
 The published bin grid cases:
-| d50 | sigma | bins | span | golden median | golden truncated tail |
+| d50 (stated) | sigma (stated) | bins (stated) | span (stated) | golden median | golden truncated tail |
 | --- | --- | --- | --- | --- | --- |
 | 30 | 0.7 | 60 | 4 | 30.000000 | 0.000063342484 |
 | 30 | 0.7 | 30 | 4 | 30.000000 | 0.000063342484 |
@@ -659,7 +666,7 @@ AND THE MEASURED GAP, so a reader knows what the agreements are worth. This is t
 | apiSeparator | 4 | 3.75e-14 |
 | plateInterceptor | 3 | 4.24e-14 |
 | hydrocyclone | 5 | 3.38e-13 |
-| mediaFilter | 5 | 2.17e-5 |
+| mediaFilter | 8 | 2.17e-5 |
 | train, outlet concentration | 3 | 3.47e-3 |
 | train, outlet droplet median | 3 | 1.80e-3 |
 The two exact routes, the basin and the plate pack, agree to rounding, and so does the cyclone: two closed arguments for one number should. The train rows are larger because the golden there is a Monte Carlo over 400,000 droplets and carries its own sampling noise, so agreement at that level is the best a particle count can buy rather than slack in the gate. IDENTICAL TO TWELVE DECIMALS WOULD BE THE WEAKER RESULT on those rows, because that is what two copies of one calculation produce.
@@ -668,16 +675,17 @@ The two exact routes, the basin and the plate pack, agree to rounding, and so do
 
 A golden file and a green suite are not the same thing as a validated engine. The only way to know what a gate can catch is to break the engine on purpose and watch.
 
-The golden file as it stands: 13 groups, 65 rows.
+The golden file as it stands: 14 groups, 77 rows.
 | group | rows | what it pins |
 | --- | --- | --- |
 | apiSeparator | 4 | basin cut sizes, the velocity warning on both sides of the limit, and Reynolds numbers inside and outside the creeping flow band |
 | binGrid | 5 | the median identity and the truncated tail across bin counts and spans |
 | bubbleRise | 4 | the full drag balance at bubble Reynolds numbers from below one to the tens |
 | cdf | 7 | the error function series against the C library, on an absolute tolerance that is the series own published accuracy |
-| flotation | 5 | the whole attachment chain, with the holdup and residence warnings straddled |
+| flotation | 7 | the whole attachment chain, with the holdup and residence warnings straddled |
 | hydrocyclone | 5 | the field, the envelope, the shear penalty and the captured fraction at the cut |
-| mediaFilter | 5 | depth filtration, the inverted cut, the grain size and the breakthrough warning |
+| mediaFilter | 8 | depth filtration, the inverted cut, the grain size and the breakthrough warning, with three rows added at low loading where the bed area used to move nothing |
+| mediaFilterFloor | 7 | the loading floor: five beds REFUSED below it, two answered at and above it, and the bed area that would run the flow at the floor |
 | oilDensity | 6 | the crude density FUNCTION, called rather than fed its own answers back |
 | plateInterceptor | 3 | the pack cut and the channel height independence |
 | properties | 7 | the viscosity and brine density fits, including the one published check in the file |
@@ -685,20 +693,20 @@ The golden file as it stands: 13 groups, 65 rows.
 | rise | 5 | Stokes, its Reynolds number, and the measured gap to the real drag balance |
 | train | 3 | the coupling, both medians and every stage, by particle tracking |
 
-THE WARNINGS ARE GOLDEN VALUES, which is unusual and is deliberate. The golden carries `expectVelocityWarning`, `expectStarvedWarning`, `expectOverloadWarning`, `expectResidenceWarning`, `expectHoldupWarning` and `expectBreakthroughWarning`, each straddled by rows on both sides of the threshold, so a warning that stops firing fails a case rather than going quietly. Counted off the file:
+THE WARNINGS ARE GOLDEN VALUES, which is unusual and is deliberate. The golden carries `expectVelocityWarning`, `expectStarvedWarning`, `expectOverloadWarning`, `expectResidenceWarning`, `expectHoldupWarning` and `expectBreakthroughWarning`, each straddled by rows on both sides of the threshold, so a warning that stops firing fails a case rather than going quietly. Counted off the file, in the table below:
 | golden warning field | rows carrying it | rows where it is true |
 | --- | --- | --- |
 | expectVelocityWarning | 4 | 2 |
 | expectStarvedWarning | 5 | 1 |
 | expectOverloadWarning | 5 | 1 |
-| expectResidenceWarning | 5 | 1 |
-| expectHoldupWarning | 5 | 1 |
-| expectBreakthroughWarning | 5 | 2 |
-Every one of those fields is straddled: it is true on at least one row and false on at least one other, which is what makes it evidence that the threshold is where the module says it is.
+| expectResidenceWarning | 7 | 2 |
+| expectHoldupWarning | 7 | 1 |
+| expectBreakthroughWarning | 8 | 2 |
+Every one of those fields is straddled in the table above: it is true on at least one row and false on at least one other, which is what makes it evidence that the threshold is where the module says it is.
 
 AT LEAST ONE ROW PER DEVICE STATES NONE OF THAT DEVICE'S DEFAULTS, so a default is never the only thing a case exercises. That is a rule a golden file has to be built to, because a suite whose every case runs at the defaults cannot tell a default from a derivation.
 
-THE PLANTING BATTERY, which is the real measure of the gate. Thirty five defects, twenty seven planted in the engine alone and eight planted in the engine and the oracle together, run one at a time against the suite. Before the FC7-0 repair, 22 of those 35 left the suite fully green: 16 of the 27 planted in the engine alone and 6 of the eight planted in both files. After it, 0 of 35 do. The suite went from 20 tests to 68.
+THE PLANTING BATTERY, which is the real measure of the gate. FC7-0 planted thirty five defects, twenty seven in the engine alone and eight in the engine and the oracle together, run one at a time against the suite. Before that repair, 22 of those 35 left the suite fully green: 16 of the 27 planted in the engine alone and 6 of the eight planted in both files. After it, 0 of 35 do. FC7-1 re-ran all 35 against the repaired source and added twenty four of its own plus one self-test of the runner, and none of the sixty leaves the suite green. The suite this digest was built beside carries 78 tests, counted off the vendored file.
 The eight planted in both files at once are the interesting half, because a golden regenerated from a bent oracle agrees with a bent engine perfectly. What catches them now is a mixture of three things: a route with no place to type the constant, the identities that need no source, and an explicit PIN with the value typed by hand in the test file.
 Every family in the suite also carries a NEGATIVE CONTROL that is asserted to fire and to name a case. One of them records a fact about its own subject rather than a round number: the cyclone control fails on four of five rows and not five, because a turndown of exactly one is the one case a wrong field exponent cannot move.
 
@@ -755,6 +763,11 @@ Five things this module did before FC7-0, each of which is a lesson rather than 
 - TWO MODELS WERE DEAD. An attachment fraction that was exactly one across every input a user could type made the bubble size, the gas rate and the residence time decorative, and made induced and dissolved gas flotation the same device behind two menu entries. A media filter computed its removal twice by two routes that disagreed, and the train read the route the gate did not validate. THE LESSON IS THE PROBE: sweep every input and check it moves the answer, and if a module holds two opinions about one quantity, delete one.
 - A MEDIAN WAS REPORTED AGAINST A DIFFERENT KIND OF NUMBER. The inlet median was the typed d50 and the outlet median was measured off the bins, so a train that removed nothing showed the median falling. THE LESSON IS THE BASIS: two numbers a reader will compare must be measured the same way, and the module should say on its own return that they are.
 - THE GATE COULD NOT CATCH ANY OF IT. Sixteen defects planted in the engine alone left the suite fully green, and six more survived being planted in the engine and the oracle together. THE LESSON IS SECTION 19: a green suite is a measurement of the suite, until somebody plants a defect and watches.
+
+Three more, found by THIS COURSE when it built the digest against the repaired engine and repaired in FC7-1, each of them a class FC7-0 had already named in a place FC7-0 did not look:
+- A BED AREA THAT MOVED NOTHING. The media filter clamped its own loading rate up to a floor and said nothing, so under that rate four beds of completely different area reported the same filter coefficient and the same cut size to every digit. The clamp was in the oracle too, so the independent check agreed with it. THE LESSON IS THE SILENT CLAMP: a guard that quietly moves an input is a guard that deletes the input, and the repair is to REFUSE by name. This module now answers above 1 m/hr and says why below it, because its filter coefficient is declared at 10 m/hr and what a bed does far under its design rate is held for literature.
+- A THRESHOLD NOBODY HAD DECLARED. The flotation residence warning compared against a bare 60 written inside the sentence that reported it, and the droplet grid's two floors were bare the same way, in a module whose stated doctrine is that every number which is a choice rather than a derivation lives in one frozen object. THE LESSON IS THE LEDGER: a threshold a reader cannot find is a threshold nobody reviews, and a warning should quote the figure it judged against so the reader can disagree with it.
+- A SILENT WAY BACK TO THE QUANTISED MEDIAN. The volume median interpolated when a bin carried its edges and fell back to the bin midpoint when it did not, which is the quantised answer FC7-0 had just removed, reachable again by one caller handing over midpoints alone, with nothing on the return saying which route ran. THE LESSON IS THE FALLBACK: a fallback that answers is worse than a refusal, because it is an answer nobody can tell from the right one. The leaf returns NaN now and the callers turn it into a named refusal.
 
 HOW TO TEACH THIS, and it is the rule for the whole course. Repair history is PROVENANCE: it belongs in this section, framed, or nowhere. A number from the old model has no place in a lesson, a panel or a question, because a reader who meets it without the frame has simply been told something false about how this engine works. Every figure in every section above this one is the repaired engine's own answer at the inputs named beside it.
 
