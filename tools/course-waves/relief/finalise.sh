@@ -38,7 +38,13 @@ d['gates']['digest reproducibility'] = (
     f'md5 {md5} over {lines} lines. finalise.sh re-verifies all nine and re-pins.')
 for k, v in list(d['gates'].items()):
     if isinstance(v, str):
-        d['gates'][k] = re.sub(r'\b98[0-9] line', f'{lines} line', v)
+        # Re-pin every restated digest line count. This used to be \b98[0-9],
+        # which silently stopped matching the moment the digest left the 980s
+        # and would have left a stale count behind with nothing saying so.
+        # gate_wavejson.mjs checks these, so a miss here is a red gate rather
+        # than a quiet drift, but the regex should not need a person to widen
+        # it on every rebuild.
+        d['gates'][k] = re.sub(r'(?<![\d.])\d{3,5}(?= lines?\b)', str(lines), v)
 io.open(p, 'w', encoding='utf-8').write(json.dumps(d, indent=1, ensure_ascii=False) + '\n')
 print(f'wave.json re-pinned: md5 {md5}, {lines} lines')
 PY

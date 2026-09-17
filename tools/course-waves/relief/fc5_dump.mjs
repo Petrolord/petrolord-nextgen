@@ -1065,6 +1065,33 @@ const halfAnalytic = (Math.PI / 2) * BENISEDE.diameterFt * BENISEDE.lengthFt;
 must('the half-full horizontal wetted area is half the cylinder surface', Math.abs(halfFull.areaFt2 / halfAnalytic - 1) < 1e-12, `${e12(halfFull.areaFt2)} against ${e12(halfAnalytic)}`);
 w(`- HALF FULL IS THE ONE CASE WITH AN ANALYTIC ANSWER. At a level of exactly ${e6(BENISEDE.diameterFt / 2)} ft the wetted area is ${r4(halfFull.areaFt2)} ft2, and half the lateral surface of the cylinder is ${r4(halfAnalytic)} ft2. Ratio ${e12(halfFull.areaFt2 / halfAnalytic)}. Any geometry that is wrong away from half full can still be exactly right there, which is why the sweep above walks the whole level.`);
 w(`- FULL, at a level of ${e6(BENISEDE.diameterFt)} ft, the horizontal area is ${r4(R.wettedAreaFt2({ orientation: 'horizontal', diameterFt: BENISEDE.diameterFt, lengthFt: BENISEDE.lengthFt, liquidLevelFt: BENISEDE.diameterFt }).areaFt2)} ft2, which is the whole lateral surface. The level is clamped at the diameter, so a level above it returns the same figure.`);
+w();
+// WHAT A FOOT OF LEVEL BUYS, COMPUTED. The level sweep above is printed at
+// uneven spacings, so reading a steepness off it means dividing two rows the
+// digest never divided, and a lesson that did exactly that concluded the
+// sweep buys LESS near the top. It buys the same as the bottom. Equal bands,
+// printed, so the shape is read rather than inferred (FC5 repair).
+w('# WHAT A FOOT OF LEVEL BUYS. The sweep above is printed at uneven spacings, so its steepness cannot be read off it by eye. The same vessel in EQUAL bands of a tenth of its diameter, each band an engine return at each of its two ends.');
+w('| band ft | horizontal wetted gained ft2 | gained per foot ft2 |');
+w('| --- | --- | --- |');
+const bandFt = BENISEDE.diameterFt / 10;
+const bandGain = [];
+for (let i = 0; i < 10; i += 1) {
+  const lo = i * bandFt; const hi = (i + 1) * bandFt;
+  const a = success(`the horizontal wetted area at ${lo} ft`, R.wettedAreaFt2({ orientation: 'horizontal', diameterFt: BENISEDE.diameterFt, lengthFt: BENISEDE.lengthFt, liquidLevelFt: lo }));
+  const b = success(`the horizontal wetted area at ${hi} ft`, R.wettedAreaFt2({ orientation: 'horizontal', diameterFt: BENISEDE.diameterFt, lengthFt: BENISEDE.lengthFt, liquidLevelFt: hi }));
+  bandGain.push(b.areaFt2 - a.areaFt2);
+  w(`| ${e6(lo)} to ${e6(hi)} | ${r4(b.areaFt2 - a.areaFt2)} | ${r4((b.areaFt2 - a.areaFt2) / bandFt)} |`);
+}
+const mirrored = bandGain.every((g, i) => Math.abs(g - bandGain[9 - i]) < 1e-9);
+const maxGain = Math.max(...bandGain); const minGain = Math.min(...bandGain);
+must('the band gains are mirror-symmetric about half full', mirrored, `${r4(bandGain[0])} against ${r4(bandGain[9])}`);
+must('the steepest band is the bottom one and it ties with the top one', Math.abs(bandGain[0] / maxGain - 1) < 1e-12 && Math.abs(bandGain[9] / maxGain - 1) < 1e-12, `${r4(bandGain[0])} and ${r4(bandGain[9])} against a maximum of ${r4(maxGain)}`);
+must('the flattest bands are the two either side of half full', Math.abs(bandGain[4] / minGain - 1) < 1e-12 && Math.abs(bandGain[5] / minGain - 1) < 1e-12, `${r4(bandGain[4])} and ${r4(bandGain[5])} against a minimum of ${r4(minGain)}`);
+w();
+w(`- THE SWEEP IS STEEPEST AT BOTH ENDS AND IT IS EQUALLY STEEP AT EACH OF THEM. The bottom band gains ${r4(bandGain[0])} ft2 and the top band gains ${r4(bandGain[9])} ft2. Ratio of the top band to the bottom: ${e12(bandGain[9] / bandGain[0])}. The whole column is a mirror: its ${bandGain.length} figures read the same from the top as from the bottom.`);
+w(`- THE FLAT PART IS THE MIDDLE. The two middle bands of the ten gain ${r4(bandGain[4])} ft2 each, against ${r4(maxGain)} ft2 at each end, a ratio of ${e12(maxGain / bandGain[4])}. A vessel filling at a steady rate therefore adds wetted shell fastest when it is nearly empty and again when it is nearly full.`);
+w();
 w('- THE ORIENTATION IS MATCHED CASE-INSENSITIVELY AND TRIMMED, and anything else REFUSES rather than falling through to a default. Section 26 runs that refusal.');
 w('- THE HEADS ARE IGNORED. That is standard screening practice and it is conservative for the shell term. The engine does not add them and this course does not either.');
 w(`- THE 25 FT LIMIT IS THE CALLER JOB. The engine attaches a note saying so on every fire duty: "${benDuty.note}". Only the wetted area below 25 ft above grade counts towards a pool fire, and where that height falls depends on the plot elevation the engine is never told. The level is trimmed BEFORE the call.`);
@@ -1180,6 +1207,7 @@ const benChain = (over) => {
   const o = success('the BENISEDE variant orifice', R.selectOrifice(a.areaIn2));
   return [wa.areaFt2, d.qBtuHr, l.wLbHr, a.areaIn2, o.orifice];
 };
+const oneInputRows = [];
 [
   ['none, the stated case', {}],
   ['drainage answered false', { drainage: false }],
@@ -1190,8 +1218,41 @@ const benChain = (over) => {
   ['read standing up', { geom: { orientation: 'vertical' } }],
 ].forEach(([label, over]) => {
   const [wa, d, l, a, o] = benChain(over);
+  oneInputRows.push({ label, wa, d, l, a, o });
   w(`| ${label} | ${r4(wa)} | ${r4(d)} | ${r4(l)} | ${e6(a)} | ${o} |`);
 });
+w();
+// WHICH ROW MOVES THE ANSWER FURTHEST, RANKED BY THE GENERATOR. Three committed
+// lessons ranked these rows by eye and all three got it wrong: the drainage
+// answer was called the largest lever in the fire case, the environment factor
+// was called a lever of the same reach as it, and the drainage answer and the
+// orientation were called the two largest moves on the letter. A ranking is an
+// answer, so it is computed here rather than left beside the figures to be
+// guessed at (FC5 repair).
+const LADDER = R.API_ORIFICES.map((x) => x.orifice);
+const stated = oneInputRows[0];
+const ranked = oneInputRows.slice(1).map((r) => ({
+  ...r,
+  dutyFactor: r.d >= stated.d ? r.d / stated.d : stated.d / r.d,
+  dutyDir: r.d >= stated.d ? 'up' : 'down',
+  rungs: LADDER.indexOf(r.o) - LADDER.indexOf(stated.o),
+}));
+must('every variant orifice is on the published ladder', ranked.every((r) => LADDER.indexOf(r.o) >= 0), ranked.map((r) => r.o).join(' '));
+const byDuty = [...ranked].sort((a, b) => b.dutyFactor - a.dutyFactor);
+const byRung = [...ranked].sort((a, b) => Math.abs(b.rungs) - Math.abs(a.rungs));
+const maxRung = Math.max(...ranked.map((r) => Math.abs(r.rungs)));
+const furthest = ranked.filter((r) => Math.abs(r.rungs) === maxRung);
+const drain = ranked.find((r) => r.label === 'drainage answered false');
+must('the drainage answer is NOT the largest duty lever in this table', byDuty[0].label !== 'drainage answered false', `${byDuty[0].label} moves the duty by ${e12(byDuty[0].dutyFactor)}`);
+must('the drainage answer is NOT among the rows that move the letter furthest', !furthest.some((r) => r.label === 'drainage answered false'), `${drain.rungs} rung against a furthest of ${maxRung}`);
+w('# THE SAME TABLE, RANKED. A ranking is an answer, so it is computed rather than left to be read off the rows above. The duty factor is the variant duty over the stated one, or the stated one over the variant where the variant is lower, so every row is a figure at or above one.');
+w('| changed input | duty factor against the stated case | direction | orifice | rungs moved on the ladder |');
+w('| --- | --- | --- | --- | --- |');
+byDuty.forEach((r) => w(`| ${r.label} | ${e12(r.dutyFactor)} | ${r.dutyDir} | ${r.o} | ${r.rungs > 0 ? `+${r.rungs}` : r.rungs} |`));
+w();
+w(`- THE LARGEST DUTY LEVER IS ${byDuty[0].label.toUpperCase()}, at ${e12(byDuty[0].dutyFactor)}. The drainage answer, which changes the duty by the ratio of the two published fire constants, comes ${byDuty.findIndex((r) => r.label === 'drainage answered false') + 1} of ${byDuty.length} at ${e12(drain.dutyFactor)}.`);
+w(`- THE ROWS THAT MOVE THE LETTER FURTHEST MOVE IT ${maxRung} RUNGS, and there are ${furthest.length} of them: ${furthest.map((r) => r.label).join(' and ')}. The drainage answer moves it ${Math.abs(drain.rungs)} rung, which is the smallest non-zero move in the table and is shared with ${ranked.filter((r) => Math.abs(r.rungs) === Math.abs(drain.rungs) && r.label !== drain.label).length} other rows.`);
+w('- A DUTY RANKING AND A LETTER RANKING ARE DIFFERENT RANKINGS. The ladder is a published table of discrete areas, so a large move in the duty can land inside the same letter and a smaller one can cross a rung. Read the column that answers the question being asked.');
 w();
 
 /* ------------------------------------------------------------ SECTION 17 */
@@ -1237,8 +1298,31 @@ CONVENTION_LEVELS.concat([0, 0.99]).sort((a, b) => a - b).forEach((f) => {
   w(`| ${e6(f)} | ${e6(frac)} | ${e6(1 - frac)} |`);
 });
 must('the segment area fraction at half depth is a half', Math.abs(R.segmentAreaFraction(0.5) - 0.5) < 1e-12, `${e12(R.segmentAreaFraction(0.5))}`);
+// WHERE THE TWO AGREE IS SWEPT RATHER THAN ASSERTED. This line used to say the
+// two agree at half depth and NOWHERE ELSE, while the table printed directly
+// above it carries | 0.000000 | 0.000000 |, which agrees. A claim about how
+// MANY places satisfy a relation is one no figure on the page can contradict,
+// so it is counted here and the count is printed (FC5 repair).
+const AGREE_GRID = 100000;
+const agreeEnds = [0, 1].filter((f) => R.segmentAreaFraction(f) === f);
+let agreeInterior = 0; let below = 0; let belowSmaller = 0; let above = 0; let aboveLarger = 0;
+for (let i = 1; i < AGREE_GRID; i += 1) {
+  const f = i / AGREE_GRID;
+  const d = R.segmentAreaFraction(f) - f;
+  if (d === 0) { agreeInterior += 1; continue; }
+  if (f < 0.5) { below += 1; if (d < 0) belowSmaller += 1; }
+  if (f > 0.5) { above += 1; if (d > 0) aboveLarger += 1; }
+}
+const halfCrossing = bisect(0.25, 0.75, (f) => R.segmentAreaFraction(f) < f);
+must('both ends of the depth range agree with themselves', agreeEnds.length === 2, `${agreeEnds.join(' and ')}`);
+must('exactly one depth strictly inside the range agrees', agreeInterior === 1, `${agreeInterior}`);
+must('the one interior agreement is half depth', Math.abs(halfCrossing - 0.5) < 1e-12, e12(halfCrossing));
+must('below half depth the area fraction is smaller on every swept depth', below > 0 && belowSmaller === below, `${belowSmaller} of ${below}`);
+must('above half depth the area fraction is larger on every swept depth', above > 0 && aboveLarger === above, `${aboveLarger} of ${above}`);
 w();
-w(`- AT HALF DEPTH THE AREA FRACTION IS A HALF, ${e12(R.segmentAreaFraction(0.5))}, and only there do the depth fraction and the area fraction agree. Read the table above at 0.1 and at 0.75 to see how far apart they get.`);
+w(`- AT HALF DEPTH THE AREA FRACTION IS A HALF, ${e12(R.segmentAreaFraction(0.5))}. Read the table above at 0.1 and at 0.75 to see how far apart the two get.`);
+w(`- WHERE THE TWO AGREE IS COUNTED RATHER THAN ASSERTED. Swept across the whole range, the depth fraction and the area fraction agree at exactly ${agreeEnds.length + agreeInterior} depths: ${e12(R.segmentAreaFraction(0))} empty, ${e12(halfCrossing)} half full, and ${e12(R.segmentAreaFraction(1))} full. THE TWO ENDS AGREE TRIVIALLY, because an empty circle holds no liquid area and a full one is all liquid area, and the empty row is printed in the table above. HALF DEPTH IS THE ONLY AGREEMENT STRICTLY BETWEEN THEM, bisected rather than assumed.`);
+w(`- EITHER SIDE OF ${e6(halfCrossing)} THE TWO DISAGREE IN OPPOSITE DIRECTIONS. Below half depth the area fraction is SMALLER than the depth fraction on all ${below} swept depths, and above half depth it is LARGER on all ${above}. That is one crossing of the diagonal with a touch at each end.`);
 w();
 w('# The ODIDI drum, with the holdup walked end to end. Everything on a row is an engine return except the stated fraction.');
 w('| holdup fraction (stated) | liquid depth ft | liquid area fraction | vapour area ft2 | vapour velocity ft/s | fall distance ft | required length ft | L over D | note |');

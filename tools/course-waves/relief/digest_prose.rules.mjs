@@ -11,7 +11,7 @@
 // follows it. So the kit reports its sentences as framed and warns for a human
 // read rather than failing. Nothing above Section 29 is history, and that is
 // measured rather than asserted: at the time this file was written the kit
-// found zero history-keyword matches in lines 1 to 955.
+// found zero history-keyword matches in lines 1 to 992.
 //
 // The warnings that section raises are expected and are re-read by hand on
 // every rebuild rather than cleared, because clearing them would make the one

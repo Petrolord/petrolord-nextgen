@@ -384,6 +384,24 @@
 
 - HALF FULL IS THE ONE CASE WITH AN ANALYTIC ANSWER. At a level of exactly 6.000000 ft the wetted area is 848.2300 ft2, and half the lateral surface of the cylinder is 848.2300 ft2. Ratio 1.000000000000. Any geometry that is wrong away from half full can still be exactly right there, which is why the sweep above walks the whole level.
 - FULL, at a level of 12.000000 ft, the horizontal area is 1696.4600 ft2, which is the whole lateral surface. The level is clamped at the diameter, so a level above it returns the same figure.
+
+# WHAT A FOOT OF LEVEL BUYS. The sweep above is printed at uneven spacings, so its steepness cannot be read off it by eye. The same vessel in EQUAL bands of a tenth of its diameter, each band an engine return at each of its two ends.
+| band ft | horizontal wetted gained ft2 | gained per foot ft2 |
+| --- | --- | --- |
+| 0.000000 to 1.200000 | 347.4906 | 289.5755 |
+| 1.200000 to 2.400000 | 153.2488 | 127.7073 |
+| 2.400000 to 3.600000 | 125.2715 | 104.3929 |
+| 3.600000 to 4.800000 | 113.4858 | 94.5715 |
+| 4.800000 to 6.000000 | 108.7333 | 90.6111 |
+| 6.000000 to 7.200000 | 108.7333 | 90.6111 |
+| 7.200000 to 8.400000 | 113.4858 | 94.5715 |
+| 8.400000 to 9.600000 | 125.2715 | 104.3929 |
+| 9.600000 to 10.800000 | 153.2488 | 127.7073 |
+| 10.800000 to 12.000000 | 347.4906 | 289.5755 |
+
+- THE SWEEP IS STEEPEST AT BOTH ENDS AND IT IS EQUALLY STEEP AT EACH OF THEM. The bottom band gains 347.4906 ft2 and the top band gains 347.4906 ft2. Ratio of the top band to the bottom: 1.000000000000. The whole column is a mirror: its 10 figures read the same from the top as from the bottom.
+- THE FLAT PART IS THE MIDDLE. The two middle bands of the ten gain 108.7333 ft2 each, against 347.4906 ft2 at each end, a ratio of 3.195807278241. A vessel filling at a steady rate therefore adds wetted shell fastest when it is nearly empty and again when it is nearly full.
+
 - THE ORIENTATION IS MATCHED CASE-INSENSITIVELY AND TRIMMED, and anything else REFUSES rather than falling through to a default. Section 26 runs that refusal.
 - THE HEADS ARE IGNORED. That is standard screening practice and it is conservative for the shell term. The engine does not add them and this course does not either.
 - THE 25 FT LIMIT IS THE CALLER JOB. The engine attaches a note saying so on every fire duty: "wetted area counts only to 25 ft above grade (API 521); truncate the level before calling". Only the wetted area below 25 ft above grade counts towards a pool fire, and where that height falls depends on the plot elevation the engine is never told. The level is trimmed BEFORE the call.
@@ -489,6 +507,20 @@
 | latent heat 90 Btu/lb | 683.6960 | 4434115.2612 | 49267.9473 | 2.244651 | L |
 | read standing up | 158.3363 | 1336211.5771 | 10439.1529 | 0.475609 | G |
 
+# THE SAME TABLE, RANKED. A ranking is an answer, so it is computed rather than left to be read off the rows above. The duty factor is the variant duty over the stated one, or the stated one over the variant where the variant is lower, so every row is a figure at or above one.
+| changed input | duty factor against the stated case | direction | orifice | rungs moved on the ladder |
+| --- | --- | --- | --- | --- |
+| environment factor 0.3 | 3.333333333333 | down | G | -3 |
+| read standing up | 3.318423022984 | down | G | -3 |
+| drainage answered false | 1.642857142857 | up | L | +1 |
+| level raised to 8.0 ft | 1.401330610749 | up | L | +1 |
+| level trimmed to 2.0 ft | 1.398501724833 | down | J | -1 |
+| latent heat 90 Btu/lb | 1.000000000000 | up | L | +1 |
+
+- THE LARGEST DUTY LEVER IS ENVIRONMENT FACTOR 0.3, at 3.333333333333. The drainage answer, which changes the duty by the ratio of the two published fire constants, comes 3 of 6 at 1.642857142857.
+- THE ROWS THAT MOVE THE LETTER FURTHEST MOVE IT 3 RUNGS, and there are 2 of them: environment factor 0.3 and read standing up. The drainage answer moves it 1 rung, which is the smallest non-zero move in the table and is shared with 3 other rows.
+- A DUTY RANKING AND A LETTER RANKING ARE DIFFERENT RANKINGS. The ladder is a published table of discrete areas, so a large move in the duty can land inside the same letter and a smaller one can cross a rung. Read the column that answers the question being asked.
+
 # SECTION 17: Droplet settling, drag against weight, iterated (owned by Professional m05 l02 and l03)
 
 # A droplet falls at the speed where form drag balances its buoyant weight. The drag coefficient depends on the Reynolds number, the Reynolds number depends on the speed, so the engine iterates and reports the pair it converged on.
@@ -532,7 +564,9 @@
 | 0.900000 | 0.947956 | 0.052044 |
 | 0.990000 | 0.998307 | 0.001693 |
 
-- AT HALF DEPTH THE AREA FRACTION IS A HALF, 0.500000000000, and only there do the depth fraction and the area fraction agree. Read the table above at 0.1 and at 0.75 to see how far apart they get.
+- AT HALF DEPTH THE AREA FRACTION IS A HALF, 0.500000000000. Read the table above at 0.1 and at 0.75 to see how far apart the two get.
+- WHERE THE TWO AGREE IS COUNTED RATHER THAN ASSERTED. Swept across the whole range, the depth fraction and the area fraction agree at exactly 3 depths: 0.000000000000 empty, 0.500000000000 half full, and 1.000000000000 full. THE TWO ENDS AGREE TRIVIALLY, because an empty circle holds no liquid area and a full one is all liquid area, and the empty row is printed in the table above. HALF DEPTH IS THE ONLY AGREEMENT STRICTLY BETWEEN THEM, bisected rather than assumed.
+- EITHER SIDE OF 0.500000 THE TWO DISAGREE IN OPPOSITE DIRECTIONS. Below half depth the area fraction is SMALLER than the depth fraction on all 49999 swept depths, and above half depth it is LARGER on all 49999. That is one crossing of the diagonal with a touch at each end.
 
 # The ODIDI drum, with the holdup walked end to end. Everything on a row is an engine return except the stated fraction.
 | holdup fraction (stated) | liquid depth ft | liquid area fraction | vapour area ft2 | vapour velocity ft/s | fall distance ft | required length ft | L over D | note |
