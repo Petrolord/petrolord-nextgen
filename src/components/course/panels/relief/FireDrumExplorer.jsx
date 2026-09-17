@@ -21,7 +21,8 @@ import {
 // THE SAME CIRCULAR SEGMENT DECIDES TWO THINGS IN THE DRUM: how much vapour
 // space there is, and how far a droplet has to fall. That is why the segment
 // view sits between the settling view and the drum view, and why the one point
-// where a depth fraction and an area fraction agree is marked.
+// where a depth fraction and an area fraction agree strictly between empty
+// and full is marked. The two ends agree trivially and are not marked.
 //
 // Every figure on this page is a return value from reliefLab, which is a return
 // value from the vendored pressure relief engine on the teaching streams
@@ -41,7 +42,7 @@ const twelve = (v) => (Number.isFinite(v) ? Number(v).toFixed(12) : 'none');
 export const MODES = [
   ['wetted', 'The wetted area against the level, in both orientations, with half full marked'],
   ['duty', 'The pool fire duty and the load, and the two answers that move them'],
-  ['segment', 'The segment area fraction against the depth fraction, and the one point they agree'],
+  ['segment', 'The segment area fraction against the depth fraction, and the one point between the ends they agree'],
   ['settling', 'Settling against droplet size, with the low Reynolds cap drawn'],
   ['drum', 'The drum length and the L over D against diameter, and the holdup that turns'],
 ];
@@ -256,7 +257,7 @@ export const SegmentMode = ({ k }) => {
             <YAxis tick={AXIS} domain={[0, 1]} />
             <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
             <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceDot x={0.5} y={0.5} r={5} fill="#BFFF00" stroke="none" label={{ value: 'the one point they agree', fill: '#BFFF00', fontSize: 10, position: 'right' }} />
+            <ReferenceDot x={0.5} y={0.5} r={5} fill="#BFFF00" stroke="none" label={{ value: 'the one agreement between the ends', fill: '#BFFF00', fontSize: 10, position: 'right' }} />
             <Line dataKey="area" name="liquid AREA fraction" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
             <Line dataKey="vapour" name="vapour area fraction" stroke="#f472b6" strokeWidth={2} dot isAnimationActive={false} />
             <Line dataKey="same" name="the depth fraction itself" stroke="#94a3b8" strokeDasharray="4 3" dot={false} isAnimationActive={false} />

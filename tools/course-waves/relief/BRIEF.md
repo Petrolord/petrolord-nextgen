@@ -17,7 +17,7 @@ across 11 blocks. Repair record:
 `packages/engines/tools/validation/facilities/FINDINGS-relief.md`, with its
 controls in `negcontrol_relief.sh` beside it.
 
-Teaching digest: `digest.txt`, 982 lines and 29 sections, built by
+Teaching digest: `digest.txt`, 1020 lines and 29 sections, built by
 `build_digest.sh` from `fc5_dump.mjs` and NEVER hand edited. Committed copy:
 `tools/course-waves/relief/digest.txt` in the NextGen repository, pinned by
 sha256 in `tools/course-waves/waves.json`. Teaching lab, to be built:

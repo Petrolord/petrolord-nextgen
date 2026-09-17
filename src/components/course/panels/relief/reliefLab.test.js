@@ -690,14 +690,26 @@ describe('SECTION 17: droplet settling, drag against weight, iterated', () => {
 
 describe('SECTION 18: the knockout drum, a level, a segment and a length', () => {
   const k = S.knockoutDrum;
-  it('the segment area fraction, and the one point it agrees with the depth fraction', () => {
+  it('the segment area fraction, and the one point between the ends it agrees with the depth fraction', () => {
     k.segmentRows.forEach((r) => line(row([e6(r.depthFraction), e6(r.liquidAreaFraction), e6(r.vapourAreaFractionDerived)]),
       `the segment row at a depth fraction of ${r.depthFraction}`));
-    line(`- AT HALF DEPTH THE AREA FRACTION IS A HALF, ${e12(k.halfDepthAreaFraction)}, and only there do the `
-      + 'depth fraction and the area fraction agree.', 'the half depth crossing');
-    // ONLY THERE, asserted rather than described.
+    line(`- AT HALF DEPTH THE AREA FRACTION IS A HALF, ${e12(k.halfDepthAreaFraction)}. Read the table `
+      + 'above at 0.1 and at 0.75 to see how far apart the two get.', 'the half depth crossing');
+    // THE ENDS AGREE TOO, asserted rather than filtered out. This assertion used
+    // to exclude the 0 row so that an "only there" claim would pass, which is
+    // how the digest and this lab both kept saying half depth was the only
+    // agreement while printing an agreeing empty row directly above it.
+    expect(e6(k.segmentRows.find((r) => r.depthFraction === 0).liquidAreaFraction),
+      'the empty drum agrees with itself').toBe(e6(0));
+    expect(e6(k.halfDepthAreaFraction), 'half depth agrees with itself').toBe(e6(0.5));
+    // AND NO OTHER ROW DOES.
     k.segmentRows.filter((r) => r.depthFraction !== 0.5 && r.depthFraction !== 0)
       .forEach((r) => expect(e6(r.liquidAreaFraction), `${r.depthFraction} also agrees`).not.toBe(e6(r.depthFraction)));
+    // AND THEY DISAGREE IN OPPOSITE DIRECTIONS EITHER SIDE OF HALF DEPTH.
+    k.segmentRows.filter((r) => r.depthFraction > 0 && r.depthFraction < 0.5)
+      .forEach((r) => expect(r.liquidAreaFraction, `${r.depthFraction} is below half`).toBeLessThan(r.depthFraction));
+    k.segmentRows.filter((r) => r.depthFraction > 0.5 && r.depthFraction < 1)
+      .forEach((r) => expect(r.liquidAreaFraction, `${r.depthFraction} is above half`).toBeGreaterThan(r.depthFraction));
   });
 
   it('the holdup walked end to end, and the spread it moves the length by', () => {

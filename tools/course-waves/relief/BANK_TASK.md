@@ -35,7 +35,7 @@ sentences describing what it used to do and **none of them is teaching truth**:
    stale**: five of the eighteen graded capstone fields moved when the repair
    was vendored and three more are new ground. Read them to understand the
    work. Do not take a figure from either.
-3. **THE ENGINE SOURCE COMMENTS.** `engines/facilities/relief.js` is 620 lines
+3. **THE ENGINE SOURCE COMMENTS.** `engines/facilities/relief.js` is 619 lines
    long and carries 12 comment lines with the repair marker and 16 written in
    a past tense about former behaviour, which is roughly one line in 39.
    **NOTHING GATES A WRITER READING ENGINE COMMENTS.** A sibling wave shipped
@@ -82,6 +82,16 @@ written:
 
 If any of that has changed by the time you read this, say so in your hand-back
 and correct this file in the same commit.
+
+**MEASURED AGAIN 2026-09-17, by the Associate bank writer.** Four of those
+statements have moved. All 78 lesson bodies, the relief teaching lab and the
+three panels ARE written and committed (worktree /root/wt-fc5-nextgen at
+a6a5d5bf). The digest is 986 lines and 29 sections rather than 982, rebuilt on
+nine defects. `banks/` now exists and `sweep_literals.py` returns a real count
+rather than exit 2: 527 literals over the seven Associate banks, 0 unresolved.
+The seven names in `structure.py`'s HELD list are still not held. Nothing else
+in the list above has changed: no migration is written and no capstone answer
+file is seeded, which is why `promptleak.py` has nothing to sweep.
 
 ## Shape
 
@@ -171,3 +181,13 @@ backticks and nowhere else.
 Per bank: the question count, the length-rank histogram of the correct option,
 both sweep counts with the number of literals examined, the number of
 unresolved literals, the leakage counts, and any question you are unsure of.
+
+**MEASURED AGAIN 2026-09-17, by the FC5 repair pass that ran before the three
+key-truth audits.** The digest is now 1020 lines and 29 sections, rebuilt on two
+further repairs: digest section 18 said the depth fraction and the area fraction
+agree at half depth and nowhere else while its own table printed an agreeing
+empty row, and digest sections 12 and 16 printed figures that three committed
+lessons then RANKED by eye and got wrong. Both rankings are now computed and
+printed by the generator. The 396 bank questions ARE written and committed. No
+migration is written and no capstone answer file is seeded, so `promptleak.py`
+still has nothing to sweep and is not a pass on this wave.
