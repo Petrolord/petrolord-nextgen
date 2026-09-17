@@ -98,7 +98,7 @@ q(3, "A drum question states a settling velocity and also mentions a droplet siz
   "The droplet size, unless the stated velocity falls inside the band the published rows carry."],
  "A computed settling velocity rests on the drag correlation, which is held for literature and unchecked by any published case. A stated one rests on a number a reader can see and defend.")
 
-q(0, "Eleven figures in four units arrive on one screen from six routes and two conversions. What does this tier ask you to do first?",
+q(0, "Eleven rows arrive on one screen in eight different units, from seven routes and two conversions. What does this tier ask you to do first?",
  "Label every figure with the half of the system it belongs to.",
  ["Convert every figure to the unit the graded field will be read in.",
   "Check each figure against the published row nearest to it.",

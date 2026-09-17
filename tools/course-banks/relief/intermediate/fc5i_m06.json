@@ -143,7 +143,7 @@
   "explanation": "A computed settling velocity rests on the drag correlation, which is held for literature and unchecked by any published case. A stated one rests on a number a reader can see and defend."
  },
  {
-  "prompt": "Eleven figures in four units arrive on one screen from six routes and two conversions. What does this tier ask you to do first?",
+  "prompt": "Eleven rows arrive on one screen in eight different units, from seven routes and two conversions. What does this tier ask you to do first?",
   "options": [
    "Label every figure with the half of the system it belongs to.",
    "Convert every figure to the unit the graded field will be read in.",

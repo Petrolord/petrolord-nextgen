@@ -96,7 +96,7 @@ q(0, "Read the teaching vessel standing up rather than lying down. What does the
  ["226.1947 ft2 of wetted shell, ending on orifice G.",
   "158.3363 ft2 of wetted shell, ending on orifice F.",
   "683.6960 ft2 of wetted shell, ending on orifice K, since the steel and the level are unchanged."],
- "The chain runs on through 1336211.5771 Btu/hr, then 10439.1529 lb/hr, then 0.475609 in2. One word in one field, and the case lands two letters from where it lands lying down.")
+ "The chain runs on through 1336211.5771 Btu/hr, then 10439.1529 lb/hr, then 0.475609 in2. One word in one field, and the case lands three rungs of the ladder from where it lands lying down.")
 
 q(3, "Two of the changes in the sweep are a single word each. Which, and which way does each move the letter?",
  "Drainage answered false takes K to L, and reading the vessel standing up takes K to G.",

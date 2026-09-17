@@ -412,10 +412,10 @@
    "Both are the level at which the engine switches between two branches.",
    "Both are the only levels the published sets exercise.",
    "Both are levels at which the engine attaches a note to its answer.",
-   "Both are the one point where two different expressions agree, so a check made only there proves nothing."
+   "Both are a point where two different expressions agree, so a check made only there proves nothing."
   ],
   "answer": 3,
-  "explanation": "At 6.000000 ft the segment area and half the lateral surface agree to a ratio of 1.000000000000. At a fraction of 0.500000 the level and area conventions give 11.039649 ft either way."
+  "explanation": "At 6.000000 ft the segment area and half the lateral surface agree to a ratio of 1.000000000000. At a fraction of 0.500000 the level and area conventions give 11.039649 ft either way. An empty drum agrees with itself as well, so neither agreement says anything about any other level."
  },
  {
   "prompt": "One word changes the letter in the fire chain and one convention changes the length in the drum. Which pair is it?",

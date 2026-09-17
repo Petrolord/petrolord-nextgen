@@ -14,7 +14,7 @@ One vessel in a pool fire, one drum keeping liquid out of the header behind it, 
 | required area | 1.578271 in2 | gasVaporArea |
 | orifice | K | selectOrifice |
 
-Five steps, four routes and one derived pressure among them. Every figure is an engine return, and the order cannot be rearranged: the duty needs the area, the load needs the duty, the required area needs the load and the relieving pressure, and the letter needs the required area.
+Five steps, five routes, and one derived pressure that never appears as a row of its own. Every figure is an engine return, and the order cannot be rearranged: the duty needs the area, the load needs the duty, the required area needs the load and the relieving pressure, and the letter needs the required area.
 
 ## The drum half
 
@@ -31,7 +31,7 @@ Note the first two rows. Both are derived rather than returned by any route in t
 
 ## Reading the two halves as one screen
 
-The two tables arrive in the same session, about the same facility, on the same screen. That is what makes them worth putting side by side, and it is also the trap. Eleven figures in four units, produced by six different routes plus two conversions the caller did, and nothing on the screen groups them.
+The two tables arrive in the same session, about the same facility, on the same screen. That is what makes them worth putting side by side, and it is also the trap. Eleven rows, eight different units among them, produced by seven different routes plus two conversions the caller did, and nothing on the screen groups them.
 
 So the discipline is to label every figure with the half it belongs to before writing any of them down. A required area and a required length are both required, both in the answer, and answers to two unrelated questions.
 

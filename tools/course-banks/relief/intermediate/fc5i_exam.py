@@ -281,11 +281,11 @@ q(0, "The exact circular segment turns up twice in this tier. Where, and what do
  "One geometry, two questions. In the drum the same segment decides both how much vapour space there is and how far a droplet has to fall.")
 
 q(3, "Half full on a vessel and half depth in a drum have something in common. What?",
- "Both are the one point where two different expressions agree, so a check made only there proves nothing.",
+ "Both are a point where two different expressions agree, so a check made only there proves nothing.",
  ["Both are the level at which the engine switches between two branches.",
   "Both are the only levels the published sets exercise.",
   "Both are levels at which the engine attaches a note to its answer."],
- "At 6.000000 ft the segment area and half the lateral surface agree to a ratio of 1.000000000000. At a fraction of 0.500000 the level and area conventions give 11.039649 ft either way.")
+ "At 6.000000 ft the segment area and half the lateral surface agree to a ratio of 1.000000000000. At a fraction of 0.500000 the level and area conventions give 11.039649 ft either way. An empty drum agrees with itself as well, so neither agreement says anything about any other level.")
 
 q(1, "One word changes the letter in the fire chain and one convention changes the length in the drum. Which pair is it?",
  "The orientation of the vessel, and whether a stated fraction is a level or an area.",

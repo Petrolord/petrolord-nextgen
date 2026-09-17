@@ -27,7 +27,7 @@ Inside the cap the drag coefficient is a constant, so the balance becomes an exp
 
 ## The expensive middle
 
-Read the pass column. It rises sharply once the cap is left behind, peaks in the third and fourth rows, then falls away steadily. Those are the rows where the fit is steepest in the Reynolds number, so each pass moves the answer a long way and the loop takes many small steps to settle.
+Read the pass column. It rises sharply once the cap is left behind, peaks in the third row, stays high in the fourth, then falls away steadily. Those two are where the fit is steepest in the Reynolds number, so each pass moves the answer a long way and the loop takes many small steps to settle.
 
 The direction is the lesson: a slow convergence is a signal about where on the curve you are sitting rather than a sign of trouble. Every row here converged, including the slowest.
 

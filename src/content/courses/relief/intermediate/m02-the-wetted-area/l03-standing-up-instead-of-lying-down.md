@@ -44,7 +44,7 @@ Note what the table licenses: the direction, and the printed ratios on its own r
 
 ## Why the wrong orientation is expensive
 
-A vertical reading carries straight through the fire chain. On the teaching vessel, read standing up at the same level, the chain gives a duty of 1336211.5771 Btu/hr, a relief load of 10439.1529 lb/hr, a required area of 0.475609 in2 and orifice G. Lying down the same vessel lands on orifice K. Two letters apart, from one word in one field.
+A vertical reading carries straight through the fire chain. On the teaching vessel, read standing up at the same level, the chain gives a duty of 1336211.5771 Btu/hr, a relief load of 10439.1529 lb/hr, a required area of 0.475609 in2 and orifice G. Lying down the same vessel lands on orifice K. Three rungs apart, from one word in one field.
 
 ## How the published set keeps both branches honest
 

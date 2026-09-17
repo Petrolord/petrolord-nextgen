@@ -40,7 +40,7 @@ Six engine answers and one derived pressure, in an order that cannot be rearrang
 
 ## The one derived pressure
 
-Five of the seven rows name a route. The relieving pressure names none, because no route computes it: it is built from the set pressure, the overpressure fraction and the atmospheric constant, and the sizing route is handed the result. It is the one place in the chain where the number on the screen came from arithmetic outside an engine call.
+Six of the seven rows name a route. The relieving pressure names none, because no route computes it: it is built from the set pressure, the overpressure fraction and the atmospheric constant, and the sizing route is handed the result. It is the one place in the chain where the number on the screen came from arithmetic outside an engine call.
 
 It is also the row where a unit changes, from psig to psia, and a set pressure carried into the sizing route without that conversion is out by one atmosphere in a direction nothing downstream can see.
 

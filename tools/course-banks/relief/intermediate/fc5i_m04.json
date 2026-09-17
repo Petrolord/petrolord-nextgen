@@ -140,7 +140,7 @@
    "683.6960 ft2 of wetted shell, ending on orifice K, since the steel and the level are unchanged."
   ],
   "answer": 0,
-  "explanation": "The chain runs on through 1336211.5771 Btu/hr, then 10439.1529 lb/hr, then 0.475609 in2. One word in one field, and the case lands two letters from where it lands lying down."
+  "explanation": "The chain runs on through 1336211.5771 Btu/hr, then 10439.1529 lb/hr, then 0.475609 in2. One word in one field, and the case lands three rungs of the ladder from where it lands lying down."
  },
  {
   "prompt": "Two of the changes in the sweep are a single word each. Which, and which way does each move the letter?",
