@@ -150,13 +150,13 @@ const buildSections = () => {
   w();
   w(`# THE GOLDEN IS SYNTHETIC AND IT SAYS SO. golden provenance.published is ${S(GOLD.provenance.published)}. The golden's own words: "${GOLD.provenance.why}"`);
   w();
-  w('# WHAT IS NEVER GRADED IN THIS COURSE. No corrosion rate the correlation produced, no rate category, no sour severity region, no material choice, no inspection interval and no retirement thickness. Section 21 lists every held item and section 3 pins every held constant. The eighteen graded capstone fields are the stream bookkeeping, the flow definition, the inhibitor arithmetic and the allowance arithmetic, and the capstone states any rate it needs from an inspection survey.');
+  w('# WHAT IS NEVER GRADED IN THIS COURSE. No corrosion rate the correlation produced, no rate category, no sour severity region, no material choice, no inspection interval and no retirement thickness. Section 21 lists every held item and section 3 pins every held constant. The eighteen graded capstone fields are the stream bookkeeping, the flow definition, the corrosion inhibitor arithmetic and the allowance arithmetic, and the capstone states any rate it needs from an inspection survey.');
   w();
 
   /* ------------------------------------------------------------- SECTION 1 */
   const s1 = L.engineScope();
   start();
-  w('# SECTION 1: What this engine computes, and what it refuses to compute (owned by Associate m01, and shared with Expert m01 because WHAT IS NOT HERE is that module\'s subject)');
+  w('# SECTION 1: What this engine computes, and what it refuses to compute (owned by Associate m01 and Expert m01, because WHAT IS NOT HERE is that module\'s subject)');
   w();
   w('The engine is a CO2 corrosion rate screen with a remaining-life calculation on the end of it. It answers one question about one mechanism, and the list of what it does not answer is longer than the list of what it does.');
   w();
@@ -175,7 +175,7 @@ const buildSections = () => {
   /* ------------------------------------------------------------- SECTION 2 */
   const s2 = L.theWithdrawal();
   start();
-  w('# SECTION 2: THE WITHDRAWAL. A curve carrying a standard\'s name told engineers what steel to buy, and it was invented here (owned by Expert m06, and the headline lesson of this whole course)');
+  w('# SECTION 2: THE WITHDRAWAL. A curve carrying a standard\'s name told engineers what steel to buy, and it was invented here (owned by Associate m01 l02 and Expert m06 l01, and the headline lesson of this whole course)');
   w();
   w('This section is about behaviour the engine SHIPS TODAY, which is a refusal to answer. It is not repair history: the absence is current, declared and permanent, and section 25 is where the history lives.');
   w();
@@ -206,9 +206,9 @@ const buildSections = () => {
   /* ------------------------------------------------------------- SECTION 3 */
   const s3 = L.heldConstantsTable();
   start();
-  w('# SECTION 3: The numbers this module stands on, MEASURED out of the engine rather than typed, and pinned against a third copy (shared by Associate m01 and Expert m01)');
+  w('# SECTION 3: The numbers this module stands on, MEASURED out of the engine rather than typed, and pinned against a third copy (owned by Associate m01 and Expert m01)');
   w();
-  w('NONE of these is sourced in this repository. Every one of them is HELD FOR LITERATURE, every one is measured below by asking the engine a question whose answer is that constant and nothing else, and every measured value is compared against a literal typed in this generator, which is a THIRD location. A constant that lives in the engine and in the oracle cannot be validated by comparing the engine with the oracle, and a paired battery proved that: fifteen of seventeen constants moved in both files at once left the suite green.');
+  w('NONE of these is sourced in this repository WITH ONE NAMED EXEMPTION, AND IT IS THE ROW CALLED \'the bar to psia factor\'. That factor is exact by the definition of the bar and of the pound-force rather than held: section 24 derives it, section 21 grades a conversion through it, and the engine\'s own eleven-item held list does not name it. Every OTHER constant here is HELD FOR LITERATURE, every one is measured below by asking the engine a question whose answer is that constant and nothing else, and every measured value is compared against a literal typed in this generator, which is a THIRD location. A constant that lives in the engine and in the oracle cannot be validated by comparing the engine with the oracle, and a paired battery proved that: fifteen of seventeen constants moved in both files at once left the suite green.');
   w();
   w('MEASURING RATHER THAN READING THE EXPORT IS DELIBERATE. An export tells you what the module declares. A measurement tells you what it actually uses. Both are below, and the two columns disagreeing would be a finding.');
   w();
@@ -380,7 +380,7 @@ const buildSections = () => {
   w();
   w(`> ${s8.oilWetWhy}`);
   w();
-  w(`AND THE INHIBITION FIGURE IS \`null\` RATHER THAN ZERO: ${S(s8.oilWetEffectiveInhibitionPct)}. A reported zero percent inhibition on a line that has an inhibitor programme is a statement, and it would be a false one. There is nothing to be effective against when the rate is zero by assumption.`);
+  w(`AND THE INHIBITION FIGURE IS \`null\` RATHER THAN ZERO: ${S(s8.oilWetEffectiveInhibitionPct)}. A reported zero percent inhibition on a line that has a corrosion inhibitor programme is a statement, and it would be a false one. There is nothing to be effective against when the rate is zero by assumption.`);
   w();
   w('THE REGIME NAME IS MATCHED CASE AND PUNCTUATION INSENSITIVELY, and an unrecognised string refuses rather than falling through to the least limiting regime:');
   w('| what was typed | what the engine did |');
@@ -403,9 +403,9 @@ const buildSections = () => {
   /* ------------------------------------------------------------- SECTION 9 */
   const s9 = L.inhibitorArithmetic();
   start();
-  w('# SECTION 9: The inhibitor, and the arithmetic that surprises people (owned by Professional m02, and the one lesson this module exists to teach)');
+  w('# SECTION 9: The corrosion inhibitor, and the arithmetic that surprises people (owned by Professional m02, and the one lesson this module exists to teach)');
   w();
-  w('A 95 percent inhibitor running 80 percent of the time is not a 95 percent solution. The uninhibited rate applies for the fraction of the time the inhibitor is off, and it is that time average that eats the wall. The engine takes EFFICIENCY and AVAILABILITY as separate inputs and returns the effective protection, the shortfall in percentage points, and a warning that names the metal-loss ratio.');
+  w('A 95 percent corrosion inhibitor running 80 percent of the time is not a 95 percent solution. The uninhibited rate applies for the fraction of the time the corrosion inhibitor is off, and it is that time average that eats the wall. The engine takes EFFICIENCY and AVAILABILITY as separate inputs and returns the effective protection, the shortfall in percentage points, and a warning that names the metal-loss ratio.');
   w();
   w('| efficiency percent | availability percent | effective protection percent | shortfall pp | rate mm/yr | metal loss against the datasheet number |');
   w('| --- | --- | --- | --- | --- | --- |');
@@ -413,7 +413,7 @@ const buildSections = () => {
     w(`| ${e6(r.efficiencyPct)} | ${e6(r.availabilityPct)} | ${e6(r.effectiveInhibitionPct)} | ${e6(r.inhibitorShortfallPp)} | ${e6(r.rateMmYr)} | ${e6(r.metalLossRatio)} |`);
   });
   w();
-  w(`READ THE 80 PERCENT ROW TWICE. A 95 percent inhibitor at 80 percent availability delivers ${e6(s9.eightyEffectivePct)} percent effective protection, which is ${e6(s9.eightyShortfallPp)} percentage points short of the datasheet figure, and the metal loss is ${e6(s9.eightyMetalLossRatio)} times what the datasheet number would give. AVAILABILITY IS WHAT LIMITS IT. Efficiency does not. The engine's own warning on that case, verbatim:`);
+  w(`READ THE 80 PERCENT ROW TWICE. A 95 percent corrosion inhibitor at 80 percent availability delivers ${e6(s9.eightyEffectivePct)} percent effective protection, which is ${e6(s9.eightyShortfallPp)} percentage points short of the datasheet figure, and the metal loss is ${e6(s9.eightyMetalLossRatio)} times what the datasheet number would give. AVAILABILITY IS WHAT LIMITS IT. Efficiency does not. The engine's own warning on that case, verbatim:`);
   w();
   w(`> ${s9.eightyWarning}`);
   w();
@@ -508,7 +508,7 @@ const buildSections = () => {
   /* ------------------------------------------------------------ SECTION 12 */
   const s12 = L.h2sThreshold();
   start();
-  w('# SECTION 12: H2S, a threshold comparison, and nothing more (owned by Professional m05)');
+  w('# SECTION 12: H2S, a threshold comparison, and nothing more (owned by Professional m06 l03)');
   w();
   w('This door compares one partial pressure against one threshold and reports the comparison in two units. It does not classify severity and it does not choose a material. Section 2 is why.');
   w();
@@ -577,7 +577,7 @@ const buildSections = () => {
   /* ------------------------------------------------------------ SECTION 14 */
   const s14 = L.allowanceAndLife();
   start();
-  w('# SECTION 14: The allowance, the remaining life, and a zero rate that is not a pass (owned by Expert m02)');
+  w('# SECTION 14: The allowance, the remaining life, and a zero rate that is not a pass (owned by Professional m05 and Expert m02 l04 and m05 l03 and l04)');
   w();
   w('This door divides a remaining allowance by a rate and stops. That is its whole scope, and what it does NOT do is the subject of section 21.');
   w();
@@ -674,7 +674,7 @@ const buildSections = () => {
   /* ------------------------------------------------------------ SECTION 17 */
   const s17 = L.wholeScreening();
   start();
-  w('# SECTION 17: The whole screening in one call, and the order that makes it honest (owned by Expert m05)');
+  w('# SECTION 17: The whole screening in one call, and the order that makes it honest (owned by Expert m04 and m05)');
   w();
   w(`\`screen\` returns ${s17.fieldCount} top-level fields. The order in which it computes them is the design decision: the wall shear FIRST, because the rate depends on whether the film survives it, then the rate, then the credited rate beside it, then the sour comparison, then the regime, then the withholding, then the category, then the life, then the binding constraint.`);
   w();
@@ -735,7 +735,7 @@ const buildSections = () => {
   /* ------------------------------------------------------------ SECTION 18 */
   const s18 = L.everyRefusal();
   start();
-  w('# SECTION 18: Every refusal this module can produce, in one table (owned by Expert m05 l04)');
+  w('# SECTION 18: Every refusal this module can produce, in one table (owned by Expert m05)');
   w();
   w('A refusal is the module telling you it cannot answer, and the difference between a refusal and a least-limiting default is the difference between a screening tool and a liability. Every row below is a call this generator made, labelled a refusal, and asserted to have returned an error key and no non-finite number alongside it.');
   w();
@@ -758,7 +758,7 @@ const buildSections = () => {
   const s19 = L.studioDefaults();
   const byKey = Object.fromEntries(s19.inputs.map((i) => [i.key, i]));
   start();
-  w('# SECTION 19: The live studio\'s own defaults, end to end, and every number a user has been shown (owned by Associate m06, and shared with Professional m06)');
+  w('# SECTION 19: The live studio\'s own defaults, end to end, and every number a user has been shown (owned by Associate m06 and Professional m05 and m06)');
   w();
   w('The Corrosion & Integrity Studio ships with a case already filled in, so the first thing any user sees is this. Every figure below is this generator running the engine on the studio\'s own default inputs, converted with the studio\'s own factors, which are stated in section 24.');
   w();
@@ -840,11 +840,21 @@ const buildSections = () => {
   w('| --- | --- | --- |');
   s19.mpyRows.forEach((r) => w(`| ${r.label} | ${e6(r.mmYr)} | ${e6(r.mpy)} |`));
   w();
+  w(`AND THE SAME CASE WITH A CONSUMED DEPTH TYPED IN, because the shipped case consumes ${e6(byKey.consumedMm.value)} mm and at that depth two of these four fields cannot be told apart by reading them. Type ${e6(s19.consumedProbeMm)} mm of consumed depth into the box, which is 0.05 in against the studio's own 0.125 in allowance, and change nothing else:`);
+  w();
+  w('| field | at the shipped defaults | with 0.05 in consumed | did it move |');
+  w('| --- | --- | --- | --- |');
+  s19.consumedRows.forEach((r) => w(`| ${r.label} | ${e6(r.base)} | ${e6(r.withConsumed)} | ${r.moved ? 'yes' : 'no'} |`));
+  w();
+  w(`THE FIELD THAT DID NOT MOVE IS THE ONE THAT IGNORES WHAT HAS ALREADY GONE. The allowance the design life demands is the rate times the design life and nothing else, so it is the allowance a NEW line would need and it stays at ${e6(s19.consumedRequiredAllowanceMm)} mm at both depths. The remaining allowance and the remaining life fall with the consumed depth, and the shortfall rises by ${e6(s19.consumedShortfallRiseMm)} mm, which is EXACTLY the consumed depth typed in. This generator asserts both of those on every rebuild. The rate is unchanged at ${e6(s19.consumedRateMmYr)} mm/yr, because the consumed depth reaches none of the rate chain. The binding constraint is still ${s19.consumedBindingWhat}, and the engine's own sentence for it now reads:`);
+  w();
+  w(`> ${s19.consumedBindingWhy}`);
+  w();
 
   /* ------------------------------------------------------------ SECTION 20 */
   const s20 = L.goldenDiscrimination();
   start();
-  w('# SECTION 20: What the vendored cases can and cannot discriminate (owned by Expert m01 l05 and Expert m05 l02)');
+  w('# SECTION 20: What the vendored cases can and cannot discriminate (owned by Expert m01 l05 and m05 l02)');
   w();
   w(`The vendored golden carries ${s20.rows} rows in ${s20.blocks} blocks and NOT ONE OF THEM IS PUBLISHED. \`provenance.published\` is ${S(s20.published)}, and the file says why in its own words, quoted in this digest's header. There is no published de Waard-Milliams case, no clause of either sour-service standard and no corrosion rate-band table anywhere in this repository, so a number recalled from memory would be the only alternative and that is not a published datum.`);
   w();
@@ -1420,6 +1430,10 @@ describe('THE VOCABULARY GATE: three legislated collisions, over every surface a
     const digest = readDigest();
     const bareInhibitor = (line) => /inhibitor/i.test(line
       .replace(/corrosion inhibitor/gi, ' ')
+      // GOLDEN_BLOCK_NOTE is keyed by the GOLDEN'S OWN block names, so the
+      // bare `inhibitor:` at the head of that row is the name of a block in a
+      // vendored file. It is code, the same class the backticked row already is.
+      .replace(/^\s*inhibitor:/, ' ')
       .replace(/inhibitorEfficiencyPct|inhibitorAvailabilityPct|inhibitorFilmIntact|inhibitorShortfallPp|inhibitorArithmetic|inhibitorClamps|INHIBITOR_SHORTFALL_PP/g, ' '));
     const bareErosion = (line) => /erosi/i.test(line
       .replace(/mechanical erosion/gi, ' ')

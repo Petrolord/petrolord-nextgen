@@ -589,7 +589,7 @@ export const ENGINE_DOORS = Object.freeze([
   ['scaleFactor', 'the protective-film multiplier, clamped at 1', 'a temperature and a CO2 fugacity'],
   ['scaleOnsetTC', 'the temperature at which that multiplier leaves 1', 'a CO2 fugacity'],
   ['phFactor', 'the pH multiplier and the reference it is taken against, or a refusal', 'an in-situ pH'],
-  ['corrosionRate', 'the whole rate with every factor reported separately', 'the conditions, the wetting regime and the inhibitor programme'],
+  ['corrosionRate', 'the whole rate with every factor reported separately', 'the conditions, the wetting regime and the corrosion inhibitor programme'],
   ['wallShearStressPa', 'the Reynolds number, the friction branch, the friction factor, the wall shear and a film-risk word', 'a velocity, a diameter, a density and a viscosity'],
   ['sourServiceScreen', 'the H2S partial pressure in bar and psia, the threshold in both, and whether the stream is above it', 'an H2S partial pressure'],
   ['corrosionRegime', 'which corrosion product governs, and whether the CO2 rate model applies at all', 'the H2S and CO2 partial pressures'],
@@ -1377,6 +1377,11 @@ export const everyRefusal = () => {
   };
 };
 
+/** 0.05 in against the studio's own 0.125 in corrosion allowance, in mm. The
+ *  shipped case consumes nothing, and at a consumed depth of zero the field
+ *  that IGNORES what has gone and the field that does not read the same. */
+export const CONSUMED_PROBE_MM = 0.05 * 25.4;
+
 /** Section 19. The live studio's own defaults, end to end. */
 export const studioDefaults = () => {
   const ap = appScreen();
@@ -1384,6 +1389,11 @@ export const studioDefaults = () => {
   const sourCase = C.screen({ ...APP, h2sMolFrac: 0.01 });
   const oil = C.screen({ ...APP, flowRegime: 'oilWet' });
   const ph4 = C.screen({ ...APP, ph: 4 });
+  // THE SHIPPED CASE WITH A CONSUMED DEPTH TYPED IN. The shipped case consumes
+  // 0 mm, so the remaining allowance and the allowance the design life demands
+  // cannot be told apart by watching them, and the only worked case with a
+  // non-zero consumed depth was in an Expert-owned section.
+  const used = C.screen({ ...APP, consumedMm: CONSUMED_PROBE_MM });
   return {
     inputs: APP_AS_TYPED.map(([label, typed, key]) => ({
       label, typed, key, value: APP[key],
@@ -1464,6 +1474,18 @@ export const studioDefaults = () => {
       ['the reaction term', ap.rate.reactionMmYr],
       ['the mass-transfer term', ap.rate.massTransferMmYr],
     ].map(([label, v]) => ({ label, mmYr: v, mpy: mpy(v) })),
+    consumedProbeMm: CONSUMED_PROBE_MM,
+    consumedRows: [
+      ['remaining allowance mm', ap.life.remainingMm, used.life.remainingMm],
+      ['remaining life yr', ap.life.remainingYears, used.life.remainingYears],
+      ['allowance the design life demands mm', ap.life.requiredAllowanceMm, used.life.requiredAllowanceMm],
+      ['shortfall mm', ap.life.shortfallMm, used.life.shortfallMm],
+    ].map(([label, base, withConsumed]) => ({ label, base, withConsumed, moved: base !== withConsumed })),
+    consumedRequiredAllowanceMm: used.life.requiredAllowanceMm,
+    consumedShortfallRiseMm: used.life.shortfallMm - ap.life.shortfallMm,
+    consumedRateMmYr: used.rate.rateMmYr,
+    consumedBindingWhat: used.binding.what,
+    consumedBindingWhy: used.binding.why,
   };
 };
 
@@ -1473,7 +1495,7 @@ export const GOLDEN_BLOCK_NOTE = Object.freeze({
   categoryBands: 'the three band edges, as the oracle read them',
   categoryRows: 'the category word either side of all three bands, plus a non-finite rate',
   heldConstants: "the oracle's own copy of every held constant, cross-pinned in section 3",
-  inhibitor: 'the inhibitor time average, rebuilt as an hour-by-hour duty cycle',
+  inhibitor: 'the corrosion inhibitor time average, rebuilt as an hour-by-hour duty cycle',
   inhibitorClamps: 'the three clamped inputs and the clamp count each produces',
   lifeRows: 'remaining life, reached by marching the wall loss forward rather than by dividing',
   lifeZeroRate: 'the zero-rate row, where the life is null and the verdict is null',
@@ -1491,7 +1513,7 @@ export const GOLDEN_BLOCK_NOTE = Object.freeze({
 /** What each oracle route is independent because of, and what it cannot check. */
 export const ORACLE_ROUTES = Object.freeze([
   ['the series combination', 'solved by bisection on the reciprocal rather than formed as a reciprocal, with the residual identity checked separately', 'nothing'],
-  ['the inhibitor time average', 'rebuilt as an explicit 8760 hour duty cycle, which rounds to whole hours, so the agreement is loose and that looseness IS the independence', 'nothing'],
+  ['the corrosion inhibitor time average', 'rebuilt as an explicit 8760 hour duty cycle, which rounds to whole hours, so the agreement is loose and that looseness IS the independence', 'nothing'],
   ['the wall shear', 'reached through a momentum balance over a stated length, with the pipe force balance checked as an identity', 'the Blasius pair, the laminar constant and the branch switch'],
   ['the film onset', 'found by bisection on the unclamped expression and cross-checked against the closed form', 'the three scale constants'],
   ['the remaining life', 'reached by marching the wall loss forward in small steps rather than by dividing, held to one step absolute', 'nothing'],

@@ -8,7 +8,7 @@ The reference is a pH of 4.000000. At the reference the factor is exactly 1.0000
 
 ## The shipped case, read through the correction
 
-The studio ships with an in situ pH of 4.500000 and the engine reports a pH factor of 0.562341. That multiplier is one of three the engine applies between the combined figure the two rate terms produce and the rate the screen finally prints, the other two being the wetting regime and the corrosion inhibitor credit. Change the pH box alone and the pH factor moves with it, and nothing else in the chain moves at all. That is a useful property when you are trying to attribute a change in a printed rate to a cause.
+The studio ships with an in situ pH of 4.500000 and the engine reports a pH factor of 0.562341. That multiplier is one of four the engine applies between the combined figure the two rate terms produce and the rate the screen finally prints, the other three being the protective film factor, the wetting regime and the corrosion inhibitor credit. The film factor is easy to miss on the shipped case, because there it is exactly 1.000000000000 and the chain closes to the last digit with it silently at one. Change the pH box alone and the pH factor moves with it, and nothing else in the chain moves at all. That is a useful property when you are trying to attribute a change in a printed rate to a cause.
 
 The slope of the correction and the reference itself are both held for literature. They are measured out of the engine's behaviour and pinned against a literal in a third file, so the module is using what it declares, and no source in this repository says whether the declared values are the published ones.
 
@@ -20,4 +20,4 @@ The engine also range checks the pH before it corrects anything, which is one of
 
 ## Exercise
 
-Run the shipped case and record the pH factor of 0.562341 beside the reference of 4.000000 the engine returns with it. Now set the pH to 4.000000 and record the factor there. Compare the two factors and say which direction the correction moves the rate as the water becomes less acid. Then type a pH of 15 and copy down exactly what the engine returns, and write one sentence on why a range guard and a reference are two different pieces of protection.
+Run the shipped case and record the pH factor of 0.562341 beside the reference of 4.000000 the engine returns with it. Now set the pH to 4.000000 and record the factor there. Compare the two factors and say which direction the correction moves the rate as the water becomes less acid. Then type a pH of 14.500000 and copy down exactly what the engine returns, and write one sentence on why a range guard and a reference are two different pieces of protection.

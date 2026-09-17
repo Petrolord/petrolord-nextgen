@@ -110,7 +110,7 @@
   "explanation": "This module consumes an allowance and never computes a pressure, so the comparison between the two is a pivot from one course to another rather than a derivation you can run here."
  },
  {
-  "prompt": "One live course points at this one. Which, and what does it say about corrosion?",
+  "prompt": "Which live Suite course names this module in its own scope statement, and on what grounds?",
   "options": [
    "The Casing and Tubing Design course, which defers its erosional criterion to this one.",
    "The Storage Tank course, which takes its shell allowance from this module's output.",

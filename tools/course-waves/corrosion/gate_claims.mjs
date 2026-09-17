@@ -74,6 +74,8 @@ const DIGEST_OK = new Set();
  */
 const ALLOWED = {
   78: 'the lesson count, settled by structure.py',
+  396: 'the question count of this wave, 132 a tier, settled by the banks and counted by wave_check',
+  792: 'the field texts of one tier\'s 132 questions at a prompt, an explanation and four options each, which is the corpus the Expert writer swept by hand when gate_capstone_leak.py had no --banks path',
   26: 'the lessons a tier, settled by structure.py',
   33: 'the tests in the two panel suites, settled by the vitest run itself',
   420: 'the bottom of the word band, settled by structure.py',

@@ -6,10 +6,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # FC9 Professional m05, the allowance.
 # Every allowance figure here is taken from digest Section 19, the shipped
 # studio case, with the lives from Section 11 and the oil-wet case from Section
-# 8. Nothing in this bank quotes Section 14, which the digest labels as an
-# Expert-owned section, and the tier's own 26 lessons teach the allowance the
-# same way. The scope seams are Section 23 and the narrow reading of the word
-# integrity is Section 22.
+# 8. This bank quotes no Section 14 figure, which at the time it was written was
+# forced: Section 14's owner clause named only Expert m02, so a Professional
+# question quoting it would have been a forward reach. THAT CLAUSE WAS WRONG and
+# the second repair pass fixed it, and Section 19 now carries a worked case with
+# a NON-ZERO consumed depth, so a later pass may key on either. The scope seams
+# are Section 23 and the narrow reading of the word integrity is Section 22.
 
 q(0, "What arithmetic is the remaining life in this module?",
  "The corrosion allowance less what has already gone, divided by a rate.",
@@ -81,7 +83,7 @@ q(1, "Which course owns wall loss taken to a derated burst pressure?",
   "This one, which reports it beside the remaining life."],
  "This module consumes an allowance and never computes a pressure, so the comparison between the two is a pivot from one course to another rather than a derivation you can run here.")
 
-q(2, "One live course points at this one. Which, and what does it say about corrosion?",
+q(2, "Which live Suite course names this module in its own scope statement, and on what grounds?",
  "The Well Integrity and P and A course, which refuses corrosion, wall loss and remaining life in its own scope.",
  ["The Casing and Tubing Design course, which defers its erosional criterion to this one.",
   "The Storage Tank course, which takes its shell allowance from this module's output.",

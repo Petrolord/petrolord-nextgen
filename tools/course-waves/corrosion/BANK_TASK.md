@@ -88,8 +88,36 @@ plants. Both were re-run against this digest while this decision was taken and
 both are clean. A digest that carried the conditions would be a digest a learner
 could work the graded capstone out of.
 
+**AND THE BANKS THEMSELVES ARE SWEPT NOW, WHICH THEY WERE NOT WHEN THIS WAS
+WRITTEN.** Directions one and four above are digest-facing, and for most of this
+wave that was the whole of `gate_capstone_leak.py`: it read `digest.txt`, the
+generator, the vendored golden and the sibling waves, it had no `--banks` path
+and no argument parsing at all, and its clean result therefore said NOTHING
+WHATEVER about the 396 questions. Three writers were told otherwise. The Expert
+writer built the bank-side sweep by hand rather than trusting the claim, and got
+0 condition hits, 0 plant-name hits and 0 graded hits across 792 field texts.
+DIRECTION SEVEN is that sweep, folded in: every condition, every graded value at
+all four renderings and every plant name against every prompt, option and
+explanation, with three plants proved on each run and a clean control that trips
+none of them. Run it as `python3 gate_capstone_leak.py`, which defaults to
+`<wave>/banks`, and `--no-banks` is the deliberate declaration that a run is not
+sweeping them.
+
+**AND THE THREE VOCABULARY COLLISIONS ARE GATED NOW TOO.** Section 22 says the
+copy gate catches a breach and `gate_copy_rule.py` checks dashes and
+contrastives and nothing else. `gate_vocabulary.py` is the check the lab already
+ran over the panels, promoted to run over all 78 lessons and all 396 questions:
+never bare "inhibitor" in a prompt, an option or a heading, "corrosion
+inhibitor" on first use everywhere, and never the bare geological "erosion". It
+carries 16 negative controls, it unwraps hard-wrapped markdown before it matches,
+and it clears the engine's own verbatim messages by finding them in the digest.
+
 **And the fallback does not exist either, so do not reach for it.** The lesson and
-bank sweeps have no stated-inputs path. `litsweep.py` resolves a literal by
+bank sweeps have no stated-inputs path. `sweep_literals.py` USED TO PROMISE ONE
+in its docstring, listing "a stated input of the bank's own tier" as its third
+resolver. There was never any such path: it tests a literal against the small
+integers, the digest and the declared constants and against nothing else, and
+that docstring is corrected rather than implemented. `litsweep.py` resolves a literal by
 verbatim whole-number presence in `digest.txt` and by nothing else; its only
 escape hatch is the `constants` block of `wave.json`, which in this wave holds
 held correlation constants and not one capstone condition. A figure stated in

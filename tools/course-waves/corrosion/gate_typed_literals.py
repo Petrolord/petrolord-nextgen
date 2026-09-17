@@ -81,6 +81,7 @@ ALLOWED = {
  '1000': 'mils an inch, stated in the same mpy conversion',
  '0.05': 'the psia value the old threshold comment claimed, stated beside the MEASURED psia value it is compared against. The whole point of the row is that the two differ',
  '8760': 'hours in a year, stated as the oracle duty cycle length in the sentence that explains why one tolerance is looser than another',
+ '78': 'the lesson count of this wave, asserted by the owner-clause parser against structure.py. The clauses are RENDERED from the curriculum rather than typed, and the parser refuses when its regex stops matching structure.py rather than yielding an empty curriculum that validates nothing, so the number is a shape assertion about this wave and not a measurement',
  '0.250000': 'a stated corrosion rate for the worked allowance example, whose four answers are printed beside it',
  '1.2': 'the stated consumed depth of the same worked example, whose reinstating allowance is printed beside it',
  '4': 'the stated corrosion allowance of the same worked example, in millimetres',

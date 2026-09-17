@@ -57,7 +57,7 @@ A threshold quoted in one unit and compared in another is where conversion
 mistakes live. This engine derives the psia figure from the bar figure rather
 than carrying a separate rounded literal for it, and prints both, so the reader
 never has to convert and no second copy of the number can drift away from the
-first. The psia value it reports is 0.050763208303, carried to twelve figures
+first. The psia value it reports is 0.050763208303, carried to twelve decimal places
 because a threshold that has been rounded on the way to the screen is a
 different threshold from the one the comparison used.
 

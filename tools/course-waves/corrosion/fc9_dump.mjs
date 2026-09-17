@@ -426,6 +426,25 @@ const AP_FAST = success('the shipped app defaults at 60 ft per second', C.screen
 const AP_SOUR = success('the shipped app defaults at 1 mol percent H2S', C.screen({ ...APP, h2sMolFrac: 0.01 }));
 const AP_OIL = success('the shipped app defaults oil wet', C.screen({ ...APP, flowRegime: 'oilWet' }));
 const AP_PH4 = success('the shipped app defaults at pH 4.0', C.screen({ ...APP, ph: 4 }));
+/* THE SHIPPED CASE WITH A CONSUMED DEPTH TYPED IN, and it is here because of
+   what was missing without it. The shipped case consumes 0.000000 mm, so the
+   REMAINING allowance and the allowance the design life DEMANDS cannot be told
+   apart by watching them: the one field that ignores what has gone and the one
+   that does not sit at the same consumed depth of zero. The only worked case
+   with a non-zero consumed depth was in SECTION 14, which the Expert tier owns,
+   and the Professional module titled The Allowance therefore had to teach the
+   distinction from a case that cannot show it. 0.05 in is a studio-shaped depth
+   on the studio's own 0.125 in allowance. */
+const AP_USED = success('the shipped app defaults with 0.05 in consumed', C.screen({ ...APP, consumedMm: 0.05 * 25.4 }));
+must('THE REQUIRED ALLOWANCE DOES NOT MOVE WITH THE CONSUMED DEPTH AND THE OTHER THREE FIELDS DO, which is the whole of what this case is for',
+  AP_USED.life.requiredAllowanceMm === AP.life.requiredAllowanceMm
+  && AP_USED.life.remainingMm < AP.life.remainingMm
+  && AP_USED.life.remainingYears < AP.life.remainingYears
+  && AP_USED.life.shortfallMm > AP.life.shortfallMm,
+  `required ${AP_USED.life.requiredAllowanceMm} against ${AP.life.requiredAllowanceMm}, remaining ${AP_USED.life.remainingMm}, years ${AP_USED.life.remainingYears}, shortfall ${AP_USED.life.shortfallMm}`);
+must('AND THE SHORTFALL MOVES BY EXACTLY THE CONSUMED DEPTH, which is the identity the distinction rests on',
+  Math.abs((AP_USED.life.shortfallMm - AP.life.shortfallMm) - (0.05 * 25.4)) < 1e-9,
+  `${AP_USED.life.shortfallMm - AP.life.shortfallMm} against ${0.05 * 25.4}`);
 must('THE RATE AT THE SHIPPED DEFAULTS IS THE ONE THE REPAIR LEFT ALONE, and this file re-derives it rather than quoting it',
   Number.isFinite(AP.rate.rateMmYr) && AP.rate.rateMmYr > 0, AP.rate.rateMmYr);
 must('THE DEFAULT CASE TAKES NO REPAIRED BRANCH: its scale factor is 1, its film is intact, its pH is above the reference and its category is issued',
@@ -477,6 +496,150 @@ const SCREEN_TEXT = JSON.stringify(AP) + JSON.stringify(DI) + JSON.stringify(AP_
 must('NO RETURNED STRING ANYWHERE IN THREE WHOLE SCREENS NAMES EITHER STANDARD',
   !SCREEN_TEXT.includes('MR0175') && !SCREEN_TEXT.includes('15156'), 'neither name present');
 
+
+const WAVE_DIR = new URL('.', import.meta.url).pathname;
+
+/* ------------------------------------------- the section owner clauses */
+/**
+ * SECTION OWNER CLAUSES ARE BUILT FROM structure.py, NEVER TYPED.
+ *
+ * They were 25 hand-typed string literals with nothing linking them to the
+ * curriculum, and the module key drifted the moment a section stopped covering
+ * exactly one module. Four of them were wrong when this was written and a
+ * SECOND REPAIR PASS found every one by reading the lessons rather than the
+ * clauses:
+ *
+ *   SECTION 2   named Expert m06 alone, and structure.py declares in its own
+ *               words that THE WITHDRAWAL IS TAUGHT IN BEGINNER m01 AND AGAIN
+ *               IN ADVANCED m06. An Associate lesson quoting section 2 was a
+ *               FORWARD reach waiting to be reported, and the only reason
+ *               litsweep never reported one is that the figure that lesson
+ *               quotes also appears in a section the Associate tier owns.
+ *   SECTION 12  named Professional m05, which is The Allowance. Its consumer is
+ *               Professional m06 l03, The threshold comparison, alone. No
+ *               lesson in m05 quotes a figure that resolves only in section 12.
+ *   SECTION 14  named Expert m02 alone. Professional m05 is titled The
+ *               Allowance and carries l01 an allowance divided by a rate, l02
+ *               what has already gone and l03 a zero rate is not a pass, and
+ *               every one of those subjects is in section 14 and nowhere else.
+ *               The Professional lessons had to teach the field from section
+ *               19, whose consumed depth is 0.000000, where the required
+ *               allowance and the remaining allowance are INDISTINGUISHABLE.
+ *               Expert m05 l03 and l04 quote its worked case and the clause did
+ *               not name them either.
+ *   SECTION 17  named Expert m05, and NO lesson in that tier reaches it: a grep
+ *               for its subjects over all 26 Expert lessons returns zero. The
+ *               clause is wrong about the module and the tier also has a hole,
+ *               which the wave report names. Expert m04 and m05 are the two
+ *               modules its subject serves.
+ *
+ * litsweep keys ALL of its gating off the TIER WORD, so a wrong module key
+ * could never misplace a figure or open a leak by itself. It misleads the
+ * writer and the auditor placing a lesson or a question, which is the entire
+ * job of the clause. Section 2 is the one where the tier word was wrong too.
+ *
+ * `owners()` renders the clause from tier, module and lesson keys and REFUSES
+ * at build time when any of them is absent from structure.py: an unknown tier,
+ * a module key that tier does not have, or a lesson key that is not in the
+ * module named beside it. Three negative controls prove each refusal fires,
+ * under FC9_OWNERS_SELFTEST=1.
+ */
+const STRUCTURE = (() => {
+  const src = fs.readFileSync(`${WAVE_DIR}structure.py`, 'utf8');
+  const tiers = new Map();
+  let tier = null;
+  let mod = null;
+  for (const line of src.split('\n')) {
+    // THE APOSTROPHES IN THESE THREE PATTERNS ARE ESCAPED AS \x27 ON PURPOSE.
+    // gate_typed_literals pairs quotes to find the printed prose, and a bare
+    // apostrophe inside a regex shifts that pairing and makes it sweep code as
+    // if it were a sentence. This family has already paid for that once.
+    let m = /^ \x27(\w+)\x27: \[\s*$/.exec(line);
+    if (m) { tier = m[1]; tiers.set(tier, new Map()); mod = null; continue; }
+    if (!tier) continue;
+    m = /^ {2}\(\x27(m\d\d)[^\x27]*\x27, \x27([^\x27]*)\x27, \[\s*$/.exec(line);
+    if (m) { mod = m[1]; tiers.get(tier).set(mod, { title: m[2], lessons: new Set() }); continue; }
+    m = /^ {4}\(\x27(l\d\d)[^\x27]*\x27, \x27/.exec(line);
+    if (m && mod) tiers.get(tier).get(mod).lessons.add(m[1]);
+  }
+  // THE PARSE IS CHECKED AGAINST WHAT THIS WAVE IS, so a structure.py that
+  // moves under this generator, or a regex that stops matching it, stops the
+  // build instead of quietly yielding an empty curriculum that validates
+  // nothing at all.
+  let lessons = 0;
+  for (const [t, mods] of tiers) {
+    if (mods.size !== 6) throw new Error(`GENERATOR REFUSES: structure.py gives tier ${t} ${mods.size} modules and this wave is six a tier`);
+    for (const [k, v] of mods) {
+      if (!v.lessons.size) throw new Error(`GENERATOR REFUSES: structure.py gives ${t} ${k} no lessons, so the owner clauses cannot be checked`);
+      lessons += v.lessons.size;
+    }
+  }
+  if (tiers.size !== 3) throw new Error(`GENERATOR REFUSES: structure.py gives ${tiers.size} tiers and this wave is three`);
+  if (lessons !== 78) throw new Error(`GENERATOR REFUSES: structure.py gives ${lessons} lessons and this wave is 78`);
+  return tiers;
+})();
+
+const TIER_WORD = { beginner: 'Associate', intermediate: 'Professional', advanced: 'Expert' };
+
+/**
+ * One owner clause. Each entry is [tier, module] or [tier, module, lesson].
+ * Consecutive entries in the same tier share one tier word and consecutive
+ * entries in the same module share one module key, which is the form the clean
+ * clauses already read in: "Associate m01 l04 and Expert m06", "Expert m05 l03
+ * and l04". A trailing string is a REASON and is printed after the clause.
+ */
+const owners = (...spec) => {
+  let note = null;
+  if (typeof spec[spec.length - 1] === 'string') note = spec.pop();
+  if (!spec.length) throw new Error('GENERATOR REFUSES: an owner clause names no tier at all, and litsweep refuses such a clause rather than guessing the tier ranges');
+  const parts = spec.map(([tier, mkey, lkey]) => {
+    const word = TIER_WORD[tier];
+    if (!word) throw new Error(`GENERATOR REFUSES: an owner clause names the tier "${tier}", which is not one of ${Object.keys(TIER_WORD).join(', ')}`);
+    const mods = STRUCTURE.get(tier);
+    if (!mods.has(mkey)) {
+      throw new Error(`GENERATOR REFUSES: an owner clause names ${word} ${mkey}, and structure.py gives that tier ${[...mods.keys()].join(', ')}`);
+    }
+    if (lkey && !mods.get(mkey).lessons.has(lkey)) {
+      throw new Error(`GENERATOR REFUSES: an owner clause names ${word} ${mkey} ${lkey}, and "${mods.get(mkey).title}" carries only ${[...mods.get(mkey).lessons].join(', ')}`);
+    }
+    return { word, mkey, lkey };
+  });
+  const words = parts.map((p, i) => {
+    const prev = i ? parts[i - 1] : null;
+    const key = p.lkey ? `${p.mkey} ${p.lkey}` : p.mkey;
+    if (prev && prev.word === p.word && prev.mkey === p.mkey && p.lkey) return p.lkey;
+    if (prev && prev.word === p.word) return key;
+    return `${p.word} ${key}`;
+  });
+  return `(owned by ${words.join(' and ')}${note ? `, ${note}` : ''})`;
+};
+
+/** One `# SECTION n:` heading, with its owner clause built rather than typed. */
+const sec = (no, title, ...spec) => `# SECTION ${no}: ${title} ${owners(...spec)}`;
+
+/* THE THREE NEGATIVE CONTROLS. A gate that has never been shown refusing is a
+   gate nobody knows can refuse, and FC9 shipped a reproducibility gate on a
+   build script it could not execute. Run: FC9_OWNERS_SELFTEST=1 node fc9_dump.mjs */
+if (process.env.FC9_OWNERS_SELFTEST) {
+  const control = (what, fn) => {
+    let msg = null;
+    try { fn(); } catch (err) { msg = err.message; }
+    if (!msg) { process.stderr.write(`OWNERS SELFTEST FAILED: ${what} did not refuse\n`); process.exit(1); }
+    process.stderr.write(`OWNERS SELFTEST: ${what} refused: ${msg}\n`);
+  };
+  control('an unknown tier', () => owners(['postgraduate', 'm01']));
+  control('a module that tier does not have', () => owners(['beginner', 'm09']));
+  control('a lesson that is not in the module named beside it', () => owners(['advanced', 'm02', 'l05']));
+  // AND A POSITIVE CONTROL, so the three refusals above are not simply a
+  // function that refuses everything it is handed.
+  const good = owners(['intermediate', 'm05'], ['advanced', 'm02', 'l04'], ['advanced', 'm05', 'l03'], ['advanced', 'm05', 'l04']);
+  if (good !== '(owned by Professional m05 and Expert m02 l04 and m05 l03 and l04)') {
+    process.stderr.write(`OWNERS SELFTEST FAILED: a valid clause rendered as ${good}\n`); process.exit(1);
+  }
+  process.stderr.write(`OWNERS SELFTEST: a valid clause renders as ${good}\n`);
+  process.exit(0);
+}
+
 /* ==================================================================
    THE DIGEST ITSELF.
    ================================================================== */
@@ -491,12 +654,12 @@ w(`# ENGINE. engines/facilities/corrosion.js, vendored sha-identical with petrol
 w();
 w(`# THE GOLDEN IS SYNTHETIC AND IT SAYS SO. golden provenance.published is ${String(GOLD.provenance.published)}. The golden's own words: "${GOLD.provenance.why}"`);
 w();
-w('# WHAT IS NEVER GRADED IN THIS COURSE. No corrosion rate the correlation produced, no rate category, no sour severity region, no material choice, no inspection interval and no retirement thickness. Section 21 lists every held item and section 3 pins every held constant. The eighteen graded capstone fields are the stream bookkeeping, the flow definition, the inhibitor arithmetic and the allowance arithmetic, and the capstone states any rate it needs from an inspection survey.');
+w('# WHAT IS NEVER GRADED IN THIS COURSE. No corrosion rate the correlation produced, no rate category, no sour severity region, no material choice, no inspection interval and no retirement thickness. Section 21 lists every held item and section 3 pins every held constant. The eighteen graded capstone fields are the stream bookkeeping, the flow definition, the corrosion inhibitor arithmetic and the allowance arithmetic, and the capstone states any rate it needs from an inspection survey.');
 w();
 
 /* ------------------------------------------------------------- SECTION 1 */
 
-w('# SECTION 1: What this engine computes, and what it refuses to compute (owned by Associate m01, and shared with Expert m01 because WHAT IS NOT HERE is that module\'s subject)');
+w(sec(1, 'What this engine computes, and what it refuses to compute', ['beginner', 'm01'], ['advanced', 'm01'], 'because WHAT IS NOT HERE is that module\'s subject'));
 w();
 w('The engine is a CO2 corrosion rate screen with a remaining-life calculation on the end of it. It answers one question about one mechanism, and the list of what it does not answer is longer than the list of what it does.');
 w();
@@ -509,7 +672,7 @@ w('| --- | --- | --- |');
   ['scaleFactor', 'the protective-film multiplier, clamped at 1', 'a temperature and a CO2 fugacity'],
   ['scaleOnsetTC', 'the temperature at which that multiplier leaves 1', 'a CO2 fugacity'],
   ['phFactor', 'the pH multiplier and the reference it is taken against, or a refusal', 'an in-situ pH'],
-  ['corrosionRate', 'the whole rate with every factor reported separately', 'the conditions, the wetting regime and the inhibitor programme'],
+  ['corrosionRate', 'the whole rate with every factor reported separately', 'the conditions, the wetting regime and the corrosion inhibitor programme'],
   ['wallShearStressPa', 'the Reynolds number, the friction branch, the friction factor, the wall shear and a film-risk word', 'a velocity, a diameter, a density and a viscosity'],
   ['sourServiceScreen', 'the H2S partial pressure in bar and psia, the threshold in both, and whether the stream is above it', 'an H2S partial pressure'],
   ['corrosionRegime', 'which corrosion product governs, and whether the CO2 rate model applies at all', 'the H2S and CO2 partial pressures'],
@@ -527,7 +690,7 @@ w();
 
 /* ------------------------------------------------------------- SECTION 2 */
 
-w('# SECTION 2: THE WITHDRAWAL. A curve carrying a standard\'s name told engineers what steel to buy, and it was invented here (owned by Expert m06, and the headline lesson of this whole course)');
+w(sec(2, 'THE WITHDRAWAL. A curve carrying a standard\'s name told engineers what steel to buy, and it was invented here', ['beginner', 'm01', 'l02'], ['advanced', 'm06', 'l01'], 'and the headline lesson of this whole course'));
 w();
 w('This section is about behaviour the engine SHIPS TODAY, which is a refusal to answer. It is not repair history: the absence is current, declared and permanent, and section 25 is where the history lives.');
 w();
@@ -557,9 +720,9 @@ w();
 
 /* ------------------------------------------------------------- SECTION 3 */
 
-w('# SECTION 3: The numbers this module stands on, MEASURED out of the engine rather than typed, and pinned against a third copy (shared by Associate m01 and Expert m01)');
+w(sec(3, 'The numbers this module stands on, MEASURED out of the engine rather than typed, and pinned against a third copy', ['beginner', 'm01'], ['advanced', 'm01']));
 w();
-w('NONE of these is sourced in this repository. Every one of them is HELD FOR LITERATURE, every one is measured below by asking the engine a question whose answer is that constant and nothing else, and every measured value is compared against a literal typed in this generator, which is a THIRD location. A constant that lives in the engine and in the oracle cannot be validated by comparing the engine with the oracle, and a paired battery proved that: fifteen of seventeen constants moved in both files at once left the suite green.');
+w('NONE of these is sourced in this repository WITH ONE NAMED EXEMPTION, AND IT IS THE ROW CALLED \'the bar to psia factor\'. That factor is exact by the definition of the bar and of the pound-force rather than held: section 24 derives it, section 21 grades a conversion through it, and the engine\'s own eleven-item held list does not name it. Every OTHER constant here is HELD FOR LITERATURE, every one is measured below by asking the engine a question whose answer is that constant and nothing else, and every measured value is compared against a literal typed in this generator, which is a THIRD location. A constant that lives in the engine and in the oracle cannot be validated by comparing the engine with the oracle, and a paired battery proved that: fifteen of seventeen constants moved in both files at once left the suite green.');
 w();
 w('MEASURING RATHER THAN READING THE EXPORT IS DELIBERATE. An export tells you what the module declares. A measurement tells you what it actually uses. Both are below, and the two columns disagreeing would be a finding.');
 w();
@@ -632,7 +795,7 @@ w();
 
 /* ------------------------------------------------------------- SECTION 4 */
 
-w('# SECTION 4: CO2 partial pressure, CO2 fugacity, and the difference the screen printed for a year without explaining (owned by Associate m02)');
+w(sec(4, 'CO2 partial pressure, CO2 fugacity, and the difference the screen printed for a year without explaining', ['beginner', 'm02']));
 w();
 w('TWO QUANTITIES, ONE MOLECULE, AND THEY ARE NOT THE SAME NUMBER. The partial pressure is the total pressure times the mole fraction. The fugacity is the partial pressure times a coefficient below one at high pressure, and it is the fugacity that drives the RATE. The H2S threshold and the film-governing ratio use PARTIAL PRESSURES, and no fugacity correction is applied to H2S at all, which the engine declares in a field.');
 w();
@@ -674,7 +837,7 @@ w();
 
 /* ------------------------------------------------------------- SECTION 5 */
 
-w('# SECTION 5: Two resistances in series, and which one is holding the rate back (owned by Associate m03)');
+w(sec(5, 'Two resistances in series, and which one is holding the rate back', ['beginner', 'm03']));
 w();
 w('The rate is not the reaction rate and it is not the transport rate. It is the two in series: the reciprocal of the sum of the reciprocals. That has a consequence a learner should be able to state before they see a number, and the table below is the proof of it: the combined rate is always BELOW BOTH TERMS, and it sits close to whichever term is smaller.');
 w();
@@ -727,7 +890,7 @@ w();
 
 /* ------------------------------------------------------------- SECTION 6 */
 
-w('# SECTION 6: The protective film, and an onset temperature that MOVES (owned by Associate m04)');
+w(sec(6, 'The protective film, and an onset temperature that MOVES', ['beginner', 'm04']));
 w();
 w('Once iron carbonate plates out on the steel the rate FALLS with further heating, which a naive extrapolation of the low-temperature equation gets exactly backwards. The engine handles that with a multiplier clamped at one, and the temperature at which the multiplier leaves one is COMPUTED rather than quoted, because it moves with the CO2 fugacity.');
 w();
@@ -763,7 +926,7 @@ w();
 
 /* ------------------------------------------------------------- SECTION 7 */
 
-w('# SECTION 7: pH, the reference it is taken against, and why below it the engine refuses (owned by Associate m05)');
+w(sec(7, 'pH, the reference it is taken against, and why below it the engine refuses', ['beginner', 'm05']));
 w();
 w(`The correction is a multiplier relative to the pH the correlation was fitted at. The reference is ${e6(PH_REF)}, measured by bisecting the pH at which the engine stops returning a factor, and at the reference the factor is exactly one by definition rather than by a clamp.`);
 w();
@@ -813,7 +976,7 @@ w();
 
 /* ------------------------------------------------------------- SECTION 8 */
 
-w('# SECTION 8: Water wetting, and the largest single lever in this model (owned by Professional m01)');
+w(sec(8, 'Water wetting, and the largest single lever in this model', ['intermediate', 'm01']));
 w();
 w('Steel does not corrode where it is oil wet. The engine treats that as a REGIME and not as a multiplier applied always, which matters because the multiplier for the oil-wet regime is zero and a zero rate is the strongest reassurance a screen can give.');
 w();
@@ -833,7 +996,7 @@ const OW = success('the Etelebou stream oil wet', C.screen({ ...ETELEBOU, flowRe
 w(`> ${OW.withheld.why}`);
 w();
 must('THE OIL-WET INHIBITION FIGURE IS NULL AND NOT ZERO', OW.rate.effectiveInhibitionPct === null, String(OW.rate.effectiveInhibitionPct));
-w(`AND THE INHIBITION FIGURE IS \`null\` RATHER THAN ZERO: ${String(OW.rate.effectiveInhibitionPct)}. A reported zero percent inhibition on a line that has an inhibitor programme is a statement, and it would be a false one. There is nothing to be effective against when the rate is zero by assumption.`);
+w(`AND THE INHIBITION FIGURE IS \`null\` RATHER THAN ZERO: ${String(OW.rate.effectiveInhibitionPct)}. A reported zero percent inhibition on a line that has a corrosion inhibitor programme is a statement, and it would be a false one. There is nothing to be effective against when the rate is zero by assumption.`);
 w();
 w('THE REGIME NAME IS MATCHED CASE AND PUNCTUATION INSENSITIVELY, and an unrecognised string refuses rather than falling through to the least limiting regime:');
 w('| what was typed | what the engine did |');
@@ -870,9 +1033,9 @@ w();
 
 /* ------------------------------------------------------------- SECTION 9 */
 
-w('# SECTION 9: The inhibitor, and the arithmetic that surprises people (owned by Professional m02, and the one lesson this module exists to teach)');
+w(sec(9, 'The corrosion inhibitor, and the arithmetic that surprises people', ['intermediate', 'm02'], 'and the one lesson this module exists to teach'));
 w();
-w('A 95 percent inhibitor running 80 percent of the time is not a 95 percent solution. The uninhibited rate applies for the fraction of the time the inhibitor is off, and it is that time average that eats the wall. The engine takes EFFICIENCY and AVAILABILITY as separate inputs and returns the effective protection, the shortfall in percentage points, and a warning that names the metal-loss ratio.');
+w('A 95 percent corrosion inhibitor running 80 percent of the time is not a 95 percent solution. The uninhibited rate applies for the fraction of the time the corrosion inhibitor is off, and it is that time average that eats the wall. The engine takes EFFICIENCY and AVAILABILITY as separate inputs and returns the effective protection, the shortfall in percentage points, and a warning that names the metal-loss ratio.');
 w();
 w('| efficiency percent | availability percent | effective protection percent | shortfall pp | rate mm/yr | metal loss against the datasheet number |');
 w('| --- | --- | --- | --- | --- | --- |');
@@ -887,7 +1050,7 @@ const EIGHTY = success('a 95 percent inhibitor at 80 percent availability',
   C.corrosionRate({ ...ETELEBOU, inhibitorEfficiencyPct: 95, inhibitorAvailabilityPct: 80 }));
 const EIGHTY_DS = success('the same at perfect availability',
   C.corrosionRate({ ...ETELEBOU, inhibitorEfficiencyPct: 95, inhibitorAvailabilityPct: 100 }));
-w(`READ THE 80 PERCENT ROW TWICE. A 95 percent inhibitor at 80 percent availability delivers ${e6(EIGHTY.effectiveInhibitionPct)} percent effective protection, which is ${e6(EIGHTY.inhibitorShortfallPp)} percentage points short of the datasheet figure, and the metal loss is ${e6(EIGHTY.rateMmYr / EIGHTY_DS.rateMmYr)} times what the datasheet number would give. AVAILABILITY IS WHAT LIMITS IT. Efficiency does not. The engine's own warning on that case, verbatim:`);
+w(`READ THE 80 PERCENT ROW TWICE. A 95 percent corrosion inhibitor at 80 percent availability delivers ${e6(EIGHTY.effectiveInhibitionPct)} percent effective protection, which is ${e6(EIGHTY.inhibitorShortfallPp)} percentage points short of the datasheet figure, and the metal loss is ${e6(EIGHTY.rateMmYr / EIGHTY_DS.rateMmYr)} times what the datasheet number would give. AVAILABILITY IS WHAT LIMITS IT. Efficiency does not. The engine's own warning on that case, verbatim:`);
 w();
 w(`> ${EIGHTY.warning}`);
 w();
@@ -914,7 +1077,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 10 */
 
-w('# SECTION 10: Wall shear, the friction branch, and a discontinuity that is reported rather than smoothed (owned by Professional m03)');
+w(sec(10, 'Wall shear, the friction branch, and a discontinuity that is reported rather than smoothed', ['intermediate', 'm03']));
 w();
 w('The wall shear is what decides whether an inhibitor film survives, so it is the number the rate now depends on. It is built from a friction factor, and the friction factor has TWO BRANCHES with a hard switch between them.');
 w();
@@ -971,7 +1134,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 11 */
 
-w('# SECTION 11: THE COUPLING. The shear verdict now acts on the rate, so the number and the sentence beside it agree (owned by Professional m04)');
+w(sec(11, 'THE COUPLING. The shear verdict now acts on the rate, so the number and the sentence beside it agree', ['intermediate', 'm04']));
 w();
 w('This is the design decision at the centre of the engine as it ships. When the wall shear says the inhibitor film is gone, the rate is computed WITH THE CREDIT REMOVED, and the credited rate is reported beside it so the cost of that verdict is visible rather than implied. No new correlation was invented to do it: the credit is simply not taken.');
 w();
@@ -1011,7 +1174,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 12 */
 
-w('# SECTION 12: H2S, a threshold comparison, and nothing more (owned by Professional m05)');
+w(sec(12, 'H2S, a threshold comparison, and nothing more', ['intermediate', 'm06', 'l03']));
 w();
 w('This door compares one partial pressure against one threshold and reports the comparison in two units. It does not classify severity and it does not choose a material. Section 2 is why.');
 w();
@@ -1044,7 +1207,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 13 */
 
-w('# SECTION 13: Which film governs, from a ratio that needs no pressure at all (owned by Professional m06)');
+w(sec(13, 'Which film governs, from a ratio that needs no pressure at all', ['intermediate', 'm06']));
 w();
 w('Above a certain H2S to CO2 ratio iron sulphide starts to compete with iron carbonate, and above a higher one a CO2-only rate model has stopped describing the surface. The engine answers in four words and it says whether its own rate model applies.');
 w();
@@ -1106,7 +1269,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 14 */
 
-w('# SECTION 14: The allowance, the remaining life, and a zero rate that is not a pass (owned by Expert m02)');
+w(sec(14, 'The allowance, the remaining life, and a zero rate that is not a pass', ['intermediate', 'm05'], ['advanced', 'm02', 'l04'], ['advanced', 'm05', 'l03'], ['advanced', 'm05', 'l04']));
 w();
 w('This door divides a remaining allowance by a rate and stops. That is its whole scope, and what it does NOT do is the subject of section 21.');
 w();
@@ -1168,7 +1331,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 15 */
 
-w('# SECTION 15: The rate category is a LABEL, and the label is held (owned by Expert m03)');
+w(sec(15, 'The rate category is a LABEL, and the label is held', ['advanced', 'm03']));
 w();
 w('Four BAND words separated by three boundaries, and a fifth word that is not a band at all. The four bands are low, moderate, high and severe. The fifth word is negligible, and it is what the door returns at exactly zero and below rather than a band it reaches by being small. Counting zero itself there are four boundaries, and no source for any of them. The engine says in its own held list that the bands are looser than those commonly cited for carbon steel in production service, so a label here may be optimistic by one or two steps.');
 w();
@@ -1238,7 +1401,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 16 */
 
-w('# SECTION 16: The binding constraint, which is the summary this module did not have (owned by Expert m04)');
+w(sec(16, 'The binding constraint, which is the summary this module did not have', ['advanced', 'm04']));
 w();
 w('A screen that returns seven independent numbers and reconciles none of them is a screen the reader has to summarise themselves, and they will summarise it by reading the largest number. The engine now names WHICH OF ITS OWN LIMITS governs the answer, in descending order of what would change first, and every one of them is derived from what is already computed.');
 w();
@@ -1265,7 +1428,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 17 */
 
-w('# SECTION 17: The whole screening in one call, and the order that makes it honest (owned by Expert m05)');
+w(sec(17, 'The whole screening in one call, and the order that makes it honest', ['advanced', 'm04'], ['advanced', 'm05']));
 w();
 w(`\`screen\` returns ${Object.keys(AP).length} top-level fields. The order in which it computes them is the design decision: the wall shear FIRST, because the rate depends on whether the film survives it, then the rate, then the credited rate beside it, then the sour comparison, then the regime, then the withholding, then the category, then the life, then the binding constraint.`);
 w();
@@ -1362,7 +1525,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 18 */
 
-w('# SECTION 18: Every refusal this module can produce, in one table (owned by Expert m05 l04)');
+w(sec(18, 'Every refusal this module can produce, in one table', ['advanced', 'm05']));
 w();
 w('A refusal is the module telling you it cannot answer, and the difference between a refusal and a least-limiting default is the difference between a screening tool and a liability. Every row below is a call this generator made, labelled a refusal, and asserted to have returned an error key and no non-finite number alongside it.');
 w();
@@ -1419,7 +1582,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 19 */
 
-w('# SECTION 19: The live studio\'s own defaults, end to end, and every number a user has been shown (owned by Associate m06, and shared with Professional m06)');
+w(sec(19, 'The live studio\'s own defaults, end to end, and every number a user has been shown', ['beginner', 'm06'], ['intermediate', 'm05'], ['intermediate', 'm06']));
 w();
 w('The Corrosion & Integrity Studio ships with a case already filled in, so the first thing any user sees is this. Every figure below is this generator running the engine on the studio\'s own default inputs, converted with the studio\'s own factors, which are stated in section 24.');
 w();
@@ -1499,9 +1662,24 @@ w('| --- | --- | --- |');
   ['the mass-transfer term', AP.rate.massTransferMmYr]].forEach(([a, v]) => w(`| ${a} | ${e6(v)} | ${e6(MPY(v))} |`));
 w();
 
+w(`AND THE SAME CASE WITH A CONSUMED DEPTH TYPED IN, because the shipped case consumes ${e6(APP.consumedMm)} mm and at that depth two of these four fields cannot be told apart by reading them. Type ${e6(0.05 * 25.4)} mm of consumed depth into the box, which is 0.05 in against the studio's own 0.125 in allowance, and change nothing else:`);
+w();
+w('| field | at the shipped defaults | with 0.05 in consumed | did it move |');
+w('| --- | --- | --- | --- |');
+[['remaining allowance mm', AP.life.remainingMm, AP_USED.life.remainingMm],
+  ['remaining life yr', AP.life.remainingYears, AP_USED.life.remainingYears],
+  ['allowance the design life demands mm', AP.life.requiredAllowanceMm, AP_USED.life.requiredAllowanceMm],
+  ['shortfall mm', AP.life.shortfallMm, AP_USED.life.shortfallMm],
+].forEach(([a, b, c]) => w(`| ${a} | ${e6(b)} | ${e6(c)} | ${b === c ? 'no' : 'yes'} |`));
+w();
+w(`THE FIELD THAT DID NOT MOVE IS THE ONE THAT IGNORES WHAT HAS ALREADY GONE. The allowance the design life demands is the rate times the design life and nothing else, so it is the allowance a NEW line would need and it stays at ${e6(AP_USED.life.requiredAllowanceMm)} mm at both depths. The remaining allowance and the remaining life fall with the consumed depth, and the shortfall rises by ${e6(AP_USED.life.shortfallMm - AP.life.shortfallMm)} mm, which is EXACTLY the consumed depth typed in. This generator asserts both of those on every rebuild. The rate is unchanged at ${e6(AP_USED.rate.rateMmYr)} mm/yr, because the consumed depth reaches none of the rate chain. The binding constraint is still ${AP_USED.binding.what}, and the engine's own sentence for it now reads:`);
+w();
+w(`> ${AP_USED.binding.why}`);
+w();
+
 /* ------------------------------------------------------------ SECTION 20 */
 
-w('# SECTION 20: What the vendored cases can and cannot discriminate (owned by Expert m01 l05 and Expert m05 l02)');
+w(sec(20, 'What the vendored cases can and cannot discriminate', ['advanced', 'm01', 'l05'], ['advanced', 'm05', 'l02']));
 w();
 const GOLD_ROWS = Object.entries(GOLD).reduce((a, [, v]) => a + (Array.isArray(v) ? v.length : 1), 0);
 w(`The vendored golden carries ${GOLD_ROWS} rows in ${Object.keys(GOLD).length} blocks and NOT ONE OF THEM IS PUBLISHED. \`provenance.published\` is ${String(GOLD.provenance.published)}, and the file says why in its own words, quoted in this digest's header. There is no published de Waard-Milliams case, no clause of either sour-service standard and no corrosion rate-band table anywhere in this repository, so a number recalled from memory would be the only alternative and that is not a published datum.`);
@@ -1513,7 +1691,7 @@ const BLOCK_NOTE = {
   categoryBands: 'the three band edges, as the oracle read them',
   categoryRows: 'the category word either side of all three bands, plus a non-finite rate',
   heldConstants: 'the oracle\'s own copy of every held constant, cross-pinned in section 3',
-  inhibitor: 'the inhibitor time average, rebuilt as an hour-by-hour duty cycle',
+  inhibitor: 'the corrosion inhibitor time average, rebuilt as an hour-by-hour duty cycle',
   inhibitorClamps: 'the three clamped inputs and the clamp count each produces',
   lifeRows: 'remaining life, reached by marching the wall loss forward rather than by dividing',
   lifeZeroRate: 'the zero-rate row, where the life is null and the verdict is null',
@@ -1556,7 +1734,7 @@ w();
 w('| route | independent because | cannot check |');
 w('| --- | --- | --- |');
 [['the series combination', 'solved by bisection on the reciprocal rather than formed as a reciprocal, with the residual identity checked separately', 'nothing'],
-  ['the inhibitor time average', 'rebuilt as an explicit 8760 hour duty cycle, which rounds to whole hours, so the agreement is loose and that looseness IS the independence', 'nothing'],
+  ['the corrosion inhibitor time average', 'rebuilt as an explicit 8760 hour duty cycle, which rounds to whole hours, so the agreement is loose and that looseness IS the independence', 'nothing'],
   ['the wall shear', 'reached through a momentum balance over a stated length, with the pipe force balance checked as an identity', 'the Blasius pair, the laminar constant and the branch switch'],
   ['the film onset', 'found by bisection on the unclamped expression and cross-checked against the closed form', 'the three scale constants'],
   ['the remaining life', 'reached by marching the wall loss forward in small steps rather than by dividing, held to one step absolute', 'nothing'],
@@ -1572,7 +1750,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 21 */
 
-w('# SECTION 21: What is HELD, what is NOT PROVIDED, and what this course therefore never grades (owned by Expert m01, and read by every writer before the first lesson)');
+w(sec(21, 'What is HELD, what is NOT PROVIDED, and what this course therefore never grades', ['advanced', 'm01'], 'and read by every writer before the first lesson'));
 w();
 w(`The engine exports its own list. \`HELD_FOR_LITERATURE\` carries ${C.HELD_FOR_LITERATURE.length} items, \`screen\` returns them in \`limits\`, and the studio prints them behind a disclosure. Verbatim, in the engine's order:`);
 w();
@@ -1672,7 +1850,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 24 */
 
-w('# SECTION 24: Units. The studio\'s field units, the engine\'s correlation units, and one factor that is truncated (owned by Associate m01 l05)');
+w(sec(24, 'Units. The studio\'s field units, the engine\'s correlation units, and one factor that is truncated', ['beginner', 'm01', 'l05']));
 w();
 w('The engine works in the units the correlations are published in: temperature in degrees Celsius, pressures in bar, rates in millimetres a year, velocity in metres a second, diameter in metres, density in kilograms a cubic metre and viscosity in pascal seconds. The studio takes Fahrenheit, psig, mol percent, feet a second, inches, pounds a cubic foot and centipoise, and converts. The conversions are the studio\'s own and they are listed here because a learner reading a number off the app needs to know which layer produced it.');
 w();
@@ -1702,7 +1880,7 @@ w();
 
 /* ------------------------------------------------------------ SECTION 25 */
 
-w('# SECTION 25: WHAT THIS ENGINE USED TO DO. THIS SECTION IS REPAIR HISTORY, and nothing follows it (owned by Expert m06)');
+w(sec(25, 'WHAT THIS ENGINE USED TO DO. THIS SECTION IS REPAIR HISTORY, and nothing follows it', ['advanced', 'm06']));
 w();
 w('# THIS SECTION, AND ONLY THIS SECTION, DESCRIBES BEHAVIOUR THIS ENGINE NO LONGER HAS. Every sentence above this line is about the engine as it ships today. Every sentence below is about what it did before the repair that preceded this course, and each item is a GENERAL LESSON that happens to have an example here. A sentence about former behaviour that reads as current behaviour is a defect, and the frame for this material is this heading and this paragraph.');
 w();

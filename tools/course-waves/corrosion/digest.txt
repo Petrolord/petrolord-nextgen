@@ -8,9 +8,9 @@
 
 # THE GOLDEN IS SYNTHETIC AND IT SAYS SO. golden provenance.published is false. The golden's own words: "No published de Waard-Milliams case, no MR0175 or ISO 15156 clause and no corrosion rate-band table exists anywhere in this repository, so every row here is SYNTHETIC. Route independence and the gate's pins carry the load instead. A number recalled from memory is not a published datum and none is typed here."
 
-# WHAT IS NEVER GRADED IN THIS COURSE. No corrosion rate the correlation produced, no rate category, no sour severity region, no material choice, no inspection interval and no retirement thickness. Section 21 lists every held item and section 3 pins every held constant. The eighteen graded capstone fields are the stream bookkeeping, the flow definition, the inhibitor arithmetic and the allowance arithmetic, and the capstone states any rate it needs from an inspection survey.
+# WHAT IS NEVER GRADED IN THIS COURSE. No corrosion rate the correlation produced, no rate category, no sour severity region, no material choice, no inspection interval and no retirement thickness. Section 21 lists every held item and section 3 pins every held constant. The eighteen graded capstone fields are the stream bookkeeping, the flow definition, the corrosion inhibitor arithmetic and the allowance arithmetic, and the capstone states any rate it needs from an inspection survey.
 
-# SECTION 1: What this engine computes, and what it refuses to compute (owned by Associate m01, and shared with Expert m01 because WHAT IS NOT HERE is that module's subject)
+# SECTION 1: What this engine computes, and what it refuses to compute (owned by Associate m01 and Expert m01, because WHAT IS NOT HERE is that module's subject)
 
 The engine is a CO2 corrosion rate screen with a remaining-life calculation on the end of it. It answers one question about one mechanism, and the list of what it does not answer is longer than the list of what it does.
 
@@ -23,7 +23,7 @@ The engine is a CO2 corrosion rate screen with a remaining-life calculation on t
 | `scaleFactor` | the protective-film multiplier, clamped at 1 | a temperature and a CO2 fugacity |
 | `scaleOnsetTC` | the temperature at which that multiplier leaves 1 | a CO2 fugacity |
 | `phFactor` | the pH multiplier and the reference it is taken against, or a refusal | an in-situ pH |
-| `corrosionRate` | the whole rate with every factor reported separately | the conditions, the wetting regime and the inhibitor programme |
+| `corrosionRate` | the whole rate with every factor reported separately | the conditions, the wetting regime and the corrosion inhibitor programme |
 | `wallShearStressPa` | the Reynolds number, the friction branch, the friction factor, the wall shear and a film-risk word | a velocity, a diameter, a density and a viscosity |
 | `sourServiceScreen` | the H2S partial pressure in bar and psia, the threshold in both, and whether the stream is above it | an H2S partial pressure |
 | `corrosionRegime` | which corrosion product governs, and whether the CO2 rate model applies at all | the H2S and CO2 partial pressures |
@@ -45,7 +45,7 @@ NOT_PROVIDED, verbatim from the engine:
 
 THE ONE RATE THIS ENGINE RETURNS IS A GENERAL UNIFORM RATE. It is not a pitting rate. It is not a weld rate and it is not a top-of-line rate, and the engine says so in the list above. A learner who reads a uniform rate as a wall-loss prediction for the worst spot on the line has read it wrong, and the engine cannot warn them because it has no localised model to compare against.
 
-# SECTION 2: THE WITHDRAWAL. A curve carrying a standard's name told engineers what steel to buy, and it was invented here (owned by Expert m06, and the headline lesson of this whole course)
+# SECTION 2: THE WITHDRAWAL. A curve carrying a standard's name told engineers what steel to buy, and it was invented here (owned by Associate m01 l02 and Expert m06 l01, and the headline lesson of this whole course)
 
 This section is about behaviour the engine SHIPS TODAY, which is a refusal to answer. It is not repair history: the absence is current, declared and permanent, and section 25 is where the history lives.
 
@@ -72,9 +72,9 @@ THE GENERAL LESSON, which is why this is the course's headline and not a footnot
 
 THE THRESHOLD VALUE ITSELF STAYED WHERE IT WAS. Changing a live number without a source would have repeated the same mistake with the sign flipped, so the engine keeps its threshold, declares it held, and prints it in both units so nobody has to guess which.
 
-# SECTION 3: The numbers this module stands on, MEASURED out of the engine rather than typed, and pinned against a third copy (shared by Associate m01 and Expert m01)
+# SECTION 3: The numbers this module stands on, MEASURED out of the engine rather than typed, and pinned against a third copy (owned by Associate m01 and Expert m01)
 
-NONE of these is sourced in this repository. Every one of them is HELD FOR LITERATURE, every one is measured below by asking the engine a question whose answer is that constant and nothing else, and every measured value is compared against a literal typed in this generator, which is a THIRD location. A constant that lives in the engine and in the oracle cannot be validated by comparing the engine with the oracle, and a paired battery proved that: fifteen of seventeen constants moved in both files at once left the suite green.
+NONE of these is sourced in this repository WITH ONE NAMED EXEMPTION, AND IT IS THE ROW CALLED 'the bar to psia factor'. That factor is exact by the definition of the bar and of the pound-force rather than held: section 24 derives it, section 21 grades a conversion through it, and the engine's own eleven-item held list does not name it. Every OTHER constant here is HELD FOR LITERATURE, every one is measured below by asking the engine a question whose answer is that constant and nothing else, and every measured value is compared against a literal typed in this generator, which is a THIRD location. A constant that lives in the engine and in the oracle cannot be validated by comparing the engine with the oracle, and a paired battery proved that: fifteen of seventeen constants moved in both files at once left the suite green.
 
 MEASURING RATHER THAN READING THE EXPORT IS DELIBERATE. An export tells you what the module declares. A measurement tells you what it actually uses. Both are below, and the two columns disagreeing would be a finding.
 
@@ -330,7 +330,7 @@ THE OIL-WET CASE WITHHOLDS ITS CATEGORY AND ITS LIFE, and it says why. The engin
 
 > the wetting regime is oil wet, so the rate is zero because that was assumed and not because it was calculated. An unbounded life off a dropdown is the strongest reassurance on the screen arriving from the weakest input.
 
-AND THE INHIBITION FIGURE IS `null` RATHER THAN ZERO: null. A reported zero percent inhibition on a line that has an inhibitor programme is a statement, and it would be a false one. There is nothing to be effective against when the rate is zero by assumption.
+AND THE INHIBITION FIGURE IS `null` RATHER THAN ZERO: null. A reported zero percent inhibition on a line that has a corrosion inhibitor programme is a statement, and it would be a false one. There is nothing to be effective against when the rate is zero by assumption.
 
 THE REGIME NAME IS MATCHED CASE AND PUNCTUATION INSENSITIVELY, and an unrecognised string refuses rather than falling through to the least limiting regime:
 | what was typed | what the engine did |
@@ -359,9 +359,9 @@ THE WATER CUT IS ONLY READ IN THE INTERMITTENT REGIME, and it is range checked t
 ONE ABSENT INPUT STILL REACHES A DEFAULT, AND IT IS WORTH KNOWING WHICH. `waterCutFrac` carries a DEFAULT PARAMETER of one in the engine signature, so an argument that is genuinely missing, rather than not-a-number, becomes a water cut of one hundred percent in the intermittent regime. A water cut typed as not-a-number refuses, which is what the studio layer produces from a blank box, so the live app is not exposed. A direct caller that omits the key is.
 Measured: with the key omitted the wetting factor is 1.000000 and the rate is 1.676428 mm/yr, the same as the water-wet answer. The direction is CONSERVATIVE, because a wetting factor of one is the most limiting value the regime can take, which is why it is recorded here rather than treated as a defect. The H2S mole fraction in section 17 has the same shape and the opposite direction.
 
-# SECTION 9: The inhibitor, and the arithmetic that surprises people (owned by Professional m02, and the one lesson this module exists to teach)
+# SECTION 9: The corrosion inhibitor, and the arithmetic that surprises people (owned by Professional m02, and the one lesson this module exists to teach)
 
-A 95 percent inhibitor running 80 percent of the time is not a 95 percent solution. The uninhibited rate applies for the fraction of the time the inhibitor is off, and it is that time average that eats the wall. The engine takes EFFICIENCY and AVAILABILITY as separate inputs and returns the effective protection, the shortfall in percentage points, and a warning that names the metal-loss ratio.
+A 95 percent corrosion inhibitor running 80 percent of the time is not a 95 percent solution. The uninhibited rate applies for the fraction of the time the corrosion inhibitor is off, and it is that time average that eats the wall. The engine takes EFFICIENCY and AVAILABILITY as separate inputs and returns the effective protection, the shortfall in percentage points, and a warning that names the metal-loss ratio.
 
 | efficiency percent | availability percent | effective protection percent | shortfall pp | rate mm/yr | metal loss against the datasheet number |
 | --- | --- | --- | --- | --- | --- |
@@ -374,7 +374,7 @@ A 95 percent inhibitor running 80 percent of the time is not a 95 percent soluti
 | 95.000000 | 50.000000 | 47.500000 | 47.500000 | 0.880125 | 10.500000 |
 | 95.000000 | 25.000000 | 23.750000 | 71.250000 | 1.278276 | 15.250000 |
 
-READ THE 80 PERCENT ROW TWICE. A 95 percent inhibitor at 80 percent availability delivers 76.000000 percent effective protection, which is 19.000000 percentage points short of the datasheet figure, and the metal loss is 4.800000 times what the datasheet number would give. AVAILABILITY IS WHAT LIMITS IT. Efficiency does not. The engine's own warning on that case, verbatim:
+READ THE 80 PERCENT ROW TWICE. A 95 percent corrosion inhibitor at 80 percent availability delivers 76.000000 percent effective protection, which is 19.000000 percentage points short of the datasheet figure, and the metal loss is 4.800000 times what the datasheet number would give. AVAILABILITY IS WHAT LIMITS IT. Efficiency does not. The engine's own warning on that case, verbatim:
 
 > a 95 percent inhibitor at 80 percent availability gives 76.0 percent effective protection, which is 4.80 times the metal loss of the datasheet number: availability, not efficiency, is what limits it
 
@@ -479,7 +479,7 @@ AND THE BINDING CONSTRAINT NAMES THE SHEAR, so the summary and the rate do not d
 | the velocity | screening incomplete: the inhibitor film survival check did not run. wall shear stress needs a positive velocity |
 | the line inside diameter | screening incomplete: the inhibitor film survival check did not run. wall shear stress needs a positive line inside diameter |
 
-# SECTION 12: H2S, a threshold comparison, and nothing more (owned by Professional m05)
+# SECTION 12: H2S, a threshold comparison, and nothing more (owned by Professional m06 l03)
 
 This door compares one partial pressure against one threshold and reports the comparison in two units. It does not classify severity and it does not choose a material. Section 2 is why.
 
@@ -556,7 +556,7 @@ THE MIXED REGIME STAYS GRADED AND IS MARKED. It sets `rateIsUpperBound` and carr
 
 > mixed sulphide and carbonate films: the CO2 rate is an upper bound and the real rate depends on which film persists
 
-# SECTION 14: The allowance, the remaining life, and a zero rate that is not a pass (owned by Expert m02)
+# SECTION 14: The allowance, the remaining life, and a zero rate that is not a pass (owned by Professional m05 and Expert m02 l04 and m05 l03 and l04)
 
 This door divides a remaining allowance by a rate and stops. That is its whole scope, and what it does NOT do is the subject of section 21.
 
@@ -673,7 +673,7 @@ THE ORDER IS THE CLAIM. The engine checks, in this sequence: does the model appl
 
 A BINDING CONSTRAINT IS NOT A RECOMMENDATION. It names the limit that governs the number, and it is silent about what to buy, when to inspect and what thickness to retire at, because the module has none of those.
 
-# SECTION 17: The whole screening in one call, and the order that makes it honest (owned by Expert m05)
+# SECTION 17: The whole screening in one call, and the order that makes it honest (owned by Expert m04 and m05)
 
 `screen` returns 18 top-level fields. The order in which it computes them is the design decision: the wall shear FIRST, because the rate depends on whether the film survives it, then the rate, then the credited rate beside it, then the sour comparison, then the regime, then the withholding, then the category, then the life, then the binding constraint.
 
@@ -733,7 +733,7 @@ THE SUM GUARD IS THE ONE PEOPLE MISS. Two mole fractions each inside nought to o
 
 A sum of exactly one is accepted: CO2 0.600000 and H2S 0.400000 give a partial pressure sum of 51.000427 bar against a total of 51.000427 bar, and the screening runs.
 
-# SECTION 18: Every refusal this module can produce, in one table (owned by Expert m05 l04)
+# SECTION 18: Every refusal this module can produce, in one table (owned by Expert m05)
 
 A refusal is the module telling you it cannot answer, and the difference between a refusal and a least-limiting default is the difference between a screening tool and a liability. Every row below is a call this generator made, labelled a refusal, and asserted to have returned an error key and no non-finite number alongside it.
 
@@ -780,7 +780,7 @@ A typed zero: rate 0.000000 mm/yr, `rateApplies` false, category null, life null
 
 A blank box, on the same screen: a finite CO2 mole fraction is required
 
-# SECTION 19: The live studio's own defaults, end to end, and every number a user has been shown (owned by Associate m06, and shared with Professional m06)
+# SECTION 19: The live studio's own defaults, end to end, and every number a user has been shown (owned by Associate m06 and Professional m05 and m06)
 
 The Corrosion & Integrity Studio ships with a case already filled in, so the first thing any user sees is this. Every figure below is this generator running the engine on the studio's own default inputs, converted with the studio's own factors, which are stated in section 24.
 
@@ -879,7 +879,20 @@ EVERY RATE ON THAT SCREEN NOW CARRIES MPY BESIDE MM/YR, because every input on i
 | the reaction term | 44.225132 | 1741.146915 |
 | the mass-transfer term | 11.701938 | 460.706213 |
 
-# SECTION 20: What the vendored cases can and cannot discriminate (owned by Expert m01 l05 and Expert m05 l02)
+AND THE SAME CASE WITH A CONSUMED DEPTH TYPED IN, because the shipped case consumes 0.000000 mm and at that depth two of these four fields cannot be told apart by reading them. Type 1.270000 mm of consumed depth into the box, which is 0.05 in against the studio's own 0.125 in allowance, and change nothing else:
+
+| field | at the shipped defaults | with 0.05 in consumed | did it move |
+| --- | --- | --- | --- |
+| remaining allowance mm | 3.175000 | 1.905000 | yes |
+| remaining life yr | 4.207953 | 2.524772 | yes |
+| allowance the design life demands mm | 15.090473 | 15.090473 | no |
+| shortfall mm | 11.915473 | 13.185473 | yes |
+
+THE FIELD THAT DID NOT MOVE IS THE ONE THAT IGNORES WHAT HAS ALREADY GONE. The allowance the design life demands is the rate times the design life and nothing else, so it is the allowance a NEW line would need and it stays at 15.090473 mm at both depths. The remaining allowance and the remaining life fall with the consumed depth, and the shortfall rises by 1.270000 mm, which is EXACTLY the consumed depth typed in. This generator asserts both of those on every rebuild. The rate is unchanged at 0.754524 mm/yr, because the consumed depth reaches none of the rate chain. The binding constraint is still the corrosion allowance against the design life, and the engine's own sentence for it now reads:
+
+> at 0.755 mm/yr the allowance runs out in 2.5 years against a 20 year design life, short by 13.19 mm of allowance.
+
+# SECTION 20: What the vendored cases can and cannot discriminate (owned by Expert m01 l05 and m05 l02)
 
 The vendored golden carries 110 rows in 17 blocks and NOT ONE OF THEM IS PUBLISHED. `provenance.published` is false, and the file says why in its own words, quoted in this digest's header. There is no published de Waard-Milliams case, no clause of either sour-service standard and no corrosion rate-band table anywhere in this repository, so a number recalled from memory would be the only alternative and that is not a published datum.
 
@@ -889,7 +902,7 @@ The vendored golden carries 110 rows in 17 blocks and NOT ONE OF THEM IS PUBLISH
 | `categoryBands` | 1 | the three band edges, as the oracle read them |
 | `categoryRows` | 12 | the category word either side of all three bands, plus a non-finite rate |
 | `heldConstants` | 1 | the oracle's own copy of every held constant, cross-pinned in section 3 |
-| `inhibitor` | 9 | the inhibitor time average, rebuilt as an hour-by-hour duty cycle |
+| `inhibitor` | 9 | the corrosion inhibitor time average, rebuilt as an hour-by-hour duty cycle |
 | `inhibitorClamps` | 3 | the three clamped inputs and the clamp count each produces |
 | `lifeRows` | 5 | remaining life, reached by marching the wall loss forward rather than by dividing |
 | `lifeZeroRate` | 1 | the zero-rate row, where the life is null and the verdict is null |
@@ -930,7 +943,7 @@ WHAT THE ROUTES BEHIND THOSE NUMBERS ACTUALLY PROVE, and what they cannot. The o
 | route | independent because | cannot check |
 | --- | --- | --- |
 | the series combination | solved by bisection on the reciprocal rather than formed as a reciprocal, with the residual identity checked separately | nothing |
-| the inhibitor time average | rebuilt as an explicit 8760 hour duty cycle, which rounds to whole hours, so the agreement is loose and that looseness IS the independence | nothing |
+| the corrosion inhibitor time average | rebuilt as an explicit 8760 hour duty cycle, which rounds to whole hours, so the agreement is loose and that looseness IS the independence | nothing |
 | the wall shear | reached through a momentum balance over a stated length, with the pipe force balance checked as an identity | the Blasius pair, the laminar constant and the branch switch |
 | the film onset | found by bisection on the unclamped expression and cross-checked against the closed form | the three scale constants |
 | the remaining life | reached by marching the wall loss forward in small steps rather than by dividing, held to one step absolute | nothing |

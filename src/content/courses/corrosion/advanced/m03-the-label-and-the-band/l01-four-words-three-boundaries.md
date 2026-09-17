@@ -16,7 +16,7 @@ There is a fourth boundary and it is zero itself, and the golden carries both si
 
 A blank rate returns null. A rate that is not a number returns null. Both of those are the door declining to label something it has not been given.
 
-A negative rate returns negligible, and that one is different in kind. It is an answer rather than a refusal, and it is the most reassuring word in the vocabulary, produced from an input that cannot be a corrosion rate. Nothing upstream in the whole screening door will hand it a negative rate, so the shape does not reach the studio. It is still the shape to look for: a function that answers where it could decline, with the least alarming answer available.
+A negative rate returns negligible, and that one is different in kind. It is an answer rather than a refusal, and it is the most reassuring word in the vocabulary, produced from an input that cannot be a corrosion rate. What the digest records is the behaviour of the door itself, and it says nothing about what any caller hands it. It is the shape to look for: a function that answers where it could decline, with the least alarming answer available.
 
 ## Why the word is not a measurement
 

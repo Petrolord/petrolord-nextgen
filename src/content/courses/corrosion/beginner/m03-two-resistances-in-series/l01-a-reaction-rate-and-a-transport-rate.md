@@ -4,7 +4,7 @@
 
 The rate this engine reports is neither of the two rates it computes on the way. It calculates a reaction term, which is how fast the surface chemistry can consume iron at the given temperature and carbon dioxide fugacity, and a transport term, which is how fast the flow can bring reactant to the wall and carry product away. Then it combines them.
 
-On the shipped case the reaction term is 44.225132 mm/yr and the transport term is 11.701938 mm/yr. The combined figure is 9.253475 mm/yr, and the engine names transport as the controlling step. The rate the screen finally prints, 0.754524 mm/yr, is that combined figure after the pH correction, the wetting regime and the corrosion inhibitor credit have been applied to it.
+On the shipped case the reaction term is 44.225132 mm/yr and the transport term is 11.701938 mm/yr. The combined figure is 9.253475 mm/yr, and the engine names transport as the controlling step. The rate the screen finally prints, 0.754524 mm/yr, is that combined figure after the protective film factor, the pH correction, the wetting regime and the corrosion inhibitor credit are applied. Its film factor is 1.000000000000, so it moves nothing and is one of the four.
 
 ## Two different physical questions
 

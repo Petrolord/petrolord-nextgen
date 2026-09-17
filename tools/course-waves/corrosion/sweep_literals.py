@@ -15,12 +15,22 @@ EVERY EXPLANATION IN A LIVE COURSE, WAS NEVER EXAMINED. This file sweeps all
 three, it says how many of each, and its --selftest plants a literal in a
 PROMPT, in an EXPLANATION and in an OPTION and requires all three to be found.
 
-WHAT RESOLVES A LITERAL:
+WHAT RESOLVES A LITERAL, AND IT IS THREE THINGS RATHER THAN FOUR:
   1. the digest, at any of the precisions the digest prints;
   2. the wave's declared constants, from wave.json's constants block;
-  3. a stated input of the bank's own tier, which a question is allowed to
-     restate;
-  4. a small integer or an ordinal, which carries no engine claim.
+  3. a small integer or an ordinal, which carries no engine claim.
+
+AND A FOURTH THAT THIS DOCSTRING USED TO PROMISE AND THIS FILE NEVER HAD. It
+listed "a stated input of the bank's own tier, which a question is allowed to
+restate" as resolver 3. There is no stated-inputs path anywhere in this file:
+`sweep_question` tests a literal against SMALL, DIGEST_OK and CONSTANTS_OK and
+against nothing else, and every stated input a bank restates has in fact been
+resolving through the digest, which prints them. A writer who read that line
+and planned a question around a resolver that does not exist would have been
+told the literal was unresolved with no way to see why. The promise is removed
+rather than implemented: adding a fourth resolver widens what passes, and this
+gate's whole value is that a figure a course prints is a figure the digest
+prints.
 
 WHAT DOES NOT RESOLVE A LITERAL, and this is the point:
   * a graded capstone answer. That is a LEAK and it is reported separately and
@@ -199,7 +209,10 @@ def main():
             p = os.path.join(root, n)
             files.append(p)
             data = json.load(io.open(p, encoding='utf-8'))
-            qs = data.get('questions', data if isinstance(data, list) else [])
+            # A bank emitted by bankkit is a BARE LIST. This line called .get on it and
+            # crashed with an AttributeError rather than sweeping anything, which is a
+            # gate that cannot run reported as a traceback. Both shapes are read now.
+            qs = data.get('questions', []) if isinstance(data, dict) else (data if isinstance(data, list) else [])
             for i, q in enumerate(qs, 1):
                 pk, un, lk = sweep_question(q, f'{n} Q{i}', TIER or '')
                 for k, v in pk.items():

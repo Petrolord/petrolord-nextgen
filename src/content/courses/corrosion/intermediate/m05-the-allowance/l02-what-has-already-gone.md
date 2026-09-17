@@ -8,9 +8,19 @@ mm, so the corrosion allowance of 3.175000 mm and the remaining allowance of
 3.175000 mm are the same figure, and a reader can go a long way without
 noticing that they are two separate quantities.
 
-Put a consumed depth into the box and they separate. The remaining allowance
-falls by whatever has gone, and the remaining life falls with it, because the
-life is the remaining allowance divided by the rate.
+Put a consumed depth into the box and they separate. The digest carries the
+shipped case with 1.270000 mm typed into that box, which is 0.05 in against the
+studio's own 0.125 in allowance, and nothing else changed:
+
+| field | at the shipped defaults | with 0.05 in consumed | did it move |
+| --- | --- | --- | --- |
+| remaining allowance mm | 3.175000 | 1.905000 | yes |
+| remaining life yr | 4.207953 | 2.524772 | yes |
+| allowance the design life demands mm | 15.090473 | 15.090473 | no |
+| shortfall mm | 11.915473 | 13.185473 | yes |
+
+Three moved and one did not, and which one did not is the lesson. The shortfall
+rose by exactly the consumed depth, and the rate did not move at all.
 
 ## The field that does not move
 
@@ -21,7 +31,7 @@ because it is not a statement about this line's history. On the shipped case it
 is 15.090473 mm against a corrosion allowance of 3.175000 mm.
 
 So the consumed depth moves the remaining allowance and the remaining life, and
-leaves the required allowance where it was. Two fields that both sound like
+leaves the required allowance where it was at 15.090473 mm on both readings. Two fields that both sound like
 allowances answer two different questions, and only one of them is affected by
 the history of the wall.
 

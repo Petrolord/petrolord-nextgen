@@ -387,6 +387,7 @@
       "gate_collisions.mjs",
       "gate_capstone_leak.py",
       "gate_copy_rule.py",
+      "gate_vocabulary.py",
       "gate_typed_literals.py",
       "gate_movement.mjs",
       "gate_wavejson.mjs",
@@ -406,7 +407,7 @@
       "PANELS.md"
     ],
     "pins": {
-      "digest.txt": "c735d3c63d7befa119f50de265f9c741793ff005d6abd8bad934fad5efe53c65",
+      "digest.txt": "77dfa8d35f34adf6979259a3d90a1f97e03c91e252a194e72aea020f4b8adb7b",
       "fields.json": "44edd802bdf49afb88e53f25290de25b3ded9296e092767b5ea980ea17ebf98f"
     },
     "note": "FULL kit. Everything this wave is rebuilt from is committed: the digest and its generator, the teaching streams, the capstone generator, the answer key and its precision declaration, every gate that reads either, the build and re-pin scripts, the structure and scaffold, and all five writer briefs. The gates read /root paths by DEFAULT and every one takes an override, which is what makes the committed copy the thing the vitest suites read on a CI runner."
