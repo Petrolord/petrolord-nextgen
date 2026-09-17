@@ -25,10 +25,16 @@ problems. Do not add, rename or reorder a lesson: change `structure.py` and re-r
 it.
 
 Each lesson carries between its own minimum and 560 PROSE WORDS. The minimum is
-derived from `est_minutes`: 420 at 12 minutes, 460 at 13, 500 at 14. PROSE WORDS
-means front matter, markdown table rows, headings and panel lines are all
-excluded. A raw word count over the whole file is a different measure and runs
-materially higher, so say which measure before quoting a number at anyone.
+derived from `est_minutes`: 420 at 12 minutes, 460 at 13, 500 at 14, and the same
+three numbers are written into every lesson's `min_prose_words` in the manifest.
+PROSE WORDS IS WHAT `lengths.py` COUNTS, and this paragraph is written from the
+code rather than from an intention: front matter, markdown TABLE ROWS (a line
+starting with a pipe) and PANEL lines (a line starting with `{{panel`) are
+excluded, and HEADINGS ARE COUNTED. This file and the scaffold text both used to
+say headings were excluded, which the counter never did, and a writer who
+believed either ran twenty to forty words light on every lesson. A raw word count
+over the whole file is a third measure again and runs materially higher, so say
+which measure before quoting a number at anyone.
 
 A lesson keeps the H1 that `scaffold.py` wrote, which is the lesson title exactly,
 and the panel line where `structure.py` says one goes. Replace the body.

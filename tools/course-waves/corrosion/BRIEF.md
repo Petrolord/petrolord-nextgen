@@ -130,7 +130,13 @@ Reynolds number.
 
 **The sour threshold is not 0.05 psia.** Measured out of the engine it is
 0.050763208303 psia, and a threshold of exactly 0.05 psia would be
-0.003447378640 bar, 1.526417 percent below the one the engine uses.
+0.003447378640 bar. The digest computes TWO relationships for that pair and
+they have different bases, so quote whichever section you are teaching from
+and never weld one's figure to the other's wording. Section 3: the gap
+between the two, as a fraction of THE SMALLER, is 1.526417 percent. Section
+24: 0.003447378640 bar is 1.503467 percent BELOW THE THRESHOLD THE ENGINE
+ACTUALLY USES. An earlier draft of this brief paired 1.526417 with Section
+24's wording, which is false, and all three lesson writers caught it.
 
 **And one Suite conversion factor is truncated.** The studio divides a psig
 pressure by 14.5038; the engine exports 14.503773800722, exact by definition. The

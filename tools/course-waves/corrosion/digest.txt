@@ -599,7 +599,7 @@ With the design life left out: remaining years 13.333333, `meetsDesignLife` null
 
 # SECTION 15: The rate category is a LABEL, and the label is held (owned by Expert m03)
 
-Four words, three boundaries, no source. The engine says in its own held list that the bands are looser than those commonly cited for carbon steel in production service, so a label here may be optimistic by one or two steps.
+Four BAND words separated by three boundaries, and a fifth word that is not a band at all. The four bands are low, moderate, high and severe. The fifth word is negligible, and it is what the door returns at exactly zero and below rather than a band it reaches by being small. Counting zero itself there are four boundaries, and no source for any of them. The engine says in its own held list that the bands are looser than those commonly cited for carbon steel in production service, so a label here may be optimistic by one or two steps.
 
 | rate mm/yr | category |
 | --- | --- |
@@ -631,7 +631,7 @@ THE GOLDEN CARRIES 12 CATEGORY ROWS, both sides of all three bands. Read from th
 | golden rate mm/yr | golden category | engine category | agree |
 | --- | --- | --- | --- |
 | 0.000000 | negligible | negligible | yes |
-| 0.000000 | low | low | yes |
+| 0.000000001 | low | low | yes |
 | 0.099900 | low | low | yes |
 | 0.100000 | moderate | moderate | yes |
 | 0.100100 | moderate | moderate | yes |
@@ -642,6 +642,8 @@ THE GOLDEN CARRIES 12 CATEGORY ROWS, both sides of all three bands. Read from th
 | 1.000000 | severe | severe | yes |
 | 1.000100 | severe | severe | yes |
 | 12.300000 | severe | severe | yes |
+
+THE FOURTH BOUNDARY IS ZERO ITSELF, AND THE GOLDEN IS WHERE IT IS PINNED. The first two rows above are the two sides of it. At exactly 0.000000 mm/yr the word is negligible, and at 0.000000001 mm/yr, which is the smallest positive rate the golden carries, the word is already low. The test the engine applies is whether the rate is greater than zero, so there is no small-but-positive rate that comes back negligible: a rate is negligible when it is zero or below and low the instant it is not. The second row is the only row in this table printed past six decimals, because at six decimals it would read 0.000000 and a reader would see the row above it twice.
 
 READ THE APP'S OWN DEFAULT ROW. At the shipped defaults the rate is 0.754524 mm/yr and the label is "high". A band set one step tighter would call the same number something worse, and nothing in this repository says which band set is right. That is what "held" means in practice: the word on the screen is not a measurement.
 

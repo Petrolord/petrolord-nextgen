@@ -73,6 +73,43 @@ Digest section 22 is binding on every prompt, every option and every explanation
 A sibling course shipped one word carrying three different quantities and it had
 to be gated out afterwards. These three are named before you meet them.
 
+## THE CAPSTONE CONDITIONS, AND THE DECISION IS SETTLED: YOU DO NOT RESTATE THEM
+
+The three capstone scenarios live in `fc9_capstone.mjs` and NOTHING ABOUT THEM IS
+IN `digest.txt`. Not a plant name, not a temperature, not an allowance, not a
+design life. That is deliberate, it is gated, and this section exists because the
+Expert lesson writer hit it and asked.
+
+**It was considered and rejected to add a stated-conditions section to the
+digest.** `gate_capstone_leak.py` fails on two separate directions if anyone
+does: direction one fails a digest carrying any condition value out of the three
+frozen scenarios, and direction four fails a digest naming any of the three
+plants. Both were re-run against this digest while this decision was taken and
+both are clean. A digest that carried the conditions would be a digest a learner
+could work the graded capstone out of.
+
+**And the fallback does not exist either, so do not reach for it.** The lesson and
+bank sweeps have no stated-inputs path. `litsweep.py` resolves a literal by
+verbatim whole-number presence in `digest.txt` and by nothing else; its only
+escape hatch is the `constants` block of `wave.json`, which in this wave holds
+held correlation constants and not one capstone condition. A figure stated in
+your own prompt resolves against nothing and is reported as a bad literal. That
+was checked by reading the gate rather than assumed.
+
+**So: no question in any of the three banks names a capstone plant or carries a
+capstone condition at any precision.** A question that wants the capstone's
+subject teaches the METHOD with the digest's own worked cases, which is what the
+merged FC1 separation banks and its Professional capstone lesson do: the order of
+the chain, what each step needs from the one before it, what a complete answer
+contains, and which of the module's own limits governs. The shipped default case
+in section 19, the corrosion inhibitor arithmetic in section 9, the shear
+coupling in sections 11 and 19 and the sulphide withholding in section 13 are all
+in the digest and all fair game.
+
+The conditions reach the learner on the capstone surface itself, authored from
+`fc9_capstone.mjs`, which is where the capstone states them in the engine's units.
+That is a later phase and it is not the bank's business.
+
 ## NO LEAKS
 
 No question may carry a graded capstone answer at any precision.

@@ -6,9 +6,11 @@ The category door takes a rate in millimetres a year and returns one word. That 
 
 ## The shape of it
 
-There are four words and three edges between them. Below the first edge the label is negligible. Between the first and the second it is low. Between the second and the third it is moderate, then high, then severe above the last. The boundaries measured by bisecting the word are 0.100000000000, 0.500000000000 and 1.000000000000 mm/yr.
+There are four band words with three edges between them, and a fifth word that is no band at all. The four bands run low, moderate, high and severe, and the edges measured by bisecting the word are 0.100000000000, 0.500000000000 and 1.000000000000 mm/yr. The fifth word is negligible, and the door returns it at exactly zero and below.
 
 Each boundary is at-or-above. A rate of 0.099900 mm/yr comes back low and 0.100000 mm/yr comes back moderate. A rate of 0.499900 mm/yr is moderate and 0.500000 mm/yr is high. A rate of 0.999900 mm/yr is high and 1.000000 mm/yr is severe. The golden carries rows on both sides of all three edges and the engine agrees with every one of them.
+
+There is a fourth boundary and it is zero itself, and the golden carries both sides of it. At exactly 0.000000 mm/yr the word is negligible, and at 0.000000001 mm/yr, the smallest positive rate the golden holds, the word is already low. The engine tests whether the rate is greater than zero, so no rate comes back negligible for being small. A rate is negligible when it is zero or below and low the instant it is not.
 
 ## Three edge behaviours worth knowing
 
@@ -18,7 +20,7 @@ A negative rate returns negligible, and that one is different in kind. It is an 
 
 ## Why the word is not a measurement
 
-All three boundaries are held. The engine says so in its own held list and returns `categoryHeld` true beside the word on every screening. No source anywhere in this repository fixes those three numbers, and the engine adds that the bands may be optimistic by one or two steps against the bands commonly cited for carbon steel in production service.
+All three band edges are held. The engine says so in its own held list and returns `categoryHeld` true beside the word on every screening. No source anywhere in this repository fixes those three numbers, and the engine adds that the bands may be optimistic by one or two steps against the bands commonly cited for carbon steel in production service.
 
 So the label is a rendering convention applied to a rate. Move the three edges and every word on every screen moves with them, while not one rate changes. That is why no graded field in this course is a category, and why the panel beside this lesson shows the word without presenting it as a measurement.
 

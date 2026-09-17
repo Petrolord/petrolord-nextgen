@@ -119,7 +119,11 @@ check('the vendored engine is sha-identical with the commit enginesVendoredAt na
     const m = /petrolord-engines ([0-9a-f]{7,40})/.exec(WAVE.enginesVendoredAt);
     if (!m) return false;
     try {
-      const want = execFileSync('git', ['-C', '/root/wt-fc9f-engines', 'rev-parse', `${m[1]}:engines/facilities/corrosion.js`], { encoding: 'utf8' }).trim();
+      // The canonical clone. A /root path is the DEFAULT here and not a hard wire:
+      // every gate in this wave takes an override, which is what makes the
+      // committed copy the thing a CI runner reads.
+      const clone = process.env.FC9_CANONICAL || '/root/wt-fc9f-engines';
+      const want = execFileSync('git', ['-C', clone, 'rev-parse', `${m[1]}:engines/facilities/corrosion.js`], { encoding: 'utf8' }).trim();
       const got = execFileSync('git', ['-C', NG, 'hash-object', 'packages/engines/engines/facilities/corrosion.js'], { encoding: 'utf8' }).trim();
       return want === got;
     } catch { return false; }

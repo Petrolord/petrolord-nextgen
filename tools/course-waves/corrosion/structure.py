@@ -123,10 +123,14 @@
 # PER-LESSON WORD COUNTS.
 #
 # THE BAND IS 420 TO 560 PROSE WORDS for every lesson in this wave, and the
-# measure is PROSE WORDS ONLY, with front matter, markdown table rows, headings
-# and {{panel:...}} lines all excluded. A raw `wc -w` over the whole file is NOT
-# this measure and runs materially higher, so a lesson can be inside the band and
-# still fail a raw word count. Say which measure before quoting a number.
+# measure is PROSE WORDS ONLY, with front matter, markdown table rows and
+# {{panel:...}} lines excluded and HEADINGS COUNTED. This comment used to say
+# headings were excluded as well, and lengths.py, which is the code that actually
+# counts, has never excluded them: a writer who believed the comment ran twenty
+# to forty words light against the floor on every lesson. A raw `wc -w` over the
+# whole file is a third measure again and runs materially higher, so a lesson can
+# be inside the band and still fail a raw word count. Say which measure before
+# quoting a number.
 #
 # The MINIMUM is per lesson and is DERIVED from the estimated minutes rather than
 # typed, so the ranking by est_minutes and the ranking by length cannot disagree.

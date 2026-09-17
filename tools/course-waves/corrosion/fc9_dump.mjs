@@ -1170,7 +1170,7 @@ w();
 
 w('# SECTION 15: The rate category is a LABEL, and the label is held (owned by Expert m03)');
 w();
-w('Four words, three boundaries, no source. The engine says in its own held list that the bands are looser than those commonly cited for carbon steel in production service, so a label here may be optimistic by one or two steps.');
+w('Four BAND words separated by three boundaries, and a fifth word that is not a band at all. The four bands are low, moderate, high and severe. The fifth word is negligible, and it is what the door returns at exactly zero and below rather than a band it reaches by being small. Counting zero itself there are four boundaries, and no source for any of them. The engine says in its own held list that the bands are looser than those commonly cited for carbon steel in production service, so a label here may be optimistic by one or two steps.');
 w();
 w('| rate mm/yr | category |');
 w('| --- | --- |');
@@ -1188,6 +1188,27 @@ w(`THE BOUNDARIES, MEASURED BY BISECTING THE WORD: ${e12(CAT_LOW)}, ${e12(CAT_MO
 w();
 w(`> ${C.HELD_FOR_LITERATURE.find((s) => s.includes('rate category bands'))}`);
 w();
+// A GOLDEN RATE PRINTED AT SIX DECIMALS CAN READ AS A NUMBER IT IS NOT, AND
+// THIS TABLE IS WHERE IT DID. The golden's second category row is a rate of one
+// part in a thousand million mm/yr, which e6 renders as 0.000000: the same
+// string the first row's exact zero renders as. The two rows then appeared to
+// give ONE rate TWO different words, one row above the other, in the section
+// that teaches where the words change. The row was always right and the
+// RENDERING was wrong.
+//
+// So the rate column of THIS ONE TABLE widens past the six decimals the header
+// declares, and only as far as it has to: the printed form is the shortest
+// fixed-decimal rendering that reads back as the number it came from. Every
+// other row in it still prints at six, because six already round-trips them.
+// The widening is asserted rather than assumed, twice, below the table.
+const eWide = (x) => {
+  for (let d = 6; d <= 20; d += 1) {
+    const s = n(x, d);
+    if (Number(s) === Number(x)) return s;
+  }
+  return String(x);
+};
+
 const GOLD_CAT = GOLD.categoryRows.filter((r) => Number.isFinite(r.rateMmYr));
 w(`THE GOLDEN CARRIES ${GOLD.categoryRows.length} CATEGORY ROWS, both sides of all three bands. Read from the file and re-run through the engine:`);
 w();
@@ -1196,8 +1217,21 @@ w('| --- | --- | --- | --- |');
 GOLD_CAT.forEach((r) => {
   const got = C.rateCategory(r.rateMmYr);
   must(`the golden category row at ${r.rateMmYr} agrees with the engine`, got === r.category, `${got} against ${r.category}`);
-  w(`| ${e6(r.rateMmYr)} | ${r.category} | ${String(got)} | ${got === r.category ? 'yes' : 'NO'} |`);
+  w(`| ${eWide(r.rateMmYr)} | ${r.category} | ${String(got)} | ${got === r.category ? 'yes' : 'NO'} |`);
 });
+w();
+must('EVERY GOLDEN CATEGORY RATE READS BACK AS THE NUMBER IT WAS PRINTED FROM',
+  GOLD_CAT.every((r) => Number(eWide(r.rateMmYr)) === Number(r.rateMmYr)),
+  GOLD_CAT.map((r) => eWide(r.rateMmYr)).join(' '));
+const CAT_ZERO = GOLD_CAT.find((r) => r.rateMmYr === 0);
+const CAT_TINY = GOLD_CAT.filter((r) => r.rateMmYr > 0).sort((a, b) => a.rateMmYr - b.rateMmYr)[0];
+must('THE GOLDEN CARRIES BOTH SIDES OF THE ZERO BOUNDARY AND THE TWO SIDES CARRY DIFFERENT WORDS',
+  CAT_ZERO && CAT_TINY && CAT_ZERO.category !== CAT_TINY.category,
+  `${CAT_ZERO && CAT_ZERO.category} against ${CAT_TINY && CAT_TINY.category}`);
+must('THE ZERO ROW AND THE SMALLEST POSITIVE ROW PRINT AS DIFFERENT STRINGS',
+  eWide(CAT_ZERO.rateMmYr) !== eWide(CAT_TINY.rateMmYr),
+  `${eWide(CAT_ZERO.rateMmYr)} against ${eWide(CAT_TINY.rateMmYr)}`);
+w(`THE FOURTH BOUNDARY IS ZERO ITSELF, AND THE GOLDEN IS WHERE IT IS PINNED. The first two rows above are the two sides of it. At exactly ${eWide(CAT_ZERO.rateMmYr)} mm/yr the word is ${CAT_ZERO.category}, and at ${eWide(CAT_TINY.rateMmYr)} mm/yr, which is the smallest positive rate the golden carries, the word is already ${CAT_TINY.category}. The test the engine applies is whether the rate is greater than zero, so there is no small-but-positive rate that comes back ${CAT_ZERO.category}: a rate is ${CAT_ZERO.category} when it is zero or below and ${CAT_TINY.category} the instant it is not. The second row is the only row in this table printed past six decimals, because at six decimals it would read ${e6(CAT_TINY.rateMmYr)} and a reader would see the row above it twice.`);
 w();
 w(`READ THE APP'S OWN DEFAULT ROW. At the shipped defaults the rate is ${e6(AP.rate.rateMmYr)} mm/yr and the label is "${AP.category}". A band set one step tighter would call the same number something worse, and nothing in this repository says which band set is right. That is what "held" means in practice: the word on the screen is not a measurement.`);
 w();
