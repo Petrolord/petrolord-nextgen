@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "What is `requiredAllowanceMm`, exactly?",
+  "options": [
+   "The rate times the design life less whatever has already been consumed, which is the allowance the line still has to find before it meets its design life.",
+   "The remaining allowance divided by the design life, which is what a year of service takes.",
+   "The rate times the design life, which is the allowance a new line would need. It does not know the allowance the line has or what has been consumed.",
+   "The allowance that makes `meetsDesignLife` turn true, found inside the door."
+  ],
+  "answer": 2,
+  "explanation": "It is a property of the rate and the design life alone. On the worked case at a stated 0.250000 mm/yr with a 20 year design life it is 5.000000 mm, whatever the allowance and the consumed depth happen to be."
+ },
+ {
+  "prompt": "A line has a 4 mm allowance with 1.2 mm gone, a 20 year design life and a stated rate of 0.250000 mm/yr. What allowance reinstates the design life?",
+  "options": [
+   "6.200000 mm, found by bisecting the total allowance until `meetsDesignLife` turns true.",
+   "5.000000 mm, which is `requiredAllowanceMm` on this case and is the allowance the door names when it is asked what the design life demands.",
+   "2.200000 mm, which is the shortfall on this case and is the amount the allowance falls short of what the design life asks of it.",
+   "2.800000 mm, which is the remaining allowance on this case and is what the line still has available to lose over the years ahead of it."
+  ],
+  "answer": 0,
+  "explanation": "Three quantities sit side by side here and only one of them reinstates the design life. `requiredAllowanceMm` is 5.000000 mm, the remaining allowance is 2.800000 mm and the shortfall is 2.200000 mm."
+ },
+ {
+  "prompt": "On that same case `requiredAllowanceMm` is 5.000000 mm and the reinstating allowance is 6.200000 mm. Why is the gap exactly 1.2 mm?",
+  "options": [
+   "Because the shortfall of 2.200000 mm is split between the two figures, and the part of it the remaining allowance already covers is the difference between them.",
+   "Because the bisection converges from above and stops one step short, so the gap is the width of the last bracket rather than a quantity with a meaning.",
+   "Because the rate of 0.250000 mm/yr is applied over the design life twice.",
+   "The required figure measures a new line and the reinstating figure measures this one, so they differ by what has already been consumed."
+  ],
+  "answer": 3,
+  "explanation": "The digest asserts that identity on every rebuild rather than quoting it. The shortfall of 2.200000 mm is a third quantity again, because it compares the required allowance against what is left rather than against the allowance the line started with."
+ },
+ {
+  "prompt": "Why bisect the engine's own verdict rather than rearrange the arithmetic on paper?",
+  "options": [
+   "The arithmetic inside the door is not a division, so a rearrangement cannot be formed at all and the bisection is the only route the field admits.",
+   "The bisection meets every guard, rounding and branch inside the door, while a rearrangement answers a question you wrote down and agrees only while the door behaves as you assumed.",
+   "The bisection reaches the answer in fewer engine calls, which matters because the remaining-life door is the slowest of the fourteen in this module.",
+   "The rearrangement uses held constants and the bisection does not, so only the bisection keeps the correlation's unsourced numbers out of the answer."
+  ],
+  "answer": 1,
+  "explanation": "A zero rate returns null years, a null verdict and `unbounded` true. An allowance consumed past its own depth refuses. A design life left out gives a life with a null verdict. None of that falls out of dividing one number by another."
+ },
+ {
+  "prompt": "The design life is left out of a remaining-life call on a case that would otherwise give 13.333333 yr. What comes back?",
+  "options": [
+   "A refusal, because the door needs a design life before it can form either the required allowance or the verdict it reports beside the years.",
+   "13.333333 yr with `meetsDesignLife` true, since a line with no stated design life meets every life that could be asked of it and passes by default.",
+   "13.333333 yr with `requiredAllowanceMm` at 0.000000 mm and a shortfall of 0.000000 mm, since a design life of nothing demands an allowance of nothing.",
+   "13.333333 yr with `meetsDesignLife` null, `requiredAllowanceMm` null and a shortfall of 0.000000."
+  ],
+  "answer": 3,
+  "explanation": "A design life is optional and its absence is not a zero. That single sweep also separates the two allowance fields: the required figure is the one that goes null, and the years still arrive."
+ },
+ {
+  "prompt": "A programme manager wants a stated effective protection at the efficiency already bought. How is the availability found?",
+  "options": [
+   "Divide the target effective protection by the efficiency, since the effective figure is the product of the two and the division inverts it exactly.",
+   "Bracket the efficiency instead and read the availability off the shortfall.",
+   "Hold the efficiency, bracket the availability, and narrow the bracket until the effective figure the engine returns first reaches the target.",
+   "Raise the efficiency until the target is met, since availability cannot be typed in."
+  ],
+  "answer": 2,
+  "explanation": "Bisecting keeps every clamp in the loop. The engine clamps an efficiency below zero up to zero, one above a hundred down to a hundred, and an availability above a hundred the same way, and it names each clamp it applied in a field."
+ },
+ {
+  "prompt": "A corrosion inhibitor with a datasheet efficiency of 95 percent runs at 80 percent availability. What does the programme deliver?",
+  "options": [
+   "95.000000 percent effective protection for the 80 percent of the time it is present, which the engine reports beside an availability warning naming the gap.",
+   "76.000000 percent effective protection, which is 19.000000 percentage points short of the datasheet figure and 4.800000 times the metal loss.",
+   "80.000000 percent effective protection, since availability is the lower of the two.",
+   "90.250000 percent effective protection, since the shortfall grows with the square of the availability."
+  ],
+  "answer": 1,
+  "explanation": "The uninhibited rate applies for the fraction of the time the programme is off, and it is that time average that eats the wall. Availability is what limits the result and efficiency does not."
+ },
+ {
+  "prompt": "A typed efficiency of 100 percent is used at 95 percent availability. What does the engine return, and what does it say about it?",
+  "options": [
+   "95.000000 percent effective protection with no clamp and no hidden ceiling, and a note saying that this is the arithmetic of the number typed in.",
+   "100.000000 percent effective protection, with a clamp recorded in the clamps field because no programme removes all metal loss while it is running.",
+   "A refusal, because an efficiency of 100 percent would give a rate of zero and the module declines to issue an unbounded life off a typed percentage.",
+   "95.000000 percent effective protection with the efficiency clamped from 100 down to the highest value the engine will credit on a filming amine."
+  ],
+  "answer": 0,
+  "explanation": "A typed 100 percent gives exactly the availability. The note the engine adds says what that arithmetic is, and it is the shape to watch for wherever a typed number is carried straight through into an answer."
+ },
+ {
+  "prompt": "The engine fires a warning on the corrosion inhibitor shortfall. Where is the trigger, and is it present on the shipped default case?",
+  "options": [
+   "At 10.000000 percentage points of shortfall, and the shipped case is at 4.500000 percentage points, so the warning is absent on the first screen a user meets.",
+   "At an efficiency strictly above 90 percent, and the shipped case is at exactly 90 percent efficiency, so the warning is silent on the first screen a user meets.",
+   "At 0.100000 percentage points of shortfall, and the shipped case is at 4.500000 percentage points, so the warning is present.",
+   "At 0.100000 percentage points of shortfall, with the shipped case at 0.000000."
+  ],
+  "answer": 2,
+  "explanation": "The trigger is measured by bisecting the availability at which the warning first appears. At the shipped 90 percent efficiency and 95 percent availability the effective protection is 85.500000 percent."
+ },
+ {
+  "prompt": "Two of the graded quantities in this course are ratios of engine rates rather than pure arithmetic over typed percentages. Why are they still clear of every held constant?",
+  "options": [
+   "The ratio is taken after the pH correction and the scale factor are applied, and those are the only two places in the chain a held constant enters.",
+   "The rates are computed at conditions the pin table covers, so the held constants in them are measured rather than declared and a measured constant is not held.",
+   "The ratio is rounded to six decimals before it is graded.",
+   "The two rates share the whole correlation chain, so it divides out exactly and only the corrosion inhibitor arithmetic is left in the ratio."
+  ],
+  "answer": 3,
+  "explanation": "The shipped case gives a rate of 0.754524 mm/yr against an uninhibited 5.203611 mm/yr on the same conditions. The capstone generator measures the invariance rather than claiming it, by re-running at conditions that move the rate by more than half and cross the fugacity cap."
+ },
+ {
+  "prompt": "This module's Reynolds number is a graded quantity while the wall shear is not. What separates them?",
+  "options": [
+   "The Reynolds number is a definition over four supplied properties, and the Blasius pair and the branch switch act on the friction factor downstream of it.",
+   "The Reynolds number is exported and the wall shear is not, and a quantity the engine exports by name has been declared in a way the pin table can carry.",
+   "The Reynolds number is dimensionless and the wall shear is not, so only the Reynolds number is free of the unit conversions the studio layer applies.",
+   "The Reynolds number is pinned in the digest and the wall shear is bisected out of the risk word, and only a pinned quantity can be graded in this course."
+  ],
+  "answer": 0,
+  "explanation": "Density times velocity times diameter over viscosity is a definition, and no graded field in this course reads a friction factor or a shear stress. The Pipeline and Line Sizing course computes its own Reynolds number with a different correlation and a different transition, so the two will not agree on the same pipe."
+ },
+ {
+  "prompt": "One held item is a question about where the protective scale factor belongs. How is it kept out of every graded capstone answer?",
+  "options": [
+   "The graded fields are all taken before the scale factor is applied, since the factor is the last multiplication in the chain and the capstone reads the earlier values.",
+   "Every capstone scenario sits below its own computed film onset, so the factor is exactly one and multiplying by one in either place gives the same double.",
+   "The capstone states the factor from an inspection survey in the way it states a rate.",
+   "The capstone grades the factor as a ratio against the same case with it removed."
+  ],
+  "answer": 1,
+  "explanation": "The capstone generator asserts the condition rather than assuming it. Nothing downstream of that factor is graded anywhere in this course, and five of the six digest streams also have a factor of exactly one."
+ },
+ {
+  "prompt": "The studio converts a psig pressure by dividing by 14.5038 and the engine exports the exact factor as 14.503773800722. What does the difference cost, and what was done about it?",
+  "options": [
+   "Nothing measurable, since the two agree well inside six significant figures, and the capstones state their conditions in field units as the studio does.",
+   "A whole rate category step at the shipped defaults, which is why the conditions are stated in the engine's units and the category is never graded here.",
+   "The difference is the reason the fugacity pressure cap is held, since a pressure converted two ways can land on either side of 250.000000000000 bar.",
+   "The shipped defaults give 0.754523654262 mm/yr through the studio's divisor and 0.754524736514 mm/yr through the exact factor, so graded conditions are stated in the engine's units."
+  ],
+  "answer": 3,
+  "explanation": "The gap is far below anything a screening decision turns on and far above zero, which is exactly the size that fails a tolerance while mattering to nobody. Grading through the studio's rounding would measure the app rather than the corrosion."
+ },
+ {
+  "prompt": "A capstone in this course needs a rate for its allowance arithmetic. Where does that rate come from, and why?",
+  "options": [
+   "From the correlation at the stated conditions, with the held constants declared beside it so a learner can see what the answer is resting on.",
+   "From the uninhibited rate the engine returns, since that figure is free of the corrosion inhibitor arithmetic and therefore free of the two typed percentages.",
+   "From an operator's inspection survey, stated on the page, so that no held correlation constant enters any graded chain.",
+   "From the category band the stream lands in, taken at the band edge, since an edge is a pinned number and a pinned number can be graded."
+  ],
+  "answer": 2,
+  "explanation": "The remaining-life door takes an allowance, a consumed depth, a design life and a rate. With the rate stated, the whole arithmetic reduces to a division, a multiplication and a comparison over quantities somebody measured or typed."
+ },
+ {
+  "prompt": "You want to know which of `requiredAllowanceMm` and the shortfall depends on the consumed depth. What is the one sweep that settles it?",
+  "options": [
+   "Set the consumed depth to zero and rerun. The required allowance stays exactly where it was and the shortfall changes.",
+   "Set the rate to zero and rerun. The required allowance goes to zero and the shortfall holds, which shows the shortfall is the field that carries the consumed depth.",
+   "Set the allowance to zero and rerun. The door refuses, and the message names which of the two fields it was unable to form from the inputs it was given.",
+   "Read the field names and the comment above the door, which states which inputs each field is formed from and is the quickest route to the same answer."
+  ],
+  "answer": 0,
+  "explanation": "Read what a function returns rather than what its name suggests it returns, and find out by moving an input. On one shipped stream the shortfall is 0.000000 mm because the remaining allowance covers the required figure, and that zero is a pass on that one comparison and silent about everything else."
+ }
+]
