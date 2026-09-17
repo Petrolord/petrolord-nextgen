@@ -20,7 +20,8 @@ all.
 
 Each message has two halves. The first half says which check did not run and
 therefore why the whole screening stopped. The second half names the box. A
-reader gets both the cause and the fix out of one sentence.
+reader gets both the cause and the fix out of a single sentence, which is the
+pattern every refusal in this module follows.
 
 ## Why a missing density is not a missing row
 

@@ -44,7 +44,7 @@ laminar branch, and the friction factor it gets there is 4.740191 against the
 0.002867 the Tunu stream gets in the turbulent branch. Those two figures come
 from different expressions.
 
-## Where the shear comes from after the factor
+## After the factor, the shear
 
 The friction factor is the middle of the calculation rather than the end of it.
 The Reynolds number is formed first, from a density, a velocity, a diameter and
@@ -68,7 +68,9 @@ disagreement that neither screen is equipped to explain.
 
 Nothing here is a naming problem better labels would solve. Two modules
 genuinely compute a friction factor for the same pipe with different
-correlations, and removing the duplicate is a cross-module decision.
+correlations, and removing the duplicate is a cross-module decision rather than
+a repair either course can make alone, so this course names the seam and leaves
+it in plain view.
 
 ## Exercise
 

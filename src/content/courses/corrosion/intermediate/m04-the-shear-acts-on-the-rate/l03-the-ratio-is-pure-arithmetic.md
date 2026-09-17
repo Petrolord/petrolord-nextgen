@@ -57,7 +57,7 @@ When a case comes back with the credit removed, the ratio tells you what the
 verdict cost and it tells you so without any of the held machinery. If you
 distrust the absolute rate, and there is a good deal in this module's held list
 to justify distrusting it, you can still trust the ratio. It is arithmetic over
-the corrosion inhibitor programme you typed in.
+the corrosion inhibitor programme you typed in, and nothing else reaches it.
 
 ## Exercise
 

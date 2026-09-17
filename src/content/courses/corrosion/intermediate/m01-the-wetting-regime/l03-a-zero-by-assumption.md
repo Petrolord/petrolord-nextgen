@@ -16,7 +16,7 @@ life is WITHHELD, and the module says why in its own words:
 > and not because it was calculated. An unbounded life off a dropdown is the
 > strongest reassurance on the screen arriving from the weakest input.
 
-## Withholding is a different act from refusing
+## Withholding and refusing
 
 A refusal says an input is missing or out of range and no answer is available.
 Withholding says the arithmetic ran and its outputs would be misleading if
@@ -51,7 +51,9 @@ the withheld category and life are the engine saying exactly that.
 ## The rest of the screen keeps working
 
 Notice what is not withheld. The wall shear and the chemistry figures are still
-computed on an oil-wet case, because none of them depends on the regime.
+computed on an oil-wet case, because none of them depends on the regime. Only
+the fields that sit downstream of the rate are held back, which is the smallest
+withholding that keeps the summary consistent with the arithmetic.
 
 ## Exercise
 

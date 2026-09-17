@@ -18,7 +18,7 @@ divides by.
 | 95.000000 | 50.000000 | 47.500000 | 47.500000 | 10.500000 |
 | 95.000000 | 25.000000 | 23.750000 | 71.250000 | 15.250000 |
 
-## Read the second row before the last one
+## Read the second row first
 
 Two percentage points of availability, from 100.000000 to 98.000000 percent,
 take the effective protection from 95.000000 percent to 93.100000 percent. That
@@ -34,13 +34,12 @@ at the same row.
 
 The remaining life in this module is a remaining allowance divided by a rate.
 The metal loss ratio is a ratio of rates, so it passes straight through that
-division and becomes the factor by which the life shortens. That is why the
-ratio is worth recording as its own field rather than being left for the reader
-to form. At 95.000000 percent efficiency and 90.000000 percent availability the
+division and becomes the factor by which the life shortens. That is why the ratio is worth recording as its own field. At 95.000000 percent efficiency and 90.000000 percent availability the
 ratio is 2.900000, and the rate on that row is 0.243082 mm/yr against the
-0.083821 mm/yr of the datasheet row.
+0.083821 mm/yr of the datasheet row. Divide one allowance by each of those two
+rates and the ratio reappears in the years.
 
-## The shipped case has one too
+## The shipped case
 
 On the studio's own default case the corrosion inhibitor is at 90 percent
 efficiency and 95 percent availability, the effective protection is 85.500000
@@ -68,7 +67,9 @@ that reason, and so can you, on paper, in one line.
 
 The comparison is always against the datasheet row rather than against an
 uninhibited line. A ratio of 1.000000 means the programme delivered what the
-container promised.
+container promised, and it says nothing about how fast the wall is going away.
+A line can sit at a ratio of 1.000000 and still lose metal quickly, because the
+ratio measures the gap between a promise and a delivery.
 
 ## Exercise
 

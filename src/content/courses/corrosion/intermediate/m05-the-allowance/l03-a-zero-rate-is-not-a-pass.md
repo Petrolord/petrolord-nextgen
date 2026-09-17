@@ -8,7 +8,7 @@ produce and it would arrive from the weakest input on the form, so the engine
 does not produce it. Where the rate is zero it returns no life and no verdict,
 and it says what the reader should do instead.
 
-## The oil-wet case is the one to study
+## The oil-wet case
 
 Set the wetting regime to oil wet and the wetting factor is 0.000000, so the
 rate is 0.000000 mm/yr. The category is WITHHELD, the life is WITHHELD, and the
@@ -49,10 +49,10 @@ read the CO2 fraction and the corrosion inhibitor percentages.
 
 ## The same reasoning one field along
 
-The withheld category deserves the same reading as the withheld life. A band
-label on a rate of zero would read as the most reassuring word on the scale, and
-it would be describing an assumption. Withholding both together keeps the
-summary consistent with the arithmetic that produced it.
+The withheld category deserves the same reading as the withheld life. A band label on a rate of zero would read as the
+most reassuring word on the scale while describing an assumption. Withholding both together keeps the
+summary consistent with the arithmetic that produced it, and it leaves the
+reader with a question instead of a verdict.
 
 ## Exercise
 
