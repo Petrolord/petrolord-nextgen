@@ -1,0 +1,115 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC7 Expert m02, The medians and the grid. Digest section 15, with the grid
+# the train reports back in section 14.
+
+q(2, "A train hands a reader an inlet droplet median and an outlet one, knowing the reader will compare them. What does this engine guarantee about the pair, and where does it say so?",
+ "That both are the volume median of the same bin set, interpolated across the bin the median falls in, and it says so in those words on every return.",
+ ["That the inlet figure is read straight from the analytic log-normal and the outlet figure off the bins afterwards, which is the reason the inlet reproduces the typed d50 so closely.",
+  "That both are number medians rather than volume medians, so the comparison is unaffected by how volume is spread across the bins.",
+  "That both are bin midpoints on one grid, so the two are quantised identically and the difference between them is exact."],
+ "A declaration of BASIS is what makes a difference between two figures a measurement rather than a coincidence. A figure with a stated basis can be argued with.")
+
+q(0, "The OGBOTOBO inlet median comes back as 14.000000 micron against a typed d50 of 14, reproducing it to 1.19e-9 relative. What kind of agreement is that?",
+ "An identity. The volume median of a log-normal IS its own d50, so a bin set that fails to reproduce the typed figure has described the distribution wrongly.",
+ ["A validation against the golden file, whose published bin grid group carries that same figure at five different conditions.",
+  "A convergence tolerance: the median is bisected out of the bin set, and 1.19e-9 is where the bisection is allowed to stop.",
+  "A calibration, chosen so that an inlet median lands on the typed figure at the module's own default grid of 60 bins."],
+ "The typed figure is kept beside the measured one on the return as `inletD50Micron`, so a reader can see both and can see that they agree.")
+
+q(1, "Across the cut size sweep the outlet median falls 9.006299, 7.097314, 5.720019, 4.371791, 3.237392 and 2.179329 micron. What would a flat run of three identical figures in that column have told you?",
+ "That the median had been read as a bare bin midpoint, so it was quantised to the grid rather than interpolated across it.",
+ ["That the outlet concentration had stopped responding to the cut size over those three rows as well.",
+  "That the distribution had been truncated, so the volume beyond the span was being absorbed into the bin holding the median.",
+  "That the sharpness had moved from 2 to 3 across those rows, which flattens the grade curve on either side of the cut."],
+ "A quantised median can only take as many values as there are bins, so it shows up as a flat run in a column that should be strictly falling.")
+
+q(3, "A jest test asserts that the outlet median falls monotonically as the cut tightens, rather than checking one median against a published value. What does the sweep buy that the spot check does not?",
+ "It tests the SHAPE of a whole column, which a median that is right at one condition and quantised everywhere else cannot pass.",
+ ["It checks the reported median against the analytic log-normal at all six of the conditions in the sweep instead of at a single one.",
+  "It pins the six outlet concentrations printed beside the medians, so any change in the quadrature fails this same assertion as well.",
+  "It is the only check in this module that needs no source, since every other assertion compares against the golden file."],
+ "Shape is a much harder thing to get right by accident than a value at a point. A median correct at one condition passes a spot check and fails this one.")
+
+q(2, "Interpolating in log diameter removes the step from a reported median. What does it NOT remove?",
+ "The grid, which still decides where the bin edges fall and therefore what is being interpolated between.",
+ ["The truncated tail, which the interpolation absorbs into whichever bin the reported median happens to fall in.",
+  "The floor of 10 bins on the grid, which this module applies after the interpolation has run rather than before it.",
+  "The quantisation of the outlet concentration, which on this route is still read off the single bin holding the median."],
+ "A distribution described on 60 bins is a description rather than the distribution itself. Interpolation removes the step and leaves the instrument where it was.")
+
+q(0, "In the published bin grid cases the median column reads 30.000000, 30.000000, 12.000000, 30.000000 and 30.000000 against stated d50 figures of 30, 30, 12, 30 and 30, at bin counts from 30 to 240 and spans from 4 to 6. What does holding that across the whole group establish?",
+ "That the grid describes the distribution rather than distorting it, because the identity survives both knobs being moved.",
+ ["That the bin count and the span are outputs of this module rather than inputs a caller supplies, given that neither of the two moved the median anywhere in the group.",
+  "That the median must be interpolated, since a quantised median could never land on a whole number.",
+  "That 60 bins over 4 sigma is the only grid on which this module will describe a distribution."],
+ "A group that moved one knob could not say this. The identity is asserted across both of them at once.")
+
+q(1, "In the same published group the truncated tail reads 0.000063342484 at a span of 4, 0.000000573303 at a span of 5 and 0.000000001973 at a span of 6, and it is the same figure at 30 bins as at 60. Which knob moves it?",
+ "The span, because it decides where the grid stops and therefore how much of the analytic distribution is left outside it.",
+ ["The bin count, because the tail is the volume sitting in the outermost bins and there are a great many more of those at 240 bins than at 30.",
+  "Both of them, because the tail is the volume that the normalisation absorbs and the normalisation itself runs across every bin in the set.",
+  "Neither of them. Sigma alone sets the tail, which is why the published row at sigma 0.9 carries a different figure from the rows at 0.7."],
+ "Slicing the covered range more finely does nothing about what lies beyond it. Two knobs, and only one of them touches this quantity.")
+
+q(3, "A caller wants a finer answer out of the quadrature and a colleague wants more of the extremes of the distribution covered. Which knob does each of them reach for?",
+ "The bin count controls resolution inside the range the grid covers, and the span controls how far the grid reaches.",
+ ["Both reach for the span, since a wider span at a fixed bin count also narrows the bins.",
+  "Both reach for the bin count, since the grid reaches a fixed number of sigma either side of the median whatever the count.",
+  "The bin count for the extremes and the span for the resolution, since the outermost bins are where the truncation happens."],
+ "Resolution decides how finely volume is apportioned within the covered range, which is what the quadrature integrates against. Reach decides how much is covered at all.")
+
+q(1, "Why is a median read as a bare bin midpoint a coarse instrument on this grid?",
+ "One step of the grid is a few percent of a diameter, so the answer is pinned to the nearest step, and a bin wide enough to hold six orders of magnitude of outlet concentration reports one value for all of them.",
+ ["Because the module reports the index of the bin the median falls in rather than a diameter, so the caller has to convert it.",
+  "Because the truncated tail sits in the outermost bins, so a midpoint read there is biased by the volume the normalisation absorbed.",
+  "Because the median is taken before the outlet bins are normalised, so a midpoint is read against a surviving volume rather than against one."],
+ "Two trains with genuinely different outlets come back with the same droplet median, which is exactly the comparison a reader is about to make.")
+
+q(2, "Across the cut sweep the outlet concentration falls from 1125.805910 ppm to 43.150877 ppm while the outlet median falls from 9.006299 to 2.179329 micron. What does each column tell a designer sizing a polishing stage?",
+ "The concentration says how much oil is left, and the median says how hard the oil that is left will be to remove next.",
+ ["The concentration says how hard the remaining oil is to remove, and the median says how much of it there is once the bins are weighted by volume.",
+  "They say the same thing at two precisions, the median being the concentration read on the droplet grid.",
+  "The concentration sizes the polishing stage, and the median says only whether the grid still resolves the distribution."],
+ "Both are consequences of the same tightening and neither is a substitute for the other. A designer sizing what comes next needs the second more than the first.")
+
+q(3, "The return carries the measured inlet median and the typed figure beside it as `inletD50Micron`. Why keep both?",
+ "They are different kinds of number, one typed and one measured off the bins, and carrying both lets a reader see that they agree.",
+ ["Because the outlet median is compared against the typed figure rather than against the measured inlet one, so both of them have to be present on the return.",
+  "Because the typed figure is what any verdict on the train is taken against in the case where no discharge specification has been given at all.",
+  "Because a caller may pass a distribution with no d50 at all, in which case the measured figure is the only median on the return."],
+ "The module checks itself against its own input and shows a reader the result, rather than reporting one figure and asking to be believed.")
+
+q(0, "Suppose this engine interpolated its medians correctly and said nothing about it on the return. What would a reader still be unable to do?",
+ "Know that an inlet median from one run and an outlet median from another are commensurable, which is what a stated basis settles.",
+ ["Compute the removal, since the removal is the ratio of the two medians.",
+  "Reproduce either figure, since a median cannot be recovered from a bin set without the interpolation rule.",
+  "Read the grid, since the bin count and the span are reported only alongside the basis string."],
+ "Every number would be right and the comparison would still be undefended. The basis strings say what each number is a number OF.")
+
+q(2, "The OGBOTOBO train takes the droplet median from 14.000000 to 3.185598 micron. What does that pair say about the oil still in the water?",
+ "It is finer than the oil that has gone, so what is left is harder to remove than what has already been removed.",
+ ["It is 3.185598 micron across, so a device cutting anywhere below that size would take all of it out.",
+  "It has fallen in the same proportion as the concentration, which runs from 1800 ppm to 160.391597 ppm.",
+  "It sits inside the fine tail the normalisation truncates, so the figure describes the grid rather than the water."],
+ "That is the sentence a designer needs in front of them before proposing another vessel.")
+
+q(1, "What grid does the OGBOTOBO train report beside its four stages, and what truncated tail does it carry on it?",
+ "60 bins over 4 sigma, with a truncated tail of 0.000063372072.",
+ ["60 bins over 4 sigma, with a truncated tail of 0.002699934563, which is the volume this grid leaves outside its span.",
+  "240 bins over 6 sigma, with a truncated tail of 0.000000001973, which is the finest grid in the published cases.",
+  "30 bins over 4 sigma, with a truncated tail of 0.000063342484, which is the figure the published grid cases carry."],
+ "Those are the module's own defaults, and both of them are DECLARED values rather than derived ones.")
+
+q(0, "The reported truncated tail is divided by twice the module's own cdf at the lower span edge, and the answer comes out at 1.000000000000 at 30, 60, 120 and 600 bins. Why is that worth more than a comparison against a published figure?",
+ "Two parts of the module are asked the same question by different routes, so nothing outside the file is consulted and no tolerance has to be argued about.",
+ ["The ratio is taken at four bin counts, and four agreeing conditions outrank a single published condition.",
+  "A tail measured on the bins is exact where a published tail has been rounded to six decimals first.",
+  "The normalisation absorbs the tail, so the ratio is one by construction and cannot fail."],
+ "It says the tail the normalisation absorbs is exactly the analytic tail rather than a binning artefact. An engine agreeing with ITSELF, structurally, at every condition swept.")
+
+emit(Q, '/root/wt-fc7-nextgen/tools/course-banks/producedwater/advanced/fc7a_m02.json', expect_n=15)
+finish()
