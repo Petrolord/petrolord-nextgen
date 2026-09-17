@@ -320,5 +320,44 @@
       "fields.json": "ba4c8e63d1dd591e11e7b213bca81a6e306fe3cef006b836b3264c771dca1dcd"
     },
     "headingsNoGeneratorSpells": 21
+  },
+  "metering": {
+    "course": "FC8",
+    "live": "/root/fc-wip-metering",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "build_digest.sh",
+      "fc8_dump.mjs",
+      "fc8_fields.mjs",
+      "fc8_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "digest_prose.rules.mjs",
+      "structure.py",
+      "scaffold.py",
+      "lengths.py",
+      "gate_capstone_leak.py",
+      "gate_collisions.mjs",
+      "gate_claims.mjs",
+      "gate_copy_rule.py",
+      "gate_wavejson.mjs",
+      "finalise.sh",
+      "package.json",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md",
+      "vendor/closure.py",
+      "vendor/closure.json"
+    ],
+    "pins": {
+      "digest.txt": "b8ce5729f500a5ac02426aacadd769599a02642a4ae8eda3340fdd555b02d077",
+      "fields.json": "cd9195a30660a8ebbfe4d5b84d01aef4e77b33509377cc5469b2c81f356fc88e"
+    }
   }
 }

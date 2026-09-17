@@ -1,0 +1,136 @@
+{
+ "slug": "metering",
+ "prefix": "fc8",
+ "name": "Metering, Control Valves & Storage",
+ "pathOrder": 46,
+ "module": "facilities",
+ "prerequisite": null,
+ "repo": "/root/wt-fc8-nextgen",
+ "branch": "feat/fc8-metering-course",
+ "goldens": [
+  "facilities/goldens/tanksmetering_cases.json",
+  "facilities/goldens/controlvalve_cases.json"
+ ],
+ "engines": [
+  "engines/facilities/metering.js",
+  "engines/facilities/controlValve.js",
+  "engines/facilities/storageTank.js"
+ ],
+ "enginesVendoredAt": "petrolord-engines main 9874d5834de552a08ed7aa16e0fcd12438fefdb1, which carries the FC8-0 repair (PR #204, merge 1cc597c) and its planting-harness gate (PR #205, merge 55431d7). TEN paths, and the ten were WALKED rather than listed: vendor/closure.py starts from the two jest suites, the two goldens, the three engines, the two oracles and the repair record as seeds, follows every ES import, every re-export, every CommonJS require, every dynamic import and every relative data read (path.join(__dirname, ...) in JavaScript and os.path.join(here, ...) in Python) until nothing new appears, and REFUSES if a seed is absent, if an edge resolves to nothing, or if it resolved nothing at all. It walked 7 edges and closed at 10 paths, which is what establishes that this family is ONE closure and not two: facilities.tanksmetering.test.js imports BOTH metering.js and storageTank.js. Identity was proved THREE independent ways per path: the git blob hash of the canonical file against the git blob hash of the vendored file, which is content addressing and knows nothing of the filesystem; an md5 of the two files on disk; and a byte compare against the Suite's own subtree vendoring of the same engines commit at e63ed83bc, which is a third party that pulled the same bytes through a different route on a different day. 10 of 10 identical on all three, recorded path by path in vendor/closure.json. The FC8 paths are byte-identical at 55431d7 and at main 9874d583, which was checked directly rather than assumed: FC7-1 (#206) sits between them and touches only the produced water family. THE CANONICAL PIN IN VENDOR.json WAS NOT ADVANCED. It stays at 709172f and the ten paths are ledgered, nine as differing and one as extra, each PINNED to the blob now vendored, so a second drift on an already-known path still fails the guard.",
+ "digest": {
+  "file": "digest.txt",
+  "lines": 1277,
+  "sections": 32,
+  "md5": "03fb67866328c1f3e0fdf7f6884c48c4",
+  "sha256": "b8ce5729f500a5ac02426aacadd769599a02642a4ae8eda3340fdd555b02d077",
+  "generator": "fc8_dump.mjs, through build_digest.sh",
+  "rule": "Every figure is engine output printed at a stated precision. Nothing is typed, nothing is rounded by hand, and nothing comes from RECON.md, FINDINGS.md, the vendored FINDINGS-metering.md or an engine source comment. A sentence may name a figure the file computes and may NOT characterise the relationship between two figures unless that relationship is itself computed and printed, which is what every RELATION line is. Constants the engines do not export are MEASURED by asking the engine a question about itself. Every count states the tree it was counted over and the rule that decided membership."
+ },
+ "constants": {
+  "$comment": "Every constant this course touches, with its status. HELD means the engine states that the package does not carry it or does not cite it. WITHHELD means the engine returns a refusal in place of a number. MEASURED means this digest found it by asking the engine rather than by typing it. EXPORTED means the module exports it so it can be read.",
+  "the inches of water to psi conversion": "MEASURED. It is a module-private constant in metering.js and the digest never types it: SECTION 3 divides a returned differential in psi by the differential in inches of water that produced it, at two runs sharing no other input, and asserts the two agree to the last bit.",
+  "the Reader-Harris/Gallagher coefficients": "CARRIED AND PUBLISHED. The correlation is implemented and the digest evaluates it rather than quoting it. What is HELD is its published lower Reynolds limit at each beta and bore, which the engine says it does not carry and flags on every returned coefficient.",
+  "the published beta range": "MEASURED, by bisecting the engine's own betaInPublishedRange flag at both edges (SECTION 6).",
+  "the small bore threshold": "MEASURED, by bisecting the engine's own smallBoreCorrectionApplied flag (SECTION 5).",
+  "the flow and differential turndown limits": "EXPORTED in the result of transmitterUncertaintyPct and printed in SECTION 12. The repaired warning fires on the FLOW turndown.",
+  "the straight-run table": "HELD. Stated table data cited to no document in this repository, and one whole column is WITHHELD by name.",
+  "the API MPMS temperature and pressure corrections": "HELD. Not carried, so every turbine volume in this course is labelled gross and no net standard volume exists anywhere in the module.",
+  "the valve style FL and xT": "HELD and EXPORTED. Stated table values, trim and vendor dependent, and a certified vendor figure replaces them. The Professional capstone STATES its FL for exactly this reason.",
+  "the sigma thresholds": "HELD and EXPORTED as SIGMA_THRESHOLDS, printed in SECTION 18, and this course grades no regime word.",
+  "the noise ratio and power bands": "HELD and EXPORTED as NOISE_RATIO_BANDS and NOISE_POWER_BANDS, printed in SECTION 23, and this course grades no band.",
+  "the authority screen": "HELD. The engine returns thresholdBasis saying the boundaries are its own stated screen, quoted in SECTION 22.",
+  "the ISA Reynolds factor FR": "HELD. Not carried, and the engine returns reynoldsFactorApplied false on every liquid sizing.",
+  "the API 650 minimum plate band table": "HELD. Not carried, so the minimum is a stated input and the result names the value in force.",
+  "the variable design point diameter": "HELD. Not carried, returned as a note on every course.",
+  "the thermal venting factors and credits": "HELD. The rate per barrel, the latitude factor, the low volatility factor, the insulation credit and the proportional limit are all the engine's stated choices. The Expert capstone states every one of them it uses.",
+  "AP-42 turnover factor Kn": "HELD. Not carried, and the input that never fed it was removed rather than echoed back.",
+  "the fire vent air equivalence relation": "WITHHELD BY NAME, and exported as FIRE_VENT_WITHHELD so a screen cannot print a blank. The two plausible forms differ by a factor of about 24 and an emergency vent sized 24 times too small is how a tank is destroyed. TAUGHT AS A LIMIT IN SECTION 28 AND GRADED NOWHERE.",
+  "the cubic feet in a barrel": "EXACT BY DEFINITION and returned by tankCapacity as ft3PerBbl, so it can be checked rather than assumed."
+ },
+ "plan": {
+  "state": "FOUNDATION COMPLETE, vendored at engines main 9874d583. Digest BUILT: 32 sections, 1277 lines, byte-reproducible across two consecutive rebuilds, five timezones and four locales, 12 builds in all. Eighteen graded fields chosen, tolerances derived in one place, discriminate clean with zero WEAK routes. NO LESSON IS WRITTEN.",
+  "thesis": "A meter run, a control valve and a tank are the three places on a facility where a number that looks like a measurement is a design judgement with a standard behind it. The orifice equation is simple and its uncertainty is the subject; the valve equation is simple and its choking boundary is the subject; the tank shell equation is simple and venting is what actually destroys tanks. The course therefore teaches the boundaries and the refusals, and grades nothing that rests on a table value the engine says it does not cite.",
+  "tiers": {
+   "beginner": "Associate. WHAT A METER RUN MEASURES AND HOW WELL. Why: the orifice equation is arithmetic and the uncertainty budget is the argument, and every Associate graded field is arithmetic over stated inputs or a definition.",
+   "intermediate": "Professional. THE VALVE, AND THE BOUNDARY EVERYTHING HAPPENS AT. Why: past the choking boundary a larger coefficient buys nothing, and sizing on the stated drop is the commonest error in the subject.",
+   "advanced": "Expert. THE TANK, AND WHAT IS REFUSED. Why: the interesting questions are inversions (which product makes the water test govern, which draw rate makes vacuum govern) and the most important answer in the module is a refusal."
+  },
+  "modulesPerTier": 6,
+  "lessonsPerTier": 26,
+  "lessonsInWave": 78,
+  "lessonLength": {
+   "band": "420 to 560 prose words, with the floor rising by est_minutes through structure.py's MIN_WORDS",
+   "measure": "PROSE WORDS as lengths.py counts them: front matter, markdown table rows whose first non-space character is a pipe, and {{panel:...}} lines are excluded. EVERYTHING ELSE IS COUNTED, INCLUDING EVERY HEADING. Older waves' task files claimed headings were excluded and the code never did that, so a writer who trusted the task file ran 20 to 40 words light on every lesson."
+  },
+  "capstones": {
+   "count": 3,
+   "gradedFieldsEach": 6,
+   "beginner": "KRAKAMA, a gas export meter run: the beta, the differential in psi, the transmitter contribution, the flow turndown, the total uncertainty and the gross turbine volume.",
+   "intermediate": "UTONANA, a choked control valve on hot condensate: the critical pressure ratio factor, the allowable drop, the coefficient, the cavitation index, the authority and the normal duty travel.",
+   "advanced": "SAGHARA, a fixed-roof tank farm: the bottom course thickness, the gravity at which the water test takes over, the inbreathing, the draw rate at which vacuum takes over, the working capacity and what the recovery unit saves.",
+   "tablesRule": "WHERE A CAPSTONE NEEDS A TABLE VALUE IT STATES IT, the way a project states a certified vendor figure. UTONANA states its FL and its rangeability; SAGHARA states its allowable stresses, its minimum plate thickness, its thermal rate per barrel, its latitude factor, its low volatility factor and its proportional limit.",
+   "withheldRule": "NO GRADED FIELD RESTS ON A WITHHELD OR HELD ITEM. The emergency fire vent and the two-elbows-out-of-plane straight run are refused by name, taught as limits in SECTIONS 28 and 16, and graded nowhere."
+  },
+  "panels": {
+   "lab": "src/components/course/panels/metering/meteringLab.js, NOT YET WRITTEN",
+   "shipped": [
+    "src/components/course/panels/metering/gradedTolerance.js"
+   ],
+   "ids": [
+    "fc-meterrun-explorer",
+    "fc-choking-explorer",
+    "fc-venting-explorer",
+    "fc-withheld-explorer"
+   ]
+  },
+  "route": "/dashboard/apps/metering",
+  "migrations": [
+   "course and capstones",
+   "the three capstone rows",
+   "the lesson seed",
+   "the bank seed",
+   "the go-live"
+  ],
+  "migrationsState": "NONE WRITTEN AND NONE APPLIED. The foundation applies nothing."
+ },
+ "fields": {
+  "count": 18,
+  "perTier": {
+   "beginner": 6,
+   "intermediate": 6,
+   "advanced": 6
+  },
+  "keys": [
+   "krakama_beta_ratio",
+   "krakama_differential_psi",
+   "krakama_transmitter_uncertainty_pct",
+   "krakama_flow_turndown_ratio",
+   "krakama_total_uncertainty_pct",
+   "krakama_turbine_gross_bbl",
+   "utonana_ff_critical_ratio",
+   "utonana_allowable_drop_psi",
+   "utonana_liquid_cv",
+   "utonana_cavitation_sigma",
+   "utonana_valve_authority",
+   "utonana_normal_travel_pct",
+   "saghara_bottom_course_required_in",
+   "saghara_sg_at_which_test_governs",
+   "saghara_inbreathing_scfh",
+   "saghara_vacuum_governing_draw_bblhr",
+   "saghara_working_capacity_bbl",
+   "saghara_recovery_saved_lb_yr"
+  ],
+  "toleranceRule": "tol = max(stated, half a unit in the last place the course PRINTS that class), MAX and never MIN, so the rule only ever loosens. DERIVED IN ONE PLACE: src/components/course/panels/metering/gradedTolerance.js in the NextGen repository. fields.json and precision.json are both written out of that one derivation by make_fields.mjs and neither is hand edited, so no second copy of a tolerance exists anywhere in this wave.",
+  "toleranceSource": "src/components/course/panels/metering/gradedTolerance.js"
+ },
+ "gates": {
+  "digest reproducibility": "byte-identical across two consecutive rebuilds, five timezones (Pacific/Kiritimati, UTC, Pacific/Niue, America/Sao_Paulo, Asia/Kathmandu) and four locales (C, de_DE.UTF-8, tr_TR.UTF-8, ar_EG.UTF-8): 12 builds in all, every one byte-identical. md5 03fb67866328c1f3e0fdf7f6884c48c4 over 1277 lines. build_digest.sh is mode 755 and EXECUTABLE, which finalise.sh asserts before it runs anything: a sibling wave shipped a mode 644 build script and its reproducibility gate had therefore never once run."
+ },
+ "leakScales": [
+  1,
+  1000,
+  0.001,
+  42,
+  2000
+ ]
+}

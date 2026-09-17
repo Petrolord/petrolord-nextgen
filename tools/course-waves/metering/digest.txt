@@ -1,0 +1,1277 @@
+FC8 METERING, CONTROL VALVES & STORAGE: THE TEACHING DIGEST
+===========================================================
+#
+# THIS FILE IS THE ONLY SOURCE OF NUMBERS FOR EVERY FC8 LESSON, PANEL AND
+# BANK QUESTION. Every figure in it was produced by calling the vendored
+# engine while this file was built. Nothing here was typed, rounded by hand,
+# or taken from the wave recon, the wave findings, the repair record
+# vendored beside the oracle, or an engine source comment. Those four are
+# PROVENANCE and no writer may quote them.
+#
+# PRECISION. Beta ratios, pressure differentials in psi, percentages, shell
+# thicknesses in inches, valve coefficients, cavitation indices, authorities,
+# travel percentages and every dimensionless ratio print to SIX decimals;
+# volumes in barrels, vent rates in scfh, movement rates in barrels per hour
+# and annual losses in pounds print to FOUR, because a number in the
+# thousands carries no information in its millionths; counts are whole
+# numbers. The quantities this course prints and never grades follow the same
+# two clauses: discharge coefficients, expansibility and expansion factors,
+# loss fractions and vapour densities print to SIX, and Reynolds numbers,
+# mass flows in pounds an hour, areas in square feet, volumes in cubic feet
+# and fire duties in Btu an hour print to FOUR.
+#
+# QUOTE A FIGURE AT THE PRECISION THIS FILE PRINTS IT. A learner who reads
+# the right row and quotes it as printed is inside every graded tolerance in
+# this course, because every tolerance is at least half a unit in the last
+# place of its own class.
+#
+# A RELATIONSHIP BETWEEN TWO FIGURES IS ONLY EVER STATED WHERE THIS FILE
+# PRINTS IT. Lines beginning RELATION carry the two values, their difference
+# and their ratio. A writer may state a comparison only by quoting one of
+# those lines. No lesson may say a term is "about a tenth" of another, or
+# "three times" another, on its own arithmetic.
+#
+# THREE ENGINES, ONE ARGUMENT. A meter run, a control valve and a tank are
+# the three places on a facility where a number that looks like a measurement
+# is a design judgement with a standard behind it, and where the behaviour
+# that matters lives at a boundary the ordinary equation walks straight past.
+# The orifice equation is simple and its UNCERTAINTY is the subject. The
+# valve equation is simple and its CHOKING BOUNDARY is the subject. The tank
+# shell equation is simple and VENTING is what actually destroys tanks.
+#
+# WHAT IS REFUSED IS CURRICULUM. Two answers in these engines are WITHHELD BY
+# NAME and this file teaches both as limits. Neither is graded anywhere in
+# this course, and SECTION 31 is the whole register.
+#
+# SECTION 1: THE THREE ENGINES, AND WHAT EACH ONE EXPORTS (owned by Associate m01)
+
+The course stands on three modules. No module imports another, which is why
+a fact learned about one carries nothing over to the next by construction.
+
+   metering.js
+   COUNT  metering.js exported names: 11
+          tree: Object.keys of the imported module metering.js
+          rule: every name the module exports, functions and data alike, with no filter
+          functions (9): dischargeCoefficient, expansibility, orificeFlow, orificeUncertainty, permanentLoss, sizeOrifice, straightRunDiameters, transmitterUncertaintyPct, turbineVolume
+          data     (2): RG_REYNOLDS_BASIS, STRAIGHT_RUN_WITHHELD_FITTINGS
+
+   controlValve.js
+   COUNT  controlValve.js exported names: 16
+          tree: Object.keys of the imported module controlValve.js
+          rule: every name the module exports, functions and data alike, with no filter
+          functions (10): characteristicFor, characteristicLabel, gasValve, liquidCriticalRatioFF, liquidValve, noiseIndication, specificHeatFactor, styleOf, travelCheck, valveAuthority
+          data     (6): CHARACTERISTICS, NOISE_POWER_BANDS, NOISE_RATIO_BANDS, SIGMA_THRESHOLDS, VALVE_STYLES, VALVE_STYLE_PROVENANCE
+
+   storageTank.js
+   COUNT  storageTank.js exported names: 11
+          tree: Object.keys of the imported module storageTank.js
+          rule: every name the module exports, functions and data alike, with no filter
+          functions (10): evaporativeLosses, fireVenting, lossControl, movementVenting, normalVenting, shellCourse, shellCourses, tankCapacity, thermalVenting, wettedAreaFt2
+          data     (1): FIRE_VENT_WITHHELD
+
+# SECTION 2: ONE ORIFICE RUN, END TO END (owned by Associate m01)
+
+The ABOH gas export run. Every field the engine returns, at the precision
+this course prints each class to. The whole of Associate module 1 is reading
+this one result and knowing what each line is.
+
+   pipe bore, in                                          6.065000   stated
+   orifice bore, in                                       2.926500   stated
+   differential, in H2O                                  63.800000   stated
+   static pressure, psia                                815.200000   stated
+   flowing density, lb/ft3                                2.617800   stated
+   viscosity, cP                                          0.012100   stated
+   specific heat ratio                                    1.270000   stated
+   beta                                                   0.482523   returned
+   discharge coefficient                                  0.602223   returned
+   expansibility                                          0.999181   returned
+   pipe Reynolds number                               2117151.4444   returned
+   mass flow, lb/hr                                     24602.3337   returned
+   volume at flowing density, ft3/hr                     9398.0952   returned
+   differential, psi                                      2.304922   returned
+   beta inside the published range                            true   returned
+   warning                                                    null   returned
+
+THE VOLUME IS AT THE FLOWING DENSITY AND THE ENGINE NAMES IT SO. There is no
+base pressure and no base temperature anywhere in this function, so nothing
+on this line is a standard volume.
+
+# SECTION 3: THE INCH OF WATER, MEASURED RATHER THAN TYPED (owned by Associate m01)
+
+The factor that turns inches of water column into psi is a module-private
+constant in metering.js. This file never types it. It is MEASURED, by asking
+the engine for the differential in psi at two runs that share no other input
+and dividing by the differential each was given.
+
+   run one: 63.800000 in H2O returned 2.304922 psi, so the factor is 0.0361273
+   run two: 17.900000 in H2O returned 0.646679 psi, so the factor is 0.0361273
+   the two agree exactly, which is what makes this a constant rather than a coincidence
+
+# SECTION 4: THE DISCHARGE COEFFICIENT IS NOT A CONSTANT (owned by Associate m02)
+
+The Reader-Harris/Gallagher equation for a flange-tapped orifice, swept
+across beta and across four decades of Reynolds number on the ABOH pipe
+bore. A course that used a constant 0.61 would be wrong by more than the
+uncertainty anybody is arguing about, and the span of this table is the
+measurement of that.
+
+   beta           Re 5e+3       Re 5e+4       Re 5e+5       Re 5e+6       Re 5e+7
+   0.050000      0.598718      0.596626      0.596209      0.596125      0.596108
+   0.100000      0.600481      0.597067      0.596382      0.596243      0.596214
+   0.200000      0.604059      0.598299      0.597110      0.596849      0.596784
+   0.350000      0.612008      0.601810      0.599531      0.598908      0.598697
+   0.500000      0.626708      0.608174      0.603746      0.602287      0.601691
+   0.600000      0.641608      0.613342      0.606466      0.604015      0.602950
+   0.670000      0.653961      0.615976      0.606719      0.603296      0.601766
+   0.750000      0.668050      0.615280      0.602488      0.597614      0.595385
+   0.800000      0.675240      0.611016      0.595531      0.589541      0.586772
+
+   COUNT  cells in the table above that sit inside the published beta range: 35
+          tree: the cross product of the 9 betas and the 5 Reynolds numbers in fc8_fields.mjs
+          rule: a cell counts when the engine returns betaInPublishedRange true for it
+   RELATION  the span of the coefficient over the cells inside the published range
+             largest, at beta 0.750000 and Reynolds 5e+3                0.668050
+             smallest, at beta 0.750000 and Reynolds 5e+7               0.595385
+             difference (first less second)                      0.072666
+             ratio (first over second)                           1.122048
+
+THE ENGINE REFUSES TO ASSUME A COEFFICIENT ANYWHERE IT NEEDS ONE. The
+permanent loss relation takes the coefficient of the run as a required
+argument, and says why when it is missing.
+
+   > permanent loss needs the discharge coefficient of this run. This module exists to show
+     that it is not a constant 0.61, so it will not assume one
+
+# SECTION 5: THE SMALL BORE CORRECTION, AND WHERE IT TURNS ON (owned by Associate m02)
+
+Below a pipe bore the correlation treats as small, the equation carries an
+extra term. The engine returns a flag saying whether it applied that term,
+so the bore at which it turns on is found by bisecting the flag rather than
+by reading a number out of the source.
+
+   the correction is applied below a pipe bore of, in             2.800000
+   found by bisecting the engine's own smallBoreCorrectionApplied flag
+
+   pipe bore, in          coefficient    correction applied
+   1.049000                  0.607340                  true
+   2.067000                  0.604875                  true
+   2.469000                  0.603886                  true
+   2.800000                  0.603040                  true
+   3.068000                  0.603075                 false
+   4.026000                  0.603134                 false
+   6.065000                  0.603149                 false
+   10.020000                 0.603172                 false
+   RELATION  the coefficient either side of the small bore boundary, at beta 0.500000 and Reynolds 1e+6
+             at a bore of 2.800000 in, where the correction is applied             0.603040
+             at a bore of 3.068000 in, where it is not                  0.603075
+             difference (first less second)                     -0.000036
+             ratio (first over second)                           0.999941
+
+# SECTION 6: THE PUBLISHED BETA RANGE, AND WHAT THE ENGINE SAYS OUTSIDE IT (owned by Associate m02)
+
+The flange-tap correlation is published over a band of beta. Outside it the
+engine still returns a coefficient and it carries a warning saying the number
+is an extrapolation of the equation. The two edges are found by bisecting the
+engine's own betaInPublishedRange flag.
+
+   lower edge of the published range, beta                       0.100000
+   upper edge of the published range, beta                       0.750000
+
+The warning the engine returns above the upper edge, in its own words:
+   > beta of 0.841 is outside the 0.1 to 0.75 range the flange-tap correlation is published
+     for: resize the plate rather than trusting this number
+
+And the second warning, which fires inside the published range, above a beta
+the engine treats as the point where the trade begins to bite:
+   > beta above 0.6: the permanent pressure loss falls but the uncertainty and the
+     straight-run requirement both rise
+
+   the trade warning starts above a beta of                       0.600000
+   found by bisecting the beta at which the returned warning stops being null
+
+# SECTION 7: THE EXPANSIBILITY FACTOR (owned by Associate m03)
+
+A compressible fluid expands as it passes the plate, and the expansibility
+factor is what the equation carries to account for it. It is swept here
+against the ratio of differential to static pressure and against the specific
+heat ratio, at the ABOH beta.
+
+   dP/P1              k 1.1         k 1.2         k 1.3         k 1.4        k 1.66
+   0.001000        0.999666      0.999694      0.999717      0.999737      0.999779
+   0.005000        0.998329      0.998468      0.998585      0.998686      0.998892
+   0.010000        0.996657      0.996934      0.997169      0.997370      0.997781
+   0.020000        0.993310      0.993863      0.994331      0.994733      0.995553
+   0.040000        0.986608      0.987705      0.988636      0.989436      0.991070
+   0.080000        0.973165      0.975324      0.977162      0.978745      0.981991
+   0.150000        0.949509      0.953438      0.956800      0.959710      0.965716
+   0.250000        0.915403      0.921639      0.927022      0.931717      0.941507
+
+   RELATION  the span of the expansibility factor across the table above
+             largest, at dP/P1 0.001000 and k 1.66                      0.999779
+             smallest, at dP/P1 0.250000 and k 1.1                      0.915403
+             difference (first less second)                      0.084375
+             ratio (first over second)                           1.092173
+
+AN INCOMPRESSIBLE SIZING SETS THE FACTOR TO ONE. The same run computed both
+ways is the measurement of what the factor is worth on this meter.
+
+   RELATION  the ABOH mass flow with and without the expansibility factor
+             taken as incompressible, lb/hr                           24622.4751
+             with the expansibility factor, lb/hr                     24602.3337
+             difference (first less second)                       20.1414
+             ratio (first over second)                           1.000819
+
+# SECTION 8: A DIFFERENTIAL THAT IS NOT A FLOW (owned by Associate m03)
+
+A differential at or above the static pressure would put the downstream
+pressure at zero or below. The repaired engine names that by itself rather
+than letting it fall through to a message about the Reynolds number.
+
+   > the differential of 500 in H2O is 18.06 psi, which is at or above the static pressure
+     of 14.7 psia. The downstream pressure would be zero or negative, so this is a
+     differential range or a static pressure that is wrong rather than a flow
+
+The other three refusals this function carries, in its own words:
+
+   > the orifice bore must be positive and smaller than the pipe bore
+   > flow needs a positive differential, density and viscosity
+   > a compressible flow needs a positive static pressure
+
+# SECTION 9: SIZING THE PLATE, AND THE TWO ENDS OF THE BRACKET (owned by Associate m03)
+
+Sizing solves the bore that gives the wanted differential at the wanted flow,
+by bisection inside the correlation's own published beta range. The repaired
+function NEVER RETURNS A BORE BESIDE AN ERROR.
+
+   target mass flow, lb/hr                              42000.0000   stated
+   solved beta                                            0.614193   returned
+   solved bore, in                                        3.725084   returned
+   the flow that bore passes, lb/hr                     42000.0000   returned
+   the coefficient at that bore                           0.604313   returned
+   the beta bracket it searched                        0.1 to 0.75   returned
+
+The bore note the engine returns, which is the sentence that stops a solved
+bore being ordered as a plate:
+   > a plate is bored to a stock size, so 3.7251 in is the bore this duty asks for rather
+     than the bore that will be ordered. Take the nearest stock plate and recompute the
+     differential it gives at this flow
+
+Both ends of the bracket refuse by name, and each refusal carries the flow
+that end can actually pass:
+
+   > even a 0.75 beta plate cannot pass this flow at this differential: it passes 69,326.8
+     lb/hr. Raise the differential range or use a larger meter run
+   > even a 0.1 beta plate passes more than this flow at this differential: it passes
+     1,018.5 lb/hr. Lower the differential range
+
+# SECTION 10: PERMANENT PRESSURE LOSS (owned by Associate m04)
+
+A differential is not free. The permanent loss is the part of it the meter
+run never gives back, and it falls as beta rises, which is one half of the
+trade the high beta warning in SECTION 6 names.
+
+   beta         coefficient   loss fraction    loss, in H2O
+   0.100000        0.596272        0.988145       63.043643
+   0.200000        0.596906        0.953338       60.822938
+   0.350000        0.599062        0.862647       55.036882
+   0.500000        0.602677        0.733463       46.794924
+   0.600000        0.604689        0.629688       40.174094
+   0.670000        0.604249        0.549831       35.079209
+   0.750000        0.598985        0.452033       28.839688
+
+   RELATION  the permanent loss at the two ends of the published beta range, at the ABOH differential
+             at beta 0.100000, in H2O                                  63.043643
+             at beta 0.750000, in H2O                                  28.839688
+             difference (first less second)                     34.203954
+             ratio (first over second)                           2.186003
+
+WHAT ASSUMING A COEFFICIENT OF 0.61 WOULD COST HERE. The engine refuses to
+assume one. This file computes the loss both ways at the ABOH beta, using the
+run's own coefficient and using the constant the module exists to argue
+against, so the size of the assumption is printed rather than asserted.
+
+   RELATION  the permanent loss on the ABOH run, computed coefficient against an assumed 0.61
+             with the run's own coefficient of 0.602223, in H2O            47.865230
+             with an assumed coefficient of 0.610000, in H2O            47.689171
+             difference (first less second)                      0.176059
+             ratio (first over second)                           1.003692
+
+# SECTION 11: THE TRANSMITTER, AND WHY ACCURACY ON SPAN IS NOT ACCURACY ON READING (owned by Associate m05)
+
+A differential transmitter's accuracy is quoted on its SPAN. Its uncertainty
+as a percentage of the READING therefore rises as the reading falls. This is
+the single most misunderstood thing in gas measurement and the whole of
+Associate module 5.
+
+   span, in H2O: 200.000000   accuracy, percent of span: 0.075000   (the engine's own default accuracy)
+
+   reading, in H2O         pct of reading     dP turndown   flow turndown   warning
+   200.000000                    0.075000        1.000000        1.000000    silent
+   150.000000                    0.100000        1.333333        1.154701    silent
+   100.000000                    0.150000        2.000000        1.414214    silent
+   63.800000                     0.235110        3.134796        1.770536    silent
+   40.000000                     0.375000        5.000000        2.236068    silent
+   25.000000                     0.600000        8.000000        2.828427    silent
+   18.000000                     0.833333       11.111111        3.333333     fires
+   16.000000                     0.937500       12.500000        3.535534     fires
+   14.000000                     1.071429       14.285714        3.779645     fires
+   12.000000                     1.250000       16.666667        4.082483     fires
+   5.000000                      3.000000       40.000000        6.324555     fires
+   2.000000                      7.500000      100.000000       10.000000     fires
+
+   RELATION  the transmitter contribution at the top and the bottom of this span
+             at a reading of 200.000000 in H2O, percent of reading             0.075000
+             at a reading of 2.000000 in H2O, percent of reading             7.500000
+             difference (first less second)                     -7.425000
+             ratio (first over second)                           0.010000
+
+   > the reading is above the transmitter span
+
+# SECTION 12: NINE TO ONE IS THREE TO ONE (owned by Associate m05)
+
+Flow through an orifice goes as the square root of the differential, so a
+DIFFERENTIAL turndown and a FLOW turndown are different numbers. The engine
+returns both, returns the limit it holds for each, and says so in a note. The
+repaired warning fires on the flow turndown.
+
+   flow turndown limit the engine holds                      3.000000
+   differential turndown limit the engine holds              9.000000
+   RELATION  the two limits the engine holds, which are the same rule written in two quantities
+             the differential turndown limit                            9.000000
+             the flow turndown limit                                    3.000000
+             difference (first less second)                      6.000000
+             ratio (first over second)                           3.000000
+
+   on a 200.000000 in H2O span the warning starts below a reading of, in H2O          22.222222
+   the flow turndown there                                                      3.000000
+   the differential turndown there                                              9.000000
+   found by bisecting the reading at which the returned warning stops being null
+
+The note the engine returns on every call, in its own words:
+   > a differential turndown of 3.1 to 1 is a FLOW turndown of 1.77 to 1, because flow goes
+     as the square root of the differential. The customary three-to-one flow rule is a
+     nine-to-one differential turndown
+
+# SECTION 13: THE UNCERTAINTY BUDGET (owned by Associate m06)
+
+The point of a metering app is the uncertainty. Each input's uncertainty is
+multiplied by the sensitivity of the flow to that input, read off the orifice
+equation itself, and the six are combined as a root sum of squares. The
+budget below uses the engine's own default uncertainties for every term
+except the differential, which comes from the transmitter.
+
+   term                         sensitivity  uncertainty, pct  contribution, pct  share of variance, pct
+   discharge coefficient           1.000000          0.500000           0.500000               74.045614
+   expansibility                   1.000000          0.200000           0.200000               11.847298
+   density                         0.500000          0.300000           0.150000                6.664105
+   differential pressure           0.500000          0.235110           0.117555                4.092988
+   orifice bore                    2.114632          0.050000           0.105732                3.311074
+   pipe bore                       0.114632          0.100000           0.011463                0.038920
+
+   total uncertainty, percent of flow                        0.581059
+   dominant term                                            discharge coefficient
+   runner up                                                        expansibility
+   the dominance is clear                                                    true
+
+   RELATION  the two largest shares of the variance on the ABOH run at its design reading
+             discharge coefficient, share of variance in percent            74.045614
+             expansibility, share of variance in percent               11.847298
+             difference (first less second)                     62.198316
+             ratio (first over second)                           6.250000
+
+WHERE THE DIFFERENTIAL TERM COMES FROM. The function derives it from the
+transmitter when a reading and a span are given, and the result says which of
+the two routes it took. That is what stops a screen showing a transmitter
+figure beside a budget that disagrees with it.
+   > the differential transmitter: 0.075 percent of a 200 in H2O span read at 63.8 in H2O
+     is 0.235 percent of reading
+
+And with no reading and no span, the same call takes the typed figure:
+   > a typed differential uncertainty
+   RELATION  the total uncertainty on the ABOH beta, transmitter derived against the typed default
+             with the differential term from the transmitter, percent             0.581059
+             with the engine's typed default differential term, percent             0.621539
+             difference (first less second)                     -0.040480
+             ratio (first over second)                           0.934872
+
+# SECTION 14: WHICH TERM DOMINATES IS A RESULT (owned by Associate m06)
+
+The budget re-run down the span. The dominant term is whatever the engine
+names, and the reading at which the name changes is found by bisecting the
+name rather than by argument.
+
+   reading, in H2O       total, pct             dominant term   its share, pct   clear
+   200.000000              0.570278     discharge coefficient        76.871791    true
+   150.000000              0.571236     discharge coefficient        76.614127    true
+   100.000000              0.573965     discharge coefficient        75.887372    true
+   63.800000               0.581059     discharge coefficient        74.045614    true
+   40.000000               0.599138     discharge coefficient        69.644319    true
+   25.000000               0.643281     discharge coefficient        60.414116    true
+   18.000000               0.705281     discharge coefficient        50.259168    true
+   16.000000               0.737250     discharge coefficient        45.995017   false
+   14.000000               0.781537     differential pressure        46.985858   false
+   12.000000               0.845243     differential pressure        54.676029    true
+   5.000000                1.604310     differential pressure        87.419021    true
+   2.000000                3.792929     differential pressure        97.749176    true
+
+   the dominant term changes name at a reading of, in H2O          15.000000
+   the flow turndown there                                          3.651484
+   the total uncertainty there, percent                             0.757503
+   above that reading the engine names                             discharge coefficient
+   below it the engine names                                       differential pressure
+
+THE MARGIN IS PART OF THE RESULT. A ranking of six numbers with no margin
+will name a winner on a photo finish. The engine returns whether the lead is
+clear and the note it writes differs in the two cases, both quoted here:
+
+   > discharge coefficient contributes 76.9 percent of the variance against 12.3 percent
+     for expansibility: spend on it first
+   > discharge coefficient contributes 46.0 percent of the variance and differential
+     pressure 40.4 percent. That is too close to call a dominant term: improving either one
+     alone will move the total very little
+
+   the lead stops being clear at a reading of, in H2O              16.862007
+
+# SECTION 15: A TURBINE VOLUME IS GROSS (owned by Associate m04)
+
+Pulses divided by a K factor is an indicated volume. A proving run produces a
+meter factor and the product is a GROSS volume. It is not a custody transfer
+quantity and the engine says so on every call.
+
+   pulses                                                  2640000   stated
+   K factor, pulses per bbl                             848.200000   stated
+   meter factor                                           1.002100   stated
+   indicated volume, bbl                                 3112.4735   returned
+   gross volume, bbl                                     3119.0097   returned
+
+   > gross volume at metering conditions. A net standard volume needs the API MPMS
+     temperature and pressure corrections, and this package carries neither, so this is not
+     a custody transfer quantity
+
+   meter factor            gross, bbl   warning
+   0.985000                 3065.7864     fires
+   0.990000                 3081.3487     fires
+   0.995000                 3096.9111    silent
+   1.000000                 3112.4735    silent
+   1.005000                 3128.0358    silent
+   1.010000                 3143.5982     fires
+   1.015000                 3159.1606     fires
+   1.040000                 3236.9724     fires
+
+   the proving screen fires above a meter factor of                 1.010000
+   found by bisecting the meter factor at which the returned warning stops being null
+
+   > a meter factor of 1.04 is 4.0 percent from unity. A proving run on a healthy meter
+     lands within about one percent of 1, and further out than that is a proving failure, a
+     wrong K factor or a damaged rotor rather than a volume. This screen is this engine's
+     stated choice
+
+
+# SECTION 16: STRAIGHT RUN: A TABLE, A REFUSAL AND A CEILING (owned by Associate m04)
+
+Straight-run requirements are table values. They depend on beta and on what
+is upstream, and the engine says it is not calculating them. NONE of the
+columns is cited to a document in this repository, and ONE of them is
+withheld by name.
+
+   fitting                          beta 0.2   beta 0.4   beta 0.5   beta 0.6  beta 0.67  beta 0.75
+   singleElbow                            10         14         18         26         36         44
+   twoElbowsSamePlane                     10         16         22         42         44         44
+   reducer                                 5          5          8          9         12         13
+   fullBoreValve                          12         12         12         14         19         24
+   twoElbowsDifferentPlanes         withheld   withheld   withheld   withheld   withheld   withheld
+
+   COUNT  upstream fittings this engine refuses to answer for: 1
+          tree: the 5 fitting names in fc8_fields.mjs, each asked at all 6 betas
+          rule: a fitting counts as refused when the engine returns withheld true at every beta asked
+
+THE WITHHELD COLUMN, in the engine's own words:
+   > the straight-run requirement for two elbows in different planes is withheld. The
+     column that used to be here fell by 15 diameters between beta 0.5 and 0.6 and then
+     rose by 20, and a published requirement rises with beta, so it cannot be right.
+     Repairing it needs the ISO 5167 or AGA 3 table, which this package does not carry. Two
+     elbows out of plane is the worst common upstream arrangement, so take the requirement
+     from the standard or fit a flow conditioner
+
+AND THE CEILING. Above the last row of the table the engine refuses rather
+than reading off the last row:
+   > beta of 0.950 is above 0.75, where this table stops and where the flange-tap
+     correlation this module is built on stops being published. Answering here would mean
+     reading off the last row, which is not a requirement for this beta
+
+The note every answered row carries:
+   > these are table values, not a calculation: they depend on the fitting and the beta,
+     and a flow conditioner shortens them substantially. They are this engine's stated
+     table data and are not cited to a document in this repository
+
+   the downstream requirement steps up above a beta of              0.500000
+   below it, diameters                                                     4
+   above it, diameters                                                     5
+
+# SECTION 17: THE VALVE, AND THE BOUNDARY EVERYTHING HAPPENS AT (owned by Professional m01)
+
+A control valve is the one item of process equipment where the ordinary
+sizing equation stops working exactly when the service gets difficult. Past
+the choking boundary a larger coefficient buys nothing. The BELEMA valve is
+marched down its outlet pressure and the boundary is crossed inside the
+table.
+
+   P2, psia       dP stated  dP allowable     dP used          Cv       sigma                regime
+   200.000000     46.900000    179.220032   46.900000   37.431838    4.651599                stable
+   171.300000     75.600000    179.220032   75.600000   29.482661    2.885714  incipient cavitation
+   140.000000    106.900000    179.220032  106.900000   24.793550    2.040786  incipient cavitation
+   110.000000    136.900000    179.220032  136.900000   21.909166    1.593572            cavitating
+   80.000000     166.900000    179.220032  166.900000   19.842638    1.307130            cavitating
+   60.000000     186.900000    179.220032  179.220032   19.148480    1.217275    choked, cavitating
+   40.000000     206.900000    179.220032  179.220032   19.148480    1.217275    choked, cavitating
+   28.740000     218.160000    179.220032  179.220032   19.148480    1.217275              flashing
+   20.000000     226.900000    179.220032  179.220032   19.148480    1.217275              flashing
+
+   COUNT  rows of the march above on which the engine reports choked flow: 4
+          tree: the 9 outlet pressures in fc8_fields.mjs, each run through liquidValve
+          rule: a row counts when the engine returns choked true
+
+   the valve begins to choke at an outlet pressure of, psia        67.679968
+   the allowable drop there, psi                                  179.220032
+   the coefficient there                                           19.148480
+   found by bisecting the engine's own choked flag
+
+WHAT SIZING ON THE STATED DROP WOULD COST. Past the boundary the engine caps
+the drop. A hand calculation that used the full stated drop instead produces
+a smaller coefficient, and the size of that error is printed here rather than
+described.
+
+   RELATION  the coefficient at an outlet of 40.000000 psia, the engine against a sizing on the full stated drop
+             the engine, sizing on the drop the valve can use            19.148480
+             a sizing on the full stated drop                          17.821626
+             difference (first less second)                      1.326854
+             ratio (first over second)                           1.074452
+
+   > choked flow: the stated pressure drop is beyond what the valve can use, so sizing on
+     it would undersize the valve badly. The allowable drop has been used instead, and this
+     service wants a multistage or anti-cavitation trim
+
+# SECTION 18: SIGMA IS COMPUTED ON THE DROP THE VALVE USES (owned by Professional m02)
+
+Damage begins long before the flow chokes, and the cavitation index says how
+much margin there is before it. The engine computes it on the drop the valve
+ACTUALLY USES, and returns a basis line saying so. On a choked service the
+stated drop and the used drop are two different pressure drops, and an index
+computed on the stated one belongs to a drop the valve cannot take.
+
+   > computed on the pressure drop the valve uses, which is the allowable drop once the
+     service is choked
+
+THE REGIME LADDER, and the sigma at which each rung is reached, found by
+bisecting the word the engine returns.
+
+   boundary                                          outlet, psia   sigma there
+   stable gives way to incipient cavitation            174.180000      3.000000
+   incipient gives way to cavitating                   137.820000      2.000000
+   the flow chokes                                      67.679968      1.217275
+
+BOTH LADDER THRESHOLDS ARE THIS ENGINE'S STATED SCREEN and neither is read
+from a standard. The engine exports them and this course never grades a
+regime word.
+   the cavitating threshold the engine exports                      2.000000
+   the incipient threshold the engine exports                       3.000000
+
+AND THE REFUSAL THAT MAKES THE LADDER RUN AT ALL. With no vapour pressure the
+index is infinite, the last rung of the ladder is taken, and every liquid
+service at every drop reads as stable in green. The repaired engine refuses:
+   > a true vapour pressure is needed. The cavitation index is (P1 - Pv) divided by the
+     pressure drop, so with no vapour pressure it is infinite and every service reads as
+     stable: the cavitation screen would not run at all. Every liquid has a vapour pressure
+     at its flowing temperature, so state it
+
+# SECTION 19: FLASHING IS A DIFFERENT PROBLEM (owned by Professional m02)
+
+When the outlet is at or below the vapour pressure the liquid is flashing
+rather than cavitating, and an anti-cavitation trim will not help it. The
+engine separates the two and says which one it has.
+
+   outlet pressure, psia                                 26.740000   stated
+   vapour pressure, psia                                 28.740000   stated
+   flashing                                                   true   returned
+   regime                                                 flashing   returned
+   coefficient                                           19.148480   returned
+
+   > the outlet is at or below the vapour pressure: this service is FLASHING, not
+     cavitating, and an anti-cavitation trim will not help it. Size for two-phase flow and
+     use hardened trim with an expanded outlet
+
+   RELATION  the outlet pressure at which flashing starts, against the stated vapour pressure
+             the outlet pressure where the engine turns the flashing flag on, psia            28.740000
+             the stated vapour pressure, psia                          28.740000
+             difference (first less second)                      0.000000
+             ratio (first over second)                           1.000000
+
+The liquid critical pressure ratio factor, which sets how much of the
+difference between the inlet and the vapour pressure the valve can use:
+   FF at the BELEMA vapour and critical pressures                   0.892161
+   FF as the vapour pressure approaches zero                        0.960000
+   FF at the critical point                                         0.680000
+
+# SECTION 20: GAS SIZING AND THE TWO THIRDS FLOOR (owned by Professional m03)
+
+On gas the boundary is a pressure drop RATIO. The expansion factor falls
+linearly with it and is floored at two thirds, which is the choked condition.
+Past it the flow is sonic in the vena contracta and more drop buys nothing.
+
+   P2, psia               x   x terminal      x used           Y            Cv   choked
+   230.000000      0.068449     0.680357    0.068449    0.966464    330.485071    false
+   200.000000      0.189955     0.680357    0.189955    0.906933    211.406903    false
+   171.300000      0.306197     0.680357    0.306197    0.849982    177.668417    false
+   140.000000      0.432969     0.680357    0.432969    0.787872    161.189447    false
+   110.000000      0.554475     0.680357    0.554475    0.728341    154.079391    false
+   90.000000       0.635480     0.680357    0.635480    0.688654    152.218918    false
+   70.000000       0.716484     0.680357    0.680357    0.666667    151.964887     true
+   50.000000       0.797489     0.680357    0.680357    0.666667    151.964887     true
+   30.000000       0.878493     0.680357    0.680357    0.666667    151.964887     true
+
+   COUNT  rows of the gas march above on which the engine reports choked flow: 3
+          tree: the 9 outlet pressures in fc8_fields.mjs, each run through gasValve
+          rule: a row counts when the engine returns choked true
+
+   the expansion factor on every choked row                         0.666667
+   which is two thirds to the last bit a double carries
+
+   the gas valve begins to choke at an outlet of, psia             78.919821
+   the terminal pressure drop ratio there                           0.680357
+   the specific heat ratio factor there                             0.907143
+   the coefficient there                                          151.964887
+
+The specific heat ratio factor across the specific heat ratios in this file:
+   k                       Fk
+   1.100000          0.785714
+   1.200000          0.857143
+   1.300000          0.928571
+   1.400000          1.000000
+   1.660000          1.185714
+
+   > choked flow: x of 0.878 is at or past the terminal 0.680, so the flow is sonic in the
+     vena contracta and further pressure drop buys nothing. The terminal ratio has been
+     used for sizing, and the noise and trim wear at this condition need a multistage trim
+
+# SECTION 21: THE VALVE STYLE TABLE, AND WHOSE IT IS (owned by Professional m03)
+
+The pressure recovery factor FL and the terminal pressure drop ratio xT are
+TABLE VALUES. They are trim and vendor dependent by nature and this course
+never grades a number that rests on them.
+
+   style id                label                                               FL        xT
+   globeSingleFlow         Globe, single seat, flow to open              0.900000  0.720000
+   globeSingleClose        Globe, single seat, flow to close             0.800000  0.550000
+   globeCage               Globe, cage guided                            0.900000  0.750000
+   globeAntiCav            Globe, multistage anti-cavitation trim        0.970000  0.900000
+   butterfly60             Butterfly, 60 degrees open                    0.680000  0.380000
+   butterfly90             Butterfly, 90 degrees open                    0.550000  0.200000
+   ballSegmented           Ball, segmented                               0.660000  0.300000
+   ballFullBore            Ball, full bore                               0.550000  0.150000
+
+   COUNT  valve styles this engine carries: 8
+          tree: the VALVE_STYLES array the module exports
+          rule: every entry of the array, with no filter
+
+   > the FL and xT above are this engine's stated table values. They are not cited to a
+     document in this repository, they are trim and vendor dependent by nature, and a
+     certified vendor figure for the specific trim always replaces them
+
+   RELATION  the pressure recovery factor across the styles this engine carries
+             the largest FL in the table                                0.970000
+             the smallest FL in the table                               0.550000
+             difference (first less second)                      0.420000
+             ratio (first over second)                           1.763636
+
+A STATED VENDOR FIGURE REPLACES THE TABLE, and the engine takes it. The same
+service sized on the table and on a stated figure:
+   RELATION  the coefficient at an outlet of 60.000000 psia, the table FL against a stated FL of 0.970000
+             on the table FL of 0.900000                               19.148480
+             on a stated FL of 0.970000                                18.750935
+             difference (first less second)                      0.397545
+             ratio (first over second)                           1.021201
+
+
+# SECTION 22: AUTHORITY, AND THE CHARACTERISTIC IT CHOOSES (owned by Professional m04)
+
+Valve authority is the fraction of the system's total drop the valve takes at
+design flow, and it decides whether a loop can control at all. The
+characteristic recommendation reads off it. The two functions speak ONE
+vocabulary: every id the recommendation returns is an id the travel check
+accepts, which this section asserts on every row of the ladder below.
+
+   total system drop, psi: 120.000000
+
+   valve drop, psi        authority       verdict      characteristic               label
+   10.000000               0.083333          poor     equalPercentage    equal percentage
+   25.000000               0.208333          poor     equalPercentage    equal percentage
+   40.000000               0.333333    acceptable     equalPercentage    equal percentage
+   55.000000               0.458333    acceptable     equalPercentage    equal percentage
+   70.000000               0.583333          good              linear              linear
+   85.000000               0.708333          good              linear              linear
+   100.000000              0.833333          good              linear              linear
+
+   the verdict stops being good below an authority of               0.500000
+   the verdict becomes poor below an authority of                   0.250000
+   the characteristic recommendation changes at an authority of     0.500000
+
+   > the 0.5 and 0.25 boundaries are this engine's stated screen, not a value read from a
+     standard
+
+The two reasons the recommendation gives, in the engine's own words:
+   > the valve takes most of the system drop, so its inherent curve is close to its
+     installed curve and linear trim gives even loop gain
+   > the system absorbs most of the drop as flow rises, which flattens the installed curve.
+     Equal-percentage trim is shaped to cancel exactly that and restore something close to
+     linear installed gain
+
+
+# SECTION 23: NOISE: THE BAND THE STREAM POWER CAPS AND FLOORS (owned by Professional m05)
+
+The full noise prediction needs geometry this package does not have, so what
+the engine offers is a SCREENING band and it says so. The repaired band sees
+both the pressure ratio and the stream power: a trickle cannot be loud
+however hard it is throttled, and tens of megawatts of stream power is not
+quiet however gently.
+
+   probe                                                      ratio       power, kW  ratio band        band
+   a one scfh bleed at a pressure ratio near twelve       12.000000      0.00133650      severe         low
+   a hundred million scfh at a pressure ratio near two     1.898734         34486.0         low    moderate
+   a moderate station flow at a pressure ratio near six    6.000000         2312.85        high        high
+
+   COUNT  probes above on which the stream power moved the band off the pressure ratio alone: 2
+          tree: the 3 noise probes in fc8_fields.mjs
+          rule: a probe counts when the engine returns a non-null powerEffect
+
+   a one scfh bleed at a pressure ratio near twelve:
+   > held down to low: the stream power of 0.00134 kW is below 1 kW, and a trickle cannot
+     be loud however hard it is throttled. On the pressure ratio alone this service would
+     have read severe
+   a hundred million scfh at a pressure ratio near two:
+   > raised to moderate: the stream power of 34486.0 kW is above 1000 kW, which is not a
+     quiet valve at any pressure ratio. On the pressure ratio alone this service would have
+     read low
+
+   the pressure ratio bands the engine exports              moderate 2.000000, high 4.000000, severe 10.000000
+   the stream power bands the engine exports                quiet 1.000000 kW, loud 1000.000000 kW
+
+   > a screening indication only: a real noise prediction needs the IEC 60534-8-3 method
+     with valve and pipe geometry. Use this to know whether to ask the question, not to
+     answer it. The pressure ratio sets the band and the stream power caps and floors it,
+     and both sets of thresholds are this engine's stated screen
+
+
+# SECTION 24: TRAVEL, AND A VERDICT OVER CHECKS THAT RAN (owned by Professional m06)
+
+A valve sized for the maximum and asked to control at the minimum may be near
+its seat, where it does not control at all. The engine counts its checks and
+says how many it ran, and it WITHHOLDS the pass verdict whenever a flow is
+missing. It also separates a flow BEYOND the valve from a flow NOT GIVEN.
+
+   case                                                   min      normal         max   ran    pass  warnings
+   all three flows given and all three checks clean   47.956430   74.737770   83.997848   3/3    true         0
+   no minimum flow given                            not given   74.737770   83.997848   2/3    null         0
+   no maximum flow given                            47.956430   74.737770   not given   2/3    null         0
+   a maximum flow beyond the valve                  47.956430   74.737770beyond the valve   3/3   false         1
+   a minimum flow hard against the seat              0.000000   74.737770   83.997848   3/3   false         1
+
+   COUNT  travel cases above on which the engine WITHHELD its pass verdict: 2
+          tree: the 5 travel cases in fc8_fields.mjs
+          rule: a case counts when the engine returns pass null, which it does whenever a check could not run
+
+   no minimum flow given:
+   > no verdict: 2 of the 3 checks ran. Not run: the near-seat rangeability check: no
+     minimum flow was given, so whether the valve can control at turndown is not known
+   no maximum flow given:
+   > no verdict: 2 of the 3 checks ran. Not run: the maximum flow case: no maximum flow was
+     given, so whether the valve can pass its design case is not known
+
+The two states a missing travel can carry, which a single null cannot tell
+apart:
+   a maximum flow beyond the valve reports the state            beyond the valve
+   a maximum flow not given reports the state                          not given
+
+THE EQUAL PERCENTAGE TRAVEL AGAINST THE LINEAR TRAVEL at the same required
+coefficient, which is the whole reason a characteristic is chosen:
+   RELATION  the normal duty travel on the same valve, equal percentage against linear
+             equal percentage trim at a rangeability of 50, percent open            74.737770
+             linear trim, percent open                                 37.222222
+             difference (first less second)                     37.515548
+             ratio (first over second)                           2.007880
+
+   > unknown inherent characteristic 'quickOpening': this module knows equalPercentage and
+     linear. An unrecognised characteristic used to be treated silently as equal percentage
+
+# SECTION 25: THE TANK, AND THE EXACT BARREL (owned by Expert m01)
+
+The three tank questions share one geometry, which is why they are in one
+module. The conversion between cubic feet and barrels is exact by definition
+and the engine returns it so it can be checked rather than assumed.
+
+   diameter, ft                                          62.400000   stated
+   shell height, ft                                      36.000000   stated
+   design liquid level, ft                               34.600000   stated
+   cross section, ft2                                    3058.1520   returned
+   nominal capacity, bbl                                19608.4845   returned
+   nominal capacity, ft3                               110093.4703   returned
+   working capacity to the design level, bbl            18845.9323   returned
+   barrels per foot of shell                              544.6801   returned
+   cubic feet in a barrel                        5.614583333333333   returned
+
+   RELATION  the nominal and the working capacity of this tank
+             nominal, to the top of the shell, bbl                    19608.4845
+             working, to the design liquid level, bbl                 18845.9323
+             difference (first less second)                      762.5522
+             ratio (first over second)                           1.040462
+
+   > a fill height cannot be negative: a tank does not hold less than nothing
+
+# SECTION 26: THE SHELL, AND WHICH OF THREE THINGS GOVERNS EACH COURSE (owned by Expert m02)
+
+The one-foot method, at the design condition and at the hydrostatic test
+condition, because either can govern and which one does depends on the
+product. A light product makes the water test govern, which is exactly the
+case people forget when they design for the product alone. The minimum plate
+thickness is a STATED INPUT and the engine says so.
+
+   course      bottom, ft    top, ft    head, ft   t design, in   t test, in   required, in               governed by
+   1             0.000000   8.000000   34.600000       0.214385     0.218926       0.218926          hydrostatic test
+   2             8.000000  16.000000   26.600000       0.163341     0.166801       0.187500   minimum plate thickness
+   3            16.000000  24.000000   18.600000       0.112297     0.114676       0.187500   minimum plate thickness
+   4            24.000000  32.000000   10.600000       0.061253     0.062550       0.187500   minimum plate thickness
+   5            32.000000  36.000000    2.600000       0.010209     0.010425       0.187500   minimum plate thickness
+
+   COUNT  courses on this tank: 5
+          tree: the courses array shellCourses returns for the OGBOGENE geometry
+          rule: one course per whole or part course height in the shell height, which the engine takes as the ceiling of the shell height divided by the course height
+   COUNT  courses on this tank the water test governs: 1
+          tree: the same courses array
+          rule: a course counts when the engine returns governing equal to hydrostatic test
+   COUNT  courses on this tank the stated minimum plate governs: 4
+          tree: the same courses array
+          rule: a course counts when the engine returns governing equal to minimum plate thickness
+
+   the thickest course                                           1   returned
+   its required thickness, in                             0.218926   returned
+   what governs it                                hydrostatic test   returned
+   the stated minimum plate thickness, in                 0.187500   returned
+   the last course the water test governs                        1   returned
+   the first course the minimum plate governs                    2   returned
+
+THE BOTTOM COURSE IS ALWAYS THE THICKEST and the engine returns that as a
+property of the method rather than as a result. The head falls as the courses
+go up, both thickness relations are linear in it, and the minimum plate is a
+floor, so the required thickness cannot increase upward.
+   the engine's own flag for that                             true   returned
+
+WHAT GOVERNS THE BOTTOM COURSE ACROSS THE PRODUCT GRAVITIES IN THIS FILE:
+
+   specific gravity       t design, in   t test, in   required, in               governed by
+   0.550000                   0.129233     0.218926       0.218926          hydrostatic test
+   0.650000                   0.152729     0.218926       0.218926          hydrostatic test
+   0.750000                   0.176226     0.218926       0.218926          hydrostatic test
+   0.850000                   0.199723     0.218926       0.218926          hydrostatic test
+   0.912400                   0.214385     0.218926       0.218926          hydrostatic test
+   1.000000                   0.234968     0.218926       0.234968            product design
+   1.150000                   0.270214     0.218926       0.270214            product design
+
+   on this tank the water test takes the bottom course below a gravity of     0.931727
+   found by bisecting the engine's own governing word
+
+The two notes the engine writes when something other than the product
+governs, in its own words:
+   > the water test governs this course, not the product: a light product does not stress
+     the shell as hard as the water it will be tested with, and designing for the product
+     alone would under-thickness it
+   > neither the product nor the water test needs this much plate: the stated minimum of
+     0.1875 in governs this course
+
+   > a stated input. API 650 bands the minimum shell plate thickness by tank diameter and
+     this package does not carry that band table, so this value is the caller's and not the
+     standard's
+   > the one-foot method. API 650 sets a diameter above which the variable design point
+     method is required instead, and that limit is not carried here, so a large tank must
+     be checked against the standard before this thickness is used
+
+# SECTION 27: NORMAL VENTING, AND WHICH DIRECTION GOVERNS (owned by Expert m03)
+
+A tank breathes in and out. Thermal venting is temperature, movement venting
+is displacement, and the two add in each direction. The engine forms ONE
+predicate for which direction governs, computed once, because two expressions
+disagreed at the tie and the label said vacuum while the warning stayed
+silent.
+
+   nominal capacity, bbl                                19608.4845   from SECTION 25
+   fill rate, bbl/hr                                     2480.0000   stated
+   draw rate, bbl/hr                                      640.0000   stated
+   thermal inbreathing, scfh                            19608.4845   returned
+   thermal outbreathing low volatility, scfh            11765.0907   returned
+   thermal outbreathing high volatility, scfh           19608.4845   returned
+   movement outbreathing, scfh                          13924.1667   returned
+   movement inbreathing, scfh                            3593.3333   returned
+   total outbreathing, scfh                             25689.2574   returned
+   total inbreathing, scfh                              23201.8178   returned
+   governing case                             pressure (outbreathing)   returned
+
+   RELATION  the two directions on this tank at its stated rates
+             total outbreathing, scfh                                 25689.2574
+             total inbreathing, scfh                                  23201.8178
+             difference (first less second)                     2487.4395
+             ratio (first over second)                           1.107209
+
+   > 1 scfh of air per barrel of capacity for an uninsulated tank at a latitude factor of
+     1, with the low-volatility outbreathing at 0.6 of it. These factors are this engine's
+     stated choices and are not cited to a document in this repository
+
+EVERY THERMAL FACTOR IS THE ENGINE'S OWN STATED CHOICE, and this course
+grades nothing that rests on one unless a capstone states it:
+   thermal rate per barrel of capacity, scfh              1.000000   returned
+   latitude factor                                        1.000000   returned
+
+   draw rate, bbl/hr      inbreathing, scfh   outbreathing, scfh               governing
+   0.0000                        19608.4845           25689.2574 pressure (outbreathing)
+   200.0000                      20731.4012           25689.2574 pressure (outbreathing)
+   400.0000                      21854.3178           25689.2574 pressure (outbreathing)
+   640.0000                      23201.8178           25689.2574 pressure (outbreathing)
+   900.0000                      24661.6095           25689.2574 pressure (outbreathing)
+   1200.0000                     26345.9845           25689.2574    vacuum (inbreathing)
+   1600.0000                     28591.8178           25689.2574    vacuum (inbreathing)
+   2400.0000                     33083.4845           25689.2574    vacuum (inbreathing)
+
+   vacuum takes the case above a draw rate of, bbl/hr               1083.0319
+   found by bisecting the engine's own governing word
+
+VACUUM IS THE CASE THAT DESTROYS TANKS, and the warning says why:
+   > vacuum governs. A tank is a thin-walled vessel designed for inches of water column,
+     and an undersized vacuum vent will pull it flat during a cold rainstorm on a draining
+     tank. This is the case that destroys tanks
+
+ABOVE A STATED CAPACITY THE ENGINE STOPS CLAIMING THE THERMAL RATE IS
+PROPORTIONAL, and warns rather than extrapolating in silence:
+   > this tank holds 250,000 bbl, above the 20,000 bbl at which this package stops claiming
+     the thermal rate is proportional to capacity. The published table above that capacity
+     is not carried here, so this inbreathing figure is an extrapolation and must be
+     checked against API 2000 before a vent is bought
+   the stated capacity at which it stops, bbl                     20000.0000
+
+INSULATION IS A CREDIT THE ENGINE STATES AND DOES NOT CITE:
+   RELATION  the thermal inbreathing of this tank, insulated against uninsulated
+             uninsulated, scfh                                        19608.4845
+             insulated at the engine's stated credit, scfh             4902.1211
+             difference (first less second)                    14706.3634
+             ratio (first over second)                           4.000000
+   > insulation cuts the thermal rate substantially and the credit applied here is 0.25,
+     which is this engine's stated choice rather than a value read from the standard; the
+     standard allows a calculated credit for a documented insulation system
+
+
+A HIGH VOLATILITY PRODUCT DOUBLES THE MOVEMENT OUTBREATHING, because the
+incoming liquid also evaporates:
+   RELATION  the movement outbreathing at the same fill rate, high volatility against low
+             high volatility, scfh                                    27848.3333
+             low volatility, scfh                                     13924.1667
+             difference (first less second)                    13924.1667
+             ratio (first over second)                           2.000000
+
+# SECTION 28: THE FIRE CASE: THE DUTY IS COMPUTED AND THE VENT IS WITHHELD (owned by Expert m04)
+
+This section is the reason this course exists in the shape it does. The
+wetted-area heat input is in this package and is returned. The step after it,
+the relation that turns a duty in Btu an hour into a required vent capacity in
+scfh of air equivalent, is NOT in this package, and the engine refuses to
+guess it.
+
+   wetted area, ft2                                      5881.0614   returned
+   effective wetted height, ft                           30.000000   returned
+   heat input band                                  above 2800 ft2   returned
+   fire duty, Btu/hr                                 25892440.2513   returned
+   environment factor                                     1.000000   returned
+   required vent capacity, scfh of air                        null   returned
+   the vent is withheld                                       true   returned
+
+THE WITHHOLDING, IN THE ENGINE'S OWN WORDS. Every writer on this course must
+be able to quote this and no writer may go round it:
+   > the required vent capacity is withheld. Turning this duty into scfh of air equivalent
+     needs the API 2000 air-equivalence relation, and this package does not carry it. The
+     relation that used to be here divided by the square root of an absolute temperature
+     beside a packaged field constant, which cannot both be right, and the two plausible
+     forms of it differ by a factor of about 24. An emergency vent sized 24 times too small
+     is how a tank is destroyed, so no figure is offered here. Size the vent from API 2000
+     against the heat input above, or from the vent manufacturer's certified capacity curve
+
+THE ENGINE EXPORTS THAT SENTENCE AS A NAMED CONSTANT, so a screen cannot
+print a blank where the vent should be:
+   the exported constant and the returned reason are the same string
+
+THE HEAT INPUT BANDS, walked across their own edges. The wetted area at which
+each band gives way to the next is found by bisecting the band NAME the
+engine returns.
+
+   wetted area, ft2                    band        duty, Btu/hr    vent, scfh
+   120.0000                   below 200 ft2        2400000.0000          null
+   199.0000                   below 200 ft2        3980000.0000          null
+   200.0000                 200 to 1000 ft2        3998437.1717          null
+   640.0000                 200 to 1000 ft2        7723340.1783          null
+   999.0000                 200 to 1000 ft2        9937139.0067          null
+   1000.0000               1000 to 2800 ft2        9949623.3831          null
+   1800.0000               1000 to 2800 ft2       12136368.3356          null
+   2799.0000               1000 to 2800 ft2       14089436.4220          null
+   2800.0000                 above 2800 ft2       14089282.6074          null
+   4200.0000                 above 2800 ft2       19646433.0614          null
+
+   COUNT  fire heat input bands this engine carries: 4
+          tree: the band names the engine returns across the wetted areas in fc8_fields.mjs
+          rule: a band counts once for each distinct band string the engine returned over that sweep
+
+   band edge                                         wetted area, ft2  duty below, Btu/hr  duty above, Btu/hr
+   below 200 ft2 gives way to 200 to 1000 ft2                200.0000        3999999.9960        3998437.1740
+   200 to 1000 ft2 gives way to 1000 to 2800 ft2            1000.0000        9942767.8295        9949623.3865
+   1000 to 2800 ft2 gives way to above 2800 ft2             2800.0000       14091137.6199       14089282.6189
+
+THE WETTED HEIGHT IS CAPPED. Only the wetted shell below the standard's own
+height limit counts, and the engine says so when the cap binds:
+   > only the wetted shell below 30 ft counts for fire venting (API 2000): a flame does not
+     reach higher in the standard's basis
+   the effective wetted height on a 48 ft column, ft               30.000000
+
+THE ENVIRONMENT FACTOR IS A CREDIT AND CANNOT BE A PENALTY:
+   RELATION  the fire duty on this tank, with and without a stated drainage credit
+             with no credit, Btu/hr                                25892440.2513
+             with a stated environment factor of 0.300000, Btu/hr         7767732.0754
+             difference (first less second)                 18124708.1759
+             ratio (first over second)                           3.333333
+   > the environment factor is a credit for drainage, insulation or a water spray and lies
+     between 0 and 1: a factor above 1 would be a penalty, which this relation does not
+     carry
+
+AND THE NOTE THAT STOPS THE FIRE DUTY BEING COMPARED WITH THE NORMAL VENT:
+   > the fire duty is normally far above the normal venting duty, which is why an emergency
+     vent or a weak roof-to-shell seam exists at all. The two cannot be compared as vent
+     capacities here, because the vent capacity is withheld
+
+# SECTION 29: EVAPORATIVE LOSSES, AND WHAT CONTROL SAVES (owned by Expert m05)
+
+What evaporates out of a fixed-roof tank is both lost product and a
+reportable release, and the two are the same arithmetic.
+
+   vapour space height, ft                                4.200000   stated
+   true vapour pressure, psia                             2.370000   stated
+   annual throughput, bbl                              484000.0000   stated
+   vapour space volume, ft3                             12844.2382   returned
+   vapour density, lb/ft3                                 0.027086   returned
+   vapour space expansion factor                          0.042556   returned
+   saturation factor                                      0.654638   returned
+   standing loss, lb/yr                                  3537.6108   returned
+   working loss, lb/yr                                  73605.2059   returned
+   total loss, lb/yr                                    77142.8167   returned
+   total loss, short tons/yr                               38.5714   returned
+
+   RELATION  the two halves of the annual loss on this tank
+             the standing loss, lb/yr                                  3537.6108
+             the working loss, lb/yr                                  73605.2059
+             difference (first less second)                   -70067.5951
+             ratio (first over second)                           0.048062
+
+   > the turnover effect is the stated workingTurnoverFactor. AP-42's turnover factor Kn is
+     not carried by this package, so a turnover count is not an input here
+
+A PRODUCT THAT BOILS AT AMBIENT IS REFUSED. The expansion factor has the
+difference between atmospheric and the vapour pressure in a denominator, so
+a product at atmospheric pressure has no expansion factor at all. The engine
+refuses rather than returning a standing loss with a denominator at or below
+zero, which a total would hide because the working loss does not carry it:
+   > a true vapour pressure of 15.4 psia is at or above the stated atmospheric pressure of
+     14.7 psia: the product boils at ambient and this is not a fixed-roof tank problem. It
+     needs a pressure vessel or a refrigerated tank, and these relations do not apply to it
+
+WHAT CONTROL SAVES, over the efficiencies in this file:
+
+   control efficiency, pct         saved, lb/yr    remaining, lb/yr
+   0.000000                              0.0000          77142.8167
+   60.000000                         46285.6900          30857.1267
+   75.000000                         57857.1125          19285.7042
+   90.000000                         69428.5350           7714.2817
+   95.000000                         73285.6759           3857.1408
+   98.000000                         75599.9604           1542.8563
+   100.000000                        77142.8167              0.0000
+
+   > an internal floating roof customarily saves 60 to 90 percent and a vapour recovery
+     unit 90 to 98 percent; both figures are equipment and operating questions, so they are
+     typed here rather than assumed
+
+   > a control efficiency is needed: leaving it out is not the same as saying zero
+   > a control efficiency of 140 percent is impossible: it lies between 0 and 100
+
+# SECTION 30: EVERY REFUSAL IN THIS COURSE, COUNTED (owned by Expert m06)
+
+A refusal is the most useful thing these engines do, and a learner who has
+not met one has not met the module. Every refusal this file called is counted
+here with the tree it was counted over and the rule that decided membership.
+
+   COUNT  distinct refusals this digest calls and proves: 28
+          tree: the assertion list this generator built while it ran, filtered to the ones labelled a refusal
+          rule: one count per distinct assertion text, and every one of them asserted that the engine returned an error key
+   COUNT  calls this digest labels a success and proves: 238
+          tree: the same assertion list, filtered to the ones labelled a success
+          rule: one count per distinct assertion text, and every one of them asserted no error key and no non-finite number in the result
+
+LABEL AND CALL ARE CHECKED AGAINST EACH OTHER. A generator that labelled a
+row a refusal and then called a case that succeeded would print numbers that
+are all real engine output under a sentence that is false, and no numeric
+sweep could see it. This file writes NOTHING AT ALL if any label disagrees
+with its call.
+
+The refusals, by the function that raises them:
+
+   evaporativeLosses           1
+       evaporativeLosses on a product that boils at ambient
+   fireVenting                 1
+       fireVenting with an environment factor above one
+   gasValve                    1
+       gasValve on an xT above one
+   liquidValve                 3
+       liquidValve on an FL above one
+       liquidValve on an unknown style
+       liquidValve with no vapour pressure
+   lossControl                 2
+       lossControl above a hundred percent
+       lossControl with no efficiency
+   movementVenting             1
+       movementVenting with a negative fill rate
+   noiseIndication             2
+       noiseIndication with no gas gravity
+       noiseIndication with no outlet pressure
+   orificeFlow                 4
+       a compressible flow with no static pressure
+       orificeFlow with a differential above the static pressure
+       orificeFlow with an orifice bore above the pipe bore
+       orificeFlow with no differential
+   permanentLoss               1
+       permanentLoss with no discharge coefficient
+   sizeOrifice                 2
+       sizeOrifice for a flow below the smallest plate
+       sizeOrifice for a flow beyond the largest plate
+   straightRunDiameters        2
+       straightRunDiameters above the top of the table
+       straightRunDiameters for two elbows in different planes
+   tankCapacity                1
+       tankCapacity with a fill height below zero
+   thermalVenting              2
+       thermalVenting at a latitude factor above what the package will apply
+       thermalVenting with no capacity
+   transmitterUncertaintyPct   1
+       a reading above the transmitter span
+   travelCheck                 1
+       travelCheck on an unrecognised characteristic
+   turbineVolume               2
+       turbineVolume with a meter factor of zero
+       turbineVolume with no K factor
+   valveAuthority              1
+       valveAuthority with a valve drop above the system drop
+
+# SECTION 31: WHAT THESE THREE ENGINES DO NOT CARRY (owned by Expert m06)
+
+The register. Fifteen items, and two of them are outright refusals to answer.
+NOTHING IN THIS COURSE IS GRADED ON ANY OF THEM. The capstone clearance
+report says field by field which mechanism clears which item, and the two
+withheld answers are taught as limits and are never graded anywhere.
+
+   tag   engine    item                                                                                                status
+   H1    metering  the published lower Reynolds number limit of the Reader-Harris/Gallagher correlation at each beta and boreNOT CARRIED, and every coefficient the engine returns carries a note saying the low Reynolds end is an extrapolation of this package
+   H2    metering  the straight-run requirement for two elbows in different planes                                     WITHHELD BY NAME, because the column that was there fell as beta rose and then rose again, and a published requirement rises with beta
+   H3    metering  the remaining straight-run columns                                                                  STATED TABLE DATA, cited to no document in this repository, and the engine labels every answered row as such
+   H4    metering  the API MPMS temperature and pressure correction tables                                             NOT CARRIED, so there is no CTL, no CPL and no net standard volume in this module, and every turbine volume is labelled gross
+   H5    valve     the valve style FL and xT table                                                                     STATED TABLE VALUES, trim and vendor dependent by nature, and a certified vendor figure always replaces them
+   H6    valve     the cavitation index thresholds                                                                     A STATED SCREEN, exported so it can be read, and this course grades no regime word
+   H7    valve     the noise pressure ratio bands and the stream power bands                                           A STATED SCREEN, and the engine calls its own output an indication rather than a prediction
+   H8    valve     the valve authority screen boundaries                                                               A STATED SCREEN, and the engine says so in the result
+   H9    valve     the ISA Reynolds number factor FR                                                                   NOT CARRIED, so every liquid sizing here is a fully turbulent one, the engine returns reynoldsFactorApplied false, and this module takes no viscosity at all
+   H10   valve     the IEC 60534-8-3 noise prediction                                                                  NOT CARRIED, and the screening indication says so on every call
+   H11   tank      the API 650 minimum shell plate thickness band table                                                NOT CARRIED, so the minimum is a stated input and the result names the value in force
+   H12   tank      the diameter above which the variable design point method replaces the one-foot method              NOT CARRIED, and the engine returns a note saying a large tank must be checked against the standard
+   H13   tank      the thermal venting table above the proportional limit, and the latitude and insulation credits     NOT CARRIED OR STATED, and a tank above the stated limit is warned rather than silently extrapolated
+   H14   tank      the turnover factor Kn                                                                              NOT CARRIED, and the input that never fed it has been removed rather than echoed back as though it worked
+   W1    tank      the relation that turns a fire duty into a required vent capacity in scfh of air equivalent         WITHHELD BY NAME. The two plausible forms of it differ by a factor of about 24 and an emergency vent sized 24 times too small is how a tank is destroyed
+
+   COUNT  items in the register above: 15
+          tree: the register written out in this section, one row per item
+          rule: an item counts when the engine states in its own source or its own returned text that the package does not carry it, does not cite it, or refuses to answer it
+   COUNT  items in the register that are outright refusals to answer: 2
+          tree: the same register
+          rule: an item counts when the engine returns a refusal or a withheld flag in place of a number, which SECTIONS 16 and 28 both show being returned
+
+BOTH REFUSALS PROVED, BY CALLING THEM:
+   straightRunDiameters returns withheld true for two elbows in different planes
+   fireVenting returns ventWithheld true and a null vent capacity at every wetted area
+
+# SECTION 32: EVERY COUNT IN THIS FILE, WITH ITS TREE AND ITS RULE (owned by Expert m06)
+
+A count is not checkable without the tree it was counted over and the rule
+that decided membership, so every count printed above is repeated here with
+both. A writer quoting a count must quote the tree and the rule with it.
+
+   metering.js exported names: 11
+      tree: Object.keys of the imported module metering.js
+      rule: every name the module exports, functions and data alike, with no filter
+   controlValve.js exported names: 16
+      tree: Object.keys of the imported module controlValve.js
+      rule: every name the module exports, functions and data alike, with no filter
+   storageTank.js exported names: 11
+      tree: Object.keys of the imported module storageTank.js
+      rule: every name the module exports, functions and data alike, with no filter
+   cells in the table above that sit inside the published beta range: 35
+      tree: the cross product of the 9 betas and the 5 Reynolds numbers in fc8_fields.mjs
+      rule: a cell counts when the engine returns betaInPublishedRange true for it
+   upstream fittings this engine refuses to answer for: 1
+      tree: the 5 fitting names in fc8_fields.mjs, each asked at all 6 betas
+      rule: a fitting counts as refused when the engine returns withheld true at every beta asked
+   rows of the march above on which the engine reports choked flow: 4
+      tree: the 9 outlet pressures in fc8_fields.mjs, each run through liquidValve
+      rule: a row counts when the engine returns choked true
+   rows of the gas march above on which the engine reports choked flow: 3
+      tree: the 9 outlet pressures in fc8_fields.mjs, each run through gasValve
+      rule: a row counts when the engine returns choked true
+   valve styles this engine carries: 8
+      tree: the VALVE_STYLES array the module exports
+      rule: every entry of the array, with no filter
+   probes above on which the stream power moved the band off the pressure ratio alone: 2
+      tree: the 3 noise probes in fc8_fields.mjs
+      rule: a probe counts when the engine returns a non-null powerEffect
+   travel cases above on which the engine WITHHELD its pass verdict: 2
+      tree: the 5 travel cases in fc8_fields.mjs
+      rule: a case counts when the engine returns pass null, which it does whenever a check could not run
+   courses on this tank: 5
+      tree: the courses array shellCourses returns for the OGBOGENE geometry
+      rule: one course per whole or part course height in the shell height, which the engine takes as the ceiling of the shell height divided by the course height
+   courses on this tank the water test governs: 1
+      tree: the same courses array
+      rule: a course counts when the engine returns governing equal to hydrostatic test
+   courses on this tank the stated minimum plate governs: 4
+      tree: the same courses array
+      rule: a course counts when the engine returns governing equal to minimum plate thickness
+   fire heat input bands this engine carries: 4
+      tree: the band names the engine returns across the wetted areas in fc8_fields.mjs
+      rule: a band counts once for each distinct band string the engine returned over that sweep
+   distinct refusals this digest calls and proves: 28
+      tree: the assertion list this generator built while it ran, filtered to the ones labelled a refusal
+      rule: one count per distinct assertion text, and every one of them asserted that the engine returned an error key
+   calls this digest labels a success and proves: 238
+      tree: the same assertion list, filtered to the ones labelled a success
+      rule: one count per distinct assertion text, and every one of them asserted no error key and no non-finite number in the result
+   items in the register above: 15
+      tree: the register written out in this section, one row per item
+      rule: an item counts when the engine states in its own source or its own returned text that the package does not carry it, does not cite it, or refuses to answer it
+   items in the register that are outright refusals to answer: 2
+      tree: the same register
+      rule: an item counts when the engine returns a refusal or a withheld flag in place of a number, which SECTIONS 16 and 28 both show being returned
+
+   COUNT  counts in this file: 19
+          tree: the COUNTS array this generator built while it ran, plus this count itself
+          rule: one per call to the count helper, which is the only way a count reaches this file
+
+   engine strings pinned verbatim in this file: 50
+   each was asserted to contain a fragment of its own text when this file was
+   built, so a reworded engine message fails the build rather than quietly
+   teaching wording the learner will never see on the screen.
+
+# END OF THE FC8 TEACHING DIGEST
