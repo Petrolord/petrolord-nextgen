@@ -1,0 +1,317 @@
+{
+ "app_slug": "metering",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01",
+   "title": "The choking boundary",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "Why a valve equation stops working when the service gets hard",
+     "order": 1,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "The allowable drop, and where it comes from",
+     "order": 2,
+     "est_minutes": 10,
+     "panels": [
+      "fc-choking-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "Marching the outlet pressure down",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "fc-choking-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "What sizing on the stated drop would cost",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05",
+     "title": "The critical pressure ratio factor",
+     "order": 5,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02",
+   "title": "Cavitation, and the screen an empty box switched off",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "Damage begins long before the flow chokes",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "Sigma is computed on the drop the valve uses",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "The regime ladder, rung by rung",
+     "order": 3,
+     "est_minutes": 10,
+     "panels": [
+      "fc-choking-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "Flashing is a different problem with a different fix",
+     "order": 4,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03",
+   "title": "Gas sizing, and whose table the factors are",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "The pressure drop ratio and its terminal value",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "The expansion factor and the two thirds floor",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "fc-choking-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "The specific heat ratio factor",
+     "order": 3,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "The style table, and that it is this engine own",
+     "order": 4,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05",
+     "title": "A stated vendor figure replaces a table",
+     "order": 5,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04",
+   "title": "Authority, and the characteristic it chooses",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "What authority decides",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "The ladder, and the screen it is read against",
+     "order": 2,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "Equal percentage exists to cancel something",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "One vocabulary, two functions",
+     "order": 4,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05",
+   "title": "Noise, as an indication rather than a prediction",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "What a screening band can and cannot tell you",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "The pressure ratio sets the band",
+     "order": 2,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "The stream power caps it and floors it",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "What a real noise prediction would need",
+     "order": 4,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06",
+   "title": "Travel, rangeability and a verdict over checks that ran",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "A valve near its seat does not control",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "Equal percentage travel against linear travel",
+     "order": 2,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "Beyond the valve is not the same as not given",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "A verdict over checks that did not run is not a verdict",
+     "order": 4,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
