@@ -49,7 +49,9 @@ The notes on items 2 and 6 are that kind of evidence. "No gas test entry for the
 
 ## Why only critical questions
 
-The rule is about Critical questions. Item 4, lifting plan approved for the tie-in lift, is Major and reads Observation, and it appears on no list of critical answers. The digest prints no reporting refusal for a Major or Minor question answered Nonconformant, and AUD-2026-007 has none, so this lesson does not say what the engine asks of one. What it prints is the Critical rule: a critical question that fails does not leave the checklist without a tracked finding.
+The rule is about Critical questions. AUD-2026-007 has no Major or Minor question answered Nonconformant, so the digest runs a probe: a three-item checklist with a Major item and a Minor item answered Nonconformant, no finding raised, every item answered and a conclusion written. criticalAnswersWithoutFindings lists 0 items, and canReportAudit answers ALLOWED.
+
+Say it plainly. The finding rule applies to Critical items only. The engine has no rule that a Major or Minor nonconformance must raise a finding before the audit is reported. An organisation that wants a finding for every nonconformance has to require it in its own procedure, because the gate will not.
 
 ## Exercise
 

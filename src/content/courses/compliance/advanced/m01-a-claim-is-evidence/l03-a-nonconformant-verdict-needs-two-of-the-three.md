@@ -31,10 +31,12 @@ Assessed reads true and evidence record reads false. That is the pattern the gat
 
 The readiness counts print nonconformant 1, and module 5 shows the blocking item this clause raises: "1 clause is assessed nonconformant and not yet resolved." The verdict is on the record, dated and named, and the list keeps it in front of the reader until it is resolved.
 
-## What the digest does not print
+## Partially conformant asks for all three
 
-The digest prints gate rows for Conformant, Nonconformant and Not applicable. It prints no row setting a clause to Partially conformant. Clause 6.1.2 reads Partially conformant in the register, with claims conformity, evidence record and assessed all true, and that tells you what this one clause carries. It does not tell you what the gate demands for that status. This course does not say which of the three the gate asks of a Partially conformant clause, and you should not infer it from the one row.
+The digest prints two requests to set clause 7.2 to Partially conformant. With nothing else, it is refused with the same sentence Conformant meets: "Name the evidence, the date it was assessed and who assessed it. Conformity is a claim about documented information; without those three it is an opinion in a dropdown." With evidence, a date and an assessor, it is ALLOWED. So Partially conformant sits with Conformant: it asks for all three. Nonconformant asks for two.
+
+Clause 6.1.2 reads Partially conformant in the register, with claims conformity, evidence record and assessed all true. That row carries what the gate asks for the status.
 
 ## Exercise
 
-At 2026-10-15, read the rows for clauses 5.2, 6.1.3 and 7.2. For each, name the status and the values of claims conformity, evidence record and assessed. Then say which of the three rows the canSetClauseStatus requests printed in this module would allow as recorded, and which of the three things each one lacks. Say why the digest gives you no answer for clause 6.1.2's status.
+At 2026-10-15, read the rows for clauses 5.2, 6.1.3 and 7.2. For each, name the status and the values of claims conformity, evidence record and assessed. Then say which of the three rows the canSetClauseStatus requests printed in this module would allow as recorded, and which of the three things each one lacks. Then read clause 6.1.2's row against the two Partially conformant requests and say whether it carries what the gate asks for.

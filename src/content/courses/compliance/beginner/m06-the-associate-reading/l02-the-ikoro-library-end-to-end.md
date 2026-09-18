@@ -32,7 +32,7 @@ The flare management philosophy is Published with no review date. It reads No re
 
 The old custody metering procedure is Superseded, and its review date of 2020-01-06 does not put it in the queue ahead of anything live. The draft oily waste procedure and the hydrotest procedure in review have no review dates yet and read Not in force.
 
-The hydrotest procedure is the one in review, and its review task is governed by the rule from module five. Its reviewer must be somebody other than its author, and only the assigned reviewer may decide the task. The digest's example revision, rev-0019-10 authored by u-adaeze, shows each refusal the engine gives.
+The hydrotest procedure is the one in review, and its review task is governed by the rule from module five. Its reviewer must be somebody other than its author, and only the assigned reviewer may decide the task. The digest's example revision, rev-0019-10 of ENG-PRO-0019, takes the procedure from its current revision '09' to its next revision '10'. It is authored by u-adaeze, and it shows each refusal the engine gives.
 
 ## What the controller takes away
 

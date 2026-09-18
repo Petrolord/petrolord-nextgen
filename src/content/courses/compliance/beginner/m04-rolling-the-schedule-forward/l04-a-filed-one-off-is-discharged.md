@@ -25,7 +25,7 @@ The difference between the two rows is the filing. A passed due date with a fili
 
 Everywhere else in the register, a negative days until on an Active obligation goes with Overdue or Expired. The right of way consent is the exception, and the reason sentence is there to explain it. Without the words "nothing further is due", a reader seeing Compliant beside -62 could reasonably wonder whether the status was stale. With them, the row explains itself: the obligation was met, it does not recur, and the passed date is the date it was met against.
 
-This is one of the rules the engine keeps at 9d5d3b4 (ASC-0): a filed One-off says it is discharged. The status is Compliant, and the reason carries the words that make the status readable.
+This is one of the five rules the engine keeps under ASC-0, the one the digest calls R4: a filed One-off says it is discharged. The Expert tier reads all five. The status is Compliant, and the reason carries the words that make the status readable.
 
 ## Where the two sit in the sorted register
 

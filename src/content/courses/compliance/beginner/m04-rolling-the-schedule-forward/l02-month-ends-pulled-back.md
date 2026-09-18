@@ -44,10 +44,18 @@ Document Control uses it for review dates, which module five reads in full. A do
 
 One rule applied in all three places means a due date, the period it closes and a document's review date never disagree about what the end of a month is.
 
-## What the digest does not print
+## Rolling on from a pulled-back date
 
-Every case above is a single roll. The digest does not print what the rule gives when a pulled-back date, such as 2026-02-28, is itself rolled on again, so this course says nothing about it. That answer has to come from the engine, and it is not one this course quotes.
+The digest also rolls a pulled-back date on a second time:
+
+| from | frequency | next due date | and the roll after that |
+| --- | --- | --- | --- |
+| 2026-01-31 | Monthly | 2026-02-28 | 2026-03-28 |
+| 2026-02-28 | Monthly | 2026-03-28 | 2026-04-28 |
+| 2026-08-31 | Semi-annual | 2027-02-28 | 2027-08-28 |
+
+Each roll starts from the date it is given. A date pulled back to the end of a short month rolls on from that day of the month. So 2026-01-31 becomes 2026-02-28, and the roll after that lands on 2026-03-28. It does not return to the thirty-first. Whoever keeps a month end deadline on the register has to check the due date after a short month.
 
 ## Exercise
 
-From the table for 2026-08-31, name the frequencies whose next due date was pulled back to a shorter month's last day, and the ones that kept the thirty-first, quoting each date. Then read the leap day row and say what the rule does to 2028-02-29 when it is rolled a year on.
+From the table for 2026-08-31, name the frequencies whose next due date was pulled back to a shorter month's last day, and the ones that kept the thirty-first, quoting each date. Then read the leap day row and say what the rule does to 2028-02-29 when it is rolled a year on. Finally, read the second roll from 2026-01-31 and say which day of the month it lands on, and why.

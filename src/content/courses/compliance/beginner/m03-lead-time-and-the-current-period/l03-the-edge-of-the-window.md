@@ -9,6 +9,7 @@ The flare and venting return, REG-2026-003, is due 2026-10-31. At the as-of date
 | lead_time_days given | status |
 | --- | --- |
 | 14 | On track |
+| 15 | On track |
 | 16 | Due soon |
 | 17 | Due soon |
 
@@ -16,11 +17,11 @@ The flare and venting return, REG-2026-003, is due 2026-10-31. At the as-of date
 
 Read the middle row. The lead time is 16 and the days until is 16, the same number, and the return reads Due soon. An obligation whose days until equals its lead time is inside its window. The edge belongs to Due soon.
 
-The row above it has a lead time of 14 and reads On track. The row below has 17 and reads Due soon.
+The row above it has a lead time of 15 and reads On track. The row below has 17 and reads Due soon.
 
-## What the digest does not print
+## One day either side
 
-The digest prints no row for a lead time of 15. It is tempting to fill that row in by reasoning, and this course does not. The rows it does print are enough to establish the one fact a user needs at the edge: when the days remaining and the lead time are the same number, the row is Due soon. For every other lead time, move the control in the panel and read the status the engine gives.
+The digest prints the row for a lead time of 15, one day short of the 16 days remaining, and it reads On track. So the two rows either side of the line are printed, and nothing at the edge has to be filled in by reasoning. A lead time of 15 leaves the return On track. A lead time of 16, equal to the days remaining, makes it Due soon. That is the one fact a user needs at the edge. For any lead time the table does not print, move the control in the panel and read the status the engine gives.
 
 ## The same edge on the documents side
 
@@ -34,4 +35,4 @@ There is a second reason. People set lead times in round numbers: 14, 30, 60, 90
 
 ## Exercise
 
-Read the three rows of the table above and the return's 16 days to its due date. Say which lead time in the table is the same number as the days until, what status it gives, and what that shows about which side of the edge the equal case falls on. Then say which lead time between 14 and 16 the digest does not print, and why the course does not fill it in.
+Read the four rows of the table above and the return's 16 days to its due date. Say which lead time in the table is the same number as the days until, what status it gives, and what that shows about which side of the edge the equal case falls on. Then read the rows for 15 and 16 and say what the two statuses, one day apart, show about where the window begins.

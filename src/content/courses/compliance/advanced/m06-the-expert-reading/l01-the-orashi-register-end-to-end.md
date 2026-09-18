@@ -14,7 +14,7 @@ The digest's planned internal audit over clauses 8.1, 8.2, 9.1.1 and 9.2 refuses
 
 ## Step three: coverage
 
-Of the six ORASHI audits, three count: ISA-2023-002, ISA-2024-001 and ISA-2026-001. ISA-2026-S01 is a Surveillance audit. ISA-2026-002 is In progress, and ISA-2025-003 is Cancelled. At a cycle of 3 years the coverage table reads covered 8, stale 1 and never examined 3. Clause 4.3, last examined 2023-09-20, is the stale one. Clauses 6.1.2, 7.2 and 7.5.3 are the three never examined, and 7.5.3 is Conformant with full evidence in the register all the same.
+Of the six ORASHI audits, three count: ISA-2023-002, ISA-2024-001 and ISA-2026-001. ISA-2026-S01 is a Surveillance audit. ISA-2026-002 is In progress, and ISA-2025-003 is Cancelled. At a cycle of 3 years the coverage table reads covered 8, stale 1 and never examined 3. Clause 4.3, last examined 2023-09-20, is the stale one. Clauses 6.1.2, 7.2 and 7.5.3 are the three never examined, and 7.5.3 is Conformant with full evidence in the register all the same. ISA-2026-S01 examined 6.1.2, and ISA-2025-003 examined 7.5.3; neither audit counts.
 
 ## Step four: findings and actions
 
@@ -22,7 +22,7 @@ Three findings are open. ISF-2026-004, a Major nonconformity raised 2026-06-12, 
 
 ## Step five: the list
 
-certificationReadiness reads ready false, with four blocking items, three serious and four watch. The open Major nonconformity, the three never examined clauses, clause 5.2's incomplete claim and clause 6.1.3's unresolved verdict are blocking. The stale clause, the unassessed clause and the overdue action are serious. The minor nonconformity, the past-due review, the overdue finding and the certificate at 85 days are watch.
+certificationReadiness reads ready false, with four blocking items, three serious and four watch. The open Major nonconformity, the three never examined clauses, clause 5.2's claim with no evidence reference and clause 6.1.3's unresolved verdict are blocking. The stale clause, the unassessed clause and the overdue action are serious. The minor nonconformity, the past-due review, the overdue finding and the certificate at 85 days are watch.
 
 ## What the auditor does with it
 

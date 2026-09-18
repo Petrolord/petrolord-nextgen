@@ -45,7 +45,7 @@ isAuditOverdue in this module answers for an audit whose planned end has passed:
 | Closed | false |
 | Cancelled | false |
 
-An audit stops being overdue when it is Reported. The fieldwork being finished is not enough, because the report is the deliverable. A cancelled audit is not overdue either, since it is not being done. Closed follows Reported, so a closed audit reads false as well. The three statuses before the report all read true once the planned end has passed.
+An audit stops being overdue when it is Reported. The fieldwork being finished is not enough, because the report is the deliverable. A cancelled audit is not overdue either, since it is not being done. Closed follows Reported, so a closed audit reads false as well. The three statuses before the report all read true once the planned end has passed. The Expert tier meets the same rule again in the ISO module, which reads every status the same way.
 
 ## AUD-2026-007 on the workflow
 

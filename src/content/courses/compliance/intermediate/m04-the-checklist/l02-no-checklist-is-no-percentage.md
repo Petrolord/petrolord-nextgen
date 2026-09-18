@@ -21,7 +21,7 @@ At the as-of date 2026-10-15, checklistProgress over the 14 questions of AUD-202
 
 The percent measures answering. It says how much of the checklist has an answer the engine accepts. It does not say how much of the site conformed. Items 2 and 6 are Nonconformant and both sit inside answered 10, so they lift the percent exactly as a Conformant answer does. A reader who wants to know what was found reads the result counts beside it.
 
-The percent is a whole number the engine has already rounded, and this lesson quotes it as printed.
+The percent is a whole number the engine has already rounded, and this lesson quotes it as printed. SECTION 11 states the rounding rule for planProgress: half up on the exact fraction, so 3 of 8 prints 38 and 5 of 8 prints 63. Read 71 as the engine's figure and do not recompute it from the counts.
 
 Read the outstanding count with it. Outstanding 4 names items 10, 11, 13 and 14, the same four canReportAudit names when it refuses to report the audit. Items 10 and 11 carry the result Not applicable and are still outstanding because no reason is written beside it. The percent rises only when those answers are completed, and a reason is part of an answer.
 

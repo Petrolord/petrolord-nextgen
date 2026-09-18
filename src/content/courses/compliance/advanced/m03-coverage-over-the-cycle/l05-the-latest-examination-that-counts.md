@@ -28,11 +28,13 @@ Coverage asks whether the clause was examined by a counting audit inside the cyc
 
 The latest examination is chosen among counting audits only. An audit that does not count is not a candidate, however recent its dates. That is how the two conditions from lessons 1 and 2 reach the table. Clause 4.3's latest counting examination is 2023-09-20. ISA-2026-S01, of type Surveillance, ended 2026-07-24, and ISA-2026-002 is In progress. Neither is a counting audit, so neither can become clause 4.3's latest examination.
 
+The table of what each audit examined shows two more. ISA-2026-002 examined clause 5.2, Conformant on 2026-10-06, and 5.2's last examined date stays at 2026-06-09, by ISA-2026-001, because ISA-2026-002 is In progress. ISA-2025-003 examined clause 7.5.3 on 2025-11-12 and is Cancelled, and 7.5.3 reads never.
+
 Clause 8.1 shows the same thing from the other side. Its latest counting examination is 2024-05-16, by ISA-2024-001. ISA-2026-002 has 8.1 in scope, and its canReportAudit refusal names 8.1 among the clauses with no result yet. Until that audit reports a result, 8.1's date stays at 2024-05-16.
 
 ## Why the rule picks the latest
 
-A clause's coverage is a statement about how recently it was examined. The latest counting examination is the only one that answers that question. An earlier examination of the same clause adds nothing to it. Clauses 8.1 and 8.2 read last examined 2024-05-16 by ISA-2024-001; whatever earlier audits looked at them, that is the one date the cycle reads. The cycle is then read against that one date, which is what lessons 3 and 4 did.
+A clause's coverage is a statement about how recently it was examined. The latest counting examination is the only one that answers that question. An earlier examination of the same clause adds nothing to it. Clauses 8.1 and 8.2 read last examined 2024-05-16 by ISA-2024-001, and that is the one date the cycle reads for each. The cycle is then read against that one date, which is what lessons 3 and 4 did.
 
 ## Exercise
 

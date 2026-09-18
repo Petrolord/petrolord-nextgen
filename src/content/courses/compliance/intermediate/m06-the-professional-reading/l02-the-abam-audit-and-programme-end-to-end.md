@@ -44,13 +44,13 @@ The programme summarise brings the audits and the checklist together: audits out
 
 ## Two counts of outstanding answers
 
-checklistProgress prints outstanding 4, and summarise prints answers outstanding 2. The digest says what summarise was given: the programme, the 8 audits, the 12 recorded answers and the finding. Items 13 and 14 have no answer recorded at all, so they are not among the 12. Among the 12 recorded answers, the two without an accepted answer are items 10 and 11, the Not applicable answers with no reason. checklistProgress reads all 14 questions and counts all four.
+checklistProgress prints outstanding 4, and summarise prints answers outstanding 2. The digest says what summarise was given: the programme, the 8 audits, the 12 recorded answers and the finding. The digest names the items. Items 10 (Not applicable, a blank note) and 11 (Not applicable, no note) have a recorded row that is not an answer, and those are the answers outstanding 2. Items 13 and 14 have no row at all, so they are not among the 12. checklistProgress reads all 14 questions and counts all four.
 
 Neither figure is wrong. Both are engine readings of the same audit at the same as-of date. They count different things, and a reader who puts one beside the other has to know which records each was given.
 
 ## What the programme manager should hear
 
-The programme reads reported 3 of total 8, percent 38. AUD-2026-004 is cancelled and counts in neither reported nor outstanding. Three audits are overdue, and AUD-2026-007 has its fieldwork complete, with its checklist, one finding and a conclusion between it and the report. One finding is open on the programme, and summarise counts it in open major 1 and stop-work open 1 as well.
+The programme reads reported 3 of total 8, percent 38. AUD-2026-004 is cancelled and counts in neither reported nor outstanding. Three audits are overdue, and AUD-2026-007 has its fieldwork complete, with its checklist, one finding and a conclusion between it and the report. One finding is open on the programme: AF-2026-018, a Major nonconformity, Open, stop-work true. It is the one finding behind open findings 1, open major 1 and stop-work open 1.
 
 ## Exercise
 

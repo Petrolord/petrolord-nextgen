@@ -12,6 +12,8 @@ Reporting says what the audit found. Closing says that everything it found has b
 | reported, with both major findings open | REFUSED |
 | reported, with both closed | ALLOWED |
 | reported, with a stop-work minor finding still open | REFUSED |
+| reported, with a minor nonconformity open and no stop-work | ALLOWED |
+| reported, with an observation open and no stop-work | ALLOWED |
 
 ## Report first
 
@@ -39,9 +41,9 @@ Reported, with a stop-work minor finding still open, the engine refuses:
 
 The finding in this row is a minor one. On a major finding alone the gate would already refuse, and this row shows the stop-work rule reaching further: a finding that stopped work holds the audit open whatever its grade. Module four showed why. Stopping work is the auditor's judgement of imminent danger, and an audit is not closed over it while its finding is open.
 
-## What the digest does not show
+## What the gate lets through
 
-The digest prints no closure refusal about minor findings that did not stop work, or about observations. It does not print a canCloseAudit row with only such findings open, so this lesson does not say what the engine answers for one. What it prints is two kinds of finding that hold an audit open: major nonconformities and findings that stopped work.
+The last two rows answer the other cases. A reported audit with a minor nonconformity open and no stop-work is ALLOWED to close. A reported audit with an observation open and no stop-work is ALLOWED too. So two kinds of finding hold an audit open: major nonconformities and findings that stopped work. A lesser finding left open follows its own lifecycle after the audit closes.
 
 ## Reading the programme dashboard
 
@@ -49,4 +51,4 @@ The programme summarise in SECTION 17 carries these same kinds of finding: open 
 
 ## Exercise
 
-Read the two rows for a reported audit with its major findings: "reported, with both major findings open", REFUSED with the count 2, and "reported, with both closed", ALLOWED. Then read the stop-work row, "reported, with a stop-work minor finding still open", REFUSED. Say what the readings show about which findings the closure gate reads, and whether a finding's grade alone decides whether it holds the audit open.
+Read the two rows for a reported audit with its major findings: "reported, with both major findings open", REFUSED with the count 2, and "reported, with both closed", ALLOWED. Then read the stop-work row, "reported, with a stop-work minor finding still open", REFUSED. Then read the two ALLOWED rows with a minor nonconformity or an observation open. Say what the readings show about which findings the closure gate reads, and whether a finding's grade alone decides whether it holds the audit open.

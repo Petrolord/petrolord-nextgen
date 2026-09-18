@@ -17,7 +17,7 @@ The three that do count are two Closed audits, ISA-2023-002 and ISA-2024-001, an
 
 ## An audit in progress
 
-ISA-2026-002 is In progress. Its examiners may already have recorded results. Until it is reported, none of them moves a clause's last examined date. Until then the audit's conclusion has not been written, and nothing on the record says what the audit as a whole found. Coverage waits for the report, because the report is the audit's deliverable and the only statement an auditee or a certification body can hold the organization to.
+ISA-2026-002 is In progress. It has already examined clause 5.2, Conformant on 2026-10-06, and clause 5.2 still reads last examined 2026-06-09, by ISA-2026-001. Until the audit is reported, no result it holds moves a clause's last examined date. Until then the audit's conclusion has not been written, and nothing on the record says what the audit as a whole found. Coverage waits for the report, because the report is the audit's deliverable and the only statement an auditee or a certification body can hold the organization to.
 
 The ISO module refuses to report an audit whose scope still has clauses without a result. For ISA-2026-002, with three clauses in scope and two not yet examined, canReportAudit answers:
 
@@ -31,7 +31,7 @@ So the path to coverage runs through both gates. Every clause in scope needs a r
 
 ## A cancelled audit
 
-ISA-2025-003 is Cancelled, and its ended column reads none. A cancelled audit has no report, and it counts for nothing in coverage, whatever its examiners may have looked at before it was stopped. The Professional tier read the same rule from the other side: a programme's delivered percent counts reported audits only, and a cancellation never counts as delivery.
+ISA-2025-003 is Cancelled, and its ended column reads none. A cancelled audit has no report, and it counts for nothing in coverage. ISA-2025-003 examined clause 7.5.3 on 2025-11-12, and clause 7.5.3 reads never. The Professional tier read the same rule from the other side: a programme's delivered percent counts reported audits only, and a cancellation never counts as delivery.
 
 ## Why the rule is a status rule
 

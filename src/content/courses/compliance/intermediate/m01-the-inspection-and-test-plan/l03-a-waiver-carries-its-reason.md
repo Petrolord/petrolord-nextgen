@@ -20,11 +20,13 @@ So W-06 carries the plan forward as fully as H-01's passed material certificate 
 
 ## What else a waiver needs
 
-The digest prints the waiver refusal for a request with no reason. It prints the date and name requirement for a waiver in another sentence, one the engine gives when a hold point is set aside:
+A reason alone is not enough. Asked to waive W-09 with a reason and no date or verifier, canDecideCheckpoint refuses:
 
-"Setting a hold point aside needs the date and who decided it, the same record a waiver needs."
+"Record the date this was decided and who decided it."
 
-By the engine's own words a waiver needs the date and who decided it, as well as its reason. The digest does not print a waiver request that has a reason and lacks a date or a name, and it does not print a request to waive a hold point, so this lesson does not say how the gate answers either.
+So a waiver needs three things on the record: the date, who decided it, and why. The digest walks the same request on a hold point. H-08, the hydrostatic test, waived with a date, a verifier and a reason, is ALLOWED. H-08 waived with a date and a verifier and no reason is refused with the same waiver sentence W-09 met.
+
+Read the allowed row plainly. canDecideCheckpoint has no rule that forbids waiving a hold point. A waived hold point with its record and reason is resolved, the same as a waived point of any other type. The engine asks a hold point waiver for its record and its reason, and it asks nothing more. Whether a hold point should ever be waived is a decision for the people who own the plan, and the reason on the record is where that decision is written down.
 
 When you read a plan, treat each Waived row as a question with its answer attached: who decided that the check was not needed, on what date, and why.
 

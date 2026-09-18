@@ -1,12 +1,12 @@
 # What is held and what is decided
 
-SECTION 23 of the digest lists the owner decisions in force, the ambiguities recorded and left as they are, and five rules the engine keeps at 9d5d3b4 (ASC-0). None of it is graded. This lesson reads it as stated policy and as limits.
+SECTION 23 of the digest lists the owner decisions in force, the ambiguities recorded and left as they are, five rules the engine keeps from ASC-0 and three more from ASC-1. None of it is a graded field. This lesson reads it as stated policy and as limits.
 
 {{panel:compliance-readiness-explorer}}
 
 ## Owner decisions in force
 
-The owner decisions of AS15, as they touch these five apps:
+The owner decisions of AS15:
 
 - Q1: an unreadable today makes deriveStatus throw.
 - Q2: evidence counts towards Compliant only for the current period.
@@ -27,19 +27,23 @@ Four ambiguities are recorded and not changed. Each is a limit, never a figure t
 - A templated audit passed with no checklist items passes the unanswered-items rule vacuously. The database counts the template itself.
 - An unreadable today is refused by complianceStatus alone. Two other modules answer as though nothing were due.
 
-The last limit matters most to a reader of a screen. An app that shows no overdue review and no overdue NCR has told you nothing if the date it was given could not be read.
+The last limit matters most: an app that shows no overdue review has told you nothing if the date it was given could not be read.
 
 ## Five rules the engine keeps
 
-Each is current behaviour, measured:
-
-- R1, one rule for outstanding. On four audits, one of them cancelled with no reason, programmeProgress counts 2 outstanding and summarise counts 2. A cancellation without a written reason is outstanding in both, and canCompleteProgramme asks the same rule.
+- R1, one rule for outstanding. On four audits, one of them cancelled with no reason, programmeProgress counts 2 outstanding and summarise counts 2.
 - R2, a percent rounds half up on the exact fraction. checklistProgress on 57 answered of 200 prints 29, and planProgress on 23 resolved of 40 prints 58.
 - R3, expired and expiring are two separate flags. A certificate with certificateDays -15 reads certificateExpiring false and certificateExpired true.
-- R4, a filed One-off says it is discharged. REG-2026-006 reads Compliant, and explainStatus gives the reason "Filed 2026-08-10. A one-off obligation, nothing further is due."
+- R4, a filed One-off says it is discharged. REG-2026-006 reads Compliant, and its reason says nothing further is due.
 - R5, a sentence names the register's own standard. The readiness list for ISO 14001:2015 carries 1 item naming ISO 14001:2015 and 0 naming ISO 9001.
 
-Quote R2's two percents as they print, and do not work the fractions yourself.
+## Three more rules
+
+From ASC-1:
+
+- An audit is overdue only while it is undelivered, in both modules. Both modules read false for a Reported audit whose planned end has passed.
+- A readiness sentence names what an unevidenced claim lacks. SECTION 22 prints it for clause 5.2, which lacks evidence reference.
+- The Due soon reason says when the default lead time applies, as REG-2026-012's reason does.
 
 ## Exercise
 

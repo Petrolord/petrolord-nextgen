@@ -10,12 +10,12 @@ Four items read blocking:
 
 - "1 major nonconformity is open." ISF-2026-004 is the open Major nonconformity in the findings table.
 - "3 applicable clauses have never been examined by an internal audit." The coverage table reads never for clauses 6.1.2, 7.2 and 7.5.3.
-- "1 clause is marked conformant with no evidence, date or assessor recorded." In the register, clause 5.2 is the one row that claims conformity with its evidence record reading false.
+- "1 clause is marked conformant with no evidence reference recorded." In the register, clause 5.2 is the one row that claims conformity with its evidence record reading false.
 - "1 clause is assessed nonconformant and not yet resolved." Clause 6.1.3 reads Nonconformant.
 
 The first blocking item gives the reason in the engine's own words: a certification body will not recommend certification over one. Each of the four is a direct gap in what a management system has to show: a nonconformity unanswered, clauses the organization has not audited, a claim without its evidence, and a known failure still standing.
 
-Read the third item beside clause 5.2's row with care. The item's sentence names evidence, date and assessor together. Clause 5.2's assessed column reads true, and only its evidence record reads false. The item counts the claim as incomplete, and the register row tells you which part is missing. Read the row as well as the sentence before you act on it.
+Read the third item beside clause 5.2's row. The sentence names the part the claim lacks, and it names one part: the evidence reference. missingEvidenceParts for clause 5.2 prints the same words, evidence reference. The register row agrees: clause 5.2's assessed column reads true, and its evidence record reads false. The sentence, the missing parts and the row all point at the one thing to record before the claim is complete.
 
 ## Serious
 

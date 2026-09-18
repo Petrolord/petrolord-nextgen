@@ -23,7 +23,7 @@ The closure walk is the plan's to-do list, in the engine's order:
 
 Step 1 is "the most outstanding item on a plan", in the engine's words. Step 2 needs, for each hold point, a date and a verifier to pass it, or a date, a name and a reason to set it aside. Removing either is refused while the plan is Active. Step 3 reaches outside the plan into the NCR register.
 
-W-09, S-10 and R-12 do not appear in the walk. At the allowed step planProgress reads resolved 9 of 12, percent 75, and those three are still open. S-10 and R-12 are overdue at the as-of date, and the gate does not stop on either of them.
+W-09, S-10 and R-12 do not appear in the walk. At the allowed step planProgress reads resolved 9 of 12, percent 75, and W-09, S-10, R-12 are still unresolved. S-10 and R-12 are overdue at the as-of date, and the gate does not stop on either of them.
 
 ## The NCRs behind step 3
 
@@ -33,13 +33,13 @@ W-09, S-10 and R-12 do not appear in the walk. At the allowed step planProgress 
 | NCR-2026-027 | Minor | Open | 64 | refused on the missing disposition |
 | NCR-2026-019 | Critical | Disposition agreed | 117 | ALLOWED |
 
-NCR-2026-019 is the oldest open NCR at 117 days and the first in ncrByUrgency, and it is also the one the engine will let close at the as-of date: k4, a corrective action, is verified effective. NCR-2026-031 waits on k2, its preventive action, which is In progress and overdue against 2026-10-05, while k1, its corrective action, is Complete and reads verified effective false. NCR-2026-027 has no disposition, so the gate reads nothing else about it until one is agreed and dated. Its age, 64 days, keeps growing while it waits.
+NCR-2026-019 is the oldest open NCR at 117 days and the first in ncrByUrgency, and it is also the one the engine will let close at the as-of date: k4, a corrective action, is verified effective. NCR-2026-031 waits on k2, its preventive action, which is In progress and overdue against 2026-10-05, while k1, its corrective action, is Complete and reads verified effective false. Finishing k2 is not the end: once k2 is Complete, the engine refuses NCR-2026-031 on "No corrective action has been verified effective yet." NCR-2026-027 has no disposition, so the gate reads nothing else about it until one is agreed and dated. Its age, 64 days, keeps growing while it waits.
 
 The dashboard counts for the NCRs at the as-of date: NCRs 6, open 3, overdue 2, serious and open 2, concessions 2, oldest open 117 days, mean open age 75 days.
 
 ## What the meeting should hear
 
-A quality lead reading this record reports three things. The plan is at 50 percent, with a failed hold point that the closure gate reads before anything else. H-08 and H-11 are pending and on schedule, and they still stop work. Of the three open NCRs, one may close at the as-of date by the engine's own answer, one waits on a late preventive action, and one has not yet had its disposition agreed. None of that is typed. Each statement is an engine reading of a dated record at 2026-10-15.
+A quality lead reading this record reports three things. The plan is at 50 percent, with a failed hold point that the closure gate reads before anything else. H-08 and H-11 are pending and on schedule, and they still stop work. Of the three open NCRs, one may close at the as-of date by the engine's own answer, one waits on a late preventive action and then on the check that k1 worked, and one has not yet had its disposition agreed. None of that is typed. Each statement is an engine reading of a dated record at 2026-10-15.
 
 ## Exercise
 

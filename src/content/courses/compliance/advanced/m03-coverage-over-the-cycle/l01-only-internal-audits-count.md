@@ -27,7 +27,7 @@ A surveillance audit is carried out by the certification body. It examines the m
 
 The trap this tier is built on sits here. An examination by the certification body does not move a clause's last examined date, however late it falls. Clause 4.3 reads last examined 2023-09-20, by ISA-2023-002, and it reads stale true. A surveillance audit ended in 2026 sits on the same table, and 4.3's last examined date stays where it is.
 
-The digest does not print which clauses ISA-2026-S01 examined. This course does not claim that it examined clause 4.3 or any other. Whatever it examined, its type keeps it out of every clause's coverage, and that is all the rule needs.
+The digest prints what each ORASHI audit examined. ISA-2026-S01 examined one clause, 6.1.2, Conformant on 2026-07-22. It did not examine clause 4.3. Now read clause 6.1.2 in the coverage table: last examined never, by audit none, covered false. The only audit that examined 6.1.2 is of type Surveillance, so the coverage count reads the clause as never examined. Clause 6.1.2 is one of the 3 applicable clauses the readiness list names as never examined by an internal audit.
 
 ## Why the rule matters
 
@@ -39,4 +39,4 @@ Module 2 read an external lead auditor named in text, allowed on an internal aud
 
 ## Exercise
 
-Read the six rows of the ORASHI audits table at 2026-10-15. For each, name its type and status and read its counts towards coverage value. Then say which one row fails only on its type, and why clause 4.3's last examined date, 2023-09-20, is unaffected by that audit. Say what the digest does not tell you about ISA-2026-S01's scope.
+Read the six rows of the ORASHI audits table at 2026-10-15. For each, name its type and status and read its counts towards coverage value. Then say which one row fails only on its type, and why clause 4.3's last examined date, 2023-09-20, is unaffected by that audit. Then read what ISA-2026-S01 examined beside clause 6.1.2's coverage row, and say what the two readings show about the type rule.

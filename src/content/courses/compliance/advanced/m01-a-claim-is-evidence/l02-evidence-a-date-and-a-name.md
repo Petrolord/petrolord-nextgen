@@ -24,7 +24,7 @@ The refusal is the same sentence both times:
 
 REFUSED: Name the evidence, the date it was assessed and who assessed it. Conformity is a claim about documented information; without those three it is an opinion in a dropdown.
 
-An evidence reference on its own is still refused: the gate asks for all three together. Evidence with no date cannot be read against a certification cycle, and evidence with no assessor cannot be checked for independence, which module 2 teaches.
+An evidence reference on its own is still refused: the gate asks for all three together. Partially conformant is held to the same three: refused with nothing else, in the same sentence, and ALLOWED with evidence, a date and an assessor. Evidence with no date cannot be read against a certification cycle, and evidence with no assessor cannot be checked for independence, which module 2 teaches.
 
 ## Reading the three columns in the register
 
@@ -36,7 +36,7 @@ The register counts the same thing in two places you will meet later in this tie
 
 ## Why the gate stands where it does
 
-An auditor reading a register asks what was seen, when, and by whom. Those are the three questions the gate puts, in the same order. The gate puts that question at the moment the status is set, so a register built through the engine cannot hold a Conformant clause the auditor cannot follow back to a document.
+An auditor reading a register asks what was seen, when, and by whom. Those are the three questions the gate puts, in the same order. The gate asks them when the status is set, so a register built through the engine cannot hold a Conformant clause the auditor cannot follow back to a document.
 
 ## Exercise
 

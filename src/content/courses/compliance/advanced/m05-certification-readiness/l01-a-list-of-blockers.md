@@ -10,7 +10,7 @@ Every module of this tier has built towards one question: is the ORASHI manageme
 | --- | --- | --- |
 | blocking | 1 | 1 major nonconformity is open. A certification body will not recommend certification over one. |
 | blocking | 3 | 3 applicable clauses have never been examined by an internal audit. ISO 14001:2015 §9.2 requires the organization to audit its own system. |
-| blocking | 1 | 1 clause is marked conformant with no evidence, date or assessor recorded. |
+| blocking | 1 | 1 clause is marked conformant with no evidence reference recorded. |
 | blocking | 1 | 1 clause is assessed nonconformant and not yet resolved. |
 | serious | 1 | 1 clause was last audited before this certification cycle began. |
 | serious | 1 | 1 applicable clause has never been assessed at all. |

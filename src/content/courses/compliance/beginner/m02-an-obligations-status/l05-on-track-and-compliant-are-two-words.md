@@ -31,17 +31,19 @@ Compliant says the obligation has been met for the period it is in. The reasons 
 - REG-2026-008: "Last filed 2026-08-05, next due in 108 days."
 - REG-2026-006: "Filed 2026-08-10. A one-off obligation, nothing further is due."
 
-The host community development report has a filing inside its current period, so the requirement for that period is discharged. The next due date is ahead and there is nothing to do until the next period opens. The right of way consent is a One-off that was filed, so nothing further is due at all, and module four gives it a lesson of its own.
+The host community development report has a filing inside its current period, so that period's requirement is discharged. The right of way consent is a One-off that was filed, so nothing further is due at all, and module four gives it a lesson of its own.
+
+A filing for the current period is not the only thing Compliant asks. deriveStatus asks whether the next action date is inside the lead time before it asks about the filing. Module four shows REG-2026-002 once its filing is recorded and its due date rolled: the filing counts for the current period, and the row reads Due soon at 26 days. The same row with lead_time_days 0 reads Compliant.
 
 ## The rule behind the difference
 
-Owner decision AS15 Q2 states it: evidence counts towards Compliant only for the current period. A filing made for last quarter says nothing about this quarter. So a return that was filed on time every period so far still reads On track, and never Compliant, until something is filed for the period it is now in. The next module shows exactly where the current period starts and how one day decides whether a filing counts.
+Owner decision AS15 Q2 states it: evidence counts towards Compliant only for the current period. A filing made for last quarter says nothing about this quarter. The next module shows where the current period starts and how one day decides whether a filing counts.
 
 ## Why the order puts On track first
 
 In complianceStatus.STATUS_SEVERITY On track is fourth and Compliant is fifth. On track is the worse of the two because it has work outstanding. In the register sorted worst first the two On track rows sit sixth and seventh and the two Compliant rows sit eighth and ninth.
 
-The practical consequence is for anyone who summarises the register. A report that lumps On track and Compliant together under a heading like "fine" has thrown away the one thing the distinction was there to say: which obligations still need a filing this period. At IKORO the engine's summarise prints On track 2 and Compliant 2, and those two counts describe two different states.
+A report that lumps On track and Compliant together under a heading like "fine" throws away which obligations still need a filing this period. At IKORO the engine's summarise prints On track 2 and Compliant 2, and those two counts describe two different states.
 
 ## Exercise
 

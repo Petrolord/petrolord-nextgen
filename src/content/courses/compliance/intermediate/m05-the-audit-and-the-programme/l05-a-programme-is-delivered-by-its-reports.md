@@ -19,11 +19,11 @@ An audit programme is the plan of audits for a period. programmeProgress reads i
 
 programmeProgress prints: total 8, reported 3, cancelled 1, outstanding 4, overdue 3, percent 38.
 
-Reported 3 counts AUD-2026-001 and AUD-2026-003, which are Closed, and AUD-2026-002, which is Reported. A closed audit was reported on its way to closure, and it counts. Cancelled 1 is AUD-2026-004. Outstanding 4 is AUD-2026-005 to AUD-2026-008. Overdue 3 is AUD-2026-005, AUD-2026-006 and AUD-2026-007, whose planned ends have passed at the as-of date. The percent is a whole number the engine has already rounded, and this lesson quotes it exactly as the engine prints it.
+Reported 3 counts AUD-2026-001 and AUD-2026-003, which are Closed, and AUD-2026-002, which is Reported. A closed audit was reported on its way to closure, and it counts. Cancelled 1 is AUD-2026-004. Outstanding 4 is AUD-2026-005 to AUD-2026-008. Overdue 3 is AUD-2026-005, AUD-2026-006 and AUD-2026-007, whose planned ends have passed at the as-of date. The percent is a whole number the engine has already rounded, quoted as printed.
 
 ## A cancelled audit is not a delivered one
 
-AUD-2026-004 is cancelled, and it is not outstanding. It is not in reported 3 either. The percent is counted from reported audits, so a cancellation does not raise it. An audit that did not happen delivered nothing, and the programme's percent does not pretend otherwise. A programme manager who cancels an audit with its reason written has made a decision the record can show, and the percent still reports how many audits were delivered.
+AUD-2026-004 is cancelled, and it is not outstanding. It is not in reported 3 either. The percent is counted from reported audits, so a cancellation does not raise it. An audit that did not happen delivered nothing. A programme manager who cancels an audit with its reason written has made a decision the record can show, and the percent still reports how many audits were delivered.
 
 programmeProgress over no audits prints percent null, as the plan and checklist readings do over an empty record.
 
@@ -37,7 +37,9 @@ With every outstanding audit reported, the answer is ALLOWED. With the last one 
 
 "1 audit in this programme has not been reported or cancelled (AUD-2026-008). A programme marked complete over audits that never happened is the document a certification body will ask for."
 
-A cancellation with no written reason leaves the audit outstanding. The status may read Cancelled, and the engine still names AUD-2026-008 among the audits not dealt with. programmeProgress and summarise count it the same way. The reason is what turns a missing audit into a decision on the record, and lesson one showed the gate that asks for it.
+A cancellation with no written reason leaves the audit outstanding. The status may read Cancelled, and the engine still names AUD-2026-008 among the audits not dealt with.
+
+One rule decides outstanding, and the digest proves it on four audits: Reported, Cancelled with no reason, Cancelled with a reason, and Planned. programmeProgress counts 2 outstanding, summarise counts 2, and canCompleteProgramme refuses on "2 audits in this programme have not been reported or cancelled." All three readings use the same rule. The reason is what turns a missing audit into a decision on the record, and lesson one showed the gate that asks for it.
 
 ## Approving the programme
 

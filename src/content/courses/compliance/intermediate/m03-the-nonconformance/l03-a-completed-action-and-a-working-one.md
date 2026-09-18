@@ -43,7 +43,11 @@ Read against the refusal above, the difference is k4. The walked refusal is for 
 
 NCR-2026-031, the radiography reject on tie-in weld TW-07, is Major. Its corrective action k1 reads Complete and verified effective false. Its preventive action k2 is In progress, due 2026-10-05, overdue true. At the as-of date the engine refuses it on the open action: "1 corrective or preventive action still open."
 
-The digest prints only that first refusal for NCR-2026-031. The Major walk shows the refusal an NCR meets when its one corrective action is complete and unchecked, and k1 is in that state. This lesson does not say what the engine answers for NCR-2026-031 once k2 finishes, because the digest does not print that call.
+The digest also asks what comes next. With k2, its preventive action, marked Complete, NCR-2026-031 is refused again:
+
+"No corrective action has been verified effective yet. A completed action is not a working one, and for a non-conformance this serious the check is the point."
+
+Finishing k2 clears the open action and exposes the next gap. k1 is Complete and reads verified effective false, so the NCR waits on the check that it worked.
 
 ## The counts that follow
 

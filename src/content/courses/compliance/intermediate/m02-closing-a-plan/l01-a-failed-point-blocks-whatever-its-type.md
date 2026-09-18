@@ -12,7 +12,16 @@ Asked to close the plan as recorded, the engine refuses:
 
 The failed point is H-05, the radiography of the tie-in welds, a Hold point that reads Failed, resolved false and overdue true against its planned date of 2026-09-10. planProgress counts it in failed 1.
 
-Read the words of the refusal. It counts checkpoints, and the hold point rule is a separate sentence the engine gives only once the failure is cleared. On this plan the one failed point happens to be a hold point, so the digest does not print a failed witness or review point meeting the gate. What the digest does show is the order: failure is refused before anything about hold points is asked.
+Read the words of the refusal. It counts checkpoints, and the hold point rule is a separate sentence the engine gives only once the failure is cleared. On this plan the one failed point happens to be a hold point, so the digest tries the other types too. It takes the same plan with every hold point Passed and every NCR closed, and fails one other point at a time:
+
+| failed point | type | canClosePlan |
+| --- | --- | --- |
+| W-09 | Witness point | REFUSED |
+| R-04 | Review point | REFUSED |
+| M-07 | Monitor point | REFUSED |
+| S-10 | Surveillance point | REFUSED |
+
+Each is refused with the same failed-point sentence H-05 met. A failed point blocks closure whatever its type, including the types whose stops work column reads false.
 
 ## Why a failure outranks a pending point
 
@@ -26,7 +35,7 @@ With H-05 re-inspected and Passed, the engine refuses again, for a new reason:
 
 "2 hold points still outstanding (H-08, H-11). A hold point stops work until it is verified, so the plan cannot be finished over one."
 
-Lesson two reads that refusal. For now, notice that the count in it is 2, while planProgress at the as-of date prints hold points outstanding 3. The difference is H-05, which the re-inspection has resolved.
+Lesson two reads that refusal. Notice that the count in it is 2, while planProgress at the as-of date prints hold points outstanding 3. The difference is H-05, which the re-inspection has resolved.
 
 ## A failure is still counted after closure
 

@@ -30,14 +30,14 @@ The alternative would be to treat a missing lead time as no warning window. Then
 
 ## The rental that nobody gave a lead time
 
-REG-2026-012, the annual concession rental, is recorded with its lead time as null. It is due 2026-11-09, 25 days after the as-of date, and it reads Due soon. explainStatus gives the reason "Due in 25 days, inside the 30 day lead time set for this obligation."
+REG-2026-012, the annual concession rental, is recorded with its lead time as null. It is due 2026-11-09, 25 days after the as-of date, and it reads Due soon. explainStatus gives the reason "Due in 25 days, inside the default 30 day lead time (none is set for this obligation)."
 
-Read that reason against the record. The lead time on the record is null. The 30 in the sentence is DEFAULT_LEAD_TIME_DAYS, the window the engine applied because none was given. The sentence says the window was set for this obligation, and a reader who opens the record will find the field empty. The status is right. When you meet a reason like this one, check the lead time field before assuming anybody chose 30.
+Read that reason against the record. The lead time on the record is null. The 30 in the sentence is DEFAULT_LEAD_TIME_DAYS, the window the engine applied because none was given, and the sentence says so twice: it calls the window the default, and it says none is set for this obligation. Compare REG-2026-001, whose reason names the 60 day lead time set for this obligation. The two sentences let a reader tell a chosen window from a supplied one without opening either record.
 
 ## A default is still a choice
 
-The default is a safety net. It is set once, in the module, and the same 30 goes to a routine return and to a licence whose renewal takes months. If the obligation needs a longer window, somebody has to put one on the record. The register cannot tell you which obligations deserve more than the default. It can only make sure none of them get nothing.
+The default is a safety net, set once in the module, and the same 30 goes to a routine return and to a licence whose renewal takes months. If an obligation needs a longer window, somebody has to put one on the record.
 
 ## Exercise
 
-Read the five rows of the table that carry no usable lead time, and the row for 30. Say what status they share and which constant supplies the window. Then read the row for 0 and say what it shows about how the engine treats a lead time of zero. Finally, read the lead time recorded for REG-2026-012 and the lead time its reason names, and say where the second figure comes from.
+Read the five rows of the table that carry no usable lead time, and the row for 30. Say what status they share and which constant supplies the window. Then read the row for 0 and say what it shows about how the engine treats a lead time of zero. Finally, read the lead time recorded for REG-2026-012 and the lead time its reason names, and say which words in the reason tell you where the second figure comes from.

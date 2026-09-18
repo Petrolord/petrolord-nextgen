@@ -22,7 +22,7 @@ planProgress over the plan prints hold points 5. Every hold point row reads stop
 
 A hold point is a check the work may not pass until it is verified: the radiography of the tie-in welds, the hydrostatic test, the pre-commissioning release. The engine states the consequence in its own words when a plan tries to close over one: "A hold point stops work until it is verified, so the plan cannot be finished over one."
 
-The other four types are checks the plan still records and still dates. A witness point invites somebody to watch a test, such as W-02, the weld procedure qualification test. A review point is a check of paperwork, such as R-04, the NDT procedure review. M-07 monitors the daily fit-up and S-10 is site surveillance. Their stops work column reads false, and module two shows what that means in practice: the plan reaches a closure the engine allows while W-09, S-10 and R-12 are still open.
+The other four types are checks the plan still records and still dates. A witness point invites somebody to watch a test, such as W-02, the weld procedure qualification test. A review point is a check of paperwork, such as R-04, the NDT procedure review. M-07 monitors the daily fit-up and S-10 is site surveillance. Their stops work column reads false, and module two shows what that means in practice: the plan reaches a closure the engine allows while planProgress lists W-09, S-10, R-12 as still unresolved.
 
 ## The hold points at the as-of date
 

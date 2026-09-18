@@ -22,7 +22,7 @@ With a date and a name but no reason, it refuses again:
 
 "Say why this hold point does not apply. It stops work until released, so setting it aside needs a reason on the record."
 
-With all three, the answer is ALLOWED. Each refusal names only the next thing missing. The learner who brings a date and a name has cleared the first sentence and meets the second, and nothing reaches the plan until the third request.
+With all three, the answer is ALLOWED. Each refusal names only the next thing missing. A date and a name clear the first sentence and meet the second.
 
 ## The same act on a surveillance point
 
@@ -38,9 +38,11 @@ A hold point that no longer applies still cannot be deleted from a live plan. As
 
 The engine sends the request to exactly the route this lesson walked. Removal would leave no trace that the hold point was ever planned. Setting it aside leaves the point on the plan with its date, its name and its reason, and module two reads the removal gate in full.
 
+A waiver is the other route, and the last lesson read it. H-08 waived with a date, a verifier and a reason is ALLOWED: the engine has no rule that forbids waiving a hold point.
+
 ## What the record buys
 
-Once H-11 is set aside with all three, it counts as resolved under CHECKPOINT_RESOLVED_STATUSES, and it no longer stands between the plan and closure. That is exactly why the engine asks so much. A release this large has to carry the person and the reason that justify it.
+Once H-11 is set aside with all three, it counts as resolved under CHECKPOINT_RESOLVED_STATUSES, and it no longer stands between the plan and closure. That is why the engine asks so much. A release this large has to carry the person and the reason that justify it.
 
 ## Exercise
 

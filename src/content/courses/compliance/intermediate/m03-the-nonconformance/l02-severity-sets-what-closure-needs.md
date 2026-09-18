@@ -1,6 +1,6 @@
 # Severity sets what closure needs
 
-An NCR carries one of four severities: Critical, Major, Minor or Observation. The severity decides how much canCloseNcr asks for once the disposition is agreed. The digest walks the same closure on a Major NCR and on a Minor one, and the two walks part company at the root cause.
+An NCR carries one of four severities: Critical, Major, Minor or Observation. The severity decides how much canCloseNcr asks for once the disposition is agreed. The digest walks the same closure at all four severities, and the walks part company at the root cause.
 
 {{panel:compliance-plan-explorer}}
 
@@ -45,16 +45,25 @@ A Minor NCR closes with no root cause and no action at all. It closes over a cor
 
 ## Where the line falls
 
-The module's list NCR_EFFECTIVENESS_REQUIRED holds Critical and Major. Those are the severities for which a completed action is not enough and the check that it worked is required. The digest walks the Major case step by step. It does not walk a Critical NCR one requirement at a time, so this lesson does not say which of the Major refusals a Critical NCR meets in which order. What the digest does show is NCR-2026-019, a Critical NCR, reading ALLOWED with one corrective action verified effective.
+The module's list NCR_EFFECTIVENESS_REQUIRED holds Critical and Major. Those are the severities for which a completed action is not enough and the check that it worked is required. The Critical walk, after a disposition and its date:
 
-Observation is the fourth severity. NCR-2026-022, bolt torque record missing, is an Observation, Closed, with the disposition Use as is. The digest prints no closure walk for an Observation.
+| step | canCloseNcr |
+| --- | --- |
+| no root cause | REFUSED |
+| a root cause, no corrective action | REFUSED |
+| a corrective action complete and not yet checked | REFUSED |
+| a corrective action verified effective | ALLOWED |
 
-## The open action rule holds at every severity
+The first two refusals are the Major sentences with the word critical in place of major, and the third is the Major sentence word for word. The root cause refusal: "A critical non-conformance needs a root cause before it closes. Closing one without it is how the same non-conformance arrives again next quarter." NCR-2026-019, the one Critical NCR on the ABAM register, reads ALLOWED at the as-of date with k4 verified effective.
 
-Across both walks one refusal is common: an open action blocks closure. That is also the refusal NCR-2026-031 meets at the as-of date 2026-10-15. It is Major, status Actions in progress, and its preventive action k2 reads In progress, open true, due 2026-10-05, overdue true. Asked to close it, the engine refuses: "1 corrective or preventive action still open."
+Observation is the fourth severity, and its walk is the shortest. With nothing recorded it meets the disposition refusal every NCR meets first. With a disposition, Use as is, and its date, and nothing else, it is ALLOWED.
 
-A severity is therefore a rule about evidence. Every NCR has to finish what it started. A Major or Critical NCR also has to show why it happened and that the fix worked. A dashboard that closes every severity on the same checklist has lost the difference the engine keeps.
+## An open action blocks closure
+
+Across the Major and Minor walks one refusal is common: an open action blocks closure. That is also the refusal NCR-2026-031 meets at the as-of date 2026-10-15. It is Major, status Actions in progress, and its preventive action k2 reads In progress, open true, due 2026-10-05, overdue true. Asked to close it, the engine refuses: "1 corrective or preventive action still open."
+
+A severity is therefore a rule about evidence. An NCR has to finish the actions it started. A Major or Critical NCR also has to show why it happened and that the fix worked. An Observation needs only its disposition and date.
 
 ## Exercise
 
-Read the two walks side by side: the Major row "with one corrective action complete and not yet checked", REFUSED, and the Minor row "one corrective action complete and never checked", ALLOWED. Then read the one refusal the two walks share. Say what the pair of answers shows about where severity changes what closure needs, and what stays the same at both severities.
+Read the two walks side by side: the Major row "with one corrective action complete and not yet checked", REFUSED, and the Minor row "one corrective action complete and never checked", ALLOWED. Then read the one refusal the two walks share. Say what the pair of answers shows about where severity changes what closure needs, and what stays the same at both severities. Then read the Observation walk's allowed row and say what it asks of an Observation NCR.

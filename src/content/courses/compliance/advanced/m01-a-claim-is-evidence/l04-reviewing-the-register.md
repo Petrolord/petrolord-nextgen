@@ -10,11 +10,11 @@ Every applicable ORASHI clause carries a next review date. The engine reads it a
 
 Three rows show the three outcomes:
 
-| clause | status | next review | review overdue | review due soon |
-| --- | --- | --- | --- | --- |
-| 4.3 | Conformant | 2026-10-01 | true | false |
-| 6.1.2 | Partially conformant | 2026-11-02 | false | true |
-| 7.2 | Not assessed | 2027-01-31 | false | false |
+| clause | status | next review | days until it | review overdue | review due soon |
+| --- | --- | --- | --- | --- | --- |
+| 4.3 | Conformant | 2026-10-01 | -14 | true | false |
+| 6.1.2 | Partially conformant | 2026-11-02 | 18 | false | true |
+| 7.2 | Not assessed | 2027-01-31 | 108 | false | false |
 
 Clause 4.3's review date is behind the as-of date, so it reads review overdue true. Clause 6.1.2's review date is ahead of the as-of date and inside the lead window, so it reads review due soon true. Clause 7.2's review date is further ahead, and both flags read false. No row in this table reads true for both flags.
 
@@ -28,9 +28,9 @@ Clause 4.3 reads Conformant and review overdue true on the same row. The status 
 
 The register summary prints reviews overdue 1 and reviews due soon 1. The readiness list in module 5 carries one of them as a watch item, "1 clause review is past due." The list carries no item for the review that is due soon. The due soon flag is a warning for the register's owner, and the overdue flag is the one the list reads.
 
-## A day count the digest does not print
+## The day counts behind the flags
 
-The digest prints the next review dates and the two flags. It does not print a day count for any clause's review. Do not count the days from 2026-10-15 to 2026-11-02 yourself and quote the result as the engine's: the flag is what the engine derived, and it is what this course teaches.
+The digest prints the days until each clause's next review at 2026-10-15. Clause 4.3 reads -14, a review date already behind the as-of date. Clause 6.1.2 reads 18, and it is the only clause that reads review due soon true. Clause 7.2 reads 108. Quote the day count as the engine printed it, beside its as-of date. Moved to another date, every one of these counts changes, and a flag can change with it.
 
 ## Exercise
 

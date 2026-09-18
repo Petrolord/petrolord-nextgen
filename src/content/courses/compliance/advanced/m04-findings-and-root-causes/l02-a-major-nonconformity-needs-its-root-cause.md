@@ -46,7 +46,7 @@ ISF-2026-004 is Action in progress. Its actions are ac1, Corrective, In progress
 
 REFUSED: 1 action still open against this finding.
 
-The refusal names the first thing missing: ac1 is still open. Complete it, and the record would still hold no corrective action verified effective. The summary in module 5 prints awaiting an effectiveness check 1 across the register. The digest does not say which action that count reads, so this lesson does not name it.
+The refusal names the first thing missing: ac1 is still open. Complete it, and the record would still hold no corrective action verified effective. The summary in module 5 prints awaiting an effectiveness check 1 across the register, and the digest names the action behind it: ac4, Preventive, on ISF-2026-004, Complete with no effectiveness verdict recorded.
 
 ## The Professional parallel
 

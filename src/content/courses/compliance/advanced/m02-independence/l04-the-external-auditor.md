@@ -18,7 +18,7 @@ ALLOWED says the engine found no conflict among the names it holds. It is the ri
 
 ## An external audit is a different thing
 
-An external lead auditor on an internal audit is one case. An audit carried out by an external body is another, and module 3 of this tier reads it. The ORASHI record holds one audit of type Surveillance, ISA-2026-S01, Closed, ended 2026-07-24. Its row in the audits table reads counts towards coverage false.
+An external lead auditor on an internal audit is one case. An audit carried out by an external body is another, and module 3 of this tier reads it. The ORASHI record holds one audit of type Surveillance, ISA-2026-S01, Closed, ended 2026-07-24. Its row in the audits table reads counts towards coverage false. It examined clause 6.1.2, Conformant on 2026-07-22, and clause 6.1.2 reads never examined in the coverage table.
 
 So an external person may lead an internal audit, and that audit counts towards coverage once it is reported. An audit of type Surveillance does not count towards coverage whatever its status. The first is about who examines. The second is about what kind of audit it is. The readiness list's blocking item for never-examined clauses quotes the reason: "ISO 14001:2015 §9.2 requires the organization to audit its own system."
 

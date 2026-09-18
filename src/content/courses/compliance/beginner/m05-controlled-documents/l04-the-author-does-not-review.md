@@ -8,7 +8,7 @@ The owner decision behind it is AS15 D1: a document review task is decided only 
 
 ## Seven requests, one revision
 
-The digest takes revision rev-0019-10, authored by u-adaeze, and puts seven requests to the engine. Each answer is ALLOWED or a refusal, and each refusal is quoted exactly as the engine gives it:
+The digest takes revision rev-0019-10 of ENG-PRO-0019, the hydrotest procedure. The document's status is In Review, its current revision is '09' and its next revision is '10'. The revision is authored by u-adaeze, and the digest puts seven requests to the engine. Each answer is ALLOWED or a refusal, and each refusal is quoted exactly as the engine gives it:
 
 | request | answer |
 | --- | --- |

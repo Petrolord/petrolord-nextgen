@@ -22,7 +22,7 @@ The digest this course is built on measures each module directly. It counts what
 | complianceStatus | 11 | 8 | 4 |
 | documentControl | 14 | 7 | 4 |
 | qualityAssurance | 28 | 24 | 7 |
-| isoCompliance | 33 | 24 | 10 |
+| isoCompliance | 34 | 25 | 10 |
 | auditManagement | 33 | 20 | 4 |
 
 Read the last column carefully. Every module has at least one export whose answer depends on the date it is given. That is the reason this course keeps naming a date.

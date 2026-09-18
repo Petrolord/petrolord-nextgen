@@ -1,6 +1,6 @@
 # The Ikoro register end to end
 
-This lesson reads the whole IKORO obligation register at once, as a compliance lead would at the start of a working day, using everything the tier has taught. Every figure is the engine's, at the as-of date of 2026-10-15.
+This lesson reads the whole IKORO obligation register at once, as a compliance lead would at the start of a day. Every figure is the engine's, at the as-of date of 2026-10-15.
 
 ## The register, worst first
 
@@ -24,13 +24,13 @@ This lesson reads the whole IKORO obligation register at once, as a compliance l
 
 ## The top five: attention
 
-summarise counts Expired 1, Overdue 2 and Due soon 2, and prints an attention count of 5. Those five rows are the day's work.
+summarise counts Expired 1, Overdue 2 and Due soon 2, and prints an attention count of 5.
 
 The radioactive source licence is first. Its expiry, 2026-09-30, has passed, and explainStatus says "The permit expired 15 days ago." Its due date of 2026-12-31 is still ahead and does not rescue it. The expiry drives the status, and Expired heads the severity list.
 
 The contingency plan notification and the water quality return are both Overdue. The notification is a One-off with nothing filed, 44 days past due. The return was last filed on 2026-09-09, and its current period starts on 2026-09-10, so that filing counts for the period before. The return for this period is late, and its reason says "The due date passed 5 days ago." The notification sits above the return because its next action date is the nearer one.
 
-The concession rental is Due soon at 25 days. Its lead time is null, so the default of 30 days applies, and the reason names that 30. The discharge permit is Due soon at 36 days, inside the 60 day lead time set for it, and its next action date is its expiry, 2026-11-20. Its due date, 2027-03-31, reads 167 days away on another row. A reader who counted to the due date would miss the permit lapsing.
+The concession rental is Due soon at 25 days. Its lead time is null, so the default of 30 days applies, and the reason calls the window the default and says none is set for this obligation. The discharge permit is Due soon at 36 days, inside the 60 day lead time set for it, and its next action date is its expiry, 2026-11-20. Its due date, 2027-03-31, reads 167 days away on another row. A reader who counted to the due date would miss the permit lapsing.
 
 ## The middle: in hand
 
@@ -44,8 +44,26 @@ The waste consignment register has no due date and no expiry, and reads No date 
 
 ## By regime
 
-countBy regime counts the obligations by regime: Environmental 5, Reporting 3, Health & Safety 2, Licensing 1, Operational 1 and Financial 1. The digest prints these counts without saying which obligation carries which regime, so this lesson does not assign them. Read them as the shape of the register: the areas of the operation its obligations come from, and the spread of work the compliance lead answers for.
+countBy regime counts the obligations by regime: Environmental 5, Reporting 3, Health & Safety 2, Licensing 1, Operational 1 and Financial 1. The digest prints the regime of each obligation, which is what countBy groups:
+
+| code | regime | obligation type |
+| --- | --- | --- |
+| REG-2026-001 | Environmental | Permit |
+| REG-2026-002 | Reporting | Periodic report |
+| REG-2026-003 | Reporting | Periodic report |
+| REG-2026-004 | Environmental | Periodic report |
+| REG-2026-005 | Licensing | Licence |
+| REG-2026-006 | Operational | Consent |
+| REG-2026-007 | Health & Safety | Notification |
+| REG-2026-008 | Reporting | Periodic report |
+| REG-2026-009 | Environmental | Permit |
+| REG-2026-010 | Health & Safety | Periodic report |
+| REG-2026-011 | Environmental | Permit |
+| REG-2026-012 | Financial | Fee or levy |
+| REG-2026-013 | Environmental | Other |
+
+The five Environmental rows include the Superseded original approval and the Not applicable night noise permit. A regime count is the shape of the register. It is no count of live work.
 
 ## Exercise
 
-From the sorted register, read the attention count summarise prints and name the five obligations behind it. For the discharge permit, read the next action date, its days until and the due date, and say which of the two dates drives its status. Then read the two On track rows and say what their last filings have in common.
+From the sorted register, read the attention count summarise prints and name the five obligations behind it. For the discharge permit, read the next action date, its days until and the due date, and say which of the two dates drives its status. Then read the two On track rows and say what their last filings have in common. Finally, name the Environmental obligations in the regime table and say which of them the register is not counting down.

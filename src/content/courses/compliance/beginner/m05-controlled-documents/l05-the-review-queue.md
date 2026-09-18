@@ -34,11 +34,11 @@ byReviewUrgency puts the library in order. Read the order column and the review 
 | 6 | HSE-PRO-0012 | Not in force | none |
 | 7 | ENG-PRO-0019 | Not in force | none |
 
-The queue runs Review overdue, then Review due soon, then Review scheduled, then No review scheduled, then Not in force. The produced water sampling procedure is first. Its review date has passed and people are still working to it. The emergency response plan is second, with its review due soon. The tank inspection standard is third. Its review is 258 days away and reads Review scheduled, so there is nothing to do for it yet beyond keeping the date on the record.
+The digest states the rule. The review states come first, in the order Review overdue, Review due soon, Review scheduled, No review scheduled and then Not in force. Within a state the nearest review date comes first, and undated documents go last. The produced water sampling procedure is first. Its review date has passed and people are still working to it. The emergency response plan is second, with its review due soon. The tank inspection standard is third. Its review is 258 days away and reads Review scheduled, so there is nothing to do for it yet beyond keeping the date on the record.
 
 The flare management philosophy is fourth. It is in force and has no review scheduled, and the queue places it after the three documents in force that have a review date and ahead of every document that is not in force. It is a live document without a plan to review it, and the queue keeps it in view.
 
-The three documents not in force are last. The old issue of the custody metering procedure carries a review date of 2020-01-06, -2474 days from the as-of date, and it sits at fifth. A passed date on a document nobody works to does not raise it in the queue, because its review state is Not in force.
+The three documents not in force are last. The old issue of the custody metering procedure carries a review date of 2020-01-06, -2474 days from the as-of date. A passed date on a document nobody works to does not raise it above any document in force, because its review state is Not in force. Among the three not in force it sits fifth, first of the three, because it is the only one with a review date and undated documents go last.
 
 ## Queue and register side by side
 

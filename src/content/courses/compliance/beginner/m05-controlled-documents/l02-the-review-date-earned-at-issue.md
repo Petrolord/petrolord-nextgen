@@ -19,7 +19,15 @@ The engine's nextReviewDate takes an issue date and a review period in months. R
 
 {{panel:compliance-register-explorer}}
 
-The first two next review dates, 2026-11-02 and 2027-06-30, are also the next review dates the IKORO library carries for the terminal emergency response plan and the tank inspection standard. The digest does not print those two documents' issue dates, so read that as two dates in common and nothing more.
+The first two rows are IKORO documents. The digest recomputes each library document that has an issue date, from that date and its own review period:
+
+| number | issue date | review period in months | nextReviewDate | next_review_date recorded | the two agree |
+| --- | --- | --- | --- | --- | --- |
+| HSE-PRO-0007 | 2024-09-30 | 24 | 2026-09-30 | 2026-09-30 | true |
+| OPS-PLA-0002 | 2025-11-02 | 12 | 2026-11-02 | 2026-11-02 | true |
+| ENG-STD-0011 | 2025-06-30 | 24 | 2027-06-30 | 2027-06-30 | true |
+
+All three agree with the date on the record. OPS-PHI-0001, OPS-PRO-0004, HSE-PRO-0012 and ENG-PRO-0019 have no issue date recorded, so nextReviewDate has nothing to count from.
 
 The next three rows show the month end rule from module four at work again. An issue date of 2024-08-31 on an 18 month period lands on 2026-02-28, and so does 2025-12-31 on a two month period. A document issued on the leap day 2024-02-29 on a 12 month period comes up for review on 2025-02-28.
 
@@ -29,7 +37,7 @@ The digest prints the case that makes this rule matter. A document issued 2025-0
 
 Counted from the issue date, the review falls on 2027-03-14. Counted from the correction, it would fall on 2028-10-01.
 
-Document Control counts from the issue date, so the review stays on 2027-03-14. A correction is a fix to a typo, a phone number or a reference. It is not the full review the period asks for, and it must not reset the clock. If it did, a document could be kept away from review indefinitely by making a small correction every so often, and the library would show a review date that no real review had earned. The date is earned when the document is issued, and it is kept until the document is reviewed.
+Document Control counts from the issue date, so the review stays on 2027-03-14. A correction fixes a typo or a reference. It is not the full review the period asks for, and it must not reset the clock. If it did, a document could be kept away from review indefinitely by making a small correction every so often, and the library would show a review date that no real review had earned. The date is earned when the document is issued, and it is kept until the document is reviewed.
 
 ## When the period is missing
 
