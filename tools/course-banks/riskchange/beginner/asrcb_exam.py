@@ -1,0 +1,313 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+K=[3,2,0,1,2,0,0,3,3,3,0,1,3,1,1,3,1,2,0,1,2,2,0,1,2,3,3,0,1,2,2,3,2,2,0,3,1,0,0,2,0,1]
+def q(p,c,ds,e): Q.append((K[len(Q)],p,c,ds,e))
+
+# riskchange Associate tier exam, 42 questions over the whole tier, written
+# last and from digest.txt SECTIONS 1 to 6 as the 26 Associate lessons teach
+# them. It asks each module's material through probes and rows the module
+# banks do not key on. Every dated answer is true on 2026-10-01.
+
+# ---- m01: what these engines decide
+q("Which Suite app calls the peerReview engine?",
+ "Peer Review Manager",
+ ["Lessons Learned",
+  "Management of Change",
+  "The Risk Register, through its Heatmap tab"],
+ "Peer Review Manager asks peerReview for a closure verdict on a review. riskScoring sits behind the Risk Register and its Heatmap tab, and Lessons Learned has an engine of its own."),
+
+q("Measured by loading the module, how many exports does riskScoring carry, and how are they split?",
+ "15 exports: 7 functions and 8 frozen tables and constants",
+ ["7 exports, all of them functions",
+  "15 exports: 8 functions and 7 frozen tables and constants",
+  "34 exports: 15 functions and 19 frozen tables and constants"],
+ "riskScoring has 15 exports, 7 of them functions and 8 frozen tables and constants, one of which is the band table. The 34, 15 and 19 split belongs to managementOfChange."),
+
+q("Of the inputs behind a risk's status, which does the engine choose for itself?",
+ "None: the levels, residual levels, target, as-of date and population are all chosen by people.",
+ ["The target, which it sets from the inherent band whenever a risk owner leaves the field empty.",
+  "The as-of date, which it always reads from the register's own settings so every user sees one date.",
+  "The population, which it filters by status before counting, so that drafts never reach a tile."],
+ "An engine decides a state from a record by a fixed rule, and everything that goes into the record, and every choice about which records to hand over and on what date, stays with people."),
+
+q("A status report reads \"OB-01 is not overdue.\" What does it need before anybody can check it?",
+ "The date it is true on, 2026-10-01",
+ ["OB-01's band",
+  "The name of the engine that produced it, so a reader can rerun the call",
+  "Nothing, since a review status is the same on every day"],
+ "A status quoted without its date has lost half of what produced it. \"OB-01 is not overdue on 2026-10-01\" is the sentence that can be checked."),
+
+q("Measured by loading the module, how many functions does calendar export, and how many of those take a date?",
+ "5 functions, and 1 of them takes a date",
+ ["6 functions, and every one of them takes a date",
+  "5 functions, and none takes a date, as the module only parses dates",
+  "1 function, daysUntil, beside 5 frozen tables and constants"],
+ "calendar has 6 exports: 5 functions and 1 frozen table or constant. Its one function that takes a date is daysUntil, which takes it as argument 2 and defaults it to the machine clock when the caller leaves it out."),
+
+q("How many functions in lessonsLearned take a date, each defaulting it to the machine clock?",
+ "6 of its 26 functions",
+ ["All 26 of its functions",
+  "4 of its 17 functions",
+  "1, as in calendar"],
+ "lessonsLearned has 40 exports and 26 functions, and 6 of those functions take a date: daysUntil, isReviewDueSoon, isReviewOverdue, lessonAgeDays, lessonByAttention and summarise."),
+
+q("A band beside a risk surprises its owner. Where does this tier say to look first?",
+ "At the field of the record that produced it",
+ ["At the engine version, since a band can change when the engine is updated",
+  "At the band table, which each organisation edits",
+  "At the machine clock, since bands move with the date"],
+ "The rule is the same for every user. What varies is the record, so the question to ask first is which field of the record produced the answer."),
+
+# ---- m02: the matrix and its bands
+q("Suppose 4.5 turns up in the score column of an imported register. Which band holds it?",
+ "\"Low\", as it reaches the lower edge of 1 and falls short of 5",
+ ["\"Medium\", after rounding up to 5",
+  "\"None\", as a fractional score is unscored",
+  "It is refused, as no cell of the grid holds 4.5, so the engine will not band it"],
+ "Reading down the floors, 4.5 passes under 5, where \"Medium\" starts, and clears 1, where \"Low\" starts. Only a fractional LEVEL is off the scale; a score just meets the floors."),
+
+q("A score of -3 reaches the band table. Where does it land?",
+ "\"None\", as any score of zero or below means no score",
+ ["\"Low\", the lowest band on the table",
+  "It is refused as negative",
+  "\"None\" only when the likelihood was negative; a negative impact gives \"Low\""],
+ "Zero and every negative score take \"None\". That label marks a missing score, so it sits outside the four real bands and out of every tally of low risks."),
+
+q("A likelihood arrives as \" 3 \", with a space either side, against an impact of 4. What does the engine make of it?",
+ "Level 3: it scores 12 and bands \"High\"",
+ ["It is blank text, so it scores 0 and bands \"None\"",
+  "Level 3, but it scores 0 until the spaces are removed by the app",
+  "It is refused"],
+ "Padding round a whole level does not stop it being read as that level, so the product is 3 times 4. A spreadsheet that pads its cells gets the same band as one that does not."),
+
+q("An import carries the boolean false in a likelihood field, and the impact is 1. What does riskScoring answer?",
+ "Nothing scored: 0, \"None\"",
+ ["A score of 1 and the band \"Low\"",
+  "A refusal",
+  "A score of 5 and the band \"Medium\", as false is read as the top of the scale"],
+ "The engine takes false as no level, so the product is 0 and the band is the one that means no score. True, handed in the same way, is taken as level 1. The register's form writes neither."),
+
+q("Where on the grid do the \"Critical\" cells sit, and how many are there?",
+ "6 cells, all in the top right corner where both levels are high",
+ ["8 cells, spread along the top row and down the right-hand column",
+  "6 cells, all on the diagonal from bottom left to top right",
+  "4 cells"],
+ "Counted from the grid, \"Critical\" has 6 cells, \"High\" 4, \"Medium\" 7 and \"Low\" 8. The \"Critical\" cells sit where both levels are high and the \"Low\" cells in the bottom left."),
+
+q("Likelihood 4 with impact 3 and likelihood 3 with impact 4 are two different cells. What do they share?",
+ "The score 12 and the band \"High\"",
+ ["Nothing, since each cell carries a score of its own",
+  "The band only, since the two scores differ by the order of the levels",
+  "The same risk, since a cell names a single kind of hazard"],
+ "The product does not care which axis a level sits on, so the same score appears in more than one cell. Two risks in those two cells can be very different hazards with the same band."),
+
+q("An import writes the text \"3.5\" into a likelihood field, with impact 4. Which score and band follow?",
+ "Unscored at 0, \"None\"",
+ ["A score of 12, \"High\", once the text is read as 3",
+  "A score of 14, \"High\"",
+  "A score of 16, \"Critical\", once the text is rounded to 4"],
+ "Text is read as a level only when it names a whole level. \"3.5\" is a fraction written as text, and a fraction is off the scale and unscored, however it arrives."),
+
+q("How many whole numbers from 1 to 25 does the grid never produce, and why?",
+ "11, since no two whole levels from 1 to 5 multiply to any of them",
+ ["14, since the grid holds only 11 distinct scores",
+  "11, since each of them would need a level above 5 on both axes at the same time",
+  "none"],
+ "Every product of two levels from 1 to 5 appears in some cell, and the 14 products that do appear leave 11 gaps between 1 and 25. The first gap is 7 and the last is 24."),
+
+# ---- m03: residual and appetite
+q("OB-04 is \"Mitigated\" with a residual of 9 and a target of 9. What is its appetite answer, and which rule decides it?",
+ "\"Within appetite\": equal to the target counts as within",
+ ["\"Above appetite\": a residual must fall below its target",
+  "\"Not set\", since a mitigated risk carries no target",
+  "\"Within appetite\" only because it is \"Mitigated\""],
+ "A residual EQUAL to the target is within appetite, since the target is the most the organisation will carry for that hazard. OB-07 does the same with 8 against 8."),
+
+q("A residual of 9 meets a target of 8. Which appetite answer follows?",
+ "\"Above appetite\": 9 exceeds 8",
+ ["\"Within appetite\", as 9 and 8 are both \"Medium\"",
+  "\"Not set\", since a residual and a target in one band cannot be compared",
+  "\"Within appetite\", as a residual within one of its target is tolerated"],
+ "Appetite compares the residual score with the target, and the bands play no part. A residual of 9 is over a target of 8, though both numbers band \"Medium\"."),
+
+q("Nobody has entered a target on a risk whose residual scores 6. Which appetite word does the engine print?",
+ "\"Not set\"",
+ ["\"Within appetite\", since 6 is \"Medium\"",
+  "\"Above appetite\" until a target is set",
+  "\"Within appetite\", since with no target any residual is accepted by default"],
+ "An empty target leaves the comparison with one side missing, and the engine prints its declining word in place of a pass or a fail. Against a target of 8 the same 6 would read \"Within appetite\"."),
+
+q("OB-11 has an impact of 6, no residual levels assessed and a target of 6. Why does its appetite read \"Not set\"?",
+ "Its impact is off the scale, so both its scores are 0",
+ ["Its target is missing, so appetite has nothing to compare against",
+  "Its residual of 6 equals the target, which the engine reads as undecided",
+  "It is not live"],
+ "An impact of 6 is beyond the top level, which leaves OB-11 without an inherent score, and its unassessed residual is 0, \"None\", too. Appetite then has nothing to set against the target of 6."),
+
+q("OB-09 is \"Draft\" at 2 by 2 and neither residual axis is assessed. What residual does deriveRiskFields give it?",
+ "4, \"Low\", with both axes falling back to the inherent 2",
+ ["0, \"None\"",
+  "It has none, since a draft risk is not scored",
+  "2, \"Low\", with one axis falling back and the other left at 1"],
+ "Scoring does not depend on status. Both unassessed axes fall back to the inherent levels, so the residual is 2 times 2, which is 4, \"Low\", the same as its inherent score."),
+
+q("OB-01's rating column reads \"Critical\" while its residual band is \"High\". Which is right?",
+ "Both: the rating is the inherent band, and the residual is a separate answer",
+ ["The residual, and the rating is stale",
+  "The rating, as the residual is only an estimate",
+  "Neither, since a risk with two bands has been scored twice and needs its levels checking against the grid before either band can be quoted"],
+ "The stored column holds the band before controls, 3 by 5 giving 15. The band after controls, 2 by 5 giving 10, is a second answer to a second question, and neither overrides the other."),
+
+# ---- m04: the calendar date
+q("On a count from the as-of date, where does 2026-11-01 fall?",
+ "31 days ahead",
+ ["30 days ahead",
+  "61 days ahead",
+  "1, one month"],
+ "October has 30 days after its first, which brings 2026-10-31 to 30, and one more day reaches 31. Each count is in whole days."),
+
+q("What is daysUntil for 2026-10-02, counted from 2026-10-01, for a reader in any time zone?",
+ "1 everywhere",
+ ["1 in some zones and 0 in others",
+  "0, as the date is read in UTC",
+  "2"],
+ "Neither date carries an hour once it is read, so readers in any two offices count the same single day between them."),
+
+q("OB-10 was marked \"Closed\" and still shows a review date of 2027-03-31. What does the register report for it on 2026-10-01?",
+ "181 days to go, and no overdue flag",
+ ["181 days, and overdue, since a closed risk still carries its date",
+  "-181 days, and overdue, counted back from the review",
+  "null, and not overdue, since a closed risk has no date"],
+ "daysUntil still counts the date, 181 days after 2026-10-01. The overdue test asks the status first, and a \"Closed\" risk is not live, so it can never read overdue whatever its date."),
+
+q("A review date reads \"after the turnaround\". What does calendar.js parse it to?",
+ "null",
+ ["The as-of date, as a stand-in",
+  "The first day of the next month",
+  "The date of the next turnaround the register holds"],
+ "Words where a date should be parse to null, and so does a date that does not exist. The engine never guesses a day, so the gap stays visible on the record."),
+
+q("How far is OB-03's review, set for 2026-11-15, from the as-of date 2026-10-01?",
+ "45 days on",
+ ["-45",
+  "60",
+  "15"],
+ "A date still to come gives a positive count, and mid November is 45 whole days on. The figure is only checkable with the date it was counted from."),
+
+q("What in riskScoring warns that a live risk has no review date at all?",
+ "Nothing: it reads not overdue, and nothing flags the missing date",
+ ["isReviewOverdue returns ok false with a reason naming the missing date",
+  "daysUntil returns -1 for a missing date, so the risk reads overdue at once",
+  "The band drops to \"None\" until a review date is entered on the record"],
+ "With no date there is nothing to fall behind, so the answer is no and no warning is raised. A person reading the register has to notice the empty field."),
+
+q("Is OB-06, an \"Open\" risk due for review on 2026-10-31, late on 2026-10-01?",
+ "No: it has 30 days left",
+ ["Yes, because it has no target",
+  "No, as \"Open\" risks are checked at month end only",
+  "Yes: it is -30 days away"],
+ "OB-06 is live, so its date is read, and the end of October is still to come. Its missing target decides its appetite answer and has nothing to do with its review."),
+
+# ---- m05: the register as a whole
+q("An event on the register has actually happened, and the risk now reads \"Realized\". Does it stay in the live group?",
+ "Yes: the organisation is living with its consequences and still carries it",
+ ["Yes, because it still has a review date on the record, and any dated risk is live",
+  "No: it leaves once its residual is assessed",
+  "No, because the engine treats any status past \"Mitigated\" as finished, like \"Closed\""],
+ "The live group is the set of risks still carried. A realized risk cannot be put down by changing a word on its record, and its review date keeps counting."),
+
+q("Counting every OBODO risk on its residual band, how many read \"Medium\"?",
+ "5 of the 12",
+ ["4 risks, the live count",
+  "2 risks, the inherent count",
+  "7 risks"],
+ "Every risk counted residual reads \"Critical\" 1, \"High\" 1, \"Medium\" 5, \"Low\" 3 and \"None\" 2. Over the live risks only, residual \"Medium\" is 4."),
+
+q("Live OBODO risks counted inherent read \"Low\" 0. Why is the column empty?",
+ "The one risk with an inherent \"Low\" band, OB-09, is \"Draft\" and so is not live",
+ ["No OBODO risk has an inherent score below 5",
+  "countByBand drops the \"Low\" band from live counts",
+  "OB-06 and OB-12 moved to \"Low\" on the residual"],
+ "Every risk counted inherent has \"Low\" 1, OB-09 at 4. Handing over only live risks takes OB-09 out, and nothing else moves because the other risks are in both lists."),
+
+q("How many OBODO risks does the Risk Register dashboard count?",
+ "8 risks",
+ ["10 risks, every live one",
+  "12 risks, the whole register",
+  "6 risks"],
+ "Its list is OB-01, OB-02, OB-03, OB-05, OB-06, OB-08, OB-11 and OB-12, read inherent: \"Critical\" 4, \"High\" 1, \"Medium\" 2, \"Low\" 0 and \"None\" 1."),
+
+q("RECON records the Heatmap tab and the dashboard disagreeing. What does this tier say about which is miscounting?",
+ "Neither: each counts the list it was given, and the lists differ by status",
+ ["The dashboard, which drops live risks that the Heatmap tab rightly counts as carried",
+  "The Heatmap tab, which counts risks that are not live alongside the carried ones",
+  "Both, since two heatmaps of one register should agree in every cell they share"],
+ "The tab takes all four live statuses and the dashboard two of them, so a \"Mitigated\" or \"Realized\" risk shows on one and not the other. Each count is faithful to its own list."),
+
+q("Why does deriveRiskFields produce every column of a row in one call?",
+ "So every column comes from the same record at the same moment and no column can drift from the others",
+ ["Because the engine stores the row",
+  "Because a band is read from the target",
+  "So the app can store all the columns and skip the engine next time"],
+ "The band cannot disagree with the score beside it, and the appetite cannot be computed from a residual that has since changed. Edit a level and derive the row again, and every column moves together."),
+
+q("OB-12 is \"Open\" at 1 by 5, with residual levels 1 and 3 and a target of 3. Which row does the engine derive?",
+ "5, \"Medium\"; residual 3, \"Low\"; \"Within appetite\"",
+ ["5, \"Medium\"; residual 3, \"Low\"; \"Above appetite\"",
+  "5, \"Low\"; residual 3, \"Low\"; \"Within appetite\"",
+  "5, \"Medium\"; residual 15, \"Critical\"; \"Above appetite\""],
+ "Before controls the product lands on 5, the floor of \"Medium\". After controls it is 3, inside \"Low\", and 3 sits exactly on the target of 3."),
+
+# ---- m06: the associate reading
+q("Take OB-07's residual away from its inherent score. What is left?",
+ "4, from 12 and 8",
+ ["0",
+  "8",
+  "12, its whole inherent score"],
+ "OB-07 is 3 by 4 inherent, 12, and 2 by 4 residual, 8. Unlike OB-08, OB-11 and OB-03, both of its scores exist and its residual was assessed, so the difference rests on two real scores."),
+
+q("What does the 0 in OB-11's reduction column tell a reader about its controls?",
+ "Nothing: neither of its scores exists",
+ ["Controls that do nothing on either axis of the risk",
+  "A risk that already sits exactly at its target of 6",
+  "An assessed residual that equals the inherent score"],
+ "OB-11's impact of 6 is off the scale, so its inherent and residual are both 0. OB-03 also shows 0, for another reason: its residual was not assessed and fell back."),
+
+q("Applying step three of the method to OB-02, which residual axis falls back, and to what?",
+ "The impact, to the inherent 4, since its residual impact is blank",
+ ["The likelihood, to the inherent 4",
+  "Neither, as a blank leaves the residual unscored",
+  "Both axes, to 4 and 4"],
+ "Only the empty field is replaced. The assessed 2 on likelihood stays, the missing impact borrows OB-02's inherent 4, and the product is 8, \"Medium\"."),
+
+q("Which inherent inputs leave a risk at 0, \"None\", in step two of the method?",
+ "A fraction, a 6, a blank or a negative on either axis",
+ ["Only a blank",
+  "A fraction only, since a 6 is capped",
+  "Any level below 3"],
+ "A whole number written as text is still that level, while a fraction, a 6, a blank or a negative is off the scale. The inherent axes have nothing to fall back to."),
+
+q("What kind of answer does this tier warn the next one will often give?",
+ "A refusal, with a reason a user can act on",
+ ["A band",
+  "A days-until count",
+  "An appetite answer"],
+ "A risk is read; a change is moved. The next tier is about stages and legal moves, and when a move is not allowed the engine refuses it, and a refusal is read as carefully as a band."),
+
+q("Which segregation of duties rule does this tier say the next one teaches?",
+ "The person who raised a change is not the one who approves it",
+ ["An assessor may not score their own risk",
+  "A risk owner may not set their own target",
+  "The person who closes a risk must be a different person from the one who wrote it, and from the reviewer"],
+ "A change is approved in levels, and the person who raised a change is not the person who approves it. That rule is one this course owns."),
+
+q("How many different \"Critical\" figures can the OBODO register show across its four band-count populations?",
+ "3",
+ ["4, one for each population",
+  "1",
+  "2, inherent and residual"],
+ "The four figures are 5, 1, 4 and 1, and the two residual populations share the 1, which leaves 3 different values. Each is right for the question it answers."),
+
+emit(Q, '/root/wt-as-riskchange-nextgen/tools/course-banks/riskchange/beginner/asrcb_exam.json', label='asrcb_exam', expect_n=42)
+finish()

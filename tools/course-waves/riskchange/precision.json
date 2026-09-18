@@ -1,0 +1,6 @@
+{
+ "whole": {
+  "decimals": 0,
+  "match": "^(?:etim_lesson_age_days|etim_lesson_applied|etim_lesson_last_applied_yyyymmdd|etim_register_reviews_due_soon|etim_review_blocking|etim_review_open_comments|igbara_i03_inherent_score|igbara_i03_residual_score|igbara_i06_days_to_review|igbara_i12_days_to_review|igbara_live_inherent_high|igbara_live_residual_critical|okomu_ok01_ratify_due_yyyymmdd|okomu_register_expired|okomu_register_expiring_soon|okomu_register_open_actions|okomu_register_overdue_actions|okomu_register_ratification_overdue)$"
+ }
+}

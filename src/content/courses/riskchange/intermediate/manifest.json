@@ -1,0 +1,307 @@
+{
+  "app_slug": "riskchange",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-change-and-its-stages",
+      "title": "A Change and Its Stages",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-eight-stages-in-order",
+          "title": "Eight stages in order",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-legal-moves-and-final-stages",
+          "title": "Legal moves and final stages",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-refusal-that-names-the-way-forward",
+          "title": "A refusal that names the way forward",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-active-in-effect-and-terminal",
+          "title": "Active, in effect and terminal",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-approval-levels",
+      "title": "Approval Levels",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-levels-come-from-the-rows",
+          "title": "Levels come from the rows",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-one-signature-a-level",
+          "title": "One signature a level",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-rejection-stops-the-gate",
+          "title": "A rejection stops the gate",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-no-rows-means-nothing-to-approve",
+          "title": "No rows means nothing to approve",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-segregation-of-duties",
+      "title": "Segregation of Duties",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-originator-never-approves",
+          "title": "The originator never approves",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-only-the-assignee-decides",
+          "title": "Only the assignee decides",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-decision-is-made-once",
+          "title": "A decision is made once",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-covering-an-absence",
+          "title": "Covering an absence",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-actions-and-the-two-gates",
+      "title": "Actions and the Two Gates",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-three-kinds-of-action",
+          "title": "Three kinds of action",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-gate-into-implementation",
+          "title": "The gate into implementation",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-gate-into-closed",
+          "title": "The gate into closed",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-date-to-come-back-out",
+          "title": "A date to come back out",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-actions-on-a-finished-change",
+          "title": "Actions on a finished change",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-temporary-and-emergency-change",
+      "title": "Temporary and Emergency Change",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-only-a-change-in-effect-can-expire",
+          "title": "Only a change in effect can expire",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-six-expiry-states",
+          "title": "Six expiry states",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-lead-before-an-expiry",
+          "title": "The lead before an expiry",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-an-emergency-change-on-one-signature",
+          "title": "An emergency change on one signature",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-ratification-window",
+          "title": "The ratification window",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l06-a-window-that-cannot-be-shown-open",
+          "title": "A window that cannot be shown open",
+          "order": 6,
+          "est_minutes": 13,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-esanmi-register-end-to-end",
+          "title": "The ESANMI register end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-capstone-worked",
+          "title": "The capstone worked",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rc-change-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+-- ============================================================================
+-- riskchange PROFESSIONAL DEEP SEED: Risk, Change & Learning, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: CHANGE: STAGES, SIGNATURES, ACTIONS AND EXPIRY. The
+-- stage machine and its refusals; approval levels read from the rows;
+-- segregation of duties (AS15 D1); the gate into Implementation and the gate
+-- into Closed; a temporary change that can expire only while in effect; the
+-- emergency route that goes in on its first signature and must be ratified
+-- (AS15 Q9). It ends on the ESANMI register.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A gate is a rule the engine refuses to cross,
+-- with a sentence that names the way forward. An approval belongs to the person
+-- it is assigned to, and an originator never decides their own change.
+--
+-- THE TRAP THE TIER IS BUILT ON. Both windows are counted on calendar dates:
+-- the expiry lead inclusively, and the ratification window from the actual
+-- implementation date, with no recorded date failing closed. Actions on a
+-- finished change are not open work. The capstone grades all three.
+--
+-- REPAIRED IN ASC-0 (RECON RC-3): a change in Implementation is not overdue;
+-- late work shows as overdue actions. OKOMU grades action due dates and never a
+-- change's overdue flag, before or after the repair.
+-- ============================================================================
