@@ -370,6 +370,40 @@
     },
     "headingsNoGeneratorSpells": 21
   },
+  "producedwater": {
+    "course": "FC7",
+    "live": "/root/fc-wip-producedwater",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "wave.json",
+      "precision.json",
+      "truth-producedwater.json",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "fc7_dump.mjs",
+      "fc7_fields.mjs",
+      "fc7_capstone.mjs",
+      "fc7_fields_capstone.mjs",
+      "structure.py",
+      "vendor/closure.json",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "scratch_db.sh",
+      "dryrun_fc7.sh",
+      "verify_sql.py",
+      "apply_fc7_producedwater.sh"
+    ],
+    "pins": {
+      "digest.txt": "1b95d46e023723681970a79c8eacd241686fc82a754a54cf8f1ca683a48d8d52",
+      "fields.json": "73576e0fb180f1518d85e1906d0fa4041ba88b46ea479e25be33c83367f591fd"
+    }
+  },
   "corrosion": {
     "course": "FC9",
     "live": "/root/fc-wip-corrosion",

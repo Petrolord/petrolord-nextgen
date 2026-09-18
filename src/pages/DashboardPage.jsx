@@ -66,6 +66,7 @@ import RotatingLearningPage from '@/pages/apps/RotatingLearningPage';
 import GasProcessingLearningPage from '@/pages/apps/GasProcessingLearningPage';
 import ReliefLearningPage from '@/pages/apps/ReliefLearningPage';
 import HeatTransferLearningPage from '@/pages/apps/HeatTransferLearningPage';
+import ProducedWaterLearningPage from '@/pages/apps/ProducedWaterLearningPage';
 import CorrosionLearningPage from '@/pages/apps/CorrosionLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
@@ -435,6 +436,7 @@ const DashboardPage = () => {
     <Route path="apps/gasprocessing" element={<GasProcessingLearningPage />} />
     <Route path="apps/relief" element={<ReliefLearningPage />} />
     <Route path="apps/heattransfer" element={<HeatTransferLearningPage />} />
+    <Route path="apps/producedwater" element={<ProducedWaterLearningPage />} />
     <Route path="apps/corrosion" element={<CorrosionLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.

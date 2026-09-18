@@ -1,0 +1,332 @@
+{
+  "app_slug": "producedwater",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-this-engine-answers",
+      "title": "What this engine answers",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-produced-water-and-what-it-carries",
+          "title": "Produced water, and what it carries",
+          "order": 1,
+          "est_minutes": 8,
+          "min_prose_words": 420,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-why-a-concentration-is-not-enough",
+          "title": "Why a concentration is not enough",
+          "order": 2,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-four-kinds-of-number-here",
+          "title": "The four kinds of number in this module",
+          "order": 3,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-this-engine-refuses-to-guess",
+          "title": "What this engine refuses to guess",
+          "order": 4,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-water-and-the-oil",
+      "title": "The water and the oil",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-viscosity-from-temperature",
+          "title": "Viscosity from temperature",
+          "order": 1,
+          "est_minutes": 8,
+          "min_prose_words": 420,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-salinity-and-a-stated-limit",
+          "title": "Salinity, and a correction stated to a limit",
+          "order": 2,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-brine-density",
+          "title": "Brine density",
+          "order": 3,
+          "est_minutes": 8,
+          "min_prose_words": 420,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-crude-density-from-api-gravity",
+          "title": "Crude density from API gravity",
+          "order": 4,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-density-difference",
+          "title": "The density difference, which drives everything",
+          "order": 5,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-droplets",
+      "title": "The droplets",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-distribution-in-droplet-volume",
+          "title": "A distribution in droplet volume",
+          "order": 1,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-bins-and-the-grid",
+          "title": "The bins, and the grid the answer is measured on",
+          "order": 2,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-sigma-the-input-nobody-measured",
+          "title": "Sigma, the input nobody measured",
+          "order": 3,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-median-a-bin-set-reproduces",
+          "title": "The median a bin set has to reproduce",
+          "order": 4,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-a-droplets-rise",
+      "title": "A droplet rising",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-buoyancy-against-drag",
+          "title": "Buoyancy against drag",
+          "order": 1,
+          "est_minutes": 8,
+          "min_prose_words": 420,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-stokes-and-its-reynolds-number",
+          "title": "Stokes, and the Reynolds number it is stated to",
+          "order": 2,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-an-out-of-band-cut-is-worth",
+          "title": "What an out of band cut size is worth",
+          "order": 3,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reading-a-rise-velocity",
+          "title": "Reading a rise velocity in the studio",
+          "order": 4,
+          "est_minutes": 8,
+          "min_prose_words": 420,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-gravity-devices",
+      "title": "The gravity devices",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-an-api-421-basin",
+          "title": "An API 421 basin",
+          "order": 1,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-surface-loading",
+          "title": "The surface loading, and the depth that stays out of it",
+          "order": 2,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-horizontal-velocity-and-half-a-rule",
+          "title": "The horizontal velocity, and half a rule",
+          "order": 3,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-short-circuit-allowance",
+          "title": "The short circuit allowance",
+          "order": 4,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-plate-pack",
+          "title": "A plate pack, and what the plates buy",
+          "order": 5,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-one-stream-from-the-rate",
+          "title": "One stream, from the rate to the cut size",
+          "order": 1,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-the-basin-removes",
+          "title": "What the basin removes from this water",
+          "order": 2,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-water-explorer",
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-devices-in-series",
+          "title": "Two devices in series",
+          "order": 3,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-verdict-that-was-withheld",
+          "title": "The verdict the engine would not give",
+          "order": 4,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

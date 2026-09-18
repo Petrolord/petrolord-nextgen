@@ -1,0 +1,114 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC7 Expert m01, The coupling. Digest sections 14 and 17.
+
+q(1, "Five identical devices, each cutting at 9 micron, are put in series on the OGBOTOBO inlet water. The first removes 65.398946 percent and the fifth removes 12.284239 percent. What is that fall a measurement of?",
+ "What the four stages upstream of it left behind, since every device in that column is the same device on the same geometry.",
+ ["The cut size tightening along the train, because each stage is sized against the water arriving at it rather than against the inlet of the plant.",
+  "The grade curve flattening as the sharpness falls from 3 at the head of the train to 2 at the tail of it.",
+  "The concentration falling below the level at which this module will still report a stage removal for a device at all."],
+ "The engine prints each stage removal as a fraction of the first stage's: 1.000000, then 0.486641, then 0.313934, then 0.233950, then 0.187835. Nothing about the equipment moves down that column. The water does.")
+
+q(2, "Compounding a 65.398946 percent removal five times over predicts 8.927280 ppm where the train reports 250.692079 ppm. Which assumption does the compounding make that this engine does not?",
+ "That the oil being removed is homogeneous, so a device takes a fixed fraction of the whole rather than a fixed fraction of each droplet size.",
+ ["That the five devices are identical, where the engine sizes each stage against the water reaching it and so gives the five of them five different cut sizes.",
+  "That the volume surviving in one size bin is a product across the devices, which holds only while the stages are taken in the order they were designed in.",
+  "That the outlet comes back on the basis the inlet was given on, where the compounded figure is by mass and the train figure is by volume."],
+ "The volume surviving in one size bin does compound exactly. The removal over the whole distribution does not, because the weight shifts towards the fine end at every stage and the fine end is where the grade efficiency is low.")
+
+q(0, "The four OGBOTOBO devices are run as designed and then run in reverse. Which figures are left where they were and which move?",
+ "The outlet of 160.391597 ppm and the outlet median of 3.185598 micron are unchanged, and every stage removal moves.",
+ ["The stage removals are unchanged and the outlet moves, because the device at the end of a train sets the concentration leaving it.",
+  "Both the outlet and the stage removals are unchanged, because a product of survivals is being taken and nothing on the return is position dependent.",
+  "The outlet median is unchanged and the outlet concentration moves by 7.09e-16 ppm, which is the float rounding the module reports beside it."],
+ "Reversed, the four stages read 60.582215, 48.170414, 56.381625 and 0.006985 percent, and the per stage figures move by as much as 57.344778 percentage points. The two outlet figures agree to 7.09e-16 relative.")
+
+q(3, "Why does reordering the stages of a train leave its outlet exactly where it was?",
+ "Because a device removes a fixed fraction of each droplet SIZE, so the volume surviving in any one size bin is the product of the survivals across the devices, and a product does not care what order it is taken in.",
+ ["Because the bin set is renormalised after every stage, so the distribution arriving at the last device is the same one whichever route it took through the plant.",
+  "Because the coarse device removes so little on this water, 3.237437 percent, that moving it cannot change what the other three stages do.",
+  "Because both medians are interpolated across the bin they fall in, which removes the grid steps that would otherwise make the arrangement visible."],
+ "It is a statement about multiplication. It needs no data, no calibration and no published case, which is exactly what makes it a good check on the coupling.")
+
+q(1, "A designer reads the order identity and concludes that the arrangement of the plant is free to choose. What has that reading missed?",
+ "Fouling, plugging and how much oil each device can take in its reject are what decide the arrangement, and this module carries none of them.",
+ ["That the identity holds only while every stage runs, so a skipped vessel makes the outlet depend on position after all.",
+  "That the identity was measured on one train of four stages and is not claimed for trains longer than that.",
+  "That the stage removals change, and the overall removal of 91.089356 percent changes with them."],
+ "An invariance in a model is a statement about the model. It says what the model is insensitive to, and everything left out of the model is also something the invariance cannot see.")
+
+q(0, "The walnut shell filter reports 14.382082 percent in the OGBOTOBO train as designed and 60.582215 percent when the same four devices are reversed. What changed?",
+ "The water reaching it. Nothing about the bed moved at all.",
+ ["Its cut size, which this engine re-sizes at each position from the concentration arriving at that position.",
+  "Its sharpness, which is 2 where the bed follows an interception device and 3 where the bed leads the train.",
+  "The basis of the figure, which is a fraction of the oil in the designed order and a fraction of the train inlet in the reversed one."],
+ "A stage removal is a property of a device and a water together. In a train the water is whatever the stages before it chose to leave, so the same bed honestly reports two very different percentages.")
+
+q(2, "In the four stage OGBOTOBO table the removals read 3.237437, 85.209861, 27.278164 and 14.382082 percent, and the outlets read 1741.726140, 257.603712, 187.334148 and 160.391597 ppm. Which of the two columns follows one quantity through the plant?",
+ "The outlet column. The removal column is four numbers about four different waters.",
+ ["The removal column, because every figure in it is a fraction of the same train inlet of 1800 ppm.",
+  "Both of them, because each removal on a row is that row's outlet taken against the inlet of the train.",
+  "Neither of them, because both are reported per stage and only the droplet median carries one quantity from the inlet to the outlet."],
+ "Read the outlet column when you want the state of the water, and read the removal column only with the outlet of the row above it in hand.")
+
+q(3, "What does this engine state on every train return about the basis of the removal and the outlet concentration?",
+ "That the removal is a fraction of the OIL and so dimensionless, and that the outlet comes back on whatever basis the inlet was given on, ppm by mass in giving ppm by mass out.",
+ ["That the removal is a fraction of the oil and the outlet is converted to mg per litre, which is the basis a discharge comparison has to be made on.",
+  "That both are on a volume basis, because the distribution is log-normal in droplet volume and the quadrature is taken over volume bins.",
+  "That the removal is a fraction of the whole stream while the outlet is a fraction of the oil, which is why the two can never be multiplied together."],
+ "It adds that comparing the result with a figure written in mg/l is a conversion the caller must make, and that this module states no limit of its own.")
+
+q(1, "Eight identical devices, each cutting at 4 micron, are put on the wide OGBOTOBO inlet at sigma 0.95. What is left?",
+ "36.154977 ppm, with the droplet median down at 1.700800 micron.",
+ ["Nothing a median can be read off, the surviving volume being dust.",
+  "2.364977 ppm, the figure a 2 micron device reaches.",
+  "160.391597 ppm, because the fine tail beats more equipment and no train does better than the four stage one on this water."],
+ "The fine tail of a wide distribution carries volume that no device in this module removes at all. The devices are working and the thing they are working on has receded below them.")
+
+q(2, "A narrow inlet of 650 ppm at d50 26 micron and sigma 0.7 through one device cutting at 2 micron reports a dispersed figure of 2.364977 ppm, a reported outlet of 5.000000 ppm and floorApplied yes. Whose number is the 5 ppm?",
+ "The caller's. No value for the dissolved and soluble oil floor is stated anywhere in this module.",
+ ["The module's own floor, which sits in the frozen constants and is applied whenever a dispersed prediction falls under it.",
+  "This engine's estimate of the dissolved oil in that water, derived from the salinity and the temperature of the stream.",
+  "A specification, which the module reports the higher of."],
+ "Both figures are on the return, so a reader can see which is which, and the warning that arrives with it names the caller as the source of the floor.")
+
+q(3, "On the wide inlet eight devices still leave 36.154977 ppm, and on the narrow inlet one device takes the dispersed oil to 2.364977 ppm. What decides which of those two limits a design is up against?",
+ "The inlet distribution. A wide spread holds the answer up on its fine tail, and a narrow one dives under a floor this model cannot see unless a caller states it.",
+ ["The number of stages, since a train of eight can never reach a floor that one device reaches in a single pass.",
+  "The cut size, since any device cutting below 4 micron reaches the floor and any device above it is held up by the tail.",
+  "The specification given, since the module compares against it and reports whichever of the two limits binds first in the margin field."],
+ "The two limits call for completely different responses. Against the tail you change the inlet. Against the floor you stop, because no equipment in this module addresses dissolved oil at all.")
+
+q(0, "The published train cases print a golden outlet of 6.388448 ppm beside an engine outlet of 6.366280 ppm on the Suite's own shipped default train. Where does the golden figure come from?",
+ "Particle tracking: 400000 droplets, each carrying a surviving weight through every stage, with no binning anywhere.",
+ ["The engine's own answer recorded back at an earlier release, which is why the two figures are close without being equal.",
+  "The same quadrature over the same 60 bin grid, re-run at a tighter convergence tolerance than the engine uses.",
+  "A published field measurement on that shipped train, which is the one case in this file with plant data behind it."],
+ "That route has no bins in it at all, so it validates the quadrature, the coupling, the outlet concentration, every stage and both medians at once.")
+
+q(1, "The API 421 basin removes 3.237437 percent of the oil at the head of the OGBOTOBO train and 0.006985 percent at the tail of the reversed one. Which of the two readings of that basin is right?",
+ "Both. A stage removal is a fact about a device and a water together, and those are two different waters.",
+ ["The 3.237437 percent, since a device is rated on its design inlet.",
+  "The 0.006985 percent, since it is the worst the basin can do.",
+  "Neither, because a basin whose cut of 112.300216 micron sits above every droplet in this water cannot be given a removal at all."],
+ "Quoted alone, either figure is an anecdote. Quoted with the outlet median of the stage before it, either one is a measurement.")
+
+q(2, "The OGBOTOBO train reports 91.089356 percent overall against stage removals of 3.237437, 85.209861, 27.278164 and 14.382082 percent. What is the overall figure taken over?",
+ "Every stage in the train, from the inlet of 1800 ppm to the outlet of 160.391597 ppm.",
+ ["The stages that ran, which here is the sum of the four.",
+  "The largest stage removal, scaled by the stage count.",
+  "The dispersed oil alone, with the dissolved fraction taken off the inlet before the percentage is formed on the remainder."],
+ "The train reports 4 of 4 stages ran, complete yes and 0 stages skipped, so the overall figure covers the whole plant.")
+
+q(3, "Beside its concentrations the OGBOTOBO train reports a grid of 60 bins over 4 sigma and a truncated tail of 0.000063372072. Why is the grid on the return at all?",
+ "Because the grid moves the answer, so this module reports it back rather than hiding it as an implementation detail.",
+ ["Because the truncated tail has to be added back to the outlet concentration by the caller before the figure is quoted.",
+  "Because the bin count is an output here, chosen from the sigma of the inlet so that the quadrature converges on this water.",
+  "Because the truncated tail is the dissolved oil floor, which the module has no other way of stating."],
+ "A reader can then read a median or a removal off the same object that says what grid it was computed on.")
+
+emit(Q, '/root/wt-fc7-nextgen/tools/course-banks/producedwater/advanced/fc7a_m01.json', expect_n=15)
+finish()

@@ -1,0 +1,335 @@
+{
+  "app_slug": "producedwater",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-grade-efficiency",
+      "title": "Grade efficiency",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-what-a-device-does-to-a-distribution",
+          "title": "What a device does to a distribution",
+          "order": 1,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-reduced-efficiency-curve",
+          "title": "The reduced efficiency curve",
+          "order": 2,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-sharpness-derived-and-a-sharpness-declared",
+          "title": "A sharpness derived and a sharpness declared",
+          "order": 3,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-removal-as-an-integral",
+          "title": "Removal as an integral over the distribution",
+          "order": 4,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-hydrocyclone",
+      "title": "The hydrocyclone",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-field-in-place-of-gravity",
+          "title": "A field in place of gravity",
+          "order": 1,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-liner-geometry",
+          "title": "The liner geometry, and the travel a droplet makes",
+          "order": 2,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-residence-time-in-one-liner",
+          "title": "The residence time in one liner",
+          "order": 3,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-cut-the-march-gives",
+          "title": "The cut size the march gives",
+          "order": 4,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-ideal-capture-leaves-out",
+          "title": "What the ideal capture leaves out",
+          "order": 5,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-operating-envelope",
+      "title": "The operating envelope",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-turndown-and-what-a-bank-is-sized-in",
+          "title": "Turndown, and what a bank is sized in",
+          "order": 1,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ceiling-on-the-field",
+          "title": "The ceiling on the field",
+          "order": 2,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-sweep-that-turns-over",
+          "title": "A sweep that turns over",
+          "order": 3,
+          "est_minutes": 12,
+          "min_prose_words": 500,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-refusal-and-the-count-it-names",
+          "title": "The refusal, and the liner count it names",
+          "order": 4,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-flotation",
+      "title": "Flotation",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-carrying-oil-out",
+          "title": "Carrying oil out rather than settling it",
+          "order": 1,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-gas-and-the-plan-area",
+          "title": "The gas, the plan area and the flux",
+          "order": 2,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-bubble-at-reynolds-twenty",
+          "title": "A bubble at Reynolds twenty",
+          "order": 3,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-holdup-and-a-swarm",
+          "title": "Holdup, and when a swarm stops being one",
+          "order": 4,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-interception-and-the-cut",
+          "title": "Interception, and the cut the kinetics gives",
+          "order": 5,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-bed",
+      "title": "The bed",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-depth-filtration",
+          "title": "Depth filtration",
+          "order": 1,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-cut-as-an-inversion",
+          "title": "The cut size as an inversion of the same law",
+          "order": 2,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-grain-size-and-a-held-exponent",
+          "title": "The grain size, and an exponent that is held",
+          "order": 3,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-loading-rate-and-breakthrough",
+          "title": "Loading rate, and breakthrough",
+          "order": 4,
+          "est_minutes": 9,
+          "min_prose_words": 440,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-two-kinds-of-cell-on-two-boxes",
+          "title": "Two kinds of cell on two boxes",
+          "order": 1,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-an-invariance-and-what-cells-buy",
+          "title": "An invariance, and what the cell count buys",
+          "order": 2,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-three-unlike-devices-in-one-train",
+          "title": "Three unlike devices in one train",
+          "order": 3,
+          "est_minutes": 12,
+          "min_prose_words": 500,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-which-argument-produced-which-number",
+          "title": "Which argument produced which number",
+          "order": 4,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

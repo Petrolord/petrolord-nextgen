@@ -1,0 +1,319 @@
+{
+  "app_slug": "producedwater",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-coupling",
+      "title": "The coupling",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-why-the-next-device-sees-finer-water",
+          "title": "Why the next device sees finer water",
+          "order": 1,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-three-good-devices",
+          "title": "Three good devices and one great one",
+          "order": 2,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-order-identity",
+          "title": "The order identity, and what it does not answer",
+          "order": 3,
+          "est_minutes": 12,
+          "min_prose_words": 500,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reading-a-stage-removal",
+          "title": "Reading a stage removal",
+          "order": 4,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-more-equipment-cannot-buy",
+          "title": "What more equipment cannot buy",
+          "order": 5,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-medians-and-the-grid",
+      "title": "The medians and the grid",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-two-medians-on-one-basis",
+          "title": "Two medians on one basis",
+          "order": 1,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-median-that-tracks-the-cut",
+          "title": "A median that tracks the cut",
+          "order": 2,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-bin-count-and-the-span",
+          "title": "The bin count and the span, reported back",
+          "order": 3,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-truncated-tail",
+          "title": "The truncated tail, and a check that needs no source",
+          "order": 4,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-not-answering",
+      "title": "Not answering",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-refusal-and-the-input-it-names",
+          "title": "A refusal, and the input it names",
+          "order": 1,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-withheld-verdict",
+          "title": "A withheld verdict, and its three reasons",
+          "order": 2,
+          "est_minutes": 12,
+          "min_prose_words": 500,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-warning-withholds-nothing",
+          "title": "A warning, which withholds nothing",
+          "order": 3,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-three-leaves-and-a-bare-nan",
+          "title": "Three leaves, and a bare NaN",
+          "order": 4,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-studio-does-with-each",
+          "title": "What the studio does with each of the three",
+          "order": 5,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-train-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-band-and-the-balance",
+      "title": "The band and the balance",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-creeping-flow-and-where-it-ends",
+          "title": "Creeping flow, and where it ends",
+          "order": 1,
+          "est_minutes": 10,
+          "min_prose_words": 460,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-full-drag-balance",
+          "title": "The full drag balance as a second method",
+          "order": 2,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-gap-that-has-to-be-real",
+          "title": "A gap that has to be real",
+          "order": 3,
+          "est_minutes": 12,
+          "min_prose_words": 500,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-case-on-both-sides-of-a-limit",
+          "title": "A published case on both sides of a limit",
+          "order": 4,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-what-a-gate-can-catch",
+      "title": "What a gate can catch",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-was-repaired-history",
+          "title": "What was repaired in this engine, and what was not",
+          "order": 1,
+          "est_minutes": 12,
+          "min_prose_words": 500,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-an-independent-oracle-is",
+          "title": "What an independent oracle is",
+          "order": 2,
+          "est_minutes": 12,
+          "min_prose_words": 500,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-identities-need-no-source",
+          "title": "Identities, which need no source at all",
+          "order": 3,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-water-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-pin-is-not-a-validation",
+          "title": "A pin and a validation are different claims",
+          "order": 4,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-green-suite-means",
+          "title": "The planting battery, and what a green suite means",
+          "order": 5,
+          "est_minutes": 12,
+          "min_prose_words": 500,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-where-the-method-stops",
+      "title": "Where the method stops",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-six-things-held-for-literature",
+          "title": "Six things held for literature",
+          "order": 1,
+          "est_minutes": 12,
+          "min_prose_words": 500,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-one-calibration",
+          "title": "The one calibration in this module",
+          "order": 2,
+          "est_minutes": 11,
+          "min_prose_words": 480,
+          "panels": [
+            "pw-device-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-this-engine-does-not-know",
+          "title": "What this engine does not know about produced water",
+          "order": 3,
+          "est_minutes": 12,
+          "min_prose_words": 500,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
