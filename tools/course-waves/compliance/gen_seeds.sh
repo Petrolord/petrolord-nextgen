@@ -7,7 +7,7 @@
 # whatever somebody last saved there. A bank repaired in the wave dir and never
 # committed, and a bank committed and never copied back, both produce a seed
 # that matches nothing a reviewer can read. This wave ran three tier key-truth
-# audits that made their repairs IN THE REPOSITORY (40 questions repaired or
+# audits that made their repairs IN THE REPOSITORY (48 questions repaired or
 # replaced), so the working tree is exactly the copy that can be behind. (FC1's
 # first apply read a stale worktree and would have seeded the unrepaired
 # questions; this is that hole, closed.)
