@@ -956,19 +956,24 @@ A(f'''
     v_stage_median := v_stage_median || v_med;
   end loop;
 
-  if {rel(VE('tunu_plate_stage_removal_pct'), 'v_stage_removal[1]', '1e-10')} then
+  -- THE TRAIN IS ASSERTED AT 1e-9 RELATIVE, NOT 1e-12. Postgres's exp and ln
+  -- are the host libm's, not V8's, and across sixty bins and three stages they
+  -- land within 3e-11 of the engine on the scratch server. 1e-9 leaves thirty
+  -- times that for a production libm and is still a hundred times tighter than
+  -- the one part in 1e7 the negative control moves a field by.
+  if {rel(VE('tunu_plate_stage_removal_pct'), 'v_stage_removal[1]', '1e-9')} then
     raise exception 'FC7 go-live refused: the plate stage removal of % percent is not the quadrature over the stated inlet, which gives %', {VE('tunu_plate_stage_removal_pct')}, v_stage_removal[1];
   end if;
-  if {rel(VE('tunu_cyclone_stage_removal_pct'), 'v_stage_removal[2]', '1e-10')} then
+  if {rel(VE('tunu_cyclone_stage_removal_pct'), 'v_stage_removal[2]', '1e-9')} then
     raise exception 'FC7 go-live refused: the liner stage removal of % percent is not the quadrature over the plate stage outlet, which gives %', {VE('tunu_cyclone_stage_removal_pct')}, v_stage_removal[2];
   end if;
-  if {rel(VE('tunu_cyclone_stage_median_micron'), 'v_stage_median[2]', '1e-10')} then
+  if {rel(VE('tunu_cyclone_stage_median_micron'), 'v_stage_median[2]', '1e-9')} then
     raise exception 'FC7 go-live refused: the liner stage median of % micron is not the interpolated median of that outlet, which is %', {VE('tunu_cyclone_stage_median_micron')}, v_stage_median[2];
   end if;
-  if {rel(VE('tunu_train_outlet_ppm'), 'v_oiw', '1e-10')} then
+  if {rel(VE('tunu_train_outlet_ppm'), 'v_oiw', '1e-9')} then
     raise exception 'FC7 go-live refused: the train outlet of % ppm is not the stated inlet carried through all three stages, which gives %', {VE('tunu_train_outlet_ppm')}, v_oiw;
   end if;
-  if {rel(VE('tunu_train_outlet_median_micron'), 'v_stage_median[3]', '1e-10')} then
+  if {rel(VE('tunu_train_outlet_median_micron'), 'v_stage_median[3]', '1e-9')} then
     raise exception 'FC7 go-live refused: the train outlet median of % micron is not the interpolated median at the bed outlet, which is %', {VE('tunu_train_outlet_median_micron')}, v_stage_median[3];
   end if;
 
@@ -978,7 +983,7 @@ A(f'''
   v_eff := 1.0 - {VE('tunu_train_outlet_ppm')}
            / ({f17(TUI['oiwPpm'])} * (1.0 - {VE('tunu_plate_stage_removal_pct')} / 100.0)
               * (1.0 - {VE('tunu_cyclone_stage_removal_pct')} / 100.0));
-  if not (v_eff > 0.0 and v_eff < 1.0) or {rel('v_eff * 100.0', 'v_stage_removal[3]', '1e-9')} then
+  if not (v_eff > 0.0 and v_eff < 1.0) or {rel('v_eff * 100.0', 'v_stage_removal[3]', '1e-8')} then
     raise exception 'FC7 go-live refused: the graded outlet and stage removals imply a bed removal of % percent, against the % percent the quadrature finds', v_eff * 100.0, v_stage_removal[3];
   end if;
   -- Every stage works on finer water than the one before it.
