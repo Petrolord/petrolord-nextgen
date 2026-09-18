@@ -82,11 +82,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20260925_fc8_metering_course           ) echo 36c096ef26ed04732390bee5282b8a1c5685ab0500257e05c05bb4dca9ac5e18 ;;
-    20260925_fc8_metering_beginner_deep    ) echo bb922176fe5c1f61f162bfa5fc40a27678cee93d36919e56702c701d5121ef8c ;;
-    20260925_fc8_metering_intermediate_deep) echo ac20f953dc1d709b0b0b0ee99a33c287f799fc8757dfcee01f8307e9d498927f ;;
-    20260925_fc8_metering_advanced_deep    ) echo d0f98a515b707052016483c97b756f8d3e9b09e66ffa8e8ce54643b4b12d6daa ;;
-    20260925_fc8_metering_go_live          ) echo bf35ab1cc9e6ac43a247530abb55b82b7828cb4c340dab51a8878a0792497e56 ;;
+    20260925_fc8_metering_course                ) echo 4f1d4dacb30740435ee7086c3edae7c25a59debedb4b804d5db9b04c35742e14 ;;
+    20260925_fc8_metering_beginner_deep         ) echo 9c54b2a042c00608ea754b8aaccc26b9ac54b611202466d7841e74982deef9ef ;;
+    20260925_fc8_metering_intermediate_deep     ) echo d9f0ac3261a83c256c8418d201bc0b129b3b48110d653541d0d1c2c52a132e6b ;;
+    20260925_fc8_metering_advanced_deep         ) echo a422f18b94481deac605f783323a7a4b22ed153c4a2917aad66dac01c1a074cf ;;
+    20260925_fc8_metering_go_live               ) echo 37e2d912667038461fec84bde8ca94ab1b3ddcb6f1b64113512dba5707ba50a3 ;;
     *) echo UNPINNED ;;
   esac
 }

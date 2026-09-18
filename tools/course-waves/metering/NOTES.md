@@ -28,6 +28,38 @@ committed Associate bank directory. Copying other tiers' banks "into banks/"
 writes them into the repository's `beginner/`. Gates that default to `banks/`
 (`bankleak.py`, `litsweep.py`) must be given `--banks <tier dir>` per tier.
 
-## promptleak
+## promptleak HAS RUN, AND IT IS GREEN. 2026-09-18, on the capstone migration.
 
-Recorded with the seed ladder, below.
+    python3 /root/dc-wavekit/promptleak.py --sql migrations/20260925_fc8_metering_course.sql
+    swept 3 prompt(s) across 1 course(s): 47 numbers against 18 graded fields, 3 unit shiftings
+    own-field leaks: 0   cross-tier leaks: 0   self leaks: 0   near misses: 0
+
+Its selftest passes, and a scratch copy of the migration with the Associate's
+own gross volume (4604.5016 bbl) planted in its prompt reports SELF LEAK 1.
+The `--db --course metering` run is owed after the owner seeds.
+
+## The seed ladder, proved. 2026-09-18.
+
+- gen_course.py refuses a prompt that omits any constant fc8_capstone.mjs
+  passes to the engine (47 constants). Control: dropping the corrosion
+  allowance from the Expert prompt REFUSED by name.
+- gen_seeds.sh from the committed tree: all five migrations regenerate byte for
+  byte (AGREE).
+- verify_sql.py: 4752 fields, banks against SQL, both from the object store,
+  AGREE; the one-character canary DISAGREES and exits 2.
+- THE DRY RUN RAN AGAINST A SCRATCH POSTGRES AND NEVER AGAINST PRODUCTION.
+  FC6's dryrun ran its rolled-back ladder on the linked project, which is
+  NextGen production (txcsbtvcdaqmkjjbhbeg). scratch_db.sh builds the four
+  academy tables from the repository's own DDL in a local postgres:16 container
+  and loads every committed Facilities course row, so path_order and slug
+  collisions are exercised against real neighbours. Clean at HEAD, go-live
+  NOTICE reached, before/after snapshot and md5 digests identical.
+- Negative controls, one part in 1e7 on the graded value, each REFUSED by name:
+  saghara_bottom_course_required_in (the smallest field, a move of about
+  3.4e-8, a fourteenth of its own tolerance), saghara_vacuum_governing_draw_bblhr,
+  utonana_cavitation_sigma, krakama_flow_turndown_ratio.
+- apply_fc8_metering.sh pinned to the five committed digests; `verify` ok.
+
+What the scratch run cannot prove: that production's rows match the
+repository's. The go-live re-runs every assertion against production inside the
+flip's own transaction, so a production-only collision refuses there.
