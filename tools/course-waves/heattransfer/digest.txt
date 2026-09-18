@@ -1,0 +1,766 @@
+# FC6 Heat Exchange & Cooling. Teaching digest.
+# Temperatures, log means, areas, overall coefficients, film coefficients, diameters, percentages and dimensionless groups print to six decimals; duties, capacity rates and UA in Btu an hour to four; resistances in hr.ft2.F per Btu to nine; tube and shell counts are whole numbers.
+# Field units throughout: Btu an hour, degF, lb an hour, ft2, Btu an hour per ft2 per degF, hr.ft2.F per Btu, inches, psia, inches of water, brake horsepower.
+# Nothing here is read from a clock or a random number, so every line reproduces.
+# Built against engines e4377b3, vendored sha-identical. Every figure below is that engine's own answer at the inputs named beside it, except a line that says golden or derived.
+# A GOLDEN LINE IS NOT THE ENGINE ANSWERING. The published case file is written by the oracle, which reaches each answer by a different route, so a golden figure beside an engine figure is two methods agreeing to as many digits as the two of them agree to.
+
+# SECTION 1: What this engine rates and sizes, and what it refuses (owned by Associate m01)
+
+# App surface: the Heat Exchanger & Cooling Studio has three tabs over one exchanger. Sizing takes a duty and returns a surface and a bundle, Rating takes a surface and returns what it delivers, and Air Cooler sizes a bay and then rates it on a hot afternoon.
+- This engine answers four questions about one exchanger. What duty do these two streams exchange, what driving force do they exchange it across, what coefficient does the surface carry, and how much surface and how many tubes does that take. It then rates a machine you already have, in both directions, and sizes an air cooler.
+- What is NOT here: no shell-side film coefficient from stream analysis, no pressure drop, no vibration check, no condensation or boiling, no fin geometry, no rigorous cross-flow rating. The shell side stays an input and the module says so. Pressure drop in a line belongs to the Pipeline and Line Sizing engine, and machine work belongs to Rotating Equipment.
+- The contract belongs to the 12 exports that are called with a NAMED-ARGUMENT OBJECT, which is every door the studio calls. Each of them answers with an object, and each refusal puts a named string on an `error` key. The other callable exports, airDensityLbFt3 and bundleConstants, do not take one: the first is a leaf correlation with nowhere to put an error key, which answers with a bare number and says it has no answer with a bare NaN that its one caller turns into a named refusal, and the second hands back a copy of the held bundle table and takes no argument at all.
+- This module exports 17 names in all, 3 of them frozen tables rather than functions: the declared constants, the declared bounds, and the held-for-literature register that Section 20 reads.
+
+Every door, asked a question it can answer and a question it cannot:
+| export | answers with an object | keys on the answer | refuses with a named string | refusal carries evidence |
+| --- | --- | --- | --- | --- |
+| airCooler | yes | 13 | yes | no |
+| areaRequired | yes | 1 | yes | no |
+| capacityRate | yes | 1 | yes | no |
+| effectivenessFromNtu | yes | 3 | yes | no |
+| energyBalance | yes | 5 | yes | yes |
+| lmtd | yes | 5 | yes | no |
+| lmtdCorrectionF | yes | 4 | yes | no |
+| lmtdGroups | yes | 2 | yes | no |
+| ntuFromEffectiveness | yes | 3 | yes | yes |
+| overallUOutside | yes | 13 | yes | no |
+| tubeCount | yes | 10 | yes | no |
+| tubeSideFilm | yes | 10 | yes | yes |
+
+- Read the fourth column first: every door refuses with a NAMED string, so one guard shape works everywhere. Then read the last one. On these probes 3 of the 12 doors handed back MORE than a message, which is the numbers that produced the state they refused. A panel that shows only the message throws that away.
+- The one scalar helper is the air density, and the module documents the exception rather than making it silently: a leaf correlation has nowhere to put an error key.
+
+# SECTION 2: The energy balance, its four terminals, and the refusals that protect it (owned by Associate m02 and m03)
+
+- A capacity rate is a mass flow times a heat capacity, in Btu an hour per degF. It is the whole of what the balance knows about a stream.
+| stream | lb an hour | Btu per lb per degF | capacity rate, Btu an hour per degF |
+| --- | --- | --- | --- |
+| the studio hot stream | 50000.0000 | 0.550000 | 27500.0000 |
+| the studio cold stream | 80000.0000 | 1.000000 | 80000.0000 |
+| the ORON hot stream | 74000.0000 | 0.620000 | 45880.0000 |
+| the ORON cold stream | 112000.0000 | 0.990000 | 110880.0000 |
+
+- The studio case states its HOT outlet, so the duty is the hot capacity rate times the hot temperature drop, and the cold outlet is the answer: 2750000.0000 Btu an hour, cold leaving at 134.375000 degF. The engine reports which of the three it worked from, on the `basis` key, and here it says "hot outlet".
+- ORON on the same basis: 5046800.0000 Btu an hour, cold leaving at 167.515873 degF.
+- The smaller of the two capacity rates is the one that governs a rating. On the studio case that is 27500.0000 against 80000.0000, and the capacity ratio is 0.343750 (derived, the smaller over the larger).
+
+The same duty stated three ways, on the studio streams. All three agree, and the engine names which one it used:
+| stated | duty, Btu an hour | hot outlet, degF | cold outlet, degF | basis |
+| --- | --- | --- | --- | --- |
+| the hot outlet | 2750000.0000 | 200.000000 | 134.375000 | hot outlet |
+| the cold outlet | 2750000.0000 | 200.000000 | 134.375000 | cold outlet |
+| the duty itself | 2750000.0000 | 200.000000 | 134.375000 | stated duty |
+
+Six states this balance will not compute, each one a state a saved study can carry, and each refusal naming the box rather than the physics:
+- REFUSED, a hot outlet above the hot inlet: the hot stream cannot leave hotter than it entered: a hot outlet of 320 F against a hot inlet of 300 F. An exchanger takes heat out of this stream.
+- REFUSED, a cold outlet below the cold inlet: the cold stream cannot leave colder than it entered: a cold outlet of 94 F against a cold inlet of 100 F. An exchanger puts heat into this stream.
+- FRAMED AS REPAIR HISTORY: the engine message on the next line also states the behaviour FC6-0 replaced. That half of the message is history and is not what the engine does now.
+- REFUSED, a stated duty of zero: a stated duty must be positive Btu/hr; it was 0. A zero or negative duty is not an exchanger, and it used to fall through to the outlet branch unremarked.
+- REFUSED, a stated duty beside a stated outlet that disagrees with it: the stated duty and the stated hot outlet disagree: 3200000 Btu/hr on this hot stream leaves it at 183.6364 F, but 200 F was given. State one of them.
+- REFUSED, a duty that crosses the two streams: this duty crosses the streams: the hot outlet would be -45.45 F against a cold inlet of 100 F, and the cold outlet 218.75 F against a hot inlet of 300 F. No exchanger of any size does that.  [evidence beside the message: thOutIfReached -45.454545, tcOutIfReached 218.750000]
+- REFUSED, a duty no PARALLEL exchanger can deliver, refused by the parallel test: no PARALLEL-flow exchanger delivers this duty: the two streams would leave at 110.91 F hot and 165.00 F cold, so they must have crossed inside. Parallel flow cannot take the hot outlet below the cold outlet at any area. A counter-current unit can.  [evidence beside the message: thOutIfReached 110.909091, tcOutIfReached 165.000000]
+
+The same duty that a parallel unit cannot deliver, put to a counter-current one:
+- Counter-current: 5200000.0000 Btu an hour, hot leaving 110.909091 degF and cold leaving 165.000000 degF. The arrangement is an input to the balance, and the test it applies is the test for that arrangement.
+- The two outlets on those two refusal rows above are labelled `thOutIfReached` and `tcOutIfReached`, which is the evidence beside the message: the temperatures the duty implies, handed back so a caller can show why the state is impossible.
+
+And the arrangement itself, read three ways:
+- Given in lower case, parallel flow pairs the two ends the other way and the log mean is 120.584840 degF against the counter-current 130.064846 degF on the same four temperatures.
+- Given as Parallel, with a capital letter, the same case answers 120.584840 degF, because case and surrounding space no longer decide which method runs.
+- REFUSED, an arrangement this module does not carry: unknown arrangement "crossflow": this module carries counter, parallel, shell1 and will not fall back to one of them
+
+# SECTION 3: The log mean, the two pairings, and the arithmetic mean it sits below (owned by Associate m04)
+
+- The driving force is the log mean of the two END temperature differences. Which two ends they are is what the arrangement decides: counter-current pairs each inlet with the other outlet, parallel flow pairs the two inlets and then the two outlets.
+| case | arrangement | end one, degF | end two, degF | log mean, degF | arithmetic mean, degF (derived, the two ends added and halved) | equal ends |
+| --- | --- | --- | --- | --- | --- | --- |
+| the studio case | counter | 165.625000 | 100.000000 | 130.064846 | 132.812500 | no |
+| the studio case | parallel | 200.000000 | 65.625000 | 120.584840 | 132.812500 | no |
+| ORON | counter | 177.484127 | 113.000000 | 142.824087 | 145.242063 | no |
+| ORON | parallel | 223.000000 | 67.484127 | 130.108390 | 145.242063 | no |
+| published case 1, golden 109.696299 | counter | 120.000000 | 100.000000 | 109.696299 | 110.000000 | no |
+| published case 2, golden 88.498488 | counter | 110.000000 | 70.000000 | 88.498488 | 90.000000 | no |
+| published case 3, golden 280.000000 | counter | 280.000000 | 280.000000 | 280.000000 | 280.000000 | yes |
+| published case 4, golden 216.158486 | counter | 270.000000 | 170.000000 | 216.158486 | 220.000000 | no |
+| published case 5, golden 69.521190 | counter | 60.000000 | 80.000000 | 69.521190 | 70.000000 | no |
+| published case 6, golden 85.264090 | counter | 300.000000 | 10.000000 | 85.264090 | 155.000000 | no |
+
+- THE LOG MEAN IS STRICTLY BELOW THE ARITHMETIC MEAN WHENEVER THE TWO ENDS DIFFER, and equal to it when they do not. That is an analytic limit and it needs no publication to check it. Read the last three columns of every row above.
+- The published case with the closest two ends is the one where the two means come nearest: end differences of 280.000000 and 280.000000 degF.
+- Drive the two ends to the same number and the engine says so rather than dividing by a logarithm of one: log mean 280.000000 degF with equal ends reported as yes.
+- A 1-2 shell exchanger asks for the log mean too, and gets the counter-current one with a note attached. The note is the point: that figure is not the corrected driving force, and the correction is the next section.
+- On the studio case: log mean 130.064846 degF, basis reported as "counter", note "a 1-2 shell exchanger is rated on the counter-current log mean multiplied by F; this is the log mean, not the corrected driving force".
+- The note rides along as a key of its own, so the three arrangements do not answer with the same number of keys: the counter reading carries 5, the parallel reading 5 and the shell reading 6 (counted here by reading the three answers).
+- REFUSED, a log mean asked for on three terminals: the log mean needs all four terminal temperatures; tcOut was not given
+- REFUSED, a log mean across streams that have crossed: temperature cross: in counter flow the two ends of this exchanger have driving forces of 0.00 and 0.00 F, and one of them is not positive.  [evidence beside the message: dt1 0.000000, dt2 0.000000]
+
+# SECTION 4: Area from the duty, the coefficient and the driving force (owned by Associate m05)
+
+- The surface is the duty divided by the coefficient, the correction factor and the log mean. Nothing else. Which means every error in any of those three arrives in the area unchanged.
+| case | duty, Btu an hour | U dirty, Btu an hour per ft2 per degF | F | log mean, degF | area, ft2 |
+| --- | --- | --- | --- | --- | --- |
+| the studio case | 2750000.0000 | 92.110348 | 1.000000 | 130.064846 | 229.543151 |
+| ORON | 5046800.0000 | 106.971929 | 1.000000 | 142.824087 | 330.327560 |
+| published case 1, golden 578.703704 | 5000000.0000 | 120.000000 | 0.900000 | 80.000000 | 578.703704 |
+| published case 2, golden 286.311271 | 2750000.0000 | 73.850000 | 1.000000 | 130.060000 | 286.311271 |
+
+- The studio case again with the same duty and the same coefficient but the CLEAN coefficient instead of the dirty one: 157.246707 ft2 against 229.543151 ft2. The surface you buy is sized on the dirty coefficient, because the exchanger has to do its duty when it is dirty.
+- REFUSED, an area asked for at a zero coefficient: the area needs a positive overall coefficient; it was 0 Btu/hr.ft2.F
+- REFUSED, an area asked for at an F above one: the F correction must be greater than 0 and at most 1; it was 1.000001
+
+# SECTION 5: Tubes: the surface of one, the count, the pass rounding, and the overshoot (owned by Associate m05)
+
+- One tube carries pi times its outside diameter in feet times its length. The count is the area divided by that, ROUNDED UP twice: once to a whole tube, and again to a whole multiple of the pass count, because a multi-pass bundle puts the same number of tubes in every pass.
+| case | area asked for, ft2 | one tube, ft2 | passes | tubes | tubes a pass | actual area, ft2 | overshoot, percent |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| the studio case | 229.543151 | 3.141593 | 2 | 74 | 37 | 232.477856 | 1.278498 |
+| ORON | 330.327560 | 5.235988 | 4 | 64 | 16 | 335.103216 | 1.445734 |
+| published case 1, golden 160 tubes | 500.000000 | 3.141593 | 2 | 160 | 80 | 502.654825 | 0.530965 |
+| published case 2, golden 638 tubes | 2000.000000 | 3.141593 | 2 | 638 | 319 | 2004.336113 | 0.216806 |
+| published case 3, golden 232 tubes | 1200.000000 | 5.235988 | 4 | 232 | 58 | 1214.749159 | 1.229097 |
+| published case 4, golden 274 tubes | 860.000000 | 3.141593 | 2 | 274 | 137 | 860.796387 | 0.092603 |
+| published case 5, golden 274 tubes | 860.000000 | 3.141593 | 2 | 274 | 137 | 860.796387 | 0.092603 |
+
+- THE OVERSHOOT IS ALWAYS POSITIVE and it is reported rather than left for the reader to notice. A whole number of tubes cannot land exactly on a required area, so the surface you get is always at or above the surface you asked for.
+- The rounding to a whole multiple of the passes is what makes the count usable: a count that does not divide equally cannot be fed back into the film, which is the loop Section 6 closes. On the studio case the count before that second rounding would have been 74 (derived, the area over one tube rounded up) and the engine returns 74.
+- REFUSED, a tube count asked for at 3 passes, which this module carries no bundle constants for: this module carries bundle constants for 1, 2, 4 and 6 tube passes only; 3 was given
+- REFUSED, a tube count asked for at a zero area: the tube count needs a positive area; it was 0 ft2
+
+# SECTION 6: The studio default case, end to end, with the tube count closed (owned by Associate m06 and Professional m06)
+
+- This is the case the Heat Exchanger & Cooling Studio opens with. Every figure in this section is on that screen, and a reader can check the whole chain against an app.
+- The chain is a LOOP. It is not a line. The film needs a tube count, the count needs an area, the area needs the coefficient, and the coefficient needs the film. The map is a contraction, so plain iteration settles, and the trail is worth seeing settle.
+- The studio walks a seed ladder, 2, 12, 60, 300 tubes, because an intermediate count can land in the band the film refuses. The first seed that evaluates starts the loop.
+- The trail on this case: 2, 60, 72, 74 tubes, converged in 4 passes of the loop.
+- ORON, four passes, its own ladder 4, 24, 120, 600: trail 4, 56, 64 tubes, converged in 3 passes.
+
+The studio case at its converged tube count, top to bottom:
+| quantity | value |
+| --- | --- |
+| hot capacity rate, Btu an hour per degF | 27500.0000 |
+| cold capacity rate, Btu an hour per degF | 80000.0000 |
+| duty, Btu an hour | 2750000.0000 |
+| cold outlet, degF | 134.375000 |
+| log mean driving force, degF | 130.064846 |
+| P | 0.171875 |
+| R | 2.909091 |
+| tube-side Reynolds number | 44051.846000 |
+| tube-side Prandtl number | 15.119375 |
+| tube-side regime | turbulent |
+| inside film coefficient, Btu an hour per ft2 per degF | 547.762384 |
+| U clean, Btu an hour per ft2 per degF | 134.459410 |
+| U dirty, Btu an hour per ft2 per degF | 92.110348 |
+| fouling penalty, percent | 31.495796 |
+| controlling resistance | outsideFilm |
+| its runner up | insideFouling |
+| the margin between them, percent | 51.612903 |
+| is that margin clear of the declared threshold | yes |
+| area required, ft2 | 229.543151 |
+| tubes | 74 |
+| tubes a pass | 37 |
+| actual area, ft2 | 232.477856 |
+| area overshoot, percent | 1.278498 |
+| bundle diameter, inches | 9.899233 |
+| shell diameter, inches | 12.399233 |
+
+ORON, the same chain on a four-pass bundle:
+| quantity | value |
+| --- | --- |
+| duty, Btu an hour | 5046800.0000 |
+| cold outlet, degF | 167.515873 |
+| log mean driving force, degF | 142.824087 |
+| tube-side Reynolds number | 125636.640925 |
+| tube-side Prandtl number | 12.678930 |
+| inside film coefficient, Btu an hour per ft2 per degF | 994.597468 |
+| U dirty, Btu an hour per ft2 per degF | 106.971929 |
+| area required, ft2 | 330.327560 |
+| tubes | 64 |
+| tubes a pass | 16 |
+| bundle diameter, inches | 13.235036 |
+| shell diameter, inches | 16.235036 |
+
+- SELF-CONSISTENCY, which is the check that catches a loop that has not closed. At the converged count the duty, the coefficient, the area and the driving force satisfy the equation they were built from.
+- On the studio case: U times area times F times the log mean is 2750000.0000 Btu an hour (derived, the four figures above multiplied) against the duty of 2750000.0000 Btu an hour.
+- On ORON: 5046800.0000 Btu an hour against 5046800.0000.
+
+# SECTION 7: P and R, and a correction factor computed rather than typed (owned by Professional m01)
+
+- P and R are the two dimensionless groups the correction factor is written in. P is the cold rise over the span between the two inlets. R is the hot drop over the cold rise.
+| case | P | R | F at one shell pass | warning |
+| --- | --- | --- | --- | --- |
+| the studio case | 0.171875 | 2.909091 | 0.964693 | none |
+| ORON | 0.204107 | 2.416739 | 0.957197 | none |
+| published case 1, golden 0.945353 | 0.400000 | 0.800000 | 0.945353 | none |
+| published case 2, golden 0.938660 | 0.300000 | 1.500000 | 0.938660 | none |
+| published case 3, golden 0.802278 | 0.500000 | 1.000000 | 0.802278 | none |
+| published case 4, golden 0.900870 | 0.250000 | 2.500000 | 0.900870 | none |
+| published case 5, golden 0.882889 | 0.600000 | 0.500000 | 0.882889 | none |
+
+- F across P at a fixed R of 0.900000. Read the third column, then the rows below the table: this one sweep carries all three behaviours, an answer, an answer with the steep-curve warning, and a configuration one shell pass cannot reach at all.
+| P | F | warning |
+| --- | --- | --- |
+| 0.050000 | 0.999587 | none |
+| 0.200000 | 0.990786 | none |
+| 0.450000 | 0.899076 | none |
+| 0.520000 | 0.813593 | none |
+| 0.550000 | 0.751428 | yes |
+| 0.580000 | 0.654869 | yes |
+| 0.600000 | 0.544585 | yes |
+- REFUSED, F at P of 0.620000 and R of 0.900000: F is undefined at P = 0.62 and R = 0.9 with 1 shell pass: the configuration cannot reach this duty. Add a shell pass.
+
+- The warning is not a refusal. The engine answers and says the curve is steep here, so a small error in the terminal temperatures swings the area badly, and the remedy is another shell rather than accepting the number.
+
+- AN ANALYTIC LIMIT: F TENDS TO ONE AS P TENDS TO ZERO, at every R. A vanishing cold rise is a vanishing departure from counter-current flow, so there is nothing left to correct. This needs no publication to check.
+| P | F at R 0.400000 | F at R 0.900000 | F at R 1.000000 | F at R 1.700000 | F at R 3.000000 |
+| --- | --- | --- | --- | --- | --- |
+| 0.100000 | 0.999228 | 0.998166 | 0.997939 | 0.996196 | 0.992029 |
+| 0.010000 | 0.999993 | 0.999985 | 0.999983 | 0.999971 | 0.999948 |
+| 0.001000 | 1.000000 | 1.000000 | 1.000000 | 1.000000 | 0.999999 |
+| 0.000100 | 1.000000 | 1.000000 | 1.000000 | 1.000000 | 1.000000 |
+
+- Read the columns downward. Every one of them climbs toward one, and the R equals one column reaches it by its own branch of the closed form rather than by the general one.
+- REFUSED, P given at one: F needs 0 <= P < 1; P was 1
+- REFUSED, R given at zero: F needs R > 0; R was 0
+- FRAMED AS REPAIR HISTORY: the engine message on the next line also states the behaviour FC6-0 replaced. That half of the message is history and is not what the engine does now.
+- REFUSED, P and R asked for on a cold stream that does not change temperature: the cold stream does not change temperature (100 F in, 100 F out), so R is undefined and no number of shell passes changes that. R used to come back as Infinity here and the F correction then blamed the shell count.
+
+# SECTION 8: Shells in series, a declared bound, and the equivalent single-shell P (owned by Professional m02)
+
+- One duty, at P of 0.720000 and R of 0.850000, bought with one shell up to the declared maximum of 6:
+| shells in series | equivalent single-shell P | F | warning |
+| --- | --- | --- | --- |
+- REFUSED, 1 shells at this duty: F is undefined at P = 0.72 and R = 0.85 with 1 shell pass: the configuration cannot reach this duty. Add a shell pass.
+| 2 | 0.541514 | 0.800677 | none |
+| 3 | 0.433686 | 0.920456 | none |
+| 4 | 0.361625 | 0.956604 | none |
+| 5 | 0.310086 | 0.972592 | none |
+| 6 | 0.271401 | 0.981100 | none |
+
+- The conversion is the whole mechanism. N shells in series are rated by converting the whole unit P into the P a SINGLE shell would see, and then reading the same closed form. The equivalent P falls as shells are added, which is why F rises.
+- The published multi-shell cases, five of the seven at an R away from one, which is the branch the conversion is easiest to get wrong in:
+| P | R | shells | equivalent single-shell P | F | golden F |
+| --- | --- | --- | --- | --- | --- |
+| 0.600000 | 1.000000 | 2 | 0.428571 | 0.897945 | 0.897945 |
+| 0.750000 | 1.000000 | 3 | 0.500000 | 0.802278 | 0.802278 |
+| 0.700000 | 0.500000 | 2 | 0.485576 | 0.947601 | 0.947601 |
+| 0.450000 | 1.500000 | 2 | 0.316280 | 0.926208 | 0.926208 |
+| 0.800000 | 0.600000 | 3 | 0.483917 | 0.932636 | 0.932636 |
+| 0.300000 | 2.500000 | 2 | 0.211516 | 0.948089 | 0.948089 |
+| 0.550000 | 0.800000 | 4 | 0.219343 | 0.989954 | 0.989954 |
+
+- THE BOUND IS DECLARED BY THIS MODULE AND IS NOT A PUBLISHED LIMIT, and the refusal says so. It exists because F climbs toward one as shells are added, so an unbounded box makes any duty reachable by typing a bigger number.
+- REFUSED, 7 shells in series, one past the declared bound: 7 shell passes in series is outside the declared bound of 1 to 6. This bound is a design limit declared by this module, not a published one, and it exists because F approaches 1 as the shell count grows, so an unbounded box makes any duty reachable by typing.
+- REFUSED, 2.400000 shells, which is not a whole number of shells: shells come in whole numbers and 2.4 is not one. The engine will not round for you: 2 and 3 shells give materially different F. State one.
+- Read that second refusal again. It names both whole numbers either side and says the engine will not pick one, because 2 and 3 shells give materially different F: 0.800677 against 0.920456.
+
+- A duty one shell cannot reach at all, at P of 0.920000 and R of 1.400000, and the same duty as shells are added:
+- REFUSED, the unreachable duty at 1 shell pass or passes: F is undefined at P = 0.92 and R = 1.4 with 1 shell pass: the configuration cannot reach this duty. Add a shell pass.
+- REFUSED, the unreachable duty at 2 shell pass or passes: this duty is unreachable with 2 shell passes: the equivalent single-shell P works out at NaN
+- REFUSED, the unreachable duty at 3 shell pass or passes: this duty is unreachable with 3 shell passes: the equivalent single-shell P works out at NaN
+- REFUSED, the unreachable duty at 4 shell pass or passes: this duty is unreachable with 4 shell passes: the equivalent single-shell P works out at NaN
+- That is the shape to carry away. A configuration can be infeasible rather than merely inefficient, and the answer is a refusal that tells you to add a shell.
+
+# SECTION 9: The overall coefficient, assembled from five named resistances (owned by Professional m03)
+
+- The coefficient is a sum of resistances in series, and it is referred to the OUTSIDE tube surface. The engine says which area on every answer: "outside tube surface (do)". This matters inside this package, because a second export in the production domain is called overallU and is referred to a stated BORE instead. A coefficient without its reference area is not a number you can use.
+- The five terms, on the studio case at its converged tube count:
+| term | resistance, hr.ft2.F per Btu | share of the total, percent |
+| --- | --- | --- |
+| outsideFilm | 0.005000000 | 46.055174 |
+| outsideFouling | 0.001000000 | 9.211035 |
+| wall | 0.000228791 | 2.107398 |
+| insideFilm | 0.002208398 | 20.341632 |
+| insideFouling | 0.002419355 | 22.284762 |
+| the total | 0.010856543 | 100.000000 |
+
+- The five add to the total: 0.010856543 (derived, the five rows above added) against the engine's 0.010856543.
+- U dirty is one over that total: 92.110348. U clean is one over the three terms that are not fouling: 134.459410.
+- The fouling penalty is 31.495796 percent.
+- AND THAT PENALTY IS AN IDENTITY. It is not an extra calculation: the two fouling terms as a share of the total come to 31.495796 percent (derived, the outside and inside fouling rows over the total). The penalty in percent IS the fouling share of the resistance stack, because one minus clean over total is exactly the fouling terms over the total.
+
+- The inside terms are referred to the outside area by the diameter ratio, and that is visible in the numbers rather than asserted:
+- The inside film coefficient is 547.762384, so one over it is 0.001825609 (derived). The engine's inside film resistance is 0.002208398, which is the first figure multiplied by the diameter ratio 1.209677 (derived, the outside diameter over the inside one).
+- The inside fouling allowance is 0.002000000 as typed and 0.002419355 in the stack, by the same ratio. The outside fouling allowance of 0.001000000 is already on the reference area and is carried unchanged.
+
+The published coefficient cases, and the defaults row:
+| ho | hi | do | di | U clean | golden U clean | U dirty | golden U dirty | controlling |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 200.000000 | 800.000000 | 0.750000 | 0.620000 | 148.348423 | 148.348423 | 98.422851 | 98.422851 | outsideFilm |
+| 1200.000000 | 300.000000 | 1.000000 | 0.834000 | 195.272975 | 195.272975 | 146.625908 | 146.625908 | insideFilm |
+| 340.000000 | 1450.000000 | 0.875000 | 0.732000 | 249.017598 | 249.017598 | 249.017598 | 249.017598 | outsideFilm |
+| 250.000000 | 900.000000 | 0.750000 | 0.652000 | 183.606770 | 183.606770 | 183.606770 | 183.606770 | outsideFilm |
+
+- The golden columns sit beside the engine columns on purpose. The oracle builds this stack on each term OWN area and refers it to the outside only at the end, and it takes the wall term by quadrature rather than by a logarithm, so the agreement in those columns is two methods meeting and not one method restated.
+- FRAMED AS REPAIR HISTORY: the engine message on the next line also states the behaviour FC6-0 replaced. That half of the message is history and is not what the engine does now.
+- REFUSED, a negative outside fouling allowance of -0.010000000: the outside fouling factor must be zero or positive hr.ft2.F/Btu; it was -0.01. A negative fouling allowance is surface that cleans itself: it used to raise the dirty U above the clean one and report a fouling penalty of -298 percent.
+- FRAMED AS REPAIR HISTORY: the engine message on the next line also states the behaviour FC6-0 replaced. That half of the message is history and is not what the engine does now.
+- REFUSED, a wall conductivity of zero: the wall conductivity must be positive Btu/hr.ft.F; it was 0. Zero used to return a U of zero with the wall named as the controlling resistance, and a negative value used to raise U above its own clean value.
+- REFUSED, an inside diameter above the outside one: the tube outside diameter must exceed the inside diameter: 0.62 in against 0.75 in
+
+# SECTION 10: The controlling resistance, its runner up, and the margin that decided it (owned by Professional m03 and m04)
+
+- Naming the largest resistance is the point of assembling U from its parts, because that is the term worth spending money on. A one-word verdict decided by a two percent gap is a coin toss wearing a result clothes, so the engine reports the runner up and the margin as well.
+| case | controlling | runner up | margin, percent of the controlling term | clear of the declared threshold |
+| --- | --- | --- | --- | --- |
+| the studio case | outsideFilm | insideFouling | 51.612903 | yes |
+| ORON | outsideFilm | insideFouling | 44.757033 | yes |
+| published case 1 | outsideFilm | insideFouling | 51.612903 | yes |
+| published case 2 | insideFilm | insideFouling | 70.000000 | yes |
+| published case 3 | outsideFilm | insideFilm | 71.970982 | yes |
+| published case 4 | outsideFilm | insideFilm | 68.047035 | yes |
+
+- THE THRESHOLD IS DECLARED BY THIS MODULE AT 10 PERCENT AND IS NOT PUBLISHED. It is a reporting threshold: above it the engine lets the word stand, below it the answer carries a note telling you to treat the two terms as jointly controlling instead of acting on the word.
+- Built deliberately near: outside film 0.005000000 against inside film 0.005100000, a margin of 1.960784 percent, clear reported as no, and the note reads "insideFilm leads outsideFilm by only 2.0 percent of itself, under the 10 percent this module calls clear. Treat the two as jointly controlling rather than acting on the word.".
+
+# SECTION 11: The thin-wall limit, and the factor it fixes (owned by Professional m04)
+
+- A cylindrical wall resistance carries the outside diameter times the logarithm of the diameter ratio, over twice the conductivity. As the wall gets thin that expression has to collapse onto the flat plate, which is the thickness over the conductivity and nothing else. THAT LIMIT IS A KNOWN TRUTH AND NEEDS NO PUBLICATION, and it is the limit that fixes the factor of two.
+- Measured by asking the engine for a coefficient with both films made negligible, at an outside diameter of 1.000000 inches, so the total resistance IS the wall:
+| wall thickness, inches | wall resistance at k 9 | wall resistance at k 26 | wall resistance at k 64 | flat plate at k 9 | flat plate at k 26 | flat plate at k 64 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.109000 | 0.001138428 | 0.000394071 | 0.000160091 | 0.001009259 | 0.000349359 | 0.000141927 |
+| 0.035000 | 0.000335975 | 0.000116299 | 0.000047247 | 0.000324074 | 0.000112179 | 0.000045573 |
+| 0.010000 | 0.000093531 | 0.000032376 | 0.000013153 | 0.000092593 | 0.000032051 | 0.000013021 |
+| 0.002000 | 0.000018556 | 0.000006423 | 0.000002609 | 0.000018519 | 0.000006410 | 0.000002604 |
+
+- Read the two halves of the table against each other row by row. They converge as the wall thins, and the ratio says how fast:
+| wall thickness, inches | wall resistance over flat plate, at the middle conductivity |
+| --- | --- |
+| 0.109000 | 1.127984 |
+| 0.035000 | 1.036724 |
+| 0.010000 | 1.010135 |
+| 0.002000 | 1.002005 |
+
+- THE LIMIT IS WHAT A TRANSCRIPTION CANNOT CATCH. Move that factor of two the same way in the engine and in the oracle and the two files go on agreeing with each other perfectly, and neither of them agrees with the flat plate. An independent method is worth more than a matching one, and an analytic limit is worth more than both when the method is the thing in doubt.
+- The wall is the smallest of the five terms on the studio case, at 2.107398 percent of the total. That is usual for metal and it is not a reason to skip it: the three conductivity columns above stand in inverse proportion to their conductivities, so a less conductive wall moves the term by the same factor in the other direction.
+
+# SECTION 12: The tube-side film: Reynolds, Prandtl, three regimes, and a band nobody here can state (owned by Professional m05)
+
+- The film coefficient inside the tubes is computed, and it is the only place in this module where a FITTED correlation is used. Reynolds and Prandtl come out on every call so they can be checked.
+- At the studio's converged count of 74 tubes in 2 passes, which is 37 tubes a pass: Reynolds 44051.846000, Prandtl 15.119375, regime turbulent, film coefficient 547.762384.
+- The count is what sets the velocity, so it sets the Reynolds number, so it sets the film. A coefficient computed at a tube count the same screen contradicts is not a coefficient of anything:
+| tubes, at the studio two passes | tubes a pass | Reynolds | regime | film coefficient | U dirty that follows | area that follows, ft2 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2 | 1 | 1629918.301989 | turbulent | 9843.591536 | 114.011627 | 185.448625 |
+| 60 | 30 | 54330.610066 | turbulent | 647.823324 | 95.098250 | 222.331111 |
+| 72 | 36 | 45275.508389 | turbulent | 559.901439 | 92.518373 | 228.530818 |
+| 74 | 37 | 44051.846000 | turbulent | 547.762384 | 92.110348 | 229.543151 |
+
+- The flow through one bundle, swept, at the converged count:
+| tube-side flow, lb an hour | Reynolds | regime | film coefficient |
+| --- | --- | --- | --- |
+| 2600.0000 | 1431.684995 | laminar | 5.667097 (with a warning) |
+- REFUSED, the film at 12000.0000 lb an hour: tube-side Reynolds 6608 is in the transition band (2300 to 10000): no film correlation is trustworthy here. Change the tube count, the passes or the bore to leave it.  [evidence beside the message: re 6607.776900, pr 15.119375]
+| 45000.0000 | 24779.163375 | turbulent | 345.692714 |
+| 120000.0000 | 66077.769000 | turbulent | 757.644042 |
+| 400000.0000 | 220259.229998 | turbulent | 1985.035182 |
+
+- Below a Reynolds number of 2300 the engine uses the laminar constant-wall-temperature limit, and says what that costs in a warning:
+- At 900.0000 lb an hour: Reynolds 495.583267, regime laminar, film coefficient 5.667097, and the warning reads "laminar tube side: the constant-wall-temperature limit is used, so this film coefficient does NOT move with the flow rate and does NOT take the Sieder-Tate correction. Entrance effects are ignored.".
+- Double that flow and the film coefficient is 5.667097, the same number, at a Reynolds of 991.166535. The warning said it would not move with the flow, and it does not.
+- Between 2300 and 10000 the engine REFUSES, and hands back the Reynolds number that put the case there, because no correlation in that band is trustworthy and sizing on a fiction is worse than being told to change something:
+- REFUSED, the film in the transition band, at 6000.0000 lb an hour: tube-side Reynolds 3304 is in the transition band (2300 to 10000): no film correlation is trustworthy here. Change the tube count, the passes or the bore to leave it.  [evidence beside the message: re 3303.888450, pr 15.119375, tubesPerPass 37.000000]
+
+- The Sieder-Tate viscosity ratio, applied when a wall viscosity is given:
+| wall viscosity given | Sieder-Tate applied | correction factor | film coefficient |
+| --- | --- | --- | --- |
+| none | no | 1.000000 | 547.762384 |
+| 0.320000 cp | yes | 1.064473 | 583.078474 |
+
+- A tube count that cannot divide equally into its passes is refused, because a multi-pass bundle puts the same number of tubes in every pass:
+- FRAMED AS REPAIR HISTORY: the engine message on the next line also states the behaviour FC6-0 replaced. That half of the message is history and is not what the engine does now.
+- REFUSED, 9 tubes in 4 passes: 9 tubes cannot be divided equally into 4 passes. A multi-pass bundle puts the same number of tubes in every pass; the engine used to floor this at one tube per pass, so one tube in four passes returned exactly the same Reynolds number as four tubes in four passes.
+
+- THE VALIDITY BAND OF THIS CORRELATION IS NOT ESTABLISHED IN THIS REPOSITORY, in Reynolds or in Prandtl, and the engine says so rather than pretending otherwise. Every answer carries a `correlation` block:
+- On the studio case that block reports a validity band of null, with the Reynolds and Prandtl numbers beside it, and a note that reads: "The validity band of the Dittus-Boelter fit, in Reynolds and in Prandtl, is not established in this repository. Re and Pr are returned on every call so they can be checked against the source the caller trusts. Nothing here grades them."
+- That is the honest shape for a held item. The numbers a reader would need to check the band against their own source are handed over, and nothing here grades them.
+
+The published film cases:
+| flow, lb an hour | bore, inches | viscosity, cp | wall viscosity, cp | Reynolds | golden Reynolds | Prandtl | film coefficient | golden film coefficient |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 150000.0000 | 0.620000 | 0.500000 | none | 30560.968162 | 30561.115839 | 7.559687 | 309.843653 | 309.844251 |
+| 400000.0000 | 0.834000 | 1.200000 | none | 33658.051800 | 33658.214442 | 8.294057 | 1129.767467 | 1129.769651 |
+| 150000.0000 | 0.620000 | 0.500000 | 0.300000 | 30560.968162 | 30561.115839 | 7.559687 | 332.813879 | 332.814522 |
+| 2000.0000 | 0.620000 | 50.000000 | none | 4.074796 | 4.074815 | 755.968750 | 5.667097 | 5.667097 |
+
+- THE ENGINE AND THE ORACLE DISAGREE IN THE LAST DIGITS OF THOSE COLUMNS AND THE DISAGREEMENT IS UNDERSTOOD. The oracle forms no flow area at all, taking Reynolds as four times the mass flow over pi times the diameter times the viscosity, and it derives every unit conversion from the SI definitions rather than typing one. The engine types a rounded viscosity conversion. Section 20 measures that rounding and shows the residual it causes is exactly it.
+
+# SECTION 13: The cooling exponent this module declines to invent (owned by Professional m05)
+
+- The correlation carries a Prandtl exponent, and the heating form and the cooling form use DIFFERENT ones. Only the heating form is established in this repository.
+- So a cooled tube side is REFUSED. Not answered with the heating exponent, and not answered with a cooling exponent invented here:
+- REFUSED, a tube side declared as cooling: this module carries only the HEATING form of Dittus-Boelter (Pr^0.4). The cooling exponent is not established in this repository, and at a Prandtl around 15 the two forms differ by about 31 percent on hi, so it is not a detail to shrug at. Type the tube-side film instead of computing it.
+- REFUSED, a tube side declared as condensing, which this module carries no form for at all: service must be 'heating'; it was "condensing"
+
+- The refusal states the size of the thing it is declining to guess, and the engine's own register says it too: "Only the heating exponent (Pr^0.4) is carried. The cooling exponent is not established here, and it is not a detail: at a Prandtl of 15 the two forms differ by about 31 percent on hi. A cooled tube side is REFUSED rather than answered with the heating form."
+- The studio's own Prandtl number is 15.119375, which is the neighbourhood that statement is about, and the engine reports that number on every call so a reader can see which neighbourhood they are in.
+- The answer the engine DOES give, at the same conditions with the tube side declared as heating: film coefficient 547.762384, with the service reported back as heating so a reader can see which form produced it.
+
+- WHY THE REFUSAL IS THE RIGHT ANSWER AND NOT A GAP. Answering a cooled tube side with the heating exponent would be a confident wrong number, and a confident wrong number is the worst thing an engine can return. Inventing the cooling exponent here would be worse, because it would carry no source at all and would then be quoted as though it did.
+- What a caller does instead: type the film coefficient. The module takes a stated inside film, and the studio offers that box, so a hot tube side is designed with a coefficient the engineer stands behind rather than one the engine guessed.
+- Nothing in this course grades a cooled tube side, and nothing in it grades a film coefficient at all, for exactly this reason.
+
+# SECTION 14: The bundle, the shell, and the two layout rows that are identical (owned by Expert m05)
+
+- A bundle diameter comes from a fitted geometry form: the tube outside diameter times the tube count over a constant, raised to the reciprocal of an exponent. The constant and the exponent depend on the layout angle and the pass count, and this module carries 3 layouts across 4 pass counts.
+- One area of 980.000000 ft2 at the studio's tube size, across every layout and pass count the module carries:
+| layout, degrees | passes | tubes | bundle diameter, inches | shell diameter, inches | layout note |
+| --- | --- | --- | --- | --- | --- |
+| 30 | 1 | 312 | 18.669077 | 21.169077 | none |
+| 30 | 2 | 312 | 19.000124 | 21.500124 | none |
+| 30 | 4 | 312 | 19.854977 | 22.354977 | none |
+| 30 | 6 | 312 | 21.130390 | 23.630390 | none |
+| 45 | 1 | 312 | 20.307045 | 22.807045 | yes |
+| 45 | 2 | 312 | 20.698071 | 23.198071 | yes |
+| 45 | 4 | 312 | 21.444352 | 23.944352 | yes |
+| 45 | 6 | 312 | 22.986286 | 25.486286 | yes |
+| 90 | 1 | 312 | 20.307045 | 22.807045 | yes |
+| 90 | 2 | 312 | 20.698071 | 23.198071 | yes |
+| 90 | 4 | 312 | 21.444352 | 23.944352 | yes |
+| 90 | 6 | 312 | 22.986286 | 25.486286 | yes |
+
+- READ THE LAST TWO LAYOUT BLOCKS AGAINST EACH OTHER. Every figure is the same. The constants this module carries for those two layouts are IDENTICAL in all four pass counts, so that input does nothing between them, and the engine attaches a note saying exactly that rather than letting the box look live.
+- Measured rather than asserted: the two constant rows compare equal as data, yes.
+- The first layout against the second IS live: bundle 19.000124 against 20.698071 inches at the same area and pass count, a ratio of 1.089365 (derived, the second over the first). So the input is not decorative in general, and the note names the pair it is inert between.
+- The note itself, printed by the engine on any answer at either of those two layouts: "the 45 and 90 degree constants carried here are identical, so the layout choice changes nothing between those two. 30 degrees does move the bundle."
+
+- THE EIGHT CONSTANT PAIRS ARE HELD FOR LITERATURE. Their source is not established in this repository, and the engine's own register says so: "BUNDLE_K carries eight layout/pass pairs. Their source is not established in this repository, and the 45 and 90 degree rows carried here are IDENTICAL in all four pass counts, so the layout input does nothing between those two. 30 against 45 moves the bundle diameter by about 9 percent, so the input is not decorative in general."
+- The shell diameter is the bundle plus a clearance, and the clearance is an INPUT because it depends on the head type. The engine adds it once:
+- At the studio clearance of 2.500000 inches the shell is 21.500124 inches; at no clearance it is 19.000124, which is the bundle diameter itself. The difference is 2.500000 inches (derived), which is the clearance, once.
+- REFUSED, a layout of 60 degrees, which this module carries no constants for: this module carries bundle constants for 30, 45 and 90 degree layouts only; 60 was given
+- REFUSED, a negative bundle-to-shell clearance: the bundle-to-shell clearance must be zero or positive inches; it was -2.5
+
+The published bundle cases:
+| area, ft2 | tube outside diameter, inches | length, ft | layout | passes | tubes | golden tubes | bundle diameter | golden bundle diameter |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 500.000000 | 0.750000 | 16.000000 | 30 | 2 | 160 | 160 | 14.039145 | 14.039145 |
+| 2000.000000 | 0.750000 | 16.000000 | 30 | 2 | 638 | 638 | 26.273650 | 26.273650 |
+| 1200.000000 | 1.000000 | 20.000000 | 30 | 4 | 232 | 232 | 23.254065 | 23.254065 |
+| 860.000000 | 0.750000 | 16.000000 | 45 | 2 | 274 | 274 | 19.557352 | 19.557352 |
+| 860.000000 | 0.750000 | 16.000000 | 90 | 2 | 274 | 274 | 19.557352 | 19.557352 |
+
+- The oracle reaches the bundle diameter by BISECTING on the diameter until the geometry form balances, rather than raising a ratio to a reciprocal power. That is what makes the golden column independent: inverting an exponent is one of the easiest errors to make in this expression and the hardest to see in an answer.
+
+# SECTION 15: Effectiveness and NTU in both directions, two ceilings, and the arrangement with none (owned by Expert m01)
+
+- A rating asks the other question. Given a surface, what fraction of the most heat that could possibly be moved does this machine actually move. Effectiveness is that fraction, and NTU is the surface written dimensionlessly.
+| NTU | counter at Cr 0.000000 | counter at Cr 0.350000 | counter at Cr 0.650000 | counter at Cr 1.000000 | parallel at Cr 0.000000 | parallel at Cr 0.350000 | parallel at Cr 0.650000 | parallel at Cr 1.000000 | 1-2 shell at Cr 0.000000 | 1-2 shell at Cr 0.350000 | 1-2 shell at Cr 0.650000 | 1-2 shell at Cr 1.000000 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0.250000 | 0.221199 | 0.213502 | 0.207144 | 0.200000 | 0.221199 | 0.212184 | 0.204853 | 0.196735 | 0.221199 | 0.212840 | 0.205991 | 0.198351 |
+| 0.750000 | 0.527633 | 0.491489 | 0.461685 | 0.428571 | 0.527633 | 0.471623 | 0.430237 | 0.388435 | 0.527633 | 0.481287 | 0.445221 | 0.407158 |
+| 1.400000 | 0.753403 | 0.695454 | 0.643699 | 0.583333 | 0.753403 | 0.628836 | 0.545902 | 0.469595 | 0.753403 | 0.659770 | 0.588924 | 0.517151 |
+| 2.600000 | 0.925726 | 0.871782 | 0.809194 | 0.722222 | 0.925726 | 0.718595 | 0.597755 | 0.497242 | 0.925726 | 0.783246 | 0.676796 | 0.573455 |
+| 4.500000 | 0.988891 | 0.964450 | 0.916283 | 0.818182 | 0.988891 | 0.739037 | 0.605699 | 0.499938 | 0.988891 | 0.823843 | 0.700802 | 0.584950 |
+| 8.000000 | 0.999665 | 0.996407 | 0.977841 | 0.888889 | 0.999665 | 0.740726 | 0.606059 | 0.500000 | 0.999665 | 0.829902 | 0.703518 | 0.585781 |
+
+- Read any column downward: effectiveness rises with NTU. Read across the capacity ratios at a fixed NTU: it falls as the ratio rises. Read the three arrangements against each other at the same NTU and capacity ratio: counter-current is the highest of the three, every time.
+- THE TWO CEILINGS ARE THE POINT OF THIS SECTION. A parallel-flow unit and a 1-2 shell unit each have an effectiveness they cannot pass at ANY area, and the engine reports it as `ceiling` on every answer:
+| capacity ratio | parallel ceiling | 1-2 shell ceiling | counter-current ceiling |
+| --- | --- | --- | --- |
+| 0.000000 | 1.000000 | 1.000000 | 1.000000 |
+| 0.350000 | 0.740741 | 0.830054 | none |
+| 0.650000 | 0.606061 | 0.703560 | none |
+| 1.000000 | 0.500000 | 0.585786 | none |
+
+- COUNTER-CURRENT FLOW HAS NO CEILING BELOW ONE, and that is the entry in the last column: the engine reports null rather than a number. It is an analytic truth and it is also the default arrangement on the Rating tab, so it is the one a reader meets first.
+- Proved by asking for an NTU at effectivenesses climbing toward one, at a capacity ratio of 0.650000:
+| effectiveness asked for | counter-current NTU | parallel | 1-2 shell |
+| --- | --- | --- | --- |
+| 0.900000 | 4.066024 | refused, ceiling 0.606061 | refused, ceiling 0.703560 |
+| 0.990000 | 10.210712 | refused, ceiling 0.606061 | refused, ceiling 0.703560 |
+| 0.999000 | 16.742253 | refused, ceiling 0.606061 | refused, ceiling 0.703560 |
+| 0.999990 | 29.894634 | refused, ceiling 0.606061 | refused, ceiling 0.703560 |
+
+- The counter-current column answers every time and the other two stop. A counter-current unit needs more and more surface as the effectiveness approaches one, without bound, and that is the honest answer rather than a refusal.
+- The refusals in those two columns carry the CEILING beside the message, which is the number that says how far the arrangement can go:
+- REFUSED, a parallel unit asked for an effectiveness of 0.820000 at a capacity ratio of 0.650000: a parallel-flow exchanger cannot exceed an effectiveness of 0.606 at this capacity ratio, whatever its area  [evidence beside the message: ceiling 0.606061]
+- REFUSED, a 1-2 shell unit asked for the same effectiveness: a 1-2 shell exchanger cannot exceed an effectiveness of 0.704 at this capacity ratio, whatever its area  [evidence beside the message: ceiling 0.703560]
+- REFUSED, a capacity ratio of 1.400000, which is the two capacity rates passed the wrong way round: the capacity ratio must be between 0 and 1 inclusive; it was 1.4. Cr is Cmin over Cmax by definition, so a value above 1 means the two capacity rates were passed the wrong way round.
+
+- The two directions are inverses, and the engine is checked in both. The published cases run each way:
+| NTU | capacity ratio | arrangement | effectiveness | golden effectiveness | NTU recovered from that effectiveness |
+| --- | --- | --- | --- | --- | --- |
+| 1.000000 | 0.500000 | counter | 0.564733 | 0.564733 | 1.000000 |
+| 2.000000 | 0.800000 | counter | 0.710909 | 0.710909 | 2.000000 |
+| 3.000000 | 1.000000 | counter | 0.750000 | 0.750000 | 3.000000 |
+| 0.500000 | 0.250000 | counter | 0.377589 | 0.377589 | 0.500000 |
+| 1.000000 | 0.500000 | parallel | 0.517913 | 0.517913 | 1.000000 |
+| 2.000000 | 0.700000 | parallel | 0.568604 | 0.568604 | 2.000000 |
+| 0.500000 | 1.000000 | parallel | 0.316060 | 0.316060 | 0.500000 |
+| 1.000000 | 0.500000 | shell1 | 0.539940 | 0.539940 | 1.000000 |
+| 2.000000 | 0.700000 | shell1 | 0.634231 | 0.634231 | 2.000000 |
+| 3.000000 | 0.900000 | shell1 | 0.607210 | 0.607210 | 3.000000 |
+| 1.500000 | 0.000000 | counter | 0.776870 | 0.776870 | 1.500000 |
+| 1.500000 | 0.000000 | parallel | 0.776870 | 0.776870 | 1.500000 |
+| 1.500000 | 0.000000 | shell1 | 0.776870 | 0.776870 | 1.500000 |
+
+- The last column is the inversion returning the NTU the row started with. That is a self-consistency check and it is NOT evidence that either direction is right: an identity between a function and its own inverse holds whether or not either one is correct. The golden column is the evidence, because the oracle reaches it by marching the differential equations rather than by algebra.
+
+# SECTION 16: The capacity ratio at zero, where all three arrangements collapse onto one curve (owned by Expert m02)
+
+- A capacity ratio of zero is a stream changing phase: it absorbs heat without changing temperature. At that limit the arrangement stops mattering, and all three collapse onto the same curve.
+| NTU | counter | parallel | 1-2 shell | the three all equal |
+| --- | --- | --- | --- | --- |
+| 0.250000 | 0.221199 | 0.221199 | 0.221199 | yes |
+| 0.750000 | 0.527633 | 0.527633 | 0.527633 | yes |
+| 1.400000 | 0.753403 | 0.753403 | 0.753403 | yes |
+| 2.600000 | 0.925726 | 0.925726 | 0.925726 | yes |
+| 4.500000 | 0.988891 | 0.988891 | 0.988891 | yes |
+| 8.000000 | 0.999665 | 0.999665 | 0.999665 | yes |
+
+- THAT IS AN ANALYTIC LIMIT AND IT DISCRIMINATES. Three separate closed forms, three separate branches of the code, one answer. A wrong constant in any one of the three breaks the row it sits on and nothing else, which is exactly the kind of error a single published case cannot find.
+- The ceiling at that limit is 1.000000 for every arrangement, because with nothing limiting the cold side there is no arrangement penalty left to pay.
+- The published cases include one row in each arrangement at that limit, so the collapse is in the golden file and not only in this table.
+
+# SECTION 17: The air cooler: the air balance, the draft type, the barometer, and the correction it declines (owned by Expert m03)
+
+- An air cooler has no cooling water. It has ambient air, a fan and a bundle, and the ambient temperature is the thing the design is hostage to.
+- The design point of the two teaching bays:
+| quantity | the studio bay | ANTAN |
+| --- | --- | --- |
+| duty, Btu an hour | 20000000.0000 | 15500000.0000 |
+| process in, degF | 250.000000 | 235.000000 |
+| process out, degF | 150.000000 | 158.000000 |
+| design ambient, degF | 95.000000 | 98.000000 |
+| air rise, degF | 30.000000 | 26.000000 |
+| air outlet, degF | 125.000000 | 124.000000 |
+| log mean, degF | 85.263896 | 82.901805 |
+| U, Btu an hour per ft2 per degF | 4.500000 | 5.100000 |
+| bare surface, ft2 | 52125.749338 | 36660.428319 |
+| air, lb an hour | 2777777.7778 | 2483974.3590 |
+| draft type | forced | forced |
+| fan inlet, degF | 95.000000 | 98.000000 |
+| barometric pressure, psia | 14.700000 | 14.300000 |
+| air density at the fan inlet, lb per ft3 | 0.071524401 | 0.069203861 |
+| actual ft3 a minute | 647279.7513 | 598226.3422 |
+| fan brake horsepower | 94.003933 | 86.879945 |
+| motor horsepower | 102.178189 | 94.434723 |
+
+- The air outlet is the ambient plus the rise, and the air mass follows from the duty and the rise through the module's declared air heat capacity. On the studio bay: 2777777.7778 lb an hour carrying 20000000.0000 Btu an hour across 30.000000 degF implies a heat capacity of 0.240000 Btu per lb per degF (derived, the duty over the air mass and the rise). THAT IS THE DECLARED CONSTANT, measured out of the engine's own answer rather than read from its source.
+
+- THE DRAFT TYPE IS AN INPUT AND IT IS NOT A DETAIL. A forced-draft fan sits below the bundle and handles ambient air. An induced-draft fan sits above it and handles the heated air leaving. Those are different densities, so they are different volumes, so they are different fan powers.
+| draft type | fan inlet, degF | air density, lb per ft3 | actual ft3 a minute | fan brake horsepower | motor horsepower |
+| --- | --- | --- | --- | --- | --- |
+| forced | 95.000000 | 0.071524401 | 647279.7513 | 94.003933 | 102.178189 |
+| induced | 125.000000 | 0.067854412 | 682288.6620 | 99.088250 | 107.704620 |
+- The gap between the two, on the same bay: a fan power ratio of 1.054086 (derived, the induced over the forced). The engine will not pick one for you, and it reports the fan inlet temperature so the answer says which machine it belongs to.
+- REFUSED, a draft type of balanced, which is neither of the two this module carries: the draft type must be 'forced' or 'induced'; it was "balanced". The fan inlet density depends on it and the two differ by about 5 percent on fan power, so this module will not pick one for you.
+
+- THE BAROMETER IS AN INPUT TOO, because the duty of this machine is set by air density and a bay on a plateau breathes thinner air:
+| barometric pressure, psia | air density at the fan inlet, lb per ft3 | actual ft3 a minute | fan brake horsepower |
+| --- | --- | --- | --- |
+| 14.700000 | 0.071139633 | 581948.0744 | 84.515865 |
+| 14.300000 | 0.069203861 | 598226.3422 | 86.879945 |
+| 13.200000 | 0.063880487 | 648078.5374 | 94.119941 |
+| 12.000000 | 0.058073170 | 712886.3911 | 103.531935 |
+
+- The air density is an ideal-gas density, and it can be measured out of the engine directly. At 60.000000 degF and 14.700000 psia it returns 0.076341600 lb per ft3.
+- That one export answers with a BARE NUMBER rather than an object, and it is the documented exception to the module's error contract. Below absolute zero it returns NaN, which the bay turns into a named refusal rather than passing on.
+
+- AND THE CORRECTION THIS BAY DOES NOT HAVE. An air cooler is a CROSS-FLOW machine. The closed form or chart for its correction factor is not established in this repository, so the bare surface above is sized on the COUNTER-CURRENT log mean with no correction at all, and the engine says so on every answer rather than letting a silent one stand.
+- On both bays the reported correction is null, and the note reads: "An air cooler is cross-flow, and the closed form or chart for its F is not established in this repository. `airCooler` therefore sizes on the COUNTER-CURRENT log mean with F = 1 and says so in its return (`fCorrection: null`). The area it reports is a counter-current-basis area and a real cross-flow unit needs more surface. The hot-day rating does NOT depend on this, because it holds effectiveness rather than assuming an arrangement."
+- What that means for a reader: the surface in the table above is a counter-current-basis surface and a real bay needs more. The number is not wrong, it is a stated basis, and the honest form of a held item is to name the basis rather than to quietly apply a one.
+
+Six states a bay will not compute, every one of them a box in the studio:
+- FRAMED AS REPAIR HISTORY: the engine message on the next line also states the behaviour FC6-0 replaced. That half of the message is history and is not what the engine does now.
+- REFUSED, a fan efficiency of zero: the fan efficiency must be greater than 0 and at most 1; it was 0. Zero used to return Infinity bhp and a negative value a negative one, neither with an error key.
+- FRAMED AS REPAIR HISTORY: the engine message on the next line also states the behaviour FC6-0 replaced. That half of the message is history and is not what the engine does now.
+- REFUSED, a fan efficiency of 5.000000: the fan efficiency must be greater than 0 and at most 1; it was 5. Zero used to return Infinity bhp and a negative value a negative one, neither with an error key.
+- REFUSED, a motor efficiency of 3.000000: the motor efficiency must be greater than 0 and at most 1; it was 3. A value above 1 is a motor drawing less than the shaft it turns.
+- FRAMED AS REPAIR HISTORY: the engine message on the next line also states the behaviour FC6-0 replaced. That half of the message is history and is not what the engine does now.
+- REFUSED, a fan static pressure of -0.600000 inches of water: the fan static pressure must be positive inches of water; it was -0.6. A negative one used to return a negative horsepower.
+- REFUSED, an empty design ambient temperature: the design ambient temperature is empty or not a number; it was NaN F
+- REFUSED, a process outlet above the process inlet: a cooler takes the process DOWN: the inlet is 250 F and the outlet 251 F
+
+# SECTION 18: The hot day, rated at fixed UA and fixed air mass (owned by Expert m04)
+
+- A bay is bought for its worst afternoon. So the question is not what it does on its design day, it is what it still does when the air arrives hotter than the day it was sized on.
+- WHAT A MACHINE ACTUALLY HOLDS ON A HOT AFTERNOON IS ITS SURFACE AND ITS AIR MASS. Those two fix UA and both capacity rates, so they fix NTU and the capacity ratio, so they fix the EFFECTIVENESS. The duty then follows from the inlet temperature difference alone, and the new process outlet and the new air rise come out with it.
+- AND THAT IS WHY THIS RATING NEEDS NO ARRANGEMENT AND NO CORRECTION FACTOR. Effectiveness is taken from its DEFINITION at the design point, the duty over the smaller capacity rate times the inlet span, so the one correction this module cannot source never enters. The engine states the basis on every answer.
+- The basis it states: "effectiveness-NTU at fixed UA and fixed air mass; no arrangement and no F correction is assumed"
+
+The studio bay across its design point, hotter and colder:
+| check ambient, degF | regime | duty fraction | duty, Btu an hour | process out, degF | air rise, degF | air out, degF | effectiveness | NTU | capacity ratio | UA, Btu an hour per degF | hot-day log mean, degF | design outlet reached |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 86.000000 | colder than design | 1.058065 | 21161290.3226 | 144.193548 | 31.741935 | 117.741935 | 0.645161 | 1.172829 | 0.300000 | 234565.8720 | 90.214702 | yes |
+| 92.000000 | colder than design | 1.019355 | 20387096.7742 | 148.064516 | 30.580645 | 122.580645 | 0.645161 | 1.172829 | 0.300000 | 234565.8720 | 86.914164 | yes |
+| 98.000000 | hotter than design | 0.980645 | 19612903.2258 | 151.935484 | 29.419355 | 127.419355 | 0.645161 | 1.172829 | 0.300000 | 234565.8720 | 83.613627 | no |
+| 104.000000 | hotter than design | 0.941935 | 18838709.6774 | 155.806452 | 28.258065 | 132.258065 | 0.645161 | 1.172829 | 0.300000 | 234565.8720 | 80.313089 | no |
+| 112.000000 | hotter than design | 0.890323 | 17806451.6129 | 160.967742 | 26.709677 | 138.709677 | 0.645161 | 1.172829 | 0.300000 | 234565.8720 | 75.912371 | no |
+| 124.000000 | hotter than design | 0.812903 | 16258064.5161 | 168.709677 | 24.387097 | 148.387097 | 0.645161 | 1.172829 | 0.300000 | 234565.8720 | 69.311296 | no |
+
+The ANTAN bay, the same sweep:
+| check ambient, degF | regime | duty fraction | duty, Btu an hour | process out, degF | air rise, degF | effectiveness | NTU | capacity ratio | UA, Btu an hour per degF |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 86.000000 | colder than design | 1.087591 | 16857664.2336 | 151.255474 | 28.277372 | 0.562044 | 0.928810 | 0.337662 | 186968.1844 |
+| 92.000000 | colder than design | 1.043796 | 16178832.1168 | 154.627737 | 27.138686 | 0.562044 | 0.928810 | 0.337662 | 186968.1844 |
+| 98.000000 | the design ambient | 1.000000 | 15500000.0000 | 158.000000 | 26.000000 | 0.562044 | 0.928810 | 0.337662 | 186968.1844 |
+| 104.000000 | hotter than design | 0.956204 | 14821167.8832 | 161.372263 | 24.861314 | 0.562044 | 0.928810 | 0.337662 | 186968.1844 |
+| 112.000000 | hotter than design | 0.897810 | 13916058.3942 | 165.868613 | 23.343066 | 0.562044 | 0.928810 | 0.337662 | 186968.1844 |
+| 124.000000 | hotter than design | 0.810219 | 12558394.1606 | 172.613139 | 21.065693 | 0.562044 | 0.928810 | 0.337662 | 186968.1844 |
+
+- Read the effectiveness, the NTU, the capacity ratio and the UA columns. They do not move down either table. That is the whole mechanism in four columns: the machine is the same machine at every ambient, and what changes is the air it is given.
+- Read the duty fraction and the process outlet columns together. As the air gets hotter the duty falls AND the process leaves hotter. Those two go together and a rating that reports one without the other is asserting something it did not compute.
+- The self-consistency of the rated answer, on the studio bay at its own default check ambient: the duty is 18064516.1290 Btu an hour, and the process capacity rate times the drop from the inlet to the new outlet is 18064516.1290 (derived, the design duty over the design process drop, times the new drop).
+- The air side agrees too: the air capacity rate times the new rise is 18064516.1290 Btu an hour (derived, the design duty over the design rise, times the new rise).
+
+- A COLD DAY IS A CAPABILITY AND NOT A DELIVERED DUTY, and the engine says so in words rather than printing a number above one and leaving it:
+- At 86.000000 degF the bay is labelled "colder than design", the duty fraction is 1.058065, and the note reads: "colder than the design ambient, so the SURFACE can do more than the design duty. This is a capability, not a delivered duty: a plant holding the process at 150 F will throttle or stage the air instead, and the outlet shown is what the bundle would reach wide open."
+- And on the hot side, the note names both numbers that moved: "the design outlet of 150 F is no longer reachable at 110 F ambient: the process leaves at 159.7 F instead, and the air rise falls from 30 to 27.1 F."
+- REFUSED, a check ambient of 260.000000 degF, which is hotter than the process it is meant to cool: at 260 F the air is not colder than the 250 F process inlet, so this cooler has no driving force at all and its duty is zero.
+
+The published hot-day cases, which the oracle reaches by the OTHER method:
+| design duty, Btu an hour | process in, degF | process out, degF | design ambient, degF | check ambient, degF | duty fraction | golden duty fraction | duty, Btu an hour | golden duty | process out, degF | golden process out | air rise, degF | golden air rise | UA | golden UA |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 20000000.0000 | 250.000000 | 150.000000 | 95.000000 | 110.000000 | 0.903226 | 0.903226 | 18064516.1290 | 18064516.1306 | 159.677419 | 159.677419 | 27.096774 | 27.096774 | 234565.8720 | 234565.8720 |
+| 20000000.0000 | 250.000000 | 150.000000 | 95.000000 | 120.000000 | 0.838710 | 0.838710 | 16774193.5484 | 16774193.5498 | 166.129032 | 166.129032 | 25.161290 | 25.161290 | 234565.8720 | 234565.8720 |
+| 20000000.0000 | 250.000000 | 150.000000 | 95.000000 | 130.000000 | 0.774194 | 0.774194 | 15483870.9677 | 15483870.9691 | 172.580645 | 172.580645 | 23.225806 | 23.225806 | 234565.8720 | 234565.8720 |
+| 8000000.0000 | 180.000000 | 120.000000 | 90.000000 | 105.000000 | 0.833333 | 0.833333 | 6666666.6667 | 6666666.6671 | 130.000000 | 130.000000 | 20.833333 | 20.833333 | 176729.1173 | 176729.1173 |
+| 14000000.0000 | 300.000000 | 190.000000 | 100.000000 | 118.000000 | 0.910000 | 0.910000 | 12740000.0000 | 12740000.0007 | 199.900000 | 199.900000 | 25.480000 | 25.480000 | 110580.3328 | 110580.3328 |
+
+- THE PUBLISHED ROWS CARRY UA AND NO OVERALL COEFFICIENT, and that is not an omission. UA is the duty over the design log mean, so the hot-day rating cannot see U and the area separately at all. Measured rather than asserted, by rating the same bay at two different coefficients:
+| U, Btu an hour per ft2 per degF | bare surface, ft2 | UA, Btu an hour per degF | duty fraction | process out on the hot day, degF |
+| --- | --- | --- | --- | --- |
+| 4.500000 | 52125.749338 | 234565.8720 | 0.903226 | 159.677419 |
+| 5.100000 | 45993.308239 | 234565.8720 | 0.903226 | 159.677419 |
+| 45.000000 | 5212.574934 | 234565.8720 | 0.903226 | 159.677419 |
+
+- The surface column moves and the last three do not. A learner who has seen that understands what the rating holds fixed better than any sentence about it can teach them.
+
+# SECTION 19: The second method, and what two methods agreeing buys (owned by Expert m04)
+
+- The hot day above was rated by effectiveness-NTU. There is another classical way to the same answer, and it is genuinely independent: solve the duty out of the surface equation itself, at the fixed UA and at whatever log mean the new outlet and the new air rise produce.
+- If both methods are right they must agree, because a rated answer has to satisfy the surface equation it came from. So the product of the fixed UA and the hot-day log mean is a CHECK and not a restatement:
+| case | check ambient, degF | rated duty, Btu an hour | UA times the hot-day log mean, Btu an hour | the two as a ratio |
+| --- | --- | --- | --- | --- |
+| the studio bay | 86.000000 | 21161290.3226 | 21161290.3226 | 1.000000 |
+| the studio bay | 92.000000 | 20387096.7742 | 20387096.7742 | 1.000000 |
+| the studio bay | 98.000000 | 19612903.2258 | 19612903.2258 | 1.000000 |
+| the studio bay | 104.000000 | 18838709.6774 | 18838709.6774 | 1.000000 |
+| the studio bay | 112.000000 | 17806451.6129 | 17806451.6129 | 1.000000 |
+| the studio bay | 124.000000 | 16258064.5161 | 16258064.5161 | 1.000000 |
+| ANTAN | 86.000000 | 16857664.2336 | 16857664.2336 | 1.000000 |
+| ANTAN | 92.000000 | 16178832.1168 | 16178832.1168 | 1.000000 |
+| ANTAN | 98.000000 | 15500000.0000 | 15500000.0000 | 1.000000 |
+| ANTAN | 104.000000 | 14821167.8832 | 14821167.8832 | 1.000000 |
+| ANTAN | 112.000000 | 13916058.3942 | 13916058.3942 | 1.000000 |
+| ANTAN | 124.000000 | 12558394.1606 | 12558394.1606 | 1.000000 |
+
+- Every ratio in the last column is one to the precision this digest prints. TWO METHODS AGREE WHERE A SINGLE METHOD CAN ONLY BE CONSISTENT WITH ITSELF.
+- AND THAT IS THE LESSON OF THIS WHOLE COURSE, stated once, here. A rating that holds a duty and an outlet temperature that its own duty cannot produce satisfies NEITHER method. Checking it against a second method is what turns an answer into a result. The oracle behind the published rows above does exactly this: it bisects on the duty until the surface equation balances, and it never evaluates the effectiveness relation at all.
+- What an independent method is, and what it is not. Restating the same expression in SI units and converting back is a multiply followed by a divide: it checks the units and nothing else. Marching a differential equation to the answer a closed form claims, or bisecting on a different equation entirely, is a second method. The difference is whether the check could have failed for a reason other than a typing error.
+
+- The other places this digest shows two methods meeting, all of them in the golden columns above:
+| what | the engine route | the oracle route |
+| --- | --- | --- |
+| the log mean | the closed form with a logarithm | integrating the driving force it is the closed form of, which never evaluates a logarithm |
+| effectiveness, counter-current | the closed form | a fourth-order march of the two-stream system with a linear shot |
+| effectiveness, 1-2 shell | the closed form | a march of the three-stream shell and two-pass system, with the tube turn-around as a boundary condition |
+| the correction factor | the Bowman closed form | the ratio of the counter-current NTU to the 1-2 NTU inverted from that march |
+| the shell-count conversion | converting the whole-unit P to a single-shell P | marching N shells in series and recovering the whole-unit P |
+| the overall coefficient | the resistance sum referred to the outside | each term on its OWN area, referred to the outside at the end, with the wall by quadrature |
+| the tube-side Reynolds number | a mass velocity through a formed flow area | four times the mass flow over pi times the bore times the viscosity, which forms no area at all |
+| the bundle diameter | a ratio raised to a reciprocal exponent | bisecting on the diameter until the geometry form balances |
+| the fan power | the customary constant with inches of water in it | a pressure rise in pascals, which MEASURES the water density that constant is written against |
+| the hot day | effectiveness-NTU at fixed UA | bisecting the surface equation at the same fixed UA |
+
+- Read the last column for what it does NOT contain: a second copy of the first. Where a route could only have been a transcription, the golden file would tell you the two files agree and nothing more.
+
+# SECTION 20: What no route here can check: the held register, the fitted numbers and two measured roundings (owned by Expert m02 and m05)
+
+- The module exports a register of what it cannot source, and it carries 7 entries, counted here by reading the register itself. Every return that depends on one says so. No citation is invented for any of them, and NOTHING IN THIS COURSE GRADES ONE.
+- AND THE MODULE'S OWN HEADER SAYS SIX. Read the register: bundleConstants, dittusBoelterBand, dittusBoelterCoolingExponent, siederTateExponent, crossFlowF, defaultsProvenance, fanConstantWaterDensity. That is 7 entries against a header sentence that says six, and the register is the authority because it is the thing the returns point at. A COUNT IS WORTH MEASURING RATHER THAN QUOTING, even from the module that owns it, and this is the cheapest possible demonstration of why.
+| held item | what the engine does about it |
+| --- | --- |
+| bundleConstants | BUNDLE_K carries eight layout/pass pairs. Their source is not established in this repository, and the 45 and 90 degree rows carried here are IDENTICAL in all four pass counts, so the layout input does nothing between those two. 30 against 45 moves the bundle diameter by about 9 percent, so the input is not decorative in general. |
+| dittusBoelterBand | The validity band of the Dittus-Boelter fit, in Reynolds and in Prandtl, is not established in this repository. Re and Pr are returned on every call so they can be checked against the source the caller trusts. Nothing here grades them. |
+| dittusBoelterCoolingExponent | Only the heating exponent (Pr^0.4) is carried. The cooling exponent is not established here, and it is not a detail: at a Prandtl of 15 the two forms differ by about 31 percent on hi. A cooled tube side is REFUSED rather than answered with the heating form. |
+| siederTateExponent | The 0.14 exponent and the band it was fitted over are not established in this repository. |
+| crossFlowF | An air cooler is cross-flow, and the closed form or chart for its F is not established in this repository. `airCooler` therefore sizes on the COUNTER-CURRENT log mean with F = 1 and says so in its return (`fCorrection: null`). The area it reports is a counter-current-basis area and a real cross-flow unit needs more surface. The hot-day rating does NOT depend on this, because it holds effectiveness rather than assuming an arrangement. |
+| defaultsProvenance | kWallBtuHrFtF = 26 names no material; staticPressureInH2O = 0.6, fanEfficiency = 0.65 and motorEfficiency = 0.92 name no machine. They are pinned in DECLARED_CONSTANTS so that moving one is a reviewed act, which is not the same as validating one. |
+| fanConstantWaterDensity | The fan constant 6356 is written against a density of water this module does not state. It can be MEASURED rather than cited: 33000 ft.lbf/min per hp divided by 6356 and by 12 in/ft implies 62.3033 lb/ft3, which is water at roughly 80 F. The gate asserts that implied density, so moving 6356 in the engine and in the oracle together still fails. |
+
+- THE DIFFERENCE BETWEEN A PIN AND A VALIDATION, which is the most useful thing in this section. The declared constants below are pinned BY LITERAL in the engine gate. Pinning a number does not make it right. It makes changing it a reviewed act instead of a silent one, and that is worth having: it is not the same thing as evidence, and no lesson in this course may present it as evidence.
+| declared constant | value |
+| --- | --- |
+| dittusBoelterA | 0.023000 |
+| dittusBoelterReExp | 0.800000 |
+| dittusBoelterPrExpHeating | 0.400000 |
+| siederTateExp | 0.140000 |
+| laminarNusselt | 3.660000 |
+| transitionReLow | 2300 |
+| transitionReHigh | 10000 |
+| cpToLbFtHr | 2.419100 |
+| airMolecularWeight | 28.962500 |
+| gasConstantPsiaFt3LbmolR | 10.731600 |
+| standardBarometricPsia | 14.700000 |
+| airCpBtuLbF | 0.240000 |
+| fanConstant | 6356 |
+| defaultKWallBtuHrFtF | 26 |
+| defaultStaticPressureInH2O | 0.600000 |
+| defaultFanEfficiency | 0.650000 |
+| defaultMotorEfficiency | 0.920000 |
+
+| declared bound | value | why it is declared rather than published |
+| --- | --- | --- |
+| maxShellPasses | 6 | the correction factor climbs toward one as shells are added, so an unbounded box makes any duty reachable by typing a bigger number |
+| controllingMarginPct | 10 | a one-word verdict decided by a two percent gap is a coin toss, so below this margin the answer carries a note instead |
+
+- TWO OF THOSE CONSTANTS ARE MEASURED RATHER THAN PINNED, because they are roundings of exact derivations, and the residual each one causes can be measured out of the engine itself.
+- The Prandtl number at a unit viscosity is 30.238750 and the heat capacity and conductivity it was formed from are conditions of the case, so the conversion the engine used is 2.419100 (derived, the Prandtl number times the conductivity over the heat capacity). The engine's declared figure is 2.419100.
+- The Reynolds number at twice that viscosity is 11012.961500 against 22025.923000, a ratio of 0.500000 (derived), which is what a Reynolds number inversely proportional to viscosity has to give.
+- The golden file carries the exactly derived conversion beside the engine's rounded one: 2.419088 derived against 2.419100 in the engine, a ratio of 1.000004832191 (golden, and derived from those two golden figures).
+- The gas constant the air density uses: 10.731600 in the engine against 10.731577 derived from the SI gas constant, a ratio of 1.000002134913 (derived from those two figures).
+- NEITHER IS MOVED, and that is a decision rather than an oversight: moving either would move every shipped number that reads it, in this module and in the apps built on it. What is done instead is that the residual each one causes downstream is asserted to EQUAL the rounding, so the named cause is itself a check.
+- The Rankine offset the density uses is a literal inside that helper rather than a row of the table above, and it can be MEASURED out of two calls: densities of 0.076341600 and 0.068439697 lb per ft3 at 60.000000 and 120.000000 degF imply an offset of 459.670000 degR (derived, from those two densities and those two temperatures, because an ideal-gas density is inversely proportional to absolute temperature and the offset is the only unknown left).
+- And one constant that is MEASURED rather than cited: the fan constant implies a water density. The golden file carries it at 62.303335 lb per ft3 (golden), which is water at roughly the temperature of a warm afternoon. That is a MEASUREMENT and not a citation, and it is recorded as one. The oracle's fan route goes through pascals with that density and carries no customary constant at all, so moving the constant in both files still fails.
+
+- WHAT IS NOT REPAIRED AND WILL NOT BE, in this module, until a publication settles it:
+- BUNDLE_K carries eight layout/pass pairs. Their source is not established in this repository, and the 45 and 90 degree rows carried here are IDENTICAL in all four pass counts, so the layout input does nothing between those two. 30 against 45 moves the bundle diameter by about 9 percent, so the input is not decorative in general.
+- The validity band of the Dittus-Boelter fit, in Reynolds and in Prandtl, is not established in this repository. Re and Pr are returned on every call so they can be checked against the source the caller trusts. Nothing here grades them.
+- Only the heating exponent (Pr^0.4) is carried. The cooling exponent is not established here, and it is not a detail: at a Prandtl of 15 the two forms differ by about 31 percent on hi. A cooled tube side is REFUSED rather than answered with the heating form.
+- The 0.14 exponent and the band it was fitted over are not established in this repository.
+- An air cooler is cross-flow, and the closed form or chart for its F is not established in this repository. `airCooler` therefore sizes on the COUNTER-CURRENT log mean with F = 1 and says so in its return (`fCorrection: null`). The area it reports is a counter-current-basis area and a real cross-flow unit needs more surface. The hot-day rating does NOT depend on this, because it holds effectiveness rather than assuming an arrangement.
+- kWallBtuHrFtF = 26 names no material; staticPressureInH2O = 0.6, fanEfficiency = 0.65 and motorEfficiency = 0.92 name no machine. They are pinned in DECLARED_CONSTANTS so that moving one is a reviewed act, which is not the same as validating one.
+- The shell-side film coefficient also stays an INPUT. A rigorous shell-side coefficient needs stream analysis that belongs in a dedicated rating package, and this module has always said so.
+
+- THE GOLDEN FILE IS DECLARED SYNTHETIC AND THE REASON IS STATED. This repository carries no published heat exchanger case to take a row from, and inventing a citation would be worse than saying so. What stands in for published data is three things: route independence, the constant pins, and the analytic limits this digest has already shown, which are known truths that need no citation and which DISCRIMINATE.
+- The golden carries 19 sections and 75 rows (counted here by reading the file).
+| analytic limit | what it fixes |
+| --- | --- |
+| a thin cylindrical wall is a flat plate | the factor of two in the wall term, which no transcription check can fix because moving it in both files leaves the two files agreeing |
+| the log mean is strictly below the arithmetic mean at unequal ends | the substitution of one mean for the other, which was the worst paired plant the recon found |
+| the correction factor tends to one as P tends to zero | the whole shape of the correction curve at small cold rises |
+| the parallel ceiling and the 1-2 shell ceiling | the two closed forms at high NTU, where a wrong constant shows as a ceiling that is not reached |
+| every arrangement collapses onto one curve at a capacity ratio of zero | three separate branches against one another, at a limit where all three must agree |
+| counter-current flow has no ceiling | the claim that every arrangement has one, which is false and was in the help text |
+| self-consistency across the whole chain | a duty, a coefficient, a surface and a driving force that do not satisfy the equation they came from |
+
+# SECTION 21: HISTORY, and it is labelled as history in this title and in the line below it: what this engine was repaired for, and what each case teaches (owned by Expert m05 l01)
+
+EVERYTHING IN THIS SECTION IS HISTORY AND IS LABELLED AS HISTORY. Nothing above this line is. If you teach any of it, say plainly that it is what the engine used to do, the way this section does. A sentence about former behaviour that reads as current behaviour is the defect; the subject itself is not.
+
+This module was repaired after a recon raised findings against it, its published cases, its oracle and the studio that composes it. Four of them are worth teaching, because each one is a general lesson that happens to have an example here.
+
+1. A RATING THAT ASSERTED TWO NUMBERS ITS OWN ANSWER COULD NOT PRODUCE. Before FC6-0 the hot-day block held the process outlet temperature FIXED and scale the duty by the ratio of two log means. Those two things cannot both be true: if the duty falls, the outlet rises. The general lesson is that a result carrying several numbers has to be self-consistent, and that the cheapest way to find out is to compute one of them from the others.
+- The shape of the old error, in numbers that are CURRENT. At the studio bay design point the process capacity rate is the duty over the process drop, and the air capacity rate is the duty over the air rise:
+- Process capacity rate 200000.0000 and air capacity rate 666666.6667 Btu an hour per degF (derived, each from the design duty and its own temperature change).
+- So any duty on this bay implies an air rise of the duty over 666666.6667, and a process outlet of the inlet minus the duty over 200000.0000. A rating that reports a duty, an outlet and a rise has already said all three, whether it computed them together or not.
+- The rated answer at the studio's own check ambient satisfies all three: duty 18064516.1290, outlet 159.677419 degF, air rise 27.096774 degF.
+
+2. A COEFFICIENT COMPUTED AT A TUBE COUNT THE SAME SCREEN CONTRADICTED. Before FC6-0 the studio passed a hard-coded tube count into the film while printing a different count beside it. The general lesson is that a screen showing two numbers that disagree about the same thing is a screen where one of them was never computed, and that the fix is to close the loop rather than to choose a better constant.
+- The trail in Section 6 is what closing it looks like, and the table in Section 12 is what it costs: the film, the coefficient and the area at each count on the way.
+
+3. A CAPITAL LETTER THAT WAS A FORTY PERCENT ERROR. Before FC6-0 the arrangement was matched against one lowercase string, so anything else became counter-current silently. The general lesson is that a defaulted input is worse than a refused one, because a default answers a question the caller did not ask and never says it did. Section 2 shows what the module does now with all three cases: the lowercase string, the capitalised one and an unknown one.
+
+4. A GATE THAT COULD NOT CATCH ANY OF IT. The suite the module shipped with was green against every one of these. The general lesson is the one this whole programme runs on: a gate that restates the formula it is checking has not checked it, and the way to find out is to break the engine on purpose and see whether the gate notices. Section 19 is what a check that could have failed looks like.
+
+- WHERE THE REST OF IT LIVES, AND HOW TO READ IT. The engine source records what changed in its own comments, because a good repair records what it changed. Those comments are PROVENANCE. A sentence lifted out of one arrives with no frame around it, and a writer cannot frame what they did not know was history. The count below is MEASURED by reading the vendored source with a stated rule rather than quoted from a report.
+- Comment lines in packages/engines/engines/facilities/heatTransfer.js carrying "used to", "no longer" or this repair's own name: 11. Widening the rule to nine keywords takes the same file to 16.
+- Both the file and the rule are stated because a count of this kind means nothing without them. A count across the whole vendored tree is DELIBERATELY NOT QUOTED, because it answers to work in other modules and would go stale at the next facilities wave without anything in this engine changing.
+
+- RECON.md, FINDINGS.md and FINDINGS-heattransfer.md are provenance too, and their numbers are STALE BY CONSTRUCTION: the repair changed the app own defaults, so a figure from before it is a figure about a machine that no longer exists. Read them to understand the work. Never quote one.
+
+# GENERATOR AUDIT: 45 refusal-labelled call(s), every one of which the engine refused; 319 answer-labelled call(s), every one of which the engine answered; 122 engine call site(s) in this generator, 122 labelled, 7 exempt by name because they have no error contract to check (bundleConstants, airDensityLbFt3).

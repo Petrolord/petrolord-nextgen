@@ -1,0 +1,307 @@
+{
+  "app_slug": "heattransfer",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-rating-and-the-other-question",
+      "title": "Rating, and the Other Question",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-effectiveness-is-a-fraction-of-a-maximum",
+          "title": "Effectiveness is a fraction of a maximum",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-ntu-is-a-surface-written-dimensionlessly",
+          "title": "NTU is a surface written dimensionlessly",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-an-identity-that-proves-nothing",
+          "title": "An identity that proves nothing",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-ceilings",
+          "title": "Two ceilings",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-arrangement-with-no-ceiling",
+          "title": "The arrangement with no ceiling",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-limits-that-discriminate",
+      "title": "Limits That Discriminate",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-capacity-ratio-of-zero",
+          "title": "A capacity ratio of zero",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-three-closed-forms-and-one-answer",
+          "title": "Three closed forms and one answer",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-one-published-case-cannot-find",
+          "title": "What one published case cannot find",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-golden-file-declared-synthetic",
+          "title": "A golden file declared synthetic",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-air-cooler",
+      "title": "The Air Cooler",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-a-bay-and-the-air-it-is-given",
+          "title": "A bay, and the air it is given",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-draft-type-is-not-a-detail",
+          "title": "The draft type is not a detail",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-barometer-is-an-input",
+          "title": "The barometer is an input",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-correction-this-bay-declines",
+          "title": "The correction this bay declines",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-six-states-a-bay-will-not-compute",
+          "title": "Six states a bay will not compute",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-hot-day",
+      "title": "The Hot Day",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-a-machine-holds-on-a-hot-afternoon",
+          "title": "What a machine holds on a hot afternoon",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-four-columns-that-do-not-move",
+          "title": "Four columns that do not move",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-duty-and-the-outlet-go-together",
+          "title": "The duty and the outlet go together",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-cold-day-is-a-capability",
+          "title": "A cold day is a capability",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-second-method-and-what-it-buys",
+          "title": "The second method, and what it buys",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-what-the-method-does-not-know",
+      "title": "What the Method Does Not Know",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-what-this-engine-was-repaired-for",
+          "title": "What this engine was repaired for",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-pin-is-not-a-validation",
+          "title": "A pin is not a validation",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-roundings-measured",
+          "title": "Two roundings, measured",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-bundle-rows-that-are-identical",
+          "title": "Two bundle rows that are identical",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-whole-chain-on-one-machine",
+          "title": "The whole chain on one machine",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-capstone-worked",
+          "title": "The capstone worked",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-rating-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-this-engine-hands-over",
+          "title": "Where this engine hands over",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

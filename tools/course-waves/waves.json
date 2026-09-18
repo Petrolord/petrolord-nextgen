@@ -323,5 +323,41 @@
       "digest.txt": "0adc31a65e7e9adbd8a3b2246635d41500415015c45990c268af797ed8a78236",
       "fields.json": "fc0b8561b287aa99308ce90ce973b92e07d174c609585c9da467f67670f1338c"
     }
+  },
+  "heattransfer": {
+    "course": "FC6",
+    "live": "/root/fc-wip-heattransfer",
+    "kit": "full",
+    "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest, the graded answers, the precision declaration, wave.json, the dump, the teaching fields, the capstone generator, the capstone conditions, the structure, the three migration headers, the course, go-live and seed generators, the SQL verifier, the dry run and the owner's apply script. The kit became \"full\" with the seed ladder.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "fc6_dump.mjs",
+      "fc6_fields.mjs",
+      "fc6_capstone.mjs",
+      "fc6_fields_capstone.mjs",
+      "structure.py",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "dryrun_fc6.sh",
+      "verify_sql.py",
+      "apply_fc6_heattransfer.sh",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "oracle_heattransfer.py",
+      "source_prose.rules.mjs",
+      "truth-heattransfer.json"
+    ],
+    "pins": {
+      "digest.txt": "a7f7b44a42e673348f15a2ddce929decf2e58f406cf9d42bc90cf28406292a1e",
+      "fields.json": "ba4c8e63d1dd591e11e7b213bca81a6e306fe3cef006b836b3264c771dca1dcd"
+    },
+    "headingsNoGeneratorSpells": 21
   }
 }

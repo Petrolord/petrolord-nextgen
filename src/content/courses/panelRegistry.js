@@ -199,6 +199,11 @@ export const PANELS = {
   'fc-sizing-explorer': React.lazy(() => import('@/components/course/panels/relief/SizingExplorer')),
   'fc-fire-drum-explorer': React.lazy(() => import('@/components/course/panels/relief/FireDrumExplorer')),
   'fc-blowdown-explorer': React.lazy(() => import('@/components/course/panels/relief/BlowdownExplorer')),
+
+  // FC6 Heat Exchange & Cooling
+  'fc-exchanger-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/ExchangerExplorer')),
+  'fc-coefficient-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/CoefficientExplorer')),
+  'fc-rating-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/RatingExplorer')),
 };
 
 export function resolvePanel(id) {

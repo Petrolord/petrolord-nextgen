@@ -1,0 +1,305 @@
+{
+  "app_slug": "heattransfer",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-this-engine-rates",
+      "title": "What This Engine Rates and Sizes",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-four-questions-about-one-exchanger",
+          "title": "Four questions about one exchanger",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-every-door-answers-with-an-object",
+          "title": "Every door answers with an object",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-it-refuses-to-guess",
+          "title": "What it refuses to guess",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-units-and-the-reference-area",
+          "title": "The units and the reference area",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-stream-and-its-capacity-rate",
+      "title": "The Stream and Its Capacity Rate",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-capacity-rate-is-the-whole-of-a-stream",
+          "title": "A capacity rate is the whole of a stream",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-duty-a-stated-outlet-sets",
+          "title": "The duty a stated outlet sets",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-same-duty-stated-three-ways",
+          "title": "The same duty stated three ways",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-smaller-capacity-rate-governs",
+          "title": "The smaller capacity rate governs",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-refusals-that-protect-a-balance",
+      "title": "The Refusals That Protect a Balance",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-an-outlet-that-moves-the-wrong-way",
+          "title": "An outlet that moves the wrong way",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-duty-that-crosses-the-streams",
+          "title": "A duty that crosses the streams",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-duty-parallel-flow-cannot-deliver",
+          "title": "A duty parallel flow cannot deliver",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-an-arrangement-given-three-ways",
+          "title": "An arrangement given three ways",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-log-mean-driving-force",
+      "title": "The Log Mean Driving Force",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-two-ends-and-which-two-they-are",
+          "title": "Two ends, and which two they are",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-arithmetic-mean-it-sits-below",
+          "title": "The arithmetic mean it sits below",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-equal-ends-and-what-the-engine-says",
+          "title": "Equal ends, and what the engine says",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-shell-reading-and-its-note",
+          "title": "The shell reading and its note",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-a-log-mean-cannot-be-asked",
+          "title": "What a log mean cannot be asked",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-surface-and-the-tubes",
+      "title": "The Surface and the Tubes",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-surface-out-of-three-numbers",
+          "title": "A surface out of three numbers",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-clean-surface-and-dirty-surface",
+          "title": "Clean surface and dirty surface",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-surface-of-one-tube",
+          "title": "The surface of one tube",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-rounding-up-twice",
+          "title": "Rounding up twice",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-overshoot-is-always-positive",
+          "title": "The overshoot is always positive",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-studio-case-end-to-end",
+          "title": "The studio case end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-loop-and-its-trail",
+          "title": "The loop, and its trail",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-capstone-worked",
+          "title": "The capstone worked",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-exchanger-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

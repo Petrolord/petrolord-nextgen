@@ -1,0 +1,115 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC6 Expert m01, Rating and the Other Question. Digest section 15, with the
+# capacity ratio of 0.000000 row it shares with section 16. 15 questions.
+
+q(1, "Effectiveness is a fraction of a maximum. What is that maximum formed from?",
+ "The smaller of the two capacity rates, multiplied by the difference between the two inlet temperatures.",
+ ["The larger of the two capacity rates, multiplied by the difference between the two inlet temperatures.",
+  "The smaller of the two capacity rates, multiplied by the log mean driving force of the unit.",
+  "UA for the unit as built, multiplied by the difference between the two inlet temperatures."],
+ "Nothing about the arrangement enters the maximum. The arrangement enters the fraction, which is why one NTU and one capacity ratio give three different answers.")
+
+q(3, "At an NTU of 1.400000 and a capacity ratio of 0.650000 the three arrangements answer 0.643699, 0.545902 and 0.588924. Which figure belongs to the 1-2 shell unit?",
+ "0.588924, which falls between the other two figures.",
+ ["0.643699, which is the highest of the three at this NTU and capacity ratio.",
+  "0.545902, which is the lowest of the three at this NTU and capacity ratio.",
+  "0.588924 belongs to parallel flow here and 0.545902 to the 1-2 shell unit."],
+ "Counter-current leads at 0.643699 and parallel trails at 0.545902. A 1-2 shell unit sits between the two arrangements, because one tube pass runs against the shell flow and the other runs with it, and 0.588924 sits between them accordingly.")
+
+q(0, "A counter-current rating at a capacity ratio of 0.350000 comes back with its ceiling field. What does that field carry?",
+ "No number at all, because this arrangement has no ceiling below one.",
+ ["0.740741, which is the effectiveness a counter-current unit cannot pass at this capacity ratio.",
+  "0.830054, which counter-current flow shares with a 1-2 shell unit at this capacity ratio.",
+  "1.000000, which is the ceiling every arrangement carries at every capacity ratio."],
+ "0.740741 is the parallel ceiling at 0.350000 and 0.830054 is the 1-2 shell ceiling there. Counter-current reports none. Every arrangement carries 1.000000 only at a capacity ratio of 0.000000.")
+
+q(2, "At a capacity ratio of 1.000000, which pair of ceilings does the engine report?",
+ "Parallel 0.500000 and 1-2 shell 0.585786.",
+ ["Parallel 0.585786 and 1-2 shell 0.500000.",
+  "Parallel 0.606061 and 1-2 shell 0.703560.",
+  "Parallel 0.500000 and 1-2 shell 0.703560."],
+ "The 1-2 shell ceiling stands above the parallel one on every row where the two differ, so 0.585786 is the shell figure. The pair 0.606061 and 0.703560 belongs to a capacity ratio of 0.650000.")
+
+q(1, "Asked for an effectiveness of 0.999990 at a capacity ratio of 0.650000, what do the three arrangements do?",
+ "Counter-current answers with an NTU of 29.894634, and the other two refuse, each carrying its own ceiling.",
+ ["All three answer, and the counter-current figure of 29.894634 is the smallest of the three NTUs returned.",
+  "All three refuse, because no arrangement reaches an effectiveness of 0.999990 at any area whatsoever.",
+  "Counter-current refuses because the request sits above one minus the capacity ratio, and the other two answer."],
+ "The counter-current column answers at 0.900000, 0.990000, 0.999000 and 0.999990. The other two stop at 0.606061 and 0.703560 however high the request goes, because those ceilings depend on the capacity ratio alone.")
+
+q(3, "A rating asked at a capacity ratio of 1.400000 is refused. What does the refusal say about the input?",
+ "That the ratio is the smaller capacity rate over the larger by definition, so a value above one means the two rates were passed the wrong way round.",
+ ["That a capacity ratio above one is a temperature cross, so the two outlet temperatures the case implies come back beside the message as evidence.",
+  "That the engine has clamped the value to one and answered at a capacity ratio of 1.000000, with the clamp recorded in a field of its own.",
+  "That the value sits outside the bound of 1 to 6 this module declares for that input."],
+ "Clamping would have produced a plausible effectiveness for a machine with its streams swapped, which is the kind of answer nobody checks. The refusal names the definition instead.")
+
+q(2, "The engine takes an effectiveness out of an NTU and then recovers the NTU from that effectiveness, and the figure it started with comes back on every published row. What has that established?",
+ "That the algebra was not mistyped twice in opposite directions, and nothing further.",
+ ["That the closed form for effectiveness carries the right constants, since a wrong constant would break the round trip.",
+  "That the engine agrees with the published file, since the published file is written by the same inversion.",
+  "That all three arrangements agree at both ends of the capacity ratio range."],
+ "An identity between a function and its own inverse holds whether or not either one is correct. Put a wrong constant in the closed form, invert that same wrong form, and the round trip still closes.")
+
+q(0, "Where do this module's published effectivenesses actually come from?",
+ "An oracle that marches the two-stream system with a fourth-order scheme and a linear shot, and marches a three-stream system with the tube turn-around as a boundary condition for the shell form.",
+ ["The engine's own closed forms, restated in SI units and converted back to field units.",
+  "The engine's own closed forms, inverted once so that the recovered NTU can be printed beside the input.",
+  "A published chart for this class of exchanger, read at each NTU and capacity ratio in the file."],
+ "Neither oracle route evaluates the closed form the engine uses. That is what makes a golden figure standing beside an engine figure two methods meeting rather than one method restated.")
+
+q(1, "Parallel flow at a capacity ratio of 0.650000 returns 0.597755 at an NTU of 2.600000, 0.605699 at 4.500000 and 0.606059 at 8.000000. What is the figure 0.606061?",
+ "The ceiling that column is approaching, which is where the relation itself is heading.",
+ ["The effectiveness the same unit reaches once the NTU passes 16.742253.",
+  "The counter-current effectiveness at the same capacity ratio and an NTU of 8.000000.",
+  "The 1-2 shell ceiling at the same capacity ratio, which parallel flow approaches from below."],
+ "Counter-current at that capacity ratio and an NTU of 8.000000 gives 0.977841, and the 1-2 shell ceiling there is 0.703560. Adding surface past 0.606059 buys effectiveness in the sixth decimal place.")
+
+q(3, "A parallel unit refused at a capacity ratio of 0.650000 reports that it cannot exceed an effectiveness of 0.606. What does a caller that displays only the message throw away?",
+ "The evidence field, which carries the same ceiling as 0.606061 at full precision.",
+ ["The arrangement, which this engine reports only in the field beside the message.",
+  "Nothing, because 0.606 and 0.606061 are the same figure at the precision the engine works to.",
+  "The 1-2 shell ceiling of 0.703560, which the same refusal carries beside the parallel one."],
+ "The message rounds to three decimals so it reads. The number a designer needs is the one in the field, and a 1-2 shell request is a separate call with a separate refusal.")
+
+q(2, "A rating of a real machine starts from UA rather than from an NTU. How does the NTU follow?",
+ "Divide UA by the smaller of the two capacity rates.",
+ ["Divide UA by the larger of the two capacity rates.",
+  "Divide UA by the difference between the two inlet temperatures.",
+  "Multiply UA by the capacity ratio of the unit."],
+ "NTU is the coefficient times the area over the smaller capacity rate, which is why the hot-day module in this tier holds UA and never computes an area at all.")
+
+q(0, "At a capacity ratio of 0.000000 the ceiling field carries 1.000000 for all three arrangements, counter-current included. Why is that consistent with counter-current flow having no ceiling anywhere else?",
+ "One is the value the relation approaches there, so the field reports a limit rather than a bound.",
+ ["At that capacity ratio only the counter-current relation is defined, so the other two entries are copies of it.",
+  "The engine prints 1.000000 wherever it has no ceiling to report, and leaves the field empty only above a ratio of zero.",
+  "A capacity ratio of 0.000000 turns every arrangement into parallel flow, and the parallel ceiling there is 1.000000."],
+ "With nothing limiting the cold side there is no arrangement penalty left to pay. The empty field elsewhere says the relation approaches nothing below one, and here it approaches one.")
+
+q(1, "Read the effectiveness table down a column and then across a row. What two directions does it show?",
+ "Effectiveness rises with NTU, and it falls as the capacity ratio rises.",
+ ["Effectiveness rises with NTU, and it rises again as the capacity ratio rises.",
+  "Effectiveness falls with NTU, and it falls further as the capacity ratio rises.",
+  "Effectiveness rises with NTU, and it does not depend on the capacity ratio at all."],
+ "Counter-current at a capacity ratio of 0.350000 runs 0.213502 at an NTU of 0.250000 up to 0.996407 at 8.000000. At a fixed NTU of 1.400000 counter-current runs 0.753403, 0.695454, 0.643699 and 0.583333 as the ratio rises.")
+
+q(3, "Why does this module report a fraction and let the duty follow from it?",
+ "A duty depends on the inlet temperatures of the day and a fraction does not, so a fixed surface and fixed flows hold the fraction while the weather moves.",
+ ["A fraction can be compared between arrangements and a duty cannot, because a duty carries units and a fraction does not.",
+  "A duty would need the cross-flow correction this module cannot source, and a fraction needs no correction at all.",
+  "A fraction is what the published file records, so a duty would have to be converted before it could be checked."],
+ "That is exactly what the hot-day rating in this tier turns on. Fix the surface and the air mass and the fraction holds at every ambient.")
+
+q(2, "Counter-current flow returns an NTU of 29.894634 for an effectiveness of 0.999990. What is that figure?",
+ "A real number and a ruinous design, returned because the relation has a value there and the size of it is what a designer needs.",
+ ["A refusal expressed as a number, which this engine returns for counter-current flow in place of the named error string the other two arrangements carry.",
+  "The largest NTU counter-current flow can carry at a capacity ratio of 0.650000.",
+  "The NTU at which counter-current flow finally meets the 1-2 shell ceiling of 0.703560."],
+ "Each extra nine of effectiveness costs more surface than the nine before it. The limit on this arrangement is a budget rather than a physical bound, and the module leaves that judgement where it belongs.")
+
+emit(Q, '/root/wt-fc6-nextgen/tools/course-banks/heattransfer/advanced/fc6a_m01.json', expect_n=15)
+finish()

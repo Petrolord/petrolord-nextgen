@@ -1,0 +1,307 @@
+{
+  "app_slug": "heattransfer",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-p-r-and-the-correction-factor",
+      "title": "P, R and the Correction Factor",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-two-groups-off-four-temperatures",
+          "title": "Two groups off four temperatures",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-factor-computed-rather-than-typed",
+          "title": "A factor computed rather than typed",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-warning-on-a-steep-curve",
+          "title": "The warning on a steep curve",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-limit-as-p-tends-to-zero",
+          "title": "The limit as P tends to zero",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-correction-cannot-be-asked",
+          "title": "What the correction cannot be asked",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-shells-in-series",
+      "title": "Shells in Series",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-equivalent-single-shell-p",
+          "title": "The equivalent single-shell P",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-a-second-shell-buys",
+          "title": "What a second shell buys",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-bound-this-module-declares",
+          "title": "A bound this module declares",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-infeasible-and-inefficient-are-different",
+          "title": "Infeasible and inefficient are different",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-coefficient-from-its-parts",
+      "title": "The Coefficient From Its Parts",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-five-resistances-in-series",
+          "title": "Five resistances in series",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-which-area-a-coefficient-is-referred-to",
+          "title": "Which area a coefficient is referred to",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-inside-terms-and-the-diameter-ratio",
+          "title": "The inside terms and the diameter ratio",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-fouling-costs-and-the-identity-in-it",
+          "title": "What fouling costs, and the identity in it",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-naming-the-controlling-resistance",
+          "title": "Naming the controlling resistance",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-wall-and-a-limit-that-fixes-a-factor",
+      "title": "The Wall, and a Limit That Fixes a Factor",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-smallest-term-usually",
+          "title": "The smallest term, usually",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-thin-wall-is-a-flat-plate",
+          "title": "A thin wall is a flat plate",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-a-transcription-cannot-catch",
+          "title": "What a transcription cannot catch",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-margin-that-decided-a-verdict",
+          "title": "The margin that decided a verdict",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-tube-side-film",
+      "title": "The Tube Side Film",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-reynolds-prandtl-and-the-tube-count",
+          "title": "Reynolds, Prandtl and the tube count",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-three-regimes-and-one-refusal",
+          "title": "Three regimes and one refusal",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-laminar-film-does-not-move-with-flow",
+          "title": "A laminar film does not move with flow",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-band-nobody-here-can-state",
+          "title": "A band nobody here can state",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-exponent-this-module-declines",
+          "title": "The exponent this module declines",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-studio-case-coefficient-first",
+          "title": "The studio case, coefficient first",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-capstone-worked",
+          "title": "The capstone worked",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "fc-coefficient-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

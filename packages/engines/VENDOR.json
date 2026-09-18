@@ -28,8 +28,8 @@
     },
     {
       "domain": "facilities",
-      "engineFiles": 6,
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "engineFiles": 7,
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. The remaining five facilities engines have no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     }
   ],
   "localOnly": [
@@ -520,19 +520,20 @@
       "path": "__tests__/facilities.controlvalve.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "__tests__/facilities.corrosion.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "__tests__/facilities.heattransfer.test.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "FC6 Heat Exchange & Cooling vendors the heat transfer family from engines main AFTER the FC6-0 repair merged (engines PR #202, merge e4377b3), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at e4377b3, proved path by path over the WALKED IMPORT CLOSURE (five paths, three edges, and heatTransfer.js imports nothing at all) and byte-compared against the Suite's own vendoring of the same repair (Suite PR #499, merge 8a371c94, vendor pin e4377b3e), so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC6 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "e11c582b75abc42a1bbb1653a8cfb715d2616302"
     },
     {
       "path": "__tests__/facilities.linehydraulics.test.js",
@@ -545,7 +546,7 @@
       "path": "__tests__/facilities.producedwater.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "__tests__/facilities.pumps.test.js",
@@ -565,7 +566,7 @@
       "path": "__tests__/facilities.tanksmetering.test.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "__tests__/production.choke.test.js",
@@ -585,19 +586,20 @@
       "path": "engines/facilities/controlValve.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "engines/facilities/corrosion.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "engines/facilities/heatTransfer.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "FC6 Heat Exchange & Cooling vendors the heat transfer family from engines main AFTER the FC6-0 repair merged (engines PR #202, merge e4377b3), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at e4377b3, proved path by path over the WALKED IMPORT CLOSURE (five paths, three edges, and heatTransfer.js imports nothing at all) and byte-compared against the Suite's own vendoring of the same repair (Suite PR #499, merge 8a371c94, vendor pin e4377b3e), so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC6 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "64c58416e4e0a5d134eabbc88affd6584b63350b"
     },
     {
       "path": "engines/facilities/lineHydraulics.js",
@@ -610,13 +612,13 @@
       "path": "engines/facilities/metering.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "engines/facilities/producedWater.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "engines/facilities/pumps.js",
@@ -636,7 +638,7 @@
       "path": "engines/facilities/storageTank.js",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "engines/production/chokePerformance.js",
@@ -663,19 +665,20 @@
       "path": "test-data/facilities/goldens/controlvalve_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "test-data/facilities/goldens/corrosion_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "test-data/facilities/goldens/heattransfer_cases.json",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "FC6 Heat Exchange & Cooling vendors the heat transfer family from engines main AFTER the FC6-0 repair merged (engines PR #202, merge e4377b3), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at e4377b3, proved path by path over the WALKED IMPORT CLOSURE (five paths, three edges, and heatTransfer.js imports nothing at all) and byte-compared against the Suite's own vendoring of the same repair (Suite PR #499, merge 8a371c94, vendor pin e4377b3e), so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC6 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "60a372af6b2fa644d885f6ce9214787361618120"
     },
     {
       "path": "test-data/facilities/goldens/linehydraulics_cases.json",
@@ -688,7 +691,7 @@
       "path": "test-data/facilities/goldens/producedwater_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "test-data/facilities/goldens/relief_cases.json",
@@ -701,7 +704,7 @@
       "path": "test-data/facilities/goldens/tanksmetering_cases.json",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "tools/validation/facilities/FINDINGS-rotating.md",
@@ -721,19 +724,27 @@
       "path": "tools/validation/facilities/oracle_controlvalve.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_corrosion.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_heattransfer.py",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "FC6 Heat Exchange & Cooling vendors the heat transfer family from engines main AFTER the FC6-0 repair merged (engines PR #202, merge e4377b3), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at e4377b3, proved path by path over the WALKED IMPORT CLOSURE (five paths, three edges, and heatTransfer.js imports nothing at all) and byte-compared against the Suite's own vendoring of the same repair (Suite PR #499, merge 8a371c94, vendor pin e4377b3e), so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC6 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "7b46f5ca279378ee3fdf2b81c43c8c4329ff1e06"
+    },
+    {
+      "path": "tools/validation/facilities/FINDINGS-heattransfer.md",
+      "kind": "extra",
+      "group": "0-partial-domain-facilities",
+      "reason": "The FC6-0 heat transfer wave's own findings record, written by engines PR #202 and absent from the canonical pin 709172f, so it reads as extra. It is vendored with the heat transfer family it documents, for the same reason FINDINGS-rotating.md is vendored with the pumps and compression family and FINDINGS-producedwater.md with the produced water one: a module vendored without the record of what its repair decided and what it held is vendored half. It clears when canonical is next advanced.",
+      "vendoredSha": "230b30c7c7de5fc07ccf762e10a5110a676b9901"
     },
     {
       "path": "tools/validation/facilities/oracle_linehydraulics.py",
@@ -746,7 +757,7 @@
       "path": "tools/validation/facilities/oracle_producedwater.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "tools/validation/facilities/oracle_relief.py",
@@ -759,7 +770,7 @@
       "path": "tools/validation/facilities/oracle_tanksmetering.py",
       "kind": "missing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and relief.js for FC5 Relief & Flare Systems. Six facilities engines remain unvendored because no NextGen course reads them. This path belongs to one of those six, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC5 all landed after it was measured."
+      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, relief.js for FC5 Relief & Flare Systems, and heatTransfer.js for FC6 Heat Exchange & Cooling. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4, FC5 and FC6 all landed after it was measured."
     },
     {
       "path": "__tests__/earthmodel.adjust.test.js",
