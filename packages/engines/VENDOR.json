@@ -2,7 +2,7 @@
   "$comment": "Vendoring contract for packages/engines. Checked by tools/check-vendored-engines.mjs; see that file for the model. Every deviation from canonical is enumerated below with a reason, and every differing or extra path is pinned to the blob currently vendored, so a second drift on an already-known path still fails.",
   "canonical": {
     "repo": "git@github.com:Petrolord/petrolord-engines.git",
-    "commit": "675962130ed23df405074a9ab34f8e0235ddbcd9",
+    "commit": "5cbdca5fb78cf83771ede4119fb4a92cb7aacaa9",
     "manifest": "VENDOR.manifest"
   },
   "floors": {
@@ -29,7 +29,7 @@
     {
       "domain": "assurance",
       "engineFiles": 10,
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     }
   ],
   "localOnly": [
@@ -513,319 +513,319 @@
       "path": "__tests__/assurance.audit.test.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/assurance.compliance.test.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/assurance.copy.test.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/assurance.documents.test.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/assurance.goldens.test.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/assurance.instants.test.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/assurance.iso.test.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/assurance.lessons.test.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/assurance.moc.test.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/assurance.peerReview.test.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/assurance.quality.test.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/assurance.risk.test.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/helpers/assuranceGoldens.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "engines/assurance/auditManagement.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "engines/assurance/calendar.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "engines/assurance/complianceStatus.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "engines/assurance/documentControl.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "engines/assurance/isoCompliance.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "engines/assurance/lessonsLearned.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "engines/assurance/managementOfChange.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "engines/assurance/peerReview.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "engines/assurance/qualityAssurance.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "engines/assurance/riskScoring.js",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "test-data/assurance/goldens/auditManagement_cases.json",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "test-data/assurance/goldens/calendar_cases.json",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "test-data/assurance/goldens/complianceStatus_cases.json",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "test-data/assurance/goldens/documentControl_cases.json",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "test-data/assurance/goldens/isoCompliance_cases.json",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "test-data/assurance/goldens/lessonsLearned_cases.json",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "test-data/assurance/goldens/managementOfChange_cases.json",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "test-data/assurance/goldens/peerReview_cases.json",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "test-data/assurance/goldens/qualityAssurance_cases.json",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "test-data/assurance/goldens/riskScoring_cases.json",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/FINDINGS-audit.md",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/FINDINGS-calendar.md",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/FINDINGS-compliance.md",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/FINDINGS-documents.md",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/FINDINGS-iso.md",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/FINDINGS-lessons.md",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/FINDINGS-moc.md",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/FINDINGS-peer-review.md",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/FINDINGS-quality.md",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/FINDINGS-risk.md",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/oracle_audit.py",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/oracle_calendar.py",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/oracle_compliance.py",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/oracle_documents.py",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/oracle_iso.py",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/oracle_lessons.py",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/oracle_moc.py",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/oracle_peer_review.py",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/oracle_quality.py",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "tools/validation/assurance/oracle_risk.py",
       "kind": "missing",
       "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 5cbdca5 (AS12 onward)."
     },
     {
       "path": "__tests__/earthmodel.adjust.test.js",
