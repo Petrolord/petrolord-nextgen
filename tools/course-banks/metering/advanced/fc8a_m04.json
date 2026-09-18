@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "This tank has a shell height of 36.000000 ft and a design liquid level of 34.600000 ft, and the fire result returns an effective wetted height of 30.000000 ft. What has happened?",
+  "options": [
+   "The standard's own height limit has capped the height that counts, so the shell above it takes no credit for heat from the fire.",
+   "The height has been taken to the design liquid level and then reduced by the course height of the top course.",
+   "The engine has used the height of the vapour space rather than the height of the liquid.",
+   "The height has been cut because the wetted area fell into a band with its own height basis."
+  ],
+  "answer": 0,
+  "explanation": "The wetted area of 5881.0614 ft2 was formed on 30.000000 ft rather than on 34.600000 ft, which is why the two figures are returned beside one another."
+ },
+ {
+  "prompt": "Which sentence does the engine write when the wetted height cap binds?",
+  "options": [
+   "A note saying the wetted area has been limited to the area of the band the tank falls in, so a taller tank cannot be moved into a higher band by its height alone.",
+   "A note saying the level used for fire exposure is the design liquid level.",
+   "A note saying the shell above the cap is credited at a reduced rate.",
+   "`only the wetted shell below 30 ft counts for fire venting (API 2000): a flame does not reach higher in the standard's basis`"
+  ],
+  "answer": 3,
+  "explanation": "The basis assumes a pool fire around the tank, and the relation was established for the shell a flame of that kind envelops."
+ },
+ {
+  "prompt": "The engine is asked for the fire case on a tank with a 48 ft liquid column. What effective wetted height comes back?",
+  "options": [
+   "48 ft, because the cap applies to the area rather than to the height and a taller liquid column is wetted shell like any other shell.",
+   "34.600000 ft, because the engine falls back to the design liquid level of the geometry it was given when a column exceeds the cap.",
+   "30.000000 ft, the same as on this tank, because the cap binds on both.",
+   "A refusal, because a liquid column above the cap is outside the basis the heat input relation was established over."
+  ],
+  "answer": 2,
+  "explanation": "A taller tank does not get a larger fire duty out of its extra height, which is why the returned height is printed beside the area."
+ },
+ {
+  "prompt": "Where does this tank sit in the heat input bands, and what duty comes with it?",
+  "options": [
+   "In the band from 1000 to 2800 ft2, at a duty of 14089436.4220 Btu/hr, which is the duty the engine returns at the top of that band.",
+   "In the band above 2800 ft2, at a fire duty of 25892440.2513 Btu/hr with an environment factor of 1.000000.",
+   "In the band from 200 to 1000 ft2, at a duty of 9937139.0067 Btu/hr.",
+   "In the band above 2800 ft2, at a duty of 19646433.0614 Btu/hr, which is the figure the sweep returns for the largest area it was run at."
+  ],
+  "answer": 1,
+  "explanation": "The wetted area of 5881.0614 ft2 puts the tank in the top band, and 19646433.0614 Btu/hr belongs to the sweep row at 4200.0000 ft2."
+ },
+ {
+  "prompt": "Across the whole sweep of wetted areas the vent column comes back null on every row. What does that tell a reader?",
+  "options": [
+   "That the sweep was run with the vent calculation switched off.",
+   "That a vent capacity is returned only below an environment factor of 1.000000.",
+   "That the refusal is not a property of one tank: the engine returns no vent capacity at any wetted area.",
+   "That the vent capacity is returned in a separate result the sweep does not print, so a caller who needs it asks the fire venting function a second time."
+  ],
+  "answer": 2,
+  "explanation": "Ten swept areas return ten duties and not one capacity, so the null column is the behaviour itself rather than a gap in how the rows were made."
+ },
+ {
+  "prompt": "Why does the engine refuse to turn the duty it has just computed into a required vent capacity?",
+  "options": [
+   "`the required vent capacity is withheld. Turning this duty into scfh of air equivalent needs the API 2000 air-equivalence relation, and this package does not carry it. The relation that used to be here divided by the square root of an absolute temperature beside a packaged field constant, which cannot both be right, and the two plausible forms of it differ by a factor of about 24. An emergency vent sized 24 times too small is how a tank is destroyed, so no figure is offered here. Size the vent from API 2000 against the heat input above, or from the vent manufacturer's certified capacity curve`",
+   "Because the duty of 25892440.2513 Btu/hr is itself an extrapolation above the top band edge at 2800.0000 ft2, so any capacity taken from it would carry that extrapolation forward into a vent size.",
+   "Because the environment factor of 1.000000 is the case with no credit taken, and the engine will not convert a duty into a capacity until a drainage credit has been justified by the caller.",
+   "Because the conversion depends on the vapour the product makes under fire exposure, and this package takes no vapour pressure at all in the fire calculation."
+  ],
+  "answer": 0,
+  "explanation": "The message names the relation it needs, says the package does not carry it, says what is wrong with the candidate it will not use, and gives the reader two routes to the answer."
+ },
+ {
+  "prompt": "What makes the factor of about 24 decisive, when engineering works with uncertain quantities all the time?",
+  "options": [
+   "A factor of that size cannot be carried through the units, so the two forms would give answers in different units and only one of them could be quoted as scfh of air.",
+   "A disagreement of that size means one of the two forms has an arithmetic error in it.",
+   "It is above the ratio of 3.333333 the environment factor relation prints, which is the largest movement the engine will accept in a fire result before it stops answering.",
+   "No margin policy covers being wrong by that much in the unsafe direction on the last line of defence."
+  ],
+  "answer": 3,
+  "explanation": "A duty known to a few percent supports a purchase. Two forms differing by a factor of about 24 mean picking one is being wrong by that factor whenever the other form is right."
+ },
+ {
+  "prompt": "Why does the engine export the withholding message as a named constant?",
+  "options": [
+   "So a caller can switch the refusal off and receive the figure from whichever of the two plausible forms the package was configured with at the time of the call.",
+   "So a screen cannot print a blank where the vent should be, and the constant and the returned reason are the same string.",
+   "So the message can be translated once for the interface.",
+   "So the register has a constant to count against."
+  ],
+  "answer": 1,
+  "explanation": "A blank looks like a tool that broke, a zero looks like a vent of no capacity, and only the sentence reads as a deliberate refusal with a route attached."
+ },
+ {
+  "prompt": "The refusal names two routes to a vent capacity. Which returned figure does each of them start from?",
+  "options": [
+   "The standard starts from the fire duty and the manufacturer's curve starts from the wetted area of 5881.0614 ft2, since a certified curve is published against the area it protects.",
+   "The standard starts from the wetted area and the manufacturer's curve from the effective wetted height of 30.000000 ft, which is what a certified capacity curve is indexed on.",
+   "Both start from the fire duty, which on this tank is 25892440.2513 Btu/hr.",
+   "Both start from the heat input band, because the band is what decides which relation a capacity is read against in either route."
+  ],
+  "answer": 2,
+  "explanation": "The refusal says to size the vent from API 2000 against the heat input above, or from the vent manufacturer's certified capacity curve, so the refusal costs one step rather than the calculation."
+ },
+ {
+  "prompt": "The engine carries four fire heat input bands. What was that count taken over, and what made a band count?",
+  "options": [
+   "The band names returned across the swept wetted areas, with one count for each distinct band string returned over that sweep.",
+   "The rows of the band edge table, with one count for each edge the bisection of the band name found between one relation and the next one above it.",
+   "The relations in the engine source, with one count for each heat input expression written there.",
+   "The wetted areas in the sweep, with one count for each area that returned a duty."
+  ],
+  "answer": 0,
+  "explanation": "A count is not checkable without its tree and its rule, and the rule here is what explains why ten swept rows produce four bands rather than ten."
+ },
+ {
+  "prompt": "At the edge where the 1000 to 2800 ft2 band gives way to the band above it, the digest prints a duty of 14091137.6199 Btu/hr below the edge and 14089282.6189 Btu/hr above it. Why print both?",
+  "options": [
+   "So a reader can interpolate between the two and recover the duty at any area inside either band without calling the engine again for it.",
+   "So the behaviour of the duty across a change of relation can be read rather than assumed.",
+   "So the edge itself can be located, since the wetted area at which the change happens is not returned by the engine and has to be inferred from the two duties.",
+   "So the discontinuity can be corrected, because a designer quoting a duty near an edge is expected to blend the two relations across it."
+  ],
+  "answer": 1,
+  "explanation": "Each edge was found by bisecting the band name the engine returns, and the two duties are printed at 2800.0000 ft2 so a reader can see what the change of band does."
+ },
+ {
+  "prompt": "What does the engine say about an environment factor above 1?",
+  "options": [
+   "That it is accepted and applied, because a tank with no drainage and no spray is exposed to more than the bare relation assumes and the factor is the place that is carried.",
+   "That it is treated as 1.000000 with a note beside the returned duty.",
+   "That it moves the tank into the band above its own wetted area band.",
+   "That it would be a penalty, and the factor is a credit for drainage, insulation or a water spray lying between 0 and 1."
+  ],
+  "answer": 3,
+  "explanation": "The bound is the engine's own sentence: the relation carries a credit and does not carry a penalty."
+ },
+ {
+  "prompt": "The digest prints the fire duty on this tank with and without a stated drainage credit. What does that relation carry?",
+  "options": [
+   "A ratio of 0.300000, since that factor is what produced the second value.",
+   "A difference of 18124708.1759 Btu/hr against the duty at the top of the band.",
+   "25892440.2513 Btu/hr with no credit, 7767732.0754 Btu/hr at a factor of 0.300000, a difference of 18124708.1759 and a ratio of 3.333333.",
+   "A ratio of 24, the factor the engine names for the two forms it will not use."
+  ],
+  "answer": 2,
+  "explanation": "The relation line gives both values, their difference and their ratio, and a credit of that size has to be earned by drainage, insulation or a spray that exists and is maintained."
+ },
+ {
+  "prompt": "A datasheet carries the fire duty in the field where the vent capacity belongs. What is wrong with that?",
+  "options": [
+   "A duty is a heat input in Btu an hour and a vent is specified in scfh of air equivalent, so the entry will eventually be read as a capacity.",
+   "Nothing, provided the duty is labelled, because a reviewer checks the units.",
+   "The duty is the wrong figure to carry forward to the standard in any case.",
+   "The duty was computed with no drainage credit, so the entry is conservative."
+  ],
+  "answer": 0,
+  "explanation": "The fire duty of 25892440.2513 Btu/hr is what the standard's own relation needs, and putting it in a capacity field is how a withheld figure gets invented downstream."
+ },
+ {
+  "prompt": "What is the general rule this module wants a reader to carry into every package they use afterwards?",
+  "options": [
+   "A package should return its best estimate with the uncertainty attached, because a reader who is given a range can apply their own margin to it.",
+   "Withholding beats guessing whenever the plausible alternatives differ by more than a rounding.",
+   "A package should refuse wherever a figure is not traceable to a document.",
+   "A package should return the figure and the warning together, in the way a thermal rate above the stated capacity limit is returned and labelled."
+  ],
+  "answer": 1,
+  "explanation": "When you meet a null with a reason beside it, read the reason, find the size of the disagreement, and decide which kind of argument you are in."
+ }
+]

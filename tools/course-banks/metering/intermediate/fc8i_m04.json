@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "What is valve authority?",
+  "options": [
+   "The fraction of its own travel the valve uses between the minimum and the maximum duty.",
+   "The ratio of the coefficient the valve carries to the coefficient the design case needs.",
+   "The fraction of the system's total pressure drop that the valve itself takes at design flow.",
+   "The share of the total flow the valve passes when the loop is at its design set point."
+  ],
+  "answer": 2,
+  "explanation": "The rest of the drop is taken by the pipe, the fittings, the exchangers and everything else in the circuit."
+ },
+ {
+  "prompt": "A system carries a total drop of 120.000000 psi and the valve takes 25.000000 psi of it. What authority does the engine return?",
+  "options": [
+   "0.333333",
+   "0.208333",
+   "0.083333",
+   "0.458333"
+  ],
+  "answer": 1,
+  "explanation": "A valve drop of 40.000000 psi on the same system gives 0.333333 and a valve drop of 10.000000 psi gives 0.083333."
+ },
+ {
+  "prompt": "On that same 120.000000 psi system the valve is given 70.000000 psi. What is the authority?",
+  "options": [
+   "0.708333",
+   "0.833333",
+   "0.458333",
+   "0.583333"
+  ],
+  "answer": 3,
+  "explanation": "Seven valve drops are run against one total in the digest, and this rung is the fifth of them."
+ },
+ {
+  "prompt": "Why does a valve with a small share of the system drop make a loop hard to tune?",
+  "options": [
+   "Opening it hands most of the newly released pressure to the pump, so the flow overshoots and the gain changes enormously across the range.",
+   "Opening it hands most of the newly released pressure straight to the pipework, so the flow barely moves and the gain changes enormously across the range.",
+   "Opening it changes the flow faster than the controller can act, so the loop gain is even but the dead time swamps it at every set point.",
+   "Opening it leaves the drop across the circuit unchanged, so the flow rises in exact proportion to travel and the loop has no gain to work with."
+  ],
+  "answer": 1,
+  "explanation": "As the flow rises the drop taken by the rest of the circuit rises with it, because friction losses go up with flow, and the total available is fixed by the pump and the system."
+ },
+ {
+  "prompt": "Where does the total system drop the authority is taken against have to come from?",
+  "options": [
+   "The valve datasheet, where the supplier states it beside the rated coefficient of the trim offered.",
+   "The difference between the pump shut-in head and the vessel operating pressure.",
+   "A hydraulic calculation of the whole circuit at design flow, produced by somebody.",
+   "The engine, which derives it from the valve drop and the returned authority."
+  ],
+  "answer": 2,
+  "explanation": "Where that figure is a guess, the authority is a guess, and the verdict beside it inherits the guess without showing it."
+ },
+ {
+  "prompt": "The engine states where its two authority boundaries come from. What does the message say?",
+  "options": [
+   "`the 0.5 and 0.25 boundaries are this engine's stated screen, not a value read from a standard`",
+   "`the 0.5 and 0.25 boundaries are drawn from the installed characteristic literature and apply to modulating service`",
+   "`the 0.5 and 0.25 boundaries are the limits at which the installed gain doubles and halves across the travel`",
+   "`the 0.5 and 0.25 boundaries were chosen so that a linear trim is recommended wherever the loop can be tuned`"
+  ],
+  "answer": 0,
+  "explanation": "A verdict word carries an air of authority that a bare fraction does not. What the engine is saying is that the word is the output of a screen it states for itself."
+ },
+ {
+  "prompt": "Why should a document quote the authority alongside the verdict?",
+  "options": [
+   "A reader given the fraction can recover the total system drop from it, which the word alone does not carry.",
+   "A reader given the fraction can apply their own company screen to it, and a reader given the word alone cannot recover anything.",
+   "A reader given the fraction can tell which characteristic was recommended, which the word alone leaves open.",
+   "A reader given the fraction can check it against the standard the boundaries are read from, which the word hides."
+  ],
+  "answer": 1,
+  "explanation": "The verdict is a word with no units and no visible arithmetic behind it, so it travels further than the fraction does and arrives somewhere being read as though a standard had said it."
+ },
+ {
+  "prompt": "Which valve drop on the 120.000000 psi system returns an authority of 0.833333?",
+  "options": [
+   "85.000000 psi",
+   "55.000000 psi",
+   "the whole 120.000000 psi",
+   "100.000000 psi"
+  ],
+  "answer": 3,
+  "explanation": "The ladder runs 10.000000, 25.000000, 40.000000, 55.000000, 70.000000, 85.000000 and 100.000000 psi against one total, and the characteristic recommendation changes at an authority of 0.500000."
+ },
+ {
+  "prompt": "The engine gives a reason for its recommendation on the high authority cases. What is that reason?",
+  "options": [
+   "The valve takes most of the system drop, so its inherent curve is far from its installed curve and linear trim restores the balance.",
+   "The valve takes most of the system drop, so the installed curve steepens at the top of the range and linear trim flattens it again.",
+   "The valve takes most of the system drop, so its inherent curve is close to its installed curve and linear trim gives even loop gain.",
+   "The valve takes most of the system drop, so the rangeability of the trim is the limit on control rather than the shape of the curve."
+  ],
+  "answer": 2,
+  "explanation": "When the valve takes most of the drop there is almost nothing to cancel, so linear trim is the choice that leaves the gain even."
+ },
+ {
+  "prompt": "What does the engine say equal percentage trim is shaped to cancel?",
+  "options": [
+   "The flattening of the installed curve that happens because the system absorbs most of the drop as flow rises.",
+   "The steepening of the installed curve that happens because the pump head falls away as flow rises.",
+   "The dead band in the positioner, which otherwise leaves the plug behind the controller output.",
+   "The nonlinearity of the process itself, which is what the loop is ultimately being asked to hold."
+  ],
+  "answer": 0,
+  "explanation": "The engine's words are `the system absorbs most of the drop as flow rises, which flattens the installed curve. Equal-percentage trim is shaped to cancel exactly that and restore something close to linear installed gain`."
+ },
+ {
+  "prompt": "What shape is the equal percentage curve?",
+  "options": [
+   "It passes a great deal near the seat and very little near full travel.",
+   "It passes very little near the seat and a great deal near full travel.",
+   "It passes the same increment of flow for each increment of travel throughout.",
+   "It passes most of its range within the first quarter of travel and then flattens."
+  ],
+  "answer": 1,
+  "explanation": "That is a curve bent in the opposite direction to the distortion the circuit applies, which is why the two together leave the loop something close to a straight line."
+ },
+ {
+  "prompt": "What happens when equal percentage trim is fitted to a circuit that applies no such distortion?",
+  "options": [
+   "The loop behaves as though linear trim had been fitted, because the two curves agree at high authority.",
+   "The loop cannot reach its design flow, because the equal percentage curve passes less at full travel.",
+   "The loop gain is even, because the trim curve is the one the installed curve is measured against.",
+   "The loop is bent the other way instead, because the trim is cancelling something that is not there."
+  ],
+  "answer": 3,
+  "explanation": "The trim is chosen to cancel a known distortion. That is also why the recommendation is read off the authority rather than off the service."
+ },
+ {
+  "prompt": "Two functions in this module talk about inherent characteristics. What is asserted about the words they exchange?",
+  "options": [
+   "Every id the recommendation returns is an id the travel check accepts, and it is asserted on the two rows where the recommendation changes.",
+   "Every id the recommendation returns is an id the travel check accepts, and it is asserted once when the module loads rather than per row.",
+   "Every id the recommendation returns is an id the travel check accepts, and it is asserted on every row of the authority ladder.",
+   "The two functions carry separate vocabularies and the engine maps between them, which is why an unknown word can still be handled."
+  ],
+  "answer": 2,
+  "explanation": "A recommendation phrased in a vocabulary the travel check did not recognise would strand the user at exactly the point where they were doing the right thing."
+ },
+ {
+  "prompt": "Which two inherent characteristics does the travel check know?",
+  "options": [
+   "equalPercentage and linear",
+   "linear and quickOpening",
+   "equalPercentage and modifiedParabolic",
+   "linear and modifiedParabolic"
+  ],
+  "answer": 0,
+  "explanation": "The engine's refusal names them itself: `unknown inherent characteristic 'quickOpening': this module knows equalPercentage and linear. An unrecognised characteristic used to be treated silently as equal percentage`."
+ },
+ {
+  "prompt": "A silent default in place of a refusal is the failure mode this module is built to avoid. Why is it so dangerous?",
+  "options": [
+   "It produces an answer of the wrong type, which fails loudly at the next step and wastes the time of whoever traces it.",
+   "It produces an answer of the right type and the wrong value, and nothing downstream can tell that it happened.",
+   "It produces no answer at all, so the user is left with a blank cell and no statement of what was missing.",
+   "It produces an answer that is right at the ends of the range and wrong in the middle, which is where reviews look."
+  ],
+  "answer": 1,
+  "explanation": "The refusal fires at the travel check, which is the function that was handed the unknown word. A refusal belongs at the boundary a bad value crosses, because that is the only place that knows both what arrived and what was expected."
+ }
+]

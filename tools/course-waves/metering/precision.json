@@ -1,0 +1,38 @@
+{
+ "bbl": {
+  "decimals": 4,
+  "match": "^(?:krakama_turbine_gross_bbl|saghara_working_capacity_bbl)$"
+ },
+ "bblPerHr": {
+  "decimals": 4,
+  "match": "^(?:saghara_vacuum_governing_draw_bblhr)$"
+ },
+ "cv": {
+  "decimals": 6,
+  "match": "^(?:utonana_liquid_cv)$"
+ },
+ "inch": {
+  "decimals": 6,
+  "match": "^(?:saghara_bottom_course_required_in)$"
+ },
+ "lbPerYr": {
+  "decimals": 4,
+  "match": "^(?:saghara_recovery_saved_lb_yr)$"
+ },
+ "pct": {
+  "decimals": 6,
+  "match": "^(?:krakama_total_uncertainty_pct|krakama_transmitter_uncertainty_pct|utonana_normal_travel_pct)$"
+ },
+ "psi": {
+  "decimals": 6,
+  "match": "^(?:krakama_differential_psi|utonana_allowable_drop_psi)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:krakama_beta_ratio|krakama_flow_turndown_ratio|saghara_sg_at_which_test_governs|utonana_cavitation_sigma|utonana_ff_critical_ratio|utonana_valve_authority)$"
+ },
+ "scfh": {
+  "decimals": 4,
+  "match": "^(?:saghara_inbreathing_scfh)$"
+ }
+}
