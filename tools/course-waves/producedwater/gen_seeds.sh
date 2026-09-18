@@ -62,7 +62,7 @@ done
 # The vendored engine at the SAME ref, which gen_golive.py reads its declared
 # constants and API 421 limits out of, so the go-live asserts against the
 # engine this commit ships and not against whatever a worktree holds.
-git -C "$REPO" show "$REF:packages/engines/engines/facilities/producedWater.js" > "$STAGE/producedWater.js"
+git -C "$REPO" show "$REF:packages/engines/engines/facilities/producedWater.js" > "$STAGE/producedWater.mjs"
 
 for tier in beginner intermediate advanced; do
   case $tier in beginner) L=b;; intermediate) L=i;; advanced) L=a;; esac
@@ -89,7 +89,7 @@ FC7_WAVE="$STAGE" FC7_REPO="$REPO" FC7_COURSE_OUT="$OUTDIR/${DATE}_${PREFIX}_${S
 
 # The go-live, off the staged fields and digest and the COURSE MIGRATION THIS RUN
 # JUST EMITTED, so the prompts it sweeps for collisions are the prompts it ships.
-FC7_WAVE="$STAGE" FC7_REPO="$REPO" FC7_ENGINE="$STAGE/producedWater.js" \
+FC7_WAVE="$STAGE" FC7_REPO="$REPO" FC7_ENGINE="$STAGE/producedWater.mjs" \
   FC7_COURSE_SQL="$OUTDIR/${DATE}_${PREFIX}_${SLUG}_course.sql" \
   FC7_GOLIVE_OUT="$OUTDIR/${DATE}_${PREFIX}_${SLUG}_go_live.sql" \
   python3 "$HERE/gen_golive.py"
