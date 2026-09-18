@@ -22,7 +22,7 @@ The same reading shows up after the gate: a Temporary change already in "Impleme
 
 ## Readable is all the gate asks
 
-The gate asks only that the expiry date can be read; it does not ask that it lies ahead. A Temporary change in "Approval" whose expiry, 2026-09-30, has already passed, asked to go into "Implementation" with every level signed, is ALLOWED. Once in "Implementation" the same change reads "Expired" on 2026-10-01. That is what the engine does today, so the reviewer at the gate checks that the date lies ahead.
+The gate asks only that the expiry date can be read; it does not ask that it lies ahead. A Temporary change in "Approval" whose expiry, 2026-09-30, has already passed, asked to go into "Implementation" with every level signed, is ALLOWED. Once in "Implementation" the same change reads "Expired" on 2026-10-01.
 
 {{panel:rc-change-explorer}}
 

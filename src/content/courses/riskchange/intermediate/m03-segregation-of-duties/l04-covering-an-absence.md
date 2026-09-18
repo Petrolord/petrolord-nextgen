@@ -16,15 +16,14 @@ The refusal a user meets when they try to decide somebody else's approval ends w
 
 The engine refuses the shortcut and names the correct route in the same breath.
 
-## What a reassignment must respect
+## Where the engine checks, and where it does not
 
-A reassignment is an assignment, so the assignment rules from lesson one apply to it. On ES-01, raised by u-chika:
+The reassignment itself is a step in the app and the database. What the engine holds is the check at the decision. On ES-01, raised by u-chika:
 
-- ALLOWED, assigning u-halima, who is independent of the change.
-- REFUSED, assigning the originator as an approver: The originator of a change cannot approve it. Choose somebody independent of the change.
-- REFUSED, assigning nobody: Choose the approver.
+- ALLOWED, u-emeka deciding the approval assigned to u-emeka.
+- REFUSED, the originator deciding an approval somebody assigned to them: The originator of a change cannot approve it.
 
-So an absence cannot be covered by handing the approval to the originator, and it cannot be covered by leaving the row with no assignee. Once the approval is reassigned to u-halima, u-halima is the assignee, and the rule in lesson two now lets u-halima decide it. Every answer here was replayed through the module's independent oracle.
+The second probe is the one that matters for an absence. However the approval reached the originator, the engine refuses the originator at the decision, even as the assignee. Decision D1 says an approval is decided only by the member it is assigned to, never by the change originator, so a cover arranged by handing the approval to u-chika cannot be signed.
 
 {{panel:rc-change-explorer}}
 
@@ -40,8 +39,8 @@ Recording a delegation does not cover the absence by itself. Deciding a Delegate
 
 ## What the engine does not model
 
-The engine does not move an approval to somebody else. Measured by searching its 34 exports, the functions whose name mentions reassigning or delegating number 0. How an approval moves to another person is the app's and the database's business (the AS15 reassignment), and this engine holds no rule for it. What the engine does hold is the check on the result: whoever ends up assigned must pass the assignment rules above.
+Measured by searching its 34 exports, the functions whose name mentions reassigning or delegating number 0. How an approval moves to another person, and whether a decided one can be reopened, is the app's and the database's business (the AS15 reassignment), and this engine holds no rule for either.
 
 ## Exercise
 
-For the level 2 approval on ES-01, assigned to u-emeka, write down the route the engine names when u-emeka is unavailable. Record the engine's answer to reassigning the approval to u-halima, to u-chika and to nobody. Then record what a lone "Delegated" row does to its level, and say which rule produced that answer.
+For the level 2 approval on ES-01, assigned to u-emeka, write down the route the engine names when u-emeka is unavailable. Record the engine's answer when u-emeka decides it and when the originator decides an approval assigned to them. Record who holds the rule for moving the approval. Then record what a lone "Delegated" row does to its level, and say which rule produced that answer.

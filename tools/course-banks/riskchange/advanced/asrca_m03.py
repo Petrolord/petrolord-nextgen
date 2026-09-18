@@ -98,12 +98,12 @@ q(1, "Publishing a lesson checks for a validation record. Which limit does the d
   "Publishing checks the validator again and refuses the author."],
  "The independence check sits where the validation is recorded. Publishing relies on it having been enforced there, and the digest lists that as a stated limit of the engine.")
 
-q(2, "The rule that a lesson's author may not validate it by typing a name is an owner decision. Which one, and when was it taken?",
- "AS15 Q10, validation by typed name, taken on 2026-09-18.",
- ["AS15 D1, segregation of duties on change approvals, taken on 2026-10-01.",
-  "AS15 Q9, the emergency change authority, taken on 2026-09-18.",
-  "AS13-0, which decided how a closed lesson reads."],
- "2026-10-01 is the as-of date of every status in this course. D1 is segregation of duties on change approvals and, from ASC-0, peer review, and Q9 is emergency change authority and the ratification window. AS13-0 decided how a closed temporary change reads.")
+q(2, "Read ON-01 as if it were still \"Submitted\". Its author, u-musa, is refused at validation. What does the owner decision on validation by typed name require before ON-01 can be validated?",
+ "A colleague who was not involved in writing it validates it, signed in as themselves.",
+ ["u-musa types in the name of a colleague who was not involved in writing it and then validates it.",
+  "u-musa validates it once the name of an external reviewer has been recorded alongside it.",
+  "It is published first, and then any member may validate it."],
+ "The refusal says \"Ask a colleague who was not involved in writing it to validate it.\", and under AS15 Q10 the actor is always the signed-in person doing the validation, whatever name is typed. A typed name records an external reviewer and cannot launder the author, so u-musa is refused with or without one. A lesson whose validation record is missing is refused at \"Published\".")
 
 q(0, "Why does the engine ask for a validation record at the moment of publishing, instead of trusting a status that reads \"Validated\"?",
  "A status is one field anything can write; the record ties publication to an act by a person.",

@@ -14,7 +14,7 @@ The type decides which gate an unfinished action blocks. Pre-implementation acti
 
 ## Why the type matters
 
-The three types line up with the life of a change. Before it goes in, the pre-implementation work proves the plant is ready: the procedure is written, the people are briefed, the parts are on site. While it goes in, the implementation work is the change itself. After it is in, the post-implementation work confirms it and tidies up. The engine does not read the words on an action; it reads the type, and the type is what places the action at one gate or the other. An action filed under the wrong type is checked at the wrong door, so the type deserves the same care as the due date.
+The three types line up with the life of a change. Before it goes in, the pre-implementation work proves the plant is ready: the procedure is written, the people are briefed, the parts are on site. While it goes in, the implementation work is the change itself. After it is in, the post-implementation work confirms it and tidies up. Each gate reads the action types it names, so the type is what places the action at one gate or the other. An action filed under the wrong type is checked at the wrong door, so the type deserves the same care as the due date.
 
 ## Four statuses, two of them finished
 

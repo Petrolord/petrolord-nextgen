@@ -30,7 +30,7 @@ Condition 1 has two more refusals, which module two read: "An approver has rejec
 
 ## The expiry condition
 
-A Temporary or Emergency change must carry a readable expiry date before it goes in. A Temporary change whose expiry reads "after the turnaround" is refused: A temporary change needs an expiry date before it is implemented. Without one it is a permanent change nobody decided to make. The condition asks only that the date can be read. An expiry of 2026-09-30, already passed, is ALLOWED through with every level signed, and lesson four reads what that change says the next day.
+A Temporary or Emergency change must carry a readable expiry date before it goes in. A Temporary change whose expiry reads "after the turnaround" is refused: A temporary change needs an expiry date before it is implemented. Without one it is a permanent change nobody decided to make. The condition asks only that the date can be read. An expiry of 2026-09-30, already passed, is ALLOWED through with every level signed, and lesson four reads what that change says on 2026-10-01.
 
 {{panel:rc-change-explorer}}
 

@@ -30,7 +30,7 @@ The allowance shows what "independent" means in the engine's terms. u-halima did
 
 The person who proposes a change believes in it. That is why they raised it, and it is also why their signature adds nothing as a check. An approval is worth something because somebody who did not write the proposal has read it and agreed that it is safe to put onto the facility. If the originator could sign their own level, the approval set would record a check that nobody performed.
 
-The rule is written against the originator by identity, whatever their seniority or the level being approved.
+The printed rule names the originator: an approval is decided only by the member it is assigned to, never by the change originator. u-chika raised ES-01 and is refused; u-halima did not raise it and is ALLOWED.
 
 {{panel:rc-change-explorer}}
 

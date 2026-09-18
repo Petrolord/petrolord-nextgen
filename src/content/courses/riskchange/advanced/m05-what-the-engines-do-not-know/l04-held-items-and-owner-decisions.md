@@ -4,27 +4,30 @@ Every engine has edges where its rule stops. This lesson reads two lists from th
 
 ## The held items
 
-The digest lists nine. Five belong to the registers of the earlier tiers: a band found by its lower edge alone, so any positive score bands; countByBand counting whatever it is handed; an action on a change missing from the register counting as open work; urgency ranks that sort by expiry date or target date, so the two keys mix; and an invalid as-of date making daysUntil answer NaN, so every date rule reads as not due. Nothing in this course passes one.
+The digest lists nine, in this order, with the section it names where it names one:
 
-Four belong to this tier, and each is a place where the engine trusts what it is handed:
+1. A band is found by its lower edge alone, so any positive score bands, including a score no cell of the grid holds (Section 2).
+2. countByBand counts whatever it is handed (Section 5).
+3. An action on a change that is not in the register counts as open work (Section 12).
+4. Within one urgency rank, changes sort by expiry date when they have one and by target date otherwise, so the two keys mix.
+5. A comment whose review is not in the list handed to the peer review summary still counts as open work, as an MOC action with an unknown change does (Sections 12 and 14).
+6. A reviewer named by display name only cannot be matched to the author, so the independence rule allows one (Section 14); a review with no author recorded cannot be checked either.
+7. Publishing a lesson checks that a validation record exists and does not check again who validated it.
+8. The application counts in the lessons summary include applications on lessons that are not visible.
+9. An invalid as-of date makes daysUntil answer NaN rather than refuse, and a comparison on NaN is false either way, so every date rule reads as not due. Nothing in this course passes one.
 
-- A comment whose review is not in the list handed to the peer review summary still counts as open work, as an MOC action with an unknown change does. The summary can keep a finished review's comments out of the open and blocking counts only when it can see the review.
-- A reviewer named by display name only cannot be matched to the author, so the independence rule allows one; a review with no author recorded cannot be checked either. The record carries the name for a person to judge.
-- Publishing a lesson checks that a validation record exists and does not check again who validated it. The independence check sits where the validation is recorded.
-- The application counts in the lessons summary include applications on lessons that are not visible. The lesson counts beside them, lessonsApplied and lessonsUnapplied, cover visible lessons only.
-
-A user who knows these limits reads a count or a verdict with the right caution. Each is a stated boundary of what the engine decides.
+Items five and three are tied in the digest's own words: a comment counts "as an MOC action with an unknown change does".
 
 ## The owner decisions
 
 All were taken on 2026-09-18 under AS15, and each is held in the engine, the app and, where it matters, the database:
 
-- D1, segregation of duties on change approvals and, from ASC-0, on peer review. For peer review the engine holds it now; the app and the database follow with the Suite pull request that ships ASC-0.
-- Q9, emergency change authority and the ratification window.
-- Q10, validation by typed name.
-- Q3, fractional levels unscored.
+- D1, segregation of duties on change approvals (Section 9) and, from ASC-0, on peer review (Section 14). For peer review the engine holds it now; the app and the database follow with the Suite pull request that ships ASC-0.
+- Q9, emergency change authority and the ratification window (Section 11).
+- Q10, validation by typed name (Section 15).
+- Q3, fractional levels unscored (Sections 2 and 3).
 
-AS13-0 decided that a closed temporary change reads "Closed out".
+AS13-0 decided that a closed temporary change reads "Closed out" (Section 11).
 
 ## Why the two lists are kept apart
 
@@ -32,4 +35,4 @@ An owner decision is policy, and an engine that disagrees with it is wrong. A he
 
 ## Exercise
 
-Record the four held items that touch peer review and lessons, and for each say which count or verdict a user should read with care. Then record the four owner decisions taken on 2026-09-18 under AS15, and name which register each governs. Say what separates a held item from an owner decision.
+Record the nine held items in the digest's order, and beside each write the digest section it names, or "none named". Record the two items the digest ties to each other in its own words. Then record the four owner decisions taken on 2026-09-18 under AS15 and the section or sections the digest names for each, and the decision AS13-0 took. Say what separates a held item from an owner decision.
