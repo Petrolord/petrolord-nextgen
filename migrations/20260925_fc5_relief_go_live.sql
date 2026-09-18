@@ -172,13 +172,18 @@ begin
 
 
   -- ------------------------------------------- the held-for-literature gates
+  -- A FRAGMENT IS MATCHED AS A LITERAL SUBSTRING WITH strpos, NEVER WITH LIKE.
+  -- In LIKE an underscore is a one-character wildcard, so the fragment kw_
+  -- matched the kwm in gbaran_radiant_intensity_kwm2 and refused a field that
+  -- names no held quantity. This wave's first dry run caught it; strpos is the
+  -- same test the generator's own Python guard runs.
   -- ON THE NAME. A graded field that NAMES a quantity this module holds for the
   -- literature is refused before anything is computed from it.
   select count(*), string_agg(c.tier || '/' || (f->>'key'), ', ')
     into v_graded, v_names
     from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f,
          unnest(array['orifice', 'letter', 'margin', 'duty', 'btu', 'heat_input', 'relief_load', 'kv_', 'reynolds', 'dropout', 'drag', 'napier', 'kn_', 'ksh', 'kb_', 'kw_', 'allowable_level', 'customary']) frag
-   where c.app_slug = 'relief' and (f->>'key') like '%' || frag || '%';
+   where c.app_slug = 'relief' and strpos(f->>'key', frag) > 0;
   if v_graded <> 0 then
     raise exception 'FC5 go-live refused: % graded field(s) name a quantity held for the literature: %', v_graded, v_names;
   end if;
@@ -187,7 +192,7 @@ begin
     into v_graded, v_names
     from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f,
          unnest(array['orifice letter', 'fire duty', 'heat input', 'relief load', 'viscosity correction', 'reynolds number', 'dropout velocity', 'drag coefficient', 'napier', 'superheat factor', 'bellows', 'customary']) frag
-   where c.app_slug = 'relief' and lower(f->>'label') like '%' || frag || '%';
+   where c.app_slug = 'relief' and strpos(lower(f->>'label'), frag) > 0;
   if v_graded <> 0 then
     raise exception 'FC5 go-live refused: % graded field label(s) name a quantity held for the literature: %', v_graded, v_names;
   end if;
