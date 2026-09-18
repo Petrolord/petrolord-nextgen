@@ -21,7 +21,7 @@ q(0, "An unfinished action blocks one gate or the other according to its type. W
  ["The gate into the Closed stage, along with the other two action types.",
   "Both gates.",
   "Neither gate."],
- "Pre-implementation actions block the gate into \"Implementation\"; Implementation and Post-implementation actions block the gate into the Closed stage. The engine reads the type and never the words on the action.")
+ "Pre-implementation actions block the gate into \"Implementation\"; Implementation and Post-implementation actions block the gate into the Closed stage. Each gate reads the action types it names.")
 
 q(3, "ES-01 has every level signed and one Pre-implementation action still \"Open\". What does the gate into \"Implementation\" answer?",
  "It refuses: 1 pre-implementation action still open. They exist to be done before the change goes in.",
@@ -56,7 +56,7 @@ q(3, "A Temporary change in \"Approval\" carries a readable expiry of 2026-09-30
  ["It refuses, because an expiry date that has already passed cannot be implemented.",
   "It refuses, because a Temporary change needs an Emergency approval once its date is past.",
   "It allows it and reads the change as \"Closed out\" on 2026-10-01."],
- "The gate asks only that the expiry can be read; it does not ask that it lies ahead. Once in \"Implementation\" the same change reads \"Expired\" on 2026-10-01, which is a limit of the gate the reviewer covers by checking the date.")
+ "The gate asks only that the expiry can be read; it does not ask that it lies ahead. Once in \"Implementation\" the same change reads \"Expired\" on 2026-10-01.")
 
 q(1, "A Temporary change is already in \"Implementation\" with an expiry that reads \"after the turnaround\". What is its expiry state?",
  "\"No expiry\", since the date cannot be read.",

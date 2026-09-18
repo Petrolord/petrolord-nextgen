@@ -55,14 +55,14 @@ q(3, "Who may decide ES-01's level 2 approval, as it is assigned?",
 
 # two modules: m03 segregation, m05 emergency route
 q(0, "An Emergency change must go in fast, and its originator is the only person on site. May the originator sign level 1 so the change can go in?",
- "No. The originator never approves their own change, and the emergency route relaxes only how many levels must sign.",
+ "No. Under D1 the change originator never decides an approval, on any route.",
  ["Yes. The emergency route suspends the originator rule until the change is ratified.",
   "Yes, provided an independent approver ratifies level 1 within 7 days.",
   "No, because an Emergency change needs every level signed before it goes in."],
  "The originator rule is written against the originator by identity, at assignment and at decision. The route needs level 1 signed by somebody allowed to sign it, and nobody having rejected it.")
 
 # two modules: m04 gate conditions, m05 emergency route
-q(2, "An Emergency change in \"Approval\" has level 1 signed and carries no expiry date. What stops it at the gate into \"Implementation\"?",
+q(2, "Level 1 has signed on an Emergency change waiting in \"Approval\", no approver has objected, and its expiry field is blank. What keeps it out of \"Implementation\"?",
  "The expiry condition: an Emergency change needs a readable expiry.",
  ["Nothing stops it: an Emergency change needs only its first level signed to go in.",
   "Nothing stops it, because an Emergency change reads its expiry as \"No expiry\".",
@@ -134,12 +134,12 @@ q(2, "Which list of stages does a change's own overdue flag read?",
   "The terminal stages, where a change is judged against its date."],
  "A change is overdue only in \"Draft\", \"Screening\", \"Review\" or \"Approval\", with its target date passed. Late work after that shows as overdue actions.")
 
-q(1, "How many ESANMI changes are in effect on 2026-10-01?",
- "7: \"Implementation\" 5 plus \"Closed\" 2.",
- ["8, the active count.",
-  "5, the changes in \"Implementation\" alone, since a closed change is finished.",
-  "Every change in the register, whatever its stage."],
- "In effect is \"Implementation\" and the Closed stage. The by-stage counts give 5 and 2, and 5 + 2 = 7. Active, 8, is a different list.")
+q(1, "Beyond the 5 in \"Implementation\", what else in the ESANMI register sits on the facility as read on 2026-10-01?",
+ "ES-06 and ES-07, the 2 in the Closed stage.",
+ ["None: a change in the Closed stage is finished and off the list.",
+  "ES-09 and ES-11, the \"Cancelled\" change and the \"Rejected\" one.",
+  "ES-01, which is in \"Approval\" and next in line to go in."],
+ "Being on the facility is being in effect, and in effect is \"Implementation\" and the Closed stage. By stage reads \"Closed\" 2, which are ES-06 and ES-07. \"Cancelled\", \"Rejected\" and \"Approval\" are not in effect.")
 
 q(0, "ES-03 went onto the plant with an expiry of 2026-09-28, and its one action AC-08 was cancelled. Give the register's reading for it on 2026-10-01.",
  "\"Expired\", counted in expired, with AC-08 finished and outside openActions.",

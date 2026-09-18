@@ -19,7 +19,7 @@
    "Neither gate."
   ],
   "answer": 0,
-  "explanation": "Pre-implementation actions block the gate into \"Implementation\"; Implementation and Post-implementation actions block the gate into the Closed stage. The engine reads the type and never the words on the action."
+  "explanation": "Pre-implementation actions block the gate into \"Implementation\"; Implementation and Post-implementation actions block the gate into the Closed stage. Each gate reads the action types it names."
  },
  {
   "prompt": "ES-01 has every level signed and one Pre-implementation action still \"Open\". What does the gate into \"Implementation\" answer?",
@@ -74,7 +74,7 @@
    "It allows it."
   ],
   "answer": 3,
-  "explanation": "The gate asks only that the expiry can be read; it does not ask that it lies ahead. Once in \"Implementation\" the same change reads \"Expired\" on 2026-10-01, which is a limit of the gate the reviewer covers by checking the date."
+  "explanation": "The gate asks only that the expiry can be read; it does not ask that it lies ahead. Once in \"Implementation\" the same change reads \"Expired\" on 2026-10-01."
  },
  {
   "prompt": "A Temporary change is already in \"Implementation\" with an expiry that reads \"after the turnaround\". What is its expiry state?",

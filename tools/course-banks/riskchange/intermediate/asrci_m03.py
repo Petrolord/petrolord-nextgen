@@ -26,7 +26,7 @@ q(0, "Why is u-halima allowed as an approver on ES-01?",
  ["u-halima is the level 2 assignee on ES-01, and only an assignee may be added as an approver.",
   "u-halima is senior to u-chika.",
   "u-halima raised ES-01 and knows it."],
- "The rule is written against the originator by identity. Seniority and the level being approved play no part; u-chika raised ES-01, and anybody else may be assigned.")
+ "The refusal names one person to keep off the change: its originator. u-chika raised ES-01; u-halima did not, and the engine allows u-halima as an independent approver.")
 
 q(2, "ES-01's level 2 approval is assigned to u-emeka. u-halima, who is independent of the change, tries to decide it. What does the engine answer?",
  "It refuses: Only the person this approval is assigned to can decide it. If they are unavailable, reassign it.",
@@ -35,12 +35,12 @@ q(2, "ES-01's level 2 approval is assigned to u-emeka. u-halima, who is independ
   "It allows it and records the row as \"Delegated\" from u-emeka to u-halima."],
  "Independence decides who may be assigned. Assignment decides who may decide. An approval belongs to the person it is assigned to.")
 
-q(3, "Nobody is signed in, and a decision is attempted on ES-01's level 2 approval. What does the engine answer?",
- "It refuses with the assignee sentence, since nobody is not u-emeka, the assignee.",
- ["It allows it, because no originator is acting on the change.",
-  "It refuses: Choose the approver, since no actor was named.",
-  "It returns no answer, because a decision needs an actor to be read."],
- "The question the engine asks is whether the person deciding is the person the approval is assigned to. Nobody is not u-emeka, so the answer is the assignee refusal.")
+q(3, "Nobody is signed in when a decision is attempted on ES-01's level 2 approval, which is assigned to u-emeka. Which other attempt meets the same refusal sentence word for word?",
+ "u-halima trying to decide that same approval.",
+ ["Assigning nobody as the approver on ES-01.",
+  "u-chika, the originator, deciding an approval somebody assigned to u-chika.",
+  "Moving a change with no approval rows at all into \"Implementation\"."],
+ "Both are refused with: Only the person this approval is assigned to can decide it. If they are unavailable, reassign it. Neither nobody nor u-halima is u-emeka. Assigning nobody meets \"Choose the approver.\" and the originator meets \"The originator of a change cannot approve it.\"")
 
 q(0, "A record arrives with the originator already assigned to decide an approval on their own change. The originator decides it. What does the engine answer?",
  "Refused: an originator never decides, even as assignee.",
@@ -91,19 +91,19 @@ q(2, "u-emeka, the level 2 assignee on ES-01, is unavailable. What route does th
   "Let u-chika decide it, as the person who knows the change best."],
  "The assignee refusal ends: If they are unavailable, reassign it. A \"Delegated\" row signs nothing, and u-chika is the originator.")
 
-q(3, "ES-01's level 2 approval is to be reassigned. Which of these reassignments does the engine refuse?",
- "To u-chika.",
- ["To u-halima, because the approval was first assigned to u-emeka and stays with them.",
-  "To u-halima, because a person who was not on the original set cannot be added later.",
-  "To any member independent of the change, because reassignment is not modelled."],
- "A reassignment is an assignment, so the assignment rules apply. u-chika raised ES-01 and is refused with \"The originator of a change cannot approve it. Choose somebody independent of the change.\"")
+q(3, "The app moves ES-01's level 2 approval away from u-emeka. On which new assignee does the engine still refuse the decision?",
+ "u-chika, who raised ES-01.",
+ ["u-halima, because the approval was first assigned to u-emeka and stays with them.",
+  "u-halima, because a person who was not on the original set can never decide.",
+  "Any member at all, because the engine holds no rule for moving an approval."],
+ "The engine checks the decision as well as the assignment. The originator deciding an approval somebody assigned to them is refused: The originator of a change cannot approve it.")
 
 q(1, "Searching the engine's 34 exports, how many functions have a name that mentions reassigning or delegating?",
  "0. How an approval moves to somebody else is the app's and the database's business.",
  ["34, one for each export, because every function in the engine can hand an approval to another member.",
   "1, the function that reads a Delegated row as signed.",
   "0, so reassignment is refused by the engine as illegal."],
- "The engine holds no rule for moving an approval. It holds the check on the result: whoever ends up assigned must pass the assignment rules.")
+ "The engine holds no rule for moving an approval. It still refuses the originator at the decision, even when somebody assigned the approval to them.")
 
 q(2, "A report says: \"The engine lets a decided approval be reopened by the assignee.\" What does the digest support?",
  "None of it. The engine holds no rule for reopening, and a decided approval is refused as already decided.",
