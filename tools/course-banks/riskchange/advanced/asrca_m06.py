@@ -13,7 +13,7 @@ q(1, "ON-01 was applied into the risk register on 2026-05-02, naming OB-07, Pump
  ["\"Closed\", residual 8, \"Medium\", \"Within appetite\", since the lesson has been applied to it.",
   "\"Realized\", residual 8, \"High\", \"Above appetite\", because the risk has already happened.",
   "\"Realized\", residual 12, \"High\", \"Within appetite\"."],
- "OB-07 is a record with its own state, decided by the riskScoring engine from its own fields. The lesson that names it does not own that state, and applying a lesson to a risk changes nothing about how the risk is scored.")
+ "OB-07 is a record with its own state, decided by the riskScoring engine from its own fields. The lesson that names it points at that row, and the risk's status, residual, band and appetite answer stay the risk's own.")
 
 q(3, "ON-02 was applied into the change register on 2026-06-10. Which change does it name, and what stage is that change in?",
  "ES-06, Revised operating procedure for glycol regeneration, now \"Closed\".",
@@ -43,7 +43,7 @@ q(2, "ON-06 records its source type as \"Audit finding\". How far does this cour
   "It checks that the audit was independent before accepting the lesson."],
  "Compliance, Audit & Quality owns audit independence, the audit and finding lifecycles and root-cause categories. This course names an audit finding as the source of a lesson and stops there.")
 
-q(0, "Working the chain on IK-01, which question comes before asking any comment for its severity?",
+q(0, "Working the chain on IK-01, a reader asks two questions of each comment to find its blockers. One is its severity. What is the other?",
  "Whether each comment's status is resolved.",
  ["Whether the review is overdue on 2026-10-01, since a late review cannot close.",
   "Who wrote each comment, since that decides blocking.",
@@ -78,12 +78,12 @@ q(3, "With 2 applied on its reuse record, what does the chain record for marking
   "Refused, until the review due on 2026-10-20 is done."],
  "An adoption into the \"Risk register\" and an adaptation into a \"Procedure\" are evidence of use, so the move is allowed. The considered-and-adopted-nowhere refusal is ON-03's, whose one application is a rejection.")
 
-q(2, "The engines in this course decide a state from a record. What do they store?",
- "Nothing: the app stores the record and asks the engine what it means.",
- ["The verdict of every call, so a report can be replayed later.",
-  "The as-of date of every call and nothing else.",
-  "The refusal sentences, in a table the app reads back."],
- "Each engine decides a band, a stage move, a closure verdict or an embedding verdict from the record it is handed. None of them stores anything, which is why what the app shows and what the database enforces sit outside the engine.")
+q(2, "ON-02 is \"Embedded\". Which record is the evidence of use that its status rests on?",
+ "AA-04, its \"Adopted\" application into the change register, naming ES-06.",
+ ["Its validation record, which is all Embedded asks beyond Published.",
+  "AA-01, the adoption that named OB-07 in the risk register.",
+  "Its review date, 2026-09-20, which keeps it current."],
+ "Embedded is earned by an application that changed something: ON-04, with none, and ON-03, with only a rejection, are both refused it. ON-02's reuse record holds one application, AA-04, applied 1 into \"Management of change\". AA-01 is ON-01's, and a review date says nothing about use.")
 
 q(1, "Segregation of duties in peer review, the author never reviewing the work, is held where today?",
  "In the engine; the app and the database follow with the Suite pull request that ships ASC-0.",
@@ -93,18 +93,18 @@ q(1, "Segregation of duties in peer review, the author never reviewing the work,
  "The engine enforces the rule now, from ASC-0, as owner decision D1 applied to peer review. A lesson that told a learner the app already refuses the author would be teaching something the digest does not say.")
 
 q(0, "Which of these does the peerReview engine hand to a person rather than decide itself?",
- "Whether a verified response is actually correct.",
+ "Whether the author's response is good enough to accept.",
  ["Whether a \"Major\" comment that is \"Rejected\" still blocks the review from closing.",
   "Whether the author may verify.",
   "Whether a comment with no response text may be verified by the reviewer."],
- "The engine checks that the right people acted and that the record is complete. It decides blocking, refuses the author a reviewer's move and refuses a verification with no response text. Whether the response is right is a judgement for the independent reviewer.")
+ "The engine checks that the right people acted and that the record is complete. It decides blocking, refuses the author a reviewer's move and refuses a verification with no response text. Whether a response deserves to be accepted it leaves to a person, in its own words: \"A reviewer independent of the work decides it.\"")
 
 q(1, "The Lessons Learned dashboard and the ONNE register on 2026-10-01: what does the digest record about reviewsOverdue and reviewsDueSoon?",
- "The dashboard computes them, 1 and 2, and displays neither.",
+ "They read 1 and 2; the dashboard computes both and shows neither.",
  ["The dashboard displays them, and the engine leaves both uncomputed on this register.",
   "The engine computes them as 2 and 1, and the dashboard shows only the first of the two.",
   "Neither is computed, because the dashboard reads lessons one at a time."],
- "The engine answers the question. Whether a user sees the answer is the app's part, and RECON.md records that gap.")
+ "The engine's summary reads reviewsOverdue 1 and reviewsDueSoon 2 on the ONNE register. The digest records beside them that the dashboard computes both and displays neither: the engine answers, and whether a user sees the answer is the app's part.")
 
 q(3, "Across the three tiers of this course, the same kind of rule keeps the person with most interest in a yes from giving it. Which set of three refusals shows that rule?",
  "The originator approving a change, the author reviewing their own work, the author validating their own lesson.",

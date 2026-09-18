@@ -83,7 +83,7 @@ q(1, "A \"Withdrawn\" comment is asked to move to \"Responded\". Which sentence 
   "\"An open comment can only go to Responded or Withdrawn.\""],
  "\"Withdrawn\" has no legal next status, so the refusal names no way forward because there is none. The same-status sentence is reserved for a move from \"Withdrawn\" to \"Withdrawn\".")
 
-q(2, "The comment refusals fall into three families. Which family never names a way forward, and why?",
+q(2, "The comment refusals fall into three families. Which family tells the user the comment has no legal move left at all, and why?",
  "Moves out of \"Closed\" or \"Withdrawn\", because a final status has no legal move to name.",
  ["Moves to the status a comment already holds, because nothing needed doing on the record.",
   "Moves illegal from the current status, since those sentences only say that the move is refused.",

@@ -61,7 +61,7 @@ q(2, "bySeverityThenAge sorts IK-01's log for the coordinator. Which order does 
  ["C-09, C-01, C-03, C-04, C-06, C-07, C-08, C-02, C-05.",
   "C-01, C-02, C-08, C-03, C-04, C-05, C-06, C-07, C-09.",
   "C-01, C-03, C-04, C-09, C-06, C-07, C-08, C-02, C-05."],
- "Unresolved comments come first, worst severity first within them, then the resolved ones. The three blockers lead. The unrated C-09 sorts after every rated unresolved comment, the \"Editorial\" C-07 included, so a missing severity never lifts a comment above a rated one.")
+ "Unresolved comments come first, worst severity first within them, then the resolved ones. The three blockers lead. On this log the unrated C-09 comes after every rated unresolved comment, the \"Editorial\" C-07 included, and before C-08, the first of the resolved comments.")
 
 q(3, "IK-02 is \"In Review\" with a due date of 2026-10-01. What does isOverdue answer on 2026-10-01?",
  "Not overdue: a review due on the as-of date is on time.",
@@ -78,7 +78,7 @@ q(1, "On 2026-10-01 a coordinator checks IK-04, a review in the \"Cancelled\" st
  "isOverdue asks the stage first. At the same past due date, 2026-09-30, \"Draft\", \"In Review\" and \"Verification\" read overdue, and \"Closed\" and \"Cancelled\" do not. A cancelled review has no work left to be late with.")
 
 q(0, "The whole IKANG register, five reviews and 12 comments, is summarised on 2026-10-01. What are totalComments, open and blocking?",
- "12, 7 and 4, with C-10 and C-11 kept in the total alone.",
+ "12, 7 and 4, with C-10 and C-11 in neither open nor blocking.",
  ["12, 9 and 6, with C-10 and C-11 on IK-04 counted as open and blocking.",
   "10, 7 and 4, with C-10 and C-11 left out of the comment total.",
   "12, 8 and 5, with C-12 counted twice across two reviews."],

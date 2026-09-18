@@ -18,7 +18,7 @@ q(0, "A comment is raised and later closed by the shortest legal path. Which sta
  "Each role owns its step. The author answers, the reviewer accepts the answer, and the coordinator records the comment as finished. The other exit, withdrawal, finishes a comment without ever reaching \"Closed\".")
 
 q(3, "A reviewer tries to withdraw a comment that the author has already responded to. What does the engine say?",
- "Refused: only Verified or Rejected now.",
+ "Refused: a response now stands, so the only moves are to Verified or Rejected.",
  ["\"A withdrawn comment is final.\"",
   "\"The author of the work under review cannot withdraw a comment on it.\"",
   "Nothing: withdrawing is the reviewer's own move."],
@@ -110,12 +110,12 @@ q(3, "C-03 on IK-01 has been answered by the author and reads \"Responded\". Whi
   "blockingComments only, because a \"Major\" comment counts nowhere else."],
  "C-03 counts in totalComments 9, openComments 6 and blockingComments 3. A response is a claim the reviewer has not yet accepted, so it moves neither the open nor the blocking count until the reviewer verifies it.")
 
-q(0, "Which rule decides that the unrated C-09 sorts after C-07, the \"Editorial\" comment, in bySeverityThenAge?",
- "Worst severity first among unresolved comments, and C-09's missing severity places it after every rated one on this log.",
- ["Comments are sorted by comment number within the unresolved group.",
-  "Open comments sort by their age alone, oldest first.",
-  "An unrated comment is read as \"Editorial\" and sorts last among them."],
- "Unresolved comments come first, worst severity first within them, then the resolved ones. C-09 is unresolved and unrated, so it follows C-07 and precedes C-08, the first of the resolved comments.")
+q(0, "In bySeverityThenAge over IK-01's log, why does C-08, a \"Critical\" comment, come after C-09, a comment with no severity at all?",
+ "C-08 is \"Closed\" and so resolved, and every unresolved comment comes before every resolved one, whatever its severity.",
+ ["C-09 is read as \"Critical\" too, and between two comments of equal severity the older one sorts first.",
+  "The list runs by comment number within each severity, and C-09 was raised after C-08.",
+  "A \"Closed\" comment drops to the very end of the list, behind even the \"Verified\" C-02."],
+ "The sort puts unresolved before resolved and the worst severity first within each group. The six unresolved comments lead, and C-08, C-02 and C-05 follow as the resolved ones. C-09 cannot be read as \"Critical\", because it comes after the \"Minor\" C-06 and the \"Editorial\" C-07.")
 
 # ---- a lesson and its validation (section 15)
 
@@ -270,12 +270,12 @@ q(3, "How many golden cases does the digest measure across the five files this c
   "1037, in two time zones, Lagos and UTC."],
  "The five files hold 77, 140, 291, 184 and 345 cases. The other five assurance golden files belong to Compliance, Audit & Quality.")
 
-q(3, "How many held items does the digest list, and how many of them touch this tier's peer review and lessons registers?",
- "Nine, four of them in this tier.",
- ["Four, all of them in this tier's registers.",
-  "Nine, none of them in this tier, since held items belong to the risk register.",
+q(3, "How many held items does the digest list, and how is each one taught?",
+ "Nine, each taught as a stated limit and graded nowhere.",
+ ["Four, each an owner decision taken on 2026-09-18 and held in the engine.",
+  "Nine, each graded in a capstone field so that a learner proves the limit.",
   "Five, one for each golden file."],
- "Five belong to the registers of the earlier tiers. The four in this tier are the comment whose review is missing from the summary's list, the reviewer named by display name only, publishing that does not check again who validated, and the application counts that include lessons that are not visible.")
+ "A held item is a rule the engines state that no owner has decided, or a behaviour that is a limit of the engine, and the digest lists nine. Each is taught as a stated limit and graded nowhere. The owner decisions are the other list: rules an owner has decided, which an engine must follow.")
 
 q(1, "On 2026-10-01 the ONNE summary reads lessonsUnapplied 2. Which lessons are they?",
  "ON-03 and ON-04, the visible lessons with no adoption or adaptation.",
@@ -284,19 +284,19 @@ q(1, "On 2026-10-01 the ONNE summary reads lessonsUnapplied 2. Which lessons are
   "ON-03 and ON-05, the visible lessons whose reviews are inside the lead."],
  "ON-03's one application is a rejection and ON-04 has none, which is also why they lead lessonByAttention. ON-05 is not visible, and ON-06 to ON-09 are not counted because they are not visible either.")
 
-q(2, "Repair history from AS15, as digest SECTION 20 frames it: which two defects did AS15 repair?",
- "Emergency changes used to need every level signed before implementation, and a lesson author used to be able to validate their own lesson by typing a name.",
- ["Actions on finished changes used to count as open work for ever, and a comment with no severity used to sort above Critical.",
-  "A closed risk used to read review-overdue, and a change already in Implementation used to read overdue against its target date.",
-  "Peer review used to hold no rule on who reviews, and several refusals used to read \"A archived\"."],
- "SECTION 20 marks both the emergency route and the typed-name validation as AS15. The actions repair is marked AS14, and the closed risk, the change in Implementation, peer review independence and the refusal copy are ASC-0 repairs.")
+q(2, "Today, what must an Emergency change have signed to go into Implementation, and what before it may close?",
+ "Its first approval level signed with nobody rejecting to go in, and every level signed before it can close.",
+ ["Every approval level signed to go in, as for a Permanent change, and nothing further to close.",
+  "Its first level to go in, and nothing more to close once its ratification window has passed.",
+  "No signature to go in, being an emergency, and its first level signed later to close."],
+ "The emergency route is owner policy: reduced authority up front so a hazard can be dealt with, full review after the event. The gate into Implementation asks for level 1 and no rejection. The gate into Closed asks for every level, and until they sign the change reads \"Awaiting ratification\", or \"Ratification overdue\" once its window has passed.")
 
 q(0, "Agreement between an engine and its independent oracle proves what, and leaves what open?",
  "That the engine does what the stated rule says on those inputs; whether the rule is right stays open.",
  ["That the rule is the right rule, since two methods reached it by different routes.",
   "That the held items are closed, since both methods agree on them.",
   "That the app displays what the engine computes."],
- "Whether the rule is right belongs to the owner decisions, taken on 2026-09-18. A limit both methods share is still a limit, and what the app shows is the app's part.")
+ "Agreement shows two methods reading the stated rule the same way on those inputs. Whether a rule is right is for the owner to decide, and the digest keeps the rules an owner has decided apart from the held items nobody has ruled on. A limit both methods share is still a limit, and what the app shows is the app's part.")
 
 # ---- one loop across four registers (section 19)
 

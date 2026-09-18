@@ -99,19 +99,19 @@ q(2, "A golden case and the oracle bridge both check the engine. On which record
   "Both on the oracle author's records, replayed from the golden files."],
  "The bridge, oracle_bridge.py, replays every engine answer in the digest, IKANG and ONNE included. A defect that shows on only one record slips past a check that never meets it, which is why both exist.")
 
-q(3, "Repair history: which defect does SECTION 20 mark with AS14?",
- "Actions on finished changes used to count as open work for ever.",
- ["A comment with no severity used to sort above \"Critical\", ahead of every rated comment.",
-  "A lesson author used to be able to validate their own lesson by typing a name.",
-  "A closed risk used to read review-overdue."],
- "SECTION 20 marks the actions repair as AS14. The unrated comment sorting above Critical is AS12 to AS15 history without that mark, the typed-name validation is AS15, and the closed risk reading review-overdue is an ASC-0 repair.")
+q(3, "A change has finished, and one of its actions still reads \"Open\". What do openActions and overdueActions do with that action today?",
+ "They skip it: a finished change is locked, so its actions are not open work.",
+ ["They count it as open work until the action itself reads \"Complete\" or \"Cancelled\".",
+  "They skip it only on a change in the Closed stage, and count it on a Cancelled one.",
+  "They skip it, as they skip an action whose change is not in the register."],
+ "On 2026-10-01 the summary skips AC-06 and AC-07, whose changes, ES-06 in the Closed stage and ES-09 \"Cancelled\", are finished and locked, and a probe on the \"Rejected\" ES-11 counts its open action nowhere. AC-09, whose change is not in the register, still counts, and the digest holds that as a limit.")
 
-q(0, "Repair history from ASC-0 (engines PR #212): which of these peer review defects did that pull request fix?",
- "Peer review used to hold no rule on who reviews, and its summary used to count comments on cancelled reviews as blocking for ever.",
- ["A comment with no severity used to sort above \"Critical\".",
-  "A change already in Implementation used to read overdue against its target date.",
-  "An unreadable expiry used to read \"Expiring soon\" and pass the implementation gate."],
- "Today the engine refuses the author of the work as a reviewer and in every reviewer move, and the summary keeps comments on a finished review out of the open and blocking counts. The unrated comment is peer review history from AS12 to AS15, the change in Implementation is ASC-0 history in management of change, and the unreadable expiry is AS12 to AS15 history in management of change.")
+q(0, "Today, how does the peer review summary count an unresolved \"Critical\" comment that sits on a \"Cancelled\" review?",
+ "In the comment total and its severity and status columns, and in neither the open nor the blocking count.",
+ ["In the open and blocking counts for as long as it stays unresolved, whatever its review's stage.",
+  "Nowhere at all, the comment total included, because its review is locked.",
+  "In the open count and not the blocking count, because nobody can resolve it."],
+ "A \"Cancelled\" review is locked, and nobody can move a comment on it, so a work count that included one could never fall. The summary lists such a comment in every column that describes the log and leaves it out of the counts of work still owed. The digest's case is C-10 on IK-04.")
 
 emit(Q, '/root/wt-as-riskchange-nextgen/tools/course-banks/riskchange/advanced/asrca_m05.json', expect_n=15)
 finish()
