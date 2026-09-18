@@ -13,7 +13,7 @@ q(3, "A Major NCR with nothing recorded is asked to close. What does canCloseNcr
  ["A root cause, since a major non-conformance needs one before it closes.",
   "At least one corrective action that has been verified effective.",
   "The date the NCR was raised, so that its age can be read."],
- "The first refusal is \"Agree the disposition first: what happens to the non-conforming item.\" It is the same first refusal at every severity, Observation included, and NCR-2026-027, a Minor NCR, meets it at the as-of date.")
+ "The first refusal is \"Agree the disposition first: what happens to the non-conforming item.\" It is the first refusal on the Major walk and on the Observation walk, and NCR-2026-027, a Minor NCR, meets it at the as-of date.")
 
 q(1, "A Major NCR has its disposition recorded, Repair, and nothing else. What does canCloseNcr answer?",
  "REFUSED: Record the date the disposition was agreed.",

@@ -41,7 +41,7 @@ q(1, "Items 2 and 6 are answered Nonconformant. What do they do to checklistProg
 q(3, "An audit has no checklist at all. What does checklistProgress print, and what should a screen show for it?",
  "percent null, shown as no checklist to measure.",
  ["percent 0, shown as an empty bar on the audit's screen.",
-  "percent 100, shown as a full bar for a finished audit.",
+  "No figure, since checklistProgress refuses an audit with no checklist.",
   "percent 71, the figure carried over from AUD-2026-007."],
  "With no questions there is no fraction to take. planProgress over a plan with no points and programmeProgress over no audits print null in the same way.")
 

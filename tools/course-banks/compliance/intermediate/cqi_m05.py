@@ -43,7 +43,7 @@ q(0, "In what order does canReportAudit refuse AUD-2026-007 on its walk from the
  ["Critical item 6 with no finding, then unanswered items, then the conclusion.",
   "The conclusion, then unanswered items, then critical item 6 with no finding.",
   "Unanswered items, then the conclusion, then critical item 6 with no finding."],
- "The checklist comes first because a finding is raised from an answer, and the findings come before the conclusion because the conclusion has to account for them. With the conclusion written the walk reads ALLOWED.")
+ "As recorded the refusal names the 4 unanswered items. With every item answered and the two blank Not applicable answers given reasons, it names critical item 6. With a finding raised from item 6 as well, it asks for the conclusion, and with the conclusion written the walk reads ALLOWED.")
 
 q(1, "Every item on AUD-2026-007 is answered and a finding is raised from item 6. What does canReportAudit still ask for?",
  "The audit conclusion, which it calls the deliverable.",

@@ -47,7 +47,7 @@
   "prompt": "An audit has no checklist at all. What does checklistProgress print, and what should a screen show for it?",
   "options": [
    "percent 0, shown as an empty bar on the audit's screen.",
-   "percent 100, shown as a full bar for a finished audit.",
+   "No figure, since checklistProgress refuses an audit with no checklist.",
    "percent 71, the figure carried over from AUD-2026-007.",
    "percent null, shown as no checklist to measure."
   ],

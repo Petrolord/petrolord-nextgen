@@ -34,7 +34,7 @@ q(2, "Which column on the QAP-2026-014 table does the engine derive from the poi
  ["overdue.",
   "resolved.",
   "planned."],
- "stops work reads true on every Hold point row and false on every other row. resolved and overdue change as a point's status and dates change.")
+ "BLOCKING_POINT_TYPES, the stop work list, holds one type, Hold point. stops work reads true on every Hold point row, whether Passed, Failed or Pending, and false on every other row whatever its status. resolved and overdue change as a point's status and dates change.")
 
 # m02, closing the plan
 q(1, "Once QAP-2026-014 is Closed, which of these is still allowed?",
@@ -63,7 +63,7 @@ q(0, "TWO MODULES. The plan gate counts NCRs as open. Which NCR status clears th
  ["Closed.",
   "Disposition agreed.",
   "Actions in progress."],
- "The walk's last step is every NCR closed or voided. Closed goes through the NCR's own closure gate, and Voided withdraws the NCR; canCloseNcr on NCR-2026-011 reads \"This non-conformance is already voided.\"")
+ "The walk's last step is every NCR closed or voided. NCR-2026-011 reads Voided with no disposition and k5 still Open, and canCloseNcr refuses an NCR with no disposition before anything else, so it reached Voided without passing that gate. Asked now, canCloseNcr answers \"This non-conformance is already voided.\" Disposition agreed and Actions in progress read open, and the plan gate counts them.")
 
 q(3, "The failed-point rows put one other point Failed on a plan whose hold points are Passed and NCRs closed. Which of them lets the plan close?",
  "None of them.",
@@ -122,12 +122,12 @@ q(0, "Which walks refuse an NCR that has its disposition and date but no root ca
   "The Major, Critical and Minor walks."],
  "The root cause refusals read \"A major non-conformance needs a root cause before it closes.\" and the same with critical. The Minor walk prints ALLOWED for no root cause and no actions.")
 
-q(3, "Of the open NCRs on the register, which make up the dashboard's serious and open 2?",
- "The Major weld reject and the Critical flange rating.",
- ["The two Major NCRs, the weld reject and the pipe ovality.",
-  "The Critical flange rating and the Minor coating.",
-  "The weld reject and the coating thickness, both with open actions."],
- "NCR-2026-031 is the Major radiography reject on weld TW-07 and NCR-2026-019 the Critical wrong flange rating. NCR-2026-011, pipe ovality, is Major and Voided, so it is not open.")
+q(3, "The NCR summarise prints oldest open 117 days. Which NCR carries that age?",
+ "NCR-2026-019, raised 2026-06-20.",
+ ["NCR-2026-006, the first NCR on the register to be raised.",
+  "NCR-2026-011, raised 2026-05-11 and since Voided.",
+  "NCR-2026-031, now overdue."],
+ "The open ages are 43, 64 and 117, and NCR-2026-019, Disposition agreed, is the 117. NCR-2026-006 was raised first, on 2026-03-03, and its age stopped at 48 when it closed; NCR-2026-011 stopped at 2 when it was voided. NCR-2026-031 is open at 43.")
 
 q(1, "k6 is an open corrective action on NCR-2026-027, due 2026-11-01. Why is it not in the action summarise's overdue 1?",
  "It is not yet due: 2026-11-01 lies ahead.",
@@ -206,7 +206,7 @@ q(2, "On four audits, Reported, Cancelled with no reason, Cancelled with a reaso
  ["1: the Planned one, since both cancelled audits are dealt with.",
   "3: every audit except the Reported one.",
   "2: the two Cancelled ones, since neither was delivered."],
- "One rule decides outstanding. programmeProgress counts 2, summarise counts 2, and canCompleteProgramme refuses on \"2 audits in this programme have not been reported or cancelled.\"")
+ "One rule decides outstanding. programmeProgress counts 2, summarise counts 2, and canCompleteProgramme refuses on \"2 audits in this programme have not been reported or cancelled.\" A cancellation without a written reason is outstanding, as AUD-2026-008 is when cancelled with none, and a Planned audit is outstanding, as AUD-2026-006 and AUD-2026-008 are named at the as-of date.")
 
 q(1, "An audit programme is Approved. What must happen before it can be marked Complete?",
  "It must first move to In progress.",
@@ -227,7 +227,7 @@ q(0, "TWO MODULES. What two rules about the lead auditor does this tier read?",
  ["There must be one with an account.",
   "It must be external.",
   "It may be the auditee with a co-signer."],
- "One rule sits in the reporting gate and one in auditIndependence, and an outside auditor with no account passes both.")
+ "One rule sits in the reporting gate, which refuses with \"Name the lead auditor.\", and one in auditIndependence, which allows an external lead auditor named in text with no account.")
 
 q(2, "canCompleteProgramme refuses the programme as recorded. Which audits does it name?",
  "AUD-2026-005, AUD-2026-006, AUD-2026-007 and AUD-2026-008.",
@@ -267,7 +267,7 @@ q(2, "TWO MODULES. The plan gate reads NCRs and the audit gate reads findings. W
 
 q(3, "TWO MODULES. What does percent 71 on the checklist and percent 50 on the plan each leave unsaid?",
  "71 does not say what conformed; 50 does not say which points were waived.",
- ["71 does not say what was answered; 50 does not say which points were passed.",
+ ["71 does not say how much was answered; 50 does not say how many points were resolved.",
   "71 leaves out the Nonconformant answers; 50 leaves out the Waived points.",
   "Nothing; each percent is the count of good results over the total."],
  "Items 2 and 6, Nonconformant, sit inside answered 10. W-06 (Waived) and M-07 (Not applicable) sit inside resolved 6 beside the passes.")
@@ -279,12 +279,12 @@ q(1, "A plan has 23 of its 40 points resolved. What percent does planProgress pr
   "63, the figure for 5 of 8."],
  "Half up on the exact fraction gives 58 here, and that is the line the digest carries.")
 
-q(0, "At the as-of date canCloseNcr allows NCR-2026-019, the oldest open NCR. Which record meets the last requirement of the Critical walk?",
+q(0, "At the as-of date canCloseNcr allows NCR-2026-019, a Critical NCR. Which record meets the last requirement of the Critical walk?",
  "k4, verified effective.",
  ["Its disposition, Return to supplier, agreed and dated.",
-  "Its age, 117 days.",
+  "k3, marked Complete.",
   "Its place at order 1 in ncrByUrgency."],
- "NCR-2026-019 is Critical, and a Critical NCR needs a corrective action verified effective. k3 was found ineffective and k4 was verified effective.")
+ "The Critical walk ends on a corrective action verified effective, after the disposition and its date, the root cause and a corrective action. On NCR-2026-019 k3 was checked and found ineffective, and k4 is the one action that reads verified effective true.")
 
 q(3, "H-08 is removed from QAP-2026-014 while the plan is still a Draft. What does canRemoveCheckpoint answer?",
  "ALLOWED.",

@@ -30,7 +30,7 @@ q(1, "checklistProgress prints outstanding 4 for AUD-2026-007, and the programme
   "summarise reads the programme at an earlier date than the checklist."],
  "Items 10 and 11 have a recorded row that is not an answer, and those are the answers outstanding 2. checklistProgress reads all 14 questions and counts 10, 11, 13 and 14. Neither figure is wrong; each counts what it was given.")
 
-q(3, "The first canReportAudit refusal on AUD-2026-007 counts 4 items. Which figure does that count agree with?",
+q(3, "The first canReportAudit refusal on AUD-2026-007 counts 4 items. Which printed figure counts the same four items?",
  "checklistProgress's outstanding 4.",
  ["The programme summarise's answers outstanding 2.",
   "The programme summarise's audits outstanding 4.",
@@ -66,18 +66,18 @@ q(3, "Which of the tier's progress functions print percent null over an empty re
  "A plan with no points, no checklist at all and no audits each print percent null. An empty record has no fraction to take.")
 
 q(2, "A request to change a record is refused. What happens to the record?",
- "Nothing changes, and the refusal names the next thing missing.",
+ "Nothing changes, and the refusal says why the request was stopped.",
  ["The request is held as pending on the record until somebody corrects it.",
   "The record moves on to the requested status, with the refusal attached to it.",
   "The item is marked Failed until the request is sent again."],
  "A request is not a result. H-08 stays Pending after its refused pass, stays on the Active plan after its refused removal, and R-04 still reads Passed.")
 
-q(1, "The programme reads reported 3 of total 8 and percent 38. What is the percent built from?",
- "The reported audits over all 8, so the cancelled one adds nothing.",
- ["The reported and cancelled audits together over all 8.",
-  "The closed audits over all 8, with AUD-2026-002 left out.",
-  "The reported audits over those not overdue."],
- "Reported 3 counts AUD-2026-001, AUD-2026-002 and AUD-2026-003. AUD-2026-004 is in cancelled 1 and in neither reported nor outstanding, and a cancellation does not raise the percent.")
+q(1, "The programme reads reported 3, cancelled 1 and percent 38. What does AUD-2026-004, the cancelled audit, add to the percent?",
+ "Nothing. The percent counts reported audits, and it is not one.",
+ ["It counts as delivered, the same as a reported audit.",
+  "It counts as delivered once its cancellation reason is on the record.",
+  "It counts as half an audit, between reported and outstanding."],
+ "Reported 3 counts AUD-2026-001, AUD-2026-002 and AUD-2026-003, and AUD-2026-004 sits in cancelled 1, in neither reported nor outstanding. A programme is delivered when its audits are reported, and the digest records that the programme counts reported audits only, which is why a complete programme that contains a cancelled audit reads below one hundred percent by design.")
 
 q(0, "What does the Expert tier put in place of this tier's percents when it reads certification readiness?",
  "A list of blockers, each one named.",
@@ -88,7 +88,7 @@ q(0, "What does the Expert tier put in place of this tier's percents when it rea
 
 q(3, "A finding here feeds a risk register. Where does this course send a learner for risk scores and bands?",
  "To the sibling course, Risk, Change & Learning.",
- ["To the NCR dashboard's serious and open count, which picks out Major and Critical.",
+ ["To the NCR summarise and its serious and open count.",
   "To ncrAgeing's severity columns and its four age bands.",
   "To the programme summarise's open major count."],
  "Risk scores, bands and the approval rules for change belong to the sibling course, and this course sends the learner there for them.")

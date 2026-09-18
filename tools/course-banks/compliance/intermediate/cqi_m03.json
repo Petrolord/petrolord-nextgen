@@ -8,7 +8,7 @@
    "The disposition: what happens to the non-conforming item."
   ],
   "answer": 3,
-  "explanation": "The first refusal is \"Agree the disposition first: what happens to the non-conforming item.\" It is the same first refusal at every severity, Observation included, and NCR-2026-027, a Minor NCR, meets it at the as-of date."
+  "explanation": "The first refusal is \"Agree the disposition first: what happens to the non-conforming item.\" It is the first refusal on the Major walk and on the Observation walk, and NCR-2026-027, a Minor NCR, meets it at the as-of date."
  },
  {
   "prompt": "A Major NCR has its disposition recorded, Repair, and nothing else. What does canCloseNcr answer?",

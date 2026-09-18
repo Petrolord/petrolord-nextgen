@@ -52,7 +52,7 @@
    "Unanswered items, then the conclusion, then critical item 6 with no finding."
   ],
   "answer": 0,
-  "explanation": "The checklist comes first because a finding is raised from an answer, and the findings come before the conclusion because the conclusion has to account for them. With the conclusion written the walk reads ALLOWED."
+  "explanation": "As recorded the refusal names the 4 unanswered items. With every item answered and the two blank Not applicable answers given reasons, it names critical item 6. With a finding raised from item 6 as well, it asks for the conclusion, and with the conclusion written the walk reads ALLOWED."
  },
  {
   "prompt": "Every item on AUD-2026-007 is answered and a finding is raised from item 6. What does canReportAudit still ask for?",

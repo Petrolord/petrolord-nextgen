@@ -67,9 +67,9 @@ q(1, "R-04, a review point that Passed, is asked to be removed from the Active p
 
 q(3, "W-09, a pending witness point, may be removed from the Active plan. When is the same removal refused?",
  "Once the plan is Closed.",
- ["Once its planned date, 2026-10-21, has passed.",
+ ["While the plan is Active, since W-09 is still Pending.",
   "Once the plan has left Draft, as for a hold point.",
-  "Once H-08, the hydrostatic test, has Passed."],
+  "Never, since a witness point stops no work."],
  "The refusal on the Closed plan reads \"This plan is closed. Its inspection points are the record it was finished on.\" A closed plan is frozen.")
 
 q(0, "Which request to raise an NCR does canRaiseNcr refuse?",

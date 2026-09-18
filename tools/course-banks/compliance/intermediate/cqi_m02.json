@@ -90,9 +90,9 @@
  {
   "prompt": "W-09, a pending witness point, may be removed from the Active plan. When is the same removal refused?",
   "options": [
-   "Once its planned date, 2026-10-21, has passed.",
+   "While the plan is Active, since W-09 is still Pending.",
    "Once the plan has left Draft, as for a hold point.",
-   "Once H-08, the hydrostatic test, has Passed.",
+   "Never, since a witness point stops no work.",
    "Once the plan is Closed."
   ],
   "answer": 3,

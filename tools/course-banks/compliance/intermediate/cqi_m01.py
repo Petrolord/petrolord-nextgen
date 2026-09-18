@@ -54,8 +54,8 @@ q(3, "S-10, site surveillance, reads In progress and overdue true. It is set Not
  "ALLOWED, with nothing asked of it.",
  ["REFUSED, because S-10 reads overdue true against its planned date of 2026-10-01.",
   "REFUSED, because setting any point aside needs the date and who decided it.",
-  "ALLOWED, and S-10 stays in the outstanding count until somebody passes it."],
- "A surveillance point stops nothing, and the digest prints ALLOWED for S-10 with nothing recorded. Not applicable is one of the three resolved statuses, so the point leaves the outstanding count. The same request on H-11, a hold point, is refused until a date, a name and a reason are on the record.")
+  "ALLOWED once a reason is recorded, the same record H-11 needs."],
+ "A surveillance point stops nothing, and the digest prints ALLOWED for S-10 with nothing recorded: no date, no name and no reason. Not applicable is one of the three statuses in CHECKPOINT_RESOLVED_STATUSES. The same request on H-11, a hold point, is refused until a date, a name and a reason are on the record.")
 
 q(1, "Which of these points is inside planProgress's resolved 6 at the as-of date?",
  "W-06, the coating holiday test, which reads Waived.",
@@ -81,9 +81,9 @@ q(2, "SECTION 11 prints four cases of how a planProgress percent rounds. Which p
 q(3, "planProgress is asked about a plan with no points. What does it print for the percent?",
  "null.",
  ["0.",
-  "100.",
+  "50.",
   "It refuses to count an empty plan."],
- "An empty plan has no fraction to take, and planProgress over a plan with no points prints percent null. A screen that shows zero or one hundred has invented a figure the engine does not make.")
+ "An empty plan has no fraction to take, and planProgress over a plan with no points prints percent null. A screen that shows 0 there, or the 50 that QAP-2026-014 reads, has invented a figure the engine does not make.")
 
 q(1, "Between the as-of date reading, resolved 6 and percent 50, and the allowed closure step, resolved 9 of 12 and percent 75, which three points were resolved?",
  "H-05, H-08 and H-11, all three of them hold points.",
