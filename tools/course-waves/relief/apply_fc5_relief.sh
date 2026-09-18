@@ -82,11 +82,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20260925_fc5_relief_course           ) echo 36c096ef26ed04732390bee5282b8a1c5685ab0500257e05c05bb4dca9ac5e18 ;;
-    20260925_fc5_relief_beginner_deep    ) echo bb922176fe5c1f61f162bfa5fc40a27678cee93d36919e56702c701d5121ef8c ;;
-    20260925_fc5_relief_intermediate_deep) echo ac20f953dc1d709b0b0b0ee99a33c287f799fc6757dfcee01f8307e9d498927f ;;
-    20260925_fc5_relief_advanced_deep    ) echo d0f98a515b707052016483c97b756f8d3e9b09e66ffa8e8ce54643b4b12d6daa ;;
-    20260925_fc5_relief_go_live          ) echo bf35ab1cc9e6ac43a247530abb55b82b7828cb4c340dab51a8878a0792497e56 ;;
+    20260925_fc5_relief_course                  ) echo fffd9b98e5be00879320bac0465bc5a17409fc8dbdd6537b3b0dfc3834acef6b ;;
+    20260925_fc5_relief_beginner_deep           ) echo 4e6c061947169e0b924c6dd09c2fb6f0ba1d66b6f1674b2b4b15afb072549bff ;;
+    20260925_fc5_relief_intermediate_deep       ) echo 3d8d60286c6ea8270aa151d4a4a3a78e2620cfaa1414928dd5dd4c408e6297ce ;;
+    20260925_fc5_relief_advanced_deep           ) echo 9c42d82af0a62417ec2c2a50c70918a3c100da42661ba89417a501eee30ba27e ;;
+    20260925_fc5_relief_go_live                 ) echo 145c665171027c84a86160e9d37fe6ea5a89dc2d0db2e37c3edaa5b10e68e3d9 ;;
     *) echo UNPINNED ;;
   esac
 }
