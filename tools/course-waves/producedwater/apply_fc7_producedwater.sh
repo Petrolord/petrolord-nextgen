@@ -84,9 +84,9 @@ digest_for() {
   case $1 in
     20260925_fc7_producedwater_course           ) echo ac8c99d931fa99bed28a1189dc5c3e2c7f1b899cac164093365b0410ed4b6f18 ;;
     20260925_fc7_producedwater_beginner_deep    ) echo b21f79b1c810eef76ec8d57741f18c3053bedd98827d23af74e1e007cc047b35 ;;
-    20260925_fc7_producedwater_intermediate_deep) echo 92c21250158b60a74c4263e7c78299831f16398223092eee3f4b9abacb67ca08 ;;
+    20260925_fc7_producedwater_intermediate_deep) echo 2d32e0e2713f962bc2ac6a74dcaa40d8351ec3e12b56d79224f678eadd53da25 ;;
     20260925_fc7_producedwater_advanced_deep    ) echo dcc31c06383caacba806e1b06459e35c13fe3966e2065166b5ec62507f9dce27 ;;
-    20260925_fc7_producedwater_go_live          ) echo 7a65e8b978d8d6848c58f22a607334e39e962d15de4f8724228aae5c09cca0ac ;;
+    20260925_fc7_producedwater_go_live          ) echo 26a162a9ae6e47e8b0931c24aa9e05650c76b84e75cded2fc2ed7bed9c22cd77 ;;
     *) echo UNPINNED ;;
   esac
 }

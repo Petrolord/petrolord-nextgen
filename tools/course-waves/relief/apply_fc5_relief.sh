@@ -85,8 +85,8 @@ digest_for() {
     20260925_fc5_relief_course                  ) echo fffd9b98e5be00879320bac0465bc5a17409fc8dbdd6537b3b0dfc3834acef6b ;;
     20260925_fc5_relief_beginner_deep           ) echo 4e6c061947169e0b924c6dd09c2fb6f0ba1d66b6f1674b2b4b15afb072549bff ;;
     20260925_fc5_relief_intermediate_deep       ) echo 3d8d60286c6ea8270aa151d4a4a3a78e2620cfaa1414928dd5dd4c408e6297ce ;;
-    20260925_fc5_relief_advanced_deep           ) echo 9c42d82af0a62417ec2c2a50c70918a3c100da42661ba89417a501eee30ba27e ;;
-    20260925_fc5_relief_go_live                 ) echo 145c665171027c84a86160e9d37fe6ea5a89dc2d0db2e37c3edaa5b10e68e3d9 ;;
+    20260925_fc5_relief_advanced_deep           ) echo edb6e3f58c3fbb8a3fdcd859aff794c4f36b8f3ef40c1a87353e2fb2e6388672 ;;
+    20260925_fc5_relief_go_live                 ) echo 62292a714d2332a5714d030b8b3b73d47367a7c0bac1ec618e4a37be81a90ed8 ;;
     *) echo UNPINNED ;;
   esac
 }
