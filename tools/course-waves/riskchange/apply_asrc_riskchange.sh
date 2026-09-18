@@ -89,11 +89,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20261001_asrc_riskchange_course           ) echo 8c1a5a526be15677a8077f12152c07a4eef8a3b388aa6eb7fdd65bca6a321cde ;;
+    20261001_asrc_riskchange_course           ) echo 4cfa52709374e61f2d43067bcf9bae31a0ccb367c0afcab5bbeed3c737eda585 ;;
     20261001_asrc_riskchange_beginner_deep    ) echo f16c3dc5f9f9c8d361fafc282459525692ec28049c32d71d9912d8d3dda3588e ;;
     20261001_asrc_riskchange_intermediate_deep) echo 7444074616410673600e59038975d055e6b54e4bb30f4bb35206cf8d489cba55 ;;
     20261001_asrc_riskchange_advanced_deep    ) echo b16e050d7d9cf8aeec5fb4543a0af3ab1e022a8e24f587fcf0cc0e8c428b1db4 ;;
-    20261001_asrc_riskchange_go_live          ) echo 6b2b87b5fc201e13f0000e16fa15a81830af8b4a7ee5b45c2e3d2ce706df5ab8 ;;
+    20261001_asrc_riskchange_go_live          ) echo a87e312a0a4be9ab787ebf4491ee070d57a085e76e44a9d90e8bbe263def96a8 ;;
     *) echo UNPINNED ;;
   esac
 }

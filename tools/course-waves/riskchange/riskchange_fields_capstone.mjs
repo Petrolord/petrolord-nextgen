@@ -225,11 +225,13 @@ export const PROMPTS = Object.freeze({
     + 'as-of date to the next review of IG-12, negative if it has passed.',
   intermediate: 'OKOMU compression station, change register, read on 2026-10-01. The tables list every change with its '
     + 'type, stage, expiry date and actual implementation date, every approval row with its change, level and status, '
-    + 'and every action with its change, type, status and due date. Give: the date by which every remaining approval '
+    + 'and every action with its change, type, status and due date. A change listed with no actual implementation date '
+    + 'has none recorded. Give: the date by which every remaining approval '
     + 'level of OK-01 must have signed, written as eight digits year month day; how many changes read Expiring soon; how '
     + 'many read Expired; how many actions are open work; how many open actions are past their due date; and how many '
     + 'changes read Ratification overdue.',
-  advanced: 'ETIM floating production unit, read on 2026-10-01. The first table is the comment log of review ET-R1 with '
+  advanced: 'ETIM floating production unit, read on 2026-10-01. Review ET-R1 is in Verification, an active stage. '
+    + 'The first table is the comment log of review ET-R1 with '
     + 'each comment severity and disposition. The second is every application recorded for lesson EL-01 with its '
     + 'target, outcome and date; EL-01 records its event date. The third is the lessons register with each lesson status '
     + 'and review date. Give: how many comments block the closure of ET-R1; how many comments on ET-R1 are open; how many '

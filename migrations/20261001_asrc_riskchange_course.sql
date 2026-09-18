@@ -90,7 +90,7 @@ IG-12 | title Night driving between the flow station and the jetty | status Open
   'riskchange', 'intermediate', 'professional',
   'OKOMU, a compression station change register read on 2026-10-01',
   'Signatures, expiry and the work still open',
-  'OKOMU compression station, change register, read on 2026-10-01. The tables list every change with its type, stage, expiry date and actual implementation date, every approval row with its change, level and status, and every action with its change, type, status and due date. Give: the date by which every remaining approval level of OK-01 must have signed, written as eight digits year month day; how many changes read Expiring soon; how many read Expired; how many actions are open work; how many open actions are past their due date; and how many changes read Ratification overdue.
+  'OKOMU compression station, change register, read on 2026-10-01. The tables list every change with its type, stage, expiry date and actual implementation date, every approval row with its change, level and status, and every action with its change, type, status and due date. A change listed with no actual implementation date has none recorded. Give: the date by which every remaining approval level of OK-01 must have signed, written as eight digits year month day; how many changes read Expiring soon; how many read Expired; how many actions are open work; how many open actions are past their due date; and how many changes read Ratification overdue.
 
 TABLE 1, THE OKOMU CHANGES, one line per change:
 OK-01 | moc number MOC-OK-01 | title Replace the anti-surge valve positioner on compressor K-301 | type Emergency | stage Implementation | expiry date 2026-12-15 | actual implementation date 2026-09-28 | originator id u-dayo.
@@ -162,7 +162,7 @@ OX-15 | moc id OK-14 | action type Pre-implementation | status Open | due date 2
   'riskchange', 'advanced', 'expert',
   'ETIM, a floating production unit review log and lessons register read on 2026-10-01',
   'Closure, proof of use and the review dates',
-  'ETIM floating production unit, read on 2026-10-01. The first table is the comment log of review ET-R1 with each comment severity and disposition. The second is every application recorded for lesson EL-01 with its target, outcome and date; EL-01 records its event date. The third is the lessons register with each lesson status and review date. Give: how many comments block the closure of ET-R1; how many comments on ET-R1 are open; how many applications of EL-01 changed something; the date EL-01 was last applied, written as eight digits year month day; the age of EL-01 in whole days; and how many lessons on the register read review due soon.
+  'ETIM floating production unit, read on 2026-10-01. Review ET-R1 is in Verification, an active stage. The first table is the comment log of review ET-R1 with each comment severity and disposition. The second is every application recorded for lesson EL-01 with its target, outcome and date; EL-01 records its event date. The third is the lessons register with each lesson status and review date. Give: how many comments block the closure of ET-R1; how many comments on ET-R1 are open; how many applications of EL-01 changed something; the date EL-01 was last applied, written as eight digits year month day; the age of EL-01 in whole days; and how many lessons on the register read review due soon.
 
 TABLE 1, THE COMMENT LOG OF REVIEW ET-R1, one line per comment:
 EC-01 | review id ET-R1 | severity Critical | status Open | created at 2026-09-02T08:00:00Z.

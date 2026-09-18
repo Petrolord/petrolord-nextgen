@@ -230,7 +230,7 @@ begin
 
   -- intermediate: the prose verbatim, every record line present, and no other.
   select prompt into v_prompt from public.academy_capstones where app_slug = 'riskchange' and tier = 'intermediate';
-  if split_part(v_prompt, E'\n\n', 1) <> 'OKOMU compression station, change register, read on 2026-10-01. The tables list every change with its type, stage, expiry date and actual implementation date, every approval row with its change, level and status, and every action with its change, type, status and due date. Give: the date by which every remaining approval level of OK-01 must have signed, written as eight digits year month day; how many changes read Expiring soon; how many read Expired; how many actions are open work; how many open actions are past their due date; and how many changes read Ratification overdue.' then
+  if split_part(v_prompt, E'\n\n', 1) <> 'OKOMU compression station, change register, read on 2026-10-01. The tables list every change with its type, stage, expiry date and actual implementation date, every approval row with its change, level and status, and every action with its change, type, status and due date. A change listed with no actual implementation date has none recorded. Give: the date by which every remaining approval level of OK-01 must have signed, written as eight digits year month day; how many changes read Expiring soon; how many read Expired; how many actions are open work; how many open actions are past their due date; and how many changes read Ratification overdue.' then
     raise exception 'riskchange go-live refused: the intermediate prompt prose is not the prose PROMPTS carries';
   end if;
   select count(*), string_agg(l, ' / ') into v_n, v_names
@@ -301,7 +301,7 @@ begin
 
   -- advanced: the prose verbatim, every record line present, and no other.
   select prompt into v_prompt from public.academy_capstones where app_slug = 'riskchange' and tier = 'advanced';
-  if split_part(v_prompt, E'\n\n', 1) <> 'ETIM floating production unit, read on 2026-10-01. The first table is the comment log of review ET-R1 with each comment severity and disposition. The second is every application recorded for lesson EL-01 with its target, outcome and date; EL-01 records its event date. The third is the lessons register with each lesson status and review date. Give: how many comments block the closure of ET-R1; how many comments on ET-R1 are open; how many applications of EL-01 changed something; the date EL-01 was last applied, written as eight digits year month day; the age of EL-01 in whole days; and how many lessons on the register read review due soon.' then
+  if split_part(v_prompt, E'\n\n', 1) <> 'ETIM floating production unit, read on 2026-10-01. Review ET-R1 is in Verification, an active stage. The first table is the comment log of review ET-R1 with each comment severity and disposition. The second is every application recorded for lesson EL-01 with its target, outcome and date; EL-01 records its event date. The third is the lessons register with each lesson status and review date. Give: how many comments block the closure of ET-R1; how many comments on ET-R1 are open; how many applications of EL-01 changed something; the date EL-01 was last applied, written as eight digits year month day; the age of EL-01 in whole days; and how many lessons on the register read review due soon.' then
     raise exception 'riskchange go-live refused: the advanced prompt prose is not the prose PROMPTS carries';
   end if;
   select count(*), string_agg(l, ' / ') into v_n, v_names
