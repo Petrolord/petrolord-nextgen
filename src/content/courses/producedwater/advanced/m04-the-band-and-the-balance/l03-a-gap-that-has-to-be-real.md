@@ -25,7 +25,7 @@ The basin, the plate pack and the cyclone agree to rounding. That is the right a
 
 Nothing is being tolerated on those rows. The gap is floating point noise, so anything materially larger would be a real disagreement to go and find.
 
-## The bottom three rows, and why larger is better
+## The train rows, and why larger is better
 
 The train rows are larger by orders of magnitude, and this is where a careless reviewer tightens a tolerance and breaks a good gate.
 

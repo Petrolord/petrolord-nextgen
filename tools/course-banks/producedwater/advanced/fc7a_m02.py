@@ -63,11 +63,11 @@ q(3, "A caller wants a finer answer out of the quadrature and a colleague wants 
  "Resolution decides how finely volume is apportioned within the covered range, which is what the quadrature integrates against. Reach decides how much is covered at all.")
 
 q(1, "Why is a median read as a bare bin midpoint a coarse instrument on this grid?",
- "One step of the grid is a few percent of a diameter, so the answer is pinned to the nearest step, and a bin wide enough to hold six orders of magnitude of outlet concentration reports one value for all of them.",
+ "Each bin's upper edge sits 13.503861 percent above its lower edge on the OGBOTOBO grid, so a midpoint median takes one value per bin and two outlets whose medians share a bin report the same one.",
  ["Because the module reports the index of the bin the median falls in rather than a diameter, so the caller has to convert it.",
   "Because the truncated tail sits in the outermost bins, so a midpoint read there is biased by the volume the normalisation absorbed.",
   "Because the median is taken before the outlet bins are normalised, so a midpoint is read against a surviving volume rather than against one."],
- "Two trains with genuinely different outlets come back with the same droplet median, which is exactly the comparison a reader is about to make.")
+ "Two trains with genuinely different outlets can come back with the same droplet median, which is exactly the comparison a reader is about to make.")
 
 q(2, "Across the cut sweep the outlet concentration falls from 1125.805910 ppm to 43.150877 ppm while the outlet median falls from 9.006299 to 2.179329 micron. What does each column tell a designer sizing a polishing stage?",
  "The concentration says how much oil is left, and the median says how hard the oil that is left will be to remove next.",

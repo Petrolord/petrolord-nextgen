@@ -20,11 +20,11 @@ The module defaults to 1.5, and that default is a declared constant rather than 
 
 ## The row at the top of the table
 
-An allowance of 1 says the basin behaves exactly as its dimensions predict, with no short-circuiting anywhere. That is the most optimistic assumption available and it produces the finest cut size in the table, which is what makes it dangerous. It is the value a designer under pressure reaches for, and it is the value the engine warns about.
+An allowance of 1 says the basin behaves exactly as its dimensions predict, with no short-circuiting anywhere. That is the plug flow ideal and it produces the finest cut size in the table, which is what makes it dangerous. It is the value a designer under pressure reaches for, and it is the value the engine warns about.
 
 ## The values it declines outright
 
-Three inputs get a refusal rather than a warning, and the engine's own wording is worth reading. An F of 0 is refused because the short-circuit factor F must be positive and this is 0, and because an F of zero or less is not a perfect separator, it is an undefined one. An F of -2 is refused the same way and named the same way. An F of 6 is refused because F is a turbulence allowance customarily between 1.3 and 1.8, this module holds it to 5, and this is 6.
+Three inputs get a refusal rather than a warning, and the engine's own wording is worth reading. An F of 0 is refused because the short-circuit factor F must be positive and this is 0, and because an F of zero or less leaves the separator undefined. An F of -2 is refused the same way and named the same way. An F of 6 is refused because F is a turbulence allowance customarily between 1.3 and 1.8, this module holds it to 5, and this is 6.
 
 Notice how those differ from the warnings. The warned values are answerable and doubtful. The refused values are outside what the quantity means at all, and in each case the module states what the quantity is before it states what was wrong with the input. A refusal that only said the input was invalid would leave the caller guessing at the range.
 

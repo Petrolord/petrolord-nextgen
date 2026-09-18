@@ -97,7 +97,7 @@ q(3, "The bubble is changed from 300 micron to 1200 micron. What does the cut si
  ["It becomes four times coarser, because the cut goes linearly with the bubble diameter.",
   "It becomes 8.000000 times finer, because a larger bubble sweeps more water on its way up.",
   "It does not move, because the gas rate rather than the bubble size is what sets the interception rate."],
- "The rate carries the inverse cube of the bubble diameter and the cut is a square root of a rate. FINER BUBBLES CUT FINER, and that is the entire engineering difference between the two kinds of cell.")
+ "The rate carries the inverse cube of the bubble diameter and the cut is a square root of a rate. FINER BUBBLES CUT FINER, and that is the larger of the two engineering differences between the two kinds of cell.")
 
 q(0, "Which of these does the module REFUSE outright?",
  "A gas to water volume ratio of 4, because it holds that ratio to 3.",

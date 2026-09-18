@@ -8,7 +8,7 @@ This module takes the droplet population as log-normal in droplet volume, descri
 
 ## Volume, which is what a treating answer is about
 
-Notice which quantity the distribution is written in. It is droplet volume rather than droplet count, and that is the right basis for this work, because a removal percentage is a fraction of the oil and the oil is a volume. A distribution in counts would be dominated by the finest droplets, which between them carry almost none of the oil. The engine names the basis of each figure it reports, so a reader never has to guess which kind of number is being compared with which.
+Notice which quantity the distribution is written in. It is droplet volume rather than droplet count, and that is the right basis for this work, because a removal percentage is a fraction of the oil and the oil is a volume. A distribution in counts would be dominated by the finest droplets, which between them carry almost none of the oil. Every train return names the basis of its removal and its concentrations, so a reader never has to guess which kind of number is being compared with which.
 
 ## Discretised so an integral can be done exactly
 

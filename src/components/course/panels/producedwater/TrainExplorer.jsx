@@ -222,9 +222,9 @@ export const MediansMode = ({ s }) => {
       />
       <Note>
         Both medians are the volume median of the same bin set, interpolated in log diameter across the bin the median
-        falls in. That is why they can be compared at all. One step of this grid is a few percent of a diameter, so a
-        median read as a bare bin midpoint is quantised to the grid, and a bin wide enough to hold six orders of
-        magnitude of outlet concentration would report one value for all of them. Interpolated, the median falls
+        falls in. That is why they can be compared at all. On the OGBOTOBO grid each bin&apos;s upper edge is
+        {' '}{six(s.gridStepPct)} percent above its lower edge, so a median read as a bare bin midpoint can take only one
+        value per bin, and two outlets whose medians fall in the same bin would report the same median. Interpolated, the median falls
         monotonically as the cut tightens, which is the property a quantised median cannot have.
       </Note>
       <Tbl

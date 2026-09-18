@@ -12,7 +12,7 @@ A velocity with that many leading zeros in it looks like nothing at all, and tha
 
 ## Reading the Reynolds number beside it
 
-The Reynolds number of 0.002796 is the evidence that the velocity beside it can be believed. It sits far below the stated limit of 1, so the creeping flow assumption is comfortable rather than marginal. Compare it with a coarser droplet in the same water: at 100 micron the engine returns a rise velocity of 0.001091782327 m/s. The band is a statement about the droplet and the water together rather than about the water alone, so a stream can hold droplets inside the band and droplets outside it at once.
+The Reynolds number of 0.002796 is the evidence that the velocity beside it can be believed. It sits far below the stated limit of 1, so the creeping flow assumption is comfortable rather than marginal. Compare it with a coarser droplet in the same water: at 240 micron the engine returns a Reynolds number of 2.198987, past the limit. The band is a statement about the droplet and the water together rather than about the water alone, so a stream can hold droplets inside the band and droplets outside it at once.
 
 ## Two things this figure is not
 

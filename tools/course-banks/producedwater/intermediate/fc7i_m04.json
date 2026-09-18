@@ -140,7 +140,7 @@
    "It becomes 8.000000 times coarser, because the cut goes as the bubble diameter to the three halves."
   ],
   "answer": 3,
-  "explanation": "The rate carries the inverse cube of the bubble diameter and the cut is a square root of a rate. FINER BUBBLES CUT FINER, and that is the entire engineering difference between the two kinds of cell."
+  "explanation": "The rate carries the inverse cube of the bubble diameter and the cut is a square root of a rate. FINER BUBBLES CUT FINER, and that is the larger of the two engineering differences between the two kinds of cell."
  },
  {
   "prompt": "Which of these does the module REFUSE outright?",

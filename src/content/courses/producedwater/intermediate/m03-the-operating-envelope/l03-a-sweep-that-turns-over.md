@@ -6,7 +6,7 @@ This is the one place in this module where the arithmetic and the engineering pu
 
 ## The sweep
 
-The KOKORI flow, swept downward through liner counts. Read the cut size column from the bottom up, which is the direction a designer saving money reads it:
+The KOKORI flow, swept downward through liner counts. Read the cut size column from the top down, which is the direction a designer saving money reads it, taking liners out of the bank:
 
 | liners | m3/s per liner | turndown | field g | shear penalty | ideal cut micron | CUT MICRON | warning |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -24,7 +24,7 @@ The KOKORI flow, swept downward through liner counts. Read the cut size column f
 
 The finest cut in that table is at 177 liners, 4.168146 micron at a turndown of 1.299527, and it is NOT the smallest bank in the table. The smallest bank, 120 liners, cuts at 6.144662 micron, which is 1.474196 times worse.
 
-A designer reading the column from the bottom sees the cut size improving as liners come out of the bank, right up to the row where it stops and reverses. Everything above that row is the square law. Everything below it is the ceiling and the shear penalty.
+A designer reading the column from the top sees the cut size improving as liners come out of the bank, right up to the row where it stops and reverses. Everything above that row is the square law. Everything below it is the ceiling and the shear penalty.
 
 ## The top of the table
 
@@ -48,6 +48,6 @@ The warning column is part of the same discipline. Every row outside the envelop
 
 ## Exercise
 
-Read the CUT MICRON column from the bottom row upward, write down where it stops improving, and name the two separate mechanisms that put the turn there.
+Read the CUT MICRON column from the top row downward, write down where it stops improving, and name the two separate mechanisms that put the turn there.
 
 Then say what the field column is doing on the last two rows, and why the ideal cut and the reported cut have parted company.

@@ -99,10 +99,10 @@ q(0, "The crude in this module thins with temperature at 0.0007 for each degree.
   "It is held for literature, which is why a caller has to supply an expansion rate before a crude density comes back."],
  "A declared value is customary or chosen and the module keeps it in one frozen place so that moving it is a reviewed act. Held for literature means the module states an absence instead, and nothing here is absent in this chain."),
 
-q(0, "An answer looks suspicious and an engineer raises the bin count from 60 to 600. What does that buy?",
- "Nothing at all, and knowing so saves an argument about resolution when the real question lies somewhere else.",
- ["A finer answer, since the removal is a sum taken over the bins and more terms in a sum make it that much more exact.",
-  "A smaller truncated tail, since a grid that has been cut into more bins reaches further out into the distribution.",
+q(0, "An answer looks suspicious and an engineer raises the bin count from 60 to 600. What does that do to the volume median and the truncated tail the bin set reports?",
+ "Nothing to either of them, since the median is an identity of the distribution and the tail is set by how far the grid reaches.",
+ ["It moves the median closer to the typed d50, since a coarse grid carries a quantisation that a finer grid removes.",
+  "It shrinks the truncated tail, since a grid that has been cut into more bins reaches further out into the distribution.",
   "A refusal, since this module holds the bin count to the 60 it defaults to and declines anything else."],
  "The volume median reads 26.000000 micron and the truncated tail 0.000063372072 at 30, 60, 120 and 600 bins alike. The span is the grid input that moves the tail, and the floor under the bin count is 10."),
 
@@ -233,7 +233,7 @@ q(1, "A device is applied to this water at a cut size of 0.001 micron. It remove
  "The return says the outlet was not normalised and warns in the engine's own words that what is left is numerical dust. 4.880416 micron is the outlet median at a 2 micron cut on the same water, which does answer."),
 
 q(3, "An allowance of 0 is typed into the studio. What comes back, and in what words?",
- "A refusal saying the factor must be positive and that an allowance of zero or less is not a perfect separator, it is an undefined one.",
+ "A refusal saying the factor must be positive and this is 0, and that an allowance of zero or less leaves the separator undefined.",
  ["An answer with a note, since an allowance of zero sits outside the customary band in the same way that 1 does.",
   "An answer computed at the 1.5 the module defaults to, with a line on the return saying the supplied value was unusable.",
   "A refusal saying that an allowance of zero would put the cut droplet outside the creeping flow band."],
@@ -253,12 +253,12 @@ q(2, "Nine steps of the UZERE reading pass before the droplets and the equipment
   "The surface loading of 0.001981679246 m/s, which needs the flow as well as a dimension of the vessel."],
  "The rise velocity needs a droplet and the loading needs a vessel, and neither of them puts the two together. The removal is the grade efficiency of the device integrated against the oil volume in every bin."),
 
-q(0, "The UZERE train of a basin and a plate pack leaves 567.644189 ppm out of 650 ppm. How does the overall figure stand against the two stage figures?",
- "12.670125 percent, and no arithmetic on the two stage figures reaches it, because each of them is a fraction of different water.",
- ["12.670125 percent, which is what the two stage figures come to when they are added, since both are fractions of the inlet oil.",
-  "12.670125 percent, which is what the two stage figures come to when they are compounded as independent fractions.",
-  "3.284882 percent, since the pack is working on water that the basin upstream of it has already picked over."],
- "The pack is given the basin\'s residue, which is finer than the raw stream by construction. A device applied to different water is a different duty, and that is what the coupling in this engine carries."),
+q(0, "The UZERE train removes 12.670125 percent. Its basin removes 3.284882 percent of the oil reaching it and its plate pack 9.704008 percent of the oil reaching it. How do those two stage figures combine?",
+ "Compounded as survivals they give 12.670125 percent exactly, because each is already a fraction of the water that reached its own stage.",
+ ["Added they give 12.670125 percent, because both stage figures are fractions of the 650 ppm that entered the train.",
+  "They do not combine at all, because each is a fraction of a different water and no arithmetic on the two of them reaches the overall figure.",
+  "Compounded they overstate the train, because the plate pack figure credits the pack with coarse oil the basin had already taken out."],
+ "Each stage figure is a fraction of the water that reached its own stage, so the two survivals multiply straight through to the train outlet of 567.644189 ppm. Adding the two percentages counts oil the plate pack never saw."),
 
 q(3, "What does the second device in that train actually see, and why does it matter?",
  "Water whose coarse oil has already been taken out, so it faces a finer population and a harder duty than the raw stream would have given it.",

@@ -8,7 +8,7 @@ This is the last lesson of the tier, and it has one job. Given a cut size out of
 
 A GRAVITY DEVICE inverts a surface loading. The flow over the plan area, times an allowance, is a design rise velocity, and the droplet that rises that fast is the cut. The depth does not enter it. The plan area does.
 
-A HYDROCYCLONE marches a droplet. A field, a travel from the half area radius to the oil core, and a residence time from the liner volume over the flow through it. The liner count decides all three by deciding the turndown.
+A HYDROCYCLONE marches a droplet. A field, a travel from the half area radius to the oil core, and a residence time from the liner volume over the flow through it. The liner count decides the field and the residence by deciding the turndown, and the travel is the liner's own geometry.
 
 A FLOTATION CELL is a rate against a time. A gas flux over a plan area, a bubble that rises by the full drag balance, an interception rate carrying the inverse cube of the bubble diameter, and a residence long enough for the rate to use up the log of two.
 

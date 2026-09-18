@@ -22,7 +22,7 @@ Move it and the flotation cut moves with its own square root.
 | 0.02 | 16.782723 | 0.707107 |
 | 0.05 | 10.614326 | 0.447214 |
 
-The last column is derived, each cut over the declared value row. Taking the efficiency from its declared 0.01 down to 0.002 multiplies the cut size by 2.236068, and taking it up to 0.05 multiplies it by 0.447214. Those are movements most designers would not accept in a device rating, and they come from a number with nothing published behind it.
+The last column is derived, each cut over the declared value row. Taking the efficiency from its calibrated 0.01 down to 0.002 multiplies the cut size by 2.236068, and taking it up to 0.05 multiplies it by 0.447214. Those are movements most designers would not accept in a device rating, and they come from a number with nothing published behind it.
 
 ## Why a square root is the reassuring part
 
@@ -38,7 +38,7 @@ That is also why no graded answer in this course depends on it. Grading an answe
 
 ## How to quote a flotation cut
 
-Say the cut size, say the bubble size and the gas rate that produced it, and say that the attachment efficiency behind it is a calibrated value chosen to land the default case in a customary range. A reader who knows that can decide how much weight to put on it. A reader who does not will treat it like the basin cut, which comes out of geometry and measured fluid properties and is a completely different kind of number.
+Say the cut size, say the bubble size and the gas rate that produced it, and say that the attachment efficiency behind it is a calibrated value chosen to land the default case in a customary range. A reader who knows that can decide how much weight to put on it. A reader who does not will treat it like the basin cut, which comes out of geometry, the fluid properties and a declared allowance, and is a completely different kind of number.
 
 ## Exercise
 

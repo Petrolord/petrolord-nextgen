@@ -522,6 +522,35 @@ export const DECLARED_ROWS = [
   ['sigmaMax', 'the widest droplet spread this module will describe'],
 ];
 
+/**
+ * WHAT THE KEYS OUTSIDE THE DECLARED TABLE ARE, partitioned and checked. The
+ * digest once called all of them band edges and customary limits; two are
+ * defaults, one is the interception sharpness KIND ONE derives, and one is the
+ * attachment efficiency of KIND THREE. The partition must cover exactly the
+ * keys the table leaves out, or this throws (FC7-3).
+ */
+const UNTABULATED = {
+  bands: ['waterViscosityMinC', 'waterViscosityMaxC', 'waterDensityMinC', 'waterDensityMaxC', 'apiGravityMin', 'apiGravityMax',
+    'bubbleMicronMin', 'bubbleMicronMax', 'gasRatioMax', 'sigmaCustomaryMin', 'sigmaCustomaryMax', 'coarseCutWarnMicron'],
+  defaults: ['filterBedDepthDefaultM', 'trainSigmaDefault'],
+  sharpness: ['interceptionSharpness'],
+  calibration: ['attachmentEfficiency'],
+};
+export const untabulatedPartition = () => {
+  const tabled = new Set(DECLARED_ROWS.map(([k]) => k));
+  const outside = Object.keys(DECLARED).filter((k) => !tabled.has(k));
+  const listed = Object.values(UNTABULATED).flat();
+  if (listed.length !== new Set(listed).size || listed.length !== outside.length
+    || !outside.every((k) => listed.includes(k))) {
+    throw new Error(`the keys outside the declared table are ${outside.join(', ')} and the partition lists ${listed.join(', ')}`);
+  }
+  return {
+    bands: UNTABULATED.bands.length,
+    defaults: UNTABULATED.defaults.length,
+    keys: Object.fromEntries(Object.entries(UNTABULATED).map(([k, v]) => [k, [...v]])),
+  };
+};
+
 export const fourKinds = () => {
   const uz = uzere();
   const ko = kokori();
@@ -583,6 +612,7 @@ export const fourKinds = () => {
     declaredKeyCount: Object.keys(DECLARED).length,
     declaredRowCount: DECLARED_ROWS.length,
     untabulatedCount: Object.keys(DECLARED).length - DECLARED_ROWS.length,
+    untabulated: untabulatedPartition(),
     attachmentEfficiency: DECLARED.attachmentEfficiency,
     velocityRuleComplete: API_421.velocityRuleComplete,
   };
@@ -1234,6 +1264,10 @@ export const flotationKinetics = () => {
     gasRatio: KOKORI_FLOTATION.gasRatio,
     bubbles,
     referenceBubbleMicron: BUBBLE_REFERENCE_MICRON,
+    // DERIVED, the largest bubble rise over the smallest. The cut column is the
+    // three halves power of the bubble ratio on every row while this moves, so
+    // the rise velocity does not reach the cut (FC7-3).
+    bubbleRiseSpread: Math.max(...bubbles.map((b) => b.bubbleRiseMS)) / Math.min(...bubbles.map((b) => b.bubbleRiseMS)),
     gasRatios,
     refusals,
     straddle,
@@ -1283,8 +1317,20 @@ export const twoKindsOfCell = () => {
     };
   });
   const cuts = arrangement.map((a) => a.d50cMicron);
+  // ONE CHANGE AT A TIME, so the larger lever is measured rather than asserted
+  // (FC7-3). Each preset difference is applied alone to the induced cell.
+  const dafBubbleAlone = answered('the induced cell with the dissolved bubble alone', P.flotation({
+    flowM3S: ko.q, ...KOKORI_FLOTATION, ...IGF_PRESET, bubbleMicron: DAF_PRESET.bubbleMicron, ...ko.fluid,
+  }));
+  const dafGasAlone = answered('the induced cell with the dissolved gas ratio alone', P.flotation({
+    flowM3S: ko.q, ...KOKORI_FLOTATION, ...IGF_PRESET, gasRatio: DAF_PRESET.gasRatio, ...ko.fluid,
+  }));
   return {
     presets,
+    // DERIVED, the induced cut over the cut with the dissolved bubble alone, and
+    // the cut with the dissolved gas ratio alone over the induced cut.
+    bubbleLever: presets[0].d50cMicron / dafBubbleAlone.d50cMicron,
+    gasLever: dafGasAlone.d50cMicron / presets[0].d50cMicron,
     // DERIVED, the two preset cut sizes divided, and the two gas ratios divided.
     finerBy: presets[0].d50cMicron / presets[1].d50cMicron,
     gasRatioBy: DAF_PRESET.gasRatio / IGF_PRESET.gasRatio,
@@ -1502,6 +1548,17 @@ export const twoMedians = () => {
     // DERIVED, the difference over the typed value.
     inletRelativeGap: Math.abs(og.train.inletMedianMicron - og.train.inletD50Micron) / og.train.inletD50Micron,
     tracking,
+    // DERIVED, the two edges of one OGBOTOBO bin divided, as a percent step.
+    // The same on every bin, which the test asserts (FC7-3).
+    gridStepPct: (() => {
+      const b = answered('the OGBOTOBO inlet grid', P.dropletBins({
+        d50: OGBOTOBO_INLET.d50Micron, sigma: OGBOTOBO_INLET.sigma,
+      })).bins;
+      return (b[0].dHiMicron / b[0].dLoMicron - 1) * 100;
+    })(),
+    gridEdgeRatios: answered('the OGBOTOBO inlet grid', P.dropletBins({
+      d50: OGBOTOBO_INLET.d50Micron, sigma: OGBOTOBO_INLET.sigma,
+    })).bins.map((b) => b.dHiMicron / b.dLoMicron),
     binGrid: GOLD.binGrid.map((c) => ({
       ...c,
       nBinsStated: c.nBins ?? DECLARED.defaultNBins,
@@ -1901,7 +1958,25 @@ export const associateReading = () => {
     sigma: UZERE_INLET.sigma,
     devices: [{ name: 'API 421 basin', ...uz.basin }, { name: 'CPI plate pack', ...uz.plate }],
   }));
+  // WHICH COMPOUNDING IS RIGHT IS COMPUTED (FC7-3). The train's own stage
+  // figures compound to its overall figure; a figure measured on the raw
+  // stream overstates it.
+  const packAlone = answered('the plate pack alone on the raw UZERE water', P.treatmentTrain({
+    inletOiwPpm: UZERE_INLET.oiwPpm,
+    inletD50Micron: UZERE_INLET.d50Micron,
+    sigma: UZERE_INLET.sigma,
+    devices: [{ name: 'CPI plate pack', ...uz.plate }],
+  }));
+  const [basinStage, packStage] = train.stages;
+  const survive = (pct) => 1 - pct / 100;
   return {
+    basinStageRemovalPct: basinStage.removalPct,
+    packStageRemovalPct: packStage.removalPct,
+    // DERIVED, one minus the product of the two stage survivals.
+    stagesCompoundedPct: 100 * (1 - survive(basinStage.removalPct) * survive(packStage.removalPct)),
+    packAloneRemovalPct: packAlone.overallRemovalPct,
+    // DERIVED, the same arithmetic with the pack's raw water figure.
+    rawCompoundedPct: 100 * (1 - survive(basinStage.removalPct) * survive(packAlone.overallRemovalPct)),
     qM3S: uz.q,
     barrelM3: BARREL_M3,
     muPaS: uz.mu.muPaS,

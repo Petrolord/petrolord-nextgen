@@ -43,4 +43,4 @@ So when a stage removal is quoted at you, ask what reached that stage and what t
 
 Run the OGBOTOBO train in the panel and write down, for each stage, the cut size, the sharpness and the outlet median of the stage before it.
 
-Then pick the stage with the smallest removal and say in one sentence whether that is a statement about the device or about the water it was given. Move that stage to the front of the train and check your answer.
+Then take the walnut shell filter, which reports 14.382082 percent at the back of the train, and say in one sentence whether that is a statement about the device or about the water it was given. Move it to the front of the train and check your answer.

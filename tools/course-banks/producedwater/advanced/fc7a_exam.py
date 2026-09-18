@@ -166,7 +166,7 @@ q(0, "The creeping flow band is not checked once for the water. What does every 
  ["The Reynolds number of the median droplet in its inlet distribution, which is the droplet the grid is built around.",
   "The ratio of its Stokes velocity to its full drag balance velocity, which is the gap the band is stated on.",
   "The Reynolds number of the coarsest droplet on its grid, which is the first one to leave the band."],
- "A coarse basin on a light oil is exactly where this bites. The cut droplet is large, its Reynolds number climbs, and the number on the screen is the one the warning is about.")
+ "A coarse basin on a heavy oil is exactly where this bites. The density difference is small, so the cut droplet is large, its Reynolds number climbs, and the number on the screen is the one the warning is about.")
 
 q(1, "What does the golden file's rise group pin, across its 5 rows?",
  "Stokes, its Reynolds number, and the measured gap to the real drag balance.",
@@ -238,21 +238,21 @@ q(2, "A gate that restates the formula the engine uses validates nothing. What h
  ["It has to be written by somebody other than the author of the engine.",
   "It has to be run at a very much tighter tolerance than the engine is, so that any disagreement between the two is the engine's own.",
   "It has to cover every one of the published cases in the golden file, so that no answer the engine gives goes unchecked."],
- "The engine inverts a balance and the oracle marches a droplet and asks when it arrives. The two share the geometry and the fluid properties and nothing else.")
+ "The engine inverts a balance and the oracle marches a droplet and asks when it arrives. The two share the geometry, the fluid properties and a second copy of the declared constants, and the routes share nothing.")
 
-q(0, "Digest Section 22 is history. What does it say about where repair history belongs in this course?",
- "In that section, framed, or nowhere, because a number from the old model meets a reader without the frame and simply tells them something false about how this engine works.",
+q(0, "The lesson on what was repaired in this engine is framed as HISTORY. Where does this course keep repair history?",
+ "In that one framed lesson and nowhere else, while every other lesson, panel and figure is the repaired engine answering now.",
  ["In any lesson that teaches the repaired behaviour, so that a reader can see the before and the after together.",
   "In the panels, where a reader can drive the old model and the new one side by side.",
   "In the golden file, which carries the old answers as expectation fields the suite asserts against."],
- "Every figure in every section above that one is the repaired engine's own answer at the inputs named beside it.")
+ "A number from the old model that reached a reader without the frame would simply tell them something false about how this engine works.")
 
-q(3, "Section 22 records what the studio's own shipped default did before the first repair. What was it?",
+q(3, "The history lesson records what the studio's own shipped default did before the first repair. What was it?",
  "It ran its liners at 7.7 times their design flow.",
  ["It ran its bed at 7.7 times the loading rate the filter coefficient is declared at.",
   "It ran a cell at 7.7 times the gas to water ratio the module now holds a cell to.",
   "It ran a basin at 7.7 times the horizontal velocity the API 421 check allows."],
- "That is the state a studio was shipped in, and it is why Section 22 exists as framed history rather than as an anecdote.")
+ "That is the state a studio was shipped in, and it is why that lesson is framed as history rather than told as an anecdote.")
 
 q(1, "Why do the identities survive a compromised oracle where the published comparisons do not?",
  "An identity is checked against the definition rather than against another program, so it does not care what the oracle says.",

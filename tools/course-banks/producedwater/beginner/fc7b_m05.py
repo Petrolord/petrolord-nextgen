@@ -69,7 +69,7 @@ q(1, "An allowance of 1 returns a cut size of 134.725142 micron with a warning, 
  ["An allowance of 1 is inside the customary band of 1.3 to 1.8 and an allowance of 0 is outside it, which is the only distinction the module draws.",
   "An allowance of 1 produces a cut droplet inside the creeping flow band and an allowance of 0 produces one outside it.",
   "An allowance of 1 is the module's own default, so it is reported with a note, while any value a caller supplies is checked against the band."],
- "The engine says that an F of zero or less is not a perfect separator, it is an undefined one. The default is 1.5, the customary band is 1.3 to 1.8, and 1 sits outside that band and still answers."),
+ "The engine says that F must be positive and that an F of zero or less leaves the separator undefined. The default is 1.5, the customary band is 1.3 to 1.8, and 1 sits outside that band and still answers."),
 
 q(0, "What does this module do with an allowance of 6?",
  "It refuses, saying that F is a turbulence allowance customarily between 1.3 and 1.8, that this module holds it to 5, and that this is 6.",

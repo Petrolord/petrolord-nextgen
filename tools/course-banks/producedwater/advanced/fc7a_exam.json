@@ -239,7 +239,7 @@
    "The Reynolds number of the coarsest droplet on its grid, which is the first one to leave the band."
   ],
   "answer": 0,
-  "explanation": "A coarse basin on a light oil is exactly where this bites. The cut droplet is large, its Reynolds number climbs, and the number on the screen is the one the warning is about."
+  "explanation": "A coarse basin on a heavy oil is exactly where this bites. The density difference is small, so the cut droplet is large, its Reynolds number climbs, and the number on the screen is the one the warning is about."
  },
  {
   "prompt": "What does the golden file's rise group pin, across its 5 rows?",
@@ -349,21 +349,21 @@
    "It has to cover every one of the published cases in the golden file, so that no answer the engine gives goes unchecked."
   ],
   "answer": 2,
-  "explanation": "The engine inverts a balance and the oracle marches a droplet and asks when it arrives. The two share the geometry and the fluid properties and nothing else."
+  "explanation": "The engine inverts a balance and the oracle marches a droplet and asks when it arrives. The two share the geometry, the fluid properties and a second copy of the declared constants, and the routes share nothing."
  },
  {
-  "prompt": "Digest Section 22 is history. What does it say about where repair history belongs in this course?",
+  "prompt": "The lesson on what was repaired in this engine is framed as HISTORY. Where does this course keep repair history?",
   "options": [
-   "In that section, framed, or nowhere, because a number from the old model meets a reader without the frame and simply tells them something false about how this engine works.",
+   "In that one framed lesson and nowhere else, while every other lesson, panel and figure is the repaired engine answering now.",
    "In any lesson that teaches the repaired behaviour, so that a reader can see the before and the after together.",
    "In the panels, where a reader can drive the old model and the new one side by side.",
    "In the golden file, which carries the old answers as expectation fields the suite asserts against."
   ],
   "answer": 0,
-  "explanation": "Every figure in every section above that one is the repaired engine's own answer at the inputs named beside it."
+  "explanation": "A number from the old model that reached a reader without the frame would simply tell them something false about how this engine works."
  },
  {
-  "prompt": "Section 22 records what the studio's own shipped default did before the first repair. What was it?",
+  "prompt": "The history lesson records what the studio's own shipped default did before the first repair. What was it?",
   "options": [
    "It ran its bed at 7.7 times the loading rate the filter coefficient is declared at.",
    "It ran a cell at 7.7 times the gas to water ratio the module now holds a cell to.",
@@ -371,7 +371,7 @@
    "It ran its liners at 7.7 times their design flow."
   ],
   "answer": 3,
-  "explanation": "That is the state a studio was shipped in, and it is why Section 22 exists as framed history rather than as an anecdote."
+  "explanation": "That is the state a studio was shipped in, and it is why that lesson is framed as history rather than told as an anecdote."
  },
  {
   "prompt": "Why do the identities survive a compromised oracle where the published comparisons do not?",

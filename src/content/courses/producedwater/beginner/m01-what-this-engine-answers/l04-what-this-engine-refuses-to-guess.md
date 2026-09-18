@@ -4,7 +4,7 @@ Most of a course is about answers. This lesson is about the three ways this modu
 
 ## A refusal names the input that caused it
 
-When the method has no answer for a state, the call comes back as an object carrying a named error string, and this module throws nothing at all. The refusal names the input. Hand the basin a short-circuit allowance of 0, and the engine says that the short-circuit factor F must be positive and this is 0, and that an F of zero or less is not a perfect separator, it is an undefined one. Hand it -2 and it says the same thing about -2. Hand it 6 and it says that F is a turbulence allowance customarily between 1.3 and 1.8, that this module holds it to 5, and that this is 6.
+When the method has no answer for a state, the call comes back as an object carrying a named error string, and this module throws nothing at all. The refusal names the input. Hand the basin a short-circuit allowance of 0, and the engine says that the short-circuit factor F must be positive and this is 0, and that an F of zero or less leaves the separator undefined. Hand it -2 and it says the same thing about -2. Hand it 6 and it says that F is a turbulence allowance customarily between 1.3 and 1.8, that this module holds it to 5, and that this is 6.
 
 ## A withheld verdict names its reason
 
@@ -20,7 +20,7 @@ The module exports 20 names. 16 of them are callable and 4 are frozen objects or
 
 ## What it will not guess
 
-Six things in this module are held for literature, which means the engine states their absence rather than guessing a value. The discharge limit is the one that catches people out. This engine states none at all, and a test asserts that its declared constants carry no specification-like key. A caller may supply a specification and the engine will compare against it. The comparison is withheld when the train did not run or when the figure supplied is not positive.
+Six things in this module are held for literature, which means the engine states their absence rather than guessing a value. The discharge limit is the one that catches people out. This engine states none at all, and a test asserts that its declared constants carry no specification-like key. A caller may supply a specification and the engine will compare against it. The comparison is withheld when any stage of the train did not run or when the figure supplied is not positive.
 
 ## Exercise
 

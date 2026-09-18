@@ -40,7 +40,7 @@ q(2, "Move the bin count over 30, 60, 120 and 600 on the UZERE inlet. What moves
  ["The median holds at 26.000000 micron on every row and the truncated tail falls steadily as the bins are added, because a finer grid describes more of the same distribution.",
   "Both move a little, and the module reports the grid back on the answer so that the reader knows which resolution produced the figure.",
   "The truncated tail holds at 0.000063372072 and the median drifts, which is the quantisation a coarse grid puts into a bin median."],
- "The median reads 26.000000 and the tail reads 0.000063372072 on all four rows. Bin count is the input an engineer is most tempted to raise when an answer looks suspicious, and raising it here buys nothing at all."),
+ "The median reads 26.000000 and the tail reads 0.000063372072 on all four rows. Bin count is the input an engineer is most tempted to raise when an answer looks suspicious, and raising it here moves neither of those two figures."),
 
 q(0, "Hold the bin count and change the span from 3 sigma to 6. What does the truncated tail do?",
  "It falls from 0.002699934563 to 0.000000001980, because a wider grid reaches further into the distribution and throws less of it away.",

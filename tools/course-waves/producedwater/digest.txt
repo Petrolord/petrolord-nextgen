@@ -72,7 +72,7 @@ KIND TWO: DECLARED. Customary or chosen values with no publication anywhere in t
 | stokesReynoldsLimit | 1 | the Reynolds number Stokes law is stated to here |
 | tdsMaxPpm | 300000 | the salinity the linear correction is stated to |
 | sigmaMax | 2 | the widest droplet spread this module will describe |
-Read straight off the frozen export, which carries 55 keys in all. The 16 not in the table above are band edges and customary limits printed where they bite, in Sections 4, 10, 12, 13 and 16.
+Read straight off the frozen export, which carries 55 keys in all. The 16 not in the table above are 12 band edges and customary limits, each the edge a refusal or a warning is judged against; two defaults, the bed depth and the droplet spread a train assumes; the interception sharpness of 2, which is stored in the same object although KIND ONE derives it; and the attachment efficiency of KIND THREE.
 
 KIND THREE: A CALIBRATION, and there is exactly one.
 - `attachmentEfficiency` is 0.01. It is the probability that a droplet colliding with a bubble sticks, and it is the ONE number in this module with no derivation at all: it was chosen so that a cell at the module's own default conditions cuts in the ten to twenty micron range induced gas flotation is customarily credited with. It is an input, so a caller with a vendor curve can move it. Nothing in this course presents it as published, and no graded capstone answer depends on it.
@@ -329,7 +329,7 @@ The refusal is a real criterion and not a range check: past one over the root of
 
 A liner bank is sized in LINERS, and the flow each liner carries is what sets its field. This is the one place in this module where the arithmetic and the engineering pull in opposite directions, and it is the most important section in the course.
 
-The KOKORI flow, swept DOWNWARD through liner counts. Read the cut size column from the bottom up, which is the direction a designer saving money reads it:
+The KOKORI flow, swept DOWNWARD through liner counts. Read the cut size column from the top down, which is the direction a designer saving money reads it, taking liners out of the bank:
 | liners | m3/s per liner | turndown | field g | shear penalty | ideal cut micron | CUT MICRON | warning |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 600 | 0.000230016341 | 0.383361 | 146.965325 | 1.000000 | 7.674178 | 7.674178 | starved |
@@ -384,7 +384,8 @@ The bubble size, which is the difference between the two kinds of cell:
 | 300 | 0.040291028009 | 22.678201 | 0.199810536843 | 15.415916 | 1.000000 |
 | 600 | 0.083507115328 | 94.005599 | 0.096405820089 | 43.602795 | 2.828427 |
 | 1200 | 0.156122973645 | 351.501391 | 0.051565581596 | 123.327327 | 8.000000 |
-The last column is derived, each cut over the 300 micron row. The cut goes as the bubble diameter to the three halves, because the rate carries the inverse cube of it and the cut is a square root of a rate: FINER BUBBLES CUT FINER, and that is the entire engineering difference between the two kinds of cell.
+The last column is derived, each cut over the 300 micron row. The cut goes as the bubble diameter to the three halves, because the rate carries the inverse cube of it and the cut is a square root of a rate: FINER BUBBLES CUT FINER, and that is the larger of the two engineering differences between the two kinds of cell, which the next section measures one change at a time.
+THE BUBBLE RISE VELOCITY DOES NOT REACH THE CUT. It sets the holdup and nothing else in the chain: the rate carries the gas flux over the cube of the bubble diameter, because the water a faster bubble sweeps is cancelled by the fewer bubbles a faster swarm holds at the same flux. That is why the last column is the three halves power of the bubble ratio on every row while the rise velocity column moves by a factor of 98.886283 across the same rows (derived, the largest rise over the smallest).
 
 The gas rate, at one bubble size:
 | gas to water ratio | superficial gas m/s | holdup | cut micron | warning |
@@ -424,6 +425,7 @@ Induced gas flotation entrains coarse bubbles mechanically. Dissolved gas flotat
 | induced gas | 0.2 | 300 | 0.006440457549 | 17.235518 |
 | dissolved gas | 0.03 | 80 | 0.000966068632 | 6.128184 |
 The dissolved cell cuts 2.812500 times finer on 0.150000 times the gas (both derived, the pairs of figures on those two rows divided). A model in which the bubble size could not move the cut would make these the same device, and no amount of menu would change that.
+ONE CHANGE AT A TIME, so the larger lever is measured rather than asserted. On the induced cell, the dissolved bubble alone cuts 7.261844 times finer, and the dissolved gas ratio alone cuts 2.581989 times coarser (both derived, the two cuts on each change divided). The bubble is the larger of the two levers, and the first factor over the second is the 2.812500 of the two presets, because the cut is a power of each of them multiplied.
 
 THE INVARIANCE, which is the other half of the same design. How you COUNT the cells must not change the answer at equal total volume and equal total gas. The gas ratio here is scaled by the cell count so the unit is fed the same gas whatever the arrangement:
 | cells | m3 each | total m3 | ratio per cell | total gas m3/s | residence s | cut micron |
@@ -474,7 +476,7 @@ The loading rate, which is the only thing the area changes:
 | 20 | 24.841765 | 4.140060735138 | 9.149437 | none |
 | 40 | 12.420882 | 5.854930040680 | 7.693729 | none |
 | 80 | 6.210441 | 8.280121470276 | 6.469629 | none |
-Lambda falls as the loading rate to the power 0.5, from a value DECLARED at 10 m/hr, and the module warns above 25 m/hr because a bed loses depth capture at that rate and breaks through early. The reference triple, 3.5 per m at a 20 micron droplet, 800 micron media and 10 m/hr, is ONE calibration of this module with no published source here.
+Lambda falls as the loading rate to the power 0.5, from a value DECLARED at 10 m/hr, and the module warns above 25 m/hr because a bed loses depth capture at that rate and breaks through early. The reference triple, 3.5 per m at a 20 micron droplet, 800 micron media and 10 m/hr, is DECLARED, with no published source here. It is not a second calibration: the attachment efficiency is still the one calibration in this module.
 
 THE FLOOR UNDER THE LOADING RATE, which is the one place this device REFUSES. Widening a bed lowers its loading, and past a point the loading falls under the 1 m/hr this module answers above. The reason is on the refusal rather than in a range check: the filter coefficient is DECLARED at 10 m/hr, the loading exponent is the only velocity dependence in this model, and at the floor the declared law is already claiming several times the one coefficient there is any calibration for. On the KOKORI flow, the last beds that answer:
 | area m2 | loading m/hr | lambda per m | cut micron |
@@ -486,7 +488,7 @@ And the beds that do not, each refused by name:
 - a 600 m2 bed on this flow: REFUSED: a loading of 0.828 m/hr is below the 1 m/hr floor this module answers above: the filter coefficient is DECLARED at 10 m/hr, its loading exponent is the only velocity dependence in this model, and at the floor the declared law is already claiming 3.162 times the one coefficient there is any calibration for. 496.8 m2 of bed would run this flow at the floor. What a bed really does far below its design rate needs bed data this module does not carry
 - a 2000 m2 bed on this flow: REFUSED: a loading of 0.248 m/hr is below the 1 m/hr floor this module answers above: the filter coefficient is DECLARED at 10 m/hr, its loading exponent is the only velocity dependence in this model, and at the floor the declared law is already claiming 3.162 times the one coefficient there is any calibration for. 496.8 m2 of bed would run this flow at the floor. What a bed really does far below its design rate needs bed data this module does not carry
 - the bed that would run this flow AT the floor, which every one of those refusals names and which the return carries as `areaAtFloorM2`: 496.835297 m2, against the 20 m2 bed this stream actually runs.
-THE REFUSAL NAMES FOUR THINGS and each of them is doing work: the loading it was given, the floor it is under, the reference loading the coefficient is declared at, and the bed that would reach the floor. A reader who wanted an answer below 1 m/hr is told what to change and by how much. What a bed really does far below its design rate is HELD FOR LITERATURE, which is why this is a refusal rather than a warning: the module will not extend a one-point calibration downward by three orders of magnitude and then report the result as a cut size.
+THE REFUSAL NAMES FOUR THINGS and each of them is doing work: the loading it was given, the floor it is under, the reference loading the coefficient is declared at, and the bed that would reach the floor. A reader who wanted an answer below 1 m/hr is told what to change and by how much. What a bed really does far below its design rate is HELD FOR LITERATURE, which is why this is a refusal rather than a warning: the module will not extend a coefficient declared at one loading down past the floor and then report the result as a cut size.
 
 The published bed cases, beside the engine:
 | area m2 | depth m | media micron | golden loading m/hr | golden lambda per m | golden cut micron | engine cut micron |
@@ -556,7 +558,7 @@ Both are the volume median of the same bin set, interpolated in LOG diameter acr
 - both medians are the volume median of the same bin set, interpolated across the bin the median falls in, so they are comparable with each other
 - the inlet median, 14.000000 micron, reproduces the typed d50 of 14 to 1.19e-9 relative (derived, the difference over the typed value). The typed figure is kept beside it as `inletD50Micron`.
 
-WHY INTERPOLATION RATHER THAN THE BIN MIDPOINT. One step of this grid is a few percent of a diameter, so a median read as a bare midpoint is quantised to the grid, and a bin wide enough to hold six orders of magnitude of outlet concentration reports one value for all of them. Interpolated, the median tracks the cut:
+WHY INTERPOLATION RATHER THAN THE BIN MIDPOINT. On the OGBOTOBO grid each bin's upper edge is 13.503861 percent above its lower edge (derived, the two edges of one bin divided, the same on every bin), so a median read as a bare midpoint can take only one value per bin: two outlets of different concentration whose medians fall in the same bin report the same median. Interpolated, the median tracks the cut:
 | cut micron | outlet ppm on the OGBOTOBO inlet | outlet median micron |
 | --- | --- | --- |
 | 20 | 1125.805910 | 9.006299 |
@@ -675,7 +677,7 @@ The last column is derived, each cut over the KOKORI row. Nothing downstream may
 
 SIX: THE DEVICE SHAPE AND SCALE CONSTANTS, one at a time. Sharpness three, the plate pack efficiency factor, the whole liner geometry with its rated field and design flow, the flotation interception coefficient, the filter reference triple and the customary bands. Section 2 lists them. They are PINNED by literal in the jest suite with an exact key-set match, so adding or removing one fails until the pin is updated, and the test says in as many words that a pin is not a validation.
 
-AND ONE STATEMENT ABOUT THE HYDROCYCLONE CUT ITSELF. The capture this model computes is an IDEAL: an ideal capture: the median droplet crossing from the half-area radius to the oil core in the residence time. Re-entrainment, the reject split and the shear the liner itself applies are not in it, and field de-oilers are customarily credited with a coarser cut than this. Field de-oilers are customarily credited with a coarser cut than this model gives, and no vendor performance curve exists in this repository to calibrate against. That is a statement about what the model leaves out rather than a number, and it belongs beside every cyclone cut size this course prints.
+AND ONE STATEMENT ABOUT THE HYDROCYCLONE CUT ITSELF. The capture this model computes is an IDEAL: an ideal capture: the median droplet crossing from the half-area radius to the oil core in the residence time. Re-entrainment, the reject split and the shear the liner itself applies are not in it, and field de-oilers are customarily credited with a coarser cut than this. No vendor performance curve exists in this repository to calibrate against. That is a statement about what the model leaves out rather than a number, and it belongs beside every cyclone cut size this course prints.
 
 # SECTION 18: What an independent oracle is (owned by Expert m05 l02 and l03)
 
@@ -784,6 +786,8 @@ UZERE, 28000 bwpd of 650 ppm oil at 41 C and 62000 ppm TDS, 24 API, droplets at 
 | 13 | the verdict | null, because "no discharge specification was given" |
 
 Step 13 is the point of the whole tier. The engine has just computed eleven numbers and it will not turn them into a pass or a fail, because nobody gave it a specification and it does not have one of its own.
+
+THE TWO STAGE FIGURES BEHIND STEP 11, and which way of combining them is right. The basin removes 3.284882 percent of the oil reaching it and the plate pack 9.704008 percent of the oil reaching IT. Compounded as survivals, one minus the product of the two survivals, they give 12.670125 percent, which is the train's own overall figure (derived, the two stage figures above), because each stage figure is already a fraction of the water that reached its own stage. The plate pack run alone on the raw UZERE water removes 11.315691 percent, more than it removes in the train, and compounding THAT figure with the basin predicts 14.228866 percent (derived, the same arithmetic), which overstates the train: the raw figure credits the pack with coarse oil the basin had already taken out.
 
 # SECTION 21: The Professional reading, one de-oiling train through three unlike devices (owned by Professional m06)
 

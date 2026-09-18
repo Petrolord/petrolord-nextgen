@@ -41,7 +41,7 @@ Stating the band converts a silent error into a visible one. The engine still an
 
 The band is not checked once for the water. Every device in this module reports the Reynolds number of its OWN cut droplet and warns the same way, so a cut size that has landed outside creeping flow says so on the same return that carries it.
 
-A coarse basin on a light oil is exactly where this bites. The cut droplet is large, its Reynolds number climbs, and the number on the screen is the one the warning is about. The published basin group carries a row at a Reynolds number of 1.851949 for that reason, so the gate sees a case on the wrong side of the band as well as cases inside it.
+A coarse basin on a heavy oil is exactly where this bites. The density difference is small, so the cut droplet is large, its Reynolds number climbs, and the number on the screen is the one the warning is about. The published basin group carries a row at a Reynolds number of 1.851949 for that reason, so the gate sees a case on the wrong side of the band as well as cases inside it.
 
 ## Exercise
 

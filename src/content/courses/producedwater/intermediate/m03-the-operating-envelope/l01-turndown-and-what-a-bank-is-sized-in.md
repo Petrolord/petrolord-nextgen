@@ -1,6 +1,6 @@
 # Turndown, and what a bank is sized in
 
-A basin is sized in square metres. A liner bank is sized in LINERS, and that one difference is what makes this module the most interesting device in the course.
+A basin is sized in square metres. A liner bank is sized in LINERS, and that one difference is why this device gets a module of its own.
 
 {{panel:pw-device-explorer}}
 
@@ -18,9 +18,9 @@ A liner develops its field by spinning the water, and the water is spun by being
 
 That is a strong dependence and it is the reason a designer is tempted to buy fewer liners. Halve the bank and each remaining liner sees twice the flow, which looks like four times the field.
 
-## The four numbers that bound it
+## The five numbers that bound it
 
-The module declares an operating envelope around that arithmetic, and all four of its edges live in the frozen constants:
+The module declares an operating envelope around that arithmetic. Its three edges and the two ratings they are measured from all live in the frozen constants:
 
 | declared constant | value | what it sets |
 | --- | --- | --- |

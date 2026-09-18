@@ -178,11 +178,11 @@ q(2, "The cut at a 150 micron bubble is 5.450349 micron and at 300 micron it is 
  "Take the cube out of the rate, take a square root because the cut is one, and the exponent left over is three halves. The 1200 micron row against the 300 micron row is the same statement at a factor of four, where the column reads 8.000000.")
 
 q(1, "The 40 micron bubble rises at a Reynolds number of 0.118487. What does that say about the settling law for it?",
- "That this bubble is inside the creeping flow band the module states Stokes to, unlike the ones a mechanical cell makes.",
+ "That this bubble is inside the creeping flow band the module states Stokes to, unlike the 300 micron induced gas bubble.",
  ["That this bubble is outside the band, since the module states the law to a Reynolds number of 0.1.",
   "That the module will report no rise velocity for it, because it is below the bubble diameter band.",
   "That the full drag balance and Stokes disagree most sharply here, which is why the band is policed."],
- "The Reynolds number climbs much faster than the bubble diameter does, because it carries both the size and the velocity the size produced. Everything a mechanically induced cell makes is far outside that band.")
+ "The Reynolds number climbs much faster than the bubble diameter does, because it carries both the size and the velocity the size produced. The induced gas preset bubble of 300 micron sits at 22.678201, far outside that band.")
 
 q(0, "The published pair straddling the residence threshold is run at one flow, one depth, one gas ratio and one bubble size. What is the ONLY thing that differs between the two rows?",
  "The cell volume, 6.1 m3 against 5.9 m3.",
@@ -236,11 +236,11 @@ q(1, "At 1200 micron media the filter coefficient is 0.657965381590 per m and th
  "It is the CUBE of the grain ratio, which the 8.000000 row and the 0.125000 row show most plainly. Both the number of collectors per unit volume and the interception efficiency of each one depend on the grain.")
 
 q(2, "What is the standing of the reference triple, 3.5 per m at a 20 micron droplet, 800 micron media and 10 m/hr?",
- "It is ONE calibration of this module with no published source in this repository.",
+ "It is DECLARED, kept in the frozen constants with no published source in this repository.",
  ["It is DERIVED, because the three reference values follow from the interception law itself.",
   "It is HELD FOR LITERATURE, which is why the module refuses to answer below the loading floor.",
-  "It is validated by the published bed rows, which is what the golden loading column checks."],
- "Everything in the loading column is that declared value scaled to a different rate. A reader arguing with a bed cut size should start with the triple rather than with the arithmetic that follows it.")
+  "It is the one CALIBRATION in this module, which is why no publication stands behind it."],
+ "Everything in the loading column is that declared value scaled to a different rate. The one calibration in this module is the attachment efficiency, and a reader arguing with a bed cut size should start with the triple.")
 
 q(0, "Of the beds the section walks down towards the loading floor, which is the widest that still gets an answer, and what does it report?",
  "490 m2, at a loading of 1.013950 m/hr and a cut of 4.112471 micron.",

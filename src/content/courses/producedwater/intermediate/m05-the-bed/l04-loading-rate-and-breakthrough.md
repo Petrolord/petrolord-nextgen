@@ -1,12 +1,12 @@
 # Loading rate, and breakthrough
 
-The bed area is not in the filter coefficient and it is not in the depth. It reaches the answer through one quantity only, the loading rate, and that makes this the cleanest input in the device to reason about.
+The bed area is not in the filter coefficient or in the depth. It reaches the answer through one quantity only, the loading rate, which makes it the cleanest input in the device to reason about.
 
 {{panel:pw-device-explorer}}
 
 ## What the area does
 
-Loading rate is the flow divided by the bed area, in m/hr: the velocity the water travels through the bed at.
+Loading rate is the flow over the bed area, in m/hr, the velocity of the water through the bed.
 
 | area m2 | loading m/hr | lambda per m | cut micron | warning |
 | --- | --- | --- | --- | --- |
@@ -16,17 +16,17 @@ Loading rate is the flow divided by the bed area, in m/hr: the velocity the wate
 | 40 | 12.420882 | 5.854930040680 | 7.693729 | none |
 | 80 | 6.210441 | 8.280121470276 | 6.469629 | none |
 
-A bigger bed at the same flow is a slower bed, water spends longer near the grains, and the filter coefficient rises. The area appears nowhere else in the calculation, so the whole effect of buying a wider vessel arrives through this one column.
+A bigger bed at the same flow is a slower bed, so water spends longer near the grains and the filter coefficient rises. The area appears nowhere else in the calculation, so the whole effect of buying a wider vessel arrives through this one column.
 
 ## The declared rate the coefficient comes from
 
-Lambda falls as the loading rate to the power 0.5, from a value DECLARED at 10 m/hr as part of a triple: 3.5 per m at a 20 micron droplet, 800 micron media and 10 m/hr. The triple is ONE calibration with no published source here.
+Lambda falls as the loading rate to the power 0.5, from a value DECLARED at 10 m/hr as part of a triple: 3.5 per m at a 20 micron droplet, 800 micron media and 10 m/hr. The triple is DECLARED, with no published source here, and the attachment efficiency is still the one calibration.
 
 Argue with a bed cut size by starting at the triple.
 
 ## Breakthrough
 
-The module warns above 25 m/hr, where a bed loses depth capture and breaks through early. Breakthrough is the bed passing oil long before it is full, a real operating failure. The warning withholds nothing: the top two rows still carry a cut size, with a statement that a bed run that hard will not behave the way a clean depth filtration model expects.
+The module warns above 25 m/hr, where a bed loses depth capture and breaks through early. Breakthrough is a bed passing oil long before it is full. The warning withholds nothing: the top two rows carry a cut size, with a statement that a bed run that hard will not behave the way a clean depth filtration model expects.
 
 ## The floor at the other end
 

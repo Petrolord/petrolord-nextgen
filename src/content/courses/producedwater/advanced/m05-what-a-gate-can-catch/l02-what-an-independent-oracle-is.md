@@ -17,7 +17,7 @@ Each of these is a separate argument for a number the engine also computes.
 
 ## What makes a route independent
 
-Look for the shared quantity in each pair. There usually is not one. The engine inverts a balance to get a cut size. The oracle marches a droplet and asks when it arrives. The two share the geometry and the fluid properties and nothing else, so an error in the inversion has nowhere to hide.
+Look for the shared quantity in each pair. There usually is not one. The engine inverts a balance to get a cut size. The oracle marches a droplet and asks when it arrives. The two share the geometry, the fluid properties and a second copy of the declared constants, so an error in the inversion has nowhere to hide.
 
 The strongest example is the 18 in the Stokes group. The oracle solves the force balance with the forces written out, so THERE IS NO PLACE IN IT FOR AN 18 TO BE TYPED. Bending the engine from 18 to 20 is caught even when the same bend is attempted in the oracle.
 

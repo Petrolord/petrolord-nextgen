@@ -8,7 +8,7 @@ The chain is assembled. The last step is the one that turns a gas flux, a bubble
 
 A droplet is captured when it comes close enough to a rising bubble to touch it. The efficiency of that encounter is proportional to the SQUARE of the droplet diameter divided by the bubble diameter, which is the Stokes flow interception result, with the module's `interceptionCoefficient` of 1.5 in front of it.
 
-Multiply that efficiency by how many bubbles there are and how much water each one sweeps, and you have a rate constant. On the KOKORI cell it is 2830279.196411133744 per second per square metre of droplet diameter. The units of that constant are worth reading twice: it is a rate per unit of droplet diameter SQUARED, which is the interception law showing through.
+Multiply that efficiency by how many bubbles there are and how much water each one sweeps, and you have a rate constant. On the KOKORI cell it is 2830279.196411133744 per second per square metre of droplet diameter. Read its units twice: it is a rate per unit of droplet diameter SQUARED, which is the interception law showing through.
 
 ## The cut is where the rate uses up the time
 
@@ -37,7 +37,7 @@ The basis string says the rate carries the inverse CUBE of the bubble diameter, 
 | 600 | 43.602795 | 2.828427 |
 | 1200 | 123.327327 | 8.000000 |
 
-FINER BUBBLES CUT FINER, and that is the entire engineering difference between the two kinds of flotation cell.
+FINER BUBBLES CUT FINER, and that is the larger of the two engineering differences between the two kinds of flotation cell, as the last module of this tier measures.
 
 ## The one calibration
 

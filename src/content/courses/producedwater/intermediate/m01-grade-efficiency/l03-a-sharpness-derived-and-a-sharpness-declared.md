@@ -1,6 +1,6 @@
 # A sharpness derived and a sharpness declared
 
-Two devices in this module carry a sharpness of 3 and two carry a sharpness of 2. Those two numbers have completely different standing, and a reader who can say which is which has learned the most portable thing in this course.
+Three devices in this module carry a sharpness of 3 and two carry a sharpness of 2. Those two numbers have completely different standing, and a reader who can say which is which has learned the most portable thing in this course.
 
 {{panel:pw-water-explorer}}
 

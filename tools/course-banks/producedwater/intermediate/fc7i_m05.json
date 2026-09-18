@@ -162,6 +162,6 @@
    "Because the module refuses wherever a warning would have to quote two thresholds in one sentence."
   ],
   "answer": 2,
-  "explanation": "The refusal names four things and each is doing work: the loading it was given, the floor it is under, the reference loading the coefficient is declared at, and the bed that would reach the floor. This module will not extend a one point calibration downward by three orders of magnitude and then report the result as a cut size."
+  "explanation": "The refusal names four things and each is doing work: the loading it was given, the floor it is under, the reference loading the coefficient is declared at, and the bed that would reach the floor. This module will not extend a coefficient declared at one loading down past the floor and then report the result as a cut size."
  }
 ]

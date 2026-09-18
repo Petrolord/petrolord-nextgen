@@ -111,7 +111,7 @@ q(2, "Why is the loading floor a refusal where the breakthrough loading is only 
  ["Because a loading that low would put the cut droplet well outside the creeping flow band that this module states its migration law to.",
   "Because the loading exponent changes sign below the floor, so the reported cut would be meaningless.",
   "Because the module refuses wherever a warning would have to quote two thresholds in one sentence."],
- "The refusal names four things and each is doing work: the loading it was given, the floor it is under, the reference loading the coefficient is declared at, and the bed that would reach the floor. This module will not extend a one point calibration downward by three orders of magnitude and then report the result as a cut size.")
+ "The refusal names four things and each is doing work: the loading it was given, the floor it is under, the reference loading the coefficient is declared at, and the bed that would reach the floor. This module will not extend a coefficient declared at one loading down past the floor and then report the result as a cut size.")
 
 emit(Q, '/root/wt-fc7-nextgen/tools/course-banks/producedwater/intermediate/fc7i_m05.json', label='fc7i_m05', expect_n=15)
 finish()

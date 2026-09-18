@@ -1,12 +1,12 @@
 # A median that tracks the cut
 
-A median read straight off a bin set is quantised to that bin set. It can only take as many values as there are bins, and on a grid built to span six orders of magnitude of droplet volume that is a coarse instrument for a quantity a reader is about to compare.
+A median read straight off a bin set is quantised to that bin set. It can only take as many values as there are bins, and that is a coarse instrument for a quantity a reader is about to compare.
 
 {{panel:pw-train-explorer}}
 
 ## Interpolation, and what it buys
 
-One step of this grid is a few percent of a diameter. Read a median as a bare bin midpoint and the answer is pinned to the nearest step, so a bin wide enough to hold six orders of magnitude of outlet concentration reports one value for all of them. Two trains with genuinely different outlets come back with the same droplet median.
+On the OGBOTOBO grid each bin's upper edge is 13.503861 percent above its lower edge, the same on every bin. Read a median as a bare bin midpoint and the answer is pinned to one value per bin, so two trains with genuinely different outlets whose medians fall in the same bin come back with the same droplet median.
 
 Interpolating in log diameter across the bin the median falls in removes that. The median then moves continuously with the distribution it measures.
 

@@ -24,7 +24,7 @@ Read those as a set. Each names the quantity, the band, and the value that fell 
 
 ## The same bad input through every door
 
-The strongest demonstration here is one fluid put through five doors at once. Give it an oil heavier than its water and the gravity separator, the plate pack, the hydrocyclone and the flotation cell all refuse, each in its own words, alongside the property function that refuses first.
+The strongest demonstration here is one fluid put through five doors at once. Give it an oil heavier than its water and the gravity separator, the plate pack, the hydrocyclone and the flotation cell all refuse, each in its own words, alongside the Stokes rise velocity function, the one door that is not a device.
 
 A module where one export refuses a condition and another accepts it is a module holding two opinions about the same physics, and a caller cannot tell which one it got.
 

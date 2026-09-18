@@ -18,7 +18,7 @@ RE-ENTRAINMENT is oil that reached the core and was picked back up by the flow b
 
 THE REJECT SPLIT is the fraction of the feed taken off with the oil. A real liner sends a small overflow stream out of the top, and how much water goes with it decides both the oil recovery and how much water there is to deal with downstream. This module carries no reject stream and no oil recovery balance at all.
 
-THE SHEAR THE LINER APPLIES is the most important of the three for this course. A liner accelerates water hard, and that acceleration breaks droplets. A device that makes the oil finer while removing it is changing the distribution it was handed in a way the ideal march does not model at the inlet.
+THE SHEAR THE LINER APPLIES is the one of the three this course comes back to. A liner accelerates water hard, and that acceleration breaks droplets. A device that makes the oil finer while removing it is changing the distribution it was handed in a way the ideal march does not model at the inlet.
 
 ## What the sentence means for a design
 
@@ -28,7 +28,7 @@ That is a statement about what the model leaves out rather than a correction fac
 
 ## Why an ideal is still worth computing
 
-An ideal with its omissions listed is a usable engineering result. It ranks geometries correctly, it responds to the inputs that physically matter, and it can be checked by an independent march. A quoted efficiency with no basis at all can do none of those, and it cannot tell you what it left out because it never knew.
+An ideal with its omissions listed is a usable engineering result. It responds to the inputs that physically matter, in directions a reader can follow, and it can be checked by an independent march. A quoted efficiency with no basis at all can do none of those, and it cannot tell you what it left out because it never knew.
 
 ## Exercise
 

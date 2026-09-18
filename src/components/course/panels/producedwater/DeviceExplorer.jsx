@@ -249,8 +249,9 @@ export const FlotationMode = ({ s, preset, setPreset }) => {
       </div>
       <Note>
         The cut goes as the bubble diameter to the three halves, because the rate carries the inverse cube of it and the
-        cut is a square root of a rate. Finer bubbles cut finer, and that is the entire engineering difference between
-        an induced gas cell and a dissolved gas one. On these two presets the dissolved cell cuts {six(s.presets[0].d50cMicron / s.presets[1].d50cMicron)}
+        cut is a square root of a rate. Finer bubbles cut finer, and that is the larger of the two engineering
+        differences between an induced gas cell and a dissolved gas one: on the induced cell the dissolved bubble alone
+        cuts {six(s.bubbleLever)} times finer, and the dissolved gas ratio alone cuts {six(s.gasLever)} times coarser. On these two presets the dissolved cell cuts {six(s.presets[0].d50cMicron / s.presets[1].d50cMicron)}
         {' '}times finer on {six(s.presets[1].gasRatio / s.presets[0].gasRatio)} times the gas.
       </Note>
       <Tbl
@@ -379,8 +380,8 @@ export const BedMode = ({
         interception derivation gives that cube, it is a strong dependence, and this repository carries no bed data to
         check it against. Treat the grain column as the model&apos;s statement rather than as a measurement. The
         reference triple itself, {s.referenceCoefficientPerM} per m at a {s.referenceDropletMicron} micron droplet,
-        {' '}{s.referenceMediaMicron} micron media and {s.referenceLoadingMHr} m/hr, is one calibration with no
-        published source here.
+        {' '}{s.referenceMediaMicron} micron media and {s.referenceLoadingMHr} m/hr, is declared, with no
+        published source here, and the attachment efficiency is still the one calibration in this module.
       </Held>
     </>
   );
@@ -397,7 +398,9 @@ const DeviceExplorer = ({ initialMode = 'liners' }) => {
   const cells = useMemo(() => (mode === 'flotation' ? safe(twoKindsOfCell) : null), [mode]);
   const b = useMemo(() => (mode === 'bed' ? safe(theBed) : null), [mode]);
   const held = useMemo(() => safe(heldItems) || [], []);
-  const flot = useMemo(() => (f && cells ? { ...f, presets: cells.presets } : f), [f, cells]);
+  const flot = useMemo(() => (f && cells ? {
+    ...f, presets: cells.presets, bubbleLever: cells.bubbleLever, gasLever: cells.gasLever,
+  } : f), [f, cells]);
 
   return (
     <PanelShell

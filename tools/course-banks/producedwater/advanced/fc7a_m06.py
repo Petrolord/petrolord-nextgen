@@ -68,12 +68,12 @@ q(0, "No graded answer in this course depends on the attachment efficiency. What
   "The cut size it produces falls outside the band this module states its rise velocities to."],
  "It is the ONE number in this module with no derivation at all, and it is an input so that a caller with real data can move it.")
 
-q(1, "The frozen constants object carries 55 keys, and 16 of them are not in the digest's table of declared constants. Where are those 16?",
- "They are band edges and customary limits, printed where they bite rather than gathered into one list.",
- ["They are derived quantities the module caches in the same object, so they are not declared values at all.",
+q(1, "The frozen constants object carries 55 keys, and a table of the module's chosen fit and device values lists only part of them. What are the rest?",
+ "Mostly band edges and limits a refusal or a warning is judged against, plus two defaults, the interception sharpness and the one calibration.",
+ ["Copies of the table's own entries restated in other units of measure, kept in the same object so that a caller never has to convert between them.",
   "They are the held numbers, kept in the object with no value at all.",
   "They are the golden file's expectation fields, carried so the suite reads them."],
- "They are printed in the sections where they decide something, which on this module is Sections 4, 10, 12, 13 and 16.")
+ "Twelve are band edges and limits, such as the -10 to 200 C of the viscosity fit and the 5 to 100 degrees of API gravity. The rest are the bed depth and train spread defaults, the interception sharpness of 2 and the attachment efficiency of 0.01.")
 
 q(2, "How does the jest suite treat the declared constants, and what does that guarantee?",
  "It pins them by literal with an exact key set match, so adding or removing one fails until the pin is updated, which makes moving one a reviewed act rather than a silent one.",

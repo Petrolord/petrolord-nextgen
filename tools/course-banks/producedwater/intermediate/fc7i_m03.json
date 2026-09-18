@@ -52,7 +52,7 @@
    "At 600 liners, 7.674178 micron, where the field column reaches its highest value in the sweep."
   ],
   "answer": 0,
-  "explanation": "It is NOT the smallest bank. A designer reading the cut column upward from the bottom sees it improving as liners come out, right up to the row where it stops and reverses."
+  "explanation": "It is NOT the smallest bank. A designer reading the cut column from the top down sees it improving as liners come out, right up to the row where it stops and reverses."
  },
  {
   "prompt": "By how much is the smallest bank in that sweep worse than the best one?",

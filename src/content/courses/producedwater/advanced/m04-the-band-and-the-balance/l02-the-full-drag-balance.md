@@ -22,11 +22,11 @@ For creeping flow the oracle goes further and solves the FORCE BALANCE numerical
 
 ## Where the second method earns its keep
 
-Inside the band the balance mostly confirms Stokes. Outside it, the balance IS the answer, and the module uses it where it has to.
+Inside the band the balance mostly confirms Stokes. Outside it the balance is the better answer. The module uses it for the bubbles, which are never inside the band, and for an oil droplet outside the band it keeps the closed form and warns.
 
 A rising bubble is the clearest case. A 400 micron bubble in the flotation chain rises at 0.055485861717 m per second at a Reynolds number of 41.641016, and the engine reaches that by the full drag balance rather than by Stokes, because at a Reynolds number in the tens Stokes is no longer the settling law.
 
-That is the correct use of two methods. One is cheap and is stated to a band. The other is expensive and holds everywhere. The module uses each where it applies and reports which one produced the number.
+That is the correct use of two methods. One is cheap and is stated to a band. The other is iterative and does not assume creeping flow. The module uses each where it applies and reports which one produced the number.
 
 ## Exercise
 

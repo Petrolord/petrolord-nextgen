@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "Digest Section 22 is the one section of this course whose subject is history. What did the hydrocyclone in this module do BEFORE it was repaired, and what lesson is drawn from it?",
+  "prompt": "The history lesson is the one lesson of this course whose subject is history. What did the hydrocyclone in this module do BEFORE it was repaired, and what lesson is drawn from it?",
   "options": [
    "The field was clamped at its rated value whatever the flow, so removing liners moved nothing at all, and the lesson is that a clamp deletes the input it quietly moves.",
    "The liner count was not an input at all, so a bank of any size reported one cut size, and the lesson is that a model has to respond to every box a user can type in.",
@@ -11,7 +11,7 @@
   "explanation": "The studio's own shipped default ran its liners at 7.7 times their design flow. A studio that tells a designer to buy less equipment for a better answer is worse than no studio."
  },
  {
-  "prompt": "Section 22 records a second defect in that same device, one level down from the first. What was it?",
+  "prompt": "The history lesson records a second defect in that same device, one level down from the first. What was it?",
   "options": [
    "The liner LENGTH was not an input at all, and the bore reached the answer through a bare divisor on a velocity the source called residence-scaled rather than through any residence time.",
    "The bore of the liner was not an input at all, and the length reached the answer only through the liner volume, so just one of the two stated dimensions was able to move the reported cut size.",
@@ -19,10 +19,10 @@
    "The oil core and the half-area radius are one and the same here, so the median droplet has no distance at all to cross."
   ],
   "answer": 0,
-  "explanation": "Section 9 is the stated geometry the repair put there, where both dimensions move the answer for a reason a reader can follow."
+  "explanation": "The liner this course teaches is the stated geometry the repair put there, where both dimensions move the answer for a reason a reader can follow."
  },
  {
-  "prompt": "Given an oil heavier than its water, what did this module do before the first repair, and what rule does the digest draw from it?",
+  "prompt": "Given an oil heavier than its water, what did this module do before the first repair, and what rule does this course draw from it?",
   "options": [
    "Every one of the five doors refused the fluid and the train then returned no verdict of any kind, and the rule drawn from it is that a refusal raised anywhere must reach the caller intact.",
    "One export returned a bare NaN while the four devices each refused it by name, and the rule drawn from it is that a leaf must never answer a question where its own callers have declined to.",
@@ -30,7 +30,7 @@
    "One export refused by name while four devices returned a cut size of NaN with no error at all, and the rule is that when two halves of one module disagree the TRUSTING half is the bug."
   ],
   "answer": 3,
-  "explanation": "The train then skipped those stages and returned a spec verdict computed over whatever ran. Section 16 now runs the identical bad fluid through all five doors at once."
+  "explanation": "The train then skipped those stages and returned a spec verdict computed over whatever ran. The repaired engine refuses the identical bad fluid at all five doors at once."
  },
  {
   "prompt": "Two models in this engine were DEAD before the first repair. What made the flotation model dead?",
@@ -55,7 +55,7 @@
   "explanation": "If a module holds two opinions about one quantity, delete one. There is ONE route through this model now."
  },
  {
-  "prompt": "Before the repair a train that removed nothing showed its droplet median falling. Section 22 says why. What was it?",
+  "prompt": "Before the repair a train that removed nothing showed its droplet median falling. The history lesson says why. What was it?",
   "options": [
    "The outlet bins were normalised by the surviving volume and the inlet bins were not, so the two medians were taken on different totals.",
    "The inlet median was the typed d50 and the outlet median was measured off the bins, so the two were not the same kind of number.",
@@ -77,7 +77,7 @@
   "explanation": "The clamp was in the oracle too, so the independent check agreed with it. A guard that quietly moves an input is a guard that deletes the input."
  },
  {
-  "prompt": "One device threshold in this module was still written bare inside the sentence that reported it. Which was it, and what lesson does Section 22 draw?",
+  "prompt": "One device threshold in this module was still written bare inside the sentence that reported it. Which was it, and what lesson does the history lesson draw?",
   "options": [
    "The breakthrough loading, which was written bare inside the warning that reported it and which the module now declares at 25 m/hr in its own frozen constants object where a reader can find it.",
    "The overload turndown of the liner bank, which was written inside the shear penalty itself rather than being declared into the frozen constants object where any reader could go and find it for themselves.",
@@ -110,7 +110,7 @@
   "explanation": "Twenty seven were planted in the engine alone and eight in the engine and the oracle together, and 16 of the first group and 6 of the second survived."
  },
  {
-  "prompt": "How large is the planting battery this digest was built beside, and what does it show?",
+  "prompt": "How large is the planting battery this course was built beside, and what does it show?",
   "options": [
    "Thirty five in all, each of them run on its own against the vendored suite, and none of those thirty five is able to leave the suite fully green.",
    "Seventy eight in all, one for each of the tests carried in the vendored suite, and none of those is able to leave the suite fully green either.",

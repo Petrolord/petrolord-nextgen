@@ -461,7 +461,28 @@ DECLARED_ROWS.forEach(([k, what]) => {
   if (!(k in D)) throw new Error(`GENERATOR REFUSES: DECLARED_CONSTANTS has no key ${k}, so this table row describes nothing`);
   w(`| ${k} | ${D[k]} | ${what} |`);
 });
-w(`Read straight off the frozen export, which carries ${Object.keys(D).length} keys in all. The ${Object.keys(D).length - DECLARED_ROWS.length} not in the table above are band edges and customary limits printed where they bite, in Sections 4, 10, 12, 13 and 16.`);
+// WHAT THE KEYS OUTSIDE THE TABLE ARE IS A CLAIM, SO IT IS PARTITIONED AND
+// CHECKED. This line said all of them were "band edges and customary limits".
+// Two of them are defaults, one is the interception sharpness KIND ONE derives,
+// and one is the attachment efficiency of KIND THREE. The partition below must
+// cover exactly the keys the table leaves out, or the build stops.
+const UNTABLED = [
+  ['bands', ['waterViscosityMinC', 'waterViscosityMaxC', 'waterDensityMinC', 'waterDensityMaxC', 'apiGravityMin', 'apiGravityMax',
+    'bubbleMicronMin', 'bubbleMicronMax', 'gasRatioMax', 'sigmaCustomaryMin', 'sigmaCustomaryMax', 'coarseCutWarnMicron']],
+  ['defaults', ['filterBedDepthDefaultM', 'trainSigmaDefault']],
+  ['sharpness', ['interceptionSharpness']],
+  ['calibration', ['attachmentEfficiency']],
+];
+{
+  const tabled = new Set(DECLARED_ROWS.map(([k]) => k));
+  const listed = UNTABLED.flatMap(([, ks]) => ks);
+  const outside = Object.keys(D).filter((k) => !tabled.has(k));
+  if (listed.length !== new Set(listed).size || listed.length !== outside.length || !outside.every((k) => listed.includes(k))) {
+    throw new Error(`GENERATOR REFUSES: the keys outside the declared table are ${outside.join(', ')} and the partition that describes them lists ${listed.join(', ')}`);
+  }
+}
+const untabledCount = (name) => UNTABLED.find(([n]) => n === name)[1].length;
+w(`Read straight off the frozen export, which carries ${Object.keys(D).length} keys in all. The ${Object.keys(D).length - DECLARED_ROWS.length} not in the table above are ${untabledCount('bands')} band edges and customary limits, each the edge a refusal or a warning is judged against; ${word(untabledCount('defaults'))} defaults, the bed depth and the droplet spread a train assumes; the interception sharpness of ${D.interceptionSharpness}, which is stored in the same object although KIND ONE derives it; and the attachment efficiency of KIND THREE.`);
 w();
 w('KIND THREE: A CALIBRATION, and there is exactly one.');
 w(`- \`attachmentEfficiency\` is ${D.attachmentEfficiency}. It is the probability that a droplet colliding with a bubble sticks, and it is the ONE number in this module with no derivation at all: it was chosen so that a cell at the module's own default conditions cuts in the ten to twenty micron range induced gas flotation is customarily credited with. It is an input, so a caller with a vendor curve can move it. Nothing in this course presents it as published, and no graded capstone answer depends on it.`);
@@ -841,7 +862,14 @@ w(sec(10, 'The envelope, the ceiling and the refusal', ['intermediate', 'm03']))
 w();
 w('A liner bank is sized in LINERS, and the flow each liner carries is what sets its field. This is the one place in this module where the arithmetic and the engineering pull in opposite directions, and it is the most important section in the course.');
 w();
-w(`The KOKORI flow, swept DOWNWARD through liner counts. Read the cut size column from the bottom up, which is the direction a designer saving money reads it:`);
+// THE READING DIRECTION IS A CLAIM ABOUT THE ROW ORDER, SO IT IS CHECKED. This
+// line said "from the bottom up" while the rows run from the largest bank to
+// the smallest, which is the direction of ADDING liners. A designer saving
+// money takes liners out, which reads this table from the top down.
+if (!LINER_SWEEP.every((n, i) => i === 0 || n < LINER_SWEEP[i - 1])) {
+  throw new Error('GENERATOR REFUSES: the liner sweep is not in strictly falling liner count, so "from the top down" would not be the direction of taking liners out');
+}
+w(`The KOKORI flow, swept DOWNWARD through liner counts. Read the cut size column from the top down, which is the direction a designer saving money reads it, taking liners out of the bank:`);
 w('| liners | m3/s per liner | turndown | field g | shear penalty | ideal cut micron | CUT MICRON | warning |');
 w('| --- | --- | --- | --- | --- | --- | --- | --- |');
 const linerRows = [];
@@ -904,11 +932,26 @@ w('The bubble size, which is the difference between the two kinds of cell:');
 w(`| bubble micron | rise m/s | Reynolds | holdup | cut micron | cut over the ${BUBBLE_REFERENCE_MICRON} micron cut |`);
 w('| --- | --- | --- | --- | --- | --- |');
 const flotAt300 = A(`flotation at ${BUBBLE_REFERENCE_MICRON} micron bubbles`, P.flotation({ flowM3S: koQ, ...KOKORI_FLOTATION, bubbleMicron: BUBBLE_REFERENCE_MICRON, ...koFluid }));
-BUBBLE_SWEEP.forEach((bubbleMicron) => {
+const bubbleRows = BUBBLE_SWEEP.map((bubbleMicron) => {
   const r = A(`flotation at ${bubbleMicron} micron bubbles`, P.flotation({ flowM3S: koQ, ...KOKORI_FLOTATION, bubbleMicron, ...koFluid }));
   w(`| ${bubbleMicron} | ${f12(r.bubbleRiseMS)} | ${f6(r.bubbleReynolds)} | ${f12(r.gasHoldup)} | ${f6(r.d50cMicron)} | ${f6(r.d50cMicron / flotAt300.d50cMicron)} |`);
+  return { bubbleMicron, r };
 });
-w(`The last column is derived, each cut over the ${BUBBLE_REFERENCE_MICRON} micron row. The cut goes as the bubble diameter to the three halves, because the rate carries the inverse cube of it and the cut is a square root of a rate: FINER BUBBLES CUT FINER, and that is the entire engineering difference between the two kinds of cell.`);
+// THE RISE VELOCITY DOES NOT REACH THE CUT, and that is a claim about the
+// engine, so it is measured here: every cut ratio must be the three halves
+// power of the bubble ratio while the rise velocity column moves a long way.
+// A Professional lesson once said the rise velocity sets how much water a
+// bubble sweeps and so moves the cut. In this model it does neither.
+bubbleRows.forEach(({ bubbleMicron, r }) => {
+  const expected = (bubbleMicron / BUBBLE_REFERENCE_MICRON) ** 1.5;
+  if (Math.abs(r.d50cMicron / flotAt300.d50cMicron / expected - 1) > 1e-12) {
+    throw new Error(`GENERATOR REFUSES: the cut ratio at ${bubbleMicron} micron is not the three halves power of the bubble ratio, so the rise velocity is reaching the cut after all`);
+  }
+});
+const bubbleRises = bubbleRows.map(({ r }) => r.bubbleRiseMS);
+const bubbleRiseSpread = Math.max(...bubbleRises) / Math.min(...bubbleRises);
+w(`The last column is derived, each cut over the ${BUBBLE_REFERENCE_MICRON} micron row. The cut goes as the bubble diameter to the three halves, because the rate carries the inverse cube of it and the cut is a square root of a rate: FINER BUBBLES CUT FINER, and that is the larger of the two engineering differences between the two kinds of cell, which the next section measures one change at a time.`);
+w(`THE BUBBLE RISE VELOCITY DOES NOT REACH THE CUT. It sets the holdup and nothing else in the chain: the rate carries the gas flux over the cube of the bubble diameter, because the water a faster bubble sweeps is cancelled by the fewer bubbles a faster swarm holds at the same flux. That is why the last column is the three halves power of the bubble ratio on every row while the rise velocity column moves by a factor of ${f6(bubbleRiseSpread)} across the same rows (derived, the largest rise over the smallest).`);
 w();
 w('The gas rate, at one bubble size:');
 w('| gas to water ratio | superficial gas m/s | holdup | cut micron | warning |');
@@ -978,6 +1021,21 @@ w('| --- | --- | --- | --- | --- |');
 const igfR = A('the induced preset', P.flotation({ flowM3S: koQ, ...KOKORI_FLOTATION, ...IGF_PRESET, ...koFluid }));
 const dafR = A('the dissolved preset', P.flotation({ flowM3S: koQ, ...KOKORI_FLOTATION, ...DAF_PRESET, ...koFluid }));
 w(`The dissolved cell cuts ${f6(igfR.d50cMicron / dafR.d50cMicron)} times finer on ${f6(DAF_PRESET.gasRatio / IGF_PRESET.gasRatio)} times the gas (both derived, the pairs of figures on those two rows divided). A model in which the bubble size could not move the cut would make these the same device, and no amount of menu would change that.`);
+// THE LARGER LEVER IS COMPUTED, NEVER ASSERTED. A lesson said the bubble size
+// is the stronger of the two levers "by a wide margin" with no figure behind
+// it. Each preset difference is applied alone to the induced cell here, and
+// the build refuses if the bubble is not the larger or the two do not compose.
+const igfDafBubble = A('the induced cell with the dissolved bubble alone', P.flotation({ flowM3S: koQ, ...KOKORI_FLOTATION, ...IGF_PRESET, bubbleMicron: DAF_PRESET.bubbleMicron, ...koFluid }));
+const igfDafGas = A('the induced cell with the dissolved gas ratio alone', P.flotation({ flowM3S: koQ, ...KOKORI_FLOTATION, ...IGF_PRESET, gasRatio: DAF_PRESET.gasRatio, ...koFluid }));
+const bubbleLever = igfR.d50cMicron / igfDafBubble.d50cMicron;
+const gasLever = igfDafGas.d50cMicron / igfR.d50cMicron;
+if (!(bubbleLever > gasLever)) {
+  throw new Error(`GENERATOR REFUSES: the bubble change alone moves the cut by ${bubbleLever} and the gas change alone by ${gasLever}, so the bubble is not the larger lever`);
+}
+if (Math.abs((bubbleLever / gasLever) / (igfR.d50cMicron / dafR.d50cMicron) - 1) > 1e-12) {
+  throw new Error('GENERATOR REFUSES: the two one-at-a-time factors do not compose into the preset ratio');
+}
+w(`ONE CHANGE AT A TIME, so the larger lever is measured rather than asserted. On the induced cell, the dissolved bubble alone cuts ${f6(bubbleLever)} times finer, and the dissolved gas ratio alone cuts ${f6(gasLever)} times coarser (both derived, the two cuts on each change divided). The bubble is the larger of the two levers, and the first factor over the second is the ${f6(igfR.d50cMicron / dafR.d50cMicron)} of the two presets, because the cut is a power of each of them multiplied.`);
 w();
 w('THE INVARIANCE, which is the other half of the same design. How you COUNT the cells must not change the answer at equal total volume and equal total gas. The gas ratio here is scaled by the cell count so the unit is fed the same gas whatever the arrangement:');
 w('| cells | m3 each | total m3 | ratio per cell | total gas m3/s | residence s | cut micron |');
@@ -1037,7 +1095,7 @@ LOADING_AREA_SWEEP.forEach((areaM2) => {
     ['above the breakthrough loading', r.loadingMHr > D.filterBreakthroughLoadingMHr],
   ])} |`);
 });
-w(`Lambda falls as the loading rate to the power ${D.filterLoadingExponent}, from a value DECLARED at ${D.filterReferenceLoadingMHr} m/hr, and the module warns above ${D.filterBreakthroughLoadingMHr} m/hr because a bed loses depth capture at that rate and breaks through early. The reference triple, ${D.filterCoefficientPerM} per m at a ${D.filterReferenceDropletMicron} micron droplet, ${D.filterReferenceMediaMicron} micron media and ${D.filterReferenceLoadingMHr} m/hr, is ONE calibration of this module with no published source here.`);
+w(`Lambda falls as the loading rate to the power ${D.filterLoadingExponent}, from a value DECLARED at ${D.filterReferenceLoadingMHr} m/hr, and the module warns above ${D.filterBreakthroughLoadingMHr} m/hr because a bed loses depth capture at that rate and breaks through early. The reference triple, ${D.filterCoefficientPerM} per m at a ${D.filterReferenceDropletMicron} micron droplet, ${D.filterReferenceMediaMicron} micron media and ${D.filterReferenceLoadingMHr} m/hr, is DECLARED, with no published source here. It is not a second calibration: the attachment efficiency is still the one calibration in this module.`);
 w();
 // THE FLOOR IS THE FC7-1 REPAIR AND THIS SECTION OWNS IT. A device whose one
 // refusal is never shown refusing is a device a reader can only take the
@@ -1068,7 +1126,7 @@ FILTER_FLOOR_REFUSED_AREAS.forEach((areaM2) => {
   wRefusalLine(`a ${areaM2} m2 bed on this flow`, P.mediaFilter({ flowM3S: koQ, ...KOKORI_FILTER, areaM2 }));
 });
 w(`- the bed that would run this flow AT the floor, which every one of those refusals names and which the return carries as \`areaAtFloorM2\`: ${f6(areaAtFloor)} m2, against the ${KOKORI_FILTER.areaM2} m2 bed this stream actually runs.`);
-w(`THE REFUSAL NAMES FOUR THINGS and each of them is doing work: the loading it was given, the floor it is under, the reference loading the coefficient is declared at, and the bed that would reach the floor. A reader who wanted an answer below ${D.filterMinLoadingMHr} m/hr is told what to change and by how much. What a bed really does far below its design rate is HELD FOR LITERATURE, which is why this is a refusal rather than a warning: the module will not extend a one-point calibration downward by three orders of magnitude and then report the result as a cut size.`);
+w(`THE REFUSAL NAMES FOUR THINGS and each of them is doing work: the loading it was given, the floor it is under, the reference loading the coefficient is declared at, and the bed that would reach the floor. A reader who wanted an answer below ${D.filterMinLoadingMHr} m/hr is told what to change and by how much. What a bed really does far below its design rate is HELD FOR LITERATURE, which is why this is a refusal rather than a warning: the module will not extend a coefficient declared at one loading down past the floor and then report the result as a cut size.`);
 w();
 w('The published bed cases, beside the engine:');
 w('| area m2 | depth m | media micron | golden loading m/hr | golden lambda per m | golden cut micron | engine cut micron |');
@@ -1161,7 +1219,16 @@ w('Both are the volume median of the same bin set, interpolated in LOG diameter 
 w(`- ${ogTrain.medianBasis}`);
 w(`- the inlet median, ${f6(ogTrain.inletMedianMicron)} micron, reproduces the typed d50 of ${ogTrain.inletD50Micron} to ${(Math.abs(ogTrain.inletMedianMicron - ogTrain.inletD50Micron) / ogTrain.inletD50Micron).toExponential(2)} relative (derived, the difference over the typed value). The typed figure is kept beside it as \`inletD50Micron\`.`);
 w();
-w('WHY INTERPOLATION RATHER THAN THE BIN MIDPOINT. One step of this grid is a few percent of a diameter, so a median read as a bare midpoint is quantised to the grid, and a bin wide enough to hold six orders of magnitude of outlet concentration reports one value for all of them. Interpolated, the median tracks the cut:');
+// THE STEP OF THE GRID IS MEASURED. This line said "a few percent of a
+// diameter" and a bin "wide enough to hold six orders of magnitude of outlet
+// concentration", and neither figure was computed anywhere. The step is read
+// off the engine's own bin edges and asserted equal on every bin.
+const ogGrid = A('the OGBOTOBO inlet grid', P.dropletBins({ d50: OGBOTOBO_INLET.d50Micron, sigma: OGBOTOBO_INLET.sigma }));
+const ogStep = ogGrid.bins[0].dHiMicron / ogGrid.bins[0].dLoMicron;
+if (!ogGrid.bins.every((b) => Math.abs(b.dHiMicron / b.dLoMicron / ogStep - 1) < 1e-12)) {
+  throw new Error('GENERATOR REFUSES: the OGBOTOBO bins do not share one edge ratio, so a single step cannot be printed for the grid');
+}
+w(`WHY INTERPOLATION RATHER THAN THE BIN MIDPOINT. On the OGBOTOBO grid each bin's upper edge is ${f6((ogStep - 1) * 100)} percent above its lower edge (derived, the two edges of one bin divided, the same on every bin), so a median read as a bare midpoint can take only one value per bin: two outlets of different concentration whose medians fall in the same bin report the same median. Interpolated, the median tracks the cut:`);
 w('| cut micron | outlet ppm on the OGBOTOBO inlet | outlet median micron |');
 w('| --- | --- | --- |');
 [20, 12, 8, 5, 3, 1.5].forEach((d50cMicron) => {
@@ -1309,7 +1376,7 @@ w('The last column is derived, each cut over the KOKORI row. Nothing downstream 
 w();
 w('SIX: THE DEVICE SHAPE AND SCALE CONSTANTS, one at a time. Sharpness three, the plate pack efficiency factor, the whole liner geometry with its rated field and design flow, the flotation interception coefficient, the filter reference triple and the customary bands. Section 2 lists them. They are PINNED by literal in the jest suite with an exact key-set match, so adding or removing one fails until the pin is updated, and the test says in as many words that a pin is not a validation.');
 w();
-w(`AND ONE STATEMENT ABOUT THE HYDROCYCLONE CUT ITSELF. The capture this model computes is an IDEAL: ${koCyc.cutBasis}. Field de-oilers are customarily credited with a coarser cut than this model gives, and no vendor performance curve exists in this repository to calibrate against. That is a statement about what the model leaves out rather than a number, and it belongs beside every cyclone cut size this course prints.`);
+w(`AND ONE STATEMENT ABOUT THE HYDROCYCLONE CUT ITSELF. The capture this model computes is an IDEAL: ${koCyc.cutBasis}. No vendor performance curve exists in this repository to calibrate against. That is a statement about what the model leaves out rather than a number, and it belongs beside every cyclone cut size this course prints.`);
 w();
 
 /* ============================================================= SECTION 18 */
@@ -1465,10 +1532,34 @@ const uzTrain = A('the UZERE two stage train', P.treatmentTrain({
   devices: [{ name: 'API 421 basin', ...uzBasin }, { name: 'CPI plate pack', ...uzPlate }],
 }));
 w(`| ${step()} | the two of them in series | ${f6(uzTrain.outletOiwPpm)} ppm out, ${f6(uzTrain.overallRemovalPct)} percent removed |`);
+const uzSeriesStep = stepN;
 w(`| ${step()} | the droplets left | median ${f6(uzTrain.outletMedianMicron)} micron, from ${f6(uzTrain.inletMedianMicron)} |`);
 w(`| ${step()} | the verdict | ${String(uzTrain.meetsSpec)}, because "${uzTrain.verdictWithheldReason}" |`);
 w();
 w(`Step ${stepN} is the point of the whole tier. The engine has just computed eleven numbers and it will not turn them into a pass or a fail, because nobody gave it a specification and it does not have one of its own.`);
+w();
+// WHICH COMPOUNDING IS RIGHT IS COMPUTED, NEVER ASSERTED. An Associate question
+// keyed "no arithmetic on the two stage figures reaches" the overall removal,
+// and a distractor saying they compound was the true statement. Compounding the
+// train's OWN stage figures reaches it exactly; compounding a figure measured
+// on the raw stream does not. Both are asserted here before either is printed.
+const uzStage = uzTrain.stages;
+if (uzStage.length !== 2 || !uzStage.every((s) => s.ran)) {
+  throw new Error('GENERATOR REFUSES: the UZERE train did not run both of its stages, so its stage figures cannot be compounded');
+}
+const uzCompounded = 100 * (1 - (1 - uzStage[0].removalPct / 100) * (1 - uzStage[1].removalPct / 100));
+if (Math.abs(uzCompounded / uzTrain.overallRemovalPct - 1) > 1e-12) {
+  throw new Error(`GENERATOR REFUSES: the two UZERE stage figures compound to ${uzCompounded} and the train reports ${uzTrain.overallRemovalPct}`);
+}
+const uzPackAlone = A('the plate pack alone on the raw UZERE water', P.treatmentTrain({
+  inletOiwPpm: UZERE_INLET.oiwPpm, inletD50Micron: UZERE_INLET.d50Micron, sigma: UZERE_INLET.sigma,
+  devices: [{ name: 'CPI plate pack', ...uzPlate }],
+}));
+const uzRawCompounded = 100 * (1 - (1 - uzStage[0].removalPct / 100) * (1 - uzPackAlone.overallRemovalPct / 100));
+if (!(uzPackAlone.overallRemovalPct > uzStage[1].removalPct) || !(uzRawCompounded > uzTrain.overallRemovalPct)) {
+  throw new Error('GENERATOR REFUSES: the plate pack does not remove more on the raw water than in the train, or the raw compounding does not overstate the train');
+}
+w(`THE TWO STAGE FIGURES BEHIND STEP ${uzSeriesStep}, and which way of combining them is right. The basin removes ${f6(uzStage[0].removalPct)} percent of the oil reaching it and the plate pack ${f6(uzStage[1].removalPct)} percent of the oil reaching IT. Compounded as survivals, one minus the product of the two survivals, they give ${f6(uzCompounded)} percent, which is the train's own overall figure (derived, the two stage figures above), because each stage figure is already a fraction of the water that reached its own stage. The plate pack run alone on the raw UZERE water removes ${f6(uzPackAlone.overallRemovalPct)} percent, more than it removes in the train, and compounding THAT figure with the basin predicts ${f6(uzRawCompounded)} percent (derived, the same arithmetic), which overstates the train: the raw figure credits the pack with coarse oil the basin had already taken out.`);
 w();
 
 /* ============================================================= SECTION 21 */

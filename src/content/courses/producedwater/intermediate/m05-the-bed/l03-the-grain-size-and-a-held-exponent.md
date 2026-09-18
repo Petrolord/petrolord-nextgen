@@ -1,6 +1,6 @@
 # The grain size, and an exponent that is held
 
-The media a bed is packed with moves its answer more than any other input, through the strongest dependence in the device. It is also the one place in this device where the model is making a statement the repository cannot check.
+The media a bed is packed with enters the filter coefficient through the highest power of any input to it, the inverse cube. It is also the one place in this device where the model is making a statement the repository cannot check.
 
 {{panel:pw-device-explorer}}
 

@@ -22,7 +22,7 @@ That agreement is not decoration. It is an identity: the volume median of a log-
 
 Suppose the engine did the interpolation correctly and said nothing about it. Every number would be right, and a reader comparing an inlet median from one run with an outlet median from another would still have no way of knowing the two were commensurable.
 
-The basis strings in this module answer that. They appear beside the cut sizes, the concentrations and the medians, and each says what the number is a number OF. A figure with a stated basis can be argued with. A figure without one can only be believed.
+The basis strings in this module answer that. They appear beside the cyclone, flotation and bed cut sizes, the concentrations and the medians, and each says what the number is a number OF. A figure with a stated basis can be argued with. A figure without one can only be believed.
 
 ## What the pair actually tells you
 

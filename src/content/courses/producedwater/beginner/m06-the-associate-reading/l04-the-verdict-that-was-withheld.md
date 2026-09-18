@@ -8,7 +8,7 @@ It would have been easy to write an engine that answered. There is a number on t
 
 ## What the engine would need
 
-A verdict needs a specification supplied by the caller, and that caller is the person who knows the licence, the receiving environment and the regulator. Give the engine a positive specification and it will compare the train outlet against it. The comparison is withheld when the train did not run, or when the figure supplied is not positive, because a verdict on equipment that did not run is a verdict on equipment that is not there.
+A verdict needs a specification supplied by the caller, and that caller is the person who knows the licence, the receiving environment and the regulator. Give the engine a positive specification and it will compare the train outlet against it. The comparison is withheld when any stage of the train did not run, or when the figure supplied is not positive, because a verdict on equipment that did not run is a verdict on equipment that is not there.
 
 ## Why the engine states none of its own
 

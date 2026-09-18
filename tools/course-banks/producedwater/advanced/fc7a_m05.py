@@ -6,26 +6,26 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # FC7 Expert m05, What a gate can catch. Digest section 22 for the framed
 # history, section 18 for the oracle and section 19 for the battery.
 
-q(2, "Digest Section 22 is the one section of this course whose subject is history. What did the hydrocyclone in this module do BEFORE it was repaired, and what lesson is drawn from it?",
+q(2, "The history lesson is the one lesson of this course whose subject is history. What did the hydrocyclone in this module do BEFORE it was repaired, and what lesson is drawn from it?",
  "The field went as the square of the flow with nothing above it, so the cut size fell without limit as liners were removed, and the lesson is to sweep the input a user is most tempted to reduce and look at the direction of the answer.",
  ["The field was clamped at its rated value whatever the flow, so removing liners moved nothing at all, and the lesson is that a clamp deletes the input it quietly moves.",
   "The liner count was not an input at all, so a bank of any size reported one cut size, and the lesson is that a model has to respond to every box a user can type in.",
   "The shear penalty was applied below the operating envelope as well as above it, so the cut degraded everywhere, and the lesson is that a penalty needs a stated band."],
  "The studio's own shipped default ran its liners at 7.7 times their design flow. A studio that tells a designer to buy less equipment for a better answer is worse than no studio.")
 
-q(0, "Section 22 records a second defect in that same device, one level down from the first. What was it?",
+q(0, "The history lesson records a second defect in that same device, one level down from the first. What was it?",
  "The liner LENGTH was not an input at all, and the bore reached the answer through a bare divisor on a velocity the source called residence-scaled rather than through any residence time.",
  ["The bore of the liner was not an input at all, and the length reached the answer only through the liner volume, so just one of the two stated dimensions was able to move the reported cut size.",
   "Both dimensions were inputs and neither moved the answer, because the cut size was read out of a fixed table of liner sizes.",
   "The oil core and the half-area radius are one and the same here, so the median droplet has no distance at all to cross."],
- "Section 9 is the stated geometry the repair put there, where both dimensions move the answer for a reason a reader can follow.")
+ "The liner this course teaches is the stated geometry the repair put there, where both dimensions move the answer for a reason a reader can follow.")
 
-q(3, "Given an oil heavier than its water, what did this module do before the first repair, and what rule does the digest draw from it?",
+q(3, "Given an oil heavier than its water, what did this module do before the first repair, and what rule does this course draw from it?",
  "One export refused by name while four devices returned a cut size of NaN with no error at all, and the rule is that when two halves of one module disagree the TRUSTING half is the bug.",
  ["Every one of the five doors refused the fluid and the train then returned no verdict of any kind, and the rule drawn from it is that a refusal raised anywhere must reach the caller intact.",
   "One export returned a bare NaN while the four devices each refused it by name, and the rule drawn from it is that a leaf must never answer a question where its own callers have declined to.",
   "All five of them returned a cut size and the train raised a warning beside the result, and the rule drawn from it is that a warning is never any substitute at all for a refusal."],
- "The train then skipped those stages and returned a spec verdict computed over whatever ran. Section 16 now runs the identical bad fluid through all five doors at once.")
+ "The train then skipped those stages and returned a spec verdict computed over whatever ran. The repaired engine refuses the identical bad fluid at all five doors at once.")
 
 q(1, "Two models in this engine were DEAD before the first repair. What made the flotation model dead?",
  "An attachment fraction that was exactly one across every input a user could type, which made the bubble size, the gas rate and the residence time decorative and made the two kinds of cell one device behind two menu entries.",
@@ -41,7 +41,7 @@ q(2, "The media filter was the other dead model. What was wrong with it before t
   "It inverted the penetration law at the wrong depth, so every cut size was out by the root of the bed depth."],
  "If a module holds two opinions about one quantity, delete one. There is ONE route through this model now.")
 
-q(1, "Before the repair a train that removed nothing showed its droplet median falling. Section 22 says why. What was it?",
+q(1, "Before the repair a train that removed nothing showed its droplet median falling. The history lesson says why. What was it?",
  "The inlet median was the typed d50 and the outlet median was measured off the bins, so the two were not the same kind of number.",
  ["The outlet bins were normalised by the surviving volume and the inlet bins were not, so the two medians were taken on different totals.",
   "The inlet median was interpolated and the outlet median was read as a bin midpoint, so the outlet was quantised downward every time.",
@@ -55,7 +55,7 @@ q(0, "This course found a defect of its own in the media filter while building t
   "It took its loading rate from the bed depth rather than the bed area, and the repair made the area an input."],
  "The clamp was in the oracle too, so the independent check agreed with it. A guard that quietly moves an input is a guard that deletes the input.")
 
-q(3, "One device threshold in this module was still written bare inside the sentence that reported it. Which was it, and what lesson does Section 22 draw?",
+q(3, "One device threshold in this module was still written bare inside the sentence that reported it. Which was it, and what lesson does the history lesson draw?",
  "The flotation residence warning, which compared against a bare 60 written inside its own message, and the lesson is that a threshold a reader cannot find is a threshold nobody reviews.",
  ["The breakthrough loading, which was written bare inside the warning that reported it and which the module now declares at 25 m/hr in its own frozen constants object where a reader can find it.",
   "The overload turndown of the liner bank, which was written inside the shear penalty itself rather than being declared into the frozen constants object where any reader could go and find it for themselves.",
@@ -76,7 +76,7 @@ q(2, "Thirty five defects were run one at a time against the suite before the fi
   "Before it, 27 of the 35 left the suite green. After it, 22 of them still do."],
  "Twenty seven were planted in the engine alone and eight in the engine and the oracle together, and 16 of the first group and 6 of the second survived.")
 
-q(3, "How large is the planting battery this digest was built beside, and what does it show?",
+q(3, "How large is the planting battery this course was built beside, and what does it show?",
  "Sixty in all, the thirty five re-run plus twenty four more and one self-test of the runner, and none of the sixty leaves the suite green.",
  ["Thirty five in all, each of them run on its own against the vendored suite, and none of those thirty five is able to leave the suite fully green.",
   "Seventy eight in all, one for each of the tests carried in the vendored suite, and none of those is able to leave the suite fully green either.",

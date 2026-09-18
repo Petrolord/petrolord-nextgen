@@ -36,6 +36,6 @@ A reader who can tell those apart can tell an operating decision from a purchase
 
 ## Exercise
 
-Write out the five separate facts the 115 liner refusal puts in one sentence, and say which of them a user would need to act on it.
+Write out each separate fact the 115 liner refusal puts in one sentence, and say which of them a user would need to act on it.
 
 Then say why a starved bank gets a warning and a cut size while an overrun bank past twice design gets neither.

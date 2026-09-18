@@ -24,11 +24,11 @@ This module uses two values of m. Here is what each does to the curve:
 | 2 | 0.800000000000 | 0.888888888889 |
 | 4 | 0.941176470588 | 0.984615384615 |
 
-Both curves pass through one half at a ratio of one, which is the definition and is the row a reader should check first. Away from that row they separate. The sharper curve is better on both sides at once: at four times the cut size it removes 98.461538 percent against 94.117647, and at a quarter of the cut size it removes 1.538462 percent against 5.882353.
+Both curves pass through one half at a ratio of one, which is the definition and is the row a reader should check first. Away from that row they separate. The sharper curve separates more cleanly on both sides at once: at four times the cut size it removes 98.461538 percent against 94.117647, and at a quarter of the cut size it removes 1.538462 percent against 5.882353.
 
 ## Sharper means more decisive rather than better
 
-It is tempting to read the m of 3 column as the good one. It is the DECISIVE one. A sharp device makes a cleaner distinction between droplets it catches and droplets it passes, so it takes more of the coarse oil and less of the fine oil than a blunt device with the same cut size does. Which of those two is worth more depends on the distribution in front of it, which is the subject of the next lesson but one.
+It is tempting to read the m of 3 column as the good one. It is the DECISIVE one. A sharp device makes a cleaner distinction between droplets it catches and droplets it passes, so it takes more of the coarse oil and less of the fine oil than a blunt device with the same cut size does. Which of those two is worth more depends on the distribution in front of it.
 
 What the sharpness is never allowed to do is move the cut size. The half point is nailed at r of one, so the two columns above describe two devices with identical cut sizes and different selectivity.
 

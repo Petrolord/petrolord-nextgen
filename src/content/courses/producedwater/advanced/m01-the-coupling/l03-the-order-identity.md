@@ -27,7 +27,7 @@ That is a statement about multiplication. It needs no data, no calibration and n
 
 Here is where the reading has to stop. The identity says the MODEL does not care about order, and nothing about whether a plant does.
 
-A designer still puts the coarse device first, and the reasons are real. Fouling, plugging, and how much oil each device can take in its reject decide the arrangement, and this module carries none of them. Put the walnut shell filter first in the real world and it removes 60.582215 percent of the oil into a bed that has to be backwashed, which is a maintenance problem the engine does not model.
+A designer still puts the coarse device first, and the reasons are real. Fouling, plugging, and how much oil each device can take in its reject decide the arrangement, and this module carries none of them. Put the walnut shell filter first and the model credits it with 60.582215 percent of the oil, which in a real plant is oil loaded into a bed that has to be backwashed, a maintenance problem the engine does not model.
 
 So the correct statement of the lesson is the flat one. An invariance in a model is a statement about the model. It tells you what the model is insensitive to, and everything left out of the model is also, by construction, something the invariance cannot see.
 

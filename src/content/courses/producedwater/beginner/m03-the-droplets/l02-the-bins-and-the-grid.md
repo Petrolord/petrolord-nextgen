@@ -19,7 +19,7 @@ Move the bin count over a wide range on the UZERE inlet and read what stays stil
 | 120 | 26.000000 | 0.000063372072 | 1.000000000000 |
 | 600 | 26.000000 | 0.000063372072 | 1.000000000000 |
 
-The median holds at 26.000000 on every grid, which is the identity from the last lesson surviving a twentyfold change in resolution. The truncated tail holds too, because the tail is a property of how far the grid reaches rather than of how finely it is divided. Bin count is the input an engineer is most tempted to raise when an answer looks suspicious, and raising it here buys nothing.
+The median holds at 26.000000 on every grid, which is the identity from the last lesson surviving a twentyfold change in resolution. The truncated tail holds too, because the tail is a property of how far the grid reaches rather than of how finely it is divided. Bin count is the input an engineer is most tempted to raise when an answer looks suspicious, and raising it here moves neither of those two figures.
 
 ## The span, which does move the tail
 

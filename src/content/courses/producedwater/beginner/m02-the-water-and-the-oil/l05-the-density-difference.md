@@ -31,7 +31,7 @@ If the oil is heavier than the water, there is no rise at all, and this engine s
 
 ## Where it goes next
 
-Everything from here is this one number doing work. The next module asks how fast a droplet of a given size rises given this difference and the viscosity from the module before. The module after that inverts the question and asks what size droplet a given vessel can catch in the time the water spends inside it. Both of those are this subtraction and the viscosity, arranged two ways.
+Everything from here is this one number doing work. The next module lays the droplets out as a distribution. The one after it asks how fast a droplet of a given size rises given this difference and the viscosity from the start of this module, and the module after that inverts the question and asks what size droplet a given vessel can catch in the time the water spends inside it. Both of those are this subtraction and the viscosity, arranged two ways.
 
 {{panel:pw-water-explorer}}
 

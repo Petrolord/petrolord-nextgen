@@ -1,6 +1,6 @@
 # Two kinds of cell on two boxes
 
-Induced gas flotation and dissolved gas flotation are sold as two different machines, and in a studio they are usually two entries on a menu. In this module they are the same model, given different numbers.
+Induced and dissolved gas flotation are sold as two different machines, and in a studio they are usually two menu entries. In this module they are the same model, given different numbers.
 
 {{panel:pw-device-explorer}}
 
@@ -21,7 +21,7 @@ Those are the two real differences: bubble size and gas rate. Everything else ab
 
 The dissolved cell cuts 2.812500 times finer on 0.150000 times the gas. Both of those figures are derived, the pairs on those two rows divided.
 
-That is a real engineering statement and the model earned it. The dissolved cell is working at 0.150000 times the gas and still reports the finer cut, which the interception law makes sense of: the rate carries the inverse cube of the bubble diameter and carries the gas rate only once, so bubble size is the stronger of the two levers by a wide margin.
+That is a real engineering statement and the model earned it. The dissolved cell is working at 0.150000 times the gas and still reports the finer cut, which the interception law makes sense of: the rate carries the inverse cube of the bubble diameter and carries the gas rate only once. Change one thing at a time on the induced cell and it shows: the dissolved bubble alone cuts 7.261844 times finer, and the dissolved gas ratio alone cuts 2.581989 times coarser, so bubble size is the larger of the two levers.
 
 ## Why this is a test of the model rather than of the menu
 
@@ -35,7 +35,7 @@ This one uses them. The bubble size enters the interception rate through its cub
 
 A preset is a convenience and never an authority. Both rows above are the same function called twice, and a caller with a real bubble size distribution from a vendor should type it rather than press either button.
 
-It is also worth remembering what neither preset carries. Both rows use the module's declared attachment efficiency, which is the one calibration in this device and has no derivation behind it, so the absolute level of both cut sizes rests on a chosen number while the comparison between them rests on the interception law.
+It is also worth remembering what neither preset carries. Both rows use the module's default attachment efficiency, which is the one calibration in this device and has no derivation behind it, so the absolute level of both cut sizes rests on a chosen number while the comparison between them rests on the interception law.
 
 ## Exercise
 

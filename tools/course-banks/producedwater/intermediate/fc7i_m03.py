@@ -40,7 +40,7 @@ q(0, "Where in the swept table does the finest cut size sit?",
  ["At 120 liners, 6.144662 micron, which is the smallest bank the sweep printed.",
   "At 230 liners, 4.751385 micron, where the bank runs closest to its design point.",
   "At 600 liners, 7.674178 micron, where the field column reaches its highest value in the sweep."],
- "It is NOT the smallest bank. A designer reading the cut column upward from the bottom sees it improving as liners come out, right up to the row where it stops and reverses.")
+ "It is NOT the smallest bank. A designer reading the cut column from the top down sees it improving as liners come out, right up to the row where it stops and reverses.")
 
 q(2, "By how much is the smallest bank in that sweep worse than the best one?",
  "1.474196 times, which is 6.144662 micron against 4.168146 micron.",

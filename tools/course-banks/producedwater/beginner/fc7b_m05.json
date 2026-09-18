@@ -96,7 +96,7 @@
    "An allowance of 1 is the module's own default, so it is reported with a note, while any value a caller supplies is checked against the band."
   ],
   "answer": 1,
-  "explanation": "The engine says that an F of zero or less is not a perfect separator, it is an undefined one. The default is 1.5, the customary band is 1.3 to 1.8, and 1 sits outside that band and still answers."
+  "explanation": "The engine says that F must be positive and that an F of zero or less leaves the separator undefined. The default is 1.5, the customary band is 1.3 to 1.8, and 1 sits outside that band and still answers."
  },
  {
   "prompt": "What does this module do with an allowance of 6?",

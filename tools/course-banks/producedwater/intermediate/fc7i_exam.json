@@ -256,12 +256,12 @@
   "prompt": "The 40 micron bubble rises at a Reynolds number of 0.118487. What does that say about the settling law for it?",
   "options": [
    "That this bubble is outside the band, since the module states the law to a Reynolds number of 0.1.",
-   "That this bubble is inside the creeping flow band the module states Stokes to, unlike the ones a mechanical cell makes.",
+   "That this bubble is inside the creeping flow band the module states Stokes to, unlike the 300 micron induced gas bubble.",
    "That the module will report no rise velocity for it, because it is below the bubble diameter band.",
    "That the full drag balance and Stokes disagree most sharply here, which is why the band is policed."
   ],
   "answer": 1,
-  "explanation": "The Reynolds number climbs much faster than the bubble diameter does, because it carries both the size and the velocity the size produced. Everything a mechanically induced cell makes is far outside that band."
+  "explanation": "The Reynolds number climbs much faster than the bubble diameter does, because it carries both the size and the velocity the size produced. The induced gas preset bubble of 300 micron sits at 22.678201, far outside that band."
  },
  {
   "prompt": "The published pair straddling the residence threshold is run at one flow, one depth, one gas ratio and one bubble size. What is the ONLY thing that differs between the two rows?",
@@ -345,11 +345,11 @@
   "options": [
    "It is DERIVED, because the three reference values follow from the interception law itself.",
    "It is HELD FOR LITERATURE, which is why the module refuses to answer below the loading floor.",
-   "It is ONE calibration of this module with no published source in this repository.",
-   "It is validated by the published bed rows, which is what the golden loading column checks."
+   "It is DECLARED, kept in the frozen constants with no published source in this repository.",
+   "It is the one CALIBRATION in this module, which is why no publication stands behind it."
   ],
   "answer": 2,
-  "explanation": "Everything in the loading column is that declared value scaled to a different rate. A reader arguing with a bed cut size should start with the triple rather than with the arithmetic that follows it."
+  "explanation": "Everything in the loading column is that declared value scaled to a different rate. The one calibration in this module is the attachment efficiency, and a reader arguing with a bed cut size should start with the triple."
  },
  {
   "prompt": "Of the beds the section walks down towards the loading floor, which is the widest that still gets an answer, and what does it report?",

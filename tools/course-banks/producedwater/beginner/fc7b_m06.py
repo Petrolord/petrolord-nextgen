@@ -77,12 +77,12 @@ q(1, "Why can the two stage removals of this train not be added together?",
   "The percentages are volume fractions and the overall figure is a mass fraction, so they cannot be combined without a density."],
  "Adding them counts oil that was gone before the second device saw it. One grid runs through the whole train, and the removals are fractions of the oil throughout."),
 
-q(2, "Treating the two stages as independent fractions and multiplying them is also wrong. Why?",
- "The coupling is what destroys independence: the pack works on the residue of the basin, which is finer by construction.",
- ["The product would ignore the oil in the truncated tails of the grid, which the normalisation absorbs at each stage.",
-  "The product would be right only where both devices carry the same sharpness, and these two carry different ones.",
-  "The product would double count the coarse droplets, since each device reports its removal over the full inlet distribution."],
- "Multiplying two fractions measured on the raw stream credits the second device with performance it can only reach on water the first has not already picked over. Both of these devices carry the declared sharpness of 3."),
+q(2, "The plate pack alone on the raw UZERE water removes 11.315691 percent, and compounding that with the basin predicts 14.228866 percent where the train reports 12.670125. Why does that compounding overstate the train?",
+ "The coupling: in the train the pack works on the basin\'s residue, which is finer by construction, so its raw figure credits it with coarse oil already taken out.",
+ ["The product ignores the oil in the truncated tails of the grid, which the normalisation absorbs at each stage.",
+  "The product is right only where both devices carry the same sharpness, and these two carry different ones.",
+  "The product is right only when the device with the larger removal comes first, and in this train the basin comes first although it removes the smaller share of the two."],
+ "Compounding the train\'s OWN stage figures, 3.284882 and 9.704008 percent, gives 12.670125 exactly, because each is a fraction of the water that reached its stage. Both of these devices carry the declared sharpness of 3."),
 
 q(3, "What does this engine actually pass from one stage to the next?",
  "The outlet bin distribution of the stage, normalised by the volume that survived it, with the concentration as a scaling on it.",
@@ -109,8 +109,8 @@ q(1, "Somebody quotes the 3.284882 percent as the removal of an API 421 basin. W
  "It is a property of this basin on this water at this droplet distribution, and a stream with coarser droplets gives a different figure out of the same vessel.",
  ["It is a property of the train rather than of the basin, since the figure was computed with the plate pack in place downstream.",
   "It understates the basin, since the percentage on a steady sample is quoted before the short-circuit allowance has been applied.",
-  "It is a property of the grid rather than of the device, since a different bin count would give a different removal."],
- "Nothing in this module is a fixed removal efficiency, which is why the same device on finer water performs worse. The stage figure is the basin alone, the allowance is already in the cut size, and the removal holds across the bin sweep."),
+  "It is a property of the grid rather than of the device, since the removal is read off the bin the inlet median falls in."],
+ "Nothing in this module is a fixed removal efficiency, which is why the same device on finer water performs worse. The stage figure is the basin alone, and the allowance is already in the cut size."),
 
 emit(Q, '/root/wt-fc7-nextgen/tools/course-banks/producedwater/beginner/fc7b_m06.json', label='fc7b_m06', expect_n=15)
 finish()

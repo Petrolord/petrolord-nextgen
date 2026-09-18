@@ -19,7 +19,7 @@ Both basins cut at 165.003927 micron. The shallower one runs the water through a
 
 ## Reading the two answers together
 
-This is the reason the depth was worth following after it dropped out of the cut size. A designer who optimises the footprint alone will find a shallow basin that appears to cut exactly as well as a deep one and costs less to build. The cut size column agrees. The velocity column is where the design fails, and it is reported on the same return precisely so that the two are read together. This is the clearest example in the tier of a headline answer that is true and incomplete.
+This is the reason the depth was worth following after it dropped out of the cut size. A designer who optimises the footprint alone will find a shallow basin that appears to cut exactly as well as a deep one and costs less to build. The cut size column agrees. The velocity column is where the design fails, and it is reported on the same return precisely so that the two are read together. It is a headline answer that is true and incomplete.
 
 ## The half of the rule this module applies
 
