@@ -22,11 +22,11 @@ The step is halved seven times over a contiguous sequence. That contiguity is pa
 
 Each row's last entry is that row's time over the time at the finest step. The digest computes one such ratio per row and computes nothing between rows, so any statement about how the column behaves is a reading you take rather than a figure you were handed.
 
-Take the reading deliberately. Across the whole sixty-four-fold refinement the time moves by 0.002015907907 s in total, which is smaller than the precision this digest prints a time at. Put that beside the answer it belongs to: a time of 268.419002 s that is uncertain by two thousandths of a second on account of its step size is a time whose step size has stopped being an interesting question.
+Take the reading deliberately. Across the whole sixty-four-fold refinement the time moves by 0.002015907907 s, which is 0.000007510303 of the time at the finest step. A time prints to six decimals, and that movement is 4031.815814 times half a unit in the sixth decimal, so the step shows in the printed figure. At the stated step of 0.100000 s the time sits 0.000027894862 s above the finest-step time. A time quoted to six decimals carries its step with it, and the step is stated beside the answer.
 
 ## What that does and does not establish
 
-It establishes that the march has converged in its own terms. The answer at the step the engine uses by default is the answer the method is heading towards, so the step size is not a live uncertainty on this case.
+It establishes that the march has converged in its own terms: the row at the default step reads 1.000000103923 against the finest.
 
 It establishes nothing about whether the balance being marched is the right balance. A march converging beautifully to a wrong answer is a thing numerical methods do very well, and the check for that is elsewhere: the closed-form comparison in the first module, where the same balance is integrated exactly and the ratio column reads one.
 

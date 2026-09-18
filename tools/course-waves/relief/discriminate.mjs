@@ -213,6 +213,28 @@ const ROUTES = {
       temperature_left_in_degf: () => R.blowdown({ ...GBARAN_BLOWDOWN, t0R: GBARAN_BLOWDOWN.t0R - RK }).timeS,
       time_in_minutes_quoted: () => R.blowdown(GBARAN_BLOWDOWN).timeS / 60,
     },
+    equivalent: {
+      // TWO RIGHT ROUTES TO THE SAME TIME, and both must grade correct. The
+      // course integrates the same balance EXACTLY (digest section 21): with z
+      // held and the flow choked, dm/dt is proportional to m^((k+1)/2), so the
+      // time between two masses is closed form. It is built here from the
+      // STATED inputs and the engine's own C and gas constant, not from the
+      // march. The second is the march at an eight-fold finer step, which the
+      // course teaches a reader to run (section 23). Either one outside the
+      // tolerance would grade a right answer wrong.
+      the_same_balance_integrated_exactly: () => {
+        const { volumeFt3: V, p0Psia: p0, t0R: T0, pEndPsia: pe, mw, k, z, orificeDIn: d, cd } = GBARAN_BLOWDOWN;
+        const c = R.gasConstantC(k);
+        const rGas = 1545.349 / mw;
+        const m0 = (p0 * 144 * V) / (z * rGas * T0);
+        const aIn2 = cd * (Math.PI / 4) * (d / 12) ** 2 * 144;
+        const a = ((c * aIn2 * Math.sqrt(mw / z)) / 3600) * ((z * rGas) / (144 * V)) * Math.sqrt(T0) * m0 ** (-(k - 1) / 2);
+        const n = (k + 1) / 2;
+        const mEnd = m0 * (pe / p0) ** (1 / k);
+        return (mEnd ** (1 - n) - m0 ** (1 - n)) / (a * (n - 1));
+      },
+      the_march_at_an_eight_fold_finer_step: () => R.blowdown({ ...GBARAN_BLOWDOWN, dtS: GBARAN_BLOWDOWN.dtS / 8 }).timeS,
+    },
   },
   gbaran_final_temperature_degr: {
     truth: () => R.blowdown(GBARAN_BLOWDOWN).finalTR,

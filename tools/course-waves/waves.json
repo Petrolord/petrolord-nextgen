@@ -317,12 +317,22 @@
       "BANK_TASK.md",
       "KEY_TRUTH_TASK.md",
       "PANELS.md",
-      "finalise.sh"
+      "finalise.sh",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "dryrun_fc5.sh",
+      "verify_sql.py",
+      "apply_fc5_relief.sh"
     ],
     "pins": {
-      "digest.txt": "0adc31a65e7e9adbd8a3b2246635d41500415015c45990c268af797ed8a78236",
-      "fields.json": "fc0b8561b287aa99308ce90ce973b92e07d174c609585c9da467f67670f1338c"
-    }
+      "digest.txt": "8026f29fbb2ac84486798cc28df42c0f8037d6b93bb11f8dc1060cc88a1317ca",
+      "fields.json": "ca5d88d2d1b73842b6169ac542d44f9dbf7b6d22569ee69a56baa6059f3eb21b"
+    },
+    "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest, the graded answers, the precision declaration, wave.json, the dump, the teaching fields, the capstone generator, the capstone conditions, the structure, the three migration headers, the course, go-live and seed generators, the SQL verifier, the dry run and the owner's apply script. The kit became \"full\" with the seed ladder."
   },
   "heattransfer": {
     "course": "FC6",

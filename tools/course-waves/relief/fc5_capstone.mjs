@@ -186,6 +186,22 @@ ok('gbaran blowdown: the march landed ON the end pressure',
 ok('gbaran blowdown: refining the step by ten moves the time by less than a thousandth of a second, so the graded time is not an artefact of dtS',
   Math.abs(R.blowdown({ ...GBARAN_BLOWDOWN, dtS: 0.01 }).timeS - gbBlow.timeS) < 1e-3,
   `dtS 0.1 gives ${gbBlow.timeS} s, dtS 0.01 gives ${R.blowdown({ ...GBARAN_BLOWDOWN, dtS: 0.01 }).timeS} s`);
+// THE SECOND RIGHT ROUTE. The course integrates the same balance exactly, so the
+// exact time must sit inside the graded tolerance with room to spare, or a
+// learner who integrates grades wrong while doing what the course taught.
+{
+  const { volumeFt3: V, p0Psia: p0, t0R: T0, pEndPsia: pe, mw, k, z, orificeDIn: d, cd } = GBARAN_BLOWDOWN;
+  const rGas = 1545.349 / mw;
+  const m0 = (p0 * 144 * V) / (z * rGas * T0);
+  const a = ((R.gasConstantC(k) * cd * (Math.PI / 4) * (d / 12) ** 2 * 144 * Math.sqrt(mw / z)) / 3600)
+    * ((z * rGas) / (144 * V)) * Math.sqrt(T0) * m0 ** (-(k - 1) / 2);
+  const n = (k + 1) / 2;
+  const exact = ((m0 * (pe / p0) ** (1 / k)) ** (1 - n) - m0 ** (1 - n)) / (a * (n - 1));
+  const tol = gradedTolerance('gbaran_blowdown_time_s');
+  ok('gbaran blowdown: the exact integral of the same balance sits inside HALF the graded tolerance, so the closed form the course teaches grades correct',
+    Math.abs(exact - gbBlow.timeS) < tol / 2,
+    `march ${gbBlow.timeS} s, exact ${exact} s, gap ${Math.abs(exact - gbBlow.timeS)} s against a tolerance of ${tol}`);
+}
 // H5, the RADIATION_LEVELS table. The allowable is a stated project basis and
 // is not any of the four customary values.
 ok('gbaran flare: the project allowable is NOT one of the four customary RADIATION_LEVELS values (H5)',

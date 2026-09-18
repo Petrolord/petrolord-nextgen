@@ -82,7 +82,15 @@ export const GRADED_FIELDS = [
   // Expert: a vessel emptying itself, and the point source asked both ways
   // against a stated project allowable.
   ['advanced', 'gbaran_initial_mass_lb', 'lb', 1e-6],
-  ['advanced', 'gbaran_blowdown_time_s', 's', 1e-6],
+  // THE ONE STATED TOLERANCE SET BY A SECOND RIGHT ROUTE. The graded time is
+  // the engine's march at its stated step, and the course teaches the SAME
+  // balance integrated exactly (digest section 21) and teaches that the step
+  // shows in the sixth decimal (section 23). On this case the closed form sits
+  // 3.98e-5 s below the march, so a stated 1e-6 would mark the exact integral
+  // wrong by forty tolerances. 1e-4 admits both routes and still sits orders
+  // of magnitude inside every plausible wrong method discriminate.mjs aims at
+  // this field, which that sweep measures rather than this comment claiming.
+  ['advanced', 'gbaran_blowdown_time_s', 's', 1e-4],
   ['advanced', 'gbaran_final_temperature_degr', 'degR', 1e-6],
   ['advanced', 'gbaran_choked_floor_psia', 'psia', 1e-9],
   ['advanced', 'gbaran_radiant_intensity_kwm2', 'kWm2', 1e-9],

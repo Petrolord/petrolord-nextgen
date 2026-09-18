@@ -6,11 +6,11 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # FC5 Expert m03, A Step Size Is an Answer. Digest section 23.
 
 q(0, "Halving the step seven times takes the AFIESERE time from 268.420990 s at 0.800000 s to 268.418974 s at 0.012500 s, a total movement of 0.002015907907 s. What does that movement establish?",
- "That the step is no longer a live uncertainty here, since the movement is smaller than the precision a time prints at.",
+ "That the march converges in its own terms, with the step still visible in the sixth decimal a time prints at.",
  ["That the march is converging on the right balance to be marching, since the sequence settles down rather than wandering.",
   "That the default step of 0.100000 s is the coarsest one this vessel tolerates before the answer moves.",
   "That the remaining error in the time is 0.002015907907 s, which is the figure an answer carries as its uncertainty."],
- "It establishes convergence in the march's own terms and nothing more. A march converging beautifully to a wrong answer is a thing numerical methods do very well, and the check for that is the closed-form comparison in the first module.")
+ "It establishes convergence in the march's own terms and nothing more. The movement is 4031.815814 times half a unit in the sixth decimal, so the step shows in a printed time and is stated beside it. A march converging beautifully to a wrong answer is a thing numerical methods do very well, and the check for that is the closed-form comparison in the first module.")
 
 q(2, "The refinement halves the step over a contiguous sequence of seven values rather than sampling a few. Why does the contiguity matter?",
  "A table with a gap in it invites a reader to assume the behaviour across the gap, which is the thing a convergence table exists to stop.",
@@ -24,7 +24,7 @@ q(1, "A study refines a step and a comparison runs the same balance in closed fo
  ["Refinement checks the balance being marched and the closed form checks the arithmetic underneath it, which is why the ratio column reads one.",
   "Refinement checks the time and the closed form checks the final temperature, which is the one column that refinement is unable to move at all.",
   "Refinement checks the engine and the closed form checks the published cases, which are generated from it."],
- "The two answer different questions and a march needs both. The closed-form ratios in the first module sit within a part in a million of one, and the refinement here moves the time by less than the digest's own printing precision.")
+ "The two answer different questions and a march needs both. The closed-form ratios in the first module sit within a part in a million of one, and the refinement here moves the time by 0.000007510303 of itself.")
 
 q(3, "The final temperature column reads 340.807983 degR on all seven rows of the refinement study. What has the study told you about that figure?",
  "Nothing. Refinement cannot move it, so the study left it alone rather than validating it.",

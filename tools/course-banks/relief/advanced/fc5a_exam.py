@@ -123,12 +123,12 @@ q(2, "Two columns of the refinement study never move: the substeps and the final
   "No. The substeps are fixed by the end pressure, while the temperature is fixed by the step size."],
  "A convergence table with several columns looks like a convergence statement about all of them. It is only a statement about the columns that moved, and reading a constant column as confirmation is reading an absence of evidence as evidence.")
 
-q(0, "Across the sixty-four-fold refinement the time moves by 0.002015907907 s in total. Why is that figure quoted against the digest's own printing precision?",
- "Because a time prints to six decimals, so a movement below that has stopped being an interesting question.",
- ["Because the published rows are checked at that precision, so anything smaller is inside the tolerance.",
-  "Because the engine returns its time at that precision, so a smaller movement cannot be represented.",
-  "Because the customary limit is stated in minutes, and a movement that small cannot cross it."],
- "It establishes convergence in the march's own terms. It establishes nothing about whether the balance being marched is the right balance, and the instrument for that is the closed-form comparison.")
+q(0, "Across the sixty-four-fold refinement the time moves by 0.002015907907 s in total, and the digest prints a time to six decimals. What does setting one beside the other show?",
+ "That the step shows in a printed time, since the movement is thousands of half-units in the sixth decimal.",
+ ["That the step has dropped out of every printed time, since the whole movement sits below the sixth decimal.",
+  "That the engine returns its time at six decimals, so any movement smaller than that cannot be represented at all.",
+  "That the march has not converged, since a converged march stops moving at the precision a time prints at."],
+ "A time prints to six decimals and the movement is 4031.815814 times half a unit in that sixth decimal, so the step is visible in the printed figure and belongs beside it. The march has still converged in its own terms, and whether it is marching the right balance is the closed-form comparison's question.")
 
 q(1, "What would you compare on any march to find out whether it quantises its answer to one step?",
  "The final pressure it reports against the pressure you asked for, at full precision.",

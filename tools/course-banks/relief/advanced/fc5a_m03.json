@@ -2,13 +2,13 @@
  {
   "prompt": "Halving the step seven times takes the AFIESERE time from 268.420990 s at 0.800000 s to 268.418974 s at 0.012500 s, a total movement of 0.002015907907 s. What does that movement establish?",
   "options": [
-   "That the step is no longer a live uncertainty here, since the movement is smaller than the precision a time prints at.",
+   "That the march converges in its own terms, with the step still visible in the sixth decimal a time prints at.",
    "That the march is converging on the right balance to be marching, since the sequence settles down rather than wandering.",
    "That the default step of 0.100000 s is the coarsest one this vessel tolerates before the answer moves.",
    "That the remaining error in the time is 0.002015907907 s, which is the figure an answer carries as its uncertainty."
   ],
   "answer": 0,
-  "explanation": "It establishes convergence in the march's own terms and nothing more. A march converging beautifully to a wrong answer is a thing numerical methods do very well, and the check for that is the closed-form comparison in the first module."
+  "explanation": "It establishes convergence in the march's own terms and nothing more. The movement is 4031.815814 times half a unit in the sixth decimal, so the step shows in a printed time and is stated beside it. A march converging beautifully to a wrong answer is a thing numerical methods do very well, and the check for that is the closed-form comparison in the first module."
  },
  {
   "prompt": "The refinement halves the step over a contiguous sequence of seven values rather than sampling a few. Why does the contiguity matter?",
@@ -30,7 +30,7 @@
    "Refinement checks the engine and the closed form checks the published cases, which are generated from it."
   ],
   "answer": 1,
-  "explanation": "The two answer different questions and a march needs both. The closed-form ratios in the first module sit within a part in a million of one, and the refinement here moves the time by less than the digest's own printing precision."
+  "explanation": "The two answer different questions and a march needs both. The closed-form ratios in the first module sit within a part in a million of one, and the refinement here moves the time by 0.000007510303 of itself."
  },
  {
   "prompt": "The final temperature column reads 340.807983 degR on all seven rows of the refinement study. What has the study told you about that figure?",

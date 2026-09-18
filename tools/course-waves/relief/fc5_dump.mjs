@@ -1537,7 +1537,16 @@ w();
 const times = AFIESERE_STEP_SWEEP.map((dt) => R.blowdown({ ...AFIESERE, dtS: dt }).timeS);
 const spreadT = Math.max(...times) - Math.min(...times);
 must('refining the step converges the time', spreadT < 0.01, `spread ${e12(spreadT)} s across the sweep`);
-w(`- REFINING THE STEP CONVERGES. Across a sixty-four-fold refinement the time moves by ${e12(spreadT)} s in total, which is smaller than the precision this digest prints a time at. The ratio column is the evidence: read it top to bottom.`);
+// THE MOVEMENT IS COMPARED WITH THE PRINTED PRECISION BY ARITHMETIC, because a
+// time prints to six decimals and the movement is thousands of half-units, and
+// a sentence that ranks the two by eye can get the ranking backwards. The build
+// refuses if the comparison ever flips.
+const halfUnitT = 5e-7;
+const statedOffT = afi.timeS - finest.timeS;
+must('the refinement movement is larger than half a unit in the sixth decimal', spreadT > halfUnitT, `spread ${e12(spreadT)} s against ${halfUnitT}`);
+must('the stated step still shows in the printed time', Math.abs(statedOffT) > halfUnitT, `offset ${e12(statedOffT)} s`);
+w(`- REFINING THE STEP CONVERGES. Across a sixty-four-fold refinement the time moves by ${e12(spreadT)} s in total, which is ${e12(spreadT / finest.timeS)} of the time at the finest step. The ratio column is the evidence: read it top to bottom.`);
+w(`- THE STEP STILL SHOWS IN THE PRINTED TIME. This digest prints a time to six decimals, and the movement above is ${e6(spreadT / halfUnitT)} times half a unit in that sixth decimal. At the stated step of ${e6(afi.dtS)} s the time sits ${e12(statedOffT)} s above the time at the finest step, so a time quoted to six decimals carries its step with it and is stated beside it.`);
 w(`- The march lands ON the end pressure rather than stepping past it. AFIESERE finishes at ${e12(afi.finalPPsia)} psia against a target of ${e6(AFIESERE.pEndPsia)} psia, a difference of ${e12(afi.finalPPsia - AFIESERE.pEndPsia)} psia.`);
 w(`- NO STEP REMOVES MORE THAN A TWENTIETH OF THE INVENTORY. The engine subdivides a step that would, and reports how many it subdivided. At the stated step AFIESERE subdivided ${afi.substeps} of its ${afi.steps} steps.`);
 w();

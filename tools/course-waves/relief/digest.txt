@@ -765,7 +765,8 @@
 | 0.025000 | 268.418975 | 340.807983 | 10737 | 0 | 1.000000004994 |
 | 0.012500 | 268.418974 | 340.807983 | 21474 | 0 | 1.000000000000 |
 
-- REFINING THE STEP CONVERGES. Across a sixty-four-fold refinement the time moves by 0.002015907907 s in total, which is smaller than the precision this digest prints a time at. The ratio column is the evidence: read it top to bottom.
+- REFINING THE STEP CONVERGES. Across a sixty-four-fold refinement the time moves by 0.002015907907 s in total, which is 0.000007510303 of the time at the finest step. The ratio column is the evidence: read it top to bottom.
+- THE STEP STILL SHOWS IN THE PRINTED TIME. This digest prints a time to six decimals, and the movement above is 4031.815814 times half a unit in that sixth decimal. At the stated step of 0.100000 s the time sits 0.000027894862 s above the time at the finest step, so a time quoted to six decimals carries its step with it and is stated beside it.
 - The march lands ON the end pressure rather than stepping past it. AFIESERE finishes at 145.000000000000 psia against a target of 145.000000 psia, a difference of -0.000000000000 psia.
 - NO STEP REMOVES MORE THAN A TWENTIETH OF THE INVENTORY. The engine subdivides a step that would, and reports how many it subdivided. At the stated step AFIESERE subdivided 0 of its 2685 steps.
 
