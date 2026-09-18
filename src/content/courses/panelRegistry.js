@@ -204,6 +204,10 @@ export const PANELS = {
   'fc-exchanger-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/ExchangerExplorer')),
   'fc-coefficient-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/CoefficientExplorer')),
   'fc-rating-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/RatingExplorer')),
+  // FC9 Corrosion & Integrity
+  'fc-chemistry-explorer': React.lazy(() => import('@/components/course/panels/corrosion/ChemistryExplorer')),
+  'fc-rate-explorer': React.lazy(() => import('@/components/course/panels/corrosion/RateExplorer')),
+  'fc-inhibitor-integrity-explorer': React.lazy(() => import('@/components/course/panels/corrosion/InhibitorIntegrityExplorer')),
 };
 
 export function resolvePanel(id) {

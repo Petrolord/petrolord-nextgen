@@ -1,0 +1,29 @@
+-- ============================================================================
+-- FC9 PROFESSIONAL DEEP SEED: Corrosion & Integrity, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE LEVERS AND THE ALLOWANCE. The wetting regime as a
+-- dropdown that can take the rate to zero, and the oil-wet zero that withholds
+-- its category and its life; efficiency and availability as two inputs, and
+-- the time average that eats the wall; this module's own wall shear, its own
+-- friction factor and the discontinuity at its branch switch, named beside the
+-- line sizing course's different correlation; the shear verdict acting on the
+-- rate, with the credited rate reported beside it; the allowance divided by a
+-- rate, a zero rate that is not a pass, and three apps that use one word with
+-- no link between them; and which film governs, from a ratio that needs no
+-- pressure.
+--
+-- THE LESSON THIS TIER EXISTS TO TEACH. A 95 percent corrosion inhibitor
+-- running 80 percent of the time is not a 95 percent solution. The engine
+-- takes the two percentages separately and the metal-loss ratio against the
+-- datasheet number is a straight line in the availability.
+--
+-- The Professional capstone grades the corrosion inhibitor arithmetic and the
+-- allowance arithmetic on a rate STATED from a two-year ultrasonic survey, so
+-- no correlation constant, no fugacity coefficient and no held threshold is in
+-- any graded chain. Nothing downstream of the protective-film factor is graded
+-- anywhere in this course.
+-- ============================================================================

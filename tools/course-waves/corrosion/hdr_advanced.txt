@@ -1,0 +1,27 @@
+-- ============================================================================
+-- FC9 EXPERT DEEP SEED: Corrosion & Integrity, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: WHAT THE MODULE HOLDS BACK, AND HOW TO WORK AGAINST A
+-- LIMIT ANYWAY. Eleven held items and one withdrawal; a constant that lives in
+-- two files and cannot be validated by comparing them; measuring rather than
+-- reading an export; what a synthetic golden can prove and what no case can
+-- discriminate; the four things an integrity reader looks for and this module
+-- does not have; the rate category as a held label; the binding constraint and
+-- the order that makes it honest; inversion against the engine's own verdict;
+-- and, framed as history in its own module, what this engine used to do.
+--
+-- THE INVERSION TRAP. `requiredAllowanceMm` is the allowance a NEW line would
+-- need. The allowance that reinstates THIS line's design life is larger by
+-- exactly the consumed depth, and the Expert capstone is built on a case where
+-- that gap is graded.
+--
+-- The Expert capstone states its uninhibited rate from the operator's
+-- inspection record and its stripped film as a condition, so no held constant
+-- reaches any graded chain. Four of its six fields are found by bisecting the
+-- engine's own verdict, one is a single remaining-life call and one is a ratio
+-- of two lives.
+-- ============================================================================
