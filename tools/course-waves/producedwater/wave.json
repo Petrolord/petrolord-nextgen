@@ -73,7 +73,7 @@
   "x1e-3"
  ],
  "plan": {
-  "state": "FOUNDATION REFRESHED at engines 9874d58 (FC7-1). Digest rebuilt, 22 sections, 773 lines. All 78 lessons writable. No lesson, bank, capstone answer file, panel, lab or migration written yet. NOT ONE of the eighteen graded capstone fields moved at FC7-1: fields.json and precision.json are byte-identical against both engines, measured by running this wave's own capstone generator against a fresh extraction of 8b8fb6a as well as against the vendored 9874d58.",
+  "state": "LADDER BUILT 2026-09-18. 78 lessons, 396 questions, lab and three panels; three tier audits FIT TO SEED (AUDIT-*.md, 38 defects repaired); five migrations 20260925_fc7_producedwater_*, path_order 45, module facilities, go-live HELD. Dry run clean against the local scratch Postgres (never production), database proved unchanged by snapshot; negative controls fired and named the field on four fields including the SQL train quadrature and the bubble drag-balance root; promptleak 0; banks against SQL 4752 fields agree, one-character canary exits 2.",
   "thesis": "Oil in water is a droplet size distribution and every device is a cut size, so what a train removes follows from the equipment's own geometry and the water's own properties, and the discipline is knowing which numbers on the page the engine DERIVED, which it was GIVEN, which it CALIBRATED and which it refuses to state at all.",
   "oneSentence": "Produced Water Treatment teaches how to read oil in water as a droplet size distribution and every treating device as a cut size computed from its own geometry, so that what a train removes, what the water looks like afterwards, and what the engine will not rule on all follow from stated physics rather than from a quoted efficiency.",
   "tiers": {

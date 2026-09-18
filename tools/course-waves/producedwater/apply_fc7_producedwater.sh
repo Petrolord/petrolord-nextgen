@@ -82,11 +82,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20260925_fc7_producedwater_course           ) echo 36c096ef26ed04732390bee5282b8a1c5685ab0500257e05c05bb4dca9ac5e18 ;;
-    20260925_fc7_producedwater_beginner_deep    ) echo bb922176fe5c1f61f162bfa5fc40a27678cee93d36919e56702c701d5121ef8c ;;
-    20260925_fc7_producedwater_intermediate_deep) echo ac20f953dc1d709b0b0b0ee99a33c287f799fc6757dfcee01f8307e9d498927f ;;
-    20260925_fc7_producedwater_advanced_deep    ) echo d0f98a515b707052016483c97b756f8d3e9b09e66ffa8e8ce54643b4b12d6daa ;;
-    20260925_fc7_producedwater_go_live          ) echo bf35ab1cc9e6ac43a247530abb55b82b7828cb4c340dab51a8878a0792497e56 ;;
+    20260925_fc7_producedwater_course           ) echo ac8c99d931fa99bed28a1189dc5c3e2c7f1b899cac164093365b0410ed4b6f18 ;;
+    20260925_fc7_producedwater_beginner_deep    ) echo b21f79b1c810eef76ec8d57741f18c3053bedd98827d23af74e1e007cc047b35 ;;
+    20260925_fc7_producedwater_intermediate_deep) echo 92c21250158b60a74c4263e7c78299831f16398223092eee3f4b9abacb67ca08 ;;
+    20260925_fc7_producedwater_advanced_deep    ) echo dcc31c06383caacba806e1b06459e35c13fe3966e2065166b5ec62507f9dce27 ;;
+    20260925_fc7_producedwater_go_live          ) echo e0f90cc95323be08253673ab5c3c50aa3c20bdc13d8d7fc0bb3f94311487f460 ;;
     *) echo UNPINNED ;;
   esac
 }
