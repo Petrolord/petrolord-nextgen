@@ -14,7 +14,7 @@
 // Build THROUGH A TEMP FILE. A gate that reads a half written digest finds no
 // literals and clears everything.
 //
-// Engine, vendored sha-identical with petrolord-engines d4c19ad (the FC9-0
+// Engine, vendored sha-identical with petrolord-engines 6759621 (carrying the FC9-0
 // repair): engines/facilities/corrosion.js. It imports nothing, so the vendoring
 // closure walked from the jest suite is SIX paths: the suite, the engine, the
 // golden the suite reads at runtime, and the oracle plus the two markdown
@@ -650,7 +650,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Partial pressures in bar and in psia, wall thicknesses and allowances in mm, corrosion rates in mm/yr, lives in years, percentages, percentage points and every dimensionless ratio print to SIX decimals; Reynolds numbers print to FOUR, because a number in the hundreds of thousands carries no information in its millionths; measured constants and ratios of them print to TWELVE; counts are whole numbers.');
 w();
-w(`# ENGINE. engines/facilities/corrosion.js, vendored sha-identical with petrolord-engines d4c19ad, ${SRC.split('\n').length} lines, importing nothing. The vendoring closure walked from the jest suite is SIX paths. The vendored golden test-data/facilities/goldens/corrosion_cases.json carries ${Object.entries(GOLD).reduce((a, [, v]) => a + (Array.isArray(v) ? v.length : 1), 0)} rows in ${Object.keys(GOLD).length} blocks.`);
+w(`# ENGINE. engines/facilities/corrosion.js, vendored sha-identical with petrolord-engines 6759621, ${SRC.split('\n').length} lines, importing nothing. The vendoring closure walked from the jest suite is SIX paths. The vendored golden test-data/facilities/goldens/corrosion_cases.json carries ${Object.entries(GOLD).reduce((a, [, v]) => a + (Array.isArray(v) ? v.length : 1), 0)} rows in ${Object.keys(GOLD).length} blocks.`);
 w();
 w(`# THE GOLDEN IS SYNTHETIC AND IT SAYS SO. golden provenance.published is ${String(GOLD.provenance.published)}. The golden's own words: "${GOLD.provenance.why}"`);
 w();

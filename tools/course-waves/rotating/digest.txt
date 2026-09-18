@@ -2,7 +2,7 @@
 # Pump work prints to six decimals (gpm, ft, psi, hp, kW, ratios, percentages); gas work to four (ft lbf per lbm, Btu per hr, acfm, degF); exponents, small factors and MMscfd to nine; counts are whole numbers.
 # Field units: gpm and feet of head for pumps, MMscfd and psia and degF for gas, horsepower for both.
 # Two engines: engines/facilities/pumps.js (14 exports) and engines/facilities/compression.js (8 exports), over engines/production/gasProperties.js. The export counts are read off the modules themselves.
-# The engines are vendored at engines main 4fa37e6, which is the FC3-0 repair wave. compression.js reads its gas constant, its molecular weight of air and its Rankine offset from engines/production/gasProperties.js, its compressibility validity window from engines/facilities/separatorSizing.js, and its two power packagings from lib/units/fieldUnits.js, which pumps.js also reads.
+# The engines are vendored at engines 6759621, which carries the FC3-0 repair wave (4fa37e6) and the engines copy sweep (PR #214). compression.js reads its gas constant, its molecular weight of air and its Rankine offset from engines/production/gasProperties.js, its compressibility validity window from engines/facilities/separatorSizing.js, and its two power packagings from lib/units/fieldUnits.js, which pumps.js also reads.
 # Nothing here is read from a clock or a random number, so every line reproduces.
 
 # SECTION 1: What these engines size, and what they refuse (owned by Associate m01)

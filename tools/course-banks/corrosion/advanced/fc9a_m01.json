@@ -19,7 +19,7 @@
    "It came off both lists when the threshold value was kept, since a module that still prints a screening threshold is still classifying severity at that threshold."
   ],
   "answer": 0,
-  "explanation": "Both fields are false today and will stay false, so the absence arrives as a field and a caller cannot read it as an unset property. The region function is not exported and neither standard name appears anywhere in the 775 lines of the engine source."
+  "explanation": "Both fields are false today and will stay false, so the absence arrives as a field and a caller cannot read it as an unset property. The region function is not exported and neither standard name appears anywhere in the 783 lines of the engine source."
  },
  {
   "prompt": "The engine's own eleven-item held list names three of these four numbers. Which one does it not name?",

@@ -26,7 +26,7 @@ set -eu
 REF=${1:-HEAD}
 WRITE=${2:-}
 W=/root/fc-wip-rotating
-REPO=/root/wt-fc3-nextgen
+REPO=${REPO:-/root/wt-fc3-nextgen}
 KIT=/root/dc-wavekit
 SLUG=rotating
 PREFIX=fc3

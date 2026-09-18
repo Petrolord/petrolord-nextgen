@@ -107,7 +107,7 @@
  },
  "gates": {
   "fc5_dump.mjs label assertions": "643 label-and-call assertions run inside the digest build, 0 failed. EVERY row this file labels is asserted against what the call actually did: refusal() asserts an error key AND no non-finite number in the returned object, success() asserts the absence of one, and every branch, warning, flag, note and convergence claim goes through must(). It exists because a sibling wave labelled a row a refusal and then called a case that SUCCEEDED, printing the success fields under a refusal heading, which no numeric sweep can see. On a failure NOTHING IS WRITTEN and the build exits non-zero, so the previous digest stands. It refuses below two hundred assertions. The count rose from 606 in the FC5 digest repair, which added: the two probe ratios either side of the crossing asserted onto opposite branches and asserted to print as two distinct numbers, the bisection bracket asserted to hold the letter change before it is bisected and its answer asserted to land on the orifice area and on the ORUBIRI margin, the measured default Kd Kb Kc asserted to be fractions of an ideal, the run of identical critical areas counted rather than typed, the selection probes asserted to print as distinct stated areas, the orifice refusal asserted to carry exactly one whole-number key beside `error`, AKASO relieving asserted different from AKASO set, the engine line count asserted to be the wc -l one, and the two whole-digest final passes below.",
-  "digest reproducibility": "byte-identical across two consecutive rebuilds, four timezones (Pacific/Kiritimati, UTC, Pacific/Niue, America/Sao_Paulo) and three locales (C, de_DE.UTF-8, tr_TR.UTF-8). md5 7201a6e68fd1c2c551c4fc92d39cba12 over 1024 lines. finalise.sh re-verifies all nine and re-pins.",
+  "digest reproducibility": "byte-identical across two consecutive rebuilds, four timezones (Pacific/Kiritimati, UTC, Pacific/Niue, America/Sao_Paulo) and three locales (C, de_DE.UTF-8, tr_TR.UTF-8). md5 a5198ec34aafe2028b5ae579b54c27d1 over 1024 lines. finalise.sh re-verifies all nine and re-pins.",
   "make_fields.mjs": "regenerates fields.json and precision.json from the ONE tolerance derivation and REFUSES any field graded tighter than its class prints. --bare-stated-tolerances is the negative control and exits 1 naming five fields.",
   "discriminate.mjs": "104 plausible wrong methods over 18 routes, 0 WEAK. --slack-tolerances is the negative control and reports 18 weak routes.",
   "gate_capstone_leak.py": "four directions: 38 conditions against the digest and the generator, 18 graded values at three renderings each, 11 recorded ENGINE CALLS against all 49 published golden rows by input set, and 18 graded values against FC1 separation's own answer key, because that merged course grades a setback off the same point source. Fails on a dead shared row and refuses below its own floors.",
@@ -132,12 +132,12 @@
  "digest": {
   "lines": 1024,
   "sections": 29,
-  "md5": "7201a6e68fd1c2c551c4fc92d39cba12",
+  "md5": "a5198ec34aafe2028b5ae579b54c27d1",
   "goldenRows": 49,
   "goldenBlocks": 11,
   "withheld": null,
   "note": "Nothing is withheld. SECTION 29 is the one section whose subject is what this engine used to do, it says so in its title and its first line, nothing follows it, and it carries four items each of which is a general lesson that happens to have an example here.",
-  "sha256": "d0c9e4f1928849608b2fe4243134c29db84435f20e246e81235e1297ff05a50e"
+  "sha256": "74c81a6fc59965959f513fb53964c2ed7bccfcb442bcea413320ee3394e08a1a"
  },
  "history": {
   "position": "FRAMED HISTORY IS CURRICULUM, UNFRAMED HISTORY IS A DEFECT. Digest SECTION 29 is the one section whose subject is what this engine used to do. Expert m06, whose DIRECTORY NAME is what-was-repaired-and-what-was-not, owns it, with the frame in the HEADING where the gate and the reader both look. Nothing above section 29 in the digest is history.",
