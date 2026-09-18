@@ -1,0 +1,30 @@
+-- ============================================================================
+-- FC5 ASSOCIATE DEEP SEED: Relief & Flare Systems, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE FOUR API 520 ROUTES. What a relief valve is sized
+-- for and the units this engine speaks; gas and vapour, with the critical
+-- ratio, the coefficient C and the subcritical branch the back pressure
+-- decides; liquid, with the viscosity correction and the loop that closes on
+-- itself; steam, with the Napier correction and the superheat factor the
+-- caller types; the step from a required area to an orifice letter on the
+-- API 526 ladder; and the Associate reading walked end to end.
+--
+-- THE ENGINE FACT THIS TIER OWNS. Every route here is a closed form, and the
+-- back pressure picks the gas branch. Above the critical ratio the engine uses
+-- F2 and IGNORES Kb entirely, so a reader who types a bellows factor into a
+-- subcritical case has typed a number that changes nothing.
+--
+-- NOT DERIVED HERE, taught as a limit and never graded in any tier: six items
+-- HELD FOR LITERATURE (the Kv fit coefficients, the sphere-drag correlation,
+-- the Napier boundaries, the pool-fire constants and exponent, the customary
+-- allowable intensities, and whether the standard prints 1.15 or four
+-- thirds), two TYPED published inputs (Kb, Kw and KSH; the API 526 table) and
+-- one stated LIMIT the caller applies (the 25 ft wetted height). The capstone
+-- grades none of them: the liquid case is inviscid so no Kv constant enters,
+-- the valve is conventional so Kb is 1 by the standard, and the steam case sits
+-- far below the Napier threshold so KN is exactly 1.
+-- ============================================================================

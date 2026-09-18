@@ -1,0 +1,26 @@
+-- ============================================================================
+-- FC8 ASSOCIATE DEEP SEED: Metering, Control Valves & Storage, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE METER RUN. One orifice result read line by line;
+-- the discharge coefficient computed rather than assumed, across beta and
+-- Reynolds number; the expansibility and what it is worth; sizing the plate
+-- and the two refusals at the ends of its bracket; the permanent loss, the
+-- turbine's gross volume and the straight-run table with its withheld column;
+-- the transmitter whose accuracy is quoted on span; and the uncertainty budget
+-- whose dominant term is a result with a margin.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The orifice equation is simple and its
+-- UNCERTAINTY is the subject. The dominant term of the budget changes name
+-- down the span, and the engine returns whether its lead is clear.
+--
+-- WITHHELD, taught as a limit and never graded in any tier: the straight-run
+-- requirement for two elbows in different planes. The capstone grades a beta,
+-- a differential, a transmitter pair, a stated budget and a gross turbine
+-- volume, none of which reads a straight-run column or a correction table this
+-- package does not carry. The tier was audited question by question against
+-- the digest and the engine before seeding (AUDIT-beginner.md).
+-- ============================================================================

@@ -1,0 +1,25 @@
+-- ============================================================================
+-- FC5 PROFESSIONAL DEEP SEED: Relief & Flare Systems, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE FIRE CASE AND THE DRUM. Where a relief load comes
+-- from and what the engine leaves to the caller; the wetted area as an exact
+-- circular segment lying down and a cylinder standing up; the pool fire duty
+-- and the drainage credit; the fire case end to end, from level to letter; and
+-- the flare knockout drum, where the liquid level sets both the vapour area and
+-- the fall distance.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The holdup MOVES the drum length. The level
+-- sets the vapour cross-section as the circular segment above it and the fall
+-- distance as the vapour depth, two different functions of one fraction, so a
+-- reader who uses one factor for both has a drum that is exactly right at half
+-- full and wrong everywhere else.
+--
+-- The fire DUTY is never graded: 21000, 34500 and the 0.82 exponent are held
+-- for literature. The capstone grades the GEOMETRY the duty stands on, and the
+-- drum states its own dropout velocity and actual vapour rate, so no graded
+-- value reads the sphere-drag correlation or a standard-condition base.
+-- ============================================================================

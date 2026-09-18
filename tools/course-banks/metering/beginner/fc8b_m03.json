@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Two quantities move the expansibility factor in the sweep this module carries. Which two?",
+  "options": [
+   "The differential and the flowing density, since the density at the throat is what the factor is correcting and a density is what the equation is short of.",
+   "The pipe Reynolds number and the beta, which are the same two coordinates the discharge coefficient is evaluated at.",
+   "The ratio of the differential to the static pressure, and the specific heat ratio of the gas.",
+   "The static pressure on its own and the viscosity, which together fix how far the gas expands as it drops through the plate."
+  ],
+  "answer": 2,
+  "explanation": "The sweep runs dP/P1 down its rows and the specific heat ratio across its columns, at the ABOH beta."
+ },
+ {
+  "prompt": "The expansibility sweep spans 0.999779 at the top and 0.915403 at the bottom. Why can that span not be quoted as a statement about the specific heat ratio?",
+  "options": [
+   "Because the span was computed at the ABOH beta and a different beta would give a different pair of figures, so nothing about the columns survives a change of plate.",
+   "The two cells differ in both coordinates, so the span is across the table rather than along one axis of it.",
+   "Because the specific heat ratio of 1.270000 on the ABOH run lands on none of the five columns, so no comparison drawn from the columns applies to it.",
+   "Because the span crosses the boundary where an incompressible sizing sets the factor to one."
+  ],
+  "answer": 1,
+  "explanation": "The largest is at dP/P1 0.001000 and k 1.66 and the smallest is at dP/P1 0.250000 and k 1.1. The difference is 0.084375 and the ratio is 1.092173."
+ },
+ {
+  "prompt": "What is the expansibility factor worth on the ABOH run, and how was that established?",
+  "options": [
+   "The same run computed both ways gives 24622.4751 lb/hr taken as incompressible against 24602.3337 lb/hr with the factor, a difference of 20.1414 and a ratio of 1.000819.",
+   "The returned factor of 0.999181 is multiplied into the mass flow, so its worth is that fraction of the flow at any differential.",
+   "The span of the sweep bounds it, so it is worth at most the difference of 0.084375 on this run.",
+   "It cannot be established, because the engine has no way to compute a flow with the factor left out."
+  ],
+  "answer": 0,
+  "explanation": "An incompressible sizing sets the factor to one, and running the same case both ways is the measurement of what the factor buys on that meter."
+ },
+ {
+  "prompt": "A differential of 500 in H2O is asked for on a line at 14.7 psia. What does the engine return, and what makes the message useful?",
+  "options": [
+   "It returns a flow with a warning attached, since the equation still evaluates and the user is the one who has to decide whether a downstream pressure of zero is credible.",
+   "It refuses with a message about the Reynolds number, which is where a negative downstream pressure stops the arithmetic.",
+   "It returns a flow and sets the published range flag false, which is how this module marks an impossible state.",
+   "It refuses, converting the differential to 18.06 psi so the two pressures can be compared in the same units, and names which inputs are wrong."
+  ],
+  "answer": 3,
+  "explanation": "The message says the downstream pressure would be zero or negative, so this is a differential range or a static pressure that is wrong rather than a flow."
+ },
+ {
+  "prompt": "Why does the engine name the differential against static pressure case by itself rather than letting it fall through?",
+  "options": [
+   "Without it the run would return a flow computed on a negative density, and a negative flow on a screen is the kind of number a reader will quietly correct the sign of and use.",
+   "Without it the fault surfaces as a complaint about the Reynolds number, which is true and useless because that is not where the fault lies.",
+   "Without it the expansibility factor would be computed at a pressure ratio above the last row of the sweep, so the factor would be extrapolated.",
+   "Without it the guard on a positive static pressure would fire instead, and that message names only one of the two inputs involved."
+  ],
+  "answer": 1,
+  "explanation": "An error message is read at the moment its reader knows least about what went wrong, and the measure of a good one is how quickly it puts the reader in front of the right input."
+ },
+ {
+  "prompt": "The flow function carries three further refusals besides the differential against static pressure case. Which set is it?",
+  "options": [
+   "A positive differential, density and viscosity; a beta inside the published range; a pipe bore above the small bore threshold.",
+   "A positive static pressure; a discharge coefficient supplied by the caller; a specific heat ratio above one.",
+   "The orifice bore must be positive and smaller than the pipe bore; flow needs a positive differential, density and viscosity; a compressible flow needs a positive static pressure.",
+   "An orifice bore smaller than the pipe bore; a reading inside the transmitter span; a meter factor within about one percent of unity."
+  ],
+  "answer": 2,
+  "explanation": "The first is geometry that cannot exist, the second catches the empty field and the sign error together, and the third is the compressible case specifically."
+ },
+ {
+  "prompt": "Sizing solves for the bore that gives a wanted differential at a wanted flow. How does the engine do it?",
+  "options": [
+   "By rearranging the orifice equation for the bore, holding the coefficient at the value the flow calculation returned on the previous run so the algebra closes.",
+   "By evaluating the coefficient sweep at the target flow and reading the beta off the row whose coefficient matches, then converting that beta into a bore.",
+   "By stepping the bore up in stock plate sizes until the differential it produces first falls below the target, which is the size that would be ordered anyway.",
+   "By bisection inside the correlation's own published beta range, because the coefficient depends on the beta being solved for."
+  ],
+  "answer": 3,
+  "explanation": "There is no rearranged formula, because the coefficient is a function of the beta. The engine reports the bracket it searched as 0.1 to 0.75."
+ },
+ {
+  "prompt": "A sizing run for a target mass flow of 42000.0000 lb/hr returns a solved bore of 3.725084 in. Which returned line is the check that the search converged?",
+  "options": [
+   "The flow that bore passes, which comes back as 42000.0000 lb/hr and is the figure that was asked for.",
+   "The solved beta of 0.614193, which sits inside the bracket the search was allowed to work in.",
+   "The coefficient at that bore of 0.604313, which is inside the span the coefficient sweep prints.",
+   "The bracket line reading 0.1 to 0.75, which says the answer was found without leaving the published band."
+  ],
+  "answer": 0,
+  "explanation": "A search that stopped somewhere near the target would show it on that line. The bore, the beta and the coefficient are the answer; the passed flow is the evidence."
+ },
+ {
+  "prompt": "What does the engine's bore note tell a user to do with a solved bore of 3.725084 in?",
+  "options": [
+   "Round the bore to the nearest stock size and keep the solved differential, because the transmitter range was already fixed by the duty the sizing was run for.",
+   "Take the nearest stock plate and recompute the differential it gives at this flow, because a plate is bored to a stock size.",
+   "Order the plate at the solved bore, because a shop can machine to that figure and any rounding moves the beta away from the answer.",
+   "Resize at a different differential until the solved bore lands on a stock size."
+  ],
+  "answer": 1,
+  "explanation": "The note calls 3.7251 in the bore this duty asks for rather than the bore that will be ordered. The second calculation is what sets the transmitter range."
+ },
+ {
+  "prompt": "The sizing search refuses at the top of its bracket. What does that refusal carry besides the fact of the refusal?",
+  "options": [
+   "The beta the search stopped at along with the differential that would have been needed, so a user can decide whether to raise the differential or accept the beta.",
+   "The coefficient at the upper edge of the bracket, so the user can recompute the duty by hand.",
+   "The flow that end can actually pass, quoted as 69,326.8 lb/hr, and the two things to change.",
+   "The nearest stock plate above the bracket, so the user has a size to order while the meter run is being reconsidered."
+  ],
+  "answer": 2,
+  "explanation": "The message says even a 0.75 beta plate cannot pass this flow at this differential, and tells the reader to raise the differential range or use a larger meter run."
+ },
+ {
+  "prompt": "The sizing search refuses at the bottom of its bracket too. What does that message say the smallest plate does?",
+  "options": [
+   "It passes less than the target flow at this differential, at 1,018.5 lb/hr, so the differential range should be raised and the search rerun on a wider bracket.",
+   "It cannot be evaluated, because a beta of 0.1 sits on the lower edge of the published range.",
+   "It passes the target flow at a beta the trade warning fires on, so a warning is returned.",
+   "It passes more than the target flow at this differential, at 1,018.5 lb/hr, so the differential range should be lowered."
+  ],
+  "answer": 3,
+  "explanation": "Each end of the bracket carries the flow that end can actually pass and says which two things to change. At the bottom end the instruction is to lower the differential range."
+ },
+ {
+  "prompt": "What does it mean that the sizing function never returns a bore beside an error?",
+  "options": [
+   "You get an answer or you get a reason, so no screen ever carries a number that came from a search which did not converge.",
+   "Every refusal names an input rather than a result, so a bore could never appear in the same object as the message.",
+   "The bore is returned as null on a refusal, which a screen can show as a blank field.",
+   "A refusal is thrown rather than returned, so nothing comes back at all."
+  ],
+  "answer": 0,
+  "explanation": "A solver that hands back its last guess alongside a complaint produces a screen with a number on it, and the number gets used."
+ },
+ {
+  "prompt": "A sizing result reports a coefficient of 0.604313 at the solved bore. Why is that line on the result?",
+  "options": [
+   "Because the coefficient is the input the permanent loss relation refuses without, and a sizing run is where a user is expected to obtain it for the plate being ordered.",
+   "Because it shows the solved beta of 0.614193 sits inside the published range.",
+   "Because a bore without a coefficient beside it is half a result, and the coefficient is what the solved flow was computed with.",
+   "Because the coefficient at the solved bore is the figure that has to be entered into the flow computer once the plate is installed."
+  ],
+  "answer": 2,
+  "explanation": "The coefficient is evaluated at the beta the search landed on, and printing it keeps the chain traceable from the duty to the plate."
+ },
+ {
+  "prompt": "The expansibility on the ABOH sheet comes back as 0.999181. What does that figure belong to?",
+  "options": [
+   "The ABOH gas alone, since the factor is a property of the fluid and moves only when the specific heat ratio of 1.270000 moves with the composition.",
+   "That run's own differential, static pressure, beta and specific heat ratio, which are what the engine computes it from.",
+   "The row of the sweep at a pressure ratio of 0.001000, which is the top row of the table.",
+   "The plate alone, since the beta of 0.482523 is the coordinate the sweep was evaluated at."
+  ],
+  "answer": 1,
+  "explanation": "You do not supply the expansibility. The engine computes it and returns it on the result line so that it can be read and checked."
+ },
+ {
+  "prompt": "Why is a factor close to one still a factor worth carrying on a commercial meter?",
+  "options": [
+   "Because the factor is the one term in the equation the engine will refuse to assume, in the same way the permanent loss relation refuses to assume a discharge coefficient.",
+   "Because the sweep shows the factor reaching 0.915403, and a meter that drifted to that row would be reading low by that fraction on every ticket it issued.",
+   "Because the engine refuses to return a flow when the factor rounds to one, so a run near the top of the sweep has to carry it explicitly.",
+   "Because a systematic offset runs in the same direction on every ticket and nothing averages it out."
+  ],
+  "answer": 3,
+  "explanation": "A run computed both ways differs by 20.1414 lb/hr on this meter. The argument against dropping the factor is that the error it leaves behind is not random."
+ }
+]

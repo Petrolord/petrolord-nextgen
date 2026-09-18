@@ -25,11 +25,6 @@
       "domain": "stratigraphy",
       "engineFiles": 10,
       "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
-    },
-    {
-      "domain": "facilities",
-      "engineFiles": 6,
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, gasProcessing.js for FC4 Gas Processing, and heatTransfer.js for FC6 Heat Exchange & Cooling. The remaining six facilities engines have no NextGen course. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3, FC4 and FC6 all landed after it was measured."
     }
   ],
   "localOnly": [
@@ -518,15 +513,10 @@
     },
     {
       "path": "__tests__/facilities.controlvalve.test.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
-    },
-    {
-      "path": "__tests__/facilities.corrosion.test.js",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "d56048381b340d59b5016a4478c8f79dade0e5af"
     },
     {
       "path": "__tests__/facilities.heattransfer.test.js",
@@ -544,9 +534,10 @@
     },
     {
       "path": "__tests__/facilities.producedwater.test.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-1 repair merged (engines PR #206, merge 9874d583), which is ahead of the canonical pin at 709172f. FC7-1 followed FC7-0 (#201) and repaired the three defects the FC7 course foundation found in it: a bed area that moved nothing below 1 m/hr, the one device threshold nobody had declared, and a silent way back to the quantised median. The vendored blob is sha-identical with engines origin/main at 9874d583, proved path by path over the WALKED import closure, which was re-walked at the new commit rather than assumed and is still five paths and three edges, and proved three independent ways: git blob hash, md5, and sha256 plus cmp over a fresh git-archive extraction. The Suite comparison used at FC7-0 is NOT available here, because the Suite's packages/engines is still pinned at FC9-0 (engines d4c19ad, an ancestor of 9874d583) and has not vendored FC7-1 yet. So this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
+      "vendoredSha": "d97f186d5da65c128f6d335d3971c0e4bb20254f"
     },
     {
       "path": "__tests__/facilities.pumps.test.js",
@@ -557,15 +548,17 @@
     },
     {
       "path": "__tests__/facilities.relief.test.js",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "reason": "Vendored at engines 3bac13cd, the FC5-0 relief-and-flare repair, which is AHEAD of the pinned canonical 709172f. The repair stopped `blowdown` returning a depressuring time of ZERO with no error key and the vessel still at its start pressure, removed a hidden 0.975 on the caller's discharge coefficient, gave the knockout drum a holdup input that can move its own answer (the two (1-f) factors cancelled exactly), validated every certified coefficient, and replaced five oracle transcriptions with independent derivations. The FC5 Relief and Flare Systems course grades against THIS revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails.",
+      "vendoredSha": "5d2adbf1e3f76807a44cffd00802cd04c8023cb3"
     },
     {
       "path": "__tests__/facilities.tanksmetering.test.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "5cb08b488d0c48e21f438a5c2a6627cf0949c30c"
     },
     {
       "path": "__tests__/production.choke.test.js",
@@ -583,15 +576,10 @@
     },
     {
       "path": "engines/facilities/controlValve.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
-    },
-    {
-      "path": "engines/facilities/corrosion.js",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "840f5fe1854afc4899d0e1d8aa4135fe5624204d"
     },
     {
       "path": "engines/facilities/heatTransfer.js",
@@ -609,15 +597,17 @@
     },
     {
       "path": "engines/facilities/metering.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "dd01f3b194061e41fef29e6a3e3ffb2b067dbd6a"
     },
     {
       "path": "engines/facilities/producedWater.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-1 repair merged (engines PR #206, merge 9874d583), which is ahead of the canonical pin at 709172f. FC7-1 followed FC7-0 (#201) and repaired the three defects the FC7 course foundation found in it: a bed area that moved nothing below 1 m/hr, the one device threshold nobody had declared, and a silent way back to the quantised median. The vendored blob is sha-identical with engines origin/main at 9874d583, proved path by path over the WALKED import closure, which was re-walked at the new commit rather than assumed and is still five paths and three edges, and proved three independent ways: git blob hash, md5, and sha256 plus cmp over a fresh git-archive extraction. The Suite comparison used at FC7-0 is NOT available here, because the Suite's packages/engines is still pinned at FC9-0 (engines d4c19ad, an ancestor of 9874d583) and has not vendored FC7-1 yet. So this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
+      "vendoredSha": "bb18c78f9f6bcefc05302295f4eedb0c80d291e7"
     },
     {
       "path": "engines/facilities/pumps.js",
@@ -628,15 +618,17 @@
     },
     {
       "path": "engines/facilities/relief.js",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "kind": "differing",
+      "group": "5-unaudited-difference",
+      "reason": "Vendored at engines 3bac13cd, the FC5-0 relief-and-flare repair, which is AHEAD of the pinned canonical 709172f. The repair stopped `blowdown` returning a depressuring time of ZERO with no error key and the vessel still at its start pressure, removed a hidden 0.975 on the caller's discharge coefficient, gave the knockout drum a holdup input that can move its own answer (the two (1-f) factors cancelled exactly), validated every certified coefficient, and replaced five oracle transcriptions with independent derivations. The FC5 Relief and Flare Systems course grades against THIS revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails.",
+      "vendoredSha": "e4262c7fa98313e46c41407306c4b9b8015ecf3f"
     },
     {
       "path": "engines/facilities/storageTank.js",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "04483891a8985fa0c7b494bb5b08ea22aea7ccfd"
     },
     {
       "path": "engines/production/chokePerformance.js",
@@ -661,15 +653,10 @@
     },
     {
       "path": "test-data/facilities/goldens/controlvalve_cases.json",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
-    },
-    {
-      "path": "test-data/facilities/goldens/corrosion_cases.json",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "731eb1a2b89ecbae61aa1ff10a526bb2f2f69f9d"
     },
     {
       "path": "test-data/facilities/goldens/heattransfer_cases.json",
@@ -687,21 +674,24 @@
     },
     {
       "path": "test-data/facilities/goldens/producedwater_cases.json",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-1 repair merged (engines PR #206, merge 9874d583), which is ahead of the canonical pin at 709172f. FC7-1 followed FC7-0 (#201) and repaired the three defects the FC7 course foundation found in it: a bed area that moved nothing below 1 m/hr, the one device threshold nobody had declared, and a silent way back to the quantised median. The vendored blob is sha-identical with engines origin/main at 9874d583, proved path by path over the WALKED import closure, which was re-walked at the new commit rather than assumed and is still five paths and three edges, and proved three independent ways: git blob hash, md5, and sha256 plus cmp over a fresh git-archive extraction. The Suite comparison used at FC7-0 is NOT available here, because the Suite's packages/engines is still pinned at FC9-0 (engines d4c19ad, an ancestor of 9874d583) and has not vendored FC7-1 yet. So this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
+      "vendoredSha": "7df7ee90c17f99869ef30457bdeb7fb99f484789"
     },
     {
       "path": "test-data/facilities/goldens/relief_cases.json",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "reason": "Vendored at engines 3bac13cd, the FC5-0 relief-and-flare repair, which is AHEAD of the pinned canonical 709172f. The repair stopped `blowdown` returning a depressuring time of ZERO with no error key and the vessel still at its start pressure, removed a hidden 0.975 on the caller's discharge coefficient, gave the knockout drum a holdup input that can move its own answer (the two (1-f) factors cancelled exactly), validated every certified coefficient, and replaced five oracle transcriptions with independent derivations. The FC5 Relief and Flare Systems course grades against THIS revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails.",
+      "vendoredSha": "1b19c8a721b5b3c7f029d6e3d16c6d01a49a18e6"
     },
     {
       "path": "test-data/facilities/goldens/tanksmetering_cases.json",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "477be94911688c5a53190348c4e17f64be2620fd"
     },
     {
       "path": "tools/validation/facilities/FINDINGS-rotating.md",
@@ -719,15 +709,10 @@
     },
     {
       "path": "tools/validation/facilities/oracle_controlvalve.py",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
-    },
-    {
-      "path": "tools/validation/facilities/oracle_corrosion.py",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "41deb10defb69f1887bedbd555efc3bf911231ea"
     },
     {
       "path": "tools/validation/facilities/oracle_heattransfer.py",
@@ -752,21 +737,24 @@
     },
     {
       "path": "tools/validation/facilities/oracle_producedwater.py",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-1 repair merged (engines PR #206, merge 9874d583), which is ahead of the canonical pin at 709172f. FC7-1 followed FC7-0 (#201) and repaired the three defects the FC7 course foundation found in it: a bed area that moved nothing below 1 m/hr, the one device threshold nobody had declared, and a silent way back to the quantised median. The vendored blob is sha-identical with engines origin/main at 9874d583, proved path by path over the WALKED import closure, which was re-walked at the new commit rather than assumed and is still five paths and three edges, and proved three independent ways: git blob hash, md5, and sha256 plus cmp over a fresh git-archive extraction. The Suite comparison used at FC7-0 is NOT available here, because the Suite's packages/engines is still pinned at FC9-0 (engines d4c19ad, an ancestor of 9874d583) and has not vendored FC7-1 yet. So this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
+      "vendoredSha": "a62407100785677cbf823185dc2882e1b1844ef0"
     },
     {
       "path": "tools/validation/facilities/oracle_relief.py",
-      "kind": "missing",
-      "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "kind": "differing",
+      "group": "6-test-layer-drift",
+      "reason": "Vendored at engines 3bac13cd, the FC5-0 relief-and-flare repair, which is AHEAD of the pinned canonical 709172f. The repair stopped `blowdown` returning a depressuring time of ZERO with no error key and the vessel still at its start pressure, removed a hidden 0.975 on the caller's discharge coefficient, gave the knockout drum a holdup input that can move its own answer (the two (1-f) factors cancelled exactly), validated every certified coefficient, and replaced five oracle transcriptions with independent derivations. The FC5 Relief and Flare Systems course grades against THIS revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails.",
+      "vendoredSha": "7520155bb4a93964cd9415dc5e3acb9bcf323b14"
     },
     {
       "path": "tools/validation/facilities/oracle_tanksmetering.py",
-      "kind": "missing",
+      "kind": "differing",
       "group": "0-partial-domain-facilities",
-      "reason": "NextGen vendors only the facilities engines its courses need: separatorSizing.js and spacing.js for FC1 Separation, lineHydraulics.js for FC2 Pipeline & Line Sizing, pumps.js and compression.js for FC3 Rotating Equipment, and gasProcessing.js for FC4 Gas Processing. This path belongs to a facilities engine no NextGen course teaches yet, so it is deliberately not vendored. This corrects the audit, which recorded facilities as wholly absent; FC1 (#135), FC2, FC3 and FC4 all landed after it was measured."
+      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
+      "vendoredSha": "3b37dbbf3365fad58a9043a6e24e76aafefb33f8"
     },
     {
       "path": "__tests__/earthmodel.adjust.test.js",
@@ -2046,6 +2034,48 @@
       "reason": "The FC4-0 repair's own findings record, which does not exist at the pinned canonical because the repair is ahead of it. Vendored for the same reason FINDINGS-separation.md is. IT IS NOT TEACHING TRUTH: it describes the engine BEFORE the repair, and FC4's RECON.md says so in as many words."
     },
     {
+      "path": "__tests__/facilities.corrosion.test.js",
+      "kind": "differing",
+      "group": "9-fc9-corrosion-course",
+      "reason": "Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path.",
+      "vendoredSha": "052ace797772a9178db35a92e296cc6d0221256c"
+    },
+    {
+      "path": "engines/facilities/corrosion.js",
+      "kind": "differing",
+      "group": "9-fc9-corrosion-course",
+      "reason": "Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path.",
+      "vendoredSha": "d000a5fa978e1565f6f9abb610fff16c9ef123a8"
+    },
+    {
+      "path": "test-data/facilities/goldens/corrosion_cases.json",
+      "kind": "differing",
+      "group": "9-fc9-corrosion-course",
+      "reason": "Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path.",
+      "vendoredSha": "b0965cb3c04a3c1442a78ce2d3700a40106181da"
+    },
+    {
+      "path": "tools/validation/facilities/FINDINGS-corrosion.md",
+      "kind": "extra",
+      "group": "9-fc9-corrosion-course",
+      "vendoredSha": "51d1b136f3c4053eb243a8c0ca468dc2c4e41ff0",
+      "reason": "The FC9-0 repair record. Added to canonical after 709172f, so it is extra against the pinned manifest. Same shape as FINDINGS-gasprocessing.md. Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path."
+    },
+    {
+      "path": "tools/validation/facilities/RECON-corrosion.md",
+      "kind": "extra",
+      "group": "9-fc9-corrosion-course",
+      "vendoredSha": "c7f042f93c26a1fe7705a40628366a9affa16274",
+      "reason": "The FC9-0 recon the repair record cites, 55 findings. Added to canonical after 709172f, so it is extra against the pinned manifest. Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path."
+    },
+    {
+      "path": "tools/validation/facilities/oracle_corrosion.py",
+      "kind": "differing",
+      "group": "9-fc9-corrosion-course",
+      "reason": "Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path.",
+      "vendoredSha": "fe1a229337feb4a0afc5b8b7f399dde9a6bbf435"
+    },
+    {
       "path": "__tests__/sim.ekene.test.js",
       "kind": "extra",
       "group": "local-only",
@@ -2065,6 +2095,34 @@
       "group": "local-only",
       "vendoredSha": "e54c1b25a05e2fc5102c020a44ea2957688e7b66",
       "reason": "Authored in NextGen and never upstreamed to the engines repo. A whole-tree subtree pull would delete it, which is how the Suite lost 24 files on 2026-09-14."
+    },
+    {
+      "path": "tools/validation/facilities/FINDINGS-relief.md",
+      "kind": "extra",
+      "group": "8-repair-record",
+      "vendoredSha": "ee684cab14953edb2d6ebcd3f854e01e23adebd7",
+      "reason": "The FC5-0 repair's own findings record, which does not exist at the pinned canonical because the repair is ahead of it. Vendored for the same reason FINDINGS-separation.md and FINDINGS-rotating.md are. IT IS NOT TEACHING TRUTH: it describes the engine BEFORE the repair, and the FC5 wave's briefs say so in as many words."
+    },
+    {
+      "path": "tools/validation/facilities/negcontrol_relief.sh",
+      "kind": "extra",
+      "group": "8-repair-record",
+      "vendoredSha": "4fa016c3ec13176d939471743669aa30236966c6",
+      "reason": "The FC5-0 repair's negative-control script, which does not exist at the pinned canonical because the repair is ahead of it. It is the file that produced every claim in FINDINGS-relief.md about what the relief suite now catches: 23 of 23 engine-only plants red, 5 of 5 oracle-only plants red, and 2 shared plants GREEN, which is the finding rather than a gap. Vendored so the claim stays checkable in this repository. NOT TEACHING TRUTH."
+    },
+    {
+      "path": "tools/validation/facilities/FINDINGS-producedwater.md",
+      "kind": "extra",
+      "group": "0-partial-domain-facilities",
+      "reason": "The produced water wave's own findings file, written by engines PR #201 and extended by #206, and absent from the canonical pin 709172f, so it reads as extra. It is vendored with the produced water family it documents, for the same reason FINDINGS-rotating.md is vendored with the pumps and compression family. It clears when canonical is next advanced.",
+      "vendoredSha": "fd7659042cfcb311951dcfd53ee0dc93372605fc"
+    },
+    {
+      "path": "tools/validation/facilities/FINDINGS-metering.md",
+      "kind": "extra",
+      "group": "8-repair-record",
+      "vendoredSha": "dedda0063dfb007a230a73bff3bc6fb22500c5d6",
+      "reason": "The FC8-0 repair's own findings record, which does not exist at the pinned canonical because the repair is ahead of it. Vendored for the same reason FINDINGS-separation.md and FINDINGS-gasprocessing.md are: it travels with the family it documents. IT IS NOT TEACHING TRUTH. Its second half is the recon of the engines BEFORE the repair, and it says so in as many words; the FC8 teaching digest is built from the repaired engines and quotes nothing from here."
     },
     {
       "path": "__tests__/assurance.audit.test.js",

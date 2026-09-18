@@ -1,0 +1,34 @@
+-- ============================================================================
+-- FC7 ASSOCIATE DEEP SEED: Produced Water Treatment, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE WATER, THE OIL AND THE GRAVITY FRONT END. What this
+-- engine answers and the three ways it declines to; the water viscosity and
+-- the brine density out of a temperature and a salinity, and the crude density
+-- out of an API gravity; the droplets as a log-normal distribution in volume on
+-- a grid the module reports back; the rise balance and the creeping flow band
+-- it is honest in; an API 421 basin and a plate pack; and the UZERE stream read
+-- end to end, down to a verdict the engine withholds.
+--
+-- THE ENGINE FACT THIS TIER OWNS. Oil in water is a DISTRIBUTION and not a
+-- concentration, and a cut size is computed from the equipment and the fluids,
+-- never looked up. The same device on finer water performs worse.
+--
+-- THE TRAP THE TIER IS BUILT ON. The depth of a basin cancels out of its cut
+-- size and does NOT cancel out of its velocity check, so a reader who takes the
+-- cut size as the whole answer builds a basin too shallow to work. The second
+-- trap is the train: the stage figures of a train compound exactly as
+-- survivals, and a figure measured on the RAW stream does not.
+--
+-- HELD FOR LITERATURE, taught as a limit and never graded in any tier: the
+-- dissolved oil floor, the second half of the API 421 velocity rule, any
+-- discharge limit, the grain exponent of a bed, the attachment efficiency and
+-- the device shape constants one at a time. The capstone grades none of them.
+-- OGULAGHA's basin sits under the fixed velocity limit, so the missing half of
+-- the rule cannot decide anything, and every pinned constant a graded answer
+-- reads (the short-circuit allowance, the plate efficiency factor) is stated
+-- on the capstone page rather than taken as published.
+-- ============================================================================

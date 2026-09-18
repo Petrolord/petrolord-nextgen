@@ -1,0 +1,319 @@
+{
+ "app_slug": "metering",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01",
+   "title": "One orifice run, end to end",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "What a meter run is being asked to do",
+     "order": 1,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "Reading one orifice result line by line",
+     "order": 2,
+     "est_minutes": 10,
+     "panels": [
+      "fc-meterrun-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "The inch of water, and where the conversion lives",
+     "order": 3,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "A volume at the flowing density is not a standard volume",
+     "order": 4,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02",
+   "title": "The discharge coefficient is not a constant",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "Why the coefficient is computed rather than assumed",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "The coefficient across beta and across Reynolds number",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "fc-meterrun-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "The small bore correction, and where it turns on",
+     "order": 3,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "The published beta range, and what the engine says outside it",
+     "order": 4,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05",
+     "title": "The high beta trade, in the engine own words",
+     "order": 5,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03",
+   "title": "Compressibility, and the differentials that are not flows",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "The expansibility factor and what it is worth",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "The specific heat ratio, swept",
+     "order": 2,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "A differential at or above the static pressure",
+     "order": 3,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "Sizing the plate, and both ends of the bracket",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04",
+   "title": "Permanent loss, turbine meters and straight run",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "What a differential costs that is never given back",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "What assuming a coefficient of 0.61 would cost",
+     "order": 2,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "A turbine volume is gross and says so",
+     "order": 3,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "The meter factor, and the proving screen",
+     "order": 4,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05",
+     "title": "Straight run: a table, a refusal and a ceiling",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "fc-withheld-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05",
+   "title": "The transmitter, and what turndown means",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "Accuracy on span is not accuracy on reading",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "Down the span, reading by reading",
+     "order": 2,
+     "est_minutes": 10,
+     "panels": [
+      "fc-meterrun-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "Nine to one is three to one",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "Where the warning fires, and what it says",
+     "order": 4,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06",
+   "title": "The uncertainty budget",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "Six terms, six sensitivities, one root sum of squares",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-meterrun-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "Where the differential term comes from",
+     "order": 2,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "Which term dominates is a result",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "A lead with no margin is not a lead",
+     "order": 4,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

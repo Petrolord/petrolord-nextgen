@@ -64,7 +64,11 @@ import SeparationLearningPage from '@/pages/apps/SeparationLearningPage';
 import LineSizingLearningPage from '@/pages/apps/LineSizingLearningPage';
 import RotatingLearningPage from '@/pages/apps/RotatingLearningPage';
 import GasProcessingLearningPage from '@/pages/apps/GasProcessingLearningPage';
+import ReliefLearningPage from '@/pages/apps/ReliefLearningPage';
 import HeatTransferLearningPage from '@/pages/apps/HeatTransferLearningPage';
+import MeteringLearningPage from '@/pages/apps/MeteringLearningPage';
+import ProducedWaterLearningPage from '@/pages/apps/ProducedWaterLearningPage';
+import CorrosionLearningPage from '@/pages/apps/CorrosionLearningPage';
 import RiskChangeLearningPage from '@/pages/apps/RiskChangeLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
@@ -432,7 +436,11 @@ const DashboardPage = () => {
     <Route path="apps/linesizing" element={<LineSizingLearningPage />} />
     <Route path="apps/rotating" element={<RotatingLearningPage />} />
     <Route path="apps/gasprocessing" element={<GasProcessingLearningPage />} />
+    <Route path="apps/relief" element={<ReliefLearningPage />} />
     <Route path="apps/heattransfer" element={<HeatTransferLearningPage />} />
+    <Route path="apps/metering" element={<MeteringLearningPage />} />
+    <Route path="apps/producedwater" element={<ProducedWaterLearningPage />} />
+    <Route path="apps/corrosion" element={<CorrosionLearningPage />} />
     <Route path="apps/riskchange" element={<RiskChangeLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.

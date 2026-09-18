@@ -1,0 +1,119 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC8 Professional m01, the choking boundary on one marched liquid valve.
+# Every figure is from digest SECTION 17 and SECTION 19, at the rendering those
+# sections print. The valve inlet pressure is never printed in SECTIONS 17 to 19
+# and no question here asks for it, backs it out of an outlet plus a stated
+# drop, or names a style, a flow or a rangeability for the liquid march.
+# Nothing keyed here is a number that rests on the engine's own style table.
+
+q(1, "Three pressure drop columns run down the marched liquid valve. What separates the stated drop from the drop used?",
+ "The stated drop is what the process hands the engine, and the drop used is the one the sizing equation is actually given, which is the allowable drop once the service is choked.",
+ ["The stated drop is measured at the flange taps and the drop used is corrected back to the vena contracta, so the two differ by the recovery the trim gives back on every row of the march.",
+  "The stated drop is the drop at the design case and the drop used is the drop at the turndown case, so the two differ wherever a turndown flow is given.",
+  "The stated drop carries the static head of the fluid column and the drop used has that head stripped out of it, so the two agree at one elevation."],
+ "On the row at an outlet pressure of 200.000000 psia both columns read 46.900000 psi. On the row at an outlet pressure of 40.000000 psia the stated drop is 206.900000 psi and the drop used is 179.220032 psi.")
+
+q(3, "What does the allowable drop column do as the outlet pressure is marched from 200.000000 psia down to 20.000000 psia?",
+ "It holds the same figure on every row, because it is built from the valve, the fluid and the inlet pressure, and the march moves none of them.",
+ ["It falls on every row, because the allowable drop is a fraction of the stated drop and the stated drop is rising as the outlet pressure is taken down the march.",
+  "It holds still down to the row where the engine first reports choked flow and then falls away, because past that row the engine has stopped recomputing it and carries the last value forward.",
+  "It rises on every row, because the allowable drop is recomputed from the outlet pressure and a lower outlet pressure leaves the valve more of the difference to work with."],
+ "The stated drop changes on every row because a different outlet pressure is being asked for. The allowable drop of 179.220032 psi is the same figure on all nine rows.")
+
+q(0, "On which row of the march do the stated drop and the drop used first carry different figures?",
+ "The row at an outlet pressure of 60.000000 psia.",
+ ["The row at an outlet pressure of 80.000000 psia.",
+  "The row at an outlet pressure of 110.000000 psia.",
+  "The row at an outlet pressure of 28.740000 psia."],
+ "Above the crossing the two columns agree, all the way down to 80.000000 psia. Below it the drop used stops at 179.220032 psi while the stated drop goes on to 186.900000 psi and past it.")
+
+q(2, "The engine counts the rows of this march on which it reports choked flow. What is the count, and what tree and rule stand behind it?",
+ "4, counted over the 9 outlet pressures asked of the liquid valve, with a row counting when the engine returns choked true.",
+ ["4, counted over the 9 outlet pressures asked of the liquid valve, with a row counting when the cavitation index returned there falls below the engine's exported cavitating threshold.",
+  "5, counted over the 9 marched rows, with a row counting when its regime word carries a cavitation word.",
+  "3, counted over the 9 marched rows, with a row counting when the regime word returned is flashing."],
+ "A count with no tree and no rule cannot be checked by anybody reading it. The rule here is the flag itself, so the count is the flag counted and nothing else.")
+
+q(3, "How was the outlet pressure at which this valve begins to choke established?",
+ "By bisecting the engine's own choked flag until the crossing was located between the rows of the march.",
+ ["By reading the crossing off a chart of coefficient against outlet pressure.",
+  "By setting the stated drop equal to the allowable drop and solving the sizing equation backwards for the outlet pressure that satisfies it.",
+  "By taking the midpoint of the two marched rows that sit either side of the crossing, which is what the engine itself reports as its boundary."],
+ "The crossing sits at an outlet pressure of 67.679968 psia, with an allowable drop there of 179.220032 psi. It is the engine's own flag that was bisected, so the figure belongs to the engine rather than to a reading of its output.")
+
+q(0, "A hand calculation past the choking boundary reaches for the full stated drop off the datasheet. What is wrong with the coefficient it produces?",
+ "It is the coefficient for a pressure drop the valve cannot take, so it undersizes the valve while looking entirely reasonable to a reviewer reading the number alone.",
+ ["It is the coefficient for a pressure drop the valve cannot take, so it oversizes the valve and leaves the plug near its seat for the normal duty.",
+  "It is computed on a drop the valve can take but at the wrong density, so it is out by the ratio of the flowing density to the density the datasheet quotes.",
+  "It carries no error in the coefficient at all, because the sizing equation is linear in the pressure drop and the two drops cancel out of the answer entirely."],
+ "At an outlet of 40.000000 psia the engine, sizing on the drop the valve can use, returns 19.148480, and a sizing on the full stated drop returns 17.821626. The difference, the first less the second, is 1.326854, and the ratio, the first over the second, is 1.074452.")
+
+q(2, "Why is the extra pressure drop written on the datasheet unavailable to the valve past the boundary?",
+ "It is dissipated in bubble collapse downstream of the trim rather than in pushing liquid through the restriction, so a calculation that credits the valve with it is crediting it with work the valve does not perform.",
+ ["It is taken by the downstream pipework instead, because the flow at the choking boundary has reached the velocity at which the line itself becomes the controlling restriction.",
+  "It is recovered downstream of the vena contracta and handed back to the process, so the valve never sees it and the net drop across the valve stops rising at the boundary.",
+  "It is absorbed as sensible heat in the liquid, which raises the flowing temperature and with it the vapour pressure, so the drop is spent on a property change instead."],
+ "Past the boundary the flow has stopped responding to further reduction in outlet pressure, because the pressure at the vena contracta has fallen to the point where the liquid is vaporising there.")
+
+q(1, "What does the engine return on a row where it reports choked flow?",
+ "A coefficient computed on the allowable drop, together with a message saying the stated drop is beyond what the valve can use.",
+ ["A coefficient computed on the allowable drop, with the stated drop rewritten to the allowable figure so one drop is carried.",
+  "A refusal in place of the coefficient, because the engine declines to size a choked service from the ordinary equation.",
+  "A coefficient computed on the stated drop, with a warning that the answer is provisional until a trim is selected."],
+ "The engine has still returned a coefficient, so a reader skimming for a number gets one. The sentence beside it is what changes the order that gets placed.")
+
+q(3, "The engine's choked flow message ends with a clause about trim. What does that clause say the service wants?",
+ "A multistage or anti-cavitation trim.",
+ ["A larger body, one line size up.",
+  "A second valve in series on the same line.",
+  "A hardened seat ring and an expanded outlet."],
+ "The capped coefficient is a correct answer to the sizing question and a wrong answer to the engineering question, because a standard globe trim asked to hold that drop on this fluid is absorbing continuous bubble collapse against its plug and seat.")
+
+q(2, "On the last two rows of the march the regime word reads flashing. What happens to the coefficient and the choked flag there?",
+ "The coefficient stays at the figure it settled on when the drop was capped and the choked flag stays true, so the regime word and the flashing flag record the change.",
+ ["The coefficient falls again on both rows, because the flashing correction reduces the density the equation is handed.",
+  "The coefficient stays where it settled and the choked flag turns false again, because a flashing service is sized on a two-phase basis rather than on the liquid basis that choked.",
+  "The coefficient is withheld on both rows and the choked flag stays true, because the engine refuses to size a flashing service from a liquid equation."],
+ "The sizing has been capped and the failure mechanism has changed underneath it. That is why the regime word and the choked flag are two separate returns rather than one.")
+
+q(0, "What does marching a valve across nine outlet pressures settle that a single sizing call cannot?",
+ "Where the valve turns over and how much room is left either side of the turn, which is what a turndown case actually needs to know.",
+ ["Whether the coefficient the engine returns at the design point is the coefficient a vendor would quote for the same service on certified trim data.",
+  "Which valve style would place the crossing furthest from the operating range.",
+  "What the inlet pressure of the service is, which nine rows give nine chances to check."],
+ "Asked at one operating point a valve either chokes or it does not, and a reviewer has no way of telling whether the answer was close.")
+
+q(1, "What does the liquid critical pressure ratio factor set?",
+ "How much of the difference between the inlet pressure and the vapour pressure the valve is able to use.",
+ ["How much of the pressure the valve took is recovered downstream of the vena contracta, which is the property of the trim that the style table carries.",
+  "How far the outlet pressure may fall below the vapour pressure before the engine turns its flashing flag on and changes the regime word it returns.",
+  "What fraction of the stated drop the engine is prepared to size on before it caps the drop and reports the service as choked."],
+ "It is a property of the liquid rather than of the valve, and it is computed from the vapour pressure and the critical pressure of the fluid being handled.")
+
+q(2, "What value does this factor take as the vapour pressure approaches zero?",
+ "0.960000",
+ ["0.892161",
+  "0.680000",
+  "0.900000"],
+ "The engine returns 0.892161 at the marched fluid's own vapour and critical pressures and 0.680000 at the critical point. The value as the vapour pressure approaches zero is the end of the range that cold hydrocarbon and water service sit near.")
+
+q(1, "A cold water service is being sized, well away from its critical pressure. Which of the three returned values of the critical pressure ratio factor does it sit near?",
+ "The value the engine returns as the vapour pressure approaches zero.",
+ ["The value the engine returns at the critical point.",
+  "The value the engine returns at the marched fluid's own vapour and critical pressures.",
+  "None of the three, because the factor is undefined for a liquid whose vapour pressure is a small fraction of its critical pressure."],
+ "Light hydrocarbons at high temperature are where the other end of the range matters. Water at ordinary temperature sits a long way below its critical pressure.")
+
+q(3, "Change the fluid on a valve and keep the valve. What happens to the outlet pressure at which the flow chokes?",
+ "It moves, because the allowable drop moves with the critical pressure ratio factor and the crossing is set by the allowable drop.",
+ ["It stays where it was, because the crossing is fixed by the pressure recovery factor of the trim and the trim has not been changed.",
+  "It moves only if the new fluid has a higher vapour pressure than the old one, since the factor is flat below the vapour pressure of the fluid the valve was sized on.",
+  "It stays where it was, because the engine recomputes the crossing from the stated drop and the stated drop is a process figure rather than a fluid one."],
+ "It is the reason a valve that behaved perfectly on one service misbehaves on another that looks similar on the datasheet, and the vapour pressure it rests on is an input this engine refuses to work without, because without it the cavitation index cannot form.")
+
+emit(Q, '/root/wt-fc8-nextgen/tools/course-banks/metering/intermediate/fc8i_m01.json', label='fc8i_m01', expect_n=15)
+finish()

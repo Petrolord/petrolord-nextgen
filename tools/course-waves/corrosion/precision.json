@@ -1,0 +1,38 @@
+{
+ "bar": {
+  "decimals": 6,
+  "match": "^(?:obigbo_co2_partial_pressure_bar)$"
+ },
+ "mm": {
+  "decimals": 6,
+  "match": "^(?:nembe_required_allowance_mm|soku_allowance_to_reinstate_mm)$"
+ },
+ "mmPerYr": {
+  "decimals": 6,
+  "match": "^(?:nembe_inhibited_rate_mmyr|soku_tolerable_rate_mmyr)$"
+ },
+ "pct": {
+  "decimals": 6,
+  "match": "^(?:obigbo_effective_inhibition_pct|soku_availability_for_design_life_pct|soku_required_availability_pct)$"
+ },
+ "pp": {
+  "decimals": 6,
+  "match": "^(?:nembe_inhibitor_shortfall_pp)$"
+ },
+ "psia": {
+  "decimals": 6,
+  "match": "^(?:obigbo_h2s_partial_pressure_psia)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:nembe_retained_metal_loss_fraction|obigbo_h2s_to_co2_mole_ratio|obigbo_metal_loss_ratio_vs_datasheet|soku_film_credit_life_ratio)$"
+ },
+ "reynolds": {
+  "decimals": 4,
+  "match": "^(?:obigbo_reynolds_number)$"
+ },
+ "yr": {
+  "decimals": 6,
+  "match": "^(?:nembe_life_lost_to_availability_yr|nembe_remaining_life_yr|soku_stripped_film_life_yr)$"
+ }
+}

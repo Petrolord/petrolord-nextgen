@@ -1,0 +1,115 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC7 Expert m05, What a gate can catch. Digest section 22 for the framed
+# history, section 18 for the oracle and section 19 for the battery.
+
+q(2, "The history lesson is the one lesson of this course whose subject is history. What did the hydrocyclone in this module do BEFORE it was repaired, and what lesson is drawn from it?",
+ "The field went as the square of the flow with nothing above it, so the cut size fell without limit as liners were removed, and the lesson is to sweep the input a user is most tempted to reduce and look at the direction of the answer.",
+ ["The field was clamped at its rated value whatever the flow, so removing liners moved nothing at all, and the lesson is that a clamp deletes the input it quietly moves.",
+  "The liner count was not an input at all, so a bank of any size reported one cut size, and the lesson is that a model has to respond to every box a user can type in.",
+  "The shear penalty was applied below the operating envelope as well as above it, so the cut degraded everywhere, and the lesson is that a penalty needs a stated band."],
+ "The studio's own shipped default ran its liners at 7.7 times their design flow. A studio that tells a designer to buy less equipment for a better answer is worse than no studio.")
+
+q(0, "The history lesson records a second defect in that same device, one level down from the first. What was it?",
+ "The liner LENGTH was not an input at all, and the bore reached the answer through a bare divisor on a velocity the source called residence-scaled rather than through any residence time.",
+ ["The bore of the liner was not an input at all, and the length reached the answer only through the liner volume, so just one of the two stated dimensions was able to move the reported cut size.",
+  "Both dimensions were inputs and neither moved the answer, because the cut size was read out of a fixed table of liner sizes.",
+  "The oil core and the half-area radius are one and the same here, so the median droplet has no distance at all to cross."],
+ "The liner this course teaches is the stated geometry the repair put there, where both dimensions move the answer for a reason a reader can follow.")
+
+q(3, "Given an oil heavier than its water, what did this module do before the first repair, and what rule does this course draw from it?",
+ "One export refused by name while four devices returned a cut size of NaN with no error at all, and the rule is that when two halves of one module disagree the TRUSTING half is the bug.",
+ ["Every one of the five doors refused the fluid and the train then returned no verdict of any kind, and the rule drawn from it is that a refusal raised anywhere must reach the caller intact.",
+  "One export returned a bare NaN while the four devices each refused it by name, and the rule drawn from it is that a leaf must never answer a question where its own callers have declined to.",
+  "All five of them returned a cut size and the train raised a warning beside the result, and the rule drawn from it is that a warning is never any substitute at all for a refusal."],
+ "The train then skipped those stages and returned a spec verdict computed over whatever ran. The repaired engine refuses the identical bad fluid at all five doors at once.")
+
+q(1, "Two models in this engine were DEAD before the first repair. What made the flotation model dead?",
+ "An attachment fraction that was exactly one across every input a user could type, which made the bubble size, the gas rate and the residence time decorative and made the two kinds of cell one device behind two menu entries.",
+ ["An attachment efficiency applied unchanged to every cell whatever its gas rate, which held the cut size at one figure.",
+  "A residence time taken from the plan area rather than from the cell volume, so the cell depth never reached the answer.",
+  "A bubble rise read from Stokes at every bubble size, so a Reynolds number in the tens was never reported at all."],
+ "THE LESSON IS THE PROBE: sweep every input and check that it moves the answer.")
+
+q(2, "The media filter was the other dead model. What was wrong with it before that first repair?",
+ "It computed its removal twice by two routes that disagreed, and the train read the route the gate did not validate.",
+ ["It computed its cut size out of the grain size alone, so the depth of the bed never entered into the answer it reported.",
+  "It reported the removal at its own reference droplet as though that figure were the removal over the whole droplet distribution.",
+  "It inverted the penetration law at the wrong depth, so every cut size was out by the root of the bed depth."],
+ "If a module holds two opinions about one quantity, delete one. There is ONE route through this model now.")
+
+q(1, "Before the repair a train that removed nothing showed its droplet median falling. The history lesson says why. What was it?",
+ "The inlet median was the typed d50 and the outlet median was measured off the bins, so the two were not the same kind of number.",
+ ["The outlet bins were normalised by the surviving volume and the inlet bins were not, so the two medians were taken on different totals.",
+  "The inlet median was interpolated and the outlet median was read as a bin midpoint, so the outlet was quantised downward every time.",
+  "The truncated tail was absorbed into the outlet distribution alone, which dragged its median towards the fine end of the grid."],
+ "THE LESSON IS THE BASIS: two numbers a reader will compare must be measured the same way, and the module should say on its own return that they are.")
+
+q(0, "This course found a defect of its own in the media filter while building the digest against the already repaired engine. What was it, and what did the second repair put in its place?",
+ "It clamped its own loading rate up to a floor and said nothing, so beds of completely different area reported the same filter coefficient and the same cut size to every digit, and the repair is to REFUSE by name.",
+ ["It refused every bed below its reference loading of 10 m/hr, and the repair lowered that floor to 1 m/hr.",
+  "It warned below the floor and answered anyway, and the repair turned that warning into a clamp reported on the return.",
+  "It took its loading rate from the bed depth rather than the bed area, and the repair made the area an input."],
+ "The clamp was in the oracle too, so the independent check agreed with it. A guard that quietly moves an input is a guard that deletes the input.")
+
+q(3, "One device threshold in this module was still written bare inside the sentence that reported it. Which was it, and what lesson does the history lesson draw?",
+ "The flotation residence warning, which compared against a bare 60 written inside its own message, and the lesson is that a threshold a reader cannot find is a threshold nobody reviews.",
+ ["The breakthrough loading, which was written bare inside the warning that reported it and which the module now declares at 25 m/hr in its own frozen constants object where a reader can find it.",
+  "The overload turndown of the liner bank, which was written inside the shear penalty itself rather than being declared into the frozen constants object where any reader could go and find it for themselves.",
+  "The swarm holdup limit of this module, which was compared against inside the holdup warning that reported it and which is now simply an input that a caller supplies for themselves."],
+ "The droplet grid's two floors were bare the same way. A warning should quote the figure it judged against so a reader can disagree with it.")
+
+q(0, "The volume median had a silent way back to the answer the first repair had just removed. What was that route?",
+ "It interpolated when a bin carried its edges and fell back to the bin midpoint when it did not, reachable by one caller handing over midpoints alone, with nothing on the return saying which route had run.",
+ ["It interpolated on the outlet distribution and read the inlet from the typed d50, which is the basis defect appearing in a second place.",
+  "It fell back to the analytic median of the log-normal whenever the bin set arrived empty, which is an answer no bin set supports.",
+  "It reported a midpoint whenever the median fell in the outermost bin, where there is no edge available to interpolate against."],
+ "A fallback that answers is worse than a refusal, because it is an answer nobody can tell from the right one. The leaf returns NaN now and its callers turn that into a named refusal.")
+
+q(2, "Thirty five defects were run one at a time against the suite before the first repair and again after it. What were the two results?",
+ "Before it, 22 of the 35 left the suite fully green. After it, 0 of 35 do.",
+ ["Before it, 16 of the 35 left the suite green. After it, 8 of them still do.",
+  "Before it, all 35 were caught in the engine while 8 were missed in the oracle. After it, none are missed.",
+  "Before it, 27 of the 35 left the suite green. After it, 22 of them still do."],
+ "Twenty seven were planted in the engine alone and eight in the engine and the oracle together, and 16 of the first group and 6 of the second survived.")
+
+q(3, "How large is the planting battery this course was built beside, and what does it show?",
+ "Sixty in all, the thirty five re-run plus twenty four more and one self-test of the runner, and none of the sixty leaves the suite green.",
+ ["Thirty five in all, each of them run on its own against the vendored suite, and none of those thirty five is able to leave the suite fully green.",
+  "Seventy eight in all, one for each of the tests carried in the vendored suite, and none of those is able to leave the suite fully green either.",
+  "Sixty in all, run together in one single pass against the vendored suite, and not one of the sixty is able to leave that suite fully green."],
+ "A battery run one defect at a time measures the suite's ability to catch each defect separately. Many at once measures nothing useful, because one catch hides all the rest.")
+
+q(1, "A defect planted in the engine and the oracle at the same time is the hard case, because a golden regenerated from a bent oracle agrees with a bent engine perfectly. What catches those now?",
+ "Three things: a route with no place to type the constant, the identities that need no source, and an explicit pin with the value typed by hand in the test file.",
+ ["The measured gap table printed in this digest, since a bent pair of files will agree with itself very much more closely than two genuinely independent routes ever should.",
+  "The negative controls carried by every single family in the whole suite, each of which is asserted to stay green on every row of the family it belongs to.",
+  "The straddled warning fields in the golden file, since a bent pair of files moves a threshold and a straddle on both sides of it will detect that move at once."],
+ "None of those three is a comparison between the engine and its golden. They are the checks that step outside the pair.")
+
+q(0, "The independent oracle holds its OWN second copy of the declared constants. What does the agreement between the two files establish about those numbers?",
+ "Nothing. On the constants the two are copies rather than arguments, so if a value is wrong they are both wrong together.",
+ ["A validation, since the oracle was written separately from the engine and arrived at the same values for each of them.",
+  "A pin at twice the strength, since two separate files now have to be edited together before any one constant can be moved.",
+  "It depends on the constant, since the ones that also appear in the golden file are validated by it."],
+ "Six of the eight defects planted in the engine and the oracle together are caught by that pin and by nothing else, which is a statement about how much of this module a pin is carrying.")
+
+q(2, "One negative control in this suite records a fact about its own subject rather than a round number. Which one, and what is the fact?",
+ "The cyclone control fails on four of five rows and not five, because a turndown of exactly one is the one case a wrong field exponent cannot move.",
+ ["The filter control fails on seven of its eight rows, the row sitting at the reference grain being the one where the grain size ratio comes out at exactly one.",
+  "The train control fails on two of three rows, the Monte Carlo noise in the golden covering the third of them.",
+  "The cyclone control fails on all five of its rows, which is what a control asserted to fire is supposed to do."],
+ "A control asserted to fail on all five would have been quietly wrong about the physics, and the honest number is the one that matches what the exponent can actually reach.")
+
+q(1, "After a planting battery has been run, what specific claim does a green suite support?",
+ "That these particular defects, introduced this way, would each have been caught, which is a much smaller claim than validated.",
+ ["That the engine is validated outright, since a battery that no planted defect survives has exhausted the ways it could have been wrong.",
+  "That every number the module computes is either derived or validated, the pinned ones being covered by the exact key set match.",
+  "That the oracle is fully independent of the engine, since an oracle that was not would have let at least some of the sixty through."],
+ "A green suite is a measurement of the suite until somebody plants a defect and watches. That is a claim you can actually defend.")
+
+emit(Q, '/root/wt-fc7-nextgen/tools/course-banks/producedwater/advanced/fc7a_m05.json', expect_n=15)
+finish()

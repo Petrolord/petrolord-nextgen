@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The engine computes a reaction term and a transport term and then combines them. What is the combination?",
+  "options": [
+   "The smaller of the two terms, since a series chain can never run faster than its slowest step and the engine reports that step by name.",
+   "The reciprocal of the sum of the two reciprocals, which is what putting two steps in series means.",
+   "The product of the two terms divided by their difference, which is what keeps the answer below both of them at every ratio.",
+   "The arithmetic mean of the two terms."
+  ],
+  "answer": 1,
+  "explanation": "On the shipped case a reaction term of 44.225132 mm/yr and a transport term of 11.701938 mm/yr combine to 9.253475 mm/yr. Adding reciprocals is adding resistances."
+ },
+ {
+  "prompt": "What can a learner say about the combined figure before seeing a single number?",
+  "options": [
+   "It is below both terms, and it sits close to whichever of the two is the smaller.",
+   "It is the smaller of the two terms whenever they differ by more than the reporting margin, and their mean whenever they do not.",
+   "It is between the two terms, closer to the smaller one, which is what distinguishes a series combination from a simple minimum.",
+   "It is above the smaller term whenever the two are comparable and below it whenever one dominates the other."
+  ],
+  "answer": 0,
+  "explanation": "Adding two positive resistances gives a resistance larger than either, so the rate is smaller than either. The smaller term is the bottleneck and adding capacity to the faster step moves the answer very little."
+ },
+ {
+  "prompt": "Four of the engine's worked streams report the combined rate divided by the smaller of the two terms as 0.844077, 0.947776, 0.615743 and 0.990899. What does the spread show?",
+  "options": [
+   "The ratio measures how far the controlling word is from its reporting margin, so a ratio near one means the engine is close to answering comparable.",
+   "The ratio is the fraction of the rate that the reaction term contributes, so a stream at 0.990899 is almost entirely reaction controlled.",
+   "The ratio rises with velocity on every stream, which is why the flow side of the model is the one that moves it.",
+   "Where one term dominates the ratio approaches one, and where the two terms are comparable the combination falls well below both."
+  ],
+  "answer": 3,
+  "explanation": "The stream at 0.990899 has a transport term of 0.091971 mm/yr against a reaction term of 10.013808 mm/yr. The stream at 0.615743 runs 44.114126 mm/yr against 70.689594 mm/yr, and its combination is 27.162967 mm/yr."
+ },
+ {
+  "prompt": "One stream runs a reaction term of 44.114126 mm/yr against a transport term of 70.689594 mm/yr. What does the engine name as controlling, and what is the combination?",
+  "options": [
+   "Mass transfer, with a combination of 27.162967 mm/yr, since the transport term is the larger figure and the larger figure is what the engine names.",
+   "Comparable, with a combination of 27.162967 mm/yr, because the two terms sit inside the reporting margin of each other.",
+   "Reaction kinetics, with a combination of 27.162967 mm/yr, because the reaction term is the smaller of the two here.",
+   "Reaction kinetics, with a combination of 44.114126 mm/yr, since a series chain returns its slowest step unchanged."
+  ],
+  "answer": 2,
+  "explanation": "This is the one stream of the six where the chemistry is slower than the transport. Its margin is 0.602425, which is the nearest of the six to the boundary at which the engine would answer comparable instead."
+ },
+ {
+  "prompt": "The series identity is checked on every row the digest prints. What exactly is checked, and to what?",
+  "options": [
+   "That the reciprocal of the combined rate minus the reciprocal of each term is zero, held to twelve figures.",
+   "That the combined rate agrees with the vendored golden's own combined rate to a tolerance of one part in a thousand on every case.",
+   "That the combined rate lies between the smaller term and half of it, which is the band the identity allows on any positive pair.",
+   "That the two terms agree with the constants the engine exports, measured by bisecting the rate at a fixed fugacity."
+  ],
+  "answer": 0,
+  "explanation": "It is one of very few claims in this module that needs no held constant at all. Because it is arithmetic rather than a comparison against a fitted number, it survives whatever the correlation constants turn out to be."
+ },
+ {
+  "prompt": "When the two terms sit within 10.000000 percent of each other, what does the engine report?",
+  "options": [
+   "The smaller of the two by name, with a flag saying the choice was made inside the margin and should be read with care.",
+   "Both terms by name in the order they were computed, leaving the reader to decide which of the two is doing the limiting.",
+   "Nothing at all, so the controlling field is absent and the summary rail carries no row for it on those cases.",
+   "Comparable, rather than naming either term, because a bare comparison of two nearly equal numbers flips on floating point noise."
+  ],
+  "answer": 3,
+  "explanation": "The margin is a REPORTING threshold and the engine says so. It is not a claim about where mass transfer stops mattering physically, and it is measured out of the engine's behaviour like every other constant here."
+ },
+ {
+  "prompt": "Three streams report controlling margins of 2.779300, 0.602425 and 107.879479. How should those three be read?",
+  "options": [
+   "As the ratio of the reaction term to the transport term, so a margin above one means the reaction term is the larger of the two.",
+   "As the number of percentage points by which the controlling term leads the other, which is why the largest of the three is reported to six decimals.",
+   "As how far each case sits from the boundary at which the engine would decline to name a term, so the smallest of the three is the least settled.",
+   "As the fraction of the combined rate the controlling term accounts for, which is why the figures cluster near one on most streams."
+  ],
+  "answer": 2,
+  "explanation": "The shipped case reports 2.779300 with transport controlling. A stream at 0.602425 sits much nearer the boundary, and one at 107.879479 is in no doubt at all."
+ },
+ {
+  "prompt": "At a line inside diameter of 0.050800 m the transport term is 6.669367 mm/yr at 1 m/s, 11.612042 mm/yr at 2 m/s and 20.217739 mm/yr at 4 m/s. What do the two doubling ratios show?",
+  "options": [
+   "They differ, and the difference between them is what the measured velocity exponent is derived from.",
+   "Both come to 1.741101126592, and the same figure appears at every diameter in the sweep, which is what a power law in velocity means.",
+   "Both come to 1.741101126592 at this diameter and to a different constant at each of the other three diameters, which is the diameter exponent showing through.",
+   "Both come to 2.000000 because the term is linear in velocity, and 1.741101126592 is the ratio the diameter doubling gives instead."
+  ],
+  "answer": 1,
+  "explanation": "At 0.101600 m the term is 5.806021 mm/yr, 10.108870 mm/yr and 17.600564 mm/yr, and the ratio is 1.741101126592 again. At 0.203200 m and 0.406400 m it is the same number once more."
+ },
+ {
+  "prompt": "Why is a constant ratio down that column worth more to this course than an agreement to six decimals against an expected number?",
+  "options": [
+   "It is measured at four diameters rather than one, so it carries four times the evidence a single comparison would carry.",
+   "It is the only quantity in the transport term the engine exports, so it is the only one an export and a measurement can be compared on.",
+   "It is scale free, so it tests the form of the term rather than the size of its constants, and it needs no expected number at all.",
+   "It is computed by the oracle through an independent route, which is what makes it a validation rather than a pin."
+  ],
+  "answer": 2,
+  "explanation": "An expected number produced by anything that shares a constant with the engine cannot test that constant. That is why this course leans on properties of this kind wherever it can find them."
+ },
+ {
+  "prompt": "What are the two measured exponents of the transport term, and which way does each act?",
+  "options": [
+   "0.800000000000 on velocity, which raises the term, and 0.200000000000 on diameter, which enters the other way round.",
+   "0.800000000000 on diameter and 0.200000000000 on velocity, so line size is the stronger of the two levers on a line already in the ground.",
+   "0.580000000000 on velocity and 0.200000000000 on diameter, the first being the exponent the reaction term shares with it.",
+   "1.000000000000 on velocity and 1.000000000000 on diameter, since the term is exactly linear in both and only in the fugacity is it a power law."
+  ],
+  "answer": 0,
+  "explanation": "The term is exactly linear in the carbon dioxide fugacity, which is a property rather than a typed constant. Both exponents and the coefficient in front of them are held for literature."
+ },
+ {
+  "prompt": "The transport door is given a blank velocity. What does it return?",
+  "options": [
+   "Zero, which propagates through the series combination and makes the combined rate zero as well.",
+   "Not a number, and the vendored gate asserts the result is not infinity rather than merely checking it is not an ordinary number.",
+   "Infinity, which is the honest limit of a transport term as the velocity supplied to it is taken down towards nothing at all.",
+   "The last velocity the door happened to be called with, which is the reason a sweep over candidate line sizes has to be run in a fresh call for every one of them."
+  ],
+  "answer": 1,
+  "explanation": "A blank diameter, a zero velocity and a negative diameter all behave the same way. A test that accepted any non finite value would pass on the behaviour this gate is written to prevent."
+ },
+ {
+  "prompt": "Why would an infinite transport term be worse than a refusal?",
+  "options": [
+   "It makes the combined rate infinite, which the studio would print as an unbounded rate and a remaining life of zero years.",
+   "It moves the controlling margin past its reporting threshold, so the engine would answer comparable on every case with a missing velocity.",
+   "It would be clamped to the largest finite double, which is a number a reader has no way of recognising as a failure.",
+   "It makes the series combination equal the reaction term exactly, so the engine would name reaction kinetics as controlling from an input nobody supplied."
+  ],
+  "answer": 3,
+  "explanation": "Every one of those outputs would look like an answer. The shape to look for in any engine is a function that hands back infinity, zero or one where it ought to hand back nothing."
+ },
+ {
+  "prompt": "The rate door, `corrosionRate`, goes further than the bare transport door. What does it do with a blank velocity?",
+  "options": [
+   "It returns a rate with the transport term omitted from the series combination and records the omission in the notes.",
+   "It returns not a number in the rate field and leaves the rest of the screening intact, so the reader sees which fields survived.",
+   "It refuses outright and names the box, in the engine's own words that a positive velocity is required and an absent velocity is not an unlimited mass-transfer capacity.",
+   "It substitutes the velocity from the previous call, which is why the studio clears every field between runs."
+  ],
+  "answer": 2,
+  "explanation": "The bare term hands back a value a direct caller has to check, and the rate door refuses and names the input. The whole screening refuses earlier still, at the wall shear it computes first, saying the film survival check did not run."
+ },
+ {
+  "prompt": "On the shipped case the transport term of 11.701938 mm/yr sits below the reaction term of 44.225132 mm/yr. What does the engine name, and what follows for the reader?",
+  "options": [
+   "Mass transfer, so velocity and line size move this answer and the chemistry does not.",
+   "Mass transfer, so temperature and carbon dioxide move this answer and the flow has already been accounted for.",
+   "Reaction kinetics, because the reaction term is the larger figure and the larger figure sets the ceiling the rate is measured against.",
+   "Comparable, because the two terms are within the reporting margin of each other at this velocity and diameter."
+  ],
+  "answer": 0,
+  "explanation": "The word tells you which lever this model responds to. Where transport controls, velocity and line size change the answer. Where the reaction controls, temperature and carbon dioxide change it."
+ },
+ {
+  "prompt": "What is the safe reading of the controlling word, and what would be over reading it?",
+  "options": [
+   "It says which of the two terms the reader should quote when a single number is asked for, and it is not a statement about the other term.",
+   "It says which term the rate is nearer to in size, and it is not a statement about which input would move it.",
+   "It says whether the correlation applies at all, and it is not a statement about which mechanism is faster.",
+   "It says which lever this model responds to. It is not a verdict on the line, and two streams naming the same word can differ by a large factor in the rate."
+  ],
+  "answer": 3,
+  "explanation": "A screening naming reaction kinetics on a stream near the comparable boundary would name something else after a small change in velocity. Record the word, the margin and the two terms together."
+ }
+]

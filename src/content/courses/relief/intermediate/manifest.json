@@ -1,0 +1,359 @@
+{
+ "app_slug": "relief",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-where-the-relief-load-comes-from",
+   "title": "Where the Relief Load Comes From",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-four-scenarios-and-the-one-computed-here",
+     "title": "Four scenarios, and the one computed here",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-blocked-in-and-thermally-expanding",
+     "title": "Blocked in, and thermally expanding",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-actual-cubic-feet-and-the-base-they-came-from",
+     "title": "Actual cubic feet, and the base they came from",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-the-engine-leaves-to-the-caller",
+     "title": "What the engine leaves to the caller",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-wetted-area",
+   "title": "The Wetted Area",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-a-circular-segment-exactly",
+     "title": "A circular segment, exactly",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-half-full-and-why-that-case-is-special",
+     "title": "Half full, and why that case is special",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-standing-up-instead-of-lying-down",
+     "title": "Standing up instead of lying down",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-height-the-wetted-area-stops-at",
+     "title": "The height the wetted area stops at",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-level-the-caller-must-trim",
+     "title": "The level the caller must trim",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-the-pool-fire-duty",
+   "title": "The Pool Fire Duty",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-two-constants-and-which-one-applies",
+     "title": "Two constants, and which one applies",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-exponent-and-what-it-says-about-size",
+     "title": "The exponent, and what it says about size",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-environment-factor-and-its-credits",
+     "title": "The environment factor, and its credits",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-duty-into-pounds-an-hour",
+     "title": "Duty into pounds an hour",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-fire-case-end-to-end",
+   "title": "The Fire Case End to End",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-geometry-to-duty-to-load-to-letter",
+     "title": "Geometry to duty to load to letter",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-allowance-the-fire-case-gets",
+     "title": "The allowance the fire case gets",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-latent-heat-that-is-collapsing",
+     "title": "A latent heat that is collapsing",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-moves-the-letter",
+     "title": "What moves the letter",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-knockout-drum",
+   "title": "The Knockout Drum",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-what-a-flare-knockout-drum-is-for",
+     "title": "What a flare knockout drum is for",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-drag-against-weight-iterated",
+     "title": "Drag against weight, iterated",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-three-regimes-in-one-fit",
+     "title": "Three regimes in one fit",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-length-a-diameter-demands",
+     "title": "The length a diameter demands",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-l-over-d-as-a-judgment",
+     "title": "L over D, as a judgment",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-the-professional-reading",
+   "title": "The Professional Reading",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-a-load-a-drum-and-a-letter",
+     "title": "A load, a drum and a letter",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-chain-the-capstone-walks",
+     "title": "The chain the capstone walks",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-capstone-worked",
+     "title": "The capstone worked",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-the-next-tier-changes",
+     "title": "What the next tier changes",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

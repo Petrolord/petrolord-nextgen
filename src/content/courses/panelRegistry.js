@@ -195,11 +195,28 @@ export const PANELS = {
   'fc-water-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/WaterExplorer')),
   'fc-absorber-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/AbsorberExplorer')),
   'fc-coldend-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/ColdEndExplorer')),
+  // FC5 Relief & Flare Systems
+  'fc-sizing-explorer': React.lazy(() => import('@/components/course/panels/relief/SizingExplorer')),
+  'fc-fire-drum-explorer': React.lazy(() => import('@/components/course/panels/relief/FireDrumExplorer')),
+  'fc-blowdown-explorer': React.lazy(() => import('@/components/course/panels/relief/BlowdownExplorer')),
 
   // FC6 Heat Exchange & Cooling
   'fc-exchanger-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/ExchangerExplorer')),
   'fc-coefficient-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/CoefficientExplorer')),
   'fc-rating-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/RatingExplorer')),
+  // FC7 Produced Water Treatment
+  'pw-water-explorer': React.lazy(() => import('@/components/course/panels/producedwater/WaterExplorer')),
+  'pw-device-explorer': React.lazy(() => import('@/components/course/panels/producedwater/DeviceExplorer')),
+  'pw-train-explorer': React.lazy(() => import('@/components/course/panels/producedwater/TrainExplorer')),
+  // FC9 Corrosion & Integrity
+  'fc-chemistry-explorer': React.lazy(() => import('@/components/course/panels/corrosion/ChemistryExplorer')),
+  'fc-rate-explorer': React.lazy(() => import('@/components/course/panels/corrosion/RateExplorer')),
+  'fc-inhibitor-integrity-explorer': React.lazy(() => import('@/components/course/panels/corrosion/InhibitorIntegrityExplorer')),
+  // FC8 Metering, Control Valves & Storage
+  'fc-meterrun-explorer': React.lazy(() => import('@/components/course/panels/metering/MeterRunExplorer')),
+  'fc-choking-explorer': React.lazy(() => import('@/components/course/panels/metering/ChokingExplorer')),
+  'fc-venting-explorer': React.lazy(() => import('@/components/course/panels/metering/VentingExplorer')),
+  'fc-withheld-explorer': React.lazy(() => import('@/components/course/panels/metering/WithheldExplorer')),
 
   // AS-RC Risk, Change & Learning
   'rc-risk-explorer': React.lazy(() => import('@/components/course/panels/riskchange/RiskExplorer')),

@@ -1,0 +1,115 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC9 Associate m04, The Protective Film. Digest section 6, with the shipped
+# studio figures of section 19 where the lessons quote them.
+
+q(2, "Why does a naive extrapolation of the low temperature equation get a hot line backwards?",
+ "Iron carbonate plates out on the steel above a certain temperature and the layer it forms slows the attack, so the rate turns and falls with further heating.",
+ ["The reaction term saturates at high temperature, so the rate flattens rather than turning, and an extrapolation reads that flat stretch as a rise.",
+  "The transport term overtakes the reaction term as the viscosity falls with temperature, so the series combination stops responding to the chemistry at all.",
+  "The fugacity coefficient falls with temperature, so the fugacity the correlation is fed drops away faster than the temperature term can raise the rate."],
+ "The engine handles the turn with a multiplier on the rate. Below a computed onset it is exactly one, and above the onset it falls fast enough to take the rate downward."),
+
+q(0, "The film multiplier is clamped at one. What does the clamp state?",
+ "A direction rather than a magnitude, since a film can slow the attack and can never speed it up.",
+ ["A magnitude rather than a direction, since the clamp fixes how much of the rate the film is allowed to remove on any stream.",
+  "The published validity band of the scale expression.",
+  "The boundary the engine bisects to find the onset."],
+ "Applying the same expression with no ceiling would let a correction meant to be protective increase a rate instead. Below the onset the engine returns 1.000000000000 and the rate passes through untouched."),
+
+q(3, "What decides the temperature at which the multiplier leaves one?",
+ "The carbon dioxide fugacity, from which the engine computes the onset rather than quoting a fixed figure.",
+ ["The total pressure, which is why the onset sits beside the cap flag.",
+  "The wetting regime, since a film forms only on a wall the water reaches.",
+  "The reaction constants, which fix one onset for every stream."],
+ "The computed onset is teachable because it is measured out of the engine's own behaviour by bisection and cross checked against a closed form. What the published correlation turns at is a separate question and it is held."),
+
+q(1, "The digest sweeps the onset across seven carbon dioxide fugacities. What do those figures show?",
+ "It falls as the fugacity rises, from 132.297731 C at 0.050000 bar to 35.853960 C at 60.000000 bar.",
+ ["It rises as the fugacity rises, from 35.853960 C at 0.050000 bar to 132.297731 C at 60.000000 bar, which is why a high pressure line credits no film.",
+  "It holds near 85.058955 C across the whole sweep and moves only when the temperature itself is changed.",
+  "It falls to a floor at 35.853960 C and is clamped there, in the same way the fugacity coefficient is clamped above its own cap."],
+ "At 0.200000 bar the onset is 108.978001 C, at 1.000000 bar 85.058955 C, at 2.000000 bar 75.655878 C, at 5.000000 bar 63.957912 C and at 20.000000 bar 47.679108 C."),
+
+q(2, "Across the fugacities the digest sweeps, how far does the onset move?",
+ "96.443771 degrees Celsius, which is what retires the idea of a single film onset temperature.",
+ ["Nothing measurable, because the onset is a constant of the scale expression and the sweep is there to demonstrate that it does not move.",
+  "10.000000 percent, the engine's own reporting margin.",
+  "80.984504 degrees Celsius, which is the onset the engine computes at the shipped studio defaults and also the width of the swept band."],
+ "A help guide saying the film appears at a round temperature is wrong at every fugacity except one. The panel prints the computed onset for the conditions set rather than a constant."),
+
+q(0, "At the shipped studio defaults the carbon dioxide fugacity is 1.344240 bar. What is the onset there, and what is the multiplier?",
+ "An onset of 80.984504 C, and a multiplier of exactly 1.000000000000 because the stream runs at 60.000000 C.",
+ ["An onset of 80.984504 C, and a multiplier of 0.206012 because the stream is credited with a partial film at that fugacity.",
+  "An onset of 85.058955 C, and a multiplier of exactly one, since the onset at a fugacity near 1.000000 bar is what the shipped case is closest to.",
+  "An onset of 60.000000 C, and a multiplier just below one."],
+ "No film credit is taken on that screen at all. Every capstone scenario in this course is deliberately below its own computed onset for the same reason."),
+
+q(1, "Two of the engine's worked streams sit on opposite sides of their own onsets. What are the two answers?",
+ "One at 119.400000 C with an onset of 79.792274 C has a multiplier of 0.206012, and one at 58.200000 C with an onset of 89.053653 C has a multiplier of exactly one.",
+ ["Both have multipliers below one, and the difference between the two is only how far below, which the onset figure records.",
+  "One has an onset of 79.792274 C and the other of 89.053653 C, and both credit a film because both onsets sit below the temperature of the shipped case.",
+  "One is above its onset and refuses a rate, and the other is below its onset and returns one, which is the refusal the scale door owns."],
+ "The first runs at a fugacity of 1.467680 bar and the second at 0.753085 bar. One expression, two streams, two different answers about whether a film exists at all."),
+
+q(3, "Hold the composition fixed and walk the temperature up one of the engine's streams. What does the rate column do?",
+ "It rises to 1.508421 mm/yr at 70.000000 C, then turns and falls away, reaching 0.135116 mm/yr at 150.000000 C.",
+ ["It rises without turning across the whole walk, and only the multiplier column turns, which is why the two have to be read together.",
+  "It falls throughout the walk, because the film is credited from the first step.",
+  "It holds flat until the onset and then falls away."],
+ "At 40.000000 C the rate is 1.270135 mm/yr and at 55.000000 C it is 1.401052 mm/yr, both with a multiplier of exactly one. The turn is the film arriving rather than the chemistry slowing."),
+
+q(2, "On that same walk, at which step is the film first credited and what is the multiplier there?",
+ "At 85.000000 C, with a multiplier of 0.820838044032.",
+ ["At 70.000000 C, with a multiplier of 0.435371430361, which is the step at which the rate stops rising.",
+  "At 100.000000 C, with a multiplier of 0.242520118987, which is the first step at which the rate falls below its value at the start of the walk.",
+  "At 40.000000 C, with a multiplier of 1.000000000000, since a multiplier is credited at every step and only its size changes."],
+ "At 100.000000 C the multiplier is 0.435371430361 and the rate is 0.728051 mm/yr. At 130.000000 C it is 0.141105882050 and the rate is 0.252905 mm/yr."),
+
+q(1, "Of the six worked streams in this course's source material, how many carry a film multiplier of exactly one?",
+ "5 of the 6, so no film credit is in their rates at all.",
+ ["1 of the 6, which is the shipped studio case, and the other five are all above their own computed onsets.",
+  "3 of the 6, which is the split that makes the sweep a fair test of both sides of the onset.",
+  "All 6, since every scenario used anywhere in this course is set below its own onset by construction."],
+ "The shipped studio case, which is not one of the six, sits below its onset too, at 60.000000 C with a computed onset of 80.984504 C. Where the multiplier is exactly one, multiplying by it changes nothing at all."),
+
+q(0, "Where in the chain does this engine apply the film multiplier, and what is the standing of that choice?",
+ "It multiplies the combined rate after the series combination, and which form the published correlation intends is held.",
+ ["It multiplies the reaction term before the series combination.",
+  "It multiplies the transport term, since a film is a barrier to transport.",
+  "It applies the multiplier once to each of the two terms."],
+ "Multiplying the reaction term instead is a different physical claim. The two give materially different answers whenever mass transfer controls, which it does at the studio's own defaults."),
+
+q(3, "What follows for this course from that unresolved modelling question?",
+ "Nothing downstream of the film factor is graded anywhere in these three tiers.",
+ ["The factor is graded only on streams where the reaction term is the smaller of the two, because the two arrangements agree there.",
+  "The factor is graded at the Expert tier alone, where a learner is expected to state which arrangement the engine uses before quoting a rate.",
+  "The rate is graded and the factor is not, since the factor is a multiplier the learner never has to produce on its own."],
+ "A rate carrying a film credit depends on an unresolved modelling decision as well as on three unsourced constants, so grading one would examine a learner on a question the engine itself declines to settle."),
+
+q(2, "Every capstone scenario in this course sits below its own computed onset. Why does that clear the arrangement question?",
+ "The multiplier is then exactly one, and multiplying by one before the combination or after it gives the same number to the last bit.",
+ ["The multiplier is then small enough that the difference between the two arrangements falls inside the grading tolerance on every field.",
+  "The scale constants drop out of the chain below the onset, so the rate is reached without any held constant at all.",
+  "The engine refuses to apply the factor below the onset, so a scenario there is graded on a chain the factor never entered."],
+ "It is an identity rather than a tolerance, which is why it is worth stating as the reason. The capstone generator asserts it rather than assuming it."),
+
+q(1, "Which of these is held for literature in the film part of this module?",
+ "The three constants of the scale expression and the temperature at which the published correlation turns protective.",
+ ["The clamp at one, which is the one part of the correction carrying no source anywhere in this repository and is therefore never graded.",
+  "The computed onset, which is the reason the engine declines to print it and shows only the multiplier beside the rate on the screen.",
+  "The direction of the correction, since no source in the repository says whether a film raises or lowers the rate."],
+ "The published turning temperature is a separate question from the onset this engine computes. The clamp itself is arithmetic and it is not held."),
+
+q(0, "A screening from a hot line reports a reassuringly low rate. What should the reader record beside it?",
+ "The multiplier, whenever it is below one, so the next reader can see how much of the answer the film credit is carrying.",
+ ["The reaction term on its own, since that is the figure the rate would have taken had the film not been credited at those conditions.",
+  "The published onset temperature for the correlation.",
+  "The wall shear, since a film credited by the correlation is only removed when the shear exceeds the erosional velocity limit this module carries."],
+ "A rate that looks low at high temperature is carrying a film credit inside it, and that credit rests on constants nobody here can source. The module holds no erosional velocity criterion at all."),
+
+emit(Q, '/root/fc-wip-corrosion/banks/fc9b_m04.json', expect_n=15)
+finish()
