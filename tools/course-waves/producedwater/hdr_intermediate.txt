@@ -1,0 +1,33 @@
+-- ============================================================================
+-- FC7 PROFESSIONAL DEEP SEED: Produced Water Treatment, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE THREE DEVICES WHOSE CUT DOES NOT COME FROM GRAVITY
+-- ALONE. The grade efficiency curve and the removal as an integral over the
+-- distribution; the hydrocyclone on stated geometry, a field, a travel from the
+-- half-area radius to the oil core and a residence time; the operating
+-- envelope, where the field stops rising at 1.3 times design, the inlet shear
+-- penalty starts, and the module refuses past twice design and names the bank
+-- the flow wants; flotation as attachment kinetics; the media bed as depth
+-- filtration read backwards; and the KOKORI train through all three.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A liner bank is sized in LINERS, and the
+-- sweep a designer saving money reads, taking liners out, improves and then
+-- TURNS OVER. A model whose answer improves without limit as an input is pushed
+-- has no limit in it.
+--
+-- THE TRAP THE TIER IS BUILT ON. The bubble rise velocity is on every
+-- flotation return and does not reach the cut size at all: the rate carries
+-- the gas flux over the cube of the bubble diameter. The IZOMBE capstone grades
+-- the rise velocity and the holdup it sets, and not the flotation cut, which is
+-- the one answer that reads the calibration.
+--
+-- HELD FOR LITERATURE, and neutralised by construction on the capstone: the
+-- attachment efficiency is read by no graded field (the capstone generator
+-- moves it tenfold and asserts the graded rise and holdup do not change by a
+-- single bit), and the bed is packed at the module's own reference grain, where
+-- the held inverse-cube exponent multiplies by exactly one.
+-- ============================================================================

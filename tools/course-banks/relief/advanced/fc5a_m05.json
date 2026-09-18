@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The audit splits every figure into computed, typed and held for literature. What separates the second class from the third?",
+  "options": [
+   "A typed figure arrives as an input and a held one is a constant written into the module, so only the second of the two is ever visible in the source.",
+   "A typed figure is a published chart or table the engine names the reference for; a held one is a figure the oracle cannot derive by any route at all.",
+   "A typed figure has been checked against a published value and a held one is waiting for the publication to arrive.",
+   "A typed figure moves the answer and a held one cannot, which is why nothing graded in this course reads a held figure."
+  ],
+  "answer": 1,
+  "explanation": "Both are figures nothing here derives, and the difference is what is claimed about them. Kb, Kw and KSH are inputs by design with their references named, while the Kv fit is a fit no route in this package could reproduce."
+ },
+ {
+  "prompt": "Which set is the typed one on this engine?",
+  "options": [
+   "The pool fire constants 21000.000000000000 and 34500.000000000000 with the exponent 0.820000000000.",
+   "The Kv viscosity fit and the sphere-drag correlation with its low-Reynolds cap of 240.000000000000.",
+   "The Napier boundaries 1500.000000000007 psia and 3200.000000000003 psia, and the customary intensities.",
+   "Kb for gas, Kw for liquid, KSH for steam, and the API 526 orifice table of 14 rows."
+  ],
+  "answer": 3,
+  "explanation": "The typed set is short and every member of it is a published chart or table taken as an input. The other three groups named here are all held for literature, which is a different status and gets a different sentence."
+ },
+ {
+  "prompt": "What is the difference between an oracle that is an independent derivation and one that is a transcription?",
+  "options": [
+   "An independent derivation goes red when the engine moves, because two derivations disagree; a transcription cannot, because there is only one derivation in the room.",
+   "An independent derivation is written in SI and a transcription in USC, so a packaging error is what separates them.",
+   "An independent derivation is run against the published rows and a transcription against the engine, so only one is regenerated.",
+   "An independent derivation covers every route and a transcription covers only the routes the published set already reaches."
+  ],
+  "answer": 0,
+  "explanation": "That test is what the audit table applies route by route. The march is checked against the same march solved in closed form in SI, the wetted area against a polyline round the real circle, and the point source against a quadrature of the sphere."
+ },
+ {
+  "prompt": "The pool fire pair is held for literature, yet the oracle does check something about it. What?",
+  "options": [
+   "The exponent of 0.820000000000, which falls straight out of the log ratio of two duties taken at 100 and at 1000 ft2 respectively.",
+   "The credit between the two constants, which the digest measures as a drainage factor of 1.642857142857.",
+   "The unit packaging, by checking the USC pair against the published SI pair with the exponent carried through the conversion.",
+   "The physics, since the same duty comes back from a second correlation the oracle carries in SI."
+  ],
+  "answer": 2,
+  "explanation": "A packaging error would be caught even though the constants themselves are not in question. That is a hedge on a held figure rather than a check of it, and the audit column says which it is."
+ },
+ {
+  "prompt": "The audit puts the 25 ft wetted-height limit in none of its three columns. What is it instead?",
+  "options": [
+   "It is a published boundary, so the suite pins it as a behaviour of the engine and it is unable to move without the suite going red on it.",
+   "It is an empirical fit that the oracle shares on purpose, so moving the figure in both files at once leaves the whole published set green.",
+   "It is a stated convention of this engine, and it is exported beside its own unclamped form so that the effect of it stays inspectable.",
+   "It is a caller's decision rather than a constant, since it depends on a plot elevation the engine is never told."
+  ],
+  "answer": 3,
+  "explanation": "It arrives as a note on every duty rather than as arithmetic: wetted area counts only to 25 ft above grade, and the truncation is the caller's to apply before calling."
+ },
+ {
+  "prompt": "Move the Kv fit coefficients in both the engine and its oracle and every published case still passes. How should that result be reported?",
+  "options": [
+   "As a tolerance problem, since the published rows are checked loosely enough for the change to hide inside them.",
+   "As the finding itself. A gate that stays green while the thing it guards has changed is not a gate, and the only honest response is to say so where a reader will look.",
+   "As a missing case, since the fit has no published row placed where its coefficients are worth anything.",
+   "As a reassurance, since agreement across the whole published set is what a validation suite exists to produce."
+  ],
+  "answer": 1,
+  "explanation": "The same holds for the sphere-drag correlation. Both are shared between the engine and its oracle on purpose, because no route here can derive either, and nothing graded in this course rests on either of them."
+ },
+ {
+  "prompt": "The published set places a liquid case at a Reynolds number of 92.428866. What can that case discriminate, given that the fit it sits on is shared with the oracle?",
+  "options": [
+   "The fit coefficients themselves, since the term table prints what each is worth at that Reynolds number.",
+   "The clamp at one, which would show up first at a low Reynolds number.",
+   "Engine-side drift, since it sits where the inverse-three-halves term is still worth something.",
+   "Nothing at all, since a shared fit leaves every case on that route unable to tell anything apart."
+  ],
+  "answer": 2,
+  "explanation": "A case can be worth something for one purpose and nothing for another. A change in how the engine uses the fit shows up at that row, while a change to the fit itself, made in both files, does not."
+ },
+ {
+  "prompt": "The Napier fit has published cases at 2014.700000, 3100.000000 and 1550.000000 psia. What is that placement for?",
+  "options": [
+   "So the two boundaries at 1500.000000000007 and 3200.000000000003 psia are each covered by a case beside them.",
+   "So the correction is sampled once below the threshold, once inside the enlarging band and once above the range.",
+   "So the published set carries a row at each pressure the steam equation changes its leading constant at.",
+   "So the constant is checked where moving it by a realistic amount moves the answer by more than the tolerance."
+  ],
+  "answer": 3,
+  "explanation": "A case can be present and unable to discriminate its own constant, which is a different fault from a missing case. The test is arithmetic: move the constant a realistic amount and ask whether the answer moves by more than the tolerance the case is checked at."
+ },
+ {
+  "prompt": "Three different balanced-bellows factors in the subcritical branch all return 2.658695041098 in2, to twelve decimals. What is that?",
+  "options": [
+   "Correct behaviour, because the standard uses F2 in that branch and the bellows factor has no place in it.",
+   "A defect of the kind the audit describes, since a validated input with a box has no effect on the answer.",
+   "A coincidence of the stated case, since the three factors chosen happen to fall inside one printing precision.",
+   "A clamp, since the engine holds the factor at one whenever its branch is not in use."
+  ],
+  "answer": 0,
+  "explanation": "What makes it teachable rather than confusing is that the engine says so: the call succeeds and attaches `subcritical flow uses F2, not Kb; the typed Kb was ignored`. Silence would have left a user turning a dial and inventing an explanation."
+ },
+ {
+  "prompt": "The steam superheat factor at 1.000000 gives 0.949984 in2 and at 0.830000 gives 1.144559 in2, a ratio of 1.204819277108 against a factor ratio of 1.204819277108. What does that pair of ratios say?",
+  "options": [
+   "The factor is applied twice, since the area ratio and the factor ratio are equal rather than squared.",
+   "The factor is clamped at one, since only the smaller value moved the area.",
+   "The factor divides straight into the area, so this input always moves the answer exactly.",
+   "The factor is computed rather than typed, since the engine reproduces the ratio to twelve decimals."
+  ],
+  "answer": 2,
+  "explanation": "Put it beside the bellows factor in the subcritical branch, which never moves its answer and is right not to. The two are read completely differently, and the first question to ask of any input is which kind it is."
+ },
+ {
+  "prompt": "Walk an input across its whole declared range, print the spread of the answer and compare it with the precision the answer prints at. Which outcome is the one to investigate?",
+  "options": [
+   "A spread smaller than the precision with no reason offered, because the input asserts that it matters while doing nothing.",
+   "A spread of exactly zero, because an input that cannot move an answer at all has no business being validated.",
+   "A spread much larger than the precision, because an input that dominates an answer usually hides a second effect.",
+   "A spread that changes direction inside the range, because a non-monotonic answer means two effects are being confused."
+  ],
+  "answer": 0,
+  "explanation": "A spread of zero with a stated reason is the bellows factor in a branch that is not running. A large spread is an input doing its job, and the drum holdup is the worked example: the required length moves by tens of feet and the column is not even monotonic."
+ },
+ {
+  "prompt": "The module has 22 exports, and 7 of them return a bare number and signal a refusal with NaN. Why do those 7 need separate care?",
+  "options": [
+   "A bare NaN is returned only on a valid call, so an error check on those routes would reject good answers.",
+   "A bare NaN passes an error check that looks for a property, so the number itself has to be tested.",
+   "Those 7 are the tables and the derived constant, which carry no error key.",
+   "A NaN from those routes is a warning, so the answer is still usable."
+  ],
+  "answer": 1,
+  "explanation": "12 of the exports return an object and keep the contract of either a finite result or an `error` string, 2 are published tables and 1 is a derived constant. A non-finite number with no error key is exactly what a caller's guard cannot see."
+ },
+ {
+  "prompt": "One rule covers Kd, Kb, Kc, Kw, KSH, the environment factor, the radiated fraction, the transmissivity and the blowdown discharge coefficient. What does it say?",
+  "options": [
+   "A certified coefficient is a published chart value, so it must be typed rather than computed from anything.",
+   "A certified coefficient is a fraction of an ideal, so it must be above zero and no more than one.",
+   "A certified coefficient must be finite and the refusal names it, which is what makes nine messages into one rule.",
+   "A certified coefficient always divides the answer, which is what makes nine messages into one single rule."
+  ],
+  "answer": 1,
+  "explanation": "The refusal names the offender every time, and a rule that general beats memorising nine messages. It also says what the engine believes: a coefficient cannot add capacity, so a value above one is a typing error."
+ },
+ {
+  "prompt": "A drainage answer arriving as a string is refused by name. What class of defect is that guard aimed at?",
+  "options": [
+   "The gap between a screen and a function, where a select element sending a string would buy the drainage credit silently.",
+   "A physics error, since a drained pool and an undrained one carry different constants and different exponents.",
+   "A unit error, since a boolean sent as text cannot be checked against the environment factor beside it.",
+   "A precision error, since a string compared against a boolean resolves differently at different printing precisions."
+  ],
+  "answer": 0,
+  "explanation": "The string \"false\" is truthy in JavaScript, so the duty would come back on the drained constant with nothing said. The engine's own wording is `adequate drainage must be true or false, not a string`."
+ },
+ {
+  "prompt": "Of the refusals this module can produce, exactly one carries a second key beside `error`. Which, and why does it matter?",
+  "options": [
+   "blowdown past its time limit returns the orifice it would need, and a guard reading only the error discards it.",
+   "gasVaporArea at a back pressure above the relieving pressure returns the ratio, which the caller needs to size a header.",
+   "liquidArea below the certified envelope returns the correction it computed, which is the figure the warning refers to.",
+   "selectOrifice past the largest returns `multipleOfT`, and a guard that stops at the error throws that figure away."
+  ],
+  "answer": 3,
+  "explanation": "It is a whole number of valves, worked out by a refusal that then had to be read for it. 42 refusals run across 12 of the routes and every other one of them carries the error alone."
+ }
+]

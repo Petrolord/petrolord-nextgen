@@ -95,10 +95,37 @@ for (const [wave, entry] of Object.entries(waves)) {
   const digest = fs.readFileSync(path.join(dir, 'digest.txt'), 'utf8');
   const headings = digest.match(SECTION) || [];
   if (headings.length < 10) fail(`${wave}/digest.txt prints ${headings.length} section headings, which is too few to be a whole digest`);
-  const unspelled = headings.map((h) => h.replace(/^#?\s*/, '').trim()).filter((h) => !haystack.includes(h));
+  // A WAVE MAY BUILD ITS OWNER CLAUSE RATHER THAN TYPE IT, AND THAT IS STRICTER
+  // RATHER THAN LOOSER. FC9's clauses were 25 hand-typed string literals with
+  // nothing linking them to structure.py, and four of them named a module that
+  // does not teach the section: one named a tier that does not either, which is
+  // a forward leak waiting to happen. Its generator now RENDERS the clause from
+  // structure.py and REFUSES at build time on an unknown tier, an unknown module
+  // or a lesson that is not in the module beside it. The cost is that the whole
+  // heading string is no longer a literal anywhere, so the test below stopped
+  // finding 23 of them.
+  //
+  // The point of this check is that a heading comes out of a COMMITTED GENERATOR
+  // rather than out of a hand-edited digest, and a heading whose TITLE is spelled
+  // by a generator that also carries a clause builder still satisfies that. So a
+  // heading is spelled when the generator carries it whole, or when the generator
+  // carries its title AND builds section headings AND builds owner clauses. All
+  // three are required: a generator that does neither cannot clear anything.
+  const CLAUSE_TAIL = /\s*\((?:owned|shared|binding)\b[^)]*\)\s*$/i;
+  const buildsHeadings = /# SECTION \$\{/.test(haystack);
+  const buildsClauses = /\(owned by \$\{/.test(haystack);
+  let assembled = 0;
+  const unspelled = headings.map((h) => h.replace(/^#?\s*/, '').trim()).filter((h) => {
+    if (haystack.includes(h)) return false;
+    if (!buildsHeadings || !buildsClauses) return true;
+    const title = h.replace(/^SECTION\s+\d+\s*:\s*/i, '').replace(CLAUSE_TAIL, '').trim();
+    if (title && title !== h && haystack.includes(title)) { assembled += 1; return false; }
+    return true;
+  });
   const allowedHeadings = entry.headingsNoGeneratorSpells || 0;
   console.log(`  ok   digest.txt: ${headings.length} section heading(s), ${headings.length - unspelled.length} spelled by `
-    + `${generators.length} committed generator(s)`);
+    + `${generators.length} committed generator(s)`
+    + (assembled ? `, ${assembled} of them as a generator-written TITLE with an owner clause the generator BUILDS from the curriculum rather than types` : ''));
   if (unspelled.length !== allowedHeadings) {
     fail(`${wave}/digest.txt has ${unspelled.length} section heading(s) no committed generator spells, `
       + `and waves.json records ${allowedHeadings}. The headings: ${unspelled.map((h) => h.slice(0, 60)).join(' | ')}`);

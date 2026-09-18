@@ -1,0 +1,14 @@
+#!/bin/sh
+# TZ and LC_ALL are pinned so the digest is byte-identical wherever it is built.
+# Build THROUGH A TEMP FILE, never straight into the file the gates read:
+#   sh build_digest.sh > digest.tmp && mv digest.tmp digest.txt
+# The generator writes NOTHING to stdout if any label-and-call, measurement or
+# pin assertion fails, so a failed build leaves the previous digest intact.
+#
+# THIS FILE MUST BE EXECUTABLE. FC4 shipped a build script with mode 644 and its
+# reproducibility gate invoked it as ./build_digest.sh, so the gate had never once
+# run and nobody knew. finalise.sh asserts the mode of this file before it uses
+# it, and the wave gate asserts it again.
+export TZ=UTC
+export LC_ALL=C
+exec node /root/fc-wip-corrosion/fc9_dump.mjs

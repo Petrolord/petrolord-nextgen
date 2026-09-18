@@ -1,0 +1,28 @@
+-- ============================================================================
+-- FC8 PROFESSIONAL DEEP SEED: Metering, Control Valves & Storage,
+-- intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE CONTROL VALVE AND ITS CHOKING BOUNDARY. The liquid
+-- valve marched down its outlet pressure until it chokes; the allowable drop
+-- and the critical pressure ratio factor that sets it; the cavitation index
+-- computed on the drop the valve uses, its regime ladder and the refusal that
+-- makes the ladder run at all; flashing as a different problem; the gas ratio
+-- and the two thirds floor; the style table and the certified figure that
+-- replaces it; authority and the characteristic it chooses; the noise screen
+-- the stream power caps and floors; and a travel verdict over checks that ran.
+--
+-- THE TRAP THE TIER IS BUILT ON. Past the boundary a larger coefficient buys
+-- nothing, and a sizing on the stated drop undersizes the valve while looking
+-- entirely reasonable. The capstone valve is CHOKED on purpose.
+--
+-- STATED SCREENS, taught and never graded: the cavitation thresholds, the
+-- authority boundaries, the noise bands and the style table. The capstone
+-- states its own certified FL, so no graded field reads the table, and it
+-- grades the index and the authority as numbers and never the words laid over
+-- them. The tier was audited question by question against the digest and the
+-- engine before seeding (AUDIT-intermediate.md).
+-- ============================================================================

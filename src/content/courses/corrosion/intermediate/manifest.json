@@ -1,0 +1,362 @@
+{
+ "app_slug": "corrosion",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-wetting-regime",
+   "title": "The Wetting Regime",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-steel-corrodes-where-it-is-wet",
+     "title": "Steel corrodes where it is wet",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-water-cut-is-read-in-one-regime",
+     "title": "The water cut is read in one regime",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-zero-by-assumption",
+     "title": "A zero by assumption",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-largest-lever-is-a-dropdown",
+     "title": "A lever that is a dropdown",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-efficiency-is-not-protection",
+   "title": "Efficiency Is Not Protection",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-two-inputs-not-one",
+     "title": "Two inputs where people expect one",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-time-average-eats-the-wall",
+     "title": "The time average eats the wall",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-metal-loss-ratio",
+     "title": "The metal loss ratio",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-hundred-percent-is-arithmetic",
+     "title": "A hundred percent is arithmetic",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-every-clamp-is-named",
+     "title": "Every clamp is named",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-wall-shear",
+   "title": "Wall Shear",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-what-the-shear-is-for",
+     "title": "What the shear is for",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-this-modules-own-friction-factor",
+     "title": "This module has its own friction factor",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-switch-that-jumps",
+     "title": "A switch that jumps",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-thresholds-carry-no-source",
+     "title": "The thresholds carry no source",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-shear-acts-on-the-rate",
+   "title": "The Shear Acts on the Rate",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-credit-is-removed",
+     "title": "The credit is removed",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-credited-rate-beside-it",
+     "title": "The credited rate beside it",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-ratio-is-pure-arithmetic",
+     "title": "The ratio is pure arithmetic",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-shear-first-or-no-rate-at-all",
+     "title": "Shear first, or no rate at all",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-allowance",
+   "title": "The Allowance",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-an-allowance-divided-by-a-rate",
+     "title": "An allowance divided by a rate",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-has-already-gone",
+     "title": "What has already gone",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-zero-rate-is-not-a-pass",
+     "title": "A zero rate is not a pass",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-three-apps-one-word-no-link",
+     "title": "Three apps, one word, no link",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-integrity-read-narrowly",
+     "title": "Integrity, read narrowly",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-which-film-governs",
+   "title": "Which Film Governs",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-a-ratio-that-needs-no-pressure",
+     "title": "A ratio that needs no pressure",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-chemistry-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-four-answers-and-one-refusal",
+     "title": "Four answers and one refusal",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-chemistry-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-threshold-comparison-alone",
+     "title": "The threshold comparison, alone",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "fc-chemistry-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "fc-chemistry-explorer",
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

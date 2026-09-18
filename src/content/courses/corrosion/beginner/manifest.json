@@ -1,0 +1,358 @@
+{
+ "app_slug": "corrosion",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-this-screen-answers-and-what-it-withdrew",
+   "title": "What This Screen Answers, and What It Withdrew",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-one-mechanism-one-rate",
+     "title": "One mechanism, one rate",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-region-that-was-withdrawn",
+     "title": "The region that was withdrawn",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-chemistry-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-a-uniform-rate-is-not",
+     "title": "What a uniform rate cannot tell you",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-numbers-with-no-source",
+     "title": "The numbers with no source",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-units-this-engine-speaks",
+     "title": "The units this engine speaks",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "fc-chemistry-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-what-is-in-the-stream",
+   "title": "What Is in the Stream",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-partial-pressure-from-a-mole-fraction",
+     "title": "Partial pressure from a mole fraction",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-chemistry-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-fugacity-and-the-cap-it-is-held-at",
+     "title": "Fugacity, and the cap it is held at",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-chemistry-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-which-quantity-drives-what",
+     "title": "Which quantity drives what",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-chemistry-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-h2s-has-no-fugacity-correction",
+     "title": "H2S has no fugacity correction here",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-chemistry-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-two-resistances-in-series",
+   "title": "Two Resistances in Series",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-a-reaction-rate-and-a-transport-rate",
+     "title": "A reaction rate and a transport rate",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-why-the-combination-is-below-both",
+     "title": "Why the combination is below both",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-velocity-and-line-size-enter-here",
+     "title": "Velocity and line size enter here",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-which-one-is-holding-it-back",
+     "title": "Which one is holding it back",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-an-absent-velocity-is-not-infinite-capacity",
+     "title": "An absent velocity is not unlimited capacity",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-protective-film",
+   "title": "The Protective Film",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-hotter-is-not-always-faster",
+     "title": "Hotter is not always faster",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-an-onset-that-moves",
+     "title": "An onset that moves",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-factor-is-clamped-at-one",
+     "title": "The factor is clamped at one",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-where-the-factor-belongs-is-unsettled",
+     "title": "Where the factor belongs is unsettled",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-ph-and-the-water",
+   "title": "The pH and the Water",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-a-correction-relative-to-a-reference",
+     "title": "A correction relative to a reference",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-one-decade-per-two-units",
+     "title": "One decade per two units",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-below-the-reference-it-refuses",
+     "title": "Below the reference it refuses",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-oil-wet-is-a-regime",
+     "title": "Oil wet is a regime",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-one-screen-end-to-end",
+   "title": "One Screen, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-case-the-studio-ships-with",
+     "title": "The case the studio ships with",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-chemistry-explorer",
+      "fc-rate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-reading-the-summary-rail",
+     "title": "Reading the summary rail",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-the-binding-constraint-is-for",
+     "title": "What the binding constraint is for",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "fc-chemistry-explorer",
+      "fc-rate-explorer",
+      "fc-inhibitor-integrity-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

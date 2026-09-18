@@ -1,0 +1,27 @@
+-- ============================================================================
+-- FC8 EXPERT DEEP SEED: Metering, Control Valves & Storage, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE TANK. One geometry and its three answers; the shell
+-- by the one-foot method at two conditions, and the light product that makes
+-- the water test govern; normal venting and the one predicate that says which
+-- direction governs; the fire case, where the duty is computed and the vent is
+-- WITHHELD BY NAME; evaporative losses and what control saves; and the whole
+-- register of what these three engines do not carry.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The engine refuses the emergency vent
+-- capacity because the two plausible forms of the missing relation differ by a
+-- factor of about 24, and it exports that refusal as a named constant.
+--
+-- WITHHELD, taught as a limit and never graded in any tier: the relation that
+-- turns a fire duty into a required vent capacity. The capstone grades a shell
+-- thickness, a crossover gravity, an inbreathing, a crossover draw rate, a
+-- working capacity and a control saving, and states every thermal factor, the
+-- allowable stresses, the minimum plate and a measured annual loss so that no
+-- graded field rests on an engine default or on AP-42. The tier was audited
+-- question by question against the digest and the engine before seeding
+-- (AUDIT-advanced.md).
+-- ============================================================================

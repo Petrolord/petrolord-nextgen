@@ -1,0 +1,116 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC7 Associate m03, The Droplets. Written from digest.txt Section 4: the
+# log-normal in droplet volume, the grid it is laid on, the spread nobody
+# measured, and the median a bin set has to reproduce.
+
+q(0, "How does this module describe the oil carried in the water?",
+ "As a log-normal distribution in droplet volume, given by a median diameter d50 and a log standard deviation sigma, discretised into volume bins.",
+ ["As a log-normal distribution in droplet count, from which the volume in each size is recovered by weighting each count by the cube of the diameter.",
+  "As a set of measured bins supplied by the caller, since no two produced waters carry the same shape of droplet population.",
+  "As a concentration and a single characteristic droplet size, which is all a grade efficiency needs to be evaluated at."],
+ "Two inputs describe the whole population, and the module cuts it into volume bins so a grade efficiency can be integrated against it exactly. A single characteristic size would throw away the spread, which is the input that moves the answer hardest."),
+
+q(2, "Why is droplet volume the right basis for this distribution rather than droplet count?",
+ "A removal is a fraction of the oil and the oil is a volume, and a distribution in counts would be dominated by the finest droplets, which carry almost none of it.",
+ ["A count distribution cannot be normalised, because the number of droplets in a stream depends on the sample volume the laboratory happened to take.",
+  "A volume basis is what makes the distribution log-normal, since a count distribution of the same population would have no closed form at all.",
+  "The devices in this module remove droplets one at a time, so the count is what falls and the volume is what the caller wants reported."],
+ "A very large number of very small droplets carries very little oil, so counts would put the weight of the description where the oil is not. The engine names the basis of each figure it reports so a reader never has to guess."),
+
+q(1, "The UZERE inlet is d50 26 micron at sigma 0.8, on the module's own grid of 60 bins spanning 4 sigma either side. Where does that grid reach?",
+ "The coarsest bin reaches 637.845785 micron and the finest starts at 1.059817303438 micron.",
+ ["The coarsest bin reaches 286.602586 micron and the finest starts at 1.059817303438 micron.",
+  "The coarsest bin reaches 637.845785 micron and the finest starts at 26.000000 micron, which is where the median sits.",
+  "The coarsest bin reaches 1419.551901 micron and the finest 26.000000."],
+ "286.602586 micron is the coarsest bin of the same inlet at a span of 3 sigma and 1419.551901 is the coarsest at 5. The span of the grid is what sets both edges, and the median sits between them rather than at one of them."),
+
+q(3, "Ask the UZERE bin set for its own volume median and it returns 26.000000 micron against a typed 26. What kind of evidence is that?",
+ "An identity, because the volume median of a log-normal distribution is its own d50, so the bin set has shown it is what it claims to be.",
+ ["A calibration, because the edges of the bins were placed exactly where they had to be for the median of the bin set to return the figure the caller typed in.",
+  "A published comparison, because a log-normal fit to measured produced water is where the relation between the two comes from.",
+  "A coincidence of this particular grid, since a coarser or finer set of bins would return a median near 26 rather than exactly it."],
+ "It is a mathematical fact about the distribution rather than an observation about produced water, it needs no published data, and it holds on every grid in the sweep from 30 bins to 600."),
+
+q(2, "Move the bin count over 30, 60, 120 and 600 on the UZERE inlet. What moves?",
+ "Neither the median nor the truncated tail moves, because the tail is a property of how far the grid reaches rather than of how finely it is divided.",
+ ["The median holds at 26.000000 micron on every row and the truncated tail falls steadily as the bins are added, because a finer grid describes more of the same distribution.",
+  "Both move a little, and the module reports the grid back on the answer so that the reader knows which resolution produced the figure.",
+  "The truncated tail holds at 0.000063372072 and the median drifts, which is the quantisation a coarse grid puts into a bin median."],
+ "The median reads 26.000000 and the tail reads 0.000063372072 on all four rows. Bin count is the input an engineer is most tempted to raise when an answer looks suspicious, and raising it here moves neither of those two figures."),
+
+q(0, "Hold the bin count and change the span from 3 sigma to 6. What does the truncated tail do?",
+ "It falls from 0.002699934563 to 0.000000001980, because a wider grid reaches further into the distribution and throws less of it away.",
+ ["It rises from 0.000000001980 to 0.002699934563, because a wider grid puts more of its bins out near the edges of the distribution where the volume in each one is thin.",
+  "It holds at 0.000063372072 throughout, which is the analytic tail of this distribution and is a property of the spread rather than of the grid it is laid on.",
+  "It falls to zero at a span of 6 sigma, which is why the module holds its own floor at 3 sigma and refuses below it."],
+ "The tail is the volume outside the span, so reaching further leaves less of it. The coarsest bin runs from 286.602586 micron to 3159.270855 across those same four rows, and 0.000063372072 is the tail at the default span of 4."),
+
+q(1, "What happens to the volume the grid leaves outside its span?",
+ "The normalisation absorbs it, so the bins always sum to the whole, and the module reports how much was absorbed.",
+ ["It is dropped, so the bins sum to slightly less than the whole, which is why the truncated tail is reported beside the answer.",
+  "It is placed in the two edge bins, which is why the coarsest bin of a narrow grid carries more volume than a wide one does.",
+  "It is refused when it grows past a declared fraction, since a grid that throws away that much of the oil cannot be integrated against."],
+ "Reporting the tail is what lets a reader judge the grid. At the default span the truncated fraction is 0.000063372072, and the grid is reported back on the answer rather than kept as an implementation detail."),
+
+q(2, "On the bin count sweep the digest divides the reported tail by twice the module's own cdf below the span edge, and the column reads 1.000000000000 on every row. What does that rule out?",
+ "That the truncated tail is a binning artefact, since it is exactly the analytic tail of the distribution instead.",
+ ["That the bin count moves the answer, since a column of ones across four resolutions is what an invariance looks like.",
+  "That the module takes its cdf on the diameter rather than the volume, putting the tail on the wrong variable.",
+  "That the bins have been normalised, since a set of bins that did not sum to the whole would leave that column somewhere other than one."],
+ "The check compares the module against a mathematical fact about the distribution it says it is using. A grid artefact would show up in that column at once as a departure from one."),
+
+q(3, "One device at a 12 micron cut, one water, and only the spread of the droplets moved. The removal runs from 84.480253 percent at sigma 0.5 to 68.402514 at sigma 1.5. Why does a wider spread treat worse?",
+ "A wide population puts oil volume into droplets far below the cut size, and those go straight through, while the coarse end it also reaches was being caught anyway.",
+ ["A wide population has a lower median, so the same cut size sits further up the distribution and the device is asked for more than it can give.",
+  "A wide population carries more droplets in total at the same concentration, so the device has more collisions to make in the same residence time.",
+  "A wide population is described on a grid reaching further out, so more of its volume falls in the truncated tail and is never presented to the device."],
+ "The median was held at 26 micron and the cut size at 12 throughout, and the grid is the module's own default on every row. The two ends of a widening distribution do not cancel: the coarse end has nothing left to give and the fine end passes."),
+
+q(0, "Read the outlet median column of that same sigma sweep: 15.793311 micron at sigma 0.5 and 5.944722 at sigma 1.5. What is it telling a designer?",
+ "The widest row leaves the hardest water in the table for whatever device stands downstream, and it came out of the same equipment as every other row.",
+ ["The widest row leaves the easiest water downstream, since a fine outlet median means the coarse oil has already been taken out.",
+  "The outlet median is what the next device's cut size should be set to, which is how a train is sized stage by stage.",
+  "The outlet median falls because the concentration fell, so the two columns are the same fact reported in two units."],
+ "A finer outlet population is a harder duty for any device, because a cut size acts on sizes rather than on mass. The concentration and the median are different facts, and a device that removes a great deal can still leave a fine population behind."),
+
+q(1, "Where does this module warn on the droplet spread, and where does it stop answering?",
+ "It warns outside 0.5 to 1 and refuses above 2, because a wider spread than that is not what produced water carries.",
+ ["It warns outside 0.5 to 1 and refuses above 1.5, which is the widest row the digest sweeps and the last one that answers.",
+  "It warns above 1 only, since a tight distribution is always within what the log-normal form can describe.",
+  "It refuses outside 0.5 to 1, because a spread outside the customary band would carry volume beyond the span the grid reaches."],
+ "The sigma of 1.5 answers and carries the warning, which is the ordinary pattern here: doubt is reported and the number still arrives, while a value the method has nothing to say about is declined by name."),
+
+q(2, "What floors does this module hold under the droplet grid itself?",
+ "It will not describe the distribution on fewer than 10 bins, nor span fewer than 3 sigma either side of the median.",
+ ["It will not describe the distribution on fewer than 30 bins, which is the coarsest row of the bin count sweep.",
+  "It holds no floor under either, since the grid is reported back on every answer and a reader can judge it.",
+  "It will not span fewer than 4 sigma either side, which is the default the module uses and the span its tail is quoted at."],
+ "Both floors are declared constants, so a reader can find them in one place. 30 bins and a span of 4 are sweep rows and defaults rather than limits."),
+
+q(3, "A reader has a median droplet size from a laboratory and no measurement of the spread at all. What is the honest response?",
+ "Run the population at the low end and the high end of what is plausible and look at both answers.",
+ ["Use the module default, since a default that ships with the engine is the value most produced waters sit at.",
+  "Report the concentration alone, since an answer resting on a guessed input is worth less than no answer.",
+  "Take the spread from the outlet median of an existing device on the same stream, which fixes it by inversion."],
+ "If the design decision is the same at both ends, the missing measurement does not matter. If it is not, the measurement has justified its own cost, which is a far stronger argument for a droplet sizing campaign than any assertion about one spread."),
+
+q(0, "Why does this module discretise the distribution into bins at all rather than carrying it as a curve?",
+ "So that a device grade efficiency can be multiplied against the oil volume in each bin and summed, which makes the removal a finite sum over a grid the module reports back.",
+ ["So that the outlet of one stage can be handed to the next as a list of numbers, which is the only way a train of devices can be assembled.",
+  "So that the truncated tail can be measured, which is the check that proves the distribution is log-normal in volume.",
+  "So that the median can be interpolated across the bin it falls in, which a continuous curve would not allow."],
+ "The integral is what a removal is, and the bins are what make it exact on a stated grid. The outlet distribution and the reported median are consequences of having a grid rather than reasons for having one."),
+
+q(1, "Which of these would tell a reader that the bin set is not what it claims to be?",
+ "A volume median drifting away from the typed d50 as the bin count is raised.",
+ ["A truncated tail that falls as the span is widened, since the analytic tail of a log-normal does not depend on the grid.",
+  "A removal that falls as the droplet spread is widened at a fixed cut size, since the device has not moved.",
+  "A coarsest bin that grows as the span is widened, since the grid would then be reaching past the distribution it describes."],
+ "The median identity is the check with nothing behind it but arithmetic. The other three are the module behaving as the sweeps in this section say it does."),
+
+emit(Q, '/root/wt-fc7-nextgen/tools/course-banks/producedwater/beginner/fc7b_m03.json', label='fc7b_m03', expect_n=15)
+finish()

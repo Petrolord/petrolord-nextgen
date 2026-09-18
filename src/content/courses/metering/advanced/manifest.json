@@ -1,0 +1,319 @@
+{
+ "app_slug": "metering",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01",
+   "title": "The tank, and the geometry three questions share",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "Why the shell, the venting and the losses are one module",
+     "order": 1,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "Capacity, working capacity and the exact barrel",
+     "order": 2,
+     "est_minutes": 10,
+     "panels": [
+      "fc-venting-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "Nominal against working, on one tank",
+     "order": 3,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "A fill height that cannot be negative",
+     "order": 4,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02",
+   "title": "The shell, and which of three things governs",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "The one-foot method, at two conditions",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "A light product makes the water test govern",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "The minimum plate is a stated input",
+     "order": 3,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "Course by course, bottom to top",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05",
+     "title": "The crossovers, found by bisecting a word",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03",
+   "title": "Normal venting, and which direction governs",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "Thermal and movement, in each direction",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [
+      "fc-venting-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "One predicate, computed once",
+     "order": 2,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "Vacuum is the case that destroys tanks",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "The factors the engine states and does not cite",
+     "order": 4,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04",
+   "title": "The fire case, and the vent that is withheld",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "The wetted area, and the height that counts",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [
+      "fc-withheld-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "The heat input bands, edge by edge",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "Why the vent capacity is refused by name",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-withheld-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 520,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "A factor of about 24, and what it would mean",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05",
+     "title": "What to do instead, and what never to do",
+     "order": 5,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05",
+   "title": "Losses, and what control saves",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "The same arithmetic answers money and emissions",
+     "order": 1,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "Standing loss and working loss",
+     "order": 2,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "A product that boils at ambient is refused",
+     "order": 3,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "An input that never fed anything",
+     "order": 4,
+     "est_minutes": 8,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 440,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06",
+   "title": "The register, the refusals and the counts",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01",
+     "title": "Fifteen things these engines do not carry",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-withheld-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02",
+     "title": "Every refusal, and why a refusal is the useful answer",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 490,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03",
+     "title": "A count with no tree and no rule is not checkable",
+     "order": 3,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04",
+     "title": "What you may quote, and what you may never quote",
+     "order": 4,
+     "est_minutes": 10,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

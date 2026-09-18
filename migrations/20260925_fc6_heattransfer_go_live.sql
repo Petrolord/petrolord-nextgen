@@ -197,13 +197,19 @@ begin
 
 
   -- ------------------------------------------- the held-for-literature gates
+  -- A FRAGMENT IS MATCHED AS A LITERAL SUBSTRING WITH strpos, NEVER WITH LIKE.
+  -- In LIKE an underscore is a one-character wildcard, so the fragment fan_hp
+  -- would also match a key with any other character in that place. The
+  -- generator's own Python guard tests a literal substring, and strpos is
+  -- the same test. FC5's dry run caught the LIKE form refusing a field that
+  -- names no held quantity (its kw_ against a kwm).
   -- ON THE NAME. A graded field that NAMES a quantity this module holds for the
   -- literature is refused before anything is computed from it.
   select count(*), string_agg(c.tier || '/' || (f->>'key'), ', ')
     into v_graded, v_names
     from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f,
          unnest(array['bundle_diameter', 'shell_diameter', 'fan_bhp', 'fan_hp', 'motor_hp', 'acfm', 'air_density', 'reynolds', 'prandtl', 'nusselt', 'film_coefficient', 'cross_flow_f']) frag
-   where c.app_slug = 'heattransfer' and (f->>'key') like '%' || frag || '%';
+   where c.app_slug = 'heattransfer' and strpos(f->>'key', frag) > 0;
   if v_graded <> 0 then
     raise exception 'FC6 go-live refused: % graded field(s) name a quantity held for the literature: %', v_graded, v_names;
   end if;
@@ -212,7 +218,7 @@ begin
     into v_graded, v_names
     from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f,
          unnest(array['bundle diameter', 'shell diameter', 'fan horsepower', 'motor horsepower', 'cross-flow correction', 'reynolds number', 'prandtl number', 'nusselt number', 'dittus', 'sieder', 'air density']) frag
-   where c.app_slug = 'heattransfer' and lower(f->>'label') like '%' || frag || '%';
+   where c.app_slug = 'heattransfer' and strpos(lower(f->>'label'), frag) > 0;
   if v_graded <> 0 then
     raise exception 'FC6 go-live refused: % graded field label(s) name a quantity held for the literature: %', v_graded, v_names;
   end if;

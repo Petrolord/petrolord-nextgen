@@ -1,0 +1,126 @@
+{
+ "enginesHead": "55431d7123237e16435a5d3b9ccaf22912125d0e",
+ "suiteRef": "e63ed83bc",
+ "closure": [
+  {
+   "path": "__tests__/facilities.controlvalve.test.js",
+   "canonicalBlob": "d56048381b340d59b5016a4478c8f79dade0e5af",
+   "vendoredBlob": "d56048381b340d59b5016a4478c8f79dade0e5af",
+   "canonicalMd5": "3106384a541cb56058fa391d62994bac",
+   "vendoredMd5": "3106384a541cb56058fa391d62994bac",
+   "suiteBlob": "d56048381b340d59b5016a4478c8f79dade0e5af",
+   "identical": true
+  },
+  {
+   "path": "__tests__/facilities.tanksmetering.test.js",
+   "canonicalBlob": "5cb08b488d0c48e21f438a5c2a6627cf0949c30c",
+   "vendoredBlob": "5cb08b488d0c48e21f438a5c2a6627cf0949c30c",
+   "canonicalMd5": "e3f007ef486233f85b4a1fabd0064f7c",
+   "vendoredMd5": "e3f007ef486233f85b4a1fabd0064f7c",
+   "suiteBlob": "5cb08b488d0c48e21f438a5c2a6627cf0949c30c",
+   "identical": true
+  },
+  {
+   "path": "engines/facilities/controlValve.js",
+   "canonicalBlob": "840f5fe1854afc4899d0e1d8aa4135fe5624204d",
+   "vendoredBlob": "840f5fe1854afc4899d0e1d8aa4135fe5624204d",
+   "canonicalMd5": "84cbb96c1a2abe73e3bf379f9c47d7dd",
+   "vendoredMd5": "84cbb96c1a2abe73e3bf379f9c47d7dd",
+   "suiteBlob": "840f5fe1854afc4899d0e1d8aa4135fe5624204d",
+   "identical": true
+  },
+  {
+   "path": "engines/facilities/metering.js",
+   "canonicalBlob": "dd01f3b194061e41fef29e6a3e3ffb2b067dbd6a",
+   "vendoredBlob": "dd01f3b194061e41fef29e6a3e3ffb2b067dbd6a",
+   "canonicalMd5": "aa038e19d8601c602531800e6ceaa083",
+   "vendoredMd5": "aa038e19d8601c602531800e6ceaa083",
+   "suiteBlob": "dd01f3b194061e41fef29e6a3e3ffb2b067dbd6a",
+   "identical": true
+  },
+  {
+   "path": "engines/facilities/storageTank.js",
+   "canonicalBlob": "04483891a8985fa0c7b494bb5b08ea22aea7ccfd",
+   "vendoredBlob": "04483891a8985fa0c7b494bb5b08ea22aea7ccfd",
+   "canonicalMd5": "1929b243d142a9df787f3ca7587de042",
+   "vendoredMd5": "1929b243d142a9df787f3ca7587de042",
+   "suiteBlob": "04483891a8985fa0c7b494bb5b08ea22aea7ccfd",
+   "identical": true
+  },
+  {
+   "path": "test-data/facilities/goldens/controlvalve_cases.json",
+   "canonicalBlob": "731eb1a2b89ecbae61aa1ff10a526bb2f2f69f9d",
+   "vendoredBlob": "731eb1a2b89ecbae61aa1ff10a526bb2f2f69f9d",
+   "canonicalMd5": "19067d8dee67e62ebc7d13fbb8c3ca23",
+   "vendoredMd5": "19067d8dee67e62ebc7d13fbb8c3ca23",
+   "suiteBlob": "731eb1a2b89ecbae61aa1ff10a526bb2f2f69f9d",
+   "identical": true
+  },
+  {
+   "path": "test-data/facilities/goldens/tanksmetering_cases.json",
+   "canonicalBlob": "477be94911688c5a53190348c4e17f64be2620fd",
+   "vendoredBlob": "477be94911688c5a53190348c4e17f64be2620fd",
+   "canonicalMd5": "cf723583b689925a15e35269740839a9",
+   "vendoredMd5": "cf723583b689925a15e35269740839a9",
+   "suiteBlob": "477be94911688c5a53190348c4e17f64be2620fd",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/facilities/FINDINGS-metering.md",
+   "canonicalBlob": "dedda0063dfb007a230a73bff3bc6fb22500c5d6",
+   "vendoredBlob": "dedda0063dfb007a230a73bff3bc6fb22500c5d6",
+   "canonicalMd5": "8afb331a2b3988a0c6a28d1d21a1a3f9",
+   "vendoredMd5": "8afb331a2b3988a0c6a28d1d21a1a3f9",
+   "suiteBlob": "dedda0063dfb007a230a73bff3bc6fb22500c5d6",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/facilities/oracle_controlvalve.py",
+   "canonicalBlob": "41deb10defb69f1887bedbd555efc3bf911231ea",
+   "vendoredBlob": "41deb10defb69f1887bedbd555efc3bf911231ea",
+   "canonicalMd5": "38a062692735b40983932a7426f69041",
+   "vendoredMd5": "38a062692735b40983932a7426f69041",
+   "suiteBlob": "41deb10defb69f1887bedbd555efc3bf911231ea",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/facilities/oracle_tanksmetering.py",
+   "canonicalBlob": "3b37dbbf3365fad58a9043a6e24e76aafefb33f8",
+   "vendoredBlob": "3b37dbbf3365fad58a9043a6e24e76aafefb33f8",
+   "canonicalMd5": "fb705de19f0ed23f213ace095fd26962",
+   "vendoredMd5": "fb705de19f0ed23f213ace095fd26962",
+   "suiteBlob": "3b37dbbf3365fad58a9043a6e24e76aafefb33f8",
+   "identical": true
+  }
+ ],
+ "edges": [
+  [
+   "__tests__/facilities.tanksmetering.test.js",
+   "engines/facilities/metering.js"
+  ],
+  [
+   "__tests__/facilities.tanksmetering.test.js",
+   "engines/facilities/storageTank.js"
+  ],
+  [
+   "__tests__/facilities.tanksmetering.test.js",
+   "test-data/facilities/goldens/tanksmetering_cases.json"
+  ],
+  [
+   "__tests__/facilities.controlvalve.test.js",
+   "engines/facilities/controlValve.js"
+  ],
+  [
+   "__tests__/facilities.controlvalve.test.js",
+   "test-data/facilities/goldens/controlvalve_cases.json"
+  ],
+  [
+   "tools/validation/facilities/oracle_tanksmetering.py",
+   "test-data/facilities/goldens/tanksmetering_cases.json"
+  ],
+  [
+   "tools/validation/facilities/oracle_controlvalve.py",
+   "test-data/facilities/goldens/controlvalve_cases.json"
+  ]
+ ]
+}

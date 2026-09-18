@@ -1,0 +1,114 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC7 Expert m04, The band and the balance. Digest sections 5, 18 and 19.
+
+q(0, "Stokes and the full drag balance are asked the same question at 5, 20, 60, 120, 240 and 500 micron in the UZERE water. What does the ratio between them do down that table?",
+ "It grows with the Reynolds number on every row, from 1.000088 at Reynolds 0.000020 to 1.785576 at Reynolds 19.883778.",
+ ["It holds at one across the rows inside the band and then jumps on the two rows outside it, which is where the module raises its warning.",
+  "It falls as the droplet grows, because the full drag balance overtakes Stokes once the Reynolds number has passed one.",
+  "It grows with the droplet diameter and is independent of the Reynolds number, which the module reports as a separate field."],
+ "THE DEPARTURE GROWS WITH THE REYNOLDS NUMBER, every row of that table. That is the whole content of the band.")
+
+q(2, "Outside the creeping flow band Stokes overstates the rise velocity. What does that do to a cut size, and why does the module warn rather than leave it to the reader?",
+ "It UNDERSTATES the cut size, so a device looks as though it catches finer droplets than it does, which is the optimistic direction.",
+ ["It OVERSTATES the cut size, so the removal computed from that cut is too low and the design quietly carries an unstated margin nobody asked for.",
+  "It leaves the cut size exactly where it was and moves only the Reynolds number that the device reports on the same return beside it.",
+  "It understates the cut size and the removal together, so the two errors cancel out of the outlet concentration."],
+ "A pessimistic model gets questioned. An optimistic one gets approved. That is why this one is stated as a number rather than left to judgement.")
+
+q(1, "At 120 micron the two routes already differ by 5.937008 percent, and the module still reports that row as inside its band. How is that consistent?",
+ "The band is stated on the Reynolds number, which is 0.274873 on that row, and not on the size of the gap between the two routes.",
+ ["The gap falls inside the tolerance this module applies between its two rise velocity routes, which is why the row is marked in band.",
+  "The band is stated on the droplet diameter, and 120 micron sits under the diameter Stokes is held to here.",
+  "The density difference of the UZERE water keeps the rise velocity under the limit the warning is stated on."],
+ "The module states Stokes to Reynolds 1 and warns above it. At 500 micron the Reynolds number is 19.883778 and Stokes overstates the rise by 78.557612 percent.")
+
+q(3, "Why is the agreement between Stokes and the full drag balance inside the band evidence of anything at all?",
+ "Stokes is closed form and the balance is a damped iteration on the Schiller-Naumann drag coefficient, so the two are different arguments rather than two copies of one.",
+ ["The balance is solved at a very much finer tolerance than the closed form is written to, so its answer is the reference figure that the closed form is then checked against.",
+  "The two routes share one drag coefficient and differ only in how each of them solves for the velocity.",
+  "The balance is the route this module actually uses, and the Stokes figure is printed only for the comparison."],
+ "Two copies of one calculation always agree. Two arguments agreeing is a result.")
+
+q(1, "For the terminal rise velocity the oracle bisects on the drag residual while the engine runs a damped iteration. Why does that pairing catch more than a second copy would?",
+ "Bisection brackets a sign change and halves the interval, so it shares no step with an iteration walking towards a fixed point, and an iteration that converged to the wrong place would land somewhere else.",
+ ["Bisection is exact where an iteration is approximate, so any disagreement between them is the engine's error alone.",
+  "The oracle runs at 400000 samples on this route, so its answer carries far less noise than the engine's does.",
+  "The oracle uses the Schiller-Naumann coefficient where the engine uses 24 over the Reynolds number, so the two drag laws are independent."],
+ "Bisection and damped iteration are different numerical animals, which is the whole reason the golden is worth reading.")
+
+q(0, "The oracle solves the creeping flow rise as a force balance, with the drag coefficient written as 24 over the Reynolds number and the two force expressions typed out. What does that buy?",
+ "There is no place in that route for an 18 to be typed, so bending the engine from 18 to 20 is caught even when the same bend is attempted in the oracle.",
+ ["It removes any need for a published rise velocity at all, a force balance written out in full being an identity of the kind that needs no source behind it.",
+  "It reproduces the engine's closed form exactly, so any difference at all between them is a defect.",
+  "It lets the oracle report a Reynolds number as well, which a closed form route cannot do."],
+ "The 18 in the Stokes group is measured out of the engine rather than typed, and it comes to 18.000000000000 on the UZERE water.")
+
+q(3, "apiSeparator, plateInterceptor and hydrocyclone come out at 3.75e-14, 4.24e-14 and 3.38e-13 against the golden. What is being tolerated on those three rows?",
+ "Nothing. Both sides are exact arguments about one geometry, so the gap is floating point noise and anything materially larger would be a real disagreement to go and find.",
+ ["A tolerance of 1e-12, which is the figure the jest suite asserts the cyclone group to.",
+  "The oracle's own bisection step, which stops once its bracket is narrower than the gap shown.",
+  "The six decimal print of this digest, which is where two figures stop being comparable."],
+ "The engine inverts a balance and the oracle marches a droplet through the vessel and bisects on the size that just clears. Two closed arguments for one number should land on the same float.")
+
+q(2, "The train rows carry gaps of 3.47e-3 on the outlet concentration and 1.80e-3 on the outlet median. Why is tightening those the wrong move?",
+ "The golden there is a Monte Carlo over 400000 droplets and carries its own sampling noise, so agreement at that level is the best a particle count can buy.",
+ ["Those rows carry only three published cases each, so any tolerance fitted over them would rest on far too few published conditions to be defended by any reviewer.",
+  "The outlet median on those rows is interpolated across the single bin it falls in, and that one interpolation is where the whole of the difference on them comes from.",
+  "The train is the one group in the file whose golden value is the engine's own answer recorded straight back into it."],
+ "This is where a careless reviewer tightens a tolerance and breaks a good gate.")
+
+q(0, "What would it mean if the train golden ever matched the engine to machine precision?",
+ "That the oracle had stopped being independent, because that is what two copies of one calculation produce.",
+ ["That the particle count had been raised until the sampling noise in the golden fell well under the precision this digest prints at.",
+  "That the quadrature over the bins had converged, which is the property the default grid of 60 bins is chosen to deliver.",
+  "That the engine had been rewritten to track particles, which is the route the golden takes on those rows."],
+ "IDENTICAL TO TWELVE DECIMALS WOULD BE THE WEAKER RESULT on those rows. A gap is evidence in two directions.")
+
+q(3, "A reviewer finds a gap far SMALLER than the two methods being compared could justify. What does that indicate?",
+ "That the two sides are sharing something they were meant to derive separately, which is the quiet failure that lets a bent engine and a bent oracle agree perfectly.",
+ ["That the tolerance on that whole family of published cases is far too loose and ought to be tightened until it sits exactly at the gap the reviewer has just observed.",
+  "That the case sits inside a band both methods are stated to, where agreement is expected and carries no information.",
+  "That the comparison is being made at the print precision of the digest rather than at full float."],
+ "Before quoting any agreement, ask what the two routes were and what noise each of them carries.")
+
+q(2, "The golden carries expectVelocityWarning, expectStarvedWarning, expectOverloadWarning, expectResidenceWarning, expectHoldupWarning and expectBreakthroughWarning as values of its own. What does that buy?",
+ "A warning that stops firing fails a case rather than going quietly.",
+ ["A warning that fires wrongly is downgraded to a note, the field recording what was expected rather than what happened.",
+  "The thresholds themselves are pinned, since each field carries beside it the figure it was judged against.",
+  "The suite can be run without the engine's warning strings at all, since these fields stand in for them."],
+ "Carrying the warnings as golden values is unusual and it is deliberate.")
+
+q(1, "expectStarvedWarning is carried on 5 rows and is true on 1. Why is a field that is true on every row it carries worth less than that?",
+ "A suite like that passes if the warning fires correctly, and it also passes if the warning fires always, on everything, and the cases cannot tell those two apart.",
+ ["A field that is true on every row it appears on cannot be counted at all, so the suite reports that field as unstraddled and then quietly skips over it altogether.",
+  "The warning would then be the only quantity those rows pin at all, and every single row in this golden file has to pin a cut size beside whatever else the row carries.",
+  "The threshold would be measured from one side, so the suite would locate it to within a row."],
+ "Only a field that is true on one row and false on another can measure where a boundary is. Every one of the six is straddled.")
+
+q(0, "The mediaFilterFloor group runs one flow of 0.001 m3/s through beds of 20, 200, 600, 2000, 3.61, 3.6 and 3.5 m2. What does that group establish that a cut size cannot?",
+ "Exactly where this module starts refusing: five beds refused below the floor, two answered at and above it, and the bed that would run the flow at the floor recorded on every row.",
+ ["That a bed wider than the floor allows still returns a cut size, carrying a warning that names its loading.",
+  "That the breakthrough warning is straddled, the loading falling from 0.180000 to 0.001800 m/hr across the refused rows.",
+  "That the bed area moves the cut size, which the other mediaFilter rows cannot show at the loadings they run."],
+ "It is the only group in the file whose subject is a refusal and the only one a reader cannot infer from a cut size.")
+
+q(1, "The first four beds in that group span 100.000000 times in area and every one of them is refused. Why is that span the point of the group?",
+ "A hundredfold of bed area is the widest thing a reader could vary, and a module that answered the same on all four would be caught here and nowhere else in the file.",
+ ["Because the cut size goes as one over the root of the area, so a hundredfold of area is a tenfold of cut size.",
+  "Because those four rows are the only rows in the whole file that state none of the device's own defaults.",
+  "Because the floor is stated as an area rather than as a loading, so a span of area is what a refusal is measured in."],
+ "THOSE ARE THE FOUR BEDS A CLAMP MAKES IDENTICAL, which is the whole reason the group exists.")
+
+q(2, "In that same group 0.997230 m/hr is refused and 1.000000 m/hr answers, a gap of 0.002770 of the floor itself. What do those two rows pin?",
+ "The floor at its declared value rather than somewhere below it.",
+ ["The loading exponent of 0.5, which is the quantity the two rows differ by.",
+  "The bed of 3.600000 m2 as the smallest this module will describe on that flow.",
+  "The breakthrough loading of 25 m/hr, read off the other end of the same sweep."],
+ "Straddling as close to a boundary as a reader can usefully get is what turns a demonstration that a module CAN refuse into a measurement of WHERE it does.")
+
+emit(Q, '/root/wt-fc7-nextgen/tools/course-banks/producedwater/advanced/fc7a_m04.json', expect_n=15)
+finish()
