@@ -86,7 +86,7 @@ digest_for() {
     20260925_fc6_heattransfer_beginner_deep    ) echo bb922176fe5c1f61f162bfa5fc40a27678cee93d36919e56702c701d5121ef8c ;;
     20260925_fc6_heattransfer_intermediate_deep) echo ac20f953dc1d709b0b0b0ee99a33c287f799fc6757dfcee01f8307e9d498927f ;;
     20260925_fc6_heattransfer_advanced_deep    ) echo d0f98a515b707052016483c97b756f8d3e9b09e66ffa8e8ce54643b4b12d6daa ;;
-    20260925_fc6_heattransfer_go_live          ) echo a1e91fd9a096c73e83c6a95a1d6834aa8406b52f581f31e9372a140eb6b61e4a ;;
+    20260925_fc6_heattransfer_go_live          ) echo 283c788b8a0e7d5decb1ceef7104cd961e1e0d8bfc3f8ac70d84687cdfab758c ;;
     *) echo UNPINNED ;;
   esac
 }

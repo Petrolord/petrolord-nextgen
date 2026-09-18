@@ -82,7 +82,7 @@ digest_for() {
     20260923_fc3_rotating_beginner_deep         ) echo 1ec3cc7916c1a7c436c32370acd8a3a41309b8019cdf2152997146db04fb8011 ;;
     20260923_fc3_rotating_intermediate_deep     ) echo 7ce271fb0c1111193af951509db575839306d11afd84dbce96025d1e77b1c579 ;;
     20260923_fc3_rotating_advanced_deep         ) echo de1963630f2c9d9b44ec6a593f6e7e4a5c9269a3c123507ff2b06df63bd42447 ;;
-    20260923_fc3_rotating_go_live               ) echo 28ecae4930274659c411968d1be2e43559e0632f06fbbf649d0e8610d3cb178b ;;
+    20260923_fc3_rotating_go_live               ) echo e7b4c45e5d8469780748ab463b195e440e2676799663dce3218915cdf18298f3 ;;
     *) echo UNPINNED ;;
   esac
 }

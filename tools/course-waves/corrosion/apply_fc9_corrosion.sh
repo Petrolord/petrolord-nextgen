@@ -86,7 +86,7 @@ digest_for() {
     20260925_fc9_corrosion_beginner_deep    ) echo 1a0bce465e99986b6fe73e0d7c4dbc6a12894d76e5959cd65027b7de842ea22f ;;
     20260925_fc9_corrosion_intermediate_deep) echo c549dcd3af3a9a440c8436147619c354c0e1670afb6affb5632752c07fe22d52 ;;
     20260925_fc9_corrosion_advanced_deep    ) echo 2509aa15116d461e948924abe7867968b1affc57f1296b5f1206c7f1cbe27911 ;;
-    20260925_fc9_corrosion_go_live          ) echo 26fed9456b52a238c0fc2cab198360bb789b6eccb683bb2a5242124beba29a92 ;;
+    20260925_fc9_corrosion_go_live          ) echo a5bcf6f500816e932be2fce77738da9ee61087bbec811a994f4c21e7debf91bc ;;
     *) echo UNPINNED ;;
   esac
 }
