@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """WALK THE IMPORT CLOSURE of the whole engines/assurance family at engines
-6b00f43, then prove the vendored NextGen copy is sha-identical PATH BY PATH.
+REV (default 9d5d3b4, ASC-0; first run at 6b00f43), then prove the vendored NextGen copy is sha-identical PATH BY PATH.
 
 Adapted from FC6's vendor/closure.py. Two differences, both forced by this
 family:
@@ -23,13 +23,13 @@ this identical set so their two pull requests cannot conflict.
 import json, os, re, subprocess, sys  # noqa: E401
 
 ENGINES_GIT = "/root/petrolord-engines"
-REV = "6b00f43"
+REV = os.environ.get("RC_ENGINES_REV", "9d5d3b4")
 # The pinned tree, exported fresh on every run into a temporary directory, so
 # nothing stale in the wave directory can stand in for the commit.
 import atexit, shutil, tempfile
-SRC = tempfile.mkdtemp(prefix="engines-6b00f43-")
+SRC = tempfile.mkdtemp(prefix=f"engines-{REV}-")
 atexit.register(shutil.rmtree, SRC, True)
-_arch = subprocess.run(["git", "-C", "/root/petrolord-engines", "archive", "6b00f43",
+_arch = subprocess.run(["git", "-C", "/root/petrolord-engines", "archive", REV,
                         "engines/assurance", "test-data/assurance", "__tests__", "tools/validation/assurance"],
                        capture_output=True, check=True).stdout
 subprocess.run(["tar", "-x", "-C", SRC], input=_arch, check=True)
@@ -42,8 +42,13 @@ ORACLES = ["audit", "calendar", "compliance", "documents", "iso", "lessons", "mo
            "peer_review", "quality", "risk"]
 FINDINGS = ["audit", "calendar", "compliance", "documents", "iso", "lessons", "moc",
             "peer-review", "quality", "risk"]
-SUITES = ["audit", "compliance", "documents", "goldens", "iso", "lessons", "moc",
-          "peerReview", "quality", "risk"]
+# The suites are SEEDED BY LISTING the commit, never by a typed list: ASC-0 added
+# assurance.copy and assurance.instants, which nothing else imports, so a typed
+# list would have silently left them behind.
+SUITES = sorted(re.match(r"__tests__/assurance\.(\w+)\.test\.js$", p).group(1)
+                for p in subprocess.run(["git", "-C", "/root/petrolord-engines", "ls-tree", "-r", "--name-only", REV,
+                                         "__tests__/"], capture_output=True, text=True, check=True).stdout.split()
+                if re.match(r"__tests__/assurance\.(\w+)\.test\.js$", p))
 SEEDS = ([f"engines/assurance/{m}.js" for m in MODULES]
          + [f"test-data/assurance/goldens/{m}_cases.json" for m in MODULES]
          + [f"tools/validation/assurance/oracle_{o}.py" for o in ORACLES]

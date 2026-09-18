@@ -8,10 +8,10 @@
 // Usage:  sh /root/as-wip-riskchange/build_digest.sh > digest.tmp \
 //           && mv digest.tmp /root/as-wip-riskchange/digest.txt
 //
-// Engines, vendored sha-identical with engines 6b00f43 (AS15, PR #211):
+// Engines, vendored sha-identical with engines 9d5d3b4 (ASC-0, PR #212):
 // riskScoring.js, managementOfChange.js, peerReview.js, lessonsLearned.js and
-// the calendar.js they share (lessonsLearned reaches it through
-// qualityAssurance.js). The walked closure of the family is 51 paths.
+// the calendar.js they share (lessonsLearned reaches it directly and through
+// qualityAssurance.js). The walked closure of the family is 53 paths.
 //
 // EVERY FIGURE PRINTED HERE IS A RETURN VALUE OF AN ENGINE, except a line that
 // says "golden" (read from the published case file, which the ORACLE wrote) or
@@ -37,7 +37,7 @@ import {
   AS_OF, AS_OF_ISO, AS_OF_PARTS,
   OBODO_RISKS, LEVEL_PROBES, BAND_PROBES, RESIDUAL_PROBES, APPETITE_PROBES, CALENDAR_PROBES,
   ESANMI_MOCS, ESANMI_APPROVALS, ESANMI_ACTIONS, APPROVAL_SETS, EXPIRY_DAY_SWEEP, RATIFY_DAY_SWEEP,
-  IKANG_REVIEWS, IKANG_COMMENTS,
+  IKANG_REVIEWS, IKANG_COMMENTS, IKANG_OTHER_COMMENTS, IKANG_PARTICIPANTS,
   ONNE_LESSONS, ONNE_APPLICATIONS, APPLICATION_PROBES, LESSON_REVIEW_SWEEP,
 } from '/root/as-wip-riskchange/riskchange_fields.mjs';
 
@@ -138,10 +138,11 @@ const guard = (m) => new Proxy(RAW[m], {
 
 let NEG_LINE = null;
 if (NEGATIVE === 'utc') {
-  // The negative control for the time-zone gate: one line that reads a date as
-  // a UTC instant (the RS-1 shape) rather than as a calendar date. It must make
-  // the digest differ between zones west and east of Greenwich.
-  NEG_LINE = `NEGATIVE CONTROL: ${RAW.riskScoring.isReviewOverdue({ next_review_date: '2026-09-30' }, new RealDate('2026-10-01'))}`;
+  // The negative control for the time-zone gate: one line that reads a date
+  // string as a UTC instant (the RS-1 and RC-1 shape, both now repaired in the
+  // engine, so the plant is made here) and prints the local calendar day of
+  // that instant. It must make the digest differ west of Greenwich.
+  NEG_LINE = `NEGATIVE CONTROL: day ${new RealDate('2026-10-01').getDate()}`;
 }
 if (NEGATIVE === 'clock') {
   // The negative control for the trap: an engine call that is allowed to fall
@@ -156,7 +157,7 @@ for (const [m, name] of [['riskScoring', 'RISK_BANDS'], ['riskScoring', 'SCALE_M
   ['managementOfChange', 'EMERGENCY_RATIFY_DAYS'], ['managementOfChange', 'STAGE_TRANSITIONS'],
   ['managementOfChange', 'ACTIVE_STAGES'], ['managementOfChange', 'IN_EFFECT_STAGES'],
   ['peerReview', 'COMMENT_TRANSITIONS'], ['peerReview', 'RESOLVED_STATUSES'], ['peerReview', 'BLOCKING_SEVERITIES'],
-  ['peerReview', 'ACTIVE_STAGES'], ['lessonsLearned', 'REVIEW_LEAD_DAYS'], ['lessonsLearned', 'LESSON_TRANSITIONS'],
+  ['peerReview', 'ACTIVE_STAGES'], ['peerReview', 'REVIEWER_ROLES'], ['lessonsLearned', 'REVIEW_LEAD_DAYS'], ['lessonsLearned', 'LESSON_TRANSITIONS'],
   ['lessonsLearned', 'LESSON_VISIBLE_STATUSES'], ['lessonsLearned', 'LESSON_LIVE_STATUSES'],
   ['lessonsLearned', 'EMBEDDING_OUTCOMES']]) {
   ledger.push({ m, constant: name, value: enc(RAW[m][name]) });
@@ -245,7 +246,7 @@ w('# Risk, Change & Learning (riskchange). Teaching digest.');
 if (NEG_LINE) w(NEG_LINE);
 w(`# THE AS-OF DATE FOR EVERY LINE BELOW IS ${AS_OF_ISO}, a Thursday. Every status that depends on a date (review overdue, expired, expiring soon, awaiting or overdue ratification, review due soon, days until) is that status ON ${AS_OF_ISO}, and every engine call that takes a date was handed this one explicitly. None of them read a clock.`);
 w('# Scores, levels, counts and days are whole numbers. Dates print as YYYY-MM-DD. Statuses, bands and verdicts print exactly as the engine spells them, in double quotes.');
-w('# Built against engines 6b00f43 (AS15), vendored sha-identical: riskScoring, managementOfChange, peerReview, lessonsLearned and the calendar they share. Every figure is the engine answering at the inputs named beside it, except a line that says golden or measured.');
+w('# Built against engines 9d5d3b4 (ASC-0), vendored sha-identical: riskScoring, managementOfChange, peerReview, lessonsLearned and the calendar they share. Every figure is the engine answering at the inputs named beside it, except a line that says golden or measured.');
 w('# Every engine answer printed here was also replayed through the independent Python oracle for its module (oracle_bridge.py), so each one is two methods agreeing.');
 w('# A GOLDEN LINE IS NOT THE ENGINE ANSWERING. The published case files are written by the oracles.');
 w();
@@ -370,16 +371,21 @@ w();
 w('- A date that does not exist is no date at all: 30 February and a thirteenth month both parse to null, and so does text. The engine never rolls an impossible date over into a real one.');
 w('- A timestamp is read by its leading date only. The late-evening UTC timestamp above is the calendar date its first ten characters name, whatever the zone the reader is in.');
 w();
-w(`- A risk review is overdue when its date has PASSED: days until below zero. A review due on the as-of date is not overdue. On the OBODO register, read on ${AS_OF_ISO}:`);
+w(`- A risk review is overdue when the risk is LIVE and its review date has PASSED: days until below zero. A review due on the as-of date is not overdue, and a risk that is not live carries no review obligation at all. On the OBODO register, read on ${AS_OF_ISO}:`);
 w('| risk | status | next review | days until | review overdue |');
 w('| --- | --- | --- | --- | --- |');
 const LIVE = RAW.riskScoring.RISK_LIVE_STATUSES;
-for (const r of OBODO_RISKS.filter((x) => LIVE.includes(x.status))) {
+for (const r of OBODO_RISKS) {
   const days = CAL.daysUntil(r.next_review_date, T());
   w(`| ${r.id} | ${q(r.status)} | ${r.next_review_date ?? 'null'} | ${days === null ? 'null' : n0(days)} | ${yn(R.isReviewOverdue(r, T()))} |`);
 }
 w();
-w('- This table lists LIVE risks only. isReviewOverdue reads the date and nothing else, so the register decides which risks the question is asked of. RECON.md records what it answers for a closed risk as a finding, and nothing here grades it.');
+{
+  const ob10 = OBODO_RISKS.find((r) => r.id === 'OB-10');
+  w(`- OB-10 is ${q(ob10.status)} and its review date is ${n0(CAL.daysUntil(ob10.next_review_date, T()))} days away, and OB-09 is ${q(OBODO_RISKS.find((r) => r.id === 'OB-09').status)} with no review date. Neither can read overdue whatever its date, because the test asks the status first.`);
+  const probe = { status: 'Closed', next_review_date: '2026-09-30' };
+  w(`- The same question of a Closed risk whose review date passed the day before the as-of date: overdue ${yn(R.isReviewOverdue(probe, T()))}. The same risk as ${q('Open')}: overdue ${yn(R.isReviewOverdue({ ...probe, status: 'Open' }, T()))}.`);
+}
 w();
 
 /* ================================================================== *
@@ -521,7 +527,6 @@ w();
   const aps = (id) => ESANMI_APPROVALS.filter((a) => a.moc_id === id);
   const acs = (id) => ESANMI_ACTIONS.filter((a) => a.moc_id === id);
   const signed = [{ level: 1, status: 'Approved' }, { level: 2, status: 'Approved' }, { level: 3, status: 'Approved' }];
-  w('- ENGINE COPY, RECORDED IN RECON.md AS RC-9: the engine message on the next line says "level 2 and 3 has" where two levels are meant. Quote it exactly as the engine prints it, or do not quote it.');
   w(`- ${refusal('ES-01 into Implementation as it stands, levels 2 and 3 unsigned', M.canAdvance(es01, 'Implementation', { approvals: aps('ES-01'), actions: acs('ES-01') }))}`);
   w(`- ${refusal('ES-01 into Implementation with every level signed and one Pre-implementation action still Open', M.canAdvance(es01, 'Implementation', { approvals: signed, actions: acs('ES-01') }))}`);
   w(`- ${allowed('ES-01 into Implementation with every level signed and its actions finished', M.canAdvance(es01, 'Implementation', { approvals: signed, actions: acs('ES-01').map((a) => ({ ...a, status: 'Complete' })) }))}`);
@@ -606,7 +611,12 @@ for (const m of ESANMI_MOCS) {
   w(`| ${m.id} | ${q(m.type)} | ${q(m.stage)} | ${m.target_implementation_date ?? 'null'} | ${m.expiry_date ?? 'null'} | ${q(M.expiryState(m, T()))} | ${yn(M.isOverdue(m, T()))} | ${q(r.state)} | ${r.dueDate ?? 'null'} |`);
 }
 w();
-w('- HELD, RECORDED IN RECON.md AS RC-3: the overdue column reads "yes" for every change in Implementation past its target implementation date, including ES-04, implemented ON its target date and in effect since. The engine counts Implementation as live work for this test and as in effect for expiry. Nothing in this course grades the overdue test or the overdue count until the lead decides which reading holds.');
+{
+  const lateStages = MX.ACTIVE_STAGES.filter((st) => !MX.IN_EFFECT_STAGES.includes(st));
+  const inImpl = ESANMI_MOCS.filter((m) => m.stage === 'Implementation');
+  const pastTarget = inImpl.filter((m) => CAL.daysUntil(m.target_implementation_date, T()) < 0);
+  w(`- A change is overdue only BEFORE it is on the facility: in ${lst(lateStages.map(q))}, with its target implementation date passed. Of the ${n0(inImpl.length)} changes in Implementation here, ${n0(pastTarget.length)} are past their target date and none reads overdue, because being in effect means the target was met or passed by the fact of it. Late work after that point shows as overdue ACTIONS.`);
+}
 w();
 w('The action log:');
 w('| action | change | type | status | due |');
@@ -695,7 +705,46 @@ for (const r of IKANG_REVIEWS) w(`| ${r.id} | ${q(r.stage)} | ${r.due_date} | ${
   w(`- Reviews ${n0(s.total)}, active ${n0(s.active)}, overdue ${n0(s.overdue)}. IK-02 is due on the as-of date and is not overdue. IK-04 is Cancelled and never overdue, whatever its date.`);
   w(`- byUrgency: ${sortWith('peerReview', 'byUrgency', [T()], IKANG_REVIEWS).join(', ')}.`);
 }
-w('- WHAT THIS ENGINE DOES NOT CHECK. It carries no rule about WHO may respond to or verify a comment, or close a review: TRANSITION_ACTOR names a party for a button label and nothing enforces it. RECON.md records this as a finding. Nothing in this course grades reviewer independence.');
+{
+  const ik01 = IKANG_REVIEWS.find((r) => r.id === 'IK-01');
+  w(`- SEGREGATION OF DUTIES IN PEER REVIEW. The author of the work under review never reviews it. IK-01's author is ${ik01.author_id}. Reviewer roles: ${PX.REVIEWER_ROLES.map(q).join(', ')}. Putting people on the review:`);
+  for (const [label, p] of IKANG_PARTICIPANTS) {
+    const r = P.canAssignPeerReviewer(ik01, p);
+    w(`- ${r.ok ? allowed(label, r) : refusal(label, r)}`);
+  }
+  w('- Acting on a comment: the moves TRANSITION_ACTOR gives to the reviewer (Verified, Rejected, Withdrawn) are never taken by the author. The author\'s own move (Responded) and the coordinator\'s (Closed) are not restricted by this rule.');
+  const c03 = IKANG_COMMENTS.find((c) => c.id === 'C-03');
+  const c01 = IKANG_COMMENTS.find((c) => c.id === 'C-01');
+  const c02 = IKANG_COMMENTS.find((c) => c.id === 'C-02');
+  for (const [label, c, to, who] of [
+    [`the author verifying C-03, a Responded comment on their own work`, c03, 'Verified', ik01.author_id],
+    [`the author rejecting C-03`, c03, 'Rejected', ik01.author_id],
+    [`the author withdrawing C-01, an Open comment`, c01, 'Withdrawn', ik01.author_id],
+    [`u-kemi, independent of the work, verifying C-03`, c03, 'Verified', 'u-kemi'],
+    [`the author responding to C-01`, c01, 'Responded', ik01.author_id],
+    [`the author closing out C-02, a Verified comment`, c02, 'Closed', ik01.author_id],
+    [`u-kemi responding to C-02, which is already Verified`, c02, 'Responded', 'u-kemi'],
+    [`nobody signed in, verifying C-03`, c03, 'Verified', null],
+  ]) {
+    const r = P.canActOnComment(c, to, ik01, who);
+    w(`- ${r.ok ? allowed(label, r) : refusal(label, r)}`);
+  }
+  w('- This is the owner decision D1 of 2026-09-18 (segregation of duties), applied to peer review at ASC-0 in the engine; the app and the database follow it with the Suite pull request that ships ASC-0.');
+}
+w();
+w('The whole IKANG register summarised, with the comments on the other reviews:');
+{
+  const all = [...IKANG_COMMENTS, ...IKANG_OTHER_COMMENTS];
+  w('| comment | review | review stage | severity | status | blocking on its own |');
+  w('| --- | --- | --- | --- | --- | --- |');
+  for (const c of IKANG_OTHER_COMMENTS) {
+    const rv = IKANG_REVIEWS.find((r) => r.id === c.review_id);
+    w(`| ${c.id} | ${c.review_id} | ${q(rv.stage)} | ${q(c.severity)} | ${q(c.status)} | ${yn(P.isBlocking(c))} |`);
+  }
+  const s = P.summarise(IKANG_REVIEWS, all, T());
+  w(`- summarise over all five reviews and all ${n0(all.length)} comments: totalComments ${n0(s.totalComments)}, open ${n0(s.openComments)}, blocking ${n0(s.blockingComments)}.`);
+  w('- C-10 and C-11 are on IK-04, which is Cancelled and locked, so nobody can resolve them: they stay in the comment total and in the severity and status columns, and they are not counted as open or blocking. C-12 is on IK-02, which is live, and counts.');
+}
 w();
 
 /* ================================================================== *
@@ -759,7 +808,6 @@ w();
   w(`- ${refusal('ON-10 superseded with no successor named', L.canAdvanceLesson(on('ON-10'), 'Superseded', { patch: {} }))}`);
   w(`- ${refusal('ON-10 superseded by itself', L.canAdvanceLesson(on('ON-10'), 'Superseded', { patch: { superseded_by: 'ON-10' } }))}`);
   w(`- ${refusal('a Draft lesson moved straight to Published', L.canAdvanceLesson(on('ON-07'), 'Published', {}))}`);
-  w('- ENGINE COPY, RECORDED IN RECON.md AS RC-9: the engine message on the next line says "A archived" where "An archived" is meant. Quote it exactly as the engine prints it, or do not quote it.');
   w(`- ${refusal('an Archived lesson moved anywhere', L.canAdvanceLesson(on('ON-08'), 'Published', {}))}`);
 }
 w();
@@ -794,6 +842,7 @@ for (const l of ONNE_LESSONS) {
   w(`| ${l.id} | ${q(l.status)} | ${l.event_date} | ${age === null ? 'null' : n0(age)} | ${l.review_due ?? 'null'} | ${yn(L.isReviewOverdue(l, T()))} | ${yn(L.isReviewDueSoon(l, T()))} | ${yn(L.isUnapplied(l, ONNE_APPLICATIONS.filter((a) => a.lesson_id === l.id)))} |`);
 }
 w('- ON-05 is Validated with a review date inside the lead and reads neither overdue nor due soon, because it is not yet visible to anybody.');
+w('- A lesson\'s age is counted from its event date. With no event date it falls back to the record\'s creation timestamp, read as the LOCAL calendar date of that instant (calendar.localDateOf), so the same row can be a day older in Lagos than in UTC. Every ONNE lesson records its event date, which is why every age above is the same in every zone.');
 w();
 {
   const s = L.summarise({ lessons: ONNE_LESSONS, applications: ONNE_APPLICATIONS }, T());
@@ -820,15 +869,15 @@ w();
 sec('SECTION 18: What these engines hold, what the owner decided, and what the oracles check (owned by Expert m05)');
 w('- HELD ITEMS are rules these engines state but that no owner has decided, or behaviours that are limits of the engine. Each is taught as a stated limit and graded nowhere:');
 w('  - A band is found by its lower edge alone, so any positive score bands, including a score no cell of the grid holds (Section 2).');
-w('  - isReviewOverdue on a risk reads the date and not the status (Section 4).');
 w('  - countByBand counts whatever it is handed (Section 5).');
 w('  - An action on a change that is not in the register counts as open work (Section 12).');
 w('  - Within one urgency rank, changes sort by expiry date when they have one and by target date otherwise, so the two keys mix.');
-w('  - Peer review carries no independence rule for who responds, verifies or closes (Section 14), and its summarise counts every comment it is handed whatever the stage of the review the comment belongs to.');
+w('  - A comment whose review is not in the list handed to the peer review summary still counts as open work, as an MOC action with an unknown change does (Sections 12 and 14).');
+w('  - A reviewer named by display name only cannot be matched to the author, so the independence rule allows one (Section 14); a review with no author recorded cannot be checked either.');
 w('  - Publishing a lesson checks that a validation record exists and does not check again who validated it.');
 w('  - The application counts in the lessons summary include applications on lessons that are not visible.');
 w('  - An invalid as-of date makes daysUntil answer NaN rather than refuse, and a comparison on NaN is false either way, so every date rule reads as not due. Nothing in this course passes one.');
-w('- OWNER DECISIONS in this course scope, all taken on 2026-09-18 under AS15 and each held in the engine, the app and where it matters the database: D1 segregation of duties on change approvals (Section 9); Q9 emergency change authority and the ratification window (Section 11); Q10 validation by typed name (Section 15); Q3 fractional levels unscored (Sections 2 and 3). AS13-0 decided that a closed temporary change reads "Closed out" (Section 11).');
+w('- OWNER DECISIONS in this course scope, all taken on 2026-09-18 under AS15 and each held in the engine, the app and where it matters the database: D1 segregation of duties on change approvals (Section 9) and, from ASC-0, on peer review (Section 14); Q9 emergency change authority and the ratification window (Section 11); Q10 validation by typed name (Section 15); Q3 fractional levels unscored (Sections 2 and 3). AS13-0 decided that a closed temporary change reads "Closed out" (Section 11).');
 w();
 w('The published golden case files, measured by reading them (golden, written by the oracles):');
 w('| golden file | cases | cases carrying a repaired marker | functions exercised |');
@@ -876,7 +925,8 @@ w();
   w('The repair markers in the golden files, measured (each is a defect an oracle found, pinned as failing, then repaired and kept as a case):');
   for (const [m, ids] of rows) w(`- ${m}: ${lst(ids)}.`);
 }
-w('- HISTORY: a risk review due today used to read overdue west of Greenwich, because the date was parsed as UTC midnight. A blank residual axis used to zero the whole residual. An impossible date such as 30 February used to roll over into a real one. An unreadable expiry used to read "Expiring soon" and pass the implementation gate. A comment with no severity used to sort above Critical. Actions on finished changes used to count as open work for ever (AS14). Emergency changes used to need every level signed before implementation, and a lesson author used to be able to validate their own lesson by typing a name (both AS15).');
+w('- HISTORY, ASC-0 (engines PR #212, the repairs these two assurance courses found while this digest was being built): a closed risk used to read review-overdue and an as-of date given as text used to be read as a UTC instant; a change already in Implementation used to read overdue against its target date; peer review used to hold no rule on who reviews, and its summary used to count comments on cancelled reviews as blocking for ever; and several refusals used to read "A archived", "level 2 and 3 has" and "1 critical comment still need".');
+w('- HISTORY, AS12 to AS15: a risk review due today used to read overdue west of Greenwich, because the date was parsed as UTC midnight. A blank residual axis used to zero the whole residual. An impossible date such as 30 February used to roll over into a real one. An unreadable expiry used to read "Expiring soon" and pass the implementation gate. A comment with no severity used to sort above Critical. Actions on finished changes used to count as open work for ever (AS14). Emergency changes used to need every level signed before implementation, and a lesson author used to be able to validate their own lesson by typing a name (both AS15).');
 w('- The general lesson is the one this programme runs on: each of these was found by an independent oracle written from the stated rule (AS12 onward), and each is now a golden case that fails if the defect returns.');
 w();
 

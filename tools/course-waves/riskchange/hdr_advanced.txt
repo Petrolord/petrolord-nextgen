@@ -17,9 +17,9 @@
 -- nothing. A review closes when nothing blocking is unresolved, and Responded
 -- and Rejected are both unresolved.
 --
--- HELD, taught as a limit and never graded: peer review holds no independence
--- rule in any layer, and its summary counts comments on finished reviews
--- (RECON RC-4). ETIM grades one review's own log.
+-- SEGREGATION OF DUTIES IN PEER REVIEW (ASC-0, RECON RC-4a): the author never
+-- reviews the work and never takes a reviewer's move. The summary skips comments
+-- on finished reviews (RC-4b). ETIM grades one review's own log.
 --
 -- FRAMED HISTORY: digest SECTION 20 is the only history and Expert m05 l03
 -- owns it.

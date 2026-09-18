@@ -22,7 +22,7 @@
 -- residual unscored; and the same register gives different band counts for
 -- every population and score a caller picks. The capstone grades both.
 --
--- HELD, taught as a limit and never graded: isReviewOverdue reads the date and
--- not the risk's status (RECON RC-2); a band is found by its lower edge alone.
+-- HELD, taught as a limit and never graded: a band is found by its lower edge
+-- alone. (isReviewOverdue now asks the status first; ASC-0 repaired RC-2.)
 -- IGBARA's two day counts are daysUntil on live risks' review dates.
 -- ============================================================================

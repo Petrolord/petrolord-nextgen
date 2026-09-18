@@ -23,7 +23,7 @@
 # reads, headings included.
 #
 # Engines: engines/assurance/{riskScoring,managementOfChange,peerReview,
-# lessonsLearned,calendar}.js, vendored sha-identical with engines 6b00f43.
+# lessonsLearned,calendar}.js, vendored sha-identical with engines 9d5d3b4 (ASC-0).
 #
 # ---------------------------------------------------------------------------
 # SCOPE SEAMS with the sibling course compliance (Compliance, Audit & Quality,
@@ -33,9 +33,8 @@
 #    as the SOURCE of a lesson and stops there; nothing from auditManagement or
 #    isoCompliance is graded or computed here.
 #  * RISK SCORING, BANDS, APPETITE and the SEGREGATION-OF-DUTIES rules on
-#    change approvals are OWNED here. Peer review carries no independence rule
-#    in any layer (RECON.md RC-4), so Expert m02 l04 teaches that absence as a
-#    stated limit.
+#    change approvals and peer review are OWNED here. Peer review gained its
+#    independence rule in ASC-0 (RECON.md RC-4a), and Expert m02 l04 teaches it.
 #  * Nothing here is an NPV, a Monte Carlo or a decision tree; those are owned
 #    by the economics courses.
 # ---------------------------------------------------------------------------
@@ -140,7 +139,7 @@ TIERS = {
     ('l01-two-severities-that-block', 'Two severities that block', 13, [V]),
     ('l02-a-review-that-cannot-close', 'A review that cannot close', 14, [V]),
     ('l03-overdue-reviews-and-live-stages', 'Overdue reviews and live stages', 13, [V]),
-    ('l04-what-the-review-engine-does-not-check', 'What the review engine does not check', 13, [V]),
+    ('l04-the-author-never-reviews-the-work', 'The author never reviews the work', 13, [V]),
   ]),
   ('m03-a-lesson-and-its-validation', 'A Lesson and Its Validation', [
     ('l01-three-parts-of-a-lesson', 'Three parts of a lesson', 12, [V]),
@@ -170,8 +169,9 @@ TIERS = {
  ],
 }
 
-# Nothing is held at the lesson level. Held ENGINE items (RECON.md RC-1 to
-# RC-4) are taught as stated limits in the lessons that own their sections and
+# Nothing is held at the lesson level. The engine items RECON.md raised were
+# repaired in ASC-0; the limits still held (digest SECTION 18) are taught as
+# stated limits in the lessons that own their sections and
 # are graded nowhere; no whole lesson waits on a repair.
 HELD = {}
 

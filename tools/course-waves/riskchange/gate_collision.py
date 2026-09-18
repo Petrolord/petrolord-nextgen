@@ -70,6 +70,9 @@ def teaching_values(digest):
     onne = digest.split('# SECTION 17')[1].split('# SECTION 18')[0]
     reuse_hdr = '| lesson | total | applied |'
     m = re.search(r'openComments (\d+), blockingComments (\d+)', ikang)
+    reg = re.search(r'summarise over all five reviews and all \d+ comments: totalComments \d+, open (\d+), blocking (\d+)', ikang)
+    if not reg:
+        raise SystemExit('  GATE REFUSES: the register-wide peer review summary line is not in the digest')
     blocking_all = re.search(r'The blocking comments are [^:]+: (\d+) in all', ikang)
     days = [int(x) for x in table_col(digest, '| risk | status | next review | days until |', 'days until') if x != 'null']
     days += [int(x) for x in table_col(digest, '| date given | as | parsed | days until |', 'days until') if x != 'null']
@@ -91,8 +94,8 @@ def teaching_values(digest):
         'okomu_register_open_actions': [count_row(esanmi, 'openActions')],
         'okomu_register_overdue_actions': [count_row(esanmi, 'overdueActions')],
         'okomu_register_ratification_overdue': [count_row(esanmi, 'ratificationOverdue')],
-        'etim_review_blocking': [int(m.group(2)), int(blocking_all.group(1))],
-        'etim_review_open_comments': [int(m.group(1))],
+        'etim_review_blocking': [int(m.group(2)), int(blocking_all.group(1)), int(reg.group(2))],
+        'etim_review_open_comments': [int(m.group(1)), int(reg.group(1))],
         'etim_lesson_applied': [int(x) for x in table_col(digest, reuse_hdr, 'applied')],
         'etim_lesson_last_applied_yyyymmdd': [ymd(d) for d in lasts],
         'etim_lesson_age_days': ages,

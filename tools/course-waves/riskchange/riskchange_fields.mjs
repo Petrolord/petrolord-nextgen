@@ -255,6 +255,25 @@ export const IKANG_COMMENTS = Object.freeze([
   { id: 'C-09', review_id: 'IK-01', severity: null, status: 'Open', created_at: '2026-09-06T09:00:00Z' },
 ]);
 
+/** Comments on the OTHER IKANG reviews, for the register-wide summary: two on
+ *  IK-04, which is Cancelled and locked, and one on IK-02, which is live. */
+export const IKANG_OTHER_COMMENTS = Object.freeze([
+  { id: 'C-10', review_id: 'IK-04', severity: 'Critical', status: 'Open', created_at: '2026-07-20T09:00:00Z' },
+  { id: 'C-11', review_id: 'IK-04', severity: 'Major', status: 'Responded', response_text: 'Datasheet reissued.', created_at: '2026-07-21T09:00:00Z' },
+  { id: 'C-12', review_id: 'IK-02', severity: 'Major', status: 'Open', created_at: '2026-09-22T09:00:00Z' },
+]);
+
+/** The reviewer panel of IK-01: who may be put on it, and in what role. */
+export const IKANG_PARTICIPANTS = Object.freeze([
+  ['the author of the work, as a Reviewer', { user_id: 'u-efe', role: 'Reviewer' }],
+  ['the author of the work, as the Lead Reviewer', { user_id: 'u-efe', role: 'Lead Reviewer' }],
+  ['the author of the work, with no role given', { user_id: 'u-efe' }],
+  ['the author of the work, as an Observer', { user_id: 'u-efe', role: 'Observer' }],
+  ['u-kemi, independent of the work, as the Lead Reviewer', { user_id: 'u-kemi', role: 'Lead Reviewer' }],
+  ['an external reviewer named only by display name', { display_name: 'A. Okafor (external)', role: 'Reviewer' }],
+  ['nobody named at all', { role: 'Reviewer' }],
+]);
+
 /* ------------------------------------------------------------------ *
  * ONNE: a supply base lessons register.
  * ------------------------------------------------------------------ */

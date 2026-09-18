@@ -21,7 +21,7 @@
 -- implementation date, with no recorded date failing closed. Actions on a
 -- finished change are not open work. The capstone grades all three.
 --
--- HELD, taught as a limit and never graded: a change in effect reads overdue
--- against its target implementation date (RECON RC-3). OKOMU grades action due
--- dates and never a change's overdue flag.
+-- REPAIRED IN ASC-0 (RECON RC-3): a change in Implementation is not overdue;
+-- late work shows as overdue actions. OKOMU grades action due dates and never a
+-- change's overdue flag, before or after the repair.
 -- ============================================================================

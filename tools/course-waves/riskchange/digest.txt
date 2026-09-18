@@ -1,7 +1,7 @@
 # Risk, Change & Learning (riskchange). Teaching digest.
 # THE AS-OF DATE FOR EVERY LINE BELOW IS 2026-10-01, a Thursday. Every status that depends on a date (review overdue, expired, expiring soon, awaiting or overdue ratification, review due soon, days until) is that status ON 2026-10-01, and every engine call that takes a date was handed this one explicitly. None of them read a clock.
 # Scores, levels, counts and days are whole numbers. Dates print as YYYY-MM-DD. Statuses, bands and verdicts print exactly as the engine spells them, in double quotes.
-# Built against engines 6b00f43 (AS15), vendored sha-identical: riskScoring, managementOfChange, peerReview, lessonsLearned and the calendar they share. Every figure is the engine answering at the inputs named beside it, except a line that says golden or measured.
+# Built against engines 9d5d3b4 (ASC-0), vendored sha-identical: riskScoring, managementOfChange, peerReview, lessonsLearned and the calendar they share. Every figure is the engine answering at the inputs named beside it, except a line that says golden or measured.
 # Every engine answer printed here was also replayed through the independent Python oracle for its module (oracle_bridge.py), so each one is two methods agreeing.
 # A GOLDEN LINE IS NOT THE ENGINE ANSWERING. The published case files are written by the oracles.
 
@@ -14,10 +14,10 @@
 Every export, measured by loading each module:
 | module | exports | functions | frozen tables and constants | functions that take a date |
 | --- | --- | --- | --- | --- |
-| calendar | 5 | 4 | 1 | 1 |
+| calendar | 6 | 5 | 1 | 1 |
 | riskScoring | 15 | 7 | 8 | 1 |
 | managementOfChange | 34 | 15 | 19 | 7 |
-| peerReview | 26 | 15 | 11 | 4 |
+| peerReview | 29 | 17 | 12 | 4 |
 | lessonsLearned | 40 | 26 | 14 | 6 |
 
 The functions that take a date, each read from its signature in the engine source (a parameter that defaults to the machine clock). Every one of them was handed the as-of date on every call this digest makes:
@@ -136,7 +136,7 @@ What the scale accepts as a level, each probe scored against the other axis:
 - A date that does not exist is no date at all: 30 February and a thirteenth month both parse to null, and so does text. The engine never rolls an impossible date over into a real one.
 - A timestamp is read by its leading date only. The late-evening UTC timestamp above is the calendar date its first ten characters name, whatever the zone the reader is in.
 
-- A risk review is overdue when its date has PASSED: days until below zero. A review due on the as-of date is not overdue. On the OBODO register, read on 2026-10-01:
+- A risk review is overdue when the risk is LIVE and its review date has PASSED: days until below zero. A review due on the as-of date is not overdue, and a risk that is not live carries no review obligation at all. On the OBODO register, read on 2026-10-01:
 | risk | status | next review | days until | review overdue |
 | --- | --- | --- | --- | --- |
 | OB-01 | "Open" | 2026-10-01 | 0 | no |
@@ -147,10 +147,13 @@ What the scale accepts as a level, each probe scored against the other axis:
 | OB-06 | "Open" | 2026-10-31 | 30 | no |
 | OB-07 | "Realized" | 2026-10-02 | 1 | no |
 | OB-08 | "Open" | 2026-11-30 | 60 | no |
+| OB-09 | "Draft" | null | null | no |
+| OB-10 | "Closed" | 2027-03-31 | 181 | no |
 | OB-11 | "Open" | 2026-12-15 | 75 | no |
 | OB-12 | "Open" | 2027-01-15 | 106 | no |
 
-- This table lists LIVE risks only. isReviewOverdue reads the date and nothing else, so the register decides which risks the question is asked of. RECON.md records what it answers for a closed risk as a finding, and nothing here grades it.
+- OB-10 is "Closed" and its review date is 181 days away, and OB-09 is "Draft" with no review date. Neither can read overdue whatever its date, because the test asks the status first.
+- The same question of a Closed risk whose review date passed the day before the as-of date: overdue no. The same risk as "Open": overdue yes.
 
 # SECTION 5: The register as a whole: live risks, and counting by band (owned by Associate m05)
 
@@ -259,8 +262,7 @@ Moves the engine refuses, with its own words:
 - Action types: "Pre-implementation", "Implementation", "Post-implementation". Action statuses: "Open", "In progress", "Complete", "Cancelled". Complete and Cancelled actions are finished; Open and In progress are not.
 - Into Implementation: every approval level signed with no rejection (an Emergency change needs only its first level), no Pre-implementation action unfinished, and a Temporary or Emergency change needs a READABLE expiry date. Into Closed: no Implementation or Post-implementation action unfinished, and an Emergency change needs every level signed.
 
-- ENGINE COPY, RECORDED IN RECON.md AS RC-9: the engine message on the next line says "level 2 and 3 has" where two levels are meant. Quote it exactly as the engine prints it, or do not quote it.
-- REFUSED, ES-01 into Implementation as it stands, levels 2 and 3 unsigned: Approval level 2 and 3 has not signed yet.
+- REFUSED, ES-01 into Implementation as it stands, levels 2 and 3 unsigned: Approval levels 2 and 3 have not signed yet.
 - REFUSED, ES-01 into Implementation with every level signed and one Pre-implementation action still Open: 1 pre-implementation action still open. They exist to be done before the change goes in.
 - ALLOWED, ES-01 into Implementation with every level signed and its actions finished.
 - REFUSED, a change with no approval rows at all: No approvers have been assigned, so there is nothing to approve. Add the approval levels this change needs.
@@ -327,19 +329,19 @@ The ESANMI change register, read on 2026-10-01:
 | change | type | stage | target | expiry | expiry state | overdue | ratification | due |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | ES-01 | "Permanent" | "Approval" | 2026-10-20 | null | "Permanent change" | no | "Not required" | null |
-| ES-02 | "Temporary" | "Implementation" | 2026-09-20 | 2026-10-14 | "Expiring soon" | yes | "Not required" | null |
-| ES-03 | "Temporary" | "Implementation" | 2026-09-10 | 2026-09-28 | "Expired" | yes | "Not required" | null |
-| ES-04 | "Emergency" | "Implementation" | 2026-09-26 | 2026-11-29 | "Within expiry" | yes | "Awaiting ratification" | 2026-10-03 |
-| ES-05 | "Emergency" | "Implementation" | 2026-09-20 | 2026-10-10 | "Expiring soon" | yes | "Ratification overdue" | 2026-09-27 |
+| ES-02 | "Temporary" | "Implementation" | 2026-09-20 | 2026-10-14 | "Expiring soon" | no | "Not required" | null |
+| ES-03 | "Temporary" | "Implementation" | 2026-09-10 | 2026-09-28 | "Expired" | no | "Not required" | null |
+| ES-04 | "Emergency" | "Implementation" | 2026-09-26 | 2026-11-29 | "Within expiry" | no | "Awaiting ratification" | 2026-10-03 |
+| ES-05 | "Emergency" | "Implementation" | 2026-09-20 | 2026-10-10 | "Expiring soon" | no | "Ratification overdue" | 2026-09-27 |
 | ES-06 | "Permanent" | "Closed" | 2026-08-15 | null | "Permanent change" | no | "Not required" | null |
 | ES-07 | "Temporary" | "Closed" | 2026-07-20 | 2026-08-01 | "Closed out" | no | "Not required" | null |
 | ES-08 | "Permanent" | "Review" | 2026-09-25 | null | "Permanent change" | yes | "Not required" | null |
 | ES-09 | "Permanent" | "Cancelled" | 2026-08-01 | null | "Permanent change" | no | "Not required" | null |
 | ES-10 | "Temporary" | "Screening" | 2026-10-06 | 2026-09-01 | "No expiry" | no | "Not required" | null |
 | ES-11 | "Permanent" | "Rejected" | 2026-09-01 | null | "Permanent change" | no | "Not required" | null |
-| ES-12 | "Emergency" | "Implementation" | 2026-09-28 | 2026-12-31 | "Within expiry" | yes | "Ratification overdue" | null |
+| ES-12 | "Emergency" | "Implementation" | 2026-09-28 | 2026-12-31 | "Within expiry" | no | "Ratification overdue" | null |
 
-- HELD, RECORDED IN RECON.md AS RC-3: the overdue column reads "yes" for every change in Implementation past its target implementation date, including ES-04, implemented ON its target date and in effect since. The engine counts Implementation as live work for this test and as in effect for expiry. Nothing in this course grades the overdue test or the overdue count until the lead decides which reading holds.
+- A change is overdue only BEFORE it is on the facility: in "Draft", "Screening", "Review", "Approval", with its target implementation date passed. Of the 5 changes in Implementation here, 5 are past their target date and none reads overdue, because being in effect means the target was met or passed by the fact of it. Late work after that point shows as overdue ACTIONS.
 
 The action log:
 | action | change | type | status | due |
@@ -363,7 +365,7 @@ summarise, the dashboard and report counts, computed once:
 | awaitingApproval | 1 |
 | expired | 1 |
 | expiringSoon | 2 |
-| overdue | 6 |
+| overdue | 1 |
 | openActions | 4 |
 | overdueActions | 2 |
 | ratificationPending | 1 |
@@ -373,7 +375,7 @@ summarise, the dashboard and report counts, computed once:
 - openActions and overdueActions skip AC-06 and AC-07, whose changes (ES-06 Closed, ES-09 Cancelled) are finished and locked. They count AC-09, whose change is unknown. A Cancelled action (AC-08) is finished.
 
 byUrgency on 2026-10-01, most urgent first. Expired changes first, then expiring soon, then overdue, then other live work, then everything finished; within a rank the earlier expiry or target date first:
-- ES-03, ES-05, ES-02, ES-08, ES-04, ES-12, ES-10, ES-01, ES-07, ES-09, ES-06, ES-11
+- ES-03, ES-05, ES-02, ES-08, ES-10, ES-01, ES-04, ES-12, ES-07, ES-09, ES-06, ES-11
 
 # SECTION 13: The comment loop: six dispositions and who moves each one (owned by Expert m01)
 
@@ -457,7 +459,33 @@ The IKANG review register on 2026-10-01:
 | IK-05 | "Draft" | 2026-10-20 | no |
 - Reviews 5, active 3, overdue 1. IK-02 is due on the as-of date and is not overdue. IK-04 is Cancelled and never overdue, whatever its date.
 - byUrgency: IK-01, IK-02, IK-05, IK-04, IK-03.
-- WHAT THIS ENGINE DOES NOT CHECK. It carries no rule about WHO may respond to or verify a comment, or close a review: TRANSITION_ACTOR names a party for a button label and nothing enforces it. RECON.md records this as a finding. Nothing in this course grades reviewer independence.
+- SEGREGATION OF DUTIES IN PEER REVIEW. The author of the work under review never reviews it. IK-01's author is u-efe. Reviewer roles: "Lead Reviewer", "Reviewer". Putting people on the review:
+- REFUSED, the author of the work, as a Reviewer: The author of the work under review cannot review it. Choose somebody independent of the work.
+- REFUSED, the author of the work, as the Lead Reviewer: The author of the work under review cannot review it. Choose somebody independent of the work.
+- REFUSED, the author of the work, with no role given: The author of the work under review cannot review it. Choose somebody independent of the work.
+- ALLOWED, the author of the work, as an Observer.
+- ALLOWED, u-kemi, independent of the work, as the Lead Reviewer.
+- ALLOWED, an external reviewer named only by display name.
+- REFUSED, nobody named at all: Choose the reviewer.
+- Acting on a comment: the moves TRANSITION_ACTOR gives to the reviewer (Verified, Rejected, Withdrawn) are never taken by the author. The author's own move (Responded) and the coordinator's (Closed) are not restricted by this rule.
+- REFUSED, the author verifying C-03, a Responded comment on their own work: The author of the work under review cannot verify a comment on it. A reviewer independent of the work decides it.
+- REFUSED, the author rejecting C-03: The author of the work under review cannot reject a comment on it. A reviewer independent of the work decides it.
+- REFUSED, the author withdrawing C-01, an Open comment: The author of the work under review cannot withdraw a comment on it. A reviewer independent of the work decides it.
+- ALLOWED, u-kemi, independent of the work, verifying C-03.
+- ALLOWED, the author responding to C-01.
+- ALLOWED, the author closing out C-02, a Verified comment.
+- REFUSED, u-kemi responding to C-02, which is already Verified: A verified comment can only go to Closed.
+- REFUSED, nobody signed in, verifying C-03: Sign in to act on this comment.
+- This is the owner decision D1 of 2026-09-18 (segregation of duties), applied to peer review at ASC-0 in the engine; the app and the database follow it with the Suite pull request that ships ASC-0.
+
+The whole IKANG register summarised, with the comments on the other reviews:
+| comment | review | review stage | severity | status | blocking on its own |
+| --- | --- | --- | --- | --- | --- |
+| C-10 | IK-04 | "Cancelled" | "Critical" | "Open" | yes |
+| C-11 | IK-04 | "Cancelled" | "Major" | "Responded" | yes |
+| C-12 | IK-02 | "In Review" | "Major" | "Open" | yes |
+- summarise over all five reviews and all 12 comments: totalComments 12, open 7, blocking 4.
+- C-10 and C-11 are on IK-04, which is Cancelled and locked, so nobody can resolve them: they stay in the comment total and in the severity and status columns, and they are not counted as open or blocking. C-12 is on IK-02, which is live, and counts.
 
 # SECTION 15: A lesson: its three parts, and the author who may not validate it (owned by Expert m03)
 
@@ -520,8 +548,7 @@ The reuse record of each visible lesson, which is a count and never a claim:
 - REFUSED, ON-10 superseded with no successor named: Name the lesson that replaces this one.
 - REFUSED, ON-10 superseded by itself: A lesson cannot supersede itself.
 - REFUSED, a Draft lesson moved straight to Published: A lesson that is draft can only move to Submitted, Archived.
-- ENGINE COPY, RECORDED IN RECON.md AS RC-9: the engine message on the next line says "A archived" where "An archived" is meant. Quote it exactly as the engine prints it, or do not quote it.
-- REFUSED, an Archived lesson moved anywhere: A archived lesson is final.
+- REFUSED, an Archived lesson moved anywhere: An archived lesson is final.
 
 | from | legal next statuses |
 | --- | --- |
@@ -569,6 +596,7 @@ The ONNE register on 2026-10-01:
 | ON-09 | "Superseded" | 2025-06-01 | 487 | null | no | no | no |
 | ON-10 | "Published" | 2026-07-01 | 92 | 2026-11-01 | no | no | no |
 - ON-05 is Validated with a review date inside the lead and reads neither overdue nor due soon, because it is not yet visible to anybody.
+- A lesson's age is counted from its event date. With no event date it falls back to the record's creation timestamp, read as the LOCAL calendar date of that instant (calendar.localDateOf), so the same row can be a day older in Lagos than in UTC. Every ONNE lesson records its event date, which is why every age above is the same in every zone.
 
 summarise, the dashboard and report counts:
 | count | value |
@@ -595,24 +623,24 @@ summarise, the dashboard and report counts:
 
 - HELD ITEMS are rules these engines state but that no owner has decided, or behaviours that are limits of the engine. Each is taught as a stated limit and graded nowhere:
   - A band is found by its lower edge alone, so any positive score bands, including a score no cell of the grid holds (Section 2).
-  - isReviewOverdue on a risk reads the date and not the status (Section 4).
   - countByBand counts whatever it is handed (Section 5).
   - An action on a change that is not in the register counts as open work (Section 12).
   - Within one urgency rank, changes sort by expiry date when they have one and by target date otherwise, so the two keys mix.
-  - Peer review carries no independence rule for who responds, verifies or closes (Section 14), and its summarise counts every comment it is handed whatever the stage of the review the comment belongs to.
+  - A comment whose review is not in the list handed to the peer review summary still counts as open work, as an MOC action with an unknown change does (Sections 12 and 14).
+  - A reviewer named by display name only cannot be matched to the author, so the independence rule allows one (Section 14); a review with no author recorded cannot be checked either.
   - Publishing a lesson checks that a validation record exists and does not check again who validated it.
   - The application counts in the lessons summary include applications on lessons that are not visible.
   - An invalid as-of date makes daysUntil answer NaN rather than refuse, and a comparison on NaN is false either way, so every date rule reads as not due. Nothing in this course passes one.
-- OWNER DECISIONS in this course scope, all taken on 2026-09-18 under AS15 and each held in the engine, the app and where it matters the database: D1 segregation of duties on change approvals (Section 9); Q9 emergency change authority and the ratification window (Section 11); Q10 validation by typed name (Section 15); Q3 fractional levels unscored (Sections 2 and 3). AS13-0 decided that a closed temporary change reads "Closed out" (Section 11).
+- OWNER DECISIONS in this course scope, all taken on 2026-09-18 under AS15 and each held in the engine, the app and where it matters the database: D1 segregation of duties on change approvals (Section 9) and, from ASC-0, on peer review (Section 14); Q9 emergency change authority and the ratification window (Section 11); Q10 validation by typed name (Section 15); Q3 fractional levels unscored (Sections 2 and 3). AS13-0 decided that a closed temporary change reads "Closed out" (Section 11).
 
 The published golden case files, measured by reading them (golden, written by the oracles):
 | golden file | cases | cases carrying a repaired marker | functions exercised |
 | --- | --- | --- | --- |
-| calendar_cases.json | 63 | 11 | 4 |
-| riskScoring_cases.json | 124 | 14 | 7 |
-| managementOfChange_cases.json | 272 | 50 | 15 |
-| peerReview_cases.json | 151 | 5 | 15 |
-| lessonsLearned_cases.json | 333 | 7 | 26 |
+| calendar_cases.json | 77 | 25 | 5 |
+| riskScoring_cases.json | 140 | 30 | 7 |
+| managementOfChange_cases.json | 291 | 69 | 15 |
+| peerReview_cases.json | 184 | 38 | 17 |
+| lessonsLearned_cases.json | 345 | 19 | 26 |
 - Every exported function of each module is exercised by at least one golden case, and the gate replays every case in five time zones. The oracles were written from the rules as stated rather than from the JavaScript.
 - Every engine answer in THIS digest was replayed through the same oracles by oracle_bridge.py. A golden case checks the engine on the oracle author records; the bridge checks it on this course records.
 
@@ -628,11 +656,12 @@ The published golden case files, measured by reading them (golden, written by th
 EVERYTHING IN THIS SECTION IS HISTORY AND IS LABELLED AS HISTORY. Nothing above this line is. Teach it as what the engines used to do, the way this section does.
 
 The repair markers in the golden files, measured (each is a defect an oracle found, pinned as failing, then repaired and kept as a case):
-- calendar: CAL-1, CAL-2.
-- riskScoring: AS15-Q3, RS-1, RS-2.
-- managementOfChange: AS15-D1, AS15-Q9, CAL-1, MOC-1, MOC-1,CAL-1, MOC-AS14-1.
-- peerReview: CAL-1, PR-1, PR-2.
-- lessonsLearned: AS15-Q10, CAL-1, LL-1.
-- HISTORY: a risk review due today used to read overdue west of Greenwich, because the date was parsed as UTC midnight. A blank residual axis used to zero the whole residual. An impossible date such as 30 February used to roll over into a real one. An unreadable expiry used to read "Expiring soon" and pass the implementation gate. A comment with no severity used to sort above Critical. Actions on finished changes used to count as open work for ever (AS14). Emergency changes used to need every level signed before implementation, and a lesson author used to be able to validate their own lesson by typing a name (both AS15).
+- calendar: ASC0-12, CAL-1, CAL-2.
+- riskScoring: AS15-Q3, RC-1, RC-2, RS-1, RS-2.
+- managementOfChange: AS15-D1, AS15-Q9, CAL-1, MOC-1, MOC-1,CAL-1, MOC-AS14-1, RC-3, RC-9.
+- peerReview: CAL-1, PR-1, PR-2, RC-4a, RC-4b, RC-9.
+- lessonsLearned: AS15-Q10, ASC0-12, CAL-1, LL-1, RC-9.
+- HISTORY, ASC-0 (engines PR #212, the repairs these two assurance courses found while this digest was being built): a closed risk used to read review-overdue and an as-of date given as text used to be read as a UTC instant; a change already in Implementation used to read overdue against its target date; peer review used to hold no rule on who reviews, and its summary used to count comments on cancelled reviews as blocking for ever; and several refusals used to read "A archived", "level 2 and 3 has" and "1 critical comment still need".
+- HISTORY, AS12 to AS15: a risk review due today used to read overdue west of Greenwich, because the date was parsed as UTC midnight. A blank residual axis used to zero the whole residual. An impossible date such as 30 February used to roll over into a real one. An unreadable expiry used to read "Expiring soon" and pass the implementation gate. A comment with no severity used to sort above Critical. Actions on finished changes used to count as open work for ever (AS14). Emergency changes used to need every level signed before implementation, and a lesson author used to be able to validate their own lesson by typing a name (both AS15).
 - The general lesson is the one this programme runs on: each of these was found by an independent oracle written from the stated rule (AS12 onward), and each is now a golden case that fails if the defect returns.
 

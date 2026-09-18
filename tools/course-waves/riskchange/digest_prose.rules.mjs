@@ -41,7 +41,12 @@ export default {
     { frag: 'Only the person this approval is assigned to can decide it. If they are unavailable, reassign it.', src: 'engines/assurance/managementOfChange.js' },
     { frag: 'has not signed yet.', src: 'engines/assurance/managementOfChange.js' },
     { frag: 'A comment cannot be verified before the author has responded to it.', src: 'engines/assurance/peerReview.js' },
-    { frag: 'still need resolving. Verify, close out or withdraw them first.', src: 'engines/assurance/peerReview.js' },
+    // ASC-0 (RC-9) made the verb agree with the count, and this pin turned red
+    // on the re-vendor until it was re-read against the new sentence.
+    { frag: "still need${blocking.length === 1 ? 's' : ''} resolving. ", src: 'engines/assurance/peerReview.js' },
+    { frag: 'The author of the work under review cannot review it. Choose somebody independent of the work.', src: 'engines/assurance/peerReview.js' },
+    { frag: 'a comment on it. A reviewer independent of the work decides it.', src: 'engines/assurance/peerReview.js' },
+    { frag: "${withArticle(String(lesson.status).toLowerCase())} lesson is final.", src: 'engines/assurance/lessonsLearned.js' },
     { frag: 'Ask a colleague who was not involved in writing it to validate it.', src: 'engines/assurance/lessonsLearned.js' },
     { frag: 'A lesson that changed nothing has not been learned.', src: 'engines/assurance/lessonsLearned.js' },
   ],
