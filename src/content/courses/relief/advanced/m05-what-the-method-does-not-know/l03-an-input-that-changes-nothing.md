@@ -10,7 +10,7 @@ Type a balanced-bellows back-pressure factor into the gas route while the flow t
 
 That is correct. The standard uses F2 in the subcritical branch and the bellows factor has no place in it. An input that cannot move an answer because the method it belongs to is not the method being used is behaving exactly as it should.
 
-What makes it teachable rather than confusing is that the engine says so. The call succeeds and attaches a warning, and these are the engine's own words: `subcritical flow uses F2, not Kb; the typed Kb was ignored`.
+What makes it teachable rather than confusing is that the engine says so. The call succeeds and attaches a warning, and these are the engine's own words: `subcritical flow uses F2 in place of Kb, so the typed Kb was ignored`.
 
 Silence would have left a user turning a dial and inventing an explanation. A warning turns the same behaviour into information.
 

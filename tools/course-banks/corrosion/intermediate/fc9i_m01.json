@@ -19,7 +19,7 @@
    "It issues the band label and withholds only the life."
   ],
   "answer": 1,
-  "explanation": "The arithmetic ran, so this is a withholding rather than a refusal. The engine's own words are that the rate is zero because that was assumed and not because it was calculated, and that an unbounded life off a dropdown is the strongest reassurance on the screen arriving from the weakest input."
+  "explanation": "The arithmetic ran, so this is a withholding rather than a refusal. The engine's own words are that the rate is zero by assumption, and nothing was calculated to reach it, and that an unbounded life off a dropdown is the strongest reassurance on the screen arriving from the weakest input."
  },
  {
   "prompt": "On an oil-wet case, what does the engine report for the effective corrosion inhibition?",

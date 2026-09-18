@@ -37,7 +37,7 @@ a note in its own words:
 
 > Reynolds 4080 sits on the laminar to turbulent switch at 4000, where this
 > friction factor is discontinuous and the shear jumps by about a factor of
-> two. Read this number as a bracket, not a value.
+> two. Read this number as good to within that factor of two.
 
 Read that last sentence as an instruction. Near the switch the shear is a range with two candidates in it. Away
 from the switch it is a single number.

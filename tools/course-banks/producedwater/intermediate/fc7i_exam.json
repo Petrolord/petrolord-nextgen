@@ -368,7 +368,7 @@
    "0.828 m/hr, which is the loading the 600 m2 bed was refused at.",
    "1.013950 m/hr, which is the loading of the last bed that answers.",
    "2.484176 m/hr, which is the loading a 200 m2 bed would be refused at.",
-   "0.248 m/hr, against the 1 m/hr floor this module answers above."
+   "0.248 m/hr, below the 1 m/hr floor, which this module answers at and above."
   ],
   "answer": 3,
   "explanation": "Both refusals carry the same four things: the loading given, the floor, the reference loading the coefficient is declared at, and the bed area that would reach the floor on this flow."

@@ -95,7 +95,7 @@ q(2, "Every answered row of the straight-run table carries a note. What does tha
  ["That the rows were computed from the beta and the fitting geometry, so a reader can reproduce them, and that a flow conditioner is outside the scope of the calculation.",
   "That the rows come from a published table the engine names, so a reader can check them, and that the engine will interpolate between the printed betas on request.",
   "That the rows are the engine's own defaults and can be replaced by a project's stated figures, which is how a certified vendor figure is handled elsewhere in this course."],
- "The engine's own words are `these are table values, not a calculation: they depend on the fitting and the beta, and a flow conditioner shortens them substantially`."),
+ "The engine's own words are `these are table values and nothing here calculates them: they depend on the fitting and the beta, and a flow conditioner shortens them substantially`."),
 
 q(1, "The straight-run function reports one upstream fitting it refuses to answer for. What tree was that counted over and what rule decided it?",
  "The five fitting names in the wave's field list, each asked at all six betas, with a fitting counting as refused when the engine returns withheld true at every beta asked.",

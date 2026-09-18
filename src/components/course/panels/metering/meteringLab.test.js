@@ -855,19 +855,12 @@ describe('THE REFUSAL GATE: every refusal is the engine\'s own returned message'
 
 describe('THE COPY RULE, over everything a learner reads on a panel', () => {
   // The wave's gate_copy_rule.py sweeps the digest and the lesson bodies. It
-  // does not sweep panel sources, so the same rule is enforced here. The five
-  // engine strings the gate exempts BY EXACT FRAGMENT are exempted the same way
-  // and for the same reason: a paraphrase would teach a sentence the learner
-  // will never see on the screen. A panel may not write a contrastive of its
-  // own, and none of these fragments is typed into a panel anyway, because
-  // every engine sentence on the screen arrives at run time through the lab.
-  const ENGINE_TEXT = [
-    'these are table values, not a calculation',
-    'stated screen, not a value read from a',
-    'whether to ask the question, not to',
-    'the water test governs this course, not the product',
-    'this service is FLASHING, not cavitating',
-  ];
+  // does not sweep panel sources, so the same rule is enforced here. The gate
+  // exempts no engine string, because every engine message the course quotes
+  // meets the rule, and this list matches it. A panel may not write a
+  // contrastive of its own, and every engine sentence on the screen arrives at
+  // run time through the lab.
+  const ENGINE_TEXT = [];
 
   PANEL_FILES.concat(['meteringLab.js']).forEach((file) => {
     it(`${file} carries no em dash and no en dash`, () => {

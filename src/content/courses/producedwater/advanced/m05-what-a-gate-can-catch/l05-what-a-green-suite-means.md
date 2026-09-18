@@ -4,7 +4,7 @@ A golden file and a green suite are not the same thing as a validated engine. Th
 
 ## The battery
 
-The suite this course is built beside carries 78 tests, counted off the vendored file. Beside it sits a battery of deliberately planted defects, each one introduced alone, the suite run against it, and the result recorded.
+The suite this course is built beside carries 79 tests, counted off the vendored file. Beside it sits a battery of deliberately planted defects, each one introduced alone, the suite run against it, and the result recorded.
 
 Thirty five defects, twenty seven of them planted in the engine alone and eight planted in the engine and the oracle together, were run one at a time. Twenty four more were added, with one self-test of the runner itself, and none of the sixty leaves the suite green.
 

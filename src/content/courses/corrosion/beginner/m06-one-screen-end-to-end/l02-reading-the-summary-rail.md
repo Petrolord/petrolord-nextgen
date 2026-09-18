@@ -12,7 +12,7 @@ Then the rate, at 0.754524 mm/yr. Then the sour comparison, which reports the st
 
 This part of the rail is where the arithmetic surprises people, and it is worth pausing on. The datasheet efficiency is 90.000000 percent and the availability is 95.000000 percent, and the effective protection the engine reports is 85.500000 percent, a shortfall of 4.500000 percentage points. The engine says what that costs in its own words:
 
-> a 90 percent inhibitor at 95 percent availability gives 85.5 percent effective protection, which is 1.45 times the metal loss of the datasheet number: availability, not efficiency, is what limits it
+> a 90 percent inhibitor at 95 percent availability gives 85.5 percent effective protection, which is 1.45 times the metal loss of the datasheet number: availability is what limits it
 
 Read the words above as the engine's own and keep the vocabulary straight in your own notes: the chemical here is a corrosion inhibitor, a filming amine on the steel, and it has nothing to do with the hydrate inhibitors the Flow Assurance course doses in the water phase.
 

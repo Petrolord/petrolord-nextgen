@@ -11,7 +11,7 @@ removes everything while it is on.
 
 Then the engine adds a note, and the note is the lesson:
 
-> an efficiency of 100 percent is the arithmetic of the number typed in, not a prediction: no inhibitor removes all metal loss while it is on.
+> an efficiency of 100 percent is only the arithmetic of the number typed in and predicts nothing: no inhibitor removes all metal loss while it is on.
 
 ## What that sentence is doing
 

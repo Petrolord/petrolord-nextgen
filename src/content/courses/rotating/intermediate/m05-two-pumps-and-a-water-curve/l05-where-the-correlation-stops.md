@@ -8,7 +8,7 @@ A correlation with an empirical parameter has a range it was fitted over and a r
 
 At 9000.000000 cSt the engine returns a corrected flow of 551.907863 gpm and a corrected head of 206.365549 ft, and it warns:
 
-"B above 40 is outside the published correlation: this service needs a positive-displacement pump or vendor viscous test data, not a corrected centrifugal curve"
+"B above 40 is outside the published correlation, so a corrected centrifugal curve cannot be used here: this service needs a positive-displacement pump or vendor viscous test data"
 
 B on that row is 40.385733873. The warning names the parameter, names the threshold, and names the two things that would actually answer the question. It does not withhold the numbers, and a caller reading only the numbers gets a corrected curve for a service the method has just disclaimed.
 

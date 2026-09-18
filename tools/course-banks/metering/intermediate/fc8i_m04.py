@@ -46,7 +46,7 @@ q(2, "Where does the total system drop the authority is taken against have to co
  "Where that figure is a guess, the authority is a guess, and the verdict beside it inherits the guess without showing it.")
 
 q(0, "The engine states where its two authority boundaries come from. What does the message say?",
- "`the 0.5 and 0.25 boundaries are this engine's stated screen, not a value read from a standard`",
+ "`the 0.5 and 0.25 boundaries are this engine's stated screen, and no standard in this package supplies them`",
  ["`the 0.5 and 0.25 boundaries are drawn from the installed characteristic literature and apply to modulating service`",
   "`the 0.5 and 0.25 boundaries are the limits at which the installed gain doubles and halves across the travel`",
   "`the 0.5 and 0.25 boundaries were chosen so that a linear trim is recommended wherever the loop can be tuned`"],

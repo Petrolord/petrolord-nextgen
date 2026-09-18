@@ -66,7 +66,7 @@ q(0, "Three different balanced-bellows factors in the subcritical branch all ret
  ["A defect of the kind the audit describes, since a validated input with a box has no effect on the answer.",
   "A coincidence of the stated case, since the three factors chosen happen to fall inside one printing precision.",
   "A clamp, since the engine holds the factor at one whenever its branch is not in use."],
- "What makes it teachable rather than confusing is that the engine says so: the call succeeds and attaches `subcritical flow uses F2, not Kb; the typed Kb was ignored`. Silence would have left a user turning a dial and inventing an explanation.")
+ "What makes it teachable rather than confusing is that the engine says so: the call succeeds and attaches `subcritical flow uses F2 in place of Kb, so the typed Kb was ignored`. Silence would have left a user turning a dial and inventing an explanation.")
 
 q(2, "The steam superheat factor at 1.000000 gives 0.949984 in2 and at 0.830000 gives 1.144559 in2, a ratio of 1.204819277108 against a factor ratio of 1.204819277108. What does that pair of ratios say?",
  "The factor divides straight into the area, so this input always moves the answer exactly.",
@@ -101,7 +101,7 @@ q(0, "A drainage answer arriving as a string is refused by name. What class of d
  ["A physics error, since a drained pool and an undrained one carry different constants and different exponents.",
   "A unit error, since a boolean sent as text cannot be checked against the environment factor beside it.",
   "A precision error, since a string compared against a boolean resolves differently at different printing precisions."],
- "The string \"false\" is truthy in JavaScript, so the duty would come back on the drained constant with nothing said. The engine's own wording is `adequate drainage must be true or false, not a string`.")
+ "The string \"false\" is truthy in JavaScript, so the duty would come back on the drained constant with nothing said. The engine's own wording is `adequate drainage must be the boolean true or false`.")
 
 q(3, "Of the refusals this module can produce, exactly one carries a second key beside `error`. Which, and why does it matter?",
  "selectOrifice past the largest returns `multipleOfT`, and a guard that stops at the error throws that figure away.",

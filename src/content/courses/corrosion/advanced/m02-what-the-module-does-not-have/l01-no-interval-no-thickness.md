@@ -14,7 +14,7 @@ For the fitness-for-service question the engine has nothing at all. Producing an
 
 The remaining-life door makes the boundary concrete in one message. Ask it for a life on a line whose allowance is already fully consumed and it declines rather than returning a negative life or a zero one:
 
-> the corrosion allowance is already consumed: this is an inspection and fitness-for-service question, not a design one
+> the corrosion allowance is already consumed: this is now an inspection and fitness-for-service question
 
 Read that as a statement about scope. Most refusals in the module say an input is wrong or missing. This one says the input is fine and the module is the wrong tool.
 
