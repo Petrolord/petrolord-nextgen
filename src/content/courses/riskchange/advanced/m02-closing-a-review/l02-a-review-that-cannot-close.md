@@ -16,13 +16,15 @@ IK-01, Water injection pump selection, is in "Verification". Its blocking commen
 
 The sentence counts the blockers by severity, names the three ways a comment becomes resolved (verify, close out or withdraw) and says "first", so the order of work is plain.
 
+One move later the engine is asked again: with C-01 withdrawn, closing IK-01 is still refused, and the blocking comments are C-03 and C-04, 2 in all. Clearing C-01 does not open the door while C-03 and C-04 stand.
+
 ## What closing does not wait for
 
 The engine then asks the same question after IK-01's blocking comments are withdrawn:
 
 - ALLOWED, closing IK-01 once its blocking comments are withdrawn, with a Minor, an Editorial and an unrated comment still Open.
 
-C-06, C-07 and C-09 are still "Open", and the review closes anyway. A review that waited on every editorial remark would stay open for a spelling point. By letting only "Critical" and "Major" block, the engine keeps the stop for the comments that should stop the work.
+C-06, C-07 and C-09 are still "Open", and the review closes anyway. By letting only "Critical" and "Major" block, the engine keeps the stop for the comments that should stop the work.
 
 ## The counts beside the verdict
 
@@ -44,7 +46,7 @@ The engine also sorts the log for the reader, with the function bySeverityThenAg
 
 The three blockers lead the list, which is where a coordinator reading down it needs them. The unrated C-09 sorts after every rated unresolved comment in this log, the "Editorial" C-07 included, so its missing severity does not lift it above the comments that were rated.
 
-Every answer here was also replayed through the independent oracle for peerReview, so each is two methods agreeing.
+Every answer here was also replayed through the independent oracle for peerReview.
 
 ## Exercise
 

@@ -23,9 +23,9 @@ The engine's summary reads openActions 4 and overdueActions 2. Both counts were 
 - **Finished actions.** AC-02 and AC-04 are "Complete" and AC-08 is "Cancelled". A Cancelled action is finished.
 - **Actions on a finished change.** AC-06 is "Open" and AC-07 is "In progress", and both are skipped, because their changes are finished and locked: ES-06 is in the Closed stage and ES-09 is "Cancelled".
 
-Look at AC-06. Its status says "Open" and its due date, 2026-09-01, is before the as-of date, so a count that read the action alone would call it open and overdue. The engine reads its change as well. ES-06 is in the Closed stage, finished and locked, and an action on a locked change is left out of the open work. The same holds for AC-07 on ES-09, which is "Cancelled".
+Look at AC-06. Its status says "Open" and its due date, 2026-09-01, is before the as-of date, so a count that read the action alone would call it open and overdue. The engine reads its change as well, and ES-06 is locked. The same holds for AC-07 on ES-09, which is "Cancelled". A Rejected change is terminal in the same way. One probe puts an Open action due 2026-09-26 on ES-11, which is "Rejected": openActions 0, overdueActions 0.
 
-This is why a reader of the counts needs both lists in hand: the action log and the change register. An action's own status tells you half of the answer; the stage of its change tells you the rest.
+So a reader of the counts needs both lists in hand: the action log and the change register.
 
 ## One kind of row the count keeps
 
@@ -33,16 +33,26 @@ AC-09 names change ES-99, which is not in this register. The engine counts it. A
 
 ## The four and the two
 
-Reading the log with those rules, the open actions are AC-01, AC-03, AC-05 and AC-09, which agrees with openActions 4.
+The 4 open actions are AC-01, AC-03, AC-05 and AC-09.
 
-"Overdue" here means an action's due date has passed, which is a different question from a change's own overdue flag. The digest prints the count, overdueActions 2, and does not list which two. Of the four open actions, AC-01 is due 2026-09-28 and AC-09 is due 2026-09-30, both before 2026-10-01; AC-03 and AC-05 are due after it. That reading agrees with the count.
+"Overdue" here is the overdue flag on an action, a different question from a change's own overdue flag. An action is overdue when it is open work and its due date has PASSED: days until below zero. The 2 overdue actions on 2026-10-01 are AC-01, due 2026-09-28 at -3 days, and AC-09, due 2026-09-30 at -1 days. AC-03 and AC-05 are due after the as-of date.
+
+The edge is the as-of date itself. Three probes, each one open action read on 2026-10-01:
+
+| due | openActions | overdueActions |
+| --- | --- | --- |
+| 2026-09-30, the day before | 1 | 1 |
+| 2026-10-01, the as-of date | 1 | 0 |
+| 2026-10-02, the day after | 1 | 0 |
+
+An action due on the as-of date is not overdue that day, the same rule as a risk review due today.
 
 {{panel:rc-change-explorer}}
 
 ## Where late work shows
 
-A change's own overdue flag is read against its target implementation date, and only before the change is on the facility. The ESANMI register holds 5 changes in "Implementation", 5 are past their target date, and none of them reads overdue. Late work on a change that is already on the facility shows here instead, as overdue actions, with the due date of each action carrying the lateness. A reader looking for late work on a live change looks at overdueActions and the action log.
+A change's own overdue flag is read against its target implementation date, and only before the change is on the facility. The ESANMI register holds 5 changes in "Implementation", 5 are past their target date, and none of them reads overdue. Late work on a change already on the facility shows here instead, as overdue actions.
 
 ## Exercise
 
-For every action in the ESANMI log, record whether it is counted in openActions on 2026-10-01, and name the rule that included or skipped it: finished status, finished change, or unknown change counted. Then record openActions and overdueActions, and say why AC-06 is not in either count.
+For every action in the ESANMI log, record whether it is counted in openActions on 2026-10-01, and name the rule that included or skipped it: finished status, finished change, or unknown change counted. Then record openActions and overdueActions, and name the two overdue actions with their days until. Say why AC-06 is not in either count, and why an action due on 2026-10-01 is not overdue on that date.

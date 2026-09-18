@@ -26,7 +26,17 @@ IK-02 is due on 2026-10-01 itself and reads not overdue. A due date is the last 
 
 ## A finished review carries no due date that matters
 
-IK-03 and IK-04 both have due dates before 2026-10-01, and neither reads overdue. IK-03 is in the review's "Closed" stage, and the work is done. IK-04 is "Cancelled", and the digest says it plainly: it is never overdue, whatever its date. On this register only a review in an active stage reads overdue, much as only a live risk can be review-overdue in the risk register.
+IK-03 and IK-04 both have due dates before 2026-10-01, and neither reads overdue. IK-03 is in the review's "Closed" stage, and the work is done. IK-04 is "Cancelled", and it is never overdue, whatever its date. isOverdue asks the stage first. Every stage at the same past due date, 2026-09-30:
+
+| stage | overdue |
+| --- | --- |
+| "Draft" | yes |
+| "In Review" | yes |
+| "Verification" | yes |
+| "Closed" | no |
+| "Cancelled" | no |
+
+Only a review in an active stage reads overdue, much as only a live risk can be review-overdue in the risk register.
 
 ## The urgency order
 
@@ -34,11 +44,11 @@ The engine's byUrgency sorts the register for a coordinator deciding what to loo
 
 - IK-01, IK-02, IK-05, IK-04, IK-03.
 
-The overdue review leads, the other two live reviews follow it, and the two finished reviews come last.
+The rule: overdue reviews first, then other reviews in an active stage, then everything finished; within a rank the earlier due date first, and a review with no due date last. IK-01 is the one overdue review. IK-02 and IK-05 are active, with IK-02 due first. IK-04 and IK-03 are finished, with IK-04 due first.
 
 ## The whole register counted
 
-A summary over every review on the register also counts every comment on it. IKANG holds three comments beyond IK-01's own log:
+IKANG holds three comments beyond IK-01's own log:
 
 | comment | review | review stage | severity | status | blocking on its own |
 | --- | --- | --- | --- | --- | --- |
@@ -48,14 +58,12 @@ A summary over every review on the register also counts every comment on it. IKA
 
 The summary over all five reviews and all 12 comments reads totalComments 12, open 7, blocking 4. C-10 and C-11 would block on their own, but they sit on IK-04, which is "Cancelled" and locked, so nobody can resolve them. They stay in the comment total and in the severity and status columns, and they are not counted as open or blocking. C-12 is on IK-02, which is live, and counts. The open and blocking counts are therefore IK-01's 6 and 3, each with C-12 added.
 
-Counting them as open work would put a blocker on the dashboard that nobody has the power to clear.
-
 ## A limit the summary states
 
 A comment whose review is missing from the list handed to the summary still counts as open work. The digest lists that among the held limits, and the fifth module reads it there.
 
-These answers were also replayed through the independent oracle for peerReview, so each is two methods agreeing.
+These answers were also replayed through the independent oracle for peerReview.
 
 ## Exercise
 
-Record, on 2026-10-01, which IKANG reviews are overdue, and the reviews, active and overdue counts. Then record totalComments, open and blocking over the whole register. Say which rule keeps IK-02 from reading overdue, and which rule keeps C-10 and C-11 out of the open and blocking counts.
+Record, on 2026-10-01, which IKANG reviews are overdue, and the reviews, active and overdue counts. Then record totalComments, open and blocking over the whole register. Say which rule puts IK-04 before IK-03 in the urgency order, which rule keeps IK-02 from reading overdue, and which rule keeps C-10 and C-11 out of the open and blocking counts.

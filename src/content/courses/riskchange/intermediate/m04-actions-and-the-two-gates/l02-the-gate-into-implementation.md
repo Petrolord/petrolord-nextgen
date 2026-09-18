@@ -20,7 +20,7 @@ ES-01 is a permanent change in "Approval" in the ESANMI register. The engine ans
 - REFUSED, ES-01 into Implementation with every level signed and one Pre-implementation action still Open: 1 pre-implementation action still open. They exist to be done before the change goes in.
 - ALLOWED, ES-01 into Implementation with every level signed and its actions finished.
 
-The first probe fails condition 1. The second clears condition 1 and fails condition 2, and its refusal carries a reason as well as a count. The third clears both.
+The first probe fails condition 1. The second clears condition 1 and fails condition 2. The third clears both.
 
 ES-01 carries two Pre-implementation actions in the register: AC-01, "Open", and AC-02, "Complete". The second probe is the gate reading the one that is still open.
 
@@ -30,17 +30,17 @@ Condition 1 has two more refusals, which module two read: "An approver has rejec
 
 ## The expiry condition
 
-A Temporary or Emergency change must carry a readable expiry date before it goes in. A Temporary change whose expiry reads "after the turnaround" is refused: A temporary change needs an expiry date before it is implemented. Without one it is a permanent change nobody decided to make. Lesson four of this module reads this condition in full.
+A Temporary or Emergency change must carry a readable expiry date before it goes in. A Temporary change whose expiry reads "after the turnaround" is refused: A temporary change needs an expiry date before it is implemented. Without one it is a permanent change nobody decided to make. The condition asks only that the date can be read. An expiry of 2026-09-30, already passed, is ALLOWED through with every level signed, and lesson four reads what that change says the next day.
 
 {{panel:rc-change-explorer}}
 
 ## The emergency exception
 
-Condition 1 carries one exception, and it is owner policy (AS15, Q9, decided on 2026-09-18): an Emergency change needs only its first level signed to go in. The rest of its levels sign afterwards, inside a ratification window. Module five reads that route and its window. At this gate, what matters is that the exception is narrow. It changes how many levels must sign. It does not lift the rejection rule, the Pre-implementation rule or the expiry rule.
+Condition 1 carries one exception, and it is owner policy (AS15, Q9, decided on 2026-09-18): an Emergency change needs only its first level signed to go in. The rest of its levels sign afterwards, inside a ratification window. Module five reads that route and its window. The exception is narrow. It changes how many levels must sign. It does not lift the rejection rule, the Pre-implementation rule or the expiry rule.
 
 ## Reading a refusal at the gate
 
-When the gate refuses, read the sentence for which condition failed: levels are condition 1, pre-implementation actions condition 2, an expiry date condition 3. The sentence tells you what to fix, and no other stage leads into "Implementation".
+When the gate refuses, read the sentence for which condition failed: levels are condition 1, pre-implementation actions condition 2, an expiry date condition 3. The sentence tells you what to fix.
 
 ## Exercise
 

@@ -27,9 +27,9 @@ The same holds in the other direction. An approval that has been given cannot be
 
 When you read an approval set, a row's status is the whole of its story as far as the engine is concerned. A "Pending" row can still be decided, by its assignee alone. An "Approved" row signs its level and will stay signed. A "Rejected" row stops the gate and will stay rejected. A "Delegated" row signs nothing. Report each row by the status the engine reads, quoted exactly.
 
-## What the digest does not show
+## What the engine does not model
 
-The digest prints the two refusals and stops there. It does not show how an organisation revisits a decision once it has been made, and this lesson does not guess. What it does show is enough to read a record: a decided approval is fixed, and its status is the answer the engine will give for it.
+The engine holds no rule for revisiting a decision. Measured by searching its 34 exports, the functions whose name mentions reopening, revisiting, undoing, revoking or withdrawing a decision number 0. Whether a decided approval can be reopened is the app's and the database's business, and this engine says nothing about it. So a decided approval is fixed as far as the engine is concerned, and its status is the answer the engine gives for it.
 
 ## Exercise
 

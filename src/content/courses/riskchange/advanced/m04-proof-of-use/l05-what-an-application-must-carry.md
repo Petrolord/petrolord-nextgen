@@ -16,7 +16,7 @@ The two targets that are Suite registers, "Risk register" and "Management of cha
 - REFUSED, a risk register target with no risk named: Name the risk. A lesson pushed into the register points at the row it raised or changed, so the trail runs both ways.
 - REFUSED, a change register target with no change named: Name the change record this lesson went into.
 
-The phrase "the trail runs both ways" is the point. With the risk named, a reader of the lesson can open the risk, and a reader of the risk can find the lesson that changed it. The last module of this tier walks that trail for ON-01 and the risk OB-07.
+The phrase "the trail runs both ways" is the point. With the risk named, a reader of the lesson can open the risk, and a reader of the risk can find the lesson that changed it.
 
 ## Into anything else
 
@@ -31,7 +31,15 @@ A rejection changes nothing, and it must carry the reason:
 - REFUSED, a rejection with no reason: Say why it was not adopted. A rejection is a decision, and the next person to read this lesson needs the reasoning.
 - ALLOWED, a rejection with its reason.
 
-This is what makes a rejection a real record. ON-03's one application is a rejection, and its reuse record counts it as a consideration.
+A rejection must still name its target. Three refusals, each on a rejection that carries its reason:
+
+| the rejection | the engine's sentence |
+| --- | --- |
+| no target type | Pick what this lesson was applied to. |
+| a procedure target and no reference | Name what changed (the procedure, the course, the standard) so somebody can go and look at it. |
+| into the risk register, no risk named | Name the risk. A lesson pushed into the register points at the row it raised or changed, so the trail runs both ways. |
+
+The target checks come before the outcome check, so a rejection carries the same trail as an adoption, plus its reason.
 
 ## The target and the outcome themselves
 
@@ -40,14 +48,12 @@ Two more refusals guard the fields every application needs:
 - REFUSED, no target type: Pick what this lesson was applied to.
 - REFUSED, an outcome the register does not know: Was the lesson adopted, adapted, or rejected?
 
-The second refusal is a question, and it lists the three outcomes the engine knows. An outcome outside those three would fall into no column of the reuse record, so the engine asks for one it can count.
+The second refusal is a question, and it lists the three outcomes the engine knows.
 
 ## Why the refusals come at recording time
 
-Every one of these checks happens when the application is recorded. An application without its pointer would sit in the log looking like evidence until somebody tried to follow it.
-
-Every answer here was also replayed through the independent oracle for lessonsLearned, so each is two methods agreeing.
+Every one of these checks happens when the application is recorded. An application without its pointer would sit in the log looking like evidence until somebody tried to follow it. Every answer here was also replayed through the independent oracle for lessonsLearned.
 
 ## Exercise
 
-Record the engine's sentence for a risk register target with no risk named, a change register target with no change named, a procedure with no reference and a rejection with no reason. Record which of these the engine allows: a risk register target with the risk named, a rejection with its reason. Say what a risk register and a change register target must name, and what a rejection must carry.
+Record the engine's sentence for a risk register target with no risk named, a change register target with no change named, a procedure with no reference and a rejection with no reason. Record which of these the engine allows: a risk register target with the risk named, a rejection with its reason. Say what a risk register and a change register target must name, what a rejection must carry, and whether a rejection may leave out its target.

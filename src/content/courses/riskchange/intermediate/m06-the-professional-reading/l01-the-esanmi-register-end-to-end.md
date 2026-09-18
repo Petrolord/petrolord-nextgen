@@ -39,12 +39,27 @@ Read each count back to its rule:
 - **active 8.** The stage counts are "Draft" 0, "Screening" 1, "Review" 1, "Approval" 1 and "Implementation" 5, and those are the active stages: 0 + 1 + 1 + 1 + 5 = 8.
 - **expired 1 and expiringSoon 2.** ES-03 reads "Expired"; ES-02 and ES-05 read "Expiring soon". ES-10 has an expiry date behind the as-of date and reads "No expiry", because it is in "Screening" and not in effect.
 - **overdue 1.** This is the overdue flag on a change, read against its target date. ES-08, in "Review" with a target of 2026-09-25, is the one change that reads yes. The 5 changes in "Implementation" are all past their target dates, and none reads overdue, because being in effect means the target was met or passed by the fact of it.
-- **openActions 4 and overdueActions 2.** Module four read these from the action log: actions on finished changes (AC-06 on ES-06, AC-07 on ES-09) are skipped, and AC-09, whose change ES-99 is not in the register, is counted.
+- **openActions 4 and overdueActions 2.** Actions on finished changes (AC-06 on ES-06, AC-07 on ES-09) are skipped, and AC-09, whose change ES-99 is not in the register, is counted. The open four are AC-01, AC-03, AC-05 and AC-09. The overdue two are AC-01 (due 2026-09-28, -3 days) and AC-09 (due 2026-09-30, -1 days): open work whose due date has passed.
 - **ratificationPending 1 and ratificationOverdue 2.** ES-04 is awaiting ratification. ES-05 is past its due date of 2026-09-27, and ES-12 has no implementation date, so its window fails closed.
 
 - **total 12.** Every row counts, whatever its stage, including the four finished changes ES-06, ES-07, ES-09 and ES-11.
 
-Two kinds of count need care. The engine prints awaitingApproval 1, and the by-stage count shows 1 change in "Approval", ES-01; the digest prints both figures and does not print the definition of awaitingApproval, so read them side by side and say no more. It also prints counts by risk level: "Low" 2, "Medium" 4, "High" 4, "Critical" 2. The register above does not carry each change's risk level, so quote those four counts as the engine's figures.
+Two kinds of count need care. awaitingApproval counts the changes whose STAGE is Approval: 1, ES-01. It counts changes, so ES-01 counts once although it carries two Pending approval rows. The counts by risk level read "Low" 2, "Medium" 4, "High" 4, "Critical" 2, and every row counts, finished changes included:
+
+| change | risk level |
+| --- | --- |
+| ES-01 | "High" |
+| ES-02 | "High" |
+| ES-03 | "Medium" |
+| ES-04 | "Critical" |
+| ES-05 | "High" |
+| ES-06 | "Low" |
+| ES-07 | "High" |
+| ES-08 | "Medium" |
+| ES-09 | "Medium" |
+| ES-10 | "Low" |
+| ES-11 | "Medium" |
+| ES-12 | "Critical" |
 
 ## Rows the counts leave alone
 

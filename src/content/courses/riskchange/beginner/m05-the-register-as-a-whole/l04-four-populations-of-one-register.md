@@ -8,7 +8,7 @@ A dashboard tile reads "Critical risks" with a number under it. That number is a
 
 The first choice is which risks to hand to countByBand: every risk in the register, or only the live ones. The engine does not filter by status, so this is entirely the caller's decision. The second choice is which score to count: the inherent band, the risk before any control, or the residual band, the risk with its controls in place.
 
-Two choices of two options each give four populations.
+Two choices of two options each give four populations. A screen can make a narrower first choice still, and the next lesson reads one that does.
 
 ## The four counts
 

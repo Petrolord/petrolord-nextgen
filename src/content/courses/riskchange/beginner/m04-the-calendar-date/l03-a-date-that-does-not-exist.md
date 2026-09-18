@@ -31,7 +31,15 @@ This is the rule you met with levels. A likelihood of 2.5 is off the scale, and 
 
 On the OBODO register, OB-09 is "Draft" with no review date. Its next review is null and its days until is null. Its review overdue answer is no, and the reason printed for it is its status: OB-09 is not live, so the test never reaches the date.
 
-This course does not show a live risk whose review date is null or unreadable, so it does not teach what that risk's overdue answer would be. If you meet one, the record is the thing to fix: a live risk needs a review date that exists.
+A live risk takes the same question further, because its status lets the test reach the date. Three probes, each an "Open" risk read on 2026-10-01:
+
+| review date on the record | days until | review overdue |
+| --- | --- | --- |
+| none at all | null | no |
+| 30 February | null | no |
+| "after the audit" | null | no |
+
+So a live risk with no readable review date is never review-overdue: the engine has no date to be late against, and nothing in it flags the missing date. The overdue column stays quiet on exactly the record that most needs a person. If you meet one, the record is the thing to fix: a live risk needs a review date that exists.
 
 ## The mistake
 
@@ -39,4 +47,4 @@ The mistake is to trust any date that displays. A date field that shows a value 
 
 ## Exercise
 
-Record the parsed value and the days until for "2026-02-30", "2026-13-01" and "after the turnaround", counted from 2026-10-01. Record OB-09's status, next review and days until, and state the rule that decides its review overdue answer.
+Record the parsed value and the days until for "2026-02-30", "2026-13-01" and "after the turnaround", counted from 2026-10-01. Record OB-09's status, next review and days until, and state the rule that decides its review overdue answer. Then record the review overdue answer for an "Open" risk whose review date is 30 February, and say why the engine gives it.

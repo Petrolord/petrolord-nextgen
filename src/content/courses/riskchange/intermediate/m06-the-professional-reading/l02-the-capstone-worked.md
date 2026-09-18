@@ -4,7 +4,7 @@ The graded exercise for this tier is a change register with its actions, read on
 
 ## Write the as-of date down first
 
-Every expiry state, ratification state and overdue flag in a change register is true on one date. Write that date at the top of your working and quote every count with it. The engines default to the machine clock when no date is handed in, so the stated date is what makes your answer checkable.
+Every expiry state, ratification state and overdue flag in a change register is true on one date. Write that date at the top of your working and quote every count with it. The engines default to the machine clock, so the stated date is what makes your answer checkable.
 
 ## Place each change in its lists
 
@@ -26,7 +26,7 @@ For an Emergency change, add EMERGENCY_RATIFY_DAYS, 7 days, to the date it actua
 
 ## Read actions with their changes
 
-Before you count open actions, put the action log beside the change register. Skip actions that are "Complete" or "Cancelled". Skip actions whose change is finished and locked, in the Closed stage or "Cancelled". Keep actions whose change is not in the register at all; an unknown parent is no reason to hide the work. Then, for overdue actions, compare each remaining action's due date with the as-of date.
+Before you count open actions, put the action log beside the change register. Skip actions that are "Complete" or "Cancelled". Skip actions whose change is terminal: Closed, "Rejected" or "Cancelled". Keep actions whose change is not in the register at all. Then an open action is overdue only when its due date has PASSED, days until below zero; one due ON the as-of date is not. On ESANMI that rule gives two, AC-01 at -3 days and AC-09 at -1 days, and AC-09 is the unknown-parent action.
 
 ## Read the gates as refusals
 
@@ -34,7 +34,7 @@ If a question asks whether a change can move, answer with the engine's sentence 
 
 ## Quote the words exactly, and never supply a missing figure
 
-Quote every state as the engine spells it. Where the engine answers null or refuses, that is the answer, and writing a plausible figure into the gap turns a correct reading into a wrong one.
+Quote every state as the engine spells it. Where the engine answers null or refuses, that is the answer, and a plausible figure written into the gap is wrong.
 
 ## Exercise
 

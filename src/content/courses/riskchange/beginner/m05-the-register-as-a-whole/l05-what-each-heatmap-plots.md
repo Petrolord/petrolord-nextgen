@@ -10,9 +10,9 @@ The four populations of the previous lesson are not a thought experiment. The Su
 | --- | --- | --- |
 | Risk Register dashboard | "Open" and "Under Review" risks | inherent |
 | Heatmap tab | the four live statuses | inherent |
-| Assurance hub | live risks, through countByBand | not stated here |
+| Assurance hub | live risks, through countByBand | inherent and residual, both shown |
 
-The Risk Register dashboard counts Open and Under Review risks and plots them INHERENT. The Heatmap tab plots the four live statuses INHERENT. The Assurance hub counts live risks through countByBand.
+The Risk Register dashboard counts Open and Under Review risks and plots them INHERENT. The Heatmap tab plots the four live statuses INHERENT. The Assurance hub counts live risks through countByBand, twice.
 
 ## The Heatmap tab
 
@@ -28,7 +28,9 @@ On the OBODO register it holds the 10 live risks, and its Critical count is 4: O
 
 The dashboard's population is narrower. It takes "Open" and "Under Review" and leaves out the other two live statuses, "Mitigated" and "Realized". On the OBODO register that leaves out OB-04, which is "Mitigated", and OB-07, which is "Realized". Both are live risks that the Heatmap tab plots and the dashboard does not.
 
-This course does not print the dashboard's band counts for the OBODO register, so it does not quote them. What it can say is which risks the two populations differ by: OB-04 and OB-07. Any difference between the two heatmaps on this register comes from those two risks.
+On the OBODO register the dashboard population is 8 risks: OB-01, OB-02, OB-03, OB-05, OB-06, OB-08, OB-11 and OB-12. Counted inherent, it reads "Critical" 4, "High" 1, "Medium" 2, "Low" 0 and "None" 1.
+
+Set that beside the Heatmap tab's row. "Critical", "Medium", "Low" and "None" agree. "High" reads 3 on the Heatmap tab and 1 on the dashboard, and the arithmetic is the two risks the dashboard leaves out: OB-04 and OB-07 both carry an inherent band of "High", and 3 minus 2 is 1.
 
 ## The two heatmaps disagree
 
@@ -38,7 +40,7 @@ The practical lesson is the one from the previous lesson, applied to real screen
 
 ## The hub
 
-The Assurance hub counts live risks through countByBand. This course's source does not state which score the hub counts, inherent or residual, so this lesson does not say. Check the hub's own label before comparing it with either heatmap.
+The Assurance hub calls countByBand twice over the live risks, once inherent and once residual, and shows both. On OBODO that is "Critical" 4 inherent and 1 residual, the two live rows of the four populations. The hub's inherent count is the Heatmap tab's population; its residual count is a question neither heatmap asks.
 
 ## The mistake
 
@@ -46,4 +48,4 @@ The mistake is to treat "the heatmap" as one thing. There are two in the Risk Re
 
 ## Exercise
 
-Record which statuses and which score the dashboard and the Heatmap tab each plot. Record the Heatmap tab's population's Critical count on the OBODO register and name the risks in it. Name the OBODO risks that the Heatmap tab includes and the dashboard leaves out, and state the rule that explains why.
+Record which statuses and which score the dashboard and the Heatmap tab each plot. Record the Critical and High counts of the dashboard and of the Heatmap tab on the OBODO register, and the two Critical counts the hub shows. Name the OBODO risks that the Heatmap tab includes and the dashboard leaves out, and state the rule that explains why.

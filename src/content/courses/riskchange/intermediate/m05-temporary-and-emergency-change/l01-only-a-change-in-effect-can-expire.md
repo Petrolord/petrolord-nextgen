@@ -41,6 +41,10 @@ The ESANMI register carries a live example. ES-10 is a Temporary change in "Scre
 
 An expired count on a dashboard is an alarm: something is on the plant that should have come off. If the count included changes not yet implemented, the alarm would fire for paperwork, and people learn to ignore alarms that fire for paperwork. Reading expiry only while the change is in effect keeps the count to the changes where it means something.
 
+## The other side of the gate
+
+The rule runs the other way too. The gate into "Implementation" asks only that an expiry can be read. A Temporary change in "Approval" with an expiry of 2026-09-30, already passed, goes in with every level signed, and once in "Implementation" it reads "Expired" on 2026-10-01. A plan's date becomes an alarm once the change is in effect.
+
 ## Exercise
 
 For a date one day past 2026-10-01, record the expiry state and whether it is counted expired for a Temporary change in "Implementation", in the Closed stage, in "Review" and in "Cancelled", and for a Permanent change in "Implementation". Then record ES-10's expiry state from the ESANMI register and say which rule produced it.

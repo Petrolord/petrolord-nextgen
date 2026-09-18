@@ -12,7 +12,7 @@ The engine prints the case that shows it:
 
 Nothing is outstanding. Level 1 has an "Approved" row and level 2 has an "Approved" row. A reader who checks only for outstanding levels would call this set done. The engine does not, because one row somewhere in the set is "Rejected". A rejection anywhere makes the set incomplete even when every level has an "Approved" row.
 
-It does not matter which level the rejection sits at. One recorded rejection is enough to stop the set.
+One recorded rejection at any level is enough.
 
 ## The refusal at the gate
 
@@ -22,11 +22,11 @@ When a change with that set is asked to move into "Implementation", the engine r
 
 Compare it with the refusal for unsigned levels, "Approval levels 2 and 3 have not signed yet." That one names what is missing and invites more signatures. This one names a decision that has been made. No further signature clears it, because the rejected row still sits on the set.
 
-Both refusals were replayed through the module's independent oracle, so each is two methods agreeing.
+Both refusals were replayed through the module's independent oracle.
 
 ## Why a rejection outweighs approvals
 
-An approval set is the record of independent people being asked whether a change is safe to make. If one of them has said no, the set carries an objection that nobody has answered. Letting the approvals at other levels outvote it would turn the approval set into a majority vote, and the engine's rule does not do that. The objection has to be dealt with before the change can go in.
+An approval set is the record of independent people being asked whether a change is safe to make. If one of them has said no, the set carries an objection that nobody has answered. Letting the approvals at other levels outvote it would turn the approval set into a majority vote. The objection has to be dealt with before the change can go in.
 
 The engine also holds the rejection in place. Module three shows that an approval already decided cannot be decided again: the refusal reads "This approval is already rejected."
 
@@ -37,7 +37,7 @@ Module five reads the emergency route, which lets an Emergency change into "Impl
 
 ## A rejected row and a rejected change
 
-Two things in this tier carry the same word. A rejected approval row is a status on one row. "Rejected" is also a stage of a change, one of the three terminal stages, reachable from "Screening", "Review" and "Approval". A rejected row stops the gate into "Implementation"; a change in the "Rejected" stage is final, and the engine answers "A rejected change is final." if anyone tries to move it. Name which one you mean.
+Two things in this tier carry the same word. A rejected approval row is a status on one row. "Rejected" is also a stage of a change, one of the three terminal stages, reachable from "Screening", "Review" and "Approval". A rejected row stops the gate into "Implementation"; a change in the "Rejected" stage is final, and the engine answers "A rejected change is final." if anyone tries to move it. Its actions stop being open work too: one probe puts an Open action due 2026-09-26 on ES-11, which is "Rejected", and reads openActions 0, overdueActions 0. Name which one you mean.
 
 {{panel:rc-change-explorer}}
 

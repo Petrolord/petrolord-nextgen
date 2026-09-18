@@ -10,7 +10,7 @@ With no implementation date recorded, the ratification due date is null and the 
 
 There were two possible answers. The engine could treat a missing date as "no window has started", which would read "Awaiting ratification" for ever. Or it could treat a missing date as a window it cannot confirm, and report the change as overdue until somebody records when it went in.
 
-The first answer would give an unratified emergency change a permanent pass: on the facility, on one signature, with no flag that full review is due. The second puts the burden on recording the date. Once the date is recorded, the window is counted from it.
+The first answer would give an unratified emergency change a permanent pass: on the facility, on one signature, with no flag that full review is due. The second puts the burden on recording the date.
 
 The engine takes the second answer. A status that says "you are fine" has to be earned by the record, and a missing date earns nothing.
 
@@ -24,7 +24,7 @@ The ESANMI register carries a live example. Read on 2026-10-01:
 | ES-05 | "Emergency" | "Implementation" | "Ratification overdue" | 2026-09-27 |
 | ES-12 | "Emergency" | "Implementation" | "Ratification overdue" | null |
 
-ES-12 reads "Ratification overdue" with its due date null, the pair the engine gives when no implementation date is recorded. ES-05 reads the same state for a different reason: it has a due date, and 2026-09-27 is before 2026-10-01.
+ES-12's actual implementation date is null: no date recorded. So it reads "Ratification overdue" with its due date null, the pair the engine gives when no implementation date is recorded. ES-05 reads the same state for a different reason: it has a due date, and 2026-09-27 is before 2026-10-01.
 
 The summary reads ratificationOverdue 2, and those two are ES-05 and ES-12. A reader who drops the row with a null due date as "nothing to report" misses one of the two.
 
@@ -46,4 +46,4 @@ A null due date means two different things in the ESANMI register. On ES-01, a P
 
 ## Exercise
 
-Record the ratification state and due date of ES-04, ES-05 and ES-12 from the ESANMI register on 2026-10-01. For each, say which rule produced the state. Then record ratificationOverdue from the summary, and name the two changes behind it.
+Record the ratification state and due date of ES-04, ES-05 and ES-12 from the ESANMI register on 2026-10-01. For each, say which rule produced the state. Record ES-12's actual implementation date. Then record ratificationOverdue from the summary, and name the two changes behind it.

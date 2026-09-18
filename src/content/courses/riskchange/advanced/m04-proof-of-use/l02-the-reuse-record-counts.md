@@ -16,7 +16,7 @@ For every visible lesson on the ONNE register the engine builds a reuse record f
 | ON-04 | 0 | 0 | 0 | 0 | 0 | null | none |
 | ON-10 | 1 | 1 | 1 | 0 | 0 | 2026-08-20 | "Maintenance plan" |
 
-Read each row as arithmetic on the log. Total is every application. Applied is adopted plus adapted. Rejected is the rest. For ON-01 that is 3 in total, 1 adopted and 1 adapted making 2 applied, and 1 rejected.
+Read each row as arithmetic on the log. Total is every application. Applied is adopted plus adapted. Rejected is the rest. For ON-01 that is 3 in total, 1 adopted and 1 adapted making 2 applied, and 1 rejected. The adopted and adapted columns are kept apart, and that separate count is the only difference the engine draws between the two outcomes.
 
 ## A count and never a claim
 
@@ -40,7 +40,7 @@ The last column lists the targets the lesson actually changed. ON-01 changed the
 
 The reuse record counts applications. It cannot say whether an adoption was done well, or whether the risk register row the lesson changed is now better managed. The digest carries no quality measure for an application, and neither does this lesson. What the count gives a reader is the trail: which records to open to check.
 
-Every figure here was also replayed through the independent oracle for lessonsLearned, so each is two methods agreeing.
+Every figure here was also replayed through the independent oracle for lessonsLearned.
 
 ## Exercise
 

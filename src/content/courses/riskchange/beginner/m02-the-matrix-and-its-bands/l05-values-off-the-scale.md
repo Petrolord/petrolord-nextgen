@@ -28,7 +28,7 @@ The same reasoning covers a level of 6. The scale stops at 5. A 6 might be a typ
 
 ## What 0 and "None" mean here
 
-Be careful with the 0 in the score column. It is a score of zero in the arithmetic sense only. The band "None" is the one band that means no score, and it is kept apart from "Low" so that an unscored risk can never be counted as a low one. On the OBODO register, OB-11 has a likelihood of 3 and an impact of 6. Its inherent score is 0 and its band is "None", because 6 is off the scale.
+Be careful with the 0 in the score column. It is a score of zero in the arithmetic sense only. The band "None" is the one band that means no score, and it is kept apart from "Low" so that an unscored risk can never be counted as a low one. On the OBODO register, OB-11 has a likelihood of 3 and an impact of 6. Its inherent score is 0 and its band is "None", because 6 is off the scale. The value false lands here too: against an impact of 1 it scores 0, band "None".
 
 ## A blank on the inherent axes
 

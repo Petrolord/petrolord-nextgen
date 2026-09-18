@@ -12,7 +12,7 @@ Two of those are Suite registers and carry a real key: "Risk register" and "Mana
 
 ## Three outcomes
 
-Every application carries an outcome: "Adopted", "Adapted" or "Rejected". The outcomes that changed something are "Adopted" and "Adapted". In plain terms, adopted means the lesson was taken as written, adapted means it was changed to fit and then used, and rejected means somebody considered the lesson for that target and decided against it.
+Every application carries an outcome: "Adopted", "Adapted" or "Rejected". The outcomes that changed something are "Adopted" and "Adapted". Rejected means somebody considered the lesson for that target and decided against it. Between the other two, the engine gives Adopted and Adapted no meaning beyond this: both count as applied, both can earn Embedded, and the reuse record counts each separately. It holds no rule that tells them apart. Taking a lesson as written against changing it to fit is the organisation's own reading of the words.
 
 A rejection is a real record. It is evidence that the lesson was read and weighed by somebody responsible for the target. It embeds nothing, because nothing changed.
 
@@ -39,7 +39,7 @@ The summary over the ONNE register counts applications 6, applied 4 and rejected
 
 The word "Rejected" appears in this course as a comment status, a change stage and an application outcome. Here it is an outcome: a decision recorded against one target, which says nothing about the lesson's own status. ON-01 has a rejected application and is still "Published".
 
-Every figure here was also replayed through the independent oracle for lessonsLearned, so each is two methods agreeing.
+Every figure here was also replayed through the independent oracle for lessonsLearned.
 
 ## Exercise
 

@@ -10,7 +10,7 @@ The engine keeps no separate setting that says how many levels a change needs. T
 - no row at any level may be "Rejected";
 - a row with no level counts as level 1.
 
-An approval row has one of four statuses: "Pending", "Approved", "Rejected" and "Delegated". Only "Approved" signs a level. The next two lessons read the other three.
+An approval row has one of four statuses: "Pending", "Approved", "Rejected" and "Delegated". Only "Approved" signs a level. The next two lessons read the other three. "Delegated" is a status a row can carry and nothing more: it signs nothing, and module three shows that deciding a Delegated row is refused as already delegated.
 
 ## Reading the levels off a set
 

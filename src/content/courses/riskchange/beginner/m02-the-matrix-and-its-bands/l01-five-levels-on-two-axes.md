@@ -24,7 +24,7 @@ A level can arrive from a form, from an import or from another system, so it doe
 
 A whole number written as text or with a decimal point is still that level. The text "3", the text " 3 " with spaces round it and the text "3.0" all score exactly as the number 3 does against an impact of 4: 12, "High". That is useful, because a spreadsheet import often delivers numbers as text, and the band does not change because of how a cell was formatted.
 
-The value true, handed in as a likelihood against an impact of 5, scores 5 and bands "Medium". It is printed here because a form checkbox can deliver true where a level was expected. The course does not grade it; treat it as a warning that a field of the wrong kind can still produce a band.
+The value true, handed in as a likelihood against an impact of 5, scores 5 and bands "Medium". Asked directly, true against an impact of 1 scores 1, so the engine reads true as level 1; false against an impact of 1 scores 0, band "None". The register's own form stores whole numbers, so this is how the engine treats a value the form never writes. Treat it as a warning that a field of the wrong kind can still produce a band.
 
 ## Two axes, one product
 

@@ -27,7 +27,7 @@ OB-01 is "Open" and due on 2026-10-01, the as-of date. Its days until is 0, and 
 
 The second half of the rule is the status. Here "Closed" is a status of a risk. OB-10 is "Closed" and OB-09 is "Draft", and neither is live. Neither can read overdue whatever its date, because the test asks the status first. A risk that is not live is either not yet in the register properly or one the organisation has stopped carrying, and a review date on it is not an obligation.
 
-The same question asked of a Closed risk whose review date passed the day before the as-of date answers overdue no. Asked of the same risk marked "Open", it answers overdue yes. Only the status differs between the two.
+The same question asked of a Closed risk whose review date passed the day before the as-of date answers overdue no. Asked of the same risk marked "Open", it answers overdue yes. Only the status differs between the two. The date half has an edge of its own: an "Open" risk with no review date at all has days until null and reads overdue no, because there is no date to be late against.
 
 ## Why the rule has both halves
 
