@@ -1,0 +1,359 @@
+{
+ "app_slug": "relief",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-a-vessel-emptying-itself",
+   "title": "A Vessel Emptying Itself",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-where-depressuring-is-handed-over",
+     "title": "Where depressuring is handed over",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-mass-out-through-a-choked-orifice",
+     "title": "Mass out through a choked orifice",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-isentropic-inside-the-vessel",
+     "title": "Isentropic, inside the vessel",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-discharge-coefficient-and-the-one-beside-it",
+     "title": "The discharge coefficient, and the one beside it",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-trajectory-the-answer-is-read-off",
+     "title": "The trajectory the answer is read off",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-customary-depressuring-time",
+   "title": "The Customary Depressuring Time",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-where-the-customary-time-comes-from",
+     "title": "Where the customary time comes from",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-reading-a-time-off-a-curve",
+     "title": "Reading a time off a curve",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-orifice-that-buys-the-time",
+     "title": "The orifice that buys the time",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-cold-end-and-the-metal-question",
+     "title": "The cold end, and the metal question",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-a-step-size-is-an-answer",
+   "title": "A Step Size Is an Answer",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-refining-the-step",
+     "title": "Refining the step",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-time-quantised-to-one-step",
+     "title": "A time quantised to one step",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-temperature-that-does-not-settle",
+     "title": "A temperature that does not settle",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-a-march-owes-the-reader",
+     "title": "What a march owes the reader",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-point-source-twice",
+   "title": "The Point Source, Twice",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-point-source-in-one-relation",
+     "title": "The point source, in one relation",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-same-model-asked-as-a-distance",
+     "title": "The same model, asked as a distance",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-where-the-setback-is-taught",
+     "title": "Where the setback is taught",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-two-tables-with-the-same-numbers",
+     "title": "Two tables with the same numbers",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-what-the-method-does-not-know",
+   "title": "What the Method Does Not Know",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-computed-typed-and-never-checked",
+     "title": "Computed, typed, and never checked",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-published-case-that-cannot-discriminate",
+     "title": "A published case that cannot discriminate",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-an-input-that-changes-nothing",
+     "title": "An input that changes nothing",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-fire-drum-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-guard-that-refuses-the-wrong-thing",
+     "title": "A guard that refuses the wrong thing",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-oracle-that-agreed-with-itself",
+     "title": "The oracle that agreed with itself",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-what-was-repaired-and-what-was-not",
+   "title": "What Was Repaired, and What Was Not",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-what-was-repaired-and-what-was-not",
+     "title": "What was repaired, and what was not",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-gate-that-could-not-fail",
+     "title": "The gate that could not fail",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-capstone-worked",
+     "title": "The capstone worked",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-blowdown-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-onward",
+     "title": "Onward",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

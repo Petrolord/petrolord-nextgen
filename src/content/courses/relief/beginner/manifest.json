@@ -1,0 +1,357 @@
+{
+ "app_slug": "relief",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-a-relief-valve-is-sized-for",
+   "title": "What a Relief Valve Is Sized For",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-four-questions-one-studio",
+     "title": "Four questions, one studio",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-set-overpressure-and-relieving-pressure",
+     "title": "Set, overpressure and relieving pressure",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-three-things-called-back-pressure",
+     "title": "Three things called back pressure",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-units-this-engine-speaks",
+     "title": "The units this engine speaks",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-gas-and-vapour",
+   "title": "Gas and Vapour",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-coefficient-c-and-where-it-comes-from",
+     "title": "The coefficient C, and where it comes from",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-critical-pressure-ratio",
+     "title": "The critical pressure ratio",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-choked-and-the-branch-that-is-not",
+     "title": "Choked, and the branch that is not",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-f2-replaces",
+     "title": "What F2 replaces",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-area-a-gas-case-demands",
+     "title": "The area a gas case demands",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-liquid",
+   "title": "Liquid",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-certified-valve-equation",
+     "title": "The certified valve equation",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-viscosity-arrives-as-a-correction",
+     "title": "Viscosity arrives as a correction",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-reynolds-number-that-needs-the-answer",
+     "title": "A Reynolds number that needs the answer",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-loop-that-closes-on-itself",
+     "title": "The loop that closes on itself",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-where-the-correction-stops-helping",
+     "title": "Where the correction stops helping",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-steam",
+   "title": "Steam",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-steam-equation-and-its-constant",
+     "title": "The steam equation and its constant",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-napier-and-the-pressure-it-starts-at",
+     "title": "Napier, and the pressure it starts at",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-superheat-factor-the-engine-types",
+     "title": "The superheat factor the engine types",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-two-ends-of-a-published-range",
+     "title": "Two ends of a published range",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-from-an-area-to-a-letter",
+   "title": "From an Area to a Letter",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-fourteen-standard-orifices",
+     "title": "The fourteen standard orifices",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-smallest-one-that-will-do",
+     "title": "The smallest one that will do",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-margin-and-what-it-is-worth",
+     "title": "Margin, and what it is worth",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-past-the-largest-orifice",
+     "title": "Past the largest orifice",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-the-associate-reading",
+   "title": "The Associate Reading",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-one-scenario-one-answer",
+     "title": "One scenario, one answer",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-computed-factors-and-typed-ones",
+     "title": "Computed factors, and typed ones",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-capstone-worked",
+     "title": "The capstone worked",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "fc-sizing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-the-next-tier-changes",
+     "title": "What the next tier changes",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
