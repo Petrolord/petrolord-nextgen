@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "documentControl.DOC_STATUSES holds seven words. Which of them does documentControl.EFFECTIVE_STATUSES treat as in force?",
+  "options": [
+   "Published alone.",
+   "Published, Approved and In Review.",
+   "Published and Approved.",
+   "Every status except Obsolete and Rejected."
+  ],
+  "answer": 2,
+  "explanation": "EFFECTIVE_STATUSES holds Published and Approved, the two statuses a document carries once it has been signed off for people to work to. A document in any other status reads Not in force."
+ },
+ {
+  "prompt": "HSE-PRO-0007 and OPS-PRO-0004 both have review dates behind the as-of date. HSE-PRO-0007 reads Review overdue and OPS-PRO-0004 reads Not in force. What separates them?",
+  "options": [
+   "OPS-PRO-0004 is Superseded, a status outside EFFECTIVE_STATUSES, and reviewState reads only documents in force.",
+   "OPS-PRO-0004's review date, 2020-01-06, is too far back for the review window to reach.",
+   "HSE-PRO-0007 has an issue date on the record and OPS-PRO-0004 has none.",
+   "HSE-PRO-0007 is a procedure, and only procedures are read against a review date."
+  ],
+  "answer": 0,
+  "explanation": "The old custody metering procedure is Superseded and nobody works to it. Calling it Review overdue would put a dead document at the top of a live queue, so it reads Not in force whatever its date."
+ },
+ {
+  "prompt": "OPS-PHI-0001, the flare management philosophy, is Published with no review date on the record. What review state does it read, and what does that ask of the document controller?",
+  "options": [
+   "Not in force: withdraw it.",
+   "Review overdue: review it now.",
+   "Review scheduled: nothing yet, because an undated document is left to the default review period.",
+   "No review scheduled: give it a review date."
+  ],
+  "answer": 3,
+  "explanation": "A document in force with no review date is one nobody has committed to looking at again. The library shows it as its own state so it can be found and given a date."
+ },
+ {
+  "prompt": "documentPrefix builds a document number prefix from a department and a category. What does it give for 'QA' and 'ITP'?",
+  "options": [
+   "QAI-ITP",
+   "QA-ITP",
+   "GEN-DOC",
+   "QA-ITP-0001"
+  ],
+  "answer": 1,
+  "explanation": "documentPrefix takes the first three letters of each, and two letters of 'QA' stay two letters. GEN-DOC is what an empty department and category give."
+ },
+ {
+  "prompt": "A document issued 2025-03-14 on a 24 month review period is corrected and re-published on 2026-10-01. When does Document Control put its review?",
+  "options": [
+   "2028-10-01, counted from the correction.",
+   "2026-10-01, the day the correction was re-published.",
+   "2027-03-14, counted from the issue date.",
+   "No date at all, because a re-published document starts with none."
+  ],
+  "answer": 2,
+  "explanation": "nextReviewDate counts from the issue date. A correction is not the full review the period asks for, and if it reset the clock a document could be kept from review indefinitely."
+ },
+ {
+  "prompt": "nextReviewDate is called for an issue date of 2025-03-14 with the review period missing, as null. What does it return, and whose job is the default?",
+  "options": [
+   "No date. Applying DEFAULT_REVIEW_PERIOD_MONTHS is the caller's job.",
+   "2027-03-14, because the function applies DEFAULT_REVIEW_PERIOD_MONTHS itself.",
+   "A refusal naming the missing review period as a required field.",
+   "The issue date itself, so the document comes up for review at once."
+  ],
+  "answer": 0,
+  "explanation": "The digest prints none for a period of null and for a period of 0. It prints 2027-03-14 only when the caller passes 24, DEFAULT_REVIEW_PERIOD_MONTHS. The owner's recorded position is that the default is the caller's to apply, and the course teaches it as a limit."
+ },
+ {
+  "prompt": "nextRevisionNumber is given the current revision '7'. What does it return?",
+  "options": [
+   "'8'",
+   "'07'",
+   "'01'",
+   "'08'"
+  ],
+  "answer": 3,
+  "explanation": "A revision written with one digit comes back padded to two. Keeping the width keeps the text order and the number order the same, so '09' then '10' sorts correctly as text."
+ },
+ {
+  "prompt": "nextRevisionNumber is given the letter 'A', and separately null. What does it return for each?",
+  "options": [
+   "'B' for the letter and '01' for null.",
+   "'01' for both.",
+   "A refusal for both.",
+   "'02' for both."
+  ],
+  "answer": 1,
+  "explanation": "A revision that is not a number, whether a letter, an empty string or null, starts a numbered sequence at '01' because the engine has nothing it can count from. ' 04 ' with spaces around it gives '05'."
+ },
+ {
+  "prompt": "On revision rev-0019-10 of ENG-PRO-0019, authored by u-adaeze, the author assigns herself as reviewer. What does the engine answer?",
+  "options": [
+   "REFUSED: Only the reviewer this task is assigned to can decide it.",
+   "ALLOWED, with a warning recorded against the task.",
+   "REFUSED: The author of a revision cannot review it. Choose somebody independent of the draft.",
+   "REFUSED: Choose the reviewer."
+  ],
+  "answer": 2,
+  "explanation": "This is the first of the two author checks, made at assignment. The rule is owner decision AS15 D1: a document review task is decided only by its assigned reviewer."
+ },
+ {
+  "prompt": "No reviewer is chosen for the revision. What does the engine answer, and why does that refusal come before any decision?",
+  "options": [
+   "ALLOWED, an empty field counts as independent.",
+   "REFUSED: The author of a revision cannot review it, because an empty field defaults to the author.",
+   "ALLOWED, the task falls to the document controller.",
+   "REFUSED: Choose the reviewer. Nobody is named to check against the author."
+  ],
+  "answer": 3,
+  "explanation": "The gate needs two named people on the record, the author and the reviewer. The engine will not treat an empty field as independent."
+ },
+ {
+  "prompt": "The author was assigned as reviewer by mistake and now tries to decide the task. At which step is she stopped, and why?",
+  "options": [
+   "At the decision, which is checked against the author as well.",
+   "Nowhere, because the assignment made her the reviewer of the task.",
+   "At assignment only, so the decision itself goes through.",
+   "At the decision, because an approved task cannot be decided again."
+  ],
+  "answer": 0,
+  "explanation": "The engine answers REFUSED: The author of a revision cannot approve it. A slip at assignment does not become an approval, which is why the rule is checked twice."
+ },
+ {
+  "prompt": "Somebody other than the assigned reviewer, however senior, decides the task on the reviewer's behalf. What does the engine answer?",
+  "options": [
+   "ALLOWED, because the decider is not the author and so is independent of the draft.",
+   "REFUSED: Only the reviewer this task is assigned to can decide it.",
+   "REFUSED: The author of a revision cannot approve it.",
+   "ALLOWED, once the assigned reviewer's name is recorded beside the decision."
+  ],
+  "answer": 1,
+  "explanation": "Independence from the author is not enough at the decision step. Only the reviewer the task is assigned to may decide it."
+ },
+ {
+  "prompt": "summarise prints published 3 for the IKORO library, yet four documents are in force. Why the difference?",
+  "options": [
+   "The flare philosophy has no review date, so summarise leaves it out of the published count.",
+   "The emergency response plan is due for review, so summarise moves it to the review due soon count.",
+   "The sampling procedure is overdue for review, so summarise counts it only under review overdue.",
+   "The tank inspection standard is Approved, which is in force and is not Published."
+  ],
+  "answer": 3,
+  "explanation": "Published and Approved are both in force. summarise counts each document status, and the status counts read Approved 1 and Published 3."
+ },
+ {
+  "prompt": "byReviewUrgency places OPS-PHI-0001, which has no review date, fourth in the queue. Why does it sit above every document that is not in force?",
+  "options": [
+   "Undated documents go first within the queue, so the missing date lifts it.",
+   "It is Published, and Published documents always sort above Approved and Draft ones.",
+   "Review states decide the order first, and No review scheduled comes before Not in force.",
+   "Its number sorts ahead of the three documents below it."
+  ],
+  "answer": 2,
+  "explanation": "The review states come first in the order Review overdue, Review due soon, Review scheduled, No review scheduled and then Not in force. Within a state the nearest date comes first and undated documents go last."
+ },
+ {
+  "prompt": "OPS-PRO-0004 carries the oldest review date in the library, 2020-01-06, at -2474 days. Where does it sit in byReviewUrgency, and why?",
+  "options": [
+   "First, because the most passed review date in the library is the most urgent one.",
+   "Fifth, first of the three not in force, because it is the only one of them with a review date.",
+   "Seventh, because a Superseded document is always the last row of the queue.",
+   "Fourth, because its passed date lifts it above the one undated document in force."
+  ],
+  "answer": 1,
+  "explanation": "Its review state is Not in force, so a passed date does not raise it above any document in force. Among the three not in force, the nearest review date comes first and undated documents go last."
+ }
+]
