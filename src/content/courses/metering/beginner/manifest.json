@@ -4,12 +4,12 @@
  "content_version": 1,
  "modules": [
   {
-   "key": "m01",
+   "key": "m01-one-orifice-run-end-to-end",
    "title": "One orifice run, end to end",
    "order": 1,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-what-a-meter-run-is-asked-to-do",
      "title": "What a meter run is being asked to do",
      "order": 1,
      "est_minutes": 8,
@@ -19,7 +19,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-reading-one-orifice-result",
      "title": "Reading one orifice result line by line",
      "order": 2,
      "est_minutes": 10,
@@ -31,7 +31,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-the-inch-of-water",
      "title": "The inch of water, and where the conversion lives",
      "order": 3,
      "est_minutes": 8,
@@ -41,7 +41,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-flowing-volume-and-standard-volume",
      "title": "A volume at the flowing density is not a standard volume",
      "order": 4,
      "est_minutes": 10,
@@ -53,12 +53,12 @@
    ]
   },
   {
-   "key": "m02",
+   "key": "m02-the-discharge-coefficient",
    "title": "The discharge coefficient is not a constant",
    "order": 2,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-why-the-coefficient-is-computed",
      "title": "Why the coefficient is computed rather than assumed",
      "order": 1,
      "est_minutes": 10,
@@ -68,7 +68,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-the-coefficient-across-beta-and-reynolds",
      "title": "The coefficient across beta and across Reynolds number",
      "order": 2,
      "est_minutes": 12,
@@ -80,7 +80,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-the-small-bore-correction",
      "title": "The small bore correction, and where it turns on",
      "order": 3,
      "est_minutes": 8,
@@ -90,7 +90,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-the-published-beta-range",
      "title": "The published beta range, and what the engine says outside it",
      "order": 4,
      "est_minutes": 10,
@@ -100,7 +100,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l05",
+     "key": "l05-the-high-beta-trade",
      "title": "The high beta trade, in the engine own words",
      "order": 5,
      "est_minutes": 8,
@@ -112,12 +112,12 @@
    ]
   },
   {
-   "key": "m03",
+   "key": "m03-compressibility-and-differentials",
    "title": "Compressibility, and the differentials that are not flows",
    "order": 3,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-the-expansibility-factor",
      "title": "The expansibility factor and what it is worth",
      "order": 1,
      "est_minutes": 10,
@@ -127,7 +127,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-the-specific-heat-ratio-swept",
      "title": "The specific heat ratio, swept",
      "order": 2,
      "est_minutes": 8,
@@ -137,7 +137,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-a-differential-at-the-static-pressure",
      "title": "A differential at or above the static pressure",
      "order": 3,
      "est_minutes": 10,
@@ -147,7 +147,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-sizing-the-plate",
      "title": "Sizing the plate, and both ends of the bracket",
      "order": 4,
      "est_minutes": 12,
@@ -159,12 +159,12 @@
    ]
   },
   {
-   "key": "m04",
+   "key": "m04-permanent-loss-turbines-and-straight-run",
    "title": "Permanent loss, turbine meters and straight run",
    "order": 4,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-the-cost-of-a-differential",
      "title": "What a differential costs that is never given back",
      "order": 1,
      "est_minutes": 10,
@@ -174,7 +174,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-assuming-a-coefficient-of-0-61",
      "title": "What assuming a coefficient of 0.61 would cost",
      "order": 2,
      "est_minutes": 10,
@@ -184,7 +184,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-a-turbine-volume-is-gross",
      "title": "A turbine volume is gross and says so",
      "order": 3,
      "est_minutes": 10,
@@ -194,7 +194,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-meter-factor-and-proving-screen",
      "title": "The meter factor, and the proving screen",
      "order": 4,
      "est_minutes": 8,
@@ -204,7 +204,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l05",
+     "key": "l05-straight-run",
      "title": "Straight run: a table, a refusal and a ceiling",
      "order": 5,
      "est_minutes": 12,
@@ -218,12 +218,12 @@
    ]
   },
   {
-   "key": "m05",
+   "key": "m05-the-transmitter-and-turndown",
    "title": "The transmitter, and what turndown means",
    "order": 5,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-accuracy-on-span-and-on-reading",
      "title": "Accuracy on span is not accuracy on reading",
      "order": 1,
      "est_minutes": 10,
@@ -233,7 +233,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-down-the-span",
      "title": "Down the span, reading by reading",
      "order": 2,
      "est_minutes": 10,
@@ -245,7 +245,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-nine-to-one-is-three-to-one",
      "title": "Nine to one is three to one",
      "order": 3,
      "est_minutes": 12,
@@ -255,7 +255,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-where-the-warning-fires",
      "title": "Where the warning fires, and what it says",
      "order": 4,
      "est_minutes": 8,
@@ -267,12 +267,12 @@
    ]
   },
   {
-   "key": "m06",
+   "key": "m06-the-uncertainty-budget",
    "title": "The uncertainty budget",
    "order": 6,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-six-terms-one-root-sum-of-squares",
      "title": "Six terms, six sensitivities, one root sum of squares",
      "order": 1,
      "est_minutes": 12,
@@ -284,7 +284,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-the-differential-term",
      "title": "Where the differential term comes from",
      "order": 2,
      "est_minutes": 10,
@@ -294,7 +294,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-which-term-dominates",
      "title": "Which term dominates is a result",
      "order": 3,
      "est_minutes": 12,
@@ -304,7 +304,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-a-lead-with-no-margin",
      "title": "A lead with no margin is not a lead",
      "order": 4,
      "est_minutes": 10,
