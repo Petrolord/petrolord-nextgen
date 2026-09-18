@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The lessonsLearned engine asks whether a lesson has substance. What must the lesson record to have it?",
+  "options": [
+   "What happened and why it happened, with the date of the event beside them.",
+   "What happened, who wrote it up and which register it was applied to.",
+   "What happened, why it happened and what to do about it.",
+   "Why it happened and what to do about it."
+  ],
+  "answer": 2,
+  "explanation": "The engine checks for all three parts. The first two without the third are a story: an account of an event that tells the next person nothing they can act on."
+ },
+ {
+  "prompt": "ON-07 on the ONNE register is a \"Draft\" that records only what happened. What does the engine print in its missing column?",
+  "options": [
+   "\"why it happened, what to do about it\", the two parts it lacks, so substance reads no.",
+   "\"what to do about it\", the one part a draft may leave out.",
+   "none, because a \"Draft\" is not yet checked for substance.",
+   "\"what happened\", since a draft has not been submitted."
+  ],
+  "answer": 0,
+  "explanation": "The missing column names the absent parts in the engine's own words. ON-07 has only the first of the three, so two are missing. ON-06, a \"Submitted\" lesson, lacks only \"what to do about it\"."
+ },
+ {
+  "prompt": "u-grace, who did not write ON-06, asks to validate it. ON-06 has no recommendation. What does the engine answer?",
+  "options": [
+   "Allowed, because u-grace did not write the lesson and the author-validation rule is therefore met in full.",
+   "Refused: \"This lesson is missing what to do about it. A lesson is what happened, why it happened and what to do about it; the first two without the third are a story.\"",
+   "Refused: \"The author of a lesson cannot validate it, and that includes recording somebody else's name.\"",
+   "Refused: \"This lesson has not been validated. Somebody other than its author has to accept it before it is published to everyone.\" as the lesson stands."
+  ],
+  "answer": 1,
+  "explanation": "Independence is not the problem here: u-grace did not write ON-06. The lesson itself is incomplete. A lesson without its third part can be written and submitted, and the substance check bites at validation, naming the missing part so the author knows what to add."
+ },
+ {
+  "prompt": "ON-05 is \"Validated\". How do the engine's accepted and visible columns read for it?",
+  "options": [
+   "Accepted yes and visible yes, because validation is the step that shows a lesson to everyone.",
+   "Accepted no and visible no, because only \"Published\" and \"Embedded\" are accepted.",
+   "Accepted no and visible yes, because a validated lesson is readable and still awaiting a decision.",
+   "Accepted yes, visible no."
+  ],
+  "answer": 3,
+  "explanation": "Accepted by the organisation is \"Validated\", \"Published\" and \"Embedded\". Visible to everyone is \"Published\" and \"Embedded\" only. Accepted and visible are different questions, and ON-05 sits between them."
+ },
+ {
+  "prompt": "Which lesson statuses does the engine count as visible to everyone?",
+  "options": [
+   "\"Validated\", \"Published\" and \"Embedded\".",
+   "\"Published\" only, until the lesson has been embedded.",
+   "\"Published\" and \"Embedded\".",
+   "Every live status."
+  ],
+  "answer": 2,
+  "explanation": "\"Validated\", \"Published\" and \"Embedded\" is the accepted group. The visible group is narrower, and visibility decides which lessons carry a review status and which are counted in lessonsApplied and lessonsUnapplied."
+ },
+ {
+  "prompt": "ON-08 is \"Archived\" and ON-09 is \"Superseded\". Both have substance. How does the engine read them for acceptance and visibility?",
+  "options": [
+   "Accepted, since each was validated before it left use, and not visible.",
+   "Neither accepted nor visible, because an archived or superseded lesson is out of use.",
+   "Accepted and visible, since a lesson with substance stays on the register for everyone.",
+   "Visible, because the archive is open to everyone, and not accepted."
+  ],
+  "answer": 1,
+  "explanation": "The accepted group is \"Validated\", \"Published\" and \"Embedded\", and the visible group is \"Published\" and \"Embedded\". Neither \"Archived\" nor \"Superseded\" is in either group, and neither is live."
+ },
+ {
+  "prompt": "ON-01 was written by u-musa. Read as if it were still \"Submitted\", u-musa asks to validate it. What does the engine return?",
+  "options": [
+   "Refused: \"The author of a lesson cannot validate it, and that includes recording somebody else's name. Ask a colleague who was not involved in writing it to validate it.\"",
+   "Allowed, because the author knows the event best and the validation is recorded under the author's name.",
+   "Refused: \"The author of the work under review cannot review it. Choose somebody independent of the work.\"",
+   "Refused: \"This lesson is missing what to do about it.\""
+  ],
+  "answer": 0,
+  "explanation": "The refusal states the rule, closes the workaround of recording somebody else's name in the same breath, and names the way forward. The sentence about the author of the work under review belongs to peer review, the same idea held in another register."
+ },
+ {
+  "prompt": "u-musa, the author of ON-01, asks to validate it while typing a colleague's name into the validator field. What happens?",
+  "options": [
+   "It is allowed, and the colleague's typed name is recorded as the validator of the lesson.",
+   "It is allowed, and the typed name is filed as an external reviewer beside u-musa as actor.",
+   "It is refused with \"Choose somebody independent of the work.\", the sentence the author of the work gets.",
+   "It is refused in the same words the author gets without a typed name."
+  ],
+  "answer": 3,
+  "explanation": "The actor is always the signed-in person doing the validation, whatever name is typed. The engine finds the author signed in and refuses with the sentence that already says \"that includes recording somebody else's name\"."
+ },
+ {
+  "prompt": "Under the owner decision on validation by typed name, who does the engine read as the actor of a validation?",
+  "options": [
+   "The name typed into the validator field, whoever is signed in at the time.",
+   "Whichever of the two names appears later in the lesson's record.",
+   "The signed-in person, whatever name is typed.",
+   "The lesson's author, with the typed name read as a witness to it."
+  ],
+  "answer": 2,
+  "explanation": "This is AS15 Q10, decided on 2026-09-18. A name in a text field proves nothing about who typed it, so the engine reads the signed-in identity, and a typed name records an external reviewer and cannot launder the author."
+ },
+ {
+  "prompt": "u-grace, signed in and not the author of ON-01, records an external reviewer by name while validating it. What does the engine do?",
+  "options": [
+   "It refuses, because a typed name is only accepted when the author records it.",
+   "It allows it: u-grace is the actor, and the typed name records who else looked at the lesson.",
+   "It refuses, because an external reviewer has to be signed in to the app to be recorded.",
+   "It allows it and records the external reviewer as the actor, with u-grace as a witness beside the name."
+  ],
+  "answer": 1,
+  "explanation": "The digest records u-grace recording an external reviewer by name as ALLOWED. The actor is independent of the lesson, and the typed name adds who else looked at it, which is the legitimate use of the field."
+ },
+ {
+  "prompt": "ON-05's validation record is removed and it is then asked to move to \"Published\". What does the engine return?",
+  "options": [
+   "Refused: \"This lesson has not been validated. Somebody other than its author has to accept it before it is published to everyone.\"",
+   "Allowed, because the status reads \"Validated\" and \"Published\" is a legal next status from it.",
+   "Refused: \"A lesson that is draft can only move to Submitted, Archived.\"",
+   "Refused: \"Record where this lesson was applied first.\""
+  ],
+  "answer": 0,
+  "explanation": "The status alone does not satisfy the engine. It asks for the validation record, which ties publication to an act by a person, so a lesson cannot reach everyone on the strength of a status somebody typed."
+ },
+ {
+  "prompt": "Once an author submits a lesson, where can the lesson go from \"Submitted\"?",
+  "options": [
+   "\"Validated\" or \"Published\", once somebody other than the author accepts it.",
+   "\"Validated\" only, because a submitted lesson has already left its author.",
+   "\"Published\", \"Draft\" or \"Archived\", with validation recorded along the way.",
+   "\"Validated\", \"Draft\" or \"Archived\"."
+  ],
+  "answer": 3,
+  "explanation": "The author writes and submits, somebody else validates, and only then can it be published. A submitted lesson can also go back to \"Draft\" if a gap is found, or be archived."
+ },
+ {
+  "prompt": "Publishing a lesson checks for a validation record. Which limit does the digest list among the held items for that step?",
+  "options": [
+   "Publishing does not check that a validation record exists at all.",
+   "Publishing does not check a second time who validated the lesson.",
+   "Publishing does not check whether the lesson has substance.",
+   "Publishing checks the validator again and refuses the author."
+  ],
+  "answer": 1,
+  "explanation": "The independence check sits where the validation is recorded. Publishing relies on it having been enforced there, and the digest lists that as a stated limit of the engine."
+ },
+ {
+  "prompt": "The rule that a lesson's author may not validate it by typing a name is an owner decision. Which one, and when was it taken?",
+  "options": [
+   "AS15 D1, segregation of duties on change approvals, taken on 2026-10-01.",
+   "AS15 Q9, the emergency change authority, taken on 2026-09-18.",
+   "AS15 Q10, validation by typed name, taken on 2026-09-18.",
+   "AS13-0, which decided how a closed lesson reads."
+  ],
+  "answer": 2,
+  "explanation": "2026-10-01 is the as-of date of every status in this course. D1 is segregation of duties on change approvals and, from ASC-0, peer review, and Q9 is emergency change authority and the ratification window. AS13-0 decided how a closed temporary change reads."
+ },
+ {
+  "prompt": "Why does the engine ask for a validation record at the moment of publishing, instead of trusting a status that reads \"Validated\"?",
+  "options": [
+   "A status is one field anything can write; the record ties publication to an act by a person.",
+   "Because the status of a validated lesson is cleared when the lesson is published.",
+   "Because the record carries the lesson's review date, which publishing sets for the first time.",
+   "Because a validated lesson is already visible to everyone and needs no second check."
+  ],
+  "answer": 0,
+  "explanation": "A validation record says who accepted the lesson and when. By asking for it, the engine stops a lesson reaching everyone on the strength of a status somebody typed, and the refusal says somebody other than its author has to accept it first."
+ }
+]

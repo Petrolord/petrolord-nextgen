@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "ON-01 was applied into the risk register on 2026-05-02, naming OB-07, Pump house flooded in the rainy season. How does OB-07 read at the other end of that trail?",
+  "options": [
+   "\"Closed\", residual 8, \"Medium\", \"Within appetite\", since the lesson has been applied to it.",
+   "\"Realized\", residual 8, \"Medium\", \"Within appetite\".",
+   "\"Realized\", residual 8, \"High\", \"Above appetite\", because the risk has already happened.",
+   "\"Realized\", residual 12, \"High\", \"Within appetite\"."
+  ],
+  "answer": 1,
+  "explanation": "OB-07 is a record with its own state, decided by the riskScoring engine from its own fields. The lesson that names it does not own that state, and applying a lesson to a risk changes nothing about how the risk is scored."
+ },
+ {
+  "prompt": "ON-02 was applied into the change register on 2026-06-10. Which change does it name, and what stage is that change in?",
+  "options": [
+   "ES-06, Revised operating procedure for glycol regeneration, now in \"Implementation\".",
+   "OB-07, Pump house flooded in the rainy season, now \"Realized\".",
+   "ES-06, with its stage set to \"Embedded\" by the lesson that names it.",
+   "ES-06, Revised operating procedure for glycol regeneration, now \"Closed\"."
+  ],
+  "answer": 3,
+  "explanation": "\"Closed\" here is a stage of a change, decided by the managementOfChange engine from the change's own approvals and actions. \"Embedded\" is a lesson status, ON-02's own, and OB-07 is the risk ON-01 names."
+ },
+ {
+  "prompt": "AA-01 records ON-01 going into the risk register. What must that application carry for the engine to record it?",
+  "options": [
+   "The risk it points at, OB-07, so the trail can be walked from the lesson to the row and back.",
+   "Only its outcome, since a risk register target is a Suite register the engine already knows.",
+   "The residual score of the risk at the time the lesson was applied.",
+   "A reference to a procedure, as every application outside the Suite needs."
+  ],
+  "answer": 0,
+  "explanation": "The digest records an application into the risk register that names the risk as ALLOWED, and refuses one that names no risk. Both ends carry a key: the lesson names the row, and the row is a record with its own state."
+ },
+ {
+  "prompt": "The ONNE summary reads intoRiskRegister 1 and intoMoc 1. Which applications are they?",
+  "options": [
+   "AA-01 and AA-02, the two applications of ON-01 that changed something.",
+   "AA-04 and AA-06, the two adoptions dated after 2026-06-01, whatever their targets.",
+   "AA-01 and AA-04, the two applications into Suite registers.",
+   "AA-03 and AA-05."
+  ],
+  "answer": 2,
+  "explanation": "AA-01 is ON-01 into the \"Risk register\", naming OB-07. AA-04 is ON-02 into \"Management of change\", naming ES-06. AA-02 went into a procedure and AA-06 into a maintenance plan, neither of them a Suite register."
+ },
+ {
+  "prompt": "ON-06 records its source type as \"Audit finding\". How far does this course go with that audit and its finding?",
+  "options": [
+   "It scores the finding on the five by five matrix before the lesson that cites it is validated.",
+   "It follows the finding through its own lifecycle until the finding closes.",
+   "It reads them only as the source of the lesson; they belong to Compliance, Audit & Quality.",
+   "It checks that the audit was independent before accepting the lesson."
+  ],
+  "answer": 2,
+  "explanation": "Compliance, Audit & Quality owns audit independence, the audit and finding lifecycles and root-cause categories. This course names an audit finding as the source of a lesson and stops there."
+ },
+ {
+  "prompt": "Working the chain on IK-01, which question comes before asking any comment for its severity?",
+  "options": [
+   "Whether each comment's status is resolved.",
+   "Whether the review is overdue on 2026-10-01, since a late review cannot close.",
+   "Who wrote each comment, since that decides blocking.",
+   "How many comments the log holds in total, since blocking is a share of the total."
+  ],
+  "answer": 0,
+  "explanation": "Resolved first, then blocking: the resolved statuses are \"Verified\", \"Closed\" and \"Withdrawn\", which leaves 6 unresolved on IK-01. Asking those six for \"Critical\" or \"Major\" leaves 3 blocking."
+ },
+ {
+  "prompt": "In the chain, a reader is tempted to skip C-03 and C-04 on IK-01 because a response exists on one and a rejection is recorded on the other. Why must they stay in the blocking count?",
+  "options": [
+   "They stay only until the coordinator records the review as overdue.",
+   "A response or a rejection turns a \"Major\" comment into a \"Critical\" one.",
+   "They must stay because every comment on a review in \"Verification\" blocks until it closes.",
+   "\"Responded\" and \"Rejected\" are both unresolved, and both comments are \"Major\"."
+  ],
+  "answer": 3,
+  "explanation": "Only the reviewer's verification turns a response into a resolved comment, and a rejection means the reviewer did not accept the response. Both statuses therefore still wait on somebody, and a \"Major\" comment that is unresolved blocks."
+ },
+ {
+  "prompt": "IK-01 is in \"Verification\" and was due 2026-09-29. What does the chain record for its overdue reading?",
+  "options": [
+   "Overdue, with no date needed, because 2026-09-29 is in the past on every day this course is read.",
+   "Overdue on 2026-10-01, with that date written beside the verdict.",
+   "Not overdue, as \"Verification\" is finished.",
+   "Not overdue, its blockers hold the clock."
+  ],
+  "answer": 1,
+  "explanation": "\"Verification\" is an active stage, and 2026-09-29 has passed on 2026-10-01. A status without its as-of date cannot be checked, because every date rule answers a different question on a different day."
+ },
+ {
+  "prompt": "ON-01's review is due 2026-10-20. What review status does the chain record for it on 2026-10-01?",
+  "options": [
+   "It is inside the lead, so the engine reads review due soon.",
+   "\"review overdue\", because ON-01 has passed 203 days of age since its event.",
+   "Neither, because a lesson that is embedded has no review status.",
+   "Neither, since 2026-10-20 sits outside the 30-day lead."
+  ],
+  "answer": 0,
+  "explanation": "ON-01 is visible and 2026-10-20 falls inside the 30-day lead on 2026-10-01, so it reads review due soon. Age carries no status of its own. Had ON-01 been \"Validated\" like ON-05, it would carry no review status at all."
+ },
+ {
+  "prompt": "With 2 applied on its reuse record, what does the chain record for marking ON-01 \"Embedded\"?",
+  "options": [
+   "Refused, because its rejected application must be withdrawn first.",
+   "Refused: \"This lesson has been considered 1 time and adopted nowhere.\"",
+   "Refused, until the review due on 2026-10-20 is done.",
+   "Allowed."
+  ],
+  "answer": 3,
+  "explanation": "An adoption into the \"Risk register\" and an adaptation into a \"Procedure\" are evidence of use, so the move is allowed. The considered-and-adopted-nowhere refusal is ON-03's, whose one application is a rejection."
+ },
+ {
+  "prompt": "The engines in this course decide a state from a record. What do they store?",
+  "options": [
+   "The verdict of every call, so a report can be replayed later.",
+   "The as-of date of every call and nothing else.",
+   "Nothing: the app stores the record and asks the engine what it means.",
+   "The refusal sentences, in a table the app reads back."
+  ],
+  "answer": 2,
+  "explanation": "Each engine decides a band, a stage move, a closure verdict or an embedding verdict from the record it is handed. None of them stores anything, which is why what the app shows and what the database enforces sit outside the engine."
+ },
+ {
+  "prompt": "Segregation of duties in peer review, the author never reviewing the work, is held where today?",
+  "options": [
+   "In the app and the database already, with the engine following later.",
+   "In the engine; the app and the database follow with the Suite pull request that ships ASC-0.",
+   "In the database only, as a constraint on who can be put on a review.",
+   "Nowhere yet: it is listed among the held items as a limit."
+  ],
+  "answer": 1,
+  "explanation": "The engine enforces the rule now, from ASC-0, as owner decision D1 applied to peer review. A lesson that told a learner the app already refuses the author would be teaching something the digest does not say."
+ },
+ {
+  "prompt": "Which of these does the peerReview engine hand to a person rather than decide itself?",
+  "options": [
+   "Whether a verified response is actually correct.",
+   "Whether a \"Major\" comment that is \"Rejected\" still blocks the review from closing.",
+   "Whether the author may verify.",
+   "Whether a comment with no response text may be verified by the reviewer."
+  ],
+  "answer": 0,
+  "explanation": "The engine checks that the right people acted and that the record is complete. It decides blocking, refuses the author a reviewer's move and refuses a verification with no response text. Whether the response is right is a judgement for the independent reviewer."
+ },
+ {
+  "prompt": "The Lessons Learned dashboard and the ONNE register on 2026-10-01: what does the digest record about reviewsOverdue and reviewsDueSoon?",
+  "options": [
+   "The dashboard displays them, and the engine leaves both uncomputed on this register.",
+   "The dashboard computes them, 1 and 2, and displays neither.",
+   "The engine computes them as 2 and 1, and the dashboard shows only the first of the two.",
+   "Neither is computed, because the dashboard reads lessons one at a time."
+  ],
+  "answer": 1,
+  "explanation": "The engine answers the question. Whether a user sees the answer is the app's part, and RECON.md records that gap."
+ },
+ {
+  "prompt": "Across the three tiers of this course, the same kind of rule keeps the person with most interest in a yes from giving it. Which set of three refusals shows that rule?",
+  "options": [
+   "The author responding to a comment, the coordinator closing it out, the reviewer withdrawing it.",
+   "A band read from its lower edge, a residual that falls back, a target that declines.",
+   "An archive with no reason, a supersede with no successor, a draft sent straight to publication.",
+   "The originator approving a change, the author reviewing their own work, the author validating their own lesson."
+  ],
+  "answer": 3,
+  "explanation": "Segregation of duties runs through every register: the originator of a change never approves it, the author of work under review never reviews it, and the author of a lesson never validates it. The author's own response and the coordinator's close are allowed."
+ }
+]
