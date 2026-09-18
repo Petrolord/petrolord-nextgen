@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """WALK THE IMPORT CLOSURE of the whole engines/assurance family at engines
-REV (default 9d5d3b4, ASC-0; first run at 6b00f43), then prove the vendored NextGen copy is sha-identical PATH BY PATH.
+REV (default ab3ce6a, ASC-1; run before at 6b00f43 and 9d5d3b4), then prove the vendored NextGen copy is sha-identical PATH BY PATH.
 
 Adapted from FC6's vendor/closure.py. Two differences, both forced by this
 family:
@@ -23,7 +23,7 @@ this identical set so their two pull requests cannot conflict.
 import json, os, re, subprocess, sys  # noqa: E401
 
 ENGINES_GIT = "/root/petrolord-engines"
-REV = os.environ.get("RC_ENGINES_REV", "9d5d3b4")
+REV = os.environ.get("RC_ENGINES_REV", "ab3ce6a")
 # The pinned tree, exported fresh on every run into a temporary directory, so
 # nothing stale in the wave directory can stand in for the commit.
 import atexit, shutil, tempfile

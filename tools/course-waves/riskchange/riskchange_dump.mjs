@@ -8,7 +8,8 @@
 // Usage:  sh /root/as-wip-riskchange/build_digest.sh > digest.tmp \
 //           && mv digest.tmp /root/as-wip-riskchange/digest.txt
 //
-// Engines, vendored sha-identical with engines 9d5d3b4 (ASC-0, PR #212):
+// Engines, vendored sha-identical with engines ab3ce6a (ASC-1, PR #213; nothing
+// in this course's scope changed from 9d5d3b4, ASC-0, PR #212):
 // riskScoring.js, managementOfChange.js, peerReview.js, lessonsLearned.js and
 // the calendar.js they share (lessonsLearned reaches it directly and through
 // qualityAssurance.js). The walked closure of the family is 53 paths.
@@ -30,8 +31,9 @@
 //      the whole run, so an engine that fell back to the clock anywhere, even
 //      inside a call the first gate could not see, stops the build.
 //
-// NOTHING IN THIS FILE DESCRIBES WHAT THE ENGINES USED TO DO except the last
-// section, which says so in its title and in its first line.
+// EVERY SECTION BUT THE LAST DESCRIBES THE ENGINES AS VENDORED. The last
+// section is the one place a former behaviour is described, and it says so in
+// its title and in its first line.
 import fs from 'fs';
 import {
   AS_OF, AS_OF_ISO, AS_OF_PARTS,
@@ -246,7 +248,7 @@ w('# Risk, Change & Learning (riskchange). Teaching digest.');
 if (NEG_LINE) w(NEG_LINE);
 w(`# THE AS-OF DATE FOR EVERY LINE BELOW IS ${AS_OF_ISO}, a Thursday. Every status that depends on a date (review overdue, expired, expiring soon, awaiting or overdue ratification, review due soon, days until) is that status ON ${AS_OF_ISO}, and every engine call that takes a date was handed this one explicitly. None of them read a clock.`);
 w('# Scores, levels, counts and days are whole numbers. Dates print as YYYY-MM-DD. Statuses, bands and verdicts print exactly as the engine spells them, in double quotes.');
-w('# Built against engines 9d5d3b4 (ASC-0), vendored sha-identical: riskScoring, managementOfChange, peerReview, lessonsLearned and the calendar they share. Every figure is the engine answering at the inputs named beside it, except a line that says golden or measured.');
+w('# Built against engines ab3ce6a (ASC-1), vendored sha-identical; the five modules this course reads are unchanged since 9d5d3b4 (ASC-0), and this digest was proved byte-identical across that re-vendor: riskScoring, managementOfChange, peerReview, lessonsLearned and the calendar they share. Every figure is the engine answering at the inputs named beside it, except a line that says golden or measured.');
 w('# Every engine answer printed here was also replayed through the independent Python oracle for its module (oracle_bridge.py), so each one is two methods agreeing.');
 w('# A GOLDEN LINE IS NOT THE ENGINE ANSWERING. The published case files are written by the oracles.');
 w();
@@ -328,6 +330,11 @@ for (const [l, i, what] of LEVEL_PROBES) {
 }
 w();
 w('- The scale is five WHOLE levels. A fraction is off the scale and unscored, the same as a level of 6 or a blank: the engine returns a score of 0 and the band "None" rather than guessing a level. A whole number written as text or with a decimal point is still that level.');
+{
+  const t1 = R.calculateRiskScore(true, 1);
+  const f1 = R.calculateRiskScore(false, 1);
+  w(`- What level the value true is read as, asked directly: true against an impact of 1 scores ${n0(t1)}, so true is read as level ${n0(t1)}; false against an impact of 1 scores ${n0(f1)}, band ${q(R.getRiskBand(f1))}. The register's own form stores whole numbers, so this is how the engine treats a value the form never writes.`);
+}
 w();
 
 /* ================================================================== *
@@ -385,6 +392,10 @@ w();
   w(`- OB-10 is ${q(ob10.status)} and its review date is ${n0(CAL.daysUntil(ob10.next_review_date, T()))} days away, and OB-09 is ${q(OBODO_RISKS.find((r) => r.id === 'OB-09').status)} with no review date. Neither can read overdue whatever its date, because the test asks the status first.`);
   const probe = { status: 'Closed', next_review_date: '2026-09-30' };
   w(`- The same question of a Closed risk whose review date passed the day before the as-of date: overdue ${yn(R.isReviewOverdue(probe, T()))}. The same risk as ${q('Open')}: overdue ${yn(R.isReviewOverdue({ ...probe, status: 'Open' }, T()))}.`);
+  for (const [label, d] of [['no review date at all', null], ['a review date of 30 February', '2026-02-30'], ['a review date that reads "after the audit"', 'after the audit']]) {
+    w(`- An ${q('Open')} risk with ${label}: days until ${CAL.daysUntil(d, T()) === null ? 'null' : n0(CAL.daysUntil(d, T()))}, review overdue ${yn(R.isReviewOverdue({ status: 'Open', next_review_date: d }, T()))}.`);
+  }
+  w('- So a live risk with no readable review date is never review-overdue: the engine has no date to be late against, and nothing in it flags the missing date.');
 }
 w();
 
@@ -423,6 +434,14 @@ for (const [label, rows, opts] of [
 w();
 w(`- The same register gives Critical counts of ${POPS.map((p) => n0(p.Critical)).join(', ')} across those four rows, ${n0(new Set(POPS.map((p) => p.Critical)).size)} different values, depending on two choices the CALLER makes: which risks to hand over, and whether to count inherent or residual. The engine does not filter by status. Each count is right for the question it answers, and a dashboard tile has to say which question that is.`);
 w('# App surface: the Risk Register dashboard counts Open and Under Review risks and plots them INHERENT; the Heatmap tab plots the four live statuses INHERENT; the Assurance hub counts live risks through countByBand. RECON.md records the two heatmaps disagreeing as a finding.');
+{
+  const dash = OBODO_RISKS.filter((r) => ['Open', 'Under Review'].includes(r.status));
+  const c = R.countByBand(dash);
+  w(`- The Risk Register DASHBOARD population, Open and Under Review only, counted INHERENT: ${n0(dash.length)} risks (${lst(dash.map((r) => r.id))}), ${[...RAW.riskScoring.RISK_BAND_NAMES, RAW.riskScoring.NO_BAND].map((b) => `${q(b)} ${n0(c[b])}`).join(', ')}. The Mitigated and Realized risks (OB-04, OB-07) are live and outside this population.`);
+  const ci = R.countByBand(liveRisks);
+  const cr = R.countByBand(liveRisks, { residual: true });
+  w(`# App surface: the Assurance hub calls countByBand TWICE over the live risks, once inherent and once residual, and shows both: on OBODO that is Critical ${n0(ci.Critical)} inherent and ${n0(cr.Critical)} residual, the two live rows of the table above.`);
+}
 w();
 
 /* ================================================================== *
@@ -512,6 +531,13 @@ sec('SECTION 9: Segregation of duties: the originator never approves, and only t
   w(`- ${refusal('deciding an approval that is already Approved', M.canDecideApproval({ ...pending, status: 'Approved' }, moc, 'u-emeka'))}`);
   w(`- ${refusal('deciding an approval that is already Rejected', M.canDecideApproval({ ...pending, status: 'Rejected' }, moc, 'u-emeka'))}`);
   w('- The rule is owner policy, decided on 2026-09-18 (AS15, D1): an approval is decided only by the member it is assigned to, never by the change originator, and an absence is covered by reassigning the approval. The database enforces the same rule.');
+  w(`- ${refusal('u-emeka deciding an approval whose status is Delegated', M.canDecideApproval({ ...pending, status: 'Delegated' }, moc, 'u-emeka'))}`);
+  {
+    const names = Object.keys(RAW.managementOfChange);
+    const reassign = names.filter((n) => /reassign|delegat/i.test(n) && typeof RAW.managementOfChange[n] === 'function');
+    const reopen = names.filter((n) => /reopen|revisit|undo|revoke|withdraw/i.test(n) && typeof RAW.managementOfChange[n] === 'function');
+    w(`- What the engine does NOT model, measured by searching its ${n0(names.length)} exports: functions whose name mentions reassigning or delegating: ${n0(reassign.length)}; functions whose name mentions reopening, revisiting, undoing, revoking or withdrawing a decision: ${n0(reopen.length)}. "Delegated" is a status an approval row can carry and nothing more: a Delegated row is not Approved, so its level stays outstanding (Section 8), and deciding it is refused as already decided. How an approval moves to somebody else, and whether a decided one can be reopened, is the app's and the database's business (the AS15 reassignment), and this engine holds no rule for either. A decided approval is refused as already approved or already rejected, the two lines above.`);
+  }
 }
 w();
 
@@ -571,6 +597,12 @@ for (const [type, stage] of [['Temporary', 'Implementation'], ['Emergency', 'Imp
   w(`| ${q(type)} | ${q(stage)} | ${q(M.expiryState(m, T()))} | ${yn(M.isExpired(m, T()))} |`);
 }
 w(`- An expiry that cannot be read is no expiry: ${q(M.expiryState({ type: 'Temporary', stage: 'Implementation', expiry_date: 'after the turnaround' }, T()))} for a Temporary change in Implementation whose expiry reads "after the turnaround".`);
+{
+  const signedAll = [{ level: 1, status: 'Approved' }];
+  const past = { stage: 'Approval', type: 'Temporary', expiry_date: shift(-1) };
+  const r = M.canAdvance(past, 'Implementation', { approvals: signedAll, actions: [] });
+  w(`- A Temporary change in Approval whose expiry date, ${past.expiry_date}, has already passed, asked to go into Implementation with every level signed: ${r.ok ? allowed('a past-dated expiry at the gate', r) : refusal('a past-dated expiry at the gate', r)} The gate asks only that the expiry date can be read; it does not ask that it lies ahead. Once in Implementation the same change reads ${q(M.expiryState({ ...past, stage: 'Implementation' }, T()))} on ${AS_OF_ISO}.`);
+}
 w();
 w(`- An Emergency change may go into Implementation once its FIRST approval level has signed and nobody has rejected it. Every other level must then sign within EMERGENCY_RATIFY_DAYS, ${n0(MX.EMERGENCY_RATIFY_DAYS)} days, of the actual implementation date, and the change cannot close until they have. Ratification states: ${Object.values(MX.RATIFICATION).map(q).join(', ')}.`);
 {
@@ -635,6 +667,31 @@ w();
   w(`- By stage: ${MX.STAGES.map((st) => `${q(st)} ${n0(s.byStage[st])}`).join(', ')}.`);
   w(`- By risk level: ${MX.RISK_LEVELS.map((rl) => `${q(rl)} ${n0(s.byRisk[rl])}`).join(', ')}.`);
   w('- openActions and overdueActions skip AC-06 and AC-07, whose changes (ES-06 Closed, ES-09 Cancelled) are finished and locked. They count AC-09, whose change is unknown. A Cancelled action (AC-08) is finished.');
+  {
+    const finishedIds = new Set(ESANMI_MOCS.filter((m) => MX.TERMINAL_STAGES.includes(m.stage)).map((m) => m.id));
+    const open = ESANMI_ACTIONS.filter((a) => !finishedIds.has(a.moc_id) && !['Complete', 'Cancelled'].includes(a.status));
+    const late = open.filter((a) => CAL.daysUntil(a.due_date, T()) < 0);
+    w(`- The ${n0(s.openActions)} open actions are ${lst(open.map((a) => a.id))}. The ${n0(s.overdueActions)} overdue actions are ${lst(late.map((a) => `${a.id} (due ${a.due_date}, ${n0(CAL.daysUntil(a.due_date, T()))} days)`))}. An action is overdue when it is open work and its due date has PASSED: days until below zero.`);
+    for (const [label, due] of [['due the day before the as-of date', shift(-1)], ['due ON the as-of date', shift(0)], ['due the day after', shift(1)]]) {
+      const one = M.summarise([{ id: 'EDGE', stage: 'Implementation', type: 'Permanent' }], { actions: [{ id: 'X', moc_id: 'EDGE', action_type: 'Post-implementation', status: 'Open', due_date: due }], approvals: [] }, T());
+      w(`- Edge probe, one open action ${label} (${due}): openActions ${n0(one.openActions)}, overdueActions ${n0(one.overdueActions)}.`);
+    }
+    const rej = ESANMI_MOCS.find((m) => m.stage === 'Rejected');
+    const onRej = [{ id: 'AC-R', moc_id: rej.id, action_type: 'Pre-implementation', status: 'Open', due_date: shift(-5) }];
+    const sr = M.summarise([rej], { actions: onRej, approvals: [] }, T());
+    w(`- Probe, the finished-parent skip for a REJECTED change: ${rej.id} is ${q(rej.stage)}; one Open action on it due ${onRej[0].due_date}: openActions ${n0(sr.openActions)}, overdueActions ${n0(sr.overdueActions)}. A Rejected change is terminal like a Closed or Cancelled one, and its actions are not open work.`);
+    const aw = ESANMI_MOCS.filter((m) => m.stage === 'Approval').map((m) => m.id);
+    w(`- awaitingApproval counts the changes whose STAGE is Approval: ${n0(s.awaitingApproval)} (${lst(aw)}). It counts changes. ES-01 carries two Pending approval rows and counts once.`);
+  }
+  w('The risk level each ESANMI change carries, the rows behind the by-risk-level counts:');
+  w('| change | risk level |');
+  w('| --- | --- |');
+  for (const m of ESANMI_MOCS) w(`| ${m.id} | ${q(m.risk_level)} |`);
+  {
+    const es12 = ESANMI_MOCS.find((m) => m.id === 'ES-12');
+    const r12 = M.ratificationState(es12, ESANMI_APPROVALS.filter((a) => a.moc_id === 'ES-12'), T());
+    w(`- ES-12's actual implementation date: ${es12.actual_implementation_date === undefined ? 'null (no date recorded)' : es12.actual_implementation_date}. Its ratification reads ${q(r12.state)} with due ${r12.dueDate === null ? 'null' : r12.dueDate}: with no recorded implementation date the window cannot be shown to be open, so it fails closed.`);
+  }
 }
 w();
 w(`byUrgency on ${AS_OF_ISO}, most urgent first. Expired changes first, then expiring soon, then overdue, then other live work, then everything finished; within a rank the earlier expiry or target date first:`);
@@ -693,6 +750,12 @@ sec('SECTION 14: Closing a review: the blocking comments, overdue reviews, and t
   const s1 = P.summarise([ik01], IKANG_COMMENTS, T());
   w(`- summarise over IK-01 and its own log: totalComments ${n0(s1.totalComments)}, openComments ${n0(s1.openComments)}, blockingComments ${n0(s1.blockingComments)}. By status: ${PX.COMMENT_STATUSES.map((st) => `${q(st)} ${n0(s1.byStatus[st])}`).join(', ')}. By severity: ${PX.SEVERITIES.map((sv) => `${q(sv)} ${n0(s1.bySeverity[sv])}`).join(', ')}.`);
   w('- The unrated comment C-09 is in the comment total and in openComments and in no severity column.');
+  {
+    const moved = IKANG_COMMENTS.map((c) => (c.id === 'C-01' ? { ...c, status: 'Withdrawn' } : c));
+    const cc1 = P.canClose(moved);
+    if (cc1.ok !== false) throw new Error('GENERATOR REFUSES: the one-move probe was labelled refused and the engine allowed it');
+    w(`- One move later: with C-01 withdrawn, closing IK-01 is still refused, and the blocking comments are ${lst(cc1.blocking.map((c) => c.id))}, ${n0(cc1.blocking.length)} in all.`);
+  }
   w(`- Comments worst first, unresolved before resolved (bySeverityThenAge): ${sortPlain('peerReview', 'bySeverityThenAge', IKANG_COMMENTS).join(', ')}.`);
 }
 w();
@@ -704,6 +767,12 @@ for (const r of IKANG_REVIEWS) w(`| ${r.id} | ${q(r.stage)} | ${r.due_date} | ${
   const s = P.summarise(IKANG_REVIEWS, [], T());
   w(`- Reviews ${n0(s.total)}, active ${n0(s.active)}, overdue ${n0(s.overdue)}. IK-02 is due on the as-of date and is not overdue. IK-04 is Cancelled and never overdue, whatever its date.`);
   w(`- byUrgency: ${sortWith('peerReview', 'byUrgency', [T()], IKANG_REVIEWS).join(', ')}.`);
+  w(`- The byUrgency rule: overdue reviews first, then other reviews in an active stage (${PX.ACTIVE_STAGES.map(q).join(', ')}), then everything finished; within a rank the earlier due date first, and a review with no due date last. Read against the table above: IK-01 is the one overdue review, IK-02 and IK-05 are active with IK-02 due first, and IK-04 and IK-03 are finished with IK-04 due first.`);
+  const past = shift(-1);
+  w(`- isOverdue asks the stage first. Every stage at the same past due date, ${past}:`);
+  w('| stage | overdue |');
+  w('| --- | --- |');
+  for (const st of PX.STAGES) w(`| ${q(st)} | ${yn(P.isOverdue({ stage: st, due_date: past }, T()))} |`);
 }
 {
   const ik01 = IKANG_REVIEWS.find((r) => r.id === 'IK-01');
@@ -782,6 +851,7 @@ w();
 sec('SECTION 16: Proof of use: applications, the reuse record, and embedding (owned by Expert m04)');
 w(`- Application targets: ${LX.TARGET_TYPES.map(q).join(', ')}. The two that are Suite registers and carry a real key: ${LX.SUITE_TARGET_TYPES.map(q).join(', ')}.`);
 w(`- Outcomes: ${LX.APPLICATION_OUTCOMES.map(q).join(', ')}. The outcomes that changed something: ${LX.EMBEDDING_OUTCOMES.map(q).join(', ')}. A rejection is a real record and embeds nothing.`);
+w('- The engine gives Adopted and Adapted no meaning beyond this: both count as applied, both can earn Embedded, and the reuse record counts each separately. It holds no rule that tells them apart, so the difference between taking a lesson as written and changing it to fit is the organisation\'s own reading of the words.');
 w();
 w('The application log:');
 w('| application | lesson | target | outcome | applied on |');
@@ -816,6 +886,18 @@ w('| --- | --- |');
 for (const s of LX.LESSON_STATUSES) w(`| ${q(s)} | ${lst(L.nextLessonStatuses(s).map(q))} |`);
 w();
 w('What an application must carry before it is recorded:');
+{
+  const probes = [
+    ['a rejection with its reason and no target type', { outcome: 'Rejected', notes: 'Covered already.' }],
+    ['a rejection with a procedure target, its reason, and no reference', { target_type: 'Procedure', outcome: 'Rejected', notes: 'Covered already.' }],
+    ['a rejection into the risk register with its reason and no risk named', { target_type: 'Risk register', outcome: 'Rejected', notes: 'Covered already.' }],
+  ];
+  for (const [label, a] of probes) {
+    const r = L.canRecordApplication(a);
+    w(`- ${r.ok ? allowed(label, r) : refusal(label, r)}`);
+  }
+  w('- A REJECTED application must still name its target: the target checks come before the outcome check, so a rejection carries the same trail as an adoption, plus its reason.');
+}
 for (const [label, a] of APPLICATION_PROBES) {
   const r = L.canRecordApplication(a);
   w(`- ${r.ok ? allowed(label, r) : refusal(label, r)}`);
@@ -888,6 +970,16 @@ for (const m of ['calendar', 'riskScoring', 'managementOfChange', 'peerReview', 
   w(`| ${m}_cases.json | ${n0(g.cases.length)} | ${n0(g.cases.filter((c) => c.repaired).length)} | ${n0(fns.size)} |`);
 }
 w('- Every exported function of each module is exercised by at least one golden case, and the gate replays every case in five time zones. The oracles were written from the rules as stated rather than from the JavaScript.');
+{
+  // Only this course's five files are counted: the other five belong to the
+  // sibling course, move with its repairs, and would make this digest change
+  // when nothing in this course's scope did.
+  let five = 0;
+  for (const m of ['calendar', 'riskScoring', 'managementOfChange', 'peerReview', 'lessonsLearned']) {
+    five += JSON.parse(fs.readFileSync(`${ROOT}/test-data/assurance/goldens/${m}_cases.json`, 'utf8')).cases.length;
+  }
+  w(`- Golden cases, measured: ${n0(five)} across the five files in the table above. The other five assurance golden files belong to Compliance, Audit & Quality.`);
+}
 w('- Every engine answer in THIS digest was replayed through the same oracles by oracle_bridge.py. A golden case checks the engine on the oracle author records; the bridge checks it on this course records.');
 w();
 

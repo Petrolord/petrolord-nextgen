@@ -1,7 +1,7 @@
 # Risk, Change & Learning (riskchange). Teaching digest.
 # THE AS-OF DATE FOR EVERY LINE BELOW IS 2026-10-01, a Thursday. Every status that depends on a date (review overdue, expired, expiring soon, awaiting or overdue ratification, review due soon, days until) is that status ON 2026-10-01, and every engine call that takes a date was handed this one explicitly. None of them read a clock.
 # Scores, levels, counts and days are whole numbers. Dates print as YYYY-MM-DD. Statuses, bands and verdicts print exactly as the engine spells them, in double quotes.
-# Built against engines 9d5d3b4 (ASC-0), vendored sha-identical: riskScoring, managementOfChange, peerReview, lessonsLearned and the calendar they share. Every figure is the engine answering at the inputs named beside it, except a line that says golden or measured.
+# Built against engines ab3ce6a (ASC-1), vendored sha-identical; the five modules this course reads are unchanged since 9d5d3b4 (ASC-0), and this digest was proved byte-identical across that re-vendor: riskScoring, managementOfChange, peerReview, lessonsLearned and the calendar they share. Every figure is the engine answering at the inputs named beside it, except a line that says golden or measured.
 # Every engine answer printed here was also replayed through the independent Python oracle for its module (oracle_bridge.py), so each one is two methods agreeing.
 # A GOLDEN LINE IS NOT THE ENGINE ANSWERING. The published case files are written by the oracles.
 
@@ -87,6 +87,7 @@ What the scale accepts as a level, each probe scored against the other axis:
 | a negative likelihood | -2 | 4 | 0 | "None" |
 
 - The scale is five WHOLE levels. A fraction is off the scale and unscored, the same as a level of 6 or a blank: the engine returns a score of 0 and the band "None" rather than guessing a level. A whole number written as text or with a decimal point is still that level.
+- What level the value true is read as, asked directly: true against an impact of 1 scores 1, so true is read as level 1; false against an impact of 1 scores 0, band "None". The register's own form stores whole numbers, so this is how the engine treats a value the form never writes.
 
 # SECTION 3: Inherent and residual, the per-axis fallback, and appetite (owned by Associate m03)
 
@@ -154,6 +155,10 @@ What the scale accepts as a level, each probe scored against the other axis:
 
 - OB-10 is "Closed" and its review date is 181 days away, and OB-09 is "Draft" with no review date. Neither can read overdue whatever its date, because the test asks the status first.
 - The same question of a Closed risk whose review date passed the day before the as-of date: overdue no. The same risk as "Open": overdue yes.
+- An "Open" risk with no review date at all: days until null, review overdue no.
+- An "Open" risk with a review date of 30 February: days until null, review overdue no.
+- An "Open" risk with a review date that reads "after the audit": days until null, review overdue no.
+- So a live risk with no readable review date is never review-overdue: the engine has no date to be late against, and nothing in it flags the missing date.
 
 # SECTION 5: The register as a whole: live risks, and counting by band (owned by Associate m05)
 
@@ -188,6 +193,8 @@ countByBand, which counts whatever list it is handed. Four populations of the sa
 
 - The same register gives Critical counts of 5, 1, 4, 1 across those four rows, 3 different values, depending on two choices the CALLER makes: which risks to hand over, and whether to count inherent or residual. The engine does not filter by status. Each count is right for the question it answers, and a dashboard tile has to say which question that is.
 # App surface: the Risk Register dashboard counts Open and Under Review risks and plots them INHERENT; the Heatmap tab plots the four live statuses INHERENT; the Assurance hub counts live risks through countByBand. RECON.md records the two heatmaps disagreeing as a finding.
+- The Risk Register DASHBOARD population, Open and Under Review only, counted INHERENT: 8 risks (OB-01, OB-02, OB-03, OB-05, OB-06, OB-08, OB-11, OB-12), "Critical" 4, "High" 1, "Medium" 2, "Low" 0, "None" 1. The Mitigated and Realized risks (OB-04, OB-07) are live and outside this population.
+# App surface: the Assurance hub calls countByBand TWICE over the live risks, once inherent and once residual, and shows both: on OBODO that is Critical 4 inherent and 1 residual, the two live rows of the table above.
 
 # SECTION 6: The OBODO register end to end (owned by Associate m06)
 
@@ -256,6 +263,8 @@ Moves the engine refuses, with its own words:
 - REFUSED, deciding an approval that is already Approved: This approval is already approved.
 - REFUSED, deciding an approval that is already Rejected: This approval is already rejected.
 - The rule is owner policy, decided on 2026-09-18 (AS15, D1): an approval is decided only by the member it is assigned to, never by the change originator, and an absence is covered by reassigning the approval. The database enforces the same rule.
+- REFUSED, u-emeka deciding an approval whose status is Delegated: This approval is already delegated.
+- What the engine does NOT model, measured by searching its 34 exports: functions whose name mentions reassigning or delegating: 0; functions whose name mentions reopening, revisiting, undoing, revoking or withdrawing a decision: 0. "Delegated" is a status an approval row can carry and nothing more: a Delegated row is not Approved, so its level stays outstanding (Section 8), and deciding it is refused as already decided. How an approval moves to somebody else, and whether a decided one can be reopened, is the app's and the database's business (the AS15 reassignment), and this engine holds no rule for either. A decided approval is refused as already approved or already rejected, the two lines above.
 
 # SECTION 10: Actions and the two gates: into Implementation and into Closed (owned by Professional m04)
 
@@ -302,6 +311,7 @@ The same expiry date, one day past, across types and stages:
 | "Temporary" | "Cancelled" | "No expiry" | no |
 | "Permanent" | "Implementation" | "Permanent change" | no |
 - An expiry that cannot be read is no expiry: "No expiry" for a Temporary change in Implementation whose expiry reads "after the turnaround".
+- A Temporary change in Approval whose expiry date, 2026-09-30, has already passed, asked to go into Implementation with every level signed: ALLOWED, a past-dated expiry at the gate. The gate asks only that the expiry date can be read; it does not ask that it lies ahead. Once in Implementation the same change reads "Expired" on 2026-10-01.
 
 - An Emergency change may go into Implementation once its FIRST approval level has signed and nobody has rejected it. Every other level must then sign within EMERGENCY_RATIFY_DAYS, 7 days, of the actual implementation date, and the change cannot close until they have. Ratification states: "Not required", "Awaiting ratification", "Ratification overdue", "Ratified".
 - ALLOWED, an Emergency change in Approval into Implementation with level 1 signed and level 2 pending.
@@ -373,6 +383,28 @@ summarise, the dashboard and report counts, computed once:
 - By stage: "Draft" 0, "Screening" 1, "Review" 1, "Approval" 1, "Implementation" 5, "Closed" 2, "Rejected" 1, "Cancelled" 1.
 - By risk level: "Low" 2, "Medium" 4, "High" 4, "Critical" 2.
 - openActions and overdueActions skip AC-06 and AC-07, whose changes (ES-06 Closed, ES-09 Cancelled) are finished and locked. They count AC-09, whose change is unknown. A Cancelled action (AC-08) is finished.
+- The 4 open actions are AC-01, AC-03, AC-05, AC-09. The 2 overdue actions are AC-01 (due 2026-09-28, -3 days), AC-09 (due 2026-09-30, -1 days). An action is overdue when it is open work and its due date has PASSED: days until below zero.
+- Edge probe, one open action due the day before the as-of date (2026-09-30): openActions 1, overdueActions 1.
+- Edge probe, one open action due ON the as-of date (2026-10-01): openActions 1, overdueActions 0.
+- Edge probe, one open action due the day after (2026-10-02): openActions 1, overdueActions 0.
+- Probe, the finished-parent skip for a REJECTED change: ES-11 is "Rejected"; one Open action on it due 2026-09-26: openActions 0, overdueActions 0. A Rejected change is terminal like a Closed or Cancelled one, and its actions are not open work.
+- awaitingApproval counts the changes whose STAGE is Approval: 1 (ES-01). It counts changes. ES-01 carries two Pending approval rows and counts once.
+The risk level each ESANMI change carries, the rows behind the by-risk-level counts:
+| change | risk level |
+| --- | --- |
+| ES-01 | "High" |
+| ES-02 | "High" |
+| ES-03 | "Medium" |
+| ES-04 | "Critical" |
+| ES-05 | "High" |
+| ES-06 | "Low" |
+| ES-07 | "High" |
+| ES-08 | "Medium" |
+| ES-09 | "Medium" |
+| ES-10 | "Low" |
+| ES-11 | "Medium" |
+| ES-12 | "Critical" |
+- ES-12's actual implementation date: null (no date recorded). Its ratification reads "Ratification overdue" with due null: with no recorded implementation date the window cannot be shown to be open, so it fails closed.
 
 byUrgency on 2026-10-01, most urgent first. Expired changes first, then expiring soon, then overdue, then other live work, then everything finished; within a rank the earlier expiry or target date first:
 - ES-03, ES-05, ES-02, ES-08, ES-10, ES-01, ES-04, ES-12, ES-07, ES-09, ES-06, ES-11
@@ -447,6 +479,7 @@ Every disposition asked for every move, the engine explaining each refusal in it
 - ALLOWED, closing IK-01 once its blocking comments are withdrawn, with a Minor, an Editorial and an unrated comment still Open.
 - summarise over IK-01 and its own log: totalComments 9, openComments 6, blockingComments 3. By status: "Open" 4, "Responded" 1, "Verified" 1, "Closed" 1, "Rejected" 1, "Withdrawn" 1. By severity: "Critical" 3, "Major" 3, "Minor" 1, "Editorial" 1.
 - The unrated comment C-09 is in the comment total and in openComments and in no severity column.
+- One move later: with C-01 withdrawn, closing IK-01 is still refused, and the blocking comments are C-03, C-04, 2 in all.
 - Comments worst first, unresolved before resolved (bySeverityThenAge): C-01, C-03, C-04, C-06, C-07, C-09, C-08, C-02, C-05.
 
 The IKANG review register on 2026-10-01:
@@ -459,6 +492,15 @@ The IKANG review register on 2026-10-01:
 | IK-05 | "Draft" | 2026-10-20 | no |
 - Reviews 5, active 3, overdue 1. IK-02 is due on the as-of date and is not overdue. IK-04 is Cancelled and never overdue, whatever its date.
 - byUrgency: IK-01, IK-02, IK-05, IK-04, IK-03.
+- The byUrgency rule: overdue reviews first, then other reviews in an active stage ("Draft", "In Review", "Verification"), then everything finished; within a rank the earlier due date first, and a review with no due date last. Read against the table above: IK-01 is the one overdue review, IK-02 and IK-05 are active with IK-02 due first, and IK-04 and IK-03 are finished with IK-04 due first.
+- isOverdue asks the stage first. Every stage at the same past due date, 2026-09-30:
+| stage | overdue |
+| --- | --- |
+| "Draft" | yes |
+| "In Review" | yes |
+| "Verification" | yes |
+| "Closed" | no |
+| "Cancelled" | no |
 - SEGREGATION OF DUTIES IN PEER REVIEW. The author of the work under review never reviews it. IK-01's author is u-efe. Reviewer roles: "Lead Reviewer", "Reviewer". Putting people on the review:
 - REFUSED, the author of the work, as a Reviewer: The author of the work under review cannot review it. Choose somebody independent of the work.
 - REFUSED, the author of the work, as the Lead Reviewer: The author of the work under review cannot review it. Choose somebody independent of the work.
@@ -519,6 +561,7 @@ The whole IKANG register summarised, with the comments on the other reviews:
 
 - Application targets: "Risk register", "Management of change", "Procedure", "Training", "Design standard", "Contract or tender", "Maintenance plan", "Other". The two that are Suite registers and carry a real key: "Risk register", "Management of change".
 - Outcomes: "Adopted", "Adapted", "Rejected". The outcomes that changed something: "Adopted", "Adapted". A rejection is a real record and embeds nothing.
+- The engine gives Adopted and Adapted no meaning beyond this: both count as applied, both can earn Embedded, and the reuse record counts each separately. It holds no rule that tells them apart, so the difference between taking a lesson as written and changing it to fit is the organisation's own reading of the words.
 
 The application log:
 | application | lesson | target | outcome | applied on |
@@ -561,6 +604,10 @@ The reuse record of each visible lesson, which is a count and never a claim:
 | "Superseded" | none |
 
 What an application must carry before it is recorded:
+- REFUSED, a rejection with its reason and no target type: Pick what this lesson was applied to.
+- REFUSED, a rejection with a procedure target, its reason, and no reference: Name what changed (the procedure, the course, the standard) so somebody can go and look at it.
+- REFUSED, a rejection into the risk register with its reason and no risk named: Name the risk. A lesson pushed into the register points at the row it raised or changed, so the trail runs both ways.
+- A REJECTED application must still name its target: the target checks come before the outcome check, so a rejection carries the same trail as an adoption, plus its reason.
 - ALLOWED, a risk register target with the risk named.
 - REFUSED, a risk register target with no risk named: Name the risk. A lesson pushed into the register points at the row it raised or changed, so the trail runs both ways.
 - REFUSED, a change register target with no change named: Name the change record this lesson went into.
@@ -642,6 +689,7 @@ The published golden case files, measured by reading them (golden, written by th
 | peerReview_cases.json | 184 | 38 | 17 |
 | lessonsLearned_cases.json | 345 | 19 | 26 |
 - Every exported function of each module is exercised by at least one golden case, and the gate replays every case in five time zones. The oracles were written from the rules as stated rather than from the JavaScript.
+- Golden cases, measured: 1037 across the five files in the table above. The other five assurance golden files belong to Compliance, Audit & Quality.
 - Every engine answer in THIS digest was replayed through the same oracles by oracle_bridge.py. A golden case checks the engine on the oracle author records; the bridge checks it on this course records.
 
 # SECTION 19: One loop across four registers: a lesson into a risk and into a change (owned by Expert m06)

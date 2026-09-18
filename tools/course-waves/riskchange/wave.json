@@ -22,7 +22,7 @@
   "engines/assurance/calendar.js",
   "engines/assurance/qualityAssurance.js"
  ],
- "enginesVendoredAt": "NextGen, sha-identical with engines 9d5d3b4 (the squash merge of PR #212, ASC-0, the repairs this wave and its sibling found), re-vendored over the first vendoring at 6b00f43 (AS15). The WHOLE engines/assurance family is vendored, 53 paths over a WALKED closure (32 edges, including the oracles' Python imports of one another, with every assurance suite seeded by listing the commit), identical to what the sibling compliance wave cherry-picks so the two pull requests cannot conflict. Proved path by path by git blob hash and md5; the Suite does not vendor 9d5d3b4 yet, so the third compare used at 6b00f43 was not available. qualityAssurance.js is listed because lessonsLearned reaches calendar.js through it; nothing in this course teaches or grades it.",
+ "enginesVendoredAt": "NextGen, sha-identical with engines ab3ce6a (ASC-1, PR #213), cherry-picked from the compliance branch's vendor commit so the two branches carry the same tree. ASC-1 changed only isoCompliance and complianceStatus, so nothing this course reads moved from 9d5d3b4 (ASC-0, PR #212), and the digest was proved byte-identical across the re-vendor before its header was relabelled. 53 paths over a WALKED closure; proved path by path by git blob hash and md5.",
  "asOf": "2026-10-01",
  "constants": {
   "$classification": "Every constant a lesson may quote, classified. EXPORTED means the engine exports it and the digest prints it from the export. OWNER means an owner decision (AS15, 2026-09-18) fixed it. Every one is also stated independently by the module's oracle and oracle_bridge.py checks the two agree.",
@@ -70,7 +70,7 @@
   }
  },
  "gates": {
-  "vendor/closure.py": "walks the import closure of the whole family at RC_ENGINES_REV (default 9d5d3b4; ES, CommonJS, dynamic, data reads and the oracles' Python imports; suites seeded by listing the commit) and proves the vendored copy sha-identical path by path. 53 of 53.",
+  "vendor/closure.py": "walks the import closure of the whole family at RC_ENGINES_REV (default ab3ce6a; ES, CommonJS, dynamic, data reads and the oracles' Python imports; suites seeded by listing the commit) and proves the vendored copy sha-identical path by path. 53 of 53.",
   "vendor/ledger.py": "upserts the closure into VENDOR.json group 9-assurance-ahead-of-pin, each path pinned to its blob: 53 in all.",
   "riskchange_dump.mjs": "the digest generator, with its own as-of gate (every date-taking export found by reading its signature must be handed the as-of date) and a clock trap (new Date() and Date.now() throw), refusal/allowed guards, section-owner checks, and a ledger of every engine call.",
   "oracle_bridge.py": "replays every ledgered engine call (and every printed constant) through the Python oracle for its module and refuses on any disagreement or any unmapped export. --selftest plants a wrong score, an AS14 miscount and an unmapped export.",
@@ -84,10 +84,10 @@
   "digestprose.mjs (kit)": "headings against their blocks, repair history framing, the owner copy rule, with this wave's rules file and ten engine pins (one went red on the ASC-0 re-vendor, as it should, and was re-pinned)."
  },
  "digest": {
-  "lines": 667,
+  "lines": 715,
   "sections": 20,
   "withheld": null,
-  "note": "Nothing is withheld. SECTION 20 is the one section whose subject is what these engines were repaired for (AS12 to AS15 and ASC-0) and it says so in its title and first line. The digest teaches the ASC-0 engine: nothing it prints is held or framed as an engine defect."
+  "note": "Nothing is withheld. SECTION 20 is the one section whose subject is what these engines were repaired for (AS12 to AS15 and ASC-0) and it says so in its title and first line. The digest teaches the ASC-0 engine: nothing it prints is held or framed as an engine defect. The ASC-1 digest extension round added probes for the writers' gaps (REVISE.md maps each gap to its lines)."
  },
  "history": {
   "position": "FRAMED HISTORY IS CURRICULUM, UNFRAMED HISTORY IS A DEFECT. Digest SECTION 20 is the only history; Expert m05 l03 owns it.",
