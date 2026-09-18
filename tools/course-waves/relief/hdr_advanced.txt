@@ -1,0 +1,23 @@
+-- ============================================================================
+-- FC5 EXPERT DEEP SEED: Relief & Flare Systems, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: A VESSEL EMPTYING ITSELF, AND THE AUDIT. The blowdown
+-- march and its closed form; the customary fifteen-minute depressuring time and
+-- the orifice that buys it; a step size as part of the answer; the point source
+-- asked as an intensity and again as a distance; what the method does not know,
+-- read as three columns (computed, typed, and held for literature); and what
+-- the FC5-0 repair changed, framed as history in the module that is about it.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A march has a step, and the step shows in the
+-- sixth decimal of a printed time. The same balance also integrates exactly, so
+-- the tier carries two right routes to one time, and the capstone's tolerance
+-- on that time is set wide enough to admit both.
+--
+-- The customary RADIATION_LEVELS values and their wording are held for
+-- literature. The capstone states its own project allowable, which is none of
+-- the four, so no held label and no held value enters a graded answer.
+-- ============================================================================
