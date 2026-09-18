@@ -200,6 +200,11 @@ export const PANELS = {
   'fc-exchanger-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/ExchangerExplorer')),
   'fc-coefficient-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/CoefficientExplorer')),
   'fc-rating-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/RatingExplorer')),
+
+  // compliance: Compliance, Audit & Quality (academy module assurance)
+  'compliance-register-explorer': React.lazy(() => import('@/components/course/panels/compliance/RegisterExplorer')),
+  'compliance-plan-explorer': React.lazy(() => import('@/components/course/panels/compliance/PlanExplorer')),
+  'compliance-readiness-explorer': React.lazy(() => import('@/components/course/panels/compliance/ReadinessExplorer')),
 };
 
 export function resolvePanel(id) {

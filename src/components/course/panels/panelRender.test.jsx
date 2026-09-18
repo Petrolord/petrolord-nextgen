@@ -78,6 +78,12 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('linesizing/GasLineExplorer.jsx');
     expect(names).toContain('linesizing/WallPigExplorer.jsx');
   });
+  it('finds the compliance (Compliance, Audit & Quality) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('compliance/RegisterExplorer.jsx');
+    expect(names).toContain('compliance/PlanExplorer.jsx');
+    expect(names).toContain('compliance/ReadinessExplorer.jsx');
+  });
   for (const [path, load] of entries) {
     it(path.split('/panels/')[1], async () => {
       const mod = await load();
