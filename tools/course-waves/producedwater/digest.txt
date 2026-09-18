@@ -110,6 +110,7 @@ Viscosity against salinity, at 41 C:
 | 200000 | 1.360000 | 0.000869335586 |
 | 280000 | 1.504000 | 0.000961382883 |
 The factor is one plus 1.8 times the mass fraction, which is DECLARED. It is linear and it is stated only to 300000 ppm, because past saturation a linear correction has nothing behind it.
+- 300001 ppm TDS at the 41 C of the sweep above: REFUSED: the salinity correction in this module is stated to 300000 ppm TDS and this is 300001 ppm: past saturation a linear correction has nothing behind it
 
 Brine density and crude density on the same water, which is what the density DIFFERENCE is made of:
 | degC | ppm TDS | fresh kg/m3 | brine kg/m3 |
@@ -128,7 +129,18 @@ Crude density against API gravity at 41 C:
 | 30 | 0.876161 | 859.697757 | 175.563417 |
 | 38 | 0.834808 | 819.122052 | 216.139122 |
 | 46 | 0.797183 | 782.203875 | 253.057299 |
-The last column is derived, the brine density on the row above this table minus each crude density. It is the entire driving force for every gravity and centrifugal device in this module, and across this sweep it changes by a factor of about three, which is the same factor on every cut size squared.
+The last column is derived, the brine density on the row above this table minus each crude density. It is the entire driving force for every gravity and centrifugal device in this module, and across this sweep it changes by a factor of 3.736445 (derived, the largest difference over the smallest), which is the same factor on every cut size squared.
+
+Both effects of the UZERE salinity at once. The UZERE basin at 28000 bwpd, run by the engine on each crude above, once in fresh water and once in the UZERE brine, both at 41 C:
+| API | difference from fresh water, kg/m3 | fresh water cut, micron | UZERE brine cut, micron | brine cut over fresh cut |
+| --- | --- | --- | --- | --- |
+| 12 | 24.326764 | 378.634626 | 239.252567 | 0.631882 |
+| 19 | 69.328365 | 224.288508 | 185.447151 | 0.826824 |
+| 24 | 98.991799 | 187.699403 | 165.003927 | 0.879086 |
+| 30 | 132.163417 | 162.445195 | 148.600324 | 0.914772 |
+| 38 | 172.739122 | 142.091188 | 133.927597 | 0.942547 |
+| 46 | 209.657299 | 128.975585 | 123.773404 | 0.959665 |
+The last column is derived, the two engine cuts on the same row divided. It is below one on all 6 rows, so on every crude of this sweep the saline water is the one that cuts finer. The salinity makes the water 1.111600 times as viscous and 43.400000 kg/m3 heavier, and on this sweep the density gain is the larger move. The two effects balance only where the difference from fresh water is that density gain over the viscosity factor less one, 388.888889 kg/m3 (derived, the two figures in this sentence), which is 432.288889 kg/m3 against the brine. A crude placed exactly there cuts at 94.699946 micron in both waters when the engine runs it, and the largest difference against the brine anywhere in this sweep is 253.057299 kg/m3.
 
 # SECTION 4: Oil in water is a distribution (owned by Associate m03)
 
@@ -165,6 +177,10 @@ Sigma is the input a reader is least likely to have measured and it matters more
 | 1 | 74.748250 | 8.988225 | none |
 | 1.5 | 68.402514 | 5.944722 | sigma outside the customary band |
 The module warns outside 0.5 to 1 and refuses above 2, because a wider spread than that is not what produced water carries.
+- a bin count of 60.5: REFUSED: the distribution needs a whole number of bins, at least 10, and this is 60.5
+- a bin count of 4: REFUSED: the distribution needs a whole number of bins, at least 10, and this is 4
+- a span of 2 sigma either side: REFUSED: the distribution must span at least 3 sigma either side of the median and this spans 2
+Those three name the guard they crossed and the figure that crossed it. The whole-number guard is the one worth pausing on: a bin count is a COUNT, a grid of 60.5 bins is not a thing the module can build, and rounding it quietly would have handed back an answer measured on a grid the caller never asked for.
 
 # SECTION 5: A droplet's rise, and the band it is honest in (owned by Associate m04 and Expert m04)
 
@@ -263,7 +279,7 @@ The reduced-efficiency curve, at both sharpnesses this module uses:
 | 4 | 0.941176470588 | 0.984615384615 |
 Both curves in the table above pass through one half at a ratio of one, which is the definition. The sharper curve separates better either side of the cut: at four times the cut size it removes 98.461538 percent against 94.117647, and at a quarter of it 1.538462 percent against 5.882353. Sharpness 3 is DECLARED for the gravity and centrifugal devices. Sharpness 2 is DERIVED for the two interception devices.
 
-The same water through one device at several cut sizes, so the removal and the outlet can be read together:
+The UZERE inlet, d50 26 micron at sigma 0.8, through one device at several cut sizes, so the removal and the outlet can be read together:
 | cut micron | removal percent | surviving volume | outlet median micron |
 | --- | --- | --- | --- |
 | 30 | 44.236922 | 0.557630781833 | 16.943389 |
@@ -282,6 +298,7 @@ The KOKORI bank, 75000 bwpd through 200 liners:
 - 0.000690049023 m3/s per liner against a 0.0006 m3/s design flow, a turndown of 1.150082.
 - field 1322.687929 g, liner volume 0.000673478925 m3, residence 0.975987 s.
 - the droplet has 0.003624368671 m to cross and 0.003713541683 m/s to do it in, which gives a cut of 4.430689 micron at Reynolds 0.030870.
+- the half-area radius, as a fraction of the liner radius, MEASURED back out of this return rather than read from a constant: the travel over the radius the returned volume and length give, plus the declared core fraction of 0.5, is 0.707106781187 (derived, the three figures on this same return). Half the flow area sits inside it, which is why the MEDIAN droplet starts there, and it is the criterion the core refusal below is taken against.
 - shear penalty 1.000000, so the ideal cut and the reported cut are the same number here: 4.430689 and 4.430689.
 - the bank this flow would want at its design point: 231 liners.
 - cut basis, on every return: an ideal capture: the median droplet crossing from the half-area radius to the oil core in the residence time. Re-entrainment, the reject split and the shear the liner itself applies are not in it, and field de-oilers are customarily credited with a coarser cut than this

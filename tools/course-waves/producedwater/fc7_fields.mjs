@@ -99,6 +99,14 @@ export const API_BAND = { low: 5, belowLow: 4.9, high: 100, aboveHigh: 100.1, in
 /** The bin grid: the median identity and the truncated tail. */
 export const NBINS_SWEEP = [30, 60, 120, 600];
 export const SPAN_SWEEP = [3, 4, 5, 6];
+/**
+ * The grid guards, which the sweeps above stay inside and this digest had never
+ * once printed the far side of. `fractional` is a bin count that is not a whole
+ * number, `belowFloor` is under `minNBins`, and SPAN_REFUSED is under
+ * `minSpanSigma`.
+ */
+export const NBINS_REFUSED = { fractional: 60.5, belowFloor: 4 };
+export const SPAN_REFUSED = 2;
 export const SIGMA_SWEEP = [0.5, 0.7, 0.8, 1.0, 1.5];
 /** The reduced-efficiency curve, at both sharpnesses the module uses. */
 export const GRADE_RATIOS = [0.25, 0.5, 0.75, 1.0, 1.5, 2, 4];

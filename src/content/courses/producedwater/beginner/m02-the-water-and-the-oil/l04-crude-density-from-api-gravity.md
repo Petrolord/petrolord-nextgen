@@ -27,7 +27,7 @@ This engine holds API gravity to a stated range and refuses outside it, naming t
 
 ## What the column is actually for
 
-Look down the density column and notice the spread. Nearly two hundred kilograms per cubic metre separate the heaviest row from the lightest, against a brine that barely moved in the last lesson. That asymmetry is the subject of the next lesson, because it is the crude, and therefore the API gravity typed into the studio, that carries most of the variation in what any of this equipment can catch.
+Look down the density column and notice the spread, then hold it against a brine column that barely moved in the last lesson. The next lesson takes the same six crudes against the UZERE brine and prints what is left after the subtraction, and that column runs from 67.726764 to 253.057299 kg/m3, a factor of 3.736445. The whole of that spread came out of this table. That asymmetry is the subject of the next lesson, because it is the crude, and therefore the API gravity typed into the studio, that carries most of the variation in what any of this equipment can catch.
 
 {{panel:pw-water-explorer}}
 

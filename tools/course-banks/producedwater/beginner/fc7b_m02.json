@@ -123,10 +123,10 @@
  {
   "prompt": "Across the six crudes of the API sweep the density difference against the UZERE brine runs from 67.726764 to 253.057299 kg/m3. What is that worth?",
   "options": [
-   "A factor of about three in the driving force, and the same factor again on every cut size, since the two are proportional.",
-   "A factor of about three in the driving force, which the short-circuit allowance of 1.5 was chosen to absorb on an ordinary basin.",
-   "A factor of about three in the driving force, and the digest says it is the same factor on every cut size squared.",
-   "A factor of about three in the driving force, and no effect on a cut size at all, which follows from the flow over the plan area."
+   "A factor of 3.736445 in the driving force, and the same factor again on every cut size, since the two are proportional.",
+   "A factor of 3.736445 in the driving force, which the short-circuit allowance of 1.5 was chosen to absorb on an ordinary basin.",
+   "A factor of 3.736445 in the driving force, and the digest says it is the same factor on every cut size squared.",
+   "A factor of 3.736445 in the driving force, and no effect on a cut size at all, which follows from the flow over the plan area."
   ],
   "answer": 2,
   "explanation": "The cut size carries the square root of that group, so the factor lands on the cut size squared. It is a property of the two fluids, settled before anybody opens an equipment catalogue."

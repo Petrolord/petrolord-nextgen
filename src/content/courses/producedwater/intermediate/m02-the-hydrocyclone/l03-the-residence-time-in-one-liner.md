@@ -27,18 +27,18 @@ Read the first three rows and one thing is holding still. The travel column does
 
 The fourth row changes the bore instead, and it moves both columns at once. A wider tube holds more water at the same flow, so the residence goes up. It also puts the wall further from the axis, so the travel goes up. Two effects that pull opposite ways, and the reported cut on that row is 3.383995 micron.
 
+The model settles that race. The residence goes as the SQUARE of the bore, because the liner volume does, while the travel goes only as the bore, so the cut goes as one over the square root of the bore. Swept from 0.01 to 0.1 m of bore at one length, the cut times the square root of the bore is 0.828906 on every row, and one over a square root has no turning point, so no bore is wide enough to start cutting coarser.
+
 ## Where the flow per liner comes from
 
-Notice what set the residence time. The bank flow never appears in it directly. What appears is the flow through ONE liner, which is the bank flow divided by the liner count, and that is the quantity the whole next module is about. Add liners and each one sees less water and holds it longer. Remove liners and each one sees more.
-
-So the residence time is a property of the equipment and of how hard it is being run.
+The bank flow never appears in the residence directly. What appears is the flow through ONE liner, the bank flow over the liner count, and that is the quantity the whole next module is about. Add liners and each one sees less water and holds it longer.
 
 ## Why this is worth stating
 
-Residence time is where most vendor arithmetic stops. This module carries it as one factor of a calculation whose other factor is a distance, so a change to the geometry is never a single-signed improvement. Anything that lengthens the path also changes what the droplet has to cross, and only running the model settles it.
+Residence time is where most vendor arithmetic stops. This module carries it as one factor of a calculation whose other factor is a distance, so no geometry change can be read off the residence column alone, and it is the constant product across the bore sweep that says which of the two carried the day.
 
 ## Exercise
 
 Take the first three rows of the table and confirm for yourself that residence time and liner length rise together while the travel does not move.
 
-Then say, in one sentence, why the bore is the harder of the two inputs to reason about without the model.
+Then say, in one sentence, why the bore is the harder of the two inputs to reason about without the model, and name the quantity that settles it once the model has been run.

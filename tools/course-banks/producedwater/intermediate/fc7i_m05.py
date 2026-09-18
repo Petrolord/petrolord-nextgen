@@ -101,10 +101,10 @@ q(3, "A 600 m2 bed is put on the KOKORI flow. What does the module do?",
 
 q(0, "That refusal names the bed that would run this flow AT the floor. What is that figure and where does it come from?",
  "496.835297 m2, which the return carries as `areaAtFloorM2` against the 20 m2 bed this stream actually runs.",
- ["496.835297 m2, which is the largest bed on this flow that the module will still answer for at its stated floor.",
+ ["496.835297 m2, which is the reference bed area the filter coefficient of 3.5 per m is declared at.",
   "490 m2, which is the smallest bed on this flow that the module refuses to answer for.",
   "2000 m2, which is the second of the two beds the section refuses and the one sitting furthest under the floor."],
- "The last beds that answer on this flow are 200, 400 and 490 m2, cutting at 5.145107, 4.326502 and 4.112471 micron. The floor area is the quantity the refusal names for a caller who wants to know what to change and by how much.")
+ "The answering beds the section walks on this flow are 200, 400 and 490 m2, cutting at 5.145107, 4.326502 and 4.112471 micron. The floor area is the quantity the refusal names for a caller who wants to know what to change and by how much.")
 
 q(2, "Why is the loading floor a refusal where the breakthrough loading is only a warning?",
  "Because what a bed really does far below its design rate is HELD FOR LITERATURE, so there is no answer to report.",

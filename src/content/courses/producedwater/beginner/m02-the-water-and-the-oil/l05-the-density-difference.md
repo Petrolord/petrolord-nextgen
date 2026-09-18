@@ -19,7 +19,7 @@ The UZERE stream sits on the middle row at 142.391799 kg/m3, and that single fig
 
 ## What the spread is worth
 
-Across that sweep the difference changes by a factor of about three, and that is the same factor landing on every cut size squared. A heavy crude in the same brine is a fundamentally harder duty, and no amount of equipment selection makes the driving force larger. It is a property of the two fluids, settled before anybody opens a catalogue, and the only lever an engineer has over it is temperature, which moves both densities at once and moves them by different amounts.
+Across that sweep the difference changes by a factor of 3.736445, and that is the same factor landing on every cut size squared. A heavy crude in the same brine is a fundamentally harder duty, and no amount of equipment selection makes the driving force larger. It is a property of the two fluids, settled before anybody opens a catalogue, and the only lever an engineer has over it is temperature, which moves both densities at once and moves them by different amounts.
 
 ## The number a small error lands on
 

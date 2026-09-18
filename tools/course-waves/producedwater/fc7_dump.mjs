@@ -59,7 +59,7 @@ import {
   OGBOTOBO_SPEC_TIGHT_PPM, OGBOTOBO_SPEC_LOOSE_PPM, OGBOTOBO_CALLER_FLOOR_PPM,
   FLOOR_DEMO_INLET, FLOOR_DEMO_CUT_MICRON, FLOOR_WIDE_STAGES, FLOOR_WIDE_CUT_MICRON,
   VISC_T_SWEEP, VISC_TDS_SWEEP, API_SWEEP, VISC_BAND, DENSITY_BAND, TDS_BAND, API_BAND,
-  NBINS_SWEEP, SPAN_SWEEP, SIGMA_SWEEP, GRADE_RATIOS, GRADE_SHARPNESS,
+  NBINS_SWEEP, SPAN_SWEEP, SIGMA_SWEEP, NBINS_REFUSED, SPAN_REFUSED, GRADE_RATIOS, GRADE_SHARPNESS,
   BASIN_AREA_SWEEP, SHORT_CIRCUIT_SWEEP, SHORT_CIRCUIT_REFUSED, PLATE_COUNT_SWEEP,
   LINER_SWEEP, LINER_REFUSED, LINER_STARVED, LINER_GEOMETRY_SWEEP, LINER_BORE_LEG_LENGTH_M,
   CORE_FRACTION_SWEEP, CORE_FRACTION_REFUSED,
@@ -498,6 +498,12 @@ VISC_TDS_SWEEP.forEach((tdsPpm) => {
   w(`| ${tdsPpm} | ${f6(r.salinityFactor)} | ${f12(r.muPaS)} |`);
 });
 w(`The factor is one plus ${D.salinityViscosityMultiplier} times the mass fraction, which is DECLARED. It is linear and it is stated only to ${D.tdsMaxPpm} ppm, because past saturation a linear correction has nothing behind it.`);
+// THE SWEEP NEEDS ITS OWN REFUSAL. The sentence above states a limit and the
+// only refused salinity in this digest sat in Section 16, which the Associate
+// tier does not own, so the tier that is taught this limit could not reach a
+// single line of the engine actually enforcing it. This is that line, on the
+// UZERE temperature the sweep above is run at.
+wRefusalLine(`${TDS_BAND.justOver} ppm TDS at the ${UZERE_WATER.tC} C of the sweep above`, P.waterViscosityPaS({ tC: UZERE_WATER.tC, tdsPpm: TDS_BAND.justOver }));
 w();
 w(`Brine density and crude density on the same water, which is what the density DIFFERENCE is made of:`);
 w('| degC | ppm TDS | fresh kg/m3 | brine kg/m3 |');
@@ -510,11 +516,58 @@ w();
 w(`Crude density against API gravity at ${UZERE_OIL.tC} C:`);
 w('| API | sg at 60 F | kg/m3 | difference from the UZERE brine, kg/m3 |');
 w('| --- | --- | --- | --- |');
-API_SWEEP.forEach((apiGravity) => {
+const crudeDiffs = API_SWEEP.map((apiGravity) => {
   const r = A(`crude density at ${apiGravity} API`, P.oilDensityKgM3({ apiGravity, tC: UZERE_OIL.tC }));
   w(`| ${apiGravity} | ${f6(r.sg60)} | ${f6(r.rhoKgM3)} | ${f6(uzRw.rhoKgM3 - r.rhoKgM3)} |`);
+  return uzRw.rhoKgM3 - r.rhoKgM3;
 });
-w('The last column is derived, the brine density on the row above this table minus each crude density. It is the entire driving force for every gravity and centrifugal device in this module, and across this sweep it changes by a factor of about three, which is the same factor on every cut size squared.');
+// THE SPREAD IS PRINTED, never characterised by eye: an earlier build called
+// it "about three" where it is nearer four.
+w(`The last column is derived, the brine density on the row above this table minus each crude density. It is the entire driving force for every gravity and centrifugal device in this module, and across this sweep it changes by a factor of ${f6(Math.max(...crudeDiffs) / Math.min(...crudeDiffs))} (derived, the largest difference over the smallest), which is the same factor on every cut size squared.`);
+w();
+// BOTH EFFECTS OF THE SALINITY AT ONCE, RANKED BY THE ENGINE. The salinity makes
+// the water more viscous (a coarser cut) and heavier (a finer cut), and a lesson
+// that says which one wins is stating a RANKING. A ranking is an answer, so it
+// is computed here from two engine cuts per row rather than left to be read off
+// two separate tables, and the generator refuses if the ranking it prints fails
+// on any row.
+const freshMu = A('fresh water viscosity at the UZERE temperature', P.waterViscosityPaS({ tC: UZERE_WATER.tC, tdsPpm: 0 }));
+const freshRw = A('fresh water density at the UZERE temperature', P.waterDensityKgM3({ tC: UZERE_WATER.tC, tdsPpm: 0 }));
+const saltRows = API_SWEEP.map((apiGravity) => {
+  const o = A(`crude density at ${apiGravity} API`, P.oilDensityKgM3({ apiGravity, tC: UZERE_OIL.tC }));
+  const fresh = A(`the UZERE basin on ${apiGravity} API crude in fresh water`, P.apiSeparator({
+    flowM3S: uzQ, ...UZERE_BASIN, rhoWater: freshRw.rhoKgM3, rhoOil: o.rhoKgM3, muPaS: freshMu.muPaS,
+  }));
+  const brine = A(`the UZERE basin on ${apiGravity} API crude in the UZERE brine`, P.apiSeparator({
+    flowM3S: uzQ, ...UZERE_BASIN, rhoWater: uzRw.rhoKgM3, rhoOil: o.rhoKgM3, muPaS: uzMu.muPaS,
+  }));
+  return {
+    apiGravity, dFresh: freshRw.rhoKgM3 - o.rhoKgM3, freshCut: fresh.d50cMicron, brineCut: brine.d50cMicron,
+  };
+});
+w(`Both effects of the UZERE salinity at once. The UZERE basin at ${UZERE_BWPD} bwpd, run by the engine on each crude above, once in fresh water and once in the UZERE brine, both at ${UZERE_WATER.tC} C:`);
+w('| API | difference from fresh water, kg/m3 | fresh water cut, micron | UZERE brine cut, micron | brine cut over fresh cut |');
+w('| --- | --- | --- | --- | --- |');
+saltRows.forEach((r) => w(`| ${r.apiGravity} | ${f6(r.dFresh)} | ${f6(r.freshCut)} | ${f6(r.brineCut)} | ${f6(r.brineCut / r.freshCut)} |`));
+if (!saltRows.every((r) => r.brineCut < r.freshCut)) {
+  throw new Error('GENERATOR REFUSES: the digest says the saline water cuts finer on every crude of the sweep and at least one row does not');
+}
+const saltViscFactor = uzMu.muPaS / freshMu.muPaS;
+const saltDensityGain = uzRw.rhoKgM3 - freshRw.rhoKgM3;
+const saltBalanceFresh = saltDensityGain / (saltViscFactor - 1);
+// The balance point is CHECKED BY THE ENGINE, not only derived: a crude placed
+// exactly there must cut the same in both waters.
+const saltBalanceOil = freshRw.rhoKgM3 - saltBalanceFresh;
+const balFresh = A('the UZERE basin at the balance point in fresh water', P.apiSeparator({
+  flowM3S: uzQ, ...UZERE_BASIN, rhoWater: freshRw.rhoKgM3, rhoOil: saltBalanceOil, muPaS: freshMu.muPaS,
+}));
+const balBrine = A('the UZERE basin at the balance point in the UZERE brine', P.apiSeparator({
+  flowM3S: uzQ, ...UZERE_BASIN, rhoWater: uzRw.rhoKgM3, rhoOil: saltBalanceOil, muPaS: uzMu.muPaS,
+}));
+if (!(Math.abs(balBrine.d50cMicron / balFresh.d50cMicron - 1) <= Number.EPSILON * 16)) {
+  throw new Error(`GENERATOR REFUSES: the salinity balance point does not balance in the engine: ${balBrine.d50cMicron / balFresh.d50cMicron}`);
+}
+w(`The last column is derived, the two engine cuts on the same row divided. It is below one on all ${saltRows.length} rows, so on every crude of this sweep the saline water is the one that cuts finer. The salinity makes the water ${f6(saltViscFactor)} times as viscous and ${f6(saltDensityGain)} kg/m3 heavier, and on this sweep the density gain is the larger move. The two effects balance only where the difference from fresh water is that density gain over the viscosity factor less one, ${f6(saltBalanceFresh)} kg/m3 (derived, the two figures in this sentence), which is ${f6(saltBalanceFresh + saltDensityGain)} kg/m3 against the brine. A crude placed exactly there cuts at ${f6(balFresh.d50cMicron)} micron in both waters when the engine runs it, and the largest difference against the brine anywhere in this sweep is ${f6(Math.max(...saltRows.map((r) => r.dFresh + saltDensityGain)))} kg/m3.`);
 w();
 
 /* ============================================================== SECTION 4 */
@@ -558,6 +611,14 @@ SIGMA_SWEEP.forEach((sigma) => {
   ])} |`);
 });
 w(`The module warns outside ${D.sigmaCustomaryMin} to ${D.sigmaCustomaryMax} and refuses above ${D.sigmaMax}, because a wider spread than that is not what produced water carries.`);
+// THE GRID HAS THREE GUARDS AND THE DIGEST PRINTED NONE OF THEM. The bin count
+// must be a WHOLE NUMBER and the engine says so by name, which a lesson in this
+// tier asserted while no line of this digest carried it. A claim about an engine
+// that the truth source does not print is a claim a reader cannot check.
+wRefusalLine(`a bin count of ${NBINS_REFUSED.fractional}`, P.dropletBins({ d50: UZERE_INLET.d50Micron, sigma: UZERE_INLET.sigma, nBins: NBINS_REFUSED.fractional }));
+wRefusalLine(`a bin count of ${NBINS_REFUSED.belowFloor}`, P.dropletBins({ d50: UZERE_INLET.d50Micron, sigma: UZERE_INLET.sigma, nBins: NBINS_REFUSED.belowFloor }));
+wRefusalLine(`a span of ${SPAN_REFUSED} sigma either side`, P.dropletBins({ d50: UZERE_INLET.d50Micron, sigma: UZERE_INLET.sigma, spanSigma: SPAN_REFUSED }));
+w(`Those three name the guard they crossed and the figure that crossed it. The whole-number guard is the one worth pausing on: a bin count is a COUNT, a grid of ${NBINS_REFUSED.fractional} bins is not a thing the module can build, and rounding it quietly would have handed back an answer measured on a grid the caller never asked for.`);
 w();
 
 /* ============================================================== SECTION 5 */
@@ -695,7 +756,7 @@ GRADE_RATIOS.forEach((ratio) => {
 });
 w(`Both curves in the table above pass through one half at a ratio of one, which is the definition. The sharper curve separates better either side of the cut: at four times the cut size it removes ${f6(100 * P.gradeEfficiency({ dMicron: 40, d50cMicron: 10, sharpness: 3 }))} percent against ${f6(100 * P.gradeEfficiency({ dMicron: 40, d50cMicron: 10, sharpness: 2 }))}, and at a quarter of it ${f6(100 * P.gradeEfficiency({ dMicron: 2.5, d50cMicron: 10, sharpness: 3 }))} percent against ${f6(100 * P.gradeEfficiency({ dMicron: 2.5, d50cMicron: 10, sharpness: 2 }))}. Sharpness ${D.defaultSharpness} is DECLARED for the gravity and centrifugal devices. Sharpness ${D.interceptionSharpness} is DERIVED for the two interception devices.`);
 w();
-w('The same water through one device at several cut sizes, so the removal and the outlet can be read together:');
+w(`The UZERE inlet, d50 ${UZERE_INLET.d50Micron} micron at sigma ${UZERE_INLET.sigma}, through one device at several cut sizes, so the removal and the outlet can be read together:`);
 w('| cut micron | removal percent | surviving volume | outlet median micron |');
 w('| --- | --- | --- | --- |');
 [30, 20, 12, 6, 2].forEach((d50cMicron) => {
@@ -715,6 +776,21 @@ w(`The KOKORI bank, ${KOKORI_BWPD} bwpd through ${KOKORI_LINERS.nLiners} liners:
 w(`- ${f12(koCyc.perLinerM3S)} m3/s per liner against a ${koCyc.designFlowPerLinerM3S} m3/s design flow, a turndown of ${f6(koCyc.turndownRatio)}.`);
 w(`- field ${f6(koCyc.gField)} g, liner volume ${f12(koCyc.linerVolumeM3)} m3, residence ${f6(koCyc.residenceS)} s.`);
 w(`- the droplet has ${f12(koCyc.radialTravelM)} m to cross and ${f12(koCyc.requiredRiseMS)} m/s to do it in, which gives a cut of ${f6(koCyc.d50cMicron)} micron at Reynolds ${f6(koCyc.cutReynolds)}.`);
+// THE HALF-AREA RADIUS, MEASURED BACK OUT OF THIS RETURN. It was printed only in
+// Section 2, which this tier does not own, so a Professional question resting on
+// it had to reach backward out of range for it. Here it is derived from three
+// figures of the hydrocyclone's OWN return, which is a better line than the one
+// in Section 2 anyway: that one restates one over the root of two and this one
+// measures it out of the geometry the engine actually used.
+// The radius is taken from the RETURNED volume and length rather than from the
+// declared bore, so only the core fraction on this line is read rather than
+// measured, and that one is declared and named where it is used.
+const koLinerRadiusM = Math.sqrt(koCyc.linerVolumeM3 / (Math.PI * koCyc.linerLengthM));
+const koHalfAreaFraction = koCyc.radialTravelM / koLinerRadiusM + D.coreRadiusFraction;
+if (!(Math.abs(koHalfAreaFraction - Math.SQRT1_2) <= Number.EPSILON * 8)) {
+  throw new Error(`GENERATOR REFUSES: the half-area radius measured out of the hydrocyclone return is ${koHalfAreaFraction} and the criterion is ${Math.SQRT1_2}`);
+}
+w(`- the half-area radius, as a fraction of the liner radius, MEASURED back out of this return rather than read from a constant: the travel over the radius the returned volume and length give, plus the declared core fraction of ${D.coreRadiusFraction}, is ${f12(koHalfAreaFraction)} (derived, the three figures on this same return). Half the flow area sits inside it, which is why the MEDIAN droplet starts there, and it is the criterion the core refusal below is taken against.`);
 w(`- shear penalty ${f6(koCyc.shearPenalty)}, so the ideal cut and the reported cut are the same number here: ${f6(koCyc.idealD50cMicron)} and ${f6(koCyc.d50cMicron)}.`);
 w(`- the bank this flow would want at its design point: ${koCyc.linersAtDesignFlow} liners.`);
 w(`- cut basis, on every return: ${koCyc.cutBasis}`);

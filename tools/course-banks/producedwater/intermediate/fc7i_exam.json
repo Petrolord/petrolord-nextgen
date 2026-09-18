@@ -357,7 +357,7 @@
    "490 m2, at a loading of 1.013950 m/hr and a cut of 4.112471 micron.",
    "400 m2, at a loading of 1.242088 m/hr and a cut of 4.326502 micron, with the wider beds all refused.",
    "600 m2, at a loading of 0.828 m/hr and a cut of 4.112471 micron, which is the last row before the floor.",
-   "496.835297 m2, which is the bed the refusals name and the last area the module will answer at."
+   "496.835297 m2, which is the bed the refusals name, reported at a loading of 1.013950 m/hr."
   ],
   "answer": 0,
   "explanation": "The three answering beds are 200, 400 and 490 m2, cutting at 5.145107, 4.326502 and 4.112471 micron. The floor under them is a refusal rather than a warning, because what a bed does far below its design rate is HELD FOR LITERATURE."

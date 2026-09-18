@@ -233,6 +233,8 @@ export const API_BAND = {
 
 export const NBINS_SWEEP = [30, 60, 120, 600];
 export const SPAN_SWEEP = [3, 4, 5, 6];
+export const NBINS_REFUSED = { fractional: 60.5, belowFloor: 4 };
+export const SPAN_REFUSED = 2;
 export const SIGMA_SWEEP = [0.5, 0.7, 0.8, 1.0, 1.5];
 export const GRADE_RATIOS = [0.25, 0.5, 0.75, 1.0, 1.5, 2, 4];
 export const GRADE_SHARPNESS = [2, 3];
@@ -620,14 +622,63 @@ export const temperatureAndSalinity = () => {
     // DERIVED, the UZERE brine density minus this crude density.
     return { apiGravity, ...r, differenceFromBrine: uz.rhoW.rhoKgM3 - r.rhoKgM3 };
   });
+  // BOTH EFFECTS OF THE SALINITY AT ONCE, RANKED BY THE ENGINE. A lesson says the
+  // saline water cuts finer on every crude of the sweep, which is a RANKING, so
+  // it is two engine cuts per row here and the lab throws if any row refutes it.
+  const freshMu = answered('the fresh water viscosity at the UZERE temperature', P.waterViscosityPaS({ tC: UZERE_WATER.tC, tdsPpm: 0 }));
+  const freshRw = answered('the fresh water density at the UZERE temperature', P.waterDensityKgM3({ tC: UZERE_WATER.tC, tdsPpm: 0 }));
+  const basinCut = (label, rhoWater, rhoOil, muPaS) => answered(label, P.apiSeparator({
+    flowM3S: uz.q, ...UZERE_BASIN, rhoWater, rhoOil, muPaS,
+  })).d50cMicron;
+  const bothRows = crude.map((c) => {
+    const freshCut = basinCut(`the UZERE basin on ${c.apiGravity} API crude in fresh water`, freshRw.rhoKgM3, c.rhoKgM3, freshMu.muPaS);
+    const brineCut = basinCut(`the UZERE basin on ${c.apiGravity} API crude in the UZERE brine`, uz.rhoW.rhoKgM3, c.rhoKgM3, uz.mu.muPaS);
+    // DERIVED, the two engine cuts on the same row divided.
+    return {
+      apiGravity: c.apiGravity, differenceFromFresh: freshRw.rhoKgM3 - c.rhoKgM3, freshCut, brineCut, ratio: brineCut / freshCut,
+    };
+  });
+  if (!bothRows.every((r) => r.brineCut < r.freshCut)) {
+    throw new Error('the lab says the saline water cuts finer on every crude of the sweep and at least one row does not');
+  }
+  const viscosityFactor = uz.mu.muPaS / freshMu.muPaS;
+  const densityGain = uz.rhoW.rhoKgM3 - freshRw.rhoKgM3;
+  // DERIVED: where the two effects balance, then CHECKED by the engine.
+  const balanceFromFresh = densityGain / (viscosityFactor - 1);
+  const balanceOil = freshRw.rhoKgM3 - balanceFromFresh;
+  const balanceFreshCut = basinCut('the UZERE basin at the balance point in fresh water', freshRw.rhoKgM3, balanceOil, freshMu.muPaS);
+  const balanceBrineCut = basinCut('the UZERE basin at the balance point in the UZERE brine', uz.rhoW.rhoKgM3, balanceOil, uz.mu.muPaS);
+  if (!(Math.abs(balanceBrineCut / balanceFreshCut - 1) <= Number.EPSILON * 16)) {
+    throw new Error(`the salinity balance point does not balance in the engine: ${balanceBrineCut / balanceFreshCut}`);
+  }
+  const salinityBoth = {
+    rows: bothRows,
+    count: bothRows.length,
+    brineFinerOnEveryRow: true,
+    viscosityFactor,
+    densityGain,
+    balanceFromFresh,
+    balanceFromBrine: balanceFromFresh + densityGain,
+    balanceCut: balanceFreshCut,
+    largestFromBrine: Math.max(...crude.map((c) => c.differenceFromBrine)),
+  };
   return {
     byTemperature,
     bySalinity,
     densities,
     crude,
+    salinityBoth,
+    // DERIVED, the largest difference against the brine over the smallest.
+    crudeSpread: Math.max(...crude.map((c) => c.differenceFromBrine)) / Math.min(...crude.map((c) => c.differenceFromBrine)),
     thinningFactor: cold.muPaS / hot.muPaS,
     salinityMultiplier: DECLARED.salinityViscosityMultiplier,
     tdsMaxPpm: DECLARED.tdsMaxPpm,
+    // The stated limit, with the engine enforcing it on the same sweep rather
+    // than only in the export census of Section 16, which this tier never reads.
+    tdsRefusal: refusalRow(
+      `${TDS_BAND.justOver} ppm TDS at the ${UZERE_WATER.tC} C of the sweep above`,
+      P.waterViscosityPaS({ tC: UZERE_WATER.tC, tdsPpm: TDS_BAND.justOver }),
+    ),
   };
 };
 
@@ -688,6 +739,21 @@ export const theDistribution = () => {
     byBinCount,
     bySpan,
     bySigma,
+    // THE GRID GUARDS. The bin count must be a WHOLE NUMBER and at least
+    // `minNBins`, and the span must reach at least `minSpanSigma`. A lesson
+    // asserted the whole-number guard while nothing printed it.
+    gridRefusals: [
+      refusalRow(`a bin count of ${NBINS_REFUSED.fractional}`, P.dropletBins({
+        d50: UZERE_INLET.d50Micron, sigma: UZERE_INLET.sigma, nBins: NBINS_REFUSED.fractional,
+      })),
+      refusalRow(`a bin count of ${NBINS_REFUSED.belowFloor}`, P.dropletBins({
+        d50: UZERE_INLET.d50Micron, sigma: UZERE_INLET.sigma, nBins: NBINS_REFUSED.belowFloor,
+      })),
+      refusalRow(`a span of ${SPAN_REFUSED} sigma either side`, P.dropletBins({
+        d50: UZERE_INLET.d50Micron, sigma: UZERE_INLET.sigma, spanSigma: SPAN_REFUSED,
+      })),
+    ],
+    fractionalBins: NBINS_REFUSED.fractional,
     probeCutMicron: SIGMA_PROBE_CUT_MICRON,
     sigmaCustomaryMin: DECLARED.sigmaCustomaryMin,
     sigmaCustomaryMax: DECLARED.sigmaCustomaryMax,
@@ -951,8 +1017,19 @@ export const theHydrocyclone = () => {
     }));
     return { coreRadiusFraction, radialTravelM: r.radialTravelM, d50cMicron: r.d50cMicron };
   });
+  // THE HALF-AREA RADIUS, MEASURED BACK OUT OF THE BANK'S OWN RETURN. The radius
+  // comes from the returned liner volume and length, so only the core fraction
+  // on this line is read rather than measured. It was printed only in Section 2,
+  // which the Professional tier does not own.
+  const linerRadiusM = Math.sqrt(ko.cyclone.linerVolumeM3 / (Math.PI * ko.cyclone.linerLengthM));
+  const halfAreaRadiusFraction = ko.cyclone.radialTravelM / linerRadiusM + DECLARED.coreRadiusFraction;
+  if (!(Math.abs(halfAreaRadiusFraction - Math.SQRT1_2) <= Number.EPSILON * 8)) {
+    throw new Error(`the half-area radius measured out of the hydrocyclone return is ${halfAreaRadiusFraction} and the criterion is ${Math.SQRT1_2}`);
+  }
   return {
     bank: ko.cyclone,
+    halfAreaRadiusFraction,
+    coreRadiusFraction: DECLARED.coreRadiusFraction,
     geometry,
     boreLeg,
     boreProducts,

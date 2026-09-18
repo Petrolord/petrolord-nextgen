@@ -10,8 +10,6 @@ Take the first stage of the five identical devices in the coupling sweep. It rem
 
 The train says 250.692079 ppm.
 
-That is the difference between a plant that looks finished on paper and one still carrying most of the oil it started with.
-
 ## Where the compounding fails
 
 Compounding assumes the thing being removed is homogeneous. Oil in water is a distribution, and a device is a cut size against it, so a fixed fraction of each SIZE survives rather than a fixed fraction of the whole.
@@ -33,7 +31,9 @@ Read the outlet column rather than the removal column. The removal column is fou
 
 ## One great device is a different object
 
-A single device cutting at 2 micron on the same water removes 99.398720 percent and leaves a surviving volume of 0.006012799541, with an outlet droplet median of 4.880416 micron. That is what one great device looks like, and no number of ordinary devices reproduces it, because each of them is working further down the same tail.
+A sweep of cut sizes on the UZERE inlet, d50 26 micron at sigma 0.8, takes one device down to 2 micron. It removes 99.398720 percent there and leaves a surviving volume of 0.006012799541, with an outlet droplet median of 4.880416 micron. Those figures belong to that water: the OGBOTOBO inlet carries its oil at a different d50 and sigma, and the same device on it would report something else.
+
+A single cut placed far below the population takes almost the whole distribution in one pass. Ordinary devices approach that only slowly, because each one works further down a tail the one before it already thinned, which is why the five identical stages above still leave 250.692079 ppm.
 
 A train therefore buys you a SEQUENCE of cut sizes rather than a product of efficiencies.
 
@@ -41,7 +41,7 @@ A train therefore buys you a SEQUENCE of cut sizes rather than a product of effi
 
 The useful question is never whether a device is good. It is what that device is being asked to do at the point in the train where it sits. A device placed where the water is already fine is being asked for its worst performance, and the number it returns will say so.
 
-This is also the honest way to read a vendor claim. A removal percentage arrives with a water attached to it, and if that water is not stated the percentage cannot be carried to another plant.
+Read a vendor claim the same way: a removal percentage belongs to a water, and without that water stated it cannot be carried to another plant.
 
 ## Exercise
 

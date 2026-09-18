@@ -23,7 +23,7 @@ Across that sweep the water thins by a factor of 3.403251, taking the brine visc
 
 ## Where this bites in practice
 
-Two consequences follow, and both of them are design decisions rather than curiosities. The first is that a treating train sized on a summer sample and run on winter water is not the train that was sized. The second is that heat is a treating variable in its own right: raising the temperature of produced water upstream of a separator does real work on the droplets, and the size of that work is readable in the table above rather than a matter of opinion.
+Two consequences follow, and both of them are design decisions rather than curiosities. The first is that a treating train sized on a summer sample and run on winter water is not the train that was sized. The second is that heat is a treating variable in its own right: raising the temperature of produced water upstream of a separator does real work on the droplets, and the size of that work is readable in the table above rather than a matter of opinion. Read it as the viscosity half of the answer and no more than that, because temperature moves the brine density and the crude density as well, and the two later lessons of this module are where that other half is taken.
 
 ## The shape of the fit, and its edges
 
