@@ -1,0 +1,50 @@
+{
+ "coefficient": {
+  "decimals": 6,
+  "match": "^(?:kolocreek_gas_coefficient_c)$"
+ },
+ "degR": {
+  "decimals": 6,
+  "match": "^(?:gbaran_final_temperature_degr)$"
+ },
+ "ft": {
+  "decimals": 6,
+  "match": "^(?:ogbainbiri_drum_length_ft|ogbainbiri_drum_length_wider_ft)$"
+ },
+ "ft2": {
+  "decimals": 4,
+  "match": "^(?:ogbainbiri_tower_wetted_area_ft2|ogbainbiri_wetted_area_ft2)$"
+ },
+ "ftPerS": {
+  "decimals": 6,
+  "match": "^(?:ogbainbiri_vapor_velocity_fts)$"
+ },
+ "in2": {
+  "decimals": 6,
+  "match": "^(?:kolocreek_gas_critical_area_in2|kolocreek_gas_subcritical_area_in2|kolocreek_liquid_area_in2|kolocreek_steam_area_in2)$"
+ },
+ "kWm2": {
+  "decimals": 6,
+  "match": "^(?:gbaran_radiant_intensity_kwm2)$"
+ },
+ "lb": {
+  "decimals": 4,
+  "match": "^(?:gbaran_initial_mass_lb)$"
+ },
+ "m": {
+  "decimals": 6,
+  "match": "^(?:gbaran_setback_distance_m)$"
+ },
+ "psia": {
+  "decimals": 6,
+  "match": "^(?:gbaran_choked_floor_psia)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:kolocreek_critical_pressure_ratio|ogbainbiri_liquid_area_fraction)$"
+ },
+ "s": {
+  "decimals": 6,
+  "match": "^(?:gbaran_blowdown_time_s)$"
+ }
+}

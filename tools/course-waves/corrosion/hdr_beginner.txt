@@ -1,0 +1,31 @@
+-- ============================================================================
+-- FC9 ASSOCIATE DEEP SEED: Corrosion & Integrity, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: WHAT THE SCREEN ANSWERS AND WHAT IT WITHDREW. One
+-- mechanism and one general uniform rate; the sour-service severity region
+-- the engine no longer provides, and says so in two fields; the numbers with
+-- no source; the units the engine speaks and the one studio factor that is
+-- truncated; partial pressure against fugacity and which quantity drives
+-- which answer; the two resistances in series; the protective film and an
+-- onset that MOVES with fugacity; pH taken against a reference below which
+-- the engine refuses; the wetting regime; and the studio's own default case
+-- walked end to end.
+--
+-- THE HEADLINE OF THE WHOLE COURSE STARTS HERE. A curve carrying a standard's
+-- name and telling an engineer what steel to buy was invented in an earlier
+-- version of this engine, and the repair WITHDREW it rather than retuning it.
+-- `regionProvided` and `materialGuidanceProvided` come back false on every
+-- screening. That absence is current and permanent, and this tier teaches it
+-- as the first thing to know about the app.
+--
+-- WHAT IS NEVER GRADED, IN ANY TIER: no corrosion rate the correlation
+-- produced, no band label, no threshold verdict, no severity region, no
+-- material choice. Eleven items are held for literature and the engine lists
+-- them itself. The Associate capstone grades the stream bookkeeping, this
+-- module's Reynolds number as a definition, and the corrosion inhibitor
+-- arithmetic over two typed percentages, all in the engine's own units.
+-- ============================================================================

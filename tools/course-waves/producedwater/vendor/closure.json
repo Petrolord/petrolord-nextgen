@@ -1,0 +1,49 @@
+{
+ "enginesHead": "9874d5834de552a08ed7aa16e0fcd12438fefdb1",
+ "closure": [
+  {
+   "path": "__tests__/facilities.producedwater.test.js",
+   "canonicalBlob": "d97f186d5da65c128f6d335d3971c0e4bb20254f",
+   "vendoredBlob": "d97f186d5da65c128f6d335d3971c0e4bb20254f",
+   "identical": true
+  },
+  {
+   "path": "engines/facilities/producedWater.js",
+   "canonicalBlob": "bb18c78f9f6bcefc05302295f4eedb0c80d291e7",
+   "vendoredBlob": "bb18c78f9f6bcefc05302295f4eedb0c80d291e7",
+   "identical": true
+  },
+  {
+   "path": "test-data/facilities/goldens/producedwater_cases.json",
+   "canonicalBlob": "7df7ee90c17f99869ef30457bdeb7fb99f484789",
+   "vendoredBlob": "7df7ee90c17f99869ef30457bdeb7fb99f484789",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/facilities/FINDINGS-producedwater.md",
+   "canonicalBlob": "fd7659042cfcb311951dcfd53ee0dc93372605fc",
+   "vendoredBlob": "fd7659042cfcb311951dcfd53ee0dc93372605fc",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/facilities/oracle_producedwater.py",
+   "canonicalBlob": "a62407100785677cbf823185dc2882e1b1844ef0",
+   "vendoredBlob": "a62407100785677cbf823185dc2882e1b1844ef0",
+   "identical": true
+  }
+ ],
+ "edges": [
+  [
+   "__tests__/facilities.producedwater.test.js",
+   "engines/facilities/producedWater.js"
+  ],
+  [
+   "__tests__/facilities.producedwater.test.js",
+   "test-data/facilities/goldens/producedwater_cases.json"
+  ],
+  [
+   "tools/validation/facilities/oracle_producedwater.py",
+   "test-data/facilities/goldens/producedwater_cases.json"
+  ]
+ ]
+}

@@ -1,0 +1,114 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC9 Expert m03, The Label and the Band. Digest section 15.
+
+q(2, "What is the whole contract of the category door?",
+ "A rate in millimetres a year goes in and one word comes out. It carries no conditions, no stream, no allowance and no life.",
+ ["A rate and the conditions that produced it go in, so the word can be softened wherever the wetting regime or the sour comparison says the rate is an upper bound.",
+  "A rate and the remaining life go in together, which is what lets the word separate a fast rate on a thick wall from a slow one on a thin wall.",
+  "A whole screening goes in and the word comes back on it."],
+ "The door sees nothing but the rate. It does not know the temperature, the CO2 fugacity, the velocity, the corrosion allowance or the corrosion inhibitor programme, and it performs three comparisons against the band edges and one against zero, and stops.")
+
+q(0, "How many band words does the door return, how many edges separate them, and what is the extra word?",
+ "Four band words with three edges between them, plus one more word that is no band at all and is returned at exactly zero and below.",
+ ["Five band words with four edges between them, the fifth band being the one the door reaches whenever the rate it is handed is small enough to sit under the lowest edge.",
+  "Four band words with four edges between them, the fourth edge being the upper limit above which the door stops labelling and returns null instead of a word.",
+  "Three band words with three edges between them, since the highest edge is open ended and the word above it is the same word the door returns at the edge itself."],
+ "The four bands are low, moderate, high and severe. The extra word is negligible and it is what the door returns at zero and below rather than a band it reaches by being small.")
+
+q(3, "The digest names a fourth boundary in this door. Where is it?",
+ "At zero itself, which the golden pins from both sides.",
+ ["At 4.200000 mm/yr, where the golden's highest category row sits and the severe band is taken to run out of meaning altogether.",
+  "At 0.000000001 mm/yr, which is the smallest positive rate the golden carries and the value the door first stops calling a rate negligible at.",
+  "There is no fourth boundary. Three edges separate four words, and the extra word is reached by the rate being small rather than by crossing anything."],
+ "At exactly 0.000000 mm/yr the word is negligible and at 0.000000001 mm/yr it is already low. The test the engine applies is whether the rate is greater than zero, so no rate comes back negligible for being small.")
+
+q(1, "One row of the golden's category table is printed past six decimals while every other row is printed at six. Why?",
+ "At six decimals it would read 0.000000 and a reader would see the row above it twice.",
+ ["It is the only row where the golden and the engine disagree, so the extra digits are there to show the size of the gap between the two of them.",
+  "It sits on an edge, and every row on an edge is printed at the precision the edge is measured to so that the comparison can be checked by hand.",
+  "It is the row the vendored jest suite pins, and a pin is printed at the full precision of the double rather than at the digest's own precision."],
+ "It is the smallest positive rate the golden carries, and it is one of the two rows that pin the zero boundary. The row above it is the rate of exactly zero.")
+
+q(2, "Each of the three edges between the bands is applied in one direction. Which, and how is it pinned?",
+ "At or above: a rate sitting exactly on an edge takes the band above it, and the golden carries rows on both sides of all three edges.",
+ ["Strictly above: a rate sitting exactly on an edge stays in the band below it, which is why the golden carries a row a ten-thousandth under each of the three.",
+  "It varies by edge: the lowest is at or above and the two higher ones strictly above.",
+  "It is undefined, because the door compares against the edges with a tolerance."],
+ "The golden carries 12 category rows, both sides of all three edges, and the engine agrees with every one of them. The edges themselves are measured by bisecting the word the door returns.")
+
+q(3, "A blank rate, a rate that is not a number and a negative rate go to the category door. Which of the three behaves differently from the other two, and why does it matter?",
+ "The negative rate. The other two return null, while a negative rate gets an answer, and it is the most reassuring word the door has.",
+ ["The blank rate. It refuses with a message naming the input, while a negative rate and a rate that is not a number both come back as null from the same branch.",
+  "The rate that is not a number. It returns the same word as a negative rate does.",
+  "None of them. All three return null, which is the door declining to label."],
+ "A blank rate and a rate that is not a number both return null, which is the door declining. The negative rate is answered instead, and that is a function answering where it could decline with the least alarming word available. Nothing upstream in the screening door hands it one.")
+
+q(0, "What is `categoryHeld` and what does it do?",
+ "A field returned beside the category, declaring that the band edges carry no source. It is true at the shipped defaults.",
+ ["A field returned when the band edges have been overridden by a caller, so a reader can tell a default label from one produced under a tightened set of edges.",
+  "A flag raised when the rate the door was handed is itself an upper bound, which is how the sulphide and mixed regimes mark the word they produce.",
+  "A flag raised when the door declines to label a rate at all."],
+ "A field that declares its own band unsourced is stronger engineering than a footnote in a help page, because a caller can read it, print it and act on it. The studio prints it behind a disclosure alongside the rest of the held list.")
+
+q(1, "The engine's own held list says something unusual about the category bands. What does it say?",
+ "That they carry no source and may be optimistic by one or two steps against the bands commonly cited for carbon steel in production service.",
+ ["That they were taken from a published rate-band table whose clause number the golden records.",
+  "That they are conservative by one or two steps, so a word here reads worse than it would elsewhere.",
+  "That they are correct for carbon steel and unsourced for every other metallurgy."],
+ "The bands are the ninth of the eleven held items. No corrosion rate-band table exists anywhere in this repository, which is also why the golden is synthetic and says so.")
+
+q(3, "The held list says the bands may be optimistic by one or two steps. What is stated there and what is missing?",
+ "The direction is stated. The size beyond one or two steps is not, and the phrase commonly cited names no document a reader could go and check.",
+ ["Both the direction and the size are stated, so a reader can shift a word by two bands and quote the held list as the authority for having done it.",
+  "The size is stated and the direction is not, so a reader knows how far the edges could move and has no way to tell which way they would move.",
+  "Neither is stated. The sentence records only that the numbers are unsourced, and one or two steps describes how many edges exist rather than an error."],
+ "A direction without a magnitude and without a citation is a warning a reader can carry into a conversation. It is not a correction and nobody can apply it to a number on a screen, which is why it sits on the held list rather than in a help page as guidance.")
+
+q(2, "Why would tightening the three edges so the words read more conservatively not repair them?",
+ "It would replace one unsourced set of numbers with a different unsourced set, and it would do it under the appearance of a fix.",
+ ["It would break the twelve golden category rows, which pin the edges from both sides, and the golden cannot be recut while the engine stays vendored.",
+  "It would move every rate with them, since the rate is formed by the same comparisons.",
+  "It would contradict the engine's own admission about the direction of the error."],
+ "The screen would then carry numbers nobody could source with a claim of correctness attached that the first set never had. The H2S screening threshold of 0.003500000000 bar was kept for the same reason, declared held in a field and printed in both units.")
+
+q(1, "Move the first band edge to a smaller number and rerun the teaching streams. What moves?",
+ "The word on any stream between the old edge and the new one. No rate moves, no remaining life moves and no binding constraint moves.",
+ ["The word and the remaining life together, because the life is computed from the band the rate lands in and a stream that changes word changes life with it.",
+  "The word and the binding constraint together, because the allowance step reads the band first.",
+  "The word and the rate together, because the wetting factor is selected from the category."],
+ "The arithmetic of the module is untouched and the screen reads differently everywhere. Moving a held correlation constant is the other experiment: every rate moves, every life moves, and the words move with them.")
+
+q(0, "Why does a reader who treats the word as a summary of the rate get into trouble?",
+ "The two layers fail independently. The word inherits everything uncertain in the rate and then adds a second unsourced layer of its own.",
+ ["The word is computed before the rate, so a rate that changes after the label has been chosen leaves the screen carrying a word from an earlier pass.",
+  "The word is the more reliable of the two, since three comparisons carry less uncertainty.",
+  "The word is derived from the conditions rather than from the rate itself."],
+ "The rate is the output of a correlation over stream conditions and the word is the output of three comparisons against three constants and one against zero. Keeping them apart is the whole of this module.")
+
+q(2, "The shipped default case screens at 0.754524 mm/yr and the studio prints a word beside it. What does that one row show about the screen?",
+ "That two unsourced layers are stacked in it. The rate is built on held constants and the word is three more comparisons laid on top of the rate.",
+ ["That the correlation and the bands were fitted together, so the layers can be checked here.",
+  "That the word is the safer figure to quote, since a band absorbs the uncertainty in the rate.",
+  "That the screen is internally consistent, which the twelve golden rows establish."],
+ "A band set one step tighter would call the same number something worse and nothing in this repository says which band set is right. The screen prints the rate and the word in the same typeface, and telling the two apart is the skill this tier is for.")
+
+q(3, "Not everything on that same default screen is layered that way. Which figures on it are exact arithmetic over what the user typed?",
+ "The H2S partial pressure of 0.051000 bar, its 0.739699 psia, and the effective corrosion inhibition of 85.500000 percent.",
+ ["The remaining life of 4.207953 yr and the shortfall of 11.915473 mm, since both come out of a door that performs one division over numbers the caller supplied.",
+  "The wall shear of 14.408065 Pa and this module's Reynolds number of 416686.8569, since a shear follows from a momentum balance over quantities the user entered.",
+  "The computed film onset of 80.984504 C and the pH factor of 0.562341, since both are reached from the typed conditions without a band edge anywhere in the chain."],
+ "The partial pressure is the total pressure times the mole fraction, the psia value is a unit conversion by the engine's bar to psia factor, and the effective figure is arithmetic over two typed percentages. The remaining life is a division that rests on a rate, so it inherits what the rate inherits. The Pipeline and Line Sizing course computes its own friction factor and its own Reynolds number on a different correlation with a different transition, so the two will not agree on the same pipe.")
+
+q(0, "A decision turns on the difference between two adjacent band words. What is the right reading?",
+ "The module cannot support it, because that difference is exactly the width of the uncertainty the engine admits to in its own held list.",
+ ["The module supports it as far as the edge, since the golden pins the edges from both sides.",
+  "The module supports it wherever `categoryHeld` is false, which is the flag a caller reads first.",
+  "The module supports it in the direction the held list names, since the admission fixes the sign."],
+ "Treat the word as a rough sort of a list of streams. When the argument rather than the sorting is wanted, take the rate, the conditions that produced it and the held items in its chain to whoever owns the decision.")
+
+emit(Q, '/root/wt-fc9-nextgen/tools/course-banks/corrosion/advanced/fc9a_m03.json', expect_n=15)
+finish()

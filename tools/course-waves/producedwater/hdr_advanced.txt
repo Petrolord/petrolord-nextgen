@@ -1,0 +1,33 @@
+-- ============================================================================
+-- FC7 EXPERT DEEP SEED: Produced Water Treatment, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE COUPLING AND WHAT A GATE CAN CATCH. Why the next
+-- device sees finer water, and why three good devices are not one great one;
+-- the two medians and the grid they are measured on; the three ways this module
+-- declines to answer, a refusal, a withheld verdict and a warning; the creeping
+-- flow band, the full drag balance and a gap that has to be real; what was
+-- repaired in this engine, what an independent oracle is and what a green suite
+-- means; and where the method stops.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The order of the stages changes every stage
+-- number and not the outlet, because a device removes a fixed fraction of each
+-- droplet SIZE and a product does not care about order. And an invariance in a
+-- model is a statement about the model: a designer still puts the coarse device
+-- first for reasons this module does not carry.
+--
+-- THE TRAP THE TIER IS BUILT ON. A stage removal is a fact about a device AND a
+-- water, so the same device reports very different removals in two positions.
+-- The TUNU capstone grades two stage removals, a stage median and the train
+-- outlet, on a train whose every cut is computed from its own geometry.
+--
+-- HELD FOR LITERATURE, and kept out of every graded answer: TUNU has no
+-- flotation stage, so the calibration cannot reach it; no dissolved oil floor
+-- is given, so no graded concentration is a floored one; no specification is
+-- given, so no graded field is a verdict; and the bed is at the reference grain.
+-- The one Reynolds number graded is the one the engine reports beside its own
+-- Stokes answer at 240 micron, OUTSIDE the band, which is the point of it.
+-- ============================================================================

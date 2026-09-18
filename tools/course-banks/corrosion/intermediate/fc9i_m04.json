@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The wall shear says the corrosion inhibitor film is gone. What does this engine do with the rate?",
+  "options": [
+   "It computes the rate with the credit taken in full and prints a warning under it.",
+   "It refuses the rate, because the corrosion inhibitor programme no longer describes the line.",
+   "It computes both rates and reports whichever of the two is the larger as the answer.",
+   "It computes the rate with the credit removed and reports the credited rate beside it."
+  ],
+  "answer": 3,
+  "explanation": "A rate that still carried the credit with a warning underneath would leave the number and the sentence beside it disagreeing, and a reader resolves that by trusting the number. Here the arithmetic carries the verdict."
+ },
+ {
+  "prompt": "What new correlation was written to remove the corrosion inhibitor credit?",
+  "options": [
+   "A stripped-film correlation fitted to the two shear thresholds.",
+   "None. The credit is simply not taken, so the rate is the uninhibited rate for those conditions.",
+   "A derating curve on the datasheet efficiency, indexed by the wall shear.",
+   "A second mass-transfer term that applies once the film has gone."
+  ],
+  "answer": 1,
+  "explanation": "That is why the relationship between the two rates stays arithmetic rather than becoming a second model. Both rates run through the same chain with the same inputs and differ in one factor."
+ },
+ {
+  "prompt": "For the one digest stream whose film is stripped, the stripped rate is how many times the credited rate?",
+  "options": [
+   "1.000000 times, as it is on every other stream in that table.",
+   "6.896552 times, which is the figure the shipped case reaches at 60 ft per second.",
+   "4.699248 times.",
+   "2.189815 times, which is the jump across the friction branch switch."
+  ],
+  "answer": 2,
+  "explanation": "That factor is exactly the reciprocal of the fraction of the metal loss the corrosion inhibitor programme leaves behind. The digest asserts the property to twelve figures on every rebuild."
+ },
+ {
+  "prompt": "What quantity does the ratio of the stripped rate to the credited rate equal?",
+  "options": [
+   "The reciprocal of the fraction of the metal loss the corrosion inhibitor programme leaves.",
+   "The ratio of the wall shear on the case to the film-stripping threshold it was taken against.",
+   "The ratio of the two band edges the rate happens to sit between.",
+   "The ratio of the uninhibited rate to the mass-transfer term."
+  ],
+  "answer": 0,
+  "explanation": "Nothing in the correlation is in it. The two rates share the whole chain and every held constant, coefficient and correction factor divides out exactly."
+ },
+ {
+  "prompt": "Why can a graded capstone field in this course be a ratio of two lives?",
+  "options": [
+   "Because the remaining-life door is the only one the engine exports by name.",
+   "Because the allowance is common to both, so the ratio reduces to the corrosion inhibitor arithmetic.",
+   "Because the band edges cancel between the two lives on the same case.",
+   "Because a life in years is a measurement rather than a derived figure."
+  ],
+  "answer": 1,
+  "explanation": "The remaining life is a remaining allowance divided by a rate, and the allowance is the same on both sides, so the ratio of the two lives is the ratio of the two rates the other way up. Neither carries a held constant."
+ },
+ {
+  "prompt": "Take the shipped studio case and raise the velocity from 10 to 60 ft per second. What is the ratio between the rate and the credited rate there?",
+  "options": [
+   "4.699248, the same figure the stripped digest stream carries.",
+   "1.45, which the shipped warning names on the default case.",
+   "1.000000, because the chemistry was not altered between the two screens.",
+   "6.896552."
+  ],
+  "answer": 3,
+  "explanation": "The two stripped cases in this course have different temperatures, different pressures, different chemistry and different lines. Their ratios differ because the two corrosion inhibitor programmes differ, and for no other reason."
+ },
+ {
+  "prompt": "At 60 ft per second on the shipped case, what happens to the remaining life?",
+  "options": [
+   "It falls from 4.207953 yr to 0.242737 yr.",
+   "It falls from 4.207953 yr to 0.760876 yr, which is the stripped digest stream's credited life.",
+   "It is withheld, because the corrosion inhibitor credit is no longer being taken on that case.",
+   "It is unchanged, because the allowance and the design life were not altered."
+  ],
+  "answer": 0,
+  "explanation": "Nothing about the chemistry moved between those two screens. One flow input moved and the module changed which rate it was willing to stand behind, and the life follows the rate."
+ },
+ {
+  "prompt": "Take the shipped case to 60 ft per second. Which wall shear produced the stripped verdict there, and what was it measured against?",
+  "options": [
+   "14.408065 Pa, against that same stripping threshold measured at 100.000000 Pa.",
+   "369.638295 Pa, against the moderate band this module measures at 50.000000 Pa.",
+   "362.474888 Pa, against the measured stripping threshold of 100.000000 Pa.",
+   "362.474888 Pa, against an erosional velocity limit this module carries."
+  ],
+  "answer": 2,
+  "explanation": "The film risk is high there, the credit is removed and the rate the screen reports becomes the uninhibited one. The threshold itself is held for literature and no source for it exists in this repository."
+ },
+ {
+  "prompt": "On a stream whose film survives, what do the rate column and the credited rate column show?",
+  "options": [
+   "Two different figures, the credited one smaller.",
+   "The same figure, and the ratio between them is 1.000000.",
+   "One figure and one blank, the credited column being filled only when it differs.",
+   "Two figures whose ratio is the availability."
+  ],
+  "answer": 1,
+  "explanation": "Five of the digest's six streams are in that position and on each of them the two rate columns agree and the two life columns agree. Printing a figure twice looks redundant until you meet the case where they differ."
+ },
+ {
+  "prompt": "Why does the engine report the credited rate even when the credit was taken in full?",
+  "options": [
+   "Because it is the rate a reader working from a datasheet efficiency already has in their head.",
+   "Because the two figures are needed to form the band label on that case.",
+   "Because the remaining life is computed from the credited rate rather than the rate.",
+   "Because the capstone grades the credited rate rather than the rate itself."
+  ],
+  "answer": 0,
+  "explanation": "A screen showing only the stripped rate would look like a different calculation rather than the same calculation with one credit removed. Printing both lets the reader see exactly what the shear verdict cost."
+ },
+ {
+  "prompt": "The stripping threshold is held for literature. What does that leave a reader holding on a stripped case?",
+  "options": [
+   "A single rate, since the engine has already chosen which of the two applies.",
+   "A refusal, since no verdict can rest on a number with no source.",
+   "A band label, which is the one field the threshold does not reach.",
+   "A pair of bounds, the stripped rate if the held threshold is right and the credited rate if the film survives."
+  ],
+  "answer": 3,
+  "explanation": "Nothing in this repository settles which of the two is true, so a reader who quotes both and says which assumption produces which is giving an honest account of what the module knows."
+ },
+ {
+  "prompt": "In what order does the whole screening compute the shear and the rate?",
+  "options": [
+   "The rate first, with the wall shear read afterwards only to colour the risk word.",
+   "Both at once, the two of them being independent of one another on any case.",
+   "The shear first, because the rate depends on whether the film survived it.",
+   "The rate first, and the shear only when the rate has passed a band edge."
+  ],
+  "answer": 2,
+  "explanation": "That ordering is forced by the coupling. Every step after the first is allowed to depend on the shear verdict, and reading the order tells you which parts of the screen are hostage to which inputs."
+ },
+ {
+  "prompt": "The density box is blank, so the film survival check cannot run. Why does the engine refuse to issue a rate?",
+  "options": [
+   "Because it does not know whether the corrosion inhibitor credit applies, so the rate would be one of two figures.",
+   "Because the density is one of the arguments of the correlation from which this module's corrosion rate is computed.",
+   "Because a remaining life cannot be formed without a density for the stream.",
+   "Because the band label is taken against a density corrected rate."
+  ],
+  "answer": 0,
+  "explanation": "On the shipped case at 60 ft per second the two candidate rates differ by the ratio of 6.896552. Issuing one of them while the credit question is open would be choosing between them at random."
+ },
+ {
+  "prompt": "Which four blank boxes produce the screening incomplete message?",
+  "options": [
+   "The temperature, the pressure, the CO2 fraction and the in-situ pH.",
+   "The density, the viscosity, the velocity and the line inside diameter.",
+   "The corrosion allowance, the consumed depth, the design life and the rate.",
+   "The wetting regime, the water cut, the efficiency and the availability."
+  ],
+  "answer": 1,
+  "explanation": "Each of those four reaches the wall shear door, and each message has two halves: the first says the film survival check did not run, and the second names the box. A reader gets the cause and the fix from one sentence."
+ },
+ {
+  "prompt": "On the stripped digest stream the binding constraint names the wall shear. What does the engine say to change first?",
+  "options": [
+   "Raising the corrosion inhibitor efficiency quoted on the chemical's datasheet.",
+   "Increasing the corrosion allowance that the line was originally built with.",
+   "Slowing the line, which changes this answer before anything else does.",
+   "Lowering the in-situ pH so the correction factor falls."
+  ],
+  "answer": 2,
+  "explanation": "Its words are that the wall shear is above the value at which this module takes the film to be stripped, so the credit is removed and the rate is 4.70 times what the datasheet efficiency would give. The rate, the warning and the summary all say the same thing on that case."
+ }
+]

@@ -1,0 +1,1024 @@
+# FC5 Relief & Flare Systems. Teaching digest.
+# PRECISION AND QUANTITY CLASS. Required areas (in2), pressures (psia), dimensionless ratios and fractions, velocities (ft/s), lengths (ft), radiant intensities (kW/m2), setback distances (m), blowdown times (s), temperatures (degR) and the gas coefficient C print to SIX decimals; flows (lb/hr and gpm), duties (Btu/hr), wetted areas (ft2) and masses (lb) to FOUR; measured constants and ratios of them to TWELVE; counts are whole numbers.
+# THE GRADED QUANTITY CLASSES, one per capstone answer key, so a grader and a reader cannot disagree about what a correct reading is worth. SIX decimals: ratio (kolocreek_critical_pressure_ratio, ogbainbiri_liquid_area_fraction), coefficient (kolocreek_gas_coefficient_c), in2 (kolocreek_gas_critical_area_in2, kolocreek_gas_subcritical_area_in2, kolocreek_liquid_area_in2, kolocreek_steam_area_in2), ftPerS (ogbainbiri_vapor_velocity_fts), ft (ogbainbiri_drum_length_ft, ogbainbiri_drum_length_wider_ft), s (gbaran_blowdown_time_s), degR (gbaran_final_temperature_degr), psia (gbaran_choked_floor_psia), kWm2 (gbaran_radiant_intensity_kwm2), m (gbaran_setback_distance_m). FOUR decimals: ft2 (ogbainbiri_wetted_area_ft2, ogbainbiri_tower_wetted_area_ft2), lb (gbaran_initial_mass_lb).
+# Those eighteen keys are the names of the ANSWER FIELDS and nothing else. No condition of any capstone and no graded value appears anywhere in this digest, and no lesson or question may name a capstone plant.
+# Field units: API 520 USC as this engine speaks them. Flow lb/hr for gas and steam and gpm for liquid, pressure psia except where a row says psig, temperature degR except where a row says degF, area in2, wetted area ft2, duty Btu/hr, velocity ft/s, drum length ft, droplet micron, heat release kW, distance m, radiant flux kW/m2, blowdown time s, mass lb.
+# Nothing here is read from a clock, a random number or a locale, so every line reproduces. Built with TZ pinned to UTC.
+# Built against engines 3bac13cd, vendored sha-identical over a closure of seven paths. Every figure below is that engine own answer at the inputs named beside it.
+# WHERE A CONSTANT IS NOT EXPORTED, IT IS MEASURED. This digest never types a number the engine keeps to itself: it asks the engine a question whose answer is that constant and nothing else, and says which question.
+# EVERY LABEL BELOW IS ASSERTED AGAINST WHAT THE CALL DID. A row labelled a refusal ran a call that refused, a row labelled critical ran a call the engine reported critical, and a row labelled converged ran a loop the engine reported converged. The build fails and writes nothing if any label and its call disagree.
+# THE SIX TEACHING STREAMS: ORUBIRI a gas relief case, AKASO a viscous liquid one, TEBIDABA a steam one, BENISEDE a vessel in a pool fire, ODIDI a flare knockout drum, AFIESERE a vessel depressuring into a flare. The three capstones run different plants entirely.
+
+# SECTION 1: What this engine sizes, and what it refuses (owned by Associate m01, and shared with Professional m01 because THE ENGINE NEVER CHOOSES THE CASE is that module own subject)
+
+# App surface: the Relief & Flare Studio answers four questions over one facility. What orifice a pressure safety valve needs, what load a pool fire puts on it, what drum keeps liquid out of the flare header, and how long a vessel takes to depressure.
+- This engine sizes a PRESSURE RELIEF DEVICE and the flare system behind it. The word relief here always means pressure relief. A relief WELL is a drilling subject and belongs to another course.
+- The four sizing routes are API 520 Part I in its published USC forms: gas and vapour in both flow regimes, liquid with the published viscosity correction, steam with the Napier correction, and the API 521 fire case with its heat input evaluated at the ACTUAL relieving pressure.
+- The flare side is three more: droplet settling and a horizontal knockout drum, point-source radiation solved in both directions, and an adiabatic vessel blowdown march.
+- THE ENGINE NEVER CHOOSES THE CASE. Every sizing route takes a relief load as an input. The one route that computes its own load is the fire case, and it computes it from geometry, a drainage answer and an environment factor that the caller states.
+
+- Exports, counted by reading the module: 22.
+  API_ORIFICES, NAPIER_UNITY_PSIA, RADIATION_LEVELS, blowdown, criticalPressureRatio, distanceForIntensity, dropoutVelocityFtS, fireHeatInput, fireReliefLoad, gasConstantC, gasVaporArea, koDrumHorizontal, liquidArea, liquidKv, liquidKvUnclamped, radiationIntensity, segmentAreaFraction, selectOrifice, steamArea, steamKn, subcriticalF2, wettedAreaFt2
+
+# The return contract, MEASURED with typeof rather than listed.
+| export | typeof | returns |
+| --- | --- | --- |
+| gasConstantC | function | a bare number, and NaN where it refuses |
+| criticalPressureRatio | function | a bare number, and NaN where it refuses |
+| subcriticalF2 | function | a bare number, and NaN where it refuses |
+| liquidKvUnclamped | function | a bare number, and NaN where it refuses |
+| liquidKv | function | a bare number, and NaN where it refuses |
+| steamKn | function | a bare number, and NaN where it refuses |
+| segmentAreaFraction | function | a bare number, and NaN where it refuses |
+| NAPIER_UNITY_PSIA | number | a derived constant, 1580.310881 psia |
+| API_ORIFICES | array | 14 published rows |
+| RADIATION_LEVELS | array | 4 published rows |
+| blowdown | function | an object, carrying either a result or an `error` |
+| distanceForIntensity | function | an object, carrying either a result or an `error` |
+| dropoutVelocityFtS | function | an object, carrying either a result or an `error` |
+| fireHeatInput | function | an object, carrying either a result or an `error` |
+| fireReliefLoad | function | an object, carrying either a result or an `error` |
+| gasVaporArea | function | an object, carrying either a result or an `error` |
+| koDrumHorizontal | function | an object, carrying either a result or an `error` |
+| liquidArea | function | an object, carrying either a result or an `error` |
+| radiationIntensity | function | an object, carrying either a result or an `error` |
+| selectOrifice | function | an object, carrying either a result or an `error` |
+| steamArea | function | an object, carrying either a result or an `error` |
+| wettedAreaFt2 | function | an object, carrying either a result or an `error` |
+
+- 7 exports return a bare number and signal a refusal with NaN. 12 return an object. 2 are published tables and 1 is a derived constant.
+- THE CONTRACT EVERY OBJECT ROUTE KEEPS: either a finite result, or an object carrying an `error` string. A non-finite number with no `error` is what a caller's `if (r.error)` guard cannot see, and every route in this module is checked against both halves of that contract in section 26.
+- ONE REFUSAL CARRIES MORE THAN AN `error`. selectOrifice past the largest orifice returns `error` and `multipleOfT`, a whole number of valves, and section 10 prints both. Every other refusal in this module carries the `error` alone. A caller that stops at the `error` throws away the only figure the refusal worked out.
+- A WARNING SLOT HOLDING A NULL IS A PROMISE THAT THE CHECK RAN. fireReliefLoad returns 2 fields, `wLbHr` and `warning`, and on a duty and a latent heat that raise nothing the warning slot is present and holds a null. A caller can therefore tell a check that ran and found nothing from a check that never ran, which a missing key cannot say.
+- dropoutVelocityFtS RETURNS THE ITERATION ALONGSIDE THE ANSWER: `udFtS`, `dragC`, `reynolds`, `iterations`, `converged`, `residual`, `warning`, 7 fields in all. The pass count, the converged flag and the residual are what let a reader judge the velocity rather than take it, and section 17 walks all 7.
+
+# SECTION 2: The numbers this module stands on, measured rather than typed (shared by Associate m01 l04 and Expert m05 l01)
+
+# Every figure in this section was recovered by asking the engine a question whose answer is that constant and nothing else. The question is on the row.
+| constant | measured | how it was asked |
+| --- | --- | --- |
+| the default outlet pressure, psia | 14.700000000000 | the relieving pressure at which the branch flag turns over with p2 omitted, times the engine own critical ratio |
+| the same, a second way | 14.700000000000 | the stated p2 that reproduces an omitted-p2 area in the SUBCRITICAL branch, where the area moves with it |
+| the same, from a different function | 14.700000000000 | the blowdown march own choked-flow floor, times the critical ratio |
+| the gas coefficient leading constant | 520.000000000000 | gasConstantC(1.4) divided by the bracket sqrt(k (2/(k+1))^((k+1)/(k-1))), which is computable from k alone |
+| the subcritical leading constant | 735.000000000000 | one subcritical area rearranged against its own stated inputs and the engine own F2 |
+| the liquid leading constant | 38.000000000000 | one inviscid liquid area at unit coefficients rearranged against its own stated inputs |
+| the steam leading constant | 51.500000000000 | one steam area below the Napier threshold at unit coefficients |
+| the pool fire constant with drainage, Btu/hr per ft2^0.82 | 21000.000000000000 | one duty at a wetted area of 1 ft2 and an environment factor of 1, where the area term is one whatever the exponent is |
+| the pool fire constant without drainage | 34500.000000000000 | the same call with the drainage answer false |
+| the drainage factor between them | 1.642857142857 | the ratio of the two rows above |
+| the pool fire exponent | 0.820000000000 | the log ratio of two duties at 100 and 1000 ft2 over the log ratio of the areas |
+| the Kv fit intercept | 0.993500000000 | 1/Kv is the sum of three terms in the Reynolds number, so THREE readings of the UNCLAMPED export solve for all three coefficients exactly. Reading them one at a time does not work: at a Reynolds number of 1e18 the inverse-root term is still 2.878e-9, and subtracting an intercept carrying that residue puts the next coefficient out by more than one percent |
+| the Kv fit inverse-root term | 2.878000000000 | the same three-equation solve |
+| the Kv fit inverse-three-halves term | 342.750000000000 | the same three-equation solve |
+| the Kv asymptote the unclamped fit reaches | 1.006542523506 | liquidKvUnclamped at 1e18 |
+| the Reynolds number the clamp starts holding Kv at one | 196282.561354814417 | bisection on where the unclamped fit crosses one |
+| the Napier numerator slope over the denominator slope | 0.831588132635 | three pressures above the threshold solving the ratio of two lines. A ratio of two lines is unchanged when all four of its coefficients are scaled together, so only THREE of the four are measurable and the published quartet is one scaling of these three |
+| the Napier numerator intercept over the denominator slope | -4363.001745200682 | the same solve |
+| the Napier denominator intercept over the denominator slope | -4629.144851657922 | the same solve |
+| the liquid Reynolds constant | 2800.000000000000 | the returned Reynolds number rearranged against the area it belongs to |
+| the universal gas constant the march uses, ft.lbf/(lbmol.degR) | 1545.349000000000 | the mass the march reports for its own start state, rearranged |
+| the solid angle in the point source | 12.566370614359 | one intensity rearranged against its own stated release, fraction, transmissivity and distance |
+| the settling group at 100 micron | 0.000140743657 | Ud^2 C rhoV / ((rhoL - rhoV) d) from the returned pair |
+| the same at 200 micron | 0.000140743657 | the same, which separates the droplet size conversion from the rest |
+| the same at 0.02 cp | 0.000140743657 | the same, which shows the group does not carry the viscosity |
+| the squared settling coefficient times the foot per micron | 1.333333333333 | the group above divided by standard gravity in ft/s2 |
+
+# Thresholds and warning edges, every one BISECTED out of the engine own behaviour rather than read off a constant.
+| edge | measured | what changes there |
+| --- | --- | --- |
+| the Napier threshold, psia | 1500.000000000007 | KN leaves 1.0 |
+| the Napier unity crossing, psia | 1580.310880829016 | KN returns through 1.0 from below |
+| the exported crossing, psia | 1580.310880829016 | the same number, derived and EXPORTED by the engine |
+| the top of the published Napier range, psia | 3200.000000000003 | steamArea refuses |
+| the back-pressure ratio the bellows warning fires above | 0.300000000000 | gasVaporArea attaches a chart-Kb warning |
+| the Kv the envelope warning fires below | 0.500000000000 | liquidArea attaches an off-envelope warning |
+| the latent heat the near-critical warning fires below, Btu/lb | 50.000000000000 | fireReliefLoad attaches a method-breaking-down warning |
+| the drag coefficient cap | 240.000000000000 | the drag correlation stops being evaluated |
+| the Reynolds number just inside that cap | 0.104182271364 | the same edge, read from the engine own returned Reynolds number |
+| the L over D the go-wider note starts at | 6.000000000000 | koDrumHorizontal changes its note |
+| the L over D the smaller-drum note ends at | 2.000000000000 | the same, from below |
+| the blowdown time limit, s | 7199.999985603571 | blowdown refuses rather than marching further |
+
+# WHAT IS COMPUTED AND WHAT IS TYPED. The closed forms this module can derive are computed: C from k, the critical ratio from k, F2 from k and the pressure ratio, Kv from the Reynolds number, KN from the pressure, the exact circular segment, the terminal-velocity balance, and the whole blowdown march. The ones published as CHARTS and TABLES are typed inputs with their references named: the balanced-bellows back-pressure factors Kb for gas and Kw for liquid, the steam superheat factor KSH, and the API 526 orifice table. Section 27 is the full audit.
+
+# SECTION 3: Set, overpressure, relieving pressure, and three things called back pressure (owned by Associate m01 l02 and l03)
+
+# The pressures a relief calculation stands on, walked on ORUBIRI conditions. Set pressure is STATED in psig. The relieving pressure is the set pressure raised by the allowed overpressure and converted to absolute with the measured atmospheric constant from section 2.
+- ORUBIRI states a set pressure of 420.000000 psig and an overpressure of 10.000000 percent.
+- Relieving pressure, derived as set times one plus the overpressure fraction plus the measured atmospheric 14.700000000000: 476.700000 psia.
+- Back pressure at the valve OUTLET, stated as 35.000000 psig, is 49.700000 psia absolute.
+- The back-pressure RATIO the branch decision reads: 0.104258.
+
+# The overpressure a case is allowed changes the relieving pressure and therefore the area. Same load, same valve, four allowances.
+| overpressure pct (stated) | relieving psia | required area in2 | branch |
+| --- | --- | --- | --- |
+| 10.000000 | 476.700000 | 2.223779 | critical |
+| 16.000000 | 501.900000 | 2.112125 | critical |
+| 21.000000 | 522.900000 | 2.027301 | critical |
+| 25.000000 | 539.700000 | 1.964194 | critical |
+
+- THREE DIFFERENT QUANTITIES ARE CALLED BACK PRESSURE ELSEWHERE IN THIS PLATFORM and none of them is this one. Here it means the pressure at the relief valve OUTLET, in the header the valve discharges into. It is always written that way in this course.
+- The gas route is the only one that takes an absolute back pressure. The liquid route takes its two pressures in psig and works on their DIFFERENCE, so the atmospheric constant never enters it. The engine names that upstream argument for the SET pressure and this course passes the RELIEVING pressure into it, which is what API 520 sizes a liquid valve on.
+- The same AKASO differential read both ways: a set pressure of 310.000000 psig raised by 10.000000 percent is a relieving pressure of 341.000000 psig, and against back 40.000000 psig that is a differential of 301.000000 psi.
+
+# SECTION 4: Gas and vapour, and the branch the back pressure decides (owned by Associate m02)
+
+# The coefficient C and the critical ratio are both functions of the isentropic exponent alone. Walked across the range the standard covers.
+| k (stated) | C | critical pressure ratio | F2 at a ratio of 0.8 |
+| --- | --- | --- | --- |
+| 1.050000 | 321.187587 | 0.595386 | 0.851784 |
+| 1.100000 | 326.747329 | 0.584679 | 0.857982 |
+| 1.200000 | 337.236209 | 0.564474 | 0.868947 |
+| 1.300000 | 346.976423 | 0.545728 | 0.878343 |
+| 1.400000 | 356.060357 | 0.528282 | 0.886483 |
+| 1.500000 | 364.564134 | 0.512000 | 0.893603 |
+| 1.600000 | 372.551290 | 0.496765 | 0.899884 |
+| 1.800000 | 387.182334 | 0.469042 | 0.910457 |
+
+# The branch. ORUBIRI load and ORUBIRI valve, with the back pressure walked as a RATIO of the relieving pressure, so the rows carry no pressure of their own. The two crossing rows are DERIVED from the engine own critical ratio and sit either side of it.
+- ORUBIRI critical ratio at k = 1.270000: 0.551208.
+| back pressure ratio (stated) | branch | required area in2 | F2 where subcritical | warning |
+| --- | --- | --- | --- | --- |
+| 0.100000 | critical | 2.223779 | n/a | no |
+| 0.200000 | critical | 2.223779 | n/a | no |
+| 0.300000 | critical | 2.223779 | n/a | no |
+| 0.400000 | critical | 2.223779 | n/a | yes |
+| 0.500000 | critical | 2.223779 | n/a | yes |
+| 0.551207 | critical | 2.223779 | n/a | yes |
+| 0.551209 | subcritical | 2.224962 | 0.698520 | no |
+| 0.600000 | subcritical | 2.237461 | 0.735763 | no |
+| 0.700000 | subcritical | 2.352545 | 0.808025 | no |
+| 0.800000 | subcritical | 2.658695 | 0.875668 | no |
+| 0.900000 | subcritical | 3.504623 | 0.939468 | no |
+
+- IN CRITICAL FLOW THE AREA DOES NOT MOVE WITH THE BACK PRESSURE AT ALL. Read the first 6 rows: the required area is identical across them, because the flow through the throat is set by the upstream condition once the downstream pressure is low enough. That is the whole meaning of choked.
+- The crossing is the measured critical ratio 0.551208.
+- The two probe rows are chosen either side of that critical ratio, the last critical row at 0.551207 and the first subcritical one at 0.551209, and the areas across the crossing are printed so the size of the step is visible rather than asserted.
+
+# Kb IS IGNORED IN SUBCRITICAL FLOW, and the engine says so rather than leaving it to be discovered. The same call at two different balanced-bellows factors, on both branches.
+| branch | back pressure ratio (stated) | Kb (stated) | required area in2 | warning present |
+| --- | --- | --- | --- | --- |
+| critical | 0.200000 | 1.000000 | 2.223779 | no |
+| critical | 0.200000 | 0.720000 | 3.088582 | no |
+| subcritical | 0.800000 | 1.000000 | 2.658695 | no |
+| subcritical | 0.800000 | 0.720000 | 2.658695 | yes |
+- The two subcritical rows are IDENTICAL to twelve decimals, 2.658695041098 in2 and 2.658695041098 in2, and the engine attaches a warning on the second saying the typed Kb was ignored.
+- The two critical rows are NOT identical, 2.223779 in2 and 3.088582 in2, because in critical flow Kb divides the area.
+
+# ORUBIRI, the whole gas case.
+- Stated: 68000.000000 lb/hr, set 420.000000 psig, 10.000000 percent overpressure, back 35.000000 psig, 185.000000 degF, molecular weight 20.500000, z 0.870000, k 1.270000, Kd 0.975000, Kb 1.000000, Kc 1.000000.
+- Relieving pressure 476.700000 psia, back pressure 49.700000 psia, branch critical, critical ratio 0.551208.
+- Required area 2.223779 in2. Orifice L at 2.853000 in2, margin 1.282951.
+- Warning: none. The back-pressure ratio is 0.104258, below the measured 0.300000 at which the chart-Kb warning fires
+
+# SECTION 5: The published gas cases (owned by Associate m02 l05)
+
+# 5 published gas rows, every input and every answer read from the golden file and re-run through the engine. The re-run column is the engine own answer at the golden inputs, so a reader can see the published case and the live engine agree.
+| golden flow lb/hr | golden p1 psia | golden p2 psia | golden tR | golden mw | golden z | golden k | golden Kd | golden Kb | golden Kc | published area in2 | engine area in2 | relative difference | branch |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 50000.0000 | 314.700000 | 14.700000 | 610.000000 | 19.000000 | 0.900000 | 1.250000 | 0.975000 | 1.000000 | 1.000000 | 2.562519 | 2.559800 | 1.061e-3 | critical |
+| 12000.0000 | 114.700000 | 14.700000 | 560.000000 | 44.000000 | 0.950000 | 1.180000 | 0.975000 | 1.000000 | 1.000000 | 1.114288 | 1.113106 | 1.061e-3 | critical |
+| 80000.0000 | 514.700000 | 300.000000 | 640.000000 | 22.000000 | 0.880000 | 1.300000 | 0.975000 | 1.000000 | 1.000000 | 2.334502 | 2.333266 | 5.295e-4 | subcritical |
+| 80000.0000 | 514.700000 | 400.000000 | 640.000000 | 22.000000 | 0.880000 | 1.300000 | 0.975000 | 1.000000 | 1.000000 | 2.693414 | 2.691988 | 5.295e-4 | subcritical |
+| 25000.0000 | 214.700000 | 30.000000 | 580.000000 | 28.000000 | 0.920000 | 1.350000 | 0.900000 | 0.880000 | 0.900000 | 2.030426 | 2.028271 | 1.061e-3 | critical |
+
+- THE VALIDATION ORACLE DOES NOT RESTATE THIS ROUTE. For the critical rows it derives the isentropic nozzle mass flux from the gas constant, the molecular weight, the temperature and the pressure in absolute SI, so the USC leading constant is CHECKED against a different derivation rather than repeated. For the subcritical rows it integrates the subcritical nozzle flux from the isentropic expansion, so F2 is checked rather than restated. For the critical ratio it takes the ARGMAX of that flux over the throat ratio by golden-section search.
+- Rows carrying certified coefficients away from the engine own defaults: 1 of the 5 rows. Those defaults are the MEASURED Kd 0.975000, Kb 1.000000 and Kc 1.000000 of section 2 rather than a figure typed here, and a row away from all three is the only way a published case can check that the coefficients divide rather than multiply.
+- The row away from the defaults is the one at 25000.0000 lb/hr, at Kd 0.900000, Kb 0.880000 and Kc 0.900000.
+
+# SECTION 6: Liquid, the Kv loop, and the band each of its terms is worth anything in (owned by Associate m03)
+
+# The liquid route needs the AREA to find the Reynolds number, and the Reynolds number to find the correction that sets the area. The engine iterates and reports whether it converged, in how many passes, and on what residual.
+- AKASO states 860.000000 gpm, set 310.000000 psig, 10.000000 percent overpressure, back 40.000000 psig, specific gravity 0.840000, viscosity 85.000000 cp, Kd 0.650000, Kw 1.000000, Kc 1.000000.
+- Inviscid, with the viscosity left out entirely: area 1.839323 in2, Kv 1.000000, Reynolds null, iterations 0.
+- Viscous: area 1.867758 in2, Kv 0.984776, Reynolds 17412.317969, iterations 6, converged true, residual 0.000000000000.
+- The ratio of the two areas: 1.015459516779.
+- What ONE pass would have given, built from the measured leading constants of section 2 and the engine own Kv function: area 1.867601 in2 at Kv 0.984858 and Reynolds 17546.394776. Ratio of the converged area to the one-pass area: 1.000083905751.
+
+# The same case with the viscosity walked. The iteration count is the engine own report.
+| viscosity cp (stated) | area in2 | Kv | Reynolds | iterations | converged | warning |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.000000 | 1.839323 | 1.000000 | n/a | 0 | true | no |
+| 1.000000 | 1.839323 | 1.000000 | 1491443.555990 | 1 | true | no |
+| 5.000000 | 1.839323 | 1.000000 | 298288.711198 | 1 | true | no |
+| 20.000000 | 1.846802 | 0.995950 | 74421.009125 | 5 | true | no |
+| 85.000000 | 1.867758 | 0.984776 | 17412.317969 | 6 | true | no |
+| 300.000000 | 1.904951 | 0.965548 | 4885.090330 | 7 | true | no |
+| 1200.000000 | 1.995916 | 0.921543 | 1193.117870 | 8 | true | no |
+| 5000.000000 | 2.295843 | 0.801154 | 266.989810 | 12 | true | no |
+
+# THE KV FIT, TERM BY TERM. 1/Kv is the sum of three terms, and the only way to say one of them has a band is to print what each is worth where. The three coefficients are the MEASURED ones of section 2.
+| Reynolds (stated) | Kv clamped | Kv unclamped | intercept term | inverse-root term | inverse-three-halves term | the last term as a fraction of the sum |
+| --- | --- | --- | --- | --- | --- | --- |
+| 10.000000 | 0.078479 | 0.078479 | 0.993500 | 0.910104 | 10.838707 | 0.850608 |
+| 30.000000 | 0.277403 | 0.277403 | 0.993500 | 0.525449 | 2.085910 | 0.578639 |
+| 92.000000 | 0.594542 | 0.594542 | 0.993500 | 0.300052 | 0.388415 | 0.230929 |
+| 300.000000 | 0.815911 | 0.815911 | 0.993500 | 0.166161 | 0.065962 | 0.053819 |
+| 900.000000 | 0.907336 | 0.907336 | 0.993500 | 0.095933 | 0.012694 | 0.011518 |
+| 3000.000000 | 0.954079 | 0.954079 | 0.993500 | 0.052545 | 0.002086 | 0.001990 |
+| 10000.000000 | 0.977878 | 0.977878 | 0.993500 | 0.028780 | 0.000343 | 0.000335 |
+| 100000.000000 | 0.997395 | 0.997395 | 0.993500 | 0.009101 | 0.000011 | 0.000011 |
+| 196000.000000 | 0.999995 | 0.999995 | 0.993500 | 0.006501 | 0.000004 | 0.000004 |
+| 300000.000000 | 1.000000 | 1.001245 | 0.993500 | 0.005254 | 0.000002 | 0.000002 |
+| 100000000.000000 | 1.000000 | 1.006251 | 0.993500 | 0.000288 | 0.000000 | 0.000000 |
+
+- THE CORRECTION IS CLAMPED AT ONE. The unclamped fit rises through one and asymptotes to 1.006542523506, which would let a correction for viscous drag ADD capacity. The clamp holds it at 1.0 above a Reynolds number of 196282.561354814417, and `liquidKvUnclamped` is exported so the asymptote stays inspectable. The clamp is a stated convention of this engine.
+- The envelope warning fires below a Kv of 0.500000000000, which the sweep above crosses.
+- THE FIT IS HELD FOR LITERATURE. Its three coefficients are an empirical fit that no route in this package can derive, and the validation oracle SHARES them on purpose and says so in its own header. Section 28 is where that is audited. Nothing graded in this course rests on them.
+
+# SECTION 7: The published liquid cases (owned by Associate m03 l05)
+
+# 5 published liquid rows, re-run through the engine.
+| golden gpm | golden p1 psig | golden p2 psig | golden sg | golden viscosity cp | golden Kd | golden Kv | golden Reynolds | published area in2 | engine area in2 | relative difference |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 500.0000 | 250.000000 | 50.000000 | 0.900000 | 0.000000 | 0.650000 | 1.000000 | n/a | 1.358296 | 1.357936 | 2.650e-4 |
+| 500.0000 | 250.000000 | 50.000000 | 0.900000 | 400.000000 | 0.650000 | 0.950480 | 2634.968451 | 1.429064 | 1.428678 | 2.697e-4 |
+| 1200.0000 | 180.000000 | 0.000000 | 1.050000 | 30.000000 | 0.650000 | 0.994840 | 60882.958012 | 3.730822 | 3.729830 | 2.659e-4 |
+| 200.0000 | 150.000000 | 50.000000 | 0.950000 | 5000.000000 | 0.650000 | 0.595745 | 92.428866 | 1.325102 | 1.324638 | 3.502e-4 |
+| 800.0000 | 300.000000 | 100.000000 | 1.000000 | 0.500000 | 0.650000 | 1.000000 | 2959866.538047 | 2.290831 | 2.290224 | 2.650e-4 |
+
+- 1 of the 5 rows sits below a Reynolds number of 200, at 92.428866. That row exists so the inverse-three-halves term of the fit is worth something: read the term table in section 6 at that Reynolds number and compare the fraction there with the fraction at the other rows.
+- The oracle derives the 2800.000000000000 of the Reynolds relation from rho u D over mu in SI with D taken as sqrt(4A/pi), so that constant is checked. It derives NOTHING for the Kv fit itself.
+- The oracle checks the 38.000000000000 of the area equation against the published SI form of the same equation.
+
+# SECTION 8: Steam, Napier, and both crossings of unity (owned by Associate m04)
+
+# The Napier correction is 1.0 up to a published threshold, drops BELOW one above it, and returns through one at a pressure the engine derives and exports. Between those two pressures the correction makes the required area LARGER.
+- The threshold, bisected: 1500.000000000007 psia. The crossing back through unity, bisected: 1580.310880829016 psia. The engine exported constant for the same crossing: 1580.310880829016 psia. The top of the published range, bisected: 3200.000000000003 psia.
+| relieving psia (stated) | KN | required area in2 at the TEBIDABA load | warning |
+| --- | --- | --- | --- |
+| 1000.000000 | 1.000000 | 1.872044 | no |
+| 1400.000000 | 1.000000 | 1.337174 | no |
+| 1500.000000 | 1.000000 | 1.248029 | no |
+| 1520.000000 | 0.996733 | 1.235644 | yes |
+| 1550.000000 | 0.998342 | 1.209776 | yes |
+| 1580.000000 | 0.999983 | 1.184858 | yes |
+| 1600.000000 | 1.001095 | 1.168748 | no |
+| 1800.000000 | 1.013078 | 1.026599 | no |
+| 2000.000000 | 1.026884 | 0.911517 | no |
+| 2500.000000 | 1.072746 | 0.698038 | no |
+| 3000.000000 | 1.146760 | 0.544155 | no |
+| 3200.000000 | 1.190866 | 0.491251 | no |
+
+- THE CORRECTION STEPS RATHER THAN SLIDING. A millionth of a psi below the threshold KN is 1.000000000000 and a millionth above it KN is 0.995677635301, a step of -0.004322364699 across two millionths of a psi. The required area moves by the reciprocal of that.
+- BETWEEN THE THRESHOLD AND THE CROSSING KN IS BELOW ONE, so the required area is LARGER than the uncorrected one. Read the rows between 1500.000000000007 and 1580.310880829016 psia above and compare the areas with the rows below the threshold at the same load.
+- THE THRESHOLD AND THE TOP OF THE RANGE ARE PUBLISHED BOUNDARIES. This package can derive neither, and the suite pins both as behaviour. The FIT between them is checked against the standard own SI statement.
+
+# TEBIDABA, the whole steam case.
+- Stated: 94000.0000 lb/hr, set 1740.000000 psig, 10.000000 percent overpressure, Kd 0.975000, Kb 1.000000, Kc 1.000000, KSH 1.000000 saturated.
+- Relieving pressure 1928.700000 psia, KN 1.021727, required area 0.949984 in2, orifice J at 1.287000 in2, margin 1.354759.
+- KSH is the published superheat TABLE and is a typed input. The same case at a superheated KSH of 0.83: area 1.144559 in2.
+
+# SECTION 9: The published steam cases (owned by Associate m04 l04)
+
+# 5 published steam rows, re-run through the engine.
+| golden flow lb/hr | golden p1 psia | golden Kd | golden KSH | published KN | published area in2 | engine area in2 | relative difference | engine KN |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 60000.0000 | 314.700000 | 0.975000 | 1.000000 | 1.000000 | 3.796612 | 3.797018 | 1.071e-4 | 1.000000 |
+| 60000.0000 | 314.700000 | 0.975000 | 0.830000 | 1.000000 | 4.574231 | 4.574721 | 1.071e-4 | 1.000000 |
+| 150000.0000 | 2014.700000 | 0.975000 | 1.000000 | 1.028016 | 1.442191 | 1.442393 | 1.402e-4 | 1.027982 |
+| 150000.0000 | 3100.000000 | 0.975000 | 1.000000 | 1.167438 | 0.825349 | 0.825485 | 1.645e-4 | 1.167370 |
+| 120000.0000 | 1550.000000 | 0.975000 | 1.000000 | 0.998366 | 1.544193 | 1.544395 | 1.306e-4 | 0.998342 |
+
+- 3 of the 5 rows have the Napier correction active, at 2014.700000, 3100.000000, 1550.000000 psia. 1 of them sits INSIDE the band where the correction is below one, at 1550.000000 psia, where the correction makes the valve bigger.
+- The oracle checks the 51.500000000000 of the area equation against the published SI form and the SI statement of Napier, so the fit is two published routes meeting. It cannot check the KSH table, which is typed.
+
+# SECTION 10: From a required area to a standard orifice (owned by Associate m05)
+
+# The API 526 ladder, 14 standard orifices, read from the engine own exported table.
+| letter | area in2 | ratio to the one below |
+| --- | --- | --- |
+| D | 0.110000 | n/a |
+| E | 0.196000 | 1.781818 |
+| F | 0.307000 | 1.566327 |
+| G | 0.503000 | 1.638436 |
+| H | 0.785000 | 1.560636 |
+| J | 1.287000 | 1.639490 |
+| K | 1.838000 | 1.428127 |
+| L | 2.853000 | 1.552231 |
+| M | 3.600000 | 1.261830 |
+| N | 4.340000 | 1.205556 |
+| P | 6.380000 | 1.470046 |
+| Q | 11.050000 | 1.731975 |
+| R | 16.000000 | 1.447964 |
+| T | 26.000000 | 1.625000 |
+
+- THE LADDER IS NOT GEOMETRIC. The ratio column is the evidence: read it top to bottom rather than assuming a constant step.
+- THE TABLE IS A PUBLISHED TABLE. This package cannot derive a single one of these fourteen areas. It checks the SELECTION BEHAVIOUR instead: that the smallest orifice at or above the required area is the one returned, that a required area exactly equal to a listed area takes that orifice rather than the next one, and that anything past the largest refuses. Nothing graded in this course is an orifice letter or a margin.
+
+# Selection walked across and ON the boundaries. The rows at an exact listed area are the ones that decide whether the comparison is at-or-above or strictly-above.
+| required area in2 (stated) | orifice | orifice area in2 | margin | note |
+| --- | --- | --- | --- | --- |
+| 0.050000 | D | 0.110000 | 2.200000 |  |
+| 0.110000 | D | 0.110000 | 1.000000 | exactly a listed area |
+| 0.110001 | E | 0.196000 | 1.781802 |  |
+| 0.500000 | G | 0.503000 | 1.006000 |  |
+| 0.503000 | G | 0.503000 | 1.000000 | exactly a listed area |
+| 0.503001 | H | 0.785000 | 1.560633 |  |
+| 1.287000 | J | 1.287000 | 1.000000 | exactly a listed area |
+| 2.000000 | L | 2.853000 | 1.426500 |  |
+| 6.380000 | P | 6.380000 | 1.000000 | exactly a listed area |
+| 11.050000 | Q | 11.050000 | 1.000000 | exactly a listed area |
+| 16.000000 | R | 16.000000 | 1.000000 | exactly a listed area |
+| 25.999999 | T | 26.000000 | 1.000000 |  |
+| 26.000000 | T | 26.000000 | 1.000000 | exactly a listed area |
+
+# Past the largest orifice the engine refuses and says how many valves the area needs. THE REFUSAL CARRIES A SECOND KEY BESIDE `error`, and its name, read off the returned object rather than listed, is `multipleOfT`.
+| required area in2 (stated) | refusal | multipleOfT, the engine own second key |
+| --- | --- | --- |
+| 26.000001 | required area 26.000001 in2 exceeds a T orifice (26 in2): use multiple valves | 2 |
+| 26.000100 | required area 26.0001 in2 exceeds a T orifice (26 in2): use multiple valves | 2 |
+| 40.000000 | required area 40 in2 exceeds a T orifice (26 in2): use multiple valves | 2 |
+| 79.000000 | required area 79 in2 exceeds a T orifice (26 in2): use multiple valves | 4 |
+| 105.000000 | required area 105 in2 exceeds a T orifice (26 in2): use multiple valves | 5 |
+
+- The refusal PRINTS THE FIGURE THAT MADE IT TRUE. Read the 26.0001 row: the message carries the required area to eight significant figures, so the statement and its evidence agree on the page.
+
+# The three teaching streams, each from its own required area to its own letter.
+| stream | fluid | required area in2 | orifice | orifice area in2 | margin |
+| --- | --- | --- | --- | --- | --- |
+| ORUBIRI | gas | 2.223779 | L | 2.853000 | 1.282951 |
+| AKASO | liquid | 1.867758 | L | 2.853000 | 1.527500 |
+| TEBIDABA | steam | 0.949984 | J | 1.287000 | 1.354759 |
+
+# What it takes to move a letter. The ORUBIRI load walked until the selection changes, and the load at which it does, bisected.
+- At 68000.0000 lb/hr the selection is L. THE BRACKET IS GROWN RATHER THAN ASSUMED: the load is multiplied by 1.050000 until the letter changes, which takes 6 steps and ends at 91126.5036 lb/hr, where the letter is M. A bisection needs the answer inside its bracket and cannot tell you when it is not.
+- Bisected inside that bracket, the load at which the letter changes is 87240.6737 lb/hr, where the required area is 2.853000 in2. That is the L orifice area itself, which is the arithmetic the selection rule makes unavoidable.
+- The ratio of that load to the stated one: 1.282951083345. In critical flow the required area is proportional to the load, so that ratio IS the margin of the ORUBIRI selection, printed as 1.282951 in the table above.
+
+# SECTION 11: One Associate scenario, end to end (owned by Associate m06)
+
+# ORUBIRI, AKASO and TEBIDABA are three relief cases on one train. Every figure below appears in a section above, gathered here so a reader can see the whole shape at once.
+| step | ORUBIRI (gas) | AKASO (liquid) | TEBIDABA (steam) |
+| --- | --- | --- | --- |
+| the load, stated | 68000.0000 lb/hr | 860.0000 gpm | 94000.0000 lb/hr |
+| the set pressure, stated psig | 420.000000 | 310.000000 | 1740.000000 |
+| the relieving pressure | 476.700000 psia | 341.000000 psig | 1928.700000 psia |
+| the computed factor | critical ratio 0.551208 | Kv 0.984776 | KN 1.021727 |
+| the typed factor | Kb 1.000000 | Kw 1.000000 | KSH 1.000000 |
+| the certified factor, stated | Kd 0.975000 | Kd 0.650000 | Kd 0.975000 |
+| required area in2 | 2.223779 | 1.867758 | 0.949984 |
+| orifice | L | L | J |
+| margin | 1.282951 | 1.527500 | 1.354759 |
+
+- EACH ROUTE HAS EXACTLY ONE COMPUTED CORRECTION AND EXACTLY ONE TYPED ONE. That is the shape of API 520 Part I as this engine implements it, and it is the Associate reading: which of the numbers in front of you did the engine work out, and which one did somebody copy off a chart.
+- THE CERTIFIED DISCHARGE COEFFICIENT IS ALWAYS STATED. It is the valve manufacturer own certified figure and the engine defaults are placeholders for it. Every coefficient in this module is validated on the way in: a certified coefficient is a fraction of an ideal, above zero and no more than one.
+
+# SECTION 12: The wetted area in both orientations, exactly (owned by Professional m02)
+
+# The fire case is the one route that computes its own relief load, and it starts from geometry. A horizontal vessel wetted to a level is an exact circular segment: the wetted arc times the length. A vertical one is the circumference times the wetted height.
+- BENISEDE states a horizontal vessel 12.000000 ft across and 45.000000 ft long, at a liquid level of 4.200000 ft.
+- Wetted area lying down: 683.6960 ft2. Read standing up at the same level: 158.3363 ft2. Ratio: 4.317999814064.
+
+# The level walked from empty to full, both orientations, on the same vessel.
+| level ft (stated) | level as a fraction of the diameter | horizontal wetted ft2 | vertical wetted ft2 | horizontal over vertical |
+| --- | --- | --- | --- | --- |
+| 0.600000 | 0.050000 | 243.5545 | 22.6195 | 10.767472 |
+| 1.200000 | 0.100000 | 347.4906 | 45.2389 | 7.681229 |
+| 2.400000 | 0.200000 | 500.7394 | 90.4779 | 5.534386 |
+| 4.200000 | 0.350000 | 683.6960 | 158.3363 | 4.318000 |
+| 6.000000 | 0.500000 | 848.2300 | 226.1947 | 3.750000 |
+| 7.800000 | 0.650000 | 1012.7640 | 294.0531 | 3.444154 |
+| 9.600000 | 0.800000 | 1195.7206 | 361.9115 | 3.303904 |
+| 10.800000 | 0.900000 | 1348.9694 | 407.1504 | 3.313197 |
+| 12.000000 | 1.000000 | 1696.4600 | 452.3893 | 3.750000 |
+
+- HALF FULL IS THE ONE CASE WITH AN ANALYTIC ANSWER. At a level of exactly 6.000000 ft the wetted area is 848.2300 ft2, and half the lateral surface of the cylinder is 848.2300 ft2. Ratio 1.000000000000. Any geometry that is wrong away from half full can still be exactly right there, which is why the sweep above walks the whole level.
+- FULL, at a level of 12.000000 ft, the horizontal area is 1696.4600 ft2, which is the whole lateral surface. The level is clamped at the diameter, so a level above it returns the same figure.
+
+# WHAT A FOOT OF LEVEL BUYS. The sweep above is printed at uneven spacings, so its steepness cannot be read off it by eye. The same vessel in EQUAL bands of a tenth of its diameter, each band an engine return at each of its two ends.
+| band ft | horizontal wetted gained ft2 | gained per foot ft2 |
+| --- | --- | --- |
+| 0.000000 to 1.200000 | 347.4906 | 289.5755 |
+| 1.200000 to 2.400000 | 153.2488 | 127.7073 |
+| 2.400000 to 3.600000 | 125.2715 | 104.3929 |
+| 3.600000 to 4.800000 | 113.4858 | 94.5715 |
+| 4.800000 to 6.000000 | 108.7333 | 90.6111 |
+| 6.000000 to 7.200000 | 108.7333 | 90.6111 |
+| 7.200000 to 8.400000 | 113.4858 | 94.5715 |
+| 8.400000 to 9.600000 | 125.2715 | 104.3929 |
+| 9.600000 to 10.800000 | 153.2488 | 127.7073 |
+| 10.800000 to 12.000000 | 347.4906 | 289.5755 |
+
+- THE SWEEP IS STEEPEST AT BOTH ENDS AND IT IS EQUALLY STEEP AT EACH OF THEM. The bottom band gains 347.4906 ft2 and the top band gains 347.4906 ft2. Ratio of the top band to the bottom: 1.000000000000. The whole column is a mirror: its 10 figures read the same from the top as from the bottom.
+- THE FLAT PART IS THE MIDDLE. The two middle bands of the ten gain 108.7333 ft2 each, against 347.4906 ft2 at each end, a ratio of 3.195807278241. A vessel filling at a steady rate therefore adds wetted shell fastest when it is nearly empty and again when it is nearly full.
+
+- THE ORIENTATION IS MATCHED CASE-INSENSITIVELY AND TRIMMED, and anything else REFUSES rather than falling through to a default. Section 26 runs that refusal.
+- THE HEADS ARE IGNORED. That is standard screening practice and it is conservative for the shell term. The engine does not add them and this course does not either.
+- THE 25 FT LIMIT IS THE CALLER JOB. The engine attaches a note saying so on every fire duty: "wetted area counts only to 25 ft above grade (API 521); truncate the level before calling". Only the wetted area below 25 ft above grade counts towards a pool fire, and where that height falls depends on the plot elevation the engine is never told. The level is trimmed BEFORE the call.
+
+# SECTION 13: The published wetted-area cases (owned by Professional m02)
+
+# 7 published rows, re-run through the engine. Both orientations, including the empty vessel and one wetted past its own diameter.
+| golden orientation | golden diameter ft | golden length ft | golden level ft | published wetted ft2 | engine wetted ft2 | relative difference |
+| --- | --- | --- | --- | --- | --- | --- |
+| horizontal | 10.000000 | 40.000000 | 5.000000 | 628.3185 | 628.3185 | 1.990e-15 |
+| horizontal | 10.000000 | 40.000000 | 2.500000 | 418.8790 | 418.8790 | 1.065e-13 |
+| horizontal | 8.000000 | 24.000000 | 7.900000 | 560.1633 | 560.1633 | 8.950e-14 |
+| horizontal | 12.000000 | 30.000000 | 1.200000 | 231.6604 | 231.6604 | 1.186e-13 |
+| vertical | 10.000000 | 40.000000 | 12.000000 | 376.9911 | 376.9911 | 5.654e-14 |
+| vertical | 6.000000 | 25.000000 | 25.000000 | 471.2389 | 471.2389 | 3.981e-14 |
+| vertical | 8.000000 | 30.000000 | 0.000000 | 0.0000 | 0.0000 | n/a, the empty vessel |
+
+- 3 of the 7 rows are VERTICAL. That branch has its own derived oracle route, so a defect in one orientation cannot hide behind the other.
+- The oracle derives both branches by POLYLINE SUMMATION round the real circle with Richardson extrapolation, rather than by evaluating the same arc formula the engine uses.
+
+# SECTION 14: The pool fire duty, its two constants, its exponent and its credit (owned by Professional m03)
+
+# The API 521 pool fire duty is a constant times an environment factor times the wetted area raised to a published exponent. Which constant applies is decided by one answer: whether the plot has adequate drainage and firefighting.
+- Measured at a unit area and a unit environment factor: with drainage 21000.000000000000 Btu/hr, without 34500.000000000000 Btu/hr. The factor between them is 1.642857142857.
+- The exponent, measured as the log ratio of two duties at 100 and 1000 ft2: 0.820000000000.
+- THE TWO CONSTANTS AND THE EXPONENT ARE HELD FOR LITERATURE. The oracle checks the USC pair against the published SI pair with the exponent carried through the unit conversion, which checks the UNIT PACKAGING rather than the pool-fire physics. Nothing graded in this course reads a fire duty or a fire relief load.
+
+# BENISEDE duty, with the environment factor walked. The factor is the insulation and drainage credit and is a typed input against its own table.
+| environment factor (stated) | duty Btu/hr with drainage | duty Btu/hr without | relief load lb/hr with drainage |
+| --- | --- | --- | --- |
+| 1.000000 | 4434115.2612 | 7284617.9291 | 34641.5255 |
+| 0.850000 | 3768997.9720 | 6191925.2397 | 29445.2967 |
+| 0.500000 | 2217057.6306 | 3642308.9645 | 17320.7627 |
+| 0.300000 | 1330234.5784 | 2185385.3787 | 10392.4576 |
+| 0.150000 | 665117.2892 | 1092692.6894 | 5196.2288 |
+
+# The exponent is below one, so duty per square foot FALLS as a vessel gets bigger. The evidence, at a fixed environment factor and drainage.
+| wetted area ft2 (stated) | duty Btu/hr | duty per ft2 Btu/hr |
+| --- | --- | --- |
+| 50.0000 | 519247.8396 | 10384.9568 |
+| 100.0000 | 916683.2477 | 9166.8325 |
+| 250.0000 | 1943256.3783 | 7773.0255 |
+| 500.0000 | 3430636.4553 | 6861.2729 |
+| 1000.0000 | 6056466.1566 | 6056.4662 |
+| 2500.0000 | 12838967.5692 | 5135.5870 |
+| 5000.0000 | 22665990.2852 | 4533.1981 |
+
+# The relief load is the duty divided by the latent heat of the boiling liquid, and the method breaks down as that latent heat collapses towards the critical point. The engine warns rather than refusing.
+- The latent heat below which the warning fires, bisected: 50.000000000000 Btu/lb.
+| latent heat Btu/lb (stated) | relief load lb/hr at the BENISEDE duty | warning |
+| --- | --- | --- |
+| 300.000000 | 14780.3842 | no |
+| 200.000000 | 22170.5763 | no |
+| 150.000000 | 29560.7684 | no |
+| 128.000000 | 34641.5255 | no |
+| 100.000000 | 44341.1526 | no |
+| 60.000000 | 73901.9210 | no |
+| 49.000000 | 90492.1482 | yes |
+| 30.000000 | 147803.8420 | yes |
+
+# SECTION 15: The published fire and relief-load cases (owned by Professional m03 and m04)
+
+# 4 published fire rows and 3 published load rows, re-run through the engine.
+| golden wetted ft2 | golden drainage | golden environment factor | published duty Btu/hr | engine duty Btu/hr | relative difference |
+| --- | --- | --- | --- | --- | --- |
+| 628.3000 | true | 1.000000 | 4138017.5155 | 4137293.0505 | 1.751e-4 |
+| 628.3000 | false | 1.000000 | 6791329.6724 | 6796981.4402 | 8.322e-4 |
+| 300.0000 | true | 0.300000 | 677104.9976 | 676986.4532 | 1.751e-4 |
+| 1250.0000 | false | 0.850000 | 10147123.8325 | 10155568.3036 | 8.322e-4 |
+
+| golden duty Btu/hr | golden latent Btu/lb | published load lb/hr | engine load lb/hr | relative difference |
+| --- | --- | --- | --- | --- |
+| 4138017.5155 | 150.000000 | 27586.7834 | 27586.7834 | 5.876e-10 |
+| 10000000.0000 | 100.000000 | 99999.9999 | 100000.0000 | 5.876e-10 |
+| 6791329.6724 | 87.500000 | 77615.1962 | 77615.1963 | 5.876e-10 |
+
+- The oracle for the load route re-derives every unit packaging: Btu, hour and pound through kW and kilograms a second. It cannot check the latent-heat METHOD, which is the model this route is.
+
+# SECTION 16: The fire case end to end, geometry to letter (owned by Professional m04)
+
+# BENISEDE, from a vessel and a level to an orifice, every step an engine return.
+- Stated: horizontal, 12.000000 ft diameter, 45.000000 ft long, level 4.200000 ft, drainage true, environment factor 1.000000, latent heat 128.000000 Btu/lb, set 275.000000 psig, overpressure 21.000000 percent, 180.000000 degF, molecular weight 21.000000, z 0.900000, k 1.220000.
+| step | value | route |
+| --- | --- | --- |
+| wetted area | 683.6960 ft2 | wettedAreaFt2, horizontal |
+| pool fire duty | 4434115.2612 Btu/hr | fireHeatInput |
+| relief load | 34641.5255 lb/hr | fireReliefLoad |
+| relieving pressure | 347.450000 psia | derived, set times one plus the overpressure fraction plus the measured atmospheric |
+| required area | 1.578271 in2 | gasVaporArea, critical |
+| orifice | K at 1.838000 in2 | selectOrifice |
+| margin | 1.164566 | selectOrifice |
+
+- THE FIRE CASE GETS A LARGER OVERPRESSURE ALLOWANCE THAN A PROCESS CASE, and BENISEDE states 21.000000 percent. The same chain at 10.000000 percent: relieving pressure 317.200000 psia, required area 1.728783 in2, orifice K.
+
+# What moves the letter. Each row changes ONE input of the chain above and carries the change all the way through.
+| changed input | wetted ft2 | duty Btu/hr | load lb/hr | required in2 | orifice |
+| --- | --- | --- | --- | --- | --- |
+| none, the stated case | 683.6960 | 4434115.2612 | 34641.5255 | 1.578271 | K |
+| drainage answered false | 683.6960 | 7284617.9291 | 56911.0776 | 2.592873 | L |
+| environment factor 0.3 | 683.6960 | 1330234.5784 | 10392.4576 | 0.473481 | G |
+| level trimmed to 2.0 ft | 454.1771 | 3170618.3714 | 24770.4560 | 1.128544 | J |
+| level raised to 8.0 ft | 1031.7419 | 6213661.4471 | 48544.2301 | 2.211679 | L |
+| latent heat 90 Btu/lb | 683.6960 | 4434115.2612 | 49267.9473 | 2.244651 | L |
+| read standing up | 158.3363 | 1336211.5771 | 10439.1529 | 0.475609 | G |
+
+# THE SAME TABLE, RANKED. A ranking is an answer, so it is computed rather than left to be read off the rows above. The duty factor is the variant duty over the stated one, or the stated one over the variant where the variant is lower, so every row is a figure at or above one.
+| changed input | duty factor against the stated case | direction | orifice | rungs moved on the ladder |
+| --- | --- | --- | --- | --- |
+| environment factor 0.3 | 3.333333333333 | down | G | -3 |
+| read standing up | 3.318423022984 | down | G | -3 |
+| drainage answered false | 1.642857142857 | up | L | +1 |
+| level raised to 8.0 ft | 1.401330610749 | up | L | +1 |
+| level trimmed to 2.0 ft | 1.398501724833 | down | J | -1 |
+| latent heat 90 Btu/lb | 1.000000000000 | up | L | +1 |
+
+- THE LARGEST DUTY LEVER IS ENVIRONMENT FACTOR 0.3, at 3.333333333333. The drainage answer, which changes the duty by the ratio of the two published fire constants, comes 3 of 6 at 1.642857142857.
+- THE ROWS THAT MOVE THE LETTER FURTHEST MOVE IT 3 RUNGS, and there are 2 of them: environment factor 0.3 and read standing up. The drainage answer moves it 1 rung, which is the smallest non-zero move in the table and is shared with 3 other rows.
+- A DUTY RANKING AND A LETTER RANKING ARE DIFFERENT RANKINGS. The ladder is a published table of discrete areas, so a large move in the duty can land inside the same letter and a smaller one can cross a rung. Read the column that answers the question being asked.
+
+# SECTION 17: Droplet settling, drag against weight, iterated (owned by Professional m05 l02 and l03)
+
+# A droplet falls at the speed where form drag balances its buoyant weight. The drag coefficient depends on the Reynolds number, the Reynolds number depends on the speed, so the engine iterates and reports the pair it converged on.
+- THREE COURSES IN THIS ACADEMY ANSWER THE SAME QUESTION BY DIFFERENT ROUTES. Gas well loading owns drag against weight with the Turner and Coleman criteria. Separation owns the Souders-Brown allowable and the critique of using it as a settling velocity. This is the third answer, the API 521 drag-coefficient method, and this course does not re-derive either of the other two.
+- The balance the engine evaluates is Ud = coefficient times the square root of (g d (rhoL - rhoV) / (rhoV C)). The group Ud^2 C rhoV / ((rhoL - rhoV) d) therefore carries the coefficient squared, standard gravity and the foot per micron and nothing else. Measured at 100 micron: 0.000140743657. At 200 micron: 0.000140743657. At 0.02 cp instead of 0.01: 0.000140743657.
+- The first two are equal to twelve decimals, which is what says the group does not carry the droplet size. The third is equal to the first as well, which is what says it does not carry the viscosity either.
+- Dividing that group by standard gravity in ft/s2 leaves the coefficient squared times the foot per micron: 1.333333333333.
+- THE DRAG CORRELATION IS HELD FOR LITERATURE. Its three terms and its low-Reynolds cap are an empirical fit that no route in this package can derive, and the validation oracle shares it on purpose and says so. Section 28 audits that. Nothing graded in this course reads it.
+
+# The droplet size walked, on the ODIDI vapour. Watch the drag coefficient, the Reynolds number and the iteration count together.
+- ODIDI states 44.000000 MMscfd at 42.000000 psia and 160.000000 degF with a gas gravity of 0.680000, a liquid density of 36.500000 lb/ft3 and a vapour viscosity of 0.013500 cp.
+- The vapour density, DERIVED from the stated gravity and the package own gas constant and air molecular weight: 0.124385 lb/ft3.
+- The actual vapour rate, DERIVED from the stated MMscfd at the package own standard base of 14.696 psia and 519.67 degR: 212.481739 actual ft3/s.
+| droplet micron (stated) | dropout velocity ft/s | drag coefficient | Reynolds | iterations | converged |
+| --- | --- | --- | --- | --- | --- |
+| 5.000000 | 0.029283 | 240.000000 | 0.006587 | 3 | true |
+| 20.000000 | 0.058566 | 240.000000 | 0.052692 | 4 | true |
+| 60.000000 | 0.249724 | 39.600545 | 0.674035 | 44 | true |
+| 150.000000 | 1.183722 | 4.406172 | 7.987529 | 33 | true |
+| 400.000000 | 4.005010 | 1.026414 | 72.066751 | 19 | true |
+| 900.000000 | 7.984159 | 0.581104 | 323.253352 | 15 | true |
+| 2000.000000 | 13.594845 | 0.445401 | 1223.138436 | 12 | true |
+| 6000.000000 | 25.504827 | 0.379644 | 6884.065258 | 9 | true |
+
+- THE CORRELATION IS CAPPED AT LOW REYNOLDS NUMBERS. Measured: the drag coefficient stops moving at 240.000000000000, and the Reynolds number just inside that cap is 0.104182271364. Below there the fit would keep climbing and the cap holds it.
+- THE RETURNED VELOCITY AND THE RETURNED DRAG COEFFICIENT BELONG TOGETHER. The engine recomputes the velocity from the coefficient it is about to return, so a reader can put the pair back into the balance and get the same answer. The ODIDI pair: 4.005010 ft/s at a drag coefficient of 1.026414, converged true in 19 passes on a residual of 0.000000000000.
+
+# SECTION 18: The knockout drum, a level, a segment and a length (owned by Professional m05 l04 and l05)
+
+# A horizontal knockout drum works if the vapour takes longer to cross the drum than a droplet takes to fall out of it. At a candidate diameter the engine returns the length that demands.
+- THE HOLDUP INPUT IS THE LIQUID LEVEL AS A FRACTION OF THE DIAMETER, which is what a level instrument reads. The vapour cross-section is then the EXACT CIRCULAR SEGMENT above that level, and the distance a droplet falls is the vapour depth. The engine returns the depth, the segment area fraction, the vapour area and the fall distance, so the convention is visible rather than inferred.
+
+# The segment area fraction of a circle filled to a depth fraction, straight from the engine own export.
+| depth fraction (stated) | liquid area fraction | vapour area fraction |
+| --- | --- | --- |
+| 0.000000 | 0.000000 | 1.000000 |
+| 0.100000 | 0.052044 | 0.947956 |
+| 0.250000 | 0.195501 | 0.804499 |
+| 0.500000 | 0.500000 | 0.500000 |
+| 0.750000 | 0.804499 | 0.195501 |
+| 0.900000 | 0.947956 | 0.052044 |
+| 0.990000 | 0.998307 | 0.001693 |
+
+- AT HALF DEPTH THE AREA FRACTION IS A HALF, 0.500000000000. Read the table above at 0.1 and at 0.75 to see how far apart the two get.
+- WHERE THE TWO AGREE IS COUNTED RATHER THAN ASSERTED. Swept across the whole range, the depth fraction and the area fraction agree at exactly 3 depths: 0.000000000000 empty, 0.500000000000 half full, and 1.000000000000 full. THE TWO ENDS AGREE TRIVIALLY, because an empty circle holds no liquid area and a full one is all liquid area, and the empty row is printed in the table above. HALF DEPTH IS THE ONLY AGREEMENT STRICTLY BETWEEN THEM, bisected rather than assumed.
+- EITHER SIDE OF 0.500000 THE TWO DISAGREE IN OPPOSITE DIRECTIONS. Below half depth the area fraction is SMALLER than the depth fraction on all 49999 swept depths, and above half depth it is LARGER on all 49999. That is one crossing of the diagonal with a touch at each end.
+
+# The ODIDI drum, with the holdup walked end to end. Everything on a row is an engine return except the stated fraction.
+| holdup fraction (stated) | liquid depth ft | liquid area fraction | vapour area ft2 | vapour velocity ft/s | fall distance ft | required length ft | L over D | note |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0.000000 | 0.000000 | 0.000000 | 63.617251 | 3.340002 | 9.000000 | 7.505603 | 0.833956 | L/D below 2: a smaller drum may do |
+| 0.100000 | 0.900000 | 0.052044 | 60.306354 | 3.523372 | 8.100000 | 7.125904 | 0.791767 | L/D below 2: a smaller drum may do |
+| 0.250000 | 2.250000 | 0.195501 | 51.180008 | 4.151655 | 6.750000 | 6.997154 | 0.777462 | L/D below 2: a smaller drum may do |
+| 0.300000 | 2.700000 | 0.252316 | 47.565614 | 4.467129 | 6.300000 | 7.026927 | 0.780770 | L/D below 2: a smaller drum may do |
+| 0.500000 | 4.500000 | 0.500000 | 31.808626 | 6.680004 | 4.500000 | 7.505603 | 0.833956 | L/D below 2: a smaller drum may do |
+| 0.750000 | 6.750000 | 0.804499 | 12.437243 | 17.084312 | 2.250000 | 9.597904 | 1.066434 | L/D below 2: a smaller drum may do |
+| 0.900000 | 8.100000 | 0.947956 | 3.310897 | 64.176478 | 0.900000 | 14.421645 | 1.602405 | L/D below 2: a smaller drum may do |
+| 0.990000 | 8.910000 | 0.998307 | 0.107675 | 1973.354184 | 0.090000 | 44.344927 | 4.927214 | none |
+
+- THE HOLDUP MOVES THE ANSWER. Across the sweep above the required length runs from 6.997154 ft to 44.344927 ft, a spread of 37.347773 ft, while the vapour velocity runs from 3.340002 ft/s to 1973.354184 ft/s.
+- THE LENGTH IS NOT MONOTONIC IN THE HOLDUP. Two things move against each other: filling the drum shrinks the vapour space and speeds the gas up, which needs MORE length, and it also shortens the distance a droplet has to fall, which needs LESS. Read the required-length column top to bottom and find where it turns.
+
+# THE CONVENTION MATTERS, and the size of it is printed rather than asserted. The same drum read two ways: the holdup as a LIQUID LEVEL fraction, which is what the engine takes, and the same figure read as an AREA fraction instead.
+| fraction (stated) | length ft, read as a level | length ft, read as an area fraction | ratio |
+| --- | --- | --- | --- |
+| 0.100000 | 10.481166 | 10.346904 | 0.987190 |
+| 0.250000 | 10.291794 | 10.332911 | 1.003995 |
+| 0.500000 | 11.039649 | 11.039649 | 1.000000 |
+| 0.750000 | 14.117118 | 13.159863 | 0.932192 |
+| 0.900000 | 21.212138 | 17.274356 | 0.814362 |
+
+# The diameter walked at the ODIDI duty. This is the design move: the length and the L over D together decide the drum.
+| diameter ft (stated) | vapour velocity ft/s | required length ft | L over D | note |
+| --- | --- | --- | --- | --- |
+| 5.000000 | 14.473498 | 12.648469 | 2.529694 | none |
+| 6.000000 | 10.051040 | 10.540391 | 1.756732 | L/D below 2: a smaller drum may do |
+| 7.000000 | 7.384438 | 9.034621 | 1.290660 | L/D below 2: a smaller drum may do |
+| 8.000000 | 5.653710 | 7.905293 | 0.988162 | L/D below 2: a smaller drum may do |
+| 9.000000 | 4.467129 | 7.026927 | 0.780770 | L/D below 2: a smaller drum may do |
+| 10.000000 | 3.618375 | 6.324234 | 0.632423 | L/D below 2: a smaller drum may do |
+| 12.000000 | 2.512760 | 5.270195 | 0.439183 | L/D below 2: a smaller drum may do |
+| 14.000000 | 1.846109 | 4.517310 | 0.322665 | L/D below 2: a smaller drum may do |
+
+- THE NOTE IS A JUDGMENT WITH TWO EDGES AND BOTH ARE MEASURED. The go-wider note starts at an L over D of 6.000000000000 and the smaller-drum note ends at 2.000000000000. Between them the engine says nothing, which is the band it treats as reasonable.
+- The stated ODIDI drum: 9.000000 ft across at a holdup of 0.300000, vapour velocity 4.467129 ft/s, required length 7.026927 ft, L over D 0.780770, note L/D below 2: a smaller drum may do.
+
+# SECTION 19: The published dropout and drum cases (owned by Professional m05)
+
+# 4 published dropout rows and 6 published drum rows, re-run through the engine.
+| golden droplet micron | golden rhoL lb/ft3 | golden rhoV lb/ft3 | golden viscosity cp | published velocity ft/s | engine velocity ft/s | relative difference | engine drag coefficient |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 300.000000 | 31.200000 | 0.500000 | 0.012000 | 1.738917 | 1.738915 | 9.635e-7 | 0.857357 |
+| 600.000000 | 43.700000 | 1.200000 | 0.010000 | 2.529020 | 2.529018 | 8.226e-7 | 0.467610 |
+| 150.000000 | 50.000000 | 0.300000 | 0.015000 | 1.202999 | 1.202998 | 1.171e-6 | 2.416716 |
+| 450.000000 | 38.000000 | 0.750000 | 0.011000 | 2.353646 | 2.353644 | 8.676e-7 | 0.567839 |
+
+| golden rate acfs | golden dropout ft/s | golden diameter ft | golden holdup | golden liquid area fraction | published length ft | golden L over D | engine length ft | relative difference |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 120.000000 | 1.730000 | 8.000000 | 0.000000 | 0.000000 | 11.039649 | 1.379956 | 11.039649 | 1.609e-16 |
+| 120.000000 | 1.730000 | 8.000000 | 0.100000 | 0.052044 | 10.481166 | 1.310146 | 10.481166 | 0.000e+0 |
+| 120.000000 | 1.730000 | 8.000000 | 0.250000 | 0.195501 | 10.291794 | 1.286474 | 10.291794 | 8.630e-16 |
+| 120.000000 | 1.730000 | 8.000000 | 0.500000 | 0.500000 | 11.039649 | 1.379956 | 11.039649 | 3.218e-16 |
+| 120.000000 | 1.730000 | 8.000000 | 0.750000 | 0.804499 | 14.117118 | 1.764640 | 14.117118 | 7.550e-14 |
+| 45.000000 | 2.400000 | 5.000000 | 0.300000 | 0.252316 | 4.470141 | 0.894028 | 4.470141 | 1.987e-15 |
+
+- 6 distinct holdup fractions appear in the published drum rows, which is what lets that set discriminate an input that could not move its own answer.
+- The oracle derives the segment vapour area by SIMPSON QUADRATURE of the area integral and the length as a transit time against a fall time, in SI, rather than by evaluating the engine own expressions.
+- The oracle for settling derives the balance by BISECTION on the force residual in SI, which recovers the exact coefficient the balance carries. It SHARES the drag correlation with the engine on purpose.
+
+# SECTION 20: One Professional scenario, end to end (owned by Professional m06)
+
+# BENISEDE puts a load on a valve. ODIDI is the drum that keeps the liquid that valve passes out of the flare header. They are the two halves of one Professional reading.
+| step | value | route |
+| --- | --- | --- |
+| BENISEDE wetted area | 683.6960 ft2 | wettedAreaFt2 |
+| BENISEDE pool fire duty | 4434115.2612 Btu/hr | fireHeatInput |
+| BENISEDE relief load | 34641.5255 lb/hr | fireReliefLoad |
+| BENISEDE required area | 1.578271 in2 | gasVaporArea |
+| BENISEDE orifice | K | selectOrifice |
+| ODIDI vapour density | 0.124385 lb/ft3 | derived from the stated gravity |
+| ODIDI actual vapour rate | 212.481739 acfs | derived from the stated MMscfd |
+| ODIDI dropout velocity | 4.005010 ft/s | dropoutVelocityFtS |
+| ODIDI vapour velocity | 4.467129 ft/s | koDrumHorizontal |
+| ODIDI required length | 7.026927 ft | koDrumHorizontal |
+| ODIDI L over D | 0.780770 | koDrumHorizontal |
+
+- THE TWO HALVES DO NOT SHARE A NUMBER. The drum is sized on the vapour the header carries and the droplet the flare tip will not take, and the valve is sized on the load a fire puts on a vessel. A reader who expects the relief load to appear in the drum calculation has the chain wrong: what the drum takes is a rate at drum conditions, and this engine is handed that rate rather than deriving it from a relief case.
+- WHAT THE ENGINE LEAVES TO THE CALLER, in this tier: the wetted height truncation at 25 ft, the choice of which scenario is the governing case, the conversion from a standard rate to an actual one, and the liquid density and vapour viscosity at drum conditions.
+
+# SECTION 21: The blowdown march, mass out through a choked orifice and isentropic inside (owned by Expert m01)
+
+# Depressuring is the other question this engine answers about a vessel. A relief valve keeps the pressure from rising; a blowdown orifice takes the inventory out. The march is explicit: mass leaves through a choked orifice, the gas left behind expands isentropically, and the trajectory is returned so the answer is read off a curve.
+- AFIESERE states 720.000000 ft3 at 1240.000000 psia and 545.000000 degR, down to 145.000000 psia, molecular weight 20.000000, k 1.280000, z 0.880000, orifice 1.250000 in at a discharge coefficient of 0.820000.
+| returned | value |
+| --- | --- |
+| time to the end pressure | 268.419002 s |
+| the same in minutes, derived | 4.473650 |
+| starting inventory | 3469.2925 lb |
+| inventory left at the end | 648.7449 lb |
+| fraction of the inventory removed, derived | 0.813004 |
+| final temperature | 340.807983 degR |
+| the same in degF, derived | -118.862017 |
+| final pressure | 145.000000 psia |
+| steps taken | 2685 |
+| steps that had to be subdivided | 0 |
+| stations returned | 270 |
+| the time step used | 0.100000 s |
+| the pressure below which the choked assumption stops holding | 26.758009 psia |
+| warning | none |
+
+- THE MASS THE ENGINE REPORTS FOR ITS OWN START STATE IS WHERE THE GAS CONSTANT COMES FROM. Rearranged, it gives 1545.349000000000 ft.lbf per lbmol degR, which is the universal gas constant this march stands on.
+
+# THE MARCH HAS A CLOSED FORM, AND THE DIGEST USES IT. With z held constant and the flow choked throughout, the mass balance is separable: the rate of mass loss is proportional to the mass raised to (k+1)/2, so the time between two masses can be integrated exactly. The closed form below is built from the engine own coefficient C, the measured gas constant above, and the stated geometry.
+| case | marched time s | closed-form time s | ratio |
+| --- | --- | --- | --- |
+| AFIESERE as stated | 268.419002 | 268.418973 | 0.999999894249 |
+| AFIESERE at a 2.0 in orifice | 104.851242 | 104.851161 | 0.999999232099 |
+| AFIESERE at a discharge coefficient of 0.60 | 366.839286 | 366.839263 | 0.999999938032 |
+| AFIESERE from 1800 psia | 321.794698 | 321.794669 | 0.999999911186 |
+
+- THE RATIO COLUMN IS THE CHECK. A discharge coefficient applied twice, a coefficient hidden inside the mass flow, or an isentropic exponent off by one would all show as a ratio away from one. The validation oracle runs the same closed form in SI and the published blowdown cases are built from it.
+- THE DISCHARGE COEFFICIENT IS THE CALLER FIGURE AND NOTHING MULTIPLIES IT. The same vessel at three coefficients: 0.600000 gives 366.839286 s, 0.820000 gives 268.419002 s, 1.000000 gives 220.103588 s. The ratio of the first time to the last is 1.666666542759, against a coefficient ratio of 1.666666666667.
+
+# The trajectory. Every tenth station of the AFIESERE march, which is what the panel draws.
+| station | time s | pressure psia | temperature degR |
+| --- | --- | --- | --- |
+| 0 | 0.000000 | 1240.000000 | 545.000000 |
+| 1 | 10.000000 | 1133.641018 | 534.413026 |
+| 2 | 20.000000 | 1037.307957 | 524.131571 |
+| 3 | 30.000000 | 949.972166 | 514.143990 |
+| 4 | 40.000000 | 870.718948 | 504.439191 |
+| 5 | 50.000000 | 798.734021 | 495.006596 |
+| 6 | 60.000000 | 733.291697 | 485.836122 |
+| 7 | 70.000000 | 673.744535 | 476.918145 |
+| 8 | 80.000000 | 619.514300 | 468.243479 |
+| 9 | 90.000000 | 570.084018 | 459.803355 |
+| 10 | 100.000000 | 524.991018 | 451.589391 |
+| 11 | 110.000000 | 483.820806 | 443.593580 |
+| 12 | 120.000000 | 446.201690 | 435.808264 |
+| 13 | 130.000000 | 411.800027 | 428.226118 |
+| 14 | 140.000000 | 380.316049 | 420.840135 |
+| 15 | 150.000000 | 351.480172 | 413.643606 |
+| 16 | 160.000000 | 325.049729 | 406.630105 |
+| 17 | 170.000000 | 300.806087 | 399.793480 |
+| 18 | 180.000000 | 278.552096 | 393.127831 |
+| 19 | 190.000000 | 258.109813 | 386.627505 |
+| 20 | 200.000000 | 239.318504 | 380.287079 |
+| 21 | 210.000000 | 222.032848 | 374.101352 |
+| 22 | 220.000000 | 206.121355 | 368.065331 |
+| 23 | 230.000000 | 191.464951 | 362.174225 |
+| 24 | 240.000000 | 177.955718 | 356.423432 |
+| 25 | 250.000000 | 165.495773 | 350.808529 |
+| 26 | 260.000000 | 153.996263 | 345.325271 |
+| 27 | 268.419002 | 145.000000 | 340.807983 |
+
+- The pressure falls at every one of the 270 stations and the vessel gets colder all the way down, because the gas left behind is doing the expanding.
+
+# SECTION 22: Reading a depressuring time off a curve, and the orifice that buys it (owned by Expert m02)
+
+# The question a depressuring study answers is whether the vessel is down inside the customary time. The answer is read off the march, and the orifice is what buys it.
+| orifice in (stated) | time s | time min, derived | final temperature degR | steps | substeps |
+| --- | --- | --- | --- | --- | --- |
+| 0.500000 | 1677.618587 | 27.960310 | 340.807983 | 16777 | 0 |
+| 0.750000 | 745.608268 | 12.426804 | 340.807983 | 7457 | 0 |
+| 1.000000 | 419.404662 | 6.990078 | 340.807983 | 4195 | 0 |
+| 1.250000 | 268.419002 | 4.473650 | 340.807983 | 2685 | 0 |
+| 1.500000 | 186.402100 | 3.106702 | 340.807983 | 1865 | 0 |
+| 2.000000 | 104.851242 | 1.747521 | 340.807983 | 1049 | 0 |
+| 2.500000 | 67.104843 | 1.118414 | 340.807983 | 672 | 0 |
+| 3.000000 | 46.600653 | 0.776678 | 340.807983 | 467 | 0 |
+
+- THE ORIFICE AT WHICH THIS VESSEL TAKES EXACTLY FIFTEEN MINUTES, bisected on the engine own time: 0.682646 in, where the march returns 900.000000 s.
+- The time does not scale with the diameter. Read the sweep: doubling the orifice from 1.000000 in to 2.000000 in takes the time from 419.404662 s to 104.851242 s, a ratio of 0.250000182473.
+
+# THE COLD END. The final temperature does not depend on the orifice at all, and the sweep above is the evidence: the end state is fixed by the pressure ratio and the isentropic exponent, and the orifice only decides how long it takes to get there.
+- Distinct final temperatures across the orifice sweep, counted: 1.
+| end pressure psia (stated) | time s | final temperature degR | final degF, derived | fraction of inventory removed |
+| --- | --- | --- | --- | --- |
+| 600.000000 | 83.838356 | 464.976597 | 5.306597 | 0.432854 |
+| 400.000000 | 133.645325 | 425.511333 | -34.158667 | 0.586835 |
+| 250.000000 | 194.213269 | 383.936928 | -75.733072 | 0.713810 |
+| 145.000000 | 268.419002 | 340.807983 | -118.862017 | 0.813004 |
+| 80.000000 | 354.644554 | 299.234348 | -160.435652 | 0.882496 |
+| 40.000000 | 462.482817 | 257.134963 | -202.535037 | 0.931629 |
+| 25.000000 | 540.397236 | 232.011700 | -227.658300 | 0.952641 |
+
+- THE MODEL STATES ITS OWN LIMIT. The march assumes choked flow the whole way down, and it stops being choked below 26.758009 psia against the stated back pressure. The rows above that cross it carry the engine own warning.
+- At an end pressure of 25.000000 psia the engine returns: the march assumes choked flow throughout, and it stops being choked below 26.8 psia against a 14.7 psia back pressure: the time below that is optimistic
+
+# SECTION 23: A step size is an answer (owned by Expert m03)
+
+# An explicit march has a step, and a reader is entitled to know what that step is worth. The step is halved seven times over a contiguous sequence, because a convergence table is only honest over a contiguous slice.
+| time step s (stated) | time s | final temperature degR | steps | substeps | time against the finest, ratio |
+| --- | --- | --- | --- | --- | --- |
+| 0.800000 | 268.420990 | 340.807983 | 336 | 0 | 1.000007510303 |
+| 0.400000 | 268.419373 | 340.807983 | 672 | 0 | 1.000001488532 |
+| 0.200000 | 268.419078 | 340.807983 | 1343 | 0 | 1.000000389388 |
+| 0.100000 | 268.419002 | 340.807983 | 2685 | 0 | 1.000000103923 |
+| 0.050000 | 268.418981 | 340.807983 | 5369 | 0 | 1.000000027016 |
+| 0.025000 | 268.418975 | 340.807983 | 10737 | 0 | 1.000000004994 |
+| 0.012500 | 268.418974 | 340.807983 | 21474 | 0 | 1.000000000000 |
+
+- REFINING THE STEP CONVERGES. Across a sixty-four-fold refinement the time moves by 0.002015907907 s in total, which is 0.000007510303 of the time at the finest step. The ratio column is the evidence: read it top to bottom.
+- THE STEP STILL SHOWS IN THE PRINTED TIME. This digest prints a time to six decimals, and the movement above is 4031.815814 times half a unit in that sixth decimal. At the stated step of 0.100000 s the time sits 0.000027894862 s above the time at the finest step, so a time quoted to six decimals carries its step with it and is stated beside it.
+- The march lands ON the end pressure rather than stepping past it. AFIESERE finishes at 145.000000000000 psia against a target of 145.000000 psia, a difference of -0.000000000000 psia.
+- NO STEP REMOVES MORE THAN A TWENTIETH OF THE INVENTORY. The engine subdivides a step that would, and reports how many it subdivided. At the stated step AFIESERE subdivided 0 of its 2685 steps.
+
+# The same study on a small vessel through a large orifice, which is where a fixed step has the least to work with.
+| case (stated) | time s | final pressure psia | final temperature degR | steps | substeps |
+| --- | --- | --- | --- | --- | --- |
+| 5.000000 ft3, 4.000000 in orifice | 0.167677 | 114.700000 | 338.611469 | 34 | 34 |
+| 100.000000 ft3, 17.000000 in orifice | 0.185663 | 114.700000 | 338.611469 | 34 | 34 |
+| 500.000000 ft3, 38.000000 in orifice | 0.185791 | 114.700000 | 338.611469 | 34 | 34 |
+
+- EVERY ROW ABOVE REACHES ITS END PRESSURE AND REPORTS A TIME ABOVE ZERO. The substep column is why: the first step at these geometries would take out more mass than the vessel holds, so the engine cuts it until no step removes more than a twentieth.
+
+# SECTION 24: The published blowdown cases (owned by Expert m01, m02 and m03)
+
+# 5 published blowdown rows, re-run through the engine.
+| golden volume ft3 | golden p0 psia | golden pEnd psia | golden t0 degR | golden mw | golden k | golden z | golden orifice in | golden cd | published time s | engine time s | relative difference | published final degR | published start lb | published end lb |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 500.000000 | 1014.700000 | 114.700000 | 560.000000 | 19.000000 | 1.300000 | 0.900000 | 1.000000 | 0.850000 | 268.353614 | 268.068607 | 1.062e-3 | 338.611469 | 1782.2441 | 333.1803 |
+| 500.000000 | 1014.700000 | 114.700000 | 560.000000 | 19.000000 | 1.300000 | 0.900000 | 2.000000 | 0.850000 | 67.088404 | 67.017258 | 1.060e-3 | 338.611469 | 1782.2441 | 333.1803 |
+| 2000.000000 | 1514.700000 | 214.700000 | 600.000000 | 22.000000 | 1.250000 | 0.880000 | 1.500000 | 0.800000 | 489.170126 | 488.650558 | 1.062e-3 | 405.931108 | 11762.0177 | 2464.2579 |
+| 5.000000 | 1014.700000 | 114.700000 | 560.000000 | 19.000000 | 1.300000 | 0.900000 | 4.000000 | 0.850000 | 0.167721 | 0.167677 | 2.654e-4 | 338.611469 | 17.8224 | 3.3318 |
+| 500.000000 | 1014.700000 | 114.700000 | 560.000000 | 19.000000 | 1.300000 | 0.900000 | 38.000000 | 0.850000 | 0.185840 | 0.185791 | 2.654e-4 | 338.611469 | 1782.2441 | 333.1803 |
+
+- 2 of the 5 rows use an orifice of 4 in or larger and 1 sits at 10 ft3 or smaller. Those are the geometries where a fixed step has the least room, and a published set without them cannot discriminate a march that stops before it starts.
+- The oracle for this route solves the SAME march in closed form in SI, so the time, the isentropic exponent and the absence of any hidden coefficient are all checked at once. It makes the same two model assumptions on purpose, a constant compressibility and choked flow throughout, so what the published set checks is the march and not the thermodynamics.
+
+# SECTION 25: The point source, asked both ways, and two tables with the same numbers (owned by Expert m04)
+
+# A flare radiates, and the API 521 point source is the screening model for how much of that reaches a distance. The relief engine carries it in both directions: the intensity at a distance, and the distance an allowable intensity demands.
+- The solid angle in the relation, measured from one intensity against its own stated inputs: 12.566370614359.
+- The two directions against each other: an intensity of 0.795774715459 kW/m2 at 10.000000 m, and the distance the inverse demands for that intensity, 10.000000000000 m. Ratio 1.000000000000.
+- A ROUND TRIP THROUGH A FUNCTION AND ITS OWN INVERSE IS AN IDENTITY AND PROVES NOTHING ABOUT THE MODEL. It proves the two implementations agree. The oracle derives the sphere area by QUADRATURE and the inverse by BISECTION on that same quadrature, which is what makes the model itself checked rather than only self-consistent.
+
+# The AFIESERE flare, with the distance walked.
+- Stated: a relief rate of 210000.0000 lb/hr at a lower heating value of 19400.0000 Btu/lb, a radiated fraction of 0.320000 and a transmissivity of 0.920000.
+- Heat release, DERIVED from the two stated figures through the Btu per hour to kilowatt conversion: 1193971.5392 kW.
+| distance m (stated) | intensity kW/m2 |
+| --- | --- |
+| 40.000000 | 17.482435 |
+| 60.000000 | 7.769971 |
+| 80.000000 | 4.370609 |
+| 100.000000 | 2.797190 |
+| 140.000000 | 1.427138 |
+| 200.000000 | 0.699297 |
+| 300.000000 | 0.310799 |
+| 450.000000 | 0.138133 |
+
+- At the stated 140.000000 m the intensity is 1.427138 kW/m2.
+- THE INTENSITY FALLS WITH THE SQUARE OF THE DISTANCE. Read any two rows of the sweep and form the ratio of the intensities against the ratio of the squared distances.
+
+# The radiated fraction and the transmissivity are both INPUTS, and both are fractions the engine validates.
+| radiated fraction (stated) | transmissivity (stated) | intensity at the stated distance kW/m2 |
+| --- | --- | --- |
+| 0.150000 | 1.000000 | 0.727142 |
+| 0.200000 | 0.920000 | 0.891961 |
+| 0.300000 | 0.920000 | 1.337941 |
+| 0.320000 | 0.920000 | 1.427138 |
+| 0.320000 | 1.000000 | 1.551237 |
+| 0.450000 | 0.800000 | 1.745141 |
+
+# THE SETBACK IS NOT TAUGHT HERE. A flare setback computed from a heat release, the pool fire behind it and the four customary allowable intensities with their held-for-literature caveat are all owned by the Separation & Slug Catching course, which is already live and grades a setback of its own. This course teaches the point source as the RELIEF engine second copy of the same model and hands the setback question back by name.
+- What this section does show is the inverse EXISTS and validates the same four inputs as the forward direction. Both refuse a radiated fraction of zero, a transmissivity above one and a negative transmissivity. Section 26 runs every one of those.
+
+# TWO TABLES WITH THE SAME NUMBERS. Two engines in this package export the customary allowable intensities: the relief engine and the spacing engine. They now carry IDENTICAL wording, and the jest suite asserts they stay equal, so one learner cannot meet two sets of words for one published table.
+| kW/m2 | label in the relief engine | label in the spacing engine | equal |
+| --- | --- | --- | --- |
+| 1.580000 | Continuous exposure, no time limit (site boundary, control room) | Continuous exposure, no time limit (site boundary, control room) | yes |
+| 4.730000 | Emergency action of several minutes, with clothing | Emergency action of several minutes, with clothing | yes |
+| 6.310000 | Emergency action up to about a minute | Emergency action up to about a minute | yes |
+| 9.460000 | Seconds only: escape route | Seconds only: escape route | yes |
+
+- THE VALUES ARE CUSTOMARY AND THE WORDING IS THIS PACKAGE OWN. No publication in this repository checks either, so the whole table is HELD FOR LITERATURE, taught as a stated limit and never as an answer. Nothing graded in this course reads a row of it.
+
+# SECTION 26: Every refusal this module can produce, and the contract behind them (owned by Expert m05 l04)
+
+# THE CONTRACT: every route in this module returns either a finite result or an object carrying an `error` string. A non-finite number with no `error` is what a caller `if (r.error)` guard cannot see. Each row below is ONE bad input with everything else sound, so the message and the input that caused it are on the same row.
+- EVERY ROW WAS RUN AND EVERY ROW REFUSED. The build asserts it: a row labelled a refusal whose call succeeded would print success fields under a refusal heading, and no numeric sweep can see that.
+| route | the one bad input (stated) | the refusal |
+| --- | --- | --- |
+| selectOrifice | a required area of zero | required area must be a finite positive number |
+| selectOrifice | a required area past the largest standard orifice | required area 30 in2 exceeds a T orifice (26 in2): use multiple valves |
+| selectOrifice | a required area that is not a number | required area must be a finite positive number |
+| gasVaporArea | a relief load of zero | gas sizing needs positive flow, pressure, temperature, MW, z and k above 1 |
+| gasVaporArea | an isentropic exponent of one | gas sizing needs positive flow, pressure, temperature, MW, z and k above 1 |
+| gasVaporArea | a back pressure at the relieving pressure | back pressure meets or exceeds relieving pressure: the valve cannot flow |
+| gasVaporArea | a negative back pressure | back pressure must be a finite pressure, zero or more |
+| gasVaporArea | a certified discharge coefficient of zero | Kd must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
+| gasVaporArea | a certified discharge coefficient above one | Kd must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
+| gasVaporArea | a back-pressure correction above one | Kb must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
+| liquidArea | a rate of zero | liquid sizing needs a positive rate and specific gravity |
+| liquidArea | a negative viscosity | viscosity must be a finite number, zero or more |
+| liquidArea | a back pressure at the set pressure | no differential across the valve: back pressure meets set pressure |
+| liquidArea | a liquid back-pressure correction above one | Kw must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
+| steamArea | a flow of zero | steam sizing needs a positive flow and pressure |
+| steamArea | a superheat factor of zero | KSH must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
+| steamArea | a pressure past the published Napier range | Napier correction is only published to 3200 psia |
+| wettedAreaFt2 | a diameter of zero | vessel geometry must be positive |
+| wettedAreaFt2 | a missing liquid level | liquid level must be a finite number, zero or more |
+| wettedAreaFt2 | a negative liquid level | liquid level must be a finite number, zero or more |
+| wettedAreaFt2 | an orientation the engine does not recognise | orientation must be 'horizontal' or 'vertical' |
+| fireHeatInput | a wetted area of zero | fire case needs a positive wetted area |
+| fireHeatInput | a drainage answer given as a string | adequate drainage must be true or false, not a string |
+| fireHeatInput | an environment factor of zero | environment factor F must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
+| fireReliefLoad | a latent heat of zero | relief load needs a positive duty and latent heat |
+| dropoutVelocityFtS | a vapour denser than the liquid | settling needs a positive droplet size, vapor viscosity, and a liquid denser than the vapor |
+| dropoutVelocityFtS | a vapour viscosity of zero | settling needs a positive droplet size, vapor viscosity, and a liquid denser than the vapor |
+| koDrumHorizontal | a diameter of zero | drum sizing needs positive vapor rate, dropout velocity and diameter |
+| koDrumHorizontal | a liquid level fraction at one | liquid level fraction must be a number from 0 up to but not including 1 |
+| koDrumHorizontal | a negative liquid level fraction | liquid level fraction must be a number from 0 up to but not including 1 |
+| koDrumHorizontal | a liquid level fraction given as null | liquid level fraction must be a number from 0 up to but not including 1 |
+| radiationIntensity | a distance of zero | radiation needs a positive heat release and distance |
+| radiationIntensity | a radiated fraction above one | the radiated fraction must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
+| radiationIntensity | a transmissivity above one | transmissivity must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
+| distanceForIntensity | an allowable intensity of zero | distance solve needs a positive duty and allowable |
+| distanceForIntensity | a radiated fraction of zero | the radiated fraction must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
+| distanceForIntensity | a negative transmissivity | transmissivity must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
+| blowdown | an end pressure above the start pressure | blowdown needs positive geometry, a start above the end pressure, and gas properties |
+| blowdown | a negative discharge coefficient | the discharge coefficient must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
+| blowdown | a time step of zero | the time step must be a finite number above zero |
+| blowdown | a negative time step | the time step must be a finite number above zero |
+| blowdown | an orifice too small to finish inside the time limit | did not reach the end pressure inside the time limit: check the orifice size |
+
+- 42 refusals, across 12 of the module routes.
+- ONE RULE COVERS EVERY CERTIFIED COEFFICIENT: a certified coefficient is a fraction of an ideal, so it must be above zero and no more than one, and the refusal names the offender. That rule runs on Kd, Kb, Kc, Kw, KSH, the environment factor, the radiated fraction, the transmissivity and the blowdown discharge coefficient.
+- A DRAINAGE ANSWER MUST BE A REAL BOOLEAN. The string "false" is truthy in JavaScript, so a select element that sends a string would otherwise buy the drainage credit silently. The engine refuses it by name.
+- THE TIME STEP MUST BE ABOVE ZERO, and there is a step budget behind that. A march whose clock never advances can never reach its own time limit.
+
+# The soft states: calls that SUCCEED but attach a warning, which is a different thing from a refusal and is read differently.
+| route | condition (stated) | warning |
+| --- | --- | --- |
+| gasVaporArea | a back pressure above the ratio the chart warning fires at | back pressure exceeds 30 percent of relieving pressure: a balanced-bellows valve needs its chart Kb (API 520 Fig. 30), typed here |
+| gasVaporArea | a typed Kb in the subcritical branch | subcritical flow uses F2, not Kb; the typed Kb was ignored |
+| liquidArea | a viscosity far off the certified envelope | viscosity correction below 0.5: this service is far off the certified test envelope; consider a different device |
+| steamArea | a relieving pressure inside the band where the correction enlarges the valve | the Napier correction is below 1.0 between 1500 and 1580.3 psia, so it makes the required area LARGER here; it steps at 1500 psia and returns through 1.0 at 1580.3 psia |
+| fireReliefLoad | a latent heat below the near-critical edge | latent heat below 50 Btu/lb: near-critical fluid, the latent-heat method is breaking down (API 521 c.4.4) |
+| blowdown | an end pressure below the choked floor | the march assumes choked flow throughout, and it stops being choked below 26.8 psia against a 14.7 psia back pressure: the time below that is optimistic |
+
+# The notes: text the engine returns on a successful call to name a decision it has left to the caller.
+| route | note |
+| --- | --- |
+| fireHeatInput | wetted area counts only to 25 ft above grade (API 521); truncate the level before calling |
+| koDrumHorizontal, at the ODIDI drum | L/D below 2: a smaller drum may do |
+| koDrumHorizontal, at a 5 ft drum on the same duty | none: the engine left no note on this call |
+| koDrumHorizontal, at a 14 ft drum on the same duty | L/D below 2: a smaller drum may do |
+
+# SECTION 27: What is computed, what is typed, and what is never checked (owned by Expert m05 l01 and l03)
+
+# THE AUDIT. Three columns, and the third is the one that matters. A figure this engine COMPUTES is derived from a closed form it can state. A figure it TYPES is a published chart or table it takes as an input and names. A figure that is NEVER CHECKED is one the validation oracle cannot derive by any independent route, so nothing in this package would notice if it drifted.
+| quantity | computed, typed or held | what checks it |
+| --- | --- | --- |
+| the gas coefficient C, 520.000000000000 times the bracket | COMPUTED from k | the oracle derives the isentropic nozzle mass flux in absolute SI |
+| the critical pressure ratio | COMPUTED from k | the oracle finds it as the ARGMAX of that flux by golden-section search |
+| the subcritical leading constant 735.000000000000 and F2 | COMPUTED from k and the pressure ratio | the oracle integrates the subcritical nozzle flux from the isentropic expansion |
+| the liquid leading constant 38.000000000000 | COMPUTED | the oracle checks it against the published SI form |
+| the liquid Reynolds constant 2800.000000000000 | COMPUTED | the oracle derives it from rho u D over mu in SI |
+| the Kv fit coefficients | HELD FOR LITERATURE | NOTHING. An empirical fit no route in this package can derive. The oracle shares it on purpose and says so in its own header. What the published set CAN discriminate is engine-side drift, through its low-Reynolds row |
+| the Kv clamp at one | a stated CONVENTION of this engine | the suite pins it, and the unclamped fit is exported so the asymptote stays inspectable |
+| the steam leading constant 51.500000000000 | COMPUTED | the oracle checks it against the published SI form |
+| the Napier fit | COMPUTED from the pressure | the oracle checks it against the SI statement of Napier |
+| the Napier threshold 1500.000000000007 psia and the top of the range 3200.000000000003 psia | HELD FOR LITERATURE, published BOUNDARIES | nothing derives them. The suite pins both as behaviour |
+| the crossing back through unity, 1580.310880829016 psia | COMPUTED from the fit and EXPORTED | it falls out of the fit the oracle checks |
+| Kb for gas, Kw for liquid, KSH for steam | TYPED, published CHARTS and TABLES | nothing. They are inputs by design with their references named |
+| the API 526 table, 14 rows | TYPED, a published TABLE | nothing derives the areas. The suite checks the SELECTION BEHAVIOUR: the ladder, both boundaries and the refusal past the largest |
+| the pool fire constants 21000.000000000000 and 34500.000000000000, and the exponent 0.820000000000 | HELD FOR LITERATURE | the oracle checks the USC pair against the published SI pair with the exponent carried through the unit conversion, which checks the UNIT PACKAGING and not the pool-fire physics |
+| the 25 ft wetted-height limit | a stated LIMIT the caller applies | nothing. It depends on the plot elevation the engine is never told, and it arrives as a note |
+| the exact circular segment, both orientations | COMPUTED | the oracle sums a polyline round the real circle with Richardson extrapolation |
+| the terminal-velocity balance | COMPUTED | the oracle bisects on the force residual in SI, which recovers the coefficient the balance carries |
+| whether the standard prints 1.15 or the exact four thirds | HELD FOR LITERATURE | nothing. No copy of the standard is in this repository. The engine evaluates the BALANCE, which is the derivation both forms come from, and section 17 MEASURES the coefficient out of the returned pair rather than typing either form |
+| the sphere-drag correlation and its low-Reynolds cap | HELD FOR LITERATURE | NOTHING. An empirical fit, shared with the oracle on purpose |
+| the drum segment area and the length | COMPUTED | the oracle uses Simpson quadrature and a transit time against a fall time, in SI |
+| the solid angle 12.566370614359 in the point source | COMPUTED | the oracle finds the sphere area by quadrature and the inverse by bisection on that quadrature |
+| the radiated fraction and the transmissivity | TYPED inputs | nothing, and nothing should: they are project figures |
+| the four customary allowable intensities and their labels | HELD FOR LITERATURE | nothing. Customary values with wording this package wrote. A merged sibling course already teaches them |
+| the universal gas constant 1545.349000000000 | COMPUTED | the oracle uses the SI gas constant in its closed form |
+| a constant compressibility along the blowdown path, and choked flow throughout | stated MODEL DECISIONS | the oracle makes the same two deliberately, so the published set checks the march and not the thermodynamics. The engine names the pressure below which the choked half stops holding |
+| the heads ignored in the wetted area | a stated MODEL DECISION | nothing, and it is conservative for the shell term |
+
+# TWO INPUTS THAT CHANGE NOTHING, AND WHY EACH IS DIFFERENT.
+- Kb IN THE SUBCRITICAL BRANCH. Three different values give 2.658695041098, 2.658695041098, 2.658695041098 in2, one figure to twelve decimals. That is CORRECT: the standard uses F2 there and Kb has no place in it. The engine says so in a warning rather than leaving the reader to discover it.
+- KSH, BY CONTRAST, ALWAYS DIVIDES. 1.000000 gives 0.949984 in2 and 0.830000 gives 1.144559 in2, a ratio of 1.204819277108 against a factor ratio of 1.204819277108. An input that never moves an answer and an input that always does are read differently, and the first question to ask of any input is which kind it is.
+
+# THE INPUT THAT CHANGES NOTHING IS A CLASS OF DEFECT, AND THE TEST FOR IT IS ARITHMETIC. Take the input, walk it across its whole declared range at everything-else-fixed, and print the spread of the answer. The drum holdup sweep in section 18 is exactly that test, run on an input that does move its answer. Run it on any input and compare the spread with the precision the answer prints at.
+
+# SECTION 28: What the published cases can and cannot discriminate (owned by Expert m05 l02 and l05)
+
+# A published case is only worth what it can tell apart. A route whose validation oracle is an INDEPENDENT DERIVATION goes red when the engine moves, because two derivations disagree. A route whose oracle is a TRANSCRIPTION of the engine cannot, because there is only one derivation.
+| route | the oracle route | independent |
+| --- | --- | --- |
+| gas, critical | the isentropic nozzle mass flux from R, M, T and P in absolute SI | yes |
+| gas, subcritical | the subcritical nozzle flux integrated from the isentropic expansion | yes |
+| the critical ratio | the argmax of that flux over the throat ratio, by golden-section search | yes |
+| liquid area | the published SI form of the same equation | yes |
+| the liquid Reynolds relation | rho u D over mu in SI with D as sqrt(4A/pi) | yes |
+| the Kv fit | nothing: SHARED with the engine on purpose | NO, and it is named as held |
+| steam area | the published SI form and the SI statement of Napier | yes |
+| the fire duty | the published SI pair with the exponent carried through the unit conversion | the unit packaging only |
+| the relief load | every unit packaging, through kW and kg/s | yes |
+| wetted area, both orientations | polyline summation round the real circle with Richardson extrapolation | yes |
+| droplet settling | bisection on the force residual in SI | yes for the balance |
+| the drag correlation | nothing: SHARED with the engine on purpose | NO, and it is named as held |
+| the knockout drum | Simpson quadrature of the segment integral, and a transit time against a fall time, in SI | yes |
+| point-source radiation, both directions | the sphere area by quadrature, and the inverse by bisection on that quadrature | yes |
+| the blowdown march | the same march solved IN CLOSED FORM in SI | yes |
+
+# A PUBLISHED CASE CAN ALSO FAIL TO DISCRIMINATE ITS OWN CONSTANT, WHICH IS NOT THE SAME THING AS A MISSING CASE. The test is arithmetic: take the constant, move it by a realistic amount, and ask whether the answer moves by more than the tolerance the case is checked at.
+| what is being discriminated | where the published set places a case | the evidence on this page |
+| --- | --- | --- |
+| the inverse-three-halves term of the Kv fit | at a Reynolds number of 92.428866 | the term table in section 6, which prints what that term is worth as a fraction of the sum at each Reynolds number |
+| the Napier fit | at 2014.700000 and 3100.000000 and 1550.000000 psia | the sweep in section 8, which prints KN and the area together across the whole published range |
+| the blowdown march at its hardest geometry | at 500.000000 ft3 through 1.000000 in, 500.000000 ft3 through 2.000000 in, 2000.000000 ft3 through 1.500000 in, 5.000000 ft3 through 4.000000 in, 500.000000 ft3 through 38.000000 in | the table in section 23, which runs the small-vessel large-orifice cases and prints the substep count |
+| the drum holdup as an input that must move its answer | at 6 distinct holdups on one drum | the sweep in section 18, which prints the spread across the whole range |
+
+# THE TWO THINGS THIS PACKAGE CANNOT DISCRIMINATE, STATED PLAINLY. The Kv fit coefficients and the sphere-drag correlation are shared between the engine and its oracle on purpose, because no route here can derive either. Move one of them in both files and every published case still passes. That is the honest statement of the limit, and it is why nothing graded in this course rests on either of them.
+- The published set carries 49 rows across 11 blocks: blowdown 5, dropout 4, drum 6, fire 4, gas 5, liquid 5, load 3, radiation 3, setback 2, steam 5, wetted 7.
+
+# The published radiation and setback rows, re-run, because they are the two blocks no section above walks.
+| golden release kW | golden distance m | golden radiated fraction | golden transmissivity | published intensity kW/m2 | engine kW/m2 | relative difference |
+| --- | --- | --- | --- | --- | --- | --- |
+| 50000.0000 | 100.000000 | 0.300000 | 1.000000 | 0.119366 | 0.119366 | 5.116e-15 |
+| 50000.0000 | 100.000000 | 0.200000 | 0.800000 | 0.063662 | 0.063662 | 5.014e-15 |
+| 12000.0000 | 35.000000 | 0.250000 | 0.900000 | 0.175395 | 0.175395 | 5.064e-15 |
+
+| golden release kW | golden allowable kW/m2 | golden radiated fraction | golden transmissivity | published distance m | engine distance m | relative difference |
+| --- | --- | --- | --- | --- | --- | --- |
+| 12000.0000 | 6.310000 | 0.250000 | 0.900000 | 5.835288 | 5.835288 | 2.588e-15 |
+| 50000.0000 | 1.580000 | 0.300000 | 1.000000 | 27.486039 | 27.486039 | 2.585e-15 |
+
+# SECTION 29: WHAT THIS ENGINE USED TO DO. THIS SECTION IS REPAIR HISTORY, and nothing follows it (owned by Expert m06)
+
+# THIS SECTION, AND ONLY THIS SECTION, DESCRIBES BEHAVIOUR THIS ENGINE NO LONGER HAS. Every sentence above this line is about the engine as it ships today. Every sentence below is about what it did before the repair that preceded this course, and each item is a GENERAL LESSON that happens to have an example here. A sentence about former behaviour that reads as current behaviour is a defect, and the frame for this material is this heading and this paragraph.
+
+- THE ENGINE SOURCE CARRIES THIS HISTORY IN ITS COMMENTS, and a sentence lifted out of a comment arrives with no frame around it. Counted by reading engines/facilities/relief.js: 12 comment lines carry the repair marker, and 16 comment lines are written in a past tense about former behaviour. The rule that counted them: a line that begins with a comment marker and contains one of "used to", "previous version", "before", "no longer", "turned" or "silently".
+- The module is 619 lines of text long, counting a line as a run ending in a newline the way wc -l does, so roughly one line in 39 of it is a sentence about what it used to do. Engine source comments are PROVENANCE. So are the wave RECON.md and FINDINGS.md, and so is the repair own findings record vendored beside the oracle. None of the four is teaching truth.
+
+# ITEM ONE. AN OUTPUT THAT READ AS REASSURANCE.
+- The general lesson: the worst failure of a calculation is not a wrong number, it is a wrong number shaped like the answer somebody wanted. A depressuring study is run to ask whether a vessel is down inside the customary time, and the failure answered yes.
+- Before the repair, when the first step of the blowdown march would have removed more mass than the vessel held, the loop broke with the clock still at zero, the time limit test was therefore false, and the function returned a time of zero seconds with the vessel still at its start pressure and NO error key. Every caller guard passed and the screen printed a depressuring time of zero minutes under a hint saying that was inside the customary fifteen.
+- Today the same geometries march properly, because no step may remove more than a twentieth of the inventory. The three cases in section 23 are exactly those geometries and every one reaches its end pressure with a time above zero.
+
+# ITEM TWO. AN INPUT THAT COULD NOT MOVE THE ANSWER PRINTED BESIDE IT.
+- The general lesson: two factors that cancel algebraically leave a box on a screen that a user will turn, watching nothing happen, and conclude the quantity does not matter. The test is arithmetic and takes one sweep: walk the input across its whole range and print the spread of the answer.
+- Before the repair the drum used the same factor for the vapour cross-section and for the fall distance, and the two cancelled exactly, so the holdup box moved the required length by less than a millionth of a millionth of a foot across its entire range while the vapour velocity printed on the same row moved by a factor of ten. The input was also ambiguous, used once as an area fraction and once as a depth fraction.
+- Today the input is the liquid LEVEL as a fraction of the diameter, which is what a level instrument reads, the vapour cross-section is the exact circular segment above it, and the engine returns the depth, the area fraction, the vapour area and the fall distance so the convention is visible. The sweep in section 18 is the same test, run on the repaired engine.
+
+# ITEM THREE. A CONSTANT HIDDEN INSIDE A FUNCTION THAT ALREADY TOOK IT AS AN INPUT.
+- The general lesson: a number applied twice is invisible on the answer and visible only in a ratio. The way to find one is to rebuild the quantity from first principles and divide.
+- Before the repair the blowdown mass flow multiplied the caller discharge coefficient by a second, hard-coded coefficient of its own, so a typed value ran about two and a half percent low and the time came out that much long, with the fifteen-minute verdict read off it.
+- Today the closed-form comparison in section 21 is what would catch it: the marched time against the exact integral of the same balance, and the ratio column reads one.
+
+# ITEM FOUR. A GATE THAT COULD NOT FAIL.
+- The general lesson: a validation case is only worth what it can tell apart, and there are two separate ways it can be worth nothing. It can be MISSING, so a route has no case at all. Or it can be PRESENT AND UNABLE TO DISCRIMINATE, sitting where the constant it is supposed to check is worth less than the tolerance it is checked at.
+- Before the repair, twenty defects planted one at a time in the engine left the published suite entirely green in seven cases, including an inverted division inside the drum own length equation. Three whole routes had no published case and no oracle route at all, and five oracle routes were transcriptions of the engine rather than independent derivations, proved by planting the same defect in both files and regenerating the published set.
+- Today the published set carries 11 blocks and the suite is materially larger, the five transcriptions are independent derivations, and the two routes nothing can discriminate are NAMED in section 28 rather than left to be discovered. Section 27 and section 28 are the standing form of that lesson, about the engine as it is now.
+
+# NOTHING FOLLOWS THIS SECTION.
