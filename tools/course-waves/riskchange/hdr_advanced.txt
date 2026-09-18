@@ -1,0 +1,26 @@
+-- ============================================================================
+-- riskchange EXPERT DEEP SEED: Risk, Change & Learning, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: REVIEW AND LEARNING: CLOSURE, INDEPENDENCE AND PROOF OF
+-- USE. The comment disposition loop; the two blocking severities and a review
+-- that cannot close; a lesson's three parts and the author who may not
+-- validate it (AS15 Q10); the reuse record that counts rather than claims;
+-- embedding as earned; lesson review dates; the held items and the owner
+-- decisions; and one loop from a lesson into a risk and a change.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A lesson is learned when an application
+-- proves it changed something, and a rejection is a real record that applies
+-- nothing. A review closes when nothing blocking is unresolved, and Responded
+-- and Rejected are both unresolved.
+--
+-- HELD, taught as a limit and never graded: peer review holds no independence
+-- rule in any layer, and its summary counts comments on finished reviews
+-- (RECON RC-4). ETIM grades one review's own log.
+--
+-- FRAMED HISTORY: digest SECTION 20 is the only history and Expert m05 l03
+-- owns it.
+-- ============================================================================

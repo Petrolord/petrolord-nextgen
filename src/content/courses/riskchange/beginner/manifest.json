@@ -1,0 +1,303 @@
+{
+  "app_slug": "riskchange",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-these-engines-decide",
+      "title": "What These Engines Decide",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-four-registers-and-a-rule-for-each",
+          "title": "Four registers and a rule for each",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-one-as-of-date-for-every-status",
+          "title": "One as-of date for every status",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-every-verdict-answers-the-same-way",
+          "title": "Every verdict answers the same way",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-engines-leave-to-people",
+          "title": "What the engines leave to people",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-matrix-and-its-bands",
+      "title": "The Matrix and Its Bands",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-five-levels-on-two-axes",
+          "title": "Five levels on two axes",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-twenty-five-cells-and-one-product",
+          "title": "Twenty-five cells and one product",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-four-bands-and-their-lower-edges",
+          "title": "Four bands and their lower edges",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-scores-the-grid-cannot-hold",
+          "title": "Scores the grid cannot hold",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-values-off-the-scale",
+          "title": "Values off the scale",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-residual-and-appetite",
+      "title": "Residual and Appetite",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-inherent-and-residual",
+          "title": "Inherent and residual",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-falling-back-one-axis-at-a-time",
+          "title": "Falling back one axis at a time",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-blank-and-an-off-scale-level",
+          "title": "A blank and an off-scale level",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-target-and-three-answers",
+          "title": "A target and three answers",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-when-there-is-no-answer",
+          "title": "When there is no answer",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-calendar-date",
+      "title": "The Calendar Date",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-whole-days-between-two-dates",
+          "title": "Whole days between two dates",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-due-today-is-not-overdue",
+          "title": "Due today is not overdue",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-date-that-does-not-exist",
+          "title": "A date that does not exist",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-one-as-of-date-in-every-time-zone",
+          "title": "One as-of date in every time zone",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-register-as-a-whole",
+      "title": "The Register as a Whole",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-live-and-not-live",
+          "title": "Live and not live",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-one-row-derived-once",
+          "title": "One row derived once",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-counting-by-band",
+          "title": "Counting by band",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-four-populations-of-one-register",
+          "title": "Four populations of one register",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-each-heatmap-plots",
+          "title": "What each heatmap plots",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-obodo-register-end-to-end",
+          "title": "The OBODO register end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-capstone-worked",
+          "title": "The capstone worked",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rc-risk-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

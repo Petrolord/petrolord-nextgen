@@ -1,0 +1,28 @@
+-- ============================================================================
+-- riskchange ASSOCIATE DEEP SEED: Risk, Change & Learning, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: RISK: THE SCORE, THE BAND, THE RESIDUAL AND THE DATE.
+-- Five whole levels on two axes and a score that is their product; four bands
+-- found by their lower edges; the residual falling back to the inherent level
+-- one axis at a time; appetite against a target with a third answer that
+-- declines; whole days between calendar dates; and a register counted by band
+-- over a population the caller chooses. It ends on the OBODO register.
+--
+-- THE ENGINE FACT THIS TIER OWNS. Every status here is a rule over a record and
+-- an as-of date. The engines default that date to the machine clock; this
+-- course hands them 2026-10-01 on every call, and every dated status it quotes
+-- is true on that date.
+--
+-- THE TRAP THE TIER IS BUILT ON. A blank residual axis falls back to the
+-- inherent level on that axis alone, while an off-scale level leaves the
+-- residual unscored; and the same register gives different band counts for
+-- every population and score a caller picks. The capstone grades both.
+--
+-- HELD, taught as a limit and never graded: isReviewOverdue reads the date and
+-- not the risk's status (RECON RC-2); a band is found by its lower edge alone.
+-- IGBARA's two day counts are daysUntil on live risks' review dates.
+-- ============================================================================
