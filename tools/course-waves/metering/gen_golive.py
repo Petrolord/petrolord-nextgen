@@ -471,13 +471,19 @@ A(f'''
 
 
   -- ------------------------------------------- the held and withheld gates
+  -- A FRAGMENT IS MATCHED AS A LITERAL SUBSTRING WITH strpos, NEVER WITH LIKE.
+  -- In LIKE an underscore is a one-character wildcard, so the fragment vent_scfh
+  -- would also match a key with any other character in that place. The
+  -- generator's own Python guard tests a literal substring, and strpos is
+  -- the same test. FC5's dry run caught the LIKE form refusing a field that
+  -- names no held quantity (its kw_ against a kwm).
   -- ON THE NAME. A graded field that NAMES a held, uncited or withheld path is
   -- refused before anything is computed from it.
   select count(*), string_agg(c.tier || '/' || (f->>'key'), ', ')
     into v_graded, v_names
     from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f,
          unnest(array[{', '.join("'" + x + "'" for x in FORBIDDEN_KEY_FRAGMENTS)}]) frag
-   where c.app_slug = '{SLUG}' and (f->>'key') like '%' || frag || '%';
+   where c.app_slug = '{SLUG}' and strpos(f->>'key', frag) > 0;
   if v_graded <> 0 then
     raise exception 'FC8 go-live refused: % graded field(s) name a held or withheld path: %', v_graded, v_names;
   end if;
@@ -486,7 +492,7 @@ A(f'''
     into v_graded, v_names
     from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f,
          unnest(array[{', '.join("'" + x + "'" for x in FORBIDDEN_LABEL_FRAGMENTS)}]) frag
-   where c.app_slug = '{SLUG}' and lower(f->>'label') like '%' || frag || '%';
+   where c.app_slug = '{SLUG}' and strpos(lower(f->>'label'), frag) > 0;
   if v_graded <> 0 then
     raise exception 'FC8 go-live refused: % graded field label(s) name a held or withheld path: %', v_graded, v_names;
   end if;

@@ -195,11 +195,17 @@ begin
 
 
   -- ------------------------------------------- the held-for-literature gates
+  -- A FRAGMENT IS MATCHED AS A LITERAL SUBSTRING WITH strpos, NEVER WITH LIKE.
+  -- In LIKE an underscore is a one-character wildcard, so the fragment grain_exponent
+  -- would also match a key with any other character in that place. The
+  -- generator's own Python guard tests a literal substring, and strpos is
+  -- the same test. FC5's dry run caught the LIKE form refusing a field that
+  -- names no held quantity (its kw_ against a kwm).
   select count(*), string_agg(c.tier || '/' || (f->>'key'), ', ')
     into v_graded, v_names
     from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f,
          unnest(array['flotation_cut', 'attachment', 'floor', 'dissolved', 'spec', 'margin', 'meets', 'verdict', 'grain_exponent', 'velocity_rule']) frag
-   where c.app_slug = 'producedwater' and (f->>'key') like '%' || frag || '%';
+   where c.app_slug = 'producedwater' and strpos(f->>'key', frag) > 0;
   if v_graded <> 0 then
     raise exception 'FC7 go-live refused: % graded field(s) name a quantity held for the literature: %', v_graded, v_names;
   end if;
@@ -208,7 +214,7 @@ begin
     into v_graded, v_names
     from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f,
          unnest(array['flotation cut', 'attachment', 'dissolved oil floor', 'discharge', 'specification', 'margin', 'verdict', 'grain size exponent', 'velocity rule']) frag
-   where c.app_slug = 'producedwater' and lower(f->>'label') like '%' || frag || '%';
+   where c.app_slug = 'producedwater' and strpos(lower(f->>'label'), frag) > 0;
   if v_graded <> 0 then
     raise exception 'FC7 go-live refused: % graded field label(s) name a quantity held for the literature: %', v_graded, v_names;
   end if;

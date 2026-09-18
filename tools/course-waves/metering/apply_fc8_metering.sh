@@ -86,7 +86,7 @@ digest_for() {
     20260925_fc8_metering_beginner_deep         ) echo 9c54b2a042c00608ea754b8aaccc26b9ac54b611202466d7841e74982deef9ef ;;
     20260925_fc8_metering_intermediate_deep     ) echo d9f0ac3261a83c256c8418d201bc0b129b3b48110d653541d0d1c2c52a132e6b ;;
     20260925_fc8_metering_advanced_deep         ) echo a422f18b94481deac605f783323a7a4b22ed153c4a2917aad66dac01c1a074cf ;;
-    20260925_fc8_metering_go_live               ) echo 37e2d912667038461fec84bde8ca94ab1b3ddcb6f1b64113512dba5707ba50a3 ;;
+    20260925_fc8_metering_go_live               ) echo 166207f4a608e8574b3853f4b6be8f9da7a06c126b8e2106bb46da236be8ccf8 ;;
     *) echo UNPINNED ;;
   esac
 }
