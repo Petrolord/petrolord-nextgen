@@ -2,7 +2,7 @@
   "$comment": "Vendoring contract for packages/engines. Checked by tools/check-vendored-engines.mjs; see that file for the model. Every deviation from canonical is enumerated below with a reason, and every differing or extra path is pinned to the blob currently vendored, so a second drift on an already-known path still fails.",
   "canonical": {
     "repo": "git@github.com:Petrolord/petrolord-engines.git",
-    "commit": "709172f162e1063fb9958204ced726dbf66010fc",
+    "commit": "675962130ed23df405074a9ab34f8e0235ddbcd9",
     "manifest": "VENDOR.manifest"
   },
   "floors": {
@@ -25,6 +25,11 @@
       "domain": "stratigraphy",
       "engineFiles": 10,
       "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
+    },
+    {
+      "domain": "assurance",
+      "engineFiles": 10,
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     }
   ],
   "localOnly": [
@@ -505,256 +510,322 @@
       "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
     },
     {
-      "path": "__tests__/facilities.compression.test.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "fbbf68ed7522d1dc140d5c87aa562a6d2090eb92"
+      "path": "__tests__/assurance.audit.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "__tests__/facilities.controlvalve.test.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "d56048381b340d59b5016a4478c8f79dade0e5af"
+      "path": "__tests__/assurance.compliance.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "__tests__/facilities.heattransfer.test.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC6 Heat Exchange & Cooling vendors the heat transfer family from engines main AFTER the FC6-0 repair merged (engines PR #202, merge e4377b3), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at e4377b3, proved path by path over the WALKED IMPORT CLOSURE (five paths, three edges, and heatTransfer.js imports nothing at all) and byte-compared against the Suite's own vendoring of the same repair (Suite PR #499, merge 8a371c94, vendor pin e4377b3e), so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC6 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "e11c582b75abc42a1bbb1653a8cfb715d2616302"
+      "path": "__tests__/assurance.copy.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "__tests__/facilities.linehydraulics.test.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC2 Pipeline & Line Sizing vendors the line-hydraulics family from engines main AFTER the FC2-0 repairs merged (engines PR #196, merge da9693b), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
-      "vendoredSha": "49614dba71b4edddc3158953e41c8439e28fd570"
+      "path": "__tests__/assurance.documents.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "__tests__/facilities.producedwater.test.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-1 repair merged (engines PR #206, merge 9874d583), which is ahead of the canonical pin at 709172f. FC7-1 followed FC7-0 (#201) and repaired the three defects the FC7 course foundation found in it: a bed area that moved nothing below 1 m/hr, the one device threshold nobody had declared, and a silent way back to the quantised median. The vendored blob is sha-identical with engines origin/main at 9874d583, proved path by path over the WALKED import closure, which was re-walked at the new commit rather than assumed and is still five paths and three edges, and proved three independent ways: git blob hash, md5, and sha256 plus cmp over a fresh git-archive extraction. The Suite comparison used at FC7-0 is NOT available here, because the Suite's packages/engines is still pinned at FC9-0 (engines d4c19ad, an ancestor of 9874d583) and has not vendored FC7-1 yet. So this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
-      "vendoredSha": "d97f186d5da65c128f6d335d3971c0e4bb20254f"
+      "path": "__tests__/assurance.goldens.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "__tests__/facilities.pumps.test.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "183c9e4a10796bb794ae84c5d1153ab8bac70a73"
+      "path": "__tests__/assurance.instants.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "__tests__/facilities.relief.test.js",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "reason": "Vendored at engines 3bac13cd, the FC5-0 relief-and-flare repair, which is AHEAD of the pinned canonical 709172f. The repair stopped `blowdown` returning a depressuring time of ZERO with no error key and the vessel still at its start pressure, removed a hidden 0.975 on the caller's discharge coefficient, gave the knockout drum a holdup input that can move its own answer (the two (1-f) factors cancelled exactly), validated every certified coefficient, and replaced five oracle transcriptions with independent derivations. The FC5 Relief and Flare Systems course grades against THIS revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails.",
-      "vendoredSha": "5d2adbf1e3f76807a44cffd00802cd04c8023cb3"
+      "path": "__tests__/assurance.iso.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "__tests__/facilities.tanksmetering.test.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "5cb08b488d0c48e21f438a5c2a6627cf0949c30c"
+      "path": "__tests__/assurance.lessons.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "__tests__/production.choke.test.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "The erosional limit the FC2 course grades lives here, and FC2-0 (engines PR #196) repaired it. Vendored from engines main after that merge, ahead of the canonical pin at 709172f, and sha-identical with engines origin/main. It clears when canonical is next advanced.",
-      "vendoredSha": "58a0f6c7a6095cefb8e4dc5731698777a39cc32a"
+      "path": "__tests__/assurance.moc.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "engines/facilities/compression.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "776f654f8561c0337bf7ca0e653e1a280bb5ba14"
+      "path": "__tests__/assurance.peerReview.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "engines/facilities/controlValve.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "840f5fe1854afc4899d0e1d8aa4135fe5624204d"
+      "path": "__tests__/assurance.quality.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "engines/facilities/heatTransfer.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC6 Heat Exchange & Cooling vendors the heat transfer family from engines main AFTER the FC6-0 repair merged (engines PR #202, merge e4377b3), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at e4377b3, proved path by path over the WALKED IMPORT CLOSURE (five paths, three edges, and heatTransfer.js imports nothing at all) and byte-compared against the Suite's own vendoring of the same repair (Suite PR #499, merge 8a371c94, vendor pin e4377b3e), so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC6 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "64c58416e4e0a5d134eabbc88affd6584b63350b"
+      "path": "__tests__/assurance.risk.test.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "engines/facilities/lineHydraulics.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC2 Pipeline & Line Sizing vendors the line-hydraulics family from engines main AFTER the FC2-0 repairs merged (engines PR #196, merge da9693b), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
-      "vendoredSha": "b4e2c70ce978fe1c6865a5295832b291132e0fa6"
+      "path": "__tests__/helpers/assuranceGoldens.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "engines/facilities/metering.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "dd01f3b194061e41fef29e6a3e3ffb2b067dbd6a"
+      "path": "engines/assurance/auditManagement.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "engines/facilities/producedWater.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-1 repair merged (engines PR #206, merge 9874d583), which is ahead of the canonical pin at 709172f. FC7-1 followed FC7-0 (#201) and repaired the three defects the FC7 course foundation found in it: a bed area that moved nothing below 1 m/hr, the one device threshold nobody had declared, and a silent way back to the quantised median. The vendored blob is sha-identical with engines origin/main at 9874d583, proved path by path over the WALKED import closure, which was re-walked at the new commit rather than assumed and is still five paths and three edges, and proved three independent ways: git blob hash, md5, and sha256 plus cmp over a fresh git-archive extraction. The Suite comparison used at FC7-0 is NOT available here, because the Suite's packages/engines is still pinned at FC9-0 (engines d4c19ad, an ancestor of 9874d583) and has not vendored FC7-1 yet. So this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
-      "vendoredSha": "bb18c78f9f6bcefc05302295f4eedb0c80d291e7"
+      "path": "engines/assurance/calendar.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "engines/facilities/pumps.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "c3651e2ba41bc98d234f2f341662b3046f811990"
+      "path": "engines/assurance/complianceStatus.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "engines/facilities/relief.js",
-      "kind": "differing",
-      "group": "5-unaudited-difference",
-      "reason": "Vendored at engines 3bac13cd, the FC5-0 relief-and-flare repair, which is AHEAD of the pinned canonical 709172f. The repair stopped `blowdown` returning a depressuring time of ZERO with no error key and the vessel still at its start pressure, removed a hidden 0.975 on the caller's discharge coefficient, gave the knockout drum a holdup input that can move its own answer (the two (1-f) factors cancelled exactly), validated every certified coefficient, and replaced five oracle transcriptions with independent derivations. The FC5 Relief and Flare Systems course grades against THIS revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails.",
-      "vendoredSha": "e4262c7fa98313e46c41407306c4b9b8015ecf3f"
+      "path": "engines/assurance/documentControl.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "engines/facilities/storageTank.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "04483891a8985fa0c7b494bb5b08ea22aea7ccfd"
+      "path": "engines/assurance/isoCompliance.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "engines/production/chokePerformance.js",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "The erosional limit the FC2 course grades lives here, and FC2-0 (engines PR #196) repaired it. Vendored from engines main after that merge, ahead of the canonical pin at 709172f, and sha-identical with engines origin/main. It clears when canonical is next advanced.",
-      "vendoredSha": "0925af553382ff09c11b12109deb97b8f9704e67"
+      "path": "engines/assurance/lessonsLearned.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "lib/units/fieldUnits.js",
-      "kind": "extra",
-      "group": "0-partial-domain-facilities",
-      "reason": "Pulled by the FC2-0 vendor (NextGen 27de8d90) because the repaired lineHydraulics.js and chokePerformance.js import their barrel and their field constants from it rather than keeping private roundings. It did not exist at the canonical pin 709172f, so it reads as extra. FC3 now carries the engines-main power and energy block on it too (J_PER_FT_LBF, FT_LBF_PER_MIN_PER_HP, W_PER_HP, KW_PER_HP, J_PER_BTU, BTU_PER_HP_HR), which pumps.js and compression.js import instead of the roundings 0.7457 and 2544.43 that FC3-0 removed. The blob is engines main at 4fa37e6, and the two reconcile when canonical is next advanced.",
-      "vendoredSha": "d2f96efc8d4f16d1c07a09c1e387f13d114ad682"
+      "path": "engines/assurance/managementOfChange.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "test-data/facilities/goldens/compression_cases.json",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "42c28da29567f3022527f1a5712d5b3e65eebf12"
+      "path": "engines/assurance/peerReview.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "test-data/facilities/goldens/controlvalve_cases.json",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "731eb1a2b89ecbae61aa1ff10a526bb2f2f69f9d"
+      "path": "engines/assurance/qualityAssurance.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "test-data/facilities/goldens/heattransfer_cases.json",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC6 Heat Exchange & Cooling vendors the heat transfer family from engines main AFTER the FC6-0 repair merged (engines PR #202, merge e4377b3), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at e4377b3, proved path by path over the WALKED IMPORT CLOSURE (five paths, three edges, and heatTransfer.js imports nothing at all) and byte-compared against the Suite's own vendoring of the same repair (Suite PR #499, merge 8a371c94, vendor pin e4377b3e), so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC6 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "60a372af6b2fa644d885f6ce9214787361618120"
+      "path": "engines/assurance/riskScoring.js",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "test-data/facilities/goldens/linehydraulics_cases.json",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC2 Pipeline & Line Sizing vendors the line-hydraulics family from engines main AFTER the FC2-0 repairs merged (engines PR #196, merge da9693b), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
-      "vendoredSha": "43c71b0b8527de15a2b496eb0e5f50fac93261e2"
+      "path": "test-data/assurance/goldens/auditManagement_cases.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "test-data/facilities/goldens/producedwater_cases.json",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-1 repair merged (engines PR #206, merge 9874d583), which is ahead of the canonical pin at 709172f. FC7-1 followed FC7-0 (#201) and repaired the three defects the FC7 course foundation found in it: a bed area that moved nothing below 1 m/hr, the one device threshold nobody had declared, and a silent way back to the quantised median. The vendored blob is sha-identical with engines origin/main at 9874d583, proved path by path over the WALKED import closure, which was re-walked at the new commit rather than assumed and is still five paths and three edges, and proved three independent ways: git blob hash, md5, and sha256 plus cmp over a fresh git-archive extraction. The Suite comparison used at FC7-0 is NOT available here, because the Suite's packages/engines is still pinned at FC9-0 (engines d4c19ad, an ancestor of 9874d583) and has not vendored FC7-1 yet. So this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
-      "vendoredSha": "7df7ee90c17f99869ef30457bdeb7fb99f484789"
+      "path": "test-data/assurance/goldens/calendar_cases.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "test-data/facilities/goldens/relief_cases.json",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "reason": "Vendored at engines 3bac13cd, the FC5-0 relief-and-flare repair, which is AHEAD of the pinned canonical 709172f. The repair stopped `blowdown` returning a depressuring time of ZERO with no error key and the vessel still at its start pressure, removed a hidden 0.975 on the caller's discharge coefficient, gave the knockout drum a holdup input that can move its own answer (the two (1-f) factors cancelled exactly), validated every certified coefficient, and replaced five oracle transcriptions with independent derivations. The FC5 Relief and Flare Systems course grades against THIS revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails.",
-      "vendoredSha": "1b19c8a721b5b3c7f029d6e3d16c6d01a49a18e6"
+      "path": "test-data/assurance/goldens/complianceStatus_cases.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "test-data/facilities/goldens/tanksmetering_cases.json",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "477be94911688c5a53190348c4e17f64be2620fd"
+      "path": "test-data/assurance/goldens/documentControl_cases.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "tools/validation/facilities/FINDINGS-rotating.md",
-      "kind": "extra",
-      "group": "0-partial-domain-facilities",
-      "reason": "The FC3-0 rotating wave's own findings file, written by engines PR #197 and absent from the canonical pin 709172f, so it reads as extra. It is vendored with the pumps and compression family it documents, for the same reason FINDINGS-separation.md is vendored with the separator family. It clears when canonical is next advanced.",
-      "vendoredSha": "eefa0fb4c4b766ed4d167d0aafea0f1fe030d706"
+      "path": "test-data/assurance/goldens/isoCompliance_cases.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "tools/validation/facilities/oracle_compression.py",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC3 Rotating Equipment vendors the pumps and compression family from engines main AFTER the FC3-0 repairs merged (engines PR #197, merge 4fa37e6), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at 4fa37e6, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC3 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "10fe384cf62c1efad9953b3e64ad3ec3a29d6ea3"
+      "path": "test-data/assurance/goldens/lessonsLearned_cases.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "tools/validation/facilities/oracle_controlvalve.py",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "41deb10defb69f1887bedbd555efc3bf911231ea"
+      "path": "test-data/assurance/goldens/managementOfChange_cases.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "tools/validation/facilities/oracle_heattransfer.py",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC6 Heat Exchange & Cooling vendors the heat transfer family from engines main AFTER the FC6-0 repair merged (engines PR #202, merge e4377b3), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main at e4377b3, proved path by path over the WALKED IMPORT CLOSURE (five paths, three edges, and heatTransfer.js imports nothing at all) and byte-compared against the Suite's own vendoring of the same repair (Suite PR #499, merge 8a371c94, vendor pin e4377b3e), so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced. Before FC6 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "7b46f5ca279378ee3fdf2b81c43c8c4329ff1e06"
+      "path": "test-data/assurance/goldens/peerReview_cases.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "tools/validation/facilities/FINDINGS-heattransfer.md",
-      "kind": "extra",
-      "group": "0-partial-domain-facilities",
-      "reason": "The FC6-0 heat transfer wave's own findings record, written by engines PR #202 and absent from the canonical pin 709172f, so it reads as extra. It is vendored with the heat transfer family it documents, for the same reason FINDINGS-rotating.md is vendored with the pumps and compression family and FINDINGS-producedwater.md with the produced water one: a module vendored without the record of what its repair decided and what it held is vendored half. It clears when canonical is next advanced.",
-      "vendoredSha": "230b30c7c7de5fc07ccf762e10a5110a676b9901"
+      "path": "test-data/assurance/goldens/qualityAssurance_cases.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "tools/validation/facilities/oracle_linehydraulics.py",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC2 Pipeline & Line Sizing vendors the line-hydraulics family from engines main AFTER the FC2-0 repairs merged (engines PR #196, merge da9693b), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines origin/main, so this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
-      "vendoredSha": "953d13d1c2f34ce94909070dab94e815c267e81b"
+      "path": "test-data/assurance/goldens/riskScoring_cases.json",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "tools/validation/facilities/oracle_producedwater.py",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC7 Produced Water Treatment vendors the produced water family from engines main AFTER the FC7-1 repair merged (engines PR #206, merge 9874d583), which is ahead of the canonical pin at 709172f. FC7-1 followed FC7-0 (#201) and repaired the three defects the FC7 course foundation found in it: a bed area that moved nothing below 1 m/hr, the one device threshold nobody had declared, and a silent way back to the quantised median. The vendored blob is sha-identical with engines origin/main at 9874d583, proved path by path over the WALKED import closure, which was re-walked at the new commit rather than assumed and is still five paths and three edges, and proved three independent ways: git blob hash, md5, and sha256 plus cmp over a fresh git-archive extraction. The Suite comparison used at FC7-0 is NOT available here, because the Suite's packages/engines is still pinned at FC9-0 (engines d4c19ad, an ancestor of 9874d583) and has not vendored FC7-1 yet. So this is a pin that has not caught up rather than a local edit. It clears when canonical is next advanced.",
-      "vendoredSha": "a62407100785677cbf823185dc2882e1b1844ef0"
+      "path": "tools/validation/assurance/FINDINGS-audit.md",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "tools/validation/facilities/oracle_relief.py",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "reason": "Vendored at engines 3bac13cd, the FC5-0 relief-and-flare repair, which is AHEAD of the pinned canonical 709172f. The repair stopped `blowdown` returning a depressuring time of ZERO with no error key and the vessel still at its start pressure, removed a hidden 0.975 on the caller's discharge coefficient, gave the knockout drum a holdup input that can move its own answer (the two (1-f) factors cancelled exactly), validated every certified coefficient, and replaced five oracle transcriptions with independent derivations. The FC5 Relief and Flare Systems course grades against THIS revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails.",
-      "vendoredSha": "7520155bb4a93964cd9415dc5e3acb9bcf323b14"
+      "path": "tools/validation/assurance/FINDINGS-calendar.md",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
-      "path": "tools/validation/facilities/oracle_tanksmetering.py",
-      "kind": "differing",
-      "group": "0-partial-domain-facilities",
-      "reason": "FC8 Metering, Control Valves & Storage vendors the metering, control valve and storage tank family from engines main AFTER the FC8-0 repair merged (engines PR #204, merge 1cc597c, with its harness gate PR #205 at 55431d7), which is ahead of the canonical pin at 709172f. The vendored blob is sha-identical with engines 55431d7, with engines MAIN AT 9874d5834de552a08ed7aa16e0fcd12438fefdb1 (checked path by path, and the ten FC8 paths are byte-identical at the two commits because the only commit between them, FC7-1 #206, touches the produced water family alone), and with the Suite's own subtree vendoring of the same commit at e63ed83bc, which is a third route to the same bytes. So this is a pin that has not caught up rather than a local edit. The walked import closure of this family is ten paths and seven edges, recorded in the wave's vendor/closure.json. It clears when canonical is next advanced. Before FC8 this path was ledgered as \"missing\", which was true of the whole facilities domain until a course needed it.",
-      "vendoredSha": "3b37dbbf3365fad58a9043a6e24e76aafefb33f8"
+      "path": "tools/validation/assurance/FINDINGS-compliance.md",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/FINDINGS-documents.md",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/FINDINGS-iso.md",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/FINDINGS-lessons.md",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/FINDINGS-moc.md",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/FINDINGS-peer-review.md",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/FINDINGS-quality.md",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/FINDINGS-risk.md",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/oracle_audit.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/oracle_calendar.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/oracle_compliance.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/oracle_documents.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/oracle_iso.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/oracle_lessons.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/oracle_moc.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/oracle_peer_review.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/oracle_quality.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
+    },
+    {
+      "path": "tools/validation/assurance/oracle_risk.py",
+      "kind": "missing",
+      "group": "0-out-of-scope-domain",
+      "reason": "NextGen teaches no Assurance course and ships no Assurance panel; the two Assurance courses are deferred behind the Suite's AS rebuild, so the whole domain is deliberately not vendored (audit Group 0). It entered canonical between 709172f and 6759621 (AS12 onward)."
     },
     {
       "path": "__tests__/earthmodel.adjust.test.js",
@@ -1446,20 +1517,6 @@
       "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
     },
     {
-      "path": "engines/facilities/gasProcessing.js",
-      "kind": "differing",
-      "group": "5-unaudited-difference",
-      "vendoredSha": "f11acae5601d194e2eca63bc8173ad352653d4a4",
-      "reason": "Vendored at engines 82ec6d4, the FC4-0 repair, which is AHEAD of the pinned canonical 709172f. It corrects a Joule-Thomson coefficient that was wrong by a factor of 1/z on four screens of the live Suite studio, narrows the water fit's band to its own docstring, makes the lean glycol strength drive the loop water balance, and puts kremserFractionRemoved inside the module's own error contract. FC4's digest and capstone are built from THIS revision, so it moves only with a recut of that course."
-    },
-    {
-      "path": "engines/facilities/separatorSizing.js",
-      "kind": "differing",
-      "group": "5-unaudited-difference",
-      "vendoredSha": "5dacfaa6402e940bfa6a02f9465e32458a7ecf56",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
-    },
-    {
       "path": "engines/mapping/surface.js",
       "kind": "differing",
       "group": "5-unaudited-difference",
@@ -1521,13 +1578,6 @@
       "group": "5-unaudited-difference",
       "vendoredSha": "a7ada422163167a2fae84c6cf1a1ab1250201463",
       "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
-    },
-    {
-      "path": "__tests__/dca.montecarlo.test.js",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "a3e06588927a3950418d631f509fb9f00e882e5d",
-      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
     },
     {
       "path": "__tests__/drilling.cementing.test.js",
@@ -1611,20 +1661,6 @@
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "1c3fdb897f50436f94fe37270c8f6e3f77412aeb",
-      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
-    },
-    {
-      "path": "__tests__/facilities.gasprocessing.test.js",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "e571c174b6619c09d2ccf8f2662e476178a96eed",
-      "reason": "Vendored at engines 82ec6d4, the FC4-0 gas-conditioning repair, which is AHEAD of the pinned canonical. The FC4 Gas Processing course grades against this revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails."
-    },
-    {
-      "path": "__tests__/facilities.separator.test.js",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "0eb3442d5556e1443d99064b20f50a378dc87611",
       "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
     },
     {
@@ -1786,20 +1822,6 @@
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "531ebbddb8c22d0324e92619ba0954feae3bf9d7",
-      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
-    },
-    {
-      "path": "test-data/facilities/goldens/gasprocessing_cases.json",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "af9b1a2d8a2e7814120d5ad32d23d6c8d6758f69",
-      "reason": "Vendored at engines 82ec6d4, the FC4-0 gas-conditioning repair, which is AHEAD of the pinned canonical. The FC4 Gas Processing course grades against this revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails."
-    },
-    {
-      "path": "test-data/facilities/goldens/separator_cases.json",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "0898a90b87d8733587406911b94bda8548ee40a3",
       "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
     },
     {
@@ -1971,27 +1993,6 @@
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
-      "path": "tools/validation/facilities/FINDINGS-separation.md",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "51f2594a1b48f5dc8268f38be48979b0b3dd812b",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
-      "path": "tools/validation/facilities/oracle_gasprocessing.py",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "be8be21aefd2d1124c882364fe28a2d6ae6e6d49",
-      "reason": "Vendored at engines 82ec6d4, the FC4-0 gas-conditioning repair, which is AHEAD of the pinned canonical. The FC4 Gas Processing course grades against this revision and its digest is built from it, so it moves only with a recut of that course. Pinned to the blob so a second drift still fails."
-    },
-    {
-      "path": "tools/validation/facilities/oracle_separator.py",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "8875fde79c92bf917fd3dd99aecc9e8a561bc659",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
       "path": "tools/validation/petrophysics/genfixtures.py",
       "kind": "differing",
       "group": "6-test-layer-drift",
@@ -2027,55 +2028,6 @@
       "reason": "The vendored README carries NextGen's own vendoring note rather than the canonical package README. Cosmetic and deliberate."
     },
     {
-      "path": "tools/validation/facilities/FINDINGS-gasprocessing.md",
-      "kind": "extra",
-      "group": "8-repair-record",
-      "vendoredSha": "711b8935c93f2cbf64a163e230c12a07bd8bd93e",
-      "reason": "The FC4-0 repair's own findings record, which does not exist at the pinned canonical because the repair is ahead of it. Vendored for the same reason FINDINGS-separation.md is. IT IS NOT TEACHING TRUTH: it describes the engine BEFORE the repair, and FC4's RECON.md says so in as many words."
-    },
-    {
-      "path": "__tests__/facilities.corrosion.test.js",
-      "kind": "differing",
-      "group": "9-fc9-corrosion-course",
-      "reason": "Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path.",
-      "vendoredSha": "052ace797772a9178db35a92e296cc6d0221256c"
-    },
-    {
-      "path": "engines/facilities/corrosion.js",
-      "kind": "differing",
-      "group": "9-fc9-corrosion-course",
-      "reason": "Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path.",
-      "vendoredSha": "d000a5fa978e1565f6f9abb610fff16c9ef123a8"
-    },
-    {
-      "path": "test-data/facilities/goldens/corrosion_cases.json",
-      "kind": "differing",
-      "group": "9-fc9-corrosion-course",
-      "reason": "Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path.",
-      "vendoredSha": "b0965cb3c04a3c1442a78ce2d3700a40106181da"
-    },
-    {
-      "path": "tools/validation/facilities/FINDINGS-corrosion.md",
-      "kind": "extra",
-      "group": "9-fc9-corrosion-course",
-      "vendoredSha": "51d1b136f3c4053eb243a8c0ca468dc2c4e41ff0",
-      "reason": "The FC9-0 repair record. Added to canonical after 709172f, so it is extra against the pinned manifest. Same shape as FINDINGS-gasprocessing.md. Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path."
-    },
-    {
-      "path": "tools/validation/facilities/RECON-corrosion.md",
-      "kind": "extra",
-      "group": "9-fc9-corrosion-course",
-      "vendoredSha": "c7f042f93c26a1fe7705a40628366a9affa16274",
-      "reason": "The FC9-0 recon the repair record cites, 55 findings. Added to canonical after 709172f, so it is extra against the pinned manifest. Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path."
-    },
-    {
-      "path": "tools/validation/facilities/oracle_corrosion.py",
-      "kind": "differing",
-      "group": "9-fc9-corrosion-course",
-      "reason": "Vendored at engines d4c19ad, the FC9-0 corrosion repair and the WITHDRAWAL of the invented sour-service region, for the FC9 Corrosion & Integrity course. The canonical pin stays at 709172f because moving it would re-vendor the FC1 to FC4 facilities engines whose committed course digests pin their numbers, and that is a separate deploy window. Sha-identical with d4c19ad, proved four ways per path.",
-      "vendoredSha": "fe1a229337feb4a0afc5b8b7f399dde9a6bbf435"
-    },
-    {
       "path": "__tests__/sim.ekene.test.js",
       "kind": "extra",
       "group": "local-only",
@@ -2095,34 +2047,6 @@
       "group": "local-only",
       "vendoredSha": "e54c1b25a05e2fc5102c020a44ea2957688e7b66",
       "reason": "Authored in NextGen and never upstreamed to the engines repo. A whole-tree subtree pull would delete it, which is how the Suite lost 24 files on 2026-09-14."
-    },
-    {
-      "path": "tools/validation/facilities/FINDINGS-relief.md",
-      "kind": "extra",
-      "group": "8-repair-record",
-      "vendoredSha": "ee684cab14953edb2d6ebcd3f854e01e23adebd7",
-      "reason": "The FC5-0 repair's own findings record, which does not exist at the pinned canonical because the repair is ahead of it. Vendored for the same reason FINDINGS-separation.md and FINDINGS-rotating.md are. IT IS NOT TEACHING TRUTH: it describes the engine BEFORE the repair, and the FC5 wave's briefs say so in as many words."
-    },
-    {
-      "path": "tools/validation/facilities/negcontrol_relief.sh",
-      "kind": "extra",
-      "group": "8-repair-record",
-      "vendoredSha": "4fa016c3ec13176d939471743669aa30236966c6",
-      "reason": "The FC5-0 repair's negative-control script, which does not exist at the pinned canonical because the repair is ahead of it. It is the file that produced every claim in FINDINGS-relief.md about what the relief suite now catches: 23 of 23 engine-only plants red, 5 of 5 oracle-only plants red, and 2 shared plants GREEN, which is the finding rather than a gap. Vendored so the claim stays checkable in this repository. NOT TEACHING TRUTH."
-    },
-    {
-      "path": "tools/validation/facilities/FINDINGS-producedwater.md",
-      "kind": "extra",
-      "group": "0-partial-domain-facilities",
-      "reason": "The produced water wave's own findings file, written by engines PR #201 and extended by #206, and absent from the canonical pin 709172f, so it reads as extra. It is vendored with the produced water family it documents, for the same reason FINDINGS-rotating.md is vendored with the pumps and compression family. It clears when canonical is next advanced.",
-      "vendoredSha": "fd7659042cfcb311951dcfd53ee0dc93372605fc"
-    },
-    {
-      "path": "tools/validation/facilities/FINDINGS-metering.md",
-      "kind": "extra",
-      "group": "8-repair-record",
-      "vendoredSha": "dedda0063dfb007a230a73bff3bc6fb22500c5d6",
-      "reason": "The FC8-0 repair's own findings record, which does not exist at the pinned canonical because the repair is ahead of it. Vendored for the same reason FINDINGS-separation.md and FINDINGS-gasprocessing.md are: it travels with the family it documents. IT IS NOT TEACHING TRUTH. Its second half is the recon of the engines BEFORE the repair, and it says so in as many words; the FC8 teaching digest is built from the repaired engines and quotes nothing from here."
     }
   ]
 }
