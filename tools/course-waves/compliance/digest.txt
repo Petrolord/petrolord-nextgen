@@ -1,0 +1,849 @@
+# compliance: Compliance, Audit & Quality. Teaching digest.
+# Every figure is a whole number: days (daysUntil, ages), counts, and percents the engine has already rounded. Dates print as YYYY-MM-DD through the engine's own toDateOnlyString.
+# AS-OF DATE: 2026-10-15. Every engine call in this digest that reads a date against today passes this one date, except the rows in SECTION 2 that show what an unreadable today does, which say so. Nothing below read the machine clock, and the generator refuses to print a line from a call that did not pass the as-of date.
+# ENGINES: engines/assurance at petrolord-engines 6b00f43, vendored in NextGen under packages/engines.
+# MODULES TAUGHT: calendar, complianceStatus, documentControl, qualityAssurance, auditManagement, isoCompliance.
+# CASES: IKORO (a terminal obligation register and document library), ABAM (a flowline tie-in quality plan, its NCRs, a contractor HSE audit and an audit programme), ORASHI (an ISO 14001:2015 management system). All three are invented records.
+# Built by build_digest.sh from compliance_dump.mjs and compliance_fields.mjs. Never edited by hand.
+
+# SECTION 1: WHAT THE FIVE APPS COMPUTE, AND THE VOCABULARY EACH ONE OWNS (owned by Associate m01)
+
+Each module exports rules as functions and vocabularies as frozen lists. The counts below are measured from the modules themselves.
+
+| module | exported functions | exported lists and constants | exports that read a date against today |
+| --- | --- | --- | --- |
+| calendar | 4 | 1 | 1 |
+| complianceStatus | 11 | 8 | 4 |
+| documentControl | 14 | 7 | 4 |
+| qualityAssurance | 28 | 24 | 7 |
+| isoCompliance | 33 | 24 | 10 |
+| auditManagement | 33 | 20 | 4 |
+
+complianceStatus.LIFECYCLES: Active, Draft, Superseded, Not applicable
+complianceStatus.STATUS_SEVERITY, worst first: Expired, Overdue, Due soon, On track, Compliant, No date set, Draft, Superseded, Not applicable
+complianceStatus.ATTENTION_STATUSES: Expired, Overdue, Due soon
+complianceStatus.FREQUENCIES: One-off, Monthly, Quarterly, Semi-annual, Annual, Biennial, Other
+complianceStatus.DEFAULT_LEAD_TIME_DAYS: 30
+documentControl.DOC_STATUSES: Draft, In Review, Approved, Published, Superseded, Obsolete, Rejected
+documentControl.EFFECTIVE_STATUSES (in force): Published, Approved
+documentControl review states: Review overdue, Review due soon, Review scheduled, No review scheduled, Not in force
+documentControl.REVIEW_LEAD_DAYS: 30
+documentControl.DEFAULT_REVIEW_PERIOD_MONTHS: 24
+qualityAssurance.POINT_TYPES: Hold point, Witness point, Review point, Monitor point, Surveillance point
+qualityAssurance.BLOCKING_POINT_TYPES (stop work): Hold point
+qualityAssurance.CHECKPOINT_RESOLVED_STATUSES: Passed, Waived, Not applicable
+qualityAssurance.NCR_SEVERITIES: Critical, Major, Minor, Observation
+qualityAssurance.NCR_EFFECTIVENESS_REQUIRED: Critical, Major
+qualityAssurance.DISPOSITIONS: Use as is, Repair, Rework, Regrade, Reject, Return to supplier, Scrap
+qualityAssurance.CONCESSION_DISPOSITIONS: Use as is, Regrade
+auditManagement.CRITICALITIES: Critical, Major, Minor
+auditManagement.ANSWERED_RESULTS: Conformant, Nonconformant, Observation, Not applicable
+isoCompliance.CLAUSE_STATUSES: Not assessed, Conformant, Partially conformant, Nonconformant, Not applicable
+isoCompliance.FINDING_TYPES: Major nonconformity, Minor nonconformity, Observation, Opportunity for improvement
+isoCompliance.EFFECTIVENESS_REQUIRED_TYPES: Major nonconformity
+isoCompliance.COVERING_AUDIT_TYPES: Internal
+isoCompliance.COVERAGE_COUNTING_STATUSES: Reported, Closed
+isoCompliance.REVIEW_LEAD_DAYS: 30
+isoCompliance.CERTIFICATE_LEAD_DAYS: 90
+
+Two root cause vocabularies, and they are different lists:
+isoCompliance.ROOT_CAUSE_CATEGORIES (10), shared with auditManagement: Procedure or documentation, Human factors or competence, Design, Material or equipment, Supplier or subcontractor, Planning or scheduling, Communication, Measurement or monitoring, Management system, Other
+qualityAssurance.ROOT_CAUSE_CATEGORIES (9): Procedure or documentation, Human factors or competence, Design, Material or equipment, Supplier or subcontractor, Planning or scheduling, Communication, Measurement or inspection, Other
+only in the ISO list: Measurement or monitoring, Management system
+only in the quality list: Measurement or inspection
+auditManagement.ROOT_CAUSE_CATEGORIES is the same list object as isoCompliance's: true
+auditManagement.canCloseFinding is the same function as isoCompliance's: true
+isoCompliance.isActionOverdue is the same function as qualityAssurance.isCapaOverdue: true
+
+# SECTION 2: THE CALENDAR: A DATE IS A DAY, AND AN UNREADABLE DATE IS NO DATE (owned by Associate m01)
+
+parseDateOnly reads the leading YYYY-MM-DD of a string at local midnight and refuses a day that does not exist. toDateOnlyString prints it back.
+
+| input | parseDateOnly, printed by toDateOnlyString | daysUntil against the as-of date |
+| --- | --- | --- |
+| 2026-10-15 | 2026-10-15 | 0 |
+| 2026-11-30 | 2026-11-30 | 46 |
+| 2026-09-30 | 2026-09-30 | -15 |
+| 2027-02-28 | 2027-02-28 | 136 |
+| 2026-02-30 | null | none |
+| 2026-13-01 | null | none |
+| 2026-10-15T23:59:00+14:00 | 2026-10-15 | 0 |
+| 15/10/2026 | null | none |
+| (empty) | null | none |
+| tbc | null | none |
+
+daysUntil of the as-of date itself: 0
+
+What the modules do with an unreadable TODAY, which no caller should pass. The digest itself always passes a real date, so these rows are the contract rather than a case:
+complianceStatus.deriveStatus with an unreadable Date as today throws RangeError: deriveStatus needs a valid date for today.
+documentControl.reviewState of a published document whose review date is 2020-01-06, with an unreadable Date as today, returns: Review scheduled
+qualityAssurance.isNcrOverdue of an open NCR due 2020-01-06, with an unreadable Date as today, returns: false
+documentControl.reviewState with today passed as the STRING 2026-10-15 throws TypeError: d.getFullYear is not a function
+Only deriveStatus refuses an unreadable today (owner decision AS15 Q1). The two rows above show two other modules answering as though nothing were due. This is recorded as a held limit in SECTION 23.
+
+# SECTION 3: AN OBLIGATION'S STATUS IS DERIVED, AND THE REASON COMES WITH IT (owned by Associate m02)
+
+The IKORO register at the as-of date. Status and reason are explainStatus; the next action date is the earlier of the due date and the expiry date.
+
+| code | obligation | lifecycle | frequency | due | expiry | last filed | lead time | next action date | days until | status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| REG-2026-001 | Produced water discharge permit | Active | Annual | 2027-03-31 | 2026-11-20 | none | 60 | 2026-11-20 | 36 | Due soon |
+| REG-2026-002 | Monthly produced water quality return | Active | Monthly | 2026-10-10 | none | 2026-09-09 | not set | 2026-10-10 | -5 | Overdue |
+| REG-2026-003 | Quarterly flare and venting return | Active | Quarterly | 2026-10-31 | none | 2026-07-28 | 14 | 2026-10-31 | 16 | On track |
+| REG-2026-004 | Annual environmental monitoring report | Active | Annual | 2027-03-31 | none | 2026-03-30 | not set | 2027-03-31 | 167 | On track |
+| REG-2026-005 | Radioactive source licence | Active | Biennial | 2026-12-31 | 2026-09-30 | none | not set | 2026-09-30 | -15 | Expired |
+| REG-2026-006 | Pipeline right of way consent | Active | One-off | 2026-08-14 | none | 2026-08-10 | not set | 2026-08-14 | -62 | Compliant |
+| REG-2026-007 | Oil spill contingency plan notification | Active | One-off | 2026-09-01 | none | none | not set | 2026-09-01 | -44 | Overdue |
+| REG-2026-008 | Host community development report | Active | Semi-annual | 2027-01-31 | none | 2026-08-05 | not set | 2027-01-31 | 108 | Compliant |
+| REG-2026-009 | Original environmental impact approval | Superseded | One-off | 2025-01-06 | none | none | not set | 2025-01-06 | -647 | Superseded |
+| REG-2026-010 | Safety case resubmission | Draft | Other | 2027-06-30 | none | none | not set | 2027-06-30 | 258 | Draft |
+| REG-2026-011 | Night noise permit | Not applicable | Annual | 2026-05-01 | none | none | not set | 2026-05-01 | -167 | Not applicable |
+| REG-2026-012 | Annual concession rental | Active | Annual | 2026-11-09 | none | 2025-11-03 | null | 2026-11-09 | 25 | Due soon |
+| REG-2026-013 | Waste consignment register | Active | Other | none | none | none | not set | none | none | No date set |
+
+The reason explainStatus gives for each, verbatim:
+REG-2026-001: Due in 36 days, inside the 60 day lead time set for this obligation.
+REG-2026-002: The due date passed 5 days ago.
+REG-2026-003: Due in 16 days. The last filing (2026-07-28) was for an earlier period, so nothing has been filed for this one yet.
+REG-2026-004: Due in 167 days. The last filing (2026-03-30) was for an earlier period, so nothing has been filed for this one yet.
+REG-2026-005: The permit expired 15 days ago.
+REG-2026-006: Last filed 2026-08-10, next due in -62 days.
+REG-2026-007: The due date passed 44 days ago.
+REG-2026-008: Last filed 2026-08-05, next due in 108 days.
+REG-2026-009: Lifecycle is Superseded, so it is not tracked against a date.
+REG-2026-010: Lifecycle is Draft, so it is not tracked against a date.
+REG-2026-011: Lifecycle is Not applicable, so it is not tracked against a date.
+REG-2026-012: Due in 25 days, inside the 30 day lead time set for this obligation.
+REG-2026-013: No due date or expiry date has been set, so nothing can fall due.
+REG-2026-006: the status is right, and the sentence under it prints a negative number of days after "next due in". That sentence is a recorded defect, R4 in SECTION 23, and is not taught as a reading of the obligation.
+
+The precedence, one obligation varied one field at a time from REG-2026-005 (the radioactive source licence):
+| variant | status | days until |
+| --- | --- | --- |
+| as recorded (expiry passed, due date ahead) | Expired | -15 |
+| the same with lifecycle Superseded | Superseded | -15 |
+| the same with the expiry removed | On track | 77 |
+| the same with the expiry moved to 2027-09-30 | On track | 77 |
+| the same with the due date moved to 2026-10-01 and no expiry | Overdue | -14 |
+| the same with an unknown lifecycle word, Archived | Expired | -15 |
+
+A One-off obligation, filed and unfiled, once its due date has passed:
+| obligation | last filed | status | days until |
+| --- | --- | --- | --- |
+| REG-2026-006 | 2026-08-10 | Compliant | -62 |
+| REG-2026-007 | none | Overdue | -44 |
+
+# SECTION 4: THE LEAD TIME DECIDES WHEN "DUE SOON" STARTS (owned by Associate m03)
+
+REG-2026-003, the quarterly flare and venting return, is due 2026-10-31: 16 days after the as-of date. Its recorded lead time is 14. Only the lead time is varied below.
+
+| lead_time_days given | status |
+| --- | --- |
+| 0 | On track |
+| 7 | On track |
+| 14 | On track |
+| 16 | Due soon |
+| 17 | Due soon |
+| 30 | Due soon |
+| 90 | Due soon |
+| null | Due soon |
+| '' (empty) | Due soon |
+| -5 | Due soon |
+| 'ten' | Due soon |
+| not set at all | Due soon |
+
+With no usable lead time the engine uses DEFAULT_LEAD_TIME_DAYS, 30.
+
+# SECTION 5: THE CURRENT PERIOD: WHEN A FILING STILL COUNTS (owned by Associate m03)
+
+periodStart is one frequency before the next due date, pulled back to the last day of the month when that month is shorter. For a due date of 2026-10-31:
+
+| frequency | periodStart | days until the period start |
+| --- | --- | --- |
+| One-off | none | none |
+| Monthly | 2026-09-30 | -15 |
+| Quarterly | 2026-07-31 | -76 |
+| Semi-annual | 2026-04-30 | -168 |
+| Annual | 2025-10-31 | -349 |
+| Biennial | 2024-10-31 | -714 |
+| Other | none | none |
+
+The same filing, read against the period it falls in. Each row is an IKORO obligation as recorded:
+| code | frequency | due | periodStart | last filed | status |
+| --- | --- | --- | --- | --- | --- |
+| REG-2026-003 | Quarterly | 2026-10-31 | 2026-07-31 | 2026-07-28 | On track |
+| REG-2026-004 | Annual | 2027-03-31 | 2026-03-31 | 2026-03-30 | On track |
+| REG-2026-008 | Semi-annual | 2027-01-31 | 2026-07-31 | 2026-08-05 | Compliant |
+| REG-2026-012 | Annual | 2026-11-09 | 2025-11-09 | 2025-11-03 | Due soon |
+| REG-2026-002 | Monthly | 2026-10-10 | 2026-09-10 | 2026-09-09 | Overdue |
+
+REG-2026-004 filed one day later, on 2026-03-31, the first day of its period:
+status Compliant; Last filed 2026-03-31, next due in 167 days.
+
+# SECTION 6: ROLLING THE SCHEDULE FORWARD FROM THE DATE THAT WAS DUE (owned by Associate m04)
+
+rollForward from a due date of 2026-08-31, by every frequency:
+
+| frequency | next due date | days until it |
+| --- | --- | --- |
+| One-off | none | none |
+| Monthly | 2026-09-30 | -15 |
+| Quarterly | 2026-11-30 | 46 |
+| Semi-annual | 2027-02-28 | 136 |
+| Annual | 2027-08-31 | 320 |
+| Biennial | 2028-08-31 | 686 |
+| Other | none | none |
+
+Three month ends:
+| due date | frequency | next due date |
+| --- | --- | --- |
+| 2026-01-31 | Monthly | 2026-02-28 |
+| 2028-02-29 | Annual | 2029-02-28 |
+| 2026-03-31 | Semi-annual | 2026-09-30 |
+
+REG-2026-002 was due 2026-10-10 and is filed on 2026-10-14. The app rolls from the date that was due: rollForward(2026-10-10, Monthly) = 2026-11-10.
+The same call on the filing date would give 2026-11-14. The Regulatory Compliance app passes the due date to rollForward when a filing is recorded, so this second date is the one the schedule would walk to if it rolled from the filing.
+After the filing is recorded and the due date rolled: status Due soon, next action 2026-11-10, 26 days.
+
+# SECTION 7: THE REGISTER SUMMARISED, AND SORTED WORST FIRST (owned by Associate m02 and m06)
+
+summarise over the 13 IKORO obligations:
+
+| status | count |
+| --- | --- |
+| Expired | 1 |
+| Overdue | 2 |
+| Due soon | 2 |
+| On track | 2 |
+| Compliant | 2 |
+| No date set | 1 |
+| Draft | 1 |
+| Superseded | 1 |
+| Not applicable | 1 |
+
+attention (Expired + Overdue + Due soon): 5
+
+byUrgency: worst status first, then the nearest next action date, undated last:
+| order | code | status | next action date |
+| --- | --- | --- | --- |
+| 1 | REG-2026-005 | Expired | 2026-09-30 |
+| 2 | REG-2026-007 | Overdue | 2026-09-01 |
+| 3 | REG-2026-002 | Overdue | 2026-10-10 |
+| 4 | REG-2026-012 | Due soon | 2026-11-09 |
+| 5 | REG-2026-001 | Due soon | 2026-11-20 |
+| 6 | REG-2026-003 | On track | 2026-10-31 |
+| 7 | REG-2026-004 | On track | 2027-03-31 |
+| 8 | REG-2026-006 | Compliant | 2026-08-14 |
+| 9 | REG-2026-008 | Compliant | 2027-01-31 |
+| 10 | REG-2026-013 | No date set | none |
+| 11 | REG-2026-010 | Draft | 2027-06-30 |
+| 12 | REG-2026-009 | Superseded | 2025-01-06 |
+| 13 | REG-2026-011 | Not applicable | 2026-05-01 |
+
+countBy regime:
+Environmental: 5
+Reporting: 3
+Health & Safety: 2
+Licensing: 1
+Operational: 1
+Financial: 1
+
+# SECTION 8: DOCUMENT CONTROL: THE REVIEW DATE, THE REVISION AND WHO MAY REVIEW (owned by Associate m05)
+
+The IKORO document library at the as-of date. reviewState reads only documents in force.
+
+| number | title | status | next review | days until | review state |
+| --- | --- | --- | --- | --- | --- |
+| HSE-PRO-0007 | Produced water sampling procedure | Published | 2026-09-30 | -15 | Review overdue |
+| OPS-PLA-0002 | Terminal emergency response plan | Published | 2026-11-02 | 18 | Review due soon |
+| ENG-STD-0011 | Tank inspection standard | Approved | 2027-06-30 | 258 | Review scheduled |
+| OPS-PHI-0001 | Flare management philosophy | Published | none | none | No review scheduled |
+| OPS-PRO-0004 | Custody metering procedure (old issue) | Superseded | 2020-01-06 | -2474 | Not in force |
+| HSE-PRO-0012 | Oily waste handling procedure | Draft | none | none | Not in force |
+| ENG-PRO-0019 | Hydrotest procedure | In Review | none | none | Not in force |
+
+A published document whose review date is the text tbc: No review scheduled
+
+nextReviewDate counts from the ISSUE date by the review period in months:
+| issue date | period in months | next review date | days until it |
+| --- | --- | --- | --- |
+| 2025-11-02 | 12 | 2026-11-02 | 18 |
+| 2025-06-30 | 24 | 2027-06-30 | 258 |
+| 2024-08-31 | 18 | 2026-02-28 | -229 |
+| 2025-12-31 | 2 | 2026-02-28 | -229 |
+| 2024-02-29 | 12 | 2025-02-28 | -594 |
+| 2025-03-14 | 24 (DEFAULT_REVIEW_PERIOD_MONTHS, passed by the caller) | 2027-03-14 | 150 |
+| 2025-03-14 | 0 | none | none |
+| 2025-03-14 | null | none | none |
+
+A correction re-published on 2026-10-01 to a document issued 2025-03-14, on a 24 month period: counted from the issue date the review falls on 2027-03-14; counted from the correction it would fall on 2028-10-01.
+
+nextRevisionNumber keeps the width a revision is cited at:
+| current revision | next revision |
+| --- | --- |
+| '01' | '02' |
+| '09' | '10' |
+| '099' | '100' |
+| '7' | '08' |
+| '10' | '11' |
+| 'A' | '01' |
+| '' (empty) | '01' |
+| null | '01' |
+| ' 04 ' | '05' |
+
+documentPrefix, from department and category:
+'Health, Safety & Environment', 'Procedure' gives HEA-PRO
+'Operations', 'Plan' gives OPE-PLA
+'', '' gives GEN-DOC
+'QA', 'ITP' gives QA-ITP
+
+atLeastConfidential, against the default floor Confidential:
+Public: false
+Internal: false
+Confidential: true
+Restricted: true
+
+Segregation of duties on revision rev-0019-10, authored by u-adaeze:
+the author assigns herself: REFUSED: The author of a revision cannot review it. Choose somebody independent of the draft.
+no reviewer chosen: REFUSED: Choose the reviewer.
+an independent reviewer is assigned: ALLOWED
+the assigned reviewer decides a pending task: ALLOWED
+somebody else decides it for the reviewer: REFUSED: Only the reviewer this task is assigned to can decide it.
+the author was assigned by mistake and tries to decide: REFUSED: The author of a revision cannot approve it.
+a task already approved is decided again: REFUSED: This review task is already approved.
+
+# SECTION 9: THE DOCUMENT LIBRARY SUMMARISED, AND THE REVIEW QUEUE (owned by Associate m05 and m06)
+
+summarise over the 7 IKORO documents: in review 1, published 3, review overdue 1, review due soon 1.
+| status | count |
+| --- | --- |
+| Draft | 1 |
+| In Review | 1 |
+| Approved | 1 |
+| Published | 3 |
+| Superseded | 1 |
+| Obsolete | 0 |
+| Rejected | 0 |
+
+byReviewUrgency:
+| order | number | review state | next review |
+| --- | --- | --- | --- |
+| 1 | HSE-PRO-0007 | Review overdue | 2026-09-30 |
+| 2 | OPS-PLA-0002 | Review due soon | 2026-11-02 |
+| 3 | ENG-STD-0011 | Review scheduled | 2027-06-30 |
+| 4 | OPS-PHI-0001 | No review scheduled | none |
+| 5 | OPS-PRO-0004 | Not in force | 2020-01-06 |
+| 6 | HSE-PRO-0012 | Not in force | none |
+| 7 | ENG-PRO-0019 | Not in force | none |
+
+# SECTION 10: THE INSPECTION AND TEST PLAN: A HOLD POINT STOPS WORK (owned by Professional m01)
+
+QAP-2026-014, Abam flowline tie-in, status Active. Its twelve points at the as-of date:
+
+| item | point | type | status | stops work | resolved | planned | overdue |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| H-01 | Material certificates review | Hold point | Passed | true | true | 2026-08-20 | false |
+| W-02 | Weld procedure qualification test | Witness point | Passed | false | true | 2026-08-24 | false |
+| H-03 | Welder qualification | Hold point | Passed | true | true | 2026-08-26 | false |
+| R-04 | NDT procedure review | Review point | Passed | false | true | 2026-08-28 | false |
+| H-05 | Radiography of tie-in welds | Hold point | Failed | true | false | 2026-09-10 | true |
+| W-06 | Coating holiday test | Witness point | Waived | false | true | 2026-09-15 | false |
+| M-07 | Daily fit-up monitoring | Monitor point | Not applicable | false | true | 2026-09-01 | false |
+| H-08 | Hydrostatic test | Hold point | Pending | true | false | 2026-10-20 | false |
+| W-09 | Hydrotest chart review | Witness point | Pending | false | false | 2026-10-21 | false |
+| S-10 | Site surveillance | Surveillance point | In progress | false | false | 2026-10-01 | true |
+| H-11 | Pre-commissioning release | Hold point | Pending | true | false | 2026-11-05 | false |
+| R-12 | As-built dossier review | Review point | Notified | false | false | 2026-10-09 | true |
+
+Decisions asked of the engine, one point at a time (canDecideCheckpoint):
+H-08 passed with nobody named: REFUSED: A hold point needs the date it was verified and who verified it. Without those it has not been held.
+W-09 passed with nobody named: REFUSED: Record the date this was decided and who decided it.
+W-09 waived with no reason: REFUSED: Say why this point is being waived. A waiver is a deliberate acceptance of less assurance, and the reason is what makes it auditable later.
+H-11 set Not applicable with nothing recorded: REFUSED: Setting a hold point aside needs the date and who decided it, the same record a waiver needs.
+H-11 set Not applicable with a date and a name but no reason: REFUSED: Say why this hold point does not apply. It stops work until released, so setting it aside needs a reason on the record.
+H-11 set Not applicable with a date, a name and a reason: ALLOWED
+S-10 set Not applicable with nothing recorded: ALLOWED
+H-08 passed with a date and a verifier: ALLOWED
+a status the vocabulary does not have: REFUSED: Accepted is not a checkpoint status.
+
+# SECTION 11: PROGRESS IS COUNTED FROM THE POINTS, AND A PLAN CLOSES ONLY WHEN ITS HOLD POINTS ARE RESOLVED (owned by Professional m01 and m02)
+
+planProgress over QAP-2026-014: total 12, resolved 6, failed 1, outstanding 6, hold points 5, hold points outstanding 3, percent 50.
+planProgress over a plan with no points: percent null.
+
+canClosePlan, walked from the plan as recorded to a plan that may close:
+as recorded: REFUSED: 1 checkpoint has failed and has not been resolved. A failed inspection is the most outstanding item on a plan.
+H-05 re-inspected and Passed: REFUSED: 2 hold points still outstanding (H-08, H-11). A hold point stops work until it is verified, so the plan cannot be finished over one.
+H-08 and H-11 Passed as well: REFUSED: 3 non-conformances raised against this plan are still open.
+and every NCR against it closed or voided: ALLOWED
+At that point planProgress reads resolved 9 of 12, percent 75, and W-09, S-10 and R-12 are still open.
+
+Removing a point from the plan (canRemoveCheckpoint):
+H-08, a pending hold point, from the Active plan: REFUSED: A hold point cannot be removed once its plan has left Draft. Record it as Not applicable with the reason, so the plan shows who set it aside and why.
+W-09, a pending witness point, from the Active plan: ALLOWED
+R-04, a passed review point, from the Active plan: REFUSED: Item R-04 has a result recorded (Passed). A recorded result is evidence and stays on the plan.
+H-08 from the same plan while it was still a Draft: ALLOWED
+W-09 from the plan once it is Closed: REFUSED: This plan is closed. Its inspection points are the record it was finished on.
+
+Raising an NCR against a plan (canRaiseNcr):
+against the Active plan: ALLOWED
+against no plan at all: ALLOWED
+against the plan once Closed: REFUSED: QAP-2026-014 is closed. Raise the non-conformance against the plan now in force, or with no plan.
+
+The plan workflow (nextPlanStatuses):
+Draft: Under review, Active, Cancelled
+Under review: Active, Draft, Cancelled
+Active: Closed, Superseded, Cancelled
+Superseded: final
+Closed: final
+Cancelled: final
+canAdvancePlan from Draft straight to Closed: REFUSED: A plan that is draft can only move to Under review, Active, Cancelled.
+
+# SECTION 12: THE ABAM PLAN READ END TO END (owned by Professional m02 and m06)
+
+6 of 12 points resolved, 50 percent. Hold points: H-01 Passed, H-03 Passed, H-05 Failed, H-08 Pending, H-11 Pending.
+Overdue points at the as-of date: H-05, S-10, R-12.
+summarise: checkpoints 12, outstanding 6, overdue 3, hold points outstanding 3, failed 1.
+
+# SECTION 13: A NON-CONFORMANCE CLOSES ON ITS DISPOSITION, ITS CAUSE AND AN ACTION SHOWN TO WORK (owned by Professional m03)
+
+The ABAM NCRs at the as-of date:
+
+| code | title | severity | status | raised | due | disposition | open | overdue |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| NCR-2026-031 | Radiography reject on tie-in weld TW-07 | Major | Actions in progress | 2026-09-02 | 2026-10-02 | Repair | true | true |
+| NCR-2026-027 | Coating thickness below specification on spool S-14 | Minor | Open | 2026-08-12 | 2026-11-12 | none | true | false |
+| NCR-2026-019 | Wrong flange rating delivered | Critical | Disposition agreed | 2026-06-20 | 2026-09-30 | Return to supplier | true | true |
+| NCR-2026-022 | Bolt torque record missing | Observation | Closed | 2026-07-01 | none | Use as is | false | false |
+| NCR-2026-011 | Pipe ovality out of tolerance | Major | Voided | 2026-05-11 | none | none | false | false |
+| NCR-2026-006 | Gate valve body casting porosity | Minor | Closed | 2026-03-03 | none | Regrade | false | false |
+
+The corrective and preventive actions:
+| action | NCR | type | status | due | open | overdue | verified effective | found ineffective |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| k1 | NCR-2026-031 | Corrective | Complete | 2026-09-25 | false | false | false | false |
+| k2 | NCR-2026-031 | Preventive | In progress | 2026-10-05 | true | true | false | false |
+| k3 | NCR-2026-019 | Corrective | Complete | 2026-07-31 | false | false | false | true |
+| k4 | NCR-2026-019 | Corrective | Complete | 2026-09-15 | false | false | true | false |
+| k5 | NCR-2026-011 | Corrective | Open | 2026-06-01 | true | true | false | false |
+| k6 | NCR-2026-027 | Corrective | Open | 2026-11-01 | true | false | false | false |
+
+canCloseNcr on a Major NCR, one requirement met at a time:
+nothing recorded: REFUSED: Agree the disposition first: what happens to the non-conforming item. Use as is, repair, rework, regrade, reject, return to supplier or scrap.
+a disposition, Repair: REFUSED: Record the date the disposition was agreed.
+and the date it was agreed: REFUSED: A major non-conformance needs a root cause before it closes. Closing one without it is how the same non-conformance arrives again next quarter.
+and a root cause, with a preventive action still in progress: REFUSED: 1 corrective or preventive action still open.
+with the preventive action finished and no corrective action: REFUSED: A major non-conformance needs at least one corrective action. A disposition deals with the item; a corrective action deals with the cause.
+with one corrective action checked and found not to work: REFUSED: A corrective action here was checked and found not to have worked. Raise another one rather than closing over it.
+with one corrective action complete and not yet checked: REFUSED: No corrective action has been verified effective yet. A completed action is not a working one, and for a non-conformance this serious the check is the point.
+with a corrective action verified effective: ALLOWED
+
+The same last three steps on a Minor NCR:
+no root cause, no actions: ALLOWED
+one corrective action complete and never checked: ALLOWED
+one corrective action still open: REFUSED: 1 corrective or preventive action still open.
+
+The ABAM NCRs themselves:
+NCR-2026-031: REFUSED: 1 corrective or preventive action still open.
+NCR-2026-027: REFUSED: Agree the disposition first: what happens to the non-conforming item. Use as is, repair, rework, regrade, reject, return to supplier or scrap.
+NCR-2026-019: ALLOWED
+NCR-2026-022: REFUSED: This non-conformance is already closed.
+NCR-2026-011: REFUSED: This non-conformance is already voided.
+NCR-2026-006: REFUSED: This non-conformance is already closed.
+
+# SECTION 14: HOW LONG A NON-CONFORMANCE HAS BEEN OPEN, AND WHAT THE DASHBOARD COUNTS (owned by Professional m03)
+
+ncrAgeDays: to the as-of date while open, to the closed date once closed or voided.
+
+| code | status | raised | closed | age in days | ageBand |
+| --- | --- | --- | --- | --- | --- |
+| NCR-2026-031 | Actions in progress | 2026-09-02 | none | 43 | 31 to 60 days |
+| NCR-2026-027 | Open | 2026-08-12 | none | 64 | 61 to 90 days |
+| NCR-2026-019 | Disposition agreed | 2026-06-20 | none | 117 | Over 90 days |
+| NCR-2026-022 | Closed | 2026-07-01 | 2026-07-09 | 8 | 0 to 30 days |
+| NCR-2026-011 | Voided | 2026-05-11 | 2026-05-13 | 2 | 0 to 30 days |
+| NCR-2026-006 | Closed | 2026-03-03 | 2026-04-20 | 48 | 31 to 60 days |
+
+ageBand at its edges:
+0 days: 0 to 30 days
+30 days: 0 to 30 days
+31 days: 31 to 60 days
+60 days: 31 to 60 days
+61 days: 61 to 90 days
+90 days: 61 to 90 days
+91 days: Over 90 days
+-1 days: null
+
+ncrAgeing, open NCRs only, by band and severity:
+| band | Critical | Major | Minor | Observation |
+| --- | --- | --- | --- | --- |
+| 0 to 30 days | 0 | 0 | 0 | 0 |
+| 31 to 60 days | 0 | 1 | 0 | 0 |
+| 61 to 90 days | 0 | 0 | 1 | 0 |
+| Over 90 days | 1 | 0 | 0 | 0 |
+
+summarise: NCRs 6, open 3, overdue 2, serious and open 2, concessions 2, oldest open 117 days, mean open age 75 days.
+the open ages it averages: 43, 64, 117; their sum 224 over 3.
+actions: 6 in total, open 2, overdue 1, awaiting an effectiveness check 1, verified effective 1, found ineffective 1.
+k5 sits on NCR-2026-011, which is Voided: isCapaOpen reads true and isCapaOverdue reads true, and summarise leaves it out of the open and overdue counts.
+The same actions summarised with no NCRs supplied: open 3, overdue 2. A child whose parent is not supplied counts.
+The same points summarised under the plan marked Closed: outstanding 0, overdue 0, failed 1.
+
+ncrByUrgency:
+| order | code | severity | status | overdue |
+| --- | --- | --- | --- | --- |
+| 1 | NCR-2026-019 | Critical | Disposition agreed | true |
+| 2 | NCR-2026-031 | Major | Actions in progress | true |
+| 3 | NCR-2026-027 | Minor | Open | false |
+| 4 | NCR-2026-006 | Minor | Closed | false |
+| 5 | NCR-2026-011 | Major | Voided | false |
+| 6 | NCR-2026-022 | Observation | Closed | false |
+
+# SECTION 15: THE CHECKLIST: AN ANSWER, A REASON, AND A FINDING FOR A FAILED CRITICAL ITEM (owned by Professional m04)
+
+AUD-2026-007, Pipeline contractor HSE audit, Abam tie-in, status Fieldwork complete, 14 checklist questions.
+
+| item | question | criticality | result | note | answered |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Permit to work displayed at the work site | Critical | Conformant | none | true |
+| 2 | Gas test recorded before hot work | Critical | Nonconformant | No gas test entry for the 07:30 hot work. | true |
+| 3 | Toolbox talk held and signed | Major | Conformant | none | true |
+| 4 | Lifting plan approved for the tie-in lift | Major | Observation | Plan approved; rigging sketch not attached. | true |
+| 5 | Housekeeping at the laydown area | Minor | Conformant | none | true |
+| 6 | Isolation certificate matches the tie-in point | Critical | Nonconformant | Isolation certificate names valve XV-102, tie-in is at XV-103. | true |
+| 7 | Fire watch posted for hot work | Major | Conformant | none | true |
+| 8 | Welfare facilities adequate | Minor | Conformant | none | true |
+| 9 | Excavation shoring inspected | Major | Not applicable | No excavation open during the audit. | true |
+| 10 | Waste segregated at source | Minor | Not applicable | blank | false |
+| 11 | Confined space entry attendant present | Critical | Not applicable | none | false |
+| 12 | Radiography exclusion zone barricaded | Major | Conformant | none | true |
+| 13 | Signage current | Minor | no answer | none | false |
+| 14 | Emergency drill held this month | Major | no answer | none | false |
+
+checklistProgress: total 14, answered 10, outstanding 4, conformant 6, nonconformant 2, observations 1, notApplicable 3, percent 71.
+checklistProgress with no checklist at all: percent null.
+unansweredItems: 10, 11, 13, 14
+criticalAnswersWithoutFindings, with finding AF-2026-018 raised from item 2: 6
+the same with that finding Voided: 2, 6
+
+Raising a finding (canRaiseFinding):
+no finding type: REFUSED: Pick the finding type.
+no one-line statement: REFUSED: State the finding in one line.
+no objective evidence: REFUSED: Objective evidence: what was seen, where, and when. It is the first thing an auditee will ask for.
+a stop-work observation: REFUSED: A finding that stopped work is a nonconformity, not an observation.
+a stop-work nonconformity with no correction recorded: REFUSED: A finding that stopped work records what was done about it at the time. Imminent danger does not wait for the corrective action cycle.
+a stop-work nonconformity with its correction: ALLOWED
+
+# SECTION 16: THE AUDIT LIFECYCLE, AND AN AUDITOR WHO MAY NOT AUDIT THEIR OWN AREA (owned by Professional m05)
+
+The audit workflow (nextAuditStatuses):
+Planned: In progress, Cancelled
+In progress: Fieldwork complete, Cancelled
+Fieldwork complete: Reported, In progress, Cancelled
+Reported: Closed
+Closed: final
+Cancelled: final
+
+canReportAudit on AUD-2026-007, one requirement met at a time:
+as recorded: REFUSED: 4 checklist items have no answer yet (10, 11, 13, 14). An audit reported with its checklist half blank says nothing about the items nobody looked at.
+every item answered, and the two blank Not applicable answers given reasons: REFUSED: Critical item 6 was answered Nonconformant with no finding raised. A critical question that fails needs a finding with a number, an owner and a due date.
+a finding raised from item 6 as well: REFUSED: Write the audit conclusion. It is the deliverable.
+and the conclusion written: ALLOWED
+the same audit with no lead auditor named at all: REFUSED: Name the lead auditor.
+
+canCloseAudit:
+before it is reported: REFUSED: Report the audit before closing it: the report is the deliverable, and closure is the statement that everything it raised has been dealt with.
+reported, with both major findings open: REFUSED: 2 major nonconformities raised by this audit are still open.
+reported, with both closed: ALLOWED
+reported, with a stop-work minor finding still open: REFUSED: 1 finding that stopped work is still open.
+
+canCancelAudit:
+no reason given: REFUSED: Say why this audit is not being done. An audit that quietly disappears from the programme is the reason a programme cannot be trusted.
+a reason of spaces: REFUSED: Say why this audit is not being done. An audit that quietly disappears from the programme is the reason a programme cannot be trusted.
+a reason given: ALLOWED
+
+auditIndependence (the lead auditor against the auditee):
+u-kelechi leads, u-boma is audited: ALLOWED
+u-boma named as both: REFUSED: The lead auditor is also the auditee for this audit. An auditor may not audit their own area: name somebody else as one or the other.
+an external lead auditor named in text, with no account: ALLOWED
+
+isAuditOverdue in this module, for an audit whose planned end has passed:
+Planned: true
+In progress: true
+Fieldwork complete: true
+Reported: false
+Closed: false
+Cancelled: false
+
+# SECTION 17: THE AUDIT PROGRAMME IS DELIVERED WHEN ITS AUDITS ARE REPORTED (owned by Professional m05 and m06)
+
+| code | status | planned end | overdue |
+| --- | --- | --- | --- |
+| AUD-2026-001 | Closed | 2026-02-13 | false |
+| AUD-2026-002 | Reported | 2026-04-17 | false |
+| AUD-2026-003 | Closed | 2026-05-22 | false |
+| AUD-2026-004 | Cancelled | 2026-06-19 | false |
+| AUD-2026-005 | In progress | 2026-09-25 | true |
+| AUD-2026-006 | Planned | 2026-10-02 | true |
+| AUD-2026-007 | Fieldwork complete | 2026-10-09 | true |
+| AUD-2026-008 | Planned | 2026-11-27 | false |
+
+programmeProgress: total 8, reported 3, cancelled 1, outstanding 4, overdue 3, percent 38.
+programmeProgress over no audits: percent null.
+
+canCompleteProgramme:
+as recorded: REFUSED: 4 audits in this programme have not been reported or cancelled (AUD-2026-005, AUD-2026-006, AUD-2026-007, AUD-2026-008). A programme marked complete over audits that never happened is the document a certification body will ask for.
+every outstanding audit reported: ALLOWED
+the last one cancelled instead, with no reason written: REFUSED: 1 audit in this programme has not been reported or cancelled (AUD-2026-008). A programme marked complete over audits that never happened is the document a certification body will ask for.
+
+The programme workflow (nextProgrammeStatuses) and approval:
+Draft: Approved, Cancelled
+Approved: In progress, Cancelled
+In progress: Complete, Cancelled
+Complete: final
+Cancelled: final
+approving with no date recorded: REFUSED: Record the date the programme was approved.
+approving with a date and no approver: REFUSED: Name who approved it.
+approving with both: ALLOWED
+
+summarise over the programme, the 8 audits, the 12 recorded answers and the finding: audits outstanding 4, overdue 3, reported 3, cancelled 1, answers 10, answers outstanding 2, nonconformances 2, notApplicable 3, open findings 1, open major 1, stop-work open 1.
+
+# SECTION 18: A CONFORMITY CLAIM IS EVIDENCE, A DATE AND A NAME (owned by Expert m01)
+
+ISO 14001:2015 at ORASHI, Certified, certification cycle 3 years, certificate expires 2027-01-08.
+
+| clause | title | applicability | status | owner | claims conformity | evidence record | assessed | next review | review overdue | review due soon |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 4.1 | Understanding the organization and its context | Applicable | Conformant | u-nneka | true | true | true | 2027-05-04 | false | false |
+| 4.3 | Scope of the environmental management system | Applicable | Conformant | u-nneka | true | true | true | 2026-10-01 | true | false |
+| 5.2 | Environmental policy | Applicable | Conformant | u-obinna | true | false | true | 2027-05-04 | false | false |
+| 6.1.2 | Environmental aspects | Applicable | Partially conformant | u-tari | true | true | true | 2026-11-02 | false | true |
+| 6.1.3 | Compliance obligations | Applicable | Nonconformant | u-tari | false | false | true | 2027-06-12 | false | false |
+| 7.2 | Competence | Applicable | Not assessed | u-obinna | false | false | false | 2027-01-31 | false | false |
+| 7.5.3 | Control of documented information | Applicable | Conformant | u-obinna | true | true | true | 2027-05-04 | false | false |
+| 8.1 | Operational planning and control | Applicable | Conformant | u-kalu | true | true | true | 2027-05-04 | false | false |
+| 8.2 | Emergency preparedness and response | Applicable | Conformant | u-kalu | true | true | true | 2027-05-04 | false | false |
+| 9.1.1 | Monitoring, measurement, analysis and evaluation | Applicable | Conformant | u-tari | true | true | true | 2027-05-04 | false | false |
+| 9.2 | Internal audit | Applicable | Conformant | u-nneka | true | true | true | 2027-05-04 | false | false |
+| 10.2 | Nonconformity and corrective action | Applicable | Conformant | u-nneka | true | true | true | 2027-05-04 | false | false |
+| 4.4 | Environmental management system (sites outside scope) | Not applicable | Not applicable | u-nneka | false | false | false | none | false | false |
+
+canSetClauseStatus on clause 7.2, which has nothing recorded:
+Conformant, nothing else: REFUSED: Name the evidence, the date it was assessed and who assessed it. Conformity is a claim about documented information; without those three it is an opinion in a dropdown.
+Conformant with an evidence reference only: REFUSED: Name the evidence, the date it was assessed and who assessed it. Conformity is a claim about documented information; without those three it is an opinion in a dropdown.
+Conformant with evidence, a date and an assessor: ALLOWED
+Nonconformant with no date: REFUSED: Record the date this was assessed and who assessed it.
+Nonconformant with a date and an assessor: ALLOWED
+Not applicable while still marked Applicable: REFUSED: A clause determined not applicable cannot also carry a conformity verdict. Set both together, or neither.
+Not applicable and applicability Not applicable, no justification: REFUSED: ISO 9001:2015 §4.3 requires the justification for a requirement determined not applicable to be kept. Say why this one does not apply.
+Not applicable with its justification: ALLOWED
+Compliant, a word the vocabulary does not have: REFUSED: Compliant is not a clause status.
+
+# SECTION 19: INDEPENDENCE: AN AUDITOR MAY NOT AUDIT THEIR OWN WORK (owned by Expert m02)
+
+A planned internal audit with clauses 8.1, 8.2, 9.1.1, 9.2 in scope. Owners: 8.1 u-kalu, 8.2 u-kalu, 9.1.1 u-tari, 9.2 u-nneka.
+
+lead auditor u-chidi: ALLOWED
+lead auditor u-kalu: REFUSED: The lead auditor owns clauses 8.1, 8.2 in this audit's own scope. An auditor may not audit their own work (ISO 19011), so either the scope or the auditor has to change. Clauses named: 8.1, 8.2.
+lead auditor u-nneka: REFUSED: The lead auditor owns clause 9.2 in this audit's own scope. An auditor may not audit their own work (ISO 19011), so either the scope or the auditor has to change. Clauses named: 9.2.
+lead auditor u-tari: REFUSED: The lead auditor owns clause 9.1.1 in this audit's own scope. An auditor may not audit their own work (ISO 19011), so either the scope or the auditor has to change. Clauses named: 9.1.1.
+an external lead auditor named in text: ALLOWED
+
+canExamineClause, for the person recording a clause result:
+u-kalu recording 8.1, which u-kalu owns: REFUSED: You own clause 8.1. An auditor may not audit their own work (ISO 19011), so somebody else on the audit has to record this result.
+u-chidi recording 8.1: ALLOWED
+
+The same principle in the other two apps this course teaches, for comparison: the Audit & Findings Manager checks the lead auditor against the auditee (SECTION 16), and Document Control checks a reviewer against the author (SECTION 8).
+
+# SECTION 20: COVERAGE IS COUNTED OVER THE CERTIFICATION CYCLE, FROM REPORTED INTERNAL AUDITS (owned by Expert m03)
+
+The audits ORASHI holds:
+| audit | type | status | ended | counts towards coverage |
+| --- | --- | --- | --- | --- |
+| ISA-2023-002 | Internal | Closed | 2023-09-22 | true |
+| ISA-2024-001 | Internal | Closed | 2024-05-17 | true |
+| ISA-2026-001 | Internal | Reported | 2026-06-12 | true |
+| ISA-2026-002 | Internal | In progress | none | false |
+| ISA-2025-003 | Internal | Cancelled | none | false |
+| ISA-2026-S01 | Surveillance | Closed | 2026-07-24 | false |
+
+clauseCoverage over the 12 applicable clauses, cycle 3 years:
+| clause | last examined | days until it (negative is past) | by audit | result | covered | stale |
+| --- | --- | --- | --- | --- | --- | --- |
+| 4.1 | 2026-06-10 | -127 | ISA-2026-001 | Conformant | true | false |
+| 4.3 | 2023-09-20 | -1121 | ISA-2023-002 | Conformant | false | true |
+| 5.2 | 2026-06-09 | -128 | ISA-2026-001 | Observation | true | false |
+| 6.1.2 | never | none | none | none | false | false |
+| 6.1.3 | 2026-06-11 | -126 | ISA-2026-001 | Nonconformant | true | false |
+| 7.2 | never | none | none | none | false | false |
+| 7.5.3 | never | none | none | none | false | false |
+| 8.1 | 2024-05-16 | -882 | ISA-2024-001 | Conformant | true | false |
+| 8.2 | 2024-05-16 | -882 | ISA-2024-001 | Conformant | true | false |
+| 9.1.1 | 2026-06-11 | -126 | ISA-2026-001 | Conformant | true | false |
+| 9.2 | 2026-06-08 | -129 | ISA-2026-001 | Conformant | true | false |
+| 10.2 | 2026-06-12 | -125 | ISA-2026-001 | Conformant | true | false |
+
+The same register over cycles of other lengths:
+| cycleYears | covered | stale | never examined |
+| --- | --- | --- | --- |
+| 1 | 6 | 3 | 3 |
+| 2 | 6 | 3 | 3 |
+| 3 | 8 | 1 | 3 |
+| 4 | 9 | 0 | 3 |
+
+clauseCoverageByStandard, each clause against its own standard's cycle (ISO 14001:2015 3 years, ISO 45001:2018 1 year), both last examined on the same day:
+| standard | clause | last examined | covered | stale |
+| --- | --- | --- | --- | --- |
+| ISO 14001:2015 | 8.1 | 2025-10-14 | true | false |
+| ISO 45001:2018 | 6.1.2 | 2025-10-14 | false | true |
+
+# SECTION 21: A FINDING: THE CORRECTION, THE CORRECTIVE ACTION, AND THE CHECK THAT IT WORKED (owned by Expert m04)
+
+The ORASHI findings at the as-of date:
+| code | type | status | raised | due | closed | open | overdue | age in days |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ISF-2026-004 | Major nonconformity | Action in progress | 2026-06-12 | 2026-09-30 | none | true | true | 125 |
+| ISF-2026-005 | Minor nonconformity | Open | 2026-06-12 | 2026-12-11 | none | true | false | 125 |
+| ISF-2026-001 | Major nonconformity | Closed | 2026-02-03 | 2026-04-30 | 2026-04-21 | false | false | 77 |
+| ISF-2026-002 | Observation | Voided | 2026-06-10 | none | 2026-06-13 | false | false | 3 |
+| ISF-2026-003 | Opportunity for improvement | Open | 2026-06-12 | none | none | true | false | 125 |
+
+The actions:
+| action | finding | type | status | due | open | overdue | verified effective |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| ac1 | ISF-2026-004 | Corrective | In progress | 2026-10-02 | true | true | false |
+| ac2 | ISF-2026-001 | Corrective | Complete | 2026-04-15 | false | false | true |
+| ac3 | ISF-2026-005 | Corrective | Open | 2026-11-30 | true | false | false |
+| ac4 | ISF-2026-004 | Preventive | Complete | 2026-09-01 | false | false | false |
+
+canCloseFinding for each ORASHI finding with its own actions:
+ISF-2026-004 (Major nonconformity, Action in progress): REFUSED: 1 action still open against this finding.
+ISF-2026-005 (Minor nonconformity, Open): REFUSED: Record the correction: what was done about the thing that was found. A corrective action deals with the cause, and this is the other half.
+ISF-2026-001 (Major nonconformity, Closed): REFUSED: This finding is already closed.
+ISF-2026-002 (Observation, Voided): REFUSED: This finding is already voided.
+ISF-2026-003 (Opportunity for improvement, Open): ALLOWED
+
+canCloseFinding on a Major nonconformity, one requirement met at a time:
+no correction recorded: REFUSED: Record the correction: what was done about the thing that was found. A corrective action deals with the cause, and this is the other half.
+a correction, and an action still open: REFUSED: 1 action still open against this finding.
+the action complete, no root cause: REFUSED: A major nonconformity needs its root cause recorded before it closes. Closing one without it is how the same finding is raised again at the next surveillance audit.
+a root cause, only a preventive action: REFUSED: A major nonconformity needs at least one corrective action. A correction deals with the instance; a corrective action deals with the cause.
+a corrective action found not to work: REFUSED: A corrective action here was checked and found not to have worked. Raise another one rather than closing over it.
+a corrective action complete and unchecked: REFUSED: No corrective action has been verified effective yet. For a major nonconformity the effectiveness check is the point: a completed action is not a working one.
+a corrective action verified effective: ALLOWED
+a Minor nonconformity with its correction and no actions: ALLOWED
+an Observation with nothing recorded: ALLOWED
+
+findingByUrgency:
+| order | code | type | status | overdue |
+| --- | --- | --- | --- | --- |
+| 1 | ISF-2026-004 | Major nonconformity | Action in progress | true |
+| 2 | ISF-2026-003 | Opportunity for improvement | Open | false |
+| 3 | ISF-2026-005 | Minor nonconformity | Open | false |
+| 4 | ISF-2026-001 | Major nonconformity | Closed | false |
+| 5 | ISF-2026-002 | Observation | Voided | false |
+
+The ISO audit lifecycle uses the same workflow as the Audit & Findings Manager:
+the two AUDIT_TRANSITIONS tables agree on every status: true
+isAuditOverdue in the ISO module, for an audit whose planned end has passed:
+Planned: true
+In progress: true
+Fieldwork complete: true
+Reported: true
+Closed: false
+Cancelled: false
+
+canReportAudit on ISA-2026-002 with three clauses in scope, two not yet examined: REFUSED: 2 clauses in scope have no result yet (7.2, 8.1).
+with no clauses in scope: REFUSED: This audit has no clauses in its scope. An audit that examined nothing has nothing to report.
+
+# SECTION 22: CERTIFICATION READINESS IS A LIST OF BLOCKERS (owned by Expert m05 and m06)
+
+certificationReadiness for ISO 14001:2015 at ORASHI: ready false.
+
+| severity | count | text |
+| --- | --- | --- |
+| blocking | 1 | 1 major nonconformity is open. A certification body will not recommend certification over one. |
+| blocking | 3 | 3 applicable clauses have never been examined by an internal audit. ISO 9001 §9.2 requires the organization to audit its own system. |
+| blocking | 1 | 1 clause is marked conformant with no evidence, date or assessor recorded. |
+| blocking | 1 | 1 clause is assessed nonconformant and not yet resolved. |
+| serious | 1 | 1 clause was last audited before this certification cycle began. |
+| serious | 1 | 1 applicable clause has never been assessed at all. |
+| serious | 1 | 1 corrective or preventive action is past its due date. |
+| watch | 1 | 1 minor nonconformity is open. |
+| watch | 1 | 1 clause review is past due. |
+| watch | 1 | 1 finding is past its due date. |
+| watch | 1 | The certificate expires in 85 days. Book the recertification audit before then. |
+
+| count | value |
+| --- | --- |
+| clauses | 13 |
+| applicable | 12 |
+| excluded | 1 |
+| assessed | 11 |
+| evidenced | 9 |
+| conformant | 9 |
+| partial | 1 |
+| nonconformant | 1 |
+| notAssessed | 1 |
+| covered | 8 |
+| neverAudited | 3 |
+| staleAudited | 1 |
+| openMajor | 1 |
+| openMinor | 1 |
+| overdueActions | 1 |
+| certificateDays | 85 |
+| certificateExpiring | true |
+| certificateExpired | false |
+
+The same register with the certificate expiry moved, and nothing else:
+| certificate expires | certificateDays | certificateExpiring | certificateExpired | certificate item listed |
+| --- | --- | --- | --- | --- |
+| 2026-10-14 | -1 | true | true | serious: The certificate expired 1 day ago. The organization cannot claim certification, and a surveillance audit is no longer possible: it needs a recertification audit. |
+| 2026-10-15 | 0 | true | false | watch: The certificate expires in 0 days. Book the recertification audit before then. |
+| 2027-01-13 | 90 | true | false | watch: The certificate expires in 90 days. Book the recertification audit before then. |
+| 2027-01-14 | 91 | false | false | none |
+| tbc | null | false | false | none |
+| null | null | false | false | none |
+
+A standard with no clauses in the register: ready false; blocking (count 0): This standard has no applicable clauses in the register yet, so there is nothing to be ready with.
+
+summarise over the same register: clauses 13, applicable 12, excluded 1, evidenced claims 9, unevidenced claims 1, notAssessed 1, reviews overdue 1, reviews due soon 1, audits 6, audits open 2, audits overdue 2, clauses covered 8, never audited 3, stale 1, open findings 3, open major 1, findings overdue 1, open actions 2, overdue actions 1, awaiting an effectiveness check 1.
+
+# SECTION 23: HELD ITEMS, OWNER DECISIONS AND THE LIMITS THIS COURSE TEACHES WITHOUT GRADING (owned by Expert m06)
+
+Everything in this section is taught as a stated policy or a limit. None of it is a graded field.
+
+Owner decisions in force (AssuranceApps-STATUS.md section 3n, AS15), as they touch these five apps:
+Q1: an unreadable today makes deriveStatus throw (SECTION 2 prints the error).
+Q2: evidence counts towards Compliant only for the current period (SECTION 5).
+Q4: ISO coverage counts only Reported or Closed audits (SECTION 20).
+Q5: every examiner is checked for independence, through canExamineClause (SECTION 19).
+Q6: an expired certificate is a serious readiness item, one inside the lead window a watch item (SECTION 22).
+Q11: a Not applicable answer without a reason is not an answer, and a cancellation without a reason does not complete a programme (SECTIONS 15 and 17).
+D1: a document review task is decided only by its assigned reviewer, never by the author (SECTION 8).
+
+Owner ambiguities recorded in the FINDINGS files and not changed:
+a document review period missing from a call to nextReviewDate returns no date; the default of DEFAULT_REVIEW_PERIOD_MONTHS is the caller's to apply (SECTION 8 prints the null).
+a complete audit programme that contains a cancelled audit reads below one hundred percent, by design (SECTION 17 counts reported audits only).
+a templated audit passed with no checklist items passes the unanswered-items rule vacuously; the database counts the template itself.
+an unreadable today is refused by complianceStatus alone; SECTION 2 shows two other modules answering as though nothing were due.
+
+Findings from this course's recon, never graded:
+R1: on the same four audits, one of them cancelled with no reason, programmeProgress counts 2 outstanding and summarise counts 1. The two exports disagree, and the oracle does not model the reasonless cancellation in programmeProgress. Neither count is graded or taught as a figure.
+R2: checklistProgress on 57 answered of 200 prints 28 percent. The exact half-up rounding the audit oracle uses gives one more. No graded percent sits on an exact half.
+R3: a certificate with certificateDays -15 reads certificateExpiring true and certificateExpired true at once, while the readiness list names it only once, as serious. The expiring flag is not taught as "inside the lead window".
+R4: REG-2026-006 is a One-off obligation filed before its due date passed. deriveStatus reads Compliant, which is the AS13-0 repair, and explainStatus gives the reason "Last filed 2026-08-10, next due in -62 days.". The Compliant reason was written for a recurring obligation with a next due date ahead, and prints a negative count here.
+R5: the readiness list for ISO 14001:2015 carries 1 item citing ISO 9001 by name, and canSetClauseStatus cites ISO 9001:2015 for a Not applicable justification whatever the standard. The name printed is the one the engine was written against, whatever standard the register holds.
+
+# SECTION 24: WHAT THE ORACLES CHECK (owned by Expert m06)
+
+| module | golden cases | distinct exports with a case | sort cases | oracle |
+| --- | --- | --- | --- | --- |
+| calendar | 63 | 4 | 0 | tools/validation/assurance/oracle_calendar.py |
+| complianceStatus | 149 | 10 | 3 | tools/validation/assurance/oracle_compliance.py |
+| documentControl | 130 | 13 | 2 | tools/validation/assurance/oracle_documents.py |
+| qualityAssurance | 414 | 27 | 2 | tools/validation/assurance/oracle_quality.py |
+| isoCompliance | 206 | 32 | 1 | tools/validation/assurance/oracle_iso.py |
+| auditManagement | 171 | 31 | 2 | tools/validation/assurance/oracle_audit.py |
+
+Each golden file is written by an independent stdlib Python oracle, from the rules as the modules and the status document state them. A golden figure beside an engine figure is two methods agreeing. The oracles check the verdict of a gate (allowed or refused) and never the wording of its reason, so every refusal sentence in this digest is the engine's own and is quoted rather than checked.

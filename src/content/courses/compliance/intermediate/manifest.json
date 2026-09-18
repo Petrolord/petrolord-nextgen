@@ -1,0 +1,307 @@
+{
+  "app_slug": "compliance",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-inspection-and-test-plan",
+      "title": "The Inspection and Test Plan",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-five-point-types-and-one-that-stops-work",
+          "title": "Five point types, and one that stops work",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-decision-is-a-date-and-a-name",
+          "title": "A decision is a date and a name",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-waiver-carries-its-reason",
+          "title": "A waiver carries its reason",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-setting-a-hold-point-aside",
+          "title": "Setting a hold point aside",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-progress-counted-from-the-points",
+          "title": "Progress counted from the points",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-closing-a-plan",
+      "title": "Closing a Plan",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-failed-point-blocks-whatever-its-type",
+          "title": "A failed point blocks whatever its type",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-hold-points-outstanding",
+          "title": "Hold points outstanding",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-an-open-ncr-blocks-the-plan",
+          "title": "An open NCR blocks the plan",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-removing-a-point-and-raising-an-ncr",
+          "title": "Removing a point, and raising an NCR",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-nonconformance",
+      "title": "The Nonconformance",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-disposition-comes-first",
+          "title": "The disposition comes first",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-severity-sets-what-closure-needs",
+          "title": "Severity sets what closure needs",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-completed-action-and-a-working-one",
+          "title": "A completed action and a working one",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-ageing-and-its-four-bands",
+          "title": "Ageing and its four bands",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-dashboard-counts",
+          "title": "What the dashboard counts",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-checklist",
+      "title": "The Checklist",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-not-applicable-needs-a-reason",
+          "title": "Not applicable needs a reason",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-no-checklist-is-no-percentage",
+          "title": "No checklist is no percentage",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-failed-critical-item-needs-a-finding",
+          "title": "A failed critical item needs a finding",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-stop-work-records-its-correction",
+          "title": "Stop work records its correction",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-audit-and-the-programme",
+      "title": "The Audit and the Programme",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-six-statuses-and-the-moves-between-them",
+          "title": "Six statuses and the moves between them",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-reporting-an-audit-needs",
+          "title": "What reporting an audit needs",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-closing-an-audit-needs",
+          "title": "What closing an audit needs",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-lead-auditor-and-the-auditee",
+          "title": "The lead auditor and the auditee",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-programme-is-delivered-by-its-reports",
+          "title": "A programme is delivered by its reports",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-abam-plan-end-to-end",
+          "title": "The Abam plan end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-abam-audit-and-programme-end-to-end",
+          "title": "The Abam audit and programme end to end",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

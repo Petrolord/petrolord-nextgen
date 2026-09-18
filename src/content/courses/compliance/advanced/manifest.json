@@ -1,0 +1,305 @@
+{
+  "app_slug": "compliance",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-a-claim-is-evidence",
+      "title": "A Claim Is Evidence",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-applicability-and-its-justification",
+          "title": "Applicability and its justification",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-evidence-a-date-and-a-name",
+          "title": "Evidence, a date and a name",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-nonconformant-verdict-needs-two-of-the-three",
+          "title": "A nonconformant verdict needs two of the three",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-reviewing-the-register",
+          "title": "Reviewing the register",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-independence",
+      "title": "Independence",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-lead-auditor-and-the-clauses-in-scope",
+          "title": "The lead auditor and the clauses in scope",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-every-examiner",
+          "title": "Every examiner",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-three-independence-rules-in-three-apps",
+          "title": "Three independence rules in three apps",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-external-auditor",
+          "title": "The external auditor",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-coverage-over-the-cycle",
+      "title": "Coverage Over the Cycle",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-only-internal-audits-count",
+          "title": "Only internal audits count",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-only-reported-results-count",
+          "title": "Only reported results count",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-never-examined-and-examined-too-long-ago",
+          "title": "Never examined, and examined too long ago",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-each-standard-its-own-cycle",
+          "title": "Each standard its own cycle",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-latest-examination-that-counts",
+          "title": "The latest examination that counts",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-findings-and-root-causes",
+      "title": "Findings and Root Causes",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-correction-and-the-corrective-action",
+          "title": "The correction and the corrective action",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-major-nonconformity-needs-its-root-cause",
+          "title": "A major nonconformity needs its root cause",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-root-cause-vocabularies",
+          "title": "Two root cause vocabularies",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-findings-age-stops-at-closure",
+          "title": "A finding's age stops at closure",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-which-finding-comes-first",
+          "title": "Which finding comes first",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-certification-readiness",
+      "title": "Certification Readiness",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-list-of-blockers",
+          "title": "A list of blockers",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-blocking-serious-and-watch",
+          "title": "Blocking, serious and watch",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-certificate-and-its-window",
+          "title": "The certificate and its window",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-counts-beside-the-list",
+          "title": "The counts beside the list",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-orashi-register-end-to-end",
+          "title": "The Orashi register end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-is-held-and-what-is-decided",
+          "title": "What is held and what is decided",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-readiness-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-oracles-check",
+          "title": "What the oracles check",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-where-this-course-hands-over",
+          "title": "Where this course hands over",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+ "days": {
+  "decimals": 0,
+  "match": "^(?:ekpe_emissions_permit_next_action_days|ekpe_community_report_next_due_days|ekpe_waste_return_period_start_days|ekpe_abstraction_next_action_after_filing_days|ekpe_slug_catcher_procedure_review_days|ekpe_emergency_plan_review_days|utapate_oldest_open_ncr_days|utapate_mean_open_ncr_age_days|obeakpu_clause_812_last_examined_days|obeakpu_clause_93_last_examined_days|obeakpu_closed_major_finding_age_days|obeakpu_certificate_days)$"
+ },
+ "percent": {
+  "decimals": 0,
+  "match": "^(?:utapate_itp_progress_pct|utapate_itp_progress_after_requests_pct|utapate_checklist_progress_pct|utapate_programme_delivered_pct)$"
+ },
+ "count": {
+  "decimals": 0,
+  "match": "^(?:obeakpu_evidenced_claims|obeakpu_clauses_covered)$"
+ }
+}

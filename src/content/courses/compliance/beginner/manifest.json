@@ -1,0 +1,305 @@
+{
+  "app_slug": "compliance",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-the-register-derives",
+      "title": "What the Register Derives",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-five-apps-and-one-date",
+          "title": "Five apps and one date",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-date-is-a-day",
+          "title": "A date is a day",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-an-unreadable-date-is-no-date",
+          "title": "An unreadable date is no date",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-as-of-date-is-an-input",
+          "title": "The as-of date is an input",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-an-obligations-status",
+      "title": "An Obligation's Status",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-nine-statuses-worst-first",
+          "title": "Nine statuses, worst first",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-lifecycle-answers-for-itself",
+          "title": "The lifecycle answers for itself",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-an-expired-permit-outranks-an-overdue-return",
+          "title": "An expired permit outranks an overdue return",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-earlier-of-two-dates",
+          "title": "The earlier of two dates",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-on-track-and-compliant-are-two-words",
+          "title": "On track and compliant are two words",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-lead-time-and-the-current-period",
+      "title": "Lead Time and the Current Period",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-lead-time-sets-the-warning",
+          "title": "The lead time sets the warning",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-missing-lead-time",
+          "title": "A missing lead time",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-edge-of-the-window",
+          "title": "The edge of the window",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-period-a-filing-belongs-to",
+          "title": "The period a filing belongs to",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-one-day-before-the-period",
+          "title": "One day before the period",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-rolling-the-schedule-forward",
+      "title": "Rolling the Schedule Forward",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-from-the-date-that-was-due",
+          "title": "From the date that was due",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-month-ends-pulled-back",
+          "title": "Month ends pulled back",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-two-frequencies-with-no-next-date",
+          "title": "Two frequencies with no next date",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-filed-one-off-is-discharged",
+          "title": "A filed one-off is discharged",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-controlled-documents",
+      "title": "Controlled Documents",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-in-force-and-not-in-force",
+          "title": "In force and not in force",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-review-date-earned-at-issue",
+          "title": "The review date earned at issue",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-revision-numbers-keep-their-width",
+          "title": "Revision numbers keep their width",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-author-does-not-review",
+          "title": "The author does not review",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-review-queue",
+          "title": "The review queue",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-ikoro-register-end-to-end",
+          "title": "The Ikoro register end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ikoro-library-end-to-end",
+          "title": "The Ikoro library end to end",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "compliance-register-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+ "slug": "compliance",
+ "prefix": "cq",
+ "name": "Compliance, Audit & Quality",
+ "pathOrder": 60,
+ "module": "assurance",
+ "prerequisite": null,
+ "repo": "/root/wt-as-compliance-nextgen",
+ "branch": "feat/as-compliance-course",
+ "sibling": {
+  "slug": "riskchange",
+  "pathOrder": 59,
+  "branch": "feat/as-riskchange-course",
+  "repo": "/root/wt-as-riskchange-nextgen"
+ },
+ "asOf": "2026-10-15",
+ "goldens": [
+  "assurance/goldens/calendar_cases.json",
+  "assurance/goldens/complianceStatus_cases.json",
+  "assurance/goldens/documentControl_cases.json",
+  "assurance/goldens/qualityAssurance_cases.json",
+  "assurance/goldens/isoCompliance_cases.json",
+  "assurance/goldens/auditManagement_cases.json"
+ ],
+ "engines": [
+  "engines/assurance/calendar.js",
+  "engines/assurance/complianceStatus.js",
+  "engines/assurance/documentControl.js",
+  "engines/assurance/qualityAssurance.js",
+  "engines/assurance/isoCompliance.js",
+  "engines/assurance/auditManagement.js"
+ ],
+ "enginesVendoredAt": "NextGen, sha-identical with engines 6b00f43 (the squash merge of PR #211, AS15), which the Suite pins. The WHOLE engines/assurance family, 51 paths, WALKED by vendor/closure.py from 50 seeds discovered by pattern: ten modules, ten goldens, ten oracles, ten FINDINGS records, ten jest suites and the goldens runner they import. Proved path by path by git blob hash, by md5, and against the Suite's own vendoring at the same pin. Canonical pin in VENDOR.json stays at 709172f, which predates the domain, so all 51 are ledgered as extra in group 9-assurance-ahead-of-pin, each pinned to its blob. The sibling wave riskchange vendors the identical set.",
+ "plan": {
+  "state": "FOUNDATION COMPLETE. Engines vendored sha-identical at 6b00f43, digest built and reproducible under two rebuilds and five time zones with the clock proven unread, eighteen graded integer fields cut and reproduced by the Python oracles, gates written with negative controls, scaffold written (manifests plus title-only placeholders). No lesson body, bank, panel, lab or migration written yet; capstone prompts are drafts in capstone.json.",
+  "thesis": "Nothing in these five apps is typed as a status: every status, count, age and verdict is derived from a dated record read against one stated as-of date, and every gate refuses until the evidence, the date and the named person it asks for are on the record.",
+  "tiers": {
+   "beginner": "THE REGISTER AND THE CALENDAR: complianceStatus, documentControl, calendar. Graded: six day counts.",
+   "intermediate": "THE PLAN, THE NONCONFORMANCE AND THE CHECKLIST: qualityAssurance, auditManagement. Graded: four percents and two NCR ages.",
+   "advanced": "THE MANAGEMENT SYSTEM: isoCompliance and the finding rules auditManagement imports. Graded: two coverage counts and four day counts."
+  },
+  "cases": {
+   "teaching": [
+    "IKORO",
+    "ABAM",
+    "ORASHI"
+   ],
+   "capstone": [
+    "EKPE",
+    "UTAPATE",
+    "OBEAKPU"
+   ]
+  }
+ },
+ "digest": {
+  "lines": 849,
+  "sections": 24,
+  "withheld": null,
+  "note": "No section is history. SECTION 23 names the owner decisions in force by the wave that took them, in the present tense, and the five recon findings as limits. The explainStatus reason for a filed One-off (R4) is printed with a frame on the line after it."
+ },
+ "grading": {
+  "grader": "public.academy_submit_capstone reads expected, tol and the answer as numeric, so every graded field is an integer and statuses, verdicts and dates are taught and never graded. A date is graded as calendar.daysUntil from the as-of date.",
+  "tolerance": "0 for all eighteen: a whole day, a percent the engine rounds, or a count has no legitimate reading error. gradeprecision.py's half-unit floor is written for rounded readings and is recorded as not applying.",
+  "collisionRule": "No graded value equals the absolute value of any number token the digest prints (the go-live rule), and no two graded values share an absolute value."
+ },
+ "findings": {
+  "R1": "programmeProgress.outstanding counts a Cancelled audit with no reason as outstanding (AS15 Q11) and auditManagement.summarise().auditsOutstanding does not; the oracle's programme_progress does not model the rule either. Neither count is graded.",
+  "R2": "checklistProgress and programmeProgress round a float, the audit oracle rounds exactly; they part at an exact half (57 of 200: 28 against 29). No graded percent sits on an exact half, enforced by oracle_check.py.",
+  "R3": "certificationReadiness.counts.certificateExpiring is true for a lapsed certificate as well as certificateExpired. Latent in the Suite (certificateState reads Expired first). The flag is not graded.",
+  "R4": "explainStatus gives a filed One-off obligation the reason 'Last filed ..., next due in -N days.' LIVE on the Regulatory Compliance detail page. The status is right; no reason text is graded.",
+  "R5": "certificationReadiness and canSetClauseStatus cite ISO 9001 by name whatever the standard. Prose, not graded.",
+  "clock": "No clock read without an override. Every clock-reading export takes today as a parameter and forwards it; proven by the source-read clock guard (274 gated calls), the fake-clock rebuild and the static unguarded-call check."
+ },
+ "decisions": [
+  "Every graded field is an integer at tolerance 0, because the academy grader is numeric only; dates are graded as daysUntil from the as-of date and enums are never graded.",
+  "The as-of date is 2026-10-15, built at local midnight; the reproducibility gate adds America/Los_Angeles to the three required zones because only a zone west of Greenwich can see a UTC parse, and its negative control proves it.",
+  "Graded counts come from a forty-clause ISO 45001 register so they clear the go-live collision rule; small counts would collide with the day and month tokens every printed date carries.",
+  "Manifests carry the three panel ids exactly as FC6's scaffold writes them, so courseContent.test.js 'every panel referenced is registered' is red until the panel phase registers them.",
+  "Lesson placeholders are title-only H1 files, because the content lint fails a manifest lesson with no file; FC6 wrote none."
+ ],
+ "gates": {
+  "structure": {
+   "file": "structure.py",
+   "md5": "4dbe1c3ca5a8dd77b486499bd889d0d7",
+   "result": "exit 0: panels: 73 of 78 lessons carry one; ids ['compliance-plan-explorer', 'compliance-readiness-explorer', 'compliance-register-explorer']"
+  },
+  "vendor-closure": {
+   "file": "vendor/closure.py",
+   "md5": "53e4566e82a0365b4caff24c7a1a3b3b",
+   "result": "exit 0: 51 of 51 closure paths are SHA-IDENTICAL with engines 6b00f43 in /root/wt-as-compliance-nextgen/packages/engines"
+  },
+  "digest-repro": {
+   "file": "gate_repro.sh",
+   "md5": "c2f0d883fb4e883a87395130c87b89a4",
+   "result": "exit 0: gate_repro: PASS"
+  },
+  "kit-digestrepro": {
+   "file": "/root/dc-wavekit/digestrepro.sh",
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "result": "exit 0: NOTE: no truth-*.json in this wave. If numsweep runs here, harvest_digest.py first."
+  },
+  "clock": {
+   "file": "gate_clock.sh",
+   "md5": "be5224bf6f5003fe1059c8928a4c8c99",
+   "result": "exit 0: gate_clock: PASS"
+  },
+  "kit-digestprose": {
+   "file": "/root/dc-wavekit/digestprose.mjs",
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "result": "exit 0: [digestprose] /root/as-wip-compliance/digest.txt: 849 line(s), 24 section title(s) and 38 in-body marker(s) swept against their blocks, 32 history framings, 40 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 1 deferred as verbatim engine strings; 0 failing"
+  },
+  "kit-digestfigures": {
+   "file": "/root/dc-wavekit/digestfigures.py",
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "result": "exit 0: [digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "capstone-generator": {
+   "file": "compliance_capstone.mjs",
+   "md5": "4774c5962afc88e97b90137f17094721",
+   "result": "exit 0: advanced      obeakpu_clauses_covered                          34"
+  },
+  "oracle-check": {
+   "file": "oracle_check.py",
+   "md5": "19056d52d757c7e077357459b3dabdb3",
+   "result": "exit 0: graded fields the oracle reproduces: 18 of 18",
+   "control": "exit 1: graded fields the oracle reproduces: 17 of 18"
+  },
+  "discriminate": {
+   "file": "discriminate.mjs",
+   "md5": "6c2725c7c5a1a7c444a6959c857ac464",
+   "result": "exit 0: the closest miss anywhere in the eighteen: ekpe_emissions_permit_next_action_days at 1 unit(s), against an exact tolerance",
+   "control": "exit 1: the closest miss anywhere in the eighteen: ekpe_emissions_permit_next_action_days at 1 unit(s), against an exact tolerance"
+  },
+  "collisions": {
+   "file": "gate_collisions.py",
+   "md5": "244b1381a5f67db162d64529153546de",
+   "result": "exit 0: collisions with the digest: 0; graded pairs sharing a value: 0",
+   "control": "exit 1: collisions with the digest: 1; graded pairs sharing a value: 0"
+  },
+  "promptleak": {
+   "file": "gate_promptleak.py",
+   "md5": "2b0bf60b259bb7028817ac1e2163ffa7",
+   "result": "exit 0: leaks: 0",
+   "control": "exit 1: leaks: 2"
+  },
+  "capstone-leak": {
+   "file": "gate_capstone_leak.py",
+   "md5": "1449872233d187490a09bd83c7fbccee",
+   "result": "exit 0: leaks: 0",
+   "control": "exit 1: leaks: 4"
+  },
+  "copy-rule": {
+   "file": "gate_copy_rule.py",
+   "md5": "9382275420ac1af95585882478c0ccad",
+   "result": "exit 0: violations: 0",
+   "control": "exit 1: violations: 2"
+  },
+  "kit-gradeprecision": {
+   "file": "/root/dc-wavekit/gradeprecision.py",
+   "result": "NOT APPLIED BY DESIGN: it flags all 18 fields because each is graded at tolerance 0 and its rule is half a unit of the printed precision (0.5 at 0 decimals). That rule protects a learner ROUNDING A READING; every graded value here is an integer the engine returns (a day count, a count, or a percent the engine has already rounded), so an exact tolerance grades nothing a correct learner could miss. Setting 0.5 would make the kit green and still accept no other integer; the brief asks for exact."
+  },
+  "kit-sourceprose": {
+   "file": "/root/dc-wavekit/sourceprose.mjs",
+   "result": "compliance_dump.mjs, compliance_fields.mjs, clockguard.mjs, compliance_capstone.mjs: 0 warned, 0 failing"
+  }
+ },
+ "vendorCommit": "This branch's vendor commit IS the sibling wave's, 017981d8 'chore(engines): vendor the assurance family (engines 6b00f43)', adopted by git reset --keep before any foundation commit, so the two assurance PRs share one vendoring commit and cannot conflict on it. This wave's own vendor commit, 023e8f97, carried the same 51 paths byte for byte (git diff over packages/engines outside VENDOR.json is empty) and differed only in the wording of the 51 ledger reasons; it was committed two minutes after the sibling's and was replaced rather than pushed."
+}

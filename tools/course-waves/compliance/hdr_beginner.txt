@@ -1,0 +1,30 @@
+-- ============================================================================
+-- compliance ASSOCIATE DEEP SEED: Compliance, Audit & Quality, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE REGISTER AND THE CALENDAR. A calendar date is a
+-- day read at local midnight and an unreadable date is no date; an
+-- obligation's status is derived from its lifecycle and its dates in a fixed
+-- precedence, and the reason comes with it; the lead time decides when "Due
+-- soon" starts and the current period decides whether a filing still counts;
+-- the schedule rolls forward from the date that was due; and a controlled
+-- document earns its review date when it is issued, never when it is
+-- corrected.
+--
+-- THE ENGINE FACT THIS TIER OWNS. One as-of date is an INPUT. Every status in
+-- the register is a comparison against it, and the engine is given it rather
+-- than reading a clock.
+--
+-- THE TRAP THE TIER IS BUILT ON. Two dates count down at once. A permit's
+-- expiry and a return's due date sit on the same row, the earlier one drives
+-- the warning, and a reader who counts to the due date misses a permit that
+-- lapses first.
+--
+-- HELD, taught as a limit and never graded: the negative "next due in" reason
+-- the engine prints for a filed One-off (R4), and the modules other than
+-- complianceStatus answering an unreadable today as though nothing were due.
+-- The capstone grades six whole numbers of days, each an engine return.
+-- ============================================================================
