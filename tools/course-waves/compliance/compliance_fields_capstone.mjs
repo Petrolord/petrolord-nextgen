@@ -151,7 +151,12 @@ export const OBEAKPU_AUDITS = [
   { id: 'ob-cb', audit_code: 'OSA-2026-S02', audit_type: 'Surveillance', status: 'Closed', actual_end: '2026-07-17' },
 ];
 /** Which audits examined which clauses. Default: the 2025 internal audit. */
-const EXAMINED_2025 = OBEAKPU_REFS.filter((r) => !['8.1.4.3', '4.4', '6.1.4', '7.5.2', '10.3', '5.3'].includes(r));
+// The clauses the 2025 internal audit did NOT examine. 7.1 and 7.3 were added
+// after ASC-1: the re-vendored isoCompliance exports 34 functions, so the digest
+// prints 34, and the covered count was moved off 34 (to 32) rather than
+// hiding an engine count (gate_collisions.py).
+export const OBEAKPU_NOT_EXAMINED_2025 = ['8.1.4.3', '4.4', '6.1.4', '7.5.2', '10.3', '5.3', '7.1', '7.3'];
+const EXAMINED_2025 = OBEAKPU_REFS.filter((r) => !OBEAKPU_NOT_EXAMINED_2025.includes(r));
 export const OBEAKPU_AUDIT_CLAUSES = [
   ...EXAMINED_2025.map((r) => ({ audit_id: 'ob-2025', clause_id: cid(r), result: 'Conformant', examined_on: '2025-03-19' })),
   // The Reported 2026 audit re-examined the operational clauses.

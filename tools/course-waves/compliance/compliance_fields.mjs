@@ -81,7 +81,7 @@ export const IKORO_OBLIGATIONS = [
 ];
 
 /** The lead-time sweep runs on the flare return (o03) and nothing else. */
-export const IKORO_LEAD_SWEEP = [0, 7, 14, 16, 17, 30, 90, null, '', -5, 'ten'];
+export const IKORO_LEAD_SWEEP = [0, 7, 14, 15, 16, 17, 30, 90, null, '', -5, 'ten'];
 
 /** One due date rolled by every frequency, and the three month-end cases. */
 export const ROLL_FROM = '2026-08-31';

@@ -1,7 +1,7 @@
 # compliance: Compliance, Audit & Quality. Teaching digest.
 # Every figure is a whole number: days (daysUntil, ages), counts, and percents the engine has already rounded. Dates print as YYYY-MM-DD through the engine's own toDateOnlyString.
 # AS-OF DATE: 2026-10-15. Every engine call in this digest that reads a date against today passes this one date, except the rows in SECTION 2 that show what an unreadable today does, which say so. Nothing below read the machine clock, and the generator refuses to print a line from a call that did not pass the as-of date.
-# ENGINES: engines/assurance at petrolord-engines 9d5d3b4 (ASC-0), vendored in NextGen under packages/engines.
+# ENGINES: engines/assurance at petrolord-engines ab3ce6a (ASC-1), vendored in NextGen under packages/engines.
 # MODULES TAUGHT: calendar, complianceStatus, documentControl, qualityAssurance, auditManagement, isoCompliance.
 # CASES: IKORO (a terminal obligation register and document library), ABAM (a flowline tie-in quality plan, its NCRs, a contractor HSE audit and an audit programme), ORASHI (an ISO 14001:2015 management system). All three are invented records.
 # Built by build_digest.sh from compliance_dump.mjs and compliance_fields.mjs. Never edited by hand.
@@ -16,7 +16,7 @@ Each module exports rules as functions and vocabularies as frozen lists. The cou
 | complianceStatus | 11 | 8 | 4 |
 | documentControl | 14 | 7 | 4 |
 | qualityAssurance | 28 | 24 | 7 |
-| isoCompliance | 33 | 24 | 10 |
+| isoCompliance | 34 | 25 | 10 |
 | auditManagement | 33 | 20 | 4 |
 
 complianceStatus.LIFECYCLES: Active, Draft, Superseded, Not applicable
@@ -32,6 +32,7 @@ documentControl.DEFAULT_REVIEW_PERIOD_MONTHS: 24
 qualityAssurance.POINT_TYPES: Hold point, Witness point, Review point, Monitor point, Surveillance point
 qualityAssurance.BLOCKING_POINT_TYPES (stop work): Hold point
 qualityAssurance.CHECKPOINT_RESOLVED_STATUSES: Passed, Waived, Not applicable
+qualityAssurance.CHECKPOINT_STATUSES, in full: Pending, Notified, In progress, Passed, Failed, Waived, Not applicable
 qualityAssurance.NCR_SEVERITIES: Critical, Major, Minor, Observation
 qualityAssurance.NCR_EFFECTIVENESS_REQUIRED: Critical, Major
 qualityAssurance.DISPOSITIONS: Use as is, Repair, Rework, Regrade, Reject, Return to supplier, Scrap
@@ -39,6 +40,9 @@ qualityAssurance.CONCESSION_DISPOSITIONS: Use as is, Regrade
 auditManagement.CRITICALITIES: Critical, Major, Minor
 auditManagement.ANSWERED_RESULTS: Conformant, Nonconformant, Observation, Not applicable
 isoCompliance.CLAUSE_STATUSES: Not assessed, Conformant, Partially conformant, Nonconformant, Not applicable
+isoCompliance.AUDIT_TYPES, in full: Internal, Supplier, Certification, Surveillance, Recertification
+isoCompliance.AUDIT_OPEN_STATUSES: Planned, In progress, Fieldwork complete, Reported
+isoCompliance.AUDIT_UNDELIVERED_STATUSES (the statuses an audit can be overdue in): Planned, In progress, Fieldwork complete
 isoCompliance.FINDING_TYPES: Major nonconformity, Minor nonconformity, Observation, Opportunity for improvement
 isoCompliance.EFFECTIVENESS_REQUIRED_TYPES: Major nonconformity
 isoCompliance.COVERING_AUDIT_TYPES: Internal
@@ -113,7 +117,7 @@ REG-2026-008: Last filed 2026-08-05, next due in 108 days.
 REG-2026-009: Lifecycle is Superseded, so it is not tracked against a date.
 REG-2026-010: Lifecycle is Draft, so it is not tracked against a date.
 REG-2026-011: Lifecycle is Not applicable, so it is not tracked against a date.
-REG-2026-012: Due in 25 days, inside the 30 day lead time set for this obligation.
+REG-2026-012: Due in 25 days, inside the default 30 day lead time (none is set for this obligation).
 REG-2026-013: No due date or expiry date has been set, so nothing can fall due.
 
 The precedence, one obligation varied one field at a time from REG-2026-005 (the radioactive source licence):
@@ -141,6 +145,7 @@ REG-2026-003, the quarterly flare and venting return, is due 2026-10-31: 16 days
 | 0 | On track |
 | 7 | On track |
 | 14 | On track |
+| 15 | On track |
 | 16 | Due soon |
 | 17 | Due soon |
 | 30 | Due soon |
@@ -203,6 +208,16 @@ Three month ends:
 REG-2026-002 was due 2026-10-10 and is filed on 2026-10-14. The app rolls from the date that was due: rollForward(2026-10-10, Monthly) = 2026-11-10.
 The same call on the filing date would give 2026-11-14. The Regulatory Compliance app passes the due date to rollForward when a filing is recorded, so this second date is the one the schedule would walk to if it rolled from the filing.
 After the filing is recorded and the due date rolled: status Due soon, next action 2026-11-10, 26 days.
+The rolled row's periodStart is 2026-10-10, and the filing on 2026-10-14 is on or after it, so the filing counts for the current period. The status is still Due soon: deriveStatus asks whether the next action date is inside the lead time before it asks about the filing.
+The same rolled row with lead_time_days 0, so no window is open: status Compliant. Last filed 2026-10-14, next due in 26 days.
+
+Rolling again from a date that was pulled back to a month end:
+| from | frequency | next due date | and the roll after that |
+| --- | --- | --- | --- |
+| 2026-01-31 | Monthly | 2026-02-28 | 2026-03-28 |
+| 2026-02-28 | Monthly | 2026-03-28 | 2026-04-28 |
+| 2026-08-31 | Semi-annual | 2027-02-28 | 2027-08-28 |
+Each roll starts from the date it is given. A date pulled back to the end of a short month rolls on from that day of the month.
 
 # SECTION 7: THE REGISTER SUMMARISED, AND SORTED WORST FIRST (owned by Associate m02 and m06)
 
@@ -247,6 +262,23 @@ Licensing: 1
 Operational: 1
 Financial: 1
 
+The regime of each obligation, which countBy groups:
+| code | obligation | regime | obligation type |
+| --- | --- | --- | --- |
+| REG-2026-001 | Produced water discharge permit | Environmental | Permit |
+| REG-2026-002 | Monthly produced water quality return | Reporting | Periodic report |
+| REG-2026-003 | Quarterly flare and venting return | Reporting | Periodic report |
+| REG-2026-004 | Annual environmental monitoring report | Environmental | Periodic report |
+| REG-2026-005 | Radioactive source licence | Licensing | Licence |
+| REG-2026-006 | Pipeline right of way consent | Operational | Consent |
+| REG-2026-007 | Oil spill contingency plan notification | Health & Safety | Notification |
+| REG-2026-008 | Host community development report | Reporting | Periodic report |
+| REG-2026-009 | Original environmental impact approval | Environmental | Permit |
+| REG-2026-010 | Safety case resubmission | Health & Safety | Periodic report |
+| REG-2026-011 | Night noise permit | Environmental | Permit |
+| REG-2026-012 | Annual concession rental | Financial | Fee or levy |
+| REG-2026-013 | Waste consignment register | Environmental | Other |
+
 # SECTION 8: DOCUMENT CONTROL: THE REVIEW DATE, THE REVISION AND WHO MAY REVIEW (owned by Associate m05)
 
 The IKORO document library at the as-of date. reviewState reads only documents in force.
@@ -262,6 +294,14 @@ The IKORO document library at the as-of date. reviewState reads only documents i
 | ENG-PRO-0019 | Hydrotest procedure | In Review | none | none | Not in force |
 
 A published document whose review date is the text tbc: No review scheduled
+
+Each library document with an issue date, its review date recomputed by nextReviewDate from that issue date and its own review period:
+| number | issue date | review period in months | nextReviewDate | next_review_date recorded | the two agree |
+| --- | --- | --- | --- | --- | --- |
+| HSE-PRO-0007 | 2024-09-30 | 24 | 2026-09-30 | 2026-09-30 | true |
+| OPS-PLA-0002 | 2025-11-02 | 12 | 2026-11-02 | 2026-11-02 | true |
+| ENG-STD-0011 | 2025-06-30 | 24 | 2027-06-30 | 2027-06-30 | true |
+Documents with no issue date recorded, so nextReviewDate has nothing to count from: OPS-PHI-0001, OPS-PRO-0004, HSE-PRO-0012, ENG-PRO-0019.
 
 nextReviewDate counts from the ISSUE date by the review period in months:
 | issue date | period in months | next review date | days until it |
@@ -302,7 +342,7 @@ Internal: false
 Confidential: true
 Restricted: true
 
-Segregation of duties on revision rev-0019-10, authored by u-adaeze:
+Segregation of duties on revision rev-0019-10 of ENG-PRO-0019 (Hydrotest procedure, status In Review, current revision '09', next revision '10'), authored by u-adaeze:
 the author assigns herself: REFUSED: The author of a revision cannot review it. Choose somebody independent of the draft.
 no reviewer chosen: REFUSED: Choose the reviewer.
 an independent reviewer is assigned: ALLOWED
@@ -324,7 +364,7 @@ summarise over the 7 IKORO documents: in review 1, published 3, review overdue 1
 | Obsolete | 0 |
 | Rejected | 0 |
 
-byReviewUrgency:
+byReviewUrgency: review states in the order Review overdue, Review due soon, Review scheduled, No review scheduled, Not in force, then the nearest review date first, undated last, the order this table shows:
 | order | number | review state | next review |
 | --- | --- | --- | --- |
 | 1 | HSE-PRO-0007 | Review overdue | 2026-09-30 |
@@ -365,6 +405,12 @@ S-10 set Not applicable with nothing recorded: ALLOWED
 H-08 passed with a date and a verifier: ALLOWED
 a status the vocabulary does not have: REFUSED: Accepted is not a checkpoint status.
 
+Two more waiver requests:
+W-09 waived with a reason and no date or verifier: REFUSED: Record the date this was decided and who decided it.
+H-08, a hold point, waived with a date, a verifier and a reason: ALLOWED
+H-08 waived with a date and a verifier and no reason: REFUSED: Say why this point is being waived. A waiver is a deliberate acceptance of less assurance, and the reason is what makes it auditable later.
+canDecideCheckpoint has no rule that forbids waiving a hold point: a waived hold point with its record and reason is resolved, the same as a waived point of any other type.
+
 # SECTION 11: PROGRESS IS COUNTED FROM THE POINTS, AND A PLAN CLOSES ONLY WHEN ITS HOLD POINTS ARE RESOLVED (owned by Professional m01 and m02)
 
 planProgress over QAP-2026-014: total 12, resolved 6, failed 1, outstanding 6, hold points 5, hold points outstanding 3, percent 50.
@@ -375,7 +421,15 @@ as recorded: REFUSED: 1 checkpoint has failed and has not been resolved. A faile
 H-05 re-inspected and Passed: REFUSED: 2 hold points still outstanding (H-08, H-11). A hold point stops work until it is verified, so the plan cannot be finished over one.
 H-08 and H-11 Passed as well: REFUSED: 3 non-conformances raised against this plan are still open.
 and every NCR against it closed or voided: ALLOWED
-At that point planProgress reads resolved 9 of 12, percent 75, and W-09, S-10 and R-12 are still open.
+At that point planProgress reads resolved 9 of 12, percent 75, and W-09, S-10, R-12 are still unresolved.
+
+A failed point blocks closure whatever its type. The same plan with every hold point Passed and every NCR closed, and one other point Failed:
+W-09 (Witness point) Failed: REFUSED: 1 checkpoint has failed and has not been resolved. A failed inspection is the most outstanding item on a plan.
+R-04 (Review point) Failed: REFUSED: 1 checkpoint has failed and has not been resolved. A failed inspection is the most outstanding item on a plan.
+M-07 (Monitor point) Failed: REFUSED: 1 checkpoint has failed and has not been resolved. A failed inspection is the most outstanding item on a plan.
+S-10 (Surveillance point) Failed: REFUSED: 1 checkpoint has failed and has not been resolved. A failed inspection is the most outstanding item on a plan.
+
+How a percent rounds: planProgress rounds half up on the exact fraction of resolved points. 1 of 8 prints 13; 23 of 40 prints 58; 3 of 8 prints 38; 5 of 8 prints 63.
 
 Removing a point from the plan (canRemoveCheckpoint):
 H-08, a pending hold point, from the Active plan: REFUSED: A hold point cannot be removed once its plan has left Draft. Record it as Not applicable with the reason, so the plan shows who set it aside and why.
@@ -442,6 +496,16 @@ no root cause, no actions: ALLOWED
 one corrective action complete and never checked: ALLOWED
 one corrective action still open: REFUSED: 1 corrective or preventive action still open.
 
+The same walk on a Critical NCR:
+a disposition and its date, no root cause: REFUSED: A critical non-conformance needs a root cause before it closes. Closing one without it is how the same non-conformance arrives again next quarter.
+a root cause, no corrective action: REFUSED: A critical non-conformance needs at least one corrective action. A disposition deals with the item; a corrective action deals with the cause.
+a corrective action complete and not yet checked: REFUSED: No corrective action has been verified effective yet. A completed action is not a working one, and for a non-conformance this serious the check is the point.
+a corrective action verified effective: ALLOWED
+
+An Observation NCR:
+nothing recorded: REFUSED: Agree the disposition first: what happens to the non-conforming item. Use as is, repair, rework, regrade, reject, return to supplier or scrap.
+a disposition, Use as is, and its date, nothing else: ALLOWED
+
 The ABAM NCRs themselves:
 NCR-2026-031: REFUSED: 1 corrective or preventive action still open.
 NCR-2026-027: REFUSED: Agree the disposition first: what happens to the non-conforming item. Use as is, repair, rework, regrade, reject, return to supplier or scrap.
@@ -449,6 +513,7 @@ NCR-2026-019: ALLOWED
 NCR-2026-022: REFUSED: This non-conformance is already closed.
 NCR-2026-011: REFUSED: This non-conformance is already voided.
 NCR-2026-006: REFUSED: This non-conformance is already closed.
+NCR-2026-031 once k2, its preventive action, is Complete: REFUSED: No corrective action has been verified effective yet. A completed action is not a working one, and for a non-conformance this serious the check is the point.
 
 # SECTION 14: HOW LONG A NON-CONFORMANCE HAS BEEN OPEN, AND WHAT THE DASHBOARD COUNTS (owned by Professional m03)
 
@@ -522,8 +587,10 @@ AUD-2026-007, Pipeline contractor HSE audit, Abam tie-in, status Fieldwork compl
 checklistProgress: total 14, answered 10, outstanding 4, conformant 6, nonconformant 2, observations 1, notApplicable 3, percent 71.
 checklistProgress with no checklist at all: percent null.
 unansweredItems: 10, 11, 13, 14
+Of those, the items with a recorded row that is not an answer: 10 (Not applicable, a blank note), 11 (Not applicable, no note). Items 13 and 14 have no row at all.
 criticalAnswersWithoutFindings, with finding AF-2026-018 raised from item 2: 6
 the same with that finding Voided: 2, 6
+A probe: a three-item checklist with a Major item and a Minor item answered Nonconformant, no finding raised, every item answered and a conclusion written. criticalAnswersWithoutFindings lists 0 items, and canReportAudit: ALLOWED. The finding rule applies to Critical items only; the engine has no rule that a Major or Minor nonconformance must raise a finding before the audit is reported.
 
 Raising a finding (canRaiseFinding):
 no finding type: REFUSED: Pick the finding type.
@@ -555,6 +622,8 @@ before it is reported: REFUSED: Report the audit before closing it: the report i
 reported, with both major findings open: REFUSED: 2 major nonconformities raised by this audit are still open.
 reported, with both closed: ALLOWED
 reported, with a stop-work minor finding still open: REFUSED: 1 finding that stopped work is still open.
+reported, with a minor nonconformity open and no stop-work: ALLOWED
+reported, with an observation open and no stop-work: ALLOWED
 
 canCancelAudit:
 no reason given: REFUSED: Say why this audit is not being done. An audit that quietly disappears from the programme is the reason a programme cannot be trusted.
@@ -606,6 +675,9 @@ approving with a date and no approver: REFUSED: Name who approved it.
 approving with both: ALLOWED
 
 summarise over the programme, the 8 audits, the 12 recorded answers and the finding: audits outstanding 4, overdue 3, reported 3, cancelled 1, answers 10, answers outstanding 2, nonconformances 2, notApplicable 3, open findings 1, open major 1, stop-work open 1.
+The findings that summarise counts: AF-2026-018 (Major nonconformity, Open, stop-work true). One finding is behind open findings 1, open major 1 and stop-work open 1.
+
+One rule decides outstanding. On four audits (Reported; Cancelled with no reason; Cancelled with a reason; Planned) programmeProgress counts 2 outstanding and summarise counts 2, and canCompleteProgramme: REFUSED: 2 audits in this programme have not been reported or cancelled. A programme marked complete over audits that never happened is the document a certification body will ask for.
 
 # SECTION 18: A CONFORMITY CLAIM IS EVIDENCE, A DATE AND A NAME (owned by Expert m01)
 
@@ -627,6 +699,25 @@ ISO 14001:2015 at ORASHI, Certified, certification cycle 3 years, certificate ex
 | 10.2 | Nonconformity and corrective action | Applicable | Conformant | u-nneka | true | true | true | 2027-05-04 | false | false |
 | 4.4 | Environmental management system (sites outside scope) | Not applicable | Not applicable | u-nneka | false | false | false | none | false | false |
 
+The clause reviews against the as-of date:
+| clause | next review | days until it | review overdue | review due soon |
+| --- | --- | --- | --- | --- |
+| 4.1 | 2027-05-04 | 201 | false | false |
+| 4.3 | 2026-10-01 | -14 | true | false |
+| 5.2 | 2027-05-04 | 201 | false | false |
+| 6.1.2 | 2026-11-02 | 18 | false | true |
+| 6.1.3 | 2027-06-12 | 240 | false | false |
+| 7.2 | 2027-01-31 | 108 | false | false |
+| 7.5.3 | 2027-05-04 | 201 | false | false |
+| 8.1 | 2027-05-04 | 201 | false | false |
+| 8.2 | 2027-05-04 | 201 | false | false |
+| 9.1.1 | 2027-05-04 | 201 | false | false |
+| 9.2 | 2027-05-04 | 201 | false | false |
+| 10.2 | 2027-05-04 | 201 | false | false |
+
+missingEvidenceParts for each applicable clause that claims conformity without a complete record:
+5.2: evidence reference
+
 canSetClauseStatus on clause 7.2, which has nothing recorded, with the ISO 14001:2015 record passed:
 Conformant, nothing else: REFUSED: Name the evidence, the date it was assessed and who assessed it. Conformity is a claim about documented information; without those three it is an opinion in a dropdown.
 Conformant with an evidence reference only: REFUSED: Name the evidence, the date it was assessed and who assessed it. Conformity is a claim about documented information; without those three it is an opinion in a dropdown.
@@ -636,6 +727,8 @@ Nonconformant with a date and an assessor: ALLOWED
 Not applicable while still marked Applicable: REFUSED: A clause determined not applicable cannot also carry a conformity verdict. Set both together, or neither.
 Not applicable and applicability Not applicable, no justification: REFUSED: Say why this requirement of ISO 14001:2015 does not apply. A requirement determined not applicable keeps its justification on record.
 Not applicable with its justification: ALLOWED
+Partially conformant, nothing else: REFUSED: Name the evidence, the date it was assessed and who assessed it. Conformity is a claim about documented information; without those three it is an opinion in a dropdown.
+Partially conformant with evidence, a date and an assessor: ALLOWED
 Compliant, a word the vocabulary does not have: REFUSED: Compliant is not a clause status.
 
 The same Not applicable refusal, the register's standard passed as the fourth argument, for three standards and for none:
@@ -671,6 +764,14 @@ The audits ORASHI holds:
 | ISA-2026-002 | Internal | In progress | none | false |
 | ISA-2025-003 | Internal | Cancelled | none | false |
 | ISA-2026-S01 | Surveillance | Closed | 2026-07-24 | false |
+
+What each audit examined:
+ISA-2023-002: 4.3 Conformant on 2023-09-20
+ISA-2024-001: 4.1 Conformant on 2024-05-15; 8.1 Conformant on 2024-05-16; 8.2 Conformant on 2024-05-16; 9.1.1 Conformant on 2024-05-14
+ISA-2026-001: 4.1 Conformant on 2026-06-10; 5.2 Observation on 2026-06-09; 6.1.3 Nonconformant on 2026-06-11; 7.2 Not examined on 2026-06-12; 9.1.1 Conformant on 2026-06-11; 9.2 Conformant on 2026-06-08; 10.2 Conformant on 2026-06-12
+ISA-2026-002: 5.2 Conformant on 2026-10-06
+ISA-2025-003: 7.5.3 Conformant on 2025-11-12
+ISA-2026-S01: 6.1.2 Conformant on 2026-07-22
 
 clauseCoverage over the 12 applicable clauses, cycle 3 years:
 | clause | last examined | days until it (negative is past) | by audit | result | covered | stale |
@@ -720,6 +821,7 @@ The actions:
 | ac2 | ISF-2026-001 | Corrective | Complete | 2026-04-15 | false | false | true |
 | ac3 | ISF-2026-005 | Corrective | Open | 2026-11-30 | true | false | false |
 | ac4 | ISF-2026-004 | Preventive | Complete | 2026-09-01 | false | false | false |
+Complete with no effectiveness verdict recorded, the actions summarise counts as awaiting an effectiveness check: ac4 (Preventive, on ISF-2026-004).
 
 canCloseFinding for each ORASHI finding with its own actions:
 ISF-2026-004 (Major nonconformity, Action in progress): REFUSED: 1 action still open against this finding.
@@ -739,6 +841,15 @@ a corrective action verified effective: ALLOWED
 a Minor nonconformity with its correction and no actions: ALLOWED
 an Observation with nothing recorded: ALLOWED
 
+findingByUrgency ranks each finding: an open Major nonconformity that is overdue 0, one that is not overdue 1, any other open finding that is overdue 2, any other open finding 3, a closed or voided finding 4; within a rank, the earlier due date first, the raised date standing in for a missing due date. The ranks, from the engine's own predicates:
+| code | type | open | overdue | rank | date it sorts by |
+| --- | --- | --- | --- | --- | --- |
+| ISF-2026-004 | Major nonconformity | true | true | 0 | 2026-09-30 |
+| ISF-2026-005 | Minor nonconformity | true | false | 3 | 2026-12-11 |
+| ISF-2026-001 | Major nonconformity | false | false | 4 | 2026-04-30 |
+| ISF-2026-002 | Observation | false | false | 4 | 2026-06-10 (raised) |
+| ISF-2026-003 | Opportunity for improvement | true | false | 3 | 2026-06-12 (raised) |
+
 findingByUrgency:
 | order | code | type | status | overdue |
 | --- | --- | --- | --- | --- |
@@ -754,7 +865,7 @@ isAuditOverdue in the ISO module, for an audit whose planned end has passed:
 Planned: true
 In progress: true
 Fieldwork complete: true
-Reported: true
+Reported: false
 Closed: false
 Cancelled: false
 
@@ -769,7 +880,7 @@ certificationReadiness for ISO 14001:2015 at ORASHI: ready false.
 | --- | --- | --- |
 | blocking | 1 | 1 major nonconformity is open. A certification body will not recommend certification over one. |
 | blocking | 3 | 3 applicable clauses have never been examined by an internal audit. ISO 14001:2015 §9.2 requires the organization to audit its own system. |
-| blocking | 1 | 1 clause is marked conformant with no evidence, date or assessor recorded. |
+| blocking | 1 | 1 clause is marked conformant with no evidence reference recorded. |
 | blocking | 1 | 1 clause is assessed nonconformant and not yet resolved. |
 | serious | 1 | 1 clause was last audited before this certification cycle began. |
 | serious | 1 | 1 applicable clause has never been assessed at all. |
@@ -812,9 +923,19 @@ The same register with the certificate expiry moved, and nothing else:
 
 A standard with no clauses in the register: ready false; blocking (count 0): This standard has no applicable clauses in the register yet, so there is nothing to be ready with.
 
-summarise over the same register: clauses 13, applicable 12, excluded 1, evidenced claims 9, unevidenced claims 1, notAssessed 1, reviews overdue 1, reviews due soon 1, audits 6, audits open 2, audits overdue 2, clauses covered 8, never audited 3, stale 1, open findings 3, open major 1, findings overdue 1, open actions 2, overdue actions 1, awaiting an effectiveness check 1.
+The ORASHI audits against the as-of date:
+| audit | type | status | planned end | open | overdue |
+| --- | --- | --- | --- | --- | --- |
+| ISA-2023-002 | Internal | Closed | 2023-09-22 | false | false |
+| ISA-2024-001 | Internal | Closed | 2024-05-17 | false | false |
+| ISA-2026-001 | Internal | Reported | 2026-06-12 | true | false |
+| ISA-2026-002 | Internal | In progress | 2026-10-09 | true | true |
+| ISA-2025-003 | Internal | Cancelled | 2025-11-14 | false | false |
+| ISA-2026-S01 | Surveillance | Closed | 2026-07-24 | false | false |
 
-# SECTION 23: OWNER DECISIONS, HELD LIMITS AND FIVE RULES THIS COURSE TEACHES WITHOUT GRADING (owned by Expert m06)
+summarise over the same register: clauses 13, applicable 12, excluded 1, evidenced claims 9, unevidenced claims 1, notAssessed 1, reviews overdue 1, reviews due soon 1, audits 6, audits open 2, audits overdue 1, clauses covered 8, never audited 3, stale 1, open findings 3, open major 1, findings overdue 1, open actions 2, overdue actions 1, awaiting an effectiveness check 1.
+
+# SECTION 23: OWNER DECISIONS, HELD LIMITS AND THE RULES THIS COURSE TEACHES WITHOUT GRADING (owned by Expert m06)
 
 Everything in this section is taught as a stated policy or a limit. None of it is a graded field.
 
@@ -833,22 +954,35 @@ a complete audit programme that contains a cancelled audit reads below one hundr
 a templated audit passed with no checklist items passes the unanswered-items rule vacuously; the database counts the template itself.
 an unreadable today is refused by complianceStatus alone; SECTION 2 shows two other modules answering as though nothing were due.
 
-Five rules the engine keeps at 9d5d3b4 (ASC-0, engines PR #212), each one asked for by this course's recon. Each is current behaviour, measured here:
+Five rules the engine keeps (ASC-0, engines PR #212), each one asked for by this course's recon. Each is current behaviour, measured here:
 R1, one rule for outstanding: on four audits, one of them cancelled with no reason, programmeProgress counts 2 outstanding and summarise counts 2. A cancellation without a written reason is outstanding in both, and canCompleteProgramme asks the same rule.
 R2, a percent rounds half up on the exact fraction: checklistProgress on 57 answered of 200 prints 29, and planProgress on 23 resolved of 40 prints 58. checklistProgress, programmeProgress and planProgress are the three exports that print a percent.
 R3, expired and expiring are two separate flags: a certificate with certificateDays -15 reads certificateExpiring false and certificateExpired true. SECTION 22 prints both flags at the edges.
 R4, a filed One-off says it is discharged: REG-2026-006 reads Compliant, and explainStatus gives the reason "Filed 2026-08-10. A one-off obligation, nothing further is due."
 R5, a sentence names the register's own standard: the readiness list for ISO 14001:2015 carries 1 item naming ISO 14001:2015 and 0 naming ISO 9001. SECTION 18 prints the Not applicable refusal for both standards.
 
+Three more rules the engine keeps (ASC-1, engines PR #213), each asked for by this course's writers:
+an audit is overdue only while it is undelivered, in both modules: isoCompliance and auditManagement read Planned true/true, In progress true/true, Fieldwork complete true/true, Reported false/false, Closed false/false, Cancelled false/false for an audit whose planned end has passed.
+a readiness sentence names what an unevidenced claim lacks: SECTION 22 prints it for clause 5.2, which lacks evidence reference.
+the Due soon reason says when the default lead time applies: "Due in 25 days, inside the default 30 day lead time (none is set for this obligation)."
+
 # SECTION 24: WHAT THE ORACLES CHECK (owned by Expert m06)
 
 | module | golden cases | distinct exports with a case | sort cases | oracle |
 | --- | --- | --- | --- | --- |
 | calendar | 77 | 5 | 0 | tools/validation/assurance/oracle_calendar.py |
-| complianceStatus | 159 | 10 | 3 | tools/validation/assurance/oracle_compliance.py |
+| complianceStatus | 171 | 10 | 3 | tools/validation/assurance/oracle_compliance.py |
 | documentControl | 130 | 13 | 2 | tools/validation/assurance/oracle_documents.py |
 | qualityAssurance | 422 | 27 | 2 | tools/validation/assurance/oracle_quality.py |
-| isoCompliance | 216 | 32 | 1 | tools/validation/assurance/oracle_iso.py |
+| isoCompliance | 235 | 33 | 1 | tools/validation/assurance/oracle_iso.py |
 | auditManagement | 181 | 31 | 2 | tools/validation/assurance/oracle_audit.py |
+
+The exported functions each golden file has no case for, counting a sort case as a case for the sort it names:
+calendar: 5 exported functions, 0 without a case; 1 exported constant, which is data rather than a function and carries no case of its own.
+complianceStatus: 11 exported functions, 0 without a case; 8 exported lists and constants, which are data rather than functions and carry no case of their own.
+documentControl: 14 exported functions, 0 without a case; 7 exported lists and constants, which are data rather than functions and carry no case of their own.
+qualityAssurance: 28 exported functions, 0 without a case; 24 exported lists and constants, which are data rather than functions and carry no case of their own.
+isoCompliance: 34 exported functions, 0 without a case; 25 exported lists and constants, which are data rather than functions and carry no case of their own.
+auditManagement: 33 exported functions, 0 without a case; 20 exported lists and constants, which are data rather than functions and carry no case of their own.
 
 Each golden file is written by an independent stdlib Python oracle, from the rules as the modules and the status document state them. A golden figure beside an engine figure is two methods agreeing. The oracles check the verdict of a gate (allowed or refused) and never the wording of its reason, so every refusal sentence in this digest is the engine's own and is quoted rather than checked.

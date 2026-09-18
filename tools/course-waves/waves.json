@@ -362,11 +362,12 @@
       "PANELS.md",
       "vendor/closure.py",
       "vendor/ledger.py",
-      "vendor/closure.json"
+      "vendor/closure.json",
+      "REVISE.md"
     ],
     "pins": {
-      "digest.txt": "c85714003231376500ed1e078ac6a78fbbf5482384b82edfc34c5af45fc59e2e",
-      "fields.json": "0f2a9c44d05c0eb65fb8b88cae5192584bab8b0271555895b879d0cc4a357ebb"
+      "digest.txt": "d2830fc9ed1be24cb445acf2ca0332b7c0e8644cfae41d99baf673f79552bb88",
+      "fields.json": "792165af33c6b5cfd291f4a6810691f6011bc73105292f42280d5570f41add13"
     },
     "headingsNoGeneratorSpells": 24
   }

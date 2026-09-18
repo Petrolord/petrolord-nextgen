@@ -25,8 +25,8 @@ an edge resolves to nothing, or if it resolved nothing at all.
 import json, os, re, subprocess, sys
 
 ENGINES_GIT = "/root/petrolord-engines"
-PIN = "9d5d3b486493b8d08eb7dc38557d10e63e56adc2"
-TREE = "/root/as-wip-compliance/engines-9d5d3b4"
+PIN = "ab3ce6af5cd64e3dba2fe1c94493602f57e0ccdb"
+TREE = "/root/as-wip-compliance/engines-ab3ce6a"
 VENDOR = sys.argv[1] if len(sys.argv) > 1 else "/root/wt-as-compliance-nextgen/packages/engines"
 OUT = "/root/as-wip-compliance/vendor/closure.json"
 

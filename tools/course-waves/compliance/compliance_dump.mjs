@@ -123,7 +123,7 @@ const byId = (rows) => new Map(rows.map((r) => [r.id, r]));
 out('# compliance: Compliance, Audit & Quality. Teaching digest.');
 out('# Every figure is a whole number: days (daysUntil, ages), counts, and percents the engine has already rounded. Dates print as YYYY-MM-DD through the engine\'s own toDateOnlyString.');
 out(`# AS-OF DATE: ${ymd(AS_OF)}. Every engine call in this digest that reads a date against today passes this one date, except the rows in SECTION 2 that show what an unreadable today does, which say so. Nothing below read the machine clock, and the generator refuses to print a line from a call that did not pass the as-of date.`);
-out('# ENGINES: engines/assurance at petrolord-engines 9d5d3b4 (ASC-0), vendored in NextGen under packages/engines.');
+out('# ENGINES: engines/assurance at petrolord-engines ab3ce6a (ASC-1), vendored in NextGen under packages/engines.');
 out('# MODULES TAUGHT: calendar, complianceStatus, documentControl, qualityAssurance, auditManagement, isoCompliance.');
 out('# CASES: IKORO (a terminal obligation register and document library), ABAM (a flowline tie-in quality plan, its NCRs, a contractor HSE audit and an audit programme), ORASHI (an ISO 14001:2015 management system). All three are invented records.');
 out('# Built by build_digest.sh from compliance_dump.mjs and compliance_fields.mjs. Never edited by hand.');
@@ -153,6 +153,7 @@ out(`documentControl.DEFAULT_REVIEW_PERIOD_MONTHS: ${RAW.documentControl.DEFAULT
 out(`qualityAssurance.POINT_TYPES: ${RAW.qualityAssurance.POINT_TYPES.join(', ')}`);
 out(`qualityAssurance.BLOCKING_POINT_TYPES (stop work): ${RAW.qualityAssurance.BLOCKING_POINT_TYPES.join(', ')}`);
 out(`qualityAssurance.CHECKPOINT_RESOLVED_STATUSES: ${RAW.qualityAssurance.CHECKPOINT_RESOLVED_STATUSES.join(', ')}`);
+out(`qualityAssurance.CHECKPOINT_STATUSES, in full: ${RAW.qualityAssurance.CHECKPOINT_STATUSES.join(', ')}`);
 out(`qualityAssurance.NCR_SEVERITIES: ${RAW.qualityAssurance.NCR_SEVERITIES.join(', ')}`);
 out(`qualityAssurance.NCR_EFFECTIVENESS_REQUIRED: ${RAW.qualityAssurance.NCR_EFFECTIVENESS_REQUIRED.join(', ')}`);
 out(`qualityAssurance.DISPOSITIONS: ${RAW.qualityAssurance.DISPOSITIONS.join(', ')}`);
@@ -160,6 +161,9 @@ out(`qualityAssurance.CONCESSION_DISPOSITIONS: ${RAW.qualityAssurance.CONCESSION
 out(`auditManagement.CRITICALITIES: ${RAW.auditManagement.CRITICALITIES.join(', ')}`);
 out(`auditManagement.ANSWERED_RESULTS: ${RAW.auditManagement.ANSWERED_RESULTS.join(', ')}`);
 out(`isoCompliance.CLAUSE_STATUSES: ${RAW.isoCompliance.CLAUSE_STATUSES.join(', ')}`);
+out(`isoCompliance.AUDIT_TYPES, in full: ${RAW.isoCompliance.AUDIT_TYPES.join(', ')}`);
+out(`isoCompliance.AUDIT_OPEN_STATUSES: ${RAW.isoCompliance.AUDIT_OPEN_STATUSES.join(', ')}`);
+out(`isoCompliance.AUDIT_UNDELIVERED_STATUSES (the statuses an audit can be overdue in): ${RAW.isoCompliance.AUDIT_UNDELIVERED_STATUSES.join(', ')}`);
 out(`isoCompliance.FINDING_TYPES: ${RAW.isoCompliance.FINDING_TYPES.join(', ')}`);
 out(`isoCompliance.EFFECTIVENESS_REQUIRED_TYPES: ${RAW.isoCompliance.EFFECTIVENESS_REQUIRED_TYPES.join(', ')}`);
 out(`isoCompliance.COVERING_AUDIT_TYPES: ${RAW.isoCompliance.COVERING_AUDIT_TYPES.join(', ')}`);
@@ -310,6 +314,18 @@ out('');
   const after = { ...F.IKORO_OBLIGATIONS.find((x) => x.id === 'o02'), due_date: ymd(right), last_submitted_date: lf.filed };
   const e = C.explainStatus(after, AS_OF);
   out(`After the filing is recorded and the due date rolled: status ${e.status}, next action ${ymd(e.nextActionDate)}, ${days(e.daysUntil)} days.`);
+  const ps = C.periodStart(after.due_date, after.frequency);
+  out(`The rolled row's periodStart is ${ymd(ps)}, and the filing on ${lf.filed} is on or after it, so the filing counts for the current period. The status is still ${e.status}: deriveStatus asks whether the next action date is inside the lead time before it asks about the filing.`);
+  const noLead = C.explainStatus({ ...after, lead_time_days: 0 }, AS_OF);
+  out(`The same rolled row with lead_time_days 0, so no window is open: status ${noLead.status}. ${noLead.reason}`);
+  out('');
+  out('Rolling again from a date that was pulled back to a month end:');
+  head('from', 'frequency', 'next due date', 'and the roll after that');
+  for (const [d, fr] of [['2026-01-31', 'Monthly'], ['2026-02-28', 'Monthly'], ['2026-08-31', 'Semi-annual']]) {
+    const n1 = C.rollForward(d, fr); const n2 = C.rollForward(n1, fr);
+    row(d, fr, ymd(n1), ymd(n2));
+  }
+  out('Each roll starts from the date it is given. A date pulled back to the end of a short month rolls on from that day of the month.');
 }
 
 /* ------------------------------------------------------------------ */
@@ -330,6 +346,10 @@ section('THE REGISTER SUMMARISED, AND SORTED WORST FIRST');
   out('');
   out('countBy regime:');
   for (const r of C.countBy(F.IKORO_OBLIGATIONS, 'regime')) out(`${r.name}: ${r.count}`);
+  out('');
+  out('The regime of each obligation, which countBy groups:');
+  head('code', 'obligation', 'regime', 'obligation type');
+  for (const o of F.IKORO_OBLIGATIONS) row(o.code, o.title, o.regime, o.obligation_type);
 }
 
 /* ------------------------------------------------------------------ */
@@ -343,6 +363,14 @@ for (const d of F.IKORO_DOCUMENTS) {
 }
 out('');
 out(`A published document whose review date is the text tbc: ${D.reviewState({ status: 'Published', next_review_date: 'tbc' }, AS_OF)}`);
+out('');
+out('Each library document with an issue date, its review date recomputed by nextReviewDate from that issue date and its own review period:');
+head('number', 'issue date', 'review period in months', 'nextReviewDate', 'next_review_date recorded', 'the two agree');
+for (const d of F.IKORO_DOCUMENTS.filter((x) => x.issue_date)) {
+  const n = D.nextReviewDate(d.issue_date, d.review_period_months);
+  row(d.document_number, d.issue_date, d.review_period_months, ymd(n), d.next_review_date || 'none', ymd(n) === d.next_review_date);
+}
+out(`Documents with no issue date recorded, so nextReviewDate has nothing to count from: ${F.IKORO_DOCUMENTS.filter((x) => !x.issue_date).map((x) => x.document_number).join(', ')}.`);
 out('');
 out('nextReviewDate counts from the ISSUE date by the review period in months:');
 head('issue date', 'period in months', 'next review date', 'days until it');
@@ -367,7 +395,10 @@ out('');
 out('atLeastConfidential, against the default floor Confidential:');
 for (const lv of RAW.documentControl.CONFIDENTIALITY_LEVELS) out(`${lv}: ${D.atLeastConfidential(lv)}`);
 out('');
-out(`Segregation of duties on revision ${F.IKORO_REVISION_UNDER_REVIEW.id}, authored by ${F.IKORO_REVISION_UNDER_REVIEW.created_by}:`);
+{
+  const doc = F.IKORO_DOCUMENTS.find((x) => x.id === F.IKORO_REVISION_UNDER_REVIEW.document_id);
+  out(`Segregation of duties on revision ${F.IKORO_REVISION_UNDER_REVIEW.id} of ${doc.document_number} (${doc.title}, status ${doc.status}, current revision '${doc.revision}', next revision '${D.nextRevisionNumber(doc.revision)}'), authored by ${F.IKORO_REVISION_UNDER_REVIEW.created_by}:`);
+}
 for (const t of F.IKORO_REVIEW_TASKS) {
   const v = t.kind === 'assign'
     ? D.canAssignReviewer(F.IKORO_REVISION_UNDER_REVIEW, t.reviewer)
@@ -384,7 +415,7 @@ section('THE DOCUMENT LIBRARY SUMMARISED, AND THE REVIEW QUEUE');
   head('status', 'count');
   for (const st of RAW.documentControl.DOC_STATUSES) row(st, s.byStatus[st]);
   out('');
-  out('byReviewUrgency:');
+  out(`byReviewUrgency: review states in the order ${Object.values(RAW.documentControl.REVIEW).join(', ')}, then the nearest review date first, undated last, the order this table shows:`);
   head('order', 'number', 'review state', 'next review');
   [...F.IKORO_DOCUMENTS].sort(D.byReviewUrgency(AS_OF)).forEach((d, i) => row(i + 1, d.document_number, D.reviewState(d, AS_OF), d.next_review_date || 'none'));
 }
@@ -405,6 +436,12 @@ section('THE INSPECTION AND TEST PLAN: A HOLD POINT STOPS WORK');
   for (const d of F.ABAM_DECISIONS) {
     out(`${d.label}: ${verdict(Q.canDecideCheckpoint(cps.get(d.item), d.status, d.patch), OK.has(d.label), d.label)}`);
   }
+  out('');
+  out('Two more waiver requests:');
+  out(`W-09 waived with a reason and no date or verifier: ${refused(Q.canDecideCheckpoint(cps.get('c09'), 'Waived', { remarks: 'Chart reviewed by the client offshore.' }), 'waive no record')}`);
+  out(`H-08, a hold point, waived with a date, a verifier and a reason: ${allowed(Q.canDecideCheckpoint(cps.get('c08'), 'Waived', { result_date: '2026-10-15', verified_by: 'u-ifeoma', remarks: 'Test certificate from the pipe mill accepted.' }), 'waive hold')}`);
+  out(`H-08 waived with a date and a verifier and no reason: ${refused(Q.canDecideCheckpoint(cps.get('c08'), 'Waived', { result_date: '2026-10-15', verified_by: 'u-ifeoma' }), 'waive hold noreason')}`);
+  out('canDecideCheckpoint has no rule that forbids waiving a hold point: a waived hold point with its record and reason is resolved, the same as a waived point of any other type.');
 }
 
 /* ------------------------------------------------------------------ */
@@ -426,7 +463,18 @@ section('PROGRESS IS COUNTED FROM THE POINTS, AND A PLAN CLOSES ONLY WHEN ITS HO
   const closedNcrs = ncrs.map((n) => ({ ...n, status: ['Voided'].includes(n.status) ? n.status : 'Closed' }));
   out(`and every NCR against it closed or voided: ${allowed(Q.canClosePlan(F.ABAM_PLAN, { checkpoints: cps, ncrs: closedNcrs }), 'close final')}`);
   const pp = Q.planProgress(cps);
-  out(`At that point planProgress reads resolved ${pp.resolved} of ${pp.total}, percent ${pp.percent}, and W-09, S-10 and R-12 are still open.`);
+  out(`At that point planProgress reads resolved ${pp.resolved} of ${pp.total}, percent ${pp.percent}, and ${cps.filter((c) => !Q.isResolved(c)).map((c) => c.item_no).join(', ')} are still unresolved.`);
+  out('');
+  out('A failed point blocks closure whatever its type. The same plan with every hold point Passed and every NCR closed, and one other point Failed:');
+  const allHoldsOk = cps;
+  for (const id of ['c09', 'c04', 'c07', 'c10']) {
+    const one = allHoldsOk.map((c) => (c.id === id ? { ...c, status: 'Failed', result_date: '2026-10-14', verified_by: 'u-ifeoma' } : c));
+    const f = one.find((c) => c.id === id);
+    out(`${f.item_no} (${f.point_type}) Failed: ${refused(Q.canClosePlan(F.ABAM_PLAN, { checkpoints: one, ncrs: closedNcrs }), `close failed ${id}`)}`);
+  }
+  out('');
+  const pct = (n, d) => Q.planProgress(Array.from({ length: d }, (_, i) => ({ status: i < n ? 'Passed' : 'Pending' }))).percent;
+  out(`How a percent rounds: planProgress rounds half up on the exact fraction of resolved points. ${[[1, 8], [23, 40], [3, 8], [5, 8]].map(([n, d]) => `${n} of ${d} prints ${pct(n, d)}`).join('; ')}.`);
   out('');
   out('Removing a point from the plan (canRemoveCheckpoint):');
   const cpm = byId(F.ABAM_CHECKPOINTS);
@@ -494,12 +542,30 @@ section('A NON-CONFORMANCE CLOSES ON ITS DISPOSITION, ITS CAUSE AND AN ACTION SH
   out(`one corrective action complete and never checked: ${allowed(Q.canCloseNcr(minor, [{ action_type: 'Corrective', status: 'Complete' }]), 'minor unchecked')}`);
   out(`one corrective action still open: ${refused(Q.canCloseNcr(minor, [{ action_type: 'Corrective', status: 'Open' }]), 'minor open')}`);
   out('');
+  out('The same walk on a Critical NCR:');
+  const crit = { severity: 'Critical', status: 'Actions in progress' };
+  const crRc = { ...crit, disposition: 'Reject', disposition_date: '2026-09-05', root_cause: 'Wrong material grade released from stores.' };
+  for (const [label, n, capas, ok] of [
+    ['a disposition and its date, no root cause', { ...crit, disposition: 'Reject', disposition_date: '2026-09-05' }, [], false],
+    ['a root cause, no corrective action', crRc, [], false],
+    ['a corrective action complete and not yet checked', crRc, [{ action_type: 'Corrective', status: 'Complete' }], false],
+    ['a corrective action verified effective', crRc, [verifiedCa], true],
+  ]) out(`${label}: ${verdict(Q.canCloseNcr(n, capas), ok, `crit ${label}`)}`);
+  out('');
+  out('An Observation NCR:');
+  const obsN = { severity: 'Observation', status: 'Open' };
+  out(`nothing recorded: ${refused(Q.canCloseNcr(obsN, []), 'obs none')}`);
+  out(`a disposition, Use as is, and its date, nothing else: ${allowed(Q.canCloseNcr({ ...obsN, disposition: 'Use as is', disposition_date: '2026-09-05' }, []), 'obs ok')}`);
+  out('');
   out('The ABAM NCRs themselves:');
   for (const n of F.ABAM_NCRS) {
     const capas = F.ABAM_CAPAS.filter((k) => k.ncr_id === n.id);
     const v = Q.canCloseNcr(n, capas);
     out(`${n.ncr_code}: ${v.ok ? allowed(v, n.ncr_code) : refused(v, n.ncr_code)}`);
   }
+  const n031 = F.ABAM_NCRS.find((n) => n.ncr_code === 'NCR-2026-031');
+  const next = F.ABAM_CAPAS.filter((k) => k.ncr_id === n031.id).map((k) => (k.id === 'k2' ? { ...k, status: 'Complete', completed_date: '2026-10-14' } : k));
+  out(`NCR-2026-031 once k2, its preventive action, is Complete: ${refused(Q.canCloseNcr(n031, next), 'n031 next')}`);
 }
 
 /* ------------------------------------------------------------------ */
@@ -557,8 +623,16 @@ section('THE CHECKLIST: AN ANSWER, A REASON, AND A FINDING FOR A FAILED CRITICAL
   out(`checklistProgress: total ${p.total}, answered ${p.answered}, outstanding ${p.outstanding}, conformant ${p.conformant}, nonconformant ${p.nonconformant}, observations ${p.observations}, notApplicable ${p.notApplicable}, percent ${p.percent}.`);
   out(`checklistProgress with no checklist at all: percent ${A.checklistProgress([], []).percent === null ? 'null' : A.checklistProgress([], []).percent}.`);
   out(`unansweredItems: ${A.unansweredItems(F.ABAM_ITEMS, F.ABAM_RESPONSES).map((i) => i.item_no).join(', ')}`);
+  const noAns = F.ABAM_RESPONSES.filter((x) => !A.isAnswered(x));
+  out(`Of those, the items with a recorded row that is not an answer: ${noAns.map((x) => `${x.item_id.replace(/^i0?/, '')} (${x.result}, ${x.note === undefined ? 'no note' : 'a blank note'})`).join(', ')}. Items ${A.unansweredItems(F.ABAM_ITEMS, F.ABAM_RESPONSES).filter((i) => !F.ABAM_RESPONSES.some((x) => x.item_id === i.id)).map((i) => i.item_no).join(' and ')} have no row at all.`);
   out(`criticalAnswersWithoutFindings, with finding ${F.ABAM_FINDINGS[0].finding_code} raised from item 2: ${A.criticalAnswersWithoutFindings(F.ABAM_ITEMS, F.ABAM_RESPONSES, F.ABAM_FINDINGS).map((i) => i.item_no).join(', ')}`);
   out(`the same with that finding Voided: ${A.criticalAnswersWithoutFindings(F.ABAM_ITEMS, F.ABAM_RESPONSES, [{ ...F.ABAM_FINDINGS[0], status: 'Voided' }]).map((i) => i.item_no).join(', ')}`);
+  {
+    const items2 = [{ id: 'm1', item_no: 'M1', criticality: 'Major' }, { id: 'm2', item_no: 'M2', criticality: 'Minor' }, { id: 'm3', item_no: 'M3', criticality: 'Critical' }];
+    const resp2 = [{ id: 'mr1', item_id: 'm1', result: 'Nonconformant', note: 'Lift plan unsigned.' }, { id: 'mr2', item_id: 'm2', result: 'Nonconformant', note: 'Signage faded.' }, { id: 'mr3', item_id: 'm3', result: 'Conformant' }];
+    const au2 = { status: 'Fieldwork complete', template_id: 't', lead_auditor_id: 'u-kelechi', conclusion: 'Two lesser nonconformances.' };
+    out(`A probe: a three-item checklist with a Major item and a Minor item answered Nonconformant, no finding raised, every item answered and a conclusion written. criticalAnswersWithoutFindings lists ${A.criticalAnswersWithoutFindings(items2, resp2, []).length} items, and canReportAudit: ${allowed(A.canReportAudit(au2, { items: items2, responses: resp2, findings: [] }), 'report major minor')}. The finding rule applies to Critical items only; the engine has no rule that a Major or Minor nonconformance must raise a finding before the audit is reported.`);
+  }
   out('');
   out('Raising a finding (canRaiseFinding):');
   for (const a of F.RAISE_ATTEMPTS) out(`${a.label}: ${verdict(A.canRaiseFinding(a.finding), a.label.endsWith('with its correction'), a.label)}`);
@@ -594,6 +668,8 @@ section('THE AUDIT LIFECYCLE, AND AN AUDITOR WHO MAY NOT AUDIT THEIR OWN AREA');
   out(`reported, with both closed: ${allowed(A.canCloseAudit(reported, closedMajors), 'close ok')}`);
   const minorStop = [{ ...F.ABAM_FINDINGS[0], finding_type: 'Minor nonconformity', status: 'Open' }];
   out(`reported, with a stop-work minor finding still open: ${refused(A.canCloseAudit(reported, minorStop), 'close stopwork')}`);
+  out(`reported, with a minor nonconformity open and no stop-work: ${allowed(A.canCloseAudit(reported, [{ ...F.ABAM_FINDINGS[0], finding_type: 'Minor nonconformity', status: 'Open', stop_work: false }]), 'close minor open')}`);
+  out(`reported, with an observation open and no stop-work: ${allowed(A.canCloseAudit(reported, [{ ...F.ABAM_FINDINGS[0], finding_type: 'Observation', status: 'Open', stop_work: false }]), 'close obs open')}`);
   out('');
   out('canCancelAudit:');
   out(`no reason given: ${refused(A.canCancelAudit(au, {}), 'cancel none')}`);
@@ -637,6 +713,11 @@ section('THE AUDIT PROGRAMME IS DELIVERED WHEN ITS AUDITS ARE REPORTED');
   const s = A.summarise({ programmes: [pg], audits: aud, responses: F.ABAM_RESPONSES, findings: F.ABAM_FINDINGS, actions: [] }, AS_OF);
   out(`summarise over the programme, the ${au(aud)} audits, the ${F.ABAM_RESPONSES.length} recorded answers and the finding: audits outstanding ${s.auditsOutstanding}, overdue ${s.auditsOverdue}, reported ${s.auditsReported}, cancelled ${s.auditsCancelled}, answers ${s.answers}, answers outstanding ${s.answersOutstanding}, nonconformances ${s.nonconformances}, notApplicable ${s.notApplicable}, open findings ${s.openFindings}, open major ${s.openMajor}, stop-work open ${s.stopWorkOpen}.`);
   function au(x) { return x.length; }
+  const f = F.ABAM_FINDINGS;
+  out(`The findings that summarise counts: ${f.map((x) => `${x.finding_code} (${x.finding_type}, ${x.status}, stop-work ${x.stop_work === true})`).join('; ')}. One finding is behind open findings ${s.openFindings}, open major ${s.openMajor} and stop-work open ${s.stopWorkOpen}.`);
+  out('');
+  const aud2 = [{ status: 'Reported' }, { status: 'Cancelled' }, { status: 'Cancelled', cancellation_reason: 'Plant shutdown' }, { status: 'Planned', planned_end: '2026-09-01' }];
+  out(`One rule decides outstanding. On four audits (Reported; Cancelled with no reason; Cancelled with a reason; Planned) programmeProgress counts ${A.programmeProgress(aud2, AS_OF).outstanding} outstanding and summarise counts ${A.summarise({ audits: aud2 }, AS_OF).auditsOutstanding}, and canCompleteProgramme: ${refused(A.canCompleteProgramme({ status: 'In progress' }, aud2), 'complete aud2')}`);
 }
 
 /* ------------------------------------------------------------------ */
@@ -651,6 +732,13 @@ section('A CONFORMITY CLAIM IS EVIDENCE, A DATE AND A NAME');
       c.next_review_due || 'none', I.isReviewOverdue(c, AS_OF), I.isReviewDueSoon(c, AS_OF));
   }
   out('');
+  out('The clause reviews against the as-of date:');
+  head('clause', 'next review', 'days until it', 'review overdue', 'review due soon');
+  for (const c of F.ORASHI_CLAUSES.filter((x) => x.next_review_due)) row(c.clause_ref, c.next_review_due, days(CAL.daysUntil(c.next_review_due, AS_OF)), I.isReviewOverdue(c, AS_OF), I.isReviewDueSoon(c, AS_OF));
+  out('');
+  out('missingEvidenceParts for each applicable clause that claims conformity without a complete record:');
+  for (const c of F.ORASHI_CLAUSES.filter((x) => I.isApplicable(x) && I.claimsConformity(x) && !I.hasEvidenceRecord(x))) out(`${c.clause_ref}: ${I.missingEvidenceParts(c).join(', ')}`);
+  out('');
   out(`canSetClauseStatus on clause 7.2, which has nothing recorded, with the ${F.ORASHI_STANDARD.code} record passed:`);
   const k72 = F.ORASHI_CLAUSES.find((c) => c.id === 'k72');
   const tries = [
@@ -662,6 +750,8 @@ section('A CONFORMITY CLAIM IS EVIDENCE, A DATE AND A NAME');
     ['Not applicable while still marked Applicable', 'Not applicable', {}, false],
     ['Not applicable and applicability Not applicable, no justification', 'Not applicable', { applicability: 'Not applicable' }, false],
     ['Not applicable with its justification', 'Not applicable', { applicability: 'Not applicable', applicability_justification: 'Competence is managed under the group HR system outside this scope.' }, true],
+    ['Partially conformant, nothing else', 'Partially conformant', {}, false],
+    ['Partially conformant with evidence, a date and an assessor', 'Partially conformant', { evidence_reference: 'EMS-TRN-MATRIX', assessed_date: '2026-10-12', assessed_by: 'u-nneka' }, true],
     ['Compliant, a word the vocabulary does not have', 'Compliant', {}, false],
   ];
   for (const [label, st, patch, ok] of tries) out(`${label}: ${verdict(I.canSetClauseStatus(k72, st, patch, F.ORASHI_STANDARD), ok, label)}`);
@@ -704,6 +794,13 @@ section('COVERAGE IS COUNTED OVER THE CERTIFICATION CYCLE, FROM REPORTED INTERNA
     row(a.audit_code, a.audit_type, a.status, a.actual_end || 'none', counts);
   }
   out('');
+  out('What each audit examined:');
+  const cref = byId(F.ORASHI_CLAUSES);
+  for (const a of F.ORASHI_AUDITS) {
+    const rows = F.ORASHI_AUDIT_CLAUSES.filter((x) => x.audit_id === a.id);
+    out(`${a.audit_code}: ${rows.length ? rows.map((x) => `${cref.get(x.clause_id).clause_ref} ${x.result} on ${x.examined_on}`).join('; ') : 'no clause rows'}`);
+  }
+  out('');
   out(`clauseCoverage over the ${F.ORASHI_CLAUSES.filter((c) => I.isApplicable(c)).length} applicable clauses, cycle ${F.ORASHI_STANDARD.cycle_years} years:`);
   head('clause', 'last examined', 'days until it (negative is past)', 'by audit', 'result', 'covered', 'stale');
   for (const r of cov) {
@@ -742,6 +839,8 @@ section('A FINDING: THE CORRECTION, THE CORRECTIVE ACTION, AND THE CHECK THAT IT
   head('action', 'finding', 'type', 'status', 'due', 'open', 'overdue', 'verified effective');
   const fm = byId(F.ORASHI_FINDINGS);
   for (const a of F.ORASHI_ACTIONS) row(a.id, fm.get(a.finding_id).finding_code, a.action_type, a.status, a.due_date, I.isActionOpen(a), I.isActionOverdue(a, AS_OF), I.isEffectivenessVerified(a));
+  const awaiting = F.ORASHI_ACTIONS.filter((a) => a.status === 'Complete' && a.effectiveness_verified !== true && a.effectiveness_verified !== false);
+  out(`Complete with no effectiveness verdict recorded, the actions summarise counts as awaiting an effectiveness check: ${awaiting.map((a) => `${a.id} (${a.action_type}, on ${fm.get(a.finding_id).finding_code})`).join(', ')}.`);
   out('');
   out('canCloseFinding for each ORASHI finding with its own actions:');
   for (const f of F.ORASHI_FINDINGS) {
@@ -765,6 +864,11 @@ section('A FINDING: THE CORRECTION, THE CORRECTIVE ACTION, AND THE CHECK THAT IT
   for (const [label, f, acts, ok] of steps) out(`${label}: ${verdict(I.canCloseFinding(f, acts), ok, label)}`);
   out(`a Minor nonconformity with its correction and no actions: ${allowed(I.canCloseFinding({ finding_type: 'Minor nonconformity', status: 'Open', correction: 'Briefing held.' }, []), 'minor')}`);
   out(`an Observation with nothing recorded: ${allowed(I.canCloseFinding({ finding_type: 'Observation', status: 'Open' }, []), 'obs')}`);
+  out('');
+  out('findingByUrgency ranks each finding: an open Major nonconformity that is overdue 0, one that is not overdue 1, any other open finding that is overdue 2, any other open finding 3, a closed or voided finding 4; within a rank, the earlier due date first, the raised date standing in for a missing due date. The ranks, from the engine\'s own predicates:');
+  head('code', 'type', 'open', 'overdue', 'rank', 'date it sorts by');
+  const rankOf = (f) => (I.isFindingOpen(f) && f.finding_type === 'Major nonconformity' ? (I.isFindingOverdue(f, AS_OF) ? 0 : 1) : I.isFindingOpen(f) && I.isFindingOverdue(f, AS_OF) ? 2 : I.isFindingOpen(f) ? 3 : 4);
+  for (const f of F.ORASHI_FINDINGS) row(f.finding_code, f.finding_type, I.isFindingOpen(f), I.isFindingOverdue(f, AS_OF), rankOf(f), f.due_date || `${f.raised_date} (raised)`);
   out('');
   out('findingByUrgency:');
   head('order', 'code', 'type', 'status', 'overdue');
@@ -806,12 +910,16 @@ section('CERTIFICATION READINESS IS A LIST OF BLOCKERS');
   const empty = I.certificationReadiness({ id: 's-empty' }, { clauses: [] }, AS_OF);
   out(`A standard with no clauses in the register: ready ${empty.ready}; ${empty.blockers.map((b) => `${b.severity} (count ${b.count}): ${b.text}`).join(' ')}`);
   out('');
+  out('The ORASHI audits against the as-of date:');
+  head('audit', 'type', 'status', 'planned end', 'open', 'overdue');
+  for (const a of F.ORASHI_AUDITS) row(a.audit_code, a.audit_type, a.status, a.planned_end || 'none', RAW.isoCompliance.AUDIT_OPEN_STATUSES.includes(a.status), I.isAuditOverdue(a, AS_OF));
+  out('');
   const s = I.summarise({ standards: [F.ORASHI_STANDARD], clauses: F.ORASHI_CLAUSES, audits: F.ORASHI_AUDITS, findings: F.ORASHI_FINDINGS, actions: F.ORASHI_ACTIONS, auditClauses: F.ORASHI_AUDIT_CLAUSES }, AS_OF);
   out(`summarise over the same register: clauses ${s.clauses}, applicable ${s.applicable}, excluded ${s.excluded}, evidenced claims ${s.evidencedClaims}, unevidenced claims ${s.unevidencedClaims}, notAssessed ${s.notAssessed}, reviews overdue ${s.reviewsOverdue}, reviews due soon ${s.reviewsDueSoon}, audits ${s.audits}, audits open ${s.auditsOpen}, audits overdue ${s.auditsOverdue}, clauses covered ${s.clausesCovered}, never audited ${s.clausesNeverAudited}, stale ${s.clausesStale}, open findings ${s.openFindings}, open major ${s.openMajor}, findings overdue ${s.findingsOverdue}, open actions ${s.openActions}, overdue actions ${s.overdueActions}, awaiting an effectiveness check ${s.actionsAwaitingEffectiveness}.`);
 }
 
 /* ------------------------------------------------------------------ */
-section('OWNER DECISIONS, HELD LIMITS AND FIVE RULES THIS COURSE TEACHES WITHOUT GRADING');
+section('OWNER DECISIONS, HELD LIMITS AND THE RULES THIS COURSE TEACHES WITHOUT GRADING');
 out('Everything in this section is taught as a stated policy or a limit. None of it is a graded field.');
 out('');
 out('Owner decisions in force (AssuranceApps-STATUS.md section 3n, AS15), as they touch these five apps:');
@@ -829,7 +937,7 @@ out('a complete audit programme that contains a cancelled audit reads below one 
 out('a templated audit passed with no checklist items passes the unanswered-items rule vacuously; the database counts the template itself.');
 out('an unreadable today is refused by complianceStatus alone; SECTION 2 shows two other modules answering as though nothing were due.');
 out('');
-out('Five rules the engine keeps at 9d5d3b4 (ASC-0, engines PR #212), each one asked for by this course\'s recon. Each is current behaviour, measured here:');
+out('Five rules the engine keeps (ASC-0, engines PR #212), each one asked for by this course\'s recon. Each is current behaviour, measured here:');
 {
   const aud = [{ status: 'Reported' }, { status: 'Cancelled' }, { status: 'Cancelled', cancellation_reason: 'Plant shutdown' }, { status: 'Planned', planned_end: '2026-09-01' }];
   const p = A.programmeProgress(aud, AS_OF);
@@ -848,6 +956,12 @@ out('Five rules the engine keeps at 9d5d3b4 (ASC-0, engines PR #212), each one a
   const cites = rr5.blockers.filter((b) => b.text.includes(F.ORASHI_STANDARD.code)).length;
   const cites9001 = rr5.blockers.filter((b) => /ISO 9001/.test(b.text)).length;
   out(`R5, a sentence names the register's own standard: the readiness list for ${F.ORASHI_STANDARD.code} carries ${cites} item naming ${F.ORASHI_STANDARD.code} and ${cites9001} naming ISO 9001. SECTION 18 prints the Not applicable refusal for both standards.`);
+  out('');
+  out('Three more rules the engine keeps (ASC-1, engines PR #213), each asked for by this course\'s writers:');
+  const both = RAW.isoCompliance.AUDIT_STATUSES.map((st) => `${st} ${I.isAuditOverdue({ status: st, planned_end: '2026-10-09' }, AS_OF)}/${A.isAuditOverdue({ status: st, planned_end: '2026-10-09' }, AS_OF)}`);
+  out(`an audit is overdue only while it is undelivered, in both modules: isoCompliance and auditManagement read ${both.join(', ')} for an audit whose planned end has passed.`);
+  out(`a readiness sentence names what an unevidenced claim lacks: SECTION 22 prints it for clause 5.2, which lacks ${I.missingEvidenceParts(F.ORASHI_CLAUSES.find((c) => c.id === 'k52')).join(', ')}.`);
+  out(`the Due soon reason says when the default lead time applies: "${C.explainStatus(F.IKORO_OBLIGATIONS.find((o) => o.id === 'o12'), AS_OF).reason}"`);
 }
 
 /* ------------------------------------------------------------------ */
@@ -859,6 +973,16 @@ section('WHAT THE ORACLES CHECK');
     const g = JSON.parse(fs.readFileSync(`${G}/${mod}_cases.json`, 'utf8'));
     const fns = new Set(g.cases.filter((c) => c.fn).map((c) => c.fn));
     row(mod, g.cases.length, fns.size, g.cases.filter((c) => c.sort).length, g.generatedBy);
+  }
+  out('');
+  out('The exported functions each golden file has no case for, counting a sort case as a case for the sort it names:');
+  for (const mod of MODS) {
+    const g = JSON.parse(fs.readFileSync(`${G}/${mod}_cases.json`, 'utf8'));
+    const cased = new Set([...g.cases.map((c) => c.fn), ...g.cases.map((c) => c.sort)].filter(Boolean));
+    const fnNames = Object.entries(RAW[mod]).filter(([, v]) => typeof v === 'function').map(([k]) => k);
+    const lists = Object.values(RAW[mod]).filter((v) => typeof v !== 'function').length;
+    const none = fnNames.filter((k) => !cased.has(k));
+    out(`${mod}: ${fnNames.length} exported functions, ${none.length} without a case${none.length ? ` (${none.join(', ')})` : ''}; ${lists} exported ${lists === 1 ? 'constant, which is data rather than a function and carries' : 'lists and constants, which are data rather than functions and carry'} no case of ${lists === 1 ? 'its' : 'their'} own.`);
   }
   out('');
   out('Each golden file is written by an independent stdlib Python oracle, from the rules as the modules and the status document state them. A golden figure beside an engine figure is two methods agreeing. The oracles check the verdict of a gate (allowed or refused) and never the wording of its reason, so every refusal sentence in this digest is the engine\'s own and is quoted rather than checked.');

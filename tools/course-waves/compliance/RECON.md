@@ -218,7 +218,7 @@ allows. So:
   value may equal the absolute value of any number token the digest prints,
   dates included (`2026-11-30` prints 2026, 11 and 30). That rules out every
   small count, so the graded counts are the ones a forty-clause register makes
-  large (34, 35) and everything else is a day count or a percent.
+  large (32, 35) and everything else is a day count or a percent.
 
 Oracle coverage of every graded output, confirmed by calling the oracle, not
 by reading goldens (`oracle_check.py`, 18 of 18):

@@ -86,7 +86,9 @@ export default {
   // instead of letting a stale quote pass as current behaviour.
   pinned: [
     { frag: 'deriveStatus needs a valid date for today.', src: 'engines/assurance/complianceStatus.js' },
-    { frag: 'inside the ${leadTime(obligation)} day lead time set for this obligation', src: 'engines/assurance/complianceStatus.js' },
+    { frag: 'day lead time set for this obligation', src: 'engines/assurance/complianceStatus.js' },
+    { frag: 'inside the default ${days} day lead time (none is set for this obligation)', src: 'engines/assurance/complianceStatus.js' },
+    { frag: 'with no ${listWith(missingEvidenceParts(clauses[0]), ', src: 'engines/assurance/isoCompliance.js' },
     { frag: 'was for an earlier period, so nothing has been filed for this one yet.', src: 'engines/assurance/complianceStatus.js' },
     { frag: 'so it is not tracked against a date.', src: 'engines/assurance/complianceStatus.js' },
     { frag: 'No due date or expiry date has been set, so nothing can fall due.', src: 'engines/assurance/complianceStatus.js' },

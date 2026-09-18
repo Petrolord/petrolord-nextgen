@@ -333,7 +333,7 @@ describe('AGREEMENT WITH THE DIGEST: every reader, rebuilt into the digest\'s ow
       ...dr.revisions.map((x) => row(q(x.current), `'${x.next}'`)),
       ...dr.prefixes.map((x) => `'${x.department}', '${x.category}' gives ${x.prefix}`),
       ...dr.confidentiality.map((x) => `${x.level}: ${x.atLeastConfidential}`),
-      `Segregation of duties on revision ${dr.revision.id}, authored by ${dr.revision.created_by}:`,
+      `Segregation of duties on revision ${dr.revision.id} of ${dr.revisionDocument.number} (${dr.revisionDocument.title}, status ${dr.revisionDocument.status}, current revision '${dr.revisionDocument.revision}', next revision '${dr.revisionDocument.next}'), authored by ${dr.revision.created_by}:`,
       ...dr.segregation.map(verdictLine),
     ]);
   });
@@ -359,12 +359,11 @@ describe('AGREEMENT WITH THE DIGEST: every reader, rebuilt into the digest\'s ow
   it('SECTION 11, progress, the closure walk, removals, raising and the workflow', () => {
     const p = S.planAt.progress;
     const w = S.planClosureWalk;
-    const [a, b, c3] = w.atTheEnd.stillOpen;
     pin(11, [
       `planProgress over ${S.planAt.plan.code}: total ${p.total}, resolved ${p.resolved}, failed ${p.failed}, outstanding ${p.outstanding}, hold points ${p.holdPoints}, hold points outstanding ${p.holdPointsOutstanding}, percent ${p.percent}.`,
       `planProgress over a plan with no points: percent ${nullWord(S.planAt.emptyPlanPercent)}.`,
       ...w.steps.map(verdictLine),
-      `At that point planProgress reads resolved ${w.atTheEnd.resolved} of ${w.atTheEnd.total}, percent ${w.atTheEnd.percent}, and ${a}, ${b} and ${c3} are still open.`,
+      `At that point planProgress reads resolved ${w.atTheEnd.resolved} of ${w.atTheEnd.total}, percent ${w.atTheEnd.percent}, and ${w.atTheEnd.stillOpen.join(', ')} are still unresolved.`,
       ...S.planRequestsAsRecorded.removals.map(verdictLine),
       ...w.raise.map(verdictLine),
       ...w.workflow.map((x) => `${x.status}: ${x.next.join(', ') || 'final'}`),

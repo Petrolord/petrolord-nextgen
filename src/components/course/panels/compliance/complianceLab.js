@@ -123,7 +123,7 @@ export const IKORO_OBLIGATIONS = [
 ];
 
 /** The lead-time sweep runs on the flare return (o03) and nothing else. */
-export const IKORO_LEAD_SWEEP = [0, 7, 14, 16, 17, 30, 90, null, '', -5, 'ten'];
+export const IKORO_LEAD_SWEEP = [0, 7, 14, 15, 16, 17, 30, 90, null, '', -5, 'ten'];
 
 /** One due date rolled by every frequency, and the three month-end cases. */
 export const ROLL_FROM = '2026-08-31';
@@ -871,6 +871,12 @@ export const documentRules = () => ({
   prefixes: IKORO_PREFIXES.map(([dep, cat]) => ({ department: dep, category: cat, prefix: D.documentPrefix(dep, cat) })),
   confidentiality: D.CONFIDENTIALITY_LEVELS.map((lv) => ({ level: lv, atLeastConfidential: D.atLeastConfidential(lv) })),
   revision: { ...IKORO_REVISION_UNDER_REVIEW },
+  // The document the revision under review belongs to, and the revision the
+  // engine numbers next, so the segregation lines name what is being reviewed.
+  revisionDocument: (() => {
+    const d = IKORO_DOCUMENTS.find((x) => x.id === IKORO_REVISION_UNDER_REVIEW.document_id);
+    return { number: d.document_number, title: d.title, status: d.status, revision: d.revision, next: D.nextRevisionNumber(d.revision) };
+  })(),
   segregation: IKORO_REVIEW_TASKS.map((t) => verdictOf(t.label, t.kind === 'assign'
     ? D.canAssignReviewer(IKORO_REVISION_UNDER_REVIEW, t.reviewer)
     : D.canDecideReviewTask(t.task, IKORO_REVISION_UNDER_REVIEW, t.user))),
