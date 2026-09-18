@@ -10,7 +10,7 @@
 // Usage:  sh /root/fc-wip-heattransfer/build_digest.sh > digest.tmp \
 //           && mv digest.tmp /root/fc-wip-heattransfer/digest.txt
 //
-// Engine, vendored sha-identical with engines 6759621 (carrying the FC6-0 repair, e4377b3):
+// Engine, vendored sha-identical with engines 5cbdca5 (carrying the FC6-0 repair, e4377b3):
 // engines/facilities/heatTransfer.js, which imports NOTHING. The walked import
 // closure of the whole family is five paths and three edges.
 //
@@ -362,7 +362,7 @@ w('# FC6 Heat Exchange & Cooling. Teaching digest.');
 w('# Temperatures, log means, areas, overall coefficients, film coefficients, diameters, percentages and dimensionless groups print to six decimals; duties, capacity rates and UA in Btu an hour to four; resistances in hr.ft2.F per Btu to nine; tube and shell counts are whole numbers.');
 w('# Field units throughout: Btu an hour, degF, lb an hour, ft2, Btu an hour per ft2 per degF, hr.ft2.F per Btu, inches, psia, inches of water, brake horsepower.');
 w('# Nothing here is read from a clock or a random number, so every line reproduces.');
-w(`# Built against engines 6759621, vendored sha-identical. Every figure below is that engine's own answer at the inputs named beside it, except a line that says golden or derived.`);
+w(`# Built against engines 5cbdca5, vendored sha-identical. Every figure below is that engine's own answer at the inputs named beside it, except a line that says golden or derived.`);
 w('# A GOLDEN LINE IS NOT THE ENGINE ANSWERING. The published case file is written by the oracle, which reaches each answer by a different route, so a golden figure beside an engine figure is two methods agreeing to as many digits as the two of them agree to.');
 w();
 // ---------------------------------------------------------------- SECTION 1

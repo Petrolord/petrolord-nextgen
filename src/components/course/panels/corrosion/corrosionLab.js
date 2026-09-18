@@ -8,7 +8,7 @@
 // number, friction factor, threshold comparison, regime word, remaining life,
 // category label and binding constraint below is a return value of
 // engines/facilities/corrosion.js, as repaired in FC9-0 and vendored
-// sha-identical with petrolord-engines 6759621.
+// sha-identical with petrolord-engines 5cbdca5.
 //
 // NOTHING IN THIS FILE COMPUTES A CORROSION QUANTITY. Where a reader carries a
 // value the teaching digest calls "derived", it is the digest's own arithmetic

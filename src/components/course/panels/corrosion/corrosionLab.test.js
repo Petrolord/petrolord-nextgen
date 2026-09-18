@@ -146,7 +146,7 @@ const buildSections = () => {
   w();
   w('# PRECISION. Partial pressures in bar and in psia, wall thicknesses and allowances in mm, corrosion rates in mm/yr, lives in years, percentages, percentage points and every dimensionless ratio print to SIX decimals; Reynolds numbers print to FOUR, because a number in the hundreds of thousands carries no information in its millionths; measured constants and ratios of them print to TWELVE; counts are whole numbers.');
   w();
-  w(`# ENGINE. engines/facilities/corrosion.js, vendored sha-identical with petrolord-engines 6759621, ${srcLines} lines, importing nothing. The vendoring closure walked from the jest suite is SIX paths. The vendored golden test-data/facilities/goldens/corrosion_cases.json carries ${counts.rows} rows in ${counts.blocks} blocks.`);
+  w(`# ENGINE. engines/facilities/corrosion.js, vendored sha-identical with petrolord-engines 5cbdca5, ${srcLines} lines, importing nothing. The vendoring closure walked from the jest suite is SIX paths. The vendored golden test-data/facilities/goldens/corrosion_cases.json carries ${counts.rows} rows in ${counts.blocks} blocks.`);
   w();
   w(`# THE GOLDEN IS SYNTHETIC AND IT SAYS SO. golden provenance.published is ${S(GOLD.provenance.published)}. The golden's own words: "${GOLD.provenance.why}"`);
   w();

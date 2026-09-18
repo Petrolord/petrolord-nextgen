@@ -2,7 +2,7 @@
 # Densities in kg/m3, cut sizes and droplet medians in micron, concentrations in ppm, removals in percent, centrifugal fields in g and dimensionless ratios print to six decimals; viscosities in Pa.s, velocities in m/s and volume fractions print to twelve.
 # Field units: bwpd of water, degrees C, ppm of total dissolved solids, degrees API, micron for droplets and bubbles, m3/s and m for the equipment, ppm of oil in water.
 # Nothing here is read from a clock or a random number, so every line reproduces.
-# Built against engines 6759621, vendored sha-identical over a walked import closure of 5 paths. Every figure below is that engine's own answer at the inputs named beside it.
+# Built against engines 5cbdca5, vendored sha-identical over a walked import closure of 5 paths. Every figure below is that engine's own answer at the inputs named beside it.
 
 # SECTION 1: What this engine treats, and what it refuses (owned by Associate m01)
 
