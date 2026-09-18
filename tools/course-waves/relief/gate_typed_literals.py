@@ -55,6 +55,7 @@ ALLOWED = {
  # the digest, and strip_calls removes the whole call before the sweep. A dead
  # row would have hidden that, which is why a dead row fails this gate.
  '0.82':  'the exponent named in the column heading of the row that MEASURES it, printed on that row',
+ '1.15':  'the ROUNDED form a publication may print, named on the section 27 row that HOLDS the question of which form the standard prints; the engine never uses it and section 17 measures the coefficient it does use',
  '1e18':  'the Reynolds number the how-it-was-asked column names when it explains why the three coefficients are solved together rather than read one at a time',
  # ROW AND COLUMN LABELS naming a stated input of the row they head
  '0.8':   'the pressure ratio the F2 column of the section 4 table is evaluated at, stated in that column heading',

@@ -459,6 +459,6 @@
    "Kd, Kc, the critical pressure ratio and the fourteen published orifice areas."
   ],
   "answer": 2,
-  "explanation": "Those four are the typed set: three chart or table factors and one published table of areas. The viscosity fit is held for literature as well, but no caller types it in, because the engine evaluates it, and the coefficient C and the critical ratio are closed forms."
+  "explanation": "Those four are the typed set: three chart or table factors and one published table of areas. The viscosity fit is held for literature, a different status, and no caller types it in, because the engine evaluates it. The coefficient C and the critical ratio are closed forms."
  }
 ]

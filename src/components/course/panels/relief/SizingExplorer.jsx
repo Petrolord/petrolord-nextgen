@@ -3,7 +3,7 @@ import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceArea,
 } from 'recharts';
 import {
-  associateReading, gasBranch, liquidLoop, steamNapier, orificeLadder,
+  associateReading, gasBranch, liquidLoop, steamNapier, orificeLadder, TYPED_MARKER,
 } from './reliefLab';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
@@ -64,10 +64,14 @@ const Tbl = ({ head, rows }) => (
   </div>
 );
 
-/** A quantity this course teaches as a stated limit and never as an answer. */
-const Held = ({ children }) => (
+/**
+ * A quantity this course teaches as a stated limit and never as an answer. The
+ * heading names WHICH kind of not-derived it is, in the lab's own marker words:
+ * held for literature, typed as a published input, or a limit the caller applies.
+ */
+const Held = ({ label = 'HELD FOR LITERATURE', children }) => (
   <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-amber-300 text-xs font-medium mb-1">{label.toUpperCase()}</p>
     <p className="text-xs text-slate-300 mb-0">{children}</p>
   </div>
 );
@@ -106,7 +110,7 @@ export const RoutesMode = ({ a }) => {
         it can state, and exactly one it took as an input off a published chart. That is the shape of API 520 Part I as
         this engine implements it, and it is the question to ask of any number on any of these pages.
       </Note>
-      <Held>
+      <Held label={TYPED_MARKER}>
         Kb for gas, Kw for liquid and KSH for steam are published charts and tables, so they are typed inputs with their
         references named. Nothing in this package derives any of the three and nothing should. Taught as a limit and
         never as an answer.
@@ -442,7 +446,7 @@ export const LadderMode = ({ o }) => {
         head={['stream', 'fluid', 'required area in2', 'orifice', 'orifice area in2', 'margin']}
         rows={o.streams.map((r) => [r.stream, r.fluid, six(r.areaIn2), r.orifice, six(r.orificeAreaIn2), six(r.margin)])}
       />
-      <Held>
+      <Held label={TYPED_MARKER}>
         The fourteen areas of this table. It is a published table and this package cannot derive a single one of them, so
         what the suite checks is the SELECTION BEHAVIOUR: the ladder, both boundaries and the refusal past the largest.
         Taught as a limit and never as an answer, and nothing graded in this course is an orifice letter or a margin.

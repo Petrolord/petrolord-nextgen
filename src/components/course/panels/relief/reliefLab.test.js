@@ -38,7 +38,7 @@
 //                           or on the course page, with a control that calling the
 //                           engine directly gives the same string and a control that
 //                           an accepted probe reports no error.
-//   THE HELD GATE           the nine held quantities carry the marker wording, the
+//   THE HELD GATE           the nine not-derived items carry their kind's marker, the
 //                           TWO that are shared with the validation oracle on purpose
 //                           are marked as shared, every panel shows the wording, and
 //                           no panel presents either shared item as validated.
@@ -1391,25 +1391,112 @@ describe('THE REFUSAL GATE: every refusal shown is the engine\'s own returned me
 });
 
 // ---------------------------------------------------------------------------
+// THE TWO RANKINGS. A ranking is an answer, so the lab computes both and this
+// gate pins each against the digest row by row and against the lesson that
+// teaches it. Five of the FC5 audit's defects were ordering claims read off
+// these tables by eye (FC5 repair).
+// ---------------------------------------------------------------------------
+
+describe('THE TWO RANKINGS: what a foot of level buys, and what moves the letter', () => {
+  const lesson = (rel) => fs.readFileSync(path.join(ROOT, 'src/content/courses/relief', rel), 'utf8');
+  const BAND_LESSON = 'intermediate/m02-the-wetted-area/l02-half-full-and-why-that-case-is-special.md';
+  const RANK_LESSON = 'intermediate/m04-the-fire-case-end-to-end/l04-what-moves-the-letter.md';
+
+  it('ten equal bands, mirrored, steepest at both ends and flattest in the middle two', () => {
+    const g = S.wettedGeometry.bandGains;
+    expect(g.count).toBe(10);
+    expect(g.mirrored).toBe(true);
+    expect(g.steepestAreTheEnds).toBe(true);
+    expect(g.flattestAreTheMiddleTwo).toBe(true);
+    const text = lesson(BAND_LESSON);
+    g.rows.forEach((r) => {
+      const printed = row([`${e6(r.loFt)} to ${e6(r.hiFt)}`, r4(r.gainedFt2), r4(r.gainedPerFtDerived)]);
+      line(printed, `the band row ${e6(r.loFt)} to ${e6(r.hiFt)}`);
+      expect(text, `${BAND_LESSON} does not print ${printed}`).toContain(printed);
+    });
+    expect(text).toContain(e12(g.steepestOverFlattestDerived));
+  });
+
+  it('the fire variants ranked by duty, with the letter moves beside them, in the digest and in the lesson', () => {
+    const k = S.fireCase.ranked;
+    expect(k.count).toBe(6);
+    expect(k.everyVariantOrificeIsOnTheLadder).toBe(true);
+    expect(k.largestDutyLever).toBe('environment factor 0.3');
+    expect(k.drainageIsNotTheLargestDutyLever).toBe(true);
+    expect(k.drainageIsNotAmongTheFurthest).toBe(true);
+    expect(k.drainageRankByDuty).toBe(3);
+    expect(k.maxRungs).toBe(3);
+    expect(k.furthestLabels).toEqual(['environment factor 0.3', 'read standing up']);
+    expect(k.drainageRungs).toBe(1);
+    expect(k.sharingTheDrainageRungCount).toBe(3);
+    const text = lesson(RANK_LESSON);
+    k.rows.forEach((r) => {
+      const printed = row([r.changed, e12(r.dutyFactorDerived), r.dutyDirection, r.orifice, r.rungs > 0 ? `+${r.rungs}` : String(r.rungs)]);
+      line(printed, `the ranked row for ${r.changed}`);
+      expect(text, `${RANK_LESSON} does not print ${printed}`).toContain(printed);
+    });
+  });
+
+  it('the blowdown falls STRICTLY at every station, in pressure and in temperature', () => {
+    const b = S.blowdownMarch;
+    expect(b.stationPairs).toBeGreaterThan(0);
+    expect(b.nonFallingPressurePairs).toBe(0);
+    expect(b.nonFallingTemperaturePairs).toBe(0);
+    expect(b.temperatureFallsEverywhere).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // THE HELD GATE.
 // ---------------------------------------------------------------------------
 
-describe('THE HELD GATE: nine held quantities, two of them shared with the oracle on purpose', () => {
+describe('THE HELD GATE: nine not derived here, six of them held, two of those shared with the oracle on purpose', () => {
   const h = S.heldItems;
+  const MARKER_OF = { held: L.HELD_MARKER, typed: L.TYPED_MARKER, limit: L.LIMIT_MARKER };
 
-  it('there are nine, each carrying the marker wording', () => {
-    expect(h.heldCount).toBe(9);
+  it('there are nine, split six held, two typed and one stated limit, each carrying its own kind\'s marker', () => {
+    expect(h.notDerivedHereCount).toBe(9);
     expect(h.items).toHaveLength(9);
+    expect(h.heldCount).toBe(6);
+    expect(h.typedCount).toBe(2);
+    expect(h.statedLimitCount).toBe(1);
+    expect(h.heldCount + h.typedCount + h.statedLimitCount).toBe(h.notDerivedHereCount);
     h.items.forEach((i) => {
-      expect(i.note, `${i.id} does not carry the marker`).toContain(L.HELD_MARKER);
+      expect(L.NOT_DERIVED_KINDS, `${i.id} has an unknown kind`).toContain(i.kind);
+      expect(i.note, `${i.id} does not carry its ${i.kind} marker`).toContain(MARKER_OF[i.kind]);
+      // A typed or limit item never carries the HELD marker, which is the confusion this split repairs.
+      if (i.kind !== 'held') expect(i.note, `${i.id} is ${i.kind} and calls itself held`).not.toContain(L.HELD_MARKER);
       expect(i.note, `${i.id} does not say it is never an answer`).toMatch(/never as an answer/);
       expect(i.section).toBe(27);
     });
+    expect(h.typedIds).toEqual(['typed-charts-kb-kw-ksh', 'api-526-orifice-table']);
+    expect(h.statedLimitIds).toEqual(['wetted-height-limit']);
     expect(h.decisionCount).toBe(3);
   });
 
-  it('the digest marks them the same way, and the audit carries the same nine', () => {
-    expect((digest.match(/HELD FOR LITERATURE/g) || []).length).toBe(9);
+  it('the digest audit table labels the same six HELD, the same two TYPED and the one LIMIT, and the audit carries all nine', () => {
+    const s27 = digest.slice(digest.indexOf('# SECTION 27:'), digest.indexOf('# SECTION 28:'));
+    const rows = s27.split('\n').filter((l) => l.startsWith('| ') && !l.startsWith('| ---') && !l.startsWith('| quantity'));
+    const classOf = (r) => r.split(' | ')[1];
+    const heldRows = rows.filter((r) => /^HELD FOR LITERATURE/.test(classOf(r)));
+    expect(heldRows, heldRows.join('\n')).toHaveLength(h.heldCount);
+    // Each held item's title names a quantity on one of those rows.
+    const HELD_ROW_KEY = {
+      'kv-fit-coefficients': 'the Kv fit coefficients',
+      'sphere-drag-correlation': 'the sphere-drag correlation',
+      'napier-boundaries': 'the Napier threshold',
+      'pool-fire-constants-and-exponent': 'the pool fire constants',
+      'customary-allowable-intensities': 'the four customary allowable intensities',
+      'settling-coefficient-packaging': 'whether the standard prints 1.15',
+    };
+    expect(Object.keys(HELD_ROW_KEY).sort()).toEqual([...h.heldIds].sort());
+    Object.entries(HELD_ROW_KEY).forEach(([id, key]) => {
+      expect(heldRows.filter((r) => r.startsWith(`| ${key}`)), `${id} is not a HELD row of section 27`).toHaveLength(1);
+    });
+    const typedRow = (key) => rows.find((r) => r.startsWith(`| ${key}`));
+    expect(classOf(typedRow('Kb for gas, Kw for liquid, KSH for steam'))).toMatch(/^TYPED/);
+    expect(classOf(typedRow('the API 526 table'))).toMatch(/^TYPED/);
+    expect(classOf(typedRow('the 25 ft wetted-height limit'))).toMatch(/^a stated LIMIT the caller applies/);
     expect(S.theAudit.held.map((x) => x.id)).toEqual(h.items.map((x) => x.id));
   });
 
@@ -1444,7 +1531,7 @@ describe('THE HELD GATE: nine held quantities, two of them shared with the oracl
     // The two shared quantities appear in the panels that teach them.
     expect(sourceOf('SizingExplorer.jsx')).toMatch(/SHARES them with the engine on purpose/);
     expect(sourceOf('FireDrumExplorer.jsx')).toMatch(/shares them with the engine deliberately/);
-    console.log('[relief held gate] 9 held items, 2 shared with the oracle on purpose, marker in all 3 panels');
+    console.log('[relief held gate] 9 items not derived here (6 held, 2 typed, 1 limit), 2 shared with the oracle on purpose, marker in all 3 panels');
   });
 
   it('NO graded field reads a held quantity: the held functions are not what the capstone grades', () => {
@@ -1578,9 +1665,12 @@ describe('THE PROSE SWEEP: the lab\'s and the panels\' own comments', () => {
     expect(comments.length).toBeGreaterThan(8000);
     // Every claim the comments make, checked against the code.
     expect(L.HELD_ITEMS).toHaveLength(9);
-    expect(comments).toMatch(/NINE items are held/);
-    expect(comments).not.toMatch(/\bEIGHT items are held\b|\bTEN items are held\b/);
-    expect(comments).toMatch(/TWO OF THEM ARE SHARED WITH THE VALIDATION ORACLE/);
+    expect(comments).toMatch(/NINE items are on this list: SIX held for literature, TWO typed and ONE\s+\*\s+stated limit/);
+    expect(L.HELD_ITEMS.filter((i) => i.kind === 'held')).toHaveLength(6);
+    expect(L.HELD_ITEMS.filter((i) => i.kind === 'typed')).toHaveLength(2);
+    expect(L.HELD_ITEMS.filter((i) => i.kind === 'limit')).toHaveLength(1);
+    expect(comments).not.toMatch(/\bNINE items are held\b/);
+    expect(comments).toMatch(/TWO OF THE HELD SIX ARE SHARED WITH THE VALIDATION ORACLE/);
     expect(L.HELD_ITEMS.filter((i) => i.sharedWithTheOracle)).toHaveLength(2);
     // The comments name the engines the lab actually imports, and the vintage
     // the wave states.

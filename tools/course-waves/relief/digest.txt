@@ -49,6 +49,8 @@
 - 7 exports return a bare number and signal a refusal with NaN. 12 return an object. 2 are published tables and 1 is a derived constant.
 - THE CONTRACT EVERY OBJECT ROUTE KEEPS: either a finite result, or an object carrying an `error` string. A non-finite number with no `error` is what a caller's `if (r.error)` guard cannot see, and every route in this module is checked against both halves of that contract in section 26.
 - ONE REFUSAL CARRIES MORE THAN AN `error`. selectOrifice past the largest orifice returns `error` and `multipleOfT`, a whole number of valves, and section 10 prints both. Every other refusal in this module carries the `error` alone. A caller that stops at the `error` throws away the only figure the refusal worked out.
+- A WARNING SLOT HOLDING A NULL IS A PROMISE THAT THE CHECK RAN. fireReliefLoad returns 2 fields, `wLbHr` and `warning`, and on a duty and a latent heat that raise nothing the warning slot is present and holds a null. A caller can therefore tell a check that ran and found nothing from a check that never ran, which a missing key cannot say.
+- dropoutVelocityFtS RETURNS THE ITERATION ALONGSIDE THE ANSWER: `udFtS`, `dragC`, `reynolds`, `iterations`, `converged`, `residual`, `warning`, 7 fields in all. The pass count, the converged flag and the residual are what let a reader judge the velocity rather than take it, and section 17 walks all 7.
 
 # SECTION 2: The numbers this module stands on, measured rather than typed (shared by Associate m01 l04 and Expert m05 l01)
 
@@ -856,7 +858,7 @@
 | liquidArea | a rate of zero | liquid sizing needs a positive rate and specific gravity |
 | liquidArea | a negative viscosity | viscosity must be a finite number, zero or more |
 | liquidArea | a back pressure at the set pressure | no differential across the valve: back pressure meets set pressure |
-| liquidArea | a viscosity correction factor above one | Kw must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
+| liquidArea | a liquid back-pressure correction above one | Kw must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
 | steamArea | a flow of zero | steam sizing needs a positive flow and pressure |
 | steamArea | a superheat factor of zero | KSH must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
 | steamArea | a pressure past the published Napier range | Napier correction is only published to 3200 psia |
@@ -931,6 +933,7 @@
 | the 25 ft wetted-height limit | a stated LIMIT the caller applies | nothing. It depends on the plot elevation the engine is never told, and it arrives as a note |
 | the exact circular segment, both orientations | COMPUTED | the oracle sums a polyline round the real circle with Richardson extrapolation |
 | the terminal-velocity balance | COMPUTED | the oracle bisects on the force residual in SI, which recovers the coefficient the balance carries |
+| whether the standard prints 1.15 or the exact four thirds | HELD FOR LITERATURE | nothing. No copy of the standard is in this repository. The engine evaluates the BALANCE, which is the derivation both forms come from, and section 17 MEASURES the coefficient out of the returned pair rather than typing either form |
 | the sphere-drag correlation and its low-Reynolds cap | HELD FOR LITERATURE | NOTHING. An empirical fit, shared with the oracle on purpose |
 | the drum segment area and the length | COMPUTED | the oracle uses Simpson quadrature and a transit time against a fall time, in SI |
 | the solid angle 12.566370614359 in the point source | COMPUTED | the oracle finds the sphere area by quadrature and the inverse by bisection on that quadrature |

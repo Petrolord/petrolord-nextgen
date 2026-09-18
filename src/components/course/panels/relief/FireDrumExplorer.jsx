@@ -3,7 +3,7 @@ import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot, ReferenceArea,
 } from 'recharts';
 import {
-  wettedGeometry, fireDuty, fireCase, dropletSettling, knockoutDrum,
+  wettedGeometry, fireDuty, fireCase, dropletSettling, knockoutDrum, LIMIT_MARKER,
 } from './reliefLab';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
@@ -67,9 +67,13 @@ const Tbl = ({ head, rows }) => (
   </div>
 );
 
-const Held = ({ children }) => (
+/**
+ * A quantity this course teaches as a stated limit and never as an answer. The
+ * heading names WHICH kind of not-derived it is, in the lab's own marker words.
+ */
+const Held = ({ label = 'HELD FOR LITERATURE', children }) => (
   <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-amber-300 text-xs font-medium mb-1">{label.toUpperCase()}</p>
     <p className="text-xs text-slate-300 mb-0">{children}</p>
   </div>
 );
@@ -138,7 +142,7 @@ export const WettedMode = ({ w }) => {
         rows={w.rows.map((r) => [six(r.liquidLevelFt), six(r.levelFractionDerived), four(r.horizontalFt2), four(r.verticalFt2), six(r.horizontalOverVerticalDerived)])}
       />
       <EngineNote label="What the engine returns on every fire duty" message={w.heightLimitNote} />
-      <Held>
+      <Held label={LIMIT_MARKER}>
         The 25 ft wetted-height limit. Where that height falls depends on a plot elevation the engine is never told, so
         the truncation is the caller&apos;s job and it arrives as the note above rather than as arithmetic. Taught as a
         limit and never as an answer. The heads are ignored as well, which is standard screening practice and

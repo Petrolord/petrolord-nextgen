@@ -221,7 +221,7 @@ export const REFUSALS = [
   ['liquidArea', 'a rate of zero', { qGpm: 0, p1Psig: 200, p2Psig: 0, sg: 0.9 }],
   ['liquidArea', 'a negative viscosity', { qGpm: 500, p1Psig: 200, p2Psig: 0, sg: 0.9, muCp: -400 }],
   ['liquidArea', 'a back pressure at the set pressure', { qGpm: 500, p1Psig: 200, p2Psig: 200, sg: 0.9 }],
-  ['liquidArea', 'a viscosity correction factor above one', { qGpm: 500, p1Psig: 200, p2Psig: 0, sg: 0.9, kw: 1.2 }],
+  ['liquidArea', 'a liquid back-pressure correction above one', { qGpm: 500, p1Psig: 200, p2Psig: 0, sg: 0.9, kw: 1.2 }],
   ['steamArea', 'a flow of zero', { wLbHr: 0, p1Psia: 500 }],
   ['steamArea', 'a superheat factor of zero', { wLbHr: 60000, p1Psia: 500, ksh: 0 }],
   ['steamArea', 'a pressure past the published Napier range', { wLbHr: 60000, p1Psia: 3400 }],
@@ -1133,6 +1133,41 @@ export const associateReading = () => {
 // ---------------------------------------------------------------------------
 
 /** Digest section 12. */
+/**
+ * The wetted area gained across TEN EQUAL BANDS of a tenth of the diameter,
+ * each band an engine return at each of its two ends. The digest prints this
+ * table and the lesson that reads a steepness off it reads it here.
+ */
+const bandGainRows = (geom, diameterFt) => {
+  const bandFt = diameterFt / 10;
+  const rows = [];
+  for (let i = 0; i < 10; i += 1) {
+    const loFt = i * bandFt;
+    const hiFt = (i + 1) * bandFt;
+    const a = R.wettedAreaFt2({ ...geom, orientation: 'horizontal', liquidLevelFt: loFt });
+    const b = R.wettedAreaFt2({ ...geom, orientation: 'horizontal', liquidLevelFt: hiFt });
+    rows.push({
+      loFt, hiFt, bandFt, gainedFt2: b.areaFt2 - a.areaFt2, gainedPerFtDerived: (b.areaFt2 - a.areaFt2) / bandFt,
+    });
+  }
+  const gains = rows.map((r) => r.gainedFt2);
+  const maxGain = Math.max(...gains);
+  const minGain = Math.min(...gains);
+  return {
+    bandFt,
+    rows,
+    count: rows.length,
+    maxGainedFt2: maxGain,
+    minGainedFt2: minGain,
+    // The column read from the top is the column read from the bottom.
+    mirrored: gains.every((g, i) => Math.abs(g - gains[9 - i]) < 1e-9),
+    topOverBottomDerived: gains[9] / gains[0],
+    steepestOverFlattestDerived: maxGain / minGain,
+    steepestAreTheEnds: Math.abs(gains[0] / maxGain - 1) < 1e-12 && Math.abs(gains[9] / maxGain - 1) < 1e-12,
+    flattestAreTheMiddleTwo: Math.abs(gains[4] / minGain - 1) < 1e-12 && Math.abs(gains[5] / minGain - 1) < 1e-12,
+  };
+};
+
 export const wettedGeometry = () => {
   const geom = {
     diameterFt: BENISEDE.diameterFt, lengthFt: BENISEDE.lengthFt,
@@ -1169,6 +1204,12 @@ export const wettedGeometry = () => {
     },
     fullFt2: full.areaFt2,
     heightLimitNote: R.fireHeatInput({ wettedFt2: lying.areaFt2 }).note,
+    // WHAT A FOOT OF LEVEL BUYS. The sweep above is printed at uneven spacings,
+    // so its steepness cannot be read off it by eye, and a lesson that divided
+    // two of its rows concluded the sweep buys LESS near the top. It buys the
+    // same as the bottom. The digest prints this table for exactly that reason,
+    // and until now nothing in this repository pinned it (FC5 repair).
+    bandGains: bandGainRows(geom, BENISEDE.diameterFt),
   };
 };
 
@@ -1280,6 +1321,65 @@ const fireChain = (over) => {
 };
 
 /** Digest section 16. */
+/** The stated fire case and one changed input at a time, the digest's own list. */
+const FIRE_VARIANTS = [
+  { changed: 'none, the stated case', ...fireChain({}) },
+  { changed: 'drainage answered false', ...fireChain({ adequateDrainage: false }) },
+  { changed: 'environment factor 0.3', ...fireChain({ envFactor: 0.3 }) },
+  { changed: 'level trimmed to 2.0 ft', ...fireChain({ liquidLevelFt: 2.0 }) },
+  { changed: 'level raised to 8.0 ft', ...fireChain({ liquidLevelFt: 8.0 }) },
+  { changed: 'latent heat 90 Btu/lb', ...fireChain({ latentBtuLb: 90 }) },
+  { changed: 'read standing up', ...fireChain({ orientation: 'vertical' }) },
+];
+
+/**
+ * THE SAME TABLE, RANKED BY THE DUTY IT MOVES. The duty factor is the variant
+ * duty over the stated one, or the stated one over the variant where the
+ * variant is lower, so every row is a figure at or above one. The rung count is
+ * the signed distance the orifice letter moved on the published ladder.
+ *
+ * A DUTY RANKING AND A LETTER RANKING ARE DIFFERENT RANKINGS, which is the
+ * whole reason both columns are here.
+ */
+const fireRanking = () => {
+  const ladder = R.API_ORIFICES.map((x) => x.orifice);
+  const stated = FIRE_VARIANTS[0];
+  const rows = FIRE_VARIANTS.slice(1).map((r) => ({
+    changed: r.changed,
+    dutyBtuHr: r.dutyBtuHr,
+    orifice: r.orifice,
+    dutyFactorDerived: r.dutyBtuHr >= stated.dutyBtuHr ? r.dutyBtuHr / stated.dutyBtuHr : stated.dutyBtuHr / r.dutyBtuHr,
+    dutyDirection: r.dutyBtuHr >= stated.dutyBtuHr ? 'up' : 'down',
+    rungs: ladder.indexOf(r.orifice) - ladder.indexOf(stated.orifice),
+  })).sort((a, b) => b.dutyFactorDerived - a.dutyFactorDerived);
+  const maxRungs = Math.max(...rows.map((r) => Math.abs(r.rungs)));
+  const furthest = rows.filter((r) => Math.abs(r.rungs) === maxRungs);
+  const drainage = rows.find((r) => r.changed === 'drainage answered false');
+  return {
+    ladder,
+    statedOrifice: stated.orifice,
+    statedDutyBtuHr: stated.dutyBtuHr,
+    rows,
+    count: rows.length,
+    everyVariantOrificeIsOnTheLadder: rows.every((r) => ladder.indexOf(r.orifice) >= 0),
+    largestDutyLever: rows[0].changed,
+    largestDutyFactorDerived: rows[0].dutyFactorDerived,
+    drainageRankByDuty: rows.findIndex((r) => r.changed === 'drainage answered false') + 1,
+    drainageDutyFactorDerived: drainage.dutyFactorDerived,
+    drainageRungs: Math.abs(drainage.rungs),
+    // The two findings the generator asserts, carried as readers so the lesson
+    // that states either of them is pinned rather than trusted.
+    drainageIsNotTheLargestDutyLever: rows[0].changed !== 'drainage answered false',
+    drainageIsNotAmongTheFurthest: !furthest.some((r) => r.changed === 'drainage answered false'),
+    maxRungs,
+    furthestCount: furthest.length,
+    furthestLabels: furthest.map((r) => r.changed),
+    sharingTheDrainageRungCount: rows.filter(
+      (r) => Math.abs(r.rungs) === Math.abs(drainage.rungs) && r.changed !== drainage.changed,
+    ).length,
+  };
+};
+
 export const fireCase = () => ({
   stated: { ...BENISEDE },
   chain: fireChain({}),
@@ -1287,15 +1387,13 @@ export const fireCase = () => ({
     overpressurePct: 10,
     ...fireChain({ overpressurePct: 10 }),
   },
-  whatMovesTheLetter: [
-    { changed: 'none, the stated case', ...fireChain({}) },
-    { changed: 'drainage answered false', ...fireChain({ adequateDrainage: false }) },
-    { changed: 'environment factor 0.3', ...fireChain({ envFactor: 0.3 }) },
-    { changed: 'level trimmed to 2.0 ft', ...fireChain({ liquidLevelFt: 2.0 }) },
-    { changed: 'level raised to 8.0 ft', ...fireChain({ liquidLevelFt: 8.0 }) },
-    { changed: 'latent heat 90 Btu/lb', ...fireChain({ latentBtuLb: 90 }) },
-    { changed: 'read standing up', ...fireChain({ orientation: 'vertical' }) },
-  ],
+  whatMovesTheLetter: FIRE_VARIANTS,
+  // THE SAME TABLE, RANKED. A ranking is an ANSWER, so it is computed rather
+  // than left beside the figures to be read off by eye. Three committed lessons
+  // ranked these rows by eye and all three got it wrong. The digest prints this
+  // table for exactly that reason, and until now nothing in this repository
+  // pinned it (FC5 repair).
+  ranked: fireRanking(),
 });
 
 // ---------------------------------------------------------------------------
@@ -1528,7 +1626,15 @@ export const blowdownMarch = () => {
       .map((s, i) => ({
         station: i, timeS: s.tS, pressurePsia: s.pPsia, temperatureR: s.tR,
       })),
-    pressureFallsEverywhere: run.stations.every((s, i) => i === 0 || s.pPsia <= run.stations[i - 1].pPsia),
+    // STRICTLY falling, because the sentence this pins says the pressure FALLS
+    // at every station. A `<=` here is satisfied by a plateau, which would
+    // refute the sentence while leaving the pin green (FC5 repair).
+    pressureFallsEverywhere: run.stations.every((s, i) => i === 0 || s.pPsia < run.stations[i - 1].pPsia),
+    nonFallingPressurePairs: run.stations.filter((s, i) => i > 0 && !(s.pPsia < run.stations[i - 1].pPsia)).length,
+    // The other half of the same sentence: the vessel gets colder all the way down.
+    temperatureFallsEverywhere: run.stations.every((s, i) => i === 0 || s.tR < run.stations[i - 1].tR),
+    nonFallingTemperaturePairs: run.stations.filter((s, i) => i > 0 && !(s.tR < run.stations[i - 1].tR)).length,
+    stationPairs: run.stations.length - 1,
   };
 };
 
@@ -1869,27 +1975,50 @@ export const contractCensus = () => ({
 // ---------------------------------------------------------------------------
 
 export const HELD_MARKER = 'HELD FOR LITERATURE';
+/** A published chart or table the caller types in, with its reference named. */
+export const TYPED_MARKER = 'TYPED, a published input';
+/** A limit the caller applies, which the engine states and never enforces. */
+export const LIMIT_MARKER = 'a stated LIMIT the caller applies';
 
 /**
- * WHAT THIS COURSE TEACHES AS A LIMIT AND NEVER AS AN ANSWER.
+ * WHAT THIS COURSE DOES NOT DERIVE, AND WHICH KIND OF NOT-DERIVED EACH ONE IS.
  *
- * Digest section 27 is the standing audit and section 2 MEASURES every figure
- * in this list. NINE items are held, which is the count the writing brief
- * states and the count section 27 supports, and they are three different kinds
- * of thing: an empirical FIT nothing here can derive, a published TABLE or
- * CHART taken as an input, and a stated LIMIT or CONVENTION the caller applies.
+ * NINE items are on this list: SIX held for literature, TWO typed and ONE
+ * stated limit. Digest section 27 splits every figure in the module into
+ * COMPUTED, TYPED and HELD FOR LITERATURE, with the 25 ft limit on a row of its
+ * own, and the Expert tier teaches that split as the point of its audit module.
+ * Every count below is the count of one kind, and the course page, the lessons
+ * of all three tiers and the digest's audit table all use the same split, so a
+ * learner meets one set of words for it (FC5 repair).
  *
- * TWO OF THEM ARE SHARED WITH THE VALIDATION ORACLE ON PURPOSE, and that is the
- * sharpest thing in the audit. The Kv fit's inverse-three-halves coefficient
- * and the sphere-drag correlation are written into both the engine and its
- * oracle, so moving either in both files leaves every published case green. The
- * FC5-0 battery reports GREEN on both and CALLS THAT THE FINDING rather than a
- * pass, and `sharedWithTheOracle` is true on exactly those two. A panel that
- * presented either as validated would be teaching the opposite of the lesson.
+ * The three kinds, in the digest's own words:
+ *   HELD FOR LITERATURE   nothing in this package checks it by any independent
+ *                         route, so nothing here would notice if it drifted.
+ *   TYPED                 a published chart or table taken as an input by
+ *                         design, arriving with its reference named. Nothing
+ *                         derives it and nothing should.
+ *   a stated LIMIT        a limit the caller applies. The engine states it and
+ *                         cannot enforce it, because what it depends on is
+ *                         never passed in.
+ *
+ * TWO OF THE HELD SIX ARE SHARED WITH THE VALIDATION ORACLE ON PURPOSE, and
+ * that is the sharpest thing in the audit. The Kv fit's inverse-three-halves
+ * coefficient and the sphere-drag correlation are written into both the engine
+ * and its oracle, so moving either in both files leaves every published case
+ * green. The FC5-0 battery reports GREEN on both and CALLS THAT THE FINDING
+ * rather than a pass, and `sharedWithTheOracle` is true on exactly those two. A
+ * panel that presented either as validated would be teaching the opposite of
+ * the lesson.
+ *
+ * Every one of the nine, whatever its kind, is taught as a limit and never as
+ * an answer, and no graded field in this course reads any of them.
  */
+export const NOT_DERIVED_KINDS = ['held', 'typed', 'limit'];
+
 export const HELD_ITEMS = [
   {
     id: 'kv-fit-coefficients',
+    kind: 'held',
     section: 27,
     sharedWithTheOracle: true,
     title: 'The three coefficients of the Kv viscosity fit',
@@ -1897,59 +2026,67 @@ export const HELD_ITEMS = [
   },
   {
     id: 'sphere-drag-correlation',
+    kind: 'held',
     section: 27,
     sharedWithTheOracle: true,
     title: 'The sphere-drag correlation and its low-Reynolds cap',
     note: `${HELD_MARKER}: the same class and the same reason. Its terms and its cap are an empirical fit, the oracle shares it deliberately, and the FC5-0 battery reports that sharing as its own finding rather than as a pass. Taught as a limit and never as an answer, and nothing graded in this course reads it.`,
   },
   {
-    id: 'api-526-orifice-table',
-    section: 27,
-    sharedWithTheOracle: false,
-    title: 'The API 526 orifice table, fourteen rows',
-    note: `${HELD_MARKER}: a published table. This package cannot derive a single one of the fourteen areas, so what the suite checks is the SELECTION BEHAVIOUR: the ladder, both selection boundaries and the refusal past the largest. Taught as a limit and never as an answer, and nothing graded in this course is an orifice letter or a margin.`,
-  },
-  {
-    id: 'typed-charts-kb-kw-ksh',
-    section: 27,
-    sharedWithTheOracle: false,
-    title: 'Kb for gas, Kw for liquid and KSH for steam',
-    note: `${HELD_MARKER}: published charts and tables, so they are typed inputs with their references named. Nothing derives them and nothing should. Taught as a limit and never as an answer.`,
-  },
-  {
-    id: 'customary-allowable-intensities',
-    section: 27,
-    sharedWithTheOracle: false,
-    title: 'The four customary allowable radiant intensities and their labels',
-    note: `${HELD_MARKER}: the values are customary and the wording is this package's own. No publication in this repository checks either. Two engines export the identical table and a test asserts they stay equal, so one learner cannot meet two sets of words for one published table. Taught as a limit and never as an answer, and the setback that reads them belongs to a merged sibling course.`,
-  },
-  {
-    id: 'pool-fire-constants-and-exponent',
-    section: 27,
-    sharedWithTheOracle: false,
-    title: 'The two pool fire constants and the published exponent',
-    note: `${HELD_MARKER}: the oracle checks the USC pair against the published SI pair with the exponent carried through the unit conversion, which checks the UNIT PACKAGING rather than the pool-fire physics. Taught as a limit and never as an answer, and nothing graded in this course reads a fire duty or a fire relief load.`,
-  },
-  {
     id: 'napier-boundaries',
+    kind: 'held',
     section: 27,
     sharedWithTheOracle: false,
     title: 'The Napier threshold and the top of the published range',
     note: `${HELD_MARKER}: published BOUNDARIES. This package can derive neither, and the suite pins both as behaviour. The FIT between them is checked against the standard's own SI statement. Taught as a limit and never as an answer.`,
   },
   {
-    id: 'wetted-height-limit',
+    id: 'pool-fire-constants-and-exponent',
+    kind: 'held',
     section: 27,
     sharedWithTheOracle: false,
-    title: 'The 25 ft wetted-height limit',
-    note: `${HELD_MARKER}: a stated LIMIT the caller applies. Where that height falls depends on a plot elevation the engine is never told, so the truncation is the caller's job and it arrives as a note on every fire duty. Taught as a limit and never as an answer.`,
+    title: 'The two pool fire constants and the published exponent',
+    note: `${HELD_MARKER}: the oracle checks the USC pair against the published SI pair with the exponent carried through the unit conversion, which checks the UNIT PACKAGING rather than the pool-fire physics. Taught as a limit and never as an answer, and nothing graded in this course reads a fire duty or a fire relief load.`,
+  },
+  {
+    id: 'customary-allowable-intensities',
+    kind: 'held',
+    section: 27,
+    sharedWithTheOracle: false,
+    title: 'The four customary allowable radiant intensities and their labels',
+    note: `${HELD_MARKER}: the values are customary and the wording is this package's own. No publication in this repository checks either. Two engines export the identical table and a test asserts they stay equal, so one learner cannot meet two sets of words for one published table. Taught as a limit and never as an answer, and the setback that reads them belongs to a merged sibling course.`,
   },
   {
     id: 'settling-coefficient-packaging',
+    kind: 'held',
     section: 27,
     sharedWithTheOracle: false,
     title: 'Whether the standard prints 1.15 or the exact four thirds',
-    note: `${HELD_MARKER}: no copy of the standard is in this repository. The engine evaluates the BALANCE, which is the derivation both forms come from, and section 17 MEASURES the coefficient out of the returned pair rather than typing either form. Taught as a limit and never as an answer.`,
+    note: `${HELD_MARKER}: no copy of the standard is in this repository, so nothing here can check which form it prints. The engine evaluates the BALANCE, which is the derivation both forms come from, and section 17 MEASURES the coefficient out of the returned pair rather than typing either form. Taught as a limit and never as an answer.`,
+  },
+  {
+    id: 'typed-charts-kb-kw-ksh',
+    kind: 'typed',
+    section: 27,
+    sharedWithTheOracle: false,
+    title: 'Kb for gas, Kw for liquid and KSH for steam',
+    note: `${TYPED_MARKER}: published CHARTS and TABLES, so they arrive as inputs by design with their references named. Nothing derives them and nothing should, which is what separates a typed figure from a held one: a typed figure is a reading somebody took, and the question to ask of it is what condition it was read at. Taught as a limit and never as an answer.`,
+  },
+  {
+    id: 'api-526-orifice-table',
+    kind: 'typed',
+    section: 27,
+    sharedWithTheOracle: false,
+    title: 'The API 526 orifice table, fourteen rows',
+    note: `${TYPED_MARKER}: a published TABLE of fourteen areas. This package cannot derive a single one of them, so what the suite checks is the SELECTION BEHAVIOUR: the ladder, both selection boundaries and the refusal past the largest. Taught as a limit and never as an answer, and nothing graded in this course is an orifice letter or a margin.`,
+  },
+  {
+    id: 'wetted-height-limit',
+    kind: 'limit',
+    section: 27,
+    sharedWithTheOracle: false,
+    title: 'The 25 ft wetted-height limit',
+    note: `${LIMIT_MARKER}: where that height falls depends on a plot elevation the engine is never told, so the truncation is the caller's job and the engine can only state it. It arrives as a note on every fire duty. Taught as a limit and never as an answer.`,
   },
 ];
 
@@ -1975,9 +2112,20 @@ export const STATED_MODEL_DECISIONS = [
 /** Section 27, for a panel that wants the marked list. */
 export const heldItems = () => ({
   marker: HELD_MARKER,
+  typedMarker: TYPED_MARKER,
+  limitMarker: LIMIT_MARKER,
   items: HELD_ITEMS.map((h) => ({ ...h })),
   decisions: STATED_MODEL_DECISIONS.map((d) => ({ ...d })),
-  heldCount: HELD_ITEMS.length,
+  // THE COUNTS SAY PLAINLY WHAT EACH ONE COUNTS. `notDerivedHereCount` is the
+  // whole list. `heldCount` is the strict sense the digest's audit table uses
+  // and the Expert tier teaches: nothing in this package checks it.
+  notDerivedHereCount: HELD_ITEMS.length,
+  heldCount: HELD_ITEMS.filter((h) => h.kind === 'held').length,
+  typedCount: HELD_ITEMS.filter((h) => h.kind === 'typed').length,
+  statedLimitCount: HELD_ITEMS.filter((h) => h.kind === 'limit').length,
+  heldIds: HELD_ITEMS.filter((h) => h.kind === 'held').map((h) => h.id),
+  typedIds: HELD_ITEMS.filter((h) => h.kind === 'typed').map((h) => h.id),
+  statedLimitIds: HELD_ITEMS.filter((h) => h.kind === 'limit').map((h) => h.id),
   sharedWithTheOracleCount: HELD_ITEMS.filter((h) => h.sharedWithTheOracle).length,
   decisionCount: STATED_MODEL_DECISIONS.length,
 });

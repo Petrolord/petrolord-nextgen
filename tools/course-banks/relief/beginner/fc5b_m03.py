@@ -108,7 +108,7 @@ q(2, "With no viscosity stated at all, what does the liquid route return for the
 
 q(1, "AKASO states a Kd of 0.650000 while the gas and steam streams state 0.975000. What kind of figure is that?",
  "The valve manufacturer own certified discharge coefficient, validated on the way in as a fraction of an ideal.",
- ["A chart factor that is held for literature, read against the service condition and then typed in by the caller.",
+ ["A published chart factor, read off its chart against the liquid service condition and then typed in by the caller.",
   "A closed form the engine evaluates from the specific gravity and the differential.",
   "A published table entry that the oracle checks against its own SI statement."],
  "A certified coefficient is measured on a real device on a test stand, and every coefficient is validated on the way in as above zero and no more than one. A liquid service figure and a vapour one are different quantities."),

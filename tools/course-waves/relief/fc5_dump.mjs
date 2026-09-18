@@ -665,6 +665,16 @@ w();
 w(`- ${BARE_NUMBER_EXPORTS.length} exports return a bare number and signal a refusal with NaN. ${OBJ_EXPORTS.length} return an object. ${DATA_EXPORTS.length} are published tables and ${CONSTANT_EXPORTS.length} is a derived constant.`);
 w('- THE CONTRACT EVERY OBJECT ROUTE KEEPS: either a finite result, or an object carrying an `error` string. A non-finite number with no `error` is what a caller\'s `if (r.error)` guard cannot see, and every route in this module is checked against both halves of that contract in section 26.');
 w(`- ONE REFUSAL CARRIES MORE THAN AN \`error\`. selectOrifice past the largest orifice returns \`error\` and \`${ORIFICE_REFUSAL_EXTRA[0]}\`, a whole number of valves, and section 10 prints both. Every other refusal in this module carries the \`error\` alone. A caller that stops at the \`error\` throws away the only figure the refusal worked out.`);
+// TWO RETURN SHAPES TWO COMMITTED LESSONS STATE AND THE DIGEST NEVER PRINTED.
+// Both are TRUE of the engine and both were unpinned, so a lesson could drift
+// off either with nothing in the wave to catch it. Read off a live return
+// rather than listed (FC5 repair).
+const FIRE_LOAD_KEYS = Object.keys(success('the fire relief load on a bare probe', R.fireReliefLoad({ qBtuHr: 4000000, latentBtuLb: 150 })));
+const DROPOUT_KEYS = Object.keys(success('the dropout velocity on a bare probe', R.dropoutVelocityFtS({ dropletMicron: 400, rhoLLbFt3: 36.5, rhoVLbFt3: 0.124385, muVCp: 0.0135 })));
+must('the fire relief load carries a warning slot holding a null on a call that raises nothing', FIRE_LOAD_KEYS.includes('warning') && R.fireReliefLoad({ qBtuHr: 4000000, latentBtuLb: 150 }).warning === null, FIRE_LOAD_KEYS.join(', '));
+must('the dropout velocity carries the iteration alongside the answer', DROPOUT_KEYS.length === 7, `${DROPOUT_KEYS.length} fields: ${DROPOUT_KEYS.join(', ')}`);
+w(`- A WARNING SLOT HOLDING A NULL IS A PROMISE THAT THE CHECK RAN. fireReliefLoad returns ${FIRE_LOAD_KEYS.length} fields, \`${FIRE_LOAD_KEYS.join('` and `')}\`, and on a duty and a latent heat that raise nothing the warning slot is present and holds a null. A caller can therefore tell a check that ran and found nothing from a check that never ran, which a missing key cannot say.`);
+w(`- dropoutVelocityFtS RETURNS THE ITERATION ALONGSIDE THE ANSWER: \`${DROPOUT_KEYS.join('`, `')}\`, ${DROPOUT_KEYS.length} fields in all. The pass count, the converged flag and the residual are what let a reader judge the velocity rather than take it, and section 17 walks all ${DROPOUT_KEYS.length}.`);
 w();
 
 /* ------------------------------------------------------------- SECTION 2 */
@@ -1690,6 +1700,11 @@ w(`| the pool fire constants ${e12(C21000)} and ${e12(C34500)}, and the exponent
 w('| the 25 ft wetted-height limit | a stated LIMIT the caller applies | nothing. It depends on the plot elevation the engine is never told, and it arrives as a note |');
 w('| the exact circular segment, both orientations | COMPUTED | the oracle sums a polyline round the real circle with Richardson extrapolation |');
 w('| the terminal-velocity balance | COMPUTED | the oracle bisects on the force residual in SI, which recovers the coefficient the balance carries |');
+// THE PACKAGING OF THAT COEFFICIENT IS A SEPARATE QUESTION FROM THE BALANCE,
+// and the audit table never carried a row for it although the teaching lab
+// has always held it. The balance is COMPUTED; which form the standard prints
+// is checked by nothing here (FC5 repair).
+w('| whether the standard prints 1.15 or the exact four thirds | HELD FOR LITERATURE | nothing. No copy of the standard is in this repository. The engine evaluates the BALANCE, which is the derivation both forms come from, and section 17 MEASURES the coefficient out of the returned pair rather than typing either form |');
 w('| the sphere-drag correlation and its low-Reynolds cap | HELD FOR LITERATURE | NOTHING. An empirical fit, shared with the oracle on purpose |');
 w('| the drum segment area and the length | COMPUTED | the oracle uses Simpson quadrature and a transit time against a fall time, in SI |');
 w(`| the solid angle ${e12(FOUR_PI)} in the point source | COMPUTED | the oracle finds the sphere area by quadrature and the inverse by bisection on that quadrature |`);
@@ -1845,6 +1860,9 @@ const NON_NUMBER_OK = [
   // A refusal row whose INPUT was the null, quoted so the message and the input
   // that caused it are on one row.
   'a liquid level fraction given as null',
+  // Section 1 TEACHES the warning slot that holds a null on a quiet call: the
+  // null is the engine's own return there, and the point of the bullet.
+  'the warning slot is present and holds a null',
 ];
 const nnHits = [];
 const nnUsed = new Set();

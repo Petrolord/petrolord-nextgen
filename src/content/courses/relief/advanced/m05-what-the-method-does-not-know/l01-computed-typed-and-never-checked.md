@@ -14,16 +14,18 @@ The typed set is short: Kb for gas, Kw for liquid, KSH for steam, and the API 52
 
 ## The held set the audit names
 
-Six things, and nothing derives the typed set either. The Kv viscosity fit's three coefficients. The sphere-drag correlation and its low-Reynolds cap of 240.000000000000. The Napier boundaries at 1500.000000000007 psia and 3200.000000000003 psia. The pool fire constants 21000.000000000000 and 34500.000000000000 with the exponent 0.820000000000. The 25 ft wetted-height limit. And the four customary allowable intensities with their labels.
+Six things. The Kv viscosity fit's three coefficients. The sphere-drag correlation and its low-Reynolds cap of 240.000000000000. The Napier boundaries at 1500.000000000007 psia and 3200.000000000003 psia. The pool fire constants 21000.000000000000 and 34500.000000000000 with the exponent 0.820000000000. The four customary allowable intensities with their labels. And whether the standard prints the settling coefficient as 1.15 or as the exact four thirds.
+
+The 25 ft wetted-height limit sits in none of the three columns. It is a limit the caller applies, because it depends on a plot elevation the engine is never told.
 
 ## Where the line sits, exactly
 
-The Napier boundaries are held, but the suite pins both, so they cannot move silently. The pool fire pair is held, but the oracle checks the unit conversion between the USC and SI statements, so a packaging error would be caught even though the constants themselves are not in question. The 25 ft limit is held because it is not a physical constant at all: it is a decision the caller applies, and the engine returns a note saying so.
+The Napier boundaries are held, but the suite pins both, so they cannot move silently. The pool fire pair is held, but the oracle checks the unit conversion between the USC and SI statements, so a packaging error would be caught even though the constants themselves are not in question.
 
-Computing a balance can also sidestep a held figure entirely. A publication may print a rounded coefficient or an exact fraction for the settling relation, and no copy of the standard is here to say which. The engine evaluates the balance, which is the derivation both forms come from, and the digest recovers the coefficient out of the returned pair as 1.333333333333.
+Computing a balance can also keep a held figure out of every answer. Which form of the settling coefficient the standard prints stays held, and the engine evaluates the balance both forms come from, and the digest recovers the coefficient out of the returned pair as 1.333333333333.
 
 The Kv fit and the drag correlation are held with nothing hedging them at all. No pin, no partial check, no unit conversion standing in for the physics, and the next four lessons are about what that means and how to teach a figure in that position without either hiding it or overstating the problem.
 
 ## Exercise
 
-Define computed, typed and held for literature in your own words, and say what distinguishes the second from the third. List the typed set. List the held set the audit names with the figure for each where the digest prints one. Then say which held items are pinned as behaviour, which is hedged by a unit check, which is a caller decision rather than a constant, and which two have nothing standing behind them.
+Define computed, typed and held for literature in your own words, and say what distinguishes the second from the third. List the typed set. List the held set the audit names with the figure for each where the digest prints one. Then say which held items are pinned as behaviour, which is hedged by a unit check, which one the engine keeps out of every answer, and which two have nothing standing behind them. Then place the 25 ft limit.

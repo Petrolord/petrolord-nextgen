@@ -18,13 +18,13 @@ The computed side is longer than that table suggests, because the coefficient C 
 
 ## The typed side, with the caveat each one needs
 
-Four things in this tier are held for literature, meaning they are taught as stated limits and never as facts the package can stand behind.
+Four things in this tier are not derived here, and all four are taught as stated limits and never as facts the package stands behind. Three are typed and one is held for literature.
 
-The balanced bellows factors Kb and Kw are published charts. They arrive typed, with their references named, and on the gas route the engine warns you once the back pressure ratio passes 0.300000000000 that a balanced bellows valve needs its chart factor. The superheat factor KSH is a published table with the same status, and no route in the package can check a single entry in it.
+The balanced bellows factors Kb and Kw are published charts. They arrive typed, with their references named, and on the gas route the engine warns you once the back pressure ratio passes 0.300000000000 that a balanced bellows valve needs its chart factor. The superheat factor KSH is a published table with the same status.
 
-The viscosity fit is the subtlest of the four. Its three coefficients, 0.993500000000, 2.878000000000 and 342.750000000000, are an empirical fit that no route here derives, and the validation oracle shares the same three on purpose, so the oracle cannot check them either. What is checked around them is the Reynolds constant and the leading constant of the area equation.
+The viscosity fit is the held one. Its three coefficients, 0.993500000000, 2.878000000000 and 342.750000000000, are an empirical fit that no route here derives, and the validation oracle shares the same three on purpose, so the oracle cannot check them either. What is checked around them is the Reynolds constant and the leading constant of the area equation.
 
-The API 526 orifice table is the fourth. Fourteen published areas that nothing in the package computes, checked only by behaviour.
+The API 526 orifice table is the third typed item. Fourteen published areas that nothing in the package computes, checked only by behaviour.
 
 ## Why the distinction is the skill
 

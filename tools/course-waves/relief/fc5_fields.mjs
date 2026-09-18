@@ -208,7 +208,7 @@ export const REFUSALS = [
   ['liquidArea', 'a rate of zero', { qGpm: 0, p1Psig: 200, p2Psig: 0, sg: 0.9 }],
   ['liquidArea', 'a negative viscosity', { qGpm: 500, p1Psig: 200, p2Psig: 0, sg: 0.9, muCp: -400 }],
   ['liquidArea', 'a back pressure at the set pressure', { qGpm: 500, p1Psig: 200, p2Psig: 200, sg: 0.9 }],
-  ['liquidArea', 'a viscosity correction factor above one', { qGpm: 500, p1Psig: 200, p2Psig: 0, sg: 0.9, kw: 1.2 }],
+  ['liquidArea', 'a liquid back-pressure correction above one', { qGpm: 500, p1Psig: 200, p2Psig: 0, sg: 0.9, kw: 1.2 }],
   ['steamArea', 'a flow of zero', { wLbHr: 0, p1Psia: 500 }],
   ['steamArea', 'a superheat factor of zero', { wLbHr: 60000, p1Psia: 500, ksh: 0 }],
   ['steamArea', 'a pressure past the published Napier range', { wLbHr: 60000, p1Psia: 3400 }],

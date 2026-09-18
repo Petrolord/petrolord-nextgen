@@ -29,13 +29,13 @@ That third column is the reason it is printed. A reader who assumes a constant s
 
 Notice also what the letters do. Between D and T the sequence skips I, O and S. Read the exported table and count: fourteen letters are printed across a span of seventeen. Why those three are absent is not a question the engine or the digest answers, and this course does not invent a reason. The letters are a convention of the published table rather than anything the engine decided.
 
-## The table is held for literature
+## The table is typed, a published input
 
 This package cannot derive a single one of those fourteen areas. They are published figures, and no route anywhere in the module computes them from a geometry or a standard bore.
 
 What the suite checks instead is the behaviour around the table: that the smallest orifice at or above a required area is the one returned, that a required area exactly equal to a listed area takes that orifice rather than the next one up, and that anything past the largest is refused rather than served. Behaviour is checkable where the numbers are not, and checking the behaviour is what makes the selection trustworthy even though the table is taken on authority.
 
-Nothing graded in this course is an orifice letter or a margin. That is a deliberate consequence of the table being held: a graded answer resting on a figure nobody in the package can derive would be grading a reader's copy of a standard rather than their understanding of a method.
+Nothing graded in this course is an orifice letter or a margin. That is a deliberate consequence of the table being typed: a graded answer resting on a figure nobody in the package can derive would be grading a reader's copy of a standard rather than their understanding of a method.
 
 ## Where the letter sits in the chain
 

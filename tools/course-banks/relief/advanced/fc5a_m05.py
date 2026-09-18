@@ -16,7 +16,7 @@ q(3, "Which set is the typed one on this engine?",
  "Kb for gas, Kw for liquid, KSH for steam, and the API 526 orifice table of 14 rows.",
  ["The pool fire constants 21000.000000000000 and 34500.000000000000 with the exponent 0.820000000000.",
   "The Kv viscosity fit and the sphere-drag correlation with its low-Reynolds cap of 240.000000000000.",
-  "The Napier boundaries 1500.000000000007 psia and 3200.000000000003 psia, and the 25 ft height limit."],
+  "The Napier boundaries 1500.000000000007 psia and 3200.000000000003 psia, and the customary intensities."],
  "The typed set is short and every member of it is a published chart or table taken as an input. The other three groups named here are all held for literature, which is a different status and gets a different sentence.")
 
 q(0, "What is the difference between an oracle that is an independent derivation and one that is a transcription?",
@@ -33,7 +33,7 @@ q(2, "The pool fire pair is held for literature, yet the oracle does check somet
   "The physics, since the same duty comes back from a second correlation the oracle carries in SI."],
  "A packaging error would be caught even though the constants themselves are not in question. That is a hedge on a held figure rather than a check of it, and the audit column says which it is.")
 
-q(3, "The 25 ft wetted-height limit is held, and the audit gives it a different reason from the other held items. What is it?",
+q(3, "The audit puts the 25 ft wetted-height limit in none of its three columns. What is it instead?",
  "It is a caller's decision rather than a constant, since it depends on a plot elevation the engine is never told.",
  ["It is a published boundary, so the suite pins it as a behaviour of the engine and it is unable to move without the suite going red on it.",
   "It is an empirical fit that the oracle shares on purpose, so moving the figure in both files at once leaves the whole published set green.",

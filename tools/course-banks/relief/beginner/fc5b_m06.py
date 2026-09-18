@@ -59,7 +59,7 @@ q(1, "Which list is entirely computed by this engine?",
 
 q(3, "What kind of number is Kd, and how is it treated?",
  "The valve manufacturer own certified discharge coefficient, always stated, with the engine defaults standing in as placeholders for it.",
- ["A published chart factor, always typed, held for literature exactly as Kb and Kw are held.",
+ ["A published chart factor, always typed, read off its chart exactly as Kb and Kw are read.",
   "A closed form the engine evaluates from the fluid and the branch, reported on the return beside the area.",
   "A default of the engine, used as it stands, because a certified figure is a property of the standard rather than the device."],
  "It is measured on a real device on a test stand, which is why this course states it on every stream. The gas and steam streams state 0.975000 and the liquid stream states 0.650000."),

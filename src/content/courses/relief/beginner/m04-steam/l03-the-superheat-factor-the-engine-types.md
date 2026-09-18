@@ -23,7 +23,7 @@ Two of the published steam rows are the same flow at the same relieving pressure
 
 Both rows sit below the Napier threshold, so the other correction is exactly 1.000000 on both, and the only thing moving between them is the typed factor. That is a well built pair of published cases, because it isolates one input and leaves everything else alone. A pair that moved two things at once could confirm an answer without testing either of them.
 
-## Held for literature, and what that costs
+## Typed, and what that costs
 
 KSH is a published table. This package cannot derive a single entry in it, and the validation oracle cannot check it, because there is nothing in the package to check it against. It is a typed input with its reference named, and that is the whole of its provenance in this course.
 

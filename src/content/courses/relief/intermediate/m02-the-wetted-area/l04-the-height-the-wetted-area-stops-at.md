@@ -6,7 +6,7 @@ A pool fire heats the shell it can reach. Above some height the flame no longer 
 
 ## The limit as this package holds it
 
-No copy of the standard sits in this package, so the 25 ft height is held for literature. It is taught as a stated limit with its reference named, and it is never derived here and never argued with. Every engine that types a published limit owes the reader that admission, and this one makes it in the plainest possible way: the height limit arrives as a note attached to every pool fire duty the route returns.
+No copy of the standard sits in this package, and the 25 ft height is a stated limit the caller applies. It is taught with its reference named, and it is never derived here and never argued with. Every engine that types a published limit owes the reader that admission, and this one makes it in the plainest possible way: the height limit arrives as a note attached to every pool fire duty the route returns.
 
 The note reads `wetted area counts only to 25 ft above grade (API 521); truncate the level before calling`. Those are the engine's own words, quoted here so a learner recognises them on the screen.
 

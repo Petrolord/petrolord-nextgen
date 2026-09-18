@@ -309,7 +309,7 @@ q(2, "Which four figures in this tier arrive as TYPED inputs, so a reader would 
  ["Kb, Kw, KSH and the three coefficients of the viscosity fit.",
   "The two Napier boundaries, the coefficient C and the fourteen published orifice areas.",
   "Kd, Kc, the critical pressure ratio and the fourteen published orifice areas."],
- "Those four are the typed set: three chart or table factors and one published table of areas. The viscosity fit is held for literature as well, but no caller types it in, because the engine evaluates it, and the coefficient C and the critical ratio are closed forms."),
+ "Those four are the typed set: three chart or table factors and one published table of areas. The viscosity fit is held for literature, a different status, and no caller types it in, because the engine evaluates it. The coefficient C and the critical ratio are closed forms."),
 
 emit(Q, '/root/wt-fc5-nextgen/tools/course-banks/relief/beginner/fc5b_exam.json', label='fc5b_exam', expect_n=42)
 finish()

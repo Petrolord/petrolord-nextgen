@@ -29,7 +29,7 @@ Every one of those is a unit bearing number. That is why they are quoted to twel
 
 The closed forms this module can derive, it derives. The coefficient C from the isentropic exponent, the critical pressure ratio from the same exponent, the subcritical factor from the exponent and the pressure ratio, the viscosity correction from the Reynolds number, and the Napier correction from the pressure.
 
-The rest are published charts and tables, and they arrive as typed inputs with their references named. That set is the balanced bellows back pressure factor Kb for gas, the equivalent Kw for liquid, the steam superheat factor KSH, and the API 526 orifice table. All four are held for literature in this course, which means they are taught as stated limits and never as things the package can check. Nothing graded in this tier rests on any of them.
+The rest are published charts and tables, and they arrive as typed inputs with their references named. That set is the balanced bellows back pressure factor Kb for gas, the equivalent Kw for liquid, the steam superheat factor KSH, and the API 526 orifice table. All four are taught as stated limits in this course and never as things the package can check, because nothing here derives them and nothing should. Nothing graded in this tier rests on any of them.
 
 ## Precision, and why it is declared
 

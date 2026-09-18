@@ -355,10 +355,13 @@ const ReliefLearningPage = () => {
                 {lab && (
                   <>
                     {' '}
-                    {lab.held.heldCount} quantities are held for literature verification and are taught as limits rather
-                    than as answers, and {lab.held.sharedWithTheOracleCount} of those are shared between the engine and
-                    its validation oracle ON PURPOSE, so a green published run is evidence about the sharing rather than
-                    about the number. {lab.held.decisionCount} further items are stated model decisions rather than held
+                    {lab.held.notDerivedHereCount} quantities in this module are not derived here.{' '}
+                    {lab.held.heldCount} are held for literature verification, {lab.held.typedCount} are published
+                    charts and tables typed in as inputs, and {lab.held.statedLimitCount} is a limit the caller applies.
+                    Every one of them is taught as a limit and never as an answer. {lab.held.sharedWithTheOracleCount} of
+                    the held ones are shared between the engine and its validation oracle ON PURPOSE, so a green
+                    published run is evidence about the sharing rather than about the number.{' '}
+                    {lab.held.decisionCount} further items are stated model decisions rather than held
                     quantities.
                     <ul className="mt-2 space-y-1">
                       {lab.held.items.map((h) => (
