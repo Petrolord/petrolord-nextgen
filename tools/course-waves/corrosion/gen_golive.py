@@ -511,13 +511,19 @@ PUBLISHED_SQL = ', '.join(f17(v) for v in sorted(published))
 
 A(f'''
   -- ------------------------------------------- the held-for-literature gates
+  -- A FRAGMENT IS MATCHED AS A LITERAL SUBSTRING WITH strpos, NEVER WITH LIKE.
+  -- In LIKE an underscore is a one-character wildcard, so the fragment mass_transfer
+  -- would also match a key with any other character in that place. The
+  -- generator's own Python guard tests a literal substring, and strpos is
+  -- the same test. FC5's dry run caught the LIKE form refusing a field that
+  -- names no held quantity (its kw_ against a kwm).
   -- ON THE NAME. A graded field that NAMES a quantity this module holds for the
   -- literature is refused before anything is computed from it.
   select count(*), string_agg(c.tier || '/' || (f->>'key'), ', ')
     into v_graded, v_names
     from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f,
          unnest(array[{FORBIDDEN_SQL}]) frag
-   where c.app_slug = '{SLUG}' and (f->>'key') like '%' || frag || '%';
+   where c.app_slug = '{SLUG}' and strpos(f->>'key', frag) > 0;
   if v_graded <> 0 then
     raise exception 'FC9 go-live refused: % graded field(s) name a quantity held for the literature: %', v_graded, v_names;
   end if;
@@ -526,7 +532,7 @@ A(f'''
     into v_graded, v_names
     from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f,
          unnest(array[{FORBIDDEN_LABEL_SQL}]) frag
-   where c.app_slug = '{SLUG}' and lower(f->>'label') like '%' || frag || '%';
+   where c.app_slug = '{SLUG}' and strpos(lower(f->>'label'), frag) > 0;
   if v_graded <> 0 then
     raise exception 'FC9 go-live refused: % graded field label(s) name a quantity held for the literature: %', v_graded, v_names;
   end if;

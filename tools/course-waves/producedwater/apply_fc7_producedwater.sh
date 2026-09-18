@@ -86,7 +86,7 @@ digest_for() {
     20260925_fc7_producedwater_beginner_deep    ) echo b21f79b1c810eef76ec8d57741f18c3053bedd98827d23af74e1e007cc047b35 ;;
     20260925_fc7_producedwater_intermediate_deep) echo 92c21250158b60a74c4263e7c78299831f16398223092eee3f4b9abacb67ca08 ;;
     20260925_fc7_producedwater_advanced_deep    ) echo dcc31c06383caacba806e1b06459e35c13fe3966e2065166b5ec62507f9dce27 ;;
-    20260925_fc7_producedwater_go_live          ) echo e0f90cc95323be08253673ab5c3c50aa3c20bdc13d8d7fc0bb3f94311487f460 ;;
+    20260925_fc7_producedwater_go_live          ) echo 7a65e8b978d8d6848c58f22a607334e39e962d15de4f8724228aae5c09cca0ac ;;
     *) echo UNPINNED ;;
   esac
 }
