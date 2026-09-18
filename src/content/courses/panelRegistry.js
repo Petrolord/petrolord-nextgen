@@ -200,6 +200,11 @@ export const PANELS = {
   'fc-exchanger-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/ExchangerExplorer')),
   'fc-coefficient-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/CoefficientExplorer')),
   'fc-rating-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/RatingExplorer')),
+
+  // AS-RC Risk, Change & Learning
+  'rc-risk-explorer': React.lazy(() => import('@/components/course/panels/riskchange/RiskExplorer')),
+  'rc-change-explorer': React.lazy(() => import('@/components/course/panels/riskchange/ChangeExplorer')),
+  'rc-review-explorer': React.lazy(() => import('@/components/course/panels/riskchange/ReviewExplorer')),
 };
 
 export function resolvePanel(id) {
