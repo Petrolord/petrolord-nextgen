@@ -404,7 +404,16 @@
       "LESSON_TASK.md",
       "BANK_TASK.md",
       "KEY_TRUTH_TASK.md",
-      "PANELS.md"
+      "PANELS.md",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "dryrun_fc9.sh",
+      "verify_sql.py",
+      "apply_fc9_corrosion.sh",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt"
     ],
     "pins": {
       "digest.txt": "0291f1fdc43b4b66ab284434d3d8b96ed71eb55b81e3f38aad6e988949d9f3fe",
