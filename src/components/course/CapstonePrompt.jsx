@@ -9,7 +9,8 @@ import { CardDescription } from '@/components/ui/card';
 //
 // whitespace-pre-line keeps the newlines and still collapses runs of spaces
 // and wraps long lines, so a prose-only prompt renders exactly as before.
-// Only the riskchange page uses it; the other courses' pages are unchanged.
+// The riskchange and compliance pages use it; the other courses' pages are
+// unchanged.
 const CapstonePrompt = ({ prompt }) => (
   <CardDescription className="whitespace-pre-line" data-testid="capstone-prompt">
     {prompt}

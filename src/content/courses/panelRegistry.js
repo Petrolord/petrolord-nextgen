@@ -218,6 +218,10 @@ export const PANELS = {
   'fc-venting-explorer': React.lazy(() => import('@/components/course/panels/metering/VentingExplorer')),
   'fc-withheld-explorer': React.lazy(() => import('@/components/course/panels/metering/WithheldExplorer')),
 
+  // AS-RC Risk, Change & Learning
+  'rc-risk-explorer': React.lazy(() => import('@/components/course/panels/riskchange/RiskExplorer')),
+  'rc-change-explorer': React.lazy(() => import('@/components/course/panels/riskchange/ChangeExplorer')),
+  'rc-review-explorer': React.lazy(() => import('@/components/course/panels/riskchange/ReviewExplorer')),
   // compliance: Compliance, Audit & Quality (academy module assurance)
   'compliance-register-explorer': React.lazy(() => import('@/components/course/panels/compliance/RegisterExplorer')),
   'compliance-plan-explorer': React.lazy(() => import('@/components/course/panels/compliance/PlanExplorer')),

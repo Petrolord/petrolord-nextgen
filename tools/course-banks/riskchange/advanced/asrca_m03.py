@@ -1,0 +1,116 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# riskchange Expert m03, A Lesson and Its Validation. Digest section 15 only,
+# as the four lessons of m03 teach it: substance, the status groups, the author
+# who may not validate (AS15 Q10) and validated before published. 15 questions.
+
+q(2, "The lessonsLearned engine asks whether a lesson has substance. What must the lesson record to have it?",
+ "What happened, why it happened and what to do about it.",
+ ["What happened and why it happened, with the date of the event beside them.",
+  "What happened, who wrote it up and which register it was applied to.",
+  "Why it happened and what to do about it."],
+ "The engine checks for all three parts. The first two without the third are a story: an account of an event that tells the next person nothing they can act on.")
+
+q(0, "ON-07 on the ONNE register is a \"Draft\" that records only what happened. What does the engine print in its missing column?",
+ "\"why it happened, what to do about it\", the two parts it lacks, so substance reads no.",
+ ["\"what to do about it\", the one part a draft may leave out.",
+  "none, because a \"Draft\" is not yet checked for substance.",
+  "\"what happened\", since a draft has not been submitted."],
+ "The missing column names the absent parts in the engine's own words. ON-07 has only the first of the three, so two are missing. ON-06, a \"Submitted\" lesson, lacks only \"what to do about it\".")
+
+q(1, "u-grace, who did not write ON-06, asks to validate it. ON-06 has no recommendation. What does the engine answer?",
+ "Refused: \"This lesson is missing what to do about it. A lesson is what happened, why it happened and what to do about it; the first two without the third are a story.\"",
+ ["Allowed, because u-grace did not write the lesson and the author-validation rule is therefore met in full.",
+  "Refused: \"The author of a lesson cannot validate it, and that includes recording somebody else's name.\"",
+  "Refused: \"This lesson has not been validated. Somebody other than its author has to accept it before it is published to everyone.\" as the lesson stands."],
+ "Independence is not the problem here: u-grace did not write ON-06. The lesson itself is incomplete. A lesson without its third part can be written and submitted, and the substance check bites at validation, naming the missing part so the author knows what to add.")
+
+q(3, "ON-05 is \"Validated\". How do the engine's accepted and visible columns read for it?",
+ "Accepted yes, visible no.",
+ ["Accepted yes and visible yes, because validation is the step that shows a lesson to everyone.",
+  "Accepted no and visible no, because only \"Published\" and \"Embedded\" are accepted.",
+  "Accepted no and visible yes, because a validated lesson is readable and still awaiting a decision."],
+ "Accepted by the organisation is \"Validated\", \"Published\" and \"Embedded\". Visible to everyone is \"Published\" and \"Embedded\" only. Accepted and visible are different questions, and ON-05 sits between them.")
+
+q(2, "Which lesson statuses does the engine count as visible to everyone?",
+ "\"Published\" and \"Embedded\".",
+ ["\"Validated\", \"Published\" and \"Embedded\".",
+  "\"Published\" only, until the lesson has been embedded.",
+  "Every live status."],
+ "\"Validated\", \"Published\" and \"Embedded\" is the accepted group. The visible group is narrower, and visibility decides which lessons carry a review status and which are counted in lessonsApplied and lessonsUnapplied.")
+
+q(1, "ON-08 is \"Archived\" and ON-09 is \"Superseded\". Both have substance. How does the engine read them for acceptance and visibility?",
+ "Neither accepted nor visible, because an archived or superseded lesson is out of use.",
+ ["Accepted, since each was validated before it left use, and not visible.",
+  "Accepted and visible, since a lesson with substance stays on the register for everyone.",
+  "Visible, because the archive is open to everyone, and not accepted."],
+ "The accepted group is \"Validated\", \"Published\" and \"Embedded\", and the visible group is \"Published\" and \"Embedded\". Neither \"Archived\" nor \"Superseded\" is in either group, and neither is live.")
+
+q(0, "ON-01 was written by u-musa. Read as if it were still \"Submitted\", u-musa asks to validate it. What does the engine return?",
+ "Refused: \"The author of a lesson cannot validate it, and that includes recording somebody else's name. Ask a colleague who was not involved in writing it to validate it.\"",
+ ["Allowed, because the author knows the event best and the validation is recorded under the author's name.",
+  "Refused: \"The author of the work under review cannot review it. Choose somebody independent of the work.\"",
+  "Refused: \"This lesson is missing what to do about it.\""],
+ "The refusal states the rule, closes the workaround of recording somebody else's name in the same breath, and names the way forward. The sentence about the author of the work under review belongs to peer review, the same idea held in another register.")
+
+q(3, "u-musa, the author of ON-01, asks to validate it while typing a colleague's name into the validator field. What happens?",
+ "It is refused in the same words the author gets without a typed name.",
+ ["It is allowed, and the colleague's typed name is recorded as the validator of the lesson.",
+  "It is allowed, and the typed name is filed as an external reviewer beside u-musa as actor.",
+  "It is refused with \"Choose somebody independent of the work.\", the sentence the author of the work gets."],
+ "The actor is always the signed-in person doing the validation, whatever name is typed. The engine finds the author signed in and refuses with the sentence that already says \"that includes recording somebody else's name\".")
+
+q(2, "Under the owner decision on validation by typed name, who does the engine read as the actor of a validation?",
+ "The signed-in person, whatever name is typed.",
+ ["The name typed into the validator field, whoever is signed in at the time.",
+  "Whichever of the two names appears later in the lesson's record.",
+  "The lesson's author, with the typed name read as a witness to it."],
+ "This is AS15 Q10, decided on 2026-09-18. A name in a text field proves nothing about who typed it, so the engine reads the signed-in identity, and a typed name records an external reviewer and cannot launder the author.")
+
+q(1, "u-grace, signed in and not the author of ON-01, records an external reviewer by name while validating it. What does the engine do?",
+ "It allows it: u-grace is the actor, and the typed name records who else looked at the lesson.",
+ ["It refuses, because a typed name is only accepted when the author records it.",
+  "It refuses, because an external reviewer has to be signed in to the app to be recorded.",
+  "It allows it and records the external reviewer as the actor, with u-grace as a witness beside the name."],
+ "The digest records u-grace recording an external reviewer by name as ALLOWED. The actor is independent of the lesson, and the typed name adds who else looked at it, which is the legitimate use of the field.")
+
+q(0, "ON-05's validation record is removed and it is then asked to move to \"Published\". What does the engine return?",
+ "Refused: \"This lesson has not been validated. Somebody other than its author has to accept it before it is published to everyone.\"",
+ ["Allowed, because the status reads \"Validated\" and \"Published\" is a legal next status from it.",
+  "Refused: \"A lesson that is draft can only move to Submitted, Archived.\"",
+  "Refused: \"Record where this lesson was applied first.\""],
+ "The status alone does not satisfy the engine. It asks for the validation record, which ties publication to an act by a person, so a lesson cannot reach everyone on the strength of a status somebody typed.")
+
+q(3, "Once an author submits a lesson, where can the lesson go from \"Submitted\"?",
+ "\"Validated\", \"Draft\" or \"Archived\".",
+ ["\"Validated\" or \"Published\", once somebody other than the author accepts it.",
+  "\"Validated\" only, because a submitted lesson has already left its author.",
+  "\"Published\", \"Draft\" or \"Archived\", with validation recorded along the way."],
+ "The author writes and submits, somebody else validates, and only then can it be published. A submitted lesson can also go back to \"Draft\" if a gap is found, or be archived.")
+
+q(1, "Publishing a lesson checks for a validation record. Which limit does the digest list among the held items for that step?",
+ "Publishing does not check a second time who validated the lesson.",
+ ["Publishing does not check that a validation record exists at all.",
+  "Publishing does not check whether the lesson has substance.",
+  "Publishing checks the validator again and refuses the author."],
+ "The independence check sits where the validation is recorded. Publishing relies on it having been enforced there, and the digest lists that as a stated limit of the engine.")
+
+q(2, "Read ON-01 as if it were still \"Submitted\". Its author, u-musa, is refused at validation. What does the owner decision on validation by typed name require before ON-01 can be validated?",
+ "A colleague who was not involved in writing it validates it, signed in as themselves.",
+ ["u-musa types in the name of a colleague who was not involved in writing it and then validates it.",
+  "u-musa validates it once the name of an external reviewer has been recorded alongside it.",
+  "It is published first, and then any member may validate it."],
+ "The refusal says \"Ask a colleague who was not involved in writing it to validate it.\", and under AS15 Q10 the actor is always the signed-in person doing the validation, whatever name is typed. A typed name records an external reviewer and cannot launder the author, so u-musa is refused with or without one. A lesson whose validation record is missing is refused at \"Published\".")
+
+q(0, "Why does the engine ask for a validation record at the moment of publishing, instead of trusting a status that reads \"Validated\"?",
+ "A status is one field anything can write; the record ties publication to an act by a person.",
+ ["Because the status of a validated lesson is cleared when the lesson is published.",
+  "Because the record carries the lesson's review date, which publishing sets for the first time.",
+  "Because a validated lesson is already visible to everyone and needs no second check."],
+ "A validation record says who accepted the lesson and when. By asking for it, the engine stops a lesson reaching everyone on the strength of a status somebody typed, and the refusal says somebody other than its author has to accept it first.")
+
+emit(Q, '/root/wt-as-riskchange-nextgen/tools/course-banks/riskchange/advanced/asrca_m03.json', expect_n=15)
+finish()

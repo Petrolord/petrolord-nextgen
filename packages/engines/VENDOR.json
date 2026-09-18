@@ -2097,6 +2097,34 @@
       "reason": "Authored in NextGen and never upstreamed to the engines repo. A whole-tree subtree pull would delete it, which is how the Suite lost 24 files on 2026-09-14."
     },
     {
+      "path": "tools/validation/facilities/FINDINGS-relief.md",
+      "kind": "extra",
+      "group": "8-repair-record",
+      "vendoredSha": "ee684cab14953edb2d6ebcd3f854e01e23adebd7",
+      "reason": "The FC5-0 repair's own findings record, which does not exist at the pinned canonical because the repair is ahead of it. Vendored for the same reason FINDINGS-separation.md and FINDINGS-rotating.md are. IT IS NOT TEACHING TRUTH: it describes the engine BEFORE the repair, and the FC5 wave's briefs say so in as many words."
+    },
+    {
+      "path": "tools/validation/facilities/negcontrol_relief.sh",
+      "kind": "extra",
+      "group": "8-repair-record",
+      "vendoredSha": "4fa016c3ec13176d939471743669aa30236966c6",
+      "reason": "The FC5-0 repair's negative-control script, which does not exist at the pinned canonical because the repair is ahead of it. It is the file that produced every claim in FINDINGS-relief.md about what the relief suite now catches: 23 of 23 engine-only plants red, 5 of 5 oracle-only plants red, and 2 shared plants GREEN, which is the finding rather than a gap. Vendored so the claim stays checkable in this repository. NOT TEACHING TRUTH."
+    },
+    {
+      "path": "tools/validation/facilities/FINDINGS-producedwater.md",
+      "kind": "extra",
+      "group": "0-partial-domain-facilities",
+      "reason": "The produced water wave's own findings file, written by engines PR #201 and extended by #206, and absent from the canonical pin 709172f, so it reads as extra. It is vendored with the produced water family it documents, for the same reason FINDINGS-rotating.md is vendored with the pumps and compression family. It clears when canonical is next advanced.",
+      "vendoredSha": "fd7659042cfcb311951dcfd53ee0dc93372605fc"
+    },
+    {
+      "path": "tools/validation/facilities/FINDINGS-metering.md",
+      "kind": "extra",
+      "group": "8-repair-record",
+      "vendoredSha": "dedda0063dfb007a230a73bff3bc6fb22500c5d6",
+      "reason": "The FC8-0 repair's own findings record, which does not exist at the pinned canonical because the repair is ahead of it. Vendored for the same reason FINDINGS-separation.md and FINDINGS-gasprocessing.md are: it travels with the family it documents. IT IS NOT TEACHING TRUTH. Its second half is the recon of the engines BEFORE the repair, and it says so in as many words; the FC8 teaching digest is built from the repaired engines and quotes nothing from here."
+    },
+    {
       "path": "__tests__/assurance.audit.test.js",
       "kind": "extra",
       "group": "9-assurance-ahead-of-pin",
@@ -2466,34 +2494,6 @@
       "group": "9-assurance-ahead-of-pin",
       "vendoredSha": "28bcb512c210d567b4beffe060fee967de59154d",
       "reason": "The engines/assurance family (ten rule modules, their goldens, the ten stdlib oracles with their FINDINGS records, the twelve jest suites and the golden runner helper) is vendored for the two NextGen Assurance courses, Risk, Change & Learning and Compliance, Audit & Quality, from engines main ab3ce6a (the squash merge of PR #213, ASC-1; earlier 9d5d3b4, ASC-0, and 6b00f43, AS15). The canonical pin 709172f predates the whole domain, so every path reads as extra. The vendored blob is sha-identical with engines ab3ce6a, proved path by path over the WALKED IMPORT CLOSURE (53 paths, including the oracles' Python imports of one another and every assurance suite) by git blob hash and by md5. It clears when canonical is next advanced."
-    },
-    {
-      "path": "tools/validation/facilities/FINDINGS-relief.md",
-      "kind": "extra",
-      "group": "8-repair-record",
-      "vendoredSha": "ee684cab14953edb2d6ebcd3f854e01e23adebd7",
-      "reason": "The FC5-0 repair's own findings record, which does not exist at the pinned canonical because the repair is ahead of it. Vendored for the same reason FINDINGS-separation.md and FINDINGS-rotating.md are. IT IS NOT TEACHING TRUTH: it describes the engine BEFORE the repair, and the FC5 wave's briefs say so in as many words."
-    },
-    {
-      "path": "tools/validation/facilities/negcontrol_relief.sh",
-      "kind": "extra",
-      "group": "8-repair-record",
-      "vendoredSha": "4fa016c3ec13176d939471743669aa30236966c6",
-      "reason": "The FC5-0 repair's negative-control script, which does not exist at the pinned canonical because the repair is ahead of it. It is the file that produced every claim in FINDINGS-relief.md about what the relief suite now catches: 23 of 23 engine-only plants red, 5 of 5 oracle-only plants red, and 2 shared plants GREEN, which is the finding rather than a gap. Vendored so the claim stays checkable in this repository. NOT TEACHING TRUTH."
-    },
-    {
-      "path": "tools/validation/facilities/FINDINGS-producedwater.md",
-      "kind": "extra",
-      "group": "0-partial-domain-facilities",
-      "reason": "The produced water wave's own findings file, written by engines PR #201 and extended by #206, and absent from the canonical pin 709172f, so it reads as extra. It is vendored with the produced water family it documents, for the same reason FINDINGS-rotating.md is vendored with the pumps and compression family. It clears when canonical is next advanced.",
-      "vendoredSha": "fd7659042cfcb311951dcfd53ee0dc93372605fc"
-    },
-    {
-      "path": "tools/validation/facilities/FINDINGS-metering.md",
-      "kind": "extra",
-      "group": "8-repair-record",
-      "vendoredSha": "dedda0063dfb007a230a73bff3bc6fb22500c5d6",
-      "reason": "The FC8-0 repair's own findings record, which does not exist at the pinned canonical because the repair is ahead of it. Vendored for the same reason FINDINGS-separation.md and FINDINGS-gasprocessing.md are: it travels with the family it documents. IT IS NOT TEACHING TRUTH. Its second half is the recon of the engines BEFORE the repair, and it says so in as many words; the FC8 teaching digest is built from the repaired engines and quotes nothing from here."
     }
   ]
 }
