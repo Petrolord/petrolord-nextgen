@@ -55,7 +55,7 @@ echo "staging the committed tree at $REF into $STAGE"
 git -C "$REPO" show "$REF:tools/course-waves/$SLUG/wave.json" \
   | python3 -c "import json,sys; c=json.load(sys.stdin); c['repo']='$STAGE/repo'; json.dump(c, open('$STAGE/wave.json','w'))"
 
-for f in fields.json precision.json digest.txt hdr_beginner.txt hdr_intermediate.txt hdr_advanced.txt; do
+for f in fields.json precision.json digest.txt fc8_capstone.mjs hdr_beginner.txt hdr_intermediate.txt hdr_advanced.txt; do
   git -C "$REPO" show "$REF:tools/course-waves/$SLUG/$f" > "$STAGE/$f"
 done
 
