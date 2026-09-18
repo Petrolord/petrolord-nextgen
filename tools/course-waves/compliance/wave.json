@@ -117,7 +117,7 @@
   },
   "capstone-generator": {
    "file": "compliance_capstone.mjs",
-   "md5": "6ee42eee438b320cf827e55c3b3c075d",
+   "md5": "1439addc0c5a0e2eaf6e2aa53538ec2e",
    "result": "exit 0: advanced      obeakpu_clauses_covered                          32"
   },
   "oracle-check": {
@@ -131,6 +131,11 @@
    "md5": "efa17f29007f09c8a22dc06f28caa0c9",
    "result": "exit 0: the closest miss anywhere in the eighteen: ekpe_emissions_permit_next_action_days at 1 unit(s), against a tolerance of 0.5",
    "control": "exit 1: the closest miss anywhere in the eighteen: ekpe_emissions_permit_next_action_days at 1 unit(s), against a tolerance of 0.5"
+  },
+  "kit-leakage-lessons": {
+   "file": "/root/dc-wavekit/leakage.mjs",
+   "md5": "7233b8e7bc3842faf645daacbe3a8ddc",
+   "result": "exit 0: => fatal downward leaks: 0   same-tier answer prints: 0"
   },
   "collisions": {
    "file": "gate_collisions.py",

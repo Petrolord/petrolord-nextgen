@@ -90,11 +90,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20261002_cq_compliance_course           ) echo c1557c8c9d935f13e0ea18fd7129d02756435d31ad03f56a48e88848e7b617cf ;;
+    20261002_cq_compliance_course           ) echo 8b489aa4be8ab3e890afcb5a9a614be14bacb41b1550382eda15931cb8dd563a ;;
     20261002_cq_compliance_beginner_deep    ) echo 8ab2bf1176853314b9ff99a0c923953df4cd9a43b4fcdd8a156303d2fd479022 ;;
     20261002_cq_compliance_intermediate_deep) echo 1579f88b834561ddc0a9c04a7d5a1133268ff4abbc31ebbed93c717f191cb13c ;;
     20261002_cq_compliance_advanced_deep    ) echo a90a6bf9b35a6e6203a0a0b743a29b1117930ca4834dbcb19b4957b339076207 ;;
-    20261002_cq_compliance_go_live          ) echo 3ae95c9c096beb3e8bdfe3127c4882013c36237054b2c8c4d6979e3a685d43d0 ;;
+    20261002_cq_compliance_go_live          ) echo f17ccad154a62e0a5f3c042118564ccb573fdef5920454d0d28362ac346e31ea ;;
     *) echo UNPINNED ;;
   esac
 }

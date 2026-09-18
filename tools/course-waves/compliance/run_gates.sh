@@ -51,7 +51,8 @@ files = {'structure': 'structure.py', 'vendor-closure': 'vendor/closure.py', 'di
  'kit-digestfigures': '/root/dc-wavekit/digestfigures.py', 'capstone-generator': 'compliance_capstone.mjs', 'oracle-check': 'oracle_check.py',
  'discriminate': 'discriminate.mjs', 'collisions': 'gate_collisions.py', 'promptleak': 'gate_promptleak.py',
  'capstone-leak': 'gate_capstone_leak.py', 'copy-rule': 'gate_copy_rule.py',
- 'kit-gradeprecision': '/root/dc-wavekit/gradeprecision.py', 'kit-sourceprose': '/root/dc-wavekit/sourceprose.mjs'}
+ 'kit-gradeprecision': '/root/dc-wavekit/gradeprecision.py', 'kit-sourceprose': '/root/dc-wavekit/sourceprose.mjs',
+ 'kit-leakage-lessons': '/root/dc-wavekit/leakage.mjs'}
 gates = {}
 for line in open(f'{W}/.gates.tsv'):
     name, rc, last = line.rstrip('\n').split('|', 2)
