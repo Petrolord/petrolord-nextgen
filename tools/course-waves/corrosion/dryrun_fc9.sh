@@ -1,31 +1,31 @@
 #!/usr/bin/env bash
 # =============================================================================
-# FC9 DRY RUN: THE WHOLE LADDER, ROLLED BACK.
+# FC9 DRY RUN: THE WHOLE LADDER, ROLLED BACK, AGAINST A SCRATCH DATABASE.
 #
-# This is the established proof on this programme and it is the only thing that
-# reads the SQL the way Postgres will. It catches what nothing in Python can:
-# integer division, a jsonb cast that will not cast, a constraint nobody read, a
-# VALUES separator emitted inside a comment, an assertion that cannot evaluate,
-# and a held-for-literature gate refusing the very field that proves the hold.
-# FC2's dry run caught the last two.
+# Modelled on dryrun_fc6.sh with ONE deliberate difference: FC6 ran its
+# rolled-back ladder against the LINKED project, which for petrolord-nextgen is
+# production. This one runs against the local container scratch_db.sh builds
+# (fc9-scratch: the four academy tables from the repository's own DDL, plus
+# every committed Facilities course row), and it never opens a connection to
+# production at all.
+#
+# It reads the SQL the way Postgres will, which nothing in Python can:
+# integer division, a jsonb cast that will not cast, a constraint nobody read,
+# a VALUES separator emitted inside a comment, an assertion that cannot
+# evaluate, a held gate refusing the very field that proves the hold.
 #
 # All five migrations run inside ONE transaction that ends in ROLLBACK, and the
 # run then RE-READS the database and compares it to the snapshot taken before,
 # rather than assuming the rollback worked.
 #
-# APPLYING IS NOT THIS SCRIPT'S JOB AND NEVER WILL BE. The real apply is
-# apply_fc9_corrosion.sh and it is the owner's to run. The go-live is HELD
-# and is dry-run here and nowhere else.
-#
 # THE NEGATIVE CONTROL. With --control, one graded field is moved by ONE PART IN
 # 1e7 inside the same rolled-back transaction, and the go-live must REFUSE it BY
-# NAME. A dry run that passes proves nothing unless the same run can be made to
-# fail. FC9's field keys ARE unique across tiers, so a key alone names the
-# field, but the tier is still passed and still scoped on, because the shape
-# that stopped being needed is the shape that quietly stops being right.
+# NAME. The default field is the SMALLEST graded value on the wave, the Obigbo
+# mole ratio of about 0.0392, where one part in 1e7 is an absolute move of about
+# 3.9e-9: a hundredth of the field's own 5e-7 tolerance, so it would pass a
+# grader, and it must still be refused here.
 #
-# Usage: dryrun_fc9.sh [ref] [--control [<tier>] [<field key>] [<multiplier>]]
-#        default HEAD
+# Usage: dryrun_fc9.sh [ref|WORKTREE] [--control [<tier>] [<field key>] [<multiplier>]]
 # =============================================================================
 set -u
 
@@ -33,13 +33,6 @@ REF=${1:-HEAD}
 CONTROL=${2:-}
 TIER=${3:-beginner}
 FIELD=${4:-obigbo_h2s_to_co2_mole_ratio}
-# The size of the move. One part in 1e7 by default. EVERY ONE OF THE EIGHTEEN
-# IS ASSERTED AT AN ABSOLUTE EPSILON FAR TIGHTER THAN THE FIELD'S OWN SHIPPED
-# TOLERANCE, so a move of this size is caught on any of the eighteen and not
-# only on the large ones. The default field is deliberately the SMALLEST graded
-# value on the wave, the Obigbo mole ratio of about 0.0392, where one part in
-# 1e7 is an absolute move of about 3.9e-9: that is a hundredth of the field's
-# own 5e-7 tolerance and would pass a grader, and it is still refused here.
 MULT=${5:-1.0000001}
 HERE=$(cd "$(dirname "$0")" && pwd)
 if up=$(cd "$HERE/../../.." 2>/dev/null && pwd) && { [ -d "$up/.git" ] || [ -f "$up/.git" ]; }; then
@@ -47,8 +40,11 @@ if up=$(cd "$HERE/../../.." 2>/dev/null && pwd) && { [ -d "$up/.git" ] || [ -f "
 else
   REPO=${REPO:-/root/wt-fc9-nextgen}
 fi
-LINKED=${LINKED:-/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen}
+C=${SCRATCH:-fc9-scratch}
+docker exec "$C" pg_isready -U postgres >/dev/null 2>&1 \
+  || { echo "REFUSED: scratch container $C is not running; run scratch_db.sh first"; exit 3; }
 RUN=$(mktemp -d /tmp/fc9dry.XXXXXX)
+Q() { docker exec -i "$C" psql -U postgres -At -F ' | ' "$@"; }
 
 FILES="20260925_fc9_corrosion_course
 20260925_fc9_corrosion_beginner_deep
@@ -56,11 +52,10 @@ FILES="20260925_fc9_corrosion_course
 20260925_fc9_corrosion_advanced_deep
 20260925_fc9_corrosion_go_live"
 
-# ------------------------------------------------------------ the snapshot
 cat > "$RUN/snap.sql" <<'SQL'
-select 'catalogue' as what,
+select 'catalogue',
        count(*) filter (where status = 'available')::text || ' available / ' ||
-       count(*) filter (where status = 'coming_soon')::text || ' coming_soon' as v
+       count(*) filter (where status = 'coming_soon')::text || ' coming_soon'
   from public.academy_apps
 union all select 'apps rows',          count(*)::text from public.academy_apps
 union all select 'facilities rows',    count(*)::text from public.academy_apps where module = 'facilities'
@@ -68,32 +63,27 @@ union all select 'path_order 47 held', count(*)::text from public.academy_apps w
 union all select 'structures rows',    count(*)::text from public.academy_course_structures
 union all select 'questions rows',     count(*)::text from public.academy_quiz_questions
 union all select 'capstones rows',     count(*)::text from public.academy_capstones
-union all select 'corrosion any',   count(*)::text from public.academy_apps where slug = 'corrosion'
+union all select 'corrosion any',       count(*)::text from public.academy_apps where slug = 'corrosion'
 union all select 'apps digest',        md5(string_agg(slug||'|'||module||'|'||path_order||'|'||status, ',' order by slug)) from public.academy_apps
 union all select 'questions digest',   coalesce(md5(string_agg(app_slug||'|'||tier||'|'||scope||'|'||ord, ',' order by app_slug, tier, scope, coalesce(module_key,''), ord)), '(empty)') from public.academy_quiz_questions
 union all select 'capstones digest',   coalesce(md5(string_agg(app_slug||'|'||tier||'|'||(fields)::text, ',' order by app_slug, tier)), '(empty)') from public.academy_capstones
 order by 1;
 SQL
 
-echo "repo: $REPO   ref: $REF"
+echo "repo: $REPO   ref: $REF   database: docker container $C (scratch, never production)"
 echo "### THE DATABASE BEFORE"
-( cd "$LINKED" && supabase db query --linked -f "$RUN/snap.sql" 2>/dev/null ) \
-  | grep -E '"what"|"v"' | paste - - | sed 's/^/  /' | tee "$RUN/before.txt"
+Q < "$RUN/snap.sql" | sed 's/^/  /' | tee "$RUN/before.txt"
 
-# ------------------------------------------------- the ladder, then rollback
 {
+  echo '\set ON_ERROR_STOP on'
   echo "begin;"
   for f in $FILES; do
     echo "-- ================= $f"
     if [ "$REF" = WORKTREE ]; then cat "$REPO/migrations/$f.sql"; else git -C "$REPO" show "$REF:migrations/$f.sql"; fi || exit 3
     echo
     if [ "$CONTROL" = --control ] && [ "$f" = 20260925_fc9_corrosion_advanced_deep ]; then
-      # THE NEGATIVE CONTROL, injected AFTER the seeds and BEFORE the go-live, so
-      # the go-live reads a capstone that has been moved by a factor of $MULT and
-      # by nothing else. A factor rather than a round number: the point is that a
-      # tiny move is caught, not a visible one.
       cat <<CTL
--- ================= NEGATIVE CONTROL: move $TIER/$FIELD by one part in 1e7
+-- ================= NEGATIVE CONTROL: move $TIER/$FIELD by a factor of $MULT
 update public.academy_capstones c
    set fields = (
      select jsonb_agg(case when f->>'key' = '$FIELD'
@@ -108,7 +98,7 @@ CTL
     fi
   done
   cat <<'SQL'
-select 'DRY RUN' as what,
+select 'DRY RUN',
        'corrosion ' || a.status
        || ' | ' || (select count(*) from public.academy_course_structures where app_slug='corrosion' and active)::text || ' tiers'
        || ' | ' || (select count(*) from public.academy_course_structures s,
@@ -123,9 +113,6 @@ select 'DRY RUN' as what,
        || ' | ' || (select count(*) from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f
                      where c.app_slug='corrosion')::text || ' graded'
        || ' | path_order ' || a.path_order::text || ' in ' || a.module
-       || ' | catalogue ' || (select count(*) filter (where status='available') from public.academy_apps)::text
-       || ' available / ' || (select count(*) filter (where status='coming_soon') from public.academy_apps)::text
-       || ' coming_soon' as v
   from public.academy_apps a where a.slug = 'corrosion';
 rollback;
 SQL
@@ -134,17 +121,20 @@ SQL
 echo
 echo "### THE LADDER, IN ONE TRANSACTION THAT ENDS IN ROLLBACK ($(wc -l < "$RUN/ladder.sql") lines)"
 [ "$CONTROL" = --control ] && echo "### WITH THE NEGATIVE CONTROL ON $TIER/$FIELD, moved by a factor of $MULT"
-( cd "$LINKED" && supabase db query --linked -f "$RUN/ladder.sql" 2>&1 ) > "$RUN/out.txt"
+Q < "$RUN/ladder.sql" > "$RUN/out.txt" 2>&1
 RC=$?
-grep -E '"what"|"v"|ERROR|NOTICE|refused|error' "$RUN/out.txt" | sed 's/^/  /'
+grep -E 'DRY RUN|NOTICE|ERROR|refused' "$RUN/out.txt" | sed 's/^/  /'
 FAILED=0
-if [ $RC -ne 0 ] || grep -qi 'ERROR' "$RUN/out.txt"; then FAILED=1; fi
+if [ $RC -ne 0 ] || grep -q 'ERROR' "$RUN/out.txt"; then FAILED=1; fi
+# A rollback that follows a failed statement is still a rollback, but the
+# session must be seen to END in one either way.
+if [ $FAILED = 1 ] && docker exec "$C" psql -U postgres -Atc "select count(*) from pg_stat_activity where state like 'idle in transaction%'" | grep -qv '^0$'; then
+  echo "A TRANSACTION WAS LEFT OPEN"; exit 2
+fi
 
-# --------------------------------------------- the database, re-read after
 echo
 echo "### THE DATABASE AFTER THE ROLLBACK"
-( cd "$LINKED" && supabase db query --linked -f "$RUN/snap.sql" 2>/dev/null ) \
-  | grep -E '"what"|"v"' | paste - - | sed 's/^/  /' > "$RUN/after.txt"
+Q < "$RUN/snap.sql" | sed 's/^/  /' > "$RUN/after.txt"
 cat "$RUN/after.txt"
 echo
 if diff -q "$RUN/before.txt" "$RUN/after.txt" >/dev/null; then
@@ -162,7 +152,7 @@ if [ "$CONTROL" = --control ]; then
     grep -oE "FC9 go-live refused[^\"]*" "$RUN/out.txt" | head -2 | sed 's/^/    /'
     exit 0
   fi
-  echo "CONTROL DID NOT FIRE. A move of $MULT on $TIER/$FIELD passed the go-live, so the go-live does not catch a move that size on that field."
+  echo "CONTROL DID NOT FIRE. A move of $MULT on $TIER/$FIELD passed the go-live."
   exit 2
 fi
 if [ $FAILED = 1 ]; then

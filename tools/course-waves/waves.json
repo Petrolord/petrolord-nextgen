@@ -413,7 +413,8 @@
       "apply_fc9_corrosion.sh",
       "hdr_beginner.txt",
       "hdr_intermediate.txt",
-      "hdr_advanced.txt"
+      "hdr_advanced.txt",
+      "scratch_db.sh"
     ],
     "pins": {
       "digest.txt": "0291f1fdc43b4b66ab284434d3d8b96ed71eb55b81e3f38aad6e988949d9f3fe",
