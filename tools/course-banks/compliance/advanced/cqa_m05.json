@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "certificationReadiness for ISO 14001:2015 at ORASHI returns ready false. What else does it return?",
+  "options": [
+   "A readiness percentage weighted by severity, with the items that pulled it down.",
+   "A single blocking reason, the first requirement that fails, as the earlier gates do.",
+   "A score for each clause, with the certificate as a gate the rest of the list sits behind.",
+   "A list of items, each with a severity, a count and a sentence, and a table of counts."
+  ],
+  "answer": 3,
+  "explanation": "The list has eleven items across blocking, serious and watch, and a table of counts beside it. It carries no percentage and no score, because any weighting of one item against another is somebody's opinion."
+ },
+ {
+  "prompt": "Under which severity does the item \"3 applicable clauses have never been examined by an internal audit.\" sit?",
+  "options": [
+   "serious, beside the clause last audited before this cycle began",
+   "blocking, beside the open major nonconformity",
+   "watch, beside the clause review that is past due",
+   "serious, beside the one clause never assessed at all"
+  ],
+  "answer": 1,
+  "explanation": "The four blocking items are the open major nonconformity, the 3 never examined clauses, the conformant clause with no evidence reference and the clause assessed nonconformant. The stale clause and the unassessed clause are serious."
+ },
+ {
+  "prompt": "ac1 is Corrective, In progress, due 2026-10-02, and reads overdue true. How does the readiness list carry it?",
+  "options": [
+   "As a serious item: 1 corrective or preventive action is past its due date.",
+   "As a watch item, beside the finding on the same Major that is past its due date.",
+   "As a blocking item, being the corrective action on the open Major nonconformity.",
+   "Not at all, since the open Major nonconformity already stands for it on the list."
+  ],
+  "answer": 0,
+  "explanation": "The serious items are the stale clause, the clause never assessed and the overdue action. \"1 finding is past its due date.\" is a watch item, and it is ISF-2026-004."
+ },
+ {
+  "prompt": "The certificate expiry is moved to 2026-10-14 and nothing else changes. What does the certificate item become?",
+  "options": [
+   "A watch item saying the certificate expires today and the audit should be booked now.",
+   "A blocking item, because an expired certificate stops the rest of the list behind it.",
+   "A serious item: the certificate expired 1 day ago, and a recertification audit is needed.",
+   "No item at all, because certificateExpiring reads false once the date has passed."
+  ],
+  "answer": 2,
+  "explanation": "At certificateDays -1 the item reads: \"The certificate expired 1 day ago. The organization cannot claim certification, and a surveillance audit is no longer possible: it needs a recertification audit.\" certificateExpired reads true."
+ },
+ {
+  "prompt": "Reading the edge table from a certificate far from expiry towards expiry, at which expiry date does the certificate item first appear?",
+  "options": [
+   "2027-01-13, at certificateDays 90, as a watch item",
+   "2027-01-14, at certificateDays 91, as the watch item",
+   "2026-10-15, at certificateDays 0, as a watch item",
+   "2026-10-14, at certificateDays -1, as a serious item"
+  ],
+  "answer": 0,
+  "explanation": "isoCompliance.CERTIFICATE_LEAD_DAYS is 90. At 91 days the row prints certificateExpiring false and no item; at 90 the watch item appears."
+ },
+ {
+  "prompt": "The expiry is moved to 2026-10-15, the as-of date itself. What do the two certificate flags read?",
+  "options": [
+   "certificateExpiring false and certificateExpired true, once the expiry date is reached",
+   "both flags true, since the certificate both expires and is still expiring on that day",
+   "certificateExpiring true, with certificateExpired false, on the expiry date itself",
+   "both flags false, until the expiry date has fully passed"
+  ],
+  "answer": 2,
+  "explanation": "certificateDays reads 0 and the watch item reads \"The certificate expires today. Book the recertification audit now.\" The today in it is the as-of date the engine was given."
+ },
+ {
+  "prompt": "The certificate expiry is recorded as the text tbc. What does the readiness list say about the certificate?",
+  "options": [
+   "A serious item, because an expiry that cannot be read is treated as expired.",
+   "Nothing: certificateDays reads null, both flags read false and no item is listed.",
+   "A watch item asking for the expiry date to be recorded before the audit.",
+   "A blocking item, since readiness cannot be judged without an expiry date."
+  ],
+  "answer": 1,
+  "explanation": "The rows for tbc and for null both print certificateDays null, certificateExpiring false, certificateExpired false and no item. An empty certificate line can mean the date is missing, and a reader has to know that."
+ },
+ {
+  "prompt": "Which record appears on the list under both blocking and watch?",
+  "options": [
+   "Clause 4.3, as a clause never examined and as the clause review past its due date",
+   "Clause 7.2, as the unevidenced claim and as the clause never assessed at all",
+   "ac1, as the overdue action and as the finding that is past its due date",
+   "ISF-2026-004, as the open major nonconformity and as the finding past its due date"
+  ],
+  "answer": 3,
+  "explanation": "Clause 4.3 raises the serious stale item and the watch review item. Clause 7.2 raises the blocking never-examined item and the serious never-assessed item. Each item asks a separate question, and one record can fail more than one."
+ },
+ {
+  "prompt": "Clause 4.3 raises two items at 2026-10-15. Which two?",
+  "options": [
+   "last audited before this cycle began, serious; its review past due, watch",
+   "never examined by an internal audit, blocking; and its review past due, watch",
+   "last audited before this cycle began, blocking; conformant without evidence, blocking",
+   "its review past due, serious; a finding past its due date, watch"
+  ],
+  "answer": 0,
+  "explanation": "Clause 4.3 reads stale true, last examined 2023-09-20, and review overdue true, next review 2026-10-01. Its evidence record reads true, so the unevidenced item is clause 5.2."
+ },
+ {
+  "prompt": "The blocking item \"1 clause is marked conformant with no evidence reference recorded.\" points at which record, and what does that record lack?",
+  "options": [
+   "Clause 7.5.3, which lacks an internal audit examination and already has its evidence",
+   "Clause 5.2, which lacks its evidence reference and has its date and assessor",
+   "Clause 6.1.3, which lacks an evidence reference and reads Nonconformant in the register",
+   "Clause 7.2, which lacks evidence, a date and an assessor, and reads Not assessed"
+  ],
+  "answer": 1,
+  "explanation": "missingEvidenceParts for 5.2 prints evidence reference, and its row reads assessed true and evidence record false. The readiness sentence names the part the claim lacks."
+ },
+ {
+  "prompt": "A standard with no clauses in the register is passed to certificationReadiness. What comes back?",
+  "options": [
+   "ready true, since no item on the list carries a count above 0",
+   "no answer, the call refusing until at least one clause is added",
+   "ready false, with one blocking item of count 0 saying there is nothing to be ready with",
+   "ready false, with one watch item asking for clauses to be registered"
+  ],
+  "answer": 2,
+  "explanation": "\"This standard has no applicable clauses in the register yet, so there is nothing to be ready with.\" The engine does not let the absence of problems pass for readiness when there is nothing to have problems with."
+ },
+ {
+  "prompt": "The summary prints open findings 3, and the readiness counts print openMajor 1 and openMinor 1. Which open finding sits in the first count and in neither of the other two?",
+  "options": [
+   "ISF-2026-002, the Observation that was voided on 2026-06-13",
+   "ISF-2026-001, the Major nonconformity closed on 2026-04-21",
+   "ISF-2026-005, the open Minor nonconformity",
+   "ISF-2026-003, the open Opportunity for improvement"
+  ],
+  "answer": 3,
+  "explanation": "The three open findings are ISF-2026-004, ISF-2026-005 and ISF-2026-003. openMajor counts ISF-2026-004 and openMinor ISF-2026-005. ISF-2026-001 and ISF-2026-002 read open false."
+ },
+ {
+  "prompt": "The summary prints audits open 2 and audits overdue 1. Which audit is open and not overdue?",
+  "options": [
+   "ISA-2026-002, In progress, planned end 2026-10-09",
+   "ISA-2026-001, Reported, since a Reported audit is delivered",
+   "ISA-2025-003, Cancelled, since a cancelled audit stays open to the end",
+   "ISA-2026-S01, as only Internal audits fall overdue"
+  ],
+  "answer": 1,
+  "explanation": "ISA-2026-001 reads open true and overdue false; ISA-2026-002 reads open true and overdue true. The other four read open false."
+ },
+ {
+  "prompt": "A report wants to state ORASHI's readiness from covered 8 and applicable 12. What does this module ask of it?",
+  "options": [
+   "Quote both counts and the list items beside them, and form no fraction or percentage.",
+   "Quote a percentage covered, rounded half up on the exact fraction as the engine does it.",
+   "Quote covered on its own, since applicable follows from the certification cycle.",
+   "Quote covered less the stale clause, as the effective coverage of the register."
+  ],
+  "answer": 0,
+  "explanation": "The digest prints no percentage from these counts and neither does the engine. The list already says 3 uncovered clauses are never examined and blocking and 1 is stale and serious; a percentage would average that away."
+ },
+ {
+  "prompt": "Suppose the ORASHI certificate ran to 2027-01-14 in place of 2027-01-08. How would the readiness list differ?",
+  "options": [
+   "The list reads ready true, since the last watch item on it has gone.",
+   "The certificate item moves from watch up to serious.",
+   "The certificate item leaves the list, and the other ten items stay.",
+   "Every watch item leaves the list with the certificate."
+  ],
+  "answer": 2,
+  "explanation": "At 91 days the row prints certificateExpiring false, certificateExpired false and no item. The digest does not print ready for the moved rows, and booking a recertification audit closes no open Major nonconformity."
+ }
+]

@@ -1,0 +1,120 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# compliance Expert m06, The expert reading. Digest SECTIONS 22, 23 and 24:
+# the ORASHI register read end to end, the owner decisions and held limits,
+# the ASC-0 and ASC-1 rules, the oracles, and the hand-over to riskchange.
+# As-of date 2026-10-15. Rule R2's measured figures, the oracle counts for the
+# exported functions and the calendar golden case count are not printed here:
+# each sits within ten grading tolerances of a graded value, which bankleak
+# refuses. 15 questions.
+
+q(1, "ISA-2026-002 examined clause 5.2 on 2026-10-06, and 5.2's last examined date does not move. Which owner decision is at work?",
+ "Q4: ISO coverage counts only Reported or Closed audits.",
+ ["Q5: every examiner is checked for independence.",
+  "Q11: a cancellation without a reason does not complete a programme.",
+  "Q2: evidence counts towards Compliant only for the current period."],
+ "ISA-2026-002 is In progress, so none of its results moves a clause's date until it is reported. Q5 is module 2's rule, Q11 the Professional tier's, and Q2 the Associate tier's.")
+
+q(3, "A call to nextReviewDate arrives with no document review period. What comes back?",
+ "No date, and applying DEFAULT_REVIEW_PERIOD_MONTHS is left to the caller.",
+ ["A date 24 months after issue, the default the engine then applies for itself.",
+  "A refusal naming the missing review period.",
+  "The as-of date, read as Review due soon."],
+ "This is one of the four held limits: the call returns no date, and the default of DEFAULT_REVIEW_PERIOD_MONTHS is the caller's to apply. It is taught as a limit, never as a figure to compute with.")
+
+q(0, "An audit programme is complete and one of its audits was cancelled with a written reason. How does its delivered percent read?",
+ "Below one hundred percent, by design, since it counts reported audits only.",
+ ["One hundred percent, since a cancellation with a reason completes the programme.",
+  "No percent at all, since the programme refuses to print one while an audit is cancelled.",
+  "As though the cancelled audit had never been planned."],
+ "A cancellation with its reason lets the programme complete under Q11, and delivery still counts reported audits only. The owner recorded this as an ambiguity and left it unchanged.")
+
+q(2, "A templated audit is passed with no checklist items. How does the unanswered-items rule treat it?",
+ "It passes vacuously, and the database counts the template itself.",
+ ["It refuses, as there is nothing to report.",
+  "It passes only once each missing item is answered Not applicable with a reason.",
+  "It reads as nothing answered of nothing and prints a progress of zero percent."],
+ "This is a held limit. The refusal about an audit that examined nothing belongs to canReportAudit in the ISO module, for an audit with no clauses in its scope.")
+
+q(0, "An unreadable today is passed to complianceStatus and to two other modules. Which of them refuses?",
+ "complianceStatus alone; the other two answer as though nothing were due.",
+ ["All three, since owner decision Q1 makes every module throw on an unreadable date.",
+  "None, since each module reads the machine clock instead.",
+  "isoCompliance alone, reading the most dates against today."],
+ "Q1 makes deriveStatus throw. The held limit is that the other two modules answer as though nothing were due, so an app that shows no overdue review has told you nothing if its date could not be read.")
+
+q(1, "Rule R1 is measured on four audits, one of them cancelled with no reason. How many outstanding do programmeProgress and summarise count?",
+ "2 in each, since a cancellation without a written reason is outstanding in both",
+ ["1 in programmeProgress and 2 in summarise, which read the cancellation differently",
+  "2 in programmeProgress and 1 in summarise, which leaves the cancellation out",
+  "3 in each, since a cancelled audit is outstanding with or without its reason"],
+ "R1 is one rule for outstanding: a cancellation without a written reason is outstanding in both, and canCompleteProgramme asks the same rule.")
+
+q(3, "Rule R2 governs every percent the engine prints. What does it state?",
+ "A percent rounds half up, on the exact fraction.",
+ ["A percent is cut to a whole number, so a half never rounds up.",
+  "A percent rounds half to even, as float arithmetic tends to.",
+  "A percent is rounded from the one-decimal figure the app shows."],
+ "checklistProgress, programmeProgress and planProgress are the three exports that print a percent, and each rounds half up on the exact fraction.")
+
+q(2, "REG-2026-006 is a filed One-off obligation. How does it read?",
+ "Compliant, and its reason says it is a one-off obligation with nothing further due.",
+ ["On track, until the next period of a one-off obligation begins to run.",
+  "No date set, because a one-off obligation carries no next due date.",
+  "Superseded, since a filed one-off obligation leaves the active register."],
+ "R4: explainStatus gives the reason \"Filed 2026-08-10. A one-off obligation, nothing further is due.\" A filed One-off says it is discharged.")
+
+q(0, "Rule R5 is measured on the ORASHI readiness list. What does it print?",
+ "1 item naming ISO 14001:2015, and 0 naming ISO 9001",
+ ["0 items naming either, since readiness sentences name no standard",
+  "1 item naming each standard",
+  "11 items naming ISO 14001:2015, one for each item on the list"],
+ "R5: a sentence names the register's own standard. The one item that names a standard is the blocking never-examined item, which cites ISO 14001:2015 §9.2.")
+
+q(2, "What do the oracles check about a gate, and what do they leave unchecked?",
+ "They check the verdict, allowed or refused, and never the wording of its reason.",
+ ["They check the wording of each refusal, sentence by sentence, against a golden copy.",
+  "They check the verdict and the wording both, for gates that name a standard.",
+  "They check neither, leaving gates to the app screens that display them."],
+ "Every refusal sentence in the digest is the engine's own and is quoted rather than checked. That is why this course quotes a refusal verbatim or describes it, and never rewords one inside quotation marks.")
+
+q(1, "Which module's oracle carries the most golden cases?",
+ "qualityAssurance, with 422",
+ ["isoCompliance, with 235 cases",
+  "auditManagement, with 181 cases",
+  "complianceStatus, with 171 cases"],
+ "The table prints qualityAssurance 422, isoCompliance 235, auditManagement 181, complianceStatus 171 and documentControl 130. Each golden file is written by an independent stdlib Python oracle.")
+
+q(3, "For isoCompliance, what does the oracle section print about exported functions without a case, and about its lists and constants?",
+ "0 functions without a case; its 25 lists and constants are data and carry no case of their own.",
+ ["0 functions without a case, and 0 lists without one, since every list has a golden case.",
+  "1 function without a case, the sort, since a sort case is counted apart from the rest.",
+  "25 functions without a case, one for each list or constant the module exports."],
+ "Every one of the six modules reads 0 without a case, a sort case counting for the sort it names. Lists and constants are data rather than functions. isoCompliance carries 1 sort case.")
+
+q(0, "Traced through every table in this tier, which readiness items does clause 7.2 raise?",
+ "Two: the blocking item for clauses no internal audit has examined, and the serious item for the unassessed clause.",
+ ["One: the unevidenced claim, blocking, because its evidence record reads false.",
+  "Two: a stale coverage outcome, serious, and a clause review past due, watch.",
+  "Three: never examined, never assessed, and its review due soon as a watch item."],
+ "Clause 7.2 reads Not assessed with claims conformity false, so it is no unevidenced claim, and it reads never in the coverage table. Its next review, 2027-01-31, raises neither review flag.")
+
+q(2, "A finding describes a risk someone wants scored, banded and set against appetite. Where does that question go?",
+ "To riskchange, which owns risk scores, bands, appetite and heat maps.",
+ ["To the readiness list, which bands each finding by severity.",
+  "To findingByUrgency, whose ranks from 0 to 4 are the risk bands.",
+  "To the root cause list, whose Management system entry scores risk."],
+ "A finding can feed a risk register or a lesson learned, and that is where the sibling course begins. Scores, bands, appetite and heat maps are taught there.")
+
+q(1, "Which of the AS15 owner decisions belong to the Associate tier?",
+ "Q1, Q2 and D1",
+ ["Q4, Q5 and Q6 together",
+  "Q11 on its own",
+  "Q1, Q4 and Q11"],
+ "Q1 is the unreadable today, Q2 current-period evidence and D1 the document reviewer. Q4, Q5 and Q6 are this tier's modules 3, 2 and 5, and Q11 belongs to the Professional tier.")
+
+emit(Q, '/root/wt-as-compliance-nextgen/tools/course-banks/compliance/advanced/cqa_m06.json', expect_n=15)
+finish()

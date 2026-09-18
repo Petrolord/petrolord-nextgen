@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "ISA-2026-S01 is Closed, and Closed is one of the two counting statuses. Why does its row still read counts towards coverage false?",
+  "options": [
+   "It ended after the latest internal audit.",
+   "It examined a clause marked Partially conformant, which coverage leaves out.",
+   "Its type is Surveillance, and COVERING_AUDIT_TYPES holds Internal alone.",
+   "Its report came from the certification body and awaits the organization's sign-off."
+  ],
+  "answer": 2,
+  "explanation": "ISA-2026-S01 is a Surveillance audit, Closed, ended 2026-07-24, and the type alone keeps it out. The readiness list names the requirement: \"ISO 14001:2015 §9.2 requires the organization to audit its own system.\""
+ },
+ {
+  "prompt": "ISA-2026-S01 examined clause 6.1.2, Conformant on 2026-07-22. What does the coverage table print for clause 6.1.2?",
+  "options": [
+   "last examined never, by audit none, covered false",
+   "last examined 2026-07-22, by ISA-2026-S01, covered true",
+   "last examined 2026-07-22, by ISA-2026-S01, stale true",
+   "last examined never, by audit none, covered false and stale true"
+  ],
+  "answer": 0,
+  "explanation": "Only counting audits compete to be a clause's latest examination, and the one audit that examined 6.1.2 is of type Surveillance. 6.1.2 is one of the 3 applicable clauses never examined, and a never examined clause reads stale false."
+ },
+ {
+  "prompt": "ISA-2026-002 is In progress and has examined clause 5.2, Conformant on 2026-10-06. What is clause 5.2's last examined date in the coverage table?",
+  "options": [
+   "2026-10-06, from ISA-2026-002, with the result Conformant",
+   "2026-06-12, the date ISA-2026-001 ended",
+   "never, as an audit in progress holds the clause open",
+   "2026-06-09, from ISA-2026-001, with the result Observation"
+  ],
+  "answer": 3,
+  "explanation": "An audit in progress is not a counting audit, so its results move no date until it is reported. Clause 5.2 keeps its latest counting examination, the Observation of 2026-06-09 by ISA-2026-001, and reads covered true."
+ },
+ {
+  "prompt": "ISA-2025-003 examined clause 7.5.3 on 2025-11-12 and was then Cancelled. How does clause 7.5.3 read in the coverage table?",
+  "options": [
+   "covered, since 2025-11-12 falls inside the certification cycle of 3 years",
+   "never, and it is one of the 3 clauses never examined",
+   "stale, since a cancelled audit's examinations lapse",
+   "covered until a cancellation reason is recorded"
+  ],
+  "answer": 1,
+  "explanation": "A cancelled audit has no report and counts for nothing in coverage. ISA-2025-003 reads counts towards coverage false, so 7.5.3 reads never, beside 6.1.2 and 7.2."
+ },
+ {
+  "prompt": "Clause 4.3 was last examined 2023-09-20 by ISA-2023-002, and clause 7.2 has never been examined. Which pair of flags does each read at a cycle of 3 years?",
+  "options": [
+   "4.3 covered false and stale true; 7.2 covered false and stale true",
+   "4.3 covered false and stale true; 7.2 covered false and stale false",
+   "4.3 covered true and stale true; 7.2 covered false and stale false",
+   "4.3 covered false and stale false; 7.2 covered false and stale true"
+  ],
+  "answer": 1,
+  "explanation": "A clause can be stale only if it was once examined by a counting audit. 4.3 was, before the cycle began, at -1121 days. 7.2 has no counting examination, so it gets its own outcome, never, with stale false."
+ },
+ {
+  "prompt": "Across the four cycle lengths the digest prints for the ORASHI register, which column never changes?",
+  "options": [
+   "stale, at 3 in every row",
+   "covered, at 8 in every row",
+   "never examined, at 3 in every row",
+   "never examined, falling to 0 at 4 years"
+  ],
+  "answer": 2,
+  "explanation": "The cycle decides how far back an examination may fall and still count. It cannot create an examination that does not exist, so clauses 6.1.2, 7.2 and 7.5.3 read never at 1, 2, 3 and 4 years alike."
+ },
+ {
+  "prompt": "The cycle moves from 3 years to 4 years and nothing else in the register changes. Which counts move?",
+  "options": [
+   "covered goes from 8 to 9 and stale from 1 to 0, with never examined staying at 3.",
+   "never examined goes from 3 to 0, and covered from 8 to 9, with stale left at 1.",
+   "covered goes from 8 to 9 and never examined from 3 to 2, with stale left at 1.",
+   "No count moves, because the cycle is fixed by the standard record itself."
+  ],
+  "answer": 0,
+  "explanation": "The table prints cycleYears 3: covered 8, stale 1, never examined 3; and cycleYears 4: covered 9, stale 0, never examined 3. The cycle is an input to the call, so a different input gives different counts."
+ },
+ {
+  "prompt": "At cycle lengths of 1 and 2 years the table prints the same pair, covered 6 and stale 3. What may a reader conclude from the two rows?",
+  "options": [
+   "That the cycle has no effect below 3 years for any register at all.",
+   "That the 3 stale clauses at those lengths are the 3 never examined.",
+   "That 3 years is the shortest cycle the engine reads.",
+   "Only that this register gives that pair at those two lengths."
+  ],
+  "answer": 3,
+  "explanation": "The table shows this register at the four lengths printed and nothing more. Never examined also reads 3 at those lengths, a separate count from stale. Quote only the rows the digest prints."
+ },
+ {
+  "prompt": "clauseCoverageByStandard reads ISO 14001:2015 clause 8.1 and ISO 45001:2018 clause 6.1.2, both last examined 2025-10-14. Why do they give two answers?",
+  "options": [
+   "Each is read against its own standard's cycle: 3 years and 1 year.",
+   "Clause 6.1.2 was examined by a Surveillance audit and clause 8.1 by an internal one.",
+   "The ISO 45001:2018 clause shares its number with ORASHI's 6.1.2 and takes that clause's reading.",
+   "ISO 45001:2018 counts Closed audits only, where ISO 14001:2015 also counts Reported ones."
+  ],
+  "answer": 0,
+  "explanation": "ISO 14001:2015 carries 3 years and 8.1 reads covered true; ISO 45001:2018 carries 1 year and 6.1.2 reads stale true. A clause number means something only beside its standard."
+ },
+ {
+  "prompt": "Clause 10.2 reads last examined 2026-06-12, the date ISA-2026-001 ended, while clause 4.1 reads 2026-06-10 from the same audit. What is a clause's last examined date?",
+  "options": [
+   "The audit's end date, moved earlier for any clause whose result arrived before the report.",
+   "The date the result was entered into the register, taken from the assessor's own record.",
+   "The date it was examined within the audit, a field separate from the audit's end.",
+   "The audit's planned end, offset for each clause by its place in the scope."
+  ],
+  "answer": 2,
+  "explanation": "ISA-2026-001 ended 2026-06-12. Clause 10.2 was examined that day, and clauses 4.1, 5.2 and 6.1.3 on earlier ones: 2026-06-10, 2026-06-09 and 2026-06-11. Clause 4.3 shows the same, examined 2023-09-20 by an audit that ended 2023-09-22."
+ },
+ {
+  "prompt": "Clause 6.1.3's latest counting result is Nonconformant. How does it read for coverage?",
+  "options": [
+   "covered false, since a Nonconformant result leaves the requirement unmet",
+   "covered true, since coverage asks whether a counting audit examined it inside the cycle",
+   "stale true, since a Nonconformant result needs a second examination",
+   "covered true only once the finding it raised has been closed"
+  ],
+  "answer": 1,
+  "explanation": "Clause 6.1.3 reads last examined 2026-06-11 by ISA-2026-001, Nonconformant, covered true. Clause 5.2's Observation reads covered true as well. What the examiner found is the business of findings and of the register verdict."
+ },
+ {
+  "prompt": "canReportAudit is called on ISA-2026-002, which has three clauses in scope and two not yet examined. What does it answer?",
+  "options": [
+   "A refusal naming 5.2, the one clause the audit has examined so far",
+   "ALLOWED, because an audit in progress may report the results it already holds",
+   "A refusal saying the audit has no clauses in its scope to report on",
+   "A refusal naming 7.2 and 8.1 as the two clauses in scope with no result yet"
+  ],
+  "answer": 3,
+  "explanation": "The digest prints: \"2 clauses in scope have no result yet (7.2, 8.1).\" The sentence about an audit with no clauses in its scope belongs to an empty scope, a separate row."
+ },
+ {
+  "prompt": "What has to happen, in order, before ISA-2026-002 can move any clause's last examined date?",
+  "options": [
+   "The audit is reported first, and then each clause's result is entered against the report.",
+   "The audit is Closed, since Reported leaves it uncounted.",
+   "Every clause in its scope gets a result, and then the audit is reported.",
+   "The lead clears the independence check first."
+  ],
+  "answer": 2,
+  "explanation": "canReportAudit refuses while a clause in scope has no result, and coverage counts only Reported or Closed audits. Until then clause 8.1 keeps 2024-05-16 from ISA-2024-001."
+ },
+ {
+  "prompt": "Clause 7.5.3 reads Conformant with claims conformity, evidence record and assessed all true, and reads never in the coverage table. What do the two readings say together?",
+  "options": [
+   "The organization says it conforms, and no counting internal audit has checked that it does.",
+   "The coverage table overrides the register, so the clause's status falls back to Not assessed.",
+   "The coverage row is a display fault, since an evidenced verdict counts as an examination.",
+   "The clause is covered for the cycle, since evidence dated inside it stands in for an internal audit."
+  ],
+  "answer": 0,
+  "explanation": "The register verdict is the owner's assessment, evidenced, dated and named. Coverage asks whether an internal audit examined the clause, which is what ISO 14001:2015 §9.2 asks for. Both statements are on the record at once."
+ },
+ {
+  "prompt": "isoCompliance.COVERAGE_COUNTING_STATUSES holds two words. Which are they?",
+  "options": [
+   "Fieldwork complete and Reported",
+   "Reported and Closed",
+   "In progress and Closed",
+   "Closed and Cancelled"
+  ],
+  "answer": 1,
+  "explanation": "Owner decision AS15 Q4 states it: ISO coverage counts only Reported or Closed audits. The three audits that count are ISA-2023-002 and ISA-2024-001, Closed, and ISA-2026-001, Reported."
+ }
+]

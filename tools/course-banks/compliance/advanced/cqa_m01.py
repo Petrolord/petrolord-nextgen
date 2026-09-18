@@ -1,0 +1,116 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# compliance Expert m01, A claim is evidence. Digest SECTION 18 (the ORASHI
+# ISO 14001:2015 register, canSetClauseStatus, the review flags) and the counts
+# the m01 lessons quote from SECTION 22. As-of date 2026-10-15. 15 questions.
+
+q(1, "Clause 7.2 of the ORASHI register has nothing recorded. A request sets it to Conformant and supplies an evidence reference, with no assessment date and no assessor. What does canSetClauseStatus answer?",
+ "It refuses, in the same sentence it gives a Conformant request that carries nothing at all.",
+ ["It allows the status, because the evidence reference is what a conformity claim stands on.",
+  "It refuses with the shorter sentence asking only for the date and the assessor.",
+  "It allows the status and lists 7.2 under missingEvidenceParts for the rest."],
+ "The digest prints REFUSED for Conformant with an evidence reference only, in the words it uses for Conformant with nothing else: name the evidence, the date it was assessed and who assessed it. The shorter sentence belongs to a Nonconformant request with no date.")
+
+q(3, "Which of these requests on clause 7.2 does the gate ALLOW with no evidence reference on the record?",
+ "Nonconformant, with the date it was assessed and the assessor.",
+ ["Conformant, with the date it was assessed and the assessor named.",
+  "Partially conformant, with the date it was assessed and the assessor.",
+  "Not applicable as its status, while its applicability still reads Applicable."],
+ "A Nonconformant verdict needs two of the three: the date and the name. Conformant and Partially conformant are each ALLOWED only with evidence, a date and an assessor. The Not applicable request is refused because the two fields have to move together.")
+
+q(0, "A request sets clause 7.2's status to Not applicable while its applicability still reads Applicable. Which requirement stops it?",
+ "The applicability and the status are set together, or neither is.",
+ ["An excluded clause keeps its justification on record.",
+  "Every verdict names the evidence, the date it was assessed and who assessed it before it stands.",
+  "Not applicable is a word the clause vocabulary does not carry, so the status itself is refused."],
+ "The refusal reads: \"A clause determined not applicable cannot also carry a conformity verdict. Set both together, or neither.\" The justification rule arises once both fields read Not applicable, and Not applicable is one of the five words in CLAUSE_STATUSES.")
+
+q(2, "Both fields of a clause are set to Not applicable with no justification. Of the four refusals the digest prints for this request, which one cites a numbered clause of the standard?",
+ "The ISO 9001:2015 refusal, which cites §4.3 of that standard.",
+ ["The ISO 14001:2015 refusal, which cites §9.2 of the standard the ORASHI register is kept against.",
+  "The ISO 45001:2018 refusal, which cites §4.3 in the same words the ISO 9001:2015 sentence uses.",
+  "The no-standard refusal, which falls back to §4.3."],
+ "Only the ISO 9001:2015 sentence names §4.3. The ISO 14001:2015 and ISO 45001:2018 sentences name their standard in the engine's own shape, and with no standard passed the sentence names none. All four are refusals.")
+
+q(2, "The same Not applicable request, with no justification, is sent with no standard passed as the fourth argument. What comes back?",
+ "A refusal that asks why the requirement does not apply and names no standard.",
+ ["An allowed verdict, because without a standard there is no requirement left to justify.",
+  "A refusal naming ISO 14001:2015, the standard of the register the clause sits in.",
+  "A refusal saying the call is missing its standard, returned before any justification is read."],
+ "The digest prints: \"Say why this requirement does not apply. A requirement determined not applicable keeps its justification on record.\" The verdict is the same refusal for all three standards and for none; only the wording follows the standard passed.")
+
+q(1, "Asked to set clause 7.2 to Compliant, the gate answers \"Compliant is not a clause status.\" Where does the word Compliant belong in this course?",
+ "In the obligation register, where it is one of the complianceStatus words.",
+ ["In the clause register, as a Conformant claim's word once evidenced.",
+  "In the readiness counts, as the count of conformant clauses.",
+  "In the document library, as the state of a document in force."],
+ "complianceStatus.STATUS_SEVERITY carries Compliant. isoCompliance.CLAUSE_STATUSES holds Not assessed, Conformant, Partially conformant, Nonconformant and Not applicable, and the readiness count is named conformant. Each register is held to its own vocabulary.")
+
+q(0, "Clause 5.2 reads Conformant, claims conformity true, evidence record false and assessed true. What does missingEvidenceParts print for it?",
+ "evidence reference",
+ ["evidence reference, the date assessed and the assessor",
+  "nothing, because the row already reads assessed true",
+  "no row, since it lists Nonconformant clauses only"],
+ "missingEvidenceParts covers each applicable clause that claims conformity without a complete record, and prints 5.2: evidence reference. Its assessed column reads true, so the date and the assessor are there.")
+
+q(3, "Clause 6.1.3 reads Nonconformant, with evidence record false and assessed true. What does that row show about the gate?",
+ "The verdict carries what the gate asks of it: a date and an assessor, with no evidence reference.",
+ ["The row could not have passed the gate, since every clause verdict needs an evidence reference.",
+  "The row is the unevidenced claim the register summary counts, because its evidence record reads false.",
+  "The row is waiting on an assessor, since assessed marks only the date."],
+ "A Nonconformant status needs two of the three. Clause 6.1.3 reads claims conformity false, so it makes no claim, and the summary's unevidenced claims 1 is clause 5.2.")
+
+q(3, "Clause 4.3 reads Conformant and review overdue true on the same row at 2026-10-15. What do the two readings say together?",
+ "The last verdict still stands, and it is due to be looked at again and has not been.",
+ ["The Conformant verdict lapses to Not assessed once the clause's next review date has passed.",
+  "The status column prints Review overdue in place of Conformant until the review is recorded.",
+  "The overdue flag is held back while the clause reads Conformant."],
+ "Clause 4.3's next review, 2026-10-01, is -14 days from the as-of date. The status is the last verdict and the flag says its review is late; neither changes the other. Review overdue is a Document Control review state.")
+
+q(1, "At 2026-10-15 clause 6.1.2's next review is 2026-11-02, 18 days away. Which flags does the engine print for it?",
+ "review due soon true, and review overdue false",
+ ["review due soon true, and review overdue true",
+  "review overdue true, and review due soon false",
+  "both false, as the date is ahead of the as-of date"],
+ "18 days sits inside the window isoCompliance.REVIEW_LEAD_DAYS sets, and the date is ahead of the as-of date. No ORASHI row reads true for both flags, and 6.1.2 is the one clause that reads review due soon true.")
+
+q(2, "Clause 4.4, the excluded clause, has no next review date. What do its two review flags read?",
+ "Both false, because an excluded clause is not reviewed against a date.",
+ ["review overdue true, because a review date that is missing is treated as one that has passed.",
+  "review due soon true, because a missing date is read as falling inside the lead window.",
+  "Neither prints, and the summary counts 4.4 among reviews overdue."],
+ "The register prints next review none, review overdue false and review due soon false for 4.4, whose applicability and status both read Not applicable. The summary's reviews overdue 1 is clause 4.3.")
+
+q(0, "The summary prints reviews overdue 1 and reviews due soon 1. Which of the two does the readiness list carry, and at which severity?",
+ "Only the overdue review, as the watch item \"1 clause review is past due.\"",
+ ["Both, as two watch items, one for each review flag.",
+  "Only the overdue review, as a serious item.",
+  "Neither, since readiness does not read clause reviews."],
+ "The list carries one watch item for reviews and none for clause 6.1.2's review due soon. The serious item on clause 4.3 is its stale coverage, a separate question asked of the same row.")
+
+q(1, "The register summary prints evidenced claims 9 and unevidenced claims 1. Which clause is the one unevidenced claim?",
+ "Clause 5.2, Environmental policy",
+ ["Clause 6.1.3, Compliance obligations",
+  "Clause 7.2, Competence",
+  "Clause 4.4, the excluded clause"],
+ "An unevidenced claim claims conformity without its evidence record. Clauses 6.1.3 and 7.2 both read evidence record false, and neither claims conformity; 4.4 is excluded. Only 5.2 reads claims conformity true beside evidence record false.")
+
+q(0, "Partially conformant sits between Conformant and Nonconformant. Which of the two does it match on what canSetClauseStatus asks for?",
+ "Conformant: it is refused without evidence, a date and an assessor, in the same sentence.",
+ ["Nonconformant: a date and an assessor are enough, and no evidence reference is asked for.",
+  "Neither: it needs an evidence reference alone, since a partial claim carries no assessment.",
+  "Neither: it is refused unless the clause's applicability is changed in the same request."],
+ "The digest prints Partially conformant, nothing else: REFUSED, with the sentence Conformant meets, and ALLOWED with evidence, a date and an assessor. Clause 6.1.2 reads Partially conformant with claims conformity, evidence record and assessed all true.")
+
+q(3, "The readiness counts print evidenced 9 and conformant 9. Do the two counts cover the same nine clauses?",
+ "No. Clause 5.2 is Conformant without evidence, and clause 6.1.2 is evidenced without being Conformant.",
+ ["Yes. Every Conformant clause carries evidence, so the two counts are one set of clauses.",
+  "No. The evidenced count takes in the excluded clause 4.4, which the conformant count leaves out.",
+  "Yes. The evidenced count is taken over the Conformant clauses only, so it cannot differ."],
+ "Conformant rows: 4.1, 4.3, 5.2, 7.5.3, 8.1, 8.2, 9.1.1, 9.2 and 10.2. Evidence record true: the same list with 6.1.2 in place of 5.2, and 4.4 reads false. Two equal counts need not be one set, which is why a report quotes each as it prints.")
+
+emit(Q, '/root/wt-as-compliance-nextgen/tools/course-banks/compliance/advanced/cqa_m01.json', expect_n=15)
+finish()
