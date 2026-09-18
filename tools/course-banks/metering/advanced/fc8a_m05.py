@@ -102,7 +102,7 @@ q(2, "The vapour space volume comes back as 12844.2382 ft3. What is it?",
  ["The volume between the design liquid level and the top of the shell, which is the space a fixed roof leaves above a tank filled to its design level.",
   "The volume of vapour that leaves the tank in a year, which is what the annual throughput of 484000.0000 bbl displaces out of the roof space.",
   "The volume the expansion factor of 0.042556 is applied to twice a day."],
- "It is the third answer this tier has taken out of one geometry, after the capacity and the wetted area.")
+ "It is one more answer this tier takes out of the same geometry, beside the capacity, the shell and the wetted area.")
 
 q(0, "Why does this tier put evaporative losses in the same module as money and emissions?",
  "Because what leaves the roof space is product that was bought and a release that has to be reported, and the two are the same arithmetic.",

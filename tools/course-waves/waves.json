@@ -353,11 +353,26 @@
       "KEY_TRUTH_TASK.md",
       "PANELS.md",
       "vendor/closure.py",
-      "vendor/closure.json"
+      "vendor/closure.json",
+      "AUDIT-beginner.md",
+      "AUDIT-intermediate.md",
+      "AUDIT-advanced.md",
+      "NOTES.md",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "dryrun_fc8.sh",
+      "scratch_db.sh",
+      "apply_fc8_metering.sh",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt"
     ],
     "pins": {
-      "digest.txt": "b8ce5729f500a5ac02426aacadd769599a02642a4ae8eda3340fdd555b02d077",
+      "digest.txt": "dcc02ea2f3d4e7bd020caea66ad6cb13c614caad734a7d3c10c0d7e1e4e0b59d",
       "fields.json": "cd9195a30660a8ebbfe4d5b84d01aef4e77b33509377cc5469b2c81f356fc88e"
-    }
+    },
+    "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest and its generator, the graded answers and their generator, the precision declaration, wave.json, the three tier audits, the three migration headers, the course, go-live and seed generators, the SQL verifier, the scratch database and the dry run against it, and the owner's apply script. The kit became \"full\" with the seed ladder."
   }
 }

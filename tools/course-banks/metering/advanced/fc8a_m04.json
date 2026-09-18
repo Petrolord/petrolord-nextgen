@@ -74,7 +74,7 @@
    "No margin policy covers being wrong by that much in the unsafe direction on the last line of defence."
   ],
   "answer": 3,
-  "explanation": "A duty known to a few percent supports a purchase. Two forms differing by a factor of about 24 mean picking one is being wrong by a wide margin half the time."
+  "explanation": "A duty known to a few percent supports a purchase. Two forms differing by a factor of about 24 mean picking one is being wrong by that factor whenever the other form is right."
  },
  {
   "prompt": "Why does the engine export the withholding message as a named constant?",

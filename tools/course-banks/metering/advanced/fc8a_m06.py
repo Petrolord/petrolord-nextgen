@@ -34,7 +34,7 @@ q(3, "The register in this course holds fifteen items. What makes something an i
   "The item is a figure this course prints but does not grade, which is why no capstone field rests on one."],
  "Two of the fifteen are outright refusals to answer, where the engine returns a refusal or a withheld flag in place of a number.")
 
-q(2, "Held, stated and withheld are used carefully in this register. What is the difference?",
+q(2, "This course sorts the register three ways: held (the rows the register marks NOT CARRIED), stated and withheld. What is the difference?",
  "Held is absent and the engine carries on where it can, stated is a value the package chose or was handed and names, and withheld is a question it will not answer.",
  ["Held is a value the caller supplies, stated is a value the standard supplies, and withheld is a value the engine computes and declines to return to a screen.",
   "Held is a figure returned with a warning, stated is a figure returned without one, and withheld is a figure returned as a null with no reason beside it.",
@@ -83,7 +83,7 @@ q(1, "Two counts on this tank are taken over the same courses array. What separa
   "The head, with the courses below the design liquid level counted in the first and the courses above it counted in the second."],
  "Written without their rules, those two numbers are a one and a four attached to a tank, and a reader cannot tell whether they overlap or exhaust the table.")
 
-q(3, "This file pins fifty engine strings verbatim. What does the pinning actually buy?",
+q(3, "The digest pins fifty engine strings verbatim. What does the pinning actually buy?",
  "Each was asserted to contain a fragment of its own text as the file was built, so a reworded message fails the build rather than teaching wording nobody will see.",
  ["A reader can search the engine source for the string and confirm the message has not been edited since the file was built.",
   "A screen showing a message and an engine returning one cannot drift apart, because the pinned string is the named constant the interface reads and the engine returns on the call itself.",

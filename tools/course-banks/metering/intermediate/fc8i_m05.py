@@ -30,7 +30,7 @@ q(3, "Beyond the named method, what two things does the engine say a real predic
  ["A fluid property set and an ambient temperature.",
   "A measured background level and a receiver distance.",
   "A trim style and a certified pressure recovery factor."],
- "Neither one is a fluid property. They are missing because this module takes a service and a valve style rather than a drawing.")
+ "Neither one is a fluid property. They are missing because the indication takes the service alone, its pressures, flow, gas gravity and temperature, and never a drawing.")
 
 q(2, "Why does the geometry matter so much to a real prediction?",
  "Noise generated inside the trim gets out through the pipe wall downstream, so the diameter, the wall thickness, the material and any lagging all decide what reaches somebody standing on the plant.",
@@ -68,7 +68,7 @@ q(3, "Why is the noise screen built on the ratio of the pressures rather than on
  "A valve dropping a large absolute pressure from a very high inlet may sit at a modest ratio, and a valve dropping a small absolute pressure from a low inlet may sit at a large one.")
 
 q(1, "What is the stream power of a service?",
- "The mechanical power being dissipated in the valve, which is the product of the flow and the pressure drop being taken.",
+ "The energy the gas gives up expanding through the valve, formed from the mass flow, the absolute temperature and the log of the pressure ratio.",
  ["The acoustic power radiated by the valve body, which is the fraction of the mechanical power dissipated in it that leaves as sound.",
   "The kinetic energy of the stream leaving the valve, taken at the velocity in the outlet connection.",
   "The thermal power the stream carries, taken as the mass flow times the specific heat times the drop."],

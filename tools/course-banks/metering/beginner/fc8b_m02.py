@@ -67,7 +67,7 @@ q(2, "A plate comes back at a beta above the upper edge of the published range. 
  ["It refuses and returns no coefficient, on the argument that a number with no measurements underneath it is worse than no number at all when a plate is about to be ordered.",
   "It returns the coefficient at the upper edge instead, so the answer stays inside the published band.",
   "It returns a coefficient and sets the small bore flag, which is the general flag this module uses for any evaluation outside its fitted domain."],
- "Refusing would leave a user with no number and no account of what kind of number was unavailable. The result carries the coefficient and a warning naming the beta and the band."),
+ "The engine does not refuse here. The result carries the coefficient and a warning naming the beta and the band, and the published range flag comes back false."),
 
 q(0, "The engine's warning above the upper edge reads: `beta of 0.841 is outside the 0.1 to 0.75 range the flange-tap correlation is published for: resize the plate rather than trusting this number`. What two things is that sentence doing?",
  "Naming the beta it was asked about and the band it sits outside, and saying what to do about it.",

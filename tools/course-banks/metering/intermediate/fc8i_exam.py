@@ -16,7 +16,7 @@ q(2, "Which of the three pressure drop columns on the liquid march carries the s
  ["The stated drop.",
   "The drop used.",
   "None of them, since all three move as the outlet pressure is taken down."],
- "It belongs to the valve and to the fluid rather than to the operating point, which is why asking for a different outlet pressure does not move it.")
+ "The stated drop moves on every row and the drop used follows it until the service chokes, so the allowable drop is the one column reading 179.220032 psi from the first row to the last.")
 
 q(0, "The liquid valve is asked for 171.300000 psia. What stated drop goes with that row, in psi?",
  "75.600000",
@@ -67,7 +67,7 @@ q(3, "The engine's refusal spells out the arithmetic of the cavitation index. Wh
  ["The inlet pressure less the outlet pressure.",
   "The vapour pressure less the outlet pressure.",
   "The allowable drop less the stated drop."],
- "Leave the vapour pressure out and that term is the inlet pressure alone, which is why the quotient has no upper bound and the ladder hands back its safest rung.")
+ "The refusal says that with no vapour pressure the index is infinite and every service reads as stable, which is why the engine refuses rather than answering.")
 
 q(1, "A liquid sizing arrives with the vapour pressure box empty. What does the repaired engine do?",
  "It refuses the call by name and says why.",
@@ -105,7 +105,7 @@ q(1, "Where does the damage happen on a flashing service?",
  "A high velocity mixture of liquid droplets and vapour scours whatever it meets, which is an erosion problem rather than an implosion problem.")
 
 q(2, "Why does this course grade no regime word?",
- "Neither of the two ladder thresholds came from a published document, and the engine says so where a reader can see it.",
+ "Neither of the two ladder thresholds is read from a standard. Both are this engine's stated screen, which it exports so a reader can see them.",
  ["The regime word is derived from the choked flag, so grading it would grade the flag twice.",
   "The regime word changes between the stated drop basis and the allowable drop basis.",
   "The regime word is not exported by the module, so a learner cannot check it against anything."],

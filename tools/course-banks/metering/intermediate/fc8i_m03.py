@@ -32,8 +32,8 @@ q(0, "On how many rows of the gas march does the engine report choked flow, and 
  "Membership is decided by the flag and by nothing else, which is what makes the figure something a reader can go and recount.")
 
 q(3, "Two things follow from the gas boundary being a ratio rather than a pressure. What are they?",
- "It is dimensionless, so it can be quoted for a valve style without knowing the service, and the pressure it corresponds to depends entirely on the inlet pressure.",
- ["It is dimensionless, so it can be quoted for a valve style without knowing the service, and the pressure it corresponds to is fixed once the style is chosen.",
+ "It is dimensionless, so the valve's part of it, xT, can be quoted for a style without knowing the service, and the pressure it corresponds to depends on the inlet pressure.",
+ ["It is dimensionless, so the valve's part of it, xT, can be quoted for a style without knowing the service, and the pressure it corresponds to is fixed once the style is chosen.",
   "It carries units of pressure over pressure, so it has to be restated whenever the units of the datasheet change, and it moves with the outlet pressure alone.",
   "It is dimensionless, so it applies unchanged to liquid service as well, and the pressure it corresponds to is the same at every inlet condition the plant reaches."],
  "That is why a gas valve has to be checked at every inlet condition the plant can reach rather than at the design case alone.")
@@ -88,11 +88,11 @@ q(2, "At which of the specific heat ratios in this course does the factor return
  "Air at ordinary conditions sits at a specific heat ratio close to that value, which tells you what the factor is for: it scales a valve's terminal behaviour, quoted on air, onto the gas actually being handled.")
 
 q(3, "Where does the specific heat ratio factor show its effect?",
- "At the boundary, because it multiplies the terminal ratio and so moves the boundary rather than the answer at a given operating point.",
+ "At every operating point through the expansion factor, and at the boundary through the terminal ratio it multiplies.",
  ["At every operating point equally, because it multiplies the coefficient the sizing equation returns.",
   "Only on services above the terminal ratio, because below it the factor is held at unity by the engine.",
-  "Only on monatomic gases, because the factor departs from unity nowhere else in the range this course covers."],
- "Its effect is invisible on any service comfortably away from the boundary and decisive on any service near it, which is why a stream whose composition changes with plant mode has to be checked at each mode.")
+  "Only at the boundary, because it multiplies the terminal ratio and leaves the coefficient at a given operating point alone."],
+ "Fk multiplies xT to set the terminal ratio, and it sits inside the expansion factor on every row, where Y is one less x over three times Fk times xT. So it moves the coefficient everywhere and the boundary as well, which is why a stream whose composition changes with plant mode has to be checked at each mode.")
 
 q(1, "How many valve styles does this engine carry, and over what tree and rule?",
  "8, counted over the styles array the module exports, with every entry counting and no filter applied.",
@@ -109,7 +109,7 @@ q(2, "The engine states the status of its own pressure recovery factors and term
  "The message is `the FL and xT above are this engine's stated table values. They are not cited to a document in this repository, they are trim and vendor dependent by nature, and a certified vendor figure for the specific trim always replaces them`.")
 
 q(0, "Why is the choice of valve style a sizing decision rather than a procurement detail?",
- "The allowable drop is built from the pressure recovery factor, so the same service on two different styles chokes at two different outlet pressures.",
+ "The allowable drop is built from the pressure recovery factor, so the same service on two styles with different FL chokes at two different outlet pressures.",
  ["The coefficient is read off the style, so the same service on two different styles returns two different flows at the same drop.",
   "The terminal ratio is what the engine sizes every liquid service on, so the style decides the drop used on liquid and on gas alike.",
   "The style decides the rangeability, so the same service on two different styles lands at two different travels at its normal duty."],

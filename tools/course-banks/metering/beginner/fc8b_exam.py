@@ -48,7 +48,7 @@ q(1, "Which single returned line on the ABOH sheet does the rest of the result t
 q(2, "What role does the static pressure of 815.200000 psia play on the ABOH run?",
  "It describes the gas at the plate on the day, and it is one of the inputs the expansibility factor is computed from.",
  ["It is the pressure the volume line is corrected to, which is what makes that line a volume at the flowing density.",
-  "It is the pressure the differential is subtracted from to give the downstream pressure the flow equation uses.",
+  "It is the pressure the inch of water conversion is taken at, so the factor of 0.0361273 belongs to this run alone.",
   "It is compared against the differential to decide whether the small bore correction applies."],
  "It is a stated line. The differential against static pressure guard in the flow function is the other place it is read."),
 
@@ -96,7 +96,7 @@ q(3, "Which function in the metering module takes the discharge coefficient of t
  ["orificeFlow",
   "sizeOrifice",
   "orificeUncertainty"],
- "The other three evaluate the correlation themselves. Only the loss relation asks the caller for the coefficient and says why when it is missing."),
+ "orificeFlow and sizeOrifice evaluate the correlation themselves, and orificeUncertainty takes a beta and never the coefficient's value. Only the loss relation asks the caller for the coefficient and says why when it is missing."),
 
 q(0, "The small bore table prints a coefficient of 0.607340. Which bore is that, and is the correction applied there?",
  "A pipe bore of 1.049000 in, with the correction applied.",

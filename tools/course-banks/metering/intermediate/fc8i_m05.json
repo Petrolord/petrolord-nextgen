@@ -30,7 +30,7 @@
    "Valve geometry and pipe geometry."
   ],
   "answer": 3,
-  "explanation": "Neither one is a fluid property. They are missing because this module takes a service and a valve style rather than a drawing."
+  "explanation": "Neither one is a fluid property. They are missing because the indication takes the service alone, its pressures, flow, gas gravity and temperature, and never a drawing."
  },
  {
   "prompt": "Why does the geometry matter so much to a real prediction?",
@@ -91,7 +91,7 @@
   "prompt": "What is the stream power of a service?",
   "options": [
    "The acoustic power radiated by the valve body, which is the fraction of the mechanical power dissipated in it that leaves as sound.",
-   "The mechanical power being dissipated in the valve, which is the product of the flow and the pressure drop being taken.",
+   "The energy the gas gives up expanding through the valve, formed from the mass flow, the absolute temperature and the log of the pressure ratio.",
    "The kinetic energy of the stream leaving the valve, taken at the velocity in the outlet connection.",
    "The thermal power the stream carries, taken as the mass flow times the specific heat times the drop."
   ],

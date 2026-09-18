@@ -163,7 +163,7 @@ describe('FC8 metering: the tolerance is derived in ONE place', () => {
 
 describe('FC8 metering: the graded answer matcher, proved at full float precision', () => {
   it('NEGATIVE CONTROL: every answer is caught at nine significant digits AND at full float', () => {
-    // THIS IS THE ONE THAT USED TO WALK THROUGH on a sibling wave. The more
+    // THE FULL FLOAT PLANT IS THE ONE A NINE-DIGIT MATCHER MISSES. The more
     // precise plant is the more damaging one: a reader has the answer to more
     // digits than the course asks for.
     expect(FIELDS).toHaveLength(18);

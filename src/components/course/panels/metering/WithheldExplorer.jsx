@@ -23,9 +23,9 @@ import { Relation, Refusal } from './MeterRunExplorer';
 // back empty every single time with the engine's own reason beside it.
 //
 // THE STRAIGHT RUN FOR TWO ELBOWS IN DIFFERENT PLANES. The metering engine
-// refuses that column by name, because the figures that used to be there fell
-// as beta rose and then rose again, and a published requirement rises with
-// beta. The column is shown AS WITHHELD, with the reason.
+// refuses that column by name. In its own words the figures it could offer
+// fall as beta rises and then rise again, and a published requirement rises
+// with beta. The column is shown AS WITHHELD, with the reason.
 //
 // NEITHER IS GRADED ANYWHERE IN THIS COURSE, and nothing downstream of either
 // is graded. This panel never presents either as an answer.

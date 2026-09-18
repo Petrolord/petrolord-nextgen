@@ -110,7 +110,7 @@
   "explanation": "The message is quoted as the engine writes it, because that is the sentence a user reads on the screen, and it names the failure it exists to prevent."
  },
  {
-  "prompt": "A tank is designed on its product alone and the product is lighter than water. What has gone wrong?",
+  "prompt": "A tank is designed on its product alone, and the product has a gravity of 0.550000. What has gone wrong?",
   "options": [
    "Nothing, as long as the product gravity is above the crossover of 0.931727, because above that gravity the product is the governing condition on the bottom course anyway.",
    "The shell is thinner than the hydrostatic test will demand of it, and the test is not optional.",

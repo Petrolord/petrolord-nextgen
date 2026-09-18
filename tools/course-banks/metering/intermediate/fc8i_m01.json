@@ -16,7 +16,7 @@
    "It falls on every row, because the allowable drop is a fraction of the stated drop and the stated drop is rising as the outlet pressure is taken down the march.",
    "It holds still down to the row where the engine first reports choked flow and then falls away, because past that row the engine has stopped recomputing it and carries the last value forward.",
    "It rises on every row, because the allowable drop is recomputed from the outlet pressure and a lower outlet pressure leaves the valve more of the difference to work with.",
-   "It holds the same figure on every row, because it belongs to the valve and to the fluid rather than to the operating point being asked for."
+   "It holds the same figure on every row, because it is built from the valve, the fluid and the inlet pressure, and the march moves none of them."
   ],
   "answer": 3,
   "explanation": "The stated drop changes on every row because a different outlet pressure is being asked for. The allowable drop of 179.220032 psi is the same figure on all nine rows."
@@ -103,7 +103,7 @@
   "options": [
    "The coefficient falls again on both rows, because the flashing correction reduces the density the equation is handed.",
    "The coefficient stays where it settled and the choked flag turns false again, because a flashing service is sized on a two-phase basis rather than on the liquid basis that choked.",
-   "The coefficient stays at the figure it settled on when the drop was capped and the choked flag stays true, so only the regime word records the change.",
+   "The coefficient stays at the figure it settled on when the drop was capped and the choked flag stays true, so the regime word and the flashing flag record the change.",
    "The coefficient is withheld on both rows and the choked flag stays true, because the engine refuses to size a flashing service from a liquid equation."
   ],
   "answer": 2,
@@ -162,6 +162,6 @@
    "It moves, because the allowable drop moves with the critical pressure ratio factor and the crossing is set by the allowable drop."
   ],
   "answer": 3,
-  "explanation": "It is the reason a valve that behaved perfectly on one service misbehaves on another that looks similar on the datasheet, and it is the reason the vapour pressure is an input this engine refuses to work without."
+  "explanation": "It is the reason a valve that behaved perfectly on one service misbehaves on another that looks similar on the datasheet, and the vapour pressure it rests on is an input this engine refuses to work without, because without it the cavitation index cannot form."
  }
 ]

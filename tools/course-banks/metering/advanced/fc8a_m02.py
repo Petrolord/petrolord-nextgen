@@ -76,7 +76,7 @@ q(2, "The engine writes a note wherever the water test decides a course. Which s
   "A note saying that the water test is the governing case on every tank below the diameter at which the variable design point method takes over from the one-foot method."],
  "The message is quoted as the engine writes it, because that is the sentence a user reads on the screen, and it names the failure it exists to prevent.")
 
-q(1, "A tank is designed on its product alone and the product is lighter than water. What has gone wrong?",
+q(1, "A tank is designed on its product alone, and the product has a gravity of 0.550000. What has gone wrong?",
  "The shell is thinner than the hydrostatic test will demand of it, and the test is not optional.",
  ["Nothing, as long as the product gravity is above the crossover of 0.931727, because above that gravity the product is the governing condition on the bottom course anyway.",
   "The thickness comes out too great rather than too small on a light product.",

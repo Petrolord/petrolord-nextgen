@@ -81,11 +81,11 @@
   "options": [
    "The differential turndown, because it is the quantity the transmitter reports directly and a warning on a derived figure would be a warning about a calculation.",
    "Whichever of the two reaches its limit first, which on a falling reading is the differential turndown because it moves as the square of the flow.",
-   "Both, because a result that passes one limit always passes the other.",
+   "Both, each checked against the three-to-one figure, so a differential turndown of three sets it off.",
    "The flow turndown, because the figure a warning is about should be the figure the rule is written in."
   ],
   "answer": 3,
-  "explanation": "The two limits are reached at different readings, so a warning on the differential turndown would flag a meter still comfortably inside the flow rule."
+  "explanation": "The two limits are one rule written twice and are reached at the same reading. The three-to-one figure applied to the differential would flag the ABOH row, at a differential turndown of 3.134796 and a flow turndown of 1.770536, where the warning is silent."
  },
  {
   "prompt": "On a 200.000000 in H2O span the warning starts below a reading of 22.222222 in H2O. What is true at that reading?",
@@ -118,7 +118,7 @@
    "The span is a stated input and the reading is a stated input, and the engine refuses any pair of stated inputs it cannot check against each other."
   ],
   "answer": 0,
-  "explanation": "This is the likeliest of these cases to arrive in real life, when a well is opened up and a span chosen for last year's rate is too small."
+  "explanation": "It arrives in real life when a well is opened up and a span chosen for last year's rate is too small."
  },
  {
   "prompt": "A reading crosses from silent to firing. What has and has not changed about the measurement at that point?",
@@ -157,7 +157,7 @@
   "prompt": "What does the choice of span decide for the years a meter is in service?",
   "options": [
    "Where the range the instrument can be trusted in sits against the rates the field will actually make.",
-   "How wide the band around each reading is in percent of reading terms, since a wider span carries a proportionally wider band at every point on it.",
+   "Nothing about the band around a reading, since the accuracy is a percentage and a percentage does not depend on the range it is quoted on.",
    "Which of the two turndown limits the engine will apply, because a limit is held against the span rather than against the reading itself.",
    "Whether the uncertainty budget takes its differential term from the transmitter or from a typed figure, since a span is what that derivation needs to run."
   ],

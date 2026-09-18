@@ -952,11 +952,17 @@ count('rows of the gas march above on which the engine reports choked flow', cho
   'a row counts when the engine returns choked true');
 w();
 const yFloor = chokedGas[0].y;
-must('THE EXPANSION FACTOR IS EXACTLY TWO THIRDS ON EVERY CHOKED ROW',
-  chokedGas.every((r) => r.y === yFloor) && Math.abs(yFloor - 2 / 3) < 1e-15,
+// MEASURED, NOT ASSERTED. The engine forms the factor as one less a quotient,
+// and on this gas that lands one unit in the last place ABOVE the double
+// nearest two thirds. The choking panel's own reader measures that gap, so
+// the digest prints it rather than calling the factor exact.
+const yGap = yFloor - 2 / 3;
+must('THE EXPANSION FACTOR IS ONE DOUBLE ON EVERY CHOKED ROW, WITHIN ONE UNIT IN THE LAST PLACE OF TWO THIRDS',
+  chokedGas.every((r) => r.y === yFloor) && Math.abs(yGap) <= Number.EPSILON / 2,
   `${chokedGas.map((r) => r.y).join(', ')}`);
 w(`   the expansion factor on every choked row                 ${rpad(n(yFloor, 'factor'), 16)}`);
-w(`   which is two thirds to the last bit a double carries`);
+w(`   which is two thirds to within one unit in the last place of a double: it is`);
+w(`   ${yFloor === 2 / 3 ? 'the double nearest two thirds exactly' : 'one unit in the last place above the double nearest two thirds'}, because the engine forms it as one less a quotient`);
 w();
 const gasChokeP2 = bisect(S.BELEMA_GAS.p1Psia - 1, 1, (p2) => success('gas choking probe', V.gasValve({
   qScfh: S.BELEMA_GAS.qScfh, p1Psia: S.BELEMA_GAS.p1Psia, p2Psia: p2,

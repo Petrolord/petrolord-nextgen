@@ -8,7 +8,7 @@
    "None of them, since all three move as the outlet pressure is taken down."
   ],
   "answer": 2,
-  "explanation": "It belongs to the valve and to the fluid rather than to the operating point, which is why asking for a different outlet pressure does not move it."
+  "explanation": "The stated drop moves on every row and the drop used follows it until the service chokes, so the allowable drop is the one column reading 179.220032 psi from the first row to the last."
  },
  {
   "prompt": "The liquid valve is asked for 171.300000 psia. What stated drop goes with that row, in psi?",
@@ -85,7 +85,7 @@
    "The inlet pressure less the vapour pressure."
   ],
   "answer": 3,
-  "explanation": "Leave the vapour pressure out and that term is the inlet pressure alone, which is why the quotient has no upper bound and the ladder hands back its safest rung."
+  "explanation": "The refusal says that with no vapour pressure the index is infinite and every service reads as stable, which is why the engine refuses rather than answering."
  },
  {
   "prompt": "A liquid sizing arrives with the vapour pressure box empty. What does the repaired engine do?",
@@ -147,7 +147,7 @@
   "options": [
    "The regime word is derived from the choked flag, so grading it would grade the flag twice.",
    "The regime word changes between the stated drop basis and the allowable drop basis.",
-   "Neither of the two ladder thresholds came from a published document, and the engine says so where a reader can see it.",
+   "Neither of the two ladder thresholds is read from a standard. Both are this engine's stated screen, which it exports so a reader can see them.",
    "The regime word is not exported by the module, so a learner cannot check it against anything."
   ],
   "answer": 2,

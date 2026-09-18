@@ -44,7 +44,7 @@
   "explanation": "Two of the fifteen are outright refusals to answer, where the engine returns a refusal or a withheld flag in place of a number."
  },
  {
-  "prompt": "Held, stated and withheld are used carefully in this register. What is the difference?",
+  "prompt": "This course sorts the register three ways: held (the rows the register marks NOT CARRIED), stated and withheld. What is the difference?",
   "options": [
    "Held is a value the caller supplies, stated is a value the standard supplies, and withheld is a value the engine computes and declines to return to a screen.",
    "Held is a figure returned with a warning, stated is a figure returned without one, and withheld is a figure returned as a null with no reason beside it.",
@@ -121,7 +121,7 @@
   "explanation": "Written without their rules, those two numbers are a one and a four attached to a tank, and a reader cannot tell whether they overlap or exhaust the table."
  },
  {
-  "prompt": "This file pins fifty engine strings verbatim. What does the pinning actually buy?",
+  "prompt": "The digest pins fifty engine strings verbatim. What does the pinning actually buy?",
   "options": [
    "A reader can search the engine source for the string and confirm the message has not been edited since the file was built.",
    "A screen showing a message and an engine returning one cannot drift apart, because the pinned string is the named constant the interface reads and the engine returns on the call itself.",

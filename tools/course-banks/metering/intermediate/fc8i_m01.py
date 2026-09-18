@@ -18,7 +18,7 @@ q(1, "Three pressure drop columns run down the marched liquid valve. What separa
  "On the row at an outlet pressure of 200.000000 psia both columns read 46.900000 psi. On the row at an outlet pressure of 40.000000 psia the stated drop is 206.900000 psi and the drop used is 179.220032 psi.")
 
 q(3, "What does the allowable drop column do as the outlet pressure is marched from 200.000000 psia down to 20.000000 psia?",
- "It holds the same figure on every row, because it belongs to the valve and to the fluid rather than to the operating point being asked for.",
+ "It holds the same figure on every row, because it is built from the valve, the fluid and the inlet pressure, and the march moves none of them.",
  ["It falls on every row, because the allowable drop is a fraction of the stated drop and the stated drop is rising as the outlet pressure is taken down the march.",
   "It holds still down to the row where the engine first reports choked flow and then falls away, because past that row the engine has stopped recomputing it and carries the last value forward.",
   "It rises on every row, because the allowable drop is recomputed from the outlet pressure and a lower outlet pressure leaves the valve more of the difference to work with."],
@@ -74,7 +74,7 @@ q(3, "The engine's choked flow message ends with a clause about trim. What does 
  "The capped coefficient is a correct answer to the sizing question and a wrong answer to the engineering question, because a standard globe trim asked to hold that drop on this fluid is absorbing continuous bubble collapse against its plug and seat.")
 
 q(2, "On the last two rows of the march the regime word reads flashing. What happens to the coefficient and the choked flag there?",
- "The coefficient stays at the figure it settled on when the drop was capped and the choked flag stays true, so only the regime word records the change.",
+ "The coefficient stays at the figure it settled on when the drop was capped and the choked flag stays true, so the regime word and the flashing flag record the change.",
  ["The coefficient falls again on both rows, because the flashing correction reduces the density the equation is handed.",
   "The coefficient stays where it settled and the choked flag turns false again, because a flashing service is sized on a two-phase basis rather than on the liquid basis that choked.",
   "The coefficient is withheld on both rows and the choked flag stays true, because the engine refuses to size a flashing service from a liquid equation."],
@@ -113,7 +113,7 @@ q(3, "Change the fluid on a valve and keep the valve. What happens to the outlet
  ["It stays where it was, because the crossing is fixed by the pressure recovery factor of the trim and the trim has not been changed.",
   "It moves only if the new fluid has a higher vapour pressure than the old one, since the factor is flat below the vapour pressure of the fluid the valve was sized on.",
   "It stays where it was, because the engine recomputes the crossing from the stated drop and the stated drop is a process figure rather than a fluid one."],
- "It is the reason a valve that behaved perfectly on one service misbehaves on another that looks similar on the datasheet, and it is the reason the vapour pressure is an input this engine refuses to work without.")
+ "It is the reason a valve that behaved perfectly on one service misbehaves on another that looks similar on the datasheet, and the vapour pressure it rests on is an input this engine refuses to work without, because without it the cavitation index cannot form.")
 
 emit(Q, '/root/wt-fc8-nextgen/tools/course-banks/metering/intermediate/fc8i_m01.json', label='fc8i_m01', expect_n=15)
 finish()

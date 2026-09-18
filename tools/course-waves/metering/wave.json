@@ -19,10 +19,10 @@
  "enginesVendoredAt": "petrolord-engines main 9874d5834de552a08ed7aa16e0fcd12438fefdb1, which carries the FC8-0 repair (PR #204, merge 1cc597c) and its planting-harness gate (PR #205, merge 55431d7). TEN paths, and the ten were WALKED rather than listed: vendor/closure.py starts from the two jest suites, the two goldens, the three engines, the two oracles and the repair record as seeds, follows every ES import, every re-export, every CommonJS require, every dynamic import and every relative data read (path.join(__dirname, ...) in JavaScript and os.path.join(here, ...) in Python) until nothing new appears, and REFUSES if a seed is absent, if an edge resolves to nothing, or if it resolved nothing at all. It walked 7 edges and closed at 10 paths, which is what establishes that this family is ONE closure and not two: facilities.tanksmetering.test.js imports BOTH metering.js and storageTank.js. Identity was proved THREE independent ways per path: the git blob hash of the canonical file against the git blob hash of the vendored file, which is content addressing and knows nothing of the filesystem; an md5 of the two files on disk; and a byte compare against the Suite's own subtree vendoring of the same engines commit at e63ed83bc, which is a third party that pulled the same bytes through a different route on a different day. 10 of 10 identical on all three, recorded path by path in vendor/closure.json. The FC8 paths are byte-identical at 55431d7 and at main 9874d583, which was checked directly rather than assumed: FC7-1 (#206) sits between them and touches only the produced water family. THE CANONICAL PIN IN VENDOR.json WAS NOT ADVANCED. It stays at 709172f and the ten paths are ledgered, nine as differing and one as extra, each PINNED to the blob now vendored, so a second drift on an already-known path still fails the guard.",
  "digest": {
   "file": "digest.txt",
-  "lines": 1277,
+  "lines": 1278,
   "sections": 32,
-  "md5": "03fb67866328c1f3e0fdf7f6884c48c4",
-  "sha256": "b8ce5729f500a5ac02426aacadd769599a02642a4ae8eda3340fdd555b02d077",
+  "md5": "38a61245d55409620b1419de55e5cb41",
+  "sha256": "dcc02ea2f3d4e7bd020caea66ad6cb13c614caad734a7d3c10c0d7e1e4e0b59d",
   "generator": "fc8_dump.mjs, through build_digest.sh",
   "rule": "Every figure is engine output printed at a stated precision. Nothing is typed, nothing is rounded by hand, and nothing comes from RECON.md, FINDINGS.md, the vendored FINDINGS-metering.md or an engine source comment. A sentence may name a figure the file computes and may NOT characterise the relationship between two figures unless that relationship is itself computed and printed, which is what every RELATION line is. Constants the engines do not export are MEASURED by asking the engine a question about itself. Every count states the tree it was counted over and the rule that decided membership."
  },
@@ -48,7 +48,7 @@
   "the cubic feet in a barrel": "EXACT BY DEFINITION and returned by tankCapacity as ft3PerBbl, so it can be checked rather than assumed."
  },
  "plan": {
-  "state": "FOUNDATION COMPLETE, vendored at engines main 9874d583. Digest BUILT: 32 sections, 1277 lines, byte-reproducible across two consecutive rebuilds, five timezones and four locales, 12 builds in all. Eighteen graded fields chosen, tolerances derived in one place, discriminate clean with zero WEAK routes. NO LESSON IS WRITTEN.",
+  "state": "ALL THREE TIERS WRITTEN AND AUDITED FIT TO SEED 2026-09-18 (AUDIT-beginner.md, AUDIT-intermediate.md, AUDIT-advanced.md). Digest 32 sections, 1278 lines, byte-reproducible over 12 builds; eighteen graded fields, discriminate clean with zero WEAK routes. Seed ladder: migrations/20260925_fc8_metering_*.sql, go-live HELD.",
   "thesis": "A meter run, a control valve and a tank are the three places on a facility where a number that looks like a measurement is a design judgement with a standard behind it. The orifice equation is simple and its uncertainty is the subject; the valve equation is simple and its choking boundary is the subject; the tank shell equation is simple and venting is what actually destroys tanks. The course therefore teaches the boundaries and the refusals, and grades nothing that rests on a table value the engine says it does not cite.",
   "tiers": {
    "beginner": "Associate. WHAT A METER RUN MEASURES AND HOW WELL. Why: the orifice equation is arithmetic and the uncertainty budget is the argument, and every Associate graded field is arithmetic over stated inputs or a definition.",
@@ -124,7 +124,7 @@
   "toleranceSource": "src/components/course/panels/metering/gradedTolerance.js"
  },
  "gates": {
-  "digest reproducibility": "byte-identical across two consecutive rebuilds, five timezones (Pacific/Kiritimati, UTC, Pacific/Niue, America/Sao_Paulo, Asia/Kathmandu) and four locales (C, de_DE.UTF-8, tr_TR.UTF-8, ar_EG.UTF-8): 12 builds in all, every one byte-identical. md5 03fb67866328c1f3e0fdf7f6884c48c4 over 1277 lines. build_digest.sh is mode 755 and EXECUTABLE, which finalise.sh asserts before it runs anything: a sibling wave shipped a mode 644 build script and its reproducibility gate had therefore never once run."
+  "digest reproducibility": "byte-identical across two consecutive rebuilds, five timezones (Pacific/Kiritimati, UTC, Pacific/Niue, America/Sao_Paulo, Asia/Kathmandu) and four locales (C, de_DE.UTF-8, tr_TR.UTF-8, ar_EG.UTF-8): 12 builds in all, every one byte-identical. md5 38a61245d55409620b1419de55e5cb41 over 1278 lines. build_digest.sh is mode 755 and EXECUTABLE, which finalise.sh asserts before it runs anything: a sibling wave shipped a mode 644 build script and its reproducibility gate had therefore never once run."
  },
  "leakScales": [
   "1",

@@ -27,7 +27,7 @@ q(0, "Two heights are in play on this tank when a working capacity and a fire we
 q(2, "Both tank crossovers in this tier were found the same way. What do a gravity of 0.931727 and a draw rate of 1083.0319 bbl/hr have in common?",
  "Each was found by bisecting a word the engine returns, and each is a property of this tank at these conditions.",
  ["Each is a threshold the standard publishes, which the engine reproduces so a designer can see where the governing case changes.",
-  "Each is the input at which two returned figures are exactly equal.",
+  "Each is the input at which the engine's warning and its governing word first disagree.",
   "Each is a limit above which the engine stops answering, in the way it stops claiming proportionality above a stated capacity."],
  "Nothing in the package publishes either figure. The shell returns a governing candidate and the venting returns a governing case, and a word that changes has a boundary in it.")
 
@@ -127,7 +127,7 @@ q(0, "Which two things does the register call withheld by name, and what do they
  ["The minimum plate band table and the fire vent capacity, both noted on every call.",
   "The fire vent capacity and the turnover factor, and both are relations the package once carried and has since removed.",
   "The straight run for two elbows and the noise prediction, and both are answers the engine calls an indication rather than a figure."],
- "A withheld item is a question the engine will not answer at all, which is a different thing from a held item it works around.")
+ "A withheld item is a question the engine will not answer at all, which is a different thing from a held item, one the register marks NOT CARRIED, that it works around.")
 
 q(2, "This tank has a design liquid level of 34.600000 ft and a vapour space height of 4.200000 ft. What is each used for?",
  "The level sets the working capacity and the shell heads, and the vapour space height sets the volume the standing loss breathes on.",
@@ -221,7 +221,7 @@ q(2, "What is the practical difference between the tank capacity refusal and the
  "A fill height below zero is impossible arithmetic, and an omitted control efficiency is unknown rather than zero.")
 
 q(1, "Which two routes does the fire result name for getting a vent capacity, and what do they share?",
- "API 2000 against the heat input, or the vent manufacturer's certified capacity curve, and both start outside this package.",
+ "API 2000 against the heat input, or the vent manufacturer's certified capacity curve, and neither is carried by this package.",
  ["A rearrangement of the duty into scfh of air, or a vendor curve, and both start from the fire duty the engine returns.",
   "The band table in the standard, or a certified curve, and both start from the wetted area of 5881.0614 ft2.",
   "A calculated environment credit, or a certified curve, and both reduce the duty before a capacity is read against it."],

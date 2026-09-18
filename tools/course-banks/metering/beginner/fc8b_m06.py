@@ -31,12 +31,12 @@ q(3, "The six contributions are combined into a total of 0.581059 percent. How?"
  ["By adding the six contributions, which is why the total is larger than any one of them and smaller than a simple sum of the uncertainties.",
   "By taking the largest contribution and widening it by the share of the variance the other five carry between them.",
   "By multiplying the six contributions by their sensitivities and summing the products, which is what the last column reports."],
- "The last column is each term's share of that sum of squares, which is a different ranking of the same six terms from the contribution column."),
+ "The last column is each term's share of that sum of squares. It ranks the six terms in the same order as the contribution column, since squaring cannot reorder positive numbers."),
 
 q(2, "Why does the budget carry a share of variance column when it already carries a contribution column?",
- "Because squaring reorders the six terms, and the share column is the one that says where money spent on better instrumentation would go.",
+ "Because the total is formed from the squares, so each term's share of that sum is what says where money spent on better instrumentation would go.",
  ["Because the contribution column is in percent of the input and the share column is in percent of the flow, so only the second can be compared across terms.",
-  "Because the share column is the one that sums to the total, and a reader checking the arithmetic needs a column that adds up.",
+  "Because the share column carries the sensitivities and the contribution column does not, so only the share traces back to the orifice equation.",
   "Because the contribution column is computed for the engine's own default uncertainties and the share column for the ones actually supplied."],
  "Quote the share column when you are deciding what to improve, and quote the total when you are stating what the meter is worth."),
 

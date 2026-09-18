@@ -634,7 +634,8 @@ Past it the flow is sonic in the vena contracta and more drop buys nothing.
           rule: a row counts when the engine returns choked true
 
    the expansion factor on every choked row                         0.666667
-   which is two thirds to the last bit a double carries
+   which is two thirds to within one unit in the last place of a double: it is
+   one unit in the last place above the double nearest two thirds, because the engine forms it as one less a quotient
 
    the gas valve begins to choke at an outlet of, psia             78.919821
    the terminal pressure drop ratio there                           0.680357

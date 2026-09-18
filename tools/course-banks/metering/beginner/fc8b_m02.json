@@ -96,7 +96,7 @@
    "It returns a coefficient and sets the small bore flag, which is the general flag this module uses for any evaluation outside its fitted domain."
   ],
   "answer": 2,
-  "explanation": "Refusing would leave a user with no number and no account of what kind of number was unavailable. The result carries the coefficient and a warning naming the beta and the band."
+  "explanation": "The engine does not refuse here. The result carries the coefficient and a warning naming the beta and the band, and the published range flag comes back false."
  },
  {
   "prompt": "The engine's warning above the upper edge reads: `beta of 0.841 is outside the 0.1 to 0.75 range the flange-tap correlation is published for: resize the plate rather than trusting this number`. What two things is that sentence doing?",

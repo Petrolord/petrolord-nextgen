@@ -54,7 +54,7 @@ q(3, "What makes the factor of about 24 decisive, when engineering works with un
  ["A factor of that size cannot be carried through the units, so the two forms would give answers in different units and only one of them could be quoted as scfh of air.",
   "A disagreement of that size means one of the two forms has an arithmetic error in it.",
   "It is above the ratio of 3.333333 the environment factor relation prints, which is the largest movement the engine will accept in a fire result before it stops answering."],
- "A duty known to a few percent supports a purchase. Two forms differing by a factor of about 24 mean picking one is being wrong by a wide margin half the time.")
+ "A duty known to a few percent supports a purchase. Two forms differing by a factor of about 24 mean picking one is being wrong by that factor whenever the other form is right.")
 
 q(1, "Why does the engine export the withholding message as a named constant?",
  "So a screen cannot print a blank where the vent should be, and the constant and the returned reason are the same string.",

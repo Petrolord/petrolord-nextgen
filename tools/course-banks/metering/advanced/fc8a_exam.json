@@ -25,7 +25,7 @@
   "prompt": "Both tank crossovers in this tier were found the same way. What do a gravity of 0.931727 and a draw rate of 1083.0319 bbl/hr have in common?",
   "options": [
    "Each is a threshold the standard publishes, which the engine reproduces so a designer can see where the governing case changes.",
-   "Each is the input at which two returned figures are exactly equal.",
+   "Each is the input at which the engine's warning and its governing word first disagree.",
    "Each was found by bisecting a word the engine returns, and each is a property of this tank at these conditions.",
    "Each is a limit above which the engine stops answering, in the way it stops claiming proportionality above a stated capacity."
   ],
@@ -184,7 +184,7 @@
    "The straight run for two elbows and the noise prediction, and both are answers the engine calls an indication rather than a figure."
   ],
   "answer": 0,
-  "explanation": "A withheld item is a question the engine will not answer at all, which is a different thing from a held item it works around."
+  "explanation": "A withheld item is a question the engine will not answer at all, which is a different thing from a held item, one the register marks NOT CARRIED, that it works around."
  },
  {
   "prompt": "This tank has a design liquid level of 34.600000 ft and a vapour space height of 4.200000 ft. What is each used for?",
@@ -333,7 +333,7 @@
   "prompt": "Which two routes does the fire result name for getting a vent capacity, and what do they share?",
   "options": [
    "A rearrangement of the duty into scfh of air, or a vendor curve, and both start from the fire duty the engine returns.",
-   "API 2000 against the heat input, or the vent manufacturer's certified capacity curve, and both start outside this package.",
+   "API 2000 against the heat input, or the vent manufacturer's certified capacity curve, and neither is carried by this package.",
    "The band table in the standard, or a certified curve, and both start from the wetted area of 5881.0614 ft2.",
    "A calculated environment credit, or a certified curve, and both reduce the duty before a capacity is read against it."
   ],

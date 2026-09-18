@@ -151,7 +151,7 @@
    "The volume the expansion factor of 0.042556 is applied to twice a day."
   ],
   "answer": 2,
-  "explanation": "It is the third answer this tier has taken out of one geometry, after the capacity and the wetted area."
+  "explanation": "It is one more answer this tier takes out of the same geometry, beside the capacity, the shell and the wetted area."
  },
  {
   "prompt": "Why does this tier put evaporative losses in the same module as money and emissions?",
