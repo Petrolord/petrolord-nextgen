@@ -7,15 +7,14 @@ in the course. A graded field is a RETURN VALUE OF THE ENGINE, reached through t
 same clock gate as the digest (`clockguard.mjs`), at the wave's one as-of date. It
 is never arithmetic performed in the generator and never a figure typed by hand.
 
-**EVERY GRADED FIELD IS AN INTEGER, GRADED EXACTLY (tolerance 0).** The academy
-grader, `public.academy_submit_capstone`, compares numbers and nothing else, so a
-status, a verdict or a date cannot be graded here. A date the engine returns is
-graded as the whole number of days `daysUntil` puts between it and the as-of
-date, which is itself an engine return. A whole day, a whole percent the engine
-has already rounded, or a count has no legitimate reading error, which is why the
-tolerance is zero. `gradeprecision.py` states a half-unit floor for rounded
-READINGS; it does not apply to a value the engine itself rounds and the learner
-reproduces, and this is recorded rather than widened.
+**EVERY GRADED FIELD IS AN INTEGER, GRADED AT 0.5.** The academy grader,
+`public.academy_submit_capstone`, compares numbers and nothing else, so a status,
+a verdict or a date cannot be graded here. A date the engine returns is graded as
+the whole number of days `daysUntil` puts between it and the as-of date, which is
+itself an engine return. 0.5 is half a unit of the zero decimals the course
+prints an integer at: around an integer it admits exactly one answer, and it is
+what `gradeprecision.py` asks for (lead ruling after ASC-0, the same as
+riskchange). The one derivation is `TOLERANCE` in `compliance_capstone.mjs`.
 
 ## The generator and its inputs
 
@@ -39,19 +38,19 @@ reproduces, and this is recorded rather than widened.
 
 | gate | what it proves | negative control |
 |---|---|---|
-| `oracle_check.py` | the vendored Python ORACLES, called on the capstone records, reproduce all eighteen fields; no graded percent sits on an exact half (R2); the teaching readiness counts agree with the ISO oracle | `--plant` moves one oracle answer and the gate names that field |
+| `oracle_check.py` | the vendored Python ORACLES, called on the capstone records, reproduce all eighteen fields; the teaching readiness counts agree with the ISO oracle. Its exact-half guard is retired: after ASC-0 engine and oracle round a percent the same way | `--plant` moves one oracle answer and the gate names that field |
 | `discriminate.mjs` | every field has at least three plausible wrong routes, each the engine asked the wrong question, and none lands on the answer | `--plant` adds an identity route and the sweep reports one WEAK field |
 | `gate_collisions.py` | no graded value equals the absolute value of any number token the digest prints (the go-live rule), and no two graded values share an absolute value | `--plant` sets one field to a digest number |
 | `gate_promptleak.py` | no prompt prints a graded value of any tier, or a date the engine derives on the way to a graded day count | `--plant` appends both |
 | `gate_capstone_leak.py` | names and codes stay on their own road, no derived answer date is in the digest, no capstone record shares its dates with a teaching record or a golden case | `--plant` copies a record and a date across |
 
-## What no graded field touches
+## The five recon findings
 
-R1 (programmeProgress against summarise on a reasonless cancellation), R2
-(rounding at an exact half), R3 (the expiring flag on a lapsed certificate), R4
-(the negative reason on a filed One-off) and R5 (the ISO 9001 citation). The
-header of `compliance_fields_capstone.mjs` says how each is avoided, and
-`oracle_check.py` enforces the one that could move a value (R2).
+R1 to R5 were repaired upstream in ASC-0 (engines #212, 9d5d3b4) and are
+current rules now. None was on a graded path before the repair and no graded
+value moved on re-vendoring. `programmeProgress.outstanding` and
+`summarise().auditsOutstanding` now agree and are oracle-checked, but UTAPATE's
+count is 3, which the digest prints, so neither is graded.
 
 ## Write the go-live assertions from the engine's OUTPUT
 

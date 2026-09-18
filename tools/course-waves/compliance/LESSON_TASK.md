@@ -33,9 +33,9 @@ understand the work. Do not take a figure or a sentence from any of them.
 
 ## History on this wave
 
-This digest describes the engine as it is at 6b00f43. It carries NO section about
+This digest describes the engine as it is at 9d5d3b4 (ASC-0). It carries NO section about
 what the engine used to do. It names owner decisions by the wave that took them
-(AS13-0, AS15) in SECTION 23, and each of those lines states CURRENT behaviour. A
+(AS13-0, AS15, ASC-0) in SECTION 23, and each of those lines states CURRENT behaviour. A
 sentence about former behaviour that reads as current behaviour is a defect; do
 not write "used to", "was changed", "before the repair" or anything of that shape.
 If you want to say why a rule exists, say what the rule prevents, in the present
@@ -76,19 +76,21 @@ Run it over your lessons as well as the digest.
    marks.** The digest prints each one after `REFUSED:`. The oracles check the
    verdict and never the wording, so the words are the engine's own and nothing
    else vouches for them.
-4. **ONE ENGINE SENTENCE IS A RECORDED DEFECT (R4).** The reason the engine gives
-   for a filed One-off obligation prints "next due in" followed by a negative
-   number. The digest prints it in SECTION 3 with a frame on the line after it,
-   and again in SECTION 23 as R4. Teach the STATUS of that obligation; do not
-   teach its reason as a reading, and if you quote it, quote the frame with it.
+4. **THE ENGINE SENTENCES ARE CURRENT AT 9d5d3b4 (ASC-0).** Five rules this
+   course's recon asked for are in force and SECTION 23 states each one with its
+   measured figures: one rule for "outstanding" audits, percents rounded half up
+   on the exact fraction, expired and expiring as separate certificate flags, a
+   filed One-off whose reason says nothing further is due, and refusals that name
+   the register's own standard. Teach them as how the engine works. Do not
+   narrate them as repairs: no "was fixed", no "used to".
 5. **ONE ENGINE STRING BREAKS THE COPY RULE AND IS QUOTED ANYWAY.** "A finding
    that stopped work is a nonconformity, not an observation." is a verbatim
    engine refusal (digest SECTION 15). You may quote it inside quotation marks as
    the engine's words. You may not write that shape yourself.
 6. **Held items are taught as limits, never as figures to compute with.** SECTION
-   23 lists them. R1 (two outstanding counts that disagree) and R3 (the expiring
-   flag on a lapsed certificate) are named there as limits: say the counts
-   disagree, do not teach either count as the right one.
+   23 lists the owner decisions in force and the owner ambiguities still open
+   (a missing review period, a complete programme below one hundred percent, an
+   empty template, an unreadable today outside complianceStatus).
 
 ## Owner copy rule, and it applies to headings
 

@@ -71,12 +71,14 @@ and a distractor quickly.
   figure looks printed.
 - No option may equal a graded capstone value. `bankleak.py` checks it.
 
-## Held items and recorded findings
+## Held items and the five ASC-0 rules
 
-R1 to R5 (digest SECTION 23) may be asked about as LIMITS: "what does this
-engine say about X, and why is it not graded". None may be keyed as a figure the
-learner should rely on. Never key the negative "next due in" reason (R4) as a
-correct reading of an obligation.
+R1 to R5 (digest SECTION 23) are CURRENT RULES after ASC-0, and may be keyed
+like any rule: one outstanding rule for a programme, exact half-up percents,
+expired and expiring as separate flags, the One-off reason, the standard named
+in a refusal. Ask about them in the present tense; no question may be about
+what the engine used to do. The owner ambiguities in SECTION 23 are limits and
+may be asked about as limits only.
 
 ## Owner copy rule
 

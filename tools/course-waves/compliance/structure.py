@@ -17,8 +17,8 @@
 # Titles carry COUNTS only, never a measurement. No em dashes, no en dashes and
 # no "X, not Y" contrastive anywhere a learner reads, headings included.
 #
-# Engines: engines/assurance at petrolord-engines 6b00f43 (AS15), vendored
-# sha-identical. This course grades only complianceStatus, documentControl,
+# Engines: engines/assurance at petrolord-engines 9d5d3b4 (ASC-0, which
+# repaired this wave's five recon findings), vendored sha-identical. This course grades only complianceStatus, documentControl,
 # qualityAssurance, auditManagement and isoCompliance (+ calendar).
 #
 # ---------------------------------------------------------------------------
@@ -167,8 +167,8 @@ TIERS = {
 }
 
 # Nothing is held: the engine is vendored, the digest is built, and every module
-# has its source. Three recon findings (R1 to R3, RECON.md) are taught as limits
-# in Expert m06 l02 and never graded; none of them removes a lesson.
+# has its source. The five recon findings were repaired upstream in ASC-0 and
+# are taught in Expert m06 l02 as current rules.
 HELD = {}
 
 if __name__ == '__main__':

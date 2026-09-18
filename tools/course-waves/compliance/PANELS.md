@@ -48,9 +48,9 @@ Date or nothing reaches the engine.
 - the document library's review states, and the review date earned at issue with
   the correction date marked (SECTIONS 8 and 9).
 
-Do not render explainStatus's reason for a filed One-off as a reading (R4). Show
-the status; if the reason is shown at all, show it with the frame the digest
-prints.
+Show explainStatus's reason beside every status, the filed One-off included:
+at 9d5d3b4 it reads "Filed <date>. A one-off obligation, nothing further is
+due." (SECTION 3).
 
 **`compliance-plan-explorer`** (Professional throughout)
 
@@ -75,12 +75,15 @@ prints.
   engine does: a certification body's audit, an audit in progress and a
   cancelled audit never count;
 - the lead auditor picker over a scope, the owned clauses named when the engine
-  refuses (SECTION 19);
+  refuses (SECTION 19); and pass the register's standard record as the fourth
+  argument to canSetClauseStatus, so a refusal names the right standard
+  (SECTION 18);
 - a finding's closure walk and its age stopping at its closed date (SECTION 21);
 - **readiness as a list, never as a percentage or a gauge** (SECTION 22). The
   certificate expiry as a control, showing the serious item, the watch item and
-  nothing, at the edges the digest prints. Do not render `certificateExpiring` as
-  "inside the lead window" on its own (R3).
+  nothing, at the edges the digest prints. `certificateExpiring` is the lead
+  window, 0 to 90 days inclusive, and `certificateExpired` is past the expiry;
+  the two never read true together.
 
 ## THE CAPSTONE GUARD
 

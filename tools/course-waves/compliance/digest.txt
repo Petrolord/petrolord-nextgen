@@ -1,7 +1,7 @@
 # compliance: Compliance, Audit & Quality. Teaching digest.
 # Every figure is a whole number: days (daysUntil, ages), counts, and percents the engine has already rounded. Dates print as YYYY-MM-DD through the engine's own toDateOnlyString.
 # AS-OF DATE: 2026-10-15. Every engine call in this digest that reads a date against today passes this one date, except the rows in SECTION 2 that show what an unreadable today does, which say so. Nothing below read the machine clock, and the generator refuses to print a line from a call that did not pass the as-of date.
-# ENGINES: engines/assurance at petrolord-engines 6b00f43, vendored in NextGen under packages/engines.
+# ENGINES: engines/assurance at petrolord-engines 9d5d3b4 (ASC-0), vendored in NextGen under packages/engines.
 # MODULES TAUGHT: calendar, complianceStatus, documentControl, qualityAssurance, auditManagement, isoCompliance.
 # CASES: IKORO (a terminal obligation register and document library), ABAM (a flowline tie-in quality plan, its NCRs, a contractor HSE audit and an audit programme), ORASHI (an ISO 14001:2015 management system). All three are invented records.
 # Built by build_digest.sh from compliance_dump.mjs and compliance_fields.mjs. Never edited by hand.
@@ -12,7 +12,7 @@ Each module exports rules as functions and vocabularies as frozen lists. The cou
 
 | module | exported functions | exported lists and constants | exports that read a date against today |
 | --- | --- | --- | --- |
-| calendar | 4 | 1 | 1 |
+| calendar | 5 | 1 | 1 |
 | complianceStatus | 11 | 8 | 4 |
 | documentControl | 14 | 7 | 4 |
 | qualityAssurance | 28 | 24 | 7 |
@@ -107,7 +107,7 @@ REG-2026-002: The due date passed 5 days ago.
 REG-2026-003: Due in 16 days. The last filing (2026-07-28) was for an earlier period, so nothing has been filed for this one yet.
 REG-2026-004: Due in 167 days. The last filing (2026-03-30) was for an earlier period, so nothing has been filed for this one yet.
 REG-2026-005: The permit expired 15 days ago.
-REG-2026-006: Last filed 2026-08-10, next due in -62 days.
+REG-2026-006: Filed 2026-08-10. A one-off obligation, nothing further is due.
 REG-2026-007: The due date passed 44 days ago.
 REG-2026-008: Last filed 2026-08-05, next due in 108 days.
 REG-2026-009: Lifecycle is Superseded, so it is not tracked against a date.
@@ -115,7 +115,6 @@ REG-2026-010: Lifecycle is Draft, so it is not tracked against a date.
 REG-2026-011: Lifecycle is Not applicable, so it is not tracked against a date.
 REG-2026-012: Due in 25 days, inside the 30 day lead time set for this obligation.
 REG-2026-013: No due date or expiry date has been set, so nothing can fall due.
-REG-2026-006: the status is right, and the sentence under it prints a negative number of days after "next due in". That sentence is a recorded defect, R4 in SECTION 23, and is not taught as a reading of the obligation.
 
 The precedence, one obligation varied one field at a time from REG-2026-005 (the radioactive source licence):
 | variant | status | days until |
@@ -628,16 +627,22 @@ ISO 14001:2015 at ORASHI, Certified, certification cycle 3 years, certificate ex
 | 10.2 | Nonconformity and corrective action | Applicable | Conformant | u-nneka | true | true | true | 2027-05-04 | false | false |
 | 4.4 | Environmental management system (sites outside scope) | Not applicable | Not applicable | u-nneka | false | false | false | none | false | false |
 
-canSetClauseStatus on clause 7.2, which has nothing recorded:
+canSetClauseStatus on clause 7.2, which has nothing recorded, with the ISO 14001:2015 record passed:
 Conformant, nothing else: REFUSED: Name the evidence, the date it was assessed and who assessed it. Conformity is a claim about documented information; without those three it is an opinion in a dropdown.
 Conformant with an evidence reference only: REFUSED: Name the evidence, the date it was assessed and who assessed it. Conformity is a claim about documented information; without those three it is an opinion in a dropdown.
 Conformant with evidence, a date and an assessor: ALLOWED
 Nonconformant with no date: REFUSED: Record the date this was assessed and who assessed it.
 Nonconformant with a date and an assessor: ALLOWED
 Not applicable while still marked Applicable: REFUSED: A clause determined not applicable cannot also carry a conformity verdict. Set both together, or neither.
-Not applicable and applicability Not applicable, no justification: REFUSED: ISO 9001:2015 §4.3 requires the justification for a requirement determined not applicable to be kept. Say why this one does not apply.
+Not applicable and applicability Not applicable, no justification: REFUSED: Say why this requirement of ISO 14001:2015 does not apply. A requirement determined not applicable keeps its justification on record.
 Not applicable with its justification: ALLOWED
 Compliant, a word the vocabulary does not have: REFUSED: Compliant is not a clause status.
+
+The same Not applicable refusal, the register's standard passed as the fourth argument, for three standards and for none:
+ISO 14001:2015: REFUSED: Say why this requirement of ISO 14001:2015 does not apply. A requirement determined not applicable keeps its justification on record.
+ISO 9001:2015: REFUSED: ISO 9001:2015 §4.3 requires the justification for a requirement determined not applicable to be kept. Say why this one does not apply.
+ISO 45001:2018: REFUSED: Say why this requirement of ISO 45001:2018 does not apply. A requirement determined not applicable keeps its justification on record.
+no standard passed: REFUSED: Say why this requirement does not apply. A requirement determined not applicable keeps its justification on record.
 
 # SECTION 19: INDEPENDENCE: AN AUDITOR MAY NOT AUDIT THEIR OWN WORK (owned by Expert m02)
 
@@ -763,7 +768,7 @@ certificationReadiness for ISO 14001:2015 at ORASHI: ready false.
 | severity | count | text |
 | --- | --- | --- |
 | blocking | 1 | 1 major nonconformity is open. A certification body will not recommend certification over one. |
-| blocking | 3 | 3 applicable clauses have never been examined by an internal audit. ISO 9001 §9.2 requires the organization to audit its own system. |
+| blocking | 3 | 3 applicable clauses have never been examined by an internal audit. ISO 14001:2015 §9.2 requires the organization to audit its own system. |
 | blocking | 1 | 1 clause is marked conformant with no evidence, date or assessor recorded. |
 | blocking | 1 | 1 clause is assessed nonconformant and not yet resolved. |
 | serious | 1 | 1 clause was last audited before this certification cycle began. |
@@ -798,8 +803,8 @@ certificationReadiness for ISO 14001:2015 at ORASHI: ready false.
 The same register with the certificate expiry moved, and nothing else:
 | certificate expires | certificateDays | certificateExpiring | certificateExpired | certificate item listed |
 | --- | --- | --- | --- | --- |
-| 2026-10-14 | -1 | true | true | serious: The certificate expired 1 day ago. The organization cannot claim certification, and a surveillance audit is no longer possible: it needs a recertification audit. |
-| 2026-10-15 | 0 | true | false | watch: The certificate expires in 0 days. Book the recertification audit before then. |
+| 2026-10-14 | -1 | false | true | serious: The certificate expired 1 day ago. The organization cannot claim certification, and a surveillance audit is no longer possible: it needs a recertification audit. |
+| 2026-10-15 | 0 | true | false | watch: The certificate expires today. Book the recertification audit now. |
 | 2027-01-13 | 90 | true | false | watch: The certificate expires in 90 days. Book the recertification audit before then. |
 | 2027-01-14 | 91 | false | false | none |
 | tbc | null | false | false | none |
@@ -809,7 +814,7 @@ A standard with no clauses in the register: ready false; blocking (count 0): Thi
 
 summarise over the same register: clauses 13, applicable 12, excluded 1, evidenced claims 9, unevidenced claims 1, notAssessed 1, reviews overdue 1, reviews due soon 1, audits 6, audits open 2, audits overdue 2, clauses covered 8, never audited 3, stale 1, open findings 3, open major 1, findings overdue 1, open actions 2, overdue actions 1, awaiting an effectiveness check 1.
 
-# SECTION 23: HELD ITEMS, OWNER DECISIONS AND THE LIMITS THIS COURSE TEACHES WITHOUT GRADING (owned by Expert m06)
+# SECTION 23: OWNER DECISIONS, HELD LIMITS AND FIVE RULES THIS COURSE TEACHES WITHOUT GRADING (owned by Expert m06)
 
 Everything in this section is taught as a stated policy or a limit. None of it is a graded field.
 
@@ -828,22 +833,22 @@ a complete audit programme that contains a cancelled audit reads below one hundr
 a templated audit passed with no checklist items passes the unanswered-items rule vacuously; the database counts the template itself.
 an unreadable today is refused by complianceStatus alone; SECTION 2 shows two other modules answering as though nothing were due.
 
-Findings from this course's recon, never graded:
-R1: on the same four audits, one of them cancelled with no reason, programmeProgress counts 2 outstanding and summarise counts 1. The two exports disagree, and the oracle does not model the reasonless cancellation in programmeProgress. Neither count is graded or taught as a figure.
-R2: checklistProgress on 57 answered of 200 prints 28 percent. The exact half-up rounding the audit oracle uses gives one more. No graded percent sits on an exact half.
-R3: a certificate with certificateDays -15 reads certificateExpiring true and certificateExpired true at once, while the readiness list names it only once, as serious. The expiring flag is not taught as "inside the lead window".
-R4: REG-2026-006 is a One-off obligation filed before its due date passed. deriveStatus reads Compliant, which is the AS13-0 repair, and explainStatus gives the reason "Last filed 2026-08-10, next due in -62 days.". The Compliant reason was written for a recurring obligation with a next due date ahead, and prints a negative count here.
-R5: the readiness list for ISO 14001:2015 carries 1 item citing ISO 9001 by name, and canSetClauseStatus cites ISO 9001:2015 for a Not applicable justification whatever the standard. The name printed is the one the engine was written against, whatever standard the register holds.
+Five rules the engine keeps at 9d5d3b4 (ASC-0, engines PR #212), each one asked for by this course's recon. Each is current behaviour, measured here:
+R1, one rule for outstanding: on four audits, one of them cancelled with no reason, programmeProgress counts 2 outstanding and summarise counts 2. A cancellation without a written reason is outstanding in both, and canCompleteProgramme asks the same rule.
+R2, a percent rounds half up on the exact fraction: checklistProgress on 57 answered of 200 prints 29, and planProgress on 23 resolved of 40 prints 58. checklistProgress, programmeProgress and planProgress are the three exports that print a percent.
+R3, expired and expiring are two separate flags: a certificate with certificateDays -15 reads certificateExpiring false and certificateExpired true. SECTION 22 prints both flags at the edges.
+R4, a filed One-off says it is discharged: REG-2026-006 reads Compliant, and explainStatus gives the reason "Filed 2026-08-10. A one-off obligation, nothing further is due."
+R5, a sentence names the register's own standard: the readiness list for ISO 14001:2015 carries 1 item naming ISO 14001:2015 and 0 naming ISO 9001. SECTION 18 prints the Not applicable refusal for both standards.
 
 # SECTION 24: WHAT THE ORACLES CHECK (owned by Expert m06)
 
 | module | golden cases | distinct exports with a case | sort cases | oracle |
 | --- | --- | --- | --- | --- |
-| calendar | 63 | 4 | 0 | tools/validation/assurance/oracle_calendar.py |
-| complianceStatus | 149 | 10 | 3 | tools/validation/assurance/oracle_compliance.py |
+| calendar | 77 | 5 | 0 | tools/validation/assurance/oracle_calendar.py |
+| complianceStatus | 159 | 10 | 3 | tools/validation/assurance/oracle_compliance.py |
 | documentControl | 130 | 13 | 2 | tools/validation/assurance/oracle_documents.py |
-| qualityAssurance | 414 | 27 | 2 | tools/validation/assurance/oracle_quality.py |
-| isoCompliance | 206 | 32 | 1 | tools/validation/assurance/oracle_iso.py |
-| auditManagement | 171 | 31 | 2 | tools/validation/assurance/oracle_audit.py |
+| qualityAssurance | 422 | 27 | 2 | tools/validation/assurance/oracle_quality.py |
+| isoCompliance | 216 | 32 | 1 | tools/validation/assurance/oracle_iso.py |
+| auditManagement | 181 | 31 | 2 | tools/validation/assurance/oracle_audit.py |
 
 Each golden file is written by an independent stdlib Python oracle, from the rules as the modules and the status document state them. A golden figure beside an engine figure is two methods agreeing. The oracles check the verdict of a gate (allowed or refused) and never the wording of its reason, so every refusal sentence in this digest is the engine's own and is quoted rather than checked.

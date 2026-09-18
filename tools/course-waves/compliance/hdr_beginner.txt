@@ -23,8 +23,8 @@
 -- the warning, and a reader who counts to the due date misses a permit that
 -- lapses first.
 --
--- HELD, taught as a limit and never graded: the negative "next due in" reason
--- the engine prints for a filed One-off (R4), and the modules other than
+-- HELD, taught as a limit and never graded: the modules other than
 -- complianceStatus answering an unreadable today as though nothing were due.
--- The capstone grades six whole numbers of days, each an engine return.
+-- A filed One-off reads "nothing further is due" (ASC-0). The capstone grades
+-- six whole numbers of days, each an engine return, at a tolerance of 0.5.
 -- ============================================================================

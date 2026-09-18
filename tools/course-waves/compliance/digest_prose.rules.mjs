@@ -5,10 +5,10 @@
 //     /root/as-wip-compliance/digest.txt --rules /root/as-wip-compliance
 //
 // THIS WAVE'S HISTORY POSITION. The digest teaches the engine as it is at
-// 6b00f43 (AS15). It names three repairs by their wave (AS13-0, AS15) as the
-// owner decisions currently IN FORCE, in SECTION 23, and every one of those
-// lines states present behaviour. Nothing in the digest describes what an
-// engine used to return.
+// 9d5d3b4 (ASC-0). It names decisions by their wave (AS13-0, AS15, ASC-0) as
+// rules currently IN FORCE, in SECTION 23, and every one of those lines states
+// present behaviour with a measured figure. Nothing in the digest describes
+// what an engine used to return.
 export default {
   enginesRoot: process.env.AS_ENGINES || '/root/wt-as-compliance-nextgen/packages/engines',
 
@@ -73,7 +73,7 @@ export default {
   cleared: [
     // The owner decisions in force, named by the wave that took them. Present tense.
     /owner decision AS15 Q1/,
-    /which is the AS13-0 repair/,
+    /Five rules the engine keeps at 9d5d3b4 \(ASC-0, engines PR #212\)/,
     /Owner decisions in force \(AssuranceApps-STATUS\.md section 3n, AS15\)/,
     // "was written for" describes the ENGINE MESSAGE's scope, not a former behaviour.
     /The Compliant reason was written for a recurring obligation/,
@@ -117,6 +117,10 @@ export default {
     { frag: 'Say why this audit is not being done.', src: 'engines/assurance/auditManagement.js' },
     { frag: 'Conformity is a claim about documented information; without those three it is an opinion in a dropdown.', src: 'engines/assurance/isoCompliance.js' },
     { frag: 'requires the justification for a requirement determined not applicable to be kept', src: 'engines/assurance/isoCompliance.js' },
+    { frag: 'A requirement determined not applicable keeps its justification on record.', src: 'engines/assurance/isoCompliance.js' },
+    { frag: 'A one-off obligation, nothing further is due.', src: 'engines/assurance/complianceStatus.js' },
+    { frag: 'The certificate expires today. Book the recertification audit now.', src: 'engines/assurance/isoCompliance.js' },
+    { frag: 'requires the organization to audit its own system.', src: 'engines/assurance/isoCompliance.js' },
     { frag: 'An auditor may not audit their own work (ISO 19011), so either the scope or the auditor has to change.', src: 'engines/assurance/isoCompliance.js' },
     { frag: 'so somebody else on the audit has to record this result.', src: 'engines/assurance/isoCompliance.js' },
     { frag: 'A correction deals with the instance; a corrective action deals with the cause.', src: 'engines/assurance/isoCompliance.js' },

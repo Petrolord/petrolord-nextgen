@@ -15,10 +15,13 @@
 // the order they arrive, and each request is decided by the ENGINE
 // (canRemoveCheckpoint, canDecideCheckpoint); a refused request changes nothing.
 //
-// TOLERANCES. Every field is an integer and every one is graded EXACTLY
-// (tolerance 0): the academy grader compares numbers only, and a whole number of
-// days, a whole percent or a count has no rounding a learner could legitimately
-// differ by, because the engine's own rounding is part of what is graded.
+// TOLERANCES. Every field is an integer the engine returns, and every one is
+// graded at 0.5 (lead ruling after ASC-0, the same as riskchange): half a unit
+// of the zero decimals the course prints an integer at. Around an integer that
+// band holds exactly one integer, so it accepts the one right answer and
+// nothing else, and it is the band gradeprecision.py asks a zero-decimal class
+// for. The academy grader compares numbers, so a learner types the integer.
+export const TOLERANCE = 0.5;
 //
 // Usage: node compliance_capstone.mjs [--json]
 import fs from 'fs';
@@ -91,7 +94,7 @@ export const FIELDS = [
   ['advanced', 'obeakpu_evidenced_claims', ready.counts.evidenced],
   ['advanced', 'obeakpu_certificate_days', ready.counts.certificateDays],
   ['advanced', 'obeakpu_clauses_covered', ready.counts.covered],
-].map(([tier, key, value]) => [tier, key, value, 0]);
+].map(([tier, key, value]) => [tier, key, value, TOLERANCE]);
 
 for (const [tier, key, v] of FIELDS) {
   if (!Number.isInteger(v)) throw new Error(`${tier}.${key} is ${v}, which is not an integer the engine returned`);

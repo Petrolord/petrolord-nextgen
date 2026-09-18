@@ -21,8 +21,8 @@
 -- reason, a failed point is the most outstanding item on a plan, and a
 -- cancelled audit is not a delivered one.
 --
--- HELD, taught as a limit and never graded: the outstanding count of a
--- programme holding a cancellation with no reason, where programmeProgress and
--- summarise disagree (R1), and percent rounding at an exact half (R2). The
--- capstone grades four engine percents and two NCR ages.
+-- ONE RULE, NOW: an audit cancelled without a written reason is outstanding in
+-- programmeProgress, canCompleteProgramme and summarise alike, and every
+-- percent rounds half up on the exact fraction (ASC-0). The capstone grades
+-- four engine percents and two NCR ages, at a tolerance of 0.5.
 -- ============================================================================

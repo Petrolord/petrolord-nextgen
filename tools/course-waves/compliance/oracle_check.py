@@ -111,18 +111,6 @@ if '--plant' in sys.argv:
     ORACLE['utapate_mean_open_ncr_age_days'] += 1
 
 
-def exact_half_percents():
-    """R2: no graded percent may sit on an exact half, where the audit oracle's
-    exact rounding and the engine's float rounding can part company."""
-    out = []
-    items, resp = K['UTAPATE_ITEMS'], K['UTAPATE_RESPONSES']
-    n = OA.checklist_progress(items, resp)['answered']
-    if (200 * n) % (2 * len(items)) == len(items):
-        out.append('utapate_checklist_progress_pct')
-    rep = sum(1 for a in K['UTAPATE_AUDITS'] if a['status'] in ('Reported', 'Closed'))
-    if (200 * rep) % (2 * len(K['UTAPATE_AUDITS'])) == len(K['UTAPATE_AUDITS']):
-        out.append('utapate_programme_delivered_pct')
-    return out
 
 
 def main():
@@ -135,8 +123,10 @@ def main():
         print(f"  {'OK  ' if same else 'DIFF'} {tier:<13} {key:<48} engine {value:>6}  oracle {o}")
         if not same:
             bad.append(key)
-    halves = exact_half_percents()
-    print(f'  graded percents on an exact half (R2): {len(halves)} {halves}')
+    # The exact-half guard is RETIRED after ASC-0: every percent now rounds
+    # half up on the exact rational in the engine and the oracle alike, and
+    # the per-field comparison above would catch any divergence directly.
+    halves = []
     # A second population: the teaching digest's own ORASHI readiness counts.
     sys.path.insert(0, WAVE)
     F = json.loads(subprocess.run(['node', '--input-type=module', '-e', f"""

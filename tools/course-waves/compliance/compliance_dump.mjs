@@ -123,7 +123,7 @@ const byId = (rows) => new Map(rows.map((r) => [r.id, r]));
 out('# compliance: Compliance, Audit & Quality. Teaching digest.');
 out('# Every figure is a whole number: days (daysUntil, ages), counts, and percents the engine has already rounded. Dates print as YYYY-MM-DD through the engine\'s own toDateOnlyString.');
 out(`# AS-OF DATE: ${ymd(AS_OF)}. Every engine call in this digest that reads a date against today passes this one date, except the rows in SECTION 2 that show what an unreadable today does, which say so. Nothing below read the machine clock, and the generator refuses to print a line from a call that did not pass the as-of date.`);
-out('# ENGINES: engines/assurance at petrolord-engines 6b00f43, vendored in NextGen under packages/engines.');
+out('# ENGINES: engines/assurance at petrolord-engines 9d5d3b4 (ASC-0), vendored in NextGen under packages/engines.');
 out('# MODULES TAUGHT: calendar, complianceStatus, documentControl, qualityAssurance, auditManagement, isoCompliance.');
 out('# CASES: IKORO (a terminal obligation register and document library), ABAM (a flowline tie-in quality plan, its NCRs, a contractor HSE audit and an audit programme), ORASHI (an ISO 14001:2015 management system). All three are invented records.');
 out('# Built by build_digest.sh from compliance_dump.mjs and compliance_fields.mjs. Never edited by hand.');
@@ -223,7 +223,7 @@ for (const o of F.IKORO_OBLIGATIONS) {
   if (/in -\d+ days/.test(e.reason)) negativeReasons.push(o.code);
 }
 if (negativeReasons.length) {
-  out(`${negativeReasons.join(', ')}: the status is right, and the sentence under it prints a negative number of days after "next due in". That sentence is a recorded defect, R4 in SECTION 23, and is not taught as a reading of the obligation.`);
+  throw new Error(`R4 REGRESSED: explainStatus prints a negative day count for ${negativeReasons.join(', ')}`);
 }
 out('');
 out('The precedence, one obligation varied one field at a time from REG-2026-005 (the radioactive source licence):');
@@ -651,7 +651,7 @@ section('A CONFORMITY CLAIM IS EVIDENCE, A DATE AND A NAME');
       c.next_review_due || 'none', I.isReviewOverdue(c, AS_OF), I.isReviewDueSoon(c, AS_OF));
   }
   out('');
-  out('canSetClauseStatus on clause 7.2, which has nothing recorded:');
+  out(`canSetClauseStatus on clause 7.2, which has nothing recorded, with the ${F.ORASHI_STANDARD.code} record passed:`);
   const k72 = F.ORASHI_CLAUSES.find((c) => c.id === 'k72');
   const tries = [
     ['Conformant, nothing else', 'Conformant', {}, false],
@@ -664,7 +664,12 @@ section('A CONFORMITY CLAIM IS EVIDENCE, A DATE AND A NAME');
     ['Not applicable with its justification', 'Not applicable', { applicability: 'Not applicable', applicability_justification: 'Competence is managed under the group HR system outside this scope.' }, true],
     ['Compliant, a word the vocabulary does not have', 'Compliant', {}, false],
   ];
-  for (const [label, st, patch, ok] of tries) out(`${label}: ${verdict(I.canSetClauseStatus(k72, st, patch), ok, label)}`);
+  for (const [label, st, patch, ok] of tries) out(`${label}: ${verdict(I.canSetClauseStatus(k72, st, patch, F.ORASHI_STANDARD), ok, label)}`);
+  out('');
+  out(`The same Not applicable refusal, the register's standard passed as the fourth argument, for three standards and for none:`);
+  for (const std of [F.ORASHI_STANDARD, { code: 'ISO 9001:2015' }, F.ORASHI_SECOND_STANDARD, null]) {
+    out(`${std ? std.code : 'no standard passed'}: ${refused(I.canSetClauseStatus(k72, 'Not applicable', { applicability: 'Not applicable' }, std), 'na std')}`);
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -806,7 +811,7 @@ section('CERTIFICATION READINESS IS A LIST OF BLOCKERS');
 }
 
 /* ------------------------------------------------------------------ */
-section('HELD ITEMS, OWNER DECISIONS AND THE LIMITS THIS COURSE TEACHES WITHOUT GRADING');
+section('OWNER DECISIONS, HELD LIMITS AND FIVE RULES THIS COURSE TEACHES WITHOUT GRADING');
 out('Everything in this section is taught as a stated policy or a limit. None of it is a graded field.');
 out('');
 out('Owner decisions in force (AssuranceApps-STATUS.md section 3n, AS15), as they touch these five apps:');
@@ -824,23 +829,25 @@ out('a complete audit programme that contains a cancelled audit reads below one 
 out('a templated audit passed with no checklist items passes the unanswered-items rule vacuously; the database counts the template itself.');
 out('an unreadable today is refused by complianceStatus alone; SECTION 2 shows two other modules answering as though nothing were due.');
 out('');
-out('Findings from this course\'s recon, never graded:');
+out('Five rules the engine keeps at 9d5d3b4 (ASC-0, engines PR #212), each one asked for by this course\'s recon. Each is current behaviour, measured here:');
 {
   const aud = [{ status: 'Reported' }, { status: 'Cancelled' }, { status: 'Cancelled', cancellation_reason: 'Plant shutdown' }, { status: 'Planned', planned_end: '2026-09-01' }];
   const p = A.programmeProgress(aud, AS_OF);
   const s = A.summarise({ audits: aud }, AS_OF);
-  out(`R1: on the same four audits, one of them cancelled with no reason, programmeProgress counts ${p.outstanding} outstanding and summarise counts ${s.auditsOutstanding}. The two exports disagree, and the oracle does not model the reasonless cancellation in programmeProgress. Neither count is graded or taught as a figure.`);
+  out(`R1, one rule for outstanding: on four audits, one of them cancelled with no reason, programmeProgress counts ${p.outstanding} outstanding and summarise counts ${s.auditsOutstanding}. A cancellation without a written reason is outstanding in both, and canCompleteProgramme asks the same rule.`);
   const items = Array.from({ length: 200 }, (_, i) => ({ id: `x${i}` }));
   const resp = items.slice(0, 57).map((it) => ({ item_id: it.id, result: 'Conformant' }));
-  out(`R2: checklistProgress on 57 answered of 200 prints ${A.checklistProgress(items, resp).percent} percent. The exact half-up rounding the audit oracle uses gives one more. No graded percent sits on an exact half.`);
+  const cps = Array.from({ length: 40 }, (_, i) => ({ status: i < 23 ? 'Passed' : 'Pending' }));
+  out(`R2, a percent rounds half up on the exact fraction: checklistProgress on 57 answered of 200 prints ${A.checklistProgress(items, resp).percent}, and planProgress on 23 resolved of 40 prints ${Q.planProgress(cps).percent}. checklistProgress, programmeProgress and planProgress are the three exports that print a percent.`);
   const rr = I.certificationReadiness({ id: 's', certificate_expires: '2026-09-30' }, { clauses: [{ id: 'c', standard_id: 's', status: 'Not assessed' }] }, AS_OF);
-  out(`R3: a certificate with certificateDays ${rr.counts.certificateDays} reads certificateExpiring ${rr.counts.certificateExpiring} and certificateExpired ${rr.counts.certificateExpired} at once, while the readiness list names it only once, as serious. The expiring flag is not taught as "inside the lead window".`);
+  out(`R3, expired and expiring are two separate flags: a certificate with certificateDays ${rr.counts.certificateDays} reads certificateExpiring ${rr.counts.certificateExpiring} and certificateExpired ${rr.counts.certificateExpired}. SECTION 22 prints both flags at the edges.`);
   const one = F.IKORO_OBLIGATIONS.find((o) => o.frequency === 'One-off' && o.last_submitted_date);
   const e1 = C.explainStatus(one, AS_OF);
-  out(`R4: ${one.code} is a One-off obligation filed before its due date passed. deriveStatus reads ${e1.status}, which is the AS13-0 repair, and explainStatus gives the reason "${e1.reason}". The Compliant reason was written for a recurring obligation with a next due date ahead, and prints a negative count here.`);
+  out(`R4, a filed One-off says it is discharged: ${one.code} reads ${e1.status}, and explainStatus gives the reason "${e1.reason}"`);
   const rr5 = I.certificationReadiness(F.ORASHI_STANDARD, { clauses: F.ORASHI_CLAUSES, findings: [], actions: [], audits: F.ORASHI_AUDITS, auditClauses: F.ORASHI_AUDIT_CLAUSES }, AS_OF);
-  const cites = rr5.blockers.filter((b) => /ISO 9001/.test(b.text)).length;
-  out(`R5: the readiness list for ${F.ORASHI_STANDARD.code} carries ${cites} item citing ISO 9001 by name, and canSetClauseStatus cites ISO 9001:2015 for a Not applicable justification whatever the standard. The name printed is the one the engine was written against, whatever standard the register holds.`);
+  const cites = rr5.blockers.filter((b) => b.text.includes(F.ORASHI_STANDARD.code)).length;
+  const cites9001 = rr5.blockers.filter((b) => /ISO 9001/.test(b.text)).length;
+  out(`R5, a sentence names the register's own standard: the readiness list for ${F.ORASHI_STANDARD.code} carries ${cites} item naming ${F.ORASHI_STANDARD.code} and ${cites9001} naming ISO 9001. SECTION 18 prints the Not applicable refusal for both standards.`);
 }
 
 /* ------------------------------------------------------------------ */

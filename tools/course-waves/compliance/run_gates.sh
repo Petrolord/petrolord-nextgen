@@ -36,6 +36,8 @@ run promptleak-CONTROL 1 python3 gate_promptleak.py --plant
 run capstone-leak 0 python3 gate_capstone_leak.py
 run capstone-leak-CONTROL 1 python3 gate_capstone_leak.py --plant
 run copy-rule 0 python3 gate_copy_rule.py
+run kit-gradeprecision 0 python3 /root/dc-wavekit/gradeprecision.py $W
+run kit-sourceprose 0 node /root/dc-wavekit/sourceprose.mjs $W/compliance_dump.mjs $W/compliance_fields.mjs $W/clockguard.mjs $W/compliance_capstone.mjs --rules $W
 run copy-rule-CONTROL 1 python3 gate_copy_rule.py --plant
 python3 - <<'PY'
 import hashlib, json
@@ -44,7 +46,8 @@ files = {'structure': 'structure.py', 'vendor-closure': 'vendor/closure.py', 'di
  'kit-digestrepro': '/root/dc-wavekit/digestrepro.sh', 'clock': 'gate_clock.sh', 'kit-digestprose': '/root/dc-wavekit/digestprose.mjs',
  'kit-digestfigures': '/root/dc-wavekit/digestfigures.py', 'capstone-generator': 'compliance_capstone.mjs', 'oracle-check': 'oracle_check.py',
  'discriminate': 'discriminate.mjs', 'collisions': 'gate_collisions.py', 'promptleak': 'gate_promptleak.py',
- 'capstone-leak': 'gate_capstone_leak.py', 'copy-rule': 'gate_copy_rule.py'}
+ 'capstone-leak': 'gate_capstone_leak.py', 'copy-rule': 'gate_copy_rule.py',
+ 'kit-gradeprecision': '/root/dc-wavekit/gradeprecision.py', 'kit-sourceprose': '/root/dc-wavekit/sourceprose.mjs'}
 gates = {}
 for line in open(f'{W}/.gates.tsv'):
     name, rc, last = line.rstrip('\n').split('|', 2)

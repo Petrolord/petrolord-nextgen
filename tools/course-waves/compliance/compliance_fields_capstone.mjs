@@ -15,29 +15,25 @@
 // compliance_fields.mjs is imported here. gate_capstone_leak.py sweeps both
 // directions on every rebuild.
 //
-// EVERY GRADED FIELD IS AN INTEGER THE ENGINE RETURNS, graded EXACTLY. The
-// academy grader (public.academy_submit_capstone) compares a numeric answer to
-// a numeric expected value within a numeric tolerance and nothing else, so a
-// status word or a date cannot be a graded field in this programme. A date the
-// engine returns is graded as the whole number of days daysUntil puts between
-// it and the as-of date, which is an engine return too. And no graded value may
-// equal any number the teaching digest prints, dates included, which is why the
-// conditions below were moved until none did (gate_collisions.py).
+// EVERY GRADED FIELD IS AN INTEGER THE ENGINE RETURNS, graded at 0.5, which
+// admits exactly one integer. The academy grader (public.academy_submit_capstone)
+// compares a numeric answer to a numeric expected value within a numeric
+// tolerance and nothing else, so a status word or a date cannot be a graded
+// field in this programme. A date the engine returns is graded as the whole
+// number of days daysUntil puts between it and the as-of date, which is an
+// engine return too. And no graded value may be within its tolerance of any
+// number the teaching digest prints, dates included, which is why the
+// conditions below were moved until none was (gate_collisions.py).
 //
-// NO GRADED FIELD DEPENDS ON A HELD ITEM OR A RECON FINDING:
-//   * R1 (programmeProgress against summarise on a cancellation with no reason):
-//     every cancelled UTAPATE audit carries its reason, and the graded field is
-//     programmeProgress.percent, which does not read the reason at all.
-//   * R2 (percent rounding at an exact half): no graded percent lands on an
-//     exact half. The one graded .5 is meanOpenNcrAgeDays, where the quality
-//     oracle and the engine both round a half up, and oracle_check.py proves
-//     the two agree on it.
-//   * R3 (certificateExpiring on a lapsed certificate): certificateDays is
-//     graded, the flag is not.
-//   * R4 (the negative explainStatus reason): the reason is prose and nothing
-//     prose is graded. No EKPE obligation is a filed One-off.
-//   * R5 (ISO 9001 cited by name): prose, not graded.
-// And an unreadable today is never passed: every call gets AS_OF.
+// The five recon findings R1 to R5 were repaired upstream in ASC-0 (engines PR
+// #212, 9d5d3b4). None of them was on a graded path before the repair, and no
+// graded value moved when the engine was re-vendored: every UTAPATE NCR carries
+// a raised_date, so the created_at local-date fallback in ncrAgeDays is never
+// read, and no graded percent sat on an exact half. programmeProgress.outstanding
+// and summarise().auditsOutstanding now agree and the oracle checks both, but
+// they are not graded: UTAPATE's count is 3, which the digest prints, and a
+// count that small cannot clear the collision rule.
+// Every call gets AS_OF.
 
 export const AS_OF_YMD = '2026-10-15';
 export const AS_OF = new Date(2026, 9, 15);

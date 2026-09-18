@@ -21,8 +21,8 @@
 -- certification body, by an audit still in progress or by one later cancelled
 -- does not move a clause's last examined date.
 --
--- HELD, taught as a limit and never graded: the expiring flag that reads true
--- on a lapsed certificate (R3), the ISO 9001 citation printed whatever the
--- standard (R5), and the owner decisions of AS15 as stated policy. The capstone
--- grades two coverage counts and four day counts.
+-- The certificate's expiring and expired flags never read true together, and
+-- every refusal names the register's own standard (ASC-0). The owner decisions
+-- of AS15 are taught as stated policy. The capstone grades two coverage counts
+-- and four day counts, at a tolerance of 0.5.
 -- ============================================================================

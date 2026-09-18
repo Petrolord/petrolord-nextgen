@@ -3,7 +3,7 @@
 # row and under three time zones. Prints every comparison it made.
 W=/root/as-wip-compliance
 fail=0
-for z in UTC UTC Africa/Lagos Pacific/Kiritimati America/Los_Angeles; do
+for z in UTC UTC Africa/Lagos Pacific/Kiritimati America/Los_Angeles Pacific/Pago_Pago; do
   DIGEST_TZ=$z $W/build_digest.sh 2>/dev/null > /tmp/cq-repro.$$
   off=$(TZ=$z date +%z)
   if cmp -s /tmp/cq-repro.$$ $W/digest.txt; then echo "  TZ=$z (offset $off): byte-identical, $(wc -l < /tmp/cq-repro.$$) lines, md5 $(md5sum < /tmp/cq-repro.$$ | cut -c1-12)"; else echo "  TZ=$z (offset $off): DIFFERS"; fail=1; fi

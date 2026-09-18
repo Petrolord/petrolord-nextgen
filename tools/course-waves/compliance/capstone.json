@@ -8,32 +8,32 @@
     {
      "key": "ekpe_emissions_permit_next_action_days",
      "source": "EKPE e1: complianceStatus.explainStatus(e1).daysUntil",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "ekpe_community_report_next_due_days",
      "source": "EKPE e2 filed on its filing date: calendar.daysUntil(complianceStatus.rollForward(e2.due_date, e2.frequency))",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "ekpe_waste_return_period_start_days",
      "source": "EKPE e3: calendar.daysUntil(complianceStatus.periodStart(e3.due_date, e3.frequency))",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "ekpe_abstraction_next_action_after_filing_days",
      "source": "EKPE e4 filed and rolled: complianceStatus.explainStatus({...e4, due_date: rollForward(...)}).daysUntil",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "ekpe_slug_catcher_procedure_review_days",
      "source": "EKPE ed1: calendar.daysUntil(documentControl.nextReviewDate(ed1.issue_date, ed1.review_period_months))",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "ekpe_emergency_plan_review_days",
      "source": "EKPE ed2: calendar.daysUntil(documentControl.nextReviewDate(ed2.issue_date, ed2.review_period_months))",
-     "tol": 0
+     "tol": 0.5
     }
    ]
   },
@@ -44,32 +44,32 @@
     {
      "key": "utapate_itp_progress_pct",
      "source": "UTAPATE plan: qualityAssurance.planProgress(checkpoints).percent",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "utapate_itp_progress_after_requests_pct",
      "source": "UTAPATE plan after the six requests, each through canRemoveCheckpoint or canDecideCheckpoint: planProgress.percent",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "utapate_oldest_open_ncr_days",
      "source": "UTAPATE NCRs: qualityAssurance.summarise(...).oldestOpenNcrDays",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "utapate_mean_open_ncr_age_days",
      "source": "UTAPATE NCRs: qualityAssurance.summarise(...).meanOpenNcrAgeDays",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "utapate_checklist_progress_pct",
      "source": "UTAPATE checklist: auditManagement.checklistProgress(items, responses).percent",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "utapate_programme_delivered_pct",
      "source": "UTAPATE programme: auditManagement.programmeProgress(audits).percent",
-     "tol": 0
+     "tol": 0.5
     }
    ]
   },
@@ -80,32 +80,32 @@
     {
      "key": "obeakpu_clause_812_last_examined_days",
      "source": "OBEAKPU 8.1.2: calendar.daysUntil(isoCompliance.clauseCoverage(...) row lastExaminedOn)",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "obeakpu_clause_93_last_examined_days",
      "source": "OBEAKPU 9.3: calendar.daysUntil(isoCompliance.clauseCoverage(...) row lastExaminedOn)",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "obeakpu_closed_major_finding_age_days",
      "source": "OBEAKPU OSF-2026-002: isoCompliance.findingAgeDays",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "obeakpu_evidenced_claims",
      "source": "OBEAKPU: isoCompliance.certificationReadiness(...).counts.evidenced",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "obeakpu_certificate_days",
      "source": "OBEAKPU: isoCompliance.certificationReadiness(...).counts.certificateDays",
-     "tol": 0
+     "tol": 0.5
     },
     {
      "key": "obeakpu_clauses_covered",
      "source": "OBEAKPU: isoCompliance.certificationReadiness(...).counts.covered",
-     "tol": 0
+     "tol": 0.5
     }
    ]
   }

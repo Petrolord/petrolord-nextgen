@@ -2,8 +2,8 @@
 
 Academy module `assurance`, path_order 60, slug `compliance`. Subject: five of
 the ten `engines/assurance` modules plus the calendar they share, as vendored
-sha-identical from petrolord-engines **6b00f43** (the squash merge of PR #211,
-AS15, the commit the Suite pins): `complianceStatus.js`, `documentControl.js`,
+sha-identical from petrolord-engines **9d5d3b4** (ASC-0, PR #212, which
+repaired the five findings below; the foundation was first cut at 6b00f43): `complianceStatus.js`, `documentControl.js`,
 `qualityAssurance.js`, `auditManagement.js`, `isoCompliance.js` and
 `calendar.js`; their goldens under `test-data/assurance/goldens/`, their
 oracles and FINDINGS under `tools/validation/assurance/`; and the live Suite
@@ -116,67 +116,46 @@ was measured three ways rather than read:
 So no clock read needed a fake timer; there is nothing to report under that
 heading.
 
-### 3b. R1: programmeProgress and summarise disagree on a cancellation with no reason. ENGINE SELF-CONTRADICTION, ORACLE GAP.
+### 3b to 3f. R1 to R5: REPAIRED UPSTREAM IN ASC-0 (engines PR #212, main 9d5d3b4)
 
-    node -e "const A=await import('/root/wt-as-compliance-nextgen/packages/engines/engines/assurance/auditManagement.js');
-      const a=[{status:'Reported'},{status:'Cancelled'},{status:'Cancelled',cancellation_reason:'Plant shutdown'},{status:'Planned',planned_end:'2026-09-01'}];
-      const t=new Date(2026,9,15); console.log(A.programmeProgress(a,t).outstanding, A.summarise({audits:a},t).auditsOutstanding)"
-    # 2 1   (run as an ES module: node --input-type=module -e ...)
+This recon found five defects and reported them under rule 5. The lead ruled
+on all five and the engine was repaired before a lesson was written. The
+course now teaches the repaired behaviour as current behaviour (digest SECTION
+23, "Five rules the engine keeps"), and none of the five is a held item any
+longer. Each ruling, with the reproduction that now gives the repaired answer:
 
-AS15 Q11 made a cancellation without a reason count as outstanding in
-`programmeProgress` and `canCompleteProgramme`. `summarise().auditsOutstanding`
-still counts it done. The Programmes page and the dashboard can therefore print
-different outstanding counts for the same audits. The oracle's
-`programme_progress` does not model the AS15 rule either (engine 2, oracle 1 on
-the same input), and no golden case has a reasonless cancellation inside
-`programmeProgress`, so the oracle has never checked `outstanding` there.
-**Held: neither count is graded or taught as a figure.** The graded
-`programmeProgress.percent` does not read the reason and the oracle agrees on it.
-The digest prints R1 in SECTION 23. Latent in production today: the database
-constraint `audit_records_cancel_needs_reason` refuses the row on the write path.
+- **R1, one rule for "outstanding".** `programmeProgress`, `canCompleteProgramme`
+  and `summarise` ask one predicate (`isOutstandingAudit`): an audit is
+  outstanding until it is reported, closed, or cancelled WITH a written reason.
+  The oracle models Q11. On four audits with one reasonless cancellation both
+  counts now read 2 (they read 2 and 1 at 6b00f43). Not graded: see section 6.
+- **R2, percents round half up on the exact rational.**
+  `floor((200n + d) / 2d)` in checklistProgress, programmeProgress and
+  planProgress, the only three exports that print a percent. 57 of 200 now
+  prints 29 (it printed 28). The exact-half guard in `oracle_check.py` is
+  RETIRED: engine and oracle round the same way by construction, and the
+  per-field comparison would catch any divergence.
+- **R3, `certificateExpiring` is `0 <= days <= 90`.** A lapsed certificate
+  reads expiring false, expired true. Day 0 reads "The certificate expires
+  today. Book the recertification audit now."
+- **R4, a filed One-off is discharged in words too.** The reason reads
+  "Filed <date>. A one-off obligation, nothing further is due." (was "next due
+  in -62 days"). The dump now THROWS if any explainStatus reason prints a
+  negative day count, so R4 cannot regress unseen.
+- **R5, sentences name the register's standard.** `canSetClauseStatus` takes
+  the standard record as a 4th argument; §9.2 is cited for ISO 9001, 14001 and
+  45001, §4.3 for ISO 9001 only, and a call with no standard is neutral. The
+  digest prints the Not applicable refusal for ISO 14001, ISO 9001, ISO 45001
+  and no standard.
 
-### 3c. R2: percent rounding at an exact half. KNOWN, UNPINNED.
-
-`checklistProgress` on 57 answered of 200: engine 28, the audit oracle's exact
-half-up 29. FINDINGS-audit ambiguity 2 calls it cosmetic and no golden pins it.
-The quality oracle rounds the same way as the engine (float then half up), so
-`planProgress` agrees with its oracle there. **Handled by construction:**
-`oracle_check.py` refuses any graded checklist or programme percent that sits on
-an exact half, and none does.
-
-### 3d. R3: certificateExpiring is true for a lapsed certificate. LABEL AGAINST ITS OWN NUMBERS, LATENT.
-
-    certificationReadiness({id:'s',certificate_expires:'2026-09-30'}, {clauses:[...]}, 2026-10-15)
-    -> counts.certificateDays -15, certificateExpiring true, certificateExpired true
-
-The readiness list names a lapsed certificate once, as `serious`; the counts
-flag it as expiring as well as expired, because the flag is `certDays <= 90`
-with no lower bound. The oracle mirrors the flag, so it is oracle-consistent and
-still wrong as a label. The ISO app reads `certificateExpired` first
-(`certificateState` in `isoPayload.js`), so nothing on screen is wrong today.
-**Held: the flag is not taught as "inside the lead window" and is not graded;
-`certificateDays` is graded and the oracle checks it.**
-
-### 3e. R4: explainStatus prints "next due in -62 days" for a filed One-off. ENGINE PROSE DEFECT, LIVE.
-
-    explainStatus({frequency:'One-off', due_date:'2026-08-14', last_submitted_date:'2026-08-10'}, 2026-10-15)
-    -> { status: 'Compliant', reason: 'Last filed 2026-08-10, next due in -62 days.', daysUntil: -62 }
-
-AS13-0 made a filed One-off Compliant after its due date; the Compliant reason
-was written for a recurring obligation with a next due date ahead and was not
-updated. Regulatory Compliance prints this reason on the obligation detail page
-(`ComplianceDetail.jsx`, `explainStatus(obligation, new Date())`). **Held: the
-status is taught, the sentence is printed once in the digest with a frame and
-never taught as a reading; no reason text is graded, and no capstone obligation
-is a filed One-off.** A one-line engine repair (a One-off branch in
-`explainStatus`) would clear it; that is the lead's call.
-
-### 3f. R5: ISO 9001 cited by name for any standard. PROSE, NOT GRADED.
-
-`certificationReadiness` cites "ISO 9001 section 9.2" in the never-audited
-blocker and `canSetClauseStatus` cites "ISO 9001:2015 section 4.3", whatever
-standard the register holds (ORASHI is ISO 14001). Taught as the engine's own
-wording.
+Also in ASC-0 and in scope: `calendar.localDateOf`, which reads a created_at
+INSTANT as its local calendar date; `ncrAgeDays` now uses it for the
+created_at fallback. No teaching or capstone NCR lacks a raised_date, so no
+digest or graded value moved. The digest does not print a localDateOf example
+on purpose: its answer depends on the time zone by design, and the digest must
+be identical in every zone. Article agreement ("An archived", "An emergency")
+and plural agreement in two readiness sentences are also repaired; none of
+those sentences was quoted in a way a lesson depends on.
 
 ### 3g. Two contracts that are not defects, stated so nobody grades against them
 
@@ -192,12 +171,12 @@ wording.
 ## 4. FINDINGS held items and ambiguities in scope
 
 From FINDINGS-compliance, -iso, -audit, -quality, -documents and -calendar at
-6b00f43 (every knownDefect in them is now `repaired` and gated; the items below
+9d5d3b4 (every knownDefect in them is now `repaired` and gated; the items below
 are the ones still open):
 
 - documentControl: `nextReviewDate` with no period returns null, and the
   24-month default is the caller's to apply; a fractional period truncates.
-- auditManagement: percent rounding at an exact half (R2 above); a Complete
+- auditManagement: a Complete
   programme with cancelled audits reads below 100 percent, by design; a
   templated audit passed with no items passes the unanswered rule vacuously.
 - isoCompliance: two examinations of one clause on the same day keep the first
@@ -257,10 +236,11 @@ by reading goldens (`oracle_check.py`, 18 of 18):
 | findingAgeDays | oracle_iso.finding_age |
 | certificationReadiness.counts.evidenced, covered, certificateDays | oracle_iso.certification_readiness |
 
-Outputs deliberately NOT graded because the oracle does not check them or
-disagrees: `programmeProgress.outstanding` and `summarise.auditsOutstanding`
-(R1), every `reason` and blocker `text` (oracles strip prose), `certificateExpiring`
-(R3), every sort order (checked by the goldens as orders, not a number).
+Outputs deliberately NOT graded: `programmeProgress.outstanding` and
+`summarise().auditsOutstanding`, which agree and are oracle-checked after ASC-0
+but are 3 on the UTAPATE programme, a number the digest prints, so they cannot
+clear the collision rule; every `reason` and blocker `text` (oracles strip
+prose); `certificateExpiring`; every sort order.
 
 ## 7. The split with `riskchange`
 
@@ -282,9 +262,14 @@ refusal class). Free ground.
 
 ## 9. Vendoring
 
-51 paths (50 discovered seeds plus the goldens runner the gate imports),
-walked by `vendor/closure.py`, sha-identical with engines 6b00f43 and with the
-Suite's vendoring, ledgered as `extra` in group `9-assurance-ahead-of-pin`
-because the canonical pin 709172f predates the domain. Assurance suites 10 of
-10 files, 2,391 of 2,391 tests green; the whole ledgered runner 125 suites,
-6,344 tests, 24 failing, all 24 allow-listed from before this wave.
+At 9d5d3b4 (ASC-0): 53 paths (52 discovered seeds, now including the new
+assurance.copy and assurance.instants suites, plus the goldens runner),
+walked by `vendor/closure.py` and sha-identical with engines 9d5d3b4. The
+vendor commit is the sibling's `chore(engines): vendor the assurance family
+(engines 9d5d3b4)` (e2211cc0), cherry-picked, so `packages/engines` is the same
+git tree on both branches (f37e30d0). Ledgered as `extra` in group
+`9-assurance-ahead-of-pin` (53 entries) because the canonical pin 709172f
+predates the domain. The Suite still vendors 6b00f43, so it matches 6 of the 53
+paths until it re-vendors. Assurance suites 12 of 12 files, 2,569 of 2,569
+tests green; the whole ledgered runner 127 suites, 6,522 tests, 24 failing,
+all 24 allow-listed from before this wave.

@@ -5,7 +5,7 @@
 // Every wrong route is the ENGINE asked the wrong question (the wrong date, the
 // wrong record set, a rule skipped) or the one piece of arithmetic a learner
 // most plausibly does instead, and each is named for the mistake. Every field
-// here is an integer graded exactly, so a route is BLIND only when it lands on
+// here is an integer graded at 0.5, so a route is BLIND only when it lands on
 // the right answer; the table also prints the CLOSEST MISS in whole units,
 // because "it moved" and "it moved enough to be caught" are two claims, and for
 // an exact integer the smallest possible miss is one.
@@ -261,6 +261,6 @@ for (const [key, { truth, routes: rs }] of Object.entries(WRONG)) {
 }
 if (Object.keys(WRONG).length !== 18) { console.log('  REFUSES: not eighteen fields'); process.exit(2); }
 console.log(`\ndiscriminate: 18 graded fields, ${routes} wrong routes swept, ${weak} WEAK field(s)`);
-console.log(`the closest miss anywhere in the eighteen: ${closest.key} at ${closest.miss} unit(s), against an exact tolerance`);
+console.log(`the closest miss anywhere in the eighteen: ${closest.key} at ${closest.miss} unit(s), against a tolerance of ${fields[closest.key][3]}`);
 if (routes < 18 * 3) { console.log('  GATE REFUSES: fewer than three wrong routes a field is not a sweep'); process.exit(2); }
 process.exit(weak ? 1 : 0);
