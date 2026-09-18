@@ -42,7 +42,7 @@ export const MODES = [
   ['series', 'Two resistances in series, and which one is holding the rate back'],
   ['film', 'The protective film, and an onset temperature that MOVES'],
   ['ph', 'pH, the reference it is taken against, and the refusal below it'],
-  ['wetting', 'Water wetting, the largest single lever in this model'],
+  ['wetting', 'Water wetting, a dropdown that can take the rate to zero'],
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -302,8 +302,8 @@ export const WettingMode = ({ ww }) => {
       <p className="text-xs text-slate-400 mt-2 mb-0">
         Steel does not corrode where it is oil wet, and the engine treats that as a REGIME rather than as a multiplier
         applied always. The multiplier for the oil-wet regime is zero, a zero rate is the strongest reassurance a screen
-        can give, and whether the wall is oil wet is an INPUT. That makes this dropdown the largest single lever in the
-        whole model.
+        can give, and whether the wall is oil wet is an INPUT. That makes this dropdown able to take the rate to zero
+        with nothing else touched.
       </p>
       <Tbl
         head={['regime', 'wetting factor', 'rate mm/yr', 'what the engine says']}

@@ -3,7 +3,8 @@
 {{panel:fc-inhibitor-integrity-explorer}}
 
 An input a program silently moves is an input the reader no longer controls.
-This module moves three of them and says so in each case, and the saying is as
+This module moves two of them, the efficiency and the availability, and says
+so in each case, and the saying is as
 much of the design as the moving.
 
 | clamped input | what the engine did | the clamp it named |

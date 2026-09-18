@@ -35,7 +35,7 @@ q(3, "A user types a wetting regime the engine cannot resolve. What happens?",
  ["It falls through to the water-wet branch, which is the most limiting of the three regimes.",
   "It falls through to the intermittent branch.",
   "It resolves to whichever regime was used last."],
- "The wetting regime is the largest single lever in this model, so resolving an unrecognised string to any branch would be choosing that lever on the user's behalf from a typing mistake. The engine works hard to understand what was meant and never invents what was meant.")
+ "The wetting regime can take the rate to zero on its own, so resolving an unrecognised string to any branch would be choosing that lever on the user's behalf from a typing mistake. The engine works hard to understand what was meant and never invents what was meant.")
 
 q(1, "The strings oilWet, OILWET, oil-wet, Oil Wet and oil_wet all reach the same branch. What does that tell you about the matcher?",
  "It is insensitive to case and to punctuation.",
@@ -77,7 +77,7 @@ q(0, "A water cut of 5 is typed into the intermittent regime. Why does the engin
  ["A water cut above one is read as a percentage, and the engine will not guess which unit was meant.",
   "The engine refuses any water cut larger than its own default parameter would supply.",
   "It exceeds the corrosion inhibitor availability."],
- "Nought to one on every fraction is one of the four range guards this module actually enforces. The message names the value it was given, and a water cut of -0.1 refuses with the same shape.")
+ "Nought to one on every fraction is one of the range guards this module enforces on what a caller types. The message names the value it was given, and a water cut of -0.1 refuses with the same shape.")
 
 q(1, "Why does the engine describe the oil-wet zero as assumed rather than calculated?",
  "The zero follows by arithmetic from a word chosen in a list, and nothing was measured to produce it.",
@@ -87,11 +87,11 @@ q(1, "Why does the engine describe the oil-wet zero as assumed rather than calcu
  "The multiplier for the oil-wet regime is 0.000000, that multiplier reaches the rate, and the regime arrived from a dropdown. The strongest reassurance on the screen would otherwise arrive from the weakest input.")
 
 q(3, "Across the three wetting regimes, with every other input held still, what happens to the rate?",
- "It runs from its full water-wet value down to zero, which is the widest span any single input produces here.",
+ "It runs from its full water-wet value down to zero, with nothing but the dropdown moved.",
  ["It moves by less than the corrosion inhibitor availability moves it across that input's own range.",
   "It stays where it is, because the wetting factor is applied after the band label has been chosen.",
   "It moves only between the water-wet and the intermittent branches, the oil-wet branch being a refusal."],
- "Water wetting is the largest single lever in this model and that is why it carries a module of its own at this tier. The span is produced by one dropdown with nothing else touched.")
+ "One dropdown takes the rate to zero with nothing else touched, and that is why the regime carries a module of its own at this tier.")
 
 q(2, "What separates the oil-wet withholding from a refusal?",
  "A refusal means no answer is available, while a withholding means the arithmetic ran and its outputs would mislead as verdicts.",

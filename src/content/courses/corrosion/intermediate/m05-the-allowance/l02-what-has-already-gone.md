@@ -44,9 +44,10 @@ statement about a new line nor a pure statement about this one. It is the gap a
 reader has to close, measured from where the wall is now.
 
 This is the sort of distinction that reads as pedantry until somebody uses the
-required allowance as a specification for a replacement line. It is close to
-right and it is short by the consumed depth, and the gap is invisible unless you
-know which of the two fields carries the history.
+required allowance as the allowance this line needs to reach its design life.
+For a new line it is exactly that. For this line it is short by the consumed
+depth, and the gap is invisible unless you know which of the two fields carries
+the history.
 
 ## What to write down
 

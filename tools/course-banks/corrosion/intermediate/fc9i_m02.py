@@ -16,7 +16,7 @@ q(1, "A corrosion inhibitor runs at 95.000000 percent efficiency and 80.000000 p
   "The average of the efficiency and the availability, as a percentage."],
  "The uninhibited rate applies for the fraction of the time the chemical is off the wall, so the two percentages combine rather than one of them winning. The engine takes them as separate inputs for exactly this reason.")
 
-q(2, "By how many percentage points does that same row fall short of the datasheet figure?",
+q(2, "At 95.000000 percent efficiency and 80.000000 percent availability, by how many percentage points does the effective protection fall short of the datasheet figure?",
  "19.000000 percentage points.",
  ["0.100000 percentage points, which is where the engine's warning first fires at any efficiency.",
   "4.800000 percentage points.",
@@ -49,7 +49,7 @@ q(1, "At 95.000000 percent efficiency, which availability row carries a metal lo
  ["50.000000 percent, where the shortfall equals the protection.",
   "70.000000 percent, which is the lowest row the engine will accept.",
   "90.000000 percent, which is the shipped availability on the studio case."],
- "At 50.000000 percent availability the effective protection is 47.500000 percent and the loss is 10.500000 times the datasheet number. Keep going down the column and the effect compounds, reaching 15.250000 times at 25.000000 percent.")
+ "At 50.000000 percent availability the effective protection is 47.500000 percent and the loss is 10.500000 times the datasheet number. Keep going down the column and the loss keeps rising in equal steps per percentage point, reaching 15.250000 times at 25.000000 percent.")
 
 q(3, "On which availability row is the datasheet figure the number the wall actually sees?",
  "At 100.000000 percent, where the shortfall is 0.000000 percentage points.",

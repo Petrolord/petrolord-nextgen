@@ -655,7 +655,7 @@ export const heldConstantsTable = () => {
     };
   });
   const exportRows = EXPORT_PINS.map(([name, key]) => ({
-    name, exported: exportedValue(name), measuredValue: MEASURED[key], rel: relDiff(exportedValue(name), MEASURED[key]),
+    name, key, exported: exportedValue(name), measuredValue: MEASURED[key], rel: relDiff(exportedValue(name), MEASURED[key]),
   }));
   const goldRows = GOLDEN_PINS.map(([goldKey, key]) => ({
     goldKey,
@@ -669,6 +669,13 @@ export const heldConstantsTable = () => {
     pins,
     exportRows,
     goldRows,
+    // WHICH EXPORTS ARE ROWS OF THE PIN TABLE. Fifteen names are exported and
+    // one of them, the sour threshold in psia, is the bar row again rather
+    // than a pinned constant of its own, so sixteen pinned constants have no
+    // export. Counted here so a lesson that states either number is pinned.
+    exportsThatArePins: exportRows.filter((r) => pins.some((p) => p.key === r.key)).length,
+    exportsNotPins: exportRows.filter((r) => !pins.some((p) => p.key === r.key)).map((r) => r.name),
+    pinsWithNoExport: pins.filter((p) => !exportRows.some((r) => r.key === p.key)).length,
     goldenHeldKeys: Object.keys(GOLD.heldConstants).length,
     sourPsia: MEASURED.sourPsia,
     sourBar: MEASURED.sourBar,
@@ -845,7 +852,7 @@ export const phAndItsReference = () => {
   };
 };
 
-/** Section 8. Water wetting, and the largest single lever in this model. */
+/** Section 8. Water wetting, and a single dropdown that can take the rate to zero. */
 export const waterWetting = () => {
   const regimes = [['waterWet', 1], ['intermittent', OPUKUSHI.waterCutFrac], ['oilWet', 0]].map(([reg, expected]) => {
     const s = C.screen({
@@ -1560,7 +1567,7 @@ export const goldenDiscrimination = () => ({
 /** What is graded in this course, and why each is clear of every held item. */
 export const GRADED_GROUPS = Object.freeze([
   ['the stream bookkeeping: the CO2 partial pressure, the H2S partial pressure in bar and in psia, and the H2S to CO2 mole ratio',
-    'each is the total pressure times a mole fraction, or a ratio of two mole fractions, or a conversion by a factor exact by the definition of the bar. No correlation constant, no fugacity coefficient, no threshold and no boundary is in any chain'],
+    'each is the total pressure times a mole fraction, or a ratio of two mole fractions, or a conversion by the engine\'s bar to psia factor, which section 24 checks against the definitions of the bar and of the pound-force. No correlation constant, no fugacity coefficient, no threshold and no boundary is in any chain'],
   ['the flow definition: the Reynolds number',
     'density times velocity times diameter over viscosity is a definition. The Blasius pair and the branch switch act on the friction factor DOWNSTREAM of it, and no graded field reads a friction factor or a shear stress'],
   ['the inhibitor arithmetic: the effective protection, the shortfall, the retained fraction and the metal-loss ratio',
@@ -1650,18 +1657,24 @@ export const UNIT_CONVERSIONS = Object.freeze([
 /** Section 24. Units, and the one studio factor that is truncated. */
 export const unitsAndTruncation = () => {
   const ap = appScreen();
-  const exact = C.screen({ ...APP, pTotalBar: (725 + 14.7) / MEASURED.barPsia });
+  const viaEngine = C.screen({ ...APP, pTotalBar: (725 + 14.7) / MEASURED.barPsia });
+  // THE FACTOR REBUILT FROM THE DEFINITIONS of the pound, standard gravity, the
+  // inch and the bar. The engine's comment calls its factor exact by definition
+  // and it sits about two parts in a billion above this.
+  const byDefinition = 100000 / (0.45359237 * 9.80665 / (0.0254 * 0.0254));
   const barWouldBe = CLAIMED_SOUR_PSIA / MEASURED.barPsia;
   return {
     conversions: UNIT_CONVERSIONS.map((r) => [...r]),
-    barPsiaExact: MEASURED.barPsia,
+    barPsiaEngine: MEASURED.barPsia,
+    barPsiaByDefinition: byDefinition,
+    engineOverDefinition: relDiff(MEASURED.barPsia, byDefinition),
     studioDivisor: STUDIO_PSIA_DIVISOR,
     divisorFraction: Math.abs(STUDIO_PSIA_DIVISOR - MEASURED.barPsia) / MEASURED.barPsia,
     studioPTotalBar: APP.pTotalBar,
     studioRateMmYr: ap.rate.rateMmYr,
-    exactPTotalBar: (725 + 14.7) / MEASURED.barPsia,
-    exactRateMmYr: exact.rate.rateMmYr,
-    rateFraction: relDiff(exact.rate.rateMmYr, ap.rate.rateMmYr),
+    enginePTotalBar: (725 + 14.7) / MEASURED.barPsia,
+    engineRateMmYr: viaEngine.rate.rateMmYr,
+    rateFraction: relDiff(viaEngine.rate.rateMmYr, ap.rate.rateMmYr),
     sourPsia: MEASURED.sourPsia,
     claimedSourPsiaAsBar: barWouldBe,
     // A DIFFERENT RELATIONSHIP FROM SECTION 3's, on the same pair of numbers.

@@ -41,7 +41,7 @@
    "It falls with pressure and with temperature together, so the coefficient cannot be read from the pressure alone at any point on the curve."
   ],
   "answer": 1,
-  "explanation": "The gap between a partial pressure and a fugacity is negligible near atmospheric pressure and is not negligible on a high pressure line. The constants behind that curve are held for literature."
+  "explanation": "At 249.000000 bar it is 0.531526, and above the cap the engine holds it flat and says so in a note. The constants behind that curve are held for literature."
  },
  {
   "prompt": "At a total pressure of 249.000000 bar the coefficient is 0.531526 and at 400.000000 bar it is 0.530179. What has happened in between?",
@@ -85,7 +85,7 @@
    "It clamps the fraction to 1 and records the clamp in the list of inputs the engine moved, alongside the corrosion inhibitor clamps."
   ],
   "answer": 1,
-  "explanation": "The range guard on a fraction is one of very few guards this module enforces. Nought to one on every fraction, nought to fourteen on pH, a temperature above absolute zero, and the partial pressure sum against the total."
+  "explanation": "Nought to one on every fraction is one of the range guards this module enforces, alongside nought to fourteen on pH, a temperature above absolute zero, and the partial pressure sum against the total."
  },
  {
   "prompt": "A blank carbon dioxide box and a carbon dioxide mole fraction of 3 are both refused, and the two messages are different. Why?",

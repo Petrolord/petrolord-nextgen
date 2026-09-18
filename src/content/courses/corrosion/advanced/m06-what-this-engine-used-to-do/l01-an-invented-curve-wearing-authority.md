@@ -6,7 +6,7 @@ This module is the one place in the course whose subject is what this engine did
 
 Before the repair this engine computed a sour-service severity region from an expression of its own, labelled it with the names of two standards, and served three named material recommendations off it: what steel to buy, when to control hardness, and when to qualify weldments.
 
-Four measurements settled what the expression was worth. Moving its pH pivot by a whole unit left the validation suite entirely green. Widening one of its region boundaries by a factor of two left the suite green. A missing pH made the expression not-a-number, both of its comparisons failed, and it fell through to the hardest material recommendation in the file from an input nobody had supplied.
+Three measurements show what the expression was worth. Moving its pH pivot by a whole unit left the validation suite entirely green. Widening one of its region boundaries by a factor of two left the suite green. A missing pH made the expression not-a-number, both of its comparisons failed, and it fell through to the hardest material recommendation in the file from an input nobody had supplied.
 
 ## The general lesson
 

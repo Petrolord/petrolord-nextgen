@@ -11,7 +11,7 @@
   "explanation": "A partial pressure is the total pressure multiplied by a mole fraction, so dividing one by the other leaves the ratio of the two mole fractions at any pressure whatsoever. Two mole percentages out of a gas analysis are enough to form it."
  },
  {
-  "prompt": "The digest forms that ratio two ways at five pressures and prints the difference. What is the difference column?",
+  "prompt": "The digest forms the H2S to CO2 ratio two ways at five pressures and prints the difference. What is the difference column?",
   "options": [
    "Zero below the fugacity cap and non-zero above it.",
    "Small and falling as the pressure rises towards the cap.",
@@ -88,7 +88,7 @@
   "explanation": "That ratio is formed from an H2S mole fraction of 0.001000 and a CO2 mole fraction of 0.030000, and it would be the same number at any total pressure."
  },
  {
-  "prompt": "Raise the H2S on that case from 0.1 to 1 mol percent. Why is the rate unchanged?",
+  "prompt": "Raise the H2S on the studio's shipped case from 0.1 to 1 mol percent. Why is the rate unchanged?",
   "options": [
    "The regime change removes the corrosion inhibitor credit and the two effects cancel.",
    "H2S is not in the CO2 rate correlation, so it cannot move the rate.",
@@ -99,7 +99,7 @@
   "explanation": "The ratio becomes 0.333333333333 and the regime becomes sulphide. That the rate does not move is the lesson in one line, because H2S reaches the regime word and the threshold comparison and reaches the correlation nowhere at all."
  },
  {
-  "prompt": "So what DOES change on that screen when the H2S goes to 1 mol percent?",
+  "prompt": "On the shipped case, what DOES change on the screen when the H2S goes from 0.1 to 1 mol percent?",
   "options": [
    "Both of the fields a reader summarises by are held back, and the rate becomes a ceiling.",
    "The rate falls, and the band label and the remaining life follow it down.",
@@ -118,7 +118,7 @@
    "A refusal, because a ratio cannot be formed from a zero."
   ],
   "answer": 2,
-  "explanation": "With no CO2 partial pressure there is no ratio to form. Both unknown branches carry a note, which they did not always, because a panel printing the note unconditionally rendered an empty paragraph whenever the branch had none."
+  "explanation": "With no CO2 partial pressure there is no ratio to form. Both unknown branches carry a note, so a panel printing the note unconditionally always has a sentence to print."
  },
  {
   "prompt": "The sour service door compares one partial pressure against one threshold. What else does it do?",

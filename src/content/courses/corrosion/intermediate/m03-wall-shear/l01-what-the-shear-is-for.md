@@ -61,9 +61,10 @@ says so rather than leaving the row empty.
 
 ## What the number is worth
 
-The shear is a measurement of the flow and the verdict on it is a stated
-convention, so a reader should hold the two at different levels of confidence
-even though they arrive in the same row.
+The shear is computed through this module's own friction factor, whose
+constants are held, and the verdict on it is a stated convention on a held
+threshold, so neither carries more authority than the unsourced numbers
+underneath it, however solid the row looks.
 
 ## Exercise
 

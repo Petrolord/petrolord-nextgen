@@ -34,7 +34,7 @@ in metres a second, diameter in metres and allowances in millimetres. It does
 not give you Fahrenheit, psig, feet a second or inches for you to convert.
 
 That is not a convenience. The studio converts a psig pressure to bar by
-dividing by a truncated factor, and the engine exports the exact one, so a
+dividing by a truncated factor, and the engine exports a far closer one, so a
 pressure taken through the app and a pressure taken through the engine differ in
 the sixth significant figure and so does every rate downstream. That difference
 is far too small for any screening decision and quite large enough to fail a

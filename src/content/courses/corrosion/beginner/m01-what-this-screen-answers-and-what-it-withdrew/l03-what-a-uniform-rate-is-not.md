@@ -6,7 +6,7 @@ The rate this engine returns is a general uniform rate. The engine says so in it
 
 ## What a reader will look for and will not find
 
-The module publishes 8 items it will not pretend to answer, and four of them are the ones people reach for first. There is no inspection interval, so the app cannot tell you when to look at the line again. There is no minimum thickness and no retirement thickness, so it cannot tell you what wall to stop at. There is no fitness for service assessment of any kind. Producing any of the four means adopting a standard this module does not carry.
+The module publishes 8 items it will not pretend to answer, and three of those items hold the four things people reach for first. There is no inspection interval, so the app cannot tell you when to look at the line again. There is no minimum thickness and no retirement thickness, so it cannot tell you what wall to stop at. There is no fitness for service assessment of any kind. Producing any of the four means adopting a standard this module does not carry.
 
 Two more absences are about mechanisms rather than about limits. The engine holds no pitting criterion, so it says nothing about pit depth or pit growth. It holds no sulphide stress cracking criterion and no hydrogen induced cracking criterion, so the hydrogen sulphide comparison it does make is a screening flag and never a cracking verdict.
 

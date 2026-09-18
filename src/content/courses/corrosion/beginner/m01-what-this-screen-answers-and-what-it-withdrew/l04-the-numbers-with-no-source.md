@@ -6,7 +6,7 @@ Read the list once and the shape of this course follows. Every constant of the r
 
 ## Held is not the same as unmeasured
 
-Held means no source, and it says nothing about whether the number is known. Every one of these constants is measured out of the engine's behaviour by asking a question whose answer is that constant alone, and the measurement is compared against a literal in a third file. 30 constants are pinned that way. The engine exports 15 of them by name, so what it declares and what it does can be compared, and the vendored oracle carries 28 of them in a block of its own as a fourth copy.
+Held means no source, and it says nothing about whether the number is known. Every one of these constants is measured out of the engine's behaviour by asking a question whose answer is that constant alone, and the measurement is compared against a literal in a third file. 30 constants are pinned that way. The engine exports 15 of them by name, so what it declares and what it does can be compared, and the vendored golden carries 28 of them in a block of its own as a fourth copy.
 
 The reason for so many copies is arithmetic. A constant that lives in the engine and in the oracle cannot be validated by comparing the engine with the oracle. Both files move together and the comparison stays green, which is what a paired experiment on this module found. A pin is a comparison against a third copy and it is still not a validation against a source.
 

@@ -29,7 +29,9 @@ The protection fell from 95.000000 percent to 76.000000 percent, a shortfall of
 datasheet number. Those two figures describe the same row and they feel
 different sizes, because what survives the corrosion inhibitor is the small
 remainder and it is the remainder that sets the loss. Keep going down the
-availability column and the effect keeps compounding.
+availability column and the loss keeps rising by the same amount for every
+percentage point of availability lost, because the ratio is a straight line in
+the availability.
 
 | efficiency percent | availability percent | effective protection percent | shortfall pp | metal loss against the datasheet number |
 | --- | --- | --- | --- | --- |
@@ -59,9 +61,9 @@ unreachable case as the base case.
 Availability is an operations question. It is pump uptime, tank level, injection
 point integrity and how long the truck takes to arrive. This module gives you a
 way to price those things in metal, which is the only currency the wall
-understands. An availability improvement of a few
-percentage points is worth more here than a better chemical, and the whole
-argument is two typed percentages and a division.
+understands. Ten percentage points of availability, from 80.000000 to
+90.000000 percent, take the metal loss on the same 95 percent product from
+4.800000 to 2.900000 times the datasheet number, and the whole argument is two typed percentages and a division.
 
 ## Exercise
 

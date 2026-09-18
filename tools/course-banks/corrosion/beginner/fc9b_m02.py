@@ -32,7 +32,7 @@ q(1, "Walk the total pressure up at a fixed composition and read the fugacity co
  ["It rises with pressure, which is why a high pressure line reports a fugacity above its own partial pressure.",
   "It holds near one until the cap is reached and then drops in a single step to 0.530179, which is the value it is held at above the cap.",
   "It falls with pressure and with temperature together, so the coefficient cannot be read from the pressure alone at any point on the curve."],
- "The gap between a partial pressure and a fugacity is negligible near atmospheric pressure and is not negligible on a high pressure line. The constants behind that curve are held for literature."),
+ "At 249.000000 bar it is 0.531526, and above the cap the engine holds it flat and says so in a note. The constants behind that curve are held for literature."),
 
 q(2, "At a total pressure of 249.000000 bar the coefficient is 0.531526 and at 400.000000 bar it is 0.530179. What has happened in between?",
  "The pressure cap was reached, so the coefficient is held flat at its value there and `pressureCapApplied` turns true.",
@@ -60,7 +60,7 @@ q(1, "A user types 3 into the box that wants a carbon dioxide mole fraction. Wha
  ["It accepts the figure and reports a partial pressure three hundred times the total pressure, since the range guard covers only negative values.",
   "It reads the number as mole percent, divides by a hundred and carries on, which is the conversion the studio layer would have applied.",
   "It clamps the fraction to 1 and records the clamp in the list of inputs the engine moved, alongside the corrosion inhibitor clamps."],
- "The range guard on a fraction is one of very few guards this module enforces. Nought to one on every fraction, nought to fourteen on pH, a temperature above absolute zero, and the partial pressure sum against the total."),
+ "Nought to one on every fraction is one of the range guards this module enforces, alongside nought to fourteen on pH, a temperature above absolute zero, and the partial pressure sum against the total."),
 
 q(2, "A blank carbon dioxide box and a carbon dioxide mole fraction of 3 are both refused, and the two messages are different. Why?",
  "A blank is a question the engine cannot answer and a 3 is a value it can reject, so one asks for a finite figure and the other names the range and the value.",

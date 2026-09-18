@@ -16,7 +16,7 @@ q(1, "Why does the H2S to CO2 ratio need no pressure at all?",
   "Because the mole fractions are normalised to one bar before the division."],
  "A partial pressure is the total pressure multiplied by a mole fraction, so dividing one by the other leaves the ratio of the two mole fractions at any pressure whatsoever. Two mole percentages out of a gas analysis are enough to form it.")
 
-q(3, "The digest forms that ratio two ways at five pressures and prints the difference. What is the difference column?",
+q(3, "The digest forms the H2S to CO2 ratio two ways at five pressures and prints the difference. What is the difference column?",
  "Zero at every pressure.",
  ["Zero below the fugacity cap and non-zero above it.",
   "Small and falling as the pressure rises towards the cap.",
@@ -65,14 +65,14 @@ q(2, "On the studio's shipped default case, what is the H2S to CO2 ratio and whi
   "0.040000000000, in the mixed regime."],
  "That ratio is formed from an H2S mole fraction of 0.001000 and a CO2 mole fraction of 0.030000, and it would be the same number at any total pressure.")
 
-q(1, "Raise the H2S on that case from 0.1 to 1 mol percent. Why is the rate unchanged?",
+q(1, "Raise the H2S on the studio's shipped case from 0.1 to 1 mol percent. Why is the rate unchanged?",
  "H2S is not in the CO2 rate correlation, so it cannot move the rate.",
  ["The regime change removes the corrosion inhibitor credit and the two effects cancel.",
   "The engine holds the rate at its previous value once the regime word changes.",
   "The rate is recomputed and rounds to the same figure at six decimals."],
  "The ratio becomes 0.333333333333 and the regime becomes sulphide. That the rate does not move is the lesson in one line, because H2S reaches the regime word and the threshold comparison and reaches the correlation nowhere at all.")
 
-q(0, "So what DOES change on that screen when the H2S goes to 1 mol percent?",
+q(0, "On the shipped case, what DOES change on the screen when the H2S goes from 0.1 to 1 mol percent?",
  "Both of the fields a reader summarises by are held back, and the rate becomes a ceiling.",
  ["The rate falls, and the band label and the remaining life follow it down.",
   "The wall shear rises, and the corrosion inhibitor credit is removed.",
@@ -84,7 +84,7 @@ q(2, "A case arrives with a CO2 partial pressure of zero. What does the regime d
  ["The carbonate regime, since no CO2 means no competing sulphide film.",
   "The sulphide regime, since the ratio is unbounded above.",
   "A refusal, because a ratio cannot be formed from a zero."],
- "With no CO2 partial pressure there is no ratio to form. Both unknown branches carry a note, which they did not always, because a panel printing the note unconditionally rendered an empty paragraph whenever the branch had none.")
+ "With no CO2 partial pressure there is no ratio to form. Both unknown branches carry a note, so a panel printing the note unconditionally always has a sentence to print.")
 
 q(3, "The sour service door compares one partial pressure against one threshold. What else does it do?",
  "It reports the comparison in two units and counts how far above in powers of ten.",

@@ -2,7 +2,7 @@
 
 {{panel:fc-rate-explorer}}
 
-The most instructive row in the band table is the one every user meets first. The studio ships with a case already filled in, that case screens at 0.754524 mm/yr, and the label beside it reads high. Read that row slowly, because everything this module holds back is visible in it at once.
+Start with the row every user meets first. The studio ships with a case already filled in, that case screens at 0.754524 mm/yr, and the label beside it reads high. Read that row slowly, because everything this module holds back is visible in it at once.
 
 ## What the number is
 
@@ -16,7 +16,7 @@ A band set one step tighter would call the same number something worse, and noth
 
 ## What is solid on the same screen
 
-It would be a misreading to conclude that nothing on this screen can be trusted, and the eighteen graded fields of this course are the counterexample. On the same shipped case the H2S partial pressure is 0.051000 bar, which is the total pressure times the H2S mole fraction, and that is arithmetic. Its psia value of 0.739699 is a conversion by a factor exact by the definition of the bar. The effective corrosion inhibition of 85.500000 percent is arithmetic over two typed percentages. The remaining life of 4.207953 yr is an allowance divided by a rate.
+It would be a misreading to conclude that nothing on this screen can be trusted, and the eighteen graded fields of this course are the counterexample. On the same shipped case the H2S partial pressure is 0.051000 bar, which is the total pressure times the H2S mole fraction, and that is arithmetic. Its psia value of 0.739699 is a unit conversion by the engine's bar to psia factor. The effective corrosion inhibition of 85.500000 percent is arithmetic over two typed percentages. The remaining life of 4.207953 yr is an allowance divided by a rate.
 
 Some of those rest on a rate, so they inherit whatever the rate inherits. The bookkeeping ones do not, and that is why the capstones grade the stream chemistry, the flow definition, the corrosion inhibitor arithmetic and the allowance arithmetic and leave the correlation alone.
 

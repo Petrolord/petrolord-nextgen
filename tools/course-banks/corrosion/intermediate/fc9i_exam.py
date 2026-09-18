@@ -13,12 +13,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # --- m01, the wetting regime ------------------------------------------------
 
-q(0, "Which single input on this screen produces the widest span in the answer?",
+q(0, "Which single input on this screen is chosen from a list rather than measured, and takes the rate from 1.676428 mm/yr to zero with nothing else touched?",
  "The wetting regime, which is chosen from a list of three.",
  ["The in-situ pH, which moves the rate by a decade every two units.",
   "The velocity, which reaches the rate twice.",
   "The corrosion inhibitor availability."],
- "Water wetting is the largest single lever in this model. Almost every other input is a measured quantity with a unit, and this one is a word.")
+ "Almost every other input is a measured quantity with a unit, and this one is a word that can zero the rate on its own.")
 
 q(2, "Two of the three regimes ignore the water cut box entirely. What wetting factor does each of them use?",
  "1.000000 water wet and 0.000000 oil wet.",
@@ -32,14 +32,14 @@ q(1, "A user types waterwette into the regime box. What comes back?",
  ["The water-wet branch, reached by the matcher's fuzzy spelling rules.",
   "The intermittent branch, which is the middle of the three.",
   "A screening with the regime row marked as assumed."],
- "Five spellings of oil wet resolve because they are unambiguous. A string the matcher cannot resolve refuses, because an unrecognised regime falling through would choose the largest input in the model from a typing mistake.")
+ "Five spellings of oil wet resolve because they are unambiguous. A string the matcher cannot resolve refuses, because an unrecognised regime falling through would choose an input that can zero the rate from a typing mistake.")
 
 q(3, "Which of these is not one of the three wetting regimes this engine accepts?",
  "gasWet.",
  ["oilWet.",
   "waterWet.",
   "intermittent."],
- "The list is closed at three and there is no gas-wet, stratified or annular option, because this module carries no flow-pattern model and a longer list would imply one.")
+ "The list is closed at three and there is no gas-wet, stratified or annular option. No door in this module works out a flow pattern, so the three entries are an interpretation the engineer supplies.")
 
 q(1, "On an oil-wet case one reported field becomes null rather than zero. Which?",
  "The effective corrosion inhibition.",
@@ -60,7 +60,7 @@ q(2, "Nought to one on every fraction is one of the range guards this module enf
  ["A velocity below an erosional limit for the line.",
   "A wall shear below the film-stripping threshold.",
   "A rate below the top band edge the category table carries."],
- "The four are nought to one on every fraction, nought to fourteen on pH, a temperature above absolute zero, and the partial-pressure sum against the total. Every published validity band of every correlation is held rather than enforced.")
+ "Nought to one on every fraction, nought to fourteen on pH, a temperature above absolute zero, and the partial-pressure sum against the total are all enforced on what a caller types. Every published validity band of every correlation is held rather than enforced.")
 
 # --- m02, efficiency against availability ------------------------------------
 
@@ -134,7 +134,7 @@ q(3, "On the two swept rows either side of the branch change, what pair of frict
  ["It goes from 0.003660 to 0.002867, which is the spread across the streams.",
   "It stays at 0.046000000000, which is the Blasius coefficient itself.",
   "It goes from 4.740191 to 0.008591, which is a fall of three orders."],
- "Those two rows sit at 4000.0000 and 4040.0000. The wall shear across them goes from 0.003200 Pa to 0.007132 Pa, which is the jump of 2.189815.")
+ "Those two rows sit at 4000.0000 and 4040.0000, and the wall shear across them goes from 0.003200 Pa to 0.007132 Pa. Across the switch itself, over two ten-thousandths of the Reynolds number, the jump is 2.189815.")
 
 q(1, "The velocity sweep runs at 8.000000 m/s. What wall shear does this module return there?",
  "97.225957 Pa.",
@@ -225,7 +225,7 @@ q(1, "Which two figures does the shipped screening set against each other to rea
  "The engine prints the life it actually reaches beside the life it was given, and it says which of the two governs. There is no minimum thickness anywhere in this module to compare anything against.")
 
 q(3, "Put a consumed depth into the box on a case that had none. Which fields move?",
- "The remaining allowance and the remaining life.",
+ "The remaining allowance, the remaining life and the shortfall.",
  ["The required allowance alone.",
   "The rate and the band label, both of which are taken off the wall that is left.",
   "The wall shear and the film verdict, which are taken on the reduced bore."],
@@ -282,7 +282,7 @@ q(1, "A stream carries a CO2 mole fraction of 0.020000 and an H2S mole fraction 
   "Unknown, the H2S fraction being too small to form a ratio."],
  "In that regime the CO2 rate model applies and the rate is issued plainly, with no upper-bound flag on it. The ratio is the same at any total pressure whatever.")
 
-q(1, "Raise the H2S mole fraction on that stream to 0.000800 with the CO2 unchanged. What happens?",
+q(1, "A stream at a CO2 mole fraction of 0.020000 has its H2S mole fraction raised from 0.000010 to 0.000800. What happens?",
  "The ratio becomes 0.040000000000 and the regime becomes mixed.",
  ["The ratio becomes 0.040000000000 and the regime stays carbonate.",
   "The ratio falls and the regime becomes sulphide.",
@@ -311,11 +311,11 @@ q(2, "The threshold this door compares against is printed in psia as 0.050763208
  "Carrying a second rounded literal is how two copies of one threshold drift apart. The engine prints both units from one number, and it declares in a field of its own that the VALUE is held for literature.")
 
 q(0, "Where does the H2S to CO2 ratio reach, once it has produced its regime word?",
- "Nowhere else. It does not enter the rate, the wall shear or the allowance division.",
+ "It enters no calculation, and through the regime word it decides whether the band label and the life are issued.",
  ["The rate, which it multiplies by a sulphide correction factor.",
   "The wall shear, through the density of the sour phase.",
   "The allowance division, which it shortens in the sulphide regime."],
- "Its whole job is to say whether a CO2 rate model is still the right model for the surface. A reader who understands that will not go looking for its fingerprints anywhere else on the screen.")
+ "Its job is to say whether a CO2 rate model is still the right model for the surface. In the sulphide regime that withholds the band label and the life and keeps the rate as a stated upper bound, and the rate itself does not move.")
 
 emit(Q, "/root/wt-fc9-nextgen/tools/course-banks/corrosion/intermediate/fc9i_exam.json", label="fc9i_exam", expect_n=42)
 finish()

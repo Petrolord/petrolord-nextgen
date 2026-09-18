@@ -13,7 +13,7 @@ q(1, "The studio's shipped case types a temperature of 140 F, a pressure of 725 
   "60.000000 C, 51.000427 bar and 0.152400 m/s, the velocity being converted by the same factor as the line inside diameter."],
  "The engine works in the units the correlations are published in. A line inside diameter of 6 in becomes 0.152400 m, a density of 56 lb/ft3 becomes 897.036000 kg/m3 and a viscosity of 1 cp becomes 1.000000 mPa s."),
 
-q(3, "Those two rate terms are handed to the step that combines them. What comes out, and which step is named?",
+q(3, "On the shipped case a reaction term of 44.225132 mm/yr and a transport term of 11.701938 mm/yr are handed to the step that combines them. What comes out, and which step is named?",
  "A combined figure of 9.253475 mm/yr with transport controlling at a margin of 2.779300.",
  ["A combined figure of 27.162967 mm/yr, which is the two terms in series, with transport controlling.",
   "A combined figure of 11.701938 mm/yr, the smaller term unchanged.",
@@ -81,7 +81,7 @@ q(3, "Take the velocity from 10 to 60 ft/s on the shipped case. What happens?",
  ["The wall shear becomes 362.474888 Pa and the rate is unchanged, since the shear reaches the summary rail and not the calculation.",
   "The rate falls, because a higher velocity raises the transport term and the series combination sits nearer the smaller term.",
   "The screening refuses, because a velocity of that size is outside the published validity band of the transport correlation."],
- "The credited rate of 1.896603 mm/yr is reported beside it, a ratio of 6.896552, and the remaining life falls from 4.207953 yr to 0.242737 yr. The binding constraint becomes the wall shear on the corrosion inhibitor film."),
+ "The credited rate of 1.896603 mm/yr is reported beside it, so the cost of the shear verdict is visible. The binding constraint becomes the wall shear on the corrosion inhibitor film."),
 
 q(2, "One change moves the hydrogen sulphide box from 0.1 to 1 mol%. Where does the reported rate end up?",
  "It is unchanged at 0.754524 mm/yr, because hydrogen sulphide is not in the correlation at all.",

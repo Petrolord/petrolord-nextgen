@@ -77,7 +77,7 @@
   "explanation": "Nothing about the chemistry moved between those two screens. One flow input moved and the module changed which rate it was willing to stand behind, and the life follows the rate."
  },
  {
-  "prompt": "Which wall shear produced the stripped verdict on that faster screen, and what was it measured against?",
+  "prompt": "Take the shipped case to 60 ft per second. Which wall shear produced the stripped verdict there, and what was it measured against?",
   "options": [
    "14.408065 Pa, against that same stripping threshold measured at 100.000000 Pa.",
    "369.638295 Pa, against the moderate band this module measures at 50.000000 Pa.",
@@ -96,7 +96,7 @@
    "Two figures whose ratio is the availability."
   ],
   "answer": 1,
-  "explanation": "Four of the digest's streams are in that position and on each of them the two rate columns agree and the two life columns agree. Printing a figure twice looks redundant until you meet the case where they differ."
+  "explanation": "Five of the digest's six streams are in that position and on each of them the two rate columns agree and the two life columns agree. Printing a figure twice looks redundant until you meet the case where they differ."
  },
  {
   "prompt": "Why does the engine report the credited rate even when the credit was taken in full?",

@@ -8,7 +8,7 @@ The digest names the second class rather than leaving it to be discovered. Every
 
 The route table carries a column for exactly this, and it is the column to read first. The wall shear route goes through a momentum balance over a stated length, with the pipe force balance checked as an identity, and it cannot check the Blasius pair, the laminar constant or the branch switch. The film onset route is bisected on the unclamped expression and cross-checked against the closed form, and it cannot check the three scale constants. The H2S to CO2 ratio route is formed from mole fractions, and it cannot check the two boundary ratios. The sour comparison is done in psia while the engine works in bar, and it cannot check the threshold value.
 
-Four routes carry nothing in that column. The series combination, the corrosion inhibitor time average, the remaining life and the allowance shortfall are clear, and it is worth asking why. Each of them is arithmetic over quantities the caller supplies rather than a correlation with fitted constants inside it. That is the same property that decides which of the eighteen graded fields this course can carry.
+Four routes carry nothing in that column. The series combination, the corrosion inhibitor time average, the remaining life and the allowance shortfall are clear, and it is worth asking why. Each of them is arithmetic with no fitted constant inside it, where each of the other four reaches a correlation that carries one. That is the same property that decides which of the eighteen graded fields this course can carry.
 
 ## What carries them instead
 

@@ -132,7 +132,7 @@
   "explanation": "Every one of those outputs would look like an answer. The shape to look for in any engine is a function that hands back infinity, zero or one where it ought to hand back nothing."
  },
  {
-  "prompt": "The whole screening door goes further than the bare transport door. What does it do with a blank velocity?",
+  "prompt": "The rate door, `corrosionRate`, goes further than the bare transport door. What does it do with a blank velocity?",
   "options": [
    "It returns a rate with the transport term omitted from the series combination and records the omission in the notes.",
    "It returns not a number in the rate field and leaves the rest of the screening intact, so the reader sees which fields survived.",
@@ -140,7 +140,7 @@
    "It substitutes the velocity from the previous call, which is why the studio clears every field between runs."
   ],
   "answer": 2,
-  "explanation": "The two behaviours sit at two different depths. The bare term hands back a value a direct caller has to check, and the whole screening refuses on the user's behalf and names the input."
+  "explanation": "The bare term hands back a value a direct caller has to check, and the rate door refuses and names the input. The whole screening refuses earlier still, at the wall shear it computes first, saying the film survival check did not run."
  },
  {
   "prompt": "On the shipped case the transport term of 11.701938 mm/yr sits below the reaction term of 44.225132 mm/yr. What does the engine name, and what follows for the reader?",

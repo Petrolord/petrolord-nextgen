@@ -31,7 +31,7 @@ the other end.
 ## The box is range checked where it is read
 
 Inside the intermittent regime the water cut is checked against nought to one,
-which is one of the four range guards this module actually enforces. A water
+which is one of the range guards this module enforces on what a caller types. A water
 cut of 5 refuses:
 
 > the water cut fraction must be between 0 and 1: 5 is outside it

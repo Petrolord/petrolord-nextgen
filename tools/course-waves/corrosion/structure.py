@@ -212,7 +212,7 @@ TIERS = {
     ('l01-steel-corrodes-where-it-is-wet', 'Steel corrodes where it is wet', 12, [R]),
     ('l02-the-water-cut-is-read-in-one-regime', 'The water cut is read in one regime', 13, [R]),
     ('l03-a-zero-by-assumption', 'A zero by assumption', 14, [R]),
-    ('l04-the-largest-lever-is-a-dropdown', 'The largest lever is a dropdown', 13, [R]),
+    ('l04-the-largest-lever-is-a-dropdown', 'A lever that is a dropdown', 13, [R]),
   ]),
   ('m02-efficiency-is-not-protection', 'Efficiency Is Not Protection', [
     ('l01-two-inputs-not-one', 'Two inputs where people expect one', 12, [I]),
@@ -267,7 +267,7 @@ TIERS = {
     ('l03-optimistic-by-a-step-or-two', 'Optimistic by a step or two', 13, [R]),
     ('l04-the-default-case-reads-high', 'The default case reads high', 13, [R]),
   ]),
-  ('m04-the-summary-that-was-missing', 'The Summary That Was Missing', [
+  ('m04-the-summary-that-was-missing', 'The Summary That Reconciles the Screen', [
     ('l01-seven-numbers-and-no-verdict', 'Seven numbers and no verdict', 13, [I]),
     ('l02-the-order-is-the-claim', 'The order is the claim', 14, [I]),
     ('l03-what-would-i-change-first', 'What would I change first', 13, [I]),

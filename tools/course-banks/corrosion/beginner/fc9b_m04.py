@@ -74,7 +74,7 @@ q(1, "Of the six worked streams in this course's source material, how many carry
  ["1 of the 6, which is the shipped studio case, and the other five are all above their own computed onsets.",
   "3 of the 6, which is the split that makes the sweep a fair test of both sides of the onset.",
   "All 6, since every scenario used anywhere in this course is set below its own onset by construction."],
- "The shipped studio case is one of the 5, at 60.000000 C with a computed onset of 80.984504 C. Where the multiplier is exactly one, multiplying by it changes nothing at all."),
+ "The shipped studio case, which is not one of the six, sits below its onset too, at 60.000000 C with a computed onset of 80.984504 C. Where the multiplier is exactly one, multiplying by it changes nothing at all."),
 
 q(0, "Where in the chain does this engine apply the film multiplier, and what is the standing of that choice?",
  "It multiplies the combined rate after the series combination, and which form the published correlation intends is held.",

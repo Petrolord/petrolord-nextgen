@@ -36,16 +36,16 @@ cannot test the step they share.
 
 ## What the ratio is for
 
-The regime word the next lesson covers is the only thing this ratio produces.
-It does not enter the rate, it does not move the wall shear and it does not
-touch the allowance division. Its whole job is to say whether a CO2 rate model
-is still the right model for the surface, and a reader who understands that will
-not go looking for the ratio's fingerprints anywhere else on the screen.
+The regime word the next lesson covers is what this ratio produces. It does not
+enter the rate and it does not move the wall shear. Its job is to say whether a
+CO2 rate model is still the right model for the surface, and through that it
+decides whether the band label and the remaining life are issued at all, which
+the next lesson shows.
 
 Because it needs no pressure, the ratio is also the one chemistry number on this
 form you can form from the two mole fractions in your head. Two mole percentages
-out of a gas analysis are enough. Everything else on the chemistry panel needs a
-total pressure and a temperature before it means anything.
+out of a gas analysis are enough. Everything else on the chemistry panel needs at
+least a total pressure before it means anything.
 
 ## Partial pressure and fugacity are different quantities here
 

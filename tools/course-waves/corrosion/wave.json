@@ -128,7 +128,7 @@
  },
  "gates": {
   "fc9_dump.mjs label assertions": "833 label-and-call, measurement and pin assertions run inside the digest build, 0 failed. EVERY row this file labels is asserted against what the call actually did: refusal() asserts an error key AND that no non-finite number came back with it, success() asserts the absence of an error key and the same finiteness, measured() asserts every measurement is FINITE, and pin() compares every held constant against a literal in this generator. FC4 labelled a row a refusal and then called a case that SUCCEEDED; on failure NOTHING IS WRITTEN and the build exits non-zero, so a mislabelled row can never reach a writer. IT CAUGHT SIX OF MY OWN ERRORS on the first full run: a cap bisection whose predicate was an inequality that does not straddle, a withdrawal assertion that failed because the standard NAMES survive in the header comment (which is where they belong), two default-parameter refusals that are not refusals, and a golden tolerance that was too tight for the oracle's hour-by-hour duty cycle.",
-  "digest reproducibility": "byte-identical across two consecutive rebuilds, five timezones (Pacific/Kiritimati, UTC, Pacific/Niue, America/Sao_Paulo, Asia/Kathmandu) and four locales (C, de_DE.UTF-8, tr_TR.UTF-8, ar_EG.UTF-8): 12 builds in all, every one byte-identical. md5 c439806128c2cd684e16098eee354ad5 over 1090 lines. build_digest.sh is mode 755 and EXECUTABLE, which finalise.sh asserts before it runs anything: FC4 shipped a mode 644 build script and its reproducibility gate had therefore never once run. finalise.sh re-verifies all of this and re-pins.",
+  "digest reproducibility": "byte-identical across two consecutive rebuilds, five timezones (Pacific/Kiritimati, UTC, Pacific/Niue, America/Sao_Paulo, Asia/Kathmandu) and four locales (C, de_DE.UTF-8, tr_TR.UTF-8, ar_EG.UTF-8): 12 builds in all, every one byte-identical. md5 430e6f40f35e194e9f097bada62a9ea1 over 1090 lines. build_digest.sh is mode 755 and EXECUTABLE, which finalise.sh asserts before it runs anything: FC4 shipped a mode 644 build script and its reproducibility gate had therefore never once run. finalise.sh re-verifies all of this and re-pins.",
   "make_fields.mjs": "regenerates fields.json and precision.json from the ONE tolerance derivation and REFUSES any field graded tighter than its class prints. 15 of 18 stated tolerances were RAISED to the printed floor. --bare-stated-tolerances is the negative control: it reports 15 UNANSWERABLE fields and exits 1. precision.json classifies 18 of 18.",
   "gradeprecision.py (the kit gate)": "18 OF 18 CLASSIFIED against 9 declared classes. Two sibling waves read green at 3 of 18 and 7 of 18 before the kit was repaired to refuse partial coverage.",
   "discriminate.mjs": "108 plausible wrong methods over 18 routes, 0 WEAK, 0 BLIND. CLOSEST MISS across the whole sweep: obigbo_h2s_partial_pressure_psia via the studio's own truncated 14.5038 factor, 6.697 tolerances away. That miss was 1.285 tolerances on the first run, which is a trap rather than a test, so the Obigbo pressure was raised until the margin was comfortable. --slack-tolerances is the negative control and reports 18 weak routes.",
@@ -164,8 +164,8 @@
  "digest": {
   "lines": 1090,
   "sections": 25,
-  "md5": "c439806128c2cd684e16098eee354ad5",
-  "sha256": "77dfa8d35f34adf6979259a3d90a1f97e03c91e252a194e72aea020f4b8adb7b",
+  "md5": "430e6f40f35e194e9f097bada62a9ea1",
+  "sha256": "0291f1fdc43b4b66ab284434d3d8b96ed71eb55b81e3f38aad6e988949d9f3fe",
   "goldenRows": 110,
   "goldenBlocks": 17,
   "withheld": null,

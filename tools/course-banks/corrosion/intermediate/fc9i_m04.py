@@ -58,7 +58,7 @@ q(0, "At 60 ft per second on the shipped case, what happens to the remaining lif
   "It is unchanged, because the allowance and the design life were not altered."],
  "Nothing about the chemistry moved between those two screens. One flow input moved and the module changed which rate it was willing to stand behind, and the life follows the rate.")
 
-q(2, "Which wall shear produced the stripped verdict on that faster screen, and what was it measured against?",
+q(2, "Take the shipped case to 60 ft per second. Which wall shear produced the stripped verdict there, and what was it measured against?",
  "362.474888 Pa, against the measured stripping threshold of 100.000000 Pa.",
  ["14.408065 Pa, against that same stripping threshold measured at 100.000000 Pa.",
   "369.638295 Pa, against the moderate band this module measures at 50.000000 Pa.",
@@ -70,7 +70,7 @@ q(1, "On a stream whose film survives, what do the rate column and the credited 
  ["Two different figures, the credited one smaller.",
   "One figure and one blank, the credited column being filled only when it differs.",
   "Two figures whose ratio is the availability."],
- "Four of the digest's streams are in that position and on each of them the two rate columns agree and the two life columns agree. Printing a figure twice looks redundant until you meet the case where they differ.")
+ "Five of the digest's six streams are in that position and on each of them the two rate columns agree and the two life columns agree. Printing a figure twice looks redundant until you meet the case where they differ.")
 
 q(0, "Why does the engine report the credited rate even when the credit was taken in full?",
  "Because it is the rate a reader working from a datasheet efficiency already has in their head.",

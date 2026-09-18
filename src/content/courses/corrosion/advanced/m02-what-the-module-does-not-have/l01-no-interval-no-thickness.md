@@ -16,7 +16,7 @@ The remaining-life door makes the boundary concrete in one message. Ask it for a
 
 > the corrosion allowance is already consumed: this is an inspection and fitness-for-service question, not a design one
 
-Read that as a statement about scope. Every other refusal in the module says an input is wrong. This one says the input is fine and the module is the wrong tool.
+Read that as a statement about scope. Most refusals in the module say an input is wrong or missing. This one says the input is fine and the module is the wrong tool.
 
 ## Integrity, narrowly
 

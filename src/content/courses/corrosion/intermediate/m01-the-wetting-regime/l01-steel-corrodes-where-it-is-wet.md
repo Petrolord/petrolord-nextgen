@@ -4,7 +4,7 @@
 
 Steel does not corrode where it is oil wet. This module treats that fact as a
 REGIME and not as a multiplier it applies everywhere, and the distinction is
-the first thing to understand about the largest input on the screen. The
+the first thing to understand about an input that can zero the rate alone. The
 multiplier the oil-wet regime carries is zero, so the rate it produces is zero,
 and a zero rate is the strongest reassurance a screening tool can offer.
 
@@ -48,7 +48,7 @@ the rate at zero there is nothing for the corrosion inhibitor to be effective
 against, so the engine reports an absence where a reader might expect a
 quantity.
 
-## Why this is the largest lever
+## Why this lever gets a module
 
 Across the three regimes the rate runs from 1.676428 mm/yr to 0.000000 mm/yr on
 one dropdown, with no other input touched. That is why the regime is worth a

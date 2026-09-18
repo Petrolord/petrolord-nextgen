@@ -701,7 +701,7 @@ w();
 w('| field | value | what it means |');
 w('| --- | --- | --- |');
 w(`| \`ph2sBar\` | ${e6(AP.sour.ph2sBar)} | the H2S partial pressure, the total pressure times the H2S mole fraction |`);
-w(`| \`ph2sPsia\` | ${e6(AP.sour.ph2sPsia)} | the same, converted by the engine's exact bar to psia factor |`);
+w(`| \`ph2sPsia\` | ${e6(AP.sour.ph2sPsia)} | the same, converted by the engine's bar to psia factor |`);
 w(`| \`thresholdBar\` | ${e6(AP.sour.thresholdBar)} | the screening threshold, whose VALUE is held |`);
 w(`| \`thresholdPsia\` | ${e12(AP.sour.thresholdPsia)} | the same threshold, derived rather than rounded |`);
 w(`| \`thresholdHeld\` | ${String(AP.sour.thresholdHeld)} | the engine declares that the number is not sourced in the repository |`);
@@ -722,7 +722,7 @@ w();
 
 w(sec(3, 'The numbers this module stands on, MEASURED out of the engine rather than typed, and pinned against a third copy', ['beginner', 'm01'], ['advanced', 'm01']));
 w();
-w('NONE of these is sourced in this repository WITH ONE NAMED EXEMPTION, AND IT IS THE ROW CALLED \'the bar to psia factor\'. That factor is exact by the definition of the bar and of the pound-force rather than held: section 24 derives it, section 21 grades a conversion through it, and the engine\'s own eleven-item held list does not name it. Every OTHER constant here is HELD FOR LITERATURE, every one is measured below by asking the engine a question whose answer is that constant and nothing else, and every measured value is compared against a literal typed in this generator, which is a THIRD location. A constant that lives in the engine and in the oracle cannot be validated by comparing the engine with the oracle, and a paired battery proved that: fifteen of seventeen constants moved in both files at once left the suite green.');
+w('NONE of these is sourced in this repository WITH ONE NAMED EXEMPTION, AND IT IS THE ROW CALLED \'the bar to psia factor\'. That factor is a unit conversion rather than a held correlation constant: section 24 rebuilds it from the definitions of the bar and of the pound-force and measures how far the engine\'s value sits from them, section 21 grades a conversion through it, and the engine\'s own eleven-item held list does not name it. Every OTHER constant here is HELD FOR LITERATURE, every one is measured below by asking the engine a question whose answer is that constant and nothing else, and every measured value is compared against a literal typed in this generator, which is a THIRD location. A constant that lives in the engine and in the oracle cannot be validated by comparing the engine with the oracle, and a paired battery proved that: fifteen of seventeen constants moved in both files at once left the suite green.');
 w();
 w('MEASURING RATHER THAN READING THE EXPORT IS DELIBERATE. An export tells you what the module declares. A measurement tells you what it actually uses. Both are below, and the two columns disagreeing would be a finding.');
 w();
@@ -764,7 +764,11 @@ PINS.forEach((p) => w(`| ${p.label} | ${e12(p.measuredValue)} | ${e12(p.literal)
 w();
 w(`${PINS.length} constants pinned, every one against a literal in a third file, and the whole table is re-measured on every rebuild of this digest.`);
 w();
-w('THE ENGINE EXPORTS FIFTEEN OF THESE. An export agreeing with a measurement checks the export; a measurement on its own checks the behaviour. Both columns are here so a disagreement between them would be visible.');
+const EXPORTS_AS_ROWS = EXPORTS.filter(([, , m]) => PINS.some((p) => p.measuredValue === m));
+const EXPORTS_NOT_ROWS = EXPORTS.filter(([, , m]) => !PINS.some((p) => p.measuredValue === m));
+must('EVERY EXPORT THAT IS NOT A ROW OF THE PIN TABLE IS NAMED', EXPORTS_NOT_ROWS.length === 1 && EXPORTS_NOT_ROWS[0][0] === 'SOUR_THRESHOLD_PSIA',
+  EXPORTS_NOT_ROWS.map(([n]) => n).join(', '));
+w(`THE ENGINE EXPORTS ${EXPORTS.length} CONSTANTS BY NAME. ${EXPORTS_AS_ROWS.length} of them are constants pinned in the table above, and the other is \`${EXPORTS_NOT_ROWS[0][0]}\`, the sour threshold again in psia, so ${PINS.length - EXPORTS_AS_ROWS.length} of the ${PINS.length} pinned constants have no export at all and are reached by measurement alone. An export agreeing with a measurement checks the export; a measurement on its own checks the behaviour. Both columns are here so a disagreement between them would be visible.`);
 w();
 w('| export | declared value | measured from behaviour | relative difference |');
 w('| --- | --- | --- | --- |');
@@ -795,7 +799,7 @@ w();
 
 /* ------------------------------------------------------------- SECTION 4 */
 
-w(sec(4, 'CO2 partial pressure, CO2 fugacity, and the difference the screen printed for a year without explaining', ['beginner', 'm02']));
+w(sec(4, 'CO2 partial pressure, CO2 fugacity, and the difference between them that the screen prints', ['beginner', 'm02']));
 w();
 w('TWO QUANTITIES, ONE MOLECULE, AND THEY ARE NOT THE SAME NUMBER. The partial pressure is the total pressure times the mole fraction. The fugacity is the partial pressure times a coefficient below one at high pressure, and it is the fugacity that drives the RATE. The H2S threshold and the film-governing ratio use PARTIAL PRESSURES, and no fugacity correction is applied to H2S at all, which the engine declares in a field.');
 w();
@@ -976,7 +980,7 @@ w();
 
 /* ------------------------------------------------------------- SECTION 8 */
 
-w(sec(8, 'Water wetting, and the largest single lever in this model', ['intermediate', 'm01']));
+w(sec(8, 'Water wetting, and a single dropdown that can take the rate to zero', ['intermediate', 'm01']));
 w();
 w('Steel does not corrode where it is oil wet. The engine treats that as a REGIME and not as a multiplier applied always, which matters because the multiplier for the oil-wet regime is zero and a zero rate is the strongest reassurance a screen can give.');
 w();
@@ -1242,7 +1246,7 @@ const REG_WORDS = [...new Set(REGIME_PAIRS.map(([co2, h2s]) => C.corrosionRegime
 must('ALL FOUR REGIME ANSWERS ARE REACHED IN THE TABLE ABOVE', REG_WORDS.length === 4, REG_WORDS.join(', '));
 w(`FOUR ANSWERS, ALL REACHED ABOVE: ${REG_WORDS.join(', ')}. The boundaries, measured by bisecting the regime word, are ${e12(REG_CARB)} and ${e12(REG_MIXED)}, and BOTH ARE HELD.`);
 w();
-w('BOTH UNKNOWN BRANCHES CARRY A NOTE, which they did not always. A panel that prints the note unconditionally rendered an empty paragraph whenever the branch had none:');
+w('BOTH UNKNOWN BRANCHES CARRY A NOTE, so a panel that prints the note unconditionally always has a sentence to print:');
 w('| what was asked | regime | the engine\'s own note |');
 w('| --- | --- | --- |');
 [['a zero CO2 partial pressure', { ph2sBar: 0.06, pco2Bar: 0 }],
@@ -1401,9 +1405,9 @@ w();
 
 /* ------------------------------------------------------------ SECTION 16 */
 
-w(sec(16, 'The binding constraint, which is the summary this module did not have', ['advanced', 'm04']));
+w(sec(16, 'The binding constraint, the summary that reconciles the screen', ['advanced', 'm04']));
 w();
-w('A screen that returns seven independent numbers and reconciles none of them is a screen the reader has to summarise themselves, and they will summarise it by reading the largest number. The engine now names WHICH OF ITS OWN LIMITS governs the answer, in descending order of what would change first, and every one of them is derived from what is already computed.');
+w('A screen that returns seven independent numbers and reconciles none of them is a screen the reader has to summarise themselves, and they will summarise it by reading the largest number. The engine names WHICH OF ITS OWN LIMITS governs the answer, in descending order of what would change first, and every one of them is derived from what is already computed.');
 w();
 w('| stream | binding constraint | the value it turns on | why, in the engine\'s own words |');
 w('| --- | --- | --- | --- |');
@@ -1763,7 +1767,7 @@ w();
 w('| what is graded | why it is clear of every held item |');
 w('| --- | --- |');
 [['the stream bookkeeping: the CO2 partial pressure, the H2S partial pressure in bar and in psia, and the H2S to CO2 mole ratio',
-  'each is the total pressure times a mole fraction, or a ratio of two mole fractions, or a conversion by a factor exact by the definition of the bar. No correlation constant, no fugacity coefficient, no threshold and no boundary is in any chain'],
+  'each is the total pressure times a mole fraction, or a ratio of two mole fractions, or a conversion by the engine\'s bar to psia factor, which section 24 checks against the definitions of the bar and of the pound-force. No correlation constant, no fugacity coefficient, no threshold and no boundary is in any chain'],
   ['the flow definition: the Reynolds number',
     'density times velocity times diameter over viscosity is a definition. The Blasius pair and the branch switch act on the friction factor DOWNSTREAM of it, and no graded field reads a friction factor or a shear stress'],
   ['the inhibitor arithmetic: the effective protection, the shortfall, the retained fraction and the metal-loss ratio',
@@ -1867,15 +1871,24 @@ w('| --- | --- | --- |');
   ['every rate on the way back out', 'divide by 25.4, multiply by 1000', 'mils a year alongside millimetres a year'],
 ].forEach(([a, b, c]) => w(`| ${a} | ${b} | ${c} |`));
 w();
-w(`ONE OF THOSE FACTORS IS TRUNCATED AND THE ENGINE'S OWN IS NOT. The studio divides a psig pressure by 14.5038 to reach bar. The engine exports the exact factor, which is ${e12(BAR_PSIA)}, exact by the definition of the bar and of the pound-force, and measured here out of the psia the engine reports for a 1 bar partial pressure. The studio's divisor is therefore larger than the exact factor by ${(Math.abs(14.5038 - BAR_PSIA) / BAR_PSIA).toExponential(3)} as a fraction, so a pressure converted through the studio and a pressure converted through the engine's own factor differ in the sixth significant figure.`);
+// THE FACTOR REBUILT FROM THE DEFINITIONS, and not from anything the engine
+// exports: the avoirdupois pound, standard gravity, the inch and the bar. The
+// engine's own comment calls its factor exact by definition, and a gate that
+// only compared the engine against a literal typed from the engine could never
+// have found out whether it is.
+const DEF_BAR_PSIA = 100000 / (0.45359237 * 9.80665 / (0.0254 * 0.0254));
+const ENGINE_OVER_DEF = relDiff(BAR_PSIA, DEF_BAR_PSIA);
+must('THE ENGINE FACTOR IS CLOSE TO THE DEFINITIONS AND IS NOT EQUAL TO THEM', ENGINE_OVER_DEF > 1e-12 && ENGINE_OVER_DEF < 1e-8,
+  `${BAR_PSIA} against ${DEF_BAR_PSIA}, relative ${ENGINE_OVER_DEF}`);
+w(`ONE OF THOSE FACTORS IS TRUNCATED, AND THE ENGINE'S OWN IS CLOSE TO EXACT WITHOUT BEING EXACT. The studio divides a psig pressure by 14.5038 to reach bar. The engine exports ${e12(BAR_PSIA)}, measured here out of the psia the engine reports for a 1 bar partial pressure. Rebuilt from the definitions of the pound (0.45359237 kg), standard gravity (9.80665 m/s2), the inch (0.0254 m) and the bar (100000 Pa), the factor is ${e12(DEF_BAR_PSIA)}, so the engine's value sits above the definitions by ${ENGINE_OVER_DEF.toExponential(3)} as a fraction. The engine's own comment calls its factor exact by definition, and it is not; the gap is far below anything this course grades at. The studio's divisor is larger than the engine's factor by ${(Math.abs(14.5038 - BAR_PSIA) / BAR_PSIA).toExponential(3)} as a fraction, so a pressure converted through the studio and a pressure converted through the engine's own factor differ in the sixth significant figure.`);
 w();
-const APP_EXACT = success('the shipped defaults converted with the exact factor',
+const APP_EXACT = success('the shipped defaults converted with the engine factor',
   C.screen({ ...APP, pTotalBar: (725 + 14.7) / BAR_PSIA }));
-w(`WHAT THAT IS WORTH, measured rather than argued. The shipped defaults through the studio's divisor give a total pressure of ${e12(APP.pTotalBar)} bar and a rate of ${e12(AP.rate.rateMmYr)} mm/yr. Through the engine's exact factor they give ${e12((725 + 14.7) / BAR_PSIA)} bar and ${e12(APP_EXACT.rate.rateMmYr)} mm/yr. The two rates differ by ${(relDiff(APP_EXACT.rate.rateMmYr, AP.rate.rateMmYr)).toExponential(3)} as a fraction, which is far below anything a screening decision turns on and far above zero.`);
+w(`WHAT THAT IS WORTH, measured rather than argued. The shipped defaults through the studio's divisor give a total pressure of ${e12(APP.pTotalBar)} bar and a rate of ${e12(AP.rate.rateMmYr)} mm/yr. Through the engine's factor they give ${e12((725 + 14.7) / BAR_PSIA)} bar and ${e12(APP_EXACT.rate.rateMmYr)} mm/yr. The two rates differ by ${(relDiff(APP_EXACT.rate.rateMmYr, AP.rate.rateMmYr)).toExponential(3)} as a fraction, which is far below anything a screening decision turns on and far above zero.`);
 w();
 w('THIS IS WHY NO GRADED FIELD IN THIS COURSE IS CONVERTED THROUGH THE STUDIO. The three capstones state their conditions in the ENGINE\'S units, and they say so on the page. Grading a learner on which rounding the app happened to use would grade them on the app rather than on corrosion, and the difference is large enough to fail a tolerance while being far too small to matter to an engineer. A capstone that did that would be measuring the wrong thing on purpose.');
 w();
-w(`AND THE SAME TRUNCATION ONCE REACHED A HINT A USER READ. The sour threshold was labelled 0.05 psia and it is ${e12(SOUR_PSIA)} psia; a threshold of exactly 0.05 psia would be ${e12(0.05 / BAR_PSIA)} bar, which is ${e6(Math.abs(0.05 / BAR_PSIA - SOUR_BAR) / SOUR_BAR * 100)} percent below the threshold the engine actually uses. The engine now derives and prints both numbers, and the vendored gate asserts the psia value is not 0.05.`);
+w(`AND THE SAME ROUNDING HABIT MEETS A THRESHOLD. A sour threshold of 0.05 psia is a figure people carry around, and the one this engine uses is ${e12(SOUR_PSIA)} psia; a threshold of exactly 0.05 psia would be ${e12(0.05 / BAR_PSIA)} bar, which is ${e6(Math.abs(0.05 / BAR_PSIA - SOUR_BAR) / SOUR_BAR * 100)} percent below the threshold the engine actually uses. The engine derives and prints both numbers, and the vendored gate asserts the psia value is not 0.05.`);
 w();
 
 /* ------------------------------------------------------------ SECTION 25 */
@@ -1892,7 +1905,7 @@ w(`- The module is ${SRC.split('\n').length} lines long, so roughly one line in 
 w();
 w('# ITEM ONE. THE HEADLINE. AN INVENTED CURVE WEARING SOMEBODY ELSE\'S AUTHORITY.');
 w('- The general lesson, and it is the largest one in this course: a calculation can be wrong in a way that no amount of measurement repairs, because the number was never the claim. If a curve is labelled with a standard\'s name, the claim is "this is what the standard says". Retuning the curve does not make that true. The only honest repair is to withdraw the claim and say the thing is not provided.');
-w('- Before the repair this engine computed a sour-service severity region from an expression of its own, labelled it with two standards, and served three named material recommendations off it: what steel to buy, when to control hardness, and when to qualify weldments. Four measurements settled what the expression was worth. Moving its pH pivot by a whole unit left the validation suite entirely green. Widening one of its region boundaries by a factor of two left the suite green. A missing pH made the expression not-a-number, both of its comparisons failed, and it fell through to the HARDEST material recommendation in the file from an input nobody had supplied.');
+w('- Before the repair this engine computed a sour-service severity region from an expression of its own, labelled it with two standards, and served three named material recommendations off it: what steel to buy, when to control hardness, and when to qualify weldments. Three measurements show what the expression was worth. Moving its pH pivot by a whole unit left the validation suite entirely green. Widening one of its region boundaries by a factor of two left the suite green. A missing pH made the expression not-a-number, both of its comparisons failed, and it fell through to the HARDEST material recommendation in the file from an input nobody had supplied.');
 w(`- Today the function is gone, nothing replaces it, and section 2 is the current statement of that absence. The absence is a FIELD rather than a missing value: \`regionProvided\` is ${String(AP.sour.regionProvided)} and \`materialGuidanceProvided\` is ${String(AP.sour.materialGuidanceProvided)}, so a caller cannot read the gap as an unset property. The threshold value the screen still uses stayed exactly where it was, because changing a live number without a source is the same mistake with the sign flipped.`);
 w();
 w('# ITEM TWO. AN INPUT THAT MOVED NOTHING, BESIDE A SCREEN THAT SAID IT MATTERED.');

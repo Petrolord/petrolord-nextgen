@@ -41,7 +41,7 @@
    "It refuses, and the message names the three regimes and quotes the string it was given."
   ],
   "answer": 3,
-  "explanation": "The wetting regime is the largest single lever in this model, so resolving an unrecognised string to any branch would be choosing that lever on the user's behalf from a typing mistake. The engine works hard to understand what was meant and never invents what was meant."
+  "explanation": "The wetting regime can take the rate to zero on its own, so resolving an unrecognised string to any branch would be choosing that lever on the user's behalf from a typing mistake. The engine works hard to understand what was meant and never invents what was meant."
  },
  {
   "prompt": "The strings oilWet, OILWET, oil-wet, Oil Wet and oil_wet all reach the same branch. What does that tell you about the matcher?",
@@ -107,7 +107,7 @@
    "It exceeds the corrosion inhibitor availability."
   ],
   "answer": 0,
-  "explanation": "Nought to one on every fraction is one of the four range guards this module actually enforces. The message names the value it was given, and a water cut of -0.1 refuses with the same shape."
+  "explanation": "Nought to one on every fraction is one of the range guards this module enforces on what a caller types. The message names the value it was given, and a water cut of -0.1 refuses with the same shape."
  },
  {
   "prompt": "Why does the engine describe the oil-wet zero as assumed rather than calculated?",
@@ -126,10 +126,10 @@
    "It moves by less than the corrosion inhibitor availability moves it across that input's own range.",
    "It stays where it is, because the wetting factor is applied after the band label has been chosen.",
    "It moves only between the water-wet and the intermittent branches, the oil-wet branch being a refusal.",
-   "It runs from its full water-wet value down to zero, which is the widest span any single input produces here."
+   "It runs from its full water-wet value down to zero, with nothing but the dropdown moved."
   ],
   "answer": 3,
-  "explanation": "Water wetting is the largest single lever in this model and that is why it carries a module of its own at this tier. The span is produced by one dropdown with nothing else touched."
+  "explanation": "One dropdown takes the rate to zero with nothing else touched, and that is why the regime carries a module of its own at this tier."
  },
  {
   "prompt": "What separates the oil-wet withholding from a refusal?",

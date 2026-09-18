@@ -3,7 +3,7 @@ from bankkit import emit, finish
 Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
-# FC9 Expert m04, The Summary That Was Missing. Digest section 16.
+# FC9 Expert m04, The Summary That Reconciles the Screen. Digest section 16.
 
 q(1, "A screening returns seven independent numbers and reconciles none of them. What does a reader do with that, and why?",
  "They summarise it by reading the largest number, because nothing on an unreconciled screen ranks its own contents and attention follows the units.",
@@ -12,7 +12,7 @@ q(1, "A screening returns seven independent numbers and reconciles none of them.
   "They average the alarming figures against the comfortable ones and act on the middle."],
  "A wall shear of 370 Pa looks worse than a life of 0.161915 yr, and on that stream the life is the consequence and the shear is the cause. That is a property of the units rather than of the engineering.")
 
-q(3, "Across the six shipped streams the binding constraint takes four different values. What are they?",
+q(3, "Across the six teaching streams the binding constraint takes four different values. What are they?",
  "Mass transfer to the wall, the corrosion allowance against the design life, the model does not apply, and wall shear on the corrosion inhibitor film.",
  ["Mass transfer to the wall, reaction kinetics, the corrosion allowance against the design life, and the rate category band the stream lands in.",
   "Wall shear on the corrosion inhibitor film, the sour threshold comparison, the corrosion allowance against the design life, and mass transfer to the wall.",
@@ -38,14 +38,14 @@ q(3, "Why does applicability sit at the top of the sequence rather than anywhere
  ["Because it is the step that fires on the most streams, and a sequence that stops at the first firing question should try its commonest answer first of all.",
   "Because the applicability test needs only the mole fractions, so it can be answered before the shear and the rate have been computed at all on that stream.",
   "Because the withheld block has to be built before the category and the life are issued, and the applicability step is where that block is assembled."],
- "One shipped stream fails it: the H2S to CO2 ratio puts it in the sulphide regime and the binding constraint comes back with no value attached. A film stripping verdict on a surface the correlation does not cover is a precise answer to the wrong question.")
+ "One teaching stream fails it: the H2S to CO2 ratio puts it in the sulphide regime and the binding constraint comes back with no value attached. A film stripping verdict on a surface the correlation does not cover is a precise answer to the wrong question.")
 
 q(1, "Why does the film stripping test sit above the allowance test rather than below it?",
  "The rate depends on the shear verdict, because a stripped film removes the corrosion inhibitor credit before the rate is formed, so a life computed without it is a life at the wrong rate.",
  ["The shear is the larger number on most screens, and a sequence that ranks limits has to meet the larger of two candidates before it can meet the smaller one.",
   "The allowance test needs a design life and the shear test does not, so the shear test is placed where it can run on a screening that carries no design life at all.",
   "The film-stripping threshold of 100.000000000000 Pa is pinned and the design life is typed in, so the pinned comparison is applied before the typed one is reached."],
- "One shipped stream binds at 370 Pa against the 100 Pa at which this module takes the film to be stripped. Both thresholds are held, so the order argument stands on the structure of the calculation rather than on the value of either number.")
+ "One teaching stream binds at 370 Pa against the 100 Pa at which this module takes the film to be stripped. Both thresholds are held, so the order argument stands on the structure of the calculation rather than on the value of either number.")
 
 q(2, "Each binding constraint is returned with the value it turns on. What does the allowance constraint carry on the two streams that bind there?",
  "1.7 yr of 20 yr, short by 30.75 mm of allowance, and 7.7 yr of 20 yr, short by 4.45 mm.",
@@ -80,7 +80,7 @@ q(0, "A stream binds on mass transfer to the wall. What does the engine say foll
  ["That the corrosion inhibitor programme is what moves this rate, since the transport term is the one the credit is applied to before the series combination.",
   "That the rate is an upper bound, since a transport limited surface is one the CO2 correlation is describing at the edge of where it was fitted.",
   "That the reaction term can be ignored, since the series combination sits at whichever term is smaller and the larger one has dropped out of the answer."],
- "On one shipped stream the transport term is 2.34 mm/yr against a reaction term of 27.66 mm/yr, and on another 0.09 mm/yr against 10.01 mm/yr. Changing the water chemistry on a transport controlled stream moves the larger term and the answer barely follows.")
+ "On one teaching stream the transport term is 2.34 mm/yr against a reaction term of 27.66 mm/yr, and on another 0.09 mm/yr against 10.01 mm/yr. Changing the temperature or the carbon dioxide on a transport controlled stream moves the larger term and the answer barely follows.")
 
 q(1, "The engine says that slowing the line changes this answer before anything else does. What kind of statement is that?",
  "A statement about the sensitivity of the module's own output. It describes which limit governs the number and stops there.",

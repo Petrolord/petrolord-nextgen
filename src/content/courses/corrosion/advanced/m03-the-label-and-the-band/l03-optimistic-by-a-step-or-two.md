@@ -10,7 +10,7 @@ Optimistic means the word errs towards reassurance. If the true edges sit lower 
 
 That is the honest position, and it is the reason the sentence sits on the held list rather than in a help page as guidance. A direction without a magnitude and without a citation is a warning that a reader can carry into a conversation. It is not a correction, and nobody can apply it to a number on a screen.
 
-## Why the bands were left where they are
+## Why tightening the bands would not repair them
 
 There is a tempting alternative: tighten the edges so the words read more conservatively. Tightening them would replace one unsourced set of numbers with a different unsourced set, and it would do so under the appearance of a fix. The screen would then carry a number nobody could source, with a claim of correctness attached that the first set never had.
 
@@ -24,4 +24,4 @@ So the practical rule for reading a label here is short. Treat the word as a rou
 
 ## Exercise
 
-Take three rates from the shipped streams, record the word each gets, and then record what each would get if all three edges were one step tighter in the direction the engine warns about. Write down which of the three changed word, and say what evidence you would need before acting on the change.
+Take three rates from the teaching streams, record the word each gets, and then record what each would get if all three edges were one step tighter in the direction the engine warns about. Write down which of the three changed word, and say what evidence you would need before acting on the change.

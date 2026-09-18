@@ -55,15 +55,15 @@
   "explanation": "`thresholdHeld` comes back true, which is the engine saying the number is not sourced in this repository. The engine prints the threshold in both units so nobody has to guess which one a comparison was made against."
  },
  {
-  "prompt": "A colleague quotes the sour screening threshold as a round 0.05 psia. What is wrong with that, and what must a writer watch when saying how far off it is?",
+  "prompt": "A colleague quotes the sour screening threshold as a round 0.05 psia. What is wrong with that, and why can the gap between the two be given as two different percentages?",
   "options": [
-   "The round figure is not the one the engine works to, and two sections state two different relationships for the same pair of numbers.",
-   "The two agree to six decimals in psia and part company only in bar, because the conversion back through the engine's own exact factor is what introduces the difference in the first place.",
+   "The round figure is not the one the engine works to, and the gap depends on which of the two numbers it is taken as a fraction of.",
+   "The two agree to six decimals in psia and part company only in bar, because the conversion back through the engine's own factor is what introduces the difference in the first place.",
    "The round figure is what the studio displays, so the two live at different layers.",
    "Nothing is wrong with it, since the threshold value is held and a held number carries no precision claim."
   ],
   "answer": 0,
-  "explanation": "Section 3 gives the gap between the two as a fraction of THE SMALLER, at 1.526417 percent. Section 24 says a threshold of exactly 0.05 psia is 1.503467 percent BELOW THE ONE THE ENGINE ACTUALLY USES. Quote whichever section you are teaching from and weld neither figure to the other's wording."
+  "explanation": "As a fraction of the smaller number the gap is 1.526417 percent. Measured against the threshold the engine actually uses, a threshold of exactly 0.05 psia is 1.503467 percent below it. Both are right, and each needs its basis stated beside it."
  },
  {
   "prompt": "Digest section 3 measures every held constant out of the engine's behaviour and also prints what the engine exports. Why print both columns?",
@@ -132,7 +132,7 @@
   "explanation": "Mechanical erosion from entrained solids or impingement is not modelled here at all, and the engine carries no erosional velocity criterion. The Casing & Tubing Design course owns that criterion and Nodal Analysis and Gas Well Deliverability cite it."
  },
  {
-  "prompt": "One of the studio's unit conversions is truncated where the engine's own factor is exact. Which one, and by how much?",
+  "prompt": "One of the studio's unit conversions is truncated far more coarsely than the engine's own factor. Which one, and by how much?",
   "options": [
    "The rate conversion to mils a year, where a division by 25.4 and a multiplication by a thousand round before the engine's own figure does.",
    "The density conversion, where 16.0185 stands in for a factor the engine exports to twelve figures and carries into the Reynolds number.",
@@ -140,7 +140,7 @@
    "The allowance conversion, where a multiplication by 25.4 loses the definition of the inch that the remaining life arithmetic then divides by."
   ],
   "answer": 2,
-  "explanation": "The exact factor is exact by the definition of the bar and of the pound force, and it is measured out of the psia the engine reports for a partial pressure of exactly 1 bar."
+  "explanation": "The definitions of the bar and of the pound force give 14.503773773021, and the engine's factor sits 1.910e-9 above that. The digest measures the engine's factor out of the psia it reports for a partial pressure of exactly 1 bar."
  },
  {
   "prompt": "What is that truncated divisor worth on the shipped case, and what follows for this course?",
@@ -151,7 +151,7 @@
    "Two rates that differ by 1.806e-6 as a fraction, which is the same figure as the divisor gap because the rate is linear in the pressure."
   ],
   "answer": 0,
-  "explanation": "Through the studio's divisor the shipped case gives 0.754523654262 mm/yr and through the engine's exact factor 0.754524736514 mm/yr. All three capstones therefore state their conditions in the engine's units."
+  "explanation": "Through the studio's divisor the shipped case gives 0.754523654262 mm/yr and through the engine's factor 0.754524736514 mm/yr. All three capstones therefore state their conditions in the engine's units."
  },
  {
   "prompt": "In this course the word integrity is used narrowly. What does it cover?",

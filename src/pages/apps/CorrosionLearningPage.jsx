@@ -79,7 +79,7 @@ const LESSONS = [
   },
   {
     tier: 'Professional',
-    title: 'Water wetting, the largest single lever',
+    title: 'Water wetting, a dropdown that zeroes the rate',
     body: 'A regime rather than a multiplier applied always, a zero rate that is an assumption, and an inhibition figure that is null rather than zero.',
   },
   {

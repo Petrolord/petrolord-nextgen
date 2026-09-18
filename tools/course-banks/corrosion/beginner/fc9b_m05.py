@@ -76,8 +76,8 @@ q(0, "The shipped case runs at an in situ pH of 4.500000. Move it to 4.000000 an
   "It rises from 0.754524 mm/yr to 4.724817 mm/yr, which is the rate the correlation gives at its own fitted condition."],
  "A learner should be able to say why those two facts belong together. The pH factor at 4.500000 is 0.562341, and at the reference it is exactly one."),
 
-q(3, "Change the in situ pH box alone on the shipped case. What else in the chain moves?",
- "Nothing else at all, which is what makes a change in the printed rate easy to attribute to a cause.",
+q(3, "Change the in situ pH box alone on the shipped case. Which other factor in the chain moves?",
+ "None of the others, which is what makes a change in the printed rate easy to attribute to a cause.",
  ["The film multiplier moves with it, because the onset expression takes the pH factor as one of its arguments.",
   "The wetting factor moves with it, because both corrections are applied to the same combined figure in the same step.",
   "The transport term moves with it, because the pH reaches the rate through the water chemistry at the wall."],

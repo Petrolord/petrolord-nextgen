@@ -12,7 +12,7 @@ The same trap runs the other way. A comfortable-looking figure sits beside a fat
 
 ## What the engine returns instead
 
-The screening door now names which of its own limits governs, and it does so in words a reader can act on. Across the six shipped streams it produces four different constraints: mass transfer to the wall, the corrosion allowance against the design life, the model does not apply, and wall shear on the corrosion inhibitor film. A summary that always said the same thing would be a heading rather than a summary, and the fact that these four appear across six streams is what makes it one.
+The screening door names which of its own limits governs, and it does so in words a reader can act on. Across the six teaching streams it produces four different constraints: mass transfer to the wall, the corrosion allowance against the design life, the model does not apply, and wall shear on the corrosion inhibitor film. A summary that always said the same thing would be a heading rather than a summary, and the fact that these four appear across six streams is what makes it one.
 
 Each constraint carries the value it turns on. Etelebou binds on the allowance against the design life at 1.7 yr of 20 yr. Kanbi binds the same way at 7.7 yr of 20 yr. Tunu binds on wall shear at 370 Pa. Opukushi binds on mass transfer at a 2.34 mm/yr transport limit, and Angiama at 0.09 mm/yr. Diebu binds on the model not applying at all, with no value, because no rate verdict is being offered.
 

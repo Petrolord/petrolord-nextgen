@@ -10,11 +10,11 @@ That choice is worth understanding, because the alternative is quietly attractiv
 
 The engine returns a not a number result for a blank velocity, for a blank diameter, for a zero velocity and for a negative diameter, and the vendored gate asserts the result is not infinity rather than merely checking that it is not a normal number. That distinction in the gate is the whole point: a test that accepted any non finite value would pass on the behaviour this one is written to prevent.
 
-The whole screening door goes further. It refuses outright rather than returning a partial answer, and its message names the box:
+The rate door goes further. It refuses outright rather than returning a partial answer, and its message names the box:
 
 > a positive velocity is required: an absent velocity is not an unlimited mass-transfer capacity
 
-The same shape of refusal covers a blank line inside diameter. A refusal that names the input is what lets a user fix the screen in one move, and it is also what stops a caller reading silence as a pass. Notice that the two behaviours sit at two different depths: the bare term hands back a not a number result for a direct caller to check, and the whole screening refuses on the user's behalf.
+The same shape of refusal covers a blank line inside diameter. The whole screening stops earlier still, because it computes the wall shear first, so its message says the film survival check did not run and then names the velocity. A refusal that names the input lets a user fix the screen in one move and stops a caller reading silence as a pass. Notice that the behaviours sit at different depths: the bare term hands back a not a number result for a direct caller to check, and the rate door and the whole screening refuse on the user's behalf.
 
 ## The habit to take away
 

@@ -24,9 +24,10 @@ At a Reynolds number of 4000.0000 the branch is laminar, this module's friction
 factor is 0.004000 and the wall shear is 0.003200 Pa. At 4040.0000 the branch is
 turbulent, this module's friction factor is 0.008739 and the wall shear is
 0.007132 Pa.
-The inputs moved by almost nothing and the answer moved by the factor of
-2.189815 stated above. That is the whole of the discontinuity and it is a
-property of the two expressions rather than a property of any pipe.
+The Reynolds number moved by one percent between those two rows and the wall
+shear more than doubled. Taken across the switch itself, over two
+ten-thousandths of the Reynolds number, the jump is the factor of 2.189815
+stated above. The step belongs to the two expressions and to no pipe.
 
 ## The engine flags the neighbourhood
 
@@ -38,8 +39,7 @@ a note in its own words:
 > friction factor is discontinuous and the shear jumps by about a factor of
 > two. Read this number as a bracket, not a value.
 
-Read that last sentence as an instruction about the kind of quantity you are
-holding. Near the switch the shear is a range with two candidates in it. Away
+Read that last sentence as an instruction. Near the switch the shear is a range with two candidates in it. Away
 from the switch it is a single number.
 
 ## Reporting a discontinuity rather than hiding it

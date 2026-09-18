@@ -10,7 +10,7 @@ q(2, "What is the whole contract of the category door?",
  ["A rate and the conditions that produced it go in, so the word can be softened wherever the wetting regime or the sour comparison says the rate is an upper bound.",
   "A rate and the remaining life go in together, which is what lets the word separate a fast rate on a thick wall from a slow one on a thin wall.",
   "A whole screening goes in and the word comes back on it."],
- "The door sees nothing but the rate. It does not know the temperature, the CO2 fugacity, the velocity, the corrosion allowance or the corrosion inhibitor programme, and it performs three comparisons and stops.")
+ "The door sees nothing but the rate. It does not know the temperature, the CO2 fugacity, the velocity, the corrosion allowance or the corrosion inhibitor programme, and it performs three comparisons against the band edges and one against zero, and stops.")
 
 q(0, "How many band words does the door return, how many edges separate them, and what is the extra word?",
  "Four band words with three edges between them, plus one more word that is no band at all and is returned at exactly zero and below.",
@@ -68,14 +68,14 @@ q(3, "The held list says the bands may be optimistic by one or two steps. What i
   "Neither is stated. The sentence records only that the numbers are unsourced, and one or two steps describes how many edges exist rather than an error."],
  "A direction without a magnitude and without a citation is a warning a reader can carry into a conversation. It is not a correction and nobody can apply it to a number on a screen, which is why it sits on the held list rather than in a help page as guidance.")
 
-q(2, "Tightening the three edges so the words read more conservatively was considered and rejected. On what grounds?",
+q(2, "Why would tightening the three edges so the words read more conservatively not repair them?",
  "It would replace one unsourced set of numbers with a different unsourced set, and it would do it under the appearance of a fix.",
  ["It would break the twelve golden category rows, which pin the edges from both sides, and the golden cannot be recut while the engine stays vendored.",
   "It would move every rate with them, since the rate is formed by the same comparisons.",
   "It would contradict the engine's own admission about the direction of the error."],
  "The screen would then carry numbers nobody could source with a claim of correctness attached that the first set never had. The H2S screening threshold of 0.003500000000 bar was kept for the same reason, declared held in a field and printed in both units.")
 
-q(1, "Move the first band edge to a smaller number and rerun the shipped streams. What moves?",
+q(1, "Move the first band edge to a smaller number and rerun the teaching streams. What moves?",
  "The word on any stream between the old edge and the new one. No rate moves, no remaining life moves and no binding constraint moves.",
  ["The word and the remaining life together, because the life is computed from the band the rate lands in and a stream that changes word changes life with it.",
   "The word and the binding constraint together, because the allowance step reads the band first.",
@@ -87,7 +87,7 @@ q(0, "Why does a reader who treats the word as a summary of the rate get into tr
  ["The word is computed before the rate, so a rate that changes after the label has been chosen leaves the screen carrying a word from an earlier pass.",
   "The word is the more reliable of the two, since three comparisons carry less uncertainty.",
   "The word is derived from the conditions rather than from the rate itself."],
- "The rate is the output of a correlation over stream conditions and the word is the output of three comparisons against three constants. Keeping them apart is the whole of this module.")
+ "The rate is the output of a correlation over stream conditions and the word is the output of three comparisons against three constants and one against zero. Keeping them apart is the whole of this module.")
 
 q(2, "The shipped default case screens at 0.754524 mm/yr and the studio prints a word beside it. What does that one row show about the screen?",
  "That two unsourced layers are stacked in it. The rate is built on held constants and the word is three more comparisons laid on top of the rate.",
@@ -101,7 +101,7 @@ q(3, "Not everything on that same default screen is layered that way. Which figu
  ["The remaining life of 4.207953 yr and the shortfall of 11.915473 mm, since both come out of a door that performs one division over numbers the caller supplied.",
   "The wall shear of 14.408065 Pa and this module's Reynolds number of 416686.8569, since a shear follows from a momentum balance over quantities the user entered.",
   "The computed film onset of 80.984504 C and the pH factor of 0.562341, since both are reached from the typed conditions without a band edge anywhere in the chain."],
- "The partial pressure is the total pressure times the mole fraction, the psia value is a conversion by a factor exact by the definition of the bar, and the effective figure is arithmetic over two typed percentages. The remaining life is a division that rests on a rate, so it inherits what the rate inherits. The Pipeline and Line Sizing course computes its own friction factor and its own Reynolds number on a different correlation with a different transition, so the two will not agree on the same pipe.")
+ "The partial pressure is the total pressure times the mole fraction, the psia value is a unit conversion by the engine's bar to psia factor, and the effective figure is arithmetic over two typed percentages. The remaining life is a division that rests on a rate, so it inherits what the rate inherits. The Pipeline and Line Sizing course computes its own friction factor and its own Reynolds number on a different correlation with a different transition, so the two will not agree on the same pipe.")
 
 q(0, "A decision turns on the difference between two adjacent band words. What is the right reading?",
  "The module cannot support it, because that difference is exactly the width of the uncertainty the engine admits to in its own held list.",

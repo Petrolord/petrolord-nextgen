@@ -89,8 +89,8 @@ q(1, "One held item is a question about where the protective scale factor belong
   "The capstone grades the factor as a ratio against the same case with it removed."],
  "The capstone generator asserts the condition rather than assuming it. Nothing downstream of that factor is graded anywhere in this course, and five of the six digest streams also have a factor of exactly one.")
 
-q(3, "The studio converts a psig pressure by dividing by 14.5038 and the engine exports the exact factor as 14.503773800722. What does the difference cost, and what was done about it?",
- "The shipped defaults give 0.754523654262 mm/yr through the studio's divisor and 0.754524736514 mm/yr through the exact factor, so graded conditions are stated in the engine's units.",
+q(3, "The studio converts a psig pressure by dividing by 14.5038 and the engine exports 14.503773800722. What does the difference cost, and what was done about it?",
+ "The shipped defaults give 0.754523654262 mm/yr through the studio's divisor and 0.754524736514 mm/yr through the engine's factor, so graded conditions are stated in the engine's units.",
  ["Nothing measurable, since the two agree well inside six significant figures, and the capstones state their conditions in field units as the studio does.",
   "A whole rate category step at the shipped defaults, which is why the conditions are stated in the engine's units and the category is never graded here.",
   "The difference is the reason the fugacity pressure cap is held, since a pressure converted two ways can land on either side of 250.000000000000 bar."],
@@ -104,11 +104,11 @@ q(2, "A capstone in this course needs a rate for its allowance arithmetic. Where
  "The remaining-life door takes an allowance, a consumed depth, a design life and a rate. With the rate stated, the whole arithmetic reduces to a division, a multiplication and a comparison over quantities somebody measured or typed.")
 
 q(0, "You want to know which of `requiredAllowanceMm` and the shortfall depends on the consumed depth. What is the one sweep that settles it?",
- "Set the consumed depth to zero and rerun. The required allowance stays exactly where it was and the shortfall changes.",
+ "Set the consumed depth to zero and rerun. The required allowance stays exactly where it was and the shortfall changes on any case that was short.",
  ["Set the rate to zero and rerun. The required allowance goes to zero and the shortfall holds, which shows the shortfall is the field that carries the consumed depth.",
   "Set the allowance to zero and rerun. The door refuses, and the message names which of the two fields it was unable to form from the inputs it was given.",
   "Read the field names and the comment above the door, which states which inputs each field is formed from and is the quickest route to the same answer."],
- "Read what a function returns rather than what its name suggests it returns, and find out by moving an input. On one shipped stream the shortfall is 0.000000 mm because the remaining allowance covers the required figure, and that zero is a pass on that one comparison and silent about everything else.")
+ "Read what a function returns rather than what its name suggests it returns, and find out by moving an input. On one teaching stream the shortfall is 0.000000 mm because the remaining allowance covers the required figure, and that zero is a pass on that one comparison and silent about everything else.")
 
 emit(Q, '/root/wt-fc9-nextgen/tools/course-banks/corrosion/advanced/fc9a_m05.json', expect_n=15)
 finish()

@@ -8,7 +8,7 @@
    "A whole screening goes in and the word comes back on it."
   ],
   "answer": 2,
-  "explanation": "The door sees nothing but the rate. It does not know the temperature, the CO2 fugacity, the velocity, the corrosion allowance or the corrosion inhibitor programme, and it performs three comparisons and stops."
+  "explanation": "The door sees nothing but the rate. It does not know the temperature, the CO2 fugacity, the velocity, the corrosion allowance or the corrosion inhibitor programme, and it performs three comparisons against the band edges and one against zero, and stops."
  },
  {
   "prompt": "How many band words does the door return, how many edges separate them, and what is the extra word?",
@@ -99,7 +99,7 @@
   "explanation": "A direction without a magnitude and without a citation is a warning a reader can carry into a conversation. It is not a correction and nobody can apply it to a number on a screen, which is why it sits on the held list rather than in a help page as guidance."
  },
  {
-  "prompt": "Tightening the three edges so the words read more conservatively was considered and rejected. On what grounds?",
+  "prompt": "Why would tightening the three edges so the words read more conservatively not repair them?",
   "options": [
    "It would break the twelve golden category rows, which pin the edges from both sides, and the golden cannot be recut while the engine stays vendored.",
    "It would move every rate with them, since the rate is formed by the same comparisons.",
@@ -110,7 +110,7 @@
   "explanation": "The screen would then carry numbers nobody could source with a claim of correctness attached that the first set never had. The H2S screening threshold of 0.003500000000 bar was kept for the same reason, declared held in a field and printed in both units."
  },
  {
-  "prompt": "Move the first band edge to a smaller number and rerun the shipped streams. What moves?",
+  "prompt": "Move the first band edge to a smaller number and rerun the teaching streams. What moves?",
   "options": [
    "The word and the remaining life together, because the life is computed from the band the rate lands in and a stream that changes word changes life with it.",
    "The word on any stream between the old edge and the new one. No rate moves, no remaining life moves and no binding constraint moves.",
@@ -129,7 +129,7 @@
    "The word is derived from the conditions rather than from the rate itself."
   ],
   "answer": 0,
-  "explanation": "The rate is the output of a correlation over stream conditions and the word is the output of three comparisons against three constants. Keeping them apart is the whole of this module."
+  "explanation": "The rate is the output of a correlation over stream conditions and the word is the output of three comparisons against three constants and one against zero. Keeping them apart is the whole of this module."
  },
  {
   "prompt": "The shipped default case screens at 0.754524 mm/yr and the studio prints a word beside it. What does that one row show about the screen?",
@@ -151,7 +151,7 @@
    "The H2S partial pressure of 0.051000 bar, its 0.739699 psia, and the effective corrosion inhibition of 85.500000 percent."
   ],
   "answer": 3,
-  "explanation": "The partial pressure is the total pressure times the mole fraction, the psia value is a conversion by a factor exact by the definition of the bar, and the effective figure is arithmetic over two typed percentages. The remaining life is a division that rests on a rate, so it inherits what the rate inherits. The Pipeline and Line Sizing course computes its own friction factor and its own Reynolds number on a different correlation with a different transition, so the two will not agree on the same pipe."
+  "explanation": "The partial pressure is the total pressure times the mole fraction, the psia value is a unit conversion by the engine's bar to psia factor, and the effective figure is arithmetic over two typed percentages. The remaining life is a division that rests on a rate, so it inherits what the rate inherits. The Pipeline and Line Sizing course computes its own friction factor and its own Reynolds number on a different correlation with a different transition, so the two will not agree on the same pipe."
  },
  {
   "prompt": "A decision turns on the difference between two adjacent band words. What is the right reading?",

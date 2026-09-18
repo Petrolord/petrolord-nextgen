@@ -2,11 +2,11 @@
 
 {{panel:fc-rate-explorer}}
 
-A number on a screen and a word beside it look like one statement. They are two, and they come from different places. The rate is the output of a correlation over stream conditions. The word is the output of three comparisons against three constants. Everything this lesson is about follows from keeping them apart.
+A number on a screen and a word beside it look like one statement. They are two, and they come from different places. The rate is the output of a correlation over stream conditions. The word is the output of three comparisons against three constants and one against zero. Everything this lesson is about follows from keeping them apart.
 
 ## Where the word comes from
 
-The category door is handed a rate and returns a band label. It sees nothing else. It does not know the temperature, the CO2 fugacity, the velocity, the allowance or the corrosion inhibitor programme. It performs three comparisons against 0.100000000000, 0.500000000000 and 1.000000000000 mm/yr and it stops.
+The category door is handed a rate and returns a band label. It sees nothing else. It does not know the temperature, the CO2 fugacity, the velocity, the allowance or the corrosion inhibitor programme. It performs three comparisons against 0.100000000000, 0.500000000000 and 1.000000000000 mm/yr and one against zero, and it stops.
 
 That makes the word derivative twice over. It inherits everything uncertain about the rate, since a rate built on held constants passes that inheritance straight through. Then it adds a second layer of its own, because the three edges are themselves unsourced.
 
@@ -30,4 +30,4 @@ Read it as a rendering convention and argue with the rate underneath it. When th
 
 ## Exercise
 
-Take a rate the engine returns and record the word beside it and the value of `categoryHeld`. Then choose a boundary, decide on a value one step tighter, and write down which streams from the shipped set would change word under it. Say what else on the screen changed while you did that.
+Take a rate the engine returns and record the word beside it and the value of `categoryHeld`. Then choose a boundary, decide on a value one step tighter, and write down which of the teaching streams would change word under it. Say what else on the screen changed while you did that.

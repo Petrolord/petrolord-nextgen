@@ -149,7 +149,7 @@ export const SourMode = ({ h, w }) => {
     <>
       <TileGrid>
         <Tile label="H2S partial pressure at the studio defaults" value={six(w.ph2sBar)} unit="bar" />
-        <Tile label="The same, by the engine's exact bar to psia factor" value={six(w.ph2sPsia)} unit="psia" />
+        <Tile label="The same, by the engine's bar to psia factor" value={six(w.ph2sPsia)} unit="psia" />
         <Tile label="The screening threshold" value={twelve(h.thresholdBar)} unit="bar" />
         <Tile label="Decades above the threshold" value={six(w.decadesAboveThreshold)} />
       </TileGrid>
@@ -251,7 +251,7 @@ export const AbsentMode = ({ w, f }) => {
         head={['field', 'value', 'what it means']}
         rows={[
           ['ph2sBar', six(w.ph2sBar), 'the H2S partial pressure, the total pressure times the mole fraction'],
-          ['ph2sPsia', six(w.ph2sPsia), 'the same, by a factor exact by the definition of the bar'],
+          ['ph2sPsia', six(w.ph2sPsia), 'the same, by the engine\'s bar to psia factor'],
           ['thresholdBar', six(w.thresholdBar), 'the screening threshold, whose VALUE is held'],
           ['thresholdPsia', twelve(w.thresholdPsia), 'the same threshold, derived rather than rounded'],
           ['sour', String(w.sour), 'above the threshold or below it, and nothing more'],

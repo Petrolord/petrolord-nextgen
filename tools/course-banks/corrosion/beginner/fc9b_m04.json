@@ -107,7 +107,7 @@
    "All 6, since every scenario used anywhere in this course is set below its own onset by construction."
   ],
   "answer": 1,
-  "explanation": "The shipped studio case is one of the 5, at 60.000000 C with a computed onset of 80.984504 C. Where the multiplier is exactly one, multiplying by it changes nothing at all."
+  "explanation": "The shipped studio case, which is not one of the six, sits below its onset too, at 60.000000 C with a computed onset of 80.984504 C. Where the multiplier is exactly one, multiplying by it changes nothing at all."
  },
  {
   "prompt": "Where in the chain does this engine apply the film multiplier, and what is the standing of that choice?",

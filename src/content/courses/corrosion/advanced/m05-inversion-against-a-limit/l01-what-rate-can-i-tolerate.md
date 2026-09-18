@@ -2,7 +2,7 @@
 
 {{panel:fc-inhibitor-integrity-explorer}}
 
-The remaining-life door runs one way. Hand it a rate, an allowance, a consumed depth and a design life and it gives back the remaining allowance, the remaining years, the allowance a design life demands, the shortfall and a verdict. Every question in this module is the same door read backwards. Fix the verdict and ask what input would produce it.
+The remaining-life door runs one way. Hand it a rate, an allowance, a consumed depth and a design life and it gives back the remaining allowance, the remaining years, the allowance a design life demands, the shortfall and a verdict. Most questions in this module are the same door read backwards. Fix the verdict and ask what input would produce it.
 
 ## The inverse question
 

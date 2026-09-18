@@ -41,14 +41,14 @@ q(3, "The shipped case carries a design life of 20.000000 yr. What verdict does 
   "None is offered."],
  "The binding constraint on that case is the corrosion allowance against the design life, and the engine reports the life it actually reaches beside the life it was asked for.")
 
-q(0, "What allowance would a new line at this rate have needed in order to reach the end of the stated design life?",
+q(0, "On the shipped case, what allowance would a new line at the shipped rate have needed in order to reach the end of the stated design life?",
  "15.090473 mm.",
  ["3.175000 mm, which is the allowance the line already carries.",
   "11.915473 mm, which is the gap between two of the fields on that screen.",
   "0.000000 mm."],
  "That field asks what a line at this rate would have needed to be built with in order to reach the end of the stated design life. It is a different question from how long this line has.")
 
-q(1, "What shortfall in millimetres does that same screen carry?",
+q(1, "What shortfall in millimetres does the shipped screen carry?",
  "11.915473 mm.",
  ["15.090473 mm, which is the allowance the design life demands.",
   "3.175000 mm.",
@@ -83,7 +83,7 @@ q(1, "Which course owns wall loss taken to a derated burst pressure?",
   "This one, which reports it beside the remaining life."],
  "This module consumes an allowance and never computes a pressure, so the comparison between the two is a pivot from one course to another rather than a derivation you can run here.")
 
-q(2, "Which live Suite course names this module in its own scope statement, and on what grounds?",
+q(2, "Which live Academy course refuses corrosion in its own scope statement, the refusal this course fills?",
  "The Well Integrity and P and A course, which refuses corrosion, wall loss and remaining life in its own scope.",
  ["The Casing and Tubing Design course, which defers its erosional criterion to this one.",
   "The Storage Tank course, which takes its shell allowance from this module's output.",

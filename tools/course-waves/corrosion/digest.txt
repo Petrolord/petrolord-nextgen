@@ -56,7 +56,7 @@ WHAT THE ENGINE NOW RETURNS IN ITS PLACE, measured at the shipped app defaults:
 | field | value | what it means |
 | --- | --- | --- |
 | `ph2sBar` | 0.051000 | the H2S partial pressure, the total pressure times the H2S mole fraction |
-| `ph2sPsia` | 0.739699 | the same, converted by the engine's exact bar to psia factor |
+| `ph2sPsia` | 0.739699 | the same, converted by the engine's bar to psia factor |
 | `thresholdBar` | 0.003500 | the screening threshold, whose VALUE is held |
 | `thresholdPsia` | 0.050763208303 | the same threshold, derived rather than rounded |
 | `thresholdHeld` | true | the engine declares that the number is not sourced in the repository |
@@ -74,7 +74,7 @@ THE THRESHOLD VALUE ITSELF STAYED WHERE IT WAS. Changing a live number without a
 
 # SECTION 3: The numbers this module stands on, MEASURED out of the engine rather than typed, and pinned against a third copy (owned by Associate m01 and Expert m01)
 
-NONE of these is sourced in this repository WITH ONE NAMED EXEMPTION, AND IT IS THE ROW CALLED 'the bar to psia factor'. That factor is exact by the definition of the bar and of the pound-force rather than held: section 24 derives it, section 21 grades a conversion through it, and the engine's own eleven-item held list does not name it. Every OTHER constant here is HELD FOR LITERATURE, every one is measured below by asking the engine a question whose answer is that constant and nothing else, and every measured value is compared against a literal typed in this generator, which is a THIRD location. A constant that lives in the engine and in the oracle cannot be validated by comparing the engine with the oracle, and a paired battery proved that: fifteen of seventeen constants moved in both files at once left the suite green.
+NONE of these is sourced in this repository WITH ONE NAMED EXEMPTION, AND IT IS THE ROW CALLED 'the bar to psia factor'. That factor is a unit conversion rather than a held correlation constant: section 24 rebuilds it from the definitions of the bar and of the pound-force and measures how far the engine's value sits from them, section 21 grades a conversion through it, and the engine's own eleven-item held list does not name it. Every OTHER constant here is HELD FOR LITERATURE, every one is measured below by asking the engine a question whose answer is that constant and nothing else, and every measured value is compared against a literal typed in this generator, which is a THIRD location. A constant that lives in the engine and in the oracle cannot be validated by comparing the engine with the oracle, and a paired battery proved that: fifteen of seventeen constants moved in both files at once left the suite green.
 
 MEASURING RATHER THAN READING THE EXPORT IS DELIBERATE. An export tells you what the module declares. A measurement tells you what it actually uses. Both are below, and the two columns disagreeing would be a finding.
 
@@ -113,7 +113,7 @@ MEASURING RATHER THAN READING THE EXPORT IS DELIBERATE. An export tells you what
 
 30 constants pinned, every one against a literal in a third file, and the whole table is re-measured on every rebuild of this digest.
 
-THE ENGINE EXPORTS FIFTEEN OF THESE. An export agreeing with a measurement checks the export; a measurement on its own checks the behaviour. Both columns are here so a disagreement between them would be visible.
+THE ENGINE EXPORTS 15 CONSTANTS BY NAME. 14 of them are constants pinned in the table above, and the other is `SOUR_THRESHOLD_PSIA`, the sour threshold again in psia, so 16 of the 30 pinned constants have no export at all and are reached by measurement alone. An export agreeing with a measurement checks the export; a measurement on its own checks the behaviour. Both columns are here so a disagreement between them would be visible.
 
 | export | declared value | measured from behaviour | relative difference |
 | --- | --- | --- | --- |
@@ -170,7 +170,7 @@ THE GOLDEN CARRIES ITS OWN COPY of these constants in a `heldConstants` block, w
 
 28 of the golden's 28 held constants are re-measured here against the engine's behaviour, so the golden, the engine and this generator are three independent copies and any two of them agreeing is no longer enough.
 
-# SECTION 4: CO2 partial pressure, CO2 fugacity, and the difference the screen printed for a year without explaining (owned by Associate m02)
+# SECTION 4: CO2 partial pressure, CO2 fugacity, and the difference between them that the screen prints (owned by Associate m02)
 
 TWO QUANTITIES, ONE MOLECULE, AND THEY ARE NOT THE SAME NUMBER. The partial pressure is the total pressure times the mole fraction. The fugacity is the partial pressure times a coefficient below one at high pressure, and it is the fugacity that drives the RATE. The H2S threshold and the film-governing ratio use PARTIAL PRESSURES, and no fugacity correction is applied to H2S at all, which the engine declares in a field.
 
@@ -316,7 +316,7 @@ THE RANGE GUARD IS SEPARATE FROM THE REFERENCE GUARD, and they say different thi
 | 14.500000 | an in-situ pH between 0 and 14 is required: 14.5 is outside it |
 | a blank box | a finite in-situ pH is required |
 
-# SECTION 8: Water wetting, and the largest single lever in this model (owned by Professional m01)
+# SECTION 8: Water wetting, and a single dropdown that can take the rate to zero (owned by Professional m01)
 
 Steel does not corrode where it is oil wet. The engine treats that as a REGIME and not as a multiplier applied always, which matters because the multiplier for the oil-wet regime is zero and a zero rate is the strongest reassurance a screen can give.
 
@@ -539,7 +539,7 @@ The last column is zero at every pressure, which is the whole claim. A ratio tha
 
 FOUR ANSWERS, ALL REACHED ABOVE: carbonate, mixed, sulphide, unknown. The boundaries, measured by bisecting the regime word, are 0.002000000000 and 0.050000000000, and BOTH ARE HELD.
 
-BOTH UNKNOWN BRANCHES CARRY A NOTE, which they did not always. A panel that prints the note unconditionally rendered an empty paragraph whenever the branch had none:
+BOTH UNKNOWN BRANCHES CARRY A NOTE, so a panel that prints the note unconditionally always has a sentence to print:
 | what was asked | regime | the engine's own note |
 | --- | --- | --- |
 | a zero CO2 partial pressure | unknown | with no CO2 partial pressure there is no H2S to CO2 ratio, so which film governs is not known here. A CO2 rate model is not the right model for this stream. |
@@ -647,9 +647,9 @@ THE FOURTH BOUNDARY IS ZERO ITSELF, AND THE GOLDEN IS WHERE IT IS PINNED. The fi
 
 READ THE APP'S OWN DEFAULT ROW. At the shipped defaults the rate is 0.754524 mm/yr and the label is "high". A band set one step tighter would call the same number something worse, and nothing in this repository says which band set is right. That is what "held" means in practice: the word on the screen is not a measurement.
 
-# SECTION 16: The binding constraint, which is the summary this module did not have (owned by Expert m04)
+# SECTION 16: The binding constraint, the summary that reconciles the screen (owned by Expert m04)
 
-A screen that returns seven independent numbers and reconciles none of them is a screen the reader has to summarise themselves, and they will summarise it by reading the largest number. The engine now names WHICH OF ITS OWN LIMITS governs the answer, in descending order of what would change first, and every one of them is derived from what is already computed.
+A screen that returns seven independent numbers and reconciles none of them is a screen the reader has to summarise themselves, and they will summarise it by reading the largest number. The engine names WHICH OF ITS OWN LIMITS governs the answer, in descending order of what would change first, and every one of them is derived from what is already computed.
 
 | stream | binding constraint | the value it turns on | why, in the engine's own words |
 | --- | --- | --- | --- |
@@ -977,7 +977,7 @@ WHAT THAT MEANS FOR THE EIGHTEEN GRADED CAPSTONE FIELDS. Not one of them is a co
 
 | what is graded | why it is clear of every held item |
 | --- | --- |
-| the stream bookkeeping: the CO2 partial pressure, the H2S partial pressure in bar and in psia, and the H2S to CO2 mole ratio | each is the total pressure times a mole fraction, or a ratio of two mole fractions, or a conversion by a factor exact by the definition of the bar. No correlation constant, no fugacity coefficient, no threshold and no boundary is in any chain |
+| the stream bookkeeping: the CO2 partial pressure, the H2S partial pressure in bar and in psia, and the H2S to CO2 mole ratio | each is the total pressure times a mole fraction, or a ratio of two mole fractions, or a conversion by the engine's bar to psia factor, which section 24 checks against the definitions of the bar and of the pound-force. No correlation constant, no fugacity coefficient, no threshold and no boundary is in any chain |
 | the flow definition: the Reynolds number | density times velocity times diameter over viscosity is a definition. The Blasius pair and the branch switch act on the friction factor DOWNSTREAM of it, and no graded field reads a friction factor or a shear stress |
 | the inhibitor arithmetic: the effective protection, the shortfall, the retained fraction and the metal-loss ratio | all four are arithmetic over two typed percentages, and the two that are ratios of engine rates share the whole correlation chain so it divides out exactly. The capstone generator MEASURES that invariance rather than claiming it, by re-running at conditions that move the rate by more than half and cross the fugacity cap |
 | the allowance arithmetic: the remaining life, the required allowance, the tolerable rate and the allowance a reinstatement needs | the remaining-life door takes an allowance, a consumed depth, a design life and A RATE THE CAPSTONE STATES from an inspection survey. No correlation constant is reachable from it, and the Expert fields are found by bisecting the engine's own verdict rather than by an algebraic shortcut around it |
@@ -1047,13 +1047,13 @@ The engine works in the units the correlations are published in: temperature in 
 | corrosion allowance and consumed depth | multiply by 25.4 | millimetres |
 | every rate on the way back out | divide by 25.4, multiply by 1000 | mils a year alongside millimetres a year |
 
-ONE OF THOSE FACTORS IS TRUNCATED AND THE ENGINE'S OWN IS NOT. The studio divides a psig pressure by 14.5038 to reach bar. The engine exports the exact factor, which is 14.503773800722, exact by the definition of the bar and of the pound-force, and measured here out of the psia the engine reports for a 1 bar partial pressure. The studio's divisor is therefore larger than the exact factor by 1.806e-6 as a fraction, so a pressure converted through the studio and a pressure converted through the engine's own factor differ in the sixth significant figure.
+ONE OF THOSE FACTORS IS TRUNCATED, AND THE ENGINE'S OWN IS CLOSE TO EXACT WITHOUT BEING EXACT. The studio divides a psig pressure by 14.5038 to reach bar. The engine exports 14.503773800722, measured here out of the psia the engine reports for a 1 bar partial pressure. Rebuilt from the definitions of the pound (0.45359237 kg), standard gravity (9.80665 m/s2), the inch (0.0254 m) and the bar (100000 Pa), the factor is 14.503773773021, so the engine's value sits above the definitions by 1.910e-9 as a fraction. The engine's own comment calls its factor exact by definition, and it is not; the gap is far below anything this course grades at. The studio's divisor is larger than the engine's factor by 1.806e-6 as a fraction, so a pressure converted through the studio and a pressure converted through the engine's own factor differ in the sixth significant figure.
 
-WHAT THAT IS WORTH, measured rather than argued. The shipped defaults through the studio's divisor give a total pressure of 51.000427474179 bar and a rate of 0.754523654262 mm/yr. Through the engine's exact factor they give 51.000519600160 bar and 0.754524736514 mm/yr. The two rates differ by 1.434e-6 as a fraction, which is far below anything a screening decision turns on and far above zero.
+WHAT THAT IS WORTH, measured rather than argued. The shipped defaults through the studio's divisor give a total pressure of 51.000427474179 bar and a rate of 0.754523654262 mm/yr. Through the engine's factor they give 51.000519600160 bar and 0.754524736514 mm/yr. The two rates differ by 1.434e-6 as a fraction, which is far below anything a screening decision turns on and far above zero.
 
 THIS IS WHY NO GRADED FIELD IN THIS COURSE IS CONVERTED THROUGH THE STUDIO. The three capstones state their conditions in the ENGINE'S units, and they say so on the page. Grading a learner on which rounding the app happened to use would grade them on the app rather than on corrosion, and the difference is large enough to fail a tolerance while being far too small to matter to an engineer. A capstone that did that would be measuring the wrong thing on purpose.
 
-AND THE SAME TRUNCATION ONCE REACHED A HINT A USER READ. The sour threshold was labelled 0.05 psia and it is 0.050763208303 psia; a threshold of exactly 0.05 psia would be 0.003447378640 bar, which is 1.503467 percent below the threshold the engine actually uses. The engine now derives and prints both numbers, and the vendored gate asserts the psia value is not 0.05.
+AND THE SAME ROUNDING HABIT MEETS A THRESHOLD. A sour threshold of 0.05 psia is a figure people carry around, and the one this engine uses is 0.050763208303 psia; a threshold of exactly 0.05 psia would be 0.003447378640 bar, which is 1.503467 percent below the threshold the engine actually uses. The engine derives and prints both numbers, and the vendored gate asserts the psia value is not 0.05.
 
 # SECTION 25: WHAT THIS ENGINE USED TO DO. THIS SECTION IS REPAIR HISTORY, and nothing follows it (owned by Expert m06)
 
@@ -1064,7 +1064,7 @@ AND THE SAME TRUNCATION ONCE REACHED A HINT A USER READ. The sour threshold was 
 
 # ITEM ONE. THE HEADLINE. AN INVENTED CURVE WEARING SOMEBODY ELSE'S AUTHORITY.
 - The general lesson, and it is the largest one in this course: a calculation can be wrong in a way that no amount of measurement repairs, because the number was never the claim. If a curve is labelled with a standard's name, the claim is "this is what the standard says". Retuning the curve does not make that true. The only honest repair is to withdraw the claim and say the thing is not provided.
-- Before the repair this engine computed a sour-service severity region from an expression of its own, labelled it with two standards, and served three named material recommendations off it: what steel to buy, when to control hardness, and when to qualify weldments. Four measurements settled what the expression was worth. Moving its pH pivot by a whole unit left the validation suite entirely green. Widening one of its region boundaries by a factor of two left the suite green. A missing pH made the expression not-a-number, both of its comparisons failed, and it fell through to the HARDEST material recommendation in the file from an input nobody had supplied.
+- Before the repair this engine computed a sour-service severity region from an expression of its own, labelled it with two standards, and served three named material recommendations off it: what steel to buy, when to control hardness, and when to qualify weldments. Three measurements show what the expression was worth. Moving its pH pivot by a whole unit left the validation suite entirely green. Widening one of its region boundaries by a factor of two left the suite green. A missing pH made the expression not-a-number, both of its comparisons failed, and it fell through to the HARDEST material recommendation in the file from an input nobody had supplied.
 - Today the function is gone, nothing replaces it, and section 2 is the current statement of that absence. The absence is a FIELD rather than a missing value: `regionProvided` is false and `materialGuidanceProvided` is false, so a caller cannot read the gap as an unset property. The threshold value the screen still uses stayed exactly where it was, because changing a live number without a source is the same mistake with the sign flipped.
 
 # ITEM TWO. AN INPUT THAT MOVED NOTHING, BESIDE A SCREEN THAT SAID IT MATTERED.

@@ -21,7 +21,7 @@ q(3, "What did the pre-repair engine serve off that severity region?",
   "A wall shear threshold for sour service, set below the 100.000000000000 Pa used elsewhere, which was withdrawn with the region it was derived from."],
  "A curve that carries a standard's name and tells an engineer what steel to buy is not a tolerance question. The three strings are gone and none of them appears anywhere in the 775 lines of the engine source.")
 
-q(0, "Four measurements settled what that pre-repair expression was worth. What did they find?",
+q(0, "Three measurements show what that pre-repair expression was worth. What did they find?",
  "Moving its pH pivot by a whole unit left the suite green, widening a region boundary by a factor of two left the suite green, and a missing pH fell through to the hardest recommendation.",
  ["Moving its pH pivot by a whole unit failed one case, widening a region boundary by a factor of two failed two more, and a missing pH refused with a message naming the box.",
   "Moving its pH pivot by a whole unit left the suite green, widening a region boundary by a factor of two failed the suite, and a missing pH returned the mildest recommendation.",

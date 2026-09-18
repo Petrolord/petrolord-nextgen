@@ -1,10 +1,10 @@
-# The largest lever is a dropdown
+# A lever that is a dropdown
 
 {{panel:fc-rate-explorer}}
 
 Almost every input on this screen is a measured quantity with a unit. The
-wetting regime is a word chosen from a list, and water wetting is the largest
-single lever in this model. At one fixed set of
+wetting regime is a word chosen from a list, and it can take the rate to zero
+on its own. At one fixed set of
 conditions the rate is 1.676428 mm/yr water wet, 0.620278 mm/yr intermittent at
 a water cut of 0.370000, and 0.000000 mm/yr oil wet, with nothing else
 touched.
@@ -29,7 +29,7 @@ What it does not do is guess. A string it cannot resolve refuses by name:
 
 The same happens for "waterwette", for the empty string and for "gasWet". Read
 that against the size of the lever. An unrecognised regime that fell through to
-one of the three branches would be choosing the largest input in the model on
+one of the three branches would be choosing an input that can zero the rate on
 the user's behalf from a typing mistake, and whichever branch it chose would be
 wrong some of the time and silent all of the time.
 
@@ -43,10 +43,10 @@ empty case is the one a form produces when nobody has chosen yet.
 ## The list is closed and short
 
 Three regimes, and no fourth. There is no gas-wet option, no stratified option
-and no annular option, because this module carries no flow-pattern model and a
-longer list would imply one. A reader coming from a multiphase flow background
-will notice the absence, and the honest reading of it is that the three entries
-here are a coarse interpretation the engineer supplies rather than a regime map
+and no annular option, and neither the engine nor the digest says why the list
+stops at three. What is true is that no door in this module works out a flow
+pattern, so a reader coming from a multiphase flow background should read the
+three entries as a coarse interpretation the engineer supplies rather than a regime map
 the module has derived.
 
 ## What this costs the reader

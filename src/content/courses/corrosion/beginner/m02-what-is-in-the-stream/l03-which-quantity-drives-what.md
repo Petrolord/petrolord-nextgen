@@ -26,4 +26,4 @@ The Fluid Properties course owns fugacity and partial pressure as thermodynamic 
 
 ## Exercise
 
-Open the panel and set a total pressure of 10.000000 bar, then 200.000000 bar, at the shipped composition. Record the carbon dioxide partial pressure and the fugacity at each, and record the hydrogen sulphide to carbon dioxide ratio at each. Say which of the three figures moves with pressure and which does not, then state in one sentence what that tells you about the arguments each is built from.
+Open the panel and set a total pressure of 10.000000 bar, then 200.000000 bar, at the shipped composition. Record the carbon dioxide partial pressure and the fugacity at each, and work out the hydrogen sulphide to carbon dioxide ratio at each from the shipped mole fractions. Say which of the three figures moves with pressure and which does not, then state in one sentence what that tells you about the arguments each is built from.

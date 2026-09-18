@@ -8,9 +8,9 @@ The shipped case shows every conversion at work. A temperature typed as 140 F re
 
 ## One factor is truncated
 
-The studio converts a psig pressure to bar by adding the atmospheric offset and dividing by 14.5038. The engine exports the exact factor, which is 14.503773800722 and is exact by the definition of the bar and of the pound force. The studio's divisor is therefore larger than the exact factor by 1.806e-6 as a fraction.
+The studio converts a psig pressure to bar by adding the atmospheric offset and dividing by 14.5038. The engine exports 14.503773800722. Rebuilt from the definitions of the bar and of the pound force the factor is 14.503773773021, so the engine's value sits 1.910e-9 above exact as a fraction, and the studio's divisor is larger than the engine's by 1.806e-6.
 
-Measured rather than argued, that is worth the following on the shipped case. Through the studio's divisor the total pressure is 51.000427474179 bar and the rate is 0.754523654262 mm/yr. Through the engine's exact factor the same case gives 51.000519600160 bar and 0.754524736514 mm/yr. The two rates differ by 1.434e-6 as a fraction, which is far below anything a screening decision turns on and is still far above zero.
+Measured rather than argued, that is worth the following on the shipped case. Through the studio's divisor the total pressure is 51.000427474179 bar and the rate is 0.754523654262 mm/yr. Through the engine's factor the same case gives 51.000519600160 bar and 0.754524736514 mm/yr. The two rates differ by 1.434e-6 as a fraction, which is far below anything a screening decision turns on and is still far above zero.
 
 That gap is the reason no graded field in this course is converted through the studio. All three capstones state their conditions in the engine's units and say so on the page. Grading a learner on which rounding an app happens to carry would measure the app instead of the corrosion.
 
@@ -20,4 +20,4 @@ A sour screening threshold of exactly 0.05 psia is a figure people carry around,
 
 ## Exercise
 
-Take the shipped pressure of 725 psig and convert it to bar twice, once by dividing by 14.5038 and once by dividing by 14.503773800722, then compare your two answers against the 51.000427474179 bar and 51.000519600160 bar this lesson prints. Say at which decimal place your two answers first differ, and then say whether that difference would change the film risk word on the screen or the rate you would act on.
+Take the shipped pressure of 725 psig, add the atmospheric 14.7 and convert the sum to bar twice, once by dividing by 14.5038 and once by dividing by 14.503773800722, then compare your two answers against the 51.000427474179 bar and 51.000519600160 bar this lesson prints. Say at which decimal place your two answers first differ, and then say whether that difference would change the film risk word on the screen or the rate you would act on.

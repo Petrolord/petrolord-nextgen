@@ -80,13 +80,13 @@ q(3, "At a total pressure of 1.000000 bar the fugacity coefficient is 0.997465. 
  ["That the coefficient is clamped at one below a lower cap, in the same way it is held flat above the upper one.",
   "That the correlation was fitted at atmospheric pressure, so the coefficient is exactly one there by definition.",
   "That the two quantities can be used interchangeably at any pressure at all, since the correction never leaves the sixth decimal on any stream."],
- "Here the two differ in the fourth decimal place, and on a compressed line they differ in the first. The constants behind the coefficient are held for literature like the rest."),
+ "Here the fugacity is 0.029924 bar against a partial pressure of 0.030000 bar, and at 200.000000 bar it is 3.611511 bar against 6.000000 bar. The constants behind the coefficient are held for literature like the rest."),
 
-q(2, "Only four range guards are enforced in this module and may be taught as enforced. Which set is right?",
+q(2, "Which set is made up entirely of range guards this module enforces on what a caller types, rather than published validity bands it holds?",
  "Nought to one on every fraction, nought to fourteen on pH, a temperature above absolute zero, and the partial pressure sum against the total.",
  ["The published validity band of each correlation, the fugacity cap, the pH reference and the film stripping threshold.",
   "Nought to one on every fraction, the fugacity pressure cap, the pH reference and a positive velocity on the transport term.",
-  "A temperature above absolute zero, a positive total pressure, a positive velocity and a positive line inside diameter."],
+  "A temperature above absolute zero, a positive total pressure, and the published validity band of the transport term on velocity and line size."],
  "Every published validity band of every correlation is held, so a screening well outside one still returns a number and says nothing about it."),
 
 q(1, "Which quantity does the hydrogen sulphide screening comparison use, and how does the engine make that visible?",
@@ -112,7 +112,7 @@ q(0, "One stream reports a combined rate that is 0.990899 of its smaller term. W
   "One where the film multiplier is exactly one, so nothing is removed from the combination after it is formed."],
  "It is the slowest of the six streams on both terms at once, and the engine puts its controlling margin at 107.879479, which is the largest of the six."),
 
-q(2, "On that same stream, which inputs would a corrosion engineer reach for to move the answer?",
+q(2, "On the stream whose combined rate is 0.990899 of its smaller term, which inputs would a corrosion engineer reach for to move the answer?",
  "Velocity and line size, because the transport term is far below the reaction term and transport is what the engine names.",
  ["Temperature and carbon dioxide, because the reaction term is the larger of the two and a larger term is what sets the rate.",
   "The corrosion inhibitor efficiency alone, since it is the last lever.",
@@ -126,7 +126,7 @@ q(1, "One exponent of the transport term is described in the digest as a propert
   "The coefficient in front of the term, measured at 2.450000000000, because it is read at unit velocity, unit diameter and unit fugacity."],
  "The base two log of the doubling ratio in fugacity comes out at exactly one. The other three are held for literature and pinned against a literal in a third file."),
 
-q(3, "Both ratio columns in that sweep are constant down the table and equal to each other. Why is that the claim being made?",
+q(3, "In the digest's sweep of the transport term against velocity at four line diameters, both ratio columns are constant down the table and equal to each other. Why is that the claim being made?",
  "It is what a power law in velocity means, and it is a statement about the shape of the term that holds whatever its constants turn out to be.",
  ["It is what a linear term means, since a doubling in a term that is linear produces a fixed difference in the answer rather than a fixed ratio.",
   "It is what agreement with the vendored oracle means, since the oracle reaches exactly the same ratio through a route of its own that shares nothing.",
@@ -249,7 +249,7 @@ q(0, "Why do all three capstones in this course state their conditions in the en
  ["Because the engine refuses any input it did not convert itself, so a figure in field units would never reach the correlation.",
   "Because the studio's conversions are applied twice on the way out, so a figure taken through them cannot be reproduced by hand.",
   "Because the capstone grades a corrosion rate, and a rate is only reproducible when the conditions behind it are in correlation units."],
- "The studio divides a psig pressure by 14.5038 where the engine exports 14.503773800722, exact by the definition of the bar and of the pound force."),
+ "The studio divides a psig pressure by 14.5038 where the engine exports 14.503773800722, which sits 1.910e-9 above what the definitions of the bar and of the pound force give."),
 
 q(1, "The shipped case reports an uninhibited rate. What is it in both units, and what does it mean?",
  "5.203611 mm/yr, which is 204.866591 mpy, and it is the same case with no corrosion inhibitor credit at all.",
@@ -265,7 +265,7 @@ q(3, "At 60 ft per second the engine reports two rates side by side. What are th
   "13.080024 mm/yr at the new velocity and 1.896603 mm/yr at the shipped one, so the reader can see what the change did."],
  "The wall shear there is 362.474888 Pa against the measured stripping threshold of 100.000000 Pa, and the film risk turns high. No new correlation was invented to do it: the credit is simply not taken."),
 
-q(2, "What is the ratio between those two rates, and what happens to the remaining life?",
+q(2, "At 60 ft per second the engine reports the rate with the corrosion inhibitor credit removed beside the rate with it kept. What is the ratio between the two, and what happens to the remaining life?",
  "6.896552, and the remaining life falls from 4.207953 yr to 0.242737 yr.",
  ["2.779300, and the remaining life falls to 0.242737 yr.",
   "6.896552, and the remaining life is withheld because the model no longer applies at that velocity.",

@@ -11,7 +11,7 @@
   "explanation": "A wall shear of 370 Pa looks worse than a life of 0.161915 yr, and on that stream the life is the consequence and the shear is the cause. That is a property of the units rather than of the engineering."
  },
  {
-  "prompt": "Across the six shipped streams the binding constraint takes four different values. What are they?",
+  "prompt": "Across the six teaching streams the binding constraint takes four different values. What are they?",
   "options": [
    "Mass transfer to the wall, reaction kinetics, the corrosion allowance against the design life, and the rate category band the stream lands in.",
    "Wall shear on the corrosion inhibitor film, the sour threshold comparison, the corrosion allowance against the design life, and mass transfer to the wall.",
@@ -52,7 +52,7 @@
    "Any lower limit would be ranked inside a model that had already stopped describing the stream."
   ],
   "answer": 3,
-  "explanation": "One shipped stream fails it: the H2S to CO2 ratio puts it in the sulphide regime and the binding constraint comes back with no value attached. A film stripping verdict on a surface the correlation does not cover is a precise answer to the wrong question."
+  "explanation": "One teaching stream fails it: the H2S to CO2 ratio puts it in the sulphide regime and the binding constraint comes back with no value attached. A film stripping verdict on a surface the correlation does not cover is a precise answer to the wrong question."
  },
  {
   "prompt": "Why does the film stripping test sit above the allowance test rather than below it?",
@@ -63,7 +63,7 @@
    "The film-stripping threshold of 100.000000000000 Pa is pinned and the design life is typed in, so the pinned comparison is applied before the typed one is reached."
   ],
   "answer": 1,
-  "explanation": "One shipped stream binds at 370 Pa against the 100 Pa at which this module takes the film to be stripped. Both thresholds are held, so the order argument stands on the structure of the calculation rather than on the value of either number."
+  "explanation": "One teaching stream binds at 370 Pa against the 100 Pa at which this module takes the film to be stripped. Both thresholds are held, so the order argument stands on the structure of the calculation rather than on the value of either number."
  },
  {
   "prompt": "Each binding constraint is returned with the value it turns on. What does the allowance constraint carry on the two streams that bind there?",
@@ -118,7 +118,7 @@
    "That the reaction term can be ignored, since the series combination sits at whichever term is smaller and the larger one has dropped out of the answer."
   ],
   "answer": 0,
-  "explanation": "On one shipped stream the transport term is 2.34 mm/yr against a reaction term of 27.66 mm/yr, and on another 0.09 mm/yr against 10.01 mm/yr. Changing the water chemistry on a transport controlled stream moves the larger term and the answer barely follows."
+  "explanation": "On one teaching stream the transport term is 2.34 mm/yr against a reaction term of 27.66 mm/yr, and on another 0.09 mm/yr against 10.01 mm/yr. Changing the temperature or the carbon dioxide on a transport controlled stream moves the larger term and the answer barely follows."
  },
  {
   "prompt": "The engine says that slowing the line changes this answer before anything else does. What kind of statement is that?",

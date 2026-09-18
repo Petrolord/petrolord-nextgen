@@ -77,8 +77,9 @@ const bisect = (lo, hi, pred, label) => {
    A wet gas gathering line into the Obigbo manifold. Everything below is in
    the ENGINE'S OWN UNITS, and that is deliberate rather than lazy: the studio
    layer converts psig to bara by dividing by 14.5038, while the engine exports
-   the exact factor as 14.503773800721815, so the two disagree in the sixth
-   significant figure. Grading a learner on which rounding the app happened to
+   14.503773800721815, so the two disagree in the sixth significant figure.
+   (The engine calls its own factor exact by definition, and it sits 1.9e-9
+   above the factor the definitions give; digest section 24 measures that.) Grading a learner on which rounding the app happened to
    use would grade them on the app rather than on corrosion, so the capstone
    states the conditions the engine takes and the digest carries the conversion
    argument separately. That is one of the eighteen clearances below.

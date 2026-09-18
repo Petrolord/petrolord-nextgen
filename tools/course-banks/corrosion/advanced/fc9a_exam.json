@@ -66,7 +66,7 @@
   "explanation": "The engine checks the sum against the total and not just each fraction against its own range. A sum of exactly one is accepted: two fractions of 0.600000 and 0.400000 give a partial pressure sum of 51.000427 bar against a total of 51.000427 bar and the screening runs."
  },
  {
-  "prompt": "Only four range guards in this module are enforced and may be taught as enforced. Which set?",
+  "prompt": "Which set is made up entirely of range guards this module enforces on what a caller types?",
   "options": [
    "Nought to one on every fraction, nought to fourteen on pH, a temperature above absolute zero, and the partial-pressure sum against the total pressure.",
    "Nought to one on every fraction, nought to fourteen on pH, the 250.000000000000 bar fugacity cap, and the film-stripping threshold of 100.000000000000 Pa.",
@@ -88,20 +88,20 @@
   "explanation": "The two can differ through a second copy inside a function, a branch that never reaches the exported name, or a value transformed on the way in. Nothing in this module currently separates, and that is a result with a size attached."
  },
  {
-  "prompt": "Fifteen of the thirty pinned constants have no export at all. What is the practical consequence?",
+  "prompt": "Sixteen of the thirty pinned constants have no export at all. What is the practical consequence?",
   "options": [
-   "For those fifteen the pin compares the golden against the digest generator instead, so the engine is out of the comparison and the pin is weaker by one copy.",
-   "For those fifteen no pin is possible, so they are carried by the constant-free invariants and by the route independence the golden's own file describes.",
-   "For those fifteen the digest reads the literals out of the source.",
-   "For those fifteen the measurement is the only column there is, which is the case the technique was built for."
+   "For those sixteen the pin compares the golden against the digest generator instead, so the engine is out of the comparison and the pin is weaker by one copy.",
+   "For those sixteen no pin is possible, so they are carried by the constant-free invariants and by the route independence the golden's own file describes.",
+   "For those sixteen the digest reads the literals out of the source.",
+   "For those sixteen the measurement is the only column there is, which is the case the technique was built for."
   ],
   "answer": 3,
-  "explanation": "The two reaction constants, the reaction fugacity exponent, the two fugacity coefficient constants, the mass-transfer coefficient and both of its exponents, the three scale constants, the pH slope, the Blasius pair and the laminar constant are all reached by measurement alone."
+  "explanation": "The two reaction constants, the reaction fugacity exponent, the two fugacity coefficient constants, the mass-transfer coefficient and both of its exponents, the three scale constants, the pH slope, the Blasius pair, the laminar constant and the mass-transfer fugacity exponent are all reached by measurement alone."
  },
  {
   "prompt": "The route table gives four of its eight routes an empty cannot-check column, and the course grades four families of field. What connects the two lists?",
   "options": [
-   "Both are arithmetic over quantities the caller supplies rather than a correlation with fitted constants in it, so the two lists are one property seen twice.",
+   "Neither lets a fitted constant reach its answer, so the two lists are one property seen twice.",
    "Both were chosen from the golden's seventeen whole cases, which is the block the digest compares route by route and the block the graded fields are taken from.",
    "Both are pinned in the digest against a literal in a third file, and a pinned quantity is one a route can check and a graded field is permitted to reach through.",
    "Both are exported by the engine under their own names, and an exported quantity has been declared in a way that a route and a graded field can each rely on."
@@ -165,7 +165,7 @@
   "explanation": "Nothing upstream in the whole screening door will hand it a negative rate, so the shape does not reach the studio. It is still a function answering where it could decline, with the least alarming answer available to it."
  },
  {
-  "prompt": "The category bands were left where they are and the H2S screening threshold was left where it was. What reason covers both decisions?",
+  "prompt": "The H2S screening threshold was left where it was, and the digest says why. What argument says that tightening the category bands would not repair them either?",
   "options": [
    "Both numbers are pinned in the digest against a literal in a third file, and a pinned number cannot be moved without the gate separating the two columns.",
    "Both numbers are exported by the engine, and an exported constant is part of the module's public interface, so moving one is a change to every caller at once.",
@@ -179,7 +179,7 @@
   "prompt": "The sequence that chooses a binding constraint never reads the category word. Why is that the right design?",
   "options": [
    "The word is not available at the point the sequence runs, because the category is computed after the binding constraint in the order the screening door walks.",
-   "The word is withheld on two of the six shipped streams, and a step that could not fire on every stream would leave those two screenings with no constraint at all.",
+   "The word is withheld on two of the six teaching streams, and a step that could not fire on every stream would leave those two screenings with no constraint at all.",
    "The word is three comparisons against three unsourced edges laid on top of a rate, so a summary ranking by it would be ranking by a rendering convention.",
    "The word already reflects the rate, so reading it as well as the rate would count the same evidence twice and push every stream towards the kinetics branch."
   ],
@@ -236,7 +236,7 @@
    "The studio works in bar gauge and the engine works in bar absolute, so the two differ by one atmosphere wherever the conversion has not been applied twice.",
    "The studio applies the fugacity coefficient to the pressure before it displays it, so a screen value is the fugacity and a direct call returns the partial pressure.",
    "The studio rounds every pressure to six decimals on the way out, and the engine carries the full double, so the two differ in whatever the rounding discarded.",
-   "The studio divides a psig pressure by 14.5038 and the engine's exact factor is 14.503773800722, so the two conversions separate in the sixth significant figure."
+   "The studio divides a psig pressure by 14.5038 and the engine's factor is 14.503773800722, so the two conversions separate in the sixth significant figure."
   ],
   "answer": 3,
   "explanation": "The digest lists every one of the studio's conversions for exactly this reason: a learner reading a number off the app needs to know which layer produced it. Every graded condition in this course is stated in the engine's units."
@@ -341,15 +341,15 @@
   "explanation": "The shortfall on that case is 4.500000 percentage points against the datasheet figure. The word is three comparisons against three unsourced edges laid on a rate, and `categoryHeld` comes back true beside it."
  },
  {
-  "prompt": "A summary layer was added to this module. What did it add to the pin table and to the held list?",
+  "prompt": "The binding constraint is derived from what the screening has already computed. What does it add to the pin table and to the held list?",
   "options": [
    "Two entries to the held list, being the reporting margin of the comparable step and the ordering of the six questions the sequence walks through.",
-   "Nothing to either. The held list still stands at 11 items and the pin table at 30 constants.",
+   "Nothing to either. The held list stands at 11 items and the pin table at 30 constants.",
    "One entry to the pin table, being the controlling reporting margin, which is measured by solving for the velocity that puts the two terms a stated ratio apart.",
    "Four entries to the held list, one for each of the constraint types."
   ],
   "answer": 1,
-  "explanation": "The held list still carries 11 items and the pin table still carries 30 constants. The reporting margin was already a property of the controlling word before any summary existed, so it is not something the summary brought with it."
+  "explanation": "The held list carries 11 items and the pin table 30 constants either way. The reporting margin belongs to the controlling word, which the summary reads, so it is not something the summary brings with it."
  },
  {
   "prompt": "The shipped default screen carries a rate, a word, a partial pressure, an effective protection figure and a remaining life. Which of those can a capstone in this course grade?",
@@ -363,12 +363,12 @@
   "explanation": "The rate rests on held constants and the word adds three more on top of it. The remaining life is a division that rests on a rate, which is why a capstone states its rate from an inspection survey rather than taking it from the correlation."
  },
  {
-  "prompt": "What do the pre-repair screen and the modern one have in common, and where do they part?",
+  "prompt": "Set a screen that returns seven unreconciled numbers beside this engine's screening. What do they share, and where do they part?",
   "options": [
-   "Both print seven independent numbers. The modern one adds a summary naming which of its own limits governs, derived from what it had already computed.",
-   "Both print a binding constraint. The modern one derives it from the numbers rather than from the largest of them, which is what the pre-repair version ranked by.",
-   "Both withhold a category in the sulphide regime. The modern one adds the withheld block, which the pre-repair version reported as an empty paragraph instead.",
-   "Both refuse on a blank density. The modern one adds the message naming the box, which is what makes the refusal actionable rather than merely present."
+   "Both carry seven independent numbers. This engine's adds a summary naming which of its own limits governs, derived from what it had already computed.",
+   "Both print a binding constraint. This engine's derives it from the numbers rather than from the largest of them, which is what the other ranks by.",
+   "Both withhold a category in the sulphide regime. This engine's adds the withheld block, which the other reports as an empty paragraph instead.",
+   "Both refuse on a blank density. This engine's adds the message naming the box, which is what makes the refusal actionable rather than merely present."
   ],
   "answer": 0,
   "explanation": "A screen that returns seven numbers and reconciles none of them is a screen the reader summarises by reading the largest number, and that is a property of the units rather than of the engineering."
@@ -378,14 +378,14 @@
   "options": [
    "The golden is synthetic, so no rate in it can be compared against a published case and the tolerance it is checked at has no meaning attached to it.",
    "The rate depends on the wall shear verdict, so a rate graded at one velocity would be graded at a different chain from a rate graded at another velocity.",
-   "The studio's psig divisor is truncated, so a rate converted through the app differs from a rate converted through the engine's exact factor in the sixth figure.",
+   "The studio's psig divisor is truncated, so a rate converted through the app differs from a rate converted through the engine's factor in the sixth figure.",
    "Every de Waard-Milliams constant is held, so every rate built out of them inherits an unsourced chain."
   ],
   "answer": 3,
   "explanation": "The other three statements are all true of this module and none of them is the reason. The category word inherits that chain and adds three unsourced edges of its own, which is why no graded field is a band label either."
  },
  {
-  "prompt": "Two fields on the same screening declare their own absence and one does not. Which is the one that does not?",
+  "prompt": "Three of these fields declare their own absence and one does not. Which is the one that does not?",
   "options": [
    "The category in the sulphide regime, which comes back null while the withheld block names the reason and the rate is kept as a stated upper bound.",
    "The remaining life when the corrosion allowance box is blank, which comes back null with the screening reporting itself complete and nothing on the screen saying why.",
@@ -448,7 +448,7 @@
    "That both belong to another course named in the scope seam."
   ],
   "answer": 2,
-  "explanation": "A held item is waiting on a source and a scope gap is outside what the module attempts. This is neither, which is why it appears on neither exported list and is reported through two flags of its own instead."
+  "explanation": "A held item is waiting on a source and a scope gap is outside what the module attempts. This is neither, which is why it is off the held list, marked withdrawn on the not-provided list, and reported through two flags of its own as well."
  },
  {
   "prompt": "What is the shortest honest description of everything this module knows about integrity?",

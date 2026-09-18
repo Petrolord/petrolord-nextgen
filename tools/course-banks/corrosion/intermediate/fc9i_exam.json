@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "Which single input on this screen produces the widest span in the answer?",
+  "prompt": "Which single input on this screen is chosen from a list rather than measured, and takes the rate from 1.676428 mm/yr to zero with nothing else touched?",
   "options": [
    "The wetting regime, which is chosen from a list of three.",
    "The in-situ pH, which moves the rate by a decade every two units.",
@@ -8,7 +8,7 @@
    "The corrosion inhibitor availability."
   ],
   "answer": 0,
-  "explanation": "Water wetting is the largest single lever in this model. Almost every other input is a measured quantity with a unit, and this one is a word."
+  "explanation": "Almost every other input is a measured quantity with a unit, and this one is a word that can zero the rate on its own."
  },
  {
   "prompt": "Two of the three regimes ignore the water cut box entirely. What wetting factor does each of them use?",
@@ -30,7 +30,7 @@
    "A screening with the regime row marked as assumed."
   ],
   "answer": 1,
-  "explanation": "Five spellings of oil wet resolve because they are unambiguous. A string the matcher cannot resolve refuses, because an unrecognised regime falling through would choose the largest input in the model from a typing mistake."
+  "explanation": "Five spellings of oil wet resolve because they are unambiguous. A string the matcher cannot resolve refuses, because an unrecognised regime falling through would choose an input that can zero the rate from a typing mistake."
  },
  {
   "prompt": "Which of these is not one of the three wetting regimes this engine accepts?",
@@ -41,7 +41,7 @@
    "gasWet."
   ],
   "answer": 3,
-  "explanation": "The list is closed at three and there is no gas-wet, stratified or annular option, because this module carries no flow-pattern model and a longer list would imply one."
+  "explanation": "The list is closed at three and there is no gas-wet, stratified or annular option. No door in this module works out a flow pattern, so the three entries are an interpretation the engineer supplies."
  },
  {
   "prompt": "On an oil-wet case one reported field becomes null rather than zero. Which?",
@@ -74,7 +74,7 @@
    "A rate below the top band edge the category table carries."
   ],
   "answer": 2,
-  "explanation": "The four are nought to one on every fraction, nought to fourteen on pH, a temperature above absolute zero, and the partial-pressure sum against the total. Every published validity band of every correlation is held rather than enforced."
+  "explanation": "Nought to one on every fraction, nought to fourteen on pH, a temperature above absolute zero, and the partial-pressure sum against the total are all enforced on what a caller types. Every published validity band of every correlation is held rather than enforced."
  },
  {
   "prompt": "Which row of the corrosion inhibitor table carries an effective protection of 90.250000 percent?",
@@ -184,7 +184,7 @@
    "It goes from 0.004000 to 0.008739."
   ],
   "answer": 3,
-  "explanation": "Those two rows sit at 4000.0000 and 4040.0000. The wall shear across them goes from 0.003200 Pa to 0.007132 Pa, which is the jump of 2.189815."
+  "explanation": "Those two rows sit at 4000.0000 and 4040.0000, and the wall shear across them goes from 0.003200 Pa to 0.007132 Pa. Across the switch itself, over two ten-thousandths of the Reynolds number, the jump is 2.189815."
  },
  {
   "prompt": "The velocity sweep runs at 8.000000 m/s. What wall shear does this module return there?",
@@ -324,7 +324,7 @@
    "The required allowance alone.",
    "The rate and the band label, both of which are taken off the wall that is left.",
    "The wall shear and the film verdict, which are taken on the reduced bore.",
-   "The remaining allowance and the remaining life."
+   "The remaining allowance, the remaining life and the shortfall."
   ],
   "answer": 3,
   "explanation": "The allowance a design life demands is the rate multiplied by that design life. It is the allowance a new line would need, so it takes no account of what has already been consumed."
@@ -407,7 +407,7 @@
   "explanation": "In that regime the CO2 rate model applies and the rate is issued plainly, with no upper-bound flag on it. The ratio is the same at any total pressure whatever."
  },
  {
-  "prompt": "Raise the H2S mole fraction on that stream to 0.000800 with the CO2 unchanged. What happens?",
+  "prompt": "A stream at a CO2 mole fraction of 0.020000 has its H2S mole fraction raised from 0.000010 to 0.000800. What happens?",
   "options": [
    "The ratio becomes 0.040000000000 and the regime stays carbonate.",
    "The ratio becomes 0.040000000000 and the regime becomes mixed.",
@@ -453,12 +453,12 @@
  {
   "prompt": "Where does the H2S to CO2 ratio reach, once it has produced its regime word?",
   "options": [
-   "Nowhere else. It does not enter the rate, the wall shear or the allowance division.",
+   "It enters no calculation, and through the regime word it decides whether the band label and the life are issued.",
    "The rate, which it multiplies by a sulphide correction factor.",
    "The wall shear, through the density of the sour phase.",
    "The allowance division, which it shortens in the sulphide regime."
   ],
   "answer": 0,
-  "explanation": "Its whole job is to say whether a CO2 rate model is still the right model for the surface. A reader who understands that will not go looking for its fingerprints anywhere else on the screen."
+  "explanation": "Its job is to say whether a CO2 rate model is still the right model for the surface. In the sulphide regime that withholds the band label and the life and keeps the rate as a stated upper bound, and the rate itself does not move."
  }
 ]

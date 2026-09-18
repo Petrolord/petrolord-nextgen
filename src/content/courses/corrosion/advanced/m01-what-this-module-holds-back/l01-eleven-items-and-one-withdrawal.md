@@ -1,6 +1,6 @@
 # Eleven items and one withdrawal
 
-This engine publishes its own account of what it cannot stand behind, and that account is the right first thing to read. `HELD_FOR_LITERATURE` carries 11 items and `NOT_PROVIDED` carries 8. The whole screening door returns both in its `limits` and `notProvided` fields, so a caller displays the absences rather than meeting them one surprise at a time.
+This engine publishes its own account of what it cannot stand behind, and that account comes first. `HELD_FOR_LITERATURE` carries 11 items and `NOT_PROVIDED` carries 8. The whole screening door returns both in its `limits` and `notProvided` fields, so a caller displays the absences rather than meeting them by surprise.
 
 ## What held means here
 
@@ -14,7 +14,7 @@ The eleventh held item shades into the second list: an erosional velocity criter
 
 ## The twelfth item, which is neither
 
-A sour-service severity region and the material guidance that ran off it were withdrawn. They are absent from both lists, because they are not waiting on a source and they are not a gap in scope. They were removed because a curve carrying a standard's name and telling an engineer what steel to buy is a claim that retuning cannot repair. The engine returns `regionProvided` false and `materialGuidanceProvided` false today and will keep doing so, so the absence arrives as a field and a caller cannot read it as an unset property.
+A sour-service severity region and the material guidance that ran off it were withdrawn. They are absent from the held list, because they are not waiting on a source, and `NOT_PROVIDED` names each of them marked withdrawn. They were removed because a curve carrying a standard's name and telling an engineer what steel to buy is a claim that retuning cannot repair. The engine returns `regionProvided` false and `materialGuidanceProvided` false today and will keep doing so, so the absence arrives as a field and a caller cannot read it as an unset property.
 
 Every one of the eighteen graded fields in this course sits clear of all twelve.
 

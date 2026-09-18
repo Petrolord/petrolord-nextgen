@@ -12,8 +12,8 @@ q(2, "`HELD_FOR_LITERATURE` carries 11 items and `NOT_PROVIDED` carries 8. An in
   "Both lists at once, because an item that has no source and no implementation is entered twice so that a caller reading either one of them still finds it."],
  "Held means the number is in the code and its source is nowhere in the repository. Not provided means the quantity is absent from the scope, and an inspection interval, a minimum or retirement thickness and a fitness-for-service assessment are all on that second list.")
 
-q(0, "The withdrawn sour-service severity region appears on neither `HELD_FOR_LITERATURE` nor `NOT_PROVIDED`. Why is it on neither?",
- "It is not waiting for a source and it is not a gap in scope. The claim was withdrawn, and the engine reports the absence through `regionProvided` and `materialGuidanceProvided` instead.",
+q(0, "The withdrawn sour-service severity region is not on `HELD_FOR_LITERATURE`, and `NOT_PROVIDED` names it marked withdrawn. Why is it not on the held list?",
+ "It is not waiting for a source. The claim was withdrawn outright, and the engine also reports that absence through `regionProvided` and `materialGuidanceProvided`.",
  ["It sits on a third exported list of withdrawn features, which the whole screening door returns alongside the other two so that a caller can render all three of them together.",
   "It is held rather than listed, because the region expression still runs on every screening and only the two standard names were stripped out of the strings it returns.",
   "It came off both lists when the threshold value was kept, since a module that still prints a screening threshold is still classifying severity at that threshold."],
@@ -61,10 +61,10 @@ q(1, "The scale constant A measures 2399.999999999998 out of the engine against 
   "The slope is taken where the factor is clamped at one, so the measurement is reading a clamped expression and the last few digits are the clamp arriving in the answer."],
  "The slope is taken at 150 C and 200 C, where the factor is unclamped, because below the onset the engine returns exactly 1 and the slope would be zero. The relative difference is 9.474e-16, which is the arithmetic rather than a disagreement.")
 
-q(0, "The engine exports fifteen of the thirty pinned constants and the digest prints a declared column and a measured column for all fifteen. What is the second column for?",
+q(0, "The engine exports fifteen constants by name and the digest prints a declared column and a measured column for all fifteen. What is the second column for?",
  "So a disagreement between what the module declares and what it actually uses would be visible in the table rather than inferred later from a surprising screen.",
  ["So the export can be checked against the golden's fourth copy, which is the comparison the vendored jest suite runs and which the digest reproduces here for the reader.",
-  "So the fifteen constants that carry no export at all have somewhere to sit, which is why the mass-transfer coefficient and the Blasius pair both appear in that table.",
+  "So the sixteen pinned constants that carry no export at all have somewhere to sit, which is why the mass-transfer coefficient and the Blasius pair both appear in that table.",
   "So the measured value can replace the declared one wherever the two differ, which keeps the digest reporting behaviour in preference to declarations throughout."],
  "Nothing in this module currently separates, and that is a result with a size attached. An export agreeing with a measurement checks the export, a measurement standing alone checks the behaviour, and neither one says where the number came from.")
 
@@ -97,7 +97,7 @@ q(0, "The route table gives each of the eight oracle routes a cannot-check colum
  "A route checks what it derives independently. The film onset route cannot check the three scale constants, the mole-fraction ratio route cannot check the two boundary ratios, and the sour comparison cannot check the threshold value. The Pipeline and Line Sizing course computes its own friction factor and its own Reynolds number with a different correlation and a different transition.")
 
 q(2, "Four of the eight routes carry nothing in the cannot-check column: the series combination, the corrosion inhibitor time average, the remaining life and the allowance shortfall. What do those four share?",
- "Each is arithmetic over quantities the caller supplies rather than a correlation with fitted constants sitting inside it.",
+ "Each is arithmetic with no fitted constant inside it, where each of the other four reaches a correlation that carries one.",
  ["Each is checked against the golden at the tighter of the two tolerances, so a shared constant would surface as a difference that the looser column would have absorbed.",
   "Each is reached by bisection rather than by a closed form, and a bisection converges on the engine's own answer without ever evaluating the engine's own constants.",
   "Each appears in the golden's `heldConstants` block as well as in the route table."],

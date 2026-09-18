@@ -6,7 +6,7 @@ A screening returns a set of fields and the rail down the side of the studio is 
 
 The wall shear is computed first. On the shipped case it is 14.408065 Pa with a film risk of low, so the corrosion inhibitor credit stands and the rate is computed with it. That order is deliberate: the rate depends on whether the film survives the flow, so a shear that cannot be computed makes the screening incomplete and no rate is issued at all. A blank density is a refusal rather than a missing row.
 
-Then the rate, at 0.754524 mm/yr, with the band label high beside it and a field declaring that band held. Then the sour comparison, which reports the stream above the screening threshold. Then the regime, which is mixed here, with the rate marked as an upper bound. Then the life, at 4.207953 yr against a design life of 20.000000 yr, which the case does not meet. Then the limit that governs the answer.
+Then the rate, at 0.754524 mm/yr. Then the sour comparison, which reports the stream above the screening threshold. Then the regime, which is mixed here, with the rate marked as an upper bound. Then the band label, high, with a field declaring that band held, which comes after the regime because a regime that withholds the label has to be known first. Then the life, at 4.207953 yr against a design life of 20.000000 yr, which the case does not meet. Then the limit that governs the answer.
 
 ## The corrosion inhibitor block
 

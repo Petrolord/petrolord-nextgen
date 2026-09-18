@@ -12,7 +12,7 @@ q(1, "A reader arrives at this studio with an inspection question. What does the
   "Nothing whatever, which is why an inspection interval sits in `NOT_PROVIDED` beside the minimum thickness."],
  "A remaining life and an inspection interval are different quantities. One divides what is left by a rate, the other is a decision about when to look, and the second needs a method the first cannot supply. For the fitness-for-service question the engine has nothing at all.")
 
-q(3, "Every other refusal in this module says an input is wrong. What does the refusal on an allowance that is already consumed say instead?",
+q(3, "Most refusals in this module say an input is wrong or missing. What does the refusal on an allowance that is already consumed say instead?",
  "That the input is fine and the module is the wrong tool, because a line whose allowance is gone has become an inspection and fitness-for-service question.",
  ["That the consumed depth arrived as a negative number, which is the guard the remaining-life door applies before it divides anything at all.",
   "That the remaining life would come out negative, so the door issues a life of zero years and a failing verdict rather than a number nobody could act on.",
@@ -103,12 +103,12 @@ q(3, "The Well Integrity and Plug and Abandonment course is the one live course 
   "It states that it cites this module for a remaining life, so the barrier verdict there is reached from the allowance arithmetic computed here."],
  "A barrier envelope is a different object from a corrosion allowance and neither term substitutes for the other. A lesson here may name that course as the owner of barrier logic and must not borrow its vocabulary.")
 
-q(2, "On one shipped stream the allowance is 3.175000 mm with 0.400000 mm consumed, the rate is 1.676428 mm/yr, the remaining life is 1.655305 yr and the required allowance is 33.528563 mm. What do those four numbers rest on?",
- "A division and a multiplication over quantities the caller supplied. None of them knows the wall thickness, the design pressure or the pipe grade.",
- ["The pin table, since the remaining life and the required allowance both reach the held constants of the correlation through the rate that produced them.",
+q(2, "On one of the digest's teaching streams the allowance is 3.175000 mm with 0.400000 mm consumed, the rate is 1.676428 mm/yr, the remaining life is 1.655305 yr and the required allowance is 33.528563 mm. What do those four numbers rest on?",
+ "A division and a multiplication over a typed allowance, a typed consumed depth and the correlation's rate, and none of them knows the wall thickness or the pipe grade.",
+ ["The pin table alone, since a remaining life is itself one of the thirty constants the digest measures out of the engine and pins against a literal.",
   "A minimum thickness the module computes from the allowance, which is what makes the required allowance of 33.528563 mm a statement about a real wall.",
   "The Barlow relation, which this module applies with a default design factor so that the allowance can be checked against the wall it is taken off."],
- "The arithmetic inside the door is exact and its inputs are assertions. On another stream the same allowance at 0.076842 mm/yr gives 36.112878 yr, a required allowance of 1.536848 mm and a shortfall of 0.000000 mm.")
+ "The arithmetic inside the door is exact, and the rate it divides by inherits whatever the correlation rests on. On another stream the same allowance at 0.076842 mm/yr gives 36.112878 yr, a required allowance of 1.536848 mm and a shortfall of 0.000000 mm.")
 
 emit(Q, '/root/wt-fc9-nextgen/tools/course-banks/corrosion/advanced/fc9a_m02.json', expect_n=15)
 finish()
