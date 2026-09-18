@@ -38,12 +38,12 @@ q("A status report reads \"OB-01 is not overdue.\" What does it need before anyb
   "Nothing, since a review status is the same on every day"],
  "A status quoted without its date has lost half of what produced it. \"OB-01 is not overdue on 2026-10-01\" is the sentence that can be checked."),
 
-q("The scoring rules of this tier never refuse a move with ok false. Why not, and what do they return?",
- "A risk score moves nothing, so it answers with a value, and with a declining value of its own when it has no basis.",
- ["It refuses only closed risks.",
-  "It throws an error in place of a refusal, and the app catches it.",
-  "Because it is the one engine in the course with no refusal shape at all, so a gap in a record is simply scored as 0 and banded \"Low\"."],
- "The refusal shape, ok with a reason, belongs to verdicts that move something, such as a change or a comment. The scoring rules answer with values such as \"None\", \"Not set\" and null."),
+q("Measured by loading the module, how many functions does calendar export, and how many of those take a date?",
+ "5 functions, and 1 of them takes a date",
+ ["6 functions, and every one of them takes a date",
+  "5 functions, and none takes a date, as the module only parses dates",
+  "1 function, daysUntil, beside 5 frozen tables and constants"],
+ "calendar has 6 exports: 5 functions and 1 frozen table or constant. Its one function that takes a date is daysUntil, which takes it as argument 2 and defaults it to the machine clock when the caller leaves it out."),
 
 q("How many functions in lessonsLearned take a date, each defaulting it to the machine clock?",
  "6 of its 26 functions",
@@ -247,8 +247,8 @@ q("RECON records the Heatmap tab and the dashboard disagreeing. What does this t
 
 q("Why does deriveRiskFields produce every column of a row in one call?",
  "So every column comes from the same record at the same moment and no column can drift from the others",
- ["To save a call",
-  "Because each column needs the column to its left",
+ ["Because the engine stores the row",
+  "Because a band is read from the target",
   "So the app can store all the columns and skip the engine next time"],
  "The band cannot disagree with the score beside it, and the appetite cannot be computed from a residual that has since changed. Edit a level and derive the row again, and every column moves together."),
 
@@ -271,7 +271,7 @@ q("What does the 0 in OB-11's reduction column tell a reader about its controls?
  "Nothing: neither of its scores exists",
  ["Controls that do nothing on either axis of the risk",
   "A risk that already sits exactly at its target of 6",
-  "An unassessed residual falling back to the inherent levels"],
+  "An assessed residual that equals the inherent score"],
  "OB-11's impact of 6 is off the scale, so its inherent and residual are both 0. OB-03 also shows 0, for another reason: its residual was not assessed and fell back."),
 
 q("Applying step three of the method to OB-02, which residual axis falls back, and to what?",
@@ -286,7 +286,7 @@ q("Which inherent inputs leave a risk at 0, \"None\", in step two of the method?
  ["Only a blank",
   "A fraction only, since a 6 is capped",
   "Any level below 3"],
- "A number written as text is still that level, while a fraction, a 6, a blank or a negative is off the scale. The inherent axes have nothing to fall back to."),
+ "A whole number written as text is still that level, while a fraction, a 6, a blank or a negative is off the scale. The inherent axes have nothing to fall back to."),
 
 q("What kind of answer does this tier warn the next one will often give?",
  "A refusal, with a reason a user can act on",

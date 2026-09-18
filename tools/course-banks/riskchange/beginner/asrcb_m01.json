@@ -114,7 +114,7 @@
   "options": [
    "\"Not set\" is the engine declining to report a pass it has no basis for, so it belongs with neither answer.",
    "Nothing, since a risk with no target is carried at the organisation's default appetite.",
-   "It should be grouped with \"Above appetite\", since the engine treats a missing target as a failure.",
+   "It should be grouped with \"Above appetite\", since the engine treats a missing target as a failure to be reported.",
    "\"Not set\" only appears on closed risks, so it should be left out of the report."
   ],
   "answer": 0,

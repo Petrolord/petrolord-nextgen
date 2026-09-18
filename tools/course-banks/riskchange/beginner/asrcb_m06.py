@@ -16,9 +16,9 @@ q(1, "OB-02, a fatigue crack in a jetty loading arm, is \"Open\" at 4 by 4 with 
  "The blank impact falls back to the inherent 4, so the residual is 2 times 4, which is 8, \"Medium\", above its target of 6. Its review date, 2026-09-30, is -1 days from the as-of date, so on 2026-10-01 it is overdue."),
 
 q(3, "OB-08 is \"Open\" at 3 by 5 with a residual likelihood of 2.5, a residual impact of 5, a target of 5 and a review on 2026-11-30. Which reading holds on 2026-10-01?",
- "Residual 0, \"None\"; \"Not set\"; 60 days to review and not overdue",
- ["Residual 15, \"Critical\"; \"Above appetite\"; 60 days to review and not overdue",
-  "Residual 10, \"High\"; \"Above appetite\"; 60 days to review and not overdue",
+ "Residual 0, \"None\"; \"Not set\"; its review is 60 days off",
+ ["Residual 15, \"Critical\"; \"Above appetite\"; its review is 60 days off",
+  "Residual 10, \"High\"; \"Above appetite\"; its review is 60 days off",
   "Residual 0, \"None\"; \"Within appetite\""],
  "A fraction is off the scale and an assessed value does not fall back, so the residual is unscored and appetite has nothing to compare. 2026-11-30 is 60 days after 2026-10-01, so the review is not overdue on that date."),
 
@@ -90,11 +90,11 @@ q(2, "In the Associate tier, \"Closed\" is one of two statuses that are not live
  ["A change",
   "A review",
   "A band, the one that means no score"],
- "\"Closed\" in this tier is a status of a risk. In the next tier it is a stage of a change, the stage a change reaches when it is finished, and a closed risk and a closed change are different things."),
+ "\"Closed\" in this tier is a status of a risk, and \"Draft\" is the other status that is not live. In the next tier \"Closed\" is a stage of a change, one of its three final stages beside \"Rejected\" and \"Cancelled\", and a closed risk and a closed change are different things. Name which record the word is about every time."),
 
 q(0, "Which of these carries over unchanged from this tier into the next one?",
  "The as-of date, the calendar's whole days, and a refusal shaped as ok with a reason",
- ["The four bands and their lower edges, applied to changes",
+ ["The four live statuses, used as the stages of a change",
   "The per-axis fallback, applied to signatures",
   "The appetite answers"],
  "Every dated status in the next tier is still true on 2026-10-01, dates are read by the same calendar, and a refused verdict is the same object in every engine."),

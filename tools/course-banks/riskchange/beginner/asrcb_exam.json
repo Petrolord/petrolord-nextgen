@@ -44,15 +44,15 @@
   "explanation": "A status quoted without its date has lost half of what produced it. \"OB-01 is not overdue on 2026-10-01\" is the sentence that can be checked."
  },
  {
-  "prompt": "The scoring rules of this tier never refuse a move with ok false. Why not, and what do they return?",
+  "prompt": "Measured by loading the module, how many functions does calendar export, and how many of those take a date?",
   "options": [
-   "It refuses only closed risks.",
-   "It throws an error in place of a refusal, and the app catches it.",
-   "A risk score moves nothing, so it answers with a value, and with a declining value of its own when it has no basis.",
-   "Because it is the one engine in the course with no refusal shape at all, so a gap in a record is simply scored as 0 and banded \"Low\"."
+   "6 functions, and every one of them takes a date",
+   "5 functions, and none takes a date, as the module only parses dates",
+   "5 functions, and 1 of them takes a date",
+   "1 function, daysUntil, beside 5 frozen tables and constants"
   ],
   "answer": 2,
-  "explanation": "The refusal shape, ok with a reason, belongs to verdicts that move something, such as a change or a comment. The scoring rules answer with values such as \"None\", \"Not set\" and null."
+  "explanation": "calendar has 6 exports: 5 functions and 1 frozen table or constant. Its one function that takes a date is daysUntil, which takes it as argument 2 and defaults it to the machine clock when the caller leaves it out."
  },
  {
   "prompt": "How many functions in lessonsLearned take a date, each defaulting it to the machine clock?",
@@ -365,8 +365,8 @@
  {
   "prompt": "Why does deriveRiskFields produce every column of a row in one call?",
   "options": [
-   "To save a call",
-   "Because each column needs the column to its left",
+   "Because the engine stores the row",
+   "Because a band is read from the target",
    "So every column comes from the same record at the same moment and no column can drift from the others",
    "So the app can store all the columns and skip the engine next time"
   ],
@@ -401,7 +401,7 @@
    "Controls that do nothing on either axis of the risk",
    "Nothing: neither of its scores exists",
    "A risk that already sits exactly at its target of 6",
-   "An unassessed residual falling back to the inherent levels"
+   "An assessed residual that equals the inherent score"
   ],
   "answer": 1,
   "explanation": "OB-11's impact of 6 is off the scale, so its inherent and residual are both 0. OB-03 also shows 0, for another reason: its residual was not assessed and fell back."
@@ -426,7 +426,7 @@
    "Any level below 3"
   ],
   "answer": 0,
-  "explanation": "A number written as text is still that level, while a fraction, a 6, a blank or a negative is off the scale. The inherent axes have nothing to fall back to."
+  "explanation": "A whole number written as text is still that level, while a fraction, a 6, a blank or a negative is off the scale. The inherent axes have nothing to fall back to."
  },
  {
   "prompt": "What kind of answer does this tier warn the next one will often give?",

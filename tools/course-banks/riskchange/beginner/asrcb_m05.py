@@ -10,8 +10,8 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 q(2, "Which four statuses does the risk engine treat as live?",
  "\"Open\", \"Under Review\", \"Mitigated\" and \"Realized\"",
- ["\"Open\", \"Under Review\", \"Draft\" and \"Realized\"",
-  "\"Open\" and \"Under Review\" only",
+ ["\"Open\", \"Under Review\", \"Draft\" and \"Realized\", the four still awaiting a decision",
+  "\"Open\" and \"Under Review\" only, the two the dashboard counts",
   "\"Open\", \"Under Review\", \"Mitigated\" and \"Closed\", which together cover every risk that has ever been assessed"],
  "Live statuses are the risks an organisation still carries. \"Draft\" is not yet a carried risk and \"Closed\" is one the organisation has stopped carrying, so those two are not live."),
 
@@ -50,12 +50,12 @@ q(1, "Between the count of every risk inherent and the count of live risks inher
   "OB-03, because it is \"Under Review\""],
  "Only the list changed. OB-10 is \"Closed\" with an inherent score of 20, so it leaves the live count. OB-09 also leaves, from the \"Low\" column, which drops from 1 to 0."),
 
-q(0, "On the OBODO register, which population gives a \"Critical\" count of 1?",
+q(0, "On the OBODO register, which of these four populations gives a \"Critical\" count of 1?",
  "Live risks counted on the residual band, where OB-03 alone is \"Critical\"",
  ["Live risks counted on the inherent band",
   "Every risk counted on the inherent band",
   "The Heatmap tab's population"],
- "The four populations give Critical counts of 5, 1, 4 and 1: every risk inherent, every risk residual, live risks inherent and live risks residual. OB-03's residual is 20 because neither residual axis is assessed."),
+ "The four populations give Critical counts of 5, 1, 4 and 1: every risk inherent, every risk residual, live risks inherent and live risks residual. Every risk counted residual also gives 1, and it is not offered here. The Heatmap tab plots the live risks inherent, which is 4. OB-03's residual is 20 because neither residual axis is assessed."),
 
 q(2, "Across its four populations, the OBODO register gives Critical counts of 5, 1, 4 and 1. What decides which of those a tile shows?",
  "Two choices the caller makes: which risks to hand over, and whether to count inherent or residual.",
@@ -88,7 +88,7 @@ q(2, "Which population does the Risk Register dashboard count, and on which scor
 q(1, "On OBODO the Heatmap tab reads \"High\" 3 and the dashboard reads \"High\" 1. Which risks make the difference?",
  "OB-04 and OB-07, which are live and outside the dashboard's population",
  ["OB-09 and OB-10, which are not live, and so the Heatmap tab leaves them out as well",
-  "OB-05 and OB-04",
+  "OB-05 and OB-04, since the dashboard reads the residual band on those two rows",
   "OB-08 and OB-11"],
  "The dashboard takes \"Open\" and \"Under Review\" only. OB-04 is \"Mitigated\" and OB-07 is \"Realized\", both live, both with an inherent band of \"High\", and 3 minus 2 is 1."),
 

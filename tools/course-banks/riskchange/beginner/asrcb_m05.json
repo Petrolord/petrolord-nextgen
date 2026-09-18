@@ -2,8 +2,8 @@
  {
   "prompt": "Which four statuses does the risk engine treat as live?",
   "options": [
-   "\"Open\", \"Under Review\", \"Draft\" and \"Realized\"",
-   "\"Open\" and \"Under Review\" only",
+   "\"Open\", \"Under Review\", \"Draft\" and \"Realized\", the four still awaiting a decision",
+   "\"Open\" and \"Under Review\" only, the two the dashboard counts",
    "\"Open\", \"Under Review\", \"Mitigated\" and \"Realized\"",
    "\"Open\", \"Under Review\", \"Mitigated\" and \"Closed\", which together cover every risk that has ever been assessed"
   ],
@@ -66,7 +66,7 @@
   "explanation": "Only the list changed. OB-10 is \"Closed\" with an inherent score of 20, so it leaves the live count. OB-09 also leaves, from the \"Low\" column, which drops from 1 to 0."
  },
  {
-  "prompt": "On the OBODO register, which population gives a \"Critical\" count of 1?",
+  "prompt": "On the OBODO register, which of these four populations gives a \"Critical\" count of 1?",
   "options": [
    "Live risks counted on the residual band, where OB-03 alone is \"Critical\"",
    "Live risks counted on the inherent band",
@@ -74,7 +74,7 @@
    "The Heatmap tab's population"
   ],
   "answer": 0,
-  "explanation": "The four populations give Critical counts of 5, 1, 4 and 1: every risk inherent, every risk residual, live risks inherent and live risks residual. OB-03's residual is 20 because neither residual axis is assessed."
+  "explanation": "The four populations give Critical counts of 5, 1, 4 and 1: every risk inherent, every risk residual, live risks inherent and live risks residual. Every risk counted residual also gives 1, and it is not offered here. The Heatmap tab plots the live risks inherent, which is 4. OB-03's residual is 20 because neither residual axis is assessed."
  },
  {
   "prompt": "Across its four populations, the OBODO register gives Critical counts of 5, 1, 4 and 1. What decides which of those a tile shows?",
@@ -125,7 +125,7 @@
   "options": [
    "OB-09 and OB-10, which are not live, and so the Heatmap tab leaves them out as well",
    "OB-04 and OB-07, which are live and outside the dashboard's population",
-   "OB-05 and OB-04",
+   "OB-05 and OB-04, since the dashboard reads the residual band on those two rows",
    "OB-08 and OB-11"
   ],
   "answer": 1,

@@ -81,7 +81,7 @@ q(3, "Which set lists the three declining answers this tier meets, one for a ban
 q(0, "A register report groups \"Not set\" with \"Within appetite\" as a softer form of passing. What is wrong with that?",
  "\"Not set\" is the engine declining to report a pass it has no basis for, so it belongs with neither answer.",
  ["Nothing, since a risk with no target is carried at the organisation's default appetite.",
-  "It should be grouped with \"Above appetite\", since the engine treats a missing target as a failure.",
+  "It should be grouped with \"Above appetite\", since the engine treats a missing target as a failure to be reported.",
   "\"Not set\" only appears on closed risks, so it should be left out of the report."],
  "\"Not set\" keeps the gap in the record visible. A missing target read as a pass would put a risk inside appetite that nobody ever measured against anything."),
 

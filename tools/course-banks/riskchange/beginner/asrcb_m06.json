@@ -13,10 +13,10 @@
  {
   "prompt": "OB-08 is \"Open\" at 3 by 5 with a residual likelihood of 2.5, a residual impact of 5, a target of 5 and a review on 2026-11-30. Which reading holds on 2026-10-01?",
   "options": [
-   "Residual 15, \"Critical\"; \"Above appetite\"; 60 days to review and not overdue",
-   "Residual 10, \"High\"; \"Above appetite\"; 60 days to review and not overdue",
+   "Residual 15, \"Critical\"; \"Above appetite\"; its review is 60 days off",
+   "Residual 10, \"High\"; \"Above appetite\"; its review is 60 days off",
    "Residual 0, \"None\"; \"Within appetite\"",
-   "Residual 0, \"None\"; \"Not set\"; 60 days to review and not overdue"
+   "Residual 0, \"None\"; \"Not set\"; its review is 60 days off"
   ],
   "answer": 3,
   "explanation": "A fraction is off the scale and an assessed value does not fall back, so the residual is unscored and appetite has nothing to compare. 2026-11-30 is 60 days after 2026-10-01, so the review is not overdue on that date."
@@ -129,13 +129,13 @@
    "A band, the one that means no score"
   ],
   "answer": 2,
-  "explanation": "\"Closed\" in this tier is a status of a risk. In the next tier it is a stage of a change, the stage a change reaches when it is finished, and a closed risk and a closed change are different things."
+  "explanation": "\"Closed\" in this tier is a status of a risk, and \"Draft\" is the other status that is not live. In the next tier \"Closed\" is a stage of a change, one of its three final stages beside \"Rejected\" and \"Cancelled\", and a closed risk and a closed change are different things. Name which record the word is about every time."
  },
  {
   "prompt": "Which of these carries over unchanged from this tier into the next one?",
   "options": [
    "The as-of date, the calendar's whole days, and a refusal shaped as ok with a reason",
-   "The four bands and their lower edges, applied to changes",
+   "The four live statuses, used as the stages of a change",
    "The per-axis fallback, applied to signatures",
    "The appetite answers"
   ],

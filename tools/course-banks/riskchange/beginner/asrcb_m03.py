@@ -83,7 +83,7 @@ q(3, "A risk's residual cannot be scored, so its residual score is 0, and its ta
  ["\"Within appetite\", because 0 is below 8",
   "\"Above appetite\", since an unscored residual is treated as a failure",
   "\"Within appetite\" until the residual is scored"],
- "The engine declines to report a pass it has no basis for. Reading 0 as a pass would put a risk inside appetite that nobody has measured against anything."),
+ "Appetite compares the residual score with the target, and an unscored residual leaves one side of that comparison empty. The engine gives the same \"Not set\" here as it gives for a missing target or a target of zero."),
 
 q(2, "OB-01 has a residual band of \"High\" and reads \"Within appetite\". OB-02 has a residual band of \"Medium\" and reads \"Above appetite\". How can both be right?",
  "Each is measured against its own target: OB-01 has 10 against 10 and OB-02 has 8 against 6.",

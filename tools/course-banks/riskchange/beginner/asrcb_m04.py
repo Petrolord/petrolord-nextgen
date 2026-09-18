@@ -46,7 +46,7 @@ q(0, "OB-02 is \"Open\" and its next review is 2026-09-30. On 2026-10-01, is its
 q(2, "A \"Closed\" risk's review date passed the day before the as-of date. The same risk, marked \"Open\", is asked the same question. What are the two overdue answers?",
  "Closed: no, and Open: yes.",
  ["Closed: yes. Open: yes, as both dates are past.",
-  "Closed: no. Open: no.",
+  "Closed: no. Open: no, as one day late is still read as on time.",
   "Closed: yes. Open: no."],
  "The test asks the status first. Only a live risk carries a review obligation, so the \"Closed\" copy is never overdue whatever its date, while the \"Open\" copy with days until of -1 is."),
 
@@ -94,7 +94,7 @@ q(1, "On 2026-10-01, how many live OBODO risks are review-overdue, and which are
 
 q(0, "OB-09 is \"Draft\" with no review date. Why does its review overdue answer read no?",
  "Its status is not live, so the test never reaches the date.",
- ["Its days until is null, and null is read as zero.",
+ ["Its days until is null, and the engine reads a null count as zero days, which is not below zero.",
   "Drafts wait for a first review date.",
   "Its review date defaults to the as-of date, which is never overdue."],
  "The rule asks the status first, and \"Draft\" is not live. A live risk with no review date also reads no, for the other reason: there is no date to be late against."),
