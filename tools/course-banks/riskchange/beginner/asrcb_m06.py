@@ -1,0 +1,117 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# riskchange Associate m06, The Associate Reading. Written from digest.txt
+# SECTIONS 2 to 6 as the module's three lessons read them: the OBODO register
+# end to end, the six-step method worked on OBODO rows, and what the next tier
+# changes. Every dated answer is true on 2026-10-01.
+
+q(1, "OB-02, a fatigue crack in a jetty loading arm, is \"Open\" at 4 by 4 with a residual likelihood of 2, a blank residual impact and a target of 6. Which row does the engine give on 2026-10-01?",
+ "Residual 8, \"Medium\"; \"Above appetite\"; review overdue",
+ ["Residual 2, \"Low\"; \"Within appetite\"; review overdue",
+  "Residual 0, \"None\"; \"Not set\"; review not overdue",
+  "Residual 8, \"Medium\"; \"Above appetite\"; review not overdue, as a blank axis suspends the review date"],
+ "The blank impact falls back to the inherent 4, so the residual is 2 times 4, which is 8, \"Medium\", above its target of 6. Its review date, 2026-09-30, is -1 days from the as-of date, so on 2026-10-01 it is overdue."),
+
+q(3, "OB-08 is \"Open\" at 3 by 5 with a residual likelihood of 2.5, a residual impact of 5, a target of 5 and a review on 2026-11-30. Which reading holds on 2026-10-01?",
+ "Residual 0, \"None\"; \"Not set\"; 60 days to review and not overdue",
+ ["Residual 15, \"Critical\"; \"Above appetite\"; 60 days to review and not overdue",
+  "Residual 10, \"High\"; \"Above appetite\"; 60 days to review and not overdue",
+  "Residual 0, \"None\"; \"Within appetite\""],
+ "A fraction is off the scale and an assessed value does not fall back, so the residual is unscored and appetite has nothing to compare. 2026-11-30 is 60 days after 2026-10-01, so the review is not overdue on that date."),
+
+q(0, "OB-01 and OB-08 share their inherent levels, 3 by 5, and both score 15, \"Critical\". Where do the two rows part?",
+ "In their residual inputs: OB-01 scores a residual of 10, \"High\", and OB-08's residual is unscored.",
+ ["In their inherent bands, since the engine breaks a tie between equal scores by status.",
+  "Nowhere, since two risks with the same inherent levels share every derived value.",
+  "In their review dates only."],
+ "OB-01's residual levels are 2 and 5, which score 10 against a target of 10, \"Within appetite\". OB-08's residual likelihood of 2.5 leaves its residual at 0, \"None\", and its appetite \"Not set\"."),
+
+q(2, "Across the 10 live OBODO risks, how do the appetite answers divide?",
+ "3 \"Above appetite\", 4 \"Within appetite\" and 3 \"Not set\"",
+ ["4 \"Above appetite\", 4 \"Within appetite\" and 2 \"Not set\"",
+  "3 \"Above appetite\" and 7 \"Within appetite\", as a missing target is read as a pass",
+  "5 \"Above appetite\", 5 \"Within appetite\""],
+ "Above: OB-02, OB-03 and OB-05. Within: OB-01, OB-04, OB-07 and OB-12. Not set: OB-06, OB-08 and OB-11. The three counts add to the 10 live risks."),
+
+q(3, "Subtracting the two engine scores, OB-08's inherent minus residual is 15. What does that figure say about its controls?",
+ "Nothing: it is the size of a gap in the record, since the residual is unscored.",
+ ["That its controls remove all of the risk, which makes it the best-controlled live risk on the register.",
+  "That its controls lower the risk by exactly one band.",
+  "That the risk should move to \"Mitigated\", since the reduction reaches the \"Critical\" edge of 15."],
+ "OB-08 shows its whole inherent score as a reduction only because its residual is unscored. A subtraction over an unscored or unassessed value describes no control at all, so the two scores are read before the difference."),
+
+q(0, "OB-03 shows an inherent minus residual of 0. Why?",
+ "Its residual is not assessed on either axis, so both fall back to the inherent levels.",
+ ["Its controls have been assessed as doing nothing on either axis.",
+  "It is not live, so the engine sets the difference to 0.",
+  "Its inherent score is off the scale."],
+ "OB-03's residual axes are both null, so each falls back and the residual equals the inherent 20. OB-11 also shows 0, for a different reason: neither of its scores exists."),
+
+q(2, "In the six-step method this module works on OBODO rows, what is written down before a single row is read?",
+ "The as-of date",
+ ["The band table",
+  "The population to be counted",
+  "The target of every risk, since appetite is the question the reading is meant to answer"],
+ "Every dated answer is true on the as-of date, and a status that cannot be dated cannot be checked. Scoring, the residual, appetite, status and date, and the population follow in that order."),
+
+q(1, "Working the method on OB-03, which is \"Under Review\" at 5 by 4 with both residual axes null, a target of 12 and a review on 2026-11-15, what does step four give?",
+ "\"Above appetite\", since the residual of 20 is above 12",
+ ["\"Within appetite\", since the residual has not been assessed yet",
+  "\"Not set\"",
+  "\"Above appetite\", since the inherent band is \"Critical\" and appetite reads the inherent band"],
+ "Both residual axes fall back, so the residual is 20, \"Critical\", and 20 is above the target of 12. Appetite reads the residual, and an unassessed residual is still a scored one."),
+
+q(0, "In how many of the four band-count populations does OB-03 count as \"Critical\"?",
+ "All four, since it is live and \"Critical\" on both scores",
+ ["Two: the inherent ones",
+  "Two: the live ones",
+  "One: live risks residual"],
+ "OB-03 is \"Under Review\", so it is in both live populations, and its inherent and residual scores are both 20. It is the one risk counted \"Critical\" in the residual rows, which read 1."),
+
+q(3, "A capstone row has the same levels as an OBODO row you have worked. What does the worked method say to do?",
+ "Run the steps again on the new row.",
+ ["Reuse the OBODO answer, since the rules are the same.",
+  "Reuse the scores and recompute only the date.",
+  "Reuse the OBODO answer unless the status differs, since only the status can change a band."],
+ "OB-01 and OB-08 share their inherent levels inside one register and still differ in their residual and appetite answers. The method is what carries over, and a fraction is never rounded to rescue a band."),
+
+q(1, "In the Associate tier, what does \"overdue\" mean?",
+ "A live risk's review date has passed.",
+ ["A change has passed its target date.",
+  "A risk's score has passed its target.",
+  "Any record whose date is on or before the as-of date."],
+ "In the next tier a change can be overdue against its target date, which is a different question about a different record. The word is named every time it is used."),
+
+q(2, "In the Associate tier, \"Closed\" is one of two statuses that are not live. What is it a status of?",
+ "A risk",
+ ["A change",
+  "A review",
+  "A band, the one that means no score"],
+ "\"Closed\" in this tier is a status of a risk. In the next tier it is a stage of a change, the stage a change reaches when it is finished, and a closed risk and a closed change are different things."),
+
+q(0, "Which of these carries over unchanged from this tier into the next one?",
+ "The as-of date, the calendar's whole days, and a refusal shaped as ok with a reason",
+ ["The four bands and their lower edges, applied to changes",
+  "The per-axis fallback, applied to signatures",
+  "The appetite answers"],
+ "Every dated status in the next tier is still true on 2026-10-01, dates are read by the same calendar, and a refused verdict is the same object in every engine."),
+
+q(3, "Step five of the method, applied to OB-05 (\"Open\", review 2026-09-15) on the as-of date 2026-10-01: what does it find?",
+ "Status then date: live, -16 days, so overdue",
+ ["Date only: -16 days, so overdue",
+  "Status only: \"Open\", so overdue",
+  "Status then date: live, -16 days, but inside the tolerance a live risk is given, so not overdue"],
+ "Step five reads the status first and then the date. OB-05 is \"Open\", so the date is read, and -16 days from 2026-10-01 is below zero."),
+
+q(1, "\"OBODO has 4 Critical risks.\" How does this tier say that sentence should be written so a reader can check it?",
+ "OBODO has 4 live risks with a \"Critical\" inherent band.",
+ ["OBODO has 4 \"Critical\" risks on 2026-10-01.",
+  "OBODO has 4 \"Critical\" risks after controls.",
+  "OBODO has 4 \"Critical\" risks, as the engine counted them on 2026-10-01."],
+ "A band count is only checkable with its population and its score written beside it. On OBODO the same register gives Critical counts of 5, 1, 4 and 1."),
+
+emit(Q, '/root/wt-as-riskchange-nextgen/tools/course-banks/riskchange/beginner/asrcb_m06.json', label='asrcb_m06', expect_n=15)
+finish()
