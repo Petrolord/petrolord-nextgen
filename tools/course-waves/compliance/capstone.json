@@ -1,0 +1,157 @@
+{
+ "asOf": "2026-10-15",
+ "tiers": {
+  "beginner": {
+   "record": "EKPE",
+   "prompt": "EKPE GAS PLANT, Obolo Midstream Ltd. The as-of date is 2026-10-15. Work in whole calendar days from the as-of date: a date in the past is a negative number. The obligation register: REG-2026-041 Gas plant air emissions permit: Annual, due 2027-02-28, permit expiry 2026-12-19, lead time 60 days, nothing filed yet. REG-2026-042 Semi-annual host community report: Semi-annual, due 2026-10-31, nothing filed yet. REG-2026-043 Semi-annual waste consignment return: Semi-annual, due 2026-12-31, last filed 2026-06-24. REG-2026-044 Quarterly water abstraction return: Quarterly, due 2026-09-20, permit expiry 2026-12-28, nothing filed yet. The document library: OPS-PRO-0031 Slug catcher operating procedure, issued 2025-01-31 on a 30 month review period, a correction re-published on 2026-06-12; HSE-PLA-0009 Plant emergency response plan, issued 2024-05-31 on a 16 month review period. Give six whole numbers. (1) For REG-2026-041, the days until its next action date. (2) REG-2026-042 is filed on 2026-10-06 and the filing is recorded: the days until its next due date. (3) For REG-2026-043, the days until the start of the period a filing must fall in to count towards Compliant. (4) REG-2026-044 is filed on 2026-10-09 and the filing is recorded: the days until its next action date. (5) The days until OPS-PRO-0031's review date. (6) The days until HSE-PLA-0009's review date.",
+   "fields": [
+    {
+     "key": "ekpe_emissions_permit_next_action_days",
+     "source": "EKPE e1: complianceStatus.explainStatus(e1).daysUntil",
+     "tol": 0.5
+    },
+    {
+     "key": "ekpe_community_report_next_due_days",
+     "source": "EKPE e2 filed on its filing date: calendar.daysUntil(complianceStatus.rollForward(e2.due_date, e2.frequency))",
+     "tol": 0.5
+    },
+    {
+     "key": "ekpe_waste_return_period_start_days",
+     "source": "EKPE e3: calendar.daysUntil(complianceStatus.periodStart(e3.due_date, e3.frequency))",
+     "tol": 0.5
+    },
+    {
+     "key": "ekpe_abstraction_next_action_after_filing_days",
+     "source": "EKPE e4 filed and rolled: complianceStatus.explainStatus({...e4, due_date: rollForward(...)}).daysUntil",
+     "tol": 0.5
+    },
+    {
+     "key": "ekpe_slug_catcher_procedure_review_days",
+     "source": "EKPE ed1: calendar.daysUntil(documentControl.nextReviewDate(ed1.issue_date, ed1.review_period_months))",
+     "tol": 0.5
+    },
+    {
+     "key": "ekpe_emergency_plan_review_days",
+     "source": "EKPE ed2: calendar.daysUntil(documentControl.nextReviewDate(ed2.issue_date, ed2.review_period_months))",
+     "tol": 0.5
+    }
+   ]
+  },
+  "intermediate": {
+   "record": "UTAPATE",
+   "prompt": "UTAPATE MANIFOLD REPLACEMENT. The as-of date is 2026-10-15. The quality plan QAP-2026-022 is Active. Its inspection and test plan, item by item: H-01 Hold point Passed (date and verifier recorded); W-02 Witness point Passed (date and verifier recorded); H-03 Hold point Passed (date and verifier recorded); R-04 Review point Passed (date and verifier recorded); W-05 Witness point Passed (date and verifier recorded); H-06 Hold point Passed (date and verifier recorded); M-07 Monitor point Passed (date and verifier recorded); W-08 Witness point Passed (date and verifier recorded); R-09 Review point Passed (date and verifier recorded); W-10 Witness point Waived (reason recorded) (date and verifier recorded); M-11 Monitor point Not applicable; H-12 Hold point Not applicable (reason recorded) (date and verifier recorded); H-13 Hold point Failed (date and verifier recorded); H-14 Hold point Pending; H-15 Hold point Pending; W-16 Witness point Pending; W-17 Witness point Pending; S-18 Surveillance point Notified; M-19 Monitor point In progress; W-20 Witness point Passed (date and verifier recorded); R-21 Review point Passed (date and verifier recorded). A point listed without (date and verifier recorded) has no result date and no verifier on the record, and a point listed without (reason recorded) has no reason on the record. The site then sends six requests, in this order: remove H-15; remove W-16; waive W-17 with a date and a verifier and no reason; set H-14 Not applicable with a date, a named certifying authority surveyor and a reason; set M-19 Not applicable with nothing recorded; pass S-18 with a date and no verifier. The NCRs: NCR-2026-044 Major, Actions in progress, raised 2026-05-06; NCR-2026-051 Minor, Open, raised 2026-07-19; NCR-2026-063 Critical, Under investigation, raised 2026-09-22; NCR-2026-060 Minor, Disposition agreed, raised 2026-09-04; NCR-2026-035 Observation, Closed, raised 2026-02-11, closed 2026-03-30; NCR-2026-029 Major, Voided, raised 2026-01-05, closed 2026-01-09. The contractor HSE audit checklist has 27 questions; the answers recorded are 13 Conformant, 3 Nonconformant with notes, 2 Observations with notes, 2 Not applicable with a written reason and 2 Not applicable with the reason left blank, and the remaining questions have no answer. The 2026 audit programme: AUD-2026-101 Closed; AUD-2026-102 Reported; AUD-2026-103 Reported; AUD-2026-104 Cancelled (reason recorded); AUD-2026-105 Closed; AUD-2026-106 Reported; AUD-2026-107 Cancelled (reason recorded); AUD-2026-108 Reported; AUD-2026-109 Fieldwork complete; AUD-2026-110 In progress; AUD-2026-111 Planned. Give six whole numbers. (1) The plan's progress percent as recorded. (2) Its progress percent once the six requests have been put to the rules in order. (3) The age in days of the oldest open NCR. (4) The mean age in days of the open NCRs, as the dashboard rounds it: to a whole day, half up. (5) The checklist's progress percent. (6) The programme's delivered percent.",
+   "fields": [
+    {
+     "key": "utapate_itp_progress_pct",
+     "source": "UTAPATE plan: qualityAssurance.planProgress(checkpoints).percent",
+     "tol": 0.5
+    },
+    {
+     "key": "utapate_itp_progress_after_requests_pct",
+     "source": "UTAPATE plan after the six requests, each through canRemoveCheckpoint or canDecideCheckpoint: planProgress.percent",
+     "tol": 0.5
+    },
+    {
+     "key": "utapate_oldest_open_ncr_days",
+     "source": "UTAPATE NCRs: qualityAssurance.summarise(...).oldestOpenNcrDays",
+     "tol": 0.5
+    },
+    {
+     "key": "utapate_mean_open_ncr_age_days",
+     "source": "UTAPATE NCRs: qualityAssurance.summarise(...).meanOpenNcrAgeDays",
+     "tol": 0.5
+    },
+    {
+     "key": "utapate_checklist_progress_pct",
+     "source": "UTAPATE checklist: auditManagement.checklistProgress(items, responses).percent",
+     "tol": 0.5
+    },
+    {
+     "key": "utapate_programme_delivered_pct",
+     "source": "UTAPATE programme: auditManagement.programmeProgress(audits).percent",
+     "tol": 0.5
+    }
+   ]
+  },
+  "advanced": {
+   "record": "OBEAKPU",
+   "prompt": "OBEAKPU TERMINAL, ISO 45001:2018. The as-of date is 2026-10-15. The standard: Certified, certification cycle 3 years, certificate expiry 2026-08-27. The clause register (40 clauses): every clause is Applicable and Conformant with an evidence reference, an assessed date and an assessor, except 8.1.4.3, 6.1.3, 7.2, 7.4.3, 5.4, 9.1.2, which read: 8.1.4.3 Not applicable with its justification; 6.1.3 Nonconformant, assessed with a date and an assessor, no evidence reference; 7.2 Conformant with a date and an assessor and no evidence reference; 7.4.3 Partially conformant with an evidence reference and a date and no assessor; 5.4 Not assessed; 9.1.2 Partially conformant with an evidence reference, a date and an assessor. The audits: OSA-2023-002 Internal Closed; OSA-2025-001 Internal Closed; OSA-2026-001 Internal Reported; OSA-2026-002 Internal In progress; OSA-2025-004 Internal Cancelled; OSA-2026-S02 Surveillance Closed. Examinations: OSA-2025-001 examined every clause Conformant except 8.1.4.3, 4.4, 6.1.4, 7.5.2, 10.3, 5.3, 7.1 and 7.3, all on 2025-03-19; OSA-2026-001 examined 8.1.1, 8.1.2, 8.1.3, 8.2, 9.1.1 and 10.2 Conformant on 2026-03-25, 6.1.3 Nonconformant on 2026-03-26, and recorded 9.3 as Not examined on 2026-03-27; OSA-2026-002 examined 8.1.2 on 2026-09-30 and 6.1.4 on 2026-09-29; OSA-2026-S02 examined 8.1.2 on 2026-07-15 and 7.5.2 on 2026-07-16; OSA-2025-004 examined 10.3 on 2025-08-20; OSA-2023-002 examined 4.4 and 5.3 on 2023-06-14. The findings: OSF-2026-002 Major nonconformity, Closed, raised 2026-01-19, closed 2026-05-04; OSF-2026-007 Major nonconformity, Action in progress, raised 2026-03-26; OSF-2026-009 Minor nonconformity, Open, raised 2026-06-03. Give six whole numbers, in whole calendar days from the as-of date where a date is asked for (negative for the past). (1) The days until the last examination of 8.1.2 that counts towards coverage. (2) The same for 9.3. (3) The age in days of OSF-2026-002. (4) How many applicable clauses carry an evidenced conformity claim. (5) The certificate's days as the readiness counts give them. (6) How many applicable clauses are covered.",
+   "fields": [
+    {
+     "key": "obeakpu_clause_812_last_examined_days",
+     "source": "OBEAKPU 8.1.2: calendar.daysUntil(isoCompliance.clauseCoverage(...) row lastExaminedOn)",
+     "tol": 0.5
+    },
+    {
+     "key": "obeakpu_clause_93_last_examined_days",
+     "source": "OBEAKPU 9.3: calendar.daysUntil(isoCompliance.clauseCoverage(...) row lastExaminedOn)",
+     "tol": 0.5
+    },
+    {
+     "key": "obeakpu_closed_major_finding_age_days",
+     "source": "OBEAKPU OSF-2026-002: isoCompliance.findingAgeDays",
+     "tol": 0.5
+    },
+    {
+     "key": "obeakpu_evidenced_claims",
+     "source": "OBEAKPU: isoCompliance.certificationReadiness(...).counts.evidenced",
+     "tol": 0.5
+    },
+    {
+     "key": "obeakpu_certificate_days",
+     "source": "OBEAKPU: isoCompliance.certificationReadiness(...).counts.certificateDays",
+     "tol": 0.5
+    },
+    {
+     "key": "obeakpu_clauses_covered",
+     "source": "OBEAKPU: isoCompliance.certificationReadiness(...).counts.covered",
+     "tol": 0.5
+    }
+   ]
+  }
+ },
+ "requestLog": [
+  {
+   "kind": "remove",
+   "item": "u15",
+   "status": null,
+   "ok": false,
+   "reason": "A hold point cannot be removed once its plan has left Draft. Record it as Not applicable with the reason, so the plan shows who set it aside and why."
+  },
+  {
+   "kind": "remove",
+   "item": "u16",
+   "status": null,
+   "ok": true,
+   "reason": null
+  },
+  {
+   "kind": "decide",
+   "item": "u17",
+   "status": "Waived",
+   "ok": false,
+   "reason": "Say why this point is being waived. A waiver is a deliberate acceptance of less assurance, and the reason is what makes it auditable later."
+  },
+  {
+   "kind": "decide",
+   "item": "u14",
+   "status": "Not applicable",
+   "ok": true,
+   "reason": null
+  },
+  {
+   "kind": "decide",
+   "item": "u19",
+   "status": "Not applicable",
+   "ok": true,
+   "reason": null
+  },
+  {
+   "kind": "decide",
+   "item": "u18",
+   "status": "Passed",
+   "ok": false,
+   "reason": "Record the date this was decided and who decided it."
+  }
+ ]
+}

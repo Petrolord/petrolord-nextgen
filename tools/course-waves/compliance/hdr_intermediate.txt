@@ -1,0 +1,28 @@
+-- ============================================================================
+-- compliance PROFESSIONAL DEEP SEED: Compliance, Audit & Quality, intermediate
+-- tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE PLAN, THE NONCONFORMANCE AND THE CHECKLIST. A hold
+-- point stops work and a witness point does not; a decision is a date and a
+-- named verifier, and a waiver carries its reason; progress is counted from
+-- the points and from the answers, never typed; a plan, an NCR, an audit and a
+-- programme each close only through a gate that names what is missing; an
+-- auditor may not audit their own area; and an open NCR ages until it closes.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A request is not a result. Removing a point,
+-- waiving it or passing it goes through a gate first, and a refused request
+-- changes nothing on the plan.
+--
+-- THE TRAP THE TIER IS BUILT ON. "Not applicable" is an answer only with its
+-- reason, a failed point is the most outstanding item on a plan, and a
+-- cancelled audit is not a delivered one.
+--
+-- ONE RULE, NOW: an audit cancelled without a written reason is outstanding in
+-- programmeProgress, canCompleteProgramme and summarise alike, and every
+-- percent rounds half up on the exact fraction (ASC-0). The capstone grades
+-- four engine percents and two NCR ages, at a tolerance of 0.5.
+-- ============================================================================

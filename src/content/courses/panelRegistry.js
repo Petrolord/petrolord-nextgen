@@ -222,6 +222,10 @@ export const PANELS = {
   'rc-risk-explorer': React.lazy(() => import('@/components/course/panels/riskchange/RiskExplorer')),
   'rc-change-explorer': React.lazy(() => import('@/components/course/panels/riskchange/ChangeExplorer')),
   'rc-review-explorer': React.lazy(() => import('@/components/course/panels/riskchange/ReviewExplorer')),
+  // compliance: Compliance, Audit & Quality (academy module assurance)
+  'compliance-register-explorer': React.lazy(() => import('@/components/course/panels/compliance/RegisterExplorer')),
+  'compliance-plan-explorer': React.lazy(() => import('@/components/course/panels/compliance/PlanExplorer')),
+  'compliance-readiness-explorer': React.lazy(() => import('@/components/course/panels/compliance/ReadinessExplorer')),
 };
 
 export function resolvePanel(id) {

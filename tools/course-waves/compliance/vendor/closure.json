@@ -1,0 +1,737 @@
+{
+ "enginesPin": "ab3ce6af5cd64e3dba2fe1c94493602f57e0ccdb",
+ "seeds": [
+  "__tests__/assurance.audit.test.js",
+  "__tests__/assurance.compliance.test.js",
+  "__tests__/assurance.copy.test.js",
+  "__tests__/assurance.documents.test.js",
+  "__tests__/assurance.goldens.test.js",
+  "__tests__/assurance.instants.test.js",
+  "__tests__/assurance.iso.test.js",
+  "__tests__/assurance.lessons.test.js",
+  "__tests__/assurance.moc.test.js",
+  "__tests__/assurance.peerReview.test.js",
+  "__tests__/assurance.quality.test.js",
+  "__tests__/assurance.risk.test.js",
+  "engines/assurance/auditManagement.js",
+  "engines/assurance/calendar.js",
+  "engines/assurance/complianceStatus.js",
+  "engines/assurance/documentControl.js",
+  "engines/assurance/isoCompliance.js",
+  "engines/assurance/lessonsLearned.js",
+  "engines/assurance/managementOfChange.js",
+  "engines/assurance/peerReview.js",
+  "engines/assurance/qualityAssurance.js",
+  "engines/assurance/riskScoring.js",
+  "test-data/assurance/goldens/auditManagement_cases.json",
+  "test-data/assurance/goldens/calendar_cases.json",
+  "test-data/assurance/goldens/complianceStatus_cases.json",
+  "test-data/assurance/goldens/documentControl_cases.json",
+  "test-data/assurance/goldens/isoCompliance_cases.json",
+  "test-data/assurance/goldens/lessonsLearned_cases.json",
+  "test-data/assurance/goldens/managementOfChange_cases.json",
+  "test-data/assurance/goldens/peerReview_cases.json",
+  "test-data/assurance/goldens/qualityAssurance_cases.json",
+  "test-data/assurance/goldens/riskScoring_cases.json",
+  "tools/validation/assurance/FINDINGS-audit.md",
+  "tools/validation/assurance/FINDINGS-calendar.md",
+  "tools/validation/assurance/FINDINGS-compliance.md",
+  "tools/validation/assurance/FINDINGS-documents.md",
+  "tools/validation/assurance/FINDINGS-iso.md",
+  "tools/validation/assurance/FINDINGS-lessons.md",
+  "tools/validation/assurance/FINDINGS-moc.md",
+  "tools/validation/assurance/FINDINGS-peer-review.md",
+  "tools/validation/assurance/FINDINGS-quality.md",
+  "tools/validation/assurance/FINDINGS-risk.md",
+  "tools/validation/assurance/oracle_audit.py",
+  "tools/validation/assurance/oracle_calendar.py",
+  "tools/validation/assurance/oracle_compliance.py",
+  "tools/validation/assurance/oracle_documents.py",
+  "tools/validation/assurance/oracle_iso.py",
+  "tools/validation/assurance/oracle_lessons.py",
+  "tools/validation/assurance/oracle_moc.py",
+  "tools/validation/assurance/oracle_peer_review.py",
+  "tools/validation/assurance/oracle_quality.py",
+  "tools/validation/assurance/oracle_risk.py"
+ ],
+ "closure": [
+  {
+   "path": "__tests__/assurance.audit.test.js",
+   "canonicalBlob": "168f6cedfc18af932ba587f2ff882b7571966986",
+   "vendoredBlob": "168f6cedfc18af932ba587f2ff882b7571966986",
+   "canonicalMd5": "165e40c79152d8029ed5ed0af68dcfe7",
+   "vendoredMd5": "165e40c79152d8029ed5ed0af68dcfe7",
+   "identical": true
+  },
+  {
+   "path": "__tests__/assurance.compliance.test.js",
+   "canonicalBlob": "fc5248e0239b0841f542a3cba95ef72db34296d1",
+   "vendoredBlob": "fc5248e0239b0841f542a3cba95ef72db34296d1",
+   "canonicalMd5": "b7c7bbdd66177ca6c1ea4afcd4a28fb0",
+   "vendoredMd5": "b7c7bbdd66177ca6c1ea4afcd4a28fb0",
+   "identical": true
+  },
+  {
+   "path": "__tests__/assurance.copy.test.js",
+   "canonicalBlob": "651087d838942a80c5d00e151290e76cbf8017a4",
+   "vendoredBlob": "651087d838942a80c5d00e151290e76cbf8017a4",
+   "canonicalMd5": "d0b38fde2ca674588cb87df7da8f7259",
+   "vendoredMd5": "d0b38fde2ca674588cb87df7da8f7259",
+   "identical": true
+  },
+  {
+   "path": "__tests__/assurance.documents.test.js",
+   "canonicalBlob": "b7042f3bb16304029236350b7ff05ccfa602b489",
+   "vendoredBlob": "b7042f3bb16304029236350b7ff05ccfa602b489",
+   "canonicalMd5": "efde81abc56b64c4b66fd9242e5f7ffb",
+   "vendoredMd5": "efde81abc56b64c4b66fd9242e5f7ffb",
+   "identical": true
+  },
+  {
+   "path": "__tests__/assurance.goldens.test.js",
+   "canonicalBlob": "91027c7eeddc7a2127a2ade98261a558df6259f1",
+   "vendoredBlob": "91027c7eeddc7a2127a2ade98261a558df6259f1",
+   "canonicalMd5": "479098ca48cb37e17e7b8cce08035c9f",
+   "vendoredMd5": "479098ca48cb37e17e7b8cce08035c9f",
+   "identical": true
+  },
+  {
+   "path": "__tests__/assurance.instants.test.js",
+   "canonicalBlob": "154ed04b886f11f0f8927c86280fd6b2686bed14",
+   "vendoredBlob": "154ed04b886f11f0f8927c86280fd6b2686bed14",
+   "canonicalMd5": "822f96aa3ef6d80ce20e88461868551a",
+   "vendoredMd5": "822f96aa3ef6d80ce20e88461868551a",
+   "identical": true
+  },
+  {
+   "path": "__tests__/assurance.iso.test.js",
+   "canonicalBlob": "db85eef11528b15e4b124df423e4c5b38ab74405",
+   "vendoredBlob": "db85eef11528b15e4b124df423e4c5b38ab74405",
+   "canonicalMd5": "3bc300cd926220efad5130d248047f33",
+   "vendoredMd5": "3bc300cd926220efad5130d248047f33",
+   "identical": true
+  },
+  {
+   "path": "__tests__/assurance.lessons.test.js",
+   "canonicalBlob": "d9cb956be6df7a26fc00774ebf7666ed1b19f891",
+   "vendoredBlob": "d9cb956be6df7a26fc00774ebf7666ed1b19f891",
+   "canonicalMd5": "9e772423718d4e1306f4606dc84fc17c",
+   "vendoredMd5": "9e772423718d4e1306f4606dc84fc17c",
+   "identical": true
+  },
+  {
+   "path": "__tests__/assurance.moc.test.js",
+   "canonicalBlob": "c074a5a41b74124809e04ac48348c196664873ff",
+   "vendoredBlob": "c074a5a41b74124809e04ac48348c196664873ff",
+   "canonicalMd5": "a3b9c42eed2df9e767367da9af1c0bcf",
+   "vendoredMd5": "a3b9c42eed2df9e767367da9af1c0bcf",
+   "identical": true
+  },
+  {
+   "path": "__tests__/assurance.peerReview.test.js",
+   "canonicalBlob": "c91937938e3031f16b175ed9dc3b69713a406be6",
+   "vendoredBlob": "c91937938e3031f16b175ed9dc3b69713a406be6",
+   "canonicalMd5": "20bd59df6014b92c3ea7cb6e7f81e16e",
+   "vendoredMd5": "20bd59df6014b92c3ea7cb6e7f81e16e",
+   "identical": true
+  },
+  {
+   "path": "__tests__/assurance.quality.test.js",
+   "canonicalBlob": "08cf37a2403c072de69c04d5523c0d05489b97c5",
+   "vendoredBlob": "08cf37a2403c072de69c04d5523c0d05489b97c5",
+   "canonicalMd5": "524187f8097a729e74703b56cd0b232e",
+   "vendoredMd5": "524187f8097a729e74703b56cd0b232e",
+   "identical": true
+  },
+  {
+   "path": "__tests__/assurance.risk.test.js",
+   "canonicalBlob": "a8c2c7336a4a7636ecdf56915fde5530f3d8d8e4",
+   "vendoredBlob": "a8c2c7336a4a7636ecdf56915fde5530f3d8d8e4",
+   "canonicalMd5": "7deb5d9389e81b0f914da6758200ee92",
+   "vendoredMd5": "7deb5d9389e81b0f914da6758200ee92",
+   "identical": true
+  },
+  {
+   "path": "__tests__/helpers/assuranceGoldens.js",
+   "canonicalBlob": "d6f4f5ff8043d58a6b14f9f0feec0c443e2e3023",
+   "vendoredBlob": "d6f4f5ff8043d58a6b14f9f0feec0c443e2e3023",
+   "canonicalMd5": "935f649810ce0c32ea57488155e30455",
+   "vendoredMd5": "935f649810ce0c32ea57488155e30455",
+   "identical": true
+  },
+  {
+   "path": "engines/assurance/auditManagement.js",
+   "canonicalBlob": "942bd575c31a43b44a0b35f9ad4c06ff005e58d5",
+   "vendoredBlob": "942bd575c31a43b44a0b35f9ad4c06ff005e58d5",
+   "canonicalMd5": "b64bb1b1c59a8208b27d2681d4058777",
+   "vendoredMd5": "b64bb1b1c59a8208b27d2681d4058777",
+   "identical": true
+  },
+  {
+   "path": "engines/assurance/calendar.js",
+   "canonicalBlob": "36ff9b7dff62cd43566eb6c999b97348983fbdbf",
+   "vendoredBlob": "36ff9b7dff62cd43566eb6c999b97348983fbdbf",
+   "canonicalMd5": "64af006780ff4e0ae5792d393cff002a",
+   "vendoredMd5": "64af006780ff4e0ae5792d393cff002a",
+   "identical": true
+  },
+  {
+   "path": "engines/assurance/complianceStatus.js",
+   "canonicalBlob": "33e2db896fe993bd2c8bb602d4d1b4043cbf04ef",
+   "vendoredBlob": "33e2db896fe993bd2c8bb602d4d1b4043cbf04ef",
+   "canonicalMd5": "d68fd7e455e4e3ad752fa2a1346d623d",
+   "vendoredMd5": "d68fd7e455e4e3ad752fa2a1346d623d",
+   "identical": true
+  },
+  {
+   "path": "engines/assurance/documentControl.js",
+   "canonicalBlob": "6d65ad8da69a403e6d36b49bed551017ac32b2e9",
+   "vendoredBlob": "6d65ad8da69a403e6d36b49bed551017ac32b2e9",
+   "canonicalMd5": "37acd8e060feffdfc300d5374399737a",
+   "vendoredMd5": "37acd8e060feffdfc300d5374399737a",
+   "identical": true
+  },
+  {
+   "path": "engines/assurance/isoCompliance.js",
+   "canonicalBlob": "44f815dc303683dc811ce2327181d20ca7c3e727",
+   "vendoredBlob": "44f815dc303683dc811ce2327181d20ca7c3e727",
+   "canonicalMd5": "56f303226b4005a46de3c057b962c6d0",
+   "vendoredMd5": "56f303226b4005a46de3c057b962c6d0",
+   "identical": true
+  },
+  {
+   "path": "engines/assurance/lessonsLearned.js",
+   "canonicalBlob": "014d7c498ec535619813a0b417ee4e01ec3ddef4",
+   "vendoredBlob": "014d7c498ec535619813a0b417ee4e01ec3ddef4",
+   "canonicalMd5": "58ebfa77714b720dfebf7d955d9d2686",
+   "vendoredMd5": "58ebfa77714b720dfebf7d955d9d2686",
+   "identical": true
+  },
+  {
+   "path": "engines/assurance/managementOfChange.js",
+   "canonicalBlob": "8b7e1949ebfb36be94da9eaf3250e9ca083b81fe",
+   "vendoredBlob": "8b7e1949ebfb36be94da9eaf3250e9ca083b81fe",
+   "canonicalMd5": "53931c383e35858dba841b5ca4c58718",
+   "vendoredMd5": "53931c383e35858dba841b5ca4c58718",
+   "identical": true
+  },
+  {
+   "path": "engines/assurance/peerReview.js",
+   "canonicalBlob": "40a0562db10a83a0e719f04b71e91c0b3614997f",
+   "vendoredBlob": "40a0562db10a83a0e719f04b71e91c0b3614997f",
+   "canonicalMd5": "14aa76df9412a03ba7695597204f7ef6",
+   "vendoredMd5": "14aa76df9412a03ba7695597204f7ef6",
+   "identical": true
+  },
+  {
+   "path": "engines/assurance/qualityAssurance.js",
+   "canonicalBlob": "3cb3f85cc115da23b4c341884c906399c74dedaa",
+   "vendoredBlob": "3cb3f85cc115da23b4c341884c906399c74dedaa",
+   "canonicalMd5": "d4088fb933b4ea90f491a8e6bd9ff748",
+   "vendoredMd5": "d4088fb933b4ea90f491a8e6bd9ff748",
+   "identical": true
+  },
+  {
+   "path": "engines/assurance/riskScoring.js",
+   "canonicalBlob": "ce7ac2a3cbba857a57ccfee3ce52dfe47e70cd36",
+   "vendoredBlob": "ce7ac2a3cbba857a57ccfee3ce52dfe47e70cd36",
+   "canonicalMd5": "531086bb057f7de9892535b66e304960",
+   "vendoredMd5": "531086bb057f7de9892535b66e304960",
+   "identical": true
+  },
+  {
+   "path": "test-data/assurance/goldens/auditManagement_cases.json",
+   "canonicalBlob": "b94f64b13b4363a74e27b794efc1512929af51e4",
+   "vendoredBlob": "b94f64b13b4363a74e27b794efc1512929af51e4",
+   "canonicalMd5": "a9df0a0f784ffc3641315e57b10749b7",
+   "vendoredMd5": "a9df0a0f784ffc3641315e57b10749b7",
+   "identical": true
+  },
+  {
+   "path": "test-data/assurance/goldens/calendar_cases.json",
+   "canonicalBlob": "2ba9b9654cedb9d24f5332990bddf43eb435ad31",
+   "vendoredBlob": "2ba9b9654cedb9d24f5332990bddf43eb435ad31",
+   "canonicalMd5": "70b2636363e6fe85234e900b74a13f82",
+   "vendoredMd5": "70b2636363e6fe85234e900b74a13f82",
+   "identical": true
+  },
+  {
+   "path": "test-data/assurance/goldens/complianceStatus_cases.json",
+   "canonicalBlob": "438a79f27de319dc72b963e174f041c1936cfb48",
+   "vendoredBlob": "438a79f27de319dc72b963e174f041c1936cfb48",
+   "canonicalMd5": "7229f74accc5f6c1f315a0d0310343db",
+   "vendoredMd5": "7229f74accc5f6c1f315a0d0310343db",
+   "identical": true
+  },
+  {
+   "path": "test-data/assurance/goldens/documentControl_cases.json",
+   "canonicalBlob": "8845138a8005bb024f1fbff245827a6b4490e642",
+   "vendoredBlob": "8845138a8005bb024f1fbff245827a6b4490e642",
+   "canonicalMd5": "5216a3bd75c07be2d3fb6db695e9d7a9",
+   "vendoredMd5": "5216a3bd75c07be2d3fb6db695e9d7a9",
+   "identical": true
+  },
+  {
+   "path": "test-data/assurance/goldens/isoCompliance_cases.json",
+   "canonicalBlob": "8d5e6ffed92f7d2ee24b1ddb1f95bac714a07fc9",
+   "vendoredBlob": "8d5e6ffed92f7d2ee24b1ddb1f95bac714a07fc9",
+   "canonicalMd5": "9bbfed88939eeeec7128228fc413d774",
+   "vendoredMd5": "9bbfed88939eeeec7128228fc413d774",
+   "identical": true
+  },
+  {
+   "path": "test-data/assurance/goldens/lessonsLearned_cases.json",
+   "canonicalBlob": "988cc9ab3605af5c14700909a8014d5bbbddbe05",
+   "vendoredBlob": "988cc9ab3605af5c14700909a8014d5bbbddbe05",
+   "canonicalMd5": "183b227a47b23237fdf85d71beba4073",
+   "vendoredMd5": "183b227a47b23237fdf85d71beba4073",
+   "identical": true
+  },
+  {
+   "path": "test-data/assurance/goldens/managementOfChange_cases.json",
+   "canonicalBlob": "af8a4a9c6befbcc94d5887e69c9b24ab23770131",
+   "vendoredBlob": "af8a4a9c6befbcc94d5887e69c9b24ab23770131",
+   "canonicalMd5": "b9d1f4c81ac823a0963814ac1772d121",
+   "vendoredMd5": "b9d1f4c81ac823a0963814ac1772d121",
+   "identical": true
+  },
+  {
+   "path": "test-data/assurance/goldens/peerReview_cases.json",
+   "canonicalBlob": "70e85bcf13ad9eebabd6982d9a48b6b52cd80c56",
+   "vendoredBlob": "70e85bcf13ad9eebabd6982d9a48b6b52cd80c56",
+   "canonicalMd5": "2504bf1fc2337fcf6417525a259aa9f3",
+   "vendoredMd5": "2504bf1fc2337fcf6417525a259aa9f3",
+   "identical": true
+  },
+  {
+   "path": "test-data/assurance/goldens/qualityAssurance_cases.json",
+   "canonicalBlob": "b129488287f575558ccedfffd439f0350a5fe7ef",
+   "vendoredBlob": "b129488287f575558ccedfffd439f0350a5fe7ef",
+   "canonicalMd5": "ceb96d9b66412d65e9f24e9eb33554b6",
+   "vendoredMd5": "ceb96d9b66412d65e9f24e9eb33554b6",
+   "identical": true
+  },
+  {
+   "path": "test-data/assurance/goldens/riskScoring_cases.json",
+   "canonicalBlob": "79c826b89b8ba8a82c8dc8eaaf1226ebfecfd1b4",
+   "vendoredBlob": "79c826b89b8ba8a82c8dc8eaaf1226ebfecfd1b4",
+   "canonicalMd5": "637ff05a2a003ab08b5cc12bda29f8ba",
+   "vendoredMd5": "637ff05a2a003ab08b5cc12bda29f8ba",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/FINDINGS-audit.md",
+   "canonicalBlob": "3ef178bf186fc14a7f4e95b99a46cac687182e45",
+   "vendoredBlob": "3ef178bf186fc14a7f4e95b99a46cac687182e45",
+   "canonicalMd5": "a5e63be3bc0adf80222e412f725cd66f",
+   "vendoredMd5": "a5e63be3bc0adf80222e412f725cd66f",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/FINDINGS-calendar.md",
+   "canonicalBlob": "646fa6079a9b52b2b7ed83b70e8cede541eaa319",
+   "vendoredBlob": "646fa6079a9b52b2b7ed83b70e8cede541eaa319",
+   "canonicalMd5": "c8dec254f9542614ab28e797e596cb30",
+   "vendoredMd5": "c8dec254f9542614ab28e797e596cb30",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/FINDINGS-compliance.md",
+   "canonicalBlob": "924a459b8fc1939c1565afde2cf655ad0815ee8d",
+   "vendoredBlob": "924a459b8fc1939c1565afde2cf655ad0815ee8d",
+   "canonicalMd5": "dd95c52d743ee66ab3d3c15c35972ca7",
+   "vendoredMd5": "dd95c52d743ee66ab3d3c15c35972ca7",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/FINDINGS-documents.md",
+   "canonicalBlob": "3f6d335a4fdf2374b0a395d2b17ef46c8f554415",
+   "vendoredBlob": "3f6d335a4fdf2374b0a395d2b17ef46c8f554415",
+   "canonicalMd5": "9a1463579791bb643bb57d8c0228b9a8",
+   "vendoredMd5": "9a1463579791bb643bb57d8c0228b9a8",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/FINDINGS-iso.md",
+   "canonicalBlob": "a60de1ec023ce92b4f9a90cd8d8213edd3c3eb4d",
+   "vendoredBlob": "a60de1ec023ce92b4f9a90cd8d8213edd3c3eb4d",
+   "canonicalMd5": "d83ab9edba2c4e4a47b27dfcdffd4b84",
+   "vendoredMd5": "d83ab9edba2c4e4a47b27dfcdffd4b84",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/FINDINGS-lessons.md",
+   "canonicalBlob": "18e41d8176b0bd18bfc6c9ee773cfd00ab32470e",
+   "vendoredBlob": "18e41d8176b0bd18bfc6c9ee773cfd00ab32470e",
+   "canonicalMd5": "14a2749248ea59805e09b88389dce8a5",
+   "vendoredMd5": "14a2749248ea59805e09b88389dce8a5",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/FINDINGS-moc.md",
+   "canonicalBlob": "465ba1d5f784ff327a63a85996b673e064d31e34",
+   "vendoredBlob": "465ba1d5f784ff327a63a85996b673e064d31e34",
+   "canonicalMd5": "d8b47e0194a3aa6a37ba3bf70430ee8a",
+   "vendoredMd5": "d8b47e0194a3aa6a37ba3bf70430ee8a",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/FINDINGS-peer-review.md",
+   "canonicalBlob": "ddb634fa626e2dfc435650ef9ae040b2df56ca6a",
+   "vendoredBlob": "ddb634fa626e2dfc435650ef9ae040b2df56ca6a",
+   "canonicalMd5": "9160eadda272705ccf77ef096c465b54",
+   "vendoredMd5": "9160eadda272705ccf77ef096c465b54",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/FINDINGS-quality.md",
+   "canonicalBlob": "2541c76e3cdf91ca72fa78e802ac6bafaa35b687",
+   "vendoredBlob": "2541c76e3cdf91ca72fa78e802ac6bafaa35b687",
+   "canonicalMd5": "0413333761c2abf6898a051da7daf05e",
+   "vendoredMd5": "0413333761c2abf6898a051da7daf05e",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/FINDINGS-risk.md",
+   "canonicalBlob": "ad6215a807a1c7b65f724658629be1585d0d08cf",
+   "vendoredBlob": "ad6215a807a1c7b65f724658629be1585d0d08cf",
+   "canonicalMd5": "240337dbd258c3dfc474a42c4ed40460",
+   "vendoredMd5": "240337dbd258c3dfc474a42c4ed40460",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/oracle_audit.py",
+   "canonicalBlob": "dbfa5d4ba969e5b1ee36cdd7ed1162057d09c9b6",
+   "vendoredBlob": "dbfa5d4ba969e5b1ee36cdd7ed1162057d09c9b6",
+   "canonicalMd5": "044c23e630e14fb26a8da1b673dc6b7b",
+   "vendoredMd5": "044c23e630e14fb26a8da1b673dc6b7b",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/oracle_calendar.py",
+   "canonicalBlob": "20c39bd5802984a197ef8967c4ebf2b39e5939e3",
+   "vendoredBlob": "20c39bd5802984a197ef8967c4ebf2b39e5939e3",
+   "canonicalMd5": "a3de763cd829def720add91c51edecd6",
+   "vendoredMd5": "a3de763cd829def720add91c51edecd6",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/oracle_compliance.py",
+   "canonicalBlob": "01133e89c7d47924020b51fea8b31a141f3a9725",
+   "vendoredBlob": "01133e89c7d47924020b51fea8b31a141f3a9725",
+   "canonicalMd5": "6258e1dd22f7a0c2b4ca5ef400615168",
+   "vendoredMd5": "6258e1dd22f7a0c2b4ca5ef400615168",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/oracle_documents.py",
+   "canonicalBlob": "edd293e23d15fcd6c7c3f2f0c699a31ec1618e7f",
+   "vendoredBlob": "edd293e23d15fcd6c7c3f2f0c699a31ec1618e7f",
+   "canonicalMd5": "6663b3dc3efbbf877898a7f60b9cd1cd",
+   "vendoredMd5": "6663b3dc3efbbf877898a7f60b9cd1cd",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/oracle_iso.py",
+   "canonicalBlob": "d8a1a0468497fe70d46c3ea49cb03541e164573b",
+   "vendoredBlob": "d8a1a0468497fe70d46c3ea49cb03541e164573b",
+   "canonicalMd5": "c73897929501707c6b5d23afd756bb77",
+   "vendoredMd5": "c73897929501707c6b5d23afd756bb77",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/oracle_lessons.py",
+   "canonicalBlob": "f7aedc1ebc44be94585705839f0ef5f25e15d4ee",
+   "vendoredBlob": "f7aedc1ebc44be94585705839f0ef5f25e15d4ee",
+   "canonicalMd5": "d0b364ace6dbc9e846c193e135dfcdcf",
+   "vendoredMd5": "d0b364ace6dbc9e846c193e135dfcdcf",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/oracle_moc.py",
+   "canonicalBlob": "cfea3ede7a3d20d9a13a381d7cfd8ba0dfb5a112",
+   "vendoredBlob": "cfea3ede7a3d20d9a13a381d7cfd8ba0dfb5a112",
+   "canonicalMd5": "49a3c29b5de7f638f20e16d85127f986",
+   "vendoredMd5": "49a3c29b5de7f638f20e16d85127f986",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/oracle_peer_review.py",
+   "canonicalBlob": "df5531c727a4851383abd13c5146543f5ff2ce98",
+   "vendoredBlob": "df5531c727a4851383abd13c5146543f5ff2ce98",
+   "canonicalMd5": "fd9d93555b5db33c16f454cbeef09e62",
+   "vendoredMd5": "fd9d93555b5db33c16f454cbeef09e62",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/oracle_quality.py",
+   "canonicalBlob": "dfcca3075c05f76421d563ebcaeed47c57afce17",
+   "vendoredBlob": "dfcca3075c05f76421d563ebcaeed47c57afce17",
+   "canonicalMd5": "b7d93629b6070ecc33fe0d21ea6b89fe",
+   "vendoredMd5": "b7d93629b6070ecc33fe0d21ea6b89fe",
+   "identical": true
+  },
+  {
+   "path": "tools/validation/assurance/oracle_risk.py",
+   "canonicalBlob": "28bcb512c210d567b4beffe060fee967de59154d",
+   "vendoredBlob": "28bcb512c210d567b4beffe060fee967de59154d",
+   "canonicalMd5": "a40bf8469130039d5ff28b787d640cee",
+   "vendoredMd5": "a40bf8469130039d5ff28b787d640cee",
+   "identical": true
+  }
+ ],
+ "edges": [
+  [
+   "__tests__/assurance.audit.test.js",
+   "engines/assurance/auditManagement.js"
+  ],
+  [
+   "__tests__/assurance.audit.test.js",
+   "engines/assurance/isoCompliance.js"
+  ],
+  [
+   "__tests__/assurance.compliance.test.js",
+   "engines/assurance/complianceStatus.js"
+  ],
+  [
+   "__tests__/assurance.copy.test.js",
+   "engines/assurance/auditManagement.js"
+  ],
+  [
+   "__tests__/assurance.copy.test.js",
+   "engines/assurance/complianceStatus.js"
+  ],
+  [
+   "__tests__/assurance.copy.test.js",
+   "engines/assurance/isoCompliance.js"
+  ],
+  [
+   "__tests__/assurance.copy.test.js",
+   "engines/assurance/lessonsLearned.js"
+  ],
+  [
+   "__tests__/assurance.copy.test.js",
+   "engines/assurance/managementOfChange.js"
+  ],
+  [
+   "__tests__/assurance.copy.test.js",
+   "engines/assurance/peerReview.js"
+  ],
+  [
+   "__tests__/assurance.copy.test.js",
+   "engines/assurance/qualityAssurance.js"
+  ],
+  [
+   "__tests__/assurance.documents.test.js",
+   "engines/assurance/documentControl.js"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "__tests__/helpers/assuranceGoldens.js"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "engines/assurance/auditManagement.js"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "engines/assurance/calendar.js"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "engines/assurance/complianceStatus.js"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "engines/assurance/documentControl.js"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "engines/assurance/isoCompliance.js"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "engines/assurance/lessonsLearned.js"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "engines/assurance/managementOfChange.js"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "engines/assurance/peerReview.js"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "engines/assurance/qualityAssurance.js"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "engines/assurance/riskScoring.js"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "test-data/assurance/goldens/auditManagement_cases.json"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "test-data/assurance/goldens/calendar_cases.json"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "test-data/assurance/goldens/complianceStatus_cases.json"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "test-data/assurance/goldens/documentControl_cases.json"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "test-data/assurance/goldens/isoCompliance_cases.json"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "test-data/assurance/goldens/lessonsLearned_cases.json"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "test-data/assurance/goldens/managementOfChange_cases.json"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "test-data/assurance/goldens/peerReview_cases.json"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "test-data/assurance/goldens/qualityAssurance_cases.json"
+  ],
+  [
+   "__tests__/assurance.goldens.test.js",
+   "test-data/assurance/goldens/riskScoring_cases.json"
+  ],
+  [
+   "__tests__/assurance.instants.test.js",
+   "engines/assurance/auditManagement.js"
+  ],
+  [
+   "__tests__/assurance.instants.test.js",
+   "engines/assurance/calendar.js"
+  ],
+  [
+   "__tests__/assurance.instants.test.js",
+   "engines/assurance/complianceStatus.js"
+  ],
+  [
+   "__tests__/assurance.instants.test.js",
+   "engines/assurance/documentControl.js"
+  ],
+  [
+   "__tests__/assurance.instants.test.js",
+   "engines/assurance/isoCompliance.js"
+  ],
+  [
+   "__tests__/assurance.instants.test.js",
+   "engines/assurance/lessonsLearned.js"
+  ],
+  [
+   "__tests__/assurance.instants.test.js",
+   "engines/assurance/managementOfChange.js"
+  ],
+  [
+   "__tests__/assurance.instants.test.js",
+   "engines/assurance/peerReview.js"
+  ],
+  [
+   "__tests__/assurance.instants.test.js",
+   "engines/assurance/qualityAssurance.js"
+  ],
+  [
+   "__tests__/assurance.instants.test.js",
+   "engines/assurance/riskScoring.js"
+  ],
+  [
+   "__tests__/assurance.iso.test.js",
+   "engines/assurance/isoCompliance.js"
+  ],
+  [
+   "__tests__/assurance.lessons.test.js",
+   "engines/assurance/lessonsLearned.js"
+  ],
+  [
+   "__tests__/assurance.moc.test.js",
+   "engines/assurance/managementOfChange.js"
+  ],
+  [
+   "__tests__/assurance.peerReview.test.js",
+   "engines/assurance/peerReview.js"
+  ],
+  [
+   "__tests__/assurance.quality.test.js",
+   "engines/assurance/qualityAssurance.js"
+  ],
+  [
+   "__tests__/assurance.risk.test.js",
+   "engines/assurance/riskScoring.js"
+  ],
+  [
+   "engines/assurance/auditManagement.js",
+   "engines/assurance/isoCompliance.js"
+  ],
+  [
+   "engines/assurance/complianceStatus.js",
+   "engines/assurance/calendar.js"
+  ],
+  [
+   "engines/assurance/documentControl.js",
+   "engines/assurance/calendar.js"
+  ],
+  [
+   "engines/assurance/isoCompliance.js",
+   "engines/assurance/qualityAssurance.js"
+  ],
+  [
+   "engines/assurance/lessonsLearned.js",
+   "engines/assurance/calendar.js"
+  ],
+  [
+   "engines/assurance/lessonsLearned.js",
+   "engines/assurance/qualityAssurance.js"
+  ],
+  [
+   "engines/assurance/managementOfChange.js",
+   "engines/assurance/calendar.js"
+  ],
+  [
+   "engines/assurance/peerReview.js",
+   "engines/assurance/calendar.js"
+  ],
+  [
+   "engines/assurance/qualityAssurance.js",
+   "engines/assurance/calendar.js"
+  ],
+  [
+   "engines/assurance/riskScoring.js",
+   "engines/assurance/calendar.js"
+  ],
+  [
+   "tools/validation/assurance/oracle_audit.py",
+   "tools/validation/assurance/oracle_iso.py"
+  ],
+  [
+   "tools/validation/assurance/oracle_compliance.py",
+   "tools/validation/assurance/oracle_calendar.py"
+  ],
+  [
+   "tools/validation/assurance/oracle_documents.py",
+   "tools/validation/assurance/oracle_calendar.py"
+  ],
+  [
+   "tools/validation/assurance/oracle_peer_review.py",
+   "tools/validation/assurance/oracle_calendar.py"
+  ],
+  [
+   "tools/validation/assurance/oracle_risk.py",
+   "tools/validation/assurance/oracle_calendar.py"
+  ]
+ ]
+}

@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Items 9, 10 and 11 on AUD-2026-007 all carry the result Not applicable. Which of them reads answered true?",
+  "options": [
+   "Item 9, which carries its reason.",
+   "Item 11, the Critical one.",
+   "Items 9 and 10, which have a note.",
+   "All three of them."
+  ],
+  "answer": 0,
+  "explanation": "Item 9's note reads \"No excavation open during the audit.\" Item 10's note is blank and item 11 has none, and both read answered false. A blank note counts the same as a missing one."
+ },
+ {
+  "prompt": "checklistProgress prints notApplicable 3 and answered 10. Which figure includes items 10 and 11?",
+  "options": [
+   "answered 10, which counts every row that carries a result of any kind.",
+   "Both of them, since a Not applicable result is one of the four answers.",
+   "notApplicable 3, which counts every Not applicable result.",
+   "Neither; such an item is dropped."
+  ],
+  "answer": 2,
+  "explanation": "notApplicable counts items 9, 10 and 11. answered 10 counts items 1 to 9 and 12, and leaves out 10 and 11 because a Not applicable with no reason is not an answer."
+ },
+ {
+  "prompt": "unansweredItems lists 10, 11, 13 and 14. What separates items 13 and 14 from items 10 and 11?",
+  "options": [
+   "Items 13 and 14 are Critical questions, and 10 and 11 are Minor ones.",
+   "Items 13 and 14 carry a blank note, and 10 and 11 carry no note.",
+   "Items 13 and 14 read Observation, and 10 and 11 read Not applicable.",
+   "Items 13 and 14 have no row at all; 10 and 11 have a row that is not an answer."
+  ],
+  "answer": 3,
+  "explanation": "The digest prints that items 10 (Not applicable, a blank note) and 11 (Not applicable, no note) have a recorded row that is not an answer, and that items 13 and 14 have no row at all. Item 13 is Minor and item 14 Major."
+ },
+ {
+  "prompt": "Items 2 and 6 are answered Nonconformant. What do they do to checklistProgress's percent 71?",
+  "options": [
+   "They lower it, since the percent counts conformant answers.",
+   "They raise it, exactly as a Conformant answer would.",
+   "Nothing; a failed answer is outstanding.",
+   "They are held out of it until a finding is raised from each."
+  ],
+  "answer": 1,
+  "explanation": "The percent measures answering. Items 2 and 6 sit inside answered 10 beside the conformant 6 and the observation, so the percent says how much of the checklist has an accepted answer and says nothing about what conformed."
+ },
+ {
+  "prompt": "An audit has no checklist at all. What does checklistProgress print, and what should a screen show for it?",
+  "options": [
+   "percent 0, shown as an empty bar on the audit's screen.",
+   "No figure, since checklistProgress refuses an audit with no checklist.",
+   "percent 71, the figure carried over from AUD-2026-007.",
+   "percent null, shown as no checklist to measure."
+  ],
+  "answer": 3,
+  "explanation": "With no questions there is no fraction to take. planProgress over a plan with no points and programmeProgress over no audits print null in the same way."
+ },
+ {
+  "prompt": "AF-2026-018 was raised from item 2 and is then Voided. What does criticalAnswersWithoutFindings list?",
+  "options": [
+   "Items 2 and 6.",
+   "Item 6 alone, since item 2 keeps the finding raised from it.",
+   "Item 2 alone, since voiding reopens only the finding's own item.",
+   "Nothing until the audit is reported."
+  ],
+  "answer": 0,
+  "explanation": "With AF-2026-018 in force the list is 6. With it Voided the list is 2, 6: a voided finding covers nothing, and item 2 counts as uncovered exactly as though no finding had been raised."
+ },
+ {
+  "prompt": "A three-item checklist has a Major item and a Minor item answered Nonconformant, no finding raised, every item answered and a conclusion written. What does canReportAudit answer?",
+  "options": [
+   "REFUSED, naming the Major item as needing a finding.",
+   "REFUSED, naming both items as needing a finding.",
+   "ALLOWED, and the report goes through.",
+   "ALLOWED only once the Major item has a finding raised."
+  ],
+  "answer": 2,
+  "explanation": "criticalAnswersWithoutFindings lists 0 items and the report is ALLOWED. The finding rule applies to Critical items only, and the engine has no rule that a Major or Minor nonconformance must raise a finding before the audit is reported."
+ },
+ {
+  "prompt": "The digest walks canRaiseFinding through three refusals before it reaches the stop-work rows. What do those three ask for?",
+  "options": [
+   "A finding type, an owner and a due date.",
+   "A finding type, a one-line statement and objective evidence.",
+   "A one-line statement, a correction and a root cause.",
+   "Objective evidence, a lead auditor and the auditee's signature."
+  ],
+  "answer": 1,
+  "explanation": "The three refusals are \"Pick the finding type.\", \"State the finding in one line.\" and the objective evidence sentence. A number, an owner and a due date are what the reporting refusal says a failed critical question needs."
+ },
+ {
+  "prompt": "What does the canRaiseFinding refusal say objective evidence is?",
+  "options": [
+   "What was seen, where, and when.",
+   "Who saw it and who owns it.",
+   "A photograph and a date.",
+   "The clause and the gap."
+  ],
+  "answer": 0,
+  "explanation": "The refusal reads \"Objective evidence: what was seen, where, and when. It is the first thing an auditee will ask for.\" Item 2's note, \"No gas test entry for the 07:30 hot work.\", is that kind of evidence."
+ },
+ {
+  "prompt": "A finding that stopped work is raised with the type Observation. What does canRaiseFinding answer?",
+  "options": [
+   "ALLOWED, once the correction is recorded with it.",
+   "ALLOWED, and it counts in stop-work open.",
+   "REFUSED until the audit has been Reported.",
+   "REFUSED, because it must be typed a nonconformity."
+  ],
+  "answer": 3,
+  "explanation": "The engine's own sentence is \"A finding that stopped work is a nonconformity, not an observation.\" A stop-work nonconformity with its correction is ALLOWED."
+ },
+ {
+  "prompt": "A stop-work nonconformity is raised. What must it carry on the record at the moment it is raised?",
+  "options": [
+   "A corrective action, with the root cause behind it.",
+   "A check that the correction was effective.",
+   "The correction: what was done about it at the time.",
+   "The lead auditor's name on the stop order."
+  ],
+  "answer": 2,
+  "explanation": "The refusal reads \"A finding that stopped work records what was done about it at the time. Imminent danger does not wait for the corrective action cycle.\" The correction is immediate; the corrective action runs on its own cycle."
+ },
+ {
+  "prompt": "A reported audit has a stop-work minor finding still open. What does canCloseAudit answer?",
+  "options": [
+   "ALLOWED, since only major findings hold an audit open.",
+   "REFUSED: 1 finding that stopped work is still open.",
+   "ALLOWED, once the correction is on the finding.",
+   "REFUSED until the finding is regraded as major."
+  ],
+  "answer": 1,
+  "explanation": "The finding in that row is a minor one and it still holds the audit open. Having stopped work is enough for the gate, whatever the finding's grade."
+ },
+ {
+  "prompt": "The programme summarise prints open findings 1, open major 1 and stop-work open 1. How many findings stand behind the three counts?",
+  "options": [
+   "Three, one behind each of the three counts.",
+   "Two: AF-2026-018 and a finding raised from item 6.",
+   "One: AF-2026-018, a Minor nonconformity that stopped work.",
+   "One: AF-2026-018, a Major nonconformity, Open, stop-work true."
+  ],
+  "answer": 3,
+  "explanation": "The digest names the findings summarise counts: AF-2026-018 alone. One finding is behind open findings 1, open major 1 and stop-work open 1."
+ },
+ {
+  "prompt": "With every item answered and items 10 and 11 given reasons, canReportAudit refuses on critical item 6 alone. Why is item 2 not named?",
+  "options": [
+   "Item 2 is covered by AF-2026-018.",
+   "Item 2 is a Major question.",
+   "Item 2's note already records the time of the hot work.",
+   "The refusal names only the last critical item that failed."
+  ],
+  "answer": 0,
+  "explanation": "Items 2 and 6 are both Critical and both Nonconformant. criticalAnswersWithoutFindings with AF-2026-018 raised from item 2 lists 6, and the refusal reads \"Critical item 6 was answered Nonconformant with no finding raised.\""
+ },
+ {
+  "prompt": "Item 11 is a Critical question that reads Not applicable with no note. Where does the engine list it at the as-of date?",
+  "options": [
+   "In criticalAnswersWithoutFindings, beside item 6.",
+   "Nowhere; it needs nothing more.",
+   "In unansweredItems, beside 10, 13 and 14.",
+   "Among the conformant 6, since nothing was found wrong."
+  ],
+  "answer": 2,
+  "explanation": "Without its reason item 11 is not an answer, so it sits in unansweredItems and in outstanding 4. criticalAnswersWithoutFindings lists Critical items answered Nonconformant, and with AF-2026-018 raised from item 2 it lists 6 alone."
+ }
+]

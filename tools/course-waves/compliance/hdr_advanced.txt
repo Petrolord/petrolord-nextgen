@@ -1,0 +1,28 @@
+-- ============================================================================
+-- compliance EXPERT DEEP SEED: Compliance, Audit & Quality, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE MANAGEMENT SYSTEM. A conformity claim is evidence,
+-- a date and a name; an auditor may not audit their own work, and ISO 19011 is
+-- checked for every examiner; coverage is counted over the certification cycle
+-- from reported internal audits only; a major nonconformity closes on its
+-- correction, its root cause and a corrective action shown to work; and
+-- certification readiness is a list of blockers.
+--
+-- THE ENGINE FACT THIS TIER OWNS. Readiness is not a percentage. Every blocker
+-- is counted and named, and the certificate is an item on the list rather than
+-- a gate on it.
+--
+-- THE TRAP THE TIER IS BUILT ON. An examination is not coverage until the audit
+-- that made it is internal and reported. A later examination by the
+-- certification body, by an audit still in progress or by one later cancelled
+-- does not move a clause's last examined date.
+--
+-- The certificate's expiring and expired flags never read true together, and
+-- every refusal names the register's own standard (ASC-0). The owner decisions
+-- of AS15 are taught as stated policy. The capstone grades two coverage counts
+-- and four day counts, at a tolerance of 0.5.
+-- ============================================================================

@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "REG-2026-003, the quarterly flare and venting return, is due 2026-10-31, 16 days after the as-of date. Its recorded lead time is 14. Given a lead time of 17 and nothing else changed, what does it read?",
+  "options": [
+   "On track, because the due date and the as-of date have not moved.",
+   "Overdue, because the window now reaches back past the as-of date.",
+   "Due soon",
+   "On track, because the recorded lead time of 14 wins over a new one."
+  ],
+  "answer": 2,
+  "explanation": "The digest prints 17 as Due soon. Only the lead time changed, and that alone turned On track into Due soon: the window now reaches the 16 days that remain."
+ },
+ {
+  "prompt": "In the digest's lead time table for REG-2026-003, what is the largest lead time that still leaves the return On track?",
+  "options": [
+   "15",
+   "14",
+   "16",
+   "0"
+  ],
+  "answer": 0,
+  "explanation": "The rows print 14 On track, 15 On track and 16 Due soon. 14 is the lead time on the record, which is not the largest in the table that leaves it On track."
+ },
+ {
+  "prompt": "REG-2026-003 has 16 days to its due date. With a lead time of 16, the same number, what does it read, and what does that say about the edge of the window?",
+  "options": [
+   "On track, so the edge sits outside the window.",
+   "On track, because the window opens on the day after the lead time is reached.",
+   "Due soon only on the as-of date itself.",
+   "Due soon, so the edge belongs inside the window."
+  ],
+  "answer": 3,
+  "explanation": "The digest prints 15 On track and 16 Due soon. A lead time equal to the 16 days that remain puts the return inside its window, and the row reads Due soon."
+ },
+ {
+  "prompt": "REG-2026-003 is given the word 'ten' as its lead time. What does it read, and where does its window come from?",
+  "options": [
+   "On track, a word read as no window.",
+   "Due soon, from DEFAULT_LEAD_TIME_DAYS.",
+   "Due soon, from reading 'ten' as the number it spells.",
+   "A refusal, since it is not a number."
+  ],
+  "answer": 1,
+  "explanation": "An unusable lead time is replaced by DEFAULT_LEAD_TIME_DAYS. The rows for null, the empty string, -5, 'ten' and a field left out all read Due soon, the status the return carries with the default window."
+ },
+ {
+  "prompt": "REG-2026-003 is given a lead time of 0. It reads On track. What does that row show?",
+  "options": [
+   "Zero is read as missing, and the default applies.",
+   "Zero is refused and the old status is kept.",
+   "Zero is a usable lead time, meaning no advance warning at all.",
+   "Zero switches the obligation off, as Draft does."
+  ],
+  "answer": 2,
+  "explanation": "A null, an empty string, a negative number and a word all read Due soon because the default applies to them. 0 reads On track, so the engine is applying the 0 it was given."
+ },
+ {
+  "prompt": "A negative lead time, -5, is typed on the flare return's record. Which status follows?",
+  "options": [
+   "Due soon, because a negative lead time is not a usable one and the default applies.",
+   "On track, because a negative window opens after the due date and is not open yet.",
+   "Overdue, because a negative lead time reads the due date as five days passed.",
+   "On track, the status it carries with a lead time of 0."
+  ],
+  "answer": 0,
+  "explanation": "The digest prints -5 as Due soon. With no usable lead time the engine uses DEFAULT_LEAD_TIME_DAYS, and a negative number is not usable."
+ },
+ {
+  "prompt": "REG-2026-012, the annual concession rental, is Due soon at 25 days. Its reason names a lead time. What is recorded as its lead time on the register?",
+  "options": [
+   "The same window the reason names, entered when the obligation was set up.",
+   "Nothing, because the reason is only shown when a lead time has been typed.",
+   "The lead time of the discharge permit, copied across by the Financial regime.",
+   "null"
+  ],
+  "answer": 3,
+  "explanation": "The register prints null. The window in the reason is DEFAULT_LEAD_TIME_DAYS, and the reason says so: \"inside the default\" window, with \"(none is set for this obligation)\"."
+ },
+ {
+  "prompt": "Two Due soon reasons name a window. Which words tell a reader that REG-2026-001's window was chosen on the record?",
+  "options": [
+   "\"inside the default\"",
+   "\"set for this obligation\"",
+   "\"(none is set for this obligation)\"",
+   "\"nothing further is due\""
+  ],
+  "answer": 1,
+  "explanation": "REG-2026-001's reason names the lead time \"set for this obligation\". REG-2026-012's names the default window and adds \"(none is set for this obligation)\", so a chosen window and a supplied one can be told apart without opening either record."
+ },
+ {
+  "prompt": "periodStart steps one frequency back from a due date of 2026-10-31. Where does the Quarterly period start?",
+  "options": [
+   "2026-07-28",
+   "2026-10-10",
+   "2026-07-31",
+   "2026-08-05"
+  ],
+  "answer": 2,
+  "explanation": "Three months back from the end of October is the end of July, which has a thirty-first. 2026-07-28 is the flare return's last filing, which falls before that start."
+ },
+ {
+  "prompt": "For a due date of 2026-10-31, which frequency's current period starts on 2026-04-30?",
+  "options": [
+   "Quarterly",
+   "Annual",
+   "Biennial",
+   "Semi-annual"
+  ],
+  "answer": 3,
+  "explanation": "Semi-annual steps six months back and April has no thirty-first, so the start is pulled back to 2026-04-30. Quarterly starts 2026-07-31, Annual 2025-10-31 and Biennial 2024-10-31."
+ },
+ {
+  "prompt": "REG-2026-004, the annual monitoring report, is due 2027-03-31 and its period starts 2026-03-31. Its last filing is dated 2026-03-30. What is its status, and what would one day later on the filing make it?",
+  "options": [
+   "On track as recorded, and Compliant with the filing dated 2026-03-31.",
+   "Compliant as recorded, because a filing at the end of March covers a report due at the end of March.",
+   "On track either way, because the filing date is not what decides the status here.",
+   "Overdue as recorded, and On track with the filing dated 2026-03-31."
+  ],
+  "answer": 0,
+  "explanation": "Dated 2026-03-30 the filing belongs to the earlier period. Dated 2026-03-31, the first day of the period, it counts, and the digest prints status Compliant. The first day of the period is inside the period."
+ },
+ {
+  "prompt": "REG-2026-002, the monthly water quality return, was due 2026-10-10 and was last filed 2026-09-09. Its period starts 2026-09-10. What does it read, and why?",
+  "options": [
+   "Compliant, a day early is close enough.",
+   "Overdue, because that filing counts for the period before.",
+   "On track, because a monthly return has a filing inside the last month.",
+   "Due soon, the filing moved the due date on."
+  ],
+  "answer": 1,
+  "explanation": "The filing falls before the period start, so it discharged the period before. The return for the current period is late, and the reason says \"The due date passed 5 days ago.\""
+ },
+ {
+  "prompt": "REG-2026-012, the annual concession rental, was last paid 2025-11-03, and its current period starts 2025-11-09. Does that payment count for the current period?",
+  "options": [
+   "Yes. A payment in the same month as the period start counts for that period.",
+   "Yes. An annual payment counts for any period that ends within a year of it.",
+   "No. A payment counts only once the next due date has been rolled forward.",
+   "No. It falls before the period start, so it covered the period before."
+  ],
+  "answer": 3,
+  "explanation": "periodStart for the rental prints 2025-11-09, and the payment of 2025-11-03 is earlier, so nothing has been paid for this period. A filing counts when it is on or after the period start, as REG-2026-008's filing of 2026-08-05 does against 2026-07-31 with no roll."
+ },
+ {
+  "prompt": "REG-2026-008 is Semi-annual, due 2027-01-31, with its period starting 2026-07-31. Its last filing is 2026-08-05. What does it read?",
+  "options": [
+   "On track, because every filing is read as belonging to an earlier period.",
+   "On track, because a Semi-annual period is counted from the filing date.",
+   "Compliant",
+   "Due soon, because a filing inside the period opens the warning window."
+  ],
+  "answer": 2,
+  "explanation": "The filing on 2026-08-05 is on or after the period start of 2026-07-31, so the period is discharged. Of the five IKORO filings read against their periods, it is the only one that counts."
+ },
+ {
+  "prompt": "In Document Control, which state plays the part Due soon plays in the register, and which constant sets its window?",
+  "options": [
+   "Review scheduled, with complianceStatus.DEFAULT_LEAD_TIME_DAYS.",
+   "Review due soon, with documentControl.REVIEW_LEAD_DAYS.",
+   "Review due soon, with documentControl.DEFAULT_REVIEW_PERIOD_MONTHS.",
+   "Review overdue, with each document's own lead time."
+  ],
+  "answer": 1,
+  "explanation": "OPS-PLA-0002, the terminal emergency response plan, has its next review on 2026-11-02, 18 days after the as-of date, and reads Review due soon. DEFAULT_REVIEW_PERIOD_MONTHS is a review period in months."
+ }
+]
