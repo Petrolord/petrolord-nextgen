@@ -16,11 +16,11 @@ q(1, "REG-2026-002 was due 2026-10-10 and is filed late on 2026-10-14. What next
  "The app passes the due date to rollForward: rollForward(2026-10-10, Monthly) = 2026-11-10. The same call on the filing date would give 2026-11-14, the date the app does not use."),
 
 q(3, "Why does the app roll a monthly return forward from the date that was due and never from the filing date?",
- "Filing late does not move the regulator's next deadline.",
+ "The next due date then follows the old one, whatever day the filing came in.",
  ["A roll from the filing would land on a month end the calendar has to pull back, and the pull is avoided.",
   "The filing date is not stored on the record.",
   "Rolling from the filing warns too soon."],
- "Rolling from the filing would put 2026-11-14 on the register, a deadline the regulator does not recognise. Each late filing would push every later deadline further out."),
+ "The digest prints rollForward(2026-10-10, Monthly) = 2026-11-10. The same call on the filing date would give 2026-11-14, so a roll from the filing would move the schedule later with each late filing."),
 
 q(0, "Once the late filing of REG-2026-002 is recorded and its due date rolled, what does the return read?",
  "Due soon, with a next action date of 2026-11-10 and 26 days to go.",
@@ -83,7 +83,7 @@ q(2, "rollForward also returns none for the frequency Other. What does that none
  ["The obligation is finished, in the same way as a filed One-off.",
   "The obligation is Draft until a frequency from the list is chosen for it.",
   "The engine rolls it by the default of one year once it is filed."],
- "Other names no fixed interval. The engine will not invent a next date, because a fictional due date is worse than none: a register reader trusts a date and does not question it."),
+ "Other names no fixed interval, so rollForward returns none and supplies no next date. REG-2026-013, an Other obligation with no dates, reads No date set until somebody enters one."),
 
 q(0, "The waste consignment register carries the frequency Other and nothing in either date field. Before anyone can say it is late, what has to happen?",
  "Somebody has to enter when it is due.",

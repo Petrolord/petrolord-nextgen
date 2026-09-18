@@ -27,7 +27,7 @@ q(3, "REG-2026-003 has 16 days to its due date. With a lead time of 16, the same
  ["On track, so the edge sits outside the window.",
   "On track, because the window opens on the day after the lead time is reached.",
   "Due soon only on the as-of date itself."],
- "The digest prints 15 On track and 16 Due soon. An obligation whose days until equals its lead time is inside its window, so the warning arrives on the last day the lead time can still be met."),
+ "The digest prints 15 On track and 16 Due soon. A lead time equal to the 16 days that remain puts the return inside its window, and the row reads Due soon."),
 
 q(1, "REG-2026-003 is given the word 'ten' as its lead time. What does it read, and where does its window come from?",
  "Due soon, from DEFAULT_LEAD_TIME_DAYS.",
@@ -92,12 +92,12 @@ q(1, "REG-2026-002, the monthly water quality return, was due 2026-10-10 and was
   "Due soon, the filing moved the due date on."],
  "The filing falls before the period start, so it discharged the period before. The return for the current period is late, and the reason says \"The due date passed 5 days ago.\""),
 
-q(3, "REG-2026-012, the annual concession rental, was last paid 2025-11-03. Its current period starts 2025-11-09 and it is due 2026-11-09. Why does it read Due soon?",
- "Last year's payment does not count for this period.",
- ["A payment made in November counts for the year, and the row is warning about the next one.",
-  "The payment is still inside its period, so only the lead time is holding the row at Due soon.",
-  "Any payment over a year old is thrown away."],
- "The payment falls before the period start, so it covered last year's rental. Nothing has been paid for this year's, which is due 2026-11-09 and inside its window."),
+q(3, "REG-2026-012, the annual concession rental, was last paid 2025-11-03, and its current period starts 2025-11-09. Does that payment count for the current period?",
+ "No. It falls before the period start, so it covered the period before.",
+ ["Yes. A payment in the same month as the period start counts for that period.",
+  "Yes. An annual payment counts for any period that ends within a year of it.",
+  "No. A payment counts only once the next due date has been rolled forward."],
+ "periodStart for the rental prints 2025-11-09, and the payment of 2025-11-03 is earlier, so nothing has been paid for this period. A filing counts when it is on or after the period start, as REG-2026-008's filing of 2026-08-05 does against 2026-07-31 with no roll."),
 
 q(2, "REG-2026-008 is Semi-annual, due 2027-01-31, with its period starting 2026-07-31. Its last filing is 2026-08-05. What does it read?",
  "Compliant",

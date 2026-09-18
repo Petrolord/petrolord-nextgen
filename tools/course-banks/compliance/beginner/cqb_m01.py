@@ -106,11 +106,11 @@ q(2, "The panel lets you move the as-of date. When you move it, statuses change.
   "The lead time on each record, shortened by the panel."],
  "That is what derived means in this course. A status is never typed, so moving the date back to 2026-10-15 makes every row match the digest again."),
 
-q(0, "Why does every day count in this course come from the engine and never from a count on a calendar by hand?",
- "The engine's count is the one the app shows, and a hand count can slip by one at a month end or a leap day.",
- ["The engine counts in working days, which a calendar on the wall does not show.",
-  "A hand count starts from the machine clock, while the engine starts from the due date.",
-  "The engine rounds each count to the nearest week, and a hand count does not."],
- "daysUntil counts whole days from the as-of date. 2026-11-30 reads 46 and 2027-02-28 reads 136, and the lessons quote those figures without counting them again."),
+q(0, "The digest's header says in what form it prints every figure. Which form is that?",
+ "Whole numbers: day counts, counts, and percents the engine has already rounded.",
+ ["Days and fractions of a day, so a late evening time reads short of the plain date.",
+  "Working days, so a weekend that falls between two dates is left out of a count.",
+  "Whole weeks, with each day count rounded to the nearest week before it prints."],
+ "The header reads: every figure is a whole number, days from daysUntil and ages, counts, and percents the engine has already rounded. 2026-11-30 reads 46 and 2027-02-28 reads 136, and the lessons quote those figures as printed."),
 emit(Q, '/root/wt-as-compliance-nextgen/tools/course-banks/compliance/beginner/cqb_m01.json', expect_n=15)
 finish()

@@ -18,7 +18,7 @@ q(2, "documentControl.DOC_STATUSES holds seven words. Which of them does documen
 q(0, "HSE-PRO-0007 and OPS-PRO-0004 both have review dates behind the as-of date. HSE-PRO-0007 reads Review overdue and OPS-PRO-0004 reads Not in force. What separates them?",
  "OPS-PRO-0004 is Superseded, a status outside EFFECTIVE_STATUSES, and reviewState reads only documents in force.",
  ["OPS-PRO-0004's review date, 2020-01-06, is too far back for the review window to reach.",
-  "HSE-PRO-0007 has an issue date on the record and OPS-PRO-0004 has none.",
+  "OPS-PRO-0004 is a Draft, and reviewState waits for a Draft to be published.",
   "HSE-PRO-0007 is a procedure, and only procedures are read against a review date."],
  "The old custody metering procedure is Superseded and nobody works to it. Calling it Review overdue would put a dead document at the top of a live queue, so it reads Not in force whatever its date."),
 
@@ -92,12 +92,12 @@ q(1, "Somebody other than the assigned reviewer, however senior, decides the tas
   "ALLOWED, once the assigned reviewer's name is recorded beside the decision."],
  "Independence from the author is not enough at the decision step. Only the reviewer the task is assigned to may decide it."),
 
-q(3, "summarise prints published 3 for the IKORO library, yet four documents are in force. Why the difference?",
- "The tank inspection standard is Approved, which is in force and is not Published.",
- ["The flare philosophy has no review date, so summarise leaves it out of the published count.",
-  "The emergency response plan is due for review, so summarise moves it to the review due soon count.",
-  "The sampling procedure is overdue for review, so summarise counts it only under review overdue."],
- "Published and Approved are both in force. summarise counts each document status, and the status counts read Approved 1 and Published 3."),
+q(3, "EFFECTIVE_STATUSES treats two statuses as in force. Name the document in force that the published count of 3 leaves out.",
+ "ENG-STD-0011, the tank inspection standard, which is Approved.",
+ ["OPS-PHI-0001, which summarise leaves out for having no review date.",
+  "OPS-PLA-0002, which summarise moves to the review due soon count.",
+  "HSE-PRO-0007, which summarise counts only under review overdue."],
+ "EFFECTIVE_STATUSES holds Published and Approved. The status counts read Published 3 and Approved 1: the sampling procedure, the emergency response plan and the flare philosophy are Published, and the tank inspection standard is Approved."),
 
 q(2, "byReviewUrgency places OPS-PHI-0001, which has no review date, fourth in the queue. Why does it sit above every document that is not in force?",
  "Review states decide the order first, and No review scheduled comes before Not in force.",

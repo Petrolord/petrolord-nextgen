@@ -37,11 +37,11 @@ q(2, "The flare return REG-2026-003 and the monitoring report REG-2026-004 both 
  "The flare return was filed 2026-07-28 before a period starting 2026-07-31. The monitoring report was filed 2026-03-30, one day before its period starts on 2026-03-31. The work for the current period is still to do."),
 
 q(1, "Reading the IKORO library at 2026-10-15, which three actions does it ask of a document controller?",
- "Review HSE-PRO-0007, start the review of OPS-PLA-0002, and put a review period on OPS-PHI-0001.",
- ["Review HSE-PRO-0007, review OPS-PRO-0004, and put a review period on OPS-PHI-0001.",
+ "Review HSE-PRO-0007, start the review of OPS-PLA-0002, and give OPS-PHI-0001 a review date.",
+ ["Review HSE-PRO-0007, review OPS-PRO-0004, and give OPS-PHI-0001 a review date.",
   "Review HSE-PRO-0007, start the review of OPS-PLA-0002, and review ENG-STD-0011.",
   "Start the review of OPS-PLA-0002, publish HSE-PRO-0012, and decide ENG-PRO-0019."],
- "The sampling procedure is Review overdue, the emergency response plan Review due soon, and the flare philosophy No review scheduled. OPS-PRO-0004 is Not in force and ENG-STD-0011 is Review scheduled at 258 days."),
+ "The sampling procedure is Review overdue, the emergency response plan Review due soon, and the flare philosophy No review scheduled. OPS-PHI-0001 has no issue date recorded, so nextReviewDate has nothing to count a period from. OPS-PRO-0004 is Not in force and ENG-STD-0011 is Review scheduled at 258 days."),
 
 q(3, "The register and the library each show a missing date as a state of its own. Which pair of words is that?",
  "No date set and No review scheduled.",
@@ -57,12 +57,12 @@ q(0, "A Superseded obligation and a Superseded document are both on IKORO's book
   "The obligation reads Not applicable, and the document reads Review overdue."],
  "REG-2026-009 reads Superseded and is not counted down. OPS-PRO-0004 is Superseded and its review state is Not in force. In both apps a record that is not live does not drive a warning."),
 
-q(2, "ENG-STD-0011, the tank inspection standard, is Approved and reads Review scheduled at 258 days. What does the library ask of it for now?",
- "Only that its review date stays on the record.",
- ["A review now, because Approved documents are reviewed before they are published.",
-  "Publication.",
-  "Nothing ever, because an Approved document is not in force."],
- "Approved is one of the two statuses in EFFECTIVE_STATUSES, so the standard is live, and its date is outside the review window. The three actions the library asks for are elsewhere."),
+q(2, "ENG-STD-0011, the tank inspection standard, is Approved with its next review on 2027-06-30. What review state does it read at 2026-10-15, and why?",
+ "Review scheduled, because Approved is a status in force.",
+ ["Not in force, because only a Published document is read for review.",
+  "Review due soon, because an Approved document is reviewed before publication.",
+  "No review scheduled, because it has no issue date to count from."],
+ "EFFECTIVE_STATUSES holds Published and Approved, so reviewState reads the standard, and at 258 days it reads Review scheduled. Its issue date, 2025-06-30, is on the record, and nextReviewDate from it agrees with the recorded review date."),
 
 q(1, "The emergency response plan OPS-PLA-0002 is corrected and re-published before its review date of 2026-11-02. What happens to that date?",
  "It does not move.",

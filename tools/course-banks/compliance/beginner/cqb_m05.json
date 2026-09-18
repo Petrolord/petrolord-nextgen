@@ -15,7 +15,7 @@
   "options": [
    "OPS-PRO-0004 is Superseded, a status outside EFFECTIVE_STATUSES, and reviewState reads only documents in force.",
    "OPS-PRO-0004's review date, 2020-01-06, is too far back for the review window to reach.",
-   "HSE-PRO-0007 has an issue date on the record and OPS-PRO-0004 has none.",
+   "OPS-PRO-0004 is a Draft, and reviewState waits for a Draft to be published.",
    "HSE-PRO-0007 is a procedure, and only procedures are read against a review date."
   ],
   "answer": 0,
@@ -132,15 +132,15 @@
   "explanation": "Independence from the author is not enough at the decision step. Only the reviewer the task is assigned to may decide it."
  },
  {
-  "prompt": "summarise prints published 3 for the IKORO library, yet four documents are in force. Why the difference?",
+  "prompt": "EFFECTIVE_STATUSES treats two statuses as in force. Name the document in force that the published count of 3 leaves out.",
   "options": [
-   "The flare philosophy has no review date, so summarise leaves it out of the published count.",
-   "The emergency response plan is due for review, so summarise moves it to the review due soon count.",
-   "The sampling procedure is overdue for review, so summarise counts it only under review overdue.",
-   "The tank inspection standard is Approved, which is in force and is not Published."
+   "OPS-PHI-0001, which summarise leaves out for having no review date.",
+   "OPS-PLA-0002, which summarise moves to the review due soon count.",
+   "HSE-PRO-0007, which summarise counts only under review overdue.",
+   "ENG-STD-0011, the tank inspection standard, which is Approved."
   ],
   "answer": 3,
-  "explanation": "Published and Approved are both in force. summarise counts each document status, and the status counts read Approved 1 and Published 3."
+  "explanation": "EFFECTIVE_STATUSES holds Published and Approved. The status counts read Published 3 and Approved 1: the sampling procedure, the emergency response plan and the flare philosophy are Published, and the tank inspection standard is Approved."
  },
  {
   "prompt": "byReviewUrgency places OPS-PHI-0001, which has no review date, fourth in the queue. Why does it sit above every document that is not in force?",

@@ -16,10 +16,10 @@
    "A roll from the filing would land on a month end the calendar has to pull back, and the pull is avoided.",
    "The filing date is not stored on the record.",
    "Rolling from the filing warns too soon.",
-   "Filing late does not move the regulator's next deadline."
+   "The next due date then follows the old one, whatever day the filing came in."
   ],
   "answer": 3,
-  "explanation": "Rolling from the filing would put 2026-11-14 on the register, a deadline the regulator does not recognise. Each late filing would push every later deadline further out."
+  "explanation": "The digest prints rollForward(2026-10-10, Monthly) = 2026-11-10. The same call on the filing date would give 2026-11-14, so a roll from the filing would move the schedule later with each late filing."
  },
  {
   "prompt": "Once the late filing of REG-2026-002 is recorded and its due date rolled, what does the return read?",
@@ -118,7 +118,7 @@
    "The engine rolls it by the default of one year once it is filed."
   ],
   "answer": 2,
-  "explanation": "Other names no fixed interval. The engine will not invent a next date, because a fictional due date is worse than none: a register reader trusts a date and does not question it."
+  "explanation": "Other names no fixed interval, so rollForward returns none and supplies no next date. REG-2026-013, an Other obligation with no dates, reads No date set until somebody enters one."
  },
  {
   "prompt": "The waste consignment register carries the frequency Other and nothing in either date field. Before anyone can say it is late, what has to happen?",

@@ -136,12 +136,12 @@ q(0, "The month end rule works in three places across these apps. A document iss
   "No date, because nextReviewDate refuses to count from a leap day."],
  "nextReviewDate prints 2025-02-28 at -594 days. rollForward does the same to 2028-02-29 rolled Annual, giving 2029-02-28, so a due date, its period and a review date agree about month ends."),
 
-q(3, "An operator is habitually late with a monthly return. If the schedule rolled from each filing date, what would the register end up showing?",
- "A schedule that says it is on time.",
- ["A schedule anchored to the regulator's calendar.",
-  "Every return Overdue from the first late filing on.",
-  "No next date, because a late filing stops the roll."],
- "A habit of filing late would drift each deadline later than the regulator's own. The app rolls REG-2026-002 from 2026-10-10 to 2026-11-10 whatever day it was filed."),
+q(3, "A semi-annual schedule is rolled from 2026-08-31 to 2027-02-28. Where does the following semi-annual roll land?",
+ "2027-08-28",
+ ["2027-08-31",
+  "2027-02-28",
+  "2028-08-31"],
+ "The digest prints 2026-08-31, 2027-02-28 and then 2027-08-28 for Semi-annual. The second step starts from the twenty-eighth it landed on in February. 2027-08-31 is the Annual roll from 2026-08-31, 2028-08-31 the Biennial one, and 2027-02-28 is the first step itself."),
 
 q(1, "A department 'Operations' files a 'Plan'. Which document number prefix comes back?",
  "OPE-PLA",
