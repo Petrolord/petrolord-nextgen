@@ -43,7 +43,7 @@ The balanced bellows factor Kb is a chart input. In choked flow it divides the a
 | subcritical | 0.800000 | 1.000000 | 2.658695 | no |
 | subcritical | 0.800000 | 0.720000 | 2.658695 | yes |
 
-The two subcritical rows are identical to twelve decimals, 2.658695041098 in2 and 2.658695041098 in2, and the second carries the engine's own words: `subcritical flow uses F2, not Kb; the typed Kb was ignored`. The two choked rows are not identical, 2.223779 in2 and 3.088582 in2, because there Kb divides.
+The two subcritical rows are identical to twelve decimals, 2.658695041098 in2 and 2.658695041098 in2, and the second carries the engine's own words: `subcritical flow uses F2 in place of Kb, so the typed Kb was ignored`. The two choked rows are not identical, 2.223779 in2 and 3.088582 in2, because there Kb divides.
 
 A separate warning fires on the chart Kb itself once the back pressure ratio passes 0.300000000000, which is the point past which a balanced bellows valve needs its published chart factor. Kb is a typed input in this course: a chart, and nothing graded here rests on its value.
 

@@ -44,7 +44,7 @@
       "fc3_fields_capstone.mjs"
     ],
     "pins": {
-      "digest.txt": "d9a45ffb344fe564f8584f433fb60346fef0c9075e3606430a0be117dc11283f",
+      "digest.txt": "88d650a18f8514f5c75bd361da732d8800b3fff76a701e70554ec23496d7058a",
       "fields.json": "bf1fec1a554961059d49b9ca5ddafaf86559abd6bcd6754b9afb86c66e6d8c3b"
     }
   },
@@ -329,7 +329,7 @@
       "apply_fc5_relief.sh"
     ],
     "pins": {
-      "digest.txt": "8026f29fbb2ac84486798cc28df42c0f8037d6b93bb11f8dc1060cc88a1317ca",
+      "digest.txt": "d3f329017cb72b89548399b64cdbb03d77ba89226242c26521ae1a4c2fc3ce7a",
       "fields.json": "ca5d88d2d1b73842b6169ac542d44f9dbf7b6d22569ee69a56baa6059f3eb21b"
     },
     "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest, the graded answers, the precision declaration, wave.json, the dump, the teaching fields, the capstone generator, the capstone conditions, the structure, the three migration headers, the course, go-live and seed generators, the SQL verifier, the dry run and the owner's apply script. The kit became \"full\" with the seed ladder."
@@ -365,7 +365,7 @@
       "truth-heattransfer.json"
     ],
     "pins": {
-      "digest.txt": "a7f7b44a42e673348f15a2ddce929decf2e58f406cf9d42bc90cf28406292a1e",
+      "digest.txt": "ad261b814fe191b74321779e9117b2ace9394560b42ffb261a654aff10c15e53",
       "fields.json": "ba4c8e63d1dd591e11e7b213bca81a6e306fe3cef006b836b3264c771dca1dcd"
     },
     "headingsNoGeneratorSpells": 21
@@ -400,7 +400,7 @@
       "apply_fc7_producedwater.sh"
     ],
     "pins": {
-      "digest.txt": "1b95d46e023723681970a79c8eacd241686fc82a754a54cf8f1ca683a48d8d52",
+      "digest.txt": "20943b5a4fd64783d51192a2d49fe8f15dda136601398efb49a16740813a463f",
       "fields.json": "73576e0fb180f1518d85e1906d0fa4041ba88b46ea479e25be33c83367f591fd"
     }
   },
@@ -451,7 +451,7 @@
       "scratch_db.sh"
     ],
     "pins": {
-      "digest.txt": "0291f1fdc43b4b66ab284434d3d8b96ed71eb55b81e3f38aad6e988949d9f3fe",
+      "digest.txt": "21a86b5eef336027a35048c8351dfbf45349b22999e4b21430077e9b5e644413",
       "fields.json": "44edd802bdf49afb88e53f25290de25b3ded9296e092767b5ea980ea17ebf98f"
     },
     "note": "FULL kit. Everything this wave is rebuilt from is committed: the digest and its generator, the teaching streams, the capstone generator, the answer key and its precision declaration, every gate that reads either, the build and re-pin scripts, the structure and scaffold, and all five writer briefs. The gates read /root paths by DEFAULT and every one takes an override, which is what makes the committed copy the thing the vitest suites read on a CI runner."
@@ -505,7 +505,7 @@
       "hdr_advanced.txt"
     ],
     "pins": {
-      "digest.txt": "dcc02ea2f3d4e7bd020caea66ad6cb13c614caad734a7d3c10c0d7e1e4e0b59d",
+      "digest.txt": "d31ca5bd5189ea403f09abde07713b6ab8d9d693df81aed0bddf5e099e5d0087",
       "fields.json": "cd9195a30660a8ebbfe4d5b84d01aef4e77b33509377cc5469b2c81f356fc88e"
     },
     "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest and its generator, the graded answers and their generator, the precision declaration, wave.json, the three tier audits, the three migration headers, the course, go-live and seed generators, the SQL verifier, the scratch database and the dry run against it, and the owner's apply script. The kit became \"full\" with the seed ladder."

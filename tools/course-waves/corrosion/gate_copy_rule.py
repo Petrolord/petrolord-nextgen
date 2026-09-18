@@ -8,14 +8,12 @@ The digest is swept because every lesson is written from it, so a contrastive
 in the digest becomes a contrastive in a lesson. structure.py is NOT swept for
 prose: its own gate lines have to contain the characters this gate looks for.
 
-FIVE STRINGS THE ENGINE ITSELF OWNS. The vendored engine's own refusal and
-warning text carries two contrastives, and the digest quotes those messages
-VERBATIM because a digest that paraphrases an error message teaches a message
-the learner will never see. They are exempted BY EXACT STRING in ENGINE_TEXT
-below, with the finding recorded, and a DEAD exemption fails this gate: a row
-that clears nothing is not an amnesty, it is a claim about work never done. Every
-writer brief in this wave says: quote the message inside backticks as the
-engine's own words, and never write a contrastive of your own.
+ENGINE TEXT. Every engine message the digest quotes meets the owner copy rule,
+so ENGINE_TEXT below exempts nothing. An exemption added there is BY EXACT
+STRING, and a DEAD exemption fails this gate: a row that clears nothing is a
+claim about work never done. Every writer brief in this wave says: quote the
+message inside backticks as the engine's own words, and never write a
+contrastive of your own.
 
 REFUSALS. Exit 2 if the digest is missing, if fewer than 500 lines were read,
 or if the course directory exists with lesson files in it and not one was
@@ -29,29 +27,7 @@ COURSE = os.environ.get('FC9_COURSE', '/root/wt-fc9-nextgen/src/content/courses/
 DASHES = re.compile('[—–]')
 CONTRASTIVE = re.compile(r',\s+not\s+\w')
 
-# Verbatim engine text the digest quotes. Each is the engine's OWN words.
-ENGINE_TEXT = {
-    'availability, not efficiency, is what limits it':
-        "corrosionRate's warning when the effective protection falls short of the "
-        "datasheet efficiency. The digest quotes it verbatim because a learner who "
-        "runs the shipped default case sees exactly these words on the screen. "
-        "FINDING against the repaired engine: the message breaches the owner copy "
-        "rule and should be recast upstream.",
-    'the arithmetic of the number typed in, not a prediction':
-        "corrosionRate's note when a 100 percent efficiency is typed. Same reason, "
-        "same FINDING.",
-    'Read this number as a bracket, not a value.':
-        "wallShearStressPa's note when the Reynolds number sits on the friction "
-        "branch switch, where the shear is discontinuous. Same reason, same FINDING.",
-    'this is an inspection and fitness-for-service question, not a design one':
-        "remainingLife's refusal when the corrosion allowance is already consumed. "
-        "It is the one refusal in the module that tells the reader the QUESTION has "
-        "changed rather than that an input is wrong, so the exact wording is the "
-        "lesson. Same FINDING.",
-    'the model does not apply, not that the line is not corroding':
-        "corrosionRate's note on its no-CO2 branch, which is the sentence that stops "
-        "a rate of zero being read as a clean bill of health. Same FINDING.",
-}
+ENGINE_TEXT = {}
 
 
 def sweep(label, text):

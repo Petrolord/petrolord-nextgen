@@ -2,7 +2,7 @@
 # Densities in kg/m3, cut sizes and droplet medians in micron, concentrations in ppm, removals in percent, centrifugal fields in g and dimensionless ratios print to six decimals; viscosities in Pa.s, velocities in m/s and volume fractions print to twelve.
 # Field units: bwpd of water, degrees C, ppm of total dissolved solids, degrees API, micron for droplets and bubbles, m3/s and m for the equipment, ppm of oil in water.
 # Nothing here is read from a clock or a random number, so every line reproduces.
-# Built against engines 9874d58, vendored sha-identical over a walked import closure of 5 paths. Every figure below is that engine's own answer at the inputs named beside it.
+# Built against engines 5cbdca5, vendored sha-identical over a walked import closure of 5 paths. Every figure below is that engine's own answer at the inputs named beside it.
 
 # SECTION 1: What this engine treats, and what it refuses (owned by Associate m01)
 
@@ -234,8 +234,8 @@ F is the published allowance, customarily 1.3 to 1.8:
 | 1.8 | 180.752746 | none |
 | 2.5 | 213.019154 | F outside the customary band and the cut droplet outside creeping flow |
 And the values it refuses, each named:
-- F of 0: REFUSED: the short-circuit factor F must be positive and this is 0: an F of zero or less is not a perfect separator, it is an undefined one
-- F of -2: REFUSED: the short-circuit factor F must be positive and this is -2: an F of zero or less is not a perfect separator, it is an undefined one
+- F of 0: REFUSED: the short-circuit factor F must be positive and this is 0: at an F of zero or less the separator is undefined
+- F of -2: REFUSED: the short-circuit factor F must be positive and this is -2: at an F of zero or less the separator is undefined
 - F of 6: REFUSED: the short-circuit factor F is a turbulence allowance customarily between 1.3 and 1.8, and this module holds it to 5; this is 6
 
 A plate pack is the same physics with the pack multiplying the settling area, which is why a plate interceptor is far smaller than a basin for the same cut:
@@ -445,7 +445,7 @@ The KOKORI bed, 20 m2 and 0.8 m deep on 650 micron media:
 - loading 24.841765 m/hr, filter coefficient 4.140060735138 per m at the 20 micron reference droplet.
 - penetration at that reference droplet 0.036441443726, so removal 96.355856 percent of the oil at that ONE size.
 - cut size 9.149437 micron.
-- cut basis, on every return: depth filtration, inverted: the filter coefficient is declared at a reference droplet, a reference grain and a reference loading, it goes as the square of the droplet diameter, and the cut size is the droplet the bed removes half of over its depth. The removal the train reports is this same curve integrated over the droplet distribution, not a second opinion
+- cut basis, on every return: depth filtration, inverted: the filter coefficient is declared at a reference droplet, a reference grain and a reference loading, it goes as the square of the droplet diameter, and the cut size is the droplet the bed removes half of over its depth. The removal the train reports is this same curve integrated over the droplet distribution, so the cut size and the train come from one model
 
 The bed depth, which is the input a depth filtration model must respond to:
 | depth m | lambda per m | removal at the reference droplet percent | cut micron | cut times the root of the depth |
@@ -485,8 +485,8 @@ THE FLOOR UNDER THE LOADING RATE, which is the one place this device REFUSES. Wi
 | 400 | 1.242088 | 18.514914469492 | 4.326502 |
 | 490 | 1.013950 | 20.492255142381 | 4.112471 |
 And the beds that do not, each refused by name:
-- a 600 m2 bed on this flow: REFUSED: a loading of 0.828 m/hr is below the 1 m/hr floor this module answers above: the filter coefficient is DECLARED at 10 m/hr, its loading exponent is the only velocity dependence in this model, and at the floor the declared law is already claiming 3.162 times the one coefficient there is any calibration for. 496.8 m2 of bed would run this flow at the floor. What a bed really does far below its design rate needs bed data this module does not carry
-- a 2000 m2 bed on this flow: REFUSED: a loading of 0.248 m/hr is below the 1 m/hr floor this module answers above: the filter coefficient is DECLARED at 10 m/hr, its loading exponent is the only velocity dependence in this model, and at the floor the declared law is already claiming 3.162 times the one coefficient there is any calibration for. 496.8 m2 of bed would run this flow at the floor. What a bed really does far below its design rate needs bed data this module does not carry
+- a 600 m2 bed on this flow: REFUSED: a loading of 0.828 m/hr is below the 1 m/hr floor: this module answers at the floor and above it, and the filter coefficient is DECLARED at 10 m/hr, its loading exponent is the only velocity dependence in this model, and at the floor the declared law is already claiming 3.162 times the one coefficient there is any calibration for. 496.8 m2 of bed would run this flow at the floor. What a bed really does far below its design rate needs bed data this module does not carry
+- a 2000 m2 bed on this flow: REFUSED: a loading of 0.248 m/hr is below the 1 m/hr floor: this module answers at the floor and above it, and the filter coefficient is DECLARED at 10 m/hr, its loading exponent is the only velocity dependence in this model, and at the floor the declared law is already claiming 3.162 times the one coefficient there is any calibration for. 496.8 m2 of bed would run this flow at the floor. What a bed really does far below its design rate needs bed data this module does not carry
 - the bed that would run this flow AT the floor, which every one of those refusals names and which the return carries as `areaAtFloorM2`: 496.835297 m2, against the 20 m2 bed this stream actually runs.
 THE REFUSAL NAMES FOUR THINGS and each of them is doing work: the loading it was given, the floor it is under, the reference loading the coefficient is declared at, and the bed that would reach the floor. A reader who wanted an answer below 1 m/hr is told what to change and by how much. What a bed really does far below its design rate is HELD FOR LITERATURE, which is why this is a refusal rather than a warning: the module will not extend a coefficient declared at one loading down past the floor and then report the result as a cut size.
 
@@ -761,7 +761,7 @@ THE NEWEST GROUP IN FULL, because it is the only group in this file whose subjec
 The first four beds span 100.000000 times in area (derived, the largest of those areas over the smallest) and every one of them is refused. THOSE ARE THE FOUR BEDS A CLAMP MAKES IDENTICAL, which is the whole reason this group exists: a hundredfold of bed area is the widest thing a reader could vary, and a module that answered the same on all four would be caught here and nowhere else in the file.
 The three rows beside them are the STRADDLE, and they are what pins the floor to the declared value rather than to somewhere below it: 0.997230 m/hr is REFUSED and 1.000000 m/hr ANSWERS, which is a gap of 0.002770 of the floor itself (derived, the two loadings subtracted and taken over the floor). And 3.600000 m2 is `areaAtFloorM2` on all seven rows, golden and engine alike, which is the bed that would run that flow at the floor.
 
-THE PLANTING BATTERY, which is the real measure of the gate. FC7-0 planted thirty five defects, twenty seven in the engine alone and eight in the engine and the oracle together, run one at a time against the suite. Before that repair, 22 of those 35 left the suite fully green: 16 of the 27 planted in the engine alone and 6 of the eight planted in both files. After it, 0 of 35 do. FC7-1 re-ran all 35 against the repaired source and added twenty four of its own plus one self-test of the runner, and none of the sixty leaves the suite green. The suite this digest was built beside carries 78 tests, counted off the vendored file.
+THE PLANTING BATTERY, which is the real measure of the gate. FC7-0 planted thirty five defects, twenty seven in the engine alone and eight in the engine and the oracle together, run one at a time against the suite. Before that repair, 22 of those 35 left the suite fully green: 16 of the 27 planted in the engine alone and 6 of the eight planted in both files. After it, 0 of 35 do. FC7-1 re-ran all 35 against the repaired source and added twenty four of its own plus one self-test of the runner, and none of the sixty leaves the suite green. The suite this digest was built beside carries 79 tests, counted off the vendored file.
 The eight planted in both files at once are the interesting half, because a golden regenerated from a bent oracle agrees with a bent engine perfectly. What catches them now is a mixture of three things: a route with no place to type the constant, the identities that need no source, and an explicit PIN with the value typed by hand in the test file.
 Every family in the suite also carries a NEGATIVE CONTROL that is asserted to fire and to name a case. One of them records a fact about its own subject rather than a round number: the cyclone control fails on four of five rows and not five, because a turndown of exactly one is the one case a wrong field exponent cannot move.
 

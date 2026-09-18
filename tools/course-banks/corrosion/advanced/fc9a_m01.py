@@ -17,7 +17,7 @@ q(0, "The withdrawn sour-service severity region is not on `HELD_FOR_LITERATURE`
  ["It sits on a third exported list of withdrawn features, which the whole screening door returns alongside the other two so that a caller can render all three of them together.",
   "It is held rather than listed, because the region expression still runs on every screening and only the two standard names were stripped out of the strings it returns.",
   "It came off both lists when the threshold value was kept, since a module that still prints a screening threshold is still classifying severity at that threshold."],
- "Both fields are false today and will stay false, so the absence arrives as a field and a caller cannot read it as an unset property. The region function is not exported and neither standard name appears anywhere in the 775 lines of the engine source.")
+ "Both fields are false today and will stay false, so the absence arrives as a field and a caller cannot read it as an unset property. The region function is not exported and neither standard name appears anywhere in the 783 lines of the engine source.")
 
 q(3, "The engine's own eleven-item held list names three of these four numbers. Which one does it not name?",
  "The bar to psia factor of 14.503773800722, which follows from the definition of the bar and of the pound-force.",

@@ -160,23 +160,14 @@ const tableRows = (body) => body
 export default {
   enginesRoot: process.env.FC9_ENGINES || '/root/wt-fc9-nextgen/packages/engines',
 
-  // FIVE VERBATIM ENGINE STRINGS BREACH THE OWNER COPY RULE, and the digest
-  // quotes all five because a digest that paraphrases an error message teaches a
-  // message the learner will never see. Each is PINNED BY EXACT FRAGMENT to the
-  // engine source, so a DEAD exemption fails this gate: if the engine's wording
-  // changes, the pin breaks and the quote is re-read rather than silently kept.
-  //
-  // FINDING against the repaired engine, recorded here and in wave.json: all
-  // five should be recast upstream. Every writer brief in this wave says to
-  // quote the message inside a blockquote as the engine's own words and never to
+  // EVERY ENGINE STRING THIS DIGEST QUOTES MEETS THE OWNER COPY RULE, so
+  // nothing is exempted from the contrastive check and this list is empty. An
+  // entry added here is PINNED BY EXACT FRAGMENT to the engine source, so a
+  // DEAD exemption fails this gate: if the engine's wording changes, the pin
+  // breaks and the quote is re-read rather than silently kept. Writers quote an
+  // engine message inside a blockquote as the engine's own words and never
   // write a contrastive of their own.
-  pinned: [
-    { frag: 'availability, not efficiency, is what limits it', src: 'engines/facilities/corrosion.js' },
-    { frag: 'the arithmetic of the number typed in, not a prediction', src: 'engines/facilities/corrosion.js' },
-    { frag: 'Read this number as a bracket, not a value.', src: 'engines/facilities/corrosion.js' },
-    { frag: 'this is an inspection and fitness-for-service question, not a design one', src: 'engines/facilities/corrosion.js' },
-    { frag: 'the model does not apply, not that the line is not corroding', src: 'engines/facilities/corrosion.js' },
-  ],
+  pinned: [],
 
   // Heading claims this digest makes that a block below could contradict. Each
   // is written from a REAL title or marker in this digest and from the specific

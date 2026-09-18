@@ -500,9 +500,9 @@ than reading off the last row:
      reading off the last row, which is not a requirement for this beta
 
 The note every answered row carries:
-   > these are table values, not a calculation: they depend on the fitting and the beta,
-     and a flow conditioner shortens them substantially. They are this engine's stated
-     table data and are not cited to a document in this repository
+   > these are table values and nothing here calculates them: they depend on the fitting
+     and the beta, and a flow conditioner shortens them substantially. They are this
+     engine's stated table data and are not cited to a document in this repository
 
    the downstream requirement steps up above a beta of              0.500000
    below it, diameters                                                     4
@@ -596,9 +596,9 @@ engine separates the two and says which one it has.
    regime                                                 flashing   returned
    coefficient                                           19.148480   returned
 
-   > the outlet is at or below the vapour pressure: this service is FLASHING, not
-     cavitating, and an anti-cavitation trim will not help it. Size for two-phase flow and
-     use hardened trim with an expanded outlet
+   > the outlet is at or below the vapour pressure: this service is FLASHING, and an
+     anti-cavitation trim will not help a flashing service. Size for two-phase flow and use
+     hardened trim with an expanded outlet
 
    RELATION  the outlet pressure at which flashing starts, against the stated vapour pressure
              the outlet pressure where the engine turns the flashing flag on, psia            28.740000
@@ -716,8 +716,8 @@ accepts, which this section asserts on every row of the ladder below.
    the verdict becomes poor below an authority of                   0.250000
    the characteristic recommendation changes at an authority of     0.500000
 
-   > the 0.5 and 0.25 boundaries are this engine's stated screen, not a value read from a
-     standard
+   > the 0.5 and 0.25 boundaries are this engine's stated screen, and no standard in this
+     package supplies them
 
 The two reasons the recommendation gives, in the engine's own words:
    > the valve takes most of the system drop, so its inherent curve is close to its
@@ -757,9 +757,9 @@ quiet however gently.
    the stream power bands the engine exports                quiet 1.000000 kW, loud 1000.000000 kW
 
    > a screening indication only: a real noise prediction needs the IEC 60534-8-3 method
-     with valve and pipe geometry. Use this to know whether to ask the question, not to
-     answer it. The pressure ratio sets the band and the stream power caps and floors it,
-     and both sets of thresholds are this engine's stated screen
+     with valve and pipe geometry. Use this to decide whether that method is needed, and
+     let that method give the answer. The pressure ratio sets the band and the stream power
+     caps and floors it, and both sets of thresholds are this engine's stated screen
 
 
 # SECTION 24: TRAVEL, AND A VERDICT OVER CHECKS THAT RAN (owned by Professional m06)
@@ -881,15 +881,15 @@ WHAT GOVERNS THE BOTTOM COURSE ACROSS THE PRODUCT GRAVITIES IN THIS FILE:
 
 The two notes the engine writes when something other than the product
 governs, in its own words:
-   > the water test governs this course, not the product: a light product does not stress
-     the shell as hard as the water it will be tested with, and designing for the product
-     alone would under-thickness it
+   > the water test governs this course: a light product does not stress the shell as hard
+     as the water it will be tested with, and designing for the product alone would
+     under-thickness it
    > neither the product nor the water test needs this much plate: the stated minimum of
      0.1875 in governs this course
 
    > a stated input. API 650 bands the minimum shell plate thickness by tank diameter and
-     this package does not carry that band table, so this value is the caller's and not the
-     standard's
+     this package does not carry that band table, so this value is the caller's own and has
+     not been checked against the standard
    > the one-foot method. API 650 sets a diameter above which the variable design point
      method is required instead, and that limit is not carried here, so a large tank must
      be checked against the standard before this thickness is used

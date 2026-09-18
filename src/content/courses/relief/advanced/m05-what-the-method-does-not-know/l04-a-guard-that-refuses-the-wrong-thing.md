@@ -20,7 +20,7 @@ A rule that general beats memorising nine messages. It also says what the engine
 
 ## The one that catches a screen
 
-A drainage answer must be a real boolean. The string "false" is truthy in JavaScript, so a select element sending a string would buy the drainage credit silently and the duty would come back on the drained constant instead. The engine refuses it by name, and this is the engine's own wording: `adequate drainage must be true or false, not a string`.
+A drainage answer must be a real boolean. The string "false" is truthy in JavaScript, so a select element sending a string would buy the drainage credit silently and the duty would come back on the drained constant instead. The engine refuses it by name, and this is the engine's own wording: `adequate drainage must be the boolean true or false`.
 
 That refusal is not about physics. It is about the gap between a screen and a function, where a surprising share of real defects live.
 

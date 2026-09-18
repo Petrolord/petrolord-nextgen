@@ -22,7 +22,7 @@ You could reach the same number by adding the consumed depth to the required all
 
 The difference stops being academic at the edges of the door. An allowance already fully consumed is a refusal rather than a number:
 
-> the corrosion allowance is already consumed: this is an inspection and fitness-for-service question, not a design one
+> the corrosion allowance is already consumed: this is now an inspection and fitness-for-service question
 
 A negative consumed depth is a refusal too. A design life left out gives a remaining life with `requiredAllowanceMm` null and a shortfall of 0.000000. A bisection on the verdict runs into each of those and reports them. An addition of two fields sails past.
 

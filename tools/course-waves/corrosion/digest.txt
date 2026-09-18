@@ -4,7 +4,7 @@
 
 # PRECISION. Partial pressures in bar and in psia, wall thicknesses and allowances in mm, corrosion rates in mm/yr, lives in years, percentages, percentage points and every dimensionless ratio print to SIX decimals; Reynolds numbers print to FOUR, because a number in the hundreds of thousands carries no information in its millionths; measured constants and ratios of them print to TWELVE; counts are whole numbers.
 
-# ENGINE. engines/facilities/corrosion.js, vendored sha-identical with petrolord-engines d4c19ad, 775 lines, importing nothing. The vendoring closure walked from the jest suite is SIX paths. The vendored golden test-data/facilities/goldens/corrosion_cases.json carries 110 rows in 17 blocks.
+# ENGINE. engines/facilities/corrosion.js, vendored sha-identical with petrolord-engines 5cbdca5, 783 lines, importing nothing. The vendoring closure walked from the jest suite is SIX paths. The vendored golden test-data/facilities/goldens/corrosion_cases.json carries 110 rows in 17 blocks.
 
 # THE GOLDEN IS SYNTHETIC AND IT SAYS SO. golden provenance.published is false. The golden's own words: "No published de Waard-Milliams case, no MR0175 or ISO 15156 clause and no corrosion rate-band table exists anywhere in this repository, so every row here is SYNTHETIC. Route independence and the gate's pins carry the load instead. A number recalled from memory is not a published datum and none is typed here."
 
@@ -66,7 +66,7 @@ WHAT THE ENGINE NOW RETURNS IN ITS PLACE, measured at the shipped app defaults:
 | `materialGuidanceProvided` | false | the same for the material recommendation |
 | `label` | Above the H2S screening threshold | the whole verdict, in words |
 
-THE ABSENCE IS PROVED THREE WAYS, and each is a separate check this file ran: the function `sourServiceRegion` is not exported, so `typeof` it is undefined; none of the three material guidance strings and neither standard name appears anywhere in the 775 lines of the engine source; and no returned string anywhere in three whole screenings names either standard.
+THE ABSENCE IS PROVED THREE WAYS, and each is a separate check this file ran: the function `sourServiceRegion` is not exported, so `typeof` it is undefined; none of the three material guidance strings and neither standard name appears anywhere in the 783 lines of the engine source; and no returned string anywhere in three whole screenings names either standard.
 
 THE GENERAL LESSON, which is why this is the course's headline and not a footnote. A fit that is wrong by a factor of two in a number is a tolerance problem and you fix it by measuring. A fit that is invented and then labelled with somebody else's authority is a different kind of thing: the number was never the claim. The claim was "this is what the standard says", and no amount of retuning makes that true. The only repair available is to stop claiming it, and the only honest replacement is the sentence that the thing is not provided.
 
@@ -324,11 +324,11 @@ Steel does not corrode where it is oil wet. The engine treats that as a REGIME a
 | --- | --- | --- | --- | --- | --- |
 | waterWet | 1.000000 | 1.676428 | severe | 1.655305 yr | the model applies |
 | intermittent | 0.370000 | 0.620278 | high | 4.473797 yr | the model applies |
-| oilWet | 0.000000 | 0.000000 | WITHHELD | WITHHELD | the wetting regime is oil wet, so the rate is zero because that was assumed and not because it was calculated. An unbounded life off a dropdown is the strongest reassurance on the screen arriving from the weakest input. |
+| oilWet | 0.000000 | 0.000000 | WITHHELD | WITHHELD | the wetting regime is oil wet, so the rate is zero by assumption, and nothing was calculated to reach it. An unbounded life off a dropdown is the strongest reassurance on the screen arriving from the weakest input. |
 
 THE OIL-WET CASE WITHHOLDS ITS CATEGORY AND ITS LIFE, and it says why. The engine's own words:
 
-> the wetting regime is oil wet, so the rate is zero because that was assumed and not because it was calculated. An unbounded life off a dropdown is the strongest reassurance on the screen arriving from the weakest input.
+> the wetting regime is oil wet, so the rate is zero by assumption, and nothing was calculated to reach it. An unbounded life off a dropdown is the strongest reassurance on the screen arriving from the weakest input.
 
 AND THE INHIBITION FIGURE IS `null` RATHER THAN ZERO: null. A reported zero percent inhibition on a line that has a corrosion inhibitor programme is a statement, and it would be a false one. There is nothing to be effective against when the rate is zero by assumption.
 
@@ -376,7 +376,7 @@ A 95 percent corrosion inhibitor running 80 percent of the time is not a 95 perc
 
 READ THE 80 PERCENT ROW TWICE. A 95 percent corrosion inhibitor at 80 percent availability delivers 76.000000 percent effective protection, which is 19.000000 percentage points short of the datasheet figure, and the metal loss is 4.800000 times what the datasheet number would give. AVAILABILITY IS WHAT LIMITS IT. Efficiency does not. The engine's own warning on that case, verbatim:
 
-> a 95 percent inhibitor at 80 percent availability gives 76.0 percent effective protection, which is 4.80 times the metal loss of the datasheet number: availability, not efficiency, is what limits it
+> a 95 percent inhibitor at 80 percent availability gives 76.0 percent effective protection, which is 4.80 times the metal loss of the datasheet number: availability is what limits it
 
 THE WARNING FIRES ON THE EFFECTIVE SHORTFALL AT ANY EFFICIENCY. The trigger, measured by bisecting the availability at which it appears, is 0.100000 percentage points of shortfall. At the shipped app defaults of a 90 percent inhibitor at 95 percent availability the effective protection is 85.500000 percent, the shortfall is 4.500000 percentage points, and the warning is present.
 
@@ -388,7 +388,7 @@ THE WARNING FIRES ON THE EFFECTIVE SHORTFALL AT ANY EFFICIENCY. The trigger, mea
 
 A TYPED 100 PERCENT EFFICIENCY GIVES EXACTLY THE AVAILABILITY. At 100 percent efficiency and 95 percent availability the effective protection is 95.000000 percent, with no clamp and no hidden ceiling, and the engine adds a note saying what that arithmetic is and is not:
 
-> an efficiency of 100 percent is the arithmetic of the number typed in, not a prediction: no inhibitor removes all metal loss while it is on.
+> an efficiency of 100 percent is only the arithmetic of the number typed in and predicts nothing: no inhibitor removes all metal loss while it is on.
 
 EVERY NUMBER IN THIS SECTION IS ARITHMETIC OVER TWO TYPED PERCENTAGES, with no correlation constant anywhere in the chain. That is why the inhibitor arithmetic is the one part of this engine a capstone can grade without leaning on a number nobody can source, and section 21 says which of the eighteen graded fields rest on it.
 
@@ -432,7 +432,7 @@ THE BRANCH SWITCH IS A GENUINE DISCONTINUITY. At the measured switch of Reynolds
 
 Inside ten percent of the switch the engine sets `nearSwitch` and returns this note verbatim:
 
-> Reynolds 4080 sits on the laminar to turbulent switch at 4000, where this friction factor is discontinuous and the shear jumps by about a factor of two. Read this number as a bracket, not a value.
+> Reynolds 4080 sits on the laminar to turbulent switch at 4000, where this friction factor is discontinuous and the shear jumps by about a factor of two. Read this number as good to within that factor of two.
 
 THE ANGIAMA STREAM IS THE LAMINAR CASE, and it is there so a lesson has one. It is viscous, small and slow, and the friction factor it gets comes from the other branch entirely.
 Angiama: Reynolds 3.3754, branch laminar, friction factor 4.740191, wall shear 8.031496 Pa, film risk low.
@@ -589,8 +589,8 @@ FOUR SEPARATE PATHS REACH A ZERO RATE, and a learner should be able to list them
 | a negative rate | the corrosion rate must be a finite non-negative number |
 | a blank rate | the corrosion rate must be a finite non-negative number |
 | a design life that is not a number | the design life must be a finite number of years, or left out |
-| an allowance already fully consumed | the corrosion allowance is already consumed: this is an inspection and fitness-for-service question, not a design one |
-| an allowance consumed past its own depth | the corrosion allowance is already consumed: this is an inspection and fitness-for-service question, not a design one |
+| an allowance already fully consumed | the corrosion allowance is already consumed: this is now an inspection and fitness-for-service question |
+| an allowance consumed past its own depth | the corrosion allowance is already consumed: this is now an inspection and fitness-for-service question |
 
 THE FULLY CONSUMED CASE IS THE ONE TO READ TWICE. The engine does not return a negative life or a zero one. It says the question has changed, in its own words above: a line whose allowance is gone is an inspection and fitness-for-service question, and this module has neither.
 
@@ -719,7 +719,7 @@ AND TWO THINGS `screen` STILL SWALLOWS, WHICH THIS DIGEST RECORDS BECAUSE THE SE
 | --- | --- | --- | --- | --- | --- |
 | a blank corrosion allowance box | undefined | null | null | true | nothing |
 | an allowance that is not a number | undefined | null | null | true | nothing |
-| an allowance already consumed past its own depth | undefined | an ERROR OBJECT: the corrosion allowance is already consumed: this is an inspection and fitness-for-service question, not a design one | null | true | nothing |
+| an allowance already consumed past its own depth | undefined | an ERROR OBJECT: the corrosion allowance is already consumed: this is now an inspection and fitness-for-service question | null | true | nothing |
 | a negative consumed depth | undefined | an ERROR OBJECT: the consumed allowance must be a non-negative number | null | true | nothing |
 
 READ THE FIRST TWO ROWS AGAINST THE BINDING CONSTRAINT THEY CAME WITH. The blank-allowance case returns `mass transfer to the wall` as its binding constraint and a complete screening, so a summary rail simply has no remaining-life row and nothing on the screen says why. The last two rows put the life door's own refusal INSIDE the `life` field, so a caller's `if (result.error)` passes, `result.life.remainingYears` is undefined, and the refusal message never reaches anyone.
@@ -759,7 +759,7 @@ A refusal is the module telling you it cannot answer, and the difference between
 | `remainingLife` | a blank allowance | a positive corrosion allowance is needed |
 | `remainingLife` | a negative consumed depth | the consumed allowance must be a non-negative number |
 | `remainingLife` | a negative rate | the corrosion rate must be a finite non-negative number |
-| `remainingLife` | an allowance already consumed | the corrosion allowance is already consumed: this is an inspection and fitness-for-service question, not a design one |
+| `remainingLife` | an allowance already consumed | the corrosion allowance is already consumed: this is now an inspection and fitness-for-service question |
 | `screen` | an H2S mole fraction that is not a number | a finite H2S mole fraction is required |
 | `screen` | mole fractions summing above one | the CO2 and H2S mole fractions sum to 1.1000, so their partial pressures would exceed the total pressure |
 | `screen` | a blank density, so the film check cannot run | screening incomplete: the inhibitor film survival check did not run. wall shear stress needs a positive density |
@@ -776,7 +776,7 @@ A TYPED ZERO IS NOT A BLANK, and the difference is the whole of this table. A ty
 
 A typed zero: rate 0.000000 mm/yr, `rateApplies` false, category null, life null, and the note reads:
 
-> no CO2 in the stream, so this CO2 model has nothing to predict. A rate of zero here means the model does not apply, not that the line is not corroding: any corrosion at these conditions is another mechanism.
+> no CO2 in the stream, so this CO2 model has nothing to predict. A rate of zero here means only that the model does not apply, and it says nothing about whether the line is corroding: any corrosion at these conditions is another mechanism.
 
 A blank box, on the same screen: a finite CO2 mole fraction is required
 
@@ -847,7 +847,7 @@ The Corrosion & Integrity Studio ships with a case already filled in, so the fir
 
 THE WARNING ON THAT SCREEN, verbatim:
 
-> a 90 percent inhibitor at 95 percent availability gives 85.5 percent effective protection, which is 1.45 times the metal loss of the datasheet number: availability, not efficiency, is what limits it
+> a 90 percent inhibitor at 95 percent availability gives 85.5 percent effective protection, which is 1.45 times the metal loss of the datasheet number: availability is what limits it
 
 AND THE BINDING CONSTRAINT, verbatim:
 
@@ -1060,7 +1060,7 @@ AND THE SAME ROUNDING HABIT MEETS A THRESHOLD. A sour threshold of 0.05 psia is 
 # THIS SECTION, AND ONLY THIS SECTION, DESCRIBES BEHAVIOUR THIS ENGINE NO LONGER HAS. Every sentence above this line is about the engine as it ships today. Every sentence below is about what it did before the repair that preceded this course, and each item is a GENERAL LESSON that happens to have an example here. A sentence about former behaviour that reads as current behaviour is a defect, and the frame for this material is this heading and this paragraph.
 
 - THE ENGINE SOURCE CARRIES THIS HISTORY IN ITS COMMENTS, and a sentence lifted out of a comment arrives with no frame around it. Counted by reading engines/facilities/corrosion.js: 0 comment lines carry the repair marker, and 5 comment lines are written in a past tense about former behaviour. The rule that counted them: a line that begins with a comment marker and contains one of "used to", "previous version", "earlier version", "before", "no longer", "silently" or "would have".
-- The module is 775 lines long, so roughly one line in 155 of it is a sentence about what it used to do. Engine source comments are PROVENANCE. So are the wave recon and findings reports, and so is the repair's own findings record vendored beside the oracle. None of the four is teaching truth.
+- The module is 783 lines long, so roughly one line in 157 of it is a sentence about what it used to do. Engine source comments are PROVENANCE. So are the wave recon and findings reports, and so is the repair's own findings record vendored beside the oracle. None of the four is teaching truth.
 
 # ITEM ONE. THE HEADLINE. AN INVENTED CURVE WEARING SOMEBODY ELSE'S AUTHORITY.
 - The general lesson, and it is the largest one in this course: a calculation can be wrong in a way that no amount of measurement repairs, because the number was never the claim. If a curve is labelled with a standard's name, the claim is "this is what the standard says". Retuning the curve does not make that true. The only honest repair is to withdraw the claim and say the thing is not provided.

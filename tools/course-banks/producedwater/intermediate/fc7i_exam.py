@@ -250,7 +250,7 @@ q(0, "Of the beds the section walks down towards the loading floor, which is the
  "The three answering beds are 200, 400 and 490 m2, cutting at 5.145107, 4.326502 and 4.112471 micron. The floor under them is a refusal rather than a warning, because what a bed does far below its design rate is HELD FOR LITERATURE.")
 
 q(3, "A 2000 m2 bed on the same flow is refused. What loading does the refusal quote?",
- "0.248 m/hr, against the 1 m/hr floor this module answers above.",
+ "0.248 m/hr, below the 1 m/hr floor, which this module answers at and above.",
  ["0.828 m/hr, which is the loading the 600 m2 bed was refused at.",
   "1.013950 m/hr, which is the loading of the last bed that answers.",
   "2.484176 m/hr, which is the loading a 200 m2 bed would be refused at."],

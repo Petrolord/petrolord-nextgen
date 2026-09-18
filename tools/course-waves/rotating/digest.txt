@@ -2,7 +2,7 @@
 # Pump work prints to six decimals (gpm, ft, psi, hp, kW, ratios, percentages); gas work to four (ft lbf per lbm, Btu per hr, acfm, degF); exponents, small factors and MMscfd to nine; counts are whole numbers.
 # Field units: gpm and feet of head for pumps, MMscfd and psia and degF for gas, horsepower for both.
 # Two engines: engines/facilities/pumps.js (14 exports) and engines/facilities/compression.js (8 exports), over engines/production/gasProperties.js. The export counts are read off the modules themselves.
-# The engines are vendored at engines main 4fa37e6, which is the FC3-0 repair wave. compression.js reads its gas constant, its molecular weight of air and its Rankine offset from engines/production/gasProperties.js, its compressibility validity window from engines/facilities/separatorSizing.js, and its two power packagings from lib/units/fieldUnits.js, which pumps.js also reads.
+# The engines are vendored at engines 5cbdca5, which carries the FC3-0 repair wave (4fa37e6) and the engines copy sweep (PR #214). compression.js reads its gas constant, its molecular weight of air and its Rankine offset from engines/production/gasProperties.js, its compressibility validity window from engines/facilities/separatorSizing.js, and its two power packagings from lib/units/fieldUnits.js, which pumps.js also reads.
 # Nothing here is read from a clock or a random number, so every line reproduces.
 
 # SECTION 1: What these engines size, and what they refuse (owned by Associate m01)
@@ -438,7 +438,7 @@ A CATALOGUE CURVE IS A WATER CURVE. The Hydraulic Institute correction on the OK
 
 The two warnings, in full:
 - at 850.000000 cSt: "the efficiency correction is 45.7 percent: a centrifugal pump is a poor choice for a fluid this viscous"
-- at 9000.000000 cSt: "B above 40 is outside the published correlation: this service needs a positive-displacement pump or vendor viscous test data, not a corrected centrifugal curve"
+- at 9000.000000 cSt: "B above 40 is outside the published correlation, so a corrected centrifugal curve cannot be used here: this service needs a positive-displacement pump or vendor viscous test data"
 
 Two rows worth reading against each other. At 1.000000 cSt the engine reports B = 0.425703013; at 1.000001 cSt, a millionth higher, it reports B = 0.425703226, a difference of 2.1285145351823687e-7 (derived from the two figures on this line). The correlating parameter is a real positive number at water viscosity and the engine reports it there, on the branch where it then applies no correction at all. B is what says how far from water the fluid is; the decision not to correct is a separate statement, and it is carried by the note.
 THE RETURN SHAPE IS THE SAME ON EVERY BRANCH, and the table above shows it. The corrected flow and head are present on the water row, present on the row a millionth above it, and present on a corrected row. On the two no-correction branches they are the catalogue values themselves: at 1.000000 cSt the corrected flow is 1150.000000 gpm against a stated best efficiency flow of 1150.000000 gpm, a difference of 0 gpm (derived from the two figures on this line). "The catalogue values, unchanged" is an answer, and it is returned as one.
@@ -462,14 +462,14 @@ The SOKU K-2101 stage: 26.000000 MMscfd of a 0.648000 gravity gas at 92.000000 p
 - gas horsepower by the polytropic route 2279.6019, by the isentropic route 2279.6019 (engine); difference -9.094947017729282e-13 hp (derived)
 - brake horsepower 2354.9606 at a mechanical efficiency of 0.968000 (engine)
 - compressibility note: "Ppr 0.137 against 0.2 at 92 psia and 104 F is below the 0.2 where the DAK fit data start; the z-factor here runs toward the ideal-gas limit"
-- warning: "discharge at 333.6 F is above the stated limit of 300.0 F: the valves and the lube oil become the limit, not the thermodynamics"
+- warning: "discharge at 333.6 F is above the stated limit of 300.0 F: at this temperature the valves and the lube oil set the limit, ahead of the thermodynamics"
 
 THE HOT-STAGE WARNING FIRES ON THE LIMIT THE CALLER STATED, rather than on a threshold written into the module. The same stage against four different stated limits, everything else held:
 | stated limit degF | discharge degF | warned | the warning |
 | --- | --- | --- | --- |
-| 200.0000 | 333.5954 | true | "discharge at 333.6 F is above the stated limit of 200.0 F: the valves and the lube oil become the limit, not the thermodynamics" |
-| 250.0000 | 333.5954 | true | "discharge at 333.6 F is above the stated limit of 250.0 F: the valves and the lube oil become the limit, not the thermodynamics" |
-| 300.0000 | 333.5954 | true | "discharge at 333.6 F is above the stated limit of 300.0 F: the valves and the lube oil become the limit, not the thermodynamics" |
+| 200.0000 | 333.5954 | true | "discharge at 333.6 F is above the stated limit of 200.0 F: at this temperature the valves and the lube oil set the limit, ahead of the thermodynamics" |
+| 250.0000 | 333.5954 | true | "discharge at 333.6 F is above the stated limit of 250.0 F: at this temperature the valves and the lube oil set the limit, ahead of the thermodynamics" |
+| 300.0000 | 333.5954 | true | "discharge at 333.6 F is above the stated limit of 300.0 F: at this temperature the valves and the lube oil set the limit, ahead of the thermodynamics" |
 | 400.0000 | 333.5954 | false | null |
 The discharge on all four rows is the same 333.5954 degF, because the limit is a limit and not an input to the thermodynamics.
 THE DEFAULT IS MEASURED RATHER THAN TYPED. With no limit stated the warning turns on between a ratio of 2.7616873004480746 and 2.761687300448075, and the discharge temperatures either side of that crossing are 299.99999999999994 and 300.00000000000006 degF (engine), which brackets the default the engine applies when the caller states none. That default is a customary figure with no publication behind it in this repository.

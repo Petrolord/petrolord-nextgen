@@ -19,7 +19,7 @@ q(3, "What did the pre-repair engine serve off that severity region?",
  ["An inspection interval and a retirement thickness, both taken from the region the stream landed in, which is why neither appears in this module today.",
   "A rate category band for sour streams, which sat beside the CO2 band and is the reason the category bands are held rather than merely unsourced.",
   "A wall shear threshold for sour service, set below the 100.000000000000 Pa used elsewhere, which was withdrawn with the region it was derived from."],
- "A curve that carries a standard's name and tells an engineer what steel to buy is not a tolerance question. The three strings are gone and none of them appears anywhere in the 775 lines of the engine source.")
+ "A curve that carries a standard's name and tells an engineer what steel to buy is not a tolerance question. The three strings are gone and none of them appears anywhere in the 783 lines of the engine source.")
 
 q(0, "Three measurements show what that pre-repair expression was worth. What did they find?",
  "Moving its pH pivot by a whole unit left the suite green, widening a region boundary by a factor of two left the suite green, and a missing pH fell through to the hardest recommendation.",
@@ -36,7 +36,7 @@ q(2, "The severity region is gone from this engine today. How permanent is that,
  "The absence arrives as a field, so a caller cannot read the gap as an unset property. The digest section that states it says in its own second line that it is not repair history.")
 
 q(0, "The absence of the severity region is proved three ways. What are they?",
- "The region function is not exported so its type is undefined, neither standard name appears in the 775 lines of source, and no returned string in three whole screenings names either standard.",
+ "The region function is not exported so its type is undefined, neither standard name appears in the 783 lines of source, and no returned string in three whole screenings names either standard.",
  ["The region function throws when it is called, the two standard names appear only inside comments, and the studio renders the absence behind the same disclosure as the held list.",
   "The engine exports two false flags, the golden carries no region row among its 110, and the vendored jest suite asserts that a region request refuses with a message naming the standard.",
   "The held list omits the region, the not-provided list names it twice, and the pin table has no row for the boundary constants of the region expression."],

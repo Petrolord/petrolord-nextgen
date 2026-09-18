@@ -315,7 +315,7 @@ export default {
     { frag: 'liquid level must be a finite number, zero or more', src: 'engines/facilities/relief.js' },
     { frag: "orientation must be 'horizontal' or 'vertical'", src: 'engines/facilities/relief.js' },
     { frag: 'fire case needs a positive wetted area', src: 'engines/facilities/relief.js' },
-    { frag: 'adequate drainage must be true or false, not a string', src: 'engines/facilities/relief.js' },
+    { frag: 'adequate drainage must be the boolean true or false', src: 'engines/facilities/relief.js' },
     { frag: 'relief load needs a positive duty and latent heat', src: 'engines/facilities/relief.js' },
     { frag: 'settling needs a positive droplet size, vapor viscosity, and a liquid denser than the vapor', src: 'engines/facilities/relief.js' },
     { frag: 'drum sizing needs positive vapor rate, dropout velocity and diameter', src: 'engines/facilities/relief.js' },
@@ -329,7 +329,7 @@ export default {
     { frag: 'blowdown march did not finish inside its step budget: raise the time step', src: 'engines/facilities/relief.js' },
 
     // warnings, which are successful calls that attach text
-    { frag: 'subcritical flow uses F2, not Kb; the typed Kb was ignored', src: 'engines/facilities/relief.js' },
+    { frag: 'subcritical flow uses F2 in place of Kb, so the typed Kb was ignored', src: 'engines/facilities/relief.js' },
     { frag: 'back pressure exceeds 30 percent of relieving pressure: a balanced-bellows valve needs its chart Kb (API 520 Fig. 30), typed here', src: 'engines/facilities/relief.js' },
     { frag: 'viscosity correction below 0.5: this service is far off the certified test envelope; consider a different device', src: 'engines/facilities/relief.js' },
     { frag: 'the viscosity correction did not converge in 40 passes: treat the area as indicative', src: 'engines/facilities/relief.js' },

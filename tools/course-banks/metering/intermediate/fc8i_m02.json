@@ -162,6 +162,6 @@
    "Size on the allowable drop, fit an anti-cavitation trim, and expand the outlet."
   ],
   "answer": 0,
-  "explanation": "The engine's own words are `the outlet is at or below the vapour pressure: this service is FLASHING, not cavitating, and an anti-cavitation trim will not help it. Size for two-phase flow and use hardened trim with an expanded outlet`."
+  "explanation": "The engine's own words are `the outlet is at or below the vapour pressure: this service is FLASHING, and an anti-cavitation trim will not help a flashing service. Size for two-phase flow and use hardened trim with an expanded outlet`."
  }
 ]

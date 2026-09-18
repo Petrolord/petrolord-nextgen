@@ -18,7 +18,7 @@ Compare the two failure modes carefully, because they are easy to merge. A fit t
 
 The function is gone, nothing replaces it, and the absence is current, permanent and declared. The engine returns `regionProvided` false and `materialGuidanceProvided` false today and will keep doing so, so a caller cannot read the gap as an unset property. Reading this as something the engine might get back is a misreading of what was decided.
 
-The absence is proved three ways and each is a separate check. The region function is not exported, so asking for its type gives undefined. None of the three material guidance strings and neither standard name appears anywhere in the 775 lines of the engine source. And no returned string anywhere in three whole screenings names either standard.
+The absence is proved three ways and each is a separate check. The region function is not exported, so asking for its type gives undefined. None of the three material guidance strings and neither standard name appears anywhere in the 783 lines of the engine source. And no returned string anywhere in three whole screenings names either standard.
 
 The threshold value the screen still uses stayed exactly where it was, at 0.003500000000 bar. Changing a live number without a source would have been the same mistake with the sign flipped, so the engine keeps the number, declares it held in a field, and prints it in both units so nobody has to convert.
 

@@ -112,7 +112,7 @@ q(0, "The engine's flashing message carries three separate instructions. What ar
  ["Size for two-phase flow, fit a multistage trim, and raise the downstream pressure.",
   "Derate the coefficient, fit hardened trim, and recheck the service at the turndown case.",
   "Size on the allowable drop, fit an anti-cavitation trim, and expand the outlet."],
- "The engine's own words are `the outlet is at or below the vapour pressure: this service is FLASHING, not cavitating, and an anti-cavitation trim will not help it. Size for two-phase flow and use hardened trim with an expanded outlet`.")
+ "The engine's own words are `the outlet is at or below the vapour pressure: this service is FLASHING, and an anti-cavitation trim will not help a flashing service. Size for two-phase flow and use hardened trim with an expanded outlet`.")
 
 emit(Q, '/root/wt-fc8-nextgen/tools/course-banks/metering/intermediate/fc8i_m02.json', label='fc8i_m02', expect_n=15)
 finish()

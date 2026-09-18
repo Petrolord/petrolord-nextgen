@@ -140,7 +140,7 @@
    "That the rows are the engine's own defaults and can be replaced by a project's stated figures, which is how a certified vendor figure is handled elsewhere in this course."
   ],
   "answer": 2,
-  "explanation": "The engine's own words are `these are table values, not a calculation: they depend on the fitting and the beta, and a flow conditioner shortens them substantially`."
+  "explanation": "The engine's own words are `these are table values and nothing here calculates them: they depend on the fitting and the beta, and a flow conditioner shortens them substantially`."
  },
  {
   "prompt": "The straight-run function reports one upstream fitting it refuses to answer for. What tree was that counted over and what rule decided it?",

@@ -82,7 +82,7 @@ export default {
   pinned: [
     { frag: 'Btu that one horsepower-hour is: that driver would be more than', src: 'engines/facilities/compression.js' },
     { frag: 'F: compression raises the temperature of a gas, so no stage count can meet this limit', src: 'engines/facilities/compression.js' },
-    { frag: 'F: the valves and the lube oil become the limit, not the thermodynamics', src: 'engines/facilities/compression.js' },
+    { frag: 'F: at this temperature the valves and the lube oil set the limit, ahead of the thermodynamics', src: 'engines/facilities/compression.js' },
     { frag: 'a stage needs a compression ratio above', src: 'engines/facilities/compression.js' },
     { frag: 'a stage needs a positive gas gravity', src: 'engines/facilities/compression.js' },
     { frag: 'a stage needs a positive rate', src: 'engines/facilities/compression.js' },
@@ -111,7 +111,7 @@ export default {
     { frag: 'both a pump curve and a system curve are needed', src: 'engines/facilities/pumps.js' },
     { frag: 'ft: acceptable only with vendor agreement and a stable suction', src: 'engines/facilities/pumps.js' },
     { frag: 'gpm: raise the search limit or check the system curve', src: 'engines/facilities/pumps.js' },
-    { frag: 'is outside the published correlation: this service needs a positive-displacement pump or vendor viscous test data, not a corrected centrifugal curve', src: 'engines/facilities/pumps.js' },
+    { frag: 'is outside the published correlation, so a corrected centrifugal curve cannot be used here: this service needs a positive-displacement pump or vendor viscous test data', src: 'engines/facilities/pumps.js' },
     { frag: 'motor efficiency must be greater than', src: 'engines/facilities/pumps.js' },
     { frag: 'parallel operation needs a pump curve and a whole number of machines, at least one', src: 'engines/facilities/pumps.js' },
     { frag: 'power needs a positive flow, head and specific gravity', src: 'engines/facilities/pumps.js' },

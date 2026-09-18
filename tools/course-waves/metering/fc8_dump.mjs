@@ -906,7 +906,7 @@ w(`   flashing                                   ${rpad(String(flashing.flashing
 w(`   regime                                     ${rpad(flashing.regime, 20)}   returned`);
 w(`   coefficient                                ${rpad(n(flashing.cv, 'cv'), 20)}   returned`);
 w();
-quoted(pin('the flashing warning', flashing.warning, 'an anti-cavitation trim will not help it'));
+quoted(pin('the flashing warning', flashing.warning, 'an anti-cavitation trim will not help a flashing service'));
 w();
 const flashEdge = bisect(S.BELEMA.pvPsia + 20, 1, (p2) => {
   const r = V.liquidValve({
@@ -1124,7 +1124,7 @@ w();
 w(`   the pressure ratio bands the engine exports              moderate ${n(V.NOISE_RATIO_BANDS.moderate, 'ratio')}, high ${n(V.NOISE_RATIO_BANDS.high, 'ratio')}, severe ${n(V.NOISE_RATIO_BANDS.severe, 'ratio')}`);
 w(`   the stream power bands the engine exports                quiet ${n(V.NOISE_POWER_BANDS.quietKw, 'ratio')} kW, loud ${n(V.NOISE_POWER_BANDS.loudKw, 'ratio')} kW`);
 w();
-quoted(pin('the noise screening note', noiseRows[0].note, 'Use this to know whether to ask the question'));
+quoted(pin('the noise screening note', noiseRows[0].note, 'Use this to decide whether that method is needed'));
 w();
 refusal('noiseIndication with no outlet pressure', V.noiseIndication({
   p1Psia: 600, p2Psia: 0, qScfh: 1000, gasSg: 0.65, tF: 80,

@@ -80,9 +80,9 @@ digest_for() {
   case $1 in
     20260923_fc3_rotating_course                ) echo 69e077643033279a61046c287469eab2cdc1372f4ce0ce94afe14a71a325a50d ;;
     20260923_fc3_rotating_beginner_deep         ) echo 1ec3cc7916c1a7c436c32370acd8a3a41309b8019cdf2152997146db04fb8011 ;;
-    20260923_fc3_rotating_intermediate_deep     ) echo 853bc1cb9e1d83157ca41fe8cf05dbc767cbc074602d3659403ddea0bc7a7978 ;;
+    20260923_fc3_rotating_intermediate_deep     ) echo 7ce271fb0c1111193af951509db575839306d11afd84dbce96025d1e77b1c579 ;;
     20260923_fc3_rotating_advanced_deep         ) echo de1963630f2c9d9b44ec6a593f6e7e4a5c9269a3c123507ff2b06df63bd42447 ;;
-    20260923_fc3_rotating_go_live               ) echo acf3fc7182e64a0e28aa0aa4c145d8fb3d44e24c8dbf30ffd21618aa3ed8fed6 ;;
+    20260923_fc3_rotating_go_live               ) echo e7b4c45e5d8469780748ab463b195e440e2676799663dce3218915cdf18298f3 ;;
     *) echo UNPINNED ;;
   esac
 }

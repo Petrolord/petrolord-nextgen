@@ -909,21 +909,18 @@ const CONTRASTIVE = /,\s+not\s+\w/;
 const breaches = (s) => CONTRASTIVE.test(s) || s.includes(EM) || s.includes(EN) || / -- /.test(s);
 
 /**
- * THE TWO LIVE ENGINE STRINGS THAT BREACH THE OWNER COPY RULE, exempt BY EXACT
- * STRING and PINNED to the vendored engine.
+ * THE TWO ENGINE MESSAGES THE ENGINES SWEEP RECAST, carried by exact string and
+ * PINNED to the vendored engine.
  *
- * A panel that displays an engine message displays whatever the engine wrote,
- * copy rule included, and editing it here would desync the quote from the engine
- * it is supposed to reproduce. So these two are DEFERRED to a programme-wide
- * engines sweep rather than failed, exactly as FC5 deferred its two. The exemption
- * is the exact substring and nothing wider, each one is asserted to still be in
- * the engine source, and a DEAD EXEMPTION FAILS: an exemption that no longer
- * matches anything the lab returns is an exemption hiding nothing, and it has to
- * go rather than sit there widening the hole.
+ * A panel that displays an engine message displays whatever the engine wrote.
+ * Both of these now meet the owner copy rule, so nothing is exempt from it. They
+ * stay listed so the sweep below is shown to cover them: each must still be a
+ * string the lab returns and a string in the engine source, and a row that
+ * matches nothing FAILS.
  */
-const COPY_RULE_EXEMPTIONS = [
-  'a 1-2 shell exchanger is rated on the counter-current log mean multiplied by F; this is the log mean, not the corrected driving force',
-  'This is a capability, not a delivered duty:',
+const RECAST_ENGINE_STRINGS = [
+  'a 1-2 shell exchanger is rated on the counter-current log mean multiplied by F; this is the uncorrected log mean, before F is applied',
+  'This is a capability that the plant may never draw on:',
 ];
 
 describe('THE OWNER COPY RULE: no em dash, no en dash and no contrastive', () => {
@@ -943,27 +940,24 @@ describe('THE OWNER COPY RULE: no em dash, no en dash and no contrastive', () =>
     expect(breaches('a clean sentence that says what it means')).toBe(false);
   });
 
-  it('every string the lab hands a panel obeys it, except the TWO exempt engine strings', () => {
+  it('every string the lab hands a panel obeys it, with no exemption', () => {
     const strings = stringsIn(teachingSurface());
     expect(strings.length, 'the lab returns almost no strings, so this sweep is vacuous').toBeGreaterThanOrEqual(80);
     const offenders = strings.filter(([, s]) => breaches(s));
-    const unexcused = offenders.filter(([, s]) => !COPY_RULE_EXEMPTIONS.some((ex) => s.includes(ex)));
-    expect(unexcused.map(([p, s]) => `${p}: ${s}`), 'a string a panel displays breaches the copy rule and is not exempt').toEqual([]);
-    expect(offenders.length, 'nothing breached, so the exemption list is doing nothing').toBeGreaterThan(0);
+    expect(offenders.map(([p, s]) => `${p}: ${s}`), 'a string a panel displays breaches the copy rule').toEqual([]);
   });
 
-  it('A DEAD EXEMPTION FAILS: each exemption still matches a string the lab returns', () => {
+  it('the TWO recast engine strings are returned by the lab, are the engine\'s, and obey the rule', () => {
     const strings = stringsIn(teachingSurface()).map(([, s]) => s);
-    expect(COPY_RULE_EXEMPTIONS.length, 'the exemption list has been widened past the two engine strings').toBe(2);
-    COPY_RULE_EXEMPTIONS.forEach((ex) => {
+    expect(RECAST_ENGINE_STRINGS.length).toBe(2);
+    RECAST_ENGINE_STRINGS.forEach((ex) => {
       const matched = strings.filter((s) => s.includes(ex));
-      expect(matched.length, `the exemption "${ex}" matches nothing the lab returns any more and must be removed`)
+      expect(matched.length, `"${ex}" matches nothing the lab returns any more and must be removed`)
         .toBeGreaterThan(0);
-      // And each one still breaches, so it is an exemption rather than dead weight.
-      expect(breaches(ex) || matched.some((s) => breaches(s)), `"${ex}" does not breach anything`).toBe(true);
+      expect(matched.some((s) => breaches(s)), `a string carrying "${ex}" breaches the copy rule`).toBe(false);
       // PINNED: the string is the engine's, verbatim. An upstream rewording turns
-      // this red rather than leaving a stale quote exempt.
-      expect(ENGINE_SOURCE, `the exemption "${ex}" is no longer in the vendored engine`).toContain(ex);
+      // this red rather than leaving a stale quote in place.
+      expect(ENGINE_SOURCE, `"${ex}" is no longer in the vendored engine`).toContain(ex);
     });
   });
 });
@@ -1086,7 +1080,7 @@ describe('THE PROSE SWEEP: the lab\'s and the panels\' own comments', () => {
     // quotes an engine string inherits whatever the engine wrote, so an upstream
     // edit must turn this red rather than leave a stale quote reading as current.
     const quoted = [
-      ...COPY_RULE_EXEMPTIONS,
+      ...RECAST_ENGINE_STRINGS,
       'HEATING form of Dittus-Boelter',
       'outside tube surface (do)',
       'fCorrection: null',

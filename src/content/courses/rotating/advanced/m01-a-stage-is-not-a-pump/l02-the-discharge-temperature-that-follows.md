@@ -28,7 +28,7 @@ Across those seven rows the discharge pressure, the temperature, the head and th
 
 Ask the same stage against four different stated limits and the discharge is 333.5954 degF on every one of them. At 200.0000, 250.0000 and 300.0000 degF the return carries a warning and at 400.0000 degF it carries none. The limit is a limit and it is not an input to the thermodynamics, which is why the temperature does not move.
 
-The message names the figure the caller typed: "discharge at 333.6 F is above the stated limit of 300.0 F: the valves and the lube oil become the limit, not the thermodynamics". That is the engine's own sentence, and it points at the right thing. What fails first at temperature is the valve material and the lube oil, and the gas is perfectly happy.
+The message names the figure the caller typed: "discharge at 333.6 F is above the stated limit of 300.0 F: at this temperature the valves and the lube oil set the limit, ahead of the thermodynamics". That is the engine's own sentence, and it points at the right thing. What fails first at temperature is the valve material and the lube oil, and the gas is perfectly happy.
 
 ## The default is measured, and it is held
 

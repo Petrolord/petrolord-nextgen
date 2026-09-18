@@ -70,7 +70,7 @@ q(0, "On this tank one course is governed by the hydrostatic test and four by th
  "Both counts are taken over the same courses array, and the rule is that a course counts when the engine returns that governing word, which is what tells the two apart.")
 
 q(2, "The engine writes a note wherever the water test decides a course. Which sentence is it?",
- "`the water test governs this course, not the product: a light product does not stress the shell as hard as the water it will be tested with, and designing for the product alone would under-thickness it`",
+ "`the water test governs this course: a light product does not stress the shell as hard as the water it will be tested with, and designing for the product alone would under-thickness it`",
  ["A note saying that the product design thickness has been superseded by a test value and that the test value is the one to procure plate against, with the design figure retained beside it for reference on any later change of service.",
   "A note saying that the hydrostatic test head is taken from the design liquid level and that a tank tested to a different level has to be re-run before the thickness is used.",
   "A note saying that the water test is the governing case on every tank below the diameter at which the variable design point method takes over from the one-foot method."],

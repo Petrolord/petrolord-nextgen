@@ -143,7 +143,7 @@
   "explanation": "The warning names the efficiency correction and says what a fluid this viscous needs. The figures are still the arithmetic the method gives."
  },
  {
-  "prompt": "At 9000.000000 cSt, where B is 40.385733873, the engine says \"B above 40 is outside the published correlation: this service needs a positive-displacement pump or vendor viscous test data, not a corrected centrifugal curve\". What is the trap on that row?",
+  "prompt": "At 9000.000000 cSt, where B is 40.385733873, the engine says \"B above 40 is outside the published correlation, so a corrected centrifugal curve cannot be used here: this service needs a positive-displacement pump or vendor viscous test data\". What is the trap on that row?",
   "options": [
    "A caller reading only the numbers gets a refusal where the other rows carry figures, so the row looks like a bug.",
    "The corrected flow of 551.907863 gpm is returned at the catalogue head, so the pair no longer describes one operating point.",

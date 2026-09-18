@@ -2,7 +2,7 @@
 # Temperatures, log means, areas, overall coefficients, film coefficients, diameters, percentages and dimensionless groups print to six decimals; duties, capacity rates and UA in Btu an hour to four; resistances in hr.ft2.F per Btu to nine; tube and shell counts are whole numbers.
 # Field units throughout: Btu an hour, degF, lb an hour, ft2, Btu an hour per ft2 per degF, hr.ft2.F per Btu, inches, psia, inches of water, brake horsepower.
 # Nothing here is read from a clock or a random number, so every line reproduces.
-# Built against engines e4377b3, vendored sha-identical. Every figure below is that engine's own answer at the inputs named beside it, except a line that says golden or derived.
+# Built against engines 5cbdca5, vendored sha-identical. Every figure below is that engine's own answer at the inputs named beside it, except a line that says golden or derived.
 # A GOLDEN LINE IS NOT THE ENGINE ANSWERING. The published case file is written by the oracle, which reaches each answer by a different route, so a golden figure beside an engine figure is two methods agreeing to as many digits as the two of them agree to.
 
 # SECTION 1: What this engine rates and sizes, and what it refuses (owned by Associate m01)
@@ -91,7 +91,7 @@ And the arrangement itself, read three ways:
 - The published case with the closest two ends is the one where the two means come nearest: end differences of 280.000000 and 280.000000 degF.
 - Drive the two ends to the same number and the engine says so rather than dividing by a logarithm of one: log mean 280.000000 degF with equal ends reported as yes.
 - A 1-2 shell exchanger asks for the log mean too, and gets the counter-current one with a note attached. The note is the point: that figure is not the corrected driving force, and the correction is the next section.
-- On the studio case: log mean 130.064846 degF, basis reported as "counter", note "a 1-2 shell exchanger is rated on the counter-current log mean multiplied by F; this is the log mean, not the corrected driving force".
+- On the studio case: log mean 130.064846 degF, basis reported as "counter", note "a 1-2 shell exchanger is rated on the counter-current log mean multiplied by F; this is the uncorrected log mean, before F is applied".
 - The note rides along as a key of its own, so the three arrangements do not answer with the same number of keys: the counter reading carries 5, the parallel reading 5 and the shell reading 6 (counted here by reading the three answers).
 - REFUSED, a log mean asked for on three terminals: the log mean needs all four terminal temperatures; tcOut was not given
 - REFUSED, a log mean across streams that have crossed: temperature cross: in counter flow the two ends of this exchanger have driving forces of 0.00 and 0.00 F, and one of them is not positive.  [evidence beside the message: dt1 0.000000, dt2 0.000000]
@@ -251,7 +251,7 @@ ORON, the same chain on a four-pass bundle:
 | 0.550000 | 0.800000 | 4 | 0.219343 | 0.989954 | 0.989954 |
 
 - THE BOUND IS DECLARED BY THIS MODULE AND IS NOT A PUBLISHED LIMIT, and the refusal says so. It exists because F climbs toward one as shells are added, so an unbounded box makes any duty reachable by typing a bigger number.
-- REFUSED, 7 shells in series, one past the declared bound: 7 shell passes in series is outside the declared bound of 1 to 6. This bound is a design limit declared by this module, not a published one, and it exists because F approaches 1 as the shell count grows, so an unbounded box makes any duty reachable by typing.
+- REFUSED, 7 shells in series, one past the declared bound: 7 shell passes in series is outside the declared bound of 1 to 6. This bound is a design limit this module declares for itself, and no publication sets it. It exists because F approaches 1 as the shell count grows, so an unbounded box makes any duty reachable by typing.
 - REFUSED, 2.400000 shells, which is not a whole number of shells: shells come in whole numbers and 2.4 is not one. The engine will not round for you: 2 and 3 shells give materially different F. State one.
 - Read that second refusal again. It names both whole numbers either side and says the engine will not pick one, because 2 and 3 shells give materially different F: 0.800677 against 0.920456.
 
@@ -607,7 +607,7 @@ The ANTAN bay, the same sweep:
 - The air side agrees too: the air capacity rate times the new rise is 18064516.1290 Btu an hour (derived, the design duty over the design rise, times the new rise).
 
 - A COLD DAY IS A CAPABILITY AND NOT A DELIVERED DUTY, and the engine says so in words rather than printing a number above one and leaving it:
-- At 86.000000 degF the bay is labelled "colder than design", the duty fraction is 1.058065, and the note reads: "colder than the design ambient, so the SURFACE can do more than the design duty. This is a capability, not a delivered duty: a plant holding the process at 150 F will throttle or stage the air instead, and the outlet shown is what the bundle would reach wide open."
+- At 86.000000 degF the bay is labelled "colder than design", the duty fraction is 1.058065, and the note reads: "colder than the design ambient, so the SURFACE can do more than the design duty. This is a capability that the plant may never draw on: a plant holding the process at 150 F will throttle or stage the air instead, and the outlet shown is what the bundle would reach wide open."
 - And on the hot side, the note names both numbers that moved: "the design outlet of 150 F is no longer reachable at 110 F ambient: the process leaves at 159.7 F instead, and the air rise falls from 30 to 27.1 F."
 - REFUSED, a check ambient of 260.000000 degF, which is hotter than the process it is meant to cool: at 260 F the air is not colder than the 250 F process inlet, so this cooler has no driving force at all and its duty is zero.
 

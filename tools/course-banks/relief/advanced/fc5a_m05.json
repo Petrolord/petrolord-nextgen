@@ -96,7 +96,7 @@
    "A clamp, since the engine holds the factor at one whenever its branch is not in use."
   ],
   "answer": 0,
-  "explanation": "What makes it teachable rather than confusing is that the engine says so: the call succeeds and attaches `subcritical flow uses F2, not Kb; the typed Kb was ignored`. Silence would have left a user turning a dial and inventing an explanation."
+  "explanation": "What makes it teachable rather than confusing is that the engine says so: the call succeeds and attaches `subcritical flow uses F2 in place of Kb, so the typed Kb was ignored`. Silence would have left a user turning a dial and inventing an explanation."
  },
  {
   "prompt": "The steam superheat factor at 1.000000 gives 0.949984 in2 and at 0.830000 gives 1.144559 in2, a ratio of 1.204819277108 against a factor ratio of 1.204819277108. What does that pair of ratios say?",
@@ -151,7 +151,7 @@
    "A precision error, since a string compared against a boolean resolves differently at different printing precisions."
   ],
   "answer": 0,
-  "explanation": "The string \"false\" is truthy in JavaScript, so the duty would come back on the drained constant with nothing said. The engine's own wording is `adequate drainage must be true or false, not a string`."
+  "explanation": "The string \"false\" is truthy in JavaScript, so the duty would come back on the drained constant with nothing said. The engine's own wording is `adequate drainage must be the boolean true or false`."
  },
  {
   "prompt": "Of the refusals this module can produce, exactly one carries a second key beside `error`. Which, and why does it matter?",

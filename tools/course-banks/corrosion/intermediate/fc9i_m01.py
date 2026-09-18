@@ -21,7 +21,7 @@ q(1, "Select oil wet and the wetting factor is 0.000000. What does the engine th
  ["It issues both alongside the zero, since a zero is a perfectly good number to label and to divide into.",
   "It refuses the whole screening outright.",
   "It issues the band label and withholds only the life."],
- "The arithmetic ran, so this is a withholding rather than a refusal. The engine's own words are that the rate is zero because that was assumed and not because it was calculated, and that an unbounded life off a dropdown is the strongest reassurance on the screen arriving from the weakest input.")
+ "The arithmetic ran, so this is a withholding rather than a refusal. The engine's own words are that the rate is zero by assumption, and nothing was calculated to reach it, and that an unbounded life off a dropdown is the strongest reassurance on the screen arriving from the weakest input.")
 
 q(2, "On an oil-wet case, what does the engine report for the effective corrosion inhibition?",
  "An absence rather than a figure, reported as null.",

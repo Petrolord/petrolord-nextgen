@@ -8,13 +8,12 @@ The digest is swept because every lesson is written from it, so a contrastive
 in the digest becomes a contrastive in a lesson. structure.py is NOT swept for
 prose: its own gate lines have to contain the characters this gate looks for.
 
-TWO STRINGS THE ENGINE ITSELF OWNS. The vendored engine's own refusal and
-warning text carries two contrastives, and the digest quotes those messages
-VERBATIM because a digest that paraphrases an error message teaches a message
-the learner will never see. They are exempted BY EXACT STRING in ENGINE_TEXT
-below, with the finding recorded, and a dead exemption fails this gate. Every
-writer brief in this wave says: quote the message inside backticks as the
-engine's own words, and never write a contrastive of your own.
+ENGINE TEXT. Every engine message the digest quotes meets the owner copy rule,
+so ENGINE_TEXT below exempts nothing. An exemption added there is BY EXACT
+STRING, and a DEAD exemption fails this gate: a row that clears nothing is a
+claim about work never done. Every writer brief in this wave says: quote the
+message inside backticks as the engine's own words, and never write a
+contrastive of your own.
 
 REFUSALS. Exit 2 if the digest is missing, if fewer than 500 lines were read,
 or if the course directory exists with lesson files in it and not one was
@@ -28,17 +27,7 @@ COURSE = os.environ.get('FC5_COURSE', '/root/wt-fc5-nextgen/src/content/courses/
 DASHES = re.compile('[—–]')
 CONTRASTIVE = re.compile(r',\s+not\s+\w')
 
-# Verbatim engine text the digest quotes. Each is the engine's OWN words.
-ENGINE_TEXT = {
-    'adequate drainage must be true or false, not a string':
-        "fireHeatInput's refusal when the drainage answer arrives as a string. "
-        "The digest quotes it verbatim because a learner who types a string sees "
-        "exactly these words. FINDING against the repaired engine: the message "
-        "breaches the owner copy rule and should be recast upstream.",
-    'subcritical flow uses F2, not Kb; the typed Kb was ignored':
-        "gasVaporArea's warning when a balanced-bellows factor is typed in the "
-        "subcritical branch. Same reason, same FINDING.",
-}
+ENGINE_TEXT = {}
 
 
 def sweep(label, text):

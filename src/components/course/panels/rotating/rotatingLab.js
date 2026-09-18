@@ -11,7 +11,7 @@
 // Designer) or engines/production/gasProperties.js (the Sutton
 // pseudo-criticals, the DAK z factor, the Rankine offset, the molecular weight
 // of air and the universal gas constant), as repaired in FC3-0 and vendored at
-// engines main 4fa37e6.
+// engines 5cbdca5.
 //
 // NOTHING IN THIS FILE COMPUTES A ROTATING-EQUIPMENT QUANTITY. Where a reader
 // carries a value the teaching digest calls "derived", it is the digest's own

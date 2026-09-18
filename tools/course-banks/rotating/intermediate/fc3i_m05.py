@@ -99,7 +99,7 @@ q(1, "At 850.000000 cSt the engine attaches \"the efficiency correction is 45.7 
   "Returns the row and clears the efficiency factor, since 0.456934987 is the figure the message has just disclaimed."],
  "The warning names the efficiency correction and says what a fluid this viscous needs. The figures are still the arithmetic the method gives.")
 
-q(3, "At 9000.000000 cSt, where B is 40.385733873, the engine says \"B above 40 is outside the published correlation: this service needs a positive-displacement pump or vendor viscous test data, not a corrected centrifugal curve\". What is the trap on that row?",
+q(3, "At 9000.000000 cSt, where B is 40.385733873, the engine says \"B above 40 is outside the published correlation, so a corrected centrifugal curve cannot be used here: this service needs a positive-displacement pump or vendor viscous test data\". What is the trap on that row?",
  "A caller reading only the numbers gets a corrected curve for a service the method has just disclaimed.",
  ["A caller reading only the numbers gets a refusal where the other rows carry figures, so the row looks like a bug.",
   "The corrected flow of 551.907863 gpm is returned at the catalogue head, so the pair no longer describes one operating point.",

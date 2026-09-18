@@ -9,7 +9,7 @@
 // Usage:  sh /root/fc-wip-rotating/build_digest.sh > digest.tmp \
 //           && mv digest.tmp /root/fc-wip-rotating/digest.txt
 //
-// Engines, vendored at engines main 4fa37e6, which is the FC3-0 repair wave
+// Engines, vendored at engines 5cbdca5, which carries the FC3-0 repair wave (4fa37e6)
 // (engines PR #197) on top of the 709172f this course's foundation phase was
 // first built against:
 // engines/facilities/pumps.js and engines/facilities/compression.js, over
@@ -125,7 +125,7 @@ w('# FC3 Rotating Equipment. Teaching digest.');
 w('# Pump work prints to six decimals (gpm, ft, psi, hp, kW, ratios, percentages); gas work to four (ft lbf per lbm, Btu per hr, acfm, degF); exponents, small factors and MMscfd to nine; counts are whole numbers.');
 w('# Field units: gpm and feet of head for pumps, MMscfd and psia and degF for gas, horsepower for both.');
 w(`# Two engines: engines/facilities/pumps.js (${Object.keys(P).length} exports) and engines/facilities/compression.js (${Object.keys(C).length} exports), over engines/production/gasProperties.js. The export counts are read off the modules themselves.`);
-w('# The engines are vendored at engines main 4fa37e6, which is the FC3-0 repair wave. compression.js reads its gas constant, its molecular weight of air and its Rankine offset from engines/production/gasProperties.js, its compressibility validity window from engines/facilities/separatorSizing.js, and its two power packagings from lib/units/fieldUnits.js, which pumps.js also reads.');
+w('# The engines are vendored at engines 5cbdca5, which carries the FC3-0 repair wave (4fa37e6) and the engines copy sweep (PR #214). compression.js reads its gas constant, its molecular weight of air and its Rankine offset from engines/production/gasProperties.js, its compressibility validity window from engines/facilities/separatorSizing.js, and its two power packagings from lib/units/fieldUnits.js, which pumps.js also reads.');
 w('# Nothing here is read from a clock or a random number, so every line reproduces.');
 w();
 

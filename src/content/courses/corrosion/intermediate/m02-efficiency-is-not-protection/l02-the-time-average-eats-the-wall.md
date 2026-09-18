@@ -17,7 +17,7 @@ is 4.800000 times what the datasheet number would give. The rate on that row is
 
 > a 95 percent inhibitor at 80 percent availability gives 76.0 percent
 > effective protection, which is 4.80 times the metal loss of the datasheet
-> number: availability, not efficiency, is what limits it
+> number: availability is what limits it
 
 That last clause is the lesson of the module. Availability is what limits it.
 Efficiency does not, once the chemical is good.

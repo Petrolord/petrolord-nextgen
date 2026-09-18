@@ -48,7 +48,7 @@ loss ratio directly:
 
 > a 90 percent inhibitor at 95 percent availability gives 85.5 percent
 > effective protection, which is 1.45 times the metal loss of the datasheet
-> number: availability, not efficiency, is what limits it
+> number: availability is what limits it
 
 ## Two columns, two audiences
 

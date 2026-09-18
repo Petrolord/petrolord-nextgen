@@ -11,7 +11,7 @@
 // Build THROUGH A TEMP FILE. A gate that reads a half written digest finds
 // no literals and clears everything.
 //
-// Engine, vendored sha-identical with engines 3bac13cd (the FC5-0 repair):
+// Engine, vendored sha-identical with engines 5cbdca5 (carrying the FC5-0 repair, 3bac13cd):
 // engines/facilities/relief.js. It imports nothing; the jest suite beside it
 // imports spacing.js, which is why the vendoring closure is seven paths.
 //
@@ -624,7 +624,7 @@ w('# THE GRADED QUANTITY CLASSES, one per capstone answer key, so a grader and a
 w('# Those eighteen keys are the names of the ANSWER FIELDS and nothing else. No condition of any capstone and no graded value appears anywhere in this digest, and no lesson or question may name a capstone plant.');
 w('# Field units: API 520 USC as this engine speaks them. Flow lb/hr for gas and steam and gpm for liquid, pressure psia except where a row says psig, temperature degR except where a row says degF, area in2, wetted area ft2, duty Btu/hr, velocity ft/s, drum length ft, droplet micron, heat release kW, distance m, radiant flux kW/m2, blowdown time s, mass lb.');
 w('# Nothing here is read from a clock, a random number or a locale, so every line reproduces. Built with TZ pinned to UTC.');
-w('# Built against engines 3bac13cd, vendored sha-identical over a closure of seven paths. Every figure below is that engine own answer at the inputs named beside it.');
+w('# Built against engines 5cbdca5, vendored sha-identical over a closure of seven paths. Every figure below is that engine own answer at the inputs named beside it.');
 w('# WHERE A CONSTANT IS NOT EXPORTED, IT IS MEASURED. This digest never types a number the engine keeps to itself: it asks the engine a question whose answer is that constant and nothing else, and says which question.');
 w('# EVERY LABEL BELOW IS ASSERTED AGAINST WHAT THE CALL DID. A row labelled a refusal ran a call that refused, a row labelled critical ran a call the engine reported critical, and a row labelled converged ran a loop the engine reported converged. The build fails and writes nothing if any label and its call disagree.');
 w('# THE SIX TEACHING STREAMS: ORUBIRI a gas relief case, AKASO a viscous liquid one, TEBIDABA a steam one, BENISEDE a vessel in a pool fire, ODIDI a flare knockout drum, AFIESERE a vessel depressuring into a flare. The three capstones run different plants entirely.');

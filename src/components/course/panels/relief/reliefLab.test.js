@@ -1547,24 +1547,22 @@ describe('THE HELD GATE: nine not derived here, six of them held, two of those s
 });
 
 // ---------------------------------------------------------------------------
-// THE COPY RULE. No em dash, no en dash, no contrastive, with TWO engine
-// messages exempted BY EXACT STRING and a dead exemption FAILING.
+// THE COPY RULE. No em dash, no en dash and no contrastive, with no exemption.
 // ---------------------------------------------------------------------------
 
 /**
- * The two engine messages that breach the contrastive rule VERBATIM. They are
- * the engine's own wording, they are shown rather than retyped, and they are
- * exempted BY EXACT STRING. The exemption is not widened to a pattern, and a
- * row here that matches nothing FAILS, because an exemption for a string that
- * is no longer shown is a row claiming work it never did.
+ * The two engine messages the engines sweep recast. Both now meet the rule, so
+ * nothing is exempt from it. They stay listed so the sweep is shown to cover
+ * them: each must still be a message the engine returns and a panel shows, and
+ * a row that matches nothing FAILS.
  */
-const CONTRASTIVE_EXEMPTIONS = [
-  'adequate drainage must be true or false, not a string',
-  'subcritical flow uses F2, not Kb; the typed Kb was ignored',
+const RECAST_ENGINE_MESSAGES = [
+  'adequate drainage must be the boolean true or false',
+  'subcritical flow uses F2 in place of Kb, so the typed Kb was ignored',
 ];
 const CONTRASTIVE_RE = /[,–—]\s*not\s+\S/g;
 
-describe('THE COPY RULE: no dashes, and no contrastive outside two exact engine strings', () => {
+describe('THE COPY RULE: no dashes and no contrastive, in the sources or in anything the engine returns', () => {
   it('no em dash and no en dash in the lab, in any panel or on the course page', () => {
     COPY_SOURCES().forEach(([file, text]) => {
       expect(text, `${file} carries an em dash or an en dash`).not.toMatch(/[–—]/);
@@ -1579,25 +1577,24 @@ describe('THE COPY RULE: no dashes, and no contrastive outside two exact engine 
     });
   });
 
-  it('the TWO exempted engine messages are the only contrastives shown, and each one is live', () => {
+  it('no engine message a panel shows carries a contrastive, and the two recast ones are live', () => {
     const shown = [
       ...S.refusalContract.rows.map((r) => r.error),
       ...S.refusalContract.warnings.map((w) => w.warning),
       ...S.refusalContract.notes.map((nt) => nt.note).filter((x) => x !== null),
     ];
-    const breaching = [...new Set(shown.filter((m) => CONTRASTIVE_RE.test(m)))];
-    expect(breaching.sort()).toEqual([...CONTRASTIVE_EXEMPTIONS].sort());
-    // A DEAD EXEMPTION FAILS: each exempted string must actually be one the
-    // engine returns and a panel shows.
-    CONTRASTIVE_EXEMPTIONS.forEach((ex) => {
-      expect(shown, `the exemption for "${ex}" matches nothing the engine returns, so it clears nothing`)
-        .toContain(ex);
+    expect(shown.length, 'the refusal contract returned no messages, so this sweep is vacuous').toBeGreaterThan(40);
+    const breaching = [...new Set(shown.filter((m) => m.match(CONTRASTIVE_RE)))];
+    expect(breaching, 'an engine message a panel shows carries a contrastive').toEqual([]);
+    // A DEAD ROW FAILS: each recast message must actually be one the engine
+    // returns and a panel shows.
+    RECAST_ENGINE_MESSAGES.forEach((ex) => {
+      expect(shown, `"${ex}" matches nothing the engine returns, so the row covers nothing`).toContain(ex);
     });
-    // CONTROL: the matcher really does fire on the shape it is exempting.
+    // CONTROL: the matcher really does fire on the shape it forbids.
     expect('a value must be true or false, not a string'.match(CONTRASTIVE_RE)).not.toBeNull();
     expect('a value must be true or false rather than a string'.match(CONTRASTIVE_RE)).toBeNull();
-    console.log(`[relief copy rule] ${breaching.length} contrastives shown, both engine strings, `
-      + 'both exemptions live, and neither widened to a pattern');
+    console.log(`[relief copy rule] ${shown.length} engine messages shown, none a contrastive, both recast messages live`);
   });
 });
 

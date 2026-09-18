@@ -97,20 +97,12 @@ CLEARED.forEach((re) => {
 
 /* -------------------------------------------------------- ENGINE PINS */
 
-// Four engine messages the digest quotes carry an "X, not Y" contrastive. The
-// digest quotes them VERBATIM, because a digest that paraphrases a message
-// teaches a sentence the learner will never see on the screen. They are DEFERRED
-// rather than failed, and each is PINNED to the module it came from, so an
-// upstream engine edit turns this gate red rather than leaving a stale quote in
-// place. EACH IS ALSO A FINDING AGAINST THE ENGINE: the message breaches the
-// owner copy rule and should be recast upstream, in the engines repository,
-// where the digest quote will follow it.
-export const pinned = [
-  { frag: 'these are table values, not a calculation', src: 'engines/facilities/metering.js' },
-  { frag: 'stated screen, not a value read from a', src: 'engines/facilities/controlValve.js' },
-  { frag: 'whether to ask the question, not to', src: 'engines/facilities/controlValve.js' },
-  { frag: 'the water test governs this course, not the product', src: 'engines/facilities/storageTank.js' },
-];
+// Every engine message the digest quotes meets the owner copy rule, so none is
+// DEFERRED and this list is empty. An entry added here is PINNED to the module
+// it came from, so an upstream engine edit turns this gate red rather than
+// leaving a stale quote in place, and a pinned fragment the digest no longer
+// quotes is refused below as a dead row.
+export const pinned = [];
 pinned.forEach((p) => {
   if (!TEXT.includes(p.frag)) {
     refuse(`the pinned engine fragment "${p.frag}" is not quoted anywhere in the digest, so pinning `

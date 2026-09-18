@@ -18,7 +18,7 @@ The transport term returns not-a-number rather than infinity, and the vendored g
 
 A typed zero CO2 mole fraction is a positive assertion that there is no CO2, so the engine takes its no-CO2 branch, withholds the category and the life, and says what a rate of zero means there:
 
-> no CO2 in the stream, so this CO2 model has nothing to predict. A rate of zero here means the model does not apply, not that the line is not corroding: any corrosion at these conditions is another mechanism.
+> no CO2 in the stream, so this CO2 model has nothing to predict. A rate of zero here means only that the model does not apply, and it says nothing about whether the line is corroding: any corrosion at these conditions is another mechanism.
 
 A blank CO2 box on the same screen is a question the engine cannot answer, and it refuses with a message naming that box. Same branch, two inputs, two entirely different obligations.
 

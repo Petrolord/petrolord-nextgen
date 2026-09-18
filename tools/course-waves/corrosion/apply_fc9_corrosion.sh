@@ -83,10 +83,10 @@ FILES="
 digest_for() {
   case $1 in
     20260925_fc9_corrosion_course           ) echo bfb1a152ac6936f5847c113748b0d3ca8913db5600fad6c27da2a39d547a1031 ;;
-    20260925_fc9_corrosion_beginner_deep    ) echo ef0544ac6ce6cbcb335dd5596b26a0dff3bfb24ff4c389933f7452c3a72cfc17 ;;
-    20260925_fc9_corrosion_intermediate_deep) echo d84d2f7c2e2f95268ead922c0843b5291df4ce651c6d8a11fe194dfa5467feb7 ;;
-    20260925_fc9_corrosion_advanced_deep    ) echo ce1dd8bd1fcfa9ccbbbef1efa7e76125c035855b34736d5896f38dec2626c0fe ;;
-    20260925_fc9_corrosion_go_live          ) echo a818b9f5b1bcf3d753c7504621b362fc5e85fefaf326eff8442acf2b06c4d580 ;;
+    20260925_fc9_corrosion_beginner_deep    ) echo 1a0bce465e99986b6fe73e0d7c4dbc6a12894d76e5959cd65027b7de842ea22f ;;
+    20260925_fc9_corrosion_intermediate_deep) echo c549dcd3af3a9a440c8436147619c354c0e1670afb6affb5632752c07fe22d52 ;;
+    20260925_fc9_corrosion_advanced_deep    ) echo 2509aa15116d461e948924abe7867968b1affc57f1296b5f1206c7f1cbe27911 ;;
+    20260925_fc9_corrosion_go_live          ) echo a5bcf6f500816e932be2fce77738da9ee61087bbec811a994f4c21e7debf91bc ;;
     *) echo UNPINNED ;;
   esac
 }

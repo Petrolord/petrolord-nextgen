@@ -157,7 +157,7 @@ const buildDigest = () => {
   w('# Pump work prints to six decimals (gpm, ft, psi, hp, kW, ratios, percentages); gas work to four (ft lbf per lbm, Btu per hr, acfm, degF); exponents, small factors and MMscfd to nine; counts are whole numbers.');
   w('# Field units: gpm and feet of head for pumps, MMscfd and psia and degF for gas, horsepower for both.');
   w(`# Two engines: engines/facilities/pumps.js (${s1.pumpExports} exports) and engines/facilities/compression.js (${s1.compressionExports} exports), over engines/production/gasProperties.js. The export counts are read off the modules themselves.`);
-  w('# The engines are vendored at engines main 4fa37e6, which is the FC3-0 repair wave. compression.js reads its gas constant, its molecular weight of air and its Rankine offset from engines/production/gasProperties.js, its compressibility validity window from engines/facilities/separatorSizing.js, and its two power packagings from lib/units/fieldUnits.js, which pumps.js also reads.');
+  w('# The engines are vendored at engines 5cbdca5, which carries the FC3-0 repair wave (4fa37e6) and the engines copy sweep (PR #214). compression.js reads its gas constant, its molecular weight of air and its Rankine offset from engines/production/gasProperties.js, its compressibility validity window from engines/facilities/separatorSizing.js, and its two power packagings from lib/units/fieldUnits.js, which pumps.js also reads.');
   w('# Nothing here is read from a clock or a random number, so every line reproduces.');
   w();
 
@@ -1675,8 +1675,8 @@ describe('THE PROSE SWEEP: the lab\'s own comments are swept for claims the code
     // The comments name the engines the lab actually imports.
     ['pumps.js', 'compression.js', 'gasProperties.js'].forEach((m) => expect(comments).toContain(m));
     // And the vintage they are vendored at, which is the one the wave states.
-    expect(comments).toContain('4fa37e6');
-    expect(fs.readFileSync(waveInput(WAVE_NAME, 'wave.json'), 'utf8')).toContain('4fa37e6');
+    expect(comments).toContain('5cbdca5');
+    expect(fs.readFileSync(waveInput(WAVE_NAME, 'wave.json'), 'utf8')).toContain('5cbdca5');
     // No P label anywhere: nothing in this course is a distribution.
     expect(src).not.toMatch(/\bP10\b|\bP50\b|\bP90\b/);
   });
