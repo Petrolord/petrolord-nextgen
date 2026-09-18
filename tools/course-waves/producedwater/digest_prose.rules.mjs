@@ -81,7 +81,7 @@ export default {
   pinned: [
     { frag: 'the oil must be lighter than the water for it to rise', src: 'engines/facilities/producedWater.js' },
     { frag: 'the short-circuit factor F must be positive', src: 'engines/facilities/producedWater.js' },
-    { frag: 'is not a perfect separator, it is an undefined one', src: 'engines/facilities/producedWater.js' },
+    { frag: 'at an F of zero or less the separator is undefined', src: 'engines/facilities/producedWater.js' },
     { frag: 'a turbulence allowance customarily between', src: 'engines/facilities/producedWater.js' },
     { frag: 'the salinity correction in this module is stated to', src: 'engines/facilities/producedWater.js' },
     { frag: 'total dissolved solids cannot be negative', src: 'engines/facilities/producedWater.js' },

@@ -868,7 +868,7 @@
 | wettedAreaFt2 | a negative liquid level | liquid level must be a finite number, zero or more |
 | wettedAreaFt2 | an orientation the engine does not recognise | orientation must be 'horizontal' or 'vertical' |
 | fireHeatInput | a wetted area of zero | fire case needs a positive wetted area |
-| fireHeatInput | a drainage answer given as a string | adequate drainage must be true or false, not a string |
+| fireHeatInput | a drainage answer given as a string | adequate drainage must be the boolean true or false |
 | fireHeatInput | an environment factor of zero | environment factor F must be a number above 0 and no more than 1: a certified coefficient cannot add capacity |
 | fireReliefLoad | a latent heat of zero | relief load needs a positive duty and latent heat |
 | dropoutVelocityFtS | a vapour denser than the liquid | settling needs a positive droplet size, vapor viscosity, and a liquid denser than the vapor |
@@ -898,7 +898,7 @@
 | route | condition (stated) | warning |
 | --- | --- | --- |
 | gasVaporArea | a back pressure above the ratio the chart warning fires at | back pressure exceeds 30 percent of relieving pressure: a balanced-bellows valve needs its chart Kb (API 520 Fig. 30), typed here |
-| gasVaporArea | a typed Kb in the subcritical branch | subcritical flow uses F2, not Kb; the typed Kb was ignored |
+| gasVaporArea | a typed Kb in the subcritical branch | subcritical flow uses F2 in place of Kb, so the typed Kb was ignored |
 | liquidArea | a viscosity far off the certified envelope | viscosity correction below 0.5: this service is far off the certified test envelope; consider a different device |
 | steamArea | a relieving pressure inside the band where the correction enlarges the valve | the Napier correction is below 1.0 between 1500 and 1580.3 psia, so it makes the required area LARGER here; it steps at 1500 psia and returns through 1.0 at 1580.3 psia |
 | fireReliefLoad | a latent heat below the near-critical edge | latent heat below 50 Btu/lb: near-critical fluid, the latent-heat method is breaking down (API 521 c.4.4) |

@@ -7,15 +7,12 @@ lesson body, or in any manifest title. Headings included.
 The digest is swept because every lesson is written from it, so a contrastive in
 the digest becomes a contrastive in a lesson.
 
-FIVE STRINGS THE ENGINES THEMSELVES OWN. The vendored engines' own note and
-refusal text carries five contrastives, and the digest quotes those messages
-VERBATIM, because a digest that paraphrases a message teaches a sentence the
-learner will never see on the screen. They are exempted BY EXACT FRAGMENT in
-ENGINE_TEXT below, with the finding recorded against the engine, and a DEAD
-exemption fails this gate: a row that clears nothing is a claim about work never
-done. Every writer brief in this wave says the same thing: quote the message
-inside backticks as the engine's own words and never write a contrastive of your
-own.
+ENGINE TEXT. Every engine message the digest quotes meets the owner copy rule,
+so ENGINE_TEXT below exempts nothing. An exemption added there is BY EXACT
+STRING, and a DEAD exemption fails this gate: a row that clears nothing is a
+claim about work never done. Every writer brief in this wave says: quote the
+message inside backticks as the engine's own words, and never write a
+contrastive of your own.
 
 A CONTRASTIVE THAT WRAPS IS STILL A CONTRASTIVE. This gate scanned one line at
 a time, so a sentence whose comma landed at the end of a line and whose "not"
@@ -40,32 +37,7 @@ COURSE = os.environ.get('FC8_COURSE', '/root/wt-fc8-nextgen/src/content/courses/
 DASHES = re.compile('[—–]')
 CONTRASTIVE = re.compile(r',\s+not\s+\w')
 
-# Verbatim engine text the digest quotes. Each is the engine's OWN words, and
-# each is a FINDING against the repaired engine: the message breaches the owner
-# copy rule and should be recast upstream.
-ENGINE_TEXT = {
-    'these are table values, not a calculation':
-        "straightRunDiameters' note on every answered row. The digest quotes it verbatim "
-        "because it is the sentence that stops a table value being read as a calculation, "
-        "and a learner running the shipped app sees exactly these words.",
-    "stated screen, not a value read from a":
-        "valveAuthority's thresholdBasis. It is the sentence that tells the reader the "
-        "0.5 and 0.25 boundaries belong to the engine rather than to a standard, which is "
-        "the whole point of printing it.",
-    'whether to ask the question, not to':
-        "noiseIndication's note. It is the sentence that draws the line between a screening "
-        "indication and a prediction, and a paraphrase would blur exactly that line.",
-    'the water test governs this course, not the product':
-        "shellCourse's note when the hydrostatic test governs. It is the one sentence in "
-        "the tank module that names the mistake it exists to prevent, so the exact wording "
-        "is the lesson.",
-    'this service is FLASHING, not cavitating':
-        "liquidValve's note when the outlet sits at or below the vapour pressure. It is the "
-        "sentence that stops a flashing service being treated as a cavitating one, which is "
-        "the difference between hardened trim with an expanded outlet and a trim that buys "
-        "nothing. The exemption is EXACT and CASE SENSITIVE, so a writer's own paraphrase "
-        "of the same shape is still a violation.",
-}
+ENGINE_TEXT = {}
 
 
 def sweep(label, text):

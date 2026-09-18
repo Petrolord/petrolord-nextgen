@@ -90,14 +90,11 @@ const PAST_OK = /read back|read off|read at|read the|the note says|reads back/i;
 const CONTRASTIVE = /,\s+not\s+\w/;
 const EM = String.fromCharCode(0x2014);
 const EN = String.fromCharCode(0x2013);
-// The engine strings this digest quotes that break the copy rule, pinned by the
-// fragment of each that carries no interpolation. Each is asserted to be
-// present in its own module, so an engine edit turns this gate red rather than
-// letting a stale quote pass.
-const PINNED = [
-  { frag: ', not a corrected centrifugal curve', src: 'engines/facilities/pumps.js' },
-  { frag: 'become the limit, not the thermodynamics', src: 'engines/facilities/compression.js' },
-];
+// The engine strings this digest quotes all meet the copy rule, so none is
+// exempted and PINNED is empty. An entry here is pinned by the fragment of the
+// message that carries no interpolation and asserted present in its own module,
+// so an engine edit turns this gate red rather than letting a stale quote pass.
+const PINNED = [];
 const ENGROOT = process.env.FC3_ENGINES || '/root/wt-fc3-nextgen/packages/engines';
 let pinBroken = 0;
 for (const p of PINNED) {
