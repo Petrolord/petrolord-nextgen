@@ -509,5 +509,57 @@
       "fields.json": "cd9195a30660a8ebbfe4d5b84d01aef4e77b33509377cc5469b2c81f356fc88e"
     },
     "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest and its generator, the graded answers and their generator, the precision declaration, wave.json, the three tier audits, the three migration headers, the course, go-live and seed generators, the SQL verifier, the scratch database and the dry run against it, and the owner's apply script. The kit became \"full\" with the seed ladder."
+  },
+  "riskchange": {
+    "course": "AS-RC",
+    "live": "/root/as-wip-riskchange",
+    "kit": "full",
+    "kitNote": "The mirror carries every file the wave is rebuilt and gated from: the digest and its generator with the teaching records, the eighteen graded answers with their generator and capstone records, the precision declaration, wave.json, the structure and scaffold, the three migration headers, the oracle bridge with both call ledgers it replays, every gate (as-of, reproducibility across four zones, leak, collision, promptleak, discriminate, copy rule), the prose rules and the vendoring closure and ledger scripts, and with the seed ladder the course, go-live and seed generators, the SQL verifier, the scratch database, the dry run with its negative controls and the owner's apply script.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "riskchange_dump.mjs",
+      "riskchange_fields.mjs",
+      "riskchange_capstone.mjs",
+      "riskchange_fields_capstone.mjs",
+      "structure.py",
+      "scaffold.py",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "source_prose.rules.mjs",
+      "oracle_bridge.py",
+      "calls.json",
+      "capstone_calls.json",
+      "discriminate.mjs",
+      "gate_asof.mjs",
+      "gate_repro.sh",
+      "gate_capstone_leak.py",
+      "gate_collision.py",
+      "gate_promptleak.py",
+      "gate_copy_rule.py",
+      "lengths.py",
+      "sweep_literals.py",
+      "vendor/closure.py",
+      "vendor/ledger.py",
+      "vendor/closure.json",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "scratch_db.sh",
+      "dryrun_asrc.sh",
+      "cut_block.py",
+      "apply_asrc_riskchange.sh"
+    ],
+    "pins": {
+      "digest.txt": "27c51a39bbd17fa9f282edb93ce1707d5b21288443e4a0cc09a983831f5797de",
+      "fields.json": "2a29733537f8f69ea915b6271db2a054243c6561deb21b75b67755c4cf1c3a6e"
+    },
+    "headingsNoGeneratorSpells": 0
   }
 }

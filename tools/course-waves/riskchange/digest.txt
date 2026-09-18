@@ -1,0 +1,715 @@
+# Risk, Change & Learning (riskchange). Teaching digest.
+# THE AS-OF DATE FOR EVERY LINE BELOW IS 2026-10-01, a Thursday. Every status that depends on a date (review overdue, expired, expiring soon, awaiting or overdue ratification, review due soon, days until) is that status ON 2026-10-01, and every engine call that takes a date was handed this one explicitly. None of them read a clock.
+# Scores, levels, counts and days are whole numbers. Dates print as YYYY-MM-DD. Statuses, bands and verdicts print exactly as the engine spells them, in double quotes.
+# Built against engines ab3ce6a (ASC-1), vendored sha-identical; the five modules this course reads are unchanged since 9d5d3b4 (ASC-0), and this digest was proved byte-identical across that re-vendor: riskScoring, managementOfChange, peerReview, lessonsLearned and the calendar they share. Every figure is the engine answering at the inputs named beside it, except a line that says golden or measured.
+# Every engine answer printed here was also replayed through the independent Python oracle for its module (oracle_bridge.py), so each one is two methods agreeing.
+# A GOLDEN LINE IS NOT THE ENGINE ANSWERING. The published case files are written by the oracles.
+
+# SECTION 1: What these four engines decide, the one as-of date, and every door (owned by Associate m01)
+
+# App surface: four apps in the Suite Assurance module call these engines. The Risk Register (with its Heatmap tab) calls riskScoring, Management of Change calls managementOfChange, Peer Review Manager calls peerReview and Lessons Learned calls lessonsLearned. All four read calendar dates through calendar.js.
+- Each engine decides a STATE from a record: a band and an appetite verdict for a risk, a stage move and an expiry state for a change, a closure verdict for a review, an acceptance and an embedding verdict for a lesson. None of them stores anything. The app stores the record and asks the engine what it means.
+- Every verdict that can be refused comes back as an object with `ok`, and a refusal carries a `reason` a user can act on. The four engines refuse in the same shape.
+
+Every export, measured by loading each module:
+| module | exports | functions | frozen tables and constants | functions that take a date |
+| --- | --- | --- | --- | --- |
+| calendar | 6 | 5 | 1 | 1 |
+| riskScoring | 15 | 7 | 8 | 1 |
+| managementOfChange | 34 | 15 | 19 | 7 |
+| peerReview | 29 | 17 | 12 | 4 |
+| lessonsLearned | 40 | 26 | 14 | 6 |
+
+The functions that take a date, each read from its signature in the engine source (a parameter that defaults to the machine clock). Every one of them was handed the as-of date on every call this digest makes:
+- calendar: daysUntil (argument 2).
+- riskScoring: isReviewOverdue (argument 2).
+- managementOfChange: byUrgency (argument 1), daysUntil (argument 2), expiryState (argument 2), isExpired (argument 2), isOverdue (argument 2), ratificationState (argument 3), summarise (argument 3).
+- peerReview: byUrgency (argument 1), daysUntil (argument 2), isOverdue (argument 2), summarise (argument 3).
+- lessonsLearned: daysUntil (argument 2), isReviewDueSoon (argument 2), isReviewOverdue (argument 2), lessonAgeDays (argument 2), lessonByAttention (argument 2), summarise (argument 2).
+- A function that defaults its date to the clock answers a different question every day it is run. A report that does not state its as-of date cannot be checked by anybody, including its author the next morning.
+
+# SECTION 2: The five by five matrix, the product, and the four bands (owned by Associate m02)
+
+- The scale runs from 1 to 5 on each axis, likelihood and impact. A score is the product of the two levels.
+- The bands, as the engine carries them, highest first. Each band is found by its LOWER edge only:
+| band | lower edge | upper edge as written |
+| --- | --- | --- |
+| "Critical" | 15 | 25 |
+| "High" | 10 | 14 |
+| "Medium" | 5 | 9 |
+| "Low" | 1 | 4 |
+
+All twenty five cells, likelihood down the side and impact across the top, each cell the score and its band:
+| likelihood \ impact | 1 | 2 | 3 | 4 | 5 |
+| --- | --- | --- | --- | --- | --- |
+| 5 | 5 Medium | 10 High | 15 Critical | 20 Critical | 25 Critical |
+| 4 | 4 Low | 8 Medium | 12 High | 16 Critical | 20 Critical |
+| 3 | 3 Low | 6 Medium | 9 Medium | 12 High | 15 Critical |
+| 2 | 2 Low | 4 Low | 6 Medium | 8 Medium | 10 High |
+| 1 | 1 Low | 2 Low | 3 Low | 4 Low | 5 Medium |
+
+- Cells in each band, counted from the grid above: "Critical" 6, "High" 4, "Medium" 7, "Low" 8.
+- The grid holds 14 distinct scores. Of the whole numbers from 1 to 25, 11 are in no cell, because no two whole levels on this scale multiply to them: 7, 11, 13, 14, 17, 18, 19, 21, 22, 23, 24.
+
+Scores read against the bands, including the edge either side of each band and scores no cell of the grid holds:
+| score | band |
+| --- | --- |
+| 0 | "None" |
+| 1 | "Low" |
+| 4 | "Low" |
+| 5 | "Medium" |
+| 9 | "Medium" |
+| 10 | "High" |
+| 14 | "High" |
+| 15 | "Critical" |
+| 25 | "Critical" |
+| 26 | "Critical" |
+| 4.5 | "Low" |
+| 14.5 | "High" |
+| -3 | "None" |
+
+- A score above the grid still bands: the band is found by the lower edge alone, so the upper edge printed in the band table is a label rather than a limit. A score of zero or below reads "None", the one band that means no score.
+
+What the scale accepts as a level, each probe scored against the other axis:
+| the likelihood given | as | impact | score | band |
+| --- | --- | --- | --- | --- |
+| two whole levels | 3 | 4 | 12 | "High" |
+| two whole levels written as text | "3" | "4" | 12 | "High" |
+| a level with spaces around it | " 3 " | 4 | 12 | "High" |
+| a whole level written as text with a decimal point | "3.0" | 4 | 12 | "High" |
+| the value true | true | 5 | 5 | "Medium" |
+| a zero likelihood | 0 | 4 | 0 | "None" |
+| a likelihood of 6 | 6 | 4 | 0 | "None" |
+| a likelihood of 2.5 | 2.5 | 4 | 0 | "None" |
+| a likelihood of 3.5 written as text | "3.5" | 4 | 0 | "None" |
+| a blank likelihood | "" | 4 | 0 | "None" |
+| no likelihood at all | null | 4 | 0 | "None" |
+| a negative likelihood | -2 | 4 | 0 | "None" |
+
+- The scale is five WHOLE levels. A fraction is off the scale and unscored, the same as a level of 6 or a blank: the engine returns a score of 0 and the band "None" rather than guessing a level. A whole number written as text or with a decimal point is still that level.
+- What level the value true is read as, asked directly: true against an impact of 1 scores 1, so true is read as level 1; false against an impact of 1 scores 0, band "None". The register's own form stores whole numbers, so this is how the engine treats a value the form never writes.
+
+# SECTION 3: Inherent and residual, the per-axis fallback, and appetite (owned by Associate m03)
+
+- The inherent score is the risk before any control. The residual score is the risk with its controls in place, scored from the residual likelihood and the residual impact.
+- A residual axis that has not been assessed FALLS BACK to the inherent level on that axis alone. Null, an absent key and a blank form field all mean "not assessed". A residual axis that WAS assessed with a value off the scale does not fall back: it leaves the residual unscored.
+
+| residual probe (inherent likelihood 4, impact 5) | residual likelihood given | residual impact given | residual score | residual band |
+| --- | --- | --- | --- | --- |
+| both residual axes assessed | 2 | 3 | 6 | "Medium" |
+| neither residual axis assessed | null | null | 20 | "Critical" |
+| residual likelihood only, impact left blank | 2 | "" | 10 | "High" |
+| residual impact only, likelihood left blank | "" | 3 | 12 | "High" |
+| both residual axes left blank | "" | "" | 20 | "Critical" |
+| a residual likelihood of 2.5 | 2.5 | 3 | 0 | "None" |
+| a residual likelihood of 7 | 7 | 3 | 0 | "None" |
+
+- Appetite compares the RESIDUAL score with the risk's own target. The engine has three answers: "Within appetite", "Above appetite", "Not set".
+| appetite probe | residual score | target | appetite |
+| --- | --- | --- | --- |
+| residual below the target | 6 | 8 | "Within appetite" |
+| residual equal to the target | 8 | 8 | "Within appetite" |
+| residual above the target | 9 | 8 | "Above appetite" |
+| no target set | 6 | null | "Not set" |
+| a target of zero | 6 | 0 | "Not set" |
+| a residual that cannot be scored | 0 | 8 | "Not set" |
+
+- A residual EQUAL to the target is within appetite. With no target, or a target of zero, or a residual that cannot be scored, the answer is "Not set": the engine declines to report a pass it has no basis for.
+
+# SECTION 4: A calendar date, whole days, and a review due today (owned by Associate m04)
+
+- A calendar date is read at LOCAL midnight from its leading YYYY-MM-DD, and so is the as-of date, so a whole number of days separates any two of them in every time zone. Whole days from the as-of date, 2026-10-01:
+| date given | as | parsed | days until |
+| --- | --- | --- | --- |
+| the as-of date itself | "2026-10-01" | 2026-10-01 | 0 |
+| the day before | "2026-09-30" | 2026-09-30 | -1 |
+| the day after | "2026-10-02" | 2026-10-02 | 1 |
+| the last day of October | "2026-10-31" | 2026-10-31 | 30 |
+| the first day of November | "2026-11-01" | 2026-11-01 | 31 |
+| the first day of the next year | "2027-01-01" | 2027-01-01 | 92 |
+| a date one year earlier | "2025-10-01" | 2025-10-01 | -365 |
+| a timestamp late in the evening, UTC | "2026-09-30T23:30:00Z" | 2026-09-30 | -1 |
+| 30 February, a date that does not exist | "2026-02-30" | null | null |
+| a month of 13 | "2026-13-01" | null | null |
+| words where a date should be | "after the turnaround" | null | null |
+| nothing at all | null | null | null |
+
+- A date that does not exist is no date at all: 30 February and a thirteenth month both parse to null, and so does text. The engine never rolls an impossible date over into a real one.
+- A timestamp is read by its leading date only. The late-evening UTC timestamp above is the calendar date its first ten characters name, whatever the zone the reader is in.
+
+- A risk review is overdue when the risk is LIVE and its review date has PASSED: days until below zero. A review due on the as-of date is not overdue, and a risk that is not live carries no review obligation at all. On the OBODO register, read on 2026-10-01:
+| risk | status | next review | days until | review overdue |
+| --- | --- | --- | --- | --- |
+| OB-01 | "Open" | 2026-10-01 | 0 | no |
+| OB-02 | "Open" | 2026-09-30 | -1 | yes |
+| OB-03 | "Under Review" | 2026-11-15 | 45 | no |
+| OB-04 | "Mitigated" | 2026-12-01 | 61 | no |
+| OB-05 | "Open" | 2026-09-15 | -16 | yes |
+| OB-06 | "Open" | 2026-10-31 | 30 | no |
+| OB-07 | "Realized" | 2026-10-02 | 1 | no |
+| OB-08 | "Open" | 2026-11-30 | 60 | no |
+| OB-09 | "Draft" | null | null | no |
+| OB-10 | "Closed" | 2027-03-31 | 181 | no |
+| OB-11 | "Open" | 2026-12-15 | 75 | no |
+| OB-12 | "Open" | 2027-01-15 | 106 | no |
+
+- OB-10 is "Closed" and its review date is 181 days away, and OB-09 is "Draft" with no review date. Neither can read overdue whatever its date, because the test asks the status first.
+- The same question of a Closed risk whose review date passed the day before the as-of date: overdue no. The same risk as "Open": overdue yes.
+- An "Open" risk with no review date at all: days until null, review overdue no.
+- An "Open" risk with a review date of 30 February: days until null, review overdue no.
+- An "Open" risk with a review date that reads "after the audit": days until null, review overdue no.
+- So a live risk with no readable review date is never review-overdue: the engine has no date to be late against, and nothing in it flags the missing date.
+
+# SECTION 5: The register as a whole: live risks, and counting by band (owned by Associate m05)
+
+- Live statuses, the risks an organisation still carries: "Open", "Under Review", "Mitigated", "Realized". Not live: "Draft", "Closed". A Mitigated risk is still carried, because mitigation lowers the residual without removing the risk.
+
+The OBODO register, every risk derived once through deriveRiskFields:
+| risk | status | L | I | inherent | inherent band | residual L | residual I | residual | residual band | target | appetite |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| OB-01 | "Open" | 3 | 5 | 15 | "Critical" | 2 | 5 | 10 | "High" | 10 | "Within appetite" |
+| OB-02 | "Open" | 4 | 4 | 16 | "Critical" | 2 | "" | 8 | "Medium" | 6 | "Above appetite" |
+| OB-03 | "Under Review" | 5 | 4 | 20 | "Critical" | null | null | 20 | "Critical" | 12 | "Above appetite" |
+| OB-04 | "Mitigated" | 4 | 3 | 12 | "High" | 3 | 3 | 9 | "Medium" | 9 | "Within appetite" |
+| OB-05 | "Open" | 2 | 5 | 10 | "High" | 1 | 5 | 5 | "Medium" | 4 | "Above appetite" |
+| OB-06 | "Open" | 3 | 3 | 9 | "Medium" | 2 | 2 | 4 | "Low" | null | "Not set" |
+| OB-07 | "Realized" | 3 | 4 | 12 | "High" | 2 | 4 | 8 | "Medium" | 8 | "Within appetite" |
+| OB-08 | "Open" | 3 | 5 | 15 | "Critical" | 2.5 | 5 | 0 | "None" | 5 | "Not set" |
+| OB-09 | "Draft" | 2 | 2 | 4 | "Low" | null | null | 4 | "Low" | null | "Not set" |
+| OB-10 | "Closed" | 4 | 5 | 20 | "Critical" | 1 | 5 | 5 | "Medium" | 5 | "Within appetite" |
+| OB-11 | "Open" | 3 | 6 | 0 | "None" | null | null | 0 | "None" | 6 | "Not set" |
+| OB-12 | "Open" | 1 | 5 | 5 | "Medium" | 1 | 3 | 3 | "Low" | 3 | "Within appetite" |
+
+- `rating`, the column the register stores, is the INHERENT band, and it is written from the engine on every save.
+
+- The register holds 12 risks and 10 of them are live.
+countByBand, which counts whatever list it is handed. Four populations of the same register:
+| population | "Critical" | "High" | "Medium" | "Low" | "None" |
+| --- | --- | --- | --- | --- | --- |
+| every risk, inherent | 5 | 3 | 2 | 1 | 1 |
+| every risk, residual | 1 | 1 | 5 | 3 | 2 |
+| live risks, inherent | 4 | 3 | 2 | 0 | 1 |
+| live risks, residual | 1 | 1 | 4 | 2 | 2 |
+
+- The same register gives Critical counts of 5, 1, 4, 1 across those four rows, 3 different values, depending on two choices the CALLER makes: which risks to hand over, and whether to count inherent or residual. The engine does not filter by status. Each count is right for the question it answers, and a dashboard tile has to say which question that is.
+# App surface: the Risk Register dashboard counts Open and Under Review risks and plots them INHERENT; the Heatmap tab plots the four live statuses INHERENT; the Assurance hub counts live risks through countByBand. RECON.md records the two heatmaps disagreeing as a finding.
+- The Risk Register DASHBOARD population, Open and Under Review only, counted INHERENT: 8 risks (OB-01, OB-02, OB-03, OB-05, OB-06, OB-08, OB-11, OB-12), "Critical" 4, "High" 1, "Medium" 2, "Low" 0, "None" 1. The Mitigated and Realized risks (OB-04, OB-07) are live and outside this population.
+# App surface: the Assurance hub calls countByBand TWICE over the live risks, once inherent and once residual, and shows both: on OBODO that is Critical 4 inherent and 1 residual, the two live rows of the table above.
+
+# SECTION 6: The OBODO register end to end (owned by Associate m06)
+
+- OB-02, Fatigue crack in a jetty loading arm, "Open". Inherent 4 by 4 scores 16, "Critical". Residual likelihood 2, residual impact "": residual 8, "Medium". Target 6: "Above appetite". Next review 2026-09-30, -1 days from the as-of date, overdue yes.
+- OB-08, Fall from height during tank inspection, "Open". Inherent 3 by 5 scores 15, "Critical". Residual likelihood 2.5, residual impact 5: residual 0, "None". Target 5: "Not set". Next review 2026-11-30, 60 days from the as-of date, overdue no.
+- OB-01, Floating roof seal failure on crude tank T-104, "Open". Inherent 3 by 5 scores 15, "Critical". Residual likelihood 2, residual impact 5: residual 10, "High". Target 10: "Within appetite". Next review 2026-10-01, 0 days from the as-of date, overdue no.
+- Live risks above appetite: 3 (OB-02, OB-03, OB-05). Within: 4 (OB-01, OB-04, OB-07, OB-12). Not set: 3 (OB-06, OB-08, OB-11).
+- Live risks whose review is overdue on 2026-10-01: 2 (OB-02, OB-05). OB-01 is due on the as-of date itself and is not among them.
+- Inherent minus residual on each live risk (derived, the two engine scores subtracted): OB-01 5, OB-02 8, OB-03 0, OB-04 3, OB-05 5, OB-06 5, OB-07 4, OB-08 15, OB-11 0, OB-12 2. OB-08 shows its whole inherent score as a reduction only because its residual is unscored, OB-11 shows zero because neither of its scores exists, and OB-03 shows zero because its residual was never assessed: a subtraction over an unscored or unassessed value describes no control at all.
+
+# SECTION 7: A change and its stages: the legal moves and the final stages (owned by Professional m01)
+
+- The stages, in workflow order: "Draft", "Screening", "Review", "Approval", "Implementation", "Closed", "Rejected", "Cancelled".
+- Active, still live work: "Draft", "Screening", "Review", "Approval", "Implementation". In effect, on the facility: "Implementation", "Closed". Terminal: "Closed", "Rejected", "Cancelled".
+- Change types: "Permanent", "Temporary", "Emergency". The types that must carry an expiry date: "Temporary", "Emergency".
+
+| from | legal next stages |
+| --- | --- |
+| "Draft" | "Screening", "Cancelled" |
+| "Screening" | "Review", "Rejected", "Cancelled", "Draft" |
+| "Review" | "Approval", "Rejected", "Cancelled", "Screening" |
+| "Approval" | "Implementation", "Rejected", "Cancelled", "Review" |
+| "Implementation" | "Closed", "Cancelled" |
+| "Closed" | none |
+| "Rejected" | none |
+| "Cancelled" | none |
+
+- Only "Approval" leads to Implementation. 3 stages lead nowhere ("Closed", "Rejected", "Cancelled"), and a change can step back from Screening, Review and Approval to the stage before.
+
+Moves the engine refuses, with its own words:
+- REFUSED, Review straight to Closed: A change in Review can only move to Approval, Rejected, Cancelled, Screening.
+- REFUSED, Draft straight to Approval: A change in Draft can only move to Screening, Cancelled.
+- REFUSED, Implementation back to Approval: A change in Implementation can only move to Closed, Cancelled.
+- REFUSED, a Closed change moved anywhere: A closed change is final.
+- REFUSED, a Rejected change moved anywhere: A rejected change is final.
+- ALLOWED, Draft to Screening.
+
+# SECTION 8: Approval levels: one signature a level, and a rejection that stops the gate (owned by Professional m02)
+
+- Levels come from the approval rows themselves: every distinct level present must carry at least one Approved row, and no row at any level may be Rejected. A row with no level counts as level 1.
+- Approval statuses: "Pending", "Approved", "Rejected", "Delegated".
+
+| approval set | levels | outstanding | rejected rows | complete |
+| --- | --- | --- | --- | --- |
+| three levels, the first signed | 1, 2, 3 | 2, 3 | 0 | no |
+| three levels, all signed | 1, 2, 3 | none | 0 | yes |
+| two signers at level 2, one of them signed | 1, 2 | none | 0 | yes |
+| every level signed and one rejection | 1, 2 | none | 1 | no |
+| a row with no level at all | 1 | none | 0 | yes |
+| levels 1 and 3, no level 2 | 1, 3 | 3 | 0 | no |
+| a delegated row | 1 | 1 | 0 | no |
+| no approval rows | none | none | 0 | no |
+
+- A Delegated row is not an Approved row, so its level stays outstanding. Two signers at one level need only one of them to sign. A rejection anywhere makes the set incomplete even when every level has an Approved row.
+
+# SECTION 9: Segregation of duties: the originator never approves, and only the assignee decides (owned by Professional m03)
+
+- ES-01, Replace the dry gas seals on compressor K-201, was raised by u-chika. Its level 2 approval is assigned to u-emeka.
+- REFUSED, assigning the originator as an approver: The originator of a change cannot approve it. Choose somebody independent of the change.
+- REFUSED, assigning nobody: Choose the approver.
+- ALLOWED, assigning u-halima, who is independent of the change.
+- ALLOWED, u-emeka deciding the approval assigned to u-emeka.
+- REFUSED, u-halima deciding an approval assigned to u-emeka: Only the person this approval is assigned to can decide it. If they are unavailable, reassign it.
+- REFUSED, nobody signed in: Only the person this approval is assigned to can decide it. If they are unavailable, reassign it.
+- REFUSED, the originator deciding an approval somebody assigned to them: The originator of a change cannot approve it.
+- REFUSED, deciding an approval that is already Approved: This approval is already approved.
+- REFUSED, deciding an approval that is already Rejected: This approval is already rejected.
+- The rule is owner policy, decided on 2026-09-18 (AS15, D1): an approval is decided only by the member it is assigned to, never by the change originator, and an absence is covered by reassigning the approval. The database enforces the same rule.
+- REFUSED, u-emeka deciding an approval whose status is Delegated: This approval is already delegated.
+- What the engine does NOT model, measured by searching its 34 exports: functions whose name mentions reassigning or delegating: 0; functions whose name mentions reopening, revisiting, undoing, revoking or withdrawing a decision: 0. "Delegated" is a status an approval row can carry and nothing more: a Delegated row is not Approved, so its level stays outstanding (Section 8), and deciding it is refused as already decided. How an approval moves to somebody else, and whether a decided one can be reopened, is the app's and the database's business (the AS15 reassignment), and this engine holds no rule for either. A decided approval is refused as already approved or already rejected, the two lines above.
+
+# SECTION 10: Actions and the two gates: into Implementation and into Closed (owned by Professional m04)
+
+- Action types: "Pre-implementation", "Implementation", "Post-implementation". Action statuses: "Open", "In progress", "Complete", "Cancelled". Complete and Cancelled actions are finished; Open and In progress are not.
+- Into Implementation: every approval level signed with no rejection (an Emergency change needs only its first level), no Pre-implementation action unfinished, and a Temporary or Emergency change needs a READABLE expiry date. Into Closed: no Implementation or Post-implementation action unfinished, and an Emergency change needs every level signed.
+
+- REFUSED, ES-01 into Implementation as it stands, levels 2 and 3 unsigned: Approval levels 2 and 3 have not signed yet.
+- REFUSED, ES-01 into Implementation with every level signed and one Pre-implementation action still Open: 1 pre-implementation action still open. They exist to be done before the change goes in.
+- ALLOWED, ES-01 into Implementation with every level signed and its actions finished.
+- REFUSED, a change with no approval rows at all: No approvers have been assigned, so there is nothing to approve. Add the approval levels this change needs.
+- REFUSED, a change with every level signed and one rejection: An approver has rejected this change. It cannot be implemented.
+- REFUSED, a Temporary change whose expiry reads "after the turnaround": A temporary change needs an expiry date before it is implemented. Without one it is a permanent change nobody decided to make.
+- REFUSED, a Temporary change with no expiry date: A temporary change needs an expiry date before it is implemented. Without one it is a permanent change nobody decided to make.
+- ALLOWED, a Temporary change with a readable expiry and every level signed.
+- REFUSED, ES-02 into Closed with its Post-implementation action In progress: 1 implementation or post-implementation action still open.
+- ALLOWED, ES-02 into Closed once that action is Complete.
+- ALLOWED, ES-02 into Cancelled, which no action blocks.
+
+# SECTION 11: Temporary and emergency change: expiry, the lead, and ratification (owned by Professional m05)
+
+- Expiry states: "Expired", "Expiring soon", "Within expiry", "No expiry", "Permanent change", "Closed out". The lead before an expiry starts reading "Expiring soon" is EXPIRY_LEAD_DAYS, 14 days, counted inclusively.
+- Only a change IN EFFECT can expire. A temporary change still in Screening or Review is not running anywhere, so its expiry date is a plan.
+
+One Temporary change in Implementation, its expiry moved across the as-of date 2026-10-01:
+| expiry date | days until | expiry state |
+| --- | --- | --- |
+| 2026-09-01 | -30 | "Expired" |
+| 2026-09-30 | -1 | "Expired" |
+| 2026-10-01 | 0 | "Expiring soon" |
+| 2026-10-02 | 1 | "Expiring soon" |
+| 2026-10-14 | 13 | "Expiring soon" |
+| 2026-10-15 | 14 | "Expiring soon" |
+| 2026-10-16 | 15 | "Within expiry" |
+| 2026-11-30 | 60 | "Within expiry" |
+
+The same expiry date, one day past, across types and stages:
+| type | stage | expiry state | counted expired |
+| --- | --- | --- | --- |
+| "Temporary" | "Implementation" | "Expired" | yes |
+| "Emergency" | "Implementation" | "Expired" | yes |
+| "Temporary" | "Closed" | "Closed out" | no |
+| "Temporary" | "Review" | "No expiry" | no |
+| "Temporary" | "Screening" | "No expiry" | no |
+| "Temporary" | "Cancelled" | "No expiry" | no |
+| "Permanent" | "Implementation" | "Permanent change" | no |
+- An expiry that cannot be read is no expiry: "No expiry" for a Temporary change in Implementation whose expiry reads "after the turnaround".
+- A Temporary change in Approval whose expiry date, 2026-09-30, has already passed, asked to go into Implementation with every level signed: ALLOWED, a past-dated expiry at the gate. The gate asks only that the expiry date can be read; it does not ask that it lies ahead. Once in Implementation the same change reads "Expired" on 2026-10-01.
+
+- An Emergency change may go into Implementation once its FIRST approval level has signed and nobody has rejected it. Every other level must then sign within EMERGENCY_RATIFY_DAYS, 7 days, of the actual implementation date, and the change cannot close until they have. Ratification states: "Not required", "Awaiting ratification", "Ratification overdue", "Ratified".
+- ALLOWED, an Emergency change in Approval into Implementation with level 1 signed and level 2 pending.
+- REFUSED, the same change with level 1 unsigned: An emergency change can go in once approval level 1 has signed, with the rest ratified within 7 days. Level 1 has not signed yet.
+- REFUSED, a Permanent change with level 1 signed and level 2 pending: Approval level 2 has not signed yet.
+- REFUSED, an Emergency change in Implementation into Closed with level 2 still unsigned: Approval level 2 has not ratified this emergency change. It cannot close until every level has signed.
+
+One Emergency change in Implementation with level 2 unsigned, its implementation date moved back from 2026-10-01:
+| implemented on | days since | ratification due | state |
+| --- | --- | --- | --- |
+| 2026-10-01 | 0 | 2026-10-08 | "Awaiting ratification" |
+| 2026-09-30 | 1 | 2026-10-07 | "Awaiting ratification" |
+| 2026-09-25 | 6 | 2026-10-02 | "Awaiting ratification" |
+| 2026-09-24 | 7 | 2026-10-01 | "Awaiting ratification" |
+| 2026-09-23 | 8 | 2026-09-30 | "Ratification overdue" |
+| 2026-09-01 | 30 | 2026-09-08 | "Ratification overdue" |
+- With no implementation date recorded: due null, "Ratification overdue". The window cannot be shown to be open, so it fails closed.
+- Every level signed: "Ratified", however long ago it went in.
+- A Temporary change: "Not required". Ratification belongs to the emergency route alone.
+- The emergency route and its ratification window are owner policy (AS15, Q9, decided on 2026-09-18): reduced authority up front so a hazard can be dealt with, full review after the event.
+
+# SECTION 12: The ESANMI register end to end, summarised and sorted by urgency (owned by Professional m06)
+
+The ESANMI change register, read on 2026-10-01:
+| change | type | stage | target | expiry | expiry state | overdue | ratification | due |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ES-01 | "Permanent" | "Approval" | 2026-10-20 | null | "Permanent change" | no | "Not required" | null |
+| ES-02 | "Temporary" | "Implementation" | 2026-09-20 | 2026-10-14 | "Expiring soon" | no | "Not required" | null |
+| ES-03 | "Temporary" | "Implementation" | 2026-09-10 | 2026-09-28 | "Expired" | no | "Not required" | null |
+| ES-04 | "Emergency" | "Implementation" | 2026-09-26 | 2026-11-29 | "Within expiry" | no | "Awaiting ratification" | 2026-10-03 |
+| ES-05 | "Emergency" | "Implementation" | 2026-09-20 | 2026-10-10 | "Expiring soon" | no | "Ratification overdue" | 2026-09-27 |
+| ES-06 | "Permanent" | "Closed" | 2026-08-15 | null | "Permanent change" | no | "Not required" | null |
+| ES-07 | "Temporary" | "Closed" | 2026-07-20 | 2026-08-01 | "Closed out" | no | "Not required" | null |
+| ES-08 | "Permanent" | "Review" | 2026-09-25 | null | "Permanent change" | yes | "Not required" | null |
+| ES-09 | "Permanent" | "Cancelled" | 2026-08-01 | null | "Permanent change" | no | "Not required" | null |
+| ES-10 | "Temporary" | "Screening" | 2026-10-06 | 2026-09-01 | "No expiry" | no | "Not required" | null |
+| ES-11 | "Permanent" | "Rejected" | 2026-09-01 | null | "Permanent change" | no | "Not required" | null |
+| ES-12 | "Emergency" | "Implementation" | 2026-09-28 | 2026-12-31 | "Within expiry" | no | "Ratification overdue" | null |
+
+- A change is overdue only BEFORE it is on the facility: in "Draft", "Screening", "Review", "Approval", with its target implementation date passed. Of the 5 changes in Implementation here, 5 are past their target date and none reads overdue, because being in effect means the target was met or passed by the fact of it. Late work after that point shows as overdue ACTIONS.
+
+The action log:
+| action | change | type | status | due |
+| --- | --- | --- | --- | --- |
+| AC-01 | ES-01 | "Pre-implementation" | "Open" | 2026-09-28 |
+| AC-02 | ES-01 | "Pre-implementation" | "Complete" | 2026-09-15 |
+| AC-03 | ES-02 | "Post-implementation" | "In progress" | 2026-10-10 |
+| AC-04 | ES-04 | "Implementation" | "Complete" | 2026-09-26 |
+| AC-05 | ES-04 | "Post-implementation" | "Open" | 2026-10-20 |
+| AC-06 | ES-06 | "Post-implementation" | "Open" | 2026-09-01 |
+| AC-07 | ES-09 | "Pre-implementation" | "In progress" | 2026-08-10 |
+| AC-08 | ES-03 | "Post-implementation" | "Cancelled" | 2026-09-20 |
+| AC-09 | ES-99 | "Implementation" | "Open" | 2026-09-30 |
+- AC-09 names change ES-99, which is not in this register. An action whose change is not supplied still counts: not knowing the parent is no reason to hide the work.
+
+summarise, the dashboard and report counts, computed once:
+| count | value |
+| --- | --- |
+| total | 12 |
+| active | 8 |
+| awaitingApproval | 1 |
+| expired | 1 |
+| expiringSoon | 2 |
+| overdue | 1 |
+| openActions | 4 |
+| overdueActions | 2 |
+| ratificationPending | 1 |
+| ratificationOverdue | 2 |
+- By stage: "Draft" 0, "Screening" 1, "Review" 1, "Approval" 1, "Implementation" 5, "Closed" 2, "Rejected" 1, "Cancelled" 1.
+- By risk level: "Low" 2, "Medium" 4, "High" 4, "Critical" 2.
+- openActions and overdueActions skip AC-06 and AC-07, whose changes (ES-06 Closed, ES-09 Cancelled) are finished and locked. They count AC-09, whose change is unknown. A Cancelled action (AC-08) is finished.
+- The 4 open actions are AC-01, AC-03, AC-05, AC-09. The 2 overdue actions are AC-01 (due 2026-09-28, -3 days), AC-09 (due 2026-09-30, -1 days). An action is overdue when it is open work and its due date has PASSED: days until below zero.
+- Edge probe, one open action due the day before the as-of date (2026-09-30): openActions 1, overdueActions 1.
+- Edge probe, one open action due ON the as-of date (2026-10-01): openActions 1, overdueActions 0.
+- Edge probe, one open action due the day after (2026-10-02): openActions 1, overdueActions 0.
+- Probe, the finished-parent skip for a REJECTED change: ES-11 is "Rejected"; one Open action on it due 2026-09-26: openActions 0, overdueActions 0. A Rejected change is terminal like a Closed or Cancelled one, and its actions are not open work.
+- awaitingApproval counts the changes whose STAGE is Approval: 1 (ES-01). It counts changes. ES-01 carries two Pending approval rows and counts once.
+The risk level each ESANMI change carries, the rows behind the by-risk-level counts:
+| change | risk level |
+| --- | --- |
+| ES-01 | "High" |
+| ES-02 | "High" |
+| ES-03 | "Medium" |
+| ES-04 | "Critical" |
+| ES-05 | "High" |
+| ES-06 | "Low" |
+| ES-07 | "High" |
+| ES-08 | "Medium" |
+| ES-09 | "Medium" |
+| ES-10 | "Low" |
+| ES-11 | "Medium" |
+| ES-12 | "Critical" |
+- ES-12's actual implementation date: null (no date recorded). Its ratification reads "Ratification overdue" with due null: with no recorded implementation date the window cannot be shown to be open, so it fails closed.
+
+byUrgency on 2026-10-01, most urgent first. Expired changes first, then expiring soon, then overdue, then other live work, then everything finished; within a rank the earlier expiry or target date first:
+- ES-03, ES-05, ES-02, ES-08, ES-10, ES-01, ES-04, ES-12, ES-07, ES-09, ES-06, ES-11
+
+# SECTION 13: The comment loop: six dispositions and who moves each one (owned by Expert m01)
+
+- Review stages: "Draft", "In Review", "Verification", "Closed", "Cancelled". Active: "Draft", "In Review", "Verification".
+- Comment severities, worst first: "Critical", "Major", "Minor", "Editorial". Blocking: "Critical", "Major".
+- Comment statuses: "Open", "Responded", "Verified", "Closed", "Rejected", "Withdrawn". Resolved, needing nobody to act: "Verified", "Closed", "Withdrawn".
+
+| from | legal next statuses | who makes each move |
+| --- | --- | --- |
+| "Open" | "Responded", "Withdrawn" | Responded by the author, Withdrawn by the reviewer |
+| "Responded" | "Verified", "Rejected" | Verified by the reviewer, Rejected by the reviewer |
+| "Verified" | "Closed" | Closed by the coordinator |
+| "Closed" | none | none |
+| "Rejected" | "Responded", "Withdrawn" | Responded by the author, Withdrawn by the reviewer |
+| "Withdrawn" | none | none |
+
+Every disposition asked for every move, the engine explaining each refusal in its own words:
+- REFUSED, Open to Open: This comment is already open.
+- REFUSED, Open to Verified: An open comment can only go to Responded or Withdrawn.
+- REFUSED, Open to Closed: An open comment can only go to Responded or Withdrawn.
+- REFUSED, Open to Rejected: An open comment can only go to Responded or Withdrawn.
+- REFUSED, Responded to Open: A responded comment can only go to Verified or Rejected.
+- REFUSED, Responded to Responded: This comment is already responded.
+- REFUSED, Responded to Closed: A responded comment can only go to Verified or Rejected.
+- REFUSED, Responded to Withdrawn: A responded comment can only go to Verified or Rejected.
+- REFUSED, Verified to Open: A verified comment can only go to Closed.
+- REFUSED, Verified to Responded: A verified comment can only go to Closed.
+- REFUSED, Verified to Verified: This comment is already verified.
+- REFUSED, Verified to Rejected: A verified comment can only go to Closed.
+- REFUSED, Verified to Withdrawn: A verified comment can only go to Closed.
+- REFUSED, Closed to Open: A closed comment is final.
+- REFUSED, Closed to Responded: A closed comment is final.
+- REFUSED, Closed to Verified: A closed comment is final.
+- REFUSED, Closed to Closed: This comment is already closed.
+- REFUSED, Closed to Rejected: A closed comment is final.
+- REFUSED, Closed to Withdrawn: A closed comment is final.
+- REFUSED, Rejected to Open: A rejected comment can only go to Responded or Withdrawn.
+- REFUSED, Rejected to Verified: A rejected comment can only go to Responded or Withdrawn.
+- REFUSED, Rejected to Closed: A rejected comment can only go to Responded or Withdrawn.
+- REFUSED, Rejected to Rejected: This comment is already rejected.
+- REFUSED, Withdrawn to Open: A withdrawn comment is final.
+- REFUSED, Withdrawn to Responded: A withdrawn comment is final.
+- REFUSED, Withdrawn to Verified: A withdrawn comment is final.
+- REFUSED, Withdrawn to Closed: A withdrawn comment is final.
+- REFUSED, Withdrawn to Rejected: A withdrawn comment is final.
+- REFUSED, Withdrawn to Withdrawn: This comment is already withdrawn.
+- REFUSED, Responded to Verified with no response text on the comment: A comment cannot be verified before the author has responded to it.
+- REFUSED, a comment with no status, which reads as Open, moved to Closed: An open comment can only go to Responded or Withdrawn.
+- Of the 36 ordered pairs of statuses, 7 are legal moves.
+
+# SECTION 14: Closing a review: the blocking comments, overdue reviews, and the counts (owned by Expert m02)
+
+- IK-01, Water injection pump selection, is in "Verification". Its comment log:
+| comment | severity | status | resolved | blocking |
+| --- | --- | --- | --- | --- |
+| C-01 | "Critical" | "Open" | no | yes |
+| C-02 | "Critical" | "Verified" | yes | no |
+| C-03 | "Major" | "Responded" | no | yes |
+| C-04 | "Major" | "Rejected" | no | yes |
+| C-05 | "Major" | "Withdrawn" | yes | no |
+| C-06 | "Minor" | "Open" | no | no |
+| C-07 | "Editorial" | "Open" | no | no |
+| C-08 | "Critical" | "Closed" | yes | no |
+| C-09 | none | "Open" | no | no |
+
+- REFUSED, closing IK-01 as it stands: 1 critical and 2 major comments still need resolving. Verify, close out or withdraw them first.
+- The blocking comments are C-01, C-03, C-04: 3 in all.
+- A Responded comment still blocks, because the reviewer has not accepted the response. A Rejected comment still blocks, because the reviewer did not accept it. A Minor, an Editorial or an unrated comment never blocks, open or not.
+- ALLOWED, closing IK-01 once its blocking comments are withdrawn, with a Minor, an Editorial and an unrated comment still Open.
+- summarise over IK-01 and its own log: totalComments 9, openComments 6, blockingComments 3. By status: "Open" 4, "Responded" 1, "Verified" 1, "Closed" 1, "Rejected" 1, "Withdrawn" 1. By severity: "Critical" 3, "Major" 3, "Minor" 1, "Editorial" 1.
+- The unrated comment C-09 is in the comment total and in openComments and in no severity column.
+- One move later: with C-01 withdrawn, closing IK-01 is still refused, and the blocking comments are C-03, C-04, 2 in all.
+- Comments worst first, unresolved before resolved (bySeverityThenAge): C-01, C-03, C-04, C-06, C-07, C-09, C-08, C-02, C-05.
+
+The IKANG review register on 2026-10-01:
+| review | stage | due | overdue |
+| --- | --- | --- | --- |
+| IK-01 | "Verification" | 2026-09-29 | yes |
+| IK-02 | "In Review" | 2026-10-01 | no |
+| IK-03 | "Closed" | 2026-08-15 | no |
+| IK-04 | "Cancelled" | 2026-08-01 | no |
+| IK-05 | "Draft" | 2026-10-20 | no |
+- Reviews 5, active 3, overdue 1. IK-02 is due on the as-of date and is not overdue. IK-04 is Cancelled and never overdue, whatever its date.
+- byUrgency: IK-01, IK-02, IK-05, IK-04, IK-03.
+- The byUrgency rule: overdue reviews first, then other reviews in an active stage ("Draft", "In Review", "Verification"), then everything finished; within a rank the earlier due date first, and a review with no due date last. Read against the table above: IK-01 is the one overdue review, IK-02 and IK-05 are active with IK-02 due first, and IK-04 and IK-03 are finished with IK-04 due first.
+- isOverdue asks the stage first. Every stage at the same past due date, 2026-09-30:
+| stage | overdue |
+| --- | --- |
+| "Draft" | yes |
+| "In Review" | yes |
+| "Verification" | yes |
+| "Closed" | no |
+| "Cancelled" | no |
+- SEGREGATION OF DUTIES IN PEER REVIEW. The author of the work under review never reviews it. IK-01's author is u-efe. Reviewer roles: "Lead Reviewer", "Reviewer". Putting people on the review:
+- REFUSED, the author of the work, as a Reviewer: The author of the work under review cannot review it. Choose somebody independent of the work.
+- REFUSED, the author of the work, as the Lead Reviewer: The author of the work under review cannot review it. Choose somebody independent of the work.
+- REFUSED, the author of the work, with no role given: The author of the work under review cannot review it. Choose somebody independent of the work.
+- ALLOWED, the author of the work, as an Observer.
+- ALLOWED, u-kemi, independent of the work, as the Lead Reviewer.
+- ALLOWED, an external reviewer named only by display name.
+- REFUSED, nobody named at all: Choose the reviewer.
+- Acting on a comment: the moves TRANSITION_ACTOR gives to the reviewer (Verified, Rejected, Withdrawn) are never taken by the author. The author's own move (Responded) and the coordinator's (Closed) are not restricted by this rule.
+- REFUSED, the author verifying C-03, a Responded comment on their own work: The author of the work under review cannot verify a comment on it. A reviewer independent of the work decides it.
+- REFUSED, the author rejecting C-03: The author of the work under review cannot reject a comment on it. A reviewer independent of the work decides it.
+- REFUSED, the author withdrawing C-01, an Open comment: The author of the work under review cannot withdraw a comment on it. A reviewer independent of the work decides it.
+- ALLOWED, u-kemi, independent of the work, verifying C-03.
+- ALLOWED, the author responding to C-01.
+- ALLOWED, the author closing out C-02, a Verified comment.
+- REFUSED, u-kemi responding to C-02, which is already Verified: A verified comment can only go to Closed.
+- REFUSED, nobody signed in, verifying C-03: Sign in to act on this comment.
+- This is the owner decision D1 of 2026-09-18 (segregation of duties), applied to peer review at ASC-0 in the engine; the app and the database follow it with the Suite pull request that ships ASC-0.
+
+The whole IKANG register summarised, with the comments on the other reviews:
+| comment | review | review stage | severity | status | blocking on its own |
+| --- | --- | --- | --- | --- | --- |
+| C-10 | IK-04 | "Cancelled" | "Critical" | "Open" | yes |
+| C-11 | IK-04 | "Cancelled" | "Major" | "Responded" | yes |
+| C-12 | IK-02 | "In Review" | "Major" | "Open" | yes |
+- summarise over all five reviews and all 12 comments: totalComments 12, open 7, blocking 4.
+- C-10 and C-11 are on IK-04, which is Cancelled and locked, so nobody can resolve them: they stay in the comment total and in the severity and status columns, and they are not counted as open or blocking. C-12 is on IK-02, which is live, and counts.
+
+# SECTION 15: A lesson: its three parts, and the author who may not validate it (owned by Expert m03)
+
+- Lesson statuses: "Draft", "Submitted", "Validated", "Published", "Embedded", "Archived", "Superseded". Live: "Draft", "Submitted", "Validated", "Published", "Embedded". Accepted by the organisation: "Validated", "Published", "Embedded". Visible to everyone: "Published", "Embedded".
+- A lesson has substance when it records what happened, why it happened and what to do about it. The first two without the third are a story.
+
+| lesson | status | substance | missing | accepted | visible |
+| --- | --- | --- | --- | --- | --- |
+| ON-01 | "Published" | yes | none | yes | yes |
+| ON-02 | "Embedded" | yes | none | yes | yes |
+| ON-03 | "Published" | yes | none | yes | yes |
+| ON-04 | "Published" | yes | none | yes | yes |
+| ON-05 | "Validated" | yes | none | yes | no |
+| ON-06 | "Submitted" | no | what to do about it | no | no |
+| ON-07 | "Draft" | no | why it happened, what to do about it | no | no |
+| ON-08 | "Archived" | yes | none | no | no |
+| ON-09 | "Superseded" | yes | none | no | no |
+| ON-10 | "Published" | yes | none | yes | yes |
+
+- ON-01 was written by u-musa. Read as if it were still Submitted:
+- REFUSED, its author validating it: The author of a lesson cannot validate it, and that includes recording somebody else's name. Ask a colleague who was not involved in writing it to validate it.
+- REFUSED, its author validating it while typing a colleague name as the validator: The author of a lesson cannot validate it, and that includes recording somebody else's name. Ask a colleague who was not involved in writing it to validate it.
+- ALLOWED, u-grace, who did not write it, validating it.
+- ALLOWED, u-grace recording an external reviewer by name.
+- REFUSED, ON-06, which has no recommendation, validated by u-grace: This lesson is missing what to do about it. A lesson is what happened, why it happened and what to do about it; the first two without the third are a story.
+- The actor is always the signed-in person doing the validation, whatever name is typed (AS15, Q10, decided on 2026-09-18). A typed name records an external reviewer and cannot launder the author.
+- REFUSED, ON-05 moved to Published after its validation record is removed: This lesson has not been validated. Somebody other than its author has to accept it before it is published to everyone.
+- ALLOWED, ON-05, validated by u-grace, moved to Published.
+
+# SECTION 16: Proof of use: applications, the reuse record, and embedding (owned by Expert m04)
+
+- Application targets: "Risk register", "Management of change", "Procedure", "Training", "Design standard", "Contract or tender", "Maintenance plan", "Other". The two that are Suite registers and carry a real key: "Risk register", "Management of change".
+- Outcomes: "Adopted", "Adapted", "Rejected". The outcomes that changed something: "Adopted", "Adapted". A rejection is a real record and embeds nothing.
+- The engine gives Adopted and Adapted no meaning beyond this: both count as applied, both can earn Embedded, and the reuse record counts each separately. It holds no rule that tells them apart, so the difference between taking a lesson as written and changing it to fit is the organisation's own reading of the words.
+
+The application log:
+| application | lesson | target | outcome | applied on |
+| --- | --- | --- | --- | --- |
+| AA-01 | ON-01 | "Risk register" | "Adopted" | 2026-05-02 |
+| AA-02 | ON-01 | "Procedure" | "Adapted" | 2026-07-14 |
+| AA-03 | ON-01 | "Training" | "Rejected" | 2026-08-01 |
+| AA-04 | ON-02 | "Management of change" | "Adopted" | 2026-06-10 |
+| AA-05 | ON-03 | "Procedure" | "Rejected" | 2026-07-01 |
+| AA-06 | ON-10 | "Maintenance plan" | "Adopted" | 2026-08-20 |
+
+The reuse record of each visible lesson, which is a count and never a claim:
+| lesson | total | applied | adopted | adapted | rejected | last applied on | targets changed |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| ON-01 | 3 | 2 | 1 | 1 | 1 | 2026-07-14 | "Risk register", "Procedure" |
+| ON-02 | 1 | 1 | 1 | 0 | 0 | 2026-06-10 | "Management of change" |
+| ON-03 | 1 | 0 | 0 | 0 | 1 | null | none |
+| ON-04 | 0 | 0 | 0 | 0 | 0 | null | none |
+| ON-10 | 1 | 1 | 1 | 0 | 0 | 2026-08-20 | "Maintenance plan" |
+- ON-01 was last APPLIED on the date of its Adapted application. Its Rejected application is later and does not move that date, because a rejection applied nothing.
+
+- ALLOWED, ON-01 marked Embedded.
+- REFUSED, ON-03 marked Embedded, its one application a rejection: This lesson has been considered 1 time and adopted nowhere. Record where it was applied before calling it embedded.
+- REFUSED, ON-04 marked Embedded, with no application at all: Record where this lesson was applied first: the risk it raised, the change it caused, the procedure or the course it altered. A lesson that changed nothing has not been learned.
+- REFUSED, ON-10 archived with no reason: Say why this lesson is being archived. "Archived, nobody said why" is how a lessons database becomes a folder of PDFs.
+- ALLOWED, ON-10 archived with a reason.
+- REFUSED, ON-10 superseded with no successor named: Name the lesson that replaces this one.
+- REFUSED, ON-10 superseded by itself: A lesson cannot supersede itself.
+- REFUSED, a Draft lesson moved straight to Published: A lesson that is draft can only move to Submitted, Archived.
+- REFUSED, an Archived lesson moved anywhere: An archived lesson is final.
+
+| from | legal next statuses |
+| --- | --- |
+| "Draft" | "Submitted", "Archived" |
+| "Submitted" | "Validated", "Draft", "Archived" |
+| "Validated" | "Published", "Submitted", "Archived" |
+| "Published" | "Embedded", "Superseded", "Archived" |
+| "Embedded" | "Superseded", "Archived" |
+| "Archived" | none |
+| "Superseded" | none |
+
+What an application must carry before it is recorded:
+- REFUSED, a rejection with its reason and no target type: Pick what this lesson was applied to.
+- REFUSED, a rejection with a procedure target, its reason, and no reference: Name what changed (the procedure, the course, the standard) so somebody can go and look at it.
+- REFUSED, a rejection into the risk register with its reason and no risk named: Name the risk. A lesson pushed into the register points at the row it raised or changed, so the trail runs both ways.
+- A REJECTED application must still name its target: the target checks come before the outcome check, so a rejection carries the same trail as an adoption, plus its reason.
+- ALLOWED, a risk register target with the risk named.
+- REFUSED, a risk register target with no risk named: Name the risk. A lesson pushed into the register points at the row it raised or changed, so the trail runs both ways.
+- REFUSED, a change register target with no change named: Name the change record this lesson went into.
+- REFUSED, a procedure with no reference: Name what changed (the procedure, the course, the standard) so somebody can go and look at it.
+- REFUSED, a rejection with no reason: Say why it was not adopted. A rejection is a decision, and the next person to read this lesson needs the reasoning.
+- ALLOWED, a rejection with its reason.
+- REFUSED, no target type: Pick what this lesson was applied to.
+- REFUSED, an outcome the register does not know: Was the lesson adopted, adapted, or rejected?
+
+# SECTION 17: Lesson dates, the ONNE register summarised, and what needs attention (owned by Expert m05)
+
+- A visible lesson reads "review due soon" from REVIEW_LEAD_DAYS, 30 days, before its review date, both ends counted, and "review overdue" once the date has passed. A lesson that is not visible has no review status at all.
+| review due | days until | overdue | due soon |
+| --- | --- | --- | --- |
+| 2026-09-30 | -1 | yes | no |
+| 2026-10-01 | 0 | no | yes |
+| 2026-10-02 | 1 | no | yes |
+| 2026-10-30 | 29 | no | yes |
+| 2026-10-31 | 30 | no | yes |
+| 2026-11-01 | 31 | no | no |
+
+The ONNE register on 2026-10-01:
+| lesson | status | event date | age in days | review due | overdue | due soon | applied nowhere |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| ON-01 | "Published" | 2026-03-12 | 203 | 2026-10-20 | no | yes | no |
+| ON-02 | "Embedded" | 2026-01-20 | 254 | 2026-09-20 | yes | no | no |
+| ON-03 | "Published" | 2026-06-05 | 118 | 2026-10-31 | no | yes | yes |
+| ON-04 | "Published" | 2026-05-30 | 124 | null | no | no | yes |
+| ON-05 | "Validated" | 2026-08-14 | 48 | 2026-10-06 | no | no | no |
+| ON-06 | "Submitted" | 2026-09-10 | 21 | null | no | no | no |
+| ON-07 | "Draft" | 2026-09-25 | 6 | null | no | no | no |
+| ON-08 | "Archived" | 2025-02-01 | 607 | null | no | no | no |
+| ON-09 | "Superseded" | 2025-06-01 | 487 | null | no | no | no |
+| ON-10 | "Published" | 2026-07-01 | 92 | 2026-11-01 | no | no | no |
+- ON-05 is Validated with a review date inside the lead and reads neither overdue nor due soon, because it is not yet visible to anybody.
+- A lesson's age is counted from its event date. With no event date it falls back to the record's creation timestamp, read as the LOCAL calendar date of that instant (calendar.localDateOf), so the same row can be a day older in Lagos than in UTC. Every ONNE lesson records its event date, which is why every age above is the same in every zone.
+
+summarise, the dashboard and report counts:
+| count | value |
+| --- | --- |
+| lessons | 10 |
+| live | 8 |
+| visible | 5 |
+| awaitingValidation | 1 |
+| drafts | 1 |
+| applications | 6 |
+| applied | 4 |
+| rejected | 2 |
+| lessonsApplied | 3 |
+| lessonsUnapplied | 2 |
+| intoRiskRegister | 1 |
+| intoMoc | 1 |
+| reviewsOverdue | 1 |
+| reviewsDueSoon | 2 |
+- lessonsApplied and lessonsUnapplied count LESSONS, visible ones only. applied, rejected, intoRiskRegister and intoMoc count APPLICATIONS.
+- lessonByAttention, first to last: visible lessons nobody has applied, then lessons awaiting validation, then overdue reviews, then other live lessons, then the rest; newest event first within a rank: ON-03, ON-04, ON-06, ON-02, ON-07, ON-05, ON-10, ON-01, ON-09, ON-08.
+# App surface: the Lessons Learned dashboard computes reviewsOverdue and reviewsDueSoon and does not display either. RECON.md records it.
+
+# SECTION 18: What these engines hold, what the owner decided, and what the oracles check (owned by Expert m05)
+
+- HELD ITEMS are rules these engines state but that no owner has decided, or behaviours that are limits of the engine. Each is taught as a stated limit and graded nowhere:
+  - A band is found by its lower edge alone, so any positive score bands, including a score no cell of the grid holds (Section 2).
+  - countByBand counts whatever it is handed (Section 5).
+  - An action on a change that is not in the register counts as open work (Section 12).
+  - Within one urgency rank, changes sort by expiry date when they have one and by target date otherwise, so the two keys mix.
+  - A comment whose review is not in the list handed to the peer review summary still counts as open work, as an MOC action with an unknown change does (Sections 12 and 14).
+  - A reviewer named by display name only cannot be matched to the author, so the independence rule allows one (Section 14); a review with no author recorded cannot be checked either.
+  - Publishing a lesson checks that a validation record exists and does not check again who validated it.
+  - The application counts in the lessons summary include applications on lessons that are not visible.
+  - An invalid as-of date makes daysUntil answer NaN rather than refuse, and a comparison on NaN is false either way, so every date rule reads as not due. Nothing in this course passes one.
+- OWNER DECISIONS in this course scope, all taken on 2026-09-18 under AS15 and each held in the engine, the app and where it matters the database: D1 segregation of duties on change approvals (Section 9) and, from ASC-0, on peer review (Section 14); Q9 emergency change authority and the ratification window (Section 11); Q10 validation by typed name (Section 15); Q3 fractional levels unscored (Sections 2 and 3). AS13-0 decided that a closed temporary change reads "Closed out" (Section 11).
+
+The published golden case files, measured by reading them (golden, written by the oracles):
+| golden file | cases | cases carrying a repaired marker | functions exercised |
+| --- | --- | --- | --- |
+| calendar_cases.json | 77 | 25 | 5 |
+| riskScoring_cases.json | 140 | 30 | 7 |
+| managementOfChange_cases.json | 291 | 69 | 15 |
+| peerReview_cases.json | 184 | 38 | 17 |
+| lessonsLearned_cases.json | 345 | 19 | 26 |
+- Every exported function of each module is exercised by at least one golden case, and the gate replays every case in five time zones. The oracles were written from the rules as stated rather than from the JavaScript.
+- Golden cases, measured: 1037 across the five files in the table above. The other five assurance golden files belong to Compliance, Audit & Quality.
+- Every engine answer in THIS digest was replayed through the same oracles by oracle_bridge.py. A golden case checks the engine on the oracle author records; the bridge checks it on this course records.
+
+# SECTION 19: One loop across four registers: a lesson into a risk and into a change (owned by Expert m06)
+
+- ON-01, dropped object during a crane lift, was applied into the risk register on 2026-05-02 ("Adopted"), naming OB-07, Pump house flooded in the rainy season. That risk is "Realized", residual 8 "Medium", "Within appetite".
+- ON-02 was applied into the change register on 2026-06-10 ("Adopted"), naming ES-06, Revised operating procedure for glycol regeneration, now "Closed".
+- ALLOWED, recording an application into the risk register that names the risk.
+- The trail runs both ways because both ends carry a key: the lesson names the risk row or the change record, and each of those is a record with its own state. An audit finding can be the SOURCE of a lesson (source type "Audit finding", ON-06 above); the audit and its finding belong to Compliance, Audit & Quality, and this course reads them only as a source.
+
+# SECTION 20: HISTORY, and it is labelled as history in this title and in the line below it: what was repaired in these engines, and what each repair teaches (owned by Expert m05)
+
+EVERYTHING IN THIS SECTION IS HISTORY AND IS LABELLED AS HISTORY. Nothing above this line is. Teach it as what the engines used to do, the way this section does.
+
+The repair markers in the golden files, measured (each is a defect an oracle found, pinned as failing, then repaired and kept as a case):
+- calendar: ASC0-12, CAL-1, CAL-2.
+- riskScoring: AS15-Q3, RC-1, RC-2, RS-1, RS-2.
+- managementOfChange: AS15-D1, AS15-Q9, CAL-1, MOC-1, MOC-1,CAL-1, MOC-AS14-1, RC-3, RC-9.
+- peerReview: CAL-1, PR-1, PR-2, RC-4a, RC-4b, RC-9.
+- lessonsLearned: AS15-Q10, ASC0-12, CAL-1, LL-1, RC-9.
+- HISTORY, ASC-0 (engines PR #212, the repairs these two assurance courses found while this digest was being built): a closed risk used to read review-overdue and an as-of date given as text used to be read as a UTC instant; a change already in Implementation used to read overdue against its target date; peer review used to hold no rule on who reviews, and its summary used to count comments on cancelled reviews as blocking for ever; and several refusals used to read "A archived", "level 2 and 3 has" and "1 critical comment still need".
+- HISTORY, AS12 to AS15: a risk review due today used to read overdue west of Greenwich, because the date was parsed as UTC midnight. A blank residual axis used to zero the whole residual. An impossible date such as 30 February used to roll over into a real one. An unreadable expiry used to read "Expiring soon" and pass the implementation gate. A comment with no severity used to sort above Critical. Actions on finished changes used to count as open work for ever (AS14). Emergency changes used to need every level signed before implementation, and a lesson author used to be able to validate their own lesson by typing a name (both AS15).
+- The general lesson is the one this programme runs on: each of these was found by an independent oracle written from the stated rule (AS12 onward), and each is now a golden case that fails if the defect returns.
+

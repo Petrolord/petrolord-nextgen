@@ -1,0 +1,96 @@
+{
+ "slug": "riskchange",
+ "prefix": "asrc",
+ "name": "Risk, Change & Learning",
+ "pathOrder": 59,
+ "module": "assurance",
+ "prerequisite": null,
+ "repo": "/root/wt-as-riskchange-nextgen",
+ "branch": "feat/as-riskchange-course",
+ "goldens": [
+  "assurance/goldens/riskScoring_cases.json",
+  "assurance/goldens/managementOfChange_cases.json",
+  "assurance/goldens/peerReview_cases.json",
+  "assurance/goldens/lessonsLearned_cases.json",
+  "assurance/goldens/calendar_cases.json"
+ ],
+ "engines": [
+  "engines/assurance/riskScoring.js",
+  "engines/assurance/managementOfChange.js",
+  "engines/assurance/peerReview.js",
+  "engines/assurance/lessonsLearned.js",
+  "engines/assurance/calendar.js",
+  "engines/assurance/qualityAssurance.js"
+ ],
+ "enginesVendoredAt": "NextGen, sha-identical with engines ab3ce6a (ASC-1, PR #213), cherry-picked from the compliance branch's vendor commit so the two branches carry the same tree. ASC-1 changed only isoCompliance and complianceStatus, so nothing this course reads moved from 9d5d3b4 (ASC-0, PR #212), and the digest was proved byte-identical across the re-vendor before its header was relabelled. 53 paths over a WALKED closure; proved path by path by git blob hash and md5.",
+ "asOf": "2026-10-01",
+ "constants": {
+  "$classification": "Every constant a lesson may quote, classified. EXPORTED means the engine exports it and the digest prints it from the export. OWNER means an owner decision (AS15, 2026-09-18) fixed it. Every one is also stated independently by the module's oracle and oracle_bridge.py checks the two agree.",
+  "SCALE_MIN, SCALE_MAX": "the five whole levels of the matrix. EXPORTED. OWNER (AS15 Q3: fractions are unscored).",
+  "RISK_BANDS": "Critical from 15, High from 10, Medium from 5, Low from 1; found by the lower edge only. EXPORTED. The bands the register shipped with; changing them is an owner decision with a migration behind it.",
+  "EXPIRY_LEAD_DAYS": "the Expiring soon lead on a temporary change, counted inclusively. EXPORTED.",
+  "EMERGENCY_RATIFY_DAYS": "the window after implementation for an emergency change's remaining levels. EXPORTED. OWNER (AS15 Q9).",
+  "REVIEW_LEAD_DAYS": "the review due soon lead on a visible lesson, both ends counted. EXPORTED."
+ },
+ "leakScales": [
+  "1"
+ ],
+ "plan": {
+  "state": "FOUNDATION COMPLETE, RE-CUT ON ASC-0. Whole assurance family re-vendored sha-identical at 9d5d3b4, digest rebuilt on the repaired engine and reproducible across two rebuilds and four time zones, every engine answer replayed through the oracles, eighteen integer graded fields re-cut (none moved), gates re-run, scaffold written. No lesson, bank, panel, lab, migration or seed written yet.",
+  "thesis": "In assurance a status is earned by a rule over scores, dates and independent signatures, so the discipline is reading which rule decided each band, gate, verdict and lesson, and on which date.",
+  "tiers": {
+   "beginner": "Associate. RISK: THE SCORE, THE BAND, THE RESIDUAL AND THE DATE. The five by five matrix and its four bands found by their lower edges, the residual falling back one axis at a time, appetite against a target with a declined answer, the calendar date read in whole local days, and the register counted by band over a population the caller chooses. It ends on the OBODO register end to end.",
+   "intermediate": "Professional. CHANGE: STAGES, SIGNATURES, ACTIONS AND EXPIRY. The stage machine, approval levels derived from the rows, segregation of duties (AS15 D1), the two action gates, the temporary change that can expire only while in effect, and the emergency route with its ratification window (AS15 Q9). It ends on the ESANMI register summarised.",
+   "advanced": "Expert. REVIEW AND LEARNING: CLOSURE, INDEPENDENCE AND PROOF OF USE. The comment disposition loop, the two blocking severities and a review that cannot close, the author who never reviews their own work (ASC-0), a lesson's three parts and the author who may not validate it (AS15 Q10), the reuse record that counts rather than claims, embedding as earned, lesson review dates, the held items and owner decisions, and the loop from a lesson into a risk and a change."
+  },
+  "modulesPerTier": 6,
+  "lessonsPerTier": 26,
+  "questionsPerTier": 132,
+  "questionsPerModuleBank": 15,
+  "examQuestions": 42,
+  "lessonLength": {
+   "band": "420 to 560 words, ranked by est_minutes within a tier",
+   "measure": "PROSE WORDS ONLY, as FC6 counts them (lengths.py)"
+  },
+  "capstones": {
+   "count": 3,
+   "gradedFieldsEach": 6,
+   "beginner": "IGBARA flow station risk register: two scores of one risk, two band counts over the live population, two whole-day counts to a review date.",
+   "intermediate": "OKOMU compression station change register: one emergency ratification due date (YYYYMMDD) and five summary counts.",
+   "advanced": "ETIM floating production unit: one review's blocking and open comments, one lesson's applications and last application date (YYYYMMDD) and age, and the register's reviews due soon.",
+   "grading": "Every field is a whole number at tolerance 0.5 because the NextGen grader compares numbers only. No enum is graded; a date is graded as YYYYMMDD."
+  },
+  "panels": {
+   "lab": "src/components/course/panels/riskchange/riskchangeLab.js",
+   "ids": [
+    "rc-risk-explorer",
+    "rc-change-explorer",
+    "rc-review-explorer"
+   ]
+  }
+ },
+ "gates": {
+  "vendor/closure.py": "walks the import closure of the whole family at RC_ENGINES_REV (default ab3ce6a; ES, CommonJS, dynamic, data reads and the oracles' Python imports; suites seeded by listing the commit) and proves the vendored copy sha-identical path by path. 53 of 53.",
+  "vendor/ledger.py": "upserts the closure into VENDOR.json group 9-assurance-ahead-of-pin, each path pinned to its blob: 53 in all.",
+  "riskchange_dump.mjs": "the digest generator, with its own as-of gate (every date-taking export found by reading its signature must be handed the as-of date) and a clock trap (new Date() and Date.now() throw), refusal/allowed guards, section-owner checks, and a ledger of every engine call.",
+  "oracle_bridge.py": "replays every ledgered engine call (and every printed constant) through the Python oracle for its module and refuses on any disagreement or any unmapped export. --selftest plants a wrong score, an AS14 miscount and an unmapped export.",
+  "gate_repro.sh": "digest and ledger byte-identical across two rebuilds and four time zones (UTC, Africa/Lagos, Pacific/Kiritimati, Pacific/Pago_Pago). RC_NEGATIVE=utc plants a UTC-instant read (made in the generator now that ASC-0 repaired the engine's own) and only the western zone catches it.",
+  "gate_asof.mjs": "static scan for raw date calls around the guard, runtime clean runs of the dump, the capstone and discriminate under the clock trap, and both negative controls.",
+  "riskchange_capstone.mjs": "writes fields.json, precision.json and the capstone call ledger; asserts isOverdue, isReviewOverdue and byUrgency are on no graded path and that the ETIM log is one review's own.",
+  "discriminate.mjs": "wrong routes per graded field computed by the engine on mistaken readings; RC_NEGATIVE=blind plants a blind route.",
+  "gate_capstone_leak.py": "capstone ids, titles, people and condition sets against the digest and its generators; graded dates and distinctive integers against the digest.",
+  "gate_collision.py": "kit collisions.py across tiers; each graded value against the digest's value for the same quantity on a teaching record; capstone records against every golden argument record.",
+  "gate_promptleak.py": "the capstone prompts: no graded value in prose, input columns only, no graded date outside its declared selection column.",
+  "digestprose.mjs (kit)": "headings against their blocks, repair history framing, the owner copy rule, with this wave's rules file and ten engine pins (one went red on the ASC-0 re-vendor, as it should, and was re-pinned)."
+ },
+ "digest": {
+  "lines": 715,
+  "sections": 20,
+  "withheld": null,
+  "note": "Nothing is withheld. SECTION 20 is the one section whose subject is what these engines were repaired for (AS12 to AS15 and ASC-0) and it says so in its title and first line. The digest teaches the ASC-0 engine: nothing it prints is held or framed as an engine defect. The ASC-1 digest extension round added probes for the writers' gaps (REVISE.md maps each gap to its lines)."
+ },
+ "history": {
+  "position": "FRAMED HISTORY IS CURRICULUM, UNFRAMED HISTORY IS A DEFECT. Digest SECTION 20 is the only history; Expert m05 l03 owns it.",
+  "engineComments": "Repair comments in the engine source (RS-1, RS-2, MOC-1, AS14, AS15, and the ASC-0 notes RC-1 to RC-4, RC-9 and item 12) are provenance. A sentence lifted out of one arrives unframed."
+ }
+}

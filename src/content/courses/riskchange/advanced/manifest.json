@@ -1,0 +1,301 @@
+{
+  "app_slug": "riskchange",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-comment-loop",
+      "title": "The Comment Loop",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-six-dispositions",
+          "title": "Six dispositions",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-who-moves-a-comment",
+          "title": "Who moves a comment",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-nothing-to-verify-without-a-response",
+          "title": "Nothing to verify without a response",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-refusals-a-user-can-act-on",
+          "title": "Refusals a user can act on",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-two-final-dispositions",
+          "title": "Two final dispositions",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-closing-a-review",
+      "title": "Closing a Review",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-two-severities-that-block",
+          "title": "Two severities that block",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-review-that-cannot-close",
+          "title": "A review that cannot close",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-overdue-reviews-and-live-stages",
+          "title": "Overdue reviews and live stages",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-author-never-reviews-the-work",
+          "title": "The author never reviews the work",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-a-lesson-and-its-validation",
+      "title": "A Lesson and Its Validation",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-three-parts-of-a-lesson",
+          "title": "Three parts of a lesson",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-author-may-not-validate",
+          "title": "The author may not validate",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-typed-name-and-the-actor",
+          "title": "A typed name and the actor",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-validated-before-published",
+          "title": "Validated before published",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-proof-of-use",
+      "title": "Proof of Use",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-an-application-and-its-outcome",
+          "title": "An application and its outcome",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-reuse-record-counts",
+          "title": "The reuse record counts",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-embedded-is-earned",
+          "title": "Embedded is earned",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-archive-and-supersede-need-reasons",
+          "title": "Archive and supersede need reasons",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-an-application-must-carry",
+          "title": "What an application must carry",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-what-the-engines-do-not-know",
+      "title": "What the Engines Do Not Know",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-review-due-soon-and-overdue",
+          "title": "Review due soon and overdue",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-onne-register-summarised",
+          "title": "The ONNE register summarised",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-these-engines-were-repaired-for",
+          "title": "What these engines were repaired for",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-held-items-and-owner-decisions",
+          "title": "Held items and owner decisions",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-two-oracles-one-answer",
+          "title": "Two oracles, one answer",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-a-lesson-into-a-risk-and-a-change",
+          "title": "A lesson into a risk and a change",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-capstone-worked",
+          "title": "The capstone worked",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "rc-review-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-these-engines-hand-over",
+          "title": "Where these engines hand over",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
