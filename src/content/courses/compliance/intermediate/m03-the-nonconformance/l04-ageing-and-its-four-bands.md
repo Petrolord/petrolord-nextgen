@@ -19,7 +19,7 @@ The three open ages, 43, 64 and 117 days, are true at the as-of date 2026-10-15.
 
 ## An open NCR keeps ageing
 
-This is the point of the measure. An NCR that stays open grows older every day, whatever its status word says. NCR-2026-019 reads Disposition agreed, a status that sounds settled, and at 117 days it is the oldest open NCR on the register. Closing an NCR is the only thing that stops its age. Agreeing a disposition, raising actions and completing them all leave the clock running, because each of them is a step towards closure and none of them is closure itself.
+An NCR that stays open grows older every day, whatever its status word says. NCR-2026-019 reads Disposition agreed, a status that sounds settled, and at 117 days it is the oldest open NCR on the register. summarise prints the same figure as oldest open 117 days, beside a mean open age of 75 days. NCR-2026-031 reads Actions in progress, and its 43 days are counted to the as-of date as well. Only a closed date stops the count. Agreeing a disposition, raising actions and completing them all leave the clock running.
 
 A voided NCR stops ageing too. NCR-2026-011, pipe ovality out of tolerance, was raised on 2026-05-11 and voided on 2026-05-13, and its age is 2 days.
 

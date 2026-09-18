@@ -34,7 +34,7 @@ clauseCoverageByStandard reads each clause against its own standard's cycle. The
 | ISO 14001:2015 | 8.1 | 2025-10-14 | true | false |
 | ISO 45001:2018 | 6.1.2 | 2025-10-14 | false | true |
 
-The same examination date gives two different answers. Clause 8.1 is inside its 3 year cycle and reads covered. Clause 6.1.2 of ISO 45001:2018 is outside its 1 year cycle and reads stale. A register that holds more than one standard cannot be read against a single cycle, and this function exists so that it is not.
+The same examination date gives two different answers. Clause 8.1 is inside its 3 year cycle and reads covered. Clause 6.1.2 of ISO 45001:2018 is outside its 1 year cycle and reads stale. clauseCoverageByStandard reads each clause against its own standard's cycle, so one register can hold a 3 year standard and a 1 year standard side by side.
 
 Note that clause 6.1.2 here belongs to ISO 45001:2018. It is a different requirement from ORASHI's clause 6.1.2 of ISO 14001:2015, which shares its number and reads never in lesson 3. A clause number means something only beside its standard, which is why every refusal and every readiness sentence in this tier names the standard it was read against.
 

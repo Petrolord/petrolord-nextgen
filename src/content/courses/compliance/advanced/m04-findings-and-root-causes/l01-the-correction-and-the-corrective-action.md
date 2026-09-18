@@ -44,7 +44,7 @@ The actions table carries the two action types this module uses:
 | ac3 | ISF-2026-005 | Corrective | Open | false |
 | ac4 | ISF-2026-004 | Preventive | Complete | false |
 
-A preventive action deals with a cause that has not yet produced a nonconformity. It is welcome on a Major finding, and it does not satisfy the rule. The rule asks for a corrective action because the nonconformity has already happened.
+A preventive action deals with a cause that has not yet produced a nonconformity. It is welcome on a Major finding, and it does not satisfy the rule. The refusal names what the rule asks for: "A correction deals with the instance; a corrective action deals with the cause."
 
 ## The Professional parallel
 

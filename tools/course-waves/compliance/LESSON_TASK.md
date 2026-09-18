@@ -33,7 +33,7 @@ understand the work. Do not take a figure or a sentence from any of them.
 
 ## History on this wave
 
-This digest describes the engine as it is at 9d5d3b4 (ASC-0). It carries NO section about
+This digest describes the engine as it is at ab3ce6a (ASC-1). It carries NO section about
 what the engine used to do. It names owner decisions by the wave that took them
 (AS13-0, AS15, ASC-0) in SECTION 23, and each of those lines states CURRENT behaviour. A
 sentence about former behaviour that reads as current behaviour is a defect; do
@@ -76,7 +76,7 @@ Run it over your lessons as well as the digest.
    marks.** The digest prints each one after `REFUSED:`. The oracles check the
    verdict and never the wording, so the words are the engine's own and nothing
    else vouches for them.
-4. **THE ENGINE SENTENCES ARE CURRENT AT 9d5d3b4 (ASC-0).** Five rules this
+4. **THE ENGINE SENTENCES ARE CURRENT AT ab3ce6a (ASC-1).** Five rules this
    course's recon asked for are in force and SECTION 23 states each one with its
    measured figures: one rule for "outstanding" audits, percents rounded half up
    on the exact fraction, expired and expiring as separate certificate flags, a

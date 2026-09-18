@@ -1,6 +1,6 @@
 # A list of blockers
 
-Every module of this tier has built towards one question: is the ORASHI management system ready for certification? certificationReadiness answers it for ISO 14001:2015 at the as-of date 2026-10-15. Its answer is ready false, and a list. This lesson reads the list as a whole. It carries no percentage and no score, and that is the design.
+Every module of this tier has built towards one question: is the ORASHI management system ready for certification? certificationReadiness answers it for ISO 14001:2015 at the as-of date 2026-10-15. Its answer is ready false, and a list. This lesson reads the list as a whole. It carries no percentage and no score.
 
 {{panel:compliance-readiness-explorer}}
 
@@ -22,9 +22,9 @@ Every module of this tier has built towards one question: is the ORASHI manageme
 
 ## Why a list
 
-A single readiness percentage would have to weigh an open Major nonconformity against a clause review that is past due, and give each a share of a hundred. Any such weighting is somebody's opinion, and a high percentage can sit over one item a certification body will not look past. The first blocking item says exactly that: "A certification body will not recommend certification over one."
+certificationReadiness returns a verdict, ready false, and a list of items. Each item carries a severity, a count and a sentence. It returns no percent: SECTION 23 names checklistProgress, programmeProgress and planProgress as the three exports that print a percent, and certificationReadiness is not one of them. The first blocking item names the open Major nonconformity and adds: "A certification body will not recommend certification over one."
 
-A list avoids the weighting. Every item is counted, named in words, and given a severity. The reader sees what stands in the way and how many of each, and nothing is averaged away. The Associate tier learned that a status is derived from a dated record. This tier ends with the same idea at the scale of a whole system: readiness is derived, and it is derived as a list of what the record still lacks.
+Every item is counted, named in words, and given a severity. The reader sees what stands in the way and how many of each. The Associate tier learned that a status is derived from a dated record. This tier ends with the same idea at the scale of a whole system: readiness is derived, and it is derived as a list of what the record still lacks.
 
 ## Every item points back to a module
 

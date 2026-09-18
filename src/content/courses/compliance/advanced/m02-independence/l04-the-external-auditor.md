@@ -14,7 +14,7 @@ Both checks compare names held on the record. The clause owners in the ORASHI re
 
 ## What ALLOWED means here
 
-ALLOWED says the engine found no conflict among the names it holds. It is the right answer, because an external auditor is exactly the kind of person who owns nothing in the register. The row is still worth reading closely. The engine allows the external name because it has nothing to compare it with. The digest prints the verdict and nothing more, so what an external auditor's independence rests on in fact is outside what these rows show. That judgement stays with the people who appoint the auditor, and the audit record should say who they are and on whose behalf they examine.
+ALLOWED says the engine found no conflict among the names it holds. The row is still worth reading closely. The digest prints the verdict and nothing more, so what an external auditor's independence rests on in fact is outside what these rows show. That judgement stays with the people who appoint the auditor, and the audit record should say who they are and on whose behalf they examine.
 
 ## An external audit is a different thing
 

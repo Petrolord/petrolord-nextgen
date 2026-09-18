@@ -26,7 +26,7 @@ The emergency response plan is 18 days from review and reads Review due soon, th
 
 The tank inspection standard is Approved, one of the two statuses in force, and reads Review scheduled at 258 days. It is live and has a date on the record, so for now the only work is to keep that date.
 
-The flare management philosophy is Published with no review date. It reads No review scheduled, and it is the document in force that nobody has committed to reviewing. The fix is a review period on the record. If the caller supplies none, nextReviewDate returns no date, and the 24 month DEFAULT_REVIEW_PERIOD_MONTHS is the caller's to apply.
+The flare management philosophy is Published with no review date, and it reads No review scheduled. It has no issue date recorded either, so nextReviewDate has nothing to count from, and a review period on its own gives it no date. The fix is a review date on the record, or an issue date for a review period to count from.
 
 ## The three not in force
 
@@ -36,7 +36,7 @@ The hydrotest procedure is the one in review, and its review task is governed by
 
 ## What the controller takes away
 
-Three actions come out of this library. Review the sampling procedure, which is overdue. Start the review of the emergency response plan, which is due soon. Put a review period on the flare management philosophy, so it earns a date. Everything else is scheduled or not live. None of the three actions needed judgement to find. Each one was read off a review state the engine derived from a date and the as-of date.
+Three actions come out of this library. Review the sampling procedure, which is overdue. Start the review of the emergency response plan, which is due soon. Put a review date, or an issue date, on the flare management philosophy. Everything else is scheduled or not live. Each action was read off a review state the engine derived from a date and the as-of date.
 
 ## Reading the library and the register together
 

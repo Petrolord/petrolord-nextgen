@@ -21,7 +21,7 @@ The reporting walk, read in order, is the audit team's list of work:
 | 3 | write the audit conclusion |
 | 4 | ALLOWED |
 
-The order is the engine's. The checklist comes first, because a finding is raised from an answer. The findings come next, and the conclusion comes last, because it has to account for both. A lead auditor must be named throughout, and must not be the auditee. After reporting, closure asks for the major findings to be closed and for any finding that stopped work to be closed as well.
+The order is the engine's. The checklist comes first, the findings come next, and the conclusion comes last. A lead auditor must be named throughout, and must not be the auditee. After reporting, closure asks for the major findings to be closed and for any finding that stopped work to be closed as well.
 
 AUD-2026-007 reads overdue true against its planned end of 2026-10-09. Finishing the fieldwork has not cleared that. Reporting the audit will.
 

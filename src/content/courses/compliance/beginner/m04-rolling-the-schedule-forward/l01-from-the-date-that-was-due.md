@@ -20,7 +20,7 @@ After the filing is recorded and the due date rolled, the return reads Due soon,
 
 A regulator's monthly return is due on the same day each month. Filing late in October does not move November's deadline. If the schedule rolled from the filing, the next due date would be 2026-11-14, and the register would show a deadline that the regulator does not recognise. The operator would believe it had until the fourteenth when the return is due on the tenth.
 
-Each late filing would push every later deadline further out, so an operator that is habitually late would end up with a schedule that says it is on time. Rolling from the date that was due keeps the schedule anchored to the regulator's calendar, however late any one filing is.
+The digest prints both calls. rollForward(2026-10-10, Monthly) gives 2026-11-10, and the same call on the filing date of 2026-10-14 would give 2026-11-14. The Regulatory Compliance app passes the due date to rollForward when a filing is recorded, so the next due date it walks to is 2026-11-10.
 
 ## What the panel shows
 

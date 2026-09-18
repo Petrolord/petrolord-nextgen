@@ -35,7 +35,7 @@ With both passed the hold point refusal is gone, and a third one appears, about 
 
 When the walk reaches ALLOWED, planProgress reads resolved 9 of 12, percent 75, and W-09, S-10, R-12 are still unresolved. A witness point, a surveillance point and a review point stand unresolved on a plan the engine lets close. S-10 and R-12 are overdue at the as-of date and still do not stand in the way.
 
-That is the plan's own design. The stops work column is true for hold points alone, and the closure gate asks about exactly those points. An engineer who wants every witness point closed before sign-off has to ask for it in the procedure. The engine will not enforce it through canClosePlan.
+The stops work column is true for hold points alone, and the closure gate asks about exactly those points. An engineer who wants every witness point closed before sign-off has to ask for it in the procedure. The engine will not enforce it through canClosePlan.
 
 ## Exercise
 

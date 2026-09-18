@@ -34,7 +34,7 @@ Read the rows together and three rules come out.
 
 A hold point may be taken off a Draft plan, and H-08's removal from the Draft plan is ALLOWED. Once a plan is in force, a hold point that no longer applies is set aside with a date, a name and a reason, the route module one walked for H-11, so the plan keeps its trace.
 
-A point with a result stays. R-04, the NDT procedure review, Passed, and the refusal names the item and the result a removal would erase. Its result is evidence that a check happened, and a plan that could drop its passed points could no longer show what it was built on.
+A point with a result stays. R-04, the NDT procedure review, Passed, and the refusal names the item and the result a removal would erase. The refusal says why in its own words: a recorded result is evidence and stays on the plan.
 
 A closed plan is frozen. W-09 may be removed from the Active plan while it is pending, and the same point may not be removed from the Closed plan. A closed plan's points are the record of what it was finished on.
 

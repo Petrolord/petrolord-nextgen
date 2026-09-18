@@ -1,6 +1,6 @@
 # A waiver carries its reason
 
-A waiver accepts that a planned check will not be done and lets the work carry on anyway. The qualityAssurance module counts Waived as a resolved status, beside Passed and Not applicable, so a waived point moves the plan's progress exactly as a passed one does. That is why the gate asks a waiver for one thing more than a pass.
+A waiver accepts that a planned check will not be done and lets the work carry on anyway. The qualityAssurance module counts Waived as a resolved status, beside Passed and Not applicable, so a waived point moves the plan's progress exactly as a passed one does. The gate asks a waiver for one thing more than a pass: a reason.
 
 {{panel:compliance-plan-explorer}}
 
@@ -26,7 +26,7 @@ A reason alone is not enough. Asked to waive W-09 with a reason and no date or v
 
 So a waiver needs three things on the record: the date, who decided it, and why. The digest walks the same request on a hold point. H-08, the hydrostatic test, waived with a date, a verifier and a reason, is ALLOWED. H-08 waived with a date and a verifier and no reason is refused with the same waiver sentence W-09 met.
 
-Read the allowed row plainly. canDecideCheckpoint has no rule that forbids waiving a hold point. A waived hold point with its record and reason is resolved, the same as a waived point of any other type. The engine asks a hold point waiver for its record and its reason, and it asks nothing more. Whether a hold point should ever be waived is a decision for the people who own the plan, and the reason on the record is where that decision is written down.
+Read the allowed row plainly. canDecideCheckpoint has no rule that forbids waiving a hold point. A waived hold point with its record and reason is resolved, the same as a waived point of any other type. The engine asks a hold point waiver for its record and its reason, and it asks nothing more.
 
 When you read a plan, treat each Waived row as a question with its answer attached: who decided that the check was not needed, on what date, and why.
 

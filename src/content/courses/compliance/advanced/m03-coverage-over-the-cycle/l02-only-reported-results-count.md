@@ -17,7 +17,7 @@ The three that do count are two Closed audits, ISA-2023-002 and ISA-2024-001, an
 
 ## An audit in progress
 
-ISA-2026-002 is In progress. It has already examined clause 5.2, Conformant on 2026-10-06, and clause 5.2 still reads last examined 2026-06-09, by ISA-2026-001. Until the audit is reported, no result it holds moves a clause's last examined date. Until then the audit's conclusion has not been written, and nothing on the record says what the audit as a whole found. Coverage waits for the report, because the report is the audit's deliverable and the only statement an auditee or a certification body can hold the organization to.
+ISA-2026-002 is In progress. It has already examined clause 5.2, Conformant on 2026-10-06, and clause 5.2 still reads last examined 2026-06-09, by ISA-2026-001. Until the audit is reported, no result it holds moves a clause's last examined date. Until then the audit's conclusion has not been written, and nothing on the record says what the audit as a whole found. Coverage waits for the report, and the engine's own refusal calls the report the deliverable.
 
 The ISO module refuses to report an audit whose scope still has clauses without a result. For ISA-2026-002, with three clauses in scope and two not yet examined, canReportAudit answers:
 

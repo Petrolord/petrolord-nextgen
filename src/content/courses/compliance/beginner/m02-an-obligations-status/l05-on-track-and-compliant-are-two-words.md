@@ -39,9 +39,9 @@ A filing for the current period is not the only thing Compliant asks. deriveStat
 
 Owner decision AS15 Q2 states it: evidence counts towards Compliant only for the current period. A filing made for last quarter says nothing about this quarter. The next module shows where the current period starts and how one day decides whether a filing counts.
 
-## Why the order puts On track first
+## Where the order puts On track
 
-In complianceStatus.STATUS_SEVERITY On track is fourth and Compliant is fifth. On track is the worse of the two because it has work outstanding. In the register sorted worst first the two On track rows sit sixth and seventh and the two Compliant rows sit eighth and ninth.
+In complianceStatus.STATUS_SEVERITY On track is fourth and Compliant is fifth. The reasons quoted above show what separates them: only the two On track reasons say nothing has been filed for this period yet. In the register sorted worst first the two On track rows sit sixth and seventh and the two Compliant rows sit eighth and ninth.
 
 A report that lumps On track and Compliant together under a heading like "fine" throws away which obligations still need a filing this period. At IKORO the engine's summarise prints On track 2 and Compliant 2, and those two counts describe two different states.
 

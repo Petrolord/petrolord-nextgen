@@ -48,7 +48,7 @@ A report is somebody's report, and the lead auditor is the person answerable for
 
 ## What the order teaches
 
-The four requirements build on each other. The engine asks for a complete checklist before it asks about findings, because a finding can only be raised from an answer. It asks for the findings before the conclusion, because the conclusion has to account for them. Each refusal names only the next thing missing, so the auditor works through the record in the same order the report will be read.
+The four requirements come in a fixed order. The engine asks for a complete checklist before it asks about findings, and it asks for the findings before the conclusion. Each refusal names only the next thing missing, so the auditor works through the record in the order the refusals arrive.
 
 The walk also shows what the gate does not ask for. A digest probe reports a three-item checklist with a Major item and a Minor item answered Nonconformant and no finding raised: canReportAudit answers ALLOWED. The engine has no rule that a Major or Minor nonconformance must raise a finding before the audit is reported. Reporting needs every question answered and every failed critical question covered. It does not need the site to have conformed.
 

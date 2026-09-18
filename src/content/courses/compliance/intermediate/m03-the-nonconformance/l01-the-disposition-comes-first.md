@@ -37,7 +37,7 @@ NCR-2026-019, the wrong flange rating delivered, reads Disposition agreed with t
 
 Two dispositions keep a non-conforming item in use. The module's CONCESSION_DISPOSITIONS list holds Use as is and Regrade. A concession accepts the item as it stands, or at a lower grade, where the other five dispositions change it, send it back or remove it.
 
-The NCR summarise at the as-of date prints concessions 2. The two ABAM NCRs whose disposition is on that list are NCR-2026-022, bolt torque record missing, Use as is, and NCR-2026-006, gate valve body casting porosity, Regrade. Both are Closed, and the count keeps them. A concession is worth counting after closure because it is the NCR outcome that leaves a known departure from specification in service.
+The NCR summarise at the as-of date prints concessions 2. The two ABAM NCRs whose disposition is on that list are NCR-2026-022, bolt torque record missing, Use as is, and NCR-2026-006, gate valve body casting porosity, Regrade. Both are Closed, and the count of 2 includes them both. Their dispositions, Use as is and Regrade, are the two that qualityAssurance.CONCESSION_DISPOSITIONS lists.
 
 ## Why the item comes before the cause
 

@@ -15,7 +15,7 @@ The second request carries no evidence reference, and the gate allows it. So a N
 
 ## Why the rule is shaped this way
 
-A Conformant status asserts that documented information shows a requirement is met. The assertion stands on the document, so the document has to be named. A Nonconformant status asserts that the requirement is not met. The register does not need a document proving the gap before the gap may be recorded. What it does need is when the clause was assessed and who assessed it, because a verdict with no date cannot be placed in a cycle and a verdict with no name cannot be checked against the owner of the clause.
+A Conformant status asserts that documented information shows a requirement is met. The assertion stands on the document, so the document has to be named. A Nonconformant status asserts that the requirement is not met. The register does not need a document proving the gap before the gap may be recorded. What it does need is when the clause was assessed and who assessed it.
 
 A problem therefore needs less on the record than a claim of conformity does.
 

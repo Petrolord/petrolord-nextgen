@@ -34,9 +34,9 @@ Other is for an obligation whose timing does not fit a fixed interval: something
 
 Two IKORO rows are Other. REG-2026-010, the safety case resubmission, is Draft with a due date of 2027-06-30, and its lifecycle takes it out of the countdown. REG-2026-013, the waste consignment register, has no due date and no expiry, and it reads No date set, with the reason "No due date or expiry date has been set, so nothing can fall due."
 
-## Why no guess
+## What the none leaves on the row
 
-An engine could default Other to annual, or treat a One-off as recurring once a year. Either would produce a tidy register with a next date on every row, and some of those dates would be fiction. A fictional due date is worse than none, because a register reader trusts a date and does not question it. None tells the reader that the schedule for this row is somebody's job. The register would rather show a gap a person can see than a date nobody chose.
+rollForward returns none for One-off and for Other, and periodStart returns none for One-off. The engine writes no next date in place of either none. A row with no due date and no expiry reads No date set, as REG-2026-013 does, and its reason says nothing can fall due. The next due date for such a row has to be entered by somebody who knows it.
 
 ## Exercise
 

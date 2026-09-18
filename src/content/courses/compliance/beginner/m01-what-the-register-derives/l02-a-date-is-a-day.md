@@ -32,7 +32,7 @@ This matters for two reasons. The first is that a regulator's due date is a day,
 
 ## The count is the engine's
 
-Throughout this course the day counts come from the engine and are quoted from the digest. You are not asked to count days on a calendar yourself, and the lessons never do. A count that somebody works out by hand can be off by one at a month end or a leap day, and the engine's count is the one the app shows the user.
+Throughout this course the day counts come from the engine and are quoted from the digest. You are not asked to count days on a calendar yourself, and the lessons never do. The digest header states the form every figure takes: whole numbers, with day counts, counts and percents the engine has already rounded, and dates printed as YYYY-MM-DD.
 
 ## Exercise
 

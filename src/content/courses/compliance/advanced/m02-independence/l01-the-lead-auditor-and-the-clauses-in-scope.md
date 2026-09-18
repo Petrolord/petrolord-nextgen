@@ -31,7 +31,7 @@ The sentences for u-nneka and u-tari have the same shape, each naming the one cl
 
 ## The check reads this audit's own scope
 
-Look again at u-nneka. In the ORASHI register u-nneka owns clauses 4.1, 4.3, 9.2 and 10.2. Only 9.2 is in this audit's scope, and only 9.2 is named in the refusal. The engine does not refuse u-nneka for owning clauses somewhere in the register. It refuses because a clause u-nneka owns is inside the scope this audit will examine. The refusal says so in its own words: "in this audit's own scope".
+Look again at u-nneka. In the ORASHI register u-nneka owns five clauses: 4.1, 4.3, 9.2, 10.2 and 4.4, the one clause marked Not applicable. Only 9.2 is in this audit's scope, and only 9.2 is named in the refusal. The engine does not refuse u-nneka for owning clauses somewhere in the register. It refuses because a clause u-nneka owns is inside the scope this audit will examine. The refusal says so in its own words: "in this audit's own scope".
 
 That is why the refusal offers two ways out. Either the scope changes, so the lead does not audit a clause they own, or the auditor changes. The engine does not choose between them. It names the clauses so that whoever plans the audit can.
 

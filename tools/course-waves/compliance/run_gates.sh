@@ -28,6 +28,10 @@ run capstone-generator 0 node compliance_capstone.mjs
 run oracle-check 0 python3 oracle_check.py
 run oracle-check-CONTROL 1 python3 oracle_check.py --plant
 run discriminate 0 node discriminate.mjs
+# Lessons and banks against the graded answers. Added 2026-09-18: neither
+# gate_capstone_leak nor gate_promptleak reads lessons, and a lesson printed a
+# graded value (advanced m06 l03, 32) that only this gate saw.
+run kit-leakage-lessons 0 node /root/dc-wavekit/leakage.mjs $W --integers --content-root /root/wt-as-compliance-nextgen/src/content/courses/compliance
 run discriminate-CONTROL 1 node discriminate.mjs --plant
 run collisions 0 python3 gate_collisions.py
 run collisions-CONTROL 1 python3 gate_collisions.py --plant
