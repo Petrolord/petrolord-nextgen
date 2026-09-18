@@ -82,11 +82,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20260925_fc9_corrosion_course           ) echo 36c096ef26ed04732390bee5282b8a1c5685ab0500257e05c05bb4dca9ac5e18 ;;
-    20260925_fc9_corrosion_beginner_deep    ) echo bb922176fe5c1f61f162bfa5fc40a27678cee93d36919e56702c701d5121ef8c ;;
-    20260925_fc9_corrosion_intermediate_deep) echo ac20f953dc1d709b0b0b0ee99a33c287f799fc9757dfcee01f8307e9d498927f ;;
-    20260925_fc9_corrosion_advanced_deep    ) echo d0f98a515b707052016483c97b756f8d3e9b09e66ffa8e8ce54643b4b12d6daa ;;
-    20260925_fc9_corrosion_go_live          ) echo bf35ab1cc9e6ac43a247530abb55b82b7828cb4c340dab51a8878a0792497e56 ;;
+    20260925_fc9_corrosion_course           ) echo bfb1a152ac6936f5847c113748b0d3ca8913db5600fad6c27da2a39d547a1031 ;;
+    20260925_fc9_corrosion_beginner_deep    ) echo ef0544ac6ce6cbcb335dd5596b26a0dff3bfb24ff4c389933f7452c3a72cfc17 ;;
+    20260925_fc9_corrosion_intermediate_deep) echo d84d2f7c2e2f95268ead922c0843b5291df4ce651c6d8a11fe194dfa5467feb7 ;;
+    20260925_fc9_corrosion_advanced_deep    ) echo ce1dd8bd1fcfa9ccbbbef1efa7e76125c035855b34736d5896f38dec2626c0fe ;;
+    20260925_fc9_corrosion_go_live          ) echo a8f01eb3404f8baf98a76cbbc0585216479c40cc8ae215c1352212d13414060b ;;
     *) echo UNPINNED ;;
   esac
 }
