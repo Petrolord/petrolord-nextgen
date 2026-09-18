@@ -1,0 +1,38 @@
+-- ============================================================================
+-- FC6 ASSOCIATE DEEP SEED: Heat Exchange & Cooling, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE DUTY, THE DRIVING FORCE AND THE SURFACE. What this
+-- engine rates and what it refuses to answer; the stream reduced to the one
+-- number a balance knows it by, its capacity rate; the refusals that stand
+-- between a balance and a crossed pair of streams; the log mean and the two
+-- pairings it is read from; the surface the duty needs and the tubes that
+-- carry it; and the studio's own default case walked end to end.
+--
+-- THE ENGINE FACT THIS TIER OWNS. This is the only part of the module that
+-- runs end to end in CLOSED FORM, so a learner watches a whole answer assemble
+-- before anything iterates. The balance knows a stream by one number and
+-- everything after that is about the machine.
+--
+-- THE TRAP THE TIER IS BUILT ON. The tube count closes as a LOOP and the loop
+-- rounds twice. A bundle divides its tubes equally between its passes, so the
+-- count is rounded up to cover the area and then rounded up again to a whole
+-- multiple of the pass count. A reader who takes the first rounding for the
+-- answer gets the surface margin wrong, and the capstone is built on a case
+-- where the second rounding MOVES the count rather than leaving it alone.
+--
+-- HELD FOR LITERATURE, taught as a limit and never graded in any tier: the
+-- bundle constant table, the cross-flow correction factor, the fan constant,
+-- the default wall conductivity, the three air-cooler machine defaults and the
+-- Dittus-Boelter validity band. The capstone grades none of them. AMENAM is
+-- given its overall coefficient, so no film is computed and none of the five
+-- fitted constants is read; and no graded field reads a bundle or shell
+-- diameter, which is the only place the held table reaches.
+--
+-- The only numbers that travel from this tier to the next are the log mean and
+-- the shape of a surface, which the Professional tier then corrects by a route
+-- with nothing in common.
+-- ============================================================================

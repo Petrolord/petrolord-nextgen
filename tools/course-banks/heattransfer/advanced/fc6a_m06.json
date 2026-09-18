@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "On the teaching bay, which of these figures was chosen rather than computed?",
+  "options": [
+   "The air outlet of 125.000000 degF.",
+   "The air rise of 30.000000 degF.",
+   "The log mean of 85.263896 degF.",
+   "The air mass of 2777777.7778 lb an hour."
+  ],
+  "answer": 1,
+  "explanation": "The rise is a trade rather than a result. The outlet is the ambient plus the rise, the log mean follows from the four terminals, and the air mass follows from the duty and the rise."
+ },
+ {
+  "prompt": "Which figure on the same bay is computed rather than given to the module?",
+  "options": [
+   "The coefficient of 4.500000 on the bare surface.",
+   "The barometric pressure of 14.700000 psia.",
+   "The bare surface of 52125.749338 ft2.",
+   "The process outlet of 150.000000 degF at the design point."
+  ],
+  "answer": 2,
+  "explanation": "The surface is the arithmetic of a duty, a coefficient and a driving force. The coefficient is an input because this module never computes an air-side coefficient from fin geometry."
+ },
+ {
+  "prompt": "Work the design point in order. Which sequence needs each step for the one after it?",
+  "options": [
+   "The air outlet, then the log mean, then the bare surface, then the air mass.",
+   "The bare surface, then the log mean, then the air outlet, and the air mass last of all.",
+   "The air mass, then the air outlet, then the surface, then the log mean.",
+   "The log mean, then the air outlet, then the air mass."
+  ],
+  "answer": 0,
+  "explanation": "On the teaching bay those four are 125.000000 degF, 85.263896 degF, 52125.749338 ft2 and 2777777.7778 lb an hour."
+ },
+ {
+  "prompt": "At a check ambient of 112.000000 degF, what does the teaching bay deliver?",
+  "options": [
+   "A duty fraction of 0.812903, a duty of 16258064.5161 Btu an hour, a process outlet of 168.709677 degF and an air rise of 24.387097 degF, which is the hottest row of the sweep.",
+   "A duty fraction of 0.941935, a duty of 18838709.6774 Btu an hour, a process outlet of 155.806452 degF and an air rise of 28.258065 degF, which is the row below it.",
+   "A duty fraction of 0.890323 with the process outlet held at 150.000000 degF and the air rise held at 30.000000 degF.",
+   "A duty fraction of 0.890323, a duty of 17806451.6129 Btu an hour, a process outlet of 160.967742 degF and an air rise of 26.709677 degF."
+  ],
+  "answer": 3,
+  "explanation": "The first alternative is the row at 124.000000 degF and the second the row at 104.000000 degF. A duty that has fallen with a held outlet and a held rise is the state this rating was repaired to stop reporting."
+ },
+ {
+  "prompt": "The hot-day log mean at 112.000000 degF is 75.912371 degF and UA is 234565.8720 Btu an hour per degF. What does their product come to, and what does it check?",
+  "options": [
+   "17806451.6129 Btu an hour, scaled from the design duty.",
+   "16258064.5161 Btu an hour, the duty at 124.000000 degF.",
+   "234565.8720 Btu an hour, because a UA times a log mean returns the UA when the two methods agree.",
+   "17806451.6129 Btu an hour, which is the rated duty reached by the other method."
+  ],
+  "answer": 3,
+  "explanation": "The effectiveness route never evaluated the surface equation and the surface route never evaluated the effectiveness relation, so the agreement is two methods meeting."
+ },
+ {
+  "prompt": "The correction factor on this bay comes back empty. What has to travel with the design surface because of it?",
+  "options": [
+   "The check ambient, because a surface without one is a design figure rather than a rating.",
+   "The word counter-current, because the surface is a counter-current-basis surface.",
+   "The declared margin of 10 percent, because the module applies it wherever a factor is missing.",
+   "The fan inlet temperature, because the surface and the fan power are reported on the same answer."
+  ],
+  "answer": 1,
+  "explanation": "A caller that copies the area alone onto a sheet has copied a counter-current-basis figure without the sentence that qualifies it, and the sheet then reads as a sized bay."
+ },
+ {
+  "prompt": "Why does a study of this kind state its own fan static pressure, fan efficiency and motor efficiency rather than take the module's 0.600000, 0.650000 and 0.920000?",
+  "options": [
+   "Those three are fitted correlation coefficients, and a fitted number may not appear in a study.",
+   "Those three sit in the held register, and a held item may not be used in a calculation at all.",
+   "Those three name no machine at all, and a pin makes moving one a reviewed act rather than a validation of it.",
+   "Those three are measured out of the engine's own answers, so a study has to measure them again."
+  ],
+  "answer": 2,
+  "explanation": "The default wall conductivity of 26 names no material on the same terms. A study that states its own is reporting a fan it has chosen rather than inheriting a number with nothing behind it."
+ },
+ {
+  "prompt": "The hot-day block reads no declared constant at all. What follows from that?",
+  "options": [
+   "Nothing held for literature reaches the rated answer.",
+   "The rated answer carries no basis string, since there is no constant to name in one.",
+   "The rated answer has to be checked against the design point before it can be quoted.",
+   "The rated answer is the only one in this module that the published file does not cover."
+  ],
+  "answer": 0,
+  "explanation": "It takes the surface and the air mass and holds the effectiveness from its definition at the design point, assuming no arrangement and applying no correction factor."
+ },
+ {
+  "prompt": "Which of these does this module not do?",
+  "options": [
+   "A tube count.",
+   "A rigorous cross-flow rating.",
+   "A log mean.",
+   "An effectiveness and an NTU in both directions."
+  ],
+  "answer": 1,
+  "explanation": "The list it declines is a shell-side film from stream analysis, pressure drop, a vibration check, condensation or boiling, fin geometry, and a rigorous cross-flow rating."
+ },
+ {
+  "prompt": "Pressure drop in a line and machine work belong to other engines. Which two?",
+  "options": [
+   "The Pipeline and Line Sizing engine, and Separation.",
+   "Separation, and Rotating Equipment.",
+   "Relief and Flare, together with the Pipeline and Line Sizing engine.",
+   "The Pipeline and Line Sizing engine, and Rotating Equipment."
+  ],
+  "answer": 3,
+  "explanation": "The fan on this bay is one line of arithmetic: a volume, a static pressure and two efficiencies. Fans, pumps and compressors as machines are not attempted here."
+ },
+ {
+  "prompt": "The shell-side film coefficient stays an input everywhere in this module. What reason does the module give?",
+  "options": [
+   "The shell-side correlation is in the held register, with its validity band unestablished.",
+   "The shell side is refused rather than defaulted, in the way a cooled tube side is.",
+   "A rigorous shell-side coefficient needs stream analysis that belongs in a dedicated rating package.",
+   "The published file carries no shell-side row, so nothing could check a computed one."
+  ],
+  "answer": 2,
+  "explanation": "A boundary named is a boundary a caller can plan around, and this one has been stated from the beginning rather than discovered."
+ },
+ {
+  "prompt": "This package exports an overall coefficient twice. What separates the two?",
+  "options": [
+   "The reference area, which is the outside tube surface here and a stated bore in the other.",
+   "The direction, since one is the clean coefficient and the other the dirty one.",
+   "The units, since one is in Btu an hour per ft2 per degF and the other in SI units.",
+   "The number of resistances, since one assembles five terms and the other assembles three."
+  ],
+  "answer": 0,
+  "explanation": "A coefficient without its reference area is not a number anyone can use. This module states its own on every answer."
+ },
+ {
+  "prompt": "What should be handed over with a hot-day duty from this bay?",
+  "options": [
+   "The design surface and the coefficient it was formed at, so a reader can recompute UA.",
+   "The check ambient and the design ambient, which are the only two inputs that moved.",
+   "The published row nearest the check ambient, so the reader has a second method beside it.",
+   "The four fixed quantities, the two that moved, and the basis the rating states."
+  ],
+  "answer": 3,
+  "explanation": "A reader who receives the numbers without those qualifications has been handed a sized bay rather than a rated one."
+ },
+ {
+  "prompt": "Which of these is one of the three habits this tier ends on?",
+  "options": [
+   "Prefer a published figure to an analytic limit wherever both are available.",
+   "Ask of any check whether it could have failed for a reason other than a typing error.",
+   "Quote a coefficient without its reference area only when the two areas agree.",
+   "Treat a green test suite as evidence once every case in it has been read."
+  ],
+  "answer": 1,
+  "explanation": "The other two are computing one number on a result sheet from the others, and separating what a file pins from what a second route or an analytic limit has established."
+ },
+ {
+  "prompt": "At 124.000000 degF the teaching bay gives a duty of 16258064.5161 Btu an hour and a hot-day log mean of 69.311296 degF. What does the second-method check do here?",
+  "options": [
+   "It multiplies the duty fraction of 0.812903 by the design duty and lands on the same figure.",
+   "It divides the duty by 69.311296 and compares the result with the bare surface.",
+   "It multiplies UA by 69.311296 and lands on 16258064.5161 Btu an hour.",
+   "It compares 16258064.5161 with the published figure of 18064516.1306."
+  ],
+  "answer": 2,
+  "explanation": "It is one line and it is the only step in the chain that could have failed for a reason other than a slip of the hand. The published figure of 18064516.1306 belongs to a check ambient of 110.000000 degF."
+ }
+]

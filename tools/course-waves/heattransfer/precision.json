@@ -1,0 +1,26 @@
+{
+ "btuHr": {
+  "decimals": 4,
+  "match": "^(?:amenam_duty_btu_hr|okwori_ua_btu_hr_f)$"
+ },
+ "coefficient": {
+  "decimals": 6,
+  "match": "^(?:ubit_u_clean|ubit_u_dirty)$"
+ },
+ "degF": {
+  "decimals": 6,
+  "match": "^(?:amenam_cold_outlet_f|amenam_lmtd_f|okwori_design_lmtd_f|okwori_hotday_process_out_f)$"
+ },
+ "ft2": {
+  "decimals": 6,
+  "match": "^(?:amenam_area_ft2|amenam_area_per_tube_ft2)$"
+ },
+ "pct": {
+  "decimals": 6,
+  "match": "^(?:amenam_area_margin_pct|ubit_controlling_margin_pct|ubit_fouling_penalty_pct)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:okwori_capacity_ratio|okwori_design_effectiveness|okwori_hotday_ntu|ubit_f_correction|ubit_p1_two_shells)$"
+ }
+}

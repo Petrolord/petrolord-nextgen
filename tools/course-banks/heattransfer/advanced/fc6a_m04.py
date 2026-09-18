@@ -1,0 +1,114 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# FC6 Expert m04, The Hot Day. Digest sections 18 and 19. 15 questions.
+
+q(1, "A bay is built and the weather changes. What does the plant still own, and what does owning it fix?",
+ "The surface and the air mass, which fix UA and both capacity rates, so they fix NTU, the capacity ratio and the effectiveness.",
+ ["The duty and the design outlet, which fix the driving force, so they fix UA and the surface behind it.",
+  "The log mean and the coefficient, which fix the surface, so they fix the duty at any ambient.",
+  "The air rise and the design ambient, which fix the air outlet, so they fix the effectiveness."],
+ "The duty then follows from the difference between the two inlet temperatures alone, and the new process outlet and the new air rise come out with it.")
+
+q(0, "Which set of four figures does the studio bay hold at every check ambient?",
+ "An effectiveness of 0.645161, an NTU of 1.172829, a capacity ratio of 0.300000 and a UA of 234565.8720 Btu an hour per degF.",
+ ["An effectiveness of 0.562044, an NTU of 0.928810, a capacity ratio of 0.337662 and a UA of 186968.1844 Btu an hour per degF.",
+  "A duty fraction of 0.903226, a process outlet of 159.677419 degF, an air rise of 27.096774 degF and a UA of 234565.8720.",
+  "A log mean of 85.263896 degF, a bare surface of 52125.749338 ft2, an air mass of 2777777.7778 lb an hour and a rise of 30.000000 degF."],
+ "The second set is ANTAN's. The third is one afternoon on the studio bay rather than the machine, and the fourth is its design sheet.")
+
+q(3, "The effectiveness this rating holds is not read off an arrangement relation. Where does it come from?",
+ "From its definition at the design point: the design duty over the smaller capacity rate times the span between the two inlet temperatures.",
+ ["From the counter-current closed form, evaluated at the NTU and the capacity ratio the design point produces.",
+  "From the 1-2 shell closed form, which is the arrangement an air cooler bundle most nearly resembles.",
+  "From the published file, which carries an effectiveness column beside the duty fraction on every row."],
+ "Because it is a definition rather than a closed form, this rating assumes no arrangement and applies no correction factor, so the one number this module cannot source never enters it.")
+
+q(2, "The same bay is rated at coefficients of 4.500000, 5.100000 and 45.000000 on the bare surface. Which columns move?",
+ "Only the surface, which runs 52125.749338, 45993.308239 and 5212.574934 ft2.",
+ ["Only the UA, which falls as the surface falls and carries the duty fraction down with it.",
+  "The surface and the duty fraction, since a larger coefficient on less metal delivers less on a hot day.",
+  "The surface, the UA and the process outlet, which is why a published row has to carry all three."],
+ "UA stays at 234565.8720 Btu an hour per degF, the duty fraction at 0.903226 and the process outlet at 159.677419 degF on all three rows. A rating cannot see the coefficient and the area separately at all.")
+
+q(0, "The published hot-day rows carry UA and no overall coefficient. What is that?",
+ "A statement about the calculation rather than an omission in the file.",
+ ["An omission, which the file records in its held register as unsourced.",
+  "A consequence of the coefficient being fitted, which no oracle can validate.",
+  "A convention that keeps the published rows shorter than the engine's answer."],
+ "UA is the duty over the design log mean, so a hot-day rating cannot see U and the area separately. Rating the same bay at three different coefficients moves the surface column and nothing else.")
+
+q(1, "At a check ambient of 92.000000 degF the studio bay reports a duty of 20387096.7742 Btu an hour. What process outlet goes with it?",
+ "148.064516 degF.",
+ ["144.193548 degF.",
+  "151.935484 degF.",
+  "150.000000 degF, held while the duty moves."],
+ "The outlet of 144.193548 degF belongs to an ambient of 86.000000 degF and 151.935484 degF to 98.000000 degF. A held outlet beside a moving duty is the state this rating was repaired to stop reporting.")
+
+q(2, "Across the studio sweep the duty falls, the process outlet rises and the air rise falls. Why does the air outlet rise?",
+ "The ambient underneath it rises further than the rise falls.",
+ ["The air rise is held while the ambient climbs, so the outlet tracks the ambient exactly.",
+  "The air outlet is the process outlet less the approach, and the process outlet rises.",
+  "The air mass falls with the duty, so the same heat lands in less air."],
+ "The air outlet runs 117.741935 degF at an ambient of 86.000000 up to 148.387097 degF at 124.000000, while the rise falls from 31.741935 to 24.387097 degF. The air mass is held fixed across the whole sweep.")
+
+q(3, "The process capacity rate on the studio bay is 200000.0000 and the air capacity rate 666666.6667 Btu an hour per degF. How is each formed?",
+ "Each from the design duty and its own temperature change: the process drop for one and the air rise for the other.",
+ ["Each from the design duty and the design log mean, divided between the two streams by the capacity ratio.",
+  "Each from UA and the effectiveness, which is the fraction that separates the two streams.",
+  "Each from the air mass of 2777777.7778 lb an hour and the air heat capacity of 0.240000 Btu per lb per degF."],
+ "Neither rate depends on the ambient, so both can be formed once at the design point and used at every check ambient after that.")
+
+q(1, "At the studio bay's own check ambient the rated duty is 18064516.1290 Btu an hour. Which two products have to reproduce it?",
+ "The process capacity rate times the drop from the inlet to the new outlet, and the air capacity rate times the new rise.",
+ ["The process capacity rate times the design drop, and the air capacity rate times the design rise.",
+  "UA times the design log mean, and the effectiveness times the design duty.",
+  "The duty fraction times the smaller capacity rate, and the same fraction times the larger one."],
+ "Both routes give 18064516.1290 Btu an hour. Any rating that hands back a duty, an outlet and a rise has already stated all three, whether it computed them together or not.")
+
+q(0, "On a morning at 86.000000 degF the studio bay returns a duty fraction of 1.058065. What is that figure?",
+ "A capability of the surface rather than a duty that was delivered.",
+ ["A delivered duty of 21161290.3226 Btu an hour on the process stream.",
+  "A rating error, which the engine flags by labelling the row colder than design.",
+  "The spare capacity the same bay carries into a hot afternoon."],
+ "A plant holding the process at 150.000000 degF will throttle or stage the air instead, and the outlet of 144.193548 degF is what the bundle would reach wide open.")
+
+q(2, "ANTAN at 86.000000 degF returns a duty fraction of 1.087591 and at 124.000000 degF returns 0.810219. Why can the first figure not be read as headroom for the second day?",
+ "The two figures belong to different days, and the machine delivers what the day it is given allows.",
+ ["The first is computed at a fixed UA and the second at a UA that has been recomputed for the hotter and thinner air.",
+  "The first is a capability and the second is a capability too, so neither is a delivered duty.",
+  "The first belongs to ANTAN and the second to the studio bay, so the pair cannot be compared."],
+ "Read as spare capacity a cold-day fraction is worthless. The studio bay behaves the same way, at 1.058065 on its cold morning and 0.812903 at 124.000000 degF.")
+
+q(3, "What changes in the engine's answer as the check ambient crosses the design ambient of 95.000000 degF?",
+ "The regime label and the column saying whether the design outlet is reached.",
+ ["The effectiveness, which is recomputed above the design ambient and held below it.",
+  "The basis string, which names the definition below the design point and the closed form above it.",
+  "The capacity ratio, which the engine takes the other way round once the air is the hotter stream."],
+ "At 86.000000 and 92.000000 degF the rows read colder than design with the design outlet reached. From 98.000000 degF up they read hotter than design and the outlet is not reached.")
+
+q(0, "The rated duty and the product of UA with the hot-day log mean are compared on every row of both sweeps. What does that comparison establish?",
+ "That two independent methods land on one number, which is a thing that could have failed.",
+ ["That the effectiveness relation has been correctly inverted, which is what the ratio of one shows.",
+  "That the engine agrees with the published file to the digits the two of them print.",
+  "That UA was held fixed across the sweep, which the flat column already shows."],
+ "The effectiveness route never evaluates the surface equation and the surface route never evaluates the effectiveness relation. Every ratio in that column is 1.000000 to the precision printed.")
+
+q(1, "The middle column of that check is UA times a log mean. Which log mean?",
+ "The hot-day one, formed at the rated outlet and the rated air rise.",
+ ["The design one, formed at the design outlet and the design air rise, since UA is held from the design point.",
+  "The counter-current one on the design terminals, which is the pairing the bay was sized on.",
+  "The arithmetic mean of the two end differences, which the engine reports beside the log mean."],
+ "Taking it at the design values would have turned the check into a restatement. On the studio bay the hot-day log mean runs 90.214702 degF at an ambient of 86.000000 down to 69.311296 degF at 124.000000.")
+
+q(2, "At a check ambient of 110.000000 degF the engine gives a duty of 18064516.1290 Btu an hour and the published file 18064516.1306. What are the differing digits?",
+ "The point the oracle's bisection stopped at.",
+ ["A rounding inside the engine.",
+  "The residual caused by the viscosity conversion this module rounds.",
+  "A disagreement about the effectiveness, which the two reach by different relations."],
+ "The oracle bisects on the duty until the surface equation balances and never touches the effectiveness relation. On the same row the duty fraction, the outlet of 159.677419 degF, the rise of 27.096774 degF and the UA of 234565.8720 all agree exactly.")
+
+emit(Q, '/root/wt-fc6-nextgen/tools/course-banks/heattransfer/advanced/fc6a_m04.json', expect_n=15)
+finish()

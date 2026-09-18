@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "How does this engine rate a train of shells in series?",
+  "options": [
+   "It evaluates a separate closed form written for each shell count the module carries.",
+   "It multiplies the one shell factor by the shell count and caps the product at one.",
+   "It converts the whole unit P into the P a single shell would see and reads the same closed form at that value.",
+   "It marches the shells one at a time and recovers the factor from the last of them."
+  ],
+  "answer": 2,
+  "explanation": "There is one correction form in this module. The shell count enters through the conversion rather than through a second expression, which is why the converted value is on the answer."
+ },
+ {
+  "prompt": "Why is the equivalent single-shell P reported on a key of its own?",
+  "options": [
+   "It is the value the closed form was actually read at, so a reader can see it rather than infer it.",
+   "It is the value the whole unit would have to be brought down to in order to run at one shell pass.",
+   "It is the value the shell count would have to be raised to before the correction factor reaches one.",
+   "It is the value the conversion started from, before the shell count was applied."
+  ],
+  "answer": 0,
+  "explanation": "Both numbers are called P and they are different numbers. Quoting one and calling it the other is the mistake this key exists to prevent."
+ },
+ {
+  "prompt": "At a P of 0.720000 and an R of 0.850000, what does the engine do at one shell pass?",
+  "options": [
+   "It answers with a factor of 0.541514 and attaches the steep-curve warning to it, and names two shells as the remedy.",
+   "It answers with a factor of 0.800677, which is the value the same duty comes back with once a second shell is added.",
+   "It refuses, saying that the equivalent single-shell P for a train of one shell works out at a value that is not a number.",
+   "It refuses, saying the configuration cannot reach this duty and that a shell pass should be added."
+  ],
+  "answer": 3,
+  "explanation": "Two shells answer at the same duty with a factor of 0.800677. So the first thing a second shell buys here is feasibility rather than an improvement."
+ },
+ {
+  "prompt": "Read the equivalent single-shell P down that same sweep, from two shells to six. Which way does it go?",
+  "options": [
+   "It rises, from 0.271401 at two shells to 0.541514 at six.",
+   "It falls, from 0.541514 at two shells to 0.271401 at six.",
+   "It holds at the whole unit value of 0.720000 at every count.",
+   "It falls to 0.361625 at four shells and then climbs again."
+  ],
+  "answer": 1,
+  "explanation": "Each shell in a longer train is asked for less of the total temperature change, so each one sits lower on the correction curve, where the factor is nearer one."
+ },
+ {
+  "prompt": "And the factor itself across those counts?",
+  "options": [
+   "It rises, reaching 0.981100 at six shells.",
+   "It falls, reaching 0.800677 at six shells.",
+   "It holds at 0.800677 from two shells upward.",
+   "It rises to 0.956604 and then flattens exactly."
+  ],
+  "answer": 0,
+  "explanation": "The column is entitled to say its direction and nothing more. The engine computes no ratio between two of those rows, so a figure produced by dividing one by another is one nothing here stands behind."
+ },
+ {
+  "prompt": "The module stops the shell count at six. Where does that bound come from?",
+  "options": [
+   "A published limit on shells in series, which the refusal cites.",
+   "The largest count the published cases in this repository exercise.",
+   "The module declares it, and the refusal says so in its own text.",
+   "The count at which the correction factor reaches one exactly."
+  ],
+  "answer": 2,
+  "explanation": "A published limit is a statement about the world and you argue with it by finding better data. A declared limit is a statement about the tool, and this one is labelled as declared where it is enforced."
+ },
+ {
+  "prompt": "What reason does that refusal give for bounding the count at all?",
+  "options": [
+   "The conversion loses its accuracy above six shells in series, so the factor it produces can no longer be trusted at all.",
+   "The factor climbs toward one as shells are added, so an unbounded box makes any duty reachable by typing.",
+   "The published cases in this repository carry no train longer than six shells, so a longer one would have no evidence behind it.",
+   "A train longer than six would refuse on the equivalent single-shell P in any case."
+  ],
+  "answer": 1,
+  "explanation": "The bound stops arithmetic from standing in for steel. It is a reporting decision the module owns, and it is stated where a reader meets it."
+ },
+ {
+  "prompt": "Asked for 2.400000 shells, the engine refuses. Why does it not simply round?",
+  "options": [
+   "Because the conversion inside this module is undefined at any count that is not a whole number of shells in series.",
+   "Because the declared bound is written over whole numbers and 2.400000 falls outside it.",
+   "Because rounding down would land on a count the same duty has already been refused at.",
+   "Because two shells and three shells give materially different factors, so rounding would choose for the caller."
+  ],
+  "answer": 3,
+  "explanation": "The refusal names both whole numbers either side and hands the choice back. At the duty in that lesson two shells give 0.800677 and three give 0.920456."
+ },
+ {
+  "prompt": "At a P of 0.920000 and an R of 1.400000 the engine refuses at one shell and again at two, three and four. What changes in the message?",
+  "options": [
+   "At one shell it says the configuration cannot reach the duty, and above that it reports the equivalent single-shell P as NaN.",
+   "At one shell it reports the equivalent single-shell P as NaN, and at every count above that it names the bound this module declares.",
+   "At one shell it names the declared bound, and above that it says the configuration cannot reach the duty.",
+   "The message is the same at all four counts, with only the count inside it changing."
+  ],
+  "answer": 0,
+  "explanation": "The first refusal names a remedy. The second is the engine saying the remedy has been tried and the conversion itself has nowhere to land."
+ },
+ {
+  "prompt": "What does that second message tell a designer to stop doing?",
+  "options": [
+   "Quoting the whole unit P, because only the converted value describes the train.",
+   "Reading the factor at one shell, because the count on the answer is now four.",
+   "Adding shells, because the shell count is no longer the variable that can reach this duty.",
+   "Trusting the terminal temperatures, because one of them must have been mistyped."
+  ],
+  "answer": 2,
+  "explanation": "What is left to move is the duty, the four terminal temperatures, or a different kind of exchanger. The engine says so at each count rather than once."
+ },
+ {
+  "prompt": "A configuration that is infeasible and one that is inefficient look similar on a screen. How does this engine separate them?",
+  "options": [
+   "It answers in both cases and attaches the steep-curve warning to the one that cannot reach its duty at any area.",
+   "It answers with a warning where the curve is steep and refuses where the duty cannot be reached at any area.",
+   "It refuses in both cases, and in the inefficient one it names the bound on the shell count that this module declares.",
+   "It answers the infeasible case with a factor of zero and warns on the inefficient one."
+  ],
+  "answer": 1,
+  "explanation": "A warning is an answer and the factor beside it is correct. A refusal is not an answer and there is no number in it to salvage."
+ },
+ {
+  "prompt": "Why would the engine returning some number anyway, where the conversion did not resolve, be the worst outcome?",
+  "options": [
+   "It would disagree with the golden column on that row, which is how it would be found.",
+   "It would breach the declared bound on the shell count without saying so.",
+   "It would be correct only at the one shell count the caller happened to ask for.",
+   "It would look exactly like a result, carry no warning, and be quoted downstream."
+  ],
+  "answer": 3,
+  "explanation": "That is the principle behind every refusal in this module. A default answers a question the caller did not ask and never admits that it did."
+ },
+ {
+  "prompt": "Five of the seven published multi-shell cases sit at an R away from one. Why were they chosen that way?",
+  "options": [
+   "The conversion is easiest to get wrong away from an R of one, so the general branch has to be exercised.",
+   "The branch at an R of one is the only branch the oracle is able to march, so every other case has to be published instead.",
+   "An R of one sits outside the domain the correction form is written over, so no case at that value could be published at all.",
+   "Cases at an R of one are refused at every one of the shell counts this published table happens to carry."
+  ],
+  "answer": 0,
+  "explanation": "The shell counts in that table are not all the same either. Trains of two, three and four shells appear, so the conversion is exercised at more than one count as well."
+ },
+ {
+  "prompt": "What is the golden column in that published table evidence of?",
+  "options": [
+   "The engine reproducing its own conversion on a second call made with exactly the same inputs as the first one.",
+   "The bound of six shells being the count the published data behind those seven rows was originally taken at.",
+   "Two routes meeting, because the oracle marches the shells and recovers the whole unit P instead of converting.",
+   "The conversion having been transcribed correctly out of the engine and into the oracle that checks the engine."
+  ],
+  "answer": 2,
+  "explanation": "The oracle never evaluates the conversion at all. That is what makes agreement on all seven rows worth something about the conversion."
+ },
+ {
+  "prompt": "One published row runs at a P of 0.550000 and an R of 0.800000 with four shells, and returns an equivalent single-shell P of 0.219343 with a factor of 0.989954. Which of those numbers was the closed form read at?",
+  "options": [
+   "0.550000, the whole unit P.",
+   "0.219343, the converted value.",
+   "0.800000, which the form takes as its R.",
+   "0.989954, which the form returns."
+  ],
+  "answer": 1,
+  "explanation": "The whole unit P is a property of the duty and the four temperatures. The converted P is a property of the train chosen to deliver it, and it is the one the correction form sees."
+ }
+]
