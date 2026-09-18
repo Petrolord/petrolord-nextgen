@@ -27,7 +27,7 @@
    "An effectiveness check on the preventive action, which has to be verified effective.",
    "A second root cause, written for the preventive action to address on its own.",
    "A due date, which a finding answered by a preventive action alone never carries.",
-   "At least one corrective action, because a corrective action is what deals with the cause."
+   "At least one action of type Corrective, which a preventive action cannot stand in for."
   ],
   "answer": 3,
   "explanation": "\"A major nonconformity needs at least one corrective action. A correction deals with the instance; a corrective action deals with the cause.\" A preventive action is welcome on a Major finding and does not satisfy the rule."
@@ -36,7 +36,7 @@
   "prompt": "A Major nonconformity's corrective action is Complete, with no effectiveness check recorded. What does canCloseFinding answer?",
   "options": [
    "ALLOWED, since Complete is the last status an action can reach on its own record.",
-   "REFUSED, because no corrective action has yet been verified effective.",
+   "REFUSED, as a completed action is not yet one shown to work.",
    "REFUSED, asking for another corrective action to be raised in its place.",
    "ALLOWED, with a watch item on the readiness list until the check is recorded."
   ],
@@ -57,13 +57,13 @@
  {
   "prompt": "Suppose ac1 on ISF-2026-004 were completed and never checked. What would the record still lack before the finding could close?",
   "options": [
-   "a correction for the thing that was found",
+   "a Complete action recorded against it",
    "a preventive action to sit beside ac1",
-   "a due date for the finding itself",
+   "a due date recorded for the finding itself",
    "a corrective action verified effective"
   ],
   "answer": 3,
-  "explanation": "ac4 is Preventive with verified effective false, and ac1 would be Complete and unchecked. The finding already has a due date, 2026-09-30, and its refusal today comes after the correction step on the walk."
+  "explanation": "ac4 is Preventive with verified effective false, and ac1 would be Complete and unchecked, so no corrective action would be verified effective. The finding already holds ac4, a preventive action that is Complete, and a due date, 2026-09-30."
  },
  {
   "prompt": "The register summary prints awaiting an effectiveness check 1. Which action is behind that count?",

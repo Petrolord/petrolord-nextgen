@@ -15,12 +15,12 @@ q(3, "A planned internal audit has clauses 8.1, 8.2, 9.1.1 and 9.2 in scope. Pro
   "none by number, as the refusal cites ISO 19011 alone"],
  "\"The lead auditor owns clauses 8.1, 8.2 in this audit's own scope.\" The refusal ends \"Clauses named: 8.1, 8.2.\" Clause 9.1.1 is u-tari's and 9.2 is u-nneka's.")
 
-q(1, "In the ORASHI register u-nneka owns clauses 4.1, 4.3, 9.2 and 10.2. Proposed as lead for the same planned audit, u-nneka is refused naming 9.2 alone. Why only 9.2?",
- "The check reads this audit's own scope, and 9.2 is the only one of the four inside it.",
+q(1, "In the ORASHI register u-nneka owns clauses 4.1, 4.3, 4.4, 9.2 and 10.2. Proposed as lead for the same planned audit, u-nneka is refused naming 9.2 alone. Why only 9.2?",
+ "The check reads this audit's own scope, and 9.2 is the only one of the five inside it.",
  ["The check names only the clause whose next review falls soonest.",
-  "The other three are Conformant with evidence, so none is open to a verdict.",
+  "The others read Conformant with evidence, so none is open to a verdict.",
   "The refusal names one clause per person refused."],
- "The scope holds 8.1, 8.2, 9.1.1 and 9.2. u-nneka's 4.1, 4.3 and 10.2 sit outside it, so owning them raises nothing for this audit. The refusal says so in its own words: \"in this audit's own scope\".")
+ "The scope holds 8.1, 8.2, 9.1.1 and 9.2. u-nneka's 4.1, 4.3, 4.4 and 10.2 sit outside it, so owning them raises nothing for this audit. The refusal says so in its own words: \"in this audit's own scope\".")
 
 q(0, "Which two ways out does the lead auditor refusal offer the person planning the audit?",
  "Change the scope, or change the auditor.",
@@ -55,14 +55,14 @@ q(2, "In the Audit & Findings Manager, auditIndependence refuses u-boma named as
  ["The owner of each clause in the audit's scope, one clause at a time",
   "The author of the revision under review, as Document Control does",
   "Each person recording a result, through canExamineClause"],
- "\"The lead auditor is also the auditee for this audit. An auditor may not audit their own area: name somebody else as one or the other.\" That app holds no clause register, so it has no clauses to list. u-kelechi leading with u-boma audited is ALLOWED.")
+ "\"The lead auditor is also the auditee for this audit. An auditor may not audit their own area: name somebody else as one or the other.\" The sentence names no clause and no standard. u-kelechi leading with u-boma audited is ALLOWED.")
 
-q(0, "Document Control refuses u-adaeze as reviewer of revision rev-0019-10. What is u-adaeze to that revision?",
- "Its author, and the author of a revision cannot review it.",
- ["The owner of the clause the revision documents, as the ISO register records it.",
-  "The auditee of the audit that raised the revision, as auditIndependence reads it.",
-  "Its assigned reviewer, deciding under D1."],
- "\"The author of a revision cannot review it. Choose somebody independent of the draft.\" AS15 D1: a document review task is decided only by its assigned reviewer, and the author never decides it.")
+q(0, "Of the independence refusals printed for the three apps this course teaches, which cite ISO 19011?",
+ "The two from the ISO register, for a lead auditor and for an examiner.",
+ ["Every one of them, as each concerns who may judge another person's work.",
+  "Only the Audit & Findings Manager's, as the audit app.",
+  "Only Document Control's, as ISO 19011 governs the review of documents."],
+ "Both isoCompliance refusals carry \"An auditor may not audit their own work (ISO 19011)\". auditIndependence says an auditor may not audit their own area and names no standard, and Document Control asks for somebody independent of the draft.")
 
 q(0, "Of the three independence refusals in this course, why can only the ISO lead auditor refusal list more than one item?",
  "A person can own several clauses in one scope, while an auditee and an author are each one name.",
@@ -72,7 +72,7 @@ q(0, "Of the three independence refusals in this course, why can only the ISO le
  "The ISO check reads clause ownership, so u-kalu's refusal names 8.1 and 8.2. The Audit & Findings Manager reads one auditee, and Document Control reads the author of one revision.")
 
 q(3, "An external lead auditor named in text is ALLOWED by the ISO lead auditor check. What does that verdict establish?",
- "That no clause owner on the record matches the name, and nothing more.",
+ "That the name owns no clause in this audit's scope, and nothing more.",
  ["That the auditor is independent of every clause in scope, as ISO 19011 requires.",
   "That the audit becomes a certification audit.",
   "That the employer was checked against suppliers."],
@@ -86,18 +86,18 @@ q(1, "An internal audit led by an external auditor named in text is reported. Ho
  "The type of the audit decides coverage. ISA-2026-S01 reads counts towards coverage false, and the clause it examined, 6.1.2, reads never. The employer of the person leading an internal audit does not enter the count.")
 
 q(2, "The lead auditor refusal and the canExamineClause refusal cite ISO 19011 in the same words. Which of these is a difference between the two?",
- "In their first sentence: one speaks about the audit plan, the other to the person recording.",
+ "In their first sentence: one names the lead auditor, the other says \"You\".",
  ["In the standard cited, since the examiner refusal cites ISO 14001:2015 in place of ISO 19011.",
   "In the verdict, since the examiner check only warns where the lead auditor check refuses.",
   "In the clauses named, since the examiner refusal lists the whole scope after \"Clauses named:\"."],
- "Both carry \"An auditor may not audit their own work (ISO 19011)\". The lead refusal opens on the clauses the lead owns in scope, and the examiner refusal opens \"You own clause 8.1.\" Both are refusals.")
+ "Both carry \"An auditor may not audit their own work (ISO 19011)\". The lead refusal opens \"The lead auditor owns clauses 8.1, 8.2 in this audit's own scope.\" and the examiner refusal opens \"You own clause 8.1.\" Both are refusals of the request.")
 
-q(1, "A clause's owner in the register is out of date, and the person who now does that work is recorded against nothing. What do the independence checks do when that person is proposed to examine the clause?",
- "They allow it, because each check reads only the owner the register holds.",
- ["They refuse it, because the engine traces whoever last changed the clause record.",
-  "They refuse it, since an out-of-date owner reads stale in coverage.",
-  "They raise a watch item until the owner is put right."],
- "Both checks compare the person with the clause owner recorded in the register, and a working relationship the register does not hold is invisible to them. Stale in coverage is a statement about an examination date, read from another table.")
+q(1, "Which of the refusals printed for the planned audit carries no \"Clauses named:\" list?",
+ "u-kalu's refusal when recording clause 8.1",
+ ["u-kalu's refusal as the proposed lead of the planned audit",
+  "u-tari's refusal as lead auditor",
+  "u-nneka's refusal as lead auditor"],
+ "canExamineClause refuses u-kalu on 8.1 with \"You own clause 8.1.\" and lists nothing after. Each lead auditor refusal ends \"Clauses named:\", with 8.1, 8.2 for u-kalu, 9.2 for u-nneka and 9.1.1 for u-tari.")
 
 q(0, "Why is the lead auditor check on its own not enough to keep an owner from examining their own clause?",
  "An independent lead says nothing about the rest of the team, and any of them may record a result.",

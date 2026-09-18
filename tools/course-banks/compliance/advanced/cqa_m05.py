@@ -16,7 +16,7 @@ q(3, "certificationReadiness for ISO 14001:2015 at ORASHI returns ready false. W
  ["A readiness percentage weighted by severity, with the items that pulled it down.",
   "A single blocking reason, the first requirement that fails, as the earlier gates do.",
   "A score for each clause, with the certificate as a gate the rest of the list sits behind."],
- "The list has eleven items across blocking, serious and watch, and a table of counts beside it. It carries no percentage and no score, because any weighting of one item against another is somebody's opinion.")
+ "The list has eleven items across blocking, serious and watch, and a table of counts beside it. The digest prints no percentage and no score for it, and ready false stands beside four blocking items.")
 
 q(1, "Under which severity does the item \"3 applicable clauses have never been examined by an internal audit.\" sit?",
  "blocking, beside the open major nonconformity",
@@ -109,12 +109,12 @@ q(0, "A report wants to state ORASHI's readiness from covered 8 and applicable 1
   "Quote covered less the stale clause, as the effective coverage of the register."],
  "The digest prints no percentage from these counts and neither does the engine. The list already says 3 uncovered clauses are never examined and blocking and 1 is stale and serious; a percentage would average that away.")
 
-q(2, "Suppose the ORASHI certificate ran to 2027-01-14 in place of 2027-01-08. How would the readiness list differ?",
- "The certificate item leaves the list, and the other ten items stay.",
- ["The list reads ready true, since the last watch item on it has gone.",
-  "The certificate item moves from watch up to serious.",
-  "Every watch item leaves the list with the certificate."],
- "At 91 days the row prints certificateExpiring false, certificateExpired false and no item. The digest does not print ready for the moved rows, and booking a recertification audit closes no open Major nonconformity.")
+q(2, "The readiness counts print partial 1 and nonconformant 1. Which clause is behind each?",
+ "6.1.2 is the partial clause and 6.1.3 the nonconformant one",
+ ["6.1.3 is the partial clause and 6.1.2 the nonconformant one",
+  "5.2 is the partial clause and 6.1.3 the nonconformant one",
+  "6.1.2 is the partial clause and 7.2 the nonconformant one"],
+ "Clause 6.1.2 reads Partially conformant and clause 6.1.3 reads Nonconformant. Clause 5.2 reads Conformant without its evidence reference, and clause 7.2 reads Not assessed, behind notAssessed 1.")
 
 emit(Q, '/root/wt-as-compliance-nextgen/tools/course-banks/compliance/advanced/cqa_m05.json', expect_n=15)
 finish()

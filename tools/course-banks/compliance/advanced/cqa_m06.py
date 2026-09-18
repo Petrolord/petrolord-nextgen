@@ -18,12 +18,12 @@ q(1, "ISA-2026-002 examined clause 5.2 on 2026-10-06, and 5.2's last examined da
   "Q2: evidence counts towards Compliant only for the current period."],
  "ISA-2026-002 is In progress, so none of its results moves a clause's date until it is reported. Q5 is module 2's rule, Q11 the Professional tier's, and Q2 the Associate tier's.")
 
-q(3, "A call to nextReviewDate arrives with no document review period. What comes back?",
- "No date, and applying DEFAULT_REVIEW_PERIOD_MONTHS is left to the caller.",
- ["A date 24 months after issue, the default the engine then applies for itself.",
-  "A refusal naming the missing review period.",
-  "The as-of date, read as Review due soon."],
- "This is one of the four held limits: the call returns no date, and the default of DEFAULT_REVIEW_PERIOD_MONTHS is the caller's to apply. It is taught as a limit, never as a figure to compute with.")
+q(3, "Which of these is an owner ambiguity, recorded in the FINDINGS files and left unchanged?",
+ "nextReviewDate returns no date when the review period is missing.",
+ ["An expired certificate is a serious readiness item.",
+  "Evidence counts towards Compliant only for the current period.",
+  "A document review task is decided by its assigned reviewer, never by the author."],
+ "The missing review period is one of the four owner ambiguities: the default of DEFAULT_REVIEW_PERIOD_MONTHS is the caller's to apply. The other three are owner decisions in force: Q6, Q2 and D1.")
 
 q(0, "An audit programme is complete and one of its audits was cancelled with a written reason. How does its delivered percent read?",
  "Below one hundred percent, by design, since it counts reported audits only.",
@@ -60,12 +60,12 @@ q(3, "Rule R2 governs every percent the engine prints. What does it state?",
   "A percent is rounded from the one-decimal figure the app shows."],
  "checklistProgress, programmeProgress and planProgress are the three exports that print a percent, and each rounds half up on the exact fraction.")
 
-q(2, "REG-2026-006 is a filed One-off obligation. How does it read?",
- "Compliant, and its reason says it is a one-off obligation with nothing further due.",
- ["On track, until the next period of a one-off obligation begins to run.",
-  "No date set, because a one-off obligation carries no next due date.",
-  "Superseded, since a filed one-off obligation leaves the active register."],
- "R4: explainStatus gives the reason \"Filed 2026-08-10. A one-off obligation, nothing further is due.\" A filed One-off says it is discharged.")
+q(2, "Which of the ASC-0 rules is measured on the reason REG-2026-006 gives?",
+ "R4, a filed One-off says it is discharged",
+ ["R1, one rule for outstanding",
+  "R3, expired and expiring kept apart",
+  "R5, the register's own standard named"],
+ "R4 is measured on REG-2026-006, which reads Compliant with a reason saying nothing further is due. R1 is measured on four audits, R3 on a certificate at certificateDays -15 and R5 on the ORASHI readiness list.")
 
 q(0, "Rule R5 is measured on the ORASHI readiness list. What does it print?",
  "1 item naming ISO 14001:2015, and 0 naming ISO 9001",

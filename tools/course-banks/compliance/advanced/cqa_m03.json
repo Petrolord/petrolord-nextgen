@@ -137,7 +137,7 @@
    "The audit is reported first, and then each clause's result is entered against the report.",
    "The audit is Closed, since Reported leaves it uncounted.",
    "Every clause in its scope gets a result, and then the audit is reported.",
-   "The lead clears the independence check first."
+   "The audit is cancelled with a reason, which keeps its results."
   ],
   "answer": 2,
   "explanation": "canReportAudit refuses while a clause in scope has no result, and coverage counts only Reported or Closed audits. Until then clause 8.1 keeps 2024-05-16 from ISA-2024-001."

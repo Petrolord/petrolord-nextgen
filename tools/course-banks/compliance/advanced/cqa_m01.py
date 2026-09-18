@@ -14,12 +14,12 @@ q(1, "Clause 7.2 of the ORASHI register has nothing recorded. A request sets it 
   "It allows the status and lists 7.2 under missingEvidenceParts for the rest."],
  "The digest prints REFUSED for Conformant with an evidence reference only, in the words it uses for Conformant with nothing else: name the evidence, the date it was assessed and who assessed it. The shorter sentence belongs to a Nonconformant request with no date.")
 
-q(3, "Which of these requests on clause 7.2 does the gate ALLOW with no evidence reference on the record?",
+q(3, "Clause 7.2 has nothing recorded. Which of these requests on it does canSetClauseStatus ALLOW?",
  "Nonconformant, with the date it was assessed and the assessor.",
- ["Conformant, with the date it was assessed and the assessor named.",
-  "Partially conformant, with the date it was assessed and the assessor.",
+ ["Compliant, which is a word the clause status vocabulary does not carry.",
+  "Partially conformant, with nothing else recorded on the clause.",
   "Not applicable as its status, while its applicability still reads Applicable."],
- "A Nonconformant verdict needs two of the three: the date and the name. Conformant and Partially conformant are each ALLOWED only with evidence, a date and an assessor. The Not applicable request is refused because the two fields have to move together.")
+ "Nonconformant with a date and an assessor: ALLOWED. Partially conformant with nothing else is refused and asks for evidence as well. Not applicable while the clause still reads Applicable is refused because the two fields move together. Compliant is not a clause status.")
 
 q(0, "A request sets clause 7.2's status to Not applicable while its applicability still reads Applicable. Which requirement stops it?",
  "The applicability and the status are set together, or neither is.",
@@ -78,11 +78,11 @@ q(1, "At 2026-10-15 clause 6.1.2's next review is 2026-11-02, 18 days away. Whic
  "18 days sits inside the window isoCompliance.REVIEW_LEAD_DAYS sets, and the date is ahead of the as-of date. No ORASHI row reads true for both flags, and 6.1.2 is the one clause that reads review due soon true.")
 
 q(2, "Clause 4.4, the excluded clause, has no next review date. What do its two review flags read?",
- "Both false, because an excluded clause is not reviewed against a date.",
+ "Both false, and 4.4 is left out of the clause review table.",
  ["review overdue true, because a review date that is missing is treated as one that has passed.",
   "review due soon true, because a missing date is read as falling inside the lead window.",
   "Neither prints, and the summary counts 4.4 among reviews overdue."],
- "The register prints next review none, review overdue false and review due soon false for 4.4, whose applicability and status both read Not applicable. The summary's reviews overdue 1 is clause 4.3.")
+ "The register prints next review none, review overdue false and review due soon false for 4.4, whose applicability and status both read Not applicable, and the table of clause reviews against the as-of date lists the other 12 clauses without it. The summary's reviews overdue 1 is clause 4.3.")
 
 q(0, "The summary prints reviews overdue 1 and reviews due soon 1. Which of the two does the readiness list carry, and at which severity?",
  "Only the overdue review, as the watch item \"1 clause review is past due.\"",

@@ -23,14 +23,14 @@ q(0, "A Minor nonconformity has its correction recorded and no actions at all. W
  "The digest prints: a Minor nonconformity with its correction and no actions: ALLOWED. isoCompliance.EFFECTIVENESS_REQUIRED_TYPES holds Major nonconformity alone, and the root cause refusal is written for a major nonconformity.")
 
 q(3, "On the Major nonconformity walk, the record holds a correction, a root cause and only a preventive action. Which requirement refuses it?",
- "At least one corrective action, because a corrective action is what deals with the cause.",
+ "At least one action of type Corrective, which a preventive action cannot stand in for.",
  ["An effectiveness check on the preventive action, which has to be verified effective.",
   "A second root cause, written for the preventive action to address on its own.",
   "A due date, which a finding answered by a preventive action alone never carries."],
  "\"A major nonconformity needs at least one corrective action. A correction deals with the instance; a corrective action deals with the cause.\" A preventive action is welcome on a Major finding and does not satisfy the rule.")
 
 q(1, "A Major nonconformity's corrective action is Complete, with no effectiveness check recorded. What does canCloseFinding answer?",
- "REFUSED, because no corrective action has yet been verified effective.",
+ "REFUSED, as a completed action is not yet one shown to work.",
  ["ALLOWED, since Complete is the last status an action can reach on its own record.",
   "REFUSED, asking for another corrective action to be raised in its place.",
   "ALLOWED, with a watch item on the readiness list until the check is recorded."],
@@ -45,10 +45,10 @@ q(1, "ISF-2026-004 holds ac1, Corrective, In progress, and ac4, Preventive, Comp
 
 q(3, "Suppose ac1 on ISF-2026-004 were completed and never checked. What would the record still lack before the finding could close?",
  "a corrective action verified effective",
- ["a correction for the thing that was found",
+ ["a Complete action recorded against it",
   "a preventive action to sit beside ac1",
-  "a due date for the finding itself"],
- "ac4 is Preventive with verified effective false, and ac1 would be Complete and unchecked. The finding already has a due date, 2026-09-30, and its refusal today comes after the correction step on the walk.")
+  "a due date recorded for the finding itself"],
+ "ac4 is Preventive with verified effective false, and ac1 would be Complete and unchecked, so no corrective action would be verified effective. The finding already holds ac4, a preventive action that is Complete, and a due date, 2026-09-30.")
 
 q(0, "The register summary prints awaiting an effectiveness check 1. Which action is behind that count?",
  "ac4, Preventive, on ISF-2026-004, Complete with no effectiveness verdict",

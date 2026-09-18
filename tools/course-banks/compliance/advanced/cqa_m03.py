@@ -96,7 +96,7 @@ q(2, "What has to happen, in order, before ISA-2026-002 can move any clause's la
  "Every clause in its scope gets a result, and then the audit is reported.",
  ["The audit is reported first, and then each clause's result is entered against the report.",
   "The audit is Closed, since Reported leaves it uncounted.",
-  "The lead clears the independence check first."],
+  "The audit is cancelled with a reason, which keeps its results."],
  "canReportAudit refuses while a clause in scope has no result, and coverage counts only Reported or Closed audits. Until then clause 8.1 keeps 2024-05-16 from ISA-2024-001.")
 
 q(0, "Clause 7.5.3 reads Conformant with claims conformity, evidence record and assessed all true, and reads never in the coverage table. What do the two readings say together?",

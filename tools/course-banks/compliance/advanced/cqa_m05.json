@@ -8,7 +8,7 @@
    "A list of items, each with a severity, a count and a sentence, and a table of counts."
   ],
   "answer": 3,
-  "explanation": "The list has eleven items across blocking, serious and watch, and a table of counts beside it. It carries no percentage and no score, because any weighting of one item against another is somebody's opinion."
+  "explanation": "The list has eleven items across blocking, serious and watch, and a table of counts beside it. The digest prints no percentage and no score for it, and ready false stands beside four blocking items."
  },
  {
   "prompt": "Under which severity does the item \"3 applicable clauses have never been examined by an internal audit.\" sit?",
@@ -154,14 +154,14 @@
   "explanation": "The digest prints no percentage from these counts and neither does the engine. The list already says 3 uncovered clauses are never examined and blocking and 1 is stale and serious; a percentage would average that away."
  },
  {
-  "prompt": "Suppose the ORASHI certificate ran to 2027-01-14 in place of 2027-01-08. How would the readiness list differ?",
+  "prompt": "The readiness counts print partial 1 and nonconformant 1. Which clause is behind each?",
   "options": [
-   "The list reads ready true, since the last watch item on it has gone.",
-   "The certificate item moves from watch up to serious.",
-   "The certificate item leaves the list, and the other ten items stay.",
-   "Every watch item leaves the list with the certificate."
+   "6.1.3 is the partial clause and 6.1.2 the nonconformant one",
+   "5.2 is the partial clause and 6.1.3 the nonconformant one",
+   "6.1.2 is the partial clause and 6.1.3 the nonconformant one",
+   "6.1.2 is the partial clause and 7.2 the nonconformant one"
   ],
   "answer": 2,
-  "explanation": "At 91 days the row prints certificateExpiring false, certificateExpired false and no item. The digest does not print ready for the moved rows, and booking a recertification audit closes no open Major nonconformity."
+  "explanation": "Clause 6.1.2 reads Partially conformant and clause 6.1.3 reads Nonconformant. Clause 5.2 reads Conformant without its evidence reference, and clause 7.2 reads Not assessed, behind notAssessed 1."
  }
 ]

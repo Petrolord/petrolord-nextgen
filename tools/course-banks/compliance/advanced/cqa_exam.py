@@ -54,11 +54,11 @@ q(2, "Who may lead the planned internal audit over 8.1, 8.2, 9.1.1 and 9.2 with 
 
 # [two modules: m02, m03]
 q(0, "The planner drops 8.1 and 8.2 from the planned audit's scope so that u-kalu can lead it. What happens to clause 8.1's coverage row?",
- "Nothing moves: 8.1 keeps last examined 2024-05-16 from ISA-2024-001 until a counting audit examines it again.",
+ "Nothing moves: 8.1 keeps last examined 2024-05-16 from ISA-2024-001, since a planned audit does not count.",
  ["8.1 reads never, because a clause taken out of an audit's scope loses its examination history.",
   "8.1 reads stale, because a clause dropped from a planned scope lapses to before the cycle.",
   "8.1 reads covered by the new audit as soon as it is planned, whether or not it is in scope."],
- "Coverage reads the latest examination by a Reported or Closed internal audit. At a cycle of 3 years 8.1 reads covered true from ISA-2024-001, and a plan that is not yet reported moves no date.")
+ "Coverage reads the latest examination by a Reported or Closed internal audit, and Planned is neither. At a cycle of 3 years 8.1 reads covered true from ISA-2024-001. ISA-2026-002, In progress, shows the same: its 2026-10-06 examination of 5.2 moves no date.")
 
 q(1, "A member of an audit team is refused by canExamineClause. What does that refusal ask for?",
  "That another member of the audit records the result for that clause.",
@@ -96,12 +96,12 @@ q(1, "What separates a stale clause from a never examined one?",
   "A stale clause is past its review date; a never examined clause has no review date on the register."],
  "Clause 4.3, last examined 2023-09-20, reads stale true. Clauses 6.1.2, 7.2 and 7.5.3 read never with stale false. The list ranks them apart: never examined blocking, stale serious.")
 
-q(1, "ISO 45001:2018 clause 6.1.2, last examined 2025-10-14, reads stale under its own cycle. Read against ISO 14001:2015's cycle instead, what would the same date have shown?",
- "covered, as ISO 14001:2015 clause 8.1 reads from that very date",
- ["never examined, since a borrowed cycle drops the examination",
-  "stale all the same, since the examination date alone decides",
-  "covered and stale together, one flag for each standard's cycle"],
- "A date that falls outside a 1 year window can still fall inside a 3 year one, and the digest shows it: from 2025-10-14, the ISO 14001:2015 row prints covered true. That is the case for reading a mixed register by standard.")
+q(1, "A register mixes ISO 14001:2015 and ISO 45001:2018 clauses. Which call reads each clause against its own standard's cycle?",
+ "clauseCoverageByStandard",
+ ["clauseCoverage",
+  "certificationReadiness",
+  "missingEvidenceParts"],
+ "clauseCoverage is run over the register at one cycle, 3 years, and again at 1, 2 and 4. clauseCoverageByStandard reads ISO 14001:2015 at 3 years and ISO 45001:2018 at 1 year, so two clauses last examined 2025-10-14 read covered and stale.")
 
 q(3, "At a cycle of 1 year, what does the ORASHI coverage table print?",
  "covered 6, stale 3, never examined 3",
@@ -132,11 +132,11 @@ q(3, "A corrective action on a Major nonconformity is checked and found not to h
  "\"A corrective action here was checked and found not to have worked. Raise another one rather than closing over it.\" Only a corrective action verified effective closes a Major nonconformity.")
 
 q(3, "On an NCR in the quality module, which record plays the part a correction plays on a finding?",
- "The disposition, which deals with the item",
+ "The disposition agreed on the nonconforming item",
  ["The corrective action, which deals with the cause",
   "The root cause, which names the category of failure",
   "The effectiveness check, which proves the fix worked"],
- "The quality module's words: \"A disposition deals with the item; a corrective action deals with the cause.\" A disposition is to a nonconforming item what a correction is to a finding.")
+ "The quality module pairs the two in its refusal: a disposition deals with the item and a corrective action with the cause. On a finding a correction deals with the instance, so the disposition is its counterpart on an NCR.")
 
 q(3, "A cause recorded as Measurement or inspection on an NCR and one recorded as Measurement or monitoring on a finding: how should a reader count them?",
  "As two categories from two lists, each quoted in its own list's words.",
@@ -187,12 +187,12 @@ q(0, "Which three items does the ORASHI readiness list rank serious?",
   "the stale clause, the overdue finding and the certificate item"],
  "The serious items read: 1 clause last audited before this certification cycle began, 1 applicable clause never assessed, and 1 corrective or preventive action past its due date.")
 
-q(0, "Why does certification readiness print no percentage?",
- "Any weighting between items is an opinion, and a high score can hide one blocker.",
- ["The engine does not hold the counts that a percentage would need to be formed.",
-  "A percent rounds half up and would hide a blocker whose share falls below one half.",
-  "The certificate is a gate over the list, and a percentage has no way to show a gate."],
- "The first blocking item says it: \"A certification body will not recommend certification over one.\" A list counts and names every item and averages nothing away.")
+q(0, "Of the four blocking items on the ORASHI readiness list, which one comes from a finding?",
+ "The item counting each Major finding still open",
+ ["The clauses never examined by an internal audit",
+  "The clause marked conformant with no evidence reference",
+  "The clause assessed nonconformant and not yet resolved"],
+ "\"1 major nonconformity is open. A certification body will not recommend certification over one.\" ISF-2026-004 is the one open Major. The other three blocking items count clauses: 3 never examined, 5.2 without its evidence reference and 6.1.3 assessed nonconformant.")
 
 # [two modules: m04, m05]
 q(1, "The watch item \"1 minor nonconformity is open.\" stands on the ORASHI list. Which finding is behind it, and what keeps that finding from closing?",
@@ -208,7 +208,7 @@ q(0, "The blocking item for never-examined clauses cites which requirement?",
  ["ISO 19011, which bars an auditor from auditing their own work",
   "ISO 9001:2015 §4.3, which keeps a justification for an exclusion",
   "ISO 14001:2015 §9.2, which calls for certification body surveillance"],
- "\"3 applicable clauses have never been examined by an internal audit. ISO 14001:2015 §9.2 requires the organization to audit its own system.\" This is why a surveillance audit moves no clause's date.")
+ "\"3 applicable clauses have never been examined by an internal audit. ISO 14001:2015 §9.2 requires the organization to audit its own system.\" COVERING_AUDIT_TYPES holds Internal alone, so a surveillance audit moves no clause's date.")
 
 q(2, "Which readiness count and summary count print the same figure for the same thing under two names?",
  "covered 8 and clauses covered 8",
@@ -225,11 +225,11 @@ q(2, "Owner decisions Q4, Q5 and Q6 each show up in one module of this tier. Whi
  "Q4: ISO coverage counts only Reported or Closed audits. Q5: every examiner is checked for independence. Q6: an expired certificate is a serious readiness item, one inside the lead window a watch item.")
 
 q(3, "An app shows no overdue review for a document. Which held limit should stop a reader taking that at face value?",
- "A date that could not be read is refused in one module only, so a clean screen elsewhere proves nothing.",
+ "An unreadable today is refused in one module only, so a clean screen elsewhere proves nothing.",
  ["A templated audit with no checklist items passes the unanswered-items rule vacuously.",
   "A complete programme containing a cancelled audit reads below one hundred percent.",
   "A missing review period makes nextReviewDate return a date 24 months after issue."],
- "Of the four held limits this is the one a screen hides: an empty overdue list looks the same whether its date was read or not. The other three limits concern templates, programmes and a certificate.")
+ "Of the four held limits this is the one a screen hides: an empty overdue list looks the same whether today was read or not. The other three concern a missing review period, a templated audit and a programme with a cancelled audit.")
 
 q(0, "Rule R1 puts one rule behind three exports. What does that rule decide?",
  "Whether an audit is outstanding, for programmeProgress, summarise and canCompleteProgramme alike",
@@ -252,12 +252,12 @@ q(1, "A golden figure sits beside an engine figure and the two agree. What has t
   "That the figure matches a published standard's own worked example."],
  "Each golden file is written by an independent stdlib Python oracle from the rules as the modules and the status document state them. The oracles check a gate's verdict and never its wording.")
 
-q(2, "The isoCompliance oracle carries 1 sort case. What does the digest leave unsaid about it?",
- "Which ordering it checks",
- ["Whether it passed or failed",
-  "Which module it belongs to",
-  "Nothing; it names the sort"],
- "The digest states findingByUrgency's rule and prints each finding's rank, and does not say which ordering the isoCompliance sort case checks. Where the digest stops, an expert says so.")
+q(2, "The oracle table gives sort cases a column of their own. Which module's golden file carries 3 of them?",
+ "complianceStatus, of 171 golden cases",
+ ["qualityAssurance, of 422 golden cases",
+  "auditManagement, of 181 golden cases",
+  "documentControl, of 130 golden cases"],
+ "The sort cases column reads complianceStatus 3, documentControl 2, qualityAssurance 2, auditManagement 2, isoCompliance 1 and calendar 0. A sort case counts as a case for the sort it names.")
 
 q(2, "Which of these does this course own?",
  "Audit independence and the root cause categories",
@@ -267,12 +267,12 @@ q(2, "Which of these does this course own?",
  "This course owns audit independence in both forms, the audit and finding lifecycles and the root cause categories. The other three belong to riskchange, \"Risk, Change & Learning\".")
 
 # [two modules: m01, m02]
-q(1, "Why does canSetClauseStatus ask for the assessor's name as well as the date?",
- "Without a name, a verdict cannot be checked against the clause owner for independence.",
- ["The name decides which of the two root cause lists the clause's cause is recorded against.",
-  "The name sets the clause's next review date, counted from the day of assessment.",
-  "The name is what the certification body counts when it reads the coverage table."],
- "A verdict with no date cannot be placed in a cycle, and one with no name cannot be checked against the owner of the clause. canExamineClause refuses u-kalu recording 8.1, which u-kalu owns.")
+q(1, "Clause 7.2 is set to Nonconformant with no date. What does canSetClauseStatus ask for?",
+ "A date for the assessment and the assessor's name.",
+ ["The evidence, the date it was assessed and who assessed it.",
+  "Why the requirement does not apply, kept on record.",
+  "The applicability and the status set together."],
+ "The refusal reads \"Record the date this was assessed and who assessed it.\" A Nonconformant verdict is allowed with no evidence reference. The sentence naming all three belongs to Conformant and Partially conformant requests.")
 
 # [two modules: m03, m05]
 q(1, "Which clause does the serious item \"1 clause was last audited before this certification cycle began.\" point at, and what was its last counting examination?",
@@ -307,11 +307,11 @@ q(1, "What does rule R5 guarantee a reader of a refusal or of a readiness senten
 
 # [two modules: m01, m05]
 q(1, "Which one action on the record would remove the serious item about a clause never assessed at all?",
- "Assessing clause 7.2 and recording its verdict with a date and an assessor",
+ "Assessing clause 7.2 and recording a verdict that canSetClauseStatus allows",
  ["Auditing clause 7.2 in an internal audit and reporting the audit that examined it",
   "Recording an evidence reference against clause 5.2 in the register",
   "Setting 7.2 to Not applicable while its applicability reads Applicable"],
- "Clause 7.2 reads Not assessed. An internal audit would clear its blocking never-examined item and leave the verdict missing, and setting Not applicable with applicability unchanged is refused.")
+ "Clause 7.2 reads Not assessed, and notAssessed 1 is the count behind the serious item. An internal audit would clear its blocking never-examined item and leave the register verdict missing, and setting Not applicable with applicability unchanged is refused.")
 
 emit(Q, '/root/wt-as-compliance-nextgen/tools/course-banks/compliance/advanced/cqa_exam.json', expect_n=42)
 finish()
