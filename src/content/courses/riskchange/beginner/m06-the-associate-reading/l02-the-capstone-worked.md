@@ -10,7 +10,7 @@ Before you read a single row, write the as-of date at the top of your working. E
 
 ## Step two: score the inherent levels
 
-For each risk, check that both levels are whole levels from 1 to 5. A number written as text is still that level. A fraction, a 6, a blank or a negative is off the scale, and the inherent score is 0, "None". Otherwise multiply, then find the band by its lower edge: 15 "Critical", 10 "High", 5 "Medium", 1 "Low". OB-05 has levels 2 and 5, a product of 10, "High".
+For each risk, check both levels are whole levels from 1 to 5; a whole number written as text still counts. A fraction, a 6, a blank or a negative is off the scale: inherent score 0, "None". Otherwise multiply, then find the band by its lower edge: 15 "Critical", 10 "High", 5 "Medium", 1 "Low". OB-05 has levels 2 and 5, a product of 10, "High".
 
 ## Step three: score the residual one axis at a time
 

@@ -8,7 +8,7 @@ An engine that only ever says yes is easy to build and useless to rely on. The e
 
 Every verdict that can be refused comes back as an object with a field called `ok`. When `ok` is true the move or check is allowed. When it is false the object carries a `reason`, a sentence written for a user to act on. The four engines refuse in the same shape, so an app can show any refusal from any register in one place and the user reads the same kind of message every time.
 
-A reason is written to be acted on. It names what is missing or who is not allowed, so that the next step is clear. You will meet those sentences word for word in the later tiers, where moving a change or a comment is refused. The scoring rules of this tier do not refuse a move, because a risk score moves nothing. They answer with a value, and when they have no basis for a value they say so in a value of their own.
+A reason is written to be acted on. It names what is missing or who is not allowed, so that the next step is clear. You will meet those sentences word for word in the later tiers, where moving a change or a comment is refused. The scoring rules of this tier answer with a value, and when they have no basis for a value they say so in a value of their own, as the "None" band and the "Not set" appetite show.
 
 ## The declining answers of this tier
 

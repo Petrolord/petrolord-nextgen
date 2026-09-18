@@ -18,7 +18,7 @@ It is also about signatures. A change is approved in levels, and the person who 
 
 "Overdue" in this tier means a live risk's review date has passed. In the next tier a change can be overdue against its target date, which is a different question about a different record. Name which one you mean every time.
 
-"Closed" in this tier is a status of a risk, one of the two that is not live. In the next tier "Closed" is a stage of a change, the stage a change reaches when it is finished. A closed risk and a closed change are different things.
+"Closed" in this tier is a status of a risk, one of the two that is not live. In the next tier "Closed" is a stage of a change, one of its three terminal stages, beside "Rejected" and "Cancelled". A closed risk and a closed change are different things.
 
 ## What carries over unchanged
 
