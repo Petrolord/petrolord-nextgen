@@ -285,6 +285,42 @@
       "fields.json": "7bfa8d45e9edcee50eac517130cfa75b2cbb2d66de40bb12a4a37b5d55894c53"
     }
   },
+  "heattransfer": {
+    "course": "FC6",
+    "live": "/root/fc-wip-heattransfer",
+    "kit": "full",
+    "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest, the graded answers, the precision declaration, wave.json, the dump, the teaching fields, the capstone generator, the capstone conditions, the structure, the three migration headers, the course, go-live and seed generators, the SQL verifier, the dry run and the owner's apply script. The kit became \"full\" with the seed ladder.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "fc6_dump.mjs",
+      "fc6_fields.mjs",
+      "fc6_capstone.mjs",
+      "fc6_fields_capstone.mjs",
+      "structure.py",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "dryrun_fc6.sh",
+      "verify_sql.py",
+      "apply_fc6_heattransfer.sh",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "oracle_heattransfer.py",
+      "source_prose.rules.mjs",
+      "truth-heattransfer.json"
+    ],
+    "pins": {
+      "digest.txt": "a7f7b44a42e673348f15a2ddce929decf2e58f406cf9d42bc90cf28406292a1e",
+      "fields.json": "ba4c8e63d1dd591e11e7b213bca81a6e306fe3cef006b836b3264c771dca1dcd"
+    },
+    "headingsNoGeneratorSpells": 21
+  },
   "producedwater": {
     "course": "FC7",
     "live": "/root/fc-wip-producedwater",
@@ -307,7 +343,7 @@
     "headingsNoGeneratorSpells": 22,
     "headingsNote": "ALL 22 are assembled, and deliberately so. The owner clause on every section heading used to be a hand-typed string literal carrying the module key as a running counter, and the counter drifted: six clauses named a module that does not teach the section and two named a lesson that does not exist. fc7_dump.mjs builds every clause from structure.py now and refuses at build time when one names a module or a lesson the curriculum does not carry, with three negative controls fired. The section TITLES are still spelled in the generator; only the clause is computed, which is why the whole heading string no longer matches. The guards against a hand-edited heading are the digest.txt sha256 pinned here, the byte-identical rebuild under four timezones, and that build-time refusal.",
     "pins": {
-      "digest.txt": "7912719f8c164791f3cba15e0566072ec054df4e3e9a4db64f8a844566568d9c",
+      "digest.txt": "4c9fcf728f90cfeb9b21cd8281bf8de42597939a63bf8d1c74bccb6f99b8625d",
       "fields.json": "73576e0fb180f1518d85e1906d0fa4041ba88b46ea479e25be33c83367f591fd"
     }
   }

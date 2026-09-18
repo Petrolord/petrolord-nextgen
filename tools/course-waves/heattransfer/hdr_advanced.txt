@@ -1,0 +1,46 @@
+-- ============================================================================
+-- FC6 EXPERT DEEP SEED: Heat Exchange & Cooling, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: RATING, THE HOT DAY, AND THE SECOND METHOD. Given the
+-- machine, what does it deliver, and what does it still deliver in August.
+-- Effectiveness and NTU in both directions; the limits that discriminate
+-- between three arrangements and the one that has no ceiling at all; the air
+-- cooler and the correction it declines; the hot day rated at fixed UA and
+-- fixed air mass; and where this method stops knowing anything.
+--
+-- THE ENGINE FACT THIS TIER OWNS. Two ceilings and one arrangement that has
+-- NONE. Counter-current refuses no effectiveness this side of one at any
+-- capacity ratio, and a live help text said every arrangement has a ceiling,
+-- which is the claim this tier exists to get right.
+--
+-- THE TRAP THE TIER IS BUILT ON. A hot day is rated at FIXED UA and FIXED AIR
+-- MASS, and the effectiveness it is rated with is taken from its DEFINITION
+-- rather than from an arrangement. That is what lets the whole block assume no
+-- arrangement and need no correction factor, which matters because the
+-- cross-flow correction is exactly the thing this module cannot source. A
+-- reader who rates the hot day through an arrangement has borrowed the one
+-- number the bay declined to give them.
+--
+-- THE SECOND METHOD, AND WHAT TWO METHODS AGREEING BUYS. The hot day is rated
+-- by effectiveness-NTU and then checked by the surface equation at the same
+-- fixed UA, and the two agree. This is the clearest instance in the whole
+-- Facilities module of what an independent second method is worth: before the
+-- FC6-0 repair the engine satisfied NEITHER, and the disagreement is what found
+-- the defect.
+--
+-- HELD FOR LITERATURE, taught as a limit and never graded in any tier: the
+-- cross-flow correction factor, the fan constant and the water density it
+-- implies, and the three air-cooler machine defaults. OKWORI states its own fan
+-- static pressure, fan efficiency and motor efficiency, so not one of the three
+-- defaults is read; no graded field reads the design area of the bay, which is
+-- the only quantity the held cross-flow F reaches; and no graded field reads a
+-- fan horsepower or a motor horsepower.
+--
+-- AND THE GOLDEN FILE IS DECLARED SYNTHETIC, with its reason. This repository
+-- carries no published heat exchanger case, so no row is taken from one and no
+-- row pretends to be.
+-- ============================================================================

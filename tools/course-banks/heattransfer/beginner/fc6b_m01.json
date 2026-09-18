@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The Heat Exchanger and Cooling Studio puts three tabs over one exchanger. Which four questions does the engine behind those tabs answer about that unit?",
+  "options": [
+   "What duty the streams exchange, what pressure each side drops, what coefficient the surface carries, and how many tubes and baffles the shell needs.",
+   "What duty the two streams exchange, what driving force they exchange it across, what coefficient the surface carries, and how much surface and how many tubes that takes.",
+   "What duty the streams exchange, what driving force they cross, what the shell side works out at from stream analysis, and what the bundle vibrates at.",
+   "What the two streams exchange at their terminals, how much deposit has settled on the surface since the unit was commissioned, what the fan costs to turn, and how many tubes the bundle holds."
+  ],
+  "answer": 1,
+  "explanation": "Four questions, and then the engine rates a machine you already have in both directions and sizes an air cooler. A pressure drop, a stream-analysis shell side and a vibration check are all outside this module."
+ },
+ {
+  "prompt": "A flowsheet asks this engine for the tube-side pressure drop through the bundle it has just sized. What comes back?",
+  "options": [
+   "Nothing, because no pressure drop of any kind is computed here. Pressure drop in a line belongs to the Pipeline and Line Sizing engine.",
+   "The tube count door returns it beside the count, because the count and the velocity through the bundle are both in hand by that point.",
+   "A named string on the error key, the way an unknown arrangement is refused, because the routine is present and wants a friction factor supplied to it.",
+   "A figure carried straight through from the input that supplied it, in the way the shell-side film coefficient is carried, since both are quantities a caller types."
+  ],
+  "answer": 0,
+  "explanation": "This is an absence rather than a refusal. A pressure drop is not computed, not refused and not typed here, because the question belongs to another engine in the package."
+ },
+ {
+  "prompt": "Twelve exports in this module share one calling and answering contract. What is it?",
+  "options": [
+   "Each is called with its arguments in the order the studio lists them, and each answers with a bare number or a NaN.",
+   "Each is called with a named-argument object, and answers with an object or a bare number according to the answer.",
+   "Each is called with a single named-argument object, each answers with an object, and each refusal puts a named string on an error key.",
+   "Each is called with a named-argument object, and signals a refusal by throwing, which the studio catches once at the boundary of the tab that made the call."
+  ],
+  "answer": 2,
+  "explanation": "One contract at twelve doors, so one guard shape works everywhere. A caller reads the error key, and a refusal arrives in the same shape as an answer."
+ },
+ {
+  "prompt": "This module exports seventeen names and twelve of them are the doors the studio calls. What are the other five?",
+  "options": [
+   "Five frozen tables: the declared constants, the declared bounds, the held register, the bundle constants and the air density table.",
+   "Three more callable exports and two frozen tables, with the held register kept private to the module.",
+   "Two frozen tables and three helpers reached only through the doors above them.",
+   "Two more callable exports, which are the documented exceptions to the object contract, and three frozen tables."
+  ],
+  "answer": 3,
+  "explanation": "The three tables are the declared constants, the declared bounds and the held-for-literature register. The two extra callables are the air density and the bundle constants."
+ },
+ {
+  "prompt": "The air density export answers with a bare number rather than with an object. What does it do when it has no answer, and why is it written that way?",
+  "options": [
+   "It hands back a zero, which the bay reads as a density no air can have and reports onward as a named refusal of its own.",
+   "It hands back a bare NaN, because a bare number has nowhere to put an error key, and its one caller turns that NaN into a named refusal.",
+   "It throws, and the air cooler door catches the throw and converts it into the named string a caller of that door expects to read.",
+   "It hands back the density at the standard barometric base, so that a caller always has a number to carry forward into a volume."
+  ],
+  "answer": 1,
+  "explanation": "The module documents the exception rather than making it silently. A leaf correlation has nowhere to put an error key, so the contract is kept one level up, where a caller can see it."
+ },
+ {
+  "prompt": "What does the bundle constants export take as an argument, and what does it hand back?",
+  "options": [
+   "No argument at all, and a copy of the held bundle table.",
+   "A layout angle and a pass count, and the one constant pair that those two inputs select out of the table.",
+   "A named-argument object carrying the layout, and a named string on an error key when the layout is one it does not carry.",
+   "No argument at all, and the declared constants table, which is where the bundle figures are kept."
+  ],
+  "answer": 0,
+  "explanation": "It is the second documented exception to the object contract. It takes nothing and returns a copy of the held table, so a caller can read what the module cannot source."
+ },
+ {
+  "prompt": "Two doors in this module answer with thirteen keys each and two answer with one. Which is the wide pair, and what makes an answer that wide?",
+  "options": [
+   "The tube count and the tube-side film, each of which carries a full geometry back with the figure that was asked for.",
+   "The energy balance and the log mean, because a duty and a driving force each carry their terminals, their basis and their notes.",
+   "The air cooler and the overall coefficient, and both assemble something out of parts, so the parts come back beside the total.",
+   "The air cooler and the tube count, because a bay and a bundle are the two answers in this module that describe a piece of hardware."
+  ],
+  "answer": 2,
+  "explanation": "A capacity rate and an area carry one key each, because each is a single number with no parts. The tube count and the tube-side film carry ten."
+ },
+ {
+  "prompt": "On the probes the teaching digest runs, three of the twelve doors handed back more than a message when they refused. What were the extra keys?",
+  "options": [
+   "The defaults the door would have substituted had it been willing to answer the call at all.",
+   "The nearest input value that would have been accepted, so a caller can see how far outside the band the study sits.",
+   "The intermediate figures the door had already reached at the moment it stopped computing.",
+   "The numbers that produced the state the door refused."
+  ],
+  "answer": 3,
+  "explanation": "A refusal carrying its evidence lets an interface show why a state is impossible rather than only that it is. Three of twelve is what those probes measured, so read it as a floor."
+ },
+ {
+  "prompt": "What is a refusal message in this module built to let a reader do?",
+  "options": [
+   "Reproduce the arithmetic that failed, because it prints every intermediate figure the engine reached before it stopped.",
+   "Find the box to change, because it names the input that is wrong, quotes the value given and says what that input means.",
+   "Judge how far outside the band a study sits, because it prints the nearest acceptable value beside the value that was given.",
+   "Decide whether the guard is worth overriding, because it states which of the checks a caller that knows better may relax."
+  ],
+  "answer": 1,
+  "explanation": "A message reading only that the balance is infeasible would be true and useless. Somebody with a saved study open needs to know which box to change."
+ },
+ {
+  "prompt": "The overall coefficient this module reports names its reference area on every answer. Which area is it, and why does the module say so every time?",
+  "options": [
+   "The inside tube surface, because the tube-side film is the term most callers want to read back off the coefficient.",
+   "The bare bundle surface, because a finned bay and a plain bundle report their coefficients on two different surfaces.",
+   "The outside tube surface, because a second export in this package is referred to a stated bore instead, so a figure carried between the two is wrong by the ratio of the areas.",
+   "The outside tube surface, because the area a tube count returns is an inside surface, so a caller has to reconcile the two."
+  ],
+  "answer": 2,
+  "explanation": "A coefficient without its reference area is not a number you can use. The words the engine prints are outside tube surface (do), and the per-tube surface a count uses is an outside surface too."
+ },
+ {
+  "prompt": "Why does this course print resistances to nine decimals when it prints temperatures, coefficients and percentages to six?",
+  "options": [
+   "Because the interesting resistances are small, and one rounded to six decimals loses the term a reader is trying to see.",
+   "Because a resistance is known to nine figures, while a temperature is only ever measured well enough to justify six.",
+   "Because a resistance is a reciprocal, so it needs three more places to carry the accuracy of the coefficient it came from.",
+   "Because the grader will accept a resistance only at nine decimals, and a course prints figures at the precision its grader demands."
+  ],
+  "answer": 0,
+  "explanation": "These are reporting conventions and not claims about accuracy. Duties, capacity rates and the UA product print to four decimals and counts are whole numbers, on the same footing."
+ },
+ {
+  "prompt": "The word fouling appears in this course and in the Separation course. What is the relationship between the two uses?",
+  "options": [
+   "They are the same quantity reached two ways, so a figure from either course may be carried into the other once the two areas agree.",
+   "Here it is the percentage a coefficient loses as a surface dirties, and there the same percentage is applied to the capacity of a separator.",
+   "Here it is the mass of deposit on a tube in lb per ft2, and there it is the pressure drop that deposit adds across a mesh pad.",
+   "They are different quantities. Here it is a heat-transfer resistance in hr.ft2.F per Btu that sits as a term in the coefficient, and there it is a mist extractor fouling."
+  ],
+  "answer": 3,
+  "explanation": "Different units and a different remedy, sharing one word. Check which of the two a document means before carrying a number out of it."
+ },
+ {
+  "prompt": "Where does the letter P belong in this course?",
+  "options": [
+   "It is the probability band a figure sits in, written the way a percentile is written across the rest of the platform.",
+   "It is a dimensionless temperature group and it is nothing else here.",
+   "It is the pressure term the air cooler balance carries, which is the one place pressure enters this module at all.",
+   "It is the temperature group on the sizing side and a percentile on the rating side, so a reader checks which tab produced it."
+  ],
+  "answer": 1,
+  "explanation": "Nothing in heat exchange here is a percentile, so no P ten and no P fifty belongs anywhere near these answers."
+ },
+ {
+  "prompt": "The shell-side film coefficient is not worked out anywhere in this module. What happens to it instead?",
+  "options": [
+   "It is refused with a named string whenever a caller asks for it, so only an overall coefficient may be typed.",
+   "It is computed from the shell diameter and the baffle spacing the bundle answer returns.",
+   "It stays an input, and the module says plainly that it carries no shell-side film from stream analysis.",
+   "It is taken as equal to the tube-side film until a caller types a better figure."
+  ],
+  "answer": 2,
+  "explanation": "Absent and stated, which is the honest shape. Boiling, condensation, fin geometry, vibration and a rigorous cross-flow rating are outside this module on the same terms."
+ },
+ {
+  "prompt": "A caller writes one guard that covers all twelve doors. What is it checking, and what does it do when the check fires?",
+  "options": [
+   "It reads the error key, and where that key is present it treats the rest of the answer as not to be trusted.",
+   "It reads the number of keys on the answer, and where the count is below what that door normally returns it retries the call.",
+   "It checks each returned figure for a NaN, since that is how this module reports a state it will not compute.",
+   "It checks the sign of the headline figure, since a refusal here arrives as a negative surface or a negative duty."
+  ],
+  "answer": 0,
+  "explanation": "Nothing in this module returns a NaN in place of a number at these twelve doors, and nothing hands back a negative surface and leaves a caller to notice."
+ }
+]

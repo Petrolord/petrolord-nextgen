@@ -196,6 +196,10 @@ export const PANELS = {
   'fc-absorber-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/AbsorberExplorer')),
   'fc-coldend-explorer': React.lazy(() => import('@/components/course/panels/gasprocessing/ColdEndExplorer')),
 
+  // FC6 Heat Exchange & Cooling
+  'fc-exchanger-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/ExchangerExplorer')),
+  'fc-coefficient-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/CoefficientExplorer')),
+  'fc-rating-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/RatingExplorer')),
   // FC7 Produced Water Treatment
   'pw-water-explorer': React.lazy(() => import('@/components/course/panels/producedwater/WaterExplorer')),
   'pw-device-explorer': React.lazy(() => import('@/components/course/panels/producedwater/DeviceExplorer')),
