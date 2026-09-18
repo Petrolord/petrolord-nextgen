@@ -16,6 +16,7 @@ import {
 import { useRole } from '@/contexts/RoleContext';
 import { hasDeepCourse } from '@/lib/courseContent';
 import DeepCourseBanner from '@/components/course/DeepCourseBanner';
+import CapstonePrompt from '@/components/course/CapstonePrompt';
 import RegisterExplorer from '@/components/course/panels/compliance/RegisterExplorer';
 import PlanExplorer from '@/components/course/panels/compliance/PlanExplorer';
 import ReadinessExplorer from '@/components/course/panels/compliance/ReadinessExplorer';
@@ -249,7 +250,7 @@ const ComplianceLearningPage = () => {
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
               <CardTitle className="text-white">{capstone?.title || 'Capstone'}</CardTitle>
-              <CardDescription>{capstone?.prompt}</CardDescription>
+              <CapstonePrompt prompt={capstone?.prompt} />
             </CardHeader>
             <CardContent className="space-y-4">
               {!(!hasDeepCourse(APP, tier)
