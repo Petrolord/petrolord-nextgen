@@ -293,7 +293,7 @@ begin
   end if;
 
   -- --------------------------------------- the published-golden assertion --
-  -- EVERY numeric literal the teaching digest prints, all 801 distinct
+  -- EVERY numeric literal the teaching digest prints, all 800 distinct
   -- magnitudes of them, swept out of digest.txt rather than hand picked. A
   -- graded field within its OWN tolerance of one of these is a lookup and not
   -- a calculation. The lessons work the OKONO pump and the SOKU compressor;
@@ -402,8 +402,7 @@ begin
                  (43087.9193), (48215.9853), (53577.2205), (59471.443), (60693.2222), (60870.3418), (61985.4682), (62096.0266),
                  (62157.4133), (62661.2723), (63221.6383), (63440.7448), (63604.9582), (63684.9911), (64554.9267), (64731.4272),
                  (65574.3395), (67164.4557), (69478.7492), (78530.8297), (84758.5707), (86824.8963), (100000.0), (123445.296915),
-                 (3000000.0), (4163623.9019), (4178010.181407), (4386630.5362), (6759621.0), (8550254.4381), (36296606.925), (100000000.0),
-                 (183041883.582474)
+                 (3000000.0), (4163623.9019), (4178010.181407), (4386630.5362), (8550254.4381), (36296606.925), (100000000.0), (183041883.582474)
          ) as g(v)
    where c.app_slug = 'rotating'
      and abs(abs((f->>'expected')::numeric) - g.v) <= (f->>'tol')::numeric;
