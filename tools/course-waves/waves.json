@@ -405,5 +405,57 @@
       "digest.txt": "1b95d46e023723681970a79c8eacd241686fc82a754a54cf8f1ca683a48d8d52",
       "fields.json": "73576e0fb180f1518d85e1906d0fa4041ba88b46ea479e25be33c83367f591fd"
     }
+  },
+  "corrosion": {
+    "course": "FC9",
+    "live": "/root/fc-wip-corrosion",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "fc9_dump.mjs",
+      "fc9_fields.mjs",
+      "fc9_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "gate_collisions.mjs",
+      "gate_capstone_leak.py",
+      "gate_copy_rule.py",
+      "gate_vocabulary.py",
+      "gate_typed_literals.py",
+      "gate_movement.mjs",
+      "gate_wavejson.mjs",
+      "gate_claims.mjs",
+      "sweep_literals.py",
+      "digest_prose.rules.mjs",
+      "structure.py",
+      "scaffold.py",
+      "lengths.py",
+      "build_digest.sh",
+      "finalise.sh",
+      "truth-corrosion.json",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "dryrun_fc9.sh",
+      "verify_sql.py",
+      "apply_fc9_corrosion.sh",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "scratch_db.sh"
+    ],
+    "pins": {
+      "digest.txt": "0291f1fdc43b4b66ab284434d3d8b96ed71eb55b81e3f38aad6e988949d9f3fe",
+      "fields.json": "44edd802bdf49afb88e53f25290de25b3ded9296e092767b5ea980ea17ebf98f"
+    },
+    "note": "FULL kit. Everything this wave is rebuilt from is committed: the digest and its generator, the teaching streams, the capstone generator, the answer key and its precision declaration, every gate that reads either, the build and re-pin scripts, the structure and scaffold, and all five writer briefs. The gates read /root paths by DEFAULT and every one takes an override, which is what makes the committed copy the thing the vitest suites read on a CI runner."
   }
 }
