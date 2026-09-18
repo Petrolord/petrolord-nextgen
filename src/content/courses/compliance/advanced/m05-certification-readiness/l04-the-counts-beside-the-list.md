@@ -1,1 +1,50 @@
 # The counts beside the list
+
+certificationReadiness returns its list and a table of counts. The register's summarise returns another set. This lesson reads both at the as-of date 2026-10-15, and practises the discipline this course has asked for from its first lesson: quote a count as it prints, and form no ratio the digest does not print.
+
+{{panel:compliance-readiness-explorer}}
+
+## The readiness counts
+
+| count | value |
+| --- | --- |
+| clauses | 13 |
+| applicable | 12 |
+| excluded | 1 |
+| assessed | 11 |
+| evidenced | 9 |
+| conformant | 9 |
+| partial | 1 |
+| nonconformant | 1 |
+| notAssessed | 1 |
+| covered | 8 |
+| neverAudited | 3 |
+| staleAudited | 1 |
+| openMajor | 1 |
+| openMinor | 1 |
+| overdueActions | 1 |
+| certificateDays | 85 |
+
+Beside them, the two certificate flags: certificateExpiring true, certificateExpired false.
+
+Each count is one of the readings this tier has taught. excluded is clause 4.4. covered, neverAudited and staleAudited are the coverage outcomes of module 3 at a cycle of 3 years. openMajor and openMinor are ISF-2026-004 and ISF-2026-005. certificateDays is the 85 of lesson 3.
+
+## The summary
+
+summarise over the same register prints: clauses 13, applicable 12, excluded 1, evidenced claims 9, unevidenced claims 1, notAssessed 1, reviews overdue 1, reviews due soon 1, audits 6, audits open 2, audits overdue 2, clauses covered 8, never audited 3, stale 1, open findings 3, open major 1, findings overdue 1, open actions 2, overdue actions 1, awaiting an effectiveness check 1.
+
+Some summary counts print the same figures as readiness counts under other names: clauses covered 8 and covered 8, never audited 3 and neverAudited 3. Others appear only here. open findings 3 counts every open finding, and the findings table shows three open: ISF-2026-004, ISF-2026-005 and ISF-2026-003. open major 1 and the readiness count openMajor 1 count only the first.
+
+## No percentage
+
+The digest prints covered 8 and applicable 12. It prints evidenced 9 and conformant 9. It prints no percentage from any of them, and neither does the engine. A coverage percentage would read as though the uncovered clauses were all alike, when the list has already told you that 3 of them are never examined and blocking and 1 is stale and serious. The counts keep the difference. A percentage would average it away.
+
+So when you report readiness, report the counts as they print and the list items beside them. Do not write a fraction or a percentage of any shape. The course has shown you why at every tier: the engine rounds its own percents where it prints them, and where it prints none there is no percent to quote.
+
+## Counts the digest does not break down
+
+audits open 2 and audits overdue 2 are printed as counts. The digest does not name the audits behind them, and the ORASHI audits table prints no planned end dates. This course does not say which two they are. awaiting an effectiveness check 1 is printed the same way, without its action.
+
+## Exercise
+
+At 2026-10-15, read the readiness counts and the summary. Name the pairs that count the same thing under two names. Then take covered 8, neverAudited 3 and staleAudited 1, and say what each one counts and which severity the list gives it, without adding them or forming a percentage. Finally, say which two summary counts this course cannot trace to named records, and why.
