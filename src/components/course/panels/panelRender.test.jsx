@@ -96,6 +96,12 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('refinery/PlanExplorer.jsx');
     expect(names).toContain('refinery/VarianceExplorer.jsx');
   });
+  it('finds the carbon (Carbon & Energy Efficiency) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('carbon/InventoryExplorer.jsx');
+    expect(names).toContain('carbon/EfficiencyExplorer.jsx');
+    expect(names).toContain('carbon/AbatementExplorer.jsx');
+  });
   it('finds the supply (Terminals, Depots & Fuel Supply) panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);
     expect(names).toContain('supply/TankExplorer.jsx');

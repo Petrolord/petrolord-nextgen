@@ -171,3 +171,25 @@ Per tier: the lessons written, the prose word count of each against its own
 minimum, every figure you wanted and could not find in the digest, every
 two-figure comparison you wrote and the digest line it points at, and anything
 in the digest you believe is wrong.
+
+## LEAD RULINGS (2026-09-19, after the foundation)
+
+1. **No unprinted glosses.** In the Commercial & Trading courses every tier's
+   key-truth audit found 12 to 22 lesson sentences the digest never prints:
+   domain glosses ("a temperature is not an amount"), design rationales ("the
+   tool refuses because..."), definitions, benchmarking advice, course
+   routing, "the engine states it" for digest prose. Each one then became a
+   wrong bank key and a lesson fix. Write ONLY what a digest line prints or a
+   reading of a printed row, cite the section, and put domain context in one
+   clearly framed sentence ("In practice, ...") that no question can key on.
+2. **F1 is being REPAIRED in the engines** (abatementCurve: a claim against a
+   source that did not compute, or was not given, leaves the target verdict
+   unassessed). SECTION 21's "met, as an upper bound" at the Carbon Studio
+   defaults will change to an unassessed verdict. Do not teach the current
+   SECTION 21 verdict as correct; write the lesson around the rule (a claim
+   the curve cannot check against its source gets no verdict) and flag the
+   exact digest lines you depend on in your hand back. F2 (basis label),
+   F3 (refused measure named), F4-F7 (negative inputs refused, condensate
+   target below current refused, choked flow tested) are repaired too: teach
+   none of those behaviours from the current digest; they will print after
+   the re-vendor.

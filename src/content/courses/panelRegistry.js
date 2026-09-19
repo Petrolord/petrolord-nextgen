@@ -239,6 +239,10 @@ export const PANELS = {
   'supply-tank-explorer': React.lazy(() => import('@/components/course/panels/supply/TankExplorer')),
   'supply-depot-explorer': React.lazy(() => import('@/components/course/panels/supply/DepotExplorer')),
   'supply-price-explorer': React.lazy(() => import('@/components/course/panels/supply/PriceExplorer')),
+  // MD5 carbon: Carbon & Energy Efficiency (academy module energy_transition)
+  'carbon-inventory-explorer': React.lazy(() => import('@/components/course/panels/carbon/InventoryExplorer')),
+  'carbon-efficiency-explorer': React.lazy(() => import('@/components/course/panels/carbon/EfficiencyExplorer')),
+  'carbon-abatement-explorer': React.lazy(() => import('@/components/course/panels/carbon/AbatementExplorer')),
 };
 
 export function resolvePanel(id) {
