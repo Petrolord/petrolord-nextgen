@@ -11,7 +11,7 @@
   "explanation": "Its basis is percent_of_running, so it adds that percent of everything above it: the landed cost, every invented margin and the invented levies."
  },
  {
-  "prompt": "The same invented 6.5 percent is typed as a percent of the landed cost instead of the running total. What does buildPumpPrice report?",
+  "prompt": "The invented value added tax of 6.5 percent is typed as a percent of the landed cost instead of the running total. What does buildPumpPrice report?",
   "options": [
    "A pump price of 1074.8249 naira a litre, since a rate that is supplied gives the same amount on any basis.",
    "A pump price of 1031.3197 naira a litre, labelled a floor because the tax no longer reads the margins.",
@@ -19,7 +19,7 @@
    "A pump price of 1066.7292 naira a litre, complete true."
   ],
   "answer": 3,
-  "explanation": "The basis changes the amount and every rate is still supplied, so the build-up is complete. Nothing in 1066.7292 looks wrong; only its base differs from the running-total build."
+  "explanation": "The digest prints price 1066.7292 naira a litre for that build and says it is complete true: the basis changes the amount, and every rate is still supplied."
  },
  {
   "prompt": "The invented depot and terminal margin is 21 naira a litre. What does it do to the running total on BADAGRY?",
@@ -41,7 +41,7 @@
    "complete false with the price reported as none, since the tax cannot read a running total with gaps in it."
   ],
   "answer": 2,
-  "explanation": "The waterfall keeps both missing elements visible and prints its sentence \"A FLOOR, not a price: 2 rate(s) not supplied.\" A figure missing two invented elements is not a price anyone can check a cap on."
+  "explanation": "The engine keeps both missing elements visible, reports complete false and prints \"A FLOOR, not a price: 2 rate(s) not supplied.\" beside 1031.3197 naira a litre."
  },
  {
   "prompt": "Against the course's invented cap of 1040.0000 naira a litre, the complete BADAGRY price of 1074.8249 gives which answer?",
@@ -68,13 +68,13 @@
  {
   "prompt": "A reader sets the floor price of 1031.3197 naira a litre beside the invented cap of 1040.0000. Why is no cap verdict worth reading from that pair?",
   "options": [
-   "The floor is a price the full build-up cannot fall below, and the complete price of 1074.8249 sits above that cap.",
+   "The floor build is complete false, and the complete price of 1074.8249 gives a shortfall of 34.8249 at that cap.",
    "The floor is always above the complete price, so a cap that clears the floor clears the full chain as well.",
    "The engine applies the cap to the landed cost only, so the margins left blank play no part in the verdict.",
    "The cap is invented and the floor is measured, so a comparison between the two carries no information."
   ],
   "answer": 0,
-  "explanation": "With every invented rate supplied the shortfall at 1040.0000 is 34.8249 and the verdict false. A cap verdict is worth reading only on a build-up the engine reports as complete."
+  "explanation": "The floor of 1031.3197 naira a litre has 2 rates missing. With every invented rate supplied the price is 1074.8249, and against 1040.0000 the shortfall is 34.8249 and the cap covers the chain: false."
  },
  {
   "prompt": "marginWaterfall groups the invented BADAGRY build-up by recipient. What is the Government row?",
@@ -112,13 +112,13 @@
  {
   "prompt": "marginWaterfall is handed a build-up that the engine refused. What does it return?",
   "options": [
-   "REFUSED: A landed cost per litre is required.",
+   "The refusal buildPumpPrice gives: A landed cost per litre is required.",
    "Every share reported as none.",
-   "REFUSED: An FOB price and its basis are required.",
+   "The refusal landedCost gives with no FOB: An FOB price and its basis are required.",
    "One Unattributed row holding the price."
   ],
   "answer": 0,
-  "explanation": "A refused build-up has no price, and a share of a price that does not exist is a share of nothing, so the grouping refuses with the same sentence."
+  "explanation": "The digest prints marginWaterfall on a refused build-up as REFUSED: A landed cost per litre is required., the sentence buildPumpPrice gives when it has no landed cost."
  },
  {
   "prompt": "In the invented BADAGRY grouping, which recipient row comes first, and why?",
@@ -132,15 +132,15 @@
   "explanation": "marginWaterfall groups the build-up by recipient, largest first. The landed cost is grouped as Product (landed) with a share of 0.823088."
  },
  {
-  "prompt": "Suppose an invented per-litre margin were moved to sit after the value added tax. Which amount would change?",
+  "prompt": "On the invented BADAGRY waterfall, which element prints an amount that differs from its typed rate?",
   "options": [
-   "The margin's own amount, since a per-litre element depends on its place.",
-   "The landed cost, since the running total starts from a different figure.",
-   "None, since every element is summed onto the same price in the end.",
-   "The tax amount, since the margin would leave the running total it reads."
+   "Depot and terminal margin: typed 21, added per litre to the landed cost.",
+   "Dealer margin: typed 31.25, added per litre after the marketer.",
+   "Bridging or equalisation: typed 24.5, added per litre after the depot.",
+   "Value added tax: typed 6.5, a percent of the running total."
   ],
   "answer": 3,
-  "explanation": "A per-litre element is the same wherever it sits. A percent_of_running element depends on everything above it, so its place is part of its value."
+  "explanation": "A per-litre element adds its amount, so each margin prints its typed rate: 21.0000, 31.2500 and 24.5000 naira a litre. The value added tax is typed as a percent, and the amount it adds is that percent of a base."
  },
  {
   "prompt": "The invented dealer margin shows a share of price of 0.029075. What is that share a fraction of?",
@@ -151,7 +151,7 @@
    "The margins alone, before levies and tax."
   ],
   "answer": 1,
-  "explanation": "The share column divides each amount by the final price, so it means something only once the build-up is complete. 31.2500 naira a litre over 1074.8249 is the dealer's 0.029075."
+  "explanation": "The share column is each element's share of the price. The dealer's 31.2500 naira a litre prints 0.029075 against the pump price of 1074.8249 naira a litre, and the landed cost's share is 0.823088."
  },
  {
   "prompt": "buildPumpPrice is called for BADAGRY with no landed cost per litre. What does it return?",

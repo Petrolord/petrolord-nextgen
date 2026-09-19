@@ -25,12 +25,13 @@ q(0, "cargoQuantities returns 45772751.75 litres for BADAGRY. What role does tha
  "The landed total is spread over what arrives, 45566774.37 litres at the invented 0.45 percent loss. The litres returned by cargoQuantities are what was loaded and paid for.")
 
 # 3 m02
-q(3, "Ocean freight is typed as a percent of C&F on the invented BADAGRY walk. Which refusal comes back?",
- "REFUSED: Ocean freight is a percentage of a value that is not formed until after freight.",
- ["REFUSED: Customs processing has an unknown stage \"customs\".",
-  "No refusal: C&F is a frozen base, so the freight is computed on it directly.",
-  "REFUSED: The insurance rates on CIF add up to 100 percent or more."],
- "C&F is formed at the end of the freight stage, so it does not yet exist when freight is charged. The digest prints the same sentence for freight on C&F as for freight on CIF.")
+# audit-advanced: key 1.00 against m02 Q1 (the same refusal re-asked in the exam); now asks which other entry meets the same sentence
+q(3, "Ocean freight typed as a percent of C&F is refused on the invented BADAGRY walk. Which other entry does the digest show refused with the same sentence?",
+ "Ocean freight typed as a percent of CIF.",
+ ["A charge with the stage \"customs\".",
+  "Insurance on CIF at 100 percent.",
+  "Import duty typed as a percent of CIF."],
+ "Freight on C&F and freight on CIF both read \"Ocean freight is a percentage of a value that is not formed until after freight.\" A customs stage and CIF insurance at 100 percent have sentences of their own, and duty on CIF is the rate BADAGRY prices at 5.75 percent.")
 
 # 4 m02
 q(3, "With the invented marine insurance quoted on C&F in place of CIF, what landed total does BADAGRY print?",
@@ -41,7 +42,8 @@ q(3, "With the invented marine insurance quoted on C&F in place of CIF, what lan
  "Moving the premium onto C&F lowers it to 38868.80 USD, which lowers CIF and so the duty that reads CIF. The build with the invented premium on CIF closes at 26513943.86 USD.")
 
 # 5 m02+m04
-q(1, "The engine labels an incomplete build-up a floor in two places. On the invented BADAGRY pump price, which figure carries that label?",
+# audit-advanced: "in two places" unprinted count (the digest also calls the trucking figure a floor)
+q(1, "The engine labels an incomplete build-up a floor. On the invented BADAGRY pump price, which figure carries that label?",
  "1031.3197 naira a litre, with the dealer margin and levies blank.",
  ["1066.7292 naira a litre, with the tax typed on the landed cost.",
   "24774210.79 USD, with the duty and financing blank.",
@@ -49,28 +51,31 @@ q(1, "The engine labels an incomplete build-up a floor in two places. On the inv
  "The pump sentence is \"A FLOOR, not a price: 2 rate(s) not supplied.\" The walk's floor of 24774210.79 is in US dollars for the cargo, and 1066.7292 is complete true.")
 
 # 6 m03+m04
-q(1, "Suppose the pump build-up started from the row at an invented ocean loss of 1 percent, 889.5902 naira a litre. Which element's amount would differ from the BADAGRY waterfall?",
- "The value added tax, since it is a percent of the running total.",
- ["The depot and terminal margin, since it is charged per litre sold.",
-  "The statutory levies, since the government levies each litre received.",
-  "The dealer margin, since it is paid on the landed cost the dealer buys."],
- "Every other element is per_litre and adds the same invented amount wherever it sits. Only the percent_of_running tax reads a base that holds the landed cost.")
+# audit-advanced: REPLACED: hypothetical build from the 1 percent row, key rested on inference
+q(1, "Every invented rate in the BADAGRY import template is supplied. How does landedCost label the build-up?",
+ "complete true; All supplied rates applied.",
+ ["complete true, labelled a floor until a cap is set.",
+  "complete false, since the ocean loss has no row in the template.",
+  "complete true, with the ocean loss named in assumedZero."],
+ "The full walk prints landed total 26513943.86 USD, complete true and \"All supplied rates applied.\" The ocean loss is stated with the cargo and is not a template rate, and a floor is the label for a build-up with rates missing.")
 
 # 7 m03+m05
+# audit-advanced: "Government share" named a naira figure
 q(0, "The invented exchange rate moves while the BADAGRY cargo and every invented import rate stay the same. Which figure is unchanged?",
  "The landed total in dollars, 26513943.86 USD.",
  ["The landed cost at the depot gate in naira a litre.",
-  "The Government share of the pump price in naira.",
+  "The Government row of the pump price in naira.",
   "The shortfall against the invented cap of 1150.0000."],
  "Every line of the walk is in dollars, and the exchange rate enters once, at the end. So the naira landed cost, the tax built on it and the shortfall all move with the rate.")
 
 # 8 m04+m05
-q(1, "Across the invented exchange rate sweep the Government share moves with the rate, reaching 97.1210 naira a litre at 2100.0000. Why does the Dealer row stay at its invented 31.2500?",
- "The dealer margin is per litre, while the tax in the Government share reads a running total that holds the landed cost.",
+# audit-advanced: "Government share" named a naira figure; explanation now cites the per-litre rule
+q(1, "Across the invented exchange rate sweep the Government figure moves with the rate, reaching 97.1210 naira a litre at 2100.0000. Why does the dealer margin stay at its invented 31.2500?",
+ "The dealer margin is per litre, while the tax in the Government row reads a running total that holds the landed cost.",
  ["The dealer margin is quoted in naira while the levies are quoted in dollars, so only the levies move with the rate.",
   "The dealer is paid after the tax, so the running total the dealer reads is fixed before the landed cost is added.",
   "The dealer margin is a share of the price, and a share of the price is held fixed when the price is re-priced."],
- "The invented levies are per litre too. It is the tax element that makes the Government share move, since its base contains the landed cost.")
+ "A per-litre element adds its amount, and a percent of the running total adds that percent of everything above it. The invented levies are per litre too; the tax element is what moves the Government row, since its base contains the landed cost.")
 
 # 9 m05
 q(2, "How many bisection steps does the engine report for the invented BADAGRY breakeven?",
@@ -185,20 +190,22 @@ q(1, "The engine's CIF of 24331931.09 USD on BADAGRY, with the invented insuranc
  "Insurance on CIF by fixed-point iteration is in the fuelpricing oracle's method column. The published source column for that file reads none: every rate is synthetic.")
 
 # 23 m01+m06
+# audit-advanced: explanation claim ("quoting authority it cannot keep current") unprinted
 q(1, "RATE_DISCLAIMER and held finding H2 describe one decision. What is it?",
  "The engine ships no rate, so every rate is a required input and each one in this course is invented.",
  ["The engine ships one market's regulated rates and asks the user to confirm them before use.",
   "The engine ships typical rates as a starting point, as PRODUCT_REFERENCE does for densities.",
   "The engine ships rates for the import walk and leaves the pump elements for the user to type."],
- "H2: every template rate is absent, 9 of 9 on IMPORT_TEMPLATE and 7 of 7 on PUMP_TEMPLATE. A library that shipped a duty would be quoting authority it cannot keep current.")
+ "RATE_DISCLAIMER says every rate is a required input, since duties, levies and regulated margins are set by regulation, differ by market and change. H2: every template rate is absent, 9 of 9 on IMPORT_TEMPLATE and 7 of 7 on PUMP_TEMPLATE, and every rate in this course is invented.")
 
 # 24 m02
-q(0, "Why does freezing each base as the walk reaches it matter for the invented duty and financing lines?",
- "It gives one answer for one set of inputs, whatever order the landed lines are typed in.",
- ["It lets each percentage line bite on the lines typed before it, so the order sets the total.",
-  "It lets the engine solve the duty in closed form, as it does the insurance on CIF.",
-  "It keeps the duty off the freight, which is billed on C&F after the duty is formed."],
- "If the base moved as later charges were added, a duty would bite partly on itself and on the storage bill, and the answer would depend on typing order.")
+# audit-advanced: REPLACED: order independence of the walk is never printed; key and explanation rested on inference
+q(0, "What C&F does landedCost print for the invented BADAGRY cargo?",
+ "24293000.00 USD",
+ ["23392000.00 USD",
+  "24331931.09 USD",
+  "26513943.86 USD"],
+ "The walk runs FOB, then freight (C&F): 23392000.00 USD of cargo and 901000.00 USD of the invented freight. 24331931.09 USD is CIF, formed after insurance, and 26513943.86 USD the landed total.")
 
 # 25 m03
 q(1, "The BADAGRY cost a litre sold prints to six decimals in dollars and to four in naira. Which pair is it at the invented 0.45 percent loss?",
@@ -225,28 +232,31 @@ q(3, "Over the course's 1300 to 1500 bracket, what do the two negative end short
  "A negative shortfall means the cap sits above the price. -211.7551 and -87.8167 have the same sign, so there is nothing to halve towards.")
 
 # 28 m06
-q(0, "throughputEconomics is called with the throughput fee blank. What does it return?",
- "REFUSED: Throughput and the throughput fee are both needed for the money answer.",
- ["A margin with the fee taken as zero and named in assumedZero, as a blank fixed cost is.",
-  "REFUSED: Arrival rate and load time are both needed.",
-  "A margin labelled a floor, with the fee named as missing."],
- "The money answer needs the throughput and the fee. A blank cost or loss is taken as zero and named in assumedZero; a blank fee is refused.")
+# audit-advanced: REPLACED: key 1.00 against tdsi_m04 Q3 (the same refusal asked the same way); a SECTION 23 tank farm rule scored 0.55 against tdsi_m03 Q7, so an Expert-native SECTION 21 question
+q(0, "Which pair of elements makes up the Government recipient on the invented BADAGRY waterfall?",
+ "Statutory levies at the pump and Value added tax.",
+ ["Value added tax alone.",
+  "Statutory levies at the pump alone.",
+  "Statutory levies at the pump, Value added tax and Bridging or equalisation."],
+ "The Government row reads 75.1996 naira a litre with the elements Statutory levies at the pump and Value added tax. Bridging or equalisation is paid to Chain, and removing its recipient sends it to Unattributed.")
 
 # 29 m01+m02
+# audit-advanced: key claimed "the nearest known label is never put in its place", beyond the two printed refusals; explanation reasons unprinted
 q(1, "cargoQuantities refuses the unit \"kg\" and landedCost refuses the stage \"customs\". What do the two refusals share?",
- "A label the engine does not recognise is refused, and the nearest known label is never put in its place.",
+ "Each names a label the engine does not know and refuses the call.",
  ["Both are forward references to a value the walk has not formed, so both carry the same sentence.",
   "Both are density errors, since kilograms and customs charges are each formed from a volume.",
   "Both are read as zero and named, so the answer is labelled a floor until the label is fixed."],
- "34000 kg might be a slip for tonnes or truly kilograms, and customs might mean landed or not. A guess would print a clean figure nobody could tell was guessed.")
+ "The digest prints REFUSED: Unknown quantity unit \"kg\". for cargoQuantities and REFUSED: Customs processing has an unknown stage \"customs\". for landedCost. Neither returns a figure, and neither is a forward reference or a floor.")
 
 # 30 m03
-q(0, "Which invented BADAGRY figure changes when the ocean loss changes: CIF, the duty, the landed total or the outturn?",
+# audit-advanced: CIF and duty distractors were refuted only by inference (neither is printed across the loss sweep)
+q(0, "Which invented BADAGRY figure changes when the ocean loss changes: the landed total, the bill-of-lading litres, the regulatory line or the outturn?",
  "The outturn",
- ["CIF",
-  "The duty",
-  "The landed total"],
- "The loss is litres paid for and never received. It moves the litres the landed total is spread over and touches no charge in the walk.")
+ ["The landed total",
+  "The bill-of-lading litres",
+  "The regulatory line"],
+ "The landed total reads 26513943.86 USD on every row of the sweep and the bill of lading 45772751.75 litres, and the regulatory line, 109854.60 USD, is charged on those bill-of-lading litres. The outturn is the one figure of the four that falls as the loss rises.")
 
 # 31 m04
 q(0, "What is the running total after the invented marketer margin of 18.4 naira a litre?",
@@ -321,28 +331,31 @@ q(0, "Which recipient does the invented bridging or equalisation element pay in 
  "Bridging's recipient is Chain, and the grouping reports 24.5000 naira a litre against it. Unattributed appears only when the course removes that recipient.")
 
 # 40 m06
-q(2, "Which course owns the plan, schedule and actuals of a refinery, and which owns the truck lane its product leaves by?",
- "refinery owns the plan; this course owns the lane.",
- ["crude owns the plan; refinery owns the lane.",
-  "refinery owns both, up to the station forecourt.",
-  "this course owns both, since each is logistics."],
- "The line is drawn at the gate. A refinery's product leaving by truck is this course's lane; its margin and plan are refinery's.")
+# audit-advanced: REPLACED: the refinery/course seam is LESSON_TASK, printed nowhere in the digest
+q(2, "34000 tonnes read 40476.190 m3 through cargoQuantities. Which PRODUCT_REFERENCE density was used?",
+ "840 kg/m3, the AGO row",
+ ["745 kg/m3, the PMS row",
+  "800 kg/m3, the DPK row",
+  "960 kg/m3, the HFO row"],
+ "The density sweep prints 40476.190 m3 at 840 kg/m3, AGO. PMS at 745 reads 45637.584 m3, DPK at 800 reads 42500.000 m3 and HFO at 960 reads 35416.667 m3.")
 
 # 41 m01+m03
-q(1, "BADAGRY is entered as 287900 bbl and returns 45772.442 m3. Which later figure would carry that typed rounding if the entry were used?",
- "Every per-quantity charge and the outturn formed from the bill-of-lading quantity.",
- ["None, since the landed total is divided by the outturn and the outturn is measured ashore.",
-  "The FOB value alone, since the FOB price is quoted per barrel on a price screen.",
-  "The exchange rate, since the naira figure is formed from the barrel quantity."],
- "The bill-of-lading quantity feeds every per-quantity line and the outturn = bill-of-lading x (1 - ocean loss / 100). A rounding typed at the start travels through both.")
+# audit-advanced: REPLACED: hypothetical barrel entry, key rested on inference (and left FOB out)
+q(1, "Which method does the terminal oracle, oracle_terminaldepot.py, list for the loading queue?",
+ "Erlang C by the exact factorial form and Little's law.",
+ ["An integer fleet search, one truck at a time.",
+  "Insurance on CIF by fixed-point iteration.",
+  "A closed-form FX breakeven."],
+ "The terminal oracle lists strapping from tank geometry, Erlang C by the exact factorial form and Little's law, and a day ledger. The integer fleet search, the fixed-point insurance and the closed-form FX breakeven are the fuel pricing oracle's methods.")
 
 # 42 m05+m06
+# audit-advanced: explanation inference ("means finding the breakeven again") unprinted
 q(1, "The breakeven of 1641.7105 naira to the dollar, an invented exchange rate on an invented record, is reached by the engine and by an oracle. Which statement about it holds?",
  "It is a property of the invented record, found by bisection and matched by a closed form.",
  ["It is the rate at which the invented cap stops covering any chain priced by this engine.",
   "It is graded as the exchange rate the course expects the naira to reach against the cap.",
   "It is found by closed form in the engine, and the oracle confirms it by bisection."],
- "The engine bisects and the oracle solves in closed form. Every rate behind it is invented, so a change to any of them means finding the breakeven again.")
+ "The engine bisects and the oracle solves in closed form, and every rate behind the figure is invented for the course.")
 
 emit(Q, '/root/wt-md-supply-nextgen/tools/course-banks/supply/advanced/tdsa_exam.json', expect_n=42)
 finish()

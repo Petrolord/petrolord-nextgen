@@ -28,12 +28,13 @@ q(0, "solveCrossing is run against the invented cap over a bracket from 1300 to 
   "found true at 1641.7105, since the engine widens the bracket until the sign changes."],
  "Both end shortfalls, -211.7551 and -87.8167 naira a litre, are negative. The engine does not search outside the bracket it was handed and returns no value.")
 
+# audit-advanced: explanation flourish ("goes back to the person who typed it") unprinted
 q(2, "solveCrossing is handed the invented exchange rate bracket written backwards, 2100 to 1200. Which answer does it give?",
  "REFUSED: The search bracket is not a valid interval.",
  ["It swaps the ends and finds 1641.7105.",
   "REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.",
   "It halves from the high end and reports none."],
- "A bracket written backwards is not an interval. The engine does not swap the ends; the bracket goes back to the person who typed it.")
+ "The digest prints the bracket written backwards, 2100 to 1200, as that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500.")
 
 q(2, "The breakeven search is run on the invented BADAGRY chain with no cap. What does the engine report?",
  "breakeven none",
@@ -42,40 +43,45 @@ q(2, "The breakeven search is run on the invented BADAGRY chain with no cap. Wha
   "breakeven 2100.0000"],
  "With no cap there is nothing to cross. The engine does not invent a cap to search against, and a breakeven of none is a different answer from a figure of zero.")
 
+# audit-advanced: key asserted the -87.8167 IS the sweep row; the digest prints only that the two agree
 q(1, "The search over the invented rates 1300 to 1500 prints end shortfalls of -211.7551 and -87.8167 naira a litre. Where does each come from?",
- "The -87.8167 is the sweep row at 1500.0000; the -211.7551 is the search's own evaluation at 1300.",
+ "The -87.8167 matches the sweep row at 1500.0000; 1300 has no sweep row, so the -211.7551 is printed only here.",
  ["Both are sweep rows, at 1300 and at 1500, printed again beside the refusal for comparison.",
   "The -211.7551 is the sweep row at 1200.0000; the -87.8167 is the midpoint of the bracket.",
   "Both are the search's own evaluations, since no sweep row falls inside the 1300 to 1500 bracket."],
- "The sweep holds a row at 1500.0000 with a shortfall of -87.8167 and a verdict of true. 1300 is not a swept value, so its figure is the search evaluating its own low end.")
+ "The sweep holds a row at 1500.0000 with a shortfall of -87.8167 and a verdict of true. The swept values run 1200.0000, 1350.0000, 1500.0000 and on, so 1300 has no row, and its shortfall appears only beside the refusal.")
 
-q(3, "Why does solveCrossing return no value for the invented 1300 to 1500 bracket, where 1500 is the end nearer the crossing?",
- "At 1500 the invented cap covers the chain, so printing it as a breakeven would be false.",
+# audit-advanced: key gave an interpretive reason ("printing it would be false"); now keyed on lines 647 and 673
+q(3, "Why does solveCrossing return no value for the invented 1300 to 1500 bracket?",
+ "Both ends read a negative shortfall, so the price does not meet the cap inside the bracket.",
  ["At 1500 the shortfall is positive, so the crossing lies below the bracket and out of reach.",
   "Values are returned only for brackets that start at the lowest swept rate.",
   "A bracket must span 18 bisection steps to report a crossing."],
- "A reader who saw 1500 on a report would conclude the chain breaks there, and it does not. Returning nothing with both end shortfalls tells the reader the bracket has to move.")
+ "If the price does not cross the cap inside the range searched, the engine says so and returns no value. A negative shortfall means the cap sits above the price, and it does at 1300 and at 1500.")
 
+# audit-advanced: "Government share" named a naira figure; the digest's share is a fraction
 q(0, "Moving the invented exchange rate from 1200.0000 to 2100.0000, which printed figure moves with it besides the landed cost?",
- "The Government share, which reads 97.1210 naira a litre at 2100.0000.",
+ "The Government figure, which reads 97.1210 naira a litre at 2100.0000.",
  ["The invented levies, which are charged as a share of the landed cost at the gate.",
   "The invented dealer margin, which is quoted per dollar of cargo.",
   "No other figure; margins and levies are per litre."],
- "The per-litre margins and levies are the same invented amounts on every row. The tax is levied on a running total that holds the landed cost, so the Government share moves.")
+ "The per-litre margins and levies add their amounts on every row. The tax is a percent of the running total, which holds the landed cost, so the Government figure moves from 74.4281 at 1500.0000 to 97.1210 naira a litre at 2100.0000.")
 
-q(0, "Why does priceSensitivity rebuild the whole BADAGRY chain at each invented exchange rate instead of scaling one price?",
- "The invented value added tax reads each row's running total, which holds that row's landed cost.",
- ["The per-litre margins are quoted in dollars and have to be converted afresh at each exchange rate.",
-  "Scaling one price would move the invented cap along with the chain and hide every crossing.",
-  "The oracle requires a full re-pricing at each row before its closed form can be compared."],
- "A shortcut that moved only the landed cost and kept the tax amount fixed would misprice each row away from the base rate. Rebuilding applies the tax to each row's own running total.")
+# audit-advanced: REPLACED: "why rebuild instead of scaling" keyed an unprinted reason
+q(0, "What does priceSensitivity do at each invented exchange rate it sweeps on BADAGRY?",
+ "It re-prices the whole chain at that rate.",
+ ["It scales the base price of 1074.8249 by the rate.",
+  "It moves the landed cost and holds every other amount.",
+  "It solves for the cap at that rate."],
+ "priceSensitivity re-prices the whole chain at each value of one driver. The element table shows the landed cost and the Government figure both moving, 872.8052 and 74.4281 naira a litre at 1500.0000 against 1221.9272 and 97.1210 at 2100.0000, and the cap stays at 1150.0000.")
 
-q(3, "The oracle checking this engine solves the invented record's exchange rate breakeven in closed form. Why does the engine bisect instead?",
- "Bisection asks the chain for its price and reads the sign, whatever elements the build-up contains.",
- ["Bisection reaches the exact rate in one step where a closed form needs 18 repeated evaluations.",
-  "A closed form cannot be written for a chain that contains a per-litre element at any point.",
-  "Bisection needs no bracket, so it can search the whole range of possible exchange rates."],
- "A closed form is written for one shape of chain and must be rederived when an element or a basis changes. The two methods reaching 1641.7105 is what the oracle's check is for.")
+# audit-advanced: REPLACED: "why the engine bisects" keyed an unprinted design reason
+q(3, "Which pump price and verdict does the invented sweep print at 1500.0000 naira to the dollar, against the cap of 1150.0000?",
+ "At 1062.1833 naira a litre, the cap covers it.",
+ ["At 1074.8249 naira a litre, as at the base rate, the cap covers it.",
+  "At 1155.1370, the cap does not cover it.",
+  "At 1062.1833 naira a litre, the cap does not cover it."],
+ "The row at 1500.0000 prints 1062.1833 naira a litre, a shortfall of -87.8167 and a verdict of true. 1074.8249 is the price at the invented base rate of 1520.4000, and 1155.1370 the row at 1650.0000.")
 
 q(1, "In the invented sweep, what are the shortfalls at 1650.0000 and at 2100.0000 naira to the dollar?",
  "5.1370 and 283.9982 naira a litre",
@@ -98,12 +104,13 @@ q(3, "What does the invented exchange rate sensitivity table say about the ocean
   "That the breakeven falls by the loss percent."],
  "Each sweep is a separate single-driver table. Neither says what happens when two inputs move at once, and neither assigns a likelihood to any row.")
 
-q(0, "The invented dealer margin on BADAGRY is changed and nothing else. What happens to the breakeven of 1641.7105 naira to the dollar?",
- "It has to be found again, since it holds for the record it was solved on.",
- ["It stays the same, as it depends on the exchange rate alone.",
-  "It moves by the dealer margin change divided by the invented cap of 1150.0000.",
-  "It becomes none, as solveCrossing refuses an edited chain."],
- "The breakeven is one driver moved with everything else held at the invented BADAGRY values. Change any of them and the crossing is a new one.")
+# audit-advanced: REPLACED: an edited dealer margin is never re-solved in the digest; key rested on inference
+q(0, "solveCrossing is handed the invented BADAGRY chain and the cap. Which value does it search for?",
+ "The exchange rate at which the pump price meets the cap.",
+ ["The cap at which the pump price meets the base exchange rate.",
+  "The pump price at the invented base rate of 1520.4000.",
+  "The landed cost at which the Government figure meets the cap."],
+ "priceSensitivity re-prices the chain at each value of one driver, here the exchange rate, and solveCrossing bisects for the value at which the price meets the cap. On BADAGRY it finds 1641.7105 naira to the dollar against 1150.0000.")
 
 q(2, "What does the invented sensitivity table leave out, which a reader might be tempted to take from it?",
  "Any likelihood for a row, such as how probable a move to 1800.0000 is.",

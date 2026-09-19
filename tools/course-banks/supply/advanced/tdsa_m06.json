@@ -5,7 +5,7 @@
    "IMPORT_TEMPLATE ships 7 of 9 rates as none, keeping the freight and insurance rates, and PUMP_TEMPLATE 7 of 7.",
    "IMPORT_TEMPLATE ships 9 of 9 rates as none, and PUMP_TEMPLATE ships its value added tax rate alone of 7.",
    "IMPORT_TEMPLATE ships 9 of 9 rates as none, and PUMP_TEMPLATE 7 of 7.",
-   "IMPORT_TEMPLATE ships 8 of 9 rates as none, keeping the per_cargo demurrage figure, and PUMP_TEMPLATE 7 of 7."
+   "IMPORT_TEMPLATE ships its demurrage figure alone and every other rate as none, and PUMP_TEMPLATE 7 of 7."
   ],
   "answer": 2,
   "explanation": "H2: the volume correction coefficient tables and every published rate stay unshipped. That is why every rate in this tier is invented for the course and says so."
@@ -30,7 +30,7 @@
    "The engine uses a closed form; the oracle iterates the fixed point."
   ],
   "answer": 3,
-  "explanation": "A golden figure beside an engine figure is two methods agreeing. A mistake in one method would have to be reproduced by a quite different method to go unnoticed."
+  "explanation": "The fuelpricing oracle's method column lists insurance on CIF by fixed-point iteration, where the engine uses a closed form. A golden figure beside an engine figure is two methods agreeing."
  },
  {
   "prompt": "For the invented BADAGRY exchange rate breakeven, which way does the pairing between engine and oracle run?",
@@ -60,10 +60,10 @@
    "Every figure is unvalidated, since an oracle without a published source can only restate the engine's own figures in its own words.",
    "Every rate has been checked against the regulation in force, and the column records that no other published source was needed.",
    "The oracles and the engine share one source file, so a golden figure is the engine's figure saved at the time of the last release.",
-   "Rates and coefficients are data nobody here checks against a published figure; arithmetic and queueing are checked by independent methods."
+   "No rate or coefficient is a published figure, and each golden figure is an independent method agreeing with the engine."
   ],
   "answer": 3,
-  "explanation": "Every rate is synthetic, and the volume correction form is pinned by tests. The checking has an honest shape: methods agree on the arithmetic, and data carries no check."
+  "explanation": "The terminal row reads none because no coefficient table is shipped, and the pricing row because every rate is synthetic. Each golden file is written by an independent stdlib Python oracle, and the volume correction form is pinned by tests."
  },
  {
   "prompt": "No coefficient table is shipped, so how is the volume correction form pinned?",
@@ -88,26 +88,26 @@
   "explanation": "The landed cost cases (floor, full and insurance on CIF), the lane, the fleet, the pump build-up and the station are carried by fuelpricing_cases.json."
  },
  {
-  "prompt": "IB-T1 and IB-T2 together hold 5453.100 m3 over a combined heel of 420.000 m3. What pumpable stock does the engine report for the pair?",
+  "prompt": "Among the rules the engines keep, IB-T1 and IB-T2 together hold 5453.100 m3 over a combined heel of 420.000 m3, and their pumpable stock prints as 5078.400 m3. Which rule gives that figure?",
   "options": [
-   "5453.100 m3",
-   "5078.400 m3",
-   "420.000 m3",
-   "0.000 m3"
+   "The pair's stock less the pair's heel, taken as one pool.",
+   "Pumpable stock is counted tank by tank, each tank's stock above its own heel.",
+   "Pumpable stock is corrected to standard volume, while the stock is gross observed.",
+   "A reserve above the heel is held back on every tank before it counts as pumpable."
   ],
   "answer": 1,
-  "explanation": "Pumpable stock is counted tank by tank, each tank's stock above its own heel and never below zero. No pump lends one tank's volume to another's heel."
+  "explanation": "The rule reads: pumpable stock is counted tank by tank, and the digest measures it on IB-T1 and IB-T2 as 5078.400 m3 of pumpable stock. Each tank's pumpable stock is its stock above its own heel and never below zero, and no pump lends one tank's volume to another's heel."
  },
  {
-  "prompt": "The rules the engines keep include \"A load time of zero minutes is refused.\" Which sentence does the course print for it?",
+  "prompt": "Among the rules the engines keep, which one does the sentence \"Arrival rate and load time are both needed.\" enforce?",
   "options": [
-   "\"The number of bays must be a whole number, one or more.\"",
-   "\"Throughput and the throughput fee are both needed for the money answer.\"",
-   "\"Arrival rate and load time are both needed.\"",
-   "\"No opening stock, so the day cannot be closed.\""
+   "Bays are a whole number, one or more.",
+   "throughputEconomics needs the throughput and the fee.",
+   "A load time of zero minutes is refused.",
+   "A day is not closed without its opening stock."
   ],
   "answer": 2,
-  "explanation": "A zero load time is refused with the same sentence as a missing arrival rate. The other three are the engine's sentences for bays, for the money answer and for the day."
+  "explanation": "The digest lists the rule \"a load time of zero minutes is refused\" with that sentence. The bays rule prints \"The number of bays must be a whole number, one or more.\", the money rule \"Throughput and the throughput fee are both needed for the money answer.\" and the opening stock rule \"No opening stock, so the day cannot be closed.\""
  },
  {
   "prompt": "throughputEconomics takes a blank cost as zero and names it in assumedZero. How does landedCost treat a blank rate?",
@@ -126,32 +126,32 @@
    "It balances every day and so measures nothing, which is why the opening stock is an input.",
    "It closes the day at the dipped standard volume, the one figure the reconciliation is built to check.",
    "It is the method the engine uses when the opening stock is left blank on a reconciliation.",
-   "It shows the tolerance is set too wide, since every row sits within it at 0.000 m3."
+   "It shows the tolerance is set too wide, since every row sits within it with nothing unaccounted."
   ],
   "answer": 0,
-  "explanation": "An opening stock derived from the closing dip balances every day. A figure built so that it cannot come out wrong proves nothing, so the engine requires the opening stock."
+  "explanation": "An opening stock derived from the day's own closing dip balances every day and measures nothing: every row of the demonstration balances, so none of them measured anything. A day is not closed without its opening stock."
  },
  {
-  "prompt": "Which course owns the question of where the BADAGRY density of 742.8 kg/m3 comes from?",
+  "prompt": "Which two things does the engines repository keep unshipped under held finding H2?",
   "options": [
-   "refinery, which owns the plan",
-   "supply, which owns the measurement chain",
-   "the Economics courses, which own valuation",
-   "crude, which owns assays and blending"
+   "The strapping tables of the AKODO tanks and the dips read against them.",
+   "The diesel emission factor and the typical product densities.",
+   "The golden files and the independent oracles that write them.",
+   "The volume correction coefficient tables and every published rate."
   ],
   "answer": 3,
-  "explanation": "This course takes the density as an input read off a certificate. Where a cargo's quality comes from belongs to Crude Assay & Blending."
+  "explanation": "H2: the volume correction coefficient tables and every published rate stay unshipped. PRODUCT_REFERENCE ships typical densities, and the two golden files and their oracles are listed in the oracle table."
  },
  {
-  "prompt": "The IBAFO throughput margin is 4988.00 USD for the period, on an invented fee of 7.80 USD a cubic metre. How does the final module classify it?",
+  "prompt": "Among the rules the engines keep, what does throughputEconomics report for a loss when no product density is supplied?",
   "options": [
-   "A period's margin, never a valuation; nothing in this course discounts it.",
-   "A valuation of the depot, once it is discounted over the years the depot runs.",
-   "A net present value, since revenue less costs is the first year of a cash flow.",
-   "A figure owned by refinery, since the depot's margin is a refinery margin."
+   "No loss weight and no emissions, with a carbon note that says why.",
+   "The loss weighed at the typical density PRODUCT_REFERENCE lists.",
+   "A refusal of the whole money answer until the density is typed.",
+   "Emissions of zero kg CO2e, with the loss weight reported as none."
   ],
   "answer": 0,
-  "explanation": "No course here computes a net present value, an internal rate of return, a Monte Carlo simulation or a decision tree. Those belong to the Economics courses."
+  "explanation": "The rule reads: a loss with no density has no weight and no emissions, and the carbon note says why. The money answer needs only the throughput and the fee, and PRODUCT_REFERENCE is read only when a caller passes a density in."
  },
  {
   "prompt": "Reading the invented BADAGRY chain end to end, where do the ocean loss and the exchange rate each enter?",

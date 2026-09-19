@@ -33,7 +33,7 @@
   "explanation": "The importer pays the landed total and sells the outturn. At the invented 0.45 percent that is 26513943.86 USD over 45566774.37 litres, printed as 0.581870 USD a litre sold."
  },
  {
-  "prompt": "The engine's own sentence for the ocean loss is \"The loss divides the cost.\" Which reading of BADAGRY does that sentence rule out?",
+  "prompt": "The digest's rule for the ocean loss reads \"The loss divides the cost.\" Which reading of BADAGRY does that statement rule out?",
   "options": [
    "Spreading the total over the litres that arrived.",
    "Adding the loss to the build-up as a charge in dollars.",
@@ -41,7 +41,7 @@
    "Charging port on the 34000 bill-of-lading tonnes."
   ],
   "answer": 1,
-  "explanation": "A loss is litres paid for and never received, and nobody is paid for losing them. So it changes the litres the money is spread over, and the landed total stays at 26513943.86 USD."
+  "explanation": "The importer pays for the bill-of-lading quantity and sells the outturn. The loss divides the cost: the landed total stays at 26513943.86 USD and the litres it is spread over fall, so the loss is never a charge in the build-up."
  },
  {
   "prompt": "The invented ocean loss on BADAGRY is raised from 0.45 to 1 percent. Which pair of printed figures moves?",
@@ -63,7 +63,7 @@
    "It is folded into the invented insurance rate."
   ],
   "answer": 2,
-  "explanation": "The template's 9 lines are charges, each paid to someone on a base. The loss is paid to no one. On a real cargo it is what the shore tanks measure against the bill of lading, and the engine does not estimate it."
+  "explanation": "The template's 9 lines are charges, each on a base, and none of them is the loss. The ocean loss is stated with the cargo, beside the FOB price and the exchange rate, and outturn = bill-of-lading x (1 - ocean loss / 100)."
  },
  {
   "prompt": "How does the invented exchange rate of 1520.4000 naira to the dollar enter the BADAGRY landed cost?",
@@ -74,7 +74,7 @@
    "Once, at the end: naira per litre sold = USD per litre sold x 1520.4000."
   ],
   "answer": 3,
-  "explanation": "Converting once keeps the exchange rate a single visible input. Every line of the walk is in dollars, and 0.581870 USD a litre sold becomes 884.6753 naira."
+  "explanation": "Every line of the walk is in dollars, and the exchange rate enters once, at the end: 0.581870 USD a litre sold becomes 884.6753 naira."
  },
  {
   "prompt": "The invented exchange rate is left out of the BADAGRY call. What does the engine report?",
@@ -85,7 +85,7 @@
    "Both figures in dollars, the naira column copied from the dollar one."
   ],
   "answer": 1,
-  "explanation": "The dollar cost a litre sold needs no exchange rate. The naira figure needs exactly one, and with none the local figure is none. An old rate carried over would be a guess."
+  "explanation": "The dollar cost a litre sold needs no exchange rate. The naira figure is the dollar figure x the exchange rate, and with no exchange rate the digest prints the local figure as none."
  },
  {
   "prompt": "Which figure does the pump price build-up of the next module start from, on the course's invented BADAGRY record?",
@@ -104,10 +104,10 @@
    "The outturn, 45566774.37 litres",
    "The bill of lading, 45772751.75 litres",
    "The bill of lading, 45772.752 m3",
-   "The outturn, 45566.774 m3"
+   "The outturn at a loss of 1 percent, 45315024.23 litres"
   ],
   "answer": 0,
-  "explanation": "The column in USD per outturn litre is the division by the outturn done line by line, so every line is spread over the same 45566774.37 litres. The m3 figures are the same two quantities in another unit."
+  "explanation": "The priced case carries the invented 0.45 percent loss, and its column in USD per outturn litre spreads every line over that outturn. The other options are the outturn at 1 percent and the bill of lading in two units."
  },
  {
   "prompt": "The invented jetty line prints 54927.30 USD on BADAGRY. Which two quantities does held finding H1 set side by side?",
@@ -123,13 +123,13 @@
  {
   "prompt": "Why is H1 taught as a limit and never graded?",
   "options": [
-   "The engine bills the discharge lines on the outturn, and the course has no outturn figures.",
-   "A graded answer would have to pick one contract term and present it as the rule.",
-   "The invented jetty and storage rates are too small to matter.",
+   "The engine bills the discharge lines on the outturn, and the course prints no outturn figure.",
+   "It is held in the engines repository's findings: the billing quantity is a contract term the engine does not know.",
+   "The jetty and storage lines are left out of the BADAGRY landed total until the basis is settled.",
    "The engine refuses the jetty and storage lines until the contract basis is typed."
   ],
   "answer": 1,
-  "explanation": "Whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know. The engine answers every per-quantity line on the bill of lading."
+  "explanation": "The digest lists H1 among the items held by the engines repository in FINDINGS-supply, taught as limits and never graded. Whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know, and the engine answers every per-quantity line on the bill of lading."
  },
  {
   "prompt": "H1 names the jetty and storage lines. Which other invented BADAGRY lines does the same contract question reach?",
@@ -154,14 +154,14 @@
   "explanation": "With no loss the landed total of 26513943.86 USD is spread over the full bill of lading. 0.513357 USD is the FOB line alone per outturn litre at the invented 0.45 percent."
  },
  {
-  "prompt": "Where does a figure like BADAGRY's invented 0.45 percent loss come from, as far as the engine is concerned?",
+  "prompt": "The course sweeps the invented ocean loss on BADAGRY from 0 to 1 percent at 1520.4000 naira to the dollar. What does the naira cost a litre sold read at the two ends?",
   "options": [
-   "It is typed in as an input; on a real cargo it is measured by the shore tanks against the bill of lading.",
-   "It is estimated from the voyage, the product and the weather, then applied to the bill-of-lading litres.",
-   "It is read from PRODUCT_REFERENCE, which carries a typical loss beside each typical product density.",
-   "It is the gap between the 45772.752 m3 invoiced and the 45772.700 m3 typed as a volume."
+   "880.6943 naira at 0 and 889.5902 naira at 1 percent.",
+   "884.6753 naira at both ends, since the landed total does not move.",
+   "880.6943 naira at both ends, since the exchange rate does not move.",
+   "889.5902 naira at 0 and 880.6943 naira at 1 percent."
   ],
   "answer": 0,
-  "explanation": "The ocean loss is a percentage of the bill-of-lading quantity and it is an input. The engine does not estimate it from the voyage, the product or the weather."
+  "explanation": "The sweep prints 880.6943 naira a litre sold at a loss of 0 and 889.5902 at 1 percent. The landed total stays at 26513943.86 USD, and the outturn it is spread over falls from 45772751.75 to 45315024.23 litres."
  }
 ]

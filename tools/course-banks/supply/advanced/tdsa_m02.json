@@ -8,7 +8,7 @@
    "REFUSED: An FOB price and its basis are required."
   ],
   "answer": 2,
-  "explanation": "Freight belongs to the freight stage, and CIF is formed two stages later. A freight line naming it is a forward reference, and the engine refuses it by name."
+  "explanation": "Freight belongs to the freight stage, and CIF is formed at the insurance stage, after freight. The engine refuses a freight line that names a value formed later, and prints the same sentence for freight on C&F."
  },
  {
   "prompt": "A charge is added to the invented BADAGRY walk with its stage typed as \"customs\". Which answer does landedCost give?",
@@ -30,7 +30,7 @@
    "REFUSED: The insurance rates on CIF add up to 100 percent or more."
   ],
   "answer": 3,
-  "explanation": "CIF = (C&F + any other insurance) / (1 - the sum of the CIF rates), and at 100 percent the denominator is zero. A figure from that division would look like money, so the call is refused."
+  "explanation": "CIF = (C&F + any other insurance) / (1 - the sum of the CIF rates), and at 100 percent the denominator is zero. The engine refuses the call with the sentence above and forms no CIF."
  },
  {
   "prompt": "The course's invented import duty of 5.75 percent prints 1399086.04 USD on BADAGRY. Which figure is it a percent of?",
@@ -66,22 +66,22 @@
   "explanation": "A per_cargo line reads no quantity at all. It is levied once, and the walk prints it as 52500.00 USD."
  },
  {
-  "prompt": "The course re-prices BADAGRY with the insurance quoted on C&F in place of CIF, every other invented rate unchanged. Which printed figure is the same in both builds?",
+  "prompt": "Insurance on BADAGRY at the invented 0.16 percent is quoted first on CIF and then on C&F, every other invented rate unchanged. Which CIF does each build print?",
   "options": [
-   "C&F, 24293000.00 USD",
-   "CIF, 24331931.09 USD",
-   "The import duty, 1399086.04 USD",
-   "The landed total, 26513943.86 USD"
+   "24331931.09 USD on CIF and 24331868.80 USD on C&F.",
+   "24331931.09 USD in both builds, since the rate is unchanged.",
+   "24331868.80 USD on CIF and 24331931.09 USD on C&F.",
+   "24293000.00 USD in both builds, since C&F is frozen first."
   ],
   "answer": 0,
-  "explanation": "C&F is frozen before insurance exists, so the insurance basis cannot reach it. CIF moves to 24331868.80 USD, the duty to 1399082.46 USD and the landed total to 26513877.12 USD."
+  "explanation": "The comparison table prints CIF 24331931.09 USD with insurance on CIF and 24331868.80 USD with it on C&F. 24293000.00 USD is the C&F of the walk priced with insurance on CIF."
  },
  {
   "prompt": "Insurance on BADAGRY moves from the invented 0.16 percent of CIF to the same rate on C&F. Why does the import duty line change as well?",
   "options": [
    "The duty is a percent of the insurance line, so any change in the premium passes through it.",
    "The engine re-solves every percentage line in closed form whenever an insurance basis changes.",
-   "The duty is a percent of C&F, and C&F now carries the premium that CIF used to carry.",
+   "The duty is a percent of C&F, and moving the premium onto C&F changes that base.",
    "The duty is a percent of CIF, and CIF has changed with the insurance."
   ],
   "answer": 3,
@@ -118,18 +118,18 @@
    "The total, which the blank build marks as none because the walk cannot close on a missing duty."
   ],
   "answer": 2,
-  "explanation": "A rate typed 0 is a rate, a statement about a regime. A blank is an absence and the engine names it. The totals match, so only the flag and the list carry the difference."
+  "explanation": "The totals match, so the difference sits in the flag and the list: a rate typed 0 is a rate the engine applied, and a blank is a rate it names as missing."
  },
  {
   "prompt": "With every invented rate left blank, landedCost prints a total of 23392000.00 USD. What is that figure?",
   "options": [
-   "The landed cost of the cargo with every charge taken at zero.",
+   "The landed cost, complete true, with every blank rate read as zero.",
    "The FOB alone, labelled as a floor with 9 rates missing.",
    "The C&F value, since freight is formed from the FOB price.",
    "The CIF value, formed before any landed charge applies."
   ],
   "answer": 1,
-  "explanation": "It is the same figure as the FOB line of the full build. Printed without complete false and \"A FLOOR, not a cost: 9 rate(s) not supplied.\", it would present a purchase price as a landed cost."
+  "explanation": "It is the same figure as the FOB line of the full build. The engine prints it with complete false, 9 rates missing and \"A FLOOR, not a cost: 9 rate(s) not supplied.\""
  },
  {
   "prompt": "The digest prints 26513943.86 - 24774210.79 = 1739733.07 USD for BADAGRY, every rate invented. Which lines does the floor build leave out of its total?",
@@ -151,7 +151,7 @@
    "Duty reads CIF, which is frozen before the walk reaches any landed charge."
   ],
   "answer": 3,
-  "explanation": "Each base is frozen when the walk reaches it. The duty's CIF of 24331931.09 USD contains no landed line, so the answer does not depend on the order the landed lines were typed in."
+  "explanation": "Each base is frozen when the walk reaches it. The duty's CIF of 24331931.09 USD is formed at the insurance stage, before any landed charge, and the financing line, also a percent of CIF, prints ahead of demurrage in the walk."
  },
  {
   "prompt": "A corrected density arrives for the BADAGRY cargo. Which invented landed line does the walk leave untouched?",
