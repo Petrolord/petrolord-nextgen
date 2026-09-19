@@ -88,7 +88,7 @@
   "explanation": "The counterfactual table prints avoidedFlareCo2eTonnes 190032.865 on the diesel, pipeline gas and burned nothing rows alike. 215946.438 is the whole flare, and 62032.865 is the net where nothing is displaced."
  },
  {
-  "prompt": "In SECTION 21's blocked probe table, which probe prints the blockedBy text that names the methane global warming potential?",
+  "prompt": "In abatement's blocked probe table, which probe prints the blockedBy text that names the methane global warming potential?",
   "options": [
    "the probe with no GWP",
    "the probe at 1.5",

@@ -46,7 +46,7 @@ q(1, "Which limits did the EGBEMA study type on the Compressed natural gas route
   "minVolumeMMscfd 5, minGpmC3Plus 2, with no heating value limit"],
  "The digest's limits table: Compressed natural gas, minVolumeMMscfd 5, maxInertFraction 0.06, minGhvBtuScf 1000. The others are the gas to power, mini LNG and LPG rows.")
 
-q(3, "Which three words does screenRoute give a ROUTE as its verdict?",
+q(3, "Which three verdicts does screenRoute give a ROUTE?",
  "passes, fails and not fully screened",
  ["pass, fail and unchecked",
   "passes, fails and unchecked, as each check reads",
@@ -68,7 +68,7 @@ q(2, "OGUTA's CNG ceiling prints 21.0224 kg per Mscf. Which figure characteriseG
   "ghvBtuScf"],
  "CNG is capped on the whole gas mass, and characteriseGas prints OGUTA's kgPerMscf as 21.0224. OGUTA's molarMassLbLbmol is 17.5880, its ghvBtuScf 1035.6050, and its LPG ceiling rests on the propane and heavier.")
 
-q(3, "Which typed yield and ceiling does the digest print for EGBEMA's gas to power route?",
+q(3, "Which typed yield and ceiling are printed for EGBEMA's gas to power route?",
  "0.085 MWh against a ceiling of 0.3659",
  ["0.085 MWh against a ceiling of 0.3548",
   "0.94 MWh against a ceiling of 0.3659",
@@ -82,7 +82,7 @@ q(1, "The refusal of a CNG yield of 30 kg/Mscf on EGBEMA names a basis in bracke
   "(kg per Mscf of CNG)"],
  "The refusal reads \"... more than the 26.706618 kg the gas holds (gas mass).\" The LPG refusal on the studio gas names (propane and heavier).")
 
-q(2, "Both ceiling refusals in the digest close on the same sentence. Which?",
+q(2, "The LPG refusal at 0.02 t/Mscf and the CNG refusal at 30 kg/Mscf close on one shared sentence. Which?",
  "\"A yield above what the gas contains is refused.\"",
  ["\"A yield of zero is refused on every route.\"",
   "\"The ceiling is the licensor's, and it is yours to set.\"",
@@ -161,12 +161,12 @@ q(3, "Which recovery did the EGBEMA study type on the LPG route, and what produc
  "The LPG inputs print a yield of 0.0052 t and a recovery of 0.82, and productPerYear 11352.9000 t LPG. 0.86 is mini LNG's recovery and 40070.6250 its product in t LNG; 0.88 is CNG's.")
 
 # ---- the counterfactual (SECTION 21)
-q(2, "What reason does the digest print for crediting only the recovered share of the flare?",
+q(2, "Only the recovered share of the flare is counted as avoided. Which reason is printed for that rule?",
  "What the plant leaves unrecovered is still flared.",
  ["The unrecovered gas is vented, all of it methane.",
   "The GWP applies only to the recovered share.",
   "The credit price is set on the recovered share."],
- "The digest: \"The gas it does not recover is still flared, so the avoided flare CO2e is the flare's CO2e times the recovery.\" blockedBy words the same rule: gas the plant does not recover is still flared.")
+ "The rule reads: \"The gas it does not recover is still flared, so the avoided flare CO2e is the flare's CO2e times the recovery.\" blockedBy words the same rule: gas the plant does not recover is still flared. An unlit flare, whose gas is vented, is not modelled, and credits are priced on the net abatement.")
 
 q(0, "On which CNG counterfactual does the net abatement print the same figure as the avoided flare?",
  "Pipeline gas already burned, where displaced fuel and product combustion both read 128000",
@@ -263,9 +263,9 @@ q(3, "The rankingNote's second sentence tells the reader what to do. What?",
 q(0, "With every limit unset, as the studio opens, which rankingNote does compareRoutes print?",
  "\"No route passes screening yet, so none is ranked best.\" with CNG named as leading on value",
  ["\"Ranked on gross margin per Mscf, which ignores the capital.\" with cng named best",
-  "\"No route passes screening yet, so none is ranked best.\" with mini LNG screened out",
+  "\"No route passes screening yet, so none is ranked best.\" with cng named bestByValuePerMscf",
   "\"Ranked on net abatement, which ignores the capital.\" with Compressed natural gas named as the leader"],
- "The opening note reads: \"No route passes screening yet, so none is ranked best. Compressed natural gas leads on value among routes not fully screened; set the limits before relying on it.\" Every route reads not fully screened, so none is screened out.")
+ "The opening note reads: \"No route passes screening yet, so none is ranked best. Compressed natural gas leads on value among routes not fully screened; set the limits before relying on it.\" bestByValuePerMscf reads null and leaderNotFullyScreened reads cng. The note on gross margin per Mscf is the one printed with the study's limits typed.")
 
 q(1, "Where do the credit prices creditSensitivity tests come from?",
  "The case types them; the engine ships none.",
@@ -275,12 +275,12 @@ q(1, "Where do the credit prices creditSensitivity tests come from?",
  "The digest: \"Credit prices are case inputs; the engine ships none.\" 40, 8, 20 and 12 are the prices the EGBEMA case typed. The hurdle minus the margin over the net tonnes is the breakeven.")
 
 # ---- the tier read as one parcel (SECTION 24 with 16 to 23)
-q(2, "SECTION 24 reads EGBEMA's CNG route from the gas to the credit test. Which flareToValue functions does its function line name?",
- "routeEconomics, abatement and creditSensitivity",
- ["screenRoute, yieldCeiling and compareRoutes",
-  "characteriseGas, abatement and compareRoutes",
-  "routeEconomics, compareRoutes and creditSensitivity"],
- "SECTION 24's function line reads flareToValue.routeEconomics, abatement, creditSensitivity.")
+q(2, "The breakeven's numerator, the hurdle minus the margin, is 3491850.00 a year. Over which figure does creditSensitivity divide it?",
+ "218032.865 t/yr, the net abatement against diesel",
+ ["215946.438 t/yr, the flare's gross CO2e",
+  "190032.865 t/yr, the avoided flare CO2e",
+  "21008150.00 a year, the route's gross margin"],
+ "The field's label reads breakevenCreditPrice ((hurdle minus margin) over net tonnes), and the numerator is printed as 3491850.00 a year, over 218032.865 t/yr. A credit computed from a gross flare figure is a credit that cannot be issued, and the avoided flare is only the first term of the net.")
 
 q(3, "abatement multiplies the flare's CO2e by one figure the CNG route also types for its year. Which?",
  "The recovery, 0.88",

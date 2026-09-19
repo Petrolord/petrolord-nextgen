@@ -22,7 +22,7 @@
   "explanation": "Of the prices typed, 40 and 20 print clearsHurdle true and 8 and 12 false, and the digest prints lowestTestedClearingPrice 20. 40 is the first price in the order typed that clears, and 16.0152 is the breakeven."
  },
  {
-  "prompt": "The digest prints a third price beside the breakeven and lowestTestedClearingPrice: the first price in the order typed that clears. What does it read, and how does it relate to the other two?",
+  "prompt": "Beside the breakeven and lowestTestedClearingPrice, a third price is printed: the first price in the order typed that clears. What does it read, and how does it relate to the other two?",
   "options": [
    "20, and it equals the lowest tested price",
    "16.0152, and it equals the breakeven price",
@@ -33,7 +33,7 @@
   "explanation": "The digest prints the first price in the order typed that clears as 40 and says it \"is a third figure again, and it is neither\". The breakeven is 16.0152 and lowestTestedClearingPrice is 20."
  },
  {
-  "prompt": "What does the digest print as the breakeven's numerator, the hurdle minus the margin, on EGBEMA's CNG route?",
+  "prompt": "What is printed as the breakeven's numerator, the hurdle minus the margin, on EGBEMA's CNG route?",
   "options": [
    "24500000 a year",
    "3491850.00 a year",

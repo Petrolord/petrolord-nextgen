@@ -30,12 +30,12 @@ q(2, "How does the oracle check the flare by the rule?",
   "By moles, cross-checked against a measured flare's figures."],
  "The digest: \"the flare by the rule by moles, cross-checked by the rule's own volumetric route\". The oracle checks independently of the engine, and the digest's preamble says no figure in it is a published analysis or a measured flare.")
 
-q(0, "The oracle leaves the component heating values and liquid densities unvalidated. What does the digest say of them?",
+q(0, "The oracle leaves the component heating values and liquid densities unvalidated. What is said of them?",
  "They are pinned, and the engine labels them typical.",
  ["They are rebuilt from atomic weights.",
   "They are derived from the gas constant.",
   "They are checked by the volumetric route."],
- "SECTION 24: the oracle \"does not validate the typical heating values and liquid densities: those are pinned, and the engine labels them typical.\" Atomic weights feed the molar masses, the gas constant the standard molar volume, and the volumetric route cross-checks the flare.")
+ "The oracle \"does not validate the typical heating values and liquid densities: those are pinned, and the engine labels them typical.\" Atomic weights feed the molar masses, the gas constant the standard molar volume, and the volumetric route cross-checks the flare.")
 
 q(3, "In what form does the oracle carry the gas?",
  "In exact rationals, in kilograms and cubic metres",
@@ -51,12 +51,12 @@ q(1, "Which ledgers does the oracle check on a parcel?",
   "The discounted cash flow and payback ledgers"],
  "The digest lists \"the route, credit and comparison ledgers\" among the oracle's checks. The engine assembles its cash flow and hands it on; it does not discount it.")
 
-q(0, "Where does the validation oracle for flareToValue live?",
- "packages/engines/tools/validation/downstream",
- ["packages/engines/engines/downstream",
-  "packages/engines/goldens/downstream",
-  "packages/engines/tools/validation/facilities"],
- "The digest names oracle_flaretovalue.py, in packages/engines/tools/validation/downstream. engines/downstream is where flareToValue.js itself sits.")
+q(0, "In the end-to-end reading, the diesel counterfactual takes the avoided flare of 190032.865 t/yr to a net of 218032.865 t/yr. By which two typed figures, and how?",
+ "Less a product combustion of 128000, plus a displaced fuel of 156000.",
+ ["Less a displaced fuel of 156000, plus a product combustion of 128000.",
+  "Less a product combustion of 128000, plus the net minus the gross flare, 2086.427.",
+  "Times the recovery of 0.88, plus a displaced fuel of 156000."],
+ "The net abatement is the avoided flare, less what burning the product emits, plus what the product displaces. On the diesel row the product combustion (input) reads 128000 and the displaced fuel (input) 156000. The recovery of 0.88 already sits in the avoided flare, the flare's CO2e times the recovery, and 2086.427 is the net minus the gross flare, a printed result.")
 
 q(2, "In the end-to-end table of EGBEMA's CNG route, what does the step \"CNG made, kg/yr\" print?",
  "43345500.0000",
@@ -105,9 +105,9 @@ q(0, "The end-to-end table's net abatement step names one counterfactual. Which,
  ["pipeline gas already burned, at 190032.865 t/yr",
   "a market that burned nothing, at 62032.865 t/yr",
   "a new load that burned nothing, at -2010.348 t/yr"],
- "The step reads net abatement against diesel, t/yr, 218032.865, the figure the bid table also carries on CNG. The pipeline gas and burned nothing nets are CNG probes of SECTION 21, and -2010.348 is gas to power's.")
+ "The step reads net abatement against diesel, t/yr, 218032.865, the figure the bid table also carries on CNG. The pipeline gas and burned nothing nets are the CNG route's other two counterfactuals, and -2010.348 is gas to power's.")
 
-q(2, "How does the digest say the oracle checks flareToValue's figures?",
+q(2, "How is the validation oracle said to check flareToValue's figures?",
  "Independently of the engine",
  ["By re-running the engine on a second machine",
   "Against measured flares",

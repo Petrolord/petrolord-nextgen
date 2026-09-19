@@ -108,7 +108,7 @@ q(3, "screenRoute is asked to screen a gas the analysis refused. What does it an
   "The routes are screened on the gas as typed, with each status printed."],
  "The digest's probe table for screenRoute: a gas the analysis refused gives \"REFUSED: A characterised gas is required.\" No check table and no verdict are printed for it.")
 
-q(2, "Which sentence of the engine's note on ROUTE_TEMPLATES opens it?",
+q(2, "Beside the notes two of its requirements carry, the engine prints one note on ROUTE_TEMPLATES as a whole. Which sentence opens that note?",
  "\"Requirement limits are yours to set.\"",
  ["\"The limit is the licensor's.\" on every row of the table.",
   "\"Below this the liquids do not pay for the plant.\"",

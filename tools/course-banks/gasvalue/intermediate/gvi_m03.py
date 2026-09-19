@@ -29,7 +29,7 @@ q(0, "EGBEMA's CNG route is called with its on-stream days typed blank (''). Wha
  ["It takes the stated default, onstreamDays 350, and prints mscfPerYear 2625000.0000.",
   "It takes the days as zero, names them in assumedZero, and prints a year of none.",
   "It takes the flare's 355 days and prints mscfPerYear 2662500.0000 on the route."],
- "SECTION 19 prints this refusal for the CNG days box typed blank. The stated default of 350 applies only to days left out of the call, and 355 is EGBEMA's own typed figure.")
+ "routeEconomics prints this refusal for the CNG days box typed blank (''). The stated default of 350 applies only to days left out of the call, and 355 is EGBEMA's own typed figure.")
 
 q(2, "How does routeEconomics form productPerYear?",
  "mscfPerYear times the yield times the recovery",

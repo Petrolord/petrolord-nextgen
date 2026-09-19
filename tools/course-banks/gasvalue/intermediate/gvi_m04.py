@@ -66,7 +66,7 @@ q(2, "Across its three counterfactuals, what does the CNG route's avoidedFlareCo
   "190032.865 on diesel only, and null on the other two"],
  "The counterfactual table prints avoidedFlareCo2eTonnes 190032.865 on the diesel, pipeline gas and burned nothing rows alike. 215946.438 is the whole flare, and 62032.865 is the net where nothing is displaced.")
 
-q(0, "In SECTION 21's blocked probe table, which probe prints the blockedBy text that names the methane global warming potential?",
+q(0, "In abatement's blocked probe table, which probe prints the blockedBy text that names the methane global warming potential?",
  "the probe with no GWP",
  ["the probe at 1.5",
   "the no label probe",

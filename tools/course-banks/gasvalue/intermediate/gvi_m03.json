@@ -30,7 +30,7 @@
    "It takes the flare's 355 days and prints mscfPerYear 2662500.0000 on the route."
   ],
   "answer": 0,
-  "explanation": "SECTION 19 prints this refusal for the CNG days box typed blank. The stated default of 350 applies only to days left out of the call, and 355 is EGBEMA's own typed figure."
+  "explanation": "routeEconomics prints this refusal for the CNG days box typed blank (''). The stated default of 350 applies only to days left out of the call, and 355 is EGBEMA's own typed figure."
  },
  {
   "prompt": "How does routeEconomics form productPerYear?",

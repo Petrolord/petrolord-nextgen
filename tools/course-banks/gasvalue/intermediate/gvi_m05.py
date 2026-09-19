@@ -26,14 +26,14 @@ q(0, "Credit prices are typed in the order 40, 8, 20, 12. What does lowestTested
   "12"],
  "Of the prices typed, 40 and 20 print clearsHurdle true and 8 and 12 false, and the digest prints lowestTestedClearingPrice 20. 40 is the first price in the order typed that clears, and 16.0152 is the breakeven.")
 
-q(3, "The digest prints a third price beside the breakeven and lowestTestedClearingPrice: the first price in the order typed that clears. What does it read, and how does it relate to the other two?",
+q(3, "Beside the breakeven and lowestTestedClearingPrice, a third price is printed: the first price in the order typed that clears. What does it read, and how does it relate to the other two?",
  "40, and it is neither of the other two",
  ["20, and it equals the lowest tested price",
   "16.0152, and it equals the breakeven price",
   "40, and it is lowestTestedClearingPrice"],
  "The digest prints the first price in the order typed that clears as 40 and says it \"is a third figure again, and it is neither\". The breakeven is 16.0152 and lowestTestedClearingPrice is 20.")
 
-q(1, "What does the digest print as the breakeven's numerator, the hurdle minus the margin, on EGBEMA's CNG route?",
+q(1, "What is printed as the breakeven's numerator, the hurdle minus the margin, on EGBEMA's CNG route?",
  "3491850.00 a year",
  ["24500000 a year",
   "8721314.60 a year",

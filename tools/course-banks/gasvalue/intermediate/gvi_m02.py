@@ -45,7 +45,7 @@ q(0, "Read the LPG row of the ceiling table for OGUTA, the lean gas. Which figur
   "0.0210 t"],
  "The LPG row prints 0.0067 on EGBEMA, 0.0010 on OGUTA and 0.0056 on the studio's opening gas. 0.0210 is OGUTA's mini LNG ceiling, on the gas mass basis.")
 
-q(2, "The studio's LPG route on its opening gas is typed at 0.0045 t/Mscf. What does the digest print for that yield?",
+q(2, "The studio's LPG route on its opening gas is typed at 0.0045 t/Mscf. What is printed for that yield?",
  "Within a ceiling of 0.0056 t/Mscf; typed over ceiling 0.8062.",
  ["Refused, above the ceiling of 0.0056 t/Mscf it would need.",
   "Within a ceiling of 0.0067 t/Mscf; typed over ceiling 0.8062.",
@@ -78,7 +78,7 @@ q(0, "Which function issues the refusal of a yield above what the gas holds?",
  ["yieldCeiling",
   "screenRoute",
   "compareRoutes"],
- "SECTION 18's function line reads \"flareToValue.yieldCeiling; the refusals are routeEconomics'\". yieldCeiling gives the ceiling, and routeEconomics refuses a yield above it.")
+ "The ceiling is yieldCeiling's, and the refusals are routeEconomics'. yieldCeiling gives the most one Mscf of the gas can make, and routeEconomics refuses a yield above it. screenRoute gives a route passes, fails or not fully screened, and compareRoutes lays the routes side by side.")
 
 q(1, "EGBEMA's gas to power ceiling is 0.3659 MWh per Mscf. Which EGBEMA heating value is that ceiling built on?",
  "1248.4110 Btu/scf, the engine's heating value on moles",
