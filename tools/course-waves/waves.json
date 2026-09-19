@@ -623,7 +623,7 @@
     "course": "MD1",
     "live": "/root/md-wip-crude",
     "kit": "full",
-    "kitNote": "Foundation kit, the first Commercial & Trading course (module commercial_trading). The mirror carries every file the wave is rebuilt and gated from: the digest, its generator and the teaching records; the eighteen graded answers, their generator, the capstone records and the draft prompts; the precision declaration; wave.json; the structure and scaffold; the three tier headers; the oracle cross-check that replays the vendored Python oracles (oracle_crudeassay, oracle_productblending) on the capstone; every gate with its negative control (reproducibility across four zones, the clock, the vendor pin, collisions, promptleak, capstone leak, discriminate, copy rule) and the runner that pins their md5s; the prose rules; the recon and the four task files. The seed ladder joins it in the lesson phase.",
+    "kitNote": "Foundation kit, the first Commercial & Trading course (module commercial_trading). The mirror carries every file the wave is rebuilt and gated from: the digest, its generator and the teaching records; the eighteen graded answers, their generator, the capstone records and the draft prompts; the precision declaration; wave.json; the structure and scaffold; the three tier headers; the oracle cross-check that replays the vendored Python oracles (oracle_crudeassay, oracle_productblending) on the capstone; every gate with its negative control (reproducibility across four zones, the clock, the vendor pin, collisions, promptleak, capstone leak, discriminate, copy rule) and the runner that pins their md5s; the prose rules; the recon and the four task files. The seed ladder joined it: the course, go-live and seed generators, the SQL verifier, the scratch database, the dry run with its negative controls and block cutter, and the owner's content-addressed apply script; oracle_check.py and discriminate.mjs gained a --json mode the go-live generator reads its oracle values (with the one-sided relief quotients) and traps from, and gate_promptleak.py became importable so the go-live sweeps the same engine-derived intermediates.",
     "inputs": [
       "digest.txt",
       "fields.json",
@@ -658,7 +658,15 @@
       "BANK_TASK.md",
       "KEY_TRUTH_TASK.md",
       "PANELS.md",
-      "REVISE.md"
+      "REVISE.md",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "scratch_db.sh",
+      "dryrun_cr.sh",
+      "cut_block.py",
+      "apply_cr_crude.sh"
     ],
     "pins": {
       "digest.txt": "c22b514520b0dba14ca5f5372f1e343f30911579f795fbed16b4451ce564f7a8",

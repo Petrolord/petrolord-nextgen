@@ -102,4 +102,7 @@ def main():
     return 1 if bad else 0
 
 
-sys.exit(main())
+# Importable: gen_course.py and gen_golive.py read DERIVED from here, so the
+# go-live's SQL sweep checks exactly the intermediates this gate checks.
+if __name__ == '__main__':
+    sys.exit(main())

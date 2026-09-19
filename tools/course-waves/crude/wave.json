@@ -128,13 +128,13 @@
   },
   "oracle-check": {
    "file": "oracle_check.py",
-   "md5": "edba0e92ea80f8975e2ddf92d12c4e48",
+   "md5": "9493de89ad874a87d5c13e7ec7f4ac03",
    "result": "exit 0: graded fields the oracle reproduces within tolerance: 18 of 18",
    "control": "exit 1: graded fields the oracle reproduces within tolerance: 17 of 18"
   },
   "discriminate": {
    "file": "discriminate.mjs",
-   "md5": "73f43bd818323c56b7ed28d31faf03a1",
+   "md5": "01153def602f7cf182b6df6f10a8d9cf",
    "result": "exit 0: WEAK fields: 0",
    "control": "exit 1: WEAK fields: 1"
   },
@@ -146,7 +146,7 @@
   },
   "promptleak": {
    "file": "gate_promptleak.py",
-   "md5": "571f782e5485987e710bd679a9421dc7",
+   "md5": "b091aa03953f5acb3823115939146be0",
    "result": "exit 0: leaks: 0",
    "control": "exit 1: leaks: 3"
   },

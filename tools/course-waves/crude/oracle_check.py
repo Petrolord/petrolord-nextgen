@@ -200,4 +200,36 @@ def main():
     return 1 if (bad or teach_bad) else 0
 
 
+METHOD = {
+    'idama_': 'oracle_crudeassay.blend_cargo, the cargo loaded in barrels and pounds',
+    'idama_opuama_kerosene_yield_pct': 'oracle_crudeassay.cut_yield by segment overlap on the Opuama Medium curve',
+    'ogbele_blend_t50_f': 'oracle_crudeassay.t_at(blended_curve, 50) by bisection',
+    'ogbele_blend_kerosene_yield_pct': 'oracle_crudeassay.cut_yield on blended_curve (barrels distilled)',
+    'ogbele_blend_diesel_yield_pct': 'oracle_crudeassay.cut_yield on blended_curve (barrels distilled)',
+    'ogbele_': 'oracle_crudeassay.netback_cargo, a 100,000 bbl account',
+    'onne_': 'oracle_productblending.case, exact rational vertex enumeration on physically built rows',
+    'onne_sulfur_relief_usd_per_ppm': 'oracle_productblending.case, exact re-solve with the sulfur limit moved 1e-7 either way',
+    'onne_rvp_relief_usd_per_psi': 'oracle_productblending.case, exact re-solve with the RVP limit moved 1e-7 either way',
+    'onne_ron_relief_usd_per_octane': 'oracle_productblending.case, exact re-solve with the RON minimum moved 1e-7 either way',
+}
+
+
+def method(key):
+    return METHOD.get(key) or next(m for p, m in METHOD.items() if key.startswith(p))
+
+
+if '--json' in sys.argv:
+    # The oracle's eighteen answers and the method each came by, for the
+    # go-live's oracle route (gen_golive.py). No comparison, no verdict. A
+    # relief carries both exact one-sided quotients (relax, tighten) and their
+    # mean as its value.
+    out = {}
+    for k, v in ORACLE.items():
+        if isinstance(v, tuple):
+            out[k] = {'method': method(k), 'value': (float(v[0]) + float(v[1])) / 2,
+                      'relax': float(v[0]), 'tighten': float(v[1])}
+        else:
+            out[k] = {'method': method(k), 'value': float(v)}
+    print(json.dumps(out))
+    sys.exit(0)
 sys.exit(main())

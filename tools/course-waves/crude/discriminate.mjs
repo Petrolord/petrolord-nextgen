@@ -258,6 +258,16 @@ const WRONG = {
 };
 
 if (process.argv.includes('--plant')) WRONG.ogbele_netback_per_bbl.routes.planted_identity = ogNet.netback;
+// --json: every NUMERIC wrong route's value and nothing else, for the go-live's
+// traps (gen_golive.py takes the closest miss per field from here, so a trap in
+// the go-live is a route this sweep already ran through the engine). A NO
+// RECIPE route is not a number a learner can type and is left out. No verdict.
+if (process.argv.includes('--json')) {
+  process.stdout.write(`${JSON.stringify(Object.fromEntries(Object.entries(WRONG).map(([k, w]) => [k, {
+    truth: w.truth, routes: Object.fromEntries(Object.entries(w.routes).filter(([, v]) => typeof v === 'number')),
+  }])))}\n`);
+  process.exit(0);
+}
 
 let weak = 0;
 let closest = { key: null, route: null, tols: Infinity };
