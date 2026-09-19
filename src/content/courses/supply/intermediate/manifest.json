@@ -1,0 +1,307 @@
+{
+  "app_slug": "supply",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-loading-rack-as-a-queue",
+      "title": "The Loading Rack as a Queue",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-trucks-arrive-irregularly",
+          "title": "Trucks arrive irregularly",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-offered-load-and-utilisation",
+          "title": "Offered load and utilisation",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-probability-of-waiting",
+          "title": "The probability of waiting",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-waiting-and-being-turned-away",
+          "title": "Waiting and being turned away",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-bays-are-whole-numbers",
+          "title": "Bays are whole numbers",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-waiting-time-and-a-full-rack",
+      "title": "Waiting Time and a Full Rack",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-mean-wait-in-minutes",
+          "title": "The mean wait in minutes",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-queue-by-littles-law",
+          "title": "The queue by Little's law",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-rack-that-cannot-keep-up",
+          "title": "A rack that cannot keep up",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-one-more-bay",
+          "title": "One more bay",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-tank-farm",
+      "title": "The Tank Farm",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-capacity-heel-and-working-capacity",
+          "title": "Capacity, heel and working capacity",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-pumpable-stock-tank-by-tank",
+          "title": "Pumpable stock tank by tank",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-days-of-cover",
+          "title": "Days of cover",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-ullage-and-turns",
+          "title": "Ullage and turns",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-throughput-economics",
+      "title": "Throughput Economics",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-fee-variable-cost-and-fixed-cost",
+          "title": "Fee, variable cost and fixed cost",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-loss-has-a-weight",
+          "title": "A loss has a weight",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-no-factor-no-carbon",
+          "title": "No factor, no carbon",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-ledgers-from-one-set-of-volumes",
+          "title": "Two ledgers from one set of volumes",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-lane-the-fleet-and-the-station",
+      "title": "The Lane, the Fleet and the Station",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-cycle-sets-the-trips",
+          "title": "The cycle sets the trips",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-cost-of-a-litre-delivered",
+          "title": "The cost of a litre delivered",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-blank-cost-is-a-missing-cost",
+          "title": "A blank cost is a missing cost",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-fleet-is-a-whole-number-of-trucks",
+          "title": "A fleet is a whole number of trucks",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-forecourt-is-the-same-queue",
+          "title": "The forecourt is the same queue",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l06-the-load-that-will-not-fit",
+          "title": "The load that will not fit",
+          "order": 6,
+          "est_minutes": 13,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-ibafo-rack-and-farm-end-to-end",
+          "title": "The Ibafo rack and farm end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ibafo-lane-and-stations-end-to-end",
+          "title": "The Ibafo lane and stations end to end",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "supply-depot-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

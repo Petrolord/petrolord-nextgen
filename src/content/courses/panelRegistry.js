@@ -230,6 +230,10 @@ export const PANELS = {
   'crude-assay-explorer': React.lazy(() => import('@/components/course/panels/crude/AssayExplorer')),
   'crude-valuation-explorer': React.lazy(() => import('@/components/course/panels/crude/ValuationExplorer')),
   'crude-recipe-explorer': React.lazy(() => import('@/components/course/panels/crude/RecipeExplorer')),
+  // MD3 supply: Terminals, Depots & Fuel Supply (academy module supply_chain)
+  'supply-tank-explorer': React.lazy(() => import('@/components/course/panels/supply/TankExplorer')),
+  'supply-depot-explorer': React.lazy(() => import('@/components/course/panels/supply/DepotExplorer')),
+  'supply-price-explorer': React.lazy(() => import('@/components/course/panels/supply/PriceExplorer')),
 };
 
 export function resolvePanel(id) {
