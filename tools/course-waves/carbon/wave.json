@@ -39,7 +39,7 @@
   "held": "H1: which report to file on is the owner's decision; taught as a stated limit, never graded"
  },
  "plan": {
-  "state": "FOUNDATION, LESSONS AND LAB committed; EXTENSION ROUND on df31f53 done (REVISE.md lists the lesson lines to fix). No bank or migration.",
+  "state": "FOUNDATION, LESSONS AND LAB committed; EXTENSION ROUND on df31f53 done; LESSONS REVISED on the extended digest (REVISE.md applied). No bank or migration.",
   "thesis": "A tonne of CO2e is carbon counted atom by atom, weighted by a declared GWP set and carried on a record that says where every factor came from, and a tonne saved is priced over the life of the measure that saves it; the engines refuse or name every box nobody filled (a destruction efficiency, a factor, a safe oxygen floor, a discount rate) instead of reading it as the best case.",
   "tiers": {
    "beginner": "THE INVENTORY: the atom balance, the flare and its destruction efficiency, escaped carbon as methane, GWP sets and their reports, factors as records, computed against reportable, intensity and its boundary. Graded: six tonnes at 0.01.",
@@ -60,7 +60,7 @@
   }
  },
  "digest": {
-  "lines": 913,
+  "lines": 912,
   "sections": 26,
   "withheld": null,
   "note": "No section is history. SECTION 25 states the held items and the MD5-0 and MD45-1 rules in force in the present tense, each with the section that prints it. No clock is read. Lines marked 'computed here' are the generator's arithmetic on engine figures (differences, shares, relations checked against the engine, the percentage-point shortcut, capital against one year). The extension round (REVISE.md) rebuilt it on df31f53 and closed the writers' gaps additively; no graded value moved."
@@ -93,8 +93,8 @@
   "Carbon intensity is taught and not graded: no oracle recomputes it.",
   "Manifests carry the three panel ids, so courseContent.test.js 'every panel referenced is registered' is red until the panel phase registers them.",
   "Nothing is added to academyModules.js; the lab phase adds 'energy_transition' to CourseModuleNav MODULE_ORDER after 'supply_chain' on the same line as gasvalue.",
-  "Extension round: the three retired engine sentences (atom balance method, inventory disclaimer, condensate floor) stay exempt in gate_copy_rule.py only while written lessons still quote them; REVISE.md lists every such line and the lesson-fix pass removes the exemption.",
-  "Extension round: SECTION 21 adds a row with every source the inventory computes passed (still unassessed on steam, which has no inventory line of its own) and a labelled what-if with the trap repair checked against the heaters that raise the steam, where the verdict returns as an upper bound."
+  "Extension round: the three retired engine sentences (atom balance method, inventory disclaimer, condensate floor) were exempt in gate_copy_rule.py only while written lessons still quoted them; the REVISE.md lesson pass re-pointed every such line and removed the exemption, so the gate now exempts nothing.",
+  "Extension round: SECTION 21 adds a row with every source the inventory computes passed (still unassessed on steam, which has no inventory line of its own). A what-if with the trap repair checked against the heaters was DROPPED by lead ruling (2026-09-19): it paired a steam-saving claim with a different source, the loose bookkeeping F1 repaired, so the course does not model it."
  ],
  "gates": {
   "structure": {
@@ -125,7 +125,7 @@
   "kit-digestprose": {
    "file": "/root/dc-wavekit/digestprose.mjs",
    "md5": "97dda85819e61737a76d8caf5badb46d",
-   "result": "exit 0: [digestprose] /root/et-wip-carbon/digest.txt: 913 line(s), 26 section title(s) and 20 in-body marker(s) swept against their blocks, 32 history framings, 109 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+   "result": "exit 0: [digestprose] /root/et-wip-carbon/digest.txt: 912 line(s), 26 section title(s) and 20 in-body marker(s) swept against their blocks, 32 history framings, 109 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
   },
   "kit-digestfigures": {
    "file": "/root/dc-wavekit/digestfigures.py",
@@ -185,7 +185,7 @@
   },
   "copy-rule": {
    "file": "gate_copy_rule.py",
-   "md5": "7dee55b0d82789246c07c9be2b2359b4",
+   "md5": "59a1612522ae9151a6c1f8d74fcacb0f",
    "result": "exit 0: violations: 0",
    "control": "exit 1: violations: 2"
   },

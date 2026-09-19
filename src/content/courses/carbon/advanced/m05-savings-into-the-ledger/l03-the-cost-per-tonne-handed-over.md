@@ -20,9 +20,17 @@ The answer is costPerTonneCo2e -74.2270 USD a tonne. It is negative: in the word
 
 ## The same rules, the same refusals
 
-Because it is the same function, the cost per tonne of a saving follows the rules of module one. A capital cost is annualised by a capital recovery factor, which needs a life and a rate. SECTION 25 lists the rule in force: the cost per tonne of a saving is the levelised abatementCost, and needs a life and a rate.
+Because it is the same function, the cost per tonne of a saving follows the rules of module one. A capital cost is annualised by a capital recovery factor, which needs a life and a rate. SECTION 25 lists the rule in force: the cost per tonne of a saving is the levelised abatementCost, and needs a life and a rate. SECTION 23 prints the hand-over: priceSaving passes its life (8 years) and rate (0.1) to abatementCost. The same call made directly:
 
-With no life and no rate, the call does not refuse. It returns costPerTonneCo2e none with this costPerTonneNote: "A cost per tonne needs the measure life and a discount rate, to annualise the implementation cost against a yearly saving." The money and the carbon are still returned. Only the cost per tonne is missing, and the note says why.
+| output | value |
+| --- | --- |
+| capitalRecoveryFactor | 0.18744402 |
+| annualisedCapital USD | 39363.24 |
+| netAnnualCost USD | -49136.76 |
+| costPerTonne USD | -74.2270 |
+| paysForItself | true |
+
+With no life and no rate, the call does not refuse. It returns costPerTonneCo2e none with this costPerTonneNote: "A cost per tonne needs the measure life and a discount rate, to annualise the implementation cost against a yearly saving." The money and the carbon are still returned.
 
 ## The wrong route, printed for contrast
 

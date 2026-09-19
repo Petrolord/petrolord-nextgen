@@ -17,7 +17,7 @@ The path prints one more column beside the emissions and the target: the unabate
 | 2032 | 40640.276 | 41674.491 | 0.000 |
 | 2033 | 40640.276 | 39270.193 | 1370.083 |
 
-Three years print a positive gap: 2027 at 494.298 t, 2028 at 798.595 t and 2033 at 1370.083 t. The other five print 0.000. No year prints a negative gap. The engine prints finalGapTonnes 1370.083, the gap in the end year, and firstShortfallYear 2027.
+Three years print a positive gap: 2027 at 494.298 t, 2028 at 798.595 t and 2033 at 1370.083 t. The other five print 0.000. SECTION 22 states the rule, checked in every row: emissions are the baseline less the tonnes abated, and the unabated gap is emissions less the target where that is positive, else 0.000. The engine prints finalGapTonnes 1370.083, the gap in the end year, and firstShortfallYear 2027.
 
 ## The engine's note
 

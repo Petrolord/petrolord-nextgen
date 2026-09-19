@@ -23,13 +23,21 @@ Read as 100 percent, the same flare is 2236.537 tCO2e with no methane line: 441.
 
 The 100 percent row has no methane at all. The methane line is the part that disappears, and on the course's set it is 485.922 tCO2e at the stated efficiency. A blank read as 100 percent would remove it from the inventory without anyone having decided that the flare burns completely. That is what the refusal prevents.
 
-## A refused flare is no line
+## A refused flare is a blocked line
 
-In the Igbogene first pass, where the flare's efficiency is blank, the flare contributes no line at all. The engine refused it, and the Carbon Studio builds atom-balance lines only from a result that computed.
+SECTION 5 prints what happens to the refusal: handed to atomBalanceLines, the refused flare becomes 1 line labelled "Flaring" that carries the refusal, so an inventory built with it is blocked on the flare.
 
-With the GWP set declared and the flare still blank, the inventory has 3 lines and Scope 1 is 27353.048 tCO2e. With the flare efficiency entered, it has 5 lines and Scope 1 is 30030.777 tCO2e. At both steps the reasons it gives for not being reportable read the same: "1 factor(s) have no source or version; 1 line(s) could not be computed". The flare's absence shows in the line count and in the engine's refusal.
+SECTION 9 prints the Igbogene inventory with every other gap closed and only the flare's efficiency blank:
 
-In practice, the person reading an inventory total rarely sees the input boxes behind it, so the refusal is the record that a box was left blank.
+| lines | Scope 1 tCO2e | Scope 2 tCO2e | total tCO2e | reportable | not reportable because |
+| --- | --- | --- | --- | --- | --- |
+| 4 | 27353.048 | 12915.000 | 40268.048 | false | 1 line(s) could not be computed |
+
+The blocked line is Flaring, and its reason is the refusal above, word for word. The digest reads the row itself: the total leaves out the flare's CO2 and methane lines, and the inventory is not reportable while the flare stands refused. With the flare efficiency entered, the inventory has 5 lines and Scope 1 is 30030.777 tCO2e.
+
+SECTION 9 prints one more case beside it. atomBalanceLines with excluded true adds no line at all: 0 lines, for a source left out of the boundary on purpose. A refused flare is a blocked line with its reason. A source excluded on purpose adds none.
+
+In practice, the person reading an inventory total rarely sees the input boxes behind it, so the blocked line is the record that a box was left blank.
 
 In the panel, clear the flare's efficiency, then type 1, then type 0.98, and compare the three states of the inventory.
 

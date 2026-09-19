@@ -32,7 +32,18 @@ The engine's note on that table, verbatim: "Atom counts are definitional and dri
 
 SECTION 11 states the rule: the oxygen demand is c + h/4 + s - o/2 for each component, weighted by its mole fraction. The letters are the component's carbon, hydrogen, sulphur and oxygen atoms, read straight off FUEL_REFERENCE. The rule is arithmetic on counts, and the counts are what the note calls definitional. In practice, the c term is the oxygen carbon takes to become CO2 and the h/4 term is the oxygen hydrogen takes to become water.
 
-For the Isiokpo analysis the weighted sum prints as o2PerKmolFuel 2.089500 kmol O2 per kmol fuel. That single figure is the start of everything in modules one and two: the air, the flue gas and the excess air are all built on it.
+SECTION 11 works the rule row by row, marked computed here, because the engine returns only the weighted total:
+
+| component | mole fraction | c + h/4 + s - o/2 | weighted kmol O2 per kmol fuel |
+| --- | --- | --- | --- |
+| CH4 | 0.868 | 2 | 1.736000 |
+| C2H6 | 0.071 | 3.5 | 0.248500 |
+| C3H8 | 0.021 | 5 | 0.105000 |
+| CO2 | 0.025 | 0 | 0.000000 |
+| N2 | 0.015 | 0 | 0.000000 |
+| sum | 1.000 |  | 2.089500 |
+
+The weighted sum is the engine's o2PerKmolFuel, 2.089500 kmol O2 per kmol fuel. That single figure is the start of everything in modules one and two: the air, the flue gas and the excess air are all built on it.
 
 ## Components that demand nothing
 

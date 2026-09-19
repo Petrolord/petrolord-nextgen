@@ -732,7 +732,6 @@ The target is 30 percent of the inventory total: 16830.083 tCO2e (computed here,
 | flare gas recovery claiming 9400 t | 18660.000 | 16830.083 | none | not assessed: claims exceed what a source emits | 0.000 | flare: claimed 9400.000 against 7562.133 emitted |
 | the same claim, the flare's emission not passed | 18660.000 | 16830.083 | none | not assessed: no computed emission to check the claims on steam, flare, power, vents | 0.000 | none |
 | the six measures, every source the inventory computes passed | 15460.000 | 16830.083 | none | not assessed: no computed emission to check the claims on steam | 1370.083 | none |
-| the same, with the trap repair checked against the heaters that raise the steam (a what-if) | 15460.000 | 16830.083 | false | upper bound: measures interact | 1370.083 | none |
 
 The unchecked claims of the first row, as the engine lists them:
 | measure | source | reason |
@@ -742,7 +741,7 @@ The unchecked claims of the first row, as the engine lists them:
 | Vapour recovery on the storage tanks | vents | no emission was given for the source |
 uncheckedSources: steam, power, vents. With every source the inventory computes passed, uncheckedSources is steam: the Agbor inventory has no line of its own for steam.
 
-The sources added for the curve with every computed source passed and for the what-if, from the inventory table above:
+The sources added for the curve with every computed source passed, from the inventory table above:
 | source id | emission passed to the curve tCO2e |
 | --- | --- |
 | power | 10988.000 |

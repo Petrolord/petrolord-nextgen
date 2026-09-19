@@ -39,7 +39,7 @@ In practice, tuning a heater and then integrating its heat act on the same fuel,
 
 ## What the label carries into a target
 
-When the curve is checked against a target, the label travels with the verdict. SECTION 21 states the rule: "Where measures only interact, the verdict stands and is labelled an upper bound." The label it prints is the targetBasis text "upper bound: measures interact". A verdict read from an upper bound is a verdict on tonnes the measures could give at most. The next three lessons take the cases where the curve gives no verdict at all.
+When the curve is checked against a target, the label travels with the verdict. SECTION 21 states the rule: "Where measures only interact and every claim is checked, the verdict stands and is labelled an upper bound." A verdict read from an upper bound is a verdict on tonnes the measures could give at most. At the Agbor inputs no curve in SECTION 21 meets the condition: every row prints meetsTarget none. The next three lessons read why.
 
 ## Where the flag sits among the curve's outputs
 

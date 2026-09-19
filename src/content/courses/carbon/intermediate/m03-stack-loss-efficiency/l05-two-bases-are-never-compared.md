@@ -41,6 +41,12 @@ The engine does not convert one to the other and does not guess which the caller
 
 Where the comparison is allowed, the engine carries the basis through. SECTION 14 prints the tuning saving on LHV with basis LHV among its outputs. It also prints the saving on HHV, computed from the two HHV efficiencies of SECTION 13, as a fuelSavingPercent of 1.6476 against the LHV figure of 1.6445. Each is a saving on its own basis.
 
+The basis box is checked as well. SECTION 13 refuses a basis of "gross" and a blank one. The refusal for "gross", verbatim:
+
+REFUSED: The heating value basis must be LHV or HHV. "gross" is neither, and an efficiency on an unknown basis cannot be compared with anything.
+
+The engine reads the basis without regard to case or spaces: " hhv " returns basis HHV and 77.9288 percent.
+
 ## Exercise
 
 Read the four efficiencies of SECTION 13 and the refusal in SECTION 14 for a current efficiency on LHV and a target on HHV. Say which two pairs of efficiencies can be set against each other, what the digest's difference of 8.4741 percentage points is a difference between, and why that figure is no measure of what tuning the heater is worth.

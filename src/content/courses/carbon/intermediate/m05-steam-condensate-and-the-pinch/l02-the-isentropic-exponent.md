@@ -33,7 +33,7 @@ In practice, the state of the steam is read from the line the trap sits on, and 
 
 SECTION 15 prints the refusal twice, once for a blank exponent and once for an exponent of 1. Both get the words above. A blank is not read as any exponent, and 1 is not above 1. The engine prints no loss for either.
 
-SECTION 25 lists the rule among those in force: a trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year.
+SECTION 25 lists the rule among those in force: a trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year. Its MD45-1 table adds that a trap is choked only at or below the critical pressure ratio, and that ratio moves with the exponent: the choked-flow note prints the critical 0.5774 at 1.135 and 0.5457 at 1.3.
 
 ## The choice changes the answer
 

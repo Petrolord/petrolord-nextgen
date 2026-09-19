@@ -17,7 +17,7 @@ With the electricity factor blank, SECTION 22 prints: the inventory totals 45112
 | the full inventory | 39270.193 | 1370.083 | 2027 |
 | the partial inventory | 31578.593 | 0.000 | 2027 |
 
-Read the two rows. On the full inventory the path ends with an unabated gap of 1370.083 t. On the partial inventory it ends with 0.000. The measures are the same six. What moved is the baseline, and with it the target the path is measured against.
+Read the two rows. On the full inventory the path ends with an unabated gap of 1370.083 t. On the partial inventory it ends with 0.000. The measures are the same six. What moved is the baseline, and with it the target the path is measured against. SECTION 22 prints the difference: the full baseline less the partial is 10988.000 tCO2e, the purchased electricity line of SECTION 21, so the partial inventory is the full one without it.
 
 ## Why a partial total is still a total
 

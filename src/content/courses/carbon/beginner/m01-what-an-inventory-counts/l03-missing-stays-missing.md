@@ -39,7 +39,7 @@ The difference between the two is where the value came from. A default is writte
 
 In practice, an inventory is read by people who never see the input boxes, so a figure that silently assumed the best case would look exactly like one that was measured.
 
-Try it in the panel. Clear the flare's destruction efficiency and watch the flare line disappear from the inventory with the refusal in its place.
+Try it in the panel. Clear the flare's destruction efficiency and watch the flare's lines give way to one blocked line named Flaring that carries the refusal.
 
 ## Exercise
 

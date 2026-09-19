@@ -1,6 +1,6 @@
 # A verdict left unassessed
 
-A target verdict can come back as true, as false, or as none. This lesson is about the third answer: what it means, how the engine says why, and the rule this course reads every verdict by. The AGBOR figures are invented for this course, and money is in US dollars.
+A target verdict can come back as true, as false, or as none. This lesson is about the third answer: what it means, how the engine says why, and the rules SECTION 21 prints for it. The AGBOR figures are invented for this course, and money is in US dollars.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -21,21 +21,21 @@ meetsTarget none is the engine declining to say whether the target is met. targe
 
 ## The rule in force
 
-SECTION 25 lists the over-claim case among the rules in force: a curve with a claim above what its source emits returns meetsTarget none and says why. The "says why" is the targetBasis text, and the two are read together.
+SECTION 25 lists the over-claim case among the rules in force: a curve with a claim above what its source emits returns meetsTarget none and says why. The "says why" is the targetBasis text, and the two are read together. The MD45-1 table adds the second case: a curve verdict is none while any claim acts on a source with no computed emission passed, and the basis names the sources.
 
 ## The residual beside it
 
 The same row prints a residual to target of 0.000 t. SECTION 26 lists the curve's residual to target among the outputs no oracle recomputes, taught from the engine and never graded. On an unassessed row, the residual rests on a total that includes tonnes the source does not emit. Read it with the verdict beside it.
 
-## The rule this course reads by
+## The rules SECTION 21 prints
 
-A verdict on a target is a statement that the tonnes on the curve are enough. It can only be made on tonnes that were checked against what their sources emit. So this course reads the rule as: **a claim the curve cannot check against its source gets no verdict.** The 9400 t row is one case of it: the claim was checked, it exceeds the flare's emission, and the verdict is none.
+A verdict on a target is a statement that the tonnes on the curve are enough. It can only be made on tonnes that were checked against what their sources emit. SECTION 21 prints the rule for this case: "Where a claim exceeds what its source emits, the curve adds up tonnes that do not exist, and the verdict is none." The 9400 t row is that case: the claim was checked, it exceeds the flare's emission, and the verdict is none.
 
-The next lesson is the other case: a claim against a source whose emission is not passed to the curve, so there is nothing to check it against. SECTION 21 says of it: "A source whose emission is not passed cannot be checked, and the claim against it stands unexamined."
+The next lesson is the other case: a claim against a source whose emission is not passed to the curve, so there is nothing to check it against. SECTION 21 says of it: "Where a claim acts on a source whose emission is not passed, it cannot be checked, the verdict is none and the basis names the source."
 
 ## Where the upper bound label fits
 
-An unassessed verdict and an upper bound are different labels. SECTION 21: "Where measures only interact, the verdict stands and is labelled an upper bound." Interaction is two measures on one source, counted in full. An over-claim is a single claim beyond its source. The first leaves a verdict labelled "upper bound: measures interact". The second leaves none.
+An unassessed verdict and an upper bound are different labels. SECTION 21: "Where measures only interact and every claim is checked, the verdict stands and is labelled an upper bound." Interaction is two measures on one source, counted in full. An over-claim is a single claim beyond its source. The first leaves a verdict that stands with its label, when every claim is checked. The second leaves none.
 
 ## What a reader does with none
 

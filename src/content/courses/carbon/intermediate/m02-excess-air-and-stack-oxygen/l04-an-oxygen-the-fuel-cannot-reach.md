@@ -20,15 +20,15 @@ SECTION 12 prints the calls that do not answer:
 
 | the call | the engine says |
 | --- | --- |
-| dry O2 20.946 percent (all air) | REFUSED: Stack oxygen must lie between 0 and 20.95 percent. |
-| dry O2 21 percent | REFUSED: Stack oxygen must lie between 0 and 20.95 percent. |
-| dry O2 -1 percent | REFUSED: Stack oxygen must lie between 0 and 20.95 percent. |
+| dry O2 20.946 percent (all air) | REFUSED: Stack oxygen must be 0 percent or more and below 20.946 percent, the oxygen in dry air. A reading of 20.946 percent is air with no fuel burned. |
+| dry O2 21 percent | REFUSED: Stack oxygen must be 0 percent or more and below 20.946 percent, the oxygen in dry air. A reading of 20.946 percent is air with no fuel burned. |
+| dry O2 -1 percent | REFUSED: Stack oxygen must be 0 percent or more and below 20.946 percent, the oxygen in dry air. A reading of 20.946 percent is air with no fuel burned. |
 | dry O2 blank | REFUSED: A measured dry stack oxygen is required. |
 | no stoichiometry | REFUSED: Valid stoichiometry is required. |
 
 The digest labels the first row "all air", and SECTION 1 prints the engine's air as O2_MOLE_FRACTION_DRY_AIR 0.20946. In practice, a stack reading all air is a stack where none of the air's oxygen has gone to any fuel. The engine refuses the call with the range message, and it gives no excess air for it.
 
-A reading of 21 percent and a reading of -1 percent get the same message. The message states the range as 0 to 20.95 percent. The all-air reading of 20.946 percent is refused with that same message, so a reading of air itself is outside what the engine answers, along with anything above it or below 0.
+A reading of 21 percent and a reading of -1 percent get the same message. The message states the bound the engine applies: 0 percent or more and below 20.946 percent, the oxygen in dry air. Its second sentence names the all-air case: a reading of 20.946 percent is air with no fuel burned. SECTION 25 lists the rule among those MD45-1 put in force: the stack oxygen refusal states the bound it applies, 20.946 percent.
 
 ## Missing inputs stay missing
 

@@ -15,7 +15,7 @@
 
 The saving is 11800 GJ a year at an invented fuel price of 7.5 USD a GJ, with an implementation cost of 210000 USD over 8 years at 0.1, and every figure here is invented for this course. The engine prints simplePaybackYears 2.372881, a figure in years, to six decimals.
 
-In practice a simple payback is read as the years of saving it takes to recover an outlay, with no discounting.
+SECTION 23 prints what the figure is: the implementation cost over one year's value, 210000 / 88500.00 = 2.372881 years (computed here), undiscounted, with no life and no rate in it.
 
 ## What no oracle recomputes
 

@@ -1,6 +1,6 @@
 # One year against a life
 
-This tier is built on one trap. A one-off capital cost set against one year's saving makes every capital measure look expensive. The engine refuses to make that comparison, and the digest prints the result of making it anyway, so that the trap can be seen. Every AGBOR figure here is invented for this course and in US dollars.
+This tier is built on one trap. A one-off capital cost set against one year's saving overstates the cost per tonne of a capital measure. The engine refuses to make that comparison, and the digest prints the result of making it anyway, so that the trap can be seen. Every AGBOR figure here is invented for this course and in US dollars.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -8,7 +8,7 @@ This tier is built on one trap. A one-off capital cost set against one year's sa
 
 When a measure with capital has no life, the cost of a tonne refuses and says why:
 
-REFUSED: Measure "Heat integration project" has a capital cost, so it needs a life to annualise it over. Comparing a one-off capital cost against a recurring saving makes every measure look expensive.
+REFUSED: Measure "Heat integration project" has a capital cost, so it needs a life to annualise it over. Set against one year's saving, a one-off capital cost overstates the cost per tonne of a capital measure.
 
 The life is the box that lets a capital cost be spread across the years that the saving recurs. Without it there is no annualised capital.
 
@@ -33,7 +33,7 @@ Solar for purchased power carries 1850000 USD over 20 years. Levelised it costs 
 
 Tune the fired heaters, with 18000 USD over 5 years, and Repair failed steam traps, with 45000 USD over 3 years, print a minus sign in both columns: -150.0000 and -133.0435 against one year. Their savings are 132000 and 198000 USD a year.
 
-Read the column as a whole. It takes each measure's entire capital into a single year, so a measure that pays for itself over 15 years, the Heat integration project, prints 688.2353 USD a tonne there. That is the shape the engine's sentence names: set a one-off capital cost against a recurring saving and the measure looks expensive. The levelised column is the one this tier teaches and the one the curve is built from.
+Read the column as a whole. It takes each measure's entire capital into a single year, so a measure that pays for itself over 15 years, the Heat integration project, prints 688.2353 USD a tonne there. That is what the engine's sentence names: set against one year's saving, a one-off capital cost overstates the cost per tonne of a capital measure. The curve is built from the levelised column.
 
 ## The same trap in a saving
 

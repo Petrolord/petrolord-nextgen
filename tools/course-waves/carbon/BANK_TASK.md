@@ -91,3 +91,26 @@ contrastive, so none is exempt.
 
 Per bank: the questions, the length-rank histogram, every literal and the
 digest line it resolves to, and anything in the digest you believe is wrong.
+
+## LEAD RULINGS (2026-09-19): what the Commercial & Trading key-truth audits found
+
+Every one of the nine C&T tiers had 12 to 22 questions replaced at audit. Write
+them right the first time:
+
+1. **A key must rest on a PRINTED digest line.** Never on a lesson sentence the
+   digest does not print (a gloss, a rationale, a definition, "In practice"
+   context, course routing, which tier or wave teaches what), never on a
+   reading the digest does not draw, never on learner arithmetic, never on a
+   derived count. If the only support is a lesson sentence, the question goes.
+2. **Every distractor must be provably false by a printed line.** A distractor
+   the digest cannot refute, or one that is defensibly true, makes two answers.
+3. **Signs.** litsweep compares absolute values: a figure with its sign
+   stripped passes it. Quote every number with the sign the digest prints.
+4. **No throwaway distractors** ("Nowhere.", "Phase one."): the strategy "drop
+   the short options, pick the shortest remaining" must stay near chance, as
+   must lengthtails' strategies (refused above 40 percent).
+5. **Cross-tier duplicates.** Run dupaxes over ALL banks of all three tiers
+   that exist, yours and every other tier's.
+6. **No "why" keys** unless the digest prints the reason.
+7. **Parts and totals.** Never assert that printed parts sum to a printed total
+   unless the digest prints that relation (rounding).

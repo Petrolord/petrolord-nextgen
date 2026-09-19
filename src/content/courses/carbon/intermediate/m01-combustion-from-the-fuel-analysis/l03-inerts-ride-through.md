@@ -10,10 +10,12 @@ SECTION 1 prints the two inert rows of energyEfficiency.FUEL_REFERENCE:
 
 | code | label | C | H | O | S | N | molar mass kg/kmol | typical LHV MJ/kmol | typical HHV MJ/kmol | inert |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| CO2 | Carbon dioxide (inert) | 1 | 0 | 2 | 0 | 0 | 44.010 | 0 | 0 | yes |
+| CO2 | Carbon dioxide (inert) | 1 | 0 | 2 | 0 | 0 | 44.009 | 0 | 0 | yes |
 | N2 | Nitrogen (inert) | 0 | 0 | 0 | 0 | 2 | 28.014 | 0 | 0 | yes |
 
 Both carry a heating value of 0 on each basis and the flag inert yes. Both still carry atom counts and a molar mass. The engine does not drop an inert from the analysis. It keeps it, with its atoms and its mass, and lets the atom counts decide what it does.
+
+SECTION 1 adds one sentence about the CO2 row: it, PRODUCT_MOLAR_MASS.CO2 and carbonAbatement.MW_CO2 are one number, 44.009, so an inert CO2 in the fuel weighs the same going in as it does in the flue gas.
 
 ## The fuel's CO2
 

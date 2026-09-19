@@ -945,16 +945,13 @@ section('SOURCES, INTERACTIONS AND OVER-CLAIMS', ['carbonAbatement.combustionCo2
   const allComputed = { ...agSources, power: lineT('Purchased electricity'), vents: lineT('Vented and fugitive methane') };
   const allCurve = CA.abatementCurve({ measures: agCosted, sourceEmissions: allComputed, targetTonnes: agTarget });
   rw('the six measures, every source the inventory computes passed', allCurve);
-  const steamOnHeaters = agCosted.map((x) => (x.label === 'Repair failed steam traps' ? { ...x, actsOn: ['heaters'] } : x));
-  const heatersCurve = CA.abatementCurve({ measures: steamOnHeaters, sourceEmissions: allComputed, targetTonnes: agTarget });
-  rw('the same, with the trap repair checked against the heaters that raise the steam (a what-if)', heatersCurve);
   out('');
   out('The unchecked claims of the first row, as the engine lists them:');
   head('measure', 'source', 'reason');
   agCurve.uncheckedClaims.forEach((u) => row(u.measure, plain(u.sourceId), u.reason));
   out(`uncheckedSources: ${agCurve.uncheckedSources.join(', ')}. With every source the inventory computes passed, uncheckedSources is ${allCurve.uncheckedSources.join(', ')}: the Agbor inventory has no line of its own for steam.`);
   out('');
-  out('The sources added for the curve with every computed source passed and for the what-if, from the inventory table above:');
+  out('The sources added for the curve with every computed source passed, from the inventory table above:');
   head('source id', 'emission passed to the curve tCO2e');
   row('power', t3(allComputed.power)); row('vents', t3(allComputed.vents));
   out('');

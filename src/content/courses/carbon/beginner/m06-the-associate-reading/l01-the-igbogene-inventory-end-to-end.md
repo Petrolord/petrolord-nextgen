@@ -8,7 +8,7 @@ This lesson reads the Igbogene inventory from its first input to its last flag. 
 
 ## The heaters
 
-The fired heaters burn 482000 kmol of fuel a year at 1.09 kmol of carbon per kmol, with a destruction efficiency of 1 typed. The atom balance counts 525380.000 kmol of carbon and returns 23121.448 t of CO2 and 0.000 t of methane. The engine's method needs no factor: "Atom balance: carbon in equals CO2 out. This is conservation of mass, not an empirical factor, so it needs no source document."
+The fired heaters burn 482000 kmol of fuel a year at 1.09 kmol of carbon per kmol, with a destruction efficiency of 1 typed. The atom balance counts 525380.000 kmol of carbon and returns 23121.448 t of CO2 and 0.000 t of methane. The engine's method needs no factor: "Atom balance: carbon in equals CO2 out. This is conservation of mass, so it needs no source document."
 
 ## The flare
 
@@ -38,7 +38,7 @@ The engine returns gwpSetLabel: IPCC AR6 GWP100, fossil methane. computed: true.
 
 ## The inventory's own limit
 
-The engine states the limit of its own record, verbatim: "This is a quantitative inventory, not a regulatory compliance register. Obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree."
+The engine states the limit of its own record, verbatim: "This is a quantitative inventory. It is not a regulatory compliance register: obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree."
 
 ## The intensity
 

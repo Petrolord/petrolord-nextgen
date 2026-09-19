@@ -36,7 +36,7 @@ The emissions line does not fall in a straight line. It falls in steps, one each
 
 ## Which measures are live when
 
-The measures-live column names them. Tune the fired heaters and Repair failed steam traps are live from 2027. Solar for purchased power joins in 2028, the Heat integration project in 2029, Flare gas recovery in 2030, and Vapour recovery on the storage tanks in 2031. The path follows the start years. It does not follow the cheapest-first rank of the curve: Solar for purchased power, fifth on the curve, is live a year before the Heat integration project, third.
+SECTION 22 prints the start years as inputs, invented for this course, and the measures-live column follows them. Tune the fired heaters and Repair failed steam traps are live from 2027. Solar for purchased power joins in 2028, the Heat integration project in 2029, Flare gas recovery in 2030, and Vapour recovery on the storage tanks in 2031. The path follows the start years. It does not follow the cheapest-first rank of the curve: Solar for purchased power, fifth on the curve, is live a year before the Heat integration project, third.
 
 ## A step line against a straight line
 

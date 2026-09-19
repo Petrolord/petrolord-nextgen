@@ -12,8 +12,8 @@ The digest builds the Igbogene inventory as a first pass, with no GWP set declar
 
 | step | lines | Scope 1 tCO2e | Scope 2 tCO2e | total tCO2e | computed | reportable | not reportable because |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| as a first pass | 3 | 23121.448 | 0.000 | 23121.448 | true | false | the global warming potential set is not declared; 2 line(s) could not be computed |
-| the GWP set declared | 3 | 27353.048 | 0.000 | 27353.048 | true | false | 1 factor(s) have no source or version; 1 line(s) could not be computed |
+| as a first pass | 4 | 23121.448 | 0.000 | 23121.448 | true | false | the global warming potential set is not declared; 3 line(s) could not be computed |
+| the GWP set declared | 4 | 27353.048 | 0.000 | 27353.048 | true | false | 1 factor(s) have no source or version; 2 line(s) could not be computed |
 | the flare efficiency entered | 5 | 30030.777 | 0.000 | 30030.777 | true | false | 1 factor(s) have no source or version; 1 line(s) could not be computed |
 | the electricity factor entered with its source | 5 | 30030.777 | 12915.000 | 42945.777 | true | false | 1 factor(s) have no source or version |
 | the survey referenced | 5 | 30030.777 | 12915.000 | 42945.777 | true | true | none |
@@ -22,11 +22,11 @@ The digest builds the Igbogene inventory as a first pass, with no GWP set declar
 
 computed is true in every row. The engine produced a total at every step, from 23121.448 tCO2e in the first pass to 42945.777 tCO2e at the end. reportable is false in the first four rows and true only in the last.
 
-The first pass has two reasons: "the global warming potential set is not declared" and "2 line(s) could not be computed". Those are the vented methane, blocked for want of a GWP for CH4, and the electricity, blocked for want of a factor value. The flare is refused and contributes no line at all.
+The first pass has two reasons: "the global warming potential set is not declared" and "3 line(s) could not be computed". Those are the flare, refused and turned into one blocked line named Flaring; the vented methane, blocked for want of a GWP for CH4; and the electricity, blocked for want of a factor value.
 
-Declaring the set lets the vented line compute, and Scope 1 becomes 27353.048 tCO2e. The survey is still missing, so a new reason appears: "1 factor(s) have no source or version".
+Declaring the set lets the vented line compute, and Scope 1 becomes 27353.048 tCO2e. The survey is still missing, so a new reason appears: "1 factor(s) have no source or version". The blocked count falls to "2 line(s) could not be computed": the flare and the electricity.
 
-Entering the flare's efficiency adds the flare's two lines. The line count goes from 3 to 5, and Scope 1 becomes 30030.777 tCO2e. The reasons do not change, because the flare's lines are atom-balance lines with complete provenance.
+Entering the flare's efficiency replaces the blocked Flaring line with the flare's two computed lines. The line count goes from 4 to 5, and Scope 1 becomes 30030.777 tCO2e. The reasons change too: the flare's blocked line clears, and "1 line(s) could not be computed" is left, the electricity.
 
 Entering the electricity factor with its source clears the blocked line, and Scope 2 becomes 12915.000 tCO2e. One reason remains.
 

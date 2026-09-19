@@ -34,14 +34,19 @@ H1 reaches every figure in tCO2e. The Agbor baseline of 56100.276 tCO2e is on th
 | The cost per tonne of a saving is the levelised abatementCost, and needs a life and a rate | SECTION 23 |
 | An intensity with a stream missing is not compared with the peer | SECTION 24 |
 | A saving, its price and its factor declared on different heating value bases are refused | SECTION 23 |
+| A curve verdict is none while any claim acts on a source with no computed emission passed, and the basis names the sources | SECTION 21 |
+| A refused measure is named in refusedMeasures and kept off the curve | SECTION 19 |
+| A year whose scheduled measures abate more than the baseline is refused | SECTION 22 |
+
+The last three are from the table SECTION 25 prints of the rules MD45-1 put in force.
 
 ## What the rules share
 
-Each rule treats a missing or impossible input as missing. A blank capital is refused because a blank is not read as free. A blank rate is refused because reading it as 0 would move the measure down the curve. A claim above a source's emission gives no verdict. A stream left out withholds the peer comparison. A saving with no life and no rate returns no cost per tonne and says why. Where the engine does fill a box, as with blank savings and running costs, it names what it filled.
+Each rule treats a missing or impossible input as missing. A blank capital is refused because a blank is not read as free. A blank rate is refused because reading it as 0 would move the measure down the curve. A claim above a source's emission gives no verdict, and so does a claim on a source with no emission passed. A stream left out withholds the peer comparison. A saving with no life and no rate returns no cost per tonne and says why. Where the engine does fill a box, as with blank savings and running costs, it names what it filled.
 
 ## What this tier decides and what it does not
 
-This tier reads the rules and quotes the refusals. It does not decide a discount rate, a GWP set, a target percentage or a start year: every one is an input. It also reads no target verdict from a curve carrying a claim the curve could not check against its source.
+This tier reads the rules and quotes the refusals. It does not decide a discount rate, a GWP set, a target percentage or a start year: every one is an input. The engine gives no target verdict on a curve carrying a claim it could not check against its source, and this tier reads none from it.
 
 ## Exercise
 

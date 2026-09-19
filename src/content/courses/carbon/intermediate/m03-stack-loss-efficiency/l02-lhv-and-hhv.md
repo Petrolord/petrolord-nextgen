@@ -33,7 +33,7 @@ Both are per kmol of the fuel as analysed, inerts included, which is why lesson 
 
 ## The same heater, two efficiencies
 
-SECTION 13 prints the heater at its current reading of 5.5 percent oxygen on each basis. On LHV the efficiency is 86.4029 percent. On HHV it is 77.9288 percent. The digest computes the gap from the engine's figures: a difference of 8.4741 percentage points. The fuel, the stack, the air and the oxygen reading are the same in both rows, and so is the excess air, 32.1223 percent. The losses are printed on each basis too: the dry flue gas loss is 9.9883 percent on LHV and 9.0262 percent on HHV, the total loss 13.5971 percent on LHV and 22.0712 percent on HHV. Lesson three reads the moisture loss on each basis.
+SECTION 13 prints the heater at its current reading of 5.5 percent oxygen on each basis. On LHV the efficiency is 86.4029 percent. On HHV it is 77.9288 percent. The digest computes the gap from the engine's figures: a difference of 8.4741 percentage points. The fuel, the stack, the air and the oxygen reading are the same in both rows, and so is the excess air, 32.1223 percent. The losses are printed on each basis too: the dry flue gas loss is 9.9883 percent on LHV and 9.0262 percent on HHV (SECTION 13: the same kilojoules on both bases, divided by a different heating value, 9.9883 x 840.9925 / 930.6273 = 9.0262), the total loss 13.5971 percent on LHV and 22.0712 percent on HHV. Lesson three reads the moisture loss on each basis.
 
 ## A pair the engine holds as typical
 

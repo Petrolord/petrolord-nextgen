@@ -47,15 +47,15 @@ SECTION 17 states how the table is built: hot streams are shifted down and cold 
 | 40.500 | 39.500 | 5.700000 | 4.350000 | 1.350 | 205.950 |
 | 39.500 | 33.500 | 5.700000 | 0.000000 | 34.200 | 240.150 |
 
-Each row is one shifted temperature interval, from its top to its bottom. Read by their names, the two CP columns are the heat capacity flowrates of the hot and the cold streams present in the interval, the surplus column is signed, positive in five intervals and negative in two, and the last column is the heat flow below the interval.
+Each row is one shifted temperature interval, from its top to its bottom. SECTION 17 prints the cascade rule, checked on every row: each interval's surplus is (CP hot less CP cold) times its width, and the heat flow below an interval is the heat flow above it plus its surplus, starting from the hot utility at the top.
 
-Read down the last column. The cascade carries the hot utility at the top, 25.950 kW at this approach. The heat flow reaches 0.000 at the bottom of the third interval, 110.500 shifted, and ends at 240.150 kW at the bottom of the table, the same figure the 15 C row prints as the cold utility.
+Read down the last column. It starts from the hot utility, 25.950 kW at this approach, reaches 0.000 at the bottom of the third interval, 110.500 shifted, and ends at 240.150 kW. The digest states that the heat flow out of the bottom is the cold utility, and the 15 C row prints 240.150 kW.
 
 The shifting is why two temperatures are reported for one pinch. SECTION 17 states that the heat flow is zero at shifted 110.500 C, inside the range, and reports the pinch as 118.000 C on the hot side and 103.000 C on the cold side.
 
 ## What the balance check says
 
-Each approach row prints a balance check of 0.000. In practice, a pinch target is checked with an energy balance, the hot stream duty and the hot utility on one side and the cold stream duty and the cold utility on the other. Lesson six reads what the zero at 110.500 shifted means, and why a zero at the end of a cascade is read differently.
+Each approach row prints a balance check of 0.000. SECTION 17 states what it is: (hot utility plus hot stream duty) less (cold utility plus cold stream duty), heat in less heat out, 0.000 when the targets close. It also prints heat recovered as the hot streams' duty less the cold utility: 801.150 less 240.150 is 561.000 kW. Lesson six reads what the zero at 110.500 shifted means, and why a zero at the end of a cascade is read differently.
 
 ## Exercise
 

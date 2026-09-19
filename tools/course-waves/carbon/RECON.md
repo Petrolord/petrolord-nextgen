@@ -284,13 +284,15 @@ the air per kg of fuel, which are not graded. The efficiency weighs products
 at PRODUCT_MOLAR_MASS, the same values as before. The IGRITA trap is choked at
 8.213 bar a against the default atmosphere.
 
-The digest grew from 695 to 913 lines and keeps its 26 sections. Every line
+The digest grew from 695 to 912 lines and keeps its 26 sections. Every line
 that changed is in REVISE.md: the engine strings reworded by the copy rule
 sweep, the FUEL_REFERENCE molar masses, the mass-balance residual, the stack
 oxygen refusal, the choked note, the life refusal, the SECTION 9 first steps
 (the refused flare is now a blocked line), and the SECTION 21 verdicts. Rows 1
-and 3 are now "not assessed", and a row with every computed source passed and
-a what-if row show when the verdict returns. The writers' gaps in
+and 3 are now "not assessed", and a row with every computed source passed
+shows the verdict still unassessed on steam. (A what-if row that checked the
+trap repair against the heaters was dropped by lead ruling: it paired a
+steam-saving claim with a different source.) The writers' gaps in
 DIGEST-GAPS.md are closed additively, except P5 (a flue gas with carbon
 monoxide), which the engine does not model.
 

@@ -14,6 +14,16 @@ SECTION 15 prints the invented Isiokpo trap at its stated exponent of 1.135, wit
 
 The steam lost is 355.757 tonnes a year. The fuel the boiler burns to raise it is 1135.851 GJ a year. The carbon from that fuel is 63.721 tCO2e a year, on the synthetic factor of 56.1 kg CO2e per GJ.
 
+SECTION 15 prints the chain as relations, computed here from the engine's figures:
+
+| figure | relation |
+| --- | --- |
+| tonnes a year | kg an hour x hours / 1000 = 42.3520 x 8400 / 1000 = 355.757 |
+| annual fuel GJ | tonnes a year x MJ a tonne / 1000 / boiler efficiency = 355.757 x 2650 / 1000 / 0.83 = 1135.851 |
+| annual tCO2e | GJ x kg per GJ / 1000 = 63.721 |
+
+The boiler efficiency enters at the fuel step, and the carbon is built on the fuel.
+
 ## The row with the boiler efficiency blank
 
 SECTION 15 prints the same trap with the boiler efficiency left blank. The trap still loses 355.757 tonnes a year. The fuel and the carbon are none. The engine explains each, verbatim.

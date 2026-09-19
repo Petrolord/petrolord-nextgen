@@ -39,11 +39,24 @@ Each column carries its own unit. The flow is kilograms an hour and prints to fo
 
 ## The flow model
 
-SECTION 15 prints the engine's note on the flow, verbatim: "Choked flow: the loss depends on the upstream pressure and not on what is downstream, so a trap blowing into a condensate header loses much the same steam as one blowing to atmosphere."
+SECTION 15 prints the engine's note on the flow, verbatim: "Choked flow: the pressure ratio 0.1126 is at or below the critical 0.5774, so the loss depends on the upstream pressure alone."
 
-That sentence tells the reader which side of the trap the loss depends on. The upstream pressure, 9 bar a, is an input, and the note puts what is downstream outside the loss. The loss the table prints is set by the upstream pressure together with the orifice, the discharge coefficient, the steam density and the exponent, the five inputs that the SECTION 15 refusals name for the flow.
+With no downstream pressure given, the trap is taken to vent to atmosphere, ATMOSPHERE_BAR_A, 1.01325 bar a. SECTION 15 states the test: the flow is choked while the downstream pressure over the upstream is at or below the critical ratio (2/(k+1))^(k/(k-1)). At 0.1126 against 0.5774 the Isiokpo trap is choked, and the loss the table prints is set by the upstream pressure, 9 bar a, together with the orifice, the discharge coefficient, the steam density and the exponent.
 
-The note's last clause is the practical reading. A trap blowing into a condensate header and a trap blowing to atmosphere lose much the same steam. In practice, a trap blowing into a closed header shows no plume, and the note says the steam it loses is much the same as a trap that does.
+## A downstream pressure
+
+SECTION 15 then gives the same trap a downstream pressure:
+
+| downstream bar a | pressure ratio | critical ratio at 1.135 | choked | kg an hour | tonnes a year |
+| --- | --- | --- | --- | --- | --- |
+| left out (1.01325) | 0.112583 | 0.577430 | true | 42.3520 | 355.757 |
+| 3 | 0.333333 | 0.577430 | true | 42.3520 | 355.757 |
+| 5 | 0.555556 | 0.577430 | true | 42.3520 | 355.757 |
+| 6 | 0.666667 | 0.577430 | false | 41.4785 | 348.419 |
+| 7 | 0.777778 | 0.577430 | false | 37.5765 | 315.643 |
+| 8 | 0.888889 | 0.577430 | false | 29.0510 | 244.029 |
+
+The digest reads the table in one sentence: "At or below the critical ratio the loss does not move with the downstream pressure; above it the downstream pressure lowers the loss." At 3 and 5 bar a the trap is choked and loses the same 42.3520 kg an hour as the trap venting to atmosphere. At 6, 7 and 8 bar a choked is false and the loss is 41.4785, 37.5765 and 29.0510 kg an hour. In practice, a trap blowing into a closed condensate header shows no plume, and the header's pressure is what the table says to read.
 
 ## Inputs the engine will not assume
 
@@ -58,4 +71,4 @@ The discharge coefficient, 0.72 at Isiokpo, is required because it depends on th
 
 ## Exercise
 
-Read the SECTION 15 row at an exponent of 1.135 and the engine's choked-flow note. Say which inputs the flow of 42.3520 kg an hour depends on, which side of the trap the note puts outside the loss, and what that means for a trap blowing into a condensate header.
+Read the SECTION 15 downstream table and the engine's choked-flow note. Say which rows are choked, what the kg an hour column does across those rows, and what it does in the rows where choked is false. Then say what that means for a trap blowing into a condensate header at 5 bar a and at 8 bar a.

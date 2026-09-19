@@ -1,8 +1,12 @@
 # carbon REVISE: the extension round on engines df31f53 (MD45-1)
 
+STATUS: APPLIED in the lesson pass "feat(carbon): revise the lessons on the
+extended digest (REVISE.md)". The retired engine sentences are described
+below in words of their own, and gate_copy_rule.py exempts none of them.
+
 The digest was rebuilt on engines df31f53 (engines PR #228, MD45-1, which
 repaired recon findings F1 to F7 and the writers' F8 and F9). It grew from 695
-to 913 lines. It still has 26 sections, and every section keeps its number and
+to 912 lines. It still has 26 sections, and every section keeps its number and
 its owner. **No graded field moved:** fields.json and capstone.json rebuild
 byte-identical, and so do the capstone prompts.
 
@@ -19,10 +23,10 @@ same pass.
 
 | lesson line | now quotes | new digest line |
 |---|---|---|
-| beginner/m02-carbon-in-co2-out/l01-the-atom-balance.md:9 | "...conservation of mass, not an empirical factor, so it needs..." | 97: "Atom balance: carbon in equals CO2 out. This is conservation of mass, so it needs no source document." |
-| beginner/m06-the-associate-reading/l01-the-igbogene-inventory-end-to-end.md:41 | "This is a quantitative inventory, not a regulatory compliance register. Obligations..." | 215: "This is a quantitative inventory. It is not a regulatory compliance register: obligations, ..." |
-| intermediate/m05-steam-condensate-and-the-pinch/l04-condensate-return-and-its-floor.md:34 | "A floor, not the value: ..." | 532: "A floor on the value: Treatment not repeated not priced. ..." |
-| intermediate/m06-the-professional-reading/l02-the-isiokpo-steam-and-streams-end-to-end.md:32 | "A floor, not the value: ..." | 532 |
+| beginner/m02-carbon-in-co2-out/l01-the-atom-balance.md:9 | the retired method sentence (its contrastive clause about an empirical factor) | 97: "Atom balance: carbon in equals CO2 out. This is conservation of mass, so it needs no source document." |
+| beginner/m06-the-associate-reading/l01-the-igbogene-inventory-end-to-end.md:41 | the retired disclaimer (a contrastive against a compliance register) | 215: "This is a quantitative inventory. It is not a regulatory compliance register: obligations, ..." |
+| intermediate/m05-steam-condensate-and-the-pinch/l04-condensate-return-and-its-floor.md:34 | the retired floor note (a contrastive against the value) | 532: "A floor on the value: Treatment not repeated not priced. ..." |
+| intermediate/m06-the-professional-reading/l02-the-isiokpo-steam-and-streams-end-to-end.md:32 | the retired floor note | 532 |
 | intermediate/m02-excess-air-and-stack-oxygen/l04-an-oxygen-the-fuel-cannot-reach.md:23-25 (table) and :31 ("states the range as 0 to 20.95 percent") | the old refusal | 382-384: "Stack oxygen must be 0 percent or more and below 20.946 percent, the oxygen in dry air. A reading of 20.946 percent is air with no fuel burned." The message now states the bound the engine applies; drop the line 31 reading that the printed bound is rounded (W3 is closed). |
 | advanced/m01-the-cost-of-a-tonne-abated/l05-one-year-against-a-life.md:11 and advanced/m01-the-cost-of-a-tonne-abated/l03-a-blank-is-not-free.md:13 | "...Comparing a one-off capital cost against a recurring saving makes every measure look expensive." | 660: "...Set against one year's saving, a one-off capital cost overstates the cost per tonne of a capital measure." |
 | advanced/m01-the-cost-of-a-tonne-abated/l05-one-year-against-a-life.md:3 ("makes every capital measure look expensive") | the tier's trap sentence | reword to the engine's new sentence (660); hdr_advanced.txt now reads "overstates the cost per tonne of a capital measure" |
@@ -47,14 +51,14 @@ same pass.
 
 **The curve verdicts in SECTION 21 (F1, and Expert gap 10).** Rows 1 and 3 are now meetsTarget none, "not assessed: no computed emission to check the claims on ...":
 
-- advanced/m03-interactions-and-over-claims/l04-a-source-with-no-emission-passed.md:20 quotes the retired sentence "A source whose emission is not passed cannot be checked, and the claim against it stands unexamined." Replace it with 753: "Where a claim acts on a source whose emission is not passed, it cannot be checked, the verdict is none and the basis names the source." Line 22 ("The digest prints a target verdict on this third row ... this course teaches none from that row") is now what the engine says (733). Lines 26 and 30 (the claims "stand unexamined" and "without it, the claim is unexamined") should read the engine's own list: uncheckedClaims (737-742) and uncheckedSources (743).
-- advanced/m03-interactions-and-over-claims/l01-two-measures-on-one-source.md:42 and advanced/m03-interactions-and-over-claims/l03-a-verdict-left-unassessed.md:38 quote "Where measures only interact, the verdict stands and is labelled an upper bound." The sentence is now 753: "Where measures only interact and every claim is checked, the verdict stands and is labelled an upper bound. ..." The only row that still shows "upper bound: measures interact" is the what-if at 735, where the trap repair is checked against the heaters.
+- advanced/m03-interactions-and-over-claims/l04-a-source-with-no-emission-passed.md:20 quotes the retired sentence "A source whose emission is not passed cannot be checked, and the claim against it stands unexamined." Replace it with 752: "Where a claim acts on a source whose emission is not passed, it cannot be checked, the verdict is none and the basis names the source." Line 22 ("The digest prints a target verdict on this third row ... this course teaches none from that row") is now what the engine says (733). Lines 26 and 30 (the claims "stand unexamined" and "without it, the claim is unexamined") should read the engine's own list: uncheckedClaims (736-741) and uncheckedSources (742).
+- advanced/m03-interactions-and-over-claims/l01-two-measures-on-one-source.md:42 and advanced/m03-interactions-and-over-claims/l03-a-verdict-left-unassessed.md:38 quote "Where measures only interact, the verdict stands and is labelled an upper bound." The sentence is now 752: "Where measures only interact and every claim is checked, the verdict stands and is labelled an upper bound. ..." No SECTION 21 row prints the verdict "upper bound: measures interact" at these inputs; teach the rule from the sentence.
 - advanced/m03-interactions-and-over-claims/l03-a-verdict-left-unassessed.md:34 (the forward pointer to the next lesson's case): the digest now prints it as a verdict with the named sources (731, 733, 734).
 - advanced/m06-the-expert-reading/l01-the-agbor-programme-end-to-end.md:27 and :41 ("a ranked curve that is an upper bound"): the first row's verdict is none (731); the interaction note (SECTION 20) is unchanged.
-- advanced/m06-the-expert-reading/l02-what-is-held-and-what-is-decided.md:32 (the rules table): the over-claim row is unchanged, and the MD45-1 rules follow at 887-900.
-- advanced/m06-the-expert-reading/l03-what-the-oracles-check.md:12: the oracle row now says the tuning saving is duty_ledger (exported since MD45-1) and that the trap nozzle's throat sits at the larger of the downstream and critical pressures (909).
+- advanced/m06-the-expert-reading/l02-what-is-held-and-what-is-decided.md:32 (the rules table): the over-claim row is unchanged, and the MD45-1 rules follow at 886-899.
+- advanced/m06-the-expert-reading/l03-what-the-oracles-check.md:12: the oracle row now says the tuning saving is duty_ledger (exported since MD45-1) and that the trap nozzle's throat sits at the larger of the downstream and critical pressures (908).
 
-**Other rules in force (SECTION 25 gains an MD45-1 table, 887-900).** These lessons quote "SECTION 25 lists" and stay true, but can cite the new rows:
+**Other rules in force (SECTION 25 gains an MD45-1 table, 886-899).** These lessons quote "SECTION 25 lists" and stay true, but can cite the new rows:
 
 - intermediate/m05-steam-condensate-and-the-pinch/l02-the-isentropic-exponent.md:36
 - intermediate/m06-the-professional-reading/l02-the-isiokpo-steam-and-streams-end-to-end.md:56
@@ -69,15 +73,15 @@ same pass.
 
 | gap | now printed |
 |---|---|
-| Expert 1, simple payback | 823: implementation cost over one year's value, undiscounted |
-| Expert 2, gap and emissions relations | 782 (checked on every row) |
-| Expert 3, unscheduled | 794-803: the difference 1850.000 t equals the vapour recovery tonnes, and a year-by-year table |
-| Expert 4, partial inventory | 791: the difference 10988.000 tCO2e is the purchased electricity line |
+| Expert 1, simple payback | 822: implementation cost over one year's value, undiscounted |
+| Expert 2, gap and emissions relations | 781 (checked on every row) |
+| Expert 3, unscheduled | 793-802: the difference 1850.000 t equals the vapour recovery tonnes, and a year-by-year table |
+| Expert 4, partial inventory | 790: the difference 10988.000 tCO2e is the purchased electricity line |
 | Expert 5, start years | SECTION 22 start-year table (after the heading) |
 | Expert 6, pays-for-itself share | 695: 0.343467 |
 | Expert 7, over-claim cost | SECTION 21: net annual cost 484221.51 USD, cost per tonne 51.5129 USD at 9400 t |
-| Expert 8, the saving's abatementCost | 824: CRF 0.18744402, annualised capital, net annual cost, paysForItself true, and priceSaving passes its life and rate |
-| Expert 9, intensity formulas | 852 |
+| Expert 8, the saving's abatementCost | 823: CRF 0.18744402, annualised capital, net annual cost, paysForItself true, and priceSaving passes its life and rate |
+| Expert 9, intensity formulas | 851 |
 | Expert 10, row 1 verdict | 731 (see C) |
 | Expert 11, the life refusal wording | 660 (see A) |
 | Associate 1, the refused flare | 258-275 (see C) |
@@ -102,7 +106,7 @@ New teaching material the lessons may use:
 - A GWP of zero or below is refused (86-87).
 - A negative activity or factor blocks its line (285-290).
 - A refused measure is named in refusedMeasures, with refusedNote (SECTION 19, 667 onward).
-- Over-abatement of the baseline is refused (805).
+- Over-abatement of the baseline is refused (804).
 - The trap's downstream pressure, pressure ratio, critical ratio and choked flag, and the three downstream refusals (SECTION 15, 495-511).
 - A condensate target below the current return is refused (539).
 - The molar masses are built from ATOMIC_WEIGHT, with PRODUCT_MOLAR_MASS and ATMOSPHERE_BAR_A (SECTION 1, 32-34).

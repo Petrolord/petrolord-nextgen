@@ -15,7 +15,7 @@ SECTION 1 prints the constants energyEfficiency uses for air:
 | O2_MOLAR_MASS | 31.998 |
 | ATMOSPHERIC_N2_MOLAR_MASS | 28.1610 |
 
-The fourth is marked differently from the other three. SECTION 1 says it is printed to four decimals and derived by the engine from the air constants printed above it. It is no value typed into the module. It is what is left of air once its oxygen is accounted for.
+The fourth is marked differently from the other three. SECTION 1 says it is printed to four decimals and derived by the engine from the three air constants above it, and prints the formula: (AIR_MOLAR_MASS - O2_MOLE_FRACTION_DRY_AIR x O2_MOLAR_MASS) / (1 - O2_MOLE_FRACTION_DRY_AIR). It is no value typed into the module. It is what is left of air once its oxygen is accounted for.
 
 In practice, dry air carries argon and small amounts of other gases beside its oxygen and nitrogen, and a combustion calculation has to decide where those gases go.
 
@@ -33,11 +33,11 @@ Lesson two read the mass balance SECTION 11 prints at 3 percent stack oxygen:
 | --- | --- |
 | fuel plus air in (fuel molar mass plus actual air times AIR_MOLAR_MASS) | 351.0222 |
 | flue gas out (engine dry flue gas plus engine moisture) | 351.0222 |
-| out less in (computed here) | -0.000003 |
+| out less in (computed here) | 0.000001 |
 
 The in side weighs the air at AIR_MOLAR_MASS, argon and all. For the out side to weigh the same air, the non-oxygen part has to leave at a molar mass that carries the argon too, and ATMOSPHERIC_N2_MOLAR_MASS is that molar mass. SECTION 25 lists the rule as one of those in force: "Air's argon is carried at ATMOSPHERIC_N2_MOLAR_MASS, and the flue gas mass balance closes".
 
-The out less in figure, -0.000003 kg per kmol of fuel, is the digest's arithmetic on the engine's two sides, marked computed here. It is quoted as the digest prints it.
+The out less in figure, 0.000001 kg per kmol of fuel, is the digest's arithmetic on the engine's two sides, marked computed here. It is quoted as the digest prints it.
 
 ## Where the dry flue gas mass shows up again
 

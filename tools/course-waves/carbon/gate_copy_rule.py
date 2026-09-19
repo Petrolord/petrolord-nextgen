@@ -5,10 +5,8 @@ wave that the kit's digestprose does not already sweep.
 No em dash, no en dash, and no "X, not Y" contrastive, in: the task files and
 tier headers, the three draft capstone prompts, every module and lesson title in
 structure.py, the three tier manifests and the 78 placeholder lessons in the
-worktree. The digest itself is swept by digestprose.mjs, which defers the
-engine's verbatim contrastive sentences (the condensate floor, the inventory
-disclaimer, the atom balance method); they are allowed here only inside
-quotation marks and only verbatim.
+worktree. The digest itself is swept by digestprose.mjs. No engine sentence is exempt
+here: since MD45-1 none the course quotes carries a contrastive.
 
 Negative control: --plant adds one em dash and one contrastive to the swept
 text and the gate must name both.
@@ -21,11 +19,11 @@ import sys
 
 W = os.path.dirname(os.path.abspath(__file__))
 REPO = '/root/wt-et-carbon-nextgen/src/content/courses/carbon'
-# Since MD45-1 no engine string the DIGEST quotes carries a contrastive. The
-# three below are RETIRED engine wording that written lessons still quote;
-# every one is listed in REVISE.md for the lesson-fix pass, and this exemption
-# is removed in that pass (the gate then fails on any lesson still quoting it).
-ENGINE_VERBATIM = ['A floor, not the value:', 'quantitative inventory, not a regulatory compliance register', 'conservation of mass, not an empirical factor']
+# Since MD45-1 no engine string the DIGEST quotes carries a contrastive, and
+# since the REVISE.md lesson pass no lesson quotes the three retired sentences
+# (the atom balance method, the inventory disclaimer, the condensate floor), so
+# nothing is exempt: a lesson that quoted one again would fail here.
+ENGINE_VERBATIM = []
 CONTRAST = re.compile(r"\b\w+, not (a |an |the )?\w+", re.I)
 
 

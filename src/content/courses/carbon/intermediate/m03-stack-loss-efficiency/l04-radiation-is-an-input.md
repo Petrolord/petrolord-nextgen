@@ -36,7 +36,7 @@ A reader who quotes the current LHV efficiency of 86.4029 percent quotes an effi
 
 ## The other refusals in the same table
 
-The radiation refusal is one of four that SECTION 13 prints for stackLossEfficiency:
+The radiation refusal is one of the refusals SECTION 13 prints for stackLossEfficiency:
 
 | the call | the engine says |
 | --- | --- |
@@ -44,8 +44,10 @@ The radiation refusal is one of four that SECTION 13 prints for stackLossEfficie
 | HHV with no latent heat | REFUSED: On a higher-heating-value basis the moisture loss needs both the latent heat of water and the vapour specific heat. |
 | stack temperature blank | REFUSED: A stack temperature and a combustion air temperature are required. |
 | flue gas cp blank | REFUSED: A flue gas specific heat is required. |
+| radiation loss -3 | REFUSED: The radiation and convection loss cannot be negative: a loss below zero would add to the efficiency. |
+| unburned loss -1 | REFUSED: The unburned and other loss cannot be negative: a loss below zero would add to the efficiency. |
 
-Each one is a box whose figure the engine will not invent.
+Each one is a box whose figure the engine will not invent. The last two guard the typed losses from the other side: a radiation loss of -3 and an unburned loss of -1 are refused, because a loss below zero would add to the efficiency.
 
 ## Exercise
 

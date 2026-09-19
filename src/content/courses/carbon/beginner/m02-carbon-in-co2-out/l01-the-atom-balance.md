@@ -6,7 +6,7 @@
 
 The CO2 from burning a fuel is computed in this course by counting carbon atoms. combustionCo2FromCarbon takes the fuel burned in a year, the carbon atoms in each kilomole of it and the fraction of that carbon that is destroyed by combustion. The engine states its method, and it is quoted here in the engine's own words:
 
-"Atom balance: carbon in equals CO2 out. This is conservation of mass, not an empirical factor, so it needs no source document."
+"Atom balance: carbon in equals CO2 out. This is conservation of mass, so it needs no source document."
 
 That sentence is why a combustion line in the Igbogene inventory can show a source of "Atom balance (conservation of mass)" and a version of "not applicable". There is no factor to look up, so there is no document to cite.
 

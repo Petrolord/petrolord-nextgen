@@ -48,13 +48,13 @@ SECTION 25 lists this among the rules in force: a curve with a claim above what 
 
 The over-claim names three things a reader can act on: which source, how much was claimed, and how much it emits. The engine resolves none of them and gives no verdict while the claim stands. In practice the claim or the recorded emission is corrected and the curve is run again.
 
-## The cost side is untouched
+## The cost per tonne falls
 
-The over-claim is a check on tonnes. The claim of 9400 t is a change to Flare gas recovery's tonnes a year, and SECTION 21 prints the curve's tonnes and verdict for it. It prints no cost per tonne for the 9400 t claim, so this lesson quotes none. The costs of module one belong to the measures as costed, with Flare gas recovery at 6200 t a year and 78.1002 USD a tonne.
+SECTION 21 also prints the 9400 t claim costed: Flare gas recovery at a net annual cost of 484221.51 USD and a cost per tonne of 51.5129 USD. At 6200 t a year, SECTION 18 prints the same net annual cost, 484221.51 USD, and 78.1002 USD a tonne. The digest's reading: "The cost per tonne falls as the claimed tonnes rise; the over-claim makes the measure look cheaper as well as larger."
 
 ## Two checks the curve runs
 
-The curve carries two checks on its tonnes, and they print in different places. Interaction, two measures on one source, prints in SECTION 20 as additive false and labels a verdict an upper bound. An over-claim, one claim beyond its source's emission, prints in SECTION 21's over-claims column and leaves the verdict none.
+The curve carries two checks on its tonnes, and they print in different places. Interaction, two measures on one source, prints in SECTION 20 as additive false and labels a verdict an upper bound when every claim is checked. An over-claim, one claim beyond its source's emission, prints in SECTION 21's over-claims column and leaves the verdict none.
 
 ## Exercise
 

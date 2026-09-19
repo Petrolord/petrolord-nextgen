@@ -31,7 +31,7 @@ The money in this section is US dollars, and every figure behind it is invented.
 
 ## The floor note
 
-With the treatment cost blank, the engine returns a valueNote. It is quoted here as the engine's words, verbatim: "A floor, not the value: Treatment not repeated not priced. The treatment cost is the one usually left out."
+With the treatment cost blank, the engine returns a valueNote. It is quoted here as the engine's words, verbatim: "A floor on the value: Treatment not repeated not priced. The treatment cost is the one usually left out."
 
 The note does three things. It says the annualValue of 121403.28 USD is a floor. It names the line that was not priced. And it says which cost is the one usually left out. The engine still prints the total, and it prints complete false beside it and the floor note with it, so the total cannot be read as the whole value.
 
@@ -39,15 +39,16 @@ The same rule runs through this tier: a box nobody filled is named. Here the box
 
 ## What the engine refuses
 
-SECTION 16 prints three refusals:
+SECTION 16 prints four refusals:
 
 | the call | the engine says |
 | --- | --- |
 | boiler efficiency blank | REFUSED: A boiler efficiency in (0, 1] is required: the fuel saved depends on it and it is not assumed. |
 | hours a year blank | REFUSED: Hours in service a year are required, between 0 and 8784. A blank is not read as a full year. |
 | target return 1.2 | REFUSED: Return fractions must lie between 0 and 1. |
+| target return 0.25, below the current 0.35 | REFUSED: The target return (0.25) is below the current return (0.35). Returning less condensate is a cost, so there is nothing to value. |
 
-The boiler efficiency here is refused outright, where the trap of lesson three answered its steam and left the fuel absent. The refusal gives its own reason: the fuel saved depends on it and it is not assumed. A return fraction of 1.2 is refused because return fractions must lie between 0 and 1.
+The boiler efficiency here is refused outright, where the trap of lesson three answered its steam and left the fuel absent. The refusal gives its own reason: the fuel saved depends on it and it is not assumed. A return fraction of 1.2 is refused because return fractions must lie between 0 and 1. A target of 0.25 against the current 0.35 is refused too, and the engine gives the reason: returning less condensate is a cost, so there is nothing to value.
 
 ## Exercise
 

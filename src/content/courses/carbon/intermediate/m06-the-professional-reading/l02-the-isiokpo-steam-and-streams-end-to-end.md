@@ -1,6 +1,6 @@
 # The Isiokpo steam and streams end to end
 
-Lesson one read the Isiokpo heater as a chain. This lesson reads the rest of the plant the same way: one failed trap, one condensate system and four process streams, each a separate call with its own inputs and its own refusals. Every figure is invented for this course, and the fuel emission factor is SYNTHETIC.
+This lesson reads the rest of the Isiokpo plant as a chain: one failed trap, one condensate system and four process streams, each a separate call with its own refusals. Every figure is invented for this course, and the fuel emission factor is SYNTHETIC.
 
 {{panel:carbon-efficiency-explorer}}
 
@@ -13,9 +13,9 @@ SECTION 15 prints the trap failed open: a 4 mm orifice, 9 bar a upstream, a disc
 | 1.135 | 42.3520 | 355.757 | 7826.65 | 1135.851 | 63.721 |
 | 1.3 | 44.4620 | 373.481 | 8216.58 | 1192.439 | 66.896 |
 
-The stated exponent is 1.135, for dry saturated steam. At the superheated exponent the digest computes 17.724 tonnes a year more. The flow is choked, and the engine's note says the loss depends on the upstream pressure and not on what is downstream.
+The stated exponent is 1.135, for dry saturated steam. At the superheated exponent the digest computes 17.724 tonnes a year more. The flow is choked. The engine's note, verbatim: "Choked flow: the pressure ratio 0.1126 is at or below the critical 0.5774, so the loss depends on the upstream pressure alone."
 
-The trap asks for its exponent, its discharge coefficient and its hours, and refuses each when blank. It reports the steam without a boiler efficiency and leaves the fuel and carbon absent, with the fuel note that a boiler efficiency is "not assumed to be 1". Hours left out of the call take the stated default of 8760, 371.004 tonnes a year.
+The trap refuses a blank exponent, discharge coefficient or hours. It reports the steam without a boiler efficiency and leaves the fuel and carbon absent, with the fuel note that a boiler efficiency is "not assumed to be 1". Hours left out of the call take the stated default of 8760, 371.004 tonnes a year.
 
 ## The condensate
 
@@ -29,11 +29,11 @@ SECTION 16 raises the return from 0.35 to 0.65 on 16 t of steam an hour, with co
 | complete | true | false |
 | annualTonnesCo2e | 742.220 | 742.220 |
 
-With the treatment cost blank the value is a floor, and the engine says so in its note: "A floor, not the value: Treatment not repeated not priced. The treatment cost is the one usually left out." A blank boiler efficiency here is refused outright.
+With the treatment cost blank the value is a floor, and the engine says so in its note: "A floor on the value: Treatment not repeated not priced. The treatment cost is the one usually left out." A blank boiler efficiency here is refused outright, and so is a target return of 0.25 below the current 0.35.
 
 ## The streams
 
-SECTION 17 targets the four streams by the problem table:
+SECTION 17 targets the four streams:
 
 | minimum approach C | hot utility kW | cold utility kW | pinch hot C | pinch cold C | heat recovered kW |
 | --- | --- | --- | --- | --- | --- |
@@ -45,15 +45,15 @@ At 15 C the heat flow is zero at shifted 110.500 C, inside the range, which make
 
 ## Three kinds of answer
 
-Read together, the three records show three ways the engine handles what it was not given.
+The three records show three ways the engine handles what it was not given.
 
-It refuses. A trap with no exponent, a condensate system with no boiler efficiency, a problem table with no minimum approach: no answer is printed.
+It refuses. A trap with no exponent, a condensate system with no boiler efficiency, a problem table with no minimum approach: no answer prints.
 
 It answers in part and names the gap. A trap with no boiler efficiency reports its steam and leaves fuel and carbon absent. A condensate system with no treatment cost reports a total, marks it complete false and calls it a floor.
 
 It applies a stated default only where one is stated. Hours left out of the trap's call take 8760. Hours left blank are refused.
 
-SECTION 25 lists the trap's rule and the two pinch rules among those in force: a trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year; only an interior zero of the cascade is a pinch; a negative heat capacity flowrate is refused.
+SECTION 25 lists the trap's rule and the two pinch rules among those in force: a trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year; only an interior zero of the cascade is a pinch; a negative heat capacity flowrate is refused. Its MD45-1 table adds that a trap is choked only at or below the critical pressure ratio.
 
 ## Exercise
 

@@ -28,7 +28,7 @@ Here are the five Igbogene lines with their factors and provenance. Every activi
 
 ## Three kinds of factor
 
-The first three lines are atom-balance lines. The engine has already computed their tonnes of gas, so the Carbon Studio carries them into the inventory through a factor of 1 whose source is conservation of mass. Their version is "not applicable", and their provenance is complete. The engine's method sentence says why no document is needed: "This is conservation of mass, not an empirical factor, so it needs no source document."
+The first three lines are atom-balance lines. The engine has already computed their tonnes of gas, so the Carbon Studio carries them into the inventory through a factor of 1 whose source is conservation of mass. Their version is "not applicable", and their provenance is complete. The engine's method sentence says why no document is needed: "This is conservation of mass, so it needs no source document."
 
 The vented and fugitive methane line has an activity of 142.000 t of methane and a factor of 1. Its source is a named survey, the Epie Creek leak detection survey (invented), with a version of 2026 Q2. The factor is 1, and the record says where the 142.000 t came from.
 

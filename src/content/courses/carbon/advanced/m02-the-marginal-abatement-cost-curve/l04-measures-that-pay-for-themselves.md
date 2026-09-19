@@ -30,7 +30,7 @@ SECTION 26 lists paysForItselfTonnes among the outputs recomputed by neither ora
 
 ## Reading the list against the tonnes
 
-Read paysForItselfTonnes beside totalAbatementTonnes: 5310.000 and 15460.000 t a year. The tonnes between 5310.000 and 15460.000 on the axis belong to the three measures with positive costs, Vapour recovery on the storage tanks, Solar for purchased power and Flare gas recovery, whose steps run from 5310.000 to 15460.000 t.
+Read paysForItselfTonnes beside totalAbatementTonnes: 5310.000 and 15460.000 t a year. SECTION 20 prints the first as a share of the second, computed here: 0.343467. The tonnes between 5310.000 and 15460.000 on the axis belong to the three measures with positive costs, Vapour recovery on the storage tanks, Solar for purchased power and Flare gas recovery, whose steps run from 5310.000 to 15460.000 t.
 
 ## Exercise
 

@@ -26,7 +26,7 @@ SECTION 13 prints the heater at its current reading of 5.5 percent oxygen on LHV
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | current, 5.5 percent O2 | LHV | 32.1223 | 9.9883 | 1.8088 | 1.8000 | 0.0000 | 13.5971 | 86.4029 |
 
-The row names four losses. The dry flue gas loss is 9.9883 percent, the moisture loss 1.8088 percent, the radiation loss 1.8000 percent and the unburned loss 0.0000 percent. The total loss is 13.5971 percent and the efficiency is 86.4029 percent, both on LHV.
+The row names four losses. The dry flue gas loss is 9.9883 percent, the moisture loss 1.8088 percent, the radiation loss 1.8000 percent and the unburned loss 0.0000 percent. The total loss is 13.5971 percent and the efficiency is 86.4029 percent, both on LHV. SECTION 13 prints the ledger that ties them, checked on all four rows: the four losses add to the total loss, and the efficiency is 100 less the total loss.
 
 In practice, a stack loss method finds a heater's efficiency by naming the heat that leaves by each route and counting everything else as delivered.
 
