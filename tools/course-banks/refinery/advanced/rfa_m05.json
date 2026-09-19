@@ -41,7 +41,7 @@
    "Both read 0.0000."
   ],
   "answer": 3,
-  "explanation": "A negative taxable income pays no tax under either treatment, so the construction years read 0.0000 in both tax columns. With the option on the loss goes into the pool; with it off it is held nowhere. The difference only appears when the plant starts to earn."
+  "explanation": "Years 0 and 1 read taxable income before relief of -58.9160 million, and both tax columns read 0.0000. With the loss carried forward, the loss at year end reads 58.9160 and then 117.8320 million. The two tax columns first differ in year 2."
  },
  {
   "prompt": "Year 2, calendar 2029, reads taxable income before relief of 38.5879 million. With the loss carried forward, why is its tax 0.0000?",
@@ -52,7 +52,7 @@
    "Year 2 is still a construction year, so its income is not taxed."
   ],
   "answer": 2,
-  "explanation": "The loss carried in is set against the year's taxable income before any tax is charged. In 2029 the pool of 117.8320 million absorbs the whole 38.5879 million and falls to 79.2440 million. The plant is profitable before it pays tax."
+  "explanation": "The loss carried in to 2029 is 117.8320 million, larger than the year's taxable income of 38.5879 million, so no income is left to tax, and the loss carried forward at year end reads 79.2440 million."
  },
  {
   "prompt": "With the loss carried forward, which is the first year with tax to pay?",
@@ -121,15 +121,15 @@
   "explanation": "The feasibility oracle keeps annual accounts and a dated tax-loss ledger used oldest first, so the loss from 2027 is used before the loss from 2028. Re-solving with a small extra supply is how the plan oracle values a stream."
  },
  {
-  "prompt": "Carrying the loss forward changes which lines of the ODIOMA cash flow?",
+  "prompt": "Years 0 and 1 read taxable income before relief of -58.9160 million. Where does that figure come from?",
   "options": [
-   "Opex, since the loss is booked as a cost.",
-   "Tax, and through it the net cash flow.",
-   "Capex, since the capital is deducted later.",
-   "Gross revenue, since the pool is a credit."
+   "The fixed operating cost, charged before the plant starts.",
+   "The capex deducted in the year, with no revenue against it.",
+   "The tax at 30 percent on the capital, owed in advance.",
+   "The crude bought ahead of start-up, carried inside opex."
   ],
   "answer": 1,
-  "explanation": "Gross revenue, opex and capex are the same whether the loss is carried or not. The net cash flow moves only through tax: 38.5879 million in 2029 to 2031, 27.6320 million in 2032 and 27.0116 million from 2033."
+  "explanation": "Taxable income before relief = gross revenue - opex - capex deducted. At nine decimals years 0 and 1 read gross revenue 0.000000000, opex 0.000000000 and capex deducted 58.915982674, so taxable income reads -58.915982674, and the tax in both years is 0.000000000."
  },
  {
   "prompt": "What total tax over the life does the engine print with the option off?",
@@ -156,12 +156,12 @@
  {
   "prompt": "The screen reads 88.6345 MM with the loss carried forward and 64.8440 MM with the option off. What does the pair show?",
   "options": [
-   "The treatment of a construction loss is a setting a screen cannot ignore.",
-   "The option off is the neutral case, and the carried figure flatters the plant.",
+   "Switching the option off, on the same inputs, lowers the screen's NPV.",
+   "The option off screens a different capital, so the two are different plants.",
    "The NPV is the graded figure, so the carried case wins.",
-   "The capital is deducted twice with the option on, once in each construction year."
+   "The option on moves the tax into the two construction years."
   ],
   "answer": 0,
-  "explanation": "Both are the screen's answers under two tax treatments. Throwing the construction loss away taxes the first operating years on income the capital spending had already offset. The Economics courses teach and grade the NPV, and this course asks for neither figure."
+  "explanation": "The option-off run takes the same inputs through calculateEconomics directly, and the NPV at 12 percent reads 88.6345 MM carried and 64.8440 MM with the option off. The construction years pay 0.0000 tax in both columns. The Economics courses teach and grade the NPV; this course reads it as the screen's answer."
  }
 ]

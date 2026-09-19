@@ -13,7 +13,7 @@ q(2, "How does a matched ODIOMA variance line get its direction of cost or reven
  ["From the sign of the line's total variance: positive reads revenue, negative cost.",
   "From whether the line's value rose or fell against the plan.",
   "From the unit value on the line: above plan reads revenue, below it reads cost."],
- "A delivery's value is what it sold for, so a delivery line is revenue. Every other event's value is what it cost, so a receipt line and a unit_run line are cost. The direction is fixed before any variance is computed.")
+ "A delivery's value is what it sold for, so a delivery line is revenue. Every other event's value is what it cost, so a receipt line and a unit_run line are cost. The table bears it out: escravos reads a positive total and forcados a negative one, and both are cost lines.")
 
 q(0, "The escravos receipt line reads a total variance of 11607000.00. What margin effect does the engine give it?",
  "-11607000.00",
@@ -32,12 +32,12 @@ q(1, "Put on margin, the Forcados (illustrative) line's total becomes which figu
  ["-30508000.00", "-30720000.00", "212000.00"],
  "The Forcados total variance is -30508000.00. It is a cost line, so the sign is reversed and the margin effect reads 30508000.00. -30720000.00 is its volume variance and 212000.00 its unexplained.")
 
-q(1, "The Forcados line helps the margin by 30508000.00. Why does the module refuse to read that as good news for the month?",
- "The crude never arrived, so the products it would have made are missing from the delivery lines.",
- ["The engine marks the line costed false, so its effect is left out of every margin total.",
-  "A positive margin effect on a cost line means that spending rose against the plan.",
-  "Its 212000.00 unexplained is dropped when the lines are added, so the figure overstates it."],
- "Money not spent on crude is margin kept on that line, and the line is read on its own. A refinery that does not receive its crude does not run it, and every product line sold fewer barrels than planned. The story of the month is read across all the lines.")
+q(1, "In the totals table, the cost lines as recorded carry which volume variance?",
+ "-20622400.00",
+ ["-24572090.00",
+  "-19390350.00",
+  "212000.00"],
+ "As recorded, the cost lines add to -20622400.00 on volume and to -19390350.00 in total. -24572090.00 is the same column for the revenue lines, and 212000.00 is the cost lines' unexplained.")
 
 q(3, "Which figure does the engine print as the month's headline variance?",
  "-5452450.00, the total on margin",
@@ -47,11 +47,11 @@ q(3, "Which figure does the engine print as the month's headline variance?",
  "The headline total is on margin, -5452450.00. The two rows as recorded say what happened to spending and to sales. The sum of every line's total as recorded is printed and is not the headline.")
 
 q(0, "Adding every line's total variance as recorded gives -44233150.00. Why is that sum not the headline?",
- "It adds money spent less to money received less.",
+ "It adds cost gaps and revenue gaps with no sign reversed.",
  ["It leaves out the Forcados line.",
   "It counts the lpg sale twice.",
   "It is formed at the actual unit values, which differ from the plan unit values on each line."],
- "Money spent less helps the margin and money received less hurts it. The -44233150.00 mixes the two, so it describes nothing a refinery can act on. The engine signs each line before it adds and prints the margin total, -5452450.00.")
+ "The headline is on margin: a revenue gap counts as it is, a cost gap with its sign reversed. Adding every line's total as recorded, cost and revenue together, gives -44233150.00; the margin total is -5452450.00, and the engine prints that as the headline.")
 
 q(2, "Read the headline row on margin. What price variance does it carry?",
  "-1290760.00",

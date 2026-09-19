@@ -8,7 +8,7 @@
    "Material, type and the event date."
   ],
   "answer": 2,
-  "explanation": "A plan line and an actual line are the same line only when both the material and the type agree. Material alone would merge a receipt and a delivery of the same material, and type alone would merge four products that are all deliveries."
+  "explanation": "attributeVariance matches the two ledgers on material and type, so a plan line and an actual line are the same line only when both agree. Each ODIOMA line carries one material and one type, such as escravos receipt or cdu unit_run."
  },
  {
   "prompt": "What volume variance does the escravos receipt line read?",
@@ -41,7 +41,7 @@
    "The configuration's capacity cost, 1.4000 a barrel on every line."
   ],
   "answer": 1,
-  "explanation": "Volume variance = (actual quantity - plan quantity) x plan unit value. Pricing the barrel gap at the plan's own price keeps the volume variance free of any price change, which is left to its own term."
+  "explanation": "Volume variance = (actual quantity - plan quantity) x plan unit value. The actual unit value appears only in the price variance, (actual unit value - plan unit value) x actual quantity."
  },
  {
   "prompt": "In the price variance, (actual unit value - plan unit value) is multiplied by which quantity?",
@@ -52,7 +52,7 @@
    "The actual quantity."
   ],
   "answer": 3,
-  "explanation": "Price variance = (actual unit value - plan unit value) x actual quantity. A price change matters only on barrels that actually moved, so the difference in unit value is taken on the actual quantity."
+  "explanation": "Price variance = (actual unit value - plan unit value) x actual quantity. On the escravos line the actual unit value of 80.2000 against the plan's 78.9000 is taken on the 735000.00 bbl received, and the line reads 955500.00."
  },
  {
   "prompt": "No Forcados (illustrative) barrels arrived in the month. What price variance does its line read, and why?",
@@ -99,15 +99,15 @@
   "explanation": "Movements in one ledger and not the other are listed as unmatched and folded into no variance line. The row shows lpg, delivery, present in actual, 9000.00 bbl and 441000.00."
  },
  {
-  "prompt": "Why can the engine form neither a volume variance nor a price variance for the unmatched lpg row?",
+  "prompt": "In the actual ledger, what does the fuel_oil delivery's value of 12810000.00 record?",
   "options": [
-   "The row has no plan line, so it has no plan unit value to price a gap or to compare a price against.",
-   "Its actual unit value is 0.0000, the figure the engine gives when no barrels arrived.",
-   "Its quantity of 9000.00 bbl falls below the cargo size of 350000.00 bbl.",
-   "A delivery line is revenue, and variance is formed on cost lines alone."
+   "What the fuel oil sold for in the month.",
+   "What the fuel oil cost the refinery to make.",
+   "What the plan expected the fuel oil to sell for.",
+   "What the crude behind the fuel oil cost."
   ],
   "answer": 0,
-  "explanation": "Both formulas need a plan unit value: the volume variance prices the barrel gap at it and the price variance compares against it. With no plan line, any figure would rest on a price nobody planned."
+  "explanation": "A delivery's value is what it sold for; every other event's value is what it cost. The plan expected 18902800.00 for the fuel_oil line, and the month's delivery of 210000.00 bbl sold for 12810000.00."
  },
  {
   "prompt": "Over the month, what did each barrel of Escravos (illustrative) cost, as its variance line reads the actual unit value?",
@@ -115,10 +115,10 @@
    "78.9000",
    "76.8000",
    "80.2000",
-   "74.0000"
+   "0.0000"
   ],
   "answer": 2,
-  "explanation": "Actual unit value = actual value / actual quantity: 58947000.00 over 735000.00 bbl reads 80.2000, against a plan unit value of 78.9000. 76.8000 is the Forcados plan unit value."
+  "explanation": "Actual unit value = actual value / actual quantity: 58947000.00 over 735000.00 bbl reads 80.2000, against a plan unit value of 78.9000. 76.8000 is the Forcados plan unit value, and 0.0000 is what the Forcados line reads, with no barrels received."
  },
  {
   "prompt": "The gasoline line reads a volume variance of -5606770.00 and a price variance of 179070.00. Read as recorded, what do the two signs say?",
@@ -154,14 +154,14 @@
   "explanation": "Quantity gap = actual quantity - plan quantity: 131000.00 against 190000.00 bbl reads -59000.00. -265000.00 is the crude unit's gap, 131000.00 the reformer's actual run, and -182900.00 is the reformer's volume variance in money."
  },
  {
-  "prompt": "The crude unit's actual run and the escravos receipt each read 735000.00 bbl. What does that pair show about the month?",
+  "prompt": "The crude unit ran 735000.00 bbl for 1080450.00. Which actual unit value does its variance line print?",
   "options": [
-   "The crude unit ran at its full capacity.",
-   "The only crude that arrived is the crude the unit ran.",
-   "The Forcados barrels were recorded as escravos.",
-   "The cdu line's volume variance is zero."
+   "1.4000",
+   "1.4700",
+   "3.2000",
+   "3.1000"
   ],
   "answer": 1,
-  "explanation": "Forcados (illustrative) reads 0.00 bbl received. The escravos receipt reads 735000.00 bbl and the cdu ran 735000.00 bbl, against a plan of 1000000.00 bbl and a volume variance of -371000.00."
+  "explanation": "Actual unit value = actual value / actual quantity, and the cdu line reads 1.4700 against a plan unit value of 1.4000. 3.2000 and 3.1000 are the reformer's actual and plan unit values."
  }
 ]

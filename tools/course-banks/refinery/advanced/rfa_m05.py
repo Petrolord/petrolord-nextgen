@@ -31,14 +31,14 @@ q(3, "In years 0 and 1, what tax do the two treatments print?",
  ["Carried reads 0.0000; option off reads 11.5764.",
   "Option off prints a refund of 58.9160.",
   "Carried holds 58.9160 as a tax credit."],
- "A negative taxable income pays no tax under either treatment, so the construction years read 0.0000 in both tax columns. With the option on the loss goes into the pool; with it off it is held nowhere. The difference only appears when the plant starts to earn.")
+ "Years 0 and 1 read taxable income before relief of -58.9160 million, and both tax columns read 0.0000. With the loss carried forward, the loss at year end reads 58.9160 and then 117.8320 million. The two tax columns first differ in year 2.")
 
 q(2, "Year 2, calendar 2029, reads taxable income before relief of 38.5879 million. With the loss carried forward, why is its tax 0.0000?",
  "The pool of 117.8320 million carried in covers the whole year's income.",
  ["The plant makes no profit until year 5, when the first tax falls due.",
   "The tax rate of 30 percent is not applied until the pool is empty.",
   "Year 2 is still a construction year, so its income is not taxed."],
- "The loss carried in is set against the year's taxable income before any tax is charged. In 2029 the pool of 117.8320 million absorbs the whole 38.5879 million and falls to 79.2440 million. The plant is profitable before it pays tax.")
+ "The loss carried in to 2029 is 117.8320 million, larger than the year's taxable income of 38.5879 million, so no income is left to tax, and the loss carried forward at year end reads 79.2440 million.")
 
 q(3, "With the loss carried forward, which is the first year with tax to pay?",
  "Year 5, calendar 2032, tax 10.9559",
@@ -80,12 +80,12 @@ q(0, "How does the feasibility oracle check the loss pool?",
   "With a pool that lapses after 2 years unused."],
  "The feasibility oracle keeps annual accounts and a dated tax-loss ledger used oldest first, so the loss from 2027 is used before the loss from 2028. Re-solving with a small extra supply is how the plan oracle values a stream.")
 
-q(1, "Carrying the loss forward changes which lines of the ODIOMA cash flow?",
- "Tax, and through it the net cash flow.",
- ["Opex, since the loss is booked as a cost.",
-  "Capex, since the capital is deducted later.",
-  "Gross revenue, since the pool is a credit."],
- "Gross revenue, opex and capex are the same whether the loss is carried or not. The net cash flow moves only through tax: 38.5879 million in 2029 to 2031, 27.6320 million in 2032 and 27.0116 million from 2033.")
+q(1, "Years 0 and 1 read taxable income before relief of -58.9160 million. Where does that figure come from?",
+ "The capex deducted in the year, with no revenue against it.",
+ ["The fixed operating cost, charged before the plant starts.",
+  "The tax at 30 percent on the capital, owed in advance.",
+  "The crude bought ahead of start-up, carried inside opex."],
+ "Taxable income before relief = gross revenue - opex - capex deducted. At nine decimals years 0 and 1 read gross revenue 0.000000000, opex 0.000000000 and capex deducted 58.915982674, so taxable income reads -58.915982674, and the tax in both years is 0.000000000.")
 
 q(2, "What total tax over the life does the engine print with the option off?",
  "231.5276 million",
@@ -100,11 +100,11 @@ q(1, "In which years does the whole printed difference of 35.3496 million in tot
  "The construction years pay 0.0000 under both treatments, and from year 6 both pay 11.5764 million a year. With the option off years 2 to 5 each pay 11.5764 million; with the loss carried years 2 to 4 pay 0.0000 and year 5 pays 10.9559 million.")
 
 q(0, "The screen reads 88.6345 MM with the loss carried forward and 64.8440 MM with the option off. What does the pair show?",
- "The treatment of a construction loss is a setting a screen cannot ignore.",
- ["The option off is the neutral case, and the carried figure flatters the plant.",
+ "Switching the option off, on the same inputs, lowers the screen's NPV.",
+ ["The option off screens a different capital, so the two are different plants.",
   "The NPV is the graded figure, so the carried case wins.",
-  "The capital is deducted twice with the option on, once in each construction year."],
- "Both are the screen's answers under two tax treatments. Throwing the construction loss away taxes the first operating years on income the capital spending had already offset. The Economics courses teach and grade the NPV, and this course asks for neither figure.")
+  "The option on moves the tax into the two construction years."],
+ "The option-off run takes the same inputs through calculateEconomics directly, and the NPV at 12 percent reads 88.6345 MM carried and 64.8440 MM with the option off. The construction years pay 0.0000 tax in both columns. The Economics courses teach and grade the NPV; this course reads it as the screen's answer.")
 
 emit(Q, '/root/wt-md-refinery-nextgen/tools/course-banks/refinery/advanced/rfa_m05.json', expect_n=15)
 finish()

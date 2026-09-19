@@ -13,7 +13,7 @@ q(1, "The stream model holds a plan event, a scheduled event and a recorded actu
  ["The fields: an actual event adds a cost field.",
   "The sign: plan quantities positive, actuals negative.",
   "The grain: plan events by day, actuals by month."],
- "A plan event, a scheduled event and a recorded actual are the same shape, marked by their ledger: plan, schedule or actual. Because the shape is shared, the variance can match them on material and type with the same code on every line.")
+ "A plan event, a scheduled event and a recorded actual are the same shape, marked by their ledger: plan, schedule or actual.")
 
 q(3, "makeEvent records a delivery of 100 bbl. What signedQuantity does the engine return, and is the event flagged as emitting by its nature?",
  "-100, and it is not flagged as emitting.",
@@ -28,47 +28,47 @@ q(0, "Which event type signs a quantity of 100 bbl to -100 while its emits-by-na
  "A loss removes barrels, -100 for 100 bbl, and emits nothing by its nature. Flare and vent also sign to -100 but read true on the flag, and a unit_run signs to 0.")
 
 q(2, "A unit_run of 100 bbl is recorded for the ODIOMA reformer. What does makeEvent return as its signedQuantity?",
- "0, because the run moves material inside the site.",
+ "0, the same as a transfer or a blend.",
  ["-100, the naphtha feed it consumes.",
   "100, the reformate it makes.",
   "-100, flagged as emitting, since a unit burns fuel while it runs."],
- "A transfer, a unit_run and a blend all sign to 0. Each moves material inside the site, so the site as a whole holds the same quantity after the event, and none of the three emits by its nature.")
+ "Direction comes from the event type. A transfer, a unit_run and a blend all sign a quantity of 100 bbl to 0, and none of the three is flagged as emitting by its nature.")
 
 q(0, "A clerk keys a quantity of -500 into makeEvent to reverse a delivery. What does the engine return?",
  "REFUSED: \"Event quantity is unsigned; direction comes from the event type\"",
  ["An accepted receipt of 500 bbl, since a negative delivery is read as material coming back in.",
   "REFUSED: \"Unknown event type \"sale\"\", the same message any bad type gets.",
   "An accepted delivery with its quantity stored as 500 bbl and a warning flag set."],
- "The quantity is unsigned and the type carries the direction. A quantity of -500 would state the sign twice, and the engine does not guess which was meant. It refuses and says where direction comes from.")
+ "makeEvent takes a quantity that is never negative: direction comes from the event type. A quantity of -500 is refused with the message that says so. The sale message is the refusal for an unknown event type.")
 
 q(3, "An event is sent to makeEvent marked with a ledger called forecast. What happens to it?",
  "It is refused by name: \"Unknown ledger \"forecast\"\".",
  ["It is accepted into the plan ledger.",
   "It is accepted and listed as unmatched.",
   "It is refused with the quantity message, because a forecast quantity is unsigned."],
- "The stream model knows three ledgers: plan, schedule and actual. An event marked with any other ledger would sit outside every comparison the variance makes, so it is stopped at the door and the refusal names the word that caused it.")
+ "The three ledgers are plan, schedule and actual. makeEvent refuses a ledger called forecast with a message of its own, and the message names the ledger it did not know.")
 
 q(0, "A trader wants to record an lpg sale with the event type sale. What does makeEvent do?",
  "Refuses it: \"Unknown event type \"sale\"\".",
  ["Accepts it as a delivery.",
   "Accepts it as revenue, signed 0.",
   "Accepts it as costed false."],
- "The nine event types are the only ones the engine knows. A type called sale is refused by name, because the engine could not set its direction or place its value on the cost or the revenue side. In this model a sale is recorded as a delivery.")
+ "makeEvent refuses an event type called sale with a message of its own, and the message names the type it did not know. A delivery is one of the nine event types it knows, and a delivery signs 100 bbl to -100.")
 
 q(2, "An event is recorded with no cost at all. What does it carry, and how does a variance line built from it read?",
  "Cost null, and the line reads costed false.",
  ["Cost 0, and the line reads costed true.",
   "It is refused, naming the missing cost.",
   "Cost 0, and the line reads costed false."],
- "A cost of 0 says the movement cost nothing. A null says nobody has costed it yet. The engine keeps them apart and marks the line costed false. Every ODIOMA variance line reads costed true.")
+ "An event recorded with no cost carries cost null, which is different from a cost of 0, and the variance marks a line with an uncosted event as costed false. The event is recorded, so nothing is refused. Every ODIOMA variance line reads costed true.")
 
 q(1, "How many barrels of Escravos (illustrative) does the ODIOMA plan ledger receive?",
  "600000.00 bbl",
  ["700000.00 bbl", "350000.00 bbl", "400000.00 bbl"],
- "The escravos receipt line reads 600000.00 bbl in 2 events. The crude has 700000.00 bbl available, so the plan leaves some of it unused. Forcados (illustrative) is received at 400000.00 bbl, its full availability.")
+ "The escravos receipt line reads 600000.00 bbl in 2 events, against 700000.00 bbl available in the configuration. Forcados (illustrative) is received at 400000.00 bbl, and 350000.00 bbl is the cargo size the plan was cascaded with.")
 
 q(3, "The plan ledger's cdu unit_run line reads a quantity equal to which other ODIOMA plan figure?",
- "The plan's total crude, 1000000.00 bbl.",
+ "All the crude in the plan, 1000000.00 bbl.",
  ["The crude unit's capacity, 1200000.00 bbl.",
   "The Escravos availability, 700000.00 bbl.",
   "The reformer's 190000.00 bbl."],
@@ -76,10 +76,10 @@ q(3, "The plan ledger's cdu unit_run line reads a quantity equal to which other 
 
 q(0, "Read the ODIOMA reformer's plan ledger quantity beside its capacity in the configuration. How do the two compare?",
  "They are equal, 190000.00 bbl each.",
- ["The ledger reads 131000.00 bbl against a capacity of 190000.00 bbl.",
+ ["The ledger reads 163400.00 bbl against a capacity of 190000.00 bbl.",
   "The ledger reads 190000.00 bbl against a capacity of 1200000.00 bbl.",
   "The ledger reads 1000000.00 bbl, every barrel of crude, against 190000.00 bbl."],
- "The reformer line reads 190000.00 bbl and the reformer's capacity reads 190000.00 bbl, so the plan runs it full. 1200000.00 bbl is the crude unit's capacity.")
+ "The reformer line reads 190000.00 bbl and the reformer's capacity reads 190000.00 bbl. 163400.00 bbl is the plan's gasoline delivery, 1200000.00 bbl the crude unit's capacity and 1000000.00 bbl the cdu line.")
 
 q(3, "At what value per barrel does the ODIOMA plan ledger hold its gasoline deliveries?",
  "110.5000, the gasoline price the plan was solved with",
@@ -89,7 +89,7 @@ q(3, "At what value per barrel does the ODIOMA plan ledger hold its gasoline del
  "The plan ledger prices every movement at the configuration's own figure. The gasoline line reads 18055700.00 over 163400.00 bbl, 110.5000 a barrel, the gasoline price in the product table. That plan unit value is the price the volume variance later uses.")
 
 q(2, "The plan ledger shows 2 events on each crude receipt line and 5 on each product delivery line. How does the variance read those events?",
- "It reads only each line's sum, so a cargo landing a day late inside the month moves no line.",
+ "It reads only each line's sum, the grain it matches the actuals on.",
  ["It matches each event with the dated actual event nearest to it and prices the gap in days.",
   "It takes the value per barrel of the first event on each line as the line's unit value.",
   "It averages the events on a line, so a line with 5 events carries more weight than one with 2."],
@@ -100,7 +100,7 @@ q(3, "What does the value on a unit_run line of the ODIOMA plan ledger record?",
  ["What the unit's products sell for, since a unit run makes the products the plan delivers.",
   "The value of the crude fed to the unit, 78.9000 a barrel on the Escravos share of the run.",
   "Nothing, since a unit_run signs to 0 and so carries a value of 0."],
- "A delivery's value is what it sold for and every other event's value is what it cost. The cdu line reads 1000000.00 bbl at an operating cost of 1.4000 a barrel, a value of 1400000.00.")
+ "The cdu unit_run line reads 1000000.00 bbl and a value of 1400000.00, a value per bbl of 1.4000, the crude unit's operating cost in the configuration.")
 
 q(1, "The ODIOMA configuration lists the Crude distillation unit with no feed stream. What does the plan make of it?",
  "It is the crude unit and carries every barrel of crude.",

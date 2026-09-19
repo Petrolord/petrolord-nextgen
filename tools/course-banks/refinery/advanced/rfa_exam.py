@@ -13,24 +13,24 @@ q(0, "Which pair does makeEvent return for a flare of 100 bbl: its signedQuantit
  ["-100, with the emits flag left false",
   "0, since a flare moves nothing out of the site",
   "100, flagged as emitting by its nature"],
- "Flaring takes product off the site and releases it, so it signs negative and emits by its nature, like burn and vent. Loss shares the -100 and reads false.")
+ "The table prints flare at -100 for 100 bbl with emits by its nature true, the same as burn and vent. A loss also reads -100, and its flag reads false.")
 
 q(2, "A receipt of 100 bbl goes through makeEvent. What signedQuantity comes back?",
  "100",
  ["-100", "0", "-500"],
- "A receipt is the one event type that signs to +100 for 100 bbl. Deliveries, burns, flares, vents and losses sign to -100; transfers, unit runs and blends to 0. A quantity typed as -500 is refused.")
+ "A receipt is the one event type that signs 100 bbl to 100. Deliveries, burns, flares, vents and losses sign to -100; transfers, unit runs and blends to 0. A quantity typed as -500 is refused.")
 
-q(0, "Which of these events leaves the site's total quantity unchanged?",
+q(0, "Which of these events signs a quantity of 100 bbl to 0?",
  "a blend",
  ["a loss", "a vent", "a delivery"],
- "A blend signs to 0, as a transfer and a unit_run do: each moves material inside the site. A loss, a vent and a delivery each sign 100 bbl to -100.")
+ "A blend signs to 0, as a transfer and a unit_run do. A loss, a vent and a delivery each sign 100 bbl to -100.")
 
 q(3, "What quantity does the ODIOMA plan ledger's jet delivery line hold?",
  "136000.00 bbl",
  ["160000.00 bbl", "101200.00 bbl", "163400.00 bbl"],
  "The jet delivery line reads 136000.00 bbl at 104.9000. 160000.00 bbl is the Jet A-1 ceiling in the configuration, 101200.00 bbl the month's actual jet delivery, and 163400.00 bbl the plan's gasoline.")
 
-q(0, "What gross margin per barrel of crude did the ODIOMA plan find?",
+q(0, "Which figure is the ODIOMA month's planned gross margin per barrel?",
  "4.7763",
  ["14.0100", "1.4000", "3.1000"],
  "The plan reads total crude 1000000.00 bbl, margin 4776300.00 and gross margin per barrel 4.7763. 14.0100 is the expansion screen's figure, and 1.4000 and 3.1000 are the two units' operating costs a barrel.")
@@ -63,10 +63,10 @@ q(2, "Jet A-1 sold 101200.00 bbl against a plan of 136000.00 bbl. Priced at the 
  ["-80980.00", "-3731500.00", "-34800.00"],
  "Volume variance = (actual quantity - plan quantity) x plan unit value, and the jet line prints -3650520.00. -80980.00 is its price variance, -3731500.00 its total and -34800.00 its quantity gap in bbl.")
 
-q(1, "Beside its actual unit value of 0.0000, what plan unit value does the Forcados (illustrative) line carry?",
+q(1, "What plan unit value does the Forcados (illustrative) line carry?",
  "76.8000",
  ["78.9000", "80.2000", "74.0000"],
- "Plan unit value = plan value / plan quantity: 30720000.00 over 400000.00 bbl. The actual unit value reads 0 when no barrels arrived. 78.9000 and 80.2000 are Escravos in the plan and in the month, and 74.0000 is the expansion's crude.")
+ "Plan unit value = plan value / plan quantity: 30720000.00 over 400000.00 bbl. 78.9000 and 80.2000 are Escravos in the plan and in the month, and 74.0000 is the expansion's crude.")
 
 q(1, "The escravos line's total variance is 11607000.00. How does the engine split it?",
  "10651500.00 volume and 955500.00 price",
@@ -105,24 +105,24 @@ q(3, "What total variance do the revenue lines read, added as recorded?",
  ["-19390350.00", "-44233150.00", "-20622400.00"],
  "The revenue lines as recorded read -24842800.00: the month received less than the plan from products. -19390350.00 is the cost lines' total and -20622400.00 their volume variance, and -44233150.00 is every line's total added as recorded.")
 
-q(2, "The headline row's volume variance on margin reads -3949690.00. Where does a figure of that kind send a manager?",
- "To supply and to the units",
- ["To purchasing and to sales",
-  "To the invoices",
-  "To the tax-loss pool"],
- "A volume problem sends the reader to supply and to the units; a price problem to purchasing and sales; an unexplained figure to the invoices.")
+q(2, "In which calendar year does the expansion's capex column first read 0.0000?",
+ "2029",
+ ["2027",
+  "2028",
+  "2032"],
+ "Years 0 and 1, calendar 2027 and 2028, carry capex of 58.9160 each. Year 2, calendar 2029, is the first operating year and reads capex 0.0000 with gross revenue 346.1195. 2032 is the first year with tax to pay.")
 
 q(3, "How many events does dualLedgerTotals count in the plan ledger?",
  "34",
  ["9", "8", "5"],
  "dualLedgerTotals reads 34 events in the plan ledger and 9 in the actual ledger, with 0 uncosted events in each. 5 is the event count on each unit_run and delivery line of the plan ledger.")
 
-q(1, "The plan ledger's margin and the plan's own margin both read 4776300.00. What does that agreement check?",
- "That building the ledger from the schedule lost no money.",
+q(1, "The plan ledger's margin and the plan's own margin both read 4776300.00. What does that agreement show?",
+ "That the ledger summed from the schedule carries the plan's margin.",
  ["That the month's actual margin matched the plan's own margin figure.",
   "That every one of the eight variance lines reads costed true.",
   "That the unmatched lpg sale is counted once."],
- "reconcilePeriod reads the plan ledger margin as 4776300.00 and the plan's own margin as 4776300.00. The ledger built from the schedule and the plan it came from give the same figure, so the cascade lost nothing.")
+ "The plan ledger is summed from the scheduled events, and reconcilePeriod reads its margin as 4776300.00 beside the plan's own margin of 4776300.00. The actual margin reads -235150.00, and the lpg delivery is unmatched, in no variance line.")
 
 # m04: the investment case (section 22)
 q(3, "What annual throughput does the ODIOMA expansion screen print?",
@@ -137,31 +137,31 @@ q(3, "From which reference point is the expansion's capital scaled by the modula
   "58915982.67 at 10000 bpd"],
  "Capital is scaled by the modular law from 100000000.00 at 10000 bpd, and the 12000 bpd plant comes out at 117831965.35. 14000000.00 is the fixed operating cost a year.")
 
-q(1, "The screen's gross margin per barrel reads 14.0100. What does it take away from the gross value of 92.2100?",
+q(1, "The expansion screen prints a gross value of 92.2100 and a gross margin per barrel of 14.0100. What lies between the two?",
  "The crude cost and the variable operating cost",
  ["The crude cost alone, at 74.0000",
   "The fixed operating cost and the tax",
   "The royalty and the crude cost"],
- "The gross margin per barrel is the gross value less the crude cost less the variable operating cost, as the Associate tier defined it. The screen prints gross value 92.2100 and gross margin per barrel 14.0100.")
+ "Per barrel of crude, the engine takes the crude cost and the variable operating cost off the gross value to give the gross margin. The fixed operating cost is a yearly figure in the streams, the royalty rate is 0, and tax has its own column.")
 
 q(2, "What gross revenue does each operating year of the expansion carry, in millions?",
  "346.1195",
  ["307.5315", "291.7664", "38.5879"],
  "Each operating year reads gross revenue 346.1195, opex 307.5315 and, before any tax, a net cash flow of 38.5879. 291.7664 is opexFixed.")
 
-q(0, "What does the opexVariable of 15.7651 million carry?",
- "The variable operating cost on the year's throughput",
- ["The crude cost on the year's throughput, at 74.0000 a barrel",
-  "The fixed operating cost for the year",
-  "The tax on the year's taxable income"],
- "It is the second of the two cost streams. opexFixed, 291.7664, holds the fixed cost and the crude, and the two sum to the opex of 307.5315; tax sits in a column of its own.")
+q(0, "At what discount rate and tax rate, in that order, is the expansion valued?",
+ "12 and 30",
+ ["30 and 12",
+  "12 and 0",
+  "0 and 30"],
+ "The inputs read discountRate 12 and taxRate 30, beside royaltyRate 0. The expansion is valued at a discount rate of 12 percent and a tax rate of 30 percent.")
 
-q(0, "Why would a royalty on a refinery's product sales reach into bought crude?",
- "Its revenue already contains the crude price, which carries the producer's royalty.",
- ["The screening engine charges royalty on opex, and opex holds the crude bill.",
-  "A refinery's tax rate of 30 percent is levied only after the royalty.",
-  "The fiscalType TaxRoyalty charges royalty on capital as well as revenue."],
- "A royalty is charged on gross revenue, and a refinery's gross revenue is the value of products made from crude it bought. The royalty on that crude, where one is due, was paid by the producer and sits inside the price the refinery paid.")
+q(0, "On a matched variance line where no barrels arrived, what actual unit value does the engine print?",
+ "0.0000",
+ ["The plan unit value, 76.8000",
+  "The bill on the line, 212000.00",
+  "null, since it cannot divide"],
+ "The engine's rule for a matched line's unit values gives 0 when no barrels arrived. Forcados received 0.00 bbl, prints 0.0000 beside its plan unit value of 76.8000, and carries its 212000.00 in the unexplained column.")
 
 q(2, "The expansion is valued with start year 2031. What does the first calendar year read?",
  "2031",
@@ -172,7 +172,7 @@ q(2, "The expansion is valued with start year 2031. What does the first calendar
 q(1, "How much loss is left in the pool at the end of 2029?",
  "79.2440 million",
  ["117.8320 million", "40.6561 million", "2.0682 million"],
- "The pool enters 2029 at 117.8320 million, absorbs that year's 38.5879 million of taxable income and ends at 79.2440 million. 40.6561 and 2.0682 are the pool at the end of 2030 and 2031.")
+ "The loss carried forward at the end of 2029 reads 79.2440 million. At nine decimals, 117.831965348 carried in less taxable income of 38.587936000 leaves 79.244029348. 40.6561 and 2.0682 are the pool at the end of 2030 and 2031.")
 
 q(3, "At nine decimals, what tax does year 5 pay with the loss carried forward?",
  "10.955933596 million",
@@ -189,7 +189,7 @@ q(3, "How is a year's tax formed once a loss is being carried?",
 q(2, "What difference in total tax over the life does carrying the loss forward make?",
  "35.3496 million",
  ["196.1780 million", "11.5764 million", "64.8440 million"],
- "The two lifetime totals are 196.1780 carried and 231.5276 thrown away, and the engine prints the gap between them itself. 11.5764 is one full year's tax, and 64.8440 is a screen reading of another kind.")
+ "The two lifetime totals are 196.1780 carried and 231.5276 with the option off, and the engine prints the gap between them itself. 11.5764 is one full year's tax, and 64.8440 is a screen reading of another kind.")
 
 q(1, "How is the option-off tax column of the ODIOMA expansion produced?",
  "The same inputs through calculateEconomics directly, with the option off",
@@ -198,10 +198,10 @@ q(1, "How is the option-off tax column of the ODIOMA expansion produced?",
   "reconcilePeriod read across the 22 years of the project life"],
  "feasibilityEconomics switches lossCarryForward on. The comparison runs the same inputs through calculateEconomics directly with the option off, where each year is taxed on its own taxable income.")
 
-q(3, "If the construction loss is thrown away, when does the plant first pay tax?",
+q(3, "If the construction loss is not carried, which year pays the plant's first tax?",
  "2029, year 2",
  ["2032, year 5", "2027, year 0", "2033, year 6"],
- "Thrown away, the loss shelters nothing, so year 2, calendar 2029, is taxed at once. Carried, it pushes the first tax to 2032.")
+ "With the option off, year 2, calendar 2029, pays 11.5764. With the loss carried forward, the first year with tax to pay is year 5, 2032.")
 
 q(3, "With the loss carried forward, what net cash flow does 2032 read?",
  "27.6320",
@@ -214,7 +214,7 @@ q(2, "Which movements does materialBalance treat as leaving a tank?",
  ["Receipts and deliveries alone",
   "Unit runs, blends and transfers",
   "Receipts, unit runs and blends"],
- "Receipts are the one movement it counts in, and a unit run counts as nothing. A refinery's crude leaves through the crude unit, which is why H3 is held and no material balance is printed.")
+ "Receipts are the one movement it counts in, and a unit run counts as nothing. H3 is held and taught as a limit, and this course prints no material balance.")
 
 q(1, "What does modularrefinery_cases.json hold?",
  "8 feasibility cases, 5 scale points",
@@ -226,14 +226,14 @@ q(1, "What does modularrefinery_cases.json hold?",
 q(0, "Held item H2 leaves a fuller capital allowance model open. Which part of the Academy owns it?",
  "The Economics module",
  ["The supply course", "The crude course", "This course's Expert tier"],
- "Carrying the loss forward covers the refinery case; a fuller allowance model belongs to the Economics module. The Economics courses also own NPV, IRR, Monte Carlo and decision trees.")
+ "The held item names the Economics module as the owner of a fuller allowance model, and says carrying the loss forward covers the refinery case.")
 
 q(3, "Is there a published source in the engines repository for the 0.6 and 0.9 exponents?",
  "No; none is in the engines repository.",
  ["Yes, one is cited beside each exponent in the code.",
   "Yes, it is held in the feasibility oracle's file.",
   "Yes, it is the ODIOMA vendor quotation itself."],
- "No. The course therefore holds the exponents as a limit, and a quotation for the actual plant is what replaces them.")
+ "The held item states it: the engines repository holds none. The exponents are held, taught as a stated limit, and never graded.")
 
 q(0, "What do the engines state about crude yields?",
  "They are fixed vectors.",
@@ -249,19 +249,19 @@ q(1, "At a month-end review of ODIOMA, which figure is the month judged against?
   "The screen's NPV, 88.6345 million"],
  "The plan's margin of 4776300.00 and its gross margin per barrel of 4.7763 are what the month is read against. The actual margin of -235150.00 is what the month did.")
 
-q(0, "The course's one sentence says a refinery is judged on what?",
- "Its margin per barrel of crude",
- ["Its throughput against capacity",
-  "Its NPV at 12 percent",
-  "Its product slate by volume"],
- "A refinery is judged on its margin per barrel of crude: the screen prices that barrel, the plan finds it, the schedule dates it, and the actuals are read against it line by line on what each gap did to margin.")
+q(0, "In every year of the expansion, what does the screening engine's depreciation column equal?",
+ "The capex column of the same year",
+ ["One twentieth of the capital a year",
+  "Zero until commissioning in 2029",
+  "The loss carried forward at year end"],
+ "Under held item H2 capital is depreciated in the year it is spent, and the screen confirms the two columns match year by year: 58.9160 in years 0 and 1, then 0.0000 from year 2.")
 
-q(1, "What does this tier teach doing with money that moved with no barrels?",
- "Keep it in its own column, where a reader can see it.",
- ["Fold it into the line's volume variance.",
-  "Spread it over the line's price variance.",
-  "Drop it from every total on margin."],
- "The engine keeps it in the unexplained column: 212000.00 on the Forcados line as recorded, and -212000.00 in the headline row on margin. It stays visible so the question of what the money was for stays open.")
+q(1, "What does attributeVariance do with money that moved with no barrels?",
+ "It shows it in its own column, the unexplained.",
+ ["It folds it into the line's volume variance.",
+  "It spreads it over the line's price variance.",
+  "It drops it from every total on margin."],
+ "The engine keeps it in the unexplained column: 212000.00 on the Forcados line as recorded, and -212000.00 in the headline row on margin. The volume and price variances take none of it: the Forcados line reads -30720000.00 and 0.00 on those two.")
 
 emit(Q, '/root/wt-md-refinery-nextgen/tools/course-banks/refinery/advanced/rfa_exam.json', expect_n=42)
 finish()
