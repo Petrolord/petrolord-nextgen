@@ -1724,6 +1724,41 @@
       "group": "local-only",
       "vendoredSha": "e54c1b25a05e2fc5102c020a44ea2957688e7b66",
       "reason": "Authored in NextGen and never upstreamed to the engines repo. A whole-tree subtree pull would delete it, which is how the Suite lost 24 files on 2026-09-14."
+    },
+    {
+      "path": "__tests__/hse.safetyStats.test.js",
+      "kind": "differing",
+      "group": "h1-safetystats-course",
+      "vendoredSha": "487ed92da9e491e5504c21413b759d89c4922061",
+      "reason": "H1 safetystats course: vendored sha-identical from petrolord-engines 980199e (PR #222: pseRate base hint, Garwood upper-tail rationale, 16 tiny-q golden cases) by the wave's vendor_safetystats.sh, 4 proofs per path. Differing only because the canonical pin stays at f123a57: moving it would also move engines/economics/screening.js and other domains. Clears as STALE when the pin moves to 980199e or later."
+    },
+    {
+      "path": "engines/hse/safetyStats.js",
+      "kind": "differing",
+      "group": "h1-safetystats-course",
+      "vendoredSha": "954d83338f799780b6a1665d215ad8db79462183",
+      "reason": "H1 safetystats course: vendored sha-identical from petrolord-engines 980199e (PR #222: pseRate base hint, Garwood upper-tail rationale, 16 tiny-q golden cases) by the wave's vendor_safetystats.sh, 4 proofs per path. Differing only because the canonical pin stays at f123a57: moving it would also move engines/economics/screening.js and other domains. Clears as STALE when the pin moves to 980199e or later."
+    },
+    {
+      "path": "test-data/hse/goldens/safetyStats_cases.json",
+      "kind": "differing",
+      "group": "h1-safetystats-course",
+      "vendoredSha": "aa88804f9ded09fde56cdc6083f341f146e6b06a",
+      "reason": "H1 safetystats course: vendored sha-identical from petrolord-engines 980199e (PR #222: pseRate base hint, Garwood upper-tail rationale, 16 tiny-q golden cases) by the wave's vendor_safetystats.sh, 4 proofs per path. Differing only because the canonical pin stays at f123a57: moving it would also move engines/economics/screening.js and other domains. Clears as STALE when the pin moves to 980199e or later."
+    },
+    {
+      "path": "tools/validation/hse/FINDINGS-safetystats.md",
+      "kind": "differing",
+      "group": "h1-safetystats-course",
+      "vendoredSha": "6b34f529e1bd2057ae6065da1bd689b8605ea270",
+      "reason": "H1 safetystats course: vendored sha-identical from petrolord-engines 980199e (PR #222: pseRate base hint, Garwood upper-tail rationale, 16 tiny-q golden cases) by the wave's vendor_safetystats.sh, 4 proofs per path. Differing only because the canonical pin stays at f123a57: moving it would also move engines/economics/screening.js and other domains. Clears as STALE when the pin moves to 980199e or later."
+    },
+    {
+      "path": "tools/validation/hse/oracle_safetystats.py",
+      "kind": "differing",
+      "group": "h1-safetystats-course",
+      "vendoredSha": "540a27c41be233e07910dc6adebf02224bc43cbf",
+      "reason": "H1 safetystats course: vendored sha-identical from petrolord-engines 980199e (PR #222: pseRate base hint, Garwood upper-tail rationale, 16 tiny-q golden cases) by the wave's vendor_safetystats.sh, 4 proofs per path. Differing only because the canonical pin stays at f123a57: moving it would also move engines/economics/screening.js and other domains. Clears as STALE when the pin moves to 980199e or later."
     }
   ]
 }

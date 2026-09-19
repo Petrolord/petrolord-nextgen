@@ -134,7 +134,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Rates on every base, interval limits, rate ratios, p-values, proportions, exposure units, centre lines and derived hours print to SIX decimals; chi-square and gamma quantities print to TWELVE; counts and stated hours are whole numbers; relative differences print in exponent form.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines f123a57, ${engineLines} lines, importing nothing. The vendored golden test-data/hse/goldens/safetyStats_cases.json carries ${CASES.length} cases, ${refusalsInGolden} of them refusals, written by the scipy and mpmath oracle.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 980199e, ${engineLines} lines, importing nothing. The vendored golden test-data/hse/goldens/safetyStats_cases.json carries ${CASES.length} cases, ${refusalsInGolden} of them refusals, written by the scipy and mpmath oracle.`);
 w();
 w('# WHAT IS NEVER IN THIS FILE. No capstone workplace, no capstone count or hours and no graded answer. The capstones run their own workplaces and the digest never names them.');
 w();

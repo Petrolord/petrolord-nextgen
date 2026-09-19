@@ -13,7 +13,7 @@
  "engines": [
   "engines/hse/safetyStats.js"
  ],
- "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines f123a575 (engines PR #216). The canonical pin in VENDOR.json moves 5cbdca5 -> f123a57; the only paths that differ between those commits are README.md (ledgered group 7, pinned by vendored sha) and the six hse paths vendored here, so no live course's graded value moves. SIX paths, walked by vendor_safetystats.sh over a git-archive export of the commit with the jest suite as the only seed: the suite, the engine and the golden it reads at runtime; plus three NAMED paths (oracle_safetystats.py, FINDINGS-safetystats.md, negcontrol_safetystats.sh, mode 755 as upstream). 6 paths x 4 proofs (blob hash, sha256, cmp, byte count) = 24, zero deviations. VENDOR.manifest regenerated from the clone (816 paths) and verified; guard clean, 666 paths compared.",
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines f123a575 (engines PR #216). The canonical pin in VENDOR.json moves 5cbdca5 -> f123a57; the only paths that differ between those commits are README.md (ledgered group 7, pinned by vendored sha) and the six hse paths vendored here, so no live course's graded value moves. SIX paths, walked by vendor_safetystats.sh over a git-archive export of the commit with the jest suite as the only seed: the suite, the engine and the golden it reads at runtime; plus three NAMED paths (oracle_safetystats.py, FINDINGS-safetystats.md, negcontrol_safetystats.sh, mode 755 as upstream). 6 paths x 4 proofs (blob hash, sha256, cmp, byte count) = 24, zero deviations. VENDOR.manifest regenerated from the clone (816 paths) and verified; guard clean, 666 paths compared. RE-VENDORED 2026-09-19 from petrolord-engines 980199e (engines PR #222: pseRate base-refusal hint, Garwood upper-tail rationale comment, test, +16 tiny-q golden cases, oracle, FINDINGS) by the same script, now in its keep-the-pin mode: the canonical pin STAYS at f123a57 because f123a57..980199e also moves engines/economics/screening.js, the downstream engines and the H2/H3 hse engines. 6 paths x 4 proofs = 24, all IDENTICAL; the 5 paths that now differ from the f123a57 manifest (suite, engine, golden, oracle, FINDINGS; negcontrol unchanged) are ledgered in VENDOR.json as kind differing, group h1-safetystats-course, pinned to their vendored blobs; guard clean, 666 paths compared, 266 recorded deviations. Digest numbers unchanged: only the header line moved (engine 620 -> 627 lines, golden 321 -> 337 cases, commit f123a57 -> 980199e); fields.json and precision.json byte-identical.",
  "constants": {
   "$comment": "The engine exports RATE_BASES (200000, 1000000, 100000000) and no other constant a course could grade. Digest section 1 prints them from the export and section 3 checks 100 x 40 x 50 against OSHA_200K. The Lanczos coefficients and the iteration tolerances are implementation, not teaching, and are never graded."
  },
@@ -81,8 +81,8 @@
  "digest": {
   "lines": 622,
   "sections": 28,
-  "md5": "3299a936e5de1f48e5620d82bd0938ee",
-  "sha256": "eb05505eae6b9c53ed1e999a2a5f20765700268fe38cbd273afc6bb1360538ad"
+  "md5": "5f9677ff5c10ddf69d904cd9870551bf",
+  "sha256": "1591f83cff4d22372aca78a850f0428ddaa2124347d642a3c81feec119e6ae4d"
  },
  "history": {
   "position": "THIS ENGINE HAS NO REPAIR HISTORY: written, oracle-gated and merged in one pull request. No history module, no framed history section; structure.py and digest_prose.rules.mjs refuse any key, title or heading that reads as one."
@@ -109,7 +109,7 @@
  "cleared_claims_note": "digestfigures.py K11 reports a count it cannot recompute and a wave clears it by name once somebody has read it. THIS ONE WAS READ: the 7 is the BLS worked example's recordable count, printed in the count column of the row above it (7 cases in 400000 hours), and the sentence makes no claim about how many ROWS carry it.",
  "gates": {
   "structure.py": {
-   "md5": "7ff09e52f70664d203f0790e8b46cf2e",
+   "md5": "c6649bc3ac7192f2de67bb76731f3383",
    "command": "python3 structure.py",
    "expected": 0,
    "exit": 0,
@@ -337,7 +337,7 @@
    "command": "node gate_claims.mjs --plant-a-recon-figure",
    "expected": 1,
    "exit": 1,
-   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 2."
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 1."
   }
  }
 }

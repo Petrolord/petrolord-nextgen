@@ -2,7 +2,7 @@
 # lessons a tier. The first course of the academy's `hse` module (path_order 61).
 #
 # Engine: engines/hse/safetyStats.js, vendored sha-identical with
-# petrolord-engines f123a57 (engines PR #216). It imports nothing, so the
+# petrolord-engines 980199e (engines PR #216, re-vendored after #222). It imports nothing, so the
 # vendoring closure walked from the jest suite is SIX paths: three reached by the
 # walk (the suite, the engine, the golden it reads) and three NAMED with their
 # reason (the scipy/mpmath oracle, the FINDINGS record, the negative-control

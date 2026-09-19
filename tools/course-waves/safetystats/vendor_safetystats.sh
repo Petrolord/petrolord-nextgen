@@ -7,7 +7,7 @@
 # negative-control script that produced the FINDINGS table) are NAMED with the
 # reason they travel.
 #
-# THE WALK RUNS OVER AN EXPORT OF THE PINNED COMMIT, never over a working tree:
+# THE WALK RUNS OVER AN EXPORT OF THE COMMIT, never over a working tree:
 # /root/petrolord-engines is a shared clone whose checked-out branch is whatever
 # the last session left it on, so reading files from it would vendor a branch
 # rather than a commit. `git archive $REV` is the commit and nothing else.
@@ -15,22 +15,33 @@
 # Four independent proofs per path: the git blob hash, a sha256 over the bytes,
 # a byte-for-byte cmp, and a byte COUNT on both sides.
 #
-# AND THE PIN MOVES. Canonical 5cbdca5 -> f123a57 changes exactly seven paths:
-# README.md (a ledgered, pinned-by-vendored-sha deviation, group 7) and the six
-# new hse paths. Nothing a live course grades moves, which `git diff --stat
-# 5cbdca5 f123a57` proves and this script prints before it touches anything.
+# TWO PASSES, TWO LEDGER MODES.
+#   Pass 1 (engines PR #216, f123a57) MOVED THE PIN 5cbdca5 -> f123a57: that
+#   canonical move changed only README.md (ledgered group 7) and the six new
+#   hse paths, so no live course's graded value moved.
+#   Pass 2 (engines PR #222, 980199e) DOES NOT MOVE THE PIN. f123a57..980199e
+#   also carries engines/economics/screening.js, the downstream engines and the
+#   H2/H3 hse engines; moving the pin would reopen live graded economics values
+#   and ledger other branches' paths. So the closure is vendored sha-identical
+#   from REV while the pin stays where VENDOR.json has it, and every closure
+#   path whose blob now differs from the pinned manifest is ledgered in
+#   VENDOR.json as kind "differing", group "h1-safetystats-course", pinned to
+#   its vendored blob. Only entries in that group are touched; a closure path
+#   back in step with the manifest has its entry removed, so the guard never
+#   sees it STALE.
+# REV=<sha> vendors another commit. When REV equals the pin the script also
+# regenerates VENDOR.manifest from the clone, as pass 1 did.
 set -euo pipefail
 ENG=/root/petrolord-engines
 NG=${NG:-/root/wt-h1-nextgen}
-OLD=5cbdca5
-REV=f123a57
-FULL=$(git -C "$ENG" rev-parse "$REV")
+PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
+REV=${REV:-980199ed}
+FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 EXP=$(mktemp -d)
 trap 'rm -rf "$EXP"' EXIT
 git -C "$ENG" archive "$FULL" | tar -x -C "$EXP"
 
-echo "CANONICAL MOVE $OLD -> ${FULL:0:7}: every path that differs"
-git -C "$ENG" diff --stat "$OLD" "$FULL" | sed 's/^/  /'
+echo "PIN ${PIN:0:7}, VENDORING FROM ${FULL:0:7}"
 echo
 
 cd "$EXP"
@@ -88,12 +99,17 @@ N=$(printf '%s\n' "$PATHS" | grep -c .)
 echo "  closure size: $N paths ($WALKED walked, $((N - WALKED)) named)"
 printf '%s\n' "$PATHS" | while read -r p; do printf '    %-52s %s\n' "$p" "${CLOSURE[$p]}"; done
 echo
-# Every hse path in the commit must be in the closure, so nothing in the domain
-# is silently left behind.
-HSE_ALL=$(git -C "$ENG" ls-tree -r --name-only "$FULL" | grep -E '(^|/)hse(/|\.)' | sort)
-MISSED=$(comm -23 <(printf '%s\n' "$HSE_ALL") <(printf '%s\n' "$PATHS") | grep -v '^engines/economics/' || true)
-if [ -n "$MISSED" ]; then echo "REFUSES: hse paths in ${FULL:0:7} outside the closure: $MISSED"; exit 1; fi
-echo "  every hse path at ${FULL:0:7} is in the closure (engines/economics/fdp/hseCalculations.js is the EC6 module, already vendored and unchanged)"
+# Every safetyStats path in the commit must be in the closure, so nothing of
+# this engine is silently left behind. Scoped to safetyStats: from 870cc8f on,
+# engines/hse also holds the H2 exposure and H3 LOPA engines, which their own
+# courses vendor.
+SS_ALL=$(git -C "$ENG" ls-tree -r --name-only "$FULL" | grep -iE 'safetystats' | sort)
+MISSED=$(comm -23 <(printf '%s\n' "$SS_ALL") <(printf '%s\n' "$PATHS") || true)
+if [ -n "$MISSED" ]; then echo "REFUSES: safetyStats paths in ${FULL:0:7} outside the closure: $MISSED"; exit 1; fi
+echo "  every safetyStats path at ${FULL:0:7} is in the closure"
+echo
+echo "WHAT MOVES against the pin ${PIN:0:7}, closure paths only:"
+printf '%s\n' "$PATHS" | xargs git -C "$ENG" diff --stat "$PIN" "$FULL" -- | sed 's/^/  /'
 echo
 
 # ---- copy and prove -----------------------------------------------------
@@ -123,22 +139,60 @@ done
 echo
 echo "$N paths x 4 checks = $((N*4)) proofs, all IDENTICAL against engines ${FULL:0:7}"
 
-# ---- the ledger: pin and manifest ----------------------------------------
-{
-  printf '# Canonical petrolord-engines tree at the commit pinned in VENDOR.json.\n'
-  printf '# Generated, do not hand edit: node tools/check-vendored-engines.mjs --canonical <clone> verifies it.\n'
-  printf '# commit %s\n' "$FULL"
-  git -C "$ENG" ls-tree -r "$FULL" | awk '{print $3" "$4}'
-} > "$NG/packages/engines/VENDOR.manifest"
-python3 - "$NG/packages/engines/VENDOR.json" "$FULL" <<'PY'
-import json, sys
-p, full = sys.argv[1], sys.argv[2]
-v = json.load(open(p))
-old = v['canonical']['commit']
-v['canonical']['commit'] = full
-open(p, 'w').write(json.dumps(v, indent=2, ensure_ascii=False) + '\n')
-print(f'  VENDOR.json canonical.commit {old[:7]} -> {full[:7]}')
+# ---- the ledger ------------------------------------------------------------
+if [ "$FULL" = "$PIN" ]; then
+  {
+    printf '# Canonical petrolord-engines tree at the commit pinned in VENDOR.json.\n'
+    printf '# Generated, do not hand edit: node tools/check-vendored-engines.mjs --canonical <clone> verifies it.\n'
+    printf '# commit %s\n' "$FULL"
+    git -C "$ENG" ls-tree -r "$FULL" | awk '{print $3" "$4}'
+  } > "$NG/packages/engines/VENDOR.manifest"
+  echo "  VENDOR.manifest regenerated at ${FULL:0:7}: $(grep -vc '^#' "$NG/packages/engines/VENDOR.manifest") paths"
+fi
+LEDGER_PY=$(mktemp)
+trap 'rm -rf "$EXP" "$LEDGER_PY"' EXIT
+cat > "$LEDGER_PY" <<'PY'
+import json, subprocess, sys
+vj, man, ng, full = sys.argv[1:5]
+paths = [l for l in sys.stdin.read().split('\n') if l]
+GROUP = 'h1-safetystats-course'
+canon = {}
+for line in open(man):
+    if line.startswith('#') or not line.strip():
+        continue
+    sha, p = line.rstrip('\n').split(' ', 1)
+    canon[p] = sha
+v = json.load(open(vj))
+pin = v['canonical']['commit']
+devs = v['knownDeviations']
+foreign = [e['path'] for e in devs if e['path'] in paths and e.get('group') != GROUP]
+if foreign:
+    sys.exit(f'REFUSES: closure paths ledgered by another group: {foreign}')
+keep = [e for e in devs if not (e.get('group') == GROUP and e['path'] in paths)]
+added = []
+for p in paths:
+    blob = subprocess.check_output(['git', 'hash-object', f'{ng}/packages/engines/{p}'], text=True).strip()
+    if p not in canon:
+        sys.exit(f'REFUSES: {p} is not in the pinned manifest; this script ledgers differing paths only')
+    if canon[p] == blob:
+        continue
+    added.append({
+        'path': p, 'kind': 'differing', 'group': GROUP, 'vendoredSha': blob,
+        'reason': (f"H1 safetystats course: vendored sha-identical from petrolord-engines {full[:7]} "
+                   f"(PR #222: pseRate base hint, Garwood upper-tail rationale, 16 tiny-q golden cases) by the wave's "
+                   f"vendor_safetystats.sh, 4 proofs per path. Differing only because the canonical pin stays at {pin[:7]}: "
+                   f"moving it would also move engines/economics/screening.js and other domains. Clears as STALE when the "
+                   f"pin moves to {full[:7]} or later."),
+    })
+v['knownDeviations'] = keep + added
+open(vj, 'w').write(json.dumps(v, indent=2, ensure_ascii=False) + '\n')
+print(f'  VENDOR.json: pin {pin[:7]} unchanged; group {GROUP}: {len(added)} differing path(s) ledgered')
+for e in added:
+    print(f"    {e['path']}  {e['vendoredSha'][:12]}")
 PY
-echo "  VENDOR.manifest regenerated at ${FULL:0:7}: $(grep -vc '^#' "$NG/packages/engines/VENDOR.manifest") paths"
+printf '%s\n' "$PATHS" | python3 "$LEDGER_PY" "$NG/packages/engines/VENDOR.json" "$NG/packages/engines/VENDOR.manifest" "$NG" "$FULL"
 echo
+# The guard reads blobs from the INDEX (git ls-files -s), so the closure and the
+# ledger are staged by path first; nothing outside them is touched.
+printf '%s\n' "$PATHS" | sed 's|^|packages/engines/|' | xargs git -C "$NG" add -- packages/engines/VENDOR.json packages/engines/VENDOR.manifest
 cd "$NG" && node tools/check-vendored-engines.mjs --canonical "$ENG"

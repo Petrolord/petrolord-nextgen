@@ -4,7 +4,7 @@
 
 # PRECISION. Rates on every base, interval limits, rate ratios, p-values, proportions, exposure units, centre lines and derived hours print to SIX decimals; chi-square and gamma quantities print to TWELVE; counts and stated hours are whole numbers; relative differences print in exponent form.
 
-# ENGINE. engines/hse/safetyStats.js, vendored sha-identical with petrolord-engines f123a57, 620 lines, importing nothing. The vendored golden test-data/hse/goldens/safetyStats_cases.json carries 321 cases, 22 of them refusals, written by the scipy and mpmath oracle.
+# ENGINE. engines/hse/safetyStats.js, vendored sha-identical with petrolord-engines 980199e, 627 lines, importing nothing. The vendored golden test-data/hse/goldens/safetyStats_cases.json carries 337 cases, 22 of them refusals, written by the scipy and mpmath oracle.
 
 # WHAT IS NEVER IN THIS FILE. No capstone workplace, no capstone count or hours and no graded answer. The capstones run their own workplaces and the digest never names them.
 
