@@ -67,6 +67,11 @@ const pbl = (v) => fx(v, 4);          // US dollars a barrel
 const pct = (v) => (v === null ? 'null' : fx(v * 100, 2)); // a fraction printed as a percent
 const frac = (v) => fx(v, 4);         // a fraction
 const mmd = (v) => fx(v, 4);          // millions of US dollars (the screening engine's unit)
+// A difference or a sum the digest prints is taken over the PRINTED figures,
+// so a reader who subtracts the printed numbers gets the printed answer to the
+// last digit. The unrounded engine figures are never subtracted for print.
+const pdiff = (a, b, f) => f(Number(f(a)) - Number(f(b)));
+const psum = (xs, f) => f(xs.reduce((acc, x) => acc + Number(f(x)), 0));
 const row = (...cells) => out(`| ${cells.join(' | ')} |`);
 const head = (...cells) => { row(...cells); row(...cells.map(() => '---')); };
 const q = (s) => `"${s}"`;
@@ -164,7 +169,7 @@ const ev = (ledger, a, i) => SM.makeEvent({ id: `${ledger}-${i + 1}`, ledger, ty
 out('# refinery: Refinery Feasibility & Planning. Teaching digest.');
 out('# Precision: barrels print to two decimals, US dollars to two decimals, US dollars a barrel to four decimals, percents to two decimals, fractions to four decimals, and the screening engine\'s millions of US dollars to four decimals. Counts are whole numbers.');
 out(`# PERIOD START: ${F.PERIOD_START}, a ${F.PERIOD_DAYS}-day period. Every schedule in this digest is cascaded from this one period start, passed to the engine as that YYYY-MM-DD string; the period crosses the North American spring clock change. START YEAR: ${F.START_YEAR}, passed to every valuation. Nothing below read the machine clock, and the generator refuses to print a line from a call that did not pass them.`);
-out('# ENGINES: engines/downstream (refineryPlanning, streamModel, modularRefinery) and lib/lp/simplex at petrolord-engines 60ee266, and engines/economics/screening as NextGen vendors it (an older copy carrying the lossCarryForward option), under packages/engines.');
+out('# ENGINES: engines/downstream (refineryPlanning, streamModel, modularRefinery) and lib/lp/simplex at petrolord-engines e4d3b10, and engines/economics/screening as NextGen vendors it (an older copy carrying the lossCarryForward option), under packages/engines.');
 out('# CASES: OKORDIA (a modular refinery feasibility screen), ABUA (one month\'s refinery plan and its schedule), ODIOMA (a month\'s plan, its actuals and variance, and a conversion expansion valued through the screening engine). All three are invented records. Crude grade names are labels on invented yields and prices, and every price and cost in this digest is illustrative, in US dollars.');
 out('# Built by build_digest.sh from refinery_dump.mjs and refinery_fields.mjs. Never edited by hand.');
 
@@ -229,6 +234,8 @@ section('A BLANK BOX IS REFUSED');
   row('streams refused for a blank crude cost', refusal(MR.feasibilityEconomics({ streams: bad, discountRate: 12, taxRate: 30, startYear: F.START_YEAR }).error, 'econ blank'));
   const good = MR.feasibilityStreams(base);
   row('tax rate left out of the call', refusal(MR.feasibilityEconomics({ streams: good, discountRate: 12, startYear: F.START_YEAR }).error, 'econ no tax'));
+  row('tax rate left blank', refusal(MR.feasibilityEconomics({ streams: good, discountRate: 12, taxRate: '', startYear: F.START_YEAR }).error, 'econ blank tax'));
+  row('discount rate typed as null', refusal(MR.feasibilityEconomics({ streams: good, discountRate: null, taxRate: 30, startYear: F.START_YEAR }).error, 'econ null discount'));
 }
 
 /* ------------------------------------------------------------------ */
@@ -241,6 +248,11 @@ section('THE SCALING LAWS AND THE CROSSOVER');
   head('capacity (bpd)', 'modular cost (0.9)', 'modular per bpd', 'stick-built cost (0.6)', 'stick-built per bpd', 'ratio', 'modular cheaper', 'the two laws equal');
   for (const r of rows) {
     row(r.capacity, usd(r.modularCost), usd(r.modularPerBpd), usd(r.stickBuiltCost), usd(r.stickBuiltPerBpd), frac(r.ratio), String(r.modularCost < r.stickBuiltCost), String(r.modularCost === r.stickBuiltCost));
+  }
+  {
+    const dec = (k) => rows.every((r, i) => i === 0 || Number(usd(r[k])) < Number(usd(rows[i - 1][k])));
+    out('');
+    out(`Down the table, capital per bpd falls at every step as capacity rises: modular ${dec('modularPerBpd')}, stick-built ${dec('stickBuiltPerBpd')}. Total capital rises at every step: modular ${rows.every((r, i) => i === 0 || r.modularCost > rows[i - 1].modularCost)}, stick-built ${rows.every((r, i) => i === 0 || r.stickBuiltCost > rows[i - 1].stickBuiltCost)}.`);
   }
   out('');
   const lin = MR.scaleCapex({ baseCost: O.baseCost, baseCapacity: O.baseCapacity, capacity: 10000, exponent: 1 });
@@ -298,6 +310,16 @@ section('THROUGHPUT, THE GROSS MARGIN AND THE ANNUAL STREAMS');
     row(y.year, String(y.producing), bbl(y.crudeBbl), usd(y.revenue), usd(y.crudeCost), usd(y.fixedOpex), usd(y.variableOpex), usd(y.capex));
   }
   out(`years in the streams: ${st.years.length} (construction years plus operating years)`);
+  {
+    const y = st.years[O.constructionYears];
+    const same = st.years.filter((x) => x.producing).every((x) => ['crudeBbl', 'revenue', 'crudeCost', 'fixedOpex', 'variableOpex', 'capex'].every((k) => x[k] === y[k]));
+    out(`The table prints years 0 to 3 and the last year. Every producing year carries the same figures as year ${O.constructionYears}: ${same}. The first producing year is year ${O.constructionYears}; the last is year ${st.years.length - 1}.`);
+    out('How each column of a producing year is built, from the figures printed above:');
+    out(`revenue = crude run x gross value per barrel: ${bbl(y.crudeBbl)} x ${pbl(slate.grossValuePerBbl)} = ${usd(Number(bbl(y.crudeBbl)) * Number(pbl(slate.grossValuePerBbl)))}; the engine's figure ${usd(y.revenue)}`);
+    out(`crude cost = crude run x crude cost with the scenario premium: ${bbl(y.crudeBbl)} x ${pbl(O.crudeCostPerBbl + firm.crudePremium)} = ${usd(Number(bbl(y.crudeBbl)) * Number(pbl(O.crudeCostPerBbl + firm.crudePremium)))}; the engine's figure ${usd(y.crudeCost)}`);
+    out(`variable opex = crude run x variable operating cost: ${bbl(y.crudeBbl)} x ${pbl(O.variableOpexPerBbl)} = ${usd(Number(bbl(y.crudeBbl)) * Number(pbl(O.variableOpexPerBbl)))}; the engine's figure ${usd(y.variableOpex)}`);
+    out(`fixed opex starts in the first producing year: year ${O.constructionYears - 1} ${usd(st.years[O.constructionYears - 1].fixedOpex)}, year ${O.constructionYears} ${usd(y.fixedOpex)}`);
+  }
   out('');
   const nameplate = streamsFor(O, { scenarioId: 'firm', capex: cap.cost, slate, utilisation: 1 });
   out(`The same plant at utilisation 1 (nameplate every on-stream day): annual throughput ${bbl(nameplate.annualBbl)} bbl.`);
@@ -305,6 +327,19 @@ section('THROUGHPUT, THE GROSS MARGIN AND THE ANNUAL STREAMS');
   out(`With no construction period the capital is spent in year 0, the first operating year: year 0 capex ${usd(zero.years[0].capex)}, year 0 crude run ${bbl(zero.years[0].crudeBbl)} bbl, years in the streams ${zero.years.length}.`);
   const three = streamsFor(O, { scenarioId: 'firm', capex: cap.cost, slate, constructionYears: 3 });
   out(`With three construction years the capital is spread evenly: ${three.years.slice(0, 3).map((y) => usd(y.capex)).join(', ')}.`);
+  out(`capital / construction years = ${usd(three.capex)} / 3. Each year is printed to the cent and the engine carries the unrounded thirds, which sum to the capital: ${Math.abs(three.years.slice(0, 3).reduce((a, y) => a + y.capex, 0) - three.capex) < 1e-6}. With three construction years the first producing year is year ${three.years.findIndex((y) => y.producing)} and the streams hold ${three.years.length} years.`);
+  {
+    const blanks = [['on-stream days', { onstreamDays: '' }], ['utilisation', { utilisation: '' }], ['project life', { projectLife: '' }], ['construction years', { constructionYears: '' }]];
+    const s0 = MR.feasibilityStreams({ capacityBpd: O.capacityBpd, crudeCostPerBbl: O.crudeCostPerBbl, slate, fixedOpexPerYear: O.fixedOpexPerYear, variableOpexPerBbl: O.variableOpexPerBbl, capex: cap.cost });
+    out('');
+    out('A schedule term left blank or left out reads as the engine\'s stated default for that term. The OKORDIA plant with every schedule term left out, then with one term left blank at a time:');
+    head('schedule term', 'annual throughput (bbl)', 'years in the streams', 'year 0 capex');
+    row('every term left out', bbl(s0.annualBbl), s0.years.length, usd(s0.years[0].capex));
+    for (const [label, patch] of blanks) {
+      const r = MR.feasibilityStreams({ capacityBpd: O.capacityBpd, crudeCostPerBbl: O.crudeCostPerBbl, slate, fixedOpexPerYear: O.fixedOpexPerYear, variableOpexPerBbl: O.variableOpexPerBbl, capex: cap.cost, ...patch });
+      row(`${label} blank`, bbl(r.annualBbl), r.years.length, usd(r.years[0].capex));
+    }
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -427,6 +462,10 @@ section('THE CRUDE UNIT CARRIES EVERY BARREL');
   out('The row is written only when some unit has no feed. The same configuration with the crude unit given a feed stream that no crude makes, so no unit is feedless:');
   out(`crude unit throughput ${bbl(cd2.throughput)} bbl beside a crude run of ${bbl(noFeedless.totalCrude)} bbl; crude unit operating cost ${usd(cd2.cost)}; margin ${usd(noFeedless.margin)} against ${usd(p.margin)} for the configuration as typed.`);
   out('A configuration whose crude unit is not feedless has no crude unit in the plan, and its capacity and operating cost bind nothing.');
+  {
+    const shut = RP.planRefinery({ ...planInput(A), units: A.units.map((u) => (u.feed ? u : { ...u, feed: 'crude_feed', capacity: 0 })) });
+    out(`crude unit utilisation in that configuration: ${pct(cd2.utilisation)} percent; margin difference from the configuration as typed: ${pdiff(noFeedless.margin, p.margin, usd)}. The same configuration with that unit's capacity typed as 0: margin ${usd(shut.margin)}, the same margin: ${usd(shut.margin) === usd(noFeedless.margin)}.`);
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -459,10 +498,18 @@ section('THE ABUA PLAN UNDER FIVE CHANGES');
   const put = (label, p) => {
     if (p.status !== 'optimal') { row(label, p.status, '-', '-', '-', '-', '-'); return; }
     const cdu = p.unitRuns.find((u) => u.crudeUnit);
-    row(label, p.status, bbl(p.totalCrude), pct(cdu.utilisation), usd(p.margin), pbl(p.grossMarginPerBbl), usd(p.margin - base.margin));
+    row(label, p.status, bbl(p.totalCrude), pct(cdu.utilisation), usd(p.margin), pbl(p.grossMarginPerBbl), pdiff(p.margin, base.margin, usd));
   };
   put('the plan as typed', base);
   for (const v of A.variants) put(v.label, RP.planRefinery(withSet(A, v.set)));
+  out('');
+  out('The gross margin per barrel under each change, and its change from the plan as typed (taken over the printed figures):');
+  head('change', 'gross margin per bbl', 'change from the plan as typed');
+  row('the plan as typed', pbl(base.grossMarginPerBbl), pbl(0));
+  for (const v of A.variants) {
+    const x = RP.planRefinery(withSet(A, v.set));
+    row(v.label, x.status === 'optimal' ? pbl(x.grossMarginPerBbl) : '-', x.status === 'optimal' ? pdiff(x.grossMarginPerBbl, base.grossMarginPerBbl, pbl) : '-');
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -483,13 +530,42 @@ section('WHAT ANOTHER BARREL OF EACH STREAM IS WORTH');
   row('the plan as typed', ...mv(p));
   for (const v of A.variants) row(v.label, ...mv(RP.planRefinery(withSet(A, v.set))));
   out('');
+  {
+    // Where two stream values come from, written with the printed figures.
+    const mvP = (plan, id) => Number(pbl(plan.streamBalance.find((b) => b.id === id).marginalValue));
+    const ref = A.units.find((u) => u.id === 'reformer');
+    const refRun = p.unitRuns.find((u) => u.id === 'reformer');
+    const terms = Object.entries(ref.yields).map(([k, v]) => `${frac(v)} x ${pbl(mvP(p, k))}`).join(' + ');
+    const val = Object.entries(ref.yields).reduce((a, [k, v]) => a + v * mvP(p, k), 0) - ref.opex;
+    out('');
+    out(`Naphtha through the reformer. The reformer runs at ${pct(refRun.utilisation)} percent, below its capacity, so one more barrel of naphtha goes through it: what the reformer makes from a barrel at the stream values, less its operating cost, is ${terms} - ${pbl(ref.opex)} = ${pbl(val)}; the plan's naphtha value ${pbl(mvP(p, 'naphtha'))}.`);
+    const breakEven = (plan, input, target) => {
+      const cdu = input.units.find((u) => !u.feed);
+      const k = plan.crudeRuns.findIndex((c, i) => c.volume > 1e-6 && c.volume < input.crudes[i].available - 1e-6);
+      const cr = input.crudes[k];
+      const others = Object.entries(cr.yields).filter(([id]) => id !== target);
+      const cost = cr.cost + cdu.opex;
+      const rest = others.reduce((a, [id, y]) => a + y * mvP(plan, id), 0);
+      const v = (Number(pbl(cost)) - rest) / cr.yields[target];
+      return { cr, cdu, others, cost, v, run: plan.crudeRuns[k] };
+    };
+    const g = breakEven(p, planInput(A), 'gasoil');
+    if (Math.abs(p.unitRuns.find((u) => u.id === 'dht').utilisation - 1) > 1e-9) throw new Error('the gasoil sentence says the hydrotreater is at capacity');
+    out(`Gasoil through the crude that is only partly run. The hydrotreater is at capacity; ${g.cr.name} runs ${bbl(g.run.volume)} of ${bbl(g.cr.available)} bbl, so one more barrel of gasoil lets the plan run less of it. A barrel of ${g.cr.name} costs ${pbl(g.cr.cost)} + ${pbl(g.cdu.opex)} (crude unit) = ${pbl(g.cost)}, and at break-even that equals what its streams are worth: (${pbl(g.cost)} - ${g.others.map(([id, y]) => `${frac(y)} x ${pbl(mvP(p, id))}`).join(' - ')}) / ${frac(g.cr.yields.gasoil)} = ${pbl(g.v)}; the plan's gasoil value ${pbl(mvP(p, 'gasoil'))}.`);
+    const fv = A.variants.find((v) => v.id === 'floors');
+    const fIn = withSet(A, fv.set);
+    const fp = RP.planRefinery(fIn);
+    const r = breakEven(fp, fIn, 'residue');
+    out('');
+    out(`Under ${fv.label}: crude runs ${fp.crudeRuns.map((c) => `${c.name} ${bbl(c.volume)}`).join(', ')}; product volumes ${fp.productMakes.map((m) => `${m.name} ${bbl(m.volume)}`).join(', ')}. The fuel oil floor is met exactly: ${bbl(fp.productMakes.find((m) => m.id === 'fuel_oil').volume) === bbl(700000)}. ${r.cr.name} is the crude only partly run, and residue is valued at its break-even: (${pbl(r.cost)} - ${r.others.map(([id, y]) => `${frac(y)} x ${pbl(mvP(fp, id))}`).join(' - ')}) / ${frac(r.cr.yields.residue)} = ${pbl(r.v)}; the plan's residue value ${pbl(mvP(fp, 'residue'))}.`);
+  }
   out('Pricing a debottleneck: the reformer capacity stepped, everything else as typed. The margin gained per extra barrel of capacity is the change in margin divided by the change in capacity, both printed:');
   head('reformer capacity (bbl)', 'reformer utilisation (percent)', 'margin', 'change in margin', 'change in capacity (bbl)', 'margin gained per extra barrel of capacity');
   let prev = null;
   for (const cap of A.reformerSweep) {
     const x = RP.planRefinery(withSet(A, [['units', 'reformer', 'capacity', cap]]));
     const ref = x.unitRuns.find((u) => u.id === 'reformer');
-    if (prev) row(bbl(cap), pct(ref.utilisation), usd(x.margin), usd(x.margin - prev.margin), bbl(cap - prev.cap), pbl((x.margin - prev.margin) / (cap - prev.cap)));
+    if (prev) row(bbl(cap), pct(ref.utilisation), usd(x.margin), pdiff(x.margin, prev.margin, usd), bbl(cap - prev.cap), pbl(Number(pdiff(x.margin, prev.margin, usd)) / (cap - prev.cap)));
     else row(bbl(cap), pct(ref.utilisation), usd(x.margin), '-', '-', '-');
     prev = { cap, margin: x.margin };
   }
@@ -529,6 +605,15 @@ section('THE SCHEDULE');
   out(`The same plan with a cargo size of 150000 bbl: crude receipts ${small.events.filter((e) => e.type === 'receipt').length}; receipt dates for Forcados: ${small.events.filter((e) => e.type === 'receipt' && e.materialId === 'forcados').map((e) => e.date).join(', ')}.`);
   const none = RP.cascadeToSchedule({ plan: RP.planRefinery(withSet(A, A.refusals.find((r) => r.id === 'infeasible').set)), periodStart: PERIOD, periodDays: F.PERIOD_DAYS, cargoSize: A.cargoSize });
   out(`An infeasible plan cascades to ${none.events.length} events, with the note ${q(none.note)}`);
+  out('');
+  out(`The cargo rule: cargoes = the crude run divided by the cargo size, rounded UP to a whole cargo (at least one); the days between cargoes = the ${F.PERIOD_DAYS} days of the period divided by the cargoes, rounded DOWN. Each crude in the plan as typed, cargo size ${bbl(A.cargoSize)} bbl:`);
+  head('crude', 'crude run (bbl)', 'crude run / cargo size', 'cargoes in the schedule', 'days between cargoes', 'receipt dates');
+  for (const c of p.crudeRuns.filter((x) => x.volume > 0)) {
+    const ev = sch.events.filter((e) => e.type === 'receipt' && e.materialId === c.id);
+    const n = Math.max(1, Math.ceil(c.volume / A.cargoSize));
+    if (n !== ev.length) throw new Error(`cargo rule disagrees for ${c.id}`);
+    row(c.name, bbl(c.volume), frac(c.volume / A.cargoSize), ev.length, Math.max(1, Math.floor(F.PERIOD_DAYS / n)), ev.map((e) => e.date).join(', '));
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -555,7 +640,7 @@ section('THE SCHEDULE IN SEVEN TIME ZONES');
   out('');
   out('The same schedule with the period start handed over as a Date built at LOCAL midnight (new Date(2027, 2, 1)). The engine reads a Date\'s UTC calendar day, so the answer depends on the zone:');
   head('time zone', 'first date', 'every date matches UTC');
-  for (const z of ['UTC', 'Africa/Lagos', 'Pacific/Kiritimati', 'America/New_York', 'Pacific/Pago_Pago']) {
+  for (const z of zones) {
     const d = run(z, 'new Date(2027, 2, 1)');
     row(z, d[0], String(JSON.stringify(d) === JSON.stringify(ref)));
   }
@@ -668,6 +753,10 @@ section('THE ODIOMA ACTUALS AND THE VARIANCE LINES');
   const fz = rec.lines.find((l) => l.materialId === 'forcados');
   out('');
   out(`The Forcados line: no barrels arrived and a bill of ${usd(fz.actualCost)} did. Its volume variance is ${usd(fz.volumeVariance)}, its price variance ${usd(fz.priceVariance)}, and the unexplained ${usd(fz.unexplained)} is the money with no barrels, shown on its own.`);
+  out('');
+  out('Each matched line\'s unit values and quantity gap: plan unit value = plan value / plan quantity; actual unit value = actual value / actual quantity (0 when no barrels arrived); quantity gap = actual quantity - plan quantity.');
+  head('material', 'type', 'plan unit value', 'actual unit value', 'quantity gap (bbl)');
+  for (const l of rec.lines) row(l.materialId, l.type, pbl(l.planQuantity > 0 ? l.planCost / l.planQuantity : 0), pbl(l.actualQuantity > 0 ? l.actualCost / l.actualQuantity : 0), pdiff(l.actualQuantity, l.planQuantity, bbl));
 }
 
 /* ------------------------------------------------------------------ */
@@ -682,16 +771,23 @@ section('TOTALS ON MARGIN, AND THE UNITS AGAINST PLAN');
   row('revenue lines, as recorded', usd(t.revenue.volumeVariance), usd(t.revenue.priceVariance), usd(t.revenue.unexplained), usd(t.revenue.totalVariance));
   out('');
   const raw = rec.lines.reduce((s, l) => s + l.totalVariance, 0);
-  out(`Adding every line's total variance as recorded, cost and revenue together, gives ${usd(raw)}; the margin total is ${usd(t.totalVariance)}. The engine prints the margin total as the headline.`);
+  out(`Adding every line's total variance as recorded, cost and revenue together, gives ${psum(rec.lines.map((l) => l.totalVariance), usd)}; the margin total is ${usd(t.totalVariance)}. The engine prints the margin total as the headline.`);
   out('');
   out('reconcilePeriod reads the margin of each ledger: deliveries less everything else that carries a value.');
   out(`plan margin ${usd(rec.planMargin)}; actual margin ${usd(rec.actualMargin)}; margin variance ${usd(rec.marginVariance)}; the plan's own margin ${usd(p.margin)}; plan gross margin per barrel ${pbl(rec.planGrossMarginPerBbl)}`);
   const un = rec.unmatched.reduce((s, u) => s + (u.type === 'delivery' ? u.cost : -u.cost), 0);
-  out(`margin variance - margin total of the matched lines = ${usd(rec.marginVariance - t.totalVariance)}; the unmatched movements, deliveries counted as revenue and the rest as cost, come to ${usd(un)}. The ledger margins count every movement; the variance lines count only the matched ones.`);
+  out(`margin variance - margin total of the matched lines = ${pdiff(rec.marginVariance, t.totalVariance, usd)}; the unmatched movements, deliveries counted as revenue and the rest as cost, come to ${usd(un)}. The ledger margins count every movement; the variance lines count only the matched ones.`);
   out('');
   out('Each unit against plan. The app reports the gap and does not say why it happened:');
   head('unit', 'planned (bbl)', 'actual (bbl)', 'difference (bbl)', 'utilisation of plan (percent)');
   for (const u of rec.unitPerformance) row(u.unitId, bbl(u.planned), bbl(u.actual), bbl(u.difference), pct(u.utilisationOfPlan));
+  out('');
+  out('dualLedgerTotals reads one ledger\'s money apart: cost is what was spent (every event that is not a delivery), revenue is what was sold (deliveries), margin = revenue - cost. It also counts events recorded with no value.');
+  head('ledger', 'events', 'cost', 'revenue', 'margin', 'uncosted events', 'the same margin as reconcilePeriod reads');
+  for (const [lg, events, m] of [['plan', odioma.sch.events, rec.planMargin], ['actual', odioma.actual, rec.actualMargin]]) {
+    const d = SM.dualLedgerTotals(events, lg);
+    row(lg, d.events, usd(d.cost), usd(d.revenue), usd(d.margin), d.uncostedEvents, String(usd(d.margin) === usd(m)));
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -714,6 +810,8 @@ const expansion = (() => {
   out(`fiscalType ${i.fiscalType}; royaltyRate ${i.royaltyRate}; taxRate ${i.taxRate}; discountRate ${i.discountRate}; lossCarryForward ${i.lossCarryForward}; projectLife ${i.projectLife} years; startYear ${i.startYear}`);
   out(`production (oil, bbl) in year 0 and in the first operating year: ${bbl(i.production.oil[0])}, ${bbl(i.production.oil[X.constructionYears])}; price (the slate's gross value) in the first operating year ${pbl(i.price.oil[X.constructionYears])}`);
   out(`opexFixed in the first operating year (fixed operating cost plus crude cost, millions) ${mmd(i.opexFixed[X.constructionYears])}; opexVariable ${mmd(i.opexVariable[X.constructionYears])}; capex in year 0 ${mmd(i.capex[0])}`);
+  out(`opex in the cash flow = opexFixed + opexVariable: ${mmd(i.opexFixed[X.constructionYears])} + ${mmd(i.opexVariable[X.constructionYears])} = ${psum([i.opexFixed[X.constructionYears], i.opexVariable[X.constructionYears]], mmd)}; the cash flow's opex ${mmd(econ.cashflow[X.constructionYears].opex)}`);
+  out(`capital ${usd(cap.cost)} is spread evenly over the ${X.constructionYears} construction years: ${st.years.slice(0, X.constructionYears).map((y) => usd(y.capex)).join(' and ')} in the streams, each printed to the cent; the engine carries the unrounded halves, which sum to the capital: ${Math.abs(st.years.slice(0, X.constructionYears).reduce((a, y) => a + y.capex, 0) - cap.cost) < 1e-6}.`);
   out('Revenue goes in as revenue (barrels at the slate\'s value), and the royalty rate is 0 because a refinery buys its crude and pays no royalty.');
   out('');
   head('year', 'calendar year', 'gross revenue (MM)', 'royalty (MM)', 'opex (MM)', 'capex (MM)', 'tax (MM)', 'tax loss carried forward (MM)', 'net cash flow (MM)');
@@ -742,7 +840,24 @@ section('TAX LOSSES CARRIED FORWARD');
   const totOn = econ.cashflow.reduce((s, c) => s + c.tax, 0);
   const totOff = off.cashflow.reduce((s, c) => s + c.tax, 0);
   out(`first year with tax to pay, loss carried forward: year ${firstTax}, tax ${mmd(econ.cashflow[firstTax].tax)} MM`);
-  out(`total tax over the life: ${mmd(totOn)} MM with the loss carried forward; ${mmd(totOff)} MM with the option off; the difference ${mmd(totOff - totOn)} MM`);
+  out('');
+  out('Each four-decimal figure above is rounded on its own, so subtracting two printed figures can differ from a printed result in the last place. Here the same years to nine decimals, the construction years through the year after the first tax. Revenue, opex and capex are the engine\'s figures; the taxable income, the two loss columns and the tax are the arithmetic on the printed columns, and each agrees with the engine\'s own figure to within two units in the ninth decimal (the generator checks it):');
+  head('year', 'gross revenue (MM)', 'opex (MM)', 'capex deducted (MM)', 'taxable income before relief (MM)', 'loss carried in (MM)', 'loss carried forward at year end (MM)', 'tax (MM)');
+  const n9 = (v) => fx(v, 9);
+  let carried = 0; // the printed (nine-decimal) loss carried in
+  for (let k = 0; k <= firstTax + 1; k += 1) {
+    const c = econ.cashflow[k];
+    const taxable = Number(n9(c.grossRevenue)) - Number(n9(c.opex)) - Number(n9(c.depreciation));
+    const pool = Math.max(0, carried - taxable);
+    const tax = Math.max(0, taxable - carried) * econ.inputs.taxRate / 100;
+    for (const [what, mine, eng] of [['taxable income', taxable, c.grossRevenue - c.royalty - c.opex - c.abex - c.depreciation], ['loss carried forward', pool, c.taxLossCarriedForward], ['tax', tax, c.tax]]) {
+      if (Math.abs(mine - eng) > 2e-9) throw new Error(`year ${k}: ${what} from the printed figures ${mine} is more than two units in the ninth decimal from the engine's ${eng}`);
+    }
+    row(k, n9(c.grossRevenue), n9(c.opex), n9(c.depreciation), n9(taxable), n9(carried), n9(pool), n9(tax));
+    carried = Number(n9(pool));
+  }
+  out(`taxable income before relief = gross revenue - opex - capex deducted; the loss carried forward = the loss carried in - taxable income, never below zero; the tax = (taxable income - the loss carried in) x the tax rate of ${econ.inputs.taxRate} percent once that is above zero.`);
+  out(`total tax over the life: ${mmd(totOn)} MM with the loss carried forward; ${mmd(totOff)} MM with the option off; the difference ${pdiff(totOff, totOn, mmd)} MM`);
   out(`NPV at ${X.discountRate} percent: ${mmd(econ.metrics.npv)} MM with the loss carried forward; ${mmd(off.metrics.npv)} MM with the option off`);
   out('feasibilityEconomics passes no capexDepreciationYears, so the screening engine deducts the capital in the year it is spent (its depreciation column equals the capex column in every year): ' + String(econ.cashflow.every((c) => Math.abs(c.depreciation - c.capex) < 1e-12)) + '.');
 }
@@ -758,6 +873,7 @@ section('HELD, DECIDED, AND WHAT THE ORACLES CHECK');
   out('HELD, taught as stated limits and never graded:');
   out(`- H1. The scaling exponents ${RAW.modularRefinery.SCALING_EXPONENT.STICK_BUILT} and ${RAW.modularRefinery.SCALING_EXPONENT.MODULAR} are defaults for a vendor's own figures to replace. No published source for them is in the engines repository.`);
   out('- H2. The screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case; a fuller allowance model belongs to the Economics module.');
+  out('- H3. materialBalance counts receipts in and deliveries, burns, flares, vents and losses out, and a unit run moves nothing. A refinery\'s crude leaves its tank through the crude unit and its products arrive from units, so the function cannot close a refinery tank; it serves a tank whose movements are receipts and deliveries. This course prints no material balance.');
   out('');
   out('Limits the engines state themselves: yields are fixed vectors; quality is not carried through the plan; one period at a time with no inventory between periods; the schedule models no tank capacity, jetty window or turnaround.');
   out('');

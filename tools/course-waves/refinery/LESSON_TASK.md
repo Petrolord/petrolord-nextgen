@@ -1,10 +1,12 @@
 # refinery LESSON TASK. Read every line before you write a word.
 
 You are writing lessons for **`refinery`, "Refinery Feasibility & Planning"**,
-the second of three Commercial & Trading courses in the NextGen `downstream`
-module ("Midstream & Downstream"), path_order 49. The sibling courses `crude`
-(Crude Assay & Blending, 48) and `supply` (Terminals, Depots & Fuel Supply, 50)
-are being written beside you. Read "The seams" before module one.
+one of the three Commercial & Trading courses, in the NextGen academy module
+`commercial_trading` ("Commercial & Trading"), path_order 49. The sibling
+course `crude` (Crude Assay & Blending, 48) is in the same module; `supply`
+(Terminals, Depots & Fuel Supply, 50) is in `supply_chain` ("Supply Chain &
+Logistics"). The engine family is still engines/downstream; only the academy
+module name changed. Read "The seams" before module one.
 
 ## The one sentence the course serves
 

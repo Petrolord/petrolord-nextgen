@@ -3,8 +3,8 @@
  "prefix": "rf",
  "name": "Refinery Feasibility & Planning",
  "pathOrder": 49,
- "module": "downstream",
- "moduleLabel": "Midstream & Downstream",
+ "module": "commercial_trading",
+ "moduleLabel": "Commercial & Trading",
  "prerequisite": null,
  "repo": "/root/wt-md-refinery-nextgen",
  "branch": "feat/md-refinery-course",
@@ -13,13 +13,15 @@
    "slug": "crude",
    "pathOrder": 48,
    "branch": "feat/md-crude-course",
-   "owns": "linear programming, crudeAssay, productBlending"
+   "owns": "linear programming, crudeAssay, productBlending",
+   "module": "commercial_trading"
   },
   {
    "slug": "supply",
    "pathOrder": 50,
    "branch": "feat/md-supply-course",
-   "owns": "terminalDepot, fuelPricing: measurement and logistics"
+   "owns": "terminalDepot, fuelPricing: measurement and logistics",
+   "module": "supply_chain"
   }
  ],
  "periodStart": "2027-03-01",
@@ -36,9 +38,9 @@
   "engines/economics/screening.js",
   "lib/lp/simplex.js"
  ],
- "enginesVendoredAt": "The shared vendor commit b1f29251 ('chore(engines): vendor the downstream family (engines 60ee266) for the Commercial & Trading courses'), made by the lead and the base of this branch; not re-vendored here. engines/economics/screening.js is NextGen's older copy (VENDOR.json group 4) with lossCarryForward patched on; the vendored downstream.refinery.golden suite passes on it, so no refinery output differs from modularrefinery_cases.json.",
+ "enginesVendoredAt": "Engines e4d3b10 (engines #224, MD2-1: dualLedgerTotals, feasibilityEconomics blank rates, blank construction years), re-vendored on this branch as b30406eb, a cherry-pick of the shared vendor commit 41d88b9f; first cut on b1f29251 (60ee266). engines/economics/screening.js is NextGen's older copy (VENDOR.json group 4) with lossCarryForward patched on; the vendored downstream.refinery.golden suite passes on it.",
  "plan": {
-  "state": "FOUNDATION: recon, structure, digest, graded fields, gates, scaffold and task files. No lesson, bank, panel or migration yet.",
+  "state": "LESSONS WRITTEN (78); EXTENSION ROUND 2026-09-19: re-vendored at e4d3b10, digest extended additively for the writers' gaps, four printed differences recomputed from the printed figures, module ruling applied. REVISE.md maps every change to lessons.",
   "thesis": "A refinery is judged on its margin per barrel of crude: the screen prices that barrel before any capital is spent, the plan finds it with every barrel run through the crude unit, the schedule dates it, and the actuals are read against it line by line on what each gap did to margin.",
   "tiers": {
    "beginner": "THE MODULAR SCREEN: modularRefinery. Graded: two capital costs, the slate value, annual throughput, gross margin per barrel, first-year revenue.",
@@ -59,7 +61,7 @@
   }
  },
  "digest": {
-  "lines": 651,
+  "lines": 729,
   "sections": 24,
   "withheld": null,
   "note": "No section is history. SECTION 24 states the owner decisions in force and the HELD items. materialBalance and dualLedgerTotals are left out (RECON 3b, 3c, STOPPED)."
@@ -71,12 +73,12 @@
  },
  "findings": {
   "3a-clock": "No clock read without an override: cascadeToSchedule (periodStart), feasibilityEconomics and calculateEconomics (startYear) found in the source and guarded; expandQuickInputs never called. Fake-clock rebuild byte-identical; schedule identical in seven zones from a string period start; a local-midnight Date moves it east of Greenwich (contract, taught).",
-  "3b-materialBalance": "STOPPED: unit runs move nothing in signedQuantity, so a refinery's crude and product tanks cannot close (ODIOMA Escravos unaccounted -724500). No Suite refinery app calls it; no oracle. Not in the digest. Lead to rule.",
-  "3c-dualLedgerTotals": "STOPPED: sums delivery values (sales) into cost (ODIOMA 121082150 = spend 60658650 + sales 60423500), the R4 class. No Suite refinery app calls it; no oracle. Not in the digest. Lead to rule.",
-  "3d-blank-rate": "STOPPED: feasibilityEconomics reads a blank or null tax or discount rate as 0 (Number('') is 0): tax '' gives NPV 94.0244 against 61.7954 at 30 percent. The Suite page substitutes its default so is not exposed. The digest prints only the left-out refusal.",
+  "3b-materialBalance": "HELD as H3 (lead ruling): taught in SECTION 24 as a present-tense limit, never graded.",
+  "3c-dualLedgerTotals": "REPAIRED in engines #224 (R7): cost, revenue and margin apart. Taught in SECTION 21, not graded (no oracle).",
+  "3d-blank-rate": "REPAIRED in engines #224 (M7): a blank or null tax or discount rate is refused. SECTION 2 prints both refusals.",
   "3f-page-payback": "The Studio's scenario table computes annual margin and simple payback in the page; no engine or oracle covers them. Not printed, not graded.",
   "5-vendored-screening": "No refinery output differs from the engines-repo golden on NextGen's older screening copy (vendored golden suite green).",
-  "3h-blank-schedule-terms": "STOPPED: feasibilityStreams' comment says blank schedule terms do not keep their defaults; the code reads blank on-stream days, utilisation and project life as the defaults and blank construction years as 0 (left out: 2). The page substitutes defaults, so is not exposed. Digest states only the refusals; nothing graded."
+  "3h-blank-schedule-terms": "REPAIRED in engines #224 (M8): every schedule term, construction years included, reads blank or absent as its default. SECTION 5 prints the table."
  },
  "decisions": [
   "Period start 2027-03-01 (31 days, crossing the 14 March 2027 North American spring change), passed as a string; start year 2027, with 2031 used once to show it labels no figure.",
@@ -84,13 +86,13 @@
   "Tax fields graded in the screening engine's millions to four decimals, the digest's own precision for that unit.",
   "Schedule counts not graded: oracle_refineryplanning.schedule_dates takes the cargo count as an input.",
   "variance_case (not parametrised) is driven by an AST edit of its two ledger literals, fed the oracle's own exact plan; accounts() by setting its PRICES table.",
-  "Manifests carry the three panel ids; courseContent.test.js 'every panel referenced is registered' is red until the panel phase registers them (the compliance precedent). downstream is NOT added to academyModules.js (the lab agent does all three).",
+  "Manifests carry the three panel ids; courseContent.test.js 'every panel referenced is registered' is red until the panel phase registers them (the compliance precedent). The academy module is commercial_trading (lead ruling 2026-09-19), which already exists in academyModules.js; the lab agent adds commercial_trading and supply_chain to CourseModuleNav MODULE_ORDER.",
   "Lesson placeholders are title-only H1 files, as compliance."
  ],
  "gates": {
   "structure": {
    "file": "structure.py",
-   "md5": "b89ff11e996e352dcc336679e233e836",
+   "md5": "edd3da9ec9d73f4a5fc4defc962272d4",
    "result": "exit 0: panels: 73 of 78 lessons carry one; ids ['refinery-plan-explorer', 'refinery-screen-explorer', 'refinery-variance-explorer']"
   },
   "digest-repro": {
@@ -111,7 +113,7 @@
   "kit-digestprose": {
    "file": "/root/dc-wavekit/digestprose.mjs",
    "md5": "97dda85819e61737a76d8caf5badb46d",
-   "result": "exit 0: [digestprose] /root/md-wip-refinery/digest.txt: 651 line(s), 24 section title(s) and 8 in-body marker(s) swept against their blocks, 32 history framings, 20 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 1 deferred as verbatim engine strings; 0 failing"
+   "result": "exit 0: [digestprose] /root/md-wip-refinery/digest.txt: 729 line(s), 24 section title(s) and 8 in-body marker(s) swept against their blocks, 32 history framings, 20 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 1 deferred as verbatim engine strings; 0 failing"
   },
   "kit-digestfigures": {
    "file": "/root/dc-wavekit/digestfigures.py",
@@ -182,7 +184,7 @@
   "kit-sourceprose": {
    "file": "/root/dc-wavekit/sourceprose.mjs",
    "md5": "c370c51a0af6d3f8098ae859fb28ae1e",
-   "result": "exit 0: [sourceprose] 4 source file(s), 205 comment line(s) examined against 32 history framings, the owner copy rule, 0 wave comment claim(s) and 0 wave source claim(s); 0 warned; 0 failing"
+   "result": "exit 0: [sourceprose] 4 source file(s), 210 comment line(s) examined against 32 history framings, the owner copy rule, 0 wave comment claim(s) and 0 wave source claim(s); 0 warned; 0 failing"
   }
  }
 }

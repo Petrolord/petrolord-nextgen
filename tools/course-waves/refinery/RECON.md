@@ -1,6 +1,7 @@
 # `refinery` RECON: Refinery Feasibility & Planning
 
-Academy module `downstream` ("Midstream & Downstream"), path_order 49, slug
+Academy module `commercial_trading` ("Commercial & Trading"; lead ruling
+2026-09-19, the engine family stays engines/downstream), path_order 49, slug
 `refinery`: the second of three Commercial & Trading courses. Subject: three
 `engines/downstream` modules and the screening engine where they meet it, as
 vendored in the shared commit b1f29251 (engines **60ee266**, the MD2-0 repairs
@@ -258,3 +259,20 @@ Not re-vendored: the shared vendor commit b1f29251 (engines 60ee266) is the
 branch base. The digest's engines are those files. One observation for the
 lead: the vendored screening IRR is the pre-irrContract copy (VENDOR.json group
 4), which this course sidesteps by printing no IRR.
+
+## 9. The extension round (2026-09-19)
+
+Lead rulings on the stopped items, engines #224 (merged e4d3b10), re-vendored on
+this branch as b30406eb (a cherry-pick of the shared vendor commit 41d88b9f):
+3c `dualLedgerTotals` REPAIRED (R7: cost, revenue and margin apart; taught in
+SECTION 21, not graded, no oracle); 3d `feasibilityEconomics` REPAIRED (M7: a
+blank or null rate is refused; SECTION 2); 3h REPAIRED (M8: every schedule term,
+construction years included, reads blank or absent as its default; SECTION 5);
+3b `materialBalance` HELD as H3 (SECTION 24, a present-tense limit, never
+graded). Module ruling: the academy module is `commercial_trading`.
+
+On the re-vendored engines the digest and all eighteen graded values rebuilt
+byte-identical before any edit. The writers' gaps (DIGEST-GAPS.md) were closed
+additively; four printed differences were recomputed from the printed figures
+(the rule: a printed difference equals the difference of the printed figures),
+which moved four cells by one cent. REVISE.md lists every change by lesson.

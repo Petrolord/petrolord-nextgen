@@ -1,5 +1,6 @@
 # refinery: Refinery Feasibility & Planning. Three tiers, six modules each, 26
-# lessons a tier. Academy module `downstream`, path_order 49.
+# lessons a tier. Academy module `commercial_trading` ("Commercial & Trading"),
+# path_order 49 (lead ruling 2026-09-19; the engine family stays engines/downstream).
 #
 # THE ONE SENTENCE. A refinery is judged on its margin per barrel of crude: the
 # screen prices that barrel before any capital is spent, the plan finds it with

@@ -18,8 +18,10 @@ Register the three ids in `src/content/courses/panelRegistry.js`:
 `refinery-variance-explorer`. The manifests already carry them, so
 `src/lib/courseContent.test.js` fails "every panel referenced by a manifest is
 registered" until they are registered. That red is expected at the foundation
-and is this phase's to clear. The `downstream` academy module is added to
-`src/lib/academyModules.js` by the lab agent for all three courses at once.
+and is this phase's to clear. The course's academy module is `commercial_trading`,
+which already exists in `src/lib/academyModules.js`; do not touch that file.
+The lab agent adds `'commercial_trading'` and `'supply_chain'` to
+CourseModuleNav MODULE_ORDER after `'hse'`, the same line in every branch.
 
 ## THE CLOCK RULE
 
