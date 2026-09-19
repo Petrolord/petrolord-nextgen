@@ -108,11 +108,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20261014_cef_carbon_course                  ) echo UNPINNED ;;
-    20261014_cef_carbon_beginner_deep           ) echo UNPINNED ;;
-    20261014_cef_carbon_intermediate_deep       ) echo UNPINNED ;;
-    20261014_cef_carbon_advanced_deep           ) echo UNPINNED ;;
-    20261014_cef_carbon_go_live                 ) echo UNPINNED ;;
+    20261014_cef_carbon_course                  ) echo 265127bddbcbc35582866963c296ead5f11fec03ce5dc0a7804ca048b53c3128 ;;
+    20261014_cef_carbon_beginner_deep           ) echo 4428731945dd75a2bff14ebf97bfa412fc9e884ac7ff0d19f39336c7e2f993cb ;;
+    20261014_cef_carbon_intermediate_deep       ) echo c30a2b9b243b98eb24d8451a9fb87a969ffe33478d450cde91eecaac15e956b4 ;;
+    20261014_cef_carbon_advanced_deep           ) echo a4d8345c08d1414b0c4c4e5a676177febc5d5105b12d7f8d2d7f646d08f3abe4 ;;
+    20261014_cef_carbon_go_live                 ) echo 5ff32760331574a604af80503ec683d37378b1f74aae0d8d08c5211b69914e26 ;;
     *) echo UNPINNED ;;
   esac
 }
