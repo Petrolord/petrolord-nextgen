@@ -1,6 +1,6 @@
 # The mean wait in minutes
 
-A probability of waiting tells a driver how likely a queue is. It does not say how long the queue will hold them. The engine's next figure does: the mean wait, printed in minutes. This lesson reads it, and reads carefully what kind of average it is.
+A probability of waiting says how likely a queue is. The mean wait, printed in minutes, says how long. This lesson reads it, and reads what kind of average it is.
 
 {{panel:supply-depot-explorer}}
 
@@ -22,9 +22,21 @@ For IBAFO at 9 arrivals an hour, 24 minute loads and 4 bays:
 
 ## An average over every truck
 
-The formula carries the probability of waiting as a factor. That tells you what the average covers: every truck that arrives, including the trucks that find a free bay and wait no time at all. Those trucks count in the mean as zero. A truck that does wait therefore waits longer, on average, than the mean wait suggests. The engine prints no figure for the wait of a truck that queues, so this course quotes none, and you should not work one out beside the engine's figure and present it as the engine's.
+The formula carries the probability of waiting as a factor. That tells you what the average covers: every truck that arrives, including the trucks that find a free bay and wait no time at all. Those trucks count in the mean as zero. The digest prints the mean wait of a truck that does queue as the mean wait over the probability of waiting: 47.2652 / 0.787753 = 60.0000 minutes. The engine's 47.2652 minutes averages over every truck; the 60.0000 minutes averages over the trucks that queue.
 
-Two practical consequences follow. First, a driver's complaint and the rack's mean wait can both be honest. The driver remembers the queues; the mean includes the trucks that drove straight onto a bay. Second, a mean wait is only comparable with another mean wait of the same kind. A figure from another depot that averages only over waiting trucks is a different quantity.
+So a driver's complaint and the rack's mean wait can both be honest: the driver remembers the queues, and the mean includes the trucks that drove straight onto a bay. A mean wait is only comparable with another of the same kind.
+
+The load minutes swept on the same 4 bays at 9 arrivals an hour:
+
+| load minutes (stated) | probability of waiting | mean wait minutes |
+| --- | --- | --- |
+| 16 | 0.287043 | 2.8704 |
+| 20 | 0.509434 | 10.1887 |
+| 22 | 0.642160 | 20.1822 |
+| 24 | 0.787753 | 47.2652 |
+| 26 | 0.945114 | 245.7297 |
+
+The load time is part of the spare capacity too. Only the load minutes change down this table, and the printed mean wait goes from 2.8704 minutes at 16 minutes a load to 245.7297 minutes at 26.
 
 ## The spare capacity drives it
 
@@ -42,7 +54,7 @@ At 3 bays there is no spare capacity at all, and the engine prints none for the 
 
 ## Time on site
 
-The mean time on site is the whole visit: the wait in the yard and the time on the bay. For a haulier this is the figure that matters, because a truck on site is a truck earning nothing. The truck lane in module five carries queueing hours in its cycle for exactly this reason, as a typed input of its own.
+The mean time on site is the whole visit: the wait in the yard and the time on the bay. For a haulier this is the figure that matters. The truck lane in module five carries queueing hours in its cycle for exactly this reason, as a typed input of its own.
 
 ## Units
 
@@ -50,4 +62,4 @@ The engine works in hours internally, because the arrivals and the service rate 
 
 ## Exercise
 
-Read IBAFO's probability of waiting, mean wait and mean time on site at 4 bays. Say what population of trucks the mean wait is averaged over, and why a driver who queued that morning might report a longer wait than the mean. Then read the bay sweep and say what the row at 3 bays prints for the wait, and what that says about the rack's spare capacity.
+Read IBAFO's probability of waiting, mean wait and mean time on site at 4 bays. Say what population of trucks the mean wait is averaged over, and use the printed 60.0000 minutes to say why a driver who queued that morning might report a longer wait than the mean. Then read the bay sweep and say what the row at 3 bays prints for the wait, and what that says about the rack's spare capacity.

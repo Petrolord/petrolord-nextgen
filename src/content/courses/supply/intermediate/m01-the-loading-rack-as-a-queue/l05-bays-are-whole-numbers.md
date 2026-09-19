@@ -16,6 +16,8 @@ The bay count goes into the Erlang recursion as a count. The engine checks it be
 
 Each row keeps IBAFO's 9 arrivals an hour and 24 minute loads. A rack of no bays loads nothing. A rack of 2.5 bays does not exist. A blank bay count is a missing input, and the engine does not fill it with a typical figure. In every case the refusal is the answer, and a panel or a spreadsheet that quietly rounds 2.5 up has changed the question without saying so.
 
+The load time is checked the same way. With 9 arrivals an hour and 4 bays, a load time of 0 minutes is refused: "Arrival rate and load time are both needed." A load that takes no time is a missing measurement, and the engine treats it as one.
+
 ## From offered load to bays
 
 The offered load is a property of the traffic. The bay count is a design decision. The link between them is the stability test: a rack is stable only when its utilisation, the offered load over the bays, is below one. The bay sweep at 9 arrivals an hour shows where that line falls:

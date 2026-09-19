@@ -14,7 +14,7 @@ The peak hour carries a stated share of those transactions, and the queue is siz
 
 service minutes = litres a transaction / dispense rate + an overhead
 
-The overhead is the time a car holds a nozzle without fuel flowing: pulling in, opening the filler, paying, pulling out. It is measured at the station, from its own tills and cameras, and never borrowed from another site.
+The overhead is the time a car holds a nozzle without fuel flowing, measured at the station itself.
 
 The IBAFO forecourt's inputs:
 
@@ -38,7 +38,9 @@ The IBAFO forecourt's inputs:
 | forecourt probability of waiting | 0.688546 |
 | forecourt mean wait, minutes | 2.2083 |
 
-Read these exactly as modules one and two read the rack. The peak transactions an hour are the arrivals. The service minutes are the load time. The nozzles are the bays. The utilisation, the probability of waiting and the mean wait are the rack's figures under forecourt names.
+Read these exactly as modules one and two read the rack. The peak transactions an hour are the arrivals, the service minutes are the load time and the nozzles are the bays.
+
+The station and rackQueue agree on the probability of waiting when rackQueue is given the station's unrounded arrivals and service minutes. The station reports those two inputs rounded, and rackQueue fed the printed 135.00 and 2.342 answers 0.688454 against the station's 0.688546. Quote the station's own figure.
 
 The same trap applies. A forecourt utilisation of 0.878289 leaves an arriving car waiting with a probability of 0.688546. The mean wait of 2.2083 minutes is averaged over every car, including the ones that drive straight to a free nozzle.
 
@@ -58,7 +60,7 @@ At 4 and 5 nozzles the forecourt cannot keep up with its peak, and the engine pr
 
 ## What is different about a forecourt
 
-The model is the same and the stakes are different. A truck at a rack waits because its load is booked. A driver at a forecourt who sees a queue may drive to the next station, which is the lost trade the waiting model does not count. Module one's lesson on waiting and being turned away applies here with more force.
+The model is the same and the stakes are different. A truck at a rack waits because its load is booked. A driver at a forecourt who sees a queue may drive to the next station, which is the lost trade the waiting model does not count.
 
 The peak share matters as much as the daily throughput. The forecourt is sized for the peak hour's 135.00 transactions, and the peak share is an input the station supplies from its own till records. A forecourt sized on the daily average would be sized for a quiet hour, and its queue figures would describe a station that exists only in the middle of the afternoon.
 

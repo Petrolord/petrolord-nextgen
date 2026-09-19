@@ -1,6 +1,6 @@
 # A missing rate makes a floor
 
-The engine ships no rate, so every build-up starts with every rate missing. What it does with a missing rate is the tier's central engine fact. It does not read a blank as zero and report a cost. It adds up what it was given, counts what it was not, and labels the total as a floor.
+The engine ships no rate, so every build-up starts with every rate missing. What it does with a missing rate is the tier's central engine fact: it adds up what it was given, counts what it was not, and labels the total as a floor.
 
 {{panel:supply-price-explorer}}
 
@@ -21,18 +21,20 @@ With every rate blank, the engine reports complete false, 9 missing, and a total
 
 ## What each part of the answer does
 
-The flag says the build-up is not finished. The list of missing lines tells a person which rates to go and find. The total is still printed, because a partial sum has a use: it is a figure the true landed cost cannot be below, provided every missing rate is zero or more. And the label is the engine's own words for exactly that status. Quote it as the engine writes it, in quotation marks, and never restate it in your own words as if it were a cost.
+The flag says the build-up is not finished. The list of missing lines tells a person which rates to go and find. The total is still printed, because a partial sum has a use: it is a figure the true landed cost cannot be below, provided every missing rate is zero or more. The label is the engine's own words for that status; quote it in quotation marks, as the engine writes it.
 
-The fully blank build-up shows why that labelling matters. Its total is 23392000.00 USD, the same figure as the FOB line of the complete build-up. A page that printed that total without the flag would present a cargo's purchase price as its landed cost, and nothing in the number itself would warn a reader.
+The fully blank build-up shows why the label matters. Its total is 23392000.00 USD, the same figure as the FOB line of the complete build-up. Printed without the flag, it would present a cargo's purchase price as its landed cost.
 
-## A blank is reported missing
+## A rate typed 0 is a rate
 
-The course shows the engine reporting each blank rate by name, with complete false. That is what keeps an absence apart from a figure. A zero duty would be a statement about a regime. A blank duty is an absence. If a blank were read as zero, the build-up with its duty blank would carry the flag complete true and nothing would name the missing line. The template's rate column is empty on purpose, as the first module showed, so a default of zero would make every untouched line a claim that the charge does not exist.
+The digest prices the cargo twice more, changing only the duty. With the course's invented duty typed 0, the build-up is complete true, total 25114857.82 USD. With the duty left blank, it is complete false, missing Import duty, total 25114857.82 USD, labelled "A FLOOR, not a cost: 1 rate(s) not supplied."
+
+The two totals print the same figure. The flag and the missing list tell them apart. A duty typed 0 is a statement about a regime, and the engine takes it as one. A blank duty is an absence, and the engine names it. The template's rate column is empty on purpose, so a default of zero would make every untouched line a claim that the charge does not exist.
 
 ## Reading the floor against the full build
 
-The two rates left blank in the middle build are both percentages of CIF. The complete build prints the invented import duty at 1399086.04 USD and the financing line at 340647.04 USD. The floor build prints neither line, names both, and prints a total of 24774210.79 USD against the complete 26513943.86 USD. The engine's point is the label: one total is a cost and the other is a floor.
+The two rates left blank in the middle build are both percentages of CIF. The complete build prints the invented import duty at 1399086.04 USD and the financing line at 340647.04 USD. The floor build prints neither line, names both, and prints a total of 24774210.79 USD. The digest prints the full build less that floor: 26513943.86 - 24774210.79 = 1739733.07 USD. The engine's point is the label: one total is a cost and the other is a floor.
 
 ## Exercise
 
-Record the landed total, the complete flag and the engine's closing sentence for the full BADAGRY build, the build with duty and financing blank, and the build with every rate blank. Say what the last total, read against the FOB line of the full build, shows about why the engine labels an incomplete build-up instead of printing its sum alone.
+Record the landed total, the complete flag and the engine's closing sentence for the full BADAGRY build, the build with duty and financing blank, and the build with every rate blank. Then read the duty typed 0 against the duty left blank. Say what the last total, read against the FOB line of the full build, shows about why the engine labels an incomplete build-up instead of printing its sum alone.

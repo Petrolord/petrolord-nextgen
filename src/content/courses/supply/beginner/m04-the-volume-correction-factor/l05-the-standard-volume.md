@@ -20,6 +20,8 @@ The gross observed volume comes from module three, with free water already off. 
 
 total standard volume, the closing stock the day is closed on: 4499.452 m3
 
+The engine sums that total from the unrounded standard volumes. The three printed standard volumes, each rounded to the litre, add to 4499.453 m3. The day is closed on the unrounded total, printed as 4499.452 m3.
+
 Read AK-01 across. 3461.489 m3 of petrol stood in the tank at 31.5 C, gross observed. Multiplied by the typed VCF of 0.980300, that is 3393.298 m3 at standard. AK-02's 1067.840 m3 gross observed becomes 1054.599 m3 at standard, and AK-03's 52.161 m3 becomes 51.556 m3.
 
 ## Two totals, two quantities
@@ -37,7 +39,7 @@ Keep the units on both. A figure written as 4581.490 m3 without saying gross obs
 
 Walk AK-01 all the way back. The standard volume, 3393.298 m3, is the gross observed volume times a typed VCF. The VCF came from AKODO's tables at a measured density of 741.6 kg/m3 and a measured temperature of 31.5 C. The gross observed volume, 3461.489 m3, is the volume at the dip less the water: 3542.077 m3 less 80.588 m3. The volume at the dip came from the strapping table between 9250 mm and 9500 mm, at a tape reading of 9318 mm. The water came from the same table at a tape reading of 212 mm.
 
-That is the whole chain for one tank: two heights, a table, a density, a temperature and a VCF. Take away any one of them and the engine either refuses or names the figure it could not form. Nothing in the chain was assumed.
+Take away any one of them and the engine either refuses or names the figure it could not form. Nothing in the chain was assumed.
 
 The closing stock is ready. Module five closes the day on it.
 

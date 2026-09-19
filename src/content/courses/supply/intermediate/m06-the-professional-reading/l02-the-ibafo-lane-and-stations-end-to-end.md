@@ -58,11 +58,11 @@ The forecourt is the rack's queue with nozzles for bays. Its tank check fails, a
 
 ## Where each link is fragile
 
-The lane's weight sits in its cycle. The queue hours and the average speed are typed inputs, and the cycle sets the trips a truck a day, which sets both the depreciation a trip and the fleet. An optimistic speed makes the lane cheaper and the fleet smaller at the same stroke.
+The lane's weight sits in its cycle. The queue hours and the average speed are typed inputs, and the cycle sets the trips a truck a day, which sets both the depreciation a trip and the fleet.
 
 The fleet's weight sits in the ceiling. A fleet utilisation of 0.991038 is a figure for an average day. The operator adds whatever spare the business needs.
 
-The forecourt's weight sits in the peak share and the reorder level. The first decides whether the queue is stable. The second decides whether a full truck can discharge. The station's deliveries are 33000.00 litres, the same figure as the lane's payload, and the ullage check tests that full load. A lane planner who fills every truck and a station manager who orders at a fixed level are making one decision between them, and the warning is where it shows.
+The forecourt's weight sits in the peak share and the reorder level. The first decides whether the queue is stable. The second decides whether a full truck can discharge. The forecourt's delivery of 33000.00 litres is the IBAFO lane's payload, and stationSizing checks the payload loaded. The lane delivers 32901.00 litres a trip after its transit loss, and the station's check does not use that figure. A lane planner who fills every truck and a station manager who orders at a fixed level are making one decision between them, and the warning is where it shows.
 
 ## A blank box anywhere
 

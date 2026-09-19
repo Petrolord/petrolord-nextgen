@@ -14,7 +14,7 @@ Because the tax bites on everything above it, it bites on the margins and on the
 
 ## On the landed cost
 
-The course prices the same 6.5 percent a second way, typed as a percent of the landed cost instead of the running total. Every other invented element is unchanged. The engine prints a pump price of 1066.7292 naira a litre.
+The course prices the same 6.5 percent a second way, typed as a percent of the landed cost instead of the running total. Every other invented element is unchanged. The engine prints a pump price of 1066.7292 naira a litre. That build-up is complete true: the basis changes the amount, and every rate is still supplied.
 
 So the same rate, on the same cargo, with the same margins, gives:
 
@@ -27,9 +27,9 @@ The only input that differs is the basis. That is the tier's trap in its simples
 
 ## Which basis is right
 
-Neither this course nor the engine can say which basis a real tax uses. A value added tax, a sales tax or any levy expressed as a percentage is defined by the regulation that imposes it, and the regulation names its base. The engine's job is to make the base an explicit, named input and to apply the rate to exactly that base. The user's job is to read the base off the regulation and type it.
+Neither this course nor the engine can say which basis a real tax uses. A value added tax, a sales tax or any levy expressed as a percentage is defined by the regulation that imposes it, and the regulation names its base. The engine's job is to make the base a named input and apply the rate to it. The user's job is to read the base off the regulation and type it.
 
-What the two prices show is the cost of getting the base wrong. A tax typed on the landed cost where the regulation puts it on the running total leaves the price at 1066.7292 naira a litre where the build-up with the right base prints 1074.8249. Nothing in the first figure looks wrong. It carries every invented rate, and only its base is mistaken.
+What the two prices show is the cost of getting the base wrong. A tax typed on the landed cost where the regulation puts it on the running total leaves the price at 1066.7292 naira a litre where the build-up with the right base prints 1074.8249. Nothing in the first figure looks wrong. It carries every invented rate, the engine reports it complete true, and only its base is mistaken.
 
 ## The order and the running basis
 

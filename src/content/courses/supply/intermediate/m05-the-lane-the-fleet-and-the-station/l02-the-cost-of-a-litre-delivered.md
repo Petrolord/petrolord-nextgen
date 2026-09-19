@@ -39,7 +39,15 @@ Local currency per litre prints to four decimals. The denominator is the deliver
 | 312.00 | 495830.99 | 15.0704 |
 | 468.00 | 677996.49 | 20.6072 |
 
-At the other two distances the engine prints the totals only, without their lines, so this course breaks down no trip but the 312.00 km one. Quote each distance with its own cost. The engine prints no cost for any distance between these three, and a reader should not draw a line through them and read off a fourth.
+The engine prints every cost line at each distance, naira a trip:
+
+| distance km | Diesel | Driver | Maintenance and tyres | Tolls and levies | Overhead | Truck depreciation |
+| --- | --- | --- | --- | --- | --- | --- |
+| 156.00 | 139276.80 | 58000.00 | 20280.00 | 21000.00 | 37500.00 | 37608.70 |
+| 312.00 | 278553.60 | 58000.00 | 40560.00 | 21000.00 | 37500.00 | 60217.39 |
+| 468.00 | 417830.40 | 58000.00 | 60840.00 | 21000.00 | 37500.00 | 82826.09 |
+
+Read across the columns. Driver, Tolls and levies and Overhead print the same at all three distances. Diesel, Maintenance and tyres and Truck depreciation print a different figure at each. Quote each distance with its own lines and its own cost. The engine prints no cost for any distance between these three, and a reader should not draw a line through them and read off a fourth.
 
 ## The carbon line
 

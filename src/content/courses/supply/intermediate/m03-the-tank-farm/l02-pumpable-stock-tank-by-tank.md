@@ -6,7 +6,7 @@ A depot's stock report is usually one line: so many cubic metres in the farm. Th
 
 ## The rule
 
-`tankFarmCover` counts pumpable stock tank by tank. Each tank's pumpable stock is its stock above its own heel, and never below zero. The farm's pumpable stock is the sum of those tank figures.
+`tankFarmCover` counts pumpable stock tank by tank. Each tank's pumpable stock is its stock above its own heel, and never below zero. The farm's pumpable stock is the sum of those tank figures. Ullage is counted the same way: each tank's capacity less its stock, never below zero, summed over the tanks.
 
 The IBAFO farm this morning:
 

@@ -36,9 +36,22 @@ Money prints to two decimals of a dollar. The margin per m3 is the period's marg
 
 ## Three kinds of number
 
-The fee is charged per cubic metre and scales with throughput. The variable cost is spent per cubic metre and scales the same way: power for the pumps, additive, the consumables of loading. The fixed cost is spent whatever passes: staff, insurance on the site, the maintenance calendar. The distinction matters because the margin per m3 moves with throughput even when the fee and the variable cost do not. Spread the same fixed cost over more cubic metres and each one carries less of it. This course prints no throughput sweep of the margin, so it quotes no margin per m3 at any throughput other than 2640.000 m3.
+The fee is charged per cubic metre and scales with throughput. The variable cost is spent per cubic metre and scales the same way: power for the pumps, additive, the consumables of loading. The fixed cost is spent whatever passes: staff, insurance on the site, the maintenance calendar. The distinction matters because the margin per m3 moves with throughput even when the fee and the variable cost do not. Spread the same fixed cost over more cubic metres and each one carries less of it.
 
 That is also why a margin per m3 from one period cannot be multiplied by another period's throughput. It already contains one period's fixed cost divided by one period's volume.
+
+## A blank input
+
+The money answer needs the throughput and the fee. A blank cost or loss is taken as zero, and the engine names it:
+
+| what is blank | the engine answers |
+| --- | --- |
+| the throughput | REFUSED: Throughput and the throughput fee are both needed for the money answer. |
+| the fee | REFUSED: Throughput and the throughput fee are both needed for the money answer. |
+| the fixed cost | margin 14388.00 USD; assumedZero: fixed cost |
+| nothing | margin 4988.00 USD; assumedZero: none |
+
+With the fixed cost blank the margin reads 14388.00 USD, and assumedZero says which zero the engine assumed. A margin quoted from that row without its assumedZero line is a margin with the fixed cost silently left out.
 
 ## A period's margin
 
@@ -52,4 +65,4 @@ The same call computes a second ledger from the same volumes: the weight of the 
 
 ## Exercise
 
-Read IBAFO's throughput, fee, variable cost and fixed cost, and say which are invented. Then read the revenue, margin and margin per m3 and say which input makes the margin per m3 depend on the period's throughput, and why the margin is a period's figure and never a valuation.
+Read IBAFO's throughput, fee, variable cost and fixed cost, and say which are invented. Read the blank fixed cost row and say what assumedZero tells you. Then read the revenue, margin and margin per m3 and say which input makes the margin per m3 depend on the period's throughput, and why the margin is a period's figure and never a valuation.

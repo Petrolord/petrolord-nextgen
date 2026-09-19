@@ -8,7 +8,7 @@ A cap is fixed and a chain's price is not. The question an importer or a regulat
 
 The BADAGRY cargo is bought in dollars and sold in naira, and the exchange rate enters the landed cost once, at the end. So every dollar in the walk reaches the pump price through that one input. That makes the exchange rate the driver this module sweeps.
 
-Every figure in the sweep rests on the BADAGRY record, and every rate on that record is invented for this course: the freight, the insurance, the import duty and every landed charge, every margin and levy on the pump price, the value added tax and the cap of 1150.0000 naira a litre. The exchange rates in the sweep are invented values chosen to cover a range. None describes any market on any date.
+Every figure in the sweep rests on the BADAGRY record, and every rate on that record is invented for this course: the freight, the insurance, the import duty and every landed charge, every margin and levy on the pump price, the value added tax and the cap of 1150.0000 naira a litre. The exchange rates swept are invented values for the course, from 1200.0000 to 2100.0000 naira to the dollar. None describes any market on any date.
 
 ## The sweep
 
@@ -32,7 +32,16 @@ The engine does not take one price and scale it. At each exchange rate it builds
 
 The first is the percentage element. The value added tax is a percent of the running total, and the running total contains the landed cost. A shortcut that moved only the landed cost and kept the tax amount fixed would misprice each row away from the base rate. Rebuilding the chain applies the tax to each row's own running total.
 
-The second is honesty about what moves. The per-litre margins and the per-litre levies are the same invented amounts on every row, because they are per-litre amounts and the driver does not touch them. Only the landed cost and what is levied on it change.
+The second is honesty about what moves. The per-litre margins and the per-litre levies are the same invented amounts on every row. The digest prints the chain at each rate, element by element:
+
+| naira to the dollar | landed naira/L | Government naira/L | pump price naira/L |
+| --- | --- | --- | --- |
+| 1200.0000 | 698.2441 | 63.0816 | 876.2757 |
+| 1500.0000 | 872.8052 | 74.4281 | 1062.1833 |
+| 1650.0000 | 960.0857 | 80.1013 | 1155.1370 |
+| 2100.0000 | 1221.9272 | 97.1210 | 1433.9982 |
+
+The landed cost moves with the rate, and so does the Government share, because the tax in it is levied on a running total that contains the landed cost.
 
 ## Reading the verdict column
 

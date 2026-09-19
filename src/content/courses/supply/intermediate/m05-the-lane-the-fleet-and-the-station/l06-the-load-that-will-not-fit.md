@@ -29,7 +29,7 @@ ullage at reorder = capacity less the reorder level
 | ullage at reorder litres | 28125.00 |
 | payload fits the ullage | false |
 
-Litres print to two decimals. The engine also prints the station's cover days, 1.04.
+Litres print to two decimals. The engine also prints the station's cover days, 1.04, by cover days = usable tank litres / litres a day. The engine rounds cover days to two decimals, which is why this figure prints to two where the course's other cover and turns figures print to four.
 
 ## The warning
 

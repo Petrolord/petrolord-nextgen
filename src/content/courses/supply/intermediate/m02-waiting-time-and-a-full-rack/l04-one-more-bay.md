@@ -38,7 +38,7 @@ What the sweep does give is the service consequence of each whole choice, stated
 
 The sweep holds the arrivals at 9 an hour. A depot's traffic grows. The arrivals sweep at 4 bays showed the wait reaching 106.9703 minutes at 9.5 arrivals an hour and the engine refusing at 10. A bay chosen for today's traffic should be read against the arrivals it will face, by rerunning the queue at the forecast rate.
 
-Load time is the third lever, and this course prints no sweep of it, so it gives no figure for what a faster load buys.
+Load time is the third lever. On the same 4 bays at 9 arrivals an hour, the load minutes swept print a mean wait of 10.1887 minutes at 20 minutes a load, 47.2652 at 24 and 245.7297 at 26. Quote the row that matches the load time a proposal promises.
 
 ## Exercise
 

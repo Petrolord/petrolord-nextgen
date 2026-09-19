@@ -6,7 +6,7 @@
 
 Every measurement in the day carries some uncertainty: the tapes, the thermometers, the interpolated tables and the meters on receipts and deliveries. Product that moves is product measured on the way in or out, so a busy day leaves more room for honest error than a still one.
 
-So reconcileStock sets its tolerance on throughput, defined as receipts plus deliveries, and states it as a percent of that throughput. AKODO's stated tolerance is 0.2 percent of throughput, a figure chosen for this course. On the AKODO day, with receipts of 2870.000 m3 and deliveries of 3312.500 m3, it comes to 12.365 m3.
+So reconcileStock sets its tolerance on throughput, defined as receipts plus deliveries, and states it as a percent of that throughput. AKODO's stated tolerance is 0.2 percent of throughput, a figure chosen for this course. On the AKODO day, with receipts of 2870.000 m3 and deliveries of 3312.500 m3, the engine prints the throughput as 6182.500 m3. That is the base of the band, and 0.2 percent of it comes to 12.365 m3.
 
 The unaccounted figure is judged against that band on both sides. A gap of -8.648 m3 on the day reads within tolerance: true. The engine also states the gap as a share of throughput: -0.1399 percent. Keep the units apart: the tolerance percent is the stated band, and the unaccounted percent is the day's result on the same base.
 

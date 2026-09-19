@@ -20,13 +20,13 @@ The money columns are identical in all three rows. Revenue, margin and margin pe
 
 The carbon columns fail in a chain. Without a factor, the loss still has a weight, 3.4279 tonnes, and only the emissions and the intensity read none. Without a density, the loss has no weight, so everything after it reads none as well. Each none sits exactly at the first link that has no input and at every link after it. Nothing before the gap is lost, and nothing after it is guessed.
 
-This is the pattern the whole course is built on. A chain of measured inputs is walked in order, and the engine names the link nobody measured. The AKODO day in the Associate tier stopped at a missing opening stock. The IBAFO carbon ledger stops at a missing density or factor.
+This is the pattern the whole course is built on. A chain of measured inputs is walked in order, and the engine names the link nobody measured.
 
 ## One set of volumes
 
 The two ledgers read different volumes. The money ledger reads the throughput, the volume that passed and was charged for. The carbon ledger reads the loss, the volume that went missing. Both are the depot's own figures for the same period.
 
-That shared period is what makes the pair useful. A manager can set the period's margin beside the period's loss and the loss's emissions, and see them for the same days. The intensity row does this inside the carbon ledger, spreading emissions over throughput. The engine prints no figure that combines the two ledgers, such as a cost of carbon, and this course invents none.
+That shared period lets a manager set the margin beside the loss and its emissions for the same days. The intensity row does this inside the carbon ledger, spreading emissions over throughput. The engine prints no figure that combines the two ledgers, such as a cost of carbon, and this course invents none.
 
 ## Reading a report built this way
 
@@ -36,11 +36,11 @@ First, that the money and the carbon figures are for the same period and the sam
 
 Second, that every carbon figure names its density and its factor, and where each came from. In this course the factor is synthetic and the density is the course's own; a real report cites both.
 
-Third, that a none in the carbon columns is reported as a none. A blank read as zero turns a missing measurement into a claim of no emissions.
+Third, that a none in the carbon columns is reported as a none, and that any zero the engine assumed is reported with its name. The money side takes a blank cost or loss as zero and names it in assumedZero; a blank fixed cost reads margin 14388.00 USD with assumedZero: fixed cost. A zero quoted without that name turns a missing measurement into a claim.
 
 ## What this module leaves out
 
-The margin is a period's margin. It is never a valuation, and this module prices no bay, no tank and no truck. The truck lane in module five has its own cost per litre delivered, built from invented costs of its own, and module five reads it.
+The margin is a period's margin and never a valuation. This module prices no bay, no tank and no truck; module five reads the truck lane's own cost per litre delivered.
 
 ## Exercise
 

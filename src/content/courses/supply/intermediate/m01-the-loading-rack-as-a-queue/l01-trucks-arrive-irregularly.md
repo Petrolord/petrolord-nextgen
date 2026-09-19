@@ -1,6 +1,6 @@
 # Trucks arrive irregularly
 
-A depot's loading rack is judged by what happens to a truck at the gate. A tanker arrives, finds a free bay or finds every bay busy, loads, and leaves. If trucks came on a timetable and every load took exactly the same minutes, the rack would need no theory: compare the loads an hour with what the bays can manage and stop. Trucks do not arrive that way. Drivers meet different traffic and leave at different times, and loads differ: a compartment runs slow, a document is missing. This tier treats both as random, and that one choice shapes every answer in the first two modules.
+A depot's loading rack is judged by what happens to a truck at the gate. If trucks came on a timetable and every load took exactly the same minutes, the rack would need no theory: compare the loads an hour with what the bays can manage and stop. Trucks do not arrive that way. Drivers meet different traffic, and loads differ. This tier treats both as random, and that one choice shapes every answer in the first two modules.
 
 {{panel:supply-depot-explorer}}
 
@@ -26,7 +26,7 @@ The load time is random for the same reason. A mean of 24 minutes describes a ty
 
 ## What the engine needs, and what it refuses
 
-The arrival rate and the load time are both measured inputs. Leave either one blank and the call stops with the engine's own sentence:
+The arrival rate and the load time are both measured inputs. Leave either one blank, or type a load time of 0 minutes, and the call stops with the engine's own sentence:
 
 > REFUSED: Arrival rate and load time are both needed.
 
@@ -38,4 +38,4 @@ The next four lessons walk the chain the engine computes from these inputs: the 
 
 ## Exercise
 
-Read the IBAFO rack inputs and the engine's count of 216 trucks a day. Say what the day count tells a depot manager about the rack, and what it cannot tell them about any single hour. Then name the inputs the engine refuses to run without, quote its sentence, and say why a guessed value would be worse than the refusal.
+Read the IBAFO rack inputs and the engine's count of 216 trucks a day. Say what the day count tells a depot manager and what it cannot tell them about any single hour. Then name the inputs the engine refuses to run without, quote its sentence, and say why a guessed value would be worse than the refusal.

@@ -4,7 +4,7 @@
 
 ## From the tanks to the ledger
 
-The last lesson ended on a closing stock of 4499.452 m3 at standard. This lesson carries it through the day and then through nine days.
+The last lesson ended on a closing stock of 4499.452 m3 at standard. This lesson carries it through one day and then nine.
 
 ## The ledger
 
@@ -35,11 +35,11 @@ The digest measures three ways of closing the same day badly, and each teaches o
 
 ## The band and the still day
 
-The verdict depends on the stated percent. At 0.1 percent the band is 6.183 m3 and the same -8.648 m3 reads outside it; at 0.2 percent it reads within. The percent belongs to the terminal's procedures and is fixed before the day is closed. A day with no receipts and no deliveries has no throughput and no band: the digest's still day reads unaccounted 0.500 m3, tolerance 0.000 m3, within tolerance false, direction gain.
+The verdict depends on the stated percent. At 0.1 percent the band is 6.183 m3 and the same -8.648 m3 reads outside it; at 0.2 percent it reads within. The percent is fixed before the day is closed. A day with no receipts and no deliveries has no throughput and no band: the digest's still day reads unaccounted 0.500 m3, tolerance 0.000 m3, within tolerance false, direction gain.
 
 ## Nine days
 
-Across nine days the unaccounted figures sum to -27.200 m3, or -0.0494 percent of cumulative throughput, and the run ending on the latest day is 6 days of loss. The engine prompts: "6 days of loss in a row. One day is noise; a run in one direction is worth investigating: a drifting meter, a passing valve, or a temperature effect not being corrected." Cut at six days, the run is 3 days of loss and the prompt is none.
+Across nine days the unaccounted figures sum to -27.200 m3, or -0.0494 percent of cumulative throughput, and the run ending on the latest day is 6 days of loss. The engine prompts: "6 days of loss in a row. One day is noise; a run in one direction is worth investigating: a drifting meter, a passing valve, or a temperature effect not being corrected." The percent is taken on the cumulative throughput, printed as 55085.000 m3. The digest trims the history one day at a time: kept to 5 or 6 days, the run is 2 or 3 days of loss and the prompt is none; kept to 7, 8 or 9 days, the run is 4, 5 or 6 days of loss and the prompt is printed.
 
 ## Exercise
 

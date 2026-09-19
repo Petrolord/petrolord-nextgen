@@ -8,7 +8,7 @@ Cover looks down at what a farm holds. Ullage looks up at the room it has left, 
 
 Ullage is the empty room in a tank above its stock, the volume a receipt can go into. A depot needs it every time a cargo or a pipeline batch is due, because product that has nowhere to go stays in the ship or the line.
 
-The engine prints each tank's ullage beside its capacity and stock:
+The engine counts it tank by tank: each tank's capacity less its stock, never below zero, summed over the tanks. It prints each tank's ullage beside its capacity and stock:
 
 | tank | capacity m3 | stock m3 | ullage m3 |
 | --- | --- | --- | --- |
@@ -36,6 +36,8 @@ For IBAFO:
 | turns a year | 44.1108 |
 
 The divisor is working capacity. The heel never turns, so it is left out of the room the product cycles through. Turns print to four decimals.
+
+The daily throughput is the other half of the formula, and the engine does not supply it. With no daily throughput the engine gives days of cover none and turns a year none: both need the throughput.
 
 ## What turns tell you
 

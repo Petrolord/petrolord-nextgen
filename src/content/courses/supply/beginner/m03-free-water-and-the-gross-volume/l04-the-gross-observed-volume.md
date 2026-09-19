@@ -14,9 +14,11 @@ Everything this tier has built so far comes together in one table. For each AKOD
 
 total gross observed volume: 4581.490 m3
 
+The engine's rule is gross observed volume = volume at the dip less volume at the water cut, computed from the unrounded volumes. On AK-03 the printed columns can differ from the printed gross in the third decimal, so quote the printed 52.161 m3 and never recompute a gross from the rounded columns.
+
 Read the AK-01 row as a chain. A tape gave 9318 mm. The strapping table, interpolated between its entries at 9250 mm and 9500 mm, turned that into 3542.077 m3. A second tape reading gave 212 mm of water, which the same table turned into 80.588 m3. The water came off, and 3461.489 m3 of petrol is left, gross observed.
 
-Every figure in that row came from a measurement or from the tank's own table. No figure was assumed.
+No figure in that row was assumed.
 
 ## What gross observed means
 
@@ -36,7 +38,7 @@ That is the right place to stop. The gross observed volume is a true statement a
 
 ## The total
 
-The three tanks together hold 4581.490 m3 gross observed. That figure matters in module five, in one specific way: a day closed on it against an opening stock held at standard mixes two different quantities, and the digest measures what that does to the day. For now, keep the label on it. It is the total gross observed volume, at three different observed temperatures, of three different products.
+The three tanks together hold 4581.490 m3 gross observed. In module five the digest closes a day on it against an opening stock held at standard and measures what mixing the two quantities does. For now, keep the label on it. It is the total gross observed volume, at three different observed temperatures, of three different products.
 
 Use the panel to walk each tank from its dip to its gross observed volume, and read the total at the foot.
 

@@ -36,7 +36,7 @@ prompt: 6 days of loss in a row. One day is noise; a run in one direction is wor
 
 The prompt names three causes. A drifting meter over-reads or under-reads a little on every transfer. A passing valve lets a little product through when it is meant to be shut. A temperature effect not being corrected turns a warm stock into an apparent gain or a cool one into an apparent loss, every day in the same direction while the weather holds. None of them is a single event, so each shows up as a run.
 
-The cumulative percent, -0.0494, states the nine days' total gap on the nine days' total throughput.
+The cumulative percent, -0.0494, states the nine days' total gap on the nine days' total throughput. The engine prints that denominator as 55085.000 m3.
 
 ## Where the run starts and stops
 
@@ -44,7 +44,17 @@ The engine counts only the run that ends on the latest day. The same record cut 
 
 The first six days alone: run 3 days of loss; prompt: none.
 
-With only three days of loss at the end of the record, the engine prints no prompt. By day 9 the run is six days long and the prompt appears. The digest does not print the run length at which the prompt first appears, so read it as these two cases and nothing more.
+The digest reads the threshold off the engine by trimming the history one day at a time:
+
+| days kept | run ending on the last kept day | prompt printed |
+| --- | --- | --- |
+| 5 | 2 days of loss | none |
+| 6 | 3 days of loss | none |
+| 7 | 4 days of loss | yes |
+| 8 | 5 days of loss | yes |
+| 9 | 6 days of loss | yes |
+
+Read down the last column. At a run of 2 or 3 days of loss the engine prints no prompt. At a run of 4, 5 or 6 days it prints one. These five cuts are the whole evidence, so the lesson states the threshold as that reading of the table.
 
 With no days at all, the engine reports cumulative 0.000 m3, run 0 and mean percent none. An empty record has nothing to average, so the mean is none. It is not a zero.
 

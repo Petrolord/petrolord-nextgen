@@ -19,7 +19,7 @@ The typed row is the lane as it should be run. The blank and null rows print a l
 
 ## The row that looks complete
 
-The last row deserves the closest reading. The driver cost is left out of the call entirely. The engine then applies the default its signature states, and it reports the answer as complete, with no missing input. Its cost figures are the same as the blank row's.
+The last row deserves the closest reading. The driver cost is left out of the call entirely. The engine then applies the default its signature states: driverCostPerTrip defaults to 0. That is why the row reads the same cost a trip as the blank row and still reports complete true, with no missing input.
 
 So two rows print the same money and differ only in the flag. A blank box is read as a missing measurement. An absent input is read as a deliberate choice to accept the stated default. The engine can tell the two apart only by how the call was made. A form that drops an empty field from the call, instead of sending it as blank, turns a missing driver cost into a complete answer.
 
