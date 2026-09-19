@@ -37,6 +37,19 @@ heat quantities the Expert capstone grades are one-hour time weighted averages
 of readings the capstone STATES: the WBGT the instrument read out, and the
 metabolic rates.
 
+**Which label goes on which figure (an accepted decision).** The
+section 8.1 label belongs to the RAL and REL equations only. A WBGT built from
+globe, wet bulb and dry bulb readings rests on different constants, the weights
+of digest section 16, so it carries its own label:
+
+| figure | the words beside it |
+| --- | --- |
+| a WBGT built from thermometer readings | "the NIOSH 2016-106 section 9.3.2 weighting, checked for transcription only" |
+| a RAL, a REL, or a margin against either | "the NIOSH 2016-106 section 8.1 equation, checked for transcription only" |
+
+A WBGT the instrument READ OUT, and the one-hour averages of stated readouts
+the capstone grades, are neither: they are arithmetic on stated values.
+
 **Reason, three parts, each in the digest.**
 
 1. The RAL constants (59.9, 14.1), the REL constants (56.7, 11.5) and the WBGT
