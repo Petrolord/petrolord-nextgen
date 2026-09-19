@@ -1,9 +1,9 @@
 # Canonical petrolord-engines tree at the commit pinned in VENDOR.json.
 # Generated, do not hand edit: node tools/check-vendored-engines.mjs --canonical <clone> verifies it.
-# commit 5cbdca5fb78cf83771ede4119fb4a92cb7aacaa9
+# commit f123a575f06cb5fcef0fa9af2bbce951a3ac1305
 90543bb0df00a32d5f1ee280daa9c933d95e13a5 .github/workflows/ci.yml
 be54c1217cc42ef224dfd2e265e42ebe8bb198ba .gitignore
-2d197cf1b8c0e262cca0d2243412fc828b3c8adb README.md
+75418220b0ff305a9a8b2f5bdf97e1cb3a3c791c README.md
 6373485efb6baa9226953a76a3d6ebb740541d1c __tests__/aquifer.test.js
 168f6cedfc18af932ba587f2ff882b7571966986 __tests__/assurance.audit.test.js
 fc5248e0239b0841f542a3cba95ef72db34296d1 __tests__/assurance.compliance.test.js
@@ -103,6 +103,7 @@ af737299d0d9a9ba931d9fb48f738da9adbc1e26 __tests__/fluid.transport.test.js
 053aa286c747d9427f350c2a9d0bc5b862a1acc3 __tests__/fluid.tuning.test.js
 5827a4efbe6b1971ee8c1904ef6224f2ff3d1b37 __tests__/gridding.rotation.test.js
 d6f4f5ff8043d58a6b14f9f0feec0c443e2e3023 __tests__/helpers/assuranceGoldens.js
+e2e4f398b5c2da829a738c1038dccc93c7bdddb2 __tests__/hse.safetyStats.test.js
 4a3b30957d444d229516100f6a1a80489b3f42a6 __tests__/importExtensions.test.js
 618469aae8ebde4aee700986fc5b07bb126f78a8 __tests__/lp.simplex.test.js
 8060f28b96f2d488db64da2e0adcfdaf2c092c55 __tests__/mapping.cultureimport.test.js
@@ -325,6 +326,7 @@ af448d5f94cf591302547ab422e9f9f690ffe03e engines/fluid/labTune.js
 31471299c8fd2fbbe2995ab3738cc92a72335f74 engines/fluid/transport.js
 9ba67e2af2209f66616a22138328741bddf1eda8 engines/fluid/tuning.js
 e99c56bffeaa1b6aae8138745e509c675ea04cce engines/fluid/units.js
+3ecaa28e39abbf39846d8406f5fa4329f8b8c402 engines/hse/safetyStats.js
 22fa8bb55bfc298027ebb6d00a59ed3b2157bb70 engines/mapping/cultureImport.js
 f3bfa281ed8307b01dd26edf8b53e5257f1d1334 engines/mapping/surface.js
 ef516365f4b51788d50a5d47a220329d3e545696 engines/mbal/lm.ts
@@ -580,6 +582,7 @@ af9b1a2d8a2e7814120d5ad32d23d6c8d6758f69 test-data/facilities/goldens/gasprocess
 e61be9ec8aef61351885727cecc4dc28c7b1b89e test-data/fluid/goldens.json
 15b58be38f9dbdf64662276a3891cadf363d4f4e test-data/fluid/literature-fixtures.json
 2291d3c202a9f78382b51ec3a15997fd4acb02b1 test-data/fluid/nistVaporPressure.json
+392b810543c5d1138c96a0f9afaea8847359b9a5 test-data/hse/goldens/safetyStats_cases.json
 6c1515e471770d9ee7a4399cf533175259206f5b test-data/mapping/culture/blocks.dbf
 8ae03a0133f8e9baac79226f0f5beb3a86de5271 test-data/mapping/culture/blocks.shp
 4b2f670eea4ce2af12ec22e13f30aa91ed291bd0 test-data/mapping/culture/lines.shp
@@ -778,6 +781,9 @@ a4cc35e9fa4ded33b51e0821fc06771492672a5c tools/validation/fluid/README.md
 4dc932ca9c747e73b9ce3a6ef810ce63cf82e8fb tools/validation/fluid/genfixtures.py
 2053598b474df7d8838cd5210952402c71019a0e tools/validation/fluid/oracle.py
 aeaf3fb09d8c931b6f0b51e6caa4187159f0c8df tools/validation/fluid/run-validation.mjs
+42d823d7fc4428e51df1a62fc2aeebee9ecc37bd tools/validation/hse/FINDINGS-safetystats.md
+d1b4e2179eb8eed00e25744cc19b2ff68c685865 tools/validation/hse/negcontrol_safetystats.sh
+3d7e213cf66a2c6b86858a0b5d858be379217764 tools/validation/hse/oracle_safetystats.py
 7849160c1f2605320c3a383435ce551b06c2b352 tools/validation/mapping/culture/gen_shapefiles.py
 313d8772f44c72689f332f6b00db22c667bfce65 tools/validation/mapping/oracle_kriging.py
 ad24be471eb3fc2fdb4c55e4de86ed8ea706e391 tools/validation/mapping/oracle_rotation.py
