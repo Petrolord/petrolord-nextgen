@@ -41,7 +41,7 @@
    "The Kwale blend on the studio's default cuts, with Kwale's prices kept."
   ],
   "answer": 2,
-  "explanation": "Nothing in the default table is Kwale's. Before reading any figure on the page, read which pair, which cut set and which prices it rests on. The Kwale blend nets back 64.9473 $/bbl."
+  "explanation": "The default table is the studio's default pair, 60 and 40, on its default cuts and default valuation. The Kwale blend is 55 and 45 and nets back 64.9473 $/bbl on Kwale's cuts."
  },
  {
   "prompt": "The studio's default table reads stability screen basis api-contrast. What does that say about the SARA behind it?",
@@ -66,15 +66,15 @@
   "explanation": "The default table prints the blend T50 F (interpolated) as 617.1429 and Watson K at T50 (screening) as 11.7452. 587.3184 and 11.8135 are the Kwale blend's."
  },
  {
-  "prompt": "Why is a check that recomputes an engine's figure with the engine's own formula no evidence?",
+  "prompt": "How is oracle_crudeassay.py written, by the digest's account?",
   "options": [
-   "If the formula is wrong, the check is wrong the same way, and the two agree on the wrong answer.",
-   "It is evidence, since agreement to four decimal places on every golden case rules out a wrong formula.",
-   "It is no evidence only when the check is written in Python and the engine in JavaScript, since the languages round apart.",
-   "It is no evidence because it runs on the goldens, which the engine itself wrote."
+   "From the rules, independently of the JavaScript engine.",
+   "From the JavaScript engine, translated line for line into Python.",
+   "From the golden files, fitted to reproduce each case.",
+   "From the digest's own tables, read back as its inputs."
   ],
   "answer": 0,
-  "explanation": "Agreement is evidence only when the second computation gets there by a different road. The crude assay engine is held to an independent Python oracle written from the rules."
+  "explanation": "The digest describes an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules, and counts its golden cases from the vendored file."
  },
  {
   "prompt": "How does oracle_crudeassay.py reach a blend's T50, and how does that road differ from the engine's?",
@@ -110,26 +110,26 @@
   "explanation": "The golden sets are counted from the vendored file: blends 6, curve cases 4, blended default curve 1."
  },
  {
-  "prompt": "The oracle loads a cargo in barrels and pounds. What does that let it reach by its own road?",
+  "prompt": "What does the Python oracle for the assay engine load a blend as?",
   "options": [
-   "The mass-basis figures, from pounds on a loaded cargo, where the engine converts volume shares to mass shares with resolveFractions.",
-   "The D86 to TBP conversion, which the engine refuses to make until a coefficient table is supplied to it.",
-   "The cut points: pounds let the oracle place each cut on a mass curve beside the engine's volume curve.",
-   "The marker: pounds let the oracle value the marker by the tonne, where the engine values it by the barrel."
+   "As a cargo, loaded in barrels and in pounds.",
+   "As mass shares from resolveFractions.",
+   "As one barrel at the refinery gate.",
+   "As volume shares normalised to 100."
   ],
   "answer": 0,
-  "explanation": "The engine converts once: each crude's mass share is its volume share times its specific gravity, over the sum of those products. The oracle is written from the rules and loads a cargo instead."
+  "explanation": "The digest's oracle line begins with the load: a cargo in barrels and pounds. The engine itself converts volume shares to mass shares with resolveFractions."
  },
  {
-  "prompt": "What can the oracle not settle about Watson K at T50?",
+  "prompt": "Which Kerosene / Jet and Diesel / Gasoil yields does the studio's default table print for its default pair?",
   "options": [
-   "Its value for the Kwale blend, since a bisection cannot reach a figure that the engine reaches by interpolation.",
-   "Its sign, since the oracle bisects the curve and cannot tell which side of the 50 percent point the boiling temperature lies on.",
-   "Whether T50 is the right stand-in for the mean average boiling point, since an oracle written to the same rule agrees with it.",
-   "Its label, since the oracle checks figures alone and never reads the words the studio prints beside a figure on the page."
+   "16.6604 and 16.9510 volume percent.",
+   "16.2860 and 19.3849 volume percent.",
+   "16.1124 and 16.7449 volume percent.",
+   "16.1124 and 18.7143 volume percent."
   ],
   "answer": 2,
-  "explanation": "An oracle confirms that the engine computes what the rules say. It cannot decide which rule is right, which is why held items are stated as limits."
+  "explanation": "The default table reads Kerosene / Jet 16.1124 and Diesel / Gasoil 16.7449. 16.6604 and 16.9510 are the Kwale blend on the same default cuts, 16.2860 and 19.3849 the Kwale blend on Kwale's cuts, and 18.7143 the default pair's Vacuum residue."
  },
  {
   "prompt": "The studio's default table shows Vacuum gasoil at 27.7681 volume percent. The Kwale blend on the studio's default cuts yields 26.6940. What separates the two figures?",

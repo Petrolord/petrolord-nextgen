@@ -14,12 +14,12 @@
   "prompt": "The Kwale blend's differential against its marker is -7.5527 $/bbl. What does the sign say?",
   "options": [
    "The blend nets back more than the marker crude, read on the marker minus crude convention.",
-   "The blend nets back less than the marker crude when both are valued at the Kwale refinery.",
+   "The blend nets back less than the marker, since the differential is this crude's netback minus the marker's.",
    "The blend's gross product value falls short of the marker's gross by that figure.",
    "The blend's valuation is incomplete, since a negative differential flags a missing term."
   ],
   "answer": 1,
-  "explanation": "The engine's convention is stated with the function: this crude's netback minus the marker's. The blend nets back 64.9473 $/bbl against the marker's 72.5."
+  "explanation": "The engine's convention: this crude's netback minus the marker's, so a negative differential is a netback below the marker's. Gross product value and completeness do not enter it."
  },
  {
   "prompt": "What does netbackValue report for Kwale Light valued alone on Kwale's terms?",
@@ -41,7 +41,7 @@
    "Each row is valued against a marker built from that row's own crude, so each differential is consistent with itself whatever terms the row carries."
   ],
   "answer": 2,
-  "explanation": "Change the cut set or the prices between rows and the difference between netbacks would mix crude quality with refinery configuration. Every differential here is against the same 72.5."
+  "explanation": "One set of terms stands behind all three rows, and every differential here is against the same 72.5 $/bbl."
  },
  {
   "prompt": "What does netbackValue take from the caller in order to report a differential against a marker?",
@@ -70,22 +70,22 @@
   "options": [
    "Yields add on volume and every other term is per barrel, so the blend is worth what its barrels are worth.",
    "The engine forms the blend's netback as that mean, so the two figures are one computation printed twice.",
-   "The two crudes carry nearly the same netback, so any weighting lands on the blend's figure to four decimals.",
+   "The two crudes carry the same netback, 64.9473 $/bbl each, so any weighting lands on the blend's figure.",
    "Netbacks blend on mass, and at 55 and 45 the mass and volume shares of these two crudes coincide."
   ],
   "answer": 0,
   "explanation": "The blend's netback is computed from the blend's own curve, its own cut yields and the full chain. The mean is formed from the two single-crude netbacks, 65.9944 and 63.6676."
  },
  {
-  "prompt": "The blend's netback averages on volume, while the crudes' T50 do not. What separates the two?",
+  "prompt": "What does the digest say d86ToTbp has the structure of?",
   "options": [
-   "The netback carries four decimals of dollars while T50 carries four decimals of degrees, and dollars add across crudes where degrees do not.",
-   "The netback is formed after the losses, which cancel out the shape of the blend's curve, while the T50 is read before any loss is applied to it.",
-   "A temperature is read off the curve's other axis, while the netback is built only from amounts at prices and costs per barrel.",
-   "Both average, and the -3.3184 F printed for T50 is rounding in the volume-weighted mean of the midpoints."
+   "A fixed offset added at every point of the D86 curve, with no coefficient table needed.",
+   "A bisection on the D86 curve for the temperature of each TBP point in turn.",
+   "The cut-point-difference conversion, API Technical Data Book Procedure 3A1.1.",
+   "The Refutas index form, blended on volume fraction the way ASTM D7152 blends it."
   ],
   "answer": 2,
-  "explanation": "For the Kwale blend the volume-weighted mean of the crudes' T50 minus the engine is -3.3184 F, while the blend's netback minus the volume-weighted mean of the crudes' netbacks is 0.0000."
+  "explanation": "The digest: d86ToTbp has the structure of the cut-point-difference conversion (API Technical Data Book Procedure 3A1.1) and ships no coefficient table. Called without the table, it refuses."
  },
  {
   "prompt": "Against Kwale's marker of 72.5 $/bbl, what differential does netbackValue report for Ughelli Medium valued alone, and what does its sign say?",
@@ -121,26 +121,26 @@
   "explanation": "The engine refuses the input and returns no netback. The Kwale figure of 0.8 percent lies inside the range and is valued."
  },
  {
-  "prompt": "Why does netbackValue refuse losses of -1 percent, when the arithmetic would still run?",
+  "prompt": "Which loss percents does the digest show netbackValue refusing?",
   "options": [
-   "A negative loss is read as a volume gain, and the engine reserves every gain for the marker differential alone, so it will not take one in the losses.",
-   "The engine refuses every blank or negative term in the valuation, the costs included, before any term of the netback is formed.",
-   "The factor (1 - loss percent / 100) would exceed one, so the refinery would appear to make more product than all the crude it ran.",
-   "A loss of -1 percent would turn the netback negative, and the engine refuses a negative netback."
+   "101 percent only; -1 percent is taken as zero and named in assumedZero.",
+   "-1 percent only; 101 percent is capped at 100 and valued.",
+   "101 percent and -1 percent, each refused with the same sentence.",
+   "Neither; both are valued, with complete: false beside the netback."
   ],
   "answer": 2,
-  "explanation": "Both 101 percent and -1 percent return REFUSED: Losses must be between 0 and 100 percent. A blank loss is taken as zero and named in assumedZero: that is a question with an answer."
+  "explanation": "The refusal table prints two rows, losses of 101 percent and losses of -1 percent, and one sentence for both: REFUSED: Losses must be between 0 and 100 percent."
  },
  {
   "prompt": "A blank loss is taken as zero and named. A loss of 101 percent is refused. What separates the two?",
   "options": [
-   "A blank is a typing slip the engine can repair by itself, and 101 percent is a slip it has no way to repair.",
-   "A blank loss is taken as zero only when the freight is also blank, which it was in the case the digest prints.",
+   "A blank loss is named in unpricedCuts, and 101 percent is capped at 100 percent.",
+   "A blank loss makes the valuation incomplete, and 101 percent is valued with complete: false.",
    "Both are refused in the engine; the blank is taken as zero by the studio alone.",
-   "A blank asks what the netback is if nothing is lost; 101 percent asks something no refinery can do."
+   "A blank loss is taken as zero in assumedZero; losses must be between 0 and 100 percent."
   ],
   "answer": 3,
-  "explanation": "No refinery loses more than it runs, so 101 percent is refused at entry. A blank loss is a question the engine can answer: it takes zero and names losses in assumedZero."
+  "explanation": "The digest prints Kwale with freight and losses left blank at 67.4412 $/bbl, assumedZero naming freight, losses, and complete: true. Losses of 101 percent return REFUSED: Losses must be between 0 and 100 percent."
  },
  {
   "prompt": "A crude arrives with only a D86 curve. What does d86ToTbp return when called without a coefficient table?",
@@ -157,7 +157,7 @@
   "prompt": "Why does d86ToTbp refuse a D86 curve with no 50 percent point, even with a table supplied?",
   "options": [
    "The engine reads T50 as the crude's midpoint for Watson K, and it refuses any curve that cannot supply one.",
-   "The conversion is anchored at the 50 percent point, and without it the temperature differences have nothing to hang from.",
+   "The engine anchors the conversion at the 50 percent point, and this D86 curve carries no such point to anchor on.",
    "A D86 curve with no 50 percent point is a product test, and a crude assay must carry its own T50 point.",
    "The engine interpolates the 50 percent point from the other points and refuses when the two nearest points are far apart."
   ],

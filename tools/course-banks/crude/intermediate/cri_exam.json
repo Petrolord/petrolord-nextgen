@@ -66,15 +66,15 @@
   "explanation": "Once the blend has a curve, the same function reads it. For the Kwale blend the engine's T50 is 587.3184 F."
  },
  {
-  "prompt": "Both volumePercentAt and temperatureAtVolumePercent read linearly between points. How does keeping every temperature either crude measured bear on that?",
+  "prompt": "Ughelli Medium's assay carries 30 at 480. Which Kwale Light and blend figures share that row?",
   "options": [
-   "Each extra measured point shortens a gap the engine bridges with a straight line.",
-   "It removes the assumption entirely, since a curve standing on the union of two measured grids is exact between any two of its points.",
-   "It moves the assumption onto the temperature axis, where the engine then averages the two crudes' temperatures at each volume percent.",
-   "It has no bearing, since both functions read the crudes' own curves and never the blend's."
+   "43.7500 and 37.5625 percent.",
+   "30.0000 and 37.5625 percent.",
+   "43.7500 and 43.6471 percent.",
+   "50.0000 and 43.6471 percent."
   ],
   "answer": 0,
-  "explanation": "volumePercentAt and temperatureAtVolumePercent read linear between measured points. The Kwale blend's curve keeps all 14 temperatures the two crudes measured, so every measured point of either crude stays on it."
+  "explanation": "The 480 F row reads Kwale Light 43.7500, Ughelli Medium 30.0000 and the blend 37.5625 percent. 43.6471 and 50.0000 are the blend and Kwale Light at 530 F."
  },
  {
   "prompt": "What temperature does the engine read off the Kwale blend's curve at 90 volume percent?",
@@ -101,7 +101,7 @@
  {
   "prompt": "The Kwale blend's curve is read at 10, 30, 50, 70 and 90 percent. Why is each of those five temperatures an interpolation?",
   "options": [
-   "A round volume percent almost never falls on one of the blend's 14 points, which sit at the temperatures the crudes measured.",
+   "None of the five is a volume percent that any of the blend's 14 points reads, so each falls between two points.",
    "The engine rounds each reading to four decimals, and a rounded figure has to be interpolated back onto the curve.",
    "Each reading is taken on one crude's curve and carried to the blend, which needs a line drawn between the two.",
    "The blend's points sit at every 10 percent, so a reading between two of them is a line between two points."
@@ -113,12 +113,12 @@
   "prompt": "What does T50 tell a reader about a blend?",
   "options": [
    "The mean of the temperatures at which each crude reaches half of its own barrels, weighted by the crudes' volume shares in the blend.",
-   "The temperature by which half the barrels have boiled off, where the middle of the blend sits on the boiling scale.",
+   "The temperature at which the blend's own curve reaches 50 percent distilled.",
    "The temperature at which the blend's vapour pressure reaches half an atmosphere in a closed test cell, the figure a tank farm reads.",
    "The cut point at which the refinery splits naphtha from kerosene on the blend's own curve."
   ],
   "answer": 1,
-  "explanation": "T50 feeds the characterisation factor as well. For the Kwale blend it is 587.3184 F, read off the blend's own curve."
+  "explanation": "temperatureAtVolumePercent(curve, 50) reads the temperature at which the blend's own curve reaches 50 percent. The studio also takes the blend's T50 as the boiling temperature in Watson K. For the Kwale blend it is 587.3184 F."
  },
  {
   "prompt": "How does watsonK combine its two inputs?",
@@ -176,15 +176,15 @@
   "explanation": "The default set splits the heavy end at 1000 F. 26.6940 is the blend's Vacuum gasoil, 43.0526 its Atmospheric residue on Kwale's cuts, and 18.7143 the default pair's Vacuum residue."
  },
  {
-  "prompt": "Why does the studio take the cut set as an input instead of fixing one?",
+  "prompt": "Which cut set does the digest call a vacuum refinery's?",
   "options": [
-   "A fixed cut set would make the blend's yields depend on the order in which the crudes were typed into the studio.",
-   "The engine closes a cut set only when its cut points sit on the blend's measured grid.",
-   "A cut set belongs to the refinery that runs the crude, its units, its products and its specifications.",
-   "Every refinery draws the same cut points, so the input only renames products."
+   "Kwale's own cuts, with a single heavy cut from 650 F upward.",
+   "The cut set drawn inside the Ebocha partial curve, from 110 F to 920 F.",
+   "The studio's default cuts, which split the heavy end at 1000 F.",
+   "Kwale's cuts with the diesel end point moved from 650 F to 700 F."
   ],
   "answer": 2,
-  "explanation": "The Kwale refinery has no vacuum unit, so its cut set ends at atmospheric residue, and it draws its own cut points. The studio's default cuts are a vacuum refinery's cut set, and on them the same blend yields 16.3586 Vacuum residue."
+  "explanation": "The studio's default cuts are printed on the Kwale blend for contrast as a vacuum refinery's cut set: Vacuum gasoil runs from 650 F to 1000 F and Vacuum residue from 1000 F with no upper bound."
  },
  {
   "prompt": "Kwale's Kerosene / DPK runs from 330 F to 480 F and the default Kerosene / Jet from 350 F to 500 F. Why do the two kerosene yields of the same blend differ?",
@@ -220,15 +220,15 @@
   "explanation": "The two lists are the same gap seen by two functions. netbackValue keeps their yield and value empty and reports complete: false, with a netback of 48.3393 $/bbl over the cuts it can value."
  },
  {
-  "prompt": "Why would a netback built on the mass-weighted cut yields, such as 20.4189 for naphtha, be wrong at the product value step?",
+  "prompt": "Beside the engine's 0.7174 for LPG / Light ends, what does blendOnMass print for the Kwale blend?",
   "options": [
-   "It would price only the cuts that close on mass, leaving the naphtha cut out of the gross altogether.",
-   "It would multiply a mass share of the crude by a price per barrel, mixing a mass basis with a volume price.",
-   "It would be right, since a refinery's products are sold by weight and the prices convert automatically.",
-   "It would take the loss twice, once in the mass weighting and once in the (1 - loss percent / 100) factor."
+   "0.7174.",
+   "0.6951.",
+   "1.3043.",
+   "0.4615."
   ],
   "answer": 1,
-  "explanation": "The engine's Naphtha yield is 20.5591 volume percent, and at 74 $/bbl of product it is worth 15.2137 $/bbl of crude. A value per barrel of crude needs a volume fraction."
+  "explanation": "0.6951 is the mass-weighted LPG figure. 1.3043 is Kwale Light alone, and 0.4615 is the default pair's LPG on the studio's default cuts."
  },
  {
   "prompt": "Which row of Kwale's term table belongs to Diesel / AGO?",
@@ -264,15 +264,15 @@
   "explanation": "The netback formula ends with minus processing cost minus freight, all per barrel of crude. 0.5939 is the loss term, a different line of the account."
  },
  {
-  "prompt": "Why does netbackValue report every term of the netback beside the total?",
+  "prompt": "Which terms does netbackValue report beside the Kwale netback of 64.9473 $/bbl of crude?",
   "options": [
-   "A total reported alone would be refused by the oracle, which checks each term against its own copy of the account before accepting it.",
-   "Each term can then be questioned by the person who knows it best, and a loss taken in the wrong place shows up at once.",
-   "The terms are needed by the marker differential, which the engine forms term by term against the marker's own gross, loss and costs.",
-   "The total is rounded to four decimals and the terms are not, so only the terms carry the full figure."
+   "None: it reports the total, and the terms are left to the caller.",
+   "Gross 74.2412, loss value 0.5939, processing 6.8000 and freight 1.9000.",
+   "Gross 74.2412, loss value 0.0696, processing 6.8000 and freight 1.9000.",
+   "Gross 74.2412, loss value 0.5939, processing 1.9000 and freight 6.8000."
   ],
   "answer": 1,
-  "explanation": "The Kwale chain reads gross 74.2412, loss 0.5939, processing 6.8000, freight 1.9000 and netback 64.9473 $/bbl of crude."
+  "explanation": "Every term is reported beside the total: gross product value 74.2412, value lost to losses at 0.8 percent 0.5939, processing cost 6.8000 and freight 1.9000 $/bbl of crude. 0.0696 is how far the after-the-costs reading lands from the engine."
  },
  {
   "prompt": "Under the complete Kwale valuation the digest prints: Costs taken as zero because they were blank: nothing. What does that line confirm?",
@@ -297,15 +297,15 @@
   "explanation": "netback = sum(cut yield fraction x cut product price) x (1 - loss percent / 100) - processing cost - freight, all per barrel of crude. The differential against the marker is a separate figure, -7.5527 $/bbl."
  },
  {
-  "prompt": "A trader sets the 40.6036 $/bbl netback of the Kwale case with its residue price blank against the marker of 72.5. What would that differential compare?",
+  "prompt": "Which cut of the Kwale blend is priced at 48 $/bbl of product, and what is it worth per barrel of crude?",
   "options": [
-   "The whole blend against the marker, since an unpriced cut contributes zero and a zero is still a price the engine can use.",
-   "The blend's light end against the marker's light end, since the residue is left out of both of the netbacks being compared.",
-   "Part of one crude against the whole of another, since the residue barrels carry no value in the 40.6036.",
-   "The whole blend, since the engine fills a blank price from Kwale's price list."
+   "LPG / Light ends, 0.7174 $/bbl of crude.",
+   "Naphtha, 15.2137 $/bbl of crude.",
+   "LPG / Light ends, 0.3443 $/bbl of crude.",
+   "Atmospheric residue, 24.5400 $/bbl of crude."
   ],
   "answer": 2,
-  "explanation": "unpricedCuts names Atmospheric residue, 43.0526 percent of every barrel, and complete reads false. The gross of 49.7012 behind the 40.6036 carries no value for those barrels."
+  "explanation": "The LPG / Light ends row reads a yield of 0.7174 volume percent, a price of 48 $/bbl of product and a value of 0.3443 $/bbl of crude. Naphtha is priced at 74 and Atmospheric residue at 57."
  },
  {
   "prompt": "Which of the three rows valued against Kwale's marker carries a differential of -8.8324 $/bbl?",
@@ -330,15 +330,15 @@
   "explanation": "netbackValue takes a marker netback and reports the differential: this crude's netback minus the marker's. Like every figure in the course, 72.5 is invented. 64.9473 is the volume-weighted mean of the two crudes' netbacks and 74.2412 the blend's gross."
  },
  {
-  "prompt": "What does a differential tell a refinery offered a crude at a price tied to the marker?",
+  "prompt": "What does the digest print as the first point of the default pair's blend curve at or past 50 percent?",
   "options": [
-   "How far the crude's API sits from the marker's, which sets the gravity premium or penalty on the cargo.",
-   "How much the crude's cut yields differ from the marker's, one figure per cut, summed over the cut set.",
-   "How long the refinery can run the crude before its product slate falls outside the marker's specifications.",
-   "How far below or above the marker price it can pay and still break even against running the marker."
+   "650 F.",
+   "617.1429 F.",
+   "614.2222 F.",
+   "690 F."
   ],
   "answer": 3,
-  "explanation": "A differential turns a refinery's internal valuation into a number a seller understands. The Kwale blend's is -7.5527 $/bbl."
+  "explanation": "The shortcut table prints the default pair's grid reading minus the engine as 72.8571 F, the grid reading being 690 F. The Kwale blend's grid reading is 650 F. The other two options are the default pair's own interpolated and mass-weighted readings."
  },
  {
   "prompt": "With nothing typed, the Crude Assay & Blending Studio values its default pair on its default cuts. Which gross product value and netback does it show?",
@@ -360,7 +360,7 @@
    "D86 is a crude assay test that d86ToTbp converts with its own table."
   ],
   "answer": 1,
-  "explanation": "A crude assay comes as a TBP distillation, and D86 is a product test. A D86 curve reaches the TBP functions only through d86ToTbp, whose conversion needs a coefficient table the package does not carry."
+  "explanation": "The digest: D86 is a product test; a crude assay is reported as a TBP distillation. d86ToTbp ships no coefficient table, and called without one it refuses."
  },
  {
   "prompt": "Why does d86ToTbp ship no coefficient table for API Technical Data Book Procedure 3A1.1?",
@@ -407,15 +407,15 @@
   "explanation": "Yields add on volume, so the cut yields and the netback each match their volume-weighted readings at 0.0000. The volume-weighted mean of the crudes' T50 minus the engine's 587.3184 F is -3.3184 F. The diesel end point is a cut point moving, which is no shortcut."
  },
  {
-  "prompt": "What blend sulfur does the studio show when it opens on its default pair, and on what basis?",
+  "prompt": "What blend API does the studio show when it opens on its default pair, 60 and 40?",
   "options": [
-   "1.0050 wt%, weighted by mass fraction.",
-   "0.2268 wt%, weighted by mass fraction.",
-   "1.0050 wt%, weighted by volume fraction.",
-   "0.2590 wt%, weighted by volume fraction."
+   "30.6451.",
+   "33.1219.",
+   "32.8173.",
+   "29.3808."
   ],
   "answer": 0,
-  "explanation": "The default table prints blend sulfur wt% as 1.0050. The Kwale blend's sulfur is 0.2268 wt% on a mass basis, and 0.2590 is the Associate tier's Obigbo export blend sulfur on volume, the shortcut column."
+  "explanation": "The default table prints blend API 30.6451. 33.1219 is the Kwale blend's API, 32.8173 the Associate tier's Obigbo export blend and 29.3808 its 20 and 40 API pair at 50 and 50."
  },
  {
   "prompt": "Segment overlap is one of the oracle's roads. Which figure does it reach that way, and what is the engine's road to the same figure?",

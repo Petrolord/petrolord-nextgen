@@ -29,12 +29,12 @@ q(0, 'Which set of four checks does the digest show the Kwale valuation passing?
   'The curve has a point at every 10 percent; the cut set has a vacuum split; the netback exceeds the marker; the oracle reproduces the Watson K.'],
  'In the Kwale case the yields close, the netback of 64.9473 $/bbl is complete with nothing assumed zero, the loss appears as its own term of 0.5939 directly after gross, and the blend minus the mean is 0.0000.')
 
-q(2, 'A learner opens the Crude Assay & Blending Studio with nothing typed and reads a netback of 69.7334 $/bbl. What is it the netback of?',
+q(2, "A learner opens the Crude Assay & Blending Studio with nothing typed and reads a netback of 69.7334 $/bbl. What is it the netback of?",
  "The studio's default pair, 60 and 40, on its default cuts and default valuation.",
  ["The Kwale blend, 55 and 45, on Kwale's cut set before freight is taken off.",
   "Kwale Light alone, valued on the studio's default cuts and default prices.",
   "The Kwale blend on the studio's default cuts, with Kwale's prices kept."],
- "Nothing in the default table is Kwale's. Before reading any figure on the page, read which pair, which cut set and which prices it rests on. The Kwale blend nets back 64.9473 $/bbl.")
+ "The default table is the studio's default pair, 60 and 40, on its default cuts and default valuation. The Kwale blend is 55 and 45 and nets back 64.9473 $/bbl on Kwale's cuts.")
 
 q(1, "The studio's default table reads stability screen basis api-contrast. What does that say about the SARA behind it?",
  'SARA was not supplied for every crude, so the screen falls back to the gravity rule of thumb, which can raise a flag and can never clear one.',
@@ -50,12 +50,12 @@ q(3, "What T50 and Watson K does the studio's default pair show, and on which ba
   'T50 617.1429 F interpolated, and Watson K of 11.7452 on the mean average boiling point.'],
  "The default table prints the blend T50 F (interpolated) as 617.1429 and Watson K at T50 (screening) as 11.7452. 587.3184 and 11.8135 are the Kwale blend's.")
 
-q(0, "Why is a check that recomputes an engine's figure with the engine's own formula no evidence?",
- 'If the formula is wrong, the check is wrong the same way, and the two agree on the wrong answer.',
- ['It is evidence, since agreement to four decimal places on every golden case rules out a wrong formula.',
-  'It is no evidence only when the check is written in Python and the engine in JavaScript, since the languages round apart.',
-  'It is no evidence because it runs on the goldens, which the engine itself wrote.'],
- 'Agreement is evidence only when the second computation gets there by a different road. The crude assay engine is held to an independent Python oracle written from the rules.')
+q(0, "How is oracle_crudeassay.py written, by the digest's account?",
+ "From the rules, independently of the JavaScript engine.",
+ ["From the JavaScript engine, translated line for line into Python.",
+  "From the golden files, fitted to reproduce each case.",
+  "From the digest's own tables, read back as its inputs."],
+ "The digest describes an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules, and counts its golden cases from the vendored file.")
 
 q(2, "How does oracle_crudeassay.py reach a blend's T50, and how does that road differ from the engine's?",
  'By bisection on the curve for the temperature at which it reaches 50, where the engine interpolates between the two points either side.',
@@ -78,19 +78,19 @@ q(1, 'What golden cases is oracle_crudeassay.py checked on, counted from the ven
   '11 blends, 8 curve cases and 1 blended default curve.'],
  'The golden sets are counted from the vendored file: blends 6, curve cases 4, blended default curve 1.')
 
-q(0, 'The oracle loads a cargo in barrels and pounds. What does that let it reach by its own road?',
- 'The mass-basis figures, from pounds on a loaded cargo, where the engine converts volume shares to mass shares with resolveFractions.',
- ['The D86 to TBP conversion, which the engine refuses to make until a coefficient table is supplied to it.',
-  "The cut points: pounds let the oracle place each cut on a mass curve beside the engine's volume curve.",
-  'The marker: pounds let the oracle value the marker by the tonne, where the engine values it by the barrel.'],
- "The engine converts once: each crude's mass share is its volume share times its specific gravity, over the sum of those products. The oracle is written from the rules and loads a cargo instead.")
+q(0, "What does the Python oracle for the assay engine load a blend as?",
+ "As a cargo, loaded in barrels and in pounds.",
+ ["As mass shares from resolveFractions.",
+  "As one barrel at the refinery gate.",
+  "As volume shares normalised to 100."],
+ "The digest's oracle line begins with the load: a cargo in barrels and pounds. The engine itself converts volume shares to mass shares with resolveFractions.")
 
-q(2, 'What can the oracle not settle about Watson K at T50?',
- 'Whether T50 is the right stand-in for the mean average boiling point, since an oracle written to the same rule agrees with it.',
- ['Its value for the Kwale blend, since a bisection cannot reach a figure that the engine reaches by interpolation.',
-  'Its sign, since the oracle bisects the curve and cannot tell which side of the 50 percent point the boiling temperature lies on.',
-  'Its label, since the oracle checks figures alone and never reads the words the studio prints beside a figure on the page.'],
- 'An oracle confirms that the engine computes what the rules say. It cannot decide which rule is right, which is why held items are stated as limits.')
+q(2, "Which Kerosene / Jet and Diesel / Gasoil yields does the studio's default table print for its default pair?",
+ "16.1124 and 16.7449 volume percent.",
+ ["16.6604 and 16.9510 volume percent.",
+  "16.2860 and 19.3849 volume percent.",
+  "16.1124 and 18.7143 volume percent."],
+ "The default table reads Kerosene / Jet 16.1124 and Diesel / Gasoil 16.7449. 16.6604 and 16.9510 are the Kwale blend on the same default cuts, 16.2860 and 19.3849 the Kwale blend on Kwale's cuts, and 18.7143 the default pair's Vacuum residue.")
 
 q(3, "The studio's default table shows Vacuum gasoil at 27.7681 volume percent. The Kwale blend on the studio's default cuts yields 26.6940. What separates the two figures?",
  'The blend: the default pair at 60 and 40 against Kwale Light and Ughelli Medium at 55 and 45, on the same default cuts.',

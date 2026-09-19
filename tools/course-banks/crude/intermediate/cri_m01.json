@@ -25,12 +25,12 @@
   "prompt": "A TBP volume percent is weighted by volume share when two crudes are blended. What is the reason?",
   "options": [
    "Volume is conserved on mixing and mass is not, so every property of a blend, sulfur included, has to be weighted on volume shares.",
-   "A TBP yield is a volume fraction, a percent of the barrels, and a volume fraction of a blend is weighted by volume shares.",
+   "A TBP figure is a volume percent distilled, and the digest's rule is that yields are additive on volume.",
    "The engine holds no gravity for a crude at the curve step, so a volume share is the only weight it can form for the yields there.",
    "A volume weighting gives the larger blend yield at every temperature, which is the conservative reading."
   ],
   "answer": 1,
-  "explanation": "Each property is weighted on the basis it is expressed on: sulfur, a mass fraction, on mass shares; a yield, a volume fraction, on volume shares. The engine can weight yields on mass: SECTION 15 prints blendOnMass beside them."
+  "explanation": "The digest's rule: yields are additive on volume, so at any temperature the blend has distilled the volume-weighted sum of what each crude has distilled. Sulfur and the other per-mass properties blend on mass. The engine can weight yields on mass too: module 3 prints blendOnMass beside the engine's cut yields."
  },
  {
   "prompt": "How many points does the Kwale blend's curve carry, and where do they come from?",
@@ -38,7 +38,7 @@
    "11, the temperatures both crudes measured once the ends that neither curve covers are dropped.",
    "8, the temperatures at which both crudes were measured at round volume percents of their own.",
    "14, one point per volume percent the two laboratories reported, with the two crudes' temperatures averaged at each.",
-   "14, every temperature either crude measured, since the two assays share no temperature."
+   "14, every temperature either crude measured, from 75 F to 1470 F."
   ],
   "answer": 3,
   "explanation": "blendDistillationCurves forms the blend's curve at every temperature any component measured. Kwale Light was measured at 75, 190, 370, 530, 720, 1030 and 1350 F and Ughelli Medium at 90, 265, 480, 650, 860, 1200 and 1470 F."
@@ -77,15 +77,15 @@
   "explanation": "At 1470 F Kwale Light reads 100.0000 percent: its last point is 100 at 1350, and above a last point at 100 percent everything has distilled. The blend reads 100.0000 there."
  },
  {
-  "prompt": "Why does blendDistillationCurves never average temperatures?",
+  "prompt": "Beside the Kwale blend's curve, the digest prints the blend's properties at 55 and 45. Which set is it?",
   "options": [
-   "Averaging temperatures needs them on the Rankine scale, and the engine keeps every curve in degrees F.",
-   "A temperature average has to be weighted on mass, and the mass shares are formed only after the curve is built.",
-   "Temperatures do average, but an averaged curve would need more points than the 14 the two assays supply.",
-   "A temperature is not an amount: the barrels given up at one temperature add in the receiver, and temperatures do not."
+   "API 32.8173, SG 0.8611 and sulfur 0.2642 wt% on a mass basis.",
+   "API 33.1219, SG 0.8595 and sulfur 0.2268 wt% on a volume basis.",
+   "API 38.4, SG 0.8328 and sulfur 0.11 wt% on a mass basis.",
+   "API 33.1219, SG 0.8595 and sulfur 0.2268 wt% on a mass basis."
   ],
   "answer": 3,
-  "explanation": "The engine forms the blend's curve at every temperature any component measured and weights the volume percents there. At 530 F the blend has distilled 43.6471 percent."
+  "explanation": "The digest prints Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis). 38.4, 0.8328 and 0.11 are Kwale Light's own figures, and 32.8173, 0.8611 and 0.2642 belong to the Associate tier's Obigbo export blend."
  },
  {
   "prompt": "Kwale Light reaches 50 percent at 530 F and Ughelli Medium at 650 F. What does the blend's curve read at those two temperatures?",
@@ -154,14 +154,14 @@
   "explanation": "A temperature at which some crude's curve says nothing is left out, because the blend's value there is not known either. Kwale Light's rows at 1030 and 1350 F drop out of the partial blend on that rule."
  },
  {
-  "prompt": "Why does blendDistillationCurves keep every temperature either crude measured instead of using one crude's grid?",
+  "prompt": "Kwale Light and the Ebocha partial assay are blended 50 and 50. What does the blend's curve read at 590 F, and whose measured point is 590 F?",
   "options": [
-   "The blend's curve must carry as many points as the two assays together, or its total cannot reach 100.0000 percent.",
-   "Keeping every temperature lets the engine average the two crudes' temperatures at each volume percent it reads.",
-   "Every measured point from both crudes stays on the blend's curve, so less of it is a straight line across an unmeasured gap.",
-   "The engine refuses a blend read on one crude's grid, so the union of the two grids is the only grid it will accept."
+   "46.5909 percent, and 590 F is one of Ebocha's measured points.",
+   "53.1579 percent, and 590 F is one of Kwale Light's measured points.",
+   "53.1579 percent, and 590 F is one of Ebocha's measured points.",
+   "67.6471 percent, and 590 F is one of Ebocha's measured points."
   ],
   "answer": 2,
-  "explanation": "Between two of the blend's points the curve is read linearly, so the more real points it stands on, the shorter each straight stretch. The Kwale blend's curve has 14 points."
+  "explanation": "The blend's row at 590 F reads 53.1579 percent. Ebocha's curve carries 50 at 590, and Kwale Light was measured at 530 and 720 F. 46.5909 is the blend at 530 F and 67.6471 the blend at 720 F."
  }
 ]

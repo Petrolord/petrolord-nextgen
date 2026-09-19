@@ -36,12 +36,12 @@ q(1, "What does the digest print for the grid reading minus the engine, on the K
   "62.6816 F on the Kwale blend and -2.9207 F on the default pair."],
  "The Kwale grid reading is 650 F against 587.3184 F, and the default pair's is 690 F against 617.1429 F. -3.3184 and -5.1429 F are the volume-weighted means minus the engine, and -2.9207 F is the default pair's mass-weighted mean minus the engine.")
 
-q(2, "Why is the error of a grid reading of T50 not a fixed size?",
- "It depends on where the crudes' measured temperatures happen to fall about the blend's 50 percent point, and that changes with every pair of assays.",
- ["It is a fixed share of the interpolated T50, and that share grows in step with the heavier crude's volume share in the blend, which is why the two printed blends differ.",
-  "It is always one whole grid step of the lighter crude's own assay, and the two blends the digest prints stand on grids with different spacing between points.",
-  "It grows with the blend API, since a lighter blend's curve rises faster through its fifty percent point."],
- "The grid reading minus the engine is 62.6816 F for the Kwale blend and 72.8571 F for the default pair. Nothing in the reading tells a reader how far the next grid point lies past 50 percent.")
+q(2, "Which volume percents make up the digest's table of other points on the Kwale blend, the T50 row among them?",
+ "At 10, 30, 50, 70 and 90 percent distilled.",
+ ["At 0, 25, 50, 75 and 100 percent.",
+  "At each of the 14 points of the blend's curve.",
+  "At 50 percent alone, the blend's T50."],
+ "That table has five rows, 10, 30, 50, 70 and 90 percent, and its 50 percent row is the engine's T50 of 587.3184 F. The blend's 14 curve points sit at the temperatures the two crudes measured.")
 
 q(0, "For the Kwale blend, what is the volume-weighted mean of the crudes' own T50, and how far does it sit from the engine?",
  "584.0000 F, which the digest prints as -3.3184 F against the engine.",
@@ -50,19 +50,19 @@ q(0, "For the Kwale blend, what is the volume-weighted mean of the crudes' own T
   "612.0000 F, which the digest prints as -5.1429 F against the engine."],
  "The volume-weighted mean of 530 and 650 at 55 and 45 is printed as 584.0000 F. 586.0503 F is the mass-weighted mean, and 612.0000 F belongs to the default pair.")
 
-q(3, "The mass-weighted mean of API numbers is the blend API. Why does mass weighting not rescue an average of the crudes' T50?",
- "API works on mass because 1 / SG blends linearly on mass, and a boiling temperature has no comparable identity.",
- ["It does rescue it: the mass-weighted mean and the engine differ only by rounding at the fourth decimal place.",
-  "Mass weighting needs the blend's SG, and the engine forms the SG only after it reads the T50 off the curve.",
-  "A T50 is a volume percent, so it has to be weighted by volume shares, which is what the engine's reading does."],
- "The Kwale row prints the mass-weighted mean of the crudes' T50 as 586.0503 F beside the engine's 587.3184 F, and the difference as -1.2681 F. Only the engine's figure is read off a curve.")
+q(3, "The mass-weighted mean of the API numbers is the blend API. Does mass weighting do the same for the Kwale crudes' own T50?",
+ "No: the digest prints the mass-weighted mean minus the engine as -1.2681 F.",
+ ["Yes: the digest prints the mass-weighted mean minus the engine as 0.0000 F.",
+  "No: the digest prints the mass-weighted mean minus the engine as 62.6816 F.",
+  "Yes: the mass-weighted mean of the crudes' T50 is the engine's 587.3184 F."],
+ "The Kwale row prints the mass-weighted mean of the crudes' T50 as 586.0503 F beside the engine's 587.3184 F, and the difference as -1.2681 F. 62.6816 F is the grid reading minus the engine. The 0.0000 belongs to the mass-weighted mean of the API numbers.")
 
-q(1, "Why does an average of the two crudes' midpoints fail as a reading of the blend's T50?",
- "It looks at one point on each crude's curve and ignores the shape of the curves around those points.",
- ["It weights the midpoints by share, where the blend's T50 has to be weighted by each crude's API.",
-  "It uses measured points, while the blend's T50 is always read at one of the blend's own grid temperatures.",
-  "It is taken in degrees F, and a mean of temperatures is valid only on the absolute Rankine scale."],
- "The engine builds the blend's curve at every temperature either crude measured, weights the amounts, and reads 50 percent off that curve, so every point near the middle of both curves has a say.")
+q(1, "For the studio's default pair, 60 and 40, which volume-weighted and mass-weighted means of the crudes' T50 does the digest print?",
+ "612.0000 F and 614.2222 F.",
+ ["584.0000 F and 586.0503 F.",
+  "614.2222 F and 612.0000 F.",
+  "612.0000 F and 617.1429 F."],
+ "The default pair's row reads the volume-weighted mean of the crudes' T50 as 612.0000 F and the mass-weighted mean as 614.2222 F, beside the engine's 617.1429 F. 584.0000 F and 586.0503 F are the Kwale blend's.")
 
 q(0, "How does the digest establish the offset watsonK adds to a temperature in F?",
  "It reads it back from the function: watsonK at 0 F and SG 1, cubed, is 459.6700.",
@@ -87,24 +87,24 @@ q(3, "What does watsonK return at -500 F, and at SG 0?",
 
 q(1, "The studio takes the boiling temperature in Watson K as the blend's T50. How does this course treat that choice?",
  "As held item C13, a stated limit: K at T50 is a screening figure and is never graded.",
- ["As a graded figure: Watson K at T50 is reported to four decimals and marked at the capstone like the blend's T50.",
+ ["As a graded figure: Watson K at T50 prints to four decimals, so it is marked like any other four-decimal figure.",
   "As a refusal: the studio reports no K until a mean average boiling point is typed in beside the blend's curve.",
   "As the strict basis, since the interpolated T50 of a two crude blend is its mean average boiling point."],
- "C13 sits in the digest's last section with the other held items. What the studio does is described, the limit is stated beside it, and no capstone field asks for K.")
+ "The studio takes Tb as the blend's T50, and the page labels K as the screening figure. The digest records that choice as C13, taught here as a stated limit.")
 
-q(0, "A colleague asks you to pass on the Kwale blend's Watson K. How should the figure travel?",
- "With its basis attached, as Watson K at T50, a screening figure, 11.8135.",
- ["As 11.8135 alone, since the page's label adds nothing a characterisation factor needs.",
-  "As 12.0447, since the grid reading of T50 is the figure a laboratory would report.",
-  "Converted to the mean average boiling point basis first, since that is how K is quoted."],
- "The label the page puts on K is the instruction: read it as a screening figure. The studio does not compute the mean average boiling point, so there is nothing to convert it with.")
+q(0, "Which two Watson K figures sit on the default pair's row, at T50 interpolated and then at the grid reading?",
+ "11.7452 and 12.0043.",
+ ["12.0043 and 11.7452.",
+  "11.8135 and 12.0447.",
+  "11.7452 and 12.0447."],
+ "The default pair's row reads SG 0.8727, Watson K at T50 interpolated 11.7452 and Watson K at the grid reading 12.0043. 11.8135 and 12.0447 are the Kwale blend's.")
 
 q(3, "What does the Kwale valuation downstream of module 2 take from Watson K?",
- "Nothing: the cut yields come from the curve and the netback from the yields and prices, and K is a label for the reader.",
+ "Nothing: the cut yields come from the curve, and the netback from the yields, prices, loss and costs.",
  ["The product prices, which the engine scales by K before it sums the cut values, so that a more paraffinic blend nets back more per barrel of crude.",
   "The cut points, which the engine shifts up or down the blend's curve in proportion to K before it takes any cut yield off that curve.",
   "The loss percent, which the engine raises for a lower K on the grounds that an aromatic blend loses more."],
- "K in this studio characterises the blend for the reader. The cut yields come from the curve, and the netback is built from the yields, the prices, the loss and the two costs.")
+ "cutYields takes each cut as the curve at its upper bound minus the curve at its lower bound, and netback = sum(cut yield fraction x cut product price) x (1 - loss percent / 100) - processing cost - freight. Watson K appears in neither.")
 
 q(1, "For the studio's default pair, 60 and 40, which of the four printed T50 readings is read off the blend's own curve?",
  "The 617.1429 F reading printed for the 60 and 40 pair.",

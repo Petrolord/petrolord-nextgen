@@ -8,7 +8,7 @@
    "A cut set that splits the residue cannot close on a two crude blend, so the engine joins it."
   ],
   "answer": 1,
-  "explanation": "A cut set is a property of the refinery that runs it. The studio's default set is a vacuum refinery's and splits the heavy end at 1000 F into vacuum gasoil and vacuum residue."
+  "explanation": "The digest gives the reason in one line: the Kwale refinery has no vacuum unit, so its cut set ends at atmospheric residue. Kwale draws its own cut points."
  },
  {
   "prompt": "What is the Kwale blend's Naphtha yield on Kwale's cut set?",
@@ -22,15 +22,15 @@
   "explanation": "Kwale's naphtha runs from 90 F to 330 F. 20.4189 is the mass-weighted reading, 22.6185 is the default set's naphtha from 90 F to 350 F, and 24.2512 is Kwale Light alone."
  },
  {
-  "prompt": "cutYields on the blend's curve and blendOnVolume over the crudes' own cut yields differ by 0.0000 on every cut. Why?",
+  "prompt": "On Kwale's cuts, what Diesel / AGO figures does the digest print for the Kwale blend by cutYields on its curve, by blendOnVolume and by blendOnMass?",
   "options": [
-   "A cut is a difference of two volume percents, each a volume-weighted sum, and a difference of volume-weighted sums is the volume-weighted sum of the differences.",
-   "cutYields copies the blendOnVolume figure into its own table whenever it is handed a blend, so the two columns are one computation printed twice under two names.",
-   "The two crudes have almost the same specific gravity, so a volume basis and a mass basis give the same cut yields to four decimal places on every row of the table.",
-   "The figures do differ, and the difference falls below the fourth decimal place, where the digest stops printing."
+   "19.3849, 19.3849 and 19.4040.",
+   "19.3849, 19.4040 and 19.4040.",
+   "19.4040, 19.3849 and 19.3849.",
+   "16.9510, 19.3849 and 19.4040."
   ],
   "answer": 0,
-  "explanation": "Yields add on volume, so cutting the blend's curve gives the same barrels as blending the crudes' cuts on volume. The Diesel / AGO row reads 19.3849 both ways, and the digest prints the two ways differ by 0.0000 on every row."
+  "explanation": "The Diesel / AGO row reads 19.3849 for the blend by cutYields, 19.3849 volume-weighted from the two crudes, a difference of 0.0000, and 19.4040 mass-weighted from the two crudes. 16.9510 is the blend's Diesel / Gasoil on the studio's default cuts."
  },
  {
   "prompt": "On the Kwale blend, which figure is the engine's Atmospheric residue yield, and which is the mass-weighted reading beside it?",
@@ -41,7 +41,7 @@
    "Both are yields: 43.0526 is on volume for the barrels, 43.2685 on mass for pricing by the tonne."
   ],
   "answer": 2,
-  "explanation": "A yield is a volume percent, so it blends on volume shares. The mass-weighted column is printed only to be read against the engine's."
+  "explanation": "cutYields returns each cut's yield in volume percent, and the engine's column is the blend by cutYields on its own curve. 43.2685 sits in the column mass-weighted from the two crudes (blendOnMass). The Kwale blend's Vacuum residue on the default cuts is 16.3586."
  },
  {
   "prompt": "Ughelli Medium's own LPG / Light ends yield on Kwale's cuts is 0.0000. Why?",
@@ -63,7 +63,7 @@
    "Every cut has a yield, and together the yields sum to 100.0000, inside the closing tolerance."
   ],
   "answer": 3,
-  "explanation": "The total is reported as it computes and never normalised, so a set that closes has earned it. The 0.0000 difference column is a separate check on the basis."
+  "explanation": "Closing needs a yield for every cut and a total inside the engine's closing tolerance of 100 percent, and the total is not normalised. The 0.0000 difference column is a separate reading of the two routes."
  },
  {
   "prompt": "The diesel end point is moved from 650 F to 700 F on the Kwale blend. What changes?",
@@ -81,22 +81,22 @@
   "options": [
    "The engine normalises the total back to 100.0000 after any cut point moves.",
    "The moved barrels are taken from the lost volume, which sits outside the total.",
-   "The first cut starts at 0 percent and the last runs to 100 percent, and neither end moved.",
+   "Moving a cut point moves barrels between two cuts and nowhere else.",
    "The Diesel / AGO gain is small enough that the total rounds back to 100.0000."
   ],
   "answer": 2,
-  "explanation": "A cut set tiles the curve with no gap and no overlap. Moving one shared boundary moves barrels between the two cuts that share it and nowhere else."
+  "explanation": "The digest prints the rule with the table: moving a cut point moves barrels between two cuts and nowhere else. Diesel / AGO changes by 5.0376, Atmospheric residue by -5.0376 and the total by 0.0000. The total is reported as it computes and is never normalised."
  },
  {
-  "prompt": "Two cut yield tables drawn on one blend's curve show three cuts with a nonzero change. What does that tell you?",
+  "prompt": "In the cut table, which Naphtha and Kerosene / DPK figures stand in the Kwale Light column?",
   "options": [
-   "More than one cut point moved between the two tables.",
-   "One boundary moved and the engine spread the change across its neighbours.",
-   "The set no longer closes, so the engine's total can no longer be trusted.",
-   "One boundary moved through a measured point, which splits the change in three."
+   "24.2512 and 18.1944 volume percent.",
+   "16.0465 and 13.9535 volume percent.",
+   "20.5591 and 16.2860 volume percent.",
+   "24.2512 and 13.9535 volume percent."
   ],
   "answer": 0,
-  "explanation": "A single moved cut point leaves exactly two nonzero entries of opposite sign, on the two cuts that share it, and a total change of zero, as the Kwale table's 5.0376 and -5.0376 do."
+  "explanation": "The Kwale Light column reads Naphtha 24.2512 and Kerosene / DPK 18.1944. Ughelli Medium's column reads 16.0465 and 13.9535, and the blend reads 20.5591 and 16.2860."
  },
  {
   "prompt": "Kwale Light is blended 50 and 50 with the Ebocha partial assay and cut on Kwale's set. Why do LPG / Light ends and Naphtha come back unknown?",
@@ -129,18 +129,18 @@
    "They total 76.3376 percent, and the engine scales them only when unknownCuts is empty."
   ],
   "answer": 1,
-  "explanation": "Scaling the known yields up would spread the missing light ends and naphtha across kerosene, diesel and residue, a guess about the crude dressed as a yield. 33.6742 belongs to the Ebocha assay alone on the studio's cuts."
+  "explanation": "The digest prints: the cuts with a yield total 76.3376 percent, and the total is reported as it computes and is never normalised. 33.6742 belongs to the Ebocha partial assay alone on the studio's cuts."
  },
  {
-  "prompt": "Why does the engine return unknown for the partial blend's Naphtha cut instead of a yield of zero?",
+  "prompt": "On the Kwale Light and Ebocha blend cut on Kwale's set, what do unknownCuts and Closes read?",
   "options": [
-   "A zero would say the blend has no naphtha, a claim about the crude that nobody measured.",
-   "A zero would make the set close, and a set holding a partial crude must not close.",
-   "A zero cannot be priced, so it would stop netbackValue from valuing the other cuts.",
-   "The engine prints zero only for a cut that lies wholly above the curve's last point."
+   "unknownCuts: LPG / Light ends, Naphtha. Closes: false.",
+   "unknownCuts: LPG / Light ends, Naphtha. Closes: true.",
+   "unknownCuts: Atmospheric residue. Closes: false.",
+   "unknownCuts: LPG / Light ends, Naphtha, Vacuum gasoil, Vacuum residue. Closes: false."
   ],
   "answer": 0,
-  "explanation": "Unknown says the assay cannot tell. The engine names both such cuts in unknownCuts and reports Closes: false."
+  "explanation": "The digest prints unknownCuts: LPG / Light ends, Naphtha. Closes: false. Atmospheric residue has a yield, 40.1548, because it runs from 650 F to 100 percent. Four cuts with no yield belong to the Ebocha partial assay alone on the studio's cuts."
  },
  {
   "prompt": "Kwale Light and the Ebocha partial assay are valued as a blend on the Kwale refinery's prices, costs and losses. What comes back?",
@@ -151,7 +151,7 @@
    "A netback of 48.3393 $/bbl over the cuts it can value, with unyieldedCuts naming LPG / Light ends and Naphtha and complete: false."
   ],
   "answer": 3,
-  "explanation": "A cut the curve cannot answer has no barrels to price, so both of its columns stay empty and the valuation reports itself incomplete. A missing yield is never entered as a zero."
+  "explanation": "The digest prints unyieldedCuts: LPG / Light ends, Naphtha beside the 48.3393 $/bbl, and complete: false. Both cuts keep an empty yield and an empty value."
  },
  {
   "prompt": "The Kwale blend yields 0.7174 percent LPG / Light ends on Kwale's cuts and on the studio's default cuts. Why do the two tables agree on that row?",

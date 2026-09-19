@@ -35,12 +35,12 @@ q(1, "Atmospheric residue is priced at 57 $/bbl of product and Diesel / AGO at 9
   "Diesel's value is shrunk by the loss at 0.8 percent and residue's value is not, since residue loses no volume."],
  "The engine's formula sums each cut's yield fraction times its product price, so a cut's share of the gross of 74.2412 $/bbl of crude rests on both columns.")
 
-q(2, 'Why must the yields in the netback be on volume?',
- 'The prices are per barrel, a volume, so the share that multiplies them must be a volume share of each barrel of crude.',
- ['Mass-weighted yields never close on a blend of two crudes of different gravity, so a netback built on them could not price every barrel of the blend exactly once.',
-  "The mass-weighted yields of the two crudes equal the blend's own cut yields, so the engine could use either and takes volume by convention.",
-  'A yield on volume is the larger figure on every cut, and the netback is built to take the larger of the two readings of each yield.'],
- 'A yield on mass would say what fraction of the tonnes becomes naphtha, and multiplying it by a price per barrel mixes a mass share with a volume price. The Kwale gross is 74.2412 $/bbl.')
+q(2, "In the Kwale netback, what are the gross product value and the netback the engine reports?",
+ "74.2412 and 64.9473 $/bbl of crude.",
+ ["74.2412 and 65.0169 $/bbl of crude.",
+  "74.2412 and 67.4412 $/bbl of crude.",
+  "49.7012 and 40.6036 $/bbl of crude."],
+ "The term table reads gross product value 74.2412 and netback 64.9473 $/bbl of crude. 65.0169 is the netback with losses taken off after the costs, 67.4412 the netback with freight and losses left blank, and 49.7012 and 40.6036 the case with the residue price left blank.")
 
 q(0, 'In the Kwale netback, what is the value lost to losses, and where does the engine take it?',
  '0.5939 $/bbl of crude, off the gross product value before processing and freight.',
@@ -49,12 +49,12 @@ q(0, 'In the Kwale netback, what is the value lost to losses, and where does the
   '0.8 $/bbl of crude, the loss percent charged as a cost per barrel beside freight.'],
  "A loss of 0.8 percent is a volume shrinkage on the product side. 0.0696 is how far the after-the-costs reading lands from the engine's netback of 64.9473.")
 
-q(3, 'If the loss percent is taken off the netback after processing and freight, what does the digest print?',
+q(3, "If the loss percent is taken off the netback after processing and freight, what does the digest print?",
  "65.0169 $/bbl, which is 0.0696 above the engine's netback.",
  ["65.5412 $/bbl, which is 0.5939 above the engine's netback.",
   "64.9473 $/bbl, which is 0.0000 from the engine's netback.",
   "65.0169 $/bbl, which is 0.5939 above the engine's netback."],
- 'That reading shrinks a figure that already has processing and freight removed, so it shrinks the wrong quantity. 65.5412 is the reading with losses left out.')
+ "The engine takes losses off the product value before the costs, and this reading takes them off a figure that already has processing and freight removed. The digest prints it at 65.0169, 0.0696 from the engine's 64.9473. 65.5412 is the reading with losses left out.")
 
 q(1, 'Why are processing cost and freight not reduced by the product losses?',
  'They are charged per barrel of crude, and the loss is a shrinkage of the product side only.',
@@ -91,12 +91,12 @@ q(1, 'Why does netbackValue take a blank cost as zero instead of refusing?',
   'Refusing would stop the stability screen, which runs inside the same call as the netback.'],
  'A blank cost is taken as zero and named. With freight and losses blank the Kwale netback is 67.4412 $/bbl and assumedZero reads freight, losses.')
 
-q(2, 'A blank freight is taken as zero and named. Why is a blank sulfur treated differently?',
- 'A blank property is treated as absent: the sulfur comes back as no value, and the crude without it is named.',
- ['A blank sulfur is taken as zero as well, and it is named in assumedZero beside any blank cost, so the two blanks are in fact treated alike.',
-  'Sulfur blends on mass and freight is a volume term, and the engine takes a blank as zero only for a term measured per barrel, which rules sulfur out.',
-  'A blank sulfur is refused outright, since a blend with no sulfur cannot be sold at all.'],
- 'A blank cost is taken as zero and named in assumedZero. A blank sulfur is absent: the property comes back as no value, and the crude without it is named as missing.')
+q(2, "A blank freight is taken as zero and named. Why is a blank sulfur treated differently?",
+ "A blank property is treated as absent: the sulfur comes back as no value, and the crude without it is named.",
+ ["A blank sulfur is taken as zero as well, and it is named in assumedZero beside any blank cost, so the two blanks are in fact treated alike.",
+  "A blank sulfur is filled from the other crude's sulfur, and that crude is named as the source of the figure.",
+  "A blank sulfur is refused outright, since a blend with no sulfur cannot be sold at all."],
+ "A blank cost is taken as zero and named in assumedZero. A blank sulfur is absent: the property comes back as no value, and the crude without it is named as missing.")
 
 q(3, "Suppose nobody types a price for Atmospheric residue on the Kwale blend. What do the gross, the netback and the engine's lists read?",
  'Gross 49.7012 and netback 40.6036 $/bbl, unpricedCuts naming Atmospheric residue, and complete: false.',
